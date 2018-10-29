@@ -65,7 +65,7 @@ This would send the email to the customer to made this order.
 
 ## BCC’d Recipient
 
-The 'BCC' addresses for this email. You can seperate the addresses by a comma: `,`
+The 'BCC' addresses for this email. You can separate the addresses by a comma: `,`.
 Plain text can be entered or twig can also be used to set dynamic values.
 Two special variables available to you:
 

@@ -64,7 +64,7 @@ The note added to the line item when the purchasable was added to the cart, or u
 
 ### snapshot
 
-The snapshot is json encoded information about the purchasable at the time of when the lineitem was last updated.
+The snapshot is json encoded information about the purchasable at the time of when the line item was last updated.
 This means if the purchasable (variant) is deleted you can still get to core information about what was purchased.
 
 ### order

@@ -52,11 +52,11 @@ Returns the stock count on hand, or zero if unlimitedStock is true.
 
 ### maxQty
 
-The maximum quanity orderable for this variant (in a single cart/order)
+The maximum quantity that can be ordered at once for this variant (in a single cart/order)
 
 ### minQty
 
-The minimum quanity orderable for this variant (in a single cart/order)
+The minimum quantity that can be ordered at once for this variant (in a single cart/order)
 
 ### weight
 

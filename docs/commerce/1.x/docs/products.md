@@ -31,7 +31,7 @@ This would enable unique variant data:
 - Large, Green
 - Large, Blue
 
-This doesn't stop you from using other custom fields to define other special variants, and it also does not ensure each variant has unique combinations of custom fields - that's up to the author.
+This doesn’t stop you from using other custom fields to define other special variants, and it also does not ensure each variant has unique combinations of custom fields - that's up to the author.
 
 ## Default Variant
 

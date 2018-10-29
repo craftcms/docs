@@ -29,7 +29,7 @@ These zones can then be used within the shipping rules as conditions to match on
 
 ## Shipping Methods
 
-Shipping methods are the choices made available to the customer during checkout. For example, a shipping method might be called "Pickup" or "Fedex", "UPSP", or "Express".
+Shipping methods are the choices made available to the customer during checkout. For example, a shipping method might be called "Pickup" or "Fedex", "USPS", or "Express".
 
 You can name these shipping methods anything that makes sense to the customer. They do not need to be shipping company names, but usually indicate the delivery method. For example, you could have 2 shipping methods, one called "Fedex Standard" and "Fedex Overnight".
 
@@ -45,7 +45,7 @@ The matching of the shipping rules to the cart is based on the follow rules cond
 
 Each shipping rule has a single zone. The shipping address of the cart is determined to be within or outside the rule’s shipping zone.
 
-### Shipping Catgories
+### Shipping Categories
 
 The shipping rule has options for each category in the system. Each shipping category can be set to:
 

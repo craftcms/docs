@@ -3,7 +3,7 @@ Whenever you’re dealing with an order or cart in your template, you’re actua
 
 ## Simple Output
 
-Outputting an `Commerce_OrderModel` object in yout template without attaching a property or method will return the order’s [short number](#shortnumber):
+Outputting an `Commerce_OrderModel` object in your template without attaching a property or method will return the order’s [short number](#shortnumber):
 
 ```
 Order Number: {{ order }}
@@ -175,7 +175,7 @@ Returns the url to the pdf for this order. Requires that your general settings p
 Optionally can pass an 'option' string to this method to identify the type of pdf you want to the template.
 The order PDF template is passed an `order` and `option` variable.
 
-### getShippingmethod()
+### getShippingMethod()
 
 Returns a `Commerce_ShippingMethodModel` with the current shipping method for the model, or `null` if none exists.
 

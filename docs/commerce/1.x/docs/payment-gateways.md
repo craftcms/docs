@@ -32,10 +32,10 @@ The following Omnipay gateways are included the standard installation of Craft C
 - PayFast
 - Payflow
 - Payment Express
-- Paypal
+- PayPal
 - Pin
 - SagePay
-- Securepay
+- SecurePay
 - Stripe
 - TargetPay
 - Worldpay
@@ -44,7 +44,7 @@ To see the levels of support for each gateway see this [support article](https:/
 
 # Adding additional gateways
 
-Additional Onmipay gateways can be added to Craft Commerce. They require the creation of a plugin that wraps the Omnipay gateway class with a Commerce GatewayAdapter. An example plugin can be found [here](https://github.com/lukeholder/craftcommerce-ogone).
+Additional Omnipay gateways can be added to Craft Commerce. They require the creation of a plugin that wraps the Omnipay gateway class with a Commerce GatewayAdapter. An example plugin can be found [here](https://github.com/lukeholder/craftcommerce-ogone).
 
 # Storing config outside of the database
 
@@ -78,7 +78,7 @@ This is a dummy gateway driver intended for testing purposes. If you provide a v
 
 For general usage instructions, please see the main Omnipay repository.
 
-# Paypal Express
+# PayPal Express
 
 ### Important
 If you're going to use the PayPal Express payment gateway you are required to change the default value of ```tokenParam``` in your
@@ -89,7 +89,7 @@ Choose any different token name other than ```token```, for example you could pu
 PayPal Express Checkout requires an API Username, Password, and Signature. These are different from your PayPal account details. You can obtain your API details by logging in to your PayPal account, and clicking Profile > My Selling Tools > API Access > Request/View API Credentials > Request API Signature.
 
 ::: warning
-Paypal have increased their TLS requirements, which affects MAMP 3 and some OSX users. If you are affected, you will see an error relating to "SSL" when attempting to pay with paypal. Upgrading to MAMP 4 should fix the issue. Read more here: https://github.com/paypal/TLS-update#php
+PayPal have increased their TLS requirements, which affects MAMP 3 and some macOS users. If you are affected, you will see an error relating to "SSL" when attempting to pay with PayPal. Upgrading to MAMP 4 should fix the issue. Read more here: https://github.com/paypal/TLS-update#php
 :::
 
 # Manual Gateway
@@ -116,7 +116,7 @@ The example templates that come with Craft Commerce include an example of the 'T
 
 # Worldpay
 
-WorldPay is an off-site payment gateway. You must make some changes in your WorldPay Merchant Admin Interface before it will work correctly:
+WorldPay is an offsite payment gateway. You must make some changes in your WorldPay Merchant Admin Interface before it will work correctly:
 
 - Log into your WorldPay Merchant Admin Interface
 - Under Installations, click Setup next to your Installation ID

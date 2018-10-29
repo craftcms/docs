@@ -40,7 +40,7 @@ The template path that this item points to must contain a form that submits itse
 </html>
 ```
 
-Since this template is simply used for redirecting, it only appears for a few seconds, so we suggest making it loads fast with minimal images and inlined styles to reduce http requests.
+Since this template is simply used for redirecting, it only appears for a few seconds, so we suggest making it load fast with minimal images and inlined styles to reduce http requests.
 
 ## `paymentMethodSettings`
 
@@ -54,7 +54,7 @@ return [
     '*' => array(
     ),
 
-    // DEV Details - i.e. your Paypal sandbox details for example
+    // DEV Details - i.e. your PayPal sandbox details for example
     'dev.whatever.net' => array(
 
         'paymentMethodSettings' => [
@@ -66,7 +66,7 @@ return [
                 'CSEKey' => 'whatever',
 
             ],
-            // 4 - Paypal Express
+            // 4 - PayPal Express
             '4' => [
                 'testMode' => true,
                 'password' => 'whatever',
@@ -86,7 +86,7 @@ return [
                 'password' => 'whatever',
                 'CSEKey' => 'whatever',
             ],
-            // 4 - Paypal Express
+            // 4 - PayPal Express
             '4' => [
                 'testMode' => false,
                 'password' => 'whatever',

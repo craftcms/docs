@@ -67,7 +67,7 @@ Data returned as `[72:[3:'California', 4:'Washington'],32:[7:'New South Wales']]
 
 ## craft.commerce.states
 
-Returns an array of [State Modles](state-model.md).
+Returns an array of [State models](state-model.md).
 
 
 ```twig

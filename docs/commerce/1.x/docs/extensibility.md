@@ -7,7 +7,7 @@ events to enable developers to add features to the system.
 
 [Hooks Reference](hooks-reference.md) — Modify Craft Commerce behavior.
 
-[Purchasables](purchasables.md) — Add an element to the system that is sellable.
+[Purchasables](purchasables.md) — Add an element to the system that is able to be sold by Commerce.
 
 [Adjusters](adjusters.md) — Make any price adjustment to an order.
 

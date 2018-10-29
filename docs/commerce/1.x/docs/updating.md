@@ -22,7 +22,7 @@ If you’re manually updating a live site, we recommend you follow these instruc
 
 1. Backup your entire Craft database.
 2. Rename the plugins/commerce/ folder in the latest release zip to “commerce-new”.
-3. Upload plugins/commerce-new to the craft/plugins folder on your server, alongsite the old plugins/commerce folder.
+3. Upload plugins/commerce-new to the craft/plugins folder on your server, alongside the old plugins/commerce folder.
 4. Once commerce-new folder is done uploading proceed to the next step.
 5. Rename the old craft/plugins/commerce folder to craft/plugins/commerce-old.
 6. Rename commerce-new to “commerce”.

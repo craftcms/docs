@@ -30,7 +30,7 @@ If you have an element with a Products field in your template, you can access it
 {% set products = entry.productsFieldHandle %}
 ```
 
-That will give you an ElementCriteriaModel object, prepped to output all of the selected roductsp for the given field. In other words, the line above is really just a shortcut for this:
+That will give you an ElementCriteriaModel object, prepped to output all of the selected products for the given field. In other words, the line above is really just a shortcut for this:
 
 ```twig
 {% set products = craft.commerce.products({

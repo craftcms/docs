@@ -59,7 +59,7 @@ Gives the purchasable the chance to change the saleAmount and price of the line 
 
 ## `validateLineItem(Commerce_LineItemModel $lineItem)`
 
-Gived the purchasable the chance to validate the line item model.
+Gives the purchasable the chance to validate the line item model.
 Add errors to the lineItem like so:
 
 ```php

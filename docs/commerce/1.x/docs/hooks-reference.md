@@ -29,14 +29,14 @@ public function commerce_modifyPaymentRequest($data, $type, $transaction){
 }
 ```
 
-This hook differs from the `modifyPaymentRequest` hook, in that it not the basic data array before being passed to the omnipay gateway, but is the actual raw data object being sent to the gateway. This might be a SimpleXML object or any other type of data object native to the gateway being used. You would only want to modify this if the omnipay gateway does not expose the getters and setters on to the request
+This hook differs from the `modifyPaymentRequest` hook, in that it not the basic data array before being passed to the Omnipay gateway, but is the actual raw data object being sent to the gateway. This might be a SimpleXML object or any other type of data object native to the gateway being used. You would only want to modify this if the Omnipay gateway does not expose the getters and setters on to the request
 
-For more information on modifying the raw data, see the [omnipay changelog](http://omnipay.thephpleague.com/changelog/#additions) and the omnipay [pull request](https://github.com/thephpleague/omnipay/pull/162).
+For more information on modifying the raw data, see the [Omnipay changelog](http://omnipay.thephpleague.com/changelog/#additions) and the Omnipay [pull request](https://github.com/thephpleague/omnipay/pull/162).
 
 
 ### commerce_modifyItemBag
 
-The hook can modify the omnipay ItemBag object that will be sent to the gateway.
+The hook can modify the Omnipay ItemBag object that will be sent to the gateway.
 
 Example:
 ```php
