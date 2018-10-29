@@ -1,4 +1,4 @@
-# Extendability
+# Extensibility
 
 Commerce is a flexible and extensible platform, and just like Craft we have provided hooks and
 events to enable developers to add features to the system.

@@ -4,20 +4,20 @@
 
 Before installing Craft Commerce, make sure you’ve got everything you need:
 
-* A web host that meets Commerce’s [minimum requirements]({entry:docs/requirements:url}) (hint: you’ll need PHP 5.4 or later).
-* Craft CMS 2.6 or later (see Craft’s [installation instructions](https://craftcms.com/docs/installing) for details).
-* The latest version of Commerce, downloaded from [craftcommerce.com](https://craftcommerce.com).
+* A web host that meets Commerce’s [minimum requirements](requirements.md) (hint: you’ll need PHP 5.4 or later).
+* Craft CMS 2.6 or later (see Craft’s [installation instructions](https://docs.craftcms.com/v2/installing.html) for details).
+* The latest version of Commerce, downloaded from <https://craftcms.com/commerce-latest-v1.zip>.
 
 ## Upload the files
 
 Extract the Commerce zip somewhere on your computer. You’ll notice that it contains two folders:
 
-- commerce
-- templates
+- `commerce/`
+- `templates/`
 
-Upload the ‘commerce’ folder to your ‘craft/plugins’ folder within your Craft CMS install.
+Upload the `commerce` folder to your `craft/plugins/` folder within your Craft CMS install.
 
-The ‘templates’ folder contains example templates that demonstrate how to create a basic e-commerce site with a cart and checkout process. If you’d like to use them, just upload the ‘templates/shop’ folder to your ‘craft/templates’ folder.
+The `templates/` folder contains example templates that demonstrate how to create a basic e-commerce site with a cart and checkout process. If you’d like to use them, just upload the `templates/shop/` folder to your `craft/templates/` folder.
 
 ## Install the plugin
 
