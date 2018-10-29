@@ -19,7 +19,7 @@ The products name/title.
 
 ### type
 
-The product' product type. 
+The product' product type.
 
 ### typeId
 
@@ -40,16 +40,16 @@ The tax category all variants of this product use when their tax calculations ar
 
 ### promotable
 
-true or false.  
+true or false.
 Is this product and its variants able to be on sale or at a discount.
 
 ### freeShipping
 
-true or false.  
+true or false.
 
 Should the shipping calculator skip this product and it's variants when adding costs to the order.
 
-This flag only works on shipping cost that is `per item` or `weight based`. Any order level base shipping costs in a shipping rule will be added to the order regardless of this checkbox. 
+This flag only works on shipping cost that is `per item` or `weight based`. Any order level base shipping costs in a shipping rule will be added to the order regardless of this checkbox.
 
 ### postDate
 

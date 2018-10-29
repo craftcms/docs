@@ -9,7 +9,7 @@ Example:
 public function commerce_modifyPaymentRequest(array $request){
 
   $request['description'] = "My Order Info";
-  
+
   return $request;
 }
 ```
@@ -41,9 +41,9 @@ The hook can modify the omnipay ItemBag object that will be sent to the gateway.
 Example:
 ```php
 public function commerce_modifyItemBag($items, $order){
-	
+
   // Modify the $items
-	
+
 }
 ```
 
@@ -96,10 +96,10 @@ The hook should return a `Commerce_AddressModel` of a real address existing in t
 Example:
 ```php
 public function commerce_defaultCartShippingAddress(){
-  
-	$address = craft()->commerce_addresses->getAddressById($myId);
-	return $address;
-  
+
+    $address = craft()->commerce_addresses->getAddressById($myId);
+    return $address;
+
 }
 ```
 
@@ -112,10 +112,10 @@ The hook should return a `Commerce_AddressModel` of a real address existing in t
 Example:
 ```php
 public function commerce_defaultCartBillingAddress(){
-  
-	$address = craft()->commerce_addresses->getAddressById($myId);
-	return $address;
-  
+
+    $address = craft()->commerce_addresses->getAddressById($myId);
+    return $address;
+
 }
 ```
 
@@ -152,9 +152,9 @@ public function commerce_defineAdditionalProductTableAttributes()
 Example:
 ```php
 public function commerce_modifyEmail(EmailModel &$email, $order){
-  
+
   $email->subject = "new Subject";
-  
+
 }
 ```
 Hook must modify the `$email` Email Model directly and not return anything.
@@ -166,9 +166,9 @@ You may use information contained on the `$order` to determine changes to the em
 Example:
 ```php
 public function commerce_registerOrderAdjusters(){
-  
-	$myAdjuster = new MyAdjuster;
-	return [$myAdjuster];
-  
+
+    $myAdjuster = new MyAdjuster;
+    return [$myAdjuster];
+
 }
 ```

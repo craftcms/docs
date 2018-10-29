@@ -24,11 +24,11 @@ Usually you will be working with an order model in your template in 2 situations
 ```
 {% set pastOrders = craft.commerce.orders.customer(craft.commerce.customer).find() %}`
 {% for order in pastOrders %}
-	Order Number: {{ order.shortNumber }}<br>
-	Order Total: {{ order.totalPrice }}<br><br>
-{% endfor %}	
+    Order Number: {{ order.shortNumber }}<br>
+    Order Total: {{ order.totalPrice }}<br><br>
+{% endfor %}
 ```
-	
+
 Order Model's have the following attributes and methods:
 
 ## Attributes
@@ -148,7 +148,7 @@ The last IP address used to update the order on the front end before completedAt
 
 ### customerId
 
-The customer record for this order. You can also use `customer` to get the customer model which can tell you which craft user 
+The customer record for this order. You can also use `customer` to get the customer model which can tell you which craft user
 made the order, as well as access the addresses for this customer.
 
 ### lineItems
@@ -171,7 +171,7 @@ The current message saved when the current order status was set.
 
 ### getPdfUrl($option = '')
 
-Returns the url to the pdf for this order. Requires that your general settings point to a valid html template file.  
+Returns the url to the pdf for this order. Requires that your general settings point to a valid html template file.
 Optionally can pass an 'option' string to this method to identify the type of pdf you want to the template.
 The order PDF template is passed an `order` and `option` variable.
 

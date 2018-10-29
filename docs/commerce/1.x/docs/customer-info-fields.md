@@ -1,6 +1,6 @@
 # Customer Info Fields
 
-## General 
+## General
 
 The Customer Info field allows you to add Commerce related customer information to the Craft user profile's field layout. This allows you to see the past orders for a customer as well as all addresses they have in their address book.
 
@@ -18,7 +18,7 @@ Example of getting the customers addresses:
 
 ```twig
 {% for address in user.customerInfo.addresses %}
-	{{ address.firstName}} <br>
+    {{ address.firstName}} <br>
 {% endfor %}
 ```
 
@@ -26,6 +26,6 @@ Example of getting the customers past orders:
 
 ```twig
 {% for order in user.customerInfo.orders %}
-	{{ order.number}} <br>
+    {{ order.number}} <br>
 {% endfor %}
 ```

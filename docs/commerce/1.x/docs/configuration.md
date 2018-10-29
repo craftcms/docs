@@ -10,7 +10,7 @@ Can be set to `true` or `false` (default is `true`).
 
 ## `cartCookieDuration`
 
-A php [Date Interval](http://php.net/manual/en/class.dateinterval.php)  
+A php [Date Interval](http://php.net/manual/en/class.dateinterval.php)
 Default: 3 months. (`P3M`).
 
 How long the cookie storing the cart should last. The cart exists independently of the Craft users' session.
@@ -25,16 +25,16 @@ The template path that this item points to must contain a form that submits itse
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Redirecting...</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Redirecting...</title>
 </head>
 <body onload="document.forms[0].submit();">
 <form action="{{ actionUrl|raw }}" method="post">
-	<p>Redirecting to payment page...</p>
-	<p>
-		{{ inputs|raw }}
-		<input type="submit" value="Continue" />
-	</p>
+    <p>Redirecting to payment page...</p>
+    <p>
+        {{ inputs|raw }}
+        <input type="submit" value="Continue" />
+    </p>
 </form>
 </body>
 </html>
@@ -49,14 +49,14 @@ Allows for the overriding of [Payment Method]({entry:122:url}) settings. You sti
 ```php
 <?php
 return [
-    
+
     // he * must be present to enable multi-environment configs, even if empty
     '*' => array(
     ),
 
     // DEV Details - i.e. your Paypal sandbox details for example
     'dev.whatever.net' => array(
- 
+
         'paymentMethodSettings' => [
             //eWay Sandbox
             '1' => [
@@ -65,7 +65,7 @@ return [
                 'password' => 'whatever',
                 'CSEKey' => 'whatever',
 
-            ],           
+            ],
             // 4 - Paypal Express
             '4' => [
                 'testMode' => true,
@@ -77,7 +77,7 @@ return [
     ),
 
     // PRODUCTION Details - live payment stuff here
-    'whatever.com' => array(             
+    'whatever.com' => array(
         'paymentMethodSettings' => [
             //eWay LIVE
             '1' => [
@@ -92,9 +92,9 @@ return [
                 'password' => 'whatever',
                 'username' => 'whatever',
                 'signature' => 'whatever'
-            ],            
-        ],        
-    ),    
+            ],
+        ],
+    ),
 ];
 ```
 
@@ -118,7 +118,7 @@ Should Commerce purge old inactive carts from the database. See the [`purgeInact
 
 ## `purgeInactiveCartsDuration`
 
-A php [Date Interval](http://php.net/manual/en/class.dateinterval.php)  
+A php [Date Interval](http://php.net/manual/en/class.dateinterval.php)
 Default: 3 months. (`P3M`).
 
 Inactive carts older than this interval from their last update will be purged (deleted).
@@ -129,7 +129,7 @@ The interval check for purging of inactive carts is only run when visiting the O
 
 ## `requireEmailForAnonymousPayments`
 
-Determines whether payment requests made to the `commerce/payments/pay` controller action require the email address of the order to be submitted with an `email` POST param that matches the order the user is trying to make payment on. 
+Determines whether payment requests made to the `commerce/payments/pay` controller action require the email address of the order to be submitted with an `email` POST param that matches the order the user is trying to make payment on.
 
 Can be set to `true` or `false` (default is `false`).
 

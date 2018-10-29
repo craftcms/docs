@@ -2,7 +2,7 @@
 
 Products are the items for sale within your store. These differ from Variants, which track the unique variations of a product.
 
-The product itself is never sold, just a variant of a product. Even a product with no variants has a **default variant** behind it. 
+The product itself is never sold, just a variant of a product. Even a product with no variants has a **default variant** behind it.
 
 For instance, a t-shirt product would likely have multiple variants, one for each of it's different colors. You would only ever sell those variants, and not the product itself.
 A bug that only comes in one color and size might not need variants, but a single "in-built" default variant still exists, which is the item the customer adds to the cart.
@@ -44,4 +44,4 @@ When a product is able to have multiple variants, the author can choose which on
 Anything that can be added to the cart by a customer is called a [Purchasable](purchasables.md).
 
 3rd party plugins can provide additional Purchasables, but Craft Commerce only provides a single type of purchasable, the aforementioned 'variant' that belongs to a product.
- 
+

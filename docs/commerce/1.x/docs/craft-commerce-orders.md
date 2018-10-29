@@ -1,4 +1,4 @@
-# craft.commerce.orders 
+# craft.commerce.orders
 ## How to get orders
 
 You can access your site’s orders from your templates via `craft.commerce.orders`
@@ -26,11 +26,11 @@ Product type id.
 The unique hash of the order.
 
 ### completed
-Accepts `true`.  e.g ```{% set orders = craft.commerce.orders.completed(true).find() %}``` would 
+Accepts `true`.  e.g ```{% set orders = craft.commerce.orders.completed(true).find() %}``` would
 return completed orders since they have `isCompleted` set to true.
 
 ### isCompleted
-Accepts `1` or `not 1`.  e.g ```{% set orders = craft.commerce.orders.isCompleted('not 1').find() %}``` would 
+Accepts `1` or `not 1`.  e.g ```{% set orders = craft.commerce.orders.isCompleted('not 1').find() %}``` would
 return incomplete orders (carts) since they have `isCompleted` set to false.
 
 ### dateOrdered
@@ -44,12 +44,12 @@ Accepts the id of an Order Status.
 
 ### customer
 A customer Model can be passed to get orders for that customer only. e.g `{% set orders = craft.commerce.orders.customer(craft.commerce.customer).find() %}`
-Do not use this to get a cart, as the default response does not include orders that are still 
+Do not use this to get a cart, as the default response does not include orders that are still
 carts (use `{% set cart = craft.commerce.getCart %}` to get the current user's cart).
 
 ### user
 A customer Model can be passed to get orders for that user only. e.g `{% set orders = craft.commerce.orders.user(currentUser).find() %}`
-Do not use this to get a cart, as the default response does not include orders that are still 
+Do not use this to get a cart, as the default response does not include orders that are still
 carts (use `{% set cart = craft.commerce.getCart %}` to get the current user's cart).
 
 ### customerId
@@ -98,7 +98,7 @@ The date the order was paid.
 Returns orders that contains specific purchasables.
 
 Accepts: An array of models meeting the Purchasable interface (like variants) OR an array of Purchasable Element IDs
- 
+
 For example:
 
 ```twig

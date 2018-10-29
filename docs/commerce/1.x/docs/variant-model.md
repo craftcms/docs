@@ -20,7 +20,7 @@ Returns this variant's id - as variants are purchasables.
 
 ### product
 
-Returns this variant's [Product Model](product-model.md) 
+Returns this variant's [Product Model](product-model.md)
 
 ### price
 

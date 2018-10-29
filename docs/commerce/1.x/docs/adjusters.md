@@ -117,7 +117,7 @@ The only included adjustment we use in the core system at the moment is included
 
 ## Ordering Adjustments
 
-The array you return with your plugin's `commerce_registerOrderAdjusters()` hook can be a simple array of objects that meet the Adjuster Interface. 
+The array you return with your plugin's `commerce_registerOrderAdjusters()` hook can be a simple array of objects that meet the Adjuster Interface.
 
 If you return a simple array, your adjusters will run after the standard adjusters or after any other plugins that provide adjusters and are loaded before your plugin.
 

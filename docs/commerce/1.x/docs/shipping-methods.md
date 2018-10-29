@@ -11,7 +11,7 @@ You can provide one or more shipping methods with the following method in their 
     {
         return [new CustomShipper_CourierDeliveryMethod()];
     }
-``` 
+```
 
 The plugin can provide one or more shipping method classes with the following interface:
 
@@ -33,11 +33,11 @@ Returns the name of this Shipping Method as displayed to the customer and in the
 
 ### getHandle()
 
-This is the handle added to the order for the chosen shipping method. 
+This is the handle added to the order for the chosen shipping method.
 
 ### getCpEditUrl()
 
-Returns a control panel URL to a place where you can configure this shipping method's rules.  
+Returns a control panel URL to a place where you can configure this shipping method's rules.
 Return an empty string if the method has no link.
 
 ### getRules()
@@ -51,7 +51,7 @@ Is this shipping method available to the customer to select.
 
 # Shipping Rules Interface
 
-A shipping method returns an array of rules objects. The shipping engine goes through each rule and calls `matchOrder()`. It expects a `true` or `false` returned if this shipping method can be applied to the order/cart. The matched rule also returns the costs to the cart if the rule matches. 
+A shipping method returns an array of rules objects. The shipping engine goes through each rule and calls `matchOrder()`. It expects a `true` or `false` returned if this shipping method can be applied to the order/cart. The matched rule also returns the costs to the cart if the rule matches.
 
 These are the methods required for the shipping rule objects:
 
@@ -75,33 +75,33 @@ Stores this data as json on the orders shipping adjustment. For example you migh
 
 ### getPercentageRate()
 
-Returns the percentage rate that is multiplied per line item subtotal.  
+Returns the percentage rate that is multiplied per line item subtotal.
 Zero will not make any changes
 
 ### getPerItemRate()
 
-Returns the flat rate that is multiplied per qty.  
+Returns the flat rate that is multiplied per qty.
 Zero will not make any changes.
 
 ### getWeightRate()
 
-Returns the rate that is multiplied by the line item's weight.  
+Returns the rate that is multiplied by the line item's weight.
 Zero will not make any changes.
 
 
 ### getBaseRate()
 
-Returns a base shipping cost. This is added at the order level.  
+Returns a base shipping cost. This is added at the order level.
 Zero will not make any changes.
 
 ### getMaxRate()
 
-Returns a max cost this rule should ever apply.  
+Returns a max cost this rule should ever apply.
 If the total of your rates as applied to the order are greater than this, the baseShippingCost on the order is modified to meet this max rate.
 
 ### getMinRate()
-    
-Returns a min cost this rule should have applied.  
+
+Returns a min cost this rule should have applied.
 If the total of your rates as applied to the order are less than this, the baseShippingCost on the order is modified to meet this min rate.
 Zero will not make any changes.
 

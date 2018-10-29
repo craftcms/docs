@@ -14,7 +14,7 @@ In your templates, you can get the current user's cart with [craft.commerce.cart
 {% set cart = craft.commerce.getCart() %}
 ```
 
-The above code will generate a new cart in the session if none exists. Its likely you would only 
+The above code will generate a new cart in the session if none exists. Its likely you would only
 want to make this assignment once per page request, but more than once does not affect performance.
 
 To see how to use the cart in templates look at the [order model](order-model.md) documentation.

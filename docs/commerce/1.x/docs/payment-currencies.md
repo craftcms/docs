@@ -22,7 +22,7 @@ Craft Commerce does not keep your store's exchange rates updated automatically. 
 A cart (order) has the following fields relating to currency:
 
 ### `order.currency`
-This is the primary store currency, and the currency that all the values for price, line items, adjustments, discounts etc are all stored in, and returned in. 
+This is the primary store currency, and the currency that all the values for price, line items, adjustments, discounts etc are all stored in, and returned in.
 
 ### `order.paymentCurrency`
 This is the currency the customer has currently selected as their payment currency. If your store only has a single currency, this will be set to the same as your primary store currency. A customer can change this currency, see [switching currencies](#switching-currencies).

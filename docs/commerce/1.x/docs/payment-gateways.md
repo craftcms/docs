@@ -1,7 +1,7 @@
 # Payment Gateways
 Craft Commerce can be used with over 20+ payment gateways out of the box, through the use of the [Omnipay](https://github.com/thephpleague/omnipay) PHP library. Additional Omnipay gateways not included in the standard Craft Commerce install can be added with a [plugin](#adding-additional-gateways).
 
-All included gateways should work as expected, but logistically we are unable to test them all. See our [testing matrix](https://craftcommerce.com/support/which-payment-gateways-do-you-support) for more information. 
+All included gateways should work as expected, but logistically we are unable to test them all. See our [testing matrix](https://craftcommerce.com/support/which-payment-gateways-do-you-support) for more information.
 
 To set up a new payment method within your CP, go to`Commerce > Settings > Payment Methods`. Each payment methods' gateway requires different settings, which you will need to obtain from your gateway provider.
 
@@ -52,11 +52,11 @@ If you do not wish to store your payment gateway config information in the datab
 
 ```php
 return [
-	'paymentMethodSettings' => [
-		'2' => [
-			'apiKey' => getenv('STRIPE_API_KEY'),
-		],
-	],
+    'paymentMethodSettings' => [
+        '2' => [
+            'apiKey' => getenv('STRIPE_API_KEY'),
+        ],
+    ],
 ];
 ```
 
@@ -64,7 +64,7 @@ return [
 
 Craft CMS [supports CSRF protection](https://craftcms.com/support/csrf-protection) when turned on. Some gateways attempt to POST data back to Craft Commerce which they can't do with a valid token. If you wish to have CSRF protection enabled on your site and your gateway uses a POST request when communicating with Craft Commerce, you will need to disable CSRF protection for that request.
 
-To learn how to disable CSRF on a per controller action basis, see this [Stack Overflow answer](http://craftcms.stackexchange.com/a/4554/91). 
+To learn how to disable CSRF on a per controller action basis, see this [Stack Overflow answer](http://craftcms.stackexchange.com/a/4554/91).
 
 # Dummy Gateway
 
@@ -141,7 +141,7 @@ When configuring the SIM gateway, use the following endpoints:
 Live: `https://secure2.authorize.net/gateway/transact.dll`
 Developer: `https://test.authorize.net/gateway/transact.dll`
 
-# Payment Express	PxPay
+# Payment Express    PxPay
 
 Payment Express PxPay is an offsite redirect gateway.
 

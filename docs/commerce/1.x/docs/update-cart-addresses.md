@@ -6,7 +6,7 @@ You can see if the cart has a billing and shipping address has been set with:
 
 ```
 {% if cart.shippingAddress %}
-	{{ cart.shippingAddress.firstName }} ...etc
+    {{ cart.shippingAddress.firstName }} ...etc
 {% endif %}
 ```
 and
@@ -73,8 +73,8 @@ If `shippingAddressId` is an integer then the address form data is ignored and t
     {% for id, name in craft.commerce.countriesList %}
       <option value="{{ id }}">{{ name }}</option>
     {% endfor %}
-		</select>
-  	<input type="hidden" name="sameAddress" value="1">
+        </select>
+      <input type="hidden" name="sameAddress" value="1">
     <input type="submit" value="Add to cart">
 </form>
 ```

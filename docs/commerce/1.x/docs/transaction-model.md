@@ -36,13 +36,13 @@ The payment amount of the transaction, which is the amount sent and used when co
 
 ### paymentRate
 
-This stores the currency conversion rate of the order's payment currency at the time payment was attempted. 
+This stores the currency conversion rate of the order's payment currency at the time payment was attempted.
 
 ### status
 
 The status of the transaction. Possible values are:
 
-`pending` The transaction is pending getting a `redirect`, `success` or `failed` status. 
+`pending` The transaction is pending getting a `redirect`, `success` or `failed` status.
 
 `redirect` The initial transaction was registered successfully with the offsite gateway, and we have been told to redirect to the offsite gateway. This will be the status while the customer is on the gateways offsite page.
 
@@ -60,7 +60,7 @@ The plain text message response from the gateway. Usually a sentence. This messa
 
 ### response
 
-The full response data from the gateway, serialized as json. Useful for debugging. 
+The full response data from the gateway, serialized as json. Useful for debugging.
 
 ### code
 

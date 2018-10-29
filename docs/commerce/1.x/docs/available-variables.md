@@ -30,7 +30,7 @@ Data returned as `[32:'Australia', 72:'USA']`
 ```twig
 <select>
 {% for id, countryName in craft.commerce.countriesList %}
-	<option value="{{ id }}">{{ countryName }}</option>
+    <option value="{{ id }}">{{ countryName }}</option>
 {% endfor %}
 </select>
 ```
@@ -42,7 +42,7 @@ Returns an array of [Country Models](country-model.md).
 ```twig
 <select>
 {% for country in craft.commerce.countries %}
-	<option value="{{ country.id }}">{{ country.name }}</option>
+    <option value="{{ country.id }}">{{ country.name }}</option>
 {% endfor %}
 </select>
 ```
@@ -56,10 +56,10 @@ Data returned as `[72:[3:'California', 4:'Washington'],32:[7:'New South Wales']]
 ```twig
 <select>
 {% for countryId, states in craft.commerce.statesArray %}
-	<optgroup label="{{ craft.commerce.countriesList[countryId] }}">
-	{% for stateId, stateName in craft.commerce.statesArray[countryId] %}
-		<option value="{{ stateId }}">{{ stateName }}</option>
-	{% endfor %}
+    <optgroup label="{{ craft.commerce.countriesList[countryId] }}">
+    {% for stateId, stateName in craft.commerce.statesArray[countryId] %}
+        <option value="{{ stateId }}">{{ stateName }}</option>
+    {% endfor %}
   </optgroup>
 {% endfor %}
 </select>
@@ -73,7 +73,7 @@ Returns an array of [State Modles](state-model.md).
 ```twig
 <select>
 {% for states in craft.commerce.countries %}
-	<option value="{{ state.id }}">{{ state.name }}</option>
+    <option value="{{ state.id }}">{{ state.name }}</option>
 {% endfor %}
 </select>
 ```

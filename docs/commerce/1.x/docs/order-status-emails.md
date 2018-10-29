@@ -28,7 +28,7 @@ Enter the name of this email as it will be shown when managing it in the control
 
 ## Email Subject
 
-The subject of the email.  
+The subject of the email.
 Plain text can be entered or twig can also be used to set dynamic values.
 Two special variables available to you:
 
@@ -65,7 +65,7 @@ This would send the email to the customer to made this order.
 
 ## BCC’d Recipient
 
-The 'BCC' addresses for this email. You can seperate the addresses by a comma: `,`  
+The 'BCC' addresses for this email. You can seperate the addresses by a comma: `,`
 Plain text can be entered or twig can also be used to set dynamic values.
 Two special variables available to you:
 
