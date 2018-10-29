@@ -37,7 +37,10 @@ The above is a simple example, if your product's type has multiple variants you 
     <input type="submit" value="Add to cart">
 </form>
 ```
->{Warning} When using the `commerce/cart/updateCart` form action, the redirect is only followed if *all* updates submitted succeed. Be aware the form action can partially succeed in updating some things and not others.
+
+::: warning
+When using the `commerce/cart/updateCart` form action, the redirect is only followed if *all* updates submitted succeed. Be aware the form action can partially succeed in updating some things and not others.
+:::
 
 # Line item options and notes
 
@@ -76,7 +79,9 @@ In the above example we:
 - Allowed a customer to choose an option called 'engraving' with 2 prepared values.
 - Allowed a customer to choose an option called 'giftwrap' with 2 prepared values.
 
->{Warning} The options and notes param data is not validated. A user could submit any data. If you need to validate the options, use the [beforeAddToCart](https://craftcommerce.com/docs/events-reference#commerce_cart.onbeforeaddtocart) event.
+::: warning
+The options and notes param data is not validated. A user could submit any data. If you need to validate the options, use the [beforeAddToCart](https://craftcommerce.com/docs/events-reference#commerce_cart.onbeforeaddtocart) event.
+:::
 
 Once the order is complete, the notes and options can be found in the View Order screen.
 

@@ -88,7 +88,9 @@ Choose any different token name other than ```token```, for example you could pu
 
 PayPal Express Checkout requires an API Username, Password, and Signature. These are different from your PayPal account details. You can obtain your API details by logging in to your PayPal account, and clicking Profile > My Selling Tools > API Access > Request/View API Credentials > Request API Signature.
 
->{Warning} Paypal have increased their TLS requirements, which affects MAMP 3 and some OSX users. If you are affected, you will see an error relating to "SSL" when attempting to pay with paypal. Upgrading to MAMP 4 should fix the issue. Read more here: https://github.com/paypal/TLS-update#php
+::: warning
+Paypal have increased their TLS requirements, which affects MAMP 3 and some OSX users. If you are affected, you will see an error relating to "SSL" when attempting to pay with paypal. Upgrading to MAMP 4 should fix the issue. Read more here: https://github.com/paypal/TLS-update#php
+:::
 
 # Manual Gateway
 
@@ -98,7 +100,9 @@ When you need to accept cheque or bank deposit payments, you should use the manu
 
 The gateway simply authorizes all payments, allowing the order to proceed. You may then manually mark the payment as "captured" in the control panel when payment is received.
 
->{Tip} When creating a Manual payment method, you must select the payment type to be "Authorize Only".
+::: tip
+When creating a Manual payment method, you must select the payment type to be "Authorize Only".
+:::
 
 # Worldpay Json
 
