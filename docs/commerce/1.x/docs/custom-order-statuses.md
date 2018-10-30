@@ -1,6 +1,8 @@
+# Custom Order Statuses
+
 ## Overview
 
-When a customer completes a Cart it becomes an Order. Carts and Orders are actually the same models; an [Order Model](order-model.md).
+When a customer completes a cart it becomes an order.
 
 The only differences between an order and a cart is:
 
@@ -10,7 +12,7 @@ The only differences between an order and a cart is:
 
 When a customer completes their order, the `dateOrdered` is set to the current time and date. Also, a custom order status is set on the order. The custom order status set depends on which order status you have set as the default.
 
-Custom order statuses can be set up in the control panel at `commerce >settings > order statuses`. There you can choose the order status that is set by default on new orders.
+Custom order statuses can be managed from Commerce → Settings → Order Statuses in the Control Panel. There you can choose the order status that is set by default on new orders.
 
 ## Functionality
 
@@ -28,4 +30,4 @@ In addition to setting a new status, you can record a message which is stored wi
 
 In addition to using order statuses to manage your orders, You can choose emails that will be sent when an order moves into that status.
 
-See [Order Status Emails](order-status-emails.md)
+See [Order Status Emails](order-status-emails.md).

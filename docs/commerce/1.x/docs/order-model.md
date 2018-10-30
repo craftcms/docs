@@ -1,4 +1,5 @@
 # Order Model
+
 Whenever you’re dealing with an order or cart in your template, you’re actually working with an `Commerce_OrderModel` object.
 
 ## Simple Output
@@ -35,11 +36,11 @@ Order Model objects have the following attributes and methods:
 
 ### id
 
-The element id of the order.
+The element ID of the order.
 
 ### number
 
-The unique identifier of the order, the customer will see this, and is the best thing to use in urls.
+The unique identifier of the order, the customer will see this, and is the best thing to use in URLs.
 
 ### shortNumber
 
@@ -116,7 +117,7 @@ The date the order was paid.
 
 ### billingAddressId
 
-The id of the linked billing address. You can get the billing address model with the `billingAddress` attribute.
+The ID of the linked billing address. You can get the billing address model with the `billingAddress` attribute.
 
 ### billingAddress
 
@@ -124,7 +125,7 @@ This returns the address model from the database for the current `billingAddress
 
 ### shippingAddressId
 
-The id of the linked shipping address. You can get the shipping address model with the `shippingAddress` attribute.
+The ID of the linked shipping address. You can get the shipping address model with the `shippingAddress` attribute.
 
 ### shippingAddress
 
@@ -136,7 +137,7 @@ The handle of the currently-applied shipping method. You can get the set shippin
 
 ### paymentMethodId
 
-The id of the linked payment method. You can get the set payment method’s model with the `paymentMethod` attribute.
+The ID of the linked payment method. You can get the set payment method’s model with the `paymentMethod` attribute.
 
 ### currency
 
@@ -171,8 +172,8 @@ The current message saved when the current order status was set.
 
 ### getPdfUrl($option = '')
 
-Returns the url to the pdf for this order. Requires that your general settings point to a valid html template file.
-Optionally can pass an `option` string to this method to identify the type of pdf you want to the template.
+Returns the URL to the PDF for this order. Requires that your general settings point to a valid HTML template file.
+Optionally can pass an `option` string to this method to identify the type of PDF you want to the template.
 The order PDF template is passed an `order` and `option` variable.
 
 ### getShippingMethod()

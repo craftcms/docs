@@ -11,4 +11,4 @@ events to enable developers to add features to the system.
 
 [Adjusters](adjusters.md) — Make any price adjustment to an order.
 
-[Shipping Methods](shipping-methods.md) — Add 3rd Party shipping methods and return shipping prices.
+[Shipping Methods](shipping-methods.md) — Add third party shipping methods and return shipping prices.

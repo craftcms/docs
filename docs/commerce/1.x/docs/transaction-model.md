@@ -1,8 +1,8 @@
 # Transaction Model
 
-Order Transactions are the payment history of an order.
+Transactions record the payment history of an order.
 
-A transaction can be of a certain type and status, and contain information relevant to the payment and communication to the 3rd party payment gateway.
+A transaction can be of a certain type and status, and contain information relevant to the payment and communication to the third party payment gateway.
 
 
 ### id
@@ -60,7 +60,7 @@ The plain text message response from the gateway. Usually a sentence. This messa
 
 ### response
 
-The full response data from the gateway, serialized as json. Useful for debugging.
+The full response data from the gateway, serialized as JSON. Useful for debugging.
 
 ### code
 
@@ -72,14 +72,14 @@ Some transactions are children of another transaction. For example, capture tran
 
 ### order
 
-The [Order Model](order-model.md) this transaction belongs to.
+The [Order model](order-model.md) this transaction belongs to.
 
 ### orderId
 
-The order ID of the [Order Model](order-model.md) this transaction belongs to.
+The order ID of the [Order model](order-model.md) this transaction belongs to.
 
 ### paymentMethodId
 
-The ID of the payment method used for communicating with the 3rd party gateway.
+The ID of the payment method used for communicating with the third party gateway.
 
 

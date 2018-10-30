@@ -9,6 +9,7 @@ To get all Craft Commerce general settings:
 ```twig
 {% set settings = craft.commerce.settings %}
 ```
+
 ## craft.commerce.products
 
 See [craft.commerce.products](craft-commerce-products.md)
@@ -34,9 +35,10 @@ Data returned as `[32:'Australia', 72:'USA']`
 {% endfor %}
 </select>
 ```
+
 ## craft.commerce.countries
 
-Returns an array of [Country Models](country-model.md).
+Returns an array of [Country models](country-model.md).
 
 
 ```twig
@@ -119,13 +121,6 @@ Returns all payment methods available to the customer.
 {% endif %}
 ```
 
-## craft.commerce.orderStatuses
-
-Returns an array of all custom order statuses [Order Status Model](order-status-model.md) set up in the system.
-
-```twig
-{% set statuses = craft.commerce.orderStatuses %}
-```
 ## craft.commerce.taxCategories
 
 Returns an array of all tax categories set up in the system.
@@ -150,7 +145,7 @@ Returns an array of all product types set up in the system.
 
 ## craft.commerce.orderStatuses
 
-Returns an array of all order statuses [Order Status Model](order-status-model.md) set up in the system.
+Returns an array of all the [Order Status models](order-status-model.md) set up in the system.
 
 ```twig
 {% for status in craft.commerce.orderStatuses %}

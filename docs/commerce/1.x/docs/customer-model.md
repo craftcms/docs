@@ -18,15 +18,15 @@ If you add the [Customer Info](customer-info-fields.md) field to the user profil
 
 ### user
 
-Returns a [User Model](http://buildwithcraft.com/docs/templating/usermodel) if the customer is logged in, or `null` if the customer is a guest.
+Returns a [UserModel](https://docs.craftcms.com/v2/templating/usermodel.html#simple-output) object if the customer is logged in, or `null` if the customer is a guest.
 
 ### addresses
 
-Returns an array of [Address Models](address-model.md)
+Returns an array of [Address models](address-model.md).
 
 ### orders
 
-Returns an array of completed [Order Models](order-model.md)
+Returns an array of completed [Order models](order-model.md).
 
 ### userId
 Returns the User ID associated with this customer if the customer is a registered user.

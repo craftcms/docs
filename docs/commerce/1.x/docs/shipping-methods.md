@@ -1,8 +1,8 @@
 # Shipping Methods
 
-In Craft Commerce it is possible to define your own Shipping Methods within a plugin.
+In Craft Commerce it is possible to define your own shipping methods within a plugin.
 
-The plugin would provide Shipping Methods the customer can choose from. In addition, each Shipping method would need one or more shipping rule which allows the Shipping Method to match the order and be available for the current order, as well as provide the associated shipping costs.
+The plugin would provide shipping methods the customer can choose from. In addition, each Shipping method would need one or more shipping rule which allows the shipping method to match the order and be available for the current order, as well as provide the associated shipping costs.
 
 You can provide one or more shipping methods with the following method in their main plugin class:
 
@@ -21,15 +21,15 @@ The plugin can provide one or more shipping method classes with the following in
 The shipping method interface requires a class with the following methods:
 
 ### getType()
-Returns the type of Shipping Method. This might be the name of the plugin or provider.
-The core shipping methods have type: `Custom`. This is shown in the control panel only.
+Returns the type of shipping method. This might be the name of the plugin or provider.
+The core shipping methods have type: `Custom`. This is shown in the Control Panel only.
 
 ### getId()
 This must return null.
 
 ### getName()
 
-Returns the name of this Shipping Method as displayed to the customer and in the control panel.
+Returns the name of this shipping method as displayed to the customer and in the Control Panel.
 
 ### getHandle()
 
@@ -37,7 +37,7 @@ This is the handle added to the order for the chosen shipping method.
 
 ### getCpEditUrl()
 
-Returns a control panel URL to a place where you can configure this shipping method’s rules.
+Returns a Control Panel URL to a place where you can configure this shipping method’s rules.
 Return an empty string if the method has no link.
 
 ### getRules()
@@ -58,7 +58,7 @@ These are the methods required for the shipping rule objects:
 
 ### getHandle();
 
-Returns the unique handle of this Shipping Rule
+Returns the unique handle of this shipping rule
 
 ### matchOrder(\Craft\Commerce_OrderModel $order)
 
@@ -71,7 +71,7 @@ Is this shipping rule enabled, if not, the matchOrder() is not attempted.
 
 ### getOptions();
 
-Stores this data as json on the orders shipping adjustment. For example you might include all data used to determine the rule matched.
+Stores this data as JSON on the order’s shipping adjustment. For example, you might include all data used to determine the rule matched.
 
 ### getPercentageRate()
 

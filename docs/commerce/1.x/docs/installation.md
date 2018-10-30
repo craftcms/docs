@@ -17,7 +17,7 @@ Extract the Commerce zip somewhere on your computer. You’ll notice that it con
 
 Upload the `commerce` folder to your `craft/plugins/` folder within your Craft CMS install.
 
-The `templates/` folder contains example templates that demonstrate how to create a basic e-commerce site with a cart and checkout process. If you’d like to use them, just upload the `templates/shop/` folder to your `craft/templates/` folder.
+The `templates/` folder contains example templates that demonstrate how to create a basic ecommerce site with a cart and checkout process. If you’d like to use them, just upload the `templates/shop/` folder to your `craft/templates/` folder.
 
 ## Install the plugin
 

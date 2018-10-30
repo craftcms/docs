@@ -1,4 +1,5 @@
 # State Model
+
 StateModel objects have the following attributes and methods:
 
 # Attributes
@@ -19,11 +20,11 @@ The states’ name followed by the states’ country in parenthesis. For example
 The states’s ISO code (required).
 
 ### country
-The [Country Model](country-model.md) of the country this state belongs to (required).
+The [Country model](country-model.md) of the country this state belongs to (required).
 
 ### countryId
 The record ID of the country this state belongs to (required).
 
 ### cpEditUrl
-A url to edit this state in the control panel.
+A URL to edit this state in the Control Panel.
 

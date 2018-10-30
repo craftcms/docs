@@ -1,11 +1,12 @@
 ## Shipping
+
 The shipping system in Craft Commerce is a way for shipping costs to be added to the cart when a customer selects a shipping method you set up.
 
 The core components of the shipping system are:
 
-- Shipping Categories
-- Shipping Zones
-- Shipping Methods & Rules
+- Shipping categories
+- Shipping zones
+- Shipping methods and rules
 
 Shipping methods and rules are at the core of the shipping engine. The shipping rules use shipping categories, shipping zones and additional order conditions to determine which shipping methods are available to the cart for your customer to select from.
 
@@ -55,7 +56,7 @@ The shipping rule has options for each category in the system. Each shipping cat
 
 ### Order Contents
 
-In addition to the shipping zone and shipping category matching, various order information can be used to determine a match of the rule. For example: Order cost, order item quantity, and total order weight.
+In addition to the shipping zone and shipping category matching, various order information can be used to determine a match of the rule, such as order cost, order item quantity, and total order weight.
 
 ## Shipping Rule Conditions
 

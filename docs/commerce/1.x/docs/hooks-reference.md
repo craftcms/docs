@@ -50,7 +50,7 @@ public function commerce_modifyItemBag($items, $order){
 
 ### commerce_modifyOrderSources
 
-Gives plugins a chance to customize and modify the sources on the order listing screen. By default the sources are order statuses and active and inactive carts.
+Gives plugins a chance to modify the sources listed in the sidebar of the Orders index page. By default the sources are order statuses and active and inactive carts.
 
 ```php
 public function commerce_modifyOrderSources($sources, $context)

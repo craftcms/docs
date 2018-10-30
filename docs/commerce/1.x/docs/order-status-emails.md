@@ -10,21 +10,21 @@ Another email could be set up called “Order Notification for Admin” which co
 
 Before setting up emails for Craft Commerce. Ensure that your Craft CMS installation has email configured correctly.
 
-You can set up your email gateway in the Craft CMS control panel by going to `Settings ⟶ Email`.
+You can set up your email gateway by going to Settings → Email in the Control Panel.
 
-If you want to have a different From Email and From Name for your Commerce store emails, which overrides the Craft CMS email defaults, go to `Commerce ⟶ Settings ⟶ General Settings` and enter in your store from name and email address.
+If you want to have a different From Email and From Name for your Commerce store emails, which overrides the Craft CMS email defaults, go to Commerce → Settings → General Settings and enter in your store from name and email address.
 
 <img src="assets/new-email-settings.png" width="645" alt="New Email Settings.">
 
 # Creating an Email
 
-To create an email go to `Commerce ⟶ Settings ⟶ Emails` and click “New Email”.
+To create a new email, go to Commerce → Settings → Emails, and click “New Email”.
 
 Emails have the following configuration settings:
 
 ## Name
 
-Enter the name of this email as it will be shown when managing it in the control panel.
+Enter the name of this email as it will be shown when managing it in the Control Panel.
 
 ## Email Subject
 
@@ -32,8 +32,8 @@ The subject of the email.
 Plain text can be entered or twig can also be used to set dynamic values.
 Two special variables available to you:
 
-- `order` an [Order Model](order-model.md).
-- `orderHistory` an [Order History Model](order-history-model.md).
+- `order` – an [Order model](order-model.md).
+- `orderHistory` – an [Order History model](order-history-model.md).
 
 `order` is the current cart or order that this email is a notification for. For example, for the subject we might use a template like:
 
@@ -52,8 +52,8 @@ If “Send to custom recipient” is selected, an email address can be entered. 
 Plain text can be entered or twig can also be used to set dynamic values.
 Two special variables available to you:
 
-- `order` an [Order Model](order-model.md).
-- `orderHistory` an [Order History Model](order-history-model.md).
+- `order` – an [Order model](order-model.md).
+- `orderHistory` – an [Order History model](order-history-model.md).
 
 `order` is the current cart or order that this email is a notification for. For example, for the subject we might use a template like:
 
@@ -71,8 +71,8 @@ Plain text can be entered or twig can also be used to set dynamic values.
 
 Two special variables available to you:
 
-- `order` an [Order Model](order-model.md).
-- `orderHistory` an [Order History Model](order-history-model.md).
+- `order` – an [Order model](order-model.md).
+- `orderHistory` – an [Order History model](order-history-model.md).
 
 Most likely, you would BCC the store owner on order confirmation.
 
@@ -83,8 +83,8 @@ Plain text template path can be entered or Twig code can also be used to set dyn
 
 You can use the following variables in both the template path & template file body:
 
-- `order` an [Order Model](order-model.md).
-- `orderHistory` an [Order History Model](order-history-model.md).
+- `order` – an [Order model](order-model.md).
+- `orderHistory` – an [Order History model](order-history-model.md).
 
 This allows you to have full design flexibility.
 

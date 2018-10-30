@@ -4,11 +4,11 @@
 
 The Customer Info field allows you to add Commerce related customer information to the Craft user field layout. This allows you to see the past orders for a customer as well as all addresses they have in their address book.
 
-<img src="assets/customer-info-field.png" width="600" alt="Product Field Modal.">
+<img src="assets/customer-info-field.png" width="600" alt="Products field modal">
 
 ## Templating
 
-If you named your customer info field `customerInfo` you would be able to have a {entry:343:link} returned for a user like so:
+If you named your customer info field `customerInfo` you would be able to have a [Customer model](customer-model.md) returned for a user like so:
 
 ```twig
 {% set customer = user.customerInfo %}

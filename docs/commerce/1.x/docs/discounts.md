@@ -1,12 +1,12 @@
-## Discounts
+# Discounts
 
-Discounts are deductions off line items and an order, while products are in the cart. Discounts are only calculated while items are in the cart, {entry:23:link} can apply to a product outside of the cart context.
+Discounts are deductions off line items and an order, while products are in the cart. Discounts are only calculated while items are in the cart, [Sales](sales.md) can apply to a product outside of the cart context.
 
-To make a discount, simply go to `commerce > promotions > discounts` in the control panel.
+To create a new discount, go to Commerce → Promotions → Discounts in the Control Panel.
 
 ## Ordering
 
-Discounts are processed and applied in the order they are sorted in the control panel.
+Discounts are processed and applied in the order they are sorted in the Control Panel.
 
 By setting the *Stop processing further discounts after this discount matches* checkbox on a discount, and if that discount conditions matches, no further discounts will be applied to the cart.
 

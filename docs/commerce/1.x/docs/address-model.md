@@ -35,7 +35,7 @@ An alternative phone number
 Business Name.
 
 ### businessTaxId
-Business Tax ID. No automatic validation of this ID occurs.
+Business tax ID. No automatic validation of this ID occurs.
 
 ### stateText
 Alias of `getStateText()`
@@ -61,7 +61,7 @@ Alias of getCountryText()
 Returns the `stateName` if it exists, otherwise the related state’s name.
 
 ## getCountry()
-Returns the related Country Model is it exists, or a blank string if it does not.
+Returns the related [Country model](country-model.md) is it exists, or a blank string if it does not.
 
 ## getState()
-Returns the related State Model is it exists, or null if it does not.
+Returns the related [State model](state-model.md) is it exists, or null if it does not.

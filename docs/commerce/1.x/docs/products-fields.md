@@ -4,7 +4,7 @@ Products fields allow you to relate products to a parent element.
 
 # Settings
 
-<img src="assets/products-field-settings.png" width="422" alt="Product Field Settings.">
+<img src="assets/products-field-settings.png" width="422" alt="Products field settings.">
 
 Products fields have the following settings:
 
@@ -16,15 +16,15 @@ Products fields have the following settings:
 
 Products fields list all of the currently selected products, with a button to select new ones:
 
-<img src="assets/product-field-example.png" width="297" alt="Product Field Example.">
+<img src="assets/product-field-example.png" width="297" alt="Products field">
 
 Clicking the “Add an entry” button will bring up a modal window where you can find and select additional entries:
 
-<img src="assets/product-field-modal.png" width="600" alt="Product Field Modal.">
+<img src="assets/product-field-modal.png" width="600" alt="Product selection modal">
 
 # Templating
 
-If you have an element with a Products field in your template, you can access its selected products using your Product field’s handle:
+If you have an element with a Products field in your template, you can access its selected products using its handle:
 
 ```twig
 {% set products = entry.productsFieldHandle %}

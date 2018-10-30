@@ -4,17 +4,15 @@ A purchasable is a custom Element Type that can be sold through the cart.
 
 A purchasable:
 
-- Is a custom Element Type (See Craft docs on [Element Types](https://craftcms.com/docs/plugins/working-with-elements))
+- is an [element type](https://craftcms.com/docs/plugins/working-with-elements))
 
-- Its element type’s model inherits from the Base Purchasable Abstract Class located at: `plugins/commerce/Commerce/Base/Purchasable.php`
+- implements the Purchasable interface found at `plugins/commerce/Commerce/Interfaces/Purchasables.php`
 
-- Its element type’s model meets the `Purchasable` interface. The Interface class is found in `plugins/commerce/Commerce/Interfaces/Purchasables.php`
-
-- Persists itself as an Element with the `craft()->commerce_purchasables->saveElement()` method anywhere you would usually use `craft()->elements->saveElement()`
+- can inherit from the base Purchasable abstract class located at: `plugins/commerce/Commerce/Base/Purchasable.php`
 
 ## Interface
 
-To meet the Purchasable Interface, these core methods need to exist on the element type’s model.
+To implement the Purchasable interface, these core methods need to exist on the element type’s model.
 
 
 ### `getDescription()`
@@ -39,7 +37,7 @@ The stock keeping unit number of the purchasable. Must be unique based on the `c
 
 ### `getSnapshot()`
 
-An array of data that is serialized as json on the line item when the purchasable is added to the cart. This is useful when the purchasable is later deleted, but the cart can still have all relevant data about the purchasable stored within it.
+An array of data that is serialized as JSON on the line item when the purchasable is added to the cart. This is useful when the purchasable is later deleted, but the cart can still have all relevant data about the purchasable stored within it.
 
 ### `getTaxCategoryId()`
 

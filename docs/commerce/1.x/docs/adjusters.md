@@ -1,8 +1,8 @@
 # Adjusters
 
-Adjusters are a way to adjust values in the cart. The core Tax, Shipping, and Discount systems are all adjusters.
+Adjusters are a way to adjust values in the cart. The core tax, shipping, and discount systems are all adjusters.
 
-An Adjuster meets the Adjuster Interface found at `plugins/commerce/Commerce/Adjusters/Commerce_AdjusterInterface.php`.
+An adjuster implements the Adjuster Interface found at `plugins/commerce/Commerce/Adjusters/Commerce_AdjusterInterface.php`.
 
 A plugin will registers the adjusters it wants to be run on the order by providing an array of adjusters objects from your main Plugin file.
 
@@ -18,19 +18,19 @@ public function commerce_registerOrderAdjusters(){
 }
 ```
 
-The function returns an array of new adjuster objects. The system then runs the order through each Adjusters `adjust` method.
+The function returns an array of new adjuster objects. The system then runs the order through each adjuster’s `adjust()` method.
 
 ## Adjusting
 
-The Adjuster can add values to the Line Items and Order, but must record the adjustments by returning an array of `Commerce_OrderAdjustmentModel`s.
+The adjuster can add values to the line items and order, but must record the adjustments by returning an array of `Commerce_OrderAdjustmentModel`s.
 Each order adjustment model should contain all information about the modifications made to the cart.
 
-The `amount` value on the Order Adjustment Model is not used when totalling the cart currently, only to display the total amount of adjustments made.
+The `amount` value on the order adjustment model is not used when totalling the cart currently, only to display the total amount of adjustments made.
 If you need to explain in plain text the adjustment made use the `description` field on the Model.
 
 ## Adjustable values
 
-Any changes you make to a line item or order value (from the list of allowed values below) within an Adjuster class needs to be reflected within the `Commerce_OrderAdjustmentModel::amount` that you return from your adjuster’s interface class.
+Any changes you make to a line item or order value (from the list of allowed values below) within an adjuster class needs to be reflected within the `Commerce_OrderAdjustmentModel::amount` that you return from your adjuster’s interface class.
 
 For example, if your adjuster adds some shipping costs to a line item’s `shippingCost` field, it also needs to add that amount to a new Commerce_OrderAdjustmentModel `amount` that your adjuster interface class returns.
 
@@ -64,7 +64,7 @@ class BusinessLogic_TaxRemover implements Commerce_AdjusterInterface {
 
         $myAdjuster->type = 'Tax';
         $myAdjuster->name = 'Australian GST Remover';
-        $myAdjuster->description = 'Removes $5 of Tax';
+        $myAdjuster->description = 'Removes $5 from tax';
         $myAdjuster->amount = -5.0;
         $myAdjuster->orderId = $order->id;
         $myAdjuster->optionsJson = ['lineItemsAffected' => null];
@@ -117,7 +117,7 @@ The only included adjustment we use in the core system at the moment is included
 
 ## Ordering Adjustments
 
-The array you return with your plugin’s `commerce_registerOrderAdjusters()` hook can be a simple array of objects that meet the Adjuster Interface.
+The array you return with your plugin’s `commerce_registerOrderAdjusters()` hook can be a simple array of objects that implement the Adjuster Interface.
 
 If you return a simple array, your adjusters will run after the standard adjusters or after any other plugins that provide adjusters and are loaded before your plugin.
 

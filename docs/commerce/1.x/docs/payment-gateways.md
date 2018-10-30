@@ -1,14 +1,15 @@
 # Payment Gateways
+
 Craft Commerce can be used with over 20+ payment gateways out of the box, through the use of the [Omnipay](https://github.com/thephpleague/omnipay) PHP library. Additional Omnipay gateways not included in the standard Craft Commerce install can be added with a [plugin](#adding-additional-gateways).
 
 All included gateways should work as expected, but logistically we are unable to test them all. See our [testing matrix](https://craftcommerce.com/support/which-payment-gateways-do-you-support) for more information.
 
-To set up a new payment method within your CP, go to`Commerce > Settings > Payment Methods`. Each payment method’s gateway requires different settings, which you will need to obtain from your gateway provider.
+To create a new payment method, go to Commerce → Settings → Payment Methods in the Control Panel. Each payment method’s gateway requires different settings, which you will need to obtain from your gateway provider.
 
 Payment gateways can be one of two categories:
 
-- External gateways, or Off-site gateways.
-- Merchant-hosted gateways, or On-site gateways.
+- External gateways, or offsite gateways.
+- Merchant-hosted gateways, or onsite gateways.
 
 Merchant hosted gateways let you to collect the customer’s credit card details directly on your site, but have much stricter requirements, such as an SSL certificate for your server. You will also be subject to much more rigorous security requirements under the PCI DSS (Payment Card Industry Data Security Standard). These security requirements are your responsibility.
 
@@ -81,34 +82,33 @@ For general usage instructions, please see the main Omnipay repository.
 # PayPal Express
 
 ### Important
-If you’re going to use the PayPal Express payment gateway you are required to change the default value of `tokenParam` in your
-[Craft config](http://buildwithcraft.com/docs/config-settings#tokenParam)
+If you’re going to use the PayPal Express payment gateway you are required to change the default value of [tokenParam](https://docs.craftcms.com/v2/config-settings.html#tokenparam) in your Craft config.
 
 Choose any different token name other than `token`, for example you could put `craftToken`. Otherwise redirects from PayPal will fail.
 
-PayPal Express Checkout requires an API Username, Password, and Signature. These are different from your PayPal account details. You can obtain your API details by logging in to your PayPal account, and clicking Profile > My Selling Tools > API Access > Request/View API Credentials > Request API Signature.
+PayPal Express Checkout requires an API Username, Password, and Signature. These are different from your PayPal account details. You can obtain your API details by logging in to your PayPal account, and going to Profile → My Selling Tools → API Access → Request/View API Credentials → Request API Signature.
 
 ::: warning
-PayPal have increased their TLS requirements, which affects MAMP 3 and some macOS users. If you are affected, you will see an error relating to SSL when attempting to pay with PayPal. Upgrading to MAMP 4 should fix the issue. Read more here: https://github.com/paypal/TLS-update#php
+PayPal have increased their TLS requirements, which affects MAMP 3 and some macOS users. If you are affected, you will see an error relating to SSL when attempting to pay with PayPal. Upgrading to MAMP 4 should fix the issue. Read more here: <https://github.com/paypal/TLS-update#php>
 :::
 
 # Manual Gateway
 
-The manual payment gateway is a special gateway that does not communicate with any 3rd party.
+The manual payment gateway is a special gateway that does not communicate with any third party.
 
 When you need to accept cheque or bank deposit payments, you should use the manual payment gateway.
 
-The gateway simply authorizes all payments, allowing the order to proceed. You may then manually mark the payment as captured in the control panel when payment is received.
+The gateway simply authorizes all payments, allowing the order to proceed. You may then manually mark the payment as captured in the Control Panel when payment is received.
 
 ::: tip
 When creating a Manual payment method, you must select the payment type to be “Authorize Only”.
 :::
 
-# Worldpay Json
+# Worldpay JSON
 
-The “Worldpay Json” gateway is the newly recommended modern gateway API for Worldpay. The “Worldpay” gateway below is the older offsite gateway API.
+The “Worldpay JSON” gateway is the newly recommended modern gateway API for Worldpay. The “Worldpay” gateway below is the older offsite gateway API.
 
-The Worldpay Json gateway uses client side javascript `worldpay.js` on your payment template page to generate a token representing the credit card. This token can be passed to the standard `commerce/payments/pay` form action like the Stripe gateway.
+The Worldpay JSON gateway uses client side JavaScript `worldpay.js` on your payment template page to generate a token representing the credit card. This token can be passed to the standard `commerce/payments/pay` form action like the Stripe gateway.
 
 You have the option of a simple implementation using the `worldpay.js` “Template Form” documented [here](https://developer.worldpay.com/jsonapi/docs/template-form), and a more advanced customized implementation called “Own Form” documented [here](https://developer.worldpay.com/jsonapi/docs/own-form).
 
@@ -119,17 +119,17 @@ The example templates that come with Craft Commerce include an example of the �
 WorldPay is an offsite payment gateway. You must make some changes in your WorldPay Merchant Admin Interface before it will work correctly:
 
 - Log into your WorldPay Merchant Admin Interface
-- Under Installations, click Setup next to your Installation ID
-- In the Payment Response URL field, enter `<wpdisplay item=MC_callback>`
-- Make sure the Payment Response enabled? option is enabled
-- Make sure the Enable the Shopper Response option is enabled
-- In the Payment Response password field, choose a password, and record this in your Craft Commerce payment method settings
-- In the MD5 secret for transactions field, choose a password, and record this in your Craft Commerce payment method settings
+- Under “Installations”, click Setup next to your Installation ID
+- In the “Payment Response URL” field, enter `<wpdisplay item=MC_callback>`
+- Make sure the “Payment Response enabled?” option is enabled
+- Make sure the “Enable the Shopper Response” option is enabled
+- In the “Payment Response” password field, choose a password, and record this in your Craft Commerce payment method settings
+- In the “MD5 Secret for Transactions” field, choose a password, and record this in your Craft Commerce payment method settings
 - In your Craft Commerce payment method settings, set the “Signature Fields” setting to `instId:amount:currency:cartId`
 
 # Authorize.net
 
-The Authorize.net omnipay driver offers a more modern AIM xml based gateway (On-Site), as well as the SIM (Off-site) redirect-based gateway.
+The Authorize.net omnipay driver offers a more modern AIM xml based gateway (onsite), as well as the SIM (offsite) redirect-based gateway.
 
 When configuring the AIM gateway, use the following endpoints:
 

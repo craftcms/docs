@@ -8,7 +8,7 @@ OrderStatusModels have the following attributes and methods:
 
 ### id
 
-The status id.
+The status ID.
 
 ### name
 

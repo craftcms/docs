@@ -16,7 +16,7 @@ and
 {% endif %}
 ```
 
-Both cart attributes return an [Address Model](address-model.md), or `null` if no addresses are set.
+Both cart attributes return an [Address model](address-model.md), or `null` if no addresses are set.
 
 
 ## Adding or updating the shipping and billing address selected for the current cart.
@@ -25,7 +25,7 @@ Adding or updating the addresses on the order is done using the `commerce/cart/u
 
 There are a number of ways you can do this:
 
-### 1. Using an existing Address ID
+### 1. Using an existing address ID
 
 The first example below shows adding the first address owned by the customer as the `shippingAddressId` and also setting it as the `billingAddressId` by using the param `sameAddress`:
 
@@ -55,7 +55,7 @@ Another way of achieving the same thing is is setting both addresses explicitly:
 </form>
 ```
 
-### 2. Submit New Addresses during checkout
+### 2. Submit new addresses during checkout
 
 Another alternative, if the user wanted to submit new addresses, (they may be a guest) is submitting the address form data directly during checkout.
 

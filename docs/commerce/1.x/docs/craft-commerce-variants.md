@@ -1,9 +1,11 @@
+# craft.commerce.variants
+
 ## How to get variants
 
 Usually you will only want to retrieve products, giving you access to their variants. Sometimes you might want to query for variants directly.
 
 You can access your site’s variants from your templates via `craft.commerce.variants`
-It returns an [ElementCriteriaModel](http://buildwithcraft.com/docs/templating/elementcriteriamodel) object.
+It returns an [ElementCriteriaModel](https://docs.craftcms.com/v2/templating/elementcriteriamodel.html) object.
 
 ```twig
 {% set variants = craft.commerce.variants.id(8376).first() %}

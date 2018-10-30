@@ -1,8 +1,8 @@
 # Add to Cart
 
-To add something to the cart you need a [Purchasable](purchasables.md) model, and it’s `purchasableId`. You then submit a `purchasableId` to  the `commerce/cart/updateCart` form action to add it to the cart. You can only submit one purchasableId at a time.
+To add something to the cart you need a [purchasable](purchasables.md) model, and it’s `purchasableId`. You then submit a `purchasableId` to  the `commerce/cart/updateCart` form action to add it to the cart. You can only submit one purchasableId at a time.
 
-The core [Variant Model](variant-model.md) are [Purchasable](purchasables.md) and have a `purchasableId`. Products are not purchasable on their own. All products have at one default {entry:212:link}. See the core concept doc on {entry:92:link} for more information.
+The core [Variant model](variant-model.md) is purchasable and has a `purchasableId`. Products are not purchasable on their own. All products have at one default variant. See the [Products](products.md) page for more information.
 
 The following is an example of getting the first product found in your store. We then get the product’s default variant and use its purchasableId in the form that will add that item to the cart:
 
@@ -83,7 +83,7 @@ In the above example we:
 The options and notes param data is not validated. A user could submit any data. If you need to validate the options, use the [beforeAddToCart](https://craftcommerce.com/docs/events-reference#commerce_cart.onbeforeaddtocart) event.
 :::
 
-Once the order is complete, the notes and options can be found in the View Order screen.
+Once the order is complete, the notes and options can be found on the View Order page.
 
 <img src="assets/lineitem-options-review.png" width="509" alt="Line Item Option Review.">
 

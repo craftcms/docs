@@ -7,18 +7,18 @@ Craft Commerce is the successor to Market Commerce. To upgrade from Market Comme
 Before you perform the upgrade, make sure you are prepared.
 
 * Ensure you are running [Market 0.8.09](http://buildwithmarket.com/downloads/market-0.8.09.zip). (Do NOT uninstall Market Commerce!)
-* Ensure you are running [Craft 2.5.2715 Beta](http://buildwithcraft.com/beta#build2715) or later.
+* Ensure you are running Craft 2.5 or later.
 * Backup your database.
 
 ## Upgrade Instructions
 
 To perform the upgrade, follow these instructions.
 
-1. Upload the ‘commerce’ folder to ‘craft/plugins’.
+1. Upload the `commerce/` folder to `craft/plugins/`.
 2. Go to Settings → Plugins within the Control Panel.
 3. Click on the “Install” button beside “Craft Commerce”.
 4. Ensure that Craft Commerce is now installed, and Market Commerce is uninstalled.
-5. Delete your ‘craft/plugins/market’ folder.
+5. Delete your `craft/plugins/market/` folder.
 
 ## Updating your Templates
 

@@ -1,6 +1,6 @@
-## General Configuration
+# General Configuration
 
-In addition to the settings available in the CP Commerce → Settings screen, the config items below can be placed into a `commerce.php` file in your `craft/config/` folder:
+In addition to the settings available in Commerce → Settings, the config items below can be placed into a `commerce.php` file in your `craft/config/` folder:
 
 ## `autoSetNewCartAddresses`
 
@@ -44,7 +44,7 @@ Since this template is simply used for redirecting, it only appears for a few se
 
 ## `paymentMethodSettings`
 
-Allows for the overriding of [Payment Method]({entry:122:url}) settings. You still need to configure the Payment Method in the control panel so you can reference the ID as the key to the Payment Method’s settings. Example:
+Allows for the overriding of payment method settings. You still need to configure the payment method in the Control Panel so you can reference the ID as the key to the payment method’s settings. Example:
 
 ```php
 <?php
@@ -124,7 +124,7 @@ Default: 3 months. (`P3M`).
 Inactive carts older than this interval from their last update will be purged (deleted).
 
 ::: tip
-The interval check for purging of inactive carts is only run when visiting the Order Index screen in the control panel.
+The interval check for purging of inactive carts is only run when visiting the Orders index page in the Control Panel.
 :::
 
 ## `requireEmailForAnonymousPayments`

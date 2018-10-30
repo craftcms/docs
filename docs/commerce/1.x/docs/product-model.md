@@ -69,17 +69,17 @@ Does one or more variant have unlimited stock.
 
 ### cpEditUrl
 
-The url to edit this product.
+The URL to edit this product.
 
 ### variants
 
-Returns an array of [Variant Models](variant-model.md).
-Gets all variants that are for sale with any applicable [Sales](sales.md) applied to them.
+Returns an array of [Variant models](variant-model.md).
+Gets all variants that are for sale with any applicable [sales](sales.md) applied to them.
 Only returns an array with a single variant if the product’s type has not been set to contain multiple variants.
 
 ### defaultVariant
 
-Returns a [Variant Models](variant-model.md) which is set as the default. If no variant is set as the default, it returns the first variant found.  For product types without multiple variants this is the product’s main variant.
+Returns the default [Variant model](variant-model.md). If no variant is set as the default, it returns the first variant found. For product types without multiple variants, this is the product’s implicit variant.
 
 ## The default variant helpers
 
