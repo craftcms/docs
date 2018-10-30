@@ -13,7 +13,7 @@ For one-click updates to work, your plugins folder and all its enclosed files an
 Here are some recommended permissions depending on that relationship:
 
 If they are the same user, use 744.
-If they're in the same group, then use 774.
+If they’re in the same group, then use 774.
 Otherwise, use 777.
 
 ## Manually Updating
@@ -21,14 +21,14 @@ Otherwise, use 777.
 If you’re manually updating a live site, we recommend you follow these instructions to minimize the time your site is down:
 
 1. Backup your entire Craft database.
-2. Rename the plugins/commerce/ folder in the latest release zip to “commerce-new”.
-3. Upload plugins/commerce-new to the craft/plugins folder on your server, alongside the old plugins/commerce folder.
-4. Once commerce-new folder is done uploading proceed to the next step.
-5. Rename the old craft/plugins/commerce folder to craft/plugins/commerce-old.
-6. Rename commerce-new to “commerce”.
+2. Rename the `plugins/commerce/` folder in the latest release zip to `commerce-new`.
+3. Upload `plugins/commerce-new/` to the `craft/plugins/` folder on your server, alongside the old `plugins/commerce/` folder.
+4. Once `commerce-new` is done uploading proceed to the next step.
+5. Rename the old `craft/plugins/commerce/` folder to `commerce-old`.
+6. Rename `craft/plugins/commerce-new/` to `commerce`.
 7. Point your browser to your Craft control panel. You will be prompted to proceed with a database update.
 Click “Finish up” and let the database updates run.
-8. If all is well, delete the commerce-old folder, otherwise restore this folder as "commerce" and restore your database from backup and contact support.
+8. If all is well, delete the `craft/plugins/commerce-old/` folder, otherwise restore this folder as `commerce` and restore your database from backup and contact support.
 
 # Upgrading from Market Commerce
 

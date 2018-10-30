@@ -1,5 +1,5 @@
 # State Model
-StateModel's have the following attributes and methods:
+StateModel objects have the following attributes and methods:
 
 # Attributes
 

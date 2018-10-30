@@ -30,11 +30,11 @@ If you need to explain in plain text the adjustment made use the `description` f
 
 ## Adjustable values
 
-Any changes you make to a line item or order value (from the list of allowed values below) within an Adjuster class needs to be reflected within the `Commerce_OrderAdjustmentModel::amount` that you return from your adjuster's interface class.
+Any changes you make to a line item or order value (from the list of allowed values below) within an Adjuster class needs to be reflected within the `Commerce_OrderAdjustmentModel::amount` that you return from your adjuster’s interface class.
 
-For example, if your adjuster adds some shipping costs to a line item's `shippingCost` field, it also needs to add that amount to a new Commerce_OrderAdjustmentModel `amount` that your adjuster interface class returns.
+For example, if your adjuster adds some shipping costs to a line item’s `shippingCost` field, it also needs to add that amount to a new Commerce_OrderAdjustmentModel `amount` that your adjuster interface class returns.
 
-To clarify further, the total of all the order's adjustments should always add up to the total of the changes made to the following values:
+To clarify further, the total of all the order’s adjustments should always add up to the total of the changes made to the following values:
 
 ```
 Commerce_LineItemModel::shippingCost
@@ -47,7 +47,7 @@ Commerce_OrderModel::baseDiscount
 
 The above fields are the only things that an adjuster should adjust.
 
-In effect, this allows the system to use the total of the adjustment models 'amount' plus the total of the purchasable salePrice * qty, to get to the same value at the order `totalPrice`. This is what we do when building the `ItemBag` we send to the gateways.
+In effect, this allows the system to use the total of the adjustment model’s `amount` plus the total of the purchasable `salePrice * qty`, to get to the same value at the order `totalPrice`. This is what we do when building the `ItemBag` we send to the gateways.
 
 
 ## Example 1
@@ -62,9 +62,9 @@ class BusinessLogic_TaxRemover implements Commerce_AdjusterInterface {
 
         $order->baseTax = $order->baseTax - 5;
 
-        $myAdjuster->type = "Tax";
-        $myAdjuster->name = "Australian GST Remover";
-        $myAdjuster->description = "Removes $5 of Tax";
+        $myAdjuster->type = 'Tax';
+        $myAdjuster->name = 'Australian GST Remover';
+        $myAdjuster->description = 'Removes $5 of Tax';
         $myAdjuster->amount = -5.0;
         $myAdjuster->orderId = $order->id;
         $myAdjuster->optionsJson = ['lineItemsAffected' => null];
@@ -93,9 +93,9 @@ class BusinessLogic_Discounter implements Commerce_AdjusterInterface
 
         if ($order->totalQty >= 10) {
             $order->baseDiscount = $order->baseDiscount - 5;
-            $myAdjuster->type = "Discount";
-            $myAdjuster->name = "Discount for more than 10 items";
-            $myAdjuster->description = "Discount of $5 for more than 10 items in the cart";
+            $myAdjuster->type = 'Discount';
+            $myAdjuster->name = 'Discount for more than 10 items';
+            $myAdjuster->description = 'Discount of $5 for more than 10 items in the cart';
             $myAdjuster->amount = -5.0;
             $myAdjuster->orderId = $order->id;
             $myAdjuster->optionsJson = ['lineItemsAffected' => null];
@@ -111,13 +111,13 @@ class BusinessLogic_Discounter implements Commerce_AdjusterInterface
 
 ## Included Adjustments
 
-If you mark the adjustment model's `included` attribute as `true`, the adjustment does not make any changes to the orders value, but simply records an amount that was included in the price of the order.
+If you mark the adjustment model’s `included` attribute as `true`, the adjustment does not make any changes to the orders value, but simply records an amount that was included in the price of the order.
 
 The only included adjustment we use in the core system at the moment is included taxes.
 
 ## Ordering Adjustments
 
-The array you return with your plugin's `commerce_registerOrderAdjusters()` hook can be a simple array of objects that meet the Adjuster Interface.
+The array you return with your plugin’s `commerce_registerOrderAdjusters()` hook can be a simple array of objects that meet the Adjuster Interface.
 
 If you return a simple array, your adjusters will run after the standard adjusters or after any other plugins that provide adjusters and are loaded before your plugin.
 

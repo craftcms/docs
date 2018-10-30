@@ -12,7 +12,7 @@ By setting the *Stop processing further discounts after this discount matches* c
 
 ## Coupon Discounts
 
-Discounts can optionally be a coupon based discounts. Coupon discounts have a coupon code entered in as a special condition on the 'coupon' tab.
+Discounts can optionally be a coupon based discounts. Coupon discounts have a coupon code entered in as a special condition on the “Coupon” tab.
 
 If no coupon is entered, this discount is matched on all other conditions configured. If a coupon is added to the discount, all other conditions still need to be met in addition to the coupon being applied to the cart.
 
@@ -42,4 +42,4 @@ Read only field that counts how many times this coupon has been used, if a total
 This limit is controlled at the discount ID level, meaning if you change the coupon code itself, the counter still applies.
 
 ### Reset Counter
-After this coupon has been used at least once, there is the ability to reset all usage counters. This applies to all conditions based on the discount ID, not the 'Per Email Address Coupon Limit', which is based on the coupon code itself.
+After this coupon has been used at least once, there is the ability to reset all usage counters. This applies to all conditions based on the discount ID, not the “Per Email Address Coupon Limit”, which is based on the coupon code itself.

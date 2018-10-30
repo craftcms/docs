@@ -29,7 +29,7 @@ Usually you will be working with an order model in your template in 2 situations
 {% endfor %}
 ```
 
-Order Model's have the following attributes and methods:
+Order Model objects have the following attributes and methods:
 
 ## Attributes
 
@@ -68,7 +68,7 @@ Sum of all the items totals. (Includes all adjustments made to line items)
 
 ### totalTax
 
-Total of all tax adjustments to line items and the order's `baseTax`
+Total of all tax adjustments to line items’ and the order’s `baseTax`
 
 ### totalTaxIncluded
 
@@ -132,11 +132,11 @@ This returns the address model from the database for the current `shippingAddres
 
 ### shippingMethodHandle
 
-The handle of the currently applied shipping method. You can get the set shipping method's model with the `shippingMethod` attribute.
+The handle of the currently-applied shipping method. You can get the set shipping method’s model with the `shippingMethod` attribute.
 
 ### paymentMethodId
 
-The id of the linked payment method. You can get the set payment method's model with the `paymentMethod` attribute.
+The id of the linked payment method. You can get the set payment method’s model with the `paymentMethod` attribute.
 
 ### currency
 
@@ -172,7 +172,7 @@ The current message saved when the current order status was set.
 ### getPdfUrl($option = '')
 
 Returns the url to the pdf for this order. Requires that your general settings point to a valid html template file.
-Optionally can pass an 'option' string to this method to identify the type of pdf you want to the template.
+Optionally can pass an `option` string to this method to identify the type of pdf you want to the template.
 The order PDF template is passed an `order` and `option` variable.
 
 ### getShippingMethod()

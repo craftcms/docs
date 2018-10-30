@@ -21,7 +21,7 @@ When the sale stops being applied to matching products.
 
 ## User Group
 
-Whether the cart's customer belongs to one of the matching user groups.
+Whether the cart’s customer belongs to one of the matching user groups.
 
 ## Product Type
 

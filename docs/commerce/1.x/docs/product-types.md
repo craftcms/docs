@@ -2,7 +2,7 @@
 
 Product Types are a way to distinguish products in your system. They can determine the URL format of a product, and also determine if the products has multiple variants, as well as configure other behaviors of the products.
 
-You can also attach fields, and tab layouts to products and variants at the product type level, like you can with Craft's entry types.
+You can also attach fields, and tab layouts to products and variants at the product type level, like you can with Craft’s entry types.
 
 <img src="assets/product-type-entry-screen.png" width="797" alt="Product Type Entry Screen.">
 
@@ -14,7 +14,7 @@ This is the name of the product type as displayed in the control panel.
 
 ### Handle
 
-The handle is how you will reference the product type in code. For example, in twig, to get product types with a handle of 'clothes', you would do:
+The handle is how you will reference the product type in code. For example, in twig, to get product types with a handle of `clothes`, you would do:
 
 ```twig
 {% set clothes = craft.commerce.products.type('clothes').find() %}

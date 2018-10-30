@@ -14,7 +14,7 @@ Should the amount passed to this filter be converted to the exchange rate of the
 Should the amount passed to this filter be converted to the exchange rate of the payment currency iso passed
 
 ### stripZeros (bool) default: `false`
-Should the amount passed have it's minor units zeros removed for a cleaner looking number.
+Should the amount passed have its minor unit zeros removed for a cleaner looking number.
 
 ### Examples:
 
@@ -30,7 +30,7 @@ Should the amount passed have it's minor units zeros removed for a cleaner looki
 {{ order.totalPrice|commerceCurrency('AUD',convert=true,format=true,stripZeros=true) }} // A$ 13
 ```
 
-You might want to show the order's price in all available payment currencies:
+You might want to show the order’s price in all available payment currencies:
 
 ```twig
 {% for currency in craft.commerce.paymentCurrenciess %}

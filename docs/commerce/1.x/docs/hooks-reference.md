@@ -8,7 +8,7 @@ Example:
 ```php
 public function commerce_modifyPaymentRequest(array $request){
 
-  $request['description'] = "My Order Info";
+  $request['description'] = 'My Order Info';
 
   return $request;
 }
@@ -127,8 +127,8 @@ Gives plugins a chance to make additional table columns available to order index
 public function commerce_defineAdditionalOrderTableAttributes()
 {
     return array(
-        'foo' => "Foo",
-        'bar' => "Bar",
+        'foo' => 'Foo',
+        'bar' => 'Bar',
     );
 }
 ```
@@ -141,8 +141,8 @@ Gives plugins a chance to make additional table columns available to product ind
 public function commerce_defineAdditionalProductTableAttributes()
 {
     return array(
-        'foo' => "Foo",
-        'bar' => "Bar",
+        'foo' => 'Foo',
+        'bar' => 'Bar',
     );
 }
 ```
@@ -150,13 +150,13 @@ public function commerce_defineAdditionalProductTableAttributes()
 ### commerce_modifyEmail
 
 Example:
+
 ```php
 public function commerce_modifyEmail(EmailModel &$email, $order){
-
-  $email->subject = "new Subject";
-
+  $email->subject = 'new Subject';
 }
 ```
+
 Hook must modify the `$email` Email Model directly and not return anything.
 You may use information contained on the `$order` to determine changes to the email.
 

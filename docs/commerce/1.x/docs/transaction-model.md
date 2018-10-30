@@ -32,11 +32,11 @@ The amount of the transaction. This amount is in the primary currency.
 
 ### paymentAmount
 
-The payment amount of the transaction, which is the amount sent and used when communicating with the payment gateway. This amount is in the currency of the order's payment currency.
+The payment amount of the transaction, which is the amount sent and used when communicating with the payment gateway. This amount is in the currency of the order’s payment currency.
 
 ### paymentRate
 
-This stores the currency conversion rate of the order's payment currency at the time payment was attempted.
+This stores the currency conversion rate of the order’s payment currency at the time payment was attempted.
 
 ### status
 

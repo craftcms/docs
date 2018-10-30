@@ -2,9 +2,9 @@
 
 In addition to using order statuses to manage your orders, you can choose emails that will be sent when an order moves into that status.
 
-For example you might create an Email called "Order Confirmation for Customer" which confirms the order has been completed and is sent to the customer. This email should likely be linked to the default order status, since we want it to trigger when the cart is completed and becomes an order.
+For example you might create an Email called “Order Confirmation for Customer” which confirms the order has been completed and is sent to the customer. This email should likely be linked to the default order status, since we want it to trigger when the cart is completed and becomes an order.
 
-Another email could be set up called "Order Notification for Admin" which could also be attached to the default order status, but get's set to the store owners email address.
+Another email could be set up called “Order Notification for Admin” which could also be attached to the default order status, but gets set to the store owners email address.
 
 # Settings
 
@@ -12,13 +12,13 @@ Before setting up emails for Craft Commerce. Ensure that your Craft CMS installa
 
 You can set up your email gateway in the Craft CMS control panel by going to `Settings ⟶ Email`.
 
-If you want to have a different "From Email" and "From Name" for your commerce store emails, which overrides the Craft CMS email defaults, go to `Commerce ⟶ Settings ⟶ General Settings` and enter in your store from name and email address.
+If you want to have a different From Email and From Name for your Commerce store emails, which overrides the Craft CMS email defaults, go to `Commerce ⟶ Settings ⟶ General Settings` and enter in your store from name and email address.
 
 <img src="assets/new-email-settings.png" width="645" alt="New Email Settings.">
 
 # Creating an Email
 
-To create an email go to `Commerce ⟶ Settings ⟶ Emails` and click 'New Email'.
+To create an email go to `Commerce ⟶ Settings ⟶ Emails` and click “New Email”.
 
 Emails have the following configuration settings:
 
@@ -43,11 +43,11 @@ Order #{{ order.id }} received.`
 
 ## Recipient
 
-The 'to' address or addresses for this email.
+The “To” address or addresses for this email.
 
-If "Send to the customer" is selected, the email will only be sent to the customer of the order, and will be sent in the language (locale) that customer made the order in. This affects the use of the `|t` filter in other email fields  that support twig.
+If “Send to the customer” is selected, the email will only be sent to the customer of the order, and will be sent in the language (locale) that customer made the order in. This affects the use of the `|t` filter in other email fields  that support twig.
 
-If "Send to custom recipient" is selected, an email address can be entered. Please note the language of this email will be in the language of the current user triggering the status change.
+If “Send to custom recipient” is selected, an email address can be entered. Please note the language of this email will be in the language of the current user triggering the status change.
 
 Plain text can be entered or twig can also be used to set dynamic values.
 Two special variables available to you:
@@ -65,8 +65,10 @@ This would send the email to the customer to made this order.
 
 ## BCC’d Recipient
 
-The 'BCC' addresses for this email. You can separate the addresses by a comma: `,`.
+The BCC addresses for this email. You can separate the addresses by a comma: `,`.
+
 Plain text can be entered or twig can also be used to set dynamic values.
+
 Two special variables available to you:
 
 - `order` an [Order Model](order-model.md).

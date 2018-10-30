@@ -10,7 +10,7 @@ Products fields have the following settings:
 
 * *Sources* – The product types you want to relate entries from. (Default is “All”.)
 * *Limit* – The maximum number of products that can be related with the field at once. (Default is no limit.)
-* *Selection Label* – The label that should be used on the field’s selection button. (Default is "Add a product")
+* *Selection Label* – The label that should be used on the field’s selection button. (Default is “Add a product”.)
 
 # The Field
 
@@ -34,8 +34,8 @@ That will give you an ElementCriteriaModel object, prepped to output all of the 
 
 ```twig
 {% set products = craft.commerce.products({
-    relatedTo: { sourceElement: entry, field: "productsFieldHandle" },
-    order:     "sortOrder",
+    relatedTo: { sourceElement: entry, field: 'productsFieldHandle' },
+    order:     'sortOrder',
     limit:     null
 }) %}
 ```

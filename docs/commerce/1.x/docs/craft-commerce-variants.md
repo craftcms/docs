@@ -16,16 +16,16 @@ It returns an [ElementCriteriaModel](http://buildwithcraft.com/docs/templating/e
 `craft.commerce.variants` supports the following parameters:
 
 ### ID
-The variant's element ID.
+The variant’s element ID.
 
 ### productId
 The product ID this variant belongs to.
 
 ### sku
-The variant's SKU
+The variant’s SKU
 
 ### default
-Whether the variant is the product's default variant
+Whether the variant is the product’s default variant
 
 Accepts: boolean (`true` or `false`)
 

@@ -80,7 +80,7 @@ Returns an array of [State models](state-model.md).
 
 ## craft.commerce.availableShippingMethods
 
-Returns the shipping methods available to applied to the current cart. Will not include some shipping methods if none of the shipping method's rules can match the cart.
+Returns the shipping methods available to applied to the current cart. Will not include some shipping methods if none of the shipping method’s rules can match the cart.
 
 ```twig
 {% for handle, method in craft.commerce.availableShippingMethods %}

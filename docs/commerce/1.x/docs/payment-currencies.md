@@ -13,7 +13,7 @@ Then you could add Australian Dollars (AUD) as an additional accepted payment cu
 If a customer chooses to pay with AUD, an order that would have been $10.00 USD becomes $13.00 AUD.
 
 ::: tip
-Craft Commerce does not keep your store's exchange rates updated automatically. A plugin could be written to update the currency at your preferred interval.
+Craft Commerce does not keep your store’s exchange rates updated automatically. A plugin could be written to update the currency at your preferred interval.
 :::
 
 ## Order Currency Fields
@@ -43,7 +43,7 @@ This is a snapshot of the payment currency’s conversion rate at the time of ma
 
 The customer be switched to a different currency in the following ways.
 
-1) The PHP constant `COMMERCE_PAYMENT_CURRENCY` is set to a 3-digit ISO code that corresponds to a payment currency you have set up. Having this constant set will lock the cart's payment currency to this currency code. You would most likely set this constant in your `index.php` file in a similar location to your `CRAFT_LOCALE` constant.
+1) The PHP constant `COMMERCE_PAYMENT_CURRENCY` is set to a 3-digit ISO code that corresponds to a payment currency you have set up. Having this constant set will lock the cart’s payment currency to this currency code. You would most likely set this constant in your `index.php` file in a similar location to your `CRAFT_LOCALE` constant.
 
 2) Using the `commerce/cart/updateCart` form action, you can set POST param to named `paymentCurrency` to a valid 3-digit ISO code. This will have no affect if you have set the `COMMERCE_PAYMENT_CURRENCY` constant.
 
@@ -56,7 +56,7 @@ You can use the `|commerceCurrency` filter as a drop-in replacement for the `|cu
 
 Examples:
 
-If the store currency is USD and the order's payment currency is AUD with a exchange rate of 1.3
+If the store currency is USD and the order’s payment currency is AUD with a exchange rate of 1.3
 
 ```
 {{ 10.00|commerceCurrency(cart.currency)}} // US$ 10.00

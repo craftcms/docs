@@ -4,7 +4,7 @@ In addition to the settings available in the CP Commerce → Settings screen, th
 
 ## `autoSetNewCartAddresses`
 
-Determines whether the customer's last used shipping and billing addresses should automatically be set on new carts.
+Determines whether the customer’s last used shipping and billing addresses should automatically be set on new carts.
 
 Can be set to `true` or `false` (default is `true`).
 
@@ -13,7 +13,7 @@ Can be set to `true` or `false` (default is `true`).
 A php [Date Interval](http://php.net/manual/en/class.dateinterval.php)
 Default: 3 months. (`P3M`).
 
-How long the cookie storing the cart should last. The cart exists independently of the Craft users' session.
+How long the cookie storing the cart should last. The cart exists independently of the Craft user’s session.
 
 ## `gatewayPostRedirectTemplate`
 
@@ -44,7 +44,7 @@ Since this template is simply used for redirecting, it only appears for a few se
 
 ## `paymentMethodSettings`
 
-Allows for the overriding of [Payment Method]({entry:122:url}) settings. You still need to configure the Payment Method in the control panel so you can reference the ID as the key to the Payment Method's settings. Example:
+Allows for the overriding of [Payment Method]({entry:122:url}) settings. You still need to configure the Payment Method in the control panel so you can reference the ID as the key to the Payment Method’s settings. Example:
 
 ```php
 <?php
@@ -153,7 +153,7 @@ Can be set to `true` or `false` (default is `false`).
 
 ## `sendCartInfoToGateways`
 
-Defines whether Commerce should include information about the cart’s line items and adjustments when sending payment requests to gateways. This is not required for most gateways as they only care about the payment amount, but some will complain if they can't see a list of line items and their qty.
+Defines whether Commerce should include information about the cart’s line items and adjustments when sending payment requests to gateways. This is not required for most gateways as they only care about the payment amount, but some will complain if they can’t see a list of line items and their qty.
 
 Can be set to `true` or `false` (default is `true`).
 

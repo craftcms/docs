@@ -1,6 +1,6 @@
 # Address Model
 
-AddressModel's have the following attributes and methods:
+AddressModel objects have the following attributes and methods:
 
 # Attributes
 
@@ -39,7 +39,7 @@ Business Tax ID. No automatic validation of this ID occurs.
 
 ### stateText
 Alias of `getStateText()`
-Returns the `stateName` if it exists, otherwise the related state's name.
+Returns the `stateName` if it exists, otherwise the related state’s name.
 
 ### stateName
 
@@ -58,7 +58,7 @@ Alias of getCountryText()
 # Methods
 
 ### getStateText()
-Returns the `stateName` if it exists, otherwise the related state's name.
+Returns the `stateName` if it exists, otherwise the related state’s name.
 
 ## getCountry()
 Returns the related Country Model is it exists, or a blank string if it does not.

@@ -2,7 +2,7 @@
 
 Variants are Craft Elements and also Purchasables.
 
-VariantModel's have the following attributes and methods:
+VariantModel objects have the following attributes and methods:
 
 ## Attributes
 
@@ -16,11 +16,11 @@ The id of the variant in the system.
 
 ### purchasableId
 
-Returns this variant's id - as variants are purchasables.
+Returns this variant’s ID - as variants are purchasables.
 
 ### product
 
-Returns this variant's [Product Model](product-model.md)
+Returns this variant’s [Product Model](product-model.md)
 
 ### price
 
@@ -76,7 +76,7 @@ The variants width
 
 ### cpEditUrl
 
-The url to edit this variant's edit page in the control panel.
+The url to edit this variant’s edit page in the control panel.
 
 ### sortOrder
 
@@ -92,5 +92,5 @@ Returns an array of Sales that have been applied, allowing you to access the des
 
 ### description
 
-The description of the purchasable which is the result of the product type's 'Order Description Format' option.
+The description of the purchasable which is the result of the product type’s “Order Description Format” option.
 

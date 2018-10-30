@@ -2,15 +2,15 @@
 
 In Craft Commerce it is possible to define your own Shipping Methods within a plugin.
 
-The plugin would provide Shipping Methods the customer can choose from. In addition, each Shipping method would need one or more shipping rule which allows the Shipping Method to 'match' the order and be available for the current order, as well as provide the associated shipping costs.
+The plugin would provide Shipping Methods the customer can choose from. In addition, each Shipping method would need one or more shipping rule which allows the Shipping Method to match the order and be available for the current order, as well as provide the associated shipping costs.
 
 You can provide one or more shipping methods with the following method in their main plugin class:
 
-```
-    public function commerce_registerShippingMethods()
-    {
-        return [new CustomShipper_CourierDeliveryMethod()];
-    }
+```php
+public function commerce_registerShippingMethods()
+{
+    return [new CustomShipper_CourierDeliveryMethod()];
+}
 ```
 
 The plugin can provide one or more shipping method classes with the following interface:
@@ -37,7 +37,7 @@ This is the handle added to the order for the chosen shipping method.
 
 ### getCpEditUrl()
 
-Returns a control panel URL to a place where you can configure this shipping method's rules.
+Returns a control panel URL to a place where you can configure this shipping method’s rules.
 Return an empty string if the method has no link.
 
 ### getRules()
@@ -85,7 +85,7 @@ Zero will not make any changes.
 
 ### getWeightRate()
 
-Returns the rate that is multiplied by the line item's weight.
+Returns the rate that is multiplied by the line item’s weight.
 Zero will not make any changes.
 
 

@@ -29,9 +29,9 @@ These zones can then be used within the shipping rules as conditions to match on
 
 ## Shipping Methods
 
-Shipping methods are the choices made available to the customer during checkout. For example, a shipping method might be called "Pickup" or "Fedex", "USPS", or "Express".
+Shipping methods are the choices made available to the customer during checkout. For example, a shipping method might be called “Pickup”, “FedEx”, “USPS”, or “Express”.
 
-You can name these shipping methods anything that makes sense to the customer. They do not need to be shipping company names, but usually indicate the delivery method. For example, you could have 2 shipping methods, one called "Fedex Standard" and "Fedex Overnight".
+You can name these shipping methods anything that makes sense to the customer. They do not need to be shipping company names, but usually indicate the delivery method. For example, you could have 2 shipping methods, one called “FedEx Standard” and “FedEx Overnight”.
 
 Shipping methods contain a collection of shipping rules. This rules contain conditions and pricing logic for their shipping method they belong to.
 
@@ -60,7 +60,7 @@ In addition to the shipping zone and shipping category matching, various order i
 ## Shipping Rule Conditions
 
 ### Shipping Zone
-This condition is met if the order's shipping address falls within this zone.
+This condition is met if the order’s shipping address falls within this zone.
 
 ### Minimum Order Quantity
 This condition is met if the order has at least a certain number of items.
@@ -100,7 +100,7 @@ The maximum the person should spend on shipping after adding up the base rate pl
 Set a per order item shipping rate.
 
 ### Default Item Weight Rate
-Cost per whole unit of the store's dimension units. For example, if you set your dimension unit option to Kilos, and your product weight was 1.4Kg, and you enter 1 as the item weight rate, then the price will be $1.4
+Cost per whole unit of the store’s dimension units. For example, if you set your dimension unit option to Kilos, and your product weight was 1.4Kg, and you enter 1 as the item weight rate, then the price will be $1.4
 
 ### Default Percentage Item Price Rate
 The amount based on a percentage of items cost.

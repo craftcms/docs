@@ -9,7 +9,7 @@ Outputting an `Commerce_ProductModel` object in your template without attaching 
 ```
 <h1>{{ product }}</h1>
 ```
-ProductModel's have the following attributes and methods:
+ProductModel objects have the following attributes and methods:
 
 ## Attributes
 
@@ -19,11 +19,11 @@ The products name/title.
 
 ### type
 
-The product' product type.
+The product’s product type.
 
 ### typeId
 
-The product's product type Id
+The product’s product type ID.
 
 ### status
 
@@ -47,7 +47,7 @@ Is this product and its variants able to be on sale or at a discount.
 
 true or false.
 
-Should the shipping calculator skip this product and it's variants when adding costs to the order.
+Should the shipping calculator skip this product and its variants when adding costs to the order.
 
 This flag only works on shipping cost that is `per item` or `weight based`. Any order level base shipping costs in a shipping rule will be added to the order regardless of this checkbox.
 
@@ -75,7 +75,7 @@ The url to edit this product.
 
 Returns an array of [Variant Models](variant-model.md).
 Gets all variants that are for sale with any applicable [Sales](sales.md) applied to them.
-Only returns an array with a single variant if the product's type has not been set to contain multiple variants.
+Only returns an array with a single variant if the product’s type has not been set to contain multiple variants.
 
 ### defaultVariant
 
@@ -83,7 +83,7 @@ Returns a [Variant Models](variant-model.md) which is set as the default. If no 
 
 ## The default variant helpers
 
-Instead of calling `{{product.defaultVariant.id}}` which could perform a database query to get the products default variant, we cache the default variant when saving the product, to the product itself. You can use the following attributes to get the default variant's information:
+Instead of calling `{{product.defaultVariant.id}}` which could perform a database query to get the products default variant, we cache the default variant when saving the product, to the product itself. You can use the following attributes to get the default variant’s information:
 
 ### defaultVariantId
 ### defaultSku

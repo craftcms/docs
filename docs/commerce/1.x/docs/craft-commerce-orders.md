@@ -45,12 +45,12 @@ Accepts the id of an Order Status.
 ### customer
 A customer Model can be passed to get orders for that customer only. e.g `{% set orders = craft.commerce.orders.customer(craft.commerce.customer).find() %}`
 Do not use this to get a cart, as the default response does not include orders that are still
-carts (use `{% set cart = craft.commerce.getCart %}` to get the current user's cart).
+carts (use `{% set cart = craft.commerce.getCart %}` to get the current user’s cart).
 
 ### user
 A customer Model can be passed to get orders for that user only. e.g `{% set orders = craft.commerce.orders.user(currentUser).find() %}`
 Do not use this to get a cart, as the default response does not include orders that are still
-carts (use `{% set cart = craft.commerce.getCart %}` to get the current user's cart).
+carts (use `{% set cart = craft.commerce.getCart %}` to get the current user’s cart).
 
 ### customerId
 Accepts an id of a customer.

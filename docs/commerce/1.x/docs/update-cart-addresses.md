@@ -59,7 +59,7 @@ Another way of achieving the same thing is is setting both addresses explicitly:
 
 Another alternative, if the user wanted to submit new addresses, (they may be a guest) is submitting the address form data directly during checkout.
 
-This will only work if the shippingAddressId is not supplied or is set to a non ID like the word 'new'.
+This will only work if the `shippingAddressId` is not supplied or is set to a non-ID like the word `new`.
 If `shippingAddressId` is an integer then the address form data is ignored and the form action attempts to set the shipping address to that of the ID.
 
 ```

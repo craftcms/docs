@@ -6,15 +6,15 @@ A purchasable:
 
 - Is a custom Element Type (See Craft docs on [Element Types](https://craftcms.com/docs/plugins/working-with-elements))
 
-- Its element type's model inherits from the Base Purchasable Abstract Class located at: `plugins/commerce/Commerce/Base/Purchasable.php`
+- Its element type’s model inherits from the Base Purchasable Abstract Class located at: `plugins/commerce/Commerce/Base/Purchasable.php`
 
-- Its element type's model meets the `Purchasable` interface. The Interface class is found in `plugins/commerce/Commerce/Interfaces/Purchasables.php`
+- Its element type’s model meets the `Purchasable` interface. The Interface class is found in `plugins/commerce/Commerce/Interfaces/Purchasables.php`
 
 - Persists itself as an Element with the `craft()->commerce_purchasables->saveElement()` method anywhere you would usually use `craft()->elements->saveElement()`
 
 ## Interface
 
-To meet the Purchasable Interface, these core methods need to exist on the element type's model.
+To meet the Purchasable Interface, these core methods need to exist on the element type’s model.
 
 
 ### `getDescription()`
@@ -60,6 +60,7 @@ Gives the purchasable the chance to change the saleAmount and price of the line 
 ## `validateLineItem(Commerce_LineItemModel $lineItem)`
 
 Gives the purchasable the chance to validate the line item model.
+
 Add errors to the lineItem like so:
 
 ```php

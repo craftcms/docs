@@ -18,7 +18,7 @@ It returns an [ElementCriteriaModel](http://buildwithcraft.com/docs/templating/e
 `craft.commerce.products` supports the following parameters:
 
 ### ID
-The Product's element ID.
+The product’s element ID.
 
 ### type
 Product Type model or handle.
@@ -29,12 +29,12 @@ Product type ID.
 ### status
 Only fetch products with the given status.
 
-Possible values are 'live', 'pending', 'expired', 'disabled', and null.
-The default value is 'live'. null will return all entries regardless of status.
+Possible values are `'live'`, `'pending'`, `'expired'`, `'disabled'`, and `null`.
+The default value is `'live'`. `null` will return all entries regardless of status.
 
-An entry is 'live' if it is enabled, has a `availableOn` in the past and an `expiresOn` Date in the future.
-An entry is 'pending' if it is enabled and has `availableOn` and `expiresOn` Dates in the future.
-An entry is 'expired' if it is enabled and has `availableOn` and `expiresOn` Dates in the past.
+An entry is `live` if it is enabled, has a `availableOn` in the past and an `expiresOn` Date in the future.
+An entry is `pending` if it is enabled and has `availableOn` and `expiresOn` Dates in the future.
+An entry is `expired` if it is enabled and has `availableOn` and `expiresOn` Dates in the past.
 
 ### postDate
 Fetch products based on their postDate.
@@ -49,22 +49,22 @@ Fetch products based on available dates after this date.
 Fetch products based on their date available.
 
 ### defaultWeight
-Fetch products based on the default variant's weight
+Fetch products based on the default variant’s weight
 
 ### defaultHeight
-Fetch products based on the default variant's height
+Fetch products based on the default variant’s height
 
 ### defaultLength
-Fetch products based on the default variant's length
+Fetch products based on the default variant’s length
 
 ### defaultWidth
-Fetch products based on the default variant's width
+Fetch products based on the default variant’s width
 
 ### defaultSku
-Fetch products based on the default variant's sku
+Fetch products based on the default variant’s SKU
 
 ### hasVariant
-Only return products where the `hasVariant` params match the product's variants.
+Only return products where the `hasVariant` params match the product’s variants.
 
 For example:
 

@@ -81,7 +81,7 @@ The tax category the purchasable belongs to.
 
 ### onSale
 
-Whether the lineItem's `price` is different to the `salePrice`.
+Whether the line item’s `price` is different than the `salePrice`.
 
 ### salesApplied
 

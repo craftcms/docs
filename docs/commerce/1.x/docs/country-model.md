@@ -1,5 +1,5 @@
 # Country Model
-CountryModels's have the following attributes and methods:
+CountryModels objects have the following attributes and methods:
 
 # Attributes
 

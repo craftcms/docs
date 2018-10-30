@@ -1,6 +1,6 @@
 # Order Status Model
 
-Order Statuses are the custom statuses set up in your commerce settings. They are not the standard 'status' found on elements, but custom statuses an order can go through after a user completes a cart.
+Order Statuses are the custom statuses set up in your Commerce settings. They are not the standard status found on elements, but custom statuses an order can go through after a user completes a cart.
 
 OrderStatusModels have the following attributes and methods:
 
