@@ -10,7 +10,7 @@ Outputting an `Commerce_OrderModel` object in your template without attaching a 
 Order Number: {{ order }}
 ```
 
-# Overview
+## Overview
 
 Order models are both carts and orders. They are the same thing. A cart just has it’s `isCompleted` property set to false.
 

@@ -40,7 +40,6 @@ Data returned as `[32:'Australia', 72:'USA']`
 
 Returns an array of [Country models](country-model.md).
 
-
 ```twig
 <select>
 {% for country in craft.commerce.countries %}
@@ -70,7 +69,6 @@ Data returned as `[72:[3:'California', 4:'Washington'],32:[7:'New South Wales']]
 ## craft.commerce.states
 
 Returns an array of [State models](state-model.md).
-
 
 ```twig
 <select>

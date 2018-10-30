@@ -37,9 +37,11 @@ How many times this coupon can be used in total by guests or logged in users. Se
 This limit is controlled at the discount ID level, meaning if you change the coupon code itself, the counter still applies.
 
 ### Times Coupon Used
+
 Read only field that counts how many times this coupon has been used, if a total coupon usage limit has been set.
 
 This limit is controlled at the discount ID level, meaning if you change the coupon code itself, the counter still applies.
 
 ### Reset Counter
+
 After this coupon has been used at least once, there is the ability to reset all usage counters. This applies to all conditions based on the discount ID, not the “Per Email Address Coupon Limit”, which is based on the coupon code itself.

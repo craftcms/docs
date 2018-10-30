@@ -43,11 +43,11 @@ The following Omnipay gateways are included the standard installation of Craft C
 
 To see the levels of support for each gateway see this [support article](https://craftcommerce.com/support/which-payment-gateways-do-you-support).
 
-# Adding additional gateways
+## Adding additional gateways
 
 Additional Omnipay gateways can be added to Craft Commerce. They require the creation of a plugin that wraps the Omnipay gateway class with a Commerce GatewayAdapter. An example plugin can be found [here](https://github.com/lukeholder/craftcommerce-ogone).
 
-# Storing config outside of the database
+## Storing config outside of the database
 
 If you do not wish to store your payment gateway config information in the database (which could include secret API keys), you can override the values of a payment method’s settings by placing a `paymentMethodSettings` key into your `commerce.php` config file. You then use the payment method's ID  as the key to the config for that payment method.
 
@@ -61,13 +61,13 @@ return [
 ];
 ```
 
-# CSRF Protection issues
+## CSRF Protection issues
 
 Craft CMS [supports CSRF protection](https://craftcms.com/support/csrf-protection) when turned on. Some gateways attempt to POST data back to Craft Commerce which they can’t do with a valid token. If you wish to have CSRF protection enabled on your site and your gateway uses a POST request when communicating with Craft Commerce, you will need to disable CSRF protection for that request.
 
 To learn how to disable CSRF on a per controller action basis, see this [Stack Overflow answer](http://craftcms.stackexchange.com/a/4554/91).
 
-# Dummy Gateway
+## Dummy Gateway
 
 After installing Commerce, the plugin will install some demo products and a basic config. It will also install a Dummy payment gateway
 that can be used for testing.
@@ -79,9 +79,10 @@ This is a dummy gateway driver intended for testing purposes. If you provide a v
 
 For general usage instructions, please see the main Omnipay repository.
 
-# PayPal Express
+## PayPal Express
 
 ### Important
+
 If you’re going to use the PayPal Express payment gateway you are required to change the default value of [tokenParam](https://docs.craftcms.com/v2/config-settings.html#tokenparam) in your Craft config.
 
 Choose any different token name other than `token`, for example you could put `craftToken`. Otherwise redirects from PayPal will fail.
@@ -92,7 +93,7 @@ PayPal Express Checkout requires an API Username, Password, and Signature. These
 PayPal have increased their TLS requirements, which affects MAMP 3 and some macOS users. If you are affected, you will see an error relating to SSL when attempting to pay with PayPal. Upgrading to MAMP 4 should fix the issue. Read more here: <https://github.com/paypal/TLS-update#php>
 :::
 
-# Manual Gateway
+## Manual Gateway
 
 The manual payment gateway is a special gateway that does not communicate with any third party.
 
@@ -104,7 +105,7 @@ The gateway simply authorizes all payments, allowing the order to proceed. You m
 When creating a Manual payment method, you must select the payment type to be “Authorize Only”.
 :::
 
-# Worldpay JSON
+## Worldpay JSON
 
 The “Worldpay JSON” gateway is the newly recommended modern gateway API for Worldpay. The “Worldpay” gateway below is the older offsite gateway API.
 
@@ -114,7 +115,7 @@ You have the option of a simple implementation using the `worldpay.js` “Templa
 
 The example templates that come with Craft Commerce include an example of the “Template Form” method.
 
-# Worldpay
+## Worldpay
 
 WorldPay is an offsite payment gateway. You must make some changes in your WorldPay Merchant Admin Interface before it will work correctly:
 
@@ -127,7 +128,7 @@ WorldPay is an offsite payment gateway. You must make some changes in your World
 - In the “MD5 Secret for Transactions” field, choose a password, and record this in your Craft Commerce payment method settings
 - In your Craft Commerce payment method settings, set the “Signature Fields” setting to `instId:amount:currency:cartId`
 
-# Authorize.net
+## Authorize.net
 
 The Authorize.net omnipay driver offers a more modern AIM xml based gateway (onsite), as well as the SIM (offsite) redirect-based gateway.
 
@@ -141,7 +142,7 @@ When configuring the SIM gateway, use the following endpoints:
 Live: `https://secure2.authorize.net/gateway/transact.dll`
 Developer: `https://test.authorize.net/gateway/transact.dll`
 
-# Payment Express    PxPay
+## Payment Express PxPay
 
 Payment Express PxPay is an offsite redirect gateway.
 

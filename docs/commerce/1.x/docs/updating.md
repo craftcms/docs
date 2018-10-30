@@ -30,6 +30,6 @@ If you’re manually updating a live site, we recommend you follow these instruc
 Click “Finish up” and let the database updates run.
 8. If all is well, delete the `craft/plugins/commerce-old/` folder, otherwise restore this folder as `commerce` and restore your database from backup and contact support.
 
-# Upgrading from Market Commerce
+## Upgrading from Market Commerce
 
 Craft Commerce is the successor to Market Commerce. To upgrade from Market Commerce to Craft Commerce, [follow these instructions](upgrading-from-market.md).

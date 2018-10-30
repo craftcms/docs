@@ -86,9 +86,12 @@ Returns the default [Variant model](variant-model.md). If no variant is set as t
 Instead of calling `{{product.defaultVariant.id}}` which could perform a database query to get the products default variant, we cache the default variant when saving the product, to the product itself. You can use the following attributes to get the default variant’s information:
 
 ### defaultVariantId
+
 ### defaultSku
 ### defaultPrice
+
 ### defaultHeight
 ### defaultLength
+
 ### defaultWidth
 ### defaultWeight

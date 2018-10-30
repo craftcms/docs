@@ -1,4 +1,4 @@
-## Shipping
+# Shipping
 
 The shipping system in Craft Commerce is a way for shipping costs to be added to the cart when a customer selects a shipping method you set up.
 
@@ -61,49 +61,63 @@ In addition to the shipping zone and shipping category matching, various order i
 ## Shipping Rule Conditions
 
 ### Shipping Zone
+
 This condition is met if the order’s shipping address falls within this zone.
 
 ### Minimum Order Quantity
+
 This condition is met if the order has at least a certain number of items.
 
 ### Maximum Order Quantity
+
 This condition is met if the order quantity does not exceed a certain number of items.
 
 ### Minimum Order Total Price
+
 This condition is met if the total order price is at least a certain amount.
 
 ### Maximum Order Total Price
+
 This condition is met if the total order price is no more than a certain amount.
 
 ### Minimum Order Total Weight
+
 This condition is met if the total order weight is at least a certain amount.
 
 ### Maximum Order Total Weight
+
 This condition is met if the total order weight is no more than a certain amount.
 
 ### Shipping Categories
+
 For each shipping categories, this rule can allow, disallow, or require certain products to match this rule.
 
 ## Shipping Rule Costs
 
 ### Base Rate
+
 Set a base shipping rate for the order as a whole. This is a shipping cost added to the order as a whole and not to a single line item.
 
 ### Minimum Rate
+
 The minimum the person should spend on shipping.
 
 ### Maximum Base Rate
+
 The maximum the person should spend on shipping after adding up the base rate plus all item level rates.
 
 ### Item level rates:
 
 ### Default Per Item Rate
+
 Set a per order item shipping rate.
 
 ### Default Item Weight Rate
+
 Cost per whole unit of the store’s dimension units. For example, if you set your dimension unit option to Kilos, and your product weight was 1.4Kg, and you enter 1 as the item weight rate, then the price will be $1.4
 
 ### Default Percentage Item Price Rate
+
 The amount based on a percentage of items cost.
 
 In addition to the default item level rates, you can override the default values with shipping category specific per item, weight, and percentage rates.

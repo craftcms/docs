@@ -2,7 +2,7 @@
 
 Products fields allow you to relate products to a parent element.
 
-# Settings
+## Settings
 
 <img src="assets/products-field-settings.png" width="422" alt="Products field settings.">
 
@@ -12,7 +12,7 @@ Products fields have the following settings:
 * *Limit* – The maximum number of products that can be related with the field at once. (Default is no limit.)
 * *Selection Label* – The label that should be used on the field’s selection button. (Default is “Add a product”.)
 
-# The Field
+## The Field
 
 Products fields list all of the currently selected products, with a button to select new ones:
 
@@ -22,7 +22,7 @@ Clicking the “Add an entry” button will bring up a modal window where you ca
 
 <img src="assets/product-field-modal.png" width="600" alt="Product selection modal">
 
-# Templating
+## Templating
 
 If you have an element with a Products field in your template, you can access its selected products using its handle:
 
@@ -42,7 +42,7 @@ That will give you an ElementCriteriaModel object, prepped to output all of the 
 
 (See [Relations](https://craftcms.com/docs/relations) for more info on the relatedTo param.)
 
-# Examples
+## Examples
 
 To check if your Products field has any selected products, you can use the length filter:
 

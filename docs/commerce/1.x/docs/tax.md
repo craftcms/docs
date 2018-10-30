@@ -45,7 +45,7 @@ It’s also possible to have more than one applicable tax rate for a single zone
 In order for a tax rate to apply to a particular product, that product must have a tax category that matches
 the tax category of the tax rate.
 
-# Basic Example
+## Basic Example
 
 Let’s say you need to charge 5% tax for all items that ship to New York and 6% on only clothing items that ship to Pennsylvania. This will mean you need to construct two different zones: one zone containing just the state of New York and another zone consisting of the single state of Pennsylvania.
 

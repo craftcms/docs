@@ -18,7 +18,6 @@ and
 
 Both cart attributes return an [Address model](address-model.md), or `null` if no addresses are set.
 
-
 ## Adding or updating the shipping and billing address selected for the current cart.
 
 Adding or updating the addresses on the order is done using the `commerce/cart/updateCart` form action.

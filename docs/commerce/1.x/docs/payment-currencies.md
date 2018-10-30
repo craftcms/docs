@@ -18,25 +18,30 @@ Craft Commerce does not keep your store’s exchange rates updated automatically
 
 ## Order Currency Fields
 
-
 A cart (order) has the following fields relating to currency:
 
 ### `order.currency`
+
 This is the primary store currency, and the currency that all the values for price, line items, adjustments, discounts etc are all stored in, and returned in.
 
 ### `order.paymentCurrency`
+
 This is the currency the customer has currently selected as their payment currency. If your store only has a single currency, this will be set to the same as your primary store currency. A customer can change this currency, see [switching currencies](#switching-currencies).
 
 ## Transactions Currency Fields
+
 When a customer makes a payment on the order, transactions are applied against the order. Transactions have the following fields relating to payment and currencies:
 
 ### `transaction.currency`
+
 This is the primary store currency, and the currency that the transaction `amount` is stored in.
 
 ### `transaction.paymentCurrency`
+
 This is the currency that the `paymentAmount` is stored as. It is also the currency that was used when communicating with the payment gateway when the customer was making payment.
 
 ### `transaction.paymentRate`
+
 This is a snapshot of the payment currency’s conversion rate at the time of making payment. Because the conversion rate may have changed since making this payment.
 
 ## Switching currencies
@@ -50,7 +55,6 @@ The customer be switched to a different currency in the following ways.
 3) Using the `commerce/payments/pay` form action, you can set POST param to named `paymentCurrency` to a valid 3-digit ISO code. This will also have no affect if you have set the `COMMERCE_PAYMENT_CURRENCY` constant.
 
 ## Conversion and currency formatting
-
 
 You can use the `|commerceCurrency` filter as a drop-in replacement for the `|currency` filter. But in addition to currency _formatting_, it can also be used for currency _conversion_, by setting the `convert` param to `true`. In addition to that, the currency formatting can also be disabled by setting the `format` param to `false`, if you just want to get the raw converted currency value as a float.
 

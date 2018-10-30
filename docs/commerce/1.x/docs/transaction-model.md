@@ -4,7 +4,6 @@ Transactions record the payment history of an order.
 
 A transaction can be of a certain type and status, and contain information relevant to the payment and communication to the third party payment gateway.
 
-
 ### id
 
 The Commerce ID of the transaction.
@@ -24,7 +23,6 @@ The type of transaction. Possible values are:
 `capture` This transaction represents a capture of a previous `authorize` transaction. If this transaction type succeeds, the charge on the gateway took the funds from the customers credit card and payment has been made. This transaction is always the child of an authorize transaction.
 
 `refund` This transaction represents a refund of a payment. It is always the child transaction of either a `purchase` or `capture` transaction. You can not refund an authorization.
-
 
 ### amount
 
@@ -81,5 +79,4 @@ The order ID of the [Order model](order-model.md) this transaction belongs to.
 ### paymentMethodId
 
 The ID of the payment method used for communicating with the third party gateway.
-
 

@@ -4,58 +4,57 @@ The payment form model is a special model used to validate a credit card when pa
 
 The `paymentForm` model is usually only used by onsite gateways. In addition to the following attributes some gateways require other additional ones. See the [Payment Gateways](payment-gateways.md) page for gateway specific information.
 
-# Model Attributes
+## Model Attributes
 
 The follow attributes make up the payment form model.
 
-## token
+### token
 
 If a token is found on the payment form, no validation of other field is performed and the data is ignored.
 
 The token represents a pre validated credit card and is provided by a gateways client side JavaScript library. For example [Stripe.js](https://stripe.com/docs/stripe-js)
 
-## firstName
+### firstName
 
 The first name of the customers credit card.
 
 Validation: required field
 
-## lastName
+### lastName
 
 The last name of the customers credit card.
 
 Validation: required field
 
-## month
+### month
 
 Integer only number representing the month of credit card expiry.
 
 Validation: required field, Min:1 Max: 12
 
-## year
+### year
 
 Integer only number representing the year of credit card expiry.
 
 Validation: required field, Min: current year: 2016 Max: Current year plus 12 e.g 2028
 
-## CVV
+### CVV
 
 Integer only number found on the back side of the card for security.
 
 Validation: minimum char length: 3, maximum char length: 4
 
-## number
+### number
 
 The credit card number itself.
 
 Validation: [Luhn algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)
 
-## Example Usage
+### Example Usage
 
 Below is an example of a payment form using the payment form model.
 
 ```twig
-
 <form method="POST" class="form-horizontal">
 <input type="hidden" name="action" value="commerce/payments/pay"/>
 <input type="hidden" name="redirect" value="/commerce/customer/order?number={number}"/>

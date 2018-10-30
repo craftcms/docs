@@ -9,8 +9,7 @@ A book that only comes in one color and size might not need variants, but a sing
 
 Together, products and variants define what is for sale.
 
-
-# Variants
+## Variants
 
 Variant records track the individual variants of a product.
 
@@ -33,13 +32,13 @@ This would enable unique variant data:
 
 This doesn’t stop you from using other custom fields to define other special variants, and it also does not ensure each variant has unique combinations of custom fields - that’s up to the author.
 
-## Default Variant
+### Default Variant
 
 Every single product has a default variant. Whenever a product is created, a default variant for that product will be created too.
 
 When a product is able to have multiple variants, the author can choose which one is default. Products that do not have multiple variants still have a default variant, but the author can not add additional variants.
 
-# Purchasables
+## Purchasables
 
 Anything that can be added to the cart by a customer is called a [purchasable](purchasables.md).
 

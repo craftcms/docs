@@ -49,9 +49,7 @@ The above fields are the only things that an adjuster should adjust.
 
 In effect, this allows the system to use the total of the adjustment model’s `amount` plus the total of the purchasable `salePrice * qty`, to get to the same value at the order `totalPrice`. This is what we do when building the `ItemBag` we send to the gateways.
 
-
 ## Example 1
-
 
 ```
 class BusinessLogic_TaxRemover implements Commerce_AdjusterInterface {
@@ -80,7 +78,6 @@ class BusinessLogic_TaxRemover implements Commerce_AdjusterInterface {
 You can see above that the adjuster class above is not only removing 5 dollars from the `OrderModel::baseTax` but also storing the same `amount` on the adjustment model.
 
 ## Example 2
-
 
 ```
 class BusinessLogic_Discounter implements Commerce_AdjusterInterface

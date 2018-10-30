@@ -6,7 +6,7 @@ For example you might create an Email called “Order Confirmation for Customer�
 
 Another email could be set up called “Order Notification for Admin” which could also be attached to the default order status, but gets set to the store owners email address.
 
-# Settings
+## Settings
 
 Before setting up emails for Craft Commerce. Ensure that your Craft CMS installation has email configured correctly.
 
@@ -16,17 +16,17 @@ If you want to have a different From Email and From Name for your Commerce store
 
 <img src="assets/new-email-settings.png" width="645" alt="New Email Settings.">
 
-# Creating an Email
+## Creating an Email
 
 To create a new email, go to Commerce → Settings → Emails, and click “New Email”.
 
 Emails have the following configuration settings:
 
-## Name
+### Name
 
 Enter the name of this email as it will be shown when managing it in the Control Panel.
 
-## Email Subject
+### Email Subject
 
 The subject of the email.
 Plain text can be entered or twig can also be used to set dynamic values.
@@ -41,7 +41,7 @@ Two special variables available to you:
 Order #{{ order.id }} received.`
 ```
 
-## Recipient
+### Recipient
 
 The “To” address or addresses for this email.
 
@@ -63,7 +63,7 @@ Two special variables available to you:
 
 This would send the email to the customer to made this order.
 
-## BCC’d Recipient
+### BCC’d Recipient
 
 The BCC addresses for this email. You can separate the addresses by a comma: `,`.
 
@@ -76,7 +76,7 @@ Two special variables available to you:
 
 Most likely, you would BCC the store owner on order confirmation.
 
-## HTML Email Template Path
+### HTML Email Template Path
 
 The template path to a template in your site templates folder.
 Plain text template path can be entered or Twig code can also be used to set dynamic values.

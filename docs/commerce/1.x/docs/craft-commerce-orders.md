@@ -18,43 +18,55 @@ It returns an [ElementCriteriaModel](https://docs.craftcms.com/v2/templating/ele
 `craft.commerce.orders` supports the following parameters:
 
 ### type
+
 Product Type model or handle.
 
 ### typeId
+
 Product type ID.
 
 ### number
+
 The unique hash of the order.
 
 ### completed
+
 Accepts `true`.  e.g `{% set orders = craft.commerce.orders.completed(true).find() %}` would return completed orders since they have `isCompleted` set to true.
 
 ### isCompleted
+
 Accepts `1` or `not 1`.  e.g `{% set orders = craft.commerce.orders.isCompleted('not 1').find() %}` would return incomplete orders (carts) since they have `isCompleted` set to false.
 
 ### dateOrdered
+
 The date the order was completed.
 
 ### orderStatus
+
 accepts an `orderStatus` model.
 
 ### orderStatusId
+
 Accepts the ID of an order status.
 
 ### customer
+
 A customer Model can be passed to get orders for that customer only. e.g `{% set orders = craft.commerce.orders.customer(craft.commerce.customer).find() %}`
 Do not use this to get a cart, as the default response does not include orders that are still
 carts (use `{% set cart = craft.commerce.getCart %}` to get the current user’s cart).
 
 ### user
+
 A customer Model can be passed to get orders for that user only. e.g `{% set orders = craft.commerce.orders.user(currentUser).find() %}`
 Do not use this to get a cart, as the default response does not include orders that are still
 carts (use `{% set cart = craft.commerce.getCart %}` to get the current user’s cart).
 
 ### customerId
+
 Accepts an ID of a customer.
 
 ### updatedAfter
+
 Only fetch orders with an Updated Date that is on or after the given date.
 
 You can specify dates in the following formats:
@@ -94,6 +106,7 @@ Accepts `true`. Limits results to only orders where totalPaid is < totalPrice
 The date the order was paid.
 
 ### hasPurchasables
+
 Returns orders that contains specific purchasables.
 
 Accepts: An array of models that implement the Purchasable interface (like variants), or an array of purchasable element IDs.

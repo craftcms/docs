@@ -29,10 +29,13 @@ Returns an array of [Address models](address-model.md).
 Returns an array of completed [Order models](order-model.md).
 
 ### userId
+
 Returns the User ID associated with this customer if the customer is a registered user.
 
 ### lastUsedShippingAddress
+
 Returns the last used shipping address. Returns `null` if there is not a last used address.
 
 ### lastUsedBillingAddress
+
 Returns the last used billing address. Returns `null` if there is not a last used address.

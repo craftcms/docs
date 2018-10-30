@@ -42,7 +42,7 @@ The above is a simple example, if your product’s type has multiple variants yo
 When using the `commerce/cart/updateCart` form action, the redirect is only followed if *all* updates submitted succeed. Be aware the form action can partially succeed in updating some things and not others.
 :::
 
-# Line item options and notes
+## Line item options and notes
 
 When submitting a product to the cart, you can optionally include a text note from the customer, or arbitrary data in an options param.
 
@@ -87,7 +87,7 @@ Once the order is complete, the notes and options can be found on the View Order
 
 <img src="assets/lineitem-options-review.png" width="509" alt="Line Item Option Review.">
 
-# Options uniqueness
+## Options uniqueness
 
 The options data submitted to the line item are hashed into an `optionsSignature` for uniqueness. If you submit the same purchasableId to the cart with different option data, two line items with be created.
 

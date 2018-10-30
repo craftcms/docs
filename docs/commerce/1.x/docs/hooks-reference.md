@@ -33,7 +33,6 @@ This hook differs from the `modifyPaymentRequest` hook, in that it not the basic
 
 For more information on modifying the raw data, see the [Omnipay changelog](http://omnipay.thephpleague.com/changelog/#additions) and the Omnipay [pull request](https://github.com/thephpleague/omnipay/pull/162).
 
-
 ### commerce_modifyItemBag
 
 The hook can modify the Omnipay ItemBag object that will be sent to the gateway.
@@ -46,7 +45,6 @@ public function commerce_modifyItemBag($items, $order){
 
 }
 ```
-
 
 ### commerce_modifyOrderSources
 
@@ -159,7 +157,6 @@ public function commerce_modifyEmail(EmailModel &$email, $order){
 
 Hook must modify the `$email` Email Model directly and not return anything.
 You may use information contained on the `$order` to determine changes to the email.
-
 
 ### commerce_registerOrderAdjusters
 

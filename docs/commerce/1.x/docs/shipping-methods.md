@@ -15,16 +15,17 @@ public function commerce_registerShippingMethods()
 
 The plugin can provide one or more shipping method classes with the following interface:
 
-
-# Shipping Method Interface
+## Shipping Method Interface
 
 The shipping method interface requires a class with the following methods:
 
 ### getType()
+
 Returns the type of shipping method. This might be the name of the plugin or provider.
 The core shipping methods have type: `Custom`. This is shown in the Control Panel only.
 
 ### getId()
+
 This must return null.
 
 ### getName()
@@ -48,13 +49,11 @@ Returns an array of rules that meet the `ShippingRules` interface. (see below)
 
 Is this shipping method available to the customer to select.
 
-
-# Shipping Rules Interface
+## Shipping Rules Interface
 
 A shipping method returns an array of rules objects. The shipping engine goes through each rule and calls `matchOrder()`. It expects a `true` or `false` returned if this shipping method can be applied to the order/cart. The matched rule also returns the costs to the cart if the rule matches.
 
 These are the methods required for the shipping rule objects:
-
 
 ### getHandle();
 
@@ -87,7 +86,6 @@ Zero will not make any changes.
 
 Returns the rate that is multiplied by the line item’s weight.
 Zero will not make any changes.
-
 
 ### getBaseRate()
 
