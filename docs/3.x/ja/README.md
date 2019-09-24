@@ -1,37 +1,36 @@
-# Craft CMS について
+# About Craft CMS
 
-Craft は、ウェブ上でさらなる独自のデジタル体験を創造するための、柔軟でユーザーフレンドリーな CMS です。
+Craft is a flexible, user-friendly CMS for creating custom digital experiences on the web and beyond.
 
-特徴：
+It features:
 
-- コンテンツ制作や管理業務のための、直感的でユーザーフレンドリーなコントロールパネル。
-- コンテンツやその消費方法については想定されていない、コンテンツのモデリングや[フロントエンド開発](dev/README.md)のための真っ新なアプローチです。
-- クリックするだけの、何百という無料、および、商用[プラグイン](https://plugins.craftcms.com/)を備える組み込みのプラグインストア。
-- [モジュールおよびプラグイン開発](extend/README.md)のための、強靭なフレームワーク。
-- 活動的、かつ、活気に満ち溢れた[コミュニティ](https://craftcms.com/community)。
+- An intuitive, user-friendly Control Panel for content creation and administrative tasks.
+- A clean-slate approach to content modeling and [front-end development](dev/README.md) that doesn’t make any assumptions about your content or how it should be consumed.
+- A built-in Plugin Store with hundreds of free and commercial [plugins](https://plugins.craftcms.com/), all just a click away.
+- A robust framework for [module and plugin development](extend/README.md).
+- An active, vibrant [community](https://craftcms.com/community).
 
-[craftcms.com](https://craftcms.com) ですべてを学ぶことができます。
+You can learn all about it at [craftcms.com](https://craftcms.com).
 
-## 技術仕様
+## Tech Specs
 
-Craft は [Yii 2](https://www.yiiframework.com/) をベースとするセルフホスティング型の PHP 7 アプリケーションです。コンテンツストレージとして MySQL および PostgreSQL に接続できます。テンプレートエンジンに [Twig](https://twig.symfony.com) を備えています。
+Craft is a self-hosted PHP 7 application, built on [Yii 2](https://www.yiiframework.com/). It can connect to MySQL and PostgreSQL for content storage. Templating is powered by [Twig](https://twig.symfony.com).
 
-## 人気のリソース
+## Popular Resources
 
-- **[Documentation](http://docs.craftcms.com/v3/)** – 公式ドキュメントを読んでください。
-- **[Guides](https://craftcms.com/guides)** – 公式ガイドに従ってください。
-- **[#craftcms](https://twitter.com/hashtag/craftcms)** – Craft に関する最新ツイートをみてください。
-- **[Discord](https://craftcms.com/discord)** – コミュニティとの出会ってください。
-- **[Stack Exchange](http://craftcms.stackexchange.com/)** – お互いに助け合ってください。
-- **[CraftQuest](https://craftquest.io/)** – 無制限のビデオレッスンやコースを見てください。
-- **[Craft Link List](http://craftlinklist.com/)** – 事情通でいてください。
-- **[nystudio107 Blog](https://nystudio107.com/blog)** – Craft やモダンなウェブ開発について学んでください。
+- **[Documentation](http://docs.craftcms.com/v3/)** – Read the official docs.
+- **[Guides](https://craftcms.com/guides)** – Follow along with the official guides.
+- **[#craftcms](https://twitter.com/hashtag/craftcms)** – See the latest tweets about Craft.
+- **[Discord](https://craftcms.com/discord)** – Meet the community.
+- **[Stack Exchange](http://craftcms.stackexchange.com/)** – Get help and help others.
+- **[CraftQuest](https://craftquest.io/)** – Watch unlimited video lessons and courses.
+- **[Craft Link List](http://craftlinklist.com/)** – Stay in-the-know.
+- **[nystudio107 Blog](https://nystudio107.com/blog)** – Learn Craft and modern web development.
 
-## 打ち込む
+## Diving In
 
-Craft のコンテンツモデリングがどのように機能するのか詳しく知るには、[セクションとエントリ](sections-and-entries.md) および [フィールド](fields.md)を読んでください。
+To start getting acquainted with how content modeling works in Craft, read [Sections and Entries](sections-and-entries.md) and [Fields](fields.md).
 
-Craft をインストールする準備ができたら、[サーバー要件](requirements.md) および [インストールガイド](installation.md)を読んでください。
+When you’re ready to install Craft, read [Server Requirements](requirements.md) and [Installation Instructions](installation.md).
 
-最後に、 サイトまたはアプリケーションのフロントエンドを構築する準備が整ったら[フロントエンド開発](dev/README.md)セクションを読んでください。
-
+Finally, read the [Front-End Development](dev/README.md) section when you’re ready to start building out the front-end of your site or application.
