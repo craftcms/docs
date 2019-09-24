@@ -1,78 +1,74 @@
-# アセットフィールド
+# Assets Fields
 
-アセットフィールドでは、[アセット](assets.md)を他のエレメントに関連付けることができます。
+Assets fields allow you to relate [assets](assets.md) to other elements.
 
-## 設定
+## Settings
 
-アセットフィールドの設定は、次の通りです。
+Assets fields have the following settings:
 
-- **アップロードを単一のフォルダに限定しますか？** – ファイルのアップロード / 関連付けを単一のフォルダに制限するかどうか。
+- **Restrict uploads to a single folder?** – Whether file uploads/relations should be constrained to a single folder.
+    
+    If enabled, the following setting will be visible:
+    
+  - **Upload Location** – The location that files dragged directly onto the field should be saved in.
+    
+    If disabled, the following settings will be visible:
+    
+  - **Sources** – Which asset volumes (or other asset index sources) the field should be able to relate assets from.
+  - **Default Upload Location** – The default location that files dragged directly onto the field should be saved in.
+- **Restrict allowed file types?** Whether the field should only be able to upload/relate files of a certain type(s).
 
-   有効にすると、次の設定が表示されます。
-   - **ロケーションをアップロードする** – フィールドに直接ドラッグされたファイルを保存するロケーション。
+- **Limit** – The maximum number of assets that can be related with the field at once. (Default is no limit.)
+- **View Mode** – How the field should appear for authors.
+- **Selection Label** – The label that should be used on the field’s selection button.
 
-   無効にすると、次の設定が表示されます。
-   - **ソース** – フィールドが、どのアセットボリューム（または、他のアセットインデックスソース）からアセットを関連付けられるか。
-   - **既定のアップロードロケーション** – フィールドに直接ドラッグされたファイルを保存するデフォルトのロケーション。
+### Multi-Site Settings
 
-- **許可されるファイルの種類を制限しますか？** 特定の種類のファイルだけをアップロード / 関連付けできるフィールドにするかどうか。
+On multi-site installs, the following settings will also be available (under “Advanced”):
 
-- **リミット** – フィールドに関連付けできるアセット数の上限（デフォルトは無制限です）
+- **Relate assets from a specific site?** – Whether to only allow relations to assets from a specific site.
+    
+    If enabled, a new setting will appear where you can choose which site.
+    
+    If disabled, related assets will always be pulled from the current site.
 
-- **モードを見る。** – 投稿者のために、フィールドをどのように表示するか。
+- **Manage relations on a per-site basis** – Whether each site should get its own set of related assets.
 
-- **選択ラベル** – フィールドの選択ボタンのラベルに使用されます
+### Dynamic Subfolder Paths
 
-### マルチサイト設定
+Subfolder paths defined by the “Upload Location” and “Default Upload Location” settings can optionally contain Twig tags (e.g. `news/{{ slug }}`).
 
-マルチサイトがインストールされている場合、次の設定も有効になります。（「高度」のトグルボタンで表示されます）
+Any properties supported by the source element (the element that has the Assets field) can be used here.
 
-- **特定のサイトから アセット を関連付けますか?** – 特定のサイトのアセットとの関連付けのみを許可するかどうか。
+::: tip If you are creating the Assets field within a [Matrix field](matrix-fields.md), the source element is going to be the Matrix block, *not* the element that the Matrix field is being created on.
 
-   有効にすると、サイトを選択するための新しい設定が表示されます。
+So if your Matrix field is attached to an entry, and you want to output the entry ID in your dynamic subfolder path, use `owner.id` rather than `id`. :::
 
-   無効にすると、関連付けられたアセットは常に現在のサイトから取得されます。
+## The Field
 
-- **サイトごとにリレーションを管理** – それぞれのサイトが関連付けられたアセットの独自のセットを取得するかどうか。
+Assets fields list all of the currently-related assets, with a button to select new ones.
 
-### 動的なサブフォルダパス
+Clicking the “Add an asset” button will bring up a modal window where you can find and select additional assets, as well as upload new ones.
 
-「ロケーションをアップロードする」と「既定のアップロードロケーション」設定に定義されるサブフォルダには、オプションで Twig タグ（例：`news/{{ slug }}`）を含めることができます。
+### Inline Asset Editing
 
-ソースエレメント（アセットフィールドを持つエレメント）でサポートされているすべてのプロパティは、ここで使用できます。
+When you double-click on a related asset, a HUD will appear where you can edit the asset’s title and custom fields, and launch the Image Editor (if it’s an image).
 
-::: tip
-[行列フィールド](matrix-fields.md)の中にアセットフィールドを作成する場合、ソースエレメントは作成された行列フィールドのエレメント _ではなく_ 行列ブロックになります。
+::: tip You can choose which custom fields should be available for your assets from Settings → Assets → [Volume Name] → Field Layout. :::
 
-そのため、行列フィールドがエントリに紐づけられていて、動的なサブフォルダパスにエントリ ID を出力したい場合、`id` ではなく `owner.id` を使用します。
-:::
+## Templating
 
-## フィールド
+### Querying Elements with Assets Fields
 
-アセットフィールドには、現在関連付けられているすべてのアセットのリストと、新しいアセットを追加するためのボタンがあります。
+When [querying for elements](dev/element-queries/README.md) that have an Assets field, you can filter the results based on the Assets field data using a query param named after your field’s handle.
 
-「アセットを追加」ボタンをクリックすると、新しいアセットのアップロードはもちろん、すでに追加されているアセットの検索や選択ができるモーダルウィンドウが表示されます。
+Possible values include:
 
-### インラインのアセット編集
+| Value          | Fetches elements…                     |
+| -------------- | ------------------------------------- |
+| `':empty:'`    | that don’t have any related assets.   |
+| `':notempty:'` | that have at least one related asset. |
 
-関連付けられたアセットをダブルクリックすると、アセットのタイトルやカスタムフィールドを編集したり、（画像の場合）イメージエディタを起動できる HUD を表示します。
-
-::: tip
-アセットで使用するカスタムフィールドは、「設定 > アセット > [ボリューム名] > フィールドレイアウト」から選択できます。 
-:::
-
-## テンプレート記法
-
-### アセットフィールドによるエレメントの照会
-
-アセットフィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、アセットフィールドのデータに基づいた結果をフィルタできます。
-
-利用可能な値には、次のものが含まれます。
-
-| 値 | 取得するエレメント
-| - | -
-| `':empty:'` | 関連付けられたアセットを持たない。
-| `':notempty:'` | 少なくとも1つの関連付けられたアセットを持つ。
 
 ```twig
 {# Fetch entries with a related asset #}
@@ -81,17 +77,17 @@
     .all() %}
 ```
 
-### アセットフィールドデータの操作
+### Working with Assets Field Data
 
-テンプレート内でアセットフィールドのエレメントを取得する場合、アセットフィールドのハンドルを利用して関連付けられたアセットにアクセスできます。
+If you have an element with an Assets field in your template, you can access its related assets using your Assets field’s handle:
 
 ```twig
 {% set relatedAssets = entry.<FieldHandle> %}
 ```
 
-これは、所定のフィールドで関連付けられたすべてのアセットを出力するよう準備された[アセットクエリ](dev/element-queries/asset-queries.md)を提供します。
+That will give you an [asset query](dev/element-queries/asset-queries.md), prepped to output all of the related assets for the given field.
 
-関連付けられたすべてのアセットをループするには、[all()](api:craft\db\Query::all()) を呼び出して、結果をループ処理します。
+To loop through all of the related assets, call [all()](api:craft\db\Query::all()) and then loop over the results:
 
 ```twig
 {% set relatedAssets = entry.<FieldHandle>.all() %}
@@ -104,7 +100,7 @@
 {% endif %}
 ```
 
-関連付けられた最初のアセットだけが欲しい場合、代わりに [one()](api:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
+If you only want the first related asset, call [one()](api:craft\db\Query::one()) instead, and then make sure it returned something:
 
 ```twig
 {% set rel = entry.<FieldHandle>.one() %}
@@ -113,7 +109,7 @@
 {% endif %}
 ```
 
-（取得する必要はなく）いずれかの関連付けられたアセットがあるかを確認したい場合、[exists()](api:craft\db\Query::exists()) を呼び出すことができます。
+If you just need to check if there are any related assets (but don’t need to fetch them), you can call [exists()](api:craft\db\Query::exists()):
 
 ```twig
 {% if entry.<FieldHandle>.exists() %}
@@ -121,7 +117,7 @@
 {% endif %}
 ```
 
-アセットクエリで[パラメータ](dev/element-queries/asset-queries.md#parameters)をセットすることもできます。例えば、画像だけが返されることを保証するために、[kind](dev/element-queries/asset-queries.md#kind) パラメータをセットできます。
+You can set [parameters](dev/element-queries/asset-queries.md#parameters) on the asset query as well. For example, to ensure that only images are returned, you can set the [kind](dev/element-queries/asset-queries.md#kind) param:
 
 ```twig
 {% set relatedAssets = entry.<FieldHandle>
@@ -129,35 +125,32 @@
     .all() %}
 ```
 
-### フロントエンドの投稿フォームからのファイルアップロード
+### Uploading Files from Front-End Entry Forms
 
-フロントエンドの[投稿フォーム](dev/examples/entry-form.md)から、アセットフィールドへのファイルアップロードをユーザーに許可するには、2つの調整が必要です。
+If you want to allow users to upload files to an Assets field from a front-end [entry form](dev/examples/entry-form.md), you just need to do two things.
 
-まず、`<form>` タグに `enctype="multipart/form-data"` 属性があることを確認して、ファイルをアップロードできるようにします。
+First, make sure your `<form>` tag has an `enctype="multipart/form-data"` attribute, so that it is capable of uploading files.
 
 ```markup
 <form method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 ```
 
-次に、ファイル入力欄をフォームに追加します。
+Then add a file input to the form:
 
 ```markup
 <input type="file" name="fields[<FieldHandle>]">
 ```
 
-::: tip
-`<FieldHandle>` を実際のフィールドハンドルに置き換えます。例えば、フィールドハンドルが “heroImage” の場合、input 名は `fields[heroImage]` になります。
-:::
+::: tip Replace `<FieldHandle>` with you actual field handle. For example if you field handle is “heroImage”, the input name should be `fields[heroImage]`. :::
 
-複数ファイルをアップロードできるようにする場合、`multiple` 属性を追加し、input 名の末尾に `[]` を追加します。
+If you want to allow multiple file uploads, add the `multiple` attribute and add `[]` to the end of the input name:
 
 ```markup
 <input type="file" name="fields[<FieldHanlde>][]" multiple>
 ```
 
-## 関連項目
+## See Also
 
-* [アセットクエリ](dev/element-queries/asset-queries.md)
+* [Asset Queries](dev/element-queries/asset-queries.md)
 * <api:craft\elements\Asset>
-* [リレーション](relations.md)
-
+* [Relations](relations.md)
