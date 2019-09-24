@@ -1,6 +1,6 @@
-# ログインフォーム
+# Login Form
 
-サイトのフロントエンドからユーザーのログインが必要な場合、次のコードで実現できます。
+If you need to login a user from the front-end of your site, you can do so with the following code:
 
 ```twig
 <form method="post" accept-charset="UTF-8">
@@ -29,11 +29,10 @@
 <p><a href="{{ url('forgotpassword') }}">Forget your password?</a></p>
 ```
 
-`craft.session.returnUrl` には、このログインフォームへリダイレクトした `{% requireLogin %}` タグを含む元の URL がセットされます。
+`craft.app.user.returnUrl` is set to the original URL that included the `{% requireLogin %}` tag that initiated the redirect to this login form.
 
-デフォルトでは、ユーザーがログイン後にコンフィグ設定 `postLoginRedirect` の値に基づきリダイレクトされます。`redirect` パラメータを利用して、ログインフォーム内で設定を上書きすることもできます。
+By default, users will be redirected based on your `postLoginRedirect` config setting value after logging in. You can override that within your login form using a `redirect` param:
 
 ```twig
 {{ redirectInput('some/custom/path') }}
 ```
-
