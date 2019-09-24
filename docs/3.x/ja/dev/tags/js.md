@@ -1,6 +1,6 @@
-# `{% js %}` タグ
+# `{% js %}` Tags
 
-`{% js %}` タグは、ページに `<script>` タグを登録するために使用できます。
+The `{% js %}` tag can be used to register a `<script>` tag on the page.
 
 ```javascript
 {% js %}
@@ -12,8 +12,7 @@
 {% endjs %}
 ```
 
-::: tip
-タグを <api:yii\web\View::registerJs()> の中で呼び出し、グローバルな `view` 変数経由でアクセスすることもできます。
+::: tip The tag calls <api:yii\web\View::registerJs()> under the hood, which can also be accessed via the global `view` variable.
 
 ```twig
 {% set script = '_gaq.push(["_trackEvent", "Search", "'~searchTerm|e('js')~'"' %}
@@ -22,29 +21,27 @@
 
 :::
 
-## パラメータ
+## Parameters
 
-`{% js %}` タグは、次のパラメータをサポートしています。
+The `{% js %}` tag supports the following parameters:
 
-### 位置
+### Position
 
-次の位置キーワードのいずれかを使用して、ページの `<script>` を追加する場所を指定できます。
+You can specify where the `<script>` tag should be added to the page using one of these position keywords:
 
-| キーワード | 説明 |
-| ------- | ----------- |
-| `at head` | ページの `<head>` 内 |
-| `at beginBody` | ページの `<body>` の冒頭 |
-| `at endBody` | ページの `<body>` の最後 |
-| `on load` | ページの `<body>` の最後、`jQuery(window).load()` の中で |
-| `on ready` | ページの `<body>` の最後、 `jQuery(document).ready()` の中で |
+| Keyword        | Description                                                                |
+| -------------- | -------------------------------------------------------------------------- |
+| `at head`      | In the page’s `<head>`                                               |
+| `at beginBody` | At the beginning of the page’s `<body>`                              |
+| `at endBody`   | At the end of the page’s `<body>`                                    |
+| `on load`      | At the end of the page’s `<body>`, within `jQuery(window).load()`    |
+| `on ready`     | At the end of the page’s `<body>`, within `jQuery(document).ready()` |
+
 
 ```twig
 {% js at head %}
 ```
 
-デフォルトでは、`at endBody` が使用されます。
+By default, `at endBody` will be used.
 
-::: warning
-`on load` または `on ready` に位置をセットすると、（テンプレートがすでに独自のコピーを含めている場合でも）Craft はページに jQuery の内部コピーを読み込みます。そのため、フロントエンドのテンプレートで利用するのは避けてください。
-:::
-
+::: warning Setting the position to `on load` or `on ready` will cause Craft to load its internal copy of jQuery onto the page (even if the template is already including its own copy), so you should probably avoid using them in front-end templates. :::
