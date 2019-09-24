@@ -1,64 +1,64 @@
-# 画像の変形
+# Image Transforms
 
-すべての人に実サイズの画像アップロードを要求するのではなく、Craft が代わりにどう処理するかのルールをセットした「画像の変形」を定義することができます。トランスフォームは _非破壊的_ で、アップロードされた元画像には影響しません。
+Rather than requiring that everyone upload images at a certain size, Craft lets you define “image transforms”, which set those rules on Craft’s end instead. Transforms are *non-destructive*, meaning that they have no effect on the original image that was uploaded.
 
-## コントロールパネルからトランスフォームの定義
+## Defining Transforms from the Control Panel
 
-「設定 > アセット > 画像の変形」に移動し、「新しい画像変換」ボタンをクリックすることで、コントロールパネルからトランスフォームを定義することができます。
+You can define transforms from the Control Panel by going to Settings → Assets → Image Transforms and clicking the “New Transform” button.
 
-トランスフォームには、次の設定があります。
+Each transform has the following settings:
 
-* **名前** – ユーザーに対する画像変形の名前
-* **ハンドル** – テンプレートに対する画像変形のハンドル
-* **モード** – 変換モード
-* **幅** – 変換結果の幅
-* **高さ** – 変換結果の高さ
-* **品質** - 変換結果の画像品質（0 から 100）
-* **画像フォーマット** – 変換結果の画像フォーマット
+* **Name** – the transform’s user-facing name
+* **Handle** – the transform’s template-facing handle
+* **Mode** – the transform mode
+* **Width** – the transform’s resulting width
+* **Height** – the transform’s resulting height
+* **Quality** - the transform’s resulting image quality (0 to 100)
+* **Image Format** – the transform’s resulting image format
 
-**モード** には、次の値をセットできます。
+**Mode** can be set to the following values:
 
-* **切り抜き** – 指定された幅と高さに画像を切り抜き、必要であれば画像を拡大します。（これがデフォルトのモードです。）
-* **フィット**  – すべての寸法が指定された幅と高さに収まる範囲で、可能な限り大きいサイズになるよう画像を拡大・縮小します。
-* **ストレッチ** – 指定された幅と高さに画像を伸張します。
+* **Crop** – Crops the image to the specified width and height, scaling the image up if necessary. (This is the default mode.)
+* **Fit** – Scales the image so that it is as big as possible with all dimensions fitting within the specified width and height.
+* **Stretch** – Stretches the image to the specified width and height.
 
-**モード**で「切り抜き」がセットされた場合、[焦点](assets.md#focal-points)が設定されていない画像に対して Craft がどのエリアを切り抜きの中心にすべきかを決定する「デフォルトの焦点」プルダウンが表示されます。オプションには、次のものが含まれます。
+If **Mode** is set to “Crop”, an additional “Default Focal Point” setting will appear, where you can define which area of the image Craft should center the crop on, for images without a [focal point](assets.md#focal-points) set. Its options include:
 
-* 上左
-* 上中
-* 上右
-* 中央 - 左
-* 中央 - 中央
-* 中央 - 右
-* 下部左
-* 下部中央
-* 下部右
+* Top-Left
+* Top-Center
+* Top-Right
+* Center-Left
+* Center-Center
+* Center-Right
+* Bottom-Left
+* Bottom-Center
+* Bottom-Right
 
-**幅** または **高さ** のいずれかを空白のままにすると、その寸法は画像の縦横比を維持するようセットされます。例えば、600 x 400 ピクセルの画像があり、変形の幅を 60 に設定し、高さを空白のままにした場合、変形した画像の高さは 40 になります。
+If you leave either **Width** or **Height** blank, that dimension will be set to whatever maintains the image’s aspect ratio. So for example, if you have an image that is 600 by 400 pixels, and you set a transform’s Width to 60, but leave Height blank, the resulting height will be 40.
 
-**品質** を空白のままにすると、Craft はコンフィグ設定の <config:defaultImageQuality> にセットされた品質を使用します。
+If you leave **Quality** blank, Craft will use the quality set by your <config:defaultImageQuality> config setting.
 
-**画像フォーマット** には、次の値をセットできます。
+**Image Format** can be set to the following values:
 
 * jpg
 * png
 * gif
 
-**画像フォーマット** を空欄のままにすると、Craft は web-safe（.jpg、 .png、または .gif） なら元画像のフォーマットを使い、そうでなければ、そのジョブに最適な画像フォーマットを見つけようと試みます。（おそらく、ImageMagik がインストールされていないために）それを決定できない場合は、.jpg として処理されます。
+If you leave **Image Format** blank, Craft will use the original image’s format if it’s web-safe (.jpg, .png, or .gif); otherwise it will try to figure out the best-suited image format for the job. If it can’t determine that (probably because ImageMagik isn’t installed), it will just go with .jpg.
 
-### CP で定義された画像の変形を適用する
+### Applying CP-defined Transforms to Images
 
-トランスフォームを適用した画像を出力するには、トランスフォームのハンドルをアセットの [getUrl()](api:craft\elements\Asset::getUrl())、[getWidth()](api:craft\elements\Asset::getWidth())、および、[getHeight()](api:craft\elements\Asset::getHeight()) ファンクションに渡します。
+To output an image with a transform applied, simply pass your transform’s handle into your asset’s [getUrl()](api:craft\elements\Asset::getUrl()), [getWidth()](api:craft\elements\Asset::getWidth()), and [getHeight()](api:craft\elements\Asset::getHeight()) functions:
 
 ```twig
 <img src="{{ asset.getUrl('thumb') }}" width="{{ asset.getWidth('thumb') }}" height="{{ asset.getHeight('thumb') }}">
 ```
 
-## テンプレート内でトランスフォームを定義する
+## Defining Transforms in your Templates
 
-テンプレート内で直接トランスフォームを定義することもできます。
+You can also define transforms directly in your templates.
 
-はじめに、トランスフォームのパラメータを定義したオブジェクトを作成する必要があります。
+First, you must create an object that defines the transform’s parameters:
 
 ```twig
 {% set thumb = {
@@ -70,21 +70,20 @@
 } %}
 ```
 
-次に、そのオブジェクトをアセットモデルの `getUrl()`、`getWidth()`、および、`getHeight()` ファンクションへ渡します。
+Then you can pass that object into your AssetFileModel’s `getUrl()`, `getWidth()`, and `getHeight()` functions:
 
 ```twig
 <img src="{{ asset.getUrl(thumb) }}" width="{{ asset.getWidth(thumb) }}" height="{{ asset.getHeight(thumb) }}">
 ```
 
-ここでは、最初の例のように「`thumb`」の周りに引用符がないことに注意してください。最初の例では、CP で定義されたトランスフォームのハンドルを _文字列_ として渡しているのに対して、この例ではテンプレート内で作成した ‘thumb’ オブジェクトを参照するための _変数_ として渡しています。
+Note how in that example there are no quotes around “`thumb`”, like there were in the first one. That’s because in the first one, we were passing a *string* set to a CP-defined transform’s handle, whereas in this example we’re passing a *variable* referencing the ‘thumb’ object we created within the template.
 
-### 利用可能な値
+### Possible Values
 
-CP で定義されたトランスフォームで利用可能なすべて設定は、同様にテンプレートで定義されたトランスフォームでも利用できます。
+All of the same settings available to CP-defined transforms are also available to template-defined transforms.
 
-* `mode` プロパティには、`'crop'`、`'fit'`、または `'stretch'` をセットすることができます。
-* `mode` に `'crop'` をセットした場合、`position` プロパティに `'top-left'`、`'top-center'`、 `'top-right'`、`'center-left'`、`'center-center'`、`'center-right'`、`'bottom-left'`、`'bottom-center'`、または `'bottom-right'` のいずれかをセットして渡すことができます。
-* `width` と `height` は、整数をセットするか、省略できます。
-* `quality` は、0 から 100 の間の数値をセットするか、省略できます。
-* `format` には、`'jpg'`、`'gif'`、`'png'` をセットするか、省略できます。
-
+* The `mode` property can be set to either `'crop'`, `'fit'`, or `'stretch'`.
+* If `mode` is set to `'crop'`, you can pass a `position` property, set to either `'top-left'`, `'top-center'`, `'top-right'`, `'center-left'`, `'center-center'`, `'center-right'`, `'bottom-left'`, `'bottom-center'`, or `'bottom-right'`.
+* `width` and `height` can be set to integers or omitted.
+* `quality` can be set to a number between 0 and 100, or omitted.
+* `format` can be set to `'jpg'`, `'gif'`, `'png'`, or omitted.
