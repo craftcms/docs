@@ -6,23 +6,25 @@ Rather than requiring that everyone upload images at a certain size, Craft lets 
 
 You can define transforms from the Control Panel by going to Settings → Assets → Image Transforms and clicking the “New Transform” button.
 
+![transform-settings.2x](./images/transform-settings.2x.jpg)
+
 Each transform has the following settings:
 
 * **Name** – the transform’s user-facing name
 * **Handle** – the transform’s template-facing handle
-* **Mode** – the transform mode
-* **Width** – the transform’s resulting width
-* **Height** – the transform’s resulting height
-* **Quality** - the transform’s resulting image quality (0 to 100)
-* **Image Format** – the transform’s resulting image format
+* **Mode** – the transform mode
+* **Width** – the transform’s resulting width
+* **Height** – the transform’s resulting height
+* **Quality** - the transform’s resulting image quality (0 to 100)
+* **Image Format** – the transform’s resulting image format
 
 **Mode** can be set to the following values:
 
-* **Crop** – Crops the image to the specified width and height, scaling the image up if necessary. (This is the default mode.)
-* **Fit**  – Scales the image so that it is as big as possible with all dimensions fitting within the specified width and height.
-* **Stretch** – Stretches the image to the specified width and height.
+* **Crop** – Crops the image to the specified width and height, scaling the image up if necessary. (This is the default mode.)
+* **Fit**  – Scales the image so that it is as big as possible with all dimensions fitting within the specified width and height.
+* **Stretch** – Stretches the image to the specified width and height.
 
-If **Mode** is set to “Crop”, an additional “Default Focal Point” setting will appear, where you can define which area of the image Craft should center the crop on, for images without a [focal point](assets.md#focal-points) set. Its options include:
+If **Mode** is set to “Crop”, an additional “Crop Position” setting will appear, where you can define which area of the image should be treated as the focal point when cropping. Its options include:
 
 * Top-Left
 * Top-Center
@@ -48,7 +50,7 @@ If you leave **Image Format** blank, Craft will use the original image’s forma
 
 ### Applying CP-defined Transforms to Images
 
-To output an image with a transform applied, simply pass your transform’s handle into your asset’s [getUrl()](api:craft\elements\Asset::getUrl()), [getWidth()](api:craft\elements\Asset::getWidth()), and [getHeight()](api:craft\elements\Asset::getHeight()) functions:
+To output an image with a transform applied, simply pass your transform’s handle into your [AssetFileModel’s](templating/assetfilemodel.md) `getUrl()`, `getWidth()`, and `getHeight()` functions:
 
 ```twig
 <img src="{{ asset.getUrl('thumb') }}" width="{{ asset.getWidth('thumb') }}" height="{{ asset.getHeight('thumb') }}">
@@ -86,4 +88,4 @@ All of the same settings available to CP-defined transforms are also available t
 * If `mode` is set to `'crop'`, you can pass a `position` property, set to either `'top-left'`, `'top-center'`, `'top-right'`, `'center-left'`, `'center-center'`, `'center-right'`, `'bottom-left'`, `'bottom-center'`, or `'bottom-right'`.
 * `width` and `height` can be set to integers or omitted.
 * `quality` can be set to a number between 0 and 100, or omitted.
-* `format` can be set to `'jpg'`, `'gif'`, `'png'`, or omitted.
+* `format` can be set to `'jpg'`, `'gif'`, `'png'`, or `'Auto'`.

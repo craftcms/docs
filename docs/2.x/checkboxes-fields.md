@@ -4,96 +4,63 @@ Checkboxes fields give you a group of checkboxes.
 
 ## Settings
 
+![checkbox-settings.2x](./images/field-types/checkboxes/checkbox-settings.2x.png)
+
 Checkboxes fields have the following settings:
 
-* **Checkbox Options** – Define the checkboxes that will be available in the field. You even get to set the option values and labels separately, and choose which ones should be checked by default.
+- **Checkbox Options** – Define the checkboxes that will be available in the field. You even get to set the option values and labels separately, and choose which ones should be checked by default.
+
+## The Field
+
+Checkboxes fields will show each of the checkbox options as defined in the field settings:
+
+![checkbox-entry.2x](./images/field-types/checkboxes/checkbox-entry.2x.png)
 
 ## Templating
 
-### Querying Elements with Checkboxes Fields
-
-When [querying for elements](dev/element-queries/README.md) that have a Checkboxes field, you can filter the results based on the Checkboxes field data using a query param named after your field’s handle.
-
-Possible values include:
-
-| Value | Fetches elements…
-| - | -
-| `'*"foo"*'` | with a `foo` option checked.
-| `'not *"foo"*'` | without a `foo` option checked.
+If you only have one checkbox, and you just want to tell if it has been selected, you can do that using the `length` filter:
 
 ```twig
-{# Fetch entries with the 'foo' option checked #}
-{% set entries = craft.entries()
-    .<FieldHandle>('*"foo"*')
-    .all() %}
+{% if entry.checkboxFieldHandle | length %}
 ```
 
-### Working with Checkboxes Field Data
-
-If you have an element with a Checkboxes field in your template, you can access its data using your Checkboxes field’s handle:
+You can loop through your selected options like so:
 
 ```twig
-{% set value = entry.<FieldHandle> %}
+<ul>
+    {% for option in entry.checkboxFieldHandle %}
+        <li>{{ option }}</li>
+    {% endfor %}
+</ul>
 ```
 
-That will give you a <api:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
-
-To loop through all the checked options, iterate over the field value:
+Or you can loop through all of the available options rather than just the selected ones:
 
 ```twig
-{% for option in entry.<FieldHandle> %}
-    Label: {{ option.label }}
-    Value: {{ option }} or {{ option.value }}
-{% endfor %}
+<ul>
+    {% for option in entry.checkboxFieldHandle.options %}
+        <li>{{ option }}</li>
+    {% endfor %}
+</ul>
 ```
 
-To loop through all of the available options, iterate over the [options](api:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
+In either case, you can output an option’s label by typing `{{ option.label }}` instead, and you can tell if the option is selected or not via `option.selected`.
+
+You can also tell if a particular option is selected outside the scope of looping through the options like so:
 
 ```twig
-{% for option in entry.<FieldHandle>.options %}
-    Label:   {{ option.label }}
-    Value:   {{ option }} or {{ option.value }}
-    Checked: {{ option.selected ? 'Yes' : 'No' }}
-{% endfor %}
+{% if entry.checkboxFieldHandle.contains('tequila') %}
+    <p>Really?</p>
+{% endif %}
 ```
 
-To see if any options are checked, use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter:
+If you are including a Checkboxes field on a front-end [entry from](templating/entry-form.md), make sure to include a hidden input before the checkboxes, so that an empty value is submitted if no checkboxes are checked.
 
 ```twig
-{% if entry.<FieldHandle>|length %}
-```
-
-To see if a particular option is checked, use [contains()](api:craft\fields\data\MultiOptionsFieldData::contains())
-
-```twig
-{% if entry.<FieldHandle>.contains('foo') %}
-```
-
-### Saving Checkboxes Fields in Entry Forms
-
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Checkboxes field, you can use this template as a starting point:
-
-```twig
-{% set field = craft.app.fields.getFieldByHandle('<FieldHandle>') %}
-
-{# Include a hidden input first so Craft knows to update the
-   existing value, if no checkboxes are checked. #}
-{{ hiddenInput('fields[<FieldHandle>]', '') }}
+<input type="hidden" name="fields[checkboxFieldhandle]" value="">
 
 <ul>
-    {% for option in field.options %}
-
-        {% set checked = entry is defined
-            ? entry.<FieldHandle>.contains(option.value)
-            : option.default %}
-
-        <li><label>
-            <input type="checkbox"
-                name="fields[<FieldHandle>][]"
-                value="{{ option.value }}"
-                {% if checked %}checked{% endif %}>
-            {{ option.label }}
-        </label></li>
-    {% endfor %}
+    <li><input type="checkbox" name="fields[checkboxFieldHandle][]" value="foo">{{ checkboxOption.label }}</li>
+    <li><input type="checkbox" name="fields[checkboxFieldHandle][]" value="bar">{{ checkboxOption.label }}</li>
 </ul>
 ```

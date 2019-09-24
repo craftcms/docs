@@ -1,18 +1,16 @@
 # Reference Tags
 
-Reference tags can be used to create references to various elements in your site. They can be used in any textual fields, including Text cells within a Table field.
+Reference tags can be used to create references to various elements in your site. They can be used in any plain text field, including plain text cells within a Table field.
 
 The syntax for reference tags looks like this:
 
-```twig
-{<Type>:<Identifier>:<Property>}
-```
+    {type:reference:property}
 
 As you can see, they are made up three segments:
 
-1.  `<Type>` – The type of element you’re creating a reference to. This can be a fully-qualified element class name (e.g. `craft\elements\Entry`) or the element type’s “reference handle”.
+1.  **Type** – The type of element you’re creating a reference to.
 
-    Core element types have the following reference handles:
+    Possible values include:
 
     - `entry`
     - `asset`
@@ -20,41 +18,34 @@ As you can see, they are made up three segments:
     - `user`
     - `globalset`
 
-2.  `<Identifier>` – Either the element’s ID or a custom identifier supported by the element type.
+2.  **Reference** – An identifying reference to the element. Regardless of the element type, you can set this to the element’s ID.
 
-    Entries support the following custom identifiers:
+    Entries support two additional reference formats:
 
     - `entry-slug`
     - `sectionHandle/entry-slug`
 
-    Identifiers can also include the site ID, UUID, or handle that the element should be loaded from, using an `@<Site>` syntax.
+3.  **Property** – The property that the reference tag should return.
 
-3.  `<Property>` _(optional)_ – The element property that the reference tag should return. If omitted, the element’s URL will be returned.
+    See the available properties within each element type’s model reference:
 
-    You can refer to the element types’ class references for a list of available properties:
+    - [EntryModel](templating/entrymodel.md)
+    - [AssetFileModel](templating/assetfilemodel.md)
+    - [TagModel](templating/tagmodel.md)
+    - [UserModel](templating/usermodel.md)
+    - [GlobalSetModel](templating/globalsetmodel.md)
 
-    - [api:craft\elements\Entry](api:craft\elements\Entry#public-properties)
-    - [api:craft\elements\Asset](api:craft\elements\Asset#public-properties)
-    - [api:craft\elements\Tag](api:craft\elements\Tag#public-properties)
-    - [api:craft\elements\User](api:craft\elements\User#public-properties)
-    - [api:craft\elements\GlobalSet](api:craft\elements\GlobalSet#public-properties)
+    Note that this third segment is actually optional. If omitted, the tag will default to “url”.
 
-    Custom field handles are also supported, for field types with values that can be represented as strings.
+    You can also reference a textual field’s value in this segment by using its field handle:
 
-### Examples
+        {entry:entry-slug:fieldHandle}
 
-The following are valid reference tags:
-
-- `{asset:123:filename}` – returns the filename of an asset with the ID of `123` (via <api:craft\elements\Asset::getFilename()>).
-- `{entry:about-us:intro}` – returns the value of an `intro` custom field on an entry with the slug `about-us`.
-- `{entry:about-us@en:intro}` – returns the value of an `intro` custom field on an entry with the slug `about-us`, loaded from the site with the handle `en`.
-- `{entry:blog/whats-on-tap}` – returns the URL of an entry in a `blog` section with the slug `whats-on-tap`.
-- `{craft\commerce\Variant:123:price}` – returns the price of a Commerce Variant object with the id of `123`.
-- `{globalset:aGlobalSet:uid}` – returns the UID of a global set with the handle `aGlobalSet`.
+    Note that this will not work for any relational fields (entries, assets, users, etc.).
 
 ## Parsing Reference Tags
 
-You can parse any string for reference tags in your templates using the [parseRefs](dev/filters.md#parserefs) filter:
+You can parse any string for reference tags in your templates using the [parseRefs](templating/filters.md#parserefs) filter:
 
 ```twig
 {{ entry.body|parseRefs|raw }}

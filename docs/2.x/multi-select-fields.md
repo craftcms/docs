@@ -4,93 +4,46 @@ Multi-select fields give you a multi-select input.
 
 ## Settings
 
+![multi-select-settings.2x](./images/field-types/multi-select/multi-select-settings.2x.png)
+
 Multi-select fields have the following settings:
 
-* **Multi-select Options** – Define the options that will be available in the field. You even get to set the option values and labels separately, and choose which ones should be selected by default.
+- **Multi-select Options** – Define the options that will be available in the field. You even get to set the option values and labels separately, and choose which ones should be checked by default.
+
+## The Field
+
+Multi-select fields will show a multi-select input with each of the Multi-select Options as defined in the field settings:
+
+![multi-select-entry.2x](./images/field-types/multi-select/multi-select-entry.2x.png)
 
 ## Templating
 
-### Querying Elements with Multi-select Fields
-
-When [querying for elements](dev/element-queries/README.md) that have a Multi-select field, you can filter the results based on the Multi-select field data using a query param named after your field’s handle.
-
-Possible values include:
-
-| Value | Fetches elements…
-| - | -
-| `'*"foo"*'` | with a `foo` option selected.
-| `'not *"foo"*'` | without a `foo` option selected.
+You can loop through your selected options like so:
 
 ```twig
-{# Fetch entries with the 'foo' option selected #}
-{% set entries = craft.entries()
-    .<FieldHandle>('*"foo"*')
-    .all() %}
-```
-
-### Working with Multi-select Field Data
-
-If you have an element with a Multi-select field in your template, you can access its data using your Multi-select field’s handle:
-
-```twig
-{% set value = entry.<FieldHandle> %}
-```
-
-That will give you a <api:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
-
-To loop through all the selected options, iterate over the field value:
-
-```twig
-{% for option in entry.<FieldHandle> %}
-    Label: {{ option.label }}
-    Value: {{ option }} or {{ option.value }}
-{% endfor %}
-```
-
-To loop through all of the available options, iterate over the [options](api:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
-
-```twig
-{% for option in entry.<FieldHandle>.options %}
-    Label:    {{ option.label }}
-    Value:    {{ option }} or {{ option.value }}
-    Selected: {{ option.selected ? 'Yes' : 'No' }}
-{% endfor %}
-```
-
-To see if any options are selected, use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter:
-
-```twig
-{% if entry.<FieldHandle>|length %}
-```
-
-To see if a particular option is selected, use [contains()](api:craft\fields\data\MultiOptionsFieldData::contains())
-
-```twig
-{% if entry.<FieldHandle>.contains('foo') %}
-```
-
-### Saving Multi-select Fields in Entry Forms
-
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Multi-select field, you can use this template as a starting point:
-
-```twig
-{% set field = craft.app.fields.getFieldByHandle('<FieldHandle>') %}
-
-{# Include a hidden input first so Craft knows to update the
-   existing value, if no options are selected. #}
-{{ hiddenInput('fields[<FieldHandle>]', '') }}
-
-<select multiple name="fields[<FieldHandle>][]">
-    {% for option in field.options %}
-
-        {% set selected = entry is defined
-            ? entry.<FieldHandle>.contains(option.value)
-            : option.default %}
-
-        <option value="{{ option.value }}"
-                {% if selected %}selected{% endif %}>
-            {{ option.label }}
-        </option>
+<ul>
+    {% for option in entry.multiselectFieldHandle %}
+        <li>{{ option }}</li>
     {% endfor %}
-</select>
+</ul>
+```
+
+Or you can loop through all of the available options rather than just the selected ones:
+
+```twig
+<ul>
+    {% for option in entry.multiselectFieldHandle.options %}
+        <li>{{ option }}</li>
+    {% endfor %}
+</ul>
+```
+
+In either case, you can output an option’s label by typing `{{ option.label }}` instead, and you can tell if the option is selected or not via `option.selected`.
+
+You can also tell if a particular option is selected outside the scope of looping through the options like so:
+
+```twig
+{% if entry.multiselectFieldHandle.contains('tequilla') %}
+    <p>Really?</p>
+{% endif %}
 ```

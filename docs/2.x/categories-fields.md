@@ -1,146 +1,101 @@
 # Categories Fields
 
-Categories fields allow you to relate [categories](categories.md) to other elements.
+Categories fields allow you to relate [categories](categories.md) to the parent element.
 
 ## Settings
 
+![categories-settings.2x](./images/field-types/categories/categories-settings.2x.png)
+
 Categories fields have the following settings:
 
-- **Source** – Which category group (or other category index source) the field should be able to relate categories from.
-- **Branch Limit** – The maximum number of category tree branches that can be related with the field at once. (Default is no limit.)
-
-  For example, if you have the following category group:
-
-  ```
-  Food
-  ├── Fruit
-  │   ├── Apples
-  │   ├── Bananas
-  │   └── Oranges
-  └── Vegetables
-      ├── Brussels sprouts
-      ├── Carrots
-      └── Celery
-  ```
-
-  …and Branch Limit was set to `1`, you would be able to relate Fruit, Vegetables, or one of their descendants, but no more than that.
-
-- **Selection Label** – The label that should be used on the field’s selection button.
-
-### Multi-Site Settings
-
-On multi-site installs, the following settings will also be available (under “Advanced”):
-
-- **Relate categories from a specific site?** – Whether to only allow relations to categories from a specific site.
-
-  If enabled, a new setting will appear where you can choose which site.
-
-  If disabled, related categories will always be pulled from the current site.
-
-- **Manage relations on a per-site basis** – Whether each site should get its own set of related categories.
+- **Source** – The category group you want to relate categories from.
+- **Target Locale** – Which locale categories should be related with (this setting only appears if you’re running Craft Pro with more than one site locale)
+- **Limit** – The maximum number of categories that can be related with the field at once. (Default is no limit.) Note that this does include parent categories, if your category group has multiple levels.
+- **Selection Label** – The label that should be used on the field’s selection button.
 
 ## The Field
 
-Categories fields list all of the currently-related categories, with a button to select new ones.
+Categories fields list all of the currently selected categories, with a button to select new ones:
 
-Clicking the “Add a category” button will bring up a modal window where you can find and select additional categories. You can create new categories from this modal as well, by clicking the “New category” button.
+![categories-entry.2x](./images/field-types/categories/categories-entry.2x.jpg)
 
-When you select a nested category, all of the ancestors leading up to that category will also automatically be related. Likewise, when you remove a category from within the main field input, any of its descendants will also be removed.
+Clicking the “Add a category” button will bring up a modal window where you can find and select additional categories:
 
-### Inline Category Editing
+![categories-entry-add.2x](./images/field-types/categories/categories-entry-add.2x.jpg)
 
-When you double-click on a related category, a HUD will appear where you can edit the category’s title and custom fields.
+When you select a nested category, all of the ancestors leading up to that category will also automatically be selected. Likewise, when you deselect a category from within the main field input, any of its descendants will also become deselected.
 
 ## Templating
 
-### Querying Elements with Categories Fields
-
-When [querying for elements](dev/element-queries/README.md) that have a Categories field, you can filter the results based on the Categories field data using a query param named after your field’s handle.
-
-Possible values include:
-
-| Value | Fetches elements…
-| - | -
-| `':empty:'` | that don’t have any related categories.
-| `':notempty:'` | that have at least one related category.
+If you have an element with a Categories field in your template, you can access its selected categories using your Category field’s handle:
 
 ```twig
-{# Fetch entries with a related category #}
-{% set entries = craft.entries()
-    .<FieldHandle>(':notempty:')
-    .all() %}
+{% set categories = entry.categoriesFieldHandle %}
 ```
 
-### Working with Categories Field Data
-
-If you have an element with a Categories field in your template, you can access its related categories using your Categories field’s handle:
+That will give you an [ElementCriteriaModel](templating/elementcriteriamodel.md) object, prepped to output all of the selected categories for the given field. In other words, the line above is really just a shortcut for this:
 
 ```twig
-{% set relatedCategories = entry.<FieldHandle> %}
+{% set categories = craft.categories({
+    relatedTo: { sourceElement: entry, field: "categoriesFieldHandle" },
+    limit:     null
+}) %}
 ```
 
-That will give you a [category query](dev/element-queries/category-queries.md), prepped to output all of the related categories for the given field.
+(See [Relations](relations.md) for more info on the `relatedTo` param.)
 
-To loop through all of the related categories as a flat list, call [all()](api:craft\db\Query::all()) and then loop over the results:
+### Examples
+
+To check if your Categories field has any selected tags, you can use the `length` filter:
 
 ```twig
-{% set relatedCategories = entry.<FieldHandle>.all() %}
-{% if relatedCategories|length %}
-    <ul>
-        {% for rel in relatedCategories %}
-            <li><a href="{{ rel.url }}">{{ rel.title }}</a></li>
-        {% endfor %}
-    </ul>
+{% if entry.categoriesFieldHandle | length %}
+    ...
 {% endif %}
 ```
 
-Or you can show them as a hierarchical list with the [nav](dev/tags/nav.md) tag:
+To loop through the selected categories, you can treat the field like an array:
 
 ```twig
-{% set relatedCategories = entry.<FieldHandle.all() %}
-{% if relatedCategories|length %}
-    <ul>
-        {% nav rel in relatedCategories %}
-            <li>
-                <a href="{{ rel.url }}">{{ rel.title }}</a>
-                {% ifchildren %}
-                    <ul>
-                        {% children %}
-                    </ul>
-                {% endifchildren %}
-            </li>
-        {% endnav %}
-    </ul>
+{% nav category in entry.categoriesFieldHandle %}
+    ...
+{% endnav %}
+```
+
+Rather than typing “`entry.categoriesFieldHandle`” every time, you can call it once and set it to another variable:
+
+```twig
+{% set categories = entry.categoriesFieldHandle %}
+
+{% if categories | length %}
+
+    <h3>Some great categories</h3>
+    {% nav category in categories %}
+        ...
+    {% endnav %}
+
 {% endif %}
 ```
 
-If you only want the first related category, call [one()](api:craft\db\Query::one()) instead, and then make sure it returned something:
+You can add parameters to the ElementCriteriaModel object as well:
 
 ```twig
-{% set rel = entry.<FieldHandle>.one() %}
-{% if rel %}
-    <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
+{% set categories = entry.categoriesFieldHandle.order('name') %}
+```
+
+If your Categories field is only meant to have a single category selected, remember that calling your Categories field will still give you the same ElementCriteriaModel, not the selected category. To get the first (and only) tag selected, use `first()`:
+
+```twig
+{% set category = entry.myCategoriesField.first() %}
+
+{% if category %}
+    ...
 {% endif %}
 ```
 
-If you just need to check if there are any related categories (but don’t need to fetch them), you can call [exists()](api:craft\db\Query::exists()):
+### See Also
 
-```twig
-{% if entry.<FieldHandle>.exists() %}
-    <p>There are related categories!</p>
-{% endif %}
-```
-
-You can set [parameters](dev/element-queries/category-queries.md#parameters) on the category query as well. For example, to only fetch the “leaves” (categories without any children), set the [leaves](dev/element-queries/category-queries.md#leaves) param:
-
-```twig
-{% set relatedCategories = entry.<FieldHandle>
-    .leaves()
-    .all() %}
-```
-
-## See Also
-
-* [Category Queries](dev/element-queries/category-queries.md)
-* <api:craft\elements\Category>
-* [Relations](relations.md)
+- [craft.categories](templating/craft.categories.md)
+- [ElementCriteriaModel](templating/elementcriteriamodel.md)
+- [CategoryModel](templating/categorymodel.md)
+- [Relations](relations.md)

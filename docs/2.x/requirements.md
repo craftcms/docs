@@ -1,51 +1,49 @@
 # Server Requirements
 
-::: tip
-You can use the [Craft Server Check](https://github.com/craftcms/server-check) script to quickly find out if your server meet’s Craft’s requirements.
-:::
-
 Craft requires the following:
 
-* PHP 7.0+
-* MySQL 5.5+ with InnoDB, MariaDB 5.5+, or PostgreSQL 9.5+
-* At least 256MB of memory allocated to PHP
-* At least 200MB of free disk space
+* PHP 5.3.0+ with safe mode disabled
+* MySQL 5.1.0 or later, with the InnoDB storage engine installed
+* A web server (Apache, Nginx, IIS)
+* A minimum of 32MB of memory allocated to PHP
+* A minimum of 20MB of free disk space
+* A minimum of 1MB of database space
+
+::: tip
+If you’re using MySQL 5.7.5+, give [this a read](https://craftcms.stackexchange.com/questions/12084/getting-this-sql-error-group-by-incompatible-with-sql-mode-only-full-group-by/12106) and save yourself a headache.
+:::
 
 ## Required PHP Extensions
 
-Craft requires the following PHP extensions:
+Craft requires the following PHP extensions to be enabled:
 
-* [ctype](https://secure.php.net/manual/en/book.ctype.php)
+* [Reflection Extension](http://php.net/manual/en/class.reflectionextension.php)
+* [PCRE Extension](http://php.net/manual/en/book.pcre.php)
+* [SPL Extension](http://php.net/manual/en/book.spl.php)
+* [PDO Extension](http://php.net/manual/en/book.pdo.php)
+* [PDO MySQL Extension](http://php.net/manual/en/ref.pdo-mysql.php)
+* [Mcrypt Extension](http://php.net/manual/en/book.mcrypt.php)
+* [GD Extension](http://php.net/manual/en/book.image.php) with FreeType Support _(unless [ImageMagick Extension](http://php.net/manual/en/book.imagick.php) is installed)_
+* [OpenSSL Extension](http://php.net/manual/en/book.openssl.php)
+* [Multibyte String Extension](http://php.net/manual/en/book.mbstring.php)
+* [JSON Extension](https://php.net/manual/en/book.json.php)
 * [cURL](http://php.net/manual/en/book.curl.php)
-* [GD](http://php.net/manual/en/book.image.php) or [ImageMagick](http://php.net/manual/en/book.imagick.php). ImageMagick is preferred.
-* [iconv](http://php.net/manual/en/book.iconv.php)
-* [JSON](http://php.net/manual/en/book.json.php)
-* [Multibyte String](http://php.net/manual/en/book.mbstring.php)
-* [OpenSSL](http://php.net/manual/en/book.openssl.php)
-* [PCRE](http://php.net/manual/en/book.pcre.php)
-* [PDO MySQL Driver](http://php.net/manual/en/ref.pdo-mysql.php) or [PDO PostgreSQL Driver](http://php.net/manual/en/ref.pdo-pgsql.php)
-* [PDO](http://php.net/manual/en/book.pdo.php)
-* [Reflection](http://php.net/manual/en/class.reflectionextension.php)
-* [SPL](http://php.net/manual/en/book.spl.php)
-* [Zip](http://php.net/manual/en/book.zip.php)
+* [crypt()](http://php.net/manual/en/function.crypt.php) with BLOWFISH_CRYPT enabled
 
 ## Optional PHP Extensions
 
-* [Intl](http://php.net/manual/en/book.intl.php) – Adds rich internationalization support.
-* [DOM](http://php.net/manual/en/book.dom.php) - Required for parsing XML feeds as well as <api:yii\web\XmlResponseFormatter>.
+* **[DOM Extension](http://php.net/manual/en/book.dom.php)** - Used to parse RSS feeds and for SVG file uploading.
+* **[iconv Extension](http://php.net/manual/en/book.iconv.php)** – Adds support for more character encodings than PHP’s built-in [mb_convert_encoding()](http://php.net/manual/en/function.mb-convert-encoding.php) function, which Craft will take advantage of when converting GET and POST request parameters to UTF-8.
+* **[ImageMagick Extension](http://php.net/manual/en/book.imagick.php)** – Adds animated GIF support to Craft, and preserves 8-bit and 24-bit PNGs when creating image transforms, rather than converting them to 32-bit.
+* **[SimpleXML](http://php.net/manual/en/book.simplexml.php)** - Required if you will be using S3.
 
-## Optional PHP Methods and Configurations
+::: tip
+If you’re unsure about whether your server meets the minimum requirements, just try installing Craft anyway. If there’s an issue, the installer will let you know!
+:::
 
-Some shared hosting environments will disable certain common PHP methods and configurations that affect Craft features.
+## Required MySQL User Privileges
 
-* [allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen) - Craft requires PHP configuration to be enabled for updating and installing plugins from the Plugin Store.
-* [proc_*](http://php.net/manual/en/ref.exec.php) - The PHP `proc_` methods must be enabled in order to utilize the Plugin Store and to be able to send emails.
-
-## Required Database User Privileges
-
-The database user you tell Craft to connect with must have the following privileges:
-
-#### MySQL/MariaDB
+The MySQL user you tell Craft to connect with must have the following privileges:
 
 * `SELECT`
 * `INSERT`
@@ -56,34 +54,24 @@ The database user you tell Craft to connect with must have the following privile
 * `INDEX`
 * `DROP`
 * `REFERENCES`
-* `LOCK TABLES`
 
-#### PostgreSQL
-
-* `SELECT`
-* `INSERT`
-* `UPDATE`
-* `CREATE`
-* `DELETE`
-* `REFERENCES`
-* `CONNECT`
-
-## Control Panel Browser Requirements
+## CP Browser Requirements
 
 Craft’s Control Panel requires a modern browser:
 
-#### Windows and macOS
+### Windows and OS X
 
 * Chrome 29 or later
 * Firefox 28 or later
 * Safari 9.0 or later
+* Internet Explorer 11 or later
 * Microsoft Edge
 
-#### Mobile
+### Mobile
 
 * iOS: Safari 9.1 or later
 * Android: Chrome 4.4 or later
 
 ::: tip
-Craft’s Control Panel browser requirements have nothing to do with your actual website. If you’re a glutton for punishment and want your website to look flawless on IE 6, that’s your choice.
+Craft’s CP browser requirements have nothing to do with your actual website. If you’re a glutton for punishment and want your website to look flawless on IE 6, that’s your choice.
 :::

@@ -1,101 +1,99 @@
 # Users Fields
 
-Users fields type allow you relate [users](users.md) to other elements.
+Users fields type allow you relate [users](users.md) to the parent element.
 
 ## Settings
 
+![users-settings.2x](./images/field-types/users/users-settings.2x.png)
+
 Users fields have the following settings:
 
-- **Sources** – Which user groups (or other user index sources) the field should be able to relate users from.
-- **Limit** – The maximum number of users that can be related with the field at once. (Default is no limit.)
-- **Selection Label** – The label that should be used on the field’s selection button.
-
-### Multi-Site Settings
-
-On multi-site installs, the following setting will also be available (under “Advanced”):
-
-- **Manage relations on a per-site basis** – Whether each site should get its own set of related users.
+- **Sources** – The user groups you want to relate users from. (Default is “All”)
+- **Limit** – The maximum number of users that can be related with the field at once. (Default is no limit.)
+- **Selection Label** – The label that should be used on the field’s selection button.
 
 ## The Field
 
-Users fields list all of the currently-related users, with a button to select new ones.
+Users fields list all of the currently selected users, with a button to select new ones:
 
-Clicking the “Add a user” button will bring up a modal window where you can find and select additional users.
+![users-entry.2x](./images/field-types/users/users-entry.2x.png)
 
-### Inline User Editing
+Clicking the “Add a user button will bring up a modal window where you can find and select additional users:
 
-When you double-click on a related user, a HUD will appear where you can edit the user’s custom fields.
+![users-entry-add.2x](./images/field-types/users/users-entry-add.2x.png)
 
 ## Templating
 
-### Querying Elements with Users Fields
-
-When [querying for elements](dev/element-queries/README.md) that have a Users field, you can filter the results based on the Users field data using a query param named after your field’s handle.
-
-Possible values include:
-
-| Value | Fetches elements…
-| - | -
-| `':empty:'` | that don’t have any related users.
-| `':notempty:'` | that have at least one related user.
+If you have an element with a Users field in your template, you can access its selected users using your Users field’s handle:
 
 ```twig
-{# Fetch entries with a related user #}
-{% set entries = craft.entries()
-    .<FieldHandle>(':notempty:')
-    .all() %}
+{% set users = entry.usersFieldHandle %}
 ```
 
-### Working with Users Field Data
-
-If you have an element with a Users field in your template, you can access its related users using your Users field’s handle:
+That will give you an [ElementCriteriaModel](templating/elementcriteriamodel.md) object, prepped to output all of the selected users for the given field. In other words, the line above is really just a shortcut for this:
 
 ```twig
-{% set relatedUsers = entry.<FieldHandle> %}
+{% craft.users({
+    relatedTo: { sourceElement: entry, field: "usersFieldHandle" },
+    order:     "sortOrder",
+    limit:     null
+}) %}
 ```
 
-That will give you a [user query](dev/element-queries/user-queries.md), prepped to output all of the related users for the given field.
+(See [Relations](relations.md) for more info on the `relatedTo` param.)
 
-To loop through all of the related users, call [all()](api:craft\db\Query::all()) and then loop over the results:
+### Examples
+
+To check if your Users field has any selected users, you can use the `length` filter:
 
 ```twig
-{% set relatedUsers = entry.<FieldHandle>.all() %}
-{% if relatedUsers|length %}
-    <ul>
-        {% for rel in relatedUsers %}
-            <li><a href="{{ url('profiles/'~rel.username) }}">{{ rel.name }}</a></li>
-        {% endfor %}
-    </ul>
+{% if entry.usersFieldHandle | length %}
+    ...
 {% endif %}
 ```
 
-If you only want the first related user, call [one()](api:craft\db\Query::one()) instead, and then make sure it returned something:
+To loop through the selected users, you can treat the field like an array:
 
 ```twig
-{% set rel = entry.<FieldHandle>.one() %}
-{% if rel %}
-    <p><a href="{{ url('profiles/'~rel.username) }}">{{ rel.name }}</a></p>
+{% for user in entry.usersFieldHandle %}
+    ...
+{% endfor %}
+```
+
+Rather than typing “`entry.usersFieldHandle`” every time, you can call it once and set it to another variable:
+
+```twig
+{% set users = entry.usersFieldHandle %}
+
+{% if users | length %}
+
+    <h3>Some great users</h3>
+    {% for user in users %}
+        ...
+    {% endfor %}
+
 {% endif %}
 ```
 
-If you just need to check if there are any related users (but don’t need to fetch them), you can call [exists()](api:craft\db\Query::exists()):
+You can add parameters to the ElementCriteriaModel object as well:
 
 ```twig
-{% if entry.<FieldHandle>.exists() %}
-    <p>There are related users!</p>
+{% set authors = entry.usersFieldHandle.group('authors') %}
+```
+
+If your Users field is only meant to have a single user selected, remember that calling your Users field will still give you the same ElementCriteriaModel, not the selected user. To get the first (and only) user selected, use `first()`:
+
+```twig
+{% set user = entry.myUsersField.first() %}
+
+{% if user %}
+    ...
 {% endif %}
 ```
 
-You can set [parameters](dev/element-queries/user-queries.md#parameters) on the user query as well. For example, to only fetch users in the `authors` group, set the [groupId](dev/element-queries/user-queries.md#groupid) param:
+### See Also
 
-```twig
-{% set relatedUsers = entry.<FieldHandle>
-    .group('authors')
-    .all() %}
-```
-
-## See Also
-
-* [User Queries](dev/element-queries/user-queries.md)
-* <api:craft\elements\User>
-* [Relations](relations.md)
+- [craft.users](templating/craft.users.md)
+- [ElementCriteriaModel](templating/elementcriteriamodel.md)
+- [UserModel](templating/usermodel.md)
+- [Relations](relations.md)

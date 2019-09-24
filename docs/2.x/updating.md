@@ -1,49 +1,34 @@
-# Updating Instructions
+# Updating
 
-## Updating from the Control Panel
+## One-click Updating
 
-When an update is available, users with the permission to update Craft will see a badge in the CP next to the Utilities navigation item in the sidebar. Click on Utilities and then choose Updates. You can also use the Updates widget on the Control Panel dashboard, which is installed by default.
+When an update is available, users with the permission to update Craft will see a badge in the CP header. Clicking on that badge will take you to a page that shows the release notes of all the available updates.
 
-This section displays both Craft CMS updates and plugin updates. Each update has its own Update button. Clicking that will initiate Craft’s self-updating process.
+You can get to that page at any time by clicking the “Check for updates” link in the CP footer as well. Whenever you go to the page, whether Craft thinks updates are available or not, the page will clear its cache and re-check for available updates.
 
-You can run all of the updates (Craft, all plugin updates available) using the Update All button at the top left of the Updates page.
+At the top of the page there is an “Update” button. Clicking that will initiate Craft’s self-updating process.
 
-## Updating from the Terminal
+For one-click updates to work, your craft/app folder and all its enclosed files and folders must be writable. The exact permissions you should use depend on the relationship between the user that Apache/PHP is running as and the user who actually owns the craft/config folder.
 
-Craft 3.0.38 and 3.1.4 introduced a new `update` console command that can be used to update Craft and plugins.
+Here are some recommended permissions depending on that relationship:
 
-To see available updates, go to your Craft project in your terminal and run this command:
+* If they are the same user, use `744`.
+* If they're in the same group, then use `774`.
+* Otherwise, use `777`.
 
-```bash
-./craft update
-```
 
-![An example interaction with the `update` command.](./images/cli-update-info.png)
+## Manually Updating
 
-To update everything all at once, run this command:
+The “Update” button on the Updates page has a context menu with an alternative “Download” option. Clicking on that will give you the same `Craft.zip` file you could have gotten by downloading Craft from [craftcms.com](https://craftcms.com).
 
-```bash
-./craft update all
-```
+When the zip has finished downloading, you can manually update your Craft install by replacing the old `craft/app/` folder with the new one.
 
-To update a specific thing, replace `all` with its handle (either `craft` to update Craft, or a plugin’s handle).
+If you’re manually updating a live site, we recommend you follow these instructions to minimize your site’s down time:
 
-```bash
-./craft update element-api
-```
-
-![An example interaction with the `update <handle>` command.](./images/cli-update-plugin.png)
-
-You can also pass multiple handles in at once:
-
-```bash
-./craft update element-api commerce
-```
-
-By default, Craft will update you to the latest available version. To update to a specific version, append `:<version>` to the handle:
-
-```bash
-./craft update element-api:2.5.4
-```
-
-Craft also provides an `update/composer-install` command, which behaves like the `composer install` command, but doesn’t require you to have Composer installed.
+1. Rename the `craft/app/` folder in the release to `app-new/`.
+2. Upload `craft/app-new/` to the craft folder on your server, alongside the old `craft/app/` folder.
+3. Once `app-new/` is done uploading, your FTP client may have uploaded the `app-new/` folder with different permissions that what your `craft/app/` folder currently has. If so, make sure app-new matches what `craft/app/` currently has.
+4. Rename the old `craft/app/` folder to `craft/app-old/`.
+5. Rename `app-new/` to `app/`.
+6. Point your browser to your Craft Control Panel. If the update needs to run any new database migrations, you will be prompted to proceed with a database update. Click “Finish up” and let the database updates run.
+7. Delete the `app-old/` folder.
