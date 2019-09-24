@@ -1,27 +1,28 @@
-# 日/時フィールド
+# Date/Time Fields
 
-日付フィールドは date picker を提供します。同様に、オプションで time picker を提供します。
+Date fields give you a date picker, and optionally a time picker as well.
 
-## 設定
+## Settings
 
-日/時フィールドは、日付、時刻、もしくはその両方にするか、お好みで選択できます。
+Date/Time fields let you choose whether you want to show the date, the time, or both.
 
-## テンプレート記法
+## Templating
 
-### 日/時フィールドによるエレメントの照会
+### Querying Elements with Checkboxes Fields
 
-日/時フィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、日/時フィールドのデータに基づいた結果をフィルタできます。
+When [querying for elements](dev/element-queries/README.md) that have a Date/Time field, you can filter the results based on the Date/Time field data using a query param named after your field’s handle.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するエレメント
-| - | -
-| `':empty:'` | 選択された日付を持たない。
-| `':notempty:'` | 選択された日付を持つ。
-| `'>= 2018-04-01'` | 2018-04-01 以降に選択された日付を持つもの。
-| `'< 2018-05-01'` | 2018-05-01 より前に選択された日付を持つもの。
-| `['and', '>= 2018-04-04', '< 2018-05-01']` | 2018-04-01 から 2018-05-01 の間に選択された日付を持つもの。
-| `['or', '< 2018-04-04', '> 2018-05-01']` | 2018-04-01 より前、または、2018-05-01 より後に選択された日付を持つもの。
+| Value                                            | Fetches elements…                                                |
+| ------------------------------------------------ | ---------------------------------------------------------------- |
+| `':empty:'`                                      | that don’t have a selected date.                                 |
+| `':notempty:'`                                   | that have a selected date.                                       |
+| `'>= 2018-04-01'`                             | that have a date selected on or after 2018-04-01.                |
+| `'< 2018-05-01'`                              | that have a date selected before 2018-05-01                      |
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that have a date selected between 2018-04-01 and 2018-05-01.     |
+| `['or', '< 2018-04-04', '> 2018-05-01']`   | that have a date selected before 2018-04-01 or after 2018-05-01. |
+
 
 ```twig
 {# Fetch entries with with a selected date in the next month #}
@@ -33,19 +34,17 @@
     .all() %}
 ```
 
-::: tip
-[atom](dev/filters.md#atom) フィルタは日付を ISO-8601 タイムスタンプに変換します。
-:::
+::: tip The [atom](dev/filters.md#atom) filter converts a date to an ISO-8601 timestamp. :::
 
-### 日/時フィールドデータの操作
+### Working with Date/Time Field Data
 
-テンプレート内で日/時フィールドのエレメントを取得する場合、日/時フィールドのハンドルを利用して、そのデータにアクセスできます。
+If you have an element with a Date/Time field in your template, you can access its value using your Date/Time field’s handle:
 
 ```twig
 {% set value = entry.<FieldHandle> %}
 ```
 
-それは、選択された日付を表す [DateTime](http://php.net/manual/en/class.datetime.php) オブジェクトを提供します。日付が選択されていない場合、`null` になります。
+That will give you a [DateTime](http://php.net/manual/en/class.datetime.php) object that represents the selected date, or `null` if no date was selected.
 
 ```twig
 {% if entry.<FieldHandle> %}
@@ -53,7 +52,7 @@
 {% endif %}
 ```
 
-Craft と Twig は、必要に応じて使用できる日付を操作するためのいくつかの Twig フィルタを提供します。
+Craft and Twig provide several Twig filters for manipulating dates, which you can use depending on your needs:
 
 - [date](dev/filters.md#date)
 - [time](dev/filters.md#time)
@@ -63,11 +62,11 @@ Craft と Twig は、必要に応じて使用できる日付を操作するた�
 - [rss](dev/filters.md#rss)
 - [date_modify](https://twig.symfony.com/doc/2.x/filters/date_modify.html)
 
-### 投稿フォームで日/時フィールドを保存
+### Saving Date/Time Fields in Entry Forms
 
-日/時フィールドを含める必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、`date` または `datetime-local` 入力欄を作成できます。
+If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Date/Time field, you can create a `date` or `datetime-local` input.
 
-ユーザーに日付だけを選択させたい場合、`date` 入力欄を使用します。
+If you just want the user to be able to select a date, use a `date` input:
 
 ```twig
 {% set currentValue = entry is defined and entry.<FieldHandle>
@@ -77,7 +76,7 @@ Craft と Twig は、必要に応じて使用できる日付を操作するた�
 <input type="date" name="fields[<FieldHandle>]" value="{{ currentValue }}">
 ```
 
-ユーザーに時刻も選択させたい場合、`datetime-local` 入力欄を使用できます。
+If you want the user to be able to select a time as well, use a `datetime-local` input:
 
 ```twig
 {% set currentValue = entry is defined and entry.<FieldHandle>
@@ -87,13 +86,11 @@ Craft と Twig は、必要に応じて使用できる日付を操作するた�
 <input type="datetime-local" name="fields[<FieldHandle>]" value="{{ currentValue }}">
 ```
 
-::: tip
-より良いブラウザサポートを[待っている間](https://caniuse.com/#feat=input-datetime)に `date` と `datetime-local` 入力欄を導入するため、[HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) ポリフィルを使用することができます。
-:::
+::: tip The [HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) polyfill can be used to implement `date` and `datetime-local` inputs [while we wait](https://caniuse.com/#feat=input-datetime) for better browser support. :::
 
-#### タイムゾーンのカスタマイズ
+#### Customizing the Timezone
 
-デフォルトでは、Craft は日付が UTC で投稿されていると想定します。Craft 3.1.6 から、入力欄の name を `fields[<FieldHandle>][datetime]`、不可視項目の name を `fields[<FieldHandle>][timezone]` とし、[有効な PHP タイムゾーン](http://php.net/manual/en/timezones.php)をセットすることによって、異なるタイムゾーンの日付を投稿できます。
+By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you you can post dates in a different timezone by changing the input name to `fields[<FieldHandle>][datetime]` and adding a hidden input named `fields[<FieldHandle>][timezone]`, set to a [valid PHP timezone](http://php.net/manual/en/timezones.php):
 
 ```twig
 {% set pt = 'America/Los_Angeles' %}
@@ -105,7 +102,7 @@ Craft と Twig は、必要に応じて使用できる日付を操作するた�
 {{ hiddenInput('fields[<FieldHandle>][timezone]', pt) }}
 ```
 
-または、どのタイムゾーンで日付を投稿するかをユーザーに決定させることもできます。
+Or you can let users decide which timezone the date should be posted in:
 
 ```twig
 {% set currentValue = entry is defined and entry.<FieldHandle>
@@ -121,22 +118,19 @@ Craft と Twig は、必要に応じて使用できる日付を操作するた�
 </select>
 ```
 
-#### 日付と時刻を別々に投稿
+#### Posting the Date and Time Separately
 
-日付と時刻を別々の HTML 入力欄として投稿したい場合、それらの name を `fields[<FieldHandle>][date]`、および、`fields[<FieldHandle>][time]`にします。
+If you’d like to post the date and time as separate HTML inputs, give them the names `fields[<FieldHandle>][date]` and `fields[<FieldHandle>][time]`.
 
-日付入力欄は `YYYY-MM-DD` フォーマット、または、現在のロケールの短縮日付フォーマットのいずれかをセットできます。
+The date input can either be set to the `YYYY-MM-DD` format, or the current locale’s short date format.
 
-時刻入力欄は `HH:MM` フォーマット（24時間表記）、または、現在のロケールの短縮時刻フォーマットのいずれかをセットできます。
+The time input can either be set to the `HH:MM` format (24-hour), or the current locale’s short time format.
 
-::: tip
-現在のロケールの日付と時刻のフォーマットを調べるには、テンプレートに次のコードを追加してください。
+::: tip To find out what your current locale’s date and time formats are, add this to your template:
 
 ```twig
-日付のフォーマット： <code>{{ craft.app.locale.getDateFormat('short', 'php') }}</code><br>
-時刻のフォーマット： <code>{{ craft.app.locale.getTimeFormat('short', 'php') }}</code>
+Date format: <code>{{ craft.app.locale.getDateFormat('short', 'php') }}</code><br>
+Time format: <code>{{ craft.app.locale.getTimeFormat('short', 'php') }}</code>
 ```
 
-次に、PHP の [date()](http://php.net/manual/en/function.date.php) ファンクションのドキュメントを参照し、各フォーマットの文字の意味を確認してください。
-:::
-
+Then refer to PHP’s [date()](http://php.net/manual/en/function.date.php) function docs to see what each of the format letters mean. :::
