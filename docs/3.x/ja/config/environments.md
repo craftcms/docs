@@ -1,49 +1,49 @@
-# 環境設定
+# Environmental Configuration
 
-いくつかの設定は、それぞれの環境ごとに定義する必要があります。例えば、ローカル環境での開発時はサイトのベース URL を `http://my-project.test`、本番環境では `https://my-project.com`にしたいかもしれません。
+Some settings should be defined on a per-environment basis. For example, when developing locally, you may want your site’s base URL to be `http://my-project.test`, but on production it should be `https://my-project.com`.
 
-## コントロールパネルの設定
+## Control Panel Settings
 
-コントロールパネル内のいくつかの設定は、（`.env` ファイルで定義されているような）環境変数にセットできます。
+Some settings in the Control Panel can be set to environment variables (like the ones defined in your `.env` file):
 
-- 一般
-   - **システム名**
-- サイト
-   - **ベース URL**
-- アセットボリューム
-   - **ベース URL**
-   - **ファイルシステムのパス**（ローカル）
-- メール
-   - **システムのメールアドレス**
-   - **差出人の名前**
-   - **HTML メールのテンプレート**
-   - **ユーザー名**（Gmail、および、SMTP）
-   - **パスワード**（Gmail、および、SMTP）
-   - **ホストネーム**（SMTP）
-   - **ポート**（SMTP）
+- General Settings 
+  - **System Name**
+- Sites 
+  - **Base URL**
+- Sections 
+  - **Preview Target URIs**
+- Asset Volumes 
+  - **Base URL**
+  - **File System Path** (Local)
+- Email 
+  - **System Email Address**
+  - **Sender Name**
+  - **HTML Email Template**
+  - **Username** (Gmail and SMTP)
+  - **Password** (Gmail and SMTP)
+  - **Host Name** (SMTP)
+  - **Port** (Port)
 
-これらの設定を環境変数にセットするには、環境変数の名前を `$` に続けて入力してください。
+To set these settings to an environment variable, type `$` followed by the environment variable’s name.
 
-![ボリュームのベース URL 設定](../images/volume-base-url-setting.jpg)
+![A volume’s Base URL setting](../images/volume-base-url-setting.jpg)
 
-環境変数の名前だけがデータベース、または、プロジェクトコンフィグ内に保存さるため、環境ごとに変更したり機密性の高い情報を含む設定値をセットするのにとても良い方法です。
+Only the environment variable’s name will be stored in your database or project config, so this is a great way to set setting values that may change per-environment, or contain sensitive information.
 
-::: tip
-プラグインも同様に、それぞれの設定内で環境設定やエイリアスのためのサポートを追加できます。どのようにするかを知るには、[環境設定](../extend/environmental-settings.md)を参照してください。
-:::
+::: tip Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](../extend/environmental-settings.md) to learn how. :::
 
-### コントロールパネルの設定内でのエイリアスの利用
+### Using Aliases in Control Panel Settings
 
-（URL やファイルステムのパスを保存する）これらの設定のいくつかは[エイリアス](README.md#aliases)に設定することもできます。ベース URL やパスを環境変数内に保存し、追加のセグメントを付加したい場合に役立ちます。
+Some of these settings—the ones that store a URL or a file system path—can also be set to [aliases](README.md#aliases), which is helpful if you just want to store a base URL or path in an environment variable, and append additional segments onto it.
 
-例えば、サイトのルート URL にセットされる環境変数 `ROOT_URL` を定義できます。
+For example, you can define a `ROOT_URL` environment variable that is set to the root URL of your site:
 
 ```bash
 # -- .env --
 ROOT_URL="http://my-project.test"
 ```
 
-次に、それを参照するエイリアス `@rootUrl` を作成します。
+Then create a `@rootUrl` alias that references it:
 
 ```php
 // -- config/general.php --
@@ -52,11 +52,11 @@ ROOT_URL="http://my-project.test"
 ],
 ```
 
-これで（例として）ユーザーフォトのボリュームの設定画面に移動し、ベース URL に `@rootUrl/images/user-photos` をセットできます。
+Then you could go into your User Photos volume’s settings (for example) and set its Base URL to `@rootUrl/images/user-photos`.
 
-## コンフィグファイル
+## Config Files
 
-PHP の [getenv()](http://php.net/manual/en/function.getenv.php) ファンクションを使用して、環境変数を[一般設定](config-settings.md)、[データベース設定](db-settings.md)、および、他の PHP 設定ファイルにセットできます。
+You can set your [general config settings](config-settings.md), [database connection settings](db-settings.md), and other PHP config files to environment variables using PHP’s [getenv()](http://php.net/manual/en/function.getenv.php) function:
 
 ```bash
 # -- .env --
@@ -68,9 +68,9 @@ CP_TRIGGER="secret-word"
 'cpTrigger' => getenv('CP_TRIGGER') ?: 'admin',
 ```
 
-### マルチ環境設定
+### Multi-Environment Configs
 
-Craft の PHP 設定ファイルは、オプションでそれぞれの環境ごとに別々の設定を定義できます。
+Craft’s PHP config files can optionally define separate config settings for each individual environment.
 
 ```php
 // -- config/general.php --
@@ -92,9 +92,9 @@ return [
 ];
 ```
 
-Craft がマルチ環境のキーとしてそれを取り扱うことを知るために、ここでは `'*'` キーが必須となりますが、他のキーはあなた次第です。Craft は `web/index.php` ファイルに定義されている PHP 定数 [CRAFT_ENVIRONMENT](php-constants.md#craft-environment) とマッチするキーを探します。（フォールバックとして、サーバーのホスト名が使用されます。）
+The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you. Craft will look for the key(s) that match the [CRAFT_ENVIRONMENT](php-constants.md#craft-environment) PHP constant, which should be defined by your `web/index.php` file. (Your server’s hostname will be used as a fallback.)
 
-デフォルトでは、新しい Craft 3 プロジェクトは `.env` ファイルに定義された `ENVIRONMENT` 環境変数を使用して[CRAFT_ENVIRONMENT](php-constants.md#craft-environment) 定数を定義します。
+By default, new Craft 3 projects will define the [CRAFT_ENVIRONMENT](php-constants.md#craft-environment) constant using an environment variable called `ENVIRONMENT`, which is defined in the `.env` file:
 
 ```bash
 # -- .env --
@@ -105,4 +105,3 @@ ENVIRONMENT="dev"
 // -- web/index.php --
 define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
 ```
-
