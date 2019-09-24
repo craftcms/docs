@@ -1,27 +1,28 @@
-# ラジオボタンフィールド
+# Radio Buttons Fields
 
-ラジオボタンフィールドでは、ラジオボタンのグループが提供されます。
+Radio Buttons fields give you a group of radio buttons.
 
-## 設定
+## Settings
 
-ラジオボタンフィールドの設定は、次の通りです。
+Radio Buttons fields have the following settings:
 
-* **ラジオボタンのオプション** – フィールドで利用可能なラジオボタンを定義します。オプションの値とラベルを別々に設定したり、デフォルトで選択状態にしておくものを選択できます。
+* **Radio Button Options** – Define the radio buttons that will be available in the field. You even get to set the option values and labels separately, and choose which one should be selected by default.
 
-## テンプレート記法
+## Templating
 
-### ラジオボタンフィールドによるエレメントの照会
+### Querying Elements with Radio Buttons Fields
 
-ラジオボタンフィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、ラジオボタンフィールドのデータに基づいた結果をフィルタできます。
+When [querying for elements](dev/element-queries/README.md) that have a Radio Buttons field, you can filter the results based on the Radio Buttons field data using a query param named after your field’s handle.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するエレメント
-| - | -
-| `'foo'` | `foo` オプションが選択されている。
-| `'not foo'` | `foo` オプションが選択さていない。
-| `['foo', 'bar']` | `foo` または `bar` オプションのいずれかが選択されている。
-| `['not', 'foo', 'bar']` | `foo` または `bar` オプションのいずれかが選択されていない。
+| Value                   | Fetches elements…                                |
+| ----------------------- | ------------------------------------------------ |
+| `'foo'`                 | with a `foo` option selected.                    |
+| `'not foo'`             | without a `foo` option selected.                 |
+| `['foo', 'bar']`        | with either a `foo` or `bar` option selected.    |
+| `['not', 'foo', 'bar']` | without either a `foo` or `bar` option selected. |
+
 
 ```twig
 {# Fetch entries with the 'foo' option selected #}
@@ -30,35 +31,35 @@
     .all() %}
 ```
 
-### ラジオボタンフィールドデータの操作
+### Working with Radio Buttons Field Data
 
-テンプレート内でラジオボタンフィールドのエレメントを取得する場合、ラジオボタンフィールドのハンドルを利用して、そのデータにアクセスできます。
+If you have an element with a Radio Buttons field in your template, you can access its data using your Radio Buttons field’s handle:
 
 ```twig
 {% set value = entry.<FieldHandle> %}
 ```
 
-それは、フィールドデータを含む <api:craft\fields\data\SingleOptionFieldData> オブジェクトを提供します。
+That will give you a <api:craft\fields\data\SingleOptionFieldData> object that contains the field data.
 
-選択されたオプションを表示するには、それを文字列として出力するか、[value](api:craft\fields\data\SingleOptionFieldData::$value) プロパティを出力してください。
+To show the selected option, output it as a string, or output the [value](api:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ```twig
 {{ entry.<FieldHandle> }} or {{ entry.<FieldHandle>.value }}
 ```
 
-任意のオプションが選択されているかを確認するには、[value](api:craft\fields\data\SingleOptionFieldData::$value) プロパティを使用してください。
+To see if an option is selected, use the [value](api:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ```twig
 {% if entry.<FieldHandle>.value %}
 ```
 
-選択されたオプションのラベルを表示するには、[label](api:craft\fields\data\SingleOptionFieldData::$label) プロパティを出力してください。
+To show the selected option’s label, output the [label](api:craft\fields\data\SingleOptionFieldData::$label) property:
 
 ```twig
 {{ entry.<FieldHandle>.label }}
 ```
 
-利用可能なオプションすべてをループするには、[options](api:craft\fields\data\SingleOptionFieldData::getOptions()) プロパティを反復してください。
+To loop through all of the available options, iterate over the [options](api:craft\fields\data\SingleOptionFieldData::getOptions()) property:
 
 ```twig
 {% for option in entry.<FieldHandle>.options %}
@@ -68,9 +69,9 @@
 {% endfor %}
 ```
 
-### 投稿フォームでラジオボタンフィールドを保存
+### Saving Radio Buttons Fields in Entry Forms
 
-ラジオボタンフィールドを含める必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、出発点としてこのテンプレートを使用してください。
+If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Radio Buttons field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('<FieldHandle>') %}
@@ -92,4 +93,3 @@
     {% endfor %}
 </ul>
 ```
-
