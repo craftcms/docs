@@ -1,6 +1,6 @@
-# エントリの投稿フォーム
+# Entry Form
 
-次のコードを利用して、サイトのフロントエンド向けに新しいエントリの投稿フォームを作成できます。
+You can create a new entry form for the front-end of your site using the following code:
 
 ```twig
 {% macro errorList(errors) %}
@@ -41,17 +41,17 @@
 
     <input type="submit" value="Publish">
 </form>
+
 ```
 
-「sectionId」は必ずエントリを保存したいセクションの実際の ID に調整してください。
+Be sure and adjust the “sectionId” to the actual ID of the section want to save the entry to.
 
-エントリを送信するユーザーは、そのセクションのエントリを作成するための権限を持っている必要があります。
+The user submitting the entry will also need to have the permission necessary to create entries for the section they are posting to.
 
-### エントリの編集フォーム
+### Editing Entry Form
 
-不可視項目の「entryId」を追加すると、既存のエントリを保存するためのフォームに変更できます。
+You can modify the form to save existing entries by adding an “entryId” hidden input to the form:
 
 ```twig
 {{ hiddenInput('entryId', entry.id) }}
 ```
-
