@@ -1,56 +1,50 @@
-# マイグレーション
+# Migrations
 
-マイグレーションは、システムに一時的な変更を加える PHP クラスです。
+Migrations are PHP classes that make one-time changes to the system.
 
-ほとんどの場合、Craft のマイグレーションは [Yii の実装](https://www.yiiframework.com/doc/guide/2.0/en/db-migrations)と同様に機能しますが、Yii と異なり、Craft は3種類のマイグレーションを管理します。
+For the most part, migrations in Craft work similarly to [Yii’s implementation](https://www.yiiframework.com/doc/guide/2.0/en/db-migrations), but unlike Yii, Craft manages three different types of migrations:
 
-- **アプリケーションのマイグレーション** – Craft 独自の内部的なマイグレーション
-- **プラグインのマイグレーション** – インストールされたプラグインが持つ独自のマイグレーショントラック
-- **コンテンツのマイグレーション** - Craft プロジェクト自体もマイグレーションできます。
+- **App migrations** – Craft’s own internal migrations.
+- **Plugin migrations** – Each installed plugin has its own migration track.
+- **Content migrations** – Your Craft project itself can have migrations, too.
 
-## マイグレーションの作成
+## Creating Migrations
 
-::: tip
-Craft のインストールが Vagrant box から実行されている場合、これらのコマンドを実行するために box に SSH 接続する必要があります。
-:::
+::: tip If your Craft install is running from a Vagrant box, you will need to SSH into the box to run these commands. :::
 
-プラグインやプロジェクトのための新しいマイグレーションを作成するために、ターミナルを開き Craft プロジェクトに移動してください。
+To create a new migration for your plugin or project, open up your terminal and go to your Craft project:
 
 ```bash
 cd /path/to/project
 ```
 
-それから、プラグインのための新しいマイグレーションファイルを生成するために次のコマンドを実行します（`<migration_name>` を snake_case のマイグレーション名に、`<plugin-handle>` を kebab-case のプラグインハンドルに置き換えます）。
+Then run the following command to generate a new migration file for your plugin or project (replacing `<migration_name>` with your migration’s name in snake_case, and `<plugin-handle>` with your plugin handle in kebab-case):
 
 ::: code
 
-```bash Plugin Migration
-./craft migrate/create <migration_name> --plugin=<plugin-handle>
-```
+```bash Plugin Migration ./craft migrate/create <migration_name> --plugin=<plugin-handle>
 
-```bash Content Migration
-./craft migrate/create <migration_name>
-```
+    <br />```bash Content Migration
+    ./craft migrate/create &lt;migration_name&gt;
+    
 
 :::
 
-プロンプトで `yes` と入力すると、新しいマイグレーションファイルが作成されます。 コマンドによって出力されたファイルパスで見つけることができます。
+Enter `yes` at the prompt, and a new migration file will be created for you. You can find it at the file path output by the command.
 
-プラグインのマイグレーションの場合、プラグインの[スキーマバージョン](api:craft\base\PluginTrait::$schemaVersion)を上げてください。そうすることで、Craft は新しいバージョンにアップデートするように新しいプラグインのマイグレーションをチェックすることを知ります。
+If this is a plugin migration, increase your plugin’s [schema version](api:craft\base\PluginTrait::$schemaVersion), so Craft knows to check for new plugin migrations as people update to your new version.
 
-### 内部で行うこと
+### What Goes Inside
 
-マイグレーションクラスには [safeUp()](api:yii\db\Migration::safeUp()) と [safeDown()](api:yii\db\Migration::safeDown()) メソッドが含まれます。マイグレーションが _適用される_ ときに `safeUp()` が実行され、_復帰させる_ ときに `safeDown()` が実行されます。
+Migration classes contain methods: [safeUp()](api:yii\db\Migration::safeUp()) and [safeDown()](api:yii\db\Migration::safeDown()). `safeUp()` is run when your migration is *applied*, and `safeDown()` is run when your migration is *reverted*.
 
-::: tip
-コントロールパネルから Craft がマイグレーションを元に戻す方法がないため、通常 `safeDown()` メソッドは無視できます。
-:::
+::: tip You can usually ignore the `safeDown()` method, as Craft doesn’t have a way to revert migrations from the Control Panel. :::
 
-`safeUp()` メソッドから [Craft の API](https://docs.craftcms.com/api/v3/) にフルアクセスできますが、プラグインのマイグレーションはここでプラグイン独自の API を呼び出すことを避けるようにする必要があります。長い間にプラグインのデータベーススキーマが変化するように、スキーマに関する API の想定も変化します。古いマイグレーションが、まだ適用されていないデータベースの変更を前提とするサービスメソッドを呼び出すと、SQL エラーをもたらすでしょう。そのため、一般的には独自のマイグレーションクラスからすべての SQL クエリを直接実行する必要があります。コードを複製しているように感じるかもしれませんが、将来的にも保証されるでしょう。
+You have full access to [Craft’s API](https://docs.craftcms.com/api/v3/) from your `safeUp()` method, but plugin migrations should try to avoid calling the plugin’s own API here. As your plugin’s database schema changes over time, so will your API’s assumptions about the schema. If an old migration calls a service method that relies on database changes that haven’t been applied yet, it will result in a SQL error. So in general you should execute all SQL queries directly from your own migration class. It may feel like you’re duplicating code, but it will be more future-proof.
 
-### データベースデータの操作
+### Manipulating Database Data
 
-マイグレーションクラスは <api:craft\db\Migration> を拡張し、データベースを操作するためのいくつかのメソッドを提供しています。マイグレーションメソッドはどちらも使いやすく、ターミナルにステータスメッセージを出力するため、<api:craft\db\Command> よりもこれらを使う方が良いでしょう。
+Your migration class extends <api:craft\db\Migration>, which provides several methods for working with the database. It’s better to use these than their <api:craft\db\Command> counterparts, because the migration methods are both simpler to use, and they’ll output a status message to the terminal for you.
 
 ```php
 // Bad:
@@ -62,12 +56,9 @@ $this->db->createCommand()
 $this->insert('{{%tablename}}', $rows);
 ```
 
-::: warning
-<api:api:yii\db\Migration::insert()>、[batchInsert()](api:craft\db\Migration::batchInsert())、および、[update()](api:yii\db\Migration::update()) マイグレーションメソッドは、引数 `$columns` で指定したものに加えて `dateCreated`、 `dateUpdated`、`uid` テーブルのカラムにあるデータを自動的に挿入 / アップデートします。操作しているテーブルにこれらのカラムがない場合、引数 `$includeAuditColumns` に `false` を渡して、SQL エラーにならないようにしてください。
-:::
+::: warning The <api:api:yii\db\Migration::insert()>, [batchInsert()](api:craft\db\Migration::batchInsert()), and [update()](api:yii\db\Migration::update()) migration methods will automatically insert/update data in the `dateCreated`, `dateUpdated`, `uid` table columns in addition to whatever you specified in the `$columns` argument. If the table you’re working with does’t have those columns, make sure you pass `false` to the `$includeAuditColumns` argument so you don’t get a SQL error. :::
 
-::: tip
-<api:craft\db\Migration> はデータを _選択する_ ためのメソッドを持たないため、Yii の[クエリビルダー](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder)を通す必要があります。
+::: tip <api:craft\db\Migration> doesn’t have a method for *selecting* data, so you will still need to go through Yii’s [Query Builder](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder) for that.
 
 ```php
 use craft\db\Query;
@@ -79,43 +70,41 @@ $result = (new Query())
 
 :::
 
-### ロギング
+### Logging
 
-マイグレーションコード内でメッセージを記録したい場合、[Craft::info()](api:yii\BaseYii::info()) を呼び出すよりも echo で出力してください。
+If you want to log any messages in your migration code, echo it out rather than calling [Craft::info()](api:yii\BaseYii::info()):
 
 ```php
 echo "    > some note\n";
 ```
 
-マイグレーションがコンソールリクエストから実行された場合、メッセージがターミナル内に出力されるため、マイグレーションを実行している人がそのメッセージを見ることを保証します。ウェブリクエストであれば、`Craft::info()` を使用したときと同様に、Craft がそれを取得して `storage/logs/` に記録します。
+If the migration is being run from a console request, this will ensure the message is seen by whoever is executing the migration, as the message will be output into the terminal. If it’s a web request, Craft will capture it and log it to `storage/logs/` just as if you had used `Craft::info()`.
 
-## マイグレーションの実行
+## Executing Migrations
 
-ターミナルから Craft に新しいマイグレーションを適用することができます。
+You can have Craft apply your new migration from the terminal:
 
 ::: code
 
-```bash Plugin Migration
-./craft migrate/up --plugin=<plugin-handle>
-```
+```bash Plugin Migration ./craft migrate/up --plugin=<plugin-handle>
 
-```bash Content Migration
-./craft migrate/up
-```
+    <br />```bash Content Migration
+    ./craft migrate/up
+    
 
 :::
 
-または、すべてのマイグレーショントラックを通じて Craft にすべての新しいマイグレーションを適用することもできます。
+Or you can have Craft apply all new migrations across all migration tracks:
 
 ```bash
 ./craft migrate/all
 ```
 
-Craft はコントロールパネルのリクエストで新しい[スキーマバージョン](api:craft\base\PluginTrait::$schemaVersion)を持つプラグインの新しいプラグインのマイグレーションをチェックし、コンテンツのマイグレーションはコントロールパネルの「ユーティリティ > マイグレーション」から適用できます。
+Craft will also check for new plugin migrations on Control Panel requests, for any plugins that have a new [schema version](api:craft\base\PluginTrait::$schemaVersion), and content migrations can be applied from the Control Panel by going to Utilities → Migrations.
 
-## プラグインのインストールマイグレーション
+## Plugin Install Migrations
 
-プラグインは、プラグインのインストールとアンインストールで処理される特別な「インストール」マイグレーションを持つことができます。インストールマイグレーションは、通常のマイグレーションと並行して `migrations/Install.php` にあります。次のテンプレートに従うべきです。
+Plugins can have a special “Install” migration which handles the installation and uninstallation of the plugin. Install migrations live at `migrations/Install.php` alongside normal migrations. They should follow this template:
 
 ```php
 <?php
@@ -137,21 +126,19 @@ class Install extends Migration
 }
 ```
 
-マイグレーション名「`install`」を渡すと、`migrate/create` コマンドでプラグインにインストールマイグレーションを与えることができます。
+You can give your plugin an install migration with the `migrate/create` command if you pass the migration name “`install`”:
 
 ```bash
 ./craft migrate/create install --plugin=<plugin-handle>
 ```
 
-プラグインがインストールマイグレーションを持つ場合、`safeUp()` メソッドはプラグインがインストールされるときに呼び出されます。そして、`safeDown()` メソッドはプラグインがアンインストールされるときに呼び出されます（プラグインの [install()](api:craft\base\Plugin::install())、および、[uninstall()](api:craft\base\Plugin::uninstall()) メソッドによって呼び出されます）。
+When a plugin has an Install migration, its `safeUp()` method will be called when the plugin is installed, and its `safeDown()` method will be called when the plugin is uninstalled (invoked by the plugin’s [install()](api:craft\base\Plugin::install()) and [uninstall()](api:craft\base\Plugin::uninstall()) methods).
 
-::: tip
-`plugins` データベーステーブルの行を管理するのはプラグインの責任 *ではありません*。Craft がそれをケアします。
-:::
+::: tip It is *not* a plugin’s responsibility to manage its row in the `plugins` database table. Craft takes care of that for you. :::
 
-### デフォルトのプロジェクトコンフィグデータの設定
+### Setting Default Project Config Data
 
-直接、または、プラグインの API を経由して、インストール時に [project config](project-config.md) に何かを追加したい場合、必ず新しい `project.yaml` ファイルにそのプラグインのレコードを持っていないことを確認してください。
+If you want to add things to the [project config](project-config.md) on install, either directly or via your plugin’s API, be sure to only do that if the incoming `project.yaml` file doesn’t already have a record of your plugin.
 
 ```php
 public function safeUp()
@@ -165,5 +152,4 @@ public function safeUp()
 }
 ```
 
-なぜなら、プロジェクトコンフィグの同期の一部としてプラグインがインストールされている可能性があるためです。インストールマイグレーションが独自にプロジェクトコンフィグを変更する場合、`project.yaml` からの新しい変更をすべて上書きしてしまいます。
-
+That’s because there’s a chance that your plugin is being installed as part of a project config sync, and if its Install migration were to make any project config changes of its own, they would overwrite all of the incoming changes from `project.yaml`.
