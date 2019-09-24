@@ -1,25 +1,26 @@
-# チェックボックスフィールド
+# Checkboxes Fields
 
-チェックボックスフィールドでは、チェックボックスのグループが提供されます。
+Checkboxes fields give you a group of checkboxes.
 
-## 設定
+## Settings
 
-チェックボックスの設定は、次の通りです。
+Checkboxes fields have the following settings:
 
-* **チェックボックスのオプション** – フィールドで利用可能なチェックボックスを定義します。オプションの値とラベルを別々に設定したり、デフォルトでチェックしておくものを選択できます。
+* **Checkbox Options** – Define the checkboxes that will be available in the field. You even get to set the option values and labels separately, and choose which ones should be checked by default.
 
-## テンプレート記法
+## Templating
 
-### チェックボックスフィールドによるエレメントの照会
+### Querying Elements with Checkboxes Fields
 
-チェックボックスフィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、チェックボックスフィールドのデータに基づいた結果をフィルタできます。
+When [querying for elements](dev/element-queries/README.md) that have a Checkboxes field, you can filter the results based on the Checkboxes field data using a query param named after your field’s handle.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するエレメント
-| - | -
-| `'*"foo"*'` | `foo` オプションが選択されている。
-| `'not *"foo"*'` | `foo` オプションが選択されていない。
+| Value           | Fetches elements…               |
+| --------------- | ------------------------------- |
+| `'*"foo"*'`     | with a `foo` option checked.    |
+| `'not *"foo"*'` | without a `foo` option checked. |
+
 
 ```twig
 {# Fetch entries with the 'foo' option checked #}
@@ -28,17 +29,17 @@
     .all() %}
 ```
 
-### チェックボックスフィールドデータの操作
+### Working with Checkboxes Field Data
 
-テンプレート内でチェックボックスフィールドのエレメントを取得する場合、チェックボックスフィールドのハンドルを利用して、そのデータにアクセスできます。
+If you have an element with a Checkboxes field in your template, you can access its data using your Checkboxes field’s handle:
 
 ```twig
 {% set value = entry.<FieldHandle> %}
 ```
 
-それは、フィールドデータを含む <api:craft\fields\data\MultiOptionsFieldData> オブジェクトを提供します。
+That will give you a <api:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
 
-選択されたオプションすべてをループするには、フィールド値を反復してください。
+To loop through all the checked options, iterate over the field value:
 
 ```twig
 {% for option in entry.<FieldHandle> %}
@@ -47,7 +48,7 @@
 {% endfor %}
 ```
 
-利用可能なオプションすべてをループするには、[options](api:craft\fields\data\MultiOptionsFieldData::getOptions()) プロパティを反復してください。
+To loop through all of the available options, iterate over the [options](api:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
 
 ```twig
 {% for option in entry.<FieldHandle>.options %}
@@ -57,21 +58,21 @@
 {% endfor %}
 ```
 
-いずれかのチェックボックスが選択されているかを確認するには、[length](https://twig.symfony.com/doc/2.x/filters/length.html) フィルタを使用してください。
+To see if any options are checked, use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter:
 
 ```twig
 {% if entry.<FieldHandle>|length %}
 ```
 
-特定のオプションが選択されているかを確認するには、[contains()](api:craft\fields\data\MultiOptionsFieldData::contains()) を使用してください。
+To see if a particular option is checked, use [contains()](api:craft\fields\data\MultiOptionsFieldData::contains())
 
 ```twig
 {% if entry.<FieldHandle>.contains('foo') %}
 ```
 
-### 投稿フォームでチェックボックスフィールドを保存
+### Saving Checkboxes Fields in Entry Forms
 
-チェックボックスフィールドを含める必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、出発点としてこのテンプレートを使用してください。
+If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Checkboxes field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('<FieldHandle>') %}
@@ -97,4 +98,3 @@
     {% endfor %}
 </ul>
 ```
-
