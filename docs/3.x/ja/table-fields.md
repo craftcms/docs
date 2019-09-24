@@ -1,28 +1,28 @@
-# テーブルフィールド
+# Table Fields
 
-テーブルフィールドでは、複数行のコンテンツを作成できるカスタマイズ可能なテーブルを提供されます。
+Table fields give you a customizable table, where you can create multiple rows of content.
 
-## 設定
+## Settings
 
-テーブルフィールドの設定は、次の通りです。
+Table fields have the following settings:
 
-* **テーブルの欄** – テーブルフィールドで利用可能な列を定義します。
+* **Table Columns** – Define the columns that will be available to your Table field.
+    
+    Each column has the following properties:
+    
+  * *Column Heading* – The name that will appear in the head of the table
+  * *Handle* – How you’ll refer to this column from your templates
+  * *Width* – The width for this column specified in either pixels or a percentage
+  * *Type* – The type of content allowed in the column. Choose from Single-line text, Multi-line text, Number, Checkbox, Date, Time, Lightswitch, and Color.
+* **Default Values** – Define the default row and column values for new instances of the field.
 
-   それぞれの列には、次のプロパティがあります。
-   * *列の見出し* – テーブルのヘッダに表示する名前
-   * *ハンドル* – テンプレートから、この列を参照する方法
-   * *幅* – ピクセルまたはパーセントで指定された、この列の幅
-   * *タイプ* – 列に許可されるコンテンツのタイプ。一行テキスト、複数行のテキスト、数字、チェックボックス、日付、時間、LightSwitch、色から選択します。
+## The Field
 
-* **デフォルトの変数** – フィールドの新しいインスタンスを作成したときにセットされる行および列のデフォルト値を定義します。
+Table fields will show the table as configured based on the field settings. You can reorder, delete, and add new rows, and modify their values.
 
-## フィールド
+## Templating
 
-テーブルフィールドでは、フィールド設定で定義されたテーブルが表示されます。並び替えや削除、新しい行の追加、値の変更ができます。
-
-## テンプレート記法
-
-テンプレート内でテーブルフィールドを呼び出すと、行の配列を返します。それぞれの行は、その行の列ごとの値を保持するサブ配列です。
+Calling a Table field in your templates will return an array of the rows. Each row is a sub-array which holds each of the columns’ values for that row.
 
 ```twig
 {% if entry.whiskeyTableHandle|length %}
@@ -35,4 +35,3 @@
     </ul>
 {% endif %}
 ```
-
