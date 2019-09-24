@@ -1,61 +1,61 @@
-# 更新履歴とアップデート
+# Changelogs and Updates
 
-プラグインストアでプラグインを[公開する](plugin-store.md)とき、リポジトリのプラグインの更新履歴のパスを指定することができます。
+When you [publish](plugin-store.md) your plugin in the Plugin Store, you will be able to specify a path to your plugin’s changelog within the repository.
 
-有効な更新履歴のパスがセットされている場合、プラグインの新しいアップデートをリリースするごとにプラグインストアは更新履歴を再ダウンロードし、「ユーティリティ > アップデート」ページに利用可能なプラグインアップデートのリリースノートを表示するために使用されます。
+If this is set to a valid changelog path, then each time you release a new update for your plugin, the Plugin Store will re-download your changelog, and use it to display release notes for any available plugin updates on the Utilities → Updates page.
 
-## 更新履歴のセットアップ
+## Setting Up a Changelog
 
-プラグイン向けのリリースノートの文書化をはじめる際、プラグインのリポジトリのルートに `CHANGELOG.md` ファイルを作成してください。このようなものを出発点として使用してください。
+Create a `CHANGELOG.md` file at the root of your plugin’s repo, where you can start documenting release notes for your plugin. Use something like this as a starting point:
 
 ```markdown
 # Release Notes for <Plugin Name>
 ```
 
-更新履歴内では、リリースは**降順**（最新から古い順）でリストされている必要があります。（利用可能なプラグインアップデートを表示する際、プラグインストアはユーザーのインストールしているバージョンより古いか同じバージョンを見つけた時点で、プラグインの更新履歴のパースをストップします。）
+Within the changelog, releases must be listed in **descending order** (newest-to-oldest). (When displaying available plugin updates, the Plugin Store will stop parsing a plugin’s changelog as soon as it finds a version that is older than or equal to the user’s installed version.)
 
-## バージョン見出し
+## Version Headings
 
-更新履歴のバージョン見出しは、次のフォーマットに従う必要があります。
+Version headings in your changelog must follow this format:
 
 ```markdown
 ## X.Y.Z - YYYY-MM-DD
 ```
 
-そこには多少の余地があります。
+There’s a little wiggle room on that:
 
-- プラグイン名のような他のテキストが、バージョン番号の前に来ることができます。
-- 4番目のバージョン番号は許可されています（例：`1.2.3.4`）。
-- プレリリース版は許可されています（例：`1.0.0-alpha.1`）。
-- バージョンは `v` ではじめることができます（例：`v1.2.3`）。
-- バージョンをハイパーリンクにすることができます（例：`[1.2.3]`）。
-- 日付のセパレーターにハイフンではなくドットを使用できます（例：`2017.01.21`）。
+- Other text can come before the version number, like the plugin’s name.
+- A 4th version number is allowed (e.g. `1.2.3.4`).
+- Pre-release versions are allowed (e.g. `1.0.0-alpha.1`).
+- The version can start with `v` (e.g. `v1.2.3`).
+- The version can be hyperlinked (e.g. `[1.2.3]`).
+- Dates can use dots as separators, rather than hyphens (e.g. `2017.01.21`).
 
-このフォーマットに従わない H2 は、次の H2 までに続くいかなるコンテンツも含めて無視されます。
+Any H2s that don’t follow this format will be ignored, including any content that follows them leading up to the next H2.
 
-## リリースノート
+## Release Notes
 
-バージョン見出し（次の H2 まで）に続くすべてのコンテンツは、そのアップデートのリリースノートとして扱われます。
+All content that follows a version heading (up to the next H2) will be treated as the release notes for the update.
 
-リリースノートを書く際は [keepachangelog.com](https://keepachangelog.com/) のガイドラインに従うことをお勧めしますが、[GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/#GitHub-flavored-markdown) のすべての形式が許可されています。許可 *されない* 唯一のものは、実際の HTML コードで、エスケープされます。
+When writing release notes, we recommend that you follow the guidelines at [keepachangelog.com](https://keepachangelog.com/), but all forms of [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/#GitHub-flavored-markdown) are allowed. The only thing that is *not* allowed is actual HTML code, which will be escaped.
 
-### ヒントと警告
+### Tips and Warnings
 
-次の構文を使用して、ヒント、警告、および、その他の注釈をリリースノートに含めることができます。
+You can include tips, warnings, and other notes in your release notes using this syntax:
 
 ```markdown
 > {tip} A helpful tip.
 
 > {warning} A word of warning.
 
-> {note} A note.
+> {note} A serious note.
 ```
 
-これらのいずれかを含むアップデートは、「ユーティリティ > アップデート」ページで自動的に展開されます。
+Any updates that contain one of these will be auto-expanded on the Utilities → Updates page.
 
-### リンク
+### Links
 
-リリースノートに参照スタイルのリンクを持つ場合、次のバージョン見出しの *前に* URL を定義する必要があります。
+If you have any reference-style links in your release notes, you will need to define the URLs *before* the following version heading:
 
 ```markdown
 ## 2.0.1 - 2017-02-01
@@ -65,14 +65,15 @@
 
 ## 2.0.0 - 2017-01-31
 ### Added
+
 - New [superFoo] config setting
 
 [superFoo]: https://docs.foo.com/config#superFoo
 ```
 
-## 重大なアップデート
+## Critical Updates
 
-重大なセキュリティ脆弱性や他の危険なバグの修正が含まれているアップデートの場合、バージョン見出しの最後に `[CRITICAL]` を追加することによってユーザーに警告することができます。
+If an update contains a fix for a critical security vulnerability or other dangerous bug, you can alert your users about it by adding `[CRITICAL]` to the end of the version heading:
 
 ```markdown
 ## 2.0.1 - 2017-01-21 [CRITICAL]
@@ -80,5 +81,4 @@
 - Reverted change to `$potus` due to security vulnerabilities
 ```
 
-Craft は重大なアップデートが利用可能であることを知ったとき、すべてのコントロールパネルページの最上部にメッセージを掲載し、「ユーティリティ > アップデート」ページでアップデートに特別な注目を与えます。
-
+When Craft finds out that a critical update is available, it will post a message about it to the top of all Control Panel pages, and give the update special attention on the Utilities → Updates page.
