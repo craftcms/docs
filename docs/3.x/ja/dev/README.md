@@ -1,57 +1,54 @@
-# フロントエンド開発
+# Front-End Development
 
-Craft では、テンプレートを利用してサイトの HTML 出力を定義します。
+In Craft, you define your site’s HTML output with templates.
 
-テンプレートは `templates/` フォルダ内に存在するファイルです。テンプレートの構造は、完全にあなた次第です。 – テンプレートは、フォルダのルート、サブディレクトリ内、またはサブディレクトリのサブディレクトリ内（さらに続く）などに置くことができます。サイトに必要なものは、何でも機能します。
+Templates are files that live within your `templates/` folder. The structure of your templates is completely up to you – you can put templates at the root of that folder, within subdirectories, or within subdirectories’ subdirectories (and on and on). Whatever works for your site’s needs.
 
-Craft はテンプレートを解析するために [Twig](https://twig.symfony.com/) を利用します。Twig は、エレガントで、パワフルで、 かつ、とても高速です。Twig をはじめて使う方は、その構文に慣れ親しむために [Twig 入門書](twig-primer.md)に目を通してください。
+Craft uses [Twig](https://twig.symfony.com/) to parse your templates. Twig is elegant, powerful, and blazing fast. If you’re new to Twig, be sure to read the [Twig Primer](twig-primer.md) to familiarize yourself with its syntax.
 
-::: tip
-PHP コードはテンプレート内で使用できませんが、Craft はニーズに合わせて様々な方法で [Twig を拡張する](../extend/extending-twig.md)手段を提供しています。
-:::
+::: tip PHP code isn’t allowed in your templates, but Craft provides various ways to [extend Twig](../extend/extending-twig.md) to suit your needs. :::
 
-## テンプレートのパス
+## Template Paths
 
-テンプレートのパスを入力する必要があるときが、いくつかあります。
+There are several times when you’ll need to enter a path to one of your templates:
 
-* [エントリ](../sections-and-entries.md)や[カテゴリ](../categories.md)で読み込む、テンプレートの URL を選択するとき
-* テンプレートを[ルート](../routing.md#dynamic-routes)に割り当てるとき
-* [include](https://twig.symfony.com/doc/tags/include.html)、[extends](https://twig.symfony.com/doc/tags/extends.html)、および、[embed](https://twig.symfony.com/doc/tags/embed.html) テンプレートタグ内
+* When choosing which template [entry](../sections-and-entries.md) and [category](../categories.md) URLs should load
+* When assigning a template to a [route](../routing.md#dynamic-routes)
+* Within [include](https://twig.symfony.com/doc/tags/include.html), [extends](https://twig.symfony.com/doc/tags/extends.html), and [embed](https://twig.symfony.com/doc/tags/embed.html) template tags
 
-Craft には、テンプレートへの Unix スタイルのファイルシステムのパスや `templates` フォルダからの相対パスという、それぞれのケースで適用される標準的なテンプレートパスのフォーマットがあります。
+Craft has a standard template path format that applies to each of these cases: a Unix-style file system path to the template file, relative from your `templates/` folder.
 
-例えば、`templates/recipes/entry.twig` にテンプレートがある場合、次のテンプレートパスで指し示すことができます。
+For example, if you have a template located at `templates/recipes/entry.twig`, the following template paths would point to it:
 
 * `recipes/entry`
 * `recipes/entry.twig`
 
-### インデックステンプレート
+### Index Templates
 
-テンプレートの名前が `index.twig` の場合、テンプレートパスで明示的に記述する必要はありません。
+If you name your template `index.twig`, you don’t need to specify it in the template path.
 
-例えば、`templates/recipes/ingredients/index.twig` にテンプレートがある場合、次のテンプレートパスで指し示すことができます。
+For example, if you have a template located at `templates/recipes/ingredients/index.twig`, the following template paths would point to it:
 
 * `recipes/ingredients`
 * `recipes/ingredients/index`
 * `recipes/ingredients/index.twig`
 
-`templates/recipes/ingredients.twig` *と* `templates/recipes/ingredients/index.twig` の両方にテンプレートがある場合、`recipes/ingredients` は `ingredients.twig` にマッチします。
+If you have templates located at both `templates/recipes/ingredients.twig` *and* `templates/recipes/ingredients/index.twig`, the template path `recipes/ingredients` will match `ingredients.twig`.
 
-### 不可視テンプレート
+### Hidden Templates
 
-Craft は、`recipes/_entry.twig` のように、名前の接頭辞にアンダースコアが付いたテンプレートを直接アクセスできない不可視テンプレートとして扱います。
+Craft treats templates with names prefixed with an underscore, for example `recipes/_entry.twig`, as hidden templates that are not directly accessible.
 
-`recipes/entry` にあるテンプレートを利用した、`http://mysite.com/recipes/gin-tonic` でアクセスできるレシピのエントリがある場合、誰でも `http://mysite.com/recipes/entry` で直接テンプレートにアクセスできてしまいます。
+If we have a recipe entry that is available at the entry URL `http://mysite.com/recipes/gin-tonic`, which uses the template located at `recipes/entry`, someone could access the template directly at `http://mysite.com/recipes/entry`.
 
-この例では、エントリ URL の一部としてのみ利用されるため、テンプレートへダイレクトにアクセスする理由がありません。そこで、Craft が不可視ファイルだとみなすようファイル名を `_entry.twig` に変更し、セクションの設定をアップデートします。
+In this example there is no reason to access the template directly because it's only ever used as part of an entry URL. We change its file name to `_entry.twig` so it is considered hidden by Craft and update the settings in our Section.
 
-これで `http://mysite.com/recipes/entry` にアクセスすると、Craft がテンプレートのレンダリングを試みる代わりに、404 エラーを返します。
+Now when we try to access `http://mysite.com/recipes/entry` Craft returns a 404 error instead of attempting to render the template.
 
-## テンプレートのローカライゼーション
+## Template Localization
 
-Craft でマルチサイトを運用している場合、特定のサイトだけで利用可能なテンプレートを含むサイト固有のサブフォルダを `templates/` フォルダ内に作成できます。
+If you’re running multiple sites with Craft, you can create site-specific subfolders in your `templates/` folder, which contain templates that will only be available to a specific site.
 
-例えば、ドイツのカスタマーを歓迎するための特別なテンプレートを作成したいものの、英語版サイトで必要ない場合、`templates/de/welcome.twig` に保存します。そのテンプレートは `http://example.de/welcome` からアクセスできるでしょう。
+For example, if you want to create a special template welcoming your German customers, but there’s no need for it on your English site, then you could save it in `templates/de/welcome.twig`. That template would be available from `http://example.de/welcome`.
 
-Craft は、通常のテンプレートを探す_前に_ローカライズ用のテンプレートを探します。それによって、ローカライズされていないテンプレートを上書きすることができます。詳細については、[ローカライゼーションガイド](../localization.md)を参照してください。
-
+Craft will look for localized templates *before* it looks for templates in the normal location, so you can use them to override non-localized templates. See our [Localization Guide](../localization.md) for more details.
