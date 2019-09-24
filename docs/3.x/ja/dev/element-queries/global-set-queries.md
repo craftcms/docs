@@ -1,6 +1,6 @@
-# グローバル設定クエリ
+# Global Set Queries
 
-**グローバル設定クエリ**を使用して、テンプレートや PHP コード内でグローバル設定を取得できます。
+You can fetch global sets in your templates or PHP code using **global set queries**.
 
 ::: code
 
@@ -16,20 +16,18 @@ $myGlobalSetQuery = \craft\elements\GlobalSet::find();
 
 :::
 
-グローバル設定クエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。 さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[GlobalSet](api:craft\elements\GlobalSet) オブジェクトの配列が返されます。
+Once you’ve created a global set query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [GlobalSet](api:craft\elements\GlobalSet) objects will be returned.
 
-::: tip
-エレメントクエリがどのように機能するかについては、[エレメントクエリについて](README.md)を参照してください。
-:::
+::: tip See [Introduction to Element Queries](README.md) to learn about how element queries work. :::
 
-## 実例
+## Example
 
-次の操作をすることで、プライマリサイトからグローバル設置をロードし、コンテンツを表示できます。
+We can load a global set from the primary site and display its content by doing the following:
 
-1. `craft.globalSets()` でグローバル設定クエリを作成します。
-2. [handle](#handle) および [siteId](#siteid) パラメータをセットします。
-3. `.one()` でグローバル設定を取得します。
-4. コンテンツを出力します。
+1. Create a global set query with `craft.globalSets()`.
+2. Set the [handle](#handle) and [siteId](#siteid) parameters on it.
+3. Fetch the global set with `.one()`.
+4. Output its content.
 
 ```twig
 {# Create a global set query with the 'handle' and 'siteId' parameters #}
@@ -44,19 +42,17 @@ $myGlobalSetQuery = \craft\elements\GlobalSet::find();
 <p>{{ globalSet.copyrightInfo }}</p>
 ```
 
-::: tip
-すべてのグローバル設定は、Twig テンプレートのグローバル変数としてすでに利用可能です。そのため、現在のサイトとは異なるサイトのコンテンツにアクセスする場合、`craft.globalSets()` を通して取得する必要があります。
-:::
+::: tip All global sets are already available as global variables to Twig templates. So you only need to fetch them through `craft.globalSets()` if you need to access their content for a different site than the current site. :::
 
-## パラメータ
+## Parameters
 
-グローバル設定クエリは、次のパラメータをサポートしています。
+Global set queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
 ### `anyStatus`
 
-[status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) および [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) パラメータをクリアします。
+Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
 
 ::: code
 
@@ -78,7 +74,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `asArray`
 
-[GlobalSet](api:craft\elements\GlobalSet) オブジェクトではなく、データの配列として、マッチしたグローバル設定をクエリが返します。
+Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](api:craft\elements\GlobalSet) objects.
 
 ::: code
 
@@ -100,15 +96,16 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `dateCreated`
 
-グローバル設定の作成日に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the global sets’ creation dates.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するグローバル設定
-| - | -
-| `'>= 2018-04-01'` | 2018-04-01 以降に作成されたもの。
-| `'< 2018-05-01'` | 2018-05-01 より前に作成されたもの。
-| `['and', '>= 2018-04-04', '< 2018-05-01']` | 2018-04-01 から 2018-05-01 の間に作成されたもの。
+| Value                                            | Fetches global sets…                                 |
+| ------------------------------------------------ | ---------------------------------------------------- |
+| `'>= 2018-04-01'`                             | that were created on or after 2018-04-01.            |
+| `'< 2018-05-01'`                              | that were created before 2018-05-01                  |
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were created between 2018-04-01 and 2018-05-01. |
+
 
 ::: code
 
@@ -136,15 +133,16 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `dateUpdated`
 
-グローバル設定の最終アップデート日に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the global sets’ last-updated dates.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するグローバル設定
-| - | -
-| `'>= 2018-04-01'` | 2018-04-01 以降にアップデートされたもの。
-| `'< 2018-05-01'` | 2018-05-01 より前にアップデートされたもの。
-| `['and', '>= 2018-04-04', '< 2018-05-01']` | 2018-04-01 から 2018-05-01 の間にアップデートされたもの。
+| Value                                            | Fetches global sets…                                 |
+| ------------------------------------------------ | ---------------------------------------------------- |
+| `'>= 2018-04-01'`                             | that were updated on or after 2018-04-01.            |
+| `'< 2018-05-01'`                              | that were updated before 2018-05-01                  |
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were updated between 2018-04-01 and 2018-05-01. |
+
 
 ::: code
 
@@ -168,9 +166,122 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 :::
 
+### `draftCreator`
+
+Narrows the query results to only drafts created by a given user.
+
+Possible values include:
+
+| Value                                  | Fetches drafts…                        |
+| -------------------------------------- | -------------------------------------- |
+| `1`                                    | created by the user with an ID of 1.   |
+| a `\craft\elements\db\User` object | by the user represented by the object. |
+
+
+::: code
+
+```twig
+{# Fetch drafts by the current user #}
+{% set globalSets = craft.globalSets()
+    .draftCreator(currentUser)
+    .all() %}
+```
+
+```php
+// Fetch drafts by the current user
+$globalSets = \craft\elements\GlobalSet::find()
+    ->draftCreator(Craft::$app->user->identity)
+    ->all();
+```
+
+:::
+
+### `draftId`
+
+Narrows the query results based on the global sets’ draft’s ID (from the `drafts` table).
+
+Possible values include:
+
+| Value | Fetches drafts…                |
+| ----- | ------------------------------ |
+| `1`   | for the draft with an ID of 1. |
+
+
+::: code
+
+```twig
+{# Fetch a draft #}
+{% set globalSets = craft.globalSets()
+    .draftId(10)
+    .all() %}
+```
+
+```php
+// Fetch a draft
+$globalSets = \craft\elements\GlobalSet::find()
+    ->draftIf(10)
+    ->all();
+```
+
+:::
+
+### `draftOf`
+
+Narrows the query results to only drafts of a given global set.
+
+Possible values include:
+
+| Value                                                | Fetches drafts…                               |
+| ---------------------------------------------------- | --------------------------------------------- |
+| `1`                                                  | for the global set with an ID of 1.           |
+| a [GlobalSet](api:craft\elements\GlobalSet) object | for the global set represented by the object. |
+
+
+::: code
+
+```twig
+{# Fetch drafts of the global set #}
+{% set globalSets = craft.globalSets()
+    .draftOf(myGlobalSet)
+    .all() %}
+```
+
+```php
+// Fetch drafts of the global set
+$globalSets = \craft\elements\GlobalSet::find()
+    ->draftOf($myGlobalSet)
+    ->all();
+```
+
+:::
+
+### `drafts`
+
+Narrows the query results to only drafts global sets.
+
+::: code
+
+```twig
+{# Fetch a draft global set #}
+{% set globalSets = {twig-function}
+    .drafts()
+    .id(123)
+    .one() %}
+```
+
+```php
+// Fetch a draft global set
+$globalSets = \craft\elements\GlobalSet::find()
+    ->drafts()
+    ->id(123)
+    ->one();
+```
+
+:::
+
 ### `fixedOrder`
 
-クエリの結果を [id](#id) で指定された順序で返します。
+Causes the query results to be returned in the order specified by [id](#id).
 
 ::: code
 
@@ -194,16 +305,17 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `handle`
 
-グローバル設定のハンドルに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the global sets’ handles.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するグローバル設定
-| - | -
-| `'foo'` | ハンドルが `foo`。
-| `'not foo'` | ハンドルが `foo` ではない。
-| `['foo', 'bar']` | ハンドルが `foo` または `bar`。
-| `['not', 'foo', 'bar']` | ハンドルが `foo` または `bar` ではない。
+| Value                   | Fetches global sets…                 |
+| ----------------------- | ------------------------------------ |
+| `'foo'`                 | with a handle of `foo`.              |
+| `'not foo'`             | not with a handle of `foo`.          |
+| `['foo', 'bar']`        | with a handle of `foo` or `bar`.     |
+| `['not', 'foo', 'bar']` | not with a handle of `foo` or `bar`. |
+
 
 ::: code
 
@@ -225,16 +337,17 @@ $globalSet = \craft\elements\GlobalSet::find()
 
 ### `id`
 
-グローバル設定の ID に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the global sets’ IDs.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するグローバル設定
-| - | -
-| `1` | ID が 1。
-| `'not 1'` | ID が 1ではない。
-| `[1, 2]` | ID が 1 または 2。
-| `['not', 1, 2]` | ID が 1 または 2 ではない。
+| Value           | Fetches global sets…      |
+| --------------- | ------------------------- |
+| `1`             | with an ID of 1.          |
+| `'not 1'`       | not with an ID of 1.      |
+| `[1, 2]`        | with an ID of 1 or 2.     |
+| `['not', 1, 2]` | not with an ID of 1 or 2. |
+
 
 ::: code
 
@@ -254,13 +367,15 @@ $globalSet = \craft\elements\GlobalSet::find()
 
 :::
 
-::: tip
-特定の順序で結果を返したい場合、[fixedOrder](#fixedorder) と組み合わせることができます。
-:::
+::: tip This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order. :::
+
+### `ignorePlaceholders`
+
+Causes the query to return matching global sets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 
 ### `inReverse`
 
-クエリの結果を逆順で返します。
+Causes the query results to be returned in reverse order.
 
 ::: code
 
@@ -282,7 +397,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `limit`
 
-返されるグローバル設定の数を決定します。
+Determines the number of global sets that should be returned.
 
 ::: code
 
@@ -304,7 +419,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `offset`
 
-結果からスキップされるグローバル設定の数を決定します。
+Determines how many global sets should be skipped in the results.
 
 ::: code
 
@@ -326,7 +441,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `orderBy`
 
-返されるグローバル設定の順序を決定します。
+Determines the order that the global sets should be returned in.
 
 ::: code
 
@@ -346,11 +461,41 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 :::
 
+### `preferSites`
+
+If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+
+For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C, and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned for Site B.
+
+If this isn’t set, then preference goes to the current site.
+
+::: code
+
+```twig
+{# Fetch unique global sets from Site A, or Site B if they don’t exist in Site A #}
+{% set globalSets = craft.globalSets()
+    .site('*')
+    .unique()
+    .preferSites(['a', 'b'])
+    .all() %}
+```
+
+```php
+// Fetch unique global sets from Site A, or Site B if they don’t exist in Site A
+$globalSets = \craft\elements\GlobalSet::find()
+    ->site('*')
+    ->unique()
+    ->preferSites(['a', 'b'])
+    ->all();
+```
+
+:::
+
 ### `relatedTo`
 
-特定の他のエレメントと関連付けられたグローバル設定だけに、クエリの結果を絞り込みます。
+Narrows the query results to only global sets that are related to certain other elements.
 
-このパラメーターがどのように機能するかの詳細については、[リレーション](https://docs.craftcms.com/v3/relations.html)を参照してください。
+See [Relations](https://docs.craftcms.com/v3/relations.html) for a full explanation of how to work with this parameter.
 
 ::: code
 
@@ -370,11 +515,124 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 :::
 
+### `revisionCreator`
+
+Narrows the query results to only revisions created by a given user.
+
+Possible values include:
+
+| Value                                  | Fetches revisions…                     |
+| -------------------------------------- | -------------------------------------- |
+| `1`                                    | created by the user with an ID of 1.   |
+| a `\craft\elements\db\User` object | by the user represented by the object. |
+
+
+::: code
+
+```twig
+{# Fetch revisions by the current user #}
+{% set globalSets = craft.globalSets()
+    .revisionCreator(currentUser)
+    .all() %}
+```
+
+```php
+// Fetch revisions by the current user
+$globalSets = \craft\elements\GlobalSet::find()
+    ->revisionCreator(Craft::$app->user->identity)
+    ->all();
+```
+
+:::
+
+### `revisionId`
+
+Narrows the query results based on the global sets’ revision’s ID (from the `revisions` table).
+
+Possible values include:
+
+| Value | Fetches revisions…                |
+| ----- | --------------------------------- |
+| `1`   | for the revision with an ID of 1. |
+
+
+::: code
+
+```twig
+{# Fetch a revision #}
+{% set globalSets = craft.globalSets()
+    .revisionId(10)
+    .all() %}
+```
+
+```php
+// Fetch a revision
+$globalSets = \craft\elements\GlobalSet::find()
+    ->revisionIf(10)
+    ->all();
+```
+
+:::
+
+### `revisionOf`
+
+Narrows the query results to only revisions of a given global set.
+
+Possible values include:
+
+| Value                                                | Fetches revisions…                            |
+| ---------------------------------------------------- | --------------------------------------------- |
+| `1`                                                  | for the global set with an ID of 1.           |
+| a [GlobalSet](api:craft\elements\GlobalSet) object | for the global set represented by the object. |
+
+
+::: code
+
+```twig
+{# Fetch revisions of the global set #}
+{% set globalSets = craft.globalSets()
+    .revisionOf(myGlobalSet)
+    .all() %}
+```
+
+```php
+// Fetch revisions of the global set
+$globalSets = \craft\elements\GlobalSet::find()
+    ->revisionOf($myGlobalSet)
+    ->all();
+```
+
+:::
+
+### `revisions`
+
+Narrows the query results to only revision global sets.
+
+::: code
+
+```twig
+{# Fetch a revision global set #}
+{% set globalSets = {twig-function}
+    .revisions()
+    .id(123)
+    .one() %}
+```
+
+```php
+// Fetch a revision global set
+$globalSets = \craft\elements\GlobalSet::find()
+    ->revisions()
+    ->id(123)
+    ->one();
+```
+
+:::
+
 ### `search`
 
-検索クエリにマッチするグローバル設定だけに、クエリの結果を絞り込みます。
+Narrows the query results to only global sets that match a search query.
 
-このパラメーターがどのように機能するかの詳細については、[検索](https://docs.craftcms.com/v3/searching.html)を参照してください。
+See [Searching](https://docs.craftcms.com/v3/searching.html) for a full explanation of how to work with this parameter.
 
 ::: code
 
@@ -402,16 +660,22 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `site`
 
-グローバル設定を照会するサイトを決定します。
+Determines which site(s) the global sets should be queried in.
 
-デフォルトでは、現在のサイトが使用されます。
+The current site will be used by default.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するグローバル設定
-| - | -
-| `'foo'` | ハンドルが `foo` のサイトから。
-| `\craft\elements\db\Site` オブジェクト | オブジェクトで表されるサイトから。
+| Value                                  | Fetches global sets…                           |
+| -------------------------------------- | ---------------------------------------------- |
+| `'foo'`                                | from the site with a handle of `foo`.          |
+| `['foo', 'bar']`                       | from a site with a handle of `foo` or `bar`.   |
+| `['not', 'foo', 'bar']`                | not in a site with a handle of `foo` or `bar`. |
+| a `\craft\elements\db\Site` object | from the site represented by the object.       |
+| `'*'`                                  | from any site.                                 |
+
+
+::: tip If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you only want unique elements to be returned, use [unique](#unique) in conjunction with this. :::
 
 ::: code
 
@@ -433,9 +697,9 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `siteId`
 
-サイトの ID ごとに、グローバル設定を照会するサイトを決定します。
+Determines which site(s) the global sets should be queried in, per the site’s ID.
 
-デフォルトでは、現在のサイトが使用されます。
+The current site will be used by default.
 
 ::: code
 
@@ -457,13 +721,13 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `trashed`
 
-ソフトデリートされたグローバル設定だけに、クエリの結果を絞り込みます。
+Narrows the query results to only global sets that have been soft-deleted.
 
 ::: code
 
 ```twig
 {# Fetch trashed global sets #}
-{% set globalSets = {twig-function}
+{% set globalSets = craft.globalSets()
     .trashed()
     .all() %}
 ```
@@ -479,7 +743,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `uid`
 
-グローバル設定の UID に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the global sets’ UIDs.
 
 ::: code
 
@@ -499,11 +763,37 @@ $globalSet = \craft\elements\GlobalSet::find()
 
 :::
 
+### `unique`
+
+Determines whether only elements with unique IDs should be returned by the query.
+
+This should be used when querying elements from multiple sites at the same time, if “duplicate” results is not desired.
+
+::: code
+
+```twig
+{# Fetch unique global sets across all sites #}
+{% set globalSets = craft.globalSets()
+    .site('*')
+    .unique()
+    .all() %}
+```
+
+```php
+// Fetch unique global sets across all sites
+$globalSets = \craft\elements\GlobalSet::find()
+    ->site('*')
+    ->unique()
+    ->all();
+```
+
+:::
+
 ### `with`
 
-関連付けられたエレメントを eager-loaded した状態で、マッチしたグローバル設定をクエリが返します。
+Causes the query to return matching global sets eager-loaded with related elements.
 
-このパラメーターがどのように機能するかの詳細については、[エレメントのEager-Loading](https://docs.craftcms.com/v3/dev/eager-loading-elements.html)を参照してください。
+See [Eager-Loading Elements](https://docs.craftcms.com/v3/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 ::: code
 
@@ -524,4 +814,3 @@ $globalSets = \craft\elements\GlobalSet::find()
 :::
 
 <!-- END PARAMS -->
-
