@@ -1,33 +1,38 @@
-# How to Build a Module
+# モジュールの構築方法
 
 [[toc]]
 
-## Preparation
+## 準備
 
-Before you begin working on a module, you need to decide on a couple things:
+モジュール作成に取り組む前に、いくつかのことを決めておく必要があります。
 
-- **Namespace** – The root namespace that your module’s classes will live in. (See the [PSR-4](https://www.php-fig.org/psr/psr-4/) autoloading specification for details.) Note that this should *not* begin with `craft`; use something that identifies you (the developer), or the project.
-- **Module ID** – Something that uniquely identifies your plugin within your project. (Module IDs must begin with a letter and contain only lowercase letters, numbers, and dashes. They should be `kebab-cased`.)
+- **名前空間** – モジュールのクラスが稼働する、ルート名前空間。（詳細については、[PSR-4](https://www.php-fig.org/psr/psr-4/) オートローディング仕様を参照してください。）これは `craft\` ではじめるべき *ではない* ことに注意してください。デベロッパーやプロジェクトを識別する何かを使用してください。
+- **モジュール ID** – プロジェクト内のプラグインを一意に識別する何か。（モジュール ID は、文字ではじまり、小文字の英字、数字、および、ダッシュのみでなければなりません。`kebab-cased` にすべきです。）
 
-::: warning When choosing a module ID, try to avoid names that will conflict with Craft’s core [controllers](https://github.com/craftcms/cms/tree/develop/src/controllers) (e.g. `app` would conflict with `AppController.php`), as well as any installed plugin handles. Otherwise bad things will happen. :::
+::: warning
+モジュール ID を選択する場合、Craft のコア[コントローラー](https://github.com/craftcms/cms/tree/develop/src/controllers)（例：`app` などの `AppController.php` と競合する）やインストールされているプラグインハンドルと競合する名前は避けてください。そうでなければ、悪いことが起こります。
+:::
 
-## Set up the basic file structure
+## 基本ファイル構造の設定
 
-To create a module, create a new directory for it somewhere within your Craft project, such as `modules/<ModuleID>/`. For example, if your module ID is `foo`, you might set it up like this:
+モジュールを作るため、Craft プロジェクト内のどこかに `modules/<ModuleID>/` のような新しいディレクトリを作成してください。例えば、モジュール ID が `foo` の場合、次のように設定します。
 
-    my-project.test/
-    ├── modules/
-    │   └── foo/
-    │       └── Module.php
-    ├── templates/
-    └── ...
-    
+```
+my-project.test/
+├── modules/
+│   └── foo/
+│       └── Module.php
+├── templates/
+└── ...
+```
 
-::: tip Use [pluginfactory.io](https://pluginfactory.io/) to create your module’s scaffolding with just a few clicks. :::
+::: tip
+数クリックでモジュールの土台を作成できる [pluginfactory.io](https://pluginfactory.io/) を利用してください。
+:::
 
-## Set up class autoloading
+## クラスのオートロードの設定
 
-Next up, you need to tell Composer how to find your module’s classes by setting the [`autoload`](https://getcomposer.org/doc/04-schema.md#autoload) field in your project’s `composer.json` file. For example, if your module’s namespace is `bar`, and it’s located at `modules/foo/`, this is what you should add:
+次に、プロジェクト内の `composer.json` ファイルに [`autoload`](https://getcomposer.org/doc/04-schema.md#autoload) フィールドを設定し、モジュールのクラスを見つける方法を Composer に伝える必要があります。例えば、モジュールの名前空間が `bar` で `modules/foo/` に位置している場合、次のように追加します。
 
 ```json
 {
@@ -40,17 +45,17 @@ Next up, you need to tell Composer how to find your module’s classes by settin
 }
 ```
 
-With that in place, go to your project’s directory in your terminal, and run the following command:
+そこにモジュールを配置したら、ターミナル上でプロジェクトのディレクトリに移動し、次のコマンドを実行します。
 
 ```bash
 composer dump-autoload -a
 ```
 
-That will tell Composer to update its class autoloader script based on your new `autoload` mapping.
+新しい `autoload` マッピングに基づいて、クラスオートローダースクリプトをアップデートすることを Composer に伝えます。
 
-## Update the application config
+## アプリケーション設定のアップデート
 
-You can add your module to your project’s [application configuration](../config/app.md) by listing it in the [modules](api:yii\base\Module::modules) and [bootstrap](api:yii\base\Application::bootstrap) arrays. For example, if your module ID is `foo` and its Module class name is `foo\Module`, this is what you should add to `config/app.php`:
+[modules](api:yii\base\Module::modules) および [bootstrap](api:yii\base\Application::bootstrap) 配列にリストすることによって、プロジェクトの[アプリケーション設定](../config/app.md)にモジュールを追加できます。例えば、モジュール ID が `foo` でモジュールのクラス名が `foo\Module` の場合、`config/app.php` に次のように追加します。
 
 ```php
 return [
@@ -64,13 +69,15 @@ return [
 ];
 ```
 
-::: tip If your module doesn’t need to get loaded on every request, you can remove its ID from the `bootstrap` array. :::
+::: tip
+モジュールがすべてのリクエストでロードされる必要がない場合、`bootstrap` 配列から削除できます。
+:::
 
-## The Module class
+## モジュールクラス
 
-The `Module.php` file is your module’s entry point for the system. Its `init()` method is the best place to register event listeners, and any other steps it needs to take to initialize itself.
+`Module.php` ファイルは、システム向けのモジュールのエントリポイントです。`init()` メソッドはイベントリスナーやそれ自体の初期化を必要とする他のステップを登録するのに最適な場所です。
 
-Use this template as a starting point for your `Module.php` file:
+`Module.php` ファイルの出発点として、このテンプレートを使用してください。
 
 ```php
 <?php
@@ -92,8 +99,9 @@ class Module extends \yii\base\Module
 }
 ```
 
-Replace `bar` with your module’s actual namespace, and `'@bar'` with an [alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) name based on your actual namespace (with any ``s converted to `/`s).
+`bar` をあなたのモジュールの名前空間に、`'@bar'` を実際の名前空間に基づく[エイリアス](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)に置き換えてください（全ての `\` は `/` に置き換えます）。
 
-## Further Reading
+## 参考文献
 
-To learn more about modules, see the [Yii documentation](https://www.yiiframework.com/doc/guide/2.0/en/structure-modules).
+モジュールの詳細については、[Yii documentation](https://www.yiiframework.com/doc/guide/2.0/en/structure-modules) を参照してください。
+

@@ -1,33 +1,36 @@
-# Globals
+# グローバル
 
-Globals store content that is available globally throughout your templates. They're a convenient way to make non-Entry content easily editable via the Control Panel.
+グローバルは、テンプレート全体で包括的に利用可能なコンテンツを保存できます。これは、コントロールパネル経由でエントリではないコンテンツを簡単に編集できるようにする便利な方法です。
 
-Craft organizes Globals into Global Sets. Each Global Set has its own [field layout](fields.md#field-layouts) using any of the existing fields or new fields.
+Craft はグローバル設定内でグローバルを整理します。それぞれのグローバル設定は、存在するすべてのフィールドや新しいフィールドを利用する独自の[フィールドレイアウト](fields.md#field-layouts)を持ちます。
 
-To create a Global Set, go to Settings → Globals.
+グローバル設定を作るには、「設定 > グローバル」に移動します。
 
-If you have at least one Global Set, Craft will add a new “Globals” item added to the Control Panel primary navigation. Clicking on this will take you to a page that lists all of your Global Sets in a sidebar, as well as all of the fields associated with the selected Global Set in the main content area.
+少なくとも1つのグローバル設定があれば、Craft はコントロールパネルのメインナビゲーションに「グローバル」項目を追加します。これをクリックすると、サイドバーにすべてのグローバル設定のリスト、メインコンテンツエリアに選択されたグローバル設定に関連するすべてのフィールドが表示されたページに移動します。
 
-::: tip Unlike [entries](sections-and-entries.md#entries), Global Sets don’t have the Live Preview feature, since they aren’t associated with any one particular URL. :::
+::: tip
+[エントリ](sections-and-entries.md#entries)とは異なり、特定の URL と関連付けられていないグローバル設定では、ライブプレビュー機能がありません。
+:::
 
-## Global Sets in Templates
+## テンプレートでのグローバル設定
 
-You can access your Global Sets from any template via their handles.
+任意のテンプレートからハンドル経由でグローバル設定にアクセスできます。
 
-If you have a Global Set with the handle `companyInfo` and it has a field with the handle `yearEstablished`, you can access that field anywhere using this code:
+`companyInfo` というハンドルのグローバル設定があり、`yearEstablished` というハンドルのフィールドがある場合、次のコードを使用してそのフィールドへどこからでもアクセスすることができます。
 
 ```twig
 {{ companyInfo.yearEstablished }}
 ```
 
-For additional Global Set properties you can use besides your custom fields see <api:craft\elements\GlobalSet> for a full reference.
+カスタムフィールド以外で利用できる追加のグローバル設定のプロパティについては、リファレンスの <api:craft\elements\GlobalSet> を参照してください。
 
-## Global Sets with Multiple Sites
+## マルチサイトでのグローバル設定
 
-If you run multiple sites with Craft, Global Sets are available in all sites. However, you can set the values in those sets on a per site basis, even leaving some fields blank, if desired.
+Craft でマルチサイトを運用している場合、グローバル設定はすべてのサイトで利用可能です。しかしながら、必要に応じていくつかのフィールドを空のままにするなど、それぞれの設定値をサイトごとにセットできます。
 
-To do that, edit the global set’s fields, and make sure that their “Translation Method” settings are set to “Translate for each site”.
+そのためには、グローバルセットのフィールドを編集し、それぞれの「翻訳方法」設定で「各サイトに対して翻訳」をセットします。
 
-To toggle between sites while viewing Global Sets, use the drop-down menu at the top left of the Global Sets page in the Control Panel.
+グローバル設定を表示中にサイトを切り替えるには、コントロールパネルのグローバル設定ページの左上にあるドロップダウンメニューを使用します。
 
-![Toggling between sites in Globals](./images/globals-multisite-nav.png)
+![グローバル内のサイトの切り替え](./images/globals-multisite-nav.png)
+

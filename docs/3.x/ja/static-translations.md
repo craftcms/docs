@@ -1,18 +1,18 @@
-# Static Message Translations
+# 静的メッセージの翻訳
 
-Most websites and apps will have some UI messages that are hard-coded into the templates or PHP files. These are called “static messages”, because they aren’t being dynamically defined by content in the CMS.
+ほとんどのウェブサイトやアプリには、テンプレートや PHP ファイルにハードコードされたいくつかの UI メッセージを持ちます。CMS のコンテンツによって動的に定義されていないため、それらは「静的メッセージ」と呼ばれます。
 
-If you’re building a multilingual site or app, then these messages will need to be translatable just like your CMS-driven content.
+多言語のサイトやアプリを構築している場合、CMS 主導のコンテンツのようにそれらのメッセージも翻訳可能にする必要があるでしょう。
 
-To do that, Craft employs Yii’s [Message Translations](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n#message-translation) feature, and pre-defines special translation categories:
+そのため、Craft は Yii の[メッセージ翻訳](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n#message-translation)機能を採用し、 特別な翻訳カテゴリを事前に定義しています。
 
-- `site` is used for messages that belong to the project.
-- `app` is used for Craft Control Panel messages.
-- Each plugin gets its own category as well, based on the plugin’s handle.
+- `site` はプロジェクトに属するメッセージに使用されます。
+- `app` はコントロールパネルのメッセージに使用されます。
+- それぞれのプラグインは、プラグインのハンドルに基づいて独自のカテゴリも取得します。
 
-## Prep Your Messages
+## メッセージの準備
 
-The first step is to run all of your static messages through the translator. If you’re working on a template, use the [translate](dev/filters.md#translate-or-t) filter (`|t`). If you’re working in PHP code, use [Craft::t()](api:yii\BaseYii::t()).
+最初のステップは、すべての静的メッセージをトランスレータを通して実行することです。テンプレートを操作している場合、[translate](dev/filters.md#translate-or-t) フィルタ（`|t`）を使用します。PHP コードを操作している場合、[Craft::t()](api:yii\BaseYii::t()) を使用します。
 
 ::: code
 
@@ -26,31 +26,32 @@ The first step is to run all of your static messages through the translator. If 
 
 ```php
 // old
-echo 'Contact us';
+$label = 'Contact us';
 
 // new
-echo Craft::t('site', 'Contact us');
+$label = Craft::t('site', 'Contact us');
 ```
 
 :::
 
-## Provide the Translations
+## 翻訳の提供
 
-Once you’ve prepped a message for translations, you need to supply the actual translation.
+翻訳のためのメッセージを準備したら、実際の翻訳を提供する必要があります。
 
-To do that, create a new folder in your project’s base directory called `translations/`, and within that, create a new folder named after the target language’s ID. Within that, create a file named after the translation category you want to create massages for (`site.php` for project messages, `app.php` to overwrite Craft's Control Panel messages, or `<plugin-handle>.php` to overwrite a plugin’s messages).
+そのために、プロジェクトのベースディレクトリに `translations/` と呼ばれる新しいフォルダを作成し、その中に対象言語の ID を名前とした新しいフォルダを作成します。その中に、メッセージを作成したい翻訳カテゴリの名前をつけたファイルを作成します（プロジェクトメッセージのための `site.php`、Craft のコントロールパネルのメッセージを上書きするための `app.php`、または、プラグインのメッセージを上書きするための `<plugin-handle>.php`）。
 
-For example, if you want to translate your project’s messages into German, this is what your project’s directory structure should look like:
+例えば、プロジェクトのメッセージをドイツ語に翻訳する場合、プロジェクトのディレクトリ構造は次のようになります。
 
-    my-project.test/
-    ├── config/
-    ├── ...
-    └── translations/
-        └── de/
-            └── site.php
-    
+```
+my-project.test/
+├── config/
+├── ...
+└── translations/
+    └── de/
+        └── site.php
+```
 
-Now open `site.php` in a text editor, and have it return an array that maps the source messages to their translated messages.
+次に、テキストエディタで `site.php` を開き、ソースメッセージを翻訳メッセージにマップする配列を返すようにします。
 
 ```php
 <?php
@@ -60,34 +61,5 @@ return [
 ];
 ```
 
-Now, when Craft is processing the message translation for a German site, “Contact us” will be replaced with “Kontaktiere uns”.
+これで、ドイツ語サイトのメッセージ翻訳を処理する際、「Contact us」が「Kontaktiere uns」に置換されます。
 
-### Message Parameters
-
-Static messages can have [placeholder values](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n#message-parameters). For example:
-
-```php
-<?php
-
-return [
-    'Welcome back, {name}' => 'Willkommen zurück {name}',
-];
-```
-
-To replace the placeholder values with dynamic values when translating the message, pass the `params` argument when using the [translate](dev/filters.md#translate-or-t) filter or calling [Craft::t()](api:yii\BaseYii::t()):
-
-::: code
-
-```twig
-<a href="/contact">{{ 'Welcome back, {name}'|t(params = {
-    name: currentUser.friendlyName,
-}) }}</a>
-```
-
-```php
-echo Craft::t('site', 'Welcome back, {name}', [
-    'name' => Craft::$app->user->identity->friendlyName,
-]);
-```
-
-:::

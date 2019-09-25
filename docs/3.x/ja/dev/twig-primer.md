@@ -1,28 +1,28 @@
-# Twig Primer
+# Twig 入門書
 
-Here’s a rundown of the core concepts in Twig, the templating engine used by Craft.
+これは Craft のテンプレートエンジンである Twig のコアコンセプトの要約です。
 
-This is only meant as a primer, not a comprehensive documentation of everything Twig can do.
+これはあくまで入門書であり、 Twig が行うことができるすべての包括的なドキュメントではありません。
 
-To learn more, visit the Continued Reading section at the bottom of this page or refer directly to the [official Twig documentation](https://twig.symfony.com/doc/templates.html) .
+より詳しいことは、このページの下段にある「続きを読む」セクションを見るか、[Twig 公式ドキュメント](https://twig.symfony.com/doc/templates.html)を直接参照してください。
 
-## Three Types of Twig Tags
+## 3種類の Twig タグ
 
-There are three types of tags in Twig:
+Twig には3種類のタグがあります。
 
-* Logic Tags
-* Output Tags
-* Comment Tags
+* ロジックタグ
+* 出力タグ
+* コメントタグ
 
-Let's review each one in more detail.
+それぞれについて、詳しく見てみましょう。
 
-### Logic Tags
+### ロジックタグ
 
-Logic tags control what happens in your template. They can set variables, test conditionals, loop through arrays, and much more.
+ロジックタグは、テンプレート内で起きることをコントロールします。変数を設定したり、条件文をテストしたり、配列をループしたり、他にもいろいろなことができます。
 
-Logic tags don't output anything to the template on their own.
+ロジックタグは、それ自身でテンプレートに何も出力しません。
 
-Their syntax always begins with “`{%`” and ends with “`%}`”. What happens in between is up to the tag you’re using.
+構文は常に `{%` ではじまり `%}` で終わります。その間に記述した内容が、あたなが使うタグになります。
 
 ```twig
 <p>Is it quitting time?</p>
@@ -35,54 +35,54 @@ Their syntax always begins with “`{%`” and ends with “`%}`”. What happen
 {% endif %}
 ```
 
-### Output Tags
+### 出力タグ
 
-Output tags are responsible for printing things out to the rendered HTML.
+出力タグは、レンダリングされた HTML にプリントする責任があります。
 
-Their syntax always begins with “`{{`” and ends with “`}}`”. You can put just about anything inside them – as long as Twig can evaluate it into a string.
+構文は常に `{{` ではじまり `}}` で終わります。Twig が文字列として評価できるものであれば、その中にほぼ何でも記述できます。
 
 ```twig
 <p>The current time is {{ now|date("g:i a") }}.</p>
 ```
 
-Output tags are only for outputting to the template, so you never place output tags within statement tags in Twig.
+出力タグはテンプレートにアプトプットするためのものなので、 Twig の命令タグ内に記述することは絶対にできません
 
-These examples are incorrect:
+これらの例は、正しくありません。
 
 ```twig
 {% set entry = craft.entries.section( {{ sectionId }} ).one() %}
 {% set entry = craft.entries.section( {% if filterBySection %} sectionId {% endif %} ) %}
 ```
 
-These are correct:
+こちらは正しいです。
 
 ```twig
 {% set entry = craft.entries.section( sectionId ).one() %}
 {% set entry = craft.entries.section( filterBySection ? sectionId : null ) %}
 ```
 
-Resources:
+リソース：
 
-* [Tags that come with Twig](https://twig.symfony.com/doc/tags/index.html)
-* [Craft’s custom tags](tags.md)
+* [Twig に付随するタグ](https://twig.symfony.com/doc/tags/index.html)
+* [Craft の独自タグ](tags.md)
 
-### Comment Tags
+### コメントタグ
 
-You can leave comments for future self in the code using comment tags. Twig won't evaluate anything inside the comment tags; it will simply pretend they don’t exist.
+コメントタグを利用して、コード内に将来の自分に向けたコメントを残すことができます。Twig はコメントタグの内容を何も評価しません。単にそれが存在しないものとして振る舞います。
 
-The comment syntax always begins with “`{#`” and ends with “`#}`”.
+コメント構文は常に `{#` ではじまり `#}` で終わります。
 
 ```twig
 {# Loop through the recipes #}
 ```
 
-Anything put inside of the comments tags will not render to the final template, not even as an HTML comment.
+コメントタグの内側に記述された内容は、HTML コメントとは異なり、最終的なテンプレートにレンダリングされません。
 
-## Variables
+## 変数
 
-Variables in Twig are just like variables in Javascript or any other programming language. There are different types of variables – strings, arrays, booleans, and objects. You can pass them into functions, manipulate them, and output them.
+Twig の変数は、JavaScript や他のプログラミング言語の変数に似ています。変数には、文字列、配列、ブール値、オブジェクトなど、いろいろな種類があります。それらをファンクションに渡したり、操作したり、出力することができます。
 
-You can assign your own variables using the `set` tag:
+`set` タグを利用して、独自の変数を割り当てることができます。
 
 ```twig
 {% set style = 'stirred' %}
@@ -90,33 +90,33 @@ You can assign your own variables using the `set` tag:
 {{ style }}
 ```
 
-Additionally, all of your Craft templates are pre-loaded with a few [global variables](global-variables.md):
+さらに、すべての Craft テンプレートは、いくつかの[グローバル変数](global-variables.md)があらかじめロードされています。
 
-* Templates that are loaded as a result of a matching [route](../routing.md#dynamic-routes) get pre-loaded with the variables defined by the route’s tokens
-* Templates that are loaded as the result of a matching [entry](../sections-and-entries.md) URL get an `entry` variable (see [Routing](../routing.md) for more details).
+* 一致する[ルート](../routing.md#dynamic-routes)の結果として読み込まれたテンプレートには、ルートのトークンによって定義された変数があらかじめロードされています。
+* 一致する[エントリ](../sections-and-entries.md) URL の結果として読み込まれたテンプレートでは、変数 `entry` を取得できます。（詳細は、[ルーティング](../routing.md)を見てください）
 
-## Filters
+## フィルタ
 
-You can manipulate variables with filters. The syntax is the variable name followed by a pipe (`|`) followed by the filter name:
+フィルタで変数を操作できます。構文は、変数名に続けてパイプ（`|`）とフィルタ名となります。
 
 ```twig
 {{ siteName|upper }}
 ```
 
-Some filters accept parameters::
+いくつかのフィルタは、パラメータを受け取ります。
 
 ```twig
 {{ now|date("M d, Y") }}
 ```
 
-Resources:
+リソース：
 
-* [Filters that come with Twig](https://twig.symfony.com/doc/filters/index.html)
-* [Craft’s custom filters](filters.md)
+* [Twig に付随するフィルタ](https://twig.symfony.com/doc/filters/index.html)
+* [Craft の独自フィルタ](filters.md)
 
-## Functions
+## ファンクション
 
-Twig and Craft provide several functions that you can use within your template tags:
+Twig と Craft は、テンプレートタグ内で利用できるいくつかのファンクションを提供します。
 
 ```twig
 <h3>Watch me count to ten!</h3>
@@ -129,16 +129,17 @@ Twig and Craft provide several functions that you can use within your template t
 </ul>
 ```
 
-Resources:
+リソース：
 
-* [Functions that come with Twig](https://twig.symfony.com/doc/functions/index.html)
-* [Craft’s custom functions](functions.md)
+* [Twig に付随するファンクション](https://twig.symfony.com/doc/functions/index.html)
+* [Craft の独自ファンクション](functions.md)
 
-## Continued Reading
+## 続きを読む
 
-There are several learning resources available online for learning Twig:
+Twig を学ぶためにオンラインで利用できるいくつかの学習リソースがあります。
 
-* [Twig for Template Designers](https://twig.symfony.com/doc/templates.html) documents all of Twig’s features in detail. It can be overly technical at times, but we still recommend you read through it.
-* [Twig Templates in Craft](https://mijingo.com/products/screencasts/twig-templates-in-craft/) is a video course by Mijingo that aims to get you comfortable with using Twig in Craft.
-* [Straight up Craft](https://straightupcraft.com/twig-templating) has some great articles on how to use Twig within Craft.
-* [Twig for Designers](https://github.com/brandonkelly/TwigForDesigners) is an in-progress eBook that aims to explain how Twig works to non-developers.
+* [Twig for Template Designers](https://twig.symfony.com/doc/templates.html) は、すべての Twig の機能を詳細なドキュメントです。時として過度に専門的なところもありますが、読んでおくことをお勧めします。
+* [Twig Templates in Craft](https://mijingo.com/products/screencasts/twig-templates-in-craft/) は、Craft の Twig を快適に使えるようになることを目的とした、Mijingo によるビデオコースです。
+* [Straight up Craft](https://straightupcraft.com/twig-templating) は、Craft での Twig の使い方に関する素晴らしい記事があります。
+* [Twig for Designers](https://github.com/brandonkelly/TwigForDesigners) は進行中の eBook で、非開発者が Twig をどのように使えるか説明することを目的としています。
+

@@ -1,86 +1,88 @@
-# Categories Fields
+# カテゴリフィールド
 
-Categories fields allow you to relate [categories](categories.md) to other elements.
+カテゴリフィールドでは、[カテゴリ](categories.md)をたのエレメントに関連付けることができます。
 
-## Settings
+## 設定
 
-Categories fields have the following settings:
+カテゴリフィールドの設定は、次の通りです。
 
-- **Source** – Which category group (or other category index source) the field should be able to relate categories from.
-- **Branch Limit** – The maximum number of category tree branches that can be related with the field at once. (Default is no limit.)
-    
-    For example, if you have the following category group:
+- **ソース** – フィールドが、どのカテゴリグループ（または、他のカテゴリインデックスソース）からカテゴリを関連付けられるか。
 
-      Food
-      ├── Fruit
-      │   ├── Apples
-      │   ├── Bananas
-      │   └── Oranges
-      └── Vegetables
-          ├── Brussels sprouts
-          ├── Carrots
-          └── Celery
-      ```
-    
-      …and Branch Limit was set to `1`, you would be able to relate Fruit, Vegetables, or one of their descendants, but no more than that.
-    
-    - **Selection Label** – The label that should be used on the field’s selection button.
-    
-    ### Multi-Site Settings
-    
-    On multi-site installs, the following settings will also be available (under “Advanced”):
-    
-    - **Relate categories from a specific site?** – Whether to only allow relations to categories from a specific site.
-    
-      If enabled, a new setting will appear where you can choose which site.
-    
-      If disabled, related categories will always be pulled from the current site.
-    
-    - **Manage relations on a per-site basis** – Whether each site should get its own set of related categories.
-    
-    ## The Field
-    
-    Categories fields list all of the currently-related categories, with a button to select new ones.
-    
-    Clicking the “Add a category” button will bring up a modal window where you can find and select additional categories. You can create new categories from this modal as well, by clicking the “New category” button.
-    
-    When you select a nested category, all of the ancestors leading up to that category will also automatically be related. Likewise, when you remove a category from within the main field input, any of its descendants will also be removed.
-    
-    ### Inline Category Editing
-    
-    When you double-click on a related category, a HUD will appear where you can edit the category’s title and custom fields.
-    
-    ## Templating
-    
-    ### Querying Elements with Categories Fields
-    
-    When [querying for elements](dev/element-queries/README.md) that have a Categories field, you can filter the results based on the Categories field data using a query param named after your field’s handle.
-    
-    Possible values include:
-    
-    | Value | Fetches elements…
-    | - | -
-    | `':empty:'` | that don’t have any related categories.
-    | `':notempty:'` | that have at least one related category.
-    
-    ```twig
-    {# Fetch entries with a related category #}
-    {% set entries = craft.entries()
-        .<FieldHandle>(':notempty:')
-        .all() %}
-    
+- **ブランチ制限** – フィールドと一度に関連付けできるカテゴリ数の上限。（デフォルトは無制限です）
 
-### Working with Categories Field Data
+   例えば、次のカテゴリグループがあるとします。
 
-If you have an element with a Categories field in your template, you can access its related categories using your Categories field’s handle:
+   ```
+    Food
+    ├── Fruit
+    │   ├── Apples
+    │   ├── Bananas
+    │   └── Oranges
+    └── Vegetables
+        ├── Brussels sprouts
+        ├── Carrots
+        └── Celery
+   ```
+
+   そして、ブランチ制限が `1` にセットされていれば、Fruit、Vegetables、または、その子孫の1つだけを関連付けられます。
+
+- **選択ラベル** – フィールドの選択ボタンのラベルに使用されます
+
+### マルチサイト設定
+
+マルチサイトがインストールされている場合、次の設定も有効になります。（「高度」のトグルボタンで表示されます）
+
+- **特定のサイトから カテゴリ を関連付けますか?** – 特定のサイトのカテゴリとの関連付けのみを許可するかどうか。
+
+   有効にすると、サイトを選択するための新しい設定が表示されます。
+
+   無効にすると、関連付けられたカテゴリは常に現在のサイトから取得されます。
+
+- **サイトごとにリレーションを管理** – それぞれのサイトが関連付けられたカテゴリの独自のセットを取得するかどうか。
+
+## フィールド
+
+カテゴリフィールドには、現在関連付けられているすべてのカテゴリのリストと、新しいカテゴリを追加するためのボタンがあります。
+
+「カテゴリーを追加」ボタンをクリックすると、すでに追加されているカテゴリの検索や選択ができるモーダルウィンドウが表示されます。このモーダルから新しいカテゴリを作るには、「新しいカテゴリー」ボタンをクリックします。
+
+ネストされたカテゴリを選択すると、そのカテゴリに至るすべての先祖カテゴリも自動的に関連付けられます。同様に、メインフィールドの入力からカテゴリを削除すると、そのすべての子孫カテゴリも削除されます。
+
+### インラインのカテゴリ編集
+
+関連付けられたカテゴリをダブルクリックすると、カテゴリのタイトルやカスタムフィールドを編集できる HUD を表示します。
+
+## テンプレート記法
+
+### カテゴリフィールドによるエレメントの照会
+
+カテゴリフィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、カテゴリフィールドのデータに基づいた結果をフィルタできます。
+
+利用可能な値には、次のものが含まれます。
+
+| 値 | 取得するエレメント
+| - | -
+| `':empty:'` | 関連付けられたカテゴリを持たない。
+| `':notempty:'` | 少なくとも1つの関連付けられたカテゴリを持つ。
+
+```twig
+{# Fetch entries with a related category #}
+{% set entries = craft.entries()
+    .<FieldHandle>(':notempty:')
+    .all() %}
+```
+
+### カテゴリフィールドデータの操作
+
+テンプレート内でカテゴリフィールドのエレメントを取得する場合、カテゴリフィールドのハンドルを利用して、関連付けられたカテゴリにアクセスできます。
 
 ```twig
 {% set relatedCategories = entry.<FieldHandle> %}
 ```
 
-That will give you a [category query](dev/element-queries/category-queries.md), prepped to output all of the related categories for the given field.
+これは、所定のフィールドで関連付けられたすべてのカテゴリを出力するよう準備された[カテゴリクエリ](dev/element-queries/category-queries.md)を提供します。
 
-To loop through all of the related categories as a flat list, call [all()](api:craft\db\Query::all()) and then loop over the results:
+関連付けられたすべてのカテゴリをループするには、[all()](api:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
 ```twig
 {% set relatedCategories = entry.<FieldHandle>.all() %}
@@ -93,7 +95,7 @@ To loop through all of the related categories as a flat list, call [all()](api:c
 {% endif %}
 ```
 
-Or you can show them as a hierarchical list with the [nav](dev/tags/nav.md) tag:
+または、[nav](dev/tags/nav.md) タグで階層リストとして表示することもできます。
 
 ```twig
 {% set relatedCategories = entry.<FieldHandle.all() %}
@@ -113,7 +115,7 @@ Or you can show them as a hierarchical list with the [nav](dev/tags/nav.md) tag:
 {% endif %}
 ```
 
-If you only want the first related category, call [one()](api:craft\db\Query::one()) instead, and then make sure it returned something:
+関連付けられた最初のカテゴリだけが欲しい場合、代わりに [one()](api:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
 
 ```twig
 {% set rel = entry.<FieldHandle>.one() %}
@@ -122,7 +124,7 @@ If you only want the first related category, call [one()](api:craft\db\Query::on
 {% endif %}
 ```
 
-If you just need to check if there are any related categories (but don’t need to fetch them), you can call [exists()](api:craft\db\Query::exists()):
+（取得する必要はなく）いずれかの関連付けられたカテゴリがあるかを確認したい場合、[exists()](api:craft\db\Query::exists()) を呼び出すことができます。
 
 ```twig
 {% if entry.<FieldHandle>.exists() %}
@@ -130,7 +132,7 @@ If you just need to check if there are any related categories (but don’t need 
 {% endif %}
 ```
 
-You can set [parameters](dev/element-queries/category-queries.md#parameters) on the category query as well. For example, to only fetch the “leaves” (categories without any children), set the [leaves](dev/element-queries/category-queries.md#leaves) param:
+カテゴリクエリで[パラメータ](dev/element-queries/category-queries.md#parameters)をセットすることもできます。例えば、“leaves”（子を持たないカテゴリ）だけを取得するには、[leaves](dev/element-queries/category-queries.md#leaves) パラメータをセットします。
 
 ```twig
 {% set relatedCategories = entry.<FieldHandle>
@@ -138,8 +140,9 @@ You can set [parameters](dev/element-queries/category-queries.md#parameters) on 
     .all() %}
 ```
 
-## See Also
+## 関連項目
 
-* [Category Queries](dev/element-queries/category-queries.md)
+* [カテゴリクエリ](dev/element-queries/category-queries.md)
 * <api:craft\elements\Category>
-* [Relations](relations.md)
+* [リレーション](relations.md)
+

@@ -1,11 +1,12 @@
-# `{% requireLogin %}` Tags
+# `{% requireLogin %}` タグ
 
-This tag will ensure that the user is logged in. If they aren’t, they’ll be redirected to a Login page and returned to the original page after successfully logging in.
+このタグは、ユーザーがログインしていることを保証します。そうでない場合、ログインページにリダイレクトし、ログインに成功した後で元のページに戻ります。
 
 ```twig
 {% requireLogin %}
 ```
 
-Place this tag anywhere in your template, including within a conditional. If/when Twig gets to it, the login enforcement will take place.
+条件文の中を含め、テンプレートのどこにでもこのタグを記述できます。Twig がそれに到達すると、ログインが強制されます。
 
-The Login page location is based on your <config:loginPath> config setting. If you do not set <config:loginPath>, it defaults to `login`. That will throw a `404` error if you have not handled the `/login` route with a custom template. To use the Control Panel’s Login form, set it to `admin/login` or `[your cpTrigger]/login`.
+ログインページの場所は、コンフィグ設定 <config:loginPath> に基づきます。<config:loginPath> を設定しない場合、デフォルトで `login` になります。カスタムテンプレートで `/login` ルートを処理していない場合、`404` エラーが返されます。コントロールパネルのログインフォームを使用するには、`admin/login` または `[your cpTrigger]/login` をセットしてください。
+

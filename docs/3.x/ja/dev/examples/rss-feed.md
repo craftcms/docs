@@ -1,8 +1,10 @@
-# RSS Feed
+# RSS フィード
 
-The following template can be used to provide a RSS 2.0 feed on your site. It assumes that you have a [global set](../../globals.md) with the handle `globals`, with a field called `siteDescription`.
+次のテンプレートは、あなたのサイトで RSS 2.0 フィードを提供するために使用できます。`siteDescription` と呼ばれるフィールドを持つ、`globals` というハンドルの[グローバルのセット](../../globals.md)があることを前提としています。
 
-::: tip If you save this in a template that ends with a `.rss` file extension, Craft will even serve it with an `application/rss+xml` MIME type. :::
+::: tip
+ファイル拡張子 `.rss` で終わるテンプレートとして保存すると、Craft はそれを MIME タイプ `application/rss+xml` で配信します。
+:::
 
 ```twig
 <?xml version="1.0"?>
@@ -31,3 +33,4 @@ The following template can be used to provide a RSS 2.0 feed on your site. It as
     </channel>
 </rss>
 ```
+

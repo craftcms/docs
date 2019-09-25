@@ -1,11 +1,12 @@
-# `{% requirePermission %}` Tags
+# `{% requirePermission %}` タグ
 
-This tag will ensure that the current user is logged in with an account that has a given permission.
+このタグは、現在のユーザーが特定の権限を持つアカウントでログインしていることを保証します。
 
 ```twig
 {% requirePermission 'stayUpLate' %}
 ```
 
-The user can have the permission either directly or through one of their user groups. If they don’t have it, a 403 (Forbidden) error will be served.
+ユーザーは、直接またはユーザーグループの1つを通して権限を持つことができます。もし権限を持っていないなら、403（Forbidden）エラーが提供されます。
 
-See the [Users](../../users.md#permissions) page for a list of available permissions.
+利用可能な権限のリストは、[ユーザー](../../users.md#permissions)ページを参照してください。
+

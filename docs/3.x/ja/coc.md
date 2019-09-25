@@ -1,30 +1,35 @@
-# Code of Conduct
+# 行動規範
 
-Like the technical community as a whole, the Craft team and community is made up of a mixture of professionals and volunteers from all over the world, working on every aspect of the mission - including mentorship, teaching, and connecting people.
+すべての技術的なコミュニティがそうであるように、Craft チームとコミュニティも世界中のプロフェッショナルとボランティアの混成で成り立ち、指導者・教育者・さらに繋がる人々を含め、あらゆるミッションに取り組んでいます。
 
-Diversity is one of our strengths. With that, challenges will arise that can lead to communication issues and unhappiness. To that end, we have a few ground rules that we ask people to adhere to. This code applies equally to founders, mentors and those seeking help and guidance.
+多様性はわたしたちの強みの1つです。しかし、それは同時にコミュニケーションの問題や不幸を生じさせることがあるでしょう。そこで、わたしたちにはみなさんにしっかり守ってもらいたい幾つかの基本ルールがあります。この規約は創設者や指導者はもちろん、助けや案内を求めている人たちに等しくあてはまります。
 
-This isn’t an exhaustive list of things that you can’t do. Rather, take it in the spirit in which it’s intended - a guide to make it easier to enrich all of us and the technical communities in which we participate.
+これはあなたがしてはいけないことすべてを網羅したリストではありません。むしろ、意図している「わたしたち自身や参加する技術的なコミュニティのすべてをより豊かにするためのガイドである」という精神を取り入れてください。
 
-This code of conduct applies to all spaces used by the Craft community for communication. This includes Craft Slack, Craft CMS Stack Exchange, GitHub, Twitter, Facebook, meetups, conferences, and any other relevant forums. Violations of this code outside of any spaces managed by the Craft team will still affect a person’s ability to participate within them.
+Craft のコミュニティがコミュニケーションのために利用するすべての場所で、この行動規範はあてはまります。Craft Slack、Craft CMS Stack Exchange、GitHub、Twitter、Facebook、会合、カンファレンス、その他すべての関連するフォーラムを含みます。Craft チームが管理していない場所でこの行動規範に違反した場合、コミュニティに参加する資格があるかどうかの判断基準に悪影響を及ぼすでしょう。
 
-If you believe someone is violating the code of conduct, we ask that you report it by contacting us from [craftcms.com/contact](https://craftcms.com/contact). We take all reports seriously, and your identity will remain confidential.
+もし誰かが行動規範に違反したと確信したなら、[craftcms.com/contact](https://craftcms.com/contact) から連絡してください。わたしたちはすべての報告を真剣に受け止め、かつ、あなたの身元は機密のままであるようにします。
 
-- **Be friendly and patient.**
-- **Be welcoming.** We strive to be a community that welcomes and supports people of all backgrounds and identities. This includes, but is not limited to members of any race, ethnicity, culture, national origin, colour, immigration status, social and economic class, educational level, sex, sexual orientation, gender identity and expression, age, size, family status, political belief, religion, and mental and physical ability.
-- **Be considerate.** Your work will be used by other people, and you in turn will depend on the work of others. Any decision you take will affect users and colleagues, and you should take those consequences into account when making decisions. Remember that we’re a world-wide community, so you might not be communicating in someone else’s primary language.
-- **Be respectful.** Not all of us will agree all the time, but disagreement is no excuse for poor behavior and poor manners. We might all experience some frustration now and then, but we cannot allow that frustration to turn into a personal attack. It’s important to remember that a community where people feel uncomfortable or threatened is not a productive one. Members of the Craft community should be respectful when dealing with other members as well as with people outside the Craft community.
-- **Be careful in the words that you choose.** We are a community of professionals, and we conduct ourselves professionally. Be kind to others. Do not insult or put down other participants. Harassment and other exclusionary behavior aren’t acceptable. This includes, but is not limited to:
-    
-  - Violent threats or language directed against another person.
-  - Discriminatory jokes and language.
-  - Exclusionary gendered language (guys, gentlemen, bros, etc).
-  - Posting sexually explicit or violent material.
-  - Posting (or threatening to post) other people’s personally identifying information ("doxing").
-  - Personal insults, especially those using racist or sexist terms.
-  - Unwelcome sexual attention.
-  - Advocating for, or encouraging, any of the above behavior.
-  - Repeated harassment of others. In general, if someone asks you to stop, then stop.
-- **When we disagree, try to understand why.** Disagreements, both social and technical, happen all the time and Craft is no exception. It is important that we resolve disagreements and differing views constructively. Remember that we’re different. The strength of Craft comes from its varied community, people from a wide range of backgrounds. Different people have different perspectives on issues. Being unable to understand why someone holds a viewpoint doesn’t mean that they’re wrong. Don’t forget that it is human to err and blaming each other doesn’t get us anywhere. Instead, focus on helping to resolve issues and learning from mistakes.
+- **友好的、かつ、寛容でいてください。**
 
-*Credits for the sources and inspiration of this code of conduct go to the [Django Project](https://www.djangoproject.com/conduct/) and many others.*
+- **歓迎してください。** わたしたちはすべてのバックグラウンドとアイデンティティの人々を歓迎し、サポートするコミュニティであろうと努力します。これはいかなる人種、民族、文化、出身国、肌の色、移住ステータス、社会的・経済的地位、教育レベル、性別、性的指向、ジェンダー・アイデンティティーや表現、年齢、サイズ、家族的ステータス、政治理念、宗教、そして精神的・肉体的能力のメンバーであるかが含まれますが、これに制限されません。
+
+- **思いやりをもってください。** あなたの行為は他の誰かに使われ、あなたは他の誰かの行為に依存することでしょう。あなたの意思決定はユーザーや同僚に影響を与えるでしょう。そのため、決定を下す際はどのような結果になるかを考慮すべきです。世界的なコミュニティのため、あなたが他の誰かにとっての主要な言語で伝えられていないかもしれないことを覚えておきましょう。
+
+- **敬意をもってください。** 常に全会一致ということはないでしょう。しかし、意見の相違がひどい行為やひどいマナーの弁解にはなりません。わたしたちは時折いくらかのフラストレーションを経験するかもしれません。しかし、それが個人攻撃に変わることを許容しません。大切なのは、そこにいる人々が不快だったり脅されているように感じるコミュニティは生産的ではないと覚えておくことです。Craft コミュニティのメンバーは、コミュニティ外の人々と同様、他のメンバーとのやりとりに敬意を表するべきです。
+
+- **言葉選びに注意を払ってください。** わたしたちはプロフェッショナルによるコミュニティです。そのため、わたしたち自身がプロフェッショナルらしく振る舞いましょう。他者に親切であってください。他の参加者を侮辱したり、こきおろしたりしないでください。いやがらせや排他的な行動は、容認できません。これは次のものを含みますが、この限りではありません。
+   - 他の人に対する暴力的な脅迫、または、言葉による命令。
+   - 差別的な冗談や言葉づかい。
+   - 排他的な性差を表す言葉（guys、gentlemen、bros など）。
+   - 性的に露骨な、または、暴力的な資料の投稿。
+   - 他の人の身元を明らかにする情報の投稿、または、投稿すると脅すこと（「晒し」行為）。
+   - 個人的な侮辱。とりわけ、人種差別的であったり性差別的な表現を用いるもの。
+   - ありがたくない性の対象としての注目。
+   - 上記のいずれかを支持する。または、奨励すること。
+   - 他の人に嫌がらせを繰り返すこと。一般的に、誰かがあたなにやめるよう頼んだなら、その時点でやめてください。
+
+- **意見が食い違うときは、なぜそうなのか理解しようと試みてください。** 社会であれ技術であれ意見の相違はいつも起きていて、Craft も例外ではありません。大切なのは意見の相違や異なる視点を建設的に解決することです。わたしたちは同じではないことを忘れないでください。Craft の強みは広範囲のバックグラウンドを持つ人々による多彩なコミュニティから来ています。異なる人々は問題に対し異なる展望を持っています。誰かが持つ視点を理解できないからといって、その視点が間違っていることを意味しません。誤ることが人間的であることを忘れないでください。そして、お互いに非難してもわたしたちのためになりません。その代わりに、問題を解決することを手伝って失敗から学ぶことにフォーカスしましょう。
+
+*この行動規範のソース、および、インスピレーションのクレジットは [Django Project](https://www.djangoproject.com/conduct/) をはじめとする沢山のものに行き着きます。*
+

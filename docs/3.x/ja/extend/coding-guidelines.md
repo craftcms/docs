@@ -1,131 +1,159 @@
-# Coding Guidelines
+# コーディングガイドライン
 
-Do your best to follow these guidelines when writing code for Craft and Craft plugins.
+Craft や Craft プラグイン向けのコードを書くときには、このガイドラインに従うよう最善を尽くしてください。
 
 [[toc]]
 
-## Code Style
+## コードスタイル
 
-- Follow the [PSR-1](https://www.php-fig.org/psr/psr-1/) & [PSR-2](https://www.php-fig.org/psr/psr-2/) coding standards.
-- Use the short array syntax (`['foo' => 'bar']`).
-- Don’t fret too much over line lengths. Focus on readability.
-- Chained method calls should each be placed on their own line, with the `->` operator at the beginning of each line.
-- Conditions that span multiple lines should have logical operators (`||`, `&&`, etc.) at the end of lines.
-- Strings that are concatenated across multiple lines should have the `.` operator at the ends of lines.
-- Don’t put a space after type typecasts (`(int)$foo`).
-- Don’t wrap `include`/`include_once`/`require`/`require_once` file paths in parentheses. They are not functions.
+- [PSR-1](https://www.php-fig.org/psr/psr-1/) と [PSR-2](https://www.php-fig.org/psr/psr-2/) のコーディング基準に従ってください。
+- 短い配列構文（`['foo' => 'bar']`）を使用してください。
+- 行の長さにあまり思い悩まないでください。可読性に焦点を当てましょう。
+- チェインメソッドの呼び出しは、各行の先頭に `->` 演算子を付けて、独自の行に配置する必要があります。
+- 複数行にまたがる条件文には、行の最後に理論演算子（`||`、`&&` など）を付ける必要があります。
+- 複数行に渡って連結される文字列は、行の最後に `.` 演算子を付ける必要があります。
+- 型変換の後にスペースを置かないでください（`(int)$foo`）。
+- `include` / `include_once` / `require` / `require_once` のファイルパスを括弧で囲まないでください。それらはファンクションではありません。
 
-## Best Practices
+## ベストプラクティス
 
-- Declare method argument types whenever possible.
-  
-        php
-        public function foo(Entry $entry, array $settings)
+- 可能な限り、メソッド引数の型を宣言してください。
 
-- Use strict comparison operators (`===` and `!==`) whenever possible.
+   ```php
+   public function foo(Entry $entry, array $settings)
+   ```
 
-- Use `$foo === null`/`$bar !== null` rather than `is_null($foo)`/`!is_null($bar)`.
-- Use `(int)$foo`/`(float)$bar` rather than `intval($foo)`/`floatval($bar)`.
-- Always pass `true`/`false` to the third argument of [in_array()](http://php.net/manual/en/function.in-array.php) to indicate whether the check should be type-strict (and make it `true` whenever possible).
-- Use `$obj->property !== null` rather than `isset($obj->property)` in conditions that check if an object property is set.
-- Use `empty()`/`!empty()` in conditions that check if an array is/isn’t empty.
-- Refer to class names using the [::class](http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class) keyword (`Foo::class`) rather than as a string (`'some\nmspace\Foo'`) or <api:yii\base\BaseObject::className()>.
-- Initialize arrays explicitly (`$array = []`) rather than implicitly (e.g. `$array[] = 'foo'` where `$array` wasn’t defined yet).
-- Use `self::_foo()` rather than `static::_foo()` when calling private static functions, since `static::` would break if the class is extended.
-- Use `self::CONSTANT` rather than `static::CONSTANT` (unnecessary overhead).
-- Only use the `parent::` keyword when calling a parent method with the exact same name as the current method. Otherwise use `$this->`.
-- Always specify the visibility of class properties and methods (`public`, `protected`, or `private`).
-- Private class property/method names should begin with an underscore (`private $_foo`).
-- Don’t explicitly set class properties’ default values to `null` (e.g. `public $foo = null;`).
-- Always use `require` or `include` when including a file that returns something, rather than `require_once` or `include_once`.
-- Use `strpos($foo, $bar) === 0` rather than `strncmp($foo, $bar, $barLength) === 0` when checking if one string begins with another string, for short strings.
-- Use `$str === ''` rather than `strlen($str) === 0` when checking if a string is empty.
-- Avoid using `array_merge()` within loops when possible.
-- Unset variables created by reference in foreach-loops after the loop is finished.
-  
-        php
-        foreach ($array as &$value) {
-            // ...
-        }
-        unset($value);
+- 可能な限り、厳格な比較演算子（`===` および `!==`）を使用してください。
 
-- Use `implode()` rather than `join()`.
+- `is_null($foo)` / `!is_null($bar)` よりむしろ `$foo === null` / `$bar !== null` を使用してください。
 
-- Use `in_array()` rather than `array_search(...) !== false` when the position of the needle isn’t needed.
-- Don’t use a `switch` statement when a single `if` condition will suffice.
-- Use single quotes (`'`) whenever double quotes (`"`) aren’t needed.
-- Use shortcut operators (`+=`, `-=`, `*=`, `/=`, `%=`, `.=`, etc.) whenever possible.
-- Use shortcut regex patterns (`\d`, `\D`, `\w`, `\W`, etc.) whenever possible.
-- Use the `DIRECTORY_SEPARATOR` constant rather than `'/'` when defining file paths.
+- `intval($foo)` / `floatval($bar)` よりむしろ `(int)$foo` / `(float)$bar` を使用してください。
 
-::: tip The [Php Inspections (EA Extended)](https://plugins.jetbrains.com/idea/plugin/7622-php-inspections-ea-extended-) PhpStorm plugin can help you locate and fix these sorts of best practice issues. :::
+- [in_array()](http://php.net/manual/en/function.in-array.php) の第三引数へ常に `true` / `false` を渡して、型の比較をチェックするかを示します（そして、可能な限り `true` にします）。
 
-## Namespaces & Class Names
+- オブジェクトのプロパティがセットされているかをチェックする条件文では、`isset($obj->property)` よりむしろ `$obj->property !== null` を使用してください。
 
-- Follow the [PSR-4](https://www.php-fig.org/psr/psr-4/) specification, where a class’s file location can be inferred by its fully qualified name, given a known base namespace mapped to a base path.
-- Namespaces should be all-lowercase.
-- Class names should be `StudlyCase`.
-- Only first party code should use the `craft` and `pixelandtonic` namespace roots. Third party plugins should use a namespace root that refers to the vendor name and plugin name (e.g. `acme\myplugin`).
+- 配列が空である / ではないをチェックする条件文では、`empty()` / `!empty()` を使用してください。
 
-## Method Names
+- 文字列（`'some\nmspace\Foo'`）または <api:yii\base\BaseObject::className()> よりむしろ [::class](http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class) キーワード（`Foo::class`）を使用して、クラス名を参照してください。
 
-Getter methods (methods whose primary responsibility is to return something, rather than do something) that **don’t accept any arguments** should begin with `get` , and there should be a corresponding `@property` tag in the class’s docblock to document the corresponding magic getter property.
+- 暗黙的（例：`$array` がまだ定義されていない状態での `$array[] = 'foo'`）よりむしろ明示的（`$array = []`）に配列を初期化してください。 
+
+- クラスが拡張されている場合に `static::` が壊れるため、プライベートな static ファンクションを呼び出す際、`static::_foo()` ではなく `self::_foo()` を使用してください。
+
+- `static::CONSTANT`（不必要なオーバーヘッド）よりむしろ `self::CONSTANT` を使用してください。
+
+- 現在のメソッドと同じ名前の親メソッドを呼び出す際のみ、`parent::` キーワードを使用してください。そうでなければ、`$this->` を使用してください。
+
+- クラスのプロパティやメソッドの可視性（`public`、`protected`、または、`private`）は、常に指定してください。
+
+- プライベートなクラスのプロパティ / メソッド名は、アンダースコアではじめます（`private $_foo`）。
+
+- 明示的にクラスプロパティのデフォルト値を `null` セットしないでください（例：`public $foo = null;`）。
+
+- 何かを返すファイルをインクルードする際は、`require_once` または `include_once` よりむしろ `require` または `include` を常に使用してください。
+
+- 短い文字列向けに他の文字列がある文字列ではじまるかをチェックする際は、`strncmp($foo, $bar, $barLength) === 0` よりむしろ `strpos($foo, $bar) === 0` を使用してください。
+
+- 文字列が空かどうかをチェックする際は、`strlen($str) === 0` よりむしろ `$str === ''` を使用してください。
+
+- 可能な場合、ループ内で `array_merge()` の使用を避けてください。
+
+- ループ処理の終了後、foreach ループの参照によって作成された変数を解除してください。
+
+   ```php
+    foreach ($array as &$value) {
+        // ...
+    }
+    unset($value);
+   ```
+
+- `join()` よりむしろ `implode()` を使用してください。
+
+- needle の位置が必要でない場合、`array_search(...) !== false` よりむしろ `in_array()` を使用してください。
+
+- 単一の `if` 条件で十分な場合、`switch` 文を使用しないでください。
+
+- ダブルクォート（`"`）が不要な場合、シングルクォート（`'`）を使用してください。
+
+- 可能であれば、ショートカット演算子（`+=`、`-=`、`*=`、`/=`、`%=`、`.=` など）を使用してください。
+
+- 可能であれば、ショートカット正規表現パターン（`\d`、`\D`、`\w`、`\W` など）を使用してください。
+
+- ファイルパスを定義する際は、`'/'` よりむしろ `DIRECTORY_SEPARATOR` 定数を使用してください。
+
+::: tip
+PhpStorm プラグインの [Php Inspections (EA Extended)](https://plugins.jetbrains.com/idea/plugin/7622-php-inspections-ea-extended-) は、これらのベストプラクティスの問題を見つけて修正するのに役立ちます。
+:::
+
+## 名前空間とクラス名
+
+- ベースパスにマップされている既知のベース名前空間があれば、クラスのファイルの場所を完全修飾名で推測できる [PSR-4](https://www.php-fig.org/psr/psr-4/) 仕様に従ってください。
+- 名前空間は、すべて小文字であるべきです。
+- クラス名は `StudlyCase` にする必要があります。
+- ファーストパーティのコードだけが、`craft\` および `pixelandtonic\` 名前空間ルートを使用します。サードパーティプラグインは、ベンダー名とプラグイン名（例：`acme\myplugin\`）を参照する名前空間ルートを使用する必要があります。
+
+## メソッド名
+
+**いかなる引数も受け取らない** Getter メソッド（何かをするのではなく、何かを返すことを主たる目的とするメソッド）は、`get` ではじめます。そして、対応するマジック Getter プロパティを文書化するために、クラスの docblock に対応する `@property` タグがあるべきです。
 
 - `getAuthor()`
 - `getIsSystemOn()`
 - `getHasFreshContent()`
 
-Getter methods that **accept one or more arguments** (regardless of whether they can be omitted) should only begin with `get` if it “sounds right”.
+（省略できるかどうかに関わらず）**1つ、または、複数の引数を受け入れる** Getter メソッドは、「正しいと思う」場合のみ `get` ではじめます。
 
 - `getError($attribute)`
 - `hasErrors($attribute = null)`
 
-Static methods should generally not start with `get`.
+静的メソッドは、一般的に `get` ではじめるべきではありません。
 
 - `className()`
 - `displayName()`
 
-## Type Declarations
+## 型宣言
 
-### Argument Types
+### 引数の型
 
-Use PHP 7.0-supported [argument type declarations](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration) for all function arguments whenever possible. The only exceptions should be:
+可能な限り、すべてのファンクションの引数に PHP 7.0 でサポートされる[引数の型宣言](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration)を使用してください。唯一の例外は、次の通りです。
 
-- [Magic methods](http://php.net/manual/en/language.oop5.magic.php) (e.g. `__toString()`)
-- Arguments that accept multiple non-`null` value types
-- Methods that override a parent class’s method, where the parent method doesn’t have type declarations
-- Methods that are required by an interface, and the interface method doesn’t have type declarations
+- [マジックメソッド](http://php.net/manual/en/language.oop5.magic.php)（例：`__toString()`）
+- 複数の `null` 以外の値型を受け入れる引数
+- 親メソッドで型宣言を持たない、親クラスのメソッドを上書きするメソッド
+- インターフェースで必要なメソッドで、インターフェースメソッドに型宣言がないもの
 
-If an argument accepts two types and one of them is `null`, the argument should have a type declaration for the non-`null` type, and a default value of `null`.
+2つの型を受け入れる引数の1つが `null` の場合、引数は `null` 以外の型を型宣言に持ち、デフォルト値を `null` とします。
 
 ```php
 public function foo(string $bar = null)
 ```
 
-::: tip Do this even if there are required arguments following the argument that accepts `null`. This is the only way to enforce an argument type while also allowing `null` in PHP. :::
+::: tip
+`null` を受け入れる引数の次に必須の引数がある場合も、これを実行します。これは、PHP で `null` を許可しながら引数型を強制する唯一の方法です。
+:::
 
-### Return Types
+### 戻り値の型
 
-Use PHP 7.0-supported [return type declarations](http://php.net/manual/en/functions.returning-values.php#functions.returning-values.type-declaration) for all methods whenever possible. The only exceptions should be:
+可能な限り、すべてのメソッドに PHP 7.0 でサポートされる[戻り値の型宣言](http://php.net/manual/en/functions.returning-values.php#functions.returning-values.type-declaration)を使用してください。唯一の例外は、次の通りです。
 
-- [Magic methods](http://php.net/manual/en/language.oop5.magic.php) (e.g. `__toString()`)
-- Methods with multiple return types
-- Methods that override a parent class’s method, where the parent method doesn’t have a return type
-- Methods that are required by an interface, and the interface method doesn’t have a return type
+- [マジックメソッド](http://php.net/manual/en/language.oop5.magic.php)（例：`__toString()`）
+- 複数の戻り値の型を持つメソッド
+- 親メソッドで戻り値の型を持たない、親クラスのメソッドを上書きするメソッド
+- インターフェースで必要なメソッドで、インターフェースメソッドに戻り値の型がないもの
 
-## Docblocks
+## Docblock
 
-- Methods that override subclass methods or implement an interface method, and don’t have anything relevant to add to the docblock, should only have `@inheritdoc` in the docblock.
-- Use full sentences with proper capitalization, grammar, and punctuation in docblock descriptions.
-- `@param` and `@return` tags should **not** have proper capitalization or punctuation.
-- Use `bool` and `int` instead of `boolean` and `integer` in type declarations.
-- Specify array members’ class names in array type declarations when it makes sense (`ElementInterface[]` rather than `array`).
-- Chainable functions that return an instance of the current class should use `static` as the return type declaration.
-- Functions that don’t ever return anything should have `@return void`.
+- サブクラスメソッドを上書きしたり、インターフェースメソッドを実装したり、docblock へ追加するものがないメソッドは、docblock に `@inheritdoc` だけを持つべきです。
+- 適切な大文字、文法、および、句読点を持つ完全な文章を docblock の説明に使用してください。
+- `@param` および `@return` タグには、大文字や句読点を使用**しないでください**。
+- 型定義では、`boolean` と `integer` の代わりに `bool` と `int` を使用してください。
+- 意味をなすとき、配列の型宣言で配列メンバのクラス名を指定してください（`array` よりむしろ `ElementInterface[]`）。
+- 現在のクラスのインスタンスを返す連鎖可能なファンクションでは、戻り値の型宣言として `static` を使用するべきです。
+- 何も返さないファンクションは、`@return void` を持つべきです。
 
-### Interfaces vs. Implementation Classes
+### インターフェース 対  実装クラス
 
-`@param` , `@return` , `@var` , `@method` and `@property` tags on public service methods should reference Interfaces (when applicable), not their implementation class:
+`パブリックサービスメソッド上の @param`、`@return`、`@var`、`@method` および `@property` タグは、（該当する場合）実装クラスではなくインターフェースを参照します。
 
 ```php
 // Bad:
@@ -140,7 +168,7 @@ Use PHP 7.0-supported [return type declarations](http://php.net/manual/en/functi
  */
 ```
 
-Inline `@var` tags should reference implementation classes, not their interfaces:
+インラインの `@var` タグは、インターフェースではなく実装クラスを参照します。
 
 ```php
 // Bad:
@@ -151,11 +179,11 @@ Inline `@var` tags should reference implementation classes, not their interfaces
 /** @var \craft\base\Element $element */
 ```
 
-## Control Flow
+## 制御フロー
 
-### Happy Paths
+### Happy Path
 
-Use [them](https://en.wikipedia.org/wiki/Happy_path). In general the execution of a method should only make it all the way to the end if everything went as expected.
+[Happy Path](https://en.wikipedia.org/wiki/Happy_path) を使用してください。すべて期待通りにできた場合、一般的にはメソッドの実行が最後に行き着くところまで処理されるべきです。
 
 ```php
 // Bad:
@@ -179,7 +207,7 @@ return true;
 
 ### `if`…`return`…`else`
 
-Don’t do this. There’s no point, and can be misleading at first glance.
+このようにしないでください。それは意味がなく、一見すると紛らわしいです。
 
 ```php
 // Bad:
@@ -197,11 +225,11 @@ if ($condition) {
 return $bar;
 ```
 
-## Controllers
+## コントローラー
 
-### Return Types
+### 戻り値の型
 
-Controller actions that should complete the request must return either a string (HTML) or a Response object.
+リクエストを完了するコントローラーアクションでは、文字列（HTML）、または、Response オブジェクトのいずれかを返す必要があります。
 
 ```php
 // Bad:
@@ -213,9 +241,9 @@ return $this->asJson($obj);
 return $this->renderTemplate($template, $variables);
 ```
 
-### JSON Actions
+### JSON アクション
 
-Controller actions that have the option of returning JSON should do so if the request explicitly accepts a JSON response; not if it’s an Ajax request.
+JSON を返すオプションを持つコントローラーアクションでは、Ajax リクエストの場合ではなく、リクエストが明示的に JSON レスポンスを受け入れる場合に、JSON を返す必要があります。
 
 ```php
 // Bad:
@@ -229,34 +257,35 @@ if (\Craft::$app->getRequest()->getAcceptsJson()) {
 }
 ```
 
-Controller actions that *only* return JSON should require that the request accepts JSON.
+JSON *だけを* 返すコントローラーアクションでは、リクエストで JSON を受け入れる必要があります。
 
 ```php
 $this->requireAcceptsJson();
 ```
 
-## Exceptions
+## 例外
 
-- If an exception is likely to occur as a result of user error, use the <api:yii\base\UserException> class (or a subclass)
-- Only translate exception messages with <api:Craft::t()> if it’s a <api:yii\base\UserException>.
+- ユーザーエラーの結果として、例外が起こる可能性がある場合、<api:yii\base\UserException> クラス（または、サブクラス）を使用してください。
+- <api:yii\base\UserException> の場合のみ、<api:Craft::t()> で例外メッセージを翻訳してください。
 
-## DB Queries
+## データベースクエリ
 
-- Always wrap table names with `{{%` and `}}` (e.g. `{{%entries}}`) so it gets properly quoted and the table prefix gets inserted.
-- Use the `['col1', 'col2']` syntax with `select()` and `groupBy()` instead of `'col1, col2'`, even if only referencing a single column
-- Use the `['{{%tablename}}']` syntax with `from()` instead of `'{{%tablename}}'`.
-- Use the `['col1' => SORT_ASC, 'col2' => SORT_DESC]` syntax with `orderBy()` instead of `'col1, col2 desc'`.
+- テーブル名は常に `{{%` と `}}`（例：`{{%entries}}`）で囲み、適切に引用されテーブル接頭辞が挿入されるようにします。
+- 単一のカラムを参照する場合でも、`'col1, col2'` の代わりに `select()` および `groupBy()` で `['col1', 'col2']` 構文を使用してください。
+- `'{{%tablename}}'` の代わりに、`from()` で `['{{%tablename}}']` 構文を使用してください。
+- `'col1, col2 desc'` の代わりに、`orderBy()` で `['col1' => SORT_ASC, 'col2' => SORT_DESC]` 構文を使用してください。
 
-### Conditions
+### 条件
 
-- Always use Yii’s [declarative condition syntax](api:yii\db\QueryInterface::where()) when possible, as it will automatically quote table/column names and values for you.
-- For consistency, use: 
-  - `['col' => $values]` instead of `['in', 'col', $values]`
-  - `['col' => $value]` instead of `['=', 'col', $value]`
-  - `['like', 'col', 'value']` instead of `['like', 'col', '%value%', false]` *(unless the `%` is only needed on one side of `value`)*
-- If searching for `NULL`, use the `['col' => null]` syntax.
-- If searching for `NOT NULL`, use the `['not', ['col' => null]]` syntax.
-- If you cannot use the declarative condition syntax (e.g. the condition is referencing another table/column name rather than a value, as is often the case with joins), make sure you’ve quoted all column names, and any values that you aren’t 100% confident are safe should be added as query params.
+- テーブル / カラム名や値を自動的に引用するように、可能な限り Yii の[宣言条件構文](api:yii\db\QueryInterface::where())を使用してください。
+- 一貫性のために、次のものを使用してください。
+   - `['in', 'col', $values]` の代わりに `['col' => $values]`
+   - `['=', 'col', $value]` の代わりに `['col' => $value]`
+   - `['like', 'col', '%value%', false]` の代わりに `['like', 'col', 'value']`
+      *（`%` は `value` が片側にのみ必要な場合を除きます。）*
+- `NULL` を検索する場合、`['col' => null]` 構文を使用してください。
+- `NOT NULL` を検索する場合、`['not', ['col' => null]]` 構文を使用してください。
+- 宣言条件構文が使用できない場合（例えば、しばしば join を使うようなケースのように、条件が値ではなく他のテーブル / カラム名を参照するなど）、100%安全かどうか自信がないすべてのカラム名と値を確実に引用符で囲み、クエリパラメータとして追加する必要があります。
 
 ```php
 // Bad:
@@ -268,9 +297,9 @@ $query->where(['foo.thing' => null]);
 $query->innerJoin('{{%bar}} bar', '[[bar.fooId]] = [[foo.id]]');
 ```
 
-## Getters & Setters
+## Getter と Setter
 
-Getter and setter methods should have a corresponding `@property` tag in the class’s docblock, so IDEs like PhpStorm can be aware of the magic properties.
+Getter および Setter メソッドは、クラスの docblock 内に対応する `@property` タグを持つ必要があります。それによって、PhpStorm のような IDE がマジックプロパティを知ることができます。
 
 ```php
 /**
@@ -290,7 +319,7 @@ class Entry
 }
 ```
 
-For a slight performance improvement and easier debugging, you should generally stick with calling the getter and setter methods directly rather than going through their magic properties.
+パフォーマンスを少し向上させデバッグを容易にするために、一般的にはマジックプロパティを通すよりむしろ、Getter および Setter メソッドを直接呼び出し続けるべきです。
 
 ```php
 // Bad:
@@ -302,9 +331,9 @@ $oldAuthor = $entry->getAuthor();
 $entry->setAuthor($newAuthor);
 ```
 
-### App Component Getters
+### App コンポーネントの Getter
 
-App components should have their own getter functions, which call the app component getter method [get()](api:yii\di\ServiceLocator::get()) directly:
+App コンポーネントには、App コンポーネントの Getter メソッドである [get()](api:yii\di\ServiceLocator::get()) を直接呼び出す、独自の Getter ファンクションが必要です。
 
 ```php
 /**
@@ -316,7 +345,7 @@ public function getEntries()
 }
 ```
 
-And you should use those instead of their magic properties:
+そして、それらをマジックプロパティの代わりに使用する必要があります。
 
 ```php
 // Bad:
@@ -326,7 +355,7 @@ And you should use those instead of their magic properties:
 \Craft::$app->getEntries()->saveEntry($entry);
 ```
 
-If you will be referencing the same app component multiple times within the same method, save a local reference to it.
+同じメソッド内で同じ App コンポーネントを複数回参照する場合、ローカル参照をそこに保存します。
 
 ```php
 // Bad:
@@ -338,3 +367,4 @@ $entriesService = \Craft::$app->getEntries();
 $entriesService->saveEntry($entry1);
 $entriesService->saveEntry($entry2);
 ```
+

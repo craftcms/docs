@@ -1,6 +1,6 @@
-# Forgot Password Form
+# パスワードを忘れた際のフォーム
 
-You can create a Forgot Password form using the following code:
+次のコードを利用して、パスワードを忘れた際のフォームを作成できます。
 
 ```twig
 <form method="post" accept-charset="UTF-8">
@@ -24,4 +24,7 @@ You can create a Forgot Password form using the following code:
 </form>
 ```
 
-::: tip Craft doesn’t ever automatically create links to your Forgot Password page – only your own templates will link to it – so you don’t need to set any config settings with the path to this page, unlike other pages in the password-reset flow (e.g. <config:setPasswordPath> and <config:setPasswordSuccessPath>). :::
+::: tip
+Craft がパスワードを忘れた際のページを自動的に作成することはありません。あなた自身がテンプレートにリンクを設定するだけです。そのため、パスワードリセットフローの他のページとは異なり、このページのパスにコンフィグ設定をセットする必要はありません（例：<config:setPasswordPath> および <config:setPasswordSuccessPath>）。
+:::
+

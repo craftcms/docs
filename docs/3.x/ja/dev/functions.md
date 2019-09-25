@@ -1,64 +1,29 @@
-# Functions
+# ファンクション
 
-The following functions are available to Twig templates in Craft:
+[Twig に付随する](https://twig.symfony.com/doc/functions/index.html)テンプレートファンクションに加えて、Craft がいくつか独自のものを提供します。
 
-## `actionInput`
+## `actionInput( actionPath )`
 
-A shortcut for outputting a hidden input used to route a POST request to a particular controller action. This is effectively the same as writing `<input type="hidden" name="action" value="controller/action/route">` directly into a template.
-
-```twig
-{{ actionInput('users/save-user') }}
-```
-
-You can optionally set additional attributes on the tag by passing an `options` argument.
+特定のコントローラーやアクションのための POST リクエストをルーティングするために使用される不可視項目を出力するためのショートカット。これは、テンプレート内に直接 `<input type="hidden" name="action" value="controller/action-name">` を書き込むのと実質的に同じです。
 
 ```twig
-{{ actionInput('users/save-user', {
-    id: 'action-input'
-}) }}
+<form method="POST">
+    {{ actionInput('users/save-user') }}
+    <!-- ... -->
+</form>
 ```
 
-## `alias`
+## `alias( string )`
 
-Passes a string through [Craft::getAlias()](api:yii\BaseYii::getAlias()), which will check if the string begins with an [alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases). (See [Configuration](../config/README.md#aliases) for more info.)
+その文字列が[エイリアス](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)ではじまるかをチェックする [Craft::getAlias()](api:yii\BaseYii::getAlias()) に、文字列を渡します。（詳細については、[コンフィギュレーション](../config/README.md#aliases)を参照してください。）
 
 ```twig
 <img src="{{ alias('@assetBaseUrl/images/logo.png') }}">
 ```
 
-## `attr`
+## `beginBody()`
 
-Generates a list of HTML attributes based on the given object, using <api:yii\helpers\BaseHtml::renderTagAttributes()>.
-
-```twig
-{% set myAttributes = {
-    class: ['one', 'two'],
-    disabled: true,
-    readonly: false,
-    data: {
-        baz: 'Escape this "',
-        qux: {
-            some: ['data', '"quoted"']
-        }
-    },
-    style: {
-        'background-color': 'red',
-        'font-size': '20px'
-    },
-} %}
-
-<div {{ attr(myAttributes) }}></div>
-```
-
-## `attribute`
-
-Accesses a dynamic attribute of a variable.
-
-This works identically to Twig’s core [`attribute`](https://twig.symfony.com/doc/2.x/functions/attribute.html) function.
-
-## `beginBody`
-
-Outputs any scripts and styles that were registered for the “begin body” position. It should be placed right after your `<body>` tag.
+「begin body」に登録されたスクリプトやスタイルを出力します。`<body>` タグの直後に配置する必要があります。
 
 ```twig
 <body>
@@ -69,48 +34,30 @@ Outputs any scripts and styles that were registered for the “begin body” pos
 </body>
 ```
 
-## `block`
+## `ceil( num )`
 
-Prints a block’s output.
-
-This works identically to Twig’s core [`block`](https://twig.symfony.com/doc/2.x/functions/block.html) function.
-
-## `ceil`
-
-Rounds a number up.
+整数値に切り上げます。
 
 ```twig
-{{ ceil(42.1) }}
-{# Output: 43 #}
+{{ ceil(42.1) }} → 43
 ```
 
-## `className`
+## `className( object )`
 
-Returns the fully qualified class name of a given object.
+指定されたオブジェクトの完全修飾クラス名を返します。
 
-```twig
-{% set class = className(entry) %}
-{# Result: 'craft\\elements\\Entry' #}
-```
+## `clone( object )`
 
-## `clone`
-
-Clones a given object.
+指定されたオブジェクトのクローンを作成します。
 
 ```twig
 {% set query = craft.entries.section('news') %}
 {% set articles = clone(query).type('articles') %}
 ```
 
-## `constant`
+## `create( type )`
 
-Returns the constant value for a given string.
-
-This works identically to Twig’s core [`constant`](https://twig.symfony.com/doc/2.x/functions/constant.html) function.
-
-## `create`
-
-Creates a new object instance based on a given class name or object configuration. See <api:Yii::createObject()> for a full explanation of supported arguments.
+与えられたクラス名やオブジェクト設定に基づいて新しいオブジェクトインスタンスを作成します。サポートされる引数の詳細については、<api:Yii::createObject()> を参照してください。
 
 ```twig
 {# Pass in a class name #}
@@ -124,43 +71,20 @@ Creates a new object instance based on a given class name or object configuratio
 }) %}
 ```
 
-## `csrfInput`
+## `csrfInput()`
 
-Returns a hidden CSRF Token input. All sites that have CSRF Protection enabled must include this in each form that submits via POST.
-
-```twig
-{{ csrfInput() }}
-```
-
-You can optionally set additional attributes on the tag by passing an `options` argument.
+不可視の CSRF トークン入力欄を返します。CSRF 保護が有効になっているすべてのサイトでは、POST 経由で送信するそれぞれのフォームにこれを含めなければなりません。
 
 ```twig
-{{ csrfInput({
-    id: 'csrf-input'
-}) }}
+<form method="post">
+    {{ csrfInput() }}
+    <!-- ... -->
+</form>
 ```
 
-## `cycle`
+## `endBody()`
 
-Cycles on an array of values.
-
-This works identically to Twig’s core [`cycle`](https://twig.symfony.com/doc/2.x/functions/cycle.html) function.
-
-## `date`
-
-Converts an argument to a date.
-
-This works identically to Twig’s core [`date`](https://twig.symfony.com/doc/2.x/functions/date.html) function.
-
-## `dump`
-
-Dumps information about a template variable.
-
-This works identically to Twig’s core [`dump`](https://twig.symfony.com/doc/2.x/functions/dump.html) function.
-
-## `endBody`
-
-Outputs any scripts and styles that were registered for the “end body” position. It should be placed right before your `</body>` tag.
+「end body」に登録されたスクリプトやスタイルを出力します。`</body>` タグの直前に配置する必要があります。
 
 ```twig
 <body>
@@ -171,40 +95,33 @@ Outputs any scripts and styles that were registered for the “end body” posit
 </body>
 ```
 
-## `expression`
+## `expression( expression, params, config )`
 
-Creates and returns a new <api:yii\db\Expression> object, for use in database queries.
+データベースクエリで使用するための新しい <api:yii\db\Expression> オブジェクトを作成して返します。
 
-```twig
-{% set entries = craft.entries()
-    .andWhere(expression('[[authorId]] = :authorId', {authorId: currentUser.id}))
-    .all() %}
-```
+## `floor( num )`
 
-## `floor`
-
-Rounds a number down.
+整数値に切り捨てます。
 
 ```twig
-{{ floor(42.9) }}
-{# Output: 42 #}
+{{ floor(42.9) }} → 42
 ```
 
-## `getenv`
+## `getenv( name )`
 
-Returns the value of an environment variable.
+環境変数の値を返します。
 
 ```twig
 {{ getenv('MAPS_API_KEY') }}
 ```
 
-## `parseEnv`
+## `parseEnv( str )`
 
-Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
+文字列が環境変数（`$VARIABLE_NAME`）、および / または、エイリアス（`@aliasName`）を参照しているかどうかを確認し、参照されている値を返します。
 
-## `head`
+## `head()`
 
-Outputs any scripts and styles that were registered for the “head” position. It should be placed right before your `</head>` tag.
+「head」に登録されたスクリプトやスタイルを出力します。`</head>` タグの直前に配置する必要があります。
 
 ```twig
 <head>
@@ -213,127 +130,45 @@ Outputs any scripts and styles that were registered for the “head” position.
 </head>
 ```
 
-## `hiddenInput`
+## `plugin( handle )`
 
-Generates an HTML input tag.
-
-```twig
-{{ hiddenInput('entryId', entry.id) }}
-{# Output: <input type="hidden" name="entryId" value="100"> #}
-```
-
-You can optionally set additional attributes on the tag by passing an `options` argument.
-
-```twig
-{{ hiddenInput('entryId', entry.id, {
-    id: 'entry-id-input'
-}) }}
-```
-
-## `include`
-
-Returns the rendered content of a template.
-
-This works identically to Twig’s core [`include`](https://twig.symfony.com/doc/2.x/functions/include.html) function.
-
-## `input`
-
-Generates an HTML input tag.
-
-```twig
-{{ input('email', 'email-input', '') }}
-{# Output: <input type="email" name="email-input" value=""> #}
-```
-
-You can optionally set additional attributes on the tag by passing an `options` argument.
-
-```twig
-{{ input('email', 'email-input', '', {
-    id: 'custom-input'
-}) }}
-```
-
-## `max`
-
-Returns the biggest value in an array.
-
-This works identically to Twig’s core [`max`](https://twig.symfony.com/doc/2.x/functions/max.html) function.
-
-## `min`
-
-Returns the lowest value in an array.
-
-This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) function.
-
-## `parent`
-
-Returns the parent block’s output.
-
-This works identically to Twig’s core [`parent`](https://twig.symfony.com/doc/2.x/functions/parent.html) function.
-
-## `plugin`
-
-Returns a plugin instance by its handle, or `null` if no plugin is installed and enabled with that handle.
+ハンドルに従ってプラグインインスタンスを返します。そのハンドルでインストールされ有効化されているプラグインがない場合、`null` を返します。
 
 ```twig
 {{ plugin('commerce').version }}
 ```
 
-## `random`
+## `redirectInput( url )`
 
-Returns a random value.
+`<input type="hidden" name="redirect" value="{{ url|hash }}">` を入力するためのショートカットです。
 
-This works identically to Twig’s core [`random`](https://twig.symfony.com/doc/2.x/functions/random.html) function.
+## `seq( name, length, next )`
 
-## `range`
-
-Returns a list containing an arithmetic progression of integers.
-
-This works identically to Twig’s core [`range`](https://twig.symfony.com/doc/2.x/functions/range.html) function.
-
-## `redirectInput`
-
-Shortcut for typing `<input type="hidden" name="redirect" value="{{ url|hash }}">`.
-
-```twig
-{{ redirectInput(url) }}
-```
-
-You can optionally set additional attributes on the tag by passing an `options` argument.
-
-```twig
-{{ redirectInput(url, {
-    id: 'redirect-input'
-}) }}
-```
-
-## `seq`
-
-Outputs the next or current number in a sequence, defined by `name`:
+`name` で定義されたシーケンスの次または現在の番号を出力します。
 
 ```twig
 <p>This entry has been read {{ seq('hits:' ~ entry.id) }} times.</p>
 ```
 
-Each time the function is called, the given sequence will be automatically incremented.
+ファンクションが呼び出されるたびに、与えられたシーケンスは自動的にインクリメントされます。
 
-You can optionally have the number be zero-padded to a certain length.
+オプションで特定の長さにゼロ詰めした数値にすることができます。
 
 ```twig
 {{ now|date('Y') ~ '-' ~ seq('orderNumber:' ~ now|date('Y'), 5) }}
 {# outputs: 2018-00001 #}
 ```
 
-To view the current number in the sequence without incrementing it, set the `next` argument to `false`.
+インクリメントせずにシーケンスの現在の数字を表示するには、`next` 引数に `false` をセットします。
 
 ```twig
 <h5><a href="{{ entry.url }}">{{ entry.title }}</a></h5>
 <p>{{ seq('hits:' ~ entry.id, next=false) }} views</p>
 ```
 
-## `shuffle`
+## `shuffle( array )`
 
-Randomizes the order of the elements within an array.
+配列内のエレメントの順序をランダム化します。
 
 ```twig
 {% set promos = shuffle(homepage.promos) %}
@@ -347,124 +182,82 @@ Randomizes the order of the elements within an array.
 {% endfor %}
 ```
 
-## `siteUrl`
+## `siteUrl( path, params, scheme, siteId )`
 
-Similar to [url()](#url-path-params-scheme-mustshowscriptname), except *only* for creating URLs to pages on your site.
+サイト上のページへの URL を作成するため _だけ_ という点を除けば、[url()](#url-path-params-scheme-mustshowscriptname) と似ています。
 
 ```twig
 <a href="{{ siteUrl('company/contact') }}">Contact Us</a>
 ```
 
-### Arguments
+### 引数
 
-The `siteUrl()` function has the following arguments:
+`siteUrl()` ファンクションは、次の引数を持っています。
 
-* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or an object (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
-* **`siteId`** – The ID of the site that the URL should point to. By default the current site will be used.
+* **`path`** – 結果となる URL がサイトで指すべきパス。それは、ベースサイト URL に追加されます。
+* **`params`** – URL に追加するクエリ文字列パラメータ。これは文字列（例：`'foo=1&bar=2'`）またはオブジェクト（例：`{foo:'1', bar:'2'}`）が利用可能です。
+* **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
+* **`siteId`** – URL が指すべきサイト ID。デフォルトでは、現在のサイトが使用されます。
 
-## `svg`
+## `svg( svg, sanitize, namespace, class )`
 
-Outputs an SVG document.
+SVG 文書を出力します。
 
-You can pass the following things into it:
+次のものを渡すことができます。
 
-- An SVG file path.
+- SVG ファイルのパス。
 
-```twig
-  {{ svg('@webroot/icons/lemon.svg') }}
-  ```
+   ```twig
+   {{ svg('@webroot/icons/lemon.svg') }}
+   ```
 
-- A <api:craft\elements\Asset> object, such as one pulled in from an [Assets field](../assets-fields.md).
+- [アセットフィールド](../assets-fields.md)から引っ張られたような、<api:craft\elements\Asset> オブジェクト。
 
-  ```twig
-  {% set image = entry.myAssetsField.one() %}
-  {% if image and image.extension == 'svg' %}
+   ```twig
+    {% set image = entry.myAssetsField.one() %}
+    {% if image and image.extension == 'svg' %}
+      {{ svg(image) }}
+    {% endif %}
+   ```
+
+- 生の SVG マークアップ。
+
+   ```twig
+    {% set image = include('_includes/icons/lemon.svg') %}
     {{ svg(image) }}
-  {% endif %}
-  ```
+   ```
 
-- Raw SVG markup.
-
-  ```twig
-  {% set image = include('_includes/icons/lemon.svg') %}
-  {{ svg(image) }}
-  ```
-
-By default, if you pass an asset or raw markup into the function, the SVG will be sanitized of potentially malicious scripts using [svg-sanitizer](https://github.com/darylldoyle/svg-sanitizer), and any IDs or class names within the document will be namespaced so they don’t conflict with other IDs or class names in the DOM. You can disable those behaviors using the `sanitize` and `namespace` arguments:
+ファンクションにアセットまたは生のマークアップを渡した場合、デフォルトでは SVG は [svg-sanitizer](https://github.com/darylldoyle/svg-sanitizer) を使用して潜在的に悪意のあるスクリプトをサニタイズし、ドキュメント内の ID や class 名が DOM の他の ID や class 名と衝突しないよう名前空間を付加します。引数 `sanitize`、および、`namespace` を使用して、これらの動作を無効にできます。
 
 ```twig
 {{ svg(image, sanitize=false, namespace=false) }}
 ```
 
-You can also specify a custom class name that should be added to the root `<svg>` node using the `class` argument:
+引数 `class` を使用して、ルートの `<svg>` ノードに追加する独自の class 名を指定することもできます。
 
 ```twig
 {{ svg('@webroot/icons/lemon.svg', class='lemon-icon') }}
 ```
 
-## `source`
+## `url( path, params, scheme, mustShowScriptName )`
 
-Returns the content of a template without rendering it.
-
-This works identically to Twig’s core [`source`](https://twig.symfony.com/doc/2.x/functions/source.html) function.
-
-## `tag`
-
-Renders a complete HTML tag.
-
-```twig
-{{ tag('div', {
-    class: 'foo'
-}) }}
-{# Output: <div class="foo"></div> #}
-```
-
-If `text` is included in the attributes argument, its value will be HTML-encoded and set as the text contents of the tag.
-
-```twig
-{{ tag('div', {
-    text: 'Hello'
-}) }}
-{# Output: <div>Hello</div> #}
-```
-
-If `html` is included in the attributes argument (and `text` isn’t), its value will be set as the inner HTML of the tag (without getting HTML-encoded).
-
-```twig
-{{ tag('div', {
-    html: 'Hello<br>world'
-}) }}
-{# Output: <div>Hello<br>world</div> #}
-```
-
-All other keys passed to the second argument will be set as attributes on the tag, using <api:yii\helpers\BaseHtml::renderTagAttributes()>.
-
-## `template_from_string`
-
-Loads a template from a string.
-
-This works identically to Twig’s core [`template_from_string`](https://twig.symfony.com/doc/2.x/functions/template_from_string.html) function.
-
-## `url`
-
-Returns a URL.
+URL を返します。
 
 ```twig
 <a href="{{ url('company/contact') }}">Contact Us</a>
 ```
 
-### Arguments
+### 引数
 
-The `url()` function has the following arguments:
+`url()` ファンクションは、次の引数を持っています。
 
-* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or an object (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
-* **`mustShowScriptName`** – If this is set to `true`, then the URL returned will include “index.php”, disregarding the <config:omitScriptNameInUrls> config setting. (This can be useful if the URL will be used by POST requests over Ajax, where the URL will not be shown in the browser’s address bar, and you want to avoid a possible collision with your site’s .htaccess file redirect.)
+* **`path`** – 結果となる URL がサイトで指すべきパス。それは、ベースサイト URL に追加されます。
+* **`params`** – URL に追加するクエリ文字列パラメータ。これは文字列（例：`'foo=1&bar=2'`）またはオブジェクト（例：`{foo:'1', bar:'2'}`）が利用可能です。
+* **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
+* **`mustShowScriptName`** – ここに `true` がセットされている場合、「index.php」を含めた URL が返され、コンフィグ設定の <config:omitScriptNameInUrls> は無視されます。（ブラウザのアドレスバーに表示されない URL と .htaccess ファイルのリダイレクトとの衝突を避けたいような、Ajax 経由の POST リクエストで使用される URL の場合に有用です。）
 
-::: tip You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
+::: tip
+クエリ文字列パラメータを追加、および / または、絶対 URL にスキームを適用するために、`url()` ファンクションを使用することができます。
 
 ```twig
 {{ url('http://my-project.com', 'foo=1', 'https') }}
@@ -472,3 +265,4 @@ The `url()` function has the following arguments:
 ```
 
 :::
+

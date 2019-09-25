@@ -1,10 +1,10 @@
-# Environmental Settings
+# 環境設定
 
-Plugin settings that may need to change per-environment, or contain sensitive information, should be implemented as **environmental settings**.
+環境ごとに変更が必要だったり、機密情報を含む可能性があるプラグイン設定は、**環境設定**として実装されるべきです。
 
-Environmental settings are settings whose raw values may reference an environment variable or alias, and which get parsed by <api:Craft::parseEnv()> at runtime.
+環境設定には、環境変数やエイリアスを参照する生の値がセットされ、ランタイムで <api:Craft::parseEnv()> によって解析されます。
 
-Here’s an example model with a `$secretKey` property that may be set to an environment variable, and a `getSecretKey()` method that is responsible for parsing the value.
+これは、環境変数にセットされる `$secretKey` プロパティと、値の解析を担う `getSecretKey()` メソッドのモデルの例です。
 
 ```php
 use Craft;
@@ -16,7 +16,7 @@ class MyModel extends Model
      * @var string the raw secret key (e.g. '$ENV_NAME')
      */
     public $secretKey;
-
+    
     /**
      * @return string the parsed secret key (e.g. 'XXXXXXXXXXX')
      */ 
@@ -27,9 +27,9 @@ class MyModel extends Model
 }
 ```
 
-## Validation
+## バリデーション
 
-If your environmental settings require special validation rules, you can have the validators check the parsed values rather than the raw values using <api:craft\behaviors\EnvAttributeParserBehavior>.
+環境変数が特別なバリデーションルールを必要としない場合、<api:craft\behaviors\EnvAttributeParserBehavior> を使用して生の値ではなく、パースした値をバリデータに確認させることもできます。
 
 ```php
 use Craft;
@@ -47,7 +47,7 @@ class MyModel extends Model
             ],
         ];
     }
-
+    
     public function rules()
     {
         return [
@@ -55,14 +55,14 @@ class MyModel extends Model
             ['secretKey', 'string', 'length' => 50],
         ];
     }
-
+    
     // ...
 }
 ```
 
-## Autosuggest Inputs
+## オートサジェスト入力
 
-To guide users when entering your setting’s value in the Control Panel, give your setting an autosuggest input.
+コントロールパネルで設定値を入力するユーザーに案内するために、設定にオートサジェスト入力を提供できます。
 
 ```twig
 {% import "_includes/forms" as forms %}
@@ -76,9 +76,9 @@ To guide users when entering your setting’s value in the Control Panel, give y
 }) }}
 ```
 
-When `suggestEnvVars` is set to `true`, the autosuggest input will call <api:craft\web\twig\variables\Cp::getEnvSuggestions()> to get its suggestions, and a tip will show up below the form field advising the user that they can set the value to an environment variable.
+`suggestEnvVars` が `true` にセットされている場合、オートサジェスト入力はサジェストを取得するために <api:craft\web\twig\variables\Cp::getEnvSuggestions()> を呼び出します。そして、フォームフィールドの下にヒントを表示し、環境変数にセットできる値をユーザーにアドバイスします。
 
-If your setting is for a URL or file system path, you should also set `suggestAliases` to `true`.
+設定が URL、または、ファイルシステムパスの場合、`suggestAliases` も `true` に設定する必要があります。
 
 ```twig{4}
 {{ forms.autosuggestField({
@@ -87,3 +87,4 @@ If your setting is for a URL or file system path, you should also set `suggestAl
     suggestAliases: true
 }) }}
 ```
+

@@ -1,6 +1,6 @@
-# `{% cache %}` Tags
+# `{% cache %}` タグ
 
-This tag will cache a portion of your template, which can improve performance for subsequent requests, as they will have less work to do.
+このタグはテンプレートの一部をキャッシュするため、後からのリクエストのパフォーマンスを向上させます。
 
 ```twig
 {% cache %}
@@ -10,15 +10,15 @@ This tag will cache a portion of your template, which can improve performance fo
 {% endcache %}
 ```
 
-Warning: If you’re suffering from abnormal page load times, you may be experiencing a suboptimal hosting environment. Please consult a specialist before trying `{% cache %}`. `{% cache %}` is not a substitute for fast database connections, efficient templates, or moderate query counts. Possible side effects include stale content, excessively long-running background tasks, stuck tasks, and in rare cases, death. Ask your hosting provider if `{% cache %}` is right for you.
+警告：異常なページの読み込み時間で苦しむ場合、最適なホスティング環境を経験していないかもしれません。`{% cache %}` を試す前に、専門家に相談してください。`{% cache %}` は高速なデータベース接続、効率的なテンプレート、または適度なクエリ数に代わるものではありません。可能性のある副作用には、古くなったコンテンツ、過度に時間のかかるバックグラウンドタスク、動かなくなったタスク、および、稀に消滅があります。`{% cache %}` が適切かどうかをホスティングプロバイダに問い合わせてください。
 
-## Parameters
+## パラメータ
 
-The `{% cache %}` tag supports the following parameters:
+`{% cache %}` タグは、次のパラメータをサポートしています。
 
 ### `globally`
 
-Caches the output globally (for the current site locale), rather than on a per-URL basis.
+URL ごとではなく、（現在のサイトロケールのための）グローバルな出力をキャッシュします。
 
 ```twig
 {% cache globally %}
@@ -26,13 +26,14 @@ Caches the output globally (for the current site locale), rather than on a per-U
 
 ### `using key`
 
-Specifies the name of the key the cache should use. If this is not provided, a random key will be generated when Twig first parses the template.
+キャッシュが使用するキーの名前を指定します。これを指定しない場合、Twig が最初にテンプレートを解析するときにランダムなキーが生成されます。
 
 ```twig
 {% cache using key "page-header" %}
 ```
 
-::: tip You can combine this parameter with [globally](#globally) to cache templates on a per-page basis, without letting any query string variables get included in the path:
+::: tip
+クエリ文字列の変数をパスに含めることなく、ページごとのテンプレートをキャッシュするために [globally](#globally) パラメータを組み合わせることができます。
 
 ```twig
 {% cache globally using key craft.app.request.pathInfo %}
@@ -40,17 +41,19 @@ Specifies the name of the key the cache should use. If this is not provided, a r
 
 :::
 
-::: warning If you change the template code within a `{% cache %}` that uses a custom key, any existing template caches will not automatically be purged. You will either need to assign the tag a new key, or clear your existing template caches manually using the Clear Caches tool in Settings. :::
+::: warning
+カスタムキーを利用している `{% cache %}` 内のテンプレートコードを変更する場合、既存のテンプレートキャッシュは自動的にパージされません。タグに新しいキーを割り当てるか、「設定」の「キャッシュをクリア」ツールを使用して既存のテンプレートキャッシュを手動でクリアする必要があります。
+:::
 
 ### `for`
 
-The amount of time it should take for the cache to expire.
+キャッシュが有効期限になるまでの時間。
 
 ```twig
 {% cache for 3 weeks %}
 ```
 
-The accepted duration units are:
+許可される継続時間の単位は、次の通りです。
 
 - `sec`(`s`)
 - `second`(`s`)
@@ -64,21 +67,23 @@ The accepted duration units are:
 - `year`(`s`)
 - `week`(`s`)
 
-Tip: If this parameter is omitted, your <config:cacheDuration> config setting will be used to define the default duration.
+ヒント：このパラメータが省略される場合、コンフィグ設定の <config:cacheDuration> がデフォルトの継続時間を定義するために使用されます。
 
 ### `until`
 
-A [DateTime](http://php.net/manual/en/class.datetime.php) object defining when the cache should expire.
+キャッシュの有効期限を [DateTime](http://php.net/manual/en/class.datetime.php) オブジェクトで定義します。
 
 ```twig
 {% cache until entry.eventDate %}
 ```
 
-::: tip You can only use [for](#for) ***or*** [until](#until) in a single `{% cache %}` tag. :::
+::: tip
+[for](#for)  **_または_** [ until](#until) のいずれかを1つの `{% cache %}` タグで使用できます。
+:::
 
 ### `if`
 
-Only activates the `{% cache %}` tag if a certain condition is met.
+ある条件が満足される場合のみ、 `{% cache %}` タグを作動させます。
 
 ```twig
 {# Only cache if this is a mobile browser #}
@@ -87,40 +92,44 @@ Only activates the `{% cache %}` tag if a certain condition is met.
 
 ### `unless`
 
-Prevents the `{% cache %}` tag from activating if a certain condition is met.
+ある条件が満たされる場合、`{% cache %}` タグが作動しないようにします。
 
 ```twig
 {# Don't cache if someone is logged in #}
 {% cache unless currentUser %}
 ```
 
-::: tip You can only use [if](#if) ***or*** [unless](#unless) in a single `{% cache %}` tag. :::
+::: tip
+[if](#if)  **_または_** [ unless](#unless) のいずれかを1つの `{% cache %}`タグで使用できます。
+:::
 
-## Cache clearing
+## キャッシュのクリア
 
-Your caches will automatically clear when any elements (entries, assets, etc.) within the tags are saved or deleted.
+タグ内のエレメント（エントリ、アセットなど）が保存または削除されると、キャッシュは自動的にクリアされます。
 
-If you have any element *queries* within the tags (e.g. a `craft.entries`), and you create a new element that should be returned by one of the queries, Craft will also be able to figure that out and clear the cache.
+タグ内にエレメント _クエリ_（例：`craft.entries`）を持ち、クエリの1つによって返される新しいエレメントを作成する場合、Craft はそれを判断してキャッシュをクリアすることもできます。
 
-You can also manually clear all of your template caches from the Settings page, using the “Clear Caches” tool.
+「キャッシュをクリア」ツールを使用して、「設定」ページからすべてのテンプレートキャッシュを手動でクリアすることもできます。
 
-## When to use `{% cache %}` tags
+## どんなときに `{% cache %}` タグを使うのか
 
-You should use `{% cache %}` tags any time you’ve got a template that’s causing a lot of database queries, or you’re doing something very computationally expensive with Twig.
+沢山のデータベースクエリを引き起こすテンプレートがある場合、または Twig の計算上非常にコストがかかる処理を行っているときは、`{% cache %}` タグを使うべきです。
 
-Here are some examples of when to use them:
+それらを使用する場合のいくつかの例です。
 
-* A big list of entries
-* A Matrix field loop, where some of the blocks have relational fields on them, adding their own additional database queries to the page
-* Whenever you’re pulling in data from another site
+* エントリの大きなリスト
+* いくつかのブロックが関連フィールドを持ち、独自のデータベースクエリをページに追加している行列フィールドのループ
+* 他のサイトからデータを取得しているときはいつでも
 
-There are also some cases where it’s *not* a good idea to use them:
+それらを使用するのがよいアイデア _ではない_ 場合のいくつかの例です。
 
-* Don’t use them to cache static text; that will be more expensive than simply outputting the text.
-* You can’t use them outside of top-level `{% block %}` tags within a template that extends another.
-* The `{% cache %}` tag will only cache HTML, so using tags like [{% css %}](css.md) and [{% js %}](js.md) inside of it doesn’t make sense because they don’t actually output HTML therefore their output won’t be cached.
-    
-    ```twig
+* 静的なテキストにキャッシュを使用しないでください。シンプルにテキストを出力するよりも、コストが高くなります。
+
+* 他を拡張するテンプレート内で、トップレベルの `{% block %}` タグの外側で使用することはできません。
+
+* `{% cache %}` タグは HTML のみキャッシュします。そのため、キャッシュ対象となる実際の HTML を出力しない [{% css %}](css.md) や [{% js %}](js.md) のようなタグの内部で使うことは、意味をなしません。
+
+   ```twig
     {# Bad: #}
     
     {% extends "_layout" %}
@@ -138,6 +147,7 @@ There are also some cases where it’s *not* a good idea to use them:
             ...
         {% endcache %}
     {% endblock %}
-    ```
+   ```
 
-Tip: The `{% cache %}` tag will detect if there are any ungenerated [image transform](../../image-transforms.md) URLs within it. If there are, it will hold off on caching the template until the next request, so those temporary image URLs won’t get cached.
+ヒント：`{% cache %}` タグは、その中にまだ生成されていない [画像の変形](../../image-transforms.md) URL が含まれるかどうかを検出します。それが含まれる場合、次のリクエストまでテンプレートのキャッシュを保留するため、一時的な画像 URL はキャッシュされません。
+

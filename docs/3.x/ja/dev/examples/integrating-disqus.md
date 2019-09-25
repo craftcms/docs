@@ -1,22 +1,22 @@
-# Integrating Disqus
+# Disqus の統合
 
-You can easily add comments to your Craft entry pages by utilizing a third-party comment service such as [Disqus](https://disqus.com/).
+[Disqus](https://disqus.com/) のようなサードパーティのコメントサービスを利用して、Craft のエントリページに簡単にコメント機能を追加することができます。
 
-To do this, you will need to have an output for displaying a single entry you want to allow comments on. In this example, we'll use a template located at `templates/_entry.twig`.
+これを行うためには、コメントを許可する単一のエントリを表示するための出力設定が必要です。この例では、`templates/_entry.twig` にあるテンプレートを使用します。
 
-You'll want to sign up with Disqus and get your Universal Code on Disqus’ site in Admin → Settings → Install. Disqus has certain configuration variables that you can use to ensure comments end up on the right post. Look for:
+あなたは Disqus にサインアップし、Disqus のサイトの「Admin → Settings → Install」からユニバーサルコードを入手できるでしょう。Disqus には意図したポストへのコメントを保証するために使うことができる、規定のコンフィグ変数があります。次のコメントを探してください。
 
 ```javascript
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 ```
 
-and add this line:
+次の行を追加します。
 
 ```javascript
 var disqus_identifier = 'blog-{{ entry.id }}';
 ```
 
-A final entry template including comments might look like so:
+コメント機能を含む最終的なエントリのテンプレートは次のようになります。
 
 ```twig
 {% block blog %}
@@ -43,3 +43,4 @@ A final entry template including comments might look like so:
     <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 {% endblock %}
 ```
+

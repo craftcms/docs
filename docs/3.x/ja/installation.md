@@ -1,67 +1,74 @@
-# Installation Instructions
+# インストールガイド
 
 [[toc]]
 
-## Step 1: Download Craft
+## ステップ 1：Craft のダウンロード
 
-Craft can be downloaded with [Composer](#downloading-with-composer) or by [manually downloading](#downloading-an-archive-file-manually) a zip or tar.gz archive. The end result will be the same, so go with whichever route you feel more comfortable with.
+Craft は [Composer](#downloading-with-composer) でダウンロードするか、zip または tar.gz アーカイブを[手動でダウンロード](#downloading-an-archive-file-manually)できます。最終的な結果は同じになるため、あなたにとってより快適な方法を選んでください。
 
-### Downloading with Composer
+### Composer でダウンロード
 
-::: tip You should be running Composer 1.3.0 or later. You can find out your installed version of Composer by running `composer -V` from your terminal. If that outputs something lower than 1.3.0, run `composer self-update` to update your Composer installation. :::
+::: tip
+Composer 1.3.0 以降を稼働させるべきです。起動しているターミナル上で `composer -V` を実行することによって、インストールされている Composer のバージョンを確認できます。1.3.0 より前のバージョンであれば、Composer をアップデートするために `composer self-update` を実行します。
+:::
 
-To create a new Craft project, run this command (substituting `<Path>` with the path where Composer should create the project):
+新しい Craft プロジェクトを作成するため、次のコマンドを実行してください。（Composer が作成するプロジェクトのパスの代わりに`<Path>` と記載しています。）
 
 ```bash
 composer create-project craftcms/craft <Path>
 ```
 
-Composer will take a couple minutes to load everything. Once it’s done you will be shown a success message:
+Composer がすべてをロードするのに、数分かかるでしょう。完了すると、成功メッセージが表示されます。
 
-![The success message shown after loading Craft with Composer](./images/installation-command-line.png)
+![Composer で Craft をロード後に表示される成功メッセージ](./images/installation-command-line.png)
 
-### Downloading an Archive File Manually
+### アーカイブファイルを手動でダウンロード
 
-Download the archive format you prefer to work with:
+作業に適したアーカイブ形式をダウンロードします。
 
 - **zip**: [3.0.41](https://download.craftcdn.com/craft/3.0/Craft-3.0.41.zip), [latest](https://craftcms.com/latest-v3.zip)
 - **tar.gz**: [3.0.41](https://download.craftcdn.com/craft/3.0/Craft-3.0.41.tar.gz), [latest](https://craftcms.com/latest-v3.tar.gz)
 
-Extract the archive wherever you want your new Craft project to live.
+新しい Craft プロジェクトを稼働したい場所でアーカイブを展開します。
 
-::: tip If you’re on macOS, be careful not to lose the hidden files in there (`.env`, `.env.example`, `.gitignore`, and `web/.htaccess`). You can press <kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd> to toggle hidden file visibility in Finder. :::
+::: tip
+macOS を使用している場合、そこにある不可視ファイル（`.env`、`.env.example`、`.gitignore`、および、`web/.htaccess`）を失わないよう注意してください。Finder で <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>.</kbd> を押すことで、不可視ファイルの表示を切り替えることができます。
+:::
 
-### Directory Structure
+### ディレクトリ構造
 
-Once Craft’s files are in place, your project directory should have a directory structure like this:
+Craft のファイルが適切な場所にあれば、プロジェクトディレクトリは次のようなディレクトリ構造になっているはずです。
 
-    my-project.test/
-    ├── config/
-    │   └── ...
-    ├── storage/
-    │   └── ...
-    ├── templates/
-    │   └── ...
-    ├── vendor/
-    │   └── ...
-    ├── web/
-    │   └── ...
-    ├── .env
-    ├── .env.example
-    ├── composer.json
-    ├── craft
-    └── craft.bat
-    
+```
+my-project.test/
+├── config/
+│   └── ...
+├── storage/
+│   └── ...
+├── templates/
+│   └── ...
+├── vendor/
+│   └── ...
+├── web/
+│   └── ...
+├── .env
+├── .env.example
+├── composer.json
+├── craft
+└── craft.bat
+```
 
-::: tip The `web/` folder represents your site’s webroot, and it can be renamed to whatever you want (`www/`, `public/`, `public_html/`, etc.). :::
+::: tip
+これらすべてのフォルダやファイルが何のためにあり、どのようにカスタマイズするかを知りたければ、[Directory Structure](directory-structure.md) ページを参照してください。
+:::
 
-You can learn about what all these folders and files are for and how to customize them from the [Directory Structure](directory-structure.md) page.
+## ステップ 2：ファイルパーミッションの設定
 
-## Step 2: Set the File Permissions
+::: tip
+Craft のダウンロードに Composer を利用した場合、おそらく安全にこのステップをスキップできます。
+:::
 
-::: tip If you used Composer to download Craft, you can probably safely skip this step. :::
-
-For Craft to run properly, PHP needs to be able to write to the following places:
+Craft が正しく動作するためには、PHP が次の場所への書き込み権限が必要です。
 
 - `.env`
 - `composer.json`
@@ -71,110 +78,115 @@ For Craft to run properly, PHP needs to be able to write to the following places
 - `vendor/*`
 - `web/cpresources/*`
 
-The exact permissions you should be setting depends on the relationship between the system user that PHP is running as, and who owns the actual folders/files.
+設定されるべき正確なパーミッションは、PHP を実行しているシステムユーザーと実際にフォルダやファイルを所有しているユーザーとの関係性に依存します。
 
-- If they are the same user, use `744`.
-- If they’re in the same group, then use `774`.
-- If you’re not sure and like to live life on the edge, use `777`.
+- 同じユーザーであれば、`744` を利用します。
+- 同じグループであれば、`774` を利用します。
+- 確信が持てず、緊張感がある生活を好むなら、`777` を利用します。
 
-::: warning HEY IIS FANS Make sure your site’s AppPool account has write permissions to these folders/files as well. :::
+::: warning IS ファンへ
+サイトの AppPool アカウントがこれらのフォルダやファイルに書き込み権限を持っていることを確認してください。
+:::
 
-## Step 3: Set a Security Key
+## ステップ 3：セキュリティキーの設定
 
-::: tip If you used Composer to download Craft, you can probably safely skip this step. :::
+::: tip
+Craft のダウンロードに Composer を利用した場合、おそらく安全にこのステップをスキップできます。
+:::
 
-Each Craft project should have a unique security key, which is shared between each of the environments that the project is installed on.
+それぞれの Craft プロジェクトでは、そのプロジェクトがインストールされている各環境で共有されるユニークなセキュリティキーが必要です。
 
-You can generate and assign the key [manually](#set-the-key-manually), or have Craft do it for you with a [terminal command](#set-the-key-from-your-terminal).
+[手動](#set-the-key-manually)でキーの生成と割り当てを行うか、[ターミナルコマンド](#set-the-key-from-your-terminal)で Craft に任せることもできます。
 
-### Set the Key Manually
+### キーを手動で設定
 
-First generate a cryptographically secure key, preferably using a password generator like [1Password](https://1password.com). (There’s no length limit.)
+はじめに、なるべく [1Password](https://1password.com) のようなパスワードジェネレーターを使って、暗号化された安全なキーを生成してください。（長さに制限はありません。）
 
-Then open up your `.env` file (you may need to use an app like [Transmit](https://panic.com/transmit/) to do this if you’re running macOS), and find this line:
+そして、（macOS であれば、[Transmit](https://panic.com/transmit/) のようなアプリを利用して）`.env` ファイルを開き、次の行を探してください。
 
-      SECURITY_KEY=""
-    
+    SECURITY_KEY=""
 
-Paste your security key inside the quotes and save the file.
+ダブルクォートの内側にセキュリティキーをペーストし、ファイルを保存します。
 
-### Set the Key from Your Terminal
+### キーをターミナルから設定
 
-In your terminal, go to your project’s root directory and run the following command:
+ターミナル上でプロジェクトのルートディレクトリへ移動し、次のコマンドを実行します。
 
 ```bash
 ./craft setup/security-key
 ```
 
-## Step 4: Create a Database
+## ステップ 4：データベースの作成
 
-Next up, you need to create a database for your Craft project. Craft 3 supports both MySQL 5.5+ and PostgreSQL 9.5+.
+次に、Craft プロジェクト向けのデータベースを作成する必要があります。Craft 3 は MySQL 5.5 以上と PostgreSQL 9.5 以上の両方をサポートします。
 
-If you’re given a choice, we recommend the following database settings in most cases:
+選択可能であれば、ほとんどの場合に次のデータベース設定を推奨します。
 
 - **MySQL**
-  
-  - Default Character Set: `utf8`
-  - Default Collation: `utf8_unicode_ci`
+   - デフォルトの文字セット： `utf8`
+   - デフォルトの照合順： `utf8_unicode_ci`
+
 - **PostgreSQL**
-  
-  - Character Set: `UTF8`
+   - 文字セット： `UTF8`
 
-## Step 5: Set up the Web Server
+## ステップ 5：ウェブサーバーのセットアップ
 
-Create a new web server to host your Craft project. Its document root (or “webroot”) should point to your `web/` directory (or whatever you’ve renamed it to).
+Craft プロジェクトをホストするための新しいウェブサーバーを用意してください。ドキュメントルートは `web/` ディレクトリ（または、リネームしたディレクトリ）を指すようにします。
 
-If you’re not using [MAMP](https://mamp.info) or another localhosting tool, you will probably need to update your `hosts` file, so your computer knows to route requests to your chosen host name to the local computer.
+[MAMP](https://mamp.info) や他のローカルホスティングツールを使用していない場合、`hosts` ファイルを更新して、選択したホスト名にローカルコンピュータへ要求をルーティングする必要があるかもしれません。 
 
 - **macOS/Linux/Unix**: `/etc/hosts`
 - **Windows**: `\Windows\System32\drivers\etc\hosts`
 
-You can test whether you set everything up correctly by pointing your web browser to `http://<Hostname>/index.php?p=admin/install` (substituting `<Hostname>` with your web server’s host name). If Craft’s Setup Wizard is shown, the host name is correctly resolving to your Craft installation.
+ブラウザで `http://<Hostname>/index.php?p=admin/install`（ウェブサーバーのホスト名で `<Hostname>` を置き換える）にアクセスすることで、すべて正しく設定できたかどうかをテストできます。Craft のセットアップウィザードが表示された場合、そのホスト名は Craft のインストールのために適切に処理されています。
 
-## Step 6: Run the Setup Wizard
+## ステップ 6：セットアップウィザードの実行
 
-Finally, it’s time to run Craft’s Setup Wizard. You can either run that from your [terminal](#terminal-setup) or your [web browser](#web-browser-setup).
+ついに、Craft のセットアップウィザードを実行するときがきました。[ターミナル](#terminal-setup) または [ウェブブラウザ](#web-browser-setup) から実行できます。
 
-### Terminal Setup
+### ターミナルによるセットアップ
 
-In your terminal, go to your project’s root directory and run the following command to kick off the Setup Wizard:
+ターミナル上でプロジェクトのルートディレクトリに移動し、次のコマンドを実行してセットアップウィザードを開始します。
 
 ```bash
 ./craft setup
 ```
 
-The command will ask you a few questions to learn how to connect to your database, and then kick off Craft’s installer. Once it’s done, you should be able to access your new Craft site from your web browser.
+このコマンドは、データベースへの接続方法を学んだ上で Craft のインストーラーを開始するために、いくつかの質問をします。それが終われば、ウェブブラウザから新しい Craft サイトにアクセスできるはずです。
 
-### Web Browser Setup
+### ウェブブラウザによるセットアップ
 
-In your web browser, go to `http://<Hostname>/index.php?p=admin/install` (substituting `<Hostname>` with your web server’s host name). If you’ve done everything right so far, you should be greeted by Craft’s Setup Wizard.
+ウェブブラウザで `http://<Hostname>/index.php?p=admin/install`（ウェブサーバーのホスト名で `<Hostname>` を置き換える）に移動します。ここまでのステップがうまくいっていれば、Craft のセットアップウィザードが迎えてくれるでしょう。
 
-![Craft Installation Screen](./images/installation-step-0.png)
+![Craft のインストール画面](./images/installation-step-0.png)
 
-The first step of the installer is to accept the [license agreement](https://craftcms.com/license). Scroll down through the agreement (reading it all, of course) and click the “Got it” button to accept.
+インストーラーの最初のステップは、[ライセンス契約](https://craftcms.com/license)への同意です。（もちろん、すべて目を通した上で）契約をスクロールダウンし、「Got it（了解）」ボタンをクリックして了承してください。
 
-![Craft Installation License Agreement](./images/installation-step-1.png)
+![Craft インストール画面（ライセンス契約の確認）](./images/installation-step-1.png)
 
-The second step is to enter your database connection information.
+2つ目のステップは、データベース接続情報の入力です。
 
-::: tip If the Setup Wizard skips this step, it’s because Craft is already able to connect to your database. :::
+::: tip
+Craft がすでにデータベースに接続可能な状態であれば、このステップはスキップされます。
+:::
 
-![Craft Installation Database Connection Information](./images/installation-step-2.png)
+![Craft インストール画面（データベース接続情報）](./images/installation-step-2.png)
 
-The third step of the installer is to create an admin account. Don’t be one of *those people* and be sure to pick a strong password.
+インストーラーの3つ目のステップは、管理者アカウントの作成です。_特別なアカウント_ として、強力なパスワードを選んでください。
 
-![Craft Installation Create User Account](./images/installation-step-3.png)
+![Craft インストール画面（ユーザーアカウントの作成）](./images/installation-step-3.png)
 
-The final step is to define your System Name, Base URL, and Language.
+最後のステップは、システム名、ベース URL、および、言語の設定です。
 
-![Craft Installation System Settings](./images/installation-step-4.png)
+![Craft インストール画面（システム設定）](./images/installation-step-4.png)
 
-Click “Finish up” to complete the setup process. A few seconds later, you should have a working Craft install!
+「Finish up（完了）」 ボタンをクリックしてセットアッププロセスを完了します。数秒後、Craft のインストールが実行されるでしょう。
 
-If it was successful, Craft will redirect your browser to the Control Panel.
+インストールが成功したら、Craft はブラウザをコントロールパネルにリダイレクトします。
 
-![Craft Installation Complete](./images/installation-step-5.png)
+![Craft インストール画面（完了）](./images/installation-step-5.png)
 
-Congratulations, you’ve just installed Craft!
+おめでとうございます！Craft がインストールされました。
 
-Now build something incredible.
+さぁ、素晴らしいものを築きあげましょう。
+

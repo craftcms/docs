@@ -1,48 +1,51 @@
-# Categories
+# カテゴリ
 
-You can create taxonomies for your [entries](sections-and-entries.md), [users](users.md), and [assets](assets.md) using Categories.
+カテゴリを利用して、[エントリ](sections-and-entries.md)、[ユーザー](users.md)、および、[アセット](assets.md)の分類を作成できます。
 
-## Category Groups
+## カテゴリグループ
 
-Before you can create categories, you must create Category Groups to contain them. Each Category Group lets you define the following:
+カテゴリを作成する前に、それらを含めるためのカテゴリグループを作成しなければなりません。それぞれのカテゴリグループには、次のことを定義できます。
 
-* Category Group name
-* Category Group handle (how you'll refer to the Category Group in your templates)
-* Maximum number of levels you can nest categories in the group
-* The format of the category URI
-* Which template should load if a category’s URL is accessed
-* Which [fields](fields.md) categories in the group should have
+* カテゴリグループの名前
+* カテゴリグループのハンドル（テンプレートから、そのカテゴリグループを参照する方法）
+* そのグループの中にネストできるカテゴリの最大レベル
+* カテゴリ URI 形式
+* カテゴリ URL にアクセスされたとき、どのテンプレートを読み込むか
+* グループ内のカテゴリがどんな[フィールド](fields.md)を持つべきか
 
-To create a new category group, go to Settings → Categories and click the “New Category Group” button.
+新しいカテゴリグループを作るには、「設定 > カテゴリ」に移動し、「新しいカテゴリーグループ」ボタンをクリックします。
 
-After you create at least one category group, you will be able to create categories for that group.
+少なくとも1つのカテゴリグループを作成すると、そのグループのカテゴリを作成できるようになります。
 
-## Category Field Layout
+## カテゴリフィールドレイアウト
 
-Each Category Groups can have its own Field Layout, which allows you to customize the data that is associated with each category in the group. By default, every category will have a Title field (the category name).
+それぞれのカテゴリグループは、グループ内のカテゴリに関連付けられたデータをカスタマイズできる独自のフィールドレイアウトを持っています。デフォルトでは、すべてのカテゴリはタイトルフィールド（カテゴリ名）を持っています。
 
-You can also add additional fields using all of the available field types in Craft. If a field doesn't yet exist, you must first create it via Settings → Fields. The new field will then be available to assign to the Field Layout of your Category Group.
+Craft 内で利用可能なすべてのフィールドタイプを使って、フィールドを追加することもできます。まだフィールドが存在しなければ、先に「設定 > フィールド」から作成しなければなりません。新しいフィールドは、カテゴリグループのフィールドレイアウトに割り当てられるようになります。
 
-## Creating and Editing Categories
+## カテゴリの作成と編集
 
-If you have at least one category group, there will be a “Categories” tab in the primary Control Panel navigation. Clicking on it will take you to the category index. From there you can choose a category group from the sidebar, and add/reorder/delete categories within it:
+少なくとも1つのカテゴリグループがあれば、コントロールパネルのメインナビゲーションに「カテゴリ」タブが表示されます。クリックすると、カテゴリのインデックスに移動します。サイドバーからカテゴリグループを選択すると、そのグループに含まれるカテゴリを追加 / 並び替え / 削除できます。
 
-![Category Index](./images/categories-category-index.png)
+![カテゴリインデックス](./images/categories-category-index.png)
 
-Double-clicking on a category will bring up a modal that lets you edit its name, slug, and any fields you’ve assigned to the group.
+カテゴリをダブルクリックすると、カテゴリの名前やスラグ、および、グループに関連付けられたすべてのフィールドを編集できるモーダルウィンドウが開きます。
 
-![Category Edit Modal](./images/categories-edit-popup.png)
+![カテゴリの編集モーダル](./images/categories-edit-popup.png)
 
-When you create a category, you have the following options:
+カテゴリを作成するときのオプションは、次の通りです。
 
-* Fill out the category fields (if you didn't define any then the only field available will be Title)
-* Edit the slug (it's automatically populated based on the title).
-* Choose a Parent category. The new category will have a hierarchical relationship with its parent. This is helpful for creating taxonomies with multiple levels. You also have the option of creating a new category while assigning the Parent.
+* カテゴリフィールドへの記入（フィールドを定義していなければ、タイトルフィールドだけが利用可能となります）
+* スラグの編集（タイトルに基づいて、自動的に入力されます）
+* 親カテゴリの選択。新しいカテゴリは、親カテゴリと階層的な関係を持ちます。これはマルチレベルで分類を作成する際に役立ちます。親を割り当てる際に新しいカテゴリを作成するオプションもあります。
 
-::: tip You can only nest categories up to the level specified in the Max Level field Category Group settings. If no level is specified then the nesting level is unlimited. :::
+::: tip
+カテゴリグループの設定にある最大レベル欄で指定したレベルまでしか、カテゴリをネストできません。レベルを指定していない場合、無制限にネストできます。
+:::
 
-## Assigning Categories
+## カテゴリの割り当て
 
-To assign categories to things (entries, assets, users, etc.), you must first create a [Categories field](categories-fields.md).
+項目（エントリ、アセット、ユーザーなど）にカテゴリを割り当てるには、先に[カテゴリフィールド](categories-fields.md)を作成しなければなりません。
 
-Each Categories field is connected to a single category group. Whatever you attach the field to will be able to create [relations](relations.md) to any of the categories within that group.
+それぞれのカテゴリフィールドは、1つのカテゴリグループに接続されています。そのフィールドが付加されたものは何でも、グループに含まれるすべてのカテゴリとの[リレーション](relations.md)を持つことができます。
+

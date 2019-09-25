@@ -1,10 +1,11 @@
-# `{% hook %}` Tags
+# `{% hook %}` タグ
 
-This tag gives plugins and modules an opportunity to hook into the template, to either return additional HTML or make changes to the available template variables.
+このタグは、テンプレート内でプラグインやモジュールに追加の HTML を返すか、利用可能なテンプレート変数を変更する機会を与えます。
 
 ```twig
 {# Give plugins a chance to make changes here #}
 {% hook 'my-custom-hook-name' %}
 ```
 
-See [Template Hooks](../../extend/template-hooks.md) for details on plugins and modules can work with `{% hook %}` tags.
+プラグインやモジュールが `{% hook %}` タグで作動できる詳細については、[テンプレートフック](../../extend/template-hooks.md)を参照してください。
+

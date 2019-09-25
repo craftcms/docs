@@ -1,51 +1,52 @@
-# Tags Fields
+# タグフィールド
 
-Tags fields allow you relate [tags](tags.md) to other elements.
+タグフィールドでは、[タグ](tags.md)を他のエレメントに関連付けることができます。
 
-## Settings
+## 設定
 
-Tags fields have the following settings:
+タグフィールドの設定は、次の通りです。
 
-- **Source** – Which tag group the field should be able to relate tags from.
-- **Selection Label** – The label that should be used on the field’s tag search input.
+- **ソース** – フィールドが、どのタググループからタグを関連付けられるか。
+- **選択ラベル** – タグの検索と入力を行うフィールドのラベルに使用されます
 
-### Multi-Site Settings
+### マルチサイト設定
 
-On multi-site installs, the following settings will also be available (under “Advanced”):
+マルチサイトがインストールされている場合、次の設定も有効になります。（「高度」のトグルボタンで表示されます）
 
-- **Relate tags from a specific site?** – Whether to only allow relations to tags from a specific site.
-    
-    If enabled, a new setting will appear where you can choose which site.
-    
-    If disabled, related tags will always be pulled from the current site.
+- **特定のサイトから タグ を関連付けますか?** – 特定のサイトのタグとの関連付けのみを許可するかどうか。
 
-- **Manage relations on a per-site basis** – Whether each site should get its own set of related tags.
+   有効にすると、サイトを選択するための新しい設定が表示されます。
 
-## The Field
+   無効にすると、関連付けられたタグは常に現在のサイトから取得されます。
 
-Tags fields list all of the currently-related tags, with a text input to add new ones.
+- **サイトごとにリレーションを管理** – それぞれのサイトが関連付けられたタグの独自のセットを取得するかどうか。
 
-As you type into the text input, the Tags field will search through the existing tags that belong to the field’s tag group (per its Source setting), and suggest tags in a menu below the text input. If an exact match is not found, the first option in the menu will create a new tag named after the input value.
+## フィールド
 
-::: tip By default you won’t be able to create multiple tags that are too similar in name. You can change that behavior by enabling the <config:allowSimilarTags> config setting. :::
+タグフィールドには、現在関連付けられているすべてのタグのリストと、新しいタグを追加するための入力欄があります。
 
-### Inline Tag Editing
+テキスト入力欄に入力すると、タグフィールドはそのタググループに属する既存のタグを（ソースの設定ごとに）検索し、入力欄の下のメニューにタグのサジェストを表示します。完全に一致するものが見つからない場合、メニューの最初のオプションから入力した値を名前にもつ新しいタグを作成できます。
 
-When you double-click on a related tag, a HUD will appear where you can edit the tag’s title and custom fields.
+::: tip
+デフォルトでは、名前があまりにも似ている複数のタグを作成できません。コンフィグ設定の <config:allowSimilarTags> を有効にすると、その振る舞いを変更することができます。
+:::
 
-## Templating
+### インラインのタグ編集
 
-### Querying Elements with Tags Fields
+関連付けられたタグをダブルクリックすると、タグのタイトルやカスタムフィールドを編集できる HUD を表示します。
 
-When [querying for elements](dev/element-queries/README.md) that have a Tags field, you can filter the results based on the Tags field data using a query param named after your field’s handle.
+## テンプレート記法
 
-Possible values include:
+### タグフィールドによるエレメントの照会
 
-| Value          | Fetches elements…                   |
-| -------------- | ----------------------------------- |
-| `':empty:'`    | that don’t have any related tags.   |
-| `':notempty:'` | that have at least one related tag. |
+タグフィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、タグフィールドのデータに基づいた結果をフィルタできます。
 
+利用可能な値には、次のものが含まれます。
+
+| 値 | 取得するエレメント
+| - | -
+| `':empty:'` | 関連付けられたタグを持たない。
+| `':notempty:'` | 少なくとも1つの関連付けられたタグを持つ。
 
 ```twig
 {# Fetch entries with a related tag #}
@@ -54,17 +55,17 @@ Possible values include:
     .all() %}
 ```
 
-### Working with Tags Field Data
+### タグフィールドデータの操作
 
-If you have an element with an Tags field in your template, you can access its related tags using your Tags field’s handle:
+テンプレート内でタグフィールドのエレメントを取得する場合、タグフィールドのハンドルを利用して、関連付けられたタグにアクセスできます。
 
 ```twig
 {% set relatedTags = entry.<FieldHandle> %}
 ```
 
-That will give you a [tag query](dev/element-queries/tag-queries.md), prepped to output all of the related tags for the given field.
+これは、所定のフィールドで関連付けられたすべてのタグを出力するよう準備された[タグクエリ](dev/element-queries/tag-queries.md)を提供します。
 
-To loop through all of the related tags, call [all()](api:craft\db\Query::all()) and then loop over the results:
+関連付けられたすべてのタグをループするには、[all()](api:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
 ```twig
 {% set relatedTags = entry.<FieldHandle>.all() %}
@@ -77,7 +78,7 @@ To loop through all of the related tags, call [all()](api:craft\db\Query::all())
 {% endif %}
 ```
 
-If you only want the first related tag, call [one()](api:craft\db\Query::one()) instead, and then make sure it returned something:
+関連付けられた最初のタグだけが欲しい場合、代わりに [one()](api:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
 
 ```twig
 {% set rel = entry.<FieldHandle>.one() %}
@@ -86,7 +87,7 @@ If you only want the first related tag, call [one()](api:craft\db\Query::one()) 
 {% endif %}
 ```
 
-If you just need to check if there are any related tags (but don’t need to fetch them), you can call [exists()](api:craft\db\Query::exists()):
+（取得する必要はなく）いずれかの関連付けられたタグがあるかを確認したい場合、[exists()](api:craft\db\Query::exists()) を呼び出すことができます。
 
 ```twig
 {% if entry.<FieldHandle>.exists() %}
@@ -94,10 +95,11 @@ If you just need to check if there are any related tags (but don’t need to fet
 {% endif %}
 ```
 
-You can set [parameters](dev/element-queries/tag-queries.md#parameters) on the tag query as well.
+タグクエリで[パラメータ](dev/element-queries/tag-queries.md#parameters)をセットすることもできます。
 
-## See Also
+## 関連項目
 
-* [Tag Queries](dev/element-queries/tag-queries.md)
+* [タグクエリ](dev/element-queries/tag-queries.md)
 * <api:craft\elements\Tag>
-* [Relations](relations.md)
+* [リレーション](relations.md)
+

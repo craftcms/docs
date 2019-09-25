@@ -1,6 +1,6 @@
-# `{% header %}` Tags
+# `{% header %}` タグ
 
-This tag will set a new HTTP header on the response.
+このタグは、レスポンス上に新しい HTTP ヘッダーをセットします。
 
 ```twig
 {# Tell the browser to cache this page for 30 days #}
@@ -11,10 +11,11 @@ This tag will set a new HTTP header on the response.
 {% header "Expires: " ~ expiry|date('D, d M Y H:i:s', 'GMT') ~ " GMT" %}
 ```
 
-## Parameters
+## パラメータ
 
-The `{% header %}` tag supports the following parameter:
+`{% header %}` タグは、次のパラメータをサポートしています。
 
-### Header
+### ヘッダー
 
-You specify the actual header that should be set by typing it as a string after the word `header`. This parameter is required.
+`header` の後に文字列として記述することによって、実際のヘッダーを明示します。このパラメータは必須です。
+

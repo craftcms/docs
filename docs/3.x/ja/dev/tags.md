@@ -1,6 +1,6 @@
-# Tags
+# タグ
 
-In addition to the template tags that [Twig comes with](https://twig.symfony.com/doc/tags/index.html), Craft provides a few of its own.
+[Twig に付随する](https://twig.symfony.com/doc/tags/index.html)テンプレートタグに加えて、Craft がいくつか独自のものを提供します。
 
 - [cache](tags/cache.md)
 - [css](tags/css.md)
@@ -14,3 +14,4 @@ In addition to the template tags that [Twig comes with](https://twig.symfony.com
 - [requireLogin](tags/requirelogin.md)
 - [requirePermission](tags/requirepermission.md)
 - [switch](tags/switch.md)
+

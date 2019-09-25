@@ -1,26 +1,25 @@
-# Multi-select Fields
+# マルチセレクトボックスフィールド
 
-Multi-select fields give you a multi-select input.
+マルチセレクトボックスフィールドは、複数選択形式の入力を提供します。
 
-## Settings
+## 設定
 
-Multi-select fields have the following settings:
+マルチセレクトボックスフィールドの設定は、次の通りです。
 
-* **Multi-select Options** – Define the options that will be available in the field. You even get to set the option values and labels separately, and choose which ones should be selected by default.
+* **マルチセレクトボックスのオプション** – フィールドで利用可能なオプションを定義します。オプションの値とラベルを別々に設定したり、デフォルトで選択状態にしておくものを選択できます。
 
-## Templating
+## テンプレート記法
 
-### Querying Elements with Multi-select Fields
+### マルチセレクトボックスフィールドによるエレメントの照会
 
-When [querying for elements](dev/element-queries/README.md) that have a Multi-select field, you can filter the results based on the Multi-select field data using a query param named after your field’s handle.
+マルチセレクトボックスフィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、マルチセレクトボックスフィールドのデータに基づいた結果をフィルタできます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value           | Fetches elements…                |
-| --------------- | -------------------------------- |
-| `'*"foo"*'`     | with a `foo` option selected.    |
-| `'not *"foo"*'` | without a `foo` option selected. |
-
+| 値 | 取得するエレメント
+| - | -
+| `'*"foo"*'` | `foo` オプションが選択されている。
+| `'not *"foo"*'` | `foo` オプションが選択されていない。
 
 ```twig
 {# Fetch entries with the 'foo' option selected #}
@@ -29,17 +28,17 @@ Possible values include:
     .all() %}
 ```
 
-### Working with Multi-select Field Data
+### マルチセレクトボックスフィールドデータの操作
 
-If you have an element with a Multi-select field in your template, you can access its data using your Multi-select field’s handle:
+テンプレート内でマルチセレクトボックスフィールドのエレメントを取得する場合、マルチセレクトボックスフィールドのハンドルを利用して、そのデータにアクセスできます。
 
 ```twig
 {% set value = entry.<FieldHandle> %}
 ```
 
-That will give you a <api:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
+それは、フィールドデータを含む <api:craft\fields\data\MultiOptionsFieldData> オブジェクトを提供します。
 
-To loop through all the selected options, iterate over the field value:
+選択されたオプションすべてをループするには、フィールド値を反復してください。
 
 ```twig
 {% for option in entry.<FieldHandle> %}
@@ -48,7 +47,7 @@ To loop through all the selected options, iterate over the field value:
 {% endfor %}
 ```
 
-To loop through all of the available options, iterate over the [options](api:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
+利用可能なオプションすべてをループするには、[options](api:craft\fields\data\MultiOptionsFieldData::getOptions()) プロパティを反復してください。
 
 ```twig
 {% for option in entry.<FieldHandle>.options %}
@@ -58,28 +57,28 @@ To loop through all of the available options, iterate over the [options](api:cra
 {% endfor %}
 ```
 
-To see if any options are selected, use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter:
+いずれかのオプションが選択されているかを確認するには、[length](https://twig.symfony.com/doc/2.x/filters/length.html) フィルタを使用してください。
 
 ```twig
 {% if entry.<FieldHandle>|length %}
 ```
 
-To see if a particular option is selected, use [contains()](api:craft\fields\data\MultiOptionsFieldData::contains())
+特定のオプションが選択されているかを確認するには、[contains()](api:craft\fields\data\MultiOptionsFieldData::contains()) を使用してください。
 
 ```twig
 {% if entry.<FieldHandle>.contains('foo') %}
 ```
 
-### Saving Multi-select Fields in Entry Forms
+### 投稿フォームでマルチセレクトボックスフィールドを保存
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Multi-select field, you can use this template as a starting point:
+マルチセレクトボックスフィールドを含める必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、出発点としてこのテンプレートを使用してください。
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('<FieldHandle>') %}
 
 {# Include a hidden input first so Craft knows to update the
    existing value, if no options are selected. #}
-{{ hiddenInput('fields[<FieldHandle>]', '') }}
+{{ hiddenInput('fields[<FieldHandle>]' , '') }}
 
 <select multiple name="fields[<FieldHandle>][]">
     {% for option in field.options %}
@@ -95,3 +94,4 @@ If you have an [entry form](dev/examples/entry-form.md) that needs to contain a 
     {% endfor %}
 </select>
 ```
+

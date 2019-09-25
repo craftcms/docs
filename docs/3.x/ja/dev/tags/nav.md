@@ -1,6 +1,6 @@
-# `{% nav %}` Tags
+# `{% nav %}` タグ
 
-This tag helps create a hierarchical navigation menu for entries in a [Structure section](../../sections-and-entries.md#section-types) or a [Category Group](../../categories.md).
+このタグは、[ストラクチャー構造](../../sections-and-entries.md#section-types)や[カテゴリグループ](../../categories.md)のエントリの階層的なナビゲーションメニューを作成するのに役立ちます。
 
 ```twig
 {% set entries = craft.entries.section('pages').all() %}
@@ -19,24 +19,25 @@ This tag helps create a hierarchical navigation menu for entries in a [Structure
 </ul>
 ```
 
-## Parameters
+## パラメータ
 
-The `{% nav %}` tag has the following parameters:
+`{% nav %}` タグは、次のパラメータを持っています。
 
-### Item name
+### アイテム名
 
-The first thing to follow “`{% nav`” is the variable name you’d like to use to represent each item in the loop, e.g. `item`, `entry`, or `category`. You will be using this variable name to reference the items inside the loop.
+「`{% nav`」に続く最初のものは、例えば `item`、`entry`、または `category` のような、ループ内のそれぞれのアイテムを表すために使用する変数名です。この変数名を利用して、ループ内のアイテムを参照します。
 
 ### `in`
 
-Next you need to type the word “`in`”, followed by the array of entries the tag should loop through. This can be an actual array, or an [ElementCriteriaModel]() object.
+次に「`in`」という単語の記述が必要で、その後にタグがループ処理するエントリの配列が続きます。これは実際の配列、または [ElementCriteriaModel]() オブジェクトです。
 
-Warning: The `{% nav %}` tag requires elements to be queried in a specific (hierarchical) order, so make sure you don’t override the `order` criteria parameter in conjunction with this tag.
+警告：`{% nav %}` タグは特定の（階層的な）順序でエレメントを照会する必要があります。そのため、このタグと関連して `order` 基準パラメータを上書きしないよう確認してください。
 
-## Showing children
+## 子エレメントの表示
 
-To show the children of the current element in the loop, use the `{% children %}` tag. When Craft gets to this tag, it will loop through the element’s children, applying the same template defined between your `{% nav %}` and `{% endnav %}` tags to those children.
+ループ内の現在のエレメントの子を表示するには、`{% children %}` タグを使用します。Craft がこのタグを取得すると、エレメントの子をループし、`{% nav %}` と `{% endnav %}` タグの間に定義された同じテンプレートをその子に適用します。
 
-If you want to show some additional HTML surrounding the children, but only in the event that the element actually has children, wrap your `{% children %}` tag with `{% ifchildren %}` and `{% endifchildren %}` tags.
+エレメントが実際に子を持っているときだけ、子を取り囲む追加 HTML を表示したい場合、`{% children %}` タグを `{% ifchildren %}` と `{% endifchildren %}` タグで囲みます。
 
-Tip: The `{% nav %}` tag should *only* be used in times when you want to show elements in a hierarchy, and you want the DOM to express that hierarchy. If you want to loop through elements linearly, use Twig’s [for](https://twig.symfony.com/doc/tags/for.html) tag instead.
+ヒント：`{% nav %}` タグは、エレメントを階層的に表示したい、かつ、DOM で階層構造を表現したいとき_だけ_使用するべきです。エレメントを直線的にループしたい場合、代わりに Twig の [for](https://twig.symfony.com/doc/tags/for.html) タグを使ってください。
+

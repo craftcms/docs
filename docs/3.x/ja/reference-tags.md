@@ -1,63 +1,55 @@
-# Reference Tags
+# リファレンスタグ
 
-Reference tags can be used to create references to various elements in your site. They can be used in any textual fields, including Text cells within a Table field.
+リファレンスタグを利用して、サイト内の様々なエレメントへの参照を作成できます。テーブルフィールド内のテキストセルを含む、あらゆるテキストフィールドで使用できます。
 
-The syntax for reference tags looks like this:
+リファレンスタグの構文は、次のようになります。
 
 ```twig
 {<Type>:<Identifier>:<Property>}
 ```
 
-As you can see, they are made up three segments:
+ご覧の通り、それらは3つのセグメントで構成されています。
 
-1. `<Type>` – The type of element you’re creating a reference to. This can be a fully-qualified element class name (e.g. `craft\elements\Entry`) or the element type’s “reference handle”.
-    
-    Core element types have the following reference handles:
+1. `<Type>` – 参照を作成するエレメントのタイプ。これは完全修飾のエレメントクラス名（例：`craft\elements\Entry`）、または、エレメントタイプの「リファレンスハンドル」です。
 
-- `entry`
-- `asset`
-- `tag`
-- `user`
-- `globalset`
+   コアのエレメントタイプは、次のリファレンスハンドルを持っています。
+   - `entry`
+   - `asset`
+   - `tag`
+   - `user`
+   - `globalset`
 
-2. `<Identifier>` – Either the element’s ID or a custom identifier supported by the element type.
-    
-    Entries support the following custom identifiers:
+2. `<Identifier>` – エレメントの ID、または、エレメントタイプによってサポートされているカスタム識別子。
 
-- `entry-slug`
--     `sectionHandle/entry-slug`
-        
-    
-    Identifiers can also include the site ID, UUID, or handle that the element should be loaded from, using an `@<Site>` syntax.
+   エントリは次のカスタム識別子をサポートしています。
+   - `entry-slug`
+   - `sectionHandle/entry-slug`
 
-3. `<Property>` *(optional)* – The element property that the reference tag should return. If omitted, the element’s URL will be returned.
-    
-    You can refer to the element types’ class references for a list of available properties:
+3. `<Property>` _（オプション）_ – リファレンスタグが返すべきエレメントのプロパティ。省略した場合、エレメントの URL が返されます。
 
-- [api:craft\elements\Entry](api:craft\elements\Entry#public-properties)
-- [api:craft\elements\Asset](api:craft\elements\Asset#public-properties)
-- [api:craft\elements\Tag](api:craft\elements\Tag#public-properties)
-- [api:craft\elements\User](api:craft\elements\User#public-properties)
--     [api:craft\elements\GlobalSet](api:craft\elements\GlobalSet#public-properties)
-        
-    
-    Custom field handles are also supported, for field types with values that can be represented as strings.
+   利用可能なプロパティのリストは、エレメントタイプのクラスリファレンスを参照してください。
+   - [api:craft\elements\Entry](api:craft\elements\Entry#public-properties)
+   - [api:craft\elements\Asset](api:craft\elements\Asset#public-properties)
+   - [api:craft\elements\Tag](api:craft\elements\Tag#public-properties)
+   - [api:craft\elements\User](api:craft\elements\User#public-properties)
+   - [api:craft\elements\GlobalSet](api:craft\elements\GlobalSet#public-properties)
 
-### Examples
+   カスタムフィールドのハンドルもサポートされています。フィールドタイプは文字列として表すことができる値を持っています。
 
-The following are valid reference tags:
+### 実例
 
-- `{asset:123:filename}` – returns the filename of an asset with the ID of `123` (via <api:craft\elements\Asset::getFilename()>).
-- `{entry:about-us:intro}` – returns the value of an `intro` custom field on an entry with the slug `about-us`.
-- `{entry:about-us@en:intro}` – returns the value of an `intro` custom field on an entry with the slug `about-us`, loaded from the site with the handle `en`.
-- `{entry:blog/whats-on-tap}` – returns the URL of an entry in a `blog` section with the slug `whats-on-tap`.
-- `{craft\commerce\Variant:123:price}` – returns the price of a Commerce Variant object with the id of `123`.
-- `{globalset:aGlobalSet:uid}` – returns the UID of a global set with the handle `aGlobalSet`.
+有効なリファレンスタグは、次の通りです。
 
-## Parsing Reference Tags
+- `{asset:123:filename}` – ID が `123` のアセットのファイル名を（<api:craft\elements\Asset::getFilename()> 経由で）返します。
+- `{entry:about-us:intro}` – スラグが `about-us` のエントリのカスタムフィールド `intro` の値を返します。
+- `{entry:blog/whats-on-tap}` – スラグが `whats-on-tap` の `blog` セクションのエントリの URL を返します。
+- `{craft\commerce\Variant:123:price}` – ID が `123` の Commerce Variant オブジェクトの price を返します。
 
-You can parse any string for reference tags in your templates using the [parseRefs](dev/filters.md#parserefs) filter:
+## リファレンスタグの解析
+
+[parseRefs](dev/filters.md#parserefs) フィルタを利用して、テンプレート内のリファレンスタグの文字列を解析できます。
 
 ```twig
 {{ entry.body|parseRefs|raw }}
 ```
+

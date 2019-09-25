@@ -1,48 +1,48 @@
-# Relations
+# リレーション
 
-Craft has a powerful engine for relating elements to one another. You create those relationships using relational field types.
+Craft は、エレメントを互いに関連付けるための強力なエンジンを持っています。関連フィールドタイプを利用して、それらの関連性を作成します。
 
-Craft comes with five relational field types:
+Craft は次の5つの関連フィールドタイプがあります。
 
-* [Assets Fields](assets-fields.md)
-* [Categories Fields](categories-fields.md)
-* [Entries Fields](entries-fields.md)
-* [Tags Fields](tags-fields.md)
-* [Users Fields](users-fields.md)
+* [アセットフィールド](assets-fields.md)
+* [カテゴリフィールド](categories-fields.md)
+* [エントリフィールド](entries-fields.md)
+* [タグフィールド](tags-fields.md)
+* [ユーザーフィールド](users-fields.md)
 
-Just like the other field types, you can add these to your [section](sections-and-entries.md#sections), [user](users.md), [asset](assets.md), [category group](categories.md), [tag group](tags.md), and [global sets](globals.md)’ field layouts.
+他のフィールドタイプと同様に、これらを[セクション](sections-and-entries.md#sections)、[ユーザー](users.md)、[アセット](assets.md)、[カテゴリグループ](categories.md)、[タググループ](tags.md)、および、[グローバル設定](globals.md)のフィールドレイアウトに追加できます。
 
-## Terminology
+## 専門用語
 
-Before working with relations in Craft, it's important to grasp the following terms, as they are relevant to the templating side of things.
+Craft のリレーションを操作する前に、それがテンプレート記法に関連するため、次の用語を把握することが重要です。
 
-Each relation involves two elements:
+それぞれのリレーションは2つのエレメントを必要とします。
 
-* **Source** element - it has the relational field, where you selected the other element.
-* **Target** element - the one selected by the source.
+* **ソース**エレメント - 他のエレメントを選択した関連フィールドを持つもの
+* **ターゲット**エレメント - ソースによって選択されたエレメント
 
-How does this look in practice?
+これは実際にどのように見えるのでしょう？
 
-If we have an entry for a drink recipe where we select the ingredients as relationships (via an Entries Field), we'd label the elements as follows:
+（エントリフィールド経由で）関連する要素を選択したドリンクレシピ向けのエントリがある場合、エレメントに次のようにラベル付けします。
 
-* Drink Recipe Entry: Source
-* Ingredients: Target
+* ドリンクレシピエントリ：ソース
+* 原材料：ターゲット
 
-To set this up, we create a new field of the Entries Field Type, give it the name Ingredients, check Ingredients as the source (the available elements will be from the Ingredients section), and leave the Limit field blank so we can choose as many ingredients as each recipe dictates.
+これを設定するために、エントリフィールドタイプの新しいフィールドを作成し、「原材料」という名前を付け、ソース（利用可能なエレメントが原材料セクションに存在するとします）から「原材料」を選択し、それぞれのレシピが必要とする多くの原材料を選択できるようリミット欄を空白のままにします。
 
-Now we can assign the ingredients to each Drink entry via the new Ingredients relation field.
+これで、それぞれのドリンクエントリに新しい「原材料」フィールドから原材料を割り当てることができます。
 
-## Templating
+## テンプレート記法
 
-Once we have our relations field set up, we can look at the options for outputting related elements in our templates.
+リレーションフィールドをセットアップすると、テンプレート内で関連するエレメントを出力するためのオプションを見ることができます。
 
-### Getting Target Elements via the Source Element
+### ソースエレメントを経由したターゲットエレメントの取得
 
-If you’ve already got a hold of the source element in your template, like in the example below where we're outputting the Drink entry, you can access its target elements for a particular field in the same way you access any other field’s value: by the handle.
+「ドリンク」エントリを出力している以下の例のように、すでにテンプレート内でソースレメントを保持している場合、他のフィールドの値にアクセスするのと同じ方法、すなわちハンドルによって、特定のフィールドのターゲットエレメントにアクセスできます。
 
-Calling the source's relational field handle (`ingredients`) returns an Element Criteria Model that can output the field’s target elements, in the field-defined order.
+ソースの関連フィールドのハンドル（`ingredients`）を呼び出すと、そのフィールドのターゲットエレメントをフィールドに定義された順序で出力することができる Element Criteria Model が返ります。
 
-If we want to output the ingredients list for a drink recipe, we'd use the following:
+ドリンクレシピの原材料リストを出力したい場合、次のようにします。
 
 ```twig
 {% if drink.ingredients|length %}
@@ -58,7 +58,7 @@ If we want to output the ingredients list for a drink recipe, we'd use the follo
 {% endif %}
 ```
 
-You can also add any additional parameters supported by the element type:
+エレメントタイプでサポートされている追加パラメータを付加することもできます。
 
 ```twig
 {% for ingredient in drink.ingredients.section('ingredients') %}
@@ -66,35 +66,35 @@ You can also add any additional parameters supported by the element type:
 {% endfor %}
 ```
 
-### The `relatedTo` Parameter
+### `relatedTo` パラメータ
 
-Assets, Categories, Entries, Users, and Tags each support a `relatedTo` parameter, enabling all kinds of crazy things.
+アセット、カテゴリ、エントリ、ユーザー、および、タグは、それぞれ `relatedTo` パラメータをサポートし、あらゆる種類のとんでもないことを可能にします。
 
-In its simplest form, you can pass in one of these things to it:
+最も単純な書式としては、次のいずれかを渡すことができます。
 
 * A <api:craft\elements\Asset>, <api:craft\elements\Category>, <api:craft\elements\Entry>, <api:craft\elements\User>, or <api:craft\elements\Tag> object
-* An element’s ID
-* An array of element objects and/or IDs
+* エレメントの ID
+* エレメントオブジェクト、および / または、 ID の配列
 
-By doing that, Craft will return all of the elements related to the given element(s), regardless of which one’s the source or target.
+それによって、ソースかターゲットかに関わらず、Craft は与えられたエレメントに関連するすべてのエレメントを返します。
 
 ```twig
 {% set relatedDrinks = craft.entries.section('drinks').relatedTo(drink).all() %}
 ```
 
-If you want to be a little more specific, `relatedTo` also accepts an object that contains the following properties:
+もう少し具体的であることを望むなら、`relatedTo` は次のプロパティを含むオブジェクトも受け入れます。
 
-* `element`, `sourceElement`, or `targetElement`
-* `field` *(optional)*
-* `sourceLocale` *(optional)*
+* `element`, `sourceElement`、または `targetElement`
+* `field` _（オプション）_
+* `sourceLocale` _（オプション）_
 
-Set the first property’s key depending on what you want to get back:
+最初のプロパティのキーは、取得したいものにあわせてセットしてください。
 
-* Use `element` if you don’t care whether the returned elements are the source or the target of a relation with the element(s) you’re passing in
-* Use `sourceElement` if you want to find elements related to the given element, where the given element is the source of the relation
-* Use `targetElement` if you want to find elements related to the given element, where the given element is the target of the relation
+* 返されるエレメントが、渡したエレメントとソースまたはターゲットのどちらで関連付くかを気にしない場合、`element`を使用します
+* 与えられたエレメントのソースとして関連付くエレメントだけを見つけたい場合、`sourceElement` を使用します
+* 与えられたエレメントのターゲットとして関連付くエレメントだけを見つけたい場合、`targetElement` を使用します
 
-Set the `field` property if you want to limit the scope to relations created by a particular field. You can set this to either a field handle or a field ID (or an array of handles and/or IDs).
+特定のフィールドで作成されたリレーションにスコープを制限する場合、`field` プロパティをセットします。フィールドハンドルかフィールド ID のいずれか（もしくは、ハンドル、および / または、ID の配列）をセットできます。
 
 ```twig
 {% set ingredients = craft.entries.section('ingredients').relatedTo({
@@ -103,7 +103,7 @@ Set the `field` property if you want to limit the scope to relations created by 
 }) %}
 ```
 
-Set the `sourceLocale` property if you want to limit the scope to relations created from a particular field. (Only do this if you set your relational field to be translatable.) You can set this to a locale ID.
+特定のフィールドで作成されたリレーションにスコープを制限する場合は、`sourceLocale` プロパティをセットします。（関連フィールドを翻訳可能にしている場合のみ、これを行います。）ロケール ID をここにセットします。
 
 ```twig
 {% set ingredients = craft.entries.section('ingredients').relatedTo({
@@ -112,9 +112,9 @@ Set the `sourceLocale` property if you want to limit the scope to relations crea
 }) %}
 ```
 
-#### Going Through Matrix
+#### 行列を経由する
 
-If you want to find elements related to a source element through a [Matrix](matrix-fields.md) field, just pass the Matrix field’s handle to the `field` parameter. If that Matrix field has more than one relational field and you want to target a specific one, you can specify the block type field’s handle using a dot notation:
+[行列](matrix-fields.md)フィールド内のソースエレメントに関連するエレメントを見つけたい場合、行列フィールドのハンドルを `field` パラメータに渡します。複数の関連フィールドを持つ行列フィールドにある特定のフィールドだけをターゲットにしたい場合、ドット表記を利用してブロックタイプのフィールドハンドルを指定できます。
 
 ```twig
 {% set ingredients = craft.entries.section('ingredients').relatedTo({
@@ -123,9 +123,9 @@ If you want to find elements related to a source element through a [Matrix](matr
 }).all() %}
 ```
 
-#### Passing Multiple Relation Criteria
+#### 複数のリレーションの判定基準を渡す
 
-There might be times when you need to factor multiple types of relations into the mix. For example, outputting all of the current user’s favorite drinks that include espresso:
+複数のタイプのリレーションを組み合わせる必要がある場合があります。例えば、エスプレッソを含む現在のユーザーのお気に入りの飲み物をすべて出力するには、次のようになります。
 
 ```twig
 {% set espresso = craft.entries.section('ingredients').slug('espresso').first() %}
@@ -136,4 +136,5 @@ There might be times when you need to factor multiple types of relations into th
 ]).all() %}
 ```
 
-That first argument (`'and'`) specified that the query must match *all* of the relation criteria. You can pass `'or'` instead if you want *any* of the relation criteria to match.
+最初の引数（`'and'`）は、クエリがリレーションの基準と _すべて_ 一致しなければならないことを指定しています。リレーション基準の _いずれか_ とマッチさせたい場合、`'or'` を渡すことができます。
+
