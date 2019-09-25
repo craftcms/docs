@@ -1,18 +1,17 @@
-# タグ
+# Tags
 
-タグを利用して、[エントリ](sections-and-entries.md)、[ユーザー](users.md)、および、[アセット](assets.md)の分類を作成できます。
+You can create folksonomies for your [entries](sections-and-entries.md), [users](users.md), and [assets](assets.md) using Tags.
 
-## タググループ
+## Tag Groups
 
-タグを作成する前に、それらを含めるためのタググループを作成しなければなりません。
+Before you can create tags, you must create Tag Groups to contain them.
 
-新しいタググループを作るには、「設定 > タグ」に移動し、「新しいタググループ」ボタンをクリックします。
+To create a new tag group, go to Settings → Tags and click New Tag Group.
 
-それぞれのタググループには、ユニークなタグのセットがあり、グループ内のタグが利用可能な独自の[フィールド](fields.md)のセットを定義できます。 しかしながら、そのグループを利用するために、必ずしもタググループのフィールドレイアウトでフィールドを割り当てる必要はありません。
+Each tag group holds a unique set of tags, and lets you define a custom set of [fields](fields.md) that should be available to tags within the group. However, you don't need to assign any fields to the Tag Group Field Layout in order to use the group.
 
-## タグの割り当て
+## Assigning Tags
 
-どこか（エントリなど）にタグを割り当てるには、[タグフィールド](tags-fields.md)を作成し、フィールドレイアウトで追加しなければなりません。
+To assign tags to things (like Entries), you must create a [Tags field](tags-fields.md) and add it to a Field Layout.
 
-それぞれのタグフィールドは、1つのタググループに接続されています。そのフィールドが付加されたもの（エントリ、アセット、ユーザーなど）は何でも、新しいタグを作成したり、グループに含まれるタグとの[リレーション](relations.md)を持つことができます。
-
+Each Tags field is connected to a single tag group. Whatever you attach the field to (entries, assets, users, etc.) will be able to create new tags and create [relations](relations.md) to any of the tags within that group.
