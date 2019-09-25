@@ -1,6 +1,6 @@
-# `{% redirect %}` タグ
+# `{% redirect %}` Tags
 
-このタグは、ブラウザを別の URL にリダイレクトします。
+This tag will redirect the browser to a different URL.
 
 ```twig
 {% if not user or not user.isInGroup('members') %}
@@ -8,31 +8,30 @@
 {% endif %}
 ```
 
-## パラメータ
+## Parameters
 
-`{% redirect %}` タグは、次のパラメータを持っています。
+The `{% redirect %}` tag has the following parameter:
 
-### URL
+### The URL
 
-「`{% redirect`」と入力したすぐ後に、ブラウザがリダイレクトする場所をタグに伝える必要があります。完全な URL を与えることも、パスだけ指定することもできます。
+Immediately after typing “`{% redirect`”, you need to tell the tag where to redirect the browser. You can either give it a full URL, or just the path.
 
-### ステータスコード
+### The Status Code
 
-デフォルトでは、 リダイレクトはステータスコード `302` を持っていて、リクエストされた URL がリダイレクトされた URL に _一時的に_ 移動されたことをブラウザに伝えます。
+By default, redirects will have `302` status codes, which tells the browser that the requested URL has only been moved to the redirected URL *temporarily*.
 
-リダイレクトのレスポンスに伴うステータスコードは、URL の直後に入力することでカスタマイズできます。例えば、次のコードは `301` リダイレクト（永続的）を返します。
+You can customize which status code accompanies your redirect response by typing it right after the URL. For example, the following code would return a `301` redirect (permanent):
 
 ```twig
 {% redirect "pricing" 301 %}
 ```
 
-### フラッシュメッセージ
+### Flash Messages
 
-`with notice`、および / または、`with error` パラメータを使用して、次のリクエスト時にユーザーへ表示するフラッシュメッセージをオプションでセットできます。
+You can optionally set flash messages that will show up for the user on the next request using the `with notice` and/or `with error` params:
 
 ```twig
 {% if not currentUser.isInGroup('members') %}
     {% redirect "pricing" 301 with notice "You have to be a member to access that!" %}
 {% endif %}
 ```
-
