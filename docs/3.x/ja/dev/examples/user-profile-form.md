@@ -1,18 +1,18 @@
-# User Profile Form
+# ユーザープロフィールの編集フォーム
 
-You can create a front-end form to let users edit their profiles without granting them access to the Control Panel. To do this, you can point your form to the same controller that the Control Panel uses for its profile form. (Jump down to [Form Action](#form-action) for more about forms and controllers.)
+コントロールパネルへのアクセスを許可することなく、ユーザーが自身のプロフィールを編集できるようにするためのフロントエンドフォームを作成できます。これをするために、プロフィールフォームのためにコントロールパネルが使用するのと同じコントローラーにフォームを向かわせます。（フォームやコントローラーの詳細については、[フォームアクション](#form-action)に移動してください。）
 
-We’ll provide two examples: The simplest possible profile form and a full-featured profile form.
+可能な限りシンプルなプロフィールフォームとフル機能のプロフィールフォームの2つの例を紹介します。
 
-## Simple Profile
+## 簡易プロフィール
 
-The following fields don't require any validation.
+次のフィールドは、バリデーションを必要としません。
 
-- first name
-- last name
-- photo
+- ファーストネーム
+- ラストネーム
+- 写真
 
-If those are all you need, then the form can be quite simple.
+これがあなたにとって必要なものすべてであるならば、フォームはとてもシンプルになります。
 
 ```twig
 {% requireLogin %}
@@ -64,24 +64,24 @@ If those are all you need, then the form can be quite simple.
 </form>
 ```
 
-The [Breaking it down](#breaking-it-down) section will cover these fields as they appear in the advanced profile example below.
+[分析](#breaking-it-down)セクションでは、以下の詳細プロフィールサンプルに表示されているこれらのフィールドについて取り上げます。
 
-## Advanced Profile
+## 詳細プロフィール
 
-This example adds everything including:
+この例では、次のものをすべて含みます。
 
-- first name
-- last name
-- photo
-- username
-- email
-- password
-- a custom field
-- validation
+- ファーストネーム
+- ラストネーム
+- 写真
+- ユーザー名
+- メール
+- パスワード
+- カスタムフィールド
+- バリデーション
 
-See the [Breakdown](#breakdown) section for details. See the [Extras](#extras) section for some example styles for this form.
+詳細については、[分析](#breakdown)セクションを参照してください。このフォームのためのスタイル定義例は、[追加](#extras)セクションを参照してください。
 
-Keep in mind that there is a custom Bio field included in this example, so if you don’t have a Bio field, then delete that section after you copy and paste into your template.
+この例には、カスタムの Bio フィールドが含まれていることを忘れないでください。そのため、Bio フィールドが不要な場合はテンプレート内にコピー＆ペーストした後でそのセクションを削除してください。
 
 ```twig
 {% requireLogin %}
@@ -203,30 +203,32 @@ Keep in mind that there is a custom Bio field included in this example, so if yo
 </form>
 ```
 
-### Breaking it down
+### 分析
 
-We’ll walk through the advanced form example step by step.
+詳細フォームの例を順を追って見ていきましょう。
 
-#### Require Login
+#### ログインの要求
 
 ```twig
 {% requireLogin %}
 ```
 
-Make sure the user is logged in or else the template will throw errors doing anything with `currentUser`. Be sure to read the documentation for [{% requireLogin %} Tags](https://docs.craftcms.com/v3/dev/tags/requirelogin.html) to avoid unexpected `404 Not Found` errors.
+ユーザーがログインしていることを確実にしてください。そうでなければ、テンプレートは `currentUser` を利用する処理でエラーを返します。予期しない `404 Not Found` エラーを回避するために、[{% requireLogin %} タグ](https://docs.craftcms.com/v3/dev/tags/requirelogin.html)のドキュメントを必ず読んでください。
 
-#### Form Action
+#### フォームアクション
 
 ```twig
 <form id="profile-form" class="profile-form" method="post" accept-charset="UTF-8">
       {{ actionInput('users/save-user') }}
 ```
 
-The `<form>` tag does not have an `action=""` parameter on purpose. The hidden `name="action"` input tells Craft which controller and controller method to use.
+`<form>` タグは、意図的に `action=""` パラメータを持ちません。不可視要素の `name="action"` 項目が、どのコントローラーやコントローラーメソッドを使用するか Craft に伝えます。
 
-:::tip The Control Panel profile form uses Craft’s [UserController::actionSaveUser()](api:craft\controllers\UsersController#method-actionsaveuser) controller and you’re free to use it on the front end too if it suits your needs. Otherwise, you can use it as inspiration to build your own controller in a custom module or plugin. :::
+:::tip
+コントロールパネルのプロフィールフォームは、Craft の [UserController::actionSaveUser()](api:craft\controllers\UsersController#method-actionsaveuser) コントローラーを使用しています。あなたのニーズに適している場合、フロントエンドでも自由に使うことができます。そうでなければ、独自のモジュールやプラグインで自身のコントローラーを実装するためのインスピレーションとして使用できます。
+:::
 
-#### Notice
+#### 通知
 
 ```twig
 {% set notice = craft.app.session.getFlash('notice') %}
@@ -235,15 +237,15 @@ The `<form>` tag does not have an `action=""` parameter on purpose. The hidden `
 {% endif %}
 ```
 
-Upon success, this notice will display the message, “User saved.” That is, of course, unless you’ve set a redirect input. (Jump to [Optional Redirect](#optional-redirect) to see how.)
+送信が成功すると、この通知には “User saved.” のメッセージが表示されます。もちろん、リダイレクトの項目をセットしていない場合に限ります。（どのようにするかは、[オプションのリダイレクト](#optional-redirect)に移動してください。）
 
-#### User Variable
+#### ユーザー変数
 
 ```twig
 {% set formUser = user is defined ? user : currentUser  %}
 ```
 
-When the form first loads, we use the `currentUser` variable. If there were validation errors, there will be a `user` variable with the previously-submitted values.
+フォームが初めてロードされるときは、変数 `currentUser` を使用します。バリデーションエラーがあった場合、過去に送信された値を持つ変数 `user` になります。
 
 #### CSRF
 
@@ -251,23 +253,23 @@ When the form first loads, we use the `currentUser` variable. If there were vali
 {{ csrfInput() }}
 ```
 
-The `csrfInput()` generator function is required in all forms for Craft’s [cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) protection unless you disabled it in the <config:enableCsrfProtection> setting.
+<config:enableCsrfProtection> 設定で無効にしていない限り、Craft の[クロスサイトリクエストフォージェリ](https://en.wikipedia.org/wiki/Cross-site_request_forgery)プロテクションのため、`csrfInput()` ジェネレータファンクションはすべてのフォームで必須となります。
 
-#### Optional Redirect
+#### オプションのリダイレクト
 
 ```twig
 {# {{ redirectInput('users/'~currentUser.username) }} #}
 ```
 
-That line is commented out, but demonstrates that upon a successful save, you can redirect to another page; perhaps a user’s home page based on their username.
+この行はコメントアウトされていますが、保存が成功したら別のページにリダイレクトできることを表しています。おそらく、ユーザー名に基づくユーザーのホームページです。
 
 ```twig
 {{ hiddenInput('userId', formUser.id) }}
 ```
 
-The user id is required to update the correct user. You’ll want to make sure group permissions are set not to allow users to edit other users’ profiles.
+適切なユーザーをアップデートするには、ユーザー ID が必要です。他のユーザーのプロフィールを編集することを許可しないようグループ権限がセットされているか、確認してください。
 
-#### Name Fields
+#### 名前フィールド
 
 ```twig
 <div class="group">
@@ -281,9 +283,9 @@ The user id is required to update the correct user. You’ll want to make sure g
 </div>
 ```
 
-These fields don’t need any validation, so they’re pretty straightforward.
+これらのフィールドはバリエーションを必要としないため、かなり簡単です。
 
-#### User Photo
+#### ユーザーフォト
 
 ```twig
 {% if formUser.photo %}
@@ -307,9 +309,9 @@ These fields don’t need any validation, so they’re pretty straightforward.
 </div>
 ```
 
-If a user photo exists, we’ll show it and include a checkbox for the option to delete it. No matter what, we’ll show a file field so they can choose a new photo. If this section feels unrefined, then some JavaScript enhancements might help. That’s up to you.
+ユーザーフォトが存在する場合、それを削除するオプションのためのチェックボックスを含めて表示します。たとえ何があろうと、新しい写真を選ぶことができるようファイルフィールドを表示します。このセクションが洗練されていないと感じる場合、JavaScript による拡張が役立つかもしれません。それはあなた次第です。
 
-#### Username
+#### ユーザー名
 
 ```twig
 {% if not craft.app.config.general.useEmailAsUsername %}
@@ -325,13 +327,13 @@ If a user photo exists, we’ll show it and include a checkbox for the option to
 {% endif %}
 ```
 
-If you’ve set the <config:useEmailAsUsername> config setting to `true`, then we won’t show the Username field.
+コンフィグ設定 <config:useEmailAsUsername> を `true` にセットした場合、ユーザー名フィールドは表示されません。
 
-Here is where validation comes into play. Setting an `error` variable to `getFirstError('username')` tells us whether or not there is an error for this field. (It will be `null` if not.) If there is an error, then we’ll set the appropriate class names on HTML elements to reveal them and show the error message.
+バリデーションが有効になるのは、ここからです。変数 `error` に `getFirstError('username')` をセットすると、このフィールドにエラーがあるかどうかを伝えてくれます。（そうでなければ `null` になります。）エラーがある場合、それを開示するための HTML 要素の適切な class 名をセットし、エラーメッセージを表示します。
 
-You’ll find styles in the [Extras](#extras) section to show and hide HTML elements based on class names. Of course, you can handle that however you like.
+class 名に基づく HTML 要素を表示・非表示にするためのスタイルを [追加](#extras) セクションで見るけることができるでしょう。もちろん、あなたがしたいように操作できます。
 
-#### Email
+#### メール
 
 ```twig
 {% set error = formUser.getFirstError('email')  %}
@@ -348,9 +350,9 @@ You’ll find styles in the [Extras](#extras) section to show and hide HTML elem
 </div>
 ```
 
-That is like the Username field except for showing a message that the user should expect to verify a new email address if you’ve ticked the checkbox for “Verify email addresses?” in the Control Panel under Settings → Users → Settings. The [Current Password](#current-password) field will be required to change an email address.
+コントロールパネルの「設定 > ユーザー > 設定」で「メールアドレスを確認しますか？」のチェックボックスを ON にしている場合、ユーザーが新しいメールアドレスを確認することを期待するメッセージを表示することを除けば、ユーザー名フィールドと同様です。[現在のパスワード](#current-password)フィールドは、メールアドレスを変更するために必須です。
 
-#### Password
+#### パスワード
 
 ```twig
 {% set error = formUser.getFirstError('newPassword')  %}
@@ -362,9 +364,9 @@ That is like the Username field except for showing a message that the user shoul
 </div>
 ```
 
-The user can change their password, but they’ll need to enter their [Current Password](#current-password) too. There will be an error if the given password is too short.
+ユーザーはパスワードを変更できますが、[現在のパスワード](#current-password)も入力する必要があります。入力されたパスワードが短すぎる場合、エラーになります。
 
-#### Current Password
+#### 現在のパスワード
 
 ```twig
 {% set error = formUser.getFirstError('currentPassword')  %}
@@ -377,9 +379,9 @@ The user can change their password, but they’ll need to enter their [Current P
 </div>
 ```
 
-This field is required when the email address or password has changed. Otherwise, the user can leave it blank. You could use some fancy JavaScript to hide or show this based on the state of the other fields.
+このフィールドはメールアドレス、または、パスワードが変更された場合、必須となります。それ以外の場合、ユーザーは空白のままにできます。他のフィールドの状態に基づいてこれを表示・非表示にするために、いくつかの素晴らしい JavaScript を使用できます。
 
-#### Custom Field: Bio
+#### カスタムフィールド：Bio
 
 ```twig
 {% set error = formUser.getFirstError('bio')  %}
@@ -391,11 +393,13 @@ This field is required when the email address or password has changed. Otherwise
 </div>
 ```
 
-Let’s say you added a custom field named “Bio” with a handle of `bio` to the user profile field layout under Settings → Users → Fields. Let’s also say it’s a required field. The difference here is that custom fields belong in a `fields` array with names like `field[<fieldname>]`.
+「設定 > ユーザー > フィールド」にあるユーザープロフィールのフィールドレイアウトで `bio` というハンドルのカスタムフィールド名 “Bio” を追加したとします。それはまた、必須のフィールドだとします。ここでの違いは、カスタムフィールドが `field[<fieldname>]` のような名前の配列 `fields` に属していることです。
 
-:::tip Handling complex custom fields, like Matrix or third-party plugin fields, can seem complicated. You might want to view the source code of a user profile form in the Control Panel to see how to handle those types of fields. :::
+:::tip
+行列やサードパーティプラグインのような複雑なカスタムフィールドの操作は、理解しにくいと思うでしょう。それらの種類のフィールドを処理する方法を知るために、コントロールパネルでユーザープロフィールフォームのソースコードを見てください。
+:::
 
-#### Form Submission
+#### フォームの送信
 
 ```twig
 <div class="group">
@@ -404,11 +408,11 @@ Let’s say you added a custom field named “Bio” with a handle of `bio` to t
 </div>
 ```
 
-A link to reload the current page is a good way to reset the form because it will use `currentUser` variable, and validation errors on will be forgotten.
+現在のページをリロードするためのリンクは、変数 `currentUser` を使用し、さらにバリデーションエラーが消去されるため、フォームをリセットするのに良い方法です。
 
-## Extras
+## 追加
 
-Here are some styles to make the forms on this page more readable in your browser.
+これはブラウザでこのページのフォームをより読みやすくするためのスタイル定義です。
 
 ```html
 <style>
@@ -468,3 +472,4 @@ Here are some styles to make the forms on this page more readable in your browse
   }
 </style>
 ```
+

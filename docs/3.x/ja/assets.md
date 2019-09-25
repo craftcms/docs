@@ -1,91 +1,96 @@
-# Assets
+# アセット
 
-You can manage your project’s media and document files (“assets”) in Craft just like entries and other content types.
+エントリや他のコンテンツタイプと同様に、プロジェクトのメディアと文書ファイル（アセット）を Craft で管理することができます。
 
-## Volumes
+## ボリューム
 
-All of your assets live in “volumes”. Volumes are storage containers. A volume can be a directory on the web server, or a remote storage service like Amazon S3.
+すべてのアセットは「ボリューム」にあります。ボリュームは、ストレージコンテナです。ウェブサーバーのディレクトリ、または、Amazon S3 のようなリモートストレージサービスをボリュームにできます。
 
-You can manage your project’s volumes from Settings → Assets.
+「設定 > アセット」から、プロジェクトのボリュームを管理できます。
 
-All volumes let you choose whether the assets within them should have public URLs, and if so, what their **base URL** should be.
+すべてのボリュームは、その中に含まれるアセットがパプリック URL を持つかどうか、持つ場合に**ベース URL** をどうするかを選択できます。
 
-::: tip Volumes’ base URLs can be set to an environment variable, or begin with an alias. See [Environmental Configuration](config/environments.md) to learn more about that. :::
+::: tip
+ボリュームのベース URL は環境変数をセットしたり、エイリアスではじめることができます。詳細については、[環境設定](config/environments.md)を参照してください。
+:::
 
-### Local Volumes
+### ローカルボリューム
 
-Out of the box, you can create one type of volume, “Local”. Local volumes represent a directory on the local web server.
+デフォルトで、ボリュームの1つのタイプ「ローカル」を作成できます。ローカルボリュームは、ローカルウェブサーバー上のディレクトリを表します。
 
-Local volumes have one setting, **File System Path**. Use this setting to define the path to the volume’s root directory on the server.
+ローカルボリュームは、**ファイルシステムのパス**という1つの設定があります。この設定を使用して、サーバー上のボリュームのルートディレクトリからのパスを定義します。
 
-::: tip Local volumes’ file system path can be set to an environment variable, or begin with an alias. See [Environmental Configuration](config/environments.md) to learn more about that. :::
+::: tip
+ボリュームのファイルシステムのパスは環境変数をセットしたり、エイリアスではじめることができます。詳細については、[環境設定](config/environments.md)を参照してください。
+:::
 
-Note that Craft/PHP must be able to write to the directory you created.
+Craft もしくは PHP が、作成したディレクトリに書き込み可能でなければならないことに注意してください。
 
-### Remote Volumes
+### リモートボリューム
 
-If you would prefer to store your assets on a remote storage service like Amazon S3, you can install a plugin that provides the integration.
+Amazon S3 のようなリモートストレージサービスにアセットを保存したい場合は、インテグレーション機能を提供するプラグインをインストールできます。
 
-- [Amazon S3](https://github.com/craftcms/aws-s3) (first party)
-- [Google Cloud Storage](https://github.com/craftcms/google-cloud) (first party)
-- [Rackspace Cloud Files](https://github.com/craftcms/rackspace) (first party)
-- [DigitalOcean Spaces](https://github.com/vaersaagod/dospaces) (Værsågod)
-- [fortrabbit Object Storage](https://github.com/fortrabbit/craft-object-storage) (fortrabbit)
+- [Amazon S3](https://github.com/craftcms/aws-s3)（ファーストパーティ）
+- [Google Cloud Storage](https://github.com/craftcms/google-cloud)（ファーストパーティ）
+- [Rackspace Cloud Files](https://github.com/craftcms/rackspace)（ファーストパーティ）
+- [DigitalOcean Spaces](https://github.com/vaersaagod/dospaces)（Værsågod）
+- [fortrabbit Object Storage](https://github.com/fortrabbit/craft-object-storage)（fortrabbit）
 
-## Asset Custom Fields
+## アセットのカスタムフィールド
 
-Each of your volumes has a field layout, where you can set the [fields](fields.md) that will be available to assets within that volume. You can edit a volume’s field layout by clicking on the Field Layout tab when editing the volume.
+それぞれのアセットボリュームはフィールドレイアウトを持ち、そのボリュームに含まれるアセットが利用可能な[フィールド](fields.md)をセットできます。ボリュームの編集中に「フィールドの配置」タブをクリックすることで、ボリュームのフィールドレイアウトを編集できます。
 
-Any fields you select here will be visible in the asset editor HUD that opens up when you double-click on an asset (either on the [Assets page](#assets-page) or from [Assets fields](assets-fields.md).
+ここで選択したフィールドは、（[アセットページ](#assets-page) または [アセットフィールド](assets-fields.md) のいずれかにある）アセットをダブルクリックした際に開く、アセットエディタの HUD に表示されます。
 
-## Assets Page
+## アセットページ
 
-When you create your first volume, an “Assets” item will be added to the main Control Panel navigation. Clicking on it will take you to the Assets page, which shows a list of all of your volumes in the left sidebar, and the selected volume’s files in the main content area.
+最初のボリュームを作成すると、コントロールパネルのメインナビゲーションに「アセット」項目が追加されます。これをクリックすると、左サイドバーにすべてのボリュームのリスト、メインコンテンツエリアに選択されたボリュームのファイルが表示されたアセットページに移動します。
 
-From this page, you can do the following:
+このページでは、次のことができます。
 
-- Upload new files
-- Rename files
-- Edit files’ titles and filenames
-- Launch the Image Editor for a selected image
-- Manage subfolders
-- Move files to a different volume or subfolder (via drag and drop)
-- Delete files
+- 新しいファイルのアップロード
+- ファイルのリネーム
+- ファイルのタイトルやファイル名の編集
+- 選択されたイメージ向けのイメージエディタの起動
+- サブフォルダの管理
+- （ドラッグアンドドロップによる）別のボリュームやサブフォルダへのファイルの移動
+- ファイルの削除
 
-### Managing Subfolders
+### サブフォルダの管理
 
-You can create a subfolder in one of your volumes by right-clicking on the volume in the left sidebar, and then choosing “New subfolder”.
+左サイドバーのボリュームで右クリックし「新しいサブフォルダー」を選択すると、ボリュームの1つにサブフォルダを作成できます。
 
-Once you’ve created a subfolder, you can start dragging files into it.
+サブフォルダを作成すると、その中にファイルをドラックできるようになります。
 
-You can create a nested subfolder within a subfolder by right-clicking on the subfolder in the left sidebar, and then choosing “New subfolder”.
+左サイドバーのサブフォルダで右クリックし「新しいサブフォルダー」を選択すると、サブフォルダの中にネストされたサブフォルダを作成できます。
 
-You can rename a subfolder by right-clicking on the subfolder in the left sidebar, and then choosing “Rename folder”.
+左サイドバーのサブフォルダを右クリックし「フォルダ名を変更する」を選択すると、サブフォルダをリネームできます。
 
-You can delete a subfolder (and all assets within it) by right-clicking on the subfolder in the left sidebar, and then choosing “Delete folder”.
+左サイドバーのサブフォルダを右クリックし「フォルダを削除する」を選択すると、サブフォルダ（および、それに含まれるすべてのアセット）を削除できます。
 
-## Updating Asset Indexes
+## アセットインデックスのアップデート
 
-If any files are ever added, modified, or deleted outside of Craft (such as over FTP), you will need to tell Craft to update its indexes for the volume. You can do that from Utilities → Asset Indexes.
+（FTP などの）Craft 外で追加、編集、または、削除されたファイルがある場合、Craft にそのボリュームのインデックスをアップデートするよう伝える必要があります。「ユーティリティ > アセットインデックス」から実行できます。
 
-You will have the option to cache remote images. If you don’t have any remote volumes (Amazon S3, etc.), you can safely ignore it. Enabling the setting will cause the indexing process to take longer to complete, but it will improve the speed of [image transform](image-transforms.md) generation.
+リモート画像をキャッシュするオプションがあります。（Amazon S3 など）リモートボリュームがない場合は、無視して問題ありません。設定を有効にすると、インデックス処理が完了するまでの時間が長くなりますが、[画像の変形](image-transforms.md)の生成スピードが向上します。
 
-## Image Transforms
+## 画像の変形
 
-Craft provides a way to perform a variety of image transformations to your assets. See [Image Transforms](image-transforms.md) for more information.
+Craft はアセットに様々な画像変形を行う手段を提供します。詳細については、[画像の変形](image-transforms.md)を参照してください。
 
-## Image Editor
+## イメージエディタ
 
-Craft provides a built-in Image Editor for making changes to your images. You can crop, straighten, rotate, and flip your images, as well as choose a focal point on them.
+Craft は画像を変更するための組み込みのイメージエディタを提供します。画像を切り抜いたり、まっすぐにしたり、回転させたり、反転させたり、さらに焦点を選択することもできます。
 
-To launch the Image Editor, double-click on an image (either on the Assets page or from an [Assets field](assets-fields.md)) and click on the “Edit” button in the top-right of the image preview area in the HUD. Alternatively, you can select an asset on the [Assets page](#assets-page) and then choose “Edit image” from the task menu (gear icon).
+イメージエディタを起動するには、（アセットページまたは[アセットフィールド](assets-fields.md)のいずれかにある）画像をダブルクリックし、HUD の画像プレビューエリアの右上にある「編集」ボタンをクリックします。または、[アセットページ](#assets-page)で任意のアセットを選択し、タスクメニュー（歯車アイコン）から「画像の編集」 を選択することもできます。
 
-### Focal Points
+### 焦点
 
-Set focal points on your images so Craft knows which part of the image to prioritize when determining how to crop your images for [image transforms](image-transforms.md). Focal points take precedence over the transform’s Crop Position setting.
+[画像の変形](image-transforms.md)でどのように切り抜くかを決定する際、画像のどの部分を優先させるか Craft が認識するために、画像に焦点をセットします。焦点は、画像の変形の「デフォルトの焦点」設定よりも優先されます。
 
-To set a focal point, open the Image Editor and click on the Focal Point button. A circular icon will appear in the center of your image. Drag it to wherever you want the image’s focal point to be.
+焦点を設定するには、イメージエディタを開き「焦点」ボタンをクリックします。画像の中央に円形のアイコンが表示されます。画像の焦点にしたい場所へ、アイコンをドラッグします。
 
-To remove the focal point, click on the Focal Point button again.
+焦点を削除するには、再度「焦点」ボタンをクリックします。
 
-Like other changes in the Image Editor, focal points won’t take effect until you’ve saved the image.
+イメージエディタの他の変更と同様に、画像を保存するまで焦点は有効になりません。
+

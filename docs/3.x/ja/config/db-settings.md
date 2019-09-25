@@ -1,10 +1,10 @@
-# Database Connection Settings
+# データベース接続設定
 
-Craft supports several database connection settings that give you control over how Craft connects to the database.
+Craft は、Craft がどのようにデータベースへ接続するかを制御するためのいくつかのデータベース接続設定をサポートしています。
 
-Ultimately, database connection settings must be set from `config/db.php`, but we recommend you initially set them as environment variables (such as in your `.env` file), and then pull the environment variable value into `config/db.php` using [getenv()](http://php.net/manual/en/function.getenv.php).
+最終的に、データベース接続設定は `config/db.php` からセットしなければなりません。しかし、最初に（`.env` ファイルのような）環境変数としてセットしてから、`config/db.php` 内で [getenv()](http://php.net/manual/en/function.getenv.php) を使用して環境変数の値を取得することを推奨します。
 
-For example, in a new Craft 3 project, your `.env` file should define these environment variables:
+例えば、新しい Craft 3 プロジェクト内の `.env` ファイルでは、次の環境変数を定義する必要があります。
 
 ```bash
 ENVIRONMENT="dev"
@@ -19,7 +19,7 @@ DB_TABLE_PREFIX=""
 DB_PORT=""
 ```
 
-The variables that start with `DB_` are database connection settings, and they get pulled into `config/db.php` like this:
+`DB_` ではじまる変数はデータベース接続設定で、`config/db.php` の中から次のように取得します。
 
 ```php
 return [
@@ -34,32 +34,32 @@ return [
 ];
 ```
 
-We recommend this environment variable approach for two reasons:
+私たちがこのような環境変数のアプローチを推奨するには、2つの理由があります。
 
-1. It keeps sensitive information out of your project’s codebase. (`.env` files should never be shared or committed to Git.)
-2. It makes collaborating with other developers easier, as each developer can define their own settings without overwriting someone else’s settings.
+1. 機密情報をプロジェクトのコードベースから守ります。（`.env` ファイルは、共有したり Git にコミットするべきではありません。）
+2. それぞれの開発者が他者の設定を上書きすることなく独自の設定を定義できるため、他の開発者とのコラボレーションを容易にします。
 
-Here’s the full list of database connection settings that Craft supports:
+Craft がサポートするデータベース接続設定の完全なリストは、次の通りです。
 
 <!-- BEGIN SETTINGS -->
 
 ### `attributes`
 
-Allowed types
+許可される型
 
 :   [array](http://php.net/language.types.array)
 
-Default value
+デフォルト値
 
 :   `[]`
 
-Defined by
+定義元
 
 :   [DbConfig::$attributes](api:craft\config\DbConfig::$attributes)
 
-An array of key => value pairs of PDO attributes to pass into the PDO constructor.
+PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 
-For example, when using the MySQL PDO driver (http://php.net/manual/en/ref.pdo-mysql.php), if you wanted to enable a SSL database connection (assuming SSL is enabled in MySQL (https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html) and `'user'` can connect via SSL, you'd set these:
+例えば、MySQL PDO ドライバ（http://php.net/manual/en/ref.pdo-mysql.php）を使用する場合、（MySQL で SSL が利用できると仮定する https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html）SSL データベース接続で `'user'` が SSL 経由で接続できる場合、次のように設定します。
 
 ```php
 [
@@ -71,199 +71,201 @@ For example, when using the MySQL PDO driver (http://php.net/manual/en/ref.pdo-m
 
 ### `charset`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'utf8'`
 
-Defined by
+定義元
 
 :   [DbConfig::$charset](api:craft\config\DbConfig::$charset)
 
-The charset to use when creating tables.
+テーブルを作成する際に使用する文字セット。
 
 ### `database`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `''`
 
-Defined by
+定義元
 
 :   [DbConfig::$database](api:craft\config\DbConfig::$database)
 
-The name of the database to select.
+選択するデータベースの名前。
 
 ### `driver`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `self::DRIVER_MYSQL`
 
-Defined by
+定義元
 
 :   [DbConfig::$driver](api:craft\config\DbConfig::$driver)
 
-The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
+使用するデータベースのドライバ。MySQL 向けの 'mysql'、または、PostgreSQL 向けの 'pgsql'。
 
 ### `dsn`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [DbConfig::$dsn](api:craft\config\DbConfig::$dsn)
 
-If you want to manually specify your PDO DSN connection string you can do so here.
+手動で PDO DSN 接続文字列を指定する場合は、ここで設定できます。
 
 - MySQL: http://php.net/manual/en/ref.pdo-mysql.connection.php
-- PostgreSQL: http://php.net/manual/en/ref.pdo-pgsql.connection.php If you set this, then the [server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server), [port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port), [user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user), [password](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#password), [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database), [driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver) and [unixSocket](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#unixsocket) config settings will be ignored.
+- PostgreSQL: http://php.net/manual/en/ref.pdo-pgsql.connection.php
+これを設定すると、コンフィグ設定の [server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server)、[port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port)、[user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user)、[password](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#password)、[database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database)、[driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver)、および、[unixSocket](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#unixsocket) は無視されます。
 
 ### `password`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `''`
 
-Defined by
+定義元
 
 :   [DbConfig::$password](api:craft\config\DbConfig::$password)
 
-The database password to connect with.
+接続するデータベースのパスワード。
 
 ### `port`
 
-Allowed types
+許可される型
 
 :   [integer](http://php.net/language.types.integer)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [DbConfig::$port](api:craft\config\DbConfig::$port)
 
-The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
+データベースサーバーのポート。デフォルトは、MySQL 向けの 3306、および、PostgreSQL 向けの 5432。
 
 ### `schema`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'public'`
 
-Defined by
+定義元
 
 :   [DbConfig::$schema](api:craft\config\DbConfig::$schema)
 
-The schema that Postgres is configured to use by default (PostgreSQL only).
+使用するデータベースのスキーマ（PostgreSQL のみ）。
 
 ### `server`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'localhost'`
 
-Defined by
+定義元
 
 :   [DbConfig::$server](api:craft\config\DbConfig::$server)
 
-The database server name or IP address. Usually 'localhost' or '127.0.0.1'.
+データベースのサーバー名、または、IP アドレス。通常は 'localhost' または '127.0.0.1' です。
 
 ### `tablePrefix`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `''`
 
-Defined by
+定義元
 
 :   [DbConfig::$tablePrefix](api:craft\config\DbConfig::$tablePrefix)
 
-If you're sharing Craft installs in a single database (MySQL) or a single database and using a shared schema (PostgreSQL), then you can set a table prefix here to avoid table naming conflicts per install. This can be no more than 5 characters, and must be all lowercase.
+共有するCraft のインストールを単一のデータベース（MySQL）、または、単一のデータベースで共有スキーマ（PostgreSQL）を使用する場合、インストールごとにテーブル名の競合を避けるために、テーブル接頭辞をセットできます。これは5文字以内、かつ、すべて小文字でなければなりません。
 
 ### `unixSocket`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [DbConfig::$unixSocket](api:craft\config\DbConfig::$unixSocket)
 
-MySQL only. If this is set, then the CLI connection string (used for yiic) will connect to the Unix socket, instead of the server and port. If this is specified, then 'server' and 'port' settings are ignored.
+MySQL のみ。セットされている場合、（yiic で使用される）CLI 接続文字列は、 サーバーやポートの代わりに Unix ソケットに接続します。これを指定すると、'server' と 'port' 設定が無視されます。
 
 ### `url`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [DbConfig::$url](api:craft\config\DbConfig::$url)
 
-The database connection URL, if one was provided by your hosting environment.
+ホスティング環境によって提供された場合、データベースの接続 URL。
 
-If this is set, the values for [driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver), [user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user), [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database), [server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server), [port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port), and [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database) will be extracted from it.
+これがセットされている場合、[driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver)、[user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user)、[database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database)、[server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server)、[port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port)、および、[database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database) の値は、そこから抽出されます。
 
 ### `user`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'root'`
 
-Defined by
+定義元
 
 :   [DbConfig::$user](api:craft\config\DbConfig::$user)
 
-The database username to connect with.
+接続するデータベースのユーザー名。
 
 <!-- END SETTINGS -->
+

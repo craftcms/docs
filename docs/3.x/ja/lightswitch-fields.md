@@ -1,12 +1,12 @@
-# Lightswitch Fields
+# Lightswitch フィールド
 
-Lightswitch fields give you a simple toggle input for times when all you need is a “Yes” or “No” answer.
+Lightswitch フィールドでは、「はい」または「いいえ」の答えが必要なとき向けに、トグル入力を提供します。
 
-## The Field
+## フィールド
 
-## Templating
+## テンプレート記法
 
-This field will either return a `1` or `0` from the database, so you can test if it is in the `on` position from a template like so:
+このフィールドは、データベースから `1` または `0` のいずれかを返します。そのため、`on` の状態にあるかどうかを次のようにテンプレートからテストできます。
 
 ```twig
 {% if entry.lightswitchFieldHandle %}
@@ -15,3 +15,4 @@ This field will either return a `1` or `0` from the database, so you can test if
     <p>I'm off.</p>
 {% endif %}
 ```
+

@@ -1,187 +1,168 @@
-# Sections and Entries
+# セクションとエントリ
 
-## Entries
+## エントリ
 
-Entries hold the content that you want to display on your web pages. Each entry has an Author, a Post Date, an Expiration Date (if desired), a status (enabled or disabled), and of course, content.
+エントリはウェブページに表示させたいコンテンツを保持します。すべてのエントリは投稿者、投稿日、（もし望むなら）有効期限日、（有効・無効の）ステータスと、もちろん、コンテンツを持っています。
 
-You can also create drafts of entries that live alongside the current live version of the entry.
+エントリの現在の公開バージョンと並行して、エントリのドラフトを作成することもできます。
 
-Typically each entry will have a stake in its own primary URL on your site, though Craft can fetch any entry from anywhere if your template needs it.
+一般的に、それぞれのエントリはサイトの独自のプライマリー URL に関わり合いを持ちますが、Craft ではテンプレートが必要とするならば、どこからでもエントリを取得できます。
 
-## Sections
+## セクション
 
-Before you can create entries, you must create Sections to contain them. In each Section you can define the following:
+エントリを作成する前に、それらを含めるためのセクションを作成しなければなりません。それぞれのセクションには、次のことを定義できます。
 
-* Whether entries in the section have URLs
-* What the entries’ URLs should look like
-* Which template should get loaded if an entry’s URL is requested
-* What types of entries should be available in the section, and which fields each of those entry types should have
+* セクション内のエントリが URL を持つかどうか
+* エントリの URL をどのように表示するか
+* エントリの URL がリクエストされたとき、どのテンプレートを読み込むか
+* セクション内でどのような入力タイプが利用可能か、それらの入力タイプはどのようなフィールドを持つ必要があるか
 
-If you're using Craft with multiple sites then you can also define in your Section:
+Craft のマルチサイト機能を利用しているなら、次のこともセクションで定義できます。
 
-* Which sites entries in the section should target
-* Which sites are enabled by default for new entries
+* セクション内のどのサイトのエントリをターゲットにするか
+* 新しいエントリ向けに、どのサイトをデフォルトで有効にするか
 
-To create a new section, go to Settings → Sections and click the “New Section” button.
+新しいセクションを作るには、「設定 > セクション」に移動し、「新規セクション」ボタンをクリックします。
 
-### Section Types
+### セクションタイプ
 
-Not all sections are created equal. Craft has three different types of sections:
+すべてのセクションが同じように作成されるわけではありません。Craft には3つの異なるタイプのセクションがあります。
 
-#### Singles
+#### シングル
 
-Singles are used for one-off pages that have unique content requirements, such as:
+シングルは、次のようなユニークなコンテンツを持つ1回限りのページで利用します。
 
-* the homepage
-* an About Us page
-* a Contact Us page
+* ホームページ
+* 会社概要ページ
+* お問い合わせページ
 
-Unlike the other section types, Singles only have one entry associated with them, and they don’t have an editable Author, Slug, Post Date, or Expiration Date.
+他のセクションタイプと異なり、シングルは1つのエントリしか関連付けられておらず、編集可能な投稿者、スラグ、投稿日、または有効期限日がありません。
 
-#### Channels
+#### チャンネル
 
-Channels are used for streams of similar content, such as:
+チャンネルは、次のような類似するコンテンツのストリームに利用します。
 
-* a Blog
-* a News section
-* recipes
+* ブログ
+* ニュースのセクション
+* レシピ
 
-#### Structures
+#### ストラクチャー
 
-Structures are good for times when you need to store multiple similar entries, and sort them into a specific order. They can also be hierarchical. Examples include:
+ストラクチャーは、複数の類似するエントリを蓄積し、かつ、特定の順序で並び替える必要がある場合に適しています。それらは階層構造を持つこともできます。例として次のものを含みます。
 
-* Documentation
-* a Services section, where the order of services matters
-* a company organization chart
+* ドキュメント
+* サービスの順序が重要なサービスのセクション
+* 会社の組織図
 
-### Entry URI Formats
+### エントリー URI 形式
 
-Channel and Structure sections can choose whether their entries should be assigned URLs in the system, by filling in the “Entry URI Format” setting.
+チャンネルとストラクチャーセクションでは、「エントリー URI 形式」設定を入力することでシステム内のエントリに URL を割り当てるかどうかを選択できます。
 
-Entry URI Formats are mini Twig templates, which will be rendered each time an entry in the section is saved. The rendering result will be saved as the entry’s URI in the system.
+エントリー URI 形式は、セクション内のエントリが保存されるごとにレンダリングされる小さな Twig テンプレートです。 レンダリング結果は、システムのエントリ URI として保存されます。
 
-The entry being saved will be available to the template as a variable named `object`, and each of the entry’s properties and custom field values will also be available as their own variables. So something like this is possible:
+保存されているエントリは、`object` と名付けられた変数としてテンプレートで利用できます。さらに、各エントリのプロパティやカスタムフィールドの値は、それぞれの変数として利用できます。そのため、次のようなことが可能です。
 
 ```twig
 {{ author.username }}/{{ slug }}
 ```
 
-A shortcut syntax is also available for output tags that reference a property on the entry:
+ショートカット構文は、エントリのプロパティを参照する出力タグでも利用できます。
 
 ```twig
 {author.username}/{slug}
 ```
 
-Structure sections may want to have nested paths for child entries:
+ストラクチャーセクションでは、子エントリのためのネストされたパスが必要かもしれません。
 
 ```twig
 {parent.uri}/{slug}
 ```
 
-With the above Entry URI Format, a top-level entry’s URI might end up as `templating`, whereas a nested entry’s URI might end up as `templating/tags`.
+上記のエントリー URI 形式では、トップレベルエントリの URI は `templating` で終わるかもしれないのに対して、ネストされているエントリの URI は `templating/tags` で終わるかもしれません。
 
-Structure sections might also want to include a segment before the nested path:
+ストラクチャーセクションでは、ネストされたパスの前にセグメントを含めることもできます。
 
 ```twig
 {parent.uri ?? 'docs'}/{slug}
 ```
 
-The above template could also be expressed with this syntax:
+上記のテンプレートは次の構文で表すこともできます。
 
 ```twig
 {% if level == 1 %}docs{% else %}{parent.uri}{% endif %}/{slug}
 ```
 
-With the above Entry URI Format, a top-level entry’s URI might end up as `docs/templating`, whereas a nested entry’s URI might end up as `docs/templating/tags`.
+上記のエントリー URI 形式では、トップレベルエントリの URI は `docs/templating` で終わるかもしれないのに対して、ネストされているエントリの URI は `docs/templating/tags` で終わるかもしれません。
 
-### Preview Targets
+## 入力タイプ
 
-Your entry content will likely show up in places other than just their main URLs. For example, the Blog index page will show excerpts of recent blog posts.
+チャンネルとストラクチャーセクションの両方では、入力タイプを用いて複数のタイプのエントリを定義できます。
 
-With Craft Pro, your sections will have a “Preview Targets” setting, where you can list additional places your entries will show up on your site, so that authors can quickly preview entries everywhere they appear.
+「設定 > セクション」のセクション名の横にある「入力タイプを変更してください。」リンクをクリックして、セクションの入力タイプを管理できます。セクションの入力タイプのインデックスに移動します。いずれかの入力タイプの名前をクリックすると、その設定ページへ移動します。
 
-Each preview target has Name and a URI. Give each of your targets a clear name that authors will understand, such as “Homepage” or “Blog Index”. Set the URI to the actual URI you want to load when the target is selected.
+![入力タイプの設定編集画面](./images/sections-and-entries-entry-types.png)
 
-The URI is a mini Twig template (just like Entry URI Formats), so you can make it dynamic if you need to. For example, if you are creating an “Archive” preview target, where the URI needs to include the year the entry was published, you can enter `archive/{postDate|date('Y')}`.
+入力タイプの設定は、次の通りです。
 
-![A section’s Preview Targets setting.](./images/preview-targets.png)
+* **名前** – 入力タイプの名前
+* **ハンドル** – 入力タイプのテンプレートに対応するハンドル
+* **タイトルのフィールドの見る** – この入力タイプのエントリでタイトルフィールドを表示するかどうか
+* **タイトルフィールドラベル** – 「タイトル」フィールドのラベルをどうするか
 
-You can also set the URI to a environment variable (e.g. `$NEWS_INDEX`, or a URL that begins with an alias (e.g. `@rootUrl/news` or `@rootUrl/news/{slug}`). See [Environmental Configuration](config/environments.md) to learn more about how those work.
+### 動的なエントリタイトル
 
-When an author is editing an entry from a section with custom preview targets, the “Share” button will be replaced with a menu that lists the “Primary entry page” (if the section has an Entry URI Format), plus the names of each preview target.
+投稿者に入力を求めるのではなく、自動生成されたタイトルにする場合、「タイトルのフィールドを見る。」チェックボックスをオフにします。その際、新たに「タイトル形式」欄が表示され、自動生成されるタイトルの見え方を定義できます。
 
-![An entry’s Share menu with 3 custom preview targets.](./images/share-with-targets.png =294x)
+タイトル形式は本格的な Twig テンプレートで、エントリが保存されるたびに解析されます。
 
-The targets will also be available within Live Preview.
+エントリは `object` という名称の変数としてこのテンプレートに渡されます。エントリの [プロパティ](api:craft\elements\Entry#public-properties) は、次の2つの方法で参照できます。
 
-## Entry Types
+* `{{ object.property }}` _（標準の Twig 構文）_
+* `{property}` _（ショートカット構文）_
 
-Both Channel and Structure sections let you define multiple types of entries using Entry Types.
+_ショートカット構文には、中括弧が1つしかないことに注意してください_。
 
-You can manage your sections’ Entry Types by clicking the “Edit Entry Types” link beside the section’s name in Settings → Sections. That’ll take you to the section’s entry type index. Clicking on an entry type’s name takes you to its settings page:
+Craft がタイトル形式の中でショートカット構文を見つけた場合、Twig の解析にあたりテンプレートへ渡す前に `{` を `{{object.` 、`}` を `}}` に置換します。
 
-![Entry Type Edit Settings](./images/sections-and-entries-entry-types.png)
-
-Entry types have the following settings:
-
-* **Name** – The entry type’s name
-* **Handle** – The entry type’s template-facing handle
-* **Show the Title field?** – Whether a Title field is displayed for entries of this type
-* **Title Field Label** – What the “Title” field label should be.
-
-### Dynamic Entry Titles
-
-If you want your entries to have auto-generated titles rather than requiring authors to enter them, you can uncheck the “Show the Title field?” checkbox. When you do, a new “Title Format” setting will appear, where you can define what the auto-generated titles should look like.
-
-The Title Format is a full-blown Twig template, and it will get parsed whenever your entries are saved.
-
-The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](api:craft\elements\Entry#public-properties) in two ways:
-
-* `{{ object.property }}` *(normal Twig syntax)*
-* `{property}` *(shortcut syntax)*
-
-*Note that the shortcut syntax only has one set of curly braces*.
-
-If Craft finds any of these in your Title Format, it will replace the `{` with `{{object.` and the `}` with `}}`, before passing the template off to Twig for parsing.
-
-You can use Twig filters in both syntaxes:
+いずれの構文でも Twig フィルタを使えます。
 
 ```twig
 {{ object.postDate|date('M j, Y') }}
 {postDate|date('M j, Y')}
 ```
 
-Craft’s [global variables](dev/global-variables.md) are available to these templates as well:
+Craft の[グローバル変数](dev/global-variables.md)は、これらのテンプレートでも利用できます。
 
 ```twig
 {{ now|date('Y-m-d') }}
 {{ currentUser.username }}
 ```
 
-Conditionals are also fair game. There’s no shortcut syntax for those, so if you want to use a conditional on one of the entry’s properties, you will need to reference it with the `object` variable:
+条件文もまた、かっこうの標的です。ショートカット構文がないため、エントリプロパティの1つで条件分岐する場合、変数 `object` で参照する必要があります。
 
 ```twig
 {% if object.postDate %}{postDate|date('M j, Y')}{% else %}{{ now|date('M j, Y') }}{% endif %}
 ```
 
-## Editing Entries
+## エントリの編集
 
-If you have at least one section, there will be an “Entries” tab in the primary CP nav. Clicking on it will take you to the entry index. From there you can navigate to the entry you wish to edit, or create a new one.
+少なくとも1つのセクションがあれば、CP のメインナビゲーションに「エントリ」タブが表示されます。クリックすると、エントリのインデックスに移動します。そこから、編集したいエントリに移動したり、新しいエントリを作成できます。
 
-You can perform the following actions from the Edit Entry page:
+エントリの編集ページでは、次のアクションを実行できます。
 
-* Choose the entry type (if there’s at least two to choose from)
-* Edit the entry’s title
-* Edit the entry’s slug
-* Edit the entry’s custom field content
-* Choose the entry’s author (Pro edition only)
-* Choose the entry’s parent (if it’s within a Structure section)
-* Choose the entry’s Post Date
-* Choose the entry’s Expiration Date (optional)
-* Choose whether the entry is enabled or not
-* Save changes to the entry
-* Save a new draft of the entry
-* Publish a draft
-* View past versions of the entry
+* （選択候補が2つ以上ある場合）入力タイプの選択
+* エントリのタイトルの編集
+* エントリのスラグの編集
+* エントリのカスタムフィールドコンテンツの編集
+* エントリーの投稿者の選択（Pro エディションのみ）
+* （ストラクチャーセクションに含まれる場合）エントリの親の選択
+* エントリの投稿日の選択
+* エントリの有効期限の選択（オプション）
+* エントリを有効にするかどうかの選択
+* エントリの変更を保存
+* エントリの新しいドラフトの保存
+* ドラフトの公開
+* エントリの過去のバージョンの閲覧
 
-If you leave the Post Date blank, Craft will automatically set it the first time an entry is saved as enabled.
+投稿日を空のままにした場合、Craft はエントリが有効な状態で保存された最初のタイミングで自動的にセットします。
+

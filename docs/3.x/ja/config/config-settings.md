@@ -1,10 +1,10 @@
-# General Config Settings
+# 一般設定
 
-Craft supports several configuration settings that give you control over its behavior.
+Craft は、その振る舞いを制御するためのいくつかのコンフィギュレーション設定をサポートしています。
 
-To set a new config setting, open `config/general.php` and define it in one of the environment config arrays, depending on which environment(s) you want the setting to apply to.
+新しいコンフィグ設定をセットするには `config/general.php` を開き、設定を適用したい環境に応じて環境設定の配列の1つを定義してください。
 
-For example, if you want to allow Craft to be updated in dev environments but not on staging or production environments, do this:
+例えば、staging または production 環境ではなく、dev 環境のみ Craft のアップデートを許可したい場合、次のようにします。
 
 ```php{4,10}
 return [
@@ -32,586 +32,591 @@ return [
 ];
 ```
 
-Here’s the full list of config settings that Craft supports:
+Craft がサポートするコンフィグ設定の完全なリストは、次の通りです。
 
 <!-- BEGIN SETTINGS -->
 
 ### `actionTrigger`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'actions'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$actionTrigger](api:craft\config\GeneralConfig::$actionTrigger)
 
-The URI segment Craft should look for when determining if the current request should first be routed to a controller action.
+現在のリクエストを最初にコントローラーアクションにルーティングするかどうかを決定するとき、Craft が探す URI セグメント。
 
 ### `activateAccountSuccessPath`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `''`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$activateAccountSuccessPath](api:craft\config\GeneralConfig::$activateAccountSuccessPath)
 
-The URI that users without access to the Control Panel should be redirected to after activating their account.
+コントロールパネルにアクセスできないユーザーが、アカウントをアクティベートしたときにリダイレクトする URI。
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
 
 ### `addTrailingSlashesToUrls`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$addTrailingSlashesToUrls](api:craft\config\GeneralConfig::$addTrailingSlashesToUrls)
 
-Whether auto-generated URLs should have trailing slashes.
+自動生成された URL にスラッシュをつけるかどうか。
 
 ### `aliases`
 
-Allowed types
+許可される型
 
 :   [array](http://php.net/language.types.array)
 
-Default value
+デフォルト値
 
 :   `[]`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$aliases](api:craft\config\GeneralConfig::$aliases)
 
-Any custom Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) that should be defined for every request.
+リクエストごとに定義される、カスタムの Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)。
 
 ### `allowAdminChanges`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$allowAdminChanges](api:craft\config\GeneralConfig::$allowAdminChanges)
 
-Whether admins should be allowed to make administrative changes to the system.
+管理者によるシステムへの管理上の変更を許可するかどうか。
 
-If this is disabled, the Settings and Plugin Store sections will be hidden, the Craft edition and Craft/plugin versions will be locked, and the project config will become read-only.
+これを無効にすると、設定およびプラグインストアのセクションは非表示になり、Craft 本体のエディションとプラグインのバージョンがロックされ、プロジェクトコンフィグは読み取り専用になります。
 
-Therefore you should only disable this in production environments when [useProjectConfigFile](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#useprojectconfigfile) is enabled, and you have a deployment workflow that runs `composer install` automatically on deploy.
+そのため、[useProjectConfigFile](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#useprojectconfigfile) が有効になっている production 環境のみ、これを無効にするべきです。そして、デプロイメントワークフローでデプロイ時に自動的に `composer install` を実行するようにします。
 
-::: warning Don’t disable this setting until **all** environments have been updated to Craft 3.1.0 or later. :::
+::: warning
+**すべての**環境が Craft 3.1.0 以降にアップデートされるまで、この設定を無効にしないでください。
+:::
 
 ### `allowSimilarTags`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$allowSimilarTags](api:craft\config\GeneralConfig::$allowSimilarTags)
 
-Whether users should be allowed to create similarly-named tags.
+ユーザーによる類似した名前のタグの作成を許可するかどうか。
 
 ### `allowUpdates`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$allowUpdates](api:craft\config\GeneralConfig::$allowUpdates)
 
-Whether Craft should allow system and plugin updates in the Control Panel, and plugin installation from the Plugin Store.
+コントロールパネルでのシステムとプラグインのアップデート、および、プラグインストアからのプラグインのインストールを Craft が許可するかどうか。
 
-This setting will automatically be disabled if [allowAdminChanges](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#allowadminchanges) is disabled.
+[allowAdminChanges](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#allowadminchanges) が無効になっている場合、この設定は自動的に無効になります。
 
 ### `allowUppercaseInSlug`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$allowUppercaseInSlug](api:craft\config\GeneralConfig::$allowUppercaseInSlug)
 
-Whether uppercase letters should be allowed in slugs.
+スラグに大文字を使うことを許可するかどうか。
 
 ### `allowedFileExtensions`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)[]
 
-Default value
+デフォルト値
 
 :   `['7z', 'aiff', 'asf', 'avi', 'bmp', 'csv', 'doc', 'docx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'htm', 'html', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'm2t', 'mid', 'mov', 'mp3', 'mp4', 'm4a', 'm4v', 'mpc', 'mpeg', 'mpg', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rtf', 'sdc', 'sitd', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tgz', 'tif', 'tiff', 'txt', 'vob', 'vsd', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'zip']`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$allowedFileExtensions](api:craft\config\GeneralConfig::$allowedFileExtensions)
 
-The file extensions Craft should allow when a user is uploading files.
+ユーザーがファイルをアップロードする際に、Craft が許可するファイル拡張子。
 
 ### `autoLoginAfterAccountActivation`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$autoLoginAfterAccountActivation](api:craft\config\GeneralConfig::$autoLoginAfterAccountActivation)
 
-Whether users should automatically be logged in after activating their account or resetting their password.
+ユーザーがアカウントを有効化、または、パスワードをリセットした後で、自動的にログインさせるかどうか。
 
 ### `backupCommand`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$backupCommand](api:craft\config\GeneralConfig::$backupCommand)
 
-The shell command that Craft should execute to create a database backup.
+データベースのバックアップを作成するために Craft が実行するシェルコマンド。
 
-By default Craft will run `mysqldump` or `pg_dump`, provided that those libraries are in the `$PATH` variable for the user the web server is running as.
+ウェブサーバーを実行しているユーザーの `$PATH` 変数にライブラリが含まれている場合、デフォルトで Craft は `mysqldump` または `pg_dump` を実行します。
 
-There are several tokens you can use that Craft will swap out at runtime:
+ランタイムで Craft がスワップアウトするために利用できるいくつかのトークンがあります。
 
-- `{path}` - the target backup file path
-- `{port}` - the current database port
-- `{server}` - the current database host name
-- `{user}` - the user to connect to the database
-- `{database}` - the current database name
-- `{schema}` - the current database schema (if any)
+- `{path}` - バックアップファイルのターゲットパス
+- `{port}` -現在のデータベースポート
+- `{server}` - 現在のデータベースホスト名
+- `{user}` -データベースのに接続するユーザー
+- `{database}` - 現在のデータベース名
+- `{schema}` - （もしある場合）現在のデータベーススキーマ
 
-This can also be set to `false` to disable database backups completely.
+データベースのバックアップを完全に無効化するために、`false` をセットすることもできます。
 
 ### `backupOnUpdate`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$backupOnUpdate](api:craft\config\GeneralConfig::$backupOnUpdate)
 
-Whether Craft should create a database backup before applying a new system update.
+新しいシステムアップデートを適用する前に、Craft がデータベースのバックアップを作成するかどうか。
 
 ### `baseCpUrl`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$baseCpUrl](api:craft\config\GeneralConfig::$baseCpUrl)
 
-The base URL that Craft should use when generating Control Panel URLs.
+コントロールパネルの URL を生成する際に、Craft が使用するベース URL。
 
-It will be determined automatically if left blank.
+空白の場合、自動的に決定されます。
 
-::: tip The base CP URL should **not** include the [CP trigger word](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#cptrigger) (e.g. `/admin`). :::
+::: tip
+ベース CP URL に [CP トリガーワード](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#cptrigger)（例：`/admin`）を **含めない** でください。
+:::
 
 ### `blowfishHashCost`
 
-Allowed types
+許可される型
 
 :   [integer](http://php.net/language.types.integer)
 
-Default value
+デフォルト値
 
 :   `13`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$blowfishHashCost](api:craft\config\GeneralConfig::$blowfishHashCost)
 
-The higher the cost value, the longer it takes to generate a password hash and to verify against it. Therefore, higher cost slows down a brute-force attack.
+コスト値が高いと、パスワードハッシュの生成とそれに対する検証に時間がかかります。そのため、より高いコストはブルートフォース攻撃を遅くさせます。
 
-For best protection against brute force attacks, set it to the highest value that is tolerable on production servers.
+ブルートフォース攻撃に対するベストな保護のために、production サーバーで許容される最高の値をセットしてください。
 
-The time taken to compute the hash doubles for every increment by one for this value. For example, if the hash takes 1 second to compute when the value is 14 then the compute time varies as 2^(value - 14) seconds.
+この値が増加するごとに、ハッシュを計算するためにかかる時間は倍になります。
+例えば、値が14のときハッシュの計算に1秒かかる場合、計算時間は「2^(値 - 14) 」秒で変化します。
 
 ### `cacheDuration`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `86400`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$cacheDuration](api:craft\config\GeneralConfig::$cacheDuration)
 
-The default length of time Craft will store data, RSS feed, and template caches.
+Craft がデータ、RSS フィード、および、テンプレートキャッシュを保管する時間のデフォルトの長さ。
 
-If set to `0`, data and RSS feed caches will be stored indefinitely; template caches will be stored for one year.
+`0` をセットすると、データと RSS フィードのキャッシュは無期限に保管されます。テンプレートキャッシュは1年間保管されます。
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
 
 ### `cacheElementQueries`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$cacheElementQueries](api:craft\config\GeneralConfig::$cacheElementQueries)
 
-Whether Craft should cache element queries that fall inside `{% cache %}` tags.
+Craft が `{% cache %}` タグ内にエレメントクエリをキャッシュするかどうか。
 
 ### `convertFilenamesToAscii`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$convertFilenamesToAscii](api:craft\config\GeneralConfig::$convertFilenamesToAscii)
 
-Whether uploaded filenames with non-ASCII characters should be converted to ASCII (i.e. `ñ` → `n`).
+アップロードされたファイル名に含まれる ASCII 以外の文字を ASCII に変換するかどうか（例： `ñ` → `n`）。
 
 ### `cooldownDuration`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `300`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$cooldownDuration](api:craft\config\GeneralConfig::$cooldownDuration)
 
-The amount of time a user must wait before re-attempting to log in after their account is locked due to too many failed login attempts.
+あまりに多くのログイン試行の失敗によりアカウントがロックされた後、ユーザーが再試行するために待たなければならない時間。
 
-Set to `0` to keep the account locked indefinitely, requiring an admin to manually unlock the account.
+`0` をセットするとアカウントは無期限にロックされます。管理者が手動でアカウントのロックを解除する必要があります。
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
 
 ### `cpTrigger`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'admin'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$cpTrigger](api:craft\config\GeneralConfig::$cpTrigger)
 
-The URI segment Craft should look for when determining if the current request should route to the Control Panel rather than the front-end website.
+現在のリクエストをフロントエンドのウェブサイトではなくコントロールパネルにルーティングするかどうかを決定するとき、Craft が探す URI セグメント。
 
 ### `csrfTokenName`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'CRAFT_CSRF_TOKEN'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$csrfTokenName](api:craft\config\GeneralConfig::$csrfTokenName)
 
-The name of CSRF token used for CSRF validation if [enableCsrfProtection](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablecsrfprotection) is set to `true`.
+[enableCsrfProtection](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablecsrfprotection) が `true` にセットされている場合、CSRF の検証に使用される CSRF トークン名。
 
 ### `defaultCookieDomain`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `''`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$defaultCookieDomain](api:craft\config\GeneralConfig::$defaultCookieDomain)
 
-The domain that cookies generated by Craft should be created for. If blank, it will be left up to the browser to determine which domain to use (almost always the current). If you want the cookies to work for all subdomains, for example, you could set this to `'.domain.com'`.
+Craft によって生成される Cookie が作成されるべきドメイン。空白の場合、使用するドメイン（ほとんどの場合、現在のもの）の決定はブラウザに任されます。すべてのサブドメインで機能する Cookie を望むなら、例えば、これを `'.domain.com'` にセットします。
 
 ### `defaultCpLanguage`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$defaultCpLanguage](api:craft\config\GeneralConfig::$defaultCpLanguage)
 
-The default language the Control Panel should use for users who haven’t set a preferred language yet.
+優先言語をまだセットしてないユーザー向けに、コントロールパネルが使用するデフォルトの言語。
 
 ### `defaultDirMode`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `0775`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$defaultDirMode](api:craft\config\GeneralConfig::$defaultDirMode)
 
-The default permission to be set for newly generated directories.
+新しく生成されたディレクトリにセットされるデフォルトのパーミッション。
 
-If set to `null`, the permission will be determined by the current environment.
+`null` をセットすると、パーミッションは現在の環境によって決定されます。
 
 ### `defaultFileMode`
 
-Allowed types
+許可される型
 
 :   [integer](http://php.net/language.types.integer), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$defaultFileMode](api:craft\config\GeneralConfig::$defaultFileMode)
 
-The default permission to be set for newly generated files.
+新しく生成されたファイルにセットされるデフォルトのパーミッション。
 
-If set to `null`, the permission will be determined by the current environment.
+`null` をセットすると、パーミッションは現在の環境によって決定されます。
 
 ### `defaultImageQuality`
 
-Allowed types
+許可される型
 
 :   [integer](http://php.net/language.types.integer)
 
-Default value
+デフォルト値
 
 :   `82`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$defaultImageQuality](api:craft\config\GeneralConfig::$defaultImageQuality)
 
-The quality level Craft will use when saving JPG and PNG files. Ranges from 0 (worst quality, smallest file) to 100 (best quality, biggest file).
+JPG と PNG ファイルを保存する際に、Craft が使用する品質レベル。0（最低品質、最小ファイルサイズ）から100（最高品質、最大ファイルサイズ）までの範囲。
 
 ### `defaultSearchTermOptions`
 
-Allowed types
+許可される型
 
 :   [array](http://php.net/language.types.array)
 
-Default value
+デフォルト値
 
 :   `[]`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$defaultSearchTermOptions](api:craft\config\GeneralConfig::$defaultSearchTermOptions)
 
-The default options that should be applied to each search term.
+それぞれの検索用語に適用されるデフォルトのオプション。
 
-Options include:
+オプションは次のものを含みます。
 
-- `attribute` – The attribute that the term should apply to (e.g. 'title'), if any. (`null` by default)
-- `exact` – Whether the term must be an exact match (only applies if `attribute` is set). (`false` by default)
-- `exclude` – Whether search results should *exclude* records with this term. (`false` by default)
-- `subLeft` – Whether to include keywords that contain the term, with additional characters before it. (`false` by default)
-- `subRight` – Whether to include keywords that contain the term, with additional characters after it. (`true` by default)
+- `attribute` – （もしある場合）用語が適用される属性（例：'title'）。（デフォルトは `null`）
+- `exact` – 用語が完全一致でなければならないかどうか（`attribute` がセットされている場合のみ、適用されます）。（デフォルトは `false`）
+- `exclude` – 検索結果でこの用語のレコードを *除外する* かどうか。（デフォルトは `false`）
+- `subLeft` – それより前に追加の文字を持つ「用語を含むキーワード」を含めるかどうか。（デフォルトは `false`）
+- `subRight` – それより後に追加の文字を持つ「用語を含むキーワード」を含めるかどうか。（デフォルトは `true`）
 
 ### `defaultTemplateExtensions`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)[]
 
-Default value
+デフォルト値
 
 :   `['html', 'twig']`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$defaultTemplateExtensions](api:craft\config\GeneralConfig::$defaultTemplateExtensions)
 
-The template file extensions Craft will look for when matching a template path to a file on the front end.
+フロントエンドでテンプレートパスとファイルの照合をする際に、Craft が探すテンプレートファイルの拡張子。
 
 ### `defaultTokenDuration`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `86400`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$defaultTokenDuration](api:craft\config\GeneralConfig::$defaultTokenDuration)
 
-The default amount of time tokens can be used before expiring.
+トークンが期限切れになる前に使用できるデフォルトの時間。
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
 
 ### `defaultWeekStartDay`
 
-Allowed types
+許可される型
 
 :   [integer](http://php.net/language.types.integer)
 
-Default value
+デフォルト値
 
 :   `1`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$defaultWeekStartDay](api:craft\config\GeneralConfig::$defaultWeekStartDay)
 
-The default day that new users should have set as their Week Start Day.
+新しいユーザーが「週の開始日」としてセットする必要があるデフォルトの曜日。
 
-This should be set to one of the following integers:
+これは、次の整数の1つをセットしてください。
 
-- `0` – Sunday
-- `1` – Monday
-- `2` – Tuesday
-- `3` – Wednesday
-- `4` – Thursday
-- `5` – Friday
-- `6` – Saturday
+- `0` – 日曜日
+- `1` – 月曜日
+- `2` – 火曜日
+- `3` – 水曜日
+- `4` – 木曜日
+- `5` – 金曜日
+- `6` – 土曜日
 
 ### `deferPublicRegistrationPassword`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$deferPublicRegistrationPassword](api:craft\config\GeneralConfig::$deferPublicRegistrationPassword)
 
-By default, Craft will require a 'password' field to be submitted on front-end, public user registrations. Setting this to `true` will no longer require it on the initial registration form.
+デフォルトでは、フロントエンドの一般ユーザー登録で「パスワード」フィールドを送信する必要があります。`true` をセットすると、最初の登録フォームでパスワードを必要としなくなります。
 
-If you have email verification enabled, new users will set their password once they've clicked on the verification link in the email. If you don't, the only way they can set their password is to go through your "forgot password" workflow.
+メールアドレスの確認が有効になっている場合、新しいユーザーは通知メールに記載されたリンクをクリックしてパスワードを設定できます。そうでなければ、「パスワードを忘れた」際のワークフローを経由することがパスワードをセットできる唯一の方法となります。
 
 ### `devMode`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$devMode](api:craft\config\GeneralConfig::$devMode)
 
-Whether the system should run in [Dev Mode](https://craftcms.com/support/dev-mode).
+システムを [Dev Mode](https://craftcms.com/support/dev-mode) で実行するかどうか。
 
 ### `disabledPlugins`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)[]
 
-Default value
+デフォルト値
 
 :   `[]`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$disabledPlugins](api:craft\config\GeneralConfig::$disabledPlugins)
 
-Array of plugin handles that should be disabled, regardless of what the project config says.
+プロジェクトコンフィグの内容に関わらず無効にする、プラグインハンドルの配列。
 
 ```php
 'dev' => [
@@ -621,157 +626,139 @@ Array of plugin handles that should be disabled, regardless of what the project 
 
 ### `elevatedSessionDuration`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `300`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$elevatedSessionDuration](api:craft\config\GeneralConfig::$elevatedSessionDuration)
 
-The amount of time a user’s elevated session will last, which is required for some sensitive actions (e.g. user group/permission assignment).
+機密性の高い操作（例：ユーザーのグループや権限の割り当てなど）に必要な、ユーザーの昇格されたセッションの時間。
 
-Set to `0` to disable elevated session support.
+昇格されたセッションのサポートを無効化するには、`0` をセットしてください。
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
 
 ### `enableCsrfCookie`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$enableCsrfCookie](api:craft\config\GeneralConfig::$enableCsrfCookie)
 
-Whether to use a cookie to persist the CSRF token if [enableCsrfProtection](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablecsrfprotection) is enabled. If false, the CSRF token will be stored in session under the `csrfTokenName` config setting name. Note that while storing CSRF tokens in session increases security, it requires starting a session for every page that a CSRF token is need, which may degrade site performance.
+[enableCsrfProtection](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablecsrfprotection) が有効な場合、CSRF トークンを保持するために Cookie を使用するかどうか。false の場合、CSRF トークンはコンフィグ設定名 `csrfTokenName` 配下のセッション内に保管されます。セッションの CSRF トークンを保存することでセキュリティが向上している間は、CSRF トークンをすべてのページでセッションを開始する必要があるため、サイトのパフォーマンスが低下する可能性がある点に注意してください。
 
 ### `enableCsrfProtection`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$enableCsrfProtection](api:craft\config\GeneralConfig::$enableCsrfProtection)
 
-Whether to enable CSRF protection via hidden form inputs for all forms submitted via Craft.
-
-### `enableGql`
-
-Allowed types
-
-:   [boolean](http://php.net/language.types.boolean)
-
-Default value
-
-:   `true`
-
-Defined by
-
-:   [GeneralConfig::$enableGql](api:craft\config\GeneralConfig::$enableGql)
-
-Whether the GraphQL API should be enabled.
-
-Note that the GraphQL API is only available for Craft Pro.
+Craft 経由で送信されるすべてのフォームで、不可視項目による CSRF 保護を有効にするかどうか。
 
 ### `enableTemplateCaching`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$enableTemplateCaching](api:craft\config\GeneralConfig::$enableTemplateCaching)
 
-Whether to enable Craft's template `{% cache %}` tag on a global basis.
+グローバル基準で Craft テンプレートの `{% cache %}` タグを有効にするかどうか。
 
 ### `errorTemplatePrefix`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `''`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$errorTemplatePrefix](api:craft\config\GeneralConfig::$errorTemplatePrefix)
 
-The prefix that should be prepended to HTTP error status codes when determining the path to look for an error’s template.
+エラーテンプレートを探すためのパスを決定するときに、HTTP エラーステータスコードの前につける接頭辞。
 
-If set to `'_'`, then your site’s 404 template would live at `templates/_404.html`, for example.
+例えば `'_'` がセットされている場合、サイトの 404 テンプレートは`templates/_404.html` となります。
 
 ### `extraAllowedFileExtensions`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)[], [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$extraAllowedFileExtensions](api:craft\config\GeneralConfig::$extraAllowedFileExtensions)
 
-List of file extensions that will be merged into the [allowedFileExtensions](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#allowedfileextensions) config setting.
+コンフィグ設定 [allowedFileExtensions](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#allowedfileextensions) にマージされるファイル拡張子のリスト。
 
 ### `extraAppLocales`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)[], [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$extraAppLocales](api:craft\config\GeneralConfig::$extraAppLocales)
 
-List of extra locale IDs that the application should support, and users should be able to select as their Preferred Language.
+アプリケーションがサポートすべき追加のロケール ID のリストで、ユーザーが優先言語として選択できる必要があります。
 
-Only use this setting if your server has the Intl PHP extension, or if you’ve saved the corresponding [locale data](https://github.com/craftcms/locales) into your `config/locales/` folder.
+サーバーに Intl PHP エクステンションがあるか、対応する[ロケールデータ](https://github.com/craftcms/locales)を `config/locales/` フォルダに保存している場合のみ、この設定を使用してください。
 
 ### `extraFileKinds`
 
-Allowed types
+許可される型
 
 :   [array](http://php.net/language.types.array)
 
-Default value
+デフォルト値
 
 :   `[]`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$extraFileKinds](api:craft\config\GeneralConfig::$extraFileKinds)
 
-List of additional file kinds Craft should support. This array will get merged with the one defined in `\craft\config\craft\helpers\Assets::_buildFileKinds()`.
+Craft がサポートすべき追加のファイル種類のリスト。この配列は `\craft\config\craft\helpers\Assets::_buildFileKinds()` 内で定義されたものとマージされます。
 
 ```php
 'extraFileKinds' => [
@@ -787,998 +774,901 @@ List of additional file kinds Craft should support. This array will get merged w
 ],
 ```
 
-::: tip File extensions listed here won’t immediately be allowed to be uploaded. You will also need to list them with the [extraAllowedFileExtensions](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#extraallowedfileextensions) config setting. :::
+::: tip
+ここにリストされたファイル拡張子が、即座にアップロードを許可されるわけではありません。コンフィグ設定 [extraAllowedFileExtensions](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#extraallowedfileextensions) でそれらをリストする必要もあります。
+:::
 
 ### `filenameWordSeparator`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string), [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `'-'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$filenameWordSeparator](api:craft\config\GeneralConfig::$filenameWordSeparator)
 
-The string to use to separate words when uploading Assets. If set to `false`, spaces will be left alone.
+アセットをアップロードする際に、単語を区切るために使用する文字列。`false` の場合、空白だけが残ります。
 
 ### `generateTransformsBeforePageLoad`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$generateTransformsBeforePageLoad](api:craft\config\GeneralConfig::$generateTransformsBeforePageLoad)
 
-Whether images transforms should be generated before page load.
-
-### `headlessMode`
-
-Allowed types
-
-:   [boolean](http://php.net/language.types.boolean)
-
-Default value
-
-:   `false`
-
-Defined by
-
-:   [GeneralConfig::$headlessMode](api:craft\config\GeneralConfig::$headlessMode)
-
-Bool Whether the system should run in Headless Mode, which optimizes the system and Control Panel for headless CMS implementations.
-
-When this is enabled, the following changes will take place:
-
-- URI Format settings for sections and category groups will be hidden.
-- Template route management will be hidden.
-- Front-end routing will skip checks for element and template requests.
-- Front-end responses will be JSON-formatted rather than HTML by default.
-- Twig will be configured to escape unsafe strings for JavaScript/JSON rather than HTML by default for front-end requests.
+ページの読み込み前に画像の変形によるサムネイルの生成をするかどうか。
 
 ### `imageDriver`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `self::IMAGE_DRIVER_AUTO`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$imageDriver](api:craft\config\GeneralConfig::$imageDriver)
 
-The image driver Craft should use to cleanse and transform images. By default Craft will auto-detect if ImageMagick is installed and fallback to GD if not. You can explicitly set either `'imagick'` or `'gd'` here to override that behavior.
+Craft が画像の削除や変形で使用するイメージドライバ。デフォルトでは、Craft はインストールされている ImageMagick を自動検出し、そうでない場合は GD をフォールバックします。明示的に `'imagick'` または `'gd'` をセットして、その振る舞いを上書きすることができます。
 
 ### `indexTemplateFilenames`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)[]
 
-Default value
+デフォルト値
 
 :   `['index']`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$indexTemplateFilenames](api:craft\config\GeneralConfig::$indexTemplateFilenames)
 
-The template filenames Craft will look for within a directory to represent the directory’s “index” template when matching a template path to a file on the front end.
+フロントエンドでテンプレートパスとファイルの照合をする際に、Craft がディレクトリ内で探すディレクトリの「インデックス」テンプレートに相当するテンプレートファイル名。
 
 ### `invalidLoginWindowDuration`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `3600`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$invalidLoginWindowDuration](api:craft\config\GeneralConfig::$invalidLoginWindowDuration)
 
-The amount of time to track invalid login attempts for a user, for determining if Craft should lock an account.
+Craft がアカウントをロックするかを決定するために、ユーザーの無効なログイン試行を追跡する時間。
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
 
 ### `invalidUserTokenPath`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `''`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$invalidUserTokenPath](api:craft\config\GeneralConfig::$invalidUserTokenPath)
 
-The URI Craft should redirect to when user token validation fails. A token is used on things like setting and resetting user account passwords. Note that this only affects front-end site requests.
+ユーザートークンの検証が失敗した際に、Craft がリダイレクトする URI。トークンは、ユーザーアカウントのパスワードの設定やリセットで利用されます。フロントエンドサイトのリクエストのみに影響することに注意してください。
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
 
 ### `ipHeaders`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)[], [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$ipHeaders](api:craft\config\GeneralConfig::$ipHeaders)
 
-List of headers where proxies store the real client IP.
+プロキシが実際のクライアント IP を保管するヘッダーのリスト。
 
-See [yii\web\Request::$ipHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$ipHeaders-detail) for more details.
+詳細については、[yii\web\Request::$ipHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$ipHeaders-detail) を参照してください。
 
-If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.com/api/v3/craft-web-request.html#ipheaders) value will be used.
+設定されていない場合、デフォルトで [craft\web\Request::$ipHeaders](https://docs.craftcms.com/api/v3/craft-web-request.html#ipheaders) 値が使用されます。
 
 ### `isSystemLive`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$isSystemLive](api:craft\config\GeneralConfig::$isSystemLive)
 
-Whether the site is currently live. If set to `true` or `false`, it will take precedence over the System Status setting in Settings → General.
+サイトが現在稼働しているかどうか。`true` または `false` をセットしている場合、「設定 > 一般」のシステムのステータス設定よりも優先されます。
 
 ### `limitAutoSlugsToAscii`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$limitAutoSlugsToAscii](api:craft\config\GeneralConfig::$limitAutoSlugsToAscii)
 
-Whether non-ASCII characters in auto-generated slugs should be converted to ASCII (i.e. ñ → n).
+自動生成されたスラグの ASCII 以外の文字を ASCII に変換するかどうか（例： ñ → n）。
 
-::: tip This only affects the JavaScript auto-generated slugs. Non-ASCII characters can still be used in slugs if entered manually. :::
+::: tip
+これは JavaScript によって自動生成されるスラグのみ影響します。手動で入力した場合、ASCII 以外の文字をスラグに使用できます。
+:::
 
 ### `loginPath`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `'login'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$loginPath](api:craft\config\GeneralConfig::$loginPath)
 
-The URI Craft should use for user login on the front-end.
+Craft がフロントエンドのユーザーログインに使用する URI。
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
 
 ### `logoutPath`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `'logout'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$logoutPath](api:craft\config\GeneralConfig::$logoutPath)
 
-The URI Craft should use for user logout on the front-end.
+Craft がフロントエンドのユーザーログアウトに使用する URI。
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
 
 ### `maxCachedCloudImageSize`
 
-Allowed types
+許可される型
 
 :   [integer](http://php.net/language.types.integer)
 
-Default value
+デフォルト値
 
 :   `2000`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$maxCachedCloudImageSize](api:craft\config\GeneralConfig::$maxCachedCloudImageSize)
 
-The maximum dimension size to use when caching images from external sources to use in transforms. Set to `0` to never cache them.
+変換で使用する外部ソースから画像をキャッシュする際に使用する最大の寸法サイズ。キャッシュを無効化するには、`0` をセットしてください。
 
 ### `maxInvalidLogins`
 
-Allowed types
+許可される型
 
 :   [integer](http://php.net/language.types.integer)
 
-Default value
+デフォルト値
 
 :   `5`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$maxInvalidLogins](api:craft\config\GeneralConfig::$maxInvalidLogins)
 
-The number of invalid login attempts Craft will allow within the specified duration before the account gets locked.
-
-### `maxRevisions`
-
-Allowed types
-
-:   [integer](http://php.net/language.types.integer), [null](http://php.net/language.types.null)
-
-Default value
-
-:   `50`
-
-Defined by
-
-:   [GeneralConfig::$maxRevisions](api:craft\config\GeneralConfig::$maxRevisions)
-
-The maximum number of revisions that should be stored for each element.
-
-Set to `0` if you want to store an unlimited number of revisions.
+ロックされる前のアカウントが指定期間内で Craft に許可される、無効なログイン試行の回数。
 
 ### `maxSlugIncrement`
 
-Allowed types
+許可される型
 
 :   [integer](http://php.net/language.types.integer)
 
-Default value
+デフォルト値
 
 :   `100`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$maxSlugIncrement](api:craft\config\GeneralConfig::$maxSlugIncrement)
 
-The highest number Craft will tack onto a slug in order to make it unique before giving up and throwing an error.
+諦めてエラーにする前に、Craft がそれをユニークにするためにスラグへ追加する最高の数。
 
 ### `maxUploadFileSize`
 
-Allowed types
+許可される型
 
 :   [integer](http://php.net/language.types.integer), [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `16777216`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$maxUploadFileSize](api:craft\config\GeneralConfig::$maxUploadFileSize)
 
-The maximum upload file size allowed.
+許可される最大のアップロードファイルサイズ。
 
-See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-sizeinbytes) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-sizeinbytes) のリストを参照してください。
 
 ### `omitScriptNameInUrls`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$omitScriptNameInUrls](api:craft\config\GeneralConfig::$omitScriptNameInUrls)
 
-Whether generated URLs should omit `index.php` (e.g. `http://domain.com/path` instead of `http://domain.com/index.php/path`)
+生成された URL が `index.php` を省略するかどうか（例：`http://domain.com/index.php/path` の代わりに `http://domain.com/path`）。
 
-This can only be possible if your server is configured to redirect would-be 404's to `index.php`, for example, with the redirect found in the `.htaccess` file that came with Craft:
+これは、例えば Craft に付属している `.htaccess` にリダイレクトが見つかるなど、404 を `index.php` にリダイレクトするようサーバーが設定されている場合のみ可能です。
 
-    RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule (.+) /index.php?p= [QSA,L]
-    
+```
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule (.+) /index.php?p= [QSA,L]
+```
 
 ### `optimizeImageFilesize`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$optimizeImageFilesize](api:craft\config\GeneralConfig::$optimizeImageFilesize)
 
-Whether Craft should optimize images for reduced file sizes without noticeably reducing image quality. (Only supported when ImageMagick is used.)
+Craft が画質を著しく低下させることなく、画像のファイルサイズを減らす最適化をするかどうか。
+（ImageMagick を使用している場合のみ、サポートされます。）
 
 ### `pageTrigger`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'p'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$pageTrigger](api:craft\config\GeneralConfig::$pageTrigger)
 
-The string preceding a number which Craft will look for when determining if the current request is for a particular page in a paginated list of pages.
+現在のリクエストがページ分割されたリストに含まれる特定ページのものかどうかを決定する際に、Craft が探す数値の前にある文字列。
 
-| Example Value | Example URI    |
-| ------------- | -------------- |
-| `p`           | `/news/p5`     |
-| `page`        | `/news/page5`  |
-| `page/`       | `/news/page/5` |
-| `?page`       | `/news?page=5` |
+| サンプル値 | サンプル URI |
+| ------------- | ----------- |
+| `p` | `/news/p5` |
+| `page` | `/news/page5` |
+| `page/` | `/news/page/5` |
+| `?page` | `/news?page=5` |
 
-
-::: tip If you want to set this to `?p` (e.g. `/news?p=5`), you will need to change your [pathParam](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#pathparam) setting as well, which is set to `p` by default, and if your server is running Apache, you will need to update the redirect code in your `.htaccess` file to match your new `pathParam` value. :::
+::: tip
+これを `?p`（例：`/news?p=5`）にセットしたい場合、デフォルトで `p` がセットされている [pathParam](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#pathparam) 設定も変更する必要があります。さらにサーバーが Apache で稼働している場合、新しい `pathParam` 値とマッチするよう `.htaccess` ファイル内のリダイレクトコードをアップデートする必要があります。
+:::
 
 ### `pathParam`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'p'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$pathParam](api:craft\config\GeneralConfig::$pathParam)
 
-The query string param that Craft will check when determining the request's path.
+リクエストのパスを決定する際に、Craft がチェックするクエリ文字列のパラメータ。
 
-::: tip If you change this and your server is running Apache, don’t forget to update the redirect code in your `.htaccess` file to match the new value. :::
+::: tip
+これを変更し、かつ、サーバーが Apache で稼働している場合、新しい値とマッチするよう `.htaccess` ファイルをアップデートすることを忘れないでください。
+:::
 
 ### `phpMaxMemoryLimit`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$phpMaxMemoryLimit](api:craft\config\GeneralConfig::$phpMaxMemoryLimit)
 
-The maximum amount of memory Craft will try to reserve during memory intensive operations such as zipping, unzipping and updating. Defaults to an empty string, which means it will use as much memory as it possibly can.
+Craft が圧縮、展開、アップデートなどのメモリ集約型の操作中に確保しようと試みるメモリの最大量。デフォルトは空の文字列で、可能な限り多くのメモリを使用することを意味しています。
 
-See <http://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> for a list of acceptable values.
+受け入れられる値については、<http://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> のリストを参照してください。
 
 ### `phpSessionName`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'CraftSessionId'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$phpSessionName](api:craft\config\GeneralConfig::$phpSessionName)
 
-The name of the PHP session cookie.
+PHP セッション Cookie の名前。
 
 ### `postCpLoginRedirect`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `'dashboard'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$postCpLoginRedirect](api:craft\config\GeneralConfig::$postCpLoginRedirect)
 
-The path that users should be redirected to after logging in from the Control Panel.
+コントロールパネルからログインした後にユーザーをリダイレクトするパス。
 
-This setting will also come into effect if the user visits the CP’s Login page (`/admin/login`) or the CP’s root URL (/admin) when they are already logged in.
+すでにログインしているユーザーが CP のログインページ（`/admin/login`）または、CP のルート URL（/admin）にアクセスした場合も、この設定が効力を発揮します。
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
 
 ### `postLoginRedirect`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `''`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$postLoginRedirect](api:craft\config\GeneralConfig::$postLoginRedirect)
 
-The path that users should be redirected to after logging in from the front-end site.
+フロントエンドサイトからログインした後にユーザーをリダイレクトするパス。
 
-This setting will also come into effect if the user visits the Login page (as specified by the loginPath config setting) when they are already logged in.
+すでにログインしているユーザーがログインページ（コンフィグ設定の loginPath に明示されているとおり）にアクセスした場合も、効力を発揮します。
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
 
 ### `postLogoutRedirect`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `''`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$postLogoutRedirect](api:craft\config\GeneralConfig::$postLogoutRedirect)
 
-The path that users should be redirected to after logging out from the front-end site.
+フロントエンドサイトからログアウトした後にユーザーをリダイレクトするパス。
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
 
 ### `preserveCmykColorspace`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$preserveCmykColorspace](api:craft\config\GeneralConfig::$preserveCmykColorspace)
 
-Whether CMYK should be preserved as the colorspace when when manipulating images.
+画像を操作するとき、CMYK を色空間として保存するかどうか。
 
-Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions can cause color distortion in the image. This will only have effect if ImageMagick is in use.
+`true` をセットすると、Craft は CMYK イメージを sRGB に変換するのを防ぎます。ただし、 ImageMagick のバージョンによっては、イメージに色の歪みを生じることがあります。これは ImageMagick を使用している場合のみ、影響があります。
 
 ### `preserveExifData`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$preserveExifData](api:craft\config\GeneralConfig::$preserveExifData)
 
-Whether the EXIF data should be preserved when manipulating and uploading images.
+画像を操作するとき、EXIF データを保存するかどうか。
 
-Setting this to `true` will result in larger image file sizes.
+`true` をセットすると、画像ファイルのサイズが大きくなります。
 
-This will only have effect if ImageMagick is in use.
+これは ImageMagick を使用している場合のみ、影響があります。
 
 ### `preserveImageColorProfiles`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$preserveImageColorProfiles](api:craft\config\GeneralConfig::$preserveImageColorProfiles)
 
-Whether the embedded Image Color Profile (ICC) should be preserved when manipulating images.
+画像を操作するとき、埋め込まれたイメージカラープロファイル（ICC）を保存するかどうか。
 
-Setting this to `false` will reduce the image size a little bit, but on some ImageMagick versions can cause images to be saved with an incorrect gamma value, which causes the images to become very dark. This will only have effect if ImageMagick is in use.
+`false` に設定すると画像サイズが少し小さくなります。ただし、ImageMagick のバージョンによっては正しくないガンマ値が保存され、とても暗い画像になることがあります。これは ImageMagick を使用している場合のみ、影響があります。
 
 ### `preventUserEnumeration`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$preventUserEnumeration](api:craft\config\GeneralConfig::$preventUserEnumeration)
 
-When set to `false` and you go through the "forgot password" workflow on the Control Panel login page, for example, you get distinct messages saying if the username/email didn't exist or the email was successfully sent and to check your email for further instructions. This can allow for username/email enumeration based on the response. If set `true`, you will always get a successful response even if there was an error making it difficult to enumerate users.
+`false` に設定され、コントロールパネルのログインページの「パスワードを忘れた」ワークフローを通過すると、ユーザー名 / メールアドレスが存在しないのか、または、次の手順のためのメール送信が成功し確認されたのかを示す別個のメッセージが表示されます。これは、レスポンスに基づいてユーザー名 / メールアドレスの列挙を許可します。`true` に設定すると、ユーザーを列挙するのが難しいエラーである場合も、常に正常なレスポンスを受け取るでしょう。
 
 ### `privateTemplateTrigger`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'_'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$privateTemplateTrigger](api:craft\config\GeneralConfig::$privateTemplateTrigger)
 
-The template path segment prefix that should be used to identify "private" templates (templates that aren't directly accessible via a matching URL).
+「プライベート」テンプレート（マッチする URL から直接アクセスできないテンプレート）を識別するために使用するテンプレートパスのセグメントの接頭辞。
 
-Set to an empty value to disable public template routing.
+公開テンプレートのルーティングを無効化するには、空の値をセットしてください。
 
 ### `purgePendingUsersDuration`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$purgePendingUsersDuration](api:craft\config\GeneralConfig::$purgePendingUsersDuration)
 
-The amount of time to wait before Craft purges pending users from the system that have not activated.
+有効化されていない保留中のユーザーを Craft がシステムからパージするまでに待機する時間。
 
-Note that any content assigned to a pending user will be deleted as well when the given time interval passes.
+与えられた時間が経過すると、保留中のユーザーに割り当てられたコンテンツもすべて削除される点に注意してください。
 
-Set to `0` to disable this feature.
+この機能を無効化するには、`0` をセットしてください。
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
-
-### `purgeStaleUserSessionDuration`
-
-Allowed types
-
-:   `mixed`
-
-Default value
-
-:   `7776000`
-
-Defined by
-
-:   [GeneralConfig::$purgeStaleUserSessionDuration](api:craft\config\GeneralConfig::$purgeStaleUserSessionDuration)
-
-The amount of time to wait before Craft purges stale user sessions from the sessions table in the database.
-
-Set to `0` to disable this feature.
-
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
-
-### `purgeUnsavedDraftsDuration`
-
-Allowed types
-
-:   `mixed`
-
-Default value
-
-:   `2592000`
-
-Defined by
-
-:   [GeneralConfig::$purgeUnsavedDraftsDuration](api:craft\config\GeneralConfig::$purgeUnsavedDraftsDuration)
-
-The amount of time to wait before Craft purges drafts of new elements that were never formally saved.
-
-Set to `0` to disable this feature.
-
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
 
 ### `rememberUsernameDuration`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `31536000`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$rememberUsernameDuration](api:craft\config\GeneralConfig::$rememberUsernameDuration)
 
-The amount of time Craft will remember a username and pre-populate it on the CP login page.
+CP ログインページへ自動挿入するために、Craft がユーザー名を記憶しておく時間。
 
-Set to `0` to disable this feature altogether.
+この機能を完全に無効化するには、`0` をセットしてください。
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
 
 ### `rememberedUserSessionDuration`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `1209600`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$rememberedUserSessionDuration](api:craft\config\GeneralConfig::$rememberedUserSessionDuration)
 
-The amount of time a user stays logged if “Remember Me” is checked on the login page.
+ログインページで「ログイン状態を維持する」がチェックされている場合、ユーザーがログインしたままになる時間。
 
-Set to `0` to disable the “Remember Me” feature altogether.
+「ログイン状態を維持する」機能を完全に無効化するには、`0` をセットしてください。
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
 
 ### `requireMatchingUserAgentForSession`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$requireMatchingUserAgentForSession](api:craft\config\GeneralConfig::$requireMatchingUserAgentForSession)
 
-Whether Craft should require a matching user agent string when restoring a user session from a cookie.
+Cookie からユーザーセッションを復元する際に、一致するユーザーエージェントの文字列を Craft が必要とするかどうか。
 
 ### `requireUserAgentAndIpForSession`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$requireUserAgentAndIpForSession](api:craft\config\GeneralConfig::$requireUserAgentAndIpForSession)
 
-Whether Craft should require the existence of a user agent string and IP address when creating a new user session.
+新しいユーザーセッションを作成する際に、ユーザーエージェントの文字列と IP アドレスの存在を Craft が必要とするかどうか。
 
 ### `resourceBasePath`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'@webroot/cpresources'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$resourceBasePath](api:craft\config\GeneralConfig::$resourceBasePath)
 
-The path to the root directory that should store published CP resources.
+公開された CP リソースを保管するルートディレクトリのパス。
 
 ### `resourceBaseUrl`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'@web/cpresources'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$resourceBaseUrl](api:craft\config\GeneralConfig::$resourceBaseUrl)
 
-The URL to the root directory that should store published CP resources.
+公開された CP リソースを保管するルートディレクトリの URL。
 
 ### `restoreCommand`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$restoreCommand](api:craft\config\GeneralConfig::$restoreCommand)
 
-The shell command that Craft should execute to restore a database backup.
+データベースのバックアップを復元するために Craft が実行するシェルコマンド。
 
-By default Craft will run `mysql` or `psql`, provided that those libraries are in the `$PATH` variable for the user the web server is running as.
+ウェブサーバーを実行しているユーザーの `$PATH` 変数にライブラリが含まれている場合、デフォルトで Craft は `mysql` または `psql` を実行します。
 
-There are several tokens you can use that Craft will swap out at runtime:
+ランタイムで Craft がスワップアウトするために利用できるいくつかのトークンがあります。
 
-- `{path}` - the backup file path
-- `{port}` - the current database port
-- `{server}` - the current database host name
-- `{user}` - the user to connect to the database
-- `{database}` - the current database name
-- `{schema}` - the current database schema (if any)
+- `{path}` - バックアップファイルのパス
+- `{port}` -現在のデータベースポート
+- `{server}` - 現在のデータベースホスト名
+- `{user}` -データベースのに接続するユーザー
+- `{database}` - 現在のデータベース名
+- `{schema}` - （もしある場合）現在のデータベーススキーマ
 
-This can also be set to `false` to disable database restores completely.
+データベースの復元を完全に無効化するために、`false` をセットすることもできます。
 
 ### `rotateImagesOnUploadByExifData`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$rotateImagesOnUploadByExifData](api:craft\config\GeneralConfig::$rotateImagesOnUploadByExifData)
 
-Whether Craft should rotate images according to their EXIF data on upload.
+アップロード時の EXIF データに従って、Craft が画像を回転するかどうか。
 
 ### `runQueueAutomatically`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$runQueueAutomatically](api:craft\config\GeneralConfig::$runQueueAutomatically)
 
-Whether Craft should run pending queue jobs automatically over HTTP requests.
+HTTP リクエストを通して、Craft が保留中のキュージョブを自動的に実行するかどうか。
 
-This setting should be disabled for servers running Win32, or with Apache’s mod_deflate/mod_gzip installed, where PHP’s [flush()](http://php.net/manual/en/function.flush.php) method won’t work.
+この設定は、サーバーが Win32 を実行している、または、Apache の mod_deflate/mod_gzip がインストールされている場合は、PHP の [flush()](http://php.net/manual/en/function.flush.php) メソッドが動作しないため、無効にする必要があります。
 
-If disabled, an alternate queue runner *must* be set up separately.
+無効にした場合、代わりのキューランナーを別途セットアップ*しなければなりません*。
 
-Here is an example of how you would setup a queue runner from a cron job that ran every minute:
+これは、1分ごとに実行される cron ジョブからキューランナーを設定する方法の例です。
 
 ```text
 /1 * * * * /path/to/project/root/craft queue/run
 ```
 
-### `sameSiteCookieValue`
-
-Allowed types
-
-:   [string](http://php.net/language.types.string)
-
-Default value
-
-:   `null`
-
-Defined by
-
-:   [GeneralConfig::$sameSiteCookieValue](api:craft\config\GeneralConfig::$sameSiteCookieValue)
-
-Since
-
-:   3.1.33
-
-The [SameSite](https://www.owasp.org/index.php/SameSite) value that should be set on Craft cookies, if any.
-
-This can be set to `'Lax'`, `'Strict'`, or `null`.
-
-::: note This setting requires PHP 7.3 or later. :::
-
 ### `sanitizeSvgUploads`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$sanitizeSvgUploads](api:craft\config\GeneralConfig::$sanitizeSvgUploads)
 
-Whether Craft should sanitize uploaded SVG files and strip out potential malicious looking content.
+Craft がアップロードされた SVG ファイルをサニタイズし、潜在的な悪意のあるコンテンツを取り除くべきかどうか。
 
-This should definitely be enabled if you are accepting SVG uploads from untrusted sources.
+信頼できないソースから SVG アップロードを許可する場合は、これを確実に有効にするべきです。
 
 ### `secureHeaders`
 
-Allowed types
+許可される型
 
 :   [array](http://php.net/language.types.array), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$secureHeaders](api:craft\config\GeneralConfig::$secureHeaders)
 
-Lists of headers that are, by default, subject to the trusted host configuration.
+デフォルトで、信頼できるホスト設定の適用を受けるヘッダーのリスト。
 
-See [yii\web\Request::$secureHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureHeaders-detail) for more details.
+詳細については、[yii\web\Request::$secureHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureHeaders-detail) を参照してください。
 
-If not set, the default [yii\web\Request::$secureHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureHeaders-detail) value will be used.
+設定されていない場合、デフォルトで [yii\web\Request::$secureHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureHeaders-detail) 値が使用されます。
 
 ### `secureProtocolHeaders`
 
-Allowed types
+許可される型
 
 :   [array](http://php.net/language.types.array), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$secureProtocolHeaders](api:craft\config\GeneralConfig::$secureProtocolHeaders)
 
-List of headers to check for determining whether the connection is made via HTTPS.
+HTTPS 経由で接続されるかどうかを決定するための確認を行うヘッダーのリスト。
 
-See [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) for more details.
+詳細については、[yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) を参照してください。
 
-If not set, the default [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) value will be used.
+設定されていない場合、デフォルトで [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) 値が使用されます。
 
 ### `securityKey`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$securityKey](api:craft\config\GeneralConfig::$securityKey)
 
-A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](api:craft\services\Security).
+[craft\services\Security](api:craft\services\Security) のデータのハッシングや暗号化に使われる、非公開でランダムな暗号的に安全な鍵。
 
-This value should be the same across all environments. Note that if this key ever changes, any data that was encrypted with it will be inaccessible.
+この値は、すべての環境で同じであるべきです。この鍵を変更した場合、暗号化されたいかなるデータにもアクセスできなくなることに注意してください。
 
 ### `sendPoweredByHeader`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$sendPoweredByHeader](api:craft\config\GeneralConfig::$sendPoweredByHeader)
 
-Whether an `X-Powered-By: Craft CMS` header should be sent, helping services like [BuiltWith](https://builtwith.com/) and [Wappalyzer](https://www.wappalyzer.com/) identify that the site is running on Craft.
+`X-Powered-By: Craft CMS` ヘッダーを送信するかどうか。[BuiltWith](https://builtwith.com/) や [Wappalyzer](https://www.wappalyzer.com/) のようなサービスで、サイトが Craft で動作していると判別するのを手伝います。
 
 ### `setPasswordPath`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `'setpassword'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$setPasswordPath](api:craft\config\GeneralConfig::$setPasswordPath)
 
-The password-reset template path. Note that this only affects front-end site requests.
+パスワードリセットのテンプレートパス。フロントエンドサイトのリクエストのみに影響することに注意してください。
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
 
 ### `setPasswordSuccessPath`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `''`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$setPasswordSuccessPath](api:craft\config\GeneralConfig::$setPasswordSuccessPath)
 
-The URI Craft should redirect users to after setting their password from the front-end.
+Craft がフロントエンドからパスワードを設定したユーザーをリダイレクトさせる URI。
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
 
 ### `siteName`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string), [string](http://php.net/language.types.string)[]
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$siteName](api:craft\config\GeneralConfig::$siteName)
 
-The site name(s). If set, it will take precedence over the Name settings in Settings → Sites → [Site Name].
+サイト名。セットされている場合、「設定 > サイト > 名前」で設定された名称よりも優先されます。
 
-This can be set to a string, which will override the primary site’s name only, or an array with site handles used as the keys.
+プライマリサイトの名前だけを上書きするための文字列、または、サイトのハンドルをキーとして使用する配列をセットできます。
 
 ### `siteUrl`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string), [string](http://php.net/language.types.string)[]
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$siteUrl](api:craft\config\GeneralConfig::$siteUrl)
 
-The base URL to the site(s). If set, it will take precedence over the Base URL settings in Settings → Sites → [Site Name].
+サイトのベース URL。セットされている場合、「設定 > サイト > ベース URL」で設定されたベース URLよりも優先されます。
 
-This can be set to a string, which will override the primary site’s base URL only, or an array with site handles used as the keys.
+プライマリサイトのベース URL だけを上書きするための文字列、または、サイトのハンドルをキーとして使用する配列をセットできます。
 
-The URL(s) must begin with either `http://`, `https://`, `//` (protocol-relative), or an [alias](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#aliases).
+URL は `http://`、`https://`、`//`（プロトコル相対）、または、[エイリアス](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#aliases)のいずれかではじまる必要があります。
 
 ```php
 'siteUrl' => [
@@ -1789,340 +1679,361 @@ The URL(s) must begin with either `http://`, `https://`, `//` (protocol-relative
 
 ### `slugWordSeparator`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'-'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$slugWordSeparator](api:craft\config\GeneralConfig::$slugWordSeparator)
 
-The character(s) that should be used to separate words in slugs.
+スラグの単語を区切るために使用する文字。
 
 ### `softDeleteDuration`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `2592000`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$softDeleteDuration](api:craft\config\GeneralConfig::$softDeleteDuration)
 
-The amount of time before a soft-deleted item will be up for hard-deletion by garbage collection.
+ソフトデリートされたアイテムが、ガベージコレクションによって完全に削除されるまでの時間。
 
-Set to `0` if you don’t ever want to delete soft-deleted items.
+ソフトデリートされたアイテムを削除したくない場合、`0` をセットしてください。
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
 
 ### `storeUserIps`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$storeUserIps](api:craft\config\GeneralConfig::$storeUserIps)
 
-Whether user IP addresses should be stored/logged by the system.
+ユーザーの IP アドレスがシステムによって保存 / 記録されるべきかどうか。
+
+### `suppressTemplateErrors`
+
+許可される型
+
+:   [boolean](http://php.net/language.types.boolean)
+
+デフォルト値
+
+:   `false`
+
+定義元
+
+:   [GeneralConfig::$suppressTemplateErrors](api:craft\config\GeneralConfig::$suppressTemplateErrors)
+
+Twig のランタイムエラーを抑制するかどうか。
+
+`true` をセットすると、エラーは Craft のログファイルに記録されます。
 
 ### `testToEmailAddress`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string), [array](http://php.net/language.types.array), [false](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$testToEmailAddress](api:craft\config\GeneralConfig::$testToEmailAddress)
 
-Configures Craft to send all system emails to a single email address, or an array of email addresses for testing purposes.
+すべてのシステムメールをテスト目的の単一のメールアドレス、または、メールアドレスの配列へ送信するよう、Craft を設定します。
 
-By default the recipient name(s) will be “Test Recipient”, but you can customize that by setting the value with the format `['email@address.com' => 'Name']`.
+デフォルトでは受信者名は「テスト受信者」になりますが、`['email@address.com' => 'Name']` の形式で値をカスタマイズできます。
 
 ### `timezone`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$timezone](api:craft\config\GeneralConfig::$timezone)
 
-The timezone of the site. If set, it will take precedence over the Timezone setting in Settings → General.
+サイトのタイムゾーン。セットされている場合、「設定 > 一般」で設定されたタイムゾーンよりも優先されます。
 
-This can be set to one of PHP’s [supported timezones](http://php.net/manual/en/timezones.php).
+これは、PHP の [supported timezones](http://php.net/manual/en/timezones.php) の1つをセットできます。
 
 ### `tokenParam`
 
-Allowed types
+許可される型
 
 :   [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'token'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$tokenParam](api:craft\config\GeneralConfig::$tokenParam)
 
-The query string parameter name that Craft tokens should be set to.
+Craft のトークンがセットされるクエリ文字列パラメータ名。
 
 ### `transformGifs`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$transformGifs](api:craft\config\GeneralConfig::$transformGifs)
 
-Whether GIF files should be cleansed/transformed.
+GIF ファイルを綺麗にしたり、変形したりするかどうか。
 
 ### `translationDebugOutput`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$translationDebugOutput](api:craft\config\GeneralConfig::$translationDebugOutput)
 
-Whether translated messages should be wrapped in special characters, to help find any strings that are not being run through `Craft::t()` or the `|translate` filter.
+`Craft::t()` または `|translate` フィルタを通して実行されていない文字列を見つけるために、翻訳されたメッセージを特殊文字で囲むかどうか。
 
 ### `trustedHosts`
 
-Allowed types
+許可される型
 
 :   [array](http://php.net/language.types.array)
 
-Default value
+デフォルト値
 
 :   `['any']`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$trustedHosts](api:craft\config\GeneralConfig::$trustedHosts)
 
-The configuration for trusted security-related headers.
+信頼されるセキュリティ関連のヘッダーの設定。
 
-See [yii\web\Request::$trustedHosts](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$trustedHosts-detail) for more details.
+詳細については、[yii\web\Request::$trustedHosts](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$trustedHosts-detail) を参照してください。
 
-By default, all hosts are trusted.
+デフォルトでは、すべてのホストが信頼されます。
 
 ### `useCompressedJs`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `true`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$useCompressedJs](api:craft\config\GeneralConfig::$useCompressedJs)
 
-Whether Craft should use compressed JavaScript files whenever possible.
+可能な場合に、圧縮された JavaScript を Craft が使用するかどうか。
 
 ### `useEmailAsUsername`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$useEmailAsUsername](api:craft\config\GeneralConfig::$useEmailAsUsername)
 
-Whether Craft should set users’ usernames to their email addresses, rather than let them set their username separately.
+ユーザー自身がユーザー名をセットするのではなく、Craft がユーザー名をメールアドレスに合わせるかどうか。
 
 ### `useFileLocks`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値
 
 :   `null`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$useFileLocks](api:craft\config\GeneralConfig::$useFileLocks)
 
-Whether to grab an exclusive lock on a file when writing to it by using the `LOCK_EX` flag.
+`LOCK_EX` フラグを使用して、書き込む際にファイルを排他ロックするかどうか。
 
-Some file systems, such as NFS, do not support exclusive file locking.
+NFS のような一部のファイルシステムでは、排他的なファイルロックをサポートしていません。
 
-If not set to `true` or `false`, Craft will automatically try to detect if the underlying file system supports exclusive file locking and cache the results.
+`true` または `false` をセットしていない場合、Craft は自動的に基礎となるファイルシステムが排他的なファイルロックをサポートしているかを検出し、結果をキャッシュします。
 
 ### `usePathInfo`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$usePathInfo](api:craft\config\GeneralConfig::$usePathInfo)
 
-Whether Craft should specify the path using `PATH_INFO` or as a query string parameter when generating URLs.
+Craft が URL を生成する際、`PATH_INFO` を使用してパスを指定するか、クエリ文字列パラメータとして指定するかどうか。
 
-Note that this setting only takes effect if [omitScriptNameInUrls](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#omitscriptnameinurls) is set to false.
+この設定は、[omitScriptNameInUrls](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#omitscriptnameinurls) が false にセットされている場合のみ影響することに注意してください。
 
 ### `useProjectConfigFile`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value
+デフォルト値
 
 :   `false`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$useProjectConfigFile](api:craft\config\GeneralConfig::$useProjectConfigFile)
 
-Whether the project config should be saved out to `config/project.yaml`.
+プロジェクトコンフィグを `config/project.yaml` に保存するかどうか。
 
-If set to `true`, a hard copy of your system’s project config will be saved in `config/project.yaml`, and any changes to `config/project.yaml` will be applied back to the system, making it possible for multiple environments to share the same project config despite having separate databases.
+`true` をセットすると、システムのプロジェクトコンフィグのハードコピーが `config/project.yaml` に保存され、`config/project.yaml` の変更はシステムに適用されます。それによって、別々のデータベースを持つにも関わらず、マルチ環境で同じプロジェクトコンフィグを共有することが可能になります。
 
-::: warning Make sure you’ve read the entire [Project Config](https://docs.craftcms.com/v3/project-config.html) documentation, and carefully follow the “Enabling the Project Config File” steps when enabling this setting. :::
+::: warning
+この設定を有効にする場合、必ず[プロジェクトコンフィグ](../project-config.html)ドキュメント全体を読み、「プロジェクトコンフィグファイルを有効にする」のステップに慎重に従ってください。
+:::
 
 ### `useSecureCookies`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean), [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'auto'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$useSecureCookies](api:craft\config\GeneralConfig::$useSecureCookies)
 
-Whether Craft will set the "secure" flag when saving cookies when using `Craft::cookieConfig() to create a cookie`.
+`Cookie を作成するために Craft::cookieConfig()` を使用した際、Craft が保存する Cookie に "secure" フラグをセットするかどうか。
 
-Valid values are `true`, `false`, and `'auto'`. Defaults to `'auto'`, which will set the secure flag if the page you're currently accessing is over `https://`. `true` will always set the flag, regardless of protocol and `false` will never automatically set the flag.
+有効な値は `true`、`false`、および、`'auto'` です。デフォルトは `'auto'` で、現在のアクセスが `https://` 越しの場合に、secure フラグがセットされます。`true` はプロトコルに関係なく常にフラグをセットし、`false` は自動的にフラグをセットすることはありません。
 
 ### `useSslOnTokenizedUrls`
 
-Allowed types
+許可される型
 
 :   [boolean](http://php.net/language.types.boolean), [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値
 
 :   `'auto'`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$useSslOnTokenizedUrls](api:craft\config\GeneralConfig::$useSslOnTokenizedUrls)
 
-Determines what protocol/schema Craft will use when generating tokenized URLs. If set to `'auto'`, Craft will check the siteUrl and the protocol of the current request and if either of them are https will use `https` in the tokenized URL. If not, will use `http`.
+トークン化された URL を生成する際に、Craft が使用するプロトコル / スキーマを決定します。`'auto'` をセットすると、Craft は現在のリクエストの siteUrl とプロトコルをチェックし、いずれかが https であればトークン化された URL で `https` を使用します。そうでなければ、`http` を使用します。
 
-If set to `false`, the Craft will always use `http`. If set to `true`, then, Craft will always use `https`.
+`false` をセットすると、Craft は常に `http` を使用します。そして、`true` をセットすると、Craft は常に `https` を使用します。
 
 ### `userSessionDuration`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `3600`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$userSessionDuration](api:craft\config\GeneralConfig::$userSessionDuration)
 
-The amount of time before a user will get logged out due to inactivity.
+ユーザーがアクティブではないためにログアウトするまでの時間。
 
-Set to `0` if you want users to stay logged in as long as their browser is open rather than a predetermined amount of time.
+事前に決定した時間ではなく、ユーザーがブラウザを開いている間はログインしたままにしておきたい場合は、`0` をセットします。
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
 
 ### `verificationCodeDuration`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `86400`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$verificationCodeDuration](api:craft\config\GeneralConfig::$verificationCodeDuration)
 
-The amount of time a user verification code can be used before expiring.
+期限切れになる前に、ユーザー確認コードを使用できる時間。
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
 
 ### `verifyEmailSuccessPath`
 
-Allowed types
+許可される型
 
 :   `mixed`
 
-Default value
+デフォルト値
 
 :   `''`
 
-Defined by
+定義元
 
 :   [GeneralConfig::$verifyEmailSuccessPath](api:craft\config\GeneralConfig::$verifyEmailSuccessPath)
 
-The URI that users without access to the Control Panel should be redirected to after verifying a new email address.
+コントロールパネルにアクセスできないユーザーが、新しいメールアドレスを確認したときにリダイレクトする URI。
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
 
 <!-- END SETTINGS -->
+

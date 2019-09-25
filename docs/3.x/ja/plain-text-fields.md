@@ -1,22 +1,22 @@
-# Plain Text Fields
+# プレーンテキストフィールド
 
-Plain Text fields give you either a normal text input or a multi-line textarea, where plain text can be entered.
+プレーンテキストフィールドでは、プレーンなテキストを入力できる、一行テキストまたは複数行のテキストエリアのいずれかが提供されます。
 
-## Settings
+## 設定
 
-Plain Text fields have the following settings:
+プレーンテキストフィールドの設定は、次の通りです。
 
-* **Placeholder Text** – The field’s placeholder text, to be displayed if the field has no value yet
-* **Max Length** – The maximum number of characters the field can contain
-* **Allow line breaks** – Whether or not to allow line breaks in this field
+* **プレースホルダーのテキスト** – フィールドが値を持たない場合に表示されるプレースホルダーのテキスト
+* **文字数制限** – フィールドに含めることができる文字数の上限
+* **改行を許可** – フィールド内で改行を許可するかどうか
 
-## The Field
+## フィールド
 
-Plain Text fields will either show a normal text input or a multi-line textarea, depending on whether the “Allow line breaks” setting was checked.
+プレーンテキストフィールドでは、設定の「改行を許可」がチェックされているかどうかによって、一行テキストまたは複数行のテキストエリアのいずれかが表示されます。
 
-## Templating
+## テンプレート記法
 
-Calling a Plain Text field in your templates will return the value that was entered in the field.
+テンプレート内でプレーンテキストフィールドを呼び出すと、フィールドに入力された値を返します。
 
 ```twig
 {% if user.bio %}
@@ -24,3 +24,4 @@ Calling a Plain Text field in your templates will return the value that was ente
     {{ user.bio|markdown }}
 {% endif %}
 ```
+

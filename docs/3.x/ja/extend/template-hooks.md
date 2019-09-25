@@ -1,13 +1,13 @@
-# Template Hooks
+# テンプレートフック
 
-Craft templates can give modules and plugins an opportunity to hook into them using [hook](../dev/tags/hook.md) tags.
+Craft テンプレートでは、[hook](../dev/tags/hook.md) タグを使用してモジュールやプラグインにフックする機会を与えることができます。
 
 ```twig
 {# Give plugins a chance to make changes here #}
 {% hook 'my-custom-hook-name' %}
 ```
 
-Plugins and modules can register methods to be called by template hooks using <api:craft\web\View::hook()>.
+プラグインやモジュールは <api:craft\web\View::hook()> を使用してテンプレートフックに呼び出されることで、メソッドを登録できます。
 
 ```php
 Craft::$app->view->hook('my-custom-hook-name', function(array &$context) {
@@ -16,6 +16,7 @@ Craft::$app->view->hook('my-custom-hook-name', function(array &$context) {
 });
 ```
 
-The callback method will pass a `$context` argument, which represents the current template context (all of the currently defined template variables). Any changes to this array will result in changes to the template’s variables for any tags that follow the `{% hook %}` tag.
+コールバックメソッドは、現在のテンプレートのコンテキスト（現在定義されているすべてのテンプレート変数）を表す `$context` 引数を渡します。この配列を変更すると、`{% hook %}` タグに続くすべてのタグのテンプレートの変数が変更されます。
 
-The method can optionally return a string, which will be output where the `{% hook %}` tag is in the template.
+このメソッドは、テンプレート内の `{% hook %}` タグがある場所に出力される文字列をオプションで返すことができます。
+

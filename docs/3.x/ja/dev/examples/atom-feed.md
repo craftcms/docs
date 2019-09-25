@@ -1,8 +1,10 @@
-# Atom Feed
+# Atom フィード
 
-The following template can be used to provide an Atom 1.0 feed on your site. It assumes that you have a [global set](../../globals.md) with the handle `globals`, with two fields: `feedAuthorName` and `feedAuthorEmail`.
+次のテンプレートは、あなたのサイトで Atom 1.0 フィードを提供するために使用できます。`feedAuthorName` と `feedAuthorEmail` 2つのフィールドを持つ、`globals` というハンドルの[グローバルのセット](../../globals.md)があることを前提としています。
 
-::: tip If you save this in a template that ends with an `.atom` file extension, Craft will even serve it with an `application/atom+xml` MIME type. :::
+::: tip
+ファイル拡張子 `.atom` で終わるテンプレートとして保存すると、Craft はそれを MIME タイプ `application/atom+xml` で配信します。
+:::
 
 ```twig
 <?xml version="1.0"?>
@@ -36,3 +38,4 @@ The following template can be used to provide an Atom 1.0 feed on your site. It 
     {% endfor %}
 </feed>
 ```
+

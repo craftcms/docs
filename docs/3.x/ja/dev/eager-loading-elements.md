@@ -1,8 +1,8 @@
-# Eager-Loading Elements
+# エレメントの Eager-Loading
 
-If a template is looping through a list of elements, and each of those elements must display one or more sub-elements, there’s a good chance the page’s performance will suffer.
+テンプレートがエレメントのリストをループしていて、それらのエレメントそれぞれで1つ以上のサブエレメントを表示しなければならない場合、ページのパフォーマンスが低下する高い可能性があります。
 
-For example, here’s a template that loops through a list of entries, and displays images related by an Assets field for each entry:
+例えば、ここにエントリのリストをループし、それぞれのエントリに関連付けられた画像を表示するテンプレートがあります。
 
 ```twig
 {% set entries = craft.entries()
@@ -18,13 +18,13 @@ For example, here’s a template that loops through a list of entries, and displ
 {% endfor %}
 ```
 
-This illustrates an *N+1* query problem: In addition to the query executed to fetch the entries, an additional query will be executed for *each* entry, to find its related asset. So the number of queries needed will be *N* (the number of entries) *+ 1* (the initial entries query). If there are 50 entries, this innocent-looking template code will cost the page 51 queries.
+これは _N+1_ クエリの問題を示しています。エントリを取り出すために実行されたクエリの他に、関連付けられたアセットを探すために _それぞれの_ エントリで追加のクエリが実行されています。そのため、必要なクエリの総数は _N_（エントリ数）_+ 1_（最初にエントリを取得するクエリ）となります。50エントリがある場合、この問題なさそうに見えるテンプレートコードは、そのページのために51クエリ分のコストがかかります。
 
-All hope is not lost, though. You can solve this with **eager-loading**, using the `with` criteria parameter.
+しかし、すべての希望が失われたわけではありません。判定基準のパラメータ `with` を利用した **eager-loading** によって、これを解決することができます。
 
-The purpose of the `with` param is to tell Craft which sub-elements you’re going to be needing in advance, so that it can fetch them all up front, in as few queries as possible.
+`with` パラメータの目的は、必要とするサブエレメントを事前に Craft へ伝えることで、可能な限り少ないクエリですべてのエレメントを前もって取得できるようにすることです。
 
-Here’s how to apply the `with` param to our example:
+先の例に `with` パラメータを適用する方法は、次の通りです。
 
 ```twig
 {% set entries = craft.entries()
@@ -41,13 +41,13 @@ Here’s how to apply the `with` param to our example:
 {% endfor %}
 ```
 
-This template code will only cost 3 queries: one to fetch the entries, one to determine which assets should be eager-loaded, and one to fetch the assets. Then the entries are automatically populated with their respective related assets.
+このレンプレートコードは、たった3クエリしかコストがかかりません。エントリを取り出すための1つ、どのアセットを eager-loaded すべきか決定するための1つ、そして、アセットを取り出すための1つです。そして、エントリにはそれぞれに関連付けられたアセットのデータが自動的に入ります。
 
-### Accessing Eager-Loaded Elements
+### Eager-Loaded エレメントへのアクセス
 
-Accessing eager-loaded elements works a little differently than accessing lazy-loaded elements.
+eager-loaded エレメントへのアクセスは、lazy-loaded エレメントへのアクセスとは少し異なる働きをします。
 
-Take a look at how we assigned the `image` variable in our examples, before and after applying the `with` param:
+`with` パラメータを適用する前後の例で、変数 `image` をどのように割り当てているかを見てみましょう。
 
 ```twig
 {# Before: #}
@@ -57,13 +57,13 @@ Take a look at how we assigned the `image` variable in our examples, before and 
 {% set image = entry.assetsField[0] ?? null %}
 ```
 
-When the assets *aren’t* eager-loaded, `entry.assetsField` gives you an [asset query](element-queries/asset-queries.md) that is preconfigured to return the related assets.
+アセットを eager-loaded _していない_ 場合、`entry.assetsField` は関連付けられたアセットを返すよう事前設定された[アセットクエリ](element-queries/asset-queries.md)を提供します。
 
-However when the assets *are* eager-loaded, `entry.assetsField` gets overwritten with an array of the eager-loaded assets. So `one()`, `all()`, and other element query methods are not available. Instead you must stick to the standard array syntaxes. In our example, we’re grabbing the first asset with `entry.assetsField[0]`, and we’re using Twig’s *null-coalescing operator* (`??`) to define a default value (`null`) in case there is no related asset.
+しかしながら、アセットを eager-loaded _している_ 場合、`entry.assetsField` は eager-loaded されたアセットの配列で上書きされます。そのため、`one()`、`all()`、またはその他のエレメントクエリのメソッドを利用することができません。代わりに、あなたは標準の配列構文に耐えなければなりません。この例では、最初のアセットを `entry.assetsField[0]` で取得しています。そして、関連付けられたアセットがない場合のデフォルト値（`null`）を定義するため、Twig の _null 合体演算子_ (`??`) を使っています。
 
-### Eager-Loading Multiple Sets of Elements
+### エレメントの複数セットの Eager-Loading
 
-If you have multiple sets of elements you wish to eager-load off of the top list of elements, just add additional values to your `with` parameter.
+エレメントの最上位のリストで eager-load しておきたいエレメントの複数セットがある場合は、`with` パラメータに値を追加してください。
 
 ```twig
 {% set entries = craft.entries
@@ -88,9 +88,9 @@ If you have multiple sets of elements you wish to eager-load off of the top list
 {% endfor %}
 ```
 
-### Eager-Loading Nested Sets of Elements
+### エレメントのネストされたセットの Eager-Loading
 
-It’s also possible to load *nested* sets of elements, using this syntax:
+次の構文を利用して、エレメントの _ネストされた_ セットを読み込むこともできます。
 
 ```twig
 {% set entries = craft.entries()
@@ -112,9 +112,9 @@ It’s also possible to load *nested* sets of elements, using this syntax:
 {% endfor %}
 ```
 
-### Defining Custom Parameters on Eager-Loaded Elements
+### Eager-Loaded エレメントのカスタムパラメータを定義する
 
-You can define custom criteria parameters that will get applied as elements are being eager-loaded, by replacing its key with an array that has two values: the key, and an object that defines the criteria parameters that should be applied.
+そのキーを（キー、および、適用されるべき基準パラメータを定義するオブジェクトを含む）2つの値を持つ配列に置き換えることによって、eager-loaded するときにエレメントへ適用されるカスタムの基準パラメータを定義できます。
 
 ```twig
 {% set entries = craft.entries()
@@ -125,7 +125,7 @@ You can define custom criteria parameters that will get applied as elements are 
     .all() %}
 ```
 
-When eager-loading nested sets of elements, you can apply parameters at any level of the eager-loading path.
+エレメントのネストされたセットで eager-loading する場合、eager-loading パスの任意のレベルでパラメータを適用することができます。
 
 ```twig
 {% set entries = craft.entries()
@@ -137,9 +137,9 @@ When eager-loading nested sets of elements, you can apply parameters at any leve
     .all() %}
 ```
 
-### Eager-Loading Elements Related to Matrix Blocks
+### 行列ブロックに関連するエレメントの Eager-Loading
 
-The syntax for eager-loading relations from Matrix blocks is a little different than other contexts. You need to prefix your relational field’s handle with the block type’s handle:
+行列ブロックから関連フィールドを eager-loading するための構文は、他のコンテキストと少し異なります。関連フィールドのハンドルの前に、ブロックタイプのハンドルを付ける必要があります。
 
 ```twig
 {% set blocks = entry.matrixField
@@ -147,9 +147,9 @@ The syntax for eager-loading relations from Matrix blocks is a little different 
     .all() %}
 ```
 
-The reason for this is that Matrix fields can have multiple sub-fields that each share the same handle, as long as they’re in different block types. By requiring the block type handle as part of the eager-loading key, Matrix can be confident that it is eager-loading the right set of elements.
+この理由は、異なるブロックタイプである限り、行列フィールドでは同じハンドルを共有する複数のサブフィールドをそれぞれに持つことができるためです。eager-loading キーの一部にブロックタイプのハンドルを必要とすることで、行列が正しいエレメントを eager-loading していると確信できます。
 
-This applies if the Matrix blocks themselves are being eager-loaded, too.
+これは行列ブロック自体が eager-loaded されている場合にも、当てはまります。
 
 ```twig
 {% set entries = craft.entries()
@@ -158,11 +158,11 @@ This applies if the Matrix blocks themselves are being eager-loaded, too.
     .all() %}
 ```
 
-## Eager-Loading Image Transform Indexes
+## イメージ変換インデックスの Eager-Loading
 
-Another *N+1* problem occurs when looping through a set of assets, and applying image transforms to each of them. For each transform, Craft needs to execute a query to see if the transform already exists.
+アセットをセットしたループでそれぞれに画像の変形を適用する場合、別の _N+1_ 問題が発生します。 それぞれのトランスフォームに対して、Craft がすでに変換された画像が存在するか確認するためにクエリを実行する必要があります。
 
-This problem can be solved with the `withTransforms` asset criteria parameter:
+この問題は、アセット基準パラメータの `withTransforms` で解決することができます。
 
 ```twig
 {% set assets = entry.assetsField
@@ -173,11 +173,11 @@ This problem can be solved with the `withTransforms` asset criteria parameter:
     .all() %}
 ```
 
-Note that each transform definition you want to eager-load can either be a string (the handle of a transform defined in Settings → Assets → Image Transforms) or an object that defines the transform properties.
+eager-load したいそれぞれのトランスフォームの定義は、文字列（「設定 > アセット > 画像の変形」で定義されたトランスフォームのハンドル)、 または、トランスフォームプロパティを定義したオブジェクトのいずれかです。 
 
-Using the `withTransforms` param has no effect on how you’d access image transforms further down in the template.
+`withTransforms` パラメータを使っても、テンプレート内の変換された画像にアクセスする方法には影響を与えません。
 
-Image transform indexes can be eager-loaded on assets that are also eager-loaded:
+イメージ変換インデックスは、eager-loaded されるアセットにも eager-loaded できます。
 
 ```twig
 {% set entries = craft.entries()
@@ -188,3 +188,4 @@ Image transform indexes can be eager-loaded on assets that are also eager-loaded
     ])
     .all() %}
 ```
+

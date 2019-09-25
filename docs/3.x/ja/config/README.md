@@ -1,12 +1,12 @@
-# Configuration Overview
+# コンフィギュレーションの概要
 
-There are several ways to configure Craft depending on your needs.
+必要に応じて Craft を設定するには、いくつかの方法があります。
 
 [[toc]]
 
-## General Config Settings
+## 一般設定
 
-Craft supports several [general config settings](config-settings.md). You can override their default values in your `config/general.php` file.
+Craft は、いくつかの[一般設定](config-settings.md)をサポートしています。`config/general.php` ファイルでデフォルト値を上書きすることができます。
 
 ```php
 return [
@@ -14,20 +14,20 @@ return [
 ];
 ```
 
-## Database Connection Settings
+## データベース接続設定
 
-Craft supports several [database connection settings](db-settings.md). You can override their default values in your `config/db.php` file.
+Craft は、いくつかの[データベース接続設定](db-settings.md)をサポートしています。`config/db.php` ファイルでデフォルト値を上書きすることができます。
 
-## Guzzle Config
+## Guzzle 設定
 
-Craft uses [Guzzle 6](http://docs.guzzlephp.org/en/latest/) whenever creating HTTP requests, such as:
+Craft は、次のような HTTP リクエストを作成するたびに [Guzzle 6](http://docs.guzzlephp.org/en/latest/) を使用します。
 
-- when checking for Craft updates
-- when sending in a support request from the Craft Support widget
-- when loading RSS feeds from the Feeds widget
-- when working with assets on remote volumes, like Amazon S3
+- Craft のアップデートをチェックするとき
+- Craft のサポートウィジェットからサポートリクエストを送信するとき
+- Feed ウィジェットから RSS フィードを読み込むとき
+- Amazon S3 のようなリモートボリュームにあるアセットを操作するとき
 
-You can customize the config settings Guzzle uses when sending these requests by creating a `guzzle.php` file in your `config/` folder. The file should return an array, with your config overrides.
+`config/` フォルダに `guzzle.php` ファイルを作成することによって、これらのリクエストを送信する際に Guzzle が使用するコンフィグ設定をカスタマイズできます。そのファイルは、設定を上書きした配列を返さなければなりません。
 
 ```php
 <?php
@@ -40,38 +40,37 @@ return [
 ];
 ```
 
-The options defined here will be passed into new `GuzzleHttp\Client` instances. See [Guzzle’s documentation](http://docs.guzzlephp.org/en/latest/) for a list of available options.
+ここで定義されたオプションは、新しい `GuzzleHttp\Client` インスタンスに渡されます。利用可能なオプションのリストは、[Guzzle のドキュメント](http://docs.guzzlephp.org/en/latest/)を参照してください。
 
-## Aliases
+## エイリアス
 
-Some settings and functions in Craft support [Yii aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases), which are basically placeholders for base file system paths and URLs. These include:
+Craft のいくつかの設定やファンクションでは、基本ファイルシステムのパスや URL を代用する [Yii エイリアス](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)をサポートしています。 これには次ものが含まれます。
 
-- Sites’ Base URL settings
-- Volumes’ Base URL settings
-- Local volumes’ File System Path settings
-- The <config:resourceBasePath> and <config:resourceBaseUrl> config settings
-- The [svg()](../dev/functions.md#svg-svg-sanitize) Twig function
+- サイトのベース URL 設定
+- ボリュームのベース URL 設定
+- ローカルボリュームのファイルシステムパス設定
+- コンフィグ設定の <config:resourceBasePath> と <config:resourceBaseUrl>
+- Twig ファンクションの [svg()](../dev/functions.md#svg-svg-sanitize)
 
-The following aliases are available out of the box:
+次のエイリアスは、そのまま利用可能です。
 
-| Alias                | Description                                                                                            |
-| -------------------- | ------------------------------------------------------------------------------------------------------ |
-| `@app`               | The path to `vendor/craftcms/cms/src/`                                                                 |
-| `@config`            | The path to your `config/` folder                                                                      |
-| `@contentMigrations` | The path to your `migrations/` folder                                                                  |
-| `@craft`             | The path to `vendor/craftcms/cms/src/`                                                                 |
-| `@lib`               | The path to `vendor/craftcms/cms/lib/`                                                                 |
-| `@root`              | The root project path (same as the [CRAFT_BASE_PATH](php-constants.md#craft-base-path) PHP constant) |
-| `@runtime`           | The path to your `storage/runtime/` folder                                                             |
-| `@storage`           | The path to your `storage/` folder                                                                     |
-| `@templates`         | The path to your `templates/` folder                                                                   |
-| `@translations`      | The path to your `translations/` folder                                                                |
-| `@vendor`            | The path to your `vendor/` folder                                                                      |
-| `@web`               | The URL to the folder that contains the `index.php` file that was loaded for the request               |
-| `@webroot`           | The path to the folder that contains the `index.php` file that was loaded for the request              |
+| エイリアス | 説明 |
+| ----- | ----------- |
+| `@app` | `vendor/craftcms/cms/src/` のパス |
+| `@config` | `config/` フォルダのパス |
+| `@contentMigrations` | `migrations/` フォルダのパス |
+| `@craft` | `vendor/craftcms/cms/src/` のパス |
+| `@lib` | `vendor/craftcms/cms/lib/` のパス |
+| `@root` | ルートプロジェクトのパス（PHP 定数の [CRAFT_BASE_PATH](php-constants.md#craft-base-path) と同じ） |
+| `@runtime` | `storage/runtime/` フォルダのパス |
+| `@storage` | `storage/` フォルダのパス |
+| `@templates` | `templates/` フォルダのパス |
+| `@translations` | `translations/` フォルダのパス |
+| `@vendor` | `vendor/` フォルダのパス |
+| `@web` | リクエストのために読み込まれた `index.php` ファイルを含むフォルダの URL |
+| `@webroot` | リクエストのために読み込まれた `index.php` ファイルを含むフォルダのパス |
 
-
-You can define additional custom aliases using the <config:aliases> config setting. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
+コンフィグ設定 <config:aliases> を利用して、追加の独自エイリアスを定義することができます。例えば、アセットボリュームが存在するベース URL とベースパスを定義するエイリアスを作成したいかもしれません。
 
 ```php
 'aliases' => [
@@ -80,16 +79,16 @@ You can define additional custom aliases using the <config:aliases> config setti
 ],
 ```
 
-With those in place, you could begin your asset volumes’ Base URL and File System Path settings with them, e.g. `@assetBaseUrl/user-photos` and `@assetBasePath/user-photos`.
+これらを利用して、アセットボリュームのベース URL やファイルシステムのパス設定を記入しはじめることができます。例：`@assetBaseUrl/user-photos` と `@assetBasePath/user-photos`
 
-If you’d like, you can set the alias values with environment variables, either from your `.env` file or somewhere in your environment’s configuration:
+必要であれば、`.env` ファイルや環境設定のどこかで、環境変数のエイリアス値をセットすることができます。
 
 ```bash
 ASSETS_BASE_URL=http://my-project.com/assets
 ASSETS_BASE_PATH=/path/to/web/assets
 ```
 
-Then you can pull them into the alias definitions using [getenv()](http://php.net/manual/en/function.getenv.php):
+[getenv()](http://php.net/manual/en/function.getenv.php) を使用して、エイリアスの定義にセットすることができます。
 
 ```php
 'aliases' => [
@@ -98,9 +97,12 @@ Then you can pull them into the alias definitions using [getenv()](http://php.ne
 ],
 ```
 
-::: tip When referencing aliases in your settings, you can append additional segments onto the URL or path. For example, you can set a volume’s base URL to `@assetBaseUrl/user-photos`. :::
+::: tip
+設定でエイリアスを参照する場合、URL やパスに追加のセグメントを付加することができます。例えば、`@assetBaseUrl/user-photos` をボリュームのベース URL  にセットできます。
+:::
 
-::: tip You can parse aliases in your templates by passing them to the [alias()](../dev/functions.html#alias-string) function:
+::: tip
+[alias()](../dev/functions.html#alias-string) ファンクションに渡すことによって、テンプレート内でエイリアスをパースできます。
 
 ```twig
 {{ alias('@assetBaseUrl') }}
@@ -108,14 +110,15 @@ Then you can pull them into the alias definitions using [getenv()](http://php.ne
 
 :::
 
-## URL Rules
+## URL ルール
 
-You can define custom [URL rules](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) in `config/routes.php`. See [Routing](../routing.md) for more details.
+`config/routes.php` にカスタムの [URL ルール](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) を定義することができます。詳細については、[ルーティング](../routing.md) を参照してください。
 
-## PHP Constants
+## PHP 定数
 
-You can configure core settings like system file paths and the active environment by defining certain [PHP constants](php-constants.md) in `web/index.php`.
+`web/index.php` に特定の [PHP 定数](php-constants.md) を定義することで、システムファイルパスやアクティブな環境などのコア設定を設定できます。
 
-## Application Configuration
+## アプリケーション設定
 
-You can customize Craft’s [application configuration](app.md) from `config/app.php`, such as overriding component configs, or adding new modules and components.
+`config/app.php` から、コンポーネント設定を上書きしたり新しいモジュールやコンポーネントを追加するような Craft の [アプリケーション設定](app.md) をカスタマイズできます。
+

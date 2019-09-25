@@ -1,6 +1,6 @@
-# Tag Queries
+# タグクエリ
 
-You can fetch tags in your templates or PHP code using **tag queries**.
+**タグクエリ**を使用して、テンプレートや PHP コード内でタグを取得できます。
 
 ::: code
 
@@ -16,18 +16,20 @@ $myTagQuery = \craft\elements\Tag::find();
 
 :::
 
-Once you’ve created a tag query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Tag](api:craft\elements\Tag) objects will be returned.
+タグクエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[Tag](api:craft\elements\Tag) オブジェクトの配列が返されます。
 
-::: tip See [Introduction to Element Queries](README.md) to learn about how element queries work. :::
+::: tip
+エレメントクエリがどのように機能するかについては、[エレメントクエリについて](README.md)を参照してください。
+:::
 
-## Example
+## 実例
 
-We can display a list of the tags in a “Blog Tags” tag group by doing the following:
+次の操作を行うことで、「Blog Tags」タググループに含まれるタグのリストを表示できます。
 
-1. Create a tag query with `craft.tags()`.
-2. Set the [group](#group) parameter on it.
-3. Fetch the tags with `.all()`.
-4. Loop through the tags using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag to create the list HTML.
+1. `craft.tags()` でタグクエリを作成します。
+2. [group](#group) パラメータをセットします。
+3. `.all()` でタグを取得します。
+4. [for](https://twig.symfony.com/doc/2.x/tags/for.html) タグを使用してタグをループ処理し、リストの HTML を作成します。
 
 ```twig
 {# Create a tag query with the 'group' parameter #}
@@ -45,15 +47,15 @@ We can display a list of the tags in a “Blog Tags” tag group by doing the fo
 </ul>
 ```
 
-## Parameters
+## パラメータ
 
-Tag queries support the following parameters:
+タグクエリは、次のパラメータをサポートしています。
 
 <!-- BEGIN PARAMS -->
 
 ### `anyStatus`
 
-Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+[status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) および [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) パラメータをクリアします。
 
 ::: code
 
@@ -75,7 +77,7 @@ $tags = \craft\elements\Tag::find()
 
 ### `asArray`
 
-Causes the query to return matching tags as arrays of data, rather than [Tag](api:craft\elements\Tag) objects.
+[Tag](api:craft\elements\Tag) オブジェクトではなく、データの配列として、マッチしたタグをクエリが返します。
 
 ::: code
 
@@ -97,16 +99,15 @@ $tags = \craft\elements\Tag::find()
 
 ### `dateCreated`
 
-Narrows the query results based on the tags’ creation dates.
+タグの作成日に基づいて、クエリの結果を絞り込みます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value                                            | Fetches tags…                                        |
-| ------------------------------------------------ | ---------------------------------------------------- |
-| `'>= 2018-04-01'`                             | that were created on or after 2018-04-01.            |
-| `'< 2018-05-01'`                              | that were created before 2018-05-01                  |
-| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were created between 2018-04-01 and 2018-05-01. |
-
+| 値 | 取得するタグ
+| - | -
+| `'>= 2018-04-01'` | 2018-04-01 以降に作成されたもの。
+| `'< 2018-05-01'` | 2018-05-01 より前に作成されたもの。
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | 2018-04-01 から 2018-05-01 の間に作成されたもの。
 
 ::: code
 
@@ -134,16 +135,15 @@ $tags = \craft\elements\Tag::find()
 
 ### `dateUpdated`
 
-Narrows the query results based on the tags’ last-updated dates.
+タグの最終アップデート日に基づいて、クエリの結果を絞り込みます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value                                            | Fetches tags…                                        |
-| ------------------------------------------------ | ---------------------------------------------------- |
-| `'>= 2018-04-01'`                             | that were updated on or after 2018-04-01.            |
-| `'< 2018-05-01'`                              | that were updated before 2018-05-01                  |
-| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were updated between 2018-04-01 and 2018-05-01. |
-
+| 値 | 取得するタグ
+| - | -
+| `'>= 2018-04-01'` | 2018-04-01 以降にアップデートされたもの。
+| `'< 2018-05-01'` | 2018-05-01 より前にアップデートされたもの。
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | 2018-04-01 から 2018-05-01 の間にアップデートされたもの。
 
 ::: code
 
@@ -167,122 +167,9 @@ $tags = \craft\elements\Tag::find()
 
 :::
 
-### `draftCreator`
-
-Narrows the query results to only drafts created by a given user.
-
-Possible values include:
-
-| Value                                  | Fetches drafts…                        |
-| -------------------------------------- | -------------------------------------- |
-| `1`                                    | created by the user with an ID of 1.   |
-| a `\craft\elements\db\User` object | by the user represented by the object. |
-
-
-::: code
-
-```twig
-{# Fetch drafts by the current user #}
-{% set tags = craft.tags()
-    .draftCreator(currentUser)
-    .all() %}
-```
-
-```php
-// Fetch drafts by the current user
-$tags = \craft\elements\Tag::find()
-    ->draftCreator(Craft::$app->user->identity)
-    ->all();
-```
-
-:::
-
-### `draftId`
-
-Narrows the query results based on the tags’ draft’s ID (from the `drafts` table).
-
-Possible values include:
-
-| Value | Fetches drafts…                |
-| ----- | ------------------------------ |
-| `1`   | for the draft with an ID of 1. |
-
-
-::: code
-
-```twig
-{# Fetch a draft #}
-{% set tags = craft.tags()
-    .draftId(10)
-    .all() %}
-```
-
-```php
-// Fetch a draft
-$tags = \craft\elements\Tag::find()
-    ->draftIf(10)
-    ->all();
-```
-
-:::
-
-### `draftOf`
-
-Narrows the query results to only drafts of a given tag.
-
-Possible values include:
-
-| Value                                    | Fetches drafts…                        |
-| ---------------------------------------- | -------------------------------------- |
-| `1`                                      | for the tag with an ID of 1.           |
-| a [Tag](api:craft\elements\Tag) object | for the tag represented by the object. |
-
-
-::: code
-
-```twig
-{# Fetch drafts of the tag #}
-{% set tags = craft.tags()
-    .draftOf(myTag)
-    .all() %}
-```
-
-```php
-// Fetch drafts of the tag
-$tags = \craft\elements\Tag::find()
-    ->draftOf($myTag)
-    ->all();
-```
-
-:::
-
-### `drafts`
-
-Narrows the query results to only drafts tags.
-
-::: code
-
-```twig
-{# Fetch a draft tag #}
-{% set tags = {twig-function}
-    .drafts()
-    .id(123)
-    .one() %}
-```
-
-```php
-// Fetch a draft tag
-$tags = \craft\elements\Tag::find()
-    ->drafts()
-    ->id(123)
-    ->one();
-```
-
-:::
-
 ### `fixedOrder`
 
-Causes the query results to be returned in the order specified by [id](#id).
+クエリの結果を [id](#id) で指定された順序で返します。
 
 ::: code
 
@@ -306,18 +193,17 @@ $tags = \craft\elements\Tag::find()
 
 ### `group`
 
-Narrows the query results based on the tag groups the tags belong to.
+タグが属するタググループに基づいて、クエリの結果を絞り込みます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value                                            | Fetches tags…                                   |
-| ------------------------------------------------ | ----------------------------------------------- |
-| `'foo'`                                          | in a group with a handle of `foo`.              |
-| `'not foo'`                                      | not in a group with a handle of `foo`.          |
-| `['foo', 'bar']`                                 | in a group with a handle of `foo` or `bar`.     |
-| `['not', 'foo', 'bar']`                          | not in a group with a handle of `foo` or `bar`. |
-| a [TagGroup](api:craft\models\TagGroup) object | in a group represented by the object.           |
-
+| 値 | 取得するタグ
+| - | -
+| `'foo'` | ハンドルが `foo` のグループ内。
+| `'not foo'` | ハンドルが `foo` のグループ内ではない。
+| `['foo', 'bar']` | ハンドルが `foo` または `bar` のグループ内。
+| `['not', 'foo', 'bar']` | ハンドルが `foo` または `bar` のグループ内ではない。
+| [TagGroup](api:craft\models\TagGroup) オブジェクト | オブジェクトで表されるグループ内。
 
 ::: code
 
@@ -339,17 +225,16 @@ $tags = \craft\elements\Tag::find()
 
 ### `groupId`
 
-Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
+グループの ID ごとに、タグが属するタググループに基づいて、クエリの結果を絞り込みます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value           | Fetches tags…                        |
-| --------------- | ------------------------------------ |
-| `1`             | in a group with an ID of 1.          |
-| `'not 1'`       | not in a group with an ID of 1.      |
-| `[1, 2]`        | in a group with an ID of 1 or 2.     |
-| `['not', 1, 2]` | not in a group with an ID of 1 or 2. |
-
+| 値 | 取得するタグ
+| - | -
+| `1` | ID が 1 のグループ内。
+| `'not 1'` | ID が 1 のグループ内ではない。
+| `[1, 2]` | ID が 1 または 2 のグループ内。
+| `['not', 1, 2]` | ID が 1 または 2 のグループ内ではない。
 
 ::: code
 
@@ -371,17 +256,16 @@ $tags = \craft\elements\Tag::find()
 
 ### `id`
 
-Narrows the query results based on the tags’ IDs.
+タグの ID に基づいて、クエリの結果を絞り込みます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value           | Fetches tags…             |
-| --------------- | ------------------------- |
-| `1`             | with an ID of 1.          |
-| `'not 1'`       | not with an ID of 1.      |
-| `[1, 2]`        | with an ID of 1 or 2.     |
-| `['not', 1, 2]` | not with an ID of 1 or 2. |
-
+| 値 | 取得するタグ
+| - | -
+| `1` | ID が 1。
+| `'not 1'` | ID が 1ではない。
+| `[1, 2]` | ID が 1 または 2。
+| `['not', 1, 2]` | ID が 1 または 2 ではない。
 
 ::: code
 
@@ -401,15 +285,13 @@ $tag = \craft\elements\Tag::find()
 
 :::
 
-::: tip This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order. :::
-
-### `ignorePlaceholders`
-
-Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+::: tip
+特定の順序で結果を返したい場合、[fixedOrder](#fixedorder) と組み合わせることができます。
+:::
 
 ### `inReverse`
 
-Causes the query results to be returned in reverse order.
+クエリの結果を逆順で返します。
 
 ::: code
 
@@ -431,7 +313,7 @@ $tags = \craft\elements\Tag::find()
 
 ### `limit`
 
-Determines the number of tags that should be returned.
+返されるタグの数を決定します。
 
 ::: code
 
@@ -453,7 +335,7 @@ $tags = \craft\elements\Tag::find()
 
 ### `offset`
 
-Determines how many tags should be skipped in the results.
+結果からスキップされるタグの数を決定します。
 
 ::: code
 
@@ -475,7 +357,7 @@ $tags = \craft\elements\Tag::find()
 
 ### `orderBy`
 
-Determines the order that the tags should be returned in.
+返されるタグの順序を決定します。
 
 ::: code
 
@@ -495,41 +377,11 @@ $tags = \craft\elements\Tag::find()
 
 :::
 
-### `preferSites`
-
-If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-
-For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C, and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned for Site B.
-
-If this isn’t set, then preference goes to the current site.
-
-::: code
-
-```twig
-{# Fetch unique tags from Site A, or Site B if they don’t exist in Site A #}
-{% set tags = craft.tags()
-    .site('*')
-    .unique()
-    .preferSites(['a', 'b'])
-    .all() %}
-```
-
-```php
-// Fetch unique tags from Site A, or Site B if they don’t exist in Site A
-$tags = \craft\elements\Tag::find()
-    ->site('*')
-    ->unique()
-    ->preferSites(['a', 'b'])
-    ->all();
-```
-
-:::
-
 ### `relatedTo`
 
-Narrows the query results to only tags that are related to certain other elements.
+特定の他のエレメントと関連付けられたタグだけに、クエリの結果を絞り込みます。
 
-See [Relations](https://docs.craftcms.com/v3/relations.html) for a full explanation of how to work with this parameter.
+このパラメーターがどのように機能するかの詳細については、[リレーション](https://docs.craftcms.com/v3/relations.html)を参照してください。
 
 ::: code
 
@@ -549,124 +401,11 @@ $tags = \craft\elements\Tag::find()
 
 :::
 
-### `revisionCreator`
-
-Narrows the query results to only revisions created by a given user.
-
-Possible values include:
-
-| Value                                  | Fetches revisions…                     |
-| -------------------------------------- | -------------------------------------- |
-| `1`                                    | created by the user with an ID of 1.   |
-| a `\craft\elements\db\User` object | by the user represented by the object. |
-
-
-::: code
-
-```twig
-{# Fetch revisions by the current user #}
-{% set tags = craft.tags()
-    .revisionCreator(currentUser)
-    .all() %}
-```
-
-```php
-// Fetch revisions by the current user
-$tags = \craft\elements\Tag::find()
-    ->revisionCreator(Craft::$app->user->identity)
-    ->all();
-```
-
-:::
-
-### `revisionId`
-
-Narrows the query results based on the tags’ revision’s ID (from the `revisions` table).
-
-Possible values include:
-
-| Value | Fetches revisions…                |
-| ----- | --------------------------------- |
-| `1`   | for the revision with an ID of 1. |
-
-
-::: code
-
-```twig
-{# Fetch a revision #}
-{% set tags = craft.tags()
-    .revisionId(10)
-    .all() %}
-```
-
-```php
-// Fetch a revision
-$tags = \craft\elements\Tag::find()
-    ->revisionIf(10)
-    ->all();
-```
-
-:::
-
-### `revisionOf`
-
-Narrows the query results to only revisions of a given tag.
-
-Possible values include:
-
-| Value                                    | Fetches revisions…                     |
-| ---------------------------------------- | -------------------------------------- |
-| `1`                                      | for the tag with an ID of 1.           |
-| a [Tag](api:craft\elements\Tag) object | for the tag represented by the object. |
-
-
-::: code
-
-```twig
-{# Fetch revisions of the tag #}
-{% set tags = craft.tags()
-    .revisionOf(myTag)
-    .all() %}
-```
-
-```php
-// Fetch revisions of the tag
-$tags = \craft\elements\Tag::find()
-    ->revisionOf($myTag)
-    ->all();
-```
-
-:::
-
-### `revisions`
-
-Narrows the query results to only revision tags.
-
-::: code
-
-```twig
-{# Fetch a revision tag #}
-{% set tags = {twig-function}
-    .revisions()
-    .id(123)
-    .one() %}
-```
-
-```php
-// Fetch a revision tag
-$tags = \craft\elements\Tag::find()
-    ->revisions()
-    ->id(123)
-    ->one();
-```
-
-:::
-
 ### `search`
 
-Narrows the query results to only tags that match a search query.
+検索クエリにマッチするタグだけに、クエリの結果を絞り込みます。
 
-See [Searching](https://docs.craftcms.com/v3/searching.html) for a full explanation of how to work with this parameter.
+このパラメーターがどのように機能するかの詳細については、[検索](https://docs.craftcms.com/v3/searching.html)を参照してください。
 
 ::: code
 
@@ -694,22 +433,16 @@ $tags = \craft\elements\Tag::find()
 
 ### `site`
 
-Determines which site(s) the tags should be queried in.
+タグを照会するサイトを決定します。
 
-The current site will be used by default.
+デフォルトでは、現在のサイトが使用されます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value                                  | Fetches tags…                                  |
-| -------------------------------------- | ---------------------------------------------- |
-| `'foo'`                                | from the site with a handle of `foo`.          |
-| `['foo', 'bar']`                       | from a site with a handle of `foo` or `bar`.   |
-| `['not', 'foo', 'bar']`                | not in a site with a handle of `foo` or `bar`. |
-| a `\craft\elements\db\Site` object | from the site represented by the object.       |
-| `'*'`                                  | from any site.                                 |
-
-
-::: tip If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you only want unique elements to be returned, use [unique](#unique) in conjunction with this. :::
+| 値 | 取得するタグ
+| - | -
+| `'foo'` | ハンドルが `foo` のサイトから。
+| `\craft\elements\db\Site` オブジェクト | オブジェクトで表されるサイトから。
 
 ::: code
 
@@ -731,9 +464,9 @@ $tags = \craft\elements\Tag::find()
 
 ### `siteId`
 
-Determines which site(s) the tags should be queried in, per the site’s ID.
+サイトの ID ごとに、タグを照会するサイトを決定します。
 
-The current site will be used by default.
+デフォルトでは、現在のサイトが使用されます。
 
 ::: code
 
@@ -755,20 +488,19 @@ $tags = \craft\elements\Tag::find()
 
 ### `title`
 
-Narrows the query results based on the tags’ titles.
+タグのタイトルに基づいて、クエリの結果を絞り込みます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value                       | Fetches tags…                                     |
-| --------------------------- | ------------------------------------------------- |
-| `'Foo'`                     | with a title of `Foo`.                            |
-| `'Foo*'`                    | with a title that begins with `Foo`.              |
-| `'*Foo'`                    | with a title that ends with `Foo`.                |
-| `'*Foo*'`                   | with a title that contains `Foo`.                 |
-| `'not *Foo*'`               | with a title that doesn’t contain `Foo`.          |
-| `['*Foo*', '*Bar*']`        | with a title that contains `Foo` or `Bar`.        |
-| `['not', '*Foo*', '*Bar*']` | with a title that doesn’t contain `Foo` or `Bar`. |
-
+| 値 | 取得するタグ
+| - | -
+| `'Foo'` | タイトルが `Foo`。
+| `'Foo*'` | タイトルが `Foo` ではじまる。
+| `'*Foo'` | タイトルが `Foo` で終わる。
+| `'*Foo*'` | タイトルが `Foo` を含む。
+| `'not *Foo*'` | タイトルが `Foo` を含まない。
+| `['*Foo*', '*Bar*']` | タイトルが `Foo` または `Bar` を含む。
+| `['not', '*Foo*', '*Bar*']` | タイトルが `Foo` または `Bar` を含まない。
 
 ::: code
 
@@ -790,13 +522,13 @@ $tags = \craft\elements\Tag::find()
 
 ### `trashed`
 
-Narrows the query results to only tags that have been soft-deleted.
+ソフトデリートされたタグだけに、クエリの結果を絞り込みます。
 
 ::: code
 
 ```twig
 {# Fetch trashed tags #}
-{% set tags = craft.tags()
+{% set tags = {twig-function}
     .trashed()
     .all() %}
 ```
@@ -812,7 +544,7 @@ $tags = \craft\elements\Tag::find()
 
 ### `uid`
 
-Narrows the query results based on the tags’ UIDs.
+タグの UID に基づいて、クエリの結果を絞り込みます。
 
 ::: code
 
@@ -832,48 +564,21 @@ $tag = \craft\elements\Tag::find()
 
 :::
 
-### `unique`
-
-Determines whether only elements with unique IDs should be returned by the query.
-
-This should be used when querying elements from multiple sites at the same time, if “duplicate” results is not desired.
-
-::: code
-
-```twig
-{# Fetch unique tags across all sites #}
-{% set tags = craft.tags()
-    .site('*')
-    .unique()
-    .all() %}
-```
-
-```php
-// Fetch unique tags across all sites
-$tags = \craft\elements\Tag::find()
-    ->site('*')
-    ->unique()
-    ->all();
-```
-
-:::
-
 ### `uri`
 
-Narrows the query results based on the tags’ URIs.
+タグの URI に基づいて、クエリの結果を絞り込みます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value                       | Fetches tags…                                   |
-| --------------------------- | ----------------------------------------------- |
-| `'foo'`                     | with a URI of `foo`.                            |
-| `'foo*'`                    | with a URI that begins with `foo`.              |
-| `'*foo'`                    | with a URI that ends with `foo`.                |
-| `'*foo*'`                   | with a URI that contains `foo`.                 |
-| `'not *foo*'`               | with a URI that doesn’t contain `foo`.          |
-| `['*foo*', '*bar*']`        | with a URI that contains `foo` or `bar`.        |
-| `['not', '*foo*', '*bar*']` | with a URI that doesn’t contain `foo` or `bar`. |
-
+| 値 | 取得するタグ
+| - | -
+| `'foo'` | URI が `foo`。
+| `'foo*'` | URI が `foo` ではじまる。
+| `'*foo'` | URI が `foo` で終わる。
+| `'*foo*'` | URI が `foo` を含む。
+| `'not *foo*'` | URI が `foo` を含まない。
+| `['*foo*', '*bar*']` | URI が `foo` または `bar` を含む。
+| `['not', '*foo*', '*bar*']` | URI が `foo` または `bar` を含まない。
 
 ::: code
 
@@ -901,9 +606,9 @@ $tag = \craft\elements\Tag::find()
 
 ### `with`
 
-Causes the query to return matching tags eager-loaded with related elements.
+関連付けられたエレメントを eager-loaded した状態で、マッチしたタグをクエリが返します。
 
-See [Eager-Loading Elements](https://docs.craftcms.com/v3/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+このパラメーターがどのように機能するかの詳細については、[エレメントのEager-Loading](https://docs.craftcms.com/v3/dev/eager-loading-elements.html)を参照してください。
 
 ::: code
 
@@ -924,3 +629,4 @@ $tags = \craft\elements\Tag::find()
 :::
 
 <!-- END PARAMS -->
+

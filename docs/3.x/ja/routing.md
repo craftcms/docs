@@ -1,93 +1,101 @@
-# Routing
+# ルーティング
 
-Routing helps Craft smartly handle requests to your site. When a request comes in to Craft, it checks to determine where to route the request.
+ルーティングは、Craft がサイトのリクエストをスマートに処理するのに役立ちます。Craft にリクエストが届くと、リクエストの送り先を決定するためにチェックします。
 
-The checks detailed below explain how this process works. This information can helpful to you when troubleshooting template loading, plugin action URLs, dynamic routes, and unexpected 404 errors.
+以下に詳述されたチェック項目は、このプロセスの仕組みを説明しています。この情報は、テンプレートの読み込み、プラグインのアクション URL、動的なルート、および、予期しない 404 エラーのトラブルシューティングに役立ちます。
 
-Here is how Craft handles each request:
+Craft はリクエストを次のように処理します。
 
-0. **Should Craft handle this request in the first place?**
-    
-    It’s important to keep in mind that Craft doesn’t actually get involved for *every* request that touches your server – only requests that go to your `index.php` file.
-    
-    The `.htaccess` file that [comes with Craft](https://github.com/craftcms/craft/blob/master/web/.htaccess) will redirect all requests that don’t match a directory or file on your web server over to `index.php` behind the scenes. But if you point your browser directly at a file that *does* exist (such as an image, CSS, or JavaScript file), your web server will serve that file directly without loading Craft.
+0. **このリクエストを Craft が最初に処理するべきか？**
 
-1. **Is it an action request?**
-    
-    Action requests either have a URL that begins with `actions/` (or whatever your <config:actionTrigger> config setting is set to), or an `action` parameter in the POST request or the query string.
-    
-    Craft routes action requests to a controller action that perform actions. Craft has system Controller actions for core actions, but plugins may also have Controllers that define their own custom actions.
-    
-    The request doesn’t necessarily end after a controller call. The controller may allow it to keep going.
+   サーバーに到達する*すべての*リクエストに Craft が実際に関係しているわけではなく、`index.php` ファイルへのリクエストだけであると念頭におくことが重要です。
 
-2. **Is it an element request?**
-    
-    If the URI matches an element’s URI, Craft lets the element decide how to route the request. For example, if an [entry’s](sections-and-entries.md) URI is requested, then the entry will route the request to the template specified in its section’s settings, with an `entry` variable predefined, set to the requested entry.
-    
-    ::: tip Modules and plugins can override element routes using the [EVENT_SET_ROUTE](api:craft\base\Element::EVENT_SET_ROUTE) event. :::
+   [Craft に付属する](https://github.com/craftcms/craft/blob/master/web/.htaccess) `.htaccess` ファイルは、ウェブサーバーのディレクトリやファイルとマッチしないすべてのリクエストを内部で `index.php` にリダイレクトします。しかし、（画像、CSS、または、JavaScript のような）*実際に*存在するファイルをブラウザが直接指し示す場合、ウェブサーバーは Craft をロードせずに直接そのファイルを配信します。
 
-3. **Does the URI match a route or URI rule?**
-    
-    If the URI matches any [dynamic routes](#dynamic-routes) or [URI rules](#advanced-routing-with-url-rules), the template or controller action specified by it will get loaded.
+1. **それはアクションリクエストか？**
 
-4. **Does the URI match a template?**
-    
-    Craft will check if the URI is a valid [template path](dev/README.md#template-paths). If it is, Craft will return the matched template.
-    
-    ::: tip If any of the URI segments begin with an underscore (e.g. `blog/_archive/index`), Craft will skip this step. :::
+   アクションリクエストは、 `actions/`（または、コンフィグ設定の <config:actionTrigger> にセットされたもの）ではじまる URL か、POST リクエストやクエリ文字列に `action` パラメータのいずれかを持っています。
+
+   Craft は、アクションを実行するコントローラーアクションに、アクションリクエストをルーティングします。Craft にはコアアクションのためのシステムコントローラーアクションがありますが、プラグインが同様に独自のカスタムアクションを定義したコントローラーを持っている場合があります。
+
+   リクエストが、コントローラーの呼び出し後に必ずしも終了するとは限りません。コントローラーがそれをキープし続けることを許可するかもしれません。
+
+2. **それはエレメントリクエストか？**
+
+   URL がエレメントの URI にマッチする場合、Craft はエレメントにそのリクエストのルーティング方法を決定させます。例えば、ある[エントリの](sections-and-entries.md) URI がリクエストされた場合、エントリはそのセクションの設定で指定されたテンプレートにリクエストをルーティングし、`entry` 変数が事前定義され、リクエストされたエントリをセットします。
+
+    ::: tip
+    モジュールとプラグインは、[EVENT_SET_ROUTE](api:craft\base\Element::EVENT_SET_ROUTE) イベントを使用してエレメントルートを上書きできます。
+    :::
+
+3. **URI がルート、または、URI ルールにマッチするか？**
+
+   URI がいずれかの [動的ルート](#dynamic-routes)、または、[URI ルール](#advanced-routing-with-url-rules)にマッチする場合、それによって指定されたテンプレートやコントローラーアクションがロードされます。
+
+4. **URI がテンプレートとマッチするか？**
+
+   Craft はその URI が有効な[テンプレートパス](dev/README.md#template-paths)かどうかをチェックします。そうであれば、Craft はマッチしたテンプレートを返します。
+
+    ::: tip
+    いずれかの URI セグメントがアンダースコア（例：`blog/_archive/index`）ではじまる場合、Craft はこのステップをスキップします。
+    :::
 
 5. **404**
-    
-    If none of the above checks are successful, Craft will throw a [NotFoundHttpException](api:yii\web\NotFoundHttpException). If [Dev Mode](config:devMode) is enabled, an error report for the exception will be shown. Otherwise, a 404 error will be returned.
-    
-    ::: tip You can customize your site’s 404 page by placing a `404.twig` template at the root of your `templates/` directory. You can test this page even if [Dev Mode](config:devMode) is enabled by going to `http://my-project.test/404`. :::
 
-## Dynamic Routes
+   上記のチェックがいずれも成功しなかった場合、Craft は [NotFoundHttpException](api:yii\web\NotFoundHttpException) を返します。[Dev Mode](config:devMode) が有効な場合、例外についてのエラーレポートが表示されます。そうでなければ、404 エラーが返されます。
 
-In some cases you want a URL to load a template, but you don’t want the URI to match the template path.
+    ::: tip
+    `404.twig` テンプレートを `templates/` ディレクトリのルートに配置することで、サイトの404ページをカスタマイズできます。`http://my-project.test/404` にアクセスすることで、[Dev Mode](config:devMode) が有効になっている場合でも、このページをテストできます。
+    :::
 
-A good example of this is a yearly archive page, where you want the year to be one of the segments in the URL (e.g. `blog/archive/2018`). It would be silly to create a new template for every year. Instead, you should set up a new **route**.
+## 動的なルート
 
-![Creating a New Route](./images/routing-creating-new-route.png)
+テンプレートを読み込むための URL が必要なものの、URI とテンプレートパスをマッチさせたくない場合があります。
 
-### Creating Routes
+年を URL のセグメントの1つ（例：`blog/archive/2018`）にする年別アーカイブページが、よい例です。毎年新しいテンプレートを作成するのは、賢明とは言えません。代わりに、新しい**ルート**を設定しましょう。
 
-To create a new Route, go to Settings → Routes and click the “New Route” button. A modal window will appear where you can define the route settings.
+![新しいルートの作成画面](./images/routing-creating-new-route.png)
 
-The modal has the following settings:
+### ルートの作成
 
-* What should the URI look like?
-* Which template should get loaded?
+新しいルートを作成するには、「設定 > ルート」に移動し、「新規ルート」ボタンをクリックします。ルートの設定を定義できるモーダルウィンドウが表示されます。
 
-The first setting can contain “tokens”, which represent a range of possible matches, rather than a specific string. (The `year` token, for example, represents four consecutive digits.) When you click on a token, Craft inserts it into the URI setting wherever the cursor is.
+モーダルの設定は、次の通りです。
 
-If you want to match URIs that look like `blog/archive/2018`, you type `blog/archive/` into the URI field, and then click on the `year` token.
+* URI がどのように見えるか？
+* どのテンプレートを読み込むか？
 
-::: tip Route URIs should **not** begin with a slash (`/`). :::
+最初の設定には、特定の文字列ではなく、マッチ可能な範囲を意味する「トークン」を含めることができます。（例えば、`year` トークンは4桁の連続する数字を表します。）トークンをクリックすると、Craft は URI 設定欄のカーソル位置にそれを挿入します。
 
-After defining your URI pattern and entering a template path, click the “Save” button. The modal will close, revealing your new route on the page.
+`blog/archive/2018` のような URI とマッチさせたい場合、URI フィールドに `blog/archive/` と入力し、`year` トークンをクリックします。
 
-When you point your browser to `http://my-project.test/blog/archive/2018`, it will match your new route, and Craft will load the specified template.
+::: tip
+ルート URI はスラッシュ（`/`）ではじめるべき**ではありません**。
+:::
 
-The value of the `year` token will also be available to the template as a variable called `year`.
+URI パターンを定義しテンプレートパスを入力したら、「保存」ボタンをクリックします。モーダルが閉じ、ページに新しいルートが表示されるでしょう。
 
-### Available Tokens
+ブラウザが `http://my-project.test/blog/archive/2018` を指し示すとき、新しいルートがマッチし、Craft は指定されたテンプレートを読み込みます。
 
-The following tokens are available to the URI setting:
+`year` トークンの値は、変数 `year` としてテンプレートで利用可能です。
 
-* `*` – Any string of characters, except for a forward slash (/)
-* `day` – Day of a month (1-31 or 01-31)
-* `month` – Numeric representation of a month (1-12 or 01-12)
-* `number` – Any positive integer
-* `page` – Any positive integer
+### 利用可能なトークン
+
+URI 設定では、次のトークンが利用可能です。
+
+* `*` – スラッシュ（/）を除く、任意の文字列
+* `day` – 月の特定の日（1-31 または 01-31）
+* `month` – 月の数値表現（1-12 または 01-12）
+* `number` – 任意の正の整数
+* `page` – 任意の正の整数
 * `uid` – A v4 compatible UUID (universally unique ID)
-* `slug` – Any string of characters, except for a forward slash (/)
-* `tag` – Any string of characters, except for a forward slash (/)
-* `year` – Four consecutive digits
+* `slug` – スラッシュ（/）を除く、任意の文字列
+* `tag` – スラッシュ（/）を除く、任意の文字列
+* `year` – 4桁の連続する数字
 
-## Advanced Routing with URL Rules
+## URL ルールによる高度なルーティング
 
-In addition to routes, you can define [URL rules](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) in `config/routes.php`.
+ルートに加えて、`config/routes.php` に [URL ルール](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules)を定義できます。
 
 ```php
 return [
@@ -99,7 +107,7 @@ return [
 ];
 ```
 
-If your Craft installation has multiple sites, you can create site-specific URL rules by placing them in a sub-array, and set the key to the site’s handle.
+マルチサイトを持つ Craft のインストールでは、サブ配列に配置してサイト固有の URL ルールを作成し、そのキーをサイトのハンドルに設定できます。
 
 ```php
 return [
@@ -109,10 +117,10 @@ return [
 ];
 ```
 
-Craft also supports special tokens that you can use within the regular expression portion of your [named parameters](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#named-parameters):
+Craft は[名前付けされたパラメータ](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#named-parameters)の正規表現内で使用できる、特別なトークンもサポートしています。
 
-- `{handle}` – matches a field handle, volume handle, etc.
-- `{slug}` – matches an entry slug, category slug, etc.
+- `{handle}` – フィールドハンドル、ボリュームハンドルなどとマッチします。
+- `{slug}` – エントリスラグ、カテゴリスラグなどとマッチします。
 - `{uid}` – matches a v4 UUID.
 
 ```php
@@ -121,18 +129,19 @@ return [
 ];
 ```
 
-### Accessing Named Parameters in your Templates
+### テンプレート内の名前付けされたパラメータへのアクセス
 
-URL rules that route to a template (`['template' => '<TemplatePath>']`) will pass any matched named parameters to the template as variables.
+テンプレート（`['template' => '<TemplatePath>']`）にルーティングする URL ルールは、マッッチする名前付けされたパラメータをテンプレートの変数として渡します。
 
-For example, with this URL rule:
+例えば、次の URL ルールの場合
 
 ```php
 'blog/archive/<year:\d{4}>' => ['template' => 'blog/_archive'],
 ```
 
-If you access `http://my-project.test/blog/archive/2018`, your `blog/_archive.twig` template will get loaded a `year` variable set to `2018`.
+`http://my-project.test/blog/archive/2018` にアクセスすると、`blog/_archive.twig` テンプレートは、変数 `year` に `2018` をセットした状態で読み込まれます。
 
 ```twig
 <h1>Blog Entries from {{ year }}</h1>
 ```
+

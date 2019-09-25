@@ -1,10 +1,10 @@
-# PHP Constants
+# PHP 定数
 
-Your `web/index.php` file can define certain PHP constants, which Craft’s bootstrap script will check for while loading and configuring Craft.
+`web/index.php` ファイルには、Craft の読み込みと環境設定を行う際に、Craft の起動スクリプトがチェックする PHP 定数を定義することができます。
 
 ### `CRAFT_BASE_PATH`
 
-The path to the **base directory** that Craft will look for [config/](../directory-structure.md#config), [templates/](../directory-structure.md#templates), and other directories within by default. (It is assumed to be the parent of the `vendor/` folder by default.)
+Craft がデフォルトで探す [config/](../directory-structure.md#config)、[templates/](../directory-structure.md#templates)、および、他のディレクトリの**ベースディレクトリ**のパス。（デフォルトでは、`vendor/` フォルダの親とみなされます。）
 
 ```php
 // Tell Craft to look for config/, templates/, etc., two levels up from here
@@ -13,7 +13,7 @@ define('CRAFT_BASE_PATH', dirname(__DIR__, 2));
 
 ### `CRAFT_COMPOSER_PATH`
 
-The path to the [composer.json](../directory-structure.md#composer-json) file. (It is assumed to live within the base directory by default.)
+[composer.json](../directory-structure.md#composer-json) ファイルのパス。（デフォルトでは、ベースディレクトリ内に存在するものとします。）
 
 ```php
 define('CRAFT_COMPOSER_PATH', 'path/to/composer.json');
@@ -21,15 +21,15 @@ define('CRAFT_COMPOSER_PATH', 'path/to/composer.json');
 
 ### `CRAFT_CONFIG_PATH`
 
-The path to the [config/](../directory-structure.md#config) folder. (It is assumed to live within the base directory by default.)
+[config/](../directory-structure.md#config) フォルダのパス。（デフォルトでは、ベースディレクトリ内に存在するものとします。）
 
 ### `CRAFT_CONTENT_MIGRATIONS_PATH`
 
-The path to the [migrations/](../directory-structure.md#migrations) folder used to store content migrations. (It is assumed to live within the base directory by default.)
+コンテンツマイグレーションの保管に使用される [migrations/](../directory-structure.md#migrations) フォルダのパス。（デフォルトでは、ベースディレクトリ内に存在するものとします。）
 
 ### `CRAFT_ENVIRONMENT`
 
-The environment name that [multi-environment configs](environments.md#multi-environment-configs) can reference when defining their environment-specific config arrays. (`$_SERVER['SERVER_NAME']` will be used by default.)
+環境特有の設定配列を定義する際に[マルチ環境設定](environments.md#multi-environment-configs)が参照できる環境名。（デフォルトでは、`$_SERVER['SERVER_NAME']` が使用されます。）
 
 ```php
 // Set the environment from the ENVIRONMENT env var, or default to 'production'
@@ -38,15 +38,15 @@ define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
 
 ### `CRAFT_LICENSE_KEY`
 
-Your Craft license key, if for some reason that must be defined by PHP rather than a license key file. (Don’t set this until you have a valid license key.)
+何らかの理由で、ライセンスキーファイルではなく PHP によって定義されなければならい場合の Craft のライセンスキー。（有効なライセンスキーを取得するまで、これをセットしないでください。）
 
 ### `CRAFT_LICENSE_KEY_PATH`
 
-The path that Craft should store its license key file, including its filename. (It will be stored as `license.key` within your [config/](../directory-structure.md#config) folder by default.)
+ファイル名を含めた Craft がライセンスキーファイルを保存するパス。（デフォルトでは、[config/](../directory-structure.md#config) フォルダ内に `license.key` が保存されます。）
 
 ### `CRAFT_LOG_PHP_ERRORS`
 
-Can be set to `false` to prevent Craft from setting PHP’s [log_errors](http://php.net/manual/en/errorfunc.configuration.php#ini.log-errors) setting, leaving it up to whatever’s set in `php.ini`.
+Craft が PHP の [log_errors](http://php.net/manual/en/errorfunc.configuration.php#ini.log-errors) 設定をセットすることを抑制し、`php.ini` 内の設定に任せるよう `false` をセットすることもできます。
 
 ```php
 // Don't send PHP error logs to storage/logs/phperrors.log
@@ -55,7 +55,7 @@ define('CRAFT_LOG_PHP_ERRORS', false);
 
 ### `CRAFT_SITE`
 
-The Site handle or ID that Craft should be serving from this `index.php` file. (Only set this if you have a good reason to. Craft will automatically serve the correct site by inspecting the requested URL, unless this is set.)
+Craft がこの `index.php` ファイルから提供するべき、サイトハンドル、または、サイト ID。（明確な理由がある場合のみ、これをセットしてください。セットされていなければ、Craft はリクエスト URL を調査することで正しいサイトを自動的に配信します。）
 
 ```php
 // Show the German site
@@ -64,18 +64,17 @@ define('CRAFT_SITE', 'de');
 
 ### `CRAFT_STORAGE_PATH`
 
-The path to the [storage/](../directory-structure.md#storage) folder. (It is assumed to live within the base directory by default.)
-
-::: tip Make sure you set this to a valid folder path, otherwise it will be ignored. :::
+[storage/](../directory-structure.md#storage) フォルダのパス。（デフォルトでは、ベースディレクトリ内に存在するものとします。）
 
 ### `CRAFT_TEMPLATES_PATH`
 
-The path to the [templates/](../directory-structure.md#templates) folder. (It is assumed to live within the base directory by default.)
+[templates/](../directory-structure.md#templates) フォルダのパス。（デフォルトでは、ベースディレクトリ内に存在するものとします。）
 
 ### `CRAFT_TRANSLATIONS_PATH`
 
-The path to the `translations/` folder. (It is assumed to live within the base directory by default.)
+`translations/` フォルダのパス。（デフォルトでは、ベースディレクトリ内に存在するものとします。）
 
 ### `CRAFT_VENDOR_PATH`
 
-The path to the [vendor/](../directory-structure.md#vendor) folder. (It is assumed to live 4 directories up from the bootstrap script by default.)
+[vendor/](../directory-structure.md#vendor) フォルダのパス。（デフォルトでは、起動スクリプトによって4つのディレクトリが稼働しているものとします。）
+

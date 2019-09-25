@@ -1,32 +1,31 @@
-# Number Fields
+# 数字フィールド
 
-Number fields give you a text input that accepts a numeric value.
+数字フィールドでは、数値を受け入れるテキスト入力を提供します。
 
-## Settings
+## 設定
 
-Number fields have the following settings:
+数字フィールドの設定は、次の通りです。
 
-* **Default Value** – The default value that should be applied for new elements.
-* **Min Value** – The lowest number that may be entered in the field
-* **Max Value** – The highest number that may be entered in the field.
-* **Decimal Points** – The maximum number of decimal points that may be entered in the field
-* **Prefix** – Text that should be displayed before the input.
-* **Suffix** – Text that should be displayed after the input.
+* **初期値** – 新しいエレメントに適用するデフォルト値
+* **最小値** – フィールドに入力できる最小の数字
+* **最大値** – フィールドに入力できる最大の数字
+* **小数点** – フィールドに入力できる小数点以下の最大の桁数
+* **Prefix** – 入力欄の前に表示するテキスト
+* **Suffix** – 入力欄の後に表示するテキスト
 
-## Templating
+## テンプレート記法
 
-### Querying Elements with Number Fields
+### 数字フィールドによるエレメントの照会
 
-When [querying for elements](dev/element-queries/README.md) that have a Number field, you can filter the results based on the Number field data using a query param named after your field’s handle.
+数字フィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、数字フィールドのデータに基づいた結果をフィルタできます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value                         | Fetches elements…                   |
-| ----------------------------- | ----------------------------------- |
-| `100`                         | with a value of 100.                |
-| `'>= 100'`                 | with a value of at least 100.       |
-| `['>= 100', '<= 1000']` | with a value between 100 and 1,000. |
-
+| 値 | 取得するエレメント
+| - | -
+| `100` | 値が 100。
+| `'>= 100'` | 少なくとも、値が 100。
+| `['>= 100', '<= 1000']` | 値が 100 から 1,000 の間。
 
 ```twig
 {# Fetch entries with a Numbber field set to at least 100 #}
@@ -35,31 +34,31 @@ Possible values include:
     .all() %}
 ```
 
-### Working with Number Field Data
+### 数字フィールドデータの操作
 
-If you have an element with a Number field in your template, you can access its data using your Number field’s handle:
+テンプレート内で数字フィールドのエレメントを取得する場合、数字フィールドのハンドルを利用して、そのデータにアクセスできます。
 
 ```twig
 {% set value = entry.<FieldHandle> %}
 ```
 
-That will give you the number value for the field, or `null` if there is no value.
+それは、フィールドの数値を提供します。値がない場合、`null` になります。
 
-To format the number with proper thousands separators (e.g. `,`), use the [number](./dev/filters.md#number) filter:
+適切な千単位の区切り文字（例：`,`）でフォーマットするには、[number](./dev/filters.md#number) フィルタを使用してください。
 
 ```twig
 {{ entry.<FieldHandle>|number }}
 ```
 
-If the number will always be an integer, pass `decimals=0` to format the number without any decimals.
+数字を常に整数とする場合、小数点なしで数字をフォーマットするために `decimals=0` を渡してください。
 
 ```twig
 {{ entry.<FieldHandle>|number(decimals=0) }}
 ```
 
-### Saving Number Fields in Entry Forms
+### 投稿フォームで数字フィールドを保存
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Number field, you can use this template as a starting point:
+数字フィールドを含む[投稿フォーム](dev/examples/entry-form.md)が必要な場合、出発点としてこのテンプレートを使用してください。
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('<FieldHandle>') %}
@@ -74,3 +73,4 @@ If you have an [entry form](dev/examples/entry-form.md) that needs to contain a 
     max="{{ field.max }}"
     value="{{ value }}">
 ```
+
