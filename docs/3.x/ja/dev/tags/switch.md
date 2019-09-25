@@ -1,8 +1,8 @@
-# `{% switch %}` タグ
+# `{% switch %}` Tags
 
-「Switch 文」は、いくつかの反復的な `{% if %}` 条件を使う代わりに、複数の可能性がある値に対して変数を比較するクリーンな方法を提供します。
+“Switch statements” offer a clean way to compare a variable against multiple possible values, instead of using several repetitive `{% if %}` conditionals.
 
-このテンプレートの例では、行列ブロックのタイプによって異なるテンプレートを実行します。
+Take this template for example, which is running different template code depending on a Matrix block’s type:
 
 ```twig
 {% if matrixBlock.type == "text" %}
@@ -21,7 +21,7 @@
 {% endif %}
 ```
 
-条件文のすべてが同じもの – `matrixBlock.type` – を評価しているため、代わりに `{% switch %}` タグを利用してコードを簡略化できます。
+Since all of the conditionals are evaluating the same thing – `matrixBlock.type` – we can simplify that code using a `{% switch %}` tag instead:
 
 ```twig
 {% switch matrixBlock.type %}
@@ -42,7 +42,7 @@
 {% endswitch %}
 ```
 
-`{% for %}` ループ内で `{% switch %}` タグを使う場合、`{% switch %}` タグの内側で Twig の [ループ変数](https://twig.symfony.com/doc/tags/for.html#the-loop-variable) に直接アクセスすることはできません。代わりに、次のようにアクセスできます。
+If you’re using the `{% switch %}` tag inside of a `{% for %}` loop, you won’t be able to access Twig’s [loop variable](https://twig.symfony.com/doc/tags/for.html#the-loop-variable) directly inside of the `{% switch %}` tag. Instead, you can access it like so:
 
 ```twig
 {% for matrixBlock in entry.matrixField.all() %}
@@ -58,5 +58,4 @@
 {% endfor %}
 ```
 
-ヒント：このタグはあなたが目にしたことがあるかもしれない他の言語の `switch` 実装よりも少し単純です。マッチした `cases` で自動的に終了するため、`break` ステートメントは必要ありません。
-
+Tip: This tag is a bit simpler than other languages’ `switch` implementations you may have seen: matching `cases` are automatically broken out of, so there’s no need for `break` statements.
