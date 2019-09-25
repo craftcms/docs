@@ -1,15 +1,14 @@
-# テンプレートの実例
+# Template Examples
 
-Craft の一般的な使用例です。
+Some common usage examples in Craft:
 
-- [Disqus の統合](integrating-disqus.md)
-- [RSS フィード](rss-feed.md)
-- [Atom フィード](atom-feed.md)
-- [エントリの投稿フォーム](entry-form.md)
-- [検索フォーム](search-form.md)
-- [ログインフォーム](login-form.md)
-- [ユーザープロフィールの編集フォーム](user-profile-form.md)
-- [ユーザー登録フォーム](user-registration-form.md)
-- [パスワードを忘れた際のフォーム](forgot-password-form.md)
-- [パスワードの設定フォーム](set-password-form.md)
-
+- [Integrating Disqus](integrating-disqus.md)
+- [RSS Feed](rss-feed.md)
+- [Atom Feed](atom-feed.md)
+- [Entry Form](entry-form.md)
+- [Search Form](search-form.md)
+- [Login Form](login-form.md)
+- [User Profile Form](user-profile-form.md)
+- [User Registration Form](user-registration-form.md)
+- [Forgot Password Form](forgot-password-form.md)
+- [Set Password Form](set-password-form.md)

@@ -1,10 +1,10 @@
-# 色フィールド
+# Color Fields
 
-色フィールドでは、現在のカラーのプレビューが付いた16進数のカラー入力を提供します。`<input type="color">` をサポートしているブラウザでは、プレビューのクリックでブラウザのカラーピッカーを開きます。
+Color fields give you a hexadecimal color input with a preview of the current color, and on browsers that support `<input type="color">`, clicking on the preview will open the browser’s color picker.
 
-## テンプレート記法
+## Templating
 
-テンプレート内でカラーフィルドを呼び出すと、 <api:craft\fields\data\ColorData> オブジェクトが返ります。カラーが選択されていなければ、 `null` を返します。
+Calling a Color field in your templates will return a <api:craft\fields\data\ColorData> object, or `null` if no color was selected.
 
 ```twig
 {% if entry.linkColor %}
@@ -15,4 +15,3 @@
     </style>
 {% endif %}
 ```
-

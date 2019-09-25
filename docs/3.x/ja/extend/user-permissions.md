@@ -1,6 +1,6 @@
-# ユーザー権限
+# User Permissions
 
-モジュールとプラグインは、[EVENT_REGISTER_PERMISSIONS](api:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) イベントを使用して新しいユーザー権限をシステムに登録できます。
+Modules and plugins can register new user permissions to the system using the [EVENT_REGISTER_PERMISSIONS](api:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) event:
 
 ```php
 use craft\events\RegisterUserPermissionsEvent;
@@ -25,7 +25,7 @@ public function init()
 }
 ```
 
-権限は `nested` キーをパーミッションの配列に追加することで、ネストされた権限を持つこともできます。
+Permissions can also have nested permissions by adding a `nested` key to the permission array.
 
 ```php
 'permissionName' => [
@@ -38,9 +38,9 @@ public function init()
 ];
 ```
 
-## 権限の要求
+## Requiring Permissions
 
-コントローラーは、[requirePermission()](api:craft\web\Controller::requirePermission()) を呼び出すことで、ログインしているユーザー権限を持っていることを要求できます。
+Controllers can require that the logged-in user has a permission by calling [requirePermission()](api:craft\web\Controller::requirePermission()).
 
 ```php
 public function actionStayUpLate()
@@ -50,17 +50,17 @@ public function actionStayUpLate()
 }
 ```
 
-ユーザーがその権限を持たない場合、403 エラーが返されます。
+If the user doesn’t have that permission, then a 403 error will be returned.
 
-テンプレートでは、[requirePermission](../dev/tags/requirepermission.md) タグでユーザー権限を持っていることを保証することもできます。
+Templates can also ensure that the user has a permission with the [requirePermission](../dev/tags/requirepermission.md) tag:
 
 ```twig
 {% requirePermission 'stayUpLate' %}
 ```
 
-## 権限の確認
+## Checking Permissions
 
-<api:craft\web\User::checkPermission()> を呼び出すことで、ログインしているユーザーが権限を持っているかを確認できます。
+You can check if the logged-in user has a permission by calling <api:craft\web\User::checkPermission()>:
 
 ```php
 // See if they have the `stayUpLate` permission
@@ -69,7 +69,7 @@ if (Craft::$app->user->checkPermission('stayUpLate')) {
 }
 ```
 
-<api:craft\elements\User::can()> を呼び出すことで、指定されたユーザーが権限を持っているかを確認することもできます。
+You can also see if any given user has a permission by calling <api:craft\elements\User::can()>:
 
 ```php
 /** @var \craft\elements\User $user */
@@ -77,4 +77,3 @@ if ($user->can('stayUpLate')) {
     // ...
 }
 ```
-

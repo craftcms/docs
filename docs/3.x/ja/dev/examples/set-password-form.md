@@ -1,10 +1,10 @@
-# パスワードの設定フォーム
+# Set Password Form
 
-ユーザーがパスワードを忘れたとき、Craft は新しいパスワードを設定するための URL をメールで送信します。その URL は、コンフィグ設定の <config:setPasswordPath> で定義され、デフォルトでは「setpassword」となります。
+When a user forgets their password, Craft will send them an email with a URL to set a new password. That URL is defined by your <config:setPasswordPath> config setting, which is “setpassword” by default.
 
-サイトのフロントエンドでパスワードのリセットをサポートしたい場合、コンフィグ設定の「setPasswordPath」で指定されたパスにテンプレートを作成する必要があります。
+If you want the front-end of your site to support password resetting, you need to create a template at the path specified by the ”setPasswordPath” config setting.
 
-そのテンプレートに、次のコードを記述します。
+Within that template, place the following code:
 
 ```twig
 <form method="post" accept-charset="UTF-8">
@@ -27,5 +27,4 @@
 </form>
 ```
 
-ユーザーがログインに成功すると、コンフィグ設定 <config:setPasswordSuccessPath> で定義されたパスにリダイレクトされます。
-
+After the user successfully logs in, they will be redirected to the path defined by the <config:setPasswordSuccessPath> config setting.

@@ -1,50 +1,49 @@
-# アップデートガイド
+# Updating Instructions
 
-## コントロールパネルからのアップデート
+## Updating from the Control Panel
 
-アップデートが可能になると、Craft のアップデート権限を持つユーザーは CP のサイドバーにあるナビゲーション項目「ユーティリティ」の横にバッジを確認できるようになります。「ユーティリティ」をクリックし、その後「アップデート」を選択します。デフォルトでインストールされているコントロールパネルのダッシュボードにあるアップデートウィジェットを利用することもできます。
+When an update is available, users with the permission to update Craft will see a badge in the CP next to the Utilities navigation item in the sidebar. Click on Utilities and then choose Updates. You can also use the Updates widget on the Control Panel dashboard, which is installed by default.
 
-このセクションには、Craft CMS のアップデートとプラグインのアップデートの両方を表示します。それぞれのアップデートは、それ自身の「アップデート」ボタンを持っています。クリックすると、 Craft の自動更新プロセスが開始されます。
+This section displays both Craft CMS updates and plugin updates. Each update has its own Update button. Clicking that will initiate Craft’s self-updating process.
 
-アップデートページの左上にある「すべてを更新」ボタンを使用して、（アップデート可能な Craft とプラグイン）すべてのアップデートを実行できます。
+You can run all of the updates (Craft, all plugin updates available) using the Update All button at the top left of the Updates page.
 
-## ターミナルからのアップデート
+## Updating from the Terminal
 
-Craft 3.0.38 および 3.1.4 では、Craft およびプラグインのアップデートで利用可能な新しい `update` コンソールコマンドが導入されました。
+Craft 3.0.38 and 3.1.4 introduced a new `update` console command that can be used to update Craft and plugins.
 
-利用可能なアップデートを確認するには、ターミナルで Craft プロジェクトに移動し、次のコマンドを実行してください。
+To see available updates, go to your Craft project in your terminal and run this command:
 
 ```bash
 ./craft update
 ```
 
-![`update` コマンドによるインタラクションの例。](./images/cli-update-info.png)
+![An example interaction with the <code>update</code> command.](./images/cli-update-info.png)
 
-一度にすべてをアップデートするには、次のコマンドを実行します。
+To update everything all at once, run this command:
 
 ```bash
 ./craft update all
 ```
 
-特定のものをアップデートするには、`all` をそのハンドル（Craft をアップデートするための `craft`、または、プラグインのハンドルのいずれか）に置き換えます。
+To update a specific thing, replace `all` with its handle (either `craft` to update Craft, or a plugin’s handle).
 
 ```bash
 ./craft update element-api
 ```
 
-![`update <handle>` コマンドによるインタラクションの例。](./images/cli-update-plugin.png)
+![An example interaction with the <code>update <handle></code> command.](./images/cli-update-plugin.png)
 
-一度に複数のハンドルを渡すこともできます。
+You can also pass multiple handles in at once:
 
 ```bash
 ./craft update element-api commerce
 ```
 
-デフォルトでは、Craft は利用可能な最新バージョンにアップデートします。特定バージョンにアップデートするには、ハンドルに `:<version>` を追加します。
+By default, Craft will update you to the latest available version. To update to a specific version, append `:<version>` to the handle:
 
 ```bash
 ./craft update element-api:2.5.4
 ```
 
-Craft は `composer install` コマンドのように動作する `update/composer-install` コマンドも提供しますが、Composer をインストールする必要はありません。
-
+Craft also provides an `update/composer-install` command, which behaves like the `composer install` command, but doesn’t require you to have Composer installed.

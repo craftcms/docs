@@ -1,6 +1,6 @@
-# `{% css %}` タグ
+# `{% css %}` Tags
 
-`{% css %}` タグは、ページの `<head>` に `<style>` タグを登録するために使用できます。
+The `{% css %}` tag can be used to register a `<style>` tag in the page’s `<head>`.
 
 ```css
 {% css %}
@@ -10,8 +10,7 @@
 {% endcss %}
 ```
 
-::: tip
-タグを <api:yii\web\View::registerCss()> の中で呼び出し、グローバルな `view` 変数経由でアクセスすることもできます。
+::: tip The tag calls <api:yii\web\View::registerCss()> under the hood, which can also be accessed via the global `view` variable.
 
 ```twig
 {% set styles = ".content { color: #{entry.textColor}; }" %}
@@ -20,17 +19,16 @@
 
 :::
 
-## パラメータ
+## Parameters
 
-`{% css %}` タグは、次のパラメータをサポートしています。
+The `{% css %}` tag supports the following parameters:
 
 ### `with`
 
-`<style>` タグに含めるべき、HTML 属性。
+Any HTML attributes that should be included on the `<style>` tag.
 
 ```twig
 {% css with {type: 'text/css'} %}
 ```
 
-属性は <api:yii\helpers\BaseHtml::renderTagAttributes()> によってレンダリングされます。
-
+Attributes will be rendered by <api:yii\helpers\BaseHtml::renderTagAttributes()>.

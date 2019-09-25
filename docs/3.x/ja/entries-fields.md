@@ -1,49 +1,50 @@
-# エントリフィールド
+# Entries Fields
 
-エントリフィールドでは、[エントリ](sections-and-entries.md)を他のエレメントに関連付けることができます。
+Entries fields allow you to relate [entries](sections-and-entries.md) to other elements.
 
-## 設定
+## Settings
 
-エントリフィールドの設定は、次の通りです。
+Entries fields have the following settings:
 
-- **ソース** – フィールドが、どのエントリ（または、他のエントリインデックスソース）からエントリを関連付けられるか。
-- **リミット** – フィールドと一度に関連付けできるエントリ数の上限（デフォルトは無制限です）
-- **選択ラベル** – フィールドの選択ボタンのラベルに使用されます
+- **Sources** – Which sections (or other entry index sources) the field should be able to relate entries from.
+- **Limit** – The maximum number of entries that can be related with the field at once. (Default is no limit.)
+- **Selection Label** – The label that should be used on the field’s selection button.
 
-### マルチサイト設定
+### Multi-Site Settings
 
-マルチサイトがインストールされている場合、次の設定も有効になります。（「高度」のトグルボタンで表示されます）
+On multi-site installs, the following settings will also be available (under “Advanced”):
 
-- **特定のサイトから エントリ を関連付けますか?** – 特定のサイトのエントリとの関連付けのみを許可するかどうか。
+- **Relate entries from a specific site?** – Whether to only allow relations to entries from a specific site.
+    
+    If enabled, a new setting will appear where you can choose which site.
+    
+    If disabled, related entries will always be pulled from the current site.
 
-   有効にすると、サイトを選択するための新しい設定が表示されます。
+- **Manage relations on a per-site basis** – Whether each site should get its own set of related entries.
 
-   無効にすると、関連付けられたエントリは常に現在のサイトから取得されます。
+## The Field
 
-- **サイトごとにリレーションを管理** – それぞれのサイトが関連付けられたエントリの独自のセットを取得するかどうか。
+Entries fields list all of the currently-related entries, with a button to select new ones.
 
-## フィールド
+Clicking the “Add an entry” button will bring up a modal window where you can find and select additional entries. You can create new entries from this modal as well, by clicking the “New entry” button.
 
-エントリフィールドには、現在関連付けられているすべてのエントリのリストと、新しいエントリを追加するためのボタンがあります。
+### Inline Entry Editing
 
-「エントリを追加」ボタンをクリックすると、すでに追加されているエントリの検索や選択ができるモーダルウィンドウが表示されます。このモーダルから新しいエントリを作るには、「新しいエントリの入力」ボタンをクリックします。
+When you double-click on a related entry, a HUD will appear where you can edit the entry’s title and custom fields.
 
-### インラインのエントリ編集
+## Templating
 
-関連付けられたエントリをダブルクリックすると、エントリのタイトルやカスタムフィールドを編集できる HUD を表示します。
+### Querying Elements with Entries Fields
 
-## テンプレート記法
+When [querying for elements](dev/element-queries/README.md) that have an Entries field, you can filter the results based on the Entries field data using a query param named after your field’s handle.
 
-### エントリフィールドによるエレメントの照会
+Possible values include:
 
-エントリフィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、エントリフィールドのデータに基づいた結果をフィルタできます。
+| Value          | Fetches elements…                     |
+| -------------- | ------------------------------------- |
+| `':empty:'`    | that don’t have any related entries.  |
+| `':notempty:'` | that have at least one related entry. |
 
-利用可能な値には、次のものが含まれます。
-
-| 値 | 取得するエレメント
-| - | -
-| `':empty:'` | 関連付けられたエントリを持たない。
-| `':notempty:'` | 少なくとも1つの関連付けられたエントリを持つ。
 
 ```twig
 {# Fetch entries with a related entry #}
@@ -52,17 +53,17 @@
     .all() %}
 ```
 
-### エントリフィールドデータの操作
+### Working with Entries Field Data
 
-テンプレート内でエントリフィールドのエレメントを取得する場合、エントリフィールドのハンドルを利用して、関連付けられたエントリにアクセスできます。
+If you have an element with an Entries field in your template, you can access its related entries using your Entries field’s handle:
 
 ```twig
 {% set relatedEntries = entry.<FieldHandle> %}
 ```
 
-これは、所定のフィールドで関連付けられたすべてのエントリを出力するよう定義された[エレメントクエリ](dev/element-queries/entry-queries.md)を提供します。
+That will give you an [entry query](dev/element-queries/entry-queries.md), prepped to output all of the related entries for the given field.
 
-関連付けられたすべてのエントリをループするには、[all()](api:craft\db\Query::all()) を呼び出して、結果をループ処理します。
+To loop through all of the related entries, call [all()](api:craft\db\Query::all()) and then loop over the results:
 
 ```twig
 {% set relatedEntries = entry.<FieldHandle>.all() %}
@@ -75,7 +76,7 @@
 {% endif %}
 ```
 
-関連付けられた最初のエントリだけが欲しい場合、代わりに [one()](api:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
+If you only want the first related entry, call [one()](api:craft\db\Query::one()) instead, and then make sure it returned something:
 
 ```twig
 {% set rel = entry.<FieldHandle>.one() %}
@@ -84,7 +85,7 @@
 {% endif %}
 ```
 
-（取得する必要はなく）いずれかの関連付けられたエントリがあるかを確認したい場合、[exists()](api:craft\db\Query::exists()) を呼び出すことができます。
+If you just need to check if there are any related entries (but don’t need to fetch them), you can call [exists()](api:craft\db\Query::exists()):
 
 ```twig
 {% if entry.<FieldHandle>.exists() %}
@@ -92,7 +93,7 @@
 {% endif %}
 ```
 
-エントリクエリで[パラメータ](dev/element-queries/entry-queries.md#parameters)をセットすることもできます。例えば、`news` セクションに含まれるエントリだけを取得するには、[section](dev/element-queries/entry-queries.md#section) パラメータをセットしてください。
+You can set [parameters](dev/element-queries/entry-queries.md#parameters) on the entry query as well. For example, to only fetch entries in the `news` section, set the [section](dev/element-queries/entry-queries.md#section) param:
 
 ```twig
 {% set relatedEntries = entry.<FieldHandle>
@@ -100,9 +101,8 @@
     .all() %}
 ```
 
-## 関連項目
+## See Also
 
-* [エントリクエリ](dev/element-queries/entry-queries.md)
+* [Entry Queries](dev/element-queries/entry-queries.md)
 * <api:craft\elements\Entry>
-* [リレーション](relations.md)
-
+* [Relations](relations.md)

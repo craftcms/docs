@@ -1,10 +1,9 @@
-# エレメント
+# Elements
 
-- [アセット](api:craft\elements\Asset)
-- [カテゴリ](api:craft\elements\Category)
-- [エントリ](api:craft\elements\Entry)
-- [グローバル設定](api:craft\elements\GlobalSet)
-- [行列ブロック](api:craft\elements\MatrixBlock)
-- [タグ](api:craft\elements\Tag)
-- [ユーザー](api:craft\elements\User)
-
+- [Asset](api:craft\elements\Asset)
+- [Category](api:craft\elements\Category)
+- [Entry](api:craft\elements\Entry)
+- [GlobalSet](api:craft\elements\GlobalSet)
+- [MatrixBlock](api:craft\elements\MatrixBlock)
+- [Tag](api:craft\elements\Tag)
+- [User](api:craft\elements\User)

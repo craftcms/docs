@@ -1,12 +1,12 @@
-# プラグイン設定
+# Plugin Settings
 
 [[toc]]
 
-## 設定モデル
+## Settings Model
 
-グローバル設定を持つプラグインは、設定値の保存と検証のための責任を持つ「設定モデル」を定義する必要があります。
+Plugins that have global settings need to define a “settings model”, which is responsible for storing the setting values, and validating them.
 
-設定モデルは、他のいかなる [model](https://www.yiiframework.com/doc/guide/2.0/en/structure-models) とも全く同じです。作成するには、プラグインのソースディレクトリ内に `models/` ディレクトリを作成し、その中に `Settings.php` ファイルを作成します。
+Settings models are just like any other [model](https://www.yiiframework.com/doc/guide/2.0/en/structure-models). To create it, create a `models/` directory within your plugin’s source directory, and create a `Settings.php` file within it:
 
 ```php
 <?php
@@ -30,7 +30,7 @@ class Settings extends Model
 }
 ```
 
-次に、メインプラグインクラスに設定モデルの新しいインスタンスを返す `createSettingsModel()` メソッドを追加します。
+Next up, add a `createSettingsModel()` method on your main plugin class, which returns a new instance of your settings model:
 
 ```php
 <?php
@@ -47,9 +47,9 @@ class Plugin extends \craft\base\Plugin
 }
 ```
 
-## 設定へのアクセス
+## Accessing Settings
 
-設定モデルと `createSettingsModel()` メソッドを適切に配置すると、メインプラグインクラスの `getSettings()` メソッド経由で、現在のプロジェクトにセットされたすべてのカスタム値が入った設定モデルにアクセスできるようになります。
+With your settings model and `createSettingsModel()` method in place, you can now access your settings model, populated with any custom values set for the current project, via a `getSettings()` method on your main plugin class:
 
 ```php
 // From your main plugin class:
@@ -59,7 +59,7 @@ $foo = $this->getSettings()->foo;
 $foo = \ns\prefix\Plugin::getInstance()->getSettings()->foo;
 ```
 
-または、`$settings` マジックプロパティを使用できます。
+Or you can use the `$settings` magic property:
 
 ```php
 // From your main plugin class:
@@ -69,11 +69,11 @@ $foo = $this->settings->foo;
 $foo = \ns\prefix\Plugin::getInstance()->settings->foo;
 ```
 
-## 設定値の上書き
+## Overriding Setting Values
 
-設定値は、プラグインハンドルの名前にちなんだプロジェクトの`config/` フォルダに含まれる PHP ファイルから、プロジェクトごとに上書きできます。例えば、プラグインハンドルが `foo-bar` の場合、その設定は `config/foo-bar.php` ファイルから上書きできます。
+Your setting values can be overridden on a per-project basis from a PHP file within the project’s `config/` folder, named after your plugin handle. For example, if your plugin handle is `foo-bar`, its settings can be overridden from a `config/foo-bar.php` file.
 
-ファイルは、上書きしたい値を持つ配列を返すだけです。
+The file just needs to return an array with the overridden values:
 
 ```php
 <?php
@@ -84,7 +84,7 @@ return [
 ];
 ```
 
-マルチ環境設定も可能です。
+It can also be a multi-environment config:
 
 ```php
 <?php
@@ -99,15 +99,13 @@ return [
 ];
 ```
 
-::: warning
-設定ファイルは、プラグインの設定モデルで定義されていないキーを含めることはできません。
-:::
+::: warning The config file cannot contain any keys that are not defined in the plugin’s settings model. :::
 
-## 設定ページ
+## Settings Pages
 
-プラグインは、管理者がプラグインに依存する設定値を管理しやすくするために、コントロールパネルに設定ページを提供することもできます。
+Plugins can also provide a settings page in the Control Panel, which may make it easier for admins to manage settings values, depending on the plugin.
 
-プラグインに設定ページを追加するには、プラグインのソースディレクトリに `templates/` フォルダを作成し、その中に  `settings.twig` ファイルを作成します。
+To give your plugin a settings page, create a `templates/` directory within your plugin’s source directory, and create a `settings.twig` file within it:
 
 ```twig
 {% import "_includes/forms" as forms %}
@@ -126,7 +124,7 @@ return [
 }) }}
 ```
 
-次に、メインプラグインクラス内で `$hasCpSettings` プロパティを `true` にセットし、新しいレンダリングテンプレートを返す `settingsHtml()` メソッドを定義します。
+Then, within your main plugin class, set the `$hasCpSettings` property to `true`, and define a `settingsHtml()` method that returns your new rendered template:
 
 ```php
 <?php
@@ -153,15 +151,15 @@ class Plugin extends \craft\base\Plugin
 }
 ```
 
-これで、プラグインは設定ページの独自アイコンと「設定 > プラグイン」ページの自身の行へ `/admin/settings/plugin-handle` にリンクする歯車アイコンを表示するようになります。
+With all that in place, your plugin will now get its own icon on the Settings page, and a cog icon in its row on the Settings → Plugins page, which will link to `/admin/settings/plugin-handle`.
 
-### 高度な設定ページ
+### Advanced Settings Pages
 
-コントロールパネル URL の `/admin/settings/plugin-handle` がリクエストされると、プラグインは最終的にレスポンスを担当します。すなわち、プラグインの `getSettingsResponse()` メソッドです。<api:craft\base\Plugin> のデフォルトの `getSettingsResponse()` 実装は、プラグインの `settingsHtml()` メソッドを呼び出します。そして、Craft の（プラグイン設定ページのレイアウトテンプレートである）`settings/plugins/_settings` テンプレートをレンダリングし、`settingsHtml()` によって返された HTML を渡すようアクティブなコントローラーに伝えます。
+When the `/admin/settings/plugin-handle` Control Panel URL is requested, your plugin is ultimately in charge of the response. Namely, your plugin’s `getSettingsResponse()` method. The default `getSettingsResponse()` implementation in <api:craft\base\Plugin> will call your plugin’s `settingsHtml()` method, and then tell the active controller to render Craft’s `settings/plugins/_settings` template (the layout template for plugin settings pages), passing it the HTML returned by `settingsHtml()`.
 
-プラグインが設定ページをもっとコントルールスル必要がある場合、`getSettingsResponse()` メソッドを上書きして、リクエストでしたいことを実行できます。
+If a plugin needs more control over its settings page(s), it can override its `getSettingsResponse()` method and do whatever it wants with the request.
 
-それは Craft の `settings/plugins/_settings` レイアウトに制限されず、テンプレート独自のテンプレートをレンダリングするよう選択できます。
+It can choose to render its own template, rather than being confined to Craft’s `settings/plugins/_settings` layout template:
 
 ```php
 public function getSettingsResponse()
@@ -170,7 +168,7 @@ public function getSettingsResponse()
 }
 ```
 
-リクエストを全く別の URL にリダイレクトすることもできます。
+It can redirect the request to a completely different URL, too:
 
 ```php
 public function getSettingsResponse()
@@ -181,5 +179,4 @@ public function getSettingsResponse()
 }
 ```
 
-そこで返るものは、そこで正に起きている何かであるため、コントローラーアクションが返す何かとして筋が通っている必要があることに注意してください。<api:craft\controllers\PluginsController::actionEditPluginSettings()> メソッドは、`getSettingsResponse()` の戻り値を直接返します。
-
+Just note that whatever it returns needs to make sense as something a controller action would return, because that’s exactly what’s happening. The <api:craft\controllers\PluginsController::actionEditPluginSettings()> method returns whatever `getSettingsResponse()` returns directly.
