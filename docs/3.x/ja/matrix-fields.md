@@ -1,42 +1,43 @@
-# 行列フィールド
+# Matrix Fields
 
-行列フィールドでは、1つのフィールド内に複数のコンテンツブロックを作成できます。
+Matrix fields allow you to create multiple blocks of content within a single field.
 
-## 設定
+## Settings
 
-行列フィールドの設定は、次の通りです。
+Matrix fields have the following settings:
 
-* **構成** – ここでは、行列フィールドでどのようなブロックタイプが利用可能か、それらのブロックタイプがどのようなサブフィールドを持つ必要があるかを設定します。
-* **最大ブロック数** – フィールドに作成できるブロック数の上限（デフォルトは無制限です）
+* **Configuration** – This is where you configure which block types should be available to your Matrix field, and which sub-fields each of those block types should have.
+* **Max Blocks** – The maximum number of blocks that can be created within the field. (Default is no limit.)
 
-## フィールド
+## The Field
 
-新しいエントリでは、行列フィールドにはボタンのグループが表示されます。フィールド設定で作成したブロックタイプごとに1つのボタンが表示されます。
+On a fresh entry, Matrix fields will just show a group of buttons – one for each of the Block Types you created in the field’s settings.
 
-それらのボタンの1つをクリックすると、新しいブロックが作成されます。ブロックタイプの名前はブロックのタイトルバーに表示され、それぞれのブロックタイプのフィールドにはブロックの本体が存在しているでしょう。
+When you click on one of those buttons, a new block will be created. The Block Type’s name will be shown in the block’s title bar, and each of the Block Type’s fields will be present within the body of the block.
 
-あなたは好きなだけ（または、最大ブロック数の設定で許可されている範囲内で）、行列フィールドへブロックを追加できます。
+You can add as many blocks to your Matrix field as you’d like (or at least as many as the field’s Max Blocks setting will allow).
 
-各ブロックは設定メニューを持ち、そのブロックに対して追加でできることを開示します。
+Each block has a settings menu that reveals additional things you can do with the block.
 
-複数のブロックが選択されている場合、選択されたすべてのブロックに対して「折りたたむ / 展開する」「無効 / 有効」および「削除」オプションが適用されます。
+If multiple blocks are selected, the Collapse/Expand, Disable/Enable, and Delete options will apply to all of the selected blocks.
 
-メニューオプションの「折りたたむ」 をクリックするか、ブロックのタイトルバーをダブルクリックすることで、行列ブロックを折りたたむことができます。ブロックが折りたたまれている場合、タイトルバーはコンテンツのプレビューを表示するため、それがどんなブロックかを識別できます。
+You can collapse Matrix blocks by clicking the “Collapse” menu option, or by double-clicking on a block’s title bar. When a block is collapsed, its title bar will show a preview of its content, so you can still identify which block it is.
 
-ブロックは、そのブロックのタイトルバーの最後にある「移動」アイコンをドラックして並び替えることもできます。複数のブロックが選択されている場合、選択されたすべてのブロックが一緒に移動します。
+Blocks can also be reordered by dragging the “Move” icon at the end of the block’s title bar. If multiple blocks are selected, all of the selected blocks will be going along for the ride.
 
-## テンプレート記法
+## Templating
 
-### 行列フィールドによるエレメントの照会
+### Querying Elements with Matrix Fields
 
-行列フィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、行列フィールドのデータに基づいた結果をフィルタできます。
+When [querying for elements](dev/element-queries/README.md) that have a Matrix field, you can filter the results based on the Matrix field data using a query param named after your field’s handle.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するエレメント
-| - | -
-| `':empty:'` | 行列ブロックを持たない。
-| `':notempty:'` | 少なくとも1つの行列ブロックを持つ。
+| Value          | Fetches elements…                    |
+| -------------- | ------------------------------------ |
+| `':empty:'`    | that don’t have any Matrix blocks.   |
+| `':notempty:'` | that have at least one Matrix block. |
+
 
 ```twig
 {# Fetch entries with a Matrix block #}
@@ -45,9 +46,9 @@
     .all() %}
 ```
 
-### 行列フィールドデータの操作
+### Working with Matrix Field Data
 
-テンプレート内で行列フィールドを出力するには、行列フィールドに対して [for ループ](https://twig.symfony.com/doc/tags/for.html) を使用します。
+To output your Matrix blocks in a template, use a [for-loop](https://twig.symfony.com/doc/tags/for.html) pointed at your Matrix field:
 
 ```twig
 {% for block in entry.myMatrixField.all() %}
@@ -55,9 +56,9 @@
 {% endfor %}
 ```
 
-for ループ内に記述されたすべてのコードは、 フィールドに含まれるそれぞれの行列ブロックに対して繰り返されます。定義済みの変数 `block` にセットされる現在のブロックは、<api:craft\elements\MatrixBlock> モデルになります。
+All of the code you put within the for-loop will be repeated for each Matrix block in the field. The current block will get set to that `block` variable we’ve defined, and it will be a <api:craft\elements\MatrixBlock> model.
 
-次に、4つのブロックタイプ（見出し、テキスト、画像、および、引用）を持つ行列フィールドのテンプレートの実例を示します。`block.type` （<api:craft\elements\MatrixBlock::getType()>）をチェックすることによって、現在のブロックタイプのハンドルを確認できます。
+Here’s an example of what the template might look like for a Matrix field with four Block Types (Heading, Text, Image, and Quote). We can determine the current block type’s handle by checking `block.type` (<api:craft\elements\MatrixBlock::getType()>).
 
 ```twig
 {% for block in entry.myMatrixField.all() %}
@@ -89,11 +90,11 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 {% endfor %}
 ```
 
-> このコードは [switch](dev/tags/switch.md) タグを利用して、簡略化できます。
+> This code can be simplified using the [switch](dev/tags/switch.md) tag.
 
-### ブロックタイプのフィルタリング
+### Filtering by block type
 
-特定のタイプのブロックだけを出力したい場合、行列フィールドに「type」フィルタを追加します。
+If you just want to output blocks of a certain type, you can do that by appending a ‘type’ filter to your Matrix field:
 
 ```twig
 {% for block in entry.myMatrixField.type('text').all() %}
@@ -101,7 +102,7 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 {% endfor %}
 ```
 
-あなたが望むなら、複数のブロックタイプを渡すことができます。
+You can pass multiple block types if you want:
 
 ```twig
 {% for block in entry.myMatrixField.type('text, heading').all() %}
@@ -113,30 +114,29 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 {% endfor %}
 ```
 
-### リミットの調整
+### Adjusting the limit
 
-デフォルトでは、行列フィールドは最初の100ブロックを返します。変更するには `limit` パラメータで上書きします。
+By default, your Matrix field will return the first 100 blocks. You can change that by overriding the `limit` parameter.
 
 ```twig
 {% for block in entry.myMatrixField.limit(5) %}
 ```
 
-100以上のブロックがあり、それらすべてのブロックを返したいと考えるなら、パラメータを `null` にセットすることもできます。
+If you think you might have more that 100 blocks, and you want all of them to be returned, you can also set that parameter to `null`:
 
 ```twig
 {% for block in entry.myMatrixField.limit(null) %}
 ```
 
-### ブロックの総数の取得
+### Getting the total number of blocks
 
-[length フィルタ](https://twig.symfony.com/doc/filters/length.html)を利用して、ブロックの総数を取得できます。
+You can get the total number of blocks using the [length filter](https://twig.symfony.com/doc/filters/length.html):
 
 ```twig
 {{ entry.myMatrixField|length }}
 ```
 
-## 関連項目
+## See Also
 
-* [エレメントクエリ](dev/element-queries/README.md)
+* [Element Queries](dev/element-queries/README.md)
 * <api:craft\elements\MatrixBlock>
-
