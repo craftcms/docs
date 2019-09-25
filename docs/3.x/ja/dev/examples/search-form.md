@@ -1,6 +1,6 @@
-# 検索フォーム
+# Search Form
 
-検索フォームを作成するには、はじめに入力項目 `search` を含む通常の HTML を作成します。
+To create a search form, first create a normal HTML form with a `search` input:
 
 ```twig
 <form action="{{ url('search/results') }}">
@@ -9,7 +9,7 @@
 </form>
 ```
 
-次に、フォームの送信先にあたるテンプレート（例：`search/results.twig`）で `GET` / `POST` データから検索クエリを取り出し、それを `search` [エントリクエリパラメータ](../element-queries/entry-queries.md#search)に渡します。
+Then, on whatever template your form submits to (e.g. `search/results.twig`), just pull the search query from the `GET`/`POST` data, and pass it to the `search` [entry query param](../element-queries/entry-queries.md#search):
 
 ```twig
 <h1>Search Results</h1>
@@ -32,4 +32,3 @@
     <p>Your search for “{{ searchQuery }}” didn’t return any results.</p>
 {% endif %}
 ```
-
