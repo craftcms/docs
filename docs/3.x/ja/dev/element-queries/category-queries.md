@@ -1,6 +1,6 @@
-# カテゴリクエリ
+# Category Queries
 
-**カテゴリクエリ**を使用して、テンプレートや PHP コード内でカテゴリを取得できます。
+You can fetch categories in your templates or PHP code using **category queries**.
 
 ::: code
 
@@ -16,20 +16,18 @@ $myCategoryQuery = \craft\elements\Category::find();
 
 :::
 
-カテゴリクエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[Category](api:craft\elements\Category) オブジェクトの配列が返されます。
+Once you’ve created a category query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Category](api:craft\elements\Category) objects will be returned.
 
-::: tip
-エレメントクエリがどのように機能するかについては、[エレメントクエリについて](README.md)を参照してください。
-:::
+::: tip See [Introduction to Element Queries](README.md) to learn about how element queries work. :::
 
-## 実例
+## Example
 
-次の操作を行うことで、「Topics」カテゴリグループに含まれるすべてのカテゴリのナビゲーションを表示できます。
+We can display a navigation for all the categories in a category group called “Topics” by doing the following:
 
-1. `craft.categories()` でカテゴリクエリを作成します。
-2. [group](#group) パラメータをセットします。
-3. `.all()` でカテゴリを取得します。
-4. [nav](../tags/nav.md) タグを使用してカテゴリをループ処理し、ナビゲーションの HTML を作成します。
+1. Create a category query with `craft.categories()`.
+2. Set the [group](#group) parameter on it.
+3. Fetch the categories with `.all()`.
+4. Loop through the categories using a [nav](../tags/nav.md) tag to create the navigation HTML.
 
 ```twig
 {# Create a category query with the 'group' parameter #}
@@ -54,15 +52,15 @@ $myCategoryQuery = \craft\elements\Category::find();
 </ul>
 ```
 
-## パラメータ
+## Parameters
 
-カテゴリクエリは、次のパラメータをサポートしています。
+Category queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
 ### `ancestorDist`
 
-[ancestorOf](#ancestorof) で指定されたカテゴリから特定の距離だけ離れているカテゴリのみに、クエリの結果を絞り込みます。
+Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
 
 ::: code
 
@@ -86,14 +84,15 @@ $categories = \craft\elements\Category::find()
 
 ### `ancestorOf`
 
-指定したカテゴリの先祖であるカテゴリだけに、クエリの結果を絞り込みます。
+Narrows the query results to only categories that are ancestors of another category.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `1` | ID が 1 のカテゴリの上層。
-| [Category](api:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの上層。
+| Value                                              | Fetches categories…                           |
+| -------------------------------------------------- | --------------------------------------------- |
+| `1`                                                | above the category with an ID of 1.           |
+| a [Category](api:craft\elements\Category) object | above the category represented by the object. |
+
 
 ::: code
 
@@ -113,13 +112,11 @@ $categories = \craft\elements\Category::find()
 
 :::
 
-::: tip
-どれだけ離れた先祖カテゴリを対象にするか制限したい場合、[ancestorDist](#ancestordist) と組み合わせることができます。
-:::
+::: tip This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor categories can be. :::
 
 ### `anyStatus`
 
-[status](#status) および [enabledForSite](#enabledforsite) パラメータをクリアします。
+Clears out the [status](#status) and [enabledForSite](#enabledforsite) parameters.
 
 ::: code
 
@@ -141,7 +138,7 @@ $categories = \craft\elements\Category::find()
 
 ### `asArray`
 
-[Category](api:craft\elements\Category) オブジェクトではなく、データの配列として、マッチしたカテゴリをクエリが返します。
+Causes the query to return matching categories as arrays of data, rather than [Category](api:craft\elements\Category) objects.
 
 ::: code
 
@@ -163,15 +160,16 @@ $categories = \craft\elements\Category::find()
 
 ### `dateCreated`
 
-カテゴリの作成日に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the categories’ creation dates.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `'>= 2018-04-01'` | 2018-04-01 以降に作成されたもの。
-| `'< 2018-05-01'` | 2018-05-01 より前に作成されたもの。
-| `['and', '>= 2018-04-04', '< 2018-05-01']` | 2018-04-01 から 2018-05-01 の間に作成されたもの。
+| Value                                            | Fetches categories…                                  |
+| ------------------------------------------------ | ---------------------------------------------------- |
+| `'>= 2018-04-01'`                             | that were created on or after 2018-04-01.            |
+| `'< 2018-05-01'`                              | that were created before 2018-05-01                  |
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were created between 2018-04-01 and 2018-05-01. |
+
 
 ::: code
 
@@ -199,15 +197,16 @@ $categories = \craft\elements\Category::find()
 
 ### `dateUpdated`
 
-カテゴリの最終アップデート日に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the categories’ last-updated dates.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `'>= 2018-04-01'` | 2018-04-01 以降にアップデートされたもの。
-| `'< 2018-05-01'` | 2018-05-01 より前にアップデートされたもの。
-| `['and', '>= 2018-04-04', '< 2018-05-01']` | 2018-04-01 から 2018-05-01 の間にアップデートされたもの。
+| Value                                            | Fetches categories…                                  |
+| ------------------------------------------------ | ---------------------------------------------------- |
+| `'>= 2018-04-01'`                             | that were updated on or after 2018-04-01.            |
+| `'< 2018-05-01'`                              | that were updated before 2018-05-01                  |
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were updated between 2018-04-01 and 2018-05-01. |
+
 
 ::: code
 
@@ -233,7 +232,7 @@ $categories = \craft\elements\Category::find()
 
 ### `descendantDist`
 
-[descendantOf](#descendantof) で指定されたカテゴリから特定の距離だけ離れているカテゴリのみに、クエリの結果を絞り込みます。
+Narrows the query results to only categories that are up to a certain distance away from the category specified by [descendantOf](#descendantof).
 
 ::: code
 
@@ -257,14 +256,15 @@ $categories = \craft\elements\Category::find()
 
 ### `descendantOf`
 
-指定したカテゴリの子孫であるカテゴリだけに、クエリの結果を絞り込みます。
+Narrows the query results to only categories that are descendants of another category.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `1` | ID が 1 のカテゴリの下層。
-| [Category](api:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの下層。
+| Value                                              | Fetches categories…                           |
+| -------------------------------------------------- | --------------------------------------------- |
+| `1`                                                | below the category with an ID of 1.           |
+| a [Category](api:craft\elements\Category) object | below the category represented by the object. |
+
 
 ::: code
 
@@ -284,20 +284,132 @@ $categories = \craft\elements\Category::find()
 
 :::
 
-::: tip
-どれだけ離れた子孫カテゴリを対象にするか制限したい場合、[descendantDist](#descendantdist) と組み合わせることができます。
+::: tip This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant categories can be. :::
+
+### `draftCreator`
+
+Narrows the query results to only drafts created by a given user.
+
+Possible values include:
+
+| Value                                  | Fetches drafts…                        |
+| -------------------------------------- | -------------------------------------- |
+| `1`                                    | created by the user with an ID of 1.   |
+| a `\craft\elements\db\User` object | by the user represented by the object. |
+
+
+::: code
+
+```twig
+{# Fetch drafts by the current user #}
+{% set categories = craft.categories()
+    .draftCreator(currentUser)
+    .all() %}
+```
+
+```php
+// Fetch drafts by the current user
+$categories = \craft\elements\Category::find()
+    ->draftCreator(Craft::$app->user->identity)
+    ->all();
+```
+
+:::
+
+### `draftId`
+
+Narrows the query results based on the categories’ draft’s ID (from the `drafts` table).
+
+Possible values include:
+
+| Value | Fetches drafts…                |
+| ----- | ------------------------------ |
+| `1`   | for the draft with an ID of 1. |
+
+
+::: code
+
+```twig
+{# Fetch a draft #}
+{% set categories = craft.categories()
+    .draftId(10)
+    .all() %}
+```
+
+```php
+// Fetch a draft
+$categories = \craft\elements\Category::find()
+    ->draftIf(10)
+    ->all();
+```
+
+:::
+
+### `draftOf`
+
+Narrows the query results to only drafts of a given category.
+
+Possible values include:
+
+| Value                                              | Fetches drafts…                             |
+| -------------------------------------------------- | ------------------------------------------- |
+| `1`                                                | for the category with an ID of 1.           |
+| a [Category](api:craft\elements\Category) object | for the category represented by the object. |
+
+
+::: code
+
+```twig
+{# Fetch drafts of the category #}
+{% set categories = craft.categories()
+    .draftOf(myCategory)
+    .all() %}
+```
+
+```php
+// Fetch drafts of the category
+$categories = \craft\elements\Category::find()
+    ->draftOf($myCategory)
+    ->all();
+```
+
+:::
+
+### `drafts`
+
+Narrows the query results to only drafts categories.
+
+::: code
+
+```twig
+{# Fetch a draft category #}
+{% set categories = {twig-function}
+    .drafts()
+    .id(123)
+    .one() %}
+```
+
+```php
+// Fetch a draft category
+$categories = \craft\elements\Category::find()
+    ->drafts()
+    ->id(123)
+    ->one();
+```
+
 :::
 
 ### `enabledForSite`
 
-[site](#site) パラメータごとに、照会されているサイトでカテゴリが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on whether the categories are enabled in the site they’re being queried in, per the [site](#site) parameter.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `true` _（デフォルト）_ | サイト内で有効になっているもの。
-| `false` | サイト内で有効かどうかに関係なく。
+| Value              | Fetches categories…                          |
+| ------------------ | -------------------------------------------- |
+| `true` *(default)* | that are enabled in the site.                |
+| `false`            | whether they are enabled or not in the site. |
+
 
 ::: code
 
@@ -319,7 +431,7 @@ $categories = \craft\elements\Category::find()
 
 ### `fixedOrder`
 
-クエリの結果を [id](#id) で指定された順序で返します。
+Causes the query results to be returned in the order specified by [id](#id).
 
 ::: code
 
@@ -343,17 +455,18 @@ $categories = \craft\elements\Category::find()
 
 ### `group`
 
-カテゴリが属するカテゴリグループに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the category groups the categories belong to.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `'foo'` | ハンドルが `foo` のグループ内。
-| `'not foo'` | ハンドルが `foo` のグループ内ではない。
-| `['foo', 'bar']` | ハンドルが `foo` または `bar` のグループ内。
-| `['not', 'foo', 'bar']` | ハンドルが `foo` または `bar` のグループ内ではない。
-| [CategoryGroup](api:craft\models\CategoryGroup) オブジェクト | オブジェクトで表されるグループ内。
+| Value                                                      | Fetches categories…                             |
+| ---------------------------------------------------------- | ----------------------------------------------- |
+| `'foo'`                                                    | in a group with a handle of `foo`.              |
+| `'not foo'`                                                | not in a group with a handle of `foo`.          |
+| `['foo', 'bar']`                                           | in a group with a handle of `foo` or `bar`.     |
+| `['not', 'foo', 'bar']`                                    | not in a group with a handle of `foo` or `bar`. |
+| a [CategoryGroup](api:craft\models\CategoryGroup) object | in a group represented by the object.           |
+
 
 ::: code
 
@@ -375,16 +488,17 @@ $categories = \craft\elements\Category::find()
 
 ### `groupId`
 
-グループの ID ごとに、カテゴリが属するカテゴリグループに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `1` | ID が 1 のグループ内。
-| `'not 1'` | ID が 1 のグループ内ではない。
-| `[1, 2]` | ID が 1 または 2 のグループ内。
-| `['not', 1, 2]` | ID が 1 または 2 のグループ内ではない。
+| Value           | Fetches categories…                  |
+| --------------- | ------------------------------------ |
+| `1`             | in a group with an ID of 1.          |
+| `'not 1'`       | not in a group with an ID of 1.      |
+| `[1, 2]`        | in a group with an ID of 1 or 2.     |
+| `['not', 1, 2]` | not in a group with an ID of 1 or 2. |
+
 
 ::: code
 
@@ -406,9 +520,9 @@ $categories = \craft\elements\Category::find()
 
 ### `hasDescendants`
 
-カテゴリが子孫を持つかどうかに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on whether the categories have any descendants.
 
-（これは [leaves](#leaves) の呼び出しと反対の効果を持っています。）
+(This has the opposite effect of calling [leaves](#leaves).)
 
 ::: code
 
@@ -430,16 +544,17 @@ $categories = \craft\elements\Category::find()
 
 ### `id`
 
-カテゴリの ID に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the categories’ IDs.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `1` | ID が 1。
-| `'not 1'` | ID が 1ではない。
-| `[1, 2]` | ID が 1 または 2。
-| `['not', 1, 2]` | ID が 1 または 2 ではない。
+| Value           | Fetches categories…       |
+| --------------- | ------------------------- |
+| `1`             | with an ID of 1.          |
+| `'not 1'`       | not with an ID of 1.      |
+| `[1, 2]`        | with an ID of 1 or 2.     |
+| `['not', 1, 2]` | not with an ID of 1 or 2. |
+
 
 ::: code
 
@@ -459,13 +574,15 @@ $category = \craft\elements\Category::find()
 
 :::
 
-::: tip
-特定の順序で結果を返したい場合、[fixedOrder](#fixedorder) と組み合わせることができます。
-:::
+::: tip This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order. :::
+
+### `ignorePlaceholders`
+
+Causes the query to return matching categories as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 
 ### `inReverse`
 
-クエリの結果を逆順で返します。
+Causes the query results to be returned in reverse order.
 
 ::: code
 
@@ -487,9 +604,9 @@ $categories = \craft\elements\Category::find()
 
 ### `leaves`
 
-カテゴリが「leaves」（子孫のないカテゴリ）であるかどうかに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on whether the categories are “leaves” (categories with no descendants).
 
-（これは [hasDescendants](#hasdescendants) の呼び出しと反対の効果を持っています。）
+(This has the opposite effect of calling [hasDescendants](#hasdescendants).)
 
 ::: code
 
@@ -511,17 +628,18 @@ $categories = \craft\elements\Category::find()
 
 ### `level`
 
-構造内のカテゴリのレベルに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the categories’ level within the structure.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `1` | レベルが 1。
-| `'not 1'` | レベルが 1 ではない。
-| `'>= 3'` | レベルが 3 以上。
-| `[1, 2]` | レベルが 1 または 2。
-| `['not', 1, 2]` | レベルが 1 または 2 ではない。
+| Value           | Fetches categories…                      |
+| --------------- | ---------------------------------------- |
+| `1`             | with a level of 1.                       |
+| `'not 1'`       | not with a level of 1.                   |
+| `'>= 3'`     | with a level greater than or equal to 3. |
+| `[1, 2]`        | with a level of 1 or 2                   |
+| `['not', 1, 2]` | not with level of 1 or 2.                |
+
 
 ::: code
 
@@ -543,7 +661,7 @@ $categories = \craft\elements\Category::find()
 
 ### `limit`
 
-返されるカテゴリの数を決定します。
+Determines the number of categories that should be returned.
 
 ::: code
 
@@ -565,14 +683,15 @@ $categories = \craft\elements\Category::find()
 
 ### `nextSiblingOf`
 
-指定したカテゴリの直後にあるカテゴリだけに、クエリの結果を絞り込みます。
+Narrows the query results to only the category that comes immediately after another category.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `1` | ID が 1 のカテゴリの後。
-| [Category](api:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの後。
+| Value                                              | Fetches the category…                         |
+| -------------------------------------------------- | --------------------------------------------- |
+| `1`                                                | after the category with an ID of 1.           |
+| a [Category](api:craft\elements\Category) object | after the category represented by the object. |
+
 
 ::: code
 
@@ -594,7 +713,7 @@ $category = \craft\elements\Category::find()
 
 ### `offset`
 
-結果からスキップされるカテゴリの数を決定します。
+Determines how many categories should be skipped in the results.
 
 ::: code
 
@@ -616,7 +735,7 @@ $categories = \craft\elements\Category::find()
 
 ### `orderBy`
 
-返されるカテゴリの順序を決定します。
+Determines the order that the categories should be returned in.
 
 ::: code
 
@@ -638,14 +757,15 @@ $categories = \craft\elements\Category::find()
 
 ### `positionedAfter`
 
-指定したカテゴリの後に位置するカテゴリだけに、クエリの結果を絞り込みます。
+Narrows the query results to only categories that are positioned after another category.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `1` | ID が 1 のカテゴリの後。
-| [Category](api:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの後。
+| Value                                              | Fetches categories…                           |
+| -------------------------------------------------- | --------------------------------------------- |
+| `1`                                                | after the category with an ID of 1.           |
+| a [Category](api:craft\elements\Category) object | after the category represented by the object. |
+
 
 ::: code
 
@@ -667,14 +787,15 @@ $categories = \craft\elements\Category::find()
 
 ### `positionedBefore`
 
-指定したカテゴリの前に位置するカテゴリだけに、クエリの結果を絞り込みます。
+Narrows the query results to only categories that are positioned before another category.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| Value | Fetches categories…
-| - | -
-| `1` | before the category with an ID of 1.
-| [Category](api:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの前。
+| Value                                              | Fetches categories…                            |
+| -------------------------------------------------- | ---------------------------------------------- |
+| `1`                                                | before the category with an ID of 1.           |
+| a [Category](api:craft\elements\Category) object | before the category represented by the object. |
+
 
 ::: code
 
@@ -694,16 +815,47 @@ $categories = \craft\elements\Category::find()
 
 :::
 
+### `preferSites`
+
+If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+
+For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C, and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned for Site B.
+
+If this isn’t set, then preference goes to the current site.
+
+::: code
+
+```twig
+{# Fetch unique categories from Site A, or Site B if they don’t exist in Site A #}
+{% set categories = craft.categories()
+    .site('*')
+    .unique()
+    .preferSites(['a', 'b'])
+    .all() %}
+```
+
+```php
+// Fetch unique categories from Site A, or Site B if they don’t exist in Site A
+$categories = \craft\elements\Category::find()
+    ->site('*')
+    ->unique()
+    ->preferSites(['a', 'b'])
+    ->all();
+```
+
+:::
+
 ### `prevSiblingOf`
 
-指定したカテゴリの直前にあるカテゴリだけに、クエリの結果を絞り込みます。
+Narrows the query results to only the category that comes immediately before another category.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `1` | ID が 1 のカテゴリの前。
-| [Category](api:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの前。
+| Value                                              | Fetches the category…                          |
+| -------------------------------------------------- | ---------------------------------------------- |
+| `1`                                                | before the category with an ID of 1.           |
+| a [Category](api:craft\elements\Category) object | before the category represented by the object. |
+
 
 ::: code
 
@@ -725,9 +877,9 @@ $category = \craft\elements\Category::find()
 
 ### `relatedTo`
 
-特定の他のエレメントと関連付けられたカテゴリだけに、クエリの結果を絞り込みます。
+Narrows the query results to only categories that are related to certain other elements.
 
-このパラメーターがどのように機能するかの詳細については、[リレーション](https://docs.craftcms.com/v3/relations.html)を参照してください。
+See [Relations](https://docs.craftcms.com/v3/relations.html) for a full explanation of how to work with this parameter.
 
 ::: code
 
@@ -747,11 +899,124 @@ $categories = \craft\elements\Category::find()
 
 :::
 
+### `revisionCreator`
+
+Narrows the query results to only revisions created by a given user.
+
+Possible values include:
+
+| Value                                  | Fetches revisions…                     |
+| -------------------------------------- | -------------------------------------- |
+| `1`                                    | created by the user with an ID of 1.   |
+| a `\craft\elements\db\User` object | by the user represented by the object. |
+
+
+::: code
+
+```twig
+{# Fetch revisions by the current user #}
+{% set categories = craft.categories()
+    .revisionCreator(currentUser)
+    .all() %}
+```
+
+```php
+// Fetch revisions by the current user
+$categories = \craft\elements\Category::find()
+    ->revisionCreator(Craft::$app->user->identity)
+    ->all();
+```
+
+:::
+
+### `revisionId`
+
+Narrows the query results based on the categories’ revision’s ID (from the `revisions` table).
+
+Possible values include:
+
+| Value | Fetches revisions…                |
+| ----- | --------------------------------- |
+| `1`   | for the revision with an ID of 1. |
+
+
+::: code
+
+```twig
+{# Fetch a revision #}
+{% set categories = craft.categories()
+    .revisionId(10)
+    .all() %}
+```
+
+```php
+// Fetch a revision
+$categories = \craft\elements\Category::find()
+    ->revisionIf(10)
+    ->all();
+```
+
+:::
+
+### `revisionOf`
+
+Narrows the query results to only revisions of a given category.
+
+Possible values include:
+
+| Value                                              | Fetches revisions…                          |
+| -------------------------------------------------- | ------------------------------------------- |
+| `1`                                                | for the category with an ID of 1.           |
+| a [Category](api:craft\elements\Category) object | for the category represented by the object. |
+
+
+::: code
+
+```twig
+{# Fetch revisions of the category #}
+{% set categories = craft.categories()
+    .revisionOf(myCategory)
+    .all() %}
+```
+
+```php
+// Fetch revisions of the category
+$categories = \craft\elements\Category::find()
+    ->revisionOf($myCategory)
+    ->all();
+```
+
+:::
+
+### `revisions`
+
+Narrows the query results to only revision categories.
+
+::: code
+
+```twig
+{# Fetch a revision category #}
+{% set categories = {twig-function}
+    .revisions()
+    .id(123)
+    .one() %}
+```
+
+```php
+// Fetch a revision category
+$categories = \craft\elements\Category::find()
+    ->revisions()
+    ->id(123)
+    ->one();
+```
+
+:::
+
 ### `search`
 
-検索クエリにマッチするカテゴリだけに、クエリの結果を絞り込みます。
+Narrows the query results to only categories that match a search query.
 
-このパラメーターがどのように機能するかの詳細については、[検索](https://docs.craftcms.com/v3/searching.html)を参照してください。
+See [Searching](https://docs.craftcms.com/v3/searching.html) for a full explanation of how to work with this parameter.
 
 ::: code
 
@@ -779,14 +1044,15 @@ $categories = \craft\elements\Category::find()
 
 ### `siblingOf`
 
-指定したカテゴリの兄弟であるカテゴリだけに、クエリの結果を絞り込みます。
+Narrows the query results to only categories that are siblings of another category.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `1` | ID が 1 のカテゴリの横。
-| [Category](api:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの横。
+| Value                                              | Fetches categories…                            |
+| -------------------------------------------------- | ---------------------------------------------- |
+| `1`                                                | beside the category with an ID of 1.           |
+| a [Category](api:craft\elements\Category) object | beside the category represented by the object. |
+
 
 ::: code
 
@@ -808,16 +1074,22 @@ $categories = \craft\elements\Category::find()
 
 ### `site`
 
-カテゴリを照会するサイトを決定します。
+Determines which site(s) the categories should be queried in.
 
-デフォルトでは、現在のサイトが使用されます。
+The current site will be used by default.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `'foo'` | ハンドルが `foo` のサイトから。
-| `\craft\elements\db\Site` オブジェクト | オブジェクトで表されるサイトから。
+| Value                                  | Fetches categories…                            |
+| -------------------------------------- | ---------------------------------------------- |
+| `'foo'`                                | from the site with a handle of `foo`.          |
+| `['foo', 'bar']`                       | from a site with a handle of `foo` or `bar`.   |
+| `['not', 'foo', 'bar']`                | not in a site with a handle of `foo` or `bar`. |
+| a `\craft\elements\db\Site` object | from the site represented by the object.       |
+| `'*'`                                  | from any site.                                 |
+
+
+::: tip If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you only want unique elements to be returned, use [unique](#unique) in conjunction with this. :::
 
 ::: code
 
@@ -839,9 +1111,9 @@ $categories = \craft\elements\Category::find()
 
 ### `siteId`
 
-サイトの ID ごとに、カテゴリを照会するサイトを決定します。
+Determines which site(s) the categories should be queried in, per the site’s ID.
 
-デフォルトでは、現在のサイトが使用されます。
+The current site will be used by default.
 
 ::: code
 
@@ -863,19 +1135,20 @@ $categories = \craft\elements\Category::find()
 
 ### `slug`
 
-カテゴリのスラグに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the categories’ slugs.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `'foo'` | スラグが `foo`。
-| `'foo*'` | スラグが `foo` ではじまる。
-| `'*foo'` | スラグが `foo` で終わる。
-| `'*foo*'` | スラグが `foo` を含む。
-| `'not *foo*'` | スラグが `foo` を含まない。
-| `['*foo*', '*bar*']` | スラグが `foo` または `bar` を含む。
-| `['not', '*foo*', '*bar*']` | スラグが `foo` または `bar` を含まない。
+| Value                       | Fetches categories…                              |
+| --------------------------- | ------------------------------------------------ |
+| `'foo'`                     | with a slug of `foo`.                            |
+| `'foo*'`                    | with a slug that begins with `foo`.              |
+| `'*foo'`                    | with a slug that ends with `foo`.                |
+| `'*foo*'`                   | with a slug that contains `foo`.                 |
+| `'not *foo*'`               | with a slug that doesn’t contain `foo`.          |
+| `['*foo*', '*bar*']`        | with a slug that contains `foo` or `bar`.        |
+| `['not', '*foo*', '*bar*']` | with a slug that doesn’t contain `foo` or `bar`. |
+
 
 ::: code
 
@@ -903,14 +1176,15 @@ $category = \craft\elements\Category::find()
 
 ### `status`
 
-カテゴリのステータスに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the categories’ statuses.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `'enabled'`  _（デフォルト）_ | 有効になっているもの。
-| `'disabled'` | 無効になっているもの。
+| Value                   | Fetches categories… |
+| ----------------------- | ------------------- |
+| `'enabled'` *(default)* | that are enabled.   |
+| `'disabled'`            | that are disabled.  |
+
 
 ::: code
 
@@ -932,19 +1206,20 @@ $categories = \craft\elements\Category::find()
 
 ### `title`
 
-カテゴリのタイトルに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the categories’ titles.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `'Foo'` | タイトルが `Foo`。
-| `'Foo*'` | タイトルが `Foo` ではじまる。
-| `'*Foo'` | タイトルが `Foo` で終わる。
-| `'*Foo*'` | タイトルが `Foo` を含む。
-| `'not *Foo*'` | タイトルが `Foo` を含まない。
-| `['*Foo*', '*Bar*']` | タイトルが `Foo` または `Bar` を含む。
-| `['not', '*Foo*', '*Bar*']` | タイトルが `Foo` または `Bar` を含まない。
+| Value                       | Fetches categories…                               |
+| --------------------------- | ------------------------------------------------- |
+| `'Foo'`                     | with a title of `Foo`.                            |
+| `'Foo*'`                    | with a title that begins with `Foo`.              |
+| `'*Foo'`                    | with a title that ends with `Foo`.                |
+| `'*Foo*'`                   | with a title that contains `Foo`.                 |
+| `'not *Foo*'`               | with a title that doesn’t contain `Foo`.          |
+| `['*Foo*', '*Bar*']`        | with a title that contains `Foo` or `Bar`.        |
+| `['not', '*Foo*', '*Bar*']` | with a title that doesn’t contain `Foo` or `Bar`. |
+
 
 ::: code
 
@@ -966,13 +1241,13 @@ $categories = \craft\elements\Category::find()
 
 ### `trashed`
 
-ソフトデリートされたカテゴリだけに、クエリの結果を絞り込みます。
+Narrows the query results to only categories that have been soft-deleted.
 
 ::: code
 
 ```twig
 {# Fetch trashed categories #}
-{% set categories = {twig-function}
+{% set categories = craft.categories()
     .trashed()
     .all() %}
 ```
@@ -988,7 +1263,7 @@ $categories = \craft\elements\Category::find()
 
 ### `uid`
 
-カテゴリの UID に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the categories’ UIDs.
 
 ::: code
 
@@ -1008,21 +1283,48 @@ $category = \craft\elements\Category::find()
 
 :::
 
+### `unique`
+
+Determines whether only elements with unique IDs should be returned by the query.
+
+This should be used when querying elements from multiple sites at the same time, if “duplicate” results is not desired.
+
+::: code
+
+```twig
+{# Fetch unique categories across all sites #}
+{% set categories = craft.categories()
+    .site('*')
+    .unique()
+    .all() %}
+```
+
+```php
+// Fetch unique categories across all sites
+$categories = \craft\elements\Category::find()
+    ->site('*')
+    ->unique()
+    ->all();
+```
+
+:::
+
 ### `uri`
 
-カテゴリの URI に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the categories’ URIs.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得するカテゴリ
-| - | -
-| `'foo'` | URI が `foo`。
-| `'foo*'` | URI が `foo` ではじまる。
-| `'*foo'` | URI が `foo` で終わる。
-| `'*foo*'` | URI が `foo` を含む。
-| `'not *foo*'` | URI が `foo` を含まない。
-| `['*foo*', '*bar*']` | URI が `foo` または `bar` を含む。
-| `['not', '*foo*', '*bar*']` | URI が `foo` または `bar` を含まない。
+| Value                       | Fetches categories…                             |
+| --------------------------- | ----------------------------------------------- |
+| `'foo'`                     | with a URI of `foo`.                            |
+| `'foo*'`                    | with a URI that begins with `foo`.              |
+| `'*foo'`                    | with a URI that ends with `foo`.                |
+| `'*foo*'`                   | with a URI that contains `foo`.                 |
+| `'not *foo*'`               | with a URI that doesn’t contain `foo`.          |
+| `['*foo*', '*bar*']`        | with a URI that contains `foo` or `bar`.        |
+| `['not', '*foo*', '*bar*']` | with a URI that doesn’t contain `foo` or `bar`. |
+
 
 ::: code
 
@@ -1050,9 +1352,9 @@ $category = \craft\elements\Category::find()
 
 ### `with`
 
-関連付けられたエレメントを eager-loaded した状態で、マッチしたカテゴリをクエリが返します。
+Causes the query to return matching categories eager-loaded with related elements.
 
-このパラメーターがどのように機能するかの詳細については、[エレメントのEager-Loading](https://docs.craftcms.com/v3/dev/eager-loading-elements.html)を参照してください。
+See [Eager-Loading Elements](https://docs.craftcms.com/v3/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 ::: code
 
@@ -1073,4 +1375,3 @@ $categories = \craft\elements\Category::find()
 :::
 
 <!-- END PARAMS -->
-
