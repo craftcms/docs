@@ -1,8 +1,8 @@
-# ユーザー登録フォーム
+# User Registration Form
 
-Craft Pro を使用し、サイトで誰でもユーザーアカウントを登録できるようにしたい場合は、はじめに「設定 > ユーザー > 設定」に移動し、「一般登録を許可しますか？」設定にチェックが入っていることを確認します。
+If you have Craft Pro and want people to be able to register user accounts on your site, first go to Settings → Users → Settings and make sure that the “Allow Public Registration?” setting is checked.
 
-そして、次のようなフロントエンドの登録フォームを作成します。
+Then you can create a registration form on the front end, like this:
 
 ```twig
 <form method="post" accept-charset="UTF-8">
@@ -48,4 +48,3 @@ Craft Pro を使用し、サイトで誰でもユーザーアカウントを登�
     <input type="submit" value="Register">
 </form>
 ```
-
