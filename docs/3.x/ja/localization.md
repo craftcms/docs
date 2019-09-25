@@ -1,35 +1,34 @@
-# ガイド：ローカライズされたサイトの設定
+# Guide: Setting Up a Localized Site
 
-これは、Craft のマルチサイト機能と翻訳サポートを利用して、一般的に必要となるすべてのステップを段階的に説明するガイドです。
+This guide will walk you through all of the steps that are typically involved in setting up a localized site using Craft’s multi-site feature and translation support.
 
-## ステップ 1：サイトと言語の定義
+## Step 1: Defining Your Sites and Languages
 
-ローカライズされたサイトを作成する最初のステップは、サポートが必要な言語を決定することです。その後、[Craft のマルチサイトをセットアップする際のガイド](sites.md)を使用して、サポートされる言語ごとの新しいサイトを Craft で作成します。 
+The first step to creating localized site is to decide the languages you need to support. After that, create a new Site in Craft for each supported language using the [guide on configuring a multi-site setup in Craft](sites.md).
 
-## ステップ 2：セクションのアップデート
+## Step 2: Update Your Sections
 
-言語向けに新しいサイトを作成したら、それぞれのセクションで新しいサイトを有効にします。「設定 > セクション」で、ローカライズしたいサイトを含むセクションの設定に移動し、サイト設定でサイトを有効にします。そのサイトをどのような URL 構造にしたいかを反映するため、（チャンネルとストラクチャーセクション向けに）エントリー URI 形式、または（シングルセクション向けに）URI を記入します。
+After creating a new site for a language, enable the new site in each Section. In Settings → Sections, go into each section settings you want included in the localized site and enable the site in the Site Settings. Fill out the Entry URI Format (for Channel and Structure sections) or URI (for Single sections) to reflect how you want the URIs structured for that site.
 
-## ステップ 3：翻訳可能なフィールドの定義
+## Step 3: Define Your Translatable Fields
 
-「設定 > フィールド」で、翻訳可能にするフィールドを選択します。翻訳方法で「各言語に対して翻訳する」を選択します。
+In Settings → Fields, choose the fields you want to have translatable. Under Translation Method, choose "Translate for each language."
 
-Craft は、それぞれのエントリにあるこのフィールドのコンテンツを言語単位で更新することを許可します。
+Craft will allow you to update this field's content in each entry on a per-language basis.
 
-## ステップ 4：テンプレートのアップデート
+## Step 4: Update Your Templates
 
-特定のサイトからだけ配信したいテンプレートがある場合、テンプレートフォルダに新しいサブフォルダを作成し、サイトのハンドルをフォルダ名にして、その中に手テンプレートを配置します。
+If you have any templates that you only want to serve from a specific site, you can create a new sub-folder in your templates folder, named after your site's handle, and place the templates in there.
 
-例えば、ドイツ語のサイトのホームページを独自のテンプレートにする場合、テンプレートフォルダを次のように設定します。
+For example, if you wanted to give your German site its own homepage template, you might set your templates folder up like this:
 
-```
-templates/
-├── index.twig      --> default homepage template
-└── de/
-    └── index.twig  --> German homepage template
-```
+    templates/
+    ├── index.twig      --> default homepage template
+    └── de/
+        └── index.twig  --> German homepage template
+    
 
-`craft.app.language` を利用して、言語に依存するテンプレートの特定パーツを切り替えます。
+Use `craft.app.language` to toggle specific parts of your templates, depending on the language:
 
 ```twig
 {% if craft.app.language == 'de' %}
@@ -37,15 +36,14 @@ templates/
 {% endif %}
 ```
 
-テンプレート全体の文字列に Craft の[静的翻訳](static-translations.html)サポートを利用することもできます。
+You can also take advantage of Craft’s [static translation](https://docs.craftcms.com/v3/static-translations.html) support for strings throughout your templates.
 
 ```twig
 {{ "Welcome!"|t }}
 ```
 
-## ステップ 5：投稿者にサイトへのアクセス権を付与
+## Step 5: Give your authors access to the sites
 
-インストールされた Craft にサイトを追加すると、Craft はユーザーがコンテンツの編集を試みるたびに、サイトのパーミッションをチェックしはじめます。デフォルトでは、ユーザーやグループはどのサイトにもアクセスできないため、それらを割り当てる必要があります。
+As soon as you add an additional site to your Craft installation, Craft will start checking for site permissions whenever users try to edit content. By default, no users or groups have access to any site, so you need to assign them.
 
-ユーザーグループやユーザーアカウントを編集するとき、すべてのサイトのリストに新しいサイトの「権利」セクションが表示されます。権限を与えたいものを割り当ててください。
-
+When you edit a user group or a user account, you will find a new Sites permissions section, which lists all of your sites. Assign them where appropriate.
