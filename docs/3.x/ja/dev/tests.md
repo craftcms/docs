@@ -1,10 +1,10 @@
-# テスト
+# Tests
 
-[Twig に付随する](https://twig.symfony.com/doc/tests/index.html)テンプレートタグに加えて、Craft がいくつか独自のものを提供します。
+In addition to the template tags that [Twig comes with](https://twig.symfony.com/doc/tests/index.html), Craft provides a few of its own.
 
 ## `instance of`
 
-オブジェクトが別のオブジェクトまたはクラスのインスタンスかどうかを返します。
+Returns whether an object is an instance of another object or class.
 
 ```twig
 {% if element is instance of('craft\\elements\\Entry') %}
@@ -14,11 +14,10 @@
 
 ## `missing`
 
-指定されたオブジェクトが <api:craft\base\MissingComponentInterface> のインスタンスかどうかを返します。型が見つからないコンポーネントを表すために使用されるインターフェースです。
+Returns whether a given object is an instance of <api:craft\base\MissingComponentInterface>, an interface used to represent components whose types are missing.
 
 ```twig
 {% if field is missing %}
     <p>😱</p>
 {% endif %}
 ```
-
