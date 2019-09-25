@@ -1,14 +1,12 @@
-# ソフトデリート
+# Soft Deletes
 
-このガイドに従うことで、モジュールとプラグインはコンポーネントにソフトデリートのサポートを追加できます。
+Modules and plugins can add soft delete support to their components by following this guide.
 
-::: tip
-すべてのエレメントタイプは、ソフトデリートをそのままサポートできます。復元できるようにするための情報は、[エレメントタイプ](element-types.md#restore-action)を参照してください。
-:::
+::: tip All element types support soft deletes out of the box. See [Element Types](element-types.md#restore-action) for information on how to make them restorable. :::
 
-## データベーステーブルの準備
+## Prepare the Database Table
 
-ソフトデリート可能なコンポーネントは、データベーステーブルに `dateDeleted` カラムを持たなければなりません。`dateDeleted` 値を持つ行は、ソフトデリートされたとみなされます。
+Components that are soft-deletable must have a `dateDeleted` column in their database table. Rows that have a `dateDeleted` value will be considered soft-deleted.
 
 ```php
 // New table migration
@@ -22,7 +20,7 @@ $this->addColumn('{{%tablename}}', 'dateDeleted',
     $this->dateTime()->null()->after('dateUpdated'));
 ```
 
-ソフトデリート可能なコンポーネントデータを含むテーブルは、（主キー以外に）固有の制約を適用するべきではありません。もしそうしているなら、それらを削除する必要があります。
+Tables containing soft-deletable component data should not enforce any unique constraints (besides a primary key). If yours does, you’ll need to remove them.
 
 ```php
 use craft\helpers\MigrationHelper;
@@ -32,13 +30,13 @@ MigrationHelper::dropIndexIfExists('{{%tablename}}', ['handle'], true, $this);
 $this->createIndex(null, '{{%tablename}}', ['handle'], false);
 ```
 
-## 時間が経過したら、行を完全に削除
+## Hard-Delete Rows When Their Time Is Up
 
-ソフトデリートされたテーブル行は、コンフィグ設定 <config:softDeleteDuration> にセットされた期間だけ保持され、その後完全に削除されるべきです。
+Table rows that have been soft-deleted should only stick around as long as the <config:softDeleteDuration> config setting wants them to, and then be hard-deleted.
 
-すべてのリクエストごとに古い行をチェックするのではなく、Craft の[ガベージコレクション](../gc.md)ルーチンの一部にできます。
+Rather than check for stale rows on every request, we can make this a part of Craft’s [garbage collection](../gc.md) routines.
 
-<api:craft\services\Gc> は、実行されるたびに `run` イベントを発火します。あなたのモジュール / プラグインの `init()` メソッドから、それを利用できます。
+<api:craft\services\Gc> will fire a `run` event each time that it is running. You can tap into that from your module/plugin’s `init()` method.
 
 ```php
 use craft\services\Gc;
@@ -47,22 +45,20 @@ use yii\base\Event;
 public function init()
 {
     paren::init();
-    
+
     Event::on(Gc::class, Gc::EVENT_RUN, function() {
         Craft::$app->gc->hardDelete('{{%tablename}}');
     }
 }
 ```
 
-[hardDelete()](api:craft\services\Gc::hardDelete()) メソッドは、`dateDeleted` 値にコンフィグ設定 <config:softDeleteDuration> よりも古いタイムスタンプがセットされたすべての行を削除します。
+[hardDelete()](api:craft\services\Gc::hardDelete()) method will delete any rows with a `dateDeleted` value set to a timestamp that’s older than the <config:softDeleteDuration> config setting.
 
-::: tip
-複数のテーブルで古い行をチェックする必要がある場合、代わりに [hardDelete()](api:craft\services\Gc::hardDelete()) へテーブル名の配列を渡すことができます。
-:::
+::: tip If you need to check multiple tables for stale rows, you can pass an array of table names into [hardDelete()](api:craft\services\Gc::hardDelete()) instead. :::
 
-## Active Record クラスのアップデート
+## Update the Active Record Class
 
-コンポーネントが対応する [Active Record](https://www.yiiframework.com/doc/guide/2.0/en/db-active-record) クラスを持つ場合、<api:craft\db\SoftDeleteTrait> をインポートすることによってソフトデリートサポートを追加できます。
+If the component has a corresponding [Active Record](https://www.yiiframework.com/doc/guide/2.0/en/db-active-record) class, you can add soft delete support to it by importing <api:craft\db\SoftDeleteTrait>:
 
 ```php
 use craft\db\ActiveRecord;
@@ -71,22 +67,22 @@ use craft\db\SoftDeleteTrait;
 class MyRecord extends ActiveRecord
 {
     use SoftDeleteTrait;
-    
+
     // ...
 }
 ```
 
-トレイトは、次の特徴をクラスに付与するでしょう。
+That trait will give your class the following features:
 
-- [find()](api:craft\db\SoftDeleteTrait::find()) はソフトデリートされていない（`dateDeleted` カラムが `null` である）行のみを返します。
-- static な [findWithTrashed()](api:craft\db\SoftDeleteTrait::findWithTrashed()) メソッドは、ソフトデリートされたかどうかに関わらず行を見つけるために追加されます。
-- static な [findTrashed()](api:craft\db\SoftDeleteTrait::findTrashed()) メソッドは、ソフトデリートされた（`dateDeleted` カラムが `null` ではない）行を見つけるために追加されます。
-- `softDelete()` メソッドは、[delete()](api:yii\db\ActiveRecord::delete()) の代わりに呼び出すために追加され、行を削除するのではなく行の `dateDeleted` カラムを現在のタイムスタンプで更新します。
-- `restore()` メソッドは、`dateDeleted` 値を削除することによってソフトデリート行を復元するために追加されます。
+- [find()](api:craft\db\SoftDeleteTrait::find()) will only return rows that haven’t been soft-deleted (where the `dateDeleted` column is still `null`).
+- A [findWithTrashed()](api:craft\db\SoftDeleteTrait::findWithTrashed()) static method will be added for finding rows regardless of whether they’ve been soft-deleted.
+- A [findTrashed()](api:craft\db\SoftDeleteTrait::findTrashed()) static method will be added for finding rows that have been soft-deleted (where the `dateDeleted` column is not `null`).
+- A `softDelete()` method will be added that should be called instead of [delete()](api:yii\db\ActiveRecord::delete()), which will update the row’s `dateDeleted` column to a current timestamp, rather than deleting the row.
+- A `restore()` method will be added for restoring a soft-deleted row by removing its `dateDeleted` value.
 
-内部的には、トレイトは[ビヘイビア](https://www.yiiframework.com/doc/guide/2.0/en/concept-behaviors)として実装されている Yii 2 の [ActiveRecord Soft Delete Extension](https://github.com/yii2tech/ar-softdelete) を使用します。
+Internally, the trait uses the [ActiveRecord Soft Delete Extension](https://github.com/yii2tech/ar-softdelete) for Yii 2, which is implemented as a [behavior](https://www.yiiframework.com/doc/guide/2.0/en/concept-behaviors).
 
-クラスがすでに独自のビヘイビアを定義している場合、インポート時にトレイトの [behaviors()](api:craft\db\SoftDeleteTrait::behaviors()) メソッドをリネームし、あなたの `behaviors()` メソッドから手動で呼び出す必要があります。
+If your class already defines its own behaviors, you will need to rename the trait’s [behaviors()](api:craft\db\SoftDeleteTrait::behaviors()) method on import, and manually call it from your `behaviors()` method:
 
 ```php
 use craft\db\ActiveRecord;
@@ -109,7 +105,7 @@ class MyRecord extends ActiveRecord
 }
 ```
 
-クラスが <api:yii\db\ActiveRecord::find()> を上書きしている場合、結果のクエリに `dateDeleted` 条件を追加する必要があります。
+If your class is overriding <api:yii\db\ActiveRecord::find()>, you will need to add a `dateDeleted` condition to the resulting query yourself:
 
 ```php{5}
 public static function find()
@@ -121,53 +117,52 @@ public static function find()
 }
 ```
 
-## その他のコードの更新
+## Update the Rest of Your Code
 
-コンポーネントのテーブルを含む、データベースクエリのコードを確認してください。それらも更新する必要があるでしょう。
+Check your code for any database queries that involve your component’s table. They will need to be updated as well.
 
-- テーブルからデータを選択するときは、`dateDeleted` 値がある行を無視していることを確認してください。
+- When selecting data from your table, make sure that you’re ignoring rows with a `dateDeleted` value.
+    
+    ```php{4}
+    $results = (new \craft\db\Query())
+      ->select(['...'])
+      ->from(['{{%tableName}}'])
+      ->where(['dateDeleted' => null])
+      ->all();
+    ```
 
-   ```php{4}
-   $results = (new \craft\db\Query())
-    ->select(['...'])
-    ->from(['{{%tableName}}'])
-    ->where(['dateDeleted' => null])
-    ->all();
-   ```
+- When deleting rows from your table using your Active Record class, call its new `softDelete()` method rather than [delete()](api:yii\db\ActiveRecord::delete()).
+    
+    ```php
+    $record->softDelete();
+    ```
 
-- Active Record クラスを使用してテーブルから行を削除する場合、[delete()](api:yii\db\ActiveRecord::delete()) ではなく、新しい `softDelete()` メソッドを呼び出してください。
+- When deleting rows from your table using a query command, call <api:craft\db\Command::softDelete()> rather than [delete()](api:yii\db\Command::delete()).
+    
+    ```php
+    \Craft::$app->db->createCommand()
+      ->softDelete('{{%tablename}}', ['id' => $id])
+      ->execute(); 
+    ```
 
-   ```php
-   $record->softDelete();
-   ```
+## Restoring Soft-Deleted Rows
 
-- クエリコマンドを使用してテーブルから行を削除する場合、[delete()](api:yii\db\Command::delete()) ではなく、<api:craft\db\Command::softDelete()> を呼び出してください。
+There are two ways to restore soft-deleted rows that haven’t been hard-deleted by garbage collection yet:
 
-   ```php
-   \Craft::$app->db->createCommand()
-    ->softDelete('{{%tablename}}', ['id' => $id])
-    ->execute();
-   ```
+- With your Active Record class, by calling its `restore()` method.
+    
+    ```php
+    $record = MyRecord::findTrashed()
+        ->where(['id' => $id])
+        ->one();
+    
+    $record->restore();
+    ```
 
-## ソフトデリートされた行の復元
-
-ガベージコレクションによってまだ完全に削除されていない、ソフトデリートされた行を復元するには2つの方法があります。
-
-- Active Record クラスで `restore()` メソッドを呼び出す。
-
-   ```php
-   $record = MyRecord::findTrashed()
-    ->where(['id' => $id])
-    ->one();
-
-   $record->restore();
-   ```
-
-- クエリコマンドで <api:craft\db\Command::restore()> を呼び出す。
-
-   ```php
-   \Craft::$app->db->createCommand()
-    ->restore('{{%tablename}}', ['id' => $id])
-    ->execute();
-   ```
-
+- With a query command, by calling <api:craft\db\Command::restore()>.
+    
+    ```php
+    \Craft::$app->db->createCommand()
+      ->restore('{{%tablename}}', ['id' => $id])
+      ->execute();
+    ```
