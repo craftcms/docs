@@ -290,7 +290,7 @@ Some template functions have been deprecated in Craft 3, and will be completely 
 | `craft.request.isPut()`                                 | `craft.app.request.isPut`
 | `craft.request.isAjax()`                                | `craft.app.request.isAjax`
 | `craft.request.isSecure()`                              | `craft.app.request.isSecureConnection`
-| `craft.request.isLivePreview()`                         | `craft.app.request.isLivePreview`
+| `craft.request.isLivePreview()`                         | `craft.app.request.isLivePreview`<sup>1</sup>
 | `craft.request.getScriptName()`                         | `craft.app.request.scriptFilename`
 | `craft.request.getPath()`                               | `craft.app.request.pathInfo`
 | `craft.request.getUrl()`                                | `url(craft.app.request.pathInfo)`
@@ -341,6 +341,8 @@ Some template functions have been deprecated in Craft 3, and will be completely 
 | `craft.session.getFlashes()`                            | `craft.app.session.getAllFlashes()`
 | `craft.session.getFlash()`                              | `craft.app.session.getFlash()`
 | `craft.session.hasFlash()`                              | `craft.app.session.hasFlash()`
+
+*<sup>1</sup> `craft.app.request.isLivePreview` is also deprecated, and only will return `true` when previewing categories or plugin-supplied element types that don’t support the new previewing system. If you were calling this to work around Craft templating bugs in Live Preview requests, you can simply delete the condition now, and treat Live Preview requests the same as any other request type.*
 
 ## Date Formatting
 
