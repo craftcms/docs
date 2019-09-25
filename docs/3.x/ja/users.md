@@ -1,70 +1,71 @@
-# ユーザー
+# Users
 
-Craft はシステムのすべてのメンバーアカウントを「ユーザー」と呼びます。
+Craft calls all member accounts of the system “users”.
 
-最初のユーザーアカウントは、[インストール](installation.md)中に作成されます。Solo エディションを使い続けるなら、あなたが作成可能な唯一のアカウントとなります。さらに必要であれば、追加のユーザーアカウントを提供する Pro エディションにアップグレードできます。
+The first user account is created during [installation](installation.md). If you stick with the Solo edition, this is the only account you will be able to create. If you need more you can upgrade to the Pro edition, which offers additional user accounts.
 
-## 管理者アカウント
+## Admin Accounts
 
-管理者アカウントは、明示的な権限がない次のことを含め、 Craft 内のすべての操作を確実に行うことができる特別なアカウントです。
+Admin accounts are special accounts that can do absolutely everything within Craft, including some things that there aren’t even explicit permissions for:
 
-* 設定セクションに含まれるすべてのこと
-* 他のユーザーを管理者にする（Craft Pro のみ）
-* 他の管理者を管理する（Craft Pro のみ）
+* Everything within the Settings section
+* Make other users Admins (Craft Pro only)
+* Administrate other Admins (Craft Pro only)
 
-インストール中に作成したユーザーアカウントが、デフォルトで管理者になります。
+The user account you create during installation is an admin by default.
 
-> 管理者が行うことができるダメージの量を考えると、新しい管理者アカウントの作成は慎重に行うことを強くお勧めします。彼（彼女）らが自分が実行することの意味を理解できていると確信できる場合のみに留めてください。
+> Considering the amount of damage an admin can do, it’s strongly recommended that you be conservative with creating new admin accounts. Only do it if you trust that they know what they’re doing.
 
-## ユーザーグループ
+## User Groups
 
-Craft Pro を使っている場合、サイトのユーザーアカウントを整理したり、権限を一括設定するためにユーザーグループを作成することができます。
+If you have Craft Pro, you can create User Groups to help organize your site’s user accounts, as well as batch-set permissions on them.
 
-新しいユーザーグループを作るには、「設定 > ユーザー」に移動し、「新しいユーザーグループ」ボタンをクリックします。グループには、名前とハンドルに加え、グループに含まれるすべてのユーザーに与える権限をセットすることができます。
+To create a new User Group, go to Settings → Users and click the “New Group” button. You can give your group a Name and Handle, plus any permissions you want every user within the group to have.
 
-グループの作成後は、アカウント設定の「権利」タブをクリックして、ユーザーをグループに割り当てることができます。
+After you create your groups, you can assign users to groups by going into their account settings and clicking on the Permissions tab.
 
-## 権限
+## Permissions
 
-Craft Pro では、コントロールパネルにアクセスしたり、特定セクションのコンテンツを編集するといった権限をユーザーやグループに許可できます。これらの権限はユーザーアカウントと同様にユーザーグループにも直接適用できます。ユーザーグループに権限を適用すると、そのグループに所属するすべてのユーザーがそれを継承します。
+Craft Pro allows you to set permissions on users and groups, such as the ability to access the Control Panel, edit content within certain sections, etc. You can apply these permissions directly to user accounts as well as to user groups. When you apply permissions to a user group, all users that belong to that group will inherit them.
 
-Craft の権限は次の通りです。
+The permissions Craft comes with are:
 
-| 権限 | ハンドル |
-| ---------- | ------ |
-| システムがオフの場合にサイトにアクセスする | `accessSiteWhenSystemIsOff` |
-| 管理画面にアクセスする | `accessCp` |
-| ↳&nbsp; システムがオフの場合に管理画面にアクセスする | `accessCpWhenSystemIsOff` |
-| ↳&nbsp; Craft CMS 起動とプラグインのアップデート | `performUpdates` |
-| ↳&nbsp; _「プラグイン名」_ のアクセス | `accessPlugin-[PluginHandle]` |
-| ユーザーを編集する | `editUsers` |
-| ↳&nbsp; ユーザーを登録する | `registerUsers` |
-| ↳&nbsp; ユーザー権限を割り当てる | `assignUserPermissions` |
-| ↳&nbsp; ユーザーを管理 | `administrateUsers` |
-| ユーザーを削除する | `deleteUsers` |
-| _「サイト名」_ を編集する | `editSite:[SiteID]` |
-| エントリを編集する | `editEntries:[SectionID]` |
-| ↳&nbsp; エントリを作る | `createEntries:[SectionID]` |
-| ↳&nbsp; ライブの変更を発表する | `publishEntries:[SectionID]` |
-| ↳&nbsp; エントリを削除する | `deleteEntries:[SectionID]` |
-| ↳&nbsp; 他の投稿者のエントリを編集する | `editPeerEntries:[SectionID]` |
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の作成者の入力のためライブを変更する | `publishPeerEntries:[SectionID]` |
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の投稿者のエントリを削除する | `deletePeerEntries:[SectionID]` |
-| ↳&nbsp; 他の投稿者の下書きを編集する | `editPeerEntryDrafts:[SectionID]` |
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の投稿者の下書きを投稿する | `publishPeerEntryDrafts:[SectionID]` |
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の投稿者の下書きを削除する | `deletePeerEntryDrafts:[SectionID]` |
-| _「グローバル設定名」_ を編集する | `editGlobalSet:[GlobalSetID]` |
-| _「カテゴリグループ名」_ を編集する | `editCategories:[CategoryGroupID]` |
-| _「アセットソース名」_ を表示する | `viewVolume:[VolumeID]` |
-| ↳&nbsp; アップロード | `saveAssetInVolume:[VolumeID]` |
-| ↳&nbsp; サブフォルダを作成する | `createFoldersInVolume:[VolumeID]` |
-| ↳&nbsp; ファイルとフォルダーを削除 | `deleteFilesAndFoldersInVolume:[VolumeID]` |
+| Permission                                                | Handle                                     |
+| --------------------------------------------------------- | ------------------------------------------ |
+| Access the site when the system is off                    | `accessSiteWhenSystemIsOff`                |
+| Access the CP                                             | `accessCp`                                 |
+| ↳&nbsp; Access the CP when the system is off              | `accessCpWhenSystemIsOff`                  |
+| ↳&nbsp; Perform Craft and plugin updates                  | `performUpdates`                           |
+| ↳&nbsp; Access *[Plugin Name]*                            | `accessPlugin-[PluginHandle]`              |
+| Edit users                                                | `editUsers`                                |
+| ↳&nbsp; Register users                                    | `registerUsers`                            |
+| ↳&nbsp; Assign permissions                                | `assignUserPermissions`                    |
+| ↳&nbsp; Administrate users                                | `administrateUsers`                        |
+| Delete users                                              | `deleteUsers`                              |
+| Edit *[Site Name]*                                        | `editSite:[SiteID]`                        |
+| Impersonate users                                         | `impersonateUsers`                         |
+| Edit entries                                              | `editEntries:[SectionID]`                  |
+| ↳&nbsp; Create entries                                    | `createEntries:[SectionID]`                |
+| ↳&nbsp; Publish entries                                   | `publishEntries:[SectionID]`               |
+| ↳&nbsp; Delete entries                                    | `deleteEntries:[SectionID]`                |
+| ↳&nbsp; Edit other authors’ entries                       | `editPeerEntries:[SectionID]`              |
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Publish other authors’ entries | `publishPeerEntries:[SectionID]`           |
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other authors’ entries  | `deletePeerEntries:[SectionID]`            |
+| ↳&nbsp; Edit other authors’ drafts                        | `editPeerEntryDrafts:[SectionID]`          |
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Publish other authors’ drafts  | `publishPeerEntryDrafts:[SectionID]`       |
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other authors’ drafts   | `deletePeerEntryDrafts:[SectionID]`        |
+| Edit *[Global Set Name]*                                  | `editGlobalSet:[GlobalSetID]`              |
+| Edit *[Category Group Name]*                              | `editCategories:[CategoryGroupID]`         |
+| View *[Asset Volume Name]*                                | `viewVolume:[VolumeID]`                    |
+| ↳&nbsp; Upload files                                      | `saveAssetInVolume:[VolumeID]`             |
+| ↳&nbsp; Create subfolders                                 | `createFoldersInVolume:[VolumeID]`         |
+| ↳&nbsp; Remove files                                      | `deleteFilesAndFoldersInVolume:[VolumeID]` |
 
-## 一般登録
 
-Craft Pro には、一般ユーザーの登録を許可するオプションがあり、デフォルトで無効化されています。
+## Public Registration
 
-一般登録を有効にするには、「設定 > ユーザー > 設定」に移動し、「一般登録を許可しますか？」をチェックします。チェックすると、Craft が一般登録したユーザーを割り当てるデフォルトのユーザーグループを選択できるようになります。
+Craft Pro has the option of allowing public user registration, which is disabled by default.
 
-サイトに一般ユーザーの登録を許可する設定を行ったら、最後のステップとしてフロントエンドに[ユーザー登録フォーム](dev/examples/user-registration-form.md)を作成します。
+To enable public registration, go to Settings → Users → Settings, and check the “Allow public registration?” setting. With that checked, you will also have the ability to choose a default user group to which Craft will assign the publicly-registered users.
 
+Once you set up your site to allow public user registration, the last step is to create a [user registration form](dev/examples/user-registration-form.md) on your site’s front end.
