@@ -1,12 +1,12 @@
-# ガベージコレクション
+# Garbage Collection
 
-Craft は古いデータを削除するためにいくつかのガベージコレクションルーチンを実行することがあります。
+Craft occasionally runs a few garbage collection routines to remove stale data, including:
 
-- （コンフィグ設定の <config:purgePendingUsersDuration> ごとに）期限切れの保留中のユーザーアカウントを削除します。
-- （コンフィグ設定の <config:softDeleteDuration> ごとに）期限切れのソフトデリート行を完全に削除します。
-- 古いユーザーセッションデータを削除します。
+- Purge any expired pending user accounts (per the <config:purgePendingUsersDuration> config setting).
+- Hard delete expired soft-deleted rows (per the <config:softDeleteDuration> config setting). 
+- Delete stale user session data.
 
-デフォルトでは、すべてのウェブリクエストがガベージコレクションを発動する 100,000 分の 1 のチャンスを持っています。それは <api:craft\services\Gc::$probability> を上書きすることによって `config/app.php` から設定できます。
+By default, each web request has a 1 in 100,000 chance of triggering garbage collection. That can be configured from `config/app.php` by overriding <api:craft\services\Gc::$probability>.
 
 ```php
 return [
@@ -23,21 +23,20 @@ return [
 ];
 ```
 
-## 強制的なガベージコレクション
+## Forcing Garbage Collection
 
-ターミナルコマンドを使用して、任意のタイミングでガベージコレクションを強制的に実行できます。
+You can force garbage collection to run at any time with a terminal command.
 
-ターミナル上で Craft プロジェクトに移動し、次のコマンドを実行してください。
+In your terminal, go to your Craft project and then run:
 
 ```bash
 ./craft gc
 ```
 
-シェルが対話型である場合、Craft がすべての破棄済み項目を削除すべきかどうか尋ねられます。プロンプトで `yes` を入力した場合、まだ [softDeleteDuration](config:softDeleteDuration) に満たないものでも、ソフトデリートされたすべてのデータベース行が即座に完全に削除されます。
+If the shell is interactive, you will be asked whether Craft should delete all trashed items. If you enter `yes` at that prompt, all of your database rows that have been soft-deleted will get hard-deleted immediately, even if they hadn’t waited the full [soft delete duration](config:softDeleteDuration) yet.
 
-`delete-all-trashed` オプションを使用して、すべてのソフトデリート行を強制削除することもできます。
+You can also force hard-deletion for all soft-deleted rows with the `delete-all-trashed` option:
 
 ```bash
 ./craft gc --delete-all-trashed=1
 ```
-
