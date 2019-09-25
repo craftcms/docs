@@ -1,18 +1,18 @@
-# エレメントアクションタイプ
+# Element Action Types
 
-プラグインは、<api:craft\base\ElementActionInterface> を実装するクラスを作成することによって、エレメントインデックスページ向けのカスタムアクションタイプを提供できます。そのクラスは（静的メソッドで）アクションタイプについて様々なことを伝える手段として、さらに、そのタイプのアクションが一緒にインスタンス化されるであろうモデルとしての両方の役割を果たします。
+Plugins can provide custom action types for element index pages by creating a class that implements <api:craft\base\ElementActionInterface>. The class will serve both as a way to communicate various things about your action type (with static methods), and as a model that actions of its type will be instantiated with.
 
-便利なものとして、基本アクションタイプの実装を提供する <api:craft\base\ElementAction> を拡張できます。
+As a convenience, you can extend <api:craft\base\ElementAction>, which provides a base action type implementation.
 
-例えば、Craft 自身のエレメントアクションクラスを参照することもできます。それらは `vendor/craftcms/cms/src/elements/actions/` にあります。
+You can refer to Craft’s own element action classes for examples. They are located in `vendor/craftcms/cms/src/elements/actions/`.
 
-## カスタムエレメントアクションタイプの登録
+## Registering Custom Element Action Types
 
-エレメントインデックスページで表示するためのエレメントアクションを取得するには、エレメントタイプで登録されていなければなりません。
+To get an element action to show up on an element index page, it has to be registered with the element type.
 
-同じプラグインで定義されるカスタムエレメントタイプの場合、エレメントクラスの [defineActions()](element-types.md#index-page-actions) メソッド内にエレメントアクションを含めるだけです。
+If it’s for a custom element type that is defined by the same plugin, simply include your element action in the element class’s [defineActions()](element-types.md#index-page-actions) method.
 
-プラグインのコントロール外にあるエレメントタイプの場合、`registerActions` イベントを使用して登録することもできます。
+If it’s for an element type that is out of the plugin’s control, you can register it using the `registerActions` event:
 
 ```php
 <?php
@@ -37,4 +37,3 @@ class Plugin extends \craft\base\Plugin
     // ...
 }
 ```
-
