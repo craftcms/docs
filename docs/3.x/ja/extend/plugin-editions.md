@@ -1,18 +1,16 @@
-# プラグインのエディション
+# Plugin Editions
 
-プラグインストアは、まもなくマルチエディションプラグインの**限定的な**サポートを追加するでしょう。それは Craft の2つのエディション（Solo、および、Pro）と同様に機能します。
+The Plugin Store will soon add **limited** support for multi-edition plugins, which will work similarly to Craft’s two editions (Solo and Pro).
 
-- マルチエディションをサポートするプラグインは、依然として単一のコンポーザーパッケージで構成されます。
-- プラグインのアクティブなエディションは、[プロジェクトコンフィグ](../project-config.md)に記録されます。
-- プラグインはアクティブなエディションをチェックすることにより、機能トグルを実装できます。
+- Plugins that support multiple editions are still comprised of a single Composer package.
+- Plugins’ active edition is recorded in the [project config](../project-config.md).
+- Plugins can implement feature toggles by checking their active edition.
 
-::: warning
-すべてのプラグインがエディションをサポートできるわけではありません。あなたのプラグインが許可されるかどうかを確認するため、エディションサポートを追加しはじめる前に、Pixel & Tonic に[問い合わせ](https://craftcms.com/contact)してください。
-:::
+::: warning Not every plugin can or should support editions. [Contact](https://craftcms.com/contact) Pixel & Tonic before you begin adding edition support to make sure it will be allowed for your plugin. :::
 
-## エディションの定義
+## Define the Editions
 
-プラグインにエディションサポートを追加するには、<api:craft\base\Plugin::editions()> を上書きして、有効なエディションを（昇順で）定義することからはじめます。
+To add edition support to a plugin, begin by defining the available editions (in ascending order), by overriding <api:craft\base\Plugin::editions()>.
 
 ```php
 class Plugin extends \craft\base\Plugin;
@@ -32,9 +30,9 @@ class Plugin extends \craft\base\Plugin;
 }
 ```
 
-## 機能トグルの追加
+## Add Feature Toggles
 
-機能トグルはプラグインの [is()](api:craft\base\Plugin::is()) メソッドで呼び出すことができます。
+Your feature toggles can call your plugin’s [is()](api:craft\base\Plugin::is()) method.
 
 ::: code
 
@@ -52,34 +50,24 @@ if (Plugin::getInstance()->is(Plugin::EDITION_PRO) {
 
 :::
 
-`is()` は2つの引数 `$edition`、および、`$operator` を受け入れます。
+`is()` accepts two arguments, `$edition` and `$operator`.
 
-`$edition` はあなたが関心を寄せているエディションの名前です。
+`$edition` is the name of the edition you’re concerned with.
 
-`$operator` はそのエディションとインストールされているエディションをどのように比較するかの方法です。デフォルトでは `=` にセットされていて、バージョンが等しいかどうかをテストします。
+`$operator` is how you wish to compare that edition with the installed edition. By default it is set to `=`, which tests for version equality.
 
-次の演算子もサポートされています。
+The following operators are also supported:
 
-演算子 | アクティブなエディションが与えられたエディションより◯◯かテスト
-- | -
-`<` または `lt` | 未満
-`<=` または `le` | 以下
-`>` または `gt` | より大きい
-`>=` または `ge` | 以上
-`==` または `eq` | 等しい（デフォルトと同じ振る舞い）
-`!=`、`<>` または `ne` | 等しくない
+Operator | Tests if the active edition is ____ the given edition
 
-::: tip
-エディションの変更は常に可逆的な操作であり、エディション変更の結果としてプラグインデータが変わるべきではありません。エディションはいつでも交互に変更することができ、プラグインがそれによる問題を持つべきではありません。
-:::
+- | - `<` or `lt` | …less than… `<=` or `le` | …less than or equal to… `>` or `gt` | …greater than… `>=` or `ge` | …greater than or equal to… `==` or `eq` | …equal to… (same as default behavior) `!=`, `<>`, or `ne` | …not equal to…
 
-## テスト
+::: tip Changing editions should always be a lossless operation; no plugin data should change as a result of the edition change. Editions can change back and forth at any time, and plugins should have no problem rolling with it. :::
 
-`config/project.yaml` の `plugins.<plugin-handle>.edition` プロパティを変更することにより、アクティブなエディションを切り替えることができます。
+## Testing
 
-::: tip
-`config/project.yaml` ファイルを持たない場合、コンフィグ設定の <config:useProjectConfigFile> を有効にする必要があります。
-:::
+You can toggle the active edition by changing the `plugins.<plugin-handle>.edition` property in `config/project.yaml`.
 
-（プラグインの `editions()` メソッドで返される）有効なエディションハンドルの値に変更すると、Craft は `project.yaml` の変更を読み込まれたプロジェクトコンフィグと同期するよう促します。それが完了すると、プラグインのアクティブなエディションが新しいエディションにセットされ、機能トグルはそれに応じて動作しはじめます。
+::: tip If you don’t have a `config/project.yaml` file, you need to enable the <config:useProjectConfigFile> config setting. :::
 
+After changing the value to a valid edition handle (one returned by your plugin’s `editions()` method), Craft will prompt you to sync your `project.yaml` changes into the loaded project config. Once that’s done, your plugin’s active edition will be set to the new edition, and feature toggles should start behaving accordingly.
