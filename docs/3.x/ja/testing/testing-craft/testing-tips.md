@@ -26,7 +26,7 @@ Craft namespaces it's tests under one separate root namespace and then expands p
 
 ## Quickly setup tests using the dedicated console command
 
-If you have a general understanding of the typical Craft testing setup you can use the `tests/setup-tests` console command which will do all of the important setup work for you. It will copy from Craft's `src/test/internal/example-test-suite` folder to either your project's root directory.  
+If you have a general understanding of the typical Craft testing setup you can use the `tests/setup` console command which will do all of the important setup work for you. It will copy from Craft's `src/test/internal/example-test-suite` folder to either your project's root directory.  
 or a directory path of your choosing. All you then have to do is:
 
 - Composer require codeception. 
