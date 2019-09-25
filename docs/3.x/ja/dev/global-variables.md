@@ -1,18 +1,16 @@
-# グローバル変数
+# Global Variables
 
-ありとあらゆるテンプレートでは、次の変数を読み込むことができます。
+Every single template is going to get loaded with the following variables:
 
 ## `craft`
 
-様々なヘルパーファンクションやオブジェクトのアクセスポイントを提供する <api:craft\web\twig\variables\CraftVariable>  オブジェクト。
+A <api:craft\web\twig\variables\CraftVariable> object, which provides access points to various helper functions and objects for templates.
 
 ### `craft.app`
 
-<api:craft\web\Application> インスタンス（PHP コード内で `Craft::$app` と記述したときに取得できるもの）への参照は、`craft.app` 経由でテンプレートでも利用可能です。
+A reference to the main <api:craft\web\Application> instance (the thing you get when you type `Craft::$app` in PHP code) is also available to templates via `craft.app`.
 
-::: warning
-`craft.app` 経由でアクセスすることは、先進的であると考えられます。他の Twig 特有の変数やファンクションよりもセキュリティの上で意味があります。さらに、Craft のメジャーバージョン間で生じる互換性を破る変更に、テンプレートを反応させやすくするでしょう。
-:::
+::: warning Accessing things via `craft.app` is considered advanced. There are more security implications than other Twig-specific variables and functions, and your templates will be more susceptible to breaking changes during major Craft version bumps. :::
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('body') %}
@@ -20,13 +18,13 @@
 
 ## `currentSite`
 
-<api:craft\models\Site> オブジェクトで表される、リクエストされたサイト。
+The requested site, represented by a <api:craft\models\Site> object.
 
 ```twig
 {{ currentSite.name }}
 ```
 
-現在のサイトと同じグループのすべてのサイトは、`currentSite.group.sites` 経由でアクセスすることができます。
+You can access all of the sites in the same group as the current site via `currentSite.group.sites`:
 
 ```twig
 <nav>
@@ -40,7 +38,7 @@
 
 ## `currentUser`
 
-<api:craft\elements\User> オブジェクトで表される、現在ログインしているユーザー。誰もログインしていない場合は、`null`。
+The currently-logged-in user, represented by a <api:craft\elements\User> object, or `null` if no one is logged in.
 
 ```twig
 {% if currentUser %}
@@ -50,7 +48,7 @@
 
 ## `devMode`
 
-コンフィグ設定 <config:devMode> が現在有効になっているかどうか。
+Whether the <config:devMode> config setting is currently enabled.
 
 ```twig
 {% if devMode %}
@@ -60,7 +58,7 @@
 
 ## `loginUrl`
 
-<config:loginPath> コンフィグ設定に基づく、サイトのログインページの URL。
+The URL to your site’s login page, based on the <config:loginPath> config setting.
 
 ```twig
 {% if not currentUser %}
@@ -70,7 +68,7 @@
 
 ## `logoutUrl`
 
-<config:logoutPath> コンフィグ設定に基づく、Craft ユーザーのログアウト URL。ここに遷移した後、Craft はユーザーをホームページへ自動的にリダイレクトします。「ログアウト _ページ_ 」といったものはありません。
+The URL Craft uses to log users out, based on the <config:logoutPath> config setting. Note that Craft will automatically redirect users to your homepage after going here; there’s no such thing as a “logout *page*”.
 
 ```twig
 {% if currentUser %}
@@ -80,7 +78,7 @@
 
 ## `now`
 
-現在の日付と時刻がセットされた [DateTime](http://php.net/manual/en/class.datetime.php) オブジェクト。
+A [DateTime](http://php.net/manual/en/class.datetime.php) object set to the current date and time.
 
 ```twig
 Today is {{ now|date('M j, Y') }}.
@@ -88,27 +86,27 @@ Today is {{ now|date('M j, Y') }}.
 
 ## `POS_BEGIN`
 
-定数 [craft\web\View::POS_BEGIN](api:craft\web\View#constants) の Twig 対応のコピー。
+Twig-facing copy of the [craft\web\View::POS_BEGIN](api:craft\web\View#constants) constant.
 
 ## `POS_END`
 
-定数 [craft\web\View::POS_END](api:craft\web\View#constants) の Twig 対応のコピー。
+Twig-facing copy of the [craft\web\View::POS_END](api:craft\web\View#constants) constant.
 
 ## `POS_HEAD`
 
-定数 [craft\web\View::POS_HEAD](api:craft\web\View#constants) の Twig 対応のコピー。
+Twig-facing copy of the [craft\web\View::POS_HEAD](api:craft\web\View#constants) constant.
 
 ## `POS_LOAD`
 
-定数 [craft\web\View::POS_LOAD](api:craft\web\View#constants) の Twig 対応のコピー。
+Twig-facing copy of the [craft\web\View::POS_LOAD](api:craft\web\View#constants) constant.
 
 ## `POS_READY`
 
-定数 [craft\web\View::POS_READY](api:craft\web\View#constants) の Twig 対応のコピー。
+Twig-facing copy of the [craft\web\View::POS_READY](api:craft\web\View#constants) constant.
 
 ## `siteName`
 
-「設定 > サイト」で定義されている、サイトの名前。
+The name of your site, as defined in Settings → Sites.
 
 ```twig
 <h1>{{ siteName }}</h1>
@@ -116,7 +114,7 @@ Today is {{ now|date('M j, Y') }}.
 
 ## `siteUrl`
 
-サイトの URL。
+The URL of your site
 
 ```twig
 <link rel="home" href="{{ siteUrl }}">
@@ -124,51 +122,50 @@ Today is {{ now|date('M j, Y') }}.
 
 ## `SORT_ASC`
 
-PHP 定数 `SORT_ASC` の Twig 対応のコピー。
+Twig-facing copy of the `SORT_ASC` PHP constant.
 
 ## `SORT_DESC`
 
-PHP 定数 `SORT_DESC` の Twig 対応のコピー。
+Twig-facing copy of the `SORT_DESC` PHP constant.
 
 ## `SORT_FLAG_CASE`
 
-PHP 定数 `SORT_FLAG_CASE` の Twig 対応のコピー。
+Twig-facing copy of the `SORT_FLAG_CASE` PHP constant.
 
 ## `SORT_LOCALE_STRING`
 
-PHP 定数 `SORT_LOCALE_STRING` の Twig 対応のコピー。
+Twig-facing copy of the `SORT_LOCALE_STRING` PHP constant.
 
 ## `SORT_NATURAL`
 
-PHP 定数 `SORT_NATURAL` の Twig 対応のコピー。
+Twig-facing copy of the `SORT_NATURAL` PHP constant.
 
 ## `SORT_NUMERIC`
 
-PHP 定数 `SORT_NUMERIC` の Twig 対応のコピー。
+Twig-facing copy of the `SORT_NUMERIC` PHP constant.
 
 ## `SORT_REGULAR`
 
-PHP 定数 `SORT_REGULAR` の Twig 対応のコピー。
+Twig-facing copy of the `SORT_REGULAR` PHP constant.
 
 ## `SORT_STRING`
 
-PHP 定数 `SORT_STRING` の Twig 対応のコピー。
+Twig-facing copy of the `SORT_STRING` PHP constant.
 
 ## `systemName`
 
-「設定 > 一般」で定義されている、システム名。
+The System Name, as defined in Settings → General.
 
 ## `view`
 
-テンプレートを駆動している <api:craft\web\View> インスタンスへの参照。
+A reference to the <api:craft\web\View> instance that is driving the template.
 
-## グローバル設定の変数
+## Global Set Variables
 
-それそれのサイトの[グローバル設定](../globals.md)は、ハンドルにちなんで命名されたグローバル変数としてテンプレートで利用可能です。
+Each of your site’s [global sets](../globals.md) will be available to your template as global variables, named after their handle.
 
-それらは <api:craft\elements\GlobalSet> オブジェクトとして表されます。
+They will be represented as <api:craft\elements\GlobalSet> objects.
 
 ```twig
 <p>{{ companyInfo.companyName }} was established in {{ companyInfo.yearEstablished }}.</p>
 ```
-
