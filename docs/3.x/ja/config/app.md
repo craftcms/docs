@@ -1,18 +1,16 @@
-# アプリケーション設定
+# Application Configuration
 
-`config/app.php` から、Craft の [Yii アプリケーション設定](https://www.yiiframework.com/doc/guide/2.0/en/structure-applications#application-configurations) 全体をカスタマイズできます。配列として返された項目は、 メインのアプリケーション設定の配列にマージされます。
+You can customize Craft’s entire [Yii application configuration](https://www.yiiframework.com/doc/guide/2.0/en/structure-applications#application-configurations) from `config/app.php`. Any items returned by that array will get merged into the main application configuration array.
 
-`config/app.web.php` および `config/app.console.php` から、ウェブリクエストやコンソールリクエストだけに対して Craft のアプリケーション設定をカスタマイズすることもできます。
+You can also customize Craft’s application configuration for only web requests or console requests from `config/app.web.php` and `config/app.console.php`.
 
-::: tip
-Craft のデフォルト設定は [src/config/app.php](https://github.com/craftcms/cms/blob/master/src/config/app.php)、[app.web.php](https://github.com/craftcms/cms/blob/master/src/config/app.web.php)、および、[app.console.php](https://github.com/craftcms/cms/blob/master/src/config/app.console.php)によって定義されています。既存のアプリケーションコンポーネントを上書きする必要がある場合、これらのファイルを参照してください。
-:::
+::: tip Craft’s default configuration is defined by [src/config/app.php](https://github.com/craftcms/cms/blob/master/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/master/src/config/app.web.php), and [app.console.php](https://github.com/craftcms/cms/blob/master/src/config/app.console.php). Refer to these files when you need to override existing application components. :::
 
 [[toc]]
 
-## Cache コンポーネント
+## Cache Component
 
-デフォルトでは、Craft は `storage/runtime/cache/` フォルダにデータキャッシュを蓄積します。`config/app.php` で `cache` アプリケーションコンポーネントを上書きすることによって、代替の[キャッシュストレージ](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage)を使うよう Craft を設定できます。
+By default, Craft will store data caches in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) by overriding the `cache` application component from `config/app.php`.
 
 ```php
 <?php
@@ -26,7 +24,7 @@ return [
 ];
 ```
 
-#### Memcached の実例
+#### Memcached Example
 
 ```php
 <?php
@@ -54,9 +52,9 @@ return [
 ];
 ```
 
-#### Redis の実例
+#### Redis Example
 
-Redis キャッシュストレージを利用するには、あらかじめ [yii2-redis](https://github.com/yiisoft/yii2-redis) ライブラリをインストールする必要があります。次に、Craft の `cache` コンポーネントでそれを利用するよう設定します。
+To use Redis cache storage, you will first need to install the [yii2-redis](https://github.com/yiisoft/yii2-redis) library. Then configure Craft’s `cache` component to use it:
 
 ```php
 <?php
@@ -76,9 +74,9 @@ return [
 ];
 ```
 
-## Session コンポーネント
+## Session Component
 
-負荷分散された環境では、デフォルトの `session` コンポーネントを上書きして、PHP セッションデータを一元管理された場所（例：Redis）に保存したいかもしれません。
+In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location (e.g. Redis):
 
 ```php
 <?php
@@ -98,13 +96,11 @@ return [
 ];
 ```
 
-::: tip
-`session` コンポーネントは、システムが依存するコンポーネントにメソッドを加える <api:craft\behaviors\SessionBehavior> ビヘイビアで設定**しなければなりません**。
-:::
+::: tip The `session` component **must** be configured with the <api:craft\behaviors\SessionBehavior> behavior, which adds methods to the component that the system relies on. :::
 
-## Mailer コンポーネント
+## Mailer Component
 
-（メール送信を担っている）`mailer` コンポーネントの設定を上書きするために、`config/app.php` を調整します。
+To override the `mailer` component config (which is responsible for sending emails), do this in `config/app.php`:
 
 ```php
 <?php
@@ -133,13 +129,11 @@ return [
 ];
 ```
 
-::: tip
-`config/app.php` から Mailer コンポーネントに行った変更は、「設定 > メール」からメールの設定をテストする際には反映されません。
-:::
+::: tip Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing email settings from Settings → Email. :::
 
-## Queue コンポーネント
+## Queue Component
 
-Craft のジョブキューは [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue) によって動いています。デフォルトでは、Craft はエクステンションの [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md) をベースとする [custom queue driver](api:craft\queue\Queue) を使用しますが、`config/app.php` から Craft の `queue` コンポーネントを上書きすることによって、別のドライバに切り替えることができます。
+Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default Craft will use a [custom queue driver](api:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md), but you can switch to a different driver by overriding Craft’s `queue` component from `config/app.php`:
 
 ```php
 <?php
@@ -154,17 +148,12 @@ return [
 ];
 ```
 
-利用可能なドライバは、[Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide) に記載されています。
+Available drivers are listed in the [Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide).
 
-::: warning
-<api:craft\queue\QueueInterface> を実装しているドライバだけがコントロールパネル内に表示されます。
-:::
+::: warning Only drivers that implement <api:craft\queue\QueueInterface> will be visible within the Control Panel. :::
 
-::: tip
-キュードライバが独自のワーカーを提供している場合、`config/general.php` の <config:runQueueAutomatically> コンフィグ設定を `false` に設定します。
-:::
+::: tip If your queue driver supplies its own worker, set the <config:runQueueAutomatically> config setting to `false` in `config/general.php`. :::
 
-## モジュール
+## Modules
 
-`config/app.php` からカスタム Yii モジュールを登録し bootstrap することもできます。詳細については、[モジュールの構築方法](../extend/module-guide.md)を参照してください。
-
+You can register and bootstrap custom Yii modules into the application from `config/app.php` as well. See [How to Build a Module](../extend/module-guide.md) for more info.
