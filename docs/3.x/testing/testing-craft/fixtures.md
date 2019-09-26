@@ -26,7 +26,7 @@ for their testing code - or just provide yourself support for testing your own m
 
 ::: tip
 Craft's element fixtures are based on the excellent team over at [robuust](https://robuust.digital/) 
-and their `craft-fixtures`  [plugin](https://github.com/robuust/craft-fixtures).
+and their `craft-fixtures` [plugin](https://github.com/robuust/craft-fixtures).
 :::
 
 ### `Asset fixtures`
@@ -100,7 +100,7 @@ return [
 ];
 ```
 
-`EntryFixture`EntryFixture will define `$this->sectionIds` with all section handles as key. It will also define `$this->typeIds` with all section handles as the first key and the entry type handles as the second key.
+`EntryFixture` will define `$this->sectionIds` with all section handles as key. It will also define `$this->typeIds` with all section handles as the first key and the entry type handles as the second key.
 
 The primary keys are: `siteId`, `sectionId`, `typeId` and `title`.
 
