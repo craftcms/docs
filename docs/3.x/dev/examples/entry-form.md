@@ -13,8 +13,6 @@ You can create a new entry form for the front-end of your site using the followi
     {% endif %}
 {% endmacro %}
 
-{% from _self import errorList %}
-
 <form method="post" accept-charset="UTF-8">
     {{ csrfInput() }}
     {{ actionInput('entries/save-entry') }}
@@ -27,7 +25,7 @@ You can create a new entry form for the front-end of your site using the followi
         {%- if entry is defined %} value="{{ entry.title }}"{% endif -%}>
 
     {% if entry is defined %}
-        {{ errorList(entry.getErrors('title')) }}
+        {{ _self.errorList(entry.getErrors('title')) }}
     {% endif %}
 
     <label for="body">Body</label>
@@ -36,7 +34,7 @@ You can create a new entry form for the front-end of your site using the followi
     </textarea>
 
     {% if entry is defined %}
-        {{ errorList(entry.getErrors('body')) }}
+        {{ _self.errorList(entry.getErrors('body')) }}
     {% endif %}
 
     <input type="submit" value="Publish">

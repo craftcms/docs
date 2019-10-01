@@ -20,14 +20,12 @@ Then you can create a registration form on the front end, like this:
         {% endif %}
     {% endmacro %}
 
-    {% from _self import errorList %}
-
     <h3><label for="username">Username</label></h3>
     <input id="username" type="text" name="username"
         {%- if user is defined %} value="{{ user.username }}"{% endif -%}>
 
     {% if user is defined %}
-        {{ errorList(user.getErrors('username')) }}
+        {{ _self.errorList(user.getErrors('username')) }}
     {% endif %}
 
     <h3><label for="email">Email</label></h3>
@@ -35,14 +33,14 @@ Then you can create a registration form on the front end, like this:
         {%- if user is defined %} value="{{ user.email }}"{% endif %}>
 
     {% if user is defined %}
-        {{ errorList(user.getErrors('email')) }}
+        {{ _self.errorList(user.getErrors('email')) }}
     {% endif %}
 
     <h3><label for="password">Password</label></h3>
     <input id="password" type="password" name="password">
 
     {% if user is defined %}
-        {{ errorList(user.getErrors('password')) }}
+        {{ _self.errorList(user.getErrors('password')) }}
     {% endif %}
 
     <input type="submit" value="Register">
