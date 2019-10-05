@@ -12,7 +12,7 @@ Components that are soft-deletable must have a `dateDeleted` column in their dat
 
 ```php
 // New table migration
-$this->createTale('{{%tablename}}', [
+$this->createTable('{{%tablename}}', [
     // other columns...
     'dateDeleted' => $this->dateTime()->null(),
 ]);
