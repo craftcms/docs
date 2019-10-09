@@ -148,7 +148,7 @@
   {% if not craft.app.config.general.useEmailAsUsername %}
     {% set error = formUser.getFirstError('username')  %}
     {% set class = error ? 'has-error' : '' %}
-    <div class="group {{  class }}">
+    <div class="group {{ class }}">
       <label for="username">Username <span class="error-symbol">&#9888;</span></label>
       <p class="instruction">If left blank, this will become the email address.</p>
 
@@ -159,7 +159,7 @@
 
   {% set error = formUser.getFirstError('email')  %}
   {% set class = error ? 'has-error' : '' %}
-  <div class="group {{  class }}">
+  <div class="group {{ class }}">
     <label for="email">Email <span class="error-symbol">&#9888;</span></label>
 
     {% if craft.app.projectConfig.get('users.requireEmailVerification') %}
@@ -317,7 +317,7 @@
 {% if not craft.app.config.general.useEmailAsUsername %}
   {% set error = formUser.getFirstError('username')  %}
   {% set class = error ? 'has-error' : '' %}
-  <div class="group {{  class }}">
+  <div class="group {{ class }}">
     <label for="username">Username <span class="error-symbol">&#9888;</span></label>
     <p class="instruction">If left blank, this will become the email address.</p>
 
@@ -338,7 +338,7 @@ class 名に基づく HTML 要素を表示・非表示にするためのスタ�
 ```twig
 {% set error = formUser.getFirstError('email')  %}
 {% set class = error ? 'has-error' : '' %}
-<div class="group {{  class }}">
+<div class="group {{ class }}">
   <label for="email">Email <span class="error-symbol">&#9888;</span></label>
 
   {% if craft.app.projectConfig.get('users.requireEmailVerification') %}
