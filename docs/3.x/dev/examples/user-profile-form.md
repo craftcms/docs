@@ -167,7 +167,7 @@ Keep in mind that there is a custom Bio field included in this example, so if yo
     {% endif %}
 
     <p class="error-message">{{ error }}</p>
-    <input type="text" id="email" name="email" value="{{ formUser.email }}">
+    <input type="text" id="email" name="email" value="{{ formUser.unverifiedEmail ?? formUser.email }}">
   </div>
 
   {% set error = formUser.getFirstError('newPassword')  %}
@@ -345,7 +345,7 @@ You’ll find styles in the [Extras](#extras) section to show and hide HTML elem
   {% endif %}
 
   <p class="error-message">{{ error }}</p>
-  <input type="text" id="email" name="email" value="{{ formUser.email }}">
+  <input type="text" id="email" name="email" value="{{ formUser.unverifiedEmail ?? formUser.email }}">
 </div>
 ```
 

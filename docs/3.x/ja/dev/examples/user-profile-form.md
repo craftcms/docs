@@ -167,7 +167,7 @@
     {% endif %}
 
     <p class="error-message">{{ error }}</p>
-    <input type="text" id="email" name="email" value="{{ formUser.email }}">
+    <input type="text" id="email" name="email" value="{{ formUser.unverifiedEmail ?? formUser.email }}">
   </div>
 
   {% set error = formUser.getFirstError('newPassword')  %}
@@ -346,7 +346,7 @@ class 名に基づく HTML 要素を表示・非表示にするためのスタ�
   {% endif %}
 
   <p class="error-message">{{ error }}</p>
-  <input type="text" id="email" name="email" value="{{ formUser.email }}">
+  <input type="text" id="email" name="email" value="{{ formUser.unverifiedEmail ?? formUser.email }}">
 </div>
 ```
 
