@@ -18,7 +18,7 @@ Craft 3.0.38 および 3.1.4 では、Craft およびプラグインのアップ
 ./craft update
 ```
 
-![`update` コマンドによるインタラクションの例。](./images/cli-update-info.png)
+![<code>update</code> コマンドによるインタラクションの例。](./images/cli-update-info.png)
 
 一度にすべてをアップデートするには、次のコマンドを実行します。
 
@@ -32,7 +32,7 @@ Craft 3.0.38 および 3.1.4 では、Craft およびプラグインのアップ
 ./craft update element-api
 ```
 
-![`update <handle>` コマンドによるインタラクションの例。](./images/cli-update-plugin.png)
+![<code>update <handle></code> コマンドによるインタラクションの例。](./images/cli-update-plugin.png)
 
 一度に複数のハンドルを渡すこともできます。
 
@@ -47,4 +47,3 @@ Craft 3.0.38 および 3.1.4 では、Craft およびプラグインのアップ
 ```
 
 Craft は `composer install` コマンドのように動作する `update/composer-install` コマンドも提供しますが、Composer をインストールする必要はありません。
-
