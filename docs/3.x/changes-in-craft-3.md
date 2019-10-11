@@ -571,7 +571,7 @@ Your front-end `<form>`s and JS scripts that submit to a controller action will 
 
 ### `action` Params
 
-`action` params must be rewritten in in `kebab-case` rather than `camelCase`.
+`action` params must be rewritten in `kebab-case` rather than `camelCase`.
 
 ```twig
 Old:
