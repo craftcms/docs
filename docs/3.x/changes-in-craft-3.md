@@ -90,7 +90,7 @@ If you have any [URL rules](config/README.md#url-rules) saved in `config/routes.
 - Named parameters in the pattern should be defined using the format (`<ParamName:RegExp>`) rather than as a regular expression subpattern (`(?P<ParamName>RegExp)`).
 - Unnamed parameters are no longer allowed (e.g. `([^\/]+)`). They must also be converted to the new named parameter syntax (`<ParamName:RegExp>`).
 - Controller action routes should be defined as a string (`'action/path'`) rather than an array with an `action` key (`['action' => 'action/path']`).
-- Template routes should be defined as as an array with a `template` key (`['template' => 'template/path']`) rather than a string (`'template/path'`).
+- Template routes should be defined as an array with a `template` key (`['template' => 'template/path']`) rather than a string (`'template/path'`).
 
 ```php
 // Old:
