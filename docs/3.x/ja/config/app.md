@@ -167,4 +167,3 @@ return [
 ## モジュール
 
 `config/app.php` からカスタム Yii モジュールを登録し bootstrap することもできます。詳細については、[モジュールの構築方法](../extend/module-guide.md)を参照してください。
-
