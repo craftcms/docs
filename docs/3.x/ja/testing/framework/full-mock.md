@@ -6,19 +6,19 @@ Obviously, this forces your unit tests into a specific style which may not prefe
 
 Under the hood Craft will setup a mock of each service that is set on the `Craft::$app` using `craft\test\TestSetup:getMockApp()`. The *actual* mock is setup using `craft\test\TestSetup:getMock()`.
 
-::: warning Some Craft module methods such as [consoleCommand](../testing-craft/console.md) may not work as expected with `fullMock` on. Please be aware of the implications of enabling this option. If you are just starting testing use the [getting started guide](../testing-craft/getting-started.md) to first get an overview of what tests are and what the differences are between `fullMock` on and off.  
+::: warning
+Some Craft module methods such as [consoleCommand](../testing-craft/console.md) may not work as expected with `fullMock` on. Please be aware of the implications of enabling this option. If you are just starting testing use the [getting started guide](../testing-craft/getting-started.md) to first get an overview of what tests are and what the differences are between `fullMock` on and off.
 :::
 
 ## Plugins and modules
-
 If you enable `fullMock` your module/plugin and its components will be mocked up similarly to Craft.
 
 In order to support mocking of components within modules and/or plugins, you need to add a `getComponentMap` method in your main class. This method must return an array containing sub-arrays which meet the following specifications:
 
 - `string` The class of the service
-- `array` An array containing, in the mentioned order: 
-  - `string` The name of the method used to access this service. I.E if you access your module/plugin's service as follows: `MyModule::getInstance()->getMyService()` you would enter 'getMyService' for this parameter. Leave null if you don't access your module/plugin via methods. 
-  - `string` The property name used to access this service. I.E if you access your module/plugin's service as follows: `MyModule::getInstance()->myService` you would enter 'myService' in this parameter. Leave null if not applicable. 
+- `array` An array containing, in the mentioned order:
+  - `string` The name of the method used to access this service. I.E if you access your module/plugin's service as follows: `MyModule::getInstance()->getMyService()` you would enter 'getMyService' for this parameter. Leave null if you don't access your module/plugin via methods.
+  - `string` The property name used to access this service. I.E if you access your module/plugin's service as follows: `MyModule::getInstance()->myService` you would enter 'myService' in this parameter. Leave null if not applicable.
 
 The parameters must be entered in the order as mentioned above. ::: tip See an example map for the `craft\services\Elements` service below.
 
@@ -27,5 +27,5 @@ return [
     [Elements::class, ['getElements', 'elements']],
 ];
 ```
-
-More examples shown in `craft\test\TestSetup:getCraftServiceMap()`. :::
+More examples shown in `craft\test\TestSetup:getCraftServiceMap()`.
+:::
