@@ -83,7 +83,7 @@ If your webroot is something besides `web/`, `public/`, `public_html/`, or `html
 ```php
 'aliases' => [
     '@web' => 'http://my-project.com',
-    '@webroot' => __DIR__ . '/path/to/webroot',
+    '@webroot' => dirname(__DIR__) . '/path/to/webroot',
 ];
 ```
 
@@ -92,7 +92,7 @@ You can define additional custom aliases using the <config:aliases> config setti
 ```php
 'aliases' => [
     '@web' => 'http://my-project.com',
-    '@webroot' => __DIR__ . '/path/to/webroot',
+    '@webroot' => dirname(__DIR__) . '/path/to/webroot',
     '@assetBaseUrl' => '@web/assets',
     '@assetBasePath' => '@webroot/assets',
 ],
