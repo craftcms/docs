@@ -39,6 +39,7 @@
 
     <input type="submit" value="Publish">
 </form>
+
 ```
 
 「sectionId」は必ずエントリを保存したいセクションの実際の ID に調整してください。
@@ -52,4 +53,3 @@
 ```twig
 {{ hiddenInput('entryId', entry.id) }}
 ```
-
