@@ -49,26 +49,26 @@ Craft のいくつかの設定やファンクションでは、基本ファイ�
 - サイトのベース URL 設定
 - ボリュームのベース URL 設定
 - ローカルボリュームのファイルシステムパス設定
-- コンフィグ設定の <config:resourceBasePath> と <config:resourceBaseUrl>
+- コンフィグ設定の <config:resourceBasePath> と <config:resourceBaseUrl> config settings
 - Twig ファンクションの [svg()](../dev/functions.md#svg-svg-sanitize)
 
 次のエイリアスは、そのまま利用可能です。
 
-| エイリアス | 説明 |
-| ----- | ----------- |
-| `@app` | `vendor/craftcms/cms/src/` のパス |
-| `@config` | `config/` フォルダのパス |
-| `@contentMigrations` | `migrations/` フォルダのパス |
-| `@craft` | `vendor/craftcms/cms/src/` のパス |
-| `@lib` | `vendor/craftcms/cms/lib/` のパス |
-| `@root` | ルートプロジェクトのパス（PHP 定数の [CRAFT_BASE_PATH](php-constants.md#craft-base-path) と同じ） |
-| `@runtime` | `storage/runtime/` フォルダのパス |
-| `@storage` | `storage/` フォルダのパス |
-| `@templates` | `templates/` フォルダのパス |
-| `@translations` | `translations/` フォルダのパス |
-| `@vendor` | `vendor/` フォルダのパス |
-| `@web` | リクエストのために読み込まれた `index.php` ファイルを含むフォルダの URL |
-| `@webroot` | リクエストのために読み込まれた `index.php` ファイルを含むフォルダのパス |
+| エイリアス                | 説明                                                                              |
+| -------------------- | ------------------------------------------------------------------------------- |
+| `@app`               | `vendor/craftcms/cms/src/` のパス                                                  |
+| `@config`            | `config/` フォルダのパス                                                               |
+| `@contentMigrations` | `migrations/` フォルダのパス                                                           |
+| `@craft`             | `vendor/craftcms/cms/src/` のパス                                                  |
+| `@lib`               | `vendor/craftcms/cms/lib/` のパス                                                  |
+| `@root`              | ルートプロジェクトのパス（PHP 定数の [CRAFT_BASE_PATH](php-constants.md#craft-base-path) と同じ） |
+| `@runtime`           | `storage/runtime/` フォルダのパス                                                      |
+| `@storage`           | `storage/` フォルダのパス                                                              |
+| `@templates`         | `templates/` フォルダのパス                                                            |
+| `@translations`      | `translations/` フォルダのパス                                                         |
+| `@vendor`            | `vendor/` フォルダのパス                                                               |
+| `@web`               | リクエストのために読み込まれた `index.php` ファイルを含むフォルダの URL                                    |
+| `@webroot`           | リクエストのために読み込まれた `index.php` ファイルを含むフォルダのパス                                      |
 
 コンフィグ設定 <config:aliases> を利用して、追加の独自エイリアスを定義することができます。例えば、アセットボリュームが存在するベース URL とベースパスを定義するエイリアスを作成したいかもしれません。
 
@@ -81,14 +81,12 @@ Craft のいくつかの設定やファンクションでは、基本ファイ�
 
 これらを利用して、アセットボリュームのベース URL やファイルシステムのパス設定を記入しはじめることができます。例：`@assetBaseUrl/user-photos` と `@assetBasePath/user-photos`
 
-必要であれば、`.env` ファイルや環境設定のどこかで、環境変数のエイリアス値をセットすることができます。
-
-```bash
+```php
 ASSETS_BASE_URL=http://my-project.com/assets
 ASSETS_BASE_PATH=/path/to/web/assets
 ```
 
-[getenv()](http://php.net/manual/en/function.getenv.php) を使用して、エイリアスの定義にセットすることができます。
+You can define additional custom aliases using the <config:aliases> config setting as well. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
 
 ```php
 'aliases' => [
@@ -97,28 +95,43 @@ ASSETS_BASE_PATH=/path/to/web/assets
 ],
 ```
 
+[getenv()](http://php.net/manual/en/function.getenv.php) を使用して、エイリアスの定義にセットすることができます。
+
 ::: tip
 設定でエイリアスを参照する場合、URL やパスに追加のセグメントを付加することができます。例えば、`@assetBaseUrl/user-photos` をボリュームのベース URL  にセットできます。
 :::
 
+```bash
+{{ alias('@assetBaseUrl') }}
+```
+
 ::: tip
 [alias()](../dev/functions.html#alias-string) ファンクションに渡すことによって、テンプレート内でエイリアスをパースできます。
 
-```twig
-{{ alias('@assetBaseUrl') }}
+```php
+'aliases' => [
+    '@assetBaseUrl' => getenv('ASSETS_BASE_URL'),
+    '@assetBasePath' => getenv('ASSETS_BASE_PATH'),
+],
 ```
 
 :::
 
-## URL ルール
-
 `config/routes.php` にカスタムの [URL ルール](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) を定義することができます。詳細については、[ルーティング](../routing.md) を参照してください。
 
-## PHP 定数
+```twig
+{{ alias('@assetBaseUrl') }}
+```
+:::
 
-`web/index.php` に特定の [PHP 定数](php-constants.md) を定義することで、システムファイルパスやアクティブな環境などのコア設定を設定できます。
-
-## アプリケーション設定
+## URL ルール
 
 `config/app.php` から、コンポーネント設定を上書きしたり新しいモジュールやコンポーネントを追加するような Craft の [アプリケーション設定](app.md) をカスタマイズできます。
 
+## PHP 定数
+
+You can configure core settings like system file paths and the active environment by defining certain [PHP constants](php-constants.md) in `web/index.php`.
+
+## アプリケーション設定
+
+You can customize Craft’s [application configuration](app.md) from `config/app.php`, such as overriding component configs, or adding new modules and components.
