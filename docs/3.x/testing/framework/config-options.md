@@ -21,6 +21,9 @@ The `projectConfig` setting accepts an object with the following parameters:
 - file (Required): What file the project config setting must be copied from. This is not the `project.yml` file in 
 `CRAFT_CONFIG_PATH` but instead the file whose contents will be copied into the `project.yml` file 
 located here. 
+- reset: Whether the project config should be reset before each test is run. If enabled Craft will reset the project config
+ to what is specified in the `project.yml` file located in `CRAFT_CONFIG_PATH`. Can safely be disabled if you are not making
+ changes to project config during your tests.
 
 For the `projectConfig` option to work correctly please ensure you enable the [useProjectConfigFile](../../config/config-settings.md#useprojectconfigfile) config setting in `general.php`. 
 ::: warning
