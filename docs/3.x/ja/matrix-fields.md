@@ -33,10 +33,10 @@
 
 利用可能な値には、次のものが含まれます。
 
-| 値 | 取得するエレメント
-| - | -
-| `':empty:'` | 行列ブロックを持たない。
-| `':notempty:'` | 少なくとも1つの行列ブロックを持つ。
+| 値              | 取得するエレメント          |
+| -------------- | ------------------ |
+| `':empty:'`    | 行列ブロックを持たない。       |
+| `':notempty:'` | 少なくとも1つの行列ブロックを持つ。 |
 
 ```twig
 {# Fetch entries with a Matrix block #}
@@ -113,6 +113,7 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 {% endfor %}
 ```
 
+
 ### リミットの調整
 
 デフォルトでは、行列フィールドは最初の100ブロックを返します。変更するには `limit` パラメータで上書きします。
@@ -127,6 +128,7 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 {% for block in entry.myMatrixField.limit(null) %}
 ```
 
+
 ### ブロックの総数の取得
 
 [length フィルタ](https://twig.symfony.com/doc/filters/length.html)を利用して、ブロックの総数を取得できます。
@@ -135,8 +137,8 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 {{ entry.myMatrixField|length }}
 ```
 
+
 ## 関連項目
 
 * [エレメントクエリ](dev/element-queries/README.md)
 * <api:craft\elements\MatrixBlock>
-
