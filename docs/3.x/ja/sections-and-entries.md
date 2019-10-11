@@ -94,51 +94,72 @@ Craft のマルチサイト機能を利用しているなら、次のことも�
 
 上記のエントリー URI 形式では、トップレベルエントリの URI は `docs/templating` で終わるかもしれないのに対して、ネストされているエントリの URI は `docs/templating/tags` で終わるかもしれません。
 
-## 入力タイプ
+### 動的なエントリタイトル
 
 チャンネルとストラクチャーセクションの両方では、入力タイプを用いて複数のタイプのエントリを定義できます。
 
 「設定 > セクション」のセクション名の横にある「入力タイプを変更してください。」リンクをクリックして、セクションの入力タイプを管理できます。セクションの入力タイプのインデックスに移動します。いずれかの入力タイプの名前をクリックすると、その設定ページへ移動します。
 
-![入力タイプの設定編集画面](./images/sections-and-entries-entry-types.png)
+Each preview target has Name and a URI. Give each of your targets a clear name that authors will understand, such as “Homepage” or “Blog Index”. Set the URI to the actual URI you want to load when the target is selected.
 
 入力タイプの設定は、次の通りです。
+
+![A section’s Preview Targets setting.](./images/preview-targets.png)
+
+タイトル形式は本格的な Twig テンプレートで、エントリが保存されるたびに解析されます。
+
+エントリは `object` という名称の変数としてこのテンプレートに渡されます。エントリの [プロパティ](api:craft\elements\Entry#public-properties) は、次の2つの方法で参照できます。
+
+_ショートカット構文には、中括弧が1つしかないことに注意してください_。
+
+Craft がタイトル形式の中でショートカット構文を見つけた場合、Twig の解析にあたりテンプレートへ渡す前に `{` を `{{object.` 、`}` を `}}` に置換します。
+
+
+## 入力タイプ
+
+いずれの構文でも Twig フィルタを使えます。
+
+Craft の[グローバル変数](dev/global-variables.md)は、これらのテンプレートでも利用できます。
+
+![Entry Type Edit Settings](./images/sections-and-entries-entry-types.png)
+
+少なくとも1つのセクションがあれば、CP のメインナビゲーションに「エントリ」タブが表示されます。クリックすると、エントリのインデックスに移動します。そこから、編集したいエントリに移動したり、新しいエントリを作成できます。
 
 * **名前** – 入力タイプの名前
 * **ハンドル** – 入力タイプのテンプレートに対応するハンドル
 * **タイトルのフィールドの見る** – この入力タイプのエントリでタイトルフィールドを表示するかどうか
 * **タイトルフィールドラベル** – 「タイトル」フィールドのラベルをどうするか
 
-### 動的なエントリタイトル
+### Dynamic Entry Titles
 
-投稿者に入力を求めるのではなく、自動生成されたタイトルにする場合、「タイトルのフィールドを見る。」チェックボックスをオフにします。その際、新たに「タイトル形式」欄が表示され、自動生成されるタイトルの見え方を定義できます。
+エントリの編集ページでは、次のアクションを実行できます。
 
-タイトル形式は本格的な Twig テンプレートで、エントリが保存されるたびに解析されます。
+投稿日を空のままにした場合、Craft はエントリが有効な状態で保存された最初のタイミングで自動的にセットします。
 
-エントリは `object` という名称の変数としてこのテンプレートに渡されます。エントリの [プロパティ](api:craft\elements\Entry#public-properties) は、次の2つの方法で参照できます。
+The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](api:craft\elements\Entry#public-properties) in two ways:
 
 * `{{ object.property }}` _（標準の Twig 構文）_
 * `{property}` _（ショートカット構文）_
 
-_ショートカット構文には、中括弧が1つしかないことに注意してください_。
+_Note that the shortcut syntax only has one set of curly braces_.
 
-Craft がタイトル形式の中でショートカット構文を見つけた場合、Twig の解析にあたりテンプレートへ渡す前に `{` を `{{object.` 、`}` を `}}` に置換します。
+If Craft finds any of these in your Title Format, it will replace the `{` with `{{object.` and the `}` with `}}`, before passing the template off to Twig for parsing.
 
-いずれの構文でも Twig フィルタを使えます。
+You can use Twig filters in both syntaxes:
 
 ```twig
 {{ object.postDate|date('M j, Y') }}
 {postDate|date('M j, Y')}
 ```
 
-Craft の[グローバル変数](dev/global-variables.md)は、これらのテンプレートでも利用できます。
+Craft’s [global variables](dev/global-variables.md) are available to these templates as well:
 
 ```twig
 {{ now|date('Y-m-d') }}
 {{ currentUser.username }}
 ```
 
-条件文もまた、かっこうの標的です。ショートカット構文がないため、エントリプロパティの1つで条件分岐する場合、変数 `object` で参照する必要があります。
+Conditionals are also fair game. There’s no shortcut syntax for those, so if you want to use a conditional on one of the entry’s properties, you will need to reference it with the `object` variable:
 
 ```twig
 {% if object.postDate %}{postDate|date('M j, Y')}{% else %}{{ now|date('M j, Y') }}{% endif %}
@@ -146,9 +167,9 @@ Craft の[グローバル変数](dev/global-variables.md)は、これらのテ�
 
 ## エントリの編集
 
-少なくとも1つのセクションがあれば、CP のメインナビゲーションに「エントリ」タブが表示されます。クリックすると、エントリのインデックスに移動します。そこから、編集したいエントリに移動したり、新しいエントリを作成できます。
+If you have at least one section, there will be an “Entries” tab in the primary CP nav. Clicking on it will take you to the entry index. From there you can navigate to the entry you wish to edit, or create a new one.
 
-エントリの編集ページでは、次のアクションを実行できます。
+You can perform the following actions from the Edit Entry page:
 
 * （選択候補が2つ以上ある場合）入力タイプの選択
 * エントリのタイトルの編集
@@ -164,5 +185,4 @@ Craft の[グローバル変数](dev/global-variables.md)は、これらのテ�
 * ドラフトの公開
 * エントリの過去のバージョンの閲覧
 
-投稿日を空のままにした場合、Craft はエントリが有効な状態で保存された最初のタイミングで自動的にセットします。
-
+If you leave the Post Date blank, Craft will automatically set it the first time an entry is saved as enabled.
