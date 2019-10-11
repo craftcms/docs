@@ -66,6 +66,7 @@ Twig には3種類のタグがあります。
 * [Twig に付随するタグ](https://twig.symfony.com/doc/tags/index.html)
 * [Craft の独自タグ](tags.md)
 
+
 ### コメントタグ
 
 コメントタグを利用して、コード内に将来の自分に向けたコメントを残すことができます。Twig はコメントタグの内容を何も評価しません。単にそれが存在しないものとして振る舞います。
@@ -95,6 +96,7 @@ Twig の変数は、JavaScript や他のプログラミング言語の変数に�
 * 一致する[ルート](../routing.md#dynamic-routes)の結果として読み込まれたテンプレートには、ルートのトークンによって定義された変数があらかじめロードされています。
 * 一致する[エントリ](../sections-and-entries.md) URL の結果として読み込まれたテンプレートでは、変数 `entry` を取得できます。（詳細は、[ルーティング](../routing.md)を見てください）
 
+
 ## フィルタ
 
 フィルタで変数を操作できます。構文は、変数名に続けてパイプ（`|`）とフィルタ名となります。
@@ -113,6 +115,7 @@ Twig の変数は、JavaScript や他のプログラミング言語の変数に�
 
 * [Twig に付随するフィルタ](https://twig.symfony.com/doc/filters/index.html)
 * [Craft の独自フィルタ](filters.md)
+
 
 ## ファンクション
 
@@ -134,6 +137,7 @@ Twig と Craft は、テンプレートタグ内で利用できるいくつか�
 * [Twig に付随するファンクション](https://twig.symfony.com/doc/functions/index.html)
 * [Craft の独自ファンクション](functions.md)
 
+
 ## 続きを読む
 
 Twig を学ぶためにオンラインで利用できるいくつかの学習リソースがあります。
@@ -142,4 +146,3 @@ Twig を学ぶためにオンラインで利用できるいくつかの学習リ
 * [Twig Templates in Craft](https://mijingo.com/products/screencasts/twig-templates-in-craft/) は、Craft の Twig を快適に使えるようになることを目的とした、Mijingo によるビデオコースです。
 * [Straight up Craft](https://straightupcraft.com/twig-templating) は、Craft での Twig の使い方に関する素晴らしい記事があります。
 * [Twig for Designers](https://github.com/brandonkelly/TwigForDesigners) は進行中の eBook で、非開発者が Twig をどのように使えるか説明することを目的としています。
-
