@@ -10,31 +10,36 @@
 
 ご覧の通り、それらは3つのセグメントで構成されています。
 
-1. `<Type>` – 参照を作成するエレメントのタイプ。これは完全修飾のエレメントクラス名（例：`craft\elements\Entry`）、または、エレメントタイプの「リファレンスハンドル」です。
+1.  `<Type>` – 参照を作成するエレメントのタイプ。これは完全修飾のエレメントクラス名（例：`craft\elements\Entry`）、または、エレメントタイプの「リファレンスハンドル」です。
 
-   コアのエレメントタイプは、次のリファレンスハンドルを持っています。
-   - `entry`
-   - `asset`
-   - `tag`
-   - `user`
-   - `globalset`
+    コアのエレメントタイプは、次のリファレンスハンドルを持っています。
 
-2. `<Identifier>` – エレメントの ID、または、エレメントタイプによってサポートされているカスタム識別子。
+    - `entry`
+    - `asset`
+    - `tag`
+    - `user`
+    - `globalset`
 
-   エントリは次のカスタム識別子をサポートしています。
-   - `entry-slug`
-   - `sectionHandle/entry-slug`
+2.  `<Identifier>` – エレメントの ID、または、エレメントタイプによってサポートされているカスタム識別子。
 
-3. `<Property>` _（オプション）_ – リファレンスタグが返すべきエレメントのプロパティ。省略した場合、エレメントの URL が返されます。
+    エントリは次のカスタム識別子をサポートしています。
 
-   利用可能なプロパティのリストは、エレメントタイプのクラスリファレンスを参照してください。
-   - [api:craft\elements\Entry](api:craft\elements\Entry#public-properties)
-   - [api:craft\elements\Asset](api:craft\elements\Asset#public-properties)
-   - [api:craft\elements\Tag](api:craft\elements\Tag#public-properties)
-   - [api:craft\elements\User](api:craft\elements\User#public-properties)
-   - [api:craft\elements\GlobalSet](api:craft\elements\GlobalSet#public-properties)
+    - `entry-slug`
+    - `sectionHandle/entry-slug`
 
-   カスタムフィールドのハンドルもサポートされています。フィールドタイプは文字列として表すことができる値を持っています。
+    Identifiers can also include the site ID, UUID, or handle that the element should be loaded from, using an `@<Site>` syntax.
+
+3.  `<Property>` _（オプション）_ – リファレンスタグが返すべきエレメントのプロパティ。省略した場合、エレメントの URL が返されます。
+
+    利用可能なプロパティのリストは、エレメントタイプのクラスリファレンスを参照してください。
+
+    - [api:craft\elements\Entry](api:craft\elements\Entry#public-properties)
+    - [api:craft\elements\Asset](api:craft\elements\Asset#public-properties)
+    - [api:craft\elements\Tag](api:craft\elements\Tag#public-properties)
+    - [api:craft\elements\User](api:craft\elements\User#public-properties)
+    - [api:craft\elements\GlobalSet](api:craft\elements\GlobalSet#public-properties)
+
+    カスタムフィールドのハンドルもサポートされています。フィールドタイプは文字列として表すことができる値を持っています。
 
 ### 実例
 
@@ -44,6 +49,8 @@
 - `{entry:about-us:intro}` – スラグが `about-us` のエントリのカスタムフィールド `intro` の値を返します。
 - `{entry:blog/whats-on-tap}` – スラグが `whats-on-tap` の `blog` セクションのエントリの URL を返します。
 - `{craft\commerce\Variant:123:price}` – ID が `123` の Commerce Variant オブジェクトの price を返します。
+- `{craft\commerce\Variant:123:price}` – returns the price of a Commerce Variant object with the id of `123`.
+- `{globalset:aGlobalSet:uid}` – returns the UID of a global set with the handle `aGlobalSet`.
 
 ## リファレンスタグの解析
 
@@ -52,4 +59,3 @@
 ```twig
 {{ entry.body|parseRefs|raw }}
 ```
-
