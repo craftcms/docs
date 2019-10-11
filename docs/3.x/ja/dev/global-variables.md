@@ -8,7 +8,7 @@
 
 ### `craft.app`
 
-<api:craft\web\Application> インスタンス（PHP コード内で `Craft::$app` と記述したときに取得できるもの）への参照は、`craft.app` 経由でテンプレートでも利用可能です。
+インスタンス（PHP コード内で `Craft::$app` と記述したときに取得できるもの）への参照は、`craft.app` 経由でテンプレートでも利用可能です。
 
 ::: warning
 `craft.app` 経由でアクセスすることは、先進的であると考えられます。他の Twig 特有の変数やファンクションよりもセキュリティの上で意味があります。さらに、Craft のメジャーバージョン間で生じる互換性を破る変更に、テンプレートを反応させやすくするでしょう。
@@ -20,7 +20,7 @@
 
 ## `currentSite`
 
-<api:craft\models\Site> オブジェクトで表される、リクエストされたサイト。
+オブジェクトで表される、リクエストされたサイト。
 
 ```twig
 {{ currentSite.name }}
@@ -40,7 +40,7 @@
 
 ## `currentUser`
 
-<api:craft\elements\User> オブジェクトで表される、現在ログインしているユーザー。誰もログインしていない場合は、`null`。
+オブジェクトで表される、現在ログインしているユーザー。誰もログインしていない場合は、`null`。
 
 ```twig
 {% if currentUser %}
@@ -60,7 +60,7 @@
 
 ## `loginUrl`
 
-<config:loginPath> コンフィグ設定に基づく、サイトのログインページの URL。
+The URL to your site’s login page, based on the <config:loginPath> コンフィグ設定に基づく、サイトのログインページの URL。
 
 ```twig
 {% if not currentUser %}
@@ -70,7 +70,7 @@
 
 ## `logoutUrl`
 
-<config:logoutPath> コンフィグ設定に基づく、Craft ユーザーのログアウト URL。ここに遷移した後、Craft はユーザーをホームページへ自動的にリダイレクトします。「ログアウト _ページ_ 」といったものはありません。
+The URL Craft uses to log users out, based on the <config:logoutPath> コンフィグ設定に基づく、Craft ユーザーのログアウト URL。ここに遷移した後、Craft はユーザーをホームページへ自動的にリダイレクトします。「ログアウト _ページ_ 」といったものはありません。
 
 ```twig
 {% if currentUser %}
@@ -171,4 +171,3 @@ PHP 定数 `SORT_STRING` の Twig 対応のコピー。
 ```twig
 <p>{{ companyInfo.companyName }} was established in {{ companyInfo.yearEstablished }}.</p>
 ```
-
