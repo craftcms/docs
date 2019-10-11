@@ -8,8 +8,8 @@ Once Craft is installed a `Craft::$app` object is set up and works exactly the s
 as it would if you were running Craft in a production environment. This is the case for both
 unit, functional and acceptance testing. 
 
-Obviously, this forces your unit tests into a specific style which may not prefer.
-For this reason, the Craft provides the `fullMock` option
+Obviously, this forces your unit tests into a specific style which you may not prefer.
+For this reason, the Craft testing framework provides the `fullMock` option
 to be set
 in your `codeception.yaml` or `unit.suite.yaml` file. If you set this option to true, 
 instead of creating a `Craft::$app` that is as close to the real thing, Craft will 
