@@ -86,6 +86,7 @@ return [
 
 マルチ環境設定も可能です。
 
+
 ```php
 <?php
 
@@ -182,4 +183,3 @@ public function getSettingsResponse()
 ```
 
 そこで返るものは、そこで正に起きている何かであるため、コントローラーアクションが返す何かとして筋が通っている必要があることに注意してください。<api:craft\controllers\PluginsController::actionEditPluginSettings()> メソッドは、`getSettingsResponse()` の戻り値を直接返します。
-
