@@ -14,4 +14,3 @@
 - [requireLogin](tags/requirelogin.md)
 - [requirePermission](tags/requirepermission.md)
 - [switch](tags/switch.md)
-
