@@ -47,7 +47,7 @@ use yii\base\Event;
 public function init()
 {
     paren::init();
-    
+
     Event::on(Gc::class, Gc::EVENT_RUN, function() {
         Craft::$app->gc->hardDelete('{{%tablename}}');
     }
@@ -71,7 +71,7 @@ use craft\db\SoftDeleteTrait;
 class MyRecord extends ActiveRecord
 {
     use SoftDeleteTrait;
-    
+
     // ...
 }
 ```
@@ -127,27 +127,27 @@ public static function find()
 
 - テーブルからデータを選択するときは、`dateDeleted` 値がある行を無視していることを確認してください。
 
-   ```php{4}
-   $results = (new \craft\db\Query())
+  ```php{4}
+  $results = (new \craft\db\Query())
     ->select(['...'])
     ->from(['{{%tableName}}'])
     ->where(['dateDeleted' => null])
     ->all();
-   ```
+  ```
 
 - Active Record クラスを使用してテーブルから行を削除する場合、[delete()](api:yii\db\ActiveRecord::delete()) ではなく、新しい `softDelete()` メソッドを呼び出してください。
 
-   ```php
-   $record->softDelete();
-   ```
+  ```php
+  $record->softDelete();
+  ```
 
 - クエリコマンドを使用してテーブルから行を削除する場合、[delete()](api:yii\db\Command::delete()) ではなく、<api:craft\db\Command::softDelete()> を呼び出してください。
 
-   ```php
-   \Craft::$app->db->createCommand()
+  ```php
+  \Craft::$app->db->createCommand()
     ->softDelete('{{%tablename}}', ['id' => $id])
-    ->execute();
-   ```
+    ->execute(); 
+  ```
 
 ## ソフトデリートされた行の復元
 
@@ -155,19 +155,18 @@ public static function find()
 
 - Active Record クラスで `restore()` メソッドを呼び出す。
 
-   ```php
-   $record = MyRecord::findTrashed()
+  ```php
+  $record = MyRecord::findTrashed()
     ->where(['id' => $id])
     ->one();
 
    $record->restore();
-   ```
+  ```
 
 - クエリコマンドで <api:craft\db\Command::restore()> を呼び出す。
 
-   ```php
-   \Craft::$app->db->createCommand()
+  ```php
+  \Craft::$app->db->createCommand()
     ->restore('{{%tablename}}', ['id' => $id])
     ->execute();
-   ```
-
+  ```
