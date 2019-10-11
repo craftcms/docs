@@ -23,4 +23,3 @@ Craft で REST API を作成する方法を詳しく知るために、Nate Iler 
 ## カスタムなもの
 
 モジュールやプラグインは、新しい HTTP エンドポイントを提供するためのカスタムのフロントエンド[コントローラー](https://www.yiiframework.com/doc/guide/2.0/en/structure-controllers)を定義できます。 はじめるには、[Craft の拡張](../extend/README.md)を参照してください。
-
