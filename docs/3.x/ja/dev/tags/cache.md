@@ -38,7 +38,6 @@ URL ごとではなく、（現在のサイトロケールのための）グロ�
 ```twig
 {% cache globally using key craft.app.request.pathInfo %}
 ```
-
 :::
 
 ::: warning
@@ -123,31 +122,29 @@ URL ごとではなく、（現在のサイトロケールのための）グロ�
 
 それらを使用するのがよいアイデア _ではない_ 場合のいくつかの例です。
 
-* 静的なテキストにキャッシュを使用しないでください。シンプルにテキストを出力するよりも、コストが高くなります。
+* Don’t use them to cache static text; that will be more expensive than simply outputting the text.
+* You can’t use them outside of top-level `{% block %}` tags within a template that extends another.
+* The `{% cache %}` tag will only cache HTML, so using tags like [{% css %}](css.md) and [{% js %}](js.md) inside of it doesn’t make sense because they don’t actually output HTML therefore their output won’t be cached.
 
-* 他を拡張するテンプレート内で、トップレベルの `{% block %}` タグの外側で使用することはできません。
-
-* `{% cache %}` タグは HTML のみキャッシュします。そのため、キャッシュ対象となる実際の HTML を出力しない [{% css %}](css.md) や [{% js %}](js.md) のようなタグの内部で使うことは、意味をなしません。
-
-   ```twig
+    ```twig
     {# Bad: #}
-    
+
     {% extends "_layout" %}
     {% cache %}
         {% block "content" %}
             ...
         {% endblock %}
     {% endcache %}
-    
+
     {# Good: #}
-    
+
     {% extends "_layout" %}
     {% block "content" %}
         {% cache %}
             ...
         {% endcache %}
     {% endblock %}
-   ```
+    ```
+
 
 ヒント：`{% cache %}` タグは、その中にまだ生成されていない [画像の変形](../../image-transforms.md) URL が含まれるかどうかを検出します。それが含まれる場合、次のリクエストまでテンプレートのキャッシュを保留するため、一時的な画像 URL はキャッシュされません。
-
