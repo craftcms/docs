@@ -63,11 +63,11 @@ $this->insert('{{%tablename}}', $rows);
 ```
 
 ::: warning
-<api:api:yii\db\Migration::insert()>、[batchInsert()](api:craft\db\Migration::batchInsert())、および、[update()](api:yii\db\Migration::update()) マイグレーションメソッドは、引数 `$columns` で指定したものに加えて `dateCreated`、 `dateUpdated`、`uid` テーブルのカラムにあるデータを自動的に挿入 / アップデートします。操作しているテーブルにこれらのカラムがない場合、引数 `$includeAuditColumns` に `false` を渡して、SQL エラーにならないようにしてください。
+<api:api:yii\db\Migration::insert()>、<a href="api:craft\db\Migration::batchInsert()">batchInsert()</a>、および、<a href="api:yii\db\Migration::update()">update()</a> マイグレーションメソッドは、引数 `$columns` で指定したものに加えて `dateCreated`、 `dateUpdated`、`uid` テーブルのカラムにあるデータを自動的に挿入 / アップデートします。操作しているテーブルにこれらのカラムがない場合、引数 `$includeAuditColumns` に `false` を渡して、SQL エラーにならないようにしてください。
 :::
 
 ::: tip
-<api:craft\db\Migration> はデータを _選択する_ ためのメソッドを持たないため、Yii の[クエリビルダー](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder)を通す必要があります。
+<api:craft\db\Migration> はデータを <em x-id="4">選択する</em> ためのメソッドを持たないため、Yii の<a href="https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder">クエリビルダー</a>を通す必要があります。
 
 ```php
 use craft\db\Query;
@@ -76,7 +76,6 @@ $result = (new Query())
     // ...
     ->all();
 ```
-
 :::
 
 ### ロギング
@@ -166,4 +165,3 @@ public function safeUp()
 ```
 
 なぜなら、プロジェクトコンフィグの同期の一部としてプラグインがインストールされている可能性があるためです。インストールマイグレーションが独自にプロジェクトコンフィグを変更する場合、`project.yaml` からの新しい変更をすべて上書きしてしまいます。
-
