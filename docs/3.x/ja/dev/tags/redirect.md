@@ -35,4 +35,3 @@
     {% redirect "pricing" 301 with notice "You have to be a member to access that!" %}
 {% endif %}
 ```
-
