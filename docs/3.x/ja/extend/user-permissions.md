@@ -60,7 +60,7 @@ public function actionStayUpLate()
 
 ## 権限の確認
 
-<api:craft\web\User::checkPermission()> を呼び出すことで、ログインしているユーザーが権限を持っているかを確認できます。
+を呼び出すことで、ログインしているユーザーが権限を持っているかを確認できます。
 
 ```php
 // See if they have the `stayUpLate` permission
@@ -69,7 +69,7 @@ if (Craft::$app->user->checkPermission('stayUpLate')) {
 }
 ```
 
-<api:craft\elements\User::can()> を呼び出すことで、指定されたユーザーが権限を持っているかを確認することもできます。
+を呼び出すことで、指定されたユーザーが権限を持っているかを確認することもできます。
 
 ```php
 /** @var \craft\elements\User $user */
@@ -77,4 +77,3 @@ if ($user->can('stayUpLate')) {
     // ...
 }
 ```
-
