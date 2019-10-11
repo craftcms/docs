@@ -28,4 +28,3 @@
 ```
 
 ユーザーがログインに成功すると、コンフィグ設定 <config:setPasswordSuccessPath> で定義されたパスにリダイレクトされます。
-
