@@ -70,12 +70,31 @@ The following aliases are available out of the box:
 | `@web` | The URL to the folder that contains the `index.php` file that was loaded for the request
 | `@webroot` | The path to the folder that contains the `index.php` file that was loaded for the request
 
-You can define additional custom aliases using the <config:aliases> config setting. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
+You can override these default aliases with the <config:aliases> config setting if needed. It’s recommended to override the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
 
 ```php
 'aliases' => [
-    '@assetBaseUrl' => 'http://my-project.com/assets',
-    '@assetBasePath' => '/path/to/web/assets',
+    '@web' => 'http://my-project.com',
+];
+```
+
+If your webroot is something besides `web/`, `public/`, `public_html/`, or `html/`, or it’s not located alongside your `craft` executable, you will also need to override the `@webroot` alias, so it can be defined properly for console commands. 
+
+```php
+'aliases' => [
+    '@web' => 'http://my-project.com',
+    '@webroot' => __DIR__ . '/path/to/webroot',
+];
+```
+
+You can define additional custom aliases using the <config:aliases> config setting as well. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
+
+```php
+'aliases' => [
+    '@web' => 'http://my-project.com',
+    '@webroot' => __DIR__ . '/path/to/webroot',
+    '@assetBaseUrl' => '@web/assets',
+    '@assetBasePath' => '@webroot/assets',
 ],
 ```
 
@@ -85,7 +104,7 @@ If you’d like, you can set the alias values with environment variables, either
 
 ```bash
 ASSETS_BASE_URL=http://my-project.com/assets
-ASSETS_BASE_PATH=/path/to/web/assets
+ASSETS_BASE_PATH=/path/to/webroot/assets
 ```
 
 Then you can pull them into the alias definitions using [getenv()](http://php.net/manual/en/function.getenv.php):
