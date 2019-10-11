@@ -32,4 +32,3 @@
     <p>Your search for “{{ searchQuery }}” didn’t return any results.</p>
 {% endif %}
 ```
-
