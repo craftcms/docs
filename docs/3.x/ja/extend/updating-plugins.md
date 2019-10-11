@@ -64,13 +64,13 @@ Craft が構築されているフレームワーク の Yii は、2.0 向けに�
 
 次のコアサービス名が変更されました。
 
-| 旧 | 新 |
+| 旧               | 新                |
 | --------------- | ---------------- |
-| `assetSources` | `volumes` |
-| `email` | `mailer` |
+| `assetSources`  | `volumes`        |
+| `email`         | `mailer`         |
 | `templateCache` | `templateCaches` |
-| `templates` | `view` |
-| `userSession` | `user` |
+| `templates`     | `view`           |
+| `userSession`   | `user`           |
 
 ## コンポーネント
 
@@ -86,6 +86,8 @@ Craft 3 では、コンポーネントタイプはモデルにとってあまり
 - `$handle` のような共通プロパティは、trait によって定義されます（例：<api:craft\base\FieldTrait>）。
 - コンポーネントタイプのベース実装は、抽象的な基本クラスによって提供されます（例：<api:craft\base\Field>）。
 - 基本クラスは、様々なコンポーネントクラスによって拡張されます（例：<api:craft\fields\PlainText>）。
+
+
 
 ## 翻訳
 
@@ -182,8 +184,8 @@ $tablePrefix = Craft::$app->config->db->tablePrefix;
 ## ファイル
 
 - `IOHelper` は Yii の  <api:yii\helpers\BaseFileHelper> を拡張する <api:craft\helpers\FileHelper> で置き換えられました。
-- <api:craft\helpers\FileHelper> および <api:craft\services\Path> メソッドから返されるディレクトリパスには、スラッシュが含まれなくなりました。
-- Craft のファイルシステムパスは、ハードコードされたスラッシュ（`/`）ではなく、（環境に依存して `/` または `\` のどちらかがセットされる）PHP 定数の `DIRECTORY_SEPARATOR` を使用します。
+- および <api:craft\services\Path> メソッドから返されるディレクトリパスには、スラッシュが含まれなくなりました。
+- Craft のファイルシステムパスは、ハードコードされたスラッシュ（`/`）ではなく、（環境に依存して `/` または ``\` のどちらかがセットされる）PHP 定数の``DIRECTORY_SEPARATOR` を使用します。
 
 ## イベント
 
@@ -320,8 +322,8 @@ public function getResourcePath($path)
 }
 ```
 
-::: warning NOTE
-リソースリクエストのコンセプトが Craft 3 で削除されたため、プラグインにリソースリクエストの処理を許可するこのフックには、直接 Craft 3 で匹敵するものがありません。Craft 3 でプラグインがどのようにリソースを提供できるかを知るには[アセットバンドル](asset-bundles.md)を参照してください。
+::: warning
+NOTE リソースリクエストのコンセプトが Craft 3 で削除されたため、プラグインにリソースリクエストの処理を許可するこのフックには、直接 Craft 3 で匹敵するものがありません。Craft 3 でプラグインがどのようにリソースを提供できるかを知るには[アセットバンドル](asset-bundles.md)を参照してください。
 :::
 
 #### `modifyCpNav`
@@ -712,8 +714,8 @@ public function getTableAttributesForSource($elementType, $sourceKey)
 }
 ```
 
-::: warning NOTE
-エレメントインデックスがレンダリングされる前に、プラグインがエレメントタイプのテーブル属性を完全に変更することを許可するこのフックには、直接 Craft 3 で匹敵するものがありません。Craft 3 で最も近いのは、管理者がエレメントインデックスのソースをカスタマイズする際に、エレメントタイプの利用可能なテーブル属性を変更するために使用できる <api:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> イベントです。
+::: warning
+NOTE エレメントインデックスがレンダリングされる前に、プラグインがエレメントタイプのテーブル属性を完全に変更することを許可するこのフックには、直接 Craft 3 で匹敵するものがありません。Craft 3 で最も近いのは、管理者がエレメントインデックスのソースをカスタマイズする際に、エレメントタイプの利用可能なテーブル属性を変更するために使用できる <api:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> イベントです。
 :::
 
 ## テンプレート変数
@@ -839,11 +841,11 @@ $html = \Craft::$app->view->renderTemplate('plugin-handle/path/to/template');
 
 次のコントロールパネル[テンプレートフック](template-hooks.md)はリネームされました。
 
-| 旧 | 新 |
-| -------------------------------- | ---------------------------- |
+| 旧                               | 新                            |
+| ------------------------------- | ---------------------------- |
 | `cp.categories.edit.right-pane` | `cp.categories.edit.details` |
-| `cp.entries.edit.right-pane` | `cp.entries.edit.details` |
-| `cp.users.edit.right-pane` | `cp.users.edit.details` |
+| `cp.entries.edit.right-pane`    | `cp.entries.edit.details`    |
+| `cp.users.edit.right-pane`      | `cp.users.edit.details`      |
 
 ## リソースリクエスト
 
@@ -936,6 +938,7 @@ Craft::$app->queue->push(new MyJob([
 Craft 2 インストール向けにプラグインにマイグレーションパスを与える必要があるかもしれません。それによって、それらが立ち往生することはなくなります。
 
 Craft がプラグインを**アップデート**なのか、**新規インストール**なのか判断させることを最初に決定する必要があります。プラグインハンドルが（`UpperCamelCase` から `kebab-case` になる他に）変更されない場合、Craft は新しいバージョンの**アップデート**とみなします。しかし、ハンドルがより重要な形で変わっているなら、Craft はそれを認識せず、完全に新しいプラグインとして判断します。
+
 
 ハンドルが（一般的に）同じ名前で止まる場合、“`craft3_upgrade`” のように名付けられた新しい[マイグレーション](migrations.md)を作成してください。アップグレードコードは、他のマイグレーション同様に `safeUp()` メソッドに入れます。
 
@@ -1038,4 +1041,3 @@ $this->dropColumn('{{%tablename}}', 'oldName');
 // Rename the new siteId FK column
 MigrationHelper::renameColumn('{{%tablename}}', 'oldName__siteId', 'newName', $this);
 ```
-
