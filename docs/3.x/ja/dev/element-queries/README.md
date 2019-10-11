@@ -11,7 +11,6 @@
 典型的なエレメントクエリは、次のようになります。
 
 ::: code
-
 ```twig
 {# Create an entry query and set some parameters on it #}
 {% set entryQuery = craft.entries()
@@ -22,7 +21,6 @@
 {# Execute the query and get the results #}
 {% set entries = entryQuery.all() %}
 ```
-
 ```php
 use craft\elements\Entry;
 
@@ -35,7 +33,6 @@ $entryQuery = Entry::find()
 // Execute the query and get the results
 $entries = $entryQuery->all();
 ```
-
 :::
 
 それぞれのタイプのエレメントは、エレメントクエリを作成するための独自のファンクションを持っていて、それぞれ独自のパラメータをセットできます。それらがどんな働きをするかの詳細については、個々のエレメントクエリのページを参照してください。
@@ -61,14 +58,12 @@ $entries = $entryQuery->all();
 ほとんどの場合、照会しているエレメントの取得だけを望んでいます。`all()` ファンクションでそれを実行します。
 
 ::: code
-
 ```twig
 {% set entries = craft.entries()
     .section('news')
     .limit(10)
     .all() %}
 ```
-
 ```php
 use craft\elements\Entry;
 
@@ -77,7 +72,6 @@ $entries = Entry::find()
     ->limit(10)
     ->all();
 ```
-
 :::
 
 ### `one()`
@@ -85,14 +79,12 @@ $entries = Entry::find()
 単一のエレメントだけを取得したい場合、`all()` の代わりに `one()` を呼び出します。エレメント、または、マッチするエレメントが存在しない場合は `null` のいずれかを返します。
 
 ::: code
-
 ```twig
 {% set entry = craft.entries()
     .section('news')
     .slug('hello-world')
     .one() %}
 ```
-
 ```php
 use craft\elements\Entry;
 
@@ -101,7 +93,6 @@ $entry = Entry::find()
     ->slug('hello-world')
     ->one();
 ```
-
 :::
 
 ### `exists()`
@@ -109,14 +100,12 @@ $entry = Entry::find()
 エレメントクエリにマッチするいずれかのエレメントが存在するかを確認したい場合、`true` または `false` を返す、`exists()` を呼び出します。
 
 ::: code
-
 ```twig
 {% set exists = craft.entries()
     .section('news')
     .slug('hello-world')
     .exists() %}
 ```
-
 ```php
 use craft\elements\Entry;
 
@@ -125,7 +114,6 @@ $exists = Entry::find()
     ->slug('hello-world')
     ->exists();
 ```
-
 :::
 
 ### `count()`
@@ -133,13 +121,11 @@ $exists = Entry::find()
 エレメントクエリにマッチするエレメントの数を知りたい場合、`count()` を呼び出します。
 
 ::: code
-
 ```twig
 {% set count = craft.entries()
     .section('news')
     .count() %}
 ```
-
 ```php
 use craft\elements\Entry;
 
@@ -147,7 +133,6 @@ $count = Entry::find()
     ->section('news')
     ->count();
 ```
-
 :::
 
 ::: tip
@@ -159,13 +144,11 @@ $count = Entry::find()
 マッチするエレメント ID のリストが必要な場合、`ids()` を呼び出します。
 
 ::: code
-
 ```twig
 {% set entryIds = craft.entries()
     .section('news')
     .ids() %}
 ```
-
 ```php
 use craft\elements\Entry;
 
@@ -173,7 +156,6 @@ $entryIds = Entry::find()
     ->section('news')
     ->ids();
 ```
-
 :::
 
 ## 高度なエレメントクエリ
@@ -222,4 +204,3 @@ $entryIds = Entry::find()
 ```twig
 {{ dump(query.getRawSql()) }}
 ```
-
