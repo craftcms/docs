@@ -6,10 +6,11 @@
 
 すべてのフィールドはいくつかの共通の設定があります。
 
-* 所属するフィールドグループ
-* 名前
-* ハンドル
-* 説明
+- 所属するフィールドグループ
+- 名前
+- ハンドル
+- 説明
+- **Field Type** – What type of field it is
 
 ![フィールドの設定画面](./images/fields-field-settings.png)
 
@@ -19,40 +20,40 @@ Craft で多言語サイトを運用している場合、フィールドを翻�
 
 Craft は5つの異なる「翻訳メソッド」を提供します。
 
-- 翻訳不可
-- 各サイトに対して翻訳
-- 各サイトグループに対して翻訳
-- 各言語に対して翻訳
-- カスタム
+* [Assets](assets-fields.md)
+* [Categories](categories-fields.md)
+* [Checkboxes](checkboxes-fields.md)
+* [Color](color-fields.md)
+* [Date/Time](date-time-fields.md)
+* [Dropdown](dropdown-fields.md)
+* Email
+* [Entries](entries-fields.md)
+* [Lightswitch](lightswitch-fields.md)
+* [Matrix](matrix-fields.md)
+* [Multi-select](multi-select-fields.md)
+* [Number](number-fields.md)
+* [Plain Text](plain-text-fields.md)
+* [Radio Buttons](radio-buttons-fields.md)
+* [Table](table-fields.md)
+* [Tags](tags-fields.md)
+* URL
+* [Users](users-fields.md)
+
+## フィールドタイプ
 
 フィールドが「翻訳不可」とマークされている場合、その値はすべてのサイトに渡って常にコピーされます。
 
 「カスタム」翻訳モードは、カスタム翻訳ロジックを実装するために使用できます。フィールドのカスタム「翻訳キー」フォーマットを定義することができ、フィールド値は同じキーを生成するすべてのサイトにコピーされます。例えば、サイトハンドルの最初の2文字に基づいて翻訳可能なフィールドとするには、`{site.handle[:2]}` と入力します。
 
-## フィールドタイプ
+- **Not translatable** – The field will have the same value across all sites.
+- **Translate for each site** – The field can have a different value for each site.
+- **Translate for each site group** – The field can have a different value for each site group.
+- **Translate for each language** – The field can have a different value for each unique language associated with your sites.
+- **Custom…** – The field can have different values based on a custom differentiator.
 
 すべてのフィールドに設定されるのが「フィールドタイプ」の設定です。これは、フィールドがどんな種類か（入力 UI の外観、保存可能なデータ型、テンプレートからデータをどのようにやりとりできるか）を決定します。
 
 Craft は次の組み込みのフィールドタイプがあります。
-
-* [アセット](assets-fields.md)
-* [カテゴリ](categories-fields.md)
-* [チェックボックス](checkboxes-fields.md)
-* [色](color-fields.md)
-* [日/時](date-time-fields.md)
-* [セレクトボックス](dropdown-fields.md)
-* メール
-* [エントリ](entries-fields.md)
-* [Lightswitch](lightswitch-fields.md)
-* [行列](matrix-fields.md)
-* [マルチセレクトボックス](multi-select-fields.md)
-* [数字](number-fields.md)
-* [プレーンテキスト](plain-text-fields.md)
-* [ラジオボタン](radio-buttons-fields.md)
-* [テーブル](table-fields.md)
-* [タグ](tags-fields.md)
-* URL
-* [ユーザー](users-fields.md)
 
 ## フィールドレイアウト
 
@@ -60,7 +61,7 @@ Craft は次の組み込みのフィールドタイプがあります。
 
 関連するコンテンツを持つ Craft 内のすべての場所で、フィールドを選択するためのフィールドレイアウトを提供します。
 
-* [エントリ](sections-and-entries.md)は、「設定 > セクション > 入力タイプ > [入力タイプ名] > フィールドレイアウト」の入力タイプごとに定義されたフィールドレイアウトを使用します。 
+* [エントリ](sections-and-entries.md)は、「設定 > セクション > 入力タイプ > [入力タイプ名] > フィールドレイアウト」の入力タイプごとに定義されたフィールドレイアウトを使用します。
 * [グローバル設定](globals.md)は、「設定 > グローバル > [グローバル設定名] > フィールドレイアウト」で定義されたそれぞれのフィールドレイアウトを使用します。
 * [アセット](assets.md)は、「設定 > アセット > [アセットボリューム名] > フィールドレイアウト」のアセットボリュームごとに定義されたフィールドレイアウトを使用します。
 * [カテゴリ](categories.md)は、「設定 > カテゴリ → [カテゴリグループ名] > フィールドレイアウト」のカテゴリグループごとに定義されたフィールドレイアウトを使用します。
@@ -77,4 +78,3 @@ Craft は次の組み込みのフィールドタイプがあります。
 「必須にする」をクリックすると、フィールド名の横にアスタリスク（`*`）が追加され、必須項目になったことを示します。それ以降、歯車アイコンをクリックすると、期待通り「必須にしない」オプションを表示します。
 
 入力タイプのフィールドレイアウトには別の機能があり、フィールドを含むコンテンツタブを定義できます。必要数のコンテンツタブを作成し、類似するフィールドをまとめて分類するために利用します。各コンテンツタブには歯車アイコンが表示され、リネームや削除ができます。
-
