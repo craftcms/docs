@@ -28,27 +28,22 @@ Craft はプロジェクトコンフィグに次の設定を保存します。
 
 マルチ環境にまたがるプロジェクトコンフィグの共有を開始するには、次のステップに従います。
 
-1. 最新のデータを持つ、プライマリ環境を選択してください。（すでに稼働しているプロジェクトの場合、これは本番環境であるべきです。）
-
-2. プライマリ環境が Craft の最新版で稼働していることを確認してください。
-
-3. すでに Craft 3.1 以降で稼働している場合、その環境で `./craft project-config/rebuild` を実行し、プロジェクトコンフィグがデータベースのいたるところに保存されているコンフィグ設定と共に最新の状態であることを確認してください。
-
+1. Pick a primary environment that has the most up-to-date data. (If your project is already live, this should be your production environment.)
+2. Ensure that your primary environment is running the latest version of Craft.
+3. If you were already running Craft 3.1 or later, run `./craft project-config/rebuild` on that environment, to ensure that its project config is up-to-date with config settings stored throughout the database.
 4. プライマリ環境の `config/general.php` で <config:useProjectConfigFile> 設定を有効にしてください。
 
-   ```php
-   return [
+    ```php
+    return [
     '*' => [
         'useProjectConfigFile' => true,
     ],
    ];
-   ```
+    ```
 
 5. プライマリ環境の任意のページをロードすると、Craft は `config/project.yaml` ファイルを生成できます。
-
-6. プライマリ環境のデータベースをバックアップしてください。
-
-7. 他のすべての環境では、ステップ 6 で作成したデータベースのバックアップを復元し、ステップ 5 で作成した `config/project.yaml` ファイルのコピーを保存してください。
+6. Backup the database on the primary environment.
+7. For all other environments, restore the database backup created in step 6, and save a copy of the `config/project.yaml` file created in step 5.
 
 Craft はプロジェクトコンフィグによって管理される何かが変更されたときはいつでも、 `config/project.yaml` の更新を開始します。そして、Craft が自身の `project.yaml` が更新されたことを検知するたび（例えば、最近プルされた Git コミットによって変更された場合など）に、その変更がローカルにインストールされた Craft へ伝播されます。
 
@@ -119,5 +114,4 @@ return [
 
 ```bash
 ./craft project-config/rebuild
-```
-
+``` 

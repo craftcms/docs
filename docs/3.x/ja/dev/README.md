@@ -37,6 +37,7 @@ Craft には、テンプレートへの Unix スタイルのファイルシス�
 
 `templates/recipes/ingredients.twig` *と* `templates/recipes/ingredients/index.twig` の両方にテンプレートがある場合、`recipes/ingredients` は `ingredients.twig` にマッチします。
 
+
 ### 不可視テンプレート
 
 Craft は、`recipes/_entry.twig` のように、名前の接頭辞にアンダースコアが付いたテンプレートを直接アクセスできない不可視テンプレートとして扱います。
@@ -54,4 +55,3 @@ Craft でマルチサイトを運用している場合、特定のサイトだ�
 例えば、ドイツのカスタマーを歓迎するための特別なテンプレートを作成したいものの、英語版サイトで必要ない場合、`templates/de/welcome.twig` に保存します。そのテンプレートは `http://example.de/welcome` からアクセスできるでしょう。
 
 Craft は、通常のテンプレートを探す_前に_ローカライズ用のテンプレートを探します。それによって、ローカライズされていないテンプレートを上書きすることができます。詳細については、[ローカライゼーションガイド](../localization.md)を参照してください。
-

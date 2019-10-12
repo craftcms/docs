@@ -19,68 +19,44 @@ Craft や Craft プラグイン向けのコードを書くときには、この�
 
 - 可能な限り、メソッド引数の型を宣言してください。
 
-   ```php
-   public function foo(Entry $entry, array $settings)
-   ```
+    ```php
+    public function foo(Entry $entry, array $settings)
+    ```
 
 - 可能な限り、厳格な比較演算子（`===` および `!==`）を使用してください。
-
-- `is_null($foo)` / `!is_null($bar)` よりむしろ `$foo === null` / `$bar !== null` を使用してください。
-
-- `intval($foo)` / `floatval($bar)` よりむしろ `(int)$foo` / `(float)$bar` を使用してください。
-
-- [in_array()](http://php.net/manual/en/function.in-array.php) の第三引数へ常に `true` / `false` を渡して、型の比較をチェックするかを示します（そして、可能な限り `true` にします）。
-
-- オブジェクトのプロパティがセットされているかをチェックする条件文では、`isset($obj->property)` よりむしろ `$obj->property !== null` を使用してください。
-
-- 配列が空である / ではないをチェックする条件文では、`empty()` / `!empty()` を使用してください。
-
-- 文字列（`'some\nmspace\Foo'`）または <api:yii\base\BaseObject::className()> よりむしろ [::class](http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class) キーワード（`Foo::class`）を使用して、クラス名を参照してください。
-
-- 暗黙的（例：`$array` がまだ定義されていない状態での `$array[] = 'foo'`）よりむしろ明示的（`$array = []`）に配列を初期化してください。 
-
-- クラスが拡張されている場合に `static::` が壊れるため、プライベートな static ファンクションを呼び出す際、`static::_foo()` ではなく `self::_foo()` を使用してください。
-
-- `static::CONSTANT`（不必要なオーバーヘッド）よりむしろ `self::CONSTANT` を使用してください。
-
-- 現在のメソッドと同じ名前の親メソッドを呼び出す際のみ、`parent::` キーワードを使用してください。そうでなければ、`$this->` を使用してください。
-
-- クラスのプロパティやメソッドの可視性（`public`、`protected`、または、`private`）は、常に指定してください。
-
-- プライベートなクラスのプロパティ / メソッド名は、アンダースコアではじめます（`private $_foo`）。
-
-- 明示的にクラスプロパティのデフォルト値を `null` セットしないでください（例：`public $foo = null;`）。
-
-- 何かを返すファイルをインクルードする際は、`require_once` または `include_once` よりむしろ `require` または `include` を常に使用してください。
-
-- 短い文字列向けに他の文字列がある文字列ではじまるかをチェックする際は、`strncmp($foo, $bar, $barLength) === 0` よりむしろ `strpos($foo, $bar) === 0` を使用してください。
-
-- 文字列が空かどうかをチェックする際は、`strlen($str) === 0` よりむしろ `$str === ''` を使用してください。
-
-- 可能な場合、ループ内で `array_merge()` の使用を避けてください。
-
+- Use `$foo === null`/`$bar !== null` rather than `is_null($foo)`/`!is_null($bar)`.
+- Use `(int)$foo`/`(float)$bar` rather than `intval($foo)`/`floatval($bar)`.
+- Always pass `true`/`false` to the third argument of [in_array()](http://php.net/manual/en/function.in-array.php) to indicate whether the check should be type-strict (and make it `true` whenever possible).
+- Use `$obj->property !== null` rather than `isset($obj->property)` in conditions that check if an object property is set.
+- Use `empty()`/`!empty()` in conditions that check if an array is/isn’t empty.
+- Refer to class names using the [::class](http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class) keyword (`Foo::class`) rather than as a string (`'some\nmspace\Foo'`) or <api:yii\base\BaseObject::className()>.
+- Initialize arrays explicitly (`$array = []`) rather than implicitly (e.g. `$array[] = 'foo'` where `$array` wasn’t defined yet).
+- Use `self::_foo()` rather than `static::_foo()` when calling private static functions, since `static::` would break if the class is extended.
+- Use `self::CONSTANT` rather than `static::CONSTANT` (unnecessary overhead).
+- Only use the `parent::` keyword when calling a parent method with the exact same name as the current method. Otherwise use `$this->`.
+- Always specify the visibility of class properties and methods (`public`, `protected`, or `private`).
+- Private class property/method names should begin with an underscore (`private $_foo`).
+- Don’t explicitly set class properties’ default values to `null` (e.g. `public $foo = null;`).
+- Always use `require` or `include` when including a file that returns something, rather than `require_once` or `include_once`.
+- Use `strpos($foo, $bar) === 0` rather than `strncmp($foo, $bar, $barLength) === 0` when checking if one string begins with another string, for short strings.
+- Use `$str === ''` rather than `strlen($str) === 0` when checking if a string is empty.
+- Avoid using `array_merge()` within loops when possible.
 - ループ処理の終了後、foreach ループの参照によって作成された変数を解除してください。
 
-   ```php
+    ```php
     foreach ($array as &$value) {
         // ...
     }
     unset($value);
-   ```
+    ```
 
 - `join()` よりむしろ `implode()` を使用してください。
-
-- needle の位置が必要でない場合、`array_search(...) !== false` よりむしろ `in_array()` を使用してください。
-
-- 単一の `if` 条件で十分な場合、`switch` 文を使用しないでください。
-
-- ダブルクォート（`"`）が不要な場合、シングルクォート（`'`）を使用してください。
-
-- 可能であれば、ショートカット演算子（`+=`、`-=`、`*=`、`/=`、`%=`、`.=` など）を使用してください。
-
-- 可能であれば、ショートカット正規表現パターン（`\d`、`\D`、`\w`、`\W` など）を使用してください。
-
-- ファイルパスを定義する際は、`'/'` よりむしろ `DIRECTORY_SEPARATOR` 定数を使用してください。
+- Use `in_array()` rather than `array_search(...) !== false` when the position of the needle isn’t needed.
+- Don’t use a `switch` statement when a single `if` condition will suffice.
+- Use single quotes (`'`) whenever double quotes (`"`) aren’t needed.
+- Use shortcut operators (`+=`, `-=`, `*=`, `/=`, `%=`, `.=`, etc.) whenever possible.
+- Use shortcut regex patterns (`\d`, `\D`, `\w`, `\W`, etc.) whenever possible.
+- Use the `DIRECTORY_SEPARATOR` constant rather than `'/'` when defining file paths.
 
 ::: tip
 PhpStorm プラグインの [Php Inspections (EA Extended)](https://plugins.jetbrains.com/idea/plugin/7622-php-inspections-ea-extended-) は、これらのベストプラクティスの問題を見つけて修正するのに役立ちます。
@@ -91,7 +67,7 @@ PhpStorm プラグインの [Php Inspections (EA Extended)](https://plugins.jetb
 - ベースパスにマップされている既知のベース名前空間があれば、クラスのファイルの場所を完全修飾名で推測できる [PSR-4](https://www.php-fig.org/psr/psr-4/) 仕様に従ってください。
 - 名前空間は、すべて小文字であるべきです。
 - クラス名は `StudlyCase` にする必要があります。
-- ファーストパーティのコードだけが、`craft\` および `pixelandtonic\` 名前空間ルートを使用します。サードパーティプラグインは、ベンダー名とプラグイン名（例：`acme\myplugin\`）を参照する名前空間ルートを使用する必要があります。
+- ファーストパーティのコードだけが、``craft\` および``pixelandtonic\` 名前空間ルートを使用します。サードパーティプラグインは、ベンダー名とプラグイン名（例：`acme\myplugin\`）を参照する名前空間ルートを使用する必要があります。
 
 ## メソッド名
 
@@ -108,8 +84,8 @@ PhpStorm プラグインの [Php Inspections (EA Extended)](https://plugins.jetb
 
 静的メソッドは、一般的に `get` ではじめるべきではありません。
 
-- `className()`
-- `displayName()`
+  - `className()`
+  - `displayName()`
 
 ## 型宣言
 
@@ -266,7 +242,7 @@ $this->requireAcceptsJson();
 ## 例外
 
 - ユーザーエラーの結果として、例外が起こる可能性がある場合、<api:yii\base\UserException> クラス（または、サブクラス）を使用してください。
-- <api:yii\base\UserException> の場合のみ、<api:Craft::t()> で例外メッセージを翻訳してください。
+- の場合のみ、<api:Craft::t()> で例外メッセージを翻訳してください。
 
 ## データベースクエリ
 
@@ -276,13 +252,11 @@ $this->requireAcceptsJson();
 - `'col1, col2 desc'` の代わりに、`orderBy()` で `['col1' => SORT_ASC, 'col2' => SORT_DESC]` 構文を使用してください。
 
 ### 条件
-
 - テーブル / カラム名や値を自動的に引用するように、可能な限り Yii の[宣言条件構文](api:yii\db\QueryInterface::where())を使用してください。
 - 一貫性のために、次のものを使用してください。
-   - `['in', 'col', $values]` の代わりに `['col' => $values]`
-   - `['=', 'col', $value]` の代わりに `['col' => $value]`
-   - `['like', 'col', '%value%', false]` の代わりに `['like', 'col', 'value']`
-      *（`%` は `value` が片側にのみ必要な場合を除きます。）*
+  -  `['in', 'col', $values]` の代わりに `['col' => $values]`
+  - `['=', 'col', $value]` の代わりに `['col' => $value]`
+  - `['like', 'col', '%value%', false]` の代わりに `['like', 'col', 'value']` *（`%` は `value` が片側にのみ必要な場合を除きます。）*
 - `NULL` を検索する場合、`['col' => null]` 構文を使用してください。
 - `NOT NULL` を検索する場合、`['not', ['col' => null]]` 構文を使用してください。
 - 宣言条件構文が使用できない場合（例えば、しばしば join を使うようなケースのように、条件が値ではなく他のテーブル / カラム名を参照するなど）、100%安全かどうか自信がないすべてのカラム名と値を確実に引用符で囲み、クエリパラメータとして追加する必要があります。
@@ -367,4 +341,3 @@ $entriesService = \Craft::$app->getEntries();
 $entriesService->saveEntry($entry1);
 $entriesService->saveEntry($entry2);
 ```
-

@@ -7,20 +7,22 @@
 コントロールパネル内のいくつかの設定は、（`.env` ファイルで定義されているような）環境変数にセットできます。
 
 - 一般
-   - **システム名**
+  - **システム名**
 - サイト
-   - **ベース URL**
+  - **ベース URL**
 - アセットボリューム
-   - **ベース URL**
-   - **ファイルシステムのパス**（ローカル）
+  - **ベース URL**
 - メール
-   - **システムのメールアドレス**
-   - **差出人の名前**
-   - **HTML メールのテンプレート**
-   - **ユーザー名**（Gmail、および、SMTP）
-   - **パスワード**（Gmail、および、SMTP）
-   - **ホストネーム**（SMTP）
-   - **ポート**（SMTP）
+  - **システムのメールアドレス**
+  - **File System Path** (Local)
+- Email
+  - **System Email Address**
+  - **Sender Name**
+  - **HTML Email Template**
+  - **Username** (Gmail and SMTP)
+  - **Password** (Gmail and SMTP)
+  - **Host Name** (SMTP)
+  - **Port** (Port)
 
 これらの設定を環境変数にセットするには、環境変数の名前を `$` に続けて入力してください。
 
@@ -42,7 +44,6 @@
 # -- .env --
 ROOT_URL="http://my-project.test"
 ```
-
 次に、それを参照するエイリアス `@rootUrl` を作成します。
 
 ```php
@@ -105,4 +106,3 @@ ENVIRONMENT="dev"
 // -- web/index.php --
 define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
 ```
-

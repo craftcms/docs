@@ -6,8 +6,8 @@
 
 プラグイン作成に取り組む前に、いくつかのことを決めておく必要があります。
 
-- **パッケージ名** – プラグイン向けに Composer パッケージの名前として使用されます。（詳細については、[documentation][package name] を参照してください。）これが Craft のプラグインだと識別する手助けになるため、2番目のセグメント（`/` の後）に接頭辞 `craft-` を付けることをお勧めします。例えば `pixelandtonic/craft-recipes` のような形です。
-- **名前空間** – プラグインのクラスが稼働する、ルート名前空間。（詳細については、[PSR-4] オートローディング仕様を参照してください。）これは `craft\` ではじめるべき *ではない* ことに注意してください。あなたやデベロッパーを識別する何かを使用してください。
+- **パッケージ名** – プラグイン向けに Composer パッケージの名前として使用されます。（詳細については、[documentation](https://getcomposer.org/doc/04-schema.md#name) を参照してください。）これが Craft のプラグインだと識別する手助けになるため、2番目のセグメント（`/` の後）に接頭辞 `craft-` を付けることをお勧めします。例えば `pixelandtonic/craft-recipes` のような形です。
+- **名前空間** – プラグインのクラスが稼働する、ルート名前空間。（詳細については、[PSR-4](https://www.php-fig.org/psr/psr-4/) オートローディング仕様を参照してください。）これは `craft\` ではじめるべき *ではない* ことに注意してください。あなたやデベロッパーを識別する何かを使用してください。
 - **プラグインハンドル** – Craft のエコシステム内でプラグインを一意に識別する何か。（プラグインハンドルは、文字ではじまり、小文字の英字、数字、および、ダッシュのみでなければなりません。`kebab-cased` にすべきです。）
 - **プラグイン名** – コントロールパネル内でプラグインを何と呼ぶか。
 
@@ -82,7 +82,7 @@
 - `email@developer-website.tld` をサポートのメールアドレスにします。
 - `developer/repo` をプラグインが稼働している実際の GitHub アカウントとリポジトリ名にします。
 - `master` を GitHub リポジトリの実際のプライマリブランチ名にします。
-- `namespace\\prefix\\` を名前空間接頭辞にします。（これは JSON であるため、二重バックスラッシュを使用し、最後が `\\` でなければならない点に注意してください。）
+- ``namespace\\prefix\\` を名前空間接頭辞にします。（これは JSON であるため、二重バックスラッシュを使用し、最後が``\\` でなければならない点に注意してください。）
 - `plugin-handle` をプラグインハンドルにします。
 - `Plugin Name` をプラグイン名にします。
 - [Craft License](https://craftcms.github.io/license/) を使用する計画の場合、`MIT` を `proprietary` にします（「プラグインストアでの配布」ページの[ライセンスの選択](plugin-store.md#choose-a-license)を参照してください）。
@@ -93,7 +93,7 @@
 
 - `handle` – プラグインハンドル _（必須）_ 。
 - `class` – [プラグインクラス](#the-plugin-class)名。設定されていない場合、インストーラーはそれぞれの `autoload` パスのルートで `Plugin.php` ファイルを探します。
-- `basePath` – プラグインのソースファイルへのベースパス。[Yii alias]（例： `@vendorname/foo`） としてフォーマットされた `autoload` 名前空間の1つからはじめることができます。設定されてない場合、プライマリプラグインクラスを含むディレクトリが使用されます。
+- `basePath` – プラグインのソースファイルへのベースパス。[Yii alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)（例： `@vendorname/foo`） としてフォーマットされた `autoload` 名前空間の1つからはじめることができます。設定されてない場合、プライマリプラグインクラスを含むディレクトリが使用されます。
 - `name` – プラグイン名。設定されていない場合、（ベンダー接頭辞なしの）パッケージ名が使用されます。
 - `version` - プラグインのバージョン。設定されていない場合、現在のパッケージバージョンが使用されます。
 - `schemaVersion` – プラグインスキーマのバージョン。
@@ -105,7 +105,7 @@
 - `sourceLanguage` – プラグインのソース言語（デフォルトは `en-US`）。
 - `hasSettings` – プラグインの設定があるかどうか（`true` または `false`）。
 - `hasCpSection` – コントロールパネルにプラグイン独自のセクションを持つかどうか（`true` または `false`）。
-- `components` – プラグイン上に存在するべき [component configs] を定義するオブジェクト。
+- `components` – プラグイン上に存在するべき [component configs](https://www.yiiframework.com/doc/guide/2.0/en/structure-application-components) を定義するオブジェクト。
 
 ::: tip
 Composer が厳密に要求しているわけではありませんが、プラグインを開発する際にいくつかのことが簡単に行えるよう `composer.json` へ明示的に`version` を設定することをお勧めします。そして、アップデートし続けることを忘れないでください！
@@ -144,7 +144,7 @@ Craft にプラグインを表示するには、Craft プロジェクトの Comp
 
 ### Path Repository
 
-開発中にプラグインを動作させる最も簡単な方法は、他の依存関係と同様に `vendor/` フォルダへシンボリックリンクするよう Composer に伝える [path repository][path] を利用することです。
+開発中にプラグインを動作させる最も簡単な方法は、他の依存関係と同様に `vendor/` フォルダへシンボリックリンクするよう Composer に伝える [path repository](https://getcomposer.org/doc/05-repositories.md#path) を利用することです。
 
 設定するには、Craft プロジェクトの `composer.json` ファイルを開き、次の変更を加えます。
 
@@ -182,7 +182,7 @@ composer require package/name
 Composer のインストールログは、シンボリックリンク経由でパッケージがインストールされたことを表示するでしょう。
 
 ```
-- Installing package/name (X.Y.Z): Symlinking from ../my-plugin
+  - Installing package/name (X.Y.Z): Symlinking from ../my-plugin
 ```
 
 ::: warning
@@ -198,7 +198,6 @@ composer remove package/name
 # re-require the plugin package
 composer require package/name
 ```
-
 :::
 
 ### Packagist
@@ -222,16 +221,3 @@ composer require package/name
 プラグインアイコンは、プラグインのソースディレクトリ（例：`src/`）のルートに `icon.svg` として保存された、正方形の SVG ファイルでなければいけません。
 
 プラグインが [コントロールパネルのセクション](cp-section.md) を持つ場合は、プラグインのソースディレクトリのルートに `icon-mask.svg` ファイルを保存することによって、グローバルナビゲーション項目にカスタムアイコンを付けることもできます。このアイコンにはストロークを含めることができず、常に（アルファ透明度に関して）ソリッドカラーで表示されることに注意してください。
-
-[Yii Modules]: https://www.yiiframework.com/doc/guide/2.0/en/structure-modules
-[models]: https://www.yiiframework.com/doc/guide/2.0/en/structure-models
-[active record classes]: https://www.yiiframework.com/doc/guide/2.0/en/db-active-record
-[controllers]: https://www.yiiframework.com/doc/guide/2.0/en/structure-controllers
-[application components]: https://www.yiiframework.com/doc/guide/2.0/en/structure-application-components
-[package name]: https://getcomposer.org/doc/04-schema.md#name
-[two hardest things]: https://twitter.com/codinghorror/status/506010907021828096
-[PSR-4]: https://www.php-fig.org/psr/psr-4/
-[Yii alias]: https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases
-[component configs]: https://www.yiiframework.com/doc/guide/2.0/en/structure-application-components
-[path]: https://getcomposer.org/doc/05-repositories.md#path
-

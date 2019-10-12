@@ -40,4 +40,3 @@ return [
 ```bash
 ./craft gc --delete-all-trashed=1
 ```
-

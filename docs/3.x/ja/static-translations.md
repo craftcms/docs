@@ -15,7 +15,6 @@
 最初のステップは、すべての静的メッセージをトランスレータを通して実行することです。テンプレートを操作している場合、[translate](dev/filters.md#translate-or-t) フィルタ（`|t`）を使用します。PHP コードを操作している場合、[Craft::t()](api:yii\BaseYii::t()) を使用します。
 
 ::: code
-
 ```twig
 {# old #}
 <a href="/contact">Contact us</a>
@@ -23,7 +22,6 @@
 {# new #}
 <a href="/contact">{{ 'Contact us'|t }}</a>
 ```
-
 ```php
 // old
 $label = 'Contact us';
@@ -31,7 +29,6 @@ $label = 'Contact us';
 // new
 $label = Craft::t('site', 'Contact us');
 ```
-
 :::
 
 ## 翻訳の提供
@@ -63,3 +60,29 @@ return [
 
 これで、ドイツ語サイトのメッセージ翻訳を処理する際、「Contact us」が「Kontaktiere uns」に置換されます。
 
+### Message Parameters
+
+Static messages can have [placeholder values](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n#message-parameters). For example:
+
+```php
+<?php
+
+return [
+    'Welcome back, {name}' => 'Willkommen zurück {name}',
+];
+```
+
+To replace the placeholder values with dynamic values when translating the message, pass the `params` argument when using the [translate](dev/filters.md#translate-or-t) filter or calling [Craft::t()](api:yii\BaseYii::t()):
+
+::: code
+```twig
+<a href="/contact">{{ 'Welcome back, {name}'|t(params = {
+    name: currentUser.friendlyName,
+}) }}</a>
+```
+```php
+echo Craft::t('site', 'Welcome back, {name}', [
+    'name' => Craft::$app->user->identity->friendlyName,
+]);
+```
+:::

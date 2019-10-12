@@ -12,4 +12,3 @@ Craft の一般的な使用例です。
 - [ユーザー登録フォーム](user-registration-form.md)
 - [パスワードを忘れた際のフォーム](forgot-password-form.md)
 - [パスワードの設定フォーム](set-password-form.md)
-

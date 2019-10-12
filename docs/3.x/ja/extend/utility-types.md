@@ -32,4 +32,3 @@ class Plugin extends \craft\base\Plugin
     // ...
 }
 ```
-

@@ -99,9 +99,8 @@ class Module extends \yii\base\Module
 }
 ```
 
-`bar` をあなたのモジュールの名前空間に、`'@bar'` を実際の名前空間に基づく[エイリアス](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)に置き換えてください（全ての `\` は `/` に置き換えます）。
+`bar` をあなたのモジュールの名前空間に、`'@bar'` を実際の名前空間に基づく[エイリアス](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)に置き換えてください（全ての ``\` は``/` に置き換えます）。
 
 ## 参考文献
 
 モジュールの詳細については、[Yii documentation](https://www.yiiframework.com/doc/guide/2.0/en/structure-modules) を参照してください。
-

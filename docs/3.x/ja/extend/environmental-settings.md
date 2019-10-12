@@ -16,7 +16,7 @@ class MyModel extends Model
      * @var string the raw secret key (e.g. '$ENV_NAME')
      */
     public $secretKey;
-    
+
     /**
      * @return string the parsed secret key (e.g. 'XXXXXXXXXXX')
      */ 
@@ -47,7 +47,7 @@ class MyModel extends Model
             ],
         ];
     }
-    
+
     public function rules()
     {
         return [
@@ -55,7 +55,7 @@ class MyModel extends Model
             ['secretKey', 'string', 'length' => 50],
         ];
     }
-    
+
     // ...
 }
 ```
@@ -87,4 +87,3 @@ class MyModel extends Model
     suggestAliases: true
 }) }}
 ```
-

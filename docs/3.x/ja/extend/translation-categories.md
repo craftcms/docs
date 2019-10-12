@@ -56,4 +56,3 @@ src/
     └── de/
         └── plugin-handle.php
 ```
-

@@ -62,13 +62,15 @@ my-project.test/
 これらすべてのフォルダやファイルが何のためにあり、どのようにカスタマイズするかを知りたければ、[Directory Structure](directory-structure.md) ページを参照してください。
 :::
 
-## ステップ 2：ファイルパーミッションの設定
-
 ::: tip
 Craft のダウンロードに Composer を利用した場合、おそらく安全にこのステップをスキップできます。
 :::
 
+## ステップ 2：ファイルパーミッションの設定
+
 Craft が正しく動作するためには、PHP が次の場所への書き込み権限が必要です。
+
+設定されるべき正確なパーミッションは、PHP を実行しているシステムユーザーと実際にフォルダやファイルを所有しているユーザーとの関係性に依存します。
 
 - `.env`
 - `composer.json`
@@ -78,39 +80,39 @@ Craft が正しく動作するためには、PHP が次の場所への書き込�
 - `vendor/*`
 - `web/cpresources/*`
 
-設定されるべき正確なパーミッションは、PHP を実行しているシステムユーザーと実際にフォルダやファイルを所有しているユーザーとの関係性に依存します。
+::: warning
+IS ファンへ サイトの AppPool アカウントがこれらのフォルダやファイルに書き込み権限を持っていることを確認してください。
+:::
 
 - 同じユーザーであれば、`744` を利用します。
 - 同じグループであれば、`774` を利用します。
 - 確信が持てず、緊張感がある生活を好むなら、`777` を利用します。
 
-::: warning IS ファンへ
-サイトの AppPool アカウントがこれらのフォルダやファイルに書き込み権限を持っていることを確認してください。
-:::
-
-## ステップ 3：セキュリティキーの設定
-
 ::: tip
 Craft のダウンロードに Composer を利用した場合、おそらく安全にこのステップをスキップできます。
 :::
+
+## ステップ 3：セキュリティキーの設定
 
 それぞれの Craft プロジェクトでは、そのプロジェクトがインストールされている各環境で共有されるユニークなセキュリティキーが必要です。
 
 [手動](#set-the-key-manually)でキーの生成と割り当てを行うか、[ターミナルコマンド](#set-the-key-from-your-terminal)で Craft に任せることもできます。
 
-### キーを手動で設定
-
 はじめに、なるべく [1Password](https://1password.com) のようなパスワードジェネレーターを使って、暗号化された安全なキーを生成してください。（長さに制限はありません。）
+
+### キーを手動で設定
 
 そして、（macOS であれば、[Transmit](https://panic.com/transmit/) のようなアプリを利用して）`.env` ファイルを開き、次の行を探してください。
 
+ダブルクォートの内側にセキュリティキーをペーストし、ファイルを保存します。
+
     SECURITY_KEY=""
 
-ダブルクォートの内側にセキュリティキーをペーストし、ファイルを保存します。
+ターミナル上でプロジェクトのルートディレクトリへ移動し、次のコマンドを実行します。
 
 ### キーをターミナルから設定
 
-ターミナル上でプロジェクトのルートディレクトリへ移動し、次のコマンドを実行します。
+次に、Craft プロジェクト向けのデータベースを作成する必要があります。Craft 3 は MySQL 5.5 以上と PostgreSQL 9.5 以上の両方をサポートします。
 
 ```bash
 ./craft setup/security-key
@@ -118,75 +120,76 @@ Craft のダウンロードに Composer を利用した場合、おそらく安�
 
 ## ステップ 4：データベースの作成
 
-次に、Craft プロジェクト向けのデータベースを作成する必要があります。Craft 3 は MySQL 5.5 以上と PostgreSQL 9.5 以上の両方をサポートします。
-
 選択可能であれば、ほとんどの場合に次のデータベース設定を推奨します。
-
-- **MySQL**
-   - デフォルトの文字セット： `utf8`
-   - デフォルトの照合順： `utf8_unicode_ci`
-
-- **PostgreSQL**
-   - 文字セット： `UTF8`
-
-## ステップ 5：ウェブサーバーのセットアップ
 
 Craft プロジェクトをホストするための新しいウェブサーバーを用意してください。ドキュメントルートは `web/` ディレクトリ（または、リネームしたディレクトリ）を指すようにします。
 
-[MAMP](https://mamp.info) や他のローカルホスティングツールを使用していない場合、`hosts` ファイルを更新して、選択したホスト名にローカルコンピュータへ要求をルーティングする必要があるかもしれません。 
+- **MySQL**
+  - デフォルトの文字セット： `utf8`
+  - デフォルトの照合順： `utf8_unicode_ci`
+
+- **PostgreSQL**
+  - 文字セット： `UTF8`
+
+## ステップ 5：ウェブサーバーのセットアップ
+
+[MAMP](https://mamp.info) や他のローカルホスティングツールを使用していない場合、`hosts` ファイルを更新して、選択したホスト名にローカルコンピュータへ要求をルーティングする必要があるかもしれません。
+
+ブラウザで `http://<Hostname>/index.php?p=admin/install`（ウェブサーバーのホスト名で `<Hostname>` を置き換える）にアクセスすることで、すべて正しく設定できたかどうかをテストできます。Craft のセットアップウィザードが表示された場合、そのホスト名は Craft のインストールのために適切に処理されています。
 
 - **macOS/Linux/Unix**: `/etc/hosts`
 - **Windows**: `\Windows\System32\drivers\etc\hosts`
 
-ブラウザで `http://<Hostname>/index.php?p=admin/install`（ウェブサーバーのホスト名で `<Hostname>` を置き換える）にアクセスすることで、すべて正しく設定できたかどうかをテストできます。Craft のセットアップウィザードが表示された場合、そのホスト名は Craft のインストールのために適切に処理されています。
+ついに、Craft のセットアップウィザードを実行するときがきました。[ターミナル](#terminal-setup) または [ウェブブラウザ](#web-browser-setup) から実行できます。
 
 ## ステップ 6：セットアップウィザードの実行
 
-ついに、Craft のセットアップウィザードを実行するときがきました。[ターミナル](#terminal-setup) または [ウェブブラウザ](#web-browser-setup) から実行できます。
+ターミナル上でプロジェクトのルートディレクトリに移動し、次のコマンドを実行してセットアップウィザードを開始します。
 
 ### ターミナルによるセットアップ
 
-ターミナル上でプロジェクトのルートディレクトリに移動し、次のコマンドを実行してセットアップウィザードを開始します。
+このコマンドは、データベースへの接続方法を学んだ上で Craft のインストーラーを開始するために、いくつかの質問をします。それが終われば、ウェブブラウザから新しい Craft サイトにアクセスできるはずです。
 
 ```bash
 ./craft setup
 ```
 
-このコマンドは、データベースへの接続方法を学んだ上で Craft のインストーラーを開始するために、いくつかの質問をします。それが終われば、ウェブブラウザから新しい Craft サイトにアクセスできるはずです。
+ウェブブラウザで `http://<Hostname>/index.php?p=admin/install`（ウェブサーバーのホスト名で `<Hostname>` を置き換える）に移動します。ここまでのステップがうまくいっていれば、Craft のセットアップウィザードが迎えてくれるでしょう。
 
 ### ウェブブラウザによるセットアップ
 
-ウェブブラウザで `http://<Hostname>/index.php?p=admin/install`（ウェブサーバーのホスト名で `<Hostname>` を置き換える）に移動します。ここまでのステップがうまくいっていれば、Craft のセットアップウィザードが迎えてくれるでしょう。
+In your web browser, go to `http://<Hostname>/index.php?p=admin/install` (substituting `<Hostname>` with your web server’s host name). If you’ve done everything right so far, you should be greeted by Craft’s Setup Wizard.
 
-![Craft のインストール画面](./images/installation-step-0.png)
+![Craft Installation Screen](./images/installation-step-0.png)
 
-インストーラーの最初のステップは、[ライセンス契約](https://craftcms.com/license)への同意です。（もちろん、すべて目を通した上で）契約をスクロールダウンし、「Got it（了解）」ボタンをクリックして了承してください。
+The first step of the installer is to accept the [license agreement](https://craftcms.com/license). Scroll down through the agreement (reading it all, of course) and click the “Got it” button to accept.
 
-![Craft インストール画面（ライセンス契約の確認）](./images/installation-step-1.png)
-
-2つ目のステップは、データベース接続情報の入力です。
+![Craft Installation License Agreement](./images/installation-step-1.png)
 
 ::: tip
 Craft がすでにデータベースに接続可能な状態であれば、このステップはスキップされます。
 :::
 
-![Craft インストール画面（データベース接続情報）](./images/installation-step-2.png)
+::: tip
+If the Setup Wizard skips this step, it’s because Craft is already able to connect to your database.
+:::
 
-インストーラーの3つ目のステップは、管理者アカウントの作成です。_特別なアカウント_ として、強力なパスワードを選んでください。
+![Craft Installation Database Connection Information](./images/installation-step-2.png)
 
-![Craft インストール画面（ユーザーアカウントの作成）](./images/installation-step-3.png)
+The third step of the installer is to create an admin account. Don’t be one of _those people_ and be sure to pick a strong password.
 
-最後のステップは、システム名、ベース URL、および、言語の設定です。
+![Craft Installation Create User Account](./images/installation-step-3.png)
 
-![Craft インストール画面（システム設定）](./images/installation-step-4.png)
+The final step is to define your System Name, Base URL, and Language.
 
-「Finish up（完了）」 ボタンをクリックしてセットアッププロセスを完了します。数秒後、Craft のインストールが実行されるでしょう。
+![Craft Installation System Settings](./images/installation-step-4.png)
 
 インストールが成功したら、Craft はブラウザをコントロールパネルにリダイレクトします。
 
-![Craft インストール画面（完了）](./images/installation-step-5.png)
+If it was successful, Craft will redirect your browser to the Control Panel.
 
-おめでとうございます！Craft がインストールされました。
+![Craft Installation Complete](./images/installation-step-5.png)
 
 さぁ、素晴らしいものを築きあげましょう。
 
+Now build something incredible.

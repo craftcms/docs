@@ -61,7 +61,7 @@ public function handleChangedProductType(ConfigEvent $event)
 {
     // Get the UID that was matched in the config path
     $uid = $event->tokenMatches[0];
-    
+
     // Does this product type exist?
     $id = (new Query())
         ->select(['id'])
@@ -140,7 +140,6 @@ public function handleDeletedProductType(ConfigEvent $event)
 ```php
 Craft::$app->projectConfig->processConfigChanges('productTypeGroups');
 ```
-
 :::
 
 ### ステップ 3：設定への変更のプッシュ
@@ -251,5 +250,4 @@ Event::on(ProjectConfig::class, ProjectConfig::EVENT_REBUILD, function(RebuildCo
     // Add plugin's project config data...
    $e->config['myPlugin']['key'] = $value;
 });
-```
-
+``` 

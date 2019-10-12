@@ -8,20 +8,19 @@
 
 - **アップロードを単一のフォルダに限定しますか？** – ファイルのアップロード / 関連付けを単一のフォルダに制限するかどうか。
 
-   有効にすると、次の設定が表示されます。
-   - **ロケーションをアップロードする** – フィールドに直接ドラッグされたファイルを保存するロケーション。
+  有効にすると、次の設定が表示されます。
 
-   無効にすると、次の設定が表示されます。
-   - **ソース** – フィールドが、どのアセットボリューム（または、他のアセットインデックスソース）からアセットを関連付けられるか。
-   - **既定のアップロードロケーション** – フィールドに直接ドラッグされたファイルを保存するデフォルトのロケーション。
+  - **Upload Location** – The location that files dragged directly onto the field should be saved in.
+
+  If disabled, the following settings will be visible:
+
+  - **Sources** – Which asset volumes (or other asset index sources) the field should be able to relate assets from.
+  - **Default Upload Location** – The default location that files dragged directly onto the field should be saved in.
 
 - **許可されるファイルの種類を制限しますか？** 特定の種類のファイルだけをアップロード / 関連付けできるフィールドにするかどうか。
-
-- **リミット** – フィールドに関連付けできるアセット数の上限（デフォルトは無制限です）
-
-- **モードを見る。** – 投稿者のために、フィールドをどのように表示するか。
-
-- **選択ラベル** – フィールドの選択ボタンのラベルに使用されます
+- **Limit** – The maximum number of assets that can be related with the field at once. (Default is no limit.)
+- **View Mode** – How the field should appear for authors.
+- **Selection Label** – The label that should be used on the field’s selection button.
 
 ### マルチサイト設定
 
@@ -29,9 +28,9 @@
 
 - **特定のサイトから アセット を関連付けますか?** – 特定のサイトのアセットとの関連付けのみを許可するかどうか。
 
-   有効にすると、サイトを選択するための新しい設定が表示されます。
+  有効にすると、サイトを選択するための新しい設定が表示されます。
 
-   無効にすると、関連付けられたアセットは常に現在のサイトから取得されます。
+  無効にすると、関連付けられたアセットは常に現在のサイトから取得されます。
 
 - **サイトごとにリレーションを管理** – それぞれのサイトが関連付けられたアセットの独自のセットを取得するかどうか。
 
@@ -58,7 +57,7 @@
 関連付けられたアセットをダブルクリックすると、アセットのタイトルやカスタムフィールドを編集したり、（画像の場合）イメージエディタを起動できる HUD を表示します。
 
 ::: tip
-アセットで使用するカスタムフィールドは、「設定 > アセット > [ボリューム名] > フィールドレイアウト」から選択できます。 
+アセットで使用するカスタムフィールドは、「設定 > アセット > [ボリューム名] > フィールドレイアウト」から選択できます。
 :::
 
 ## テンプレート記法
@@ -69,10 +68,10 @@
 
 利用可能な値には、次のものが含まれます。
 
-| 値 | 取得するエレメント
-| - | -
-| `':empty:'` | 関連付けられたアセットを持たない。
-| `':notempty:'` | 少なくとも1つの関連付けられたアセットを持つ。
+| 値              | 取得するエレメント               |
+| -------------- | ----------------------- |
+| `':empty:'`    | 関連付けられたアセットを持たない。       |
+| `':notempty:'` | 少なくとも1つの関連付けられたアセットを持つ。 |
 
 ```twig
 {# Fetch entries with a related asset #}
@@ -160,4 +159,3 @@
 * [アセットクエリ](dev/element-queries/asset-queries.md)
 * <api:craft\elements\Asset>
 * [リレーション](relations.md)
-

@@ -17,7 +17,6 @@
 {% set styles = ".content { color: #{entry.textColor}; }" %}
 {% do view.registerCss(styles) %}
 ```
-
 :::
 
 ## パラメータ
@@ -33,4 +32,3 @@
 ```
 
 属性は <api:yii\helpers\BaseHtml::renderTagAttributes()> によってレンダリングされます。
-

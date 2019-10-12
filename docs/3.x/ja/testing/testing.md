@@ -5,22 +5,20 @@
 There are a variety of tests each providing pros and cons to specific use cases and functionalities within your application/module/plugin. Craft currently supports the following four test types.
 
 ## Manual testing
-
 Everyone has and probably does manual testing when developing with Craft. Manual testing can be defined in the following steps
 
 - Write some code
 - Press `f5` or trigger a controller action
-- Verify the result by seeing the result in the browser, IDE or database. 
+- Verify the result by seeing the result in the browser, IDE or database.
 
 Manual testing is the most time consuming but often the most effective way to catch bugs in the *primary* implementation of code - it also takes a lot of time and fails in certain key areas. Most importantly - if you make a change to a codebase in one place - it can very likely fail in other places, which you are not manually testing.
 
 It would be woefully inefficient to test your **entire** application after each `git push`. This is where **automated** tests can help.
 
-::: tip Testing is all about strategy and approaches. Manual testing and automated testing work best together. You can use your judgement to detect/prevent issues that computers cannot see whilst computers can execute many tests in short time.  
+::: tip
+Testing is all about strategy and approaches. Manual testing and automated testing work best together. You can use your judgement to detect/prevent issues that computers cannot see whilst computers can execute many tests in short time.
 :::
-
 ### Unit testing
-
 Many definitions exist regarding unit testing. Fundamentally a unit test is focused on testing an individual 'unit' of your code. In practice, this will often mean testing the results of a function or in some cases, class.
 
 Consider the following class.
@@ -90,8 +88,8 @@ public function multiply(int $a, int $b) : int
     return $result;
 }
 ```
-
 The test would fail. Obviously, this is a basic example but as your codebase expands/changes, new devs join or old dev's leave and/or project requirements differ from the original spec more and more code will become dependant on each other.
+
 
 Your unit tests will primarily cover your [service](../extend/services.md) classes. It is not recommended to test *every* method that your service class has. Use your best judgement and try to test methods as high up in the [call stack/backtrace](https://www.php.net/manual/en/function.debug-backtrace.php) as possible (excluding your controllers - they are covered by functional and acceptance testing).
 
@@ -100,11 +98,9 @@ Having good unit tests ensures that your individual functions work correctly, an
 It is recommended to read the Codeception documentation on [unit tests](https://codeception.com/docs/05-UnitTests) as well to see more practical examples of unit tests.
 
 ### Functional & acceptance testing
-
 Your application isn't just a collection of PHP classes on a server. These classes work together to create an end product. These methods are often linked via controllers. The end product will then be shipped to a user via these controllers. The controller actions are the place where your application functionality is encompassed into a usable package - seems a good place to write tests for?
 
 Typically a controller will:
-
 - 1. Process a request (authentication, authorization, request types e.t.c.)
 - 2. Invoke craft services
 - 3. Return a response
@@ -120,7 +116,6 @@ Welcome to this app
 ```
 
 For this page/template you would create the following test class (Assuming you are creating a functional test):
-
 ```php
 <?php
 use FunctionalTester;
@@ -134,11 +129,15 @@ class FunctionalCest {
     }
 }
 ```
-
 Dont worry about `$userWithFirstNameBob`. Just pretend that this variable is an instance of `craft\elements\User` where `$firstName = "bob"`.
 
 Notice how the test reads very much like instructions that you *could* give to a human to perform on a production version of your application.
 
 Underneath the functional test actually triggers the controller associated with this route. If you have a module/plugin you can also pass in for example `?p=actions/my-plugin/my-controller/my-action` which will test your controller actions.
 
-You can even test the CP functionality by passing in a url that starts with the [cpTrigger](../config/config-settings.md#cptrigger) config (I.E with a `cpTrigger` of `admin` you could do `$I->amOnRoute('/admin/my-plugin/my-route/my-action)`). ::: tip Acceptance and functional tests are quite similar with some subtle differences in their *implementation*. See the [codeception docs](https://codeception.com/docs/01-Introduction) for an explanation hereto. :::
+You can even test the CP functionality by passing in a url that starts with the [cpTrigger](../config/config-settings.md#cptrigger) config (I.E with a `cpTrigger` of `admin` you could do `$I->amOnRoute('/admin/my-plugin/my-route/my-action)`). ::: tip Acceptance and functional tests are quite similar with some subtle differences in their *implementation*. See the [codeception docs](https://codeception.com/docs/01-Introduction) for an explanation hereto.
+:::
+
+
+
+

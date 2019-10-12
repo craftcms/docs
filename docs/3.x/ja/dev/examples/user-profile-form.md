@@ -208,7 +208,6 @@
 詳細フォームの例を順を追って見ていきましょう。
 
 #### ログインの要求
-
 ```twig
 {% requireLogin %}
 ```
@@ -253,7 +252,7 @@
 {{ csrfInput() }}
 ```
 
-<config:enableCsrfProtection> 設定で無効にしていない限り、Craft の[クロスサイトリクエストフォージェリ](https://en.wikipedia.org/wiki/Cross-site_request_forgery)プロテクションのため、`csrfInput()` ジェネレータファンクションはすべてのフォームで必須となります。
+The `csrfInput()` generator function is required in all forms for Craft’s [cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) protection unless you disabled it in the <config:enableCsrfProtection> 設定で無効にしていない限り、Craft の[クロスサイトリクエストフォージェリ](https://en.wikipedia.org/wiki/Cross-site_request_forgery)プロテクションのため、`csrfInput()` ジェネレータファンクションはすべてのフォームで必須となります。
 
 #### オプションのリダイレクト
 
@@ -472,4 +471,3 @@ class 名に基づく HTML 要素を表示・非表示にするためのスタ�
   }
 </style>
 ```
-

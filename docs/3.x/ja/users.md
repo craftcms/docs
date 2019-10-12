@@ -30,35 +30,36 @@ Craft Pro では、コントロールパネルにアクセスしたり、特定�
 
 Craft の権限は次の通りです。
 
-| 権限 | ハンドル |
-| ---------- | ------ |
-| システムがオフの場合にサイトにアクセスする | `accessSiteWhenSystemIsOff` |
-| 管理画面にアクセスする | `accessCp` |
-| ↳&nbsp; システムがオフの場合に管理画面にアクセスする | `accessCpWhenSystemIsOff` |
-| ↳&nbsp; Craft CMS 起動とプラグインのアップデート | `performUpdates` |
-| ↳&nbsp; _「プラグイン名」_ のアクセス | `accessPlugin-[PluginHandle]` |
-| ユーザーを編集する | `editUsers` |
-| ↳&nbsp; ユーザーを登録する | `registerUsers` |
-| ↳&nbsp; ユーザー権限を割り当てる | `assignUserPermissions` |
-| ↳&nbsp; ユーザーを管理 | `administrateUsers` |
-| ユーザーを削除する | `deleteUsers` |
-| _「サイト名」_ を編集する | `editSite:[SiteID]` |
-| エントリを編集する | `editEntries:[SectionID]` |
-| ↳&nbsp; エントリを作る | `createEntries:[SectionID]` |
-| ↳&nbsp; ライブの変更を発表する | `publishEntries:[SectionID]` |
-| ↳&nbsp; エントリを削除する | `deleteEntries:[SectionID]` |
-| ↳&nbsp; 他の投稿者のエントリを編集する | `editPeerEntries:[SectionID]` |
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の作成者の入力のためライブを変更する | `publishPeerEntries:[SectionID]` |
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の投稿者のエントリを削除する | `deletePeerEntries:[SectionID]` |
-| ↳&nbsp; 他の投稿者の下書きを編集する | `editPeerEntryDrafts:[SectionID]` |
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の投稿者の下書きを投稿する | `publishPeerEntryDrafts:[SectionID]` |
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の投稿者の下書きを削除する | `deletePeerEntryDrafts:[SectionID]` |
-| _「グローバル設定名」_ を編集する | `editGlobalSet:[GlobalSetID]` |
-| _「カテゴリグループ名」_ を編集する | `editCategories:[CategoryGroupID]` |
-| _「アセットソース名」_ を表示する | `viewVolume:[VolumeID]` |
-| ↳&nbsp; アップロード | `saveAssetInVolume:[VolumeID]` |
-| ↳&nbsp; サブフォルダを作成する | `createFoldersInVolume:[VolumeID]` |
-| ↳&nbsp; ファイルとフォルダーを削除 | `deleteFilesAndFoldersInVolume:[VolumeID]` |
+| 権限                                         | ハンドル                                       |
+| ------------------------------------------ | ------------------------------------------ |
+| システムがオフの場合にサイトにアクセスする                      | `accessSiteWhenSystemIsOff`                |
+| 管理画面にアクセスする                                | `accessCp`                                 |
+| ↳&nbsp; システムがオフの場合に管理画面にアクセスする             | `accessCpWhenSystemIsOff`                  |
+| ↳&nbsp; Craft CMS 起動とプラグインのアップデート          | `performUpdates`                           |
+| ↳&nbsp; _「プラグイン名」_ のアクセス                   | `accessPlugin-[PluginHandle]`              |
+| ユーザーを編集する                                  | `editUsers`                                |
+| ↳&nbsp; ユーザーを登録する                          | `registerUsers`                            |
+| ↳&nbsp; ユーザー権限を割り当てる                       | `assignUserPermissions`                    |
+| ↳&nbsp; ユーザーを管理                            | `administrateUsers`                        |
+| ユーザーを削除する                                  | `deleteUsers`                              |
+| _「サイト名」_ を編集する                             | `editSite:[SiteID]`                        |
+| エントリを編集する                                  | `editEntries:[SectionID]`                  |
+| ↳&nbsp; エントリを作る                            | `createEntries:[SectionID]`                |
+| ↳&nbsp; ライブの変更を発表する                        | `publishEntries:[SectionID]`               |
+| ↳&nbsp; エントリを削除する                          | `deleteEntries:[SectionID]`                |
+| ↳&nbsp; 他の投稿者のエントリを編集する                    | `editPeerEntries:[SectionID]`              |
+|  ↳&nbsp; 他の作成者の入力のためライブを変更する               | `publishPeerEntries:[SectionID]`           |
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の投稿者のエントリを削除する | `deletePeerEntries:[SectionID]`            |
+| &nbsp;&nbsp;&nbsp;↳&nbsp; 他の投稿者の下書きを編集する   | `editPeerEntryDrafts:[SectionID]`          |
+|  ↳&nbsp; 他の投稿者の下書きを投稿する                    | `publishPeerEntryDrafts:[SectionID]`       |
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の投稿者の下書きを削除する  | `deletePeerEntryDrafts:[SectionID]`        |
+| &nbsp;&nbsp;&nbsp;_「グローバル設定名」_ を編集する       | `editGlobalSet:[GlobalSetID]`              |
+| _「カテゴリグループ名」_ を編集する                        | `editCategories:[CategoryGroupID]`         |
+| _「アセットソース名」_ を表示する                         | `viewVolume:[VolumeID]`                    |
+| ↳&nbsp; アップロード                             | `saveAssetInVolume:[VolumeID]`             |
+| ↳&nbsp; サブフォルダを作成する                        | `createFoldersInVolume:[VolumeID]`         |
+| ↳&nbsp; ファイルとフォルダーを削除                      | `deleteFilesAndFoldersInVolume:[VolumeID]` |
+| ↳&nbsp; Remove files                       | `deleteFilesAndFoldersInVolume:[VolumeID]` |
 
 ## 一般登録
 
@@ -67,4 +68,3 @@ Craft Pro には、一般ユーザーの登録を許可するオプションが�
 一般登録を有効にするには、「設定 > ユーザー > 設定」に移動し、「一般登録を許可しますか？」をチェックします。チェックすると、Craft が一般登録したユーザーを割り当てるデフォルトのユーザーグループを選択できるようになります。
 
 サイトに一般ユーザーの登録を許可する設定を行ったら、最後のステップとしてフロントエンドに[ユーザー登録フォーム](dev/examples/user-registration-form.md)を作成します。
-
