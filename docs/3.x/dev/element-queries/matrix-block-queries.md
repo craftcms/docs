@@ -54,6 +54,34 @@ Matrix block queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+### `allowOwnerDrafts`
+
+Narrows the query results based on whether the Matrix blocks’ owners are drafts.
+
+Possible values include:
+
+| Value | Fetches Matrix blocks…
+| - | -
+| `true` | which can belong to a draft.
+| `false` | which cannot belong to a draft.
+
+
+
+
+### `allowOwnerRevisions`
+
+Narrows the query results based on whether the Matrix blocks’ owners are revisions.
+
+Possible values include:
+
+| Value | Fetches Matrix blocks…
+| - | -
+| `true` | which can belong to a revision.
+| `false` | which cannot belong to a revision.
+
+
+
+
 ### `anyStatus`
 
 Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
