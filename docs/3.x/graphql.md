@@ -121,6 +121,12 @@ curl \
   http://my-project.test/api
 ```
 
+## Caching
+
+All query results are cached, so that repeated queries can yield results faster. The GraphQL result cache does not have a sophisticated ruleset on ivalidating the cache - if the site's content or structure changes, the entire cache is invalidated.
+
+Craft has GraphQL result caching enabled by default, but it can be disabled with the [enableGraphQlCaching](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablegraphqlcaching) config setting.
+
 ## Query Reference
 
 ::: tip
@@ -688,6 +694,9 @@ This directive is used to return a URL for an [asset tranform](https://docs.craf
 #### The `handle` argument
 The handle of the named transform to use.
 
+#### The `transform` argument
+The handle of the named transform to use.
+
 #### The `width` argument
 Width for the generated transform
 
@@ -865,6 +874,12 @@ The element’s structure’s root ID
 #### The `structureId` field
 The element’s structure ID.
 
+#### The `authorId` field
+The ID of the author of this entry.
+
+#### The `author` field
+The entry's author.
+
 #### The `sectionId` field
 The ID of the section that contains the entry.
 
@@ -877,12 +892,6 @@ The ID of the entry type that contains the entry.
 #### The `typeHandle` field
 The handle of the entry type that contains the entry.
 
-#### The `authorId` field
-The ID of the author of this entry.
-
-#### The `author` field
-The entry's author.
-
 #### The `postDate` field
 The entry's post date.
 
@@ -890,7 +899,7 @@ The entry's post date.
 The expiry date of the entry.
 
 #### The `children` field
-The entry’s children, if the section is a structure.  Accepts the same arguments as the `entries` query.
+The entry’s children, if the section is a structure. Accepts the same arguments as the `entries` query.
 
 #### The `parent` field
 The entry’s parent, if the section is a structure.
@@ -1042,6 +1051,9 @@ The date the element was created.
 #### The `dateUpdated` field
 The date the element was last updated.
 
+#### The `photo` field
+The user's photo.
+
 #### The `friendlyName` field
 The user's first name or username.
 
@@ -1050,9 +1062,6 @@ The user's full name.
 
 #### The `name` field
 The user's full name or username.
-
-#### The `photo` field
-The user's photo.
 
 #### The `preferences` field
 The user’s preferences.
