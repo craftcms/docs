@@ -198,6 +198,38 @@ Returns the value of an environment variable.
 {{ getenv('MAPS_API_KEY') }}
 ```
 
+## `gql`
+
+Executes a GraphQL query against the full schema.
+
+```twig
+{% set result = gql('{
+  entries (section: "news", limit: 2, orderBy: "dateCreated DESC") {
+    postDate @formatDateTime (format: "Y-m-d")
+    title
+    url
+    ... on news_article_Entry {
+      shortDescription
+      featuredImage {
+        url @transform (width: 300, immediately: true)
+        altText
+      }
+    }
+  }
+}') %}
+
+{% for entry in result['data'] %}
+    <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+    <p class="timestamp">{{ entry.postDate }}</p>
+
+    {% set entry.featuredImage[0] %}
+    <img class="thumb" src="{{ image.url }}" alt="{{ image.altText }}">
+
+    {{ entry.shortDescription|markdown }}
+    <p><a href="{{ entry.url }}">Continue reading…</a></p>
+{% endfor %}
+```
+
 ## `parseEnv`
 
 Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
