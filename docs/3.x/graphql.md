@@ -175,6 +175,12 @@ Narrows the query results based on the elements’ URIs.
 #### The `search` argument
 Narrows the query results to only elements that match a search query.
 
+#### The `relatedTo` argument
+Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+
+#### The `relatedToAll` argument
+Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+
 #### The `ref` argument
 Narrows the query results based on a reference string.
 
@@ -270,6 +276,12 @@ Narrows the query results based on the elements’ URIs.
 
 #### The `search` argument
 Narrows the query results to only elements that match a search query.
+
+#### The `relatedTo` argument
+Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+
+#### The `relatedToAll` argument
+Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
 
 #### The `ref` argument
 Narrows the query results based on a reference string.
@@ -397,6 +409,12 @@ Narrows the query results based on the elements’ URIs.
 #### The `search` argument
 Narrows the query results to only elements that match a search query.
 
+#### The `relatedTo` argument
+Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+
+#### The `relatedToAll` argument
+Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+
 #### The `ref` argument
 Narrows the query results based on a reference string.
 
@@ -465,6 +483,12 @@ Narrows the query results based on the elements’ URIs.
 
 #### The `search` argument
 Narrows the query results to only elements that match a search query.
+
+#### The `relatedTo` argument
+Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+
+#### The `relatedToAll` argument
+Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
 
 #### The `ref` argument
 Narrows the query results based on a reference string.
@@ -544,6 +568,12 @@ Narrows the query results based on the elements’ URIs.
 #### The `search` argument
 Narrows the query results to only elements that match a search query.
 
+#### The `relatedTo` argument
+Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+
+#### The `relatedToAll` argument
+Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+
 #### The `ref` argument
 Narrows the query results based on a reference string.
 
@@ -615,6 +645,12 @@ Narrows the query results based on the elements’ URIs.
 
 #### The `search` argument
 Narrows the query results to only elements that match a search query.
+
+#### The `relatedTo` argument
+Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+
+#### The `relatedToAll` argument
+Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
 
 #### The `ref` argument
 Narrows the query results based on a reference string.
@@ -903,6 +939,9 @@ The entry’s children, if the section is a structure. Accepts the same argument
 
 #### The `parent` field
 The entry’s parent, if the section is a structure.
+
+#### The `url` field
+The element’s full URL
 
 ### The `GlobalSetInterface` interface
 This is the interface implemented by all global sets.
