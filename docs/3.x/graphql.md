@@ -1199,7 +1199,7 @@ A defined type exists for each specific interface implementation. For example, i
 
 ```graphql
 {
-  queryEntries (section: "news", limit: 2, orderBy: "dateCreated DESC"){
+  entries (section: "news", limit: 2, orderBy: "dateCreated DESC") {
     dateCreated @formatDateTime (format: "Y-m-d")
     title
     children {
@@ -1220,7 +1220,7 @@ A defined type exists for each specific interface implementation. For example, i
 ```json
 {
   "data": {
-    "queryEntries": [
+    "entries": [
       {
         "dateCreated": "2019-08-21",
         "title": "An important news item",
@@ -1242,7 +1242,7 @@ A defined type exists for each specific interface implementation. For example, i
           {
             "title": "This is also a child entry"
           }
-        ]
+        ],
         "shortDescription": "Et omnis explicabo iusto eum nobis. Consequatur debitis architecto est exercitationem vitae velit repellendus. Aut consequatur maiores error ducimus ea et. Rem ipsa asperiores eius quas et omnis. Veniam quasi qui repellendus dignissimos et necessitatibus. Aut a illo tempora.",
         "featuredImage": []
       }
