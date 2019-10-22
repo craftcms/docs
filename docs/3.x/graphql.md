@@ -121,6 +121,12 @@ curl \
   http://my-project.test/api
 ```
 
+## Caching
+
+All query results are cached, so that repeated queries can yield results faster. The GraphQL result cache does not have a sophisticated ruleset on ivalidating the cache - if the site's content or structure changes, the entire cache is invalidated.
+
+Craft has GraphQL result caching enabled by default, but it can be disabled with the [enableGraphQlCaching](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablegraphqlcaching) config setting.
+
 ## Query Reference
 
 ::: tip
@@ -168,6 +174,12 @@ Narrows the query results based on the elements’ URIs.
 
 #### The `search` argument
 Narrows the query results to only elements that match a search query.
+
+#### The `relatedTo` argument
+Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+
+#### The `relatedToAll` argument
+Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
 
 #### The `ref` argument
 Narrows the query results based on a reference string.
@@ -264,6 +276,12 @@ Narrows the query results based on the elements’ URIs.
 
 #### The `search` argument
 Narrows the query results to only elements that match a search query.
+
+#### The `relatedTo` argument
+Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+
+#### The `relatedToAll` argument
+Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
 
 #### The `ref` argument
 Narrows the query results based on a reference string.
@@ -391,6 +409,12 @@ Narrows the query results based on the elements’ URIs.
 #### The `search` argument
 Narrows the query results to only elements that match a search query.
 
+#### The `relatedTo` argument
+Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+
+#### The `relatedToAll` argument
+Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+
 #### The `ref` argument
 Narrows the query results based on a reference string.
 
@@ -459,6 +483,12 @@ Narrows the query results based on the elements’ URIs.
 
 #### The `search` argument
 Narrows the query results to only elements that match a search query.
+
+#### The `relatedTo` argument
+Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+
+#### The `relatedToAll` argument
+Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
 
 #### The `ref` argument
 Narrows the query results based on a reference string.
@@ -538,6 +568,12 @@ Narrows the query results based on the elements’ URIs.
 #### The `search` argument
 Narrows the query results to only elements that match a search query.
 
+#### The `relatedTo` argument
+Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+
+#### The `relatedToAll` argument
+Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+
 #### The `ref` argument
 Narrows the query results based on a reference string.
 
@@ -609,6 +645,12 @@ Narrows the query results based on the elements’ URIs.
 
 #### The `search` argument
 Narrows the query results to only elements that match a search query.
+
+#### The `relatedTo` argument
+Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+
+#### The `relatedToAll` argument
+Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
 
 #### The `ref` argument
 Narrows the query results based on a reference string.
@@ -686,6 +728,9 @@ The full name of the timezone, defaults to UTC. (E.g., America/New_York)
 This directive is used to return a URL for an [asset tranform](https://docs.craftcms.com/v3/image-transforms.html). It accepts the same arguments you would use for a transform in Craft and adds the `immediately` argument.
 
 #### The `handle` argument
+The handle of the named transform to use.
+
+#### The `transform` argument
 The handle of the named transform to use.
 
 #### The `width` argument
@@ -865,6 +910,12 @@ The element’s structure’s root ID
 #### The `structureId` field
 The element’s structure ID.
 
+#### The `authorId` field
+The ID of the author of this entry.
+
+#### The `author` field
+The entry's author.
+
 #### The `sectionId` field
 The ID of the section that contains the entry.
 
@@ -877,12 +928,6 @@ The ID of the entry type that contains the entry.
 #### The `typeHandle` field
 The handle of the entry type that contains the entry.
 
-#### The `authorId` field
-The ID of the author of this entry.
-
-#### The `author` field
-The entry's author.
-
 #### The `postDate` field
 The entry's post date.
 
@@ -890,10 +935,13 @@ The entry's post date.
 The expiry date of the entry.
 
 #### The `children` field
-The entry’s children, if the section is a structure.  Accepts the same arguments as the `entries` query.
+The entry’s children, if the section is a structure. Accepts the same arguments as the `entries` query.
 
 #### The `parent` field
 The entry’s parent, if the section is a structure.
+
+#### The `url` field
+The element’s full URL
 
 ### The `GlobalSetInterface` interface
 This is the interface implemented by all global sets.
@@ -1042,6 +1090,9 @@ The date the element was created.
 #### The `dateUpdated` field
 The date the element was last updated.
 
+#### The `photo` field
+The user's photo.
+
 #### The `friendlyName` field
 The user's first name or username.
 
@@ -1050,9 +1101,6 @@ The user's full name.
 
 #### The `name` field
 The user's full name or username.
-
-#### The `photo` field
-The user's photo.
 
 #### The `preferences` field
 The user’s preferences.

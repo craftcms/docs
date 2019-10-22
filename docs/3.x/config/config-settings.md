@@ -869,6 +869,36 @@ Note that the GraphQL API is only available for Craft Pro.
 
 
 
+### `enableGraphQlCaching`
+
+Allowed types
+
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+
+:   `true`
+
+Defined by
+
+:   [GeneralConfig::$enableGraphQlCaching](api:craft\config\GeneralConfig::$enableGraphQlCaching)
+
+Since
+
+:   3.3.12
+
+
+
+Whether Craft should cache GraphQL queries.
+
+If set to `true`, Craft will cache the results for unique GraphQL queries per access token. The cache is
+automatically invalidated any time an element is saved, the site structure is updated, or a GraphQL schema is saved.
+
+This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v3/craft-services-gql.html#event-before-execute-gql-query) event to provide
+its own caching logic and setting the `result` property.
+
+
+
 ### `enableTemplateCaching`
 
 Allowed types
