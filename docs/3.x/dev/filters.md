@@ -333,11 +333,11 @@ This works identically to Twig’s core [`format`](https://twig.symfony.com/doc/
 
 ## `group`
 
-Groups the items of an array together based on common properties.
+Groups items in an array by a the results of an arrow function.
 
 ```twig
 {% set allEntries = craft.entries.section('blog').all() %}
-{% set allEntriesByYear = allEntries|group('postDate|date("Y")') %}
+{% set allEntriesByYear = allEntries|group(e => e.postDate|date('Y')) %}
 
 {% for year, entriesInYear in allEntriesByYear %}
     <h2>{{ year }}</h2>
