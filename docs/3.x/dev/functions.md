@@ -218,11 +218,11 @@ Executes a GraphQL query against the full schema.
   }
 }') %}
 
-{% for entry in result['data'] %}
+{% for entry in result.data. %}
     <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
     <p class="timestamp">{{ entry.postDate }}</p>
 
-    {% set entry.featuredImage[0] %}
+    {% set image = entry.featuredImage[0] %}
     <img class="thumb" src="{{ image.url }}" alt="{{ image.altText }}">
 
     {{ entry.shortDescription|markdown }}
