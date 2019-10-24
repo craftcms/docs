@@ -15,7 +15,7 @@ Log into your Control Panel and and click on “Plugin Store”. Search for “C
 
 ## Composer
 
-Ensure you have Composer [installed correctly](https://docs.craftcms.com/v3/installation.html#downloading-with-composer) in your Craft 3 project.
+Ensure that you have Composer [installed correctly](https://docs.craftcms.com/v3/installation.html#downloading-with-composer) in your Craft 3 project.
 
 Run the following Composer command from within your Craft 3 project:
 
