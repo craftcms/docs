@@ -88,7 +88,7 @@ If you want to be a little more specific, `relatedTo` also accepts an object tha
 
 * `element`, `sourceElement`, or `targetElement`
 * `field` _(optional)_
-* `sourceLocale` _(optional)_
+* `sourceSite` _(optional)_
 
 Set the first property’s key depending on what you want to get back:
 
@@ -105,12 +105,12 @@ Set the `field` property if you want to limit the scope to relations created by 
 }) %}
 ```
 
-Set the `sourceLocale` property if you want to limit the scope to relations created from a particular field. (Only do this if you set your relational field to be translatable.) You can set this to a locale ID.
+Set the `sourceSite` property if you want to limit the scope to relations created from a particular site. (Only do this if you set your relational field to be translatable.) You can set this to a site ID.
 
 ```twig
 {% set ingredients = craft.entries.section('ingredients').relatedTo({
     sourceElement: drink,
-    sourceLocale: craft.app.language
+    sourceSite: craft.app.sites.currentSite.id
 }) %}
 ```
 
