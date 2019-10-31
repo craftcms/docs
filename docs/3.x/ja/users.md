@@ -30,36 +30,36 @@ Craft Pro では、コントロールパネルにアクセスしたり、特定�
 
 Craft の権限は次の通りです。
 
-| 権限                                         | ハンドル                                       |
-| ------------------------------------------ | ------------------------------------------ |
-| システムがオフの場合にサイトにアクセスする                      | `accessSiteWhenSystemIsOff`                |
-| 管理画面にアクセスする                                | `accessCp`                                 |
-| ↳&nbsp; システムがオフの場合に管理画面にアクセスする             | `accessCpWhenSystemIsOff`                  |
-| ↳&nbsp; Craft CMS 起動とプラグインのアップデート          | `performUpdates`                           |
-| ↳&nbsp; _「プラグイン名」_ のアクセス                   | `accessPlugin-[PluginHandle]`              |
-| ユーザーを編集する                                  | `editUsers`                                |
-| ↳&nbsp; ユーザーを登録する                          | `registerUsers`                            |
-| ↳&nbsp; ユーザー権限を割り当てる                       | `assignUserPermissions`                    |
-| ↳&nbsp; ユーザーを管理                            | `administrateUsers`                        |
-| ユーザーを削除する                                  | `deleteUsers`                              |
-| _「サイト名」_ を編集する                             | `editSite:[SiteID]`                        |
-| エントリを編集する                                  | `editEntries:[SectionID]`                  |
-| ↳&nbsp; エントリを作る                            | `createEntries:[SectionID]`                |
-| ↳&nbsp; ライブの変更を発表する                        | `publishEntries:[SectionID]`               |
-| ↳&nbsp; エントリを削除する                          | `deleteEntries:[SectionID]`                |
-| ↳&nbsp; 他の投稿者のエントリを編集する                    | `editPeerEntries:[SectionID]`              |
-|  ↳&nbsp; 他の作成者の入力のためライブを変更する               | `publishPeerEntries:[SectionID]`           |
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の投稿者のエントリを削除する | `deletePeerEntries:[SectionID]`            |
-| &nbsp;&nbsp;&nbsp;↳&nbsp; 他の投稿者の下書きを編集する   | `editPeerEntryDrafts:[SectionID]`          |
-|  ↳&nbsp; 他の投稿者の下書きを投稿する                    | `publishPeerEntryDrafts:[SectionID]`       |
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の投稿者の下書きを削除する  | `deletePeerEntryDrafts:[SectionID]`        |
-| &nbsp;&nbsp;&nbsp;_「グローバル設定名」_ を編集する       | `editGlobalSet:[GlobalSetID]`              |
-| _「カテゴリグループ名」_ を編集する                        | `editCategories:[CategoryGroupID]`         |
-| _「アセットソース名」_ を表示する                         | `viewVolume:[VolumeID]`                    |
-| ↳&nbsp; アップロード                             | `saveAssetInVolume:[VolumeID]`             |
-| ↳&nbsp; サブフォルダを作成する                        | `createFoldersInVolume:[VolumeID]`         |
-| ↳&nbsp; ファイルとフォルダーを削除                      | `deleteFilesAndFoldersInVolume:[VolumeID]` |
-| ↳&nbsp; Remove files                       | `deleteFilesAndFoldersInVolume:[VolumeID]` |
+| 権限 | ハンドル
+| --- | -------
+| システムがオフの場合にサイトにアクセスする | `accessSiteWhenSystemIsOff`
+| 管理画面にアクセスする | `accessCp`
+| ↳&nbsp; システムがオフの場合に管理画面にアクセスする | `accessCpWhenSystemIsOff`
+| ↳&nbsp; Craft CMS 起動とプラグインのアップデート | `performUpdates`
+| ↳&nbsp; _「プラグイン名」_ のアクセス | `accessPlugin-[PluginHandle]`
+| ユーザーを編集する | `editUsers`
+| ↳&nbsp; ユーザーを登録する | `registerUsers`
+| ↳&nbsp; ユーザー権限を割り当てる | `assignUserPermissions`
+| ↳&nbsp; ユーザーを管理 | `administrateUsers`
+| ユーザーを削除する | `deleteUsers`
+| _「サイト名」_ を編集する | `editSite:[SiteUID]`
+| エントリを編集する | `editEntries:[SectionUID]`
+| ↳&nbsp; エントリを作る | `createEntries:[SectionUID]`
+| ↳&nbsp; ライブの変更を発表する | `publishEntries:[SectionUID]`
+| ↳&nbsp; エントリを削除する | `deleteEntries:[SectionUID]`
+| ↳&nbsp; 他の投稿者のエントリを編集する | `editPeerEntries:[SectionUID]`
+|  ↳&nbsp; 他の作成者の入力のためライブを変更する | `publishPeerEntries:[SectionUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の投稿者のエントリを削除する | `deletePeerEntries:[SectionUID]`
+| &nbsp;&nbsp;&nbsp;↳&nbsp; 他の投稿者の下書きを編集する | `editPeerEntryDrafts:[SectionUID]`
+|  ↳&nbsp; 他の投稿者の下書きを投稿する | `publishPeerEntryDrafts:[SectionUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; 他の投稿者の下書きを削除する | `deletePeerEntryDrafts:[SectionUID]`
+| &nbsp;&nbsp;&nbsp;_「グローバル設定名」_ を編集する | `editGlobalSet:[GlobalSetUID]`
+| _「カテゴリグループ名」_ を編集する | `editCategories:[CategoryGroupUID]`
+| _「アセットソース名」_ を表示する | `viewVolume:[VolumeUID]`
+| ↳&nbsp; アップロード | `saveAssetInVolume:[VolumeUID]`
+| ↳&nbsp; サブフォルダを作成する | `createFoldersInVolume:[VolumeUID]`
+| ↳&nbsp; ファイルとフォルダーを削除 | `deleteFilesAndFoldersInVolume:[VolumeUID]`
+| ↳&nbsp; Remove files | `deleteFilesAndFoldersInVolume:[VolumeUID]`
 
 ## 一般登録
 
