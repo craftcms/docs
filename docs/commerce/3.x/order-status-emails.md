@@ -63,6 +63,17 @@ Two special variables available to you:
 
 This would send the email to the customer to made this order.
 
+### Reply-To Address
+
+The Reply-To address for this email.
+
+Plain text can be entered or twig can also be used to set a dynamic value.
+
+Two special variables available to you:
+
+- `order` – a <api:craft\commerce\elements\Order> object.
+- `orderHistory` – a <api:craft\commerce\models\OrderHistory> object.
+
 ### BCC’d Recipient
 
 The BCC addresses for this email. You can separate the addresses by a comma: `,`.
@@ -75,6 +86,17 @@ Two special variables available to you:
 - `orderHistory` – a <api:craft\commerce\models\OrderHistory> object.
 
 Most likely, you would BCC the store owner on order confirmation.
+
+### CC’d Recipient
+
+The CC addresses for this email. You can separate the addresses by a comma: `,`.
+
+Plain text can be entered or twig can also be used to set dynamic values.
+
+Two special variables available to you:
+
+- `order` – a <api:craft\commerce\elements\Order> object.
+- `orderHistory` – a <api:craft\commerce\models\OrderHistory> object.
 
 ### HTML Email Template Path
 
