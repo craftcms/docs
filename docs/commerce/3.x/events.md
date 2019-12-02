@@ -639,19 +639,6 @@ Event::on(Subscriptions::class, Subscriptions::EVENT_RECEIVE_SUBSCRIPTION_PAYMEN
 
 ## Other events
 
-### The `registerAddressValidationRules` event
-
-Plugins can add additional address validation rules.
-
-```php
-use craft\commerce\events\RegisterAddressRulesEvent;
-use craft\commerce\models\Address;
-
-Event::on(Address::class, Address::EVENT_REGISTER_ADDRESS_VALIDATION_RULES, function(RegisterAddressRulesEvent $event) {
-     $event->rules[] = [['attention'], 'required'];
-});
-```
-
 ### The `beforeSaveAddress` event
 
 Plugins can get notified before an address is being saved
