@@ -158,7 +158,7 @@ If you want to add files to a field with existing assets, you will need to first
 
 ```
 {% for asset in entry.<FieldHanlde> %}
-<input type="hidden" name="fields[<FieldHanlde>][]" value="{{ asset.id }}">
+    <input type="hidden" name="fields[<FieldHanlde>][]" value="{{ asset.id }}">
 {% endfor %}
 
 <input type="file" name="fields[<FieldHanlde>][]" multiple>
