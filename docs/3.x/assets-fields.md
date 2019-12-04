@@ -154,7 +154,7 @@ If you want to allow multiple file uploads, add the `multiple` attribute and add
 <input type="file" name="fields[<FieldHanlde>][]" multiple>
 ```
 
-If you want to add files to a field with existing assets, you will need to first fetch the existing assets and add then to a hidden field:
+If you want to add files to a field with existing assets, you will need to first fetch the existing asset ids and add them to a hidden field:
 
 ```
 {% for asset in entry.<FieldHanlde> %}
