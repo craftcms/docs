@@ -54,6 +54,44 @@ Matrix block queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+- [`allowOwnerDrafts`](#allowownerdrafts)
+- [`allowOwnerRevisions`](#allowownerrevisions)
+- [`anyStatus`](#anystatus)
+- [`asArray`](#asarray)
+- [`column`](#column)
+- [`dateCreated`](#datecreated)
+- [`dateUpdated`](#dateupdated)
+- [`draftCreator`](#draftcreator)
+- [`draftId`](#draftid)
+- [`draftOf`](#draftof)
+- [`drafts`](#drafts)
+- [`fieldId`](#fieldid)
+- [`fixedOrder`](#fixedorder)
+- [`id`](#id)
+- [`ignorePlaceholders`](#ignoreplaceholders)
+- [`inReverse`](#inreverse)
+- [`limit`](#limit)
+- [`offset`](#offset)
+- [`orderBy`](#orderby)
+- [`owner`](#owner)
+- [`ownerId`](#ownerid)
+- [`preferSites`](#prefersites)
+- [`relatedTo`](#relatedto)
+- [`revisionCreator`](#revisioncreator)
+- [`revisionId`](#revisionid)
+- [`revisionOf`](#revisionof)
+- [`revisions`](#revisions)
+- [`search`](#search)
+- [`site`](#site)
+- [`siteId`](#siteid)
+- [`status`](#status)
+- [`trashed`](#trashed)
+- [`type`](#type)
+- [`typeId`](#typeid)
+- [`uid`](#uid)
+- [`unique`](#unique)
+- [`with`](#with)
+
 ### `allowOwnerDrafts`
 
 Narrows the query results based on whether the Matrix blocks’ owners are drafts.
@@ -130,6 +168,19 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->all();
 ```
 :::
+
+
+### `column`
+
+Executes the query and returns the first column of the result.
+
+
+
+
+
+
+
+
 
 
 ### `dateCreated`

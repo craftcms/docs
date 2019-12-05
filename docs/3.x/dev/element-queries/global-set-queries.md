@@ -51,6 +51,37 @@ Global set queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+- [`anyStatus`](#anystatus)
+- [`asArray`](#asarray)
+- [`column`](#column)
+- [`dateCreated`](#datecreated)
+- [`dateUpdated`](#dateupdated)
+- [`draftCreator`](#draftcreator)
+- [`draftId`](#draftid)
+- [`draftOf`](#draftof)
+- [`drafts`](#drafts)
+- [`fixedOrder`](#fixedorder)
+- [`handle`](#handle)
+- [`id`](#id)
+- [`ignorePlaceholders`](#ignoreplaceholders)
+- [`inReverse`](#inreverse)
+- [`limit`](#limit)
+- [`offset`](#offset)
+- [`orderBy`](#orderby)
+- [`preferSites`](#prefersites)
+- [`relatedTo`](#relatedto)
+- [`revisionCreator`](#revisioncreator)
+- [`revisionId`](#revisionid)
+- [`revisionOf`](#revisionof)
+- [`revisions`](#revisions)
+- [`search`](#search)
+- [`site`](#site)
+- [`siteId`](#siteid)
+- [`trashed`](#trashed)
+- [`uid`](#uid)
+- [`unique`](#unique)
+- [`with`](#with)
+
 ### `anyStatus`
 
 Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
@@ -99,6 +130,19 @@ $globalSets = \craft\elements\GlobalSet::find()
     ->all();
 ```
 :::
+
+
+### `column`
+
+Executes the query and returns the first column of the result.
+
+
+
+
+
+
+
+
 
 
 ### `dateCreated`

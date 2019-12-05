@@ -50,6 +50,43 @@ User queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+- [`admin`](#admin)
+- [`anyStatus`](#anystatus)
+- [`asArray`](#asarray)
+- [`can`](#can)
+- [`column`](#column)
+- [`dateCreated`](#datecreated)
+- [`dateUpdated`](#dateupdated)
+- [`draftCreator`](#draftcreator)
+- [`draftId`](#draftid)
+- [`draftOf`](#draftof)
+- [`drafts`](#drafts)
+- [`email`](#email)
+- [`firstName`](#firstname)
+- [`fixedOrder`](#fixedorder)
+- [`group`](#group)
+- [`groupId`](#groupid)
+- [`id`](#id)
+- [`ignorePlaceholders`](#ignoreplaceholders)
+- [`inReverse`](#inreverse)
+- [`lastLoginDate`](#lastlogindate)
+- [`lastName`](#lastname)
+- [`limit`](#limit)
+- [`offset`](#offset)
+- [`orderBy`](#orderby)
+- [`preferSites`](#prefersites)
+- [`relatedTo`](#relatedto)
+- [`revisionCreator`](#revisioncreator)
+- [`revisionId`](#revisionid)
+- [`revisionOf`](#revisionof)
+- [`revisions`](#revisions)
+- [`search`](#search)
+- [`status`](#status)
+- [`trashed`](#trashed)
+- [`uid`](#uid)
+- [`username`](#username)
+- [`with`](#with)
+
 ### `admin`
 
 Narrows the query results to only users that have admin accounts.
@@ -146,6 +183,19 @@ $elements = ElementClass::find()
     ->all();
 ```
 :::
+
+
+### `column`
+
+Executes the query and returns the first column of the result.
+
+
+
+
+
+
+
+
 
 
 ### `dateCreated`
