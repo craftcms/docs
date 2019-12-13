@@ -8,7 +8,6 @@
 
 Before installing Craft, make sure that you’ve got everything you need:
 
-* The latest version of Craft from [craftcms.com](https://craftcms.com).
 * A web host meets Craft’s [minimum requirements](requirements.md).
 * An FTP client (we recommend [Transmit](https://panic.com/transmit/)).
 * MySQL access, either via a web-based tool like phpMyAdmin, or a standalone app like [Sequel Pro](http://www.sequelpro.com/).
