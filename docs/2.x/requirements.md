@@ -2,7 +2,7 @@
 
 Craft requires the following:
 
-* PHP 5.3.0+ with safe mode disabled
+* PHP 5.4.0+
 * MySQL 5.1.0 or later, with the InnoDB storage engine installed
 * A web server (Apache, Nginx, IIS)
 * A minimum of 32MB of memory allocated to PHP
