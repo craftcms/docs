@@ -270,7 +270,7 @@ Possible values include:
 | Value | Fetches drafts…
 | - | -
 | `1` | created by the user with an ID of 1.
-| a `\craft\elements\db\User` object | by the user represented by the object.
+| a `\craft\elements\db\User` object | created by the user represented by the object.
 
 
 
@@ -716,7 +716,7 @@ Possible values include:
 | Value | Fetches revisions…
 | - | -
 | `1` | created by the user with an ID of 1.
-| a `\craft\elements\db\User` object | by the user represented by the object.
+| a `\craft\elements\db\User` object | created by the user represented by the object.
 
 
 
