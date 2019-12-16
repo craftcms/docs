@@ -443,7 +443,7 @@ Narrows the query results based on the folders the assets belong to, per the fol
 
 Possible values include:
 
-| Value | Fetches categories…
+| Value | Fetches assets…
 | - | -
 | `1` | in a folder with an ID of 1.
 | `'not 1'` | not in a folder with an ID of 1.
@@ -461,7 +461,7 @@ Possible values include:
 ```
 
 ```php
-// Fetch categories in the folder with an ID of 1
+// Fetch assets in the folder with an ID of 1
 $assets = \craft\elements\Asset::find()
     ->folderId(1)
     ->all();
@@ -601,7 +601,7 @@ Broadens the query results to include assets from any of the subfolders of the f
 ```
 
 ```php
-// Fetch categories in the folder with an ID of 1 (including its subfolders)
+// Fetch assets in the folder with an ID of 1 (including its subfolders)
 $assets = \craft\elements\Asset::find()
     ->folderId(1)
     ->includeSubfolders()
@@ -1176,7 +1176,7 @@ Narrows the query results based on the volume the assets belong to.
 
 Possible values include:
 
-| Value | Fetches categories…
+| Value | Fetches assets…
 | - | -
 | `'foo'` | in a volume with a handle of `foo`.
 | `'not foo'` | not in a volume with a handle of `foo`.
@@ -1209,7 +1209,7 @@ Narrows the query results based on the volumes the assets belong to, per the vol
 
 Possible values include:
 
-| Value | Fetches categories…
+| Value | Fetches assets…
 | - | -
 | `1` | in a volume with an ID of 1.
 | `'not 1'` | not in a volume with an ID of 1.
@@ -1227,7 +1227,7 @@ Possible values include:
 ```
 
 ```php
-// Fetch categories in the volume with an ID of 1
+// Fetch assets in the volume with an ID of 1
 $assets = \craft\elements\Asset::find()
     ->volumeId(1)
     ->all();
