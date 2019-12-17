@@ -130,7 +130,7 @@ If you want to find elements related to a source element through a [Matrix](matr
 There might be times when you need to factor multiple types of relations into the mix. For example, outputting all of the current user’s favorite drinks that include espresso:
 
 ```twig
-{% set espresso = craft.entries.section('ingredients').slug('espresso').first() %}
+{% set espresso = craft.entries.section('ingredients').slug('espresso').one() %}
 
 {% set cocktails = craft.entries.section('drinks').relatedTo(['and',
     { sourceElement: currentUser, field: 'favoriteDrinks' },
