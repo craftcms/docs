@@ -30,19 +30,19 @@ See [Variant Queries](dev/element-queries/variant-queries.md).
 
 See [craft.commerce.carts.cart](craft-commerce-carts-cart.md)
 
-## craft.commerce.countries.allCountries
+## craft.commerce.countries.allEnabledCountries
 
 Returns an array of <api:craft\commerce\models\Country> objects.
 
 ```twig
 <select>
-{% for country in craft.commerce.countries.allCountries %}
+{% for country in craft.commerce.countries.allEnabledCountries %}
     <option value="{{ country.id }}">{{ country.name }}</option>
 {% endfor %}
 </select>
 ```
 
-## craft.commerce.countries.allCountriesAsList
+## craft.commerce.countries.allEnabledCountriesAsList
 
 Returns a list usable for a dropdown select box.
 
@@ -50,25 +50,25 @@ Data returned as `[32:'Australia', 72:'USA']`
 
 ```twig
 <select>
-{% for id, countryName in craft.commerce.countries.allCountriesAsList %}
+{% for id, countryName in craft.commerce.countries.allEnabledCountriesAsList %}
     <option value="{{ id }}">{{ countryName }}</option>
 {% endfor %}
 </select>
 ```
 
-## craft.commerce.states
+## craft.commerce.states.allEnabledStates
 
 Returns an array of <api:craft\commerce\models\State> objects.
 
 ```twig
 <select>
-{% for state in craft.commerce.states %}
+{% for state in craft.commerce.states.allEnabledStates %}
     <option value="{{ state.id }}">{{ state.name }}</option>
 {% endfor %}
 </select>
 ```
 
-## craft.commerce.states.allStatesAsList
+## craft.commerce.states.allEnabledStatesAsListGroupedByCountryId
 
 Returns an array of <api:craft\commerce\models\State> object arrays, indexed by country IDs.
 
@@ -76,9 +76,9 @@ Data returned as `[72:[3:'California', 4:'Washington'],32:[7:'New South Wales']]
 
 ```twig
 <select>
-{% for countryId, states in craft.commerce.states.allStatesAsList %}
-    <optgroup label="{{ craft.commerce.countries.countriesAsList[countryId] }}">
-    {% for stateId, stateName in craft.commerce.states.allStatesAsList[countryId] %}
+{% for countryId, states in craft.commerce.states.allEnabledStatesAsListGroupedByCountryId %}
+    <optgroup label="{{ craft.commerce.countries.allEnabledCountriesAsList[countryId].name ?? '' }}">
+    {% for stateId, stateName in craft.commerce.states.allEnabledStatesAsList[countryId] %}
         <option value="{{ stateId }}">{{ stateName }}</option>
     {% endfor %}
   </optgroup>
