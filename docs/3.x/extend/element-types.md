@@ -726,7 +726,7 @@ $product->currency = Craft::$app->request->getBodyParam('currency');
 $product->enabled = (bool)Craft::$app->request->getBodyParam('enabled');
 
 // Set custom field values from POST data in a `fields` namespace
-$entry->setFieldValuesFromRequest('fields');
+$product->setFieldValuesFromRequest('fields');
 
 // Save the product
 $success = Craft::$app->elements->saveElement($product);
