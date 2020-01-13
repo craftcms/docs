@@ -119,13 +119,11 @@ return [
         },
     ],
 ];
-```
+``` 
 
 ## Session Component
 
-In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location
-
-####Redis Example
+In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location (e.g. Redis):
 
 ```php
 <?php
@@ -140,23 +138,6 @@ return [
         'session' => [
             'class' => yii\redis\Session::class,
             'as session' => craft\behaviors\SessionBehavior::class,
-        ],
-    ],
-];
-```
-
-#### Database Example
-
-First, you must create the database table that will store PHP’s sessions. You can do that quickly but running the `craft setup/php-session` console command from your project’s root folder.
-
-```php
-<?php
-return [
-    'components' => [
-        'session' => [
-            'class' => yii\web\DbSession::class,
-            'as session' => craft\behaviors\SessionBehavior::class,
-            'sessionTable' => '{{%phpsessions}}'
         ],
     ],
 ];
