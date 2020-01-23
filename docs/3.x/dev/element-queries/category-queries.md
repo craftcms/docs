@@ -61,6 +61,7 @@ Category queries support the following parameters:
 - [ancestorOf](#ancestorof)
 - [anyStatus](#anystatus)
 - [asArray](#asarray)
+- [column](#column)
 - [dateCreated](#datecreated)
 - [dateUpdated](#dateupdated)
 - [descendantDist](#descendantdist)
@@ -210,6 +211,19 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
+
+
+### `column`
+
+Executes the query and returns the first column of the result.
+
+
+
+
+
+
+
+
 
 
 ### `dateCreated`
