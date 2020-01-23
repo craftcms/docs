@@ -818,7 +818,7 @@ Defined by
 
 Whether to use a cookie to persist the CSRF token if [enableCsrfProtection](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablecsrfprotection) is enabled. If false, the CSRF token
 will be stored in session under the `csrfTokenName` config setting name. Note that while storing CSRF tokens in
-session increases security, it requires starting a session for every page that a CSRF token is need, which may
+session increases security, it requires starting a session for every page that a CSRF token is needed, which may
 degrade site performance.
 
 
@@ -2221,6 +2221,10 @@ Defined by
 The password-reset template path. Note that this only affects front-end site requests.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+::: tip
+You might also want to set <config:invalidUserTokenPath> in case a user clicks on an expired password reset link.
+:::
 
 
 

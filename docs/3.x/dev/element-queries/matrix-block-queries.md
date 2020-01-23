@@ -58,7 +58,6 @@ Matrix block queries support the following parameters:
 - [allowOwnerRevisions](#allowownerrevisions)
 - [anyStatus](#anystatus)
 - [asArray](#asarray)
-- [column](#column)
 - [dateCreated](#datecreated)
 - [dateUpdated](#dateupdated)
 - [fieldId](#fieldid)
@@ -160,19 +159,6 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->all();
 ```
 :::
-
-
-### `column`
-
-Executes the query and returns the first column of the result.
-
-
-
-
-
-
-
-
 
 
 ### `dateCreated`
