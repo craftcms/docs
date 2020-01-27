@@ -23,9 +23,9 @@ No changes are needed for emails to continue to work, but ensuring your queue is
 Plugins and modules that modify the Edit Order page are likely to break with this update as the page is now a [Vue.js](https://vuejs.org/) application. The same Twig template hooksx are still available, but inserting into the part of the DOM controlled by Vue.js will not work.
 
 
-## Admin Tables
+## Data tables
 
-All data tables througout the control panel use the new Craft 3.4 Vue.js-based admin table, so any extensions of those old HTML tables are likely to break.
+All data tables througout the control panel use the new Craft 3.4 Vue.js-based data table, so any extensions of those old HTML tables are likely to break.
 
 
 ## Permissions
@@ -33,9 +33,15 @@ All data tables througout the control panel use the new Craft 3.4 Vue.js-based a
 We have added the “Edit orders” and “Delete orders” user permissions, but users with the existing “Manage orders” permission will not automatically get these new permissions, so updating those users and user groups would be required.
 
 
-## Cart
+## Cart merging
 
-The cart is still retrieved from the front-end in the same way.
+The cart is still retrieved from the front-end templatess using`craft.commerce.carts.cart`in your templates, but the optional `mergeCarts` param has been removed, and it is no longer possible to automicatically merge previous carts of the current user. 
+
+We now recommend the customer manually adds items from the [previous carts to their current cart](adding-to-and-updating-the-cart.md#restoring-previous-cart-contents). An example of this is in the docs.
+
+Merging carts as manual process is better since the customer can decide what to do with any validation issues like maximum quanity rules. The previous merge feature would just fail to merge with no error messages. 
+
+This change is also mitigated by the fact that the previous cart of the current user is now loaded as the current cart when calling `craft.commerce.carts.cart` automatically.
 
 
 ## Twig template changes
@@ -47,6 +53,8 @@ BC - Breaking Change
 
 | Old                                       | New                                                         | Change
 |-------------------------------------------|-------------------------------------------------------------|--------
+| `craft.commerce.carts.cart(true, true)  ` | `craft.commerce.carts.cart(true)`                           | BC
+| `craft.commerce.carts.cart(false, true)   | `craft.commerce.carts.cart(false)`                          | BC
 | `craft.commerce.availableShippingMethods` | `cart.availableShippingMethod`                              | BC
 | `craft.commerce.cart`                     | `craft.commerce.carts.cart`                                 | BC
 | `craft.commerce.countriesList`            | `craft.commerce.countries.allStatesAsListGroupedByCountryId`| BC
