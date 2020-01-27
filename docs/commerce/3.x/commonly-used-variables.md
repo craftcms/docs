@@ -157,12 +157,12 @@ Returns an array of <api:craft\commerce\elements\OrderStatus> objects representi
 {% endfor %}
 ```
 
-## craft.commerce.discounts.allDiscounts
+## craft.commerce.discounts.allActiveDiscounts
 
-Returns an array of all discounts set up in the system.
+Returns an array of all enabled discounts set up in the system active for the current date and time.
 
 ```twig
-{% for discount in craft.commerce.discounts.allDiscounts %}
+{% for discount in craft.commerce.discounts.allActiveDiscounts %}
     {{ discount.name }} - {{ discount.description }}
 {% endfor %}
 ```
