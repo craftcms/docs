@@ -179,34 +179,26 @@ Example:
 <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title}} to the cart.">
 ```
 
-## Cart Merging
+## Restoring previous cart contents
 
-By default the current cart begins blank and customers add things to it.
+By default the current cart begins blank and customers then add things to it.
 
 If the customer is a registered user they may expect to be able to log into another computer and continue their cart from 
-a previous session. If the user arrives at the store page logged-in, without a cart in session the most recent cart belonging to that user is restored to the session.  
+a previous session. This will happen automatically if they log in while their current cart is empty (has no line items).  
 
-If the user logs in, but already has a cart in session (even an empty one), this does not happen automatically.
+If you want to allow a customer to see previous carts they had in previous logged-in sessions you cann retrieve them like this:
 
-When retrieving the current cart you can optionally tell the system to merge in the line items from a previous session 
-in 2 ways:
 
-1) Submit the `mergeCarts` parameter in either the `commerce/cart/get-cart` ajax controller action or the `commerce/cart/update-cart` controller action.
+```twig
+{% if currentUser %}
+    {% set currentCart = craft.commerce.carts.cart %}
+    {% if cart.id %}
+        {% set oldCarts = craft.orders.isCompleted(false).id('not '~cart.id).user(currentUser).all() %}
+    {% else %}
+        {% set oldCarts = craft.orders.isCompleted(false).user(currentUser).all() %}
+    {% endif %}
+{% endif %}
+```
 
-`<input type="hidden" name="mergeCarts" value="commerce/cart/update-cart">`
+You could then loop over the line items in those older carts and allow the customer to add them to the current order. An example of this is in the example templates.
 
-2) Instead of calling `{% set cart = craft.commerce.cart.cart %}` in your twig template, call `craft.commetce.cart.mergedCart`.
-
-Please note, using the above two methods will only merge previous carts of a logged-in user and only carts that belong to that user. If the user is a guest, no errors are raised, and everything behaves as normal.
-
-Calling `craft.commerce.cart.mergedCart` which the user is a guest behaves the same way as `craft.commetce.cart.cart`, so there is no harm in using it on most cart pages. 
-
-You might not want to use it on final checkout pages, so that customers don't get confused seeing new items in the cart before payment.
-
-Before merging, you may want to show the user what will be merged. 
-
-You could do this by showing the other cart’s contents from the previous session with:
-
-`{% set otherCarts = craft.orders.isCompleted(false).user(currentUser).id('not ' ~ cart.id).all()`
-
-The above query gets all carts for the current user, excluding the current cart.
