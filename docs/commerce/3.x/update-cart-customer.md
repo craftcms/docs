@@ -5,11 +5,11 @@ and is associated with a registered user.
 
 When a user logs in, the current customer switches to the customer associated to the logged in user.
 
-The only information stored about a customer is the email address, and their related address book addresses, as well as their 
-primary shipping and billing address IDs.
+The only information stored about a customer is their related address book addresses, as well as their 
+primary shipping and billing address IDs. The email address of a guest customer is inferred from their cart’s email address.
 
-As guest customer the address book is pretty useless as the next time they visit the site 
-all addresses in their address book will be lost. If they register on checkout the address book will survive. 
+As guest customers address book is fairly useless as the next time they visit the site 
+all addresses in their address book will be lost. If they register on checkout the address book will survive. This makes dealing with managing addresses during checkout the same for guests and registered users.
 
 ## Updating the email address on an order
 
@@ -44,7 +44,7 @@ enable the checking if they have an account with your site already:
 ```twig
 {% if craft.users.email(cart.email).one() %}You are already a user, please log in.{% endif %}
 ```
-Once a user logs in, the cart's customer will switch to be the registered user’s customer record.
+Once a user logs in, the cart's customer will switch to be the registered user’s customer record. Also, if the current cart was empty and their had a cart with items in it from a previous logged in session, that cart will be restored.
 
 ## Registering a guest customer as a user
 
@@ -85,4 +85,5 @@ With the `registerUserOnOrderComplete` flag set to `true` on the order, the foll
 1. Check if a user already exists, and if so, do nothing and not continue with the steps below.
 2. Create a user with the same email address as the order.
 3. Set the customer record to relate to that new user. This means all addresses in the guest customers address book will become the new users.
-4. An account activation email will be sent, that will allow them to set their password.
+4. An account activation email will be sent, which will allow them to set their password.
+
