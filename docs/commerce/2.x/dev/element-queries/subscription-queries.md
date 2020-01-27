@@ -55,6 +55,42 @@ Subscription queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+- [anyStatus](#anystatus)
+- [asArray](#asarray)
+- [dateCanceled](#datecanceled)
+- [dateCreated](#datecreated)
+- [dateExpired](#dateexpired)
+- [dateSuspended](#datesuspended)
+- [dateUpdated](#dateupdated)
+- [fixedOrder](#fixedorder)
+- [gatewayId](#gatewayid)
+- [hasStarted](#hasstarted)
+- [id](#id)
+- [ignorePlaceholders](#ignoreplaceholders)
+- [inReverse](#inreverse)
+- [isCanceled](#iscanceled)
+- [isExpired](#isexpired)
+- [isSuspended](#issuspended)
+- [limit](#limit)
+- [nextPaymentDate](#nextpaymentdate)
+- [offset](#offset)
+- [onTrial](#ontrial)
+- [orderBy](#orderby)
+- [orderId](#orderid)
+- [plan](#plan)
+- [planId](#planid)
+- [preferSites](#prefersites)
+- [reference](#reference)
+- [relatedTo](#relatedto)
+- [search](#search)
+- [status](#status)
+- [trashed](#trashed)
+- [trialDays](#trialdays)
+- [uid](#uid)
+- [user](#user)
+- [userId](#userid)
+- [with](#with)
+
 ### `anyStatus`
 
 Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
@@ -214,6 +250,40 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
+### `dateSuspended`
+
+Narrows the query results based on the subscriptions’ suspension date.
+
+Possible values include:
+
+| Value | Fetches subscriptions…
+| - | -
+| `'>= 2018-04-01'` | that were suspended on or after 2018-04-01.
+| `'< 2018-05-01'` | that were suspended before 2018-05-01
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were suspended between 2018-04-01 and 2018-05-01.
+
+
+::: code
+```twig
+{# Fetch subscriptions that were suspended recently #}
+{% set aWeekAgo = date('7 days ago')|atom %}
+
+{% set subscriptions = craft.subscriptions()
+    .dateSuspended(">= #{aWeekAgo}")
+    .all() %}
+```
+
+```php
+// Fetch subscriptions that were suspended recently
+$aWeekAgo = new \DateTime('7 days ago')->format(\DateTime::ATOM);
+
+$subscriptions = \craft\commerce\elements\Subscription::find()
+    ->dateSuspended(">= {$aWeekAgo}")
+    ->all();
+```
+:::
+
+
 ### `dateUpdated`
 
 Narrows the query results based on the subscriptions’ last-updated dates.
@@ -294,6 +364,29 @@ Possible values include:
 
 
 
+### `hasStarted`
+
+Narrows the query results to only subscriptions that have started.
+
+
+
+::: code
+```twig
+{# Fetch started subscriptions #}
+{% set subscriptions = {twig-function}
+    .hasStarted()
+    .all() %}
+```
+
+```php
+// Fetch started subscriptions
+$subscriptions = \craft\commerce\elements\Subscription::find()
+    ->hasStarted()
+    ->all();
+```
+:::
+
+
 ### `id`
 
 Narrows the query results based on the subscriptions’ IDs.
@@ -332,6 +425,20 @@ $subscription = \craft\commerce\elements\Subscription::find()
 ::: tip
 This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
 :::
+
+
+### `ignorePlaceholders`
+
+Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+
+
+
+
+
+
+
+
 
 
 ### `inReverse`
@@ -400,6 +507,29 @@ Narrows the query results to only subscriptions that have expired.
 // Fetch expired subscriptions
 $subscriptions = \craft\commerce\elements\Subscription::find()
     ->isExpired()
+    ->all();
+```
+:::
+
+
+### `isSuspended`
+
+Narrows the query results to only subscriptions that are suspended.
+
+
+
+::: code
+```twig
+{# Fetch suspended subscriptions #}
+{% set subscriptions = {twig-function}
+    .isSuspended()
+    .all() %}
+```
+
+```php
+// Fetch suspended subscriptions
+$subscriptions = \craft\commerce\elements\Subscription::find()
+    ->isSuspended()
     ->all();
 ```
 :::
@@ -594,6 +724,41 @@ Possible values include:
 
 
 
+### `preferSites`
+
+If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+
+
+
+For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
+for Site B.
+
+If this isn’t set, then preference goes to the current site.
+
+
+
+::: code
+```twig
+{# Fetch unique subscriptions from Site A, or Site B if they don’t exist in Site A #}
+{% set subscriptions = craft.subscriptions()
+    .site('*')
+    .unique()
+    .preferSites(['a', 'b'])
+    .all() %}
+```
+
+```php
+// Fetch unique subscriptions from Site A, or Site B if they don’t exist in Site A
+$subscriptions = \craft\commerce\elements\Subscription::find()
+    ->site('*')
+    ->unique()
+    ->preferSites(['a', 'b'])
+    ->all();
+```
+:::
+
+
 ### `reference`
 
 Narrows the query results based on the reference.
@@ -704,7 +869,7 @@ Narrows the query results to only subscriptions that have been soft-deleted.
 ::: code
 ```twig
 {# Fetch trashed subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
     .trashed()
     .all() %}
 ```

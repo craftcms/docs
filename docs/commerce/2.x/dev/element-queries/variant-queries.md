@@ -51,9 +51,44 @@ We can display a specific variant by its ID by doing the following:
 
 <!-- BEGIN PARAMS -->
 
+- [anyStatus](#anystatus)
+- [asArray](#asarray)
+- [dateCreated](#datecreated)
+- [dateUpdated](#dateupdated)
+- [fixedOrder](#fixedorder)
+- [hasProduct](#hasproduct)
+- [hasSales](#hassales)
+- [hasStock](#hasstock)
+- [id](#id)
+- [ignorePlaceholders](#ignoreplaceholders)
+- [inReverse](#inreverse)
+- [isDefault](#isdefault)
+- [limit](#limit)
+- [maxQty](#maxqty)
+- [minQty](#minqty)
+- [offset](#offset)
+- [orderBy](#orderby)
+- [preferSites](#prefersites)
+- [price](#price)
+- [product](#product)
+- [productId](#productid)
+- [relatedTo](#relatedto)
+- [search](#search)
+- [site](#site)
+- [siteId](#siteid)
+- [sku](#sku)
+- [status](#status)
+- [stock](#stock)
+- [title](#title)
+- [trashed](#trashed)
+- [typeId](#typeid)
+- [uid](#uid)
+- [unique](#unique)
+- [with](#with)
+
 ### `anyStatus`
 
-Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
 
 
 
@@ -285,6 +320,20 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 :::
 
 
+### `ignorePlaceholders`
+
+Causes the query to return matching variants as they are stored in the database, ignoring matching placeholder
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+
+
+
+
+
+
+
+
+
+
 ### `inReverse`
 
 Causes the query results to be returned in reverse order.
@@ -432,6 +481,41 @@ $variants = \craft\commerce\elements\Variant::find()
 :::
 
 
+### `preferSites`
+
+If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+
+
+
+For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
+for Site B.
+
+If this isn’t set, then preference goes to the current site.
+
+
+
+::: code
+```twig
+{# Fetch unique variants from Site A, or Site B if they don’t exist in Site A #}
+{% set variants = craft.variants()
+    .site('*')
+    .unique()
+    .preferSites(['a', 'b'])
+    .all() %}
+```
+
+```php
+// Fetch unique variants from Site A, or Site B if they don’t exist in Site A
+$variants = \craft\commerce\elements\Variant::find()
+    ->site('*')
+    ->unique()
+    ->preferSites(['a', 'b'])
+    ->all();
+```
+:::
+
+
 ### `price`
 
 Narrows the query results based on the variants’ price.
@@ -537,7 +621,7 @@ $variants = \craft\commerce\elements\Variant::find()
 
 ### `site`
 
-Determines which site the variants should be queried in.
+Determines which site(s) the variants should be queried in.
 
 
 
@@ -548,7 +632,15 @@ Possible values include:
 | Value | Fetches variants…
 | - | -
 | `'foo'` | from the site with a handle of `foo`.
+| `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
+| `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
 | a `\craft\commerce\elements\db\Site` object | from the site represented by the object.
+| `'*'` | from any site.
+
+::: tip
+If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you
+only want unique elements to be returned, use [unique](#unique) in conjunction with this.
+:::
 
 
 
@@ -571,7 +663,7 @@ $variants = \craft\commerce\elements\Variant::find()
 
 ### `siteId`
 
-Determines which site the variants should be queried in, per the site’s ID.
+Determines which site(s) the variants should be queried in, per the site’s ID.
 
 
 
@@ -637,6 +729,38 @@ $variant = \craft\commerce\elements\Variant::find()
 :::
 
 
+### `status`
+
+Narrows the query results based on the variants’ statuses.
+
+
+
+Possible values include:
+
+| Value | Fetches variants…
+| - | -
+| `'enabled'`  _(default)_ | that are enabled.
+| `'disabled'` | that are disabled.
+
+
+
+::: code
+```twig
+{# Fetch disabled variants #}
+{% set variants = craft.variants()
+    .status('disabled')
+    .all() %}
+```
+
+```php
+// Fetch disabled variants
+$variants = \craft\commerce\elements\Variant::find()
+    ->status('disabled')
+    ->all();
+```
+:::
+
+
 ### `stock`
 
 Narrows the query results based on the variants’ stock.
@@ -667,7 +791,7 @@ Possible values include:
 | `'*Foo'` | with a title that ends with `Foo`.
 | `'*Foo*'` | with a title that contains `Foo`.
 | `'not *Foo*'` | with a title that doesn’t contain `Foo`.
-| `['*Foo*', '*Bar*'` | with a title that contains `Foo` or `Bar`.
+| `['*Foo*', '*Bar*']` | with a title that contains `Foo` or `Bar`.
 | `['not', '*Foo*', '*Bar*']` | with a title that doesn’t contain `Foo` or `Bar`.
 
 
@@ -700,7 +824,7 @@ Narrows the query results to only variants that have been soft-deleted.
 ::: code
 ```twig
 {# Fetch trashed variants #}
-{% set variants = {twig-function}
+{% set variants = craft.variants()
     .trashed()
     .all() %}
 ```
@@ -750,6 +874,36 @@ Narrows the query results based on the variants’ UIDs.
 $variant = \craft\commerce\elements\Variant::find()
     ->uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
     ->one();
+```
+:::
+
+
+### `unique`
+
+Determines whether only elements with unique IDs should be returned by the query.
+
+
+
+This should be used when querying elements from multiple sites at the same time, if “duplicate” results is not
+desired.
+
+
+
+::: code
+```twig
+{# Fetch unique variants across all sites #}
+{% set variants = craft.variants()
+    .site('*')
+    .unique()
+    .all() %}
+```
+
+```php
+// Fetch unique variants across all sites
+$variants = \craft\commerce\elements\Variant::find()
+    ->site('*')
+    ->unique()
+    ->all();
 ```
 :::
 

@@ -55,6 +55,43 @@ Order queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+- [anyStatus](#anystatus)
+- [asArray](#asarray)
+- [customer](#customer)
+- [customerId](#customerid)
+- [dateCreated](#datecreated)
+- [dateOrdered](#dateordered)
+- [datePaid](#datepaid)
+- [dateUpdated](#dateupdated)
+- [email](#email)
+- [expiryDate](#expirydate)
+- [fixedOrder](#fixedorder)
+- [gateway](#gateway)
+- [gatewayId](#gatewayid)
+- [hasPurchasables](#haspurchasables)
+- [hasTransactions](#hastransactions)
+- [id](#id)
+- [ignorePlaceholders](#ignoreplaceholders)
+- [inReverse](#inreverse)
+- [isCompleted](#iscompleted)
+- [isPaid](#ispaid)
+- [isUnpaid](#isunpaid)
+- [limit](#limit)
+- [number](#number)
+- [offset](#offset)
+- [orderBy](#orderby)
+- [orderStatus](#orderstatus)
+- [orderStatusId](#orderstatusid)
+- [preferSites](#prefersites)
+- [reference](#reference)
+- [relatedTo](#relatedto)
+- [search](#search)
+- [shortNumber](#shortnumber)
+- [trashed](#trashed)
+- [uid](#uid)
+- [user](#user)
+- [with](#with)
+
 ### `anyStatus`
 
 Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
@@ -227,7 +264,7 @@ Possible values include:
 {% set aWeekAgo = date('7 days ago')|atom %}
 
 {% set orders = craft.orders()
-    .dateCompleted(">= #{aWeekAgo}")
+    .dateOrdered(">= #{aWeekAgo}")
     .all() %}
 ```
 
@@ -236,7 +273,7 @@ Possible values include:
 $aWeekAgo = new \DateTime('7 days ago')->format(\DateTime::ATOM);
 
 $orders = \craft\commerce\elements\Order::find()
-    ->dateCompleted(">= {$aWeekAgo}")
+    ->dateOrdered(">= {$aWeekAgo}")
     ->all();
 ```
 :::
@@ -513,6 +550,20 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 :::
 
 
+### `ignorePlaceholders`
+
+Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+
+
+
+
+
+
+
+
+
+
 ### `inReverse`
 
 Causes the query results to be returned in reverse order.
@@ -772,6 +823,41 @@ $orders = \craft\commerce\elements\Order::find()
 :::
 
 
+### `preferSites`
+
+If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+
+
+
+For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
+for Site B.
+
+If this isn’t set, then preference goes to the current site.
+
+
+
+::: code
+```twig
+{# Fetch unique orders from Site A, or Site B if they don’t exist in Site A #}
+{% set orders = craft.orders()
+    .site('*')
+    .unique()
+    .preferSites(['a', 'b'])
+    .all() %}
+```
+
+```php
+// Fetch unique orders from Site A, or Site B if they don’t exist in Site A
+$orders = \craft\commerce\elements\Order::find()
+    ->site('*')
+    ->unique()
+    ->preferSites(['a', 'b'])
+    ->all();
+```
+:::
+
+
 ### `reference`
 
 Narrows the query results based on the order reference.
@@ -863,6 +949,37 @@ $orders = \craft\commerce\elements\Order::find()
 :::
 
 
+### `shortNumber`
+
+Narrows the query results based on the order short number.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `'xxxxxxx'` | with a matching order number
+
+
+
+::: code
+```twig
+{# Fetch the requested order #}
+{% set orderNumber = craft.app.request.getQueryParam('shortNumber') %}
+{% set order = craft.orders()
+    .shortNumber(orderNumber)
+    .one() %}
+```
+
+```php
+// Fetch the requested order
+$orderNumber = Craft::$app->request->getQueryParam('shortNumber');
+$order = \craft\commerce\elements\Order::find()
+    ->shortNumber($orderNumber)
+    ->one();
+```
+:::
+
+
 ### `trashed`
 
 Narrows the query results to only orders that have been soft-deleted.
@@ -874,7 +991,7 @@ Narrows the query results to only orders that have been soft-deleted.
 ::: code
 ```twig
 {# Fetch trashed orders #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
     .trashed()
     .all() %}
 ```
