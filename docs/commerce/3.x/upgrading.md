@@ -1,13 +1,14 @@
-# Changes in Commerce 3
+# Upgrading to Commerce 3
 
-Upgrading Commerce 2 to Commerce 3 is a smaller task than the previous Commerce 1 to Commerce 2 udgrade. 
+::: warning
+If you’re upgrading from Commerce 1, review the [Changes in Commerce 2](https://docs.craftcms.com/commerce/v2/changes-in-commerce-2.html) documentation and update your project accordingly before upgrading to Commerce 3.
+:::
 
-If you are coming from Commerce 1, migrating to Commerce 2 first would be the bulk of the work. Things that were deprecated in Commerce 2, are now breaking changes in Commerce 3.
+::: tip
+See the [changelog](https://github.com/craftcms/commerce/blob/master/CHANGELOG.md#300---2020-01-28) for a full list of changes.
+:::
 
-All changes are documented in the [full changelog](https://github.com/craftcms/commerce/blob/master/CHANGELOG.md#300---2020-01-28). 
-
-The information below is for additional context and to make the transition easier.
-
+When upgrading a Commerce 2 project to Commerce 3, you should be aware of the following.
 
 ## Order Emails
 
