@@ -20,7 +20,7 @@ Ensure that you have Composer [installed correctly](https://docs.craftcms.com/v3
 Run the following Composer command from within your Craft 3 project:
 
 ```bash
-composer require craftcms/commerce
+composer require craftcms/commerce:"^2.0"
 ```
 
 ::: tip
