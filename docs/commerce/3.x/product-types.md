@@ -19,9 +19,13 @@ The handle is how you will reference the product type in code. For example, in t
 ```twig
 {% set clothes = craft.products.type('clothes').all() %}
 ```
+### Title Field Label
+
+This setting allows you to change what the "Title" field label should be.
+
 ### Automatic SKU Format
 
-What the unique auto-generated SKUs should look like, when a SKU field is submitted without a value. You can include tags that output properties, such as {product.slug} or {myCustomField}
+What the unique auto-generated SKUs should look like, when a SKU field is submitted without a value. You can include tags that output properties, such as `{product.slug}` or `{myCustomField}`
 
 ::: tip
 The way you access properties within the SKU format will differ depending on whether or not the product type has variants. If your product type has multiple variants, then the SKU formats default `object` is the variant, otherwise it’s the product.
@@ -33,6 +37,10 @@ If a product type has an automatic SKU format the SKU field is not shown for new
 
 :::
 
+### Order Description Format
+
+How this product will be described on a line item in an order. You can include tags that output properties, such as `{product.title}` or `{myVariantCustomField}`
+
 ### Show the Dimensions and Weight fields
 
 Allows you to hide the weight and dimensions fields if they are not necessary for products of this type.
@@ -42,6 +50,12 @@ Allows you to hide the weight and dimensions fields if they are not necessary fo
 If you enable the product type to have multiple variants, you will see a new tab appear at the top of the page which allows you to configure the variant field layout.
 
 You also have the option to show the title input field or have it default to use a Title Format.
+
+### Show the Title field for variants
+
+Whether or not to show the "Variant Title" field when adding or editing variants. When true there is the further option to set the "Variant Title Field Label", this allows you to change what the "Variant Title" field label should be.
+
+If you are decide to not sure the "Variant Title" field you have the option to set the "Variant Title Format" allowing you to set the format for auto-generating variant titles. You can include tags that output variant properties, such as `{sku}` or `{myVariantsCustomField}`.
 
 ### Products of this type have their own URLs
 
