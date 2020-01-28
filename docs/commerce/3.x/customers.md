@@ -20,7 +20,7 @@ You can see information for each [customer](#customer) by clicking on their emai
 
 ##Customer
 
-The customer view will show you important information about the customer. The information contained on this page is the same data that is shown on the [customer info tab](#usercustomerinfotab).
+The customer view will show you important information about the customer. The information contained on this page is the same data that is shown on the [customer info tab](#user-customer-info-tab).
 
 ### Addresses
 
