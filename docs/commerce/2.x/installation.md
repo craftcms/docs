@@ -11,7 +11,7 @@ Craft Commerce can only be installed from the plugin store, or through Composer.
 
 ## Plugin Store
 
-Log into your Control Panel and and click on “Plugin Store”. Search for “Commerce”.
+Log into your Control Panel and and click on “Plugin Store” then search for “Commerce”.
 
 ## Composer
 
