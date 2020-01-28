@@ -69,6 +69,7 @@ Order queries support the following parameters:
 - [fixedOrder](#fixedorder)
 - [gateway](#gateway)
 - [gatewayId](#gatewayid)
+- [hasLineItems](#haslineitems)
 - [hasPurchasables](#haspurchasables)
 - [hasTransactions](#hastransactions)
 - [id](#id)
@@ -83,6 +84,7 @@ Order queries support the following parameters:
 - [orderBy](#orderby)
 - [orderStatus](#orderstatus)
 - [orderStatusId](#orderstatusid)
+- [origin](#origin)
 - [preferSites](#prefersites)
 - [reference](#reference)
 - [relatedTo](#relatedto)
@@ -483,6 +485,29 @@ Possible values include:
 
 
 
+### `hasLineItems`
+
+Narrows the query results to only orders that have line items.
+
+
+
+::: code
+```twig
+{# Fetch orders that do or do not have line items #}
+{% set orders = {twig-function}
+    .hasLineItems()
+    .all() %}
+```
+
+```php
+// Fetch unpaid orders
+$orders = \craft\commerce\elements\Order::find()
+    ->hasLineItems()
+    ->all();
+```
+:::
+
+
 ### `hasPurchasables`
 
 Narrows the query results to only orders that have certain purchasables.
@@ -828,6 +853,38 @@ Possible values include:
 // Fetch orders with an order status with an ID of 1
 $orders = \craft\commerce\elements\Order::find()
     ->authorGroupId(1)
+    ->all();
+```
+:::
+
+
+### `origin`
+
+Narrows the query results based on the origin.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `'web'` | with an origin of `web`.
+| `'not remote'` | not with an origin of `remote`.
+| `['web', 'cp']` | with an order origin of `web` or `cp`.
+| `['not', 'remote', 'cp']` | not with an origin of `web` or `cp`.
+
+
+
+::: code
+```twig
+{# Fetch shipped orders #}
+{% set orders = craft.orders()
+    .origin('web')
+    .all() %}
+```
+
+```php
+// Fetch shipped orders
+$orders = \craft\commerce\elements\Order::find()
+    ->origin('web')
     ->all();
 ```
 :::
