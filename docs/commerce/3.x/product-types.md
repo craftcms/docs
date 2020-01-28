@@ -27,6 +27,12 @@ What the unique auto-generated SKUs should look like, when a SKU field is submit
 The way you access properties within the SKU format will differ depending on whether or not the product type has variants. If your product type has multiple variants, then the SKU formats default `object` is the variant, otherwise it’s the product.
 :::
 
+::: warning
+
+If a product type has an automatic SKU format the SKU field is not shown for new variants. Once saved the field will be shown to allow editing.
+
+:::
+
 ### Show the Dimensions and Weight fields
 
 Allows you to hide the weight and dimensions fields if they are not necessary for products of this type.
