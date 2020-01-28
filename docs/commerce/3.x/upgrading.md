@@ -47,9 +47,7 @@ Merging carts as manual process is better since the customer can decide what to 
 
 This change is also mitigated by the fact that the previous cart of the current user is now loaded as the current cart when calling `craft.commerce.carts.cart` automatically.
 
-
 ## Twig template changes
-
 
 Use the table below to update your twig templates.
 D - Deprecated
@@ -66,8 +64,6 @@ BC - Breaking Change
 | `craft.commerce.discountByCode`           | `craft.commerce.discounts.discountByCode`                   | BC
 | `craft.commerce.primaryPaymentCurrency`   | `craft.commerce.paymentCurrencies.primaryPaymentCurrency`   | BC
 | `craft.commerce.statesArray`              | `craft.commerce.states.allStatesAsList`                     | BC
-
-
 
 ### Form Action Changes
 
