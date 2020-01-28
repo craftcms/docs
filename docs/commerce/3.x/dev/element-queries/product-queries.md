@@ -51,6 +51,40 @@ Product queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+- [after](#after)
+- [anyStatus](#anystatus)
+- [asArray](#asarray)
+- [availableForPurchase](#availableforpurchase)
+- [before](#before)
+- [clearCachedResult](#clearcachedresult)
+- [dateCreated](#datecreated)
+- [dateUpdated](#dateupdated)
+- [expiryDate](#expirydate)
+- [fixedOrder](#fixedorder)
+- [hasVariant](#hasvariant)
+- [id](#id)
+- [ignorePlaceholders](#ignoreplaceholders)
+- [inReverse](#inreverse)
+- [limit](#limit)
+- [offset](#offset)
+- [orderBy](#orderby)
+- [postDate](#postdate)
+- [preferSites](#prefersites)
+- [relatedTo](#relatedto)
+- [search](#search)
+- [site](#site)
+- [siteId](#siteid)
+- [slug](#slug)
+- [status](#status)
+- [title](#title)
+- [trashed](#trashed)
+- [type](#type)
+- [typeId](#typeid)
+- [uid](#uid)
+- [unique](#unique)
+- [uri](#uri)
+- [with](#with)
+
 ### `after`
 
 Narrows the query results to only products that were posted on or after a certain date.
@@ -190,6 +224,15 @@ $products = \craft\commerce\elements\Product::find()
     ->all();
 ```
 :::
+
+
+### `clearCachedResult`
+
+Clears the cached result.
+
+
+
+
 
 
 ### `dateCreated`
@@ -383,6 +426,20 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 :::
 
 
+### `ignorePlaceholders`
+
+Causes the query to return matching products as they are stored in the database, ignoring matching placeholder
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+
+
+
+
+
+
+
+
+
+
 ### `inReverse`
 
 Causes the query results to be returned in reverse order.
@@ -514,6 +571,41 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
+### `preferSites`
+
+If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+
+
+
+For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
+for Site B.
+
+If this isn’t set, then preference goes to the current site.
+
+
+
+::: code
+```twig
+{# Fetch unique products from Site A, or Site B if they don’t exist in Site A #}
+{% set products = craft.products()
+    .site('*')
+    .unique()
+    .preferSites(['a', 'b'])
+    .all() %}
+```
+
+```php
+// Fetch unique products from Site A, or Site B if they don’t exist in Site A
+$products = \craft\commerce\elements\Product::find()
+    ->site('*')
+    ->unique()
+    ->preferSites(['a', 'b'])
+    ->all();
+```
+:::
+
+
 ### `relatedTo`
 
 Narrows the query results to only products that are related to certain other elements.
@@ -576,7 +668,7 @@ $products = \craft\commerce\elements\Product::find()
 
 ### `site`
 
-Determines which site the products should be queried in.
+Determines which site(s) the products should be queried in.
 
 
 
@@ -587,7 +679,15 @@ Possible values include:
 | Value | Fetches products…
 | - | -
 | `'foo'` | from the site with a handle of `foo`.
+| `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
+| `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
 | a `\craft\commerce\elements\db\Site` object | from the site represented by the object.
+| `'*'` | from any site.
+
+::: tip
+If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you
+only want unique elements to be returned, use [unique](#unique) in conjunction with this.
+:::
 
 
 
@@ -610,7 +710,7 @@ $products = \craft\commerce\elements\Product::find()
 
 ### `siteId`
 
-Determines which site the products should be queried in, per the site’s ID.
+Determines which site(s) the products should be queried in, per the site’s ID.
 
 
 
@@ -650,7 +750,7 @@ Possible values include:
 | `'*foo'` | with a slug that ends with `foo`.
 | `'*foo*'` | with a slug that contains `foo`.
 | `'not *foo*'` | with a slug that doesn’t contain `foo`.
-| `['*foo*', '*bar*'` | with a slug that contains `foo` or `bar`.
+| `['*foo*', '*bar*']` | with a slug that contains `foo` or `bar`.
 | `['not', '*foo*', '*bar*']` | with a slug that doesn’t contain `foo` or `bar`.
 
 
@@ -726,7 +826,7 @@ Possible values include:
 | `'*Foo'` | with a title that ends with `Foo`.
 | `'*Foo*'` | with a title that contains `Foo`.
 | `'not *Foo*'` | with a title that doesn’t contain `Foo`.
-| `['*Foo*', '*Bar*'` | with a title that contains `Foo` or `Bar`.
+| `['*Foo*', '*Bar*']` | with a title that contains `Foo` or `Bar`.
 | `['not', '*Foo*', '*Bar*']` | with a title that doesn’t contain `Foo` or `Bar`.
 
 
@@ -759,7 +859,7 @@ Narrows the query results to only products that have been soft-deleted.
 ::: code
 ```twig
 {# Fetch trashed products #}
-{% set products = {twig-function}
+{% set products = craft.products()
     .trashed()
     .all() %}
 ```
@@ -863,6 +963,36 @@ $product = \craft\commerce\elements\Product::find()
 :::
 
 
+### `unique`
+
+Determines whether only elements with unique IDs should be returned by the query.
+
+
+
+This should be used when querying elements from multiple sites at the same time, if “duplicate” results is not
+desired.
+
+
+
+::: code
+```twig
+{# Fetch unique products across all sites #}
+{% set products = craft.products()
+    .site('*')
+    .unique()
+    .all() %}
+```
+
+```php
+// Fetch unique products across all sites
+$products = \craft\commerce\elements\Product::find()
+    ->site('*')
+    ->unique()
+    ->all();
+```
+:::
+
+
 ### `uri`
 
 Narrows the query results based on the products’ URIs.
@@ -878,7 +1008,7 @@ Possible values include:
 | `'*foo'` | with a URI that ends with `foo`.
 | `'*foo*'` | with a URI that contains `foo`.
 | `'not *foo*'` | with a URI that doesn’t contain `foo`.
-| `['*foo*', '*bar*'` | with a URI that contains `foo` or `bar`.
+| `['*foo*', '*bar*']` | with a URI that contains `foo` or `bar`.
 | `['not', '*foo*', '*bar*']` | with a URI that doesn’t contain `foo` or `bar`.
 
 
