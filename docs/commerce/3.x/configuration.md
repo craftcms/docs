@@ -133,6 +133,12 @@ Determines whether a shipping method selection is required before making a payme
 
 Default: `false`
 
+## `showCustomerInfoTab`
+
+Whether the customer info tab should be shown when viewing users in the control panel.
+
+Default: `true`
+
 ## `updateBillingDetailsUrl`
 
 The URL for a user to resolve billing issues with their subscription. 

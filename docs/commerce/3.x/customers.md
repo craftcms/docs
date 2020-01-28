@@ -15,7 +15,10 @@ If a user account has a Craft Commerce customer record associated with it, a “
 This tab contains the following information:
 
 - **Orders** – A list of previous orders for the customer.
-- **Active Carts** – A list of active carts for the customer based on the [Commerce::$activeCartDuration](configuration.md#activecartduration).
-- **Inactive Carts** – A list of inactive carts for the customer [Commerce::$activeCartDuration](configuration.md#activecartduration).
+- **Active Carts** – A list of active carts for the customer based on the [Commerce::$activeCartDuration](configuration.md#activecartduration) setting.
+- **Inactive Carts** – A list of inactive carts for the customer based on the [Commerce::$activeCartDuration](configuration.md#activecartduration) setting.
 - **Addresses** – A list of the customer's addresses with the ability to edit or delete.
 - **Subscriptions** – A list of the customer's subscriptions.
+
+The visibility of this tab can be controlled with the [Commerce::$showCustomerInfoTab](configuration.md#showcustomerinfotab) setting. The tab is shown by default.
+
