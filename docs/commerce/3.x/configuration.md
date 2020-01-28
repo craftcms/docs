@@ -135,7 +135,7 @@ Default: `false`
 
 ## `showCustomerInfoTab`
 
-Whether the customer info tab should be shown when viewing users in the control panel.
+Whether the [customer info tab](customers.md#usercustomerinfotab) should be shown when viewing users in the control panel.
 
 Default: `true`
 
