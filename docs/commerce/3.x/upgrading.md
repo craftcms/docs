@@ -12,7 +12,7 @@ When upgrading a Commerce 2 project to Commerce 3, you should be aware of the fo
 
 ## Order Emails
 
-Order notification emails are now sent via a queue job, so running a [queue worker as a daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms)  is highly recommended to avoid customer email notification delays.
+Order notification emails are now sent via a queue job, so running a [queue worker as a daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms) is highly recommended to avoid customer email notification delays.
 
 Previously emails would be generated during customer checkout, which could cause the order completion page to take a prolonged time to display (especially with PDF generation involved). This change gives your customers a better checkout experience.
 
@@ -21,12 +21,13 @@ No changes are needed for emails to continue to work, but ensuring your queue is
 
 ## Edit Order page
 
-Plugins and modules that modify the Edit Order page are likely to break with this update as the page is now a [Vue.js](https://vuejs.org/) application. The same Twig template hooksx are still available, but inserting into the part of the DOM controlled by Vue.js will not work.
+Plugins and modules that modify the Edit Order page are likely to break with this update as the page is now a [Vue.js](https://vuejs.org/) application. 
+The same Twig template hooks are still available, but inserting into the part of the DOM controlled by Vue.js will not work.
 
 
 ## Data tables
 
-All data tables througout the control panel use the new Craft 3.4 Vue.js-based data table, so any extensions of those old HTML tables are likely to break.
+All data tables throughout the control panel use the new Craft 3.4 Vue.js-based data table, so any extensions of those old HTML tables are likely to break.
 
 
 ## Permissions
