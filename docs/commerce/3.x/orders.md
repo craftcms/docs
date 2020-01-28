@@ -7,7 +7,7 @@ Orders are an [Element Type](https://docs.craftcms.com/v3/extend/element-types.h
 To see how to get order information in templates, and learn of all the properties of an order look at 
 the <api:craft\commerce\elements\Order> class reference.
 
-# Carts become orders
+## Carts become orders
 
 When a cart becomes an order, the following things happen:
 
@@ -16,7 +16,7 @@ When a cart becomes an order, the following things happen:
 3) The default [order status](custom-order-statuses.md) is set on the order and any emails for this status are sent.
 4) The order reference number is generated for the order, based on the ‘Order Reference Number Format‘ setting found in Commerce → Settings → General Settings section of the Control Panel. 
 
-## Order Numbers
+### Order Numbers
 
 You can identify an order in three ways. By the order number, short order number, and order reference number.
 
@@ -88,8 +88,7 @@ but they can also be created in the control panel.
 To create a new order, go to Commerce → Orders, and click “New Order”. This will create a new order that behaves like a cart. 
 Purchasables can be added and removed from the order and it will automatically recalculate it’s sales and [adjustments].
 
-To complete the order, click the “Mark as complete” button to save the order and mark it as complete. This will set the default order status, current date ordered, and 
-generate a order reference number. 
+To complete the order, click the “Mark as complete” button to save the order and mark it as complete. This will set the default order status, current date ordered, and generate a order reference number. 
 
 ::: tip
  You must have the “Edit Orders” permission to create orders in the control panel.
@@ -104,4 +103,12 @@ While editing the order, the order will refresh subtotals and totals, and displa
 recalculate the order based on system rules like shipping, taxes, or promotions. If you want the order to fully recalculate, 
 click the “Recalculate Order” button to recalculate the order.
  
-Once you are happy with your changes, you can click “Update Order”.
+Once you are happy with your changes, you can click “Update Order”, which will save it to the database.
+
+
+### Order status emails
+
+Order status emails will be send (if an email is associated with an order status) when the order has been saved with a new order status.
+
+You can manully send any email again at any time by choosing the email at the top of the order edit page.
+
