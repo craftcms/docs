@@ -53,7 +53,6 @@ Global set queries support the following parameters:
 
 - [anyStatus](#anystatus)
 - [asArray](#asarray)
-- [column](#column)
 - [dateCreated](#datecreated)
 - [dateUpdated](#dateupdated)
 - [fixedOrder](#fixedorder)
@@ -122,19 +121,6 @@ $globalSets = \craft\elements\GlobalSet::find()
     ->all();
 ```
 :::
-
-
-### `column`
-
-Executes the query and returns the first column of the result.
-
-
-
-
-
-
-
-
 
 
 ### `dateCreated`

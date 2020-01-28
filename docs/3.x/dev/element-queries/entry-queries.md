@@ -62,7 +62,6 @@ Entry queries support the following parameters:
 - [authorGroupId](#authorgroupid)
 - [authorId](#authorid)
 - [before](#before)
-- [column](#column)
 - [dateCreated](#datecreated)
 - [dateUpdated](#dateupdated)
 - [descendantDist](#descendantdist)
@@ -389,19 +388,6 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
-
-
-### `column`
-
-Executes the query and returns the first column of the result.
-
-
-
-
-
-
-
-
 
 
 ### `dateCreated`
