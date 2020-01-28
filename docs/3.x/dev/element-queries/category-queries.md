@@ -61,6 +61,7 @@ Category queries support the following parameters:
 - [ancestorOf](#ancestorof)
 - [anyStatus](#anystatus)
 - [asArray](#asarray)
+- [clearCachedResult](#clearcachedresult)
 - [dateCreated](#datecreated)
 - [dateUpdated](#dateupdated)
 - [descendantDist](#descendantdist)
@@ -210,6 +211,15 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
+
+
+### `clearCachedResult`
+
+Clears the cached result.
+
+
+
+
 
 
 ### `dateCreated`

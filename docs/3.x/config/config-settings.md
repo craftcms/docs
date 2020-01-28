@@ -73,7 +73,7 @@ Defined by
 
 
 
-The URI that users without access to the Control Panel should be redirected to after activating their account.
+The URI that users without access to the control panel should be redirected to after activating their account.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -189,7 +189,7 @@ Defined by
 
 
 
-Whether Craft should allow system and plugin updates in the Control Panel, and plugin installation from the Plugin Store.
+Whether Craft should allow system and plugin updates in the control panel, and plugin installation from the Plugin Store.
 
 This setting will automatically be disabled if [allowAdminChanges](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#allowadminchanges) is disabled.
 
@@ -326,12 +326,12 @@ Defined by
 
 
 
-The base URL that Craft should use when generating Control Panel URLs.
+The base URL that Craft should use when generating control panel URLs.
 
 It will be determined automatically if left blank.
 
 ::: tip
-The base CP URL should **not** include the [CP trigger word](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#cptrigger) (e.g. `/admin`).
+The base control panel URL should **not** include the [control panel trigger word](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#cptrigger) (e.g. `/admin`).
 :::
 
 
@@ -469,7 +469,7 @@ Defined by
 
 
 
-The URI segment Craft should look for when determining if the current request should route to the Control Panel rather than
+The URI segment Craft should look for when determining if the current request should route to the control panel rather than
 the front-end website.
 
 
@@ -532,7 +532,7 @@ Defined by
 
 
 
-The default language the Control Panel should use for users who haven’t set a preferred language yet.
+The default language the control panel should use for users who haven’t set a preferred language yet.
 
 
 
@@ -1094,16 +1094,18 @@ Since
 
 
 Bool Whether the system should run in Headless Mode, which
-optimizes the system and Control Panel for headless CMS implementations.
+optimizes the system and control panel for headless CMS implementations.
 
 When this is enabled, the following changes will take place:
 
-- URI Format settings for sections and category groups will be hidden.
+- Template settings for sections and category groups will be hidden.
 - Template route management will be hidden.
 - Front-end routing will skip checks for element and template requests.
 - Front-end responses will be JSON-formatted rather than HTML by default.
 - Twig will be configured to escape unsafe strings for JavaScript/JSON
   rather than HTML by default for front-end requests.
+- The [loginPath](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#loginpath), [logoutPath](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#logoutpath), [setPasswordPath](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#setpasswordpath), and
+  [verifyEmailPath](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#verifyemailpath) settings will be ignored.
 
 
 
@@ -1281,6 +1283,8 @@ Defined by
 
 The URI Craft should use for user login on the front-end.
 
+This can be set to `false` to disable front-end login.
+
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
@@ -1303,7 +1307,30 @@ Defined by
 
 The URI Craft should use for user logout on the front-end.
 
+This can be set to `false` to disable front-end logout.
+
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+
+
+### `maxBackups`
+
+Allowed types
+
+:   [integer](http://php.net/language.types.integer), [false](http://php.net/language.types.boolean)
+
+Default value
+
+:   `20`
+
+Defined by
+
+:   [GeneralConfig::$maxBackups](api:craft\config\GeneralConfig::$maxBackups)
+
+
+
+The number of backups that Craft should make before it starts deleting the oldest backups.
+If it is set to `false`, then Craft will not delete any backups.
 
 
 
@@ -1586,10 +1613,10 @@ Defined by
 
 
 
-The path that users should be redirected to after logging in from the Control Panel.
+The path that users should be redirected to after logging in from the control panel.
 
-This setting will also come into effect if the user visits the CP’s Login page (`/admin/login`)
-or the CP’s root URL (/admin) when they are already logged in.
+This setting will also come into effect if a user visits the control panel’s Login page (`/admin/login`)
+or the control panel’s root URL (/admin) when they are already logged in.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -1732,7 +1759,7 @@ Defined by
 
 
 
-When set to `false` and you go through the "forgot password" workflow on the Control Panel login page, for example,
+When set to `false` and you go through the "forgot password" workflow on the control panel login page, for example,
 you get distinct messages saying if the username/email didn't exist or the email was successfully sent and to check
 your email for further instructions. This can allow for username/email enumeration based on the response. If set
 `true`, you will always get a successful response even if there was an error making it difficult to enumerate users.
@@ -1860,7 +1887,7 @@ Defined by
 
 
 
-The amount of time Craft will remember a username and pre-populate it on the CP login page.
+The amount of time Craft will remember a username and pre-populate it on the control panel’s Login page.
 
 Set to `0` to disable this feature altogether.
 
@@ -1949,7 +1976,7 @@ Defined by
 
 
 
-The path to the root directory that should store published CP resources.
+The path to the root directory that should store published control panel resources.
 
 
 
@@ -1969,7 +1996,7 @@ Defined by
 
 
 
-The URL to the root directory that should store published CP resources.
+The URL to the root directory that should store published control panel resources.
 
 
 
@@ -2218,7 +2245,7 @@ Defined by
 
 
 
-The password-reset template path. Note that this only affects front-end site requests.
+The URI Craft should use for Set Password forms on the front-end.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -2509,6 +2536,30 @@ By default, all hosts are trusted.
 
 
 
+### `upscaleImages`
+
+Allowed types
+
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+
+:   `true`
+
+Defined by
+
+:   [GeneralConfig::$upscaleImages](api:craft\config\GeneralConfig::$upscaleImages)
+
+Since
+
+:   3.4.0
+
+
+
+Whether images should be upscaled if the provided transform size is larger than the image.
+
+
+
 ### `useCompressedJs`
 
 Allowed types
@@ -2724,6 +2775,32 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 
 
+### `verifyEmailPath`
+
+Allowed types
+
+:   `mixed`
+
+Default value
+
+:   `'verifyemail'`
+
+Defined by
+
+:   [GeneralConfig::$verifyEmailPath](api:craft\config\GeneralConfig::$verifyEmailPath)
+
+Since
+
+:   3.4.0
+
+
+
+The URI Craft should use for email verification links on the front-end.
+
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+
+
 ### `verifyEmailSuccessPath`
 
 Allowed types
@@ -2744,7 +2821,7 @@ Since
 
 
 
-The URI that users without access to the Control Panel should be redirected to after verifying a new email address.
+The URI that users without access to the control panel should be redirected to after verifying a new email address.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 

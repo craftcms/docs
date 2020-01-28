@@ -54,6 +54,7 @@ User queries support the following parameters:
 - [anyStatus](#anystatus)
 - [asArray](#asarray)
 - [can](#can)
+- [clearCachedResult](#clearcachedresult)
 - [dateCreated](#datecreated)
 - [dateUpdated](#dateupdated)
 - [email](#email)
@@ -161,19 +162,28 @@ See [Users](https://docs.craftcms.com/v3/users.html) for a full list of availabl
 
 ::: code
 ```twig
-{# Fetch users that can access the Control Panel #}
+{# Fetch users that can access the control panel #}
 {% set users = craft.users()
     .can('accessCp')
     .all() %}
 ```
 
 ```php
-// Fetch users that can access the Control Panel
+// Fetch users that can access the control panel
 $users = \craft\elements\User::find()
     ->can('accessCp')
     ->all();
 ```
 :::
+
+
+### `clearCachedResult`
+
+Clears the cached result.
+
+
+
+
 
 
 ### `dateCreated`

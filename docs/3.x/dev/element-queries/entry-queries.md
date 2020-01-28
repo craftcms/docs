@@ -62,6 +62,7 @@ Entry queries support the following parameters:
 - [authorGroupId](#authorgroupid)
 - [authorId](#authorid)
 - [before](#before)
+- [clearCachedResult](#clearcachedresult)
 - [dateCreated](#datecreated)
 - [dateUpdated](#dateupdated)
 - [descendantDist](#descendantdist)
@@ -388,6 +389,15 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
+
+
+### `clearCachedResult`
+
+Clears the cached result.
+
+
+
+
 
 
 ### `dateCreated`

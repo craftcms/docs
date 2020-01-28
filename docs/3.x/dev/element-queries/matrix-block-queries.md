@@ -58,8 +58,10 @@ Matrix block queries support the following parameters:
 - [allowOwnerRevisions](#allowownerrevisions)
 - [anyStatus](#anystatus)
 - [asArray](#asarray)
+- [clearCachedResult](#clearcachedresult)
 - [dateCreated](#datecreated)
 - [dateUpdated](#dateupdated)
+- [field](#field)
 - [fieldId](#fieldid)
 - [fixedOrder](#fixedorder)
 - [id](#id)
@@ -161,6 +163,15 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 :::
 
 
+### `clearCachedResult`
+
+Clears the cached result.
+
+
+
+
+
+
 ### `dateCreated`
 
 Narrows the query results based on the Matrix blocks’ creation dates.
@@ -232,6 +243,39 @@ $lastWeek = (new \DateTime('1 week ago'))->format(\DateTime::ATOM);
 
 $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->dateUpdated(">= {$lastWeek}")
+    ->all();
+```
+:::
+
+
+### `field`
+
+Narrows the query results based on the field the Matrix blocks belong to.
+
+Possible values include:
+
+| Value | Fetches Matrix blocks…
+| - | -
+| `'foo'` | in a field with a handle of `foo`.
+| `'not foo'` | not in a field with a handle of `foo`.
+| `['foo', 'bar']` | in a field with a handle of `foo` or `bar`.
+| `['not', 'foo', 'bar']` | not in a field with a handle of `foo` or `bar`.
+| a [craft\fields\Matrix](api:craft\fields\Matrix) object | in a field represented by the object.
+
+
+
+::: code
+```twig
+{# Fetch Matrix blocks in the Foo field #}
+{% set MatrixBlocks = craft.matrixBlocks()
+    .field('foo')
+    .all() %}
+```
+
+```php
+// Fetch Matrix blocks in the Foo field
+$MatrixBlocks = \craft\elements\MatrixBlock::find()
+    ->field('foo')
     ->all();
 ```
 :::

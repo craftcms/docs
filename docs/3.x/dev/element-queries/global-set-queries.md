@@ -53,6 +53,7 @@ Global set queries support the following parameters:
 
 - [anyStatus](#anystatus)
 - [asArray](#asarray)
+- [clearCachedResult](#clearcachedresult)
 - [dateCreated](#datecreated)
 - [dateUpdated](#dateupdated)
 - [fixedOrder](#fixedorder)
@@ -121,6 +122,15 @@ $globalSets = \craft\elements\GlobalSet::find()
     ->all();
 ```
 :::
+
+
+### `clearCachedResult`
+
+Clears the cached result.
+
+
+
+
 
 
 ### `dateCreated`

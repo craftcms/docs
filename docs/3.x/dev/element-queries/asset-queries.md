@@ -53,6 +53,7 @@ Asset queries support the following parameters:
 
 - [anyStatus](#anystatus)
 - [asArray](#asarray)
+- [clearCachedResult](#clearcachedresult)
 - [dateCreated](#datecreated)
 - [dateModified](#datemodified)
 - [dateUpdated](#dateupdated)
@@ -78,6 +79,7 @@ Asset queries support the following parameters:
 - [trashed](#trashed)
 - [uid](#uid)
 - [unique](#unique)
+- [uploader](#uploader)
 - [volume](#volume)
 - [volumeId](#volumeid)
 - [width](#width)
@@ -132,6 +134,15 @@ $assets = \craft\elements\Asset::find()
     ->all();
 ```
 :::
+
+
+### `clearCachedResult`
+
+Clears the cached result.
+
+
+
+
 
 
 ### `dateCreated`
@@ -913,6 +924,36 @@ desired.
 $assets = \craft\elements\Asset::find()
     ->site('*')
     ->unique()
+    ->all();
+```
+:::
+
+
+### `uploader`
+
+Narrows the query results based on the user the assets were uploaded by, per the user’s IDs.
+
+Possible values include:
+
+| Value | Fetches assets…
+| - | -
+| `1` | uploaded by the user with an ID of 1.
+| a [craft\elements\User](api:craft\elements\User) object | uploaded by the user represented by the object.
+
+
+
+::: code
+```twig
+{# Fetch assets uploaded by the user with an ID of 1 #}
+{% set assets = craft.assets()
+    .uploader(1)
+    .all() %}
+```
+
+```php
+// Fetch assets uploaded by the user with an ID of 1
+$assets = \craft\elements\Asset::find()
+    ->uploader(1)
     ->all();
 ```
 :::
