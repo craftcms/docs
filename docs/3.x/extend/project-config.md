@@ -148,6 +148,10 @@ Now all that’s left is to update your service methods so that they update the 
 
 Items in the project config can be added or updated using <api:craft\services\ProjectConfig::set()>, and removed using [remove()](api:craft\services\ProjectConfig::remove()).
 
+::: tip
+`ProjectConfig::set()` will sort all associative arrays by their keys, recursively. If you are storing an associative array where the order of the items is important (e.g. editable table data), then you must run the array through <api:craft\helpers\ProjectConfig::packAssociativeArray()> before passing it to `ProjectConfig::set()`.
+:::
+
 ```php
 use Craft;
 use craft\helpers\Db;
