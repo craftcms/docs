@@ -38,6 +38,16 @@ In the case of the only built-in purchasable, variants, the category can be rela
 
 Each custom purchasable can decide to determine how they consider the category being related.
 
+### Category Relationship Type
+
+This field specifies the type of relationship must exist between the purchasable and category in order for the condition to be met. There are three options available "Source", "Target" and "Both"
+
+- **Source** - the relational field exists on the product/purchasable.
+- **Target** - the category has a product/variant relational field.
+- **Both** - the relationship can be either **Source** or **Target**
+
+For more information on how this works please see [Relations Terminology](https://docs.craftcms.com/v3/relations.html#terminology).
+
 ### Other Purchasables
 
 Any other custom purchasable a third party system adds to Commerce can show up here as a condition.
