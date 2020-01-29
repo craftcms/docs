@@ -9,7 +9,7 @@ For example, in a new Craft 3 project, your `.env` file should define these envi
 ```bash
 ENVIRONMENT="dev"
 SECURITY_KEY=""
-DB_DSN="mysql"
+DB_DSN="mysql:host=<host>;port=<port>;dbname=<dbname>"
 DB_USER="root"
 DB_PASSWORD=""
 DB_SCHEMA="public"
