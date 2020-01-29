@@ -65,7 +65,7 @@ BC - Breaking Change
 | `craft.commerce.primaryPaymentCurrency`   | `craft.commerce.paymentCurrencies.primaryPaymentCurrency`    | BC     |
 | `craft.commerce.statesArray`              | `craft.commerce.states.allStatesAsList`                      | BC     |
 
-### Form Action Changes
+## Form Action Changes
 
 | Old                                    | New                         | Docs                                                                          |
 | -------------------------------------- | --------------------------- | ----------------------------------------------------------------------------- |
@@ -73,7 +73,7 @@ BC - Breaking Change
 | `commerce/cart/update-line-item`       | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items)   |
 | `commerce/cart/remove-all-line-items`  | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items)   |
 
-### Event Changes
+## Event Changes
 
 | Old                                                          | New                                                        |
 | ------------------------------------------------------------ | ---------------------------------------------------------- |
