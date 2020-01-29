@@ -368,9 +368,10 @@ To view the current number in the sequence without incrementing it, set the `nex
 Randomizes the order of the elements within an array.
 
 ```twig
-{% set promos = shuffle(homepage.promos) %}
+{% set promos = craft.entries.section('promos').all() %}
+{% set shuffledPromos = shuffle(promos) %}
 
-{% for promo in promos %}
+{% for promo in shuffledPromos %}
     <div class="promo {{ promo.slug }}">
         <h3>{{ promo.title }}</h3>
         <p>{{ promo.description }}</p>
