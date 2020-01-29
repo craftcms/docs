@@ -72,3 +72,11 @@ BC - Breaking Change
 | `commerce/cart/remove-line-item`       | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items)   |
 | `commerce/cart/update-line-item`       | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items)   |
 | `commerce/cart/remove-all-line-items`  | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items)   |
+
+### Event Changes
+
+| Old                                                          | New                                                        |
+| ------------------------------------------------------------ | ---------------------------------------------------------- |
+| `craft\commerce\models\Address::EVENT_REGISTER_ADDRESS_VALIDATION_RULES` | `craft\base\Model::EVENT_DEFINE_RULES`         |
+| `craft\commerce\services\Reports::EVENT_BEFORE_GENERATE_EXPORT` | `craft\base\Element::EVENT_REGISTER_EXPORTERS`          |
+
