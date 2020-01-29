@@ -67,11 +67,11 @@ BC - Breaking Change
 
 ## Form Action Changes
 
-| Old                                    | New                         | Docs                                                                          |
-| -------------------------------------- | --------------------------- | ----------------------------------------------------------------------------- |
-| `commerce/cart/remove-line-item`       | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items)   |
-| `commerce/cart/update-line-item`       | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items)   |
-| `commerce/cart/remove-all-line-items`  | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items)   |
+| Old                                    | New                         | Docs                                                                        |
+| -------------------------------------- | --------------------------- | --------------------------------------------------------------------------- |
+| `commerce/cart/remove-line-item`       | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
+| `commerce/cart/update-line-item`       | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
+| `commerce/cart/remove-all-line-items`  | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
 
 ## Event Changes
 
