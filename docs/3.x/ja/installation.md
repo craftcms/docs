@@ -26,8 +26,8 @@ Composer がすべてをロードするのに、数分かかるでしょう。�
 
 作業に適したアーカイブ形式をダウンロードします。
 
-- **zip**: [3.0.41](https://download.craftcdn.com/craft/3.0/Craft-3.0.41.zip), [latest](https://craftcms.com/latest-v3.zip)
-- **tar.gz**: [3.0.41](https://download.craftcdn.com/craft/3.0/Craft-3.0.41.tar.gz), [latest](https://craftcms.com/latest-v3.tar.gz)
+- **zip**: [3.3.20.1](https://download.craftcdn.com/craft/3.3/Craft-3.3.20.1.zip), [latest](https://craftcms.com/latest-v3.zip)
+- **tar.gz**: [3.3.20.1](https://download.craftcdn.com/craft/3.3/Craft-3.3.20.1.tar.gz), [latest](https://craftcms.com/latest-v3.tar.gz)
 
 新しい Craft プロジェクトを稼働したい場所でアーカイブを展開します。
 
