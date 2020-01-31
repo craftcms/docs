@@ -1,7 +1,5 @@
 # Subscriptions
 
-Commerce 2 supports subscriptions as well as multiple concurrent subscriptions.
-
 Subscriptions are handled by gateways - it’s not possible to subscribe a user to a Commerce subscription plan that the payment gateway does not know.
 
 While some gateways allow creating subscription plans via API, some of them don’t, so to keep future options open, Commerce does not allow creating new subscription plans on the gateway. However, it’s still possible to write a plugin that does that.

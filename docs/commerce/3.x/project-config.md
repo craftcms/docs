@@ -2,7 +2,7 @@
 
 Craft 3.1 introduced the [**project config**](https://docs.craftcms.com/v3/project-config.html), a sharable configuration store that makes it easier for developers to collaborate and deploy site changes across multiple environments.
 
-Craft Commerce 2 stores the following items in the project config:
+Craft Commerce stores the following items in the project config:
 
 - Commerce general settings
 - Email settings
