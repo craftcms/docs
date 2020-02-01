@@ -1,16 +1,14 @@
 # Adjusters
 
-Adjusters are classes that return adjustment models to the cart. Adjustment models contain an amount 
-which modifies the price of the order or line item. Adjustment models always belong to the order, but 
-can optionally belong to a line item.
+Adjusters are classes that return adjustment models to the cart. Each adjustment model contains an amount which modifies the price of the order or line item. Adjustment models always belong to the order, but can optionally belong to a line item.
 
 Custom adjusters are only available in the Pro edition of Craft Commerce.
 
-An adjuster class implements the Adjuster Interface found at `vendor/craftcms/commerce/src/base/AdjusterInterface.php`.
+An adjuster class implements the [Adjuster Interface](api:craft\commerce\base\AdjusterInterface).
 
 ## Register a New Adjuster
 
-To have your adjuster class be found, simply append your adjuster class to the `types` array attribute in 
+To register your adjuster class, append it to the `types` array attribute in 
 the `OrderAdjustments::EVENT_REGISTER_ORDER_ADJUSTERS` event model.
 
 ```php
@@ -19,39 +17,31 @@ Event::on(OrderAdjustments::class, OrderAdjustments::EVENT_REGISTER_ORDER_ADJUST
 });
 ```
 
-The order of the adjustments within the types array is important, as it is the order they will be run through on the order.
-
-You could have a project level event listener, that could reorder these adjusters, and not append any new ones.
+The order of the adjustments within the types array is important, because its adjusters will be called in exactly that sequence when an order is calculated. Because of this, you could have a project-level event listener that could exist solely to reorder these adjusters without appending any new ones.
 
 ## Adjusting
 
-The only method in the Adjuster Interface is the `adjust(Order $order)` method
-Each order adjustment model should contain all information about how the adjuster came to its 
-adjustment. For example, the shipping adjuster includes the information about the matching shipping 
-rules used to calculate the shipping cost, and stores the rule information in the `sourceSnapshot` attribute 
-of the adjustment model.
+The Adjuster Interface’s only method is `adjust(Order $order)`. 
 
-The `amount` value on the Order Adjustment model is used when totalling the cart. Use negative amounts to 
-reduce the price of the order.
+Each order adjustment model should contain all information about how the adjuster came to its adjustment. For example, the shipping adjuster includes the information about the matching shipping rules used to calculate the shipping cost, and stores the rule information in the `sourceSnapshot` attribute of the adjustment model.
 
-If you need to explain in plain text the adjustment made use the `description` field on the Model.
+The `amount` value on the Order Adjustment model is used when totalling the cart. Use negative amounts to reduce the price of the order.
+
+If you’d like to explain the adjustment for the user in plain text, use the `description` field on the model.
 
 ## Included Adjustments
 
-If you mark the adjustment model’s `included` attribute as `true`, the adjustment does not make any 
-changes to the orders total, but simply records an amount that was included in the price of the order.
+If you set the adjustment model’s `included` attribute as `true`, the adjustment does not make any changes to the order’s total. Instead, it simply records an amount that was included in the price of the order.
 
-The only 'included' adjustment we use in the the core of Commerce is included taxes.'
+The only “included” adjustment used in Commerce is for included taxes.
 
-## Order or Line Item adjustment.
+## Order or Line Item adjustment
 
-An adjustment model always belongs to an order, but can optionally belong to a line item. In your adjuster 
-class, when creating the adjustment model, if the adjustment is for a particular line item, you will need 
-to set it on the adjustment model like this:
+An adjustment model always belongs to an order, but can optionally belong to a line item. To specify an adjustment on a line item, use the `setLineItem()` method when creating the adjustment model:
 
 `$adjustment->setLineItem($lineItem)`
 
-This ensures that even if the line item is new and has no ID yet, the adjustment can reference the correct line item.
+This ensures the correct line item will be referenced, even if that line item is new and doesn’t yet have an ID.
 
 ## Example
 

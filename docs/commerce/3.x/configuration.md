@@ -9,7 +9,7 @@ The following permissions are available for users or user groups to have for Com
 
 This permission lets the user get access to the Commerce section of the control panel.
 
-This permission is found under Craft’s "Access the control panel" permission. 
+This permission is found under Craft’s “Access the control panel” permission. 
 
 
 ### Manage products
@@ -24,7 +24,7 @@ This permission lets the user:
 
 ### Manage orders
 
-This permission lets the user see orders
+This permission lets the user see orders.
 
 #### Edit orders
 
@@ -175,7 +175,7 @@ Default: `true`
 
 Determines whether order PDFs can include remote images.
 
-Default `false`
+Default: `false`
 
 ## `pdfPaperSize`
 
@@ -241,6 +241,6 @@ The [example templates](example-templates.md) folder contains an example of this
 
 ## `useBillingAddressForTax`
 
-Determines whether taxes should be calculated based on the billing address, as opposed to the shipping address.
+Determines whether taxes should be calculated based on the billing address instead of the shipping address.
 
 Default: `false` (use the shipping address)

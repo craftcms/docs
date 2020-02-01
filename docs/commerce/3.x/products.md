@@ -1,23 +1,22 @@
 # Products
 
-Products are the items for sale within your store. These differ from variants, which track the unique variations of a product.
+Products define the items for sale in your store. The product itself is never sold—the thing that goes into a cart for purchase is actually one of the product’s [variants](#variants). Even if a product doesn’t appear to have any variants, it still uses a **default variant** behind the scenes.
 
-The product itself is never sold, just a variant of a product. Even a product with no variants has a **default variant** behind it.
+For instance, a t-shirt product would likely have at least one variant for each of its colors. You wouldn’t sell the t-shirt without a specific color, so a variant would be necessary.
 
-For instance, a t-shirt product would likely have multiple variants, one for each of its colors. You would only ever sell those variants, and not the product itself.
-A book that only comes in one color and size might not need variants, but a single implicit variant still exists, which is the item the customer adds to the cart.
+A book that only comes in one color and size might not have any meaningful variations for the customer to choose. It would still have a specific SKU and dimensions, so a single implicit variant exists and gets added to the cart.
 
-Together, products and variants define what is for sale.
+The product describes what’s for sale, and the variant is what the customer ultimately orders.
 
 ## Variants
 
-Variant records track the individual variants of a product.
+Variants go on to describe the individual properties regarding a variant, such as SKU, price, and dimensions.
 
-Variant records can track some individual properties regarding a variant, such as SKU, price, and dimensions.
-These properties are unique to each variant. Additional custom fields can be added to variants to allow other distinguishing traits.
+These properties are unique to each variant. Custom fields may be added to variants to allow other distinguishing traits.
 
-For example, you may be selling a product which is a Baseball Jersey, which comes in the sizes “Small”, “Medium” and “Large”, as well as in the colors of “Red”, “Green” and “Blue”.
-For this combination of sizes and colors, you might make a product type that has two Dropdown fields (“Color” and “Size”) added to the variant’s field layout.
+For example, you may be selling a product which is a baseball jersey, which comes in “Small”, “Medium” and “Large” sizes, and in “Red”, “Green” and “Blue” colors.
+
+For this combination of sizes and colors, you might make a product type that has two dropdown fields (“Color” and “Size”) added to the variant’s field layout.
 This would enable unique variant data:
 
 - Small, Red
@@ -30,13 +29,15 @@ This would enable unique variant data:
 - Large, Green
 - Large, Blue
 
-This doesn’t stop you from using other custom fields to define other special variants, and it also does not ensure each variant has unique combinations of custom fields - that’s up to the author.
+You can continue using as many custom fields as you need to define important properties and variants.
+
+Commerce does not automatically create every possible unique variant for you, that’s up to the author.
 
 ### Default Variant
 
 Every single product has a default variant. Whenever a product is created, a default variant for that product will be created too.
 
-When a product is able to have multiple variants, the author can choose which one is default. Products that do not have multiple variants still have a default variant, but the author can not add additional variants.
+If a product type has multiple variants enabled, the author can choose which one should be used by default. Products that do not have multiple variants still have a default variant, but the author cannot add additional variants.
 
 ## Purchasables
 
@@ -44,4 +45,4 @@ Anything that can be added to the cart by a customer is called a [purchasable](p
 
 Third party plugins can provide additional purchasables.
 
-The only purchasables Craft Commerce provides by default are product variants, and a donation purchasable.
+The only purchasables Craft Commerce provides are [variants](#variants), and [donations](donations.md).

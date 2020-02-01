@@ -4,9 +4,9 @@ Commerce provides example templates for you to use as a reference when building 
 
 We have 2 sets of example temples, within the folders `shop` and `buy`.
 
-The example templates can by found in the `vendor/craftcms/commerce/templates/` folder, and can be copied to your projects top level `templates/` folder.
+The example templates can be found in the `vendor/craftcms/commerce/templates/` folder, and can be copied to your project’s top level `templates/` folder.
 
-If you system supports it, you could also symlink these templates folders into your `templates/` folder so that you always have up-to-date 
+If your system supports it, you could also symlink these folders into your project’s `templates/` folder so you always have up-to-date 
 examples *while in development*.
 
 ## Shop
