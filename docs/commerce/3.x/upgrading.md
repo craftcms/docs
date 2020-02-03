@@ -39,7 +39,7 @@ We have added the “Edit orders” and “Delete orders” user permissions, bu
 
 Automatic cart merging has been removed.
 
-The cart is still retrieved from the front-end templatess using`craft.commerce.carts.cart`in your templates, but the optional `mergeCarts` param has been removed, and it is no longer possible to automicatically merge previous carts of the current user. 
+The cart is still retrieved from the front end templates using `craft.commerce.carts.cart` in your templates, but the optional `mergeCarts` param has been removed, and it is no longer possible to automicatically merge previous carts of the current user. 
 
 We now recommend the customer manually adds items from the [previous carts to their current cart](adding-to-and-updating-the-cart.md#restoring-previous-cart-contents). An example of this is in the example templates.
 
