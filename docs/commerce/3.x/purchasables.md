@@ -1,16 +1,16 @@
 # Purchasables
 
-A purchasable is a custom Craft Element Type that can be sold through the cart.
+A purchasable is a custom element type that can be sold through the cart. Commerce includes [product variant](products.md#variants) and [donation](donations.md) purchasables, but [plugins and modules](https://docs.craftcms.com/v3/extend) can provide their own.
 
 A purchasable:
 
-- is an [element types](https://docs.craftcms.com/v3/extend/element-types.html)
-- implements `craft\commerce\base\PurchasableInterface`
-- should extend `craft\commerce\base\Purchasable`
+- is an [element type](https://docs.craftcms.com/v3/extend/element-types.html)
+- implements [`craft\commerce\base\PurchasableInterface`](api:craft\commerce\base\PurchasableInterface)
+- should extend [`craft\commerce\base\Purchasable`](api:craft\commerce\base\Purchasable)
 
 ## Implementation
 
-To implement the Purchasable Interface, inherit from the base Purchasable, and also implement these methods:
+To implement the Purchasable Interface, inherit from the base Purchasable and implement these methods:
 
 ### `getId()`
 
@@ -18,7 +18,7 @@ The ID of the element.
 
 ### `getDescription()`
 
-This is the description of the purchasable. Would usually be the title, or name of the product. This is used for display in the order, even if the purchasable is later deleted.
+This is the description of the purchasable. It would often be the title or name of the product. This is used for display in the order even if the purchasable is deleted later.
 
 ### `getPrice()`
 
@@ -28,8 +28,7 @@ The default price of the item.
 
 The stock keeping unit number of the purchasable. Must be unique based on the `commerce_purchasables` table.
 
-When you inherit from `craft\commerce\base\Purchasable` a unique validation rule for the `sku` attribute is added to the `rules()` method. 
-This validator ignored soft-deleted purchasables in it’s validator. Uniqueness if only checked for non-trashed purchasables. 
+When you inherit from `craft\commerce\base\Purchasable`, a unique validation rule for the `sku` attribute is added to the `rules()` method. This ignores soft-deleted purchasables; uniqueness if only checked for non-trashed purchasables.
 
 ### `getSnapshot()`
 
@@ -49,7 +48,7 @@ Defaults to the default shipping category ID.
 
 ### `hasFreeShipping()`
 
-Stops the shipping engine from adding shipping costs adjustment to a line item containing this purchasable.
+Stops the shipping engine from adding shipping cost adjustment to a line item containing this purchasable.
 
 ### `getIsPromotable()`
 
@@ -65,45 +64,44 @@ Base Purchasable defaults to `true` always.
 
 ### `populateLineItem(Commerce_LineItemModel $lineItem)`
 
-Gives the purchasable the chance to change the `saleAmount` and `price` of the line item when it is added to the cart, or when the cart recalculates.
+Gives the purchasable the chance to change the `saleAmount` and `price` of the line item when it’s added to the cart or when the cart recalculates.
 
 ### `afterOrderComplete(Order $order, LineItem $lineItem)`
 
-Runs any logic needed for this purchasable after it was on an order that was just completed (not when an order was paid, although paying an order will complete it).
+Runs any logic needed for this purchasable after it was on an order that was just completed—not necessarily when an order was paid, although paying an order will complete it.
 
-This is called for each line item the purchasable was contained within.
+This is called for each line item that contains the purchasable.
 
 For example, variants use this method to deduct stock.
 
 ### `getPromotionRelationSource()`
 
-Returns the source param value for a element relation query, for use with promotions. For example, a sale promotion on a category need to know if the purchasable is related.
+Returns the source param value for an element relation query, for use with promotions. For example, a sale promotion on a category needs to know if the purchasable is related.
 
 Defaults to the ID of the purchasable element, which would be sufficient for most purchasables.
 
 
 ## Purchasable deletion
 
-Soft-deletion was added in Craft 3.1 and all elements get soft-deleted automatically without needing to do anything.
+::: tip
+Craft 3.1 added [soft delete support](https://docs.craftcms.com/v3/extend/soft-deletes.html) for all element types, including purchasables. You might want to familiarize yourself with soft deletion before adding delete and restore capabilities for your purchasable element.
+:::
 
-When you inherit from `craft\commerce\base\Purchasable` and your element is saved, we automatically update the `commerce_purchasables` table with the 
-purchasable’s `sku` so that all purchasables have a central location to check their `sku` uniqueness.
+When you inherit from `craft\commerce\base\Purchasable` and your element is saved, Commerce automatically updates the `commerce_purchasables` table with the purchasable’s `sku` so that all purchasables have a central location to check their `sku` uniqueness.
 
 The uniqueness of your `sku` is automatically validated for you when extending `craft\commerce\base\Purchasable`.
 
-We take care of only validating non-trashed purchasables. This means that trashed purchasables will still be in this table until garbage collection is run.
+Commerce only validates non-trashed purchasables. Trashed purchasables will still be in the `commerce_purchasables` table until garbage collection is run.
 
 ## Restoring soft-deleted purchasables
 
-If you decide to support restoring of your purchasables element, you need to make sure your restored purchasable’s `sku` is unique.
+If you decide to support restoration of your purchasable element, you need to make sure your its restored `sku` is unique.
 
-You would do this in the following way:
+You would do this by overriding the `beforeRestore()` method in your purchasable element. 
 
- 1) Override the `beforeRestore()` method in your purchasable element
- 2) Within that method, check to see if any non-trashed purchasables has the same `sku` as the purchasable being restored. You could do that like this:
+Within that method, you would first see if any non-trashed purchasables have the same `sku` as the purchasable to be restored:
 
 ```php
-
 if (!parent::beforeDelete()) {
     return false;
 }
@@ -116,7 +114,7 @@ $found = (new Query())->select(['[[p.sku]]', '[[e.id]]'])
     ->count();
 ```
 
-3) If there is live (non-trashed) purchasable with the same `sku`, make your purchasable’s `sku` unique and update the relevant tables. For example:
+If `$found` is greater than zero, meaning there’s another live (non-trashed) purchasable with the same `sku`, make your purchasable’s `sku` unique and update the relevant tables:
 
 ```php
 if ($found) {
@@ -144,4 +142,6 @@ if ($found) {
 }
 ```
 
-It's important to update both your own tables as well as the `commerce_purchasables` table.
+::: tip
+It’s important to update your own tables in addition to the `commerce_purchasables` table.
+:::
