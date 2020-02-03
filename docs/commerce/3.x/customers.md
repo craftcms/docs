@@ -12,7 +12,7 @@ Customers can be found in the Control Panel by going to  Commerce → Customers.
 
 ## Customer List
 
-The customer list is a paginated data set of all customers in the system with completed orders. You are able to search the customer list by name, email, address or order reference/number.
+The customer list is a paginated data set of all customers in the system that is linked to a user and/or has completed orders. You are able to search the customer list by name, email, address or order reference/number.
 
 Customers that are related to a user account will show a link to their respective user in the user column of the table.
 
