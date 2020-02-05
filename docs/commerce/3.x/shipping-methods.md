@@ -83,7 +83,7 @@ Returns `true` if the rule is enabled, or `false` if `matchOrder()` should not b
 
 #### getOptions()
 
-Stores this data as JSON on the order’s shipping adjustment. For example, you might include all data used to determine the rule matched.
+Stores this data as JSON on the order’s shipping adjustment when this rule is applied. For example, you might include all data used to determine the rule matched.
 
 #### getPercentageRate()
 
