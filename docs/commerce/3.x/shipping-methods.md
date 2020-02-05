@@ -120,6 +120,8 @@ Once you’ve created your shipping method class and its associated shipping rul
 Do this by using your plugin’s `init()` method to register an instance of your shipping method. Subscribe to the `EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS` event and add your shipping method to the event object’s `shippingMethods` array:
 
 ```php
+use craft\commerce\events\RegisterAvailableShippingMethodsEvent;
+
 Event::on(
     ShippingMethods::class,
     ShippingMethods::EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS,
