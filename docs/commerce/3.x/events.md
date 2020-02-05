@@ -1,782 +1,1048 @@
 # Events
 
-Craft Commerce provides a multitude of events for extending its functionality.
+Craft Commerce provides a multitude of events for extending its functionality. Modules and plugins can register event listeners, typically in their `init()` methods, to modify Commerce’s behavior.
 
-## Product related events
+## Product Events
 
-### The `beforeCaptureVariantSnapshot` event
+### `beforeCaptureVariantSnapshot`
 
-Plugins can get notified before we capture a variant’s field data, and customize which fields are included. We do not  
-include custom fields by default.
+The event that is triggered before a variant’s field data is captured, which makes it possible to customize which fields are included in the snapshot. Custom fields are not included by default.
+
+This example adds every custom field to the variant snapshot:
 
 ```php
 use craft\commerce\elements\Variant;
 use craft\commerce\events\CustomizeVariantSnapshotFieldsEvent;
+use yii\base\Event;
 
-Event::on(Variant::class, Variant::EVENT_BEFORE_CAPTURE_VARIANT_SNAPSHOT, function(CustomizeVariantSnapshotFieldsEvent $e) {
-    $variant = $e->variant;
-    $fields = $e->fields;
-    
-    // Add every custom field to the snapshot (huge amount of data and will increase your DB size
-    if (($fieldLayout = $variant->getFieldLayout()) !== null) {
-        foreach ($fieldLayout->getFields() as $field) {
-            $fields[] = $field->handle;
+Event::on(
+    Variant::class,
+    Variant::EVENT_BEFORE_CAPTURE_VARIANT_SNAPSHOT,
+    function(CustomizeVariantSnapshotFieldsEvent $event) {
+        $variant = $event->variant;
+        $fields = $event->fields;
+
+        // Add every custom field to the snapshot
+        if (($fieldLayout = $variant->getFieldLayout()) !== null) {
+            foreach ($fieldLayout->getFields() as $field) {
+                $fields[] = $field->handle;
+            }
         }
+
+        $event->fields = $fields;
     }
-    
-    $e->fields = $fields;
-});
+);
 ```
 
-### The `afterCaptureVariantSnapshot` event
+::: warning
+Add with care! A huge amount of custom fields/data will increase your database size.
+:::
 
-Plugins can get notified after we capture a variant’s field data, and customize, extend, or redact the data to be persisted.
+### `afterCaptureVariantSnapshot`
+
+The event that is triggered after a variant’s field data is captured. This makes it possible to customize, extend, or redact the data to be persisted on the variant instance.
 
 ```php
 use craft\commerce\elements\Variant;
 use craft\commerce\events\CustomizeVariantSnapshotDataEvent;
+use yii\base\Event;
 
-Event::on(Variant::class, Variant::EVENT_AFTER_CAPTURE_VARIANT_SNAPSHOT, function(CustomizeVariantSnapshotFieldsEvent $e) {
-    $variant = $e->variant;
-    $data = $e->fieldData;
-    // Modify or redact captured `$data`...
-});
+Event::on(
+    Variant::class,
+    Variant::EVENT_AFTER_CAPTURE_VARIANT_SNAPSHOT,
+    function(CustomizeVariantSnapshotFieldsEvent $event) {
+        $variant = $event->variant;
+        $data = $event->fieldData;
+        // Modify or redact captured `$data`
+        // ...
+    }
+);
 ```
 
-### The `beforeCaptureProductSnapshot` event
+### `beforeCaptureProductSnapshot`
 
-Plugins can get notified before we capture a product’s field data, and customize which fields are included. We do not  
-include custom fields by default.
+The event that is triggered before a product’s field data is captured. This makes it possible to customize which fields are included in the snapshot. Custom fields are not included by default.
+
+This example adds every custom field to the product snapshot:
 
 ```php
 use craft\commerce\elements\Variant;
 use craft\commerce\events\CustomizeProductSnapshotFieldsEvent;
+use yii\base\Event;
 
-Event::on(Variant::class, Variant::EVENT_BEFORE_CAPTURE_PRODUCT_SNAPSHOT, function(CustomizeProductSnapshotFieldsEvent $e) {
-    $product = $e->product;
-    $fields = $e->fields;
-    
-    // Add every custom field to the snapshot (huge amount of data and will increase your DB size) Don't recommend.
-    if (($fieldLayout = $product->getFieldLayout()) !== null) {
-        foreach ($fieldLayout->getFields() as $field) {
-            $fields[] = $field->handle;
+Event::on(
+    Variant::class,
+    Variant::EVENT_BEFORE_CAPTURE_PRODUCT_SNAPSHOT,
+    function(CustomizeProductSnapshotFieldsEvent $event)
+    {
+        $product = $event->product;
+        $fields = $event->fields;
+
+        // Add every custom field to the snapshot
+        if (($fieldLayout = $product->getFieldLayout()) !== null) {
+            foreach ($fieldLayout->getFields() as $field) {
+                $fields[] = $field->handle;
+            }
         }
+
+        $event->fields = $fields;
     }
-    
-    $e->fields = $fields;
-});
+);
 ```
 
-### The `afterCaptureProductSnapshot` event
+::: warning
+Add with care! A huge amount of custom fields/data will increase your database size.
+:::
 
-Plugins can get notified after we capture a product’s field data, and customize, extend, or redact the data to be persisted.
+### `afterCaptureProductSnapshot`
+
+The event that is triggered after a product’s field data is captured, which can be used to customize, extend, or redact the data to be persisted on the product instance.
 
 ```php
 use craft\commerce\elements\Variant;
 use craft\commerce\events\CustomizeProductSnapshotDataEvent;
+use yii\base\Event;
 
-Event::on(Variant::class, Variant::EVENT_AFTER_CAPTURE_PRODUCT_SNAPSHOT, function(CustomizeProductSnapshotFieldsEvent $e) {
-    $product = $e->product;
-    $data = $e->fieldData;
-    // Modify or redact captured `$data`
-});
+Event::on(
+    Variant::class,
+    Variant::EVENT_AFTER_CAPTURE_PRODUCT_SNAPSHOT,
+    function(CustomizeProductSnapshotFieldsEvent $event) {
+        $product = $event->product;
+        $data = $event->fieldData;
+        // Modify or redact captured `$data`
+        // ...
+    }
+);
 ```
 
-### The `beforeMatchPurchasableSale` event
+### `beforeMatchPurchasableSale`
 
-You may set the `isValid` property to `false` on the event to prevent the application of the matched sale.
+The event that is triggered before Commerce attempts to match a sale to a purchasable.
 
-Plugins can get notified when a purchasable matches a sale.
+The `isValid` event property can be set to `false` to prevent the application of the matched sale.
 
 ```php
 use craft\commerce\events\SaleMatchEvent;
 use craft\commerce\services\Sales;
 use yii\base\Event;
 
-Event::on(Sales::class, Sales::EVENT_BEFORE_MATCH_PURCHASABLE_SALE, function(SaleMatchEvent $e) {
-     // Perhaps prevent the purchasable match with sale based on some business logic.
-});
+Event::on(
+    Sales::class,
+    Sales::EVENT_BEFORE_MATCH_PURCHASABLE_SALE,
+    function(SaleMatchEvent $event) {
+        // Use custom business logic to exclude purchasable from sale
+        // with `$event->isValid = false`
+        // ...
+    }
+);
 ```
 
-## Order related events
+## Order Events
 
-### The `afterAddLineItem` event
+### `afterAddLineItem`
 
-Plugins can get notified after a line item has been added to the order
+The event that is triggered after a line item has been added to an order.
 
 ```php
 use craft\commerce\elements\Order;
 use yii\base\Event;
 
-Event::on(Order::class, Order::EVENT_AFTER_ADD_LINE_ITEM, function(Event $e) {
-    $lineItem = $e->lineItem;
-    $isNew = $e->isNew;
+Event::on(Order::class, Order::EVENT_AFTER_ADD_LINE_ITEM, function(Event $event) {
+    $lineItem = $event->lineItem;
+    $isNew = $event->isNew;
     // ...
 });
 ```
 
-### The `beforeCompleteOrder` event
+### `beforeCompleteOrder`
 
-Plugins can get notified before an order is completed.
+The event that is triggered before an order is completed.
 
 ```php
 use craft\commerce\elements\Order;
 use yii\base\Event;
 
-Event::on(Order::class, Order::EVENT_BEFORE_COMPLETE_ORDER, function(Event $e) {
+Event::on(Order::class, Order::EVENT_BEFORE_COMPLETE_ORDER, function(Event $event) {
     // @var Order $order
-    $order = $e->sender;
+    $order = $event->sender;
     // ...
 });
 ```
-### The `afterCompleteOrder` event
 
-Plugins can get notified after an order is completed
+### `afterCompleteOrder`
+
+The event that is triggered after an order is completed.
 
 ```php
 use craft\commerce\elements\Order;
 use yii\base\Event;
 
-Event::on(Order::class, Order::EVENT_AFTER_COMPLETE_ORDER, function(Event $e) {
+Event::on(Order::class, Order::EVENT_AFTER_COMPLETE_ORDER, function(Event $event) {
     // @var Order $order
-    $order = $e->sender;
+    $order = $event->sender;
     // ...
 });
 ```
 
-### The `afterOrderPaid` event
+### `afterOrderPaid`
 
-Plugins can get notified after an order is paid and completed
+The event that is triggered after an order is paid and completed.
 
 ```php
 use craft\commerce\elements\Order;
 use yii\base\Event;
 
-Event::on(Order::class, Order::EVENT_AFTER_ORDER_PAID, function(Event $e) {
+Event::on(Order::class, Order::EVENT_AFTER_ORDER_PAID, function(Event $event) {
     // @var Order $order
-    $order = $e->sender;
+    $order = $event->sender;
     // ...
 });
 ```
 
-### The `afterDiscountAdjustmentsCreated` event
+### `afterDiscountAdjustmentsCreated`
 
-Plugins can get notified before a line item is being saved
+The event that is triggered before a line item is saved.
 
 ```php
 use craft\commerce\adjusters\Discount;
 use yii\base\Event;
 
-Event::on(Discount::class, Discount::EVENT_AFTER_DISCOUNT_ADJUSTMENTS_CREATED, function(DiscountAdjustmentsEvent $e) {
-    // Do something - perhaps use a third party to check order data and modify the adjustments.
-});
+Event::on(
+    Discount::class,
+    Discount::EVENT_AFTER_DISCOUNT_ADJUSTMENTS_CREATED,
+    function(DiscountAdjustmentsEvent $event) {
+        // Use a third party to check order data and modify the adjustments
+        // ...
+    }
+);
 ```
 
-### The `beforeMatchLineItem` event
+### `beforeMatchLineItem`
+
+The event that is triggered before an item is removed from the cart.
 
 You may set the `isValid` property to `false` on the event to prevent the application of the matched discount.
-Plugins can get notified before an item is removed from the cart.
 
 ```php
 use craft\commerce\events\MatchLineItemEvent;
 use craft\commerce\services\Discounts;
 use yii\base\Event;
 
-Event::on(Discounts::class, Discounts::EVENT_BEFORE_MATCH_LINE_ITEM, function(MatchLineItemEvent $e) {
-     // Maybe check some business rules and prevent a match from happening in some cases.
-});
+Event::on(
+    Discounts::class,
+    Discounts::EVENT_BEFORE_MATCH_LINE_ITEM,
+    function(MatchLineItemEvent $event) {
+        // Check some business rules and prevent a match in special cases
+        // ...
+    }
+);
 ```
 
-### The `beforeSaveLineItem` event
+### `beforeSaveLineItem`
 
-Plugins can get notified before a line item is being saved
+The event that is triggered before a line item is saved.
 
 ```php
 use craft\commerce\events\LineItemEvent;
 use craft\commerce\services\LineItems;
 use yii\base\Event;
 
-Event::on(LineItems::class, LineItems::EVENT_BEFORE_SAVE_LINE_ITEM, function(LineItemEvent $e) {
-    // Do something - perhaps let a third party service know about changes to an order
-});
+Event::on(
+    LineItems::class,
+    LineItems::EVENT_BEFORE_SAVE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // Notify a third party service about changes to an order
+        // ...
+    }
+);
 ```
 
-### The `afterSaveLineItem` event
+### `afterSaveLineItem`
 
-Plugins can get notified after a line item is being saved
+The event that is triggeredd after a line item is saved.
 
 ```php
 use craft\commerce\events\LineItemEvent;
 use craft\commerce\services\LineItems;
 use yii\base\Event;
 
-Event::on(LineItems::class, LineItems::EVENT_AFTER_SAVE_LINE_ITEM, function(LineItemEvent $e) {
-    // Do something - perhaps reserve the stock
-});
+Event::on(
+    LineItems::class,
+    LineItems::EVENT_AFTER_SAVE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // Reserve stock
+        // ...
+    }
+);
 ```
 
-### The `populateLineItem` event
+### `populateLineItem`
 
-Plugins can get notified as a line item is being populated from a purchasable.
+The event that is triggered as a line item is being populated from a purchasable.
 
 ```php
 use craft\commerce\events\LineItemEvent;
 use craft\commerce\services\LineItems;
 use yii\base\Event;
 
-Event::on(LineItems::class, LineItems::EVENT_POPULATE_LINE_ITEM, function(LineItemEvent $e) {
-    // Do something - perhaps modify the price of a line item
-});
+Event::on(
+    LineItems::class,
+    LineItems::EVENT_POPULATE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // Modify the price of a line item
+        // ...
+    }
+);
 ```
 
-### The `createLineItem` event
+### `createLineItem`
 
-Plugins can get notified after a line item has been created from a purchasable
+The event that is triggered after a line item has been created from a purchasable.
 
 ```php
 use craft\commerce\events\LineItemEvent;
 use craft\commerce\services\LineItems;
 use yii\base\Event;
 
-Event::on(LineItems::class, LineItems::EVENT_CREATE_LINE_ITEM, function(LineItemEvent $e) {
-    // Do something - perhaps call a third party service according to the line item options
-});
+Event::on(
+    LineItems::class,
+    LineItems::EVENT_CREATE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // Call a third party service based on the line item options
+        // ...
+    }
+);
 ```
 
-### The `registerOrderAdjusters` event
+### `registerOrderAdjusters`
 
-Plugins can register their own adjusters.
+The event that is triggered for registration of additional adjusters.
 
 ```php
 use craft\events\RegisterComponentTypesEvent;
 use craft\commerce\services\OrderAdjustments;
 use yii\base\Event;
 
-Event::on(OrderAdjustments::class, OrderAdjustments::EVENT_REGISTER_ORDER_ADJUSTERS, function(RegisterComponentTypesEvent $e) {
-    $e->types[] = MyAdjuster::class;
-});
+Event::on(
+    OrderAdjustments::class,
+    OrderAdjustments::EVENT_REGISTER_ORDER_ADJUSTERS,
+    function(RegisterComponentTypesEvent $event) {
+        $event->types[] = MyAdjuster::class;
+    }
+);
 ```
 
-### The `orderStatusChange` event
+### `orderStatusChange`
 
-Plugins can get notified when an order status is changed
+The event that is triggered when an order status is changed.
 
 ```php
 use craft\commerce\events\OrderStatusEvent;
 use craft\commerce\services\OrderHistories;
 use yii\base\Event;
 
-Event::on(OrderHistories::class, OrderHistories::EVENT_ORDER_STATUS_CHANGE, function(OrderStatusEvent $e) {
-     // Perhaps, let the delivery department know that the order is ready to be delivered.
-});
+Event::on(
+    OrderHistories::class,
+    OrderHistories::EVENT_ORDER_STATUS_CHANGE,
+    function(OrderStatusEvent $event) {
+        // Let the delivery department know the order’s ready to be delivered
+        // ...
+    }
+);
 ```
 
-### The `defaultOrderStatus` event
+### `defaultOrderStatus`
 
-You may set the `orderStatus` property to a desired OrderStatus to override the default status set in CP
+The event that is triggered when a default order status is being fetched.
 
-Plugins can get notified when a default order status is being fetched
+Set the event object’s `orderStatus` property to override the default status set in the control panel.
 
 ```php
 use craft\commerce\events\DefaultOrderStatusEvent;
 use craft\commerce\services\OrderStatuses;
 use yii\base\Event;
 
-Event::on(OrderStatuses::class, OrderStatuses::EVENT_DEFAULT_ORDER_STATUS, function(DefaultOrderStatusEvent $e) {
-    // Do something - perhaps figure out a better default order statues than the one set in CP
-});
+Event::on(
+    OrderStatuses::class,
+    OrderStatuses::EVENT_DEFAULT_ORDER_STATUS,
+    function(DefaultOrderStatusEvent $event) {
+        // Choose a more appropriate order status than the control panel default
+        // ...
+    }
+);
 ```
 
-## Payment related events
+## Payment Events
 
-### The `registerGatewayTypes` event
+### `registerGatewayTypes`
 
-Plugins can register their own gateways.
+The event that is triggered for the registration of additional gateways.
+
+This example registers a custom gateway instance of the `MyGateway` class:
 
 ```php
 use craft\events\RegisterComponentTypesEvent;
 use craft\commerce\services\Purchasables;
 use yii\base\Event;
 
-Event::on(Gateways::class, Gateways::EVENT_REGISTER_GATEWAY_TYPES, function(RegisterComponentTypesEvent $e) {
-    $e->types[] = MyGateway::class;
-});
+Event::on(
+    Gateways::class,
+    Gateways::EVENT_REGISTER_GATEWAY_TYPES,
+    function(RegisterComponentTypesEvent $event) {
+        $event->types[] = MyGateway::class;
+    }
+);
 ```
 
-### The `afterPaymentTransaction` event
+### `afterPaymentTransaction`
 
-Plugins can get notified after a payment transaction is made
+The event that is triggered after a payment transaction is made.
 
 ```php
 use craft\commerce\events\TransactionEvent;
 use craft\commerce\services\Payments;
 use yii\base\Event;
 
-Event::on(Payments::class, Payments::EVENT_AFTER_PAYMENT_TRANSACTION, function(TransactionEvent $e) {
-    // Do something - perhaps check if that was a authorize transaction and make sure that warehouse team is on top of it
-});
+Event::on(
+    Payments::class,
+    Payments::EVENT_AFTER_PAYMENT_TRANSACTION,
+    function(TransactionEvent $event) {
+        // Check whether it was an authorize transaction
+        // and make sure that warehouse team is on top of it
+        // ...
+    }
+);
 ```
 
-### The `beforeCaptureTransaction` event
+### `beforeCaptureTransaction`
 
-Plugins can get notified before a payment transaction is captured
+The event that is triggered before a payment transaction is captured.
 
 ```php
 use craft\commerce\events\TransactionEvent;
 use craft\commerce\services\Payments;
 use yii\base\Event;
 
-Event::on(Payments::class, Payments::EVENT_BEFORE_CAPTURE_TRANSACTION, function(TransactionEvent $e) {
-    // Do something - maybe check if the shipment is really ready before capturing
-});
+Event::on(
+    Payments::class,
+    Payments::EVENT_BEFORE_CAPTURE_TRANSACTION,
+    function(TransactionEvent $event) {
+        // Check that shipment’s ready before capturing
+        // ...
+    }
+);
 ```
 
-### The `afterCaptureTransaction` event
+### `afterCaptureTransaction`
 
-Plugins can get notified after a payment transaction is captured
+The event that is triggered after a payment transaction is captured.
 
 ```php
 use craft\commerce\events\TransactionEvent;
 use craft\commerce\services\Payments;
 use yii\base\Event;
 
-Event::on(Payments::class, Payments::EVENT_AFTER_CAPTURE_TRANSACTION, function(TransactionEvent $e) {
-    // Do something - probably notify warehouse that we're ready to ship
-});
+Event::on(
+    Payments::class,
+    Payments::EVENT_AFTER_CAPTURE_TRANSACTION,
+    function(TransactionEvent $event) {
+        // Notify the warehouse we're ready to ship
+        // ...
+    }
+);
 ```
 
-### The `beforeRefundTransaction` event
+### `beforeRefundTransaction`
 
-Plugins can get notified before a transaction is refunded
+The event that is triggered before a transaction is refunded.
 
 ```php
 use craft\commerce\events\RefundTransactionEvent;
 use craft\commerce\services\Payments;
 use yii\base\Event;
 
-Event::on(Payments::class, Payments::EVENT_BEFORE_REFUND_TRANSACTION, function(RefundTransactionEvent $e) {
-    // Do something - perhaps check if refund amount more than half the transaction and do something based on that
-});
+Event::on(
+    Payments::class,
+    Payments::EVENT_BEFORE_REFUND_TRANSACTION,
+    function(RefundTransactionEvent $event) {
+        // Do something else if the refund amount’s >50% of the transaction
+        // ...
+    }
+);
 ```
 
-### The `afterRefundTransaction` event
+### `afterRefundTransaction`
 
-Plugins can get notified after a transaction is refunded
+The event that is triggered after a transaction is refunded.
 
 ```php
 use craft\commerce\events\RefundTransactionEvent;
 use craft\commerce\services\Payments;
 use yii\base\Event;
 
-Event::on(Payments::class, Payments::EVENT_AFTER_REFUND_TRANSACTION, function(RefundTransactionEvent $e) {
-    // Do something - perhaps check if refund amount more than half the transaction and do something based on that
-});
+Event::on(
+    Payments::class,
+    Payments::EVENT_AFTER_REFUND_TRANSACTION,
+    function(RefundTransactionEvent $event) {
+        // Do something else if the refund amount’s >50% of the transaction
+        // ...
+    }
+);
 ```
 
-### The `beforeProcessPaymentEvent` event
+### `beforeProcessPaymentEvent`
 
-You may set the `isValid` property to `false` on the event to prevent the payment from being processed
+The event that is triggered before a payment is processed.
 
-Plugins can get notified before a payment is being processed
+You may set the `isValid` property to `false` on the event to prevent the payment from being processed.
 
 ```php
 use craft\commerce\events\ProcessPaymentEvent;
 use craft\commerce\services\Payments;
 use yii\base\Event;
 
-Event::on(Payments::class, Payments::EVENT_BEFORE_PROCESS_PAYMENT, function(ProcessPaymentEvent $e) {
-    // Do something - perhaps check if the transaction is allowed for the order based on some business rules.
-});
+Event::on(
+    Payments::class,
+    Payments::EVENT_BEFORE_PROCESS_PAYMENT,
+    function(ProcessPaymentEvent $event) {
+        // Check some business rules to see whether the transaction is allowed
+        // ...
+    }
+);
 ```
 
-### The `afterProcessPaymentEvent` event
+### `afterProcessPaymentEvent`
 
-Plugins can get notified after a payment is processed
+The event that is triggered after a payment is processed.
 
 ```php
 use craft\commerce\events\ProcessPaymentEvent;
 use craft\commerce\services\Payments;
 use yii\base\Event;
 
-Event::on(Payments::class, Payments::EVENT_AFTER_PROCESS_PAYMENT, function(ProcessPaymentEvent $e) {
-    // Do something - maybe let accounting dept. know that a transaction went through for an order.
-});
+Event::on(
+    Payments::class,
+    Payments::EVENT_AFTER_PROCESS_PAYMENT,
+    function(ProcessPaymentEvent $event) {
+        // Let the accounting department know an order transaction went through
+        // ...
+    }
+);
 ```
 
-### The `deletePaymentSource` event
+### `deletePaymentSource`
 
-Plugins can get notified when a payment source is deleted.
+The event that is triggered when a payment source is deleted.
 
 ```php
 use craft\commerce\events\PaymentSourceEvent;
 use craft\commerce\services\PaymentSources;
 use yii\base\Event;
 
-Event::on(PaymentSources::class, PaymentSources::EVENT_DELETE_PAYMENT_SOURCE, function(PaymentSourceEvent $e) {
-    // Do something - perhaps warn a user they have no valid payment sources saved.
-});
+Event::on(
+    PaymentSources::class,
+    PaymentSources::EVENT_DELETE_PAYMENT_SOURCE,
+    function(PaymentSourceEvent $event) {
+        // Warn a user they don’t have any valid payment sources saved
+        // ...
+    }
+);
 ```
 
-### The `beforeSavePaymentSource` event
+### `beforeSavePaymentSource`
 
-Plugins can get notified before a payment source is added.
+The event that is triggered before a payment source is added.
 
 ```php
 use craft\commerce\events\PaymentSourceEvent;
 use craft\commerce\services\PaymentSources;
 use yii\base\Event;
 
-Event::on(PaymentSources::class, PaymentSources::EVENT_BEFORE_SAVE_PAYMENT_SOURCE, function(PaymentSourceEvent $e) {
-    // Do something
-});
+Event::on(
+    PaymentSources::class,
+    PaymentSources::EVENT_BEFORE_SAVE_PAYMENT_SOURCE,
+    function(PaymentSourceEvent $event) {
+        // ...
+    }
+);
 ```
 
-### The `afterSavePaymentSource` event
+### `afterSavePaymentSource`
 
-Plugins can get notified after a payment source is added.
+The event that is triggered after a payment source is added.
 
 ```php
 use craft\commerce\events\PaymentSourceEvent;
 use craft\commerce\services\PaymentSources;
 use yii\base\Event;
 
-Event::on(PaymentSources::class, PaymentSources::EVENT_BEFORE_SAVE_PAYMENT_SOURCE, function(PaymentSourceEvent $e) {
-    // Do something - perhaps settle any outstanding balance
-});
+Event::on(
+    PaymentSources::class,
+    PaymentSources::EVENT_BEFORE_SAVE_PAYMENT_SOURCE,
+    function(PaymentSourceEvent $event) {
+        // Settle any outstanding balance
+        // ...
+    }
+);
 ```
 
-### The `afterSaveTransaction` event
+### `afterSaveTransaction`
 
-Plugins can get notified after a transaction has been saved.
+The event that is triggered after a transaction has been saved.
 
 ```php
 use craft\commerce\events\TransactionEvent;
 use craft\commerce\services\Transactions;
 use yii\base\Event;
 
-Event::on(Transactions::class, Transactions::EVENT_AFTER_SAVE_TRANSACTION, function(TransactionEvent $e) {
-    // Do something - perhaps run our custom logic for failed transactions
-});
+Event::on(
+    Transactions::class,
+    Transactions::EVENT_AFTER_SAVE_TRANSACTION,
+    function(TransactionEvent $event) {
+        // Run custom logic for failed transactions
+        // ...
+    }
+);
 ```
 
-### The `afterCreateTransaction` event
+### `afterCreateTransaction`
 
-Plugins can get notified after a transaction has been created.
+The event that is triggered after a transaction has been created.
 
 ```php
 use craft\commerce\events\TransactionEvent;
 use craft\commerce\services\Transactions;
 use yii\base\Event;
 
-Event::on(Transactions::class, Transactions::EVENT_AFTER_CREATE_TRANSACTION, function(TransactionEvent $e) {
-    // Do something - perhaps run our custom logic depending on the transaction type
-});
+Event::on(
+    Transactions::class,
+    Transactions::EVENT_AFTER_CREATE_TRANSACTION,
+    function(TransactionEvent $event) {
+        // Run custom logic depending on the transaction type
+        // ...
+    }
+);
 ```
 
-## Subscription related events
+## Subscription Events
 
-### The `afterExpireSubscription` event
+### `afterExpireSubscription`
 
-Plugins can get notified when a subscription is being expired.
+The event that is triggered after a subscription has expired.
 
 ```php
 use craft\commerce\events\SubscriptionEvent;
 use craft\commerce\services\Subscriptions;
 use yii\base\Event;
 
-Event::on(Subscriptions::class, Subscriptions::EVENT_AFTER_EXPIRE_SUBSCRIPTION, function(SubscriptionEvent $e) {
-    // Do something about it - perhaps make a call to third party service to de-authorize a user.
-});
+Event::on(
+    Subscriptions::class,
+    Subscriptions::EVENT_AFTER_EXPIRE_SUBSCRIPTION,
+    function(SubscriptionEvent $event) {
+        // Make a call to third party service to de-authorize a user
+        // ...
+    }
+);
 ```
 
-### The `beforeCreateSubscription` event
+### `beforeCreateSubscription`
+
+The event that is triggered before a subscription is created.
 
 You may set the `isValid` property to `false` on the event to prevent the user from being subscribed to the plan.
-
-Plugins can get notified before a subscription is created.
 
 ```php
 use craft\commerce\events\CreateSubscriptionEvent;
 use craft\commerce\services\Subscriptions;
 use yii\base\Event;
 
-Event::on(Subscriptions::class, Subscriptions::EVENT_BEFORE_CREATE_SUBSCRIPTION, function(CreateSubscriptionEvent $e) {
-    // Set the trial days based on some business logic
-});
+Event::on(
+    Subscriptions::class,
+    Subscriptions::EVENT_BEFORE_CREATE_SUBSCRIPTION,
+    function(CreateSubscriptionEvent $event) {
+        // Set the trial days based on some business logic
+        // ...
+    }
+);
 ```
 
-### The `afterCreateSubscription` event
+### `afterCreateSubscription`
 
-Plugins can get notified after a subscription is created.
+The event that is triggered after a subscription is created.
 
 ```php
 use craft\commerce\events\SubscriptionEvent;
 use craft\commerce\services\Subscriptions;
 use yii\base\Event;
 
-Event::on(Subscriptions::class, Subscriptions::EVENT_AFTER_CREATE_SUBSCRIPTION, function(SubscriptionEvent $e) {
-    // Do something about it - perhaps make a call to third party service to authorize a user
-});
+Event::on(
+    Subscriptions::class,
+    Subscriptions::EVENT_AFTER_CREATE_SUBSCRIPTION,
+    function(SubscriptionEvent $event) {
+        // Call a third party service to authorize a user
+        // ...
+    }
+);
 ```
 
-### The `beforeReactivateSubscription` event
+### `beforeReactivateSubscription`
 
-You may set the `isValid` property to `false` on the event to prevent the subscription from being reactivated
+The event that is triggered before a subscription gets reactivated.
 
-Plugins can get notified before a subscription gets reactivated.
+You may set the `isValid` property to `false` on the event to prevent the subscription from being reactivated.
 
 ```php
 use craft\commerce\events\SubscriptionEvent;
 use craft\commerce\services\Subscriptions;
 use yii\base\Event;
 
-Event::on(Subscriptions::class, Subscriptions::EVENT_BEFORE_REACTIVATE_SUBSCRIPTION, function(SubscriptionEvent $e) {
-    // Do something - maybe the user does not qualify for reactivation due to some business logic.
-});
+Event::on(
+    Subscriptions::class,
+    Subscriptions::EVENT_BEFORE_REACTIVATE_SUBSCRIPTION,
+    function(SubscriptionEvent $event) {
+        // Use business logic to determine whether the user can reactivate
+        // ...
+    }
+);
 ```
 
-### The `afterReactivateSubscription` event
+### `afterReactivateSubscription`
 
-Plugins can get notified before a subscription gets reactivated.
+The event that is triggered before a subscription gets reactivated.
 
 ```php
 use craft\commerce\events\SubscriptionEvent;
 use craft\commerce\services\Subscriptions;
 use yii\base\Event;
 
-Event::on(Subscriptions::class, Subscriptions::EVENT_AFTER_REACTIVATE_SUBSCRIPTION, function(SubscriptionEvent $e) {
-    // Do something - maybe the user needs to be re-authorized with a third party service.
-});
+Event::on(
+    Subscriptions::class,
+    Subscriptions::EVENT_AFTER_REACTIVATE_SUBSCRIPTION,
+    function(SubscriptionEvent $event) {
+        // Re-authorize the user with a third-party service
+        // ...
+    }
+);
 ```
 
-### The `beforeSwitchSubscriptionPlan` event
+### `beforeSwitchSubscriptionPlan`
 
-You may set the `isValid` property to `false` on the event to prevent the switch from happening
+The event that is triggered before a subscription is switched to a different plan.
 
-Plugins can get notified before a subscription is switched to a different plan.
+You may set the `isValid` property to `false` on the event to prevent the switch from happening.
 
 ```php
 use craft\commerce\events\SubscriptionSwitchPlansEvent;
 use craft\commerce\services\Subscriptions;
 use yii\base\Event;
 
-Event::on(Subscriptions::class, Subscriptions::EVENT_BEFORE_SWITCH_SUBSCRIPTION_PLAN, function(SubscriptionSwitchPlansEvent $e) {
-    // Do something - maybe mody the switch parameters based on some business logic.
-});
+Event::on(
+    Subscriptions::class,
+    Subscriptions::EVENT_BEFORE_SWITCH_SUBSCRIPTION_PLAN,
+    function(SubscriptionSwitchPlansEvent $event) {
+        // Modify the switch parameters based on some business logic
+        // ...
+    }
+);
 ```
 
-### The `afterSwitchSubscriptionPlan` event
+### `afterSwitchSubscriptionPlan`
 
-Plugins can get notified after a subscription gets switched to a different plan.
+The event that is triggered after a subscription gets switched to a different plan.
 
 ```php
 use craft\commerce\events\SubscriptionSwitchPlansEvent;
 use craft\commerce\services\Subscriptions;
 use yii\base\Event;
 
-Event::on(Subscriptions::class, Subscriptions::EVENT_AFTER_SWITCH_SUBSCRIPTION_PLAN, function(SubscriptionSwitchPlansEvent $e) {
-    // Do something - maybe the user needs their permissions adjusted on a third party service.
-});
+Event::on(
+    Subscriptions::class,
+    Subscriptions::EVENT_AFTER_SWITCH_SUBSCRIPTION_PLAN,
+    function(SubscriptionSwitchPlansEvent $event) {
+        // Adjust the user’s permissions on a third party service
+        // ...
+    }
+);
 ```
 
-### The `beforeCancelSubscription` event
+### `beforeCancelSubscription`
 
-You may set the `isValid` property to `false` on the event to prevent the subscription from being canceled
+The event that is triggered before a subscription is canceled.
 
-Plugins can get notified before a subscription is canceled.
+You may set the `isValid` property to `false` on the event to prevent the subscription from being canceled.
 
 ```php
 use craft\commerce\events\CancelSubscriptionEvent;
 use craft\commerce\services\Subscriptions;
 use yii\base\Event;
 
-Event::on(Subscriptions::class, Subscriptions::EVENT_BEFORE_CANCEL_SUBSCRIPTION, function(CancelSubscriptionEvent $e) {
-    // Do something - maybe the user is not permitted to cancel the subscription for some reason.
-});
+Event::on(
+    Subscriptions::class,
+    Subscriptions::EVENT_BEFORE_CANCEL_SUBSCRIPTION,
+    function(CancelSubscriptionEvent $event) {
+        // Check whether the user is permitted to cancel the subscription
+        // ...
+    }
+);
 ```
 
-### The `afterCancelSubscription` event
+### `afterCancelSubscription`
 
-Plugins can get notified after a subscription gets canceled.
+The event that is triggered after a subscription gets canceled.
 
 ```php
 use craft\commerce\events\CancelSubscriptionEvent;
 use craft\commerce\services\Subscriptions;
 use yii\base\Event;
 
-Event::on(Subscriptions::class, Subscriptions::EVENT_AFTER_CANCEL_SUBSCRIPTION, function(CancelSubscriptionEvent $e) {
-    // Do something - maybe refund the user for the remainder of the subscription.
-});
+Event::on(
+    Subscriptions::class,
+    Subscriptions::EVENT_AFTER_CANCEL_SUBSCRIPTION,
+    function(CancelSubscriptionEvent $event) {
+        // Refund the user for the remainder of the subscription
+        // ...
+    }
+);
 ```
 
-### The `beforeUpdateSubscription` event
+### `beforeUpdateSubscription`
 
-Plugins can get notified before a subscription gets updated. Typically this event is fired when subscription data is updated on the gateway.
+The event that is triggered before a subscription gets updated. Typically this event is fired when subscription data is updated on the gateway.
 
 ```php
 use craft\commerce\events\SubscriptionEvent;
 use craft\commerce\services\Subscriptions;
 use yii\base\Event;
 
-Event::on(Subscriptions::class, Subscriptions::EVENT_BEFORE_UPDATE_SUBSCRIPTION, function(SubscriptionEvent $e) {
-    // Do something - maybe refund the user for the remainder of the subscription.
-});
+Event::on(
+    Subscriptions::class,
+    Subscriptions::EVENT_BEFORE_UPDATE_SUBSCRIPTION,
+    function(SubscriptionEvent $event) {
+        // ...
+    }
+);
 ```
 
-### The `receiveSubscriptionPayment` event
+### `receiveSubscriptionPayment`
 
-Plugins can get notified when a subscription payment is received.
+The event that is triggered when a subscription payment is received.
 
 ```php
 use craft\commerce\events\SubscriptionPaymentEvent;
 use craft\commerce\services\Subscriptions;
 use yii\base\Event;
 
-Event::on(Subscriptions::class, Subscriptions::EVENT_RECEIVE_SUBSCRIPTION_PAYMENT, function(SubscriptionPaymentEvent $e) {
-    // Do something - perhaps update the loyalty reward data.
-});
+Event::on(
+    Subscriptions::class,
+    Subscriptions::EVENT_RECEIVE_SUBSCRIPTION_PAYMENT,
+    function(SubscriptionPaymentEvent $event) {
+        // Update loyalty reward data
+        // ...
+    }
+);
 ```
 
 ## Other events
 
-### The `beforeSaveAddress` event
+### `beforeSaveAddress`
 
-Plugins can get notified before an address is being saved
-
-```php
-use craft\commerce\events\AddressEvent;
-use craft\commerce\services\Addresses;
-use yii\base\Event;
-
-Event::on(Addresses::class, Addresses::EVENT_BEFORE_SAVE_ADDRESS, function(AddressEvent $e) {
-    // Do something - perhaps let an external CRM system know about a client's new address
-});
-```
-
-### The `afterSaveAddress` event
-
-Plugins can get notified before an address is being saved
+The event that is triggered before an address is saved.
 
 ```php
 use craft\commerce\events\AddressEvent;
 use craft\commerce\services\Addresses;
 use yii\base\Event;
 
-Event::on(Addresses::class, Addresses::EVENT_AFTER_SAVE_ADDRESS, function(AddressEvent $e) {
-    // Do something - perhaps set this address as default in an external CRM system
-});
+Event::on(
+    Addresses::class,
+    Addresses::EVENT_BEFORE_SAVE_ADDRESS,
+    function(AddressEvent $event) {
+        // Update customer’s address in an external CRM
+        // ...
+    }
+);
 ```
 
-### The `beforeSendEmail` event
+### `afterSaveAddress`
+
+The event that is triggered after an address is saved.
+
+```php
+use craft\commerce\events\AddressEvent;
+use craft\commerce\services\Addresses;
+use yii\base\Event;
+
+Event::on(
+    Addresses::class,
+    Addresses::EVENT_AFTER_SAVE_ADDRESS,
+    function(AddressEvent $event) {
+        // Set the default address in an external CRM
+        // ...
+    }
+);
+```
+
+### `beforeSendEmail`
+
+The event that is triggered before an email is sent out.
 
 You may set the `isValid` property to `false` on the event to prevent the email from being sent.
-Plugins can get notified before an email is being sent out.
 
 ```php
 use craft\commerce\events\MailEvent;
 use craft\commerce\services\Emails;
 use yii\base\Event;
 
-Event::on(Emails::class, Emails::EVENT_BEFORE_SEND_MAIL, function(MailEvent $e) {
-     // Maybe prevent the email based on some business rules or client preferences.
-});
+Event::on(
+    Emails::class,
+    Emails::EVENT_BEFORE_SEND_MAIL,
+    function(MailEvent $event) {
+        // Use `$event->isValid = false` to prevent sending
+        // based on some business rules or client preferences
+        // ...
+    }
+);
 ```
 
-### The `afterSendEmail` event
+### `afterSendEmail`
 
-Plugins can get notified after an email has been sent out.
+The event that is triggered after an email has been sent out.
 
 ```php
 use craft\commerce\events\MailEvent;
 use craft\commerce\services\Emails;
 use yii\base\Event;
 
-Event::on(Emails::class, Emails::EVENT_AFTER_SEND_MAIL, function(MailEvent $e) {
-     // Perhaps add the email to a CRM system
+Event::on(Emails::class, Emails::EVENT_AFTER_SEND_MAIL, function(MailEvent $event) {
+     // Add the email address to an external CRM
+     // ...
 });
 ```
 
-### The `beforeRenderPdf` event
+### `beforeRenderPdf`
 
-Event handlers can override Commerce’s PDF generation by setting the `pdf` property on the event to a custom-rendered PDF.
-Plugins can get notified before the PDF or an order is being rendered.
+The event that is triggered before an order’s PDF is rendered.
+
+Event handlers can customize PDF rendering by modifying several properties on the event object:
+
+| Property    | Value                                                                                                                     |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `order`     | populated [Order](api:craft\commerce\elements\Order) model                                                                |
+| `template`  | optional Twig template path (string) to be used for rendering                                                             |
+| `variables` | populated with the variables availble to the template used for rendering                                                  |
+| `option`    | optional string for the template that can be used to show different details based on context (example: `receipt`, `ajax`) |
 
 ```php
 use craft\commerce\events\PdfEvent;
 use craft\commerce\services\Pdf;
 use yii\base\Event;
 
-Event::on(Pdf::class, Pdf::EVENT_BEFORE_RENDER_PDF, function(PdfEvent $e) {
-     // Roll out our own custom PDF
-});
+Event::on(
+    Pdf::class,
+    Pdf::EVENT_BEFORE_RENDER_PDF,
+    function(PdfEvent $event) {
+        // Modify `$event->order`, `$event->option`, `$event->template`,
+        // and `$event->variables` to customize what gets rendered into a PDF
+        // ...
+    }
+);
 ```
 
-### The `afterRenderPdf` event
+### `afterRenderPdf`
 
-Plugins can get notified after the PDF or an order has been rendered.
+The event that is triggered after an order’s PDF has been rendered.
+
+Event handlers can override Commerce’s PDF generation by setting the `pdf` property on the event to a custom-rendered PDF string. The event properties will be the same as those from `beforeRenderPdf`, but `pdf` will contain a rendered PDF string and is the only one for which setting a value will make any difference for the resulting PDF output.
 
 ```php
 use craft\commerce\events\PdfEvent;
 use craft\commerce\services\Pdf;
 use yii\base\Event;
 
-Event::on(Pdf::class, Pdf::EVENT_AFTER_RENDER_PDF, function(PdfEvent $e) {
-     // Add a watermark to the PDF or forward it to the accounting dpt.
-});
+Event::on(
+    Pdf::class,
+    Pdf::EVENT_AFTER_RENDER_PDF,
+    function(PdfEvent $event) {
+        // Add a watermark to the PDF or forward it to the accounting department
+        // ...
+    }
+);
 ```
 
-### The `beforeSaveProductType` event
+### `beforeSaveProductType`
 
-Plugins can get notified before a product type is being saved.
+The event that is triggered before a product type is saved.
 
 ```php
 use craft\commerce\events\ProductTypeEvent;
 use craft\commerce\services\ProductTypes;
 use yii\base\Event;
 
-Event::on(ProductTypes::class, ProductTypes::EVENT_BEFORE_SAVE_PRODUCTTYPE, function(ProductTypeEvent $e) {
-     // Maybe create an audit trail of this action.
-});
+Event::on(
+    ProductTypes::class,
+    ProductTypes::EVENT_BEFORE_SAVE_PRODUCTTYPE,
+    function(ProductTypeEvent $event) {
+        // Create an audit trail of this action
+        // ...
+    }
+);
 ```
 
-### The `afterSaveProductType` event
+### `afterSaveProductType`
 
-Plugins can get notified after a product type has been saved.
+The event that is triggered after a product type has been saved.
 
 ```php
 use craft\commerce\events\ProductTypeEvent;
 use craft\commerce\services\ProductTypes;
 use yii\base\Event;
 
-Event::on(ProductTypes::class, ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE, function(ProductTypeEvent $e) {
-     // Maybe prepare some third party system for a new product type
-});
+Event::on(
+    ProductTypes::class,
+    ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
+    function(ProductTypeEvent $event) {
+        // Prepare some third party system for a new product type
+        // ...
+    }
+);
 ```
 
-### The `registerPurchasableElementTypes` event
+### `registerPurchasableElementTypes`
 
-Plugins can register their own purchasables.
+The event that is triggered for registration of additional purchasables.
+
+This example adds an instance of `MyPurchasable` to the event object’s `types` array:
 
 ```php
 use craft\events\RegisterComponentTypesEvent;
 use craft\commerce\services\Purchasables;
 use yii\base\Event;
 
-Event::on(Purchasables::class, Purchasables::EVENT_REGISTER_PURCHASABLE_ELEMENT_TYPES, function(RegisterComponentTypesEvent $e) {
-    $e->types[] = MyPurchasable::class;
-});
+Event::on(
+    Purchasables::class,
+    Purchasables::EVENT_REGISTER_PURCHASABLE_ELEMENT_TYPES,
+    function(RegisterComponentTypesEvent $event) {
+        $event->types[] = MyPurchasable::class;
+    }
+);
 ```
 
-### The `registerAvailableShippingMethods` event
+### `registerAvailableShippingMethods`
 
-Plugins can register their own shipping methods.
+The event that is triggered for registration of additional shipping methods.
+
+This example adds an instance of `MyShippingMethod` to the event object’s `shippingMethods` array:
 
 ```php
 use craft\events\RegisterComponentTypesEvent;
 use craft\commerce\services\ShippingMethods;
 use yii\base\Event;
 
-Event::on(ShippingMethods::class, ShippingMethods::EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS, function(RegisterComponentTypesEvent $e) {
-    $e->shippingMethods[] = MyShippingMethod::class;
-});
+Event::on(
+    ShippingMethods::class,
+    ShippingMethods::EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS,
+    function(RegisterComponentTypesEvent $event) {
+        $event->shippingMethods[] = MyShippingMethod::class;
+    }
+);
 ```
