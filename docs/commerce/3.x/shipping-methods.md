@@ -121,6 +121,8 @@ Do this by using your plugin’s `init()` method to register an instance of your
 
 ```php
 use craft\commerce\events\RegisterAvailableShippingMethodsEvent;
+use craft\commerce\services\ShippingMethods;
+use yii\base\Event;
 
 Event::on(
     ShippingMethods::class,
