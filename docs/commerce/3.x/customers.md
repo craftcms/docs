@@ -16,7 +16,7 @@ The customer list is a paginated data set of all customers in the system linked 
 
 Customers having user accounts will appear with a link to the respective Craft user in the listing table.
 
-Choose any customer’s You can see information for each customer by clicking on their email address.
+Choose any customer’s email address to see more information.
 
 ## Customer
 
