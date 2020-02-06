@@ -74,5 +74,5 @@ The form action for deleting a customer address is `commerce/customer-addresses/
 ```
 
 ::: warning
-Deleting an address that is currently applied as the billing or shipping address of the current customer’s cart will result in the addresses on the cart being removed.
+If an address is designated for shipping or billing in a cart, edits will carry over to the cart before checkout. Deleting an address will remove it from the cart and require further user action to complete the order.
 :::
