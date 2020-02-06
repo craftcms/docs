@@ -1,24 +1,24 @@
 # Order Status Emails
 
-In addition to using order statuses to manage your orders, you can choose emails that will be sent when an order moves into that status.
+Once you’re using [order statuses](custom-order-statuses.md#functionality) to manage your orders, you can optionally choose to send emails when an order moves into a particular status.
 
-For example you might create an Email called “Order Confirmation for Customer” which confirms the order has been completed and is sent to the customer. This email should likely be linked to the default order status, since we want it to trigger when the cart is completed and becomes an order.
+For example, you might create an email called “Customer Order Confirmation” which emails a completed order summary to the customer. This would be linked to the default order status since we want it to trigger when the cart’s completed and becomes an order.
 
-Another email could be set up called “Order Notification for Admin” which could also be attached to the default order status, but gets set to the store owners email address.
+Another email could be “Admin Order Notification”, also attached to the default order status. Instead of being sent to the customer, however, it could go to the store owner’s email address and include stock or packing information.
 
 ## Settings
 
-Before setting up emails for Craft Commerce. Ensure that your Craft CMS installation has email configured correctly.
+Before setting up emails for Craft Commerce, ensure that your Craft CMS installation is [properly configured for email delivery](https://craftcms.com/guides/why-doesnt-craft-send-emails#setting-up-email).
 
-You can set up your email gateway by going to Settings → Email in the control panel.
+You can set up your email gateway by navigating to Settings → Email in the control panel.
 
-If you want to have a different From Email and From Name for your Commerce store emails, which overrides the Craft CMS email defaults, go to Commerce → Settings → General Settings and enter in your store from name and email address.
-
-<img src="./assets/new-email-settings.png" width="645" alt="New Email Settings.">
+By default, Commerce will send messages using Craft’s “System Email Address” and “Sender Name” found in Settings → Email Settings in the control panel. If you’d like to override this and provide your own from name/address, navigate to Commerce → System Settings → General Settings and enter your own “Status Email Address” and “From Name”.
 
 ## Creating an Email
 
-To create a new email, go to Commerce → Settings → Emails, and click “New Email”.
+To create a new email, navigate to Commerce → System Settings → Emails, and click “New Email”:
+
+<img src="./assets/new-email-settings.png" width="645" alt="New Email Settings.">
 
 Emails have the following configuration settings:
 
@@ -28,98 +28,84 @@ Enter the name of this email as it will be shown when managing it in the control
 
 ### Email Subject
 
-The subject of the email.
-Plain text can be entered or twig can also be used to set dynamic values.
-Two special variables available to you:
+The subject of the email, which can be plain text or use Twig to set dynamic values. Two special variables are available:
 
-- `order` – a <api:craft\commerce\elements\Order> object.
-- `orderHistory` – a <api:craft\commerce\models\OrderHistory> object.
+- `order` is a populated [Order object](api:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
 
-`order` is the current cart or order that this email is a notification for. For example, for the subject we might use a template like:
+`order` is the cart or order relevant to the notification. The “Email Subject” we enter, for example, might be:
 
 ```twig
-Order #{{ order.id }} received.`
+Order #{{ order.id }} received.
 ```
 
 ### Recipient
 
 The “To” address or addresses for this email.
 
-If “Send to the customer” is selected, the email will only be sent to the customer of the order, and will be sent in the language (locale) that customer made the order in. This affects the use of the `|t` filter in other email fields that support twig.
+If “Send to the customer” is selected, the email will only be sent to the order’s customer in the language (locale) that customer used placing the order. This affects the use of the `|t` filter in other email fields that support Twig.
 
-If “Send to custom recipient” is selected, an email address can be entered. Please note the language of this email will be in the language of the current user triggering the status change.
+If “Send to custom recipient” is selected, an email address can be entered. The language of this email will be in the language of whatever user triggers the status change.
 
-Plain text can be entered or twig can also be used to set dynamic values.
-Two special variables available to you:
+Like the [Email Subject](#email-subject), this field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` – a <api:craft\commerce\elements\Order> object.
-- `orderHistory` – a <api:craft\commerce\models\OrderHistory> object.
+- `order` is a populated [Order object](api:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
 
-`order` is the current cart or order that this email is a notification for. For example, for the subject we might use a template like:
+`order` is the cart or order relevant to the notification. The “Recipient” we enter, for example, might be:
 
 ```twig
-{{ order.email }}`
+{{ order.email }}
 ```
 
-This would send the email to the customer to made this order.
+This would send the email to the customer that created this order.
 
 ### Reply-To Address
 
 The Reply-To address for this email.
 
-Plain text can be entered or twig can also be used to set a dynamic value.
+This field takes plain text as well as Twig values. Two special variables are available:
 
-Two special variables available to you:
-
-- `order` – a <api:craft\commerce\elements\Order> object.
-- `orderHistory` – a <api:craft\commerce\models\OrderHistory> object.
+- `order` is a populated [Order object](api:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
 
 ### BCC’d Recipient
 
-The BCC addresses for this email. You can separate the addresses by a comma: `,`.
+The BCC addresses for this email. Most likely, you would BCC the store owner on order confirmation.
 
-Plain text can be entered or twig can also be used to set dynamic values.
+Separate multiple addresses with a comma (`,`).
 
-Two special variables available to you:
+This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` – a <api:craft\commerce\elements\Order> object.
-- `orderHistory` – a <api:craft\commerce\models\OrderHistory> object.
-
-Most likely, you would BCC the store owner on order confirmation.
+- `order` is a populated [Order object](api:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
 
 ### CC’d Recipient
 
-The CC addresses for this email. You can separate the addresses by a comma: `,`.
+The CC addresses for this email. Separate multiple addresses with a comma (`,`).
 
-Plain text can be entered or twig can also be used to set dynamic values.
+This field takes plain text as well as Twig values. Two special variables are available:
 
-Two special variables available to you:
-
-- `order` – a <api:craft\commerce\elements\Order> object.
-- `orderHistory` – a <api:craft\commerce\models\OrderHistory> object.
+- `order` is a populated [Order object](api:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
 
 ### HTML Email Template Path
 
-The template path to a template in your site templates folder.
-Plain text template path can be entered or Twig code can also be used to set dynamic values.
+The path to a template in your site’s `templates/` folder.
 
-You can use the following variables in both the template path & template file body:
+This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` – a <api:craft\commerce\elements\Order> object.
-- `orderHistory` – a <api:craft\commerce\models\OrderHistory> object.
+- `order` is a populated [Order object](api:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
 
 This allows you to have full design flexibility.
 
 ::: warning
-Craft global set variables are not loaded automatically into your email templates. See below for a work-around
-:::
+Craft [global set variables](https://docs.craftcms.com/api/v3/craft-web-twig-variables-globals.html) are not automatically loaded into your email templates. To access global set variables, first load them into your template:
 
-To get access to global set variables you need to manually load them into your templates like so:
-
-```
+```twig
 {% set globalSetName = craft.globals.getSetByHandle('globalSetName') %}
-
 {{ globalSetName.customFieldName }}
 ```
 
-Further documentation on the `craft.globals` twig function are available [here](https://craftcms.com/docs/templating/craft.globals).
+:::
