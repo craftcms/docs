@@ -1,12 +1,20 @@
 # Customers
 
-With Craft Commerce, a _Customer_ is a model representing a person who placed an order.
+With Craft Commerce, a _Customer_ is a model representing a person who may place an order.
 
-That person may have placed an order as a guest or logged in with an account via a related [user account](https://docs.craftcms.com/v3/users.html).
+That person could’ve placed an order as a guest or have an associated Craft [user account](https://docs.craftcms.com/v3/users.html) for logging in and making orders with saved information.
 
-Commerce will consolidate customers by email address. A person may checkout as a guest customer with the same email multiple times, and a new guest customer will be created each time. After an order is completed, customers are consolidated so there is only ever one customer per email address.
+Every Craft user has a customer record by default, even if that user has never created an order.
 
-Once a user is registered and verified, orders on their email address will be consolidated whenever they log in. Any guest orders with the user’s email address are transferred to the user. As a result, even future anonymous/guest orders with that email address will appear in the user’s order history.
+::: tip
+The 1:1 user-to-customer relationship is new to Craft Commerce 3. A migration from Commerce 2 will create a new customer record for any existing Craft user that doesn’t already have one.
+:::
+
+Commerce will consolidate customers by email address on order completion.
+
+If a customer checks out as a guest, a new customer record will be created. If a customer record already exists with the same email address, the order will be associated with that existing customer record and the now-orphaned one will be automatically garbage collected. If the guest customer’s email address matches one on a Craft user account, the order will be associated with that user (via the user's customer record) and appear in the user’s order history.
+
+If a customer is logged in, any order will naturally be associated with that user the moment the cart is created and on through completion.
 
 Customers can be found in the control panel by navigating to Commerce → Customers.
 
@@ -28,7 +36,7 @@ The addresses for a customer can be reached via the customer view. Select any ad
 
 ## User Customer Info Tab
 
-If a user account has a related Craft Commerce customer record, a “Customer Info” tab will be added to their account page in the control panel.
+A “Customer Info” tab will be available on every user’s account page in the control panel.
 
 This tab contains the following information:
 
