@@ -76,3 +76,25 @@ The form action for deleting a customer address is `commerce/customer-addresses/
 ::: warning
 If an address is designated for shipping or billing in a cart, edits will carry over to the cart before checkout. Deleting an address will remove it from the cart and require further user action to complete the order.
 :::
+
+## Validating addressses
+
+Commerce saves customer address data without any validation. If you’d like to provide your own validation rules, you can use a plugin or module’s `init()` method to subscribe to the event that’s triggered when the `Address` model collects it rules prior to attempting validation. Your event listener can add additional [validation rules](https://www.yiiframework.com/doc/guide/2.0/en/input-validation#declaring-rules) for the Address model.
+
+In this example, a new rule is added to make `firstName` and `lastName` required:
+
+```php
+use craft\commerce\models\Address;
+use craft\base\Model;
+use craft\events\DefineRulesEvent;
+
+Event::on(
+    Address::class,
+    Model::EVENT_DEFINE_RULES,
+    function(DefineRulesEvent $event) {
+        $rules = $event->rules;
+        $rules[] = [['firstName', 'lastName'], 'required'];
+        $event->rules = $rules;
+    }
+);
+```
