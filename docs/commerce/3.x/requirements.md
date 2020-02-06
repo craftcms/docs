@@ -2,10 +2,6 @@
 
 The server requirements for Craft Commerce are the [same as Craft 3.4](https://docs.craftcms.com/v3/requirements.html).
 
-## PHP Version
-
-Craft Commerce 3 requires PHP ^7.1
- 
 ## PHP package dependencies
 
 Craft Commerce uses the following PHP packages. Please see their documentation for any additional requirements.
