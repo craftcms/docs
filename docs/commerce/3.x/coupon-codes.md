@@ -1,21 +1,22 @@
 # Coupon Codes
 
-Coupon codes are set up as a condition within a discount promotion. 
+Coupon codes are unique strings that may be entered by a user in order to receive a discount.
 
-To create a new discount, go to Commerce → Promotions → Discounts in the Control Panel. 
-To see the coupon condition, go to the “Coupon” tab.
+With Craft Commerce, coupon codes are set up as a condition within a discount promotion.
 
-Discounts are only available in the Pro edition of Craft Commerce.
+::: warning
+Discounts are only available in the [Pro edition](editions.md) of Craft Commerce.
+:::
 
-An empty coupon field on the discount means there is no requirement for a coupon
-for the discount to work. Adding a coupon requires that a coupon is submitted to 
-the cart. This makes the discount available to match the order but still needs to match all other discount conditions.
+To create a new discount promotion, navigate to Commerce → Promotions → Discounts in the Control Panel. To see the coupon condition, select to the “Coupon” tab.
+
+An empty coupon field on the discount means no coupon is needed for the discount to work. Adding a coupon requires that a coupon is submitted to the cart. This makes the discount available to match the order but still needs to match all other discount conditions.
 
 Read more about [Discounts](discounts.md).
 
 ## Using a coupon
 
-To add a coupon to the cart, a customer submits the `couponCode` parameter to the cart using the `commerce/cart/update-cart` form action.
+To add a coupon to the cart, a customer submits the `couponCode` parameter using the `commerce/cart/update-cart` form action.
 
 Example:
 
@@ -31,26 +32,19 @@ Example:
        class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}"
        value="{{ cart.couponCode }}"
        placeholder="{{ "Coupon Code"|t }}">
-       
+
     <input type="submit" value="Update Cart"/>
 <form>
 ```
 
-Only one coupon code can exist on the cart at a time. The current coupon code 
-submitted to the cart can be seen by outputting `{{ cart.couponCode }}`.
+Only one coupon code can exist on the cart at a time. To see the value of the current cart’s coupon code, use `{{ cart.couponCode }}`.
 
-You can retrieve the discount associated with the coupon code with:
+You can retrieve the discount associated with the coupon code using `craft.commerce.discounts.getDiscountByCode`:
 
 ```twig
+{# @var discount craft\commerce\models\Discount #}
 {% set discount = craft.commerce.discounts.getDiscountByCode(cart.couponCode) %}
 {% if discount %}
 {{ discount.name }} - {{ discount.description }}
 {% endif %}
 ```
-
-
-
-
- 
-
- 
