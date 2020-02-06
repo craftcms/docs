@@ -104,3 +104,17 @@ Event::on(
     }
 );
 ```
+
+In any of the above examples that post to the `commerce/customer-addresses/save` action, you would access validation errors in your template like any other model:
+
+```twig
+{% if address %}
+  {# gets all validation errors for the address #}
+  {% set errors = address.getErrors() %}
+
+  {# gets the `firstName` error for the address #}
+  {% set firstNameErrors = address.getErrors('firstName') %}
+{% endif %}
+```
+
+For a complete template example that outputs individual field validation errors, see [shop/\_includes/addresses/form.html](https://github.com/craftcms/commerce/blob/develop/templates/shop/_includes/addresses/form.html) in the [example templates](example-templates.md).
