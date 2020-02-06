@@ -2,11 +2,11 @@
 
 Coupon codes are unique strings that may be entered by a user in order to receive a discount.
 
-With Craft Commerce, coupon codes are set up as a condition within a discount promotion.
-
 ::: warning
 Discounts are only available in the [Pro edition](editions.md) of Craft Commerce.
 :::
+
+With Craft Commerce, coupon codes are set up as a condition within a discount promotion.
 
 To create a new discount promotion, navigate to Commerce → Promotions → Discounts in the control panel. To see the coupon condition, select to the “Coupon” tab.
 
