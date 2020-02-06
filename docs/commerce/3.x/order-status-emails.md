@@ -10,7 +10,7 @@ Another email could be set up called “Order Notification for Admin” which co
 
 Before setting up emails for Craft Commerce. Ensure that your Craft CMS installation has email configured correctly.
 
-You can set up your email gateway by going to Settings → Email in the Control Panel.
+You can set up your email gateway by going to Settings → Email in the control panel.
 
 If you want to have a different From Email and From Name for your Commerce store emails, which overrides the Craft CMS email defaults, go to Commerce → Settings → General Settings and enter in your store from name and email address.
 
@@ -24,7 +24,7 @@ Emails have the following configuration settings:
 
 ### Name
 
-Enter the name of this email as it will be shown when managing it in the Control Panel.
+Enter the name of this email as it will be shown when managing it in the control panel.
 
 ### Email Subject
 
@@ -45,7 +45,7 @@ Order #{{ order.id }} received.`
 
 The “To” address or addresses for this email.
 
-If “Send to the customer” is selected, the email will only be sent to the customer of the order, and will be sent in the language (locale) that customer made the order in. This affects the use of the `|t` filter in other email fields  that support twig.
+If “Send to the customer” is selected, the email will only be sent to the customer of the order, and will be sent in the language (locale) that customer made the order in. This affects the use of the `|t` filter in other email fields that support twig.
 
 If “Send to custom recipient” is selected, an email address can be entered. Please note the language of this email will be in the language of the current user triggering the status change.
 

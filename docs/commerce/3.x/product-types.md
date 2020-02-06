@@ -10,7 +10,7 @@ You can also attach fields, and tab layouts to products and variants at the prod
 
 ### Name
 
-This is the name of the product type as displayed in the Control Panel.
+This is the name of the product type as displayed in the control panel.
 
 ### Handle
 
@@ -19,6 +19,7 @@ The handle is how you will reference the product type in code. For example, in t
 ```twig
 {% set clothes = craft.products.type('clothes').all() %}
 ```
+
 ### Title Field Label
 
 This setting allows you to change what the "Title" field label should be.

@@ -2,11 +2,11 @@
 
 Setting up sales allows a store owner to set up promotional discounts on products that apply dynamically based on conditions.
 
-A sale differs from a discount, in that it is applied *before* the item is added to the cart, whereas a discount applies only when the item is in the cart or a coupon code is applied to the cart.
+A sale differs from a discount, in that it is applied _before_ the item is added to the cart, whereas a discount applies only when the item is in the cart or a coupon code is applied to the cart.
 
 You would typically list the price of the item in the store by its sale price. If no sales apply to the current product, the sale price would be equal to the regular price.
 
-Sales are ordered in the Control Panel, and the system always runs through each sale in order when determining the `salePrice` of the purchasable.
+Sales are ordered in the control panel, and the system always runs through each sale in order when determining the `salePrice` of the purchasable.
 
 ## Conditions
 
@@ -42,9 +42,9 @@ Each custom purchasable can decide to determine how they consider the category b
 
 This field specifies the type of relationship must exist between the purchasable and category in order for the condition to be met. There are three options available "Source", "Target" and "Both"
 
-- **Source** - the relational field exists on the product/purchasable.
-- **Target** - the category has a product/variant relational field.
-- **Both** - the relationship can be either **Source** or **Target**
+- **Source**: the relational field exists on the product/purchasable.
+- **Target**: the category has a product/variant relational field.
+- **Both**: the relationship can be either **Source** or **Target**
 
 For more information on how this works please see [Relations Terminology](https://docs.craftcms.com/v3/relations.html#terminology).
 
@@ -95,6 +95,6 @@ This setting is related to the purchasable being affected.
 
 ### Do not apply subsequent matching sales beyond applying this sale. (Checkbox)
 
-After this sale matches the order, do not apply any other sales, based on the order of sales in the Control Panel.
+After this sale matches the order, do not apply any other sales, based on the order of sales in the control panel.
 
 This is a sale level option, not a purchasable level option like the above `Ignore previous matching sales if this sale matches.`

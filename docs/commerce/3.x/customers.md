@@ -8,7 +8,7 @@ Logged-in users can only be a single customer in the system. A person may checko
 
 After a user is registered and verified, whenever they log in, all guest orders that used the email address belonging to that user are transferred to the logged in user. This means, even if a registered user makes an anonymous/guest order, the next time they log in, the order will appear in their order history, as long as they used the same email address.
 
-Customers can be found in the Control Panel by going to  Commerce → Customers.
+Customers can be found in the control panel by navigating to Commerce → Customers.
 
 ## Customer List
 
@@ -28,14 +28,14 @@ The addresses for a customer can be reached via the customer view. Selecting an 
 
 ## User Customer Info Tab
 
-If a user account has a Craft Commerce customer record associated with it, a “Customer Info” tab will be added to their account page in the Control Panel.
+If a user account has a Craft Commerce customer record associated with it, a “Customer Info” tab will be added to their account page in the control panel.
 
 This tab contains the following information:
 
 - **Orders** – A list of previous orders for the customer.
-- **Active Carts** – A list of active carts for the customer based on the [Commerce::$activeCartDuration](configuration.md#activecartduration) setting.
-- **Inactive Carts** – A list of inactive carts for the customer based on the [Commerce::$activeCartDuration](configuration.md#activecartduration) setting.
+- **Active Carts** – A list of active carts for the customer based on the [Commerce::\$activeCartDuration](configuration.md#activecartduration) setting.
+- **Inactive Carts** – A list of inactive carts for the customer based on the [Commerce::\$activeCartDuration](configuration.md#activecartduration) setting.
 - **Addresses** – A list of the customer's addresses with the ability to edit or delete.
 - **Subscriptions** – A list of the customer's subscriptions.
 
-The visibility of this tab can be controlled with the [Commerce::$showCustomerInfoTab](configuration.md#showcustomerinfotab) setting. The tab is shown by default.
+The visibility of this tab can be controlled with the [Commerce::\$showCustomerInfoTab](configuration.md#showcustomerinfotab) setting. The tab is shown by default.

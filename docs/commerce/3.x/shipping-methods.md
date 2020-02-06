@@ -43,7 +43,7 @@ Must return `null`.
 
 #### getName()
 
-Returns the name of this shipping method, displayed to the customer and in the Control Panel.
+Returns the name of this shipping method, displayed to the customer and in the control panel.
 
 #### getHandle()
 
@@ -51,7 +51,7 @@ Returns the handle added to the order when a customer selects this shipping meth
 
 #### getCpEditUrl()
 
-Returns a Control Panel URL to a place where you can configure this shipping method’s rules. Return an empty string if the method has no link.
+Returns a control panel URL to a place where you can configure this shipping method’s rules. Return an empty string if the method has no link.
 
 #### getRules()
 

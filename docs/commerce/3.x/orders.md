@@ -1,6 +1,6 @@
 # Orders
 
-When a cart is completed, it becomes an order. You can view orders in the Commerce → Orders section of the Control Panel.
+When a cart is completed, it becomes an order. You can view orders in the Commerce → Orders section of the control panel.
 
 Orders are an [Element Type](https://docs.craftcms.com/v3/extend/element-types.html) and can have custom field associated with them.
 
@@ -10,10 +10,10 @@ For examples of using order information in templates and seeing what properties 
 
 When a cart becomes an order, the following things happen:
 
-1) The `dateOrdered` order attribute is set to the current date.
-2) The `isCompleted` order attribute is set to `true`.
-3) The default [order status](custom-order-statuses.md) is set on the order and any emails for this status are sent.
-4) The order reference number is generated for the order, based on the ‘Order Reference Number Format‘ setting found in Commerce → Settings → General Settings section of the Control Panel. 
+1. The `dateOrdered` order attribute is set to the current date.
+2. The `isCompleted` order attribute is set to `true`.
+3. The default [order status](custom-order-statuses.md) is set on the order and any emails for this status are sent.
+4. The order reference number is generated for the order, based on the ‘Order Reference Number Format‘ setting found in Commerce → Settings → General Settings section of the control panel.
 
 ### Order Numbers
 
@@ -29,8 +29,7 @@ We recommend using the order number when referencing the order in URLs or anytim
 
 #### Short Order Number
 
-The short order number is the first 7 characters of the order number. 
-This is short enough to still be unique, and is a little friendlier to customers, although not as friendly as the order reference number.
+The short order number is the first 7 characters of the order number. This is short enough to still be unique, and is a little friendlier to customers, although not as friendly as the order reference number.
 
 #### Order Reference Number
 
@@ -51,6 +50,7 @@ Attributes on the order can be accessed as well as Twig filters and functions, f
 ```
 
 Output:
+
 ```
 2018-43
 ```
@@ -60,14 +60,16 @@ In this example, `{{ id }}` refers to the order’s element ID, which is not seq
 The `seq()` function takes the following parameters:
 
 1. A key name. If this name is changed, a new sequence starting at one is started. See Craft docs for more information.
-2. An optional padding character length. For example if the next sequence number is `14` and the padding length is `8`, the generation number will be `00000014` 
+2. An optional padding character length. For example if the next sequence number is `14` and the padding length is `8`, the generation number will be `00000014`
 
 For example:
+
 ```twig
 {{ object.dateCompleted|date('Y') }}-{{ seq(object.dateCompleted|date('Y'), 8) }}
 ```
 
 Ouput:
+
 ```
 2018-00000023
 ```
@@ -88,15 +90,13 @@ You must be using [Commerce Pro](editions.md) and have “Edit Orders” permiss
 
 To complete the order, choose “Mark as complete”. This saves the order with its default order status, its date ordered with the current timestamp, generates the order reference number, and marks the order complete.
 
-
 ### Editing orders
 
-Orders can be edited in the control panel by visiting the order edit page and choosing  “Edit”. You’ll enter edit mode where you can change values within the order.
+Orders can be edited in the control panel by visiting the order edit page and choosing “Edit”. You’ll enter edit mode where you can change values within the order.
 
 While editing the order, it will refresh subtotals and totals and display any errors. It will _not_ automatically recalculate the order based on system rules like shipping, taxes, or promotions. Choose “Recalculate Order” to have it fully recalculate including those system rules.
 
 Once you’re happy with your changes, choose “Update Order” to save it to the database.
-
 
 ### Order status emails
 

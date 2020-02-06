@@ -1,25 +1,25 @@
 # Discounts
 
-Discounts are deductions off line items or deduction off the order as a whole. 
-Discounts are only calculated *while* items are in the cart, [Sales](sales.md) are pricing rules that apply to product *before* they are added to the cart.
+Discounts are deductions off line items or deduction off the order as a whole.
+Discounts are only calculated _while_ items are in the cart, [Sales](sales.md) are pricing rules that apply to product _before_ they are added to the cart.
 
 Discounts are only available in the Pro edition of Craft Commerce.
 
-To create a new discount, go to Commerce → Promotions → Discounts in the Control Panel.
+To create a new discount, go to Commerce → Promotions → Discounts in the control panel.
 
 ## Discount Sort Order
 
-Discounts are processed and applied in the order they are sorted in the Control Panel.
+Discounts are processed and applied in the order they are sorted in the control panel.
 
-Inside a discount there is a checkbox labelled “Stop processing further discounts after this discount matches”. 
+Inside a discount there is a checkbox labelled “Stop processing further discounts after this discount matches”.
 If this checkbox is turned on, and the discount matches the order, no further discounts will be applied to the cart.
 
 ## Coupon Discounts
 
-Discounts can have a coupon requirement as an optional condition. The coupon condition can be 
+Discounts can have a coupon requirement as an optional condition. The coupon condition can be
 found on the “Coupon” tab.
 
-If no coupon is entered into the cart, and the discount has a coupon code, then the discount will not apply. 
+If no coupon is entered into the cart, and the discount has a coupon code, then the discount will not apply.
 
 If a coupon is added to the discount, all other conditions still need to be met in addition to the coupon being applied to the cart.
 
@@ -41,7 +41,7 @@ To pass this condition a user must belong to one of the selected user groups whe
 
 ### Product Variant
 
-The product variant or variants for which the discount will be applicable to. 
+The product variant or variants for which the discount will be applicable to.
 
 ### Categories
 
@@ -81,7 +81,7 @@ Usage/counts can be reset at any point using the "Reset usage" button.
 
 ### Per Email Address Discount Limit
 
-How many times one email address is allowed to use this discount. This applies  to all previous orders, whether guest or user. Set to zero for unlimited use by guests or users.
+How many times one email address is allowed to use this discount. This applies to all previous orders, whether guest or user. Set to zero for unlimited use by guests or users.
 
 ::: tip
 
@@ -91,7 +91,7 @@ Usage/counts can be reset at any point using the "Reset usage" button.
 
 ### Total Discount Use Limit
 
-How many times this coupon can be used in total by guests or logged in users. Set 
+How many times this coupon can be used in total by guests or logged in users. Set
 zero for unlimited use.
 
 ::: tip
@@ -114,13 +114,13 @@ If the item is already on sale, the discount will not be applied.
 
 ### Base Discount
 
-This is the amount of discount that is applied to the order's total price. This comes in the form of either a flat value ($10) or a percentage (10%). 
+This is the amount of discount that is applied to the order's total price. This comes in the form of either a flat value (\$10) or a percentage (10%).
 
 There are further options for percentage base discounts and these allow you to determine if the discount is applied to the orginal or discounted price and whether or not it discounts shipping costs.
 
 ### Per Item Discount
 
-The flat value which should discount each item in the order e.g. $1.
+The flat value which should discount each item in the order e.g. \$1.
 
 ### Percent Discount
 

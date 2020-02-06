@@ -14,7 +14,7 @@ Merchant hosted gateways let you to collect the customer’s credit card details
 The following is a table of gateways provided by first-party plugins.
 
 | Plugin                           | Gateways                                | Remarks                                                            | 3D Secure Support   |
-|----------------------------------|-----------------------------------------|--------------------------------------------------------------------|---------------------|
+| -------------------------------- | --------------------------------------- | ------------------------------------------------------------------ | ------------------- |
 | `craftcms/commerce-stripe`       | Stripe                                  | Uses Stripe SDK; only first-party gateway to support subscriptions | Yes                 |
 | `craftcms/commerce-paypal`       | PayPal Pro; PayPal REST; PayPal Express | PayPal REST supports storing payment information                   | Only PayPal Express |
 | `craftcms/commerce-sagepay`      | SagePay Direct; SagePay Server          | SagePay Direct requires setting up webhooks                        | Yes                 |
@@ -39,7 +39,7 @@ The manual payment gateway is a special gateway that does not communicate with a
 
 When you need to accept cheque or bank deposit payments, you should use the manual payment gateway.
 
-The gateway simply authorizes all payments, allowing the order to proceed. You may then manually mark the payment as captured in the Control Panel when payment is received.
+The gateway simply authorizes all payments, allowing the order to proceed. You may then manually mark the payment as captured in the control panel when payment is received.
 
 ## Other gateway specifics
 
@@ -51,7 +51,7 @@ Additional payment gateways can be added to Commerce with relatively little work
 
 ## Storing config outside of the database
 
-If you do not wish to store your payment gateway config information in the database (which could include secret API keys), you can override the values of a payment method’s setting via the `commerce-gateways.php` config file. Use the payment gateway’s handle as the key to the config for that payment method. Note that you still need to configure the gateway in the Control Panel first in order to reference the gateway’s handle within this config file.
+If you do not wish to store your payment gateway config information in the database (which could include secret API keys), you can override the values of a payment method’s setting via the `commerce-gateways.php` config file. Use the payment gateway’s handle as the key to the config for that payment method. Note that you still need to configure the gateway in the control panel first in order to reference the gateway’s handle within this config file.
 
 ```php
 return [
