@@ -894,7 +894,7 @@ Whether Craft should cache GraphQL queries.
 If set to `true`, Craft will cache the results for unique GraphQL queries per access token. The cache is
 automatically invalidated any time an element is saved, the site structure is updated, or a GraphQL schema is saved.
 
-This setting will have no effect if a plugin is using the `\craft\config\craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY` event to provide
+This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v3/craft-services-gql.html#event-before-execute-gql-query) event to provide
 its own caching logic and setting the `result` property.
 
 
@@ -1010,7 +1010,7 @@ Since
 
 
 List of additional file kinds Craft should support. This array
-will get merged with the one defined in `\craft\config\craft\helpers\Assets::_buildFileKinds()`.
+will get merged with the one defined in `craft\helpers\Assets::_buildFileKinds()`.
 
 ```php
 'extraFileKinds' => [
@@ -1216,7 +1216,7 @@ List of headers where proxies store the real client IP.
 
 See [yii\web\Request::$ipHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$ipHeaders-detail) for more details.
 
-If not set, the default `\craft\config\craft\web\Request::ipHeaders` value will be used.
+If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.com/api/v3/craft-web-request.html#ipheaders) value will be used.
 
 
 
@@ -2204,7 +2204,7 @@ Defined by
 
 
 A private, random, cryptographically-secure key that is used for hashing and encrypting
-data in `\craft\config\craft\services\Security`.
+data in [craft\services\Security](api:craft\services\Security).
 
 This value should be the same across all environments. Note that if this key ever changes, any data that
 was encrypted with it will be inaccessible.
