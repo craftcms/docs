@@ -33,9 +33,7 @@ How you access properties in the SKU format depends on whether the product type 
 :::
 
 ::: warning
-
 If a product type has an automatic SKU format, the SKU field is not shown for new variants. Once saved, the field will be displayed for editing.
-
 :::
 
 ### Order Description Format

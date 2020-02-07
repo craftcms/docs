@@ -29,20 +29,24 @@ By default all items in your store would get the GST tax category, but at variou
 
 The tax engine also looks at the shipping address of the order, to determine which tax rate applies. We create tax zones which define a geographic area a shipping address could fall into.
 
-Tax Zones are either country based (match the shipping address to the list of countries in the zone) or state based (match the shipping address to the list of states in the zone). In addition to an address 
+Tax Zones are either country based (match the shipping address to the list of countries in the zone) or state based (match the shipping address to the list of states in the zone). In addition to an address
 matching a country or state, a zip code condition formula can be added.
 
-### Zip code condition formula
+### ZIP code condition formula
 
-A zip code condition formula is a short expression of logic that returns either `true` or `false`. The expression syntax is [powered by Twig](https://twig.symfony.com/doc/2.x/templates.html#expressions).
+A ZIP code condition formula is a short expression of logic that returns either `true` or `false`. The expression syntax is [powered by Twig](https://twig.symfony.com/doc/2.x/templates.html#expressions).
 
-Below are some examples of a zip code condition formula:
+The ZIP code condition will match if the ZIP code has `60` or `70` as it’s first 2 characters:
 
-`zipCode[0:2] == '60' or zipCode[0:2] == '70'`  
-The zip code condition will match if the zip code has `60` or `70` as it’s first 2 characters.
+```
+zipCode[0:2] == '60' or zipCode[0:2] == '70'
+```
 
-`zipCode in ['NG102', 'NG103', 'NG102']`  
-The zip code condition will match if the zip code is any of the above values. 
+The ZIP code condition will match if the ZIP code is any of the above values:
+
+```
+zipCode in ['NG102', 'NG103', 'NG102']
+```
 
 ## Tax Rate
 
