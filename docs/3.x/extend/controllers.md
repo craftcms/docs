@@ -29,22 +29,14 @@ Method | Description
 [requireLogin()](api:craft\web\Controller::requireLogin()) | Requires that a user is logged in.
 [requireGuest()](api:craft\web\Controller::requireGuest()) | Requires that the user is anonymous.
 [requireAdmin()](api:craft\web\Controller::requireAdmin()) | Requires that the user is logged in with an Admin account.
-[requirePermission()](api:craft\web\Controller::requirePermission()) | Requires that the user is logged in with an
-  account that has a given permission.
-[requireAuthorization()](api:craft\web\Controller::requireAuthorization()) | Requires that the user has been granted
-  authorization to do something (whether or not they are logged in).
-[requireElevatedSession()](api:craft\web\Controller::requireElevatedSession()) | Requires that the user has an
-  elevated session.
-[requirePostRequest()](api:craft\web\Controller::requirePostRequest()) | Requires that the request was sent as a POST
-  request.
-[requireAcceptsJson()](api:craft\web\Controller::requireAcceptsJson()) | Requires that the request was sent with an
-  `Accept: application/json` header.
-[requireToken()](api:craft\web\Controller::requireToken()) - Requires that the request was sent with a
-  [token](api:craft\web\Request::getToken()).
-[requireCpRequest()](api:craft\web\Controller::requireCpRequest()) | Requires that the request URI begins with the
-  [control panel trigger](config:cpTrigger).
-[requireSiteRequest()](api:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin
-  with the [control panel trigger](config::cpTrigger).
+[requirePermission()](api:craft\web\Controller::requirePermission()) | Requires that the user is logged in with an account that has a given permission.
+[requireAuthorization()](api:craft\web\Controller::requireAuthorization()) | Requires that the user has been granted authorization to do something (whether or not they are logged in).
+[requireElevatedSession()](api:craft\web\Controller::requireElevatedSession()) | Requires that the user has an elevated session.
+[requirePostRequest()](api:craft\web\Controller::requirePostRequest()) | Requires that the request was sent as a POST request.
+[requireAcceptsJson()](api:craft\web\Controller::requireAcceptsJson()) | Requires that the request was sent with an `Accept: application/json` header.
+[requireToken()](api:craft\web\Controller::requireToken()) - Requires that the request was sent with a [token](api:craft\web\Request::getToken()).
+[requireCpRequest()](api:craft\web\Controller::requireCpRequest()) | Requires that the request URI begins with the [control panel trigger](config:cpTrigger).
+[requireSiteRequest()](api:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin with the [control panel trigger](config::cpTrigger).
 
 ```php
 public function actionFoo()
