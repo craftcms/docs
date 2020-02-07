@@ -56,35 +56,43 @@ Any other custom purchasable a third party system adds to Commerce can show up h
 
 If the conditions match the current context (variant, user, cart date, etc.), then the actions are applied to the purchasable.
 
-You have 4 different ways to apply a price effect:
+### Price Effect
 
-### Reduce the price by a percentage of the original price
+There are four ways to apply a price effect:
 
-Enter a % amount to take of the price of the purchasable.
+#### Reduce the price by a percentage of the original price
 
-For example the purchasable might be $100, if you set this value to 80%, the sale price of the purchasable will be $20.
+Enter a percentage amount to take off the price of the purchasable.
 
-### Set the price to a percentage of the original price
+Example: for a $100 purchasable, setting this value to 80% would make the purchasable’s sale price $20.
 
-Enter a % amount to make the price of the purchasable.
+#### Set the price to a percentage of the original price
 
-For example the purchasable might be $100, if you set this value to 20%, the sale price of the purchasable will be $20.
+Enter a percentage amount to become the price of the purchasable.
 
-### Reduce the price by a flat amount
+Example: for a $100 purchasable, setting this value to 20% would make the purchasable’s sale price $20.
 
-Enter an flat currency amount to take off the purchasables price.
+#### Reduce the price by a flat amount
 
-### Set the price to a flat amount
+Enter an flat currency amount to take off the purchasable’s price.
 
-Enter an flat currency amount to determine the salePrice of the purchasable.
+Example: for a $100 purchasable, setting this value to $20 would make the purchasable’s sale price \$80.
 
-There are also additional options for how this sale affect is applied to the product:
+#### Set the price to a flat amount
 
-### Ignore previous matching sales if this sale matches. (Checkbox)
+Enter an flat currency amount to determine the sale price of the purchasable.
+
+Example: for a $100 purchasable, setting this value to $20 would make the purchasable’s sale price \$20.
+
+### Sale Application
+
+There are additional options for how the sale is applied to the product:
+
+#### Ignore previous matching sales if this sale matches. (Checkbox)
 
 This setting will disregard any previous sale that affected the price of the item matched in this sale.
 
-For example `Sale 1` reduced the price by 10%, checking this box within `Sale 2` will apply its affect on the original price of the purchasable, ignoring the 10% off.
+For example, `Sale 1` reduced the price by 10%. Checking this box within `Sale 2` will apply its affect on the original price of the purchasable, ignoring the 10% off.
 
 This is automatically true if either of the following pricing effects are used:
 
@@ -93,8 +101,8 @@ This is automatically true if either of the following pricing effects are used:
 
 This setting is related to the purchasable being affected.
 
-### Do not apply subsequent matching sales beyond applying this sale. (Checkbox)
+#### Do not apply subsequent matching sales beyond applying this sale. (Checkbox)
 
 After this sale matches the order, do not apply any other sales, based on the order of sales in the control panel.
 
-This is a sale level option, not a purchasable level option like the above `Ignore previous matching sales if this sale matches.`
+This is a sale-level option, not a purchasable-level option like the above `Ignore previous matching sales if this sale matches.`
