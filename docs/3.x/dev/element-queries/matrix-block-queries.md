@@ -383,7 +383,7 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 ### `ignorePlaceholders`
 
 Causes the query to return matching Matrix blocks as they are stored in the database, ignoring matching placeholder
-elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+elements that were set by `\craft\elements\db\craft\services\Elements::setPlaceholderElement()`.
 
 
 
