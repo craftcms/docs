@@ -51,7 +51,7 @@ If the customer is a guest and they do not have an account, you can present them
 form](https://docs.craftcms.com/v3/dev/examples/user-registration-form.html) during checkout.
 
 If you would like to allow the customer to register on checkout, you can update the order and flag it to register the user on
-order completion. This can again be done with the same `commerce/cart/update-cart` controller action:
+order completion. This can again be done with the same `commerce/cart/update-cart` form action:
 
 ```twig
 <form method="post">
@@ -70,7 +70,7 @@ order completion. This can again be done with the same `commerce/cart/update-car
 <form>
 ```
 
-Alternatively, as seen in the [example templates](example-templates.md), you can set this flag on the `commerce/payments/pay` controller action:
+Alternatively, as seen in the [example templates](example-templates.md), you can set this flag on the `commerce/payments/pay` form action:
 
 ```twig
 <input type="hidden" name="action" value="commerce/payments/pay">

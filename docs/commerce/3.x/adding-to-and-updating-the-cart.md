@@ -168,9 +168,9 @@ The [example templates](example-templates.md) include those above and more templ
 
 ## Update cart success notice
 
-Since the `commerce/cart/update-cart` controller action can do so much, its success flash notice is a generic-sounding “Cart Updated”.
+Since the `commerce/cart/update-cart` form action can do so much, its success flash notice is a generic-sounding “Cart Updated”.
 
-If you want to customize the success message, submit a `cartUpdatedNotice` param to the `commerce/cart/update-cart` controller action.
+If you want to customize the success message, submit a `cartUpdatedNotice` param to the `commerce/cart/update-cart` form action.
 
 Example custom message:
 
