@@ -14,6 +14,24 @@ In your templates, you can get the current user’s cart with [craft.commerce.ca
 {% set cart = craft.commerce.carts.cart %}
 ```
 
-The above code will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
+You could also fetch the cart via AJAX. This jQuery example could be added to a Twig template, and outputs the cart data to the browser’s development console:
+
+```twig
+<script>
+$.ajax({
+    url: '',
+    data: {
+        '{{ craft.config.csrfTokenName|e('js') }}': '{{ craft.request.csrfToken|e('js') }}',
+        'action': 'commerce/cart/get-cart'
+    },
+    success: function(data) {
+        console.log(data);
+    },
+    dataType: 'json'
+});
+</script>
+```
+
+Either of the examples above will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
 
 To see what cart information you can use in your templates, take a look at the <api:craft\commerce\elements\Order> class reference.
