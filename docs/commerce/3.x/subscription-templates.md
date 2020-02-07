@@ -14,7 +14,7 @@ For starting a subscription, the following example is a good start.
 Gateways handle subscription payment sources differently, which might impact what’s needed for your template.
 :::
 
-This example creates a form for posting a plan selection to the `commerce/subscriptions/subscribe` controller action:
+This example creates a form for posting a plan selection to the `commerce/subscriptions/subscribe` form action:
 
 ```twig
 {% set plans = craft.commerce.getPlans().getAllPlans() %}
@@ -44,7 +44,7 @@ There are several things to note:
 
 ## Canceling the subscription
 
-To cancel a subscription you can use the following template. It assumes the `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`, and posts to the `commerce/subscriptions/cancel` controller action:
+To cancel a subscription you can use the following template. It assumes the `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`, and posts to the `commerce/subscriptions/cancel` form action:
 
 ```twig
 <form method="post">
@@ -63,7 +63,7 @@ If you wish to set cancellation parameters, it is strongly recommended to make u
 
 ## Switching the subscription plan
 
-To switch a subscription plan you can use the following template. It assumes that `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`, and posts to the `commerce/subscriptions/switch` controller action:
+To switch a subscription plan you can use the following template. It assumes that `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`, and posts to the `commerce/subscriptions/switch` form action:
 
 ```twig
 {% for plan in subscription.alternativePlans %}
@@ -86,7 +86,7 @@ If you wish to set parameters for switching the subscription plan, it is strongl
 
 ## Reactivating a canceled subscription
 
-To reactivate a subscription plan you can use the following template. It assumes the `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`, and posts to the `commerce/subscriptions/reactivate` controller action.
+To reactivate a subscription plan you can use the following template. It assumes the `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`, and posts to the `commerce/subscriptions/reactivate` form action.
 
 ```twig
 {% if subscription.canReactivate() %}
