@@ -35,25 +35,25 @@ For example, you might set up a shipping rule that’s unavailable if the cart c
 
 ## Shipping Zones
 
-Shipping zones are areas you ship to. Shipping zones can be made up of one or more countries, and (optionally) further specify one or more states within those countries. They can also provide a ZIP code condition formula.
+Shipping zones are areas you ship to. Shipping zones can be made up of one or more countries, and (optionally) further specify one or more states within those countries. They can also provide a zip code condition formula.
 
 For example, you might make one zone for the USA and Canada, and another zone for the international countries you ship to.
 
 These zones can then be used within the shipping rules as conditions to match on the customer’s shipping address.
 
-Tax Zones are either country-based, matching the shipping address to the list of countries in the zone, or state-based, matching the shipping address to the list of states in the zone. In addition to country and state matching, an address can match a ZIP code condition formula.
+Tax Zones are either country-based, matching the shipping address to the list of countries in the zone, or state-based, matching the shipping address to the list of states in the zone. In addition to country and state matching, an address can match a zip code condition formula.
 
-### ZIP code condition formula
+### Zip code condition formula
 
-A ZIP code condition formula is an expression written in [Twig’s expression syntax](https://twig.symfony.com/doc/2.x/templates.html#expressions) that returns `true` or `false`.
+A zip code condition formula is an expression written in [Twig’s expression syntax](https://twig.symfony.com/doc/2.x/templates.html#expressions) that returns `true` or `false`.
 
-This will match if the ZIP code’s first two characters are `60` or `70`:
+This will match if the zip code’s first two characters are `60` or `70`:
 
 ```
 zipCode[0:2] == '60' or zipCode[0:2] == '70'
 ```
 
-The will match if the ZIP code is equal to `NG102`, `NG103`, or `NG102`:
+The will match if the zip code is equal to `NG102`, `NG103`, or `NG102`:
 
 ```
 zipCode in ['NG102', 'NG103', 'NG102']

@@ -1,15 +1,12 @@
 # Tax
 
-Commerce represents taxes for an order by using tax categories and tax rates.
+Commerce represents taxes for an order with tax categories and tax rates.
 
-Products within Commerce can be linked to tax categories, which are then used to influence the taxation rate for the products when they are purchased.
-One tax category can be set to being the default for the entire system,
-which means that if a product doesn’t have a related tax category,
-then this default tax category would be used.
+Products within Commerce can be linked to tax categories, which are then used to influence the taxation rate for products when they’re purchased. A default tax category can be set for the entire system, applying automatically to any product that isn’t assigned to a specific tax category.
 
-A tax category can have many tax rates, which indicate the rate at which the products belonging to a specific tax category will be taxed at.
-A tax rate links a tax rate to a particular tax zone.
-When an order is placed in a specific zone, any of the products for that order which have a tax zone that matches the order’s tax zone will be taxed.
+A tax category may have many tax rates. Each tax rate indicates the rate at which products in its tax category will be taxed. Each tax rate matches all tax zones by default, but can optionally specify a specific tax zone.
+
+When an order is placed for a specific zone, any of the order’s products with a tax zone that matching the order’s tax zone will be taxed.
 
 The standard sales tax policies commonly found in the USA can be modeled, as well as European VAT (Value Added Tax).
 These are not the only types of tax rules that you can model in Commerce.
@@ -32,17 +29,17 @@ The tax engine also looks at the shipping address of the order, to determine whi
 Tax Zones are either country based (match the shipping address to the list of countries in the zone) or state based (match the shipping address to the list of states in the zone). In addition to an address
 matching a country or state, a zip code condition formula can be added.
 
-### ZIP code condition formula
+### Zip code condition formula
 
-A ZIP code condition formula is a short expression of logic that returns either `true` or `false`. The expression syntax is [powered by Twig](https://twig.symfony.com/doc/2.x/templates.html#expressions).
+A zip code condition formula is a short expression of logic that returns either `true` or `false`. The expression syntax is [powered by Twig](https://twig.symfony.com/doc/2.x/templates.html#expressions).
 
-The ZIP code condition will match if the ZIP code has `60` or `70` as it’s first 2 characters:
+The zip code condition will match if the zip code has `60` or `70` as it’s first 2 characters:
 
 ```
 zipCode[0:2] == '60' or zipCode[0:2] == '70'
 ```
 
-The ZIP code condition will match if the ZIP code is any of the above values:
+The zip code condition will match if the zip code is any of the above values:
 
 ```
 zipCode in ['NG102', 'NG103', 'NG102']

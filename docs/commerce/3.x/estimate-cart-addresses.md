@@ -14,7 +14,7 @@ Adding or updating the estimated addresses on the order is done using the `comme
 
 You can check for existing estimate addresses with the `estimatedShippingAddressId` and `estimatedBillingAddressId` attributes on the [cart](api:craft\commerce\elements\Order) object.
 
-This example renders a form for adding an estimated shipping country, state, and ZIP code to the cart:
+This example renders a form for adding an estimated shipping country, state, and zip code to the cart:
 
 ```twig
 {% set cart = craft.commerce.carts.cart %}
@@ -40,7 +40,7 @@ This example renders a form for adding an estimated shipping country, state, and
             {% endfor %}
         </select>
 
-        {# show a ZIP code input #}
+        {# show a zip code input #}
         <input type="text" name="estimatedShippingAddress[zipCode]" value="">
     {% endif %}
 
@@ -50,10 +50,10 @@ This example renders a form for adding an estimated shipping country, state, and
         {% for handle, method in cart.availableShippingMethods %}
             {% set price = method.priceForOrder(cart)|commerceCurrency(cart.currency) %}
             <label>
-                <input type="radio" 
-                    name="shippingMethodHandle" 
-                    value="{{ handle }}" 
-                    {% if handle == cart.shippingMethodHandle %}checked{% endif %} 
+                <input type="radio"
+                    name="shippingMethodHandle"
+                    value="{{ handle }}"
+                    {% if handle == cart.shippingMethodHandle %}checked{% endif %}
                 />
                 {{ method.name }} - {{ price }}
             </label>
