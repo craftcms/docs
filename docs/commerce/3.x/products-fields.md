@@ -1,6 +1,6 @@
 # Products Fields
 
-Products fields allow you to relate products to a parent element.
+Commerce Products fields allow you to relate products to a parent element.
 
 ## Settings
 
@@ -8,9 +8,9 @@ Products fields allow you to relate products to a parent element.
 
 Products fields have the following settings:
 
-* *Sources* – The product types you want to relate entries from. (Default is “All”.)
-* *Limit* – The maximum number of products that can be related with the field at once. (Default is no limit.)
-* *Selection Label* – The label that should be used on the field’s selection button. (Default is “Add a product”.)
+- **Sources** are the product types you want to relate entries from. (Default is “All”.)
+- **Limit** is the maximum number of products that can be related with the field at once. (Default is no limit.)
+- **Selection Label** is the label to be shown on the field’s selection button. (Default is “Add a product”.)
 
 ## The Field
 
@@ -18,50 +18,52 @@ Products fields list all of the currently selected products, with a button to se
 
 <img src="./assets/product-field-example.png" width="297" alt="Products field">
 
-Clicking the “Add an entry” button will bring up a modal window where you can find and select additional entries:
+Choosing “Add an entry” will bring up a modal window where you can find and select additional entries:
 
 <img src="./assets/product-field-modal.png" width="600" alt="Product selection modal">
 
 ## Templating
 
-If you have an element with a Products field in your template, you can access its selected products using its handle:
+If you have an element with a Products field in your template, you can access its selected products with the field handle:
 
 ```twig
 {% set products = entry.productsFieldHandle %}
 ```
 
-That will give you an [element query](https://docs.craftcms.com/v3/dev/element-queries/), prepped to output all of the selected products for the given field.
+That will give you an [element query](https://docs.craftcms.com/v3/dev/element-queries/) prepped to output all of the selected products for the given field.
 
-(See [Relations](https://craftcms.com/docs/relations) for more info on the relatedTo param.)
+::: tip
+See [Relations](https://craftcms.com/docs/relations) for more info on the `relatedTo` param.
+:::
 
 ## Examples
 
-To check if your Products field has any selected products, you can use the length filter:
+To check if your Products field has any selected products, you can use the `length` filter:
 
 ```twig
-{% if entry.productsFieldHandle | length %}
-    ...
+{% if entry.productsFieldHandle|length %}
+    {# ... #}
 {% endif %}
 ```
 
-To loop through the selected products, you can treat the field like an array:
+Loop through all the selected products using `all()`:
 
 ```twig
-{% for product in entry.productsFieldHandle %}
-    ...
+{% for product in entry.productsFieldHandle.all() %}
+    {# ... #}
 {% endfor %}
 ```
 
-Rather than typing “entry.productsFieldHandle” every time, you can call it once and set it to another variable:
+Rather than typing `entry.productsFieldHandle` every time, you can call it once and set it to another variable:
 
 ```twig
-{% set products = entry.productsFieldHandle %}
+{% set products = entry.productsFieldHandle.all() %}
 
-{% if products | length %}
+{% if products|length %}
 
     <h3>Some great products</h3>
     {% for product in products %}
-        ...
+        {# ... #}
     {% endfor %}
 
 {% endif %}
@@ -78,6 +80,6 @@ If your Products field is only meant to have a single product selected, remember
 ```twig
 {% set product = entry.productsFieldHandle.one() %}
 {% if product %}
-    ...
+    {# ... #}
 {% endif %}
 ```
