@@ -92,6 +92,13 @@ class Module extends \yii\base\Module
         // Define a custom alias named after the namespace
         Craft::setAlias('@bar', __DIR__);
 
+        // Set the controllerNamespace based on whether this is a console or web request
+        if (Craft::$app->getRequest()->getIsConsoleRequest()) {
+            $this->controllerNamespace = 'bar\\console\\controllers';
+        } else {
+            $this->controllerNamespace = 'bar\\controllers';
+        }
+
         parent::init();
 
         // Custom initialization code goes here...
