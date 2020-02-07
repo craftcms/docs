@@ -1,6 +1,6 @@
 # Twig Filters
 
-## `|commerceCurrency`
+## `commerceCurrency`
 
 This can be used as a drop-in replacement for [Craft’s `|currency` filter](https://docs.craftcms.com/v3/dev/filters.html#currency), but it offers additional parameters for control over formatting and conversion:
 
@@ -20,31 +20,31 @@ This can be used as a drop-in replacement for [Craft’s `|currency` filter](htt
 {# `AUD`, exchange rate 1.3 #}
 {% set paymentCurrency = cart.paymentCurrency %}
 
-{{ 10|commerceCurrency(baseCurrency) }} {# outputs `$10.00` #}
+{{ 10|commerceCurrency(baseCurrency) }} {# Output: $10.00 #}
 
 {{ order.totalPrice|commerceCurrency(
     paymentCurrency,
     convert=true
-) }} {# outputs `A$13.00` #}
+) }} {# Output: A$13.00 #}
 
 {{ order.totalPrice|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=false
-) }} {# outputs `13` #}
+) }} {# Output: 13 #}
 
 {{ order.totalPrice|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=true
-) }} {# outputs `A$13.00` #}
+) }} {# Output: A$13.00 #}
 
 {{ order.totalPrice|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=true,
     stripZeros=true
-) }} {# outputs `A$13` #}
+) }} {# Output: A$13 #}
 ```
 
 You might want to show the order’s price in all available payment currencies:

@@ -73,31 +73,31 @@ Examples:
 {# `AUD`, exchange rate 1.3 #}
 {% set paymentCurrency = cart.paymentCurrency %}
 
-{{ 10|commerceCurrency(baseCurrency) }} {# outputs `$10.00` #}
+{{ 10|commerceCurrency(baseCurrency) }} {# Output: $10.00 #}
 
 {{ order.totalPrice|commerceCurrency(
     paymentCurrency,
     convert=true
-) }} {# outputs `A$13.00` #}
+) }} {# Output: A$13.00 #}
 
 {{ order.totalPrice|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=false
-) }} {# outputs `13` #}
+) }} {# Output: 13 #}
 
 {{ order.totalPrice|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=true
-) }} {# outputs `A$13.00` #}
+) }} {# Output: A$13.00 #}
 
 {{ order.totalPrice|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=true,
     stripZeros=true
-) }} {# outputs `A$13` #}
+) }} {# Output: A$13 #}
 ```
 
 For more details about the filter and its parameters, see the [Twig filter documentation](twig-filters.md#commercecurrency).
