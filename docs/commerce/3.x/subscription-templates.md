@@ -1,50 +1,53 @@
 # Subscription Templates
 
-Once you’ve familiarized yourself with how [subscriptions](subscriptions.md) work and set up your own subscription plans, you’re ready to write some subscription templates.
+Once you’ve familiarized yourself with how [subscriptions](subscriptions.md) work and set up your subscription plans, you’re ready to write some subscription templates.
 
-When creating templates for subscription actions, if you don’t want to use the default template provided to you by the gateway, you’ll have to reference to the plugin documentation that is providing the gateway to see, what parameters are available to you.
+Each gateway provides a default template for subscription actions. If you’d prefer to handle templating yourself, you’ll have to reference the gateway plugin’s documentation to see what parameters are available.
 
-This documentation is intended to give you a head start in getting subscriptions working as well as to show the correct endpoints for subscription actions.
+These examples are intended to get you started toward working subscriptions and specify the correct endpoints for subscription actions.
 
 ## Subscribing
 
-For starting a subscription, the following example is a good start. A thing to note is that gateways handle payment sources used for the subscription differently, so that might affect your template.
+For starting a subscription, the following example is a good start.
+
+::: warning
+Gateways handle subscription payment sources differently, which might impact what’s needed for your template.
+:::
+
+This example creates a form for posting a plan selection to the `commerce/subscriptions/subscribe` controller action:
 
 ```twig
 {% set plans = craft.commerce.getPlans().getAllPlans() %}
 
-<form method="POST">
+<form method="post">
     <input type="hidden" name="action" value="commerce/subscriptions/subscribe">
-
     {{ csrfInput() }}
 
-    <div>
-        <select name="planUid" id="planSelect">
-            {% for plan in plans %}
-                <option value="{{ plan.uid|hash }}">{{ plan.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
+    <select name="planUid">
+        {% for plan in plans %}
+            <option value="{{ plan.uid|hash }}">{{ plan.name }}</option>
+        {% endfor %}
+    </select>
 
-    {# Display only if the user does not have a payment soure saved #}
+    {# un-comment to collect payment details if there isn’t a saved payment source #}
     {# {{ plan.getGateway().getPaymentFormHtml({})|raw }} #}
 
-    <button type="submit">{{ "Subscribe"|t('commerce') }}</button>
+    <button type="submit">Subscribe</button>
 </form>
 ```
 
 There are several things to note:
 
-- Subscribing a user to a plan requires that the user have a stored payment source. If a user does not have one, you can add it by displaying the payment form.
-- If you wish to set subscription parameters, such as amount of trial days, it is strongly recommended to make use of the [subscription events](events.md#beforecreatesubscription) instead of POST data.
-- When using Stripe, it is not possible to choose which payment source to use, if multiple are saved. Instead, Stripe will use the default payment source associated with that customer.
+- Subscribing a user to a plan requires the user to have a stored payment source. If a user doesn’t have one, you can add it by displaying the payment form.
+- If you wish to set subscription parameters, such as amount of trial days, it is strongly recommended to make use of [subscription events](events.md#beforecreatesubscription) instead of POST data.
+- When using Stripe, it’s not possible to choose which payment source to use if more than one is saved. Stripe will use the default payment source associated with that customer.
 
 ## Canceling the subscription
 
-To cancel a subscription you can use the following template that assumes that the `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`.
+To cancel a subscription you can use the following template. It assumes the `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`, and posts to the `commerce/subscriptions/cancel` controller action:
 
 ```twig
-<form method="POST">
+<form method="post">
     <input type="hidden" name="action" value="commerce/subscriptions/cancel">
     <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}" />
     {{ redirectInput('shop/services') }}
@@ -52,39 +55,38 @@ To cancel a subscription you can use the following template that assumes that th
 
     {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml()|raw }}
 
-    <button type="submit">{{ "Unsubscribe"|t('commerce') }}</button>
+    <button type="submit">Unsubscribe</button>
 </form>
 ```
 
-If you wish to set cancellation parameters, it is strongly recommended to make use of the [subscription events](events.md#beforecancelsubscription) instead of POST data.
+If you wish to set cancellation parameters, it is strongly recommended to make use of [subscription events](events.md#beforecancelsubscription) instead of POST data.
 
 ## Switching the subscription plan
 
-To switch a subscription plan you can use the following template that assumes that the `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`.
+To switch a subscription plan you can use the following template. It assumes that `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`, and posts to the `commerce/subscriptions/switch` controller action:
 
 ```twig
 {% for plan in subscription.alternativePlans %}
-    <div><strong>Switch to {{ plan.name }}</strong></div>
-    <form method="POST">
+    <strong>Switch to {{ plan.name }}</strong>
+    <form method="post">
         <input type="hidden" name="action" value="commerce/subscriptions/switch">
         <input type="hidden" name="planUid" value="{{ plan.uid|hash }}">
         <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}">
         {{ csrfInput() }}
 
         {{ plan.gateway.getSwitchPlansFormHtml(subscription.plan, plan)|raw }}
-        <button type="submit" class="button link">{{ "Switch"|t('commerce') }}</button>
+
+        <button type="submit" class="button link">Switch</button>
     </form>
     <hr />
 {% endfor %}
 ```
 
-If you wish to set parameters for switching the subscription plan, it is strongly recommended to make use of the [subscription events](events.md#beforeswitchsubscriptionplan) instead of POST data.
+If you wish to set parameters for switching the subscription plan, it is strongly recommended to make use of [subscription events](events.md#beforeswitchsubscriptionplan) instead of POST data.
 
 ## Reactivating a canceled subscription
 
-To reactivate a subscription plan you can use the following template that assumes that the `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`.
-
-Note, that not all canceled subscriptions might be available for reactivation, so make sure to check for that.
+To reactivate a subscription plan you can use the following template. It assumes the `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`, and posts to the `commerce/subscriptions/reactivate` controller action.
 
 ```twig
 {% if subscription.canReactivate() %}
@@ -93,7 +95,11 @@ Note, that not all canceled subscriptions might be available for reactivation, s
         <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}">
         {{ csrfInput() }}
 
-        <button type="submit" class="button link">{{ "Reactivate"|t('commerce') }}</button>
+        <button type="submit" class="button link">Reactivate</button>
     </form>
 {% endif %}
 ```
+
+::: warning
+Not all canceled subscriptions might be available for reactivation, so make sure to check for that using `subscription.canReactivate()`.
+:::
