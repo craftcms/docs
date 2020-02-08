@@ -72,7 +72,7 @@ In this example, it’s important to note that `shippingAddressId` must either b
     <input type="text" name="shippingAddress[firstName]" value="">
     <input type="text" name="shippingAddress[lastName]" value="">
     <select name="shippingAddress[countryId]">
-        {% for id, name in craft.commerce.countriesList %}
+        {% for id, name in craft.commerce.countries.getAllCountriesAsList() %}
             <option value="{{ id }}">{{ name }}</option>
         {% endfor %}
     </select>
