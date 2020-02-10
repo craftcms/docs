@@ -1,16 +1,16 @@
 # Sales
 
-Setting up sales allows a store owner to set up promotional discounts on products that apply dynamically based on conditions.
+Sales allow a store owner to set up conditions for dynamic, promotional product discounts.
 
-A sale differs from a discount, in that it is applied *before* the item is added to the cart, whereas a discount applies only when the item is in the cart or a coupon code is applied to the cart.
+A sale is different from a [discount](discounts.md) because it’s applied _before_ an item is added to the cart. A discount needs a cart; it’s applied when an item’s in the cart or to the cart as a whole (like a coupon code).
 
-You would typically list the price of the item in the store by its sale price. If no sales apply to the current product, the sale price would be equal to the regular price.
+An item in the store would typically be listed by its sale price. If no sales apply to a given product, its sale price would simply equal its regular price.
 
-Sales are ordered in the Control Panel, and the system always runs through each sale in order when determining the `salePrice` of the purchasable.
+Sales are ordered in the control panel, and the system always runs through each sale in order when determining the `salePrice` of the purchasable.
 
 ## Conditions
 
-When creating a sale, you have a number of conditions that are checked to determine whether the sale should be applied to the purchasable. All conditions must match to have the sale applied. Leaving the condition blank ignores that condition.
+When creating a sale, you can set a number of conditions to be evaluated when determining if the sale should be applied to the purchasable. All conditions must match to have the sale applied. Leaving a condition empty ignores that condition.
 
 ### Start date
 
@@ -30,23 +30,23 @@ Whether the purchasable being matched is one of the selected variants.
 
 ### Category
 
-Whether the purchasable being matched is related to the category selected in this field.
+Whether the purchasable being matched is related to the selected category.
 
 For example, you might have a category of products in the “Womens Sport” department category, and this allows you to put all products in that category on sale.
 
-In the case of the only built-in purchasable, variants, the category can be related to either the product or the variant to match this condition.
+For variants, the category can be related to either the product or the variant to match this condition.
 
-Each custom purchasable can decide to determine how they consider the category being related.
+Each custom purchasable can decide to determine how it considers the selected category.
 
 ### Category Relationship Type
 
-This field specifies the type of relationship must exist between the purchasable and category in order for the condition to be met. There are three options available "Source", "Target" and "Both"
+This field specifies the type of relationship must exist between the purchasable and category in order for the condition to be met. There are three options available “Source”, “Target” and “Both”:
 
-- **Source** - the relational field exists on the product/purchasable.
-- **Target** - the category has a product/variant relational field.
-- **Both** - the relationship can be either **Source** or **Target**
+- **Source**: the relational field exists on the product/purchasable.
+- **Target**: the category has a product/variant relational field.
+- **Both**: the relationship can be either **Source** or **Target**
 
-For more information on how this works please see [Relations Terminology](https://docs.craftcms.com/v3/relations.html#terminology).
+For more information on how this works, see [Relations Terminology](https://docs.craftcms.com/v3/relations.html#terminology).
 
 ### Other Purchasables
 
@@ -54,37 +54,45 @@ Any other custom purchasable a third party system adds to Commerce can show up h
 
 ## Actions
 
-If the conditions match the current context (variant, user, cart date etc) then the actions are applied to the purchasable.
+If the conditions match the current context (variant, user, cart date, etc.), then the actions are applied to the purchasable.
 
-You have 4 different ways to apply a price effect:
+### Price Effect
 
-### Reduce the price by a percentage of the original price
+There are four ways to apply a price effect:
 
-Enter a % amount to take of the price of the purchasable.
+#### Reduce the price by a percentage of the original price
 
-For example the purchasable might be $100, if you set this value to 80%, the sale price of the purchasable will be $20.
+Enter a percentage amount to take off the price of the purchasable.
 
-### Set the price to a percentage of the original price
+Example: for a $100 purchasable, setting this value to 80% would make the purchasable’s sale price $20.
 
-Enter a % amount to make the price of the purchasable.
+#### Set the price to a percentage of the original price
 
-For example the purchasable might be $100, if you set this value to 20%, the sale price of the purchasable will be $20.
+Enter a percentage amount to become the price of the purchasable.
 
-### Reduce the price by a flat amount
+Example: for a $100 purchasable, setting this value to 20% would make the purchasable’s sale price $20.
 
-Enter an flat currency amount to take off the purchasables price.
+#### Reduce the price by a flat amount
 
-### Set the price to a flat amount
+Enter an flat currency amount to take off the purchasable’s price.
 
-Enter an flat currency amount to determine the salePrice of the purchasable.
+Example: for a $100 purchasable, setting this value to $20 would make the purchasable’s sale price \$80.
 
-There are also additional options for how this sale affect is applied to the product:
+#### Set the price to a flat amount
 
-### Ignore previous matching sales if this sale matches. (Checkbox)
+Enter an flat currency amount to determine the sale price of the purchasable.
+
+Example: for a $100 purchasable, setting this value to $20 would make the purchasable’s sale price \$20.
+
+### Sale Application
+
+There are additional options for how the sale is applied to the product:
+
+#### Ignore previous matching sales if this sale matches. (Checkbox)
 
 This setting will disregard any previous sale that affected the price of the item matched in this sale.
 
-For example `Sale 1` reduced the price by 10%, checking this box within `Sale 2` will apply its affect on the original price of the purchasable, ignoring the 10% off.
+For example, `Sale 1` reduced the price by 10%. Checking this box within `Sale 2` will apply its affect on the original price of the purchasable, ignoring the 10% off.
 
 This is automatically true if either of the following pricing effects are used:
 
@@ -93,8 +101,8 @@ This is automatically true if either of the following pricing effects are used:
 
 This setting is related to the purchasable being affected.
 
-### Do not apply subsequent matching sales beyond applying this sale. (Checkbox)
+#### Do not apply subsequent matching sales beyond applying this sale. (Checkbox)
 
-After this sale matches the order, do not apply any other sales, based on the order of sales in the Control Panel.
+After this sale matches the order, do not apply any other sales, based on the order of sales in the control panel.
 
-This is a sale level option, not a purchasable level option like the above `Ignore previous matching sales if this sale matches.`
+This is a sale-level option, not a purchasable-level option like the above `Ignore previous matching sales if this sale matches.`

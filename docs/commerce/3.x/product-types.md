@@ -1,8 +1,8 @@
 # Product Types
 
-Product Types are a way to distinguish products in your system. They can determine the URL format of a product, and also determine if the products has multiple variants, as well as configure other behaviors of the products.
+Product Types are a way to distinguish products in your system. They can determine the URL format of a product, whether it has multiple variants, and configure other product behaviors.
 
-You can also attach fields, and tab layouts to products and variants at the product type level, like you can with Craft’s entry types.
+You can also attach fields and tab layouts to Product Types just like you can with Craft’s [Entry Types](https://docs.craftcms.com/v3/sections-and-entries.html#entry-types).
 
 <img src="./assets/product-type-entry-screen.png" width="797" alt="Edit Product Type page">
 
@@ -10,36 +10,35 @@ You can also attach fields, and tab layouts to products and variants at the prod
 
 ### Name
 
-This is the name of the product type as displayed in the Control Panel.
+The name of the product type as displayed in the control panel.
 
 ### Handle
 
-The handle is how you will reference the product type in code. For example, in twig, to get product types with a handle of `clothes`, you would do:
+The handle is what you’ll use to reference the product type in code. In Twig, for example, to get your product types with a handle of `clothes` you would use:
 
 ```twig
 {% set clothes = craft.products.type('clothes').all() %}
 ```
+
 ### Title Field Label
 
-This setting allows you to change what the "Title" field label should be.
+Allows you to change what the “Title” field label should be.
 
 ### Automatic SKU Format
 
-What the unique auto-generated SKUs should look like, when a SKU field is submitted without a value. You can include tags that output properties, such as `{product.slug}` or `{myCustomField}`
+Defines what auto-generated SKUs should look like when a SKU field is submitted empty. You can include Twig tags that output properties, such as `{product.slug}` or `{myCustomField}`.
 
 ::: tip
-The way you access properties within the SKU format will differ depending on whether or not the product type has variants. If your product type has multiple variants, then the SKU formats default `object` is the variant, otherwise it’s the product.
+How you access properties in the SKU format depends on whether the product type has variants. If the product type does not have multiple variants, use `{product}`. Otherwise, `{object}` will refer to the variant when the product type has multiple variants.
 :::
 
 ::: warning
-
-If a product type has an automatic SKU format the SKU field is not shown for new variants. Once saved the field will be shown to allow editing.
-
+If a product type has an automatic SKU format, the SKU field is not shown for new variants. Once saved, the field will be displayed for editing.
 :::
 
 ### Order Description Format
 
-How this product will be described on a line item in an order. You can include tags that output properties, such as `{product.title}` or `{myVariantCustomField}`
+Describes the product on a line item in an order. It can include tags that output properties, such as `{product.title}` or `{myVariantCustomField}`.
 
 ### Show the Dimensions and Weight fields
 
@@ -47,20 +46,18 @@ Allows you to hide the weight and dimensions fields if they are not necessary fo
 
 ### Products of this type have multiple variants
 
-If you enable the product type to have multiple variants, you will see a new tab appear at the top of the page which allows you to configure the variant field layout.
+If enabled and multiple variants are allowed, a new tab will appear at the top of the page for configuring the variant field layout.
 
-You also have the option to show the title input field or have it default to use a Title Format.
+A “Variant Title Format” will also appear for configuring auto-generated variant titles.
 
 ### Show the Title field for variants
 
-Whether or not to show the "Variant Title" field when adding or editing variants. When true there is the further option to set the "Variant Title Field Label", this allows you to change what the "Variant Title" field label should be.
-
-If you are decide to not sure the "Variant Title" field you have the option to set the "Variant Title Format" allowing you to set the format for auto-generating variant titles. You can include tags that output variant properties, such as `{sku}` or `{myVariantsCustomField}`.
+Whether or not to show the “Variant Title” field when adding or editing variants. When `true` a “Variant Title Field Label” will appear, allowing you to change what the “Variant Title” field label should be.
 
 ### Products of this type have their own URLs
 
-This works the same way the standard Craft [entry sections](https://craftcms.com/docs/sections-and-entries) work.
+This works just like Craft’s [section entry](https://docs.craftcms.com/v3/sections-and-entries.html) URLs.
 
 ::: tip
-When a site visitor hits the URL of a product, the `product` variable is automatically available to your templates, just like the `entry` variable for standard craft entries.
+When a site visitor hits the URL of a product, the `product` variable is automatically available to your templates, just like the `entry` variable for Craft’s entries.
 :::

@@ -1,8 +1,10 @@
 # Payment Currencies
 
-Many customers feel more confident buying from your store if you allow them to purchase items in the same currency as their credit card or bank account.
+Many customers feel more confident buying from a store that allows them to purchase items in the same currency as their credit card or bank account.
 
-Craft Commerce allows you to accept payments in other currencies you define. All products are entered and stored in the primary store currency you set up. Additional payment currencies can then be added which provide a conversion ratio based on the primary store currency. This shifts the exchange rate they pay from being discovered on their credit card statement after payment, to a known amount during checkout.
+Craft Commerce allows you to accept payments in multiple currencies. All products are entered and stored in a primary store currency, and additional payment currencies can then be configured with conversion ratios used to pay for an order. This makes it possible to see the final payment amount in the desired currency at checkout, rather than an amount discovered later on a credit card statement.
+
+To set up payment currencies for your store, navigate to Commerce → Store Settings → Payment Currencies in the control panel.
 
 ## Example
 
@@ -18,15 +20,15 @@ Craft Commerce does not keep your store’s exchange rates updated automatically
 
 ## Order Currency Fields
 
-A cart (order) has the following fields relating to currency:
+A cart (order) has the following currency-related fields:
 
 ### `order.currency`
 
-This is the primary store currency, and the currency that all the values for price, line items, adjustments, discounts etc are all stored in, and returned in.
+This is the primary store currency that all values for price, line items, adjustments, discounts etc. are all stored and returned in.
 
 ### `order.paymentCurrency`
 
-This is the currency the customer has currently selected as their payment currency. If your store only has a single currency, this will be set to the same as your primary store currency. A customer can change this currency, see [switching currencies](#switching-currencies).
+If your store has only one currency, this will always be set to the primary store currency. If your store supports multiple payment currencies, this [can be changed by the user](#switching-currencies).
 
 ## Transactions Currency Fields
 
@@ -34,42 +36,68 @@ When a customer makes a payment on the order, transactions are applied against t
 
 ### `transaction.currency`
 
-This is the primary store currency, and the currency that the transaction `amount` is stored in.
+This is the primary store currency and the currency the transaction’s `amount` is stored in.
 
 ### `transaction.paymentCurrency`
 
-This is the currency that the `paymentAmount` is stored as. It is also the currency that was used when communicating with the payment gateway when the customer was making payment.
+This is the currency in which the `paymentAmount` is stored. It’s also the currency that was used when communicating with the payment gateway when the customer was making payment.
 
 ### `transaction.paymentRate`
 
-This is a snapshot of the payment currency’s conversion rate at the time of making payment. Because the conversion rate may have changed since making this payment.
+This is a snapshot of the payment currency’s conversion at the time of payment, stored in case the conversion rate changed after the payment was made.
 
 ## Switching currencies
 
-The customer be switched to a different currency in the following ways.
+The customer’s payment currency may be defined by a valid 3-digit ISO code for a payment currency you’ve set up. You can supply this code in several ways:
 
-1) The PHP constant `COMMERCE_PAYMENT_CURRENCY` is set to a 3-digit ISO code that corresponds to a payment currency you have set up. Having this constant set will lock the cart’s payment currency to this currency code. You would most likely set this constant in your `index.php` file in a similar location to your `CRAFT_LOCALE` constant.
+1. Using the `COMMERCE_PAYMENT_CURRENCY` PHP constant in order to lock the cart’s payment currency to the provided code. You would most likely set this constant in your `index.php` file in a location similar to your `CRAFT_LOCALE` constant.
 
-2) Using the `commerce/cart/update-cart` form action, you can set POST param to named `paymentCurrency` to a valid 3-digit ISO code. This will have no affect if you have set the `COMMERCE_PAYMENT_CURRENCY` constant.
+2. Sending the currency code in a `paymentCurrency` POST parameter when using the `commerce/cart/update-cart` form action. This will have no affect if you’ve set the `COMMERCE_PAYMENT_CURRENCY` constant.
 
-3) Using the `commerce/payments/pay` form action, you can set POST param to named `paymentCurrency` to a valid 3-digit ISO code. This will also have no affect if you have set the `COMMERCE_PAYMENT_CURRENCY` constant.
+3. Sending the currency code in a `paymentCurrency` POST parameter when using the `commerce/payments/pay` form action. This will also have no affect if you’ve set the `COMMERCE_PAYMENT_CURRENCY` constant.
 
 ## Conversion and currency formatting
 
-You can use the `|commerceCurrency` filter as a drop-in replacement for the `|currency` filter. But in addition to currency _formatting_, it can also be used for currency _conversion_, by setting the `convert` param to `true`. In addition to that, the currency formatting can also be disabled by setting the `format` param to `false`, if you just want to get the raw converted currency value as a float.
+While you can use the `|commerceCurrency` filter as a drop-in replacement for [Craft’s `|currency` filter](https://docs.craftcms.com/v3/dev/filters.html#currency), it offers additional control over formatting and conversion:
+
+- A `convert` parameter used to convert the base price into the supplied+valid payment currency.
+- A `format` parameter that can disable formatting and return the raw currency value as a float.
+- A `stripZeros` parameter which can be used to return a formatted value without trailing zeros (`.00`).
 
 Examples:
 
-If the store currency is USD and the order’s payment currency is AUD with a exchange rate of 1.3
+```twig
+{# `USD` #}
+{% set baseCurrency = cart.currency %}
 
+{# `AUD`, exchange rate 1.3 #}
+{% set paymentCurrency = cart.paymentCurrency %}
+
+{{ 10|commerceCurrency(baseCurrency) }} {# Output: $10.00 #}
+
+{{ order.totalPrice|commerceCurrency(
+    paymentCurrency,
+    convert=true
+) }} {# Output: A$13.00 #}
+
+{{ order.totalPrice|commerceCurrency(
+    paymentCurrency,
+    convert=true,
+    format=false
+) }} {# Output: 13 #}
+
+{{ order.totalPrice|commerceCurrency(
+    paymentCurrency,
+    convert=true,
+    format=true
+) }} {# Output: A$13.00 #}
+
+{{ order.totalPrice|commerceCurrency(
+    paymentCurrency,
+    convert=true,
+    format=true,
+    stripZeros=true
+) }} {# Output: A$13 #}
 ```
-{{ 10.00|commerceCurrency(cart.currency)}} // US$ 10.00
 
-{{ order.totalPrice|commerceCurrency(cart.paymentCurrency,convert=true)}} // A$ 13.00
-
-{{ order.totalPrice|commerceCurrency(cart.paymentCurrency,convert=true,format=false)}} // 13.0000
-
-{{ order.totalPrice|commerceCurrency(cart.paymentCurrency,convert=true,format=true)}} // A$ 13.00
-```
-
-See [Twig Filters](twig-filters.md) form documentation on the `commerceCurrency` filter.
+For more details about the filter and its parameters, see the [Twig filter documentation](twig-filters.md#commercecurrency).

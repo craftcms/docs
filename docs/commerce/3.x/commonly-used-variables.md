@@ -1,10 +1,10 @@
-# Commonly used Variables
+# Commonly Used Variables
 
 The following are common methods you will want to call in your front end templates:
 
 ## craft.commerce.settings
 
-To get the Craft Commerce general settings model:
+To get the Craft Commerce [general settings model](api:craft\commerce\models\Settings):
 
 ```twig
 {% set settings = craft.commerce.settings %}
@@ -28,7 +28,7 @@ See [Variant Queries](dev/element-queries/variant-queries.md).
 
 ## craft.commerce.carts.cart
 
-See [craft.commerce.carts.cart](craft-commerce-carts-cart.md)
+See [craft.commerce.carts.cart](craft-commerce-carts-cart.md).
 
 ## craft.commerce.countries.allEnabledCountries
 
@@ -44,7 +44,7 @@ Returns an array of <api:craft\commerce\models\Country> objects.
 
 ## craft.commerce.countries.allEnabledCountriesAsList
 
-Returns a list usable for a dropdown select box.
+Returns an array of all enabled countries for use in a dropdown menu.
 
 Data returned as `[32:'Australia', 72:'USA']`
 
@@ -88,7 +88,7 @@ Data returned as `[72:[3:'California', 4:'Washington'],32:[7:'New South Wales']]
 
 ## cart.availableShippingMethods
 
-Returns the shipping methods available to applied to the current cart. Will not include some shipping methods if none of the shipping method’s rules can match the cart.
+Returns the shipping methods available for the current cart. Some shipping methods may not be included, as only those whose rules apply to the current cart will be returned.
 
 ```twig
 {% for handle, method in cart.availableShippingMethods %}
@@ -102,7 +102,7 @@ Returns the shipping methods available to applied to the current cart. Will not 
 
 ## craft.commerce.gateways.allFrontEndGateways
 
-Returns all payment gateway available to the customer.
+Returns all payment gateways available to the customer.
 
 ```twig
 {% if not craft.commerce.gateways.allFrontEndGateways|length %}

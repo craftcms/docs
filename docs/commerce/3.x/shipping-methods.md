@@ -1,122 +1,134 @@
 # Shipping Methods
 
-Shipping methods are only available in the Pro edition of Craft Commerce. This page only applies to developers using the Pro edition of Craft Commerce.
+::: warning
+Shipping methods are only available in the [Pro edition](editions.md) of Craft Commerce.
+:::
 
-If you need to add shipping costs to the cart, you have the following options:
+Several options are available for adding shipping costs to the cart:
 
-1) Use the built in shipping method and shipping rules engine to define your rules and prices based on a few product and cart attributes, including per item rates, base order rates, weight rates, and percentage of cost rates.
-This engine is fairly powerful and can meet the needs of most small businesses with simple to medium complex shipping needs.
+1. **Use the [included shipping method and shipping rules engine](shipping.md).**  
+   Define your rules and prices based on individual product details and the cart as a whole. Costs may come from the overall order, weight, cost percentage, and per-item attributes. This engine is fairly powerful and can meet the needs of most small businesses with simple to moderately complex shipping needs.
 
-2) Write a plugin or module that provides your own shipping method. This allows you to present more than one option to the customer, and writing your own shipping method allows you to use the option (1) above at the same time. Your shipping rules could use any external API to look up prices, or you could just build the pricing logic out in PHP.
+2. **Write an order adjuster class.**  
+   If you need to add dynamic shipping costs to the cart _without_ providing options to your customer, an order adjuster class offers flexibility beyond the native shipping engine UI.
 
-3) Write an order adjuster class. Going this route mean you likely have shipping costs you can’t codify in the native shipping engine UI AND you never need to offer a shipping method choice to your customers between the native shipping engine methods your custom logic pricing. Use this when you will automatically add dynamically calculated shipping costs to the cart.
+3. **Write a plugin or module that provides its own shipping method.**  
+   You can still utilize the shipping engine in option 1, but add functionality that presents more than one option to the customer, utilizes an external API, or uses your own custom pricing logic.
 
-Below is a guide on writing a plugin or module supplied shipping method (2), and also an example of a custom adjuster (3) to add shipping costs.
+::: tip
+Before writing your own shipping adjuster or shipping method (option 2 or 3), make sure you’re comfortable [creating a plugin or module for Craft CMS](https://docs.craftcms.com/v3/extend/).
+:::
 
-## Shipping Method Interface
+## Creating a Shipping Adjuster
 
-The shipping method interface requires a class with the following methods:
+A shipping adjuster is a specific kind of adjuster whose `type` is set to `shipping`.
 
-### getType()
+To learn more about adjusters and how you can create your own, see [Adjusters](adjusters.md).
+
+## Creating a Shipping Method
+
+Use a plugin or module to register your shipping method. The shipping method provides a name and one or more rules to determine whether it can be used for an order.
+
+### Shipping Method Interface
+
+The [shipping method interface](api:craft\commerce\base\ShippingMethodInterface) requires a class with the following methods:
+
+#### getType()
+
 Returns the type of shipping method. This would likely be the handle of your plugin.
 
-### getId()
+#### getId()
 
-This must return null.
+Must return `null`.
 
-### getName()
+#### getName()
 
-Returns the name of this shipping method as displayed to the customer and in the Control Panel.
+Returns the name of this shipping method, displayed to the customer and in the control panel.
 
-### getHandle()
+#### getHandle()
 
-This is the handle added to the order when a customer selects this shipping method.
+Returns the handle added to the order when a customer selects this shipping method.
 
-### getCpEditUrl()
+#### getCpEditUrl()
 
-Returns a Control Panel URL to a place where you can configure this shipping method’s rules.
-Return an empty string if the method has no link.
+Returns a control panel URL to a place where you can configure this shipping method’s rules. Return an empty string if the method has no link.
 
-### getRules()
+#### getRules()
 
-Returns an array of rules that meet the `ShippingRules` interface. (see below)
+Returns an array of rules that meet [the `ShippingRules` interface](#shipping-rules-interface).
 
-### getIsEnabled()
+#### getIsEnabled()
 
-Is this shipping method available to the customer to select.
+Returns `true` if this shipping method should be an option for the customer to select.
 
-## Shipping Rules Interface
+### Shipping Rules Interface
 
-A shipping method returns an array of rules objects. The shipping engine goes through each rule one by one and calls `matchOrder()`. It expects a `true` or `false` returned if this shipping method can be applied to the order/cart. The first matched rule returns the costs to the cart.
+The shipping method returns an array of these rules objects. The shipping engine processes the array in the order it was received, calling `matchOrder()` on each item. It expects to get `true` or `false` from each, indicating whether this shipping method can be applied to the order/cart. The first matched (`true`) rule returns the costs to the cart.
 
-These are the methods required for the shipping rule objects:
+These are the methods required for each [shipping rule](api:craft\commerce\base\ShippingRuleInterface) object:
 
-### getHandle();
+#### getHandle();
 
-Returns the unique handle of this shipping rule
+Returns the unique handle of this shipping rule.
 
-### matchOrder(\Craft\Commerce_OrderModel $order)
+#### matchOrder([Order \$order](api:craft\commerce\elements\Order))
 
-Return a boolean.
-Is this rule a match on the order? If false is returned, the shipping engine tries the next rule on the current shipping method. If all rules return false, the shipping method is not available for selection by the customer on the order.
+Returns `true` if this rule is a match on the order, or `false` if the shipping engine should continue and evaluate the next rule for the current shipping method.
 
-### getIsEnabled()
+If all rules return `false`, the shipping method is not available for the customer to select on the order.
 
-Is this shipping rule enabled, if not, the matchOrder() is not attempted.
+#### getIsEnabled()
 
-### getOptions();
+Returns `true` if the rule is enabled, or `false` if `matchOrder()` should not be attempted.
 
-Stores this data as JSON on the order’s shipping adjustment. For example, you might include all data used to determine the rule matched.
+#### getOptions()
 
-### getPercentageRate()
+Stores this data as JSON on the order’s shipping adjustment when this rule is applied. For example, you might include all data used to determine the rule matched.
 
-Returns the percentage rate that is multiplied per line item subtotal.
-Zero will not make any changes
+#### getPercentageRate()
 
-### getPerItemRate()
+Returns a percentage rate to be multiplied by each line item’s subtotal. `0` will not make any changes.
 
-Returns the flat rate that is multiplied per qty.
-Zero will not make any changes.
+#### getPerItemRate()
 
-### getWeightRate()
+Returns a flat rate to be multiplied by each line item’s quantity. `0` will not make any changes.
 
-Returns the rate that is multiplied by the line item’s weight.
-Zero will not make any changes.
+#### getWeightRate()
 
-### getBaseRate()
+Returns a rate to be multiplied by each line item’s weight. `0` will not make any changes.
 
-Returns a base shipping cost. This is added at the order level.
-Zero will not make any changes.
+#### getBaseRate()
 
-### getMaxRate()
+Returns a base shipping cost to be added at the order level. `0` will not make any changes.
 
-Returns a max cost this rule should ever apply.
-If the total of your rates as applied to the order are greater than this, the baseShippingCost on the order is modified to meet this max rate.
+#### getMaxRate()
 
-### getMinRate()
+Returns a maximum cost for this rule to be applied. If the total of the order’s applied rates is greater than this, the `baseShippingCost` on the order is modified to meet this maximum rate.
 
-Returns a min cost this rule should have applied.
-If the total of your rates as applied to the order are less than this, the baseShippingCost on the order is modified to meet this min rate.
-Zero will not make any changes.
+#### getMinRate()
 
-### getDescription()
+Returns a minimum cost for this rule to be applied. If the total of the order’s applied rates is less than this, the `baseShippingCost` on the order is modified to meet this minimum rate. `0` will not make any changes.
 
-Returns a readable description of the rates applied by this rule.
+#### getDescription()
 
-## Registering your Shipping Method and Rules
+Returns a human-friendly description of the rates applied by this rule.
 
-Once you have created your shipping method class and its associated shipping rules classes, you need to register your shipping method class instance by using the `EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS` event in your module or plugin’s `init()` method.
+### Registering your Shipping Method and Rules
 
-Here is an example of doing so:
+Once you’ve created your shipping method class and its associated shipping rules classes, you need make sure Commerce can use it.
+
+Do this by using your plugin’s `init()` method to register an instance of your shipping method. Subscribe to the `EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS` event and add your shipping method to the event object’s `shippingMethods` array:
 
 ```php
-Event::on(ShippingMethods::class, ShippingMethods::EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS, function(RegisterAvailableShippingMethodsEvent $event) {
-    $event->shippingMethods[] = new MyShippingMethod();
-});
+use craft\commerce\events\RegisterAvailableShippingMethodsEvent;
+use craft\commerce\services\ShippingMethods;
+use yii\base\Event;
+
+Event::on(
+    ShippingMethods::class,
+    ShippingMethods::EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS,
+    function(RegisterAvailableShippingMethodsEvent $event) {
+        $event->shippingMethods[] = new MyShippingMethod();
+    }
+);
 ```
-
-## Shipping Adjuster
-
-If you decide not to make a shipping method, you could just make a custom adjuster to add shipping costs to the cart.
-
-To learn how to create an adjuster see [Adjusters](adjusters.md), and simply set the `type` of the adjuster to `shipping`.

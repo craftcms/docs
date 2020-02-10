@@ -6,7 +6,7 @@ To add something to the cart, submit the ID of a [purchasable](purchasables.md) 
 Products are not purchasable on their own; all products have at least one default variant. See [Products](products.md) for more information.
 :::
 
-The following is an example of getting the first product found in your store. We then get the product’s default variant and use its ID in the form that will add that item to the cart:
+The following is an example of getting the first product found in your store, getting the product’s default variant, and using that variant’s ID in the form that will add that item to the cart:
 
 ```twig
 {% set product = craft.products.one() %}
@@ -16,14 +16,16 @@ The following is an example of getting the first product found in your store. We
     <input type="hidden" name="action" value="commerce/cart/update-cart">
     <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
     {{ redirectInput('shop/cart') }}
-    <input type="hidden" name="qty" value="1">
     <input type="hidden" name="purchasableId" value="{{ variant.id }}">
     <input type="submit" value="Add to cart">
 </form>
 ```
-* The `qty` param is not required as it defaults to `1` if not supplied.
 
-The above is a simple example, if your product’s type has multiple variants you could loop over all the products variants and allow the customer to choose the variant from a dropdown:
+::: tip
+The `qty` param is not required. It defaults to `1` if not supplied.
+:::
+
+If your product’s type has multiple variants you could loop over them and allow the customer to choose the variant from a dropdown menu:
 
 ```twig
 {% set product = craft.products.one() %}
@@ -44,19 +46,18 @@ The above is a simple example, if your product’s type has multiple variants yo
 ```
 
 ::: warning
-In the Lite edition of Craft Commerce only single line item can exist in the cart. Whenever a customer adds something to the cart, it replaces whatever item was in the cart.
-If multiple items are added to the cart in a single request, only the last item submitted is added to the cart.    
+In the Lite edition of Craft Commerce only single line item can exist in the cart. Whenever a customer adds something to the cart, it replaces whatever item was in the cart. If multiple items are added to the cart in a single request, only the last item gets added to the cart.
 :::
 
 ::: warning
-When using the `commerce/cart/update-cart` form action, the redirect is only followed if *all* updates submitted succeed.
+When using the `commerce/cart/update-cart` form action, the redirect is only followed if _all_ submitted updates succeed.
 :::
 
 ## Line item options and notes
 
-When submitting a product to the cart, you can optionally include a text note from the customer, or arbitrary data in an options param.
+When submitting a product to the cart, you can optionally include a text note from the customer and arbitrary data.
 
-Here is an example of an add to cart form with both a `notes` and `options` param.
+Here is an example of an add to cart form with both a `note` and `options` param:
 
 ```twig
 {% set product = craft.products.one() %}
@@ -92,10 +93,10 @@ In the above example we:
 - Allowed a customer to choose an option called `giftwrap` with 2 prepared values.
 
 ::: warning
-The options and notes param data is not validated. A user could submit any data. Use front-end validation.
+The options and notes param data is not validated, so a user could submit any data. Use front-end validation.
 :::
 
-Once the order is complete, the notes and options can be found on the View Order page.
+Once the order is complete, the notes and options can be found on the View Order page:
 
 <img src="./assets/lineitem-options-review.png" width="509" alt="Line Item Option Review.">
 
@@ -107,7 +108,7 @@ Another way to think about it is that each line item is unique based on the comb
 
 ## Adding multiple purchasables to the cart
 
-You can add multiple purchasables to the cart in an update cart form. You supply the data to the controller in a different format. All purchasables IDs are supplied in a `purchasables` form array like so:
+If you’d like to add multiple purchasables to the cart at once, you’ll need to supply the form data in a `purchasables` form array:
 
 ```twig
 {% set product = craft.products.one() %}
@@ -118,28 +119,28 @@ You can add multiple purchasables to the cart in an update cart form. You supply
     {{ csrfInput() }}
 
     {% for variant in product.variants %}
-        <input type="hidden" name="purchasables[{{loop.index}}][id]" value="{{ variant.id }}">
-        <input type="hidden" name="purchasables[{{loop.index}}][qty]" value="1">
-        <input type="hidden" name="purchasables[{{loop.index}}][note]" value="1">
+        <input type="hidden" name="purchasables[{{ loop.index }}][id]" value="{{ variant.id }}">
+        <input type="hidden" name="purchasables[{{ loop.index }}][qty]" value="1">
+        <input type="hidden" name="purchasables[{{ loop.index }}][note]" value="1">
     {% endfor %}
 
     <input type="submit" value="Add all variants to cart">
 </form>
 ```
 
-While using multi-add the same rules apply for updating a quantity vs adding to cart, based on the uniquessness of the options `signature` and `purchasableId`.
+While using multi-add the same rules apply for updating a quantity vs. adding to cart, based on the uniquessness of the options `signature` and `purchasableId`.
 
-As shown in the example above,  a unique index key is required to group the purchasable ID to its related `notes` and `options` and `qty` param. Using `{{loop.index}}` is an easy way to do this.
+As shown in the example above, a unique index key is required to group the purchasable ID to its related `notes` and `options` and `qty` param. Using `{{ loop.index }}` is an easy way to do this.
 
 ## Updating line items
 
 Once the purchasable has been added to the cart, your customer may want to update the `qty` or `note`, they can do this by updating a line item.
 
-Line items can have their `qty`, `note`, and `options`updated. They can also be removed.
+Line items can have their `qty`, `note`, and `options` updated or removed.
 
-To update a line item, submit a form array param with the name of `lineItems`, with the ID of the array key being the line item ID.
+To update a line item, submit a `lineItems` form array, where each item’s array key is the line item ID.
 
-Example:
+Example using `LINE_ITEM_ID` as a placeholder for the ID of the item you’d like to edit:
 
 ```twig
 <form method="POST">
@@ -153,46 +154,49 @@ Example:
 </form>
 ```
 
-In the example above we are allowing for the editing of one line item. You would replace `LINE_ITEM_ID` with the ID of the line item you wanted to edit. Usually you would just loop over all line items and insert `{{ item.id }}` there, allowing your customers to update multiple line items at once.
+Here we’re allowing just one line item to be edited for simplicity. Normally you would loop over all line items and insert `{{ item.id }}` dynamically, allowing your customers to update multiple line items at once.
 
-To remove a line item, simply send a `lineItems[LINE_ITEM_ID][remove]` param in the request. You could do this by adding a checkbox to the form above that looks like this:
+To remove a line item, send a `lineItems[LINE_ITEM_ID][remove]` param in the request. You could do this by adding a checkbox to the form example like this:
 
 ```twig
 <input type="checkbox" name="lineItems[LINE_ITEM_ID][remove]" value="1"> Remove item<br>
 ```
 
-The example templates contain all of the above examples of adding and updating the cart within a full checkout flow.
+::: tip
+The [example templates](example-templates.md) include those above and more templates you might use adding and updating the cart within a full checkout flow.
+:::
 
 ## Update cart success notice
 
-Since the `commerce/cart/update-cart` controller action can do so much, the generic success flash notice is a very generic sounding “Cart Updated”.
+Since the `commerce/cart/update-cart` form action can do so much, its success flash notice is a generic-sounding “Cart Updated”.
 
-If you want to customize the success message, submit a `cartUpdatedNotice` param to the `commerce/cart/update-cart` controller action.
+If you want to customize the success message, submit a `cartUpdatedNotice` param to the `commerce/cart/update-cart` form action.
 
-Example:
+Example custom message:
 
 ```twig
 <input type="hidden" name="cartUpdatedNotice" value="Your cool cart was updated.">
 ```
 
+Example displaying the added product title:
+
 ```twig
-<input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title}} to the cart.">
+<input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
 ```
 
 ## Restoring previous cart contents
 
-By default the current cart begins blank and customers then add things to it.
+By default, the current cart begins empty and customers add things to it.
 
-If the customer is a registered user they may expect to be able to log into another computer and continue their cart from 
-a previous session. This will happen automatically if they log in while their current cart is empty (has no line items).  
+If the customer is a registered user they may expect to be able to log into another computer and continue shopping with their cart from a previous session. This will happen automatically if the customer logs in while their current cart is empty (has no line items).
 
-If you want to allow a customer to see previous carts they had in previous logged-in sessions you cann retrieve them like this:
-
+If you want to allow a customer to see carts from previous logged-in sessions you can retrieve them like this:
 
 ```twig
 {% if currentUser %}
     {% set currentCart = craft.commerce.carts.cart %}
     {% if cart.id %}
+        {# return all incomplete carts *except* the one from this session #}
         {% set oldCarts = craft.orders.isCompleted(false).id('not '~cart.id).user(currentUser).all() %}
     {% else %}
         {% set oldCarts = craft.orders.isCompleted(false).user(currentUser).all() %}
@@ -200,5 +204,8 @@ If you want to allow a customer to see previous carts they had in previous logge
 {% endif %}
 ```
 
-You could then loop over the line items in those older carts and allow the customer to add them to the current order. An example of this is in the example templates.
+You could then loop over the line items in those older carts and allow the customer to add them to the current order.
 
+::: tip
+You’ll find an example of this in the [example templates](example-templates.md).
+:::

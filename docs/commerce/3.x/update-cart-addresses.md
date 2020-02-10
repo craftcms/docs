@@ -1,48 +1,48 @@
 # Update Cart Addresses
 
-You may wish for the customer to supply a shipping and billing address for the order. Although not required, the shipping address enables the tax and shipping engine to more accurately supply shipping options and tax costs.
+You’ll probably want the customer to provide a shipping and billing address for the order. Although not required, the shipping address enables the tax and shipping engine to more accurately supply shipping options and tax costs.
 
 You can see if the cart has a billing and shipping address has been set with:
 
+You can use `cart.shippingAddress` and `cart.billingAddress` in a template to see if either one has been set:
+
 ```twig
 {% if cart.shippingAddress %}
-    {{ cart.shippingAddress.firstName }} ...etc
+    {{ cart.shippingAddress.firstName }}
+    {# ... #}
 {% endif %}
-```
-and
-```twig
+
 {% if cart.billingAddress %}
-  {{ cart.billingAddress.firstName }} ... etc
+    {{ cart.billingAddress.firstName }}
+    {# ... #}
 {% endif %}
 ```
 
-Both cart attributes return an <api:craft\commerce\models\Address> object, or `null` if no addresses are set.
+Each attribute returns an [Address](api:craft\commerce\models\Address) object, or `null` if no address is set.
 
-## Adding or updating the shipping and billing address selected for the current cart.
+## Modifying a cart’s shipping and billing addresses
 
-Adding or updating the addresses on the order is done using the `commerce/cart/update-cart` form action.
-
-There are a number of ways you can do this:
+Adding or updating the addresses on the order is done using the `commerce/cart/update-cart` form action. There are a number of ways you can do this:
 
 ### 1. Using an existing address ID as the default
 
-The example below shows how you can add the first address owned by the customer as the `shippingAddressId` while also setting it as the order’s billing address, by using the `billingAddressSameAsShipping` param:
+This example creates a form that would add the first address owned by the customer as the `shippingAddressId`. It also sets it as the order’s billing address by using the `billingAddressSameAsShipping` param:
 
 ```twig
 {% set address = craft.commerce.customer.addresses|first %}
 
-<form method="POST">
+<form method="post">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
     <input type="hidden" name="redirect" value="commerce/cart">
     <input type="hidden" name="shippingAddressId" value="{{ address.id }}">
     <input type="hidden" name="billingAddressSameAsShipping" value="1">
-    <input type="submit" value="Submit">
+    <button type="submit">Submit</button>
 </form>
 ```
 
-The inverse is possible as well, providing the `billingAddressId` and setting the `shippingAddressSameAsBilling` param.
+You could achieve the inverse by providing the first owned address as the `billingAddressId` and setting the `shippingAddressSameAsBilling` param.
 
-Another way of achieving the same thing is is setting both addresses explicitly:
+Another way of doing the same thing as the above examples would be to set both addresses explicitly:
 
 ```twig
 {% set address = craft.commerce.customer.addresses|first %}
@@ -52,55 +52,61 @@ Another way of achieving the same thing is is setting both addresses explicitly:
     <input type="hidden" name="redirect" value="commerce/cart">
     <input type="hidden" name="shippingAddressId" value="{{ address.id }}">
     <input type="hidden" name="billingAddressId" value="{{ address.id }}">
-    <input type="submit" value="Submit">
+    <button type="submit">Submit</button>
 </form>
 ```
 
 ### 2. Submit new addresses during checkout
 
-Another alternative, if the user wanted to submit new addresses, (they may be a guest) is submitting the address form data directly during checkout.
+A user may also submit a new address directly, at checkout. (This is common when the user is a guest.)
 
-This will only work if the `shippingAddressId` is not supplied or sent as an empty string. If `shippingAddressId` is an integer then the address form data is ignored and the form action attempts to set the shipping address to that of the ID.
+In this example, it’s important to note that `shippingAddressId` must either be omitted or sent as an empty string. If `shippingAddressId` is an integer, the address form data is ignored and the form action attempts to set the shipping address to that of the ID.
 
 ```twig
-<form method="POST">
+<form method="post">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
-    {{ redirectInput('commerce/cart') }}
     <input type="hidden" name="cartUpdatedNotice" value="Updated Shipping Address.">
+    {{ redirectInput('commerce/cart') }}
+
     <input type="hidden" name="shippingAddressId" value="">
     <input type="text" name="shippingAddress[firstName]" value="">
     <input type="text" name="shippingAddress[lastName]" value="">
     <select name="shippingAddress[countryId]">
-    {% for id, name in craft.commerce.countriesList %}
-      <option value="{{ id }}">{{ name }}</option>
-    {% endfor %}
-        </select>
-      <input type="hidden" name="sameAddress" value="1">
-    <input type="submit" value="Add to cart">
+        {% for id, name in craft.commerce.countries.getAllCountriesAsList() %}
+            <option value="{{ id }}">{{ name }}</option>
+        {% endfor %}
+    </select>
+    <input type="hidden" name="sameAddress" value="1">
+
+    <button type="submit">Add to Cart</button>
 </form>
 ```
 
-### 3. Select from existing addresses
+### 3. Select an existing address
 
-If your customers have added multiple addresses, you can use radio buttons to select the proper `shippingAddressId` and `billingAddressId`, or create a new address on-the-fly:
+If your customers have added multiple addresses, you can use radio buttons to select the proper `shippingAddressId` and `billingAddressId`, or create a new address on the fly:
 
 ```twig
 {% set cart = craft.commerce.carts.cart %}
 
-<form class="form" method="post">
-    {{ csrfInput() }}
+<form method="post">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
     <input type="hidden" name="cartUpdatedNotice" value="Updated addresses.">
+    {{ csrfInput() }}
 
     {% set customerAddresses = craft.commerce.customer.addresses %}
 
-    {# Check if we have saved addresses: #}
+    {# check if we have saved addresses #}
     {% if customerAddresses | length %}
         <div class="shipping-address">
             {% for address in customerAddresses %}
                 <label>
-                    <input type="radio" name="shippingAddressId" value="{{ address.id }}" {{- cart.shippingAddressId ? ' checked' : null }}>
-                    {# Identifying address information, up to you! #}
+                    <input type="radio"
+                        name="shippingAddressId"
+                        value="{{ address.id }}" {{- cart.shippingAddressId ? ' checked' : null }}
+                    >
+                    {# identifying address information, up to you! #}
+                    {# ... #}
                 </label>
             {% endfor %}
         </div>
@@ -108,19 +114,24 @@ If your customers have added multiple addresses, you can use radio buttons to se
         <div class="billing-address">
             {% for address in customerAddresses %}
                 <label>
-                    <input type="radio" name="billingAddressId" value="{{ address.id }}" {{- cart.billingAddressId ? ' checked' : null }}>
-                    {# Identifying address information, up to you! #}
+                    <input type="radio"
+                        name="billingAddressId"
+                        value="{{ address.id }}" {{- cart.billingAddressId ? ' checked' : null }}
+                    >
+                    {# identifying address information, up to you! #}
+                    {# ... #}
                 </label>
             {% endfor %}
         </div>
     {% else %}
-        {# If no existing addresses were found, provide forms to add new ones: #}
+        {# no existing addresses; provide forms to add new ones #}
         <div class="new-billing-address">
             <label>
                 First Name
                 <input type="text" name="billingAddress[firstName]">
             </label>
-            {# ...remainder of address fields... #}
+            {# remaining address fields #}
+            {# ... #}
         </div>
 
         <div class="new-shipping-address">
@@ -128,13 +139,14 @@ If your customers have added multiple addresses, you can use radio buttons to se
                 First Name
                 <input type="text" name="shippingAddress[firstName]">
             </label>
-            {# ...remainder of address fields... #}
+            {# remaining address fields #}
+            {# ... #}
         </div>
     {% endif %}
 </form>
 ```
 
-You may need to create other custom routes to allow customers to manage these addresses, or introduce some logic in the browser to hide and show new address forms based on the type(s) of addresses you need.
+You may need to create custom routes to allow customers to manage these addresses, or introduce some logic in the browser to hide and show new address forms based on the type(s) of addresses you need.
 
 ## Summary
 
