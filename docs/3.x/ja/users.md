@@ -59,7 +59,6 @@ Craft の権限は次の通りです。
 | ↳&nbsp; アップロード | `saveAssetInVolume:[VolumeUID]`
 | ↳&nbsp; サブフォルダを作成する | `createFoldersInVolume:[VolumeUID]`
 | ↳&nbsp; ファイルとフォルダーを削除 | `deleteFilesAndFoldersInVolume:[VolumeUID]`
-| ↳&nbsp; Remove files | `deleteFilesAndFoldersInVolume:[VolumeUID]`
 
 ## 一般登録
 
