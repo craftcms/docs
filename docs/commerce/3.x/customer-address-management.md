@@ -117,4 +117,4 @@ In any of the above examples that post to the `commerce/customer-addresses/save`
 {% endif %}
 ```
 
-For a complete template example that outputs individual field validation errors, see [shop/\_includes/addresses/form.html](https://github.com/craftcms/commerce/blob/develop/templates/shop/_includes/addresses/form.html) in the [example templates](example-templates.md).
+For a complete template example that outputs individual field validation errors, see [shop/_includes/addresses/form.html](https://github.com/craftcms/commerce/blob/develop/templates/shop/_includes/addresses/form.html) in the [example templates](example-templates.md).
