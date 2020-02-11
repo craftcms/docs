@@ -128,7 +128,7 @@ If you’d like to add multiple purchasables to the cart at once, you’ll need 
 </form>
 ```
 
-While using multi-add the same rules apply for updating a quantity vs. adding to cart, based on the uniquessness of the options `signature` and `purchasableId`.
+While using multi-add, the same rules apply whether you’re updating a quantity or adding to cart: the uniqueness of the line item is based on the `optionsSignature` attribute, which is a hash that line item’s `options`.
 
 As shown in the example above, a unique index key is required to group the purchasable ID to its related `notes` and `options` and `qty` param. Using `{{ loop.index }}` is an easy way to do this.
 
