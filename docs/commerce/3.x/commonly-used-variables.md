@@ -110,7 +110,7 @@ Returns all payment gateways available to the customer.
 {% endif %}
 
 {% if craft.commerce.gateways.allFrontEndGateways|length %}
-<form method="POST" id="paymentMethod" class="form-inline">
+<form method="post" id="paymentMethod" class="form-inline">
 
     <input type="hidden" name="action" value="commerce/cart/update-cart">
     <input type="hidden" name="redirect" value="commerce/checkout/payment">

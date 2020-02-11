@@ -47,7 +47,7 @@ Another way of doing the same thing as the above examples would be to set both a
 ```twig
 {% set address = craft.commerce.customer.addresses|first %}
 
-<form method="POST">
+<form method="post">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
     <input type="hidden" name="redirect" value="commerce/cart">
     <input type="hidden" name="shippingAddressId" value="{{ address.id }}">
