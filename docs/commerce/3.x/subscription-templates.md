@@ -90,7 +90,7 @@ To reactivate a subscription plan you can use the following template. It assumes
 
 ```twig
 {% if subscription.canReactivate() %}
-    <form method="POST">
+    <form method="post">
         <input type="hidden" name="action" value="commerce/subscriptions/reactivate">
         <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}">
         {{ csrfInput() }}
