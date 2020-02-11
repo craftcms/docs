@@ -13,8 +13,8 @@ See [the Customer model](api:craft\commerce\models\Customer) to learn about the 
 ```twig
 {% set addresses = craft.commerce.customer.addresses %}
 {% for address in addresses %}
-  {{ address.firstName }}<br/>
-  {# ... #}
+    {{ address.firstName }}<br/>
+    {# ... #}
 {% endfor %}
 ```
 
@@ -34,13 +34,13 @@ This example would add a new address for the customer with the details in the `a
 
 ```twig
 <form method="post">
-  <input type="hidden" name="action" value="commerce/customer-addresses/save">
-  {{ redirectInput('commerce/customer/addresses') }}
-  {{ csrfInput() }}
-  <input type="text" name="address[firstName]" value="{{ address is defined ? address.firstName : '' }}">
-  <input type="text" name="address[lastName]" value="{{ address is defined ? address.lastName : '' }}">
-  {# ... #}
-  <input type="submit" value="Save"/>
+    <input type="hidden" name="action" value="commerce/customer-addresses/save">
+    {{ redirectInput('commerce/customer/addresses') }}
+    {{ csrfInput() }}
+    <input type="text" name="address[firstName]" value="{{ address is defined ? address.firstName : '' }}">
+    <input type="text" name="address[lastName]" value="{{ address is defined ? address.lastName : '' }}">
+    {# ... #}
+    <input type="submit" value="Save"/>
 </form>
 ```
 
@@ -48,14 +48,14 @@ To update an existing address, include its ID for the value of a `address[id]` p
 
 ```twig{5}
 <form method="post">
-  <input type="hidden" name="action" value="commerce/customer-addresses/save">
-  {{ redirectInput('commerce/customer/addresses') }}
-  {{ csrfInput() }}
-  <input type="text" name="address[id]" value="{{ address.id }}">
-  <input type="text" name="address[firstName]" value="{{ address.firstName }}">
-  <input type="text" name="address[lastName]" value="{{ address.lastName }}">
-  {# ... #}
-  <input type="submit" value="Save"/>
+    <input type="hidden" name="action" value="commerce/customer-addresses/save">
+    {{ redirectInput('commerce/customer/addresses') }}
+    {{ csrfInput() }}
+    <input type="text" name="address[id]" value="{{ address.id }}">
+    <input type="text" name="address[firstName]" value="{{ address.firstName }}">
+    <input type="text" name="address[lastName]" value="{{ address.lastName }}">
+    {# ... #}
+    <input type="submit" value="Save"/>
 </form>
 ```
 
@@ -65,11 +65,11 @@ The form action for deleting a customer address is `commerce/customer-addresses/
 
 ```twig
 <form method="post">
-  <input type="hidden" name="action" value="commerce/customer-addresses/delete">
-  {{ redirectInput('commerce/customer/addresses') }}
-  {{ csrfInput() }}
-  <input type="hidden" name="id" value="{{ address.id }}"/>
-  <input type="submit" value="delete"/>
+    <input type="hidden" name="action" value="commerce/customer-addresses/delete">
+    {{ redirectInput('commerce/customer/addresses') }}
+    {{ csrfInput() }}
+    <input type="hidden" name="id" value="{{ address.id }}"/>
+    <input type="submit" value="delete"/>
 </form>
 ```
 
