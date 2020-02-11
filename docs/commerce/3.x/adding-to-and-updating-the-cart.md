@@ -12,7 +12,7 @@ The following is an example of getting the first product found in your store, ge
 {% set product = craft.products.one() %}
 {% set variant = product.defaultVariant %}
 
-<form method="POST">
+<form method="post">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
     <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
     {{ redirectInput('shop/cart') }}
@@ -30,7 +30,7 @@ If your product’s type has multiple variants you could loop over them and allo
 ```twig
 {% set product = craft.products.one() %}
 
-<form method="POST">
+<form method="post">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
     <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
     {{ redirectInput('shop/cart') }}
@@ -62,7 +62,7 @@ Here is an example of an add to cart form with both a `note` and `options` param
 ```twig
 {% set product = craft.products.one() %}
 {% set variant = product.defaultVariant %}
-<form method="POST">
+<form method="post">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
     <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
     {{ redirectInput('shop/cart') }}
@@ -112,7 +112,7 @@ If you’d like to add multiple purchasables to the cart at once, you’ll need 
 
 ```twig
 {% set product = craft.products.one() %}
-<form method="POST">
+<form method="post">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
     <input type="hidden" name="cartUpdatedNotice" value="Products added to the cart.">
     {{ redirectInput('shop/cart') }}
@@ -121,7 +121,6 @@ If you’d like to add multiple purchasables to the cart at once, you’ll need 
     {% for variant in product.variants %}
         <input type="hidden" name="purchasables[{{ loop.index }}][id]" value="{{ variant.id }}">
         <input type="hidden" name="purchasables[{{ loop.index }}][qty]" value="1">
-        <input type="hidden" name="purchasables[{{ loop.index }}][note]" value="1">
     {% endfor %}
 
     <input type="submit" value="Add all variants to cart">
@@ -140,26 +139,31 @@ Line items can have their `qty`, `note`, and `options` updated or removed.
 
 To update a line item, submit a `lineItems` form array, where each item’s array key is the line item ID.
 
-Example using `LINE_ITEM_ID` as a placeholder for the ID of the item you’d like to edit:
+In this example, each line item has its quantity and note exposed for the user to edit:
 
-```twig
-<form method="POST">
+```twig{9,10}
+<form method="post">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
     <input type="hidden" name="cartUpdatedNotice" value="Updated line items.">
     {{ redirectInput('shop/cart') }}
     {{ csrfInput() }}
-    <input type="text" placeholder="My Note" name="lineItems[LINE_ITEM_ID][note]" value="{{ item.note }}">
-    <input type="number" name="lineItems[LINE_ITEM_ID][qty]" min="1" value="{{ item.qty }}">
+
+    {% for item in cart.lineItems %}
+        <input type="hidden" name="lineItems[{{ loop.index }}][id]" value="{{ item.id }}">
+        <input type="number" name="lineItems[{{ loop.index }}][qty]" min="1" value="{{ item.qty }}"">
+        <input type="text" name="lineItems[{{ loop.index }}][note]" placeholder="My Note" value="{{ item.note }}">
+    {% endfor %}
+
     <input type="submit" value="Update Line Item">
 </form>
 ```
 
 Here we’re allowing just one line item to be edited for simplicity. Normally you would loop over all line items and insert `{{ item.id }}` dynamically, allowing your customers to update multiple line items at once.
 
-To remove a line item, send a `lineItems[LINE_ITEM_ID][remove]` param in the request. You could do this by adding a checkbox to the form example like this:
+To remove a line item, send a `lineItems[{{ item.id }}][remove]` param in the request. You could do this by adding a checkbox to the form example like this:
 
 ```twig
-<input type="checkbox" name="lineItems[LINE_ITEM_ID][remove]" value="1"> Remove item<br>
+<input type="checkbox" name="lineItems[{{ item.id }}][remove]" value="1"> Remove item<br>
 ```
 
 ::: tip
