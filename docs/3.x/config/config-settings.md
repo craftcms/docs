@@ -1010,7 +1010,7 @@ Since
 
 
 List of additional file kinds Craft should support. This array
-will get merged with the one defined in `craft\helpers\Assets::_buildFileKinds()`.
+will get merged with the one defined in `\craft\helpers\Assets::_buildFileKinds()`.
 
 ```php
 'extraFileKinds' => [
