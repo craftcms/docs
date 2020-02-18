@@ -18,13 +18,15 @@ Possible values include:
 
 | Value | Fetches elements…
 | - | -
-| `'*"foo"*'` | with a `foo` option selected.
-| `'not *"foo"*'` | without a `foo` option selected.
+| `'foo'` | with a `foo` option selected.
+| `'not foo'` | without a `foo` option selected.
+| `['foo', 'bar']` | with `foo` or `bar` options selected.
+| `['and', 'foo', 'bar']` | with `foo` and `bar` options selected.
 
 ```twig
 {# Fetch entries with the 'foo' option selected #}
 {% set entries = craft.entries()
-    .<FieldHandle>('*"foo"*')
+    .<FieldHandle>('foo')
     .all() %}
 ```
 

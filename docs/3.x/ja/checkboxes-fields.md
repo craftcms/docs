@@ -16,15 +16,17 @@
 
 利用可能な値には、次のものが含まれます。
 
-| 値               | 取得するエレメント             |
-| --------------- | --------------------- |
-| `'*"foo"*'`     | `foo` オプションが選択されている。  |
-| `'not *"foo"*'` | `foo` オプションが選択されていない。 |
+| 値 | 取得するエレメント
+| - | -
+| `'foo'` | `foo` オプションが選択されている。
+| `'not foo'` | `foo` オプションが選択されていない。
+| `['foo', 'bar']` | with `foo` or `bar` options selected.
+| `['and', 'foo', 'bar']` | with `foo` and `bar` options selected.
 
 ```twig
 {# Fetch entries with the 'foo' option checked #}
 {% set entries = craft.entries()
-    .<FieldHandle>('*"foo"*')
+    .<FieldHandle>('foo')
     .all() %}
 ```
 
