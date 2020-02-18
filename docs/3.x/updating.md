@@ -8,6 +8,10 @@ This section displays both Craft CMS updates and plugin updates. Each update has
 
 You can run all of the updates (Craft, all plugin updates available) using the Update All button at the top left of the Updates page.
 
+::: tip
+Craft’s [changelog](https://github.com/craftcms/cms/blob/master/CHANGELOG-v3.md) will warn you of any critical changes at the top of the release notes. While there aren’t usually any warnings, it’s always a good idea to check before updating.
+:::
+
 ## Updating from the Terminal
 
 Craft 3.0.38 and 3.1.4 introduced a new `update` console command that can be used to update Craft and plugins.
