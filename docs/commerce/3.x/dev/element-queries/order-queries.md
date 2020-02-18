@@ -60,6 +60,7 @@ Order queries support the following parameters:
 - [clearCachedResult](#clearcachedresult)
 - [customer](#customer)
 - [customerId](#customerid)
+- [dateAuthorized](#dateauthorized)
 - [dateCreated](#datecreated)
 - [dateOrdered](#dateordered)
 - [datePaid](#datepaid)
@@ -212,6 +213,41 @@ Possible values include:
 $user = Craft::$app->user->getIdentity();
 $orders = \craft\commerce\elements\Order::find()
     ->customerId($user->customerFieldHandle->id)
+    ->all();
+```
+:::
+
+
+### `dateAuthorized`
+
+Narrows the query results based on the orders’ authorized dates.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `'>= 2018-04-01'` | that were authorized on or after 2018-04-01.
+| `'< 2018-05-01'` | that were authorized before 2018-05-01
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were completed between 2018-04-01 and 2018-05-01.
+
+
+
+::: code
+```twig
+{# Fetch orders that were authorized recently #}
+{% set aWeekAgo = date('7 days ago')|atom %}
+
+{% set orders = craft.orders()
+    .dateAuthorized(">= #{aWeekAgo}")
+    .all() %}
+```
+
+```php
+// Fetch orders that were authorized recently
+$aWeekAgo = new \DateTime('7 days ago')->format(\DateTime::ATOM);
+
+$orders = \craft\commerce\elements\Order::find()
+    ->dateAuthorized(">= {$aWeekAgo}")
     ->all();
 ```
 :::

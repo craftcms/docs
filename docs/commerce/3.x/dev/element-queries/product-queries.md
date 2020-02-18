@@ -681,7 +681,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a `\craft\commerce\elements\db\Site` object | from the site represented by the object.
+| a [craft\models\Site](https://docs.craftcms.com/api/v3/craft-models-site.html) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip
