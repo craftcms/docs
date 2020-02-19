@@ -53,17 +53,18 @@ Use the table below to update your twig templates.
 D - Deprecated
 BC - Breaking Change
 
-| Old                                       | New                                                          | Change |
-| ----------------------------------------- | ------------------------------------------------------------ | ------ |
-| `craft.commerce.carts.cart(true, true)`   | `craft.commerce.carts.cart(true)`                            | BC     |
-| `craft.commerce.carts.cart(false, true)`  | `craft.commerce.carts.cart(false)`                           | BC     |
-| `craft.commerce.availableShippingMethods` | `cart.availableShippingMethod`                               | BC     |
-| `craft.commerce.cart`                     | `craft.commerce.carts.cart`                                  | BC     |
-| `craft.commerce.countriesList`            | `craft.commerce.countries.allStatesAsListGroupedByCountryId` | BC     |
-| `craft.commerce.customer`                 | `craft.commerce.customers.customer`                          | BC     |
-| `craft.commerce.discountByCode`           | `craft.commerce.discounts.discountByCode`                    | BC     |
-| `craft.commerce.primaryPaymentCurrency`   | `craft.commerce.paymentCurrencies.primaryPaymentCurrency`    | BC     |
-| `craft.commerce.statesArray`              | `craft.commerce.states.allStatesAsList`                      | BC     |
+| Old                                       | New                                                                 | Change |
+| ----------------------------------------- | ------------------------------------------------------------------- | ------ |
+| `craft.commerce.carts.cart(true, true)`   | `craft.commerce.carts.cart(true)`                                   | BC     |
+| `craft.commerce.carts.cart(false, true)`  | `craft.commerce.carts.cart(false)`                                  | BC     |
+| `craft.commerce.availableShippingMethods` | `cart.availableShippingMethod`                                      | BC     |
+| `craft.commerce.cart`                     | `craft.commerce.carts.cart`                                         | BC     |
+| `craft.commerce.countriesList`            | `craft.commerce.countries.allCountriesAsList`                       | BC     |
+| `craft.commerce.customer`                 | `craft.commerce.customers.customer`                                 | BC     |
+| `craft.commerce.discountByCode`           | `craft.commerce.discounts.discountByCode`                           | BC     |
+| `craft.commerce.primaryPaymentCurrency`   | `craft.commerce.paymentCurrencies.primaryPaymentCurrency`           | BC     |
+| `craft.commerce.statesArray`              | `craft.commerce.states.allStatesAsList`                             | BC     |
+| `craft.commerce.states.allStatesAsList`          | `craft.commerce.states.getAllEnabledStatesAsListGroupedByCountryId` | BC     |
 
 ## Form Action Changes
 
