@@ -80,14 +80,10 @@ These variables are explained [here](../framework/config-options.md)
 Create a `.env` file in `tests/` and ensure the following variables are setup:
 
 ```dotenv
-DB_DRIVER=""
-DB_SERVER=""
-DB_USER=""
+DB_DSN="mysql:host=<host>;port=<port>;dbname=<dbname>"
+DB_USER="root"
 DB_PASSWORD=""
-DB_DATABASE=""
-DB_SCHEMA=""
 DB_TABLE_PREFIX=""
-DB_PORT=""
 SECURITY_KEY=""
 DEFAULT_SITE_URL="https://your-site-url.test/" # Set this to the `entryUrl` param in the `codeception.yml` file.
 ```
