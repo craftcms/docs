@@ -29,7 +29,7 @@ Possible values include:
 {% set end = now|date_modify('+1 month')|atom %}
 
 {% set entries = craft.entries()
-    .<FieldHandle>('and', ">= #{start}", "< #{end}")
+    .<FieldHandle>(['and', ">= #{start}", "< #{end}"])
     .all() %}
 ```
 
