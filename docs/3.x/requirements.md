@@ -41,6 +41,10 @@ Some shared hosting environments will disable certain common PHP methods and con
 * [allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen) - Craft requires PHP configuration to be enabled for updating and installing plugins from the Plugin Store.
 * [proc_*](http://php.net/manual/en/ref.exec.php) - The PHP `proc_` methods must be enabled in order to utilize the Plugin Store and to be able to send emails.
 
+## Optional Extras
+
+* [Composer 1.30+](https://docs.craftcms.com/v3/installation.html#downloading-with-composer) - When installing Craft with Composer
+
 ## Required Database User Privileges
 
 The database user you tell Craft to connect with must have the following privileges:

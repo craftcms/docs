@@ -52,7 +52,7 @@ Defined by
 
 
 
-The URI segment Craft should look for when determining if the current request should first be routed to a
+The URI segment Craft should look for when determining if the current request should be routed to a
 controller action.
 
 
@@ -73,7 +73,7 @@ Defined by
 
 
 
-The URI that users without access to the Control Panel should be redirected to after activating their account.
+The URI that users without access to the control panel should be redirected to after activating their account.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -133,6 +133,10 @@ Defined by
 
 :   [GeneralConfig::$allowAdminChanges](api:craft\config\GeneralConfig::$allowAdminChanges)
 
+Since
+
+:   3.1.0
+
 
 
 Whether admins should be allowed to make administrative changes to the system.
@@ -140,7 +144,7 @@ Whether admins should be allowed to make administrative changes to the system.
 If this is disabled, the Settings and Plugin Store sections will be hidden,
 the Craft edition and Craft/plugin versions will be locked, and the project config will become read-only.
 
-Therefore you should only disable this in production environments when [useProjectConfigFile](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#useprojectconfigfile) is enabled,
+Therefore you should only disable this in production environments when <config:useProjectConfigFile> is enabled,
 and you have a deployment workflow that runs `composer install` automatically on deploy.
 
 ::: warning
@@ -185,9 +189,9 @@ Defined by
 
 
 
-Whether Craft should allow system and plugin updates in the Control Panel, and plugin installation from the Plugin Store.
+Whether Craft should allow system and plugin updates in the control panel, and plugin installation from the Plugin Store.
 
-This setting will automatically be disabled if [allowAdminChanges](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#allowadminchanges) is disabled.
+This setting will automatically be disabled if <config:allowAdminChanges> is disabled.
 
 
 
@@ -322,12 +326,12 @@ Defined by
 
 
 
-The base URL that Craft should use when generating Control Panel URLs.
+The base URL that Craft should use when generating control panel URLs.
 
 It will be determined automatically if left blank.
 
 ::: tip
-The base CP URL should **not** include the [CP trigger word](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#cptrigger) (e.g. `/admin`).
+The base control panel URL should **not** include the [control panel trigger word](config:cpTrigger) (e.g. `/admin`).
 :::
 
 
@@ -465,7 +469,7 @@ Defined by
 
 
 
-The URI segment Craft should look for when determining if the current request should route to the Control Panel rather than
+The URI segment Craft should look for when determining if the current request should route to the control panel rather than
 the front-end website.
 
 
@@ -486,7 +490,7 @@ Defined by
 
 
 
-The name of CSRF token used for CSRF validation if [enableCsrfProtection](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablecsrfprotection) is set to `true`.
+The name of CSRF token used for CSRF validation if <config:enableCsrfProtection> is set to `true`.
 
 
 
@@ -528,7 +532,7 @@ Defined by
 
 
 
-The default language the Control Panel should use for users who haven’t set a preferred language yet.
+The default language the control panel should use for users who haven’t set a preferred language yet.
 
 
 
@@ -756,6 +760,10 @@ Defined by
 
 :   [GeneralConfig::$disabledPlugins](api:craft\config\GeneralConfig::$disabledPlugins)
 
+Since
+
+:   3.1.9
+
 
 
 Array of plugin handles that should be disabled, regardless of what the project config says.
@@ -808,9 +816,9 @@ Defined by
 
 
 
-Whether to use a cookie to persist the CSRF token if [enableCsrfProtection](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablecsrfprotection) is enabled. If false, the CSRF token
+Whether to use a cookie to persist the CSRF token if <config:enableCsrfProtection> is enabled. If false, the CSRF token
 will be stored in session under the `csrfTokenName` config setting name. Note that while storing CSRF tokens in
-session increases security, it requires starting a session for every page that a CSRF token is need, which may
+session increases security, it requires starting a session for every page that a CSRF token is needed, which may
 degrade site performance.
 
 
@@ -849,11 +857,45 @@ Defined by
 
 :   [GeneralConfig::$enableGql](api:craft\config\GeneralConfig::$enableGql)
 
+Since
+
+:   3.3.1
+
 
 
 Whether the GraphQL API should be enabled.
 
 Note that the GraphQL API is only available for Craft Pro.
+
+
+
+### `enableGraphQlCaching`
+
+Allowed types
+
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+
+:   `true`
+
+Defined by
+
+:   [GeneralConfig::$enableGraphQlCaching](api:craft\config\GeneralConfig::$enableGraphQlCaching)
+
+Since
+
+:   3.3.12
+
+
+
+Whether Craft should cache GraphQL queries.
+
+If set to `true`, Craft will cache the results for unique GraphQL queries per access token. The cache is
+automatically invalidated any time an element is saved, the site structure is updated, or a GraphQL schema is saved.
+
+This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v3/craft-services-gql.html#event-before-execute-gql-query) event to provide
+its own caching logic and setting the `result` property.
 
 
 
@@ -916,7 +958,7 @@ Defined by
 
 
 
-List of file extensions that will be merged into the [allowedFileExtensions](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#allowedfileextensions) config setting.
+List of file extensions that will be merged into the <config:allowedFileExtensions> config setting.
 
 
 
@@ -933,6 +975,10 @@ Default value
 Defined by
 
 :   [GeneralConfig::$extraAppLocales](api:craft\config\GeneralConfig::$extraAppLocales)
+
+Since
+
+:   3.0.24
 
 
 
@@ -957,10 +1003,14 @@ Defined by
 
 :   [GeneralConfig::$extraFileKinds](api:craft\config\GeneralConfig::$extraFileKinds)
 
+Since
+
+:   3.0.37
+
 
 
 List of additional file kinds Craft should support. This array
-will get merged with the one defined in `\craft\config\craft\helpers\Assets::_buildFileKinds()`.
+will get merged with the one defined in `\craft\helpers\Assets::_buildFileKinds()`.
 
 ```php
 'extraFileKinds' => [
@@ -978,7 +1028,7 @@ will get merged with the one defined in `\craft\config\craft\helpers\Assets::_bu
 
 ::: tip
 File extensions listed here won’t immediately be allowed to be uploaded. You will also need to list them with
-the [extraAllowedFileExtensions](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#extraallowedfileextensions) config setting.
+the <config:extraAllowedFileExtensions> config setting.
 :::
 
 
@@ -1037,19 +1087,25 @@ Defined by
 
 :   [GeneralConfig::$headlessMode](api:craft\config\GeneralConfig::$headlessMode)
 
+Since
+
+:   3.3.0
+
 
 
 Bool Whether the system should run in Headless Mode, which
-optimizes the system and Control Panel for headless CMS implementations.
+optimizes the system and control panel for headless CMS implementations.
 
 When this is enabled, the following changes will take place:
 
-- URI Format settings for sections and category groups will be hidden.
+- Template settings for sections and category groups will be hidden.
 - Template route management will be hidden.
 - Front-end routing will skip checks for element and template requests.
 - Front-end responses will be JSON-formatted rather than HTML by default.
 - Twig will be configured to escape unsafe strings for JavaScript/JSON
   rather than HTML by default for front-end requests.
+- The <config:loginPath>, <config:logoutPath>, <config:setPasswordPath>, and
+  <config:verifyEmailPath> settings will be ignored.
 
 
 
@@ -1227,6 +1283,8 @@ Defined by
 
 The URI Craft should use for user login on the front-end.
 
+This can be set to `false` to disable front-end login.
+
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
@@ -1249,7 +1307,30 @@ Defined by
 
 The URI Craft should use for user logout on the front-end.
 
+This can be set to `false` to disable front-end logout.
+
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+
+
+### `maxBackups`
+
+Allowed types
+
+:   [integer](http://php.net/language.types.integer), [false](http://php.net/language.types.boolean)
+
+Default value
+
+:   `20`
+
+Defined by
+
+:   [GeneralConfig::$maxBackups](api:craft\config\GeneralConfig::$maxBackups)
+
+
+
+The number of backups that Craft should make before it starts deleting the oldest backups.
+If it is set to `false`, then Craft will not delete any backups.
 
 
 
@@ -1308,6 +1389,10 @@ Default value
 Defined by
 
 :   [GeneralConfig::$maxRevisions](api:craft\config\GeneralConfig::$maxRevisions)
+
+Since
+
+:   3.2.0
 
 
 
@@ -1437,7 +1522,7 @@ Example Value | Example URI
 `?page` | `/news?page=5`
 
 ::: tip
-If you want to set this to `?p` (e.g. `/news?p=5`), you will need to change your [pathParam](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#pathparam) setting as well,
+If you want to set this to `?p` (e.g. `/news?p=5`), you will need to change your <config:pathParam> setting as well,
 which is set to `p` by default, and if your server is running Apache, you will need to update the redirect code
 in your `.htaccess` file to match your new `pathParam` value.
 :::
@@ -1528,10 +1613,10 @@ Defined by
 
 
 
-The path that users should be redirected to after logging in from the Control Panel.
+The path that users should be redirected to after logging in from the control panel.
 
-This setting will also come into effect if the user visits the CP’s Login page (`/admin/login`)
-or the CP’s root URL (/admin) when they are already logged in.
+This setting will also come into effect if a user visits the control panel’s Login page (`/admin/login`)
+or the control panel’s root URL (/admin) when they are already logged in.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -1597,6 +1682,10 @@ Default value
 Defined by
 
 :   [GeneralConfig::$preserveCmykColorspace](api:craft\config\GeneralConfig::$preserveCmykColorspace)
+
+Since
+
+:   3.0.8
 
 
 
@@ -1670,7 +1759,7 @@ Defined by
 
 
 
-When set to `false` and you go through the "forgot password" workflow on the Control Panel login page, for example,
+When set to `false` and you go through the "forgot password" workflow on the control panel login page, for example,
 you get distinct messages saying if the username/email didn't exist or the email was successfully sent and to check
 your email for further instructions. This can allow for username/email enumeration based on the response. If set
 `true`, you will always get a successful response even if there was an error making it difficult to enumerate users.
@@ -1740,6 +1829,10 @@ Defined by
 
 :   [GeneralConfig::$purgeStaleUserSessionDuration](api:craft\config\GeneralConfig::$purgeStaleUserSessionDuration)
 
+Since
+
+:   3.3.0
+
 
 
 The amount of time to wait before Craft purges stale user sessions from the sessions table in the database.
@@ -1763,6 +1856,10 @@ Default value
 Defined by
 
 :   [GeneralConfig::$purgeUnsavedDraftsDuration](api:craft\config\GeneralConfig::$purgeUnsavedDraftsDuration)
+
+Since
+
+:   3.2.0
 
 
 
@@ -1790,7 +1887,7 @@ Defined by
 
 
 
-The amount of time Craft will remember a username and pre-populate it on the CP login page.
+The amount of time Craft will remember a username and pre-populate it on the control panel’s Login page.
 
 Set to `0` to disable this feature altogether.
 
@@ -1879,7 +1976,7 @@ Defined by
 
 
 
-The path to the root directory that should store published CP resources.
+The path to the root directory that should store published control panel resources.
 
 
 
@@ -1899,7 +1996,7 @@ Defined by
 
 
 
-The URL to the root directory that should store published CP resources.
+The URL to the root directory that should store published control panel resources.
 
 
 
@@ -1973,18 +2070,20 @@ Defined by
 
 
 
-Whether Craft should run pending queue jobs automatically over HTTP requests.
+Whether Craft should run pending queue jobs automatically when someone visits the control panel.
 
+If disabled, an alternate queue worker *must* be set up separately, either as an
+[always-running daemon](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/worker.md), or a
+cron job that runs the `queue/run` command every minute:
+
+```cron
+* * * * * /path/to/project/craft queue/run
+```
+
+::: tip
 This setting should be disabled for servers running Win32, or with Apache’s mod_deflate/mod_gzip installed,
 where PHP’s [flush()](http://php.net/manual/en/function.flush.php) method won’t work.
-
-If disabled, an alternate queue runner *must* be set up separately.
-
-Here is an example of how you would setup a queue runner from a cron job that ran every minute:
-
-```text
-/1 * * * * /path/to/project/root/craft queue/run
-```
+:::
 
 
 
@@ -2148,9 +2247,13 @@ Defined by
 
 
 
-The password-reset template path. Note that this only affects front-end site requests.
+The URI Craft should use for Set Password forms on the front-end.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+::: tip
+You might also want to set <config:invalidUserTokenPath> in case a user clicks on an expired password reset link.
+:::
 
 
 
@@ -2218,7 +2321,7 @@ The base URL to the site(s). If set, it will take precedence over the Base URL s
 
 This can be set to a string, which will override the primary site’s base URL only, or an array with site handles used as the keys.
 
-The URL(s) must begin with either `http://`, `https://`, `//` (protocol-relative), or an [alias](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#aliases).
+The URL(s) must begin with either `http://`, `https://`, `//` (protocol-relative), or an [alias](config:aliases).
 
 ```php
 'siteUrl' => [
@@ -2263,6 +2366,10 @@ Defined by
 
 :   [GeneralConfig::$softDeleteDuration](api:craft\config\GeneralConfig::$softDeleteDuration)
 
+Since
+
+:   3.1.0
+
 
 
 The amount of time before a soft-deleted item will be up for hard-deletion by garbage collection.
@@ -2286,6 +2393,10 @@ Default value
 Defined by
 
 :   [GeneralConfig::$storeUserIps](api:craft\config\GeneralConfig::$storeUserIps)
+
+Since
+
+:   3.1.0
 
 
 
@@ -2372,6 +2483,10 @@ Defined by
 
 :   [GeneralConfig::$transformGifs](api:craft\config\GeneralConfig::$transformGifs)
 
+Since
+
+:   3.0.7
+
 
 
 Whether GIF files should be cleansed/transformed.
@@ -2420,6 +2535,30 @@ The configuration for trusted security-related headers.
 See [yii\web\Request::$trustedHosts](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$trustedHosts-detail) for more details.
 
 By default, all hosts are trusted.
+
+
+
+### `upscaleImages`
+
+Allowed types
+
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+
+:   `true`
+
+Defined by
+
+:   [GeneralConfig::$upscaleImages](api:craft\config\GeneralConfig::$upscaleImages)
+
+Since
+
+:   3.4.0
+
+
+
+Whether images should be upscaled if the provided transform size is larger than the image.
 
 
 
@@ -2506,7 +2645,7 @@ Defined by
 
 Whether Craft should specify the path using `PATH_INFO` or as a query string parameter when generating URLs.
 
-Note that this setting only takes effect if [omitScriptNameInUrls](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#omitscriptnameinurls) is set to false.
+Note that this setting only takes effect if <config:omitScriptNameInUrls> is set to false.
 
 
 
@@ -2523,6 +2662,10 @@ Default value
 Defined by
 
 :   [GeneralConfig::$useProjectConfigFile](api:craft\config\GeneralConfig::$useProjectConfigFile)
+
+Since
+
+:   3.1.0
 
 
 
@@ -2634,6 +2777,32 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 
 
+### `verifyEmailPath`
+
+Allowed types
+
+:   `mixed`
+
+Default value
+
+:   `'verifyemail'`
+
+Defined by
+
+:   [GeneralConfig::$verifyEmailPath](api:craft\config\GeneralConfig::$verifyEmailPath)
+
+Since
+
+:   3.4.0
+
+
+
+The URI Craft should use for email verification links on the front-end.
+
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+
+
 ### `verifyEmailSuccessPath`
 
 Allowed types
@@ -2648,9 +2817,13 @@ Defined by
 
 :   [GeneralConfig::$verifyEmailSuccessPath](api:craft\config\GeneralConfig::$verifyEmailSuccessPath)
 
+Since
+
+:   3.1.20
 
 
-The URI that users without access to the Control Panel should be redirected to after verifying a new email address.
+
+The URI that users without access to the control panel should be redirected to after verifying a new email address.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 

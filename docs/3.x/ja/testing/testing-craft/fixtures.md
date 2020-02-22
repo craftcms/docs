@@ -1,23 +1,31 @@
-# Fixtures
-Fixtures are used to setup data in a test suite that is predictable and the same for each test run (so assertions can be conducted based on this data). They can be defined in the `fixturesMethod` [defined](../framework/config-options.md) in the `codeception.yml` file. In the [Yii2 docs](https://www.yiiframework.com/doc/guide/2.0/en/test-fixtures#defining-a-fixture) you can read about fixture classes and fixture data as well as how these can be setup/used for testing.
+# Using Fixtures
 
-To setup fixtures Create a folder called `fixtures` in your `tests` folder. In this folder we will put our fixture classes and fixture data
+Fixtures are used to setup data in a test suite that is predictable and the same for each test run (so assertions can be conducted based on this data).
 
-## Craft specific data
+They can be defined in the `fixturesMethod` [defined](../framework/config-options.md) in the `codeception.yml` file. In the [Yii2 docs](https://www.yiiframework.com/doc/guide/2.0/en/test-fixtures#defining-a-fixture) you can read about fixture classes and fixture data as well as how these can be setup/used for testing.
+
+To setup fixtures Create a folder called `fixtures` in your `tests` folder. In this folder we will put our fixture classes and fixture data.
+
+## Craft-specific data
+
 For traditional database rows regular fixtures will suffice. However Craft introduces several concepts of its own, these come attached to some complicated linked data structures that are very difficult to manage with regular fixtures.
 
 ### Element fixtures
-Element types are one of Craft's main selling points for developers. They yield a lot of power. That power is courtesy of a complicated data structure and set of api's. A by-product of this is that some heavy lifting is required if element types are to be defined in a single fixture and data file. For this reason support is provided out of the box for setting up various element types.
 
-Provide your own custom element type? You can extend `craft\test\fixtures\elements\ElementFixture` to provide developers using your module/plugin support for their testing code - or just provide yourself support for testing your own module/plugin.
+Element types are one of Craft’s main selling points for developers. They yield a lot of power. That power is courtesy of a complicated data structure and set of APIs. A by-product of this is that some heavy lifting is required if element types are to be defined in a single fixture and data file. For this reason support is provided out of the box for setting up various element types.
+
+Provide your own custom element type?
+You can extend `craft\test\fixtures\elements\ElementFixture` to provide developers using your module/plugin support
+for their testing code - or just provide yourself support for testing your own module/plugin.
 
 ::: tip
-Craft's element fixtures are based on the excellent team over at [robuust](https://robuust.digital/) and their `craft-fixtures` [plugin](https://github.com/robuust/craft-fixtures).
+Craft’s element fixtures are based on the excellent team over at [robuust](https://robuust.digital/)
+and their `craft-fixtures` [plugin](https://github.com/robuust/craft-fixtures).
 :::
 
 ### `Asset fixtures`
 
-If you want to add fixtures for assets. Extend `craft\test\fixtures\elements\AssetFixture`
+If you want to add fixtures for Assets, extend `craft\test\fixtures\elements\AssetFixture`.
 
 The fixture data file could look like this:
 
@@ -36,14 +44,15 @@ return [
 
 `product.jpg` (and any of your other testing assets) should live in the `tests/_craft/assets` folder.
 
-This will upload and link product.jpg as an asset.
+This will upload and link `product.jpg` as an asset.
 
 `AssetFixture` will define `$this->volumeIds` and `$this->folderIds` with their handles as key.
 
 The primary keys are: `volumeId`, `folderId`, `filename` and `title`.
 
 ::: warning
-The `AssetFixture` class will automatically copy your assets into the `tests/_craft/storage/runtime/temp` folder. Please ensure that the `tempFilePath` points to a filename this directory.
+The `AssetFixture` class will automatically copy your assets into the `tests/_craft/storage/runtime/temp` folder.
+Please ensure that the `tempFilePath` points to a filename this directory.
 :::
 
 ### `Category fixtures`
@@ -89,7 +98,6 @@ return [
 
 The primary keys are: `siteId`, `sectionId`, `typeId` and `title`.
 
-
 ### `Global set fixture`
 
 Extend `craft\test\fixtures\elements\GlobalSetFixture` to add Global Sets.
@@ -109,7 +117,7 @@ return [
 The primary keys are: `handle`.
 
 ::: tip
-Global set's do not get their own database row by default. If you need the Global Sets to have their own database row you can set the `$useActiveRecord` to true.
+Global sets do not get their own database row by default. If you need the Global Sets to have their own database row you can set `$useActiveRecord` to `true`.
 :::
 
 ### `Tag fixtures`
@@ -154,15 +162,17 @@ The primary keys are: `siteId`, `username` and `email`.
 
 ### Element fixture field layout and content.
 
-If you pass a `fieldLayoutType` into any class that extends the base `ElementFixture` class, Craft will automatically try to find the associated field layout and link it to the new Element you are creating.
+If you pass a `fieldLayoutType` into any class that extends the base `ElementFixture` class, Craft will automatically try to find the associated field layout and link it to the new Element you’re creating.
 
-If you want to set custom field values you can simply include those into your fixture data file (the examples as shown above). Here's an example of a fixture data file that is creating an entry with a title and some custom fields:
+If you want to set custom field values you can simply include those into your fixture data file (the examples as shown above).
 
-````php
+Here’s an example of a fixture data file that is creating an entry with a title and some custom fields:
+
+```php
 <?php
 return [
     [
-        // Standard `craft\elements\Entry` fields. 
+        // Standard `craft\elements\Entry` fields.
         'authorId' => '1',
         'sectionId' => '1000',
         'typeId' => '1000',
@@ -194,19 +204,21 @@ return [
     ]
 ];
 
-````
+```
 
 ### Field layout fixtures
-Another Craft specific concept is field layouts. Field layouts consist of
+
+Another Craft specific concept is field layouts. Field layouts consist of:
+
 - The layouts themselves
 - Tabs
 - Fields
 
-All of which are linked together, and would be very difficult to manage in a test environment with ordinary fixtures. For this reason Craft provides a special `craft\test\fixtures\FieldLayoutFixture` class that provides all the required support to setup field layouts, the tabs and the underlying fields, including creating the fields in the `{{%content}}` table.
+All of which are linked together, and would be very difficult to manage in a test environment with ordinary fixtures. For this reason, Craft provides a special `craft\test\fixtures\FieldLayoutFixture` class that provides all the required support to setup field layouts, the tabs and the underlying fields, including creating the fields in the `{{%content}}` table.
 
 All you have to do is create an ordinary fixture class and extend `craft\test\fixtures\FieldLayoutFixture`.
 
-Then add the `public $dataFile = 'path/to/datafile/` property that points to a datafile containing at least the following keys (including the nested position)
+Then add the `public $dataFile = 'path/to/datafile/` property that points to a datafile containing at least the following keys (including the nested position).
 
 ```php
 <?php
@@ -214,7 +226,7 @@ use craft\fields\Matrix;
 
 return [
     [
-        'type' => 'craft\test\Craft', // Required - can be set to whatever you want. 
+        'type' => 'craft\test\Craft', // Required - can be set to whatever you want.
         'tabs' => [ // Required - Value can be set to an empty array[]
             [
                 'name' => 'Tab 1', // Required
@@ -229,7 +241,7 @@ return [
                             'fieldType' => SomeField::class, // Required
                         ]
                     ],
-                    // Even matrix fields are supported in the following config: 
+                    // Even matrix fields are supported in the following config:
                     [
                         'layout-link' => [
                             'required' => false
@@ -282,5 +294,6 @@ return [
 ```
 
 ::: tip
-The value part of the key-value pairs can be set to whatever is required for your project. What is crucial is that the array keys are set with **any** string value. You can add your own parameters to the array value of the `field` key - as long as they correspond to `public` properties in the class defined in the `fieldType` key.
+The value part of the key-value pairs can be set to whatever is required
+for your project. It’s crucial that the array keys are set with **any** string value. You can add your own parameters to the array value of the `field` key, as long as they correspond to `public` properties in the class defined in the `fieldType` key.
 :::

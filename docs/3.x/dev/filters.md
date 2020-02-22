@@ -144,10 +144,16 @@ This works identically to Twig’s core [`capitalize`](https://twig.symfony.com/
 
 ## `column`
 
-Returns the values from a single column in the input array.
+Returns the values from a single property or key in the input array.
 
 ```twig
 {% set entryIds = entries|column('id') %}
+```
+
+An arrow function can be passed instead, if the values that should be returned don’t exist as a property or key on the array elements.
+
+```twig
+{% set authorNames = entries|column(e => e.author.fullName) %}
 ```
 
 This works similarly to Twig’s core [`column`](https://twig.symfony.com/doc/2.x/filters/column.html) filter, except that [ArrayHelper::getColumn()](api:yii\helpers\BaseArrayHelper::getColumn()) is used rather than PHP’s [array_column()](https://secure.php.net/array_column) function.
@@ -333,11 +339,11 @@ This works identically to Twig’s core [`format`](https://twig.symfony.com/doc/
 
 ## `group`
 
-Groups the items of an array together based on common properties.
+Groups items in an array by a the results of an arrow function.
 
 ```twig
 {% set allEntries = craft.entries.section('blog').all() %}
-{% set allEntriesByYear = allEntries|group('postDate|date("Y")') %}
+{% set allEntriesByYear = allEntries|group(e => e.postDate|date('Y')) %}
 
 {% for year, entriesInYear in allEntriesByYear %}
     <h2>{{ year }}</h2>
@@ -526,7 +532,51 @@ This works identically to Twig’s core [`merge`](https://twig.symfony.com/doc/2
 
 ## `multisort`
 
-Sorts an array with [ArrayHelper::multisort()](api:yii\helpers\BaseArrayHelper::multisort()).
+Sorts an array by one or more properties or keys within an array’s values.
+
+To sort by a single property or key, pass its name as a string:
+
+```twig
+{% set entries = entries|multisort('title') %}
+```
+
+An arrow function can be passed instead, if the values that should be sorted by don’t exist as a property or key on the array elements.
+
+```twig
+{% set entries = entries|multisort(e => e.author.fullName) %}
+```
+
+To sort by multiple properties or keys, pass them in as an array. For example, this will sort entries by their author’s name first, and then by their title:
+
+```twig
+{% set entries = entries|multisort([
+    e => e.author.fullName,
+    'title',
+]) %}
+```
+
+The values will be sorted in ascending order by default. You can switch to descending order with the `direction` param:
+
+```twig
+{% set entries = entries|multisort('title', direction=SORT_DESC) %}
+```
+
+You can also customize which sorting behavior is used, with the `sortFlag` param. For example, to sort items numerically, use `SORT_NUMERIC`:
+
+```twig
+{% set entries = entries|multisort('id', sortFlag=SORT_NUMERIC) %}
+```
+
+See PHP’s [sort()](https://www.php.net/manual/en/function.sort.php) documentation for the available sort flags.
+
+When sorting by multiple properties or keys, you must set the `direction` and `sortFlag` params to arrays as well.
+
+```twig
+{% set entries = entries|multisort([
+    e => e.author.fullName,
+    'title',
+], sortFlag=[SORT_FLAG_CASE, SORT_FLAG_CASE]) %}
+```
 
 ## `nl2br`
 

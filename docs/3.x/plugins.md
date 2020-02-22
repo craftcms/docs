@@ -34,7 +34,7 @@ Once you’ve completed the checkout process, your plugin installation will auto
 
 ## Managing Plugin Licenses
 
-You can managed all of your plugin licenses from your [Craft ID](https://id.craftcms.com/) account, under Licenses → Plugins
+You can manage all of your plugin licenses from your [Craft ID](https://id.craftcms.com/) account, under Licenses → Plugins
 
 If you don’t have a Craft ID account yet, you can create one by going to [id.craftcms.com/register](https://id.craftcms.com/register).
 

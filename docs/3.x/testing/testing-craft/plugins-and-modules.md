@@ -1,18 +1,14 @@
-# Modules & Plugins
+# Testing Modules & Plugins
 
-## Modules
-Setting up modules for testing is quite simple. In your config directory ensure 
-an `app.php` is present. Once this file exists you register your Module exactly 
-[how you would](../../extend/module-guide.md) 
-do this for a normal Craft project. Once setup, modules will be loaded in your test suite
-and available through the `MyModule::getInstance()` call. 
+## Testing Modules
 
-## Plugins
-Plugins must be registered via the `codeception.yml` file in accordance with the
-[configuration options](../framework/config-options.md#plugins).
-Once it is registered the plugin will be installed and available through the 
-`MyPlugin::getInstance()` call. 
+Setting up modules for testing is quite simple. Ensure that an `app.php` is present in your config directory. Once this file exists you’ll register your module exactly [how you would](../../extend/module-guide.md) for a normal Craft project. Once setup, modules will be loaded in your test suite and available via `MyModule::getInstance()`.
+
+## Testing Plugins
+
+Plugins must be registered via the `codeception.yml` file in accordance with the [configuration options](../framework/config-options.md#plugins). Once it’s registered the plugin will be installed and available via
+`MyPlugin::getInstance()`.
 
 ::: tip
-Unsure how to setup tests for your Module/Plugin? [Click here](getting-started.md)
+Unsure where to start with tests for your module or plugin? See [Getting Started](getting-started.md).
 :::

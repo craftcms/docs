@@ -88,7 +88,7 @@ If you want to be a little more specific, `relatedTo` also accepts an object tha
 
 * `element`, `sourceElement`, or `targetElement`
 * `field` _(optional)_
-* `sourceLocale` _(optional)_
+* `sourceSite` _(optional)_
 
 Set the first property’s key depending on what you want to get back:
 
@@ -105,12 +105,12 @@ Set the `field` property if you want to limit the scope to relations created by 
 }) %}
 ```
 
-Set the `sourceLocale` property if you want to limit the scope to relations created from a particular field. (Only do this if you set your relational field to be translatable.) You can set this to a locale ID.
+Set the `sourceSite` property if you want to limit the scope to relations created from a particular site. (Only do this if you set your relational field to be translatable.) You can set this to a site ID.
 
 ```twig
 {% set ingredients = craft.entries.section('ingredients').relatedTo({
     sourceElement: drink,
-    sourceLocale: craft.app.language
+    sourceSite: craft.app.sites.currentSite.id
 }) %}
 ```
 
@@ -130,7 +130,7 @@ If you want to find elements related to a source element through a [Matrix](matr
 There might be times when you need to factor multiple types of relations into the mix. For example, outputting all of the current user’s favorite drinks that include espresso:
 
 ```twig
-{% set espresso = craft.entries.section('ingredients').slug('espresso').first() %}
+{% set espresso = craft.entries.section('ingredients').slug('espresso').one() %}
 
 {% set cocktails = craft.entries.section('drinks').relatedTo(['and',
     { sourceElement: currentUser, field: 'favoriteDrinks' },

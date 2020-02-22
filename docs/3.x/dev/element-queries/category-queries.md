@@ -57,6 +57,47 @@ Category queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+- [ancestorDist](#ancestordist)
+- [ancestorOf](#ancestorof)
+- [anyStatus](#anystatus)
+- [asArray](#asarray)
+- [clearCachedResult](#clearcachedresult)
+- [dateCreated](#datecreated)
+- [dateUpdated](#dateupdated)
+- [descendantDist](#descendantdist)
+- [descendantOf](#descendantof)
+- [enabledForSite](#enabledforsite)
+- [fixedOrder](#fixedorder)
+- [group](#group)
+- [groupId](#groupid)
+- [hasDescendants](#hasdescendants)
+- [id](#id)
+- [ignorePlaceholders](#ignoreplaceholders)
+- [inReverse](#inreverse)
+- [leaves](#leaves)
+- [level](#level)
+- [limit](#limit)
+- [nextSiblingOf](#nextsiblingof)
+- [offset](#offset)
+- [orderBy](#orderby)
+- [positionedAfter](#positionedafter)
+- [positionedBefore](#positionedbefore)
+- [preferSites](#prefersites)
+- [prevSiblingOf](#prevsiblingof)
+- [relatedTo](#relatedto)
+- [search](#search)
+- [siblingOf](#siblingof)
+- [site](#site)
+- [siteId](#siteid)
+- [slug](#slug)
+- [status](#status)
+- [title](#title)
+- [trashed](#trashed)
+- [uid](#uid)
+- [unique](#unique)
+- [uri](#uri)
+- [with](#with)
+
 ### `ancestorDist`
 
 Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
@@ -170,6 +211,15 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
+
+
+### `clearCachedResult`
+
+Clears the cached result.
+
+
+
+
 
 
 ### `dateCreated`
@@ -310,128 +360,6 @@ $categories = \craft\elements\Category::find()
 
 ::: tip
 This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant categories can be.
-:::
-
-
-### `draftCreator`
-
-Narrows the query results to only drafts created by a given user.
-
-
-
-Possible values include:
-
-| Value | Fetches drafts…
-| - | -
-| `1` | created by the user with an ID of 1.
-| a `\craft\elements\db\User` object | by the user represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch drafts by the current user #}
-{% set categories = craft.categories()
-    .draftCreator(currentUser)
-    .all() %}
-```
-
-```php
-// Fetch drafts by the current user
-$categories = \craft\elements\Category::find()
-    ->draftCreator(Craft::$app->user->identity)
-    ->all();
-```
-:::
-
-
-### `draftId`
-
-Narrows the query results based on the categories’ draft’s ID (from the `drafts` table).
-
-
-
-Possible values include:
-
-| Value | Fetches drafts…
-| - | -
-| `1` | for the draft with an ID of 1.
-
-
-
-::: code
-```twig
-{# Fetch a draft #}
-{% set categories = craft.categories()
-    .draftId(10)
-    .all() %}
-```
-
-```php
-// Fetch a draft
-$categories = \craft\elements\Category::find()
-    ->draftIf(10)
-    ->all();
-```
-:::
-
-
-### `draftOf`
-
-Narrows the query results to only drafts of a given category.
-
-
-
-Possible values include:
-
-| Value | Fetches drafts…
-| - | -
-| `1` | for the category with an ID of 1.
-| a [Category](api:craft\elements\Category) object | for the category represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch drafts of the category #}
-{% set categories = craft.categories()
-    .draftOf(myCategory)
-    .all() %}
-```
-
-```php
-// Fetch drafts of the category
-$categories = \craft\elements\Category::find()
-    ->draftOf($myCategory)
-    ->all();
-```
-:::
-
-
-### `drafts`
-
-Narrows the query results to only drafts categories.
-
-
-
-
-
-::: code
-```twig
-{# Fetch a draft category #}
-{% set categories = {twig-function}
-    .drafts()
-    .id(123)
-    .one() %}
-```
-
-```php
-// Fetch a draft category
-$categories = \craft\elements\Category::find()
-    ->drafts()
-    ->id(123)
-    ->one();
-```
 :::
 
 
@@ -986,128 +914,6 @@ $categories = \craft\elements\Category::find()
 :::
 
 
-### `revisionCreator`
-
-Narrows the query results to only revisions created by a given user.
-
-
-
-Possible values include:
-
-| Value | Fetches revisions…
-| - | -
-| `1` | created by the user with an ID of 1.
-| a `\craft\elements\db\User` object | by the user represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch revisions by the current user #}
-{% set categories = craft.categories()
-    .revisionCreator(currentUser)
-    .all() %}
-```
-
-```php
-// Fetch revisions by the current user
-$categories = \craft\elements\Category::find()
-    ->revisionCreator(Craft::$app->user->identity)
-    ->all();
-```
-:::
-
-
-### `revisionId`
-
-Narrows the query results based on the categories’ revision’s ID (from the `revisions` table).
-
-
-
-Possible values include:
-
-| Value | Fetches revisions…
-| - | -
-| `1` | for the revision with an ID of 1.
-
-
-
-::: code
-```twig
-{# Fetch a revision #}
-{% set categories = craft.categories()
-    .revisionId(10)
-    .all() %}
-```
-
-```php
-// Fetch a revision
-$categories = \craft\elements\Category::find()
-    ->revisionIf(10)
-    ->all();
-```
-:::
-
-
-### `revisionOf`
-
-Narrows the query results to only revisions of a given category.
-
-
-
-Possible values include:
-
-| Value | Fetches revisions…
-| - | -
-| `1` | for the category with an ID of 1.
-| a [Category](api:craft\elements\Category) object | for the category represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch revisions of the category #}
-{% set categories = craft.categories()
-    .revisionOf(myCategory)
-    .all() %}
-```
-
-```php
-// Fetch revisions of the category
-$categories = \craft\elements\Category::find()
-    ->revisionOf($myCategory)
-    ->all();
-```
-:::
-
-
-### `revisions`
-
-Narrows the query results to only revision categories.
-
-
-
-
-
-::: code
-```twig
-{# Fetch a revision category #}
-{% set categories = {twig-function}
-    .revisions()
-    .id(123)
-    .one() %}
-```
-
-```php
-// Fetch a revision category
-$categories = \craft\elements\Category::find()
-    ->revisions()
-    ->id(123)
-    ->one();
-```
-:::
-
-
 ### `search`
 
 Narrows the query results to only categories that match a search query.
@@ -1188,7 +994,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a `\craft\elements\db\Site` object | from the site represented by the object.
+| a [craft\models\Site](api:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip

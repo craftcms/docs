@@ -53,6 +53,64 @@ Entry queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+- [after](#after)
+- [ancestorDist](#ancestordist)
+- [ancestorOf](#ancestorof)
+- [anyStatus](#anystatus)
+- [asArray](#asarray)
+- [authorGroup](#authorgroup)
+- [authorGroupId](#authorgroupid)
+- [authorId](#authorid)
+- [before](#before)
+- [clearCachedResult](#clearcachedresult)
+- [dateCreated](#datecreated)
+- [dateUpdated](#dateupdated)
+- [descendantDist](#descendantdist)
+- [descendantOf](#descendantof)
+- [draftCreator](#draftcreator)
+- [draftId](#draftid)
+- [draftOf](#draftof)
+- [drafts](#drafts)
+- [enabledForSite](#enabledforsite)
+- [expiryDate](#expirydate)
+- [fixedOrder](#fixedorder)
+- [hasDescendants](#hasdescendants)
+- [id](#id)
+- [ignorePlaceholders](#ignoreplaceholders)
+- [inReverse](#inreverse)
+- [leaves](#leaves)
+- [level](#level)
+- [limit](#limit)
+- [nextSiblingOf](#nextsiblingof)
+- [offset](#offset)
+- [orderBy](#orderby)
+- [positionedAfter](#positionedafter)
+- [positionedBefore](#positionedbefore)
+- [postDate](#postdate)
+- [preferSites](#prefersites)
+- [prevSiblingOf](#prevsiblingof)
+- [relatedTo](#relatedto)
+- [revisionCreator](#revisioncreator)
+- [revisionId](#revisionid)
+- [revisionOf](#revisionof)
+- [revisions](#revisions)
+- [search](#search)
+- [section](#section)
+- [sectionId](#sectionid)
+- [siblingOf](#siblingof)
+- [site](#site)
+- [siteId](#siteid)
+- [slug](#slug)
+- [status](#status)
+- [title](#title)
+- [trashed](#trashed)
+- [type](#type)
+- [typeId](#typeid)
+- [uid](#uid)
+- [unique](#unique)
+- [uri](#uri)
+- [with](#with)
+
 ### `after`
 
 Narrows the query results to only entries that were posted on or after a certain date.
@@ -333,6 +391,15 @@ $entries = \craft\elements\Entry::find()
 :::
 
 
+### `clearCachedResult`
+
+Clears the cached result.
+
+
+
+
+
+
 ### `dateCreated`
 
 Narrows the query results based on the entries’ creation dates.
@@ -485,7 +552,7 @@ Possible values include:
 | Value | Fetches drafts…
 | - | -
 | `1` | created by the user with an ID of 1.
-| a `\craft\elements\db\User` object | by the user represented by the object.
+| a [craft\elements\User](api:craft\elements\User) object | created by the user represented by the object.
 
 
 
@@ -531,7 +598,7 @@ Possible values include:
 ```php
 // Fetch a draft
 $entries = \craft\elements\Entry::find()
-    ->draftIf(10)
+    ->draftId(10)
     ->all();
 ```
 :::
@@ -1167,7 +1234,7 @@ Possible values include:
 | Value | Fetches revisions…
 | - | -
 | `1` | created by the user with an ID of 1.
-| a `\craft\elements\db\User` object | by the user represented by the object.
+| a [craft\elements\User](api:craft\elements\User) object | created by the user represented by the object.
 
 
 
@@ -1423,7 +1490,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a `\craft\elements\db\Site` object | from the site represented by the object.
+| a [craft\models\Site](api:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip

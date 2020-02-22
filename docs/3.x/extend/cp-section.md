@@ -57,7 +57,7 @@ Your templates can specify which subnav item should be selected by setting a `se
 
 ## Plugin Sections
 
-Plugins that only need to add one section can set a `$hasCpSection` property on their primary plugin class, rather than using the [EVENT_REGISTER_CP_NAV_ITEMS](api:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) event:
+Plugins that only need to add one section can set the `$hasCpSection` property on their primary plugin class, rather than using the [EVENT_REGISTER_CP_NAV_ITEMS](api:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) event:
 
 ```php
 <?php

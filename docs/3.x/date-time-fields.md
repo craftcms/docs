@@ -8,7 +8,7 @@ Date/Time fields let you choose whether you want to show the date, the time, or 
 
 ## Templating
 
-### Querying Elements with Checkboxes Fields
+### Querying Elements with Date/Time Fields
 
 When [querying for elements](dev/element-queries/README.md) that have a Date/Time field, you can filter the results based on the Date/Time field data using a query param named after your field’s handle.
 
@@ -29,7 +29,7 @@ Possible values include:
 {% set end = now|date_modify('+1 month')|atom %}
 
 {% set entries = craft.entries()
-    .<FieldHandle>('and', ">= #{start}", "< #{end}")
+    .<FieldHandle>(['and', ">= #{start}", "< #{end}"])
     .all() %}
 ```
 
@@ -93,16 +93,21 @@ The [HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) polyfill can 
 
 #### Customizing the Timezone
 
-By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you you can post dates in a different timezone by changing the input name to `fields[<FieldHandle>][datetime]` and adding a hidden input named `fields[<FieldHandle>][timezone]`, set to a [valid PHP timezone](http://php.net/manual/en/timezones.php):
+By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you can post dates in a different timezone by changing the input name to `fields[<FieldHandle>][datetime]` and adding a hidden input named `fields[<FieldHandle>][timezone]`, set to a [valid PHP timezone](http://php.net/manual/en/timezones.php):
 
 ```twig
-{% set pt = 'America/Los_Angeles' %}
+{# Use the timezone selected under Settings → General Settings → Time Zone #}
+{% set tz = craft.app.getTimezone() %}
+
+{# Or set a specific timezone #}
+{% set tz = 'America/Los_Angeles' %}
+
 {% set currentValue = entry is defined and entry.<FieldHandle>
-    ? entry.<FieldHandle>|date('Y-m-d\\TH:i', timezone=pt)
+    ? entry.<FieldHandle>|date('Y-m-d\\TH:i', tz)
     : '' %}
 
 <input type="datetime-local" name="fields[<FieldHandle>][datetime]" value="{{ currentValue }}">
-{{ hiddenInput('fields[<FieldHandle>][timezone]', pt) }}
+{{ hiddenInput('fields[<FieldHandle>][timezone]', tz) }}
 ```
 
 Or you can let users decide which timezone the date should be posted in:

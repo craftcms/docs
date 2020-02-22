@@ -79,9 +79,53 @@ return [
 ];
 ```
 
+## Database Component
+
+If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component:
+
+```php
+<?php
+return [
+    'components' => [
+        'db' => function() {
+            // Get the default component config
+            $config = craft\helpers\App::dbConfig();
+
+            // Use read/write query splitting
+            // (https://www.yiiframework.com/doc/guide/2.0/en/db-dao#read-write-splitting)
+
+            // Define the default config for replica DB connections
+            $config['slaveConfig'] = [
+                'username' => getenv('DB_REPLICA_USER'),
+                'password' => getenv('DB_REPLICA_PASSWORD'),
+                'tablePrefix' => getenv('DB_TABLE_PREFIX'),
+                'attributes' => [
+                    // Use a smaller connection timeout
+                    PDO::ATTR_TIMEOUT => 10,
+                ],
+                'charset' => 'utf8',
+            ];
+
+            // Define the replica DB connections
+            $config['slaves'] = [
+                ['dsn' => getenv('DB_REPLICA_DSN_1')],
+                ['dsn' => getenv('DB_REPLICA_DSN_2')],
+                ['dsn' => getenv('DB_REPLICA_DSN_3')],
+                ['dsn' => getenv('DB_REPLICA_DSN_4')],
+            ];
+
+            // Instantiate and return it
+            return Craft::createObject($config);
+        },
+    ],
+];
+```
+
 ## Session Component
 
-In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location (e.g. Redis):
+In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location.
+
+#### Redis Example
 
 ```php
 <?php
@@ -96,6 +140,23 @@ return [
         'session' => [
             'class' => yii\redis\Session::class,
             'as session' => craft\behaviors\SessionBehavior::class,
+        ],
+    ],
+];
+```
+
+#### Database Example
+
+First, you must create the database table that will store PHP’s sessions. You can do that quickly but running the `craft setup/php-session` console command from your project’s root folder.
+
+```php
+<?php
+return [
+    'components' => [
+        'session' => [
+            'class' => yii\web\DbSession::class,
+            'as session' => craft\behaviors\SessionBehavior::class,
+            'sessionTable' => '{{%phpsessions}}'
         ],
     ],
 ];

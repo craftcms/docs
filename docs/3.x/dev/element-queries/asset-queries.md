@@ -51,6 +51,41 @@ Asset queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+- [anyStatus](#anystatus)
+- [asArray](#asarray)
+- [clearCachedResult](#clearcachedresult)
+- [dateCreated](#datecreated)
+- [dateModified](#datemodified)
+- [dateUpdated](#dateupdated)
+- [filename](#filename)
+- [fixedOrder](#fixedorder)
+- [folderId](#folderid)
+- [height](#height)
+- [id](#id)
+- [ignorePlaceholders](#ignoreplaceholders)
+- [inReverse](#inreverse)
+- [includeSubfolders](#includesubfolders)
+- [kind](#kind)
+- [limit](#limit)
+- [offset](#offset)
+- [orderBy](#orderby)
+- [preferSites](#prefersites)
+- [relatedTo](#relatedto)
+- [search](#search)
+- [site](#site)
+- [siteId](#siteid)
+- [size](#size)
+- [title](#title)
+- [trashed](#trashed)
+- [uid](#uid)
+- [unique](#unique)
+- [uploader](#uploader)
+- [volume](#volume)
+- [volumeId](#volumeid)
+- [width](#width)
+- [with](#with)
+- [withTransforms](#withtransforms)
+
 ### `anyStatus`
 
 Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
@@ -99,6 +134,15 @@ $assets = \craft\elements\Asset::find()
     ->all();
 ```
 :::
+
+
+### `clearCachedResult`
+
+Clears the cached result.
+
+
+
+
 
 
 ### `dateCreated`
@@ -212,128 +256,6 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
-### `draftCreator`
-
-Narrows the query results to only drafts created by a given user.
-
-
-
-Possible values include:
-
-| Value | Fetches drafts…
-| - | -
-| `1` | created by the user with an ID of 1.
-| a `\craft\elements\db\User` object | by the user represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch drafts by the current user #}
-{% set assets = craft.assets()
-    .draftCreator(currentUser)
-    .all() %}
-```
-
-```php
-// Fetch drafts by the current user
-$assets = \craft\elements\Asset::find()
-    ->draftCreator(Craft::$app->user->identity)
-    ->all();
-```
-:::
-
-
-### `draftId`
-
-Narrows the query results based on the assets’ draft’s ID (from the `drafts` table).
-
-
-
-Possible values include:
-
-| Value | Fetches drafts…
-| - | -
-| `1` | for the draft with an ID of 1.
-
-
-
-::: code
-```twig
-{# Fetch a draft #}
-{% set assets = craft.assets()
-    .draftId(10)
-    .all() %}
-```
-
-```php
-// Fetch a draft
-$assets = \craft\elements\Asset::find()
-    ->draftIf(10)
-    ->all();
-```
-:::
-
-
-### `draftOf`
-
-Narrows the query results to only drafts of a given asset.
-
-
-
-Possible values include:
-
-| Value | Fetches drafts…
-| - | -
-| `1` | for the asset with an ID of 1.
-| a [Asset](api:craft\elements\Asset) object | for the asset represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch drafts of the asset #}
-{% set assets = craft.assets()
-    .draftOf(myAsset)
-    .all() %}
-```
-
-```php
-// Fetch drafts of the asset
-$assets = \craft\elements\Asset::find()
-    ->draftOf($myAsset)
-    ->all();
-```
-:::
-
-
-### `drafts`
-
-Narrows the query results to only drafts assets.
-
-
-
-
-
-::: code
-```twig
-{# Fetch a draft asset #}
-{% set assets = {twig-function}
-    .drafts()
-    .id(123)
-    .one() %}
-```
-
-```php
-// Fetch a draft asset
-$assets = \craft\elements\Asset::find()
-    ->drafts()
-    ->id(123)
-    ->one();
-```
-:::
-
-
 ### `filename`
 
 Narrows the query results based on the assets’ filenames.
@@ -402,7 +324,7 @@ Narrows the query results based on the folders the assets belong to, per the fol
 
 Possible values include:
 
-| Value | Fetches categories…
+| Value | Fetches assets…
 | - | -
 | `1` | in a folder with an ID of 1.
 | `'not 1'` | not in a folder with an ID of 1.
@@ -420,7 +342,7 @@ Possible values include:
 ```
 
 ```php
-// Fetch categories in the folder with an ID of 1
+// Fetch assets in the folder with an ID of 1
 $assets = \craft\elements\Asset::find()
     ->folderId(1)
     ->all();
@@ -560,7 +482,7 @@ Broadens the query results to include assets from any of the subfolders of the f
 ```
 
 ```php
-// Fetch categories in the folder with an ID of 1 (including its subfolders)
+// Fetch assets in the folder with an ID of 1 (including its subfolders)
 $assets = \craft\elements\Asset::find()
     ->folderId(1)
     ->includeSubfolders()
@@ -757,128 +679,6 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
-### `revisionCreator`
-
-Narrows the query results to only revisions created by a given user.
-
-
-
-Possible values include:
-
-| Value | Fetches revisions…
-| - | -
-| `1` | created by the user with an ID of 1.
-| a `\craft\elements\db\User` object | by the user represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch revisions by the current user #}
-{% set assets = craft.assets()
-    .revisionCreator(currentUser)
-    .all() %}
-```
-
-```php
-// Fetch revisions by the current user
-$assets = \craft\elements\Asset::find()
-    ->revisionCreator(Craft::$app->user->identity)
-    ->all();
-```
-:::
-
-
-### `revisionId`
-
-Narrows the query results based on the assets’ revision’s ID (from the `revisions` table).
-
-
-
-Possible values include:
-
-| Value | Fetches revisions…
-| - | -
-| `1` | for the revision with an ID of 1.
-
-
-
-::: code
-```twig
-{# Fetch a revision #}
-{% set assets = craft.assets()
-    .revisionId(10)
-    .all() %}
-```
-
-```php
-// Fetch a revision
-$assets = \craft\elements\Asset::find()
-    ->revisionIf(10)
-    ->all();
-```
-:::
-
-
-### `revisionOf`
-
-Narrows the query results to only revisions of a given asset.
-
-
-
-Possible values include:
-
-| Value | Fetches revisions…
-| - | -
-| `1` | for the asset with an ID of 1.
-| a [Asset](api:craft\elements\Asset) object | for the asset represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch revisions of the asset #}
-{% set assets = craft.assets()
-    .revisionOf(myAsset)
-    .all() %}
-```
-
-```php
-// Fetch revisions of the asset
-$assets = \craft\elements\Asset::find()
-    ->revisionOf($myAsset)
-    ->all();
-```
-:::
-
-
-### `revisions`
-
-Narrows the query results to only revision assets.
-
-
-
-
-
-::: code
-```twig
-{# Fetch a revision asset #}
-{% set assets = {twig-function}
-    .revisions()
-    .id(123)
-    .one() %}
-```
-
-```php
-// Fetch a revision asset
-$assets = \craft\elements\Asset::find()
-    ->revisions()
-    ->id(123)
-    ->one();
-```
-:::
-
-
 ### `search`
 
 Narrows the query results to only assets that match a search query.
@@ -927,7 +727,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a `\craft\elements\db\Site` object | from the site represented by the object.
+| a [craft\models\Site](api:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip
@@ -1129,13 +929,43 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
+### `uploader`
+
+Narrows the query results based on the user the assets were uploaded by, per the user’s IDs.
+
+Possible values include:
+
+| Value | Fetches assets…
+| - | -
+| `1` | uploaded by the user with an ID of 1.
+| a [craft\elements\User](api:craft\elements\User) object | uploaded by the user represented by the object.
+
+
+
+::: code
+```twig
+{# Fetch assets uploaded by the user with an ID of 1 #}
+{% set assets = craft.assets()
+    .uploader(1)
+    .all() %}
+```
+
+```php
+// Fetch assets uploaded by the user with an ID of 1
+$assets = \craft\elements\Asset::find()
+    ->uploader(1)
+    ->all();
+```
+:::
+
+
 ### `volume`
 
 Narrows the query results based on the volume the assets belong to.
 
 Possible values include:
 
-| Value | Fetches categories…
+| Value | Fetches assets…
 | - | -
 | `'foo'` | in a volume with a handle of `foo`.
 | `'not foo'` | not in a volume with a handle of `foo`.
@@ -1168,7 +998,7 @@ Narrows the query results based on the volumes the assets belong to, per the vol
 
 Possible values include:
 
-| Value | Fetches categories…
+| Value | Fetches assets…
 | - | -
 | `1` | in a volume with an ID of 1.
 | `'not 1'` | not in a volume with an ID of 1.
@@ -1186,7 +1016,7 @@ Possible values include:
 ```
 
 ```php
-// Fetch categories in the volume with an ID of 1
+// Fetch assets in the volume with an ID of 1
 $assets = \craft\elements\Asset::find()
     ->volumeId(1)
     ->all();

@@ -54,6 +54,37 @@ Matrix block queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+- [allowOwnerDrafts](#allowownerdrafts)
+- [allowOwnerRevisions](#allowownerrevisions)
+- [anyStatus](#anystatus)
+- [asArray](#asarray)
+- [clearCachedResult](#clearcachedresult)
+- [dateCreated](#datecreated)
+- [dateUpdated](#dateupdated)
+- [field](#field)
+- [fieldId](#fieldid)
+- [fixedOrder](#fixedorder)
+- [id](#id)
+- [ignorePlaceholders](#ignoreplaceholders)
+- [inReverse](#inreverse)
+- [limit](#limit)
+- [offset](#offset)
+- [orderBy](#orderby)
+- [owner](#owner)
+- [ownerId](#ownerid)
+- [preferSites](#prefersites)
+- [relatedTo](#relatedto)
+- [search](#search)
+- [site](#site)
+- [siteId](#siteid)
+- [status](#status)
+- [trashed](#trashed)
+- [type](#type)
+- [typeId](#typeid)
+- [uid](#uid)
+- [unique](#unique)
+- [with](#with)
+
 ### `allowOwnerDrafts`
 
 Narrows the query results based on whether the Matrix blocks’ owners are drafts.
@@ -132,6 +163,15 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 :::
 
 
+### `clearCachedResult`
+
+Clears the cached result.
+
+
+
+
+
+
 ### `dateCreated`
 
 Narrows the query results based on the Matrix blocks’ creation dates.
@@ -208,124 +248,35 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 :::
 
 
-### `draftCreator`
+### `field`
 
-Narrows the query results to only drafts created by a given user.
-
-
+Narrows the query results based on the field the Matrix blocks belong to.
 
 Possible values include:
 
-| Value | Fetches drafts…
+| Value | Fetches Matrix blocks…
 | - | -
-| `1` | created by the user with an ID of 1.
-| a `\craft\elements\db\User` object | by the user represented by the object.
+| `'foo'` | in a field with a handle of `foo`.
+| `'not foo'` | not in a field with a handle of `foo`.
+| `['foo', 'bar']` | in a field with a handle of `foo` or `bar`.
+| `['not', 'foo', 'bar']` | not in a field with a handle of `foo` or `bar`.
+| a [craft\fields\Matrix](api:craft\fields\Matrix) object | in a field represented by the object.
 
 
 
 ::: code
 ```twig
-{# Fetch drafts by the current user #}
+{# Fetch Matrix blocks in the Foo field #}
 {% set MatrixBlocks = craft.matrixBlocks()
-    .draftCreator(currentUser)
+    .field('foo')
     .all() %}
 ```
 
 ```php
-// Fetch drafts by the current user
+// Fetch Matrix blocks in the Foo field
 $MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->draftCreator(Craft::$app->user->identity)
+    ->field('foo')
     ->all();
-```
-:::
-
-
-### `draftId`
-
-Narrows the query results based on the Matrix blocks’ draft’s ID (from the `drafts` table).
-
-
-
-Possible values include:
-
-| Value | Fetches drafts…
-| - | -
-| `1` | for the draft with an ID of 1.
-
-
-
-::: code
-```twig
-{# Fetch a draft #}
-{% set MatrixBlocks = craft.matrixBlocks()
-    .draftId(10)
-    .all() %}
-```
-
-```php
-// Fetch a draft
-$MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->draftIf(10)
-    ->all();
-```
-:::
-
-
-### `draftOf`
-
-Narrows the query results to only drafts of a given Matrix block.
-
-
-
-Possible values include:
-
-| Value | Fetches drafts…
-| - | -
-| `1` | for the Matrix block with an ID of 1.
-| a [MatrixBlock](api:craft\elements\MatrixBlock) object | for the Matrix block represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch drafts of the Matrix block #}
-{% set MatrixBlocks = craft.matrixBlocks()
-    .draftOf(myBlock)
-    .all() %}
-```
-
-```php
-// Fetch drafts of the Matrix block
-$MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->draftOf($myBlock)
-    ->all();
-```
-:::
-
-
-### `drafts`
-
-Narrows the query results to only drafts Matrix blocks.
-
-
-
-
-
-::: code
-```twig
-{# Fetch a draft Matrix block #}
-{% set MatrixBlocks = {twig-function}
-    .drafts()
-    .id(123)
-    .one() %}
-```
-
-```php
-// Fetch a draft Matrix block
-$MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->drafts()
-    ->id(123)
-    ->one();
 ```
 :::
 
@@ -654,128 +605,6 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 :::
 
 
-### `revisionCreator`
-
-Narrows the query results to only revisions created by a given user.
-
-
-
-Possible values include:
-
-| Value | Fetches revisions…
-| - | -
-| `1` | created by the user with an ID of 1.
-| a `\craft\elements\db\User` object | by the user represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch revisions by the current user #}
-{% set MatrixBlocks = craft.matrixBlocks()
-    .revisionCreator(currentUser)
-    .all() %}
-```
-
-```php
-// Fetch revisions by the current user
-$MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->revisionCreator(Craft::$app->user->identity)
-    ->all();
-```
-:::
-
-
-### `revisionId`
-
-Narrows the query results based on the Matrix blocks’ revision’s ID (from the `revisions` table).
-
-
-
-Possible values include:
-
-| Value | Fetches revisions…
-| - | -
-| `1` | for the revision with an ID of 1.
-
-
-
-::: code
-```twig
-{# Fetch a revision #}
-{% set MatrixBlocks = craft.matrixBlocks()
-    .revisionId(10)
-    .all() %}
-```
-
-```php
-// Fetch a revision
-$MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->revisionIf(10)
-    ->all();
-```
-:::
-
-
-### `revisionOf`
-
-Narrows the query results to only revisions of a given Matrix block.
-
-
-
-Possible values include:
-
-| Value | Fetches revisions…
-| - | -
-| `1` | for the Matrix block with an ID of 1.
-| a [MatrixBlock](api:craft\elements\MatrixBlock) object | for the Matrix block represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch revisions of the Matrix block #}
-{% set MatrixBlocks = craft.matrixBlocks()
-    .revisionOf(myBlock)
-    .all() %}
-```
-
-```php
-// Fetch revisions of the Matrix block
-$MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->revisionOf($myBlock)
-    ->all();
-```
-:::
-
-
-### `revisions`
-
-Narrows the query results to only revision Matrix blocks.
-
-
-
-
-
-::: code
-```twig
-{# Fetch a revision Matrix block #}
-{% set MatrixBlocks = {twig-function}
-    .revisions()
-    .id(123)
-    .one() %}
-```
-
-```php
-// Fetch a revision Matrix block
-$MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->revisions()
-    ->id(123)
-    ->one();
-```
-:::
-
-
 ### `search`
 
 Narrows the query results to only Matrix blocks that match a search query.
@@ -824,7 +653,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a `\craft\elements\db\Site` object | from the site represented by the object.
+| a [craft\models\Site](api:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip

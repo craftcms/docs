@@ -9,30 +9,28 @@ For example, in a new Craft 3 project, your `.env` file should define these envi
 ```bash
 ENVIRONMENT="dev"
 SECURITY_KEY=""
-DB_DRIVER="mysql"
-DB_SERVER="localhost"
+DB_DSN="mysql:host=<host>;port=<port>;dbname=<dbname>"
 DB_USER="root"
 DB_PASSWORD=""
-DB_DATABASE=""
 DB_SCHEMA="public"
 DB_TABLE_PREFIX=""
-DB_PORT=""
 ```
 
 The variables that start with `DB_` are database connection settings, and they get pulled into `config/db.php` like this:
 
 ```php
 return [
-    'driver' => getenv('DB_DRIVER'),
-    'server' => getenv('DB_SERVER'),
+    'dsn' => getenv('DB_DSN'),
     'user' => getenv('DB_USER'),
     'password' => getenv('DB_PASSWORD'),
-    'database' => getenv('DB_DATABASE'),
     'schema' => getenv('DB_SCHEMA'),
     'tablePrefix' => getenv('DB_TABLE_PREFIX'),
-    'port' => getenv('DB_PORT')
 ];
 ```
+
+::: tip NOTE
+If you installed Craft before 3.4 was released, you will have `DB_DRIVER`, `DB_SERVER`, `DB_DATABASE`, and `DB_PORT` environment variables (a well as corresponding values in `config/db.php`) instead of `DB_DSN`. Both approaches work, but setting `DB_DSN` instead is recommended in Craft 3.4 and later. 
+:::
 
 We recommend this environment variable approach for two reasons:
 
@@ -96,46 +94,6 @@ The charset to use when creating tables.
 
 
 
-### `database`
-
-Allowed types
-
-:   [string](http://php.net/language.types.string)
-
-Default value
-
-:   `''`
-
-Defined by
-
-:   [DbConfig::$database](api:craft\config\DbConfig::$database)
-
-
-
-The name of the database to select.
-
-
-
-### `driver`
-
-Allowed types
-
-:   [string](http://php.net/language.types.string)
-
-Default value
-
-:   `self::DRIVER_MYSQL`
-
-Defined by
-
-:   [DbConfig::$driver](api:craft\config\DbConfig::$driver)
-
-
-
-The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
-
-
-
 ### `dsn`
 
 Allowed types
@@ -152,12 +110,13 @@ Defined by
 
 
 
-If you want to manually specify your PDO DSN connection string you can do so here.
+The Data Source Name (“DSN”) that tells Craft how to connect to the database.
 
-- MySQL: http://php.net/manual/en/ref.pdo-mysql.connection.php
-- PostgreSQL: http://php.net/manual/en/ref.pdo-pgsql.connection.php
-If you set this, then the [server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server), [port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port), [user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user), [password](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#password), [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database),
-[driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver) and [unixSocket](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#unixsocket) config settings will be ignored.
+DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by driver-specific parameters.
+For example, `mysql:host=127.0.0.1;port=3306;dbname=acme_corp`.
+
+- MySQL parameters: http://php.net/manual/en/ref.pdo-mysql.connection.php
+- PostgreSQL parameters: http://php.net/manual/en/ref.pdo-pgsql.connection.php
 
 
 
@@ -181,26 +140,6 @@ The database password to connect with.
 
 
 
-### `port`
-
-Allowed types
-
-:   [integer](http://php.net/language.types.integer)
-
-Default value
-
-:   `null`
-
-Defined by
-
-:   [DbConfig::$port](api:craft\config\DbConfig::$port)
-
-
-
-The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
-
-
-
 ### `schema`
 
 Allowed types
@@ -218,26 +157,6 @@ Defined by
 
 
 The schema that Postgres is configured to use by default (PostgreSQL only).
-
-
-
-### `server`
-
-Allowed types
-
-:   [string](http://php.net/language.types.string)
-
-Default value
-
-:   `'localhost'`
-
-Defined by
-
-:   [DbConfig::$server](api:craft\config\DbConfig::$server)
-
-
-
-The database server name or IP address. Usually 'localhost' or '127.0.0.1'.
 
 
 
@@ -261,51 +180,6 @@ If you're sharing Craft installs in a single database (MySQL) or a single
 database and using a shared schema (PostgreSQL), then you can set a table
 prefix here to avoid table naming conflicts per install. This can be no more than 5
 characters, and must be all lowercase.
-
-
-
-### `unixSocket`
-
-Allowed types
-
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
-
-Default value
-
-:   `null`
-
-Defined by
-
-:   [DbConfig::$unixSocket](api:craft\config\DbConfig::$unixSocket)
-
-
-
-MySQL only. If this is set, then the CLI connection string (used for yiic) will
-connect to the Unix socket, instead of the server and port. If this is
-specified, then 'server' and 'port' settings are ignored.
-
-
-
-### `url`
-
-Allowed types
-
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
-
-Default value
-
-:   `null`
-
-Defined by
-
-:   [DbConfig::$url](api:craft\config\DbConfig::$url)
-
-
-
-The database connection URL, if one was provided by your hosting environment.
-
-If this is set, the values for [driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver), [user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user), [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database), [server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server), [port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port), and [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database)
-will be extracted from it.
 
 
 
