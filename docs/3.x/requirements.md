@@ -28,11 +28,11 @@ Craft requires the following PHP extensions:
 * [Reflection](http://php.net/manual/en/class.reflectionextension.php)
 * [SPL](http://php.net/manual/en/book.spl.php)
 * [Zip](http://php.net/manual/en/book.zip.php)
+* [DOM](http://php.net/manual/en/book.dom.php)
 
 ## Optional PHP Extensions
 
 * [Intl](http://php.net/manual/en/book.intl.php) – Adds rich internationalization support.
-* [DOM](http://php.net/manual/en/book.dom.php) - Required for parsing XML feeds as well as <api:yii\web\XmlResponseFormatter>.
 
 ## Optional PHP Methods and Configurations
 
