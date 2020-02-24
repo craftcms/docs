@@ -2,7 +2,7 @@
 
 Craft Commerce provides a multitude of events for extending its functionality. Modules and plugins can register event listeners, typically in their `init()` methods, to modify Commerce’s behavior.
 
-## Product Events
+## Variant Events
 
 ### `beforeCaptureVariantSnapshot`
 
@@ -19,7 +19,9 @@ Event::on(
     Variant::class,
     Variant::EVENT_BEFORE_CAPTURE_VARIANT_SNAPSHOT,
     function(CustomizeVariantSnapshotFieldsEvent $event) {
+        // @var Variant $variant
         $variant = $event->variant;
+        // @var array|null $fields
         $fields = $event->fields;
 
         // Add every custom field to the snapshot
@@ -44,15 +46,18 @@ The event that is triggered after a variant’s field data is captured. This mak
 
 ```php
 use craft\commerce\elements\Variant;
-use craft\commerce\events\CustomizeVariantSnapshotDataEvent;
+use craft\commerce\events\CustomizeVariantSnapshotFieldsEvent;
 use yii\base\Event;
 
 Event::on(
     Variant::class,
     Variant::EVENT_AFTER_CAPTURE_VARIANT_SNAPSHOT,
     function(CustomizeVariantSnapshotFieldsEvent $event) {
+        // @var Variant $variant
         $variant = $event->variant;
-        $data = $event->fieldData;
+        // @var array|null $fields
+        $fields = $event->fields;
+
         // Modify or redact captured `$data`
         // ...
     }
@@ -67,15 +72,17 @@ This example adds every custom field to the product snapshot:
 
 ```php
 use craft\commerce\elements\Variant;
+use craft\commerce\elements\Product;
 use craft\commerce\events\CustomizeProductSnapshotFieldsEvent;
 use yii\base\Event;
 
 Event::on(
     Variant::class,
     Variant::EVENT_BEFORE_CAPTURE_PRODUCT_SNAPSHOT,
-    function(CustomizeProductSnapshotFieldsEvent $event)
-    {
+    function(CustomizeProductSnapshotFieldsEvent $event) {
+        // @var Product $product
         $product = $event->product;
+        // @var array|null $fields
         $fields = $event->fields;
 
         // Add every custom field to the snapshot
@@ -100,20 +107,26 @@ The event that is triggered after a product’s field data is captured, which ca
 
 ```php
 use craft\commerce\elements\Variant;
+use craft\commerce\elements\Product;
 use craft\commerce\events\CustomizeProductSnapshotDataEvent;
 use yii\base\Event;
 
 Event::on(
     Variant::class,
     Variant::EVENT_AFTER_CAPTURE_PRODUCT_SNAPSHOT,
-    function(CustomizeProductSnapshotFieldsEvent $event) {
+    function(CustomizeProductSnapshotDataEvent $event) {
+        // @var Product $product
         $product = $event->product;
+        // @var array $data
         $data = $event->fieldData;
+
         // Modify or redact captured `$data`
         // ...
     }
 );
 ```
+
+## Sale Events
 
 ### `beforeMatchPurchasableSale`
 
@@ -124,12 +137,21 @@ The `isValid` event property can be set to `false` to prevent the application of
 ```php
 use craft\commerce\events\SaleMatchEvent;
 use craft\commerce\services\Sales;
+use craft\commerce\base\PurchasableInterface;
+use craft\commerce\models\Sale;
 use yii\base\Event;
 
 Event::on(
     Sales::class,
     Sales::EVENT_BEFORE_MATCH_PURCHASABLE_SALE,
     function(SaleMatchEvent $event) {
+        // @var Sale $sale
+        $sale = $event->sale;
+        // @var PurchasableInterface $purchasable
+        $purchasable = $event->purchasable;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+
         // Use custom business logic to exclude purchasable from sale
         // with `$event->isValid = false`
         // ...
@@ -137,21 +159,123 @@ Event::on(
 );
 ```
 
+### `beforeSaveSale`
+
+The event that is triggered before a sale is saved.
+
+```php
+use craft\commerce\events\SaleEvent;
+use craft\commerce\services\Sales;
+use craft\commerce\models\Sale;
+use yii\base\Event;
+
+Event::on(
+    Sales::class,
+    Sales::EVENT_BEFORE_SAVE_SALE,
+    function(SaleEvent $event) {
+        // @var Sale $sale
+        $sale = $event->sale;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+        // ...
+    }
+);
+```
+
+### `afterSaveSale`
+
+The event that is triggered after a sale is saved.
+
+```php
+use craft\commerce\events\SaleEvent;
+use craft\commerce\services\Sales;
+use craft\commerce\models\Sale;
+use yii\base\Event;
+
+Event::on(
+    Sales::class,
+    Sales::EVENT_BEFORE_SAVE_SALE,
+    function(SaleEvent $event) {
+        // @var Sale $sale
+        $sale = $event->sale;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+        // ...
+    }
+);
+```
+
 ## Order Events
 
-### `afterAddLineItem`
+### `beforeAddLineItemToOrder`
+
+The event that is triggered before a new line item has been added to the order.
+
+```php
+use craft\commerce\elements\Order;
+use craft\commerce\models\LineItem;
+use craft\commerce\events\LineItemEvent;
+use yii\base\Event;
+
+Event::on(
+    Order::class,
+    Order::EVENT_BEFORE_ADD_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+        // @var bool $isValid
+        $isValid = $event->isValid;
+        // ...
+    }
+);
+```
+
+### `afterAddLineItemToOrder`
 
 The event that is triggered after a line item has been added to an order.
 
 ```php
 use craft\commerce\elements\Order;
+use craft\commerce\events\LineItemEvent;
+use craft\commerce\models\LineItem;
 use yii\base\Event;
 
-Event::on(Order::class, Order::EVENT_AFTER_ADD_LINE_ITEM, function(Event $event) {
-    $lineItem = $event->lineItem;
-    $isNew = $event->isNew;
-    // ...
-});
+Event::on(
+    Order::class,
+    Order::EVENT_AFTER_ADD_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+        // ...
+    }
+);
+```
+
+### `afterRemoveLineItemToOrder`
+
+The event that is triggered after a line item has been removed from an order.
+
+```php
+use craft\commerce\elements\Order;
+use craft\commerce\events\LineItemEvent;
+use craft\commerce\models\LineItem;
+use yii\base\Event;
+
+Event::on(
+    Order::class,
+    Order::EVENT_AFTER_REMOVE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+        // ...
+    }
+);
 ```
 
 ### `beforeCompleteOrder`
@@ -162,11 +286,15 @@ The event that is triggered before an order is completed.
 use craft\commerce\elements\Order;
 use yii\base\Event;
 
-Event::on(Order::class, Order::EVENT_BEFORE_COMPLETE_ORDER, function(Event $event) {
-    // @var Order $order
-    $order = $event->sender;
-    // ...
-});
+Event::on(
+    Order::class,
+    Order::EVENT_BEFORE_COMPLETE_ORDER,
+    function(Event $event) {
+        // @var Order $order
+        $order = $event->sender;
+        // ...
+    }
+);
 ```
 
 ### `afterCompleteOrder`
@@ -177,11 +305,15 @@ The event that is triggered after an order is completed.
 use craft\commerce\elements\Order;
 use yii\base\Event;
 
-Event::on(Order::class, Order::EVENT_AFTER_COMPLETE_ORDER, function(Event $event) {
-    // @var Order $order
-    $order = $event->sender;
-    // ...
-});
+Event::on(
+    Order::class,
+    Order::EVENT_AFTER_COMPLETE_ORDER,
+    function(Event $event) {
+        // @var Order $order
+        $order = $event->sender;
+        // ...
+    }
+);
 ```
 
 ### `afterOrderPaid`
@@ -192,123 +324,12 @@ The event that is triggered after an order is paid and completed.
 use craft\commerce\elements\Order;
 use yii\base\Event;
 
-Event::on(Order::class, Order::EVENT_AFTER_ORDER_PAID, function(Event $event) {
-    // @var Order $order
-    $order = $event->sender;
-    // ...
-});
-```
-
-### `afterDiscountAdjustmentsCreated`
-
-The event that is triggered before a line item is saved.
-
-```php
-use craft\commerce\adjusters\Discount;
-use yii\base\Event;
-
 Event::on(
-    Discount::class,
-    Discount::EVENT_AFTER_DISCOUNT_ADJUSTMENTS_CREATED,
-    function(DiscountAdjustmentsEvent $event) {
-        // Use a third party to check order data and modify the adjustments
-        // ...
-    }
-);
-```
-
-### `beforeMatchLineItem`
-
-The event that is triggered before an item is removed from the cart.
-
-You may set the `isValid` property to `false` on the event to prevent the application of the matched discount.
-
-```php
-use craft\commerce\events\MatchLineItemEvent;
-use craft\commerce\services\Discounts;
-use yii\base\Event;
-
-Event::on(
-    Discounts::class,
-    Discounts::EVENT_BEFORE_MATCH_LINE_ITEM,
-    function(MatchLineItemEvent $event) {
-        // Check some business rules and prevent a match in special cases
-        // ...
-    }
-);
-```
-
-### `beforeSaveLineItem`
-
-The event that is triggered before a line item is saved.
-
-```php
-use craft\commerce\events\LineItemEvent;
-use craft\commerce\services\LineItems;
-use yii\base\Event;
-
-Event::on(
-    LineItems::class,
-    LineItems::EVENT_BEFORE_SAVE_LINE_ITEM,
-    function(LineItemEvent $event) {
-        // Notify a third party service about changes to an order
-        // ...
-    }
-);
-```
-
-### `afterSaveLineItem`
-
-The event that is triggeredd after a line item is saved.
-
-```php
-use craft\commerce\events\LineItemEvent;
-use craft\commerce\services\LineItems;
-use yii\base\Event;
-
-Event::on(
-    LineItems::class,
-    LineItems::EVENT_AFTER_SAVE_LINE_ITEM,
-    function(LineItemEvent $event) {
-        // Reserve stock
-        // ...
-    }
-);
-```
-
-### `populateLineItem`
-
-The event that is triggered as a line item is being populated from a purchasable.
-
-```php
-use craft\commerce\events\LineItemEvent;
-use craft\commerce\services\LineItems;
-use yii\base\Event;
-
-Event::on(
-    LineItems::class,
-    LineItems::EVENT_POPULATE_LINE_ITEM,
-    function(LineItemEvent $event) {
-        // Modify the price of a line item
-        // ...
-    }
-);
-```
-
-### `createLineItem`
-
-The event that is triggered after a line item has been created from a purchasable.
-
-```php
-use craft\commerce\events\LineItemEvent;
-use craft\commerce\services\LineItems;
-use yii\base\Event;
-
-Event::on(
-    LineItems::class,
-    LineItems::EVENT_CREATE_LINE_ITEM,
-    function(LineItemEvent $event) {
-        // Call a third party service based on the line item options
+    Order::class,
+    Order::EVENT_AFTER_ORDER_PAID,
+    function(Event $event) {
+        // @var Order $order
+        $order = $event->sender;
         // ...
     }
 );
@@ -339,12 +360,19 @@ The event that is triggered when an order status is changed.
 ```php
 use craft\commerce\events\OrderStatusEvent;
 use craft\commerce\services\OrderHistories;
+use craft\commerce\models\OrderHistory;
+use craft\commerce\elements\Order;
 use yii\base\Event;
 
 Event::on(
     OrderHistories::class,
     OrderHistories::EVENT_ORDER_STATUS_CHANGE,
     function(OrderStatusEvent $event) {
+        // @var OrderHistory $orderHistory
+        $orderHistory = $event->orderHistory;
+        // @var Order $order
+        $order = $event->order;
+
         // Let the delivery department know the order’s ready to be delivered
         // ...
     }
@@ -360,13 +388,254 @@ Set the event object’s `orderStatus` property to override the default status s
 ```php
 use craft\commerce\events\DefaultOrderStatusEvent;
 use craft\commerce\services\OrderStatuses;
+use craft\commerce\models\OrderStatus;
+use craft\commerce\elements\Order;
 use yii\base\Event;
 
 Event::on(
     OrderStatuses::class,
     OrderStatuses::EVENT_DEFAULT_ORDER_STATUS,
     function(DefaultOrderStatusEvent $event) {
+        // @var OrderStatus $status
+        $status = $event->orderStatus;
+        // @var Order $order
+        $order = $event->order;
+
         // Choose a more appropriate order status than the control panel default
+        // ...
+    }
+);
+```
+
+## Discount Events
+
+### `afterDiscountAdjustmentsCreated`
+
+The event that is triggered after a discount has matched the order and before it returns its adjustments.
+
+```php
+use craft\commerce\adjusters\Discount;
+use craft\commerce\elements\Order;
+use craft\commerce\models\Discount as DiscountModel;
+use craft\commerce\models\OrderAdjustment;
+use craft\commerce\events\DiscountAdjustmentsEvent;
+use yii\base\Event;
+
+Event::on(
+    Discount::class,
+    Discount::EVENT_AFTER_DISCOUNT_ADJUSTMENTS_CREATED,
+    function(DiscountAdjustmentsEvent $event) {
+        // @var Order $order
+        $order = $event->order;
+        // @var DiscountModel $discount
+        $discount = $event->discount;
+        // @var OrderAdjustment[] $adjustments
+        $adjustments = $event->adjustments;
+
+        // Use a third party to check order data and modify the adjustments
+        // ...
+    }
+);
+```
+
+### `beforeSaveDiscount`
+
+The event that is triggered before a discount is saved.
+
+```php
+use craft\commerce\events\DiscountEvent;
+use craft\commerce\services\Discounts;
+use craft\commerce\models\Discount;
+use yii\base\Event;
+
+Event::on(
+    Discounts::class,
+    Discounts::EVENT_BEFORE_SAVE_DISCOUNT,
+    function(DiscountEvent $event) {
+        // @var Discount $discount
+        $discount = $event->discount;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+
+        // Let an external CRM know about a client’s new discount
+        // ...
+    }
+);
+```
+
+### `afterSaveDiscount`
+
+The event that is triggered after a discount is saved.
+
+```php
+use craft\commerce\events\DiscountEvent;
+use craft\commerce\services\Discounts;
+use craft\commerce\models\Discount;
+use yii\base\Event;
+
+Event::on(
+    Discounts::class,
+    Discounts::EVENT_AFTER_SAVE_DISCOUNT,
+    function(DiscountEvent $event) {
+        // @var Discount $discount
+        $discount = $event->discount;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+
+        // Set this discount as default in an external CRM
+        // ...
+    }
+);
+```
+
+### `afterDeleteDiscount`
+
+The event that is triggered after a discount is deleted.
+
+```php
+use craft\commerce\events\DiscountEvent;
+use craft\commerce\services\Discounts;
+use craft\commerce\models\Discount;
+use yii\base\Event;
+
+Event::on(
+    Discounts::class,
+    Discounts::EVENT_AFTER_DELETE_DISCOUNT,
+    function(DiscountEvent $event) {
+        // @var Discount $discount
+        $discount = $event->discount;
+
+        // Remove this discount from a payment gateway
+        // ...
+    }
+);
+```
+
+### `beforeMatchLineItem`
+
+The event that is triggered when a line item is matched with a discount.
+
+You may set the `isValid` property to `false` on the event to prevent the application of the matched discount.
+
+```php
+use craft\commerce\services\Discounts;
+use craft\commerce\events\MatchLineItemEvent;
+use craft\commerce\models\Discount;
+use craft\commerce\models\LineItem;
+use yii\base\Event;
+
+Event::on(
+    Discounts::class,
+    Discounts::EVENT_BEFORE_MATCH_LINE_ITEM,
+    function(MatchLineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        // @var Discount $discount
+        $discount = $event->discount;
+
+        // Check some business rules and prevent a match in special cases
+        // ...
+    }
+);
+```
+
+## Line Item Events
+
+### `beforeSaveLineItem`
+
+The event that is triggered before a line item is saved.
+
+```php
+use craft\commerce\events\LineItemEvent;
+use craft\commerce\services\LineItems;
+use craft\commerce\models\LineItem;
+use yii\base\Event;
+
+Event::on(
+    LineItems::class,
+    LineItems::EVENT_BEFORE_SAVE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+
+        // Notify a third party service about changes to an order
+        // ...
+    }
+);
+```
+
+### `afterSaveLineItem`
+
+The event that is triggeredd after a line item is saved.
+
+```php
+use craft\commerce\events\LineItemEvent;
+use craft\commerce\services\LineItems;
+use craft\commerce\models\LineItem;
+use yii\base\Event;
+
+Event::on(
+    LineItems::class,
+    LineItems::EVENT_AFTER_SAVE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+
+        // Reserve stock
+        // ...
+    }
+);
+```
+
+### `populateLineItem`
+
+The event that is triggered as a line item is being populated from a purchasable.
+
+```php
+use craft\commerce\events\LineItemEvent;
+use craft\commerce\services\LineItems;
+use craft\commerce\models\LineItem;
+use yii\base\Event;
+
+Event::on(
+    LineItems::class,
+    LineItems::EVENT_POPULATE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+
+        // Modify the price of a line item
+        // ...
+    }
+);
+```
+
+### `createLineItem`
+
+The event that is triggered after a line item has been created from a purchasable.
+
+```php
+use craft\commerce\events\LineItemEvent;
+use craft\commerce\services\LineItems;
+use craft\commerce\models\LineItem;
+use yii\base\Event;
+
+Event::on(
+    LineItems::class,
+    LineItems::EVENT_CREATE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+
+        // Call a third party service based on the line item options
         // ...
     }
 );
@@ -401,12 +670,16 @@ The event that is triggered after a payment transaction is made.
 ```php
 use craft\commerce\events\TransactionEvent;
 use craft\commerce\services\Payments;
+use craft\commerce\models\Transaction;
 use yii\base\Event;
 
 Event::on(
     Payments::class,
     Payments::EVENT_AFTER_PAYMENT_TRANSACTION,
     function(TransactionEvent $event) {
+        // @var Transaction $transaction
+        $transaction = $event->transaction;
+
         // Check whether it was an authorize transaction
         // and make sure that warehouse team is on top of it
         // ...
@@ -421,12 +694,16 @@ The event that is triggered before a payment transaction is captured.
 ```php
 use craft\commerce\events\TransactionEvent;
 use craft\commerce\services\Payments;
+use craft\commerce\models\Transaction;
 use yii\base\Event;
 
 Event::on(
     Payments::class,
     Payments::EVENT_BEFORE_CAPTURE_TRANSACTION,
     function(TransactionEvent $event) {
+        // @var Transaction $transaction
+        $transaction = $event->transaction;
+
         // Check that shipment’s ready before capturing
         // ...
     }
@@ -440,12 +717,16 @@ The event that is triggered after a payment transaction is captured.
 ```php
 use craft\commerce\events\TransactionEvent;
 use craft\commerce\services\Payments;
+use craft\commerce\models\Transaction;
 use yii\base\Event;
 
 Event::on(
     Payments::class,
     Payments::EVENT_AFTER_CAPTURE_TRANSACTION,
     function(TransactionEvent $event) {
+        // @var Transaction $transaction
+        $transaction = $event->transaction;
+
         // Notify the warehouse we're ready to ship
         // ...
     }
@@ -465,6 +746,9 @@ Event::on(
     Payments::class,
     Payments::EVENT_BEFORE_REFUND_TRANSACTION,
     function(RefundTransactionEvent $event) {
+        // @var float $amount
+        $amount = $event->amount;
+
         // Do something else if the refund amount’s >50% of the transaction
         // ...
     }
@@ -484,6 +768,9 @@ Event::on(
     Payments::class,
     Payments::EVENT_AFTER_REFUND_TRANSACTION,
     function(RefundTransactionEvent $event) {
+        // @var float $amount
+        $amount = $event->amount;
+
         // Do something else if the refund amount’s >50% of the transaction
         // ...
     }
@@ -499,12 +786,25 @@ You may set the `isValid` property to `false` on the event to prevent the paymen
 ```php
 use craft\commerce\events\ProcessPaymentEvent;
 use craft\commerce\services\Payments;
+use craft\commerce\elements\Order;
+use craft\commerce\models\payments\BasePaymentForm;
+use craft\commerce\models\Transaction;
+use craft\commerce\base\RequestResponseInterface;
 use yii\base\Event;
 
 Event::on(
     Payments::class,
     Payments::EVENT_BEFORE_PROCESS_PAYMENT,
     function(ProcessPaymentEvent $event) {
+        // @var Order $order
+        $order = $event->order;
+        // @var BasePaymentForm $form
+        $form = $event->form;
+        // @var Transaction $transaction
+        $transaction = $event->transaction;
+        // @var RequestResponseInterface $response
+        $response = $event->response;
+
         // Check some business rules to see whether the transaction is allowed
         // ...
     }
@@ -518,12 +818,25 @@ The event that is triggered after a payment is processed.
 ```php
 use craft\commerce\events\ProcessPaymentEvent;
 use craft\commerce\services\Payments;
+use craft\commerce\elements\Order;
+use craft\commerce\models\payments\BasePaymentForm;
+use craft\commerce\models\Transaction;
+use craft\commerce\base\RequestResponseInterface;
 use yii\base\Event;
 
 Event::on(
     Payments::class,
     Payments::EVENT_AFTER_PROCESS_PAYMENT,
     function(ProcessPaymentEvent $event) {
+        // @var Order $order
+        $order = $event->order;
+        // @var BasePaymentForm $form
+        $form = $event->form;
+        // @var Transaction $transaction
+        $transaction = $event->transaction;
+        // @var RequestResponseInterface $response
+        $response = $event->response;
+
         // Let the accounting department know an order transaction went through
         // ...
     }
@@ -537,12 +850,16 @@ The event that is triggered when a payment source is deleted.
 ```php
 use craft\commerce\events\PaymentSourceEvent;
 use craft\commerce\services\PaymentSources;
+use craft\commerce\models\PaymentSource;
 use yii\base\Event;
 
 Event::on(
     PaymentSources::class,
     PaymentSources::EVENT_DELETE_PAYMENT_SOURCE,
     function(PaymentSourceEvent $event) {
+        // @var PaymentSource $source
+        $source = $event->paymentSource;
+
         // Warn a user they don’t have any valid payment sources saved
         // ...
     }
@@ -556,12 +873,16 @@ The event that is triggered before a payment source is added.
 ```php
 use craft\commerce\events\PaymentSourceEvent;
 use craft\commerce\services\PaymentSources;
+use craft\commerce\models\PaymentSource;
 use yii\base\Event;
 
 Event::on(
     PaymentSources::class,
     PaymentSources::EVENT_BEFORE_SAVE_PAYMENT_SOURCE,
     function(PaymentSourceEvent $event) {
+        // @var PaymentSource $source
+        $source = $event->paymentSource;
+
         // ...
     }
 );
@@ -574,12 +895,16 @@ The event that is triggered after a payment source is added.
 ```php
 use craft\commerce\events\PaymentSourceEvent;
 use craft\commerce\services\PaymentSources;
+use craft\commerce\models\PaymentSource;
 use yii\base\Event;
 
 Event::on(
     PaymentSources::class,
-    PaymentSources::EVENT_BEFORE_SAVE_PAYMENT_SOURCE,
+    PaymentSources::EVENT_AFTER_SAVE_PAYMENT_SOURCE,
     function(PaymentSourceEvent $event) {
+        // @var PaymentSource $source
+        $source = $event->paymentSource;
+
         // Settle any outstanding balance
         // ...
     }
@@ -593,12 +918,16 @@ The event that is triggered after a transaction has been saved.
 ```php
 use craft\commerce\events\TransactionEvent;
 use craft\commerce\services\Transactions;
+use craft\commerce\models\Transaction;
 use yii\base\Event;
 
 Event::on(
     Transactions::class,
     Transactions::EVENT_AFTER_SAVE_TRANSACTION,
     function(TransactionEvent $event) {
+        // @var Transaction $transaction
+        $transaction = $event->transaction;
+
         // Run custom logic for failed transactions
         // ...
     }
@@ -612,12 +941,16 @@ The event that is triggered after a transaction has been created.
 ```php
 use craft\commerce\events\TransactionEvent;
 use craft\commerce\services\Transactions;
+use craft\commerce\models\Transaction;
 use yii\base\Event;
 
 Event::on(
     Transactions::class,
     Transactions::EVENT_AFTER_CREATE_TRANSACTION,
     function(TransactionEvent $event) {
+        // @var Transaction $transaction
+        $transaction = $event->transaction;
+
         // Run custom logic depending on the transaction type
         // ...
     }
@@ -633,12 +966,16 @@ The event that is triggered after a subscription has expired.
 ```php
 use craft\commerce\events\SubscriptionEvent;
 use craft\commerce\services\Subscriptions;
+use craft\commerce\elements\Subscription;
 use yii\base\Event;
 
 Event::on(
     Subscriptions::class,
     Subscriptions::EVENT_AFTER_EXPIRE_SUBSCRIPTION,
     function(SubscriptionEvent $event) {
+        // @var Subscription $subscription
+        $subscription = $event->subscription;
+
         // Make a call to third party service to de-authorize a user
         // ...
     }
@@ -654,12 +991,22 @@ You may set the `isValid` property to `false` on the event to prevent the user f
 ```php
 use craft\commerce\events\CreateSubscriptionEvent;
 use craft\commerce\services\Subscriptions;
+use craft\elements\User;
+use craft\commerce\base\Plan;
+use craft\commerce\models\subscriptions\SubscriptionForm;
 use yii\base\Event;
 
 Event::on(
     Subscriptions::class,
     Subscriptions::EVENT_BEFORE_CREATE_SUBSCRIPTION,
     function(CreateSubscriptionEvent $event) {
+        // @var User $user
+        $user = $event->user;
+        // @var Plan $plan
+        $plan = $event->plan;
+        // @var SubscriptionForm $params
+        $params = $event->parameters;
+
         // Set the trial days based on some business logic
         // ...
     }
@@ -673,12 +1020,16 @@ The event that is triggered after a subscription is created.
 ```php
 use craft\commerce\events\SubscriptionEvent;
 use craft\commerce\services\Subscriptions;
+use craft\commerce\elements\Subscription;
 use yii\base\Event;
 
 Event::on(
     Subscriptions::class,
     Subscriptions::EVENT_AFTER_CREATE_SUBSCRIPTION,
     function(SubscriptionEvent $event) {
+        // @var Subscription $subscription
+        $subscription = $event->subscription;
+
         // Call a third party service to authorize a user
         // ...
     }
@@ -694,12 +1045,16 @@ You may set the `isValid` property to `false` on the event to prevent the subscr
 ```php
 use craft\commerce\events\SubscriptionEvent;
 use craft\commerce\services\Subscriptions;
+use craft\commerce\elements\Subscription;
 use yii\base\Event;
 
 Event::on(
     Subscriptions::class,
     Subscriptions::EVENT_BEFORE_REACTIVATE_SUBSCRIPTION,
     function(SubscriptionEvent $event) {
+        // @var Subscription $subscription
+        $subscription = $event->subscription;
+
         // Use business logic to determine whether the user can reactivate
         // ...
     }
@@ -708,17 +1063,21 @@ Event::on(
 
 ### `afterReactivateSubscription`
 
-The event that is triggered before a subscription gets reactivated.
+The event that is triggered after a subscription gets reactivated.
 
 ```php
 use craft\commerce\events\SubscriptionEvent;
 use craft\commerce\services\Subscriptions;
+use craft\commerce\elements\Subscription;
 use yii\base\Event;
 
 Event::on(
     Subscriptions::class,
     Subscriptions::EVENT_AFTER_REACTIVATE_SUBSCRIPTION,
     function(SubscriptionEvent $event) {
+        // @var Subscription $subscription
+        $subscription = $event->subscription;
+
         // Re-authorize the user with a third-party service
         // ...
     }
@@ -734,12 +1093,24 @@ You may set the `isValid` property to `false` on the event to prevent the switch
 ```php
 use craft\commerce\events\SubscriptionSwitchPlansEvent;
 use craft\commerce\services\Subscriptions;
+use craft\commerce\base\Plan;
+use craft\commerce\elements\Subscription;
+use craft\commerce\models\subscriptions\SwitchPlansForm;
 use yii\base\Event;
 
 Event::on(
     Subscriptions::class,
     Subscriptions::EVENT_BEFORE_SWITCH_SUBSCRIPTION_PLAN,
     function(SubscriptionSwitchPlansEvent $event) {
+        // @var Subscription $subscription
+        $subscription = $event->subscription;
+        // @var Plan $oldPlan
+        $oldPlan = $event->oldPlan;
+        // @var Plan $newPlan
+        $newPlan = $event->newPlan;
+        // @var SwitchPlansForm $params
+        $params = $event->parameters;
+
         // Modify the switch parameters based on some business logic
         // ...
     }
@@ -753,12 +1124,24 @@ The event that is triggered after a subscription gets switched to a different pl
 ```php
 use craft\commerce\events\SubscriptionSwitchPlansEvent;
 use craft\commerce\services\Subscriptions;
+use craft\commerce\base\Plan;
+use craft\commerce\elements\Subscription;
+use craft\commerce\models\subscriptions\SwitchPlansForm;
 use yii\base\Event;
 
 Event::on(
     Subscriptions::class,
     Subscriptions::EVENT_AFTER_SWITCH_SUBSCRIPTION_PLAN,
     function(SubscriptionSwitchPlansEvent $event) {
+        // @var Subscription $subscription
+        $subscription = $event->subscription;
+        // @var Plan $oldPlan
+        $oldPlan = $event->oldPlan;
+        // @var Plan $newPlan
+        $newPlan = $event->newPlan;
+        // @var SwitchPlansForm $params
+        $params = $event->parameters;
+
         // Adjust the user’s permissions on a third party service
         // ...
     }
@@ -774,12 +1157,19 @@ You may set the `isValid` property to `false` on the event to prevent the subscr
 ```php
 use craft\commerce\events\CancelSubscriptionEvent;
 use craft\commerce\services\Subscriptions;
+use craft\commerce\elements\Subscription;
+use craft\commerce\models\subscriptions\CancelSubscriptionForm;
 use yii\base\Event;
 
 Event::on(
     Subscriptions::class,
     Subscriptions::EVENT_BEFORE_CANCEL_SUBSCRIPTION,
     function(CancelSubscriptionEvent $event) {
+        // @var Subscription $subscription
+        $subscription = $event->subscription;
+        // @var CancelSubscriptionForm $params
+        $params = $event->parameters;
+
         // Check whether the user is permitted to cancel the subscription
         // ...
     }
@@ -793,12 +1183,19 @@ The event that is triggered after a subscription gets canceled.
 ```php
 use craft\commerce\events\CancelSubscriptionEvent;
 use craft\commerce\services\Subscriptions;
+use craft\commerce\elements\Subscription;
+use craft\commerce\models\subscriptions\CancelSubscriptionForm;
 use yii\base\Event;
 
 Event::on(
     Subscriptions::class,
     Subscriptions::EVENT_AFTER_CANCEL_SUBSCRIPTION,
     function(CancelSubscriptionEvent $event) {
+        // @var Subscription $subscription
+        $subscription = $event->subscription;
+        // @var CancelSubscriptionForm $params
+        $params = $event->parameters;
+
         // Refund the user for the remainder of the subscription
         // ...
     }
@@ -812,12 +1209,16 @@ The event that is triggered before a subscription gets updated. Typically this e
 ```php
 use craft\commerce\events\SubscriptionEvent;
 use craft\commerce\services\Subscriptions;
+use craft\commerce\elements\Subscription;
 use yii\base\Event;
 
 Event::on(
     Subscriptions::class,
     Subscriptions::EVENT_BEFORE_UPDATE_SUBSCRIPTION,
     function(SubscriptionEvent $event) {
+        // @var Subscription $subscription
+        $subscription = $event->subscription;
+
         // ...
     }
 );
@@ -830,12 +1231,22 @@ The event that is triggered when a subscription payment is received.
 ```php
 use craft\commerce\events\SubscriptionPaymentEvent;
 use craft\commerce\services\Subscriptions;
+use craft\commerce\elements\Subscription;
+use craft\commerce\models\subscriptions\SubscriptionPayment;
+use DateTime;
 use yii\base\Event;
 
 Event::on(
     Subscriptions::class,
     Subscriptions::EVENT_RECEIVE_SUBSCRIPTION_PAYMENT,
     function(SubscriptionPaymentEvent $event) {
+        // @var Subscription $subscription
+        $subscription = $event->subscription;
+        // @var SubscriptionPayment $payment
+        $payment = $event->payment;
+        // @var DateTime $until
+        $until = $event->paidUntil;
+
         // Update loyalty reward data
         // ...
     }
@@ -851,12 +1262,18 @@ The event that is triggered before an address is saved.
 ```php
 use craft\commerce\events\AddressEvent;
 use craft\commerce\services\Addresses;
+use craft\commerce\models\Address;
 use yii\base\Event;
 
 Event::on(
     Addresses::class,
     Addresses::EVENT_BEFORE_SAVE_ADDRESS,
     function(AddressEvent $event) {
+        // @var Address $address
+        $address = $event->address;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+
         // Update customer’s address in an external CRM
         // ...
     }
@@ -870,13 +1287,42 @@ The event that is triggered after an address is saved.
 ```php
 use craft\commerce\events\AddressEvent;
 use craft\commerce\services\Addresses;
+use craft\commerce\models\Address;
 use yii\base\Event;
 
 Event::on(
     Addresses::class,
     Addresses::EVENT_AFTER_SAVE_ADDRESS,
     function(AddressEvent $event) {
+        // @var Address $address
+        $address = $event->address;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+
         // Set the default address in an external CRM
+        // ...
+    }
+);
+```
+
+### `afterDeleteAddress`
+
+The event that is triggered after an address is deleted.
+
+```php
+use craft\commerce\events\AddressEvent;
+use craft\commerce\services\Addresses;
+use craft\commerce\models\Address;
+use yii\base\Event;
+
+Event::on(
+    Addresses::class,
+    Addresses::EVENT_AFTER_DELETE_ADDRESS,
+    function(AddressEvent $event) {
+        // @var Address $address
+        $address = $event->address;
+
+        // Remove this address from a payment gateway
         // ...
     }
 );
@@ -891,12 +1337,25 @@ You may set the `isValid` property to `false` on the event to prevent the email 
 ```php
 use craft\commerce\events\MailEvent;
 use craft\commerce\services\Emails;
+use craft\commerce\elements\Order;
+use craft\commerce\models\Email;
+use craft\commerce\models\OrderHistory;
+use craft\mail\Message;
 use yii\base\Event;
 
 Event::on(
     Emails::class,
     Emails::EVENT_BEFORE_SEND_MAIL,
     function(MailEvent $event) {
+        // @var Message $message
+        $message = $event->craftEmail;
+        // @var Email $email
+        $email = $event->commerceEmail;
+        // @var Order $order
+        $order = $event->order;
+        // @var OrderHistory $history
+        $history = $event->orderHistory;
+
         // Use `$event->isValid = false` to prevent sending
         // based on some business rules or client preferences
         // ...
@@ -911,12 +1370,121 @@ The event that is triggered after an email has been sent out.
 ```php
 use craft\commerce\events\MailEvent;
 use craft\commerce\services\Emails;
+use craft\commerce\elements\Order;
+use craft\commerce\models\Email;
+use craft\commerce\models\OrderHistory;
+use craft\mail\Message;
 use yii\base\Event;
 
-Event::on(Emails::class, Emails::EVENT_AFTER_SEND_MAIL, function(MailEvent $event) {
-     // Add the email address to an external CRM
-     // ...
-});
+Event::on(
+    Emails::class,
+    Emails::EVENT_AFTER_SEND_MAIL,
+    function(MailEvent $event) {
+        // @var Message $message
+        $message = $event->craftEmail;
+        // @var Email $email
+        $email = $event->commerceEmail;
+        // @var Order $order
+        $order = $event->order;
+        // @var OrderHistory $history
+        $history = $event->orderHistory;
+
+        // Add the email address to an external CRM
+        // ...
+    }
+);
+```
+
+### `beforeSaveEmail`
+
+The event that is triggered before an email is saved.
+
+```php
+use craft\commerce\events\EmailEvent;
+use craft\commerce\services\Emails;
+use craft\commerce\models\Email;
+use yii\base\Event;
+
+Event::on(
+    Emails::class,
+    Emails::EVENT_BEFORE_SAVE_EMAIL,
+    function(EmailEvent $event) {
+        // @var Email $email
+        $email = $event->email;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+
+        // ...
+    }
+);
+```
+
+### `afterSaveEmail`
+
+The event that is triggered after an email is saved.
+
+```php
+use craft\commerce\events\EmailEvent;
+use craft\commerce\services\Emails;
+use craft\commerce\models\Email;
+use yii\base\Event;
+
+Event::on(
+    Emails::class,
+    Emails::EVENT_AFTER_SAVE_EMAIL,
+    function(EmailEvent $event) {
+        // @var Email $email
+        $email = $event->email;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+
+        // ...
+    }
+);
+```
+
+### `beforeDeleteEmail`
+
+The event that is triggered before an email is deleted.
+
+```php
+use craft\commerce\events\EmailEvent;
+use craft\commerce\services\Emails;
+use craft\commerce\models\Email;
+use yii\base\Event;
+
+Event::on(
+    Emails::class,
+    Emails::EVENT_BEFORE_DELETE_EMAIL,
+    function(EmailEvent $event) {
+        // @var Email $email
+        $email = $event->email;
+
+        // ...
+    }
+);
+```
+
+### `afterDeleteEmail`
+
+The event that is triggered after an email is deleted.
+
+```php
+use craft\commerce\events\EmailEvent;
+use craft\commerce\services\Emails;
+use craft\commerce\models\Email;
+use yii\base\Event;
+
+Event::on(
+    Emails::class,
+    Emails::EVENT_AFTER_DELETE_EMAIL,
+    function(EmailEvent $event) {
+        // @var Email $email
+        $email = $event->email;
+
+        // ...
+    }
+);
 ```
 
 ### `beforeRenderPdf`
@@ -976,12 +1544,16 @@ The event that is triggered before a product type is saved.
 ```php
 use craft\commerce\events\ProductTypeEvent;
 use craft\commerce\services\ProductTypes;
+use craft\commerce\models\ProductType;
 use yii\base\Event;
 
 Event::on(
     ProductTypes::class,
     ProductTypes::EVENT_BEFORE_SAVE_PRODUCTTYPE,
     function(ProductTypeEvent $event) {
+        // @var ProductType|null $productType
+        $productType = $event->productType;
+
         // Create an audit trail of this action
         // ...
     }
@@ -995,12 +1567,16 @@ The event that is triggered after a product type has been saved.
 ```php
 use craft\commerce\events\ProductTypeEvent;
 use craft\commerce\services\ProductTypes;
+use craft\commerce\models\ProductType;
 use yii\base\Event;
 
 Event::on(
     ProductTypes::class,
     ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
     function(ProductTypeEvent $event) {
+        // @var ProductType|null $productType
+        $productType = $event->productType;
+
         // Prepare some third party system for a new product type
         // ...
     }
