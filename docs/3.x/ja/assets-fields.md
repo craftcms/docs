@@ -85,7 +85,7 @@
 テンプレート内でアセットフィールドのエレメントを取得する場合、アセットフィールドのハンドルを利用して関連付けられたアセットにアクセスできます。
 
 ```twig
-{% set relatedAssets = entry.<FieldHandle> %}
+{% set query = entry.<FieldHandle> %}
 ```
 
 これは、所定のフィールドで関連付けられたすべてのアセットを出力するよう準備された[アセットクエリ](dev/element-queries/asset-queries.md)を提供します。
@@ -123,7 +123,7 @@
 アセットクエリで[パラメータ](dev/element-queries/asset-queries.md#parameters)をセットすることもできます。例えば、画像だけが返されることを保証するために、[kind](dev/element-queries/asset-queries.md#kind) パラメータをセットできます。
 
 ```twig
-{% set relatedAssets = entry.<FieldHandle>
+{% set relatedAssets = clone(entry.<FieldHandle>)
     .kind('image')
     .all() %}
 ```

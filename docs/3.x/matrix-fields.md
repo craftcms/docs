@@ -47,96 +47,90 @@ Possible values include:
 
 ### Working with Matrix Field Data
 
-To output your Matrix blocks in a template, use a [for-loop](https://twig.symfony.com/doc/tags/for.html) pointed at your Matrix field:
+If you have an element with a Matrix field in your template, you can access its blocks using your Matrix field’s handle:
 
 ```twig
-{% for block in entry.myMatrixField.all() %}
-    ...
-{% endfor %}
+{% set query = entry.<FieldHandle> %}
+```
+
+That will give you a [Matrix block query](dev/element-queries/matrix-block-queries.md), prepped to output all of the enabled blocks for the given field.
+
+To loop through all of the blocks, call [all()](api:craft\db\Query::all()) and then loop over the results:
+
+```twig
+{% set blocks = entry.<FieldHandle>.all() %}
+{% if blocks|length %}
+    <ul>
+        {% for block in blocks %}
+            <!-- ... -->
+        {% endfor %}
+    </ul>
+{% endif %}
 ```
 
 All of the code you put within the for-loop will be repeated for each Matrix block in the field. The current block will get set to that `block` variable we’ve defined, and it will be a <api:craft\elements\MatrixBlock> model.
 
-Here’s an example of what the template might look like for a Matrix field with four Block Types (Heading, Text, Image, and Quote). We can determine the current block type’s handle by checking `block.type` (<api:craft\elements\MatrixBlock::getType()>).
+Here’s an example of what the template might look like for a Matrix field with four block types (Heading, Text, Image, and Quote). We can determine the current block type’s handle by checking `block.type` (<api:craft\elements\MatrixBlock::getType()>).
 
 ```twig
-{% for block in entry.myMatrixField.all() %}
-
+{% for block in entry.<FieldHandle>.all() %}
     {% if block.type == "heading" %}
-
         <h3>{{ block.heading }}</h3>
-
     {% elseif block.type == "text" %}
-
         {{ block.text|markdown }}
-
     {% elseif block.type == "image" %}
-
         {% set image = block.image.one() %}
         {% if image %}
             <img src="{{ image.getUrl('thumb') }}" width="{{ image.getWidth('thumb') }}" height="{{ image.getHeight('thumb') }}" alt="{{ image.title }}">
         {% endif %}
-
     {% elseif block.type == "quote" %}
-
         <blockquote>
             <p>{{ block.quote }}</p>
             <cite>– {{ block.cite }}</cite>
         </blockquote>
-
-    {% endif %}
-
-{% endfor %}
-```
-
-> This code can be simplified using the [switch](dev/tags/switch.md) tag.
-
-### Filtering by block type
-
-If you just want to output blocks of a certain type, you can do that by appending a ‘type’ filter to your Matrix field:
-
-```twig
-{% for block in entry.myMatrixField.type('text').all() %}
-    {{ block.text|markdown }}
-{% endfor %}
-```
-
-You can pass multiple block types if you want:
-
-```twig
-{% for block in entry.myMatrixField.type('text, heading').all() %}
-    {% if block.type == "heading" %}
-        <h3>{{ block.heading }}</h3>
-    {% else %}
-        {{ block.text|markdown }}
     {% endif %}
 {% endfor %}
 ```
 
+::: tip
+This code can be simplified using the [switch](dev/tags/switch.md) tag.
+:::
 
-### Adjusting the limit
-
-By default, your Matrix field will return the first 100 blocks. You can change that by overriding the `limit` parameter.
-
-```twig
-{% for block in entry.myMatrixField.limit(5) %}
-```
-
-If you think you might have more that 100 blocks, and you want all of them to be returned, you can also set that parameter to `null`:
+If you only want the first block, call [one()](api:craft\db\Query::one()) instead of `all()`, and then make sure it returned something:
 
 ```twig
-{% for block in entry.myMatrixField.limit(null) %}
+{% set block = entry.<FieldHandle>.one() %}
+{% if block %}
+    <!-- ... -->
+{% endif %}
 ```
 
-
-### Getting the total number of blocks
-
-You can get the total number of blocks using the [length filter](https://twig.symfony.com/doc/filters/length.html):
+If you only want to know the total number of blocks, call [count()](api:craft\db\Query::count()).
 
 ```twig
-{{ entry.myMatrixField|length }}
+{% set total = entry.<FieldHandle>.count() %}
+<p>Total blocks: <strong>{{ total }}</strong></p>
 ```
 
+If you just need to check if are blocks exist (but don’t need to fetch them), you can call [exists()](api:craft\db\Query::exists()):
+
+```twig
+{% if entry.<FieldHandle>.exists() %}
+    <p>There are blocks!</p>
+{% endif %}
+```
+
+You can set [parameters](dev/element-queries/matrix-block-queries.md#parameters) on the Matrix block query as well. For example, to only fetch blocks of type `text`, set the [type](dev/element-queries/matrix-block-queries.md#type) param:
+
+```twig
+{% set blocks = clone(entry.<FieldHandle>)
+    .type('text')
+    .all() %}
+```
+
+::: tip
+It’s always a good idea to clone the Matrix query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
+:::
 
 ## See Also
 

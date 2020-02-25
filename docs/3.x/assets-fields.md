@@ -85,7 +85,7 @@ Possible values include:
 If you have an element with an Assets field in your template, you can access its related assets using your Assets field’s handle:
 
 ```twig
-{% set relatedAssets = entry.<FieldHandle> %}
+{% set query = entry.<FieldHandle> %}
 ```
 
 That will give you an [asset query](dev/element-queries/asset-queries.md), prepped to output all of the related assets for the given field.
@@ -123,10 +123,14 @@ If you just need to check if there are any related assets (but don’t need to f
 You can set [parameters](dev/element-queries/asset-queries.md#parameters) on the asset query as well. For example, to ensure that only images are returned, you can set the [kind](dev/element-queries/asset-queries.md#kind) param:
 
 ```twig
-{% set relatedAssets = entry.<FieldHandle>
+{% set relatedAssets = clone(entry.<FieldHandle>)
     .kind('image')
     .all() %}
 ```
+
+::: tip
+It’s always a good idea to clone the asset query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
+:::
 
 ### Uploading Files from Front-End Entry Forms
 

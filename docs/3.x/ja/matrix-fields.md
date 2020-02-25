@@ -50,7 +50,7 @@
 テンプレート内で行列フィールドを出力するには、行列フィールドに対して [for ループ](https://twig.symfony.com/doc/tags/for.html) を使用します。
 
 ```twig
-{% for block in entry.myMatrixField.all() %}
+{% for block in entry.<FieldHandle>.all() %}
     ...
 {% endfor %}
 ```
@@ -60,7 +60,7 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 次に、4つのブロックタイプ（見出し、テキスト、画像、および、引用）を持つ行列フィールドのテンプレートの実例を示します。`block.type` （<api:craft\elements\MatrixBlock::getType()>）をチェックすることによって、現在のブロックタイプのハンドルを確認できます。
 
 ```twig
-{% for block in entry.myMatrixField.all() %}
+{% for block in entry.<FieldHandle>.all() %}
 
     {% if block.type == "heading" %}
 
@@ -96,7 +96,7 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 特定のタイプのブロックだけを出力したい場合、行列フィールドに「type」フィルタを追加します。
 
 ```twig
-{% for block in entry.myMatrixField.type('text').all() %}
+{% for block in clone(entry.<FieldHandle>).type('text').all() %}
     {{ block.text|markdown }}
 {% endfor %}
 ```
@@ -104,7 +104,7 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 あなたが望むなら、複数のブロックタイプを渡すことができます。
 
 ```twig
-{% for block in entry.myMatrixField.type('text, heading').all() %}
+{% for block in clone(entry.<FieldHandle>).type('text, heading').all() %}
     {% if block.type == "heading" %}
         <h3>{{ block.heading }}</h3>
     {% else %}
@@ -119,13 +119,7 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 デフォルトでは、行列フィールドは最初の100ブロックを返します。変更するには `limit` パラメータで上書きします。
 
 ```twig
-{% for block in entry.myMatrixField.limit(5) %}
-```
-
-100以上のブロックがあり、それらすべてのブロックを返したいと考えるなら、パラメータを `null` にセットすることもできます。
-
-```twig
-{% for block in entry.myMatrixField.limit(null) %}
+{% for block in clone(entry.<FieldHandle>).limit(5) %}
 ```
 
 
@@ -134,7 +128,7 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 [length フィルタ](https://twig.symfony.com/doc/filters/length.html)を利用して、ブロックの総数を取得できます。
 
 ```twig
-{{ entry.myMatrixField|length }}
+{{ entry.<FieldHandle>|length }}
 ```
 
 

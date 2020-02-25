@@ -60,7 +60,7 @@
 テンプレート内でタグフィールドのエレメントを取得する場合、タグフィールドのハンドルを利用して、関連付けられたタグにアクセスできます。
 
 ```twig
-{% set relatedTags = entry.<FieldHandle> %}
+{% set query = entry.<FieldHandle> %}
 ```
 
 これは、所定のフィールドで関連付けられたすべてのタグを出力するよう準備された[タグクエリ](dev/element-queries/tag-queries.md)を提供します。
@@ -96,6 +96,12 @@
 ```
 
 タグクエリで[パラメータ](dev/element-queries/tag-queries.md#parameters)をセットすることもできます。
+
+```twig
+{% set relatedTags = clone(entry.<FieldHandle>)
+    .group('blogEntryTags')
+    .all() %}
+```
 
 ## 関連項目
 

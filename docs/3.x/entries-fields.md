@@ -57,7 +57,7 @@ Possible values include:
 If you have an element with an Entries field in your template, you can access its related entries using your Entries field’s handle:
 
 ```twig
-{% set relatedEntries = entry.<FieldHandle> %}
+{% set query = entry.<FieldHandle> %}
 ```
 
 That will give you an [entry query](dev/element-queries/entry-queries.md), prepped to output all of the related entries for the given field.
@@ -95,10 +95,14 @@ If you just need to check if there are any related entries (but don’t need to 
 You can set [parameters](dev/element-queries/entry-queries.md#parameters) on the entry query as well. For example, to only fetch entries in the `news` section, set the [section](dev/element-queries/entry-queries.md#section) param:
 
 ```twig
-{% set relatedEntries = entry.<FieldHandle>
+{% set relatedEntries = clone(entry.<FieldHandle>)
     .section('news')
     .all() %}
 ```
+
+::: tip
+It’s always a good idea to clone the entry query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
+:::
 
 ## See Also
 
