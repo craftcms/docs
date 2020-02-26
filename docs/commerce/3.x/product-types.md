@@ -32,6 +32,18 @@ Defines what auto-generated SKUs should look like when a SKU field is submitted 
 How you access properties in the SKU format depends on whether the product type has variants. If the product type does not have multiple variants, use `{product}`. Otherwise, `{object}` will refer to the variant when the product type has multiple variants.
 :::
 
+Be sure to choose this carefully and avoid using the `id` property to ensure a unique SKU.
+
+Since `id` refers to the element’s ID and Craft may have many other elements, this won’t be sequential. If you’d rather generate a unique sequential number, consider using Craft’s [seq()](https://docs.craftcms.com/v3/dev/functions.html#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
+
+The following example generates a sequential number, per variant, with the given product slug:
+
+```twig
+{{ object.product.slug }}-{{ seq(object.product.slug) }}
+```
+
+The resulting variant SKU might be something like `a-new-toga-001`, where `a-new-toga` is the product’s slug and `001` is the first sequential number based on that slug.
+
 ::: warning
 If a product type has an automatic SKU format, the SKU field is not shown for new variants. Once saved, the field will be displayed for editing.
 :::
