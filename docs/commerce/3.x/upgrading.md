@@ -1,20 +1,20 @@
 # Upgrading to Commerce 3
 
 ::: warning
-If you’re upgrading from Commerce 1, review the [Changes in Commerce 2](https://docs.craftcms.com/commerce/v2/changes-in-commerce-2.html) documentation and update your project accordingly before upgrading to Commerce 3.
+If you’re upgrading from Commerce 1, see the [Changes in Commerce 2](https://docs.craftcms.com/commerce/v2/changes-in-commerce-2.html) and upgrade to the latest Commerce 2 version before upgrading to Commerce 3.
 :::
 
 ## Preparing for the Upgrade
 
 Before you begin, make sure that:
 
-- you've reviewed the [changes in Commerce 3](https://github.com/craftcms/commerce/blob/master/CHANGELOG.md#300---2020-01-28)
-- your site is running at least **Craft 3.4** and **Commerce 2.2.17**
-- your **database is backed up** in case everything goes horribly wrong
+1. You’ve reviewed the [changes in Commerce 3](https://github.com/craftcms/commerce/blob/master/CHANGELOG.md#300---2020-01-28)
+2. Your site’s running at least **Craft 3.4** and **the latest version of Commerce 2** (2.2.17)
+3. Your **database is backed up** in case everything goes horribly wrong
 
-Once you've completed everything listed above you can continue with the upgrade process.
+Once you’ve completed these steps, you’re ready continue.
 
-When upgrading a Commerce 2 project to Commerce 3, you should be aware of the following.
+When upgrading from Commerce 2 to Commerce 3, the following changes may be important depending on how you’ve set up your project.
 
 ## Order Emails
 
@@ -53,24 +53,22 @@ Merging carts as manual process is better since the customer can decide what to 
 
 This change is also mitigated by the fact that the previous cart of the current user is now loaded as the current cart when calling `craft.commerce.carts.cart` automatically.
 
-## Twig template changes
+## Twig template breaking changes
 
-Use the table below to update your twig templates.
-D - Deprecated
-BC - Breaking Change
+Use the table below to update each breaking change in your Twig templates.
 
-| Old                                       | New                                                                 | Change |
-| ----------------------------------------- | ------------------------------------------------------------------- | ------ |
-| `craft.commerce.carts.cart(true, true)`   | `craft.commerce.carts.cart(true)`                                   | BC     |
-| `craft.commerce.carts.cart(false, true)`  | `craft.commerce.carts.cart(false)`                                  | BC     |
-| `craft.commerce.availableShippingMethods` | `cart.availableShippingMethod`                                      | BC     |
-| `craft.commerce.cart`                     | `craft.commerce.carts.cart`                                         | BC     |
-| `craft.commerce.countriesList`            | `craft.commerce.countries.allCountriesAsList`                       | BC     |
-| `craft.commerce.customer`                 | `craft.commerce.customers.customer`                                 | BC     |
-| `craft.commerce.discountByCode`           | `craft.commerce.discounts.discountByCode`                           | BC     |
-| `craft.commerce.primaryPaymentCurrency`   | `craft.commerce.paymentCurrencies.primaryPaymentCurrency`           | BC     |
-| `craft.commerce.statesArray`              | `craft.commerce.states.allStatesAsList`                             | BC     |
-| `craft.commerce.states.allStatesAsList`          | `craft.commerce.states.getAllEnabledStatesAsListGroupedByCountryId` | BC     |
+| Old                                       | New                                                                 |
+| ----------------------------------------- | ------------------------------------------------------------------- |
+| `craft.commerce.carts.cart(true, true)`   | `craft.commerce.carts.cart(true)`                                   |
+| `craft.commerce.carts.cart(false, true)`  | `craft.commerce.carts.cart(false)`                                  |
+| `craft.commerce.availableShippingMethods` | `cart.availableShippingMethod`                                      |
+| `craft.commerce.cart`                     | `craft.commerce.carts.cart`                                         |
+| `craft.commerce.countriesList`            | `craft.commerce.countries.allCountriesAsList`                       |
+| `craft.commerce.customer`                 | `craft.commerce.customers.customer`                                 |
+| `craft.commerce.discountByCode`           | `craft.commerce.discounts.discountByCode`                           |
+| `craft.commerce.primaryPaymentCurrency`   | `craft.commerce.paymentCurrencies.primaryPaymentCurrency`           |
+| `craft.commerce.statesArray`              | `craft.commerce.states.allStatesAsList`                             |
+| `craft.commerce.states.allStatesAsList`          | `craft.commerce.states.getAllEnabledStatesAsListGroupedByCountryId` |
 
 ## Form Action Changes
 
