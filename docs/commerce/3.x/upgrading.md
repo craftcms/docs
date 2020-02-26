@@ -4,9 +4,15 @@
 If you’re upgrading from Commerce 1, review the [Changes in Commerce 2](https://docs.craftcms.com/commerce/v2/changes-in-commerce-2.html) documentation and update your project accordingly before upgrading to Commerce 3.
 :::
 
-::: tip
-See the [changelog](https://github.com/craftcms/commerce/blob/master/CHANGELOG.md#300---2020-01-28) for a full list of changes.
-:::
+## Preparing for the Upgrade
+
+Before you begin, make sure that:
+
+- you've reviewed the [changes in Commerce 3](https://github.com/craftcms/commerce/blob/master/CHANGELOG.md#300---2020-01-28)
+- your site is running at least **Commerce 2.2.17**
+- your **database is backed up** in case everything goes horribly wrong
+
+Once you've completed everything listed above you can continue with the upgrade process.
 
 When upgrading a Commerce 2 project to Commerce 3, you should be aware of the following.
 
