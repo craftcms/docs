@@ -9,7 +9,7 @@ If you’re upgrading from Commerce 1, review the [Changes in Commerce 2](https:
 Before you begin, make sure that:
 
 - you've reviewed the [changes in Commerce 3](https://github.com/craftcms/commerce/blob/master/CHANGELOG.md#300---2020-01-28)
-- your site is running at least **Commerce 2.2.17**
+- your site is running at least **Craft 3.4** and **Commerce 2.2.17**
 - your **database is backed up** in case everything goes horribly wrong
 
 Once you've completed everything listed above you can continue with the upgrade process.
