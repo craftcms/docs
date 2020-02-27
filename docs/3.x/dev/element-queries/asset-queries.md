@@ -45,6 +45,10 @@ We can display a list of thumbnails for images in a “Photos” volume by doing
 </ul>
 ```
 
+::: warning
+When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have “Assets in this volume have public URLs” enabled and a “Base URL” setting. Otherwise, the result will always be empty.
+:::
+
 ## Parameters
 
 Asset queries support the following parameters:

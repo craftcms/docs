@@ -103,6 +103,10 @@ To loop through all of the related assets, call [all()](api:craft\db\Query::all(
 {% endif %}
 ```
 
+::: warning
+When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have “Assets in this volume have public URLs” enabled and a “Base URL” setting. Otherwise, the result will always be empty.
+:::
+
 If you only want the first related asset, call [one()](api:craft\db\Query::one()) instead, and then make sure it returned something:
 
 ```twig
