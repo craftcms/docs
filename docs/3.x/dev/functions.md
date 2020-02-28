@@ -218,7 +218,7 @@ Executes a GraphQL query against the full schema.
   }
 }') %}
 
-{% for entry in result.data. %}
+{% for entry in result.data %}
     <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
     <p class="timestamp">{{ entry.postDate }}</p>
 
