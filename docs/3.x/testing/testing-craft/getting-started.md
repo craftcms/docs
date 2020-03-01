@@ -229,7 +229,9 @@ codecept run unit
 This will take a second to load as it has to install all of Craft's database tables.
 Once completed it will say:
 
-> OK (1 test, 1 assertion)
+```bash
+OK (1 test, 1 assertion)
+```
 
 ## Conclusion
 

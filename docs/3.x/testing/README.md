@@ -5,8 +5,6 @@ Testing is a crucial part of ensuring that software continues to work
 as the initial design expected. Things often tend to break when changing existing code bases
 and often not directly in the places you are working on when errors occur. 
 
-> You can’t sleep well if you are not confident that your last commit didn’t take down the whole application. 
-
 This is where automated testing can help. If done correctly critical parts of 
 your site, module and/or plugin can be tested in such a way that ensures you are
 notified when anything stops working as expected and before shipping any code to production.
