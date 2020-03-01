@@ -38,6 +38,11 @@ Possible values include:
 | - | -
 | `':empty:'` | that don’t have any related users.
 | `':notempty:'` | that have at least one related user.
+| `100` | that are related to the user with an ID of 100.
+| `[100, 200]` | that are related to a user with an ID of 100 or 200.
+| `['and', 100, 200]` | that are related to the users with IDs of 100 and 200.
+| an [User](api:craft\elements\User) object | that are related to the user.
+| an [UserQuery](api:craft\elements\db\UserQuery) object | that are related to any of the resulting users.
 
 ```twig
 {# Fetch entries with a related user #}

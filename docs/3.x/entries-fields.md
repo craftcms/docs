@@ -44,11 +44,17 @@ Possible values include:
 | - | -
 | `':empty:'` | that don’t have any related entries.
 | `':notempty:'` | that have at least one related entry.
+| `100` | that are related to the entry with an ID of 100.
+| `[100, 200]` | that are related to an entry with an ID of 100 or 200.
+| `['and', 100, 200]` | that are related to the entries with IDs of 100 and 200.
+| an [Entry](api:craft\elements\Entry) object | that are related to the entry.
+| an [EntryQuery](api:craft\elements\db\EntryQuery) object | that are related to any of the resulting entries.
 
 ```twig
-{# Fetch entries with a related entry #}
-{% set entries = craft.entries()
-    .<FieldHandle>(':notempty:')
+{# Fetch artwork entries that are related to `artist` #}
+{% set works = craft.entries()
+    .section('artwork')
+    .<FieldHandle>(artist)
     .all() %}
 ```
 
