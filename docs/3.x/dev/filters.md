@@ -158,6 +158,21 @@ An arrow function can be passed instead, if the values that should be returned d
 
 This works similarly to Twig’s core [`column`](https://twig.symfony.com/doc/2.x/filters/column.html) filter, except that [ArrayHelper::getColumn()](api:yii\helpers\BaseArrayHelper::getColumn()) is used rather than PHP’s [array_column()](https://secure.php.net/array_column) function.
 
+## `contains`
+
+Returns whether the passed-in array contains any nested arrays/objects with a particular key/attribute set to a given value.
+
+```twig
+{% set works = craft.entries()
+    .section('artwork')
+    .all() %}
+
+{# See if any of the artwork has a mature rating #}
+{% if works|contains('rating', 'm') %}
+    <p class="mature">Some of this artwork is meant for mature viewers.</p>
+{% endif %}
+```
+
 ## `convert_encoding`
 
 Converts a string from one encoding to another.
@@ -651,6 +666,22 @@ If you want to replace an existing element of the same type, pass `'replace'` as
 {{ '<div><p>Ipsum</p></div>'|prepend('<p>Lorem</p>', 'replace') }}
 {# Output: <div><p>Lorem</p></div> #}
 ```
+
+## `purify`
+
+Runs the given text through HTML Purifier.
+
+```twig
+{{ user.bio|purify }}
+```
+
+You can specify a custom HTML Purifier config file as well:
+
+```twig
+{{ user.bio|purify('user_bio') }}
+```
+
+That will configure HTML Purifier based on the settings defined by `config/htmlpurifier/user_bio.json`.
 
 ## `raw`
 

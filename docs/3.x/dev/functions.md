@@ -102,6 +102,17 @@ Clones a given object.
 {% set articles = clone(query).type('articles') %}
 ```
 
+## `combine`
+
+Combines two arrays into one, using the first array to define the keys, and the second array to define the values.
+
+```twig
+{% set arr1 = ['a', 'b', 'c'] %}
+{% set arr2 = ['foo', 'bar', 'baz'] %}
+{% set arr3 = combine(arr1, arr2) %}
+{# arr3 will now be `{a: 'foo', b: 'bar', c: 'baz'}` #}
+```
+
 ## `constant`
 
 Returns the constant value for a given string.
