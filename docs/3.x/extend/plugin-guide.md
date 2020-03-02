@@ -67,9 +67,8 @@ Create a `composer.json` file at the root of your plugin directory, and use this
     }
   },
   "extra": {
-    "handle": "plugin-handle",
     "name": "Plugin Name",
-    "documentationUrl": "https://github.com/developer/repo/blob/master/README.md"
+    "handle": "plugin-handle"
   }
 }
 ```
@@ -83,33 +82,24 @@ Replace:
 - `developer/repo` with the actual GitHub account and repository names where the plugin will live.
 - `master` with the actual primary branch name of your GitHub repository.
 - `namespace\\prefix\\` with your namespace prefix. (Use double-backslashes because this is JSON, and note this must end with `\\`.)
-- `plugin-handle` with your plugin handle.
 - `Plugin Name` with your plugin name.
+- `plugin-handle` with your plugin handle.
 - `MIT` with `proprietary` if you plan to use [Craft License](https://craftcms.github.io/license/) (see [Choose a License](plugin-store.md#choose-a-license) on the “Publishing to the Plugin Store” page).
 
 If you’d prefer to release your plugin with the [Craft license](https://craftcms.github.io/license/) rather than [MIT](https://opensource.org/licenses/MIT), change the `license` value to `"proprietary"`.
 
-Here’s a full list of the properties that can go in that `extra` object:
+::: tip
+While not strictly required by Composer, we recommend you explicitly set the `version` in your `composer.json` because it makes a couple things easier on you when developing the plugin. Don’t forget to keep it updated though!
+:::
 
-- `handle` – The plugin handle _(required)_.
+In addition to `name` and `handle` (which are both required), there are a few other things you can include in that `extra` object:
+
 - `class` – The [Plugin class](#the-plugin-class) name. If not set, the installer will look for a `Plugin.php` file at each of the `autoload` path roots.
-- `basePath` – The base path to your plugin’s source files. This can begin with one of your `autoload` namespaces, formatted as a [Yii alias] (e.g. `@vendorname/foo`). If not set, the directory that contains your primary Plugin class will be used.
-- `name` – The plugin name. If not set, the package name (sans vendor prefix) will be used.
-- `version` - The plugin version. If not set, the current package version will be used.
-- `schemaVersion` – The plugin schema version.
 - `description` – The plugin description. If not set, the main `description` property will be used.
 - `developer` – The developer name. If not set, the first author’s `name` will be used (via the `authors` property).
 - `developerUrl` – The developer URL. If not set, the `homepage` property will be used, or the first author’s `homepage` (via the `authors` property).
 - `developerEmail` – The support email. If not set, the `support.email` property will be used.
 - `documentationUrl` – The plugin’s documentation URL. If not set, the `support.docs` property will be used.
-- `sourceLanguage` – The plugin’s source language (defaults to `en-US`).
-- `hasSettings` – Whether the plugin has settings (should be `true` or `false`).
-- `hasCpSection` – Whether the plugin has its own section in the Control Panel (should be `true` or `false`).
-- `components` – Object defining any [component configs] that should be present on the plugin.
-
-::: tip
-While not strictly required by Composer, we recommend you explicitly set the `version` in your `composer.json` because it makes a couple things easier on you when developing the plugin. Don’t forget to keep it updated though!
-:::
 
 ::: warning
 If you’re updating a Craft 2 plugin, make sure to remove the `composer/installers` dependency if it has one.
