@@ -4,7 +4,9 @@
 
 ## Settings Model
 
-Plugins that have global settings need to define a “settings model”, which is responsible for storing the setting values, and validating them.
+Once you’ve indicated your plugin will have settings by enabling `hasCpSettings` in your main plugin class or `composer.json`, you’ll need to provide a model for defining them.
+
+This “settings model” is responsible for storing and validating the setting values.
 
 Settings models are just like any other [model](https://www.yiiframework.com/doc/guide/2.0/en/structure-models). To create it, create a `models/` directory within your plugin’s source directory, and create a `Settings.php` file within it:
 
