@@ -19,7 +19,7 @@ Before you can create entries, you must create Sections to contain them. In each
 
 If you're using Craft with multiple sites then you can also define in your Section:
 
-* Which sites entries in the section should target
+* Which sites' entries in the section should target
 * Which sites are enabled by default for new entries
 
 To create a new section, go to Settings → Sections and click the “New Section” button.
