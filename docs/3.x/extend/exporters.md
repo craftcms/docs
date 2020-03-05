@@ -16,7 +16,7 @@ Craft 3.4 introduced the concept of custom element exporters, allowing a develop
 ## Creating Custom Exporters
 
 Craft exporters should extend <api:craft\base\ElementExporter>. 
-Their `export()` method should return an array using the array keys as column(CSV) / node(XML) / object(JSON) titles.
+Their `export()` method should return an array using the array keys as column titles(CSV), node names(XML), object keys(JSON)
 
 Here is a simple exporter that will export only the Title, Status and URL of the element as well as the Title of related elements from a field called `myRelatedElements`;
 ```php
@@ -146,7 +146,7 @@ The above export for a Commerce Product showing some related Entries would be so
 
 ## Registering Custom Exporters
 
-In order to have the option to export using your custom exporter we need to register it for use.
+In order to have the option to export using your custom exporter you need to register it for use.
 
 Register your exporter in addition to the default exporters in your module / plugin's `init()` method as follows:
 
