@@ -275,6 +275,16 @@ If disabled, an alternate task running trigger *must* be set up separately. For 
 */1 * * * * /usr/bin/curl --silent --compressed http://example.com/index.php?p=actions/tasks/runPendingTasks
 ```
 
+### `sameSiteCookieValue`
+
+The [SameSite](https://www.owasp.org/index.php/SameSite) value that should be set on Craft cookies, if any.
+
+This can be set to `'Lax'`, `'Strict'`, or `null`.
+
+::: note
+This setting requires PHP 7.3 or later.
+:::
+
 ### `sanitizeSvgUploads`
 
 **Accepts**: `true` or `false`
