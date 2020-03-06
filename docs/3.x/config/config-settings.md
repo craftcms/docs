@@ -2111,7 +2111,7 @@ The [SameSite](https://www.owasp.org/index.php/SameSite) value that should be se
 
 This can be set to `'Lax'`, `'Strict'`, or `null`.
 
-::: note
+::: tip
 This setting requires PHP 7.3 or later.
 :::
 
