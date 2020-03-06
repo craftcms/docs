@@ -1,6 +1,6 @@
 # Product Queries
 
-You can fetch products in your templates or PHP code using **product queries**.
+You can fetch products using **product queries**.
 
 ::: code
 ```twig
@@ -10,6 +10,14 @@ You can fetch products in your templates or PHP code using **product queries**.
 ```php
 // Create a new product query
 $myProductQuery = \craft\commerce\elements\Product::find();
+```
+```graphql
+# Create a new product query
+{
+  products {
+    # ...
+  }
+}
 ```
 :::
 
@@ -21,7 +29,7 @@ See [Introduction to Element Queries](https://docs.craftcms.com/v3/dev/element-q
 
 ## Example
 
-We can display the 10 most recent Clothing products by doing the following:
+We can use Twig to display the ten most recent Clothing products:
 
 1. Create a product query with `craft.products()`.
 2. Set the [type](#type) an [limit](#limit) parameters on it.
@@ -43,6 +51,20 @@ We can display the 10 most recent Clothing products by doing the following:
     {{ product.summary }}
     <a href="{{ product.url }}">Learn more</a>
 {% endfor %}
+```
+
+To fetch the same information with GraphQL, we could write a query like this:
+
+```graphql
+{
+  products(limit: 10, type: "clothing") {
+    title
+    uri
+    ... on clothing_Product {
+      summary
+    }
+  }
+}
 ```
 
 ## Parameters
