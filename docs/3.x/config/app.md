@@ -147,7 +147,7 @@ return [
 
 #### Database Example
 
-First, you must create the database table that will store PHP’s sessions. You can do that quickly but running the `craft setup/php-session` console command from your project’s root folder.
+First, you must create the database table that will store PHP’s sessions. You can do that quickly but running the `craft setup/php-session-table` console command from your project’s root folder.
 
 ```php
 <?php
