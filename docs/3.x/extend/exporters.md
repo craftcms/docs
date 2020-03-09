@@ -181,7 +181,7 @@ The example above will make the exporter available to all element types. To rest
 
 ```php{2,5,6,7}
 use prefix\exporters\MyCustomExporter;
-use craft\base\Product;
+use craft\commerce\elements\Product;
 use yii\base\Event;
 
 Event::on(
