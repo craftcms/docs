@@ -46,6 +46,16 @@ You will also be required to pick a Renewal Price, which is the annual fee the P
 If you initially submit your plugin as free, you will not be allowed to change it to commercial later. You can, however, give it a commercial [edition](plugin-editions.md) that offers extended functionality, as long as you don’t remove crucial functionality from the free edition.
 :::
 
+### Declare Craft Version Support
+
+Every plugin needs to explicitly require a minimum Craft CMS version in `composer.json`:
+
+```json
+"require": {
+    "craftcms/cms": "^3.0.0"
+}
+```
+
 ### Submit for Approval
 
 Once you’re ready to submit the plugin, click the “Submit for approval” button. Once your plugin is approved, it will become visible on [plugins.craftcms.com](https://plugins.craftcms.com/). It won’t necessarily be available in the in-app Plugin Store yet, though, unless your plugin already has at least one [release](#plugin-releases).
