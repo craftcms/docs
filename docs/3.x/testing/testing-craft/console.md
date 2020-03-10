@@ -7,7 +7,7 @@ The way you can test your console commands with Craft is inspired by the excelle
 done over at [Laravel](https://laravel.com/docs/5.8/console-tests) by [@themsaid](https://github.com/laravel/framework/pull/25270). If you are familiar with testing Laravel applications this will feel quite familiar.
 :::
 
-## How it works
+## How It Works
 
 You can test console controllers by creating a unit test and setting it up in a specific way
 ([see the guide below for a practical example](#step-1-extend-a-specific-class)). Within this unit test Craft makes
@@ -20,7 +20,7 @@ command line. So any resulting actions to the database, filesystem etc. can be t
 other unit test.
 :::
 
-### Step 1: Extend a specific class
+### Step 1: Extend a Specific Class
 
 Your unit test needs to extend `craft\test\console\ConsoleTest`.
 
@@ -34,10 +34,9 @@ use \craft\test\console\ConsoleTest;
 class MyConsoleTest extends ConsoleTest
 {
 }
-
 ```
 
-### Step 2: Create a test
+### Step 2: Create a Test
 
 Create a test like you would in any other unit test.
 
@@ -54,10 +53,9 @@ class MyConsoleTest extends ConsoleTest
     {
     }
 }
-
 ```
 
-### Step 3: Invoke the `consoleCommand` method
+### Step 3: Invoke the `consoleCommand` Method
 
 Invoke the `consoleCommand` method as follows.
 
@@ -67,11 +65,9 @@ public function testSomething()
 {
     $this->consoleCommand('test-controller/test-action');
 }
-
-
 ```
 
-### Step 4: Add steps and run the command
+### Step 4: Add Steps & Run the Command
 
 Because the `consoleCommand` returns a [fluid interface](https://en.wikipedia.org/wiki/Fluent_interface#PHP)
 you can add as many methods ([see options below](#methods)) in order to
@@ -94,7 +90,8 @@ You must end the chain with a `->exitCode($value)` call to specific what exit co
 The commands will be checked in the order you define them. So if your console command is structured as follows:
 
 ```php
-public function actionSomething() {
+public function actionSomething()
+{
     $this->stdOut('first');
     $this->stdOut('second');
 }
@@ -104,10 +101,10 @@ Don’t setup your method call as follows:
 
 ```php
 $this->consoleCommand('test-controller/test-action')
-        ->stdOut('second')
-        ->stdOut('first')
-        ->exitCode(ExitCode::OK)
-        ->run();
+    ->stdOut('second')
+    ->stdOut('first')
+    ->exitCode(ExitCode::OK)
+    ->run();
 ```
 
 As this **will** fail.

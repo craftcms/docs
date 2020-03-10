@@ -1,23 +1,20 @@
 # Testing
 
-## Types of tests
+## Types of Tests
 
 There are a variety of tests, each providing pros and cons to specific use cases and functionalities within your application/module/plugin. Craft currently supports the following four test types.
 
-### Manual testing
+### Manual Testing
 
-Everyone has and probably does manual testing when developing with Craft. Manual testing can be defined in the following steps:
+Everyone that’s worked with Craft has done manual testing. Manual testing consists of the following steps:
 
-- Write some code
-- Press `f5` or trigger a controller action
-- Verify the result by seeing the result in the browser, IDE or database.
+1. Write some code.
+2. Refresh a given page or trigger a controller action.
+3. Verify the result in the browser, IDE, or database.
 
-Manual testing is the most time consuming but often the most effective way to catch
-bugs in the _primary_ implementation of code - it also takes a lot of time and fails in certain key areas.
-Most importantly - if you make a change to a codebase in one place - it can very likely fail in other places,
-which you are not manually testing.
+Manual testing is often the most effective way to catch bugs in the _primary_ implementation of code. However, each test takes a significant amount of time and fails in certain key areas. Most importantly, if you make a change to a codebase in one place it may fail in other places you’re _not_ manually testing.
 
-It would be woefully inefficient to test your **entire** application after each `git push`. This is where **automated** tests can help.
+It would be woefully inefficient to test your **entire** application manually after each `git push`. This is where **automated** tests can help.
 
 ::: tip
 Testing is all about strategy and approaches. Manual testing and automated testing work best
@@ -25,15 +22,16 @@ together. You can use your judgement to detect/prevent issues that computers can
 can execute many tests in short time.
 :::
 
-### Unit testing
+### Unit Testing
 
 Many definitions exist regarding unit testing. Fundamentally a unit test is focused on testing
-an individual 'unit' of your code. In practice, this will often mean testing the results of a function or in some cases, class.
+an individual “unit” of your code. This often means testing the results of a function or class.
 
-Consider the following class.
+Consider the following class:
 
 ```php
-class SalaryChecker {
+class SalaryChecker
+{
     public function multiply(int $a, int $b) : int
     {
         return $a * $b;
@@ -46,13 +44,19 @@ class SalaryChecker {
 }
 ```
 
-If you were to unit test this class you would write something like follows:
+Your unit test for this class might look like this:
 
 ```php
 use Codeception\Test\Unit;
-class MyTest extends Unit {
+
+class MyTest extends Unit
+{
     public $salaryChecker;
 
+    /**
+     * This `_before()` hook is run before *every* test. We use it here
+     * to create a new `SalaryChecker()` instance each test can call.
+     */
     public function _before()
     {
         parent::_before();
@@ -60,6 +64,15 @@ class MyTest extends Unit {
         $this->salaryChecker = new SalaryChecker();
     }
 
+    /**
+     * Each `test*` function is executed, and within it we write a test
+     * that calls one of SalaryChecker’s methods to make an assertion
+     * about the result that should be returned.
+     *
+     * In this test, `multiply()` should multiply the parameters and
+     * return the result, so we provide `2` and `2` and know the result
+     * should be `4`.
+     */
     public function testMultiply()
     {
         $this->assertSame(
@@ -68,6 +81,10 @@ class MyTest extends Unit {
         );
     }
 
+    /**
+     * SalaryChecker’s `add()` method should add the parameters, so we
+     * can safely assert that `2` and `1` should return `3`.
+     */
     public function testAdd()
     {
         $this->assertSame(
@@ -78,25 +95,16 @@ class MyTest extends Unit {
 }
 ```
 
-The anatomy of this test can be defined somewhat as follows:
+This is a fundamental unit test.
 
-1. In the `_before` hook we create a `new SalaryChecker()` which can be used during the test.
-   The `_before` method is run before _every_ test.
-
-2. A test is executed and a method of the `SalaryChecker` class is called. An **assertion**
-   (checking that when passing 2 twice, 4 is returned - because the 2's are multiplied)
-   is then made regarding its return result.
-
-Fundamentally - that is a unit test.
-Now imagine a
-developer was to change the `multiply` method of the `SalaryChecker` class to the following:
+Now imagine a developer was to change `SalaryChecker` so its `multiply()` method never returned a number lower than `25000`:
 
 ```php
 public function multiply(int $a, int $b) : int
 {
     $result = $a * $b;
 
-    // Dont return salaries lower than 25000
+    // Don’t return salaries lower than 25,000
     if ($result < 25000) {
         return 25000
     }
@@ -105,81 +113,68 @@ public function multiply(int $a, int $b) : int
 }
 ```
 
-The test would fail. Obviously, this is a basic example but as your codebase expands/changes, new
-devs join or old dev's leave and/or project requirements differ from the original spec more
-and more code will become dependant on each other.
+The test would fail, expecting a result of `4` and getting `25000` instead.
 
-Your unit tests will primarily cover your [service](../extend/services.md) classes. It is not recommended to test
-_every_ method that your service class has.
-Use your best judgement and try to test methods as high up in the
-[call stack/backtrace](https://www.php.net/manual/en/function.debug-backtrace.php) as possible
-(excluding your controllers - they are covered by functional and acceptance testing).
+Even though this is a basic example, it would automatically confirm expected application behavior and issue a warning signal if the tested behavior changed. This can be increasingly important as a codebase grows, changes hands as developers join or leave the project, or requirements differ from the original spec.
 
-Having good unit tests ensures that your individual functions work correctly, and if they don't,
-quickly catch and fix bugs relating this hereto.
+Good unit tests ensure your individual functions work correctly, and help you quickly catch and fix bugs if they don’t.
 
-It is recommended to read the Codeception documentation on
-[unit tests](https://codeception.com/docs/05-UnitTests)
-as well to see more practical examples of unit tests.
+Your unit tests will primarily cover your [service](../extend/services.md) classes. It’s probably excessive to test _every_ method of your service class; you’ll need to use your judgement and test methods as high up in the [call stack/backtrace](https://www.php.net/manual/en/function.debug-backtrace.php) as possible. (This excludes your controllers, which are covered by functional and acceptance testing).
 
-### Functional & acceptance testing
+::: tip
+For more practical examples, see the [Codeception documentation on unit tests](https://codeception.com/docs/05-UnitTests).
+:::
 
-Your application isn't just a collection of PHP classes on a server. These
-classes work together to create an end product. These methods are often linked via
-controllers. The end product will then be shipped to a user via these controllers. The controller actions
-are the place where your application functionality is encompassed into a usable package - seems a good place to write tests for?
+### Functional & Acceptance Testing
+
+Your application isn’t just a collection of PHP classes on a server; these classes work together to create an end product. These methods are often linked via controllers. The end product will then be shipped to a user via these controllers. The controller actions are the place where your application functionality is encompassed into a usable package, making them an ideal place to test.
 
 Typically a controller will:
 
-- 1. Process a request (authentication, authorization, request types e.t.c.)
-- 2. Invoke craft services
-- 3. Return a response
+1. Process a request (authentication, authorization, request types etc.)
+2. Invoke craft services.
+3. Return a response.
 
-Point 2 is covered by unit tests - 1 and 3 are covered by
-functional and acceptance tests.
+Point 2 is covered by unit tests. 1 and 3 are covered by functional and acceptance tests.
 
-What separates functional and acceptance tests from unit tests are that they
-are conducted from the **user** perspective. Consider the following
-twig template located at route `/pages/bob`:
+What separates functional and acceptance tests from unit tests are that they’re conducted from the **user** perspective. Consider the following Twig template located at route `/pages/bob`:
 
 ```twig
-Hi {{ currentUser.firstName }}
+Hi {{ currentUser.firstName }},
 
-Welcome to this app
+Welcome to this app!
 ```
 
-For this page/template you would create the following test class
-(Assuming you are creating a functional test):
+A functional test tor this page/template might look like this:
 
 ```php
-<?php
 use FunctionalTester;
-class FunctionalCest {
+
+class FunctionalCest
+{
     public function testWelcomeMessage(FunctionalTester $I)
     {
         $I->amLoggedInAs($userWithFirstNameBob);
         $I->amOnPage('/pages/bob');
-        $I->see('Hi Bob');
-        $I->see('Welcome to this app');
+        $I->see('Hi Bob,');
+        $I->see('Welcome to this app!');
     }
 }
 ```
 
-Dont worry about `$userWithFirstNameBob`. Just pretend that this variable is an instance of
+Don’t worry about `$userWithFirstNameBob`. Just pretend that this variable is an instance of
 `craft\elements\User` where `$firstName = "bob"`.
 
-Notice how the test reads very much like instructions that you _could_ give to a
-human to perform on a production version of your application.
+Notice how the test reads like instructions that you _could_ give to a human to perform on a production version of your application.
 
-Underneath the functional test actually triggers the controller associated with this route.
-If you have a module/plugin you can also pass in for example
-`?p=actions/my-plugin/my-controller/my-action` which will test your controller actions.
+Underneath, the functional test actually triggers the controller associated with this route. If you have a module or plugin you can also pass in, for example, `?p=actions/my-plugin/my-controller/my-action` which will test your controller actions.
 
-You can even test the CP functionality by passing in a url that starts with the
-[cpTrigger](../config/config-settings.md#cptrigger) config (I.E with a `cpTrigger` of `admin`
+You can even test control panel functionality by passing a URL that starts with the
+[cpTrigger](../config/config-settings.md#cptrigger) config (i.e. with a `cpTrigger` of `admin`
 you could do `$I->amOnRoute('/admin/my-plugin/my-route/my-action)`).
+
 ::: tip
-Acceptance and functional tests are quite similar with some subtle differences in their
-_implementation_. See the [codeception docs](https://codeception.com/docs/01-Introduction)
-for an explanation hereto.
+Acceptance and functional tests are similar with subtle differences in their
+_implementation_. See the [Codeception docs](https://codeception.com/docs/01-Introduction)
+for an explanation.
 :::
