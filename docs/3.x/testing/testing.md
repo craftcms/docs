@@ -89,7 +89,7 @@ The anatomy of this test can be defined somewhat as follows:
 
 Fundamentally - that is a unit test.
 Now imagine a
-developer was to change the `add` method of the `SalaryChecker` class to the following:
+developer was to change the `multiply` method of the `SalaryChecker` class to the following:
 
 ```php
 public function multiply(int $a, int $b) : int
