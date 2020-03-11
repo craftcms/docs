@@ -108,7 +108,7 @@ When performing a GraphQL API request, the schema will be determined automatical
 
 ## Sending API Requests
 
-### Using GraphiQL
+### Using GraphQL
 
 The easiest way to start exploring your GraphQL API is with the built-in [GraphiQL](https://github.com/graphql/graphiql) IDE, which is available in the Control Panel from GraphQL → Explore.
 
@@ -181,7 +181,7 @@ curl \
 
 ## Caching
 
-All query results are cached, so that repeated queries can yield results faster. The GraphQL result cache does not have a sophisticated ruleset on ivalidating the cache - if the site's content or structure changes, the entire cache is invalidated.
+All query results are cached, so that repeated queries can yield results faster. The GraphQL result cache does not have a sophisticated ruleset on invalidating the cache - if the site's content or structure changes, the entire cache is invalidated.
 
 Craft has GraphQL result caching enabled by default, but it can be disabled with the [enableGraphQlCaching](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablegraphqlcaching) config setting.
 
