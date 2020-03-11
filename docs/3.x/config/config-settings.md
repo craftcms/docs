@@ -1691,8 +1691,8 @@ Since
 
 Whether CMYK should be preserved as the colorspace when manipulating images.
 
-Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions it can cause color
-distortion in the image. This will only have effect if ImageMagick is in use.
+Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions
+it can cause color distortion in the image. This will only have effect if ImageMagick is in use.
 
 
 
