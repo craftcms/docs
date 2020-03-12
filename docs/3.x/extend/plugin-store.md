@@ -27,7 +27,9 @@ To register your plugin, first make sure it’s published to a public GitHub rep
 If your plugins are published to a GitHub organization account, make sure that the organization is checked when authenticating your GitHub account.
 :::
 
-From your Craft ID account, go to Plugins → “Add a plugin”, and click the “Select” button next to your plugin’s repository. You will then be able to edit its description, screenshots, and other details.
+From your Craft ID account, you’ll need to first go to “Account Settings”, make sure “Enable plugin developer features” is checked under your username, and choose “Save”.
+
+Once plugin developer features are enabled, add your plugin by going to Plugins → “Add a plugin”, and choose the “Select” button next to your plugin’s repository. You will then be able to edit its description, screenshots, and other details.
 
 ### Choose a Price
 
