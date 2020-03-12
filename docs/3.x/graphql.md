@@ -108,7 +108,7 @@ When performing a GraphQL API request, the schema will be determined automatical
 
 ## Sending API Requests
 
-### Using GraphQL
+### Using the GraphiQL IDE
 
 The easiest way to start exploring your GraphQL API is with the built-in [GraphiQL](https://github.com/graphql/graphiql) IDE, which is available in the Control Panel from GraphQL → Explore.
 
