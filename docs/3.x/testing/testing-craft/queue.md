@@ -22,7 +22,7 @@ $this->tester->runQueue(MyJob::class, [
 Underneath Craft simply runs your job via `Craft::$app->getQueue()`. All methods and actions your job should perform on i.e. the database will thus be performed normally.
 :::
 
-## Checking queue data
+## Checking Queue Data
 
 Craft provides a `assertPushedToQueue` method that is accessible via the `$this->tester`
 property. You must pass the description of the queue when calling this method.

@@ -1689,10 +1689,10 @@ Since
 
 
 
-Whether CMYK should be preserved as the colorspace when when manipulating images.
+Whether CMYK should be preserved as the colorspace when manipulating images.
 
-Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions can cause color
-distortion in the image. This will only have effect if ImageMagick is in use.
+Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions
+it can cause color distortion in the image. This will only have effect if ImageMagick is in use.
 
 
 
@@ -2111,7 +2111,7 @@ The [SameSite](https://www.owasp.org/index.php/SameSite) value that should be se
 
 This can be set to `'Lax'`, `'Strict'`, or `null`.
 
-::: note
+::: tip
 This setting requires PHP 7.3 or later.
 :::
 

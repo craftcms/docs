@@ -6,11 +6,11 @@ They can be defined in the `fixturesMethod` [defined](../framework/config-option
 
 To setup fixtures Create a folder called `fixtures` in your `tests` folder. In this folder we will put our fixture classes and fixture data.
 
-## Craft-specific data
+## Craft-Specific Data
 
 For traditional database rows regular fixtures will suffice. However Craft introduces several concepts of its own, these come attached to some complicated linked data structures that are very difficult to manage with regular fixtures.
 
-### Element fixtures
+### Element Fixtures
 
 Element types are one of Craft’s main selling points for developers. They yield a lot of power. That power is courtesy of a complicated data structure and set of APIs. A by-product of this is that some heavy lifting is required if element types are to be defined in a single fixture and data file. For this reason support is provided out of the box for setting up various element types.
 
@@ -23,7 +23,7 @@ Craft’s element fixtures are based on the excellent team over at [robuust](htt
 and their `craft-fixtures` [plugin](https://github.com/robuust/craft-fixtures).
 :::
 
-### `Asset fixtures`
+### Asset Fixtures
 
 If you want to add fixtures for Assets, extend `craft\test\fixtures\elements\AssetFixture`.
 
@@ -55,7 +55,7 @@ The `AssetFixture` class will automatically copy your assets into the `tests/_cr
 Please ensure that the `tempFilePath` points to a filename this directory.
 :::
 
-### `Category fixtures`
+### Category Fixtures
 
 Extend `craft\test\fixtures\elements\CategoryFixture` to add categories.
 
@@ -76,7 +76,7 @@ return [
 
 The primary keys are: `siteId`, `groupId` and `title`.
 
-### `Entry fixtures`
+### Entry Fixtures
 
 Extend `craft\test\fixtures\elements\EntryFixture` to add entries.
 
@@ -98,7 +98,7 @@ return [
 
 The primary keys are: `siteId`, `sectionId`, `typeId` and `title`.
 
-### `Global set fixture`
+### Global Set Fixture
 
 Extend `craft\test\fixtures\elements\GlobalSetFixture` to add Global Sets.
 
@@ -120,7 +120,7 @@ The primary keys are: `handle`.
 Global sets do not get their own database row by default. If you need the Global Sets to have their own database row you can set `$useActiveRecord` to `true`.
 :::
 
-### `Tag fixtures`
+### Tag Fixtures
 
 Extend `craft\test\fixtures\elements\TagFixture` to add tags.
 
@@ -141,7 +141,7 @@ return [
 
 The primary keys are: `siteId`, `groupId` and `title`.
 
-### `User fixtures`
+### User Fixtures
 
 Extend `craft\test\fixtures\elements\UserFixture` to add users.
 
@@ -160,7 +160,7 @@ return [
 
 The primary keys are: `siteId`, `username` and `email`.
 
-### Element fixture field layout and content.
+### Element Fixture Field Layout & Content
 
 If you pass a `fieldLayoutType` into any class that extends the base `ElementFixture` class, Craft will automatically try to find the associated field layout and link it to the new Element you’re creating.
 
@@ -206,7 +206,7 @@ return [
 
 ```
 
-### Field layout fixtures
+### Field Layout Fixtures
 
 Another Craft specific concept is field layouts. Field layouts consist of:
 

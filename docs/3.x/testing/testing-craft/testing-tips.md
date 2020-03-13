@@ -1,6 +1,6 @@
 # Testing Tips
 
-## Maintain your database
+## Maintain Your Database
 
 The Craft module provides a `cleanup` and `transaction` option for the `codeception.yml` file. It is recommended that you set these options to `true`.
 
@@ -28,7 +28,7 @@ In the [getting started](../testing-craft/getting-started.md) section you set up
 
 Craft namespaces it's tests under one separate root namespace and then expands per test subject. I.E. Unit tests are namespaced under `crafttests\unit` while functional tests are namespaced under `crafttests\functional`. It is advised to apply this same convention to your tests. If you are testing a module or plugin you may want to provide support resources for testing, it is advised to namespace these using `my\plugin\namespace\test`. This is exactly how Craft does it as well. See the [element fixtures](../testing-craft/fixtures.md) as an example.
 
-## Quickly set up tests using the dedicated console command
+## Quick Setup via Console Command
 
 If you have a general understanding of the typical Craft testing setup, you can use the `tests/setup` console command which will do all of the important setup work for you. It will copy from Craft's `src/test/internal/example-test-suite` folder to either your project's root directory or a directory path of your choosing. All you then have to do is:
 

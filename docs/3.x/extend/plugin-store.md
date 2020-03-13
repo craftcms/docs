@@ -27,7 +27,9 @@ To register your plugin, first make sure it’s published to a public GitHub rep
 If your plugins are published to a GitHub organization account, make sure that the organization is checked when authenticating your GitHub account.
 :::
 
-From your Craft ID account, go to Plugins → “Add a plugin”, and click the “Select” button next to your plugin’s repository. You will then be able to edit its description, screenshots, and other details.
+From your Craft ID account, you’ll need to first go to “Account Settings”, make sure “Enable plugin developer features” is checked under your username, and choose “Save”.
+
+Once plugin developer features are enabled, add your plugin by going to Plugins → “Add a plugin”, and choose the “Select” button next to your plugin’s repository. You will then be able to edit its description, screenshots, and other details.
 
 ### Choose a Price
 
@@ -45,6 +47,16 @@ You will also be required to pick a Renewal Price, which is the annual fee the P
 ::: warning
 If you initially submit your plugin as free, you will not be allowed to change it to commercial later. You can, however, give it a commercial [edition](plugin-editions.md) that offers extended functionality, as long as you don’t remove crucial functionality from the free edition.
 :::
+
+### Declare Craft Version Support
+
+Every plugin needs to explicitly require a minimum Craft CMS version in `composer.json`:
+
+```json
+"require": {
+    "craftcms/cms": "^3.0.0"
+}
+```
 
 ### Submit for Approval
 
