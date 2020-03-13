@@ -555,19 +555,16 @@ To sort by a single property or key, pass its name as a string:
 {% set entries = entries|multisort('title') %}
 ```
 
+To sort by multiple properties or keys, pass them in as an array. For example, this will sort entries by their post date first, and then by their title:
+
+```twig
+{% set entries = entries|multisort(['postDate', 'title']) %}
+```
+
 An arrow function can be passed instead, if the values that should be sorted by don’t exist as a property or key on the array elements.
 
 ```twig
 {% set entries = entries|multisort(e => e.author.fullName) %}
-```
-
-To sort by multiple properties or keys, pass them in as an array. For example, this will sort entries by their author’s name first, and then by their title:
-
-```twig
-{% set entries = entries|multisort([
-    e => e.author.fullName,
-    'title',
-]) %}
 ```
 
 The values will be sorted in ascending order by default. You can switch to descending order with the `direction` param:
@@ -588,9 +585,9 @@ When sorting by multiple properties or keys, you must set the `direction` and `s
 
 ```twig
 {% set entries = entries|multisort([
-    e => e.author.fullName,
+    'postDate',
     'title',
-], sortFlag=[SORT_FLAG_CASE, SORT_FLAG_CASE]) %}
+], sortFlag=[SORT_NATURAL, SORT_FLAG_CASE]) %}
 ```
 
 ## `nl2br`
