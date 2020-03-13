@@ -509,6 +509,19 @@ All element types are [soft-deletable](soft-deletes.md) out of the box, however 
 
 To make an element restorable, just add the <api:craft\elements\actions\Restore> action to the array returned by your static [defineActions()](api:craft\base\Element::defineActions()) method. Craft will automatically hide it during normal index views, and show it when someone selects the “Trashed” status option.
 
+### Index Page Exporters
+
+You can define which [exporter types](element-exporter-types.md) your element type supports on its index page by adding a protected static [defineExporters()](api:craft\base\Element::defineExporters()) method on your element class:
+
+```php
+protected static function defineExporters(string $source): array
+{
+    $exporters = parent::defineExporters($source);
+    $exporters[] = MyExporter::class;
+    return $exporters;
+}
+```
+
 ### Sort Options
 
 You can define the sort options for your element indexes by adding a protected static [defineSortOptions()](api:craft\base\Element::defineSortOptions()) method to your element class:
