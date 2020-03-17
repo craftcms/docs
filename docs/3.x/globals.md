@@ -24,6 +24,21 @@ If you have a Global Set with the handle `companyInfo` and it has a field with t
 
 For additional Global Set properties you can use besides your custom fields see <api:craft\elements\GlobalSet> for a full reference.
 
+### Manually Loading Global Sets
+
+In some special situations, like within email templates, Global Sets won’t be available by default. Any Global Set may still be loaded manually. The above example could be loaded with `getSetByHandle()`:
+
+::: code
+```twig
+{% set companyInfo = craft.globals().getSetByHandle('companyInfo') %}
+```
+```php
+$companyInfo = \Craft::$app->getGlobals()->getSetByHandle('companyInfo');
+```
+:::
+
+More details are available in the [Globals service class documentation](api:craft\services\Globals).
+
 ## Global Sets with Multiple Sites
 
 If you run multiple sites with Craft, Global Sets are available in all sites. However, you can set the values in those sets on a per site basis, even leaving some fields blank, if desired.
