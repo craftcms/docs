@@ -72,7 +72,7 @@ Only fetch users with the given last name.
 
 ### `limit`
 
-Limits the results to *X* users.
+Limits the results to *X* users. The default value is `100`. `null` will return all users.
 
 ### `offset`
 
@@ -92,7 +92,7 @@ Only fetch users that match a given search query. (See [searching](../searching.
 
 ### `status`
 
-Only fetch users with the given status. Possible values are `'active'`, `'locked'`, `'suspended'`, `'pending'`, `archived'`, and `null`. The default value is `'active'`. `null` will return all users regardless of status.
+Only fetch users with the given status. Possible values are `'active'`, `'locked'`, `'suspended'`, `'pending'`, `'archived'`, and `null`. The default value is `'active'`. `null` will return all users regardless of status.
 
 ### `username`
 
