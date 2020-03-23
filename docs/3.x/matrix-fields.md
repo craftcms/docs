@@ -6,8 +6,8 @@ Matrix fields allow you to create multiple blocks of content within a single fie
 
 Matrix fields have the following settings:
 
-* **Configuration** – This is where you configure which block types should be available to your Matrix field, and which sub-fields each of those block types should have.
-* **Max Blocks** – The maximum number of blocks that can be created within the field. (Default is no limit.)
+- **Configuration** – This is where you configure which block types should be available to your Matrix field, and which sub-fields each of those block types should have.
+- **Max Blocks** – The maximum number of blocks that can be created within the field. (Default is no limit.)
 
 ## The Field
 
@@ -33,10 +33,10 @@ When [querying for elements](dev/element-queries/README.md) that have a Matrix f
 
 Possible values include:
 
-| Value | Fetches elements…
-| - | -
-| `':empty:'` | that don’t have any Matrix blocks.
-| `':notempty:'` | that have at least one Matrix block.
+| Value          | Fetches elements…                    |
+| -------------- | ------------------------------------ |
+| `':empty:'`    | that don’t have any Matrix blocks.   |
+| `':notempty:'` | that have at least one Matrix block. |
 
 ```twig
 {# Fetch entries with a Matrix block #}
@@ -55,7 +55,7 @@ If you have an element with a Matrix field in your template, you can access its 
 
 That will give you a [Matrix block query](dev/element-queries/matrix-block-queries.md), prepped to output all of the enabled blocks for the given field.
 
-To loop through all of the blocks, call [all()](api:craft\db\Query::all()) and then loop over the results:
+To loop through all of the blocks, call [all()](<api:craft\db\Query::all()>) and then loop over the results:
 
 ```twig
 {% set blocks = entry.<FieldHandle>.all() %}
@@ -96,7 +96,7 @@ Here’s an example of what the template might look like for a Matrix field with
 This code can be simplified using the [switch](dev/tags/switch.md) tag.
 :::
 
-If you only want the first block, call [one()](api:craft\db\Query::one()) instead of `all()`, and then make sure it returned something:
+If you only want the first block, call [one()](<api:craft\db\Query::one()>) instead of `all()`, and then make sure it returned something:
 
 ```twig
 {% set block = entry.<FieldHandle>.one() %}
@@ -105,14 +105,14 @@ If you only want the first block, call [one()](api:craft\db\Query::one()) instea
 {% endif %}
 ```
 
-If you only want to know the total number of blocks, call [count()](api:craft\db\Query::count()).
+If you only want to know the total number of blocks, call [count()](<api:craft\db\Query::count()>).
 
 ```twig
 {% set total = entry.<FieldHandle>.count() %}
 <p>Total blocks: <strong>{{ total }}</strong></p>
 ```
 
-If you just need to check if are blocks exist (but don’t need to fetch them), you can call [exists()](api:craft\db\Query::exists()):
+If you just need to check if are blocks exist (but don’t need to fetch them), you can call [exists()](<api:craft\db\Query::exists()>):
 
 ```twig
 {% if entry.<FieldHandle>.exists() %}
@@ -143,7 +143,7 @@ If you have an [entry form](dev/examples/entry-form.md) that needs to contain a 
     - type
     - fields
       - <FieldHandle_1>
-      - <FieldHanlde_2>
+      - <FieldHandle_2>
   - <BlockID_2>
     - type
     - fields
@@ -199,14 +199,14 @@ Outputting form fields for existing blocks is completely optional. As long as th
 
 To show a “New Block” form, first come up with a temporary ID for the block, prefixed with `new:`. For example, `new:1`, `new:2`, etc.
 
-Append the temporary ID to the `sortOrder` array, and use it when outputting the block’s form inputs. 
+Append the temporary ID to the `sortOrder` array, and use it when outputting the block’s form inputs.
 
 If you will likely need to include a JavaScript-powered component to the field, which appends new block inputs to the form. New blocks should have an “ID” of `new:X`, where `X` is any number that is unique among all new blocks for the field.
 
 For example, the first new block that is added to the form could have an “ID” of `new:1`, so its `type` input name would end up looking like this:
 
 ```html
-<input type="hidden" name="fields[<FieldHandle>][new:1][type]" value="text">
+<input type="hidden" name="fields[<FieldHandle>][new:1][type]" value="text" />
 ```
 
 Then define the form inputs for any additional blocks that should be appended to the input.
@@ -223,5 +223,5 @@ Then define the form inputs for any additional blocks that should be appended to
 
 ## See Also
 
-* [Element Queries](dev/element-queries/README.md)
-* <api:craft\elements\MatrixBlock>
+- [Element Queries](dev/element-queries/README.md)
+- <api:craft\elements\MatrixBlock>
