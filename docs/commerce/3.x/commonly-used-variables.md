@@ -78,7 +78,7 @@ Data returned as `[72:[3:'California', 4:'Washington'],32:[7:'New South Wales']]
 <select>
 {% for countryId, states in craft.commerce.states.allEnabledStatesAsListGroupedByCountryId %}
     <optgroup label="{{ craft.commerce.countries.allEnabledCountriesAsList[countryId].name ?? '' }}">
-    {% for stateId, stateName in craft.commerce.states.allEnabledStatesAsList[countryId] %}
+    {% for stateId, stateName in states %}
         <option value="{{ stateId }}">{{ stateName }}</option>
     {% endfor %}
   </optgroup>
