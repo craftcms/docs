@@ -26,9 +26,7 @@ Starting with your own static project? You can drag your existing `.html` files 
 
 Our work ahead will focus on the `templates/` and `web/` directories, and you can copy and paste sample code as we go without needing anything else.
 
-The sample code is available here if you want to grab everything before we get started:
-
-TODO: link to demo repo
+The sample code is available here if you want to grab everything before we get started: [github.com/craftcms/tutorial-project](https://github.com/craftcms/tutorial-project)
 
 Anything that uses dynamic content should live in your `templates/` folder. Regular HTML, CSS, JavaScript and images—including the cat photo we used earlier—can (and should) all go in your `web/` directory. How you organize either one is up to you!
 
@@ -45,8 +43,6 @@ When you provide Craft CMS with a value of `blog/_entry`, for example, it will a
 ::: tip
 There’s no “correct” file extension for templates, but `.twig` will be better for automatic syntax highlighting in editors like VS Code.
 :::
-
-TODO: mention other front end assets (but grab existing for tutorial)
 
 ## Mini demo: Twig vs. HTML
 
