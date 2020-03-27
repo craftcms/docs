@@ -66,12 +66,28 @@ These are the fields that ship with Craft CMS; many more are available [in the p
 
 Since Craft CMS doesn’t make assumptions about what you build, it’s important to start with a plan for the content you’ll need to support.
 
-For the purpose of this tutorial, we’ll focus on a limited set of requirements common to almost any blog:
+For the purpose of this tutorial, we’ll focus on simple requirements common to any blog:
 
-- a headline
-- an author
+- headline
+- post author
 - post dates
-- a feature or summary image
-- a brief summary description of the post
-- some flexible format for post content that can evolve as we need it to over time
+- feature or summary image
+- summary post description
+- post content
 - categories for post taxonomy
+
+Here’s how we’ll use Craft CMS to cover each one:
+
+- Leverage default entry details: **Title**, **Author**, **Post Date** and **Expiry Date**.
+- **Assets** field for the summary image.
+- **Plain Text** field for the summary description.
+- **Matrix** field for building the main post content in block types we choose:
+
+  - **Rich Text** block
+  - **Images** block
+
+  This facilitates a clean editing experience that can evolve neatly with content needs. (Just add blocks!)
+
+- **Categories** field for the post categories.
+
+Next we’ll set these things up in the control panel.
