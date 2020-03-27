@@ -63,3 +63,15 @@ These are the fields that ship with Craft CMS; many more are available [in the p
 :::
 
 ## Modeling a blog
+
+Since Craft CMS doesn’t make assumptions about what you build, it’s important to start with a plan for the content you’ll need to support.
+
+For the purpose of this tutorial, we’ll focus on a limited set of requirements common to almost any blog:
+
+- a headline
+- an author
+- post dates
+- a feature or summary image
+- a brief summary description of the post
+- some flexible format for post content that can evolve as we need it to over time
+- categories for post taxonomy
