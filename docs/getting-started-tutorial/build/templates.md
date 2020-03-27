@@ -6,7 +6,7 @@ Let’s build some templates and start our Twig front end!
 
 Start by creating a layout template at `templates/_layout.twig`.
 
-We want to follow DRY methodology, which stands for Don’t Repeat Yourself. The idea is to write code once and re-use it as much as possible without duplicating things. That makes your site’s code easier to understand and easier to maintain as it grows.
+We want to follow [DRY methodology](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), which stands for Don’t Repeat Yourself. The idea is to write code once and re-use it as much as possible without duplicating things. That makes your site’s code easier to understand and maintain over time.
 
 The layout is important for this because it will be the base from which our other templates _extend_.
 
@@ -22,7 +22,7 @@ Copy this into the `templates/_layout.twig` file you created:
     <meta charset="utf-8"/>
     <title>{{ siteName }}</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/styles.css" rel="stylesheet">
   </head>
   <body class="ltr">
     <div class="container mx-auto px-4">
@@ -36,22 +36,22 @@ Copy this into the `templates/_layout.twig` file you created:
 This is basebones HTML that will be the foudnation of every page on the site. HTML uses tags, or markup, as a structured way to organize and describe content. You may immediately recognize Craft’s `siteName` tag in this line:
 
 ```twig
-    <title>{{ siteName }}</title>
+<title>{{ siteName }}</title>
 ```
 
 `title` is a standard HTML tag used to tell the browser how to label the window or tab for the page. Whatever’s wrapped in the `title` tag—which means whatever’s between the opening `<title>` and closing `</title>` will be displayed. You’ll recognize that `{{ siteName }}` we used above—this is a Twig tag Craft CMS provides for outputting our site name. This is how HTML and Twig work together in our templates.
 
-Other things this template is doing:
+Now download a copy of the example styles into `web/styles.css`: <https://raw.githubusercontent.com/craftcms/tutorial-project/master/web/styles.css>
 
-- Setting the page’s language to match Craft’s.
-- Adding `meta` details that tell browsers how to interpret text and size the viewport—or how the page fits in the browser window and can be zoomed and resized.
-- Including TailwindCSS for styling and AlpineJS for scripting some basic interactions we’ll get to later.
+This static stylesheet will offer some basic styling for our templates.
 
-The most important part of the template is the `content` block:
+This base template sets the page’s language to match Craft’s and adds `meta` details that tell browsers how to interpret text and how the page fits into different browser windows.
+
+A crucial part of the template is the `content` block:
 
 ```twig
-      {% block content %}
-      {% endblock %}
+{% block content %}
+{% endblock %}
 ```
 
 Whenever you see `{{` `}}` or `{%` `%}` you know you’re looking at Twig tags. In this case, we’re establishing the beginning and end of a block named `content`. The `content` part could be anything we want, but here it imples that what’s inside will be page content. There’s _nothing_ inside, however, because the layout template provides a structure that other child templates will fill in.
@@ -387,7 +387,7 @@ The only new thing here are the hyphens in the Twig tag around `category.title`:
 
 We used a global set to store a blurb to be displayed at the bottom of all the site’s pages. Since we want that to appear everywhere, let’s add it to `_layout.twig` along with a copyright line:
 
-```twig{16-19}
+```twig{15-18}
 <!DOCTYPE html>
 <html lang="{{ craft.app.language }}">
   <head>
@@ -395,8 +395,7 @@ We used a global set to store a blurb to be displayed at the bottom of all the s
     <meta charset="utf-8"/>
     <title>{{ siteName }}</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    <link href="/styles.css" rel="stylesheet">
   </head>
   <body class="ltr">
     <div class="container mx-auto px-4">
@@ -405,7 +404,7 @@ We used a global set to store a blurb to be displayed at the bottom of all the s
     </div>
     <footer class="container mx-auto p-4 text-sm">
       {{ siteInformation.siteDescription|markdown }}
-      <p>&copy; {{ now | date('Y') }}, Built with <a class="text-blue-600" href="https://craftcms.com">Craft CMS</a></p>
+      <p>&copy; {{ now | date('Y') }}, built with <a class="text-blue-600" href="https://craftcms.com">Craft CMS</a></p>
     </footer>
   </body>
 </html>
@@ -445,20 +444,20 @@ The technical term for what we’re doing is [querying entries](https://docs.cra
 Now create `templates/_includes/listing.twig`. We’ll use this for listing blog entries here and re-use it again shortly:
 
 ```twig
-<div class="post-list flex">
+<div class="post-list my-10 flex">
 {% for post in posts %}
-    <a href="{{ post.url }}" class="flex shadow-lg rounded items-center justify-center overflow-hidden">
-        {% if post.featureImage|length %}
-            {% set image = post.featureImage.one() %}
-            <div class="w-1/4">
-                <img src="{{ image.getUrl({ width: 300, height: 300}) }}"
-                    alt="{{ image.title }}"
-                    class="block"
-                />
-            </div>
-        {% endif %}
-        <span class="title w-3/4 p-4">{{ post.title }}</span>
-    </a>
+  <a href="{{ post.url }}" class="flex shadow-lg rounded items-center justify-center overflow-hidden">
+    {% if post.featureImage|length %}
+      {% set image = post.featureImage.one() %}
+      <div class="w-1/4">
+        <img src="{{ image.getUrl({ width: 300, height: 300}) }}"
+            alt="{{ image.title }}"
+            class="block"
+        />
+      </div>
+    {% endif %}
+    <span class="title w-3/4 p-4">{{ post.title }}</span>
+  </a>
 {% endfor %}
 </div>
 ```
@@ -544,7 +543,7 @@ Create `templates/_includes/nav.twig` and add the following to it:
 
 Now let’s include that in `templates/_layout.twig`:
 
-```twig{12}
+```twig{11}
 <!DOCTYPE html>
 <html lang="{{ craft.app.language }}">
   <head>
@@ -552,8 +551,7 @@ Now let’s include that in `templates/_layout.twig`:
     <meta charset="utf-8"/>
     <title>{{ siteName }}</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    <link href="/styles.css" rel="stylesheet">
   </head>
   <body class="ltr">
     {% include "_includes/nav" %}
@@ -563,7 +561,7 @@ Now let’s include that in `templates/_layout.twig`:
     </div>
     <footer class="container mx-auto mt-8 p-4 text-sm opacity-50">
       {{ siteInformation.siteDescription|markdown }}
-      <p>&copy; {{ now | date('Y') }}, Built with <a class="text-blue-600" href="https://craftcms.com">Craft CMS</a></p>
+      <p>&copy; {{ now | date('Y') }}, built with <a class="text-blue-600" href="https://craftcms.com">Craft CMS</a></p>
     </footer>
   </body>
 </html>
