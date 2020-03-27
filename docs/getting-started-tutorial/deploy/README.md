@@ -1,13 +1,13 @@
-# 4. Make Your Site Live
+# Deploying Craft CMS
 
 - using Git
-    - what to commit
-        - composer.json and composer.lock
+
+  - what to commit
+    - composer.json and composer.lock
 
 - choosing a web host
-    - how it eases or complicates deployment strategy
+  - how it eases or complicates deployment strategy
 
+* Twig route vs. GraphQL route
 
-- Twig route vs. GraphQL route
-
-- where to go next
+* where to go next
