@@ -165,6 +165,12 @@ Since this template is simply used for redirecting, it only appears for a few se
 
 A barebones template is used  by default if this setting isn’t set.
 
+## `loadCartRedirectUrl`
+
+Determines what URL the customer should be redirected to after loading a cart via the load cart action URL.
+
+Default: `siteUrl()`
+
 ## `mergeLastCartOnLogin`
 
 Determines whether a user’s previous cart should be merged with the active cart after they log in.
