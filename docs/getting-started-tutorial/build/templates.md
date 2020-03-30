@@ -72,6 +72,8 @@ Create `templates/blog/_entry.twig` and add the following to it:
 
 The first line _extends_ the layout template, meaning it will use that as a starting point and let us further customize or override whatever we need to. We’re now providing our own content, within the `content` block, to appear on the page.
 
+![](../../images/tutorial-extend.png =550x)
+
 Now that the blog section’s template is ready, you can visit the URL for a published post:
 
 <BrowserShot url="https://localhost:8080/blog/my-first-post" :link="false" caption="">
