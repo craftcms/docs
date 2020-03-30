@@ -66,13 +66,14 @@ Let’s take a moment and configure our code editor to make life easier.
 
 VS Code has a built-in extension marketplace for installing add-ons that improve working with different kinds of code. There’s a whole universe of customization, but the following extensions will be useful here:
 
-TODO: audit list
-
 - **Twig**
 - **Twig Language 2**
-- **TWIG pack**
 - **Tailwind CSS IntelliSense**
 
 Open the “Extensions” panel in VS Code, search for each one, and choose “Install”. You’ll need to restart the app so they can all take effect.
 
-TODO: briefly show why they’re worth installing
+![](../../images/tutorial-vs-code-extension-pane.png)
+
+Once the extensions are installed, your Twig templates will get helpful syntax highlighting to make code more readable and auto-complete tips. Here’s a before and after comparison:
+
+![](../../images/tutorial-vs-code-extensions.png)

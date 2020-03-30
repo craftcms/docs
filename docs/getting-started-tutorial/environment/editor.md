@@ -15,7 +15,7 @@ An excellent, popular code editor is [Visual Studio Code](https://code.visualstu
 
 ![](../../images/tutorial-vs-code-highlighting.png)
 
-More advanced PHP developers tend to use [PhpStorm](https://www.jetbrains.com/phpstorm/), which is a more complex and specialized commercial Integrated Development Environment (IDE) specifically geared toward PHP development.
+Some advanced PHP developers tend to use [PhpStorm](https://www.jetbrains.com/phpstorm/), which is a more complex and specialized commercial Integrated Development Environment (IDE) specifically geared toward PHP development.
 
 ![](../../images/tutorial-phpstorm-highlighting.png)
 
