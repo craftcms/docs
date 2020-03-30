@@ -47,7 +47,7 @@ composer create-project craftcms/craft <Path>
 
 Composer will take a few minutes to download Craft CMS and all its dependencies, set up your project folders, and add a security key:
 
-TODO: add animation of install process
+![](../../images/tutorial-composer-create-project.gif)
 
 Now we have all the files we need to actually install and start using Craft.
 
@@ -59,7 +59,7 @@ If you’re on a Mac, drag the folder you’ve just created onto the Visual Stud
 
 If you’re on Windows or Linux, open VS Code and choose “File”, “Open Folder...”, and select the folder with your new Craft CMS files.
 
-TODO: Add screenshot of vanilla VS Code opened to the new project folder
+![](../../images/tutorial-vs-code.png)
 
 Before we complete the setup, let’s take a look at the files Composer just created:
 
