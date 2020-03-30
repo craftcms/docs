@@ -82,12 +82,12 @@ Here’s how we’ll use Craft CMS to cover each one:
 - **Assets** field for the summary image.
 - **Plain Text** field for the summary description.
 - **Matrix** field for building the main post content in block types we choose:
-
   - **Rich Text** block
   - **Images** block
-
-  This facilitates a clean editing experience that can evolve neatly with content needs. (Just add blocks!)
-
 - **Categories** field for the post categories.
+
+We’ll create an upload location and a category group to support these fields, and we’ll use Matrix because it let us create block types for content that facilitate a clean editing experience now that can also evolve with content needs later on.
+
+Keep in mind that you can build content however you’d like; these are just the simple requirements for the tutorial and how we’re using the CMS to support them. 
 
 Next we’ll set these things up in the control panel.
