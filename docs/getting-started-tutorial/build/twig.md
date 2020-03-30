@@ -16,7 +16,7 @@ The idea is that you build whatever normal parts you would need for a web page a
 
 In technical terms, Twig gets compiled behind the scenes. This means you can use templates however you’d like without having to worry about performance.
 
-Its syntax is also pretty clean and easy to understand, and it doesn’t allow PHP tags that often lead to messy or confusing templates.
+Its syntax is also clean and easy to understand, and it doesn’t allow PHP tags that often lead to messy or confusing templates.
 
 ::: tip
 Starting with your own static project? You can drag your existing `.html` files to the `templates/` folder and have a great starting point for adding bits of Twig.
