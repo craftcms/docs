@@ -119,12 +119,13 @@ Next, let’s create the individual fields for our blog posts:
 Now we have everything we need to collect content for our blog posts. If you were to create a new entry right now, however, you’d still only see that Title field. It’s time to add our custom fields to the blog section in a Field Layout:
 
 1. Navigate to “Settings” and return to “Sections”.
-2. If you chose the name of the section that’d take you back to the settings we established earlier. This time, choose “Edit entry types (1)”, and then choose the “Blog” entry type that was added for you.
+2. If you were to choose the name of the section again, that would take you back to the settings we established earlier. This time, choose “Edit entry types (1)”, and then choose the “Blog” entry type that was added for you.
 3. At the bottom of this view you’ll see the field layout designer. Choose “+ New Tab”.
 4. Select the gear icon to the right of the new tab, choose “Rename”, and give this tab a better label such as “Post Content”.
 5. Drag each of the fields we created earlier to this “Post Content” tab, in whatever order you’d like.
 6. Since every blog post should have some kind of content, choose the gear icon to the right of the “Post Content” field and make sure it’s required.
-7. Save the field layout.
+7. Enter “Headline” for the “Title Field Label”.
+8. Save the field layout.
 
 ::: tip
 You can also drag an entire field group from the available sets into your entry type’s field layout.
@@ -133,6 +134,8 @@ You can also drag an entire field group from the available sets into your entry 
 <BrowserShot url="https://localhost:8080/admin/settings/sections/1/entrytypes/1" :link="false" caption="Completed blog entry type field layout.">
 <img src="../../images/tutorial-blog-field-layout.png" alt="Screenshot of complete blog field layout" />
 </BrowserShot>
+
+That “Title Field Label” is a simple way to relabel the title—which *every* entry has—to something more descriptive for content editors. This can be especially important later if each entry represents something like a service, a physical object, or a person.
 
 Once you’ve added fields to the blog section’s field layout, return to “Entries” and create a new “Blog” entry. You’ll see each of the fields you created and you’re ready to publish some content!
 
