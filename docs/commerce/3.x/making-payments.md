@@ -2,6 +2,8 @@
 
 Once you’ve set up the store and payment gateways, you can start accepting payments.
 
+## Paying during the checkout process
+
 For this example, we’re assuming the payment gateway is set on the cart and the `cart` variable is available to the template. This will use `cart.gateway.getPaymentFormHtml()` to render the form fields required by the payment gateway:
 
 ```twig
@@ -102,3 +104,41 @@ The example below assumes the availability of a `paymentForm` variable, as discu
     <button type="submit">Pay Now</button>
 </form>
 ```
+
+## Paying outstanding balance on a cart or completed order
+
+It is possible to make a payment on cart or completed order that has an outstanding balance.
+
+The `shop/checkout/pay-static.html` template file in the [example templates](example-templates.md) gives a full example on how this is achievable in the front end.
+
+Below is a simplified example of the fields required to make a payment using Twig. The following code makes the assumption that the gateway has already been set.
+
+```twig
+{% set number = '00000000000000099999999999999999' %}
+{% set email = 'example@email-address.com' %}
+{% set cart = craft.orders.number(number).one() ?? null %}
+
+<form method="POST">
+  <input type="hidden" name="action" value="commerce/payments/pay"/>
+  {{ redirectInput('/shop/customer/order?number='~cart.number~'&success=true') }}
+  <input type="hidden" name="cancelUrl" value="{{ craft.app.request.getUrl()|hash }}"/>
+  <input type="hidden" name="email" value="{{ email }}"/>
+  <input type="hidden" name="orderNumber" value="{{ cart.number }}">
+  
+  {{ cart.gateway.getPaymentFormHtml({})|raw }}
+
+  <input type="submit" value="submit">
+</form>
+```
+
+If you would like to pay with a different gateway than the one that is already set on the cart/order you can do this pay passing the `gatewayId` in the form.
+
+```twig
+…
+<input type="hidden" name="gatewayId" value="1">
+…
+```
+
+::: warning
+During this process the cart or order is never in the user's session. This means that they could be paying for a cart and also have a separate cart in their current session.
+:::
