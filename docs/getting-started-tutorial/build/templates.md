@@ -414,7 +414,7 @@ We used a global set to store a blurb to be displayed at the bottom of all the s
 
 The “Site Description” field is Plain Text without any formatting, and just for fun we can use Craft’s [`markdown` filter](https://docs.craftcms.com/v3/dev/filters.html#markdown) to output it in a paragaph tag (`<p></p>`) and support [markdown syntax](https://daringfireball.net/projects/markdown/).
 
-## Add listing page
+## Add a listing page
 
 We’ll display a listing of posts in two places: in the blog index and again on a category page where they’re limited to the selected category.
 
@@ -491,7 +491,7 @@ Back on the front end, refresh the listing page and you’ll see the re-cropped 
 
 ## Create a category listing
 
-Create `templates/blog/_category` and add the following:
+Create `templates/blog/_category.twig` and add the following:
 
 ```twig
 {% extends "_layout" %}
