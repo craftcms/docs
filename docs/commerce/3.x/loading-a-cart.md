@@ -1,10 +1,8 @@
 # Loading a Cart
 
-It is possible to load an active or inactive cart into the current customer's session.
+There are two methods available for loading a cart—active or inactive—into the current customer’s session: [using a form](#using-a-form-to-load-a-cart) or [via a URL](#using-a-url-to-load-a-cart).
 
-There are two possible methods to do this, you are able to load the cart [using a form](#using-a-form-to-load-a-cart) or [via a URL](#using-a-url-to-load-a-cart).
-
-In both methods and errors that may occur will be returned in the session error flash data.
+In both methods, any errors that may occur will be returned in the session error flash data.
 
 ::: tip
 If the cart being loaded belongs to a user, the user must be logged in to load it into their session.
@@ -12,13 +10,13 @@ If the cart being loaded belongs to a user, the user must be logged in to load i
 
 ## Using a form to load a cart
 
-Loading a cart using a form requires the passing of a cart `number` to the `commerce/cart/load-cart` action.
+Loading a cart using a form requires passing a cart `number` to the `commerce/cart/load-cart` action.
 
-A working example can be seen in the [example templates](example-templates.md). Below is a simplified version of that form.
+A working example can be seen in the [example templates](https://github.com/craftcms/commerce/blob/master/templates/shop/load-cart.html). Below is a simplified version of that form.
 
 ```twig
-<form method="POST">
-    <input type="hidden" name="action" value="commerce/cart/load-cart"/>
+<form method="post">
+    <input type="hidden" name="action" value="commerce/cart/load-cart" />
     {{ redirectInput('/shop/cart') }}
 
     <input type="text" name="number" value="">
@@ -28,9 +26,7 @@ A working example can be seen in the [example templates](example-templates.md). 
 
 ## Using a URL to load a cart
 
-This method uses the Commerce load cart action endpoint. There are a couple of way this URL can be retrieved. Commerce provides
-a setting ([Commerce::\$loadCartRedirectUrl](configuration.md#loadcartredirecturl)) that allows you to specified the URL a customer
-will be redirected to after the cart has been loaded.
+This method uses the Commerce load cart action endpoint. There are a couple of way this URL can be retrieved. Commerce provides a setting ([Commerce::\$loadCartRedirectUrl](configuration.md#loadcartredirecturl)) that allows you to specify the URL a customer will be redirected to after the cart has been loaded.
 
 ### Using Twig
 
@@ -42,7 +38,7 @@ will be redirected to after the cart has been loaded.
 
 ```php
 use craft\helpers\UrlHelper;
-…
+// ...
 $loadCartUrl = UrlHelper('commerce/cart/load-cart', ['number' => $cart->number]);
 ```
 
