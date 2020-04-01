@@ -368,7 +368,7 @@ Result:
 }
 ```
 
-## Explore further
+## Explore GraphQL further
 
 As with the Twig examples, we’re just scratching the surface of ways you can fetch content with Craft CMS.
 
