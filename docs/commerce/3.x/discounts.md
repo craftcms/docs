@@ -43,7 +43,8 @@ The discount condition formula lets you use a simple twig condition syntax to ad
 If the field is left blank, then the condition will match the order being matched to the discount (the other conditions will still apply).
 
 The field accepts the [Twig’s expression syntax](https://twig.symfony.com/doc/2.x/templates.html#expressions), which is an expression that returns `true` or `false`.
-If the expression is calculated as `true` then the discount matches the order, and if not, the condition disqualifies the order from the discount. A blank condition is the same as
+
+If the expression is calculated as `true` then the discount matches the order. If not, the condition disqualifies the order from the discount. A blank condition is the same as
 a `true` expression.
 
 Inside the condition formula you have access to the `order` variable. This is a data only representation of the order. 
@@ -58,6 +59,7 @@ Example 1:
 ```
 
 The above would be a `true` statement if the order’s email contains the string `@myclient.com`.
+
 This would be a way of giving this discount to anyone from that company.
 
 Example 2:
@@ -66,8 +68,9 @@ Example 2:
 order.shippingAddressId and order.shippingAddress.zipCode[0:2] == '70'
 ```
 
-The above would be a `true` statement if the order has a shipping address and the shipping address’s zipCode stars with `70`.
-This would be a way of giving this discount to anyone shipping to that zipCode.
+The above would be a `true` statement if the order has a shipping address and the shipping address `zipCode` starts with `70`.
+
+This would be a way of giving this discount to anyone shipping to that zip code.
 
 ### User Groups
 

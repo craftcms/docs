@@ -117,28 +117,29 @@ Below is a simplified example of the fields required to make a payment using Twi
 {% set number = '00000000000000099999999999999999' %}
 {% set email = 'example@email-address.com' %}
 {% set cart = craft.orders.number(number).one() ?? null %}
+{% set cancelUrl = craft.app.request.getUrl()|hash %}
 
-<form method="POST">
-  <input type="hidden" name="action" value="commerce/payments/pay"/>
-  {{ redirectInput('/shop/customer/order?number='~cart.number~'&success=true') }}
-  <input type="hidden" name="cancelUrl" value="{{ craft.app.request.getUrl()|hash }}"/>
-  <input type="hidden" name="email" value="{{ email }}"/>
-  <input type="hidden" name="orderNumber" value="{{ cart.number }}">
-  
-  {{ cart.gateway.getPaymentFormHtml({})|raw }}
+<form method="post">
+    <input type="hidden" name="action" value="commerce/payments/pay"/>
+    {{ redirectInput('/shop/customer/order?number='~cart.number~'&success=true') }}
+    <input type="hidden" name="cancelUrl" value="{{ cancelUrl }}"/>
+    <input type="hidden" name="email" value="{{ email }}"/>
+    <input type="hidden" name="orderNumber" value="{{ cart.number }}">
+    
+    {{ cart.gateway.getPaymentFormHtml({})|raw }}
 
-  <input type="submit" value="submit">
+    <input type="submit" value="submit">
 </form>
 ```
 
-If you would like to pay with a different gateway than the one that is already set on the cart/order you can do this pay passing the `gatewayId` in the form.
+If you would like to pay with a different gateway than the one that is already set on the cart/order, you can pass the `gatewayId` in the form.
 
 ```twig
-…
+{# ... #}
 <input type="hidden" name="gatewayId" value="1">
-…
+{# ... #}
 ```
 
 ::: warning
-During this process the cart or order is never in the user's session. This means that they could be paying for a cart and also have a separate cart in their current session.
+During this process the cart or order is never in the user’s session. This means that they could be paying for a cart and also have a separate cart in their current session.
 :::
