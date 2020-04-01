@@ -24,7 +24,7 @@ class Settings extends Model
     {
         return [
             [['foo', 'bar'], 'required'],
-            // ...
+            // …
         ];
     }
 }
@@ -43,7 +43,7 @@ class Plugin extends \craft\base\Plugin
         return new \ns\prefix\models\Settings();
     }
 
-    // ...
+    // …
 }
 ```
 
@@ -150,7 +150,7 @@ class Plugin extends \craft\base\Plugin
         ]);
     }
 
-    // ...
+    // …
 }
 ```
 

@@ -131,7 +131,7 @@ class Plugin extends \craft\base\Plugin
     {
         parent::init();
 
-        // Custom initialization code goes here...
+        // Custom initialization code goes here…
     }
 }
 ```

@@ -62,7 +62,7 @@ To loop through all of the blocks, call [all()](<api:craft\db\Query::all()>) and
 {% if blocks|length %}
     <ul>
         {% for block in blocks %}
-            <!-- ... -->
+            <!-- … -->
         {% endfor %}
     </ul>
 {% endif %}
@@ -101,7 +101,7 @@ If you only want the first block, call [one()](<api:craft\db\Query::one()>) inst
 ```twig
 {% set block = entry.<FieldHandle>.one() %}
 {% if block %}
-    <!-- ... -->
+    <!-- … -->
 {% endif %}
 ```
 
@@ -147,7 +147,7 @@ If you have an [entry form](dev/examples/entry-form.md) that needs to contain a 
   - <BlockID_2>
     - type
     - fields
-      - ...
+      - …
 ```
 
 `sortOrder` should be submitted as an array of all the block IDs you wish to persist (as well as any new block IDs), in the order they should be saved.

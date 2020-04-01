@@ -228,7 +228,7 @@ use craft\fields\Matrix;
 use yii\base\Event;
 
 Event::on(Matrix::class, Matrix::EVENT_AFTER_SAVE, function(ModelEvent $event) {
-    // ...
+    // …
 });
 ```
 
@@ -399,7 +399,7 @@ Event::on(SystemMessages::class, SystemMessages::EVENT_REGISTER_MESSAGES, functi
         'key' => 'my_message_key',
         'heading' => Craft::t('plugin-handle', 'Email Heading'),
         'subject' => Craft::t('plugin-handle', 'Email Subject'),
-        'body' => Craft::t('plugin-handle', 'The plain text email body...'),
+        'body' => Craft::t('plugin-handle', 'The plain text email body…'),
     ];
 });
 ```
@@ -864,7 +864,7 @@ use craft\web\View;
 use yii\base\Event;
 
 Event::on(View::class, View::EVENT_END_BODY, function(Event $event) {
-    // $html = ...
+    // $html = …
     echo $html;
 });
 ```
@@ -891,7 +891,7 @@ class MyTask extends BaseTask
 
     public function runStep($step)
     {
-        // do something...
+        // do something…
         return true;
     }
 }
@@ -907,7 +907,7 @@ class MyJob extends BaseJob
         for ($step = 0; $step < $totalSteps; $step++)
         {
             $this->setProgress($queue, $step / $totalSteps);
-            // do something...
+            // do something…
         }
     }
 
@@ -958,7 +958,7 @@ class Install extends Migration
             return;
         }
 
-        // Fresh install code goes here...
+        // Fresh install code goes here…
     }
 
     private function _upgradeFromCraft2(): bool
@@ -984,14 +984,14 @@ class Install extends Migration
         $this->delete('{{%plugins}}', ['id' => $row['id']]);
         $projectConfig->remove($oldKey);
 
-        // Any additional upgrade code goes here...
+        // Any additional upgrade code goes here…
 
         return true;
     }
 
     public function safeDown()
     {
-        // ...
+        // …
     }
 }
 ```

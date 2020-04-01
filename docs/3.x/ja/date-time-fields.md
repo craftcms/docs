@@ -117,7 +117,7 @@ Craft と Twig は、必要に応じて使用できる日付を操作するた�
 <select name="fields[<FieldHandle>][timezone]">
     <option value="America/Los_Angeles">Pacific Time</option>
     <option value="UTC">UTC</option>
-    <!-- ... -->
+    <!-- … -->
 </select>
 ```
 

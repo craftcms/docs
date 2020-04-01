@@ -65,7 +65,7 @@ public function actionStayUpLate()
 ```php
 // See if they have the `stayUpLate` permission
 if (Craft::$app->user->checkPermission('stayUpLate')) {
-    // ...
+    // …
 }
 ```
 
@@ -74,6 +74,6 @@ if (Craft::$app->user->checkPermission('stayUpLate')) {
 ```php
 /** @var \craft\elements\User $user */
 if ($user->can('stayUpLate')) {
-    // ...
+    // …
 }
 ```

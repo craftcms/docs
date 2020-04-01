@@ -36,7 +36,7 @@ Next up, you need to tell Composer how to find your module’s classes by settin
 
 ```json
 {
-  // ...
+  // …
   "autoload": {
     "psr-4": {
       "bar\\": "modules/foo/"
@@ -59,7 +59,7 @@ You can add your module to your project’s [application configuration](../confi
 
 ```php
 return [
-    // ...
+    // …
     'modules' => [
         'foo' => foo\Module::class,
     ],
@@ -101,7 +101,7 @@ class Module extends \yii\base\Module
 
         parent::init();
 
-        // Custom initialization code goes here...
+        // Custom initialization code goes here…
     }
 }
 ```

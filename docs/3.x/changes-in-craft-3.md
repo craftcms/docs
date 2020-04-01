@@ -162,11 +162,11 @@ Twig 2 requires that you explicitly import macros in each template where you are
 
 ```twig
 Old:
-{% macro foo %}...{% endmacro %}
+{% macro foo %}…{% endmacro %}
 {{ _self.foo() }}
 
 New:
-{% macro foo %}...{% endmacro %}
+{% macro foo %}…{% endmacro %}
 {% import _self as macros %}
 {{ macros.foo() }}
 ```
@@ -488,12 +488,12 @@ When you need to loop over an element query, you should start explicitly calling
 
 ```twig
 Old:
-{% for entry in craft.entries.section('news') %}...{% endfor %}
-{% for asset in entry.myAssetsField %}...{% endfor %}
+{% for entry in craft.entries.section('news') %}…{% endfor %}
+{% for asset in entry.myAssetsField %}…{% endfor %}
 
 New:
-{% for entry in craft.entries.section('news').all() %}...{% endfor %}
-{% for asset in entry.myAssetsField.all() %}...{% endfor %}
+{% for entry in craft.entries.section('news').all() %}…{% endfor %}
+{% for asset in entry.myAssetsField.all() %}…{% endfor %}
 ```
 
 When you need to get the total number of results from an element query, you should call the `.count()` method:

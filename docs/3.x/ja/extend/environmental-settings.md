@@ -56,7 +56,7 @@ class MyModel extends Model
         ];
     }
 
-    // ...
+    // …
 }
 ```
 
@@ -82,7 +82,7 @@ class MyModel extends Model
 
 ```twig{4}
 {{ forms.autosuggestField({
-    // ...
+    // …
     suggestEnvVars: true,
     suggestAliases: true
 }) }}

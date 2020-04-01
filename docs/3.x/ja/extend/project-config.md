@@ -76,14 +76,14 @@ public function handleChangedProductType(ConfigEvent $event)
         Craft::$app->db->createCommand()
             ->insert('{{%producttypes}}', [
                 'name' => $event->newValue['name'],
-                // ...
+                // …
             ])
             ->execute();
     } else {
         Craft::$app->db->createCommand()
             ->update('{{%producttypes}}', [
                 'name' => $event->newValue['name'],
-                // ...
+                // …
             ], ['id' => $id])
             ->execute();
     }
@@ -181,7 +181,7 @@ public function saveProductType($productType)
     $path = "product-types.{$productType->uid}";
     Craft::$app->projectConfig->set($path, [
         'name' => $productType->name,
-        // ...
+        // …
     ]);
 
     // Now set the ID on the product type in case the
@@ -232,7 +232,7 @@ public function safeUp()
         ->get('plugins.<plugin-handle>.schemaVersion', true);
 
     if (version_compare($schemaVersion, '<NewSchemaVersion>', '<')) {
-        // Make the config changes here...
+        // Make the config changes here…
     }
 }
 ```
@@ -247,7 +247,7 @@ use craft\services\ProjectConfig;
 use yii\base\Event;
 
 Event::on(ProjectConfig::class, ProjectConfig::EVENT_REBUILD, function(RebuildConfigEvent $e) {
-    // Add plugin's project config data...
+    // Add plugin's project config data…
    $e->config['myPlugin']['key'] = $value;
 });
 ``` 

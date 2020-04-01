@@ -122,7 +122,7 @@ Or you can let users decide which timezone the date should be posted in:
 <select name="fields[<FieldHandle>][timezone]">
     <option value="America/Los_Angeles">Pacific Time</option>
     <option value="UTC">UTC</option>
-    <!-- ... -->
+    <!-- … -->
 </select>
 ```
 

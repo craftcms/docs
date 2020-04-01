@@ -23,7 +23,7 @@ public function init()
         }
     );
 
-    // ...
+    // …
 }
 ```
 
@@ -68,7 +68,7 @@ class Plugin extends \craft\base\Plugin
 {
     public $hasCpSection = true;
 
-    // ...
+    // …
 }
 ```
 

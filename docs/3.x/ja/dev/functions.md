@@ -8,7 +8,7 @@
 
 ```twig
 <form method="POST">
-    {{ actionInput('users/save-user') }}<!-- ... --></form>
+    {{ actionInput('users/save-user') }}<!-- … --></form>
 ```
 
 その文字列が[エイリアス](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)ではじまるかをチェックする [Craft::getAlias()](api:yii\BaseYii::getAlias()) に、文字列を渡します。（詳細については、[コンフィギュレーション](../config/README.md#aliases)を参照してください。）
@@ -81,7 +81,7 @@
 
 ```twig
 <form method="post">
-    {{ csrfInput() }}<!-- ... --></form>
+    {{ csrfInput() }}<!-- … --></form>
 ```
 
 ## `endBody()`
