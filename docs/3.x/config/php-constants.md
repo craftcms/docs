@@ -38,7 +38,7 @@ define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
 
 ### `CRAFT_EPHEMERAL`
 
-When defined as `true`, Craft will skip file system permission checks and operations that are not available in an environment with ephemeral storage.
+When defined as `true`, Craft will skip file system permission checks and operations that are not available in an environment with ephemeral or read-only storage.
 
 ### `CRAFT_LICENSE_KEY`
 
