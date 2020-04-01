@@ -8,6 +8,5 @@
 - choosing a web host
   - how it eases or complicates deployment strategy
 
-* Twig route vs. GraphQL route
-
-* where to go next
+- deployment process
+  - project config best practices
