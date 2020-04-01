@@ -36,6 +36,10 @@ The environment name that [multi-environment configs](environments.md#multi-envi
 define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
 ```
 
+### `CRAFT_EPHEMERAL`
+
+When defined as `true`, Craft will skip file system permission checks and operations that are not available in an environment with ephemeral storage.
+
 ### `CRAFT_LICENSE_KEY`
 
 Your Craft license key, if for some reason that must be defined by PHP rather than a license key file. (Don’t set this until you have a valid license key.)
