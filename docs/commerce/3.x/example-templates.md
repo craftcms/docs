@@ -1,6 +1,6 @@
 # Example Templates
 
-Commerce provides example templates for you to reference when building out your commerce solution.
+Commerce provides [example templates](https://github.com/craftcms/commerce/tree/master/templates) for you to reference when building out your commerce solution.
 
 You’ll find these in the `vendor/craftcms/commerce/templates/` folder, and you may want to copy them to your project’s top level `templates/` folder:
 
