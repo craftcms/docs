@@ -15,7 +15,7 @@ $myProductQuery = \craft\commerce\elements\Product::find();
 # Create a new product query
 {
   products {
-    # ...
+    # …
   }
 }
 ```
@@ -60,7 +60,7 @@ To fetch the same information with GraphQL, we could write a query like this:
   products(limit: 10, type: "clothing") {
     title
     uri
-    ... on clothing_Product {
+    … on clothing_Product {
       summary
     }
   }

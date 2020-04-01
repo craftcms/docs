@@ -15,7 +15,7 @@ $myVariantQuery = \craft\commerce\elements\Variant::find();
 # Create a new variant query
 {
   variants {
-    # ...
+    # …
   }
 }
 ```
@@ -54,7 +54,7 @@ We can display a specific variant by its ID in Twig by doing the following:
 
 {# Display the variant #}
 <h1>{{ variant.title }}</h1>
-<!-- ... -->
+<!-- … -->
 ```
 
 Fetching the equivalent with GraphQL could look like this:

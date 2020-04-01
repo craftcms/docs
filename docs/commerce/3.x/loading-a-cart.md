@@ -38,7 +38,7 @@ This method uses the Commerce load cart action endpoint. There are a couple of w
 
 ```php
 use craft\helpers\UrlHelper;
-// ...
+// …
 $loadCartUrl = UrlHelper('commerce/cart/load-cart', ['number' => $cart->number]);
 ```
 
