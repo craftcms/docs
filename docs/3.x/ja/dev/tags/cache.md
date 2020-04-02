@@ -132,7 +132,7 @@ URL ごとではなく、（現在のサイトロケールのための）グロ�
     {% extends "_layout" %}
     {% cache %}
         {% block "content" %}
-            …
+            ...
         {% endblock %}
     {% endcache %}
 
@@ -141,7 +141,7 @@ URL ごとではなく、（現在のサイトロケールのための）グロ�
     {% extends "_layout" %}
     {% block "content" %}
         {% cache %}
-            …
+            ...
         {% endcache %}
     {% endblock %}
     ```

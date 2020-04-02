@@ -15,7 +15,7 @@ To do that, create a [URL rule](routing.md#advanced-routing-with-url-rules) from
 ```php
 return [
     'api' => 'graphql/api',
-    // …
+    // ...
 ];
 ```
 

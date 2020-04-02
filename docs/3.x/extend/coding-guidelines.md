@@ -45,7 +45,7 @@ Do your best to follow these guidelines when writing code for Craft and Craft pl
 
     ```php
     foreach ($array as &$value) {
-        // …
+        // ...
     }
     unset($value);
     ```

@@ -11,23 +11,23 @@ return [
     // Global settings
     '*' => [
         'allowUpdates' => false,
-        // …
+        // ...
     ],
 
     // Dev environment settings
     'dev' => [
         'allowUpdates' => true,
-        // …
+        // ...
     ],
 
     // Staging environment settings
     'staging' => [
-        // …
+        // ...
     ],
 
     // Production environment settings
     'production' => [
-        // …
+        // ...
     ],
 ];
 ```

@@ -28,7 +28,7 @@ class Plugin extends \craft\base\Plugin;
         ];
     }
 
-    // …
+    // ...
 }
 ```
 
@@ -40,13 +40,13 @@ Your feature toggles can call your plugin’s [is()](api:craft\base\Plugin::is()
 
 ```php
 if (Plugin::getInstance()->is(Plugin::EDITION_PRO) {
-    // Pro edition-only code goes here…
+    // Pro edition-only code goes here...
 }
 ```
 
 ```twig
 {% if plugin('plugin-handle').is('pro') %}
-    {# Pro edition-only code goes here… #}
+    {# Pro edition-only code goes here... #}
 {% endif %}
 ```
 

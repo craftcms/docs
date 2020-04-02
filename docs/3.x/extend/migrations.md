@@ -73,7 +73,7 @@ The <api:yii\db\Migration::insert()>, [batchInsert()](api:craft\db\Migration::ba
 use craft\db\Query;
 
 $result = (new Query())
-    // …
+    // ...
     ->all();
 ```
 :::
@@ -126,12 +126,12 @@ class Install extends Migration
 {
     public function safeUp()
     {
-        // …
+        // ...
     }
 
     public function safeDown()
     {
-        // …
+        // ...
     }
 }
 ```
@@ -155,11 +155,11 @@ If you want to add things to the [project config](project-config.md) on install,
 ```php
 public function safeUp()
 {
-    // …
+    // ...
 
     // Don't make the same config changes twice
     if (Craft::$app->projectConfig->get('plugins.<plugin-handle>', true) === null) {
-        // Make the config changes here…
+        // Make the config changes here...
     }
 }
 ```

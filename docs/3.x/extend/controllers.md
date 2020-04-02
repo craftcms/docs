@@ -44,7 +44,7 @@ public function actionFoo()
     // This action should only be available to the control panel
     $this->requireCpRequest();
 
-    // …
+    // ...
 }
 ```
 
@@ -89,7 +89,7 @@ public function actionFoo(): Response
         ]);
     }
 
-    // …
+    // ...
 }
 ```
 
@@ -131,7 +131,7 @@ use yii\web\Response;
 
 public function actionFoo(): Response
 {
-    // …
+    // ...
 
     // Redirect the request based on a 'redirect' param,
     // which can contain entry attribute tokens, such as {id}

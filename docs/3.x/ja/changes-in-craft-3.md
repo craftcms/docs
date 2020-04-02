@@ -162,11 +162,11 @@ Twig 2 では、利用先となる各テンプレートで明示的にマクロ�
 
 ```twig
 Old:
-{% macro foo %}…{% endmacro %}
+{% macro foo %}...{% endmacro %}
 {{ _self.foo() }}
 
 New:
-{% macro foo %}…{% endmacro %}
+{% macro foo %}...{% endmacro %}
 {% import _self as macros %}
 {{ macros.foo() }}
 ```
@@ -488,12 +488,12 @@ Craft 2 動作に影響を与えるテンプレートがある場合、[clone()]
 
 ```twig
 Old:
-{% for entry in craft.entries.section('news') %}…{% endfor %}
-{% for asset in entry.myAssetsField %}…{% endfor %}
+{% for entry in craft.entries.section('news') %}...{% endfor %}
+{% for asset in entry.myAssetsField %}...{% endfor %}
 
 New:
-{% for entry in craft.entries.section('news').all() %}…{% endfor %}
-{% for asset in entry.myAssetsField.all() %}…{% endfor %}
+{% for entry in craft.entries.section('news').all() %}...{% endfor %}
+{% for asset in entry.myAssetsField.all() %}...{% endfor %}
 ```
 
 代替方法として、実際のクエリ結果を事前にフェッチする必要があり、かつ `offset` や `limit` パラメータをセットしていない場合、  [length](https://twig.symfony.com/doc/2.x/filters/length.html) フィルタを使うことで、余分なデータベースクエリを必要とせず、結果の配列の合計サイズを確認できます。

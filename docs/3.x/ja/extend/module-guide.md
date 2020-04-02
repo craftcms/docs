@@ -36,7 +36,7 @@ my-project.test/
 
 ```json
 {
-  // …
+  // ...
   "autoload": {
     "psr-4": {
       "bar\\": "modules/foo/"
@@ -59,7 +59,7 @@ composer dump-autoload -a
 
 ```php
 return [
-    // …
+    // ...
     'modules' => [
         'foo' => foo\Module::class,
     ],
@@ -94,7 +94,7 @@ class Module extends \yii\base\Module
 
         parent::init();
 
-        // Custom initialization code goes here …
+        // Custom initialization code goes here...
     }
 }
 ```

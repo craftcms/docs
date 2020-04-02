@@ -56,7 +56,7 @@ class MyModel extends Model
         ];
     }
     
-    // …
+    // ...
 }
 ```
 
@@ -82,7 +82,7 @@ If your setting is for a URL or file system path, you should also set `suggestAl
 
 ```twig{4}
 {{ forms.autosuggestField({
-    // …
+    // ...
     suggestEnvVars: true,
     suggestAliases: true
 }) }}

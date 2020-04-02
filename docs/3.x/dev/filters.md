@@ -72,14 +72,14 @@ Only the first tag will be modified, and any HTML comments or doctype declaratio
 ```twig
 {% set svg %}
     <?xml version="1.0" encoding="utf-8"?>
-    <svg>…</svg>
+    <svg>...</svg>
 {% endset %}
 {{ svg|attr({
     class: 'icon'
 }) }}
 {# Output:
    <?xml version="1.0" encoding="utf-8"?>
-   <svg class="icon">…</svg> #}
+   <svg class="icon">...</svg> #}
 ```
 
 Attributes can be removed by setting them to `false`.

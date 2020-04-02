@@ -27,7 +27,7 @@ use yii\base\Component;
 
 class Foo extends Component
 {
-    // …
+    // ...
 }
 ```
 
@@ -42,7 +42,7 @@ public function init()
         'foo' => \ns\prefix\services\Foo::class,
     ]);
 
-    // …
+    // ...
 }
 ```
 
@@ -102,7 +102,7 @@ public function saveRecipe(Recipe $recipe, $runValidation = true)
 
     $isNewRecipe = !$recipe->id;
 
-    // … Save the recipe here …
+    // ... Save the recipe here ...
 
     // Fire an 'afterSaveRecipe' event
     $this->trigger(self::EVENT_AFTER_SAVE_RECIPE, new RecipeEvent([
@@ -146,7 +146,7 @@ public function saveIngredient(IngredientInterface $ingredient, $runValidation =
 
     $transaction = \Craft::$app->getDb()->beginTransaction();
     try {
-        // … Save the ingredient here …
+        // ... Save the ingredient here ...
 
         $ingredient->afterSave();
 

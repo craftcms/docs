@@ -65,7 +65,7 @@ You can check if the logged-in user has a permission by calling <api:craft\web\U
 ```php
 // See if they have the `stayUpLate` permission
 if (Craft::$app->user->checkPermission('stayUpLate')) {
-    // …
+    // ...
 }
 ```
 
@@ -74,6 +74,6 @@ You can also see if any given user has a permission by calling <api:craft\elemen
 ```php
 /** @var \craft\elements\User $user */
 if ($user->can('stayUpLate')) {
-    // …
+    // ...
 }
 ```

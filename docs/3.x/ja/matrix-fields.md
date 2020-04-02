@@ -51,7 +51,7 @@
 
 ```twig
 {% for block in entry.<FieldHandle>.all() %}
-    …
+    ...
 {% endfor %}
 ```
 

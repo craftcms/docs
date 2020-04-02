@@ -132,7 +132,7 @@ There are also some cases where it’s _not_ a good idea to use them:
     {% extends "_layout" %}
     {% cache %}
         {% block "content" %}
-            …
+            ...
         {% endblock %}
     {% endcache %}
 
@@ -141,7 +141,7 @@ There are also some cases where it’s _not_ a good idea to use them:
     {% extends "_layout" %}
     {% block "content" %}
         {% cache %}
-            …
+            ...
         {% endcache %}
     {% endblock %}
     ```
