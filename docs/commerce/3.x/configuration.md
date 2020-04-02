@@ -123,7 +123,7 @@ Here’s the full list of config settings that Commerce supports:
 
 ## `autoSetNewCartAddresses`
 
-Determines whether the customer’s last used shipping and billing addresses should automatically be set on new carts.
+Determines whether the customer’s primary shipping and billing addresses should automatically be set on new carts.
 
 Default: `true`
 
