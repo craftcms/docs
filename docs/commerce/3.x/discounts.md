@@ -37,6 +37,41 @@ Conditions are all optional and can be used in any combination.
 
 Restrict the discount to a specific time period defined by start and end date fields.
 
+### Discount Condition Formula
+
+The discount condition formula lets you use a simple twig condition syntax to add a matching rule to the discount. 
+If the field is left blank, then the condition will match the order being matched to the discount (the other conditions will still apply).
+
+The field accepts the [Twig’s expression syntax](https://twig.symfony.com/doc/2.x/templates.html#expressions), which is an expression that returns `true` or `false`.
+
+If the expression is calculated as `true` then the discount matches the order. If not, the condition disqualifies the order from the discount. A blank condition is the same as
+a `true` expression.
+
+Inside the condition formula you have access to the `order` variable. This is a data only representation of the order. 
+The `variable` contains the same data that would be exported when clicking the export button on the order index page.
+
+Here are some examples of an discount’s condition formula:
+
+Example 1:
+
+```twig
+'@myclient.com' in order.email
+```
+
+The above would be a `true` statement if the order’s email contains the string `@myclient.com`.
+
+This would be a way of giving this discount to anyone from that company.
+
+Example 2:
+
+```twig
+order.shippingAddressId and order.shippingAddress.zipCode[0:2] == '70'
+```
+
+The above would be a `true` statement if the order has a shipping address and the shipping address `zipCode` starts with `70`.
+
+This would be a way of giving this discount to anyone shipping to that zip code.
+
 ### User Groups
 
 Limit the discount to selected user groups the customer must belong to when checking out.
@@ -103,36 +138,64 @@ The discount uses counter will always increment whether or not a limit is set. T
 
 If the item is already on sale, the discount will not be applied.
 
-## Discount Amounts
+## Discount Actions
 
-There are several ways to define the actual amount that should be discounted:
+The actions tab on discounts control what the effect of the discount will be on the order.
 
-### Base Discount
+To take an amount off a line item, a discount adjustment is applied. One discount can add multiple discount adjustments.
+The first thing the discount does is create an adjustment for each “Per Item Amount Off”, then calculates the "Per Item Percentage Off", then takes away the "Flat Amount Off Order".
+    
+### Applied Scope
 
-A discounted amount applied to the total order price. This can be a flat value (\$10) or a percentage (10%).
+To determine which line items in the order will be discounted, a discount has an "Applied Scope".
 
-There are further options for percentage-based discounts. These allow you to determine if the discount is applied to the orginal or discounted price, and whether or not it applies to shipping costs.
+The options are:
 
-### Per Item Discount
+**Discount the matching items only**  
+This will only add “Per Item Amount Off” and "Per Item Percentage Off" discount amounts to the matching line items. 
+Matching items are those items that are used to match this discount’s conditions, like “Product Variant” or “Category” conditions.
+
+**Discount all line items**  
+This will add “Per Item Amount Off” and "Per Item Percentage Off" discount amounts to all line items.
+
+Please note that the "Flat Amount Off Order" is applied to the whole order so it is not affected by the applied scope option, and applies it’s discount to every line item 
+until it is all used up (from most expensive to least expensive).
+
+### Per Item Amount Off
 
 The flat value which should discount each item in the order e.g. \$1.
 
-### Percent Discount
+### Per Item Percentage Off
 
 The percentage value which should discount each item in the order, and whether it should be off the original or discounted price.
 
-### Ignore sales when this discount is applied
+### Ignore sales when this discount is applied to matching line items
 
-When applied, this will prevent sales from being applied if this discount is applied.
+When checked, this will prevent sales from being applied to matching line items.
+Matching line items are those items that are used to match this discount’s conditions, like “Product Variant” or “Category” conditions.
+
+
+### Flat Amount Off Order
+
+A discounted currency amount to be taken off the whole order e.g. \$100.
+
+This amount will be spread across the whole order from the most expensive item to the least expensive item.
+
+If all line items have been discounted to a zero price then the remaining amount of discount is discarded. It can not make the order negative.
+
+This amount is not affected by the Applied Scope.
+
+### Additional Actions
 
 ### Remove all shipping costs from the order
 
-If the discount is applied all shipping costs from the order will be removed.
+Remove all shipping costs from the order.
 
 ### Remove shipping costs for matching products only
 
-If the discount is applied all shipping costs for matching products on the order will be removed.
+If the discount is applied no shipping costs for matching items will be added to the order.
+Matching items are those items that are used to match this discount’s conditions, like “Product Variant” or “Category” conditions.
 
-### Don't apply subsequent discounts if discount is applied
+### Don’t apply any subsequent discounts to an order if this discount is applied
 
-When this setting is on and the discount applies, discounts further down in the discounts list will not be applied. This makes it possible to prevent cummulative discounts from being applied.
+When this setting is on and the discount applies, discounts further down in the discounts list will not be applied. This makes it possible to prevent cumulative discounts from being applied.

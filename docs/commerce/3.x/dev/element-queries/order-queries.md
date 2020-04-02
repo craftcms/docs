@@ -46,7 +46,7 @@ We can display an order with a given order number by doing the following:
 
 {# Display the order #}
 <h1>Order {{ order.getShortNumber() }}</h1>
-<!-- ... ->
+<!-- … ->
 ```
 
 ## Parameters

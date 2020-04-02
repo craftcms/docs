@@ -98,23 +98,23 @@ For example, if you want to change the Commerce inactive carts duration in dev e
 return [
     // Global settings
     '*' => [
-        // ...
+        // …
     ],
 
     // Dev environment settings
     'dev' => [
         'purgeInactiveCartsDuration' => P1D,
-        // ...
+        // …
     ],
 
     // Staging environment settings
     'staging' => [
-        // ...
+        // …
     ],
 
     // Production environment settings
     'production' => [
-        // ...
+        // …
     ],
 ];
 ```
@@ -123,7 +123,7 @@ Here’s the full list of config settings that Commerce supports:
 
 ## `autoSetNewCartAddresses`
 
-Determines whether the customer’s last used shipping and billing addresses should automatically be set on new carts.
+Determines whether the customer’s primary shipping and billing addresses should automatically be set on new carts.
 
 Default: `true`
 
@@ -145,11 +145,11 @@ The template must contain a form that posts to the URL supplied by the `actionUr
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Redirecting...</title>
+    <title>Redirecting…</title>
 </head>
 <body onload="document.forms[0].submit();">
 <form action="{{ actionUrl }}" method="post">
-    <p>Redirecting to payment page...</p>
+    <p>Redirecting to payment page…</p>
     <p>
         {{ inputs|raw }}
         <input type="submit" value="Continue">
@@ -164,6 +164,12 @@ Since this template is simply used for redirecting, it only appears for a few se
 :::
 
 A barebones template is used  by default if this setting isn’t set.
+
+## `loadCartRedirectUrl`
+
+Determines what URL the customer should be redirected to after loading a cart via the load cart action URL.
+
+Default: `siteUrl()`
 
 ## `mergeLastCartOnLogin`
 

@@ -1,6 +1,6 @@
 # Variant Queries
 
-You can fetch variants in your templates or PHP code using **variant queries**.
+You can fetch variants using **variant queries**.
 
 ::: code
 ```twig
@@ -10,6 +10,14 @@ You can fetch variants in your templates or PHP code using **variant queries**.
 ```php
 // Create a new variant query
 $myVariantQuery = \craft\commerce\elements\Variant::find();
+```
+```graphql
+# Create a new variant query
+{
+  variants {
+    # …
+  }
+}
 ```
 :::
 
@@ -21,7 +29,7 @@ See [Introduction to Element Queries](https://docs.craftcms.com/v3/dev/element-q
 
 ## Example
 
-We can display a specific variant by its ID by doing the following:
+We can display a specific variant by its ID in Twig by doing the following:
 
 1. Create a variant query with `craft.variants()`.
 2. Set the [id](#id) parameter on it.
@@ -46,8 +54,23 @@ We can display a specific variant by its ID by doing the following:
 
 {# Display the variant #}
 <h1>{{ variant.title }}</h1>
-<!-- ... -->
+<!-- … -->
 ```
+
+Fetching the equivalent with GraphQL could look like this:
+
+```graphql
+# Fetch variant having ID = 46
+{  
+  variants(id: 46) {
+    title
+  }
+}
+```
+
+## Parameters
+
+Variant queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 

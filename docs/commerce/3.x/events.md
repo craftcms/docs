@@ -59,7 +59,7 @@ Event::on(
         $fields = $event->fields;
 
         // Modify or redact captured `$data`
-        // ...
+        // …
     }
 );
 ```
@@ -121,7 +121,7 @@ Event::on(
         $data = $event->fieldData;
 
         // Modify or redact captured `$data`
-        // ...
+        // …
     }
 );
 ```
@@ -154,7 +154,7 @@ Event::on(
 
         // Use custom business logic to exclude purchasable from sale
         // with `$event->isValid = false`
-        // ...
+        // …
     }
 );
 ```
@@ -177,7 +177,7 @@ Event::on(
         $sale = $event->sale;
         // @var bool $isNew
         $isNew = $event->isNew;
-        // ...
+        // …
     }
 );
 ```
@@ -200,7 +200,7 @@ Event::on(
         $sale = $event->sale;
         // @var bool $isNew
         $isNew = $event->isNew;
-        // ...
+        // …
     }
 );
 ```
@@ -227,7 +227,7 @@ Event::on(
         $isNew = $event->isNew;
         // @var bool $isValid
         $isValid = $event->isValid;
-        // ...
+        // …
     }
 );
 ```
@@ -250,7 +250,7 @@ Event::on(
         $lineItem = $event->lineItem;
         // @var bool $isNew
         $isNew = $event->isNew;
-        // ...
+        // …
     }
 );
 ```
@@ -273,7 +273,7 @@ Event::on(
         $lineItem = $event->lineItem;
         // @var bool $isNew
         $isNew = $event->isNew;
-        // ...
+        // …
     }
 );
 ```
@@ -292,7 +292,7 @@ Event::on(
     function(Event $event) {
         // @var Order $order
         $order = $event->sender;
-        // ...
+        // …
     }
 );
 ```
@@ -311,7 +311,7 @@ Event::on(
     function(Event $event) {
         // @var Order $order
         $order = $event->sender;
-        // ...
+        // …
     }
 );
 ```
@@ -330,7 +330,7 @@ Event::on(
     function(Event $event) {
         // @var Order $order
         $order = $event->sender;
-        // ...
+        // …
     }
 );
 ```
@@ -374,7 +374,7 @@ Event::on(
         $order = $event->order;
 
         // Let the delivery department know the order’s ready to be delivered
-        // ...
+        // …
     }
 );
 ```
@@ -402,7 +402,7 @@ Event::on(
         $order = $event->order;
 
         // Choose a more appropriate order status than the control panel default
-        // ...
+        // …
     }
 );
 ```
@@ -433,7 +433,7 @@ Event::on(
         $adjustments = $event->adjustments;
 
         // Use a third party to check order data and modify the adjustments
-        // ...
+        // …
     }
 );
 ```
@@ -458,7 +458,7 @@ Event::on(
         $isNew = $event->isNew;
 
         // Let an external CRM know about a client’s new discount
-        // ...
+        // …
     }
 );
 ```
@@ -483,7 +483,7 @@ Event::on(
         $isNew = $event->isNew;
 
         // Set this discount as default in an external CRM
-        // ...
+        // …
     }
 );
 ```
@@ -506,7 +506,7 @@ Event::on(
         $discount = $event->discount;
 
         // Remove this discount from a payment gateway
-        // ...
+        // …
     }
 );
 ```
@@ -534,7 +534,7 @@ Event::on(
         $discount = $event->discount;
 
         // Check some business rules and prevent a match in special cases
-        // ...
+        // …
     }
 );
 ```
@@ -561,7 +561,7 @@ Event::on(
         $isNew = $event->isNew;
 
         // Notify a third party service about changes to an order
-        // ...
+        // …
     }
 );
 ```
@@ -586,7 +586,7 @@ Event::on(
         $isNew = $event->isNew;
 
         // Reserve stock
-        // ...
+        // …
     }
 );
 ```
@@ -611,7 +611,7 @@ Event::on(
         $isNew = $event->isNew;
 
         // Modify the price of a line item
-        // ...
+        // …
     }
 );
 ```
@@ -636,7 +636,7 @@ Event::on(
         $isNew = $event->isNew;
 
         // Call a third party service based on the line item options
-        // ...
+        // …
     }
 );
 ```
@@ -682,7 +682,7 @@ Event::on(
 
         // Check whether it was an authorize transaction
         // and make sure that warehouse team is on top of it
-        // ...
+        // …
     }
 );
 ```
@@ -705,7 +705,7 @@ Event::on(
         $transaction = $event->transaction;
 
         // Check that shipment’s ready before capturing
-        // ...
+        // …
     }
 );
 ```
@@ -728,7 +728,7 @@ Event::on(
         $transaction = $event->transaction;
 
         // Notify the warehouse we're ready to ship
-        // ...
+        // …
     }
 );
 ```
@@ -750,7 +750,7 @@ Event::on(
         $amount = $event->amount;
 
         // Do something else if the refund amount’s >50% of the transaction
-        // ...
+        // …
     }
 );
 ```
@@ -772,7 +772,7 @@ Event::on(
         $amount = $event->amount;
 
         // Do something else if the refund amount’s >50% of the transaction
-        // ...
+        // …
     }
 );
 ```
@@ -806,7 +806,7 @@ Event::on(
         $response = $event->response;
 
         // Check some business rules to see whether the transaction is allowed
-        // ...
+        // …
     }
 );
 ```
@@ -838,7 +838,7 @@ Event::on(
         $response = $event->response;
 
         // Let the accounting department know an order transaction went through
-        // ...
+        // …
     }
 );
 ```
@@ -861,7 +861,7 @@ Event::on(
         $source = $event->paymentSource;
 
         // Warn a user they don’t have any valid payment sources saved
-        // ...
+        // …
     }
 );
 ```
@@ -883,7 +883,7 @@ Event::on(
         // @var PaymentSource $source
         $source = $event->paymentSource;
 
-        // ...
+        // …
     }
 );
 ```
@@ -906,7 +906,7 @@ Event::on(
         $source = $event->paymentSource;
 
         // Settle any outstanding balance
-        // ...
+        // …
     }
 );
 ```
@@ -929,7 +929,7 @@ Event::on(
         $transaction = $event->transaction;
 
         // Run custom logic for failed transactions
-        // ...
+        // …
     }
 );
 ```
@@ -952,7 +952,7 @@ Event::on(
         $transaction = $event->transaction;
 
         // Run custom logic depending on the transaction type
-        // ...
+        // …
     }
 );
 ```
@@ -977,7 +977,7 @@ Event::on(
         $subscription = $event->subscription;
 
         // Make a call to third party service to de-authorize a user
-        // ...
+        // …
     }
 );
 ```
@@ -1008,7 +1008,7 @@ Event::on(
         $params = $event->parameters;
 
         // Set the trial days based on some business logic
-        // ...
+        // …
     }
 );
 ```
@@ -1031,7 +1031,7 @@ Event::on(
         $subscription = $event->subscription;
 
         // Call a third party service to authorize a user
-        // ...
+        // …
     }
 );
 ```
@@ -1056,7 +1056,7 @@ Event::on(
         $subscription = $event->subscription;
 
         // Use business logic to determine whether the user can reactivate
-        // ...
+        // …
     }
 );
 ```
@@ -1079,7 +1079,7 @@ Event::on(
         $subscription = $event->subscription;
 
         // Re-authorize the user with a third-party service
-        // ...
+        // …
     }
 );
 ```
@@ -1112,7 +1112,7 @@ Event::on(
         $params = $event->parameters;
 
         // Modify the switch parameters based on some business logic
-        // ...
+        // …
     }
 );
 ```
@@ -1143,7 +1143,7 @@ Event::on(
         $params = $event->parameters;
 
         // Adjust the user’s permissions on a third party service
-        // ...
+        // …
     }
 );
 ```
@@ -1171,7 +1171,7 @@ Event::on(
         $params = $event->parameters;
 
         // Check whether the user is permitted to cancel the subscription
-        // ...
+        // …
     }
 );
 ```
@@ -1197,7 +1197,7 @@ Event::on(
         $params = $event->parameters;
 
         // Refund the user for the remainder of the subscription
-        // ...
+        // …
     }
 );
 ```
@@ -1219,7 +1219,7 @@ Event::on(
         // @var Subscription $subscription
         $subscription = $event->subscription;
 
-        // ...
+        // …
     }
 );
 ```
@@ -1248,7 +1248,7 @@ Event::on(
         $until = $event->paidUntil;
 
         // Update loyalty reward data
-        // ...
+        // …
     }
 );
 ```
@@ -1275,7 +1275,7 @@ Event::on(
         $isNew = $event->isNew;
 
         // Update customer’s address in an external CRM
-        // ...
+        // …
     }
 );
 ```
@@ -1300,7 +1300,7 @@ Event::on(
         $isNew = $event->isNew;
 
         // Set the default address in an external CRM
-        // ...
+        // …
     }
 );
 ```
@@ -1323,7 +1323,7 @@ Event::on(
         $address = $event->address;
 
         // Remove this address from a payment gateway
-        // ...
+        // …
     }
 );
 ```
@@ -1358,7 +1358,7 @@ Event::on(
 
         // Use `$event->isValid = false` to prevent sending
         // based on some business rules or client preferences
-        // ...
+        // …
     }
 );
 ```
@@ -1390,7 +1390,7 @@ Event::on(
         $history = $event->orderHistory;
 
         // Add the email address to an external CRM
-        // ...
+        // …
     }
 );
 ```
@@ -1414,7 +1414,7 @@ Event::on(
         // @var bool $isNew
         $isNew = $event->isNew;
 
-        // ...
+        // …
     }
 );
 ```
@@ -1438,7 +1438,7 @@ Event::on(
         // @var bool $isNew
         $isNew = $event->isNew;
 
-        // ...
+        // …
     }
 );
 ```
@@ -1460,7 +1460,7 @@ Event::on(
         // @var Email $email
         $email = $event->email;
 
-        // ...
+        // …
     }
 );
 ```
@@ -1482,7 +1482,7 @@ Event::on(
         // @var Email $email
         $email = $event->email;
 
-        // ...
+        // …
     }
 );
 ```
@@ -1511,7 +1511,7 @@ Event::on(
     function(PdfEvent $event) {
         // Modify `$event->order`, `$event->option`, `$event->template`,
         // and `$event->variables` to customize what gets rendered into a PDF
-        // ...
+        // …
     }
 );
 ```
@@ -1532,7 +1532,7 @@ Event::on(
     Pdf::EVENT_AFTER_RENDER_PDF,
     function(PdfEvent $event) {
         // Add a watermark to the PDF or forward it to the accounting department
-        // ...
+        // …
     }
 );
 ```
@@ -1555,7 +1555,7 @@ Event::on(
         $productType = $event->productType;
 
         // Create an audit trail of this action
-        // ...
+        // …
     }
 );
 ```
@@ -1578,7 +1578,7 @@ Event::on(
         $productType = $event->productType;
 
         // Prepare some third party system for a new product type
-        // ...
+        // …
     }
 );
 ```
