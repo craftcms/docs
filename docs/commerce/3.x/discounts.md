@@ -140,26 +140,26 @@ If the item is already on sale, the discount will not be applied.
 
 ## Discount Actions
 
-Discount actions control what the effect of the discount will be on the order.
+Discount actions control the effect the discount have on the order.
 
 To take an amount off a line item, a discount adjustment is applied. One discount can add multiple discount adjustments.
-The first thing the discount does is create an adjustment for each “Per Item Amount Off”, then calculates the "Per Item Percentage Off", then takes away the "Flat Amount Off Order".
-    
+The first thing the discount does is create an adjustment for each “Per Item Amount Off”. It then calculates the “Per Item Percentage Off”, then takes away the “Flat Amount Off Order”.
+
 ### Applied Scope
 
-To determine which line items in the order will be discounted, a discount has an "Applied Scope".
+To determine which line items in the order will be discounted, a discount has an “Applied Scope”.
 
 The options are:
 
 **Discount the matching items only**  
-This will only add “Per Item Amount Off” and "Per Item Percentage Off" discount amounts to the matching line items.
-Matching items are those items that are used to match this discount’s conditions, like “Product Variant” or “Category” conditions.
+This will only add “Per Item Amount Off” and “Per Item Percentage Off” discount amounts to the matching line items.
+
+Matching items are those items used to match this discount’s conditions, like “Product Variant” or “Category” conditions.
 
 **Discount all line items**  
-This will add “Per Item Amount Off” and "Per Item Percentage Off" discount amounts to all line items.
+This will add “Per Item Amount Off” and “Per Item Percentage Off” discount amounts to all line items.
 
-Please note that the "Flat Amount Off Order" is applied to the whole order so it is not affected by the applied scope option, and applies it’s discount to every line item 
-until it is all used up (from most expensive to least expensive).
+Please note that the “Flat Amount Off Order” is applied to the whole order, so it’s not affected by the applied scope option and applies its discount to every line item—most expensive to least expensive—until it’s used up.
 
 ### Per Item Amount Off
 
@@ -178,8 +178,8 @@ This is controlled by the "Applied Scope".
 ### Ignore sales when this discount is applied to matching line items
 
 When checked, this will prevent sales from being applied to matching line items.
-Matching line items are those items that are used to match this discount’s conditions, like “Product Variant” or “Category” conditions.
 
+Matching line items are those items used to match this discount’s conditions, like “Product Variant” or “Category” conditions.
 
 ### Flat Amount Off Order
 
@@ -187,21 +187,22 @@ A discounted currency amount to be taken off the whole order e.g. \$100.
 
 This amount will be spread across the whole order from the most expensive item to the least expensive item.
 
-If all line items have been discounted to a zero price then the remaining amount of discount is discarded. It can not make the order negative.
+If all line items have been discounted to a zero price then the remaining amount of discount is discarded. It cannot make the order negative.
 
 This amount is not affected by the Applied Scope.
 
 ### Additional Actions
 
-### Remove all shipping costs from the order
+#### Remove all shipping costs from the order
 
 Remove all shipping costs from the order.
 
-### Remove shipping costs for matching products only
+#### Remove shipping costs for matching products only
 
-If the discount is applied no shipping costs for matching items will be added to the order.
-Matching items are those items that are used to match this discount’s conditions, like “Product Variant” or “Category” conditions.
+If the discount is applied, no shipping costs for matching items will be added to the order.
 
-### Don’t apply any subsequent discounts to an order if this discount is applied
+Matching items are those items used to match this discount’s conditions, like “Product Variant” or “Category” conditions.
+
+#### Don’t apply any subsequent discounts to an order if this discount is applied
 
 When this setting is on and the discount applies, discounts further down in the discounts list will not be applied. This makes it possible to prevent cumulative discounts from being applied.
