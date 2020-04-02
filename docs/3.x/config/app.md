@@ -14,10 +14,6 @@ Craft’s default configuration is defined by [src/config/app.php](https://githu
 
 By default, Craft will store data caches in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) by overriding the `cache` application component from `config/app.php`.
 
-::: tip
-If you’re providing a custom database cache component, you’ll need its table to include `id`, `expire`, and `data` columns [as mentioned in Yii’s documentation](https://www.yiiframework.com/doc/api/2.0/yii-caching-dbcache#$cacheTable-detail) as well as columns for `dateCreated`, `dateUpdated`, and `uid`.
-:::
-
 ```php
 <?php
 return [
@@ -30,6 +26,11 @@ return [
     ],
 ];
 ```
+
+::: tip
+If you’re providing a custom database cache component, you’ll need its table to include `id`, `expire`, and `data` columns [as mentioned in Yii’s documentation](https://www.yiiframework.com/doc/api/2.0/yii-caching-dbcache#$cacheTable-detail) as well as columns for `dateCreated`, `dateUpdated`, and `uid`.
+:::
+
 
 #### Memcached Example
 
