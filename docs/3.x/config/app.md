@@ -137,10 +137,16 @@ return [
             'port' => 6379,
             'password' => getenv('REDIS_PASSWORD'),
         ],
-        'session' => [
-            'class' => yii\redis\Session::class,
-            'as session' => craft\behaviors\SessionBehavior::class,
-        ],
+        'session' => function() {
+            // Get the default component config
+            $config = craft\helpers\App::sessionConfig();
+
+            // Override the class to use Redis' session class
+            $config['class'] = yii\redis\Session::class;
+
+            // Instantiate and return it
+            return Craft::createObject($config);
+        },
     ],
 ];
 ```
@@ -153,11 +159,19 @@ First, you must create the database table that will store PHP’s sessions. You 
 <?php
 return [
     'components' => [
-        'session' => [
-            'class' => yii\web\DbSession::class,
-            'as session' => craft\behaviors\SessionBehavior::class,
-            'sessionTable' => '{{%phpsessions}}'
-        ],
+        'session' => function() {
+            // Get the default component config
+            $config = craft\helpers\App::sessionConfig();
+
+            // Override the class to use DB session class
+            $config['class'] = yii\web\DbSession::class;
+
+            // Set the session table name
+            $config['sessionTable'] = craft\db\Table::PHPSESSIONS;
+
+            // Instantiate and return it
+            return Craft::createObject($config);
+        },
     ],
 ];
 ```
