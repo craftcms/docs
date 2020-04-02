@@ -140,7 +140,7 @@ If the item is already on sale, the discount will not be applied.
 
 ## Discount Actions
 
-The actions tab on discounts control what the effect of the discount will be on the order.
+Discount actions control what the effect of the discount will be on the order.
 
 To take an amount off a line item, a discount adjustment is applied. One discount can add multiple discount adjustments.
 The first thing the discount does is create an adjustment for each “Per Item Amount Off”, then calculates the "Per Item Percentage Off", then takes away the "Flat Amount Off Order".
