@@ -152,7 +152,7 @@ To determine which line items in the order will be discounted, a discount has an
 The options are:
 
 **Discount the matching items only**  
-This will only add “Per Item Amount Off” and "Per Item Percentage Off" discount amounts to the matching line items. 
+This will only add “Per Item Amount Off” and "Per Item Percentage Off" discount amounts to the matching line items.
 Matching items are those items that are used to match this discount’s conditions, like “Product Variant” or “Category” conditions.
 
 **Discount all line items**  
@@ -163,11 +163,17 @@ until it is all used up (from most expensive to least expensive).
 
 ### Per Item Amount Off
 
-The flat value which should discount each item in the order e.g. \$1.
+The flat value which should discount each item in the order e.g. \$1. This is controlled by the "Applied Scope".
 
 ### Per Item Percentage Off
 
-The percentage value which should discount each item in the order, and whether it should be off the original or discounted price.
+The percentage value which should discount each item in the order, and whether it should be off the original or discounted price. 
+
+Original price is the sale price of the item. The Discounted price is the sale price of the item minus any other discounts that were applied before this one.  
+
+Whether it is based on the Original or Dicounted price, it is always calculated after the “Per Item Amount Off” has been taken off the item.
+
+This is controlled by the "Applied Scope".
 
 ### Ignore sales when this discount is applied to matching line items
 
