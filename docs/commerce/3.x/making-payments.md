@@ -135,9 +135,9 @@ Below is a simplified example of the fields required to make a payment using Twi
 If you would like to pay with a different gateway than the one that is already set on the cart/order, you can pass the `gatewayId` in the form.
 
 ```twig
-{# … #}
+{# ... #}
 <input type="hidden" name="gatewayId" value="1">
-{# … #}
+{# ... #}
 ```
 
 ::: warning

@@ -74,7 +74,7 @@ Alternatively, as seen in the [example templates](example-templates.md), you can
 
 ```twig
 <input type="hidden" name="action" value="commerce/payments/pay">
-{# … payment form … #}
+{# ... payment form ... #}
 <label for="registerUserOnOrderComplete">
     <input type="checkbox"
         id="registerUserOnOrderComplete"

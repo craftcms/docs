@@ -9,12 +9,12 @@ You can use `cart.shippingAddress` and `cart.billingAddress` in a template to se
 ```twig
 {% if cart.shippingAddress %}
     {{ cart.shippingAddress.firstName }}
-    {# … #}
+    {# ... #}
 {% endif %}
 
 {% if cart.billingAddress %}
     {{ cart.billingAddress.firstName }}
-    {# … #}
+    {# ... #}
 {% endif %}
 ```
 
@@ -106,7 +106,7 @@ If your customers have added multiple addresses, you can use radio buttons to se
                         value="{{ address.id }}" {{- cart.shippingAddressId ? ' checked' : null }}
                     >
                     {# identifying address information, up to you! #}
-                    {# … #}
+                    {# ... #}
                 </label>
             {% endfor %}
         </div>
@@ -119,7 +119,7 @@ If your customers have added multiple addresses, you can use radio buttons to se
                         value="{{ address.id }}" {{- cart.billingAddressId ? ' checked' : null }}
                     >
                     {# identifying address information, up to you! #}
-                    {# … #}
+                    {# ... #}
                 </label>
             {% endfor %}
         </div>
@@ -131,7 +131,7 @@ If your customers have added multiple addresses, you can use radio buttons to se
                 <input type="text" name="billingAddress[firstName]">
             </label>
             {# remaining address fields #}
-            {# … #}
+            {# ... #}
         </div>
 
         <div class="new-shipping-address">
@@ -140,7 +140,7 @@ If your customers have added multiple addresses, you can use radio buttons to se
                 <input type="text" name="shippingAddress[firstName]">
             </label>
             {# remaining address fields #}
-            {# … #}
+            {# ... #}
         </div>
     {% endif %}
 </form>
@@ -150,4 +150,4 @@ You may need to create custom routes to allow customers to manage these addresse
 
 ## Summary
 
-When using the `update-cart` action, you may include both new shipping and billing address (properly nested under their respective keys, `shippingAddress[…]` and `billingAddress[…]`), or select existing addresses using one or the other of the `shippingAddressId` and `billingAddressId` params. In either example, you can include `shippingAddressSameAsBilling` or `billingAddressSameAsShipping` to synchronize the attached addresses.
+When using the `update-cart` action, you may include both new shipping and billing address (properly nested under their respective keys, `shippingAddress[...]` and `billingAddress[...]`), or select existing addresses using one or the other of the `shippingAddressId` and `billingAddressId` params. In either example, you can include `shippingAddressSameAsBilling` or `billingAddressSameAsShipping` to synchronize the attached addresses.

@@ -14,7 +14,7 @@ See [the Customer model](api:craft\commerce\models\Customer) to learn about the 
 {% set addresses = craft.commerce.customer.addresses %}
 {% for address in addresses %}
     {{ address.firstName }}<br/>
-    {# … #}
+    {# ... #}
 {% endfor %}
 ```
 
@@ -39,7 +39,7 @@ This example would add a new address for the customer with the details in the `a
     {{ csrfInput() }}
     <input type="text" name="address[firstName]" value="{{ address is defined ? address.firstName : '' }}">
     <input type="text" name="address[lastName]" value="{{ address is defined ? address.lastName : '' }}">
-    {# … #}
+    {# ... #}
     <input type="submit" value="Save"/>
 </form>
 ```
@@ -54,7 +54,7 @@ To update an existing address, include its ID for the value of a `address[id]` p
     <input type="text" name="address[id]" value="{{ address.id }}">
     <input type="text" name="address[firstName]" value="{{ address.firstName }}">
     <input type="text" name="address[lastName]" value="{{ address.lastName }}">
-    {# … #}
+    {# ... #}
     <input type="submit" value="Save"/>
 </form>
 ```
