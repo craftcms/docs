@@ -611,6 +611,8 @@ Event::on(
         $isNew = $event->isNew;
 
         // Modify the price of a line item
+        // $lineItem->salePrice = 10;
+        // $lineItem->price = 20;
         // ...
     }
 );
