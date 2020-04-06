@@ -15,6 +15,10 @@ Do your best to follow these guidelines when writing code for Craft and Craft pl
 - Don’t put a space after type typecasts (`(int)$foo`).
 - Don’t wrap `include`/`include_once`/`require`/`require_once` file paths in parentheses. They are not functions.
 
+::: tip
+Craft’s PhpStorm settings repository includes a code style scheme and inspection profile: <https://github.com/craftcms/phpstorm-settings>
+:::
+
 ## Best Practices
 
 - Declare method argument types whenever possible.
