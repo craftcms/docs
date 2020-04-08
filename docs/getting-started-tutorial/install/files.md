@@ -2,7 +2,9 @@
 
 At this point you should have a local development environment running with a database and know how to run console commands. Now we’ll make sure Composer is installed.
 
-### What’s Composer?
+[[TOC]]
+
+## What’s Composer?
 
 <BrowserShot url="https://getcomposer.org/" :link="true">
 <img src="../../images/getcomposer.org.png" alt="Screenshot of getcomposer.org homepage" />
@@ -14,7 +16,7 @@ This code is split up into numerous _packages_ written by different authors. Our
 
 Composer handles the complexity of combining these packages so we can use the best software available for each individual job the website needs to accomplish. This isn’t unique to Craft CMS—most modern PHP projects are built this way.
 
-### Check your Composer version
+## Check your Composer version
 
 Try running the following console command:
 
@@ -30,7 +32,7 @@ If you’re using Composer 1.3.0 or higher, you’re ready to [Install Craft CMS
 You may be able update your Composer version by runing `composer self-update`. If that doesn’t work, follow the installation instructions to install a newer version.
 :::
 
-### Install Craft CMS Files
+## Install Craft CMS Files
 
 Choose a new path on your computer where you’d like to install Craft CMS. It can be anywhere you’d like, we’re just going to create some new files and tell your web server where to find them.
 

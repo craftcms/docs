@@ -2,6 +2,8 @@
 
 Let’s build some templates and start our Twig front end!
 
+[[TOC]]
+
 ## Create a layout
 
 Start by creating a layout template at `templates/_layout.twig`.

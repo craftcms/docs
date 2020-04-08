@@ -1,5 +1,7 @@
 # Get to know your terminal
 
+[[TOC]]
+
 Every operating system comes with a text-based command line interface (CLI) for inputting commands. This provides a powerful way of doing lots of things beyond the graphical user interface you already know.
 
 ::: tip

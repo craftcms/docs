@@ -18,4 +18,32 @@ We’ll build an example blog since that’s a common use for a CMS, but the tut
 
 We’re going to get Craft CMS running in a local environment, create a blog from scratch, and look at a few ways you might launch the site publicly. All you’ll need is yourself, your computer, and a healthy sense of adventure.
 
-If you’re ready to roll, go ahead and continue to the next section.
+
+### Table of Contents
+
+- [**0. Set Up Your Environment**](environment/)
+    - [Local development](environment/)
+    - [Get to know your terminal](environment/terminal.md)
+    - [Choose a code editor](environment/editor.md)
+    - [Set up a development stack]()
+- [**1. Install Craft CMS**](install/files.md)
+    - [Install Craft CMS with Composer](install/files.md)
+    - [Connect the database](install/database.md)
+    - [Set the web root](install/server.md)
+    - [Finish setup](install/setup.md)
+- [**2. Build Your Content**](configure/)
+    - [Building Your Content](configure/)
+    - [Control panel tour](configure/control-panel.md)
+    - [Content in Craft CMS](configure/modeling.md)
+    - [Create the blog](configure/section.md)
+    - [Configure globals](configure/globals.md)
+    - [Create an about page](configure/single.md)
+    - [Edit entries](configure/editing.md)
+- [**3. Build Your Front End**](build/)
+    - [Front End Options](build/)
+    - [Dynamic routing](build/routing.md)
+    - [Working with Twig](build/twig.md)
+    - [Create templates](build/templates.md)
+    - [Edit with live preview](build/preview.md)
+    - [Fetch content with GraphQL](build/graphql.md)
+- [**Next Steps**](more/)

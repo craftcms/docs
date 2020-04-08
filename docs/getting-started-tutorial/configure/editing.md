@@ -2,6 +2,8 @@
 
 Now that we’ve set up sections and fields, we can focus on editing content.
 
+[[TOC]]
+
 ## Add a blog entry
 
 Navigate to “Entries” and create a new blog entry. Fill in each field.
@@ -12,7 +14,7 @@ Navigate to “Entries” and create a new blog entry. Fill in each field.
 
 While this should be fairly intuitive, there are a few things you might want to know about:
 
-### **Edits are automatically saved while you work.**  
+### Edits are automatically saved while you work.
 
 Craft saves your work as you go, but you always decide when to _publish_. Edits on an already-published entry automatically start a new draft, and you can always see the save status and even leave notes in the versions menu. This menu will also let you see previous drafts and versions, which can be handy:
 
@@ -26,15 +28,15 @@ Here, the default Title has been cleaned up so it’s more presentable:
 
 When you do this, you’re editing that asset or category so any changes will carry over if you re-use it somewhere else. (Navigate to “Assets” and observe the update there as well, for example.)
 
-### Matrix is pretty cool.  
+### Matrix is pretty cool.
 
 You can grab the handles next to Matrix blocks to re-order them, and each block also has a menu just to the left of that handle you can use to collapse, disable or delete the block. You can also use this as a convenient place to insert new blocks:  
 
 ![](../../images/tutorial-matrix-menu.png =800x)
 
-### You can fine-tune details for how and when your post is displayed.  
+### You can fine-tune details for how and when your post is displayed.
 
-Craft will set a slug for you by default, and it’ll be used in the post URL once published. You can set the Post Date to a future date/time to have it appear then, and optionally add an Expiry Date to have it disappear later. You can always flip _Enabled_ off and know the post will be hidden publicly, regardless of other settings.  
+Craft will set a slug for you by default, and it’ll be used in the post URL once published. You can set the Post Date to a future date/time to have it appear then, and optionally add an Expiry Date to have it disappear later. You can always flip _Enabled_ off and know the post will be hidden publicly, regardless of other settings.
 
 ![](../../images/tutorial-post-meta.png =450x)
 

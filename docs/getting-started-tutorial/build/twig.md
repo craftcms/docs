@@ -2,6 +2,8 @@
 
 [Twig](https://twig.symfony.com/doc/3.x/templates.html) templates are plain text files that use special syntax to render Craft CMS content for the web browser.
 
+[[TOC]]
+
 ::: tip
 If you’ve used Twig in other projects that’ll be useful here. Craft adds its own layer of functionality to standard Twig.
 :::
