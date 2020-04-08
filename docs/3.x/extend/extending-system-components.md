@@ -23,8 +23,8 @@ Event::on(Entry::class, Entry::EVENT_DEFINE_RULES, function(DefineRulesEvent $e)
         return;
     }
 
-    $e->rules[] = ['field:myTagsField', ArrayValidator::class, 'max' => 5];
-    $e->rules[] = ['field:myCheckboxesField', ArrayValidator::class, 'max' => 5];
-    $e->rules[] = ['field:myTableField', ArrayValidator::class, 'max' => 5];
+    $e->rules[] = ['field:myTagsField', ArrayValidator::class, 'max' => 5, 'on' => Entry::SCENARIO_LIVE];
+    $e->rules[] = ['field:myCheckboxesField', ArrayValidator::class, 'max' => 5, 'on' => Entry::SCENARIO_LIVE];
+    $e->rules[] = ['field:myTableField', ArrayValidator::class, 'max' => 5, 'on' => Entry::SCENARIO_LIVE];
 });
 ```
