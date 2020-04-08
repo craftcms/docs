@@ -5,7 +5,7 @@ Now that we’re able to manage content with Craft CMS, it’s time to build a f
 Craft CMS supports two distinctly different ways of building a front end:
 
 1. Monolithic: building Twig templates for server-generated pages.
-2. Headless: using a GraphQL or JSON API in conjunction with a separate front end codebase.
+2. Headless: using a GraphQL API in conjunction with a separate front end codebase.
 
 Since Craft is a hybrid CMS, you can combine monolithic and headless features to suit your project—or even just for learning.
 
