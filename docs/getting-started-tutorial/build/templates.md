@@ -10,7 +10,7 @@ We want to follow [DRY methodology](https://en.wikipedia.org/wiki/Don%27t_repeat
 
 The layout is important for this because it will be the base from which our other templates _extend_.
 
-The underscore (`_`) at the beginning of the filename, `_layout.twig`, means the template is private: unlike the quick example we started with, you _cannot_ view the template by visiting `https://localhost:8080/_layout`. We can use underscores when it makes sense—in this case it’s because the layout is only a shell and isn’t meant to appear on its own.
+The underscore (`_`) at the beginning of the filename, `_layout.twig`, means the template is private: unlike the quick example we started with, you _cannot_ view the template by visiting `https://tutorial.test/_layout`. We can use underscores when it makes sense—in this case it’s because the layout is only a shell and isn’t meant to appear on its own.
 
 Copy this into the `templates/_layout.twig` file you created:
 
@@ -76,7 +76,7 @@ The first line _extends_ the layout template, meaning it will use that as a star
 
 Now that the blog section’s template is ready, you can visit the URL for a published post:
 
-<BrowserShot url="https://localhost:8080/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="">
 <img src="../../images/tutorial-entry-static.png" alt="Screenshot of empty page with generic title" />
 </BrowserShot>
 
@@ -98,7 +98,7 @@ That’s clearly no the title we should display on every page. For any detail pa
 
 Now it’s looking better!
 
-<BrowserShot url="https://localhost:8080/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="">
 <img src="../../images/tutorial-entry-dynamic.png" alt="Screenshot of detail page with dynamic title and entry date" />
 </BrowserShot>
 
@@ -130,7 +130,7 @@ For each asset, we output a `img` HTML tag using `{{ image.url }}` to get the we
 
 We should now see the image after refreshing the page:
 
-<BrowserShot url="https://localhost:8080/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="">
 <img src="../../images/tutorial-entry-with-image.png" alt="Screenshot of detail page with dynamic image added" />
 </BrowserShot>
 
@@ -165,7 +165,7 @@ We’ll use Twig to create an object called `featureImage` with the settings we 
 
 You can now refresh the front end and see your transformed asset:
 
-<BrowserShot url="https://localhost:8080/blog/my-first-post" :link="false" caption="Automatically-resized image, cropped at 900×600px.">
+<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="Automatically-resized image, cropped at 900×600px.">
 <img src="../../images/tutorial-image-resized.png" alt="Screenshot of detail page with auto-sized image" />
 </BrowserShot>
 
@@ -217,7 +217,7 @@ Matrix content is stored in whatever blocks we’ve defined. To display that con
 
 The Matrix content will now be included on the page:
 
-<BrowserShot url="https://localhost:8080/blog/my-first-post" :link="false" caption="Detail page with post content added." :max-height="600">
+<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="Detail page with post content added." :max-height="600">
 <img src="../../images/tutorial-matrix-content.png" alt="Screenshot of detail page with post content" />
 </BrowserShot>
 
@@ -420,7 +420,7 @@ We’ll display a listing of posts in two places: in the blog index and again on
 
 Let’s start with our landing page first.
 
-Create `templates/blog/index.twig`. Any time you use `index.twig` or `index.html`, that will be the default template or page in a given folder. So when we visit `https://localhost:8080/blog/`, that folder’s `blog/index.twig` will be used for rendering the result. Add the following to that template:
+Create `templates/blog/index.twig`. Any time you use `index.twig` or `index.html`, that will be the default template or page in a given folder. So when we visit `https://tutorial.test/blog/`, that folder’s `blog/index.twig` will be used for rendering the result. Add the following to that template:
 
 ```twig
 {% extends "_layout" %}
@@ -468,7 +468,7 @@ The image transform is similar to what we did earlier, except we used `.one()` i
 
 Here’s what the result looks like:
 
-<BrowserShot url="https://localhost:8080/blog/" :link="false" caption="">
+<BrowserShot url="https://tutorial.test/blog/" :link="false" caption="">
 <img src="../../images/tutorial-listing.png" alt="Screenshot of listing page" />
 </BrowserShot>
 
@@ -485,7 +485,7 @@ Transformed images will automatically be cropped from the center, but a content 
 
 Back on the front end, refresh the listing page and you’ll see the re-cropped thumbnail:
 
-<BrowserShot url="https://localhost:8080/blog/" :link="false" caption="Listing page with adjusted thumbnail focal point.">
+<BrowserShot url="https://tutorial.test/blog/" :link="false" caption="Listing page with adjusted thumbnail focal point.">
 <img src="../../images/tutorial-listing-with-custom-focal-point.png" alt="Screenshot of listing page where post thumbnail is cropped toward focal point of image" />
 </BrowserShot>
 
@@ -516,7 +516,7 @@ In the same way that entry detail pages came automatically loaded with an `entry
 
 Our post category listings, which you can navigate to by choosing any of a blog post’s tags, should be working now:
 
-<BrowserShot url="https://localhost:8080/blog/category/ramblings" :link="false" caption="Listing page for posts in the `Ramblings` category.">
+<BrowserShot url="https://tutorial.test/blog/category/ramblings" :link="false" caption="Listing page for posts in the `Ramblings` category.">
 <img src="../../images/tutorial-listing-category.png" alt="Screenshot of listing page limited by category" />
 </BrowserShot>
 
@@ -569,7 +569,7 @@ Now let’s include that in `templates/_layout.twig`:
 </html>
 ```
 
-<BrowserShot url="https://localhost:8080/blog" :link="false" caption="Blog listing with navigation." :max-height="600">
+<BrowserShot url="https://tutorial.test/blog" :link="false" caption="Blog listing with navigation." :max-height="600">
 <img src="../../images/tutorial-navigation.png" alt="Screenshot of blog listing with new top navigation" />
 </BrowserShot>
 
@@ -602,6 +602,6 @@ Create `template/_singles/about.twig` and add the following to it:
 
 We’re using some CSS utility classes to create a two-column layout here, but otherwise you’ll recognize all the pieces from previous examples!
 
-<BrowserShot url="https://localhost:8080/about" :link="false" caption="The About page.">
+<BrowserShot url="https://tutorial.test/about" :link="false" caption="The About page.">
 <img src="../../images/tutorial-single.png" alt="Screenshot of two-colum About page" />
 </BrowserShot>

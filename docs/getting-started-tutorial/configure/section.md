@@ -11,7 +11,7 @@ The first thing we’ll do is create a new Section for our blog posts.
 5. Enter `blog/_entry` for the “Template” setting. We’ll create that template later on.
 6. Leave the rest of the default settings as they are and choose “Save”.
 
-<BrowserShot url="https://localhost:8080/admin/settings/sections/new" :link="false" caption="Settings for the new blog section.">
+<BrowserShot url="https://tutorial.test/admin/settings/sections/new" :link="false" caption="Settings for the new blog section.">
 <img src="../../images/tutorial-new-section.png" alt="Screenshot of new section fields" />
 </BrowserShot>
 
@@ -19,7 +19,7 @@ You’ll see a new “Entries” menu item in the control panel navigation. Choo
 
 Technically we could create a new blog post now, but all we would have is a “Title” field.
 
-<BrowserShot url="https://localhost:8080/entries/blog6?draftId=5&fresh=1" :link="false" caption="The new blog post entry doesn’t yet have any fields.">
+<BrowserShot url="https://tutorial.test/entries/blog6?draftId=5&fresh=1" :link="false" caption="The new blog post entry doesn’t yet have any fields.">
 <img src="../../images/tutorial-empty-new-entry.png" alt="Screenshot of new blog post entry with only a title" />
 </BrowserShot>
 
@@ -55,7 +55,7 @@ Create a local Asset Volume for storing blog post images:
 `@web` and `@webroot` are [aliases](https://docs.craftcms.com/v3/config/#aliases) Craft includes by default, pointing to the base website URL and document root file path respectively.
 :::
 
-<BrowserShot url="https://localhost:8080/admin/settings/assets/volumes/new" :link="false" caption="Settings for the new blog volume.">
+<BrowserShot url="https://tutorial.test/admin/settings/assets/volumes/new" :link="false" caption="Settings for the new blog volume.">
 <img src="../../images/tutorial-new-asset-volume.png" alt="Screenshot of settings for the new asset volume" />
 </BrowserShot>
 
@@ -73,7 +73,7 @@ Now create a Category Group we can use for blog post categories:
 4. For “Category URI Format”, enter `blog/category/{slug}` and set the template to `blog/_category`.
 5. Save the Category Group.
 
-<BrowserShot url="https://localhost:8080/admin/settings/categories/new" :link="false" caption="Settings for the new blog category group.">
+<BrowserShot url="https://tutorial.test/admin/settings/categories/new" :link="false" caption="Settings for the new blog category group.">
 <img src="../../images/tutorial-new-category-group.png" alt="Screenshot of new category group fields" />
 </BrowserShot>
 
@@ -86,7 +86,7 @@ You’ll probably want a rich text editor (WYSISYG) for editing the main text of
 
 That’s it! The Redactor plugin is installed and ready to use in our site.
 
-<BrowserShot url="https://localhost:8080/admin/settings/plugins" :link="false" caption="Redactor now appears in the list of installed Plugins, where it can also be disabled and uninstalled.">
+<BrowserShot url="https://tutorial.test/admin/settings/plugins" :link="false" caption="Redactor now appears in the list of installed Plugins, where it can also be disabled and uninstalled.">
 <img src="../../images/tutorial-redactor-plugin.png" alt="Screenshot of plugins list showing Redactor installed" />
 </BrowserShot>
 
@@ -110,7 +110,7 @@ Next, let’s create the individual fields for our blog posts:
       Choose “+ New block type” again and enter “Image” for its name. Enter “Image” again for the “Name” under Field Settings. Mark this field required as well and select “Assets” from the “Field Type” dropdown menu. Restrict uploads to the “Blog” volume, enable “Restrict allowed file types?” and make sure “Image” is checked.
    3. Save the field.
 
-<BrowserShot url="https://localhost:8080/admin/settings/fields/2" :link="false" caption="Our complete group of new fields.">
+<BrowserShot url="https://tutorial.test/admin/settings/fields/2" :link="false" caption="Our complete group of new fields.">
 <img src="../../images/tutorial-new-blog-fields.png" alt="Screenshot of complete Blog Post Fields group" />
 </BrowserShot>
 
@@ -131,7 +131,7 @@ Now we have everything we need to collect content for our blog posts. If you wer
 You can also drag an entire field group from the available sets into your entry type’s field layout.
 :::
 
-<BrowserShot url="https://localhost:8080/admin/settings/sections/1/entrytypes/1" :link="false" caption="Completed blog entry type field layout.">
+<BrowserShot url="https://tutorial.test/admin/settings/sections/1/entrytypes/1" :link="false" caption="Completed blog entry type field layout.">
 <img src="../../images/tutorial-blog-field-layout.png" alt="Screenshot of complete blog field layout" />
 </BrowserShot>
 
@@ -139,6 +139,6 @@ That “Title Field Label” is a simple way to relabel the title—which *every
 
 Once you’ve added fields to the blog section’s field layout, return to “Entries” and create a new “Blog” entry. You’ll see each of the fields you created and you’re ready to publish some content!
 
-<BrowserShot url="https://localhost:8080/admin/entries/blog/7?draftId=6&fresh=1" :link="false" caption="A new blog post entry now includes our custom fields.">
+<BrowserShot url="https://tutorial.test/admin/entries/blog/7?draftId=6&fresh=1" :link="false" caption="A new blog post entry now includes our custom fields.">
 <img src="../../images/tutorial-new-entry-with-fields.png" alt="Screenshot of new entry screen with our custom fields" />
 </BrowserShot>

@@ -52,7 +52,7 @@ For a quick example of what we’ll be doing, create `templates/twig-hello.twig`
 Hi! This site’s name is {{ siteName }}.
 ```
 
-Without any setup in Craft CMS, you can go directly to `https://localhost:8080/twig-hello` and `https://localhost:8080/html-hello.html` to see each one in your browser.
+Without any setup in Craft CMS, you can go directly to `https://tutorial.test/twig-hello` and `https://tutorial.test/html-hello.html` to see each one in your browser.
 
 The Twig version gets parsed and displays the name of your site, with a clean URL that doesn’t require a file extension.
 

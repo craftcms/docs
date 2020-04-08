@@ -30,7 +30,7 @@ Now we can create the about page single:
 4. Enter `about` for “URI”, and `_singles/about` for “Template”.
 5. Save this section.
 
-<BrowserShot url="https://localhost:8080/admin/settings/sections/new" :link="false" caption="Settings for the new about single.">
+<BrowserShot url="https://tutorial.test/admin/settings/sections/new" :link="false" caption="Settings for the new about single.">
 <img src="../../images/tutorial-about-single.png" alt="Screenshot of new single fields" />
 </BrowserShot>
 
@@ -40,7 +40,7 @@ Follow the same process as the blog section to add fields to the about single:
 2. Create a “Content” tab and drag the “About Image” and “Post Content” fields to it. (Notice we’re re-using the “Post Content” field we created for blog entries.)
 3. Save the entry type.
 
-<BrowserShot url="https://localhost:8080/admin/settings/sections/2/entrytypes/2" :link="false" caption="The new about single’s field layout configuration.">
+<BrowserShot url="https://tutorial.test/admin/settings/sections/2/entrytypes/2" :link="false" caption="The new about single’s field layout configuration.">
 <img src="../../images/tutorial-about-field-layout.png" alt="Screenshot of about field type configuration" />
 </BrowserShot>
 

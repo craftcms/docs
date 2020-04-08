@@ -15,7 +15,7 @@ First upgrade your Craft Solo edition to Craft Pro:
 1. From the control panel, choose the “Solo” badge in the bottom left corner.
 2. In the “Pro” panel, choose “Try for free”.
 
-<BrowserShot url="https://localhost:8080/admin/plugin-store/upgrade-craft" :link="false" caption="Upgrading from Solo to Pro.">
+<BrowserShot url="https://tutorial.test/admin/plugin-store/upgrade-craft" :link="false" caption="Upgrading from Solo to Pro.">
 <img src="../../images/tutorial-upgrade-pro.png" alt="Screenshot of plugin store upgrading to Craft Pro trial" />
 </BrowserShot>
 
@@ -23,7 +23,7 @@ Your edition will be upgraded and you’ll see a new GraphQL item in the navigat
 
 This is the GraphiQL explorer for browsing API documentation and running queries directly in the browser:
 
-<BrowserShot url="https://localhost:8080/admin/graphql" :link="false" caption="The GraphiQL explorer.">
+<BrowserShot url="https://tutorial.test/admin/graphql" :link="false" caption="The GraphiQL explorer.">
 <img src="../../images/tutorial-graphql.png" alt="Screenshot of GraphiQL" />
 </BrowserShot>
 
@@ -39,7 +39,7 @@ Try running a test GraphQL query:
 
 You’ll see `pong` in the response signaling that everything’s ready to go:
 
-<BrowserShot url="https://localhost:8080/admin/graphql?query=%7B%20ping%20%7D%0A" :link="false" caption="It’s working!">
+<BrowserShot url="https://tutorial.test/admin/graphql?query=%7B%20ping%20%7D%0A" :link="false" caption="It’s working!">
 <img src="../../images/tutorial-graphql-ping.png" alt="Screenshot of GraphiQL with simple query and response" />
 </BrowserShot>
 
@@ -163,12 +163,12 @@ The response should be something like this:
       "title": "My first post",
       "postDate": "20 Mar 2020",
       "postDateAlt": "2020-03-20",
-      "url": "https://localhost:8080/blog/my-first-post",
+      "url": "https://tutorial.test/blog/my-first-post",
       "featureImage": [
         {
           "title": "Craft Image from Unsplash",
-          "url": "https://localhost:8080/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
-          "sized": "https://localhost:8080/assets/blog/_900x600_crop_center-center_90_none/tim-gouw-rXBwosfgG-c-unsplash.jpg"
+          "url": "https://tutorial.test/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
+          "sized": "https://tutorial.test/assets/blog/_900x600_crop_center-center_90_none/tim-gouw-rXBwosfgG-c-unsplash.jpg"
         }
       ],
       "postContent": [
@@ -181,7 +181,7 @@ The response should be something like this:
           "image": [
             {
               "title": "Little Drinks",
-              "url": "https://localhost:8080/assets/blog/rosie-kerr-Z0iBELYV8uk-unsplash.jpg"
+              "url": "https://tutorial.test/assets/blog/rosie-kerr-Z0iBELYV8uk-unsplash.jpg"
             }
           ]
         },
@@ -235,12 +235,12 @@ Result:
     "entries": [
       {
         "title": "My first post",
-        "url": "https://localhost:8080/blog/my-first-post",
+        "url": "https://tutorial.test/blog/my-first-post",
         "featureImage": [
           {
             "title": "Craft Image from Unsplash",
-            "url": "https://localhost:8080/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
-            "sized": "https://localhost:8080/assets/blog/_300x300_crop_center-center_none/tim-gouw-rXBwosfgG-c-unsplash.jpg",
+            "url": "https://tutorial.test/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
+            "sized": "https://tutorial.test/assets/blog/_300x300_crop_center-center_none/tim-gouw-rXBwosfgG-c-unsplash.jpg",
             "focalPoint": [
               0.2059,
               0.6287
@@ -354,7 +354,7 @@ Result:
       "aboutImage": [
         {
           "title": "Floating in Space",
-          "url": "https://localhost:8080/assets/general/nasa-Yj1M5riCKk4-unsplash.jpg"
+          "url": "https://tutorial.test/assets/general/nasa-Yj1M5riCKk4-unsplash.jpg"
         }
       ],
       "postContent": [
