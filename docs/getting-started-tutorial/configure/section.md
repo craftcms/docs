@@ -79,7 +79,7 @@ Now create a Category Group we can use for blog post categories:
 
 ### Install the Redactor plugin for rich text fields
 
-You’ll probably want a rich text editor (WYSISYG) for editing the main text of your blog posts. For this, we’ll install the first-party Redactor plugin. You can do this through the control panel or from the console. Let’s be adventurous and use console commands:
+You’ll probably want a rich text editor (WYSISYG) for editing the main text of your blog posts. For this, we’ll install the first-party Redactor plugin. You can do this through the control panel or from the terminal. Let’s be adventurous and use console commands:
 
 1. From your terminal, run `composer require craftcms/redactor`. Composer will download the plugin and add it to your project.
 2. Now run `./craft install/plugin redactor`.

@@ -1,4 +1,4 @@
-# Get to know your console
+# Get to know your terminal
 
 Every operating system comes with a text-based command line interface (CLI) for inputting commands. This provides a powerful way of doing lots of things beyond the graphical user interface you already know.
 
@@ -6,9 +6,9 @@ Every operating system comes with a text-based command line interface (CLI) for 
 If you’ve time traveled from the past, your operating system may _only_ have a command line interface. Our GUIs are going to blow your mind.
 :::
 
-We’ll be installing Craft with an application called [Composer](https://getcomposer.org/) that’s only available from the console—but don’t worry, it’s worth it!
+We’ll be installing Craft with an application called [Composer](https://getcomposer.org/) that’s only available from the command line—but don’t worry, it’s worth it!
 
-### Find your OS console
+### Find your OS terminal
 
 ![](../../images/tutorial-os-terminal.png)
 
@@ -16,11 +16,11 @@ We’ll be installing Craft with an application called [Composer](https://getcom
 - On Windows, the default console is called [Command Prompt](https://www.lifewire.com/command-prompt-2625840).
 - On Ubuntu Linux, the default console is called [Terminal](https://ubuntu.com/tutorials/command-line-for-beginners).
 
-There are other applications you can use like [Hyper](https://hyper.is/) (cross-platform) and [iTerm2](https://www.iterm2.com/) (Mac), but your system’s console will work just fine!
+There are other applications you can use like [Hyper](https://hyper.is/) (cross-platform) and [iTerm2](https://www.iterm2.com/) (Mac), but your system’s terminal will work just fine!
 
 ### Run a command
 
-Once you’ve launched your console, you’ll be greeted by an empty prompt that’s ready for input.
+Once you’ve launched your terminal, you’ll be greeted by an empty prompt that’s ready for input.
 
 Later on we’ll refer to “running” commands, in a format that look like this:
 

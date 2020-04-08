@@ -51,7 +51,7 @@ Once you’ve installed a provider, you’ll need to [download and install Vagra
 
 Now we’ll install the virtual machine Homestead uses to power your local development projects.
 
-Run the following command in your console:
+Run the following command in your terminal:
 
 ```bash
 vagrant box add laravel/homestead
