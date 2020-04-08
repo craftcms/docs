@@ -138,7 +138,7 @@ We also used `postDate` in two different formats, so we’re using the [GraphQL 
       }
       postCategories {
         title
-        uri
+        url
       }
     }
   }
@@ -151,8 +151,6 @@ We also used `postDate` in two different formats, so we’re using the [GraphQL 
 ```
 
 You’ll notice that anything with its own field layout implements its own element interface, which is why properties consistent for all element types (`title`, `postDate`, `slug`, etc.) are readily available while custom fields must be queried in the context of a relevant element interface such as everything nested within `... on blog_blog_Entry {}`.
-
-Lastly, categories and tags queried through GraphQL have a `uri` property but not a `url`—hence that difference here.
 
 The response should be something like this:
 
@@ -193,7 +191,7 @@ The response should be something like this:
       "postCategories": [
         {
           "title": "Ramblings",
-          "uri": "blog/category/ramblings"
+          "uri": "https://tutorial.test/blog/category/ramblings"
         }
       ]
     },
