@@ -1007,7 +1007,7 @@ $entries = \craft\elements\Entry::find()
 
 ### `orderBy`
 
-Determines the order that the entries should be returned in.
+Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`.)
 
 
 

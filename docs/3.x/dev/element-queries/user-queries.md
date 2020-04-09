@@ -607,7 +607,7 @@ $users = \craft\elements\User::find()
 
 ### `orderBy`
 
-Determines the order that the users should be returned in.
+Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
 
 
 

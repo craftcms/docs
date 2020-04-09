@@ -600,7 +600,7 @@ $assets = \craft\elements\Asset::find()
 
 ### `orderBy`
 
-Determines the order that the assets should be returned in.
+Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC`.)
 
 
 

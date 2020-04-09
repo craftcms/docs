@@ -395,7 +395,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `orderBy`
 
-Determines the order that the global sets should be returned in.
+Determines the order that the global sets should be returned in. (If empty, defaults to `name ASC`.)
 
 
 

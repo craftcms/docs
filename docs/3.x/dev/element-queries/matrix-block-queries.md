@@ -467,7 +467,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 ### `orderBy`
 
-Determines the order that the Matrix blocks should be returned in.
+Determines the order that the Matrix blocks should be returned in. (If empty, defaults to `sortOrder ASC`.)
 
 
 
