@@ -175,6 +175,7 @@ You can also choose one of the following guides to set up a development environm
 
 ### MacOS
 
+- [Laravel Valet](https://laravel.com/docs/7.x/valet)
 - [VirtualHostX](https://clickontyler.com/virtualhostx/)
 - [MAMP Pro](https://www.mamp.info/en/mamp-pro/windows/)
 
