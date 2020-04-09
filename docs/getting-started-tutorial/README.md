@@ -25,7 +25,7 @@ We’re going to get Craft CMS running in a local environment, create a blog fro
     - [Local development](environment/)
     - [Get to know your terminal](environment/terminal.md)
     - [Choose a code editor](environment/editor.md)
-    - [Set up a development stack]()
+    - [Set up a development stack](environment/stack.md)
 - [**1. Install Craft CMS**](install/files.md)
     - [Install Craft CMS with Composer](install/files.md)
     - [Connect the database](install/database.md)
