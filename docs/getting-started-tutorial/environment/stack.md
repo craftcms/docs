@@ -169,7 +169,6 @@ You can also choose one of the following guides to set up a development environm
 
 ### MacOS, Windows, and Linux
 
-- [Craft Nitro](#)
 - [DDEV](https://ddev.readthedocs.io/en/stable/)
 - [Lando](https://lando.dev/)
 
