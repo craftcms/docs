@@ -2,6 +2,12 @@
 
 You can also use Craft CMS headlessly, meaning your web server provides the authoring experience but relies on outside code to provide the front end for visitors. In this case you won’t work with Twig templates, but using an API like the GraphQL API that ships with Craft CMS Pro.
 
+::: warning
+Building a front end this way requires more development experience than we’ve covered in this tutorial. We’ll only touch on GraphQL basics and recommend more resources.
+:::
+
+[[TOC]]
+
 ## Overview
 
 GraphQL is a developer API for querying Craft CMS content. Fetching content, or [querying elements](https://docs.craftcms.com/v3/dev/element-queries/) in Craft-specific terms, is almost identical to how you would fetch content in Twig templates. Before you can use the API, you need to configured Craft CMS to make it available.
@@ -34,7 +40,9 @@ This is the GraphiQL explorer for browsing API documentation and running queries
 Try running a test GraphQL query:
 
 ```graphql
-{ ping }
+{
+  ping
+}
 ```
 
 You’ll see `pong` in the response signaling that everything’s ready to go:
@@ -70,13 +78,13 @@ return [
 ];
 ```
 
-## Query content
+## Twig examples as GraphQL queries
 
 Content may be fetched with GraphQL in the same way as with Twig: using [element queries](https://docs.craftcms.com/v3/dev/element-queries/).
 
 Let’s retrace each step of the tutorial where we fetched content, seeing how the Twig example maps to a GraphQL query.
 
-### [`_layout`](./templates.md#create-a-layout)
+### `_layout`
 
 The base template includes the default Craft CMS language and site name.
 
@@ -85,7 +93,7 @@ The base template includes the default Craft CMS language and site name.
 
 These aren’t available via the GraphQL API, but if you needed them you could store each in a global set field like the generic description.
 
-### [`blog/_entry`](./templates.md#create-a-detail-page)
+### `blog/_entry`
 
 The blog post detail template displays an entire blog post with its full content.
 
@@ -112,16 +120,16 @@ We also used `postDate` in two different formats, so we’re using the [GraphQL 
 
 ```graphql
 {
-  entry(slug:"my-first-post") {
+  entry(slug: "my-first-post") {
     title
-    postDate @formatDateTime(format:"d M Y")
-    postDateAlt:postDate @formatDateTime(format:"Y-m-d")
+    postDate @formatDateTime(format: "d M Y")
+    postDateAlt: postDate @formatDateTime(format: "Y-m-d")
     url
     ... on blog_blog_Entry {
       featureImage {
         title
         url
-        sized:url @transform(width:900, height:600, quality:90)
+        sized: url @transform(width: 900, height: 600, quality: 90)
       }
       postContent {
         ... on postContent_text_BlockType {
@@ -202,7 +210,7 @@ The response should be something like this:
 }
 ```
 
-### [`blog/index`](./templates.md#add-a-listing-page)
+### `blog/index`
 
 The blog listing page displays a thumbnail icon and summary for every entry.
 
@@ -210,14 +218,14 @@ This is fairly straightforward with GraphQL. We’ll expose the custom focal poi
 
 ```graphql
 {
-  entries(section:"blog") {
+  entries(section: "blog") {
     title
     url
     ... on blog_blog_Entry {
       featureImage {
         title
         url
-        sized:url @transform(width:300, height:300)
+        sized: url @transform(width: 300, height: 300)
         focalPoint
       }
     }
@@ -239,10 +247,7 @@ Result:
             "title": "Craft Image from Unsplash",
             "url": "https://tutorial.test/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
             "sized": "https://tutorial.test/assets/blog/_300x300_crop_center-center_none/tim-gouw-rXBwosfgG-c-unsplash.jpg",
-            "focalPoint": [
-              0.2059,
-              0.6287
-            ]
+            "focalPoint": [0.2059, 0.6287]
           }
         ]
       }
@@ -251,7 +256,7 @@ Result:
 }
 ```
 
-### [`blog/_category`](./templates.md#create-a-category-listing)
+### `blog/_category`
 
 The blog category listing is the same as the listing layout above, limited to a specific category defined in the page URL.
 
@@ -283,7 +288,7 @@ If the ID for that category is `30`, the listing query could limit results by th
 
 ```graphql
 {
-  entries(section:"blog", relatedTo:30) {
+  entries(section: "blog", relatedTo: 30) {
     title
     # ...
   }
@@ -294,7 +299,7 @@ Limiting on more than one category ID, like entries in category `30` or `40`, wo
 
 ```graphql
 {
-  entries(section:"blog", relatedTo:[30, 40]) {
+  entries(section: "blog", relatedTo: [30, 40]) {
     title
     # ...
   }
@@ -303,7 +308,7 @@ Limiting on more than one category ID, like entries in category `30` or `40`, wo
 
 For more on relationship querying, see the [Relations](https://docs.craftcms.com/v3/relations.html) page in the Craft CMS documentation.
 
-### [`_singles/about`](./templates.md#add-a-template-for-a-single)
+### `_singles/about`
 
 The about page is a Single, which is sort of a section and an entry and can be queried either way; using the `section` or `slug` parameter with a value of `about`.
 
@@ -314,10 +319,9 @@ The about page is a Single, which is sort of a section and an entry and can be q
   - `block.text`
   - `block.image` Assets field
 
-
 ```graphql
 {
-  entry(section:"about") {
+  entry(section: "about") {
     title
     ... on about_about_Entry {
       aboutImage {
