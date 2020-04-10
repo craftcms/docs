@@ -35,7 +35,7 @@ Copy this into the `templates/_layout.twig` file you created:
 </html>
 ```
 
-This is basebones HTML that will be the foudnation of every page on the site. HTML uses tags, or markup, as a structured way to organize and describe content. You may immediately recognize Craft’s `siteName` tag in this line:
+This is barebones HTML that will be the foundation of every page on the site. HTML uses tags, or markup, as a structured way to organize and describe content. You may immediately recognize Craft’s `siteName` tag in this line:
 
 ```twig
 <title>{{ siteName }}</title>
@@ -56,7 +56,7 @@ A crucial part of the template is the `content` block:
 {% endblock %}
 ```
 
-Whenever you see `{{` `}}` or `{%` `%}` you know you’re looking at Twig tags. In this case, we’re establishing the beginning and end of a block named `content`. The `content` part could be anything we want, but here it imples that what’s inside will be page content. There’s _nothing_ inside, however, because the layout template provides a structure that other child templates will fill in.
+Whenever you see `{{` `}}` or `{%` `%}` you know you’re looking at Twig tags. In this case, we’re establishing the beginning and end of a block named `content`. The `content` part could be anything we want, but here it implies that what’s inside will be page content. There’s _nothing_ inside, however, because the layout template provides a structure that other child templates will fill in.
 
 ## Create a detail page
 
