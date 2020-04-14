@@ -6,7 +6,7 @@ Diversity is one of our strengths. With that, challenges will arise that can lea
 
 This isn’t an exhaustive list of things that you can’t do. Rather, take it in the spirit in which it’s intended - a guide to make it easier to enrich all of us and the technical communities in which we participate.
 
-This code of conduct applies to all spaces used by the Craft community for communication. This includes Craft Slack, Craft CMS Stack Exchange, GitHub, Twitter, Facebook, meetups, conferences, and any other relevant forums. Violations of this code outside of any spaces managed by the Craft team will still affect a person’s ability to participate within them.
+This code of conduct applies to all spaces used by the Craft community for communication. This includes Craft Discord, Craft CMS Stack Exchange, GitHub, Twitter, Facebook, meetups, conferences, and any other relevant forums. Violations of this code outside of any spaces managed by the Craft team will still affect a person’s ability to participate within them.
 
 If you believe someone is violating the code of conduct, we ask that you report it by contacting us from [craftcms.com/contact](https://craftcms.com/contact). We take all reports seriously, and your identity will remain confidential.
 
