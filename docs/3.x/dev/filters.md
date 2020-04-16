@@ -49,6 +49,8 @@ Filter | Description
 [merge](https://twig.symfony.com/doc/2.x/filters/merge.html) | Merges an array with another array
 [multisort](#multisort) | Sorts an array by one or more keys within its sub-arrays.
 [namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
+[namespaceInputId](#namespaceinputid) | Namespaces an element ID.
+[namespaceInputName](#namespaceinputname) | Namespaces an input name.
 [nl2br](https://twig.symfony.com/doc/2.x/filters/nl2br.html) | Replaces newlines with `<br>` tags.
 [number](#number) | Formats a number.
 [number_format](https://twig.symfony.com/doc/2.x/filters/number_format.html) | Formats numbers.
@@ -596,6 +598,46 @@ would become this:
 ```
 
 Notice how the `id` attribute changed from `title` to `foo-title`, and the `name` attribute changed from `title` to `foo[title]`.
+
+## `namespaceInputId`
+
+Namepaces an element ID.
+
+For example, this:
+
+```twig
+{{ 'bar'|namespaceInputId('foo') }}
+```
+
+would output:
+
+```html
+foo-bar
+```
+
+::: tip
+If this is used within a [namespace](tags.md#namespace) tag, the namespace applied by the tag will be used by default.
+:::
+
+## `namespaceInputName`
+
+Namepaces an input name.
+
+For example, this:
+
+```twig
+{{ 'bar'|namespaceInputName('foo') }}
+```
+
+would output:
+
+```html
+foo[bar]
+```
+
+::: tip
+If this is used within a [namespace](tags.md#namespace) tag, the namespace applied by the tag will be used by default.
+:::
 
 ## `number`
 
