@@ -51,11 +51,11 @@ This tag will cache a portion of your template, which can improve performance fo
 
 Warning: If you’re suffering from abnormal page load times, you may be experiencing a suboptimal hosting environment. Please consult a specialist before trying `{% cache %}`. `{% cache %}` is not a substitute for fast database connections, efficient templates, or moderate query counts. Possible side effects include stale content, excessively long-running background tasks, stuck tasks, and in rare cases, death. Ask your hosting provider if `{% cache %}` is right for you.
 
-#### Parameters
+### Parameters
 
 The `{% cache %}` tag supports the following parameters:
 
-###### `globally`
+#### `globally`
 
 Caches the output globally (for the current site locale), rather than on a per-URL basis.
 
@@ -63,7 +63,7 @@ Caches the output globally (for the current site locale), rather than on a per-U
 {% cache globally %}
 ```
 
-###### `using key`
+#### `using key`
 
 Specifies the name of the key the cache should use. If this is not provided, a random key will be generated when Twig first parses the template.
 
@@ -83,7 +83,7 @@ You can combine this parameter with [globally](#globally) to cache templates on 
 If you change the template code within a `{% cache %}` that uses a custom key, any existing template caches will not automatically be purged. You will either need to assign the tag a new key, or clear your existing template caches manually using the Clear Caches tool in Settings.
 :::
 
-###### `for`
+#### `for`
 
 The amount of time it should take for the cache to expire.
 
@@ -107,7 +107,7 @@ The accepted duration units are:
 
 Tip: If this parameter is omitted, your <config:cacheDuration> config setting will be used to define the default duration.
 
-###### `until`
+#### `until`
 
 A [DateTime](http://php.net/manual/en/class.datetime.php) object defining when the cache should expire.
 
@@ -119,7 +119,7 @@ A [DateTime](http://php.net/manual/en/class.datetime.php) object defining when t
 You can only use [for](#for) **_or_** [until](#until) in a single `{% cache %}` tag.
 :::
 
-###### `if`
+#### `if`
 
 Only activates the `{% cache %}` tag if a certain condition is met.
 
@@ -128,7 +128,7 @@ Only activates the `{% cache %}` tag if a certain condition is met.
 {% cache if craft.app.request.isMobileBrowser() %}
 ```
 
-###### `unless`
+#### `unless`
 
 Prevents the `{% cache %}` tag from activating if a certain condition is met.
 
@@ -141,7 +141,7 @@ Prevents the `{% cache %}` tag from activating if a certain condition is met.
 You can only use [if](#if) **_or_** [unless](#unless) in a single `{% cache %}` tag.
 :::
 
-#### Cache clearing
+### Cache clearing
 
 Your caches will automatically clear when any elements (entries, assets, etc.) within the tags are saved or deleted.
 
@@ -149,7 +149,7 @@ If you have any element _queries_ within the tags (e.g. a `craft.entries`), and 
 
 You can also manually clear all of your template caches from the Settings page, using the “Clear Caches” tool.
 
-#### When to use `{% cache %}` tags
+### When to use `{% cache %}` tags
 
 You should use `{% cache %}` tags any time you’ve got a template that’s causing a lot of database queries, or you’re doing something very computationally expensive with Twig.
 
@@ -209,11 +209,11 @@ The tag calls <api:yii\web\View::registerCss()> under the hood, which can also b
 ```
 :::
 
-#### Parameters
+### Parameters
 
 The `{% css %}` tag supports the following parameters:
 
-###### `with`
+#### `with`
 
 Any HTML attributes that should be included on the `<style>` tag.
 
@@ -244,11 +244,11 @@ This tag will prevent the rest of the template from executing, and end the reque
 {% endif %}
 ```
 
-#### Parameters
+### Parameters
 
 The `{% exit %}` tag supports the following parameter:
 
-###### Status
+#### Status
 
 You can optionally set the HTTP status code that should be included with the response. If you do, Craft will look for the appropriate error template to render. For example, `{% exit 404 %}` will get Craft to return the `404.twig` template. If the template doesn’t exist. Craft will fallback on its own template corresponding to the status code.
 
@@ -265,11 +265,11 @@ This tag will set a new HTTP header on the response.
 {% header "Expires: " ~ expiry|date('D, d M Y H:i:s', 'GMT') ~ " GMT" %}
 ```
 
-#### Parameters
+### Parameters
 
 The `{% header %}` tag supports the following parameter:
 
-###### Header
+#### Header
 
 You specify the actual header that should be set by typing it as a string after the word `header`. This parameter is required.
 
@@ -307,11 +307,11 @@ The tag calls <api:yii\web\View::registerJs()> under the hood, which can also be
 ```
 :::
 
-#### Parameters
+### Parameters
 
 The `{% js %}` tag supports the following parameters:
 
-###### Position
+#### Position
 
 You can specify where the `<script>` tag should be added to the page using one of these position keywords:
 
@@ -379,21 +379,21 @@ This tag helps create a hierarchical navigation menu for entries in a [Structure
 </ul>
 ```
 
-#### Parameters
+### Parameters
 
 The `{% nav %}` tag has the following parameters:
 
-###### Item name
+#### Item name
 
 The first thing to follow “`{% nav`” is the variable name you’d like to use to represent each item in the loop, e.g. `item`, `entry`, or `category`. You will be using this variable name to reference the items inside the loop.
 
-###### `in`
+#### `in`
 
 Next you need to type the word “`in`”, followed by the array of entries the tag should loop through. This can be an actual array, or an [ElementCriteriaModel]() object.
 
 Warning: The `{% nav %}` tag requires elements to be queried in a specific (hierarchical) order, so make sure you don’t override the `order` criteria parameter in conjunction with this tag.
 
-#### Showing children
+### Showing children
 
 To show the children of the current element in the loop, use the `{% children %}` tag. When Craft gets to this tag, it will loop through the element’s children, applying the same template defined between your `{% nav %}` and `{% endnav %}` tags to those children.
 
@@ -433,11 +433,11 @@ You can use the <config:pageTrigger> config setting to customize what comes befo
 Only a single `{% paginate %}` tag should be used per request.
 :::
 
-#### Parameters
+### Parameters
 
 The `{% paginate %}` tag has the following parameters:
 
-###### Query
+#### Query
 
 The first thing you pass into the `{% paginate %}` tag is a query object (such as an [element query](../element-queries/README.md)), which defines all of the results that should be paginated. Use the `limit` parameter to define how many results should show up per page (100 by default).
 
@@ -445,7 +445,7 @@ The first thing you pass into the `{% paginate %}` tag is a query object (such a
 This parameter needs to be an actual query object, not an array of pre-fetched results. So don’t call `all()` on the query before passing it in.
 :::
 
-###### `as`
+#### `as`
 
 Next up you need to type “`as`”, followed by one or two variable names:
 
@@ -461,7 +461,7 @@ Here’s what they get set to:
 If you only specify one variable name here, the `pageInfo` variable will be called `paginate` by default for backwards compatibility.
 :::
 
-#### Showing the results
+### Showing the results
 
 The `{% paginate %}` tag won’t actually output the current page’s results for you. It will only give you an array of the results that should be on the current page (referenced by the variable you defined in the `as` parameter.)
 
@@ -478,7 +478,7 @@ Following your `{% paginate %}` tag, you will need to loop through this page’s
 {% endfor %}
 ```
 
-#### The `pageInfo` variable
+### The `pageInfo` variable
 
 The `pageInfo` variable (or whatever you’ve called it) provides the following properties and methods:
 
@@ -497,11 +497,11 @@ The `pageInfo` variable (or whatever you’ve called it) provides the following 
 * **`pageInfo.getRangeUrls( start, end )`** – Returns an array of URLs to pages in a given range of page numbers, with keys set to the page numbers.
 
 
-#### Navigation examples
+### Navigation examples
 
 The [pageInfo](#the-pageInfo-variable) variable gives you lots of options for building the pagination navigation that’s right for you. Here are a few common examples.
 
-###### Previous/Next Page Links
+#### Previous/Next Page Links
 
 If you just want simple Previous Page and Next Page links to appear, you can do this:
 
@@ -518,7 +518,7 @@ If you just want simple Previous Page and Next Page links to appear, you can do 
 
 Note that we’re wrapping those links in conditionals because there won’t always be a previous or next page.
 
-###### First/Last Page Links
+#### First/Last Page Links
 
 You can add First Page and Last Page links into the mix, you can do that too:
 
@@ -537,7 +537,7 @@ You can add First Page and Last Page links into the mix, you can do that too:
 
 There’s no reason to wrap those links in conditionals since there will always be a first and last page.
 
-###### Nearby Page Links
+#### Nearby Page Links
 
 If you want to create a list of nearby pages, perhaps surrounding the current page number, you can do that too!
 
@@ -577,15 +577,15 @@ This tag will redirect the browser to a different URL.
 {% endif %}
 ```
 
-#### Parameters
+### Parameters
 
 The `{% redirect %}` tag has the following parameter:
 
-###### The URL
+#### The URL
 
 Immediately after typing “`{% redirect`”, you need to tell the tag where to redirect the browser. You can either give it a full URL, or just the path.
 
-###### The Status Code
+#### The Status Code
 
 By default, redirects will have `302` status codes, which tells the browser that the requested URL has only been moved to the redirected URL _temporarily_.
 
@@ -595,7 +595,7 @@ You can customize which status code accompanies your redirect response by typing
 {% redirect "pricing" 301 %}
 ```
 
-###### Flash Messages
+#### Flash Messages
 
 You can optionally set flash messages that will show up for the user on the next request using the `with notice` and/or `with error` params:
 
