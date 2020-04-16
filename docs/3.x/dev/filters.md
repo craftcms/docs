@@ -586,7 +586,7 @@ For example, this:
 {% set html %}
 <input id="title" name="title" type="text">
 {% endset %}
-{{ html|namespace('foo')
+{{ html|namespace('foo') }}
 ```
 
 would become this:
