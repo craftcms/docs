@@ -590,6 +590,27 @@ When sorting by multiple properties or keys, you must set the `direction` and `s
 ], sortFlag=[SORT_NATURAL, SORT_FLAG_CASE]) %}
 ```
 
+## `namespace`
+
+The `{% namespace %}` tag can be used to namespace input names and other HTML attributes, as well as CSS selectors.
+
+For example, this:
+
+```twig
+{% set html %}
+<input id="title" name="title" type="text">
+{% endset %}
+{{ html|namespace('foo')
+```
+
+would become this:
+
+```html
+<input id="foo-title" name="foo[title]" type="text">
+```
+
+Notice how the `id` attribute changed from `title` to `foo-title`, and the `name` attribute changed from `title` to `foo[title]`.
+
 ## `nl2br`
 
 Inserts HTML line breaks before all newlines in a string.
