@@ -1,6 +1,6 @@
 # Tags
 
-The following filters are available to Twig templates in Craft:
+The following tags are available to Twig templates in Craft:
 
 Tag | Description
 --- | -----------
