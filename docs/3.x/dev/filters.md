@@ -578,7 +578,7 @@ When sorting by multiple properties or keys, you must set the `direction` and `s
 
 ## `namespace`
 
-The `{% namespace %}` tag can be used to namespace input names and other HTML attributes, as well as CSS selectors.
+The `|namespace` filter can be used to namespace input names and other HTML attributes, as well as CSS selectors.
 
 For example, this:
 
