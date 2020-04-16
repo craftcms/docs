@@ -2,6 +2,34 @@
 
 Every single template is going to get loaded with the following variables:
 
+Variable | Description
+-------- | -----------
+[Global set variables](#global-set-variables) | Variables for each of the global sets.
+[POS_BEGIN](#pos-begin) | The [craft\web\View::POS_BEGIN](api:craft\web\View#constants) constant.
+[POS_END](#pos-end) | The [craft\web\View::POS_END](api:craft\web\View#constants) constant.
+[POS_HEAD](#pos-head) | The [craft\web\View::POS_HEAD](api:craft\web\View#constants) constant.
+[POS_LOAD](#pos-load) | The [craft\web\View::POS_LOAD](api:craft\web\View#constants) constant.
+[POS_READY](#pos-ready) | The [craft\web\View::POS_READY](api:craft\web\View#constants) constant.
+[SORT_ASC](#sort-asc) | The `SORT_ASC` PHP constant.
+[SORT_DESC](#sort-desc) | The `SORT_DESC` PHP constant.
+[SORT_FLAG_CASE](#sort-flag-case) | The `SORT_FLAG_CASE` PHP constant.
+[SORT_LOCALE_STRING](#sort-locale-string) | The `SORT_LOCALE_STRING` PHP constant.
+[SORT_NATURAL](#sort-natural) | The `SORT_NATURAL` PHP constant.
+[SORT_NUMERIC](#sort-numeric) | The `SORT_NUMERIC` PHP constant.
+[SORT_REGULAR](#sort-regular) | The `SORT_REGULAR` PHP constant.
+[SORT_STRING](#sort-string) | The `SORT_STRING` PHP constant.T
+[craft](#craft) | A <api:craft\web\twig\variables\CraftVariable> object.
+[currentSite](#currentsite) | The requested site.
+[currentUser](#currentuser) | The currently logged-in user.
+[devMode](#devmode) | Whether Dev Mode is enabled.
+[loginUrl](#loginurl) | The URL to the front-end Login page.
+[logoutUrl](#logouturl) | The URL to the front-end Logout page.
+[now](#now) | The current date/time.
+[siteName](#sitename) | The name of the current site.
+[siteUrl](#siteurl) | The base URL of the current site.
+[systemName](#systemname) | The system name.
+[view](#view) | The app’s `view` component.
+
 ## `craft`
 
 A <api:craft\web\twig\variables\CraftVariable> object, which provides access points to various helper functions and objects for templates.

@@ -2,11 +2,85 @@
 
 The following filters are available to Twig templates in Craft:
 
-## `abs`
-
-Returns an absolute value.
-
-This works identically to Twig’s core [`abs`](https://twig.symfony.com/doc/2.x/filters/abs.html) filter.
+Filter | Description
+------ | -----------
+[abs](https://twig.symfony.com/doc/2.x/filters/abs.html) | Returns the absolute value of a number.
+[append](#append) | Appends HTML to the end of another element.
+[ascii](#ascii) | Converts a string to ASCII characters.
+[atom](#atom) | Converts a date to an ISO-8601 timestamp.
+[attr](#attr) | Modifies an HTML tag’s attributes.
+[batch](https://twig.symfony.com/doc/2.x/filters/batch.html) | Batches items in an array.
+[camel](#camel) | Formats a string into camelCase.
+[capitalize](https://twig.symfony.com/doc/2.x/filters/capitalize.html) | Capitalizes the first character of a string.
+[column](#column) | Returns the values from a single property or key in an array.
+[contains](#contains) | Returns whether an array contains a nested item with a given key/value pair.
+[convert_encoding](https://twig.symfony.com/doc/2.x/filters/convert_encoding.html) | Converts a string from one encoding to another.
+[currency](#currency) | Formats a number as currency.
+[date](#date) | Formats a date.
+[date_mofidy](https://twig.symfony.com/doc/2.x/filters/date_modify.html) | Modifies a date.
+[datetime](#datetime) | Formats a date with its time.
+[default](https://twig.symfony.com/doc/2.x/filters/default.html) | Returns the value or a default value if empty.
+[duration](#duration) | Returns a `DateInterval` object.
+[encenc](#encenc) | Encrypts and base64-encodes a string.
+[escape](https://twig.symfony.com/doc/2.x/filters/escape.html) | Escapes a string.
+[filesize](#filesize) | Formats a number of bytes into something else.
+[filterByValue](#filterbyvalue) | Filters an array by key/value pairs.
+[filter](#filter) | Filters the items in an array.
+[first](https://twig.symfony.com/doc/2.x/filters/first.html) | Returns the first character/item of a string/array.
+[format](https://twig.symfony.com/doc/2.x/filters/format.html) | Formats a string by replacing placeholders.
+[group](#group) | Groups items in an array.
+[hash](#hash) | Prefixes a string with a keyed-hash message authentication code (HMAC).
+[id](#id) | Normalizes an element ID into only alphanumeric characters, underscores, and dashes.
+[indexOf](#indexof) | Returns the index of a given value within an array, or the position of a passed-in string within another string.
+[index](#index) | Indexes the items in an array.
+[intersect](#intersect) | Returns the intersecting items of two arrays.
+[join](https://twig.symfony.com/doc/2.x/filters/join.html) | Concatenates multiple strings into one.
+[json_decode](#json_decode) | JSON-decodes a value.
+[json_encode](#json_encode) | JSON-encodes a value.
+[kebab](#kebab) | Formats a string into “kebab-case”.
+[keys](https://twig.symfony.com/doc/2.x/filters/keys.html) | Returns the keys of an array.
+[last](https://twig.symfony.com/doc/2.x/filters/last.html) | Returns the last character/item of a string/array.
+[lcfirst](#lcfirst) | Lowercases the first character of a string.
+[length](https://twig.symfony.com/doc/2.x/filters/length.html) | Returns the length of a string or array.
+[literal](#literal) | Escapes an untrusted string for use with element query params.
+[lower](https://twig.symfony.com/doc/2.x/filters/lower.html) | Lowercases a string.
+[map](https://twig.symfony.com/doc/2.x/filters/map.html) | Applies an arrow function to the items in an array.
+[markdown](#markdown-or-md) | Processes a string as Markdown.
+[merge](https://twig.symfony.com/doc/2.x/filters/merge.html) | Merges an array with another array
+[multisort](#multisort) | Sorts an array by one or more keys within its sub-arrays.
+[namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
+[nl2br](https://twig.symfony.com/doc/2.x/filters/nl2br.html) | Replaces newlines with `<br>` tags.
+[number](#number) | Formats a number.
+[number_format](https://twig.symfony.com/doc/2.x/filters/number_format.html) | Formats numbers.
+[parseRefs](#parserefs) Parses a string for reference tags.
+[pascal](#pascal) | Formats a string into “PascalCase”.
+[percentage](#percentage) | Formats a percentage.
+[prepend](#prepend) | Prepends HTML to the beginning of another element.
+[purify](#purify) | Runs HTML code through HTML Purifier.
+[raw](https://twig.symfony.com/doc/2.x/filters/raw.html) | Marks as value as safe for the current escaping strategy.
+[reduce](https://twig.symfony.com/doc/2.x/filters/reduce.html) | Iteratively reduces a sequence or mapping to a single value.
+[replace](#replace) | Replaces parts of a string with other things.
+[reverse](https://twig.symfony.com/doc/2.x/filters/reverse.html) | Reverses a string or array.
+[round](https://twig.symfony.com/doc/2.x/filters/round.html) | Rounds a number.
+[rss](#rss) | Converts a date to RSS date format.
+[slice](https://twig.symfony.com/doc/2.x/filters/slice.html) | Extracts a slice of a string or array.
+[snake](#snake) | Formats a string into “snake_case”.
+[sort](https://twig.symfony.com/doc/2.x/filters/sort.html) | Sorts an array.
+[spaceless](https://twig.symfony.com/doc/2.x/filters/spaceless.html) | Removes whitespace between HTML tags.
+[split](https://twig.symfony.com/doc/2.x/filters/split.html) | Splits a string by a delimiter.
+[striptags](https://twig.symfony.com/doc/2.x/filters/striptags.html) | Strips SGML/XML tags from a string.
+[time](#time) | Formats a time.
+[timestamp](#timestamp) | Formats a human-readable timestamp.
+[title](https://twig.symfony.com/doc/2.x/filters/title.html) | Formats a string into “Title Case”.
+[translate](#translate-or-t) | Translates a message.
+[trim](https://twig.symfony.com/doc/2.x/filters/trim.html) | Strips whitespace from the beginning and end of a string.
+[ucfirst](#ucfirst) | Capitalizes the first character of a string.
+[unique](#unique) | Removes duplicate values from an array.
+[upper](https://twig.symfony.com/doc/2.x/filters/upper.html) | Formats a string into “UPPER CASE”.
+[url_encode](https://twig.symfony.com/doc/2.x/filters/url_encode.html) | Percent-encodes a string as a URL segment or an array as a query string.
+[values](#values) | Returns all the values in an array, resetting its keys.
+[withoutKey](#withoutkey) | Returns an array without the specified key.
+[without](#without) | Returns an array without the specified element(s).
 
 ## `append`
 
@@ -121,12 +195,6 @@ If you want to completely replace a `class` or `style` attribute, remove it firs
 {# Output: <div class="bar"> #}
 ```
 
-## `batch`
-
-“Batches” items by returning a list of lists with the given number of items
-
-This works identically to Twig’s core [`batch`](https://twig.symfony.com/doc/2.x/filters/batch.html) filter.
-
 ## `camel`
 
 Returns a string formatted in “camelCase”.
@@ -135,12 +203,6 @@ Returns a string formatted in “camelCase”.
 {{ 'foo bar'|camel }}
 {# Output: fooBar #}
 ```
-
-## `capitalize`
-
-Capitalizes a value.
-
-This works identically to Twig’s core [`capitalize`](https://twig.symfony.com/doc/2.x/filters/capitalize.html) filter.
 
 ## `column`
 
@@ -172,12 +234,6 @@ Returns whether the passed-in array contains any nested arrays/objects with a pa
     <p class="mature">Some of this artwork is meant for mature viewers.</p>
 {% endif %}
 ```
-
-## `convert_encoding`
-
-Converts a string from one encoding to another.
-
-This works identically to Twig’s core [`convert_encoding`](https://twig.symfony.com/doc/2.x/filters/convert_encoding.html) filter.
 
 ## `currency`
 
@@ -239,12 +295,6 @@ You can customize the timezone the time is output in, using the `timezone` param
 {# Output: 12/21/1990 #}
 ```
 
-## `date_modify`
-
-Modifies a date with a given modifier string.
-
-This works identically to Twig’s core [`date_modify`](https://twig.symfony.com/doc/2.x/filters/date_modify.html) filter.
-
 ## `datetime`
 
 Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) object, including the time of day.
@@ -284,12 +334,6 @@ You can customize the timezone the time is output in, using the `timezone` param
 {# Output: 12/21/1990, 12:00 AM #}
 ```
 
-## `default`
-
-Returns the passed default value if the value is undefined or empty, otherwise the value of the variable.
-
-This works identically to Twig’s core [`default`](https://twig.symfony.com/doc/2.x/filters/default.html) filter.
-
 ## `duration`
 
 Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object through <api:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
@@ -305,12 +349,6 @@ Encrypts and base64-encodes a string.
 ```twig
 {{ 'secure-string'|encenc }}
 ```
-
-## `escape`
-
-Escapes a string using strategies that depend on the context.
-
-This works identically to Twig’s core [`escape`](https://twig.symfony.com/doc/2.x/filters/escape.html) filter.
 
 ## `filesize`
 
@@ -339,18 +377,6 @@ When an arrow function is passed, this works identically to Twig’s core [`filt
 ## `filterByValue`
 
 Runs an array through <api:craft\helpers\ArrayHelper::filterByValue()>.
-
-## `first`
-
-Returns the first element of an array or string.
-
-This works identically to Twig’s core [`first`](https://twig.symfony.com/doc/2.x/filters/first.html) filter.
-
-## `format`
-
-formats a given string by replacing the placeholders (placeholders follows the [sprintf()](https://secure.php.net/sprintf) notation).
-
-This works identically to Twig’s core [`format`](https://twig.symfony.com/doc/2.x/filters/format.html) filter.
 
 ## `group`
 
@@ -449,12 +475,6 @@ Returns an array containing only the values that are also in a passed-in array.
 %}
 ```
 
-## `join`
-
-Returns a string which is the concatenation of the elements in an array.
-
-This works identically to Twig’s core [`join`](https://twig.symfony.com/doc/2.x/filters/join.html) filter.
-
 ## `json_encode`
 
 Returns the JSON representation of a value.
@@ -473,50 +493,22 @@ JSON-decodes a string into an array  by passing it through <api:yii\helpers\Json
 
 Returns a string formatted in “kebab-case”.
 
-Tip: That’s a reference to [shish kebabs](https://en.wikipedia.org/wiki/Kebab#Shish) for those of you that don’t get the analogy.
+::: tip
+That’s a reference to [shish kebabs](https://en.wikipedia.org/wiki/Kebab#Shish) for those of you that don’t get the analogy.
+:::
 
 ```twig
 {{ 'foo bar?'|kebab }}
 {# Output: foo-bar #}
 ```
 
-## `keys`
-
-Returns the keys of an array.
-
-This works identically to Twig’s core [`keys`](https://twig.symfony.com/doc/2.x/filters/keys.html) filter.
-
-## `last`
-
-Returns the last element of an array or string.
-
-This works identically to Twig’s core [`last`](https://twig.symfony.com/doc/2.x/filters/last.html) filter.
-
 ## `lcfirst`
 
 Lowercases the first character of a string.
 
-## `length`
-
-Returns the number of elements in an array or string.
-
-This works identically to Twig’s core [`length`](https://twig.symfony.com/doc/2.x/filters/length.html) filter.
-
 ## `literal`
 
 Runs a string through <api:craft\helpers\Db::escapeParam()>
-
-## `lower`
-
-Converts a value to lowercase.
-
-This works identically to Twig’s core [`lower`](https://twig.symfony.com/doc/2.x/filters/lower.html) filter.
-
-## `map`
-
-Applies an arrow function to the elements of an array.
-
-This works identically to Twig’s core [`map`](https://twig.symfony.com/doc/2.x/filters/map.html) filter.
 
 ## `markdown` or `md`
 
@@ -538,12 +530,6 @@ the [Apple Extended Keyboard II] [1].
 This filter supports two arguments:
 - `flavor` can be `'original'` (default value), `'gfm'`(GitHub-Flavored Markdown), `'gfm-comment'` (GFM with newlines converted to `<br>`s), or `'extra'` (Markdown Extra)
 - `inlineOnly` determines whether to only parse inline elements, omitting any `<p>` tags (defaults to `false`)
-
-## `merge`
-
-Merges an array with another array.
-
-This works identically to Twig’s core [`merge`](https://twig.symfony.com/doc/2.x/filters/merge.html) filter.
 
 ## `multisort`
 
@@ -611,12 +597,6 @@ would become this:
 
 Notice how the `id` attribute changed from `title` to `foo-title`, and the `name` attribute changed from `title` to `foo[title]`.
 
-## `nl2br`
-
-Inserts HTML line breaks before all newlines in a string.
-
-This works identically to Twig’s core [`nl2br`](https://twig.symfony.com/doc/2.x/filters/nl2br.html) filter.
-
 ## `number`
 
 Formats a number according to the user’s preferred language.
@@ -630,12 +610,6 @@ You can optionally pass `false` to it if you want group symbols to be omitted (e
 {{ 1000000|number(false) }}
 {# Output: 1000000 #}
 ```
-
-## `number_format`
-
-Formats numbers. It is a wrapper around PHP’s [number_format()](https://secure.php.net/number_format) function:
-
-This works identically to Twig’s core [`number_format`](https://twig.symfony.com/doc/2.x/filters/number_format.html) filter.
 
 ## `parseRefs`
 
@@ -701,18 +675,6 @@ You can specify a custom HTML Purifier config file as well:
 
 That will configure HTML Purifier based on the settings defined by `config/htmlpurifier/user_bio.json`.
 
-## `raw`
-
-Marks a value as being “safe”, which means that in an environment with automatic escaping enabled this variable will not be escaped if raw is the last filter applied to it.
-
-This works identically to Twig’s core [`raw`](https://twig.symfony.com/doc/2.x/filters/raw.html) filter.
-
-## `reduce`
-
-Iteratively reduces a sequence or a mapping to a single value using an arrow function, so as to reduce it to a single value. The arrow function receives the return value of the previous iteration and the current value of the sequence or mapping.
-
-This works identically to Twig’s core [`reduce`](https://twig.symfony.com/doc/2.x/filters/reduce.html) filter.
-
 ## `replace`
 
 Replaces parts of a string with other things.
@@ -742,18 +704,6 @@ You can also use a regular expression to search for matches by starting and endi
 {{ tag.title|lower|replace('/[^\\w]+/', '-') }}
 ```
 
-## `reverse`
-
-Reverses an array or string.
-
-This works identically to Twig’s core [`reverse`](https://twig.symfony.com/doc/2.x/filters/reverse.html) filter.
-
-## `round`
-
-Rounds a number to a given precision.
-
-This works identically to Twig’s core [`round`](https://twig.symfony.com/doc/2.x/filters/round.html) filter.
-
 ## `rss`
 
 Outputs a date in the format required for RSS feeds (`D, d M Y H:i:s O`).
@@ -761,12 +711,6 @@ Outputs a date in the format required for RSS feeds (`D, d M Y H:i:s O`).
 ```twig
 {{ entry.postDate|rss }}
 ```
-
-## `slice`
-
-Extracts a slice of an array or string.
-
-This works identically to Twig’s core [`slice`](https://twig.symfony.com/doc/2.x/filters/slice.html) filter.
 
 ## `snake`
 
@@ -776,30 +720,6 @@ Returns a string formatted in “snake_case”.
 {{ 'foo bar'|snake }}
 {# Output: foo_bar #}
 ```
-
-## `sort`
-
-Sorts an array.
-
-This works identically to Twig’s core [`sort`](https://twig.symfony.com/doc/2.x/filters/sort.html) filter.
-
-## `spaceless`
-
-Removes whitespace between HTML tags, not whitespace within HTML tags or whitespace in plain text.
-
-This works identically to Twig’s core [`spaceless`](https://twig.symfony.com/doc/2.x/filters/spaceless.html) filter.
-
-## `split`
-
-Splits a string by the given delimiter and returns a list of string.
-
-This works identically to Twig’s core [`split`](https://twig.symfony.com/doc/2.x/filters/split.html) filter.
-
-## `striptags`
-
-Strips SGML/XML tags and replace adjacent whitespace by one space.
-
-This works identically to Twig’s core [`striptags`](https://twig.symfony.com/doc/2.x/filters/striptags.html) filter.
 
 ## `time`
 
@@ -843,18 +763,6 @@ You can customize the timezone the time is output in, using the `timezone` param
 
 Formats a date as a human-readable timestamp, via <api:craft\i18n\Formatter::asTimestamp()>.
 
-## `title`
-
-Returns a titlecased version of the value. Words will start with uppercase letters, all remaining characters are lowercase.
-
-This works identically to Twig’s core [`title`](https://twig.symfony.com/doc/2.x/filters/title.html) filter.
-
-## `trim`
-
-Strips whitespace (or other characters) from the beginning and end of a string
-
-This works identically to Twig’s core [`trim`](https://twig.symfony.com/doc/2.x/filters/trim.html) filter.
-
 ## `translate` or `t`
 
 Translates a message with [Craft::t()](api:yii\BaseYii::t()).
@@ -877,25 +785,9 @@ See [Static Message Translations](../static-translations.md) for a full explanat
 
 Capitalizes the first character of a string.
 
-## `ucwords`
-
-Capitalizes the first character of each word in a string.
-
 ## `unique`
 
 Runs an array through [array_unique()](http://php.net/manual/en/function.array-unique.php).
-
-## `upper`
-
-Converts a value to uppercase.
-
-This works identically to Twig’s core [`upper`](https://twig.symfony.com/doc/2.x/filters/upper.html) filter.
-
-## `url_encode`
-
-Percent-encodes a given string as URL segment or an array as query string.
-
-This works identically to Twig’s core [`url_encode`](https://twig.symfony.com/doc/2.x/filters/url_encode.html) filter.
 
 ## `values`
 

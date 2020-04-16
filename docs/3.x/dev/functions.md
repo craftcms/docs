@@ -2,6 +2,50 @@
 
 The following functions are available to Twig templates in Craft:
 
+Function | Description
+-------- | -----------
+[actionInput](#actioninput) | Outputs a hidden `action` input.
+[alias](#alias) | Parses a string as an alias.
+[attr](#attr) | Generates HTML attributes.
+[attribute](https://twig.symfony.com/doc/2.x/functions/attribute.html) | Accesses a dynamic attribute of a variable.
+[beginBody](#beginbody) | Outputs scripts and styles that were registered for the “begin body” position.
+[block](https://twig.symfony.com/doc/2.x/functions/block.html) | Prints a block’s output.
+[ceil](#ceil) | Rounds a number up.
+[className](#classname) | Returns the fully qualified class name of a given object.
+[clone](#clone) | Clones an object.
+[combine](#combine) | Combines two arrays into one.
+[constant](https://twig.symfony.com/doc/2.x/functions/constant.html) | Returns the constant value for a given string.
+[create](#create) | Creates a new object.
+[csrfInput](#csrfinput) | Returns a hidden CSRF token input.
+[cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html) | Cycles on an array of values.
+[date](https://twig.symfony.com/doc/2.x/functions/date.html) | Creates a date.
+[dump](https://twig.symfony.com/doc/2.x/functions/dump.html) | Dumps information about a variable.
+[endBody](#endbody) | Outputs scripts and styles that were registered for the “end body” position.
+[expression](#expression) | Creates a database expression object.
+[floor](#floor) | Rounds a number down.
+[getenv](#getenv) | Returns the value of an environment variable.
+[gql](#gql) | Executes a GraphQL query against the full schema.
+[parseEnv](#parseenv) | Parses a stirng as an environment variable or alias.
+[head](#head) | Outputs scripts and styles that were registered for the “head” position.
+[hiddenInput](#hiddeninput) | Outputs a hidden input.
+[include](https://twig.symfony.com/doc/2.x/functions/include.html) | Returns the rendered content of a template.
+[input](#input) | Outputs an HTML input.
+[max](https://twig.symfony.com/doc/2.x/functions/max.html) | Returns the biggest value in an array.
+[min](https://twig.symfony.com/doc/2.x/functions/min.html) | Returns the lowest value in an array.
+[parent](https://twig.symfony.com/doc/2.x/functions/parent.html) | Returns the parent block’s output.
+[plugin](#plugin) | Returns a plugin instance by its handle.
+[random](https://twig.symfony.com/doc/2.x/functions/random.html) | Returns a random value.
+[range](https://twig.symfony.com/doc/2.x/functions/range.html) | Returns a list containing an arithmetic progression of integers.
+[redirectInput](#redirectinput) | Outputs a hidden `redirect` input.
+[seq](#seq) | Outputs the next or current number in a sequence.
+[shuffle](#shuffle) | Randomizes the order of the items in an array.
+[siteUrl](#siteurl) | Generates a front-end URL.
+[svg](#svg) | Outputs an SVG document.
+[source](https://twig.symfony.com/doc/2.x/functions/source.html) | Returns the content of a template without rendering it.
+[tag](#tag) | Outputs an HTML tag.
+[template_from_string](https://twig.symfony.com/doc/2.x/functions/template_from_string.html) | Loads a template from a string.
+[url](#url) | Generates a URL.
+
 ## `actionInput`
 
 A shortcut for outputting a hidden input used to route a POST request to a particular controller action. This is effectively the same as writing `<input type="hidden" name="action" value="controller/action/route">` directly into a template.
@@ -49,12 +93,6 @@ Generates a list of HTML attributes based on the given object, using <api:yii\he
 
 <div {{ attr(myAttributes) }}></div>
 ```
-
-## `attribute`
-
-Accesses a dynamic attribute of a variable.
-
-This works identically to Twig’s core [`attribute`](https://twig.symfony.com/doc/2.x/functions/attribute.html) function.
 
 ## `beginBody`
 
@@ -150,24 +188,6 @@ You can optionally set additional attributes on the tag by passing an `options` 
     id: 'csrf-input'
 }) }}
 ```
-
-## `cycle`
-
-Cycles on an array of values.
-
-This works identically to Twig’s core [`cycle`](https://twig.symfony.com/doc/2.x/functions/cycle.html) function.
-
-## `date`
-
-Converts an argument to a date.
-
-This works identically to Twig’s core [`date`](https://twig.symfony.com/doc/2.x/functions/date.html) function.
-
-## `dump`
-
-Dumps information about a template variable.
-
-This works identically to Twig’s core [`dump`](https://twig.symfony.com/doc/2.x/functions/dump.html) function.
 
 ## `endBody`
 
@@ -308,12 +328,6 @@ Returns the lowest value in an array.
 
 This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) function.
 
-## `parent`
-
-Returns the parent block’s output.
-
-This works identically to Twig’s core [`parent`](https://twig.symfony.com/doc/2.x/functions/parent.html) function.
-
 ## `plugin`
 
 Returns a plugin instance by its handle, or `null` if no plugin is installed and enabled with that handle.
@@ -321,18 +335,6 @@ Returns a plugin instance by its handle, or `null` if no plugin is installed and
 ```twig
 {{ plugin('commerce').version }}
 ```
-
-## `random`
-
-Returns a random value.
-
-This works identically to Twig’s core [`random`](https://twig.symfony.com/doc/2.x/functions/random.html) function.
-
-## `range`
-
-Returns a list containing an arithmetic progression of integers.
-
-This works identically to Twig’s core [`range`](https://twig.symfony.com/doc/2.x/functions/range.html) function.
 
 ## `redirectInput`
 
@@ -484,12 +486,6 @@ If `html` is included in the attributes argument (and `text` isn’t), its value
 ```
 
 All other keys passed to the second argument will be set as attributes on the tag, using <api:yii\helpers\BaseHtml::renderTagAttributes()>.
-
-## `template_from_string`
-
-Loads a template from a string.
-
-This works identically to Twig’s core [`template_from_string`](https://twig.symfony.com/doc/2.x/functions/template_from_string.html) function.
 
 ## `url`
 
