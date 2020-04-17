@@ -54,7 +54,7 @@ Filter | Description
 [nl2br](https://twig.symfony.com/doc/2.x/filters/nl2br.html) | Replaces newlines with `<br>` tags.
 [number](#number) | Formats a number.
 [number_format](https://twig.symfony.com/doc/2.x/filters/number_format.html) | Formats numbers.
-[parseRefs](#parserefs) Parses a string for reference tags.
+[parseRefs](#parserefs) | Parses a string for reference tags.
 [pascal](#pascal) | Formats a string into “PascalCase”.
 [percentage](#percentage) | Formats a percentage.
 [prepend](#prepend) | Prepends HTML to the beginning of another element.
