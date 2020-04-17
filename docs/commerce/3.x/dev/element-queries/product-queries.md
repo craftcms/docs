@@ -535,7 +535,7 @@ $products = \craft\commerce\elements\Product::find()
 
 ### `orderBy`
 
-Determines the order that the products should be returned in.
+Determines the order that the products should be returned in. (If empty, defaults to `postDate DESC`.)
 
 
 

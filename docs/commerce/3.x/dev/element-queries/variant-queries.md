@@ -493,7 +493,7 @@ $variants = \craft\commerce\elements\Variant::find()
 
 ### `orderBy`
 
-Determines the order that the variants should be returned in.
+Determines the order that the variants should be returned in. (If empty, defaults to `sortOrder ASC`.)
 
 
 

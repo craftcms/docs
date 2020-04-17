@@ -651,7 +651,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 ### `orderBy`
 
-Determines the order that the subscriptions should be returned in.
+Determines the order that the subscriptions should be returned in. (If empty, defaults to `dateCreated DESC`.)
 
 
 
