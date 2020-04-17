@@ -53,63 +53,65 @@ Entry queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
-- [after](#after)
-- [ancestorDist](#ancestordist)
-- [ancestorOf](#ancestorof)
-- [anyStatus](#anystatus)
-- [asArray](#asarray)
-- [authorGroup](#authorgroup)
-- [authorGroupId](#authorgroupid)
-- [authorId](#authorid)
-- [before](#before)
-- [clearCachedResult](#clearcachedresult)
-- [dateCreated](#datecreated)
-- [dateUpdated](#dateupdated)
-- [descendantDist](#descendantdist)
-- [descendantOf](#descendantof)
-- [draftCreator](#draftcreator)
-- [draftId](#draftid)
-- [draftOf](#draftof)
-- [drafts](#drafts)
-- [enabledForSite](#enabledforsite)
-- [expiryDate](#expirydate)
-- [fixedOrder](#fixedorder)
-- [hasDescendants](#hasdescendants)
-- [id](#id)
-- [ignorePlaceholders](#ignoreplaceholders)
-- [inReverse](#inreverse)
-- [leaves](#leaves)
-- [level](#level)
-- [limit](#limit)
-- [nextSiblingOf](#nextsiblingof)
-- [offset](#offset)
-- [orderBy](#orderby)
-- [positionedAfter](#positionedafter)
-- [positionedBefore](#positionedbefore)
-- [postDate](#postdate)
-- [preferSites](#prefersites)
-- [prevSiblingOf](#prevsiblingof)
-- [relatedTo](#relatedto)
-- [revisionCreator](#revisioncreator)
-- [revisionId](#revisionid)
-- [revisionOf](#revisionof)
-- [revisions](#revisions)
-- [search](#search)
-- [section](#section)
-- [sectionId](#sectionid)
-- [siblingOf](#siblingof)
-- [site](#site)
-- [siteId](#siteid)
-- [slug](#slug)
-- [status](#status)
-- [title](#title)
-- [trashed](#trashed)
-- [type](#type)
-- [typeId](#typeid)
-- [uid](#uid)
-- [unique](#unique)
-- [uri](#uri)
-- [with](#with)
+| Param                                        | Description
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [after](#after) |                            | Narrows the query results to only entries that were posted on or after a certain date.
+| [ancestorDist](#ancestordist) |              | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [ancestorOf](#ancestorof).
+| [ancestorOf](#ancestorof) |                  | Narrows the query results to only entries that are ancestors of another entry.
+| [anyStatus](#anystatus) |                    | Clears out the [status](#status) and [enabledForSite](#enabledforsite) parameters.
+| [asArray](#asarray) |                        | Causes the query to return matching entries as arrays of data, rather than [Entry](api:craft\elements\Entry) objects.
+| [authorGroup](#authorgroup) |                | Narrows the query results based on the user group the entries’ authors belong to.
+| [authorGroupId](#authorgroupid) |            | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
+| [authorId](#authorid) |                      | Narrows the query results based on the entries’ authors.
+| [before](#before) |                          | Narrows the query results to only entries that were posted before a certain date.
+| [clearCachedResult](#clearcachedresult) |    | Clears the cached result.
+| [dateCreated](#datecreated) |                | Narrows the query results based on the entries’ creation dates.
+| [dateUpdated](#dateupdated) |                | Narrows the query results based on the entries’ last-updated dates.
+| [descendantDist](#descendantdist) |          | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [descendantOf](#descendantof).
+| [descendantOf](#descendantof) |              | Narrows the query results to only entries that are descendants of another entry.
+| [draftCreator](#draftcreator) |              | Narrows the query results to only drafts created by a given user.
+| [draftId](#draftid) |                        | Narrows the query results based on the entries’ draft’s ID (from the `drafts` table).
+| [draftOf](#draftof) |                        | Narrows the query results to only drafts of a given entry.
+| [drafts](#drafts) |                          | Narrows the query results to only drafts entries.
+| [enabledForSite](#enabledforsite) |          | Narrows the query results based on whether the entries are enabled in the site they’re being queried in, per the [site](#site) parameter.
+| [expiryDate](#expirydate) |                  | Narrows the query results based on the entries’ expiry dates.
+| [fixedOrder](#fixedorder) |                  | Causes the query results to be returned in the order specified by [id](#id).
+| [hasDescendants](#hasdescendants) |          | Narrows the query results based on whether the entries have any descendants.
+| [id](#id) |                                  | Narrows the query results based on the entries’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders) |  | Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#inreverse) |                    | Causes the query results to be returned in reverse order.
+| [leaves](#leaves) |                          | Narrows the query results based on whether the entries are “leaves” (entries with no descendants).
+| [level](#level) |                            | Narrows the query results based on the entries’ level within the structure.
+| [limit](#limit) |                            | Determines the number of entries that should be returned.
+| [nextSiblingOf](#nextsiblingof) |            | Narrows the query results to only the entry that comes immediately after another entry.
+| [offset](#offset) |                          | Determines how many entries should be skipped in the results.
+| [orderBy](#orderby) |                        | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`.)
+| [positionedAfter](#positionedafter) |        | Narrows the query results to only entries that are positioned after another entry.
+| [positionedBefore](#positionedbefore) |      | Narrows the query results to only entries that are positioned before another entry.
+| [postDate](#postdate) |                      | Narrows the query results based on the entries’ post dates.
+| [preferSites](#prefersites) |                | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prevSiblingOf](#prevsiblingof) |            | Narrows the query results to only the entry that comes immediately before another entry.
+| [relatedTo](#relatedto) |                    | Narrows the query results to only entries that are related to certain other elements.
+| [revisionCreator](#revisioncreator) |        | Narrows the query results to only revisions created by a given user.
+| [revisionId](#revisionid) |                  | Narrows the query results based on the entries’ revision’s ID (from the `revisions` table).
+| [revisionOf](#revisionof) |                  | Narrows the query results to only revisions of a given entry.
+| [revisions](#revisions) |                    | Narrows the query results to only revision entries.
+| [search](#search) |                          | Narrows the query results to only entries that match a search query.
+| [section](#section) |                        | Narrows the query results based on the sections the entries belong to.
+| [sectionId](#sectionid) |                    | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
+| [siblingOf](#siblingof) |                    | Narrows the query results to only entries that are siblings of another entry.
+| [site](#site) |                              | Determines which site(s) the entries should be queried in.
+| [siteId](#siteid) |                          | Determines which site(s) the entries should be queried in, per the site’s ID.
+| [slug](#slug) |                              | Narrows the query results based on the entries’ slugs.
+| [status](#status) |                          | Narrows the query results based on the entries’ statuses.
+| [title](#title) |                            | Narrows the query results based on the entries’ titles.
+| [trashed](#trashed) |                        | Narrows the query results to only entries that have been soft-deleted.
+| [type](#type) |                              | Narrows the query results based on the entries’ entry types.
+| [typeId](#typeid) |                          | Narrows the query results based on the entries’ entry types, per the types’ IDs.
+| [uid](#uid) |                                | Narrows the query results based on the entries’ UIDs.
+| [unique](#unique) |                          | Determines whether only elements with unique IDs should be returned by the query.
+| [uri](#uri) |                                | Narrows the query results based on the entries’ URIs.
+| [with](#with) |                              | Causes the query to return matching entries eager-loaded with related elements.
 
 ### `after`
 

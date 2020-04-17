@@ -50,31 +50,33 @@ Tag queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
-- [anyStatus](#anystatus)
-- [asArray](#asarray)
-- [clearCachedResult](#clearcachedresult)
-- [dateCreated](#datecreated)
-- [dateUpdated](#dateupdated)
-- [fixedOrder](#fixedorder)
-- [group](#group)
-- [groupId](#groupid)
-- [id](#id)
-- [ignorePlaceholders](#ignoreplaceholders)
-- [inReverse](#inreverse)
-- [limit](#limit)
-- [offset](#offset)
-- [orderBy](#orderby)
-- [preferSites](#prefersites)
-- [relatedTo](#relatedto)
-- [search](#search)
-- [site](#site)
-- [siteId](#siteid)
-- [title](#title)
-- [trashed](#trashed)
-- [uid](#uid)
-- [unique](#unique)
-- [uri](#uri)
-- [with](#with)
+| Param                                        | Description
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [anyStatus](#anystatus) |                    | Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+| [asArray](#asarray) |                        | Causes the query to return matching tags as arrays of data, rather than [Tag](api:craft\elements\Tag) objects.
+| [clearCachedResult](#clearcachedresult) |    | Clears the cached result.
+| [dateCreated](#datecreated) |                | Narrows the query results based on the tags’ creation dates.
+| [dateUpdated](#dateupdated) |                | Narrows the query results based on the tags’ last-updated dates.
+| [fixedOrder](#fixedorder) |                  | Causes the query results to be returned in the order specified by [id](#id).
+| [group](#group) |                            | Narrows the query results based on the tag groups the tags belong to.
+| [groupId](#groupid) |                        | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
+| [id](#id) |                                  | Narrows the query results based on the tags’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders) |  | Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#inreverse) |                    | Causes the query results to be returned in reverse order.
+| [limit](#limit) |                            | Determines the number of tags that should be returned.
+| [offset](#offset) |                          | Determines how many tags should be skipped in the results.
+| [orderBy](#orderby) |                        | Determines the order that the tags should be returned in. (If empty, defaults to `title ASC`.)
+| [preferSites](#prefersites) |                | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [relatedTo](#relatedto) |                    | Narrows the query results to only tags that are related to certain other elements.
+| [search](#search) |                          | Narrows the query results to only tags that match a search query.
+| [site](#site) |                              | Determines which site(s) the tags should be queried in.
+| [siteId](#siteid) |                          | Determines which site(s) the tags should be queried in, per the site’s ID.
+| [title](#title) |                            | Narrows the query results based on the tags’ titles.
+| [trashed](#trashed) |                        | Narrows the query results to only tags that have been soft-deleted.
+| [uid](#uid) |                                | Narrows the query results based on the tags’ UIDs.
+| [unique](#unique) |                          | Determines whether only elements with unique IDs should be returned by the query.
+| [uri](#uri) |                                | Narrows the query results based on the tags’ URIs.
+| [with](#with) |                              | Causes the query to return matching tags eager-loaded with related elements.
 
 ### `anyStatus`
 

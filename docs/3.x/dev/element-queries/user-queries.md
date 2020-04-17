@@ -50,34 +50,36 @@ User queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
-- [admin](#admin)
-- [anyStatus](#anystatus)
-- [asArray](#asarray)
-- [can](#can)
-- [clearCachedResult](#clearcachedresult)
-- [dateCreated](#datecreated)
-- [dateUpdated](#dateupdated)
-- [email](#email)
-- [firstName](#firstname)
-- [fixedOrder](#fixedorder)
-- [group](#group)
-- [groupId](#groupid)
-- [id](#id)
-- [ignorePlaceholders](#ignoreplaceholders)
-- [inReverse](#inreverse)
-- [lastLoginDate](#lastlogindate)
-- [lastName](#lastname)
-- [limit](#limit)
-- [offset](#offset)
-- [orderBy](#orderby)
-- [preferSites](#prefersites)
-- [relatedTo](#relatedto)
-- [search](#search)
-- [status](#status)
-- [trashed](#trashed)
-- [uid](#uid)
-- [username](#username)
-- [with](#with)
+| Param                                        | Description
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [admin](#admin) |                            | Narrows the query results to only users that have admin accounts.
+| [anyStatus](#anystatus) |                    | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+| [asArray](#asarray) |                        | Causes the query to return matching users as arrays of data, rather than [User](api:craft\elements\User) objects.
+| [can](#can) |                                | Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
+| [clearCachedResult](#clearcachedresult) |    | Clears the cached result.
+| [dateCreated](#datecreated) |                | Narrows the query results based on the users’ creation dates.
+| [dateUpdated](#dateupdated) |                | Narrows the query results based on the users’ last-updated dates.
+| [email](#email) |                            | Narrows the query results based on the users’ email addresses.
+| [firstName](#firstname) |                    | Narrows the query results based on the users’ first names.
+| [fixedOrder](#fixedorder) |                  | Causes the query results to be returned in the order specified by [id](#id).
+| [group](#group) |                            | Narrows the query results based on the user group the users belong to.
+| [groupId](#groupid) |                        | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
+| [id](#id) |                                  | Narrows the query results based on the users’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders) |  | Causes the query to return matching users as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#inreverse) |                    | Causes the query results to be returned in reverse order.
+| [lastLoginDate](#lastlogindate) |            | Narrows the query results based on the users’ last login dates.
+| [lastName](#lastname) |                      | Narrows the query results based on the users’ last names.
+| [limit](#limit) |                            | Determines the number of users that should be returned.
+| [offset](#offset) |                          | Determines how many users should be skipped in the results.
+| [orderBy](#orderby) |                        | Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
+| [preferSites](#prefersites) |                | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [relatedTo](#relatedto) |                    | Narrows the query results to only users that are related to certain other elements.
+| [search](#search) |                          | Narrows the query results to only users that match a search query.
+| [status](#status) |                          | Narrows the query results based on the users’ statuses.
+| [trashed](#trashed) |                        | Narrows the query results to only users that have been soft-deleted.
+| [uid](#uid) |                                | Narrows the query results based on the users’ UIDs.
+| [username](#username) |                      | Narrows the query results based on the users’ usernames.
+| [with](#with) |                              | Causes the query to return matching users eager-loaded with related elements.
 
 ### `admin`
 

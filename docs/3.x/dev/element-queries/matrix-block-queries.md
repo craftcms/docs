@@ -54,36 +54,38 @@ Matrix block queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
-- [allowOwnerDrafts](#allowownerdrafts)
-- [allowOwnerRevisions](#allowownerrevisions)
-- [anyStatus](#anystatus)
-- [asArray](#asarray)
-- [clearCachedResult](#clearcachedresult)
-- [dateCreated](#datecreated)
-- [dateUpdated](#dateupdated)
-- [field](#field)
-- [fieldId](#fieldid)
-- [fixedOrder](#fixedorder)
-- [id](#id)
-- [ignorePlaceholders](#ignoreplaceholders)
-- [inReverse](#inreverse)
-- [limit](#limit)
-- [offset](#offset)
-- [orderBy](#orderby)
-- [owner](#owner)
-- [ownerId](#ownerid)
-- [preferSites](#prefersites)
-- [relatedTo](#relatedto)
-- [search](#search)
-- [site](#site)
-- [siteId](#siteid)
-- [status](#status)
-- [trashed](#trashed)
-- [type](#type)
-- [typeId](#typeid)
-- [uid](#uid)
-- [unique](#unique)
-- [with](#with)
+| Param                                          | Description
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [allowOwnerDrafts](#allowownerdrafts) |        | Narrows the query results based on whether the Matrix blocks’ owners are drafts.
+| [allowOwnerRevisions](#allowownerrevisions) |  | Narrows the query results based on whether the Matrix blocks’ owners are revisions.
+| [anyStatus](#anystatus) |                      | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+| [asArray](#asarray) |                          | Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](api:craft\elements\MatrixBlock) objects.
+| [clearCachedResult](#clearcachedresult) |      | Clears the cached result.
+| [dateCreated](#datecreated) |                  | Narrows the query results based on the Matrix blocks’ creation dates.
+| [dateUpdated](#dateupdated) |                  | Narrows the query results based on the Matrix blocks’ last-updated dates.
+| [field](#field) |                              | Narrows the query results based on the field the Matrix blocks belong to.
+| [fieldId](#fieldid) |                          | Narrows the query results based on the field the Matrix blocks belong to, per the fields’ IDs.
+| [fixedOrder](#fixedorder) |                    | Causes the query results to be returned in the order specified by [id](#id).
+| [id](#id) |                                    | Narrows the query results based on the Matrix blocks’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders) |    | Causes the query to return matching Matrix blocks as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#inreverse) |                      | Causes the query results to be returned in reverse order.
+| [limit](#limit) |                              | Determines the number of Matrix blocks that should be returned.
+| [offset](#offset) |                            | Determines how many Matrix blocks should be skipped in the results.
+| [orderBy](#orderby) |                          | Determines the order that the Matrix blocks should be returned in. (If empty, defaults to `sortOrder ASC`.)
+| [owner](#owner) |                              | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
+| [ownerId](#ownerid) |                          | Narrows the query results based on the owner element of the Matrix blocks, per the owners’ IDs.
+| [preferSites](#prefersites) |                  | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [relatedTo](#relatedto) |                      | Narrows the query results to only Matrix blocks that are related to certain other elements.
+| [search](#search) |                            | Narrows the query results to only Matrix blocks that match a search query.
+| [site](#site) |                                | Determines which site(s) the Matrix blocks should be queried in.
+| [siteId](#siteid) |                            | Determines which site(s) the Matrix blocks should be queried in, per the site’s ID.
+| [status](#status) |                            | Narrows the query results based on the Matrix blocks’ statuses.
+| [trashed](#trashed) |                          | Narrows the query results to only Matrix blocks that have been soft-deleted.
+| [type](#type) |                                | Narrows the query results based on the Matrix blocks’ block types.
+| [typeId](#typeid) |                            | Narrows the query results based on the Matrix blocks’ block types, per the types’ IDs.
+| [uid](#uid) |                                  | Narrows the query results based on the Matrix blocks’ UIDs.
+| [unique](#unique) |                            | Determines whether only elements with unique IDs should be returned by the query.
+| [with](#with) |                                | Causes the query to return matching Matrix blocks eager-loaded with related elements.
 
 ### `allowOwnerDrafts`
 

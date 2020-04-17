@@ -57,46 +57,48 @@ Category queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
-- [ancestorDist](#ancestordist)
-- [ancestorOf](#ancestorof)
-- [anyStatus](#anystatus)
-- [asArray](#asarray)
-- [clearCachedResult](#clearcachedresult)
-- [dateCreated](#datecreated)
-- [dateUpdated](#dateupdated)
-- [descendantDist](#descendantdist)
-- [descendantOf](#descendantof)
-- [enabledForSite](#enabledforsite)
-- [fixedOrder](#fixedorder)
-- [group](#group)
-- [groupId](#groupid)
-- [hasDescendants](#hasdescendants)
-- [id](#id)
-- [ignorePlaceholders](#ignoreplaceholders)
-- [inReverse](#inreverse)
-- [leaves](#leaves)
-- [level](#level)
-- [limit](#limit)
-- [nextSiblingOf](#nextsiblingof)
-- [offset](#offset)
-- [orderBy](#orderby)
-- [positionedAfter](#positionedafter)
-- [positionedBefore](#positionedbefore)
-- [preferSites](#prefersites)
-- [prevSiblingOf](#prevsiblingof)
-- [relatedTo](#relatedto)
-- [search](#search)
-- [siblingOf](#siblingof)
-- [site](#site)
-- [siteId](#siteid)
-- [slug](#slug)
-- [status](#status)
-- [title](#title)
-- [trashed](#trashed)
-- [uid](#uid)
-- [unique](#unique)
-- [uri](#uri)
-- [with](#with)
+| Param                                        | Description
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [ancestorDist](#ancestordist) |              | Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
+| [ancestorOf](#ancestorof) |                  | Narrows the query results to only categories that are ancestors of another category.
+| [anyStatus](#anystatus) |                    | Clears out the [status](#status) and [enabledForSite](#enabledforsite) parameters.
+| [asArray](#asarray) |                        | Causes the query to return matching categories as arrays of data, rather than [Category](api:craft\elements\Category) objects.
+| [clearCachedResult](#clearcachedresult) |    | Clears the cached result.
+| [dateCreated](#datecreated) |                | Narrows the query results based on the categories’ creation dates.
+| [dateUpdated](#dateupdated) |                | Narrows the query results based on the categories’ last-updated dates.
+| [descendantDist](#descendantdist) |          | Narrows the query results to only categories that are up to a certain distance away from the category specified by [descendantOf](#descendantof).
+| [descendantOf](#descendantof) |              | Narrows the query results to only categories that are descendants of another category.
+| [enabledForSite](#enabledforsite) |          | Narrows the query results based on whether the categories are enabled in the site they’re being queried in, per the [site](#site) parameter.
+| [fixedOrder](#fixedorder) |                  | Causes the query results to be returned in the order specified by [id](#id).
+| [group](#group) |                            | Narrows the query results based on the category groups the categories belong to.
+| [groupId](#groupid) |                        | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
+| [hasDescendants](#hasdescendants) |          | Narrows the query results based on whether the categories have any descendants.
+| [id](#id) |                                  | Narrows the query results based on the categories’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders) |  | Causes the query to return matching categories as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#inreverse) |                    | Causes the query results to be returned in reverse order.
+| [leaves](#leaves) |                          | Narrows the query results based on whether the categories are “leaves” (categories with no descendants).
+| [level](#level) |                            | Narrows the query results based on the categories’ level within the structure.
+| [limit](#limit) |                            | Determines the number of categories that should be returned.
+| [nextSiblingOf](#nextsiblingof) |            | Narrows the query results to only the category that comes immediately after another category.
+| [offset](#offset) |                          | Determines how many categories should be skipped in the results.
+| [orderBy](#orderby) |                        | Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC`.)
+| [positionedAfter](#positionedafter) |        | Narrows the query results to only categories that are positioned after another category.
+| [positionedBefore](#positionedbefore) |      | Narrows the query results to only categories that are positioned before another category.
+| [preferSites](#prefersites) |                | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prevSiblingOf](#prevsiblingof) |            | Narrows the query results to only the category that comes immediately before another category.
+| [relatedTo](#relatedto) |                    | Narrows the query results to only categories that are related to certain other elements.
+| [search](#search) |                          | Narrows the query results to only categories that match a search query.
+| [siblingOf](#siblingof) |                    | Narrows the query results to only categories that are siblings of another category.
+| [site](#site) |                              | Determines which site(s) the categories should be queried in.
+| [siteId](#siteid) |                          | Determines which site(s) the categories should be queried in, per the site’s ID.
+| [slug](#slug) |                              | Narrows the query results based on the categories’ slugs.
+| [status](#status) |                          | Narrows the query results based on the categories’ statuses.
+| [title](#title) |                            | Narrows the query results based on the categories’ titles.
+| [trashed](#trashed) |                        | Narrows the query results to only categories that have been soft-deleted.
+| [uid](#uid) |                                | Narrows the query results based on the categories’ UIDs.
+| [unique](#unique) |                          | Determines whether only elements with unique IDs should be returned by the query.
+| [uri](#uri) |                                | Narrows the query results based on the categories’ URIs.
+| [with](#with) |                              | Causes the query to return matching categories eager-loaded with related elements.
 
 ### `ancestorDist`
 
