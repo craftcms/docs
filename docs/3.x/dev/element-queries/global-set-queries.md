@@ -51,30 +51,30 @@ Global set queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
-| Param                                        | Description
-| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [anyStatus](#anystatus) |                    | Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
-| [asArray](#asarray) |                        | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](api:craft\elements\GlobalSet) objects.
-| [clearCachedResult](#clearcachedresult) |    | Clears the cached result.
-| [dateCreated](#datecreated) |                | Narrows the query results based on the global sets’ creation dates.
-| [dateUpdated](#dateupdated) |                | Narrows the query results based on the global sets’ last-updated dates.
-| [fixedOrder](#fixedorder) |                  | Causes the query results to be returned in the order specified by [id](#id).
-| [handle](#handle) |                          | Narrows the query results based on the global sets’ handles.
-| [id](#id) |                                  | Narrows the query results based on the global sets’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) |  | Causes the query to return matching global sets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
-| [inReverse](#inreverse) |                    | Causes the query results to be returned in reverse order.
-| [limit](#limit) |                            | Determines the number of global sets that should be returned.
-| [offset](#offset) |                          | Determines how many global sets should be skipped in the results.
-| [orderBy](#orderby) |                        | Determines the order that the global sets should be returned in. (If empty, defaults to `name ASC`.)
-| [preferSites](#prefersites) |                | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [relatedTo](#relatedto) |                    | Narrows the query results to only global sets that are related to certain other elements.
-| [search](#search) |                          | Narrows the query results to only global sets that match a search query.
-| [site](#site) |                              | Determines which site(s) the global sets should be queried in.
-| [siteId](#siteid) |                          | Determines which site(s) the global sets should be queried in, per the site’s ID.
-| [trashed](#trashed) |                        | Narrows the query results to only global sets that have been soft-deleted.
-| [uid](#uid) |                                | Narrows the query results based on the global sets’ UIDs.
-| [unique](#unique) |                          | Determines whether only elements with unique IDs should be returned by the query.
-| [with](#with) |                              | Causes the query to return matching global sets eager-loaded with related elements.
+| Param                                     | Description
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [anyStatus](#anystatus)                   | Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+| [asArray](#asarray)                       | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](api:craft\elements\GlobalSet) objects.
+| [clearCachedResult](#clearcachedresult)   | Clears the cached result.
+| [dateCreated](#datecreated)               | Narrows the query results based on the global sets’ creation dates.
+| [dateUpdated](#dateupdated)               | Narrows the query results based on the global sets’ last-updated dates.
+| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
+| [handle](#handle)                         | Narrows the query results based on the global sets’ handles.
+| [id](#id)                                 | Narrows the query results based on the global sets’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching global sets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
+| [limit](#limit)                           | Determines the number of global sets that should be returned.
+| [offset](#offset)                         | Determines how many global sets should be skipped in the results.
+| [orderBy](#orderby)                       | Determines the order that the global sets should be returned in. (If empty, defaults to `name ASC`.)
+| [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [relatedTo](#relatedto)                   | Narrows the query results to only global sets that are related to certain other elements.
+| [search](#search)                         | Narrows the query results to only global sets that match a search query.
+| [site](#site)                             | Determines which site(s) the global sets should be queried in.
+| [siteId](#siteid)                         | Determines which site(s) the global sets should be queried in, per the site’s ID.
+| [trashed](#trashed)                       | Narrows the query results to only global sets that have been soft-deleted.
+| [uid](#uid)                               | Narrows the query results based on the global sets’ UIDs.
+| [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
+| [with](#with)                             | Causes the query to return matching global sets eager-loaded with related elements.
 
 ### `anyStatus`
 
