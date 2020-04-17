@@ -195,1106 +195,705 @@ A defined type exists for each specific interface implementation. For example, i
 The actual API features will depend on what your schema allows.
 :::
 
+<!-- BEGIN QUERIES -->
+
 ### The `assets` query
 This query is used to query for assets.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `volumeId`| `[QueryArgument]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
+| `volume`| `[String]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ handles.
+| `folderId`| `[QueryArgument]` | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
+| `filename`| `[String]` | Narrows the query results based on the assets’ filenames.
+| `kind`| `[String]` | Narrows the query results based on the assets’ file kinds.
+| `height`| `[String]` | Narrows the query results based on the assets’ image heights.
+| `width`| `[String]` | Narrows the query results based on the assets’ image widths.
+| `size`| `[String]` | Narrows the query results based on the assets’ file sizes (in bytes).
+| `dateModified`| `String` | Narrows the query results based on the assets’ files’ last-modified dates.
+| `includeSubfolders`| `Boolean` | Broadens the query results to include assets from any of the subfolders of the folder specified by `folderId`.
+| `withTransforms`| `[String]` | A list of transform handles to preload.
 
-#### The `id` argument
-Narrows the query results based on the elements’ IDs.
-
-#### The `uid` argument
-Narrows the query results based on the elements’ UIDs.
-
-#### The `status` argument
-Narrows the query results based on the elements’ statuses.
-
-#### The `archived` argument
-Narrows the query results to only elements that have been archived.
-
-#### The `trashed` argument
-Narrows the query results to only elements that have been soft-deleted.
-
-#### The `site` argument
-Determines which site(s) the elements should be queried in. Defaults to the primary site.
-
-#### The `siteId` argument
-Determines which site(s) the elements should be queried in. Defaults to the primary site.
-
-#### The `unique` argument
-Determines whether only elements with unique IDs should be returned by the query.
-
-#### The `enabledForSite` argument
-Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
-
-#### The `title` argument
-Narrows the query results based on the elements’ titles.
-
-#### The `slug` argument
-Narrows the query results based on the elements’ slugs.
-
-#### The `uri` argument
-Narrows the query results based on the elements’ URIs.
-
-#### The `search` argument
-Narrows the query results to only elements that match a search query.
-
-#### The `relatedTo` argument
-Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-
-#### The `relatedToAll` argument
-Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
-
-#### The `ref` argument
-Narrows the query results based on a reference string.
-
-#### The `fixedOrder` argument
-Causes the query results to be returned in the order specified by the `id` argument.
-
-#### The `inReverse` argument
-Causes the query results to be returned in reverse order.
-
-#### The `dateCreated` argument
-Narrows the query results based on the elements’ creation dates.
-
-#### The `dateUpdated` argument
-Narrows the query results based on the elements’ last-updated dates.
-
-#### The `offset` argument
-Sets the offset for paginated results.
-
-#### The `limit` argument
-Sets the limit for paginated results.
-
-#### The `orderBy` argument
-Sets the field the returned elements should be ordered by
-
-#### The `volumeId` argument
-Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
-
-#### The `volume` argument
-Narrows the query results based on the volumes the assets belong to, per the volumes’ handles.
-
-#### The `folderId` argument
-Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
-
-#### The `filename` argument
-Narrows the query results based on the assets’ filenames.
-
-#### The `kind` argument
-Narrows the query results based on the assets’ file kinds.
-
-#### The `height` argument
-Narrows the query results based on the assets’ image heights.
-
-#### The `width` argument
-Narrows the query results based on the assets’ image widths.
-
-#### The `size` argument
-Narrows the query results based on the assets’ file sizes (in bytes).
-
-#### The `dateModified` argument
-Narrows the query results based on the assets’ files’ last-modified dates.
-
-#### The `includeSubfolders` argument
-Broadens the query results to include assets from any of the subfolders of the folder specified by `folderId`.
+### The `asset` query
+This query is used to query for a single asset.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `volumeId`| `[QueryArgument]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
+| `volume`| `[String]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ handles.
+| `folderId`| `[QueryArgument]` | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
+| `filename`| `[String]` | Narrows the query results based on the assets’ filenames.
+| `kind`| `[String]` | Narrows the query results based on the assets’ file kinds.
+| `height`| `[String]` | Narrows the query results based on the assets’ image heights.
+| `width`| `[String]` | Narrows the query results based on the assets’ image widths.
+| `size`| `[String]` | Narrows the query results based on the assets’ file sizes (in bytes).
+| `dateModified`| `String` | Narrows the query results based on the assets’ files’ last-modified dates.
+| `includeSubfolders`| `Boolean` | Broadens the query results to include assets from any of the subfolders of the folder specified by `folderId`.
+| `withTransforms`| `[String]` | A list of transform handles to preload.
 
 ### The `entries` query
 This query is used to query for entries.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
+| `structureId`| `Int` | Determines which structure data should be joined into the query.
+| `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element.
+| `editable`| `Boolean` | Whether to only return entries that the user has permission to edit.
+| `section`| `[String]` | Narrows the query results based on the section handles the entries belong to.
+| `sectionId`| `[QueryArgument]` | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
+| `type`| `[String]` | Narrows the query results based on the entries’ entry type handles.
+| `typeId`| `[QueryArgument]` | Narrows the query results based on the entries’ entry types, per the types’ IDs.
+| `authorId`| `[QueryArgument]` | Narrows the query results based on the entries’ authors.
+| `authorGroup`| `[String]` | Narrows the query results based on the user group the entries’ authors belong to.
+| `authorGroupId`| `[QueryArgument]` | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
+| `postDate`| `[String]` | Narrows the query results based on the entries’ post dates.
+| `before`| `String` | Narrows the query results to only entries that were posted before a certain date.
+| `after`| `String` | Narrows the query results to only entries that were posted on or after a certain date.
+| `expiryDate`| `[String]` | Narrows the query results based on the entries’ expiry dates.
 
-#### The `id` argument
-Narrows the query results based on the elements’ IDs.
-
-#### The `uid` argument
-Narrows the query results based on the elements’ UIDs.
-
-#### The `status` argument
-Narrows the query results based on the elements’ statuses.
-
-#### The `archived` argument
-Narrows the query results to only elements that have been archived.
-
-#### The `trashed` argument
-Narrows the query results to only elements that have been soft-deleted.
-
-#### The `site` argument
-Determines which site(s) the elements should be queried in. Defaults to the primary site.
-
-#### The `siteId` argument
-Determines which site(s) the elements should be queried in. Defaults to the primary site.
-
-#### The `unique` argument
-Determines whether only elements with unique IDs should be returned by the query.
-
-#### The `enabledForSite` argument
-Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
-
-#### The `title` argument
-Narrows the query results based on the elements’ titles.
-
-#### The `slug` argument
-Narrows the query results based on the elements’ slugs.
-
-#### The `uri` argument
-Narrows the query results based on the elements’ URIs.
-
-#### The `search` argument
-Narrows the query results to only elements that match a search query.
-
-#### The `relatedTo` argument
-Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-
-#### The `relatedToAll` argument
-Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
-
-#### The `ref` argument
-Narrows the query results based on a reference string.
-
-#### The `fixedOrder` argument
-Causes the query results to be returned in the order specified by the `id` argument.
-
-#### The `inReverse` argument
-Causes the query results to be returned in reverse order.
-
-#### The `dateCreated` argument
-Narrows the query results based on the elements’ creation dates.
-
-#### The `dateUpdated` argument
-Narrows the query results based on the elements’ last-updated dates.
-
-#### The `offset` argument
-Sets the offset for paginated results.
-
-#### The `limit` argument
-Sets the limit for paginated results.
-
-#### The `orderBy` argument
-Sets the field the returned elements should be ordered by
-
-#### The `withStructure` argument
-Explicitly determines whether the query should join in the structure data.
-
-#### The `structureId` argument
-Determines which structure data should be joined into the query.
-
-#### The `level` argument
-Narrows the query results based on the elements’ level within the structure.
-
-#### The `hasDescendants` argument
-Narrows the query results based on whether the elements have any descendants.
-
-#### The `ancestorOf` argument
-Narrows the query results to only elements that are ancestors of another element.
-
-#### The `ancestorDist` argument
-Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-
-#### The `descendantOf` argument
-Narrows the query results to only elements that are descendants of another element.
-
-#### The `descendantDist` argument
-Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
-
-#### The `leaves` argument
-Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-
-#### The `editable` argument
-Whether to only return entries that the user has permission to edit.
-
-#### The `section` argument
-Narrows the query results based on the section handles the entries belong to.
-
-#### The `sectionId` argument
-Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
-
-#### The `type` argument
-Narrows the query results based on the entries’ entry type handles.
-
-#### The `typeId` argument
-Narrows the query results based on the entries’ entry types, per the types’ IDs.
-
-#### The `authorId` argument
-Narrows the query results based on the entries’ authors.
-
-#### The `authorGroup` argument
-Narrows the query results based on the user group the entries’ authors belong to.
-
-#### The `postDate` argument
-Narrows the query results based on the entries’ post dates.
-
-#### The `before` argument
-Narrows the query results to only entries that were posted before a certain date.
-
-#### The `after` argument
-Narrows the query results to only entries that were posted on or after a certain date.
-
-#### The `expiryDate` argument
-Narrows the query results based on the entries’ expiry dates.
+### The `entry` query
+This query is used to query for a single entry.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
+| `structureId`| `Int` | Determines which structure data should be joined into the query.
+| `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element.
+| `editable`| `Boolean` | Whether to only return entries that the user has permission to edit.
+| `section`| `[String]` | Narrows the query results based on the section handles the entries belong to.
+| `sectionId`| `[QueryArgument]` | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
+| `type`| `[String]` | Narrows the query results based on the entries’ entry type handles.
+| `typeId`| `[QueryArgument]` | Narrows the query results based on the entries’ entry types, per the types’ IDs.
+| `authorId`| `[QueryArgument]` | Narrows the query results based on the entries’ authors.
+| `authorGroup`| `[String]` | Narrows the query results based on the user group the entries’ authors belong to.
+| `authorGroupId`| `[QueryArgument]` | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
+| `postDate`| `[String]` | Narrows the query results based on the entries’ post dates.
+| `before`| `String` | Narrows the query results to only entries that were posted before a certain date.
+| `after`| `String` | Narrows the query results to only entries that were posted on or after a certain date.
+| `expiryDate`| `[String]` | Narrows the query results based on the entries’ expiry dates.
 
 ### The `globalSets` query
 This query is used to query for global sets.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `handle`| `[String]` | Narrows the query results based on the global sets’ handles.
 
-#### The `id` argument
-Narrows the query results based on the elements’ IDs.
-
-#### The `uid` argument
-Narrows the query results based on the elements’ UIDs.
-
-#### The `status` argument
-Narrows the query results based on the elements’ statuses.
-
-#### The `archived` argument
-Narrows the query results to only elements that have been archived.
-
-#### The `trashed` argument
-Narrows the query results to only elements that have been soft-deleted.
-
-#### The `site` argument
-Determines which site(s) the elements should be queried in. Defaults to the primary site.
-
-#### The `siteId` argument
-Determines which site(s) the elements should be queried in. Defaults to the primary site.
-
-#### The `unique` argument
-Determines whether only elements with unique IDs should be returned by the query.
-
-#### The `enabledForSite` argument
-Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
-
-#### The `title` argument
-Narrows the query results based on the elements’ titles.
-
-#### The `slug` argument
-Narrows the query results based on the elements’ slugs.
-
-#### The `uri` argument
-Narrows the query results based on the elements’ URIs.
-
-#### The `search` argument
-Narrows the query results to only elements that match a search query.
-
-#### The `relatedTo` argument
-Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-
-#### The `relatedToAll` argument
-Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
-
-#### The `ref` argument
-Narrows the query results based on a reference string.
-
-#### The `fixedOrder` argument
-Causes the query results to be returned in the order specified by the `id` argument.
-
-#### The `inReverse` argument
-Causes the query results to be returned in reverse order.
-
-#### The `dateCreated` argument
-Narrows the query results based on the elements’ creation dates.
-
-#### The `dateUpdated` argument
-Narrows the query results based on the elements’ last-updated dates.
-
-#### The `offset` argument
-Sets the offset for paginated results.
-
-#### The `limit` argument
-Sets the limit for paginated results.
-
-#### The `orderBy` argument
-Sets the field the returned elements should be ordered by
-
-#### The `handle` argument
-Narrows the query results based on the global sets’ handles.
+### The `globalSet` query
+This query is used to query for a single global set.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `handle`| `[String]` | Narrows the query results based on the global sets’ handles.
 
 ### The `users` query
 This query is used to query for users.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `email`| `[String]` | Narrows the query results based on the users’ email addresses.
+| `username`| `[String]` | Narrows the query results based on the users’ usernames.
+| `firstName`| `[String]` | Narrows the query results based on the users’ first names.
+| `lastName`| `[String]` | Narrows the query results based on the users’ last names.
+| `groupId`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
+| `group`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to.
 
-#### The `id` argument
-Narrows the query results based on the elements’ IDs.
-
-#### The `uid` argument
-Narrows the query results based on the elements’ UIDs.
-
-#### The `status` argument
-Narrows the query results based on the elements’ statuses.
-
-#### The `archived` argument
-Narrows the query results to only elements that have been archived.
-
-#### The `trashed` argument
-Narrows the query results to only elements that have been soft-deleted.
-
-#### The `site` argument
-Determines which site(s) the elements should be queried in. Defaults to the primary site.
-
-#### The `siteId` argument
-Determines which site(s) the elements should be queried in. Defaults to the primary site.
-
-#### The `unique` argument
-Determines whether only elements with unique IDs should be returned by the query.
-
-#### The `enabledForSite` argument
-Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
-
-#### The `title` argument
-Narrows the query results based on the elements’ titles.
-
-#### The `slug` argument
-Narrows the query results based on the elements’ slugs.
-
-#### The `uri` argument
-Narrows the query results based on the elements’ URIs.
-
-#### The `search` argument
-Narrows the query results to only elements that match a search query.
-
-#### The `relatedTo` argument
-Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-
-#### The `relatedToAll` argument
-Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
-
-#### The `ref` argument
-Narrows the query results based on a reference string.
-
-#### The `fixedOrder` argument
-Causes the query results to be returned in the order specified by the `id` argument.
-
-#### The `inReverse` argument
-Causes the query results to be returned in reverse order.
-
-#### The `dateCreated` argument
-Narrows the query results based on the elements’ creation dates.
-
-#### The `dateUpdated` argument
-Narrows the query results based on the elements’ last-updated dates.
-
-#### The `offset` argument
-Sets the offset for paginated results.
-
-#### The `limit` argument
-Sets the limit for paginated results.
-
-#### The `orderBy` argument
-Sets the field the returned elements should be ordered by
-
-#### The `email` argument
-Narrows the query results based on the users’ email addresses.
-
-#### The `username` argument
-Narrows the query results based on the users’ usernames.
-
-#### The `firstName` argument
-Narrows the query results based on the users’ first names.
-
-#### The `lastName` argument
-Narrows the query results based on the users’ last names.
+### The `user` query
+This query is used to query for a single user.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `email`| `[String]` | Narrows the query results based on the users’ email addresses.
+| `username`| `[String]` | Narrows the query results based on the users’ usernames.
+| `firstName`| `[String]` | Narrows the query results based on the users’ first names.
+| `lastName`| `[String]` | Narrows the query results based on the users’ last names.
+| `groupId`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
+| `group`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to.
 
 ### The `tags` query
 This query is used to query for tags.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `group`| `[String]` | Narrows the query results based on the tag groups the tags belong to per the group’s handles.
+| `groupId`| `[QueryArgument]` | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 
-#### The `id` argument
-Narrows the query results based on the elements’ IDs.
-
-#### The `uid` argument
-Narrows the query results based on the elements’ UIDs.
-
-#### The `status` argument
-Narrows the query results based on the elements’ statuses.
-
-#### The `archived` argument
-Narrows the query results to only elements that have been archived.
-
-#### The `trashed` argument
-Narrows the query results to only elements that have been soft-deleted.
-
-#### The `site` argument
-Determines which site(s) the elements should be queried in. Defaults to the primary site.
-
-#### The `siteId` argument
-Determines which site(s) the elements should be queried in. Defaults to the primary site.
-
-#### The `unique` argument
-Determines whether only elements with unique IDs should be returned by the query.
-
-#### The `enabledForSite` argument
-Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
-
-#### The `title` argument
-Narrows the query results based on the elements’ titles.
-
-#### The `slug` argument
-Narrows the query results based on the elements’ slugs.
-
-#### The `uri` argument
-Narrows the query results based on the elements’ URIs.
-
-#### The `search` argument
-Narrows the query results to only elements that match a search query.
-
-#### The `relatedTo` argument
-Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-
-#### The `relatedToAll` argument
-Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
-
-#### The `ref` argument
-Narrows the query results based on a reference string.
-
-#### The `fixedOrder` argument
-Causes the query results to be returned in the order specified by the `id` argument.
-
-#### The `inReverse` argument
-Causes the query results to be returned in reverse order.
-
-#### The `dateCreated` argument
-Narrows the query results based on the elements’ creation dates.
-
-#### The `dateUpdated` argument
-Narrows the query results based on the elements’ last-updated dates.
-
-#### The `offset` argument
-Sets the offset for paginated results.
-
-#### The `limit` argument
-Sets the limit for paginated results.
-
-#### The `orderBy` argument
-Sets the field the returned elements should be ordered by
-
-#### The `group` argument
-Narrows the query results based on the tag groups the tags belong to per the group’s handles.
-
-#### The `groupId` argument
-Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
+### The `tag` query
+This query is used to query for a single tag.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `group`| `[String]` | Narrows the query results based on the tag groups the tags belong to per the group’s handles.
+| `groupId`| `[QueryArgument]` | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 
 ### The `categories` query
 This query is used to query for categories.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
+| `structureId`| `Int` | Determines which structure data should be joined into the query.
+| `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element.
+| `editable`| `Boolean` | Whether to only return categories that the user has permission to edit.
+| `group`| `[String]` | Narrows the query results based on the category groups the categories belong to per the group’s handles.
+| `groupId`| `[QueryArgument]` | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
 
-#### The `id` argument
-Narrows the query results based on the elements’ IDs.
+### The `category` query
+This query is used to query for a single category.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
+| `structureId`| `Int` | Determines which structure data should be joined into the query.
+| `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element.
+| `editable`| `Boolean` | Whether to only return categories that the user has permission to edit.
+| `group`| `[String]` | Narrows the query results based on the category groups the categories belong to per the group’s handles.
+| `groupId`| `[QueryArgument]` | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
 
-#### The `uid` argument
-Narrows the query results based on the elements’ UIDs.
-
-#### The `status` argument
-Narrows the query results based on the elements’ statuses.
-
-#### The `archived` argument
-Narrows the query results to only elements that have been archived.
-
-#### The `trashed` argument
-Narrows the query results to only elements that have been soft-deleted.
-
-#### The `site` argument
-Determines which site(s) the elements should be queried in. Defaults to the primary site.
-
-#### The `siteId` argument
-Determines which site(s) the elements should be queried in. Defaults to the primary site.
-
-#### The `unique` argument
-Determines whether only elements with unique IDs should be returned by the query.
-
-#### The `enabledForSite` argument
-Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
-
-#### The `title` argument
-Narrows the query results based on the elements’ titles.
-
-#### The `slug` argument
-Narrows the query results based on the elements’ slugs.
-
-#### The `uri` argument
-Narrows the query results based on the elements’ URIs.
-
-#### The `search` argument
-Narrows the query results to only elements that match a search query.
-
-#### The `relatedTo` argument
-Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-
-#### The `relatedToAll` argument
-Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
-
-#### The `ref` argument
-Narrows the query results based on a reference string.
-
-#### The `fixedOrder` argument
-Causes the query results to be returned in the order specified by the `id` argument.
-
-#### The `inReverse` argument
-Causes the query results to be returned in reverse order.
-
-#### The `dateCreated` argument
-Narrows the query results based on the elements’ creation dates.
-
-#### The `dateUpdated` argument
-Narrows the query results based on the elements’ last-updated dates.
-
-#### The `offset` argument
-Sets the offset for paginated results.
-
-#### The `limit` argument
-Sets the limit for paginated results.
-
-#### The `orderBy` argument
-Sets the field the returned elements should be ordered by
-
-#### The `withStructure` argument
-Explicitly determines whether the query should join in the structure data.
-
-#### The `structureId` argument
-Determines which structure data should be joined into the query.
-
-#### The `level` argument
-Narrows the query results based on the elements’ level within the structure.
-
-#### The `hasDescendants` argument
-Narrows the query results based on whether the elements have any descendants.
-
-#### The `ancestorOf` argument
-Narrows the query results to only elements that are ancestors of another element.
-
-#### The `ancestorDist` argument
-Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-
-#### The `descendantOf` argument
-Narrows the query results to only elements that are descendants of another element.
-
-#### The `descendantDist` argument
-Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
-
-#### The `leaves` argument
-Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-
-#### The `editable` argument
-Whether to only return categories that the user has permission to edit.
-
-#### The `group` argument
-Narrows the query results based on the category groups the categories belong to per the group’s handles.
-
-#### The `groupId` argument
-Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
+<!-- END QUERIES -->
 
 ## List of available directives
 Directives are not regulated by permissions and they affect how the returned data is displayed.
 
+<!-- BEGIN DIRECTIVES -->
+
 ### The `formatDateTime` directive
 This directive allows for formatting any date to the desired format. It can be applied to all fields, but changes anything only when applied to a DateTime field.
+| Argument | Type | Description
+| - | - | -
+| `format`| `String` | This specifies the format to use. It defaults to the [Atom date time format](https://www.php.net/manual/en/class.datetimeinterface.php#datetime.constants.atom]).
+| `timezone`| `String` | The full name of the timezone, defaults to UTC. (E.g., America/New_York)
 
-#### The `format` argument
-This specifies the format to use. It defaults to the [Atom date time format](https://www.php.net/manual/en/class.datetimeinterface.php#datetime.constants.atom]).
-
-#### The `timezone` argument
-The full name of the timezone, defaults to UTC. (E.g., America/New_York)
 
 ### The `transform` directive
 This directive is used to return a URL for an [asset tranform](https://docs.craftcms.com/v3/image-transforms.html). It accepts the same arguments you would use for a transform in Craft and adds the `immediately` argument.
+| Argument | Type | Description
+| - | - | -
+| `handle`| `String` | The handle of the named transform to use.
+| `transform`| `String` | The handle of the named transform to use.
+| `width`| `Int` | Width for the generated transform
+| `height`| `Int` | Height for the generated transform
+| `mode`| `String` | The mode to use for the generated transform.
+| `position`| `String` | The position to use when cropping, if no focal point specified.
+| `interlace`| `String` | The interlace mode to use for the transform
+| `quality`| `Int` | The quality of the transform
+| `format`| `String` | The format to use for the transform
+| `immediately`| `Boolean` | Whether the transform should be generated immediately or only when the image is requested used the generated URL
 
-#### The `handle` argument
-The handle of the named transform to use.
-
-#### The `transform` argument
-The handle of the named transform to use.
-
-#### The `width` argument
-Width for the generated transform
-
-#### The `height` argument
-Height for the generated transform
-
-#### The `mode` argument
-The mode to use for the generated transform.
-
-#### The `position` argument
-The position to use when cropping, if no focal point specified.
-
-#### The `interlace` argument
-The interlace mode to use for the transform
-
-#### The `quality` argument
-The quality of the transform
-
-#### The `format` argument
-The format to use for the transform
-
-#### The `immediately` argument
-Whether the transform should be generated immediately or only when the image is requested used the generated URL
 
 ### The `markdown` directive
 Parses the passed field value as Markdown.
+| Argument | Type | Description
+| - | - | -
+| `flavor`| `String` | The “flavor” of Markdown the input should be interpreted with. Accepts the same arguments as yii\helpers\Markdown::process().
 
-#### The `flavor` argument
-The “flavor” of Markdown the input should be interpreted with. Accepts the same arguments as yii\helpers\Markdown::process().
+<!-- END DIRECTIVES -->
 
 ## Pre-defined interfaces
 Craft defines several interfaces to be implemented by the different GraphQL types.
 
+<!-- BEGIN INTERFACES -->
+
 ### The `AssetInterface` interface
 This is the interface implemented by all assets.
+| Field | Type | Description
+| - | - | -
+| `id`| `ID` | The id of the entity
+| `uid`| `String` | The uid of the entity
+| `_count`| `Int` | Return a number of related elements for a field.
+| `title`| `String` | The element’s title.
+| `slug`| `String` | The element’s slug.
+| `uri`| `String` | The element’s URI.
+| `enabled`| `Boolean` | Whether the element is enabled or not.
+| `archived`| `Boolean` | Whether the element is archived or not.
+| `siteId`| `Int` | The ID of the site the element is associated with.
+| `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `status`| `String` | The element's status.
+| `dateCreated`| `DateTime` | The date the element was created.
+| `dateUpdated`| `DateTime` | The date the element was last updated.
+| `volumeId`| `Int` | The ID of the volume that the asset belongs to.
+| `folderId`| `Int` | The ID of the folder that the asset belongs to.
+| `filename`| `String` | The filename of the asset file.
+| `extension`| `String` | The file extension for the asset file.
+| `hasFocalPoint`| `Boolean` | Whether a user-defined focal point is set on the asset.
+| `focalPoint`| `[Float]` | The focal point represented as an array with `x` and `y` keys, or null if it's not an image.
+| `kind`| `String` | The file kind.
+| `size`| `String` | The file size in bytes.
+| `height`| `Int` | The height in pixels or null if it's not an image.
+| `width`| `Int` | The width in pixels or null if it's not an image.
+| `img`| `String` | An `<img>` tag based on this asset.
+| `url`| `String` | The full URL of the asset. This field accepts the same fields as the `transform` directive.
+| `mimeType`| `String` | The file’s MIME type, if it can be determined.
+| `path`| `String` | The asset's path in the volume.
+| `dateModified`| `DateTime` | The date the asset file was last modified.
 
-#### The `id` field
-The id of the entity
-
-#### The `uid` field
-The uid of the entity
-
-#### The `title` field
-The element’s title.
-
-#### The `slug` field
-The element’s slug.
-
-#### The `uri` field
-The element’s URI.
-
-#### The `enabled` field
-Whether the element is enabled or not.
-
-#### The `archived` field
-Whether the element is archived or not.
-
-#### The `siteId` field
-The ID of the site the element is associated with.
-
-#### The `searchScore` field
-The element’s search score, if the `search` parameter was used when querying for the element.
-
-#### The `trashed` field
-Whether the element has been soft-deleted or not.
-
-#### The `status` field
-The element's status.
-
-#### The `dateCreated` field
-The date the element was created.
-
-#### The `dateUpdated` field
-The date the element was last updated.
-
-#### The `volumeId` field
-The ID of the volume that the asset belongs to.
-
-#### The `folderId` field
-The ID of the folder that the asset belongs to.
-
-#### The `filename` field
-The filename of the asset file.
-
-#### The `extension` field
-The file extension for the asset file.
-
-#### The `hasFocalPoint` field
-Whether a user-defined focal point is set on the asset.
-
-#### The `focalPoint` field
-The focal point represented as an array with `x` and `y` keys, or null if it's not an image.
-
-#### The `kind` field
-The file kind.
-
-#### The `size` field
-The file size in bytes.
-
-#### The `height` field
-The height in pixels or null if it's not an image.
-
-#### The `width` field
-The width in pixels or null if it's not an image.
-
-#### The `img` field
-An `<img>` tag based on this asset.
-
-#### The `url` field
-The full URL of the asset. This field accepts the same fields as the `transform` directive.
-
-#### The `mimeType` field
-The file’s MIME type, if it can be determined.
-
-#### The `path` field
-The asset's path in the volume.
-
-#### The `dateModified` field
-The date the asset file was last modified.
 
 ### The `EntryInterface` interface
 This is the interface implemented by all entries.
+| Field | Type | Description
+| - | - | -
+| `id`| `ID` | The id of the entity
+| `uid`| `String` | The uid of the entity
+| `_count`| `Int` | Return a number of related elements for a field.
+| `title`| `String` | The element’s title.
+| `slug`| `String` | The element’s slug.
+| `uri`| `String` | The element’s URI.
+| `enabled`| `Boolean` | Whether the element is enabled or not.
+| `archived`| `Boolean` | Whether the element is archived or not.
+| `siteId`| `Int` | The ID of the site the element is associated with.
+| `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `status`| `String` | The element's status.
+| `dateCreated`| `DateTime` | The date the element was created.
+| `dateUpdated`| `DateTime` | The date the element was last updated.
+| `lft`| `Int` | The element’s left position within its structure.
+| `rgt`| `Int` | The element’s right position within its structure.
+| `level`| `Int` | The element’s level within its structure
+| `root`| `Int` | The element’s structure’s root ID
+| `structureId`| `Int` | The element’s structure ID.
+| `sectionId`| `Int` | The ID of the section that contains the entry.
+| `sectionHandle`| `String` | The handle of the section that contains the entry.
+| `typeId`| `Int` | The ID of the entry type that contains the entry.
+| `typeHandle`| `String` | The handle of the entry type that contains the entry.
+| `postDate`| `DateTime` | The entry's post date.
+| `expiryDate`| `DateTime` | The expiry date of the entry.
+| `children`| `[EntryInterface]` | The entry’s children, if the section is a structure. Accepts the same arguments as the `entries` query.
+| `parent`| `EntryInterface` | The entry’s parent, if the section is a structure.
+| `url`| `String` | The element’s full URL
 
-#### The `id` field
-The id of the entity
-
-#### The `uid` field
-The uid of the entity
-
-#### The `title` field
-The element’s title.
-
-#### The `slug` field
-The element’s slug.
-
-#### The `uri` field
-The element’s URI.
-
-#### The `enabled` field
-Whether the element is enabled or not.
-
-#### The `archived` field
-Whether the element is archived or not.
-
-#### The `siteId` field
-The ID of the site the element is associated with.
-
-#### The `searchScore` field
-The element’s search score, if the `search` parameter was used when querying for the element.
-
-#### The `trashed` field
-Whether the element has been soft-deleted or not.
-
-#### The `status` field
-The element's status.
-
-#### The `dateCreated` field
-The date the element was created.
-
-#### The `dateUpdated` field
-The date the element was last updated.
-
-#### The `lft` field
-The element’s left position within its structure.
-
-#### The `rgt` field
-The element’s right position within its structure.
-
-#### The `level` field
-The element’s level within its structure
-
-#### The `root` field
-The element’s structure’s root ID
-
-#### The `structureId` field
-The element’s structure ID.
-
-#### The `authorId` field
-The ID of the author of this entry.
-
-#### The `author` field
-The entry's author.
-
-#### The `sectionId` field
-The ID of the section that contains the entry.
-
-#### The `sectionHandle` field
-The handle of the section that contains the entry.
-
-#### The `typeId` field
-The ID of the entry type that contains the entry.
-
-#### The `typeHandle` field
-The handle of the entry type that contains the entry.
-
-#### The `postDate` field
-The entry's post date.
-
-#### The `expiryDate` field
-The expiry date of the entry.
-
-#### The `children` field
-The entry’s children, if the section is a structure. Accepts the same arguments as the `entries` query.
-
-#### The `parent` field
-The entry’s parent, if the section is a structure.
-
-#### The `url` field
-The element’s full URL
 
 ### The `GlobalSetInterface` interface
 This is the interface implemented by all global sets.
+| Field | Type | Description
+| - | - | -
+| `id`| `ID` | The id of the entity
+| `uid`| `String` | The uid of the entity
+| `_count`| `Int` | Return a number of related elements for a field.
+| `title`| `String` | The element’s title.
+| `slug`| `String` | The element’s slug.
+| `uri`| `String` | The element’s URI.
+| `enabled`| `Boolean` | Whether the element is enabled or not.
+| `archived`| `Boolean` | Whether the element is archived or not.
+| `siteId`| `Int` | The ID of the site the element is associated with.
+| `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `status`| `String` | The element's status.
+| `dateCreated`| `DateTime` | The date the element was created.
+| `dateUpdated`| `DateTime` | The date the element was last updated.
+| `name`| `String` | The name of the global set.
+| `handle`| `String` | The handle of the global set.
 
-#### The `id` field
-The id of the entity
-
-#### The `uid` field
-The uid of the entity
-
-#### The `title` field
-The element’s title.
-
-#### The `slug` field
-The element’s slug.
-
-#### The `uri` field
-The element’s URI.
-
-#### The `enabled` field
-Whether the element is enabled or not.
-
-#### The `archived` field
-Whether the element is archived or not.
-
-#### The `siteId` field
-The ID of the site the element is associated with.
-
-#### The `searchScore` field
-The element’s search score, if the `search` parameter was used when querying for the element.
-
-#### The `trashed` field
-Whether the element has been soft-deleted or not.
-
-#### The `status` field
-The element's status.
-
-#### The `dateCreated` field
-The date the element was created.
-
-#### The `dateUpdated` field
-The date the element was last updated.
-
-#### The `name` field
-The name of the global set.
-
-#### The `handle` field
-The handle of the global set.
 
 ### The `MatrixBlockInterface` interface
 This is the interface implemented by all matrix blocks.
+| Field | Type | Description
+| - | - | -
+| `id`| `ID` | The id of the entity
+| `uid`| `String` | The uid of the entity
+| `_count`| `Int` | Return a number of related elements for a field.
+| `title`| `String` | The element’s title.
+| `slug`| `String` | The element’s slug.
+| `uri`| `String` | The element’s URI.
+| `enabled`| `Boolean` | Whether the element is enabled or not.
+| `archived`| `Boolean` | Whether the element is archived or not.
+| `siteId`| `Int` | The ID of the site the element is associated with.
+| `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `status`| `String` | The element's status.
+| `dateCreated`| `DateTime` | The date the element was created.
+| `dateUpdated`| `DateTime` | The date the element was last updated.
+| `fieldId`| `Int` | The ID of the field that owns the matrix block.
+| `ownerId`| `Int` | The ID of the element that owns the matrix block.
+| `typeId`| `Int` | The ID of the matrix block's type.
+| `typeHandle`| `String` | The handle of the matrix block's type.
+| `sortOrder`| `Int` | The sort order of the matrix block within the owner element field.
 
-#### The `id` field
-The id of the entity
-
-#### The `uid` field
-The uid of the entity
-
-#### The `title` field
-The element’s title.
-
-#### The `slug` field
-The element’s slug.
-
-#### The `uri` field
-The element’s URI.
-
-#### The `enabled` field
-Whether the element is enabled or not.
-
-#### The `archived` field
-Whether the element is archived or not.
-
-#### The `siteId` field
-The ID of the site the element is associated with.
-
-#### The `searchScore` field
-The element’s search score, if the `search` parameter was used when querying for the element.
-
-#### The `trashed` field
-Whether the element has been soft-deleted or not.
-
-#### The `status` field
-The element's status.
-
-#### The `dateCreated` field
-The date the element was created.
-
-#### The `dateUpdated` field
-The date the element was last updated.
-
-#### The `fieldId` field
-The ID of the field that owns the matrix block.
-
-#### The `ownerId` field
-The ID of the element that owns the matrix block.
-
-#### The `typeId` field
-The ID of the matrix block's type.
-
-#### The `typeHandle` field
-The handle of the matrix block's type.
-
-#### The `sortOrder` field
-The sort order of the matrix block within the owner element field.
 
 ### The `UserInterface` interface
 This is the interface implemented by all users.
+| Field | Type | Description
+| - | - | -
+| `id`| `ID` | The id of the entity
+| `uid`| `String` | The uid of the entity
+| `_count`| `Int` | Return a number of related elements for a field.
+| `title`| `String` | The element’s title.
+| `slug`| `String` | The element’s slug.
+| `uri`| `String` | The element’s URI.
+| `enabled`| `Boolean` | Whether the element is enabled or not.
+| `archived`| `Boolean` | Whether the element is archived or not.
+| `siteId`| `Int` | The ID of the site the element is associated with.
+| `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `status`| `String` | The element's status.
+| `dateCreated`| `DateTime` | The date the element was created.
+| `dateUpdated`| `DateTime` | The date the element was last updated.
+| `photo`| `AssetInterface` | The user's photo.
+| `friendlyName`| `String` | The user's first name or username.
+| `fullName`| `String` | The user's full name.
+| `name`| `String` | The user's full name or username.
+| `preferences`| `String` | The user’s preferences.
+| `preferredLanguage`| `String` | The user’s preferred language.
+| `username`| `String` | The username.
+| `firstName`| `String` | The user's first name.
+| `lastName`| `String` | The user's last name.
+| `email`| `String` | The user's email.
 
-#### The `id` field
-The id of the entity
-
-#### The `uid` field
-The uid of the entity
-
-#### The `title` field
-The element’s title.
-
-#### The `slug` field
-The element’s slug.
-
-#### The `uri` field
-The element’s URI.
-
-#### The `enabled` field
-Whether the element is enabled or not.
-
-#### The `archived` field
-Whether the element is archived or not.
-
-#### The `siteId` field
-The ID of the site the element is associated with.
-
-#### The `searchScore` field
-The element’s search score, if the `search` parameter was used when querying for the element.
-
-#### The `trashed` field
-Whether the element has been soft-deleted or not.
-
-#### The `status` field
-The element's status.
-
-#### The `dateCreated` field
-The date the element was created.
-
-#### The `dateUpdated` field
-The date the element was last updated.
-
-#### The `photo` field
-The user's photo.
-
-#### The `friendlyName` field
-The user's first name or username.
-
-#### The `fullName` field
-The user's full name.
-
-#### The `name` field
-The user's full name or username.
-
-#### The `preferences` field
-The user’s preferences.
-
-#### The `preferredLanguage` field
-The user’s preferred language.
-
-#### The `username` field
-The username.
-
-#### The `firstName` field
-The user's first name.
-
-#### The `lastName` field
-The user's last name.
-
-#### The `email` field
-The user's email.
 
 ### The `CategoryInterface` interface
 This is the interface implemented by all categories.
+| Field | Type | Description
+| - | - | -
+| `id`| `ID` | The id of the entity
+| `uid`| `String` | The uid of the entity
+| `_count`| `Int` | Return a number of related elements for a field.
+| `title`| `String` | The element’s title.
+| `slug`| `String` | The element’s slug.
+| `uri`| `String` | The element’s URI.
+| `enabled`| `Boolean` | Whether the element is enabled or not.
+| `archived`| `Boolean` | Whether the element is archived or not.
+| `siteId`| `Int` | The ID of the site the element is associated with.
+| `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `status`| `String` | The element's status.
+| `dateCreated`| `DateTime` | The date the element was created.
+| `dateUpdated`| `DateTime` | The date the element was last updated.
+| `lft`| `Int` | The element’s left position within its structure.
+| `rgt`| `Int` | The element’s right position within its structure.
+| `level`| `Int` | The element’s level within its structure
+| `root`| `Int` | The element’s structure’s root ID
+| `structureId`| `Int` | The element’s structure ID.
+| `groupId`| `Int` | The ID of the group that contains the category.
+| `groupHandle`| `String` | The handle of the group that contains the category.
+| `children`| `[CategoryInterface]` | The category’s children.
+| `parent`| `CategoryInterface` | The category’s parent.
+| `url`| `String` | The element’s full URL
 
-#### The `id` field
-The id of the entity
-
-#### The `uid` field
-The uid of the entity
-
-#### The `title` field
-The element’s title.
-
-#### The `slug` field
-The element’s slug.
-
-#### The `uri` field
-The element’s URI.
-
-#### The `enabled` field
-Whether the element is enabled or not.
-
-#### The `archived` field
-Whether the element is archived or not.
-
-#### The `siteId` field
-The ID of the site the element is associated with.
-
-#### The `searchScore` field
-The element’s search score, if the `search` parameter was used when querying for the element.
-
-#### The `trashed` field
-Whether the element has been soft-deleted or not.
-
-#### The `status` field
-The element's status.
-
-#### The `dateCreated` field
-The date the element was created.
-
-#### The `dateUpdated` field
-The date the element was last updated.
-
-#### The `lft` field
-The element’s left position within its structure.
-
-#### The `rgt` field
-The element’s right position within its structure.
-
-#### The `level` field
-The element’s level within its structure
-
-#### The `root` field
-The element’s structure’s root ID
-
-#### The `structureId` field
-The element’s structure ID.
-
-#### The `groupId` field
-The ID of the group that contains the category.
-
-#### The `groupHandle` field
-The handle of the group that contains the category.
-
-#### The `children` field
-The category’s children.
-
-#### The `parent` field
-The category’s parent.
 
 ### The `TagInterface` interface
 This is the interface implemented by all tags.
+| Field | Type | Description
+| - | - | -
+| `id`| `ID` | The id of the entity
+| `uid`| `String` | The uid of the entity
+| `_count`| `Int` | Return a number of related elements for a field.
+| `title`| `String` | The element’s title.
+| `slug`| `String` | The element’s slug.
+| `uri`| `String` | The element’s URI.
+| `enabled`| `Boolean` | Whether the element is enabled or not.
+| `archived`| `Boolean` | Whether the element is archived or not.
+| `siteId`| `Int` | The ID of the site the element is associated with.
+| `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `status`| `String` | The element's status.
+| `dateCreated`| `DateTime` | The date the element was created.
+| `dateUpdated`| `DateTime` | The date the element was last updated.
+| `groupId`| `Int` | The ID of the group that contains the tag.
+| `groupHandle`| `String` | The handle of the group that contains the tag.
 
-#### The `id` field
-The id of the entity
-
-#### The `uid` field
-The uid of the entity
-
-#### The `title` field
-The element’s title.
-
-#### The `slug` field
-The element’s slug.
-
-#### The `uri` field
-The element’s URI.
-
-#### The `enabled` field
-Whether the element is enabled or not.
-
-#### The `archived` field
-Whether the element is archived or not.
-
-#### The `siteId` field
-The ID of the site the element is associated with.
-
-#### The `searchScore` field
-The element’s search score, if the `search` parameter was used when querying for the element.
-
-#### The `trashed` field
-Whether the element has been soft-deleted or not.
-
-#### The `status` field
-The element's status.
-
-#### The `dateCreated` field
-The date the element was created.
-
-#### The `dateUpdated` field
-The date the element was last updated.
-
-#### The `groupId` field
-The ID of the group that contains the tag.
-
-#### The `groupHandle` field
-The handle of the group that contains the tag.
+<!-- END INTERFACES -->
