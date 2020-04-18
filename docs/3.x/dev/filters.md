@@ -50,7 +50,7 @@ Filter | Description
 [markdown](#markdown-or-md) | Processes a string as Markdown.
 [merge](https://twig.symfony.com/doc/2.x/filters/merge.html) | Merges an array with another array
 [multisort](#multisort) | Sorts an array by one or more keys within its sub-arrays.
-[namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
+[namespace](#namespace) | Namespaces input names and other HTML attributes.
 [namespaceInputId](#namespaceinputid) | Namespaces an element ID.
 [namespaceInputName](#namespaceinputname) | Namespaces an input name.
 [nl2br](https://twig.symfony.com/doc/2.x/filters/nl2br.html) | Replaces newlines with `<br>` tags.
@@ -606,7 +606,7 @@ When sorting by multiple properties or keys, you must set the `direction` and `s
 
 ## `namespace`
 
-The `|namespace` filter can be used to namespace input names and other HTML attributes, as well as CSS selectors.
+The `|namespace` filter can be used to namespace input names and other HTML attributes.
 
 For example, this:
 
