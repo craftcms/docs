@@ -1242,3 +1242,223 @@ This is the interface implemented by all tags.
 | `groupHandle`| `String` | The handle of the group that contains the tag.
 
 <!-- END INTERFACES -->
+
+## Mutations
+
+::: tip
+The actual API features will depend on what your schema allows.
+:::
+
+Mutations in GraphQL provide a way of modifying data. The actual mutations will vary depending on the schema. There are some common mutations per GraphQL object type as well as type-specific mutations.
+
+Mutations take the data as arguments and, while for most part they are pretty straightforward, there are a few cases worth mentioning up front.
+
+### Matrix fields in mutations
+
+Due to the limitations of GraphQL, input types are not very flexible and Matrix fields are quite complex. For this reason, they are entitled to their own section in the docs. It is recommended to read up on [how to save matrix field data in entry forms](https://docs.craftcms.com/v3/matrix-fields.html#saving-matrix-fields-in-entry-forms) if you are unfamiliar with that, first.
+
+In general, the Matrix Input types have the same structure:
+
+| Field | Description
+| - | -
+| `sortOrder`| A list of all the block IDs that you wish the Matrix field to persist after the mutation in the required order. This include any new blocks.
+| `blocks` | A list of all the actual blocks. You don't have to include any blocks that are not modified, however, they must be represented on the `sortOrder` field if you don't want them deleted.
+
+An actual block input type will contain fields for all the possible block types for this field, however, the first non-empty block will be considered in the order that the block types are defined on the field.
+
+Let's look at an example.
+
+Let's say you have a Matrix field with a handle `documentationField`. The field has two block types - `screenshot` and `paragraph`. The following is a list of all the input types generated for this Matrix field.
+
+| Type name | Type Description |
+| - | -
+| `documentationField_MatrixInput` | This is the input type for the Matrix field. As discussed above, it will contain two fields: `sortOrder` and `blocks`.
+| `documentationField_MatrixBlockContainerInput` | This is the input type that represents the block. In this case it will contain two fields: `screenshot` and `paragraph`.
+| `documentationField_screenshot_MatrixBlockInput` | This is the input type for the `screenshot` block. It will contain all the fields defined for that block type.
+| `documentationField_paragraph_MatrixBlockInput` | In a similar fashion, this is the input type for the `paragraph` block.
+
+In GraphQL SDL it would look like this:
+
+```graphql
+input docunentationField_MatrixInput {
+  sortOrder: [QueryArgument]!
+  blocks: [documentationField_MatrixBlockContainerInput]
+}
+
+input documentationField_MatrixBlockContainerInput {
+  screenshot: documentationField_screenshot_MatrixBlockInput
+  paragraph: documentationField_paragraph_MatrixBlockInput
+}
+
+input documentationField_screenshot_MatrixBlockInput {
+  # List of content fields defined for this block type
+}
+
+input documentationField_paragraph_MatrixBlockInput {
+  # List of content fields defined for this block type
+}
+```
+
+Tw submit two blocks, the `blocks` would contain a list of two input objects of the `documentationField_MatrixBlockContainerInput` input type. What field on those objects would contain data would determine the final block type. If more than one of the block types are defined, only the block type that is listed first will be considered.
+
+### Uploading files via mutations
+
+There are currently two ways to do a file upload - you can pass in a URL to the file that will be downloaded to the server or you can pass along the file data encoded in Base64. Either way, wherever you're able to upload a file, you will have to use the `FileInput` GraphQL input type. It has the following fields.
+
+| Field | Description
+| - | -
+| `fileData` | The contents of the file in Base64 format. If provided, takes precedence over the URL.
+| `filename` | The filename to use for the file. If not present, Craft will figure out a filename on it's own.
+| `url` | The URL of the file to use
+
+### Mutating entries
+
+#### Saving an entry
+
+To save an entry use the entry type-specific mutation which will have the name in the form of `save_<sectionHandle>_<entryTypeHandle>_Entry`.
+
+<!-- BEGIN ENTRY MUTATION ARGS -->
+
+| Argument | Type | Description
+| - | - | -
+| `id`| `ID` | Set the element’s ID.
+| `uid`| `String` | Set the element’s UID.
+| `title`| `String` | The title of the element.
+| `enabled`| `Boolean` | Whether the element should be enabled.
+| `authorId`| `ID` | The ID of the user that created this entry.
+| `postDate`| `DateTime` | When should the entry be posted.
+| `expiryDate`| `DateTime` | When should the entry expire.
+| `slug`| `String` | Narrows the query results based on the elements’ slugs.
+| `siteId`| `Int` | Determines which site(s) the elements should be saved to. Defaults to the primary site.
+| `...`|  | More arguments depending on the field layout for the type
+
+<!-- END ENTRY MUTATION ARGS -->
+
+The `id`, `uid` and `authorId` arguments do no exist for single entries. This is because single entries have no authors and are identified already by the exact mutation. In a similar fashion, there are additional arguments available for structured entries. For more information, refer to [mutating structure data](#mutating-structure-data)
+
+#### Saving a draft
+
+To save a draft for an entry use the entry type-specific mutation which will have the name in the form of `save_<sectionHandle>_<entryTypeHandle>_Draft`.
+
+<!-- BEGIN DRAFT MUTATION ARGS -->
+
+| Argument | Type | Description
+| - | - | -
+| `title`| `String` | The title of the element.
+| `enabled`| `Boolean` | Whether the element should be enabled.
+| `authorId`| `ID` | The ID of the user that created this entry.
+| `postDate`| `DateTime` | When should the entry be posted.
+| `expiryDate`| `DateTime` | When should the entry expire.
+| `slug`| `String` | Narrows the query results based on the elements’ slugs.
+| `siteId`| `Int` | Determines which site(s) the elements should be saved to. Defaults to the primary site.
+| `draftId`| `ID!` | The ID of the draft.
+| `draftName`| `String` | The name of the draft.
+| `draftNotes`| `String` | Notes for the draft.
+| `...`|  | More arguments depending on the field layout for the type
+
+<!-- END DRAFT MUTATION ARGS -->
+
+#### Creating or publishing a draft
+
+To create a draft use the `createDraft` mutation., which requires the `id` of the entry for which to create the draft as an argument and returns the resulting id of the draft as the result.
+
+For publishing a draft, you should use the `publishDraft` mutation, which requires the `id` of the draft to publish as an argument and returns the id of the entry it belongs to as the result.
+
+#### Deleting an entry
+
+To delete an entry use the `deleteEntry` mutation, which requires the `id` of the entry that must be deleted. It returns a boolean value as the result to indicate whether the operation was successful.
+
+### Mutating Assets 
+
+#### Saving an asset
+
+To create or update an asset use the volume-specific mutation, which will have the name in the form of `save_<volumeHandle>_Asset`.
+
+<!-- BEGIN ASSET MUTATION ARGS -->
+
+| Argument | Type | Description
+| - | - | -
+| `id`| `ID` | Set the element’s ID.
+| `uid`| `String` | Set the element’s UID.
+| `title`| `String` | The title of the element.
+| `enabled`| `Boolean` | Whether the element should be enabled.
+| `_file`| `FileInput` | The file to use for this asset
+| `newFolderId`| `ID` | ID of the new folder for this asset
+| `...`|  | More arguments depending on the field layout for the type
+
+<!-- END ASSET MUTATION ARGS -->
+
+#### Deleting an asset
+
+To delete an asset use the `deleteAsset` mutation, which requires the `id` of the asset that must be deleted. It returns a boolean value as the result to indicate whether the operation was successful.
+
+### Mutating Tags
+
+#### Saving a tag
+
+To create or update a tag use the tag group-specific mutation, which will have the name in the form of `save_<tagGroupHandle>_Tag`.
+
+<!-- BEGIN TAG MUTATION ARGS -->
+
+| Argument | Type | Description
+| - | - | -
+| `id`| `ID` | Set the element’s ID.
+| `uid`| `String` | Set the element’s UID.
+| `title`| `String` | The title of the element.
+| `enabled`| `Boolean` | Whether the element should be enabled.
+| `...`|  | More arguments depending on the field layout for the type
+
+<!-- END TAG MUTATION ARGS -->
+
+#### Deleting a tag
+
+To delete a tag use the `deleteTag` mutation, which requires the `id` of the tag that must be deleted. It returns a boolean value as the result to indicate whether the operation was successful.
+
+### Mutating Categories
+
+#### Saving a category
+
+To create or update a category use the category group-specific mutation, which will have the name in the form of `save_<categoryGroupHandle>_Tag`.
+
+<!-- BEGIN CATEGORY MUTATION ARGS -->
+
+| Argument | Type | Description
+| - | - | -
+| `id`| `ID` | Set the element’s ID.
+| `uid`| `String` | Set the element’s UID.
+| `title`| `String` | The title of the element.
+| `enabled`| `Boolean` | Whether the element should be enabled.
+| `...`|  | More arguments depending on the field layout for the type
+
+<!-- END CATEGORY MUTATION ARGS -->
+
+#### Deleting a category
+
+To delete a category use the `deleteCategory` mutation, which requires the `id` of the category that must be deleted. It returns a boolean value as the result to indicate whether the operation was successful.
+
+### Mutating Structure data
+
+Entries that belong to a structure section and categories are parts of structure. To manipulate their place in the structure, just save the elements using the appropriate mutations and use the following arguments.
+
+<!-- BEGIN STRUCTURE MUTATION ARGS -->
+
+| Argument | Type | Description
+| - | - | -
+| `prependTo`| `ID` | The ID of the element to prepend to.
+| `appendTo`| `ID` | The ID of the element to append to.
+| `prependToRoot`| `Boolean` | Whether to prepend this element to the root.
+| `appendToRoot`| `Boolean` | Whether to append this element to the root.
+| `insertBefore`| `ID` | The ID of the element this element should be inserted before.
+| `insertAfter`| `ID` | The ID of the element this element should be inserted after.
+
+<!-- END STRUCTURE MUTATION ARGS -->
+
+### Mutating Global Sets 
+
+To update a global set use the appropriate mutations which will have the name in the form of `save_<globalSetHandle>_GlobalSet`.
+
+The only available arguments are custom fields on the global set.
+
+### Mutating  Users
+
+Mutating users with Craft native GraphQL API is currently not possible.
