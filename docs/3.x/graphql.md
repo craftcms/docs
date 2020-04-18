@@ -203,6 +203,61 @@ This query is used to query for assets.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `volumeId`| `[QueryArgument]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
+| `volume`| `[String]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ handles.
+| `folderId`| `[QueryArgument]` | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
+| `filename`| `[String]` | Narrows the query results based on the assets’ filenames.
+| `kind`| `[String]` | Narrows the query results based on the assets’ file kinds.
+| `height`| `[String]` | Narrows the query results based on the assets’ image heights.
+| `width`| `[String]` | Narrows the query results based on the assets’ image widths.
+| `size`| `[String]` | Narrows the query results based on the assets’ file sizes (in bytes).
+| `dateModified`| `String` | Narrows the query results based on the assets’ files’ last-modified dates.
+| `includeSubfolders`| `Boolean` | Broadens the query results to include assets from any of the subfolders of the folder specified by `folderId`.
+| `withTransforms`| `[String]` | A list of transform handles to preload.
+
+### The `assetCount` query
+This query is used to return the number of assets.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -242,6 +297,14 @@ This query is used to query for a single asset.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -281,6 +344,75 @@ This query is used to query for entries.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
+| `structureId`| `Int` | Determines which structure data should be joined into the query.
+| `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element.
+| `editable`| `Boolean` | Whether to only return entries that the user has permission to edit.
+| `section`| `[String]` | Narrows the query results based on the section handles the entries belong to.
+| `sectionId`| `[QueryArgument]` | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
+| `type`| `[String]` | Narrows the query results based on the entries’ entry type handles.
+| `typeId`| `[QueryArgument]` | Narrows the query results based on the entries’ entry types, per the types’ IDs.
+| `authorId`| `[QueryArgument]` | Narrows the query results based on the entries’ authors.
+| `authorGroup`| `[String]` | Narrows the query results based on the user group the entries’ authors belong to.
+| `authorGroupId`| `[QueryArgument]` | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
+| `postDate`| `[String]` | Narrows the query results based on the entries’ post dates.
+| `before`| `String` | Narrows the query results to only entries that were posted before a certain date.
+| `after`| `String` | Narrows the query results to only entries that were posted on or after a certain date.
+| `expiryDate`| `[String]` | Narrows the query results based on the entries’ expiry dates.
+
+### The `entryCount` query
+This query is used to return the number of entries.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -334,6 +466,14 @@ This query is used to query for a single entry.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -387,6 +527,14 @@ This query is used to query for global sets.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -416,6 +564,14 @@ This query is used to query for a single global set.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -445,6 +601,56 @@ This query is used to query for users.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `email`| `[String]` | Narrows the query results based on the users’ email addresses.
+| `username`| `[String]` | Narrows the query results based on the users’ usernames.
+| `firstName`| `[String]` | Narrows the query results based on the users’ first names.
+| `lastName`| `[String]` | Narrows the query results based on the users’ last names.
+| `groupId`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
+| `group`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to.
+
+### The `userCount` query
+This query is used to return the number of users.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -479,6 +685,14 @@ This query is used to query for a single user.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -513,6 +727,52 @@ This query is used to query for tags.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `group`| `[String]` | Narrows the query results based on the tag groups the tags belong to per the group’s handles.
+| `groupId`| `[QueryArgument]` | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
+
+### The `tagCount` query
+This query is used to return the number of tags.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -543,6 +803,14 @@ This query is used to query for a single tag.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -573,6 +841,66 @@ This query is used to query for categories.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[Int]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAll`| `[Int]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
+| `structureId`| `Int` | Determines which structure data should be joined into the query.
+| `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element.
+| `editable`| `Boolean` | Whether to only return categories that the user has permission to edit.
+| `group`| `[String]` | Narrows the query results based on the category groups the categories belong to per the group’s handles.
+| `groupId`| `[QueryArgument]` | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
+
+### The `categoryCount` query
+This query is used to return the number of categories.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -617,6 +945,14 @@ This query is used to query for a single category.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -668,6 +1004,7 @@ This directive allows for formatting any date to the desired format. It can be a
 | - | - | -
 | `format`| `String` | This specifies the format to use. It defaults to the [Atom date time format](https://www.php.net/manual/en/class.datetimeinterface.php#datetime.constants.atom]).
 | `timezone`| `String` | The full name of the timezone, defaults to UTC. (E.g., America/New_York)
+| `locale`| `String` | The locale to use when formatting the date. (E.g., en-US)
 
 
 ### The `transform` directive
@@ -757,6 +1094,14 @@ This is the interface implemented by all entries.
 | `level`| `Int` | The element’s level within its structure
 | `root`| `Int` | The element’s structure’s root ID
 | `structureId`| `Int` | The element’s structure ID.
+| `isDraft`| `Boolean` | Returns whether this is a draft.
+| `isRevision`| `Boolean` | Returns whether this is a revision.
+| `sourceId`| `Int` | Returns the element’s ID, or if it’s a draft/revision, its source element’s ID.
+| `sourceUid`| `String` | Returns the element’s UUID, or if it’s a draft/revision, its source element’s UUID.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `isUnsavedDraft`| `Boolean` | Returns whether this is a draft.
+| `draftName`| `String` | The name of the draft.
+| `draftNotes`| `String` | The notes for the draft.
 | `sectionId`| `Int` | The ID of the section that contains the entry.
 | `sectionHandle`| `String` | The handle of the section that contains the entry.
 | `typeId`| `Int` | The ID of the entry type that contains the entry.
