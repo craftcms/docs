@@ -335,7 +335,7 @@ Setting the position to `on load` or `on ready` will cause Craft to load its int
 
 ## `namespace`
 
-The `{% namespace %}` tag can be used to namespace input names and other HTML attributes, as well as CSS selectors.
+The `{% namespace %}` tag can be used to namespace input names and other HTML attributes.
 
 For example, this:
 
