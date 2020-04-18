@@ -235,6 +235,37 @@ The file extensions Craft should allow when a user is uploading files.
 
 
 
+### `allowedGraphqlOrigins`
+
+Allowed types
+
+:   [string](http://php.net/language.types.string)[], [false](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
+
+Default value
+
+:   `null`
+
+Defined by
+
+:   [GeneralConfig::$allowedGraphqlOrigins](api:craft\config\GeneralConfig::$allowedGraphqlOrigins)
+
+Since
+
+:   3.5.0
+
+
+
+The Ajax origins that should be allowed to access the GraphQL API, if enabled.
+
+If this is set to an array, then `graphql/api` requests will only include the current request’s
+[origin](https://www.yiiframework.com/doc/api/2.0/yii-web-request#getOrigin()-detail) in the `Access-Control-Allow-Origin` response header if
+it’s listed here.
+
+If this is set to `false`, then the `Access-Control-Allow-Origin` response header
+will never be sent.
+
+
+
 ### `autoLoginAfterAccountActivation`
 
 Allowed types
@@ -364,6 +395,33 @@ For example, if the hash takes 1 second to compute when the value is 14 then the
 
 
 
+### `brokenImagePath`
+
+Allowed types
+
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+
+Default value
+
+:   `null`
+
+Defined by
+
+:   [GeneralConfig::$brokenImagePath](api:craft\config\GeneralConfig::$brokenImagePath)
+
+Since
+
+:   3.5.0
+
+
+
+The server path to an image file that should be sent when responding to an image request with a
+404 status code.
+
+This can be set to an aliased path such as `@webroot/assets/404.svg`.
+
+
+
 ### `cacheDuration`
 
 Allowed types
@@ -461,7 +519,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 Allowed types
 
-:   [string](http://php.net/language.types.string)
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
 Default value
 
@@ -475,6 +533,10 @@ Defined by
 
 The URI segment Craft should look for when determining if the current request should route to the control panel rather than
 the front-end website.
+
+This can be set to `null` if you have a dedicated host name for the control panel (e.g. `cms.example.com`),
+or you are running Craft in [Headless Mode](config:headlessMode). Note that if you do that, you will also need to
+set the <config:baseCpUrl> config setting.
 
 
 
@@ -1537,7 +1599,7 @@ in your `.htaccess` file to match your new `pathParam` value.
 
 Allowed types
 
-:   [string](http://php.net/language.types.string)
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
 Default value
 
@@ -1551,10 +1613,11 @@ Defined by
 
 The query string param that Craft will check when determining the request's path.
 
-::: tip
-If you change this and your server is running Apache, don’t forget to update the redirect code in your
-`.htaccess` file to match the new value.
-:::
+This can be set to `null` if your web server is capable of directing traffic to `index.php` without a query
+string param. If you’re using Apache, that means you’ll need to change the `RewriteRule` line in your `.htaccess`
+file to:
+
+    RewriteRule (.+) index.php [QSA,L]
 
 
 
@@ -2302,6 +2365,30 @@ Defined by
 The site name(s). If set, it will take precedence over the Name settings in Settings → Sites → [Site Name].
 
 This can be set to a string, which will override the primary site’s name only, or an array with site handles used as the keys.
+
+
+
+### `siteToken`
+
+Allowed types
+
+:   [string](http://php.net/language.types.string)
+
+Default value
+
+:   `'siteToken'`
+
+Defined by
+
+:   [GeneralConfig::$siteToken](api:craft\config\GeneralConfig::$siteToken)
+
+Since
+
+:   3.5.0
+
+
+
+The query string parameter name that site tokens should be set to.
 
 
 
