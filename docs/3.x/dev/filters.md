@@ -23,6 +23,8 @@ Filter | Description
 [duration](#duration) | Returns a `DateInterval` object.
 [encenc](#encenc) | Encrypts and base64-encodes a string.
 [escape](https://twig.symfony.com/doc/2.x/filters/escape.html) | Escapes a string.
+[explodeClass](#explodeclass) | Converts a `class` attribute value into an array of class names.
+[explodeStyle](#explodestyle) | Converts a `style` attribute value into an array of property name/value pairs.
 [filesize](#filesize) | Formats a number of bytes into something else.
 [filterByValue](#filterbyvalue) | Filters an array by key/value pairs.
 [filter](#filter) | Filters the items in an array.
@@ -59,6 +61,7 @@ Filter | Description
 [percentage](#percentage) | Formats a percentage.
 [prepend](#prepend) | Prepends HTML to the beginning of another element.
 [purify](#purify) | Runs HTML code through HTML Purifier.
+[push](#push) | Appends one or more items onto the end of an array.
 [raw](https://twig.symfony.com/doc/2.x/filters/raw.html) | Marks as value as safe for the current escaping strategy.
 [reduce](https://twig.symfony.com/doc/2.x/filters/reduce.html) | Iteratively reduces a sequence or mapping to a single value.
 [replace](#replace) | Replaces parts of a string with other things.
@@ -78,6 +81,7 @@ Filter | Description
 [trim](https://twig.symfony.com/doc/2.x/filters/trim.html) | Strips whitespace from the beginning and end of a string.
 [ucfirst](#ucfirst) | Capitalizes the first character of a string.
 [unique](#unique) | Removes duplicate values from an array.
+[unshift](#unshift) | Prepends one or more items to the beginning of an array.
 [upper](https://twig.symfony.com/doc/2.x/filters/upper.html) | Formats a string into “UPPER CASE”.
 [url_encode](https://twig.symfony.com/doc/2.x/filters/url_encode.html) | Percent-encodes a string as a URL segment or an array as a query string.
 [values](#values) | Returns all the values in an array, resetting its keys.
@@ -350,6 +354,28 @@ Encrypts and base64-encodes a string.
 
 ```twig
 {{ 'secure-string'|encenc }}
+```
+
+## `explodeClass`
+
+Converts a `class` attribute value into an array of class names.
+
+If an array is passed in, it will be returned as-is.
+
+```twig
+{% set classNames = 'foo bar baz'|explodeClass %}
+{# Result: ['foo', 'bar', 'baz'] #}
+```
+
+## `explodeStyle`
+
+Converts a `style` attribute value into an array of property name/value pairs.
+
+If an array is passed in, it will be returned as-is.
+
+```twig
+{% set styles = 'font-weight: bold; color: red;'|explodeStyle %}
+{# Result: {'font-weight': 'bold', 'color': 'red'} #} 
 ```
 
 ## `filesize`
@@ -717,6 +743,16 @@ You can specify a custom HTML Purifier config file as well:
 
 That will configure HTML Purifier based on the settings defined by `config/htmlpurifier/user_bio.json`.
 
+## `push`
+
+Appends one or more items onto the end of an array, and returns the new array.
+
+```twig
+{% set array1 = ['foo'] %}
+{% set array2 = array|push('bar', 'baz') %}
+{# Result: ['foo', 'bar', 'baz'] #}
+```
+
 ## `replace`
 
 Replaces parts of a string with other things.
@@ -830,6 +866,16 @@ Capitalizes the first character of a string.
 ## `unique`
 
 Runs an array through [array_unique()](http://php.net/manual/en/function.array-unique.php).
+
+## `unshift`
+
+Prepends one or more items to the beginning of an array, and returns the new array.
+
+```twig
+{% set array1 = ['baz'] %}
+{% set array2 = array|push('foo', 'bar') %}
+{# Result: ['foo', 'bar', 'baz'] #}
+```
 
 ## `values`
 

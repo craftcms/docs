@@ -36,6 +36,7 @@ Function | Description
 [plugin](#plugin) | Returns a plugin instance by its handle.
 [random](https://twig.symfony.com/doc/2.x/functions/random.html) | Returns a random value.
 [range](https://twig.symfony.com/doc/2.x/functions/range.html) | Returns a list containing an arithmetic progression of integers.
+[raw](#raw) | Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML-encoded when output.
 [redirectInput](#redirectinput) | Outputs a hidden `redirect` input.
 [seq](#seq) | Outputs the next or current number in a sequence.
 [shuffle](#shuffle) | Randomizes the order of the items in an array.
@@ -335,6 +336,19 @@ Returns a plugin instance by its handle, or `null` if no plugin is installed and
 ```twig
 {{ plugin('commerce').version }}
 ```
+
+## `raw`
+
+Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML-encoded when output.
+
+```twig
+{% set html = raw('<p>Don’t encode me.</p>') %}
+{{ html }}
+```
+
+::: tip
+This works similarly to the [raw](https://twig.symfony.com/doc/2.x/filters/raw.html) filter, except that Twig will remember not to escape the HTML even if the variable is passed to another template/macro, whereas `|raw` filters only have an effect if used directly in an output tag. 
+:::
 
 ## `redirectInput`
 
