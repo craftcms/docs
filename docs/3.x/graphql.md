@@ -208,8 +208,8 @@ This query is used to query for assets.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -247,8 +247,8 @@ This query is used to query for a single asset.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -286,8 +286,8 @@ This query is used to query for entries.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -339,8 +339,8 @@ This query is used to query for a single entry.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -392,8 +392,8 @@ This query is used to query for global sets.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -421,8 +421,8 @@ This query is used to query for a single global set.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -450,8 +450,8 @@ This query is used to query for users.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -484,8 +484,8 @@ This query is used to query for a single user.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -518,8 +518,8 @@ This query is used to query for tags.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -548,8 +548,8 @@ This query is used to query for a single tag.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -578,8 +578,8 @@ This query is used to query for categories.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -622,8 +622,8 @@ This query is used to query for a single category.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
