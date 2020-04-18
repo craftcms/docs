@@ -24,7 +24,7 @@ Tag | Description
 [include](https://twig.symfony.com/doc/2.x/tags/include.html) | Includes another template.
 [js](#js) | Registers a `<script>` tag on the page.
 [macro](https://twig.symfony.com/doc/2.x/tags/macro.html) | Defines a macro.
-[namespace](#namespace) | Namespaces input names and other HTML attributes.
+[namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
 [nav](#nav) | Creates a hierarchical nav menu.
 [paginate](#paginate) | Paginates an element query.
 [redirect](#redirect) | Redirects the browser.
@@ -335,23 +335,47 @@ Setting the position to `on load` or `on ready` will cause Craft to load its int
 
 ## `namespace`
 
-The `{% namespace %}` tag can be used to namespace input names and other HTML attributes.
+The `{% namespace %}` tag can be used to namespace input names and other HTML attributes, as well as CSS selectors.
 
 For example, this:
 
 ```twig
 {% namespace 'foo' %}
-<input id="title" name="title" type="text">
+<style>
+  .text { font-size: larger; }
+  #title { font-weight: bold; }
+</style>
+<input class="text" id="title" name="title" type="text">
 {% endnamespace %}
 ```
 
 would become this:
 
 ```html
-<input id="foo-title" name="foo[title]" type="text">
+<style>
+  .text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="text" id="foo-title" name="foo[title]" type="text">
 ```
 
-Notice how the `id` attribute changed from `title` to `foo-title`, and the `name` attribute changed from `title` to `foo[title]`.
+Notice how the `#title` CSS selector became `#foo-title`, the `id` attribute changed from `title` to `foo-title`, and the `name` attribute changed from `title` to `foo[title]`.
+
+If you want class names to get namespaced as well, add the `withClasses` flag. That will affect both class CSS selectors and `class` attributes:
+
+```twig
+{% namespace 'foo' withClasses %}
+```
+
+That would result in:
+
+```html{2,5}
+<style>
+  .foo-text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="foo-text" id="foo-title" name="foo[title]" type="text">
+```
 
 ::: tip
 This tag works identically to the [namespace](filters.md#namespace) filter, except that it will call <api:craft\web\View::setNamespace()> at the beginning, so any PHP code executed within it can be aware of what the nested IDs will become.

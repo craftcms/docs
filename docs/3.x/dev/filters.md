@@ -50,7 +50,7 @@ Filter | Description
 [markdown](#markdown-or-md) | Processes a string as Markdown.
 [merge](https://twig.symfony.com/doc/2.x/filters/merge.html) | Merges an array with another array
 [multisort](#multisort) | Sorts an array by one or more keys within its sub-arrays.
-[namespace](#namespace) | Namespaces input names and other HTML attributes.
+[namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
 [namespaceInputId](#namespaceinputid) | Namespaces an element ID.
 [namespaceInputName](#namespaceinputname) | Namespaces an input name.
 [nl2br](https://twig.symfony.com/doc/2.x/filters/nl2br.html) | Replaces newlines with `<br>` tags.
@@ -606,13 +606,17 @@ When sorting by multiple properties or keys, you must set the `direction` and `s
 
 ## `namespace`
 
-The `|namespace` filter can be used to namespace input names and other HTML attributes.
+The `|namespace` filter can be used to namespace input names and other HTML attributes, as well as CSS selectors.
 
 For example, this:
 
 ```twig
 {% set html %}
-<input id="title" name="title" type="text">
+<style>
+  .text { font-size: larger; }
+  #title { font-weight: bold; }
+</style>
+<input class="text" id="title" name="title" type="text">
 {% endset %}
 {{ html|namespace('foo') }}
 ```
@@ -620,10 +624,30 @@ For example, this:
 would become this:
 
 ```html
-<input id="foo-title" name="foo[title]" type="text">
+<style>
+  .text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="text" id="foo-title" name="foo[title]" type="text">
 ```
 
-Notice how the `id` attribute changed from `title` to `foo-title`, and the `name` attribute changed from `title` to `foo[title]`.
+Notice how the `#title` CSS selector became `#foo-title`, the `id` attribute changed from `title` to `foo-title`, and the `name` attribute changed from `title` to `foo[title]`.
+
+If you want class names to get namespaced as well, pass `withClasses=true`. That will affect both class CSS selectors and `class` attributes:
+
+```twig
+{{ html|namespace('foo', withClasses=true) }}
+```
+
+That would result in:
+
+```html{2,5}
+<style>
+  .foo-text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="foo-text" id="foo-title" name="foo[title]" type="text">
+```
 
 ## `namespaceInputId`
 
