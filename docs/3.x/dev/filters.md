@@ -1,6 +1,6 @@
 # Filters
 
-The following filters are available to Twig templates in Craft:
+The following [filters](https://twig.symfony.com/doc/2.x/templates.html#filters) are available to Twig templates in Craft:
 
 Filter | Description
 ------ | -----------

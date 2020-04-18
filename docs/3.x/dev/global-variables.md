@@ -1,9 +1,12 @@
 # Global Variables
 
-Every single template is going to get loaded with the following variables:
+The following [global variables](https://twig.symfony.com/doc/2.x/templates.html#global-variables) are available to Twig templates in Craft:
 
 Variable | Description
 -------- | -----------
+`_self' | The current template name.
+`_context` | The currently-defined variables.
+`_charset` | The current charset.
 [craft](#craft) | A <api:craft\web\twig\variables\CraftVariable> object.
 [currentSite](#currentsite) | The requested site.
 [currentUser](#currentuser) | The currently logged-in user.

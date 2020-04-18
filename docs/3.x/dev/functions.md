@@ -1,6 +1,6 @@
 # Functions
 
-The following functions are available to Twig templates in Craft:
+The following [functions](https://twig.symfony.com/doc/2.x/templates.html#functions) are available to Twig templates in Craft:
 
 Function | Description
 -------- | -----------
