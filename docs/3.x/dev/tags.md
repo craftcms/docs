@@ -1,6 +1,6 @@
 # Tags
 
-The following tags are available to Twig templates in Craft:
+The following [tags](https://twig.symfony.com/doc/2.x/templates.html#control-structure) are available to Twig templates in Craft:
 
 Tag | Description
 --- | -----------
