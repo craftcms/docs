@@ -4,7 +4,7 @@ The following [global variables](https://twig.symfony.com/doc/2.x/templates.html
 
 Variable | Description
 -------- | -----------
-`_self' | The current template name.
+`_self` | The current template name.
 `_context` | The currently-defined variables.
 `_charset` | The current charset.
 [craft](#craft) | A <api:craft\web\twig\variables\CraftVariable> object.
