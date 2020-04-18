@@ -27,6 +27,20 @@ The path to the [config/](../directory-structure.md#config) folder. (It is assum
 
 The path to the [migrations/](../directory-structure.md#migrations) folder used to store content migrations. (It is assumed to live within the base directory by default.)
 
+### `CRAFT_CP`
+
+Dictates whether the current request should be treated as a control panel request.
+
+```php
+// Tell Craft that this is a control panel request
+define('CRAFT_CP', true);
+```
+
+If this isn’t defined, Craft will treat the request as a control panel request if either of these are true:
+
+- The <config:baseCpUrl> setting **is** set, and the request URL begins with it (plus the <config:cpTrigger> setting, if set).
+- The <config:baseCpUrl> setting **is not** set, and the request URI begins with the <config:cpTrigger> setting.
+
 ### `CRAFT_ENVIRONMENT`
 
 The environment name that [multi-environment configs](environments.md#multi-environment-configs) can reference when defining their environment-specific config arrays. (`$_SERVER['SERVER_NAME']` will be used by default.)
