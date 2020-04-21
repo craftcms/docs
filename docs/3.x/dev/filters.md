@@ -378,7 +378,7 @@ When an arrow function is passed, this works identically to Twig’s core [`filt
 
 ## `filterByValue`
 
-Runs an array through <api:craft\helpers\ArrayHelper::filterByValue()>.
+Runs an array through <api:craft\helpers\ArrayHelper::where()>.
 
 ## `group`
 
