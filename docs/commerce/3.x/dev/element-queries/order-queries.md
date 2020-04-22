@@ -55,46 +55,48 @@ Order queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
-- [anyStatus](#anystatus)
-- [asArray](#asarray)
-- [clearCachedResult](#clearcachedresult)
-- [customer](#customer)
-- [customerId](#customerid)
-- [dateAuthorized](#dateauthorized)
-- [dateCreated](#datecreated)
-- [dateOrdered](#dateordered)
-- [datePaid](#datepaid)
-- [dateUpdated](#dateupdated)
-- [email](#email)
-- [expiryDate](#expirydate)
-- [fixedOrder](#fixedorder)
-- [gateway](#gateway)
-- [gatewayId](#gatewayid)
-- [hasLineItems](#haslineitems)
-- [hasPurchasables](#haspurchasables)
-- [hasTransactions](#hastransactions)
-- [id](#id)
-- [ignorePlaceholders](#ignoreplaceholders)
-- [inReverse](#inreverse)
-- [isCompleted](#iscompleted)
-- [isPaid](#ispaid)
-- [isUnpaid](#isunpaid)
-- [limit](#limit)
-- [number](#number)
-- [offset](#offset)
-- [orderBy](#orderby)
-- [orderStatus](#orderstatus)
-- [orderStatusId](#orderstatusid)
-- [origin](#origin)
-- [preferSites](#prefersites)
-- [reference](#reference)
-- [relatedTo](#relatedto)
-- [search](#search)
-- [shortNumber](#shortnumber)
-- [trashed](#trashed)
-- [uid](#uid)
-- [user](#user)
-- [with](#with)
+| Param                                     | Description
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [anyStatus](#anystatus)                   | Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+| [asArray](#asarray)                       | Causes the query to return matching orders as arrays of data, rather than [Order](api:craft\commerce\elements\Order) objects.
+| [clearCachedResult](#clearcachedresult)   | Clears the cached result.
+| [customer](#customer)                     | Narrows the query results based on the customer.
+| [customerId](#customerid)                 | Narrows the query results based on the customer, per their ID.
+| [dateAuthorized](#dateauthorized)         | Narrows the query results based on the orders’ authorized dates.
+| [dateCreated](#datecreated)               | Narrows the query results based on the orders’ creation dates.
+| [dateOrdered](#dateordered)               | Narrows the query results based on the orders’ completion dates.
+| [datePaid](#datepaid)                     | Narrows the query results based on the orders’ paid dates.
+| [dateUpdated](#dateupdated)               | Narrows the query results based on the orders’ last-updated dates.
+| [email](#email)                           | Narrows the query results based on the customers’ email addresses.
+| [expiryDate](#expirydate)                 | Narrows the query results based on the orders’ expiry dates.
+| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
+| [gateway](#gateway)                       | Narrows the query results based on the gateway.
+| [gatewayId](#gatewayid)                   | Narrows the query results based on the gateway, per its ID.
+| [hasLineItems](#haslineitems)             | Narrows the query results to only orders that have line items.
+| [hasPurchasables](#haspurchasables)       | Narrows the query results to only orders that have certain purchasables.
+| [hasTransactions](#hastransactions)       | Narrows the query results to only carts that have at least one transaction.
+| [id](#id)                                 | Narrows the query results based on the orders’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
+| [isCompleted](#iscompleted)               | Narrows the query results to only orders that are completed.
+| [isPaid](#ispaid)                         | Narrows the query results to only orders that are paid.
+| [isUnpaid](#isunpaid)                     | Narrows the query results to only orders that are not paid.
+| [limit](#limit)                           | Determines the number of orders that should be returned.
+| [number](#number)                         | Narrows the query results based on the order number.
+| [offset](#offset)                         | Determines how many orders should be skipped in the results.
+| [orderBy](#orderby)                       | Determines the order that the orders should be returned in. (If empty, defaults to `id ASC`.)
+| [orderStatus](#orderstatus)               | Narrows the query results based on the order statuses.
+| [orderStatusId](#orderstatusid)           | Narrows the query results based on the order statuses, per their IDs.
+| [origin](#origin)                         | Narrows the query results based on the origin.
+| [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [reference](#reference)                   | Narrows the query results based on the order reference.
+| [relatedTo](#relatedto)                   | Narrows the query results to only orders that are related to certain other elements.
+| [search](#search)                         | Narrows the query results to only orders that match a search query.
+| [shortNumber](#shortnumber)               | Narrows the query results based on the order short number.
+| [trashed](#trashed)                       | Narrows the query results to only orders that have been soft-deleted.
+| [uid](#uid)                               | Narrows the query results based on the orders’ UIDs.
+| [user](#user)                             | Narrows the query results based on the customer’s user account.
+| [with](#with)                             | Causes the query to return matching orders eager-loaded with related elements.
 
 ### `anyStatus`
 

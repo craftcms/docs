@@ -74,41 +74,43 @@ Variant queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
-- [anyStatus](#anystatus)
-- [asArray](#asarray)
-- [clearCachedResult](#clearcachedresult)
-- [dateCreated](#datecreated)
-- [dateUpdated](#dateupdated)
-- [fixedOrder](#fixedorder)
-- [hasProduct](#hasproduct)
-- [hasSales](#hassales)
-- [hasStock](#hasstock)
-- [id](#id)
-- [ignorePlaceholders](#ignoreplaceholders)
-- [inReverse](#inreverse)
-- [isDefault](#isdefault)
-- [limit](#limit)
-- [maxQty](#maxqty)
-- [minQty](#minqty)
-- [offset](#offset)
-- [orderBy](#orderby)
-- [preferSites](#prefersites)
-- [price](#price)
-- [product](#product)
-- [productId](#productid)
-- [relatedTo](#relatedto)
-- [search](#search)
-- [site](#site)
-- [siteId](#siteid)
-- [sku](#sku)
-- [status](#status)
-- [stock](#stock)
-- [title](#title)
-- [trashed](#trashed)
-- [typeId](#typeid)
-- [uid](#uid)
-- [unique](#unique)
-- [with](#with)
+| Param                                     | Description
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [anyStatus](#anystatus)                   | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+| [asArray](#asarray)                       | Causes the query to return matching variants as arrays of data, rather than [Variant](api:craft\commerce\elements\Variant) objects.
+| [clearCachedResult](#clearcachedresult)   | Clears the cached result.
+| [dateCreated](#datecreated)               | Narrows the query results based on the variants’ creation dates.
+| [dateUpdated](#dateupdated)               | Narrows the query results based on the variants’ last-updated dates.
+| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
+| [hasProduct](#hasproduct)                 | Narrows the query results to only variants for certain products.
+| [hasSales](#hassales)                     | Narrows the query results to only variants that are on sale.
+| [hasStock](#hasstock)                     | Narrows the query results to only variants that have stock.
+| [id](#id)                                 | Narrows the query results based on the variants’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching variants as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
+| [isDefault](#isdefault)                   | Narrows the query results to only default variants.
+| [limit](#limit)                           | Determines the number of variants that should be returned.
+| [maxQty](#maxqty)                         | Narrows the query results based on the variants’ max quantity.
+| [minQty](#minqty)                         | Narrows the query results based on the variants’ min quantity.
+| [offset](#offset)                         | Determines how many variants should be skipped in the results.
+| [orderBy](#orderby)                       | Determines the order that the variants should be returned in. (If empty, defaults to `sortOrder ASC`.)
+| [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [price](#price)                           | Narrows the query results based on the variants’ price.
+| [product](#product)                       | Narrows the query results based on the variants’ product.
+| [productId](#productid)                   | Narrows the query results based on the variants’ products’ IDs.
+| [relatedTo](#relatedto)                   | Narrows the query results to only variants that are related to certain other elements.
+| [search](#search)                         | Narrows the query results to only variants that match a search query.
+| [site](#site)                             | Determines which site(s) the variants should be queried in.
+| [siteId](#siteid)                         | Determines which site(s) the variants should be queried in, per the site’s ID.
+| [sku](#sku)                               | Narrows the query results based on the variants’ SKUs.
+| [status](#status)                         | Narrows the query results based on the variants’ statuses.
+| [stock](#stock)                           | Narrows the query results based on the variants’ stock.
+| [title](#title)                           | Narrows the query results based on the variants’ titles.
+| [trashed](#trashed)                       | Narrows the query results to only variants that have been soft-deleted.
+| [typeId](#typeid)                         | Narrows the query results based on the variants’ product types, per their IDs.
+| [uid](#uid)                               | Narrows the query results based on the variants’ UIDs.
+| [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
+| [with](#with)                             | Causes the query to return matching variants eager-loaded with related elements.
 
 ### `anyStatus`
 

@@ -55,42 +55,44 @@ Subscription queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
-- [anyStatus](#anystatus)
-- [asArray](#asarray)
-- [clearCachedResult](#clearcachedresult)
-- [dateCanceled](#datecanceled)
-- [dateCreated](#datecreated)
-- [dateExpired](#dateexpired)
-- [dateSuspended](#datesuspended)
-- [dateUpdated](#dateupdated)
-- [fixedOrder](#fixedorder)
-- [gatewayId](#gatewayid)
-- [hasStarted](#hasstarted)
-- [id](#id)
-- [ignorePlaceholders](#ignoreplaceholders)
-- [inReverse](#inreverse)
-- [isCanceled](#iscanceled)
-- [isExpired](#isexpired)
-- [isSuspended](#issuspended)
-- [limit](#limit)
-- [nextPaymentDate](#nextpaymentdate)
-- [offset](#offset)
-- [onTrial](#ontrial)
-- [orderBy](#orderby)
-- [orderId](#orderid)
-- [plan](#plan)
-- [planId](#planid)
-- [preferSites](#prefersites)
-- [reference](#reference)
-- [relatedTo](#relatedto)
-- [search](#search)
-- [status](#status)
-- [trashed](#trashed)
-- [trialDays](#trialdays)
-- [uid](#uid)
-- [user](#user)
-- [userId](#userid)
-- [with](#with)
+| Param                                     | Description
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [anyStatus](#anystatus)                   | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+| [asArray](#asarray)                       | Causes the query to return matching subscriptions as arrays of data, rather than `\craft\commerce\elements\Subscription` objects.
+| [clearCachedResult](#clearcachedresult)   | Clears the cached result.
+| [dateCanceled](#datecanceled)             | Narrows the query results based on the subscriptions’ cancellation date.
+| [dateCreated](#datecreated)               | Narrows the query results based on the subscriptions’ creation dates.
+| [dateExpired](#dateexpired)               | Narrows the query results based on the subscriptions’ expiration date.
+| [dateSuspended](#datesuspended)           | Narrows the query results based on the subscriptions’ suspension date.
+| [dateUpdated](#dateupdated)               | Narrows the query results based on the subscriptions’ last-updated dates.
+| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
+| [gatewayId](#gatewayid)                   | Narrows the query results based on the gateway, per its ID.
+| [hasStarted](#hasstarted)                 | Narrows the query results to only subscriptions that have started.
+| [id](#id)                                 | Narrows the query results based on the subscriptions’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
+| [isCanceled](#iscanceled)                 | Narrows the query results to only subscriptions that are canceled.
+| [isExpired](#isexpired)                   | Narrows the query results to only subscriptions that have expired.
+| [isSuspended](#issuspended)               | Narrows the query results to only subscriptions that are suspended.
+| [limit](#limit)                           | Determines the number of subscriptions that should be returned.
+| [nextPaymentDate](#nextpaymentdate)       | Narrows the query results based on the subscriptions’ next payment dates.
+| [offset](#offset)                         | Determines how many subscriptions should be skipped in the results.
+| [onTrial](#ontrial)                       | Narrows the query results to only subscriptions that are on trial.
+| [orderBy](#orderby)                       | Determines the order that the subscriptions should be returned in. (If empty, defaults to `dateCreated DESC`.)
+| [orderId](#orderid)                       | Narrows the query results based on the order, per its ID.
+| [plan](#plan)                             | Narrows the query results based on the subscription plan.
+| [planId](#planid)                         | Narrows the query results based on the subscription plans’ IDs.
+| [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [reference](#reference)                   | Narrows the query results based on the reference.
+| [relatedTo](#relatedto)                   | Narrows the query results to only subscriptions that are related to certain other elements.
+| [search](#search)                         | Narrows the query results to only subscriptions that match a search query.
+| [status](#status)                         | Narrows the query results based on the subscriptions’ statuses.
+| [trashed](#trashed)                       | Narrows the query results to only subscriptions that have been soft-deleted.
+| [trialDays](#trialdays)                   | Narrows the query results based on the number of trial days.
+| [uid](#uid)                               | Narrows the query results based on the subscriptions’ UIDs.
+| [user](#user)                             | Narrows the query results based on the subscriptions’ user accounts.
+| [userId](#userid)                         | Narrows the query results based on the subscriptions’ user accounts’ IDs.
+| [with](#with)                             | Causes the query to return matching subscriptions eager-loaded with related elements.
 
 ### `anyStatus`
 

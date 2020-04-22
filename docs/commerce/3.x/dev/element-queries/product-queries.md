@@ -73,39 +73,41 @@ Product queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
-- [after](#after)
-- [anyStatus](#anystatus)
-- [asArray](#asarray)
-- [availableForPurchase](#availableforpurchase)
-- [before](#before)
-- [clearCachedResult](#clearcachedresult)
-- [dateCreated](#datecreated)
-- [dateUpdated](#dateupdated)
-- [expiryDate](#expirydate)
-- [fixedOrder](#fixedorder)
-- [hasVariant](#hasvariant)
-- [id](#id)
-- [ignorePlaceholders](#ignoreplaceholders)
-- [inReverse](#inreverse)
-- [limit](#limit)
-- [offset](#offset)
-- [orderBy](#orderby)
-- [postDate](#postdate)
-- [preferSites](#prefersites)
-- [relatedTo](#relatedto)
-- [search](#search)
-- [site](#site)
-- [siteId](#siteid)
-- [slug](#slug)
-- [status](#status)
-- [title](#title)
-- [trashed](#trashed)
-- [type](#type)
-- [typeId](#typeid)
-- [uid](#uid)
-- [unique](#unique)
-- [uri](#uri)
-- [with](#with)
+| Param                                         | Description
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [after](#after)                               | Narrows the query results to only products that were posted on or after a certain date.
+| [anyStatus](#anystatus)                       | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+| [asArray](#asarray)                           | Causes the query to return matching products as arrays of data, rather than [Product](api:craft\commerce\elements\Product) objects.
+| [availableForPurchase](#availableforpurchase) | Narrows the query results to only products that are available for purchase.
+| [before](#before)                             | Narrows the query results to only products that were posted before a certain date.
+| [clearCachedResult](#clearcachedresult)       | Clears the cached result.
+| [dateCreated](#datecreated)                   | Narrows the query results based on the products’ creation dates.
+| [dateUpdated](#dateupdated)                   | Narrows the query results based on the products’ last-updated dates.
+| [expiryDate](#expirydate)                     | Narrows the query results based on the products’ expiry dates.
+| [fixedOrder](#fixedorder)                     | Causes the query results to be returned in the order specified by [id](#id).
+| [hasVariant](#hasvariant)                     | Narrows the query results to only products that have certain variants.
+| [id](#id)                                     | Narrows the query results based on the products’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders)     | Causes the query to return matching products as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#inreverse)                       | Causes the query results to be returned in reverse order.
+| [limit](#limit)                               | Determines the number of products that should be returned.
+| [offset](#offset)                             | Determines how many products should be skipped in the results.
+| [orderBy](#orderby)                           | Determines the order that the products should be returned in. (If empty, defaults to `postDate DESC`.)
+| [postDate](#postdate)                         | Narrows the query results based on the products’ post dates.
+| [preferSites](#prefersites)                   | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [relatedTo](#relatedto)                       | Narrows the query results to only products that are related to certain other elements.
+| [search](#search)                             | Narrows the query results to only products that match a search query.
+| [site](#site)                                 | Determines which site(s) the products should be queried in.
+| [siteId](#siteid)                             | Determines which site(s) the products should be queried in, per the site’s ID.
+| [slug](#slug)                                 | Narrows the query results based on the products’ slugs.
+| [status](#status)                             | Narrows the query results based on the products’ statuses.
+| [title](#title)                               | Narrows the query results based on the products’ titles.
+| [trashed](#trashed)                           | Narrows the query results to only products that have been soft-deleted.
+| [type](#type)                                 | Narrows the query results based on the products’ types.
+| [typeId](#typeid)                             | Narrows the query results based on the products’ types, per the types’ IDs.
+| [uid](#uid)                                   | Narrows the query results based on the products’ UIDs.
+| [unique](#unique)                             | Determines whether only elements with unique IDs should be returned by the query.
+| [uri](#uri)                                   | Narrows the query results based on the products’ URIs.
+| [with](#with)                                 | Causes the query to return matching products eager-loaded with related elements.
 
 ### `after`
 
