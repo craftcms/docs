@@ -164,17 +164,17 @@ Replace `<FieldHandle>` with you actual field handle. For example if you field h
 If you want to allow multiple file uploads, add the `multiple` attribute and add `[]` to the end of the input name:
 
 ```markup
-<input type="file" name="fields[<FieldHanlde>][]" multiple>
+<input type="file" name="fields[<FieldHandle>][]" multiple>
 ```
 
 If you want to add files to a field with existing assets, you will need to first fetch the existing asset ids and add them to a hidden field:
 
 ```
-{% for asset in entry.<FieldHanlde> %}
-    <input type="hidden" name="fields[<FieldHanlde>][]" value="{{ asset.id }}">
+{% for asset in entry.<FieldHandle> %}
+    <input type="hidden" name="fields[<FieldHandle>][]" value="{{ asset.id }}">
 {% endfor %}
 
-<input type="file" name="fields[<FieldHanlde>][]" multiple>
+<input type="file" name="fields[<FieldHandle>][]" multiple>
 ```
 
 ## See Also

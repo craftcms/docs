@@ -42,6 +42,12 @@ Any plugin licenses that were purchased with the same email address as your Craf
 
 If you have a plugin license that isn’t showing up, go to Licenses → Claim License. You can enter its license key manually, or if you know the email address that was used for purchase, you can enter it in the “Claim licenses by email address” section. After verifying that you own the email address, any unclaimed licenses associated with that email address will be added to your account.
 
+### Safeguarding Plugin License Keys
+
+By default your plugin license key will be stored in the database and `project.yaml`. You may, however, move that license key to a custom PHP constant and set the key using the `$VARIABLE_NAME` syntax. 
+
+If you were to create a `MY_PLUGIN_KEY` environment variable, for example, you could then use `$MY_PLUGIN_KEY` in place of the key itself anywhere the plugin license key is required.
+
 ## Transferring Plugin Licenses
 
 To transfer a plugin license to someone else’s Craft ID account, log into your Craft ID account, and click on the license under Licenses → Plugins, and then click the “Release License” button to release it from your account. Then the other person will be able to claim the license for themselves from the Licenses → Claim License page of their Craft ID account.
