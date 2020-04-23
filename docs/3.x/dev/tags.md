@@ -19,6 +19,7 @@ Tag | Description
 [from](https://twig.symfony.com/doc/2.x/tags/from.html) | Imports macros from a template.
 [header](#header) | Sets an HTTP header on the response.
 [hook](#hook) | Invokes a template hook.
+[html](#html) | Registers arbitrary HTML code on the page.
 [if](https://twig.symfony.com/doc/2.x/tags/if.html) | Conditionally executes the nested template code.
 [import](https://twig.symfony.com/doc/2.x/tags/import.html) | Imports macros from a template.
 [include](https://twig.symfony.com/doc/2.x/tags/include.html) | Includes another template.
@@ -283,6 +284,45 @@ This tag gives plugins and modules an opportunity to hook into the template, to 
 ```
 
 See [Template Hooks](../extend/template-hooks.md) for details on plugins and modules can work with `{% hook %}` tags.
+
+## `html`
+
+The `{% html %}` tag can be used to register arbitrary HTML code on the page.
+
+```twig
+{% html %}
+    <p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>
+{% endhtml %}
+```
+
+::: tip
+The tag calls <api:craft\web\View::registerHtml()> under the hood, which can also be accessed via the global `view` variable.
+
+```twig
+{% set para = '<p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>' %}
+{% do view.registerHtml(para) %}
+```
+:::
+
+### Parameters
+
+The `{% html %}` tag supports the following parameters:
+
+#### Position
+
+You can specify where the HTML code should be injected into the page using one of these position keywords:
+
+| Keyword | Description
+| ------- | -----------
+| `at head` | In the page’s `<head>`
+| `at beginBody` | At the beginning of the page’s `<body>`
+| `at endBody` | At the end of the page’s `<body>`
+
+```twig
+{% html at head %}
+```
+
+By default, `at endBody` will be used.
 
 ## `js`
 
