@@ -163,7 +163,7 @@ There are also some cases where it’s _not_ a good idea to use them:
 
 * Don’t use them to cache static text; that will be more expensive than simply outputting the text.
 * You can’t use them outside of top-level `{% block %}` tags within a template that extends another.
-* The `{% cache %}` tag will only cache HTML, so using tags like [{% css %}](css.md) and [{% js %}](js.md) inside of it doesn’t make sense because they don’t actually output HTML therefore their output won’t be cached.
+* The `{% cache %}` tag will only cache HTML, so using tags like [{% css %}](#css) and [{% js %}](#js) inside of it doesn’t make sense because they don’t actually output HTML therefore their output won’t be cached.
 
     ```twig
     {## Bad: #}
@@ -186,7 +186,7 @@ There are also some cases where it’s _not_ a good idea to use them:
     ```
 
 
-Tip: The `{% cache %}` tag will detect if there are any ungenerated [image transform](../../image-transforms.md) URLs within it. If there are, it will hold off on caching the template until the next request, so those temporary image URLs won’t get cached.
+Tip: The `{% cache %}` tag will detect if there are any ungenerated [image transform](../image-transforms.md) URLs within it. If there are, it will hold off on caching the template until the next request, so those temporary image URLs won’t get cached.
 
 ## `css`
 
@@ -282,7 +282,7 @@ This tag gives plugins and modules an opportunity to hook into the template, to 
 {% hook 'my-custom-hook-name' %}
 ```
 
-See [Template Hooks](../../extend/template-hooks.md) for details on plugins and modules can work with `{% hook %}` tags.
+See [Template Hooks](../extend/template-hooks.md) for details on plugins and modules can work with `{% hook %}` tags.
 
 ## `js`
 
@@ -359,7 +359,7 @@ This tag works identically to the [namespace](filters.md#namespace) filter, exce
 
 ## `nav`
 
-This tag helps create a hierarchical navigation menu for entries in a [Structure section](../../sections-and-entries.md#section-types) or a [Category Group](../../categories.md).
+This tag helps create a hierarchical navigation menu for entries in a [Structure section](../sections-and-entries.md#section-types) or a [Category Group](../categories.md).
 
 
 ```twig
@@ -439,7 +439,7 @@ The `{% paginate %}` tag has the following parameters:
 
 #### Query
 
-The first thing you pass into the `{% paginate %}` tag is a query object (such as an [element query](../element-queries/README.md)), which defines all of the results that should be paginated. Use the `limit` parameter to define how many results should show up per page (100 by default).
+The first thing you pass into the `{% paginate %}` tag is a query object (such as an [element query](element-queries/README.md)), which defines all of the results that should be paginated. Use the `limit` parameter to define how many results should show up per page (100 by default).
 
 ::: warning
 This parameter needs to be an actual query object, not an array of pre-fetched results. So don’t call `all()` on the query before passing it in.
@@ -637,7 +637,7 @@ This tag will ensure that the current user is logged in with an account that has
 
 The user can have the permission either directly or through one of their user groups. If they don’t have it, a 403 (Forbidden) error will be served.
 
-See the [Users](../../users.md#permissions) page for a list of available permissions.
+See the [Users](../users.md#permissions) page for a list of available permissions.
 
 ## `switch`
 
