@@ -60,7 +60,7 @@ The supported values are:
 
 ### `limit`
 
-Limits the results to *X* assets.
+Limits the results to *X* assets. The default value is `100`. `null` will return all assets.
 
 ### `locale`
 

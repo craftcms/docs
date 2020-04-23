@@ -98,7 +98,7 @@ Indexes the results by a given property. Possible values include `'id'` and `'ti
 
 ### `limit`
 
-Limits the results to *X* entries.
+Limits the results to *X* entries. The default value is `100`. `null` will return all entries.
 
 ### `locale`
 

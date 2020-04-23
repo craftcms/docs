@@ -63,7 +63,7 @@ Indexes the results by a given property. Possible values include `'id'` and `'ti
 
 ### `limit`
 
-Limits the results to *X* categories.
+Limits the results to *X* categories. The default value is `100`. `null` will return all categories.
 
 ### `locale`
 
