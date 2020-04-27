@@ -44,6 +44,8 @@ If you wish to sell your plugin, choose a price point that makes sense. Here are
 
 You will also be required to pick a Renewal Price, which is the annual fee the Plugin Store will charge customers who wish to continue installing new updates, after the first year. Pick a Renewal Price that is around 20-50% of the initial Price. For example, if you are charging $99 for your plugin, your Renewal Price should be between $19-$49.
 
+Pixel & Tonic takes a 20% processing fee on all plugin sales; be sure to factor that into your plugin pricing.
+
 ::: warning
 If you initially submit your plugin as free, you will not be allowed to change it to commercial later. You can, however, give it a commercial [edition](plugin-editions.md) that offers extended functionality, as long as you don’t remove crucial functionality from the free edition.
 :::
