@@ -9,8 +9,17 @@ Another email could be “Admin Order Notification”, also attached to the defa
 ## Settings
 
 Before setting up emails for Craft Commerce, ensure that your Craft CMS installation is [properly configured for email delivery](https://craftcms.com/guides/why-doesnt-craft-send-emails#setting-up-email).
-
 You can set up your email gateway by navigating to Settings → Email in the control panel.
+
+All Commerce emails are sent via Craft’s queue, so emails are not sent in the same request as the status change. 
+By default, Craft runs pending queue jobs automatically when someone visits the control panel. You can change this with the [runQueueAutomatically](https://docs.craftcms.com/v3/config/config-settings.html#runqueueautomatically) config setting.
+If disabled, an alternate queue worker must be set up separately, either as an [always-running daemon](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/worker.md), or a cron job that runs the queue/run command every minute:
+
+```
+* * * * * /path/to/project/craft queue/run
+```
+
+This will ensure emails are delivered in a timely manner.
 
 By default, Commerce will send messages using Craft’s “System Email Address” and “Sender Name” found in Settings → Email Settings in the control panel. If you’d like to override this and provide your own from name/address, navigate to Commerce → System Settings → General Settings and enter your own “Status Email Address” and “From Name”.
 
