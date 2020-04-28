@@ -11,15 +11,9 @@ Another email could be “Admin Order Notification”, also attached to the defa
 Before setting up emails for Craft Commerce, ensure that your Craft CMS installation is [properly configured for email delivery](https://craftcms.com/guides/why-doesnt-craft-send-emails#setting-up-email).
 You can set up your email gateway by navigating to Settings → Email in the control panel.
 
-All Commerce emails are sent via Craft’s queue, so emails are not sent in the same request as the status change. 
-By default, Craft runs pending queue jobs automatically when someone visits the control panel. You can change this with the [runQueueAutomatically](https://docs.craftcms.com/v3/config/config-settings.html#runqueueautomatically) config setting.
-If disabled, an alternate queue worker must be set up separately, either as an [always-running daemon](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/worker.md), or a cron job that runs the queue/run command every minute:
-
-```
-* * * * * /path/to/project/craft queue/run
-```
-
-This will ensure emails are delivered in a timely manner.
+::: tip
+Commerce emails are sent in Craft queue jobs, so sending may be delayed depending on how your queue is configured to run. See the [runQueueAutomatically](https://docs.craftcms.com/v3/config/config-settings.html#runqueueautomatically) config setting and notes.
+:::
 
 By default, Commerce will send messages using Craft’s “System Email Address” and “Sender Name” found in Settings → Email Settings in the control panel. If you’d like to override this and provide your own from name/address, navigate to Commerce → System Settings → General Settings and enter your own “Status Email Address” and “From Name”.
 
@@ -39,8 +33,8 @@ Enter the name of this email as it will be shown when managing it in the control
 
 The subject of the email, which can be plain text or use Twig to set dynamic values. Two special variables are available:
 
-- `order` is a populated [Order object](api:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
+-   `order` is a populated [Order object](api:craft\commerce\elements\Order).
+-   `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
 
 `order` is the cart or order relevant to the notification. The “Email Subject” we enter, for example, might be:
 
@@ -58,8 +52,8 @@ If “Send to custom recipient” is selected, an email address can be entered. 
 
 Like the [Email Subject](#email-subject), this field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](api:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
+-   `order` is a populated [Order object](api:craft\commerce\elements\Order).
+-   `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
 
 `order` is the cart or order relevant to the notification. The “Recipient” we enter, for example, might be:
 
@@ -75,8 +69,8 @@ The Reply-To address for this email.
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](api:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
+-   `order` is a populated [Order object](api:craft\commerce\elements\Order).
+-   `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
 
 ### BCC’d Recipient
 
@@ -86,8 +80,8 @@ Separate multiple addresses with a comma (`,`).
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](api:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
+-   `order` is a populated [Order object](api:craft\commerce\elements\Order).
+-   `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
 
 ### CC’d Recipient
 
@@ -95,8 +89,8 @@ The CC addresses for this email. Separate multiple addresses with a comma (`,`).
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](api:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
+-   `order` is a populated [Order object](api:craft\commerce\elements\Order).
+-   `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
 
 ### HTML Email Template Path
 
@@ -104,8 +98,8 @@ The path to a template in your site’s `templates/` folder.
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](api:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
+-   `order` is a populated [Order object](api:craft\commerce\elements\Order).
+-   `orderHistory` is a populated [OrderHistory object](api:craft\commerce\models\OrderHistory).
 
 This allows you to have full design flexibility.
 
