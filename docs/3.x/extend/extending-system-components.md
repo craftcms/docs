@@ -97,7 +97,7 @@ Event::on(Product::class, Product::EVENT_DEFINE_BEHAVIORS, function(DefineBehavi
 });
 ```
 
-Now all the built-in products have a new method available to them that can be used in your templates or plugins.
+Now all the built-in products have the new methods available to them that can be used in your templates or plugins.
 
 ::: code
 ```twig
