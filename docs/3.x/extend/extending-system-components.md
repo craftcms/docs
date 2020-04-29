@@ -48,7 +48,7 @@ namespace mynamespace\mypluginhandle\behaviors;
 use craft\commerce\elements\Product;
 use yii\base\Behavior;
 
-class FinancableProductBehavior extends Behavior
+class FinanceableProductBehavior extends Behavior
 {
     /** @var Product */
     public $owner;
@@ -83,7 +83,7 @@ class FinancableProductBehavior extends Behavior
 Then attach this behavior to the products in your plugin's `init` method.
 
 ```php
-use mynamespace\mypluginhandle\behaviors\FinancableProductBehavior;
+use mynamespace\mypluginhandle\behaviors\FinanceableProductBehavior;
 
 use craft\commerce\elements\Product;
 use craft\events\DefineBehaviorsEvent;
