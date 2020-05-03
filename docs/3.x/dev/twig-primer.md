@@ -583,7 +583,7 @@ The template will continue to work with [include](https://twig.symfony.com/doc/2
 
 ### Macros
 
-Your templates can define **macros**, which are reusable functions that output HTML. These are especially useful when a single template needs to output similar HTML multiple times, but it’s not worth using an [include](#includes) because no other templates are going to need it.
+Your templates can define **macros**, which are reusable functions that output HTML. These are especially useful when a template needs to output similar HTML multiple times, but it’s not worth using an [include](#includes) because no other templates are going to need it.
 
 For example, let’s say you find yourself repeating the same HTML and Twig code for each the global nav items in your site layout template:
 
