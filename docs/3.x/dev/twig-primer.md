@@ -318,7 +318,7 @@ Arrays are ordered lists of nested values. They are delimited with left and righ
 You can loop over an array using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag:
 
 ```twig
-<ol class="todo"">
+<ol class="todo">
   {% for item in todoList %}
     <li>{{ item }}</li>
   {% endfor %}
@@ -406,7 +406,7 @@ You’ll frequently need to loop over multiple items in an [array](#arrays) or [
   'Manage content with Craft'
 ] %}
 
-<ol class="todo"">
+<ol class="todo">
   {% for item in todoList %}
     <li>{{ item }}</li>
   {% endfor %}
