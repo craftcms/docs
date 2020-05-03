@@ -22,7 +22,7 @@ There are three types of delimiters that Twig looks out for:
 
 Twig comments are wrapped in `{#` and `#}` delimiters. You can use them to leave little notes for yourself in the code.
 
-They are similar to HTML comments in that they won’t show up as rendered text in the browser. The difference is that they will never make it into the HTML source in the first place. If you View Source on a page in your browser, you’ll be able to see all of its HTML comments in there, but any Twig comments that may have been there will be nowhere to be found.
+They are similar to HTML comments in that they won’t show up as rendered text in the browser. The difference is that they will never make it into the HTML source in the first place.
 
 ```twig
 <!-- This will be visible in the HTML source -->
