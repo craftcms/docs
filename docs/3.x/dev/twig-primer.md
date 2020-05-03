@@ -346,6 +346,17 @@ To define an object, use left and right curly braces as the delimiters (`{` and 
 } %}
 ```
 
+If you need to create an object with a dynamic key, wrap the key in parentheses:
+
+```twig{5}
+{% set myKey = 'weight' %}
+{% set myValue = '90kg' %}
+
+{% set specs = {
+  (myKey): myValue
+} %}
+```
+
 Like arrays, you can loop over all the values in an object using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag:
 
 ```twig
