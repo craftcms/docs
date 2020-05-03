@@ -446,6 +446,10 @@ You can also include nested `{% elseif %}` tags (before the `{% else %}` tag, if
 {% endif %}
 ```
 
+::: tip
+If you want to switch between different parts of your template depending on the value of something, [switch](tags.md#switch) tags provide a simpler syntax than multiple `{% if %}` and `{% elseif %}` tags each comparing the same value over and over again.
+:::
+
 ## DRY templating
 
 Whenever you’re coding anything, it’s always a good practice to keep your code “DRY” (Don’t Repeat Yourself), to avoid writing and maintaining the same general logic or HTML in multiple places. This applies to Twig as well: each page on your website is likely to have the same header and footer, and the vast majority of your pages should be made up of shared, reusable components.
