@@ -501,7 +501,7 @@ This template is pretty worthless on its own, but it provides a framework for ne
 
 - It defines `head` and `body` **blocks**, which give nested templates a way to override the contents of the `<head>` and `<body>` elements.
 - It allows nested templates to define a `docTitle` variable, which will become the `<title>` value, and defaults to the site name if that’s not defined.
-- It gives nested templates the ability to set custom attributes on the `<body>` element, by defining a `bodyArguments` object. (We’re using the [attr](functions.md#attr) to convert that object into a list of HTML attributes.)
+- It gives nested templates the ability to set custom attributes on the `<body>` element, by defining a `bodyAttributes` object. (We’re using the [attr](functions.md#attr) function to convert that object into a list of HTML attributes.)
 
 With that template in place, you can now create a `hello-world.twig` template in your `templates/` folder, which **extends** your `_html5.twig` template:
 
@@ -560,14 +560,14 @@ Now you can include that from another template, passing in the `tipText` value:
 
 ### Embeds
 
-Embeds are similar to [includes](#includes), with a superpower: they can override templaet blocks within the included template. Going with our tip example, let’s say you want to make the content more customizable. you could do that by wrapping the `<p>` tag in a block:
+Embeds are similar to [includes](#includes), with a superpower: they can override template blocks within the included template. Going with our tip example, let’s say you want to make the content more customizable. you could do that by wrapping the `<p>` tag in a block:
 
 ```twig
 <div class="tip">
   <h6>Tip</h6>
   {% block content %}
     <p>{{ tipText }}</p>
-  {% endblock
+  {% endblock %}
 </div>
 ```
 
