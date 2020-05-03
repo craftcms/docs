@@ -14,9 +14,9 @@ All Twig code follows a basic pattern that separates it from the surrounding HTM
 
 There are three types of delimiters that Twig looks out for:
 
-- `{# comments #}`
-- `{% tags %}`
-- `{{ print statements }}`
+- `{#` – [Comments](#comments)
+- `{%` – [Tags](#tags)
+- `{{` – [Print statements](#print-statements)
 
 ### Comments
 
