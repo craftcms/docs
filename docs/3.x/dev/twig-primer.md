@@ -368,7 +368,7 @@ Like arrays, you can loop over all the values in an object using a [for](https:/
 </dl>
 ```
 
-You can also access object values directly by their key:
+You can also access object values directly by their keys, using either dot or array syntax:
 
 ```twig
 <dl class="specs">
@@ -376,7 +376,7 @@ You can also access object values directly by their key:
   <dd>{{ specs.length }} × {{ specs.width }} × {{ specs.height }}</dd>
 
   <dt>Weight</dt>
-  <dd>{{ specs.weight }}</dd>
+  <dd>{{ specs['weight'] }}</dd>
 </dl>
 ```
 
