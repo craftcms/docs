@@ -79,6 +79,7 @@ To output additional HTML code dynamically, use a print statement. They are wrap
 
 ::: tip
 Don’t place a print statement (or any other Twig code) within another print statement. See [Combining Strings](#combining-strings) to learn how to combine strings with other expressions.
+:::
 
 #### Auto-escaping
 
