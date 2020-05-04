@@ -208,7 +208,7 @@ Refer to the [Filters](filters.md) page for a full list of filters available to 
 
 ## Tests
 
-Tests are like functions that only return `true` or `false`, and are meant to reveal something about the nature of a value. For example, the [defined](https://twig.symfony.com/doc/2.x/tests/defined.html) test will return `true` or `false` depending on whether a variable or object property is defined:
+Tests are like functions that only return `true` or `false`, and are meant to reveal something about the nature of a value. For example, the [defined](https://twig.symfony.com/doc/2.x/tests/defined.html) test will return `true` or `false` depending on whether a variable or hash/object property is defined:
 
 ```twig
 {% if specs.weight is defined %}
@@ -235,7 +235,7 @@ There are six types of values you’ll be working with in Twig:
 - [Numbers](#numbers)
 - [Booleans](#booleans)
 - [Arrays](#arrays)
-- [Objects](#objects)
+- [Hashes](#hashes)
 - [Arrow functions](#arrow-functions)
 
 Let’s take a look at each of them in detail.
@@ -331,11 +331,11 @@ Note that you can’t output an array directly in a print statement, or combine 
 {{ todoList|join(', ') }}
 ```
 
-### Objects
+### Hashes
 
-Objects are similar to [arrays](#arrays), except that the values are indexed by custom **keys**.
+Hashes are similar to [arrays](#arrays), except that the values are indexed by custom **keys**.
 
-To define an object, use left and right curly braces as the delimiters (`{` and `}`). Separate your object’s key-value pairs with commas, like arrays, and separate the individual keys from the values with a colon.
+To define a hash, use left and right curly braces as the delimiters (`{` and `}`). Separate your hash’s key-value pairs with commas, like arrays, and separate the individual keys from the values with a colon.
 
 ```twig
 {% set specs = {
@@ -346,7 +346,7 @@ To define an object, use left and right curly braces as the delimiters (`{` and 
 } %}
 ```
 
-If you need to create an object with a dynamic key, wrap the key in parentheses:
+If you need to create a hash with a dynamic key, wrap the key in parentheses:
 
 ```twig{5}
 {% set myKey = 'weight' %}
@@ -357,7 +357,7 @@ If you need to create an object with a dynamic key, wrap the key in parentheses:
 } %}
 ```
 
-Like arrays, you can loop over all the values in an object using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag:
+Like arrays, you can loop over all the values in a hash using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag:
 
 ```twig
 <dl class="specs">
@@ -368,7 +368,7 @@ Like arrays, you can loop over all the values in an object using a [for](https:/
 </dl>
 ```
 
-You can also access object values directly by their keys, using either dot or array syntax:
+You can also access hash values directly by their keys, using either dot or array syntax:
 
 ```twig
 <dl class="specs">
@@ -408,7 +408,7 @@ For example, Craft’s [group](filters.md#group) filter will group all of the it
 
 ## Loops
 
-You’ll frequently need to loop over multiple items in an [array](#arrays) or [object](#objects). To do that, you’ll use a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag.
+You’ll frequently need to loop over multiple items in an [array](#arrays) or [hash](#hashes). To do that, you’ll use a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag.
 
 ```twig{8-10}
 {% set todoList = [
@@ -462,6 +462,8 @@ You can also include nested `{% elseif %}` tags (before the `{% else %}` tag, if
 If you want to switch between different parts of your template depending on the value of something, [switch](tags.md#switch) tags provide a simpler syntax than multiple `{% if %}` and `{% elseif %}` tags each comparing the same value over and over again.
 :::
 
+
+
 ## DRY templating
 
 Whenever you’re coding anything, it’s always a good practice to keep your code “DRY” (Don’t Repeat Yourself), to avoid writing and maintaining the same general logic or HTML in multiple places. This applies to Twig as well: each page on your website is likely to have the same header and footer, and the vast majority of your pages should be made up of shared, reusable components.
@@ -501,7 +503,7 @@ This template is pretty worthless on its own, but it provides a framework for ne
 
 - It defines `head` and `body` **blocks**, which give nested templates a way to override the contents of the `<head>` and `<body>` elements.
 - It allows nested templates to define a `docTitle` variable, which will become the `<title>` value, and defaults to the site name if that’s not defined.
-- It gives nested templates the ability to set custom attributes on the `<body>` element, by defining a `bodyAttributes` object. (We’re using the [attr](functions.md#attr) function to convert that object into a list of HTML attributes.)
+- It gives nested templates the ability to set custom attributes on the `<body>` element, by defining a `bodyAttributes` hash. (We’re using the [attr](functions.md#attr) function to convert that hash into a list of HTML attributes.)
 
 With that template in place, you can now create a `hello-world.twig` template in your `templates/` folder, which **extends** your `_html5.twig` template:
 
