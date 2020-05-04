@@ -53,6 +53,37 @@ Merging carts as manual process is better since the customer can decide what to 
 
 This change is also mitigated by the fact that the previous cart of the current user is now loaded as the current cart when calling `craft.commerce.carts.cart` automatically.
 
+## Order recalculations
+
+Previously, when an order saved, it would only recalculate the order if the order was still a cart (`Order::isCompleted`).
+
+Now that editing an order is possible, have made recalculation more sophisticated by introducing recalculation modes.
+
+There are now three order recalculation modes.
+
+### Recalculate All (`\craft\commerce\elements\Order::RECALCULATION_MODE_ALL`)
+
+This mode recalculates all line items (from their Purchasables), and all adjustments. This will also remove a line item if the Purchasable is out of stock. This is the default mode for carts.
+
+### None (`\craft\commerce\elements\Order::RECALCULATION_MODE_NONE`)
+
+This mode recalculates nothing. It does not change anything about the order.
+
+### Adjustments only (`\craft\commerce\elements\Order::RECALCULATION_MODE_ADJUSTMENTS_ONLY`)
+
+This mode recalculates all adjustments on the order. It does not change anything with line items.
+
+So now, when saving the order in your event listeners or plugins, you may want to check and set the mode before calling save to ensure that things behaves as you expect. e.g:
+
+```php
+$originalRecalculationMode = $order->getRecalculationMode();
+$this->setRecalculationMode(\craft\commerce\elements\Order::RECALCULATION_MODE_NONE);
+
+Craft::$app->elements->saveElement($order);
+// restore what it so the current code raising this event works correctly.
+$order->setRecalculationMode($originalRecalculationMode);
+```
+
 ## Twig template breaking changes
 
 Use the table below to update each breaking change in your Twig templates.
