@@ -25,7 +25,7 @@ Function | Description
 [floor](#floor) | Rounds a number down.
 [getenv](#getenv) | Returns the value of an environment variable.
 [gql](#gql) | Executes a GraphQL query against the full schema.
-[parseEnv](#parseenv) | Parses a stirng as an environment variable or alias.
+[parseEnv](#parseenv) | Parses a string as an environment variable or alias.
 [head](#head) | Outputs scripts and styles that were registered for the “head” position.
 [hiddenInput](#hiddeninput) | Outputs a hidden input.
 [include](https://twig.symfony.com/doc/2.x/functions/include.html) | Returns the rendered content of a template.
