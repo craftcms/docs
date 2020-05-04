@@ -55,32 +55,26 @@ This change is also mitigated by the fact that the previous cart of the current 
 
 ## Order recalculations
 
-Previously, when an order saved, it would only recalculate the order if the order was still a cart (`Order::isCompleted`).
+Previously, a saved order would only be recalculated if it was still a cart, meaning `Order::isCompleted` was `false`.
 
-Now that editing an order is possible, have made recalculation more sophisticated by introducing recalculation modes.
+The introduction of order editing required more sophisticated recalculation that can be achieved with three order recalculation modes.
 
-There are now three order recalculation modes.
+| Mode | Recalculates |
+| ---- | ------------ |
+| [Recalculate All](https://docs.craftcms.com/commerce/api/v3/craft-commerce-elements-order.html#constants) | All line items (from purchasables) and all adjustments.<br>Removes line item if purchasable is out of stock.<br>**Default mode for carts.** |
+| [Adjustments Only](https://docs.craftcms.com/commerce/api/v3/craft-commerce-elements-order.html#constants) | All order adjustments; doesn’t change line items.
+| [None](https://docs.craftcms.com/commerce/api/v3/craft-commerce-elements-order.html#constants) | Nothing; does not change anything about the order. |
 
-### Recalculate All (`\craft\commerce\elements\Order::RECALCULATION_MODE_ALL`)
 
-This mode recalculates all line items (from their Purchasables), and all adjustments. This will also remove a line item if the Purchasable is out of stock. This is the default mode for carts.
-
-### None (`\craft\commerce\elements\Order::RECALCULATION_MODE_NONE`)
-
-This mode recalculates nothing. It does not change anything about the order.
-
-### Adjustments only (`\craft\commerce\elements\Order::RECALCULATION_MODE_ADJUSTMENTS_ONLY`)
-
-This mode recalculates all adjustments on the order. It does not change anything with line items.
-
-So now, when saving the order in your event listeners or plugins, you may want to check and set the mode before calling save to ensure that things behaves as you expect. e.g:
+If you’re using event listeners or plugins to save orders, you may want to check and set the mode prior to saving to ensure recalculation behaves as expected. In this example, we’re avoiding any recalculation on our custom save by setting the recalculation mode to `Order::RECALCULATION_MODE_NONE`:
 
 ```php
 $originalRecalculationMode = $order->getRecalculationMode();
 $this->setRecalculationMode(\craft\commerce\elements\Order::RECALCULATION_MODE_NONE);
 
 Craft::$app->elements->saveElement($order);
-// restore what it so the current code raising this event works correctly.
+
+// restore original mode to avoid unexpected issues with other events, plugins, etc.
 $order->setRecalculationMode($originalRecalculationMode);
 ```
 
