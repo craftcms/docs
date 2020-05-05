@@ -20,13 +20,13 @@ Filter | Description
 [date_modify](https://twig.symfony.com/doc/2.x/filters/date_modify.html) | Modifies a date.
 [datetime](#datetime) | Formats a date with its time.
 [default](https://twig.symfony.com/doc/2.x/filters/default.html) | Returns the value or a default value if empty.
+[diff](#diff) | Returns the difference between arrays.
 [duration](#duration) | Returns a `DateInterval` object.
 [encenc](#encenc) | Encrypts and base64-encodes a string.
 [escape](https://twig.symfony.com/doc/2.x/filters/escape.html) | Escapes a string.
 [explodeClass](#explodeclass) | Converts a `class` attribute value into an array of class names.
 [explodeStyle](#explodestyle) | Converts a `style` attribute value into an array of property name/value pairs.
 [filesize](#filesize) | Formats a number of bytes into something else.
-[filterByValue](#filterbyvalue) | Filters an array by key/value pairs.
 [filter](#filter) | Filters the items in an array.
 [first](https://twig.symfony.com/doc/2.x/filters/first.html) | Returns the first character/item of a string/array.
 [format](https://twig.symfony.com/doc/2.x/filters/format.html) | Formats a string by replacing placeholders.
@@ -85,6 +85,7 @@ Filter | Description
 [upper](https://twig.symfony.com/doc/2.x/filters/upper.html) | Formats a string into “UPPER CASE”.
 [url_encode](https://twig.symfony.com/doc/2.x/filters/url_encode.html) | Percent-encodes a string as a URL segment or an array as a query string.
 [values](#values) | Returns all the values in an array, resetting its keys.
+[where](#where) | Filters an array by key/value pairs.
 [withoutKey](#withoutkey) | Returns an array without the specified key.
 [without](#without) | Returns an array without the specified element(s).
 
@@ -340,6 +341,20 @@ You can customize the timezone the time is output in, using the `timezone` param
 {# Output: 12/21/1990, 12:00 AM #}
 ```
 
+## `diff`
+
+Returns the difference between arrays, using [array_diff()](https://www.php.net/manual/en/function.array-diff.php).
+
+It will return a new array with any values that were in the initial array, which weren’t present in any of the
+arrays passed into the filter.
+
+```twig
+{% set arr1 = ['foo', 'bar'] %}
+{% set arr2 = ['bar', 'baz'] %}
+{% set arr3 = arr1|diff(arr2) %}
+{# Result: ['foo'] #}
+```
+
 ## `duration`
 
 Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object through <api:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
@@ -401,10 +416,6 @@ When an arrow function is passed, this works identically to Twig’s core [`filt
 {% set filteredArray = array|filter(v => v[0] == 'b') %}
 {# Result: ['bar', 'baz'] #}
 ```
-
-## `filterByValue`
-
-Runs an array through <api:craft\helpers\ArrayHelper::where()>.
 
 ## `group`
 
@@ -910,6 +921,10 @@ Returns an array of all the values in a given array, but without any custom keys
 {% set arr2 = arr1|values %}
 {# arr2 = ['Foo', 'Bar'] #}
 ```
+
+## `where`
+
+Runs an array through <api:craft\helpers\ArrayHelper::where()>.
 
 ## `without`
 
