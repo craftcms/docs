@@ -84,7 +84,7 @@ By doing that, Craft will return all of the elements related to the given elemen
 {% set relatedDrinks = craft.entries.section('drinks').relatedTo(drink).all() %}
 ```
 
-If you want to be a little more specific, `relatedTo` also accepts an object that contains the following properties:
+If you want to be a little more specific, `relatedTo` also accepts a [hash](dev/twig-primer.md#hashes) that contains the following properties:
 
 * `element`, `sourceElement`, or `targetElement`
 * `field` _(optional)_

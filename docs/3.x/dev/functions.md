@@ -25,7 +25,7 @@ Function | Description
 [floor](#floor) | Rounds a number down.
 [getenv](#getenv) | Returns the value of an environment variable.
 [gql](#gql) | Executes a GraphQL query against the full schema.
-[parseEnv](#parseenv) | Parses a stirng as an environment variable or alias.
+[parseEnv](#parseenv) | Parses a string as an environment variable or alias.
 [head](#head) | Outputs scripts and styles that were registered for the “head” position.
 [hiddenInput](#hiddeninput) | Outputs a hidden input.
 [include](https://twig.symfony.com/doc/2.x/functions/include.html) | Returns the rendered content of a template.
@@ -73,7 +73,7 @@ Passes a string through [Craft::getAlias()](api:yii\BaseYii::getAlias()), which 
 
 ## `attr`
 
-Generates a list of HTML attributes based on the given object, using <api:yii\helpers\BaseHtml::renderTagAttributes()>.
+Generates a list of HTML attributes based on the given [hash](twig-primer.md#hashes), using <api:yii\helpers\BaseHtml::renderTagAttributes()>.
 
 ```twig
 {% set myAttributes = {
@@ -166,7 +166,7 @@ Creates a new object instance based on a given class name or object configuratio
 {# Pass in a class name #}
 {% set cookie = create('yii\\web\\Cookie') %}
 
-{# Or a full object configuration array #}
+{# Or a full object configuration hash #}
 {% set cookie = create({
     class: 'yii\\web\\cookie',
     name: 'foo',
@@ -420,7 +420,7 @@ Similar to [url()](#url-path-params-scheme-mustshowscriptname), except _only_ fo
 The `siteUrl()` function has the following arguments:
 
 * **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or an object (e.g. `{foo:'1', bar:'2'}`).
+* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
 * **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
 * **`siteId`** – The ID of the site that the URL should point to. By default the current site will be used.
 
@@ -514,7 +514,7 @@ Returns a URL.
 The `url()` function has the following arguments:
 
 * **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or an object (e.g. `{foo:'1', bar:'2'}`).
+* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
 * **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
 * **`mustShowScriptName`** – If this is set to `true`, then the URL returned will include “index.php”, disregarding the <config:omitScriptNameInUrls> config setting. (This can be useful if the URL will be used by POST requests over Ajax, where the URL will not be shown in the browser’s address bar, and you want to avoid a possible collision with your site’s .htaccess file redirect.)
 
