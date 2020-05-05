@@ -150,6 +150,39 @@ If your customers have added multiple addresses, you can use radio buttons to se
 
 You may need to create custom routes to allow customers to manage these addresses, or introduce some logic in the browser to hide and show new address forms based on the type(s) of addresses you need.
 
+### 4. Updating an existing address
+
+It is possible to update an address that is in a cart. This can be done by passing the `id` part of the address model e.g. `shippingAddress[id]`.
+
+The example below shows how to update the shipping address that is attached to the cart.
+
+::: warning
+If the ID of the address belongs to a customer, the customer's address will also be updated at the same time. 
+:::
+
+```twig
+{% set cart = craft.commerce.carts.getCart() %}
+{% set address = cart.shippingAddress %}
+
+<form method="post">
+    <input type="hidden" name="action" value="commerce/cart/update-cart">
+    <input type="hidden" name="cartUpdatedNotice" value="Updated addresses.">
+    {{ csrfInput() }}
+    <input type="hidden" name="shippingAddress[id]" value="{{ address.id }}">
+    
+    <input type="text" name="shippingAddress[firstName]" value="{{ address.firstName }}">
+    <input type="text" name="shippingAddress[lastName]" value="{{ address.lastName }}">
+
+    ...
+    
+    <button type="submit">Update Address</button>
+</form>
+```
+
+::: warning
+If billing address ID and shipping address ID are the same on the cart. Updating the shipping address will have no effect as the billing address takes precedence.
+:::
+
 ## Summary
 
 When using the `update-cart` action, you may include both new shipping and billing address (properly nested under their respective keys, `shippingAddress[...]` and `billingAddress[...]`), or select existing addresses using one or the other of the `shippingAddressId` and `billingAddressId` params. In either example, you can include `shippingAddressSameAsBilling` or `billingAddressSameAsShipping` to synchronize the attached addresses.
