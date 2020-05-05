@@ -68,7 +68,7 @@ In this example, it’s important to note that `shippingAddressId` must either b
     <input type="hidden" name="cartUpdatedNotice" value="Updated Shipping Address.">
     {{ redirectInput('commerce/cart') }}
 
-    <input type="hidden" name="shippingAddressId" value="">
+    <input type="hidden" name="shippingAddressId" value=""> {# In addition to sending a blank string, you can omit this param from the form altogether #}
     <input type="text" name="shippingAddress[firstName]" value="">
     <input type="text" name="shippingAddress[lastName]" value="">
     <select name="shippingAddress[countryId]">
@@ -82,12 +82,14 @@ In this example, it’s important to note that `shippingAddressId` must either b
 </form>
 ```
 
+In the above example we also omitted the `shippingAddress[id]` param since we were adding a new address. If we were updating an existing address we would include it with the address ID set.
+
 ### 3. Select an existing address
 
 If your customers have added multiple addresses, you can use radio buttons to select the proper `shippingAddressId` and `billingAddressId`, or create a new address on the fly:
 
 ```twig
-{% set cart = craft.commerce.carts.cart %}
+{% set cart = craft.commerce.carts.cart %
 
 <form method="post">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
