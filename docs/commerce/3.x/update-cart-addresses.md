@@ -89,7 +89,7 @@ In the above example we also omitted the `shippingAddress[id]` param since we we
 If your customers have added multiple addresses, you can use radio buttons to select the proper `shippingAddressId` and `billingAddressId`, or create a new address on the fly:
 
 ```twig
-{% set cart = craft.commerce.carts.cart %
+{% set cart = craft.commerce.carts.cart %}
 
 <form method="post">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
