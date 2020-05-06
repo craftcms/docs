@@ -356,6 +356,14 @@ Encrypts and base64-encodes a string.
 
 Formats a number of bytes into something nicer.
 
+```twig
+{{ asset.size }}
+{# Output: 1944685 #}
+
+{{ asset.size|filesize }}
+{# Output: 1.945 MB #}
+```
+
 ## `filter`
 
 Filters elements of an array.
@@ -379,6 +387,12 @@ When an arrow function is passed, this works identically to Twig’s core [`filt
 ## `filterByValue`
 
 Runs an array through <api:craft\helpers\ArrayHelper::where()>.
+
+```twig
+{% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}
+{{ array|filterByValue(v => v == 'bar') }}
+{# Result: { 'foo': 'bar', 'bat': 'bar' } #}
+```
 
 ## `group`
 
@@ -508,9 +522,19 @@ That’s a reference to [shish kebabs](https://en.wikipedia.org/wiki/Kebab#Shish
 
 Lowercases the first character of a string.
 
+```twig
+{{ 'Foobar'|lcfirst }}
+{# Output: foobar #}
+```
+
 ## `literal`
 
-Runs a string through <api:craft\helpers\Db::escapeParam()>
+Runs a string through <api:craft\helpers\Db::escapeParam()>.
+
+```twig
+{{ 'SELECT id, * FROM table'|literal }}
+{# Output: SELECT id\, \* FROM table #}
+```
 
 ## `markdown` or `md`
 
@@ -805,6 +829,11 @@ You can customize the timezone the time is output in, using the `timezone` param
 
 Formats a date as a human-readable timestamp, via <api:craft\i18n\Formatter::asTimestamp()>.
 
+```twig
+{{ now|timestamp }}
+{# Output: 9:00:00 AM #}
+```
+
 ## `translate` or `t`
 
 Translates a message with [Craft::t()](api:yii\BaseYii::t()).
@@ -827,9 +856,20 @@ See [Static Message Translations](../static-translations.md) for a full explanat
 
 Capitalizes the first character of a string.
 
+```twig
+{{ 'foobar'|ucfirst }}
+{# Output: Foobar #}
+```
+
 ## `unique`
 
 Runs an array through [array_unique()](http://php.net/manual/en/function.array-unique.php).
+
+```twig
+{% set array = ['Larry', 'Darryl', 'Darryl'] %}
+{{ array|unique }}
+{# Result: ['Larry', 'Darryl'] #}
+```
 
 ## `values`
 
