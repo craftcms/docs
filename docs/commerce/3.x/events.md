@@ -1612,14 +1612,14 @@ The event that is triggered for registration of additional shipping methods.
 This example adds an instance of `MyShippingMethod` to the event object’s `shippingMethods` array:
 
 ```php
-use craft\events\RegisterComponentTypesEvent;
+use craft\commerce\events\RegisterAvailableShippingMethodsEvent;
 use craft\commerce\services\ShippingMethods;
 use yii\base\Event;
 
 Event::on(
     ShippingMethods::class,
     ShippingMethods::EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS,
-    function(RegisterComponentTypesEvent $event) {
+    function(RegisterAvailableShippingMethodsEvent $event) {
         $event->shippingMethods[] = MyShippingMethod::class;
     }
 );
