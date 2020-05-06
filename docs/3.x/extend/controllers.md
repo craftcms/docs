@@ -48,6 +48,41 @@ public function actionFoo()
 }
 ```
 
+## Requesting Your Controller Action
+
+There are several ways to access your controller action in a request.
+
+### POST `action` Param
+
+Provide an `action` param set to your controller’s action path:
+
+```bash
+curl -d "action=plugin-handle/controller/action" \
+  -X POST https://my-project.test/
+```
+
+### Custom Route
+
+Create your own endpoint for requests with a [custom URL rule](routing.md#advanced-routing-with-url-rules) that resolves to your controller action.
+
+For example, in `config/routes.php`:
+
+```php
+return [
+    'my/custom/endpoint' => 'plugin-handle/controller/action',
+];
+```
+
+### The `actions/<action-path>` Route
+
+By default, Craft makes an `actions/` route available for appending any valid action path. 
+
+This can be customized with the <config:actionTrigger> config setting.
+
+```bash
+curl -X POST https://my-project.test/actions/plugin-handle/controller/action
+```
+
 ## Handling Requests
 
 A controller action’s primary job is to handle an incoming web request, and determine the response. There are a few ways
