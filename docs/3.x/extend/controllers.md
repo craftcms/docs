@@ -63,7 +63,7 @@ curl -d "action=plugin-handle/controller/action" \
 
 ### Custom Route
 
-Create your own endpoint for requests with a [custom URL rule](routing.md#advanced-routing-with-url-rules) that resolves to your controller action.
+Create your own endpoint for requests with a [custom URL rule](/routing.md#advanced-routing-with-url-rules) that resolves to your controller action.
 
 For example, in `config/routes.php`:
 
