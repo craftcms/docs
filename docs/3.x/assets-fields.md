@@ -41,6 +41,10 @@ Subfolder paths defined by the “Upload Location” and “Default Upload Locat
 Any properties supported by the source element (the element that has the Assets field) can be used here.
 
 ::: tip
+If you want to include the entry’s ID or UID in a dynamic subfolder path, use `{sourceId}` or `{sourceUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the revision / draft’s.
+:::
+
+::: tip
 If you are creating the Assets field within a [Matrix field](matrix-fields.md), the source element is going to be the Matrix block, _not_ the element that the Matrix field is being created on.
 
 So if your Matrix field is attached to an entry, and you want to output the entry ID in your dynamic subfolder path, use `owner.id` rather than `id`.

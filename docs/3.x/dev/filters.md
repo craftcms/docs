@@ -302,6 +302,10 @@ You can customize the timezone the time is output in, using the `timezone` param
 {# Output: 12/21/1990 #}
 ```
 
+::: tip
+If the value passed to the date filter is `null`, it will return the current date by default.
+:::
+
 ## `datetime`
 
 Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) object, including the time of day.
