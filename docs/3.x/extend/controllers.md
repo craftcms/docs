@@ -75,9 +75,7 @@ return [
 
 ### The `actions/<action-path>` Route
 
-By default, Craft makes an `actions/` route available for appending any valid action path. 
-
-This can be customized with the <config:actionTrigger> config setting.
+By default, Craft makes an `actions/` route available for appending any valid action path. This can be customized with the <config:actionTrigger> config setting.
 
 ```bash
 curl -X POST https://my-project.test/actions/plugin-handle/controller/action
