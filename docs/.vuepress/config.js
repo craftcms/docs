@@ -13,6 +13,27 @@ module.exports = {
           scrollOffset: 0
         }
       }
+    ],
+    [
+      "container",
+      {
+        type: "tip",
+        defaultTitle: ""
+      }
+    ],
+    [
+      "container",
+      {
+        type: "warning",
+        defaultTitle: ""
+      }
+    ],
+    [
+      "container",
+      {
+        type: "danger",
+        defaultTitle: ""
+      }
     ]
   ],
   shouldPrefetch: () => false,

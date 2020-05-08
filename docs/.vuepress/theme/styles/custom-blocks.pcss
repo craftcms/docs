@@ -11,6 +11,22 @@
     }
   }
 
+  &.tip,
+  &.warning,
+  &.danger {
+    @apply relative;
+    padding-left: 3.75rem;
+
+    &:before {
+      content: "";
+      @apply block absolute top-0 left-0 mt-4 ml-4;
+      width: 1.75rem;
+      height: 1.75rem;
+      background: transparent url("/icons/icon-tip.svg") no-repeat 0 0;
+      background-size: contain;
+    }
+  }
+
   &.tip {
     background-color: #fafbfe;
     border: 1px solid #f1f5fd;
@@ -18,9 +34,15 @@
   }
 
   &.warning {
+    &:before {
+      background: transparent url("/icons/icon-warning.svg") no-repeat 0 0;
+    }
   }
 
   &.danger {
+    &:before {
+      background: transparent url("/icons/icon-warning.svg") no-repeat 0 0;
+    }
   }
 
   &.details {
