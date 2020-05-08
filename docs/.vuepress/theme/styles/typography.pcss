@@ -1,0 +1,56 @@
+.theme-default-content {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-medium;
+
+    &:first-child {
+      //margin-top: -1.5rem;
+    }
+
+    &:hover .header-anchor {
+      @apply opacity-100;
+    }
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply mt-8 mb-4;
+  }
+
+  h2 code {
+    @apply text-lg;
+  }
+
+  h3 code {
+    @apply text-lg;
+  }
+
+  p,
+  pre,
+  .custom-block,
+  ul,
+  ol {
+    @apply my-4;
+  }
+
+  ul ul,
+  ol ul,
+  ol ol {
+    @apply my-0;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+}
