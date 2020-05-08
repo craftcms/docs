@@ -120,6 +120,11 @@ When an author is editing an entry from a section with custom preview targets, t
 
 The targets will also be available within Live Preview.
 
+#### Preparing external front ends for Live Preview
+
+If your site’s front end lives outside of Craft, for example as a Vue or React app, you will need to have it check for the existence of a `token` query string parameter (or whatever your <config:tokenParam> config setting is set to). If it’s in the URL, then you will need to pass that same token in the Craft API request that loads the page content. This token will cause the API request to respond with the correct content depending on what’s actually being edited (the source entry or a draft).
+
+You can pass the token via either a `token` query string parameter, or an `X-Craft-Token` header on the API request. 
 
 ## Entry Types
 
