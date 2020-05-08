@@ -126,6 +126,8 @@ If your site’s front end lives outside of Craft, for example as a Vue or React
 
 You can pass the token via either a `token` query string parameter, or an `X-Craft-Token` header on the API request. 
 
+Separately, you should also check for a `x-craft-live-preview` query string parameter, which will tell you the request is specifically a Live Preview request within the control panel (as opposed to a full-page preview via the “Share” button). If this is set, then you should include [iframeResizer.contentWindow.min.js](https://raw.github.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js) from the page. That script is provided by the [iFrame Resizer](http://davidjbradshaw.github.io/iframe-resizer/) library, and aids in cross-domain preview iframe resizing. (The full library is also available [on npm](https://www.npmjs.com/package/iframe-resizer).)
+
 ## Entry Types
 
 Both Channel and Structure sections let you define multiple types of entries using Entry Types.
