@@ -96,13 +96,13 @@ With the above Entry URI Format, a top-level entry’s URI might end up as `docs
 
 ### Preview Targets
 
-Your entry content will likely show up in places other than just their main URLs. For example, the Blog index page will show excerpts of recent blog posts.
+If you’re using Craft Pro, your section can have one or more **preview targets**, which are URLs of pages that your entries will show up on, making it possible for authors to preview entries as they are writing them in the control panel.
 
-With Craft Pro, your sections will have a “Preview Targets” setting, where you can list additional places your entries will show up on your site, so that authors can quickly preview entries everywhere they appear.
+Like entry URI formats, these preview target URLs are mini Twig templates that can contain entry properties and other dynamic values.
 
-Each preview target has Name and a URI. Give each of your targets a clear name that authors will understand, such as “Homepage” or “Blog Index”. Set the URI to the actual URI you want to load when the target is selected.
+If entries in your section have their own URLs, then you can create a preview target for the entry’s primary URL using the URL template, `{url}`.
 
-The URI is a mini Twig template (just like Entry URI Formats), so you can make it dynamic if you need to. For example, if you are creating an “Archive” preview target, where the URI needs to include the year the entry was published, you can enter `archive/{postDate|date('Y')}`.  
+Create additional preview targets for any other areas the entry might show up, such as `news`, or `archive/{postDate|date('Y')}`. If the entries show up on the homepage, you can create a preview target with a blank URL.
 
 ![A section’s Preview Targets setting.](./images/preview-targets.png)
 
