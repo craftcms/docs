@@ -125,6 +125,7 @@ function renderExternal(h, to, text) {
 a.sidebar-link {
   @apply px-2 py-1 font-normal inline-block w-full box-border;
   line-height: 1.4;
+  transition: all 0.25s ease-out;
 
   .sidebar-group & {
     @apply pl-4;
