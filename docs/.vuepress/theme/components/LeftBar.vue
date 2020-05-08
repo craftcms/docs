@@ -121,7 +121,7 @@
 
     <slot name="bottom" />
 
-    <div id="bottom" class="left-bar-bottom absolute bottom-0 w-full">
+    <div id="bottom" class="left-bar-bottom absolute bottom-0 w-full border-t">
       <div class="language p-4">
         <span
           class="inline-block relative"
@@ -148,9 +148,9 @@
 
 <style lang="postcss">
 .left-bar-links {
-  max-height: 100vh;
+  max-height: 85vh;
   overflow-y: auto;
-  padding-bottom: 20vh;
+  padding-bottom: 10vh;
 }
 
 .doc-set {
@@ -166,8 +166,7 @@
 }
 
 .left-bar-bottom {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(2px);
+  @apply bg-white;
 }
 
 .home {
