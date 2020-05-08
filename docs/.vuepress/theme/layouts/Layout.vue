@@ -29,17 +29,6 @@
             "
           />
         </div>
-        <div
-          id="links"
-          class="h-full w-64 absolute right-0 top-0 flex items-center"
-        >
-          <a
-            href="https://craftcms.com/knowledge-base"
-            rel="noopener"
-            target="_blank"
-            >Knowledge Base</a
-          >
-        </div>
       </div>
       <Page :sidebar-items="sidebarItems">
         <template #top>
