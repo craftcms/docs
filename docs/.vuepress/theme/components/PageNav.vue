@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="right-nav w-64 absolute right-0 top-0">
-      <div class="fixed mt-8">
+      <div class="fixed mt-24">
         <SidebarLinks
           :depth="0"
           :items="headingItems"
