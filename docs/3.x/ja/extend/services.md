@@ -78,7 +78,7 @@ Craft には、2つの一般的なモデル操作メソッドがあります。
 
 クラス指向メソッドの制御フロー図です。
 
-!\[An example flow for a saveRecipe() method.\](../images/save-component--class.png =612x1176)
+![An example flow for a saveRecipe() method.](../../images/save-component--class.png =612x1176)
 
 ::: tip
 操作が複数データベースの変更を含む場合、データベーストランザクションで操作をラップする必要があるだけです。
@@ -118,7 +118,7 @@ public function saveRecipe(Recipe $recipe, $runValidation = true)
 
 インターフェース指向メソッドの制御フロー図です。
 
-!\[An example flow for a saveIngredient() method.\](../images/save-component--interface.png =660x1488)
+![An example flow for a saveIngredient() method.](../../images/save-component--interface.png =660x1488)
 
 完全なコードの実例は、次のようになります。
 
