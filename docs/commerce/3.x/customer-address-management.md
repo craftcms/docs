@@ -11,7 +11,7 @@ See [the Customer model](api:craft\commerce\models\Customer) to learn about the 
 ## Get all the current customer’s addresses
 
 ```twig
-{% set addresses = craft.commerce.customer.addresses %}
+{% set addresses = craft.commerce.customers.customer.addresses %}
 {% for address in addresses %}
     {{ address.firstName }}<br/>
     {# ... #}
@@ -23,7 +23,7 @@ See <api:craft\commerce\models\Address> to learn about the fields available on a
 ## Get a current customer’s address by its ID
 
 ```twig
-{% set address = craft.commerce.customer.getAddressById(id) %}
+{% set address = craft.commerce.customers.customer.getAddressById(id) %}
 ```
 
 ## Creating or updating a customer address
