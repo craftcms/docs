@@ -1,9 +1,10 @@
 import Vue from "vue";
-import EditionComparison from "../global-components/EditionComparison.vue";
+import EditionComparison from "../global-components/EditionComparison";
+import ContentContainer from "./ContentContainer";
 
-export default { title: "Edition Comparison" };
+export default { title: "global-components/Edition Comparison" };
 
-export const asAComponent = () => ({
-  components: { EditionComparison },
-  template: "<edition-comparison />"
+export const Default = () => ({
+  components: { EditionComparison, ContentContainer },
+  template: `<ContentContainer :vertical-center="false"><EditionComparison /></ContentContainer>`
 });

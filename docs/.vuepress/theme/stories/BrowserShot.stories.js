@@ -1,16 +1,15 @@
 import { withKnobs, number, text, boolean } from "@storybook/addon-knobs";
-import BrowserShot from "../global-components/BrowserShot.vue";
-
-import "../styles/index.styl";
+import ContentContainer from "./ContentContainer";
+import BrowserShot from "../global-components/BrowserShot";
 
 export default {
-  title: "BrowserShot",
+  title: "global-components/BrowserShot",
   decorators: [withKnobs],
   component: BrowserShot
 };
 
-export const Default = () => ({
-  components: { BrowserShot },
+export const External = () => ({
+  components: { BrowserShot, ContentContainer },
   props: {
     url: { default: text("URL", "https://google.com") },
     link: { default: boolean("Use Anchor Link?", true) },
@@ -22,10 +21,52 @@ export const Default = () => ({
   },
   methods: {},
   template: `
-    <div class="content" style="display: flex; align-items: center; height: 100vh; max-width: 740px; margin: 0 auto;">
+    <ContentContainer>
       <BrowserShot :url="url" :link="link" :clean-url="cleanUrl" :caption="caption" :max-height="maxHeight">
         <img src="https://placekitten.com/900/500" alt="adorable kitten image" />
       </BrowserShot>
-    </div>
+    </ContentContainer>
+  `
+});
+
+export const NoLink = () => ({
+  components: { BrowserShot, ContentContainer },
+  props: {
+    url: { default: text("URL", "https://google.com") },
+    link: { default: boolean("Use Anchor Link?", false) },
+    cleanUrl: { default: boolean("Clean URL?", true) },
+    caption: {
+      default: text("Caption", "This is an optional caption for the image.")
+    },
+    maxHeight: { default: number("Max Height", 0) }
+  },
+  methods: {},
+  template: `
+    <ContentContainer>
+      <BrowserShot :url="url" :link="link" :clean-url="cleanUrl" :caption="caption" :max-height="maxHeight">
+        <img src="https://placekitten.com/900/500" alt="adorable kitten image" />
+      </BrowserShot>
+    </ContentContainer>
+  `
+});
+
+export const WithMaxHeight = () => ({
+  components: { BrowserShot, ContentContainer },
+  props: {
+    url: { default: text("URL", "https://google.com") },
+    link: { default: boolean("Use Anchor Link?", false) },
+    cleanUrl: { default: boolean("Clean URL?", true) },
+    caption: {
+      default: text("Caption", "This is an optional caption for the image.")
+    },
+    maxHeight: { default: number("Max Height", 350) }
+  },
+  methods: {},
+  template: `
+    <ContentContainer>
+      <BrowserShot :url="url" :link="link" :clean-url="cleanUrl" :caption="caption" :max-height="maxHeight">
+        <img src="https://placekitten.com/900/500" alt="adorable kitten image" />
+      </BrowserShot>
+    </ContentContainer>
   `
 });

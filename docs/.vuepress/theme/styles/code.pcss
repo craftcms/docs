@@ -2,7 +2,10 @@
   code {
     @apply py-1 px-2 m-0 rounded;
     font-size: 0.8rem;
-    background-color rgba(27,31,35,0.05) .token {
+    background-color: rgba(27, 31, 35, 0.05);
+    color: #476582;
+
+    .token {
       &.deleted {
         color: #ec5975;
       }
@@ -16,6 +19,7 @@
   pre,
   pre[class*="language-"] {
     @apply py-3 px-4 rounded overflow-auto leading-snug;
+    background-color: #f1f5f8;
 
     code {
       @apply p-0 rounded-none bg-transparent;
@@ -24,18 +28,30 @@
 
   /* make sure fenced code blocks look nice in tips */
   .custom-block {
-    pre,
-    pre[class*="language-"] {
-      background-color: rgba(27, 31, 35, 0.05);
+    div[class*="language-"] {
+      @apply mb-5;
+      margin-top: -0.25rem;
+      background-color: #f1f5f8;
     }
   }
 }
 
 div[class*="language-"] {
-  @apply relative rounded;
+  @apply relative rounded my-4;
+  background-color: #f1f5f8;
 
   .highlight-lines {
     @apply pt-3 absolute select-none top-0 left-0 w-full leading-snug;
+
+    .highlighted {
+      color: rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  pre,
+  pre[class*="language-"] {
+    @apply bg-transparent relative;
+    z-index: 1;
   }
 
   &:before {
@@ -44,6 +60,26 @@ div[class*="language-"] {
     top: 0.8em;
     right: 1em;
     color: rgba(0, 0, 0, 0.25);
+  }
+
+  &:not(.line-numbers-mode) {
+    .line-numbers-wrapper {
+      @apply hidden;
+    }
+  }
+
+  &.line-numbers-mode {
+    .highlight-lines {
+      .highlighted {
+        @apply relative;
+
+        &:before {
+          content: " ";
+          z-index: 3;
+          @apply absolute left-0 top-0 block h-full;
+        }
+      }
+    }
   }
 }
 
@@ -90,5 +126,3 @@ div[class~="language-bash"]:before {
 div[class~="language-php"]:before {
   content: "php";
 }
-
-@import "~prismjs/themes/prism-solarizedlight.css";

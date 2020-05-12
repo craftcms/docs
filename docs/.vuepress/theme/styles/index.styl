@@ -1,28 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@require './fonts.pcss'
-@require './config'
-@require './code'
-@require './custom-blocks'
-@require './arrow'
-@require './wrapper'
-@require './toc'
-
-@require './index.pcss'
-@require './typography.pcss'
-
-.navbar
-  position fixed
-  z-index 20
-  top 0
-  left 0
-  right 0
-  height $navbarHeight
-  background-color #fff
-  box-sizing border-box
-  border-bottom 1px solid $borderColor
+@require './config.styl'
+@require './code.styl'
+@require './custom-blocks.styl'
+@require './arrow.styl'
+@require './wrapper.styl'
+@require './toc.styl'
 
 .sidebar-mask
   position fixed
@@ -68,23 +49,9 @@
   img
     max-width 100%
 
-// a
-//   font-weight 500
-//   color $accentColor
-//   text-decoration none
-
 p a code
   font-weight 400
   color $accentColor
-
-// refine clunky `kbd` default
-kbd
-  background #eee
-  border-radius 0.15rem
-  border solid 1px #ddd
-  border-bottom solid 3px #ddd
-  padding 0.15em 0.375em
-  font-size 0.8rem
 
 blockquote
   font-size 1rem
@@ -96,41 +63,8 @@ blockquote
   & > p
     margin 0
 
-ul, ol
-  padding-left 1.2em
-
 strong
   font-weight 600
-
-// h1, h2, h3, h4, h5, h6
-//   font-weight 600
-//   line-height 1.25
-
-//   {$contentClass}:not(.custom) > &
-//     margin-top (0.5rem - $navbarHeight)
-//     padding-top ($navbarHeight + 1rem)
-//     margin-bottom 0
-
-//     &:first-child
-//       margin-top -1.5rem
-//       margin-bottom 1rem
-
-//       + p, + pre, + .custom-block
-//         margin-top 2rem
-
-//   &:hover .header-anchor
-//     opacity: 1
-
-h1
-  font-size 2.2rem
-
-h2
-  font-size 1.65rem
-  padding-bottom .3rem
-  border-bottom 1px solid $borderColor
-
-h3
-  font-size 1.35rem
 
 a.header-anchor
   font-size 0.85em

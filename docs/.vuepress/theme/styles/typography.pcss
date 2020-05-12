@@ -32,12 +32,29 @@
     @apply text-lg;
   }
 
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-2xl pb-1 border-b;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
   p,
   pre,
   .custom-block,
   ul,
   ol {
     @apply my-4;
+  }
+
+  ul,
+  ol {
+    @apply pl-5;
   }
 
   ul ul,
@@ -52,5 +69,36 @@
 
   ol {
     @apply list-decimal;
+  }
+
+  kbd {
+    background-color: #eee;
+    border-radius: 0.15rem;
+    border: 1px solid #ddd;
+    border-bottom: 3px solid #ddd;
+    padding: 0.15em 0.375em;
+    font-size: 0.8rem;
+  }
+
+  dl {
+    @apply flex py-5 px-6 leading-relaxed rounded;
+    flex-flow: row wrap;
+    background: #f1f5f8;
+
+    dt,
+    dd {
+      @apply mt-1 mx-0 mb-0;
+      word-wrap: break-word;
+    }
+
+    dt {
+      @apply pr-4 box-border flex justify-end font-medium;
+      align-items: top;
+      width: 9rem;
+    }
+
+    dd {
+      width: calc(100% - 9rem);
+    }
   }
 }

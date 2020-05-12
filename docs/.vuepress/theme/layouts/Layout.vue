@@ -15,7 +15,10 @@
     />
     <div id="main" class="relative ml-64">
       <div id="top-bar" class="block h-12 w-full content-center relative">
-        <div id="search" class="block max-w-screen-md h-full flex items-center px-10">
+        <div
+          id="search"
+          class="block max-w-screen-md h-full flex items-center px-10"
+        >
           <!-- <input
             ref="searchInput"
             type="search"
@@ -74,7 +77,9 @@
 </style>
 
 <script>
-import Topbar from "../components/Topbar";
+import "../styles/index.pcss";
+import "prismjs/themes/prism-solarizedlight.css";
+
 import Page from "../components/Page";
 import Sidebar from "../components/Sidebar";
 import SidebarLinks from "../components/SidebarLinks";
@@ -90,7 +95,6 @@ export default {
     Page,
     Sidebar,
     SidebarLinks,
-    Topbar,
     LeftBar,
     SearchBox
   },

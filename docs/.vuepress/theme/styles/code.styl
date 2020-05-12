@@ -1,44 +1,9 @@
-{$contentClass}
-  code
-    color lighten($textColor, 20%)
-    background-color rgba(27,31,35,0.05)
-
-{$contentClass}
-  pre, pre[class*="language-"]
-    margin 0.85rem 0
-    background-color $codeBgColor
-
 div[class*="language-"]
-  background-color $codeBgColor
-  .highlight-lines
-    .highlighted
-      background-color darken($codeBgColor, 5%)
-  pre, pre[class*="language-"]
-    background transparent
-    position relative
-    z-index 1
-  &::before
-    position absolute
-    z-index 3
-    top 0.8em
-    right 1em
-    font-size 0.75rem
-    color rgba(255, 255, 255, 0.4)
-  &:not(.line-numbers-mode)
-    .line-numbers-wrapper
-      display none
   &.line-numbers-mode
     .highlight-lines .highlighted
         position relative
         &:before
-          content ' '
-          position absolute
-          z-index 3
-          left 0
-          top 0
-          display block
           width $lineNumbersWrapperWidth
-          height 100%
           background-color rgba(0, 0, 0, 66%)
     pre
       padding-left $lineNumbersWrapperWidth + 1 rem
@@ -69,3 +34,4 @@ div[class*="language-"]
       border-radius 6px 0 0 6px
       border-right 1px solid rgba(0, 0, 0, 66%)
       background-color $codeBgColor
+

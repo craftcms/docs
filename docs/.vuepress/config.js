@@ -94,11 +94,7 @@ module.exports = {
     }
   },
   postcss: {
-    plugins: [
-      require("postcss-nested"),
-      require("tailwindcss"),
-      require("autoprefixer")
-    ]
+    plugins: require("../../postcss.config.js").plugins
   }
 };
 

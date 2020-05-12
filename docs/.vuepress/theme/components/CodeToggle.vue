@@ -5,7 +5,8 @@
         <a
           :class="{ active: language === selectedLanguage }"
           @click="setLanguage(language)"
-        >{{ getLanguageLabel(language) }}</a>
+          >{{ getLanguageLabel(language) }}</a
+        >
       </li>
     </ul>
     <div v-for="(language, index) in languages" :key="index">
@@ -14,50 +15,58 @@
   </div>
 </template>
 
-<style lang="stylus">
+<style lang="postcss">
 .code-toggle {
-  margin: 0.85rem 0;
+  @apply w-full mx-0 my-4;
 
-  div[class*='language-'] {
-    border-radius: 0 0 6px 6px;
+  div[class*="language-"] {
+    @apply rounded-t-none rounded-b my-0;
 
     &:before {
-      display: none;
+      @apply hidden;
     }
   }
 
-  & > div > div[class*='language-'] {
-    & > pre, & > pre[class*='language-'] {
-      margin: 0;
+  & > div > div[class*="language-"] {
+    & > pre,
+    & > pre[class*="language-"] {
+      @apply m-0;
     }
   }
 }
 
 ul.code-language-switcher {
-  border-radius: 6px 6px 0 0;
-  height: $navbarHeight;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  margin: 0;
-  padding: 0.7rem 1.5rem;
-  font-size: 15px;
-  line-height: 1.4;
+  @apply flex flex-row rounded-t box-border m-0 px-4 py-2;
+  background: #e1e9f0;
   z-index: 2;
-  background: darken($blockColor, 5%);
 
   li {
-    margin: 0 5px 0 0;
-    padding: 0;
-    list-style-type: none;
+    @apply p-0 mr-1 list-none;
 
     a {
-      display: block;
-      padding: 0 0.625rem;
-      line-height: 2.2rem;
-      cursor: pointer;
-      border-radius: 4px;
-      color: lighten($textColor, 20%);
+      @apply block font-medium px-3 cursor-pointer rounded leading-relaxed;
+      font-size: 15px;
+      color: #476582;
+      padding-top: 0.2rem;
+      padding-bottom: 0.2rem;
+    }
+  }
+}
+
+.theme-default-content {
+  ul.code-language-switcher {
+    @apply mb-0;
+  }
+}
+</style>
+
+<style lang="stylus">
+
+ul.code-language-switcher {
+
+  li {
+
+    a {
 
       &:hover {
         text-decoration: none !important;
