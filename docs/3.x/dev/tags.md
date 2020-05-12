@@ -49,6 +49,8 @@ This tag will cache a portion of your template, which can improve performance fo
 {% endcache %}
 ```
 
+The cache tag is for caching output, not logic. Take care not to cache `{{ csrfInput() }}`, form fields, or parts of templates where dynamic output is expected.
+
 Warning: If you’re suffering from abnormal page load times, you may be experiencing a suboptimal hosting environment. Please consult a specialist before trying `{% cache %}`. `{% cache %}` is not a substitute for fast database connections, efficient templates, or moderate query counts. Possible side effects include stale content, excessively long-running background tasks, stuck tasks, and in rare cases, death. Ask your hosting provider if `{% cache %}` is right for you.
 
 ### Parameters
