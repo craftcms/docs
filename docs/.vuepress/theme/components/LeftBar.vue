@@ -5,19 +5,14 @@
         :to="`/`"
         ref="siteName"
         class="site-name text-slate font-bold px-4"
-        >{{ $siteTitle }}</RouterLink
-      >
+      >{{ $siteTitle }}</RouterLink>
     </div>
 
     <slot name="top" />
 
     <div id="mid">
       <div class="doc-sets">
-        <RouterLink
-          :to="`/`"
-          class="doc-set home"
-          :class="{ active: set === false }"
-        >
+        <RouterLink :to="`/`" class="doc-set home" :class="{ active: set === false }">
           <span class="back">
             <svg
               width="7"
@@ -33,10 +28,7 @@
             </svg>
           </span>
 
-          <span
-            class="mr-2 inline-block relative home-icon"
-            style="top: 2px; left: -1px;"
-          >
+          <span class="mr-2 inline-block relative home-icon" style="top: 2px; left: -1px;">
             <svg
               width="18"
               height="16"
@@ -72,27 +64,21 @@
           <span>{{ set.title }}</span>
         </RouterLink>
       </div>
-      <div
-        v-if="set"
-        class="px-4 mt-2 pb-4 flex w-full justify-between items-center"
-      >
+      <div v-if="set" class="px-4 mt-2 pb-4 flex w-full justify-between items-center">
         <RouterLink :to="set.defaultUri" class="flex items-center">
           <span class="icon mr-3 inline-block">
             <img :src="set.icon" width="28" height="28" alt />
           </span>
-          <div class="current-doc-set text-slate leading-none font-medium">
-            {{ set.title }}
-          </div>
+          <div class="current-doc-set text-slate leading-none font-medium">{{ set.title }}</div>
         </RouterLink>
         <div v-if="set.versions" class="relative">
           <select
             name
             class="doc-set-version border pr-5 py-1 rounded-md leading-none block flex content-center items-center version-select appearance-none font-medium text-sm bg-transparent cursor-pointer"
-            id
+            @change="handleVersionSelect($event)"
+            v-model="version"
           >
-            <option v-for="version in set.versions" :value="version">
-              {{ version }}
-            </option>
+            <option v-for="version in set.versions">{{ version }}</option>
           </select>
 
           <svg
@@ -111,22 +97,14 @@
         </div>
       </div>
 
-      <SidebarLinks
-        class="left-bar-links"
-        :depth="0"
-        :items="items"
-        :sidebar-depth="0"
-      />
+      <SidebarLinks class="left-bar-links" :depth="0" :items="items" :sidebar-depth="0" />
     </div>
 
     <slot name="bottom" />
 
     <div id="bottom" class="left-bar-bottom absolute bottom-0 w-full border-t">
-      <div class="language p-4">
-        <span
-          class="inline-block relative"
-          style="top: 2px; margin-right: 0.125rem;"
-        >
+      <div v-if="set && set.locales" class="language p-4">
+        <span class="inline-block relative" style="top: 2px; margin-right: 0.125rem;">
           <svg
             width="16"
             height="16"
@@ -228,8 +206,14 @@ export default {
   props: ["items", "set", "language", "version"],
   components: { SidebarLinks },
   methods: {
-    selectSet(set) {},
-    selectVersion(version) {}
+    handleVersionSelect(event) {
+      const selected = event.target.value;
+      this.$emit("selectVersion", selected);
+    },
+    handleLanguageSelect(event) {
+      const selected = event.target.value;
+      this.$emit("selectLanguage", selected);
+    }
   }
 };
 </script>

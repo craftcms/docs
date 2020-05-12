@@ -18,8 +18,6 @@ import PageEdit from "./PageEdit";
 import PageNav from "./PageNav";
 import PageFooter from "./PageFooter";
 
-// https://github.com/vuejs/vuepress/issues/1173
-
 export default {
   name: "Page",
   components: { PageEdit, PageNav, PageFooter },

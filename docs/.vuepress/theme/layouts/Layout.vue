@@ -10,13 +10,12 @@
       :version="activeVersion"
       :items="sidebarItems"
       @toggle-sidebar="toggleSidebar"
+      @selectVersion="handleVersionUpdate"
+      @selectLanguage="handleLanguageUpdate"
     />
     <div id="main" class="relative ml-64">
       <div id="top-bar" class="block h-12 w-full content-center relative">
-        <div
-          id="search"
-          class="block max-w-screen-md h-full flex items-center px-10"
-        >
+        <div id="search" class="block max-w-screen-md h-full flex items-center px-10">
           <!-- <input
             ref="searchInput"
             type="search"
@@ -98,7 +97,8 @@ export default {
 
   data() {
     return {
-      isSidebarOpen: true
+      isSidebarOpen: true,
+      version: null
     };
   },
 
@@ -151,6 +151,7 @@ export default {
             const searchPattern = new RegExp("^" + setVersionBase, "i");
 
             if (searchPattern.test(this.$page.path)) {
+              this.version = key;
               return set;
             }
           }
@@ -168,14 +169,20 @@ export default {
     },
 
     activeVersion() {
-      if (
-        this.activeSet &&
-        this.activeSet.baseDir === "tutorials/getting-started"
-      ) {
+      if (this.activeSet && !this.activeSet.versions) {
+        console.log("no versions in set");
         return;
       }
 
-      return "v3";
+      if (this.version) {
+        console.log("version: " + this.version);
+        return this.version;
+      }
+
+      if (this.activeSet && !this.version && this.activeSet.defaultVersion) {
+        console.log("default version: " + this.activeSet.defaultVersion);
+        return this.activeSet.defaultVersion;
+      }
     },
 
     sidebarItems() {
@@ -257,6 +264,18 @@ export default {
         return resolved;
       }
     },
+
+    handleVersionUpdate(version) {
+      console.log("handleVersionUpdate()", version);
+
+      const set = this.activeSet;
+      const setVersionBase =
+        (set.baseDir ? "/" + set.baseDir : "") + "/" + version;
+
+      window.location = setVersionBase;
+    },
+
+    handleLanguageUpdate() {},
 
     // side swipe
     onTouchStart(e) {

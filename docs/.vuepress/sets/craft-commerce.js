@@ -8,6 +8,7 @@ module.exports = {
     v2: "v2",
     v1: "v1"
   },
+  defaultVersion: "v3",
   primarySet: true,
   sidebar: {
     v3: {
@@ -101,6 +102,103 @@ module.exports = {
       ]
     },
     v2: {},
-    v1: {}
+    v1: {
+      "/": [
+        {
+          title: "Getting Started",
+          collapsable: false,
+          children: [""]
+        },
+        {
+          title: "Installing and Updating",
+          collapsable: false,
+          children: [
+            "requirements",
+            "installation",
+            "updating",
+            "configuration"
+          ]
+        },
+        {
+          title: "Core Concepts",
+          collapsable: false,
+          children: [
+            "cart",
+            "orders",
+            "products",
+            "product-types",
+            "customers",
+            "sales",
+            "discounts",
+            "tax",
+            "shipping",
+            "custom-order-statuses",
+            "order-status-emails",
+            "payment-currencies"
+          ]
+        },
+        {
+          title: "Payment Gateways",
+          collapsable: false,
+          children: ["payment-gateways"]
+        },
+        {
+          title: "Getting Elements",
+          collapsable: false,
+          children: [
+            "craft-commerce-orders",
+            "craft-commerce-cart",
+            "craft-commerce-products",
+            "craft-commerce-variants"
+          ]
+        },
+        {
+          title: "Models",
+          collapsable: false,
+          children: [
+            "address-model",
+            "country-model",
+            "customer-model",
+            "order-adjustment-model",
+            "order-history-model",
+            "order-model",
+            "order-status-model",
+            "payment-form-model",
+            "product-model",
+            "state-model",
+            "transaction-model",
+            "variant-model"
+          ]
+        },
+        {
+          title: "Developers",
+          collapsable: false,
+          children: [
+            "extensibility",
+            "events-reference",
+            "purchasables",
+            "adjusters",
+            "hooks-reference",
+            "shipping-methods"
+          ]
+        },
+        {
+          title: "Template Guides",
+          collapsable: false,
+          children: [
+            "available-variables",
+            "add-to-cart",
+            "update-cart-addresses",
+            "customer-address-management",
+            "twig-filters"
+          ]
+        },
+        {
+          title: "Fields",
+          collapsable: false,
+          children: ["products-fields", "customer-info-fields"]
+        }
+      ]
+    }
   }
 };
