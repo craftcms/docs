@@ -3,14 +3,14 @@ import tailwindConfig from "../../../../tailwind.config.js";
 
 const fullConfig = resolveConfig(tailwindConfig);
 
-// colors
-// fonts
-// font sizes
-// font weights
-// body content (headings, p, ul, ol, etc.)
-// breakpoints
-// box rounding
-// shadows
+// [x] colors
+// [ ] fonts
+// [ ] font sizes
+// [ ] font weights
+// [ ] body content (headings, p, ul, ol, etc.)
+// [ ] breakpoints
+// [x] box rounding
+// [x] shadows
 
 export default {
   title: "tokens"
@@ -34,8 +34,6 @@ export const Color = () => ({
       </div>
     `
 });
-
-console.log(fullConfig);
 
 export const Shadow = () => ({
   components: {},
