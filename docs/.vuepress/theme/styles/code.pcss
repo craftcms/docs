@@ -1,3 +1,7 @@
+/**
+ * Styles for inline code and fenced code blocks.
+ */
+
 .theme-default-content {
   code {
     @apply py-1 px-2 m-0 rounded;
@@ -18,8 +22,7 @@
 
   pre,
   pre[class*="language-"] {
-    @apply py-3 px-4 rounded overflow-auto leading-snug;
-    background-color: #f1f5f8;
+    @apply py-3 px-4 rounded overflow-auto leading-snug bg-soft;
 
     code {
       @apply p-0 rounded-none bg-transparent;
@@ -29,16 +32,14 @@
   /* make sure fenced code blocks look nice in tips */
   .custom-block {
     div[class*="language-"] {
-      @apply mb-5;
+      @apply mb-5 bg-soft;
       margin-top: -0.25rem;
-      background-color: #f1f5f8;
     }
   }
 }
 
 div[class*="language-"] {
-  @apply relative rounded my-4;
-  background-color: #f1f5f8;
+  @apply relative rounded my-4 bg-soft;
 
   .highlight-lines {
     @apply pt-3 absolute select-none top-0 left-0 w-full leading-snug;
@@ -76,12 +77,49 @@ div[class*="language-"] {
         &:before {
           content: " ";
           z-index: 3;
+          width: 3.5rem;
+          background-color: rgba(0, 0, 0, 66%);
+
           @apply absolute left-0 top-0 block h-full;
         }
       }
     }
+
+    pre {
+      width: 4.5rem; /* .highlighted:before plus 1rem */
+      @apply align-middle;
+    }
+
+    .line-numbers-wrapper {
+      @apply absolute top-0 text-center py-5 px-0 leading-snug;
+      width: 3.5rem;
+      color: rgba(255, 255, 255, 0.3);
+
+      br {
+        @apply select-none;
+      }
+
+      .line-number {
+        @apply relative select-none;
+        z-index: 4;
+        font-size: 0.8rem;
+      }
+    }
+
+    &:after {
+      content: "";
+      z-index: 2;
+      width: 3.5rem;
+      border-right: 1px solid rgba(0, 0, 0, 66%);
+      @apply absolute top-0 left-0 h-full rounded-tr rounded-bl bg-soft;
+    }
   }
 }
+
+/**
+ * Individual language hints seen in the top right corner of
+ * fenced code blocks.
+ */
 
 div[class~="language-javascript"]:before {
   content: "js";
