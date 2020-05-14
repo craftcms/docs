@@ -1,16 +1,5 @@
 @require './config.styl'
-@require './custom-blocks.styl'
-@require './arrow.styl'
 @require './wrapper.styl'
-
-.sidebar-mask
-  position fixed
-  z-index 9
-  top 0
-  left 0
-  width 100vw
-  height 100vh
-  display none
 
 .sidebar
   font-size 16px
@@ -46,60 +35,6 @@
 
   img
     max-width 100%
-
-p a code
-  font-weight 400
-  color $accentColor
-
-blockquote
-  font-size 1rem
-  color #999;
-  border-left .2rem solid #dfe2e5
-  margin 1rem 0
-  padding .25rem 0 .25rem 1rem
-
-  & > p
-    margin 0
-
-strong
-  font-weight 600
-
-a.header-anchor
-  font-size 0.85em
-  float left
-  margin-left -0.87em
-  padding-right 0.23em
-  margin-top 0.125em
-  opacity 0
-
-  &:hover
-    text-decoration none
-
-code, kbd, .line-number
-  font-family source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace
-
-p, ul, ol
-  line-height 1.7
-
-hr
-  border 0
-  border-top 1px solid $borderColor
-
-table
-  border-collapse collapse
-  margin 1rem 0
-  display: block
-  overflow-x: auto
-
-tr
-  border-top 1px solid #dfe2e5
-
-  &:nth-child(2n)
-    background-color #f6f8fa
-
-th, td
-  border 1px solid #dfe2e5
-  padding .6em 1em
 
 .theme-container
   &.sidebar-open

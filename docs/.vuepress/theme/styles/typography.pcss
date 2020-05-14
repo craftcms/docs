@@ -105,9 +105,102 @@
     }
   }
 
+  p a code {
+    @apply font-normal text-blue;
+  }
+
+  blockquote {
+    @apply text-base my-4 mx-0 py-1 pr-0 pl-4;
+    color: #999;
+
+    & > p {
+      @apply m-0;
+    }
+  }
+
+  strong {
+    @apply font-bold;
+  }
+
+  a.header-anchor {
+    @apply text-sm float-left opacity-0;
+    font-size: 0.85em;
+    margin-left: -0.87em;
+    padding-right: 0.23em;
+    margin-top: 0.125em;
+
+    &:hover {
+      @apply no-underline;
+    }
+  }
+
+  code,
+  kbd,
+  .line-number {
+    @apply font-mono;
+  }
+
+  p,
+  ul,
+  ol {
+    @apply leading-relaxed;
+  }
+
+  hr {
+    @apply border-0 border-t;
+  }
+
   .table-of-contents {
     .badge {
       @apply align-middle;
+    }
+  }
+
+  div.table {
+    @apply my-4 mx-0 overflow-x-auto;
+    border: 1px solid #dfe2e5;
+
+    table {
+      @apply table block m-0 border-0 w-full border-collapse text-base;
+
+      thead,
+      tbody:first-child {
+        tr:first-child {
+          &,
+          th,
+          td {
+            border-top: none;
+          }
+        }
+      }
+
+      tr {
+        border-top: 1px solid #dfe2e5;
+
+        &:nth-child(2n) {
+          background: #f1f5f8;
+        }
+      }
+
+      tbody tr:last-child {
+        th,
+        td {
+          border-bottom: none;
+        }
+      }
+
+      th,
+      td {
+        @apply border px-4 py-2;
+
+        &:first-child {
+          border-left: none;
+        }
+
+        &:last-child {
+          border-right: none;
+        }
+      }
     }
   }
 }
