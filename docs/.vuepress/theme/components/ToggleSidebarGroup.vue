@@ -1,6 +1,6 @@
 <template>
   <section
-    class="toggle-sidebar-group pl-0 mt-2 bg-red"
+    class="toggle-sidebar-group pl-0 mt-2"
     :class="[
       {
         collapsable,
@@ -9,12 +9,12 @@
       `depth-${depth}`
     ]"
   >
-    <h3
-      class="pl-4 text-sm capitalize tracking-widest cursor-pointer select-none"
-      @click="open = ! open"
-    >MOAR!</h3>
+    <h3 class="pl-4 toggle cursor-pointer select-none" @click="isOpen = ! isOpen">
+      more ...
+      <span class="arrow" :class="{ 'down': ! isOpen, 'up': isOpen }"></span>
+    </h3>
     <SidebarLinks
-      v-if="open"
+      v-if="isOpen || descendantIsActive(item)"
       class="sidebar-group-items"
       :items="item.toggleChildren"
       :sidebar-depth="item.sidebarDepth"
@@ -34,6 +34,12 @@ export default {
     DropdownTransition
   },
 
+  data() {
+    return {
+      isOpen: false
+    };
+  },
+
   props: ["item", "open", "collapsable", "depth", "fixedHeading"],
 
   // ref: https://vuejs.org/v2/guide/components-edge-cases.html#Circular-References-Between-Components
@@ -41,7 +47,22 @@ export default {
     this.$options.components.SidebarLinks = require("./SidebarLinks.vue").default;
   },
 
-  methods: { isActive }
+  methods: {
+    isActive,
+    descendantIsActive(item) {
+      const route = this.$route;
+      if (item.type === "group") {
+        return item.toggleChildren.some(child => {
+          if (child.type === "group") {
+            return descendantIsActive(route, child);
+          } else {
+            return child.type === "page" && isActive(route, child.path);
+          }
+        });
+      }
+      return false;
+    }
+  }
 };
 </script>
 
@@ -53,6 +74,11 @@ export default {
 
   .sidebar-link {
     @apply pl-4;
+  }
+
+  .toggle {
+    @apply text-xs tracking-wide uppercase font-bold;
+    color: #a0aec0;
   }
 }
 </style>
