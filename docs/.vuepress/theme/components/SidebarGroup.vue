@@ -1,6 +1,6 @@
 <template>
   <section
-    class="sidebar-group"
+    class="sidebar-group mt-4"
     :class="[
       {
         collapsable,
@@ -64,40 +64,32 @@ export default {
 
 <style lang="postcss">
 .sidebar-group {
-  @apply mt-4;
-
   &.group-0 {
     @apply mt-0;
   }
-}
-</style>
 
-<style lang="stylus">
-.sidebar-group {
   &:not(.collapsable) {
     .sidebar-heading:not(.clickable) {
-      cursor: auto;
+      @apply cursor-auto;
       color: inherit;
     }
   }
 
-  // refine styles of nested sidebar groups
   &.is-sub-group {
     padding-left: 0;
 
     & > .sidebar-heading {
+      @apply font-normal pl-8;
       font-size: 0.95em;
       line-height: 1.4;
-      font-weight: normal;
-      padding-left: 2rem;
 
       &:not(.clickable) {
-        opacity: 0.5;
+        @apply opacity-50;
       }
     }
 
     & > .sidebar-group-items {
-      padding-left: 1rem;
+      @apply pl-4;
 
       & > li > .sidebar-link {
         font-size: 0.95em;
@@ -107,41 +99,34 @@ export default {
 }
 
 .sidebar-heading {
-  @apply: px-4;
-  color: $textColor;
+  @apply px-4 cursor-pointer font-bold m-0 box-border w-full;
   transition: color 0.15s ease;
-  cursor: pointer;
-  font-weight: bold;
-  // text-transform uppercase
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
 
-  &.open, &:hover {
+  &.open,
+  &:hover {
     color: inherit;
   }
 
   .arrow {
-    position: relative;
+    @apply relative;
     top: -0.12em;
     left: 0.5em;
   }
 
   &.clickable {
     &.active {
-      font-weight: 600;
-      color: $accentColor;
+      @apply font-semibold text-blue;
     }
 
     &:hover {
-      color: $accentColor;
+      @apply text-blue;
     }
   }
 }
 
 .sidebar-group-items {
+  @apply overflow-hidden;
   transition: height 0.1s ease-out;
   font-size: 0.95em;
-  overflow: hidden;
 }
 </style>

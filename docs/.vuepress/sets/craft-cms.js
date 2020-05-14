@@ -218,7 +218,8 @@ module.exports = {
             ["localization", "Localization"],
             "static-translations",
             "plugins"
-          ]
+          ],
+          toggleChildren: ["foo", "bar", "baz"]
         },
         {
           title: "Field Types",

@@ -15,15 +15,7 @@
     />
     <div id="main" class="relative ml-64">
       <div id="top-bar" class="block h-12 w-full content-center relative">
-        <div
-          id="search"
-          class="block max-w-screen-md h-full flex items-center px-10"
-        >
-          <!-- <input
-            ref="searchInput"
-            type="search"
-            class="bg-soft rounded-md w-full px-5 py-2 text-sm"
-          />-->
+        <div id="search" class="block max-w-screen-md h-full flex items-center px-10">
           <SearchBox
             v-if="
               $site.themeConfig.search !== false &&
@@ -260,6 +252,8 @@ export default {
           console.log("didn’t resolve config");
           return [];
         }
+
+        // TODO: resolve toggleChildren
 
         const resolved = config.map(item => {
           return resolveItem(item, pages, setRegularPath);

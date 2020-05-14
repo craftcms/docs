@@ -255,12 +255,16 @@ export function resolveItem(item, pages, base, groupDepth = 1) {
         title: item.title
       });
     }
+    const toggleChildren = item.toggleChildren || [];
     return {
       type: "group",
       path: item.path,
       title: item.title,
       sidebarDepth: item.sidebarDepth,
       children: children.map(child =>
+        resolveItem(child, pages, base, groupDepth + 1)
+      ),
+      toggleChildren: toggleChildren.map(child =>
         resolveItem(child, pages, base, groupDepth + 1)
       ),
       collapsable: item.collapsable !== false

@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="items.length" class="sidebar-links">
+  <ul v-if="items.length" class="sidebar-links pl-0">
     <li v-for="(item, i) in items" :key="i">
       <SidebarGroup
         v-if="item.type === 'group' && hasChildItems(item)"
@@ -12,6 +12,12 @@
         :fixed-heading="fixedHeading"
         @toggle="toggleGroup(i)"
       />
+      <ToggleSidebarGroup
+        v-if="hasToggleChildItems(item)"
+        :item="item"
+        :depth="depth"
+        :sidebar-depth="sidebarDepth"
+      />
       <SidebarLink
         v-else-if="item.type !== 'group'"
         :sidebar-depth="sidebarDepth || 0"
@@ -21,21 +27,16 @@
   </ul>
 </template>
 
-<style lang="postcss">
-.sidebar-links {
-  @apply pl-0;
-}
-</style>
-
 <script>
 import SidebarGroup from "./SidebarGroup.vue";
+import ToggleSidebarGroup from "./ToggleSidebarGroup.vue";
 import SidebarLink from "./SidebarLink.vue";
 import { isActive } from "../util";
 
 export default {
   name: "SidebarLinks",
 
-  components: { SidebarGroup, SidebarLink },
+  components: { SidebarGroup, ToggleSidebarGroup, SidebarLink },
 
   props: [
     "items",
@@ -78,6 +79,10 @@ export default {
 
     hasChildItems(groupItem) {
       return groupItem.children.length > 0;
+    },
+
+    hasToggleChildItems(groupItem) {
+      return groupItem.toggleChildren && groupItem.toggleChildren.length > 0;
     }
   }
 };
