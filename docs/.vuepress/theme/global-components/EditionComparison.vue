@@ -12,9 +12,9 @@
         <tr v-for="item in feature.items" :key="item.name">
           <td>
             <span>{{ item.name }}</span>
-            <info-hud v-if="item.info" class="info"
-              ><span class="smaller">{{ item.info }}</span></info-hud
-            >
+            <info-hud v-if="item.info" class="info">
+              <span class="smaller">{{ item.info }}</span>
+            </info-hud>
           </td>
           <td class="support">
             <check-mark v-if="item.lite" label="supported in Commerce Lite" />
@@ -146,52 +146,49 @@ export default {
 };
 </script>
 
-<style>
+<style lang="postcss">
 table {
-  display: table;
-  border: 0;
-  width: 100%;
-  position: relative;
-  overflow: visible;
+  @apply border-0 relative overflow-visible;
 }
 
-td,
-tr {
-  border: 0;
+.theme-default-content {
+  td,
+  tr {
+    @apply border-0;
+
+    &:first-child,
+    &:last-child {
+      @apply border-0;
+    }
+  }
 }
 
 .category {
-  border-top: 0;
-  font-weight: bold;
+  @apply border-t-0 font-bold;
 }
 
 .category .feature {
-  font-size: 1.25rem;
-  padding-left: 0;
+  @apply text-xl pl-0;
 }
 
 .category td {
-  padding-top: 2rem;
-  border: 0;
+  @apply pt-8 border-0;
 }
 
 .edition {
+  @apply text-left;
   width: 15%;
-  text-align: left;
 }
 
 .support {
-  position: relative;
-  overflow: visible;
-  font-weight: bold;
+  @apply relative overflow-visible font-bold;
 }
 
 .info {
-  margin-left: 0.75rem;
+  @apply ml-3;
 }
 
 .smaller {
-  font-size: 0.9rem;
-  line-height: 1.25rem;
+  @apply text-sm leading-tight;
 }
 </style>

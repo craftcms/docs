@@ -47,6 +47,10 @@
     @apply text-xl;
   }
 
+  a:hover {
+    @apply underline;
+  }
+
   p,
   pre,
   .custom-block,
@@ -156,12 +160,29 @@
     }
   }
 
+  table {
+    @apply border-collapse mx-0 my-4 block overflow-x-auto;
+  }
+
+  tr {
+    border-top: 1px solid #dfe2e5;
+
+    &:nth-child(2n) {
+      background: #f1f5f8;
+    }
+  }
+
+  th,
+  td {
+    @apply px-4 py-2 border;
+  }
+
   div.table {
     @apply my-4 mx-0 overflow-x-auto;
     border: 1px solid #dfe2e5;
 
     table {
-      @apply table block m-0 border-0 w-full border-collapse text-base;
+      @apply table m-0 border-none w-full text-base;
 
       thead,
       tbody:first-child {
@@ -173,33 +194,23 @@
           }
         }
       }
+    }
 
-      tr {
-        border-top: 1px solid #dfe2e5;
-
-        &:nth-child(2n) {
-          background: #f1f5f8;
-        }
-      }
-
-      tbody tr:last-child {
-        th,
-        td {
-          border-bottom: none;
-        }
-      }
-
+    tbody tr:last-child {
       th,
       td {
-        @apply border px-4 py-2;
+        border-bottom: none;
+      }
+    }
 
-        &:first-child {
-          border-left: none;
-        }
+    th,
+    td {
+      &:first-child {
+        border-left: none;
+      }
 
-        &:last-child {
-          border-right: none;
-        }
+      &:last-child {
+        border-right: none;
       }
     }
   }

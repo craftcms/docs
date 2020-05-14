@@ -1,5 +1,5 @@
 <template>
-  <main class="page relative">
+  <main class="page pb-8 block relative">
     <slot name="top" />
 
     <Content class="theme-default-content" />
@@ -24,12 +24,3 @@ export default {
   props: ["sidebarItems"]
 };
 </script>
-
-<style lang="stylus">
-@require '../styles/wrapper.styl';
-
-.page {
-  padding-bottom: 2rem;
-  display: block;
-}
-</style>

@@ -6,6 +6,9 @@ module.exports = {
         soft: "#f1f5fd",
         blue: "#4a7cf6",
         red: "#da5a47"
+      },
+      width: {
+        80: "20rem"
       }
     }
   },

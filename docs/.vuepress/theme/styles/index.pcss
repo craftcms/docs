@@ -20,6 +20,16 @@ a {
   @apply text-blue no-underline;
 }
 
+img {
+  @apply max-w-full;
+}
+
+.theme-default-content:not(.custom),
+.content-wrapper {
+  max-width: 740px;
+  @apply py-8 px-10;
+}
+
 .arrow {
   @apply inline-block w-0 h-0;
 
@@ -54,5 +64,6 @@ a {
 }
 
 .sidebar {
-  @apply bg-white;
+  @apply bg-white text-base w-80 fixed z-10 m-0 left-0 bottom-0 box-border overflow-y-auto;
+  top: 3.6rem;
 }

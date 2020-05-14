@@ -2,17 +2,13 @@
   <div>
     <div class="right-nav w-64 absolute right-0 top-0">
       <div class="fixed mt-24">
-        <SidebarLinks
-          :depth="0"
-          :items="headingItems"
-          fixed-heading="On this Page"
-        />
+        <SidebarLinks :depth="0" :items="headingItems" fixed-heading="On this Page" />
       </div>
     </div>
-    <div v-if="prev || next" class="page-nav">
-      <p class="inner">
+    <div v-if="prev || next" class="page-nav content-wrapper">
+      <p class="inner border-t mt-0 pt-4 overflow-auto">
         <span v-if="prev" class="prev">
-          <span class="paging-arrow">←</span>
+          <span class="paging-arrow inline-block">←</span>
           <a
             v-if="prev.type === 'external'"
             class="prev"
@@ -24,12 +20,14 @@
             <OutboundLink />
           </a>
 
-          <RouterLink v-else class="prev" :to="prev.path">{{
+          <RouterLink v-else class="prev" :to="prev.path">
+            {{
             prev.title || prev.path
-          }}</RouterLink>
+            }}
+          </RouterLink>
         </span>
 
-        <span v-if="next" class="next">
+        <span v-if="next" class="next float-right">
           <a
             v-if="next.type === 'external'"
             :href="next.path"
@@ -40,10 +38,12 @@
             <OutboundLink />
           </a>
 
-          <RouterLink v-else :to="next.path">{{
+          <RouterLink v-else :to="next.path">
+            {{
             next.title || next.path
-          }}</RouterLink>
-          <span class="paging-arrow">→</span>
+            }}
+          </RouterLink>
+          <span class="paging-arrow inline-block">→</span>
         </span>
       </p>
     </div>
@@ -53,33 +53,8 @@
 <style lang="postcss">
 .page-nav {
   .inner {
-    .paging-arrow {
-      @apply inline-block;
-    }
-  }
-}
-</style>
-
-<style lang="stylus">
-@require '../styles/wrapper.styl';
-
-.page-nav {
-  @extend $wrapper;
-  padding-top: 1rem;
-  padding-bottom: 0;
-
-  .inner {
     min-height: 2rem;
-    margin-top: 0;
-    border-top: 1px solid $borderColor;
-    padding-top: 1rem;
-    overflow: auto; // clear float
   }
-
-  .next {
-    float: right;
-  }
-
 }
 </style>
 
