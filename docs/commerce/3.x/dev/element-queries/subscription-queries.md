@@ -58,7 +58,7 @@ Subscription queries support the following parameters:
 | Param                                     | Description
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [anyStatus](#anystatus)                   | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
-| [asArray](#asarray)                       | Causes the query to return matching subscriptions as arrays of data, rather than `\craft\commerce\elements\Subscription` objects.
+| [asArray](#asarray)                       | Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](api:craft\commerce\elements\Subscription) objects.
 | [clearCachedResult](#clearcachedresult)   | Clears the cached result.
 | [dateCanceled](#datecanceled)             | Narrows the query results based on the subscriptions’ cancellation date.
 | [dateCreated](#datecreated)               | Narrows the query results based on the subscriptions’ creation dates.
@@ -121,7 +121,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 ### `asArray`
 
-Causes the query to return matching subscriptions as arrays of data, rather than `\craft\commerce\elements\Subscription` objects.
+Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](api:craft\commerce\elements\Subscription) objects.
 
 
 
