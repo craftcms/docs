@@ -10,15 +10,15 @@ Everything here is about building with Craft CMS.
 ## Browse Product Documentation
 
 <div class="w-full flex -mx-2">
-    <LinkPanel title="Craft CMS" subtitle="Flexible content management." link="/v3/" />
-    <LinkPanel title="Craft Commerce" subtitle="Custom, extensible ecommerce." link="/commerce/v3/" />
+    <LinkPanel title="Craft CMS" subtitle="Flexible content management." link="/v3/" icon="/icons/craft.svg" />
+    <LinkPanel title="Craft Commerce" subtitle="Custom, extensible ecommerce." link="/commerce/v3/" icon="/icons/commerce.svg" />
 </div>
 
 ## Follow Tutorials
 
 Self-contained, step-by-step training materials.
 
-<IconLink title="Getting Started with Craft" subtitle="Learn the fundamentals building a simple blog." link="/tutorials/getting-started/" />
+<IconLink title="Getting Started with Craft" subtitle="Learn the fundamentals building a simple blog." link="/tutorials/getting-started/" icon="/icons/icon-tutorial.svg" />
 
 ## Clone a Starter
 
@@ -30,10 +30,45 @@ Complete projects you can use to learn or jump start your own.
 
 ## Explore Popular Resources
 
-- Knowledge Base
-- Stack Exchange
-- Discord
-- Twitter
-- CraftQuest
-- Craft Link List
-- nystudio107 Blog
+<IconLink title="Knowledge Base" 
+    subtitle="Read support articles." 
+    link="https://craftcms.com/knowledge-base" 
+    icon="/icons/icon-knowledge-base.svg" 
+    icon-size="large" 
+/>
+<IconLink title="Stack Exchange" 
+    subtitle="Get help and help others." 
+    link="https://craftcms.stackexchange.com/" 
+    icon="/icons/icon-stack-exchange.svg" 
+    icon-size="large" 
+/>
+<IconLink title="Discord" 
+    subtitle="Meet the community." 
+    link="https://craftcms.com/discord" 
+    icon="/icons/icon-discord.svg" 
+    icon-size="large" 
+/>
+<IconLink title="Twitter" 
+    subtitle="See the latest Craft tweets." 
+    link="https://twitter.com/craftcms" 
+    icon="/icons/icon-twitter.svg" 
+    icon-size="large" 
+/>
+<IconLink title="CraftQuest" 
+    subtitle="Watch video courses." 
+    link="https://craftquest.com/" 
+    icon="/icons/icon-generic-link.svg" 
+    icon-size="large" 
+/>
+<IconLink title="Craft Link List" 
+    subtitle="Stay in-the-know." 
+    link="https://craftlinklist.com/" 
+    icon="/icons/icon-generic-link.svg" 
+    icon-size="large" 
+/>
+<IconLink title="nystudio107 Blog" 
+    subtitle="Learn Craft & web dev." 
+    link="https://nystudio107.com/blog" 
+    icon="/icons/icon-nystudio107.svg" 
+    icon-size="large" 
+/>

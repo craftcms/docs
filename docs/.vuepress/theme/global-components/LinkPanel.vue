@@ -1,8 +1,12 @@
 <template>
   <fragment>
-    <RouterLink v-if="isInternal" class="link-panel" :to="link"
-      ><span class="title">{{ title }}</span
-      ><span class="subtitle">{{ subtitle }}</span>
+    <RouterLink v-if="isInternal" class="link-panel" :to="link" :class="{ 'has-icon': icon }">
+      <div v-if="icon" class="link-panel-icon">
+        <img :src="icon" alt />
+      </div>
+
+      <span class="title">{{ title }}</span>
+      <span class="subtitle">{{ subtitle }}</span>
 
       <div v-if="repo" class="repo-icon">
         <svg
@@ -21,9 +25,20 @@
         </svg>
       </div>
     </RouterLink>
-    <a v-else class="link-panel" :href="link" :target="target" :rel="rel"
-      ><span class="title">{{ title }}</span
-      ><span class="subtitle">{{ subtitle }}</span>
+    <a
+      v-else
+      class="link-panel"
+      :href="link"
+      :target="target"
+      :rel="rel"
+      :class="{ 'has-icon': icon }"
+    >
+      <div v-if="icon" class="link-panel-icon">
+        <img :src="icon" alt />
+      </div>
+
+      <span class="title">{{ title }}</span>
+      <span class="subtitle">{{ subtitle }}</span>
 
       <div v-if="repo" class="repo-icon">
         <svg
@@ -68,6 +83,17 @@
     @apply no-underline !important;
     box-shadow: 0 0 36px rgba(74, 124, 246, 0.1);
     transform: translateY(-4px) translateZ(0);
+  }
+
+  &.has-icon {
+    .link-panel-icon {
+      @apply block w-6 h-6 absolute;
+    }
+
+    .title,
+    .subtitle {
+      padding-left: 2.25rem;
+    }
   }
 }
 </style>
