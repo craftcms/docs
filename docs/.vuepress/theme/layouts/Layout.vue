@@ -264,8 +264,6 @@ export default {
     },
 
     handleVersionUpdate(version) {
-      console.log("handleVersionUpdate()", version);
-
       const set = this.activeSet;
       const setVersionBase =
         (set.baseDir ? "/" + set.baseDir : "") + "/" + version;
