@@ -38,16 +38,6 @@ module.exports = {
   ],
   shouldPrefetch: () => false,
   head: require("./head"),
-  locales: {
-    "/": {
-      lang: "en-US",
-      title: "Craft Documentation"
-    },
-    "/ja/": {
-      lang: "ja",
-      title: "Craft ドキュメント"
-    }
-  },
   themeConfig: {
     docSets: [
       require("./sets/craft-cms"),
@@ -62,10 +52,6 @@ module.exports = {
     nextLinks: true,
     prevLinks: true,
     searchMaxSuggestions: 10,
-    locales: {
-      "/": require("./config-en"),
-      "/ja/": require("./config-ja")
-    },
     nav: [
       { text: "Knowlege Base", link: "https://craftcms.com/knowledge-base" }
     ],

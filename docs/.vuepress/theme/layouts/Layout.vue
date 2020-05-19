@@ -210,27 +210,31 @@ export default {
     resolveSidebarItems(page, regularPath, site, localePath) {
       const { pages, themeConfig } = site;
 
-      const localeConfig =
-        localePath && themeConfig.locales
-          ? themeConfig.locales[localePath] || themeConfig
-          : themeConfig;
+      //console.log("resolveSidebarItems()", page, regularPath, site, localePath);
 
-      const pageSidebarConfig =
-        page.frontmatter.sidebar || localeConfig.sidebar || themeConfig.sidebar;
-
+      // no set, no sidebar items (just list sets)
       if (!this.activeSet) {
         console.log("no sidebar set available");
         return [];
       }
 
+      // get the active set locale config if it exists, otherwise the set config
+      const localeConfig =
+        localePath && this.activeSet.locales
+          ? this.activeSet.locales[localePath].config
+          : this.activeSet;
+
       let sidebarConfig =
-        this.activeSet.sidebar || localeConfig.sidebar || themeConfig.sidebar;
+        page.frontmatter.sidebar || localeConfig.sidebar || themeConfig.sidebar;
 
       if (this.activeVersion) {
-        sidebarConfig = this.activeSet.sidebar[this.activeVersion];
+        sidebarConfig = sidebarConfig[this.activeVersion];
       } else {
-        sidebarConfig = this.activeSet.sidebar;
+        sidebarConfig = sidebarConfig;
       }
+
+      console.log("localePath", localePath);
+      console.log("sidebarConfig()", sidebarConfig);
 
       if (!sidebarConfig) {
         return [];
@@ -252,8 +256,6 @@ export default {
           console.log("didn’t resolve config");
           return [];
         }
-
-        // TODO: resolve toggleChildren
 
         const resolved = config.map(item => {
           return resolveItem(item, pages, setRegularPath);
