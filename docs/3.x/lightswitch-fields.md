@@ -23,7 +23,7 @@ Possible values include:
 ```
 
 ::: tip
-Any elements that don’t have an explicit value set for your Lightswitch field set will be treated as if they have the default field value set, per the field settings.
+Any elements that don’t have an explicit Lightswitch value set will be treated as if they have the default field value, per the field settings.
 :::
 
 ### Working with Lightswitch Field Data
