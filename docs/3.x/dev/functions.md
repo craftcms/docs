@@ -5,6 +5,7 @@ The following [functions](https://twig.symfony.com/doc/2.x/templates.html#functi
 Function | Description
 -------- | -----------
 [actionInput](#actioninput) | Outputs a hidden `action` input.
+[actionUrl](#actionurl) | Generates a controller action URL.
 [alias](#alias) | Parses a string as an alias.
 [attr](#attr) | Generates HTML attributes.
 [attribute](https://twig.symfony.com/doc/2.x/functions/attribute.html) | Accesses a dynamic attribute of a variable.
@@ -17,6 +18,7 @@ Function | Description
 [constant](https://twig.symfony.com/doc/2.x/functions/constant.html) | Returns the constant value for a given string.
 [create](#create) | Creates a new object.
 [csrfInput](#csrfinput) | Returns a hidden CSRF token input.
+[cpUrl](#cpurl) | Generates a control panel URL.
 [cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html) | Cycles on an array of values.
 [date](https://twig.symfony.com/doc/2.x/functions/date.html) | Creates a date.
 [dump](https://twig.symfony.com/doc/2.x/functions/dump.html) | Dumps information about a variable.
@@ -62,6 +64,18 @@ You can optionally set additional attributes on the tag by passing an `options` 
     id: 'action-input'
 }) }}
 ```
+
+## `actionUrl`
+
+Returns a controller action URL, automatically accounting for relative vs. absolute format and the active <config:actionTrigger> setting.
+
+### Arguments
+
+The `actionUrl()` function has the following arguments:
+
+* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
+* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
 
 ## `alias`
 
@@ -173,6 +187,22 @@ Creates a new object instance based on a given class name or object configuratio
     value: 'bar'
 }) %}
 ```
+
+## `cpUrl`
+
+Returns a control panel URL, automatically accounting for relative vs. absolute format and the active <config:cpTrigger> setting.
+
+```twig
+<a href="{{ cpUrl('settings') }}">Visit control panel settings</a>
+```
+
+### Arguments
+
+The `cpUrl()` function has the following arguments:
+
+* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
+* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
 
 ## `csrfInput`
 

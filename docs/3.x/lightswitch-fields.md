@@ -12,8 +12,8 @@ Possible values include:
 
 | Value | Fetches elements…
 | - | -
-| `true` | with an enabled Lightswitch value.
-| `false` | with a disabled Lightswitch value.
+| `true` or `':notempty:'` | with an enabled Lightswitch value.
+| `false` or `':empty:'` | with a disabled Lightswitch value.
 
 ```twig
 {# Fetch entries with the Lightswitch field enabled #}
@@ -21,6 +21,10 @@ Possible values include:
     .<FieldHandle>(true)
     .all() %}
 ```
+
+::: tip
+Any elements that don’t have an explicit value set for your Lightswitch field set will be treated as if they have the default field value set, per the field settings.
+:::
 
 ### Working with Lightswitch Field Data
 
