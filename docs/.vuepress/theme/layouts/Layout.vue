@@ -213,20 +213,26 @@ export default {
     },
 
     handleVersionUpdate(version) {
-      const set = this.$activeSet;
-      const setVersionBase =
-        (set.baseDir ? "/" + set.baseDir : "") + "/" + version;
+      // TODO: don’t reload page, and link to root rather than 404
+      const currentPath = this.$page.path;
+      const targetPath = currentPath.replace(this.$activeVersion, version);
 
-      window.location = setVersionBase;
+      window.location = targetPath;
     },
 
     handleLanguageUpdate(path) {
-      const set = this.$activeSet;
-      const setVersionBase =
-        (set.baseDir ? "/" + set.baseDir : "") +
-        (this.$activeVersion ? "/" + this.$activeVersion : "");
-
-      window.location = setVersionBase + path;
+      const currentPath = this.$page.path;
+      for (const localePath in this.$allLocales) {
+        const locale = this.$allLocales[localePath];
+        if (locale.lang == this.$lang) {
+          const replace = localePath;
+          const targetPath = currentPath.replace(
+            this.$activeVersion + replace,
+            this.$activeVersion + path
+          );
+          window.location = targetPath;
+        }
+      }
     },
 
     // side swipe

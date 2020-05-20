@@ -114,7 +114,7 @@ export default ({ Vue, options, router, siteData }) => {
                     docSetLocales[basePath + version + key] = settings;
                   }
                 } else {
-                  //docSetLocales[basePath + key] = settings;
+                  docSetLocales[basePath + key] = settings;
                 }
               }
             }
@@ -124,8 +124,6 @@ export default ({ Vue, options, router, siteData }) => {
         });
 
         return docSetLocales;
-
-        return Object.assign(locales, docSetLocales);
       },
       $localeConfig() {
         let targetLang;
