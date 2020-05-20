@@ -1,6 +1,6 @@
 # Template Roots
 
-Modules and plugins can register custom “template roots” for either Control Panel or front-end templates.
+Modules and plugins can register custom “template roots” for either control panel or front-end templates.
 
 A template root is a directory that contains templates, which are accessible to other templates from a predefined template path prefix.
 
@@ -27,8 +27,8 @@ public function init()
 }
 ```
 
-If you want to register new Control Panel template roots, use the [EVENT_REGISTER_CP_TEMPLATE_ROOTS](api:craft\web\View::EVENT_REGISTER_CP_TEMPLATE_ROOTS) event instead.
+If you want to register new control panel template roots, use the [EVENT_REGISTER_CP_TEMPLATE_ROOTS](api:craft\web\View::EVENT_REGISTER_CP_TEMPLATE_ROOTS) event instead.
 
 ## Plugin Control Panel Templates
 
-Plugins get a Control Panel template root added automatically, named after the plugin handle, which points to the `templates/` folder within the plugin’s base source folder.
+Plugins get a control panel template root added automatically, named after the plugin handle, which points to the `templates/` folder within the plugin’s base source folder.

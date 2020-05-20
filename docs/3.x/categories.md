@@ -25,7 +25,7 @@ You can also add additional fields using all of the available field types in Cra
 
 ## Creating and Editing Categories
 
-If you have at least one category group, there will be a “Categories” tab in the primary Control Panel navigation. Clicking on it will take you to the category index. From there you can choose a category group from the sidebar, and add/reorder/delete categories within it:
+If you have at least one category group, there will be a “Categories” tab in the primary control panel navigation. Clicking on it will take you to the category index. From there you can choose a category group from the sidebar, and add/reorder/delete categories within it:
 
 ![Category Index](./images/categories-category-index.png)
 

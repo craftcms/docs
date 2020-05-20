@@ -43,7 +43,7 @@ If this is a plugin migration, increase your plugin’s [schema version](api:cra
 Migration classes contain methods: [safeUp()](api:yii\db\Migration::safeUp()) and [safeDown()](api:yii\db\Migration::safeDown()). `safeUp()` is run when your migration is _applied_, and `safeDown()` is run when your migration is _reverted_.
 
 ::: tip
-You can usually ignore the `safeDown()` method, as Craft doesn’t have a way to revert migrations from the Control Panel.
+You can usually ignore the `safeDown()` method, as Craft doesn’t have a way to revert migrations from the control panel.
 :::
 
 You have full access to [Craft’s API](https://docs.craftcms.com/api/v3/) from your `safeUp()` method, but plugin migrations should try to avoid calling the plugin’s own API here. As your plugin’s database schema changes over time, so will your API’s assumptions about the schema. If an old migration calls a service method that relies on database changes that haven’t been applied yet, it will result in a SQL error. So in general you should execute all SQL queries directly from your own migration class. It may feel like you’re duplicating code, but it will be more future-proof.
@@ -110,7 +110,7 @@ Or you can have Craft apply all new migrations across all migration tracks:
 ./craft migrate/all
 ```
 
-Craft will also check for new plugin migrations on Control Panel requests, for any plugins that have a new [schema version](api:craft\base\PluginTrait::$schemaVersion), and content migrations can be applied from the Control Panel by going to Utilities → Migrations.
+Craft will also check for new plugin migrations on control panel requests, for any plugins that have a new [schema version](api:craft\base\PluginTrait::$schemaVersion), and content migrations can be applied from the Control Panel by going to Utilities → Migrations.
 
 ## Plugin Install Migrations
 

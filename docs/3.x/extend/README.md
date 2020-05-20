@@ -14,7 +14,7 @@ Modules can be simple, serving a single purpose like providing a new [Dashboard 
 
 - They can be installed/trialed/purchased from the Craft Plugin Store.
 - They can make database changes when installed, updated, or uninstalled.
-- They get their own settings page within the Settings section of the Control Panel.
+- They get their own settings page within the Settings section of the control panel.
 - They can be enabled/disabled by an admin, without running any Composer commands.
 
 If the thing you want to build would benefit from those features, make it a plugin. Otherwise, a module might be better.

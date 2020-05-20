@@ -4,7 +4,7 @@ Craft is a flexible, user-friendly CMS for creating custom digital experiences o
 
 It features:
 
-- An intuitive, user-friendly Control Panel for content creation and administrative tasks.
+- An intuitive, user-friendly control panel for content creation and administrative tasks.
 - A clean-slate approach to content modeling and [front-end development](dev/README.md) that doesn’t make any assumptions about your content or how it should be consumed.
 - A built-in Plugin Store with hundreds of free and commercial [plugins](https://plugins.craftcms.com/), all just a click away.
 - A robust framework for [module and plugin development](extend/README.md).

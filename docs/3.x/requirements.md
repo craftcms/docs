@@ -74,7 +74,7 @@ The database user you tell Craft to connect with must have the following privile
 
 ## Control Panel Browser Requirements
 
-Craft’s Control Panel requires a modern browser:
+Craft’s control panel requires a modern browser:
 
 #### Windows and macOS
 
@@ -89,5 +89,5 @@ Craft’s Control Panel requires a modern browser:
 * Android: Chrome 4.4 or later
 
 ::: tip
-Craft’s Control Panel browser requirements have nothing to do with your actual website. If you’re a glutton for punishment and want your website to look flawless on IE 6, that’s your choice.
+Craft’s control panel browser requirements have nothing to do with your actual website. If you’re a glutton for punishment and want your website to look flawless on IE 6, that’s your choice.
 :::

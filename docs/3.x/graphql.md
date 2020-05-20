@@ -102,7 +102,7 @@ Craft has two types of schemas:
 - The **Public Schema** defines which content should be available publicly.
 - You can also define multiple private schemas, which each have their own secret **Access Token**.
 
-You can manage your schemas from the Control Panel, at GraphQL → Schemas. In addition to defining the scope of each schema, you can also give them expiration dates, or disable them.
+You can manage your schemas from the control panel, at GraphQL → Schemas. In addition to defining the scope of each schema, you can also give them expiration dates, or disable them.
 
 ::: tip
 When performing a GraphQL API request, the schema will be determined automatically based on the token that is supplied (if any). See [below](#querying-a-private-schema) to learn how to do that.
@@ -112,7 +112,7 @@ When performing a GraphQL API request, the schema will be determined automatical
 
 ### Using the GraphiQL IDE
 
-The easiest way to start exploring your GraphQL API is with the built-in [GraphiQL](https://github.com/graphql/graphiql) IDE, which is available in the Control Panel from GraphQL → Explore.
+The easiest way to start exploring your GraphQL API is with the built-in [GraphiQL](https://github.com/graphql/graphiql) IDE, which is available in the control panel from GraphQL → Explore.
 
 ![The built-in GraphiQL IDE](./images/graphiql.png)
 

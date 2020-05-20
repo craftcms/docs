@@ -80,4 +80,4 @@ If an update contains a fix for a critical security vulnerability or other dange
 - Reverted change to `$potus` due to security vulnerabilities
 ```
 
-When Craft finds out that a critical update is available, it will post a message about it to the top of all Control Panel pages, and give the update special attention on the Utilities → Updates page.
+When Craft finds out that a critical update is available, it will post a message about it to the top of all control panel pages, and give the update special attention on the Utilities → Updates page.

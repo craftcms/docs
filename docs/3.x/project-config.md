@@ -55,7 +55,7 @@ There are a few things you should keep in mind when working with the project con
 
 When Craft detects that `project.yaml` has changed, it will ensure that the versions of Craft and plugins described in the file are compatible with what’s actually installed.
 
-If there’s a discrepancy, you will need to fix that before Craft can begin syncing the file’s changes into the loaded project config. The only practical way to do that is by running `composer install`, as access to the Control Panel will be denied until the discrepancy is resolved.
+If there’s a discrepancy, you will need to fix that before Craft can begin syncing the file’s changes into the loaded project config. The only practical way to do that is by running `composer install`, as access to the control panel will be denied until the discrepancy is resolved.
 
 ::: tip
 To avoid downtime on production, you should ensure that `composer install` is built into your deployment workflow.
@@ -81,7 +81,7 @@ If you’re overriding volume settings with `config/volumes.php`, you can set se
 'secret' => '$SECRET_ACCESS_KEY',
 ```
 
-Once you’ve made that change, re-save your volume in the Control Panel so your `project.yaml` file gets updated with the environment variable name.
+Once you’ve made that change, re-save your volume in the control panel so your `project.yaml` file gets updated with the environment variable name.
 :::
 
 ### Production Changes May Be Forgotten
