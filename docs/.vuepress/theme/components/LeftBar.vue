@@ -12,7 +12,7 @@
 
     <div id="mid">
       <DocSetPanel :set="set" :version="version" @selectVersion="handleVersionSelect" />
-      <SidebarLinks class="left-bar-links" :depth="0" :items="items" :sidebar-depth="0" />
+      <SidebarLinks class="left-bar-links" :depth="0" :items="items" />
     </div>
 
     <slot name="bottom" />
@@ -20,7 +20,11 @@
     <div id="bottom" class="left-bar-bottom absolute bottom-0 w-full border-t">
       <div v-if="set && set.locales" class="language">
         <select name="locale" class="locale-select-element" @change="handleLanguageSelect($event)">
-          <option v-for="locale in set.locales">{{ locale.config.label }}</option>
+          <option
+            v-for="(locale, path) in set.locales"
+            :value="path"
+            :selected="$lang == locale.lang"
+          >{{ locale.config.label }}</option>
         </select>
       </div>
     </div>
@@ -115,14 +119,9 @@
 <script>
 import DocSetPanel from "./DocSetPanel.vue";
 import SidebarLinks from "./SidebarLinks.vue";
-import {
-  resolveSidebarItems,
-  resolveMatchingConfig,
-  resolveItem
-} from "../util";
 
 export default {
-  props: ["items", "set", "language", "version"],
+  props: ["items", "set", "language"],
   components: { DocSetPanel, SidebarLinks },
   methods: {
     handleLanguageSelect(event) {

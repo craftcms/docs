@@ -70,9 +70,6 @@ export function resolvePage(pages, rawPath, base) {
         type: "page",
         path: ensureExt(pages[i].path)
       });
-
-      //console.log(resolved);
-
       return resolved;
     }
   }

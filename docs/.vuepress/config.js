@@ -39,6 +39,7 @@ module.exports = {
   shouldPrefetch: () => false,
   head: require("./head"),
   themeConfig: {
+    title: "Craft Documentation",
     docSets: [
       require("./sets/craft-cms"),
       require("./sets/craft-commerce"),

@@ -6,8 +6,8 @@
     @touchend="onTouchEnd"
   >
     <LeftBar
-      :set="activeSet"
-      :version="activeVersion"
+      :set="$activeSet"
+      :version="$activeVersion"
       :items="sidebarItems"
       @toggle-sidebar="toggleSidebar"
       @selectVersion="handleVersionUpdate"
@@ -135,52 +135,6 @@ export default {
       ];
     },
 
-    activeSet() {
-      const { themeConfig } = this.$site;
-
-      for (let index = 0; index < themeConfig.docSets.length; index++) {
-        const set = themeConfig.docSets[index];
-        if (set.versions) {
-          for (let [key, value] of Object.entries(set.versions)) {
-            const setVersionBase =
-              (set.baseDir ? "/" + set.baseDir : "") + "/" + key;
-            const searchPattern = new RegExp("^" + setVersionBase, "i");
-
-            if (searchPattern.test(this.$page.path)) {
-              this.version = key;
-              return set;
-            }
-          }
-        } else {
-          const setVersionBase = set.baseDir ? "/" + set.baseDir : "";
-          const searchPattern = new RegExp("^" + setVersionBase, "i");
-
-          if (searchPattern.test(this.$page.path)) {
-            return set;
-          }
-        }
-      }
-
-      return false;
-    },
-
-    activeVersion() {
-      if (this.activeSet && !this.activeSet.versions) {
-        console.log("no versions in set");
-        return;
-      }
-
-      if (this.version) {
-        console.log("version: " + this.version);
-        return this.version;
-      }
-
-      if (this.activeSet && !this.version && this.activeSet.defaultVersion) {
-        console.log("default version: " + this.activeSet.defaultVersion);
-        return this.activeSet.defaultVersion;
-      }
-    },
-
     sidebarItems() {
       return this.resolveSidebarItems(
         this.$page,
@@ -213,42 +167,35 @@ export default {
       //console.log("resolveSidebarItems()", page, regularPath, site, localePath);
 
       // no set, no sidebar items (just list sets)
-      if (!this.activeSet) {
+      if (!this.$activeSet) {
         console.log("no sidebar set available");
         return [];
       }
 
       // get the active set locale config if it exists, otherwise the set config
-      const localeConfig =
-        localePath && this.activeSet.locales
-          ? this.activeSet.locales[localePath].config
-          : this.activeSet;
+      const localeConfig = this.$activeSet.locales
+        ? this.$localeConfig.config
+        : this.$activeSet;
 
       let sidebarConfig =
         page.frontmatter.sidebar || localeConfig.sidebar || themeConfig.sidebar;
 
-      if (this.activeVersion) {
-        sidebarConfig = sidebarConfig[this.activeVersion];
+      if (this.$activeVersion) {
+        sidebarConfig = sidebarConfig[this.$activeVersion];
       } else {
         sidebarConfig = sidebarConfig;
       }
 
-      console.log("localePath", localePath);
-      console.log("sidebarConfig()", sidebarConfig);
-
       if (!sidebarConfig) {
         return [];
       } else {
-        let setRegularPath = this.activeSet.baseDir;
-
-        if (this.activeVersion) {
-          setRegularPath += "/" + this.activeVersion + "/";
-        } else {
-          setRegularPath += "/";
-        }
+        const regularPathWithoutVersion = regularPath.replace(
+          "/" + this.$activeVersion + "/",
+          "/"
+        );
 
         let { base, config } = resolveMatchingConfig(
-          regularPath,
+          regularPathWithoutVersion,
           sidebarConfig
         );
 
@@ -258,7 +205,7 @@ export default {
         }
 
         const resolved = config.map(item => {
-          return resolveItem(item, pages, setRegularPath);
+          return resolveItem(item, pages, regularPath);
         });
 
         return resolved;
@@ -266,14 +213,21 @@ export default {
     },
 
     handleVersionUpdate(version) {
-      const set = this.activeSet;
+      const set = this.$activeSet;
       const setVersionBase =
         (set.baseDir ? "/" + set.baseDir : "") + "/" + version;
 
       window.location = setVersionBase;
     },
 
-    handleLanguageUpdate() {},
+    handleLanguageUpdate(path) {
+      const set = this.$activeSet;
+      const setVersionBase =
+        (set.baseDir ? "/" + set.baseDir : "") +
+        (this.$activeVersion ? "/" + this.$activeVersion : "");
+
+      window.location = setVersionBase + path;
+    },
 
     // side swipe
     onTouchStart(e) {

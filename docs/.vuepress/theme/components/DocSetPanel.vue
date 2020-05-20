@@ -66,7 +66,11 @@
           class="doc-set-version border pr-5 py-1 rounded-md leading-none block flex content-center items-center version-select appearance-none font-medium text-sm bg-transparent cursor-pointer"
           @change="handleVersionSelect($event)"
         >
-          <option v-for="version in set.versions" :value="version">{{ version }}</option>
+          <option
+            v-for="version in set.versions"
+            :value="version"
+            :selected="version == $activeVersion"
+          >{{ version }}</option>
         </select>
 
         <svg
@@ -89,7 +93,7 @@
 
 <script>
 export default {
-  props: ["set", "version"],
+  props: ["set"],
   data() {
     return {
       currentVersion: this.version

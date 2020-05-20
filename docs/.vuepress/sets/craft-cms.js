@@ -13,12 +13,12 @@ module.exports = {
     "/": {
       lang: "en-US",
       name: "English",
-      title: "Craft 3 Documentation",
+      title: "Craft CMS Documentation",
       config: require("./craft-cms-en.js")
     },
     "/ja/": {
       lang: "ja",
-      title: "Craft 3 ドキュメント",
+      title: "Craft CMS ドキュメント",
       config: require("./craft-cms-ja.js")
     }
   }
