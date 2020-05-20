@@ -78,7 +78,7 @@ Multiple sites can share the same host name, such as `https://craftcms.com/` and
 If you want to create a site with a different host name, you must configure your server to handle traffic for it. The host name can either point to the same web root as your current site (e.g. `web/`), or you may want to give it its own separate web root. If you do the latter, make sure you copy your `.htaccess` and `index.php` files into the new web root.
 
 ::: tip
-If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](https://craftcms.com/support/license-enforcement), you’ll want to pick one of the domains to access the Craft Control Panel from for _all_ of the sites.
+If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](https://craftcms.com/support/license-enforcement), you’ll want to pick one of the domains to access the Craft control panel from for _all_ of the sites.
 :::
 
 ::: warning
@@ -103,7 +103,7 @@ The first step is to create the new site in the Settings of your Craft installat
 
 1. Go to Settings → Sites and click the New Site button.
 2. Choose the group your site should belong to using the drop-down. The group selection won't have any impact on your site's functionality.
-3. Give your site a name. Craft uses the site name in the Control Panel and you can also display it in your templates using `{{ siteName }}`.
+3. Give your site a name. Craft uses the site name in the control panel, and you can also display it in your templates using `{{ siteName }}`.
 4. Based on the Site name, Craft will generate a Site Handle. You can edit the Handle if you'd like. You will use the Site Handle to refer to this site in the templates.
 5. Choose the language for this site (see above for more information on how you can use languages).
 6. If this site should be the Primary Site, toggle the Is Primary Site? to enable it.

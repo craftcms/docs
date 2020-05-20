@@ -311,7 +311,7 @@ public function getEditorHtml(): string
 
 #### Managing Field Layouts
 
-If you want your element type to support custom fields, you will also need to create a page somewhere within the Control Panel for managing your element type’s field layout. Craft provides a template include that will output a Field Layout Designer for you:
+If you want your element type to support custom fields, you will also need to create a page somewhere within the control panel for managing your element type’s field layout. Craft provides a template include that will output a Field Layout Designer for you:
 
 ```twig
 {% include "_includes/fieldlayoutdesigner" with {
@@ -481,7 +481,7 @@ When a source is selected, Craft will configure your [element query](#element-qu
 
 ## Index Page
 
-You can give your [Control Panel section](cp-section.md) an index page for your element type using the following template:
+You can give your [control panel section](cp-section.md) an index page for your element type using the following template:
 
 ```twig
 {% extends '_layouts/elementindex' %}
@@ -745,7 +745,7 @@ $product->setFieldValuesFromRequest('fields');
 $success = Craft::$app->elements->saveElement($product);
 ```
 
-Once you’ve set up an edit page for your element type, you can add a [getCpEditUrl()](api:craft\base\ElementInterface::getCpEditUrl()) method to your element class, which will communicate your elements’ edit page URLs within the Control Panel.
+Once you’ve set up an edit page for your element type, you can add a [getCpEditUrl()](api:craft\base\ElementInterface::getCpEditUrl()) method to your element class, which will communicate your elements’ edit page URLs within the control panel.
 
 ```php
 public function getCpEditUrl()

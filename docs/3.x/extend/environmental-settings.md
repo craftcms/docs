@@ -62,7 +62,7 @@ class MyModel extends Model
 
 ## Autosuggest Inputs
 
-To guide users when entering your setting’s value in the Control Panel, give your setting an autosuggest input.
+To guide users when entering your setting’s value in the control panel, give your setting an autosuggest input.
 
 ```twig
 {% import "_includes/forms" as forms %}

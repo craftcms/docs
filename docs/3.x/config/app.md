@@ -261,7 +261,7 @@ return [
 Available drivers are listed in the [Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide).
 
 ::: warning
-Only drivers that implement <api:craft\queue\QueueInterface> will be visible within the Control Panel.
+Only drivers that implement <api:craft\queue\QueueInterface> will be visible within the control panel.
 :::
 
 ::: tip

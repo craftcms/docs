@@ -4,7 +4,7 @@ Some settings should be defined on a per-environment basis. For example, when de
 
 ## Control Panel Settings
 
-Some settings in the Control Panel can be set to environment variables (like the ones defined in your `.env` file):
+Some settings in the control panel can be set to environment variables (like the ones defined in your `.env` file):
 
 - General Settings
   - **System Name**

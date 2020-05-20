@@ -1,6 +1,6 @@
 # Control Panel Section
 
-Modules and plugins can add new sections to the Control Panel using the [EVENT_REGISTER_CP_NAV_ITEMS](api:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) event:
+Modules and plugins can add new sections to the control panel using the [EVENT_REGISTER_CP_NAV_ITEMS](api:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) event:
 
 ```php
 use craft\events\RegisterCpNavItemsEvent;
@@ -76,7 +76,7 @@ class Plugin extends \craft\base\Plugin
 You can alternatively set a `hasCpSection` value in `composer.json` as noted in the [plugin guide](/extend/plugin-guide.md#compser-json). We don’t recommend setting it in both places, however, since the value set in `composer.json` will override your public class property’s value and likely create confusion.
 :::
 
-You can modify aspects of the plugin’s Control Panel nav item by overriding its [getCpNavItem()](api:craft\base\PluginInterface::getCpNavItem()) method:
+You can modify aspects of the plugin’s control panel nav item by overriding its [getCpNavItem()](api:craft\base\PluginInterface::getCpNavItem()) method:
 
 ```php
 public function getCpNavItem()
@@ -100,7 +100,7 @@ Clicking on a plugin’s section will take the user to `/admin/plugin-handle`, w
 See [Control Panel Templates](cp-templates.md) for more information about developing Control Panel templates.
 :::
 
-Alternatively, you can route `/admin/plugin-handle` requests to a controller action (or a different template) by registering a Control Panel route from your plugin’s `init()` method:
+Alternatively, you can route `/admin/plugin-handle` requests to a controller action (or a different template) by registering a control panel route from your plugin’s `init()` method:
 
 ```php
 use craft\events\RegisterUrlRulesEvent;

@@ -4,13 +4,13 @@
 If you’re looking for plugin _development_ documentation, check out the [Extending Craft](extend/README.md) section.
 :::
 
-Plugins extend Craft’s core functionality. They can introduce new Dashboard widgets, field types, Control Panel sections, Twig templating features, workflow actions, and more.
+Plugins extend Craft’s core functionality. They can introduce new Dashboard widgets, field types, control panel sections, Twig templating features, workflow actions, and more.
 
 ## The Plugin Store
 
-Craft’s Control Panel features a Plugin Store, where you can browse through hundreds of free and commercial plugins, install them with a single click, and pay for them.
+Craft’s control panel features a Plugin Store, where you can browse through hundreds of free and commercial plugins, install them with a single click, and pay for them.
 
-To access the Plugin Store, click on the “Plugin Store” item in Craft’s Control Panel navigation. From there you can browse through the various plugin categories and curated lists to discover new plugins.
+To access the Plugin Store, click on the “Plugin Store” item in Craft’s control panel navigation. From there you can browse through the various plugin categories and curated lists to discover new plugins.
 
 ![The Craft Plugin Store](./images/plugin-store.png)
 

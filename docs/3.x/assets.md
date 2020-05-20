@@ -44,7 +44,7 @@ Any fields you select here will be visible in the asset editor HUD that opens up
 
 ## Assets Page
 
-When you create your first volume, an “Assets” item will be added to the main Control Panel navigation. Clicking on it will take you to the Assets page, which shows a list of all of your volumes in the left sidebar, and the selected volume’s files in the main content area.
+When you create your first volume, an “Assets” item will be added to the main control panel navigation. Clicking on it will take you to the Assets page, which shows a list of all of your volumes in the left sidebar, and the selected volume’s files in the main content area.
 
 From this page, you can do the following:
 

@@ -102,7 +102,7 @@ Here’s how it works:
 \Craft::t('app', 'Entries')
 ```
 
-In addition to front-end translation messages, the `site` category should be used for admin-defined labels in the Control Panel:
+In addition to front-end translation messages, the `site` category should be used for admin-defined labels in the control panel:
 
 ```php
 \Craft::t('app', 'Post a new {section} entry', [
@@ -782,7 +782,7 @@ $html = \Craft::$app->view->renderTemplate('plugin-handle/path/to/template');
 
 ## Control Panel Templates
 
-If your plugin has any templates that extend Craft’s `_layouts/cp.html` Control Panel layout template, there are a few things that might need to be updated.
+If your plugin has any templates that extend Craft’s `_layouts/cp.html` control panel layout template, there are a few things that might need to be updated.
 
 ### `extraPageHeaderHtml`
 
@@ -839,7 +839,7 @@ Additionally, any `<div class="pane">`s you had should generally lose their `pan
 
 ### Control Panel Template Hooks
 
-The following Control Panel [template hooks](template-hooks.md) have been renamed:
+The following control panel [template hooks](template-hooks.md) have been renamed:
 
 | Old                              | New
 | -------------------------------- | ----------------------------

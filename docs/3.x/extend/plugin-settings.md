@@ -108,7 +108,7 @@ The config file cannot contain any keys that are not defined in the plugin’s s
 
 ## Settings Pages
 
-Plugins can also provide a settings page in the Control Panel, which may make it easier for admins to manage settings values, depending on the plugin.
+Plugins can also provide a settings page in the control panel, which may make it easier for admins to manage settings values, depending on the plugin.
 
 To give your plugin a settings page, create a `templates/` directory within your plugin’s source directory, and create a `settings.twig` file within it:
 
@@ -160,7 +160,7 @@ With all that in place, your plugin will now get its own icon on the Settings pa
 
 ### Advanced Settings Pages
 
-When the `/admin/settings/plugins/plugin-handle` Control Panel URL is requested, your plugin is ultimately in charge of the response. Namely, your plugin’s `getSettingsResponse()` method. The default `getSettingsResponse()` implementation in <api:craft\base\Plugin> will call your plugin’s `settingsHtml()` method, and then tell the active controller to render Craft’s `settings/plugins/_settings` template (the layout template for plugin settings pages), passing it the HTML returned by `settingsHtml()`.
+When the `/admin/settings/plugins/plugin-handle` control panel URL is requested, your plugin is ultimately in charge of the response. Namely, your plugin’s `getSettingsResponse()` method. The default `getSettingsResponse()` implementation in <api:craft\base\Plugin> will call your plugin’s `settingsHtml()` method, and then tell the active controller to render Craft’s `settings/plugins/_settings` template (the layout template for plugin settings pages), passing it the HTML returned by `settingsHtml()`.
 
 If a plugin needs more control over its settings page(s), it can override its `getSettingsResponse()` method and do whatever it wants with the request.
 

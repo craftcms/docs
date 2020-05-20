@@ -7,7 +7,7 @@ Fields are defined globally from Settings → Fields. They are organized into Fi
 All fields share a few common settings:
 
 - **Group** – The field group that the field should be shown in
-- **Name** – How the field will be referenced throughout the Control Panel
+- **Name** – How the field will be referenced throughout the control panel
 - **Handle** – How the field will be referenced from your templates
 - **Instructions** – Instruction text to guide the authors
 - **Field Type** – What type of field it is
