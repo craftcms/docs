@@ -51,7 +51,10 @@ export default {
       query: "",
       focused: false,
       focusIndex: 0,
-      placeholder: undefined
+      placeholder: undefined,
+      maxSuggestions: 10,
+      paths: null,
+      hotkeys: ["s", "/"]
     };
   },
 
@@ -68,7 +71,7 @@ export default {
 
       const { pages } = this.$site;
       const max =
-        this.$site.themeConfig.searchMaxSuggestions || SEARCH_MAX_SUGGESTIONS;
+        this.$site.themeConfig.searchMaxSuggestions || this.maxSuggestions;
       const localePath = this.$localePath;
       const res = [];
       for (let i = 0; i < pages.length; i++) {
@@ -132,7 +135,7 @@ export default {
     },
 
     isSearchable(page) {
-      let searchPaths = SEARCH_PATHS;
+      let searchPaths = this.paths;
 
       // all paths searchables
       if (searchPaths === null) {
@@ -153,7 +156,7 @@ export default {
     onHotkey(event) {
       if (
         event.srcElement === document.body &&
-        SEARCH_HOTKEYS.includes(event.key)
+        this.hotkeys.includes(event.key)
       ) {
         this.$refs.input.focus();
         event.preventDefault();
@@ -226,21 +229,18 @@ export default {
     left: 1.75rem;
   }
 }
-</style>
 
-<style lang="stylus">
 .suggestion {
+  @apply cursor-pointer rounded;
   line-height: 1.4;
   padding: 0.4rem 0.6rem;
-  border-radius: 4px;
-  cursor: pointer;
 
   a {
-    white-space: normal;
-    color: lighten($textColor, 35%);
+    @apply whitespace-normal;
+    color: #5d81a5;
 
     .page-title {
-      font-weight: 600;
+      @apply font-semibold;
     }
 
     .header {
@@ -253,65 +253,7 @@ export default {
     background-color: #f3f4f5;
 
     a {
-      color: $accentColor;
-    }
-  }
-}
-
-@media (max-width: $MQNarrow) {
-  .search-box {
-    input {
-      cursor: pointer;
-      width: 0;
-      border-color: transparent;
-      position: relative;
-
-      &:focus {
-        cursor: text;
-        left: 0;
-        width: 10rem;
-      }
-    }
-  }
-}
-
-// Match IE11
-@media all and (-ms-high-contrast: none) {
-  .search-box input {
-    height: 2rem;
-  }
-}
-
-@media (max-width: $MQNarrow) and (min-width: $MQMobile) {
-  .search-box {
-    .suggestions {
-      left: 0;
-    }
-  }
-}
-
-@media (max-width: $MQMobile) {
-  .search-box {
-    margin-right: 0;
-
-    input {
-      left: 1rem;
-    }
-
-    .suggestions {
-      right: 0;
-    }
-  }
-}
-
-@media (max-width: $MQMobileNarrow) {
-  .search-box {
-    .suggestions {
-      width: calc(100vw - 4rem);
-    }
-
-    input:focus {
-      width: 8rem;
+      @apply text-blue;
     }
   }
 }
