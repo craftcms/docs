@@ -73,8 +73,6 @@ import "../styles/index.pcss";
 import "prismjs/themes/prism-solarizedlight.css";
 
 import Page from "../components/Page";
-import Sidebar from "../components/Sidebar";
-import SidebarLinks from "../components/SidebarLinks";
 import LeftBar from "../components/LeftBar";
 import SearchBox from "../components/SearchBox";
 
@@ -85,8 +83,6 @@ export default {
 
   components: {
     Page,
-    Sidebar,
-    SidebarLinks,
     LeftBar,
     SearchBox
   },
