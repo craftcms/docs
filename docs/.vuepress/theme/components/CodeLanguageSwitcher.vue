@@ -10,9 +10,10 @@
   </ul>
 </template>
 
-<style lang="stylus">
-.code-language-switcher.split
-    border-radius 0
+<style lang="postcss">
+.code-language-switcher.split {
+  @apply rounded-none;
+}
 </style>
 
 <script>

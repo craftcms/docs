@@ -5,8 +5,7 @@
         <a
           :class="{ active: language === selectedLanguage }"
           @click="setLanguage(language)"
-          >{{ getLanguageLabel(language) }}</a
-        >
+        >{{ getLanguageLabel(language) }}</a>
       </li>
     </ul>
     <div v-for="(language, index) in languages" :key="index">
@@ -49,24 +48,6 @@ ul.code-language-switcher {
       color: #476582;
       padding-top: 0.2rem;
       padding-bottom: 0.2rem;
-    }
-  }
-}
-
-.theme-default-content {
-  ul.code-language-switcher {
-    @apply mb-0;
-  }
-}
-</style>
-
-<style lang="stylus">
-
-ul.code-language-switcher {
-
-  li {
-
-    a {
 
       &:hover {
         text-decoration: none !important;
@@ -77,10 +58,15 @@ ul.code-language-switcher {
       }
 
       &.active {
-        cursor: default;
-        background-color: #fff;
+        @apply cursor-default bg-white;
       }
     }
+  }
+}
+
+.theme-default-content {
+  ul.code-language-switcher {
+    @apply mb-0;
   }
 }
 </style>
