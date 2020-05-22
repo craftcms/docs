@@ -12,13 +12,22 @@
 
     <div id="mid">
       <DocSetPanel @selectVersion="handleVersionSelect" />
-      <SidebarLinks class="left-bar-links" :depth="0" :items="items" />
+      <SidebarLinks
+        class="left-bar-links"
+        :depth="0"
+        :items="items"
+        :class="{ 'has-bottom': hasBottomLinks }"
+      />
     </div>
 
     <slot name="bottom" />
 
-    <div id="bottom" class="left-bar-bottom absolute bottom-0 w-full border-t">
-      <div v-if="set && set.locales" class="language">
+    <div
+      v-if="hasBottomLinks"
+      id="bottom"
+      class="left-bar-bottom absolute bottom-0 w-full border-t"
+    >
+      <div class="language">
         <select name="locale" class="locale-select-element" @change="handleLanguageSelect($event)">
           <option
             v-for="(locale, path) in set.locales"
@@ -33,9 +42,14 @@
 
 <style lang="postcss">
 .left-bar-links {
-  max-height: 85vh;
-  overflow-y: auto;
-  padding-bottom: 10vh;
+  @apply h-screen overflow-y-auto pb-32;
+  /* browser height - approx. docset panel height - #top height */
+  height: calc(100vh - 81px - 3rem);
+
+  &.has-bottom {
+    /* browser height - approx. docset panel height - #top height - #bottom height */
+    height: calc(100vh - 81px - 3rem - 3rem);
+  }
 }
 
 .language {
@@ -66,7 +80,7 @@
 }
 
 .left-bar-bottom {
-  @apply bg-white;
+  @apply bg-white h-12;
 }
 
 .home {
@@ -123,6 +137,11 @@ import SidebarLinks from "./SidebarLinks.vue";
 export default {
   props: ["items", "set", "language"],
   components: { DocSetPanel, SidebarLinks },
+  computed: {
+    hasBottomLinks() {
+      return this.set && this.set.locales;
+    }
+  },
   methods: {
     handleLanguageSelect(event) {
       const selected = event.target.value;
