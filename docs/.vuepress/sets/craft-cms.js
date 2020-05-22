@@ -1,13 +1,13 @@
 module.exports = {
-  title: "Craft CMS",
+  title: "Craft CMS Documentation",
+  setTitle: "Craft CMS",
   icon: "/icons/craft.svg",
   baseDir: "",
-  defaultUri: "/v3/",
-  versions: {
-    v3: "v3",
-    v2: "v2"
-  },
-  defaultVersion: "v3",
+  versions: [
+    ["3.x", { label: "3.x" }],
+    ["2.x", { label: "2.x" }]
+  ],
+  defaultVersion: "3.x",
   primarySet: true,
   locales: {
     "/": {

@@ -1,17 +1,17 @@
 module.exports = {
-  title: "Craft Commerce",
+  title: "Craft Commerce Documentation",
+  setTitle: "Craft Commerce",
   icon: "/icons/commerce.svg",
   baseDir: "commerce",
-  defaultUri: "/commerce/v3/",
-  versions: {
-    v3: "v3",
-    v2: "v2",
-    v1: "v1"
-  },
-  defaultVersion: "v3",
+  versions: [
+    ["3.x", { label: "3.x" }],
+    ["2.x", { label: "2.x" }],
+    ["1.x", { label: "1.x" }]
+  ],
+  defaultVersion: "3.x",
   primarySet: true,
   sidebar: {
-    v3: {
+    "3.x": {
       "/": [
         {
           title: "Introduction",
@@ -101,8 +101,8 @@ module.exports = {
         }
       ]
     },
-    v2: {},
-    v1: {
+    "2.x": {},
+    "1.x": {
       "/": [
         {
           title: "Getting Started",

@@ -19,20 +19,17 @@ export default ({ Vue, options, router, siteData }) => {
       $title() {
         const page = this.$page;
 
-        // get explicit (frontmatter) or inferred page title
-        const pageTitle =
-          page.frontmatter.title ||
-          (page.title ? page.title.replace(/[_`]/g, "") : "");
-
-        // doc set title
-        const setTitle = this.$activeSet.title;
-
-        // global site title or fall back to `VuePress`
-        const siteTitle = this.$siteTitle || "VuePress";
-
-        if (pageTitle && setTitle && siteTitle) {
-          return `${pageTitle} | ${setTitle} | ${siteTitle}`;
+        // completely override title from frontmatter
+        if (page.frontmatter.title) {
+          return page.frontmatter.title;
         }
+
+        // get explicit (frontmatter) or inferred page title
+        const pageTitle = page.title ? page.title.replace(/[_`]/g, "") : "";
+
+        // doc set title, global site title, or fall back to `VuePress`
+        const siteTitle =
+          this.$activeSet.title || this.$siteTitle || "VuePress";
 
         if (pageTitle && siteTitle) {
           return `${pageTitle} | ${siteTitle}`;
@@ -49,8 +46,10 @@ export default ({ Vue, options, router, siteData }) => {
 
         for (let index = 0; index < themeConfig.docSets.length; index++) {
           const set = themeConfig.docSets[index];
+
           if (set.versions) {
-            for (let [key, value] of Object.entries(set.versions)) {
+            for (let version of set.versions) {
+              const key = version[0];
               const setVersionBase =
                 (set.baseDir ? "/" + set.baseDir : "") + "/" + key;
               const searchPattern = new RegExp("^" + setVersionBase, "i");

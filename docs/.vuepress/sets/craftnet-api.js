@@ -1,8 +1,8 @@
 module.exports = {
   title: "Craftnet API",
   logo: "",
-  baseDir: "",
-  versions: {},
+  defaultVersion: "",
+  versions: [],
   primarySet: false,
   sidebar: {}
 };

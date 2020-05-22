@@ -2,7 +2,6 @@ module.exports = {
   title: "Craft CMS Tutorial",
   icon: "/icons/tutorial.svg",
   baseDir: "tutorials/getting-started",
-  defaultUri: "/tutorials/getting-started/",
   primarySet: false,
   sidebar: {
     "/": [

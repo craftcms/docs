@@ -3,7 +3,7 @@ module.exports = {
   label: "English",
   editLinkText: "Edit this page on GitHub",
   sidebar: {
-    v3: {
+    "3.x": {
       "/extend/": [
         {
           title: "Extending Craft",
@@ -238,7 +238,7 @@ module.exports = {
         }
       ]
     },
-    v2: {
+    "2.x": {
       "/plugins/": [
         {
           title: "Plugin Development",

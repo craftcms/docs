@@ -268,3 +268,25 @@ export function resolveItem(item, pages, base, groupDepth = 1) {
     };
   }
 }
+
+/**
+ * Returns the relative path of the docSet’s default landing,
+ * accounting for versions if present. Example:
+ * `/commerce/3.x/`
+ *
+ * @param {*} set docSet object
+ */
+export function getDocSetDefaultUri(set) {
+  let uri = set.baseDir !== "" ? "/" + set.baseDir : set.baseDir;
+
+  if (set.versions && set.defaultVersion) {
+    set.versions.forEach(key => {
+      const version = key[0];
+      if (version == set.defaultVersion) {
+        uri += "/" + version;
+      }
+    });
+  }
+
+  return ensureEndingSlash(uri);
+}

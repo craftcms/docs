@@ -11,7 +11,7 @@
     <slot name="top" />
 
     <div id="mid">
-      <DocSetPanel :set="set" :version="version" @selectVersion="handleVersionSelect" />
+      <DocSetPanel @selectVersion="handleVersionSelect" />
       <SidebarLinks class="left-bar-links" :depth="0" :items="items" />
     </div>
 

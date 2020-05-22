@@ -1,7 +1,7 @@
 <template>
   <div class="doc-set-panel">
     <div class="doc-sets">
-      <RouterLink :to="`/`" class="doc-set home" :class="{ active: set === false }">
+      <RouterLink :to="`/`" class="doc-set home" :class="{ active: $activeSet === false }">
         <span class="back">
           <svg
             width="7"
@@ -37,7 +37,7 @@
       <RouterLink
         v-if="$page.frontmatter.home && set.primarySet"
         v-for="(set, index) in $site.themeConfig.docSets"
-        :to="set.defaultUri"
+        :to="defaultUri(set)"
         class="doc-set"
       >
         <span class="mr-2 inline-block relative" style="top: 2px;">
@@ -50,27 +50,32 @@
           />
         </span>
 
-        <span>{{ set.title }}</span>
+        <span>{{ set.setTitle ? set.setTitle : set.title }}</span>
       </RouterLink>
     </div>
-    <div v-if="set" class="doc-set-current px-4 mt-2 pb-4 flex w-full justify-between items-center">
-      <RouterLink :to="set.defaultUri" class="flex items-center">
+    <div
+      v-if="$activeSet"
+      class="doc-set-current px-4 mt-2 pb-4 flex w-full justify-between items-center"
+    >
+      <RouterLink :to="defaultUri($activeSet)" class="flex items-center">
         <span class="icon mr-3 inline-block">
-          <img :src="set.icon" width="28" height="28" alt />
+          <img :src="$activeSet.icon" width="28" height="28" alt />
         </span>
-        <div class="current-doc-set text-slate leading-none font-medium">{{ set.title }}</div>
+        <div
+          class="current-doc-set text-slate leading-none font-medium"
+        >{{ $activeSet.setTitle ? $activeSet.setTitle : $activeSet.title }}</div>
       </RouterLink>
-      <div v-if="set.versions" class="relative">
+      <div v-if="$activeSet.versions" class="relative">
         <select
           name
           class="doc-set-version border pr-5 py-1 rounded-md leading-none block flex content-center items-center version-select appearance-none font-medium text-sm bg-transparent cursor-pointer"
           @change="handleVersionSelect($event)"
         >
           <option
-            v-for="version in set.versions"
-            :value="version"
-            :selected="version == $activeVersion"
-          >{{ version }}</option>
+            v-for="version in $activeSet.versions"
+            :value="version[0]"
+            :selected="version[0] == $activeVersion"
+          >{{ version[0] }}</option>
         </select>
 
         <svg
@@ -92,8 +97,9 @@
 </template>
 
 <script>
+import { getDocSetDefaultUri } from "../util";
+
 export default {
-  props: ["set"],
   data() {
     return {
       currentVersion: this.version
@@ -104,6 +110,9 @@ export default {
       const selected = event.target.value;
       this.currentVersion = selected;
       this.$emit("selectVersion", selected);
+    },
+    defaultUri(set) {
+      return getDocSetDefaultUri(set);
     }
   }
 };
