@@ -110,6 +110,44 @@ You can set [parameters](dev/element-queries/entry-queries.md#parameters) on the
 It’s always a good idea to clone the entry query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
 :::
 
+### Saving Entries Fields in Entry Forms
+
+If you have an [entry form](dev/examples/entry-form.md) that needs to contain an Entries field, you will need to submit your field value as a list of entry IDs, in the order you want them to be related.
+
+For example, you could create a list of checkboxes for each of the possible relations:
+
+```twig
+{# Include a hidden input first so Craft knows to update the
+   existing value, if no checkboxes are checked. #}
+{{ hiddenInput('fields[<FieldHandle>]', '') }}
+
+{# Get all of the possible entry options #}
+{% set possibleEntries = craft.entries()
+  .section('galleries')
+  .orderBy('title ASC')
+  .all() %}
+
+{# Get the currently related entry IDs #}
+{% set relatedEntryIds = entry is defined
+  ? entry.<FieldHandle>.ids()
+  : [] %}
+
+<ul>
+  {% for possibleEntry in possibleEntries %}
+    <li>
+      <label>
+        {{ input('checkbox', 'fields[<FieldHandle>][]', possibleEntry.id, {
+          checked: possibleEntry.id in relatedEntryIds
+        }) }}
+        {{ possibleEntry.title }}
+      </label>
+    </li>
+    {% endfor %}
+</ul>
+```
+
+You could then make the checkbox list sortable, so users have control over the order of related entries.
+
 ## See Also
 
 * [Entry Queries](dev/element-queries/entry-queries.md)
