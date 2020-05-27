@@ -75,7 +75,7 @@ module.exports = {
     },
     extendMarkdown(md) {
       md.use(replaceApiLinks)
-        .use(require("vuepress-theme-craftdocs/markup"))
+        .use(require("./theme/markup"))
         .use(require("markdown-it-deflist"))
         .use(require("markdown-it-imsize"));
     }
