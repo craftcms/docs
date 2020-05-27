@@ -6,6 +6,7 @@
     "@storybook/addon-knobs": "^5.3.18",
     "@storybook/addons": "^5.3.18",
     "@storybook/vue": "^5.3.18",
+    "@vuepress/core": "^1.5.0",
     "@vuepress/plugin-google-analytics": "^1.4.0",
     "autoprefixer": "^9.7.6",
     "babel-loader": "^8.1.0",
