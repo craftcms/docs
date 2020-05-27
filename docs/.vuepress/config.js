@@ -15,21 +15,21 @@ module.exports = {
       }
     ],
     [
-      "container",
+      "vuepress-plugin-container",
       {
         type: "tip",
         defaultTitle: ""
       }
     ],
     [
-      "container",
+      "vuepress-plugin-container",
       {
         type: "warning",
         defaultTitle: ""
       }
     ],
     [
-      "container",
+      "vuepress-plugin-container",
       {
         type: "danger",
         defaultTitle: ""

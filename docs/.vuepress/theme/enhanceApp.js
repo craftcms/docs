@@ -1,11 +1,13 @@
 import Vuex from "vuex";
 import CodeToggle from "./components/CodeToggle";
+import PostHeading from "./components/PostHeading";
 import { setStorage } from "./Storage";
 
 export default ({ Vue, options, router, siteData }) => {
   const base = siteData.base;
 
   Vue.component("code-toggle", CodeToggle);
+  Vue.component("post-heading", PostHeading);
 
   Vue.use(Vuex);
 

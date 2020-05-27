@@ -36,6 +36,10 @@ function increment(tokens) {
   tokens.forEach(t => t.level++);
 }
 
+/**
+ * Wrap tables in div.table for stylistic improvement.
+ * @param {*} tokens
+ */
 function tables(tokens) {
   for (let i = 0; i < tokens.length; i++) {
     let t = tokens[i];
@@ -207,6 +211,26 @@ function closeBlock(level) {
   return block("</div>", level);
 }
 
+/**
+ * Append PostHeading component after first `<h1>`.
+ */
+function customPostHeadings(tokens) {
+  for (let i = 0; i < tokens.length; i++) {
+    let t = tokens[i];
+    if (t.tag === "h1" && t.type === "heading_close") {
+      let postHeading = [
+        block(`<post-heading>`, t.level),
+        block(`</post-heading>`, t.level),
+      ];
+
+      tokens.splice(i + 1, 0, ...postHeading);
+
+      // only do this once
+      break;
+    }
+  }
+}
+
 module.exports = md => {
   // Custom <code> renders
   md.renderer.rules.code_inline = renderInlineCode;
@@ -218,6 +242,7 @@ module.exports = md => {
     tables(tokens);
     codeToggles(tokens);
     split(tokens);
+    customPostHeadings(tokens);
     return tokens;
   };
 

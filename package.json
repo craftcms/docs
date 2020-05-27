@@ -24,6 +24,7 @@
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.11",
     "vuepress": "^1.4.1",
+    "vuepress-plugin-container": "^2.1.4",
     "vuepress-plugin-medium-zoom": "^1.1.8",
     "vuepress-plugin-sitemap": "^2.0.0",
     "vuepress-theme-craftdocs": "../vuepress-theme-craftdocs/",
