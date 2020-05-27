@@ -9,6 +9,9 @@ module.exports = {
       },
       width: {
         80: "20rem"
+      },
+      screens: {
+        xxl: "1600px"
       }
     }
   },

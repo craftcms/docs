@@ -20,11 +20,7 @@
             <OutboundLink />
           </a>
 
-          <RouterLink v-else class="prev" :to="prev.path">
-            {{
-            prev.title || prev.path
-            }}
-          </RouterLink>
+          <RouterLink v-else class="prev" :to="prev.path">{{ prev.title || prev.path }}</RouterLink>
         </span>
 
         <span v-if="next" class="next float-right">
@@ -38,11 +34,7 @@
             <OutboundLink />
           </a>
 
-          <RouterLink v-else :to="next.path">
-            {{
-            next.title || next.path
-            }}
-          </RouterLink>
+          <RouterLink v-else :to="next.path">{{ next.title || next.path }}</RouterLink>
           <span class="paging-arrow inline-block">→</span>
         </span>
       </p>

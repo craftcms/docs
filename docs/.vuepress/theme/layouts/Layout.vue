@@ -13,7 +13,7 @@
       @selectVersion="handleVersionUpdate"
       @selectLanguage="handleLanguageUpdate"
     />
-    <div id="main" class="relative ml-64">
+    <div id="main" class="relative lg:ml-64 max-w-screen-md mx-auto lg:max-w-none">
       <div id="top-bar" class="block h-12 w-full content-center relative">
         <div id="search" class="block max-w-screen-md h-full flex items-center px-10">
           <SearchBox
@@ -38,10 +38,16 @@
 
 <style lang="postcss">
 .theme-container {
-  @apply relative max-w-screen-xl mx-auto;
+  @apply relative mx-auto;
+}
+
+.left-bar {
+  @apply hidden;
 }
 
 .right-nav {
+  @apply hidden;
+
   .sidebar-heading {
     @apply text-xs mx-0 tracking-wide uppercase;
     padding: 0.35rem 0;
@@ -64,6 +70,26 @@
         @apply opacity-100 text-slate;
       }
     }
+  }
+}
+
+@screen lg {
+  .theme-container {
+    @apply max-w-screen-lg;
+  }
+
+  .left-bar {
+    @apply block;
+  }
+}
+
+@screen xl {
+  .theme-container {
+    @apply max-w-screen-xl;
+  }
+
+  .right-nav {
+    @apply block;
   }
 }
 </style>
