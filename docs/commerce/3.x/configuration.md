@@ -250,3 +250,10 @@ The [example templates](example-templates.md) folder contains an example of this
 Determines whether taxes should be calculated based on the billing address instead of the shipping address.
 
 Default: `false` (use the shipping address)
+
+## `updateCartSearchIndexes`
+
+Determines whether the search index should be updated when a cart is saved by a customer when they use the `commerce/cart/*` controller actions.
+Making this `false` will reduce the number of search index update jobs created, but will also reduce the ability to search carts in the control panel. 
+
+Default `true`
