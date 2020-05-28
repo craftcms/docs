@@ -145,40 +145,70 @@ You can set [parameters](dev/element-queries/asset-queries.md#parameters) on the
 It’s always a good idea to clone the asset query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
 :::
 
-### Uploading Files from Front-End Entry Forms
+### Saving Assets Fields in Entry Forms
 
-If you want to allow users to upload files to an Assets field from a front-end [entry form](dev/examples/entry-form.md), you just need to do two things.
+If you have an [entry form](dev/examples/entry-form.md) that needs to contain an Assets field, you will need to submit your field value as a list of asset IDs, in the order you want them to be related.
 
-First, make sure your `<form>` tag has an `enctype="multipart/form-data"` attribute, so that it is capable of uploading files.
+For example, you could create a list of checkboxes for each of the possible relations:
 
-```markup
-<form method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+```twig
+{# Include a hidden input first so Craft knows to update the
+   existing value, if no checkboxes are checked. #}
+{{ hiddenInput('fields[<FieldHandle>]', '') }}
+
+{# Get all of the possible asset options #}
+{% set possibleAssets = craft.assets()
+  .volume('siteAssets')
+  .kind('image')
+  .orderBy('filename ASC')
+  .withTransforms([
+    { width: 100, height: 100 }
+  ])
+  .all() %}
+
+{# Get the currently related asset IDs #}
+{% set relatedAssetIds = entry is defined
+  ? entry.<FieldHandle>.ids()
+  : [] %}
+
+<ul>
+  {% for possibleAsset in possibleAssets %}
+    <li>
+      <label>
+        {{ input('checkbox', 'fields[<FieldHandle>][]', possibleAsset.id, {
+          checked: possibleAsset.id in relatedAssetIds
+        }) }}
+        {{ tag('img', {
+          src: possibleAsset.
+        }) }}
+        {{ possibleAsset.getImg({width: 100, height: 100}) }}
+        {{ possibleAsset.filename }}
+      </label>
+    </li>
+    {% endfor %}
+</ul>
 ```
 
-Then add a file input to the form:
+You could then make the checkbox list sortable, so users have control over the order of related assets.
 
-```markup
-<input type="file" name="fields[<FieldHandle>]">
+#### Creating New Assets
+
+Assets fields can handle new file uploads as well:
+
+```twig
+{{ input('file', 'fields[<FieldHandle>][]', options={
+  multiple: true,
+}) }}
 ```
 
 ::: tip
-Replace `<FieldHandle>` with you actual field handle. For example if you field handle is “heroImage”, the input name should be `fields[heroImage]`.
+Don’t forget to set `enctype="multipart/form-data"` on your `<form>` tag so your browser knows to submit the form as a multipart request.
 :::
 
-If you want to allow multiple file uploads, add the `multiple` attribute and add `[]` to the end of the input name:
+Alternatively, you can submit Base64-encoded file data, which the Assets field will decode and treat as an uploaded file:
 
-```markup
-<input type="file" name="fields[<FieldHandle>][]" multiple>
-```
-
-If you want to add files to a field with existing assets, you will need to first fetch the existing asset ids and add them to a hidden field:
-
-```
-{% for asset in entry.<FieldHandle> %}
-    <input type="hidden" name="fields[<FieldHandle>][]" value="{{ asset.id }}">
-{% endfor %}
-
-<input type="file" name="fields[<FieldHandle>][]" multiple>
+```twig
+{{ hiddenInput('fields[<FieldHandle>][]', 'data:image/jpeg;base64,<BASE64DATA>') }}
 ```
 
 ## See Also
