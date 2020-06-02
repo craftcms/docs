@@ -80,7 +80,7 @@ export default ({ Vue, options, router, siteData }) => {
         }
 
         if (this.version) {
-          console.log("version: " + this.version);
+          //console.log("version: " + this.version);
           return this.version;
         }
 
