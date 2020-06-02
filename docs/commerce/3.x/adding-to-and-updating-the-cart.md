@@ -16,6 +16,7 @@ The following is an example of getting the first product found in your store, ge
     <input type="hidden" name="action" value="commerce/cart/update-cart">
     <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
     {{ redirectInput('shop/cart') }}
+    {{ csrfInput() }}
     <input type="hidden" name="purchasableId" value="{{ variant.id }}">
     <input type="submit" value="Add to cart">
 </form>
