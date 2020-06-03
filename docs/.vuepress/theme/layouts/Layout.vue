@@ -92,11 +92,22 @@
     @apply block;
   }
 }
+
+.language-treeview {
+  code {
+    font-size: 1rem;
+  }
+}
+
+.entry-name {
+  font-size: 0.85rem;
+}
 </style>
 
 <script>
 import "../styles/index.pcss";
 import "prismjs/themes/prism-solarizedlight.css";
+import "prismjs/plugins/treeview/prism-treeview.css";
 
 import Page from "../components/Page";
 import LeftBar from "../components/LeftBar";

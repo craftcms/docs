@@ -61,7 +61,8 @@ module.exports = {
       php: "PHP",
       csv: "CSV",
       json: "JSON",
-      xml: "XML"
+      xml: "XML",
+      treeview: "Folder",
     }
   },
   markdown: {
@@ -74,6 +75,10 @@ module.exports = {
       }
     },
     extendMarkdown(md) {
+      // provide our own highlight.js to customize Prism setup
+      md.options.highlight = require("./theme/highlight");
+
+      // add markdown extensions
       md.use(replaceApiLinks)
         .use(require("./theme/markup"))
         .use(require("markdown-it-deflist"))
