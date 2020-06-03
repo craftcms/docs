@@ -220,13 +220,40 @@ function customPostHeadings(tokens) {
     if (t.tag === "h1" && t.type === "heading_close") {
       let postHeading = [
         block(`<post-heading>`, t.level),
-        block(`</post-heading>`, t.level),
+        block(`</post-heading>`, t.level)
       ];
 
       tokens.splice(i + 1, 0, ...postHeading);
 
       // only do this once
       break;
+    }
+  }
+}
+
+/**
+ * Emphasize placeholder variables in code samples by replacing custom
+ * `::placeholder_value::` with `<code-placeholder>placeholder_value</code-placeholder>`.
+ */
+function codePlaceholders(tokens) {
+
+  for (let i = 0; i < tokens.length; i++) {
+    let t = tokens[i];
+
+    if (t.type === "fence" && t.info && t.content) {
+      let replaceTokens = [];
+      let placeholderMatch = t.content.match(/::[A-Za-z0-9_-]+::/);
+
+      if (placeholderMatch) {
+        let text = placeholderMatch[0].replace(/::/g, '');
+        let content = t.content;
+        t.content = content.replace(placeholderMatch[0], `<code-placeholder>${text}</code-placeholder>`);
+        //replaceTokens.push(t);
+        //tokens.splice(i, 1, ...replaceTokens);
+
+        // skip ahead
+        //i += replaceTokens.length - 1;
+      }
     }
   }
 }
@@ -243,6 +270,7 @@ module.exports = md => {
     codeToggles(tokens);
     split(tokens);
     customPostHeadings(tokens);
+    codePlaceholders(tokens);
     return tokens;
   };
 
