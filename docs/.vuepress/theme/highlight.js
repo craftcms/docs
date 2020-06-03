@@ -59,6 +59,5 @@ module.exports = (str, lang) => {
         return wrap(code, rawLang)
     }
 
-    return str;
     return wrap(str, 'text')
 }
