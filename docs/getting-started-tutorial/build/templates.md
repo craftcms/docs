@@ -86,7 +86,7 @@ Now that the blog section’s template is ready, you can visit the URL for a pub
 Throughout these examples, some tags have `class` parameters with values like `text-4xl text-black font-display my-4`. These are TailwindCSS [utility classes](https://tailwindcss.com/docs/utility-first) that style elements on the page. You can ignore them or check out reference the [TailwindCSS documentation](https://tailwindcss.com/) if you want to explore customizing styles.
 :::
 
-That’s clearly no the title we should display on every page. For any detail page template, Craft CMS provides a special `entry` variable we can use to access the details of the relevant entry. Let’s display the `title` and `postDate` properties in the template:
+That’s clearly not the title we should display on every page. For any detail page template, Craft CMS provides a special `entry` variable we can use to access the details of the relevant entry. Let’s display the `title` and `postDate` properties in the template:
 
 ```twig{4,6}
 {% extends "_layout" %}
