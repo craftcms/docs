@@ -38,6 +38,17 @@
   }
 }
 
+.code-placeholder {
+  @apply inline-block rounded border;
+  background: linear-gradient(180deg, rgba(255,255,255,1) 25%, rgba(250,250,250,1) 100%);
+  transition: box-shadow 150ms ease;
+  padding: 0.05rem 0.25rem;
+
+  &:hover {
+    box-shadow: 0 0 24px rgba(74, 124, 246, 0.1);
+  }
+}
+
 div[class*="language-"] {
   @apply relative rounded my-4 bg-soft;
 

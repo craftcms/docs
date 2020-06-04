@@ -7,6 +7,9 @@ const prism = require('prismjs')
 // use Treeview plugin
 require('prismjs/plugins/treeview/prism-treeview.js')
 
+// handle our custom placeholders
+require('./prism-placeholders')
+
 const loadLanguages = require('prismjs/components/index')
 const { logger, chalk, escapeHtml } = require('@vuepress/shared-utils')
 
@@ -42,6 +45,7 @@ module.exports = (str, lang) => {
     if (!lang) {
         return wrap(str, 'text')
     }
+
     lang = lang.toLowerCase()
     const rawLang = lang
 
@@ -54,6 +58,7 @@ module.exports = (str, lang) => {
             logger.warn(chalk.yellow(`[vuepress] Syntax highlight for language "${lang}" is not supported.`))
         }
     }
+
     if (prism.languages[lang]) {
         const code = prism.highlight(str, prism.languages[lang], lang)
         return wrap(code, rawLang)
