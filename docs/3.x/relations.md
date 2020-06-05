@@ -1,8 +1,6 @@
 # Relations
 
-Craft has a powerful engine for relating elements to one another. You create those relationships using relational field types.
-
-Craft comes with five relational field types:
+Craft has a powerful engine for relating elements to one another with five relational field types:
 
 * [Assets Fields](assets-fields.md)
 * [Categories Fields](categories-fields.md)
@@ -14,24 +12,22 @@ Just like the other field types, you can add these to your [section](sections-an
 
 ## Terminology
 
-Before working with relations in Craft, it's important to grasp the following terms, as they are relevant to the templating side of things.
+Each relationship consists of two elements we call the *source* and *target*:
 
-Each relation involves two elements:
+- The <dfn>source</dfn> has the relational field where other elements are chosen.
+- The <dfn>target</dfn> element is the one selected by the source.
 
-* **Source** element - it has the relational field, where you selected the other element.
-* **Target** element - the one selected by the source.
+Let’s say we’d like have an entry for a drink recipe where we select each ingredient as a relationship in an Entries field.
 
-How does this look in practice?
+To set this up:
 
-If we have an entry for a drink recipe where we select the ingredients as relationships (via an Entries Field), we'd label the elements as follows:
+1. Create a new field using the Entries field type, with the name “Ingredients”.
+2. From the available source elements, check “Ingredients” so only those entries are options.
+3. Leave the Limit field blank so we can choose however many ingredients each recipe needs.
 
-* Drink Recipe Entry: Source
-* Ingredients: Target
+Now we can assign the ingredients to each Drink entry with the new Ingredients relation field.
 
-To set this up, we create a new field of the Entries Field Type, give it the name Ingredients, check Ingredients as the source (the available elements will be from the Ingredients section), and leave the Limit field blank so we can choose as many ingredients as each recipe dictates.
-
-Now we can assign the ingredients to each Drink entry via the new Ingredients relation field.
-
+By selecting multiple ingredients in an entry, we create several relationships—each with the recipe as the source and the ingredient as the target.
 
 ## Templating
 
@@ -41,7 +37,7 @@ Once we have our relations field set up, we can look at the options for outputti
 
 If you’ve already got a hold of the source element in your template, like in the example below where we're outputting the Drink entry, you can access its target elements for a particular field in the same way you access any other field’s value: by the handle.
 
-Calling the source's relational field handle (`ingredients`) returns an Element Criteria Model that can output the field’s target elements, in the field-defined order.
+Calling the source’s relational field handle (`ingredients`) returns an Element Criteria Model that can output the field’s target elements, in the field-defined order.
 
 If we want to output the ingredients list for a drink recipe, we'd use the following:
 
@@ -67,56 +63,93 @@ You can also add any additional parameters supported by the element type:
 {% endfor %}
 ```
 
-
 ### The `relatedTo` Parameter
 
 Assets, Categories, Entries, Users, and Tags each support a `relatedTo` parameter, enabling all kinds of crazy things.
 
-In its simplest form, you can pass in one of these things to it:
+You can pass one of these things to it:
 
-* A <api:craft\elements\Asset>, <api:craft\elements\Category>, <api:craft\elements\Entry>, <api:craft\elements\User>, or <api:craft\elements\Tag> object
-* An element’s ID
-* An array of element objects and/or IDs
+- A single **element object**: <api:craft\elements\Asset>, <api:craft\elements\Category>, <api:craft\elements\Entry>, <api:craft\elements\User>, or <api:craft\elements\Tag>
+- A single **element ID**
+- A **hash** with properties we’ll get into below: `element`, `sourceElement` or `targetElement` optionally with `field` and/or `sourceSite`
+- An **array** containing any mixture of the above options, which can start with `and` for relations on all elements rather than *any* elements (default behavior is `or`, which you can omit or pass explicitly)
 
-By doing that, Craft will return all of the elements related to the given element(s), regardless of which one’s the source or target.
+#### Simple Relationships
+
+A simpler query might pass a single element object or ID, like a `drinks` entry or entry ID represented here by `drink`:
 
 ```twig
 {% set relatedDrinks = craft.entries.section('drinks').relatedTo(drink).all() %}
+{# result: drinks entries with *any* relationship to `drink` (source or target) #}
 ```
 
-If you want to be a little more specific, `relatedTo` also accepts a [hash](dev/twig-primer.md#hashes) that contains the following properties:
+Passing an array of elements returns results relating to any one of the supplied items:
 
-* `element`, `sourceElement`, or `targetElement`
-* `field` _(optional)_
-* `sourceSite` _(optional)_
+```twig
+{% set relatedDrinks = craft.entries.section('drinks')
+    .relatedTo([ gin, lime ])
+    .all()
+%}
+{# result: drinks entries with any relationship to `gin` or `lime` #}
+```
 
-Set the first property’s key depending on what you want to get back:
+Passing `and` at the beginning of an array returns results relating to *all* of the supplied items:
 
-* Use `element` if you don’t care whether the returned elements are the source or the target of a relation with the element(s) you’re passing in
-* Use `sourceElement` if you want to find elements related to the given element, where the given element is the source of the relation
-* Use `targetElement` if you want to find elements related to the given element, where the given element is the target of the relation
+```twig
+{% set relatedDrinks = craft.entries.section('drinks')
+    .relatedTo([ 'and', gin, lime ])
+    .all()
+%}
+{# result: drinks entries with any relationship to `gin` and `lime` #}
+```
 
-Set the `field` property if you want to limit the scope to relations created by a particular field. You can set this to either a field handle or a field ID (or an array of handles and/or IDs).
+#### Advanced Relationships
+
+You can query more specifically by passing `relatedTo` a [hash](dev/twig-primer.md#hashes) that contains the following properties:
+
+| Property | Accepts | Description |
+| -------- | -------- | ----------- | -- |
+| `element`, `sourceElement`, or `targetElement` | Element ID, element, [element query](dev/element-queries/), or an array with any of those. | Use `element` for source *or* target relations, `sourceElement` for relations where provided item/set is the source, or `targetElement` for relations where provided item/set is the target. |
+| `field` (optional) | Field handle, field ID, or an array with either of those. | Limits scope to relations created by the supplied field(s). |
+| `sourceSite` (optional) | [Site](api:craft\models\Site) object, site ID, or site handle. | Limits scope to relations created from the supplied site(s). |
+
+::: warning
+Only use `sourceSite` if you’ve designated your relational field to be translatable.
+:::
+
+This is the equivalent of calling `drink.ingredients.all()`:
 
 ```twig
 {% set ingredients = craft.entries.section('ingredients').relatedTo({
     sourceElement: drink,
     field: 'ingredients'
 }) %}
+{# result: ingredients entries related from `drink`’s custom `ingredients` field #}
 ```
 
-Set the `sourceSite` property if you want to limit the scope to relations created from a particular site. (Only do this if you set your relational field to be translatable.) You can set this to a site ID.
+This doesn’t limit to a specific field, but it limits relations to the current site only:
 
 ```twig
 {% set ingredients = craft.entries.section('ingredients').relatedTo({
     sourceElement: drink,
     sourceSite: craft.app.sites.currentSite.id
 }) %}
+{# result: ingredients entries related from `drink`, limited to the current site #}
+```
+
+This finds other drinks that uses the current one’s primary ingredient:
+
+```twig
+{% set moreDrinks = craft.entries.section('drinks').relatedTo({
+    targetElement: drink.ingredients.one(),
+    field: 'ingredients'
+}) %}
+{# result: other drinks using `drink`’s first ingredient #}
 ```
 
 #### Going Through Matrix
 
-If you want to find elements related to a source element through a [Matrix](matrix-fields.md) field, just pass the Matrix field’s handle to the `field` parameter. If that Matrix field has more than one relational field and you want to target a specific one, you can specify the block type field’s handle using a dot notation:
+If you want to find elements related to a source element through a [Matrix](matrix-fields.md) field, pass the Matrix field’s handle to the `field` parameter. If that Matrix field has more than one relational field and you want to target a specific one, you can specify the block type field’s handle using a dot notation:
 
 ```twig
 {% set ingredients = craft.entries.section('ingredients').relatedTo({
@@ -136,6 +169,17 @@ There might be times when you need to factor multiple types of relations into th
     { sourceElement: currentUser, field: 'favoriteDrinks' },
     { targetElement: espresso, field: 'ingredients' }
 ]).all() %}
+{# result: current user’s favorite espresso drinks #}
 ```
 
-That first argument (`'and'`) specified that the query must match _all_ of the relation criteria. You can pass `'or'` instead if you want _any_ of the relation criteria to match.
+Or you might want to pass an element query to find other users’ favorite drinks using the current one’s primary ingredient:
+
+```twig
+{% set otherUsers = craft.users.not(currentUser).all() %}
+
+{% set recommendedCocktails = craft.entries.section('drinks').relatedTo(['and',
+    { sourcElement: otherUsers, field: 'favoriteDrinks' },
+    { targetElement: drink.ingredients.one(), field: 'ingredients' }
+]) %}
+{# result: other users’ favorite drinks that use `drink`’s first ingredient #}
+```
