@@ -56,6 +56,10 @@ Assets fields list all of the currently-related assets, with a button to select 
 
 Clicking the “Add an asset” button will bring up a modal window where you can find and select additional assets, as well as upload new ones.
 
+::: tip
+You can also upload assets by dragging files directly onto the assets field or modal window.
+:::
+
 ### Inline Asset Editing
 
 When you double-click on a related asset, a HUD will appear where you can edit the asset’s title and custom fields, and launch the Image Editor (if it’s an image).
