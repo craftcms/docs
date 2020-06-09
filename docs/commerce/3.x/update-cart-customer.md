@@ -33,6 +33,10 @@ Example:
 
 If a customer is a registered user, you cannot update the email address of the order; it’s always set to the user’s email address.
 
+::: warning
+If a customer is authenticated, any attempt to change their order’s email address will be ignored; the order will be linked directly to the customer and their current email address.
+:::
+
 ## Checking if a guest customer has a user account
 
 When guiding users through the checkout, it’s a good idea to collect the email address early. This checks the cart to see if they already have a user account on your site:
