@@ -9,7 +9,10 @@ For example, in a new Craft 3 project, your `.env` file should define these envi
 ```bash
 ENVIRONMENT="dev"
 SECURITY_KEY=""
-DB_DSN="mysql:host=<host>;port=<port>;dbname=<dbname>"
+DB_DRIVER="mysql"
+DB_SERVER="<host>"
+DB_PORT="<port>"
+DB_DATABASE="<dbname>"
 DB_USER="root"
 DB_PASSWORD=""
 DB_SCHEMA="public"
@@ -20,7 +23,10 @@ The variables that start with `DB_` are database connection settings, and they g
 
 ```php
 return [
-    'dsn' => getenv('DB_DSN'),
+    'driver' => getenv('DB_DRIVER'),
+    'server' => getenv('DB_SERVER'),
+    'port' => getenv('DB_PORT'),
+    'database' => getenv('DB_DATABASE'),
     'user' => getenv('DB_USER'),
     'password' => getenv('DB_PASSWORD'),
     'schema' => getenv('DB_SCHEMA'),
@@ -29,7 +35,7 @@ return [
 ```
 
 ::: tip NOTE
-If you installed Craft before 3.4 was released, you will have `DB_DRIVER`, `DB_SERVER`, `DB_DATABASE`, and `DB_PORT` environment variables (a well as corresponding values in `config/db.php`) instead of `DB_DSN`. Both approaches work, but setting `DB_DSN` instead is recommended in Craft 3.4 and later. 
+You may also provide a `DB_DSN` environment variable. If defined, Craft will use that.
 :::
 
 We recommend this environment variable approach for two reasons:
