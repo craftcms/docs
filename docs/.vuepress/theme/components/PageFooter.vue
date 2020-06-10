@@ -2,7 +2,11 @@
   <div class="content-wrapper">
     <div class="flex w-full items-center">
       <div class="w-3/5">
-        <div class="vote" :class="{ voted: hasVoted }">
+        <div
+          v-if="this.$page.frontmatter.helpfulVotes !== false"
+          class="vote"
+          :class="{ voted: hasVoted }"
+        >
           <div class="pane options">
             <h4
               class="heading"
