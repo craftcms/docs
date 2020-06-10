@@ -1,6 +1,6 @@
 <template>
   <div class="post-heading">
-    <div class="auto-toc block lg:hidden">
+    <div class="auto-toc block xl:hidden">
       <SidebarLinks :depth="0" :items="headingItems" fixed-heading="On this Page" />
     </div>
   </div>
