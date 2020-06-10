@@ -24,47 +24,42 @@ Previously emails would be generated during customer checkout, which could cause
 
 No changes are needed for emails to continue to work, but ensuring your queue is working correctly will ensure everything goes smoothly.
 
-
 ## Edit Order page
 
-Plugins and modules that modify the Edit Order page are likely to break with this update as the page is now a [Vue.js](https://vuejs.org/) application. 
+Plugins and modules that modify the Edit Order page are likely to break with this update as the page is now a [Vue.js](https://vuejs.org/) application.
 The same Twig template hooks are still available, but inserting into the part of the DOM controlled by Vue.js will not work.
 
-
-## Data tables
+## Data Tables
 
 All data tables throughout the control panel use the new Craft 3.4 Vue.js-based data table, so any extensions of those old HTML tables are likely to break.
-
 
 ## Permissions
 
 We have added the “Edit orders” and “Delete orders” user permissions, but users with the existing “Manage orders” permission will not automatically get these new permissions, so updating those users and user groups would be required.
 
-
-## Cart merging
+## Cart Merging
 
 Automatic cart merging has been removed.
 
-The cart is still retrieved from the front end templates using `craft.commerce.carts.cart` in your templates, but the optional `mergeCarts` param has been removed, and it is no longer possible to automicatically merge previous carts of the current user. 
+The cart is still retrieved from the front end templates using `craft.commerce.carts.cart` in your templates, but the optional `mergeCarts` param has been removed, and it is no longer possible to automicatically merge previous carts of the current user.
 
 We now recommend the customer manually adds items from the [previous carts to their current cart](adding-to-and-updating-the-cart.md#restoring-previous-cart-contents). An example of this is in the example templates.
 
-Merging carts as manual process is better since the customer can decide what to do with any validation issues like maximum quanity rules. The previous merge feature would just fail to merge correctly with no error messages. 
+Merging carts as manual process is better since the customer can decide what to do with any validation issues like maximum quanity rules. The previous merge feature would just fail to merge correctly with no error messages.
 
 This change is also mitigated by the fact that the previous cart of the current user is now loaded as the current cart when calling `craft.commerce.carts.cart` automatically.
 
-## Order recalculations
+## Order Recalculations
 
 Previously, a saved order would only be recalculated if it was still a cart, meaning `Order::isCompleted` was `false`.
 
 The introduction of order editing required more sophisticated recalculation that can be achieved with three order recalculation modes.
 
-| Mode | Recalculates |
-| ---- | ------------ |
-| [Recalculate All](https://docs.craftcms.com/commerce/api/v3/craft-commerce-elements-order.html#constants) | All line items (from purchasables) and all adjustments.<br>Removes line item if purchasable is out of stock.<br>**Default mode for carts.** |
-| [Adjustments Only](https://docs.craftcms.com/commerce/api/v3/craft-commerce-elements-order.html#constants) | All order adjustments; doesn’t change line items.
-| [None](https://docs.craftcms.com/commerce/api/v3/craft-commerce-elements-order.html#constants) | Nothing; does not change anything about the order. |
-
+| Mode                                                                                                       | Recalculates                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Recalculate All](https://docs.craftcms.com/commerce/api/v3/craft-commerce-elements-order.html#constants)  | All line items (from purchasables) and all adjustments.<br>Removes line item if purchasable is out of stock.<br>**Default mode for carts.** |
+| [Adjustments Only](https://docs.craftcms.com/commerce/api/v3/craft-commerce-elements-order.html#constants) | All order adjustments; doesn’t change line items.                                                                                           |
+| [None](https://docs.craftcms.com/commerce/api/v3/craft-commerce-elements-order.html#constants)             | Nothing; does not change anything about the order.                                                                                          |
 
 If you’re using event listeners or plugins to save orders, you may want to check and set the mode prior to saving to ensure recalculation behaves as expected. In this example, we’re avoiding any recalculation on our custom save by setting the recalculation mode to `Order::RECALCULATION_MODE_NONE`:
 
@@ -78,7 +73,7 @@ Craft::$app->elements->saveElement($order);
 $order->setRecalculationMode($originalRecalculationMode);
 ```
 
-## Twig template breaking changes
+## Twig Template Breaking Changes
 
 Use the table below to update each breaking change in your Twig templates.
 
@@ -93,20 +88,19 @@ Use the table below to update each breaking change in your Twig templates.
 | `craft.commerce.discountByCode`           | `craft.commerce.discounts.discountByCode`                           |
 | `craft.commerce.primaryPaymentCurrency`   | `craft.commerce.paymentCurrencies.primaryPaymentCurrency`           |
 | `craft.commerce.statesArray`              | `craft.commerce.states.allStatesAsList`                             |
-| `craft.commerce.states.allStatesAsList`          | `craft.commerce.states.getAllEnabledStatesAsListGroupedByCountryId` |
+| `craft.commerce.states.allStatesAsList`   | `craft.commerce.states.getAllEnabledStatesAsListGroupedByCountryId` |
 
 ## Form Action Changes
 
-| Old                                    | New                         | Docs                                                                        |
-| -------------------------------------- | --------------------------- | --------------------------------------------------------------------------- |
-| `commerce/cart/remove-line-item`       | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
-| `commerce/cart/update-line-item`       | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
-| `commerce/cart/remove-all-line-items`  | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
+| Old                                   | New                         | Docs                                                                        |
+| ------------------------------------- | --------------------------- | --------------------------------------------------------------------------- |
+| `commerce/cart/remove-line-item`      | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
+| `commerce/cart/update-line-item`      | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
+| `commerce/cart/remove-all-line-items` | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
 
 ## Event Changes
 
-| Old                                                          | New                                                        |
-| ------------------------------------------------------------ | ---------------------------------------------------------- |
+| Old                                                                      | New                                            |
+| ------------------------------------------------------------------------ | ---------------------------------------------- |
 | `craft\commerce\models\Address::EVENT_REGISTER_ADDRESS_VALIDATION_RULES` | `craft\base\Model::EVENT_DEFINE_RULES`         |
-| `craft\commerce\services\Reports::EVENT_BEFORE_GENERATE_EXPORT` | `craft\base\Element::EVENT_REGISTER_EXPORTERS`          |
-
+| `craft\commerce\services\Reports::EVENT_BEFORE_GENERATE_EXPORT`          | `craft\base\Element::EVENT_REGISTER_EXPORTERS` |
