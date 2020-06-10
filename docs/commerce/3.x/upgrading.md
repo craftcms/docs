@@ -104,3 +104,9 @@ Use the table below to update each breaking change in your Twig templates.
 | ------------------------------------------------------------------------ | ---------------------------------------------- |
 | `craft\commerce\models\Address::EVENT_REGISTER_ADDRESS_VALIDATION_RULES` | `craft\base\Model::EVENT_DEFINE_RULES`         |
 | `craft\commerce\services\Reports::EVENT_BEFORE_GENERATE_EXPORT`          | `craft\base\Element::EVENT_REGISTER_EXPORTERS` |
+
+## Custom Adjuster Types
+
+In order to improve compatibility with payment gateways and tax systems, custom adjuster types have been deprecated.
+
+Custom adjusters must extend the included <api:craft\commerce\adjusters\Discount>, <api:craft\commerce\adjusters\Shipping>, or <api:craft\commerce\adjusters\Tax>.
