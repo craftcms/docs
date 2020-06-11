@@ -37,7 +37,7 @@ Once we have our relations field set up, we can look at the options for outputti
 
 If you’ve already got a hold of the source element in your template, like in the example below where we're outputting the Drink entry, you can access its target elements for a particular field in the same way you access any other field’s value: by the handle.
 
-Calling the source’s relational field handle (`ingredients`) returns an Element Criteria Model that can output the field’s target elements, in the field-defined order.
+Calling the source’s relational field handle (`ingredients`) returns an [entry query](dev/element-queries/entry-queries.md) that can output the field’s target elements, in the field-defined order.
 
 If we want to output the ingredients list for a drink recipe, we'd use the following:
 
@@ -71,8 +71,8 @@ You can pass one of these things to it:
 
 - A single **element object**: <api:craft\elements\Asset>, <api:craft\elements\Category>, <api:craft\elements\Entry>, <api:craft\elements\User>, or <api:craft\elements\Tag>
 - A single **element ID**
-- A **hash** with properties we’ll get into below: `element`, `sourceElement` or `targetElement` optionally with `field` and/or `sourceSite`
-- An **array** containing any mixture of the above options, which can start with `and` for relations on all elements rather than *any* elements (default behavior is `or`, which you can omit or pass explicitly)
+- A [**hash**](dev/twig-primer.md#hashes) with properties we’ll get into below: `element`, `sourceElement` or `targetElement` optionally with `field` and/or `sourceSite`
+- An [**array**](dev/twig-primer.md#arrays) containing any mixture of the above options, which can start with `and` for relations on all elements rather than _any_ elements (default behavior is `or`, which you can omit or pass explicitly)
 
 #### Simple Relationships
 
