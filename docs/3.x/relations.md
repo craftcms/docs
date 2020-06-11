@@ -201,7 +201,8 @@ Or you might want to pass an element query to find other users’ favorite drink
     .all() %}
 
 {% set recommendedCocktails = craft.entries()
-    .section('drinks').relatedTo(['and',
+    .section('drinks')
+    .relatedTo(['and',
         { sourcElement: otherUsers, field: 'favoriteDrinks' },
         { targetElement: drink.ingredients.one(), field: 'ingredients' }
     ])
