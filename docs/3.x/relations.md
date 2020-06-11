@@ -88,8 +88,7 @@ Passing an array of elements returns results relating to any one of the supplied
 ```twig
 {% set relatedDrinks = craft.entries.section('drinks')
     .relatedTo([ gin, lime ])
-    .all()
-%}
+    .all() %}
 {# result: drinks entries with any relationship to `gin` or `lime` #}
 ```
 
@@ -98,8 +97,7 @@ Passing `and` at the beginning of an array returns results relating to *all* of 
 ```twig
 {% set relatedDrinks = craft.entries.section('drinks')
     .relatedTo([ 'and', gin, lime ])
-    .all()
-%}
+    .all() %}
 {# result: drinks entries with any relationship to `gin` and `lime` #}
 ```
 
