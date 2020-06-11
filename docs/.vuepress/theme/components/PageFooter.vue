@@ -9,9 +9,9 @@
         >
           <div class="pane options">
             <h4
-              class="heading"
+              class="heading block"
             >{{ hasVoted ? "Thanks for your feedback." : "Was this page helpful?" }}</h4>
-            <div class="vote-buttons">
+            <div class="vote-buttons inline-block">
               <button
                 aria-label="Yes"
                 class="option yes"
@@ -37,7 +37,7 @@
                 </svg>
               </button>
               <button
-                aria-label="Yes"
+                aria-label="No"
                 class="option no"
                 :class="{ chosen: hasVoted && vote === false }"
                 @click="handleFeedback(false)"
@@ -61,6 +61,13 @@
                 </svg>
               </button>
             </div>
+            <a
+              v-if="vote === false"
+              class="more-feedback"
+              :href="getIssueUrl()"
+              target="_blank"
+              rel="noopener"
+            >{{ "Give More Feedback →"}}</a>
           </div>
         </div>
       </div>
@@ -199,12 +206,26 @@ h4 {
     transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   }
 }
+
+.more-feedback {
+  @apply relative;
+  top: -1px;
+}
 </style>
 
 <script>
 import { getStorage, setStorage } from "../Storage";
 
 export default {
+  data() {
+    return {
+      vote: null,
+      hasVoted: null
+    };
+  },
+  mounted() {
+    this.refreshState();
+  },
   methods: {
     handleFeedback(wasHelpful) {
       if (typeof ga === "function") {
@@ -221,6 +242,8 @@ export default {
       }
 
       this.setVoteForPath(this.$route.fullPath, wasHelpful);
+      this.hasVoted = true;
+      this.vote = wasHelpful;
     },
     getStoredVotes() {
       let storedVotes = getStorage("votes", this.$site.base);
@@ -248,14 +271,24 @@ export default {
       let votes = this.getStoredVotes();
       votes.push({ path: path, value: vote });
       setStorage("votes", JSON.stringify(votes), this.$site.base);
+
+      // force refresh
+      this.refreshState();
+    },
+    refreshState() {
+      this.vote = this.getVoteForPath(this.$route.fullPath);
+      this.hasVoted = this.vote !== null;
+    },
+    getIssueUrl() {
+      return encodeURI(
+        `https://github.com/pixelandtonic/craft-docs/issues/new?title=${this
+          .$page.title + " Improvement"}`
+      );
     }
   },
-  computed: {
-    hasVoted() {
-      return this.vote !== null;
-    },
-    vote() {
-      return this.getVoteForPath(this.$route.fullPath);
+  watch: {
+    $route() {
+      this.refreshState();
     }
   }
 };
