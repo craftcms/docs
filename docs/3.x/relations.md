@@ -79,14 +79,18 @@ You can pass one of these things to it:
 A simpler query might pass a single element object or ID, like a `drinks` entry or entry ID represented here by `drink`:
 
 ```twig
-{% set relatedDrinks = craft.entries.section('drinks').relatedTo(drink).all() %}
+{% set relatedDrinks = craft.entries()
+    .section('drinks')
+    .relatedTo(drink)
+    .all() %}
 {# result: drinks entries with *any* relationship to `drink` (source or target) #}
 ```
 
 Passing an array of elements returns results relating to any one of the supplied items:
 
 ```twig
-{% set relatedDrinks = craft.entries.section('drinks')
+{% set relatedDrinks = craft.entries()
+    .section('drinks')
     .relatedTo([ gin, lime ])
     .all() %}
 {# result: drinks entries with any relationship to `gin` or `lime` #}
@@ -95,7 +99,8 @@ Passing an array of elements returns results relating to any one of the supplied
 Passing `and` at the beginning of an array returns results relating to *all* of the supplied items:
 
 ```twig
-{% set relatedDrinks = craft.entries.section('drinks')
+{% set relatedDrinks = craft.entries()
+    .section('drinks')
     .relatedTo([ 'and', gin, lime ])
     .all() %}
 {# result: drinks entries with any relationship to `gin` and `lime` #}
@@ -118,30 +123,39 @@ Only use `sourceSite` if you’ve designated your relational field to be transla
 This is the equivalent of calling `drink.ingredients.all()`:
 
 ```twig
-{% set ingredients = craft.entries.section('ingredients').relatedTo({
-    sourceElement: drink,
-    field: 'ingredients'
-}).all() %}
+{% set ingredients = craft.entries()
+    .section('ingredients')
+    .relatedTo({
+        sourceElement: drink,
+        field: 'ingredients'
+    })
+    .all() %}
 {# result: ingredients entries related from `drink`’s custom `ingredients` field #}
 ```
 
 This doesn’t limit to a specific field, but it limits relations to the current site only:
 
 ```twig
-{% set ingredients = craft.entries.section('ingredients').relatedTo({
-    sourceElement: drink,
-    sourceSite: craft.app.sites.currentSite.id
-}) %}
+{% set ingredients = craft.entries()
+    .section('ingredients')
+    .relatedTo({
+        sourceElement: drink,
+        sourceSite: craft.app.sites.currentSite.id
+    })
+    .all() %}
 {# result: ingredients entries related from `drink`, limited to the current site #}
 ```
 
 This finds other drinks that uses the current one’s primary ingredient:
 
 ```twig
-{% set moreDrinks = craft.entries.section('drinks').relatedTo({
-    targetElement: drink.ingredients.one(),
-    field: 'ingredients'
-}).all() %}
+{% set moreDrinks = craft.entries()
+    .section('drinks')
+    .relatedTo({
+        targetElement: drink.ingredients.one(),
+        field: 'ingredients'
+    })
+    .all() %}
 {# result: other drinks using `drink`’s first ingredient #}
 ```
 
@@ -150,10 +164,13 @@ This finds other drinks that uses the current one’s primary ingredient:
 If you want to find elements related to a source element through a [Matrix](matrix-fields.md) field, pass the Matrix field’s handle to the `field` parameter. If that Matrix field has more than one relational field and you want to target a specific one, you can specify the block type field’s handle using a dot notation:
 
 ```twig
-{% set ingredients = craft.entries.section('ingredients').relatedTo({
-    sourceElement: drink,
-    field: 'ingredientsMatrix.relatedIngredient'
-}).all() %}
+{% set ingredients = craft.entries()
+    .section('ingredients')
+    .relatedTo({
+        sourceElement: drink,
+        field: 'ingredientsMatrix.relatedIngredient'
+    })
+    .all() %}
 ```
 
 #### Passing Multiple Relation Criteria
@@ -161,23 +178,33 @@ If you want to find elements related to a source element through a [Matrix](matr
 There might be times when you need to factor multiple types of relations into the mix. For example, outputting all of the current user’s favorite drinks that include espresso:
 
 ```twig
-{% set espresso = craft.entries.section('ingredients').slug('espresso').one() %}
+{% set espresso = craft.entries()
+    .section('ingredients')
+    .slug('espresso')
+    .one() %}
 
-{% set cocktails = craft.entries.section('drinks').relatedTo(['and',
-    { sourceElement: currentUser, field: 'favoriteDrinks' },
-    { targetElement: espresso, field: 'ingredients' }
-]).all() %}
+{% set cocktails = craft.entries()
+    .section('drinks')
+    .relatedTo(['and',
+        { sourceElement: currentUser, field: 'favoriteDrinks' },
+        { targetElement: espresso, field: 'ingredients' }
+    ])
+    .all() %}
 {# result: current user’s favorite espresso drinks #}
 ```
 
 Or you might want to pass an element query to find other users’ favorite drinks using the current one’s primary ingredient:
 
 ```twig
-{% set otherUsers = craft.users.not(currentUser).all() %}
+{% set otherUsers = craft.users()
+    .not(currentUser)
+    .all() %}
 
-{% set recommendedCocktails = craft.entries.section('drinks').relatedTo(['and',
-    { sourcElement: otherUsers, field: 'favoriteDrinks' },
-    { targetElement: drink.ingredients.one(), field: 'ingredients' }
-]) %}
+{% set recommendedCocktails = craft.entries()
+    .section('drinks').relatedTo(['and',
+        { sourcElement: otherUsers, field: 'favoriteDrinks' },
+        { targetElement: drink.ingredients.one(), field: 'ingredients' }
+    ])
+    .all() %}
 {# result: other users’ favorite drinks that use `drink`’s first ingredient #}
 ```
