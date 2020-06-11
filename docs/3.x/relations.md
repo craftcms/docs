@@ -121,7 +121,7 @@ This is the equivalent of calling `drink.ingredients.all()`:
 {% set ingredients = craft.entries.section('ingredients').relatedTo({
     sourceElement: drink,
     field: 'ingredients'
-}) %}
+}).all() %}
 {# result: ingredients entries related from `drink`’s custom `ingredients` field #}
 ```
 
@@ -141,7 +141,7 @@ This finds other drinks that uses the current one’s primary ingredient:
 {% set moreDrinks = craft.entries.section('drinks').relatedTo({
     targetElement: drink.ingredients.one(),
     field: 'ingredients'
-}) %}
+}).all() %}
 {# result: other drinks using `drink`’s first ingredient #}
 ```
 
