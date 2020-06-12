@@ -35,6 +35,10 @@ The “Position Select” field type has been removed from Craft 3. If you had a
 
 If you miss Position Select, you can try installing the [Position Fieldtype](https://github.com/Rias500/craft-position-fieldtype) plugin, which brings it back.
 
+## Lightswitch Fields
+
+Lightswitch field values are now always `true` or `false`. If you’re accessing a Lightswitch field value for an element that doesn’t have an explicit value set yet, the field’s default value will be returned instead.
+
 ## Remote Volumes
 
 Support for Amazon S3, Rackspace Cloud Files, and Google Cloud Storage have been moved into plugins. If you have any asset volumes that were using those services in Craft 2, you will need to install the new plugins:
