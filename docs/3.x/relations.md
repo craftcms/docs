@@ -185,7 +185,8 @@ There might be times when you need to factor multiple types of relations into th
 
 {% set cocktails = craft.entries()
     .section('drinks')
-    .relatedTo(['and',
+    .relatedTo([
+        'and',
         { sourceElement: currentUser, field: 'favoriteDrinks' },
         { targetElement: espresso, field: 'ingredients' }
     ])
@@ -202,7 +203,8 @@ Or you might want to pass an element query to find other users’ favorite drink
 
 {% set recommendedCocktails = craft.entries()
     .section('drinks')
-    .relatedTo(['and',
+    .relatedTo([
+        'and',
         { sourcElement: otherUsers, field: 'favoriteDrinks' },
         { targetElement: drink.ingredients.one(), field: 'ingredients' }
     ])
