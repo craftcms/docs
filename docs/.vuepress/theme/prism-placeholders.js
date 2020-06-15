@@ -1,13 +1,10 @@
 // grab our custom list of placeholder strings
-const dictionary = require('../placeholders');
+const dictionary = require("../placeholders");
 
-const placeholderClass = 'code-placeholder';
+const placeholderClass = "code-placeholder";
 
 // token types to try find/replace (more = slower build)
-const searchTypes = [
-    'string',
-    'other'
-];
+const searchTypes = ["string", "other"];
 
 /**
  * Uses Prism’s `wrap` hook to check each token’s content for placeholder strings.
@@ -18,32 +15,32 @@ const searchTypes = [
  * If the wrapped element contains one or more placeholder strings, each one
  * will be wrapped with the placeholder class and optional title attribute.
  */
-Prism.hooks.add('wrap', function(env) {
-    if (env.content) {
-        if (isDictionaryString(env.content)) {
-            env.classes.push(placeholderClass);
+Prism.hooks.add("wrap", function(env) {
+  if (env.content) {
+    if (isDictionaryString(env.content)) {
+      env.classes.push(placeholderClass);
 
-            let title = getTitle(env.content);
+      let title = getTitle(env.content);
 
-            if (title) {
-                env.attributes['title'] = title;
-            }
-        } else if (searchTypes.includes(env.type)) {
-            let placeholders = findDictionaryStrings(env.content);
+      if (title) {
+        env.attributes["title"] = title;
+      }
+    } else if (searchTypes.includes(env.type)) {
+      let placeholders = findDictionaryStrings(env.content);
 
-            if (placeholders.length > 0) {
-                placeholders.forEach((placeholder) => {
-                    let replaceRegex = new RegExp(placeholder, 'g');
-                    let title = getTitle(placeholder);
+      if (placeholders.length > 0) {
+        placeholders.forEach(placeholder => {
+          let replaceRegex = new RegExp(placeholder, "g");
+          let title = getTitle(placeholder);
 
-                    env.content = env.content.replace(
-                        replaceRegex,
-                        `<span class="${placeholderClass}" title="${title}">${placeholder}</span>`
-                    );
-                });
-            }
-        }
+          env.content = env.content.replace(
+            replaceRegex,
+            `<span class="${placeholderClass}" title="${title}">${placeholder}</span>`
+          );
+        });
+      }
     }
+  }
 });
 
 /**
@@ -52,7 +49,7 @@ Prism.hooks.add('wrap', function(env) {
  * @returns {boolean}
  */
 function isDictionaryString(str) {
-    return dictionary.hasOwnProperty(str);
+  return dictionary.hasOwnProperty(str);
 }
 
 /**
@@ -62,12 +59,13 @@ function isDictionaryString(str) {
  * @returns {array}
  */
 function findDictionaryStrings(str) {
-    return Object.keys(dictionary).filter(stringContainsPlaceholder(str));
+  return Object.keys(dictionary).filter(stringContainsPlaceholder(str));
 }
 
 function getTitle(placeholder) {
-    return dictionary[placeholder].hasOwnProperty('title') ?
-        dictionary[placeholder].title : false;
+  return dictionary[placeholder].hasOwnProperty("title")
+    ? dictionary[placeholder].title
+    : false;
 }
 
 /**
@@ -78,7 +76,7 @@ function getTitle(placeholder) {
  * @returns {function(*=): boolean}
  */
 function stringContainsPlaceholder(str) {
-    return function(element) {
-        return str.indexOf(element) !== -1;
-    }
+  return function(element) {
+    return str.indexOf(element) !== -1;
+  };
 }
