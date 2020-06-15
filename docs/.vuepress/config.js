@@ -62,7 +62,7 @@ module.exports = {
       csv: "CSV",
       json: "JSON",
       xml: "XML",
-      treeview: "Folder",
+      treeview: "Folder"
     }
   },
   markdown: {
@@ -79,7 +79,7 @@ module.exports = {
       md.options.highlight = require("./theme/highlight");
 
       // add markdown extensions
-      md.use(replaceApiLinks)
+      md.use(require("./theme/util/replace-anchor-prefixes").replacePrefixes)
         .use(require("./theme/markup"))
         .use(require("markdown-it-deflist"))
         .use(require("markdown-it-imsize"));
@@ -89,75 +89,3 @@ module.exports = {
     plugins: require("../../postcss.config.js").plugins
   }
 };
-
-function replaceApiLinks(md) {
-  // TODO: revise to handle all doc sets
-  // code adapted from the markdown-it-replace-link plugin
-  md.core.ruler.after("inline", "replace-link", function(state) {
-    state.tokens.forEach(function(blockToken) {
-      if (blockToken.type === "inline" && blockToken.children) {
-        blockToken.children.forEach(function(token, tokenIndex) {
-          if (token.type === "link_open") {
-            token.attrs.forEach(function(attr) {
-              if (attr[0] === "href") {
-                let replace = replaceApiLink(attr[1]);
-                if (replace) {
-                  attr[1] = replace;
-                  let next = blockToken.children[tokenIndex + 1];
-                  if (next.type === "text") {
-                    next.content = next.content.replace(/^(api|config):/, "");
-                  }
-                }
-              }
-              return false;
-            });
-          }
-        });
-      }
-    });
-    return false;
-  });
-}
-
-function replaceApiLink(link) {
-  link = decodeURIComponent(link);
-  let m = link.match(
-    /^(?:api:)?\\?([\w\\]+)(?:::\$?(\w+)(\(\))?)?(?:#([\w\-]+))?$/
-  );
-  if (m) {
-    let className = m[1];
-    let subject = m[2];
-    let isMethod = typeof m[3] !== "undefined";
-    let hash = m[4];
-
-    if (className.match(/^craft\\/) || className.match(/^Craft/)) {
-      let url =
-        "https://docs.craftcms.com/api/v3/" +
-        className.replace(/\\/g, "-").toLowerCase() +
-        ".html";
-      if (subject) {
-        hash = "";
-        if (isMethod) {
-          hash = "method-";
-        }
-        hash += subject.replace(/_/g, "-").toLowerCase();
-      }
-      return url + (hash ? `#${hash}` : "");
-    }
-
-    if (className.match(/^yii\\/) || className.match(/^Yii/)) {
-      let url =
-        "https://www.yiiframework.com/doc/api/2.0/" +
-        className.replace(/\\/g, "-").toLowerCase();
-      if (subject) {
-        hash = (isMethod ? `${subject}()` : `\$${subject}`) + "-detail";
-      }
-      return url + (hash ? `#${hash}` : "");
-    }
-  }
-
-  m = link.match(/^config:(.+)/);
-  if (m) {
-    return "/config/config-settings.md#" + m[1].toLowerCase();
-  }
-}
