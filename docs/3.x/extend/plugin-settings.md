@@ -49,6 +49,11 @@ class Plugin extends \craft\base\Plugin
 }
 ```
 
+::: warning
+The setting model’s [`fields()`](https://www.yiiframework.com/doc/api/2.0/yii-base-model#fields()-detail) are serialized for project config, so any complex or nested data types that aren’t compatible with [`toArray()`](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) should be excluded from `fields()` and declared in [`extraFields()`](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#extraFields()-detail) instead.
+:::
+
+
 ## Accessing Settings
 
 With your settings model and `createSettingsModel()` method in place, you can now access your settings model, populated with any custom values set for the current project, via a `getSettings()` method on your main plugin class:
