@@ -5,6 +5,11 @@
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
   >
+    <div
+      class="sidebar-mask"
+      @click="toggleSidebar(false)"
+    />
+
     <LeftBar
       :set="$activeSet"
       :version="$activeVersion"
@@ -13,9 +18,14 @@
       @selectVersion="handleVersionUpdate"
       @selectLanguage="handleLanguageUpdate"
     />
-    <div id="main" class="relative lg:ml-64 max-w-screen-md mx-auto lg:max-w-none">
-      <div id="top-bar" class="block h-12 w-full content-center relative">
-        <div id="search" class="block max-w-screen-md h-full flex items-center px-10">
+    <div id="main" class="main relative lg:ml-64 max-w-screen-md mx-auto lg:max-w-none">
+      <div id="top-bar" class="block h-12 w-full content-center relative px-10">
+        <button @click="toggleSidebar" class="nav-hamburger inline-block lg:hidden">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div id="search" class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center">
           <SearchBox
             v-if="
               $site.themeConfig.search !== false &&
@@ -41,8 +51,34 @@
   @apply relative mx-auto;
 }
 
+.sidebar-open {
+  /* todo: get body overflow-x: hidden */
+
+  .main {
+    /* w-64 */
+    transform: translateX(16rem);
+    opacity: 0.5;
+    overflow: hidden;
+  }
+
+  .left-bar {
+    @apply shadow-xl z-10;
+    transform: translateX(0);
+  }
+
+  .sidebar-mask {
+    @apply block;
+  }
+}
+
+.main {
+  transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+  transform: translateX(0);
+}
+
 .left-bar {
-  @apply hidden;
+  transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+  transform: translateX(-16rem);
 }
 
 .right-nav {
@@ -73,13 +109,36 @@
   }
 }
 
+.nav-hamburger {
+  @apply rounded absolute;
+  height: 2.3rem;
+  width: 2.3rem;
+  top: 0.4rem;
+
+  span {
+    @apply block bg-black absolute left-0;
+    top: 13px;
+    left: 0.575rem;
+    width: 18px;
+    height: 2px;
+  }
+
+  span + span {
+    top: 18px;
+  }
+
+  span + span + span {
+    top: 23px;
+  }
+}
+
 @screen lg {
   .theme-container {
     @apply max-w-screen-lg;
   }
 
   .left-bar {
-    @apply block;
+    transform: translateX(0);
   }
 }
 
@@ -201,7 +260,7 @@ export default {
 
       // no set, no sidebar items (just list sets)
       if (!this.$activeSet) {
-        console.log("no sidebar set available");
+        //console.log("no sidebar set available");
         return [];
       }
 
