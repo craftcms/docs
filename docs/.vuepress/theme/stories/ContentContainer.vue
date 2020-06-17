@@ -13,8 +13,7 @@
 }
 
 .content-container {
-  @apply mx-auto;
-  max-width: 740px;
+  @apply mx-auto max-w-screen-md;
 }
 
 .center-vertically {

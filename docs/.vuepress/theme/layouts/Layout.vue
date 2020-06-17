@@ -19,7 +19,7 @@
       @selectLanguage="handleLanguageUpdate"
     />
     <div id="main" class="main relative lg:ml-64 max-w-screen-md mx-auto lg:max-w-none">
-      <div id="top-bar" class="block h-12 w-full content-center relative px-10">
+      <div id="top-bar" class="block h-12 w-full content-center relative px-10 pt-2 max-w-screen-md">
         <button @click="toggleSidebar" class="nav-hamburger inline-block lg:hidden">
           <span></span>
           <span></span>
@@ -113,7 +113,7 @@
   @apply rounded absolute;
   height: 2.3rem;
   width: 2.3rem;
-  top: 0.4rem;
+  top: 0.6rem;
 
   span {
     @apply block bg-black absolute left-0;
@@ -185,7 +185,7 @@ export default {
 
   data() {
     return {
-      isSidebarOpen: true,
+      isSidebarOpen: false,
       version: null
     };
   },
