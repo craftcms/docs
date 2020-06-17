@@ -124,26 +124,60 @@ function resolvePath(relative, base, append) {
  * @param { string } localePath
  * @returns { SidebarGroup }
  */
-export function resolveSidebarItems(page, regularPath, site, localePath) {
+export function resolveSidebarItems(
+  page,
+  regularPath,
+  site,
+  localePath,
+  activeSet,
+  activeVersion,
+  localeConfig
+) {
   const { pages, themeConfig } = site;
 
-  const localeConfig =
-    localePath && themeConfig.locales
-      ? themeConfig.locales[localePath] || themeConfig
-      : themeConfig;
+  //console.log("resolveSidebarItems()", page, regularPath, site, localePath);
 
-  const pageSidebarConfig =
-    page.frontmatter.sidebar || localeConfig.sidebar || themeConfig.sidebar;
-  if (pageSidebarConfig === "auto") {
-    return resolveHeaders(page);
+  // no set, no sidebar items (just list sets)
+  if (!activeSet) {
+    //console.log("no sidebar set available");
+    return [];
   }
 
-  const sidebarConfig = localeConfig.sidebar || themeConfig.sidebar;
+  // get the active set locale config if it exists, otherwise the set config
+  const appliedConfig = activeSet.locales ? localeConfig.config : activeSet;
+
+  let sidebarConfig =
+    page.frontmatter.sidebar || appliedConfig.sidebar || themeConfig.sidebar;
+
+  if (activeVersion) {
+    sidebarConfig = sidebarConfig[activeVersion];
+  } else {
+    sidebarConfig = sidebarConfig;
+  }
+
   if (!sidebarConfig) {
     return [];
   } else {
-    const { base, config } = resolveMatchingConfig(regularPath, sidebarConfig);
-    return config ? config.map(item => resolveItem(item, pages, base)) : [];
+    const regularPathWithoutVersion = regularPath.replace(
+      "/" + activeVersion + "/",
+      "/"
+    );
+
+    let { base, config } = resolveMatchingConfig(
+      regularPathWithoutVersion,
+      sidebarConfig
+    );
+
+    if (!config) {
+      console.log("didn’t resolve config");
+      return [];
+    }
+
+    const resolved = config.map(item => {
+      return resolveItem(item, pages, regularPath);
+    });
+
+    return resolved;
   }
 }
 

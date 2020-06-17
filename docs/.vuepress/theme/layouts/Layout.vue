@@ -180,7 +180,11 @@ import Page from "../components/Page";
 import LeftBar from "../components/LeftBar";
 import SearchBox from "../components/SearchBox";
 
-import { resolveMatchingConfig, resolveItem } from "../util";
+import {
+  resolveMatchingConfig,
+  resolveItem,
+  resolveSidebarItems
+} from "../util";
 
 export default {
   name: "Layout",
@@ -235,11 +239,14 @@ export default {
     },
 
     sidebarItems() {
-      return this.resolveSidebarItems(
+      return resolveSidebarItems(
         this.$page,
         this.$page.regularPath,
         this.$site,
-        this.$localePath
+        this.$localePath,
+        this.$activeSet,
+        this.$activeVersion,
+        this.$localeConfig
       );
     }
   },
@@ -258,57 +265,6 @@ export default {
 
     focusSearch() {
       this.$refs.searchInput.focus();
-    },
-
-    resolveSidebarItems(page, regularPath, site, localePath) {
-      const { pages, themeConfig } = site;
-
-      //console.log("resolveSidebarItems()", page, regularPath, site, localePath);
-
-      // no set, no sidebar items (just list sets)
-      if (!this.$activeSet) {
-        //console.log("no sidebar set available");
-        return [];
-      }
-
-      // get the active set locale config if it exists, otherwise the set config
-      const localeConfig = this.$activeSet.locales
-        ? this.$localeConfig.config
-        : this.$activeSet;
-
-      let sidebarConfig =
-        page.frontmatter.sidebar || localeConfig.sidebar || themeConfig.sidebar;
-
-      if (this.$activeVersion) {
-        sidebarConfig = sidebarConfig[this.$activeVersion];
-      } else {
-        sidebarConfig = sidebarConfig;
-      }
-
-      if (!sidebarConfig) {
-        return [];
-      } else {
-        const regularPathWithoutVersion = regularPath.replace(
-          "/" + this.$activeVersion + "/",
-          "/"
-        );
-
-        let { base, config } = resolveMatchingConfig(
-          regularPathWithoutVersion,
-          sidebarConfig
-        );
-
-        if (!config) {
-          console.log("didn’t resolve config");
-          return [];
-        }
-
-        const resolved = config.map(item => {
-          return resolveItem(item, pages, regularPath);
-        });
-
-        return resolved;
-      }
     },
 
     handleVersionUpdate(version) {
