@@ -63,6 +63,11 @@ module.exports = {
       json: "JSON",
       xml: "XML",
       treeview: "Folder"
+    },
+    feedback: {
+      helpful: "Was this page helpful?",
+      thanks: "Thanks for your feedback.",
+      more: "Give More Feedback →"
     }
   },
   markdown: {

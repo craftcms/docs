@@ -16,6 +16,7 @@ export default {
     // use custom active class matching logic
     // due to edge case of paths ending with / + hash
     const selfActive = isActive($route, item.path);
+
     // for sidebar: auto pages, a hash link should be active if one of its child
     // matches
     const active =
