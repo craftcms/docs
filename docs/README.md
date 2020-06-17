@@ -1,5 +1,6 @@
 ---
 editLink: false
+helpfulVotes: false
 home: true
 ---
 
@@ -10,8 +11,8 @@ Everything here is about building with Craft CMS.
 ## Browse Product Documentation
 
 <div class="w-full flex -mx-2">
-    <LinkPanel title="Craft CMS" subtitle="Flexible content management." link="/v3/" icon="/icons/craft.svg" />
-    <LinkPanel title="Craft Commerce" subtitle="Custom, extensible ecommerce." link="/commerce/v3/" icon="/icons/commerce.svg" />
+    <LinkPanel title="Craft CMS" subtitle="Flexible content management." link="/3.x/" icon="/icons/craft.svg" />
+    <LinkPanel title="Craft Commerce" subtitle="Custom, extensible ecommerce." link="/commerce/3.x/" icon="/icons/commerce.svg" />
 </div>
 
 ## Follow Tutorials
