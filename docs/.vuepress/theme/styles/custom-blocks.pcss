@@ -35,7 +35,8 @@
 
   &.warning {
     background-color: rgba(255, 229, 100, 0.3);
-    border-color: #e7c000;
+    border: 1px solid rgba(255, 229, 100, 0.4);
+    border-bottom: 1px solid rgba(255, 229, 100, 0.6);
     color: #6b5900;
 
     .custom-block-title {
@@ -54,6 +55,8 @@
   &.danger {
     background-color: #ffe6e6;
     border-color: #c00;
+    border: 1px solid #ffdcdd;
+    border-bottom: 1px solid #ffcece;
     color: #4d0000;
 
     .custom-block-title {
@@ -65,7 +68,7 @@
     }
 
     &:before {
-      background: transparent url("/icons/icon-warning.svg") no-repeat 0 0;
+      background: transparent url("/icons/icon-danger.svg") no-repeat 0 0;
     }
   }
 
