@@ -9,9 +9,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
-}
-
-body {
   font-family: "GT Eesti", "Futura Std", "Futura", "Helvetica", sans-serif;
   font-weight: 400;
 }
@@ -65,4 +62,10 @@ img {
 .sidebar {
   @apply bg-white text-base w-80 fixed z-10 m-0 left-0 bottom-0 box-border overflow-y-auto;
   top: 3.6rem;
+}
+
+@media screen and (min-width: 1408px) {
+  body {
+    zoom: 1.08;
+  }
 }
