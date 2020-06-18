@@ -1,7 +1,14 @@
 <template>
   <div class="post-heading">
-    <div class="auto-toc block xl:hidden" v-if="headingItems.length && headingItems[0].children.length">
-      <SidebarLinks :depth="0" :items="headingItems" fixed-heading="On this Page" />
+    <div
+      class="auto-toc block xl:hidden"
+      v-if="headingItems.length && headingItems[0].children.length"
+    >
+      <SidebarLinks
+        :depth="0"
+        :items="headingItems"
+        fixed-heading="On this Page"
+      />
     </div>
   </div>
 </template>

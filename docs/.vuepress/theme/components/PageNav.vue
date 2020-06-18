@@ -2,7 +2,11 @@
   <div>
     <div class="right-nav w-64 absolute right-0 top-0">
       <div class="fixed mt-24">
-        <SidebarLinks :depth="0" :items="headingItems" fixed-heading="On this Page" />
+        <SidebarLinks
+          :depth="0"
+          :items="headingItems"
+          fixed-heading="On this Page"
+        />
       </div>
     </div>
     <div v-if="prev || next" class="page-nav content-wrapper">
@@ -20,7 +24,9 @@
             <OutboundLink />
           </a>
 
-          <RouterLink v-else class="prev" :to="prev.path">{{ prev.title || prev.path }}</RouterLink>
+          <RouterLink v-else class="prev" :to="prev.path">{{
+            prev.title || prev.path
+          }}</RouterLink>
         </span>
 
         <span v-if="next" class="next float-right">
@@ -34,7 +40,9 @@
             <OutboundLink />
           </a>
 
-          <RouterLink v-else :to="next.path">{{ next.title || next.path }}</RouterLink>
+          <RouterLink v-else :to="next.path">{{
+            next.title || next.path
+          }}</RouterLink>
           <span class="paging-arrow inline-block">→</span>
         </span>
       </p>

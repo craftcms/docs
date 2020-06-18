@@ -5,7 +5,8 @@
         :to="`/`"
         ref="siteName"
         class="site-name text-slate font-bold px-4"
-      >{{ $siteTitle }}</RouterLink>
+        >{{ $siteTitle }}</RouterLink
+      >
     </div>
 
     <slot name="top" />
@@ -28,12 +29,17 @@
       class="left-bar-bottom absolute bottom-0 w-full border-t"
     >
       <div class="language">
-        <select name="locale" class="locale-select-element" @change="handleLanguageSelect($event)">
+        <select
+          name="locale"
+          class="locale-select-element"
+          @change="handleLanguageSelect($event)"
+        >
           <option
             v-for="(locale, path) in set.locales"
             :value="path"
             :selected="$lang == locale.lang"
-          >{{ locale.config.label }}</option>
+            >{{ locale.config.label }}</option
+          >
         </select>
       </div>
     </div>
