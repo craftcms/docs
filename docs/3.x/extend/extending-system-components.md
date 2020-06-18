@@ -29,16 +29,15 @@ Event::on(Entry::class, Entry::EVENT_DEFINE_RULES, function(DefineRulesEvent $e)
 });
 ```
 
-
 ## Behaviors
 
 You can add your own custom [behaviors](https://www.yiiframework.com/doc/guide/2.0/en/concept-behaviors) to elements and other system components using the [EVENT_DEFINE_BEHAVIORS](api:craft\base\Model#event-define-behaviors) event.
 
-This can be a simple way of adding small amounts of functionality to elements without having to extend them with new classes and use your new extended classes everywhere.
+This can be a simple way of adding small amounts of functionality to elements without having to write and use extended classes everywhere.
 
-In this example, we’re adding a method on the built-in Commerce Product elements that will give us some details about financing the product.
+In this example, we’re adding a method to Commerce products that returns product financing details.
 
-Create the behavior class in your plugin. (Generally this would be created in a 'behaviors' directory.)
+Create the behavior class in your plugin:
 
 ```php
 <?php
@@ -55,7 +54,7 @@ class FinanceableProductBehavior extends Behavior
 
     const FINANCE_MINIMUM_ELIGIBLE_PRICE = 500;
     const FINANCE_MINIMUM_DEPOSIT_PERCENTAGE = 10;
-    const FINANCE_MAXIMUM_DURATION_MONTHS    = 24;
+    const FINANCE_MAXIMUM_DURATION_MONTHS = 24;
 
     public function isFinanceable()
     {
@@ -66,21 +65,22 @@ class FinanceableProductBehavior extends Behavior
     public function getFinancePriceFrom()
     {
         $price = $this->owner->defaultPrice;
-        //take off the deposit
+
+        // take off the deposit
         $price = $price - ($price / self::FINANCE_MINIMUM_DEPOSIT_PERCENTAGE);
-        // split what's left over the remaining months
+
+        // split what’s left over the remaining months
         $price = $price / self::FINANCE_MAXIMUM_DURATION_MONTHS;
-    
+
         return $price;
     }
 
-  // ... any other methods
+    // ...
 
 }
-
 ```
 
-Then attach this behavior to the products in your plugin's `init` method.
+Then attach this behavior to the products in your plugin’s `init` method:
 
 ```php
 use mynamespace\mypluginhandle\behaviors\FinanceableProductBehavior;
@@ -89,15 +89,19 @@ use craft\commerce\elements\Product;
 use craft\events\DefineBehaviorsEvent;
 use yii\base\Event;
 
-Event::on(Product::class, Product::EVENT_DEFINE_BEHAVIORS, function(DefineBehaviorsEvent $event) {
-    $event->sender->attachBehaviors([
-        FinancableProductBehavior::class,
-        // ... any other behaviors
-    ]);
-});
+Event::on(
+    Product::class,
+    Product::EVENT_DEFINE_BEHAVIORS,
+    function(DefineBehaviorsEvent $event) {
+        $event->sender->attachBehaviors([
+            FinancableProductBehavior::class,
+            // ... any other behaviors
+        ]);
+    }
+);
 ```
 
-Now all the built-in products have the new methods available to them that can be used in your templates or plugins.
+Now every Commerce product has the new methods available to use in templates or plugins:
 
 ::: code
 ```twig
