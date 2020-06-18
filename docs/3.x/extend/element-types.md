@@ -870,3 +870,26 @@ public function setEagerLoadedElements(string $handle, array $elements)
     }
 }
 ```
+
+## Saving Field Content Deltas
+
+Element forms can be configured to submit only the field values that actually changed on the page. This is a prerequisite to [field delta saves](/extend/field-types.md#supporting-delta-saves).
+
+If your element provides its own edit form template, here’s how you can configure it to submit delta field content:
+
+1. Enable delta input name registration at the top of your template.
+2. Add `registerDeltas: true` wherever you’ve used `_includes/fields.html` or `_includes/field.html`.
+
+```twig{1,8}
+{% do view.setIsDeltaRegistrationActive(true) %}
+
+...
+
+{% include "_includes/fields" with {
+    fields: tab.getFields(),
+    element: customElement,
+    registerDeltas: true,
+} only %}
+```
+
+To verify that your element form is utilizing delta saving, inspect the `$_POST` data when saving edits in the Control Panel. Only the field types edited on the page should appear in the `fields` array.

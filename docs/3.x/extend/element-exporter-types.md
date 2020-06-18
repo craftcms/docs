@@ -61,7 +61,10 @@ class MyCustomExporter extends ElementExporter
                 'Title' => $element->title ?? '',
                 'Status' => ucfirst($element->status),
                 'URL' => $element->getUrl(),
-                'RelatedEntries' => ArrayHelper::getColumn($element->relatedEntries, 'title'),
+                'RelatedEntries' => ArrayHelper::getColumn(
+                    $element->relatedEntries,
+                    'title'
+                ),
             ];
         }
 
@@ -118,9 +121,13 @@ class Plugin extends \craft\base\Plugin
 {
     public function init()
     {
-        Event::on(Entry::class, Element::EVENT_REGISTER_EXPORTERS, function(RegisterElementExportersEvent $event) {
-            $event->exporters[] = MyExporter::class;
-        });
+        Event::on(
+            Entry::class,
+            Element::EVENT_REGISTER_EXPORTERS,
+            function(RegisterElementExportersEvent $event) {
+                $event->exporters[] = MyExporter::class;
+            }
+        );
 
         // ...
     }
