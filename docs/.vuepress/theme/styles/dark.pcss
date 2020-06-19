@@ -1,0 +1,89 @@
+/**
+ * TODO:
+ * - tips
+ * - custom table styles
+ * - dd
+ */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-gray-900 text-white;
+
+    .site-name {
+      @apply text-gray-100;
+    }
+
+    .doc-set {
+      @apply text-gray-200;
+    }
+
+    .doc-set-current .title {
+      @apply text-gray-100;
+    }
+
+    .right-nav .sidebar-links .sidebar-link {
+      @apply text-gray-100;
+
+      &.active {
+        @apply text-gray-100;
+      }
+    }
+
+    .page-nav .inner {
+      @apply border-slate;
+    }
+
+    .vote-buttons .option {
+      @apply border-slate;
+    }
+  }
+
+  .theme-default-content {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      @apply text-gray-100;
+    }
+
+    h2 {
+      @apply border-slate;
+    }
+
+    code {
+      @apply bg-black;
+    }
+
+    pre,
+    pre[class*="language-"] {
+      @apply bg-black;
+    }
+
+    .custom-block {
+      div[class*="language-"] {
+        @apply bg-black;
+      }
+    }
+  }
+
+  div[class*="language-"] {
+    @apply bg-black;
+  }
+
+  a.sidebar-link {
+    @apply text-gray-500;
+  }
+
+  .left-bar-bottom {
+    @apply border-slate;
+  }
+
+  .doc-set-version {
+    @apply border-slate;
+  }
+
+  #search input {
+    @apply bg-slate;
+  }
+}

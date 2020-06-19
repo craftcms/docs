@@ -53,16 +53,13 @@
         <span>{{ set.setTitle ? set.setTitle : set.title }}</span>
       </RouterLink>
     </div>
-    <div
-      v-if="$activeSet"
-      class="doc-set-current px-4 mt-2 pb-4 flex w-full justify-between items-center"
-    >
+    <div v-if="$activeSet" class="doc-set-current">
       <RouterLink :to="defaultUri($activeSet)" class="flex items-center">
         <span class="icon mr-3 inline-block">
           <img :src="$activeSet.icon" width="28" height="28" alt />
         </span>
         <div
-          class="current-doc-set text-slate leading-none font-medium"
+          class="title text-slate leading-none font-medium"
         >{{ $activeSet.setTitle ? $activeSet.setTitle : $activeSet.title }}</div>
       </RouterLink>
       <div v-if="$activeSet.versions" class="relative">
@@ -95,6 +92,77 @@
     </div>
   </div>
 </template>
+
+<style lang="postcss">
+.doc-set-panel {
+}
+
+.doc-sets {
+  @apply py-1;
+}
+
+.doc-set {
+  @apply block px-4  mt-2 text-slate font-medium text-lg;
+}
+
+.doc-set-version {
+  padding-left: 0.375rem;
+}
+
+.doc-set-current {
+  @apply px-4 mt-2 pb-5 flex w-full justify-between items-center;
+
+  .title {
+    font-size: 1.125rem;
+  }
+}
+
+.home {
+  @apply text-sm relative;
+  color: #718096;
+
+  .back {
+    @apply inline-block absolute mr-1 opacity-100;
+    top: 8px;
+    left: 15px;
+    transition: all 100ms ease-out;
+    transform: translateX(0);
+    width: auto;
+  }
+
+  .home-icon {
+    @apply hidden;
+  }
+
+  .home-title {
+    padding-left: 15px;
+  }
+
+  &.active {
+    @apply text-blue text-lg;
+
+    .home-icon {
+      @apply inline-block;
+    }
+
+    .back {
+      @apply opacity-0 mr-0;
+      transform: translateX(-5px);
+    }
+
+    .home-title {
+      @apply relative pl-0;
+      left: -2px;
+    }
+  }
+}
+
+.version-arrow {
+  @apply pointer-events-none;
+  top: 0.55rem;
+  right: 0.385rem;
+}
+</style>
 
 <script>
 import { getDocSetDefaultUri } from "../util";

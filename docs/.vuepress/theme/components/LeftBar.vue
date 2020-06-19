@@ -4,9 +4,8 @@
       <RouterLink
         :to="`/`"
         ref="siteName"
-        class="site-name text-slate font-bold px-4"
-        >{{ $siteTitle }}</RouterLink
-      >
+        class="site-name text-slate font-bold px-4 mt-1"
+      >{{ $siteTitle }}</RouterLink>
     </div>
 
     <slot name="top" />
@@ -29,17 +28,12 @@
       class="left-bar-bottom absolute bottom-0 w-full border-t"
     >
       <div class="language">
-        <select
-          name="locale"
-          class="locale-select-element"
-          @change="handleLanguageSelect($event)"
-        >
+        <select name="locale" class="locale-select-element" @change="handleLanguageSelect($event)">
           <option
             v-for="(locale, path) in set.locales"
             :value="path"
             :selected="$lang == locale.lang"
-            >{{ locale.config.label }}</option
-          >
+          >{{ locale.config.label }}</option>
         </select>
       </div>
     </div>
@@ -49,12 +43,12 @@
 <style lang="postcss">
 .left-bar-links {
   @apply h-screen overflow-y-auto pb-32;
-  /* browser height - approx. docset panel height - #top height */
-  height: calc(100vh - 81px - 3rem);
+  /* browser height - approx. .doc-set-panel height - #top height */
+  height: calc(100vh - 93px - 3rem);
 
   &.has-bottom {
-    /* browser height - approx. docset panel height - #top height - #bottom height */
-    height: calc(100vh - 81px - 3rem - 3rem);
+    /* browser height - approx. .doc-set-panel - #top height - #bottom height */
+    height: calc(100vh - 93px - 3rem - 3rem);
   }
 }
 
@@ -73,66 +67,8 @@
   @apply appearance-none bg-transparent block relative pl-8 pr-2 py-1 cursor-pointer;
 }
 
-.doc-set {
-  @apply block px-4 py-1 text-slate font-medium text-lg;
-}
-
-.current-doc-set {
-  font-size: 1.125rem;
-}
-
-.doc-set-version {
-  padding-left: 0.375rem;
-}
-
 .left-bar-bottom {
-  @apply bg-white h-12;
-}
-
-.home {
-  @apply text-sm relative;
-  color: #718096;
-
-  .back {
-    @apply inline-block absolute mr-1 opacity-100;
-    top: 8px;
-    left: 15px;
-    transition: all 100ms ease-out;
-    transform: translateX(0);
-    width: auto;
-  }
-
-  .home-icon {
-    @apply hidden;
-  }
-
-  .home-title {
-    padding-left: 15px;
-  }
-
-  &.active {
-    @apply text-blue text-lg;
-
-    .home-icon {
-      @apply inline-block;
-    }
-
-    .back {
-      @apply opacity-0 mr-0;
-      transform: translateX(-5px);
-    }
-
-    .home-title {
-      @apply relative pl-0;
-      left: -2px;
-    }
-  }
-}
-
-.version-arrow {
-  @apply pointer-events-none;
-  top: 0.55rem;
-  right: 0.385rem;
+  @apply h-12;
 }
 </style>
 
