@@ -65,7 +65,7 @@ If you’re using event listeners or plugins to save orders, you may want to che
 
 ```php
 $originalRecalculationMode = $order->getRecalculationMode();
-$this->setRecalculationMode(\craft\commerce\elements\Order::RECALCULATION_MODE_NONE);
+$order->setRecalculationMode(\craft\commerce\elements\Order::RECALCULATION_MODE_NONE);
 
 Craft::$app->elements->saveElement($order);
 
