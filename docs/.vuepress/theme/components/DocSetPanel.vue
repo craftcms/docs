@@ -102,7 +102,7 @@
 }
 
 .doc-set {
-  @apply block px-4  mt-2 text-slate font-medium text-lg;
+  @apply block px-4 mt-2 text-slate font-medium text-lg;
 }
 
 .doc-set-version {
@@ -123,7 +123,7 @@
 
   .back {
     @apply inline-block absolute mr-1 opacity-100;
-    top: 8px;
+    top: 4px;
     left: 15px;
     transition: all 100ms ease-out;
     transform: translateX(0);
