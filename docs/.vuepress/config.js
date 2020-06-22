@@ -60,7 +60,7 @@ module.exports = {
     codeLanguages: {
       twig: "Twig",
       php: "PHP",
-      csv: "CSV",
+      js: "JavaScript",
       json: "JSON",
       xml: "XML",
       treeview: "Folder"
