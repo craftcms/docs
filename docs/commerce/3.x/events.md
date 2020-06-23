@@ -340,6 +340,27 @@ Event::on(
 );
 ```
 
+### `afterOrderAuthorized`
+
+This event is raised after an order is authorized in full and completed.
+
+Plugins can get notified after an order is authorized in full and completed.
+
+```php
+use craft\commerce\elements\Order;
+use yii\base\Event;
+
+Event::on(
+    Order::class,
+    Order::EVENT_AFTER_ORDER_AUTHORIZED,
+    function(Event $event) {
+        // @var Order $order
+        $order = $event->sender;
+        // ...
+    }
+);
+```
+
 ### `afterOrderPaid`
 
 The event that is triggered after an order is paid and completed.
