@@ -529,11 +529,13 @@ Event::on(
 );
 ```
 
-### `beforeMatchLineItem`
+### `discountMatchesLineItem`
 
 The event that is triggered when a line item is matched with a discount.
 
-You may set the `isValid` property to `false` on the event to prevent the application of the matched discount.
+This event will be raised if all standard conditions are met.
+
+You may set the `isValid` property to `false` on the event to prevent the matching of the discount to the line item.
 
 ```php
 use craft\commerce\services\Discounts;
@@ -544,7 +546,7 @@ use yii\base\Event;
 
 Event::on(
     Discounts::class,
-    Discounts::EVENT_BEFORE_MATCH_LINE_ITEM,
+    Discounts::EVENT_DISCOUNT_MATCHES_LINE_ITEM,
     function(MatchLineItemEvent $event) {
         // @var LineItem $lineItem
         $lineItem = $event->lineItem;
