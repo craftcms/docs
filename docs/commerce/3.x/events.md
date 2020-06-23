@@ -205,6 +205,30 @@ Event::on(
 );
 ```
 
+### `afterDeleteSale`
+
+The event that is triggered after a sale is deleted.
+
+```php
+use craft\commerce\events\SaleEvent;
+use craft\commerce\services\Sales;
+use craft\commerce\models\Sale;
+use yii\base\Event;
+
+Event::on(
+    Sales::class,
+    Sales::EVENT_AFTER_DELETE_SALE,
+    function(SaleEvent $event) {
+        // @var Sale $sale
+        $sale = $event->sale;
+
+        // do something
+        // ...
+    }
+);
+
+```
+
 ## Order Events
 
 ### `beforeAddLineItemToOrder`
