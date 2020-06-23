@@ -118,10 +118,10 @@ return [
             $config = craft\helpers\App::dbConfig();
 
             // Use read/write query splitting
-            // (https://www.yiiframework.com/doc/guide/2.0/en/db-dao#read-write-splitting)
+            // (requires Craft 3.4.25 or later)
 
             // Define the default config for replica DB connections
-            $config['slaveConfig'] = [
+            $config['replicaConfig'] = [
                 'username' => getenv('DB_REPLICA_USER'),
                 'password' => getenv('DB_REPLICA_PASSWORD'),
                 'tablePrefix' => getenv('DB_TABLE_PREFIX'),
@@ -133,7 +133,7 @@ return [
             ];
 
             // Define the replica DB connections
-            $config['slaves'] = [
+            $config['replicas'] = [
                 ['dsn' => getenv('DB_REPLICA_DSN_1')],
                 ['dsn' => getenv('DB_REPLICA_DSN_2')],
                 ['dsn' => getenv('DB_REPLICA_DSN_3')],
