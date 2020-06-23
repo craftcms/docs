@@ -114,7 +114,7 @@ namespace ns\prefix;
 
 use craft\base\Element;
 use craft\elements\Entry;
-use craft\events\RegisterElementActionsEvent;
+use craft\events\RegisterElementExportersEvent;
 use yii\base\Event;
 
 class Plugin extends \craft\base\Plugin
