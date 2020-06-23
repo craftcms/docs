@@ -135,8 +135,6 @@ export function resolveSidebarItems(
 ) {
   const { pages, themeConfig } = site;
 
-  //console.log("resolveSidebarItems()", page, regularPath, site, localePath);
-
   // no set, no sidebar items (just list sets)
   if (!activeSet) {
     //console.log("no sidebar set available");
@@ -145,27 +143,28 @@ export function resolveSidebarItems(
 
   // get the active set locale config if it exists, otherwise the set config
   const appliedConfig = activeSet.locales ? localeConfig.config : activeSet;
+  let sidebarConfig;
 
-  let sidebarConfig =
-    page.frontmatter.sidebar || appliedConfig.sidebar || themeConfig.sidebar;
+  if (page.frontmatter.sidebar) {
+    sidebarConfig = page.frontmatter.sidebar;
+  } else if (appliedConfig.sidebar) {
+    sidebarConfig = appliedConfig.sidebar;
+  } else if (themeConfig.sidebar) {
+    sidebarConfig = themeConfig.sidebar;
+  }
 
   if (activeVersion) {
     sidebarConfig = sidebarConfig[activeVersion];
-  } else {
-    sidebarConfig = sidebarConfig;
   }
 
   if (!sidebarConfig) {
     return [];
   } else {
-    const regularPathWithoutVersion = regularPath.replace(
-      "/" + activeVersion + "/",
-      "/"
-    );
-
     let { base, config } = resolveMatchingConfig(
-      regularPathWithoutVersion,
-      sidebarConfig
+      regularPath,
+      sidebarConfig,
+      activeSet,
+      activeVersion
     );
 
     if (!config) {
@@ -174,7 +173,7 @@ export function resolveSidebarItems(
     }
 
     const resolved = config.map(item => {
-      return resolveItem(item, pages, regularPath);
+      return resolveItem(item, pages, base);
     });
 
     return resolved;
@@ -237,22 +236,53 @@ export function resolveNavLinkItem(linkItem) {
 }
 
 /**
+ * Takes the regular path (like `/3.x/extend/widget-types.html`) and locale-resolved config
+ * to return the current base and relevant section of the sidebar config.
+ * 
+ * Modified to account for the active docSet and version.
+ * 
  * @param { Route } route
  * @param { Array<string|string[]> | Array<SidebarGroup> | [link: string]: SidebarConfig } config
  * @returns { base: string, config: SidebarConfig }
  */
-export function resolveMatchingConfig(regularPath, config) {
+export function resolveMatchingConfig(regularPath, config, activeSet, activeVersion) {
+
+  // always starts with `/`
+  let base = "/";
+
+  // get ready to strip the version from the path for comparison
+  let modifiedRegularPath = regularPath;
+
+  // include the `baseDir` of our active set
+  if (activeSet) {
+    base += activeSet.baseDir;
+  }
+  
+  // account for the active set version
+  if (activeSet.versions) {
+    // include with base
+    base += "/" + activeVersion + "/";
+    // strip from modified path
+    modifiedRegularPath = modifiedRegularPath.replace(activeVersion, '');
+  }
+
+  modifiedRegularPath = fixDoubleSlashes(modifiedRegularPath);
+  base = fixDoubleSlashes(ensureEndingSlash(base));
+
+  // TODO: should base include locale segment?
+  
   if (Array.isArray(config)) {
     return {
-      base: "/",
+      base: base,
       config: config
     };
   }
-  for (const base in config) {
-    if (ensureEndingSlash(regularPath).indexOf(encodeURI(base)) === 0) {
+
+  for (const activeBase in config) {
+    if (ensureEndingSlash(modifiedRegularPath).indexOf(encodeURI(activeBase)) === 0) {
       return {
-        base,
-        config: config[base]
+        base: fixDoubleSlashes(base + activeBase),
+        config: config[activeBase]
       };
     }
   }
@@ -261,6 +291,10 @@ export function resolveMatchingConfig(regularPath, config) {
 
 function ensureEndingSlash(path) {
   return /(\.html|\/)$/.test(path) ? path : path + "/";
+}
+
+function fixDoubleSlashes(path) {
+  return path.replace(/\/\//g, '/');
 }
 
 /**

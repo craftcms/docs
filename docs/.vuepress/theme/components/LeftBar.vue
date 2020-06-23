@@ -22,16 +22,12 @@
 
     <slot name="bottom" />
 
-    <div
-      v-if="hasBottomLinks"
-      id="bottom"
-      class="left-bar-bottom absolute bottom-0 w-full border-t"
-    >
+    <div v-if="hasBottomLinks" id="bottom" class="left-bar-bottom">
       <div class="language">
         <select name="locale" class="locale-select-element" @change="handleLanguageSelect($event)">
           <option
             v-for="(locale, path) in set.locales"
-            :value="path"
+            :value="getEquivalentLocalePath(locale, path)"
             :selected="$lang == locale.lang"
           >{{ locale.config.label }}</option>
         </select>
@@ -49,6 +45,18 @@
   &.has-bottom {
     /* browser height - approx. .doc-set-panel - #top height - #bottom height */
     height: calc(100vh - 93px - 3rem - 3rem);
+  }
+}
+
+.left-bar {
+  .left-bar-bottom {
+    @apply absolute w-full border-t;
+  }
+}
+
+@media screen and (min-width: 1408px) {
+  .left-bar-links.has-bottom {
+    height: calc(100vh - 180px - 3rem - 3rem);
   }
 }
 
@@ -81,7 +89,7 @@ export default {
   components: { DocSetPanel, SidebarLinks },
   computed: {
     hasBottomLinks() {
-      return this.set && this.set.locales;
+      return this.$activeSet && this.set.hasOwnProperty("locales");
     }
   },
   methods: {
@@ -91,6 +99,21 @@ export default {
     },
     handleVersionSelect(selected) {
       this.$emit("selectVersion", selected);
+    },
+    getEquivalentLocalePath(locale, path) {
+      let localePath = this.$activeSet.baseDir;
+
+      if (localePath === "") {
+        localePath = "/";
+      }
+
+      if (this.$activeVersion) {
+        localePath += this.$activeVersion;
+      }
+
+      localePath += path;
+
+      return localePath;
     }
   }
 };

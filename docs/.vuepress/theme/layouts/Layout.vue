@@ -14,26 +14,17 @@
       @selectVersion="handleVersionUpdate"
       @selectLanguage="handleLanguageUpdate"
     />
-    <div
-      id="main"
-      class="main-container relative lg:ml-64 max-w-screen-md mx-auto lg:max-w-none"
-    >
+    <div id="main" class="main-container relative lg:ml-64 max-w-screen-md mx-auto lg:max-w-none">
       <div
         id="top-bar"
         class="block h-12 w-full content-center relative px-10 pt-2 max-w-screen-md"
       >
-        <button
-          @click="toggleSidebar"
-          class="nav-hamburger inline-block lg:hidden"
-        >
+        <button @click="toggleSidebar" class="nav-hamburger inline-block lg:hidden">
           <span></span>
           <span></span>
           <span></span>
         </button>
-        <div
-          id="search"
-          class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center"
-        >
+        <div id="search" class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center">
           <SearchBox
             v-if="
               $site.themeConfig.search !== false &&
@@ -276,18 +267,7 @@ export default {
     },
 
     handleLanguageUpdate(path) {
-      const currentPath = this.$page.path;
-      for (const localePath in this.$allLocales) {
-        const locale = this.$allLocales[localePath];
-        if (locale.lang == this.$lang) {
-          const replace = localePath;
-          const targetPath = currentPath.replace(
-            this.$activeVersion + replace,
-            this.$activeVersion + path
-          );
-          window.location = targetPath;
-        }
-      }
+      window.location = path;
     },
 
     // side swipe

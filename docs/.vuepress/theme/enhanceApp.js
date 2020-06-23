@@ -31,7 +31,7 @@ export default ({ Vue, options, router, siteData }) => {
 
         // doc set title, global site title, or fall back to `VuePress`
         const siteTitle =
-          this.$activeSet.title || this.$siteTitle || "VuePress";
+          this.$localeConfig.title || this.$siteTitle || "VuePress";
 
         if (pageTitle && siteTitle) {
           return `${pageTitle} | ${siteTitle}`;
@@ -97,6 +97,8 @@ export default ({ Vue, options, router, siteData }) => {
         // include locales from each doc set so VuePress knows about them
         const { locales = {} } = this.$site;
         const { docSets = {} } = this.$themeConfig;
+
+        let allLocales = locales;
         let docSetLocales = {};
 
         docSets.forEach(docSet => {
@@ -108,23 +110,29 @@ export default ({ Vue, options, router, siteData }) => {
                 let basePath = docSet.baseDir;
 
                 if (docSet.versions) {
-                  for (const version in docSet.versions) {
+                  for (let i = 0; i < docSet.versions.length; i++) {
+                    const version = docSet.versions[i];
+
+                    let versionLabel = version[0];
                     if (basePath === "") {
                       basePath = "/";
                     }
-                    docSetLocales[basePath + version + key] = settings;
+
+                    let localeKey = `${basePath}${versionLabel}${key}`;
+                    docSetLocales[localeKey] = settings;
                   }
                 } else {
-                  docSetLocales[basePath + key] = settings;
+                  let localeKey = `${basePath}${key}`;
+                  docSetLocales[localeKey] = settings;
                 }
               }
             }
-
-            docSetLocales = Object.assign(docSetLocales, docSet.locales);
           }
         });
 
-        return docSetLocales;
+        Object.assign(allLocales, docSetLocales);
+
+        return allLocales;
       },
       $localeConfig() {
         let targetLang;

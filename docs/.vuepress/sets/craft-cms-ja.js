@@ -3,7 +3,7 @@ module.exports = {
   label: "日本語",
   editLinkText: "このページを GitHub で編集",
   sidebar: {
-    v3: {
+    "3.x": {
       "/ja/extend/": [
         {
           title: "Craft の拡張",
