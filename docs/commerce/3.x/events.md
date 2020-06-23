@@ -1032,11 +1032,20 @@ Event::on(
         // @var Subscription $subscription
         $subscription = $event->subscription;
 
+        // Ignore suspended subscriptions
+        if ($subscription->isSuspended) {
+            return;
+        }
+
         // Call a third party service to authorize a user
         // ...
     }
 );
 ```
+
+::: tip
+It may be important to check subscription properties like `hasStarted` or `isSuspended` before taking further action.
+:::
 
 ### `beforeReactivateSubscription`
 
