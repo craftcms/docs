@@ -45,9 +45,9 @@ This example renders a form for adding an estimated shipping country, state, and
     {% endif %}
 
 
-    {% if cart.availableShippingMethods|length and cart.estimatedShippingAddressId %}
+    {% if cart.availableShippingMethodOptions|length and cart.estimatedShippingAddressId %}
         {# display name+price selection for each available shipping method #}
-        {% for handle, method in cart.availableShippingMethods %}
+        {% for handle, method in cart.availableShippingMethodOptions %}
             {% set price = method.priceForOrder(cart)|commerceCurrency(cart.currency) %}
             <label>
                 <input type="radio"

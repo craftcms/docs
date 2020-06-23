@@ -87,12 +87,12 @@ Data returned as `[72:[3:'California', 4:'Washington'],32:[7:'New South Wales']]
 </select>
 ```
 
-## cart.availableShippingMethods
+## cart.availableShippingMethodOptions
 
 Returns the shipping methods available for the current cart. Some shipping methods may not be included, as only those whose rules apply to the current cart will be returned.
 
 ```twig
-{% for handle, method in cart.availableShippingMethods %}
+{% for handle, method in cart.availableShippingMethodOptions %}
     <label>
         <input type="radio" name="shippingMethodHandle" value="{{ handle }}"
                {% if handle == cart.shippingMethodHandle %}checked{% endif %} />
