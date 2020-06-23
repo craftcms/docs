@@ -1044,7 +1044,7 @@ Event::on(
 ```
 
 ::: tip
-It may be important to check subscription properties like `hasStarted` or `isSuspended` before taking further action.
+Since a subscription may be suspended at creation due to payment issues, you may want to check subscription properties like `hasStarted` or `isSuspended` before taking further action.
 :::
 
 ### `beforeReactivateSubscription`
