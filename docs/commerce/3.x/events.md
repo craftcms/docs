@@ -353,6 +353,24 @@ Event::on(
 );
 ```
 
+### `registerDiscountAdjusters`
+
+The event that is triggered for registration of additional discount adjusters.
+
+```php
+use craft\events\RegisterComponentTypesEvent;
+use craft\commerce\services\OrderAdjustments;
+use yii\base\Event;
+
+Event::on(
+    OrderAdjustments::class,
+    OrderAdjustments::EVENT_REGISTER_DISCOUNT_ADJUSTERS,
+    function(RegisterComponentTypesEvent $event) {
+        $event->types[] = MyAdjuster::class;
+    }
+);
+```
+
 ### `orderStatusChange`
 
 The event that is triggered when an order status is changed.
