@@ -736,6 +736,36 @@ Event::on(
 );
 ```
 
+### `defaultLineItemStatus`
+
+The event that is triggered when getting a default status for a line item.
+
+You may set [[DefaultLineItemStatusEvent::lineItemStatus]] to a desired LineItemStatus to override the default status set in the control panel.
+
+Plugins can get notified when a default line item status is being fetched.
+
+```php
+use craft\commerce\services\LineItemStatuses;
+use craft\commerce\events\DefaultLineItemStatusEvent;
+use craft\commerce\models\LineItem;
+use craft\commerce\models\LineItemStatus;
+use yii\base\Event;
+
+Event::on(
+    LineItemStatuses::class,
+    LineItemStatuses::EVENT_DEFAULT_LINE_ITEM_STATUS,
+    function(DefaultLineItemStatusEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        // @var LineItemStatus $status
+        $status = $event->lineItemStatus;
+
+        // Specify a default line item status other than the CP selection
+        // ...
+    }
+);
+```
+
 ## Payment Events
 
 ### `registerGatewayTypes`
