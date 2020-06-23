@@ -583,6 +583,34 @@ Event::on(
 );
 ```
 
+### `discountMatchesOrder`
+
+The event that is triggered when an order is matched with a discount.
+
+You may set the `isValid` property to `false` on the event to prevent the matching of the discount with the order.
+
+```php
+use craft\commerce\services\Discounts;
+use craft\commerce\events\MatchOrderEvent;
+use craft\commerce\models\Discount;
+use craft\commerce\elements\Order;
+use yii\base\Event;
+
+Event::on(
+    Discounts::class,
+    Discounts::EVENT_DISCOUNT_MATCHES_ORDER,
+    function(MatchLineOrder $event) {
+        // @var Order $order
+        $order = $event->order;
+        // @var Discount $discount
+        $discount = $event->discount;
+
+        // Check some business rules and prevent a match in special cases
+        // ... $event->isValid = false; // set to false if you want it to NOT match as it would.
+    }
+);
+```
+
 ## Line Item Events
 
 ### `beforeSaveLineItem`
