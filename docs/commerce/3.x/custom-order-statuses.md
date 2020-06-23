@@ -47,6 +47,12 @@ $result = Craft::$app->getElements()->saveElement($order);
 
 By updating `orderStatusId` and saving the order, the status change event will be triggered and a new order status history record will be created.
 
+### Deleting an Order Status
+
+An order status associated with one or more orders cannot be deleted since it would result in incomplete records.
+
+If you’d like to delete an order status, first select all orders having that status in the control panel and change them to a different status. You’ll then be able to delete the order status once it’s no longer in use. (Technically, an order status will only be soft-deleted so each order’s history may be preserved.)
+
 ## Email
 
 In addition to using order statuses to manage your orders, you can choose emails that will be sent when an order moves into that status.
