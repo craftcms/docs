@@ -680,6 +680,18 @@ Since all of the conditionals are evaluating the same thing – `matrixBlock.ty
 Unlike `switch` statements in other languages, the matching `case` block will be broken out of automatically. You don’t need to worry about adding `break` statements.
 :::
 
+### Checking multiple values from a single `{% case %}` tag
+
+If you want to check for mulitple values from a single `{% case %}` tag, separate the values with `or` operators.
+
+```twig
+{% case "h2" or "h3" or "p" %}
+    {# output an <h2>, <h3>, or <p> tag, depending on the block type #}
+    {{ tag(matrixBlock.type, {
+        text: matrixBlock.text
+    }) }}
+```
+
 ### Accessing the parent `loop` variable
 
 If you’re using the `{% switch %}` tag inside of a `{% for %}` loop, you won’t be able to access Twig’s [loop variable](https://twig.symfony.com/doc/tags/for.html#the-loop-variable) directly inside of the `{% switch %}` tag.  Instead, you can access it like so:
