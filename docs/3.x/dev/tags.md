@@ -717,18 +717,12 @@ Take this template for example, which is running different template code dependi
 
 ```twig
 {% if matrixBlock.type == "text" %}
-
     {{ matrixBlock.textField|markdown }}
-
 {% elseif matrixBlock.type == "image" %}
-
     {{ matrixBlock.image[0].getImg() }}
-
 {% else %}
-
     <p>A font walks into a bar.</p>
     <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
-
 {% endif %}
 ```
 
@@ -736,22 +730,33 @@ Since all of the conditionals are evaluating the same thing – `matrixBlock.ty
 
 ```twig
 {% switch matrixBlock.type %}
-
     {% case "text" %}
-
         {{ matrixBlock.textField|markdown }}
-
     {% case "image" %}
-
         {{ matrixBlock.image[0].getImg() }}
-
     {% default %}
-
         <p>A font walks into a bar.</p>
         <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
-
 {% endswitch %}
 ```
+
+::: tip
+Unlike `switch` statements in other languages, the matching `case` block will be broken out of automatically. You don’t need to worry about adding `break` statements.
+:::
+
+### Checking multiple values from a single `{% case %}` tag
+
+If you want to check for mulitple values from a single `{% case %}` tag, separate the values with `or` operators.
+
+```twig
+{% case "h2" or "h3" or "p" %}
+    {# output an <h2>, <h3>, or <p> tag, depending on the block type #}
+    {{ tag(matrixBlock.type, {
+        text: matrixBlock.text
+    }) }}
+```
+
+### Accessing the parent `loop` variable
 
 If you’re using the `{% switch %}` tag inside of a `{% for %}` loop, you won’t be able to access Twig’s [loop variable](https://twig.symfony.com/doc/tags/for.html#the-loop-variable) directly inside of the `{% switch %}` tag.  Instead, you can access it like so:
 
@@ -768,6 +773,3 @@ If you’re using the `{% switch %}` tag inside of a `{% for %}` loop, you won�
     {% endswitch %}
 {% endfor %}
 ```
-
-Tip: This tag is a bit simpler than other languages’ `switch` implementations you may have seen: matching `cases` are automatically broken out of, so there’s no need for `break` statements.
-
