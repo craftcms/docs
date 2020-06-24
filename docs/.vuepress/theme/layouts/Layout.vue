@@ -14,17 +14,26 @@
       @selectVersion="handleVersionUpdate"
       @selectLanguage="handleLanguageUpdate"
     />
-    <div id="main" class="main-container relative lg:ml-64 max-w-screen-md mx-auto lg:max-w-none">
+    <div
+      id="main"
+      class="main-container relative lg:ml-64 max-w-screen-md mx-auto lg:max-w-none"
+    >
       <div
         id="top-bar"
         class="block h-12 w-full content-center relative px-10 pt-2 max-w-screen-md"
       >
-        <button @click="toggleSidebar" class="nav-hamburger inline-block lg:hidden">
+        <button
+          @click="toggleSidebar"
+          class="nav-hamburger inline-block lg:hidden"
+        >
           <span></span>
           <span></span>
           <span></span>
         </button>
-        <div id="search" class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center">
+        <div
+          id="search"
+          class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center"
+        >
           <SearchBox
             v-if="
               $site.themeConfig.search !== false &&
@@ -261,6 +270,10 @@ export default {
       this.$refs.searchInput.focus();
     },
 
+    /**
+     * Routes to equivalent content based on frontmatter, matching filename,
+     * or root of target version if no matching content is found.
+     */
     handleVersionUpdate(version) {
       // default to target version in current docset
       let targetPath = "/" + this.$activeSet.baseDir + version + "/";
@@ -274,18 +287,58 @@ export default {
       );
 
       if (alternatePath) {
-        const targetpage = getPageWithRelativePath(
+        const targetPage = getPageWithRelativePath(
           this.$site.pages,
           alternatePath
         );
-        targetPath = "/" + targetpage.path;
+        targetPath = "/" + targetPage.path;
       }
 
       this.$router.push(fixDoubleSlashes(targetPath));
     },
 
-    handleLanguageUpdate(path) {
-      window.location = path;
+    /**
+     * Routes to equivalent content, based on matching filename, in target
+     * language—or to root of target language if no matching content is found.
+     */
+    handleLanguageUpdate(language) {
+      const { locales } = this.$activeSet;
+
+      let targetPath = this.$page.relativePath;
+      let setBase = this.$activeSet.baseDir;
+
+      if (this.$activeVersion) {
+        setBase += this.$activeVersion;
+      }
+
+      let currentLocaleSegment;
+      let targetLocaleSegment;
+
+      for (const [path, settings] of Object.entries(locales)) {
+        if (settings.lang === this.$lang) {
+          currentLocaleSegment = path;
+        }
+
+        if (settings.lang === language) {
+          targetLocaleSegment = path;
+        }
+      }
+
+      const currentSetBase = setBase + currentLocaleSegment;
+      const targetSetBase = setBase + targetLocaleSegment;
+
+      targetPath = targetPath.replace(currentSetBase, targetSetBase);
+
+      // do we have the equivalent of this page in the desired language?
+      const targetPage = getPageWithRelativePath(this.$site.pages, targetPath);
+
+      if (targetPage) {
+        targetPath = "/" + targetPage.path;
+      } else {
+        targetPath = "/" + targetSetBase;
+      }
+
+      this.$router.push(fixDoubleSlashes(targetPath));
     },
 
     // side swipe
