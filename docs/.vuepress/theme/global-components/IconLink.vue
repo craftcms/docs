@@ -51,7 +51,7 @@
 
 <style lang="postcss">
 .icon-link {
-  @apply block relative my-4;
+  @apply block relative my-2;
 
   .icon {
     @apply flex items-center content-center justify-center w-3 h-3;
