@@ -4,6 +4,13 @@ module.exports = {
   plugins: [
     ["@vuepress/google-analytics", { ga: "UA-39036834-9" }],
     [
+      "@vuepress/active-header-links",
+      {
+        sidebarLinkSelector: ".right-nav .sidebar-link",
+        headerAnchorSelector: ".header-anchor"
+      }
+    ],
+    [
       "vuepress-plugin-medium-zoom",
       {
         selector: ".theme-default-content img",
