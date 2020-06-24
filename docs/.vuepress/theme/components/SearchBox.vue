@@ -51,7 +51,6 @@ export default {
       query: "",
       focused: false,
       focusIndex: 0,
-      placeholder: undefined,
       maxSuggestions: 10,
       paths: null,
       hotkeys: ["s", "/"]
@@ -69,7 +68,7 @@ export default {
         return;
       }
 
-      const { pages } = this.$site;
+      const pages = this.getPagesForSearch();
       const max =
         this.$site.themeConfig.searchMaxSuggestions || this.maxSuggestions;
       const localePath = this.$localePath;
@@ -112,11 +111,18 @@ export default {
       const navCount = (this.$site.themeConfig.nav || []).length;
       const repo = this.$site.repo ? 1 : 0;
       return navCount + repo <= 2;
+    },
+
+    placeholder() {
+      return (
+        this.$activeSet.searchPlaceholder ||
+        this.$site.themeConfig.searchPlaceholder ||
+        ""
+      );
     }
   },
 
   mounted() {
-    this.placeholder = this.$site.themeConfig.searchPlaceholder || "";
     document.addEventListener("keydown", this.onHotkey);
   },
 
@@ -125,6 +131,59 @@ export default {
   },
 
   methods: {
+    getPagesForSearch() {
+      const { pages } = this.$site;
+      const { docSets } = this.$themeConfig;
+
+      let searchScopes = [];
+
+      if (this.$activeSet) {
+        if (this.$activeVersion) {
+          searchScopes.push(
+            (this.$activeSet.baseDir !== ""
+              ? this.$activeSet.baseDir + "/"
+              : "") + this.$activeVersion
+          );
+        } else {
+          searchScopes.push(
+            this.$activeSet.baseDir !== "" ? this.$activeSet.baseDir + "/" : ""
+          );
+        }
+      } else {
+        const primaryDocSets = docSets.filter(set => {
+          return set.primarySet === true;
+        });
+
+        for (let i = 0; i < primaryDocSets.length; i++) {
+          const set = primaryDocSets[i];
+
+          if (set.hasOwnProperty("versions")) {
+            for (let j = 0; j < set.versions.length; j++) {
+              const version = set.versions[j][0];
+              searchScopes.push(
+                (set.baseDir !== "" ? set.baseDir + "/" : "") + version
+              );
+            }
+          } else {
+            searchScopes.push(set.baseDir !== "" ? set.baseDir + "/" : "");
+          }
+        }
+      }
+
+      const searchPages = pages.filter(page => {
+        for (let i = 0; i < searchScopes.length; i++) {
+          const scope = searchScopes[i];
+          if (page.relativePath.startsWith(scope)) {
+            return true;
+          }
+        }
+
+        return false;
+      }, this);
+
+      return searchPages;
+    },
+
     getPageLocalePath(page) {
       for (const localePath in this.$site.locales || {}) {
         if (localePath !== "/" && page.path.indexOf(localePath) === 0) {

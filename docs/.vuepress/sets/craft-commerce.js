@@ -9,6 +9,7 @@ module.exports = {
     ["1.x", { label: "1.x" }]
   ],
   defaultVersion: "3.x",
+  searchPlaceholder: "Search the Commerce docs (Press “/” to focus)",
   primarySet: true,
   sidebar: {
     "3.x": {

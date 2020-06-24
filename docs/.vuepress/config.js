@@ -49,7 +49,8 @@ module.exports = {
     docsRepo: "craftcms/craft-docs",
     docsDir: "docs",
     docsBranch: "master",
-    searchPlaceholder: "Search the docs (Press “/” to focus)",
+    searchPlaceholder:
+      "Search the Craft and Commerce docs (Press “/” to focus)",
     editLinks: true,
     nextLinks: true,
     prevLinks: true,

@@ -2,6 +2,7 @@ module.exports = {
   selectText: "言語",
   label: "日本語",
   editLinkText: "このページを GitHub で編集",
+  searchPlaceholder: "Search the Craft docs (Press “/” to focus)",
   sidebar: {
     "3.x": {
       "/ja/extend/": [

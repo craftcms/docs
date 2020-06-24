@@ -8,6 +8,7 @@ module.exports = {
     ["2.x", { label: "2.x" }]
   ],
   defaultVersion: "3.x",
+  searchPlaceholder: "Search the Craft docs (Press “/” to focus)",
   primarySet: true,
   locales: {
     "/": {
