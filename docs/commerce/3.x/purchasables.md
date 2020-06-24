@@ -8,6 +8,15 @@ A purchasable:
 - implements [`craft\commerce\base\PurchasableInterface`](api:craft\commerce\base\PurchasableInterface)
 - should extend [`craft\commerce\base\Purchasable`](api:craft\commerce\base\Purchasable)
 
+If you’d like to introduce your own purchasable, it’s best to extend [the base Purchasable](api:craft\commerce\base\Purchasable) because you’ll automatically get...
+
+- `getSalePrice()` calculation
+- `getSales()` to see the details of each sale applied in that calculation
+- a standard Yii model that includes everything in `attributes()` and `extraFields()`
+- automatic `sku` validation
+
+You may alternatively choose to implement [PurchasableInterface](api:craft\commerce\base\PurchasableInterface), but you’ll need to handle these and any additional features yourself.
+
 ## Implementation
 
 To implement the Purchasable Interface, inherit from the base Purchasable and implement these methods:
@@ -23,6 +32,10 @@ This is the description of the purchasable. It would often be the title or name 
 ### `getPrice()`
 
 The default price of the item.
+
+### `getSalePrice()`
+
+The base price of the item, adjusted by any applicable sales.
 
 ### `getSku()`
 
@@ -79,7 +92,6 @@ For example, variants use this method to deduct stock.
 Returns the source param value for an element relation query, for use with promotions. For example, a sale promotion on a category needs to know if the purchasable is related.
 
 Defaults to the ID of the purchasable element, which would be sufficient for most purchasables.
-
 
 ## Purchasable deletion
 
