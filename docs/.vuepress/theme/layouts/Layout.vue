@@ -263,8 +263,7 @@ export default {
 
     handleVersionUpdate(version) {
       // default to target version in current docset
-      let targetPath =
-        this.$site.base + this.$activeSet.baseDir + version + "/";
+      let targetPath = "/" + this.$activeSet.baseDir + version + "/";
 
       const alternatePath = getAlternateVersion(
         this.$page,
@@ -279,10 +278,10 @@ export default {
           this.$site.pages,
           alternatePath
         );
-        targetPath = this.$site.base + targetpage.path;
+        targetPath = "/" + targetpage.path;
       }
 
-      window.location = fixDoubleSlashes(targetPath);
+      this.$router.push(fixDoubleSlashes(targetPath));
     },
 
     handleLanguageUpdate(path) {
