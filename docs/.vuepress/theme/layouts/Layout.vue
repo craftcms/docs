@@ -174,7 +174,10 @@ import SearchBox from "../components/SearchBox";
 import {
   resolveMatchingConfig,
   resolveItem,
-  resolveSidebarItems
+  resolveSidebarItems,
+  getAlternateVersion,
+  getPageWithRelativePath,
+  fixDoubleSlashes
 } from "../util";
 
 export default {
@@ -259,11 +262,27 @@ export default {
     },
 
     handleVersionUpdate(version) {
-      // TODO: don’t reload page, and link to root rather than 404
-      const currentPath = this.$page.path;
-      const targetPath = currentPath.replace(this.$activeVersion, version);
+      // default to target version in current docset
+      let targetPath =
+        this.$site.base + this.$activeSet.baseDir + version + "/";
 
-      window.location = targetPath;
+      const alternatePath = getAlternateVersion(
+        this.$page,
+        this.$activeVersion,
+        version,
+        this.$site.pages,
+        true
+      );
+
+      if (alternatePath) {
+        const targetpage = getPageWithRelativePath(
+          this.$site.pages,
+          alternatePath
+        );
+        targetPath = this.$site.base + targetpage.path;
+      }
+
+      window.location = fixDoubleSlashes(targetPath);
     },
 
     handleLanguageUpdate(path) {

@@ -238,15 +238,19 @@ export function resolveNavLinkItem(linkItem) {
 /**
  * Takes the regular path (like `/3.x/extend/widget-types.html`) and locale-resolved config
  * to return the current base and relevant section of the sidebar config.
- * 
+ *
  * Modified to account for the active docSet and version.
- * 
+ *
  * @param { Route } route
  * @param { Array<string|string[]> | Array<SidebarGroup> | [link: string]: SidebarConfig } config
  * @returns { base: string, config: SidebarConfig }
  */
-export function resolveMatchingConfig(regularPath, config, activeSet, activeVersion) {
-
+export function resolveMatchingConfig(
+  regularPath,
+  config,
+  activeSet,
+  activeVersion
+) {
   // always starts with `/`
   let base = "/";
 
@@ -257,20 +261,18 @@ export function resolveMatchingConfig(regularPath, config, activeSet, activeVers
   if (activeSet) {
     base += activeSet.baseDir;
   }
-  
+
   // account for the active set version
   if (activeSet.versions) {
     // include with base
     base += "/" + activeVersion + "/";
     // strip from modified path
-    modifiedRegularPath = modifiedRegularPath.replace(activeVersion, '');
+    modifiedRegularPath = modifiedRegularPath.replace(activeVersion, "");
   }
 
   modifiedRegularPath = fixDoubleSlashes(modifiedRegularPath);
   base = fixDoubleSlashes(ensureEndingSlash(base));
 
-  // TODO: should base include locale segment?
-  
   if (Array.isArray(config)) {
     return {
       base: base,
@@ -279,7 +281,10 @@ export function resolveMatchingConfig(regularPath, config, activeSet, activeVers
   }
 
   for (const activeBase in config) {
-    if (ensureEndingSlash(modifiedRegularPath).indexOf(encodeURI(activeBase)) === 0) {
+    if (
+      ensureEndingSlash(modifiedRegularPath).indexOf(encodeURI(activeBase)) ===
+      0
+    ) {
       return {
         base: fixDoubleSlashes(base + activeBase),
         config: config[activeBase]
@@ -293,8 +298,8 @@ function ensureEndingSlash(path) {
   return /(\.html|\/)$/.test(path) ? path : path + "/";
 }
 
-function fixDoubleSlashes(path) {
-  return path.replace(/\/\//g, '/');
+export function fixDoubleSlashes(path) {
+  return path.replace(/\/\//g, "/");
 }
 
 /**
@@ -357,4 +362,64 @@ export function getDocSetDefaultUri(set) {
   }
 
   return ensureEndingSlash(uri);
+}
+
+/**
+ * Returns relativePath string if it exists in the filesystem or a
+ * frontmatter reference for targetVersion. Or `false`.
+ *
+ * @param {*} relativePath
+ * @param {*} activeVersion
+ * @param {*} targetVersion
+ * @param {*} pages
+ */
+export function getAlternateVersion(
+  page,
+  activeVersion,
+  targetVersion,
+  pages,
+  localOnly = false
+) {
+  // if we don’t have a current version, there won’t be a new one
+  if (!activeVersion) {
+    return false;
+  }
+
+  // see if the page frontmatter manually specifies a new version
+  if (page.frontmatter.updatedVersion) {
+    const updatedLocation = page.frontmatter.updatedVersion;
+
+    // only return external links if we want them
+    if (isExternal(updatedLocation) && localOnly === false) {
+      return updatedLocation;
+    }
+
+    const updatedPage = getPageWithRelativePath(pages, updatedLocation);
+
+    // return the updated path if it exists for a page
+    if (updatedPage) {
+      return updatedPage.relativePath;
+    }
+  }
+
+  // look for exact filename match with new version
+  const targetPath = page.relativePath.replace(activeVersion, targetVersion);
+  const updatedPage = getPageWithRelativePath(pages, targetPath);
+
+  if (updatedPage) {
+    return updatedPage.relativePath;
+  }
+}
+
+export function getPageWithRelativePath(pages, relativePath) {
+  for (let i = 0; i < pages.length; i++) {
+    const sitePage = pages[i];
+
+    // make sure the specified update actually exists
+    if (sitePage.relativePath == relativePath) {
+      return sitePage;
+    }
+  }
+
+  return null;
 }
