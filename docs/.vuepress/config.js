@@ -3,6 +3,7 @@ module.exports = {
   base: "/docs/",
   plugins: [
     ["@vuepress/google-analytics", { ga: "UA-39036834-9" }],
+    "vuepress-plugin-smooth-scroll",
     [
       "@vuepress/active-header-links",
       {
@@ -91,7 +92,6 @@ module.exports = {
     extendMarkdown(md) {
       // provide our own highlight.js to customize Prism setup
       md.options.highlight = require("./theme/highlight");
-
       // add markdown extensions
       md.use(require("./theme/util/replace-anchor-prefixes").replacePrefixes)
         .use(require("./theme/markup"))
