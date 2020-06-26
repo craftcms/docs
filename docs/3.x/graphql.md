@@ -79,6 +79,10 @@ return [
 ];
 ```
 
+::: tip
+Make sure `enableGql` in `config/general.php` is not set to `false`.
+:::
+
 You can verify that your endpoint is configured correctly, try sending a `{ping}` query to it.
 
 ```bash
