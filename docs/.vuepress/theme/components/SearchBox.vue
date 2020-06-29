@@ -131,25 +131,49 @@ export default {
   },
 
   methods: {
+    /**
+     * Returns a subset of this.$site.pages that should be searched
+     * based on the current navigation context.
+     */
     getPagesForSearch() {
       const { pages } = this.$site;
       const { docSets } = this.$themeConfig;
 
+      // arrays of path prefixes used for filtering
       let searchScopes = [];
+      let excludeScopes = [];
 
       if (this.$activeSet) {
-        if (this.$activeVersion) {
-          searchScopes.push(
-            (this.$activeSet.baseDir !== ""
-              ? this.$activeSet.baseDir + "/"
-              : "") + this.$activeVersion
-          );
+        // if we have an active set, we want to only show results in that set
+
+        if (this.$activeSet.locales) {
+          // limit to the current locale if relevant
+          const setLocales = Object.entries(this.$activeSet.locales);
+
+          for (let i = 0; i < setLocales.length; i++) {
+            const locale = setLocales[i];
+            const path = locale[0];
+            const settings = locale[1];
+
+            if (settings.lang === this.$lang) {
+              searchScopes.push(
+                this.getBasePath(this.$activeSet, this.$activeVersion, path)
+              );
+            } else if (path !== "/") {
+              excludeScopes.push(
+                this.getBasePath(this.$activeSet, this.$activeVersion, path)
+              );
+            }
+          }
         } else {
+          // if there’s only one locale, no need to populate excludeScopes
           searchScopes.push(
-            this.$activeSet.baseDir !== "" ? this.$activeSet.baseDir + "/" : ""
+            this.getBasePath(this.$activeSet, this.$activeVersion)
           );
         }
       } else {
+        // if there’s no active set, search everything in the primary sets
+        // using the latest version if relevant
         const primaryDocSets = docSets.filter(set => {
           return set.primarySet === true;
         });
@@ -170,10 +194,19 @@ export default {
         }
       }
 
+      //console.log("searchScopes, excludeScopes", searchScopes, excludeScopes);
+
+      // filter all pages by the scopes we just built
       const searchPages = pages.filter(page => {
         for (let i = 0; i < searchScopes.length; i++) {
           const scope = searchScopes[i];
           if (page.relativePath.startsWith(scope)) {
+            for (let j = 0; j < excludeScopes.length; j++) {
+              const excludeScope = excludeScopes[j];
+              if (page.relativePath.startsWith(excludeScope)) {
+                return false;
+              }
+            }
             return true;
           }
         }
@@ -182,6 +215,25 @@ export default {
       }, this);
 
       return searchPages;
+    },
+
+    /**
+     * Returns the base path for the given set, version, and locale path.
+     */
+    getBasePath(set, version = null, localePath = "/") {
+      let path = set.baseDir;
+
+      if (version) {
+        if (set.baseDir !== "") {
+          path += "/";
+        }
+
+        path += version;
+      }
+
+      path += localePath;
+
+      return path;
     },
 
     getPageLocalePath(page) {
