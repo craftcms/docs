@@ -242,12 +242,6 @@ export default {
         this.$activeVersion,
         this.$localeConfig
       );
-    },
-
-    getNavigationDepth() {
-      if (!this.$activeSet) {
-        return 0;
-      }
     }
   },
 

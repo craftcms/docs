@@ -135,6 +135,48 @@ export function resolveSidebarItems(
 ) {
   const { pages, themeConfig } = site;
 
+  // get the config object for whatever sidebar items we should be showing
+  const sidebarConfig = resolveSidebarConfig(
+    site,
+    page,
+    activeSet,
+    activeVersion,
+    localeConfig,
+    themeConfig
+  );
+
+  if (!sidebarConfig) {
+    return [];
+  } else {
+    // get the correct sidebar, whether the config is an array or path-indexed object
+    let { base, config } = resolveMatchingConfig(
+      regularPath,
+      sidebarConfig,
+      activeSet,
+      activeVersion
+    );
+
+    if (!config) {
+      console.log("didn’t resolve config");
+      return [];
+    }
+
+    const resolved = config.map(item => {
+      return resolveItem(item, pages, base);
+    });
+
+    return resolved;
+  }
+}
+
+export function resolveSidebarConfig(
+  site,
+  page,
+  activeSet,
+  activeVersion,
+  localeConfig,
+  themeConfig
+) {
   // no set, no sidebar items (just list sets)
   if (!activeSet) {
     //console.log("no sidebar set available");
@@ -157,27 +199,7 @@ export function resolveSidebarItems(
     sidebarConfig = sidebarConfig[activeVersion];
   }
 
-  if (!sidebarConfig) {
-    return [];
-  } else {
-    let { base, config } = resolveMatchingConfig(
-      regularPath,
-      sidebarConfig,
-      activeSet,
-      activeVersion
-    );
-
-    if (!config) {
-      console.log("didn’t resolve config");
-      return [];
-    }
-
-    const resolved = config.map(item => {
-      return resolveItem(item, pages, base);
-    });
-
-    return resolved;
-  }
+  return sidebarConfig;
 }
 
 /**
@@ -254,9 +276,6 @@ export function resolveMatchingConfig(
   // always starts with `/`
   let base = "/";
 
-  // get ready to strip the version from the path for comparison
-  let modifiedRegularPath = regularPath;
-
   // include the `baseDir` of our active set
   if (activeSet) {
     base += activeSet.baseDir;
@@ -266,13 +285,11 @@ export function resolveMatchingConfig(
   if (activeSet.versions) {
     // include with base
     base += "/" + activeVersion + "/";
-    // strip from modified path
-    modifiedRegularPath = modifiedRegularPath.replace(activeVersion, "");
   }
 
-  modifiedRegularPath = fixDoubleSlashes(modifiedRegularPath);
   base = fixDoubleSlashes(ensureEndingSlash(base));
 
+  // simpler array
   if (Array.isArray(config)) {
     return {
       base: base,
@@ -280,18 +297,64 @@ export function resolveMatchingConfig(
     };
   }
 
+  // remove version from regular path
+  const modifiedRegularPath = getRegularPathWithoutVersion(
+    regularPath,
+    activeVersion
+  );
+
+  // sidebar config by path, where `/` is the default
+  const activeBase = getRelativeActiveBaseFromConfig(
+    modifiedRegularPath,
+    config
+  );
+
+  if (activeBase) {
+    return {
+      base: fixDoubleSlashes(base + activeBase),
+      config: config[activeBase]
+    };
+  }
+
+  return {};
+}
+
+/**
+ * Returns the regular path without its version segment.
+ *
+ * @param {*} regularPath
+ * @param {*} activeVersion
+ */
+export function getRegularPathWithoutVersion(regularPath, activeVersion) {
+  // get ready to strip the version from the path for comparison
+  let modifiedRegularPath = regularPath;
+
+  if (activeVersion) {
+    // strip from modified path
+    modifiedRegularPath = modifiedRegularPath.replace(activeVersion, "");
+  }
+
+  return fixDoubleSlashes(modifiedRegularPath);
+}
+
+/**
+ * Returns the active sidebar config key.
+ *
+ * @param {*} path
+ * @param {*} config
+ */
+export function getRelativeActiveBaseFromConfig(path, config) {
+  if (Array.isArray(config)) {
+    return;
+  }
+
   for (const activeBase in config) {
-    if (
-      ensureEndingSlash(modifiedRegularPath).indexOf(encodeURI(activeBase)) ===
-      0
-    ) {
-      return {
-        base: fixDoubleSlashes(base + activeBase),
-        config: config[activeBase]
-      };
+    if (ensureEndingSlash(path).indexOf(encodeURI(activeBase)) === 0) {
+      return activeBase;
     }
   }
-  return {};
+
+  return;
 }
 
 function ensureEndingSlash(path) {

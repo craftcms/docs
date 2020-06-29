@@ -1,12 +1,12 @@
 <template>
   <div class="doc-set-panel">
-    <div class="doc-sets">
+    <div class="primary-sets">
       <RouterLink :to="`/`" class="doc-set home" :class="{ active: $activeSet === false }">
         <span class="back">
           <BackChevron />
         </span>
 
-        <span class="mr-2 inline-block relative home-icon" style="top: 2px; left: -1px;">
+        <span class="mr-2 inline-block relative home-icon">
           <Home />
         </span>
 
@@ -18,14 +18,8 @@
         :to="defaultUri(set)"
         class="doc-set"
       >
-        <span class="mr-2 inline-block relative" style="top: 2px;">
-          <img
-            :src="set.icon"
-            width="16"
-            height="16"
-            alt
-            style="filter: grayscale(100%); opacity: 0.85;"
-          />
+        <span class="mr-2 inline-block relative set-icon">
+          <img :src="set.icon" width="16" height="16" alt />
         </span>
 
         <span>{{ set.setTitle ? set.setTitle : set.title }}</span>
@@ -69,73 +63,83 @@
 
 <style lang="postcss">
 .doc-set-panel {
-}
+  .primary-sets {
+    @apply py-1;
 
-.doc-sets {
-  @apply py-1;
-}
+    .set-icon {
+      top: 2px;
 
-.doc-set {
-  @apply block px-4 mt-2 text-slate font-medium text-lg;
-}
-
-.doc-set-version {
-  @apply border pr-5 py-1 rounded-md leading-none block flex content-center items-center appearance-none font-medium text-sm bg-transparent cursor-pointer;
-  padding-left: 0.375rem;
-}
-
-.doc-set-current {
-  @apply px-4 mt-2 pb-5 flex w-full justify-between items-center;
-
-  .title {
-    font-size: 1.125rem;
-  }
-}
-
-.home {
-  @apply text-sm relative;
-  color: #718096;
-
-  .back {
-    @apply inline-block absolute mr-1 opacity-100;
-    top: 4px;
-    left: 15px;
-    transition: all 100ms ease-out;
-    transform: translateX(0);
-    width: auto;
-  }
-
-  .home-icon {
-    @apply hidden;
-  }
-
-  .home-title {
-    padding-left: 15px;
-  }
-
-  &.active {
-    @apply text-blue text-lg;
-
-    .home-icon {
-      @apply inline-block;
+      img {
+        filter: grayscale(100%);
+        opacity: 0.85;
+      }
     }
+  }
+
+  .doc-set {
+    @apply block px-4 mt-2 text-slate font-medium text-lg;
+  }
+
+  .home {
+    @apply text-sm relative;
+    color: #718096;
 
     .back {
-      @apply opacity-0 mr-0;
-      transform: translateX(-5px);
+      @apply inline-block absolute mr-1 opacity-100;
+      top: 4px;
+      left: 15px;
+      transition: all 100ms ease-out;
+      transform: translateX(0);
+      width: auto;
+    }
+
+    .home-icon {
+      @apply hidden;
     }
 
     .home-title {
-      @apply relative pl-0;
-      left: -2px;
+      padding-left: 15px;
+    }
+
+    &.active {
+      @apply text-blue text-lg;
+
+      .home-icon {
+        @apply inline-block;
+        top: 2px;
+        left: -1px;
+      }
+
+      .back {
+        @apply opacity-0 mr-0;
+        transform: translateX(-5px);
+      }
+
+      .home-title {
+        @apply relative pl-0;
+        left: -2px;
+      }
     }
   }
-}
 
-.version-arrow {
-  @apply pointer-events-none;
-  top: 0.55rem;
-  right: 0.385rem;
+  .doc-set-version {
+    @apply border pr-5 py-1 rounded-md leading-none block flex content-center items-center appearance-none font-medium text-sm bg-transparent cursor-pointer;
+    padding-left: 0.375rem;
+  }
+
+  .doc-set-current {
+    @apply px-4 mt-2 pb-5 flex w-full justify-between items-center;
+
+    .title {
+      font-size: 1.125rem;
+    }
+  }
+
+  .version-arrow {
+    @apply pointer-events-none;
+    top: 0.55rem;
+    right: 0.385rem;
+  }
 }
 </style>
 
