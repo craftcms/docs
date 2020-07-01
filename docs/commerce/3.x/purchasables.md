@@ -116,10 +116,10 @@ When a line item is populated from a purchasable, a JSON shapshot is saved on th
 
 :::
 
-This can be particularly helpful, for example, if `getPurchasable()` returns `null` on the line item and you need to display information from the purchasable in a customer’s order history.
+This can be particularly helpful, for example, if you’re displaying a completed order’s line items in templates and `getPurchasable()` returns `null`. This would happen if the purchasable was deleted, in which case details could be used from the snapshot instead. (This only applies to completed orders, because if a purchasable is deleted _during checkout_ the related line item would be removed from the customer’s cart.)
 
 ::: tip
-When building your front end and displaying line items, it’s best to reference purchasable information through `getPurchasable()`, relying the `snapshot` property either as a fallback or a source of truth when historically crucial information is needed.
+When building your front end and displaying line items, it’s best to reference purchasable information through `getPurchasable()`, relying the `snapshot` property either as a fallback or a source of truth when the purchasable is changed or deleted.
 :::
 
 ## Custom Purchasables
