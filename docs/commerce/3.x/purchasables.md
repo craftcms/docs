@@ -6,7 +6,7 @@ It should be extended to add useful attributes like Commerce’s included [produ
 
 ## Purchasables and Line Items
 
-Every purchasable is destined to become a line item, which happens when the purchasable is added to a cart. This is an important shift where the purchasable goes from describing an item’s content and available options to a line item describing part of a financial transaction.
+Every purchasable is destined to become a line item, which happens when the purchasable is added to a cart. This is an important shift where the purchasable describing an item’s content and available options becomes a line item in an order.
 
 When a line item is populated from a purchasable, a JSON shapshot is saved on that line item. The snapshot provides a permanent reference to whatever the purchasable looked like in that moment, regardless of how products or variations change over time. In other words, the details in the snapshot will persist regardless of any store changes during or after the checkout process.
 
@@ -248,7 +248,7 @@ If `$found` is greater than zero, meaning there’s another live (non-trashed) p
 
 ```php
 if ($found) {
-    
+
     $this->sku = $this->getSku() . '-1'; // make unique
 
     // Update variant table with new SKU
