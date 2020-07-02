@@ -1,14 +1,132 @@
 # Purchasables
 
-A purchasable is a custom element type that can be sold through the cart. Commerce includes [product variant](products.md#variants) and [donation](donations.md) purchasables, but [plugins and modules](https://docs.craftcms.com/v3/extend) can provide their own.
+The core of anything sold with Commerce is a purchasable, a custom [element type](https://docs.craftcms.com/v3/extend/element-types.html) that can be added to a cart.
 
-A purchasable:
+It should be extended to add useful attributes like Commerce’s included [product variant](products.md#variants) and [donation](donations.md) purchasables. [Plugins and modules](https://docs.craftcms.com/v3/extend) can provide their own purchasables.
 
-- is an [element type](https://docs.craftcms.com/v3/extend/element-types.html)
-- implements [`craft\commerce\base\PurchasableInterface`](api:craft\commerce\base\PurchasableInterface)
-- should extend [`craft\commerce\base\Purchasable`](api:craft\commerce\base\Purchasable)
+## Purchasables and Line Items
 
-If you’d like to introduce your own purchasable, it’s best to extend [the base Purchasable](api:craft\commerce\base\Purchasable) because you’ll automatically get...
+Every purchasable is destined to become a line item, which happens when the purchasable is added to a cart. This is an important shift where the purchasable describing an item’s content and available options becomes a line item in an order.
+
+When a line item is populated from a purchasable, a JSON shapshot is saved on that line item. The snapshot provides a permanent reference to whatever the purchasable looked like in that moment, regardless of how products or variations change over time. In other words, the details in the snapshot will persist regardless of any store changes during or after the checkout process.
+
+::: details Example Snapshot
+
+```json
+{
+  "productId": "29",
+  "isDefault": "1",
+  "sku": "ANT-001",
+  "price": 20,
+  "sortOrder": "1",
+  "width": null,
+  "height": null,
+  "length": null,
+  "weight": null,
+  "stock": "0",
+  "hasUnlimitedStock": "1",
+  "minQty": null,
+  "maxQty": null,
+  "deletedWithProduct": false,
+  "id": "30",
+  "tempId": null,
+  "draftId": null,
+  "revisionId": null,
+  "uid": "076305ef-17c5-4433-99de-bf5fb090f704",
+  "fieldLayoutId": null,
+  "contentId": "23",
+  "enabled": "1",
+  "archived": "0",
+  "siteId": "1",
+  "title": "A New Toga",
+  "slug": "ant-001",
+  "uri": null,
+  "dateCreated": "2020-06-29T09:12:02-07:00",
+  "dateUpdated": "2020-06-29T09:12:03-07:00",
+  "dateDeleted": null,
+  "trashed": false,
+  "propagateAll": false,
+  "newSiteIds": [],
+  "resaving": false,
+  "duplicateOf": null,
+  "previewing": false,
+  "hardDelete": false,
+  "ref": null,
+  "status": "enabled",
+  "structureId": null,
+  "url": "https://foo.dev/shop/products/ant-001?variant=30",
+  "isAvailable": true,
+  "isPromotable": true,
+  "shippingCategoryId": 1,
+  "taxCategoryId": 1,
+  "onSale": false,
+  "cpEditUrl": "#",
+  "product": {
+    "postDate": "2020-06-29T09:12:02-07:00",
+    "expiryDate": null,
+    "typeId": "1",
+    "taxCategoryId": "1",
+    "shippingCategoryId": "1",
+    "promotable": "1",
+    "freeShipping": null,
+    "enabled": "1",
+    "availableForPurchase": true,
+    "defaultVariantId": "30",
+    "defaultSku": "ANT-001",
+    "defaultPrice": "20.0000",
+    "defaultHeight": "0.0000",
+    "defaultLength": "0.0000",
+    "defaultWidth": "0.0000",
+    "defaultWeight": "0.0000",
+    "taxCategory": null,
+    "name": null,
+    "id": "29",
+    "tempId": null,
+    "draftId": null,
+    "revisionId": null,
+    "uid": "71a2efe8-163f-4014-9ffc-b8272d469a7e",
+    "fieldLayoutId": null,
+    "contentId": "22",
+    "archived": "0",
+    "siteId": "1",
+    "title": "A New Toga",
+    "slug": "ant-001",
+    "uri": "shop/products/ant-001",
+    "dateCreated": "2020-06-29T09:12:02-07:00",
+    "dateUpdated": "2020-06-29T09:12:02-07:00",
+    "dateDeleted": null,
+    "trashed": false,
+    "propagateAll": false,
+    "newSiteIds": [],
+    "resaving": false,
+    "duplicateOf": null,
+    "previewing": false,
+    "hardDelete": false,
+    "ref": null,
+    "status": "live",
+    "structureId": null,
+    "url": "https://foo.dev/shop/products/ant-001"
+  },
+  "description": "A New Toga",
+  "purchasableId": "30",
+  "options": [],
+  "sales": []
+}
+```
+
+:::
+
+This can be particularly helpful, for example, if you’re displaying a completed order’s line items in templates and `getPurchasable()` returns `null`. This would happen if the purchasable was deleted, in which case details could be used from the snapshot instead. (This only applies to completed orders, because if a purchasable is deleted _during checkout_ the related line item would be removed from the customer’s cart.)
+
+::: tip
+When building your front end and displaying line items, it’s best to reference purchasable information through `getPurchasable()`, relying the `snapshot` property either as a fallback or a source of truth when the purchasable is changed or deleted.
+:::
+
+## Custom Purchasables
+
+If you’d like to introduce your own purchasable in a custom module or plugin, you can either implement [`craft\commerce\base\PurchasableInterface`](api:craft\commerce\base\PurchasableInterface) or extend [`craft\commerce\base\Purchasable`](api:craft\commerce\base\Purchasable).
+
+We recommend extending [the base Purchasable](api:craft\commerce\base\Purchasable) because you’ll automatically get...
 
 - `getSalePrice()` calculation
 - `getSales()` to see the details of each sale applied in that calculation
@@ -109,7 +227,7 @@ Commerce only validates non-trashed purchasables. Trashed purchasables will stil
 
 If you decide to support restoration of your purchasable element, you need to make sure your its restored `sku` is unique.
 
-You would do this by overriding the `beforeRestore()` method in your purchasable element. 
+You would do this by overriding the `beforeRestore()` method in your purchasable element.
 
 Within that method, you would first see if any non-trashed purchasables have the same `sku` as the purchasable to be restored:
 
@@ -117,7 +235,7 @@ Within that method, you would first see if any non-trashed purchasables have the
 if (!parent::beforeDelete()) {
     return false;
 }
-        
+
 $found = (new Query())->select(['[[p.sku]]', '[[e.id]]'])
     ->from('{{%commerce_purchasables}} p')
     ->leftJoin(Table::ELEMENTS . ' e', '[[p.id]]=[[e.id]]')
@@ -130,7 +248,7 @@ If `$found` is greater than zero, meaning there’s another live (non-trashed) p
 
 ```php
 if ($found) {
-    
+
     $this->sku = $this->getSku() . '-1'; // make unique
 
     // Update variant table with new SKU
