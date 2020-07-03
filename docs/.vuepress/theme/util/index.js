@@ -427,6 +427,8 @@ export function getDocSetDefaultUri(set) {
   return ensureEndingSlash(uri);
 }
 
+export function getDocSetDefaultVersionByHandle(docSets, handle) {}
+
 /**
  * Returns relativePath string if it exists in the filesystem or a
  * frontmatter reference for targetVersion. Or `false`.

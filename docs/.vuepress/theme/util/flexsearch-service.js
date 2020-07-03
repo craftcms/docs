@@ -1,0 +1,382 @@
+import Flexsearch from "flexsearch";
+// Use when flexSearch v0.7.0 will be available
+// import cyrillicCharset from 'flexsearch/dist/lang/cyrillic/default.min.js'
+// import cjkCharset from 'flexsearch/dist/lang/cjk/default.min.js'
+import _ from "lodash";
+import FlexSearch from "flexsearch";
+
+const defaultLang = "en-US";
+
+let cyrillicIndex = null;
+let cjkIndex = null;
+let pagesByPath = null;
+let indexes = [];
+
+const cjkRegex = /[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3]|[\u4E00-\u9FCC\u3400-\u4DB5\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29]|[\ud840-\ud868][\udc00-\udfff]|\ud869[\udc00-\uded6\udf00-\udfff]|[\ud86a-\ud86c][\udc00-\udfff]|\ud86d[\udc00-\udf34\udf40-\udfff]|\ud86e[\udc00-\udc1d]/giu;
+
+export default {
+  buildIndex(pages) {
+    const indexSettings = {
+      async: true,
+      doc: {
+        id: "key",
+        // fields we want to index
+        field: ["title", "headersStr", "content"]
+        // fields to be stored (acts as explicit allow list; `page` object otherwise stored)
+        // store: [
+        //   "key",
+        //   "title",
+        //   "headers",
+        //   "headersStr",
+        //   "content",
+        //   "contentLowercase",
+        //   "path",
+        //   "lang",
+        //   "docSetHandle",
+        //   "docSetTitle",
+        //   "isPrimary",
+        //   "version"
+        // ]
+      }
+    };
+
+    const globalIndex = new Flexsearch(indexSettings);
+    globalIndex.add(
+      pages.filter(page => {
+        // default language, primary set, and primary version (designated or versionless set)
+        return page.lang === defaultLang && page.isPrimary;
+      })
+    );
+
+    indexes["global"] = globalIndex;
+
+    // create sets keyed with format `setHandle-version-lang`
+    let docSets = pages
+      .map(page => {
+        return page.docSetHandle;
+      })
+      .filter((handle, index, self) => {
+        return handle && self.indexOf(handle) === index;
+      });
+
+    for (let i = 0; i < docSets.length; i++) {
+      const docSet = docSets[i];
+
+      const docSetPages = pages.filter(page => {
+        return page.docSetHandle === docSet;
+      });
+
+      let versions = docSetPages
+        .map(page => {
+          return page.version;
+        })
+        .filter((handle, index, self) => {
+          return handle && self.indexOf(handle) === index;
+        });
+
+      let languages = docSetPages
+        .map(page => {
+          return page.lang;
+        })
+        .filter((handle, index, self) => {
+          return handle && self.indexOf(handle) === index;
+        });
+
+      if (versions.length) {
+        for (let j = 0; j < versions.length; j++) {
+          const version = versions[j];
+
+          for (let k = 0; k < languages.length; k++) {
+            const language = languages[k];
+            const setIndex = new FlexSearch(indexSettings);
+            const setKey = `${docSet}|${version}|${language}`;
+            const setPages = pages.filter(page => {
+              return (
+                page.docSetHandle === docSet &&
+                page.lang === language &&
+                page.version === version
+              );
+            });
+
+            //console.log(setKey, setPages);
+            setIndex.add(setPages);
+            indexes[setKey] = setIndex;
+          }
+        }
+      } else {
+        // docset-language
+        for (let j = 0; j < languages.length; j++) {
+          const language = languages[j];
+          const setIndex = new FlexSearch(indexSettings);
+          const setKey = `${docSet}|${language}`;
+          const setPages = pages.filter(page => {
+            return page.docSetHandle === docSet && page.lang === language;
+          });
+
+          setIndex.add(setPages);
+          indexes[setKey] = setIndex;
+        }
+      }
+    }
+
+    const cyrillicPages = pages.filter(p => p.charsets.cyrillic);
+    const cjkPages = pages.filter(p => p.charsets.cjk);
+
+    if (cyrillicPages.length) {
+      cyrillicIndex = new Flexsearch({
+        ...indexSettings,
+        encode: false,
+        split: /\s+/,
+        tokenize: "forward"
+      });
+      cyrillicIndex.add(cyrillicPages);
+    }
+    if (cjkPages.length) {
+      cjkIndex = new Flexsearch({
+        ...indexSettings,
+        encode: false,
+        tokenize: function(str) {
+          const cjkWords = [];
+          let m = null;
+          do {
+            m = cjkRegex.exec(str);
+            if (m) {
+              cjkWords.push(m[0]);
+            }
+          } while (m);
+          return cjkWords;
+        }
+      });
+      cjkIndex.add(cjkPages);
+    }
+    pagesByPath = _.keyBy(pages, "path");
+  },
+  // TODO: consider adding search tags for controlled boosts
+  async match(queryString, queryTerms, docSet, version, language, limit = 7) {
+    const index = resolveSearchIndex(docSet, version, language);
+    const searchParams = [
+      {
+        field: "title",
+        query: queryString,
+        boost: 10,
+        suggest: false
+      },
+      {
+        field: "headersStr",
+        query: queryString,
+        boost: 7,
+        suggest: false
+      },
+      {
+        field: "content",
+        query: queryString,
+        suggest: false
+      }
+    ];
+    const searchResult1 = await index.search(searchParams, limit);
+    const searchResult2 = cyrillicIndex
+      ? await cyrillicIndex.search(searchParams, limit)
+      : [];
+    const searchResult3 = cjkIndex
+      ? await cjkIndex.search(searchParams, limit)
+      : [];
+    const searchResult = _.uniqBy(
+      [...searchResult1, ...searchResult2, ...searchResult3],
+      "path"
+    );
+
+    const result = searchResult.map(page => ({
+      ...page,
+      parentPageTitle: getParentPageTitle(page),
+      ...getAdditionalInfo(page, queryString, queryTerms)
+    }));
+
+    const resultByParent = _.groupBy(result, "parentPageTitle");
+    return _.values(resultByParent)
+      .map(arr =>
+        arr.map((x, i) => {
+          if (i === 0) return x;
+          return { ...x, parentPageTitle: null };
+        })
+      )
+      .flat();
+  }
+};
+
+function resolveSearchIndex(docSet, version, language) {
+  let key = docSet;
+
+  if (version) {
+    key += `|${version}`;
+  }
+
+  if (language) {
+    key += `|${language}`;
+  }
+
+  return indexes[key] || indexes["global"];
+}
+
+function getParentPageTitle(page) {
+  const pathParts = page.path.split("/");
+  let parentPagePath = "/";
+  if (pathParts[1]) parentPagePath = `/${pathParts[1]}/`;
+
+  const parentPage = pagesByPath[parentPagePath] || page;
+  return parentPage.title;
+}
+
+function getAdditionalInfo(page, queryString, queryTerms) {
+  const query = queryString.toLowerCase();
+
+  /**
+   * If it’s an exact title match or the page title starts with the query string,
+   * return the result with the full heading and no slug.
+   */
+  if (
+    page.title.toLowerCase() === query ||
+    page.title.toLowerCase().startsWith(query)
+  ) {
+    return {
+      headingStr: getFullHeading(page),
+      slug: "",
+      contentStr: getBeginningContent(page),
+      match: "title"
+    };
+  }
+
+  // TODO: include excerpt with heading string match
+
+  const match = getMatch(page, query, queryTerms);
+  if (!match)
+    return {
+      headingStr: getFullHeading(page),
+      slug: "",
+      contentStr: null,
+      match: "?"
+    };
+
+  if (match.headerIndex != null) {
+    // header match
+    return {
+      headingStr: getFullHeading(page, match.headerIndex),
+      slug: "#" + page.headers[match.headerIndex].slug,
+      contentStr: null,
+      match: "header"
+    };
+  }
+
+  // TODO: highlight query string in content match
+  // content match
+  let headerIndex = _.findLastIndex(
+    page.headers || [],
+    h => h.charIndex != null && h.charIndex < match.charIndex
+  );
+  if (headerIndex === -1) headerIndex = null;
+
+  return {
+    headingStr: getFullHeading(page, headerIndex),
+    slug: headerIndex == null ? "" : "#" + page.headers[headerIndex].slug,
+    contentStr: getContentStr(page, match),
+    match: "content"
+  };
+}
+
+function getFullHeading(page, headerIndex) {
+  if (headerIndex == null) return page.title;
+  const headersPath = [];
+  while (headerIndex != null) {
+    const header = page.headers[headerIndex];
+    headersPath.unshift(header);
+    headerIndex = _.findLastIndex(
+      page.headers,
+      h => h.level === header.level - 1,
+      headerIndex - 1
+    );
+    if (headerIndex === -1) headerIndex = null;
+  }
+  return headersPath.map(h => h.title).join(" > ");
+}
+
+function getMatch(page, query, terms) {
+  const matches = terms
+    .map(t => {
+      return getHeaderMatch(page, t) || getContentMatch(page, t);
+    })
+    .filter(m => m);
+  if (matches.length === 0) return null;
+
+  if (matches.every(m => m.headerIndex != null)) {
+    return getHeaderMatch(page, query) || matches[0];
+  }
+
+  return (
+    getContentMatch(page, query) || matches.find(m => m.headerIndex == null)
+  );
+}
+
+function getHeaderMatch(page, term) {
+  if (!page.headers) return null;
+  for (let i = 0; i < page.headers.length; i++) {
+    const h = page.headers[i];
+    const charIndex = h.title.toLowerCase().indexOf(term);
+    if (charIndex === -1) continue;
+    return {
+      headerIndex: i,
+      charIndex,
+      termLength: term.length
+    };
+  }
+  return null;
+}
+
+function getContentMatch(page, term) {
+  if (!page.contentLowercase) return null;
+  const charIndex = page.contentLowercase.indexOf(term);
+  if (charIndex === -1) return null;
+
+  return { headerIndex: null, charIndex, termLength: term.length };
+}
+
+function getContentStr(page, match) {
+  const snippetLength = 120;
+  const { charIndex, termLength } = match;
+
+  let lineStartIndex = page.content.lastIndexOf("\n", charIndex);
+  let lineEndIndex = page.content.indexOf("\n", charIndex);
+
+  if (lineStartIndex === -1) lineStartIndex = 0;
+  if (lineEndIndex === -1) lineEndIndex = page.content.length;
+
+  const line = page.content.slice(lineStartIndex, lineEndIndex);
+
+  if (snippetLength >= line.length) return line;
+
+  const lineCharIndex = charIndex - lineStartIndex;
+
+  const additionalCharactersFromStart = (snippetLength - termLength) / 2;
+  const snippetStart = Math.max(
+    lineCharIndex - additionalCharactersFromStart,
+    0
+  );
+  const snippetEnd = Math.min(snippetStart + snippetLength, line.length);
+  let result = line.slice(snippetStart, snippetEnd);
+  if (snippetStart > 0) result = "..." + result;
+  if (snippetEnd < line.length) result = result + "...";
+  return result;
+}
+
+function getBeginningContent(page) {
+  const lines = page.contentLowercase.split("\n");
+  const firstLine = lines.length > 0 ? lines[0] : "";
+
+  if (firstLine.trim() === page.title.toLowerCase()) {
+    // first line *is* title; start at second line
+    return getContentStr(page, {
+      charIndex: firstLine.length + 2,
+      termLength: 0
+    });
+  }
+
+  return getContentStr(page, { charIndex: 0, termLength: 0 });
+}

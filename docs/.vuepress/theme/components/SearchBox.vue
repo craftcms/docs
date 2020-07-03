@@ -1,10 +1,10 @@
 <template>
-  <div class="relative w-full">
+  <div class="search-box relative w-full">
     <input
       ref="input"
       aria-label="Search"
       :value="query"
-      :class="{ 'focused': focused }"
+      :class="{ focused: focused }"
       :placeholder="placeholder"
       class="bg-soft rounded-md w-full px-5 py-2 text-sm"
       autocomplete="off"
@@ -30,9 +30,38 @@
         @mousedown="go(i)"
         @mouseenter="focus(i)"
       >
-        <a :href="s.path" @click.prevent>
-          <span class="page-title">{{ s.title || s.path }}</span>
-          <span v-if="s.header" class="header">&gt; {{ s.header.title }}</span>
+        <a :href="s.path + s.slug" @click.prevent>
+          <!-- <div
+            v-if="s.parentPageTitle"
+            class="parent-page-title"
+            v-html="highlight(s.parentPageTitle)"
+          /> -->
+          <div class="suggestion-row">
+            <div
+              class="page-title"
+              v-html="
+                s.match == 'title'
+                  ? highlight(s.title || s.path)
+                  : s.title || s.path
+              "
+            ></div>
+            <div class="suggestion-content">
+              <div
+                class="header"
+                v-if="s.headingStr"
+                v-html="
+                  s.match == 'header' ? highlight(s.headingStr) : s.headingStr
+                "
+              ></div>
+              <div
+                class="excerpt"
+                v-if="s.contentStr && s.headingStr != s.contentStr"
+                v-html="
+                  s.match == 'content' ? highlight(s.contentStr) : s.contentStr
+                "
+              ></div>
+            </div>
+          </div>
         </a>
       </li>
     </ul>
@@ -40,70 +69,32 @@
 </template>
 
 <script>
-import matchQuery from "../util/match-query";
-
+import searchService from "../util/flexsearch-service";
 /* global SEARCH_MAX_SUGGESTIONS, SEARCH_PATHS, SEARCH_HOTKEYS */
 export default {
   name: "SearchBox",
-
   data() {
     return {
       query: "",
       focused: false,
       focusIndex: 0,
       maxSuggestions: 10,
-      paths: null,
+      suggestions: null,
       hotkeys: ["s", "/"]
     };
   },
-
   computed: {
+    queryTerms() {
+      if (!this.query) return [];
+      const result = this.query
+        .trim()
+        .toLowerCase()
+        .split(/[^\p{L}]+/iu)
+        .filter(t => t);
+      return result;
+    },
     showSuggestions() {
       return this.focused && this.suggestions && this.suggestions.length;
-    },
-
-    suggestions() {
-      const query = this.query.trim().toLowerCase();
-      if (!query) {
-        return;
-      }
-
-      const pages = this.getPagesForSearch();
-      const max =
-        this.$site.themeConfig.searchMaxSuggestions || this.maxSuggestions;
-      const localePath = this.$localePath;
-      const res = [];
-      for (let i = 0; i < pages.length; i++) {
-        if (res.length >= max) break;
-        const p = pages[i];
-        // filter out results that do not match current locale
-        if (this.getPageLocalePath(p) !== localePath) {
-          continue;
-        }
-
-        // filter out results that do not match searchable paths
-        if (!this.isSearchable(p)) {
-          continue;
-        }
-
-        if (matchQuery(query, p)) {
-          res.push(p);
-        } else if (p.headers) {
-          for (let j = 0; j < p.headers.length; j++) {
-            if (res.length >= max) break;
-            const h = p.headers[j];
-            if (h.title && matchQuery(query, p, h.title)) {
-              res.push(
-                Object.assign({}, p, {
-                  path: p.path + "#" + h.slug,
-                  header: h
-                })
-              );
-            }
-          }
-        }
-      }
-      return res;
     },
 
     // make suggestions align right when there are not enough items
@@ -121,121 +112,53 @@ export default {
       );
     }
   },
-
+  watch: {
+    query() {
+      this.getSuggestions();
+    }
+  },
   mounted() {
+    searchService.buildIndex(this.$site.pages);
     document.addEventListener("keydown", this.onHotkey);
   },
-
   beforeDestroy() {
     document.removeEventListener("keydown", this.onHotkey);
   },
-
   methods: {
-    /**
-     * Returns a subset of this.$site.pages that should be searched
-     * based on the current navigation context.
-     */
-    getPagesForSearch() {
-      const { pages } = this.$site;
-      const { docSets } = this.$themeConfig;
-
-      // arrays of path prefixes used for filtering
-      let searchScopes = [];
-      let excludeScopes = [];
-
-      if (this.$activeSet) {
-        // if we have an active set, we want to only show results in that set
-
-        if (this.$activeSet.locales) {
-          // limit to the current locale if relevant
-          const setLocales = Object.entries(this.$activeSet.locales);
-
-          for (let i = 0; i < setLocales.length; i++) {
-            const locale = setLocales[i];
-            const path = locale[0];
-            const settings = locale[1];
-
-            if (settings.lang === this.$lang) {
-              searchScopes.push(
-                this.getBasePath(this.$activeSet, this.$activeVersion, path)
-              );
-            } else if (path !== "/") {
-              excludeScopes.push(
-                this.getBasePath(this.$activeSet, this.$activeVersion, path)
-              );
-            }
-          }
-        } else {
-          // if there’s only one locale, no need to populate excludeScopes
-          searchScopes.push(
-            this.getBasePath(this.$activeSet, this.$activeVersion)
-          );
-        }
-      } else {
-        // if there’s no active set, search everything in the primary sets
-        // using the latest version if relevant
-        const primaryDocSets = docSets.filter(set => {
-          return set.primarySet === true;
-        });
-
-        for (let i = 0; i < primaryDocSets.length; i++) {
-          const set = primaryDocSets[i];
-
-          if (set.hasOwnProperty("versions")) {
-            for (let j = 0; j < set.versions.length; j++) {
-              const version = set.versions[j][0];
-              searchScopes.push(
-                (set.baseDir !== "" ? set.baseDir + "/" : "") + version
-              );
-            }
-          } else {
-            searchScopes.push(set.baseDir !== "" ? set.baseDir + "/" : "");
-          }
-        }
+    highlight(str) {
+      if (!this.queryTerms.length) return str;
+      // safely use HTML lines in result
+      str = this.escapeHtml(str.trim());
+      return str.replace(new RegExp(this.query, "gi"), match => {
+        return `<mark>${match}</mark>`;
+      });
+    },
+    escapeHtml(unsafe) {
+      return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    },
+    async getSuggestions() {
+      if (!this.query || !this.queryTerms.length) {
+        this.suggestions = [];
+        return;
       }
 
-      //console.log("searchScopes, excludeScopes", searchScopes, excludeScopes);
+      // if no active set, search primaries + default version + default lang
+      // otherwise, search current set + current lang + current version
 
-      // filter all pages by the scopes we just built
-      const searchPages = pages.filter(page => {
-        for (let i = 0; i < searchScopes.length; i++) {
-          const scope = searchScopes[i];
-          if (page.relativePath.startsWith(scope)) {
-            for (let j = 0; j < excludeScopes.length; j++) {
-              const excludeScope = excludeScopes[j];
-              if (page.relativePath.startsWith(excludeScope)) {
-                return false;
-              }
-            }
-            return true;
-          }
-        }
-
-        return false;
-      }, this);
-
-      return searchPages;
+      this.suggestions = await searchService.match(
+        this.query,
+        this.queryTerms,
+        this.$activeSet ? this.$activeSet.handle : false,
+        this.$activeVersion,
+        this.$lang,
+        this.maxSuggestions
+      );
     },
-
-    /**
-     * Returns the base path for the given set, version, and locale path.
-     */
-    getBasePath(set, version = null, localePath = "/") {
-      let path = set.baseDir;
-
-      if (version) {
-        if (set.baseDir !== "") {
-          path += "/";
-        }
-
-        path += version;
-      }
-
-      path += localePath;
-
-      return path;
-    },
-
     getPageLocalePath(page) {
       for (const localePath in this.$site.locales || {}) {
         if (localePath !== "/" && page.path.indexOf(localePath) === 0) {
@@ -244,26 +167,6 @@ export default {
       }
       return "/";
     },
-
-    isSearchable(page) {
-      let searchPaths = this.paths;
-
-      // all paths searchables
-      if (searchPaths === null) {
-        return true;
-      }
-
-      searchPaths = Array.isArray(searchPaths)
-        ? searchPaths
-        : new Array(searchPaths);
-
-      return (
-        searchPaths.filter(path => {
-          return page.path.match(path);
-        }).length > 0
-      );
-    },
-
     onHotkey(event) {
       if (
         event.srcElement === document.body &&
@@ -280,7 +183,6 @@ export default {
         event.preventDefault();
       }
     },
-
     onUp() {
       if (this.showSuggestions) {
         if (this.focusIndex > 0) {
@@ -290,7 +192,6 @@ export default {
         }
       }
     },
-
     onDown() {
       if (this.showSuggestions) {
         if (this.focusIndex < this.suggestions.length - 1) {
@@ -300,20 +201,18 @@ export default {
         }
       }
     },
-
     go(i) {
       if (!this.showSuggestions) {
         return;
       }
-      this.$router.push(this.suggestions[i].path);
+      this.$router.push(this.suggestions[i].path + this.suggestions[i].slug);
       this.query = "";
+      this.$refs.input.blur();
       this.focusIndex = 0;
     },
-
     focus(i) {
       this.focusIndex = i;
     },
-
     unfocus() {
       this.focusIndex = -1;
     }
@@ -339,12 +238,17 @@ export default {
     top: -10px;
     left: 1.75rem;
   }
+
+  mark {
+    @apply text-slate;
+    background-color: rgba(74, 124, 246, 0.1);
+  }
 }
 
 .suggestion {
   @apply cursor-pointer rounded;
   line-height: 1.4;
-  padding: 0.4rem 0.6rem;
+  /* padding: 0.4rem 0.6rem; */
 
   a {
     @apply whitespace-normal;
@@ -365,6 +269,38 @@ export default {
 
     a {
       @apply text-blue;
+    }
+
+    .suggestion-row {
+      .page-title {
+        border-color: #e6e6e6;
+      }
+    }
+  }
+}
+
+.suggestion-row {
+  @apply flex w-full;
+
+  .page-title,
+  .suggestion-content {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .page-title {
+    @apply w-1/3 border-r;
+    border-color: #f3f4f5;
+  }
+
+  .suggestion-content {
+    @apply w-2/3;
+
+    .header {
+      @apply font-semibold m-0 p-0;
+    }
+
+    .excerpt {
+      @apply text-sm overflow-hidden;
     }
   }
 }
