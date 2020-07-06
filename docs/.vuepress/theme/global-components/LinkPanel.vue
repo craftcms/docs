@@ -62,7 +62,7 @@
 
 <style lang="postcss">
 .link-panel {
-  @apply rounded border block w-1/3 p-4 mx-2 relative;
+  @apply rounded border block w-1/2 p-4 mx-2 relative;
   transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
 
   .title {
@@ -94,6 +94,12 @@
     .subtitle {
       padding-left: 2.25rem;
     }
+  }
+}
+
+@screen sm {
+  .link-panel {
+    @apply w-1/3;
   }
 }
 </style>

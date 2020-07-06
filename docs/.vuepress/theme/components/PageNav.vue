@@ -1,14 +1,5 @@
 <template>
   <div>
-    <div class="right-nav w-64 absolute right-0 top-0">
-      <div class="fixed mt-24 pt-1">
-        <SidebarLinks
-          :depth="0"
-          :items="headingItems"
-          fixed-heading="On this Page"
-        />
-      </div>
-    </div>
     <div v-if="prev || next" class="page-nav content-wrapper">
       <p class="inner border-t mt-0 pt-4 overflow-auto">
         <span v-if="prev" class="prev">
@@ -24,9 +15,11 @@
             <OutboundLink />
           </a>
 
-          <RouterLink v-else class="prev" :to="prev.path">{{
+          <RouterLink v-else class="prev" :to="prev.path">
+            {{
             prev.title || prev.path
-          }}</RouterLink>
+            }}
+          </RouterLink>
         </span>
 
         <span v-if="next" class="next float-right">
@@ -40,9 +33,11 @@
             <OutboundLink />
           </a>
 
-          <RouterLink v-else :to="next.path">{{
+          <RouterLink v-else :to="next.path">
+            {{
             next.title || next.path
-          }}</RouterLink>
+            }}
+          </RouterLink>
           <span class="paging-arrow inline-block">→</span>
         </span>
       </p>
@@ -59,11 +54,10 @@
 </style>
 
 <script>
-import { resolvePage } from "../util";
+import { resolvePage, resolveHeaders } from "../util";
 import isString from "lodash/isString";
 import isNil from "lodash/isNil";
 import SidebarLinks from "./SidebarLinks";
-import { resolveHeaders } from "../util";
 
 export default {
   name: "PageNav",

@@ -1,5 +1,5 @@
 <template>
-  <main class="page pb-8 block relative">
+  <main class="page">
     <slot name="top" />
 
     <Content class="theme-default-content" />
@@ -13,6 +13,12 @@
     <slot name="bottom" />
   </main>
 </template>
+
+<style lang="postcss">
+.page {
+  @apply mx-auto pb-8 block relative;
+}
+</style>
 
 <script>
 import PageEdit from "./PageEdit";

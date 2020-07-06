@@ -14,26 +14,17 @@
       @selectVersion="handleVersionUpdate"
       @selectLanguage="handleLanguageUpdate"
     />
-    <div
-      id="main"
-      class="main-container relative lg:ml-64 max-w-screen-md mx-auto lg:max-w-none"
-    >
+    <div id="main" class="main-container relative max-w-screen-lg">
       <div
         id="top-bar"
         class="block h-12 w-full content-center relative px-10 pt-2 max-w-screen-md"
       >
-        <button
-          @click="toggleSidebar"
-          class="nav-hamburger inline-block lg:hidden"
-        >
+        <button @click="toggleSidebar" class="nav-hamburger inline-block lg:hidden">
           <span></span>
           <span></span>
           <span></span>
         </button>
-        <div
-          id="search"
-          class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center"
-        >
+        <div id="search" class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center">
           <SearchBox
             v-if="
               $site.themeConfig.search !== false &&
@@ -42,7 +33,7 @@
           />
         </div>
       </div>
-      <Page :sidebar-items="sidebarItems">
+      <Page :sidebar-items="sidebarItems" :heading-items="headingItems">
         <template #top>
           <slot name="page-top" />
         </template>
@@ -51,17 +42,16 @@
         </template>
       </Page>
     </div>
+    <RightBar :heading-items="headingItems" />
   </div>
 </template>
 
 <style lang="postcss">
 .theme-container {
-  @apply relative mx-auto;
+  @apply relative w-full;
 }
 
 .sidebar-open {
-  /* todo: get body overflow-x: hidden */
-
   .main-container {
     /* w-64 */
     transform: translateX(16rem);
@@ -70,7 +60,7 @@
   }
 
   .left-bar {
-    @apply shadow-xl z-10;
+    @apply z-10;
     transform: translateX(0);
   }
 
@@ -82,6 +72,21 @@
 /* don’t add transform or nothing can be `position: fixed` inside, apparently */
 .main-container {
   transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+  @apply mx-auto max-w-screen-md;
+}
+
+@screen lg {
+  .main-container {
+    @apply relative;
+    max-width: 1028px;
+    left: 16rem;
+  }
+}
+
+@screen xl {
+  .main-container {
+    left: 8rem;
+  }
 }
 
 .left-bar {
@@ -142,7 +147,6 @@
 
 @screen lg {
   .theme-container {
-    @apply max-w-screen-lg;
   }
 
   .left-bar {
@@ -152,7 +156,6 @@
 
 @screen xl {
   .theme-container {
-    @apply max-w-screen-xl;
   }
 
   .right-nav {
@@ -178,12 +181,14 @@ import "prismjs/plugins/treeview/prism-treeview.css";
 
 import Page from "../components/Page";
 import LeftBar from "../components/LeftBar";
+import RightBar from "../components/RightBar";
 import SearchBox from "../components/SearchBox";
 
 import {
   resolveMatchingConfig,
   resolveItem,
   resolveSidebarItems,
+  resolveHeaders,
   getAlternateVersion,
   getPageWithRelativePath,
   fixDoubleSlashes
@@ -195,6 +200,7 @@ export default {
   components: {
     Page,
     LeftBar,
+    RightBar,
     SearchBox
   },
 
@@ -251,6 +257,10 @@ export default {
         this.$activeVersion,
         this.$localeConfig
       );
+    },
+
+    headingItems() {
+      return resolveHeaders(this.$page);
     }
   },
 

@@ -1,67 +1,69 @@
 <template>
-  <aside class="left-bar fixed h-screen w-64">
-    <div id="top" class="h-12 flex items-center">
-      <RouterLink
-        :to="`/`"
-        ref="siteName"
-        class="site-name text-slate font-bold px-4 mt-1"
-      >{{ $siteTitle }}</RouterLink>
-    </div>
-
-    <slot name="top" />
-
-    <div id="mid" class="relative">
-      <div class="nav-wrap relative w-64 overflow-x-hidden h-full">
-        <transition name="slide-left">
-          <div class="set-index" v-if="! this.$activeSet">
-            <DocSetPanel @selectVersion="handleVersionSelect" />
-          </div>
-        </transition>
-        <transition name="slide-right">
-          <div class="set-nav" v-if="this.$activeSet">
-            <DocSetPanel @selectVersion="handleVersionSelect" />
-            <transition :name="getTransitionClass(1)">
-              <SidebarLinks
-                v-if="currentSidebarDepth === 1"
-                class="left-bar-links"
-                :depth="0"
-                :items="items"
-                :class="{ 'has-bottom': hasBottomLinks }"
-              />
-            </transition>
-            <transition name="slide-right">
-              <SidebarLinks
-                v-if="currentSidebarDepth === 2"
-                class="left-bar-links"
-                :depth="0"
-                :items="items"
-                :class="{ 'has-bottom': hasBottomLinks }"
-              />
-            </transition>
-          </div>
-        </transition>
+  <aside class="left-bar">
+    <div class="wrap">
+      <div id="top" class="h-12 flex items-center">
+        <RouterLink
+          :to="`/`"
+          ref="siteName"
+          class="site-name text-slate font-bold px-4 mt-1"
+        >{{ $siteTitle }}</RouterLink>
       </div>
-    </div>
 
-    <slot name="bottom" />
+      <slot name="top" />
 
-    <transition name="slide-up">
-      <div v-if="hasBottomLinks" id="bottom" class="left-bar-bottom">
-        <div class="language">
-          <select
-            name="locale"
-            class="locale-select-element"
-            @change="handleLanguageSelect($event)"
-          >
-            <option
-              v-for="(locale, path) in set.locales"
-              :value="locale.lang"
-              :selected="$lang == locale.lang"
-            >{{ locale.config.label }}</option>
-          </select>
+      <div id="mid" class="relative">
+        <div class="nav-wrap relative w-64 overflow-x-hidden h-full">
+          <transition name="slide-left">
+            <div class="set-index" v-if="!this.$activeSet">
+              <DocSetPanel @selectVersion="handleVersionSelect" />
+            </div>
+          </transition>
+          <transition name="slide-right">
+            <div class="set-nav" v-if="this.$activeSet">
+              <DocSetPanel @selectVersion="handleVersionSelect" />
+              <transition :name="getTransitionClass(1)">
+                <SidebarLinks
+                  v-if="currentSidebarDepth === 1"
+                  class="left-bar-links"
+                  :depth="0"
+                  :items="items"
+                  :class="{ 'has-bottom': hasBottomLinks }"
+                />
+              </transition>
+              <transition name="slide-right">
+                <SidebarLinks
+                  v-if="currentSidebarDepth === 2"
+                  class="left-bar-links"
+                  :depth="0"
+                  :items="items"
+                  :class="{ 'has-bottom': hasBottomLinks }"
+                />
+              </transition>
+            </div>
+          </transition>
         </div>
       </div>
-    </transition>
+
+      <slot name="bottom" />
+
+      <transition name="slide-up">
+        <div v-if="hasBottomLinks" id="bottom" class="left-bar-bottom">
+          <div class="language">
+            <select
+              name="locale"
+              class="locale-select-element"
+              @change="handleLanguageSelect($event)"
+            >
+              <option
+                v-for="(locale, path) in set.locales"
+                :value="locale.lang"
+                :selected="$lang == locale.lang"
+              >{{ locale.config.label }}</option>
+            </select>
+          </div>
+        </div>
+      </transition>
+    </div>
   </aside>
 </template>
 
@@ -122,8 +124,28 @@
 }
 
 .left-bar {
+  @apply h-screen bg-soft fixed;
+  background: #fafbfe;
+  @apply w-64;
+
+  .wrap {
+    @apply w-64 absolute right-0;
+  }
+
   .left-bar-bottom {
     @apply absolute w-full border-t;
+  }
+}
+
+@screen lg {
+  .left-bar {
+    width: calc(50% - 256px);
+  }
+}
+
+@screen xl {
+  .left-bar {
+    width: calc(50% - 384px);
   }
 }
 

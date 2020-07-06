@@ -13,8 +13,10 @@
       @apply text-gray-100;
     }
 
-    .doc-set {
-      @apply text-gray-200;
+    .doc-set-panel {
+      .doc-set {
+        @apply text-gray-200;
+      }
     }
 
     .doc-set-current .title {
@@ -35,6 +37,65 @@
 
     .vote-buttons .option {
       @apply border-slate;
+    }
+
+    .left-bar {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .link-panel {
+      background-color: rgba(45, 55, 72, var(--bg-opacity));
+      border-color: rgba(255, 255, 255, 0.05);
+
+      .subtitle {
+        color: rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    .icon-link {
+      .text-slate {
+        color: rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    .search-box {
+      .suggestions {
+        @apply bg-gray-900;
+
+        &:before {
+          @apply border-gray-900;
+          border-top-color: transparent;
+          border-left-color: transparent;
+          border-right-color: transparent;
+        }
+      }
+
+      mark {
+        @apply text-gray-400;
+      }
+
+      .suggestion-row {
+        .page-title {
+          border-color: rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      .suggestion {
+        &.focused {
+          background-color: rgba(255, 255, 255, 0.1);
+
+          .suggestion-row {
+            .page-title {
+              @apply border-gray-700;
+            }
+          }
+        }
+      }
+
+      input:focus {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        @apply text-white outline-none;
+      }
     }
   }
 
