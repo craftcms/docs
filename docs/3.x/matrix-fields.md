@@ -93,7 +93,7 @@ Here’s an example of what the template might look like for a Matrix field with
 ```
 
 ::: tip
-This code can be simplified using the [switch](dev/tags/switch.md) tag.
+This code can be simplified using the [switch](dev/tags.md#switch) tag.
 :::
 
 If you only want the first block, call [one()](<api:craft\db\Query::one()>) instead of `all()`, and then make sure it returned something:
