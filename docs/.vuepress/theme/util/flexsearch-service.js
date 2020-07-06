@@ -199,8 +199,9 @@ export default {
       ...getAdditionalInfo(page, queryString, queryTerms)
     }));
 
-    const resultByParent = _.groupBy(result, "parentPageTitle");
-    return _.values(resultByParent)
+    const resultBySet = _.groupBy(result, "docSetTitle");
+
+    return _.values(resultBySet)
       .map(arr =>
         arr.map((x, i) => {
           if (i === 0) return x;

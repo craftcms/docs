@@ -16,55 +16,59 @@
       @keyup.up="onUp"
       @keyup.down="onDown"
     />
-    <ul
+    <div
       v-if="showSuggestions"
       class="suggestions"
       :class="{ 'align-right': alignRight }"
       @mouseleave="unfocus"
     >
-      <li
-        v-for="(s, i) in suggestions"
-        :key="i"
-        class="suggestion"
-        :class="{ focused: i === focusIndex }"
-        @mousedown="go(i)"
-        @mouseenter="focus(i)"
-      >
-        <a :href="s.path + s.slug" @click.prevent>
-          <!-- <div
+      <div v-for="(s, i) in suggestions" :key="i">
+        <div
+          v-if="! $activeSet && shouldShowSetTitle(s, i)"
+          class="suggestion-doc-set"
+        >{{ s.docSetTitle }}</div>
+        <div
+          class="suggestion"
+          :class="{ focused: i === focusIndex }"
+          @mousedown="go(i)"
+          @mouseenter="focus(i)"
+        >
+          <a :href="s.path + s.slug" @click.prevent>
+            <!-- <div
             v-if="s.parentPageTitle"
             class="parent-page-title"
             v-html="highlight(s.parentPageTitle)"
-          /> -->
-          <div class="suggestion-row">
-            <div
-              class="page-title"
-              v-html="
+            />-->
+            <div class="suggestion-row">
+              <div
+                class="page-title"
+                v-html="
                 s.match == 'title'
                   ? highlight(s.title || s.path)
                   : s.title || s.path
               "
-            ></div>
-            <div class="suggestion-content">
-              <div
-                class="header"
-                v-if="s.headingStr"
-                v-html="
+              ></div>
+              <div class="suggestion-content">
+                <div
+                  class="header"
+                  v-if="s.headingStr"
+                  v-html="
                   s.match == 'header' ? highlight(s.headingStr) : s.headingStr
                 "
-              ></div>
-              <div
-                class="excerpt"
-                v-if="s.contentStr && s.headingStr != s.contentStr"
-                v-html="
+                ></div>
+                <div
+                  class="excerpt"
+                  v-if="s.contentStr && s.headingStr != s.contentStr"
+                  v-html="
                   s.match == 'content' ? highlight(s.contentStr) : s.contentStr
                 "
-              ></div>
+                ></div>
+              </div>
             </div>
-          </div>
-        </a>
-      </li>
-    </ul>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -80,6 +84,7 @@ export default {
       focusIndex: 0,
       maxSuggestions: 10,
       suggestions: null,
+      displayedSetTitles: [],
       hotkeys: ["s", "/"]
     };
   },
@@ -215,6 +220,13 @@ export default {
     },
     unfocus() {
       this.focusIndex = -1;
+    },
+    shouldShowSetTitle(suggestion, index) {
+      let previousSuggestion = this.suggestions[index - 1];
+      return (
+        !previousSuggestion ||
+        previousSuggestion.docSetTitle !== suggestion.docSetTitle
+      );
     }
   }
 };
@@ -277,6 +289,11 @@ export default {
       }
     }
   }
+}
+
+.suggestion-doc-set {
+  @apply relative px-2 font-bold text-sm select-none text-white rounded-sm;
+  background-color: rgb(229, 66, 43);
 }
 
 .suggestion-row {
