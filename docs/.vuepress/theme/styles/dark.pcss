@@ -113,23 +113,86 @@
     }
 
     code {
-      @apply bg-black;
+      @apply bg-cinder;
     }
 
     pre,
     pre[class*="language-"] {
-      @apply bg-black;
+      @apply bg-cinder;
     }
 
     .custom-block {
       div[class*="language-"] {
-        @apply bg-black;
+        @apply bg-cinder;
       }
+
+      &.tip {
+        border-color: transparent;
+        background-color: rgba(45, 55, 72, var(--bg-opacity));
+      }
+
+      &.warning {
+        border-color: transparent;
+        background-color: rgba(255, 229, 100, 0.2);
+        color: #b29400;
+      }
+
+      &.danger {
+        color: #e5422b;
+        border-color: transparent;
+        background-color: rgba(204, 0, 0, 0.4);
+      }
+    }
+
+    kbd {
+      @apply bg-cinder;
+      color: #476582;
+      border: 1px solid #444;
+      border-bottom: 3px solid #222;
+    }
+
+    tr {
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+
+      &:nth-child(2n) {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    th,
+    td {
+      border-color: rgba(45, 55, 72, 1);
+    }
+
+    div.table {
+      border-color: rgba(45, 55, 72, 1);
+    }
+
+    dl {
+      background-color: rgba(45, 55, 72, var(--bg-opacity));
+    }
+
+    .token.treeview-part .entry-name:before {
+      filter: invert(1);
+    }
+
+    .token.treeview-part .line-h:before,
+    .token.treeview-part .line-v:before {
+      border-left: 1px solid rgba(45, 55, 72, 1);
+    }
+
+    .token.treeview-part .line-h:after {
+      border-bottom: 1px solid rgba(45, 55, 72, 1);
+    }
+
+    .token.treeview-part .line-v-last:before {
+      border-left: 1px solid rgba(45, 55, 72, 1);
+      border-bottom: 1px solid rgba(45, 55, 72, 1);
     }
   }
 
   div[class*="language-"] {
-    @apply bg-black;
+    @apply bg-cinder;
   }
 
   a.sidebar-link {
