@@ -67,7 +67,7 @@ Complete projects you can use to learn or jump start your own.
     <div class="w-1/2">
         <IconLink title="CraftQuest" 
             subtitle="Watch video courses." 
-            link="https://craftquest.com/" 
+            link="https://craftquest.io/" 
             icon="/icons/icon-generic-link.svg" 
             icon-size="large" 
         />
