@@ -11,19 +11,12 @@
       :version="$activeVersion"
       :items="sidebarItems"
       @toggle-sidebar="toggleSidebar"
-      @selectVersion="handleVersionUpdate"
-      @selectLanguage="handleLanguageUpdate"
+      @select-version="handleVersionUpdate"
+      @select-language="handleLanguageUpdate"
     />
-    <div id="main" class="main-container relative max-w-screen-lg">
-      <div
-        id="top-bar"
-        class="block h-12 w-full content-center relative px-10 pt-2 max-w-screen-md"
-      >
-        <button @click="toggleSidebar" class="nav-hamburger inline-block lg:hidden">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+    <div id="main" class="main-container">
+      <div id="top-bar" class="top-bar">
+        <Hamburger @click="toggleSidebar" />
         <div id="search" class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center">
           <SearchBox
             v-if="
@@ -51,6 +44,15 @@
   @apply relative w-full;
 }
 
+.main-container {
+  transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+  @apply mx-auto relative max-w-screen-lg;
+}
+
+.top-bar {
+  @apply block h-12 w-full content-center relative px-10 pt-2 max-w-screen-md;
+}
+
 .sidebar-open {
   .main-container {
     /* w-64 */
@@ -60,7 +62,6 @@
   }
 
   .left-bar {
-    @apply z-10;
     transform: translateX(0);
   }
 
@@ -69,84 +70,11 @@
   }
 }
 
-/* don’t add transform or nothing can be `position: fixed` inside, apparently */
-.main-container {
-  transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
-  @apply mx-auto max-w-screen-md;
-}
-
 @screen lg {
   .main-container {
     @apply relative;
     max-width: 1028px;
     left: 16rem;
-  }
-}
-
-@screen xl {
-  .main-container {
-    left: 8rem;
-  }
-}
-
-.left-bar {
-  transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
-  transform: translateX(-16rem);
-}
-
-.right-nav {
-  @apply hidden;
-
-  .sidebar-heading {
-    @apply text-xs mx-0 tracking-wide uppercase;
-    padding: 0.35rem 0;
-    border-left: none;
-  }
-
-  .sidebar-group:not(.collapsable) .sidebar-heading:not(.clickable) {
-    color: #a0aec0;
-  }
-
-  .sidebar-links {
-    @apply ml-0 pl-0 overflow-y-auto;
-    max-height: 94vh;
-
-    .sidebar-link {
-      @apply mx-0 px-0 text-slate border-0 pr-4;
-      opacity: 0.6;
-
-      &.active {
-        @apply opacity-100 text-slate;
-      }
-    }
-  }
-}
-
-.nav-hamburger {
-  @apply rounded absolute;
-  height: 2.3rem;
-  width: 2.3rem;
-  top: 0.6rem;
-
-  span {
-    @apply block bg-black absolute left-0;
-    top: 13px;
-    left: 0.575rem;
-    width: 18px;
-    height: 2px;
-  }
-
-  span + span {
-    top: 18px;
-  }
-
-  span + span + span {
-    top: 23px;
-  }
-}
-
-@screen lg {
-  .theme-container {
   }
 
   .left-bar {
@@ -155,22 +83,9 @@
 }
 
 @screen xl {
-  .theme-container {
+  .main-container {
+    left: 8rem;
   }
-
-  .right-nav {
-    @apply block;
-  }
-}
-
-.language-treeview {
-  code {
-    font-size: 1rem;
-  }
-}
-
-.entry-name {
-  font-size: 0.85rem;
 }
 </style>
 
@@ -183,10 +98,9 @@ import Page from "../components/Page";
 import LeftBar from "../components/LeftBar";
 import RightBar from "../components/RightBar";
 import SearchBox from "../components/SearchBox";
+import Hamburger from "../components/Hamburger";
 
 import {
-  resolveMatchingConfig,
-  resolveItem,
   resolveSidebarItems,
   resolveHeaders,
   getAlternateVersion,
@@ -201,7 +115,8 @@ export default {
     Page,
     LeftBar,
     RightBar,
-    SearchBox
+    SearchBox,
+    Hamburger
   },
 
   data() {
@@ -289,10 +204,6 @@ export default {
     toggleSidebar(to) {
       this.isSidebarOpen = typeof to === "boolean" ? to : !this.isSidebarOpen;
       this.$emit("toggle-sidebar", this.isSidebarOpen);
-    },
-
-    focusSearch() {
-      this.$refs.searchInput.focus();
     },
 
     /**

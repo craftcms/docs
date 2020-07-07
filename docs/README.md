@@ -68,7 +68,7 @@ Complete projects you can use to learn or jump start your own.
         <IconLink title="CraftQuest" 
             subtitle="Watch video courses." 
             link="https://craftquest.io/" 
-            icon="/icons/icon-generic-link.svg" 
+            icon="/icons/icon-craft-quest.svg" 
             icon-size="large" 
         />
     </div>
@@ -76,7 +76,7 @@ Complete projects you can use to learn or jump start your own.
         <IconLink title="Craft Link List" 
             subtitle="Stay in-the-know." 
             link="https://craftlinklist.com/" 
-            icon="/icons/icon-generic-link.svg" 
+            icon="/icons/icon-craft-link-list.svg" 
             icon-size="large" 
         />
     </div>

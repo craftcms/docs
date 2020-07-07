@@ -124,9 +124,10 @@
 }
 
 .left-bar {
-  @apply h-screen bg-soft fixed;
+  @apply w-64 h-screen bg-soft fixed z-10;
   background: #fafbfe;
-  @apply w-64;
+  transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+  transform: translateX(-16rem);
 
   .wrap {
     @apply w-64 absolute right-0;
@@ -208,10 +209,10 @@ export default {
   methods: {
     handleLanguageSelect(event) {
       const selected = event.target.value;
-      this.$emit("selectLanguage", selected);
+      this.$emit("select-language", selected);
     },
     handleVersionSelect(selected) {
-      this.$emit("selectVersion", selected);
+      this.$emit("select-version", selected);
     },
     getSidebarNavigationDepth() {
       if (!this.$activeSet) {
