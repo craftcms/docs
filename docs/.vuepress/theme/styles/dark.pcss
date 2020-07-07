@@ -189,6 +189,15 @@
       border-left: 1px solid rgba(45, 55, 72, 1);
       border-bottom: 1px solid rgba(45, 55, 72, 1);
     }
+
+    ul.code-language-switcher {
+      background: rgba(45, 55, 72, var(--bg-opacity));
+
+      li a.active {
+        @apply text-cinder;
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+    }
   }
 
   div[class*="language-"] {
