@@ -6,9 +6,11 @@ It consists of markdown content in nested `docs/` folders, and VuePress configur
 
 ## Overview
 
-The custom theme this project relies on adds the concept of docsets, meant to define a documentation “product” that may have one or several versions. Each can be configured as a “primary set,” meaning it appears as a top-level sidebar item.
+The major change in this theme is the concept of docsets, meant to define a documentation “product” that may have one or several versions. Each can be configured as a “primary set,” meaning it appears as a top-level sidebar item. Navigation and search are unique to each set, sort of like the VuePress equivalent of Craft’s multi-site functionality.
 
-The pages served from `docs/` are treated like any other VuePress project, and the theme modifies default resolvers so that any displayed content is assumed to be part of an active set once selected.
+The only content not part of a docset is the homepage at `docs/README.md`.
+
+The pages served from `docs/` are treated like any other VuePress project, and the theme modifies resolvers so any displayed content is assumed to be part of an active set once selected.
 
 - `docs/`
     - `.storybook/` has everything to configure the Storybook project, which depends on `postcss.config.js` and `tailwind.config.js`.
