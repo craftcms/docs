@@ -80,8 +80,7 @@
 }
 
 .left-bar {
-  @apply w-64 h-screen bg-soft fixed z-10;
-  background: #fafbfe;
+  @apply w-64 h-screen bg-softer fixed z-10;
   transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
   transform: translateX(-16rem);
 

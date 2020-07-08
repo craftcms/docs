@@ -46,11 +46,21 @@
 
 .main-container {
   transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
-  @apply mx-auto relative max-w-screen-lg;
+  @apply mx-auto relative max-w-screen-md;
 }
 
 .top-bar {
   @apply block h-12 w-full content-center relative px-10 pt-2 max-w-screen-md;
+}
+
+.sidebar-mask {
+  @apply fixed top-0 left-0 hidden h-screen w-screen;
+  z-index: 9;
+}
+
+.sidebar {
+  @apply bg-white text-base w-80 fixed z-10 m-0 left-0 bottom-0 box-border overflow-y-auto;
+  top: 3.6rem;
 }
 
 .sidebar-open {
@@ -68,6 +78,11 @@
   .sidebar-mask {
     @apply block;
   }
+}
+
+.theme-default-content:not(.custom),
+.content-wrapper {
+  @apply py-8 px-10 max-w-screen-md;
 }
 
 @screen lg {
