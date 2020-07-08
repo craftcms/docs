@@ -20,7 +20,7 @@ module.exports = {
       include: path.resolve(__dirname, "../")
     });
 
-    console.log("postcss config path: " + path.resolve(__dirname, "../../"));
+    //console.log("postcss config path: " + path.resolve(__dirname, "../../"));
 
     config.module.rules.push({
       test: /\.styl$|\.stylus/,

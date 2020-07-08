@@ -68,50 +68,6 @@
 </template>
 
 <style lang="postcss">
-.slide-left-enter-active,
-.slide-left-leave-active,
-.slide-right-enter-active,
-.slide-right-leave-active {
-  transition: opacity 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* slide from left to target */
-.slide-left-enter,
-.slide-left-leave-to {
-  position: absolute;
-  transform: translateX(-16rem);
-  opacity: 0;
-}
-
-/* slide from right to target */
-.slide-right-enter,
-.slide-right-leave-to {
-  position: absolute;
-  transform: translateX(16rem);
-  opacity: 0;
-}
-
-.slide-up-enter-active {
-  transition: opacity 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* immediate outtro */
-.slide-up-leave-active {
-  transition: opacity 0, transform 0;
-}
-
-.slide-up-enter,
-.slide-up-leave-to {
-  transform: translateY(4rem);
-  opacity: 0;
-}
-
 .left-bar-links {
   @apply h-screen overflow-y-auto pb-32;
   /* browser height - approx. .doc-set-panel height - #top height */
@@ -173,6 +129,54 @@
 
 .left-bar-bottom {
   @apply h-12;
+}
+
+/**
+ * transitions
+ */
+
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: opacity 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* slide from left to target */
+.slide-left-enter,
+.slide-left-leave-to {
+  position: absolute;
+  transform: translateX(-16rem);
+  opacity: 0;
+}
+
+/* slide from right to target */
+.slide-right-enter,
+.slide-right-leave-to {
+  position: absolute;
+  transform: translateX(16rem);
+  opacity: 0;
+}
+
+.slide-up-enter-active {
+  transition: opacity 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* immediate outtro */
+.slide-up-leave-active {
+  transition: opacity 0, transform 0;
+}
+
+.slide-up-enter,
+.slide-up-leave-to {
+  transform: translateY(4rem);
+  opacity: 0;
 }
 </style>
 

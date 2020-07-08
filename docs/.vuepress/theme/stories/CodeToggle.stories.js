@@ -7,7 +7,7 @@ import ContentContainer from "./ContentContainer";
 import "../styles/index.pcss";
 
 export default {
-  title: "components/Code Toggle",
+  title: "components/CodeToggle",
   decorators: [withKnobs]
 };
 

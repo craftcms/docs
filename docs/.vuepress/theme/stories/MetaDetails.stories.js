@@ -3,7 +3,7 @@ import MetaDetails from "../global-components/MetaDetails";
 import ContentContainer from "./ContentContainer";
 
 export default {
-  title: "global-components/Meta Details",
+  title: "global-components/MetaDetails",
   decorators: [withKnobs]
 };
 
