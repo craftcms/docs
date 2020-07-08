@@ -1,6 +1,6 @@
 module.exports = {
   purge: {
-    enabled: true,
+    enabled: process.env.MY_ENV_VAR === 'production' ? true : false,
     content: ["./docs/.vuepress/theme/**/*.vue", "./docs/**/*.md"]
   },
   theme: {
