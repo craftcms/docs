@@ -315,26 +315,89 @@ If you want your element type to support custom fields, you will also need to cr
 
 ```twig
 {% include "_includes/fieldlayoutdesigner" with {
-    fieldLayout: craft.app.fields.getLayoutByType('ns\\prefix\\elements\\Product')
+    fieldLayout: craft.app.fields.getLayoutByType('ns\\prefix\\elements\\MyElementType')
 } only %}
 ```
 
-Place that include within a `<form>` that posts to one of your plugin’s controllers. The controller can save the field layout like this:
+Place that include within a `<form>` that posts to one of your plugin’s controllers. The controller can assemble the field layout from the POST data like this:
 
 ```php
-use ns\prefix\elements\Product;
+$fieldLayout = Craft::$app->getFields()->assembleLayoutFromPost();
+$fieldLayout->type = MyElementType::class;
+```
+
+Your service can then save the field layout by passing it to <api:craft\services\Fields::saveLayout()>:
+
+```php
+Craft::$app->fields->saveLayout($fieldLayout);
+```
+
+Or, if the layout is being used by a component that’s stored in the [project config](project-config.md), you can add the field layout to the component’s config, and save it alongside your component.
+
+```php
+use craft\db\Table;
+use craft\helpers\Db;
+use craft\helpers\StringHelper;
+use craft\models\FieldLayout;
 
 // ...
 
-// assemble the new one from the post data, and save it
-$fieldLayout = \Craft::$app->getFields()->assembleLayoutFromPost();
-$fieldLayout->type = Product::class;
-\Craft::$app->getFields()->saveLayout($fieldLayout);
+public function saveComponent($myComponent)
+{
+    // ...
+
+    $fieldLayoutConfig = $fieldLayout->getConfig();
+    if ($fieldLayoutConfig) {
+        if (!$fieldLayout->id) {
+            $layoutUid = $fieldLayout->uid = StringHelper::UUID();
+        } else {
+            $layoutUid = Db::uidById(Table::FIELDLAYOUTS, $fieldLayout->id);
+        }
+        $myComponentConfig['fieldLayouts'] = [
+            $layoutUid => $fieldLayoutConfig
+        ];
+    }
+
+    // ...
+}
+
+public function handleChangedComponent(ConfigEvent $event)
+{
+    // ...
+
+    if (!empty($data['fieldLayouts'])) {
+        // Save the field layout
+        $layout = FieldLayout::createFromConfig(reset($data['fieldLayouts']));
+        $layout->id = $myComponentRecord->fieldLayoutId;
+        $layout->type = MyComponent::class;
+        $layout->uid = key($data['fieldLayouts']);
+        Craft::$app->fields->saveLayout($layout);
+        $myComponentRecord->fieldLayoutId = $layout->id;
+    } else if ($myComponentRecord->fieldLayoutId) {
+        // Delete the field layout
+        Craft::$app->fields->deleteLayoutById($myComponentRecord->fieldLayoutId);
+        $myComponentRecord->fieldLayoutId = null;
+    }
+    
+    // ...
+}
+
+public function handleDeletedComponent(ConfigEvent $event)
+{
+    // ...
+
+    // Delete the field layout
+    if ($myComponentRecord->fieldLayoutId) {
+        Craft::$app->fields->deleteLayoutById($myComponentRecord->fieldLayoutId);
+    }
+    
+    // ...
+}
 ```
 
 Rather than only having one field layout for your entire element type, you can also manage multiple field layouts, if needed. For example, entry field layouts are defined for each entry type; asset field layouts are defined for each asset volume, etc.
 
-You can set that up however you want. Just remember to store new field layouts’ IDs in the database somewhere. (You can access the field layout’s ID after calling `saveLayout()` via `$fieldLayout->id`.)
+You can set that up however you want. Just make sure you’re passing the right field layout into the `fieldLayout` key when rendering the field layout designer.
 
 #### Associating Elements to their Field Layouts
 
