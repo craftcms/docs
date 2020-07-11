@@ -311,15 +311,17 @@ public function getEditorHtml(): string
 
 #### Managing Field Layouts
 
-If you want your element type to support custom fields, you will also need to create a page somewhere within the control panel for managing your element type’s field layout. Craft provides a template include that will output a Field Layout Designer for you:
+If you want your element type to support custom fields, you will also need to create a page somewhere within the control panel for managing your element type’s field layout. The `_includes/forms.html` template provides a `fieldLayoutDesignerField` macro, which will output a field layout designer:
 
 ```twig
-{% include "_includes/fieldlayoutdesigner" with {
-    fieldLayout: craft.app.fields.getLayoutByType('ns\\prefix\\elements\\MyElementType')
-} only %}
+{% import '_includes/forms' as forms %}
+
+{{ forms.fieldLayoutDesignerField({
+    fieldLayout: craft.app.fields.getLayoutByType('ns\\prefix\\elements\\Product'),
+}) }}
 ```
 
-Place that include within a `<form>` that posts to one of your plugin’s controllers. The controller can assemble the field layout from the POST data like this:
+Place that within a `<form>` that posts to one of your plugin’s controllers. The controller can assemble the field layout from the POST data like this:
 
 ```php
 $fieldLayout = Craft::$app->getFields()->assembleLayoutFromPost();
@@ -419,6 +421,8 @@ public function getFieldLayout()
     return \Craft::$app->fields->getLayoutByType(Product::class);
 }
 ```
+
+See [Edit Page](#edit-page) to learn how to create an edit page for your elements, based on their field layout.
 
 ### Localization
 
@@ -788,6 +792,25 @@ The Edit Category page offers a relatively straightforward example of how it cou
   - [actionShareCategory()](api:craft\controllers\CategoriesController::actionShareCategory()) – handles a Share Category request, creating a token for `categories/view-shared-category` and redirecting the user to it
   - [actionViewSharedCategory()](api:craft\controllers\CategoriesController::actionViewSharedCategory()) – renders a category’s front-end page for a Share Category token
 
+#### Edit Page Template
+
+You can generate a tab menu and tab contents based on your element’s field layout by calling <api:craft\models\FieldLayout::createForm()>, either from your controller action or the edit page template.
+
+::: code
+```php
+$fieldLayout = $myElement->getFieldLayout();
+$form = $fieldLayout->createForm($myElement);
+$tabs = $form->getTabMenu();
+$fieldsHtml = $form->render();
+```
+```twig
+{% set fieldLayout = myElement.getFieldLayout() %}
+{% set form = fieldLayout.createForm(myElement) %}
+{% set tabs = form.getTabMenu() %}
+{% set fieldsHtml = form.render() %}
+```
+:::
+
 - Edit Category page template: [categories/_edit.html](https://github.com/craftcms/cms/blob/develop/src/templates/categories/_edit.html)
 
 Here’s a simple example of the code needed to save an element programatically, which could live within an `actionSave()` controller action:
@@ -933,26 +956,3 @@ public function setEagerLoadedElements(string $handle, array $elements)
     }
 }
 ```
-
-## Saving Field Content Deltas
-
-Element forms can be configured to submit only the field values that actually changed on the page. This is a prerequisite to [field delta saves](/extend/field-types.md#supporting-delta-saves).
-
-If your element provides its own edit form template, here’s how you can configure it to submit delta field content:
-
-1. Enable delta input name registration at the top of your template.
-2. Add `registerDeltas: true` wherever you’ve used `_includes/fields.html` or `_includes/field.html`.
-
-```twig{1,8}
-{% do view.setIsDeltaRegistrationActive(true) %}
-
-...
-
-{% include "_includes/fields" with {
-    fields: tab.getFields(),
-    element: customElement,
-    registerDeltas: true,
-} only %}
-```
-
-To verify that your element form is utilizing delta saving, inspect the `$_POST` data when saving edits in the Control Panel. Only the field types edited on the page should appear in the `fields` array.
