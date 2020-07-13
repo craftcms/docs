@@ -212,21 +212,28 @@ function closeBlock(level) {
 }
 
 /**
- * Append PostHeading component after first `<h1>`.
+ * Add PreHeading component before and PostHeading component after first h1.
  */
-function customPostHeadings(tokens) {
+function customHeadingSlots(tokens) {
   for (let i = 0; i < tokens.length; i++) {
     let t = tokens[i];
-    if (t.tag === "h1" && t.type === "heading_close") {
-      let postHeading = [
-        block(`<post-heading>`, t.level),
-        block(`</post-heading>`, t.level)
-      ];
 
-      tokens.splice(i + 1, 0, ...postHeading);
+    if (t.tag === "h1") {
+      if (t.type === "heading_open") {
+        let preHeading = [block(`<pre-heading></pre-heading>`, t.level)];
 
-      // only do this once
-      break;
+        tokens.splice(i > 0 ? i - 1 : 0, 0, ...preHeading);
+        i += 1;
+      }
+
+      if (t.type === "heading_close") {
+        let postHeading = [block(`<post-heading></post-heading>`, t.level)];
+
+        tokens.splice(i + 1, 0, ...postHeading);
+
+        // stop after first h1 close; we only need to do this once
+        break;
+      }
     }
   }
 }
@@ -242,7 +249,7 @@ module.exports = md => {
     tables(tokens);
     codeToggles(tokens);
     split(tokens);
-    customPostHeadings(tokens);
+    customHeadingSlots(tokens);
     return tokens;
   };
 
