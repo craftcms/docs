@@ -711,6 +711,10 @@ Event::on(
 );
 ```
 
+::: tip
+Don’t forget to set `salePrice` accordingly since it’s the amount that gets added to the cart.
+:::
+
 ### `createLineItem`
 
 The event that is triggered after a line item has been created from a purchasable.
