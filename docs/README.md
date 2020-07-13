@@ -19,7 +19,7 @@ Everything here is about building with Craft CMS.
 
 Self-contained, step-by-step training materials.
 
-<IconLink title="Getting Started with Craft" subtitle="Learn the fundamentals building a simple blog." link="/tutorials/getting-started/" icon="/icons/icon-tutorial.svg" />
+<IconLink title="Getting Started with Craft" subtitle="Learn the fundamentals building a simple blog." link="/getting-started-tutorial/" icon="/icons/icon-tutorial.svg" />
 
 ## Clone a Starter
 

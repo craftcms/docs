@@ -52,7 +52,7 @@ module.exports = {
     docSets: [
       require("./sets/craft-cms"),
       require("./sets/craft-commerce"),
-      require("./sets/tutorials/getting-started")
+      require("./sets/getting-started-tutorial")
     ],
     docsRepo: "craftcms/craft-docs",
     docsDir: "docs",
