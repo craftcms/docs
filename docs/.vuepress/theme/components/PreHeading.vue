@@ -1,9 +1,9 @@
 <template>
   <div class="pre-heading">
     <h4
-      v-if="this.$page.frontmatter[0].preheading"
+      v-if="this.$page.frontmatter && this.$page.frontmatter.preheading"
       class="preheading"
-    >{{ this.$page.frontmatter[0].preheading }}</h4>
+    >{{ this.$page.frontmatter.preheading }}</h4>
   </div>
 </template>
 
