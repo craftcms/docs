@@ -110,3 +110,9 @@ Use the table below to update each breaking change in your Twig templates.
 In order to improve compatibility with payment gateways and tax systems, custom adjuster types have been deprecated.
 
 Custom adjusters must extend the included <api:craft\commerce\adjusters\Discount>, <api:craft\commerce\adjusters\Shipping>, or <api:craft\commerce\adjusters\Tax>.
+
+## Discount Category Matching
+
+The way discounts can match product categories has changed.
+
+Before Commerce 3, a category relationship field needed to be present for a product match. In Commerce 3 this is more flexible, as the categories may be selected and used as the source or the target for the match. You’ll need to evaluate any existing discounts to be ensure they’re are applied as intended.
