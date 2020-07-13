@@ -1,14 +1,17 @@
 <template>
   <div class="post-heading">
     <div
+      v-if="suggestedUpdatePath"
+      class="version-warning block w-full mt-2 px-3 py-2 rounded border border-yellow-300"
+    >
+      This document is for an older version of {{ $activeSet.setTitle }}.
+      <RouterLink :to="suggestedUpdatePath">View Latest Version →</RouterLink>
+    </div>
+    <div
       class="auto-toc block xl:hidden"
       v-if="headingItems.length && headingItems[0].children.length"
     >
-      <SidebarLinks
-        :depth="0"
-        :items="headingItems"
-        fixed-heading="On this Page"
-      />
+      <SidebarLinks :depth="0" :items="headingItems" fixed-heading="On this Page" />
     </div>
   </div>
 </template>
@@ -37,16 +40,73 @@
 </style>
 
 <script>
-import { resolveHeaders } from "../util";
+import { resolveHeaders, getSameContentForVersion } from "../util";
 import SidebarLinks from "./SidebarLinks";
 
 export default {
   components: {
     SidebarLinks
   },
+  mounted() {
+    this.checkReferrer();
+  },
+  data() {
+    return {
+      suggestedUpdatePath: null
+    };
+  },
   computed: {
     headingItems() {
       return resolveHeaders(this.$page);
+    }
+  },
+  methods: {
+    checkReferrer() {
+      if (
+        !this.$activeSet ||
+        !this.$activeSet.versions ||
+        !this.$activeVersion
+      ) {
+        // nothing to do; only set content should generate suggestions
+        return;
+      }
+
+      const isCurrentVersion =
+        this.$activeSet.defaultVersion === this.$activeVersion;
+
+      if (isCurrentVersion) {
+        // only make suggestions for past versions
+        return;
+      }
+
+      const alternateVersionPath = getSameContentForVersion(
+        this.$activeSet.defaultVersion,
+        this.$activeSet,
+        this.$activeVersion,
+        this.$page,
+        this.$site.pages,
+        true
+      );
+
+      if (alternateVersionPath === false) {
+        return;
+      }
+
+      const searchMatch = [
+        /google\.com/,
+        /yahoo\.com/,
+        /bing\.com/,
+        /duckduckgo\.com/
+      ];
+
+      // does it look like the visitor came from a search engine?
+      const isSearchReferral = searchMatch.some(item =>
+        item.test(document.referrer)
+      );
+
+      if (isSearchReferral) {
+        this.suggestedUpdatePath = alternateVersionPath;
+      }
     }
   }
 };

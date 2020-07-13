@@ -488,3 +488,36 @@ export function getPageWithRelativePath(pages, relativePath) {
 
   return null;
 }
+
+/**
+ * Returns the path to the equivalent content in the specified set version,
+ * or `false` if there’s no match and the `strict` parameter is `true`.
+ */
+export function getSameContentForVersion(
+  version,
+  activeSet,
+  activeVersion,
+  page,
+  pages,
+  strict = false
+) {
+  // default to target version in current docset
+  let targetPath = "/" + activeSet.baseDir + version + "/";
+
+  const alternatePath = getAlternateVersion(
+    page,
+    activeVersion,
+    version,
+    pages,
+    true
+  );
+
+  if (alternatePath) {
+    const targetPage = getPageWithRelativePath(pages, alternatePath);
+    targetPath = "/" + targetPage.path;
+  } else if (strict) {
+    return false;
+  }
+
+  return fixDoubleSlashes(targetPath);
+}

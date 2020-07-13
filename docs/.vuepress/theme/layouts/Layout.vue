@@ -120,7 +120,8 @@ import {
   resolveHeaders,
   getAlternateVersion,
   getPageWithRelativePath,
-  fixDoubleSlashes
+  fixDoubleSlashes,
+  getSameContentForVersion
 } from "../util";
 
 export default {
@@ -137,7 +138,8 @@ export default {
   data() {
     return {
       isSidebarOpen: false,
-      version: null
+      version: null,
+      suggestedUpdatePath: null
     };
   },
 
@@ -226,26 +228,16 @@ export default {
      * or root of target version if no matching content is found.
      */
     handleVersionUpdate(version) {
-      // default to target version in current docset
-      let targetPath = "/" + this.$activeSet.baseDir + version + "/";
-
-      const alternatePath = getAlternateVersion(
-        this.$page,
-        this.$activeVersion,
-        version,
-        this.$site.pages,
-        true
-      );
-
-      if (alternatePath) {
-        const targetPage = getPageWithRelativePath(
+      this.$router.push(
+        getSameContentForVersion(
+          version,
+          this.$activeSet,
+          this.$activeVersion,
+          this.$page,
           this.$site.pages,
-          alternatePath
-        );
-        targetPath = "/" + targetPage.path;
-      }
-
-      this.$router.push(fixDoubleSlashes(targetPath));
+          false
+        )
+      );
     },
 
     /**
