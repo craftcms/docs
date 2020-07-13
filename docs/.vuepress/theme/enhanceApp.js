@@ -1,5 +1,6 @@
 import Vuex from "vuex";
 import CodeToggle from "./components/CodeToggle";
+import PreHeading from "./components/PreHeading";
 import PostHeading from "./components/PostHeading";
 import { setStorage } from "./Storage";
 
@@ -7,6 +8,7 @@ export default ({ Vue, options, router, siteData }) => {
   const base = siteData.base;
 
   Vue.component("code-toggle", CodeToggle);
+  Vue.component("pre-heading", PreHeading);
   Vue.component("post-heading", PostHeading);
 
   Vue.use(Vuex);
@@ -75,7 +77,7 @@ export default ({ Vue, options, router, siteData }) => {
       },
       $activeVersion() {
         if (this.$activeSet && !this.$activeSet.versions) {
-          console.log("no versions in set");
+          //console.log("no versions in set");
           return;
         }
 
@@ -89,7 +91,7 @@ export default ({ Vue, options, router, siteData }) => {
           !this.version &&
           this.$activeSet.defaultVersion
         ) {
-          console.log("default version: " + this.$activeSet.defaultVersion);
+          //console.log("default version: " + this.$activeSet.defaultVersion);
           return this.$activeSet.defaultVersion;
         }
       },
