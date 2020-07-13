@@ -113,6 +113,6 @@ Custom adjusters must extend the included <api:craft\commerce\adjusters\Discount
 
 ## Discount Category Matching
 
-Commerce 3 adds a *Categories Relationship Type* field for choosing how designated purchasable categories may be used to match a discount. Its options are “Source”, “Target”, and “Both”.
+Commerce 3 adds a *Categories Relationship Type* field for choosing how designated purchasable categories may be used to match a discount. Its options are “Source”, “Target”, and “Both”. (See the Craft CMS [Relations](https://docs.craftcms.com/v3/relations.html) page for more on what each means.)
 
-Commerce 2 required a relationship field to match products, using that as the source for discount matches. Existing discounts are migrated from Commerce 2 with “Source” selected, but it’s important to consider the relationship type as you create and work with discounts in Commerce 3 since the *Categories Relationship Type* can impact how discounts are applied.
+Commerce 2 used discount categories as the source for discount matches. Existing discounts are migrated from Commerce 2 with “Source” selected, but it’s important to consider the relationship type as you create and work with discounts in Commerce 3 since the *Categories Relationship Type* can impact how discounts are applied.
