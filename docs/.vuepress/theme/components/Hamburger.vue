@@ -9,15 +9,16 @@
 <style lang="postcss">
 .nav-hamburger {
   @apply rounded absolute inline-block;
-  height: 2.3rem;
-  width: 2.3rem;
-  top: 0.6rem;
+  background-color: rgba(250, 251, 254, 1);
+  height: 38px;
+  width: 37px;
+  top: 10px;
 
   span {
     @apply block bg-black absolute left-0;
-    top: 13px;
-    left: 0.575rem;
-    width: 18px;
+    top: 12px;
+    left: 9px;
+    width: 19px;
     height: 2px;
   }
 
@@ -26,7 +27,7 @@
   }
 
   span + span + span {
-    top: 23px;
+    top: 24px;
   }
 }
 
