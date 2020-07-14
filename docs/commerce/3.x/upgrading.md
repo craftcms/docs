@@ -111,8 +111,67 @@ In order to improve compatibility with payment gateways and tax systems, custom 
 
 Custom adjusters must extend the included <api:craft\commerce\adjusters\Discount>, <api:craft\commerce\adjusters\Shipping>, or <api:craft\commerce\adjusters\Tax>.
 
+
 ## Discount Category Matching
 
 Commerce 3 adds a *Categories Relationship Type* field for choosing how designated purchasable categories may be used to match a discount or sale promotion. Its options are “Source”, “Target”, and “Either”. (See the Craft CMS [Relations](https://docs.craftcms.com/v3/relations.html) page for more on what each means.)
 
 Commerce 2 used discount categories as the “Source” for discount matches, and existing discounts are migrated from Commerce 2 with that option selected. It’s important to consider the relationship type as you work with discounts in Commerce 3 since the *Categories Relationship Type* can impact how discounts and sales are applied and its default match type is “Either”.
+
+## Custom Line Item Pricing
+
+If your store customizes line item pricing with the [`populateLineItem` event](events.md#populatelineitem), it’s important to know that the `salePrice` property is handled differently in Commerce 3.
+
+Commerce 2 set the line item’s `salePrice` to the sum of `saleAmount` and `price` immediately *after* the `populateLineItem` event. Commerce 3 does not modify `salePrice` after the event is triggered, so any pricing adjustments should explicitly set `salePrice`.
+
+### Commerce 2 Example
+
+If we’re setting a line item’s price to $20 in Commerce 2 and we want the cart price to be $15, we’d modify the `price` and `saleAmount` properties on the line item:
+
+```php {17}
+use craft\commerce\events\LineItemEvent;
+use craft\commerce\services\LineItems;
+use craft\commerce\models\LineItem;
+use yii\base\Event;
+
+Event::on(
+    LineItems::class,
+    LineItems::EVENT_POPULATE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        
+        // setting custom price
+        $lineItem->price = 20;
+
+        // setting amount to be discounted from price
+        $lineItem->saleAmount = -5;
+    }
+);
+```
+
+### Commerce 3 Example
+
+To accomplish the same thing in Commerce 3, we would need to set `price` and `salePrice`:
+
+```php {17}
+use craft\commerce\events\LineItemEvent;
+use craft\commerce\services\LineItems;
+use craft\commerce\models\LineItem;
+use yii\base\Event;
+
+Event::on(
+    LineItems::class,
+    LineItems::EVENT_POPULATE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        
+        // setting custom price
+        $lineItem->price = 20;
+
+        // setting discounted price
+        $lineItem->salePrice = 15;
+    }
+);
+```
