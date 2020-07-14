@@ -111,6 +111,13 @@ In order to improve compatibility with payment gateways and tax systems, custom 
 
 Custom adjusters must extend the included <api:craft\commerce\adjusters\Discount>, <api:craft\commerce\adjusters\Shipping>, or <api:craft\commerce\adjusters\Tax>.
 
+
+## Discount Category Matching
+
+Commerce 3 adds a *Categories Relationship Type* field for choosing how designated purchasable categories may be used to match a discount or sale promotion. Its options are “Source”, “Target”, and “Either”. (See the Craft CMS [Relations](https://docs.craftcms.com/v3/relations.html) page for more on what each means.)
+
+Commerce 2 used discount categories as the “Source” for discount matches, and existing discounts are migrated from Commerce 2 with that option selected. It’s important to consider the relationship type as you work with discounts in Commerce 3 since the *Categories Relationship Type* can impact how discounts and sales are applied and its default match type is “Either”.
+
 ## Custom Line Item Pricing
 
 If your store customizes line item pricing with the [`populateLineItem` event](events.md#populatelineitem), it’s important to know that the `salePrice` property is handled differently in Commerce 3.
