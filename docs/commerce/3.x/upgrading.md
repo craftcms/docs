@@ -110,3 +110,61 @@ Use the table below to update each breaking change in your Twig templates.
 In order to improve compatibility with payment gateways and tax systems, custom adjuster types have been deprecated.
 
 Custom adjusters must extend the included <api:craft\commerce\adjusters\Discount>, <api:craft\commerce\adjusters\Shipping>, or <api:craft\commerce\adjusters\Tax>.
+
+## Custom Line Item Pricing
+
+If your store customizes line item pricing with the [`populateLineItem` event](events.md#populatelineitem), it’s important to know that the `salePrice` property is handled differently in Commerce 3.
+
+Commerce 2 set the line item’s `salePrice` to the sum of `saleAmount` and `price` immediately *after* the `populateLineItem` event. Commerce 3 does not modify `salePrice` after the event is triggered, so any pricing adjustments should explicitly set `salePrice`.
+
+### Commerce 2 Example
+
+If we’re setting a line item’s price to $20 in Commerce 2 and we want the cart price to be $15, we’d modify the `price` and `saleAmount` properties on the line item:
+
+```php {17}
+use craft\commerce\events\LineItemEvent;
+use craft\commerce\services\LineItems;
+use craft\commerce\models\LineItem;
+use yii\base\Event;
+
+Event::on(
+    LineItems::class,
+    LineItems::EVENT_POPULATE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        
+        // setting custom price
+        $lineItem->price = 20;
+
+        // setting amount to be discounted from price
+        $lineItem->saleAmount = -5;
+    }
+);
+```
+
+### Commerce 3 Example
+
+To accomplish the same thing in Commerce 3, we would need to set `price` and `salePrice`:
+
+```php {17}
+use craft\commerce\events\LineItemEvent;
+use craft\commerce\services\LineItems;
+use craft\commerce\models\LineItem;
+use yii\base\Event;
+
+Event::on(
+    LineItems::class,
+    LineItems::EVENT_POPULATE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        
+        // setting custom price
+        $lineItem->price = 20;
+
+        // setting discounted price
+        $lineItem->salePrice = 15;
+    }
+);
+```
