@@ -119,7 +119,7 @@ if ($product->isFinanceable()) {
 
 ## Custom Searchable Attributes
 
-If you’d like to extend system components to add your own searchable custom attributes, you can hook into the [`EVENT_REGISTER_SEARCHABLE_ATTRIBUTES`](api:craft\base\Element#event-register-searchable-attributes) event. Here, we’re making custom field `myCustomAttribute` searchable for Commerce Orders:
+If you’d like to extend system components to add your own searchable custom attributes, you can hook into the [`EVENT_REGISTER_SEARCHABLE_ATTRIBUTES`](api:craft\base\Element#event-register-searchable-attributes) event. Here, we’re making custom field `myCustomAttribute` searchable for Commerce orders:
 
 ```php
 use craft\base\Element;
