@@ -36,8 +36,7 @@ Each item within the [navItems](api:craft\events\RegisterCpNavItemsEvent::$navIt
 - `subnav` _(optional)_ – An array of subnav items that should be visible when your section is accessed. (See [Subnavs](#subnavs).)
 
 
-The `url` property must be registered with a relative path to the plugin or module's section in the Control Panel in order for Craft to properly determine which nav item to designate as "active." Further, your subnav paths should begin with this same nav item's path in order for the item to appear selected when a subnav item is active.
-
+For Craft to properly designate an item as “active,” its `url` must be registered with a relative path to the plugin or module’s control panel section. Any `subnav` paths should begin with `url` in order to appear selected when active.
 
 ## Subnavs
 
