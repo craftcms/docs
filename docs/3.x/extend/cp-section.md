@@ -35,6 +35,9 @@ Each item within the [navItems](api:craft\events\RegisterCpNavItemsEvent::$navIt
 - `badgeCount` _(optional)_ – The badge count that should be displayed in the nav item.
 - `subnav` _(optional)_ – An array of subnav items that should be visible when your section is accessed. (See [Subnavs](#subnavs).)
 
+
+For Craft to properly designate an item as “active,” its `url` must be registered with a relative path to the plugin or module’s control panel section. Any `subnav` paths should begin with `url` in order to appear selected when active.
+
 ## Subnavs
 
 If your section has a sub-navigation, each subnav item within your `subnav` array should be represented by a sub-array with `url` and `label` keys:
