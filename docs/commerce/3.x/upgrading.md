@@ -115,4 +115,4 @@ Custom adjusters must extend the included <api:craft\commerce\adjusters\Discount
 
 Commerce 3 adds a *Categories Relationship Type* field for choosing how designated purchasable categories may be used to match a discount or sale promotion. Its options are “Source”, “Target”, and “Either”. (See the Craft CMS [Relations](https://docs.craftcms.com/v3/relations.html) page for more on what each means.)
 
-Commerce 2 used discount categories as the “Source” for discount matches, and existing discounts are migrated from Commerce 2 with that option selected. It’s important to consider the relationship type as work with discounts in Commerce 3 since the *Categories Relationship Type* can impact how discounts are applied and its default match type is “Either”.
+Commerce 2 used discount categories as the “Source” for discount matches, and existing discounts are migrated from Commerce 2 with that option selected. It’s important to consider the relationship type as you work with discounts in Commerce 3 since the *Categories Relationship Type* can impact how discounts are applied and its default match type is “Either”.
