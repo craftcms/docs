@@ -26,10 +26,11 @@
         <div
           v-if="! $activeSet && shouldShowSetTitle(s, i)"
           class="suggestion-doc-set"
+          :class="{ first: shouldShowSetTitle(s, i) && i === 0 }"
         >{{ s.docSetTitle }}</div>
         <div
           class="suggestion"
-          :class="{ focused: i === focusIndex }"
+          :class="{ focused: i === focusIndex, last: i == suggestions.length - 1 }"
           @mousedown="go(i)"
           @mouseenter="focus(i)"
         >
@@ -84,7 +85,6 @@ export default {
       focusIndex: 0,
       maxSuggestions: 10,
       suggestions: null,
-      displayedSetTitles: [],
       hotkeys: ["s", "/"]
     };
   },
@@ -223,6 +223,7 @@ export default {
     },
     shouldShowSetTitle(suggestion, index) {
       let previousSuggestion = this.suggestions[index - 1];
+
       return (
         !previousSuggestion ||
         previousSuggestion.docSetTitle !== suggestion.docSetTitle
@@ -234,9 +235,7 @@ export default {
 
 <style lang="postcss">
 .suggestions {
-  @apply bg-white w-full absolute z-20 rounded list-none p-2;
-
-  border: 1px solid transparent;
+  @apply bg-white w-full absolute z-20 rounded list-none;
   box-shadow: 0 20px 55px rgba(0, 0, 0, 0.3);
   top: 2.6rem;
 
@@ -258,7 +257,7 @@ export default {
 }
 
 .suggestion {
-  @apply cursor-pointer rounded;
+  @apply cursor-pointer rounded mx-2;
   line-height: 1.4;
   /* padding: 0.4rem 0.6rem; */
 
@@ -289,11 +288,18 @@ export default {
       }
     }
   }
+
+  &.last {
+    @apply mb-2;
+  }
 }
 
 .suggestion-doc-set {
-  @apply relative px-2 font-bold text-sm select-none text-white rounded-sm;
-  background-color: rgb(229, 66, 43);
+  @apply relative px-4 py-1 mt-2 mb-2 font-bold text-sm text-slate select-none bg-softer;
+
+  &.first {
+    @apply rounded-t mt-0;
+  }
 }
 
 .suggestion-row {
