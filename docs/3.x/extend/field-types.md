@@ -22,9 +22,13 @@ class Plugin extends \craft\base\Plugin
 {
     public function init()
     {
-        Event::on(Fields::class, Fields::EVENT_REGISTER_FIELD_TYPES, function(RegisterComponentTypesEvent $event) {
-            $event->types[] = MyField::class;
-        });
+        Event::on(
+            Fields::class,
+            Fields::EVENT_REGISTER_FIELD_TYPES,
+            function(RegisterComponentTypesEvent $event) {
+                $event->types[] = MyField::class;
+            }
+        );
 
         // ...
     }
