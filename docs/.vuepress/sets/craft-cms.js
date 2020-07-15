@@ -1,5 +1,5 @@
 module.exports = {
-  title: "Craft CMS Documentation",
+  title: "Craft CMS Documentation | %v",
   setTitle: "Craft CMS",
   handle: "craft",
   icon: "/icons/craft.svg",
@@ -15,12 +15,12 @@ module.exports = {
     "/": {
       lang: "en-US",
       name: "English",
-      title: "Craft CMS Documentation",
+      title: "Craft CMS Documentation | %v",
       config: require("./craft-cms-en.js")
     },
     "/ja/": {
       lang: "ja",
-      title: "Craft CMS ドキュメント",
+      title: "Craft CMS ドキュメント | %v",
       config: require("./craft-cms-ja.js")
     }
   }

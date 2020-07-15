@@ -33,8 +33,11 @@ export default ({ Vue, options, router, siteData }) => {
         const pageTitle = page.title ? page.title.replace(/[_`]/g, "") : "";
 
         // doc set title, global site title, or fall back to `VuePress`
-        const siteTitle =
-          this.$localeConfig.title || this.$siteTitle || "VuePress";
+        const siteTitle = (
+          this.$localeConfig.title ||
+          this.$siteTitle ||
+          "VuePress"
+        ).replace("%v", this.$activeVersion);
 
         if (pageTitle && siteTitle) {
           return `${pageTitle} | ${siteTitle}`;

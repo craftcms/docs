@@ -1,5 +1,5 @@
 module.exports = {
-  title: "Craft Commerce Documentation",
+  title: "Craft Commerce Documentation | %v",
   setTitle: "Craft Commerce",
   handle: "commerce",
   icon: "/icons/commerce.svg",
