@@ -490,6 +490,87 @@ export function getPageWithRelativePath(pages, relativePath) {
 }
 
 /**
+ * Returns doc set base paths combinations with their configs,
+ * accounting for set base, version, and/or language.
+ *
+ * Craft (two versions + JA translation):
+ * - `/2.x/`
+ * - `/2.x/ja/`
+ * - `/3.x/`
+ * - `/3.x/ja/`
+ *
+ * Commerce (three versions, no translations):
+ * - `/commerce/1.x/`
+ * - `/commerce/2.x/`
+ * - `/commerce/3.x/`
+ *
+ * Tutorial (one version, no translations):
+ * - `/getting-started-tutorial/`
+ */
+export function getDocSetLocaleSettings(docSet) {
+  let localeSettings = [];
+
+  // do we have translations?
+  if (docSet.locales) {
+    for (const key in docSet.locales) {
+      if (docSet.locales.hasOwnProperty(key)) {
+        // modify locale key to include set base and version
+        const settings = docSet.locales[key];
+        let basePath = docSet.baseDir;
+
+        if (docSet.versions) {
+          for (let i = 0; i < docSet.versions.length; i++) {
+            const version = docSet.versions[i];
+
+            let versionLabel = version[0];
+            if (basePath === "") {
+              basePath = "/";
+            }
+
+            let localeKey = `${basePath}${versionLabel}${key}`;
+            localeSettings[localeKey] = settings;
+          }
+        } else {
+          let localeKey = `${basePath}${key}`;
+          localeSettings[localeKey] = settings;
+        }
+      }
+    }
+  } else {
+    if (docSet.versions) {
+      for (let i = 0; i < docSet.versions.length; i++) {
+        let basePath = docSet.baseDir;
+
+        const version = docSet.versions[i];
+
+        let versionLabel = version[0];
+        if (basePath === "") {
+          basePath = "/";
+        } else {
+          basePath = "/" + basePath + "/";
+        }
+
+        let localeKey = `${basePath}${versionLabel}/`;
+        localeSettings[localeKey] = docSet;
+      }
+    } else {
+      let basePath = docSet.baseDir;
+
+      if (basePath === "") {
+        basePath = "/";
+      } else {
+        basePath = "/" + basePath + "/";
+      }
+
+      let localeKey = `${basePath}`;
+      localeSettings[localeKey] = docSet;
+    }
+  }
+
+  return localeSettings;
+}
+
+/**
  * Returns the path to the equivalent content in the specified set version,
  * or `false` if there’s no match and the `strict` parameter is `true`.
  */

@@ -2,6 +2,7 @@ import Vuex from "vuex";
 import CodeToggle from "./components/CodeToggle";
 import PreHeading from "./components/PreHeading";
 import PostHeading from "./components/PostHeading";
+import { getDocSetLocaleSettings } from "./util";
 import { setStorage } from "./Storage";
 
 export default ({ Vue, options, router, siteData }) => {
@@ -95,6 +96,17 @@ export default ({ Vue, options, router, siteData }) => {
           return this.$activeSet.defaultVersion;
         }
       },
+      /**
+       * Every doc set base path, including set base, version, and/or language. Example:
+       * - `/2.x/`
+       * - `/2.x/ja/`
+       * - `/3.x/`
+       * - `/3.x/ja/`
+       * - `/commerce/1.x/`
+       * - `/commerce/2.x/`
+       * - `/commerce/3.x/`
+       * - `/getting-started-tutorial/`
+       */
       $allLocales() {
         // include locales from each doc set so VuePress knows about them
         const { locales = {} } = this.$site;
@@ -104,32 +116,10 @@ export default ({ Vue, options, router, siteData }) => {
         let docSetLocales = {};
 
         docSets.forEach(docSet => {
-          if (docSet.locales) {
-            for (const key in docSet.locales) {
-              if (docSet.locales.hasOwnProperty(key)) {
-                // modify locale key to include set base and version
-                const settings = docSet.locales[key];
-                let basePath = docSet.baseDir;
-
-                if (docSet.versions) {
-                  for (let i = 0; i < docSet.versions.length; i++) {
-                    const version = docSet.versions[i];
-
-                    let versionLabel = version[0];
-                    if (basePath === "") {
-                      basePath = "/";
-                    }
-
-                    let localeKey = `${basePath}${versionLabel}${key}`;
-                    docSetLocales[localeKey] = settings;
-                  }
-                } else {
-                  let localeKey = `${basePath}${key}`;
-                  docSetLocales[localeKey] = settings;
-                }
-              }
-            }
-          }
+          docSetLocales = {
+            ...docSetLocales,
+            ...getDocSetLocaleSettings(docSet)
+          };
         });
 
         Object.assign(allLocales, docSetLocales);
