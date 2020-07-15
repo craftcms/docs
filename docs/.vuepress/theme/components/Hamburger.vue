@@ -14,6 +14,10 @@
   width: 37px;
   top: 10px;
 
+  &:focus {
+    @apply outline-none;
+  }
+
   span {
     @apply block bg-black absolute left-0;
     top: 12px;

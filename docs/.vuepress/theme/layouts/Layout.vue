@@ -44,8 +44,13 @@
   @apply relative w-full;
 }
 
+.sidebar-transitioning {
+  .main-container {
+    transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+}
+
 .main-container {
-  transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
   @apply mx-auto relative max-w-screen-md;
 }
 
@@ -138,6 +143,7 @@ export default {
   data() {
     return {
       isSidebarOpen: false,
+      isSidebarTransitioning: false,
       version: null,
       suggestedUpdatePath: null
     };
@@ -173,7 +179,8 @@ export default {
       return [
         {
           "no-navbar": !this.shouldShowNavbar,
-          "sidebar-open": this.isSidebarOpen
+          "sidebar-open": this.isSidebarOpen,
+          "sidebar-transitioning": this.isSidebarTransitioning
         },
         userPageClass
       ];
@@ -215,10 +222,17 @@ export default {
         window.scrollTo({ top: y, behavior: "smooth" });
       }
     }
+
+    this.$nextTick(function() {
+      window.addEventListener("resize", () => {
+        this.isSidebarOpen = false;
+      });
+    });
   },
 
   methods: {
     toggleSidebar(to) {
+      this.temporarilyAnimateBody();
       this.isSidebarOpen = typeof to === "boolean" ? to : !this.isSidebarOpen;
       this.$emit("toggle-sidebar", this.isSidebarOpen);
     },
@@ -302,6 +316,14 @@ export default {
           this.toggleSidebar(false);
         }
       }
+    },
+
+    temporarilyAnimateBody() {
+      this.isSidebarTransitioning = true;
+
+      setTimeout(() => {
+        this.isSidebarTransitioning = false;
+      }, 1500);
     }
   }
 };
