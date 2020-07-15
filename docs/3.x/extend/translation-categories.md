@@ -48,7 +48,7 @@ return [
 
 Plugins get a custom translation category registered automatically, named after the plugin handle. Plugins can provide translation files within a `translations/` folder in their base source folder.
 
-```
+```treeview
 src/
 ├── Plugin.php
 ├── ...

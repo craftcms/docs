@@ -17,7 +17,7 @@ Then, create a file that will hold your asset bundle class. This can be located 
 
 Here’s what your plugin’s structure should look like:
 
-```
+```treeview
 base_dir/
 └── src/
     ├── FooBundle.php
