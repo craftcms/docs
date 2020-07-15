@@ -22,11 +22,11 @@ If you have any templates that you only want to serve from a specific site, you 
 
 For example, if you wanted to give your German site its own homepage template, you might set your templates folder up like this:
 
-```
+```treeview
 templates/
-├── index.twig      --> default homepage template
+├── index.twig (default homepage template)
 └── de/
-    └── index.twig  --> German homepage template
+    └── index.twig (German homepage template)
 ```
 
 Use `craft.app.language` to toggle specific parts of your templates, depending on the language:

@@ -15,7 +15,7 @@ Before you begin working on a plugin, you need to decide on a few things:
 
 To create a plugin, create a new directory for it somewhere on your computer. A common approach is to store them in a `~/dev/` folder alongside your Craft projects:
 
-```
+```treeview
 ~/dev/
 ├── my-project.test/
 │   └── ...

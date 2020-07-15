@@ -136,7 +136,7 @@ The acceptable translation categories are:
 
 In Craft 3, your `translations/` folder might look something like this:
 
-```
+```treeview
 translations/
 └── de/
     ├── app.php
