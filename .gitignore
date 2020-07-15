@@ -5,3 +5,4 @@ package-lock.json
 .DS_Store
 /docs-build
 /.vscode
+/docs/.vuepress/dist
