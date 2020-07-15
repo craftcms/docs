@@ -24,13 +24,19 @@
     >
       <div v-for="(s, i) in suggestions" :key="i">
         <div
-          v-if="! $activeSet && shouldShowSetTitle(s, i)"
+          v-if="!$activeSet && shouldShowSetTitle(s, i)"
           class="suggestion-doc-set"
           :class="{ first: shouldShowSetTitle(s, i) && i === 0 }"
-        >{{ s.docSetTitle }}</div>
+        >
+          {{ s.docSetTitle }}
+        </div>
         <div
           class="suggestion"
-          :class="{ focused: i === focusIndex, last: i == suggestions.length - 1 }"
+          :class="{
+            focused: i === focusIndex,
+            first: i === 0,
+            last: i === suggestions.length - 1
+          }"
           @mousedown="go(i)"
           @mouseenter="focus(i)"
         >
@@ -44,25 +50,27 @@
               <div
                 class="page-title"
                 v-html="
-                s.match == 'title'
-                  ? highlight(s.title || s.path)
-                  : s.title || s.path
-              "
+                  s.match == 'title'
+                    ? highlight(s.title || s.path)
+                    : s.title || s.path
+                "
               ></div>
               <div class="suggestion-content">
                 <div
                   class="header"
                   v-if="s.headingStr"
                   v-html="
-                  s.match == 'header' ? highlight(s.headingStr) : s.headingStr
-                "
+                    s.match == 'header' ? highlight(s.headingStr) : s.headingStr
+                  "
                 ></div>
                 <div
                   class="excerpt"
                   v-if="s.contentStr && s.headingStr != s.contentStr"
                   v-html="
-                  s.match == 'content' ? highlight(s.contentStr) : s.contentStr
-                "
+                    s.match == 'content'
+                      ? highlight(s.contentStr)
+                      : s.contentStr
+                  "
                 ></div>
               </div>
             </div>
@@ -75,7 +83,7 @@
 
 <script>
 import searchService from "../util/flexsearch-service";
-/* global SEARCH_MAX_SUGGESTIONS, SEARCH_PATHS, SEARCH_HOTKEYS */
+
 export default {
   name: "SearchBox",
   data() {
@@ -289,6 +297,10 @@ export default {
     }
   }
 
+  &.first {
+    @apply mt-2;
+  }
+
   &.last {
     @apply mb-2;
   }
@@ -298,7 +310,7 @@ export default {
   @apply relative px-4 py-1 mt-2 mb-2 font-bold text-sm text-slate select-none bg-softer;
 
   &.first {
-    @apply rounded-t mt-0;
+    @apply rounded-t mt-0 mb-0;
   }
 }
 
