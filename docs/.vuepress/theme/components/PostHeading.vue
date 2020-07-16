@@ -85,7 +85,7 @@ export default {
         this.$activeVersion,
         this.$page,
         this.$site.pages,
-        true
+        false
       );
 
       if (alternateVersionPath === false) {
