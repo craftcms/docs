@@ -10,7 +10,7 @@
 <style lang="postcss">
 .theme-default-content {
   .preheading {
-    @apply my-0 py-0 -mb-1 leading-none uppercase text-base tracking-wider;
+    @apply my-0 py-0 px-2 relative inline-block leading-normal uppercase rounded text-xs border tracking-wider;
     color: #a0aec0;
   }
 }
