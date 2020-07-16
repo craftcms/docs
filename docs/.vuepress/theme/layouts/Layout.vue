@@ -17,7 +17,10 @@
     <div id="main" class="main-container">
       <div id="top-bar" class="top-bar">
         <Hamburger @click="toggleSidebar" />
-        <div id="search" class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center">
+        <div
+          id="search"
+          class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center"
+        >
           <SearchBox
             v-if="
               $site.themeConfig.search !== false &&
@@ -114,6 +117,8 @@ import "../styles/index.pcss";
 import "prismjs/themes/prism-solarizedlight.css";
 import "prismjs/plugins/treeview/prism-treeview.css";
 
+import TypeMate from "typemate";
+
 import Page from "../components/Page";
 import LeftBar from "../components/LeftBar";
 import RightBar from "../components/RightBar";
@@ -207,6 +212,8 @@ export default {
     this.$router.afterEach(() => {
       this.isSidebarOpen = false;
     });
+
+    this.dewidow();
 
     // temporary means of scrolling to URL hash on load
     // https://github.com/vuejs/vuepress/issues/2428
@@ -324,6 +331,19 @@ export default {
       setTimeout(() => {
         this.isSidebarTransitioning = false;
       }, 1500);
+    },
+
+    dewidow() {
+      let typemate = new TypeMate(document.getElementById("content"));
+      typemate.apply();
+    }
+  },
+
+  watch: {
+    $route() {
+      this.$nextTick(() => {
+        this.dewidow();
+      });
     }
   }
 };
