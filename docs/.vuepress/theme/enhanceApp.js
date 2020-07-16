@@ -39,7 +39,7 @@ export default ({ Vue, options, router, siteData }) => {
           "VuePress"
         ).replace("%v", this.$activeVersion);
 
-        if (pageTitle && siteTitle) {
+        if (pageTitle && siteTitle && (pageTitle !== siteTitle)) {
           return `${pageTitle} | ${siteTitle}`;
         }
 
