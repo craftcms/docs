@@ -5,7 +5,7 @@
       class="version-warning block w-full mt-2 px-3 py-2 rounded border border-yellow-300"
     >
       This document is for an older version of {{ $activeSet.setTitle }}.
-      <RouterLink :to="suggestedUpdatePath">View Latest Version →</RouterLink>
+      <RouterLink :to="suggestedUpdatePath">View latest version →</RouterLink>
     </div>
     <div
       class="auto-toc block xl:hidden"
