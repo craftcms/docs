@@ -693,6 +693,7 @@ Parses the passed field value as Markdown.
 | Argument | Type | Description
 | - | - | -
 | `flavor`| `String` | The “flavor” of Markdown the input should be interpreted with. Accepts the same arguments as yii\helpers\Markdown::process().
+| `inlineOnly`| `Boolean` | Whether to only parse inline elements, omitting any `<p>` tags.
 
 <!-- END DIRECTIVES -->
 
