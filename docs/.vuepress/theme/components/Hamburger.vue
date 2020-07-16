@@ -9,10 +9,10 @@
 <style lang="postcss">
 .nav-hamburger {
   @apply rounded absolute inline-block;
-  background-color: rgba(250, 251, 254, 1);
   height: 38px;
   width: 37px;
   top: 10px;
+  left: 2rem;
 
   &:focus {
     @apply outline-none;
