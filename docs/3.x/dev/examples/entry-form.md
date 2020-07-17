@@ -49,6 +49,14 @@ Be sure to change the `sectionId` value to the actual ID of the section want to 
 The user submitting the entry will also need to have the permission necessary to create entries for the section they are posting to.
 
 ::: tip
+You can change the name of the variable that the entry should be returned to the template as if it contains validation errors, by including an `entryVariable` input in your form.
+
+```twig
+{{ hiddenInput('entryVariable', 'badEntry'|hash) }}
+```
+:::
+
+::: tip
 You can accept anonymous entry submissions using the [Guest Entries](https://plugins.craftcms.com/guest-entries) plugin.
 :::
 

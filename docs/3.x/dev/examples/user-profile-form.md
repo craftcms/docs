@@ -112,3 +112,11 @@ You can create a form that allows users to edit their profile using the followin
   <input type="submit" value="Save Profile">
 </form>
 ```
+
+::: tip
+You can change the name of the variable that the user should be returned to the template as if it contains validation errors, by including a `userVariable` input in your form.
+
+```twig
+{{ hiddenInput('userVariable', 'badUser'|hash) }}
+```
+:::
