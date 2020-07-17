@@ -223,7 +223,7 @@ Make sure the user is logged in or else the template will throw errors doing any
 
 The `<form>` tag does not have an `action=""` parameter on purpose. The hidden `name="action"` input tells Craft which controller and controller method to use.
 
-:::tip
+::: tip
 The control panel profile form uses Craft’s [UserController::actionSaveUser()](api:craft\controllers\UsersController#method-actionsaveuser) controller and you’re free to use it on the front end too if it suits your needs. Otherwise, you can use it as inspiration to build your own controller in a custom module or plugin.
 :::
 
@@ -394,7 +394,7 @@ This field is required when the email address or password has changed. Otherwise
 
 Let’s say you added a custom field named “Bio” with a handle of `bio` to the user profile field layout under Settings → Users → Fields. Let’s also say it’s a required field. The difference here is that custom fields belong in a `fields` array with names like `field[<fieldname>]`.
 
-:::tip
+::: tip
 Handling complex custom fields, like Matrix or third-party plugin fields, can seem complicated. You might want to view the source code of a user profile form in the control panel to see how to handle those types of fields.
 :::
 
