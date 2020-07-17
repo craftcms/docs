@@ -39,3 +39,7 @@ Quit the process and re-run if you’ve made changes to any `.js` config files.
 ```
 npm run storybook
 ```
+
+## Writing Tips
+
+- Keep code block line lengths up to 85 characters long to avoid horizontal scrollbars.
