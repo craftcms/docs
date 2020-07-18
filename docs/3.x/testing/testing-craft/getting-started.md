@@ -85,7 +85,7 @@ DB_USER="root"
 DB_PASSWORD=""
 DB_TABLE_PREFIX=""
 SECURITY_KEY=""
-DEFAULT_SITE_URL="https://your-site-url.test/" # Set this to the `entryUrl` param in the `codeception.yml` file.
+PRIMARY_SITE_URL="https://your-site-url.test/" # Set this to the `entryUrl` param in the `codeception.yml` file.
 ```
 
 ::: tip
