@@ -52,12 +52,16 @@ test("handles Commerce API links", () => {
 
 
 /**
- * Yii2 URLs.
+ * Yii URLs.
  */
 const yii = [
   {
     source: "yii2:yii\\db\\Query::select()",
     result: "https://www.yiiframework.com/doc/api/2.0/yii-db-query#select()-detail"
+  },
+  {
+    source: "yii1:CSecurityManager::validateData()",
+    result: "https://www.yiiframework.com/doc/api/1.1/CSecurityManager#validateData-detail"
   },
 ];
 
