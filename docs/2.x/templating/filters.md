@@ -62,7 +62,7 @@ Prefixes the given string with a keyed-hash message authentication code (HMAC), 
 <input type="hidden" name="foo" value="{{ 'bar'|hash }}">
 ```
 
-PHP scripts can validate the value via <api:CSecurityManager::validateData()>:
+PHP scripts can validate the value via <yii1:CSecurityManager::validateData()>:
 
 ```php
 $foo = craft()->request->getPost('foo');

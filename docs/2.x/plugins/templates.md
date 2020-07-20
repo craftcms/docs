@@ -1,12 +1,12 @@
 # Templates
 
-In Craft, all HTML rendering is done via [templates](../templating-overview.md) – even for the CP itself. There are no PHP-based view files.
+In Craft, all HTML rendering is done via [templates](../templating-overview.md) – even for the control panel itself. There are no PHP-based view files.
 
 If your plugin needs its own templates, you can place them in a `templates/` folder within your plugin’s folder (ex: `craft/plugins/cocktailrecipes/templates/`).
 
 ## Plugin Template Paths, Explained
 
-To manually render a template from your plugin’s PHP code, call <api:Craft\TemplatesService::render()>:
+To manually render a template from your plugin’s PHP code, call <craft2:Craft\TemplatesService::render()>:
 
 ```php
 craft()->templates->render('pluginHandle/path/to/template')
@@ -24,7 +24,7 @@ So, if you were to call `craft()->templates->render('cocktailrecipes/settings')`
 As you can see, the `templates/` folder segment is assumed, so there’s no need to include it when calling `render()`.
 
 ::: tip
-Craft will only automatically look for templates within the plugin folders for CP requests. If you are going to be calling `TemplatesService::render()` from a front end site request, you will need to manually tell Craft where to find your template using <api:Craft\PathService::setTemplatesPath()> first:
+Craft will only automatically look for templates within the plugin folders for CP requests. If you are going to be calling `TemplatesService::render()` from a front end site request, you will need to manually tell Craft where to find your template using <craft2:Craft\PathService::setTemplatesPath()> first:
 
 ```php
 $oldPath = craft()->path->getTemplatesPath();
@@ -39,7 +39,7 @@ If you do this, you won’t be needing to begin the template path with your plug
 
 ## Giving your Plugin its own CP Section
 
-If you want to give your plugin its own CP section, add this to your primary plugin class:
+If you want to give your plugin its own control panel section, add this to your primary plugin class:
 
 ```php
 <?php
@@ -118,7 +118,7 @@ class CocktailRecipesPlugin extends BasePlugin
     {
         return array(
             'cocktailrecipes/(?P<recipeId>\d+)' => 'cocktailrecipes/_edit',
-       );
+        );
     }
 }
 ```

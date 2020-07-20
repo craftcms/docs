@@ -31,7 +31,7 @@ return array(
 );
 ```
 
-You can then grab the config value throughout your plugin code using <api:Craft\ConfigService::get()>, passing your plugin handle (lowercased) as the second argument:
+You can then grab the config value throughout your plugin code using <craft2:Craft\ConfigService::get()>, passing your plugin handle (lowercased) as the second argument:
 
 ```php
 $configSettingValue = craft()->config->get('foo', 'cocktailrecipes');
@@ -49,7 +49,7 @@ return array(
 
 ## Settings Page
 
-To give your plugin its own settings page within the Control Panel, first define which settings the plugin actually has. You do that by creating a protected <api:Craft\defineSettings()> method within your primary plugin class. This method returns an array whose keys define the setting names, and values define the parameters (the type of value, etc.).
+To give your plugin its own settings page within the Control Panel, first define which settings the plugin actually has. You do that by creating a protected `defineSettings()` method within your primary plugin class. This method returns an array whose keys define the setting names, and values define the parameters (the type of value, etc.).
 
 ```php
 <?php
@@ -62,13 +62,16 @@ class CocktailRecipesPlugin extends BasePlugin
     protected function defineSettings()
     {
         return array(
-            'cocktailCategories' => array(AttributeType::Mixed, 'default' => array('Sours', 'Fizzes', 'Juleps')),
+            'cocktailCategories' => array(
+                AttributeType::Mixed,
+                'default' => array('Sours', 'Fizzes', 'Juleps')
+            ),
         );
     }
 }
 ```
 
-Next you need to add a public <api:Craft\getSettingsHtml()> method which returns the HTML for displaying your settings. We recommend that you create a template for the actual settings HTML, and load it up with <api:Craft\TemplatesService::render()>.
+Next you need to add a public `getSettingsHtml()` method which returns the HTML for displaying your settings. We recommend that you create a template for the actual settings HTML, and load it up with <craft2:Craft\TemplatesService::render()>.
 
 ```php
 <?php
