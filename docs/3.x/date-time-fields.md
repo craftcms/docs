@@ -29,7 +29,7 @@ Possible values include:
 {% set end = now|date_modify('+1 month')|atom %}
 
 {% set entries = craft.entries()
-    .<FieldHandle>(['and', ">= #{start}", "< #{end}"])
+    .myFieldHandle(['and', ">= #{start}", "< #{end}"])
     .all() %}
 ```
 
@@ -42,14 +42,14 @@ The [atom](dev/filters.md#atom) filter converts a date to an ISO-8601 timestamp.
 If you have an element with a Date/Time field in your template, you can access its value using your Date/Time field’s handle:
 
 ```twig
-{% set value = entry.<FieldHandle> %}
+{% set value = entry.myFieldHandle %}
 ```
 
 That will give you a [DateTime](http://php.net/manual/en/class.datetime.php) object that represents the selected date, or `null` if no date was selected.
 
 ```twig
-{% if entry.<FieldHandle> %}
-    Selected date: {{ entry.<FieldHandle>|datetime('short') }}
+{% if entry.myFieldHandle %}
+    Selected date: {{ entry.myFieldHandle|datetime('short') }}
 {% endif %}
 ```
 
@@ -70,21 +70,21 @@ If you have an [entry form](dev/examples/entry-form.md) that needs to contain a 
 If you just want the user to be able to select a date, use a `date` input:
 
 ```twig
-{% set currentValue = entry is defined and entry.<FieldHandle>
-    ? entry.<FieldHandle>|date('Y-m-d', timezone='UTC')
+{% set currentValue = entry is defined and entry.myFieldHandle
+    ? entry.myFieldHandle|date('Y-m-d', timezone='UTC')
     : '' %}
 
-<input type="date" name="fields[<FieldHandle>]" value="{{ currentValue }}">
+<input type="date" name="fields[myFieldHandle]" value="{{ currentValue }}">
 ```
 
 If you want the user to be able to select a time as well, use a `datetime-local` input:
 
 ```twig
-{% set currentValue = entry is defined and entry.<FieldHandle>
-    ? entry.<FieldHandle>|date('Y-m-d\\TH:i', timezone='UTC')
+{% set currentValue = entry is defined and entry.myFieldHandle
+    ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone='UTC')
     : '' %}
 
-<input type="datetime-local" name="fields[<FieldHandle>]" value="{{ currentValue }}">
+<input type="datetime-local" name="fields[myFieldHandle]" value="{{ currentValue }}">
 ```
 
 ::: tip
@@ -93,7 +93,7 @@ The [HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) polyfill can 
 
 #### Customizing the Timezone
 
-By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you can post dates in a different timezone by changing the input name to `fields[<FieldHandle>][datetime]` and adding a hidden input named `fields[<FieldHandle>][timezone]`, set to a [valid PHP timezone](http://php.net/manual/en/timezones.php):
+By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you can post dates in a different timezone by changing the input name to `fields[myFieldHandle][datetime]` and adding a hidden input named `fields[myFieldHandle][timezone]`, set to a [valid PHP timezone](http://php.net/manual/en/timezones.php):
 
 ```twig
 {# Use the timezone selected under Settings → General Settings → Time Zone #}
@@ -102,24 +102,24 @@ By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you c
 {# Or set a specific timezone #}
 {% set tz = 'America/Los_Angeles' %}
 
-{% set currentValue = entry is defined and entry.<FieldHandle>
-    ? entry.<FieldHandle>|date('Y-m-d\\TH:i', tz)
+{% set currentValue = entry is defined and entry.myFieldHandle
+    ? entry.myFieldHandle|date('Y-m-d\\TH:i', tz)
     : '' %}
 
-<input type="datetime-local" name="fields[<FieldHandle>][datetime]" value="{{ currentValue }}">
-{{ hiddenInput('fields[<FieldHandle>][timezone]', tz) }}
+<input type="datetime-local" name="fields[myFieldHandle][datetime]" value="{{ currentValue }}">
+{{ hiddenInput('fields[myFieldHandle][timezone]', tz) }}
 ```
 
 Or you can let users decide which timezone the date should be posted in:
 
 ```twig
-{% set currentValue = entry is defined and entry.<FieldHandle>
-    ? entry.<FieldHandle>|date('Y-m-d\\TH:i', timezone='UTC')
+{% set currentValue = entry is defined and entry.myFieldHandle
+    ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone='UTC')
     : '' %}
 
-<input type="datetime-local" name="fields[<FieldHandle>][datetime]" value="{{ currentValue }}">
+<input type="datetime-local" name="fields[myFieldHandle][datetime]" value="{{ currentValue }}">
 
-<select name="fields[<FieldHandle>][timezone]">
+<select name="fields[myFieldHandle][timezone]">
     <option value="America/Los_Angeles">Pacific Time</option>
     <option value="UTC">UTC</option>
     <!-- ... -->
@@ -128,7 +128,7 @@ Or you can let users decide which timezone the date should be posted in:
 
 #### Posting the Date and Time Separately
 
-If you’d like to post the date and time as separate HTML inputs, give them the names `fields[<FieldHandle>][date]` and `fields[<FieldHandle>][time]`.
+If you’d like to post the date and time as separate HTML inputs, give them the names `fields[myFieldHandle][date]` and `fields[myFieldHandle][time]`.
 
 The date input can either be set to the `YYYY-MM-DD` format, or the current locale’s short date format.
 

@@ -56,7 +56,7 @@ Possible values include:
 ```twig
 {# Fetch entries with a related tag #}
 {% set entries = craft.entries()
-    .<FieldHandle>(':notempty:')
+    .myFieldHandle(':notempty:')
     .all() %}
 ```
 
@@ -65,7 +65,7 @@ Possible values include:
 If you have an element with an Tags field in your template, you can access its related tags using your Tags field’s handle:
 
 ```twig
-{% set query = entry.<FieldHandle> %}
+{% set query = entry.myFieldHandle %}
 ```
 
 That will give you a [tag query](dev/element-queries/tag-queries.md), prepped to output all of the related tags for the given field.
@@ -73,7 +73,7 @@ That will give you a [tag query](dev/element-queries/tag-queries.md), prepped to
 To loop through all of the related tags, call [all()](api3:craft\db\Query::all()) and then loop over the results:
 
 ```twig
-{% set relatedTags = entry.<FieldHandle>.all() %}
+{% set relatedTags = entry.myFieldHandle.all() %}
 {% if relatedTags|length %}
     <ul>
         {% for rel in relatedTags %}
@@ -86,7 +86,7 @@ To loop through all of the related tags, call [all()](api3:craft\db\Query::all()
 If you only want the first related tag, call [one()](api3:craft\db\Query::one()) instead, and then make sure it returned something:
 
 ```twig
-{% set rel = entry.<FieldHandle>.one() %}
+{% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ url('tags/'~rel.slug) }}">{{ rel.title }}</a></p>
 {% endif %}
@@ -95,7 +95,7 @@ If you only want the first related tag, call [one()](api3:craft\db\Query::one())
 If you just need to check if there are any related tags (but don’t need to fetch them), you can call [exists()](api3:craft\db\Query::exists()):
 
 ```twig
-{% if entry.<FieldHandle>.exists() %}
+{% if entry.myFieldHandle.exists() %}
     <p>There are related tags!</p>
 {% endif %}
 ```
@@ -103,7 +103,7 @@ If you just need to check if there are any related tags (but don’t need to fet
 You can set [parameters](dev/element-queries/tag-queries.md#parameters) on the tag query as well.
 
 ```twig
-{% set relatedTags = clone(entry.<FieldHandle>)
+{% set relatedTags = clone(entry.myFieldHandle)
     .group('blogEntryTags')
     .all() %}
 ```

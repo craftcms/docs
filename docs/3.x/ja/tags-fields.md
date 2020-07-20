@@ -51,7 +51,7 @@
 ```twig
 {# Fetch entries with a related tag #}
 {% set entries = craft.entries()
-    .<FieldHandle>(':notempty:')
+    .myFieldHandle(':notempty:')
     .all() %}
 ```
 
@@ -60,7 +60,7 @@
 テンプレート内でタグフィールドのエレメントを取得する場合、タグフィールドのハンドルを利用して、関連付けられたタグにアクセスできます。
 
 ```twig
-{% set query = entry.<FieldHandle> %}
+{% set query = entry.myFieldHandle %}
 ```
 
 これは、所定のフィールドで関連付けられたすべてのタグを出力するよう準備された[タグクエリ](dev/element-queries/tag-queries.md)を提供します。
@@ -68,7 +68,7 @@
 関連付けられたすべてのタグをループするには、[all()](api3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
 ```twig
-{% set relatedTags = entry.<FieldHandle>.all() %}
+{% set relatedTags = entry.myFieldHandle.all() %}
 {% if relatedTags|length %}
     <ul>
         {% for rel in relatedTags %}
@@ -81,7 +81,7 @@
 関連付けられた最初のタグだけが欲しい場合、代わりに [one()](api3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
 
 ```twig
-{% set rel = entry.<FieldHandle>.one() %}
+{% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ url('tags/'~rel.slug) }}">{{ rel.title }}</a></p>
 {% endif %}
@@ -90,7 +90,7 @@
 （取得する必要はなく）いずれかの関連付けられたタグがあるかを確認したい場合、[exists()](api3:craft\db\Query::exists()) を呼び出すことができます。
 
 ```twig
-{% if entry.<FieldHandle>.exists() %}
+{% if entry.myFieldHandle.exists() %}
     <p>There are related tags!</p>
 {% endif %}
 ```
@@ -98,7 +98,7 @@
 タグクエリで[パラメータ](dev/element-queries/tag-queries.md#parameters)をセットすることもできます。
 
 ```twig
-{% set relatedTags = clone(entry.<FieldHandle>)
+{% set relatedTags = clone(entry.myFieldHandle)
     .group('blogEntryTags')
     .all() %}
 ```

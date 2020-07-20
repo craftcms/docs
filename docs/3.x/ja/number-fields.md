@@ -30,7 +30,7 @@
 ```twig
 {# Fetch entries with a Numbber field set to at least 100 #}
 {% set entries = craft.entries()
-    .<FieldHandle>('>= 100')
+    .myFieldHandle('>= 100')
     .all() %}
 ```
 
@@ -39,7 +39,7 @@
 テンプレート内で数字フィールドのエレメントを取得する場合、数字フィールドのハンドルを利用して、そのデータにアクセスできます。
 
 ```twig
-{% set value = entry.<FieldHandle> %}
+{% set value = entry.myFieldHandle %}
 ```
 
 それは、フィールドの数値を提供します。値がない場合、`null` になります。
@@ -47,13 +47,13 @@
 適切な千単位の区切り文字（例：`,`）でフォーマットするには、[number](./dev/filters.md#number) フィルタを使用してください。
 
 ```twig
-{{ entry.<FieldHandle>|number }}
+{{ entry.myFieldHandle|number }}
 ```
 
 数字を常に整数とする場合、小数点なしで数字をフォーマットするために `decimals=0` を渡してください。
 
 ```twig
-{{ entry.<FieldHandle>|number(decimals=0) }}
+{{ entry.myFieldHandle|number(decimals=0) }}
 ```
 
 ### 投稿フォームで数字フィールドを保存
@@ -61,14 +61,14 @@
 数字フィールドを含む[投稿フォーム](dev/examples/entry-form.md)が必要な場合、出発点としてこのテンプレートを使用してください。
 
 ```twig
-{% set field = craft.app.fields.getFieldByHandle('<FieldHandle>') %}
+{% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
 
 {% set value = entry is defined
-    ? entry.<FieldHandle>
+    ? entry.myFieldHandle
     : field.defaultValue %}
 
 <input type="number"
-    name="fields[<FieldHandle>]"
+    name="fields[myFieldHandle]"
     min="{{ field.min }}"
     max="{{ field.max }}"
     value="{{ value }}">

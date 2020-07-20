@@ -26,7 +26,7 @@ Possible values include:
 ```twig
 {# Fetch entries with the 'foo' option selected #}
 {% set entries = craft.entries()
-    .<FieldHandle>('foo')
+    .myFieldHandle('foo')
     .all() %}
 ```
 
@@ -35,7 +35,7 @@ Possible values include:
 If you have an element with a Radio Buttons field in your template, you can access its data using your Radio Buttons field’s handle:
 
 ```twig
-{% set value = entry.<FieldHandle> %}
+{% set value = entry.myFieldHandle %}
 ```
 
 That will give you a <api3:craft\fields\data\SingleOptionFieldData> object that contains the field data.
@@ -43,25 +43,25 @@ That will give you a <api3:craft\fields\data\SingleOptionFieldData> object that 
 To show the selected option, output it as a string, or output the [value](api3:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ```twig
-{{ entry.<FieldHandle> }} or {{ entry.<FieldHandle>.value }}
+{{ entry.myFieldHandle }} or {{ entry.myFieldHandle.value }}
 ```
 
 To see if an option is selected, use the [value](api3:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ```twig
-{% if entry.<FieldHandle>.value %}
+{% if entry.myFieldHandle.value %}
 ```
 
 To show the selected option’s label, output the [label](api3:craft\fields\data\SingleOptionFieldData::$label) property:
 
 ```twig
-{{ entry.<FieldHandle>.label }}
+{{ entry.myFieldHandle.label }}
 ```
 
 To loop through all of the available options, iterate over the [options](api3:craft\fields\data\SingleOptionFieldData::getOptions()) property:
 
 ```twig
-{% for option in entry.<FieldHandle>.options %}
+{% for option in entry.myFieldHandle.options %}
     Label:    {{ option.label }}
     Value:    {{ option }} or {{ option.value }}
     Selected: {{ option.selected ? 'Yes' : 'No' }}
@@ -73,18 +73,18 @@ To loop through all of the available options, iterate over the [options](api3:cr
 If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Radio Buttons field, you can use this template as a starting point:
 
 ```twig
-{% set field = craft.app.fields.getFieldByHandle('<FieldHandle>') %}
+{% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
 
 <ul>
     {% for option in field.options %}
 
         {% set selected = entry is defined
-            ? entry.<FieldHandle>.value == option.value
+            ? entry.myFieldHandle.value == option.value
             : option.default %}
 
         <li><label>
             <input type="radio"
-                name="fields[<FieldHandle>]"
+                name="fields[myFieldHandle]"
                 value="{{ option.value }}"
                 {% if selected %}checked{% endif %}>
             {{ option.label }}

@@ -30,7 +30,7 @@ Possible values include:
 ```twig
 {# Fetch entries with a Numbber field set to at least 100 #}
 {% set entries = craft.entries()
-    .<FieldHandle>('>= 100')
+    .myFieldHandle('>= 100')
     .all() %}
 ```
 
@@ -39,7 +39,7 @@ Possible values include:
 If you have an element with a Number field in your template, you can access its data using your Number field’s handle:
 
 ```twig
-{% set value = entry.<FieldHandle> %}
+{% set value = entry.myFieldHandle %}
 ```
 
 That will give you the number value for the field, or `null` if there is no value.
@@ -47,13 +47,13 @@ That will give you the number value for the field, or `null` if there is no valu
 To format the number with proper thousands separators (e.g. `,`), use the [number](./dev/filters.md#number) filter:
 
 ```twig
-{{ entry.<FieldHandle>|number }}
+{{ entry.myFieldHandle|number }}
 ```
 
 If the number will always be an integer, pass `decimals=0` to format the number without any decimals.
 
 ```twig
-{{ entry.<FieldHandle>|number(decimals=0) }}
+{{ entry.myFieldHandle|number(decimals=0) }}
 ```
 
 ### Saving Number Fields in Entry Forms
@@ -61,14 +61,14 @@ If the number will always be an integer, pass `decimals=0` to format the number 
 If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Number field, you can use this template as a starting point:
 
 ```twig
-{% set field = craft.app.fields.getFieldByHandle('<FieldHandle>') %}
+{% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
 
 {% set value = entry is defined
-    ? entry.<FieldHandle>
+    ? entry.myFieldHandle
     : field.defaultValue %}
 
 <input type="number"
-    name="fields[<FieldHandle>]"
+    name="fields[myFieldHandle]"
     min="{{ field.min }}"
     max="{{ field.max }}"
     value="{{ value }}">

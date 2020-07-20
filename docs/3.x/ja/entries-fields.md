@@ -48,7 +48,7 @@
 ```twig
 {# Fetch entries with a related entry #}
 {% set entries = craft.entries()
-    .<FieldHandle>(':notempty:')
+    .myFieldHandle(':notempty:')
     .all() %}
 ```
 
@@ -57,7 +57,7 @@
 テンプレート内でエントリフィールドのエレメントを取得する場合、エントリフィールドのハンドルを利用して、関連付けられたエントリにアクセスできます。
 
 ```twig
-{% set query = entry.<FieldHandle> %}
+{% set query = entry.myFieldHandle %}
 ```
 
 これは、所定のフィールドで関連付けられたすべてのエントリを出力するよう定義された[エレメントクエリ](dev/element-queries/entry-queries.md)を提供します。
@@ -65,7 +65,7 @@
 関連付けられたすべてのエントリをループするには、[all()](api3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
 ```twig
-{% set relatedEntries = entry.<FieldHandle>.all() %}
+{% set relatedEntries = entry.myFieldHandle.all() %}
 {% if relatedEntries|length %}
     <ul>
         {% for rel in relatedEntries %}
@@ -78,7 +78,7 @@
 関連付けられた最初のエントリだけが欲しい場合、代わりに [one()](api3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
 
 ```twig
-{% set rel = entry.<FieldHandle>.one() %}
+{% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
 {% endif %}
@@ -87,7 +87,7 @@
 （取得する必要はなく）いずれかの関連付けられたエントリがあるかを確認したい場合、[exists()](api3:craft\db\Query::exists()) を呼び出すことができます。
 
 ```twig
-{% if entry.<FieldHandle>.exists() %}
+{% if entry.myFieldHandle.exists() %}
     <p>There are related entries!</p>
 {% endif %}
 ```
@@ -95,7 +95,7 @@
 エントリクエリで[パラメータ](dev/element-queries/entry-queries.md#parameters)をセットすることもできます。例えば、`news` セクションに含まれるエントリだけを取得するには、[section](dev/element-queries/entry-queries.md#section) パラメータをセットしてください。
 
 ```twig
-{% set relatedEntries = clone(entry.<FieldHandle>)
+{% set relatedEntries = clone(entry.myFieldHandle)
     .section('news')
     .all() %}
 ```

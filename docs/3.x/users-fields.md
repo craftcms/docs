@@ -47,7 +47,7 @@ Possible values include:
 ```twig
 {# Fetch entries with a related user #}
 {% set entries = craft.entries()
-    .<FieldHandle>(':notempty:')
+    .myFieldHandle(':notempty:')
     .all() %}
 ```
 
@@ -56,7 +56,7 @@ Possible values include:
 If you have an element with a Users field in your template, you can access its related users using your Users field’s handle:
 
 ```twig
-{% set query = entry.<FieldHandle> %}
+{% set query = entry.myFieldHandle %}
 ```
 
 That will give you a [user query](dev/element-queries/user-queries.md), prepped to output all of the related users for the given field.
@@ -64,7 +64,7 @@ That will give you a [user query](dev/element-queries/user-queries.md), prepped 
 To loop through all of the related users, call [all()](api3:craft\db\Query::all()) and then loop over the results:
 
 ```twig
-{% set relatedUsers = entry.<FieldHandle>.all() %}
+{% set relatedUsers = entry.myFieldHandle.all() %}
 {% if relatedUsers|length %}
     <ul>
         {% for rel in relatedUsers %}
@@ -77,7 +77,7 @@ To loop through all of the related users, call [all()](api3:craft\db\Query::all(
 If you only want the first related user, call [one()](api3:craft\db\Query::one()) instead, and then make sure it returned something:
 
 ```twig
-{% set rel = entry.<FieldHandle>.one() %}
+{% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ url('profiles/'~rel.username) }}">{{ rel.name }}</a></p>
 {% endif %}
@@ -86,7 +86,7 @@ If you only want the first related user, call [one()](api3:craft\db\Query::one()
 If you just need to check if there are any related users (but don’t need to fetch them), you can call [exists()](api3:craft\db\Query::exists()):
 
 ```twig
-{% if entry.<FieldHandle>.exists() %}
+{% if entry.myFieldHandle.exists() %}
     <p>There are related users!</p>
 {% endif %}
 ```
@@ -94,7 +94,7 @@ If you just need to check if there are any related users (but don’t need to fe
 You can set [parameters](dev/element-queries/user-queries.md#parameters) on the user query as well. For example, to only fetch users in the `authors` group, set the [groupId](dev/element-queries/user-queries.md#groupid) param:
 
 ```twig
-{% set relatedUsers = clone(entry.<FieldHandle>)
+{% set relatedUsers = clone(entry.myFieldHandle)
     .group('authors')
     .all() %}
 ```

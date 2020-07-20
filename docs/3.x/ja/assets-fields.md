@@ -76,7 +76,7 @@
 ```twig
 {# Fetch entries with a related asset #}
 {% set entries = craft.entries()
-    .<FieldHandle>(':notempty:')
+    .myFieldHandle(':notempty:')
     .all() %}
 ```
 
@@ -85,7 +85,7 @@
 テンプレート内でアセットフィールドのエレメントを取得する場合、アセットフィールドのハンドルを利用して関連付けられたアセットにアクセスできます。
 
 ```twig
-{% set query = entry.<FieldHandle> %}
+{% set query = entry.myFieldHandle %}
 ```
 
 これは、所定のフィールドで関連付けられたすべてのアセットを出力するよう準備された[アセットクエリ](dev/element-queries/asset-queries.md)を提供します。
@@ -93,7 +93,7 @@
 関連付けられたすべてのアセットをループするには、[all()](api3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
 ```twig
-{% set relatedAssets = entry.<FieldHandle>.all() %}
+{% set relatedAssets = entry.myFieldHandle.all() %}
 {% if relatedAssets|length %}
     <ul>
         {% for rel in relatedAssets %}
@@ -106,7 +106,7 @@
 関連付けられた最初のアセットだけが欲しい場合、代わりに [one()](api3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
 
 ```twig
-{% set rel = entry.<FieldHandle>.one() %}
+{% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ rel.url }}">{{ rel.filename }}</a></p>
 {% endif %}
@@ -115,7 +115,7 @@
 （取得する必要はなく）いずれかの関連付けられたアセットがあるかを確認したい場合、[exists()](api3:craft\db\Query::exists()) を呼び出すことができます。
 
 ```twig
-{% if entry.<FieldHandle>.exists() %}
+{% if entry.myFieldHandle.exists() %}
     <p>There are related assets!</p>
 {% endif %}
 ```
@@ -123,7 +123,7 @@
 アセットクエリで[パラメータ](dev/element-queries/asset-queries.md#parameters)をセットすることもできます。例えば、画像だけが返されることを保証するために、[kind](dev/element-queries/asset-queries.md#kind) パラメータをセットできます。
 
 ```twig
-{% set relatedAssets = clone(entry.<FieldHandle>)
+{% set relatedAssets = clone(entry.myFieldHandle)
     .kind('image')
     .all() %}
 ```
@@ -141,11 +141,11 @@
 次に、ファイル入力欄をフォームに追加します。
 
 ```markup
-<input type="file" name="fields[<FieldHandle>]">
+<input type="file" name="fields[myFieldHandle]">
 ```
 
 ::: tip
-`<FieldHandle>` を実際のフィールドハンドルに置き換えます。例えば、フィールドハンドルが “heroImage” の場合、input 名は `fields[heroImage]` になります。
+`myFieldHandle` を実際のフィールドハンドルに置き換えます。例えば、フィールドハンドルが “heroImage” の場合、input 名は `fields[heroImage]` になります。
 :::
 
 複数ファイルをアップロードできるようにする場合、`multiple` 属性を追加し、input 名の末尾に `[]` を追加します。

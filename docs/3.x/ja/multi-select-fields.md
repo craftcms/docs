@@ -26,7 +26,7 @@
 ```twig
 {# Fetch entries with the 'foo' option selected #}
 {% set entries = craft.entries()
-    .<FieldHandle>('foo')
+    .myFieldHandle('foo')
     .all() %}
 ```
 
@@ -35,7 +35,7 @@
 テンプレート内でマルチセレクトボックスフィールドのエレメントを取得する場合、マルチセレクトボックスフィールドのハンドルを利用して、そのデータにアクセスできます。
 
 ```twig
-{% set value = entry.<FieldHandle> %}
+{% set value = entry.myFieldHandle %}
 ```
 
 それは、フィールドデータを含む <api3:craft\fields\data\MultiOptionsFieldData> オブジェクトを提供します。
@@ -43,7 +43,7 @@
 選択されたオプションすべてをループするには、フィールド値を反復してください。
 
 ```twig
-{% for option in entry.<FieldHandle> %}
+{% for option in entry.myFieldHandle %}
     Label: {{ option.label }}
     Value: {{ option }} or {{ option.value }}
 {% endfor %}
@@ -52,7 +52,7 @@
 利用可能なオプションすべてをループするには、[options](api3:craft\fields\data\MultiOptionsFieldData::getOptions()) プロパティを反復してください。
 
 ```twig
-{% for option in entry.<FieldHandle>.options %}
+{% for option in entry.myFieldHandle.options %}
     Label:    {{ option.label }}
     Value:    {{ option }} or {{ option.value }}
     Selected: {{ option.selected ? 'Yes' : 'No' }}
@@ -62,13 +62,13 @@
 いずれかのオプションが選択されているかを確認するには、[length](https://twig.symfony.com/doc/2.x/filters/length.html) フィルタを使用してください。
 
 ```twig
-{% if entry.<FieldHandle>|length %}
+{% if entry.myFieldHandle|length %}
 ```
 
 特定のオプションが選択されているかを確認するには、[contains()](api3:craft\fields\data\MultiOptionsFieldData::contains()) を使用してください。
 
 ```twig
-{% if entry.<FieldHandle>.contains('foo') %}
+{% if entry.myFieldHandle.contains('foo') %}
 ```
 
 ### 投稿フォームでマルチセレクトボックスフィールドを保存
@@ -76,17 +76,17 @@
 マルチセレクトボックスフィールドを含める必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、出発点としてこのテンプレートを使用してください。
 
 ```twig
-{% set field = craft.app.fields.getFieldByHandle('<FieldHandle>') %}
+{% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
 
 {# Include a hidden input first so Craft knows to update the
    existing value, if no options are selected. #}
-{{ hiddenInput('fields[<FieldHandle>]' , '') }}
+{{ hiddenInput('fields[myFieldHandle]' , '') }}
 
-<select multiple name="fields[<FieldHandle>][]">
+<select multiple name="fields[myFieldHandle][]">
     {% for option in field.options %}
 
         {% set selected = entry is defined
-            ? entry.<FieldHandle>.contains(option.value)
+            ? entry.myFieldHandle.contains(option.value)
             : option.default %}
 
         <option value="{{ option.value }}"

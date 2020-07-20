@@ -41,7 +41,7 @@ Possible values include:
 ```twig
 {# Fetch entries with a Matrix block #}
 {% set entries = craft.entries()
-    .<FieldHandle>(':notempty:')
+    .myFieldHandle(':notempty:')
     .all() %}
 ```
 
@@ -50,7 +50,7 @@ Possible values include:
 If you have an element with a Matrix field in your template, you can access its blocks using your Matrix field’s handle:
 
 ```twig
-{% set query = entry.<FieldHandle> %}
+{% set query = entry.myFieldHandle %}
 ```
 
 That will give you a [Matrix block query](dev/element-queries/matrix-block-queries.md), prepped to output all of the enabled blocks for the given field.
@@ -58,7 +58,7 @@ That will give you a [Matrix block query](dev/element-queries/matrix-block-queri
 To loop through all of the blocks, call [all()](<api3:craft\db\Query::all()>) and then loop over the results:
 
 ```twig
-{% set blocks = entry.<FieldHandle>.all() %}
+{% set blocks = entry.myFieldHandle.all() %}
 {% if blocks|length %}
     <ul>
         {% for block in blocks %}
@@ -73,7 +73,7 @@ All of the code you put within the for-loop will be repeated for each Matrix blo
 Here’s an example of what the template might look like for a Matrix field with four block types (Heading, Text, Image, and Quote). We can determine the current block type’s handle by checking `block.type` (<api3:craft\elements\MatrixBlock::getType()>).
 
 ```twig
-{% for block in entry.<FieldHandle>.all() %}
+{% for block in entry.myFieldHandle.all() %}
     {% if block.type == "heading" %}
         <h3>{{ block.heading }}</h3>
     {% elseif block.type == "text" %}
@@ -99,7 +99,7 @@ This code can be simplified using the [switch](dev/tags.md#switch) tag.
 If you only want the first block, call [one()](<api3:craft\db\Query::one()>) instead of `all()`, and then make sure it returned something:
 
 ```twig
-{% set block = entry.<FieldHandle>.one() %}
+{% set block = entry.myFieldHandle.one() %}
 {% if block %}
     <!-- ... -->
 {% endif %}
@@ -108,14 +108,14 @@ If you only want the first block, call [one()](<api3:craft\db\Query::one()>) ins
 If you only want to know the total number of blocks, call [count()](<api3:craft\db\Query::count()>).
 
 ```twig
-{% set total = entry.<FieldHandle>.count() %}
+{% set total = entry.myFieldHandle.count() %}
 <p>Total blocks: <strong>{{ total }}</strong></p>
 ```
 
 If you just need to check if are blocks exist (but don’t need to fetch them), you can call [exists()](<api3:craft\db\Query::exists()>):
 
 ```twig
-{% if entry.<FieldHandle>.exists() %}
+{% if entry.myFieldHandle.exists() %}
     <p>There are blocks!</p>
 {% endif %}
 ```
@@ -123,7 +123,7 @@ If you just need to check if are blocks exist (but don’t need to fetch them), 
 You can set [parameters](dev/element-queries/matrix-block-queries.md#parameters) on the Matrix block query as well. For example, to only fetch blocks of type `text`, set the [type](dev/element-queries/matrix-block-queries.md#type) param:
 
 ```twig
-{% set blocks = clone(entry.<FieldHandle>)
+{% set blocks = clone(entry.myFieldHandle)
     .type('text')
     .all() %}
 ```
@@ -156,8 +156,8 @@ If you want all existing blocks to persist in the same order they are currently 
 
 ```twig
 {% if entry is defined %}
-    {% for blockId in clone(entry.<FieldHandle>).anyStatus().ids() %}
-        {{ hiddenInput('fields[<FieldHandle>][sortOrder][]', blockId) }}
+    {% for blockId in clone(entry.myFieldHandle).anyStatus().ids() %}
+        {{ hiddenInput('fields[myFieldHandle][sortOrder][]', blockId) }}
     {% endfor %}
 {% endif %}
 ```
@@ -168,9 +168,9 @@ Here’s how you can output form fields for existing blocks, for a Matrix field 
 
 ```twig
 {% if entry is defined %}
-    {% for block in entry.<FieldHandle>.all() %}
-        {# Prefix the block's input names with `fields[<FieldHandle>][blocks][<BlockID>]` #}
-        {% namespace "fields[<FieldHandle>][blocks][#{block.id}]" %}
+    {% for block in entry.myFieldHandle.all() %}
+        {# Prefix the block's input names with `fields[myFieldHandle][blocks][<BlockID>]` #}
+        {% namespace "fields[myFieldHandle][blocks][#{block.id}]" %}
             {{ hiddenInput('type', block.type) }}
             {% switch block.type %}
                 {% case 'text' %}
@@ -206,16 +206,16 @@ If you will likely need to include a JavaScript-powered component to the field, 
 For example, the first new block that is added to the form could have an “ID” of `new:1`, so its `type` input name would end up looking like this:
 
 ```html
-<input type="hidden" name="fields[<FieldHandle>][new:1][type]" value="text" />
+<input type="hidden" name="fields[myFieldHandle][new:1][type]" value="text" />
 ```
 
 Then define the form inputs for any additional blocks that should be appended to the input.
 
 ```twig
-{{ hiddenInput('fields[<FieldHandle>][sortOrder][]', 'new:1') }}
+{{ hiddenInput('fields[myFieldHandle][sortOrder][]', 'new:1') }}
 
-{# Prefix the block's input names with `fields[<FieldHandle>][blocks][new:1]` #}
-{% namespace "fields[<FieldHandle>][blocks][new:1]" %}
+{# Prefix the block's input names with `fields[myFieldHandle][blocks][new:1]` #}
+{% namespace "fields[myFieldHandle][blocks][new:1]" %}
     {{ hiddenInput('type', 'text') }}
     <textarea name="fields[<TextFieldHandle>]"></textarea>
 {% endnamespace %}

@@ -67,7 +67,7 @@
 ```twig
 {# Fetch entries with a related category #}
 {% set entries = craft.entries()
-    .<FieldHandle>(':notempty:')
+    .myFieldHandle(':notempty:')
     .all() %}
 ```
 
@@ -76,7 +76,7 @@
 テンプレート内でカテゴリフィールドのエレメントを取得する場合、カテゴリフィールドのハンドルを利用して、関連付けられたカテゴリにアクセスできます。
 
 ```twig
-{% set relatedCategories = entry.<FieldHandle> %}
+{% set relatedCategories = entry.myFieldHandle %}
 ```
 
 これは、所定のフィールドで関連付けられたすべてのカテゴリを出力するよう準備された[カテゴリクエリ](dev/element-queries/category-queries.md)を提供します。
@@ -84,7 +84,7 @@
 関連付けられたすべてのカテゴリをループするには、[all()](api3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
 ```twig
-{% set relatedCategories = entry.<FieldHandle>.all() %}
+{% set relatedCategories = entry.myFieldHandle.all() %}
 {% if relatedCategories|length %}
     <ul>
         {% for rel in relatedCategories %}
@@ -117,7 +117,7 @@
 関連付けられた最初のカテゴリだけが欲しい場合、代わりに [one()](api3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
 
 ```twig
-{% set rel = entry.<FieldHandle>.one() %}
+{% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
 {% endif %}
@@ -126,7 +126,7 @@
 （取得する必要はなく）いずれかの関連付けられたカテゴリがあるかを確認したい場合、[exists()](api3:craft\db\Query::exists()) を呼び出すことができます。
 
 ```twig
-{% if entry.<FieldHandle>.exists() %}
+{% if entry.myFieldHandle.exists() %}
     <p>There are related categories!</p>
 {% endif %}
 ```
@@ -134,7 +134,7 @@
 カテゴリクエリで[パラメータ](dev/element-queries/category-queries.md#parameters)をセットすることもできます。例えば、“leaves”（子を持たないカテゴリ）だけを取得するには、[leaves](dev/element-queries/category-queries.md#leaves) パラメータをセットします。
 
 ```twig
-{% set relatedCategories = entry.<FieldHandle>
+{% set relatedCategories = entry.myFieldHandle
     .leaves()
     .all() %}
 ```

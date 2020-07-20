@@ -26,7 +26,7 @@ Possible values include:
 ```twig
 {# Fetch entries with the 'foo' option selected #}
 {% set entries = craft.entries()
-    .<FieldHandle>('foo')
+    .myFieldHandle('foo')
     .all() %}
 ```
 
@@ -35,7 +35,7 @@ Possible values include:
 If you have an element with a Multi-select field in your template, you can access its data using your Multi-select field’s handle:
 
 ```twig
-{% set value = entry.<FieldHandle> %}
+{% set value = entry.myFieldHandle %}
 ```
 
 That will give you a <api3:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
@@ -43,7 +43,7 @@ That will give you a <api3:craft\fields\data\MultiOptionsFieldData> object that 
 To loop through all the selected options, iterate over the field value:
 
 ```twig
-{% for option in entry.<FieldHandle> %}
+{% for option in entry.myFieldHandle %}
     Label: {{ option.label }}
     Value: {{ option }} or {{ option.value }}
 {% endfor %}
@@ -52,7 +52,7 @@ To loop through all the selected options, iterate over the field value:
 To loop through all of the available options, iterate over the [options](api3:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
 
 ```twig
-{% for option in entry.<FieldHandle>.options %}
+{% for option in entry.myFieldHandle.options %}
     Label:    {{ option.label }}
     Value:    {{ option }} or {{ option.value }}
     Selected: {{ option.selected ? 'Yes' : 'No' }}
@@ -62,13 +62,13 @@ To loop through all of the available options, iterate over the [options](api3:cr
 To see if any options are selected, use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter:
 
 ```twig
-{% if entry.<FieldHandle>|length %}
+{% if entry.myFieldHandle|length %}
 ```
 
 To see if a particular option is selected, use [contains()](api3:craft\fields\data\MultiOptionsFieldData::contains())
 
 ```twig
-{% if entry.<FieldHandle>.contains('foo') %}
+{% if entry.myFieldHandle.contains('foo') %}
 ```
 
 ### Saving Multi-select Fields in Entry Forms
@@ -76,17 +76,17 @@ To see if a particular option is selected, use [contains()](api3:craft\fields\da
 If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Multi-select field, you can use this template as a starting point:
 
 ```twig
-{% set field = craft.app.fields.getFieldByHandle('<FieldHandle>') %}
+{% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
 
 {# Include a hidden input first so Craft knows to update the
    existing value, if no options are selected. #}
-{{ hiddenInput('fields[<FieldHandle>]', '') }}
+{{ hiddenInput('fields[myFieldHandle]', '') }}
 
-<select multiple name="fields[<FieldHandle>][]">
+<select multiple name="fields[myFieldHandle][]">
     {% for option in field.options %}
 
         {% set selected = entry is defined
-            ? entry.<FieldHandle>.contains(option.value)
+            ? entry.myFieldHandle.contains(option.value)
             : option.default %}
 
         <option value="{{ option.value }}"

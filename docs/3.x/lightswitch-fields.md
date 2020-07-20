@@ -18,7 +18,7 @@ Possible values include:
 ```twig
 {# Fetch entries with the Lightswitch field enabled #}
 {% set entries = craft.entries()
-    .<FieldHandle>(true)
+    .myFieldHandle(true)
     .all() %}
 ```
 
@@ -31,7 +31,7 @@ Any elements that don’t have an explicit Lightswitch value set will be treated
 If you have an element with a Lightswitch field in your template, you can access its data using your Lightswitch field’s handle:
 
 ```twig
-{% if entry.<FieldHandle> %}
+{% if entry.myFieldHandle %}
     <p>I'm on!</p>
 {% else %}
     <p>I'm off.</p>
@@ -47,12 +47,12 @@ If the element doesn’t have an explicit Lightswitch field value yet, the field
 If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Lightswitch field, you can use this template as a starting point:
 
 ```twig
-{{ hiddenInput('fields[<FieldHandle>]', '') }}
+{{ hiddenInput('fields[myFieldHandle]', '') }}
 
 {{ tag('input', {
   type: 'checkbox',
-  name: 'fields[<FieldHandle>]',
+  name: 'fields[myFieldHandle]',
   value: '1',
-  checked: (entry.<FieldHandle> ?? false) ? true : false,
+  checked: (entry.myFieldHandle ?? false) ? true : false,
 }) }}
 ```

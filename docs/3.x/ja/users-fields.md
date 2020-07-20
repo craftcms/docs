@@ -42,7 +42,7 @@
 ```twig
 {# Fetch entries with a related user #}
 {% set entries = craft.entries()
-    .<FieldHandle>(':notempty:')
+    .myFieldHandle(':notempty:')
     .all() %}
 ```
 
@@ -51,7 +51,7 @@
 テンプレート内でユーザーフィールドのエレメントを取得する場合、ユーザーフィールドのハンドルを利用して、関連付けられたユーザーにアクセスできます。
 
 ```twig
-{% set query = entry.<FieldHandle> %}
+{% set query = entry.myFieldHandle %}
 ```
 
 これは、所定のフィールドで関連付けられたすべてのユーザーを出力するよう準備された[ユーザークエリ](dev/element-queries/user-queries.md)を提供します。
@@ -59,7 +59,7 @@
 関連付けられたすべてのユーザーをループするには、[all()](api3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
 ```twig
-{% set relatedUsers = entry.<FieldHandle>.all() %}
+{% set relatedUsers = entry.myFieldHandle.all() %}
 {% if relatedUsers|length %}
     <ul>
         {% for rel in relatedUsers %}
@@ -72,7 +72,7 @@
 関連付けられた最初のユーザーだけが欲しい場合、代わりに [one()](api3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
 
 ```twig
-{% set rel = entry.<FieldHandle>.one() %}
+{% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ url('profiles/'~rel.username) }}">{{ rel.name }}</a></p>
 {% endif %}
@@ -81,7 +81,7 @@
 （取得する必要はなく）いずれかの関連付けられたユーザーがあるかを確認したい場合、[exists()](api3:craft\db\Query::exists()) を呼び出すことができます。
 
 ```twig
-{% if entry.<FieldHandle>.exists() %}
+{% if entry.myFieldHandle.exists() %}
     <p>There are related users!</p>
 {% endif %}
 ```
@@ -89,7 +89,7 @@
 ユーザークエリで[パラメータ](dev/element-queries/user-queries.md#parameters)をセットすることもできます。例えば、`authors` グループに含まれるユーザーだけを取得するには、[groupId](dev/element-queries/user-queries.md#groupid) パラメータをセットします。
 
 ```twig
-{% set relatedUsers = clone(entry.<FieldHandle>)
+{% set relatedUsers = clone(entry.myFieldHandle)
     .group('authors')
     .all() %}
 ```

@@ -26,7 +26,7 @@
 ```twig
 {# Fetch entries with the 'foo' option selected #}
 {% set entries = craft.entries()
-    .<FieldHandle>('foo')
+    .myFieldHandle('foo')
     .all() %}
 ```
 
@@ -35,7 +35,7 @@
 テンプレート内でセレクトボックスフィールドのエレメントを取得する場合、セレクトボックスフィールドのハンドルを利用して、そのデータにアクセスできます。
 
 ```twig
-{% set value = entry.<FieldHandle> %}
+{% set value = entry.myFieldHandle %}
 ```
 
 それは、フィールドデータを含む <api3:craft\fields\data\SingleOptionFieldData> オブジェクトを提供します。
@@ -43,25 +43,25 @@
 選択されたオプションを表示するには、それを文字列として出力するか、[value](api3:craft\fields\data\SingleOptionFieldData::$value) プロパティを出力してください。
 
 ```twig
-{{ entry.<FieldHandle> }} or {{ entry.<FieldHandle>.value }}
+{{ entry.myFieldHandle }} or {{ entry.myFieldHandle.value }}
 ```
 
 任意のオプションが選択されているかを確認するには、[value](api3:craft\fields\data\SingleOptionFieldData::$value) プロパティを使用してください。
 
 ```twig
-{% if entry.<FieldHandle>.value %}
+{% if entry.myFieldHandle.value %}
 ```
 
 選択されたオプションのラベルを表示するには、[label](api3:craft\fields\data\SingleOptionFieldData::$label) プロパティを出力してください。
 
 ```twig
-{{ entry.<FieldHandle>.label }}
+{{ entry.myFieldHandle.label }}
 ```
 
 利用可能なオプションすべてをループするには、[options](api3:craft\fields\data\SingleOptionFieldData::getOptions()) プロパティを反復してください。
 
 ```twig
-{% for option in entry.<FieldHandle>.options %}
+{% for option in entry.myFieldHandle.options %}
     Label:    {{ option.label }}
     Value:    {{ option }} or {{ option.value }}
     Selected: {{ option.selected ? 'Yes' : 'No' }}
@@ -73,13 +73,13 @@
 セレクトボックスフィールドを含める必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、出発点としてこのテンプレートを使用してください。
 
 ```twig
-{% set field = craft.app.fields.getFieldByHandle('<FieldHandle>') %}
+{% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
 
-<select name="fields[<FieldHandle>]">
+<select name="fields[myFieldHandle]">
     {% for option in field.options %}
 
         {% set selected = entry is defined
-            ? entry.<FieldHandle>.value == option.value
+            ? entry.myFieldHandle.value == option.value
             : option.default %}
 
         <option value="{{ option.value }}"
