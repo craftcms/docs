@@ -1,7 +1,5 @@
 # Craft 3 の変更点
 
-[[toc]]
-
 ## リッチテキストフィールド
 
 「リッチテキスト」フィールドタイプは Craft 3 から削除され、新しい [Redactor](https://github.com/craftcms/redactor) プラグインと [CKEditor](https://github.com/craftcms/ckeditor) プラグインが追加されました。

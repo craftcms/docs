@@ -1,7 +1,5 @@
 # How to Build a Plugin
 
-[[toc]]
-
 ## Preparation
 
 Before you begin working on a plugin, you need to decide on a few things:

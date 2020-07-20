@@ -14,8 +14,6 @@ The end result is a faster, leaner, and much more elegant codebase for core deve
 If you think something is missing, please [create an issue](https://github.com/craftcms/docs/issues/new).
 :::
 
-[[toc]]
-
 ## High Level Notes
 
 - Craft is now built on Yii 2.

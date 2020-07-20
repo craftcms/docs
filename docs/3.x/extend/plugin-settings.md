@@ -1,7 +1,5 @@
 # Plugin Settings
 
-[[toc]]
-
 ## Settings Model
 
 Once you’ve indicated your plugin will have settings by enabling `hasCpSettings` in your main plugin class or `composer.json`, you’ll need to provide a model for defining them.

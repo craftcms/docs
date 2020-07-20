@@ -2,8 +2,6 @@
 
 Craft provides two ways for plugins to extend its Twig templating environment.
 
-[[toc]]
-
 ## Extend the Global `craft` Variable
 
 The global `craft` template variable is an instance of <api3:craft\web\twig\variables\CraftVariable>. When a template references `craft.entries` or `craft.entries()`, it’s calling [CraftVariable::entries()](api3:craft\web\twig\variables\CraftVariable::entries()) behind the scenes, for example.

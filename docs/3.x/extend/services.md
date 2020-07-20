@@ -1,7 +1,5 @@
 # Services
 
-[[toc]]
-
 ## What are Services?
 
 Services are [singleton](https://en.wikipedia.org/wiki/Singleton_pattern) classes that get attached to your primary plugin class as [components](https://www.yiiframework.com/doc/guide/2.0/en/structure-application-components) (e.g. `MyPlugin::getInstance()->serviceName`).

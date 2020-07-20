@@ -8,8 +8,6 @@
 Craft のデフォルト設定は [src/config/app.php](https://github.com/craftcms/cms/blob/master/src/config/app.php)、[app.web.php](https://github.com/craftcms/cms/blob/master/src/config/app.web.php)、および、[app.console.php](https://github.com/craftcms/cms/blob/master/src/config/app.console.php)によって定義されています。既存のアプリケーションコンポーネントを上書きする必要がある場合、これらのファイルを参照してください。
 :::
 
-[[toc]]
-
 ## Cache コンポーネント
 
 デフォルトでは、Craft は `storage/runtime/cache/` フォルダにデータキャッシュを蓄積します。`config/app.php` で `cache` アプリケーションコンポーネントを上書きすることによって、代替の[キャッシュストレージ](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage)を使うよう Craft を設定できます。

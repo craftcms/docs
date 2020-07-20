@@ -1,7 +1,5 @@
 # Changes in Craft 3
 
-[[toc]]
-
 ## Rich Text Fields
 
 The “Rich Text” field type has been removed from Craft 3, in favor of new [Redactor](https://github.com/craftcms/redactor) and [CKEditor](https://github.com/craftcms/ckeditor) plugins.

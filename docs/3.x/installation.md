@@ -1,7 +1,5 @@
 # Installation Instructions
 
-[[toc]]
-
 ## Step 1: Download Craft
 
 Craft can be downloaded with [Composer](#downloading-with-composer) or by [manually downloading](#downloading-an-archive-file-manually) a zip or tar.gz archive. The end result will be the same, so go with whichever route you feel more comfortable with.

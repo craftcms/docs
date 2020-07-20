@@ -2,8 +2,6 @@
 
 There are several ways to configure Craft depending on your needs.
 
-[[toc]]
-
 ## General Config Settings
 
 Craft supports several [general config settings](config-settings.md). You can override their default values in your `config/general.php` file.

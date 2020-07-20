@@ -1,7 +1,5 @@
 # サービス
 
-[[toc]]
-
 ## サービスとは？
 
 サービスは、[コンポーネント](https://www.yiiframework.com/doc/guide/2.0/en/structure-application-components)のようにプライマリプラグインクラスに付加される（例：`MyPlugin::getInstance()->serviceName`）[singleton](https://en.wikipedia.org/wiki/Singleton_pattern) クラスです。

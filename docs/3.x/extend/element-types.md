@@ -16,8 +16,6 @@ You can refer to these classes for examples. They are located in `vendor/craftcm
 
 If your plugin needs to provide a new content type, architecting it as an element type is usually the best way to go.
 
-[[toc]]
-
 ## Getting Started
 
 ### Element Class

@@ -4,8 +4,6 @@
 
 Let’s take a look at how it works.
 
-[[toc]]
-
 ## Types of Twig code
 
 Twig templates are HTML files that are sprinkled with bits of Twig code. When Twig loads a template, the first thing it will do is separate the raw HTML code from the Twig code. The raw HTML code will be output to the browser without any tampering.

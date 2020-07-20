@@ -8,8 +8,6 @@ You can also customize Craft’s application configuration for only web requests
 Craft’s default configuration is defined by [src/config/app.php](https://github.com/craftcms/cms/blob/master/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/master/src/config/app.web.php), and [app.console.php](https://github.com/craftcms/cms/blob/master/src/config/app.console.php). Refer to these files when you need to override existing application components.
 :::
 
-[[toc]]
-
 ## Cache Component
 
 By default, Craft will store data caches in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) by overriding the `cache` application component from `config/app.php`.

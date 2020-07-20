@@ -2,8 +2,6 @@
 
 Craft や Craft プラグイン向けのコードを書くときには、このガイドラインに従うよう最善を尽くしてください。
 
-[[toc]]
-
 ## コードスタイル
 
 - [PSR-1](https://www.php-fig.org/psr/psr-1/) と [PSR-2](https://www.php-fig.org/psr/psr-2/) のコーディング基準に従ってください。

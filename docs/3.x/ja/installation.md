@@ -1,7 +1,5 @@
 # インストールガイド
 
-[[toc]]
-
 ## ステップ 1：Craft のダウンロード
 
 Craft は [Composer](#downloading-with-composer) でダウンロードするか、zip または tar.gz アーカイブを[手動でダウンロード](#downloading-an-archive-file-manually)できます。最終的な結果は同じになるため、あなたにとってより快適な方法を選んでください。

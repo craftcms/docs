@@ -2,8 +2,6 @@
 
 Do your best to follow these guidelines when writing code for Craft and Craft plugins.
 
-[[toc]]
-
 ## Code Style
 
 - Follow the [PSR-1](https://www.php-fig.org/psr/psr-1/) & [PSR-2](https://www.php-fig.org/psr/psr-2/) coding standards.

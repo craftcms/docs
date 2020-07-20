@@ -11,8 +11,6 @@ This guide can be used for setting up tests for a Craft site & Modules/Plugins.
 
 <hr>
 
-[[toc]]
-
 ## Step 1: Install Codeception 3.1 or higher
 
 Follow instruction 1 and 2 Codeception's [website](https://codeception.com/quickstart). Ensure you install

@@ -2,8 +2,6 @@
 
 Craft は、プラグイン向けに Twig テンプレート環境を拡張するための2つの方法を提供します。
 
-[[toc]]
-
 ## グローバル `craft` 変数の拡張
 
 グローバル `craft` テンプレート変数は、<api3:craft\web\twig\variables\CraftVariable> のインスタンスです。例えば、テンプレートが `craft.entries` または `craft.entries()` を参照する際、 その裏で [CraftVariable::entries()](api3:craft\web\twig\variables\CraftVariable::entries()) が呼び出されます。

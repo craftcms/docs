@@ -1,7 +1,5 @@
 # How to Build a Module
 
-[[toc]]
-
 ## Preparation
 
 Before you begin working on a module, you need to decide on a couple things:

@@ -14,8 +14,6 @@ Craft 3 は CMS の完全な書き換えで、Yii 2 上で構築されていま�
 何かが欠けていると思う場合は、[issue を作成してください](https://github.com/craftcms/docs/issues/new)。
 :::
 
-[[toc]]
-
 ## ハイレベルなメモ
 
 - Craft は、Yii 2 で構築されました。
