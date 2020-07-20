@@ -13,7 +13,7 @@ $myTagQuery = \craft\elements\Tag::find();
 ```
 :::
 
-タグクエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[Tag](api:craft\elements\Tag) オブジェクトの配列が返されます。
+タグクエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[Tag](api3:craft\elements\Tag) オブジェクトの配列が返されます。
 
 ::: tip
 エレメントクエリがどのように機能するかについては、[エレメントクエリについて](README.md)を参照してください。
@@ -77,7 +77,7 @@ $tags = \craft\elements\Tag::find()
 
 ### `asArray`
 
-[Tag](api:craft\elements\Tag) オブジェクトではなく、データの配列として、マッチしたタグをクエリが返します。
+[Tag](api3:craft\elements\Tag) オブジェクトではなく、データの配列として、マッチしたタグをクエリが返します。
 
 
 
@@ -252,7 +252,7 @@ $tags = \craft\elements\Tag::find()
 | 値                                        | 取得するタグ      |
 | ---------------------------------------- | ----------- |
 | `1`                                      | ID が 1。     |
-| a [Tag](api:craft\elements\Tag) object | ID が 1ではない。 |
+| a [Tag](api3:craft\elements\Tag) object | ID が 1ではない。 |
 
 
 
@@ -337,7 +337,7 @@ $tags = \craft\elements\Tag::find()
 | `'not foo'`                                      | オブジェクトで表されるサイトから。                               |
 | `['foo', 'bar']`                                 | in a group with a handle of `foo` or `bar`.     |
 | `['not', 'foo', 'bar']`                          | not in a group with a handle of `foo` or `bar`. |
-| a [TagGroup](api:craft\models\TagGroup) object | in a group represented by the object.           |
+| a [TagGroup](api3:craft\models\TagGroup) object | in a group represented by the object.           |
 
 
 
@@ -677,7 +677,7 @@ $tag = \craft\elements\Tag::find()
 | Value                                    | Fetches revisions…                     |
 | ---------------------------------------- | -------------------------------------- |
 | `1`                                      | for the tag with an ID of 1.           |
-| a [Tag](api:craft\elements\Tag) object | for the tag represented by the object. |
+| a [Tag](api3:craft\elements\Tag) object | for the tag represented by the object. |
 
 
 

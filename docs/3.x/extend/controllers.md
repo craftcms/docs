@@ -10,33 +10,33 @@ For the most part, writing controllers for Craft is identical to writing control
 [Yii documentation][yii] as a starting point.
 :::
  
-Craft controllers should extend <api:craft\web\Controller>, which offers a few advantages over its parent,
-<api:yii\web\Controller>:
+Craft controllers should extend <api3:craft\web\Controller>, which offers a few advantages over its parent,
+<yii2:yii\web\Controller>:
 
 - You can easily control whether the controller should allow anonymous access by overriding
-  [$allowAnonymous](api:craft\web\Controller::$allowAnonymous). (An active user session is required by default.)
+  [$allowAnonymous](api3:craft\web\Controller::$allowAnonymous). (An active user session is required by default.)
 - If an exception is thrown by a controller action and the request accepts a JSON response, the response will
   automatically be formatted as JSON, with an `error` key.
 - It provides several helper methods that ease development.
 
 ## Request Validation Methods
 
-<api:craft\web\Controller> offers several methods you can call from within your actions, to validate the current
+<api3:craft\web\Controller> offers several methods you can call from within your actions, to validate the current
 request:
 
 Method | Description
 ------ | -----------
-[requireLogin()](api:craft\web\Controller::requireLogin()) | Requires that a user is logged in.
-[requireGuest()](api:craft\web\Controller::requireGuest()) | Requires that the user is anonymous.
-[requireAdmin()](api:craft\web\Controller::requireAdmin()) | Requires that the user is logged in with an Admin account.
-[requirePermission()](api:craft\web\Controller::requirePermission()) | Requires that the user is logged in with an account that has a given permission.
-[requireAuthorization()](api:craft\web\Controller::requireAuthorization()) | Requires that the user has been granted authorization to do something (whether or not they are logged in).
-[requireElevatedSession()](api:craft\web\Controller::requireElevatedSession()) | Requires that the user has an elevated session.
-[requirePostRequest()](api:craft\web\Controller::requirePostRequest()) | Requires that the request was sent as a POST request.
-[requireAcceptsJson()](api:craft\web\Controller::requireAcceptsJson()) | Requires that the request was sent with an `Accept: application/json` header.
-[requireToken()](api:craft\web\Controller::requireToken()) | Requires that the request was sent with a [token](api:craft\web\Request::getToken()).
-[requireCpRequest()](api:craft\web\Controller::requireCpRequest()) | Requires that the request URI begins with the [control panel trigger](config3:cpTrigger).
-[requireSiteRequest()](api:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin with the [control panel trigger](config3::cpTrigger).
+[requireLogin()](api3:craft\web\Controller::requireLogin()) | Requires that a user is logged in.
+[requireGuest()](api3:craft\web\Controller::requireGuest()) | Requires that the user is anonymous.
+[requireAdmin()](api3:craft\web\Controller::requireAdmin()) | Requires that the user is logged in with an Admin account.
+[requirePermission()](api3:craft\web\Controller::requirePermission()) | Requires that the user is logged in with an account that has a given permission.
+[requireAuthorization()](api3:craft\web\Controller::requireAuthorization()) | Requires that the user has been granted authorization to do something (whether or not they are logged in).
+[requireElevatedSession()](api3:craft\web\Controller::requireElevatedSession()) | Requires that the user has an elevated session.
+[requirePostRequest()](api3:craft\web\Controller::requirePostRequest()) | Requires that the request was sent as a POST request.
+[requireAcceptsJson()](api3:craft\web\Controller::requireAcceptsJson()) | Requires that the request was sent with an `Accept: application/json` header.
+[requireToken()](api3:craft\web\Controller::requireToken()) | Requires that the request was sent with a [token](api3:craft\web\Request::getToken()).
+[requireCpRequest()](api3:craft\web\Controller::requireCpRequest()) | Requires that the request URI begins with the [control panel trigger](config3:cpTrigger).
+[requireSiteRequest()](api3:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin with the [control panel trigger](config3::cpTrigger).
 
 ```php
 public function actionFoo()
@@ -88,7 +88,7 @@ an action could go about that, depending on the needs.
 
 ### Rendering Templates
 
-Controller actions can render and return Twig templates using <api:craft\web\Controller::renderTemplate()>.
+Controller actions can render and return Twig templates using <api3:craft\web\Controller::renderTemplate()>.
 
 ```php
 use yii\web\Response;
@@ -101,14 +101,14 @@ public function actionFoo(): Response
 }
 ```
 
-<api:craft\web\Controller::renderTemplate()> calls <api:craft\web\View::renderPageTemplate()> internally, which
+<api3:craft\web\Controller::renderTemplate()> calls <api3:craft\web\View::renderPageTemplate()> internally, which
 ensures all registered JS and CSS resources have been added to the rendered HTML, and then it will set the
 `Content-Type` header on the response, based on the MIME type of the template being rendered (using `text/html` as the
 default if the MIME type isn’t known).
 
 ### Returning JSON
 
-Controller actions can return JSON responses using <api:yii\web\Controller::asJson()>.
+Controller actions can return JSON responses using <yii2:yii\web\Controller::asJson()>.
 
 ```php
 use Craft;
@@ -127,12 +127,12 @@ public function actionFoo(): Response
 ```
 
 ::: tip
-You can call <api:craft\web\Controller::asErrorJson()> instead for an easy way to return a JSON response with an `error` key.
+You can call <api3:craft\web\Controller::asErrorJson()> instead for an easy way to return a JSON response with an `error` key.
 :::
 
 ### Redirecting the Request
 
-Controller actions can redirect the request using <api:craft\web\Controller::redirect()>. 
+Controller actions can redirect the request using <api3:craft\web\Controller::redirect()>. 
 
 ```php
 use yii\web\Response;
@@ -143,7 +143,7 @@ public function actionFoo(): Response
 }
 ```
 
-Or, if the request may contain a hashed `redirect` param, you can redirect to that using <api:craft\web\Controller::redirectToPostedUrl()>.
+Or, if the request may contain a hashed `redirect` param, you can redirect to that using <api3:craft\web\Controller::redirectToPostedUrl()>.
 
 ```php
 use yii\web\Response;

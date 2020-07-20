@@ -26,7 +26,7 @@ Here is how Craft handles each request:
    If the URI matches an element’s URI, Craft lets the element decide how to route the request. For example, if an [entry’s](sections-and-entries.md) URI is requested, then the entry will route the request to the template specified in its section’s settings, with an `entry` variable predefined, set to the requested entry.
 
    ::: tip
-   Modules and plugins can override element routes using the [EVENT_SET_ROUTE](api:craft\base\Element::EVENT_SET_ROUTE) event.
+   Modules and plugins can override element routes using the [EVENT_SET_ROUTE](api3:craft\base\Element::EVENT_SET_ROUTE) event.
    :::
 
 3. **Does the URI match a route or URI rule?**
@@ -43,7 +43,7 @@ Here is how Craft handles each request:
 
 5. **404**
 
-   If none of the above checks are successful, Craft will throw a [NotFoundHttpException](api:yii\web\NotFoundHttpException). If [Dev Mode](config3:devMode) is enabled, an error report for the exception will be shown. Otherwise, a 404 error will be returned.
+   If none of the above checks are successful, Craft will throw a [NotFoundHttpException](yii2:yii\web\NotFoundHttpException). If [Dev Mode](config3:devMode) is enabled, an error report for the exception will be shown. Otherwise, a 404 error will be returned.
 
    ::: tip
    You can customize your site’s 404 page by placing a `404.twig` template at the root of your `templates/` directory. You can test this page even if [Dev Mode](config3:devMode) is enabled by going to `http://my-project.test/404`.

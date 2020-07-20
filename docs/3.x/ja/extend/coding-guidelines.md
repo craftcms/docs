@@ -29,7 +29,7 @@ Craft や Craft プラグイン向けのコードを書くときには、この�
 - Always pass `true`/`false` to the third argument of [in_array()](http://php.net/manual/en/function.in-array.php) to indicate whether the check should be type-strict (and make it `true` whenever possible).
 - Use `$obj->property !== null` rather than `isset($obj->property)` in conditions that check if an object property is set.
 - Use `empty()`/`!empty()` in conditions that check if an array is/isn’t empty.
-- Refer to class names using the [::class](http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class) keyword (`Foo::class`) rather than as a string (`'some\nmspace\Foo'`) or <api:yii\base\BaseObject::className()>.
+- Refer to class names using the [::class](http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class) keyword (`Foo::class`) rather than as a string (`'some\nmspace\Foo'`) or <yii2:yii\base\BaseObject::className()>.
 - Initialize arrays explicitly (`$array = []`) rather than implicitly (e.g. `$array[] = 'foo'` where `$array` wasn’t defined yet).
 - Use `self::_foo()` rather than `static::_foo()` when calling private static functions, since `static::` would break if the class is extended.
 - Use `self::CONSTANT` rather than `static::CONSTANT` (unnecessary overhead).
@@ -241,8 +241,8 @@ $this->requireAcceptsJson();
 
 ## 例外
 
-- ユーザーエラーの結果として、例外が起こる可能性がある場合、<api:yii\base\UserException> クラス（または、サブクラス）を使用してください。
-- の場合のみ、<api:Craft::t()> で例外メッセージを翻訳してください。
+- ユーザーエラーの結果として、例外が起こる可能性がある場合、<yii2:yii\base\UserException> クラス（または、サブクラス）を使用してください。
+- の場合のみ、<api3:Craft::t()> で例外メッセージを翻訳してください。
 
 ## データベースクエリ
 
@@ -252,7 +252,7 @@ $this->requireAcceptsJson();
 - `'col1, col2 desc'` の代わりに、`orderBy()` で `['col1' => SORT_ASC, 'col2' => SORT_DESC]` 構文を使用してください。
 
 ### 条件
-- テーブル / カラム名や値を自動的に引用するように、可能な限り Yii の[宣言条件構文](api:yii\db\QueryInterface::where())を使用してください。
+- テーブル / カラム名や値を自動的に引用するように、可能な限り Yii の[宣言条件構文](yii2:yii\db\QueryInterface::where())を使用してください。
 - 一貫性のために、次のものを使用してください。
   -  `['in', 'col', $values]` の代わりに `['col' => $values]`
   - `['=', 'col', $value]` の代わりに `['col' => $value]`
@@ -307,7 +307,7 @@ $entry->setAuthor($newAuthor);
 
 ### App コンポーネントの Getter
 
-App コンポーネントには、App コンポーネントの Getter メソッドである [get()](api:yii\di\ServiceLocator::get()) を直接呼び出す、独自の Getter ファンクションが必要です。
+App コンポーネントには、App コンポーネントの Getter メソッドである [get()](yii2:yii\di\ServiceLocator::get()) を直接呼び出す、独自の Getter ファンクションが必要です。
 
 ```php
 /**

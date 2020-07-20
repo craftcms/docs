@@ -11,7 +11,7 @@
 ```
 
 ::: tip
-タグを <api:yii\web\View::registerCss()> の中で呼び出し、グローバルな `view` 変数経由でアクセスすることもできます。
+タグを <yii2:yii\web\View::registerCss()> の中で呼び出し、グローバルな `view` 変数経由でアクセスすることもできます。
 
 ```twig
 {% set styles = ".content { color: #{entry.textColor}; }" %}
@@ -31,4 +31,4 @@
 {% css with {type: 'text/css'} %}
 ```
 
-属性は <api:yii\helpers\BaseHtml::renderTagAttributes()> によってレンダリングされます。
+属性は <yii2:yii\helpers\BaseHtml::renderTagAttributes()> によってレンダリングされます。

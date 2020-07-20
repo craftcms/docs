@@ -25,7 +25,7 @@ Craft はリクエストを次のように処理します。
 
    URL がエレメントの URI にマッチする場合、Craft はエレメントにそのリクエストのルーティング方法を決定させます。例えば、ある[エントリの](sections-and-entries.md) URI がリクエストされた場合、エントリはそのセクションの設定で指定されたテンプレートにリクエストをルーティングし、`entry` 変数が事前定義され、リクエストされたエントリをセットします。
 
-   ::: tip モジュールとプラグインは、[EVENT_SET_ROUTE](api:craft\base\Element::EVENT_SET_ROUTE) イベントを使用してエレメントルートを上書きできます。
+   ::: tip モジュールとプラグインは、[EVENT_SET_ROUTE](api3:craft\base\Element::EVENT_SET_ROUTE) イベントを使用してエレメントルートを上書きできます。
 :::
 
 3. **URI がルート、または、URI ルールにマッチするか？**
@@ -41,7 +41,7 @@ Craft はリクエストを次のように処理します。
 
 5. **404**
 
-   上記のチェックがいずれも成功しなかった場合、Craft は [NotFoundHttpException](api:yii\web\NotFoundHttpException) を返します。[Dev Mode](config3:devMode) が有効な場合、例外についてのエラーレポートが表示されます。そうでなければ、404 エラーが返されます。
+   上記のチェックがいずれも成功しなかった場合、Craft は [NotFoundHttpException](yii2:yii\web\NotFoundHttpException) を返します。[Dev Mode](config3:devMode) が有効な場合、例外についてのエラーレポートが表示されます。そうでなければ、404 エラーが返されます。
 
    ::: tip `404.twig` テンプレートを `templates/` ディレクトリのルートに配置することで、サイトの404ページをカスタマイズできます。`http://my-project.test/404` にアクセスすることで、[Dev Mode](config3:devMode) が有効になっている場合でも、このページをテストできます。
 :::

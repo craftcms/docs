@@ -59,7 +59,7 @@ Default value
 
 Defined by
 
-:   [DbConfig::$attributes](api:craft\config\DbConfig::$attributes)
+:   [DbConfig::$attributes](api3:craft\config\DbConfig::$attributes)
 
 
 
@@ -92,7 +92,7 @@ Default value
 
 Defined by
 
-:   [DbConfig::$charset](api:craft\config\DbConfig::$charset)
+:   [DbConfig::$charset](api3:craft\config\DbConfig::$charset)
 
 
 
@@ -112,7 +112,7 @@ Default value
 
 Defined by
 
-:   [DbConfig::$database](api:craft\config\DbConfig::$database)
+:   [DbConfig::$database](api3:craft\config\DbConfig::$database)
 
 
 
@@ -132,7 +132,7 @@ Default value
 
 Defined by
 
-:   [DbConfig::$driver](api:craft\config\DbConfig::$driver)
+:   [DbConfig::$driver](api3:craft\config\DbConfig::$driver)
 
 
 
@@ -152,7 +152,7 @@ Default value
 
 Defined by
 
-:   [DbConfig::$dsn](api:craft\config\DbConfig::$dsn)
+:   [DbConfig::$dsn](api3:craft\config\DbConfig::$dsn)
 
 
 
@@ -178,7 +178,7 @@ Default value
 
 Defined by
 
-:   [DbConfig::$password](api:craft\config\DbConfig::$password)
+:   [DbConfig::$password](api3:craft\config\DbConfig::$password)
 
 
 
@@ -198,7 +198,7 @@ Default value
 
 Defined by
 
-:   [DbConfig::$port](api:craft\config\DbConfig::$port)
+:   [DbConfig::$port](api3:craft\config\DbConfig::$port)
 
 
 
@@ -218,7 +218,7 @@ Default value
 
 Defined by
 
-:   [DbConfig::$schema](api:craft\config\DbConfig::$schema)
+:   [DbConfig::$schema](api3:craft\config\DbConfig::$schema)
 
 
 
@@ -238,7 +238,7 @@ Default value
 
 Defined by
 
-:   [DbConfig::$server](api:craft\config\DbConfig::$server)
+:   [DbConfig::$server](api3:craft\config\DbConfig::$server)
 
 
 
@@ -258,7 +258,7 @@ Default value
 
 Defined by
 
-:   [DbConfig::$tablePrefix](api:craft\config\DbConfig::$tablePrefix)
+:   [DbConfig::$tablePrefix](api3:craft\config\DbConfig::$tablePrefix)
 
 
 
@@ -281,7 +281,7 @@ Default value
 
 Defined by
 
-:   [DbConfig::$unixSocket](api:craft\config\DbConfig::$unixSocket)
+:   [DbConfig::$unixSocket](api3:craft\config\DbConfig::$unixSocket)
 
 
 
@@ -303,7 +303,7 @@ Default value
 
 Defined by
 
-:   [DbConfig::$url](api:craft\config\DbConfig::$url)
+:   [DbConfig::$url](api3:craft\config\DbConfig::$url)
 
 
 
@@ -326,7 +326,7 @@ Default value
 
 Defined by
 
-:   [DbConfig::$user](api:craft\config\DbConfig::$user)
+:   [DbConfig::$user](api3:craft\config\DbConfig::$user)
 
 
 

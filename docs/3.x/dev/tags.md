@@ -204,7 +204,7 @@ The `{% css %}` tag can be used to register a `<style>` tag in the page’s `<he
 ```
 
 ::: tip
-The tag calls <api:yii\web\View::registerCss()> under the hood, which can also be accessed via the global `view` variable.
+The tag calls <yii2:yii\web\View::registerCss()> under the hood, which can also be accessed via the global `view` variable.
 
 ```twig
 {% set styles = ".content { color: #{entry.textColor}; }" %}
@@ -224,7 +224,7 @@ Any HTML attributes that should be included on the `<style>` tag.
 {% css with {type: 'text/css'} %}
 ```
 
-Attributes will be rendered by <api:yii\helpers\BaseHtml::renderTagAttributes()>.
+Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
 
 ## `dd`
 
@@ -298,7 +298,7 @@ The `{% html %}` tag can be used to register arbitrary HTML code on the page.
 ```
 
 ::: tip
-The tag calls <api:craft\web\View::registerHtml()> under the hood, which can also be accessed via the global `view` variable.
+The tag calls <api3:craft\web\View::registerHtml()> under the hood, which can also be accessed via the global `view` variable.
 
 ```twig
 {% set para = '<p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>' %}
@@ -341,7 +341,7 @@ The `{% js %}` tag can be used to register a `<script>` tag on the page.
 ```
 
 ::: tip
-The tag calls <api:yii\web\View::registerJs()> under the hood, which can also be accessed via the global `view` variable.
+The tag calls <yii2:yii\web\View::registerJs()> under the hood, which can also be accessed via the global `view` variable.
 
 ```twig
 {% set script = '_gaq.push(["_trackEvent", "Search", "'~searchTerm|e('js')~'"' %}
@@ -420,7 +420,7 @@ That would result in:
 ```
 
 ::: tip
-This tag works identically to the [namespace](filters.md#namespace) filter, except that it will call <api:craft\web\View::setNamespace()> at the beginning, so any PHP code executed within it can be aware of what the nested IDs will become.
+This tag works identically to the [namespace](filters.md#namespace) filter, except that it will call <api3:craft\web\View::setNamespace()> at the beginning, so any PHP code executed within it can be aware of what the nested IDs will become.
 :::
 
 ## `nav`
@@ -524,7 +524,7 @@ Next up you need to type “`as`”, followed by one or two variable names:
 
 Here’s what they get set to:
 
-* `pageInfo` gets set to a <api:craft\web\twig\variables\Paginate> object, which provides info about the current page, and some helper methods for creating links to other pages. (See [below](#the-pageInfo-variable) for more info.)
+* `pageInfo` gets set to a <api3:craft\web\twig\variables\Paginate> object, which provides info about the current page, and some helper methods for creating links to other pages. (See [below](#the-pageInfo-variable) for more info.)
 * `pageEntries` gets set to an array of the results (e.g. the elements) that belong to the current page.
 
 ::: tip

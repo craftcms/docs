@@ -74,7 +74,7 @@ Craft のリレーションを操作する前に、それがテンプレート�
 
 最も単純な書式としては、次のいずれかを渡すことができます。
 
-* A <api:craft\elements\Asset>, <api:craft\elements\Category>, <api:craft\elements\Entry>, <api:craft\elements\User>, or <api:craft\elements\Tag> object
+* A <api3:craft\elements\Asset>, <api3:craft\elements\Category>, <api3:craft\elements\Entry>, <api3:craft\elements\User>, or <api3:craft\elements\Tag> object
 * エレメントの ID
 * エレメントオブジェクト、および / または、 ID の配列
 

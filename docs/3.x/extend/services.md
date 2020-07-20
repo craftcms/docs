@@ -11,7 +11,7 @@ They have two jobs:
 - They contain most of your plugin’s business logic.
 - They define your plugin’s API, which your plugin (and other plugins) can access.
 
-For example, Craft’s field management code is located in <api:craft\services\Fields>, which is available at `Craft::$app->fields`. It has a `getFieldByHandle()` method that returns a field model by its handle. If that’s something you want to do, you can call `Craft::$app->fields->getFieldByHandle('foo')`.
+For example, Craft’s field management code is located in <api3:craft\services\Fields>, which is available at `Craft::$app->fields`. It has a `getFieldByHandle()` method that returns a field model by its handle. If that’s something you want to do, you can call `Craft::$app->fields->getFieldByHandle('foo')`.
 
 ## Creating a Service
 
@@ -31,7 +31,7 @@ class Foo extends Component
 }
 ```
 
-Once the service class exists, you can register it as a component on your primary plugin class by calling [setComponents()](api:yii\di\ServiceLocator::setComponents()) from its [init()](api:yii\base\BaseObject::init()) method:
+Once the service class exists, you can register it as a component on your primary plugin class by calling [setComponents()](yii2:yii\di\ServiceLocator::setComponents()) from its [init()](yii2:yii\base\BaseObject::init()) method:
 
 ```php
 public function init()
@@ -66,13 +66,13 @@ Many service methods perform some sort of operation for a given model, such as a
 
 There are two common types of model operation methods in Craft:
 
-1. Methods that accept a *specific model class* (e.g. <api:craft\services\Categories::saveGroup()>, which saves a category group represented by the given <api:craft\models\CategoryGroup> model). We call these **class-oriented methods**.
+1. Methods that accept a *specific model class* (e.g. <api3:craft\services\Categories::saveGroup()>, which saves a category group represented by the given <api3:craft\models\CategoryGroup> model). We call these **class-oriented methods**.
 
-2. Methods that accept any class so long as it implements an *interface* (e.g. <api:craft\services\Fields::deleteField()>, which deletes a field represented by the given <api:craft\base\FieldInterface> instance, regardless of its actual class). We call these **interface-oriented methods**.
+2. Methods that accept any class so long as it implements an *interface* (e.g. <api3:craft\services\Fields::deleteField()>, which deletes a field represented by the given <api3:craft\base\FieldInterface> instance, regardless of its actual class). We call these **interface-oriented methods**.
 
 Both types of methods should follow the same general control flow, with one difference: interface-oriented methods should trigger callback methods on the model before and after the action is performed, giving the model a chance to run its own custom logic.
 
-Here’s an example: <api:craft\services\Elements::saveElement()> will call `beforeSave()` and `afterSave()` methods on the element model before and after it saves a record of the element to the `elements` database table. Entry elements (<api:craft\elements\Entry>) use their `afterSave()` method as an opportunity to save a row in the entry-specific `entries` database table.
+Here’s an example: <api3:craft\services\Elements::saveElement()> will call `beforeSave()` and `afterSave()` methods on the element model before and after it saves a record of the element to the `elements` database table. Entry elements (<api3:craft\elements\Entry>) use their `afterSave()` method as an opportunity to save a row in the entry-specific `entries` database table.
 
 ### Class-Oriented Methods
 

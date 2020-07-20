@@ -79,7 +79,7 @@ The `actionUrl()` function has the following arguments:
 
 ## `alias`
 
-Passes a string through [Craft::getAlias()](api:yii\BaseYii::getAlias()), which will check if the string begins with an [alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases). (See [Configuration](../config/README.md#aliases) for more info.)
+Passes a string through [Craft::getAlias()](yii2:yii\BaseYii::getAlias()), which will check if the string begins with an [alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases). (See [Configuration](../config/README.md#aliases) for more info.)
 
 ```twig
 <img src="{{ alias('@assetBaseUrl/images/logo.png') }}">
@@ -87,7 +87,7 @@ Passes a string through [Craft::getAlias()](api:yii\BaseYii::getAlias()), which 
 
 ## `attr`
 
-Generates a list of HTML attributes based on the given [hash](twig-primer.md#hashes), using <api:yii\helpers\BaseHtml::renderTagAttributes()>.
+Generates a list of HTML attributes based on the given [hash](twig-primer.md#hashes), using <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
 
 ```twig
 {% set myAttributes = {
@@ -174,7 +174,7 @@ This works identically to Twig’s core [`constant`](https://twig.symfony.com/do
 
 ## `create`
 
-Creates a new object instance based on a given class name or object configuration. See <api:Yii::createObject()> for a full explanation of supported arguments.
+Creates a new object instance based on a given class name or object configuration. See <api3:Yii::createObject()> for a full explanation of supported arguments.
 
 ```twig
 {# Pass in a class name #}
@@ -235,7 +235,7 @@ Outputs any scripts and styles that were registered for the “end body” posit
 
 ## `expression`
 
-Creates and returns a new <api:yii\db\Expression> object, for use in database queries.
+Creates and returns a new <yii2:yii\db\Expression> object, for use in database queries.
 
 ```twig
 {% set entries = craft.entries()
@@ -466,7 +466,7 @@ You can pass the following things into it:
   {{ svg('@webroot/icons/lemon.svg') }}
   ```
 
-- A <api:craft\elements\Asset> object, such as one pulled in from an [Assets field](../assets-fields.md).
+- A <api3:craft\elements\Asset> object, such as one pulled in from an [Assets field](../assets-fields.md).
 
   ```twig
   {% set image = entry.myAssetsField.one() %}
@@ -529,7 +529,7 @@ If `html` is included in the attributes argument (and `text` isn’t), its value
 {# Output: <div>Hello<br>world</div> #}
 ```
 
-All other keys passed to the second argument will be set as attributes on the tag, using <api:yii\helpers\BaseHtml::renderTagAttributes()>.
+All other keys passed to the second argument will be set as attributes on the tag, using <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
 
 ## `url`
 

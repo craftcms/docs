@@ -48,7 +48,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$actionTrigger](api:craft\config\GeneralConfig::$actionTrigger)
+:   [GeneralConfig::$actionTrigger](api3:craft\config\GeneralConfig::$actionTrigger)
 
 
 
@@ -69,7 +69,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$activateAccountSuccessPath](api:craft\config\GeneralConfig::$activateAccountSuccessPath)
+:   [GeneralConfig::$activateAccountSuccessPath](api3:craft\config\GeneralConfig::$activateAccountSuccessPath)
 
 
 
@@ -91,7 +91,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$addTrailingSlashesToUrls](api:craft\config\GeneralConfig::$addTrailingSlashesToUrls)
+:   [GeneralConfig::$addTrailingSlashesToUrls](api3:craft\config\GeneralConfig::$addTrailingSlashesToUrls)
 
 
 
@@ -111,7 +111,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$aliases](api:craft\config\GeneralConfig::$aliases)
+:   [GeneralConfig::$aliases](api3:craft\config\GeneralConfig::$aliases)
 
 
 
@@ -131,7 +131,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$allowAdminChanges](api:craft\config\GeneralConfig::$allowAdminChanges)
+:   [GeneralConfig::$allowAdminChanges](api3:craft\config\GeneralConfig::$allowAdminChanges)
 
 Since
 
@@ -165,7 +165,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$allowSimilarTags](api:craft\config\GeneralConfig::$allowSimilarTags)
+:   [GeneralConfig::$allowSimilarTags](api3:craft\config\GeneralConfig::$allowSimilarTags)
 
 
 
@@ -185,7 +185,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$allowUpdates](api:craft\config\GeneralConfig::$allowUpdates)
+:   [GeneralConfig::$allowUpdates](api3:craft\config\GeneralConfig::$allowUpdates)
 
 
 
@@ -207,7 +207,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$allowUppercaseInSlug](api:craft\config\GeneralConfig::$allowUppercaseInSlug)
+:   [GeneralConfig::$allowUppercaseInSlug](api3:craft\config\GeneralConfig::$allowUppercaseInSlug)
 
 
 
@@ -227,7 +227,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$allowedFileExtensions](api:craft\config\GeneralConfig::$allowedFileExtensions)
+:   [GeneralConfig::$allowedFileExtensions](api3:craft\config\GeneralConfig::$allowedFileExtensions)
 
 
 
@@ -247,7 +247,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$allowedGraphqlOrigins](api:craft\config\GeneralConfig::$allowedGraphqlOrigins)
+:   [GeneralConfig::$allowedGraphqlOrigins](api3:craft\config\GeneralConfig::$allowedGraphqlOrigins)
 
 Since
 
@@ -278,7 +278,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$autoLoginAfterAccountActivation](api:craft\config\GeneralConfig::$autoLoginAfterAccountActivation)
+:   [GeneralConfig::$autoLoginAfterAccountActivation](api3:craft\config\GeneralConfig::$autoLoginAfterAccountActivation)
 
 
 
@@ -299,7 +299,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$backupCommand](api:craft\config\GeneralConfig::$backupCommand)
+:   [GeneralConfig::$backupCommand](api3:craft\config\GeneralConfig::$backupCommand)
 
 
 
@@ -333,7 +333,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$backupOnUpdate](api:craft\config\GeneralConfig::$backupOnUpdate)
+:   [GeneralConfig::$backupOnUpdate](api3:craft\config\GeneralConfig::$backupOnUpdate)
 
 
 
@@ -353,7 +353,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$baseCpUrl](api:craft\config\GeneralConfig::$baseCpUrl)
+:   [GeneralConfig::$baseCpUrl](api3:craft\config\GeneralConfig::$baseCpUrl)
 
 
 
@@ -379,7 +379,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$blowfishHashCost](api:craft\config\GeneralConfig::$blowfishHashCost)
+:   [GeneralConfig::$blowfishHashCost](api3:craft\config\GeneralConfig::$blowfishHashCost)
 
 
 
@@ -407,7 +407,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$brokenImagePath](api:craft\config\GeneralConfig::$brokenImagePath)
+:   [GeneralConfig::$brokenImagePath](api3:craft\config\GeneralConfig::$brokenImagePath)
 
 Since
 
@@ -434,7 +434,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$cacheDuration](api:craft\config\GeneralConfig::$cacheDuration)
+:   [GeneralConfig::$cacheDuration](api3:craft\config\GeneralConfig::$cacheDuration)
 
 
 
@@ -458,7 +458,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$cacheElementQueries](api:craft\config\GeneralConfig::$cacheElementQueries)
+:   [GeneralConfig::$cacheElementQueries](api3:craft\config\GeneralConfig::$cacheElementQueries)
 
 
 
@@ -478,7 +478,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$convertFilenamesToAscii](api:craft\config\GeneralConfig::$convertFilenamesToAscii)
+:   [GeneralConfig::$convertFilenamesToAscii](api3:craft\config\GeneralConfig::$convertFilenamesToAscii)
 
 
 
@@ -502,7 +502,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$cooldownDuration](api:craft\config\GeneralConfig::$cooldownDuration)
+:   [GeneralConfig::$cooldownDuration](api3:craft\config\GeneralConfig::$cooldownDuration)
 
 
 
@@ -527,7 +527,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$cpHeadTags](api:craft\config\GeneralConfig::$cpHeadTags)
+:   [GeneralConfig::$cpHeadTags](api3:craft\config\GeneralConfig::$cpHeadTags)
 
 Since
 
@@ -568,7 +568,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$cpTrigger](api:craft\config\GeneralConfig::$cpTrigger)
+:   [GeneralConfig::$cpTrigger](api3:craft\config\GeneralConfig::$cpTrigger)
 
 
 
@@ -604,7 +604,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$csrfTokenName](api:craft\config\GeneralConfig::$csrfTokenName)
+:   [GeneralConfig::$csrfTokenName](api3:craft\config\GeneralConfig::$csrfTokenName)
 
 
 
@@ -624,7 +624,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$defaultCookieDomain](api:craft\config\GeneralConfig::$defaultCookieDomain)
+:   [GeneralConfig::$defaultCookieDomain](api3:craft\config\GeneralConfig::$defaultCookieDomain)
 
 
 
@@ -646,7 +646,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$defaultCpLanguage](api:craft\config\GeneralConfig::$defaultCpLanguage)
+:   [GeneralConfig::$defaultCpLanguage](api3:craft\config\GeneralConfig::$defaultCpLanguage)
 
 
 
@@ -666,7 +666,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$defaultDirMode](api:craft\config\GeneralConfig::$defaultDirMode)
+:   [GeneralConfig::$defaultDirMode](api3:craft\config\GeneralConfig::$defaultDirMode)
 
 
 
@@ -688,7 +688,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$defaultFileMode](api:craft\config\GeneralConfig::$defaultFileMode)
+:   [GeneralConfig::$defaultFileMode](api3:craft\config\GeneralConfig::$defaultFileMode)
 
 
 
@@ -710,7 +710,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$defaultImageQuality](api:craft\config\GeneralConfig::$defaultImageQuality)
+:   [GeneralConfig::$defaultImageQuality](api3:craft\config\GeneralConfig::$defaultImageQuality)
 
 
 
@@ -731,7 +731,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$defaultSearchTermOptions](api:craft\config\GeneralConfig::$defaultSearchTermOptions)
+:   [GeneralConfig::$defaultSearchTermOptions](api3:craft\config\GeneralConfig::$defaultSearchTermOptions)
 
 
 
@@ -759,7 +759,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$defaultTemplateExtensions](api:craft\config\GeneralConfig::$defaultTemplateExtensions)
+:   [GeneralConfig::$defaultTemplateExtensions](api3:craft\config\GeneralConfig::$defaultTemplateExtensions)
 
 
 
@@ -779,7 +779,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$defaultTokenDuration](api:craft\config\GeneralConfig::$defaultTokenDuration)
+:   [GeneralConfig::$defaultTokenDuration](api3:craft\config\GeneralConfig::$defaultTokenDuration)
 
 
 
@@ -801,7 +801,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$defaultWeekStartDay](api:craft\config\GeneralConfig::$defaultWeekStartDay)
+:   [GeneralConfig::$defaultWeekStartDay](api3:craft\config\GeneralConfig::$defaultWeekStartDay)
 
 
 
@@ -831,7 +831,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$deferPublicRegistrationPassword](api:craft\config\GeneralConfig::$deferPublicRegistrationPassword)
+:   [GeneralConfig::$deferPublicRegistrationPassword](api3:craft\config\GeneralConfig::$deferPublicRegistrationPassword)
 
 
 
@@ -856,7 +856,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$devMode](api:craft\config\GeneralConfig::$devMode)
+:   [GeneralConfig::$devMode](api3:craft\config\GeneralConfig::$devMode)
 
 
 
@@ -876,7 +876,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$disabledPlugins](api:craft\config\GeneralConfig::$disabledPlugins)
+:   [GeneralConfig::$disabledPlugins](api3:craft\config\GeneralConfig::$disabledPlugins)
 
 Since
 
@@ -906,7 +906,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$elevatedSessionDuration](api:craft\config\GeneralConfig::$elevatedSessionDuration)
+:   [GeneralConfig::$elevatedSessionDuration](api3:craft\config\GeneralConfig::$elevatedSessionDuration)
 
 
 
@@ -930,7 +930,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$enableCsrfCookie](api:craft\config\GeneralConfig::$enableCsrfCookie)
+:   [GeneralConfig::$enableCsrfCookie](api3:craft\config\GeneralConfig::$enableCsrfCookie)
 
 
 
@@ -953,7 +953,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$enableCsrfProtection](api:craft\config\GeneralConfig::$enableCsrfProtection)
+:   [GeneralConfig::$enableCsrfProtection](api3:craft\config\GeneralConfig::$enableCsrfProtection)
 
 
 
@@ -973,7 +973,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$enableGql](api:craft\config\GeneralConfig::$enableGql)
+:   [GeneralConfig::$enableGql](api3:craft\config\GeneralConfig::$enableGql)
 
 Since
 
@@ -999,7 +999,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$enableGraphQlCaching](api:craft\config\GeneralConfig::$enableGraphQlCaching)
+:   [GeneralConfig::$enableGraphQlCaching](api3:craft\config\GeneralConfig::$enableGraphQlCaching)
 
 Since
 
@@ -1029,7 +1029,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$enableTemplateCaching](api:craft\config\GeneralConfig::$enableTemplateCaching)
+:   [GeneralConfig::$enableTemplateCaching](api3:craft\config\GeneralConfig::$enableTemplateCaching)
 
 
 
@@ -1049,7 +1049,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$errorTemplatePrefix](api:craft\config\GeneralConfig::$errorTemplatePrefix)
+:   [GeneralConfig::$errorTemplatePrefix](api3:craft\config\GeneralConfig::$errorTemplatePrefix)
 
 
 
@@ -1072,7 +1072,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$extraAllowedFileExtensions](api:craft\config\GeneralConfig::$extraAllowedFileExtensions)
+:   [GeneralConfig::$extraAllowedFileExtensions](api3:craft\config\GeneralConfig::$extraAllowedFileExtensions)
 
 
 
@@ -1092,7 +1092,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$extraAppLocales](api:craft\config\GeneralConfig::$extraAppLocales)
+:   [GeneralConfig::$extraAppLocales](api3:craft\config\GeneralConfig::$extraAppLocales)
 
 Since
 
@@ -1119,7 +1119,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$extraFileKinds](api:craft\config\GeneralConfig::$extraFileKinds)
+:   [GeneralConfig::$extraFileKinds](api3:craft\config\GeneralConfig::$extraFileKinds)
 
 Since
 
@@ -1163,7 +1163,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$filenameWordSeparator](api:craft\config\GeneralConfig::$filenameWordSeparator)
+:   [GeneralConfig::$filenameWordSeparator](api3:craft\config\GeneralConfig::$filenameWordSeparator)
 
 
 
@@ -1183,7 +1183,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$generateTransformsBeforePageLoad](api:craft\config\GeneralConfig::$generateTransformsBeforePageLoad)
+:   [GeneralConfig::$generateTransformsBeforePageLoad](api3:craft\config\GeneralConfig::$generateTransformsBeforePageLoad)
 
 
 
@@ -1203,7 +1203,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$headlessMode](api:craft\config\GeneralConfig::$headlessMode)
+:   [GeneralConfig::$headlessMode](api3:craft\config\GeneralConfig::$headlessMode)
 
 Since
 
@@ -1239,7 +1239,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$imageDriver](api:craft\config\GeneralConfig::$imageDriver)
+:   [GeneralConfig::$imageDriver](api3:craft\config\GeneralConfig::$imageDriver)
 
 
 
@@ -1260,7 +1260,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$indexTemplateFilenames](api:craft\config\GeneralConfig::$indexTemplateFilenames)
+:   [GeneralConfig::$indexTemplateFilenames](api3:craft\config\GeneralConfig::$indexTemplateFilenames)
 
 
 
@@ -1281,7 +1281,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$invalidLoginWindowDuration](api:craft\config\GeneralConfig::$invalidLoginWindowDuration)
+:   [GeneralConfig::$invalidLoginWindowDuration](api3:craft\config\GeneralConfig::$invalidLoginWindowDuration)
 
 
 
@@ -1303,7 +1303,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$invalidUserTokenPath](api:craft\config\GeneralConfig::$invalidUserTokenPath)
+:   [GeneralConfig::$invalidUserTokenPath](api3:craft\config\GeneralConfig::$invalidUserTokenPath)
 
 
 
@@ -1326,7 +1326,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$ipHeaders](api:craft\config\GeneralConfig::$ipHeaders)
+:   [GeneralConfig::$ipHeaders](api3:craft\config\GeneralConfig::$ipHeaders)
 
 
 
@@ -1350,7 +1350,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$isSystemLive](api:craft\config\GeneralConfig::$isSystemLive)
+:   [GeneralConfig::$isSystemLive](api3:craft\config\GeneralConfig::$isSystemLive)
 
 
 
@@ -1371,7 +1371,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$limitAutoSlugsToAscii](api:craft\config\GeneralConfig::$limitAutoSlugsToAscii)
+:   [GeneralConfig::$limitAutoSlugsToAscii](api3:craft\config\GeneralConfig::$limitAutoSlugsToAscii)
 
 
 
@@ -1395,7 +1395,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$loginPath](api:craft\config\GeneralConfig::$loginPath)
+:   [GeneralConfig::$loginPath](api3:craft\config\GeneralConfig::$loginPath)
 
 
 
@@ -1419,7 +1419,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$logoutPath](api:craft\config\GeneralConfig::$logoutPath)
+:   [GeneralConfig::$logoutPath](api3:craft\config\GeneralConfig::$logoutPath)
 
 
 
@@ -1443,7 +1443,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$maxBackups](api:craft\config\GeneralConfig::$maxBackups)
+:   [GeneralConfig::$maxBackups](api3:craft\config\GeneralConfig::$maxBackups)
 
 
 
@@ -1464,7 +1464,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$maxCachedCloudImageSize](api:craft\config\GeneralConfig::$maxCachedCloudImageSize)
+:   [GeneralConfig::$maxCachedCloudImageSize](api3:craft\config\GeneralConfig::$maxCachedCloudImageSize)
 
 
 
@@ -1485,7 +1485,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$maxInvalidLogins](api:craft\config\GeneralConfig::$maxInvalidLogins)
+:   [GeneralConfig::$maxInvalidLogins](api3:craft\config\GeneralConfig::$maxInvalidLogins)
 
 
 
@@ -1506,7 +1506,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$maxRevisions](api:craft\config\GeneralConfig::$maxRevisions)
+:   [GeneralConfig::$maxRevisions](api3:craft\config\GeneralConfig::$maxRevisions)
 
 Since
 
@@ -1532,7 +1532,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$maxSlugIncrement](api:craft\config\GeneralConfig::$maxSlugIncrement)
+:   [GeneralConfig::$maxSlugIncrement](api3:craft\config\GeneralConfig::$maxSlugIncrement)
 
 
 
@@ -1552,7 +1552,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$maxUploadFileSize](api:craft\config\GeneralConfig::$maxUploadFileSize)
+:   [GeneralConfig::$maxUploadFileSize](api3:craft\config\GeneralConfig::$maxUploadFileSize)
 
 
 
@@ -1574,7 +1574,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$omitScriptNameInUrls](api:craft\config\GeneralConfig::$omitScriptNameInUrls)
+:   [GeneralConfig::$omitScriptNameInUrls](api3:craft\config\GeneralConfig::$omitScriptNameInUrls)
 
 
 
@@ -1604,7 +1604,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$optimizeImageFilesize](api:craft\config\GeneralConfig::$optimizeImageFilesize)
+:   [GeneralConfig::$optimizeImageFilesize](api3:craft\config\GeneralConfig::$optimizeImageFilesize)
 
 
 
@@ -1625,7 +1625,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$pageTrigger](api:craft\config\GeneralConfig::$pageTrigger)
+:   [GeneralConfig::$pageTrigger](api3:craft\config\GeneralConfig::$pageTrigger)
 
 
 
@@ -1659,7 +1659,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$pathParam](api:craft\config\GeneralConfig::$pathParam)
+:   [GeneralConfig::$pathParam](api3:craft\config\GeneralConfig::$pathParam)
 
 
 
@@ -1685,7 +1685,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$phpMaxMemoryLimit](api:craft\config\GeneralConfig::$phpMaxMemoryLimit)
+:   [GeneralConfig::$phpMaxMemoryLimit](api3:craft\config\GeneralConfig::$phpMaxMemoryLimit)
 
 
 
@@ -1708,7 +1708,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$phpSessionName](api:craft\config\GeneralConfig::$phpSessionName)
+:   [GeneralConfig::$phpSessionName](api3:craft\config\GeneralConfig::$phpSessionName)
 
 
 
@@ -1728,7 +1728,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$postCpLoginRedirect](api:craft\config\GeneralConfig::$postCpLoginRedirect)
+:   [GeneralConfig::$postCpLoginRedirect](api3:craft\config\GeneralConfig::$postCpLoginRedirect)
 
 
 
@@ -1753,7 +1753,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$postLoginRedirect](api:craft\config\GeneralConfig::$postLoginRedirect)
+:   [GeneralConfig::$postLoginRedirect](api3:craft\config\GeneralConfig::$postLoginRedirect)
 
 
 
@@ -1778,7 +1778,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$postLogoutRedirect](api:craft\config\GeneralConfig::$postLogoutRedirect)
+:   [GeneralConfig::$postLogoutRedirect](api3:craft\config\GeneralConfig::$postLogoutRedirect)
 
 
 
@@ -1800,7 +1800,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$preserveCmykColorspace](api:craft\config\GeneralConfig::$preserveCmykColorspace)
+:   [GeneralConfig::$preserveCmykColorspace](api3:craft\config\GeneralConfig::$preserveCmykColorspace)
 
 Since
 
@@ -1827,7 +1827,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$preserveExifData](api:craft\config\GeneralConfig::$preserveExifData)
+:   [GeneralConfig::$preserveExifData](api3:craft\config\GeneralConfig::$preserveExifData)
 
 
 
@@ -1851,7 +1851,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$preserveImageColorProfiles](api:craft\config\GeneralConfig::$preserveImageColorProfiles)
+:   [GeneralConfig::$preserveImageColorProfiles](api3:craft\config\GeneralConfig::$preserveImageColorProfiles)
 
 
 
@@ -1874,7 +1874,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$preventUserEnumeration](api:craft\config\GeneralConfig::$preventUserEnumeration)
+:   [GeneralConfig::$preventUserEnumeration](api3:craft\config\GeneralConfig::$preventUserEnumeration)
 
 
 
@@ -1897,7 +1897,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$privateTemplateTrigger](api:craft\config\GeneralConfig::$privateTemplateTrigger)
+:   [GeneralConfig::$privateTemplateTrigger](api3:craft\config\GeneralConfig::$privateTemplateTrigger)
 
 
 
@@ -1920,7 +1920,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$purgePendingUsersDuration](api:craft\config\GeneralConfig::$purgePendingUsersDuration)
+:   [GeneralConfig::$purgePendingUsersDuration](api3:craft\config\GeneralConfig::$purgePendingUsersDuration)
 
 
 
@@ -1946,7 +1946,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$purgeStaleUserSessionDuration](api:craft\config\GeneralConfig::$purgeStaleUserSessionDuration)
+:   [GeneralConfig::$purgeStaleUserSessionDuration](api3:craft\config\GeneralConfig::$purgeStaleUserSessionDuration)
 
 Since
 
@@ -1974,7 +1974,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$purgeUnsavedDraftsDuration](api:craft\config\GeneralConfig::$purgeUnsavedDraftsDuration)
+:   [GeneralConfig::$purgeUnsavedDraftsDuration](api3:craft\config\GeneralConfig::$purgeUnsavedDraftsDuration)
 
 Since
 
@@ -2002,7 +2002,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$rememberUsernameDuration](api:craft\config\GeneralConfig::$rememberUsernameDuration)
+:   [GeneralConfig::$rememberUsernameDuration](api3:craft\config\GeneralConfig::$rememberUsernameDuration)
 
 
 
@@ -2026,7 +2026,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$rememberedUserSessionDuration](api:craft\config\GeneralConfig::$rememberedUserSessionDuration)
+:   [GeneralConfig::$rememberedUserSessionDuration](api3:craft\config\GeneralConfig::$rememberedUserSessionDuration)
 
 
 
@@ -2050,7 +2050,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$requireMatchingUserAgentForSession](api:craft\config\GeneralConfig::$requireMatchingUserAgentForSession)
+:   [GeneralConfig::$requireMatchingUserAgentForSession](api3:craft\config\GeneralConfig::$requireMatchingUserAgentForSession)
 
 
 
@@ -2070,7 +2070,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$requireUserAgentAndIpForSession](api:craft\config\GeneralConfig::$requireUserAgentAndIpForSession)
+:   [GeneralConfig::$requireUserAgentAndIpForSession](api3:craft\config\GeneralConfig::$requireUserAgentAndIpForSession)
 
 
 
@@ -2091,7 +2091,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$resourceBasePath](api:craft\config\GeneralConfig::$resourceBasePath)
+:   [GeneralConfig::$resourceBasePath](api3:craft\config\GeneralConfig::$resourceBasePath)
 
 
 
@@ -2111,7 +2111,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$resourceBaseUrl](api:craft\config\GeneralConfig::$resourceBaseUrl)
+:   [GeneralConfig::$resourceBaseUrl](api3:craft\config\GeneralConfig::$resourceBaseUrl)
 
 
 
@@ -2131,7 +2131,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$restoreCommand](api:craft\config\GeneralConfig::$restoreCommand)
+:   [GeneralConfig::$restoreCommand](api3:craft\config\GeneralConfig::$restoreCommand)
 
 
 
@@ -2165,7 +2165,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$rotateImagesOnUploadByExifData](api:craft\config\GeneralConfig::$rotateImagesOnUploadByExifData)
+:   [GeneralConfig::$rotateImagesOnUploadByExifData](api3:craft\config\GeneralConfig::$rotateImagesOnUploadByExifData)
 
 
 
@@ -2185,7 +2185,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$runQueueAutomatically](api:craft\config\GeneralConfig::$runQueueAutomatically)
+:   [GeneralConfig::$runQueueAutomatically](api3:craft\config\GeneralConfig::$runQueueAutomatically)
 
 
 
@@ -2218,7 +2218,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$sameSiteCookieValue](api:craft\config\GeneralConfig::$sameSiteCookieValue)
+:   [GeneralConfig::$sameSiteCookieValue](api3:craft\config\GeneralConfig::$sameSiteCookieValue)
 
 Since
 
@@ -2248,7 +2248,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$sanitizeSvgUploads](api:craft\config\GeneralConfig::$sanitizeSvgUploads)
+:   [GeneralConfig::$sanitizeSvgUploads](api3:craft\config\GeneralConfig::$sanitizeSvgUploads)
 
 
 
@@ -2270,7 +2270,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$secureHeaders](api:craft\config\GeneralConfig::$secureHeaders)
+:   [GeneralConfig::$secureHeaders](api3:craft\config\GeneralConfig::$secureHeaders)
 
 
 
@@ -2294,7 +2294,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$secureProtocolHeaders](api:craft\config\GeneralConfig::$secureProtocolHeaders)
+:   [GeneralConfig::$secureProtocolHeaders](api3:craft\config\GeneralConfig::$secureProtocolHeaders)
 
 
 
@@ -2318,12 +2318,12 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$securityKey](api:craft\config\GeneralConfig::$securityKey)
+:   [GeneralConfig::$securityKey](api3:craft\config\GeneralConfig::$securityKey)
 
 
 
 A private, random, cryptographically-secure key that is used for hashing and encrypting
-data in [craft\services\Security](api:craft\services\Security).
+data in [craft\services\Security](api3:craft\services\Security).
 
 This value should be the same across all environments. Note that if this key ever changes, any data that
 was encrypted with it will be inaccessible.
@@ -2342,7 +2342,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$sendPoweredByHeader](api:craft\config\GeneralConfig::$sendPoweredByHeader)
+:   [GeneralConfig::$sendPoweredByHeader](api3:craft\config\GeneralConfig::$sendPoweredByHeader)
 
 
 
@@ -2362,7 +2362,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$setPasswordPath](api:craft\config\GeneralConfig::$setPasswordPath)
+:   [GeneralConfig::$setPasswordPath](api3:craft\config\GeneralConfig::$setPasswordPath)
 
 
 
@@ -2388,7 +2388,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$setPasswordSuccessPath](api:craft\config\GeneralConfig::$setPasswordSuccessPath)
+:   [GeneralConfig::$setPasswordSuccessPath](api3:craft\config\GeneralConfig::$setPasswordSuccessPath)
 
 
 
@@ -2410,7 +2410,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$siteName](api:craft\config\GeneralConfig::$siteName)
+:   [GeneralConfig::$siteName](api3:craft\config\GeneralConfig::$siteName)
 
 
 
@@ -2432,7 +2432,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$siteToken](api:craft\config\GeneralConfig::$siteToken)
+:   [GeneralConfig::$siteToken](api3:craft\config\GeneralConfig::$siteToken)
 
 Since
 
@@ -2456,7 +2456,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$siteUrl](api:craft\config\GeneralConfig::$siteUrl)
+:   [GeneralConfig::$siteUrl](api3:craft\config\GeneralConfig::$siteUrl)
 
 
 
@@ -2487,7 +2487,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$slugWordSeparator](api:craft\config\GeneralConfig::$slugWordSeparator)
+:   [GeneralConfig::$slugWordSeparator](api3:craft\config\GeneralConfig::$slugWordSeparator)
 
 
 
@@ -2507,7 +2507,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$softDeleteDuration](api:craft\config\GeneralConfig::$softDeleteDuration)
+:   [GeneralConfig::$softDeleteDuration](api3:craft\config\GeneralConfig::$softDeleteDuration)
 
 Since
 
@@ -2535,7 +2535,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$storeUserIps](api:craft\config\GeneralConfig::$storeUserIps)
+:   [GeneralConfig::$storeUserIps](api3:craft\config\GeneralConfig::$storeUserIps)
 
 Since
 
@@ -2559,7 +2559,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$testToEmailAddress](api:craft\config\GeneralConfig::$testToEmailAddress)
+:   [GeneralConfig::$testToEmailAddress](api3:craft\config\GeneralConfig::$testToEmailAddress)
 
 
 
@@ -2582,7 +2582,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$timezone](api:craft\config\GeneralConfig::$timezone)
+:   [GeneralConfig::$timezone](api3:craft\config\GeneralConfig::$timezone)
 
 
 
@@ -2604,7 +2604,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$tokenParam](api:craft\config\GeneralConfig::$tokenParam)
+:   [GeneralConfig::$tokenParam](api3:craft\config\GeneralConfig::$tokenParam)
 
 
 
@@ -2624,7 +2624,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$transformGifs](api:craft\config\GeneralConfig::$transformGifs)
+:   [GeneralConfig::$transformGifs](api3:craft\config\GeneralConfig::$transformGifs)
 
 Since
 
@@ -2648,7 +2648,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$translationDebugOutput](api:craft\config\GeneralConfig::$translationDebugOutput)
+:   [GeneralConfig::$translationDebugOutput](api3:craft\config\GeneralConfig::$translationDebugOutput)
 
 
 
@@ -2669,7 +2669,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$trustedHosts](api:craft\config\GeneralConfig::$trustedHosts)
+:   [GeneralConfig::$trustedHosts](api3:craft\config\GeneralConfig::$trustedHosts)
 
 
 
@@ -2693,7 +2693,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$upscaleImages](api:craft\config\GeneralConfig::$upscaleImages)
+:   [GeneralConfig::$upscaleImages](api3:craft\config\GeneralConfig::$upscaleImages)
 
 Since
 
@@ -2717,7 +2717,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$useCompressedJs](api:craft\config\GeneralConfig::$useCompressedJs)
+:   [GeneralConfig::$useCompressedJs](api3:craft\config\GeneralConfig::$useCompressedJs)
 
 
 
@@ -2738,7 +2738,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$useEmailAsUsername](api:craft\config\GeneralConfig::$useEmailAsUsername)
+:   [GeneralConfig::$useEmailAsUsername](api3:craft\config\GeneralConfig::$useEmailAsUsername)
 
 
 
@@ -2758,7 +2758,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$useFileLocks](api:craft\config\GeneralConfig::$useFileLocks)
+:   [GeneralConfig::$useFileLocks](api3:craft\config\GeneralConfig::$useFileLocks)
 
 
 
@@ -2783,7 +2783,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$usePathInfo](api:craft\config\GeneralConfig::$usePathInfo)
+:   [GeneralConfig::$usePathInfo](api3:craft\config\GeneralConfig::$usePathInfo)
 
 
 
@@ -2805,7 +2805,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$useProjectConfigFile](api:craft\config\GeneralConfig::$useProjectConfigFile)
+:   [GeneralConfig::$useProjectConfigFile](api3:craft\config\GeneralConfig::$useProjectConfigFile)
 
 Since
 
@@ -2838,7 +2838,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$useSecureCookies](api:craft\config\GeneralConfig::$useSecureCookies)
+:   [GeneralConfig::$useSecureCookies](api3:craft\config\GeneralConfig::$useSecureCookies)
 
 
 
@@ -2862,7 +2862,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$useSslOnTokenizedUrls](api:craft\config\GeneralConfig::$useSslOnTokenizedUrls)
+:   [GeneralConfig::$useSslOnTokenizedUrls](api3:craft\config\GeneralConfig::$useSslOnTokenizedUrls)
 
 
 
@@ -2886,7 +2886,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$userSessionDuration](api:craft\config\GeneralConfig::$userSessionDuration)
+:   [GeneralConfig::$userSessionDuration](api3:craft\config\GeneralConfig::$userSessionDuration)
 
 
 
@@ -2911,7 +2911,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$verificationCodeDuration](api:craft\config\GeneralConfig::$verificationCodeDuration)
+:   [GeneralConfig::$verificationCodeDuration](api3:craft\config\GeneralConfig::$verificationCodeDuration)
 
 
 
@@ -2933,7 +2933,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$verifyEmailPath](api:craft\config\GeneralConfig::$verifyEmailPath)
+:   [GeneralConfig::$verifyEmailPath](api3:craft\config\GeneralConfig::$verifyEmailPath)
 
 Since
 
@@ -2959,7 +2959,7 @@ Default value
 
 Defined by
 
-:   [GeneralConfig::$verifyEmailSuccessPath](api:craft\config\GeneralConfig::$verifyEmailSuccessPath)
+:   [GeneralConfig::$verifyEmailSuccessPath](api3:craft\config\GeneralConfig::$verifyEmailSuccessPath)
 
 Since
 

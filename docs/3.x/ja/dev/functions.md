@@ -11,7 +11,7 @@
     {{ actionInput('users/save-user') }}<!-- ... --></form>
 ```
 
-その文字列が[エイリアス](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)ではじまるかをチェックする [Craft::getAlias()](api:yii\BaseYii::getAlias()) に、文字列を渡します。（詳細については、[コンフィギュレーション](../config/README.md#aliases)を参照してください。）
+その文字列が[エイリアス](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)ではじまるかをチェックする [Craft::getAlias()](yii2:yii\BaseYii::getAlias()) に、文字列を渡します。（詳細については、[コンフィギュレーション](../config/README.md#aliases)を参照してください。）
 
 ```twig
 <img src="{{ alias('@assetBaseUrl/images/logo.png') }}">
@@ -46,7 +46,7 @@
 
 ## `className( object )`
 
-与えられたクラス名やオブジェクト設定に基づいて新しいオブジェクトインスタンスを作成します。サポートされる引数の詳細については、<api:Yii::createObject()> を参照してください。
+与えられたクラス名やオブジェクト設定に基づいて新しいオブジェクトインスタンスを作成します。サポートされる引数の詳細については、<api3:Yii::createObject()> を参照してください。
 
 ```twig
 {% set query = craft.entries.section('news') %}
@@ -61,7 +61,7 @@
 
 ## `create( type )`
 
-データベースクエリで使用するための新しい <api:yii\db\Expression> オブジェクトを作成して返します。
+データベースクエリで使用するための新しい <yii2:yii\db\Expression> オブジェクトを作成して返します。
 
 ```twig
 {# Pass in a class name #}
@@ -359,7 +359,7 @@ You can pass the following things into it:
   {{ svg('@webroot/icons/lemon.svg') }}
   ```
 
-- A <api:craft\elements\Asset> object, such as one pulled in from an [Assets field](../assets-fields.md).
+- A <api3:craft\elements\Asset> object, such as one pulled in from an [Assets field](../assets-fields.md).
 
   ```twig
   {% set image = entry.myAssetsField.one() %}
@@ -422,7 +422,7 @@ If `html` is included in the attributes argument (and `text` isn’t), its value
 {# Output: <div>Hello<br>world</div> #}
 ```
 
-All other keys passed to the second argument will be set as attributes on the tag, using <api:yii\helpers\BaseHtml::renderTagAttributes()>.
+All other keys passed to the second argument will be set as attributes on the tag, using <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
 
 ## `template_from_string`
 

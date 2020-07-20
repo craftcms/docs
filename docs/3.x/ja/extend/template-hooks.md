@@ -7,7 +7,7 @@ Craft テンプレートでは、[hook](../dev/tags/hook.md) タグを使用し�
 {% hook 'my-custom-hook-name' %}
 ```
 
-プラグインやモジュールは <api:craft\web\View::hook()> を使用してテンプレートフックに呼び出されることで、メソッドを登録できます。
+プラグインやモジュールは <api3:craft\web\View::hook()> を使用してテンプレートフックに呼び出されることで、メソッドを登録できます。
 
 ```php
 Craft::$app->view->hook('my-custom-hook-name', function(array &$context) {

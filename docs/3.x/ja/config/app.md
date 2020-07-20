@@ -99,7 +99,7 @@ return [
 ```
 
 ::: tip
-`session` コンポーネントは、システムが依存するコンポーネントにメソッドを加える <api:craft\behaviors\SessionBehavior> ビヘイビアで設定**しなければなりません**。
+`session` コンポーネントは、システムが依存するコンポーネントにメソッドを加える <api3:craft\behaviors\SessionBehavior> ビヘイビアで設定**しなければなりません**。
 :::
 
 ## Mailer コンポーネント
@@ -139,7 +139,7 @@ return [
 
 ## Queue コンポーネント
 
-Craft のジョブキューは [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue) によって動いています。デフォルトでは、Craft はエクステンションの [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md) をベースとする [custom queue driver](api:craft\queue\Queue) を使用しますが、`config/app.php` から Craft の `queue` コンポーネントを上書きすることによって、別のドライバに切り替えることができます。
+Craft のジョブキューは [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue) によって動いています。デフォルトでは、Craft はエクステンションの [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md) をベースとする [custom queue driver](api3:craft\queue\Queue) を使用しますが、`config/app.php` から Craft の `queue` コンポーネントを上書きすることによって、別のドライバに切り替えることができます。
 
 ```php
 <?php
@@ -157,7 +157,7 @@ return [
 利用可能なドライバは、[Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide) に記載されています。
 
 ::: warning
-<api:craft\queue\QueueInterface> を実装しているドライバだけがコントロールパネル内に表示されます。
+<api3:craft\queue\QueueInterface> を実装しているドライバだけがコントロールパネル内に表示されます。
 :::
 
 ::: tip

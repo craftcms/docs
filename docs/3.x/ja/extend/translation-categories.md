@@ -6,7 +6,7 @@
 メッセージ変換がどのように機能するかの詳細については、[静的メッセージの翻訳](../static-translations.md)を参照してください。
 :::
 
-翻訳カテゴリは、 <api:yii\i18n\I18N::$translations> 配列に新しい翻訳ソースを加えることにより、プログラムで追加できます。
+翻訳カテゴリは、 <yii2:yii\i18n\I18N::$translations> 配列に新しい翻訳ソースを加えることにより、プログラムで追加できます。
 
 ```php
 use craft\i18n\PhpMessageSource;

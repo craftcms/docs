@@ -5,7 +5,7 @@ to Craft, which will be available via the `craft` executable in the terminal.
 
 Console commands are implemented very similarly to [controllers](controllers.md), except that they should live within
 a `console/controllers/` folder within your plugin or module’s base source folder, and they should extend
-<api:craft\console\Controller> (rather than <api:craft\web\Controller>).
+<api3:craft\console\Controller> (rather than <api3:craft\web\Controller>).
 
 ::: tip
 For the most part, writing console commands for Craft is identical to writing console commands for Yii, so be sure to
@@ -59,10 +59,10 @@ return [
 ## Registering Custom Console Commands
 
 You can register custom console commands on Craft’s own controllers, or plugin-supplied controllers, so long as
-they extend <api:craft\console\Controller>. For example, plugins that supply custom element types can add their own
-actions to the [resave](api:craft\console\controllers\ResaveController) controller.
+they extend <api3:craft\console\Controller>. For example, plugins that supply custom element types can add their own
+actions to the [resave](api3:craft\console\controllers\ResaveController) controller.
 
-To do that, use the <api:craft\console\Controller::EVENT_DEFINE_ACTIONS> event.
+To do that, use the <api3:craft\console\Controller::EVENT_DEFINE_ACTIONS> event.
 
 ```php
 use craft\events\DefineConsoleActionsEvent;

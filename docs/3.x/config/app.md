@@ -16,13 +16,13 @@ By default, Craft will store data caches in the `storage/runtime/cache/` folder.
 
 #### Database Cache Example
 
-If you want to store data caches in the database, first you will need to create a `cache` table as specified by <api:yii\caching\DbCache::$cacheTable>. Craft provides a CLI command for convenience:
+If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a CLI command for convenience:
 
 ```bash
 ./craft setup/db-cache-table
 ```
 
-Once that’s done, you can set your `cache` application component to use <api:craft\cache\DbCache>.
+Once that’s done, you can set your `cache` application component to use <api3:craft\cache\DbCache>.
 
 ```php
 <?php
@@ -34,7 +34,7 @@ return [
 ```
 
 ::: tip
-If you’ve already configured Craft to use <api:yii\caching\DbCache> rather than <api:craft\cache\DbCache>, you can safely switch to the latter if you remove your `cache` table’s `dateCreated`, `dateUpdated`, and `uid` columns.
+If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather than <api3:craft\cache\DbCache>, you can safely switch to the latter if you remove your `cache` table’s `dateCreated`, `dateUpdated`, and `uid` columns.
 :::
 
 #### APC Example
@@ -203,7 +203,7 @@ return [
 ```
 
 ::: tip
-The `session` component **must** be configured with the <api:craft\behaviors\SessionBehavior> behavior, which adds methods to the component that the system relies on.
+The `session` component **must** be configured with the <api3:craft\behaviors\SessionBehavior> behavior, which adds methods to the component that the system relies on.
 :::
 
 ## Mailer Component
@@ -243,7 +243,7 @@ Any changes you make to the Mailer component from `config/app.php` will not be r
 
 ## Queue Component
 
-Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default Craft will use a [custom queue driver](api:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md), but you can switch to a different driver by overriding Craft’s `queue` component from `config/app.php`:
+Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default Craft will use a [custom queue driver](api3:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md), but you can switch to a different driver by overriding Craft’s `queue` component from `config/app.php`:
 
 ```php
 <?php
@@ -261,7 +261,7 @@ return [
 Available drivers are listed in the [Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide).
 
 ::: warning
-Only drivers that implement <api:craft\queue\QueueInterface> will be visible within the control panel.
+Only drivers that implement <api3:craft\queue\QueueInterface> will be visible within the control panel.
 :::
 
 ::: tip

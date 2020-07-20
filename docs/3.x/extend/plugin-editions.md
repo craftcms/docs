@@ -12,7 +12,7 @@ Not every plugin can or should support editions. [Contact](https://craftcms.com/
 
 ## Define the Editions
 
-To add edition support to a plugin, begin by defining the available editions (in ascending order), by overriding <api:craft\base\Plugin::editions()>.
+To add edition support to a plugin, begin by defining the available editions (in ascending order), by overriding <api3:craft\base\Plugin::editions()>.
 
 ```php
 class Plugin extends \craft\base\Plugin;
@@ -34,7 +34,7 @@ class Plugin extends \craft\base\Plugin;
 
 ## Add Feature Toggles
 
-Your feature toggles can call your plugin’s [is()](api:craft\base\Plugin::is()) method.
+Your feature toggles can call your plugin’s [is()](api3:craft\base\Plugin::is()) method.
 
 ::: code
 

@@ -1,6 +1,6 @@
 # ユーザー権限
 
-モジュールとプラグインは、[EVENT_REGISTER_PERMISSIONS](api:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) イベントを使用して新しいユーザー権限をシステムに登録できます。
+モジュールとプラグインは、[EVENT_REGISTER_PERMISSIONS](api3:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) イベントを使用して新しいユーザー権限をシステムに登録できます。
 
 ```php
 use craft\events\RegisterUserPermissionsEvent;
@@ -40,7 +40,7 @@ public function init()
 
 ## 権限の要求
 
-コントローラーは、[requirePermission()](api:craft\web\Controller::requirePermission()) を呼び出すことで、ログインしているユーザー権限を持っていることを要求できます。
+コントローラーは、[requirePermission()](api3:craft\web\Controller::requirePermission()) を呼び出すことで、ログインしているユーザー権限を持っていることを要求できます。
 
 ```php
 public function actionStayUpLate()

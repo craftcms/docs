@@ -6,7 +6,7 @@ Modules and plugins can provide custom translation categories, for use by Yii’
 See [Static Message Translations](../static-translations.md) for more details on how message translations work.
 :::
 
-Translation categories can be added programmatically by adding a new translation source onto the <api:yii\i18n\I18N::$translations> array.
+Translation categories can be added programmatically by adding a new translation source onto the <yii2:yii\i18n\I18N::$translations> array.
 
 ```php
 use craft\i18n\PhpMessageSource;

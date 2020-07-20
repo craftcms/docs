@@ -4,7 +4,7 @@
 
 ## テンプレート記法
 
-テンプレート内でカラーフィルドを呼び出すと、 <api:craft\fields\data\ColorData> オブジェクトが返ります。カラーが選択されていなければ、 `null` を返します。
+テンプレート内でカラーフィルドを呼び出すと、 <api3:craft\fields\data\ColorData> オブジェクトが返ります。カラーが選択されていなければ、 `null` を返します。
 
 ```twig
 {% if entry.linkColor %}

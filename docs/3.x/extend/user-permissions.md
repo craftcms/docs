@@ -1,6 +1,6 @@
 # User Permissions
 
-Modules and plugins can register new user permissions to the system using the [EVENT_REGISTER_PERMISSIONS](api:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) event:
+Modules and plugins can register new user permissions to the system using the [EVENT_REGISTER_PERMISSIONS](api3:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) event:
 
 ```php
 use craft\events\RegisterUserPermissionsEvent;
@@ -40,7 +40,7 @@ Permissions can also have nested permissions by adding a `nested` key to the per
 
 ## Requiring Permissions
 
-Controllers can require that the logged-in user has a permission by calling [requirePermission()](api:craft\web\Controller::requirePermission()).
+Controllers can require that the logged-in user has a permission by calling [requirePermission()](api3:craft\web\Controller::requirePermission()).
 
 ```php
 public function actionStayUpLate()
@@ -60,7 +60,7 @@ Templates can also ensure that the user has a permission with the [requirePermis
 
 ## Checking Permissions
 
-You can check if the logged-in user has a permission by calling <api:craft\web\User::checkPermission()>:
+You can check if the logged-in user has a permission by calling <api3:craft\web\User::checkPermission()>:
 
 ```php
 // See if they have the `stayUpLate` permission
@@ -69,7 +69,7 @@ if (Craft::$app->user->checkPermission('stayUpLate')) {
 }
 ```
 
-You can also see if any given user has a permission by calling <api:craft\elements\User::can()>:
+You can also see if any given user has a permission by calling <api3:craft\elements\User::can()>:
 
 ```php
 /** @var \craft\elements\User $user */

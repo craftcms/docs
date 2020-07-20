@@ -38,27 +38,27 @@ If you have an element with a Radio Buttons field in your template, you can acce
 {% set value = entry.<FieldHandle> %}
 ```
 
-That will give you a <api:craft\fields\data\SingleOptionFieldData> object that contains the field data.
+That will give you a <api3:craft\fields\data\SingleOptionFieldData> object that contains the field data.
 
-To show the selected option, output it as a string, or output the [value](api:craft\fields\data\SingleOptionFieldData::$value) property:
+To show the selected option, output it as a string, or output the [value](api3:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ```twig
 {{ entry.<FieldHandle> }} or {{ entry.<FieldHandle>.value }}
 ```
 
-To see if an option is selected, use the [value](api:craft\fields\data\SingleOptionFieldData::$value) property:
+To see if an option is selected, use the [value](api3:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ```twig
 {% if entry.<FieldHandle>.value %}
 ```
 
-To show the selected option’s label, output the [label](api:craft\fields\data\SingleOptionFieldData::$label) property:
+To show the selected option’s label, output the [label](api3:craft\fields\data\SingleOptionFieldData::$label) property:
 
 ```twig
 {{ entry.<FieldHandle>.label }}
 ```
 
-To loop through all of the available options, iterate over the [options](api:craft\fields\data\SingleOptionFieldData::getOptions()) property:
+To loop through all of the available options, iterate over the [options](api3:craft\fields\data\SingleOptionFieldData::getOptions()) property:
 
 ```twig
 {% for option in entry.<FieldHandle>.options %}

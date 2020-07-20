@@ -12,7 +12,7 @@ To do that, Craft employs Yii’s [Message Translations](https://www.yiiframewor
 
 ## Prep Your Messages
 
-The first step is to run all of your static messages through the translator. If you’re working on a template, use the [translate](dev/filters.md#translate-or-t) filter (`|t`). If you’re working in PHP code, use [Craft::t()](api:yii\BaseYii::t()).
+The first step is to run all of your static messages through the translator. If you’re working on a template, use the [translate](dev/filters.md#translate-or-t) filter (`|t`). If you’re working in PHP code, use [Craft::t()](yii2:yii\BaseYii::t()).
 
 ::: code
 ```twig
@@ -72,7 +72,7 @@ return [
 ];
 ```
 
-To replace the placeholder values with dynamic values when translating the message, pass the `params` argument when using the [translate](dev/filters.md#translate-or-t) filter or calling [Craft::t()](api:yii\BaseYii::t()):
+To replace the placeholder values with dynamic values when translating the message, pass the `params` argument when using the [translate](dev/filters.md#translate-or-t) filter or calling [Craft::t()](yii2:yii\BaseYii::t()):
 
 ::: code
 ```twig

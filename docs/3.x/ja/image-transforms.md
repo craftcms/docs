@@ -48,7 +48,7 @@ If you leave **Quality** blank, Craft will use the quality set by your <config3:
 
 ### CP で定義された画像の変形を適用する
 
-トランスフォームを適用した画像を出力するには、トランスフォームのハンドルをアセットの [getUrl()](api:craft\elements\Asset::getUrl())、[getWidth()](api:craft\elements\Asset::getWidth())、および、[getHeight()](api:craft\elements\Asset::getHeight()) ファンクションに渡します。
+トランスフォームを適用した画像を出力するには、トランスフォームのハンドルをアセットの [getUrl()](api3:craft\elements\Asset::getUrl())、[getWidth()](api3:craft\elements\Asset::getWidth())、および、[getHeight()](api3:craft\elements\Asset::getHeight()) ファンクションに渡します。
 
 ```twig
 <img src="{{ asset.getUrl('thumb') }}" width="{{ asset.getWidth('thumb') }}" height="{{ asset.getHeight('thumb') }}">

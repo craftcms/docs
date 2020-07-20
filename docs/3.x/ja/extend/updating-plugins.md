@@ -82,16 +82,16 @@ Craft 3 では、コンポーネントタイプはモデルにとってあまり
 
 次のように動作します。
 
-- `getInputHtml()` のような必須のコンポーネントメソッドは、インターフェースによって定義されます（例：<api:craft\base\FieldInterface>）。
-- `$handle` のような共通プロパティは、trait によって定義されます（例：<api:craft\base\FieldTrait>）。
-- コンポーネントタイプのベース実装は、抽象的な基本クラスによって提供されます（例：<api:craft\base\Field>）。
-- 基本クラスは、様々なコンポーネントクラスによって拡張されます（例：<api:craft\fields\PlainText>）。
+- `getInputHtml()` のような必須のコンポーネントメソッドは、インターフェースによって定義されます（例：<api3:craft\base\FieldInterface>）。
+- `$handle` のような共通プロパティは、trait によって定義されます（例：<api3:craft\base\FieldTrait>）。
+- コンポーネントタイプのベース実装は、抽象的な基本クラスによって提供されます（例：<api3:craft\base\Field>）。
+- 基本クラスは、様々なコンポーネントクラスによって拡張されます（例：<api3:craft\fields\PlainText>）。
 
 
 
 ## 翻訳
 
-<api:Craft::t()> は、次の翻訳カテゴリのいずれかがセットされる `$category` 引数を必要とします。
+<api3:Craft::t()> は、次の翻訳カテゴリのいずれかがセットされる `$category` 引数を必要とします。
 
 - Yii の翻訳メッセージのための `yii`
 - Craft の翻訳メッセージのための `app`
@@ -125,7 +125,7 @@ Craft は、もはやデータベーステーブル接頭辞をテーブル名�
 
 ### SELECT クエリ
 
-SELECT クエリは、<api:craft\db\Query> クラスで定義されています。
+SELECT クエリは、<api3:craft\db\Query> クラスで定義されています。
 
 ```php
 use craft\db\Query;
@@ -139,7 +139,7 @@ $results = (new Query())
 
 ### 操作クエリ
 
-操作クエリは、Craft 2 の [`DbCommand`](https://docs.craftcms.com/api/v2/craft-dbcommand.html) クラスと同様に（ `Craft::$app->db->createCommand()` 経由でアクセスされる）<api:craft\db\Command> のヘルパーメソッドから構築できます。
+操作クエリは、Craft 2 の [`DbCommand`](https://docs.craftcms.com/api/v2/craft-dbcommand.html) クラスと同様に（ `Craft::$app->db->createCommand()` 経由でアクセスされる）<api3:craft\db\Command> のヘルパーメソッドから構築できます。
 
 1つの顕著な違いは、ヘルパーメソッドはもはや自動的にクエリを実行しません。そのため、`execute()` の呼び出しを連鎖させる必要があります。
 
@@ -169,7 +169,7 @@ $entries = Entry::find()
 
 ## Craft コンフィグ設定
 
-Craft のコンフィグ設定のすべては、`vendor/craftcms/cms/src/config/` にあるいくつかのコンフィグクラスの実際のプロパティに移動されました。新しいコンフィグサービス（<api:craft\services\Config>）は、それらのクラスを返すための Getter メソッド / プロパティを提供します。
+Craft のコンフィグ設定のすべては、`vendor/craftcms/cms/src/config/` にあるいくつかのコンフィグクラスの実際のプロパティに移動されました。新しいコンフィグサービス（<api3:craft\services\Config>）は、それらのクラスを返すための Getter メソッド / プロパティを提供します。
 
 ```php
 // Old:
@@ -183,8 +183,8 @@ $tablePrefix = Craft::$app->config->db->tablePrefix;
 
 ## ファイル
 
-- `IOHelper` は Yii の  <api:yii\helpers\BaseFileHelper> を拡張する <api:craft\helpers\FileHelper> で置き換えられました。
-- および <api:craft\services\Path> メソッドから返されるディレクトリパスには、スラッシュが含まれなくなりました。
+- `IOHelper` は Yii の  <yii2:yii\helpers\BaseFileHelper> を拡張する <api3:craft\helpers\FileHelper> で置き換えられました。
+- および <api3:craft\services\Path> メソッドから返されるディレクトリパスには、スラッシュが含まれなくなりました。
 - Craft のファイルシステムパスは、ハードコードされたスラッシュ（`/`）ではなく、（環境に依存して `/` または ``\` のどちらかがセットされる）PHP 定数の``DIRECTORY_SEPARATOR` を使用します。
 
 ## イベント
@@ -197,7 +197,7 @@ $component->onEventName = $callback;
 
 これは、コンポーネント上にイベントリスナーを直接登録します。
 
-Craft 3 / Yii 2 では、代わりに <api:yii\base\Component::on()> を使用します。
+Craft 3 / Yii 2 では、代わりに <yii2:yii\base\Component::on()> を使用します。
 
 ```php
 $component->on('eventName', $callback);
@@ -405,7 +405,7 @@ Event::on(SystemMessages::class, SystemMessages::EVENT_REGISTER_MESSAGES, functi
 ```
 
 ::: tip
-<api:Craft::t()> の呼び出し内で heading / subject / body の右側の完全なメッセージを定義するのではなく、プレースホルダ文字列（例：`'email_heading'`） を渡してプラグインの翻訳ファイルに実際の文字列を定義することもできます。
+<api3:Craft::t()> の呼び出し内で heading / subject / body の右側の完全なメッセージを定義するのではなく、プレースホルダ文字列（例：`'email_heading'`） を渡してプラグインの翻訳ファイルに実際の文字列を定義することもできます。
 :::
 
 #### `registerUserPermissions`
@@ -563,7 +563,7 @@ Event::on(Entry::class, Element::EVENT_SET_ROUTE, function(SetElementRouteEvent 
 
 次のフックのセットは、すべてのエレメントタイプで共有されている単一のイベントに結合されました。
 
-これらのそれぞれのために、（*すべての* エレメントタイプ向けにイベントリスナーを登録している）`yii\base\Event::on()` の第一引数に <api:craft\base\Element::class>、または（1つのエレメントタイプのためだけのイベントリスナーを登録している）特定のエレメントタイプのいずれかを渡すことができます。
+これらのそれぞれのために、（*すべての* エレメントタイプ向けにイベントリスナーを登録している）`yii\base\Event::on()` の第一引数に <api3:craft\base\Element::class>、または（1つのエレメントタイプのためだけのイベントリスナーを登録している）特定のエレメントタイプのいずれかを渡すことができます。
 
 #### `addEntryActions`, `addCategoryActions`, `addAssetActions`, & `addUserActions`
 
@@ -715,7 +715,7 @@ public function getTableAttributesForSource($elementType, $sourceKey)
 ```
 
 ::: warning
-NOTE エレメントインデックスがレンダリングされる前に、プラグインがエレメントタイプのテーブル属性を完全に変更することを許可するこのフックには、直接 Craft 3 で匹敵するものがありません。Craft 3 で最も近いのは、管理者がエレメントインデックスのソースをカスタマイズする際に、エレメントタイプの利用可能なテーブル属性を変更するために使用できる <api:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> イベントです。
+NOTE エレメントインデックスがレンダリングされる前に、プラグインがエレメントタイプのテーブル属性を完全に変更することを許可するこのフックには、直接 Craft 3 で匹敵するものがありません。Craft 3 で最も近いのは、管理者がエレメントインデックスのソースをカスタマイズする際に、エレメントタイプの利用可能なテーブル属性を変更するために使用できる <api3:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> イベントです。
 :::
 
 ## テンプレート変数

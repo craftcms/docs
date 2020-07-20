@@ -55,7 +55,7 @@ If you have an element with a Matrix field in your template, you can access its 
 
 That will give you a [Matrix block query](dev/element-queries/matrix-block-queries.md), prepped to output all of the enabled blocks for the given field.
 
-To loop through all of the blocks, call [all()](<api:craft\db\Query::all()>) and then loop over the results:
+To loop through all of the blocks, call [all()](<api3:craft\db\Query::all()>) and then loop over the results:
 
 ```twig
 {% set blocks = entry.<FieldHandle>.all() %}
@@ -68,9 +68,9 @@ To loop through all of the blocks, call [all()](<api:craft\db\Query::all()>) and
 {% endif %}
 ```
 
-All of the code you put within the for-loop will be repeated for each Matrix block in the field. The current block will get set to that `block` variable we’ve defined, and it will be a <api:craft\elements\MatrixBlock> model.
+All of the code you put within the for-loop will be repeated for each Matrix block in the field. The current block will get set to that `block` variable we’ve defined, and it will be a <api3:craft\elements\MatrixBlock> model.
 
-Here’s an example of what the template might look like for a Matrix field with four block types (Heading, Text, Image, and Quote). We can determine the current block type’s handle by checking `block.type` (<api:craft\elements\MatrixBlock::getType()>).
+Here’s an example of what the template might look like for a Matrix field with four block types (Heading, Text, Image, and Quote). We can determine the current block type’s handle by checking `block.type` (<api3:craft\elements\MatrixBlock::getType()>).
 
 ```twig
 {% for block in entry.<FieldHandle>.all() %}
@@ -96,7 +96,7 @@ Here’s an example of what the template might look like for a Matrix field with
 This code can be simplified using the [switch](dev/tags.md#switch) tag.
 :::
 
-If you only want the first block, call [one()](<api:craft\db\Query::one()>) instead of `all()`, and then make sure it returned something:
+If you only want the first block, call [one()](<api3:craft\db\Query::one()>) instead of `all()`, and then make sure it returned something:
 
 ```twig
 {% set block = entry.<FieldHandle>.one() %}
@@ -105,14 +105,14 @@ If you only want the first block, call [one()](<api:craft\db\Query::one()>) inst
 {% endif %}
 ```
 
-If you only want to know the total number of blocks, call [count()](<api:craft\db\Query::count()>).
+If you only want to know the total number of blocks, call [count()](<api3:craft\db\Query::count()>).
 
 ```twig
 {% set total = entry.<FieldHandle>.count() %}
 <p>Total blocks: <strong>{{ total }}</strong></p>
 ```
 
-If you just need to check if are blocks exist (but don’t need to fetch them), you can call [exists()](<api:craft\db\Query::exists()>):
+If you just need to check if are blocks exist (but don’t need to fetch them), you can call [exists()](<api3:craft\db\Query::exists()>):
 
 ```twig
 {% if entry.<FieldHandle>.exists() %}
@@ -224,4 +224,4 @@ Then define the form inputs for any additional blocks that should be appended to
 ## See Also
 
 - [Element Queries](dev/element-queries/README.md)
-- <api:craft\elements\MatrixBlock>
+- <api3:craft\elements\MatrixBlock>

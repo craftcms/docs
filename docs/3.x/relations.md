@@ -69,7 +69,7 @@ Assets, Categories, Entries, Users, and Tags each support a `relatedTo` paramete
 
 You can pass one of these things to it:
 
-- A single **element object**: <api:craft\elements\Asset>, <api:craft\elements\Category>, <api:craft\elements\Entry>, <api:craft\elements\User>, or <api:craft\elements\Tag>
+- A single **element object**: <api3:craft\elements\Asset>, <api3:craft\elements\Category>, <api3:craft\elements\Entry>, <api3:craft\elements\User>, or <api3:craft\elements\Tag>
 - A single **element ID**
 - A [**hash**](dev/twig-primer.md#hashes) with properties we’ll get into below: `element`, `sourceElement` or `targetElement` optionally with `field` and/or `sourceSite`
 - An [**array**](dev/twig-primer.md#arrays) containing any mixture of the above options, which can start with `and` for relations on all elements rather than _any_ elements (default behavior is `or`, which you can omit or pass explicitly)
@@ -114,7 +114,7 @@ You can query more specifically by passing `relatedTo` a [hash](dev/twig-primer.
 | -------- | -------- | ----------- | -- |
 | `element`, `sourceElement`, or `targetElement` | Element ID, element, [element query](dev/element-queries/), or an array with any of those. | Use `element` for source *or* target relations, `sourceElement` for relations where provided item/set is the source, or `targetElement` for relations where provided item/set is the target. |
 | `field` (optional) | Field handle, field ID, or an array with either of those. | Limits scope to relations created by the supplied field(s). |
-| `sourceSite` (optional) | [Site](api:craft\models\Site) object, site ID, or site handle. | Limits scope to relations created from the supplied site(s). |
+| `sourceSite` (optional) | [Site](api3:craft\models\Site) object, site ID, or site handle. | Limits scope to relations created from the supplied site(s). |
 
 ::: warning
 Only use `sourceSite` if you’ve designated your relational field to be translatable.

@@ -13,7 +13,7 @@ $myEntryQuery = \craft\elements\Entry::find();
 ```
 :::
 
-エレメントクエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、 `.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[Entry](api:craft\elements\Entry) オブジェクトの配列が返されます。
+エレメントクエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、 `.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[Entry](api3:craft\elements\Entry) オブジェクトの配列が返されます。
 
 ::: tip
 エレメントクエリがどのように機能するかについては、[エレメントクエリについて](README.md)を参照してください。
@@ -125,7 +125,7 @@ $entries = \craft\elements\Entry::find()
 | 値                                          | 取得するエントリ            |
 | ------------------------------------------ | ------------------- |
 | `1`                                        | ID が 1 のエントリの上層。    |
-| [Entry](api:craft\elements\Entry) オブジェクト | オブジェクトで表されるエントリの上層。 |
+| [Entry](api3:craft\elements\Entry) オブジェクト | オブジェクトで表されるエントリの上層。 |
 
 
 
@@ -179,7 +179,7 @@ $entries = \craft\elements\Entry::find()
 
 ### `asArray`
 
-[Entry](api:craft\elements\Entry) オブジェクトではなく、データの配列として、マッチしたエントリをクエリが返します。
+[Entry](api3:craft\elements\Entry) オブジェクトではなく、データの配列として、マッチしたエントリをクエリが返します。
 
 
 
@@ -214,7 +214,7 @@ $entries = \craft\elements\Entry::find()
 | `'not foo'`                                      | ハンドルが `foo` のグループ内の投稿者ではない。           |
 | `['foo', 'bar']`                                 | ハンドルが `foo` または `bar` のグループ内の投稿者。     |
 | `['not', 'foo', 'bar']`                          | ハンドルが `foo` または `bar` のグループ内の投稿者ではない。 |
-| [UserGroup](api:craft\models\UserGroup) オブジェクト | オブジェクトで表されるグループ内の投稿者。                 |
+| [UserGroup](api3:craft\models\UserGroup) オブジェクト | オブジェクトで表されるグループ内の投稿者。                 |
 
 
 
@@ -447,7 +447,7 @@ $entries = \craft\elements\Entry::find()
 | 値                                          | 取得するエントリ            |
 | ------------------------------------------ | ------------------- |
 | `1`                                        | ID が 1 のカテゴリの下層。    |
-| [Entry](api:craft\elements\Entry) オブジェクト | オブジェクトで表されるエントリの下層。 |
+| [Entry](api3:craft\elements\Entry) オブジェクト | オブジェクトで表されるエントリの下層。 |
 
 
 
@@ -552,7 +552,7 @@ $entries = \craft\elements\Entry::find()
 | 値                                            | 取得するエントリ    |
 | -------------------------------------------- | ----------- |
 | `1`                                          | ID が 1。     |
-| a [Entry](api:craft\elements\Entry) object | ID が 1ではない。 |
+| a [Entry](api3:craft\elements\Entry) object | ID が 1ではない。 |
 
 
 
@@ -891,7 +891,7 @@ $entries = \craft\elements\Entry::find()
 | 値                                                      | 取得するエントリ                |
 | ------------------------------------------------------ | ----------------------- |
 | `gt;= 2018-04-01'43bb36c30.80274976'>= 2018-04-01'` | 2018-04-01 以降に投稿されたもの。  |
-| a [Entry](api:craft\elements\Entry) object           | 2018-05-01 より前に投稿されたもの。 |
+| a [Entry](api3:craft\elements\Entry) object           | 2018-05-01 より前に投稿されたもの。 |
 
 
 
@@ -975,7 +975,7 @@ $entry = \craft\elements\Entry::find()
 | 値                                          | 取得するエントリ           |
 | ------------------------------------------ | ------------------ |
 | `1`                                        | ID が 1 のエントリの前。    |
-| [Entry](api:craft\elements\Entry) オブジェクト | オブジェクトで表されるエントリの前。 |
+| [Entry](api3:craft\elements\Entry) オブジェクト | オブジェクトで表されるエントリの前。 |
 
 
 
@@ -1007,7 +1007,7 @@ $entries = \craft\elements\Entry::find()
 | 値                                            | 取得するエントリ                 |
 | -------------------------------------------- | ------------------------ |
 | `'94.78950570'foo'`                          | ハンドルが `foo` のセクション内。     |
-| a [Entry](api:craft\elements\Entry) object | ハンドルが `foo` のセクション内ではない。 |
+| a [Entry](api3:craft\elements\Entry) object | ハンドルが `foo` のセクション内ではない。 |
 
 
 
@@ -1105,7 +1105,7 @@ $entries = \craft\elements\Entry::find()
 | 値                                          | 取得するエントリ           |
 | ------------------------------------------ | ------------------ |
 | `1`                                        | ID が 1 のエントリの横。    |
-| [Entry](api:craft\elements\Entry) オブジェクト | オブジェクトで表されるエントリの横。 |
+| [Entry](api3:craft\elements\Entry) オブジェクト | オブジェクトで表されるエントリの横。 |
 
 
 
@@ -1233,7 +1233,7 @@ $entry = \craft\elements\Entry::find()
 | 値                                            | 取得するエントリ                      |
 | -------------------------------------------- | ----------------------------- |
 | `1`                                          | 公開しているもの。                     |
-| a [Entry](api:craft\elements\Entry) object | 保留しているもの（未来の投稿日がセットされた有効なもの）。 |
+| a [Entry](api3:craft\elements\Entry) object | 保留しているもの（未来の投稿日がセットされた有効なもの）。 |
 
 
 
@@ -1318,7 +1318,7 @@ $entries = \craft\elements\Entry::find()
 | `'Foo*'`                                       | タイトルが `Foo` ではじまる。 |
 | `'*Foo'`                                       | タイトルが `Foo` で終わる。  |
 | `'*Foo*'`                                      | タイトルが `Foo` を含む。   |
-| a [Section](api:craft\models\Section) object | タイトルが `Foo` を含まない。 |
+| a [Section](api3:craft\models\Section) object | タイトルが `Foo` を含まない。 |
 
 
 
@@ -1384,7 +1384,7 @@ $entries = \craft\elements\Entry::find()
 | 値                                            | 取得するエントリ         |
 | -------------------------------------------- | ---------------- |
 | `1`                                          | ID が 1 のタイプ。     |
-| a [Entry](api:craft\elements\Entry) object | ID が 1 のタイプではない。 |
+| a [Entry](api3:craft\elements\Entry) object | ID が 1 のタイプではない。 |
 
 
 
@@ -1627,7 +1627,7 @@ Possible values include:
 | `'not foo'`                                         | not of a type with a handle of `foo`.          |
 | `['foo', 'bar']`                                    | of a type with a handle of `foo` or `bar`.     |
 | `['not', 'foo', 'bar']`                             | not of a type with a handle of `foo` or `bar`. |
-| an [EntryType](api:craft\models\EntryType) object | of a type represented by the object.           |
+| an [EntryType](api3:craft\models\EntryType) object | of a type represented by the object.           |
 
 
 

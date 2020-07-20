@@ -62,7 +62,7 @@
 
 これは、所定のフィールドで関連付けられたすべてのエントリを出力するよう定義された[エレメントクエリ](dev/element-queries/entry-queries.md)を提供します。
 
-関連付けられたすべてのエントリをループするには、[all()](api:craft\db\Query::all()) を呼び出して、結果をループ処理します。
+関連付けられたすべてのエントリをループするには、[all()](api3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
 ```twig
 {% set relatedEntries = entry.<FieldHandle>.all() %}
@@ -75,7 +75,7 @@
 {% endif %}
 ```
 
-関連付けられた最初のエントリだけが欲しい場合、代わりに [one()](api:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
+関連付けられた最初のエントリだけが欲しい場合、代わりに [one()](api3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
 
 ```twig
 {% set rel = entry.<FieldHandle>.one() %}
@@ -84,7 +84,7 @@
 {% endif %}
 ```
 
-（取得する必要はなく）いずれかの関連付けられたエントリがあるかを確認したい場合、[exists()](api:craft\db\Query::exists()) を呼び出すことができます。
+（取得する必要はなく）いずれかの関連付けられたエントリがあるかを確認したい場合、[exists()](api3:craft\db\Query::exists()) を呼び出すことができます。
 
 ```twig
 {% if entry.<FieldHandle>.exists() %}
@@ -103,5 +103,5 @@
 ## 関連項目
 
 * [エントリクエリ](dev/element-queries/entry-queries.md)
-* <api:craft\elements\Entry>
+* <api3:craft\elements\Entry>
 * [リレーション](relations.md)

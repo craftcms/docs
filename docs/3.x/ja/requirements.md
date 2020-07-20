@@ -32,7 +32,7 @@ Craft は次の PHP エクステンションが必要です。
 ## オプションの PHP エクステンション
 
 * [Intl](http://php.net/manual/en/book.intl.php) – よりリッチな国際化のサポートを追加します。
-* [DOM](http://php.net/manual/en/book.dom.php) - <api:yii\web\XmlResponseFormatter> と同様に XML フィードの解析に必要です。
+* [DOM](http://php.net/manual/en/book.dom.php) - <yii2:yii\web\XmlResponseFormatter> と同様に XML フィードの解析に必要です。
 
 ## オプションの PHP メソッドと設定
 

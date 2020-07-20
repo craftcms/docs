@@ -13,7 +13,7 @@ $myUserQuery = \craft\elements\User::find();
 ```
 :::
 
-ユーザークエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[User](api:craft\elements\User) オブジェクトの配列が返されます。
+ユーザークエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[User](api3:craft\elements\User) オブジェクトの配列が返されます。
 
 ::: tip
 エレメントクエリがどのように機能するかについては、[エレメントクエリについて](README.md)を参照してください。
@@ -235,7 +235,7 @@ $elements = ElementClass::find()
 | 値                                                                           | 取得するエレメント                    |
 | --------------------------------------------------------------------------- | ---------------------------- |
 | `r.baz'3d'foo@bar.baz'6c'foo@bar.baz'2f3.95654'foo@bar.baz'64'foo@bar.baz'` | メールアドレスが `foo@bar.baz`。      |
-| a [craft\elements\User](api:craft\elements\User) object                 | メールアドレスが `foo@bar.baz` ではない。 |
+| a [craft\elements\User](api3:craft\elements\User) object                 | メールアドレスが `foo@bar.baz` ではない。 |
 
 
 
@@ -446,7 +446,7 @@ $elements = ElementClass::find()
 | `'< 2018-05-01'`                                | 2018-05-01 より前に最終ログインされたもの。                     |
 | `['and', '>= 2018-04-04', '< 2018-05-01']`   | 2018-04-01 から 2018-05-01 の間に最終ログインされたもの。        |
 | `['not', 'foo', 'bar']`                            | not in a group with a handle of `foo` or `bar`. |
-| a [UserGroup](api:craft\models\UserGroup) object | in a group represented by the object.           |
+| a [UserGroup](api3:craft\models\UserGroup) object | in a group represented by the object.           |
 
 
 
@@ -788,7 +788,7 @@ Possible values include:
 | Value                                                       | Fetches revisions…                     |
 | ----------------------------------------------------------- | -------------------------------------- |
 | `1`                                                         | created by the user with an ID of 1.   |
-| a [craft\elements\User](api:craft\elements\User) object | by the user represented by the object. |
+| a [craft\elements\User](api3:craft\elements\User) object | by the user represented by the object. |
 
 
 

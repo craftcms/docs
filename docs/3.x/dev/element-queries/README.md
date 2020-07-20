@@ -160,46 +160,46 @@ $entryIds = Entry::find()
 
 ## Advanced Element Queries
 
-Element queries are specialized [query builders](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder) under the hood, so they support most of the same methods provided by <api:craft\db\Query>.
+Element queries are specialized [query builders](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder) under the hood, so they support most of the same methods provided by <api3:craft\db\Query>.
 
 ### Selections
 
-- [select()](api:yii\db\Query::select())
-- [addSelect()](api:yii\db\Query::addSelect())
-- [distinct()](api:yii\db\Query::distinct())
-- [groupBy()](api:yii\db\Query::groupBy())
+- [select()](yii2:yii\db\Query::select())
+- [addSelect()](yii2:yii\db\Query::addSelect())
+- [distinct()](yii2:yii\db\Query::distinct())
+- [groupBy()](yii2:yii\db\Query::groupBy())
 
 ### Joins
 
-- [innerJoin()](api:yii\db\Query::innerJoin())
-- [leftJoin()](api:yii\db\Query::leftJoin())
-- [rightJoin()](api:yii\db\Query::rightJoin())
+- [innerJoin()](yii2:yii\db\Query::innerJoin())
+- [leftJoin()](yii2:yii\db\Query::leftJoin())
+- [rightJoin()](yii2:yii\db\Query::rightJoin())
 
 ### Conditions
 
-- [where()](api:yii\db\QueryTrait::where())
-- [andWhere()](api:yii\db\QueryTrait::andWhere())
-- [orWhere()](api:yii\db\QueryTrait::orWhere())
-- [filterWhere()](api:yii\db\QueryTrait::filterWhere())
-- [andFilterWhere()](api:yii\db\QueryTrait::andFilterWhere())
-- [orFilterWhere()](api:yii\db\QueryTrait::orFilterWhere())
+- [where()](yii2:yii\db\QueryTrait::where())
+- [andWhere()](yii2:yii\db\QueryTrait::andWhere())
+- [orWhere()](yii2:yii\db\QueryTrait::orWhere())
+- [filterWhere()](yii2:yii\db\QueryTrait::filterWhere())
+- [andFilterWhere()](yii2:yii\db\QueryTrait::andFilterWhere())
+- [orFilterWhere()](yii2:yii\db\QueryTrait::orFilterWhere())
 
 ### Query Execution
 
-- [all()](api:yii\db\Query::all())
-- [one()](api:yii\db\Query::one())
-- [nth()](api:craft\db\Query::nth())
-- [exists()](api:yii\db\Query::exists())
-- [count()](api:yii\db\Query::count())
-- [column()](api:yii\db\Query::column())
-- [scalar()](api:yii\db\Query::scalar())
-- [sum()](api:yii\db\Query::sum())
-- [average()](api:yii\db\Query::average())
-- [min()](api:yii\db\Query::min())
-- [max()](api:yii\db\Query::max())
+- [all()](yii2:yii\db\Query::all())
+- [one()](yii2:yii\db\Query::one())
+- [nth()](api3:craft\db\Query::nth())
+- [exists()](yii2:yii\db\Query::exists())
+- [count()](yii2:yii\db\Query::count())
+- [column()](yii2:yii\db\Query::column())
+- [scalar()](yii2:yii\db\Query::scalar())
+- [sum()](yii2:yii\db\Query::sum())
+- [average()](yii2:yii\db\Query::average())
+- [min()](yii2:yii\db\Query::min())
+- [max()](yii2:yii\db\Query::max())
 
 ::: tip
-When customizing an element query, you can call [getRawSql()](api:craft\db\Query::getRawSql()) to get the full SQL that is going to be executed by the query, so you have a better idea of what to modify.
+When customizing an element query, you can call [getRawSql()](api3:craft\db\Query::getRawSql()) to get the full SQL that is going to be executed by the query, so you have a better idea of what to modify.
 
 ```twig
 {{ dump(query.getRawSql()) }}

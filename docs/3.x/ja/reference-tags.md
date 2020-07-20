@@ -33,11 +33,11 @@
 
     利用可能なプロパティのリストは、エレメントタイプのクラスリファレンスを参照してください。
 
-    - [api:craft\elements\Entry](api:craft\elements\Entry#public-properties)
-    - [api:craft\elements\Asset](api:craft\elements\Asset#public-properties)
-    - [api:craft\elements\Tag](api:craft\elements\Tag#public-properties)
-    - [api:craft\elements\User](api:craft\elements\User#public-properties)
-    - [api:craft\elements\GlobalSet](api:craft\elements\GlobalSet#public-properties)
+    - [api3:craft\elements\Entry](api3:craft\elements\Entry#public-properties)
+    - [api3:craft\elements\Asset](api3:craft\elements\Asset#public-properties)
+    - [api3:craft\elements\Tag](api3:craft\elements\Tag#public-properties)
+    - [api3:craft\elements\User](api3:craft\elements\User#public-properties)
+    - [api3:craft\elements\GlobalSet](api3:craft\elements\GlobalSet#public-properties)
 
     カスタムフィールドのハンドルもサポートされています。フィールドタイプは文字列として表すことができる値を持っています。
 
@@ -45,7 +45,7 @@
 
 有効なリファレンスタグは、次の通りです。
 
-- `{asset:123:filename}` – ID が `123` のアセットのファイル名を（<api:craft\elements\Asset::getFilename()> 経由で）返します。
+- `{asset:123:filename}` – ID が `123` のアセットのファイル名を（<api3:craft\elements\Asset::getFilename()> 経由で）返します。
 - `{entry:about-us:intro}` – スラグが `about-us` のエントリのカスタムフィールド `intro` の値を返します。
 - `{entry:blog/whats-on-tap}` – スラグが `whats-on-tap` の `blog` セクションのエントリの URL を返します。
 - `{craft\commerce\Variant:123:price}` – ID が `123` の Commerce Variant オブジェクトの price を返します。

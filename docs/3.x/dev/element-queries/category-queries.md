@@ -13,7 +13,7 @@ $myCategoryQuery = \craft\elements\Category::find();
 ```
 :::
 
-Once you’ve created a category query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Category](api:craft\elements\Category) objects will be returned.
+Once you’ve created a category query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Category](api3:craft\elements\Category) objects will be returned.
 
 ::: tip
 See [Introduction to Element Queries](README.md) to learn about how element queries work.
@@ -62,7 +62,7 @@ Category queries support the following parameters:
 | [ancestorDist](#ancestordist)             | Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
 | [ancestorOf](#ancestorof)                 | Narrows the query results to only categories that are ancestors of another category.
 | [anyStatus](#anystatus)                   | Clears out the [status](#status) and [enabledForSite](#enabledforsite) parameters.
-| [asArray](#asarray)                       | Causes the query to return matching categories as arrays of data, rather than [Category](api:craft\elements\Category) objects.
+| [asArray](#asarray)                       | Causes the query to return matching categories as arrays of data, rather than [Category](api3:craft\elements\Category) objects.
 | [clearCachedResult](#clearcachedresult)   | Clears the cached result.
 | [dateCreated](#datecreated)               | Narrows the query results based on the categories’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the categories’ last-updated dates.
@@ -138,7 +138,7 @@ Possible values include:
 | Value | Fetches categories…
 | - | -
 | `1` | above the category with an ID of 1.
-| a [Category](api:craft\elements\Category) object | above the category represented by the object.
+| a [Category](api3:craft\elements\Category) object | above the category represented by the object.
 
 
 
@@ -192,7 +192,7 @@ $categories = \craft\elements\Category::find()
 
 ### `asArray`
 
-Causes the query to return matching categories as arrays of data, rather than [Category](api:craft\elements\Category) objects.
+Causes the query to return matching categories as arrays of data, rather than [Category](api3:craft\elements\Category) objects.
 
 
 
@@ -338,7 +338,7 @@ Possible values include:
 | Value | Fetches categories…
 | - | -
 | `1` | below the category with an ID of 1.
-| a [Category](api:craft\elements\Category) object | below the category represented by the object.
+| a [Category](api3:craft\elements\Category) object | below the category represented by the object.
 
 
 
@@ -436,7 +436,7 @@ Possible values include:
 | `'not foo'` | not in a group with a handle of `foo`.
 | `['foo', 'bar']` | in a group with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a group with a handle of `foo` or `bar`.
-| a [CategoryGroup](api:craft\models\CategoryGroup) object | in a group represented by the object.
+| a [CategoryGroup](api3:craft\models\CategoryGroup) object | in a group represented by the object.
 
 
 
@@ -691,7 +691,7 @@ Possible values include:
 | Value | Fetches the category…
 | - | -
 | `1` | after the category with an ID of 1.
-| a [Category](api:craft\elements\Category) object | after the category represented by the object.
+| a [Category](api3:craft\elements\Category) object | after the category represented by the object.
 
 
 
@@ -769,7 +769,7 @@ Possible values include:
 | Value | Fetches categories…
 | - | -
 | `1` | after the category with an ID of 1.
-| a [Category](api:craft\elements\Category) object | after the category represented by the object.
+| a [Category](api3:craft\elements\Category) object | after the category represented by the object.
 
 
 
@@ -801,7 +801,7 @@ Possible values include:
 | Value | Fetches categories…
 | - | -
 | `1` | before the category with an ID of 1.
-| a [Category](api:craft\elements\Category) object | before the category represented by the object.
+| a [Category](api3:craft\elements\Category) object | before the category represented by the object.
 
 
 
@@ -868,7 +868,7 @@ Possible values include:
 | Value | Fetches the category…
 | - | -
 | `1` | before the category with an ID of 1.
-| a [Category](api:craft\elements\Category) object | before the category represented by the object.
+| a [Category](api3:craft\elements\Category) object | before the category represented by the object.
 
 
 
@@ -960,7 +960,7 @@ Possible values include:
 | Value | Fetches categories…
 | - | -
 | `1` | beside the category with an ID of 1.
-| a [Category](api:craft\elements\Category) object | beside the category represented by the object.
+| a [Category](api3:craft\elements\Category) object | beside the category represented by the object.
 
 
 
@@ -996,7 +996,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](api:craft\models\Site) object | from the site represented by the object.
+| a [craft\models\Site](api3:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip

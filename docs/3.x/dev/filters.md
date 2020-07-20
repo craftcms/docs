@@ -138,7 +138,7 @@ Converts a date to an ISO-8601 timestamp (e.g. `2019-01-29T10:00:00-08:00`), whi
 
 ## `attr`
 
-Modifies an HTML tag’s attributes, using the same attribute definitions supported by using <api:yii\helpers\BaseHtml::renderTagAttributes()>.
+Modifies an HTML tag’s attributes, using the same attribute definitions supported by using <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
 
 ```twig
 {% set tag = '<div>' %}
@@ -225,7 +225,7 @@ An arrow function can be passed instead, if the values that should be returned d
 {% set authorNames = entries|column(e => e.author.fullName) %}
 ```
 
-This works similarly to Twig’s core [`column`](https://twig.symfony.com/doc/2.x/filters/column.html) filter, except that [ArrayHelper::getColumn()](api:yii\helpers\BaseArrayHelper::getColumn()) is used rather than PHP’s [array_column()](https://secure.php.net/array_column) function.
+This works similarly to Twig’s core [`column`](https://twig.symfony.com/doc/2.x/filters/column.html) filter, except that [ArrayHelper::getColumn()](yii2:yii\helpers\BaseArrayHelper::getColumn()) is used rather than PHP’s [array_column()](https://secure.php.net/array_column) function.
 
 ## `contains`
 
@@ -361,7 +361,7 @@ arrays passed into the filter.
 
 ## `duration`
 
-Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object through <api:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
+Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object through <api3:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
 
 ```twig
 <p>Posted {{ entry.postDate.diff(now)|duration(false) }} ago.</p>
@@ -455,7 +455,7 @@ Prefixes the given string with a keyed-hash message authentication code (HMAC), 
 <input type="hidden" name="foo" value="{{ 'bar'|hash }}">
 ```
 
-PHP scripts can validate the value via [Security::validateData()](api:yii\base\Security::validateData()):
+PHP scripts can validate the value via [Security::validateData()](yii2:yii\base\Security::validateData()):
 
 ```php
 $foo = Craft::$app->request->getBodyParam('foo');
@@ -468,7 +468,7 @@ if ($foo !== false) {
 
 ## `id`
 
-Formats a string into something that will work well as an HTML input `id`, via <api:craft\web\View::formatInputId()>.
+Formats a string into something that will work well as an HTML input `id`, via <api3:craft\web\View::formatInputId()>.
 
 ```twig
 {% set name = 'input[name]' %}
@@ -477,7 +477,7 @@ Formats a string into something that will work well as an HTML input `id`, via <
 
 ## `index`
 
-Runs an array through [ArrayHelper::index()](api:yii\helpers\BaseArrayHelper::index()).
+Runs an array through [ArrayHelper::index()](yii2:yii\helpers\BaseArrayHelper::index()).
 
 ```twig
 {% set entries = entries|index('id') %}
@@ -533,7 +533,7 @@ This works similarly to Twig’s core [`json_encode`](https://twig.symfony.com/d
 
 ## `json_decode`
 
-JSON-decodes a string into an array  by passing it through <api:yii\helpers\Json::decode()>.
+JSON-decodes a string into an array  by passing it through <yii2:yii\helpers\Json::decode()>.
 
 ```twig
 {% set arr = '[1, 2, 3]'|json_decode %}
@@ -563,7 +563,7 @@ Lowercases the first character of a string.
 
 ## `literal`
 
-Runs a string through <api:craft\helpers\Db::escapeParam()>.
+Runs a string through <api3:craft\helpers\Db::escapeParam()>.
 
 ```twig
 {{ 'SELECT id, * FROM table'|literal }}
@@ -895,7 +895,7 @@ You can customize the timezone the time is output in, using the `timezone` param
 
 ## `timestamp`
 
-Formats a date as a human-readable timestamp, via <api:craft\i18n\Formatter::asTimestamp()>.
+Formats a date as a human-readable timestamp, via <api3:craft\i18n\Formatter::asTimestamp()>.
 
 ```twig
 {{ now|timestamp }}
@@ -904,7 +904,7 @@ Formats a date as a human-readable timestamp, via <api:craft\i18n\Formatter::asT
 
 ## `translate` or `t`
 
-Translates a message with [Craft::t()](api:yii\BaseYii::t()).
+Translates a message with [Craft::t()](yii2:yii\BaseYii::t()).
 
 ```twig
 {{ 'Hello world'|t('myCategory') }}
@@ -961,7 +961,7 @@ Returns an array of all the values in a given array, but without any custom keys
 
 ## `where`
 
-Runs an array through <api:craft\helpers\ArrayHelper::where()>.
+Runs an array through <api3:craft\helpers\ArrayHelper::where()>.
 
 ```twig
 {% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}

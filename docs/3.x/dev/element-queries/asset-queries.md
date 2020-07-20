@@ -13,7 +13,7 @@ $myAssetQuery = \craft\elements\Asset::find();
 ```
 :::
 
-Once you’ve created an asset query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Asset](api:craft\elements\Asset) objects will be returned.
+Once you’ve created an asset query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Asset](api3:craft\elements\Asset) objects will be returned.
 
 ::: tip
 See [Introduction to Element Queries](README.md) to learn about how element queries work.
@@ -58,7 +58,7 @@ Asset queries support the following parameters:
 | Param                                     | Description
 | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [anyStatus](#anystatus)                   | Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
-| [asArray](#asarray)                       | Causes the query to return matching assets as arrays of data, rather than [Asset](api:craft\elements\Asset) objects.
+| [asArray](#asarray)                       | Causes the query to return matching assets as arrays of data, rather than [Asset](api3:craft\elements\Asset) objects.
 | [clearCachedResult](#clearcachedresult)   | Clears the cached result.
 | [dateCreated](#datecreated)               | Narrows the query results based on the assets’ creation dates.
 | [dateModified](#datemodified)             | Narrows the query results based on the assets’ files’ last-modified dates.
@@ -119,7 +119,7 @@ $assets = \craft\elements\Asset::find()
 
 ### `asArray`
 
-Causes the query to return matching assets as arrays of data, rather than [Asset](api:craft\elements\Asset) objects.
+Causes the query to return matching assets as arrays of data, rather than [Asset](api3:craft\elements\Asset) objects.
 
 
 
@@ -733,7 +733,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](api:craft\models\Site) object | from the site represented by the object.
+| a [craft\models\Site](api3:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip
@@ -944,7 +944,7 @@ Possible values include:
 | Value | Fetches assets…
 | - | -
 | `1` | uploaded by the user with an ID of 1.
-| a [craft\elements\User](api:craft\elements\User) object | uploaded by the user represented by the object.
+| a [craft\elements\User](api3:craft\elements\User) object | uploaded by the user represented by the object.
 
 
 
@@ -977,7 +977,7 @@ Possible values include:
 | `'not foo'` | not in a volume with a handle of `foo`.
 | `['foo', 'bar']` | in a volume with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a volume with a handle of `foo` or `bar`.
-| a [volume](api:craft\base\VolumeInterface) object | in a volume represented by the object.
+| a [volume](api3:craft\base\VolumeInterface) object | in a volume represented by the object.
 
 
 

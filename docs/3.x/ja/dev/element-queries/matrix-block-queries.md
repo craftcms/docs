@@ -13,7 +13,7 @@ $myMatrixBlockQuery = \craft\elements\MatrixBlock::find();
 ```
 :::
 
-行列ブロッククエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[MatrixBlock](api:craft\elements\MatrixBlock) オブジェクトの配列が返されます。
+行列ブロッククエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[MatrixBlock](api3:craft\elements\MatrixBlock) オブジェクトの配列が返されます。
 
 ::: tip
 エレメントクエリがどのように機能するかについては、[エレメントクエリについて](README.md)を参照してください。
@@ -81,7 +81,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 ### `asArray`
 
-[MatrixBlock](api:craft\elements\MatrixBlock) オブジェクトではなく、データの配列として、マッチした行列ブロックをクエリが返します。
+[MatrixBlock](api3:craft\elements\MatrixBlock) オブジェクトではなく、データの配列として、マッチした行列ブロックをクエリが返します。
 
 
 
@@ -256,7 +256,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 | 値                                                        | 取得する行列ブロック                    |
 | -------------------------------------------------------- | ----------------------------- |
 | `1`                                                      | ID が 1 のエレメントによって作成されたもの。     |
-| a [MatrixBlock](api:craft\elements\MatrixBlock) object | ID が 1 のエレメントによって作成されたものではない。 |
+| a [MatrixBlock](api3:craft\elements\MatrixBlock) object | ID が 1 のエレメントによって作成されたものではない。 |
 
 
 
@@ -695,7 +695,7 @@ $MatrixBlocks = $myEntry->myMatrixField
 | Value                                                    | Fetches revisions…                              |
 | -------------------------------------------------------- | ----------------------------------------------- |
 | `1`                                                      | for the Matrix block with an ID of 1.           |
-| a [MatrixBlock](api:craft\elements\MatrixBlock) object | for the Matrix block represented by the object. |
+| a [MatrixBlock](api3:craft\elements\MatrixBlock) object | for the Matrix block represented by the object. |
 
 
 
@@ -911,7 +911,7 @@ Possible values include:
 | `'not foo'`                                                     | not of a type with a handle of `foo`.          |
 | `['foo', 'bar']`                                                | of a type with a handle of `foo` or `bar`.     |
 | `['not', 'foo', 'bar']`                                         | not of a type with a handle of `foo` or `bar`. |
-| an [MatrixBlockType](api:craft\models\MatrixBlockType) object | of a type represented by the object.           |
+| an [MatrixBlockType](api3:craft\models\MatrixBlockType) object | of a type represented by the object.           |
 
 
 

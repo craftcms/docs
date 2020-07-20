@@ -13,7 +13,7 @@ $myUserQuery = \craft\elements\User::find();
 ```
 :::
 
-Once you’ve created a user query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [User](api:craft\elements\User) objects will be returned.
+Once you’ve created a user query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [User](api3:craft\elements\User) objects will be returned.
 
 ::: tip
 See [Introduction to Element Queries](README.md) to learn about how element queries work.
@@ -54,7 +54,7 @@ User queries support the following parameters:
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [admin](#admin)                           | Narrows the query results to only users that have admin accounts.
 | [anyStatus](#anystatus)                   | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
-| [asArray](#asarray)                       | Causes the query to return matching users as arrays of data, rather than [User](api:craft\elements\User) objects.
+| [asArray](#asarray)                       | Causes the query to return matching users as arrays of data, rather than [User](api3:craft\elements\User) objects.
 | [can](#can)                               | Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
 | [clearCachedResult](#clearcachedresult)   | Clears the cached result.
 | [dateCreated](#datecreated)               | Narrows the query results based on the users’ creation dates.
@@ -131,7 +131,7 @@ $users = \craft\elements\User::find()
 
 ### `asArray`
 
-Causes the query to return matching users as arrays of data, rather than [User](api:craft\elements\User) objects.
+Causes the query to return matching users as arrays of data, rather than [User](api3:craft\elements\User) objects.
 
 
 
@@ -364,7 +364,7 @@ Possible values include:
 | `'not foo'` | not in a group with a handle of `foo`.
 | `['foo', 'bar']` | in a group with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a group with a handle of `foo` or `bar`.
-| a [UserGroup](api:craft\models\UserGroup) object | in a group represented by the object.
+| a [UserGroup](api3:craft\models\UserGroup) object | in a group represented by the object.
 
 
 

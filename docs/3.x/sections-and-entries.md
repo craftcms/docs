@@ -149,7 +149,7 @@ If you want your entries to have auto-generated titles rather than requiring aut
 
 The Title Format is a full-blown Twig template, and it will get parsed whenever your entries are saved.
 
-The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](api:craft\elements\Entry#public-properties) in two ways:
+The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](api3:craft\elements\Entry#public-properties) in two ways:
 
 * `{{ object.property }}` _(normal Twig syntax)_
 * `{property}` _(shortcut syntax)_

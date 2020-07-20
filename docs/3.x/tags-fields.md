@@ -50,8 +50,8 @@ Possible values include:
 | `100` | that are related to the tag with an ID of 100.
 | `[100, 200]` | that are related to a tag with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the tags with IDs of 100 and 200.
-| an [Tag](api:craft\elements\Tag) object | that are related to the tag.
-| an [TagQuery](api:craft\elements\db\TagQuery) object | that are related to any of the resulting tags.
+| an [Tag](api3:craft\elements\Tag) object | that are related to the tag.
+| an [TagQuery](api3:craft\elements\db\TagQuery) object | that are related to any of the resulting tags.
 
 ```twig
 {# Fetch entries with a related tag #}
@@ -70,7 +70,7 @@ If you have an element with an Tags field in your template, you can access its r
 
 That will give you a [tag query](dev/element-queries/tag-queries.md), prepped to output all of the related tags for the given field.
 
-To loop through all of the related tags, call [all()](api:craft\db\Query::all()) and then loop over the results:
+To loop through all of the related tags, call [all()](api3:craft\db\Query::all()) and then loop over the results:
 
 ```twig
 {% set relatedTags = entry.<FieldHandle>.all() %}
@@ -83,7 +83,7 @@ To loop through all of the related tags, call [all()](api:craft\db\Query::all())
 {% endif %}
 ```
 
-If you only want the first related tag, call [one()](api:craft\db\Query::one()) instead, and then make sure it returned something:
+If you only want the first related tag, call [one()](api3:craft\db\Query::one()) instead, and then make sure it returned something:
 
 ```twig
 {% set rel = entry.<FieldHandle>.one() %}
@@ -92,7 +92,7 @@ If you only want the first related tag, call [one()](api:craft\db\Query::one()) 
 {% endif %}
 ```
 
-If you just need to check if there are any related tags (but don’t need to fetch them), you can call [exists()](api:craft\db\Query::exists()):
+If you just need to check if there are any related tags (but don’t need to fetch them), you can call [exists()](api3:craft\db\Query::exists()):
 
 ```twig
 {% if entry.<FieldHandle>.exists() %}
@@ -115,5 +115,5 @@ It’s always a good idea to clone the tag query using the [clone()](./dev/funct
 ## See Also
 
 * [Tag Queries](dev/element-queries/tag-queries.md)
-* <api:craft\elements\Tag>
+* <api3:craft\elements\Tag>
 * [Relations](relations.md)

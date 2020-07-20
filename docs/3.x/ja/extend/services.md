@@ -11,7 +11,7 @@
 - プラグインのビジネスロジックの大半を含んでいます。
 - プラグイン（および、他のプラグイン）がアクセスできる、プラグインの API を定義します。
 
-例えば、Craft のフィールド管理コードは <api:craft\services\Fields> にあり、`Craft::$app->fields` で利用できます。それは、ハンドルによってフィールドモデルを返す `getFieldByHandle()` メソッドを持ちます。そうしたい場合は、`Craft::$app->fields->getFieldByHandle('foo')` で呼び出すことができます。
+例えば、Craft のフィールド管理コードは <api3:craft\services\Fields> にあり、`Craft::$app->fields` で利用できます。それは、ハンドルによってフィールドモデルを返す `getFieldByHandle()` メソッドを持ちます。そうしたい場合は、`Craft::$app->fields->getFieldByHandle('foo')` で呼び出すことができます。
 
 ## サービスの作成
 
@@ -31,7 +31,7 @@ class Foo extends Component
 }
 ```
 
-サービスクラスが存在すると、[init()](api:yii\base\BaseObject::init()) メソッドから [setComponents()](api:yii\di\ServiceLocator::setComponents()) を呼び出すことによって、プライマリプラグインクラスのコンポーネントとして登録できます。
+サービスクラスが存在すると、[init()](yii2:yii\base\BaseObject::init()) メソッドから [setComponents()](yii2:yii\di\ServiceLocator::setComponents()) を呼び出すことによって、プライマリプラグインクラスのコンポーネントとして登録できます。
 
 ```php
 public function init()
@@ -66,13 +66,13 @@ $this->foo->bar()
 
 Craft には、2つの一般的なモデル操作メソッドがあります。
 
-1. *特定のモデルクラス*（例：指定された <api:craft\models\CategoryGroup> モデルによって表されるカテゴリグループを保存する <api:craft\services\Categories::saveGroup()>）を受け入れるメソッド。私たちは、これらを**クラス指向メソッド**と呼びます。
+1. *特定のモデルクラス*（例：指定された <api3:craft\models\CategoryGroup> モデルによって表されるカテゴリグループを保存する <api3:craft\services\Categories::saveGroup()>）を受け入れるメソッド。私たちは、これらを**クラス指向メソッド**と呼びます。
 
-2. *インターフェース*（例：実際のクラスかどうかに関わらず、指定された <api:craft\base\FieldInterface> インターフェースで表されるフィールドを削除する <api:craft\services\Fields::deleteField()>）を実装している限り、すべてのクラスを受け入れるメソッド。私たちは、これらを**インターフェース指向メソッド**と呼びます。
+2. *インターフェース*（例：実際のクラスかどうかに関わらず、指定された <api3:craft\base\FieldInterface> インターフェースで表されるフィールドを削除する <api3:craft\services\Fields::deleteField()>）を実装している限り、すべてのクラスを受け入れるメソッド。私たちは、これらを**インターフェース指向メソッド**と呼びます。
 
 両方のタイプのメソッドは、1つの違いを除き同じ一般的な制御フローに従う必要があります。インターフェース指向メソッドは、アクションが実行される前後にモデルのコールバックメソッドをトリガし、モデルに独自のカスタムロジックを実行するチャンスを与えるべきです。
 
-ここに例を示します。<api:craft\services\Elements::saveElement()> は、`elements` データベーステーブルにエレメントのレコードを保存する前後で、エレメントモデルの `beforeSave()` および `afterSave()` メソッドを呼び出します。 エントリエレメント（<api:craft\elements\Entry>）は、エントリ特有の `entries` データベーステーブルに行を保存する機会として、`afterSave()` メソッドを使用します。
+ここに例を示します。<api3:craft\services\Elements::saveElement()> は、`elements` データベーステーブルにエレメントのレコードを保存する前後で、エレメントモデルの `beforeSave()` および `afterSave()` メソッドを呼び出します。 エントリエレメント（<api3:craft\elements\Entry>）は、エントリ特有の `entries` データベーステーブルに行を保存する機会として、`afterSave()` メソッドを使用します。
 
 ### クラス指向メソッド
 

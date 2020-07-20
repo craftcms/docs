@@ -13,7 +13,7 @@ $myTagQuery = \craft\elements\Tag::find();
 ```
 :::
 
-Once you’ve created a tag query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Tag](api:craft\elements\Tag) objects will be returned.
+Once you’ve created a tag query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Tag](api3:craft\elements\Tag) objects will be returned.
 
 ::: tip
 See [Introduction to Element Queries](README.md) to learn about how element queries work.
@@ -53,7 +53,7 @@ Tag queries support the following parameters:
 | Param                                     | Description
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [anyStatus](#anystatus)                   | Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
-| [asArray](#asarray)                       | Causes the query to return matching tags as arrays of data, rather than [Tag](api:craft\elements\Tag) objects.
+| [asArray](#asarray)                       | Causes the query to return matching tags as arrays of data, rather than [Tag](api3:craft\elements\Tag) objects.
 | [clearCachedResult](#clearcachedresult)   | Clears the cached result.
 | [dateCreated](#datecreated)               | Narrows the query results based on the tags’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the tags’ last-updated dates.
@@ -105,7 +105,7 @@ $tags = \craft\elements\Tag::find()
 
 ### `asArray`
 
-Causes the query to return matching tags as arrays of data, rather than [Tag](api:craft\elements\Tag) objects.
+Causes the query to return matching tags as arrays of data, rather than [Tag](api3:craft\elements\Tag) objects.
 
 
 
@@ -252,7 +252,7 @@ Possible values include:
 | `'not foo'` | not in a group with a handle of `foo`.
 | `['foo', 'bar']` | in a group with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a group with a handle of `foo` or `bar`.
-| a [TagGroup](api:craft\models\TagGroup) object | in a group represented by the object.
+| a [TagGroup](api3:craft\models\TagGroup) object | in a group represented by the object.
 
 
 
@@ -563,7 +563,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](api:craft\models\Site) object | from the site represented by the object.
+| a [craft\models\Site](api3:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip

@@ -33,7 +33,7 @@ Craft’s PhpStorm settings repository includes a code style scheme and inspecti
 - Always pass `true`/`false` to the third argument of [in_array()](http://php.net/manual/en/function.in-array.php) to indicate whether the check should be type-strict (and make it `true` whenever possible).
 - Use `$obj->property !== null` rather than `isset($obj->property)` in conditions that check if an object property is set.
 - Use `empty()`/`!empty()` in conditions that check if an array is/isn’t empty.
-- Refer to class names using the [::class](http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class) keyword (`Foo::class`) rather than as a string (`'some\nmspace\Foo'`) or <api:yii\base\BaseObject::className()>.
+- Refer to class names using the [::class](http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class) keyword (`Foo::class`) rather than as a string (`'some\nmspace\Foo'`) or <yii2:yii\base\BaseObject::className()>.
 - Initialize arrays explicitly (`$array = []`) rather than implicitly (e.g. `$array[] = 'foo'` where `$array` wasn’t defined yet).
 - Use `self::_foo()` rather than `static::_foo()` when calling private static functions, since `static::` would break if the class is extended.
 - Use `self::CONSTANT` rather than `static::CONSTANT` (unnecessary overhead).
@@ -245,8 +245,8 @@ $this->requireAcceptsJson();
 
 ## Exceptions
 
-- If an exception is likely to occur as a result of user error, use the <api:yii\base\UserException> class (or a subclass)
-- Only translate exception messages with <api:Craft::t()> if it’s a <api:yii\base\UserException>.
+- If an exception is likely to occur as a result of user error, use the <yii2:yii\base\UserException> class (or a subclass)
+- Only translate exception messages with <api3:Craft::t()> if it’s a <yii2:yii\base\UserException>.
 
 ## DB Queries
 
@@ -256,7 +256,7 @@ $this->requireAcceptsJson();
 - Use the `['col1' => SORT_ASC, 'col2' => SORT_DESC]` syntax with `orderBy()` instead of `'col1, col2 desc'`.
 
 ### Conditions
-- Always use Yii’s [declarative condition syntax](api:yii\db\QueryInterface::where()) when possible, as it will automatically quote table/column names and values for you.
+- Always use Yii’s [declarative condition syntax](yii2:yii\db\QueryInterface::where()) when possible, as it will automatically quote table/column names and values for you.
 - For consistency, use:
   -  `['col' => $values]`  instead of `['in', 'col', $values]`
   - `['col' => $value]`  instead of `['=', 'col', $value]`
@@ -312,7 +312,7 @@ $entry->setAuthor($newAuthor);
 
 ### App Component Getters
 
-App components should have their own getter functions, which call the app component getter method [get()](api:yii\di\ServiceLocator::get()) directly:
+App components should have their own getter functions, which call the app component getter method [get()](yii2:yii\di\ServiceLocator::get()) directly:
 
 ```php
 /**

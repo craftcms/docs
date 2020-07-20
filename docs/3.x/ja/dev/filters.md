@@ -10,7 +10,7 @@
 
 ## `camel`
 
-配列に [ArrayHelper::getColumn()](api:yii\helpers\BaseArrayHelper::getColumn()) を実行し、その結果を返します。
+配列に [ArrayHelper::getColumn()](yii2:yii\helpers\BaseArrayHelper::getColumn()) を実行し、その結果を返します。
 
 ```twig
 {{ entry.postDate|atom }}
@@ -31,14 +31,14 @@
 
 ## `column`
 
-利用可能な `numberOptions` は、[こちらのリスト](api:yii\i18n\Formatter::$numberFormatterOptions)を参照してください。
+利用可能な `numberOptions` は、[こちらのリスト](yii2:yii\i18n\Formatter::$numberFormatterOptions)を参照してください。
 
 ```twig
 {{ 1000000|currency('USD') }} → $1,000,000.00
 {{ 1000000|currency('USD', [], [], true) }} → $1,000,000
 ```
 
-利用可能な `textOptions` は、[こちらのリスト](api:yii\i18n\Formatter::$numberFormatterTextOptions) を参照してください。
+利用可能な `textOptions` は、[こちらのリスト](yii2:yii\i18n\Formatter::$numberFormatterTextOptions) を参照してください。
 
 ```twig
 {{ entry.postDate|date }} → Sep 26, 2018
@@ -108,7 +108,7 @@ PHP の `date()` ファンクションでサポートされるものと同じ [�
 
 `timezone` パラメータを使用して、出力される時刻のタイムゾーンをカスタマイズできます。
 
-[DateInterval](http://php.net/manual/en/class.dateinterval.php) オブジェクトに <api:craft\helpers\DateTimeHelper::humanDurationFromInterval()> を実行します。
+[DateInterval](http://php.net/manual/en/class.dateinterval.php) オブジェクトに <api3:craft\helpers\DateTimeHelper::humanDurationFromInterval()> を実行します。
 
 ## `filesize`
 
@@ -124,7 +124,7 @@ PHP の `date()` ファンクションでサポートされるものと同じ [�
 
 配列から空のエレメントを削除し、変更された配列を返します。
 
-配列に <api:craft\helpers\ArrayHelper::filterByValue()> を実行します。
+配列に <api3:craft\helpers\ArrayHelper::filterByValue()> を実行します。
 
 ## `filterByValue`
 
@@ -153,7 +153,7 @@ PHP の `date()` ファンクションでサポートされるものと同じ [�
 
 ## `group`
 
-PHP スクリプトは、[Security::validateData()](api:yii\base\Security::validateData()) を経由して値を検証できます。
+PHP スクリプトは、[Security::validateData()](yii2:yii\base\Security::validateData()) を経由して値を検証できます。
 
 ```twig
 <input type="hidden" name="foo" value="{{ 'bar'|hash }}">
@@ -170,7 +170,7 @@ if ($foo !== false) {
 }
 ```
 
-配列に [ArrayHelper::index()](api:yii\helpers\BaseArrayHelper::index()) を実行します。
+配列に [ArrayHelper::index()](yii2:yii\helpers\BaseArrayHelper::index()) を実行します。
 
 | フォーマット             | 実例                            |
 | ------------------ | ----------------------------- |
@@ -251,7 +251,7 @@ Twig の [json_encode](https://twig.symfony.com/doc/2.x/filters/json_encode.html
 | `long`             | September 26, 2018 at 5:00:00 PM PDT            |
 | `full`             | Wednesday, September 26, 2018 at 5:00:00 PM PDT |
 
-文字列に <api:craft\helpers\Db::escapeParam()> を実行します。
+文字列に <api3:craft\helpers\Db::escapeParam()> を実行します。
 
 ```twig
 {{ "foo bar?"|kebab }}
@@ -277,11 +277,11 @@ the [Apple Extended Keyboard II] [1].
 
 このフィルタは、2つの引数をサポートしています。
 
-[ArrayHelper::multisort()](api:yii\helpers\BaseArrayHelper::multisort()) で配列をソートします。
+[ArrayHelper::multisort()](yii2:yii\helpers\BaseArrayHelper::multisort()) で配列をソートします。
 
 ## `indexOf`
 
-ユーザーが優先する言語に応じて、数値をフォーマットします。 <api:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
+ユーザーが優先する言語に応じて、数値をフォーマットします。 <api3:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
 
 ```twig
 {{ 1000000|number }} → 1,000,000
@@ -392,7 +392,7 @@ RSS フィードに必要な形式（`D, d M Y H:i:s O`）で日付を出力し�
 
 ## `percentage`
 
-[Craft::t()](api:yii\BaseYii::t()) でメッセージを翻訳します。
+[Craft::t()](yii2:yii\BaseYii::t()) でメッセージを翻訳します。
 
 ```twig
 {{ entry.postDate|time }} → 10:00:00 AM
@@ -462,7 +462,7 @@ This works identically to Twig’s core [`length`](https://twig.symfony.com/doc/
 
 ## `unique`
 
-Runs a string through <api:craft\helpers\Db::escapeParam()>
+Runs a string through <api3:craft\helpers\Db::escapeParam()>
 
 ## `values`
 
@@ -496,7 +496,7 @@ This works identically to Twig’s core [`merge`](https://twig.symfony.com/doc/2
 
 ## `multisort`
 
-Sorts an array with [ArrayHelper::multisort()](api:yii\helpers\BaseArrayHelper::multisort()).
+Sorts an array with [ArrayHelper::multisort()](yii2:yii\helpers\BaseArrayHelper::multisort()).
 
 ## `nl2br`
 
@@ -707,7 +707,7 @@ You can customize the timezone the time is output in, using the `timezone` param
 
 ## `timestamp`
 
-Formats a date as a human-readable timestamp, via <api:craft\i18n\Formatter::asTimestamp()>.
+Formats a date as a human-readable timestamp, via <api3:craft\i18n\Formatter::asTimestamp()>.
 
 ## `title`
 
@@ -723,7 +723,7 @@ This works identically to Twig’s core [`trim`](https://twig.symfony.com/doc/2.
 
 ## `translate` or `t`
 
-Translates a message with [Craft::t()](api:yii\BaseYii::t()).
+Translates a message with [Craft::t()](yii2:yii\BaseYii::t()).
 
 ```twig
 {{ 'Hello world'|t('myCategory') }}

@@ -6,7 +6,7 @@
 
 例えば、`_utils/macros.twig` からアクセスできる共通の Twig ユーティリティマクロを提供するプラグインを作成できます。
 
-そのために、[EVENT_REGISTER_SITE_TEMPLATE_ROOTS](api:craft\web\View::EVENT_REGISTER_SITE_TEMPLATE_ROOTS) イベントを使用します。
+そのために、[EVENT_REGISTER_SITE_TEMPLATE_ROOTS](api3:craft\web\View::EVENT_REGISTER_SITE_TEMPLATE_ROOTS) イベントを使用します。
 
 ```php
 use craft\events\RegisterTemplateRootsEvent;
@@ -27,7 +27,7 @@ public function init()
 }
 ```
 
-新しいコントロールパネルのテンプレートルートを登録する場合、代わりに [EVENT_REGISTER_CP_TEMPLATE_ROOTS](api:craft\web\View::EVENT_REGISTER_CP_TEMPLATE_ROOTS) イベントを使用してください。
+新しいコントロールパネルのテンプレートルートを登録する場合、代わりに [EVENT_REGISTER_CP_TEMPLATE_ROOTS](api3:craft\web\View::EVENT_REGISTER_CP_TEMPLATE_ROOTS) イベントを使用してください。
 
 ## プラグインコントロールパネルのテンプレート
 

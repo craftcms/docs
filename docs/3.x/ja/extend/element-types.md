@@ -4,13 +4,13 @@
 
 Craft には、7つの組み込みフィールドタイプがあります。
 
-- <api:craft\elements\Asset>
-- <api:craft\elements\Category>
-- <api:craft\elements\Entry>
-- <api:craft\elements\GlobalSet>
-- <api:craft\elements\MatrixBlock>
-- <api:craft\elements\Tag>
-- <api:craft\elements\User>
+- <api3:craft\elements\Asset>
+- <api3:craft\elements\Category>
+- <api3:craft\elements\Entry>
+- <api3:craft\elements\GlobalSet>
+- <api3:craft\elements\MatrixBlock>
+- <api3:craft\elements\Tag>
+- <api3:craft\elements\User>
 
 これらのクラスの実例を参照できます。それらは `vendor/craftcms/cms/src/elements/` にあります。
 
@@ -22,9 +22,9 @@ Craft には、7つの組み込みフィールドタイプがあります。
 
 ### エレメントクラス
 
-エレメントタイプは、<api:craft\base\ElementInterface> と <api:craft\base\ElementTrait> を実装するクラスによって定義されます。クラスは、（静的メソッドで）エレメントタイプについての様々なことと伝える手段としてだけでなく、その型のエレメントがインスタンス化されるモデルとしても役立ちます。
+エレメントタイプは、<api3:craft\base\ElementInterface> と <api3:craft\base\ElementTrait> を実装するクラスによって定義されます。クラスは、（静的メソッドで）エレメントタイプについての様々なことと伝える手段としてだけでなく、その型のエレメントがインスタンス化されるモデルとしても役立ちます。
 
-便利なものとして、基本エレメントタイプの実装を提供する <api:craft\base\Element> を拡張できます。
+便利なものとして、基本エレメントタイプの実装を提供する <api3:craft\base\Element> を拡張できます。
 
 プラグインのソースディレクトリ内で `elements/` ディレクトリを作成し、その中に提供したいエレメントタイプのクラス名にちなんで名付けられた PHP クラスファイルを作成します（例：`Product.php`）。
 
@@ -114,7 +114,7 @@ public function afterSave(bool $isNew)
 
 ### エレメントクエリクラス
 
-すべてのエレメントクエリクラスは、基本機能を提供する <api:craft\elements\db\ElementQuery> を拡張する必要があります。
+すべてのエレメントクエリクラスは、基本機能を提供する <api3:craft\elements\db\ElementQuery> を拡張する必要があります。
 
 それらには、3つの責任があります。
 
@@ -199,7 +199,7 @@ class Product
 }
 ```
 
-その裏で、<api:craft\elements\db\ElementQuery> は2つの <api:craft\db\Query> インスタンスを作成します。メインクエリ（`$this->query`）とサブクエリ（`$this->subQuery`）です。カラムの選択はメインクエリで行い、条件 / 結合はサブクエリに適用する必要があります。最終的に、サブクエリはメインクエリの `FROM` 句になります。
+その裏で、<api3:craft\elements\db\ElementQuery> は2つの <api3:craft\db\Query> インスタンスを作成します。メインクエリ（`$this->query`）とサブクエリ（`$this->subQuery`）です。カラムの選択はメインクエリで行い、条件 / 結合はサブクエリに適用する必要があります。最終的に、サブクエリはメインクエリの `FROM` 句になります。
 
 ```php
 Product::find()
@@ -320,7 +320,7 @@ $fieldLayout->type = Product::class;
 
 #### フィールドレイアウトへのエレメントの関連付け
 
-`$fieldLayoutId` プロパティがセットされている場合、<api:craft\services\Elements::saveElement()> はデータベースの `elements.fieldLayoutId` カラムに保存し、ロード時に取得されたその値をエレメントに再設定します。
+`$fieldLayoutId` プロパティがセットされている場合、<api3:craft\services\Elements::saveElement()> はデータベースの `elements.fieldLayoutId` カラムに保存し、ロード時に取得されたその値をエレメントに再設定します。
 
 ```php
 // ...
@@ -447,7 +447,7 @@ protected static function defineActions(string $source = null): array
 }
 ```
 
-要素を復元可能にするには、static な `defineActions()` メソッドによって返される配列に <api:craft\elements\actions\Restore> アクションを追加するだけです。Craft は通常のインデックスビューから自動的にそれを隠し、ステータスオプションで「破棄済み」を選択したときだけ表示します。
+要素を復元可能にするには、static な `defineActions()` メソッドによって返される配列に <api3:craft\elements\actions\Restore> アクションを追加するだけです。Craft は通常のインデックスビューから自動的にそれを隠し、ステータスオプションで「破棄済み」を選択したときだけ表示します。
 
 ## インデックスページ
 
@@ -565,7 +565,7 @@ protected static function defineSearchableAttributes(): array
 }
 ```
 
-そのため、エレメントの独自の URL を得る場合、このメソッドを実装し、<api:craft\web\View::renderObjectTemplate()> で解析できる文字列（例：`products/{slug}`）を返さなければなりません。通常、これはハードコードされたものではなく、ユーザー定義の文字列である必要があります。
+そのため、エレメントの独自の URL を得る場合、このメソッドを実装し、<api3:craft\web\View::renderObjectTemplate()> で解析できる文字列（例：`products/{slug}`）を返さなければなりません。通常、これはハードコードされたものではなく、ユーザー定義の文字列である必要があります。
 
 ```php
 public function getUriFormat()
@@ -578,7 +578,7 @@ public function getUriFormat()
 
 エレメントの URL がリクエストされるたびに、Craft はエレメントをインスタンス化し、その `getRoute()` メソッドを呼び出し、リクエストがどのように[ルーティングされる](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing)べきか、エレメントに決定するチャンスを与えます。
 
-内部的には、<api:craft\base\Element::getRoute()> はエレメントクラスで上書きしたい protected な `route()` メソッドを呼び出します。
+内部的には、<api3:craft\base\Element::getRoute()> はエレメントクラスで上書きしたい protected な `route()` メソッドを呼び出します。
 
 ```php
 protected function route()
@@ -638,7 +638,7 @@ public function getEditorHtml(): string
 
 ### ページの編集
 
-エレメントの編集ページをセットアップしたら、エレメントクラスにコントロールパネル内でエレメントの編集ページ URL を伝える [getCpEditUrl()](api:craft\base\ElementInterface::getCpEditUrl()) メソッドを追加してください。
+エレメントの編集ページをセットアップしたら、エレメントクラスにコントロールパネル内でエレメントの編集ページ URL を伝える [getCpEditUrl()](api3:craft\base\ElementInterface::getCpEditUrl()) メソッドを追加してください。
 
 ```php
 public function getCpEditUrl()
@@ -692,12 +692,12 @@ class Products extends BaseRelationField
 
 - コントローラーアクション：
 
-  - [actionEditCategory()](api:craft\controllers\CategoriesController::actionEditCategory()) – カテゴリの編集ページをレンダリングします
-  - [actionPreviewCategory()](api:craft\controllers\CategoriesController::actionPreviewCategory()) – ライブプレビューリクエストのカテゴリのフロントエンドページをレンダリングします
-  - [actionSaveCategory()](api:craft\controllers\CategoriesController::actionSaveCategory()) – カテゴリを保存します
-  - [actionDeleteCategory()](api:craft\controllers\CategoriesController::actionDeleteCategory()) – カテゴリを削除します
-  - [actionShareCategory()](api:craft\controllers\CategoriesController::actionShareCategory()) – Share Category リクエストを操作し、`categories/view-shared-category` のトークンを作成し、ユーザーをそこにリダイレクトします
-  - [actionViewSharedCategory()](api:craft\controllers\CategoriesController::actionViewSharedCategory()) – Share Category トークンのカテゴリのフロントエンドページをレンダリングします
+  - [actionEditCategory()](api3:craft\controllers\CategoriesController::actionEditCategory()) – カテゴリの編集ページをレンダリングします
+  - [actionPreviewCategory()](api3:craft\controllers\CategoriesController::actionPreviewCategory()) – ライブプレビューリクエストのカテゴリのフロントエンドページをレンダリングします
+  - [actionSaveCategory()](api3:craft\controllers\CategoriesController::actionSaveCategory()) – カテゴリを保存します
+  - [actionDeleteCategory()](api3:craft\controllers\CategoriesController::actionDeleteCategory()) – カテゴリを削除します
+  - [actionShareCategory()](api3:craft\controllers\CategoriesController::actionShareCategory()) – Share Category リクエストを操作し、`categories/view-shared-category` のトークンを作成し、ユーザーをそこにリダイレクトします
+  - [actionViewSharedCategory()](api3:craft\controllers\CategoriesController::actionViewSharedCategory()) – Share Category トークンのカテゴリのフロントエンドページをレンダリングします
 
 - カテゴリの編集ページテンプレート： [categories/_edit.html](https://github.com/craftcms/cms/blob/develop/src/templates/categories/_edit.html)
 
