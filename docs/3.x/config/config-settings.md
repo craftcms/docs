@@ -2195,7 +2195,7 @@ If disabled, an alternate queue worker *must* be set up separately, either as an
 [always-running daemon](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/worker.md), or a
 cron job that runs the `queue/run` command every minute:
 
-```cron
+```
 * * * * * /path/to/project/craft queue/run
 ```
 
