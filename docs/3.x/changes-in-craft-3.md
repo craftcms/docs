@@ -117,7 +117,7 @@ Some PHP constants have been deprecated in Craft 3, and will no longer work in C
 | Old PHP Constant | What to do instead
 | ---------------- | ----------------------------------------
 | `CRAFT_LOCALE`   | Use the [CRAFT_SITE](config/php-constants.md#craft-site) constant<sup>1</sup>
-| `CRAFT_SITE_URL` | Use the <config:siteUrl> config setting or [environment variables](config/environments.md)
+| `CRAFT_SITE_URL` | Use the <config3:siteUrl> config setting or [environment variables](config/environments.md)
 
 *<sup>1</sup> Craft 3 doesn’t require each site/locale to have its own `index.php` file anymore, so alternatively you can remove all unnecessary site/locale web roots and subfolders. See the new [Localization guide](localization.md) for more info.*
 

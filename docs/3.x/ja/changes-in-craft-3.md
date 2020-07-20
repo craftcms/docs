@@ -113,7 +113,7 @@ Amazon S3、Rackspace Cloud Files、および、Google Cloud Storage のサポ�
 | 旧 PHP 定数         | 代わりにすべきこと                                                                             |
 | ---------------- | ------------------------------------------------------------------------------------- |
 | `CRAFT_LOCALE`   | [CRAFT_SITE](config/php-constants.md#craft-site) 定数<sup>1</sup> を使用してください |
-| `CRAFT_SITE_URL` | コンフィグ設定 <config:siteUrl> 、または、[環境変数](config/environments.md)を使用してください                 |
+| `CRAFT_SITE_URL` | コンフィグ設定 <config3:siteUrl> 、または、[環境変数](config/environments.md)を使用してください                 |
 
 *<sup>1</sup> Craft 3 ではそれぞれのサイト / ロケールごとに独自の `index.php` ファイルを用意することが必須ではなくなりました。そのため、不要になったすべてのサイト / ロケールのウェブルート、および、サブフォルダーを削除することもできます。詳細については、新しい [ローカライゼーションガイド](localization.md) を参照してください。*
 

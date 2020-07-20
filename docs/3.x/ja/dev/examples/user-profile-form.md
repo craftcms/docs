@@ -252,7 +252,7 @@
 {{ csrfInput() }}
 ```
 
-The `csrfInput()` generator function is required in all forms for Craft’s [cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) protection unless you disabled it in the <config:enableCsrfProtection> 設定で無効にしていない限り、Craft の[クロスサイトリクエストフォージェリ](https://en.wikipedia.org/wiki/Cross-site_request_forgery)プロテクションのため、`csrfInput()` ジェネレータファンクションはすべてのフォームで必須となります。
+The `csrfInput()` generator function is required in all forms for Craft’s [cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) protection unless you disabled it in the <config3:enableCsrfProtection> 設定で無効にしていない限り、Craft の[クロスサイトリクエストフォージェリ](https://en.wikipedia.org/wiki/Cross-site_request_forgery)プロテクションのため、`csrfInput()` ジェネレータファンクションはすべてのフォームで必須となります。
 
 #### オプションのリダイレクト
 
@@ -326,7 +326,7 @@ The `csrfInput()` generator function is required in all forms for Craft’s [cro
 {% endif %}
 ```
 
-コンフィグ設定 <config:useEmailAsUsername> を `true` にセットした場合、ユーザー名フィールドは表示されません。
+コンフィグ設定 <config3:useEmailAsUsername> を `true` にセットした場合、ユーザー名フィールドは表示されません。
 
 バリデーションが有効になるのは、ここからです。変数 `error` に `getFirstError('username')` をセットすると、このフィールドにエラーがあるかどうかを伝えてくれます。（そうでなければ `null` になります。）エラーがある場合、それを開示するための HTML 要素の適切な class 名をセットし、エラーメッセージを表示します。
 

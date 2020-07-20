@@ -34,7 +34,7 @@ $this->createIndex(null, '{{%tablename}}', ['handle'], false);
 
 ## 時間が経過したら、行を完全に削除
 
-ソフトデリートされたテーブル行は、コンフィグ設定 <config:softDeleteDuration> にセットされた期間だけ保持され、その後完全に削除されるべきです。
+ソフトデリートされたテーブル行は、コンフィグ設定 <config3:softDeleteDuration> にセットされた期間だけ保持され、その後完全に削除されるべきです。
 
 すべてのリクエストごとに古い行をチェックするのではなく、Craft の[ガベージコレクション](../gc.md)ルーチンの一部にできます。
 
@@ -54,7 +54,7 @@ public function init()
 }
 ```
 
-[hardDelete()](api:craft\services\Gc::hardDelete()) メソッドは、`dateDeleted` 値にコンフィグ設定 <config:softDeleteDuration> よりも古いタイムスタンプがセットされたすべての行を削除します。
+[hardDelete()](api:craft\services\Gc::hardDelete()) メソッドは、`dateDeleted` 値にコンフィグ設定 <config3:softDeleteDuration> よりも古いタイムスタンプがセットされたすべての行を削除します。
 
 ::: tip
 複数のテーブルで古い行をチェックする必要がある場合、代わりに [hardDelete()](api:craft\services\Gc::hardDelete()) へテーブル名の配列を渡すことができます。

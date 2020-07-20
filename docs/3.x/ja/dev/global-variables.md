@@ -50,7 +50,7 @@
 
 ## `devMode`
 
-コンフィグ設定 <config:devMode> が現在有効になっているかどうか。
+コンフィグ設定 <config3:devMode> が現在有効になっているかどうか。
 
 ```twig
 {% if devMode %}
@@ -60,7 +60,7 @@
 
 ## `loginUrl`
 
-The URL to your site’s login page, based on the <config:loginPath> コンフィグ設定に基づく、サイトのログインページの URL。
+The URL to your site’s login page, based on the <config3:loginPath> コンフィグ設定に基づく、サイトのログインページの URL。
 
 ```twig
 {% if not currentUser %}
@@ -70,7 +70,7 @@ The URL to your site’s login page, based on the <config:loginPath> コンフ�
 
 ## `logoutUrl`
 
-The URL Craft uses to log users out, based on the <config:logoutPath> コンフィグ設定に基づく、Craft ユーザーのログアウト URL。ここに遷移した後、Craft はユーザーをホームページへ自動的にリダイレクトします。「ログアウト _ページ_ 」といったものはありません。
+The URL Craft uses to log users out, based on the <config3:logoutPath> コンフィグ設定に基づく、Craft ユーザーのログアウト URL。ここに遷移した後、Craft はユーザーをホームページへ自動的にリダイレクトします。「ログアウト _ページ_ 」といったものはありません。
 
 ```twig
 {% if currentUser %}

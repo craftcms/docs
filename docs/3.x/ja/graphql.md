@@ -65,7 +65,7 @@ Additional GraphQL IDEs are available as well:
 * [GraphQL Playground online](https://www.graphqlbin.com/v2/new)
 
 ::: tip
-When you are initially exploring the API, make sure that [Dev Mode](config:devMode) is enabled so the IDE can be informed about the entire schema available to it.
+When you are initially exploring the API, make sure that [Dev Mode](config3:devMode) is enabled so the IDE can be informed about the entire schema available to it.
 :::
 
 ### Sending Requests Manually

@@ -31,7 +31,7 @@ Craft はプロジェクトコンフィグに次の設定を保存します。
 1. Pick a primary environment that has the most up-to-date data. (If your project is already live, this should be your production environment.)
 2. Ensure that your primary environment is running the latest version of Craft.
 3. If you were already running Craft 3.1 or later, run `./craft project-config/rebuild` on that environment, to ensure that its project config is up-to-date with config settings stored throughout the database.
-4. プライマリ環境の `config/general.php` で <config:useProjectConfigFile> 設定を有効にしてください。
+4. プライマリ環境の `config/general.php` で <config3:useProjectConfigFile> 設定を有効にしてください。
 
     ```php
     return [
@@ -88,7 +88,7 @@ Craft はプロジェクトコンフィグによって管理される何かが�
 
 本番環境で `project.yaml` を更新するアップデートが行われた場合、次にプロジェクトがデプロイされ `project.yaml` が上書きされるタイミングで、それらの変更が失われるかもしれません。
 
-それを防ぐために、`config/general.php` でコンフィグ設定の <config:allowAdminChanges> を `false` に設定します。
+それを防ぐために、`config/general.php` でコンフィグ設定の <config3:allowAdminChanges> を `false` に設定します。
 
 ```php
 return [

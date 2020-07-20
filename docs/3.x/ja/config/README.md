@@ -49,7 +49,7 @@ Craft のいくつかの設定やファンクションでは、基本ファイ�
 - サイトのベース URL 設定
 - ボリュームのベース URL 設定
 - ローカルボリュームのファイルシステムパス設定
-- コンフィグ設定の <config:resourceBasePath> と <config:resourceBaseUrl> config settings
+- コンフィグ設定の <config3:resourceBasePath> と <config3:resourceBaseUrl> config settings
 - Twig ファンクションの [svg()](../dev/functions.md#svg-svg-sanitize)
 
 次のエイリアスは、そのまま利用可能です。
@@ -70,7 +70,7 @@ Craft のいくつかの設定やファンクションでは、基本ファイ�
 | `@web`               | リクエストのために読み込まれた `index.php` ファイルを含むフォルダの URL                                    |
 | `@webroot`           | リクエストのために読み込まれた `index.php` ファイルを含むフォルダのパス                                      |
 
-コンフィグ設定 <config:aliases> を利用して、追加の独自エイリアスを定義することができます。例えば、アセットボリュームが存在するベース URL とベースパスを定義するエイリアスを作成したいかもしれません。
+コンフィグ設定 <config3:aliases> を利用して、追加の独自エイリアスを定義することができます。例えば、アセットボリュームが存在するベース URL とベースパスを定義するエイリアスを作成したいかもしれません。
 
 ```php
 'aliases' => [
@@ -86,7 +86,7 @@ ASSETS_BASE_URL=http://my-project.com/assets
 ASSETS_BASE_PATH=/path/to/web/assets
 ```
 
-You can define additional custom aliases using the <config:aliases> config setting as well. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
+You can define additional custom aliases using the <config3:aliases> config setting as well. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
 
 ```php
 'aliases' => [

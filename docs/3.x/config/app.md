@@ -265,7 +265,7 @@ Only drivers that implement <api:craft\queue\QueueInterface> will be visible wit
 :::
 
 ::: tip
-If your queue driver supplies its own worker, set the <config:runQueueAutomatically> config setting to `false` in `config/general.php`.
+If your queue driver supplies its own worker, set the <config3:runQueueAutomatically> config setting to `false` in `config/general.php`.
 :::
 
 ## Modules

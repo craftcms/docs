@@ -15,7 +15,7 @@ Craft はリクエストを次のように処理します。
 
 1. **それはアクションリクエストか？**
 
-   アクションリクエストは、 `actions/`（または、コンフィグ設定の <config:actionTrigger> にセットされたもの）ではじまる URL か、POST リクエストやクエリ文字列に `action` パラメータのいずれかを持っています。
+   アクションリクエストは、 `actions/`（または、コンフィグ設定の <config3:actionTrigger> にセットされたもの）ではじまる URL か、POST リクエストやクエリ文字列に `action` パラメータのいずれかを持っています。
 
    Craft は、アクションを実行するコントローラーアクションに、アクションリクエストをルーティングします。Craft にはコアアクションのためのシステムコントローラーアクションがありますが、プラグインが同様に独自のカスタムアクションを定義したコントローラーを持っている場合があります。
 
@@ -41,9 +41,9 @@ Craft はリクエストを次のように処理します。
 
 5. **404**
 
-   上記のチェックがいずれも成功しなかった場合、Craft は [NotFoundHttpException](api:yii\web\NotFoundHttpException) を返します。[Dev Mode](config:devMode) が有効な場合、例外についてのエラーレポートが表示されます。そうでなければ、404 エラーが返されます。
+   上記のチェックがいずれも成功しなかった場合、Craft は [NotFoundHttpException](api:yii\web\NotFoundHttpException) を返します。[Dev Mode](config3:devMode) が有効な場合、例外についてのエラーレポートが表示されます。そうでなければ、404 エラーが返されます。
 
-   ::: tip `404.twig` テンプレートを `templates/` ディレクトリのルートに配置することで、サイトの404ページをカスタマイズできます。`http://my-project.test/404` にアクセスすることで、[Dev Mode](config:devMode) が有効になっている場合でも、このページをテストできます。
+   ::: tip `404.twig` テンプレートを `templates/` ディレクトリのルートに配置することで、サイトの404ページをカスタマイズできます。`http://my-project.test/404` にアクセスすることで、[Dev Mode](config3:devMode) が有効になっている場合でも、このページをテストできます。
 :::
 
 

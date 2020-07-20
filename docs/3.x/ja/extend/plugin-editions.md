@@ -71,7 +71,7 @@ if (Plugin::getInstance()->is(Plugin::EDITION_PRO) {
 `config/project.yaml` の `plugins.<plugin-handle>.edition` プロパティを変更することにより、アクティブなエディションを切り替えることができます。
 
 ::: tip
-`config/project.yaml` ファイルを持たない場合、コンフィグ設定の <config:useProjectConfigFile> を有効にする必要があります。
+`config/project.yaml` ファイルを持たない場合、コンフィグ設定の <config3:useProjectConfigFile> を有効にする必要があります。
 :::
 
 （プラグインの `editions()` メソッドで返される）有効なエディションハンドルの値に変更すると、Craft は `project.yaml` の変更を読み込まれたプロジェクトコンフィグと同期するよう促します。それが完了すると、プラグインのアクティブなエディションが新しいエディションにセットされ、機能トグルはそれに応じて動作しはじめます。

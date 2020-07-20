@@ -81,7 +81,7 @@ The currently-logged-in user, represented by a <api:craft\elements\User> object,
 
 ## `devMode`
 
-Whether the <config:devMode> config setting is currently enabled.
+Whether the <config3:devMode> config setting is currently enabled.
 
 ```twig
 {% if devMode %}
@@ -91,7 +91,7 @@ Whether the <config:devMode> config setting is currently enabled.
 
 ## `loginUrl`
 
-The URL to your site’s login page, based on the <config:loginPath> config setting.
+The URL to your site’s login page, based on the <config3:loginPath> config setting.
 
 ```twig
 {% if not currentUser %}
@@ -101,7 +101,7 @@ The URL to your site’s login page, based on the <config:loginPath> config sett
 
 ## `logoutUrl`
 
-The URL Craft uses to log users out, based on the <config:logoutPath> config setting. Note that Craft will automatically redirect users to your homepage after going here; there’s no such thing as a “logout _page_”.
+The URL Craft uses to log users out, based on the <config3:logoutPath> config setting. Note that Craft will automatically redirect users to your homepage after going here; there’s no such thing as a “logout _page_”.
 
 ```twig
 {% if currentUser %}

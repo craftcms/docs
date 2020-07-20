@@ -38,8 +38,8 @@ define('CRAFT_CP', true);
 
 If this isn’t defined, Craft will treat the request as a control panel request if either of these are true:
 
-- The <config:baseCpUrl> setting **is** set, and the request URL begins with it (plus the <config:cpTrigger> setting, if set).
-- The <config:baseCpUrl> setting **is not** set, and the request URI begins with the <config:cpTrigger> setting.
+- The <config3:baseCpUrl> setting **is** set, and the request URL begins with it (plus the <config3:cpTrigger> setting, if set).
+- The <config3:baseCpUrl> setting **is not** set, and the request URI begins with the <config3:cpTrigger> setting.
 
 ### `CRAFT_ENVIRONMENT`
 

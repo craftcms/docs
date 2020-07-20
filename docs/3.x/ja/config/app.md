@@ -161,7 +161,7 @@ return [
 :::
 
 ::: tip
-キュードライバが独自のワーカーを提供している場合、`config/general.php` の <config:runQueueAutomatically> コンフィグ設定を `false` に設定します。
+キュードライバが独自のワーカーを提供している場合、`config/general.php` の <config3:runQueueAutomatically> コンフィグ設定を `false` に設定します。
 :::
 
 ## モジュール

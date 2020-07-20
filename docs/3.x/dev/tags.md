@@ -108,7 +108,7 @@ The accepted duration units are:
 - `year`(`s`)
 - `week`(`s`)
 
-Tip: If this parameter is omitted, your <config:cacheDuration> config setting will be used to define the default duration.
+Tip: If this parameter is omitted, your <config3:cacheDuration> config setting will be used to define the default duration.
 
 #### `until`
 
@@ -496,7 +496,7 @@ This tag makes it easy to paginate query results across multiple pages.
 Paginated URLs will be identical to the first page’s URL, except that “/p_X_” will be appended to the end (where _X_ is the page number), e.g. `http://my-project.test/news/p2`.
 
 ::: tip
-You can use the <config:pageTrigger> config setting to customize what comes before the actual page number in your URLs. For example you could set it to `'page/'`, and your paginated URLs would start looking like `http://my-project.test/news/page/2`.
+You can use the <config3:pageTrigger> config setting to customize what comes before the actual page number in your URLs. For example you could set it to `'page/'`, and your paginated URLs would start looking like `http://my-project.test/news/page/2`.
 :::
 
 ::: warning
@@ -677,7 +677,7 @@ You can optionally set flash messages that will show up for the user on the next
 
 ## `requireGuest`
 
-This tag will ensure that the user is **not** logged in. If they’re already logged in, they’ll be redirected to the page specified by your <config:postLoginRedirect> config setting.
+This tag will ensure that the user is **not** logged in. If they’re already logged in, they’ll be redirected to the page specified by your <config3:postLoginRedirect> config setting.
 
 ```twig
 {% requireGuest %}
@@ -695,7 +695,7 @@ This tag will ensure that the user is logged in. If they aren’t, they’ll be 
 
 You can place this tag anywhere in your template, including within a conditional. If/when Twig gets to it, the login enforcement will take place.
 
-The Login page location is based on your <config:loginPath> config setting. If you do not set <config:loginPath>, it defaults to `login`. That will throw a `404` error if you have not handled the `/login` route with a custom template. To use the control panel’s Login form, set it to `admin/login` or `[your cpTrigger]/login`.
+The Login page location is based on your <config3:loginPath> config setting. If you do not set <config3:loginPath>, it defaults to `login`. That will throw a `404` error if you have not handled the `/login` route with a custom template. To use the control panel’s Login form, set it to `admin/login` or `[your cpTrigger]/login`.
 
 ## `requirePermission`
 

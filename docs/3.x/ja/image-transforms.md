@@ -36,7 +36,7 @@
 
 **幅** または **高さ** のいずれかを空白のままにすると、その寸法は画像の縦横比を維持するようセットされます。例えば、600 x 400 ピクセルの画像があり、変形の幅を 60 に設定し、高さを空白のままにした場合、変形した画像の高さは 40 になります。
 
-If you leave **Quality** blank, Craft will use the quality set by your <config:defaultImageQuality> にセットされた品質を使用します。
+If you leave **Quality** blank, Craft will use the quality set by your <config3:defaultImageQuality> にセットされた品質を使用します。
 
 **画像フォーマット** には、次の値をセットできます。
 

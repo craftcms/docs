@@ -49,7 +49,7 @@ Some settings and functions in Craft support [Yii aliases](https://www.yiiframew
 - Sites’ Base URL settings
 - Volumes’ Base URL settings
 - Local volumes’ File System Path settings
-- The <config:resourceBasePath> and <config:resourceBaseUrl> config settings
+- The <config3:resourceBasePath> and <config3:resourceBaseUrl> config settings
 - The [svg()](../dev/functions.md#svg-svg-sanitize) Twig function
 
 The following aliases are available out of the box:
@@ -70,7 +70,7 @@ The following aliases are available out of the box:
 | `@web` | The URL to the folder that contains the `index.php` file that was loaded for the request
 | `@webroot` | The path to the folder that contains the `index.php` file that was loaded for the request
 
-You can override these default aliases with the <config:aliases> config setting if needed. It’s recommended to override the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+You can override these default aliases with the <config3:aliases> config setting if needed. It’s recommended to override the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
 
 ```php
 'aliases' => [
@@ -87,7 +87,7 @@ If your webroot is something besides `web/`, `public/`, `public_html/`, or `html
 ];
 ```
 
-You can define additional custom aliases using the <config:aliases> config setting as well. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
+You can define additional custom aliases using the <config3:aliases> config setting as well. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
 
 ```php
 'aliases' => [

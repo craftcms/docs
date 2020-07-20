@@ -23,7 +23,7 @@
 ページ付けされた URL は最初のページ URL と同一になりますが、最後に「/p_X_」（_X_ はページ番号）が追加されます。例：`http://my-project.test/news/p2`。
 
 ::: tip
-URL の実際のページ番号の前にあるものをカスタマイズするために、コンフィグ設定の <config:pageTrigger> を使用することができます。例えば、`'page/'`  をセットすると、ページ付けされた URL は `http://my-project.test/news/page/2` のようになります。
+URL の実際のページ番号の前にあるものをカスタマイズするために、コンフィグ設定の <config3:pageTrigger> を使用することができます。例えば、`'page/'`  をセットすると、ページ付けされた URL は `http://my-project.test/news/page/2` のようになります。
 :::
 
 ::: warning

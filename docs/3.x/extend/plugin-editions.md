@@ -78,7 +78,7 @@ Changing editions should always be a lossless operation; no plugin data should c
 You can toggle the active edition by changing the `plugins.<plugin-handle>.edition` property in `config/project.yaml`.
 
 ::: tip
-If you don’t have a `config/project.yaml` file, you need to enable the <config:useProjectConfigFile> config setting.
+If you don’t have a `config/project.yaml` file, you need to enable the <config3:useProjectConfigFile> config setting.
 :::
 
 After changing the value to a valid edition handle (one returned by your plugin’s `editions()` method), Craft will prompt you to sync your `project.yaml` changes into the loaded project config. Once that’s done, your plugin’s active edition will be set to the new edition, and feature toggles should start behaving accordingly.

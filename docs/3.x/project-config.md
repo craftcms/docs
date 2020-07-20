@@ -2,7 +2,7 @@
 
 Craft 3.1 introduced the **project config**, a sharable configuration store that makes it easier for developers to collaborate and deploy site changes across multiple environments.
 
-Craft stores the following settings in the project config:
+Craft stores the following settings in the project 
 
 - Asset volumes and named image transforms
 - Category groups
@@ -31,7 +31,7 @@ To start sharing a project config across multiple environments, follow these ste
 1. Pick a primary environment that has the most up-to-date data. (If your project is already live, this should be your production environment.)
 2. Ensure that your primary environment is running the latest version of Craft.
 3. If you were already running Craft 3.1 or later, run `./craft project-config/rebuild` on that environment, to ensure that its project config is up-to-date with config settings stored throughout the database.
-4. Enable the <config:useProjectConfigFile> setting in `config/general.php` on your primary environment.
+4. Enable the <config3:useProjectConfigFile> setting in `config/general.php` on your primary environment.
 
     ```php
     return [
@@ -88,7 +88,7 @@ Once you’ve made that change, re-save your volume in the control panel so your
 
 If any updates are made on production that updates `project.yaml` there, those changes will be lost the next time your project is deployed and `project.yaml` is overwritten.
 
-To prevent that, you can set the <config:allowAdminChanges> config setting to `false` in `config/general.php`:
+To prevent that, you can set the <config3:allowAdminChanges> config setting to `false` in `config/general.php`:
 
 ```php
 return [
