@@ -74,11 +74,11 @@ VS Code has a built-in extension marketplace for installing add-ons that improve
 
 Open the “Extensions” panel in VS Code, search for each one, and choose “Install”. You’ll need to restart the app so they can all take effect.
 
-![](../../images/tutorial-vs-code-extension-pane.png)
+![](../images/tutorial-vs-code-extension-pane.png)
 
 Once the extensions are installed, your Twig templates will get helpful syntax highlighting to make code more readable and auto-complete tips. Here’s a before and after comparison:
 
-![](../../images/tutorial-vs-code-extensions.png)
+![](../images/tutorial-vs-code-extensions.png)
 
 ::: tip
 You’ll be able to copy and paste everything in the section that follows, but we have [an entire Twig primer](https://docs.craftcms.com/v3/dev/twig-primer.html) if you’d like to learn how to work with it!

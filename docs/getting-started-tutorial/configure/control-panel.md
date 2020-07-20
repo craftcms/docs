@@ -5,7 +5,7 @@ The control panel may seem a bit empty—that’s a feature, not bug! Craft does
 ## Dashboard
 
 <BrowserShot url="https://tutorial.test/admin/dashboard" :link="false" caption="The control panel without any content.">
-<img src="../../images/tutorial-empty-control-panel.png" alt="Screenshot of the Craft CMS control panel Dashboard" />
+<img src="../images/tutorial-empty-control-panel.png" alt="Screenshot of the Craft CMS control panel Dashboard" />
 </BrowserShot>
 
 The place you landed is the Dashboard, which you can customize with various widgets. By default, we’ll see the Recent Entries we haven’t created yet, recent Craft News, Support and Feedback options, and a notice about whether any software updates are available.
@@ -19,7 +19,7 @@ To the left, then, is the sidebar navigation. (You may have to use the hamburger
 ## Utilities
 
 <BrowserShot url="https://tutorial.test/admin/utilities/system-report" :link="false" caption="The System Report utility lists important details about your installation.">
-<img src="../../images/tutorial-utilities.png" alt="Screenshot of the Craft CMS utilities section" />
+<img src="../images/tutorial-utilities.png" alt="Screenshot of the Craft CMS utilities section" />
 </BrowserShot>
 
 You probably won’t need to visit Utilies too often, but it has some helpful tools.
@@ -27,7 +27,7 @@ You probably won’t need to visit Utilies too often, but it has some helpful to
 By default you’ll land on the System Report. These are key details about your Craft install, and while we’re here it’s a good idea to make sure that each of the items under “Requirements” has a green check mark next to it.
 
 <BrowserShot url="https://tutorial.test/admin/utilities/system-report" :link="false" caption="Installed with flying colors.">
-<img src="../../images/tutorial-system-requirements.png" alt="Screenshot of the System Report’s Requirements list with all green checkmarks" />
+<img src="../images/tutorial-system-requirements.png" alt="Screenshot of the System Report’s Requirements list with all green checkmarks" />
 </BrowserShot>
 
 If any line does not have a green check mark, choose the “i” icon to see more information and whether it’s something you’re able to fix.
@@ -48,5 +48,5 @@ We won’t be using these utilities in this tutorial, but it might be good to kn
 Craft’s built-in plugin offers free and paid plugins that can add functionality to your Craft CMS website.
 
 <BrowserShot url="https://tutorial.test/admin/plugin-store" :link="false" caption="The Craft CMS Plugin Store.">
-<img src="../../images/tutorial-plugin-store.png" alt="Screenshot of Plugin Store" />
+<img src="../images/tutorial-plugin-store.png" alt="Screenshot of Plugin Store" />
 </BrowserShot>

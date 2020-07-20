@@ -14,7 +14,7 @@ module.exports = {
     [
       "vuepress-plugin-medium-zoom",
       {
-        selector: ".theme-default-content img",
+        selector: ".theme-default-content img:not(.no-zoom)",
         delay: 1000,
         options: {
           margin: 24,

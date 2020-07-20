@@ -7,7 +7,7 @@ At this point you should have a local development environment running with a dat
 ## What’s Composer?
 
 <BrowserShot url="https://getcomposer.org/" :link="true">
-<img src="../../images/getcomposer.org.png" alt="Screenshot of getcomposer.org homepage" />
+<img src="../images/getcomposer.org.png" alt="Screenshot of getcomposer.org homepage" />
 </BrowserShot>
 
 Composer is a command line application with one important job: it makes sure a PHP project like our website has all the code it needs to run.
@@ -49,7 +49,7 @@ composer create-project craftcms/craft <Path>
 
 Composer will take a few minutes to download Craft CMS and all its dependencies, set up your project folders, and add a security key:
 
-![](../../images/tutorial-composer-create-project.gif)
+![](../images/tutorial-composer-create-project.gif)
 
 Now we have all the files we need to actually install and start using Craft.
 
@@ -61,7 +61,7 @@ If you’re on a Mac, drag the folder you’ve just created onto the Visual Stud
 
 If you’re on Windows or Linux, open VS Code and choose “File”, “Open Folder...”, and select the folder with your new Craft CMS files.
 
-![](../../images/tutorial-vs-code.png)
+![](../images/tutorial-vs-code.png)
 
 Before we complete the setup, let’s take a look at the files Composer just created:
 
