@@ -48,8 +48,8 @@ function replacePrefix(link) {
     return placeholder === prefix;
   });
 
-  if (prefix === "api") {
-    console.log('legacy `api:` needs updating: "' + link + '"');
+  if (prefix === "api" || prefix === "config") {
+    console.log('legacy `' + prefix + ':` needs updating: "' + link + '"');
   }
 
   if (!inUse || inUse.length === 0) {
@@ -95,11 +95,11 @@ function replacePrefix(link) {
 
       return url + (hash ? `#${hash}` : "");
     } else if (prefixSettings.format === "config") {
-      m = link.match(/^config:(.+)/);
+      m = link.match(/^config[2|3]:(.+)/);
       let setting = m[1].toLowerCase();
 
       if (m) {
-        return `/config/config-settings.md#${setting}`;
+        return `${prefixSettings.base}${setting}`;
       }
     } else if (prefixSettings.format === "generic") {
       return link.replace(`${prefix}:`, prefixSettings.base);
