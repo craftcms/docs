@@ -26,7 +26,7 @@ Possible values include:
 ```twig
 {# Fetch entries with the 'foo' option selected #}
 {% set entries = craft.entries()
-    .<FieldHandle>('foo')
+    .myFieldHandle('foo')
     .all() %}
 ```
 
@@ -35,33 +35,33 @@ Possible values include:
 If you have an element with a Dropdown field in your template, you can access its data using your Dropdown field’s handle:
 
 ```twig
-{% set value = entry.<FieldHandle> %}
+{% set value = entry.myFieldHandle %}
 ```
 
-That will give you a <api:craft\fields\data\SingleOptionFieldData> object that contains the field data.
+That will give you a <craft3:craft\fields\data\SingleOptionFieldData> object that contains the field data.
 
-To show the selected option, output it as a string, or output the [value](api:craft\fields\data\SingleOptionFieldData::$value) property:
+To show the selected option, output it as a string, or output the [value](craft3:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ```twig
-{{ entry.<FieldHandle> }} or {{ entry.<FieldHandle>.value }}
+{{ entry.myFieldHandle }} or {{ entry.myFieldHandle.value }}
 ```
 
-To see if an option is selected, use the [value](api:craft\fields\data\SingleOptionFieldData::$value) property:
+To see if an option is selected, use the [value](craft3:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ```twig
-{% if entry.<FieldHandle>.value %}
+{% if entry.myFieldHandle.value %}
 ```
 
-To show the selected option’s label, output the [label](api:craft\fields\data\SingleOptionFieldData::$label) property:
+To show the selected option’s label, output the [label](craft3:craft\fields\data\SingleOptionFieldData::$label) property:
 
 ```twig
-{{ entry.<FieldHandle>.label }}
+{{ entry.myFieldHandle.label }}
 ```
 
-To loop through all of the available options, iterate over the [options](api:craft\fields\data\SingleOptionFieldData::getOptions()) property:
+To loop through all of the available options, iterate over the [options](craft3:craft\fields\data\SingleOptionFieldData::getOptions()) property:
 
 ```twig
-{% for option in entry.<FieldHandle>.options %}
+{% for option in entry.myFieldHandle.options %}
     Label:    {{ option.label }}
     Value:    {{ option }} or {{ option.value }}
     Selected: {{ option.selected ? 'Yes' : 'No' }}
@@ -73,13 +73,13 @@ To loop through all of the available options, iterate over the [options](api:cra
 If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Dropdown field, you can use this template as a starting point:
 
 ```twig
-{% set field = craft.app.fields.getFieldByHandle('<FieldHandle>') %}
+{% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
 
-<select name="fields[<FieldHandle>]">
+<select name="fields[myFieldHandle]">
     {% for option in field.options %}
 
         {% set selected = entry is defined
-            ? entry.<FieldHandle>.value == option.value
+            ? entry.myFieldHandle.value == option.value
             : option.default %}
 
         <option value="{{ option.value }}"
