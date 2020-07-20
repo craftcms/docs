@@ -235,7 +235,7 @@ public function getCpAlerts($path, $fetch)
 
 The hook is passed the following arguments:
 
-* **`$path`** – The path to the main CP page that the alert will be displayed on. (This won’t nceessarily be the same as <api:Craft\HttpRequestService::getPath()> because getCpAlerts() is often called over Ajax after the main page has loaded.)
+* **`$path`** – The path to the main CP page that the alert will be displayed on. (This won’t nceessarily be the same as <craft2:Craft\HttpRequestService::getPath()> because getCpAlerts() is often called over Ajax after the main page has loaded.)
 * **`$fetch`** – Whether the method can create HTTP requests when determining if it should display alerts. When this is `false`, if the alerts can not be determined without an HTTP request, `null` should be returned, so the method does not significantly impact CP page load times.
 
 ## Routing Hooks
@@ -323,7 +323,7 @@ Return
 
 :   An array of element actions.
 
-Gives plugins a chance to add additional actions to the entry index page. Each item in the array can either be an element action’s class handle or an instantiated <api:Craft\IElementAction> object.
+Gives plugins a chance to add additional actions to the entry index page. Each item in the array can either be an element action’s class handle or an instantiated <craft2:Craft\IElementAction> object.
 
 ```php
 public function addEntryActions($source)
@@ -389,7 +389,7 @@ Return
 
 :   An array of element actions.
 
-Gives plugins a chance to add additional actions to the user index page. Each item in the array can either be an element action’s class handle or an instantiated <api:Craft\IElementAction> object.
+Gives plugins a chance to add additional actions to the user index page. Each item in the array can either be an element action’s class handle or an instantiated <craft2:Craft\IElementAction> object.
 
 ```php
 public function addUserActions($source)
