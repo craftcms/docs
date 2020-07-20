@@ -79,7 +79,7 @@ These variables are explained [here](../framework/config-options.md)
 
 Create a `.env` file in `tests/` and ensure the following variables are setup:
 
-```dotenv
+```
 DB_DSN="mysql:host=<host>;port=<port>;dbname=<dbname>"
 DB_USER="root"
 DB_PASSWORD=""
