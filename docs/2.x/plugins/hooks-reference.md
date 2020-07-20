@@ -12,7 +12,7 @@ See [hooks-and-events](hooks-and-events.md) for an explanation of how hooks work
 
 Called by
 
-:   <api:Craft\RichTextFieldType::getInputHtml()>
+:   <craft2:Craft\RichTextFieldType::getInputHtml()>
 
 Return
 
@@ -36,7 +36,7 @@ Each sub-array can contain the following keys:
 
 * **`'optionTitle'`** _(required)_ – The user-facing option label
 * **`'elementType'`** _(required)_ – The element type class that the option represents
-* **`'sources'`** _(optional)_ – An array of source keys (matching the keys returned by the element type’s <api:Craft\getSources()> method) which the element selector modal should be restricted to
+* **`'sources'`** _(optional)_ – An array of source keys (matching the keys returned by the element type’s <craft2:Craft\BaseElementType::getSources()> method) which the element selector modal should be restricted to
 * **`'criteria'`** _(optional)_ – Any element criteria params that should be applied to filter which elements can be selected
 * **`'storageKey'`** _(optional)_ – The localStorage key that should be used to store the element selector modal state (defaults to RichTextFieldType.LinkTo[ElementType])
 
@@ -44,7 +44,7 @@ Each sub-array can contain the following keys:
 
 Called by
 
-:   <api:Craft\TemplatesService::getTwig()>, <api:Craft\TemplatesService::onPluginsLoaded()>
+:   <craft2:Craft\TemplatesService::getTwig()>, <craft2:Craft\TemplatesService::onPluginsLoaded()>
 
 Return
 
@@ -64,7 +64,7 @@ public function addTwigExtension()
 
 Called by
 
-:   <api:Craft\UsersController::actionEditUser()>
+:   <craft2:Craft\UsersController::actionEditUser()>
 
 Return
 
@@ -83,15 +83,14 @@ If you include the `'action'` key, the corresponding controller action can expec
 ```php
 public function addUserAdministrationOptions(UserModel $user)
 {
-    if (!$user->isCurrent())
-    {
+    if (!$user->isCurrent()) {
         return array(
             array(
-                'label'  => Craft::t('Pull finger'),
+                'label' => Craft::t('Pull finger'),
                 'action' => 'fartbook/pullFinger'
             ),
         );
-    }    
+    }
 }
 ```
 
@@ -99,7 +98,7 @@ public function addUserAdministrationOptions(UserModel $user)
 
 Called by
 
-:   <api:Craft\ResourcesService::getResourcePath()>
+:   <craft2:Craft\ResourcesService::getResourcePath()>
 
 Return
 
@@ -111,8 +110,7 @@ Gives plugins a chance to map an incoming resource request’s path with the pat
 public function getResourcePath($path)
 {
     // Does this path start with "myplugin/"?
-    if (strncmp($path, 'myplugin/', 9) == 0)
-    {
+    if (strncmp($path, 'myplugin/', 9) == 0) {
         // Return the path to the file in craft/storage/
         return craft()->path->getStoragePath().'myplugin/'.substr($path, 9);
     }
@@ -123,17 +121,16 @@ public function getResourcePath($path)
 
 Called by
 
-:   <api:Craft\CpVariable::nav()>
+:   <craft2:Craft\CpVariable::nav()>
 
 Gives plugins a chance to modify the Control Panel navigation.
 
 ```php
 public function modifyCpNav(&$nav)
 {
-    if (craft()->userSession->isAdmin())
-    {
+    if (craft()->userSession->isAdmin()) {
         $nav['utils'] = array('label' => 'Utils', 'url' => 'utils');
-    }    
+    }
 }
 ```
 
@@ -146,7 +143,7 @@ The config arrays can be set to the following:
 
 Called by
 
-:   <api:Craft\ClearCachesTool::performAction()>
+:   <craft2:Craft\ClearCachesTool::performAction()>
 
 Return
 
@@ -167,7 +164,7 @@ public function registerCachePaths()
 
 Called by
 
-:   <api:Craft\EmailMessagesService::getAllMessages()>, <api:Craft\EmailMessagesService::getMessage()>, <api:Craft\EmailMessagesService::saveMessage()>
+:   <craft2:Craft\EmailMessagesService::getAllMessages()>, <craft2:Craft\EmailMessagesService::getMessage()>, <craft2:Craft\EmailMessagesService::saveMessage()>
 
 Return
 
@@ -197,7 +194,7 @@ public function registerEmailMessages()
 
 Called by
 
-:   <api:Craft\UserPermissionsService::getAllPermissions()>
+:   <craft2:Craft\UserPermissionsService::getAllPermissions()>
 
 Return
 
@@ -219,7 +216,7 @@ public function registerUserPermissions()
 
 Called by
 
-:   <api:Craft\CpHelper::getAlerts()>
+:   <craft2:Craft\CpHelper::getAlerts()>
 
 Return
 
@@ -230,8 +227,7 @@ Gives plugins a chance to register new Control Panel alerts.
 ```php
 public function getCpAlerts($path, $fetch)
 {
-    if (craft()->config->devMode)
-    {
+    if (craft()->config->devMode) {
         return array('Dev Mode is enabled!');
     }
 }
@@ -248,7 +244,7 @@ The hook is passed the following arguments:
 
 Called by
 
-:   <api:Craft\UrlManager::parseUrl()>
+:   <craft2:Craft\UrlManager::parseUrl()>
 
 Return
 
@@ -270,7 +266,7 @@ public function registerCpRoutes()
 
 Called by
 
-:   <api:Craft\UrlManager::parseUrl()>
+:   <craft2:Craft\UrlManager::parseUrl()>
 
 Return
 
@@ -295,7 +291,7 @@ It’s a good practice to make any URL segments in your site routes configurable
 
 Called by
 
-:   <api:Craft\UrlManager::parseUrl()>
+:   <craft2:Craft\UrlManager::parseUrl()>
 
 Return
 
@@ -309,8 +305,7 @@ public function getElementRoute(BaseElementModel $element)
     if (
         $element->getElementType() == ElementType::Entry &&
         $element->getSection()->handle == 'products'
-    )
-    {
+    ) {
         return array('action' => 'products/viewEntry');
     }
 }
@@ -322,7 +317,7 @@ public function getElementRoute(BaseElementModel $element)
 
 Called by
 
-:   <api:Craft\EntryElementType::getAvailableActions()>
+:   <craft2:Craft\EntryElementType::getAvailableActions()>
 
 Return
 
@@ -344,13 +339,13 @@ public function addEntryActions($source)
 
 Called by
 
-:   <api:Craft\CategoryElementType::getAvailableActions()>
+:   <craft2:Craft\CategoryElementType::getAvailableActions()>
 
 Return
 
 :   An array of element actions.
 
-Gives plugins a chance to add additional actions to the category index page. Each item in the array can either be an element action’s class handle or an instantiated <api:Craft\IElementAction> object.
+Gives plugins a chance to add additional actions to the category index page. Each item in the array can either be an element action’s class handle or an instantiated <craft2:Craft\IElementAction> object.
 
 ```php
 public function addCategoryActions($source)
@@ -366,13 +361,13 @@ public function addCategoryActions($source)
 
 Called by
 
-:   <api:Craft\AssetElementType::getAvailableActions()>
+:   <craft2:Craft\AssetElementType::getAvailableActions()>
 
 Return
 
 :   An array of element actions.
 
-Gives plugins a chance to add additional actions to the asset index page. Each item in the array can either be an element action’s class handle or an instantiated <api:Craft\IElementAction> object.
+Gives plugins a chance to add additional actions to the asset index page. Each item in the array can either be an element action’s class handle or an instantiated <craft2:Craft\IElementAction> object.
 
 ```php
 public function addAssetActions($source)
@@ -388,7 +383,7 @@ public function addAssetActions($source)
 
 Called by
 
-:   <api:Craft\UserElementType::getAvailableActions()>
+:   <craft2:Craft\UserElementType::getAvailableActions()>
 
 Return
 
@@ -410,7 +405,7 @@ public function addUserActions($source)
 
 Called by
 
-:   <api:Craft\AssetsHelper::cleanAssetName()>
+:   <craft2:Craft\AssetsHelper::cleanAssetName()>
 
 Return
 
@@ -429,7 +424,7 @@ public function modifyAssetFilename($filename)
 
 Called by
 
-:   <api:Craft\EntryElementType::defineSortableAttributes()>
+:   <craft2:Craft\EntryElementType::defineSortableAttributes()>
 
 Gives plugins a chance to modify the attributes that entries can be sorted by in the Control Panel.
 
@@ -444,7 +439,7 @@ public function modifyEntrySortableAttributes(&$attributes)
 
 Called by
 
-:   <api:Craft\CategoryElementType::defineSortableAttributes()>
+:   <craft2:Craft\CategoryElementType::defineSortableAttributes()>
 
 Gives plugins a chance to modify the attributes that categories can be sorted by in the Control Panel.
 
@@ -459,7 +454,7 @@ public function modifyCategorySortableAttributes(&$attributes)
 
 Called by
 
-:   <api:Craft\AssetElementType::defineSortableAttributes()>
+:   <craft2:Craft\AssetElementType::defineSortableAttributes()>
 
 Gives plugins a chance to modify the attributes that assets can be sorted by in the Control Panel.
 
@@ -474,7 +469,7 @@ public function modifyAssetSortableAttributes(&$attributes)
 
 Called by
 
-:   <api:Craft\UserElementType::defineSortableAttributes()>
+:   <craft2:Craft\UserElementType::defineSortableAttributes()>
 
 Gives plugins a chance to modify the attributes that users can be sorted by in the Control Panel.
 
@@ -489,20 +484,22 @@ public function modifyUserSortableAttributes(&$attributes)
 
 Called by
 
-:   <api:Craft\EntryElementType::getSources()>
+:   <craft2:Craft\EntryElementType::getSources()>
 
 Gives plugins a chance to modify the available sources for entries.
 
 ```php
 public function modifyEntrySources(&$sources, $context)
 {
-    if ($context == 'index')
-    {
+    if ($context == 'index') {
         $sources[] = array('heading' => 'Statuses');
 
-        $statuses = craft()->elements->getElementType(ElementType::Entry)->getStatuses();
-        foreach ($statuses as $status => $label)
-        {
+        $statuses = craft()
+            ->elements
+            ->getElementType(ElementType::Entry)
+            ->getStatuses();
+        
+        foreach ($statuses as $status => $label) {
             $sources['status:'.$status] = array(
                 'label' => $label,
                 'criteria' => array('status' => $status)
@@ -516,20 +513,18 @@ public function modifyEntrySources(&$sources, $context)
 
 Called by
 
-:   <api:Craft\CategoryElementType::getSources()>
+:   <craft2:Craft\CategoryElementType::getSources()>
 
 Gives plugins a chance to modify the available sources for categories.
 
 ```php
 public function modifyCategorySources(&$sources, $context)
 {
-    if ($context == 'index')
-    {
+    if ($context == 'index') {
         $sources[] = array('heading' => 'Statuses');
-
         $statuses = craft()->elements->getElementType(ElementType::Category)->getStatuses();
-        foreach ($statuses as $status => $label)
-        {
+
+        foreach ($statuses as $status => $label) {
             $sources['status:'.$status] = array(
                 'label' => $label,
                 'criteria' => array('status' => $status)
@@ -543,20 +538,21 @@ public function modifyCategorySources(&$sources, $context)
 
 Called by
 
-:   <api:Craft\AssetElementType::getSources()>
+:   <craft2:Craft\AssetElementType::getSources()>
 
 Gives plugins a chance to modify the available sources for assets.
 
 ```php
 public function modifyAssetSources(&$sources, $context)
 {
-    if ($context == 'index')
-    {
+    if ($context == 'index') {
         $sources[] = array('heading' => 'File Kinds');
 
-        foreach (IOHelper::getFileKinds() as $kind => $info)
-        {
-            $sources['kind:'.$kind] = array('label' => $info['label'], 'criteria' => array('kind' => $kind));
+        foreach (IOHelper::getFileKinds() as $kind => $info) {
+            $sources['kind:'.$kind] = array(
+                'label' => $info['label'],
+                'criteria' => array('kind' => $kind)
+            );
         }
     }
 }
@@ -566,20 +562,21 @@ public function modifyAssetSources(&$sources, $context)
 
 Called by
 
-:   <api:Craft\UserElementType::getSources()>
+:   <craft2:Craft\UserElementType::getSources()>
 
 Gives plugins a chance to modify the available sources for users.
 
 ```php
 public function modifyUserSources(&$sources, $context)
 {
-    if ($context == 'index')
-    {
+    if ($context == 'index') {
         $sources[] = array('heading' => 'Statuses');
+        $statuses = craft()
+            ->elements
+            ->getElementType(ElementType::User)
+            ->getStatuses();
 
-        $statuses = craft()->elements->getElementType(ElementType::User)->getStatuses();
-        foreach ($statuses as $status => $label)
-        {
+        foreach ($statuses as $status => $label) {
             $sources['status:'.$status] = array(
                 'label' => $label,
                 'criteria' => array('status' => $status)
@@ -593,7 +590,7 @@ public function modifyUserSources(&$sources, $context)
 
 Called by
 
-:   <api:Craft\EntryElementType::defineAvailableTableAttributes()>
+:   <craft2:Craft\EntryElementType::defineAvailableTableAttributes()>
 
 Gives plugins a chance to make additional table columns available to entry indexes.
 
@@ -611,7 +608,7 @@ public function defineAdditionalEntryTableAttributes()
 
 Called by
 
-:   <api:Craft\CategoryElementType::defineAvailableTableAttributes()>
+:   <craft2:Craft\CategoryElementType::defineAvailableTableAttributes()>
 
 Gives plugins a chance to make additional table columns available to category indexes.
 
@@ -629,7 +626,7 @@ public function defineAdditionalCategoryTableAttributes()
 
 Called by
 
-:   <api:Craft\AssetElementType::defineAvailableTableAttributes()>
+:   <craft2:Craft\AssetElementType::defineAvailableTableAttributes()>
 
 Gives plugins a chance to make additional table columns available to asset indexes.
 
@@ -647,7 +644,7 @@ public function defineAdditionalAssetTableAttributes()
 
 Called by
 
-:   <api:Craft\UserElementType::defineAvailableTableAttributes()>
+:   <craft2:Craft\UserElementType::defineAvailableTableAttributes()>
 
 Gives plugins a chance to make additional table columns available to user indexes.
 
@@ -665,7 +662,7 @@ public function defineAdditionalUserTableAttributes()
 
 Called by
 
-:   <api:Craft\EntryElementType::getTableAttributeHtml()>
+:   <craft2:Craft\EntryElementType::getTableAttributeHtml()>
 
 Return
 
@@ -676,8 +673,7 @@ Gives plugins a chance to customize the HTML of the table cells on the entry ind
 ```php
 public function getEntryTableAttributeHtml(EntryModel $entry, $attribute)
 {
-    if ($attribute == 'price')
-    {
+    if ($attribute == 'price') {
         return '$'.$entry->price;
     }
 }
@@ -687,7 +683,7 @@ public function getEntryTableAttributeHtml(EntryModel $entry, $attribute)
 
 Called by
 
-:   <api:Craft\CategoryElementType::getTableAttributeHtml()>
+:   <craft2:Craft\CategoryElementType::getTableAttributeHtml()>
 
 Return
 
@@ -698,8 +694,7 @@ Gives plugins a chance to customize the HTML of the table cells on the category 
 ```php
 public function getCategoryTableAttributeHtml(CategoryModel $category, $attribute)
 {
-    if ($attribute == 'color' && $category->color)
-    {
+    if ($attribute == 'color' && $category->color) {
         return '<div class="colorbox" style="background-color: '.$category->color.';"></div>';
     }
 }
@@ -709,7 +704,7 @@ public function getCategoryTableAttributeHtml(CategoryModel $category, $attribut
 
 Called by
 
-:   <api:Craft\AssetElementType::getTableAttributeHtml()>
+:   <craft2:Craft\AssetElementType::getTableAttributeHtml()>
 
 Return
 
@@ -720,12 +715,10 @@ Gives plugins a chance to customize the HTML of the table cells on the asset ind
 ```php
 public function getAssetTableAttributeHtml(AssetFileModel $asset, $attribute)
 {
-    if ($attribute == 'smallScreenImage' || $attribute == 'largeScreenImage')
-    {
+    if ($attribute == 'smallScreenImage' || $attribute == 'largeScreenImage') {
         $altImage = $asset->$attribute->first();
 
-        if ($altImage)
-        {
+        if ($altImage) {
             return craft()->templates->render('_elements/element', array(
                 'element' => $altImg
             ));
@@ -740,7 +733,7 @@ public function getAssetTableAttributeHtml(AssetFileModel $asset, $attribute)
 
 Called by
 
-:   <api:Craft\UserElementType::getTableAttributeHtml()>
+:   <craft2:Craft\UserElementType::getTableAttributeHtml()>
 
 Return
 
@@ -751,8 +744,7 @@ Gives plugins a chance to customize the HTML of the table cells on the user inde
 ```php
 public function getUserTableAttributeHtml(UserModel $user, $attribute)
 {
-    if ($attribute == 'twitter' && $user->twitter)
-    {
+    if ($attribute == 'twitter' && $user->twitter) {
         return '<a href="https://twitter.com/'.$user->twitter.'">@'.$user->twitter.'</a>';
     }
 }
@@ -762,7 +754,7 @@ public function getUserTableAttributeHtml(UserModel $user, $attribute)
 
 Called by
 
-:   <api:Craft\BaseElementType::getTableAttributesForSource()>
+:   <craft2:Craft\BaseElementType::getTableAttributesForSource()>
 
 Return
 
@@ -773,8 +765,7 @@ Gives plugins a chance to customize the visible table attributes for a given ele
 ```php
 public function getTableAttributesForSource($elementType, $sourceKey)
 {
-    if ($sourceKey == 'foo')
-    {
+    if ($sourceKey == 'foo') {
         return craft()->elementIndexes->getTableAttributes($elementType, 'bar');
     }
 }

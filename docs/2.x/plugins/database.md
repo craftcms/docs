@@ -146,7 +146,10 @@ class CocktailRecipes_IngredientRecord extends BaseRecord
     {
         return array(
             'name' => AttributeType::String,
-            'type' => array(AttributeType::Enum, 'values' => "alcohol,mixer,other"),
+            'type' => array(
+                AttributeType::Enum,
+                'values' => "alcohol,mixer,other"
+            ),
         );
     }
 }
@@ -171,13 +174,17 @@ class CocktailRecipes_IngredientRecord extends BaseRecord
     public function defineRelations()
     {
         return array(
-            'drinks' => array(static::HAS_MANY, 'CocktailRecipes_DrinkRecord', 'ingredientId'),
+            'drinks' => array(
+                static::HAS_MANY,
+                'CocktailRecipes_DrinkRecord',
+                'ingredientId'
+            ),
         );
     }
 }
 ```
 
-**`defineRelations()`** works basically the same as <api:CActiveRecord::relations()> (see Yii’s [Relational Active Record](https://www.yiiframework.com/doc/guide/1.1/en/database.arr) documentation), with two differences:
+**`defineRelations()`** works basically the same as <yii1:CActiveRecord::relations()> (see Yii’s [Relational Active Record](https://www.yiiframework.com/doc/guide/1.1/en/database.arr) documentation), with two differences:
 
 - You don’t need to specify the namespace of the related record class in the second argument (defaults to the Craft namespace)
 - You don’t need to specify the foreign key column name in `BELONGS_TO` relations (defaults to the relation name appended with “`Id`”)

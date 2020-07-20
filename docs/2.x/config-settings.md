@@ -64,7 +64,7 @@ Note that this config setting has no effect on the [{% cache %}](templating/cach
 :::
 
 ::: tip
-The DB, file, Memcache(d), and Redis cache methods each have their own additional config settings, which must be set in separate config files in the `craft/config/` folder (`dbcache.php`, `filecache.php`, `memcache.php` and `rediscache.php`, respectively). You can find their default values in craft/app/etc/config/defaults/.
+The DB, file, Memcache(d), and Redis cache methods each have their own additional config settings, which must be set in separate config files in the `craft/config/` folder (`dbcache.php`, `filecache.php`, `memcache.php` and `rediscache.php`, respectively). You can find their default values in `craft/app/etc/config/defaults/`.
 :::
 
 ### `customAsciiCharMappings`
@@ -77,7 +77,7 @@ The DB, file, Memcache(d), and Redis cache methods each have their own additiona
 
 Any custom ASCII character mappings.
 
-This array is merged into the default mapping array in <api:Craft\StringHelper::getAsciiCharMap()>.
+This array is merged into the default mapping array in <craft2:Craft\StringHelper::getAsciiCharMap()>.
 
 The keys should be the HTML decimal code equivalent of the character to search for and the value is the ASCII character used for swapping.
 

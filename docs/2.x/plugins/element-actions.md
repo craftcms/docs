@@ -16,10 +16,10 @@ On a technical level, Element Action classes must meet the following requirement
   [PluginHandle]_[ActionHandle]ElementAction.php
   ```
 * Their files must have the `Craft` namespace.
-* They must implement the <api:Craft\IElementAction> interface.
+* They must implement the <craft2:Craft\IElementAction> interface.
 
 ::: tip
-To keep your Element Action class lean and mean, it can inherit from <api:Craft\BaseElementAction> instead of implementing the whole IElementAction interface on its own.
+To keep your Element Action class lean and mean, it can inherit from <craft2:Craft\BaseElementAction> instead of implementing the whole IElementAction interface on its own.
 :::
 
 ## UI Modes
@@ -29,7 +29,7 @@ There are two ways your Element Action can manifest itself on the page:
 * As a custom trigger in the toolbar
 * As an option tucked inside the menu at the end of the toolbar
 
-The choice is up to the Element Action class. If <api:Craft\getTriggerHtml()> returns anything, then whatever it returns will show up the toolbar; otherwise a new option will be added to the menu for you, labeled with whatever <api:Craft\getName()> returns.
+The choice is up to the Element Action class. If <craft2:Craft\BaseElementAction::getTriggerHtml()> returns anything, then whatever it returns will show up the toolbar; otherwise a new option will be added to the menu for you, labeled with whatever `getName()` returns.
 
 
 ## Example 1: Custom Trigger
@@ -51,32 +51,33 @@ class CocktailRecipes_AddIngredientElementAction extends BaseElementAction
 
     public function getTriggerHtml()
     {
-        // Render the trigger menu template with all the available ingredients    
+        // Render the trigger menu template with all the available ingredients
         $ingredients = craft()->cocktailRecipes->getAllIngredients();
 
-        return craft()->templates->render('cocktailRecipes/_addIngredientsTrigger', array(
-            'ingredients' => $ingredients
-        ));
+        return craft()->templates->render(
+            'cocktailRecipes/_addIngredientsTrigger',
+            array(
+                'ingredients' => $ingredients
+            )
+        );
     }
 
     public function performAction(ElementCriteriaModel $criteria)
     {
-        // Get the selected ingredient    
-        $ingredientId = $this->getParams()->ingredient;    
+        // Get the selected ingredient
+        $ingredientId = $this->getParams()->ingredient;
         $ingredient = craft()->cocktailRecipes->getIngredientById($ingredientId);
 
-        // Make sure it's a valid one    
-        if (!$ingredient)
-        {
-            $this->setMessage(Craft::t('The selected ingredient could not be found.'));
-            return false;        
+        // Make sure it’s a valid one
+        if (!$ingredient) {
+            $this->setMessage(Craft::t('Selected ingredient could not be found.'));
+            return false;
         }
 
         // Add the ingredient to the selected elements
         $elements = $criteria->find();
 
-        foreach ($elements as $element)
-        {
+        foreach ($elements as $element) {
             craft()->cocktailRecipes->addIngredientToElement($element, $ingredient);
         }
 
@@ -101,7 +102,14 @@ And here’s what that `cocktailRecipes/_addIngredientsTrigger` template looks l
 <div class="menu">
     <ul>
         {% for ingredient in ingredients %}
-            <li><a class="formsubmit" data-param="ingredient" data-value="{{ ingredient.id }}">{{ ingredient.name }}</a></li>
+            <li>
+                <a class="formsubmit"
+                    data-param="ingredient"
+                    data-value="{{ ingredient.id }}"
+                >
+                    {{- ingredient.name -}}
+                </a>
+            </li>
         {% endfor %}
     </ul>
 </div>
@@ -115,13 +123,13 @@ To make sense of that template path, see [Plugin Template Paths, Explained](temp
 
 Here’s what’s going on in this example:
 
-1. Our <api:Craft\getTriggerHtml()> method fetches all the ingredients from our plugin’s imaginary [service](services.md), passes them to a `cocktailRecipes/_addIngredientsTrigger` template, and returns the template’s rendered HTML.
+1. Our `getTriggerHtml()` method fetches all the ingredients from our plugin’s imaginary [service](services.md), passes them to a `cocktailRecipes/_addIngredientsTrigger` template, and returns the template’s rendered HTML.
 2. Our `cocktailRecipes/_addIngredientsTrigger` template defines a menu button labeled “Add Ingredient”. When clicked, the button will open a menu that lists all of the ingredients we fetched. (We get this UI functionality for free in Craft thanks to those `menubtn` and `menu` classes.)
 3. When one of the menu options are clicked on, a form that contains our trigger will automatically get submitted thanks to that `formsubmit` class. Additionally, a new hidden input will added to the form with the name “ingredient” and its value will be whatever the ingredient’s ID is, thanks to those `data-param` and `data-value` attributes.
-4. On the back end, when an action request comes in, Craft will instantiate a new `CocktailRecipes_AddIngredientElementAction` object. Craft knows that it’s expecting an `ingredients` parameter because <api:Craft\defineParams()> has defined it, so Craft will check the POST data for it.
-5. Once any parameters have been assigned, Craft will call the <api:Craft\performAction()> method, passing an <api:Craft\ElementCriteriaModel> to it that represents all of the selected elements.
+4. On the back end, when an action request comes in, Craft will instantiate a new `CocktailRecipes_AddIngredientElementAction` object. Craft knows that it’s expecting an `ingredients` parameter because `defineParams()` has defined it, so Craft will check the POST data for it.
+5. Once any parameters have been assigned, Craft will call the `performAction()` method, passing an <craft2:Craft\ElementCriteriaModel> to it that represents all of the selected elements.
 6. `performAction()` then loops through all of the selected elements, adding the selected ingredient to them, with the help of one of its service methods. It responds with either `true` or `false` depending on whether it was successful.
-7. The index page is notified of the action’s result, the elements are refreshed, and the message set by <api:Craft\setMessage()> is displayed to the user.
+7. The index page is notified of the action’s result, the elements are refreshed, and the message set by `setMessage()` is displayed to the user.
 
 
 ## Example 2: Menu Option
@@ -165,18 +173,18 @@ class CocktailRecipes_RemoveAllIngredientsElementAction extends BaseElementActio
 
 Here’s what’s going on in this example:
 
-1. Our Element Action doesn’t have a <api:Craft\getTriggerHtml()> method, so instead of getting its own trigger in the toolbar, Craft simply gives it an option in the actions menu, labelled “Remove all ingredients” because that’s what <api:Craft\getName()> returned. It will show up below a horizontal rule in the option menu, because <api:Craft\isDestructive()> returned `true`.
+1. Our Element Action doesn’t have a `getTriggerHtml()` method, so instead of getting its own trigger in the toolbar, Craft simply gives it an option in the actions menu, labelled “Remove all ingredients” because that’s what `getName()` returned. It will show up below a horizontal rule in the option menu, because `isDestructive()` returned `true`.
 2. When the user clicks on the “Remove all ingredients” menu option, the browser will send off a request to the back end informing it to run that action.
-3. On the back end, when the action request comes in, Craft will instantiate a new CocktailRecipes_RemoveAllIngredientsElementAction object, and call its <api:Craft\performAction()> method, passing an <api:Craft\ElementCriteriaModel> to it that represents all of the selected elements.
+3. On the back end, when the action request comes in, Craft will instantiate a new CocktailRecipes_RemoveAllIngredientsElementAction object, and call its `performAction()` method, passing an <craft2:Craft\ElementCriteriaModel> to it that represents all of the selected elements.
 4. performAction() then loops through all of the selected elements, adding the selected ingredient to them, with the help of one of its service methods. It responds with either `true` or `false` depending on whether it was successful.
-5. The index page is notified of the action’s result, the elements are refreshed, and the message set by <api:Craft\setMessage()> is displayed to the user.
+5. The index page is notified of the action’s result, the elements are refreshed, and the message set by `setMessage()` is displayed to the user.
 
 
 ## Binding JavaScript to Element Action Triggers
 
 Craft provides a JavaScript class that makes it easy to bind JavaScript to your triggers.
 
-To get started, add this to your <api:Craft\getTriggerHtml()> method:
+To get started, add this to your `getTriggerHtml()` method:
 
 ```php
 public function getTriggerHtml()
@@ -193,7 +201,7 @@ public function getTriggerHtml()
 ```
 
 ::: tip
-You might find it easier to write the JavaScript using PHP’s [Heredoc string syntax](http://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc). Alternatively you could write it in a resource file and include it using <api:Craft\TemplatesService::includeJsFile()>.
+You might find it easier to write the JavaScript using PHP’s [Heredoc string syntax](http://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc). Alternatively you could write it in a resource file and include it using <craft2:Craft\TemplatesService::includeJsFile()>.
 :::
 
 Craft.ElementActionTrigger supports the following settings:
@@ -211,7 +219,7 @@ You can bind JavaScript to your Element Action trigger regardless of whether it 
 
 Once you’ve created an Element Action class, you need to add it to the appropriate element index page(s.html).
 
-If your Element Action is intended for your own custom Element Type, you can do that by implementing the <api:Craft\getAvailableActions()> method on your Element Type class.
+If your Element Action is intended for your own custom Element Type, you can do that by implementing the <craft2:Craft\IElementType::getAvailableActions()> method on your Element Type class.
 
 If you want to add your Element Action to a third party’s Element Type, you will need to use its corresponding plugin hook (assuming the Element Type provides one). The following hooks are provided by Craft’s built-in Element Types:
 
