@@ -17,5 +17,5 @@ module.exports = {
   'yii2': { base: 'https://www.yiiframework.com/doc/api/2.0/', format: 'yii' },
   'yii1': { base: 'https://www.yiiframework.com/doc/api/1.1/', format: 'yii' },
   'config3': { base: '/3.x/config/config-settings.md#', format: 'config' },
-  'config2': { base: '/2.x/config/config-settings.md#', format: 'config' },
+  'config2': { base: '/2.x/config-settings.md#', format: 'config' },
 };
