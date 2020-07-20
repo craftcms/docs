@@ -49,7 +49,7 @@ function replacePrefix(link) {
   });
 
   if (prefix === "api" || prefix === "config") {
-    console.log('legacy `' + prefix + ':` needs updating: "' + link + '"');
+    console.log('broken legacy `' + prefix + '` link: "' + link + '"');
   }
 
   if (!inUse || inUse.length === 0) {
