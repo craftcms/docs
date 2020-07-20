@@ -63,7 +63,7 @@ If you’re on Windows or Linux, open VS Code and choose “File”, “Open Fol
 
 Before we complete the setup, let’s take a look at the files Composer just created:
 
-```
+```treeview
 craft/
 ├── config/
 ├── modules/
