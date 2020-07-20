@@ -4,7 +4,7 @@
  * 
  * Format can be... 
  * - `internal` for Craft+Commerce class docs
- * - `yii` for yii2 docs
+ * - `yii2` and `yii1` for Yii docs
  * - `config` for Craft config settings
  * - `generic` for replacement of the supplied `base` only and no additional formatting
  */
