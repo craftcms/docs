@@ -4,7 +4,7 @@ The following are common methods you will want to call in your front end templat
 
 ## craft.commerce.settings
 
-To get the Craft Commerce [general settings model](api:craft\commerce\models\Settings):
+To get the Craft Commerce [general settings model](commerce3:craft\commerce\models\Settings):
 
 ```twig
 {% set settings = craft.commerce.settings %}
@@ -32,7 +32,7 @@ See [craft.commerce.carts.cart](craft-commerce-carts-cart.md).
 
 ## craft.commerce.countries.allEnabledCountries
 
-Returns an array of <api:craft\commerce\models\Country> objects.
+Returns an array of <commerce3:craft\commerce\models\Country> objects.
 
 ```twig
 <select>
@@ -58,7 +58,7 @@ Data returned as `[32:'Australia', 72:'USA']`
 
 ## craft.commerce.states.allEnabledStates
 
-Returns an array of <api:craft\commerce\models\State> objects.
+Returns an array of <commerce3:craft\commerce\models\State> objects.
 
 ```twig
 <select>
@@ -70,7 +70,7 @@ Returns an array of <api:craft\commerce\models\State> objects.
 
 ## craft.commerce.states.allEnabledStatesAsListGroupedByCountryId
 
-Returns an array of <api:craft\commerce\models\State> object arrays, indexed by country IDs.
+Returns an array of <commerce3:craft\commerce\models\State> object arrays, indexed by country IDs.
 
 Data returned as `[72:[3:'California', 4:'Washington'],32:[7:'New South Wales']]`
 
@@ -150,7 +150,7 @@ Returns an array of all product types set up in the system.
 
 ## craft.commerce.orderStatuses.allOrderStatuses
 
-Returns an array of <api:craft\commerce\models\OrderStatus> objects representing all the order statuses in the system.
+Returns an array of <commerce3:craft\commerce\models\OrderStatus> objects representing all the order statuses in the system.
 
 ```twig
 {% for status in craft.commerce.orderStatuses.allOrderStatuses %}

@@ -13,7 +13,7 @@ $mySubscriptionQuery = \craft\commerce\elements\Subscription::find();
 ```
 :::
 
-Once you’ve created a subscription query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://docs.craftcms.com/v3/dev/element-queries/#executing-element-queries) by calling `.all()`. An array of [Subscription](api:craft\commerce\elements\Subscription) objects will be returned.
+Once you’ve created a subscription query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://docs.craftcms.com/v3/dev/element-queries/#executing-element-queries) by calling `.all()`. An array of [Subscription](commerce2:craft\commerce\elements\Subscription) objects will be returned.
 
 ::: tip
 See [Introduction to Element Queries](https://docs.craftcms.com/v3/dev/element-queries/) in the Craft docs to learn about how element queries work.
@@ -688,7 +688,7 @@ Possible values include:
 | - | -
 | `'foo'` | for a plan with a handle of `foo`.
 | `['foo', 'bar']` | for plans with a handle of `foo` or `bar`.
-| a [Plan](api:craft\commerce\base\Plan) object | for a plan represented by the object.
+| a [Plan](commerce2:craft\commerce\base\Plan) object | for a plan represented by the object.
 
 
 

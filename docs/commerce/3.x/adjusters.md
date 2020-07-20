@@ -4,7 +4,7 @@ Adjusters are classes that return adjustment models to the cart. Each adjustment
 
 Custom adjusters are only available in the Pro edition of Craft Commerce.
 
-An adjuster class implements the [Adjuster Interface](api:craft\commerce\base\AdjusterInterface).
+An adjuster class implements the [Adjuster Interface](commerce3:craft\commerce\base\AdjusterInterface).
 
 ## Register a New Adjuster
 
@@ -28,7 +28,7 @@ The order of the adjustments within the types array is important, because its ad
 
 ## Replace an Adjuster
 
-Because the adjusters are exposed in an array, you could also swap your own custom adjuster for one that’s built in. Here, we’re swapping a custom shipping adjuster (`MyShippingAdjuster`), in place of the [Shipping](api:craft\commerce\adjusters\Shipping) class Commerce provides:
+Because the adjusters are exposed in an array, you could also swap your own custom adjuster for one that’s built in. Here, we’re swapping a custom shipping adjuster (`MyShippingAdjuster`), in place of the [Shipping](commerce3:craft\commerce\adjusters\Shipping) class Commerce provides:
 
 ```php
 use craft\commerce\services\OrderAdjustments;

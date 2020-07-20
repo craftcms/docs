@@ -1633,7 +1633,7 @@ Event handlers can customize PDF rendering by modifying several properties on th
 
 | Property    | Value                                                                                                                     |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `order`     | populated [Order](api:craft\commerce\elements\Order) model                                                                |
+| `order`     | populated [Order](commerce3:craft\commerce\elements\Order) model                                                                |
 | `template`  | optional Twig template path (string) to be used for rendering                                                             |
 | `variables` | populated with the variables availble to the template used for rendering                                                  |
 | `option`    | optional string for the template that can be used to show different details based on context (example: `receipt`, `ajax`) |

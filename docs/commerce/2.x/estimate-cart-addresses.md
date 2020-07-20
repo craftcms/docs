@@ -8,7 +8,7 @@ The cart accepts the setting of an estimated shipping address and an estimated b
 
 Adding or updating the estimated addresses on the order is done using the `commerce/cart/update-cart` form action.
 
-You are able to test the existence of estimate addresses by checking the `estimatedShippingAddressId` and `estimatedBillingAddressId` attributes on the [cart](api:craft\commerce\elements\Order) object.
+You are able to test the existence of estimate addresses by checking the `estimatedShippingAddressId` and `estimatedBillingAddressId` attributes on the [cart](commerce2:craft\commerce\elements\Order) object.
 
 The example below shows how you can add a shipping estimate address to the cart.
 
@@ -51,6 +51,6 @@ The example below shows how you can add a shipping estimate address to the cart.
 </form>
 ```
 
-<api:craft\commerce\adjusters\Tax> and <api:craft\commerce\adjusters\Shipping> adjusters that are based on estimated address data contain an `isEstimated` attribute.
+<commerce2:craft\commerce\adjusters\Tax> and <commerce2:craft\commerce\adjusters\Shipping> adjusters that are based on estimated address data contain an `isEstimated` attribute.
 
 A full example of this can be seen in the [example templates](example-templates.md) on the cart page.

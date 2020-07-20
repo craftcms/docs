@@ -34,4 +34,4 @@ $.ajax({
 
 Either of the examples above will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
 
-To see what cart information you can use in your templates, take a look at the <api:craft\commerce\elements\Order> class reference.
+To see what cart information you can use in your templates, take a look at the <commerce3:craft\commerce\elements\Order> class reference.

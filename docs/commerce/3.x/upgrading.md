@@ -109,7 +109,7 @@ Use the table below to update each breaking change in your Twig templates.
 
 In order to improve compatibility with payment gateways and tax systems, custom adjuster types have been deprecated.
 
-Custom adjusters must extend the included <api:craft\commerce\adjusters\Discount>, <api:craft\commerce\adjusters\Shipping>, or <api:craft\commerce\adjusters\Tax>.
+Custom adjusters must extend the included <commerce3:craft\commerce\adjusters\Discount>, <commerce3:craft\commerce\adjusters\Shipping>, or <commerce3:craft\commerce\adjusters\Tax>.
 
 
 ## Discount Category Matching

@@ -124,16 +124,16 @@ When building your front end and displaying line items, it’s best to reference
 
 ## Custom Purchasables
 
-If you’d like to introduce your own purchasable in a custom module or plugin, you can either implement [`craft\commerce\base\PurchasableInterface`](api:craft\commerce\base\PurchasableInterface) or extend [`craft\commerce\base\Purchasable`](api:craft\commerce\base\Purchasable).
+If you’d like to introduce your own purchasable in a custom module or plugin, you can either implement [`craft\commerce\base\PurchasableInterface`](commerce3:craft\commerce\base\PurchasableInterface) or extend [`craft\commerce\base\Purchasable`](commerce3:craft\commerce\base\Purchasable).
 
-We recommend extending [the base Purchasable](api:craft\commerce\base\Purchasable) because you’ll automatically get...
+We recommend extending [the base Purchasable](commerce3:craft\commerce\base\Purchasable) because you’ll automatically get...
 
 - `getSalePrice()` calculation
 - `getSales()` to see the details of each sale applied in that calculation
 - a standard Yii model that includes everything in `attributes()` and `extraFields()`
 - automatic `sku` validation
 
-You may alternatively choose to implement [PurchasableInterface](api:craft\commerce\base\PurchasableInterface), but you’ll need to handle these and any additional features yourself.
+You may alternatively choose to implement [PurchasableInterface](commerce3:craft\commerce\base\PurchasableInterface), but you’ll need to handle these and any additional features yourself.
 
 ## Implementation
 

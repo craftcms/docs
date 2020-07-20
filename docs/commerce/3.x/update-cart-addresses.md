@@ -18,7 +18,7 @@ You can use `cart.shippingAddress` and `cart.billingAddress` in a template to se
 {% endif %}
 ```
 
-Each attribute returns an [Address](api:craft\commerce\models\Address) object, or `null` if no address is set.
+Each attribute returns an [Address](commerce3:craft\commerce\models\Address) object, or `null` if no address is set.
 
 ## Modifying a cart’s shipping and billing addresses
 

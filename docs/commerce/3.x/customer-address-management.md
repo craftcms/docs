@@ -6,7 +6,7 @@ If the customer is a guest, they have no need to manage an address book.
 
 Customers can only add and remove addresses from the front end while they are logged in.
 
-See [the Customer model](api:craft\commerce\models\Customer) to learn about the methods available to retrieve customer address data e.g. [Customer::getPrimaryBillingAddress()](<api:craft\commerce\models\Customer::getPrimaryBillingAddress()>), [Customer::getPrimaryShippingAddress()](<api:craft\commerce\models\Customer::getPrimaryShippingAddress()>) and [Customer::getAddressById()](<api:craft\commerce\models\Customer::getAddressById()>).
+See [the Customer model](commerce3:craft\commerce\models\Customer) to learn about the methods available to retrieve customer address data e.g. [Customer::getPrimaryBillingAddress()](<commerce3:craft\commerce\models\Customer::getPrimaryBillingAddress()>), [Customer::getPrimaryShippingAddress()](<commerce3:craft\commerce\models\Customer::getPrimaryShippingAddress()>) and [Customer::getAddressById()](<commerce3:craft\commerce\models\Customer::getAddressById()>).
 
 ## Get all the current customer’s addresses
 
@@ -18,7 +18,7 @@ See [the Customer model](api:craft\commerce\models\Customer) to learn about the 
 {% endfor %}
 ```
 
-See <api:craft\commerce\models\Address> to learn about the fields available on an address.
+See <commerce3:craft\commerce\models\Address> to learn about the fields available on an address.
 
 ## Get a current customer’s address by its ID
 

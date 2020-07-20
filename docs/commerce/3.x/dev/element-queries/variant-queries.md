@@ -21,7 +21,7 @@ $myVariantQuery = \craft\commerce\elements\Variant::find();
 ```
 :::
 
-Once you’ve created a variant query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://docs.craftcms.com/v3/dev/element-queries/#executing-element-queries) by calling `.all()`. An array of [Variant](api:craft\commerce\elements\Variant) objects will be returned.
+Once you’ve created a variant query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://docs.craftcms.com/v3/dev/element-queries/#executing-element-queries) by calling `.all()`. An array of [Variant](commerce3:craft\commerce\elements\Variant) objects will be returned.
 
 ::: tip
 See [Introduction to Element Queries](https://docs.craftcms.com/v3/dev/element-queries/) in the Craft docs to learn about how element queries work.
@@ -77,7 +77,7 @@ Variant queries support the following parameters:
 | Param                                     | Description
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [anyStatus](#anystatus)                   | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
-| [asArray](#asarray)                       | Causes the query to return matching variants as arrays of data, rather than [Variant](api:craft\commerce\elements\Variant) objects.
+| [asArray](#asarray)                       | Causes the query to return matching variants as arrays of data, rather than [Variant](commerce3:craft\commerce\elements\Variant) objects.
 | [clearCachedResult](#clearcachedresult)   | Clears the cached result.
 | [dateCreated](#datecreated)               | Narrows the query results based on the variants’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the variants’ last-updated dates.
@@ -139,7 +139,7 @@ $variants = \craft\commerce\elements\Variant::find()
 
 ### `asArray`
 
-Causes the query to return matching variants as arrays of data, rather than [Variant](api:craft\commerce\elements\Variant) objects.
+Causes the query to return matching variants as arrays of data, rather than [Variant](commerce3:craft\commerce\elements\Variant) objects.
 
 
 
@@ -282,7 +282,7 @@ Possible values include:
 
 | Value | Fetches variants…
 | - | -
-| a [ProductQuery](api:craft\commerce\elements\db\ProductQuery) object | for products that match the query.
+| a [ProductQuery](commerce3:craft\commerce\elements\db\ProductQuery) object | for products that match the query.
 
 
 
@@ -574,7 +574,7 @@ Possible values include:
 
 | Value | Fetches variants…
 | - | -
-| a [Product](api:craft\commerce\elements\Product) object | for a product represented by the object.
+| a [Product](commerce3:craft\commerce\elements\Product) object | for a product represented by the object.
 
 
 

@@ -21,7 +21,7 @@ $myProductQuery = \craft\commerce\elements\Product::find();
 ```
 :::
 
-Once you’ve created a product query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://docs.craftcms.com/v3/dev/element-queries/#executing-element-queries) by calling `.all()`. An array of [Product](api:craft\commerce\elements\Product) objects will be returned.
+Once you’ve created a product query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://docs.craftcms.com/v3/dev/element-queries/#executing-element-queries) by calling `.all()`. An array of [Product](commerce3:craft\commerce\elements\Product) objects will be returned.
 
 ::: tip
 See [Introduction to Element Queries](https://docs.craftcms.com/v3/dev/element-queries/) in the Craft docs to learn about how element queries work.
@@ -77,7 +77,7 @@ Product queries support the following parameters:
 | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [after](#after)                               | Narrows the query results to only products that were posted on or after a certain date.
 | [anyStatus](#anystatus)                       | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
-| [asArray](#asarray)                           | Causes the query to return matching products as arrays of data, rather than [Product](api:craft\commerce\elements\Product) objects.
+| [asArray](#asarray)                           | Causes the query to return matching products as arrays of data, rather than [Product](commerce3:craft\commerce\elements\Product) objects.
 | [availableForPurchase](#availableforpurchase) | Narrows the query results to only products that are available for purchase.
 | [before](#before)                             | Narrows the query results to only products that were posted before a certain date.
 | [clearCachedResult](#clearcachedresult)       | Clears the cached result.
@@ -170,7 +170,7 @@ $products = \craft\commerce\elements\Product::find()
 
 ### `asArray`
 
-Causes the query to return matching products as arrays of data, rather than [Product](api:craft\commerce\elements\Product) objects.
+Causes the query to return matching products as arrays of data, rather than [Product](commerce3:craft\commerce\elements\Product) objects.
 
 
 
@@ -405,7 +405,7 @@ Possible values include:
 
 | Value | Fetches products…
 | - | -
-| a [VariantQuery](api:craft\commerce\elements\db\VariantQuery) object | with variants that match the query.
+| a [VariantQuery](commerce3:craft\commerce\elements\db\VariantQuery) object | with variants that match the query.
 
 
 
@@ -909,7 +909,7 @@ Possible values include:
 | `'not foo'` | not of a type with a handle of `foo`.
 | `['foo', 'bar']` | of a type with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not of a type with a handle of `foo` or `bar`.
-| an [ProductType](api:craft\commerce\models\ProductType) object | of a type represented by the object.
+| an [ProductType](commerce3:craft\commerce\models\ProductType) object | of a type represented by the object.
 
 
 

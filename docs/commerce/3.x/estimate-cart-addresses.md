@@ -5,14 +5,14 @@ It’s common to provide a shipping or tax cost estimate before a customer has e
 To help with this, the cart can use estimated shipping and billing addresses for calculations before complete addresses are available.
 
 ::: tip
-An estimated address is an [Address model](api:craft\commerce\models\Address) with its `isEstimated` property set to `true`. This simple differentiation prevents any confusion between estimated and final calculations.
+An estimated address is an [Address model](commerce3:craft\commerce\models\Address) with its `isEstimated` property set to `true`. This simple differentiation prevents any confusion between estimated and final calculations.
 :::
 
 ## Adding a shipping estimate address to the cart
 
 Adding or updating the estimated addresses on the order is done using the `commerce/cart/update-cart` form action.
 
-You can check for existing estimate addresses with the `estimatedShippingAddressId` and `estimatedBillingAddressId` attributes on the [cart](api:craft\commerce\elements\Order) object.
+You can check for existing estimate addresses with the `estimatedShippingAddressId` and `estimatedBillingAddressId` attributes on the [cart](commerce3:craft\commerce\elements\Order) object.
 
 This example renders a form for adding an estimated shipping country, state, and zip code to the cart:
 
@@ -64,6 +64,6 @@ This example renders a form for adding an estimated shipping country, state, and
 </form>
 ```
 
-[Tax adjusters](api:craft\commerce\adjusters\Tax) and [shipping adjusters](api:craft\commerce\adjusters\Shipping) based on estimated address data contain an `isEstimated` attribute.
+[Tax adjusters](commerce3:craft\commerce\adjusters\Tax) and [shipping adjusters](commerce3:craft\commerce\adjusters\Shipping) based on estimated address data contain an `isEstimated` attribute.
 
 A full example of this can be seen in the [example templates](example-templates.md) on the cart page.

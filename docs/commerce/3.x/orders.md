@@ -4,7 +4,7 @@ When a cart is completed, it becomes an order. You can view orders in the Commer
 
 Orders are an [Element Type](https://docs.craftcms.com/v3/extend/element-types.html) and can have custom field associated with them.
 
-For examples of using order information in templates and seeing what properties are available, take a look at the the <api:craft\commerce\elements\Order> class reference.
+For examples of using order information in templates and seeing what properties are available, take a look at the the <commerce3:craft\commerce\elements\Order> class reference.
 
 ## Carts become orders
 

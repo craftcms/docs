@@ -32,7 +32,7 @@ See [craft.commerce.carts.cart](craft-commerce-carts-cart.md)
 
 ## craft.commerce.countries.allCountries
 
-Returns an array of <api:craft\commerce\models\Country> objects.
+Returns an array of <commerce2:craft\commerce\models\Country> objects.
 
 ```twig
 <select>
@@ -58,7 +58,7 @@ Data returned as `[32:'Australia', 72:'USA']`
 
 ## craft.commerce.states
 
-Returns an array of <api:craft\commerce\models\State> objects.
+Returns an array of <commerce2:craft\commerce\models\State> objects.
 
 ```twig
 <select>
@@ -70,7 +70,7 @@ Returns an array of <api:craft\commerce\models\State> objects.
 
 ## craft.commerce.states.allStatesAsList
 
-Returns an array of <api:craft\commerce\models\State> object arrays, indexed by country IDs.
+Returns an array of <commerce2:craft\commerce\models\State> object arrays, indexed by country IDs.
 
 Data returned as `[72:[3:'California', 4:'Washington'],32:[7:'New South Wales']]`
 
@@ -149,7 +149,7 @@ Returns an array of all product types set up in the system.
 
 ## craft.commerce.orderStatuses.allOrderStatuses
 
-Returns an array of <api:craft\commerce\elements\OrderStatus> objects representing all the order statuses in the system.
+Returns an array of <commerce2:craft\commerce\elements\OrderStatus> objects representing all the order statuses in the system.
 
 ```twig
 {% for status in craft.commerce.orderStatuses.allOrderStatuses %}

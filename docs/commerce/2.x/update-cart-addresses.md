@@ -16,7 +16,7 @@ and
 {% endif %}
 ```
 
-Both cart attributes return an <api:craft\commerce\models\Address> object, or `null` if no addresses are set.
+Both cart attributes return an <commerce2:craft\commerce\models\Address> object, or `null` if no addresses are set.
 
 ## Adding or updating the shipping and billing address selected for the current cart.
 

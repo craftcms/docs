@@ -31,7 +31,7 @@ Use a plugin or module to register your shipping method. The shipping method pro
 
 ### Shipping Method Interface
 
-The [shipping method interface](api:craft\commerce\base\ShippingMethodInterface) requires a class with the following methods:
+The [shipping method interface](commerce3:craft\commerce\base\ShippingMethodInterface) requires a class with the following methods:
 
 #### getType()
 
@@ -65,13 +65,13 @@ Returns `true` if this shipping method should be an option for the customer to s
 
 The shipping method returns an array of these rules objects. The shipping engine processes the array in the order it was received, calling `matchOrder()` on each item. It expects to get `true` or `false` from each, indicating whether this shipping method can be applied to the order/cart. The first matched (`true`) rule returns the costs to the cart.
 
-These are the methods required for each [shipping rule](api:craft\commerce\base\ShippingRuleInterface) object:
+These are the methods required for each [shipping rule](commerce3:craft\commerce\base\ShippingRuleInterface) object:
 
 #### getHandle();
 
 Returns the unique handle of this shipping rule.
 
-#### matchOrder([Order \$order](api:craft\commerce\elements\Order))
+#### matchOrder([Order \$order](commerce3:craft\commerce\elements\Order))
 
 Returns `true` if this rule is a match on the order, or `false` if the shipping engine should continue and evaluate the next rule for the current shipping method.
 
@@ -135,6 +135,6 @@ Event::on(
 
 ## Fetching a Cart’s Shipping Method
 
-When looking to get a cart’s selected shipping method, use [`shippingMethodHandle`](api:craft\commerce\elements\Order::shippingMethodHandle). This will return the handle of the chosen shipping method or `null` if none has been selected.
+When looking to get a cart’s selected shipping method, use [`shippingMethodHandle`](commerce3:craft\commerce\elements\Order::shippingMethodHandle). This will return the handle of the chosen shipping method or `null` if none has been selected.
 
-It’s important to note that calling [`getShippingMethod()`](api:craft\commerce\elements\Order::getShippingMethod()) will set the least expensive option for the order if one hasn’t yet been selected. This can lead to some confusion if you’re expecting it to represent an explicit choice from the user.
+It’s important to note that calling [`getShippingMethod()`](commerce3:craft\commerce\elements\Order::getShippingMethod()) will set the least expensive option for the order if one hasn’t yet been selected. This can lead to some confusion if you’re expecting it to represent an explicit choice from the user.

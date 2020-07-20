@@ -1,6 +1,6 @@
 # craft.commerce.carts.cart
 
-This template function returns the current user’s cart, which is an [Order object](api:craft\commerce\elements\Order).
+This template function returns the current user’s cart, which is an [Order object](commerce3:craft\commerce\elements\Order).
 
 You would get cart for the current user like this:
 

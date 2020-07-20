@@ -13,7 +13,7 @@ $myOrderQuery = \craft\commerce\elements\Order::find();
 ```
 :::
 
-Once you’ve created an order query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://docs.craftcms.com/v3/dev/element-queries/#executing-element-queries) by calling `.all()`. An array of [Order](api:craft\commerce\elements\Order) objects will be returned.
+Once you’ve created an order query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://docs.craftcms.com/v3/dev/element-queries/#executing-element-queries) by calling `.all()`. An array of [Order](commerce2:craft\commerce\elements\Order) objects will be returned.
 
 ::: tip
 See [Introduction to Element Queries](https://docs.craftcms.com/v3/dev/element-queries/) in the Craft docs to learn about how element queries work.
@@ -119,7 +119,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 ### `asArray`
 
-Causes the query to return matching orders as arrays of data, rather than [Order](api:craft\commerce\elements\Order) objects.
+Causes the query to return matching orders as arrays of data, rather than [Order](commerce2:craft\commerce\elements\Order) objects.
 
 
 
@@ -150,7 +150,7 @@ Possible values include:
 
 | Value | Fetches orders…
 | - | -
-| a [Customer](api:craft\commerce\models\Customer) object | with a customer represented by the object.
+| a [Customer](commerce2:craft\commerce\models\Customer) object | with a customer represented by the object.
 
 
 
@@ -452,7 +452,7 @@ Possible values include:
 
 | Value | Fetches orders…
 | - | -
-| a [Gateway](api:craft\commerce\base\Gateway) object | with a gateway represented by the object.
+| a [Gateway](commerce2:craft\commerce\base\Gateway) object | with a gateway represented by the object.
 
 
 
@@ -481,8 +481,8 @@ Possible values include:
 
 | Value | Fetches orders…
 | - | -
-| a [PurchasableInterface](api:craft\commerce\base\PurchasableInterface) object | with a purchasable represented by the object.
-| an array of [PurchasableInterface](api:craft\commerce\base\PurchasableInterface) objects | with all the purchasables represented by the objects.
+| a [PurchasableInterface](commerce2:craft\commerce\base\PurchasableInterface) object | with a purchasable represented by the object.
+| an array of [PurchasableInterface](commerce2:craft\commerce\base\PurchasableInterface) objects | with all the purchasables represented by the objects.
 
 
 
@@ -770,7 +770,7 @@ Possible values include:
 | `'not foo'` | not with an order status with a handle of `foo`.
 | `['foo', 'bar']` | with an order status with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not with an order status with a handle of `foo` or `bar`.
-| a [OrderStatus](api:craft\commerce\models\OrderStatus) object | with an order status represented by the object.
+| a [OrderStatus](commerce2:craft\commerce\models\OrderStatus) object | with an order status represented by the object.
 
 
 
