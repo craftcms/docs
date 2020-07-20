@@ -2,7 +2,7 @@
 
 Before we can install Craft, we have to make sure it’s able to find the database you created for it. You’ll do this by editing settings in the `.env` file. Unless you skipped ahead, your file will look just like this but with a unique `SECURITY_KEY` filled in:
 
-```dotenv
+```
 # The environment Craft is currently running in ('dev', 'staging', 'production', etc.)
 ENVIRONMENT="dev"
 
@@ -58,7 +58,7 @@ Saving database credentials to your .env file ... done
 
 If you look again at your `.env` file, you’ll see those connection settings were filled in and saved:
 
-```dotenv
+```
 # The environment Craft is currently running in ('dev', 'staging', 'production', etc.)
 ENVIRONMENT="dev"
 
