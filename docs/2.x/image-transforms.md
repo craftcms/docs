@@ -38,7 +38,7 @@ If **Mode** is set to “Crop”, an additional “Crop Position” setting will
 
 If you leave either **Width** or **Height** blank, that dimension will be set to whatever maintains the image’s aspect ratio. So for example, if you have an image that is 600 by 400 pixels, and you set a transform’s Width to 60, but leave Height blank, the resulting height will be 40.
 
-If you leave **Quality** blank, Craft will use the quality set by your <config:defaultImageQuality> config setting.
+If you leave **Quality** blank, Craft will use the quality set by your <config2:defaultImageQuality> config setting.
 
 **Image Format** can be set to the following values:
 
@@ -53,7 +53,10 @@ If you leave **Image Format** blank, Craft will use the original image’s forma
 To output an image with a transform applied, simply pass your transform’s handle into your [AssetFileModel’s](templating/assetfilemodel.md) `getUrl()`, `getWidth()`, and `getHeight()` functions:
 
 ```twig
-<img src="{{ asset.getUrl('thumb') }}" width="{{ asset.getWidth('thumb') }}" height="{{ asset.getHeight('thumb') }}">
+<img src="{{ asset.getUrl('thumb') }}"
+    width="{{ asset.getWidth('thumb') }}"
+    height="{{ asset.getHeight('thumb') }}"
+>
 ```
 
 ## Defining Transforms in your Templates
@@ -75,7 +78,10 @@ First, you must create an object that defines the transform’s parameters:
 Then you can pass that object into your AssetFileModel’s `getUrl()`, `getWidth()`, and `getHeight()` functions:
 
 ```twig
-<img src="{{ asset.getUrl(thumb) }}" width="{{ asset.getWidth(thumb) }}" height="{{ asset.getHeight(thumb) }}">
+<img src="{{ asset.getUrl(thumb) }}"
+    width="{{ asset.getWidth(thumb) }}"
+    height="{{ asset.getHeight(thumb) }}"
+>
 ```
 
 Note how in that example there are no quotes around “`thumb`”, like there were in the first one. That’s because in the first one, we were passing a _string_ set to a CP-defined transform’s handle, whereas in this example we’re passing a _variable_ referencing the ‘thumb’ object we created within the template.
