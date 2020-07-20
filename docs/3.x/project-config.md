@@ -2,7 +2,7 @@
 
 Craft 3.1 introduced the **project config**, a sharable configuration store that makes it easier for developers to collaborate and deploy site changes across multiple environments.
 
-Craft stores the following settings in the project 
+Craft stores the following settings in the project config:
 
 - Asset volumes and named image transforms
 - Category groups
