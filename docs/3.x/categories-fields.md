@@ -66,13 +66,13 @@ Possible values include:
 | `100` | that are related to the category with an ID of 100.
 | `[100, 200]` | that are related to a category with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the categories with IDs of 100 and 200.
-| an [Category](api:craft\elements\Category) object | that are related to the category.
-| an [CategoryQuery](api:craft\elements\db\CategoryQuery) object | that are related to any of the resulting categories.
+| an [Category](craft3:craft\elements\Category) object | that are related to the category.
+| an [CategoryQuery](craft3:craft\elements\db\CategoryQuery) object | that are related to any of the resulting categories.
 
 ```twig
 {# Fetch entries with a related category #}
 {% set entries = craft.entries()
-    .<FieldHandle>(':notempty:')
+    .myFieldHandle(':notempty:')
     .all() %}
 ```
 
@@ -81,15 +81,15 @@ Possible values include:
 If you have an element with a Categories field in your template, you can access its related categories using your Categories field’s handle:
 
 ```twig
-{% set relatedCategories = entry.<FieldHandle> %}
+{% set relatedCategories = entry.myFieldHandle %}
 ```
 
 That will give you a [category query](dev/element-queries/category-queries.md), prepped to output all of the related categories for the given field.
 
-To loop through all of the related categories as a flat list, call [all()](api:craft\db\Query::all()) and then loop over the results:
+To loop through all of the related categories as a flat list, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 
 ```twig
-{% set relatedCategories = entry.<FieldHandle>.all() %}
+{% set relatedCategories = entry.myFieldHandle.all() %}
 {% if relatedCategories|length %}
     <ul>
         {% for rel in relatedCategories %}
@@ -102,7 +102,7 @@ To loop through all of the related categories as a flat list, call [all()](api:c
 Or you can show them as a hierarchical list with the [nav](dev/tags/nav.md) tag:
 
 ```twig
-{% set relatedCategories = entry.<FieldHandle>.all() %}
+{% set relatedCategories = entry.myFieldHandle.all() %}
 {% if relatedCategories|length %}
     <ul>
         {% nav rel in relatedCategories %}
@@ -119,19 +119,19 @@ Or you can show them as a hierarchical list with the [nav](dev/tags/nav.md) tag:
 {% endif %}
 ```
 
-If you only want the first related category, call [one()](api:craft\db\Query::one()) instead, and then make sure it returned something:
+If you only want the first related category, call [one()](craft3:craft\db\Query::one()) instead, and then make sure it returned something:
 
 ```twig
-{% set rel = entry.<FieldHandle>.one() %}
+{% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
 {% endif %}
 ```
 
-If you just need to check if there are any related categories (but don’t need to fetch them), you can call [exists()](api:craft\db\Query::exists()):
+If you just need to check if there are any related categories (but don’t need to fetch them), you can call [exists()](craft3:craft\db\Query::exists()):
 
 ```twig
-{% if entry.<FieldHandle>.exists() %}
+{% if entry.myFieldHandle.exists() %}
     <p>There are related categories!</p>
 {% endif %}
 ```
@@ -139,7 +139,7 @@ If you just need to check if there are any related categories (but don’t need 
 You can set [parameters](dev/element-queries/category-queries.md#parameters) on the category query as well. For example, to only fetch the “leaves” (categories without any children), set the [leaves](dev/element-queries/category-queries.md#leaves) param:
 
 ```twig
-{% set relatedCategories = entry.<FieldHandle>
+{% set relatedCategories = entry.myFieldHandle
     .leaves()
     .all() %}
 ```
@@ -147,5 +147,5 @@ You can set [parameters](dev/element-queries/category-queries.md#parameters) on 
 ## See Also
 
 * [Category Queries](dev/element-queries/category-queries.md)
-* <api:craft\elements\Category>
+* <craft3:craft\elements\Category>
 * [Relations](relations.md)
