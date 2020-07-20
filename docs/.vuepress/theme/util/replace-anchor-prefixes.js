@@ -48,6 +48,10 @@ function replacePrefix(link) {
     return placeholder === prefix;
   });
 
+  if (prefix === 'api') {
+    console.log('legacy `api:` needs updating: "' + link + '"');
+  }
+
   if (!inUse || inUse.length === 0) {
     return;
   }
