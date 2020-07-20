@@ -72,7 +72,8 @@ module.exports = {
       js: "JavaScript",
       json: "JSON",
       xml: "XML",
-      treeview: "Folder"
+      treeview: "Folder",
+      csv: "CSV"
     },
     feedback: {
       helpful: "Was this page helpful?",
