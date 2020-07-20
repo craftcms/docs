@@ -83,13 +83,13 @@ Possible values include:
 | `100` | that are related to the asset with an ID of 100.
 | `[100, 200]` | that are related to an asset with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the assets with IDs of 100 and 200.
-| an [Asset](api:craft\elements\Asset) object | that are related to the asset.
-| an [AssetQuery](api:craft\elements\db\AssetQuery) object | that are related to any of the resulting assets.
+| an [Asset](craft3:craft\elements\Asset) object | that are related to the asset.
+| an [AssetQuery](craft3:craft\elements\db\AssetQuery) object | that are related to any of the resulting assets.
 
 ```twig
 {# Fetch entries with a related asset #}
 {% set entries = craft.entries()
-    .<FieldHandle>(':notempty:')
+    .myFieldHandle(':notempty:')
     .all() %}
 ```
 
@@ -98,15 +98,15 @@ Possible values include:
 If you have an element with an Assets field in your template, you can access its related assets using your Assets field’s handle:
 
 ```twig
-{% set query = entry.<FieldHandle> %}
+{% set query = entry.myFieldHandle %}
 ```
 
 That will give you an [asset query](dev/element-queries/asset-queries.md), prepped to output all of the related assets for the given field.
 
-To loop through all of the related assets, call [all()](api:craft\db\Query::all()) and then loop over the results:
+To loop through all of the related assets, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 
 ```twig
-{% set relatedAssets = entry.<FieldHandle>.all() %}
+{% set relatedAssets = entry.myFieldHandle.all() %}
 {% if relatedAssets|length %}
     <ul>
         {% for rel in relatedAssets %}
@@ -120,19 +120,19 @@ To loop through all of the related assets, call [all()](api:craft\db\Query::all(
 When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have “Assets in this volume have public URLs” enabled and a “Base URL” setting. Otherwise, the result will always be empty.
 :::
 
-If you only want the first related asset, call [one()](api:craft\db\Query::one()) instead, and then make sure it returned something:
+If you only want the first related asset, call [one()](craft3:craft\db\Query::one()) instead, and then make sure it returned something:
 
 ```twig
-{% set rel = entry.<FieldHandle>.one() %}
+{% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ rel.url }}">{{ rel.filename }}</a></p>
 {% endif %}
 ```
 
-If you just need to check if there are any related assets (but don’t need to fetch them), you can call [exists()](api:craft\db\Query::exists()):
+If you just need to check if there are any related assets (but don’t need to fetch them), you can call [exists()](craft3:craft\db\Query::exists()):
 
 ```twig
-{% if entry.<FieldHandle>.exists() %}
+{% if entry.myFieldHandle.exists() %}
     <p>There are related assets!</p>
 {% endif %}
 ```
@@ -140,7 +140,7 @@ If you just need to check if there are any related assets (but don’t need to f
 You can set [parameters](dev/element-queries/asset-queries.md#parameters) on the asset query as well. For example, to ensure that only images are returned, you can set the [kind](dev/element-queries/asset-queries.md#kind) param:
 
 ```twig
-{% set relatedAssets = clone(entry.<FieldHandle>)
+{% set relatedAssets = clone(entry.myFieldHandle)
     .kind('image')
     .all() %}
 ```
@@ -156,39 +156,38 @@ If you have an [entry form](dev/examples/entry-form.md) that needs to contain an
 For example, you could create a list of checkboxes for each of the possible relations:
 
 ```twig
-{# Include a hidden input first so Craft knows to update the
-   existing value, if no checkboxes are checked. #}
-{{ hiddenInput('fields[<FieldHandle>]', '') }}
+{# Include a hidden input first so Craft knows to update the existing value
+   if no checkboxes are checked. #}
+{{ hiddenInput('fields[myFieldHandle]', '') }}
 
 {# Get all of the possible asset options #}
 {% set possibleAssets = craft.assets()
-  .volume('siteAssets')
-  .kind('image')
-  .orderBy('filename ASC')
-  .withTransforms([
-    { width: 100, height: 100 }
-  ])
-  .all() %}
+    .volume('siteAssets')
+    .kind('image')
+    .orderBy('filename ASC')
+    .withTransforms([{ width: 100, height: 100 }])
+    .all() %}
 
 {# Get the currently related asset IDs #}
 {% set relatedAssetIds = entry is defined
-  ? entry.<FieldHandle>.ids()
-  : [] %}
+    ? entry.myFieldHandle.ids()
+    : [] %}
 
 <ul>
-  {% for possibleAsset in possibleAssets %}
-    <li>
-      <label>
-        {{ input('checkbox', 'fields[<FieldHandle>][]', possibleAsset.id, {
-          checked: possibleAsset.id in relatedAssetIds
-        }) }}
-        {{ tag('img', {
-          src: possibleAsset.
-        }) }}
-        {{ possibleAsset.getImg({width: 100, height: 100}) }}
-        {{ possibleAsset.filename }}
-      </label>
-    </li>
+    {% for possibleAsset in possibleAssets %}
+        <li>
+            <label>
+                {{ input(
+                    'checkbox',
+                    'fields[myFieldHandle][]',
+                    possibleAsset.id,
+                    { checked: possibleAsset.id in relatedAssetIds }
+                ) }}
+                {{ tag('img', { src: possibleAsset.url }) }}
+                {{ possibleAsset.getImg({ width: 100, height: 100 }) }}
+                {{ possibleAsset.filename }}
+            </label>
+        </li>
     {% endfor %}
 </ul>
 ```
@@ -200,9 +199,7 @@ You could then make the checkbox list sortable, so users have control over the o
 Assets fields can handle new file uploads as well:
 
 ```twig
-{{ input('file', 'fields[<FieldHandle>][]', options={
-  multiple: true,
-}) }}
+{{ input('file', 'fields[myFieldHandle][]', options={ multiple: true }) }}
 ```
 
 ::: tip
@@ -212,11 +209,11 @@ Don’t forget to set `enctype="multipart/form-data"` on your `<form>` tag so yo
 Alternatively, you can submit Base64-encoded file data, which the Assets field will decode and treat as an uploaded file:
 
 ```twig
-{{ hiddenInput('fields[<FieldHandle>][]', 'data:image/jpeg;base64,<BASE64DATA>') }}
+{{ hiddenInput('fields[myFieldHandle][]', 'data:image/jpeg;base64,<BASE64DATA>') }}
 ```
 
 ## See Also
 
 * [Asset Queries](dev/element-queries/asset-queries.md)
-* <api:craft\elements\Asset>
+* <craft3:craft\elements\Asset>
 * [Relations](relations.md)
