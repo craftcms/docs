@@ -2,8 +2,6 @@
 
 At this point you should have a local development environment running with a database and know how to run console commands. Now we’ll make sure Composer is installed.
 
-[[TOC]]
-
 ## What’s Composer?
 
 <BrowserShot url="https://getcomposer.org/" :link="true">

@@ -2,8 +2,6 @@
 
 The first thing we’ll do is create a new Section for our blog posts.
 
-[[TOC]]
-
 ## Create a section
 
 1. In the control panel, choose “Settings” from the main navigation.

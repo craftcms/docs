@@ -2,8 +2,6 @@
 
 Now that we’ve set up sections and fields, we can focus on editing content.
 
-[[TOC]]
-
 ## Add a blog entry
 
 Navigate to “Entries” and create a new blog entry. Fill in each field.

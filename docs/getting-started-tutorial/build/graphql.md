@@ -6,8 +6,6 @@ You can also use Craft CMS headlessly, meaning your web server provides the auth
 Building a front end this way requires more development experience than we’ve covered in this tutorial. We’ll only touch on GraphQL basics and recommend more resources.
 :::
 
-[[TOC]]
-
 ## Overview
 
 GraphQL is a developer API for querying Craft CMS content. Fetching content, or [querying elements](https://docs.craftcms.com/v3/dev/element-queries/) in Craft-specific terms, is almost identical to how you would fetch content in Twig templates. Before you can use the API, you need to configured Craft CMS to make it available.
