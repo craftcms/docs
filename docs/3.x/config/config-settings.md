@@ -578,7 +578,7 @@ the front-end website.
 This can be set to `null` if you have a dedicated host name for the control panel (e.g. `cms.example.com`),
 or you are running Craft in [Headless Mode](config3:headlessMode). If you do that, you will need to ensure
 that the control panel is being served from its own webroot directory on your server, with an `index.php`
-file that defines the [CRAFT_CP](https://docs.craftcms.com/v3/config/php-constants.html#craft-cp) PHP
+file that defines the [CRAFT_CP](php-constants.md#craft-cp) PHP
 constant.
 
 ```php
@@ -2820,7 +2820,7 @@ and any changes to `config/project.yaml` will be applied back to the system, mak
 multiple environments to share the same project config despite having separate databases.
 
 ::: warning
-Make sure you’ve read the entire [Project Config](https://docs.craftcms.com/v3/project-config.html)
+Make sure you’ve read the entire [Project Config](project-config.md)
 documentation, and carefully follow the “Enabling the Project Config File” steps when enabling this setting.
 :::
 

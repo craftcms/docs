@@ -44,7 +44,7 @@ Some shared hosting environments will disable certain common PHP methods and con
 
 ## Optional Extras
 
-* [Composer 1.30+](https://docs.craftcms.com/v3/installation.html#downloading-with-composer) - When installing Craft with Composer
+* [Composer 1.30+](installation.md#downloading-with-composer) - When installing Craft with Composer
 
 ## Required Database User Privileges
 
