@@ -1,12 +1,10 @@
 # Configuration
 
-The Craft module is configured through the `codeception.yml` file. 
+The Craft module is configured through the `codeception.yml` file.
 
 ::: tip
-The Craft module inherits all configuration options from the 
-[Yii2 codeception module](https://codeception.com/for/yii). 
-All its [configuration options](https://codeception.com/docs/modules/Yii2) 
-are thus also available to use and not explained here.
+The Craft module inherits all configuration options from the [Yii2 codeception module](https://codeception.com/for/yii). 
+All its [configuration options](https://codeception.com/docs/modules/Yii2) are thus also available to use and not explained here.
 :::
 
 ## Config options
@@ -14,21 +12,16 @@ are thus also available to use and not explained here.
 
 Accepts: Object
 
-The `projectConfig` option instructs the Craft module if and how to set-up the `project.yml`
-file in the `config` directory specified in `CRAFT_CONFIG_PATH`. 
-The `projectConfig` setting accepts an object with the following parameters: 
+The `projectConfig` option instructs the Craft module if and how to set-up Project Config support for your tests. It accepts an object with the following parameters:
 
-- file (Required): What file the project config setting must be copied from. This is not the `project.yml` file in 
-`CRAFT_CONFIG_PATH` but instead the file whose contents will be copied into the `project.yml` file 
-located here. 
-- reset: Whether the project config should be reset before each test is run. If enabled Craft will reset the project config
- to what is specified in the `project.yml` file located in `CRAFT_CONFIG_PATH`. Can safely be disabled if you are not making
- changes to project config during your tests.
+- **folder** (required): What folder the Project Config files must be copied from.  
+Typically, this is `config/project` starting from the root of your project. The contents of that folder will be copied into `tests/_craft/config/project`.
+- **reset**: Whether Project Config should be reset before each test is run.  
+If enabled, Craft will reset the Project Config state to what is specified in the `folder` parameter. Can safely be disabled if you are not making changes to project config during your tests.
 
-For the `projectConfig` option to work correctly please ensure you enable the [useProjectConfigFile](../../config/config-settings.md#useprojectconfigfile) config setting in `general.php`. 
 ::: warning
-If you have enabled `projectConfig`, regular DB based fixtures for Project Config data (i.e sections) may cause syncing issues. It is recommended
- to setup your environment using the `project.yml` file only. 
+If you are using Project Config for your tests, regular database-backed fixtures for Project Config data (i.e sections) may
+cause syncing issues. We recommended that you set up your environment using the Project Config support only.
 :::
 
 ### `migrations`
@@ -37,8 +30,8 @@ Accepts: Array|Object
 
 The `migrations` parameter accepts an Array of objects with the following parameters. 
 
-- class (Required): The migration class
-- params: Any parameters that must be passed into the migration. 
+- **class** (required): The migration class.
+- **params**: Any parameters that must be passed into the migration.
 
 Migrations will be applied before any tests are run.
 
@@ -48,8 +41,8 @@ Accepts: Array|Object
 
 The `plugins` parameter accepts an Array of objects with the following parameters. 
 
-- class (Required): [The main plugin class](../../extend/plugin-guide.md#the-plugin-class)
-- handle (Required): The plugin handle
+- **class** (required): [The main plugin class](../../extend/plugin-guide.md#the-plugin-class).
+- **handle** (required): The plugin handle.
 
 Plugins will be installed before any tests are run.
 
@@ -57,19 +50,17 @@ Plugins will be installed before any tests are run.
 
 Accepts: Object
 
-The `setupDb` parameter controls how the database is setup before tests. 
-It accepts an object with the following parameters.  
+The `setupDb` parameter controls how the database is setup before tests. It accepts an object with the following parameters.
 
-- clean: Whether all tables should be deleted before any tests.
-- setupCraft: Whether the `Install.php` migration should be run before any tests. 
-- applyMigrations: Whether migrations stored in `CRAFT_MIGRATIONS_PATH` should be applied before any tests are run.
+- **clean**: Whether all tables should be deleted before any tests.
+- **setupCraft**: Whether the `Install.php` migration should be run before any tests.
+- **applyMigrations**: Whether migrations stored in `CRAFT_MIGRATIONS_PATH` should be applied before any tests are run.
 
 ### `edition`
 Accepts: int
 
 Determines what edition Craft must be in when running your tests and what is returned when calling 
-`Craft::$app->getEdition()`. Note if `projectConfig`
-is enabled the `edition` property will be ignored.
+`Craft::$app->getEdition()`. If `projectConfig` is enabled, the `edition` property will be ignored.
 To set an edition you must define the desired edition in the `project.yml` instead.
 
 ## PHP Constants
@@ -86,8 +77,8 @@ The [templates path](../../directory-structure.md#templates) Craft can use durin
 The [config path](../../directory-structure.md#config) Craft can use during testing.
 
 ::: warning
-If you are testing an actual Craft site this directory cannot be the config directory you use for
-the production site. I.E. Ensure it is located within the `tests/_craft/` folder. 
+If you’re testing an actual Craft site, this directory cannot be the config directory you use for
+the production site. Ensure it’s located within the `tests/_craft/` folder.
 :::
 
 ### `CRAFT_MIGRATIONS_PATH`
