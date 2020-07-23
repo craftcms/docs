@@ -51,7 +51,7 @@ URL の実際のページ番号の前にあるものをカスタマイズする�
 
 ここで設定されることは、次の通りです。
 
-* `pageInfo` には、現在のページに関する情報や他のページへのリンクを作成するためのいくつかのヘルパーメソッドを提供する <api3:craft\web\twig\variables\Paginate> オブジェクトがセットされます。（詳細は[こちら](#the-pageInfo-variable)を参照してください。）
+* `pageInfo` には、現在のページに関する情報や他のページへのリンクを作成するためのいくつかのヘルパーメソッドを提供する <craft3:craft\web\twig\variables\Paginate> オブジェクトがセットされます。（詳細は[こちら](#the-pageInfo-variable)を参照してください。）
 * `pageEntries` には、現在のページに属する結果（例：エレメント）の配列がセットされます。
 
 ::: tip

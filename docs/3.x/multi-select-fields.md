@@ -38,7 +38,7 @@ If you have an element with a Multi-select field in your template, you can acces
 {% set value = entry.myFieldHandle %}
 ```
 
-That will give you a <api3:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
+That will give you a <craft3:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
 
 To loop through all the selected options, iterate over the field value:
 
@@ -49,7 +49,7 @@ To loop through all the selected options, iterate over the field value:
 {% endfor %}
 ```
 
-To loop through all of the available options, iterate over the [options](api3:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
+To loop through all of the available options, iterate over the [options](craft3:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
 
 ```twig
 {% for option in entry.myFieldHandle.options %}
@@ -65,7 +65,7 @@ To see if any options are selected, use the [length](https://twig.symfony.com/do
 {% if entry.myFieldHandle|length %}
 ```
 
-To see if a particular option is selected, use [contains()](api3:craft\fields\data\MultiOptionsFieldData::contains())
+To see if a particular option is selected, use [contains()](craft3:craft\fields\data\MultiOptionsFieldData::contains())
 
 ```twig
 {% if entry.myFieldHandle.contains('foo') %}

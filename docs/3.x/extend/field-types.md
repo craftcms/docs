@@ -1,8 +1,8 @@
 # Field Types
 
-Plugins can provide custom field types by creating a class that implements <api3:craft\base\FieldInterface> and <api3:craft\base\FieldTrait>. The class will serve both as a way to communicate various things about your field type (with static methods), and as a model that fields of its type will be instantiated with.
+Plugins can provide custom field types by creating a class that implements <craft3:craft\base\FieldInterface> and <craft3:craft\base\FieldTrait>. The class will serve both as a way to communicate various things about your field type (with static methods), and as a model that fields of its type will be instantiated with.
 
-As a convenience, you can extend <api3:craft\base\Field>, which provides a base field type implementation.
+As a convenience, you can extend <craft3:craft\base\Field>, which provides a base field type implementation.
 
 You can refer to Craft’s own field classes for examples. They are located in `vendor/craftcms/cms/src/fields/`.
 
@@ -39,9 +39,9 @@ class Plugin extends \craft\base\Plugin
 
 ## Supporting Delta Saves
 
-If your field type does any processing from [afterElementSave()](<api3:craft\base\FieldInterface::afterElementSave()>) or [afterElementPropagate()](<api3:craft\base\FieldInterface::afterElementPropagate()>), you can improve performance by skipping processing when the field’s value is unchanged.
+If your field type does any processing from [afterElementSave()](<craft3:craft\base\FieldInterface::afterElementSave()>) or [afterElementPropagate()](<craft3:craft\base\FieldInterface::afterElementPropagate()>), you can improve performance by skipping processing when the field’s value is unchanged.
 
-You can tell whether field content has changed by calling [isFieldDirty()](<api3:craft\base\ElementInterface::isFieldDirty()>) on the element.
+You can tell whether field content has changed by calling [isFieldDirty()](<craft3:craft\base\ElementInterface::isFieldDirty()>) on the element.
 
 ```php
 public function afterElementSave(ElementInterface $element, bool $isNew)

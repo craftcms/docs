@@ -13,7 +13,7 @@ $myEntryQuery = \craft\elements\Entry::find();
 ```
 :::
 
-Once you’ve created an entry query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Entry](api3:craft\elements\Entry) objects will be returned.
+Once you’ve created an entry query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Entry](craft3:craft\elements\Entry) objects will be returned.
 
 ::: tip
 See [Introduction to Element Queries](README.md) to learn about how element queries work.
@@ -59,7 +59,7 @@ Entry queries support the following parameters:
 | [ancestorDist](#ancestordist)             | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [ancestorOf](#ancestorof).
 | [ancestorOf](#ancestorof)                 | Narrows the query results to only entries that are ancestors of another entry.
 | [anyStatus](#anystatus)                   | Clears out the [status](#status) and [enabledForSite](#enabledforsite) parameters.
-| [asArray](#asarray)                       | Causes the query to return matching entries as arrays of data, rather than [Entry](api3:craft\elements\Entry) objects.
+| [asArray](#asarray)                       | Causes the query to return matching entries as arrays of data, rather than [Entry](craft3:craft\elements\Entry) objects.
 | [authorGroup](#authorgroup)               | Narrows the query results based on the user group the entries’ authors belong to.
 | [authorGroupId](#authorgroupid)           | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
 | [authorId](#authorid)                     | Narrows the query results based on the entries’ authors.
@@ -185,7 +185,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | above the entry with an ID of 1.
-| a [Entry](api3:craft\elements\Entry) object | above the entry represented by the object.
+| a [Entry](craft3:craft\elements\Entry) object | above the entry represented by the object.
 
 
 
@@ -239,7 +239,7 @@ $entries = \craft\elements\Entry::find()
 
 ### `asArray`
 
-Causes the query to return matching entries as arrays of data, rather than [Entry](api3:craft\elements\Entry) objects.
+Causes the query to return matching entries as arrays of data, rather than [Entry](craft3:craft\elements\Entry) objects.
 
 
 
@@ -274,7 +274,7 @@ Possible values include:
 | `'not foo'` | not with an author in a group with a handle of `foo`.
 | `['foo', 'bar']` | with an author in a group with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not with an author in a group with a handle of `foo` or `bar`.
-| a [UserGroup](api3:craft\models\UserGroup) object | with an author in a group represented by the object.
+| a [UserGroup](craft3:craft\models\UserGroup) object | with an author in a group represented by the object.
 
 
 
@@ -516,7 +516,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | below the entry with an ID of 1.
-| a [Entry](api3:craft\elements\Entry) object | below the entry represented by the object.
+| a [Entry](craft3:craft\elements\Entry) object | below the entry represented by the object.
 
 
 
@@ -554,7 +554,7 @@ Possible values include:
 | Value | Fetches drafts…
 | - | -
 | `1` | created by the user with an ID of 1.
-| a [craft\elements\User](api3:craft\elements\User) object | created by the user represented by the object.
+| a [craft\elements\User](craft3:craft\elements\User) object | created by the user represented by the object.
 
 
 
@@ -617,7 +617,7 @@ Possible values include:
 | Value | Fetches drafts…
 | - | -
 | `1` | for the entry with an ID of 1.
-| a [Entry](api3:craft\elements\Entry) object | for the entry represented by the object.
+| a [Entry](craft3:craft\elements\Entry) object | for the entry represented by the object.
 
 
 
@@ -963,7 +963,7 @@ Possible values include:
 | Value | Fetches the entry…
 | - | -
 | `1` | after the entry with an ID of 1.
-| a [Entry](api3:craft\elements\Entry) object | after the entry represented by the object.
+| a [Entry](craft3:craft\elements\Entry) object | after the entry represented by the object.
 
 
 
@@ -1041,7 +1041,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | after the entry with an ID of 1.
-| a [Entry](api3:craft\elements\Entry) object | after the entry represented by the object.
+| a [Entry](craft3:craft\elements\Entry) object | after the entry represented by the object.
 
 
 
@@ -1073,7 +1073,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | before the entry with an ID of 1.
-| a [Entry](api3:craft\elements\Entry) object | before the entry represented by the object.
+| a [Entry](craft3:craft\elements\Entry) object | before the entry represented by the object.
 
 
 
@@ -1177,7 +1177,7 @@ Possible values include:
 | Value | Fetches the entry…
 | - | -
 | `1` | before the entry with an ID of 1.
-| a [Entry](api3:craft\elements\Entry) object | before the entry represented by the object.
+| a [Entry](craft3:craft\elements\Entry) object | before the entry represented by the object.
 
 
 
@@ -1236,7 +1236,7 @@ Possible values include:
 | Value | Fetches revisions…
 | - | -
 | `1` | created by the user with an ID of 1.
-| a [craft\elements\User](api3:craft\elements\User) object | created by the user represented by the object.
+| a [craft\elements\User](craft3:craft\elements\User) object | created by the user represented by the object.
 
 
 
@@ -1299,7 +1299,7 @@ Possible values include:
 | Value | Fetches revisions…
 | - | -
 | `1` | for the entry with an ID of 1.
-| a [Entry](api3:craft\elements\Entry) object | for the entry represented by the object.
+| a [Entry](craft3:craft\elements\Entry) object | for the entry represented by the object.
 
 
 
@@ -1392,7 +1392,7 @@ Possible values include:
 | `'not foo'` | not in a section with a handle of `foo`.
 | `['foo', 'bar']` | in a section with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a section with a handle of `foo` or `bar`.
-| a [Section](api3:craft\models\Section) object | in a section represented by the object.
+| a [Section](craft3:craft\models\Section) object | in a section represented by the object.
 
 
 
@@ -1456,7 +1456,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | beside the entry with an ID of 1.
-| a [Entry](api3:craft\elements\Entry) object | beside the entry represented by the object.
+| a [Entry](craft3:craft\elements\Entry) object | beside the entry represented by the object.
 
 
 
@@ -1492,7 +1492,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](api3:craft\models\Site) object | from the site represented by the object.
+| a [craft\models\Site](craft3:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip
@@ -1696,7 +1696,7 @@ Possible values include:
 | `'not foo'` | not of a type with a handle of `foo`.
 | `['foo', 'bar']` | of a type with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not of a type with a handle of `foo` or `bar`.
-| an [EntryType](api3:craft\models\EntryType) object | of a type represented by the object.
+| an [EntryType](craft3:craft\models\EntryType) object | of a type represented by the object.
 
 
 

@@ -4,7 +4,7 @@
 
 ## `craft`
 
-様々なヘルパーファンクションやオブジェクトのアクセスポイントを提供する <api3:craft\web\twig\variables\CraftVariable>  オブジェクト。
+様々なヘルパーファンクションやオブジェクトのアクセスポイントを提供する <craft3:craft\web\twig\variables\CraftVariable>  オブジェクト。
 
 ### `craft.app`
 
@@ -88,23 +88,23 @@ Today is {{ now|date('M j, Y') }}.
 
 ## `POS_BEGIN`
 
-定数 [craft\web\View::POS_BEGIN](api3:craft\web\View#constants) の Twig 対応のコピー。
+定数 [craft\web\View::POS_BEGIN](craft3:craft\web\View#constants) の Twig 対応のコピー。
 
 ## `POS_END`
 
-定数 [craft\web\View::POS_END](api3:craft\web\View#constants) の Twig 対応のコピー。
+定数 [craft\web\View::POS_END](craft3:craft\web\View#constants) の Twig 対応のコピー。
 
 ## `POS_HEAD`
 
-定数 [craft\web\View::POS_HEAD](api3:craft\web\View#constants) の Twig 対応のコピー。
+定数 [craft\web\View::POS_HEAD](craft3:craft\web\View#constants) の Twig 対応のコピー。
 
 ## `POS_LOAD`
 
-定数 [craft\web\View::POS_LOAD](api3:craft\web\View#constants) の Twig 対応のコピー。
+定数 [craft\web\View::POS_LOAD](craft3:craft\web\View#constants) の Twig 対応のコピー。
 
 ## `POS_READY`
 
-定数 [craft\web\View::POS_READY](api3:craft\web\View#constants) の Twig 対応のコピー。
+定数 [craft\web\View::POS_READY](craft3:craft\web\View#constants) の Twig 対応のコピー。
 
 ## `siteName`
 
@@ -160,13 +160,13 @@ PHP 定数 `SORT_STRING` の Twig 対応のコピー。
 
 ## `view`
 
-テンプレートを駆動している <api3:craft\web\View> インスタンスへの参照。
+テンプレートを駆動している <craft3:craft\web\View> インスタンスへの参照。
 
 ## グローバル設定の変数
 
 それそれのサイトの[グローバル設定](../globals.md)は、ハンドルにちなんで命名されたグローバル変数としてテンプレートで利用可能です。
 
-それらは <api3:craft\elements\GlobalSet> オブジェクトとして表されます。
+それらは <craft3:craft\elements\GlobalSet> オブジェクトとして表されます。
 
 ```twig
 <p>{{ companyInfo.companyName }} was established in {{ companyInfo.yearEstablished }}.</p>

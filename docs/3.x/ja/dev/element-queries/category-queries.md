@@ -13,7 +13,7 @@ $myCategoryQuery = \craft\elements\Category::find();
 ```
 :::
 
-カテゴリクエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[Category](api3:craft\elements\Category) オブジェクトの配列が返されます。
+カテゴリクエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[Category](craft3:craft\elements\Category) オブジェクトの配列が返されます。
 
 ::: tip
 エレメントクエリがどのように機能するかについては、[エレメントクエリについて](README.md)を参照してください。
@@ -95,7 +95,7 @@ $categories = \craft\elements\Category::find()
 | 値                                                | 取得するカテゴリ            |
 | ------------------------------------------------ | ------------------- |
 | `1`                                              | ID が 1 のカテゴリの上層。    |
-| [Category](api3:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの上層。 |
+| [Category](craft3:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの上層。 |
 
 
 
@@ -149,7 +149,7 @@ $categories = \craft\elements\Category::find()
 
 ### `asArray`
 
-[Category](api3:craft\elements\Category) オブジェクトではなく、データの配列として、マッチしたカテゴリをクエリが返します。
+[Category](craft3:craft\elements\Category) オブジェクトではなく、データの配列として、マッチしたカテゴリをクエリが返します。
 
 
 
@@ -286,7 +286,7 @@ $categories = \craft\elements\Category::find()
 | 値                                                | 取得するカテゴリ            |
 | ------------------------------------------------ | ------------------- |
 | `1`                                              | ID が 1 のカテゴリの下層。    |
-| [Category](api3:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの下層。 |
+| [Category](craft3:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの下層。 |
 
 
 
@@ -389,7 +389,7 @@ $categories = \craft\elements\Category::find()
 | 値                                                  | 取得するカテゴリ           |
 | -------------------------------------------------- | ------------------ |
 | `1`                                                | ID が 1 のグループ内。     |
-| a [Category](api3:craft\elements\Category) object | ID が 1 のグループ内ではない。 |
+| a [Category](craft3:craft\elements\Category) object | ID が 1 のグループ内ではない。 |
 
 
 
@@ -506,7 +506,7 @@ $category = \craft\elements\Category::find()
 | `'not 1'`                                                  | レベルが 1 ではない。       |
 | `'>= 3'`                                                | レベルが 3 以上。         |
 | `[1, 2]`                                                   | レベルが 1 または 2。      |
-| a [CategoryGroup](api3:craft\models\CategoryGroup) object | レベルが 1 または 2 ではない。 |
+| a [CategoryGroup](craft3:craft\models\CategoryGroup) object | レベルが 1 または 2 ではない。 |
 
 
 
@@ -758,7 +758,7 @@ $categories = \craft\elements\Category::find()
 | 値                                                | 取得するカテゴリ           |
 | ------------------------------------------------ | ------------------ |
 | `1`                                              | ID が 1 のカテゴリの前。    |
-| [Category](api3:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの前。 |
+| [Category](craft3:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの前。 |
 
 
 
@@ -836,7 +836,7 @@ $categories = \craft\elements\Category::find()
 | 値                                                | 取得するカテゴリ           |
 | ------------------------------------------------ | ------------------ |
 | `1`                                              | ID が 1 のカテゴリの横。    |
-| [Category](api3:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの横。 |
+| [Category](craft3:craft\elements\Category) オブジェクト | オブジェクトで表されるカテゴリの横。 |
 
 
 
@@ -935,7 +935,7 @@ $categories = \craft\elements\Category::find()
 | 値                                                  | 取得するカテゴリ          |
 | -------------------------------------------------- | ----------------- |
 | `oo'e7c'foo'.277707'foo'7'foo'`                    | スラグが `foo`。       |
-| a [Category](api3:craft\elements\Category) object | スラグが `foo` ではじまる。 |
+| a [Category](craft3:craft\elements\Category) object | スラグが `foo` ではじまる。 |
 
 
 
@@ -1063,7 +1063,7 @@ $categories = \craft\elements\Category::find()
 | 値                                                  | 取得するカテゴリ           |
 | -------------------------------------------------- | ------------------ |
 | `843.68'foo'07527'foo'`                            | URI が `foo`。       |
-| a [Category](api3:craft\elements\Category) object | URI が `foo` ではじまる。 |
+| a [Category](craft3:craft\elements\Category) object | URI が `foo` ではじまる。 |
 
 
 
@@ -1153,7 +1153,7 @@ $category = \craft\elements\Category::find()
 | Value                                              | Fetches categories…                            |
 | -------------------------------------------------- | ---------------------------------------------- |
 | `1`                                                | beside the category with an ID of 1.           |
-| a [Category](api3:craft\elements\Category) object | beside the category represented by the object. |
+| a [Category](craft3:craft\elements\Category) object | beside the category represented by the object. |
 
 
 

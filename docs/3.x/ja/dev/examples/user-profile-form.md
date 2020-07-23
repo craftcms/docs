@@ -224,7 +224,7 @@
 `<form>` タグは、意図的に `action=""` パラメータを持ちません。不可視要素の `name="action"` 項目が、どのコントローラーやコントローラーメソッドを使用するか Craft に伝えます。
 
 ::: tip
-コントロールパネルのプロフィールフォームは、Craft の [UserController::actionSaveUser()](api3:craft\controllers\UsersController#method-actionsaveuser) コントローラーを使用しています。あなたのニーズに適している場合、フロントエンドでも自由に使うことができます。そうでなければ、独自のモジュールやプラグインで自身のコントローラーを実装するためのインスピレーションとして使用できます。
+コントロールパネルのプロフィールフォームは、Craft の [UserController::actionSaveUser()](craft3:craft\controllers\UsersController#method-actionsaveuser) コントローラーを使用しています。あなたのニーズに適している場合、フロントエンドでも自由に使うことができます。そうでなければ、独自のモジュールやプラグインで自身のコントローラーを実装するためのインスピレーションとして使用できます。
 :::
 
 #### 通知

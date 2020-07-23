@@ -51,7 +51,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$actionTrigger](api3:craft\config\GeneralConfig::$actionTrigger)
+[GeneralConfig::$actionTrigger](craft3:craft\config\GeneralConfig::$actionTrigger)
 
 
 
@@ -74,7 +74,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$activateAccountSuccessPath](api3:craft\config\GeneralConfig::$activateAccountSuccessPath)
+[GeneralConfig::$activateAccountSuccessPath](craft3:craft\config\GeneralConfig::$activateAccountSuccessPath)
 
 
 
@@ -99,7 +99,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$addTrailingSlashesToUrls](api3:craft\config\GeneralConfig::$addTrailingSlashesToUrls)
+[GeneralConfig::$addTrailingSlashesToUrls](craft3:craft\config\GeneralConfig::$addTrailingSlashesToUrls)
 
 
 
@@ -122,7 +122,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$aliases](api3:craft\config\GeneralConfig::$aliases)
+[GeneralConfig::$aliases](craft3:craft\config\GeneralConfig::$aliases)
 
 
 
@@ -145,7 +145,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$allowAdminChanges](api3:craft\config\GeneralConfig::$allowAdminChanges)
+[GeneralConfig::$allowAdminChanges](craft3:craft\config\GeneralConfig::$allowAdminChanges)
 
 
 
@@ -176,7 +176,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$allowSimilarTags](api3:craft\config\GeneralConfig::$allowSimilarTags)
+[GeneralConfig::$allowSimilarTags](craft3:craft\config\GeneralConfig::$allowSimilarTags)
 
 
 
@@ -199,7 +199,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$allowUpdates](api3:craft\config\GeneralConfig::$allowUpdates)
+[GeneralConfig::$allowUpdates](craft3:craft\config\GeneralConfig::$allowUpdates)
 
 
 
@@ -224,7 +224,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$allowUppercaseInSlug](api3:craft\config\GeneralConfig::$allowUppercaseInSlug)
+[GeneralConfig::$allowUppercaseInSlug](craft3:craft\config\GeneralConfig::$allowUppercaseInSlug)
 
 
 
@@ -247,7 +247,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$allowedFileExtensions](api3:craft\config\GeneralConfig::$allowedFileExtensions)
+[GeneralConfig::$allowedFileExtensions](craft3:craft\config\GeneralConfig::$allowedFileExtensions)
 
 
 
@@ -270,7 +270,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$autoLoginAfterAccountActivation](api3:craft\config\GeneralConfig::$autoLoginAfterAccountActivation)
+[GeneralConfig::$autoLoginAfterAccountActivation](craft3:craft\config\GeneralConfig::$autoLoginAfterAccountActivation)
 
 
 
@@ -293,7 +293,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$backupCommand](api3:craft\config\GeneralConfig::$backupCommand)
+[GeneralConfig::$backupCommand](craft3:craft\config\GeneralConfig::$backupCommand)
 
 
 
@@ -329,7 +329,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$backupOnUpdate](api3:craft\config\GeneralConfig::$backupOnUpdate)
+[GeneralConfig::$backupOnUpdate](craft3:craft\config\GeneralConfig::$backupOnUpdate)
 
 
 
@@ -352,7 +352,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$baseCpUrl](api3:craft\config\GeneralConfig::$baseCpUrl)
+[GeneralConfig::$baseCpUrl](craft3:craft\config\GeneralConfig::$baseCpUrl)
 
 
 
@@ -381,7 +381,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$blowfishHashCost](api3:craft\config\GeneralConfig::$blowfishHashCost)
+[GeneralConfig::$blowfishHashCost](craft3:craft\config\GeneralConfig::$blowfishHashCost)
 
 
 
@@ -408,7 +408,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 定義元
 :
 
-[GeneralConfig::$cacheDuration](api3:craft\config\GeneralConfig::$cacheDuration)
+[GeneralConfig::$cacheDuration](craft3:craft\config\GeneralConfig::$cacheDuration)
 
 
 
@@ -435,7 +435,7 @@ Craft がデータ、RSS フィード、および、テンプレートキャッ�
 定義元
 :
 
-[GeneralConfig::$cacheElementQueries](api3:craft\config\GeneralConfig::$cacheElementQueries)
+[GeneralConfig::$cacheElementQueries](craft3:craft\config\GeneralConfig::$cacheElementQueries)
 
 
 
@@ -458,7 +458,7 @@ Craft が `{% cache %}` タグ内にエレメントクエリをキャッシュ�
 定義元
 :
 
-[GeneralConfig::$convertFilenamesToAscii](api3:craft\config\GeneralConfig::$convertFilenamesToAscii)
+[GeneralConfig::$convertFilenamesToAscii](craft3:craft\config\GeneralConfig::$convertFilenamesToAscii)
 
 
 
@@ -481,7 +481,7 @@ Craft が `{% cache %}` タグ内にエレメントクエリをキャッシュ�
 定義元
 :
 
-[GeneralConfig::$cooldownDuration](api3:craft\config\GeneralConfig::$cooldownDuration)
+[GeneralConfig::$cooldownDuration](craft3:craft\config\GeneralConfig::$cooldownDuration)
 
 
 
@@ -508,7 +508,7 @@ Craft が `{% cache %}` タグ内にエレメントクエリをキャッシュ�
 定義元
 :
 
-[GeneralConfig::$cpTrigger](api3:craft\config\GeneralConfig::$cpTrigger)
+[GeneralConfig::$cpTrigger](craft3:craft\config\GeneralConfig::$cpTrigger)
 
 
 
@@ -531,7 +531,7 @@ Craft が `{% cache %}` タグ内にエレメントクエリをキャッシュ�
 定義元
 :
 
-[GeneralConfig::$csrfTokenName](api3:craft\config\GeneralConfig::$csrfTokenName)
+[GeneralConfig::$csrfTokenName](craft3:craft\config\GeneralConfig::$csrfTokenName)
 
 
 
@@ -554,7 +554,7 @@ Craft が `{% cache %}` タグ内にエレメントクエリをキャッシュ�
 定義元
 :
 
-[GeneralConfig::$defaultCookieDomain](api3:craft\config\GeneralConfig::$defaultCookieDomain)
+[GeneralConfig::$defaultCookieDomain](craft3:craft\config\GeneralConfig::$defaultCookieDomain)
 
 
 
@@ -577,7 +577,7 @@ Craft によって生成される Cookie が作成されるべきドメイン。
 定義元
 :
 
-[GeneralConfig::$defaultCpLanguage](api3:craft\config\GeneralConfig::$defaultCpLanguage)
+[GeneralConfig::$defaultCpLanguage](craft3:craft\config\GeneralConfig::$defaultCpLanguage)
 
 
 
@@ -600,7 +600,7 @@ Craft によって生成される Cookie が作成されるべきドメイン。
 定義元
 :
 
-[GeneralConfig::$defaultDirMode](api3:craft\config\GeneralConfig::$defaultDirMode)
+[GeneralConfig::$defaultDirMode](craft3:craft\config\GeneralConfig::$defaultDirMode)
 
 
 
@@ -625,7 +625,7 @@ Craft によって生成される Cookie が作成されるべきドメイン。
 定義元
 :
 
-[GeneralConfig::$defaultFileMode](api3:craft\config\GeneralConfig::$defaultFileMode)
+[GeneralConfig::$defaultFileMode](craft3:craft\config\GeneralConfig::$defaultFileMode)
 
 
 
@@ -650,7 +650,7 @@ Craft によって生成される Cookie が作成されるべきドメイン。
 定義元
 :
 
-[GeneralConfig::$defaultImageQuality](api3:craft\config\GeneralConfig::$defaultImageQuality)
+[GeneralConfig::$defaultImageQuality](craft3:craft\config\GeneralConfig::$defaultImageQuality)
 
 
 
@@ -673,7 +673,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 定義元
 :
 
-[GeneralConfig::$defaultSearchTermOptions](api3:craft\config\GeneralConfig::$defaultSearchTermOptions)
+[GeneralConfig::$defaultSearchTermOptions](craft3:craft\config\GeneralConfig::$defaultSearchTermOptions)
 
 
 
@@ -704,7 +704,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 定義元
 :
 
-[GeneralConfig::$defaultTemplateExtensions](api3:craft\config\GeneralConfig::$defaultTemplateExtensions)
+[GeneralConfig::$defaultTemplateExtensions](craft3:craft\config\GeneralConfig::$defaultTemplateExtensions)
 
 
 
@@ -727,7 +727,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 定義元
 :
 
-[GeneralConfig::$defaultTokenDuration](api3:craft\config\GeneralConfig::$defaultTokenDuration)
+[GeneralConfig::$defaultTokenDuration](craft3:craft\config\GeneralConfig::$defaultTokenDuration)
 
 
 
@@ -752,7 +752,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 定義元
 :
 
-[GeneralConfig::$defaultWeekStartDay](api3:craft\config\GeneralConfig::$defaultWeekStartDay)
+[GeneralConfig::$defaultWeekStartDay](craft3:craft\config\GeneralConfig::$defaultWeekStartDay)
 
 
 
@@ -785,7 +785,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 定義元
 :
 
-[GeneralConfig::$deferPublicRegistrationPassword](api3:craft\config\GeneralConfig::$deferPublicRegistrationPassword)
+[GeneralConfig::$deferPublicRegistrationPassword](craft3:craft\config\GeneralConfig::$deferPublicRegistrationPassword)
 
 
 
@@ -810,7 +810,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 定義元
 :
 
-[GeneralConfig::$devMode](api3:craft\config\GeneralConfig::$devMode)
+[GeneralConfig::$devMode](craft3:craft\config\GeneralConfig::$devMode)
 
 
 
@@ -833,7 +833,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 定義元
 :
 
-[GeneralConfig::$disabledPlugins](api3:craft\config\GeneralConfig::$disabledPlugins)
+[GeneralConfig::$disabledPlugins](craft3:craft\config\GeneralConfig::$disabledPlugins)
 
 
 
@@ -860,7 +860,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 定義元
 :
 
-[GeneralConfig::$elevatedSessionDuration](api3:craft\config\GeneralConfig::$elevatedSessionDuration)
+[GeneralConfig::$elevatedSessionDuration](craft3:craft\config\GeneralConfig::$elevatedSessionDuration)
 
 
 
@@ -887,7 +887,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 定義元
 :
 
-[GeneralConfig::$enableCsrfCookie](api3:craft\config\GeneralConfig::$enableCsrfCookie)
+[GeneralConfig::$enableCsrfCookie](craft3:craft\config\GeneralConfig::$enableCsrfCookie)
 
 
 
@@ -910,7 +910,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 定義元
 :
 
-[GeneralConfig::$enableCsrfProtection](api3:craft\config\GeneralConfig::$enableCsrfProtection)
+[GeneralConfig::$enableCsrfProtection](craft3:craft\config\GeneralConfig::$enableCsrfProtection)
 
 
 
@@ -933,7 +933,7 @@ Craft 経由で送信されるすべてのフォームで、不可視項目に�
 定義元
 :
 
-[GeneralConfig::$enableTemplateCaching](api3:craft\config\GeneralConfig::$enableGql)
+[GeneralConfig::$enableTemplateCaching](craft3:craft\config\GeneralConfig::$enableGql)
 
 
 
@@ -958,7 +958,7 @@ Craft 経由で送信されるすべてのフォームで、不可視項目に�
 定義元
 :
 
-[GeneralConfig::$errorTemplatePrefix](api3:craft\config\GeneralConfig::$enableTemplateCaching)
+[GeneralConfig::$errorTemplatePrefix](craft3:craft\config\GeneralConfig::$enableTemplateCaching)
 
 
 
@@ -981,7 +981,7 @@ Craft 経由で送信されるすべてのフォームで、不可視項目に�
 定義元
 :
 
-[GeneralConfig::$extraAllowedFileExtensions](api3:craft\config\GeneralConfig::$errorTemplatePrefix)
+[GeneralConfig::$extraAllowedFileExtensions](craft3:craft\config\GeneralConfig::$errorTemplatePrefix)
 
 
 
@@ -1006,7 +1006,7 @@ Craft 経由で送信されるすべてのフォームで、不可視項目に�
 定義元
 :
 
-[GeneralConfig::$extraAppLocales](api3:craft\config\GeneralConfig::$extraAllowedFileExtensions)
+[GeneralConfig::$extraAppLocales](craft3:craft\config\GeneralConfig::$extraAllowedFileExtensions)
 
 
 
@@ -1029,7 +1029,7 @@ Craft 経由で送信されるすべてのフォームで、不可視項目に�
 定義元
 :
 
-[GeneralConfig::$extraFileKinds](api3:craft\config\GeneralConfig::$extraAppLocales)
+[GeneralConfig::$extraFileKinds](craft3:craft\config\GeneralConfig::$extraAppLocales)
 
 
 
@@ -1056,7 +1056,7 @@ Craft がサポートすべき追加のファイル種類のリスト。この�
 定義元
 :
 
-[GeneralConfig::$filenameWordSeparator](api3:craft\config\GeneralConfig::$extraFileKinds)
+[GeneralConfig::$filenameWordSeparator](craft3:craft\config\GeneralConfig::$extraFileKinds)
 
 
 
@@ -1095,7 +1095,7 @@ Craft がサポートすべき追加のファイル種類のリスト。この�
 定義元
 :
 
-[GeneralConfig::$generateTransformsBeforePageLoad](api3:craft\config\GeneralConfig::$filenameWordSeparator)
+[GeneralConfig::$generateTransformsBeforePageLoad](craft3:craft\config\GeneralConfig::$filenameWordSeparator)
 
 
 
@@ -1118,7 +1118,7 @@ Craft が画像の削除や変形で使用するイメージドライバ。デ�
 定義元
 :
 
-[GeneralConfig::$imageDriver](api3:craft\config\GeneralConfig::$generateTransformsBeforePageLoad)
+[GeneralConfig::$imageDriver](craft3:craft\config\GeneralConfig::$generateTransformsBeforePageLoad)
 
 
 
@@ -1141,7 +1141,7 @@ Craft が画像の削除や変形で使用するイメージドライバ。デ�
 定義元
 :
 
-[GeneralConfig::$indexTemplateFilenames](api3:craft\config\GeneralConfig::$headlessMode)
+[GeneralConfig::$indexTemplateFilenames](craft3:craft\config\GeneralConfig::$headlessMode)
 
 
 
@@ -1172,7 +1172,7 @@ Craft がアカウントをロックするかを決定するために、ユー�
 定義元
 :
 
-[GeneralConfig::$invalidLoginWindowDuration](api3:craft\config\GeneralConfig::$imageDriver)
+[GeneralConfig::$invalidLoginWindowDuration](craft3:craft\config\GeneralConfig::$imageDriver)
 
 
 
@@ -1195,7 +1195,7 @@ Craft がアカウントをロックするかを決定するために、ユー�
 定義元
 :
 
-[GeneralConfig::$invalidUserTokenPath](api3:craft\config\GeneralConfig::$indexTemplateFilenames)
+[GeneralConfig::$invalidUserTokenPath](craft3:craft\config\GeneralConfig::$indexTemplateFilenames)
 
 
 
@@ -1218,7 +1218,7 @@ Craft がアカウントをロックするかを決定するために、ユー�
 定義元
 :
 
-[GeneralConfig::$ipHeaders](api3:craft\config\GeneralConfig::$invalidLoginWindowDuration)
+[GeneralConfig::$ipHeaders](craft3:craft\config\GeneralConfig::$invalidLoginWindowDuration)
 
 
 
@@ -1243,7 +1243,7 @@ Craft がアカウントをロックするかを決定するために、ユー�
 定義元
 :
 
-[GeneralConfig::$isSystemLive](api3:craft\config\GeneralConfig::$invalidUserTokenPath)
+[GeneralConfig::$isSystemLive](craft3:craft\config\GeneralConfig::$invalidUserTokenPath)
 
 
 
@@ -1268,7 +1268,7 @@ Craft がアカウントをロックするかを決定するために、ユー�
 定義元
 :
 
-[GeneralConfig::$limitAutoSlugsToAscii](api3:craft\config\GeneralConfig::$ipHeaders)
+[GeneralConfig::$limitAutoSlugsToAscii](craft3:craft\config\GeneralConfig::$ipHeaders)
 
 
 
@@ -1297,7 +1297,7 @@ Craft がフロントエンドのユーザーログインに使用する URI。
 定義元
 :
 
-[GeneralConfig::$loginPath](api3:craft\config\GeneralConfig::$isSystemLive)
+[GeneralConfig::$loginPath](craft3:craft\config\GeneralConfig::$isSystemLive)
 
 
 
@@ -1320,7 +1320,7 @@ Craft がフロントエンドのユーザーログインに使用する URI。
 定義元
 :
 
-[GeneralConfig::$logoutPath](api3:craft\config\GeneralConfig::$limitAutoSlugsToAscii)
+[GeneralConfig::$logoutPath](craft3:craft\config\GeneralConfig::$limitAutoSlugsToAscii)
 
 
 
@@ -1345,7 +1345,7 @@ Craft がフロントエンドのユーザーログアウトに使用する URI�
 定義元
 :
 
-[GeneralConfig::$maxCachedCloudImageSize](api3:craft\config\GeneralConfig::$loginPath)
+[GeneralConfig::$maxCachedCloudImageSize](craft3:craft\config\GeneralConfig::$loginPath)
 
 
 
@@ -1370,7 +1370,7 @@ Craft がフロントエンドのユーザーログアウトに使用する URI�
 定義元
 :
 
-[GeneralConfig::$maxInvalidLogins](api3:craft\config\GeneralConfig::$logoutPath)
+[GeneralConfig::$maxInvalidLogins](craft3:craft\config\GeneralConfig::$logoutPath)
 
 
 
@@ -1395,7 +1395,7 @@ Craft がフロントエンドのユーザーログアウトに使用する URI�
 定義元
 :
 
-[GeneralConfig::$maxSlugIncrement](api3:craft\config\GeneralConfig::$maxCachedCloudImageSize)
+[GeneralConfig::$maxSlugIncrement](craft3:craft\config\GeneralConfig::$maxCachedCloudImageSize)
 
 
 
@@ -1418,7 +1418,7 @@ Craft がフロントエンドのユーザーログアウトに使用する URI�
 定義元
 :
 
-[GeneralConfig::$maxUploadFileSize](api3:craft\config\GeneralConfig::$maxInvalidLogins)
+[GeneralConfig::$maxUploadFileSize](craft3:craft\config\GeneralConfig::$maxInvalidLogins)
 
 
 
@@ -1441,7 +1441,7 @@ Craft がフロントエンドのユーザーログアウトに使用する URI�
 定義元
 :
 
-[GeneralConfig::$omitScriptNameInUrls](api3:craft\config\GeneralConfig::$maxRevisions)
+[GeneralConfig::$omitScriptNameInUrls](craft3:craft\config\GeneralConfig::$maxRevisions)
 
 
 
@@ -1466,7 +1466,7 @@ Craft が画質を著しく低下させることなく、画像のファイル�
 定義元
 :
 
-[GeneralConfig::$optimizeImageFilesize](api3:craft\config\GeneralConfig::$maxSlugIncrement)
+[GeneralConfig::$optimizeImageFilesize](craft3:craft\config\GeneralConfig::$maxSlugIncrement)
 
 
 
@@ -1489,7 +1489,7 @@ Craft が画質を著しく低下させることなく、画像のファイル�
 定義元
 :
 
-[GeneralConfig::$pageTrigger](api3:craft\config\GeneralConfig::$maxUploadFileSize)
+[GeneralConfig::$pageTrigger](craft3:craft\config\GeneralConfig::$maxUploadFileSize)
 
 
 
@@ -1516,7 +1516,7 @@ Craft が画質を著しく低下させることなく、画像のファイル�
 定義元
 :
 
-[GeneralConfig::$pathParam](api3:craft\config\GeneralConfig::$omitScriptNameInUrls)
+[GeneralConfig::$pathParam](craft3:craft\config\GeneralConfig::$omitScriptNameInUrls)
 
 
 
@@ -1550,7 +1550,7 @@ RewriteRule (.+) /index.php?p= [QSA,L]
 定義元
 :
 
-[GeneralConfig::$phpMaxMemoryLimit](api3:craft\config\GeneralConfig::$optimizeImageFilesize)
+[GeneralConfig::$phpMaxMemoryLimit](craft3:craft\config\GeneralConfig::$optimizeImageFilesize)
 
 
 
@@ -1573,7 +1573,7 @@ RewriteRule (.+) /index.php?p= [QSA,L]
 定義元
 :
 
-[GeneralConfig::$phpSessionName](api3:craft\config\GeneralConfig::$pageTrigger)
+[GeneralConfig::$phpSessionName](craft3:craft\config\GeneralConfig::$pageTrigger)
 
 
 
@@ -1605,7 +1605,7 @@ PHP セッション Cookie の名前。
 定義元
 :
 
-[GeneralConfig::$postCpLoginRedirect](api3:craft\config\GeneralConfig::$pathParam)
+[GeneralConfig::$postCpLoginRedirect](craft3:craft\config\GeneralConfig::$pathParam)
 
 
 
@@ -1630,7 +1630,7 @@ PHP セッション Cookie の名前。
 定義元
 :
 
-[GeneralConfig::$postLoginRedirect](api3:craft\config\GeneralConfig::$phpMaxMemoryLimit)
+[GeneralConfig::$postLoginRedirect](craft3:craft\config\GeneralConfig::$phpMaxMemoryLimit)
 
 
 
@@ -1655,7 +1655,7 @@ PHP セッション Cookie の名前。
 定義元
 :
 
-[GeneralConfig::$postLogoutRedirect](api3:craft\config\GeneralConfig::$phpSessionName)
+[GeneralConfig::$postLogoutRedirect](craft3:craft\config\GeneralConfig::$phpSessionName)
 
 
 
@@ -1678,7 +1678,7 @@ PHP セッション Cookie の名前。
 定義元
 :
 
-[GeneralConfig::$preserveCmykColorspace](api3:craft\config\GeneralConfig::$postCpLoginRedirect)
+[GeneralConfig::$preserveCmykColorspace](craft3:craft\config\GeneralConfig::$postCpLoginRedirect)
 
 
 
@@ -1705,7 +1705,7 @@ PHP セッション Cookie の名前。
 定義元
 :
 
-[GeneralConfig::$preserveExifData](api3:craft\config\GeneralConfig::$postLoginRedirect)
+[GeneralConfig::$preserveExifData](craft3:craft\config\GeneralConfig::$postLoginRedirect)
 
 
 
@@ -1732,7 +1732,7 @@ PHP セッション Cookie の名前。
 定義元
 :
 
-[GeneralConfig::$preserveImageColorProfiles](api3:craft\config\GeneralConfig::$postLogoutRedirect)
+[GeneralConfig::$preserveImageColorProfiles](craft3:craft\config\GeneralConfig::$postLogoutRedirect)
 
 
 
@@ -1757,7 +1757,7 @@ PHP セッション Cookie の名前。
 定義元
 :
 
-[GeneralConfig::$preventUserEnumeration](api3:craft\config\GeneralConfig::$preserveCmykColorspace)
+[GeneralConfig::$preventUserEnumeration](craft3:craft\config\GeneralConfig::$preserveCmykColorspace)
 
 
 
@@ -1782,7 +1782,7 @@ PHP セッション Cookie の名前。
 定義元
 :
 
-[GeneralConfig::$privateTemplateTrigger](api3:craft\config\GeneralConfig::$preserveExifData)
+[GeneralConfig::$privateTemplateTrigger](craft3:craft\config\GeneralConfig::$preserveExifData)
 
 
 
@@ -1809,7 +1809,7 @@ PHP セッション Cookie の名前。
 定義元
 :
 
-[GeneralConfig::$purgePendingUsersDuration](api3:craft\config\GeneralConfig::$preserveImageColorProfiles)
+[GeneralConfig::$purgePendingUsersDuration](craft3:craft\config\GeneralConfig::$preserveImageColorProfiles)
 
 
 
@@ -1834,7 +1834,7 @@ PHP セッション Cookie の名前。
 定義元
 :
 
-[GeneralConfig::$rememberUsernameDuration](api3:craft\config\GeneralConfig::$preventUserEnumeration)
+[GeneralConfig::$rememberUsernameDuration](craft3:craft\config\GeneralConfig::$preventUserEnumeration)
 
 
 
@@ -1857,7 +1857,7 @@ PHP セッション Cookie の名前。
 定義元
 :
 
-[GeneralConfig::$rememberedUserSessionDuration](api3:craft\config\GeneralConfig::$privateTemplateTrigger)
+[GeneralConfig::$rememberedUserSessionDuration](craft3:craft\config\GeneralConfig::$privateTemplateTrigger)
 
 
 
@@ -1882,7 +1882,7 @@ CP ログインページへ自動挿入するために、Craft がユーザー�
 定義元
 :
 
-[GeneralConfig::$requireMatchingUserAgentForSession](api3:craft\config\GeneralConfig::$purgePendingUsersDuration)
+[GeneralConfig::$requireMatchingUserAgentForSession](craft3:craft\config\GeneralConfig::$purgePendingUsersDuration)
 
 
 
@@ -1911,7 +1911,7 @@ CP ログインページへ自動挿入するために、Craft がユーザー�
 定義元
 :
 
-[GeneralConfig::$requireUserAgentAndIpForSession](api3:craft\config\GeneralConfig::$purgeStaleUserSessionDuration)
+[GeneralConfig::$requireUserAgentAndIpForSession](craft3:craft\config\GeneralConfig::$purgeStaleUserSessionDuration)
 
 
 
@@ -1938,7 +1938,7 @@ Cookie からユーザーセッションを復元する際に、一致するユ�
 定義元
 :
 
-[GeneralConfig::$resourceBasePath](api3:craft\config\GeneralConfig::$purgeUnsavedDraftsDuration)
+[GeneralConfig::$resourceBasePath](craft3:craft\config\GeneralConfig::$purgeUnsavedDraftsDuration)
 
 
 
@@ -1965,7 +1965,7 @@ Cookie からユーザーセッションを復元する際に、一致するユ�
 定義元
 :
 
-[GeneralConfig::$resourceBaseUrl](api3:craft\config\GeneralConfig::$rememberUsernameDuration)
+[GeneralConfig::$resourceBaseUrl](craft3:craft\config\GeneralConfig::$rememberUsernameDuration)
 
 
 
@@ -1992,7 +1992,7 @@ Cookie からユーザーセッションを復元する際に、一致するユ�
 定義元
 :
 
-[GeneralConfig::$restoreCommand](api3:craft\config\GeneralConfig::$rememberedUserSessionDuration)
+[GeneralConfig::$restoreCommand](craft3:craft\config\GeneralConfig::$rememberedUserSessionDuration)
 
 
 
@@ -2019,7 +2019,7 @@ HTTP リクエストを通して、Craft が保留中のキュージョブを自
 定義元
 :
 
-[GeneralConfig::$rotateImagesOnUploadByExifData](api3:craft\config\GeneralConfig::$requireMatchingUserAgentForSession)
+[GeneralConfig::$rotateImagesOnUploadByExifData](craft3:craft\config\GeneralConfig::$requireMatchingUserAgentForSession)
 
 
 
@@ -2042,7 +2042,7 @@ HTTP リクエストを通して、Craft が保留中のキュージョブを自
 定義元
 :
 
-[GeneralConfig::$runQueueAutomatically](api3:craft\config\GeneralConfig::$requireUserAgentAndIpForSession)
+[GeneralConfig::$runQueueAutomatically](craft3:craft\config\GeneralConfig::$requireUserAgentAndIpForSession)
 
 
 
@@ -2065,7 +2065,7 @@ Craft がアップロードされた SVG ファイルをサニタイズし、潜
 定義元
 :
 
-[GeneralConfig::$sanitizeSvgUploads](api3:craft\config\GeneralConfig::$resourceBasePath)
+[GeneralConfig::$sanitizeSvgUploads](craft3:craft\config\GeneralConfig::$resourceBasePath)
 
 
 
@@ -2088,7 +2088,7 @@ Craft がアップロードされた SVG ファイルをサニタイズし、潜
 定義元
 :
 
-[GeneralConfig::$secureHeaders](api3:craft\config\GeneralConfig::$resourceBaseUrl)
+[GeneralConfig::$secureHeaders](craft3:craft\config\GeneralConfig::$resourceBaseUrl)
 
 
 
@@ -2111,7 +2111,7 @@ Craft がアップロードされた SVG ファイルをサニタイズし、潜
 定義元
 :
 
-[GeneralConfig::$secureProtocolHeaders](api3:craft\config\GeneralConfig::$restoreCommand)
+[GeneralConfig::$secureProtocolHeaders](craft3:craft\config\GeneralConfig::$restoreCommand)
 
 
 
@@ -2147,7 +2147,7 @@ HTTPS 経由で接続されるかどうかを決定するための確認を行�
 定義元
 :
 
-[GeneralConfig::$securityKey](api3:craft\config\GeneralConfig::$rotateImagesOnUploadByExifData)
+[GeneralConfig::$securityKey](craft3:craft\config\GeneralConfig::$rotateImagesOnUploadByExifData)
 
 
 
@@ -2170,11 +2170,11 @@ HTTPS 経由で接続されるかどうかを決定するための確認を行�
 定義元
 :
 
-[GeneralConfig::$sendPoweredByHeader](api3:craft\config\GeneralConfig::$runQueueAutomatically)
+[GeneralConfig::$sendPoweredByHeader](craft3:craft\config\GeneralConfig::$runQueueAutomatically)
 
 
 
-[craft\services\Security](api3:craft\services\Security) のデータのハッシングや暗号化に使われる、非公開でランダムな暗号的に安全な鍵。
+[craft\services\Security](craft3:craft\services\Security) のデータのハッシングや暗号化に使われる、非公開でランダムな暗号的に安全な鍵。
 
 この値は、すべての環境で同じであるべきです。この鍵を変更した場合、暗号化されたいかなるデータにもアクセスできなくなることに注意してください。
 
@@ -2203,7 +2203,7 @@ HTTPS 経由で接続されるかどうかを決定するための確認を行�
 定義元
 :
 
-[GeneralConfig::$setPasswordPath](api3:craft\config\GeneralConfig::$sameSiteCookieValue)
+[GeneralConfig::$setPasswordPath](craft3:craft\config\GeneralConfig::$sameSiteCookieValue)
 
 Since
 :
@@ -2235,7 +2235,7 @@ Craft がフロントエンドからパスワードを設定したユーザー�
 定義元
 :
 
-[GeneralConfig::$setPasswordSuccessPath](api3:craft\config\GeneralConfig::$sanitizeSvgUploads)
+[GeneralConfig::$setPasswordSuccessPath](craft3:craft\config\GeneralConfig::$sanitizeSvgUploads)
 
 
 
@@ -2260,7 +2260,7 @@ Craft がフロントエンドからパスワードを設定したユーザー�
 定義元
 :
 
-[GeneralConfig::$siteName](api3:craft\config\GeneralConfig::$secureHeaders)
+[GeneralConfig::$siteName](craft3:craft\config\GeneralConfig::$secureHeaders)
 
 
 
@@ -2287,7 +2287,7 @@ URL は `http://`、`https://`、`//`（プロトコル相対）、または、[
 定義元
 :
 
-[GeneralConfig::$siteUrl](api3:craft\config\GeneralConfig::$secureProtocolHeaders)
+[GeneralConfig::$siteUrl](craft3:craft\config\GeneralConfig::$secureProtocolHeaders)
 
 
 
@@ -2314,7 +2314,7 @@ URL は `http://`、`https://`、`//`（プロトコル相対）、または、[
 定義元
 :
 
-[GeneralConfig::$slugWordSeparator](api3:craft\config\GeneralConfig::$securityKey)
+[GeneralConfig::$slugWordSeparator](craft3:craft\config\GeneralConfig::$securityKey)
 
 
 
@@ -2339,7 +2339,7 @@ URL は `http://`、`https://`、`//`（プロトコル相対）、または、[
 定義元
 :
 
-[GeneralConfig::$softDeleteDuration](api3:craft\config\GeneralConfig::$sendPoweredByHeader)
+[GeneralConfig::$softDeleteDuration](craft3:craft\config\GeneralConfig::$sendPoweredByHeader)
 
 
 
@@ -2362,7 +2362,7 @@ Twig のランタイムエラーを抑制するかどうか。
 定義元
 :
 
-[GeneralConfig::$storeUserIps](api3:craft\config\GeneralConfig::$setPasswordPath)
+[GeneralConfig::$storeUserIps](craft3:craft\config\GeneralConfig::$setPasswordPath)
 
 
 
@@ -2387,7 +2387,7 @@ Twig のランタイムエラーを抑制するかどうか。
 定義元
 :
 
-[GeneralConfig::$suppressTemplateErrors](api3:craft\config\GeneralConfig::$setPasswordSuccessPath)
+[GeneralConfig::$suppressTemplateErrors](craft3:craft\config\GeneralConfig::$setPasswordSuccessPath)
 
 
 
@@ -2412,7 +2412,7 @@ Twig のランタイムエラーを抑制するかどうか。
 定義元
 :
 
-[GeneralConfig::$testToEmailAddress](api3:craft\config\GeneralConfig::$siteName)
+[GeneralConfig::$testToEmailAddress](craft3:craft\config\GeneralConfig::$siteName)
 
 
 
@@ -2437,7 +2437,7 @@ Craft のトークンがセットされるクエリ文字列パラメータ名�
 定義元
 :
 
-[GeneralConfig::$timezone](api3:craft\config\GeneralConfig::$siteUrl)
+[GeneralConfig::$timezone](craft3:craft\config\GeneralConfig::$siteUrl)
 
 
 
@@ -2471,7 +2471,7 @@ GIF ファイルを綺麗にしたり、変形したりするかどうか。
 定義元
 :
 
-[GeneralConfig::$tokenParam](api3:craft\config\GeneralConfig::$slugWordSeparator)
+[GeneralConfig::$tokenParam](craft3:craft\config\GeneralConfig::$slugWordSeparator)
 
 
 
@@ -2494,7 +2494,7 @@ GIF ファイルを綺麗にしたり、変形したりするかどうか。
 定義元
 :
 
-[GeneralConfig::$transformGifs](api3:craft\config\GeneralConfig::$softDeleteDuration)
+[GeneralConfig::$transformGifs](craft3:craft\config\GeneralConfig::$softDeleteDuration)
 
 
 
@@ -2521,7 +2521,7 @@ GIF ファイルを綺麗にしたり、変形したりするかどうか。
 定義元
 :
 
-[GeneralConfig::$translationDebugOutput](api3:craft\config\GeneralConfig::$storeUserIps)
+[GeneralConfig::$translationDebugOutput](craft3:craft\config\GeneralConfig::$storeUserIps)
 
 
 
@@ -2544,7 +2544,7 @@ GIF ファイルを綺麗にしたり、変形したりするかどうか。
 定義元
 :
 
-[GeneralConfig::$trustedHosts](api3:craft\config\GeneralConfig::$testToEmailAddress)
+[GeneralConfig::$trustedHosts](craft3:craft\config\GeneralConfig::$testToEmailAddress)
 
 
 
@@ -2569,7 +2569,7 @@ NFS のような一部のファイルシステムでは、排他的なファイ�
 定義元
 :
 
-[GeneralConfig::$useCompressedJs](api3:craft\config\GeneralConfig::$timezone)
+[GeneralConfig::$useCompressedJs](craft3:craft\config\GeneralConfig::$timezone)
 
 
 
@@ -2594,7 +2594,7 @@ Craft が URL を生成する際、`PATH_INFO` を使用してパスを指定す
 定義元
 :
 
-[GeneralConfig::$useEmailAsUsername](api3:craft\config\GeneralConfig::$tokenParam)
+[GeneralConfig::$useEmailAsUsername](craft3:craft\config\GeneralConfig::$tokenParam)
 
 
 
@@ -2617,7 +2617,7 @@ Craft が URL を生成する際、`PATH_INFO` を使用してパスを指定す
 定義元
 :
 
-[GeneralConfig::$useFileLocks](api3:craft\config\GeneralConfig::$transformGifs)
+[GeneralConfig::$useFileLocks](craft3:craft\config\GeneralConfig::$transformGifs)
 
 
 
@@ -2640,7 +2640,7 @@ Craft が URL を生成する際、`PATH_INFO` を使用してパスを指定す
 定義元
 :
 
-[GeneralConfig::$usePathInfo](api3:craft\config\GeneralConfig::$translationDebugOutput)
+[GeneralConfig::$usePathInfo](craft3:craft\config\GeneralConfig::$translationDebugOutput)
 
 
 
@@ -2665,7 +2665,7 @@ Craft が URL を生成する際、`PATH_INFO` を使用してパスを指定す
 定義元
 :
 
-[GeneralConfig::$useProjectConfigFile](api3:craft\config\GeneralConfig::$trustedHosts)
+[GeneralConfig::$useProjectConfigFile](craft3:craft\config\GeneralConfig::$trustedHosts)
 
 
 
@@ -2692,7 +2692,7 @@ Craft が URL を生成する際、`PATH_INFO` を使用してパスを指定す
 定義元
 :
 
-[GeneralConfig::$useSecureCookies](api3:craft\config\GeneralConfig::$useCompressedJs)
+[GeneralConfig::$useSecureCookies](craft3:craft\config\GeneralConfig::$useCompressedJs)
 
 
 
@@ -2715,7 +2715,7 @@ Craft が URL を生成する際、`PATH_INFO` を使用してパスを指定す
 定義元
 :
 
-[GeneralConfig::$useSslOnTokenizedUrls](api3:craft\config\GeneralConfig::$useEmailAsUsername)
+[GeneralConfig::$useSslOnTokenizedUrls](craft3:craft\config\GeneralConfig::$useEmailAsUsername)
 
 
 
@@ -2738,7 +2738,7 @@ Craft が URL を生成する際、`PATH_INFO` を使用してパスを指定す
 定義元
 :
 
-[GeneralConfig::$userSessionDuration](api3:craft\config\GeneralConfig::$useFileLocks)
+[GeneralConfig::$userSessionDuration](craft3:craft\config\GeneralConfig::$useFileLocks)
 
 
 
@@ -2765,7 +2765,7 @@ Craft が URL を生成する際、`PATH_INFO` を使用してパスを指定す
 定義元
 :
 
-[GeneralConfig::$verificationCodeDuration](api3:craft\config\GeneralConfig::$usePathInfo)
+[GeneralConfig::$verificationCodeDuration](craft3:craft\config\GeneralConfig::$usePathInfo)
 
 
 
@@ -2790,7 +2790,7 @@ Craft が URL を生成する際、`PATH_INFO` を使用してパスを指定す
 定義元
 :
 
-[GeneralConfig::$verifyEmailSuccessPath](api3:craft\config\GeneralConfig::$useProjectConfigFile)
+[GeneralConfig::$verifyEmailSuccessPath](craft3:craft\config\GeneralConfig::$useProjectConfigFile)
 
 
 
@@ -2819,7 +2819,7 @@ Default value
 Defined by
 :
 
-[GeneralConfig::$useSecureCookies](api3:craft\config\GeneralConfig::$useSecureCookies)
+[GeneralConfig::$useSecureCookies](craft3:craft\config\GeneralConfig::$useSecureCookies)
 
 
 
@@ -2844,7 +2844,7 @@ Default value
 Defined by
 :
 
-[GeneralConfig::$useSslOnTokenizedUrls](api3:craft\config\GeneralConfig::$useSslOnTokenizedUrls)
+[GeneralConfig::$useSslOnTokenizedUrls](craft3:craft\config\GeneralConfig::$useSslOnTokenizedUrls)
 
 
 
@@ -2869,7 +2869,7 @@ Default value
 Defined by
 :
 
-[GeneralConfig::$userSessionDuration](api3:craft\config\GeneralConfig::$userSessionDuration)
+[GeneralConfig::$userSessionDuration](craft3:craft\config\GeneralConfig::$userSessionDuration)
 
 
 
@@ -2896,7 +2896,7 @@ Default value
 Defined by
 :
 
-[GeneralConfig::$verificationCodeDuration](api3:craft\config\GeneralConfig::$verificationCodeDuration)
+[GeneralConfig::$verificationCodeDuration](craft3:craft\config\GeneralConfig::$verificationCodeDuration)
 
 
 
@@ -2921,7 +2921,7 @@ Default value
 Defined by
 :
 
-[GeneralConfig::$verifyEmailSuccessPath](api3:craft\config\GeneralConfig::$verifyEmailSuccessPath)
+[GeneralConfig::$verifyEmailSuccessPath](craft3:craft\config\GeneralConfig::$verifyEmailSuccessPath)
 
 
 

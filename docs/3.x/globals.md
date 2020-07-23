@@ -22,7 +22,7 @@ If you have a Global Set with the handle `companyInfo` and it has a field with t
 {{ companyInfo.yearEstablished }}
 ```
 
-For additional Global Set properties you can use besides your custom fields see <api3:craft\elements\GlobalSet> for a full reference.
+For additional Global Set properties you can use besides your custom fields see <craft3:craft\elements\GlobalSet> for a full reference.
 
 ### Manually Loading Global Sets
 
@@ -37,7 +37,7 @@ $companyInfo = \Craft::$app->getGlobals()->getSetByHandle('companyInfo');
 ```
 :::
 
-More details are available in the [Globals service class documentation](api3:craft\services\Globals).
+More details are available in the [Globals service class documentation](craft3:craft\services\Globals).
 
 ## Global Sets with Multiple Sites
 

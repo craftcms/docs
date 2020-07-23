@@ -12,7 +12,7 @@
 
 ## エディションの定義
 
-プラグインにエディションサポートを追加するには、<api3:craft\base\Plugin::editions()> を上書きして、有効なエディションを（昇順で）定義することからはじめます。
+プラグインにエディションサポートを追加するには、<craft3:craft\base\Plugin::editions()> を上書きして、有効なエディションを（昇順で）定義することからはじめます。
 
 ```php
 class Plugin extends \craft\base\Plugin;
@@ -34,7 +34,7 @@ class Plugin extends \craft\base\Plugin;
 
 ## 機能トグルの追加
 
-機能トグルはプラグインの [is()](api3:craft\base\Plugin::is()) メソッドで呼び出すことができます。
+機能トグルはプラグインの [is()](craft3:craft\base\Plugin::is()) メソッドで呼び出すことができます。
 
 ::: code
 

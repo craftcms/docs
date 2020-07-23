@@ -4,13 +4,13 @@ Element types define the different types of content that can be managed in Craft
 
 Craft comes with 7 built-in element types:
 
-- <api3:craft\elements\Asset>
-- <api3:craft\elements\Category>
-- <api3:craft\elements\Entry>
-- <api3:craft\elements\GlobalSet>
-- <api3:craft\elements\MatrixBlock>
-- <api3:craft\elements\Tag>
-- <api3:craft\elements\User>
+- <craft3:craft\elements\Asset>
+- <craft3:craft\elements\Category>
+- <craft3:craft\elements\Entry>
+- <craft3:craft\elements\GlobalSet>
+- <craft3:craft\elements\MatrixBlock>
+- <craft3:craft\elements\Tag>
+- <craft3:craft\elements\User>
 
 You can refer to these classes for examples. They are located in `vendor/craftcms/cms/src/elements/`.
 
@@ -20,9 +20,9 @@ If your plugin needs to provide a new content type, architecting it as an elemen
 
 ### Element Class
 
-Element types are defined by classes which implement <api3:craft\base\ElementInterface> and <api3:craft\base\ElementTrait>. The class will serve both as a way to communicate various things about your element type (with static methods), and as a model that elements of its type will be instantiated with.
+Element types are defined by classes which implement <craft3:craft\base\ElementInterface> and <craft3:craft\base\ElementTrait>. The class will serve both as a way to communicate various things about your element type (with static methods), and as a model that elements of its type will be instantiated with.
 
-As a convenience, you can extend <api3:craft\base\Element>, which provides a base element type implementation.
+As a convenience, you can extend <craft3:craft\base\Element>, which provides a base element type implementation.
 
 Create an `elements/` directory within your plugin’s source directory, and create a PHP class file within it, named after the class name you want to give your element type (e.g. `Product.php`).
 
@@ -125,14 +125,14 @@ public function afterSave(bool $isNew)
 ```
 
 ::: tip
-`afterSave()` gets called by <api3:craft\services\Elements::saveElement()>, after the main element rows in the `elements`, `elements_sites`, and `content` tables have been saved, and the element has been assigned an `id` and `uid` (if new).
+`afterSave()` gets called by <craft3:craft\services\Elements::saveElement()>, after the main element rows in the `elements`, `elements_sites`, and `content` tables have been saved, and the element has been assigned an `id` and `uid` (if new).
 :::
 
 ### Element Query Class
 
 All element types need a corresponding element query class. Element query classes are an extension of [query builders](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder), tuned for fetching elements.
 
-All element query classes should extend <api3:craft\elements\db\ElementQuery>, which provides the base functionality.
+All element query classes should extend <craft3:craft\elements\db\ElementQuery>, which provides the base functionality.
 
 They have three responsibilities:
 
@@ -225,7 +225,7 @@ Product::find()
 
 #### `$this->query` vs. `$this->subQuery`
 
-Behind the scenes, <api3:craft\elements\db\ElementQuery> creates two <api3:craft\db\Query> instances: the main query (`$this->query`), and a subquery (`$this->subQuery`). Column selections should go in the main query, and conditions/joins should be applied to the subquery. Ultimately the subquery will become the `FROM` clause of the main query.
+Behind the scenes, <craft3:craft\elements\db\ElementQuery> creates two <craft3:craft\db\Query> instances: the main query (`$this->query`), and a subquery (`$this->subQuery`). Column selections should go in the main query, and conditions/joins should be applied to the subquery. Ultimately the subquery will become the `FROM` clause of the main query.
 
 The reason for this separation is performance. It allows MySQL/PostgreSQL to figure out exactly which element rows should be fetched before it has to worry about which columns to select, etc., avoiding the need to run expensive condition operations on temporary tables.
 
@@ -326,7 +326,7 @@ $fieldLayout = Craft::$app->getFields()->assembleLayoutFromPost();
 $fieldLayout->type = MyElementType::class;
 ```
 
-Your service can then save the field layout by passing it to <api3:craft\services\Fields::saveLayout()>:
+Your service can then save the field layout by passing it to <craft3:craft\services\Fields::saveLayout()>:
 
 ```php
 Craft::$app->fields->saveLayout($fieldLayout);
@@ -409,7 +409,7 @@ $product->fieldLayoutId = $productType->fieldLayoutId;
 \Craft::$app->elements->saveElement($product);
 ```
 
-If the `$fieldLayoutId`  property is set, <api3:craft\services\Elements::saveElement()> will store it in the `elements.fieldLayoutId` column in the database, and your elements will be re-populated with the values when they are fetched down the road.
+If the `$fieldLayoutId`  property is set, <craft3:craft\services\Elements::saveElement()> will store it in the `elements.fieldLayoutId` column in the database, and your elements will be re-populated with the values when they are fetched down the road.
 
 Alternatively, you can override the `getFieldLayout()` method, and fetch/return the field layout yourself. This might be preferable if your element type only has a single field layout (like user accounts).
 
@@ -462,7 +462,7 @@ Elements that support multiple sites will have their `afterSave()` method called
 
 ## Statuses
 
-If your elements should have their own statuses, give your element class a static <api3:craft\base\ElementInterface::hasStatuses()> method:
+If your elements should have their own statuses, give your element class a static <craft3:craft\base\ElementInterface::hasStatuses()> method:
 
 ```php
 public static function hasStatuses(): bool
@@ -473,7 +473,7 @@ public static function hasStatuses(): bool
 
 ### Custom Statuses
 
-By default your elements will support two statuses: Enabled and Disabled. If you’d like to give your element type its own custom statuses, first define what they are by overriding its static <api3:craft\base\ElementInterface::statuses()> method:
+By default your elements will support two statuses: Enabled and Disabled. If you’d like to give your element type its own custom statuses, first define what they are by overriding its static <craft3:craft\base\ElementInterface::statuses()> method:
 
 ```php
 public static function statuses(): array
@@ -485,7 +485,7 @@ public static function statuses(): array
 }
 ```
 
-Next add a <api3:craft\base\ElementInterface::getStatus()> method that returns the current status of an element:
+Next add a <craft3:craft\base\ElementInterface::getStatus()> method that returns the current status of an element:
 
 ```php
 public function getStatus()
@@ -498,7 +498,7 @@ public function getStatus()
 }
 ```
 
-Finally, override the <api3:craft\elements\db\ElementQuery::statusCondition()> method on your [element query class](#element-query-class):
+Finally, override the <craft3:craft\elements\db\ElementQuery::statusCondition()> method on your [element query class](#element-query-class):
 
 ```php
 protected function statusCondition(string $status)
@@ -521,7 +521,7 @@ Your element type can define “sources”, which are groups of elements defined
 
 Element type sources will be visible in the sidebar of element indexes, and within the settings of element relation fields.
 
-To define your element type’s sources, add a protected static [defineSources()](api3:craft\base\Element::defineSources()) method to your element class:
+To define your element type’s sources, add a protected static [defineSources()](craft3:craft\base\Element::defineSources()) method to your element class:
 
 ```php
 protected static function defineSources(string $context = null): array
@@ -564,7 +564,7 @@ You can give your [control panel section](cp-section.md) an index page for your 
 
 ### Index Page Actions
 
-You can define which [actions](element-action-types.md) your element type supports on its index page by adding a protected static [defineActions()](api3:craft\base\Element::defineActions()) method on your element class:
+You can define which [actions](element-action-types.md) your element type supports on its index page by adding a protected static [defineActions()](craft3:craft\base\Element::defineActions()) method on your element class:
 
 ```php
 protected static function defineActions(string $source = null): array
@@ -580,11 +580,11 @@ protected static function defineActions(string $source = null): array
 
 All element types are [soft-deletable](soft-deletes.md) out of the box, however it’s up to each element type to decide whether they should be restorable.
 
-To make an element restorable, just add the <api3:craft\elements\actions\Restore> action to the array returned by your static [defineActions()](api3:craft\base\Element::defineActions()) method. Craft will automatically hide it during normal index views, and show it when someone selects the “Trashed” status option.
+To make an element restorable, just add the <craft3:craft\elements\actions\Restore> action to the array returned by your static [defineActions()](craft3:craft\base\Element::defineActions()) method. Craft will automatically hide it during normal index views, and show it when someone selects the “Trashed” status option.
 
 ### Index Page Exporters
 
-You can define which [exporter types](element-exporter-types.md) your element type supports on its index page by adding a protected static [defineExporters()](api3:craft\base\Element::defineExporters()) method on your element class:
+You can define which [exporter types](element-exporter-types.md) your element type supports on its index page by adding a protected static [defineExporters()](craft3:craft\base\Element::defineExporters()) method on your element class:
 
 ```php
 protected static function defineExporters(string $source): array
@@ -597,7 +597,7 @@ protected static function defineExporters(string $source): array
 
 ### Sort Options
 
-You can define the sort options for your element indexes by adding a protected static [defineSortOptions()](api3:craft\base\Element::defineSortOptions()) method to your element class:
+You can define the sort options for your element indexes by adding a protected static [defineSortOptions()](craft3:craft\base\Element::defineSortOptions()) method to your element class:
 
 ```php
 protected static function defineSortOptions(): array
@@ -613,7 +613,7 @@ When a sort option is selected on an index, its key will be passed to the `$orde
 
 ### Table Attributes
 
-You can customize which columns should be available to your element indexes’ Table views by adding a protected [defineTableAttributes()](api3:craft\base\Element::defineTableAttributes()) method to your element class:
+You can customize which columns should be available to your element indexes’ Table views by adding a protected [defineTableAttributes()](craft3:craft\base\Element::defineTableAttributes()) method to your element class:
 
 ```php
 protected static function defineTableAttributes(): array
@@ -627,10 +627,10 @@ protected static function defineTableAttributes(): array
 ```
 
 ::: tip
-The first attribute you list here is a special case. It defines the header for the first column in the table view, which is the only one admins can’t remove. Its values will come from your elements’ <api3:craft\base\ElementInterface::getUiLabel()> method.
+The first attribute you list here is a special case. It defines the header for the first column in the table view, which is the only one admins can’t remove. Its values will come from your elements’ <craft3:craft\base\ElementInterface::getUiLabel()> method.
 :::
 
-If it’s a big list, you can also limit which columns should be visible by default for new [sources](#sources) by adding a protected [defineDefaultTableAttributes()](api3:craft\base\Element::defineDefaultTableAttributes()) method to your element class:
+If it’s a big list, you can also limit which columns should be visible by default for new [sources](#sources) by adding a protected [defineDefaultTableAttributes()](craft3:craft\base\Element::defineDefaultTableAttributes()) method to your element class:
 
 ```php
 protected static function defineDefaultTableAttributes(string $source): array
@@ -696,7 +696,7 @@ public function getThumbUrl(int $size)
 
 When an element is saved, Craft’s Search service will index its “searchable attributes” as search keywords on the element. By default, the list of searchable attributes will only include the element’s title and slug, plus any custom field values.
 
-If your element type has additional attributes you want to make searchable, add a protected static [defineSearchableAttributes()](api3:craft\base\Element::defineSearchableAttributes()) method on your element and list them:
+If your element type has additional attributes you want to make searchable, add a protected static [defineSearchableAttributes()](craft3:craft\base\Element::defineSearchableAttributes()) method on your element and list them:
 
 ```php
 protected static function defineSearchableAttributes(): array
@@ -709,7 +709,7 @@ protected static function defineSearchableAttributes(): array
 
 When an element is being saved, its `getUriFormat()` method will be called to find out whether the element should have its own URI in the system, and if so, what it should look like.
 
-So if you want your elements to get their own URLs, you must implement this method and have it return a string that can be parsed with <api3:craft\web\View::renderObjectTemplate()> (e.g. `products/{slug}`). Usually this should be a user-defined string, rather than something hard-coded.
+So if you want your elements to get their own URLs, you must implement this method and have it return a string that can be parsed with <craft3:craft\web\View::renderObjectTemplate()> (e.g. `products/{slug}`). Usually this should be a user-defined string, rather than something hard-coded.
 
 ```php
 public function getUriFormat()
@@ -720,7 +720,7 @@ public function getUriFormat()
 
 Whenever an element’s URL is requested, Craft will instantiate the element and call its `getRoute()` method, giving the element a chance to decide how the request should be [routed](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing).
 
-Internally, <api3:craft\base\Element::getRoute()> will call a protected `route()` method, which is what you should override in your element class:
+Internally, <craft3:craft\base\Element::getRoute()> will call a protected `route()` method, which is what you should override in your element class:
 
 ```php
 protected function route()
@@ -791,16 +791,16 @@ The Edit Category page offers a relatively straightforward example of how it cou
 
 - Controller actions:
 
-  - [actionEditCategory()](api3:craft\controllers\CategoriesController::actionEditCategory()) – renders the Edit Category page
-  - [actionPreviewCategory()](api3:craft\controllers\CategoriesController::actionPreviewCategory()) – renders a category’s front-end page for a Live Preview request
-  - [actionSaveCategory()](api3:craft\controllers\CategoriesController::actionSaveCategory()) – saves a category
-  - [actionDeleteCategory()](api3:craft\controllers\CategoriesController::actionDeleteCategory()) – deletes a category
-  - [actionShareCategory()](api3:craft\controllers\CategoriesController::actionShareCategory()) – handles a Share Category request, creating a token for `categories/view-shared-category` and redirecting the user to it
-  - [actionViewSharedCategory()](api3:craft\controllers\CategoriesController::actionViewSharedCategory()) – renders a category’s front-end page for a Share Category token
+  - [actionEditCategory()](craft3:craft\controllers\CategoriesController::actionEditCategory()) – renders the Edit Category page
+  - [actionPreviewCategory()](craft3:craft\controllers\CategoriesController::actionPreviewCategory()) – renders a category’s front-end page for a Live Preview request
+  - [actionSaveCategory()](craft3:craft\controllers\CategoriesController::actionSaveCategory()) – saves a category
+  - [actionDeleteCategory()](craft3:craft\controllers\CategoriesController::actionDeleteCategory()) – deletes a category
+  - [actionShareCategory()](craft3:craft\controllers\CategoriesController::actionShareCategory()) – handles a Share Category request, creating a token for `categories/view-shared-category` and redirecting the user to it
+  - [actionViewSharedCategory()](craft3:craft\controllers\CategoriesController::actionViewSharedCategory()) – renders a category’s front-end page for a Share Category token
 
 #### Edit Page Template
 
-You can generate a tab menu and tab contents based on your element’s field layout by calling <api3:craft\models\FieldLayout::createForm()>, either from your controller action or the edit page template.
+You can generate a tab menu and tab contents based on your element’s field layout by calling <craft3:craft\models\FieldLayout::createForm()>, either from your controller action or the edit page template.
 
 ::: code
 ```php
@@ -837,7 +837,7 @@ $product->setFieldValuesFromRequest('fields');
 $success = Craft::$app->elements->saveElement($product);
 ```
 
-Once you’ve set up an edit page for your element type, you can add a [getCpEditUrl()](api3:craft\base\ElementInterface::getCpEditUrl()) method to your element class, which will communicate your elements’ edit page URLs within the control panel.
+Once you’ve set up an edit page for your element type, you can add a [getCpEditUrl()](craft3:craft\base\ElementInterface::getCpEditUrl()) method to your element class, which will communicate your elements’ edit page URLs within the control panel.
 
 ```php
 public function getCpEditUrl()
@@ -850,7 +850,7 @@ public function getCpEditUrl()
 
 ### Relation Field
 
-You can give your element its own relation field by creating a new [field type](field-types.md) that extends <api3:craft\fields\BaseRelationField>.
+You can give your element its own relation field by creating a new [field type](field-types.md) that extends <craft3:craft\fields\BaseRelationField>.
 
 That base class does most of the grunt work for you, so you can get your field up and running by implementing three simple methods:
 

@@ -46,7 +46,7 @@
 
 ## `className( object )`
 
-与えられたクラス名やオブジェクト設定に基づいて新しいオブジェクトインスタンスを作成します。サポートされる引数の詳細については、<api3:Yii::createObject()> を参照してください。
+与えられたクラス名やオブジェクト設定に基づいて新しいオブジェクトインスタンスを作成します。サポートされる引数の詳細については、<craft3:Yii::createObject()> を参照してください。
 
 ```twig
 {% set query = craft.entries.section('news') %}
@@ -359,7 +359,7 @@ You can pass the following things into it:
   {{ svg('@webroot/icons/lemon.svg') }}
   ```
 
-- A <api3:craft\elements\Asset> object, such as one pulled in from an [Assets field](../assets-fields.md).
+- A <craft3:craft\elements\Asset> object, such as one pulled in from an [Assets field](../assets-fields.md).
 
   ```twig
   {% set image = entry.myAssetsField.one() %}

@@ -41,8 +41,8 @@ Possible values include:
 | `100` | that are related to the user with an ID of 100.
 | `[100, 200]` | that are related to a user with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the users with IDs of 100 and 200.
-| an [User](api3:craft\elements\User) object | that are related to the user.
-| an [UserQuery](api3:craft\elements\db\UserQuery) object | that are related to any of the resulting users.
+| an [User](craft3:craft\elements\User) object | that are related to the user.
+| an [UserQuery](craft3:craft\elements\db\UserQuery) object | that are related to any of the resulting users.
 
 ```twig
 {# Fetch entries with a related user #}
@@ -61,7 +61,7 @@ If you have an element with a Users field in your template, you can access its r
 
 That will give you a [user query](dev/element-queries/user-queries.md), prepped to output all of the related users for the given field.
 
-To loop through all of the related users, call [all()](api3:craft\db\Query::all()) and then loop over the results:
+To loop through all of the related users, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 
 ```twig
 {% set relatedUsers = entry.myFieldHandle.all() %}
@@ -74,7 +74,7 @@ To loop through all of the related users, call [all()](api3:craft\db\Query::all(
 {% endif %}
 ```
 
-If you only want the first related user, call [one()](api3:craft\db\Query::one()) instead, and then make sure it returned something:
+If you only want the first related user, call [one()](craft3:craft\db\Query::one()) instead, and then make sure it returned something:
 
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
@@ -83,7 +83,7 @@ If you only want the first related user, call [one()](api3:craft\db\Query::one()
 {% endif %}
 ```
 
-If you just need to check if there are any related users (but don’t need to fetch them), you can call [exists()](api3:craft\db\Query::exists()):
+If you just need to check if there are any related users (but don’t need to fetch them), you can call [exists()](craft3:craft\db\Query::exists()):
 
 ```twig
 {% if entry.myFieldHandle.exists() %}
@@ -106,5 +106,5 @@ It’s always a good idea to clone the user query using the [clone()](./dev/func
 ## See Also
 
 * [User Queries](dev/element-queries/user-queries.md)
-* <api3:craft\elements\User>
+* <craft3:craft\elements\User>
 * [Relations](relations.md)

@@ -38,7 +38,7 @@ $this->createIndex(null, '{{%tablename}}', ['handle'], false);
 
 すべてのリクエストごとに古い行をチェックするのではなく、Craft の[ガベージコレクション](../gc.md)ルーチンの一部にできます。
 
-<api3:craft\services\Gc> は、実行されるたびに `run` イベントを発火します。あなたのモジュール / プラグインの `init()` メソッドから、それを利用できます。
+<craft3:craft\services\Gc> は、実行されるたびに `run` イベントを発火します。あなたのモジュール / プラグインの `init()` メソッドから、それを利用できます。
 
 ```php
 use craft\services\Gc;
@@ -54,15 +54,15 @@ public function init()
 }
 ```
 
-[hardDelete()](api3:craft\services\Gc::hardDelete()) メソッドは、`dateDeleted` 値にコンフィグ設定 <config3:softDeleteDuration> よりも古いタイムスタンプがセットされたすべての行を削除します。
+[hardDelete()](craft3:craft\services\Gc::hardDelete()) メソッドは、`dateDeleted` 値にコンフィグ設定 <config3:softDeleteDuration> よりも古いタイムスタンプがセットされたすべての行を削除します。
 
 ::: tip
-複数のテーブルで古い行をチェックする必要がある場合、代わりに [hardDelete()](api3:craft\services\Gc::hardDelete()) へテーブル名の配列を渡すことができます。
+複数のテーブルで古い行をチェックする必要がある場合、代わりに [hardDelete()](craft3:craft\services\Gc::hardDelete()) へテーブル名の配列を渡すことができます。
 :::
 
 ## Active Record クラスのアップデート
 
-コンポーネントが対応する [Active Record](https://www.yiiframework.com/doc/guide/2.0/en/db-active-record) クラスを持つ場合、<api3:craft\db\SoftDeleteTrait> をインポートすることによってソフトデリートサポートを追加できます。
+コンポーネントが対応する [Active Record](https://www.yiiframework.com/doc/guide/2.0/en/db-active-record) クラスを持つ場合、<craft3:craft\db\SoftDeleteTrait> をインポートすることによってソフトデリートサポートを追加できます。
 
 ```php
 use craft\db\ActiveRecord;
@@ -78,15 +78,15 @@ class MyRecord extends ActiveRecord
 
 トレイトは、次の特徴をクラスに付与するでしょう。
 
-- [find()](api3:craft\db\SoftDeleteTrait::find()) はソフトデリートされていない（`dateDeleted` カラムが `null` である）行のみを返します。
-- static な [findWithTrashed()](api3:craft\db\SoftDeleteTrait::findWithTrashed()) メソッドは、ソフトデリートされたかどうかに関わらず行を見つけるために追加されます。
-- static な [findTrashed()](api3:craft\db\SoftDeleteTrait::findTrashed()) メソッドは、ソフトデリートされた（`dateDeleted` カラムが `null` ではない）行を見つけるために追加されます。
+- [find()](craft3:craft\db\SoftDeleteTrait::find()) はソフトデリートされていない（`dateDeleted` カラムが `null` である）行のみを返します。
+- static な [findWithTrashed()](craft3:craft\db\SoftDeleteTrait::findWithTrashed()) メソッドは、ソフトデリートされたかどうかに関わらず行を見つけるために追加されます。
+- static な [findTrashed()](craft3:craft\db\SoftDeleteTrait::findTrashed()) メソッドは、ソフトデリートされた（`dateDeleted` カラムが `null` ではない）行を見つけるために追加されます。
 - `softDelete()` メソッドは、[delete()](yii2:yii\db\ActiveRecord::delete()) の代わりに呼び出すために追加され、行を削除するのではなく行の `dateDeleted` カラムを現在のタイムスタンプで更新します。
 - `restore()` メソッドは、`dateDeleted` 値を削除することによってソフトデリート行を復元するために追加されます。
 
 内部的には、トレイトは[ビヘイビア](https://www.yiiframework.com/doc/guide/2.0/en/concept-behaviors)として実装されている Yii 2 の [ActiveRecord Soft Delete Extension](https://github.com/yii2tech/ar-softdelete) を使用します。
 
-クラスがすでに独自のビヘイビアを定義している場合、インポート時にトレイトの [behaviors()](api3:craft\db\SoftDeleteTrait::behaviors()) メソッドをリネームし、あなたの `behaviors()` メソッドから手動で呼び出す必要があります。
+クラスがすでに独自のビヘイビアを定義している場合、インポート時にトレイトの [behaviors()](craft3:craft\db\SoftDeleteTrait::behaviors()) メソッドをリネームし、あなたの `behaviors()` メソッドから手動で呼び出す必要があります。
 
 ```php
 use craft\db\ActiveRecord;
@@ -141,7 +141,7 @@ public static function find()
   $record->softDelete();
   ```
 
-- クエリコマンドを使用してテーブルから行を削除する場合、[delete()](yii2:yii\db\Command::delete()) ではなく、<api3:craft\db\Command::softDelete()> を呼び出してください。
+- クエリコマンドを使用してテーブルから行を削除する場合、[delete()](yii2:yii\db\Command::delete()) ではなく、<craft3:craft\db\Command::softDelete()> を呼び出してください。
 
   ```php
   \Craft::$app->db->createCommand()
@@ -163,7 +163,7 @@ public static function find()
    $record->restore();
   ```
 
-- クエリコマンドで <api3:craft\db\Command::restore()> を呼び出す。
+- クエリコマンドで <craft3:craft\db\Command::restore()> を呼び出す。
 
   ```php
   \Craft::$app->db->createCommand()

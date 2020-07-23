@@ -13,7 +13,7 @@ $myMatrixBlockQuery = \craft\elements\MatrixBlock::find();
 ```
 :::
 
-Once you’ve created a Matrix block query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [MatrixBlock](api3:craft\elements\MatrixBlock) objects will be returned.
+Once you’ve created a Matrix block query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [MatrixBlock](craft3:craft\elements\MatrixBlock) objects will be returned.
 
 ::: tip
 See [Introduction to Element Queries](README.md) to learn about how element queries work.
@@ -59,7 +59,7 @@ Matrix block queries support the following parameters:
 | [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the Matrix blocks’ owners are drafts.
 | [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the Matrix blocks’ owners are revisions.
 | [anyStatus](#anystatus)                     | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
-| [asArray](#asarray)                         | Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](api3:craft\elements\MatrixBlock) objects.
+| [asArray](#asarray)                         | Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft3:craft\elements\MatrixBlock) objects.
 | [clearCachedResult](#clearcachedresult)     | Clears the cached result.
 | [dateCreated](#datecreated)                 | Narrows the query results based on the Matrix blocks’ creation dates.
 | [dateUpdated](#dateupdated)                 | Narrows the query results based on the Matrix blocks’ last-updated dates.
@@ -142,7 +142,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 ### `asArray`
 
-Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](api3:craft\elements\MatrixBlock) objects.
+Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft3:craft\elements\MatrixBlock) objects.
 
 
 
@@ -262,7 +262,7 @@ Possible values include:
 | `'not foo'` | not in a field with a handle of `foo`.
 | `['foo', 'bar']` | in a field with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a field with a handle of `foo` or `bar`.
-| a [craft\fields\Matrix](api3:craft\fields\Matrix) object | in a field represented by the object.
+| a [craft\fields\Matrix](craft3:craft\fields\Matrix) object | in a field represented by the object.
 
 
 
@@ -655,7 +655,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](api3:craft\models\Site) object | from the site represented by the object.
+| a [craft\models\Site](craft3:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip
@@ -778,7 +778,7 @@ Possible values include:
 | `'not foo'` | not of a type with a handle of `foo`.
 | `['foo', 'bar']` | of a type with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not of a type with a handle of `foo` or `bar`.
-| an [MatrixBlockType](api3:craft\models\MatrixBlockType) object | of a type represented by the object.
+| an [MatrixBlockType](craft3:craft\models\MatrixBlockType) object | of a type represented by the object.
 
 
 

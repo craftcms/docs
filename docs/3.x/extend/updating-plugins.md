@@ -80,16 +80,16 @@ In Craft 3, component types no longer act as separate, peripheral classes to the
 
 Here’s how it works:
 
-- Any required component methods such as `getInputHtml()` are defined by an interface (e.g. <api3:craft\base\FieldInterface>).
-- Common properties such as `$handle` are defined by a trait (e.g. <api3:craft\base\FieldTrait>).
-- A base implementation of the component type is provided by an abstract base class (e.g. <api3:craft\base\Field>).
-- The base class is extended by the various component classes (e.g. <api3:craft\fields\PlainText>).
+- Any required component methods such as `getInputHtml()` are defined by an interface (e.g. <craft3:craft\base\FieldInterface>).
+- Common properties such as `$handle` are defined by a trait (e.g. <craft3:craft\base\FieldTrait>).
+- A base implementation of the component type is provided by an abstract base class (e.g. <craft3:craft\base\Field>).
+- The base class is extended by the various component classes (e.g. <craft3:craft\fields\PlainText>).
 
 
 
 ## Translations
 
-<api3:Craft::t()> requires a `$category` argument now, which should be set to one of these translation categories:
+<craft3:Craft::t()> requires a `$category` argument now, which should be set to one of these translation categories:
 
 - `yii` for Yii translation messages
 - `app` for Craft translation messages
@@ -123,7 +123,7 @@ Craft no longer auto-prepends the DB table prefix to table names, so you must wr
 
 ### Select Queries
 
-Select queries are defined by <api3:craft\db\Query> classes now.
+Select queries are defined by <craft3:craft\db\Query> classes now.
 
 ```php
 use craft\db\Query;
@@ -137,7 +137,7 @@ $results = (new Query())
 
 ### Operational Queries
 
-Operational queries can be built from the helper methods on <api3:craft\db\Command> (accessed via `Craft::$app->db->createCommand()`), much like the [`DbCommand`](https://docs.craftcms.com/api/v2/craft-dbcommand.html) class in Craft 2.
+Operational queries can be built from the helper methods on <craft3:craft\db\Command> (accessed via `Craft::$app->db->createCommand()`), much like the [`DbCommand`](https://docs.craftcms.com/api/v2/craft-dbcommand.html) class in Craft 2.
 
 One notable difference is that the helper methods no longer automatically execute the query, so you must chain a call to `execute()`.
 
@@ -167,7 +167,7 @@ $entries = Entry::find()
 
 ## Craft Config Settings
 
-All of Craft’s config settings have been moved to actual properties on a few config classes, located in `vendor/craftcms/cms/src/config/`. The new Config service (<api3:craft\services\Config>) provides getter methods/properties that will return those classes:
+All of Craft’s config settings have been moved to actual properties on a few config classes, located in `vendor/craftcms/cms/src/config/`. The new Config service (<craft3:craft\services\Config>) provides getter methods/properties that will return those classes:
 
 ```php
 // Old:
@@ -181,8 +181,8 @@ $tablePrefix = Craft::$app->config->db->tablePrefix;
 
 ## Files
 
-- `IOHelper` has been replaced with <api3:craft\helpers\FileHelper>, which extends Yii’s <yii2:yii\helpers\BaseFileHelper>.
-- Directory paths returned by <api3:craft\helpers\FileHelper> and <api3:craft\services\Path> methods no longer include a trailing slash.
+- `IOHelper` has been replaced with <craft3:craft\helpers\FileHelper>, which extends Yii’s <yii2:yii\helpers\BaseFileHelper>.
+- Directory paths returned by <craft3:craft\helpers\FileHelper> and <craft3:craft\services\Path> methods no longer include a trailing slash.
 - File system paths in Craft now use the `DIRECTORY_SEPARATOR` PHP constant (which is set to either `/` or `\` depending on the environment) rather than hard-coded forward slashes (`/`).
 
 ## Events
@@ -403,7 +403,7 @@ Event::on(SystemMessages::class, SystemMessages::EVENT_REGISTER_MESSAGES, functi
 ```
 
 ::: tip
-Rather than defining the full message heading/subject/body right within the <api3:Craft::t()> call, you can pass placeholder strings (e.g. `'email_heading'`) and define the actual string in your plugin’s translation file.
+Rather than defining the full message heading/subject/body right within the <craft3:Craft::t()> call, you can pass placeholder strings (e.g. `'email_heading'`) and define the actual string in your plugin’s translation file.
 :::
 
 #### `registerUserPermissions`
@@ -561,7 +561,7 @@ Event::on(Entry::class, Element::EVENT_SET_ROUTE, function(SetElementRouteEvent 
 
 The following sets of hooks have been combined into single events that are shared across all element types.
 
-For each of these, you could either pass <api3:craft\base\Element::class> to the first argument of `yii\base\Event::on()` (registering the event listener for *all* element types), or a specific element type class (registering the event listener for just that one element type).
+For each of these, you could either pass <craft3:craft\base\Element::class> to the first argument of `yii\base\Event::on()` (registering the event listener for *all* element types), or a specific element type class (registering the event listener for just that one element type).
 
 #### `addEntryActions`, `addCategoryActions`, `addAssetActions`, & `addUserActions`
 
@@ -713,7 +713,7 @@ public function getTableAttributesForSource($elementType, $sourceKey)
 ```
 
 ::: warning NOTE
-There is no direct Craft 3 equivalent for this hook, which allowed plugins to completely change the table attributes for an element type right before the element index view was rendered. The closest thing in Craft 3 is the <api3:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> event, which can be used to change the available table attributes for an element type when an admin is customizing the element index sources.
+There is no direct Craft 3 equivalent for this hook, which allowed plugins to completely change the table attributes for an element type right before the element index view was rendered. The closest thing in Craft 3 is the <craft3:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> event, which can be used to change the available table attributes for an element type when an admin is customizing the element index sources.
 :::
 
 ## Template Variables

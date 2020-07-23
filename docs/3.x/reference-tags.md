@@ -33,11 +33,11 @@ As you can see, they are made up three segments:
 
     You can refer to the element types’ class references for a list of available properties:
 
-    - [api3:craft\elements\Entry](api3:craft\elements\Entry#public-properties)
-    - [api3:craft\elements\Asset](api3:craft\elements\Asset#public-properties)
-    - [api3:craft\elements\Tag](api3:craft\elements\Tag#public-properties)
-    - [api3:craft\elements\User](api3:craft\elements\User#public-properties)
-    - [api3:craft\elements\GlobalSet](api3:craft\elements\GlobalSet#public-properties)
+    - [craft3:craft\elements\Entry](craft3:craft\elements\Entry#public-properties)
+    - [craft3:craft\elements\Asset](craft3:craft\elements\Asset#public-properties)
+    - [craft3:craft\elements\Tag](craft3:craft\elements\Tag#public-properties)
+    - [craft3:craft\elements\User](craft3:craft\elements\User#public-properties)
+    - [craft3:craft\elements\GlobalSet](craft3:craft\elements\GlobalSet#public-properties)
 
     Custom field handles are also supported, for field types with values that can be represented as strings.
 
@@ -45,7 +45,7 @@ As you can see, they are made up three segments:
 
 The following are valid reference tags:
 
-- `{asset:123:filename}` – returns the filename of an asset with the ID of `123` (via <api3:craft\elements\Asset::getFilename()>).
+- `{asset:123:filename}` – returns the filename of an asset with the ID of `123` (via <craft3:craft\elements\Asset::getFilename()>).
 - `{entry:about-us:intro}` – returns the value of an `intro` custom field on an entry with the slug `about-us`.
 - `{entry:about-us@en:intro}` – returns the value of an `intro` custom field on an entry with the slug `about-us`, loaded from the site with the handle `en`.
 - `{entry:blog/whats-on-tap}` – returns the URL of an entry in a `blog` section with the slug `whats-on-tap`.

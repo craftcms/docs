@@ -220,7 +220,7 @@ Twig 2 では、`defined` のテストでない限り、エラーを返します
 | `craft.tasks.haveTasksFailed()`             | *（該当なし）*                                                         |
 | `craft.tasks.isTaskRunning()`               | `craft.app.queue.getHasReservedJobs()`<sup>1</sup> |
 
-*<sup>1</sup> `queue` コンポーネントが <api3:craft\queue\QueueInterface> を実装している場合のみ、使用可能です。*
+*<sup>1</sup> `queue` コンポーネントが <craft3:craft\queue\QueueInterface> を実装している場合のみ、使用可能です。*
 
 いくつかのテンプレートファンクションは Craft 3 で非推奨となり、Craft 4 で完全に削除されます。
 
@@ -344,7 +344,7 @@ Twig 2 では、`defined` のテストでない限り、エラーを返します
 
 ## 日付フォーマット
 
-`|currency` フィルタは <api3:craft\i18n\Formatter::asCurrency()> にマップされるようになりました。従来と同じ動きになりますが、引数 `stripZeroCents` は `stripZeros` にリネームされ、キーと値の両方が必要となっているため、この引数をセットしている場合はテンプレートを更新する必要があります。
+`|currency` フィルタは <craft3:craft\i18n\Formatter::asCurrency()> にマップされるようになりました。従来と同じ動きになりますが、引数 `stripZeroCents` は `stripZeros` にリネームされ、キーと値の両方が必要となっているため、この引数をセットしている場合はテンプレートを更新する必要があります。
 
 | 旧                         | 新                                  |
 | ------------------------- | ---------------------------------- |

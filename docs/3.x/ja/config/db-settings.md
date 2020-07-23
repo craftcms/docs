@@ -58,7 +58,7 @@ Craft がサポートするデータベース接続設定の完全なリスト�
 定義元
 :
 
-[DbConfig::$attributes](api3:craft\config\DbConfig::$attributes)
+[DbConfig::$attributes](craft3:craft\config\DbConfig::$attributes)
 
 
 
@@ -91,7 +91,7 @@ PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 定義元
 :
 
-[DbConfig::$charset](api3:craft\config\DbConfig::$charset)
+[DbConfig::$charset](craft3:craft\config\DbConfig::$charset)
 
 
 
@@ -114,7 +114,7 @@ PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 定義元
 :
 
-[DbConfig::$database](api3:craft\config\DbConfig::$database)
+[DbConfig::$database](craft3:craft\config\DbConfig::$database)
 
 
 
@@ -137,7 +137,7 @@ PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 定義元
 :
 
-[DbConfig::$driver](api3:craft\config\DbConfig::$driver)
+[DbConfig::$driver](craft3:craft\config\DbConfig::$driver)
 
 
 
@@ -160,7 +160,7 @@ PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 定義元
 :
 
-[DbConfig::$dsn](api3:craft\config\DbConfig::$dsn)
+[DbConfig::$dsn](craft3:craft\config\DbConfig::$dsn)
 
 
 
@@ -186,7 +186,7 @@ PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 定義元
 :
 
-[DbConfig::$password](api3:craft\config\DbConfig::$password)
+[DbConfig::$password](craft3:craft\config\DbConfig::$password)
 
 
 
@@ -209,7 +209,7 @@ PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 定義元
 :
 
-[DbConfig::$port](api3:craft\config\DbConfig::$port)
+[DbConfig::$port](craft3:craft\config\DbConfig::$port)
 
 
 
@@ -232,7 +232,7 @@ PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 定義元
 :
 
-[DbConfig::$schema](api3:craft\config\DbConfig::$schema)
+[DbConfig::$schema](craft3:craft\config\DbConfig::$schema)
 
 
 
@@ -255,7 +255,7 @@ PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 定義元
 :
 
-[DbConfig::$server](api3:craft\config\DbConfig::$server)
+[DbConfig::$server](craft3:craft\config\DbConfig::$server)
 
 
 
@@ -278,7 +278,7 @@ PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 定義元
 :
 
-[DbConfig::$tablePrefix](api3:craft\config\DbConfig::$tablePrefix)
+[DbConfig::$tablePrefix](craft3:craft\config\DbConfig::$tablePrefix)
 
 
 
@@ -301,7 +301,7 @@ PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 定義元
 :
 
-[DbConfig::$unixSocket](api3:craft\config\DbConfig::$unixSocket)
+[DbConfig::$unixSocket](craft3:craft\config\DbConfig::$unixSocket)
 
 
 
@@ -324,7 +324,7 @@ MySQL のみ。セットされている場合、（yiic で使用される）CLI
 定義元
 :
 
-[DbConfig::$url](api3:craft\config\DbConfig::$url)
+[DbConfig::$url](craft3:craft\config\DbConfig::$url)
 
 
 
@@ -349,7 +349,7 @@ MySQL のみ。セットされている場合、（yiic で使用される）CLI
 定義元
 :
 
-[DbConfig::$user](api3:craft\config\DbConfig::$user)
+[DbConfig::$user](craft3:craft\config\DbConfig::$user)
 
 
 

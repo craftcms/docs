@@ -36,7 +36,7 @@ Then run the following command to generate a new migration file for your plugin 
 
 Enter `yes` at the prompt, and a new migration file will be created for you. You can find it at the file path output by the command.
 
-If this is a plugin migration, increase your plugin’s [schema version](api3:craft\base\PluginTrait::$schemaVersion), so Craft knows to check for new plugin migrations as people update to your new version.
+If this is a plugin migration, increase your plugin’s [schema version](craft3:craft\base\PluginTrait::$schemaVersion), so Craft knows to check for new plugin migrations as people update to your new version.
 
 ### What Goes Inside
 
@@ -50,7 +50,7 @@ You have full access to [Craft’s API](https://docs.craftcms.com/api/v3/) from 
 
 ### Manipulating Database Data
 
-Your migration class extends <api3:craft\db\Migration>, which provides several methods for working with the database. It’s better to use these than their <api3:craft\db\Command> counterparts, because the migration methods are both simpler to use, and they’ll output a status message to the terminal for you.
+Your migration class extends <craft3:craft\db\Migration>, which provides several methods for working with the database. It’s better to use these than their <craft3:craft\db\Command> counterparts, because the migration methods are both simpler to use, and they’ll output a status message to the terminal for you.
 
 ```php
 // Bad:
@@ -63,11 +63,11 @@ $this->insert('{{%tablename}}', $rows);
 ```
 
 ::: warning
-The <yii2:yii\db\Migration::insert()>, [batchInsert()](api3:craft\db\Migration::batchInsert()), and [update()](yii2:yii\db\Migration::update()) migration methods will automatically insert/update data in the `dateCreated`, `dateUpdated`, `uid` table columns in addition to whatever you specified in the `$columns` argument. If the table you’re working with does’t have those columns, make sure you pass `false` to the `$includeAuditColumns` argument so you don’t get a SQL error.
+The <yii2:yii\db\Migration::insert()>, [batchInsert()](craft3:craft\db\Migration::batchInsert()), and [update()](yii2:yii\db\Migration::update()) migration methods will automatically insert/update data in the `dateCreated`, `dateUpdated`, `uid` table columns in addition to whatever you specified in the `$columns` argument. If the table you’re working with does’t have those columns, make sure you pass `false` to the `$includeAuditColumns` argument so you don’t get a SQL error.
 :::
 
 ::: tip
-<api3:craft\db\Migration> doesn’t have a method for _selecting_ data, so you will still need to go through Yii’s [Query Builder](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder) for that.
+<craft3:craft\db\Migration> doesn’t have a method for _selecting_ data, so you will still need to go through Yii’s [Query Builder](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder) for that.
 
 ```php
 use craft\db\Query;
@@ -110,7 +110,7 @@ Or you can have Craft apply all new migrations across all migration tracks:
 ./craft migrate/all
 ```
 
-Craft will also check for new plugin migrations on control panel requests, for any plugins that have a new [schema version](api3:craft\base\PluginTrait::$schemaVersion), and content migrations can be applied from the Control Panel by going to Utilities → Migrations.
+Craft will also check for new plugin migrations on control panel requests, for any plugins that have a new [schema version](craft3:craft\base\PluginTrait::$schemaVersion), and content migrations can be applied from the Control Panel by going to Utilities → Migrations.
 
 ## Plugin Install Migrations
 
@@ -142,7 +142,7 @@ You can give your plugin an install migration with the `migrate/create` command 
 ./craft migrate/create install --plugin=<plugin-handle>
 ```
 
-When a plugin has an Install migration, its `safeUp()` method will be called when the plugin is installed, and its `safeDown()` method will be called when the plugin is uninstalled (invoked by the plugin’s [install()](api3:craft\base\Plugin::install()) and [uninstall()](api3:craft\base\Plugin::uninstall()) methods).
+When a plugin has an Install migration, its `safeUp()` method will be called when the plugin is installed, and its `safeDown()` method will be called when the plugin is uninstalled (invoked by the plugin’s [install()](craft3:craft\base\Plugin::install()) and [uninstall()](craft3:craft\base\Plugin::uninstall()) methods).
 
 ::: tip
 It is *not* a plugin’s responsibility to manage its row in the `plugins` database table. Craft takes care of that for you.

@@ -13,7 +13,7 @@ $myGlobalSetQuery = \craft\elements\GlobalSet::find();
 ```
 :::
 
-Once you’ve created a global set query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [GlobalSet](api3:craft\elements\GlobalSet) objects will be returned.
+Once you’ve created a global set query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [GlobalSet](craft3:craft\elements\GlobalSet) objects will be returned.
 
 ::: tip
 See [Introduction to Element Queries](README.md) to learn about how element queries work.
@@ -54,7 +54,7 @@ Global set queries support the following parameters:
 | Param                                     | Description
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [anyStatus](#anystatus)                   | Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
-| [asArray](#asarray)                       | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](api3:craft\elements\GlobalSet) objects.
+| [asArray](#asarray)                       | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft3:craft\elements\GlobalSet) objects.
 | [clearCachedResult](#clearcachedresult)   | Clears the cached result.
 | [dateCreated](#datecreated)               | Narrows the query results based on the global sets’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the global sets’ last-updated dates.
@@ -103,7 +103,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `asArray`
 
-Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](api3:craft\elements\GlobalSet) objects.
+Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft3:craft\elements\GlobalSet) objects.
 
 
 
@@ -528,7 +528,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](api3:craft\models\Site) object | from the site represented by the object.
+| a [craft\models\Site](craft3:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip

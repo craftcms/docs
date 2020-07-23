@@ -160,7 +160,7 @@ $entryIds = Entry::find()
 
 ## Advanced Element Queries
 
-Element queries are specialized [query builders](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder) under the hood, so they support most of the same methods provided by <api3:craft\db\Query>.
+Element queries are specialized [query builders](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder) under the hood, so they support most of the same methods provided by <craft3:craft\db\Query>.
 
 ### Selections
 
@@ -188,7 +188,7 @@ Element queries are specialized [query builders](https://www.yiiframework.com/do
 
 - [all()](yii2:yii\db\Query::all())
 - [one()](yii2:yii\db\Query::one())
-- [nth()](api3:craft\db\Query::nth())
+- [nth()](craft3:craft\db\Query::nth())
 - [exists()](yii2:yii\db\Query::exists())
 - [count()](yii2:yii\db\Query::count())
 - [column()](yii2:yii\db\Query::column())
@@ -199,7 +199,7 @@ Element queries are specialized [query builders](https://www.yiiframework.com/do
 - [max()](yii2:yii\db\Query::max())
 
 ::: tip
-When customizing an element query, you can call [getRawSql()](api3:craft\db\Query::getRawSql()) to get the full SQL that is going to be executed by the query, so you have a better idea of what to modify.
+When customizing an element query, you can call [getRawSql()](craft3:craft\db\Query::getRawSql()) to get the full SQL that is going to be executed by the query, so you have a better idea of what to modify.
 
 ```twig
 {{ dump(query.getRawSql()) }}

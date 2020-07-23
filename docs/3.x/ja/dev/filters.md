@@ -108,7 +108,7 @@ PHP の `date()` ファンクションでサポートされるものと同じ [�
 
 `timezone` パラメータを使用して、出力される時刻のタイムゾーンをカスタマイズできます。
 
-[DateInterval](http://php.net/manual/en/class.dateinterval.php) オブジェクトに <api3:craft\helpers\DateTimeHelper::humanDurationFromInterval()> を実行します。
+[DateInterval](http://php.net/manual/en/class.dateinterval.php) オブジェクトに <craft3:craft\helpers\DateTimeHelper::humanDurationFromInterval()> を実行します。
 
 ## `filesize`
 
@@ -124,7 +124,7 @@ PHP の `date()` ファンクションでサポートされるものと同じ [�
 
 配列から空のエレメントを削除し、変更された配列を返します。
 
-配列に <api3:craft\helpers\ArrayHelper::filterByValue()> を実行します。
+配列に <craft3:craft\helpers\ArrayHelper::filterByValue()> を実行します。
 
 ## `filterByValue`
 
@@ -251,7 +251,7 @@ Twig の [json_encode](https://twig.symfony.com/doc/2.x/filters/json_encode.html
 | `long`             | September 26, 2018 at 5:00:00 PM PDT            |
 | `full`             | Wednesday, September 26, 2018 at 5:00:00 PM PDT |
 
-文字列に <api3:craft\helpers\Db::escapeParam()> を実行します。
+文字列に <craft3:craft\helpers\Db::escapeParam()> を実行します。
 
 ```twig
 {{ "foo bar?"|kebab }}
@@ -281,7 +281,7 @@ the [Apple Extended Keyboard II] [1].
 
 ## `indexOf`
 
-ユーザーが優先する言語に応じて、数値をフォーマットします。 <api3:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
+ユーザーが優先する言語に応じて、数値をフォーマットします。 <craft3:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
 
 ```twig
 {{ 1000000|number }} → 1,000,000
@@ -462,7 +462,7 @@ This works identically to Twig’s core [`length`](https://twig.symfony.com/doc/
 
 ## `unique`
 
-Runs a string through <api3:craft\helpers\Db::escapeParam()>
+Runs a string through <craft3:craft\helpers\Db::escapeParam()>
 
 ## `values`
 
@@ -707,7 +707,7 @@ You can customize the timezone the time is output in, using the `timezone` param
 
 ## `timestamp`
 
-Formats a date as a human-readable timestamp, via <api3:craft\i18n\Formatter::asTimestamp()>.
+Formats a date as a human-readable timestamp, via <craft3:craft\i18n\Formatter::asTimestamp()>.
 
 ## `title`
 

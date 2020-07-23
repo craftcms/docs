@@ -1008,7 +1008,7 @@ This directive allows for formatting any date to the desired format. It can be a
 
 
 ### The `transform` directive
-This directive is used to return a URL for an [asset tranform](https://docs.craftcms.com/v3/image-transforms.html). It accepts the same arguments you would use for a transform in Craft and adds the `immediately` argument.
+This directive is used to return a URL for an [asset tranform](image-transforms.md). It accepts the same arguments you would use for a transform in Craft and adds the `immediately` argument.
 | Argument | Type | Description
 | - | - | -
 | `handle`| `String` | The handle of the named transform to use.
@@ -1256,7 +1256,7 @@ Mutations take the data as arguments and, while for most part they are pretty st
 
 ### Matrix fields in mutations
 
-Due to the limitations of GraphQL, input types are not very flexible and Matrix fields are quite complex. For this reason, they are entitled to their own section in the docs. It is recommended to read up on [how to save matrix field data in entry forms](https://docs.craftcms.com/v3/matrix-fields.html#saving-matrix-fields-in-entry-forms) if you are unfamiliar with that, first.
+Due to the limitations of GraphQL, input types are not very flexible and Matrix fields are quite complex. For this reason, they are entitled to their own section in the docs. It is recommended to read up on [how to save matrix field data in entry forms](hmatrix-fields.md#saving-matrix-fields-in-entry-forms) if you are unfamiliar with that, first.
 
 In general, the Matrix Input types have the same structure:
 

@@ -36,7 +36,7 @@ cd /path/to/project
 
 プロンプトで `yes` と入力すると、新しいマイグレーションファイルが作成されます。 コマンドによって出力されたファイルパスで見つけることができます。
 
-プラグインのマイグレーションの場合、プラグインの[スキーマバージョン](api3:craft\base\PluginTrait::$schemaVersion)を上げてください。そうすることで、Craft は新しいバージョンにアップデートするように新しいプラグインのマイグレーションをチェックすることを知ります。
+プラグインのマイグレーションの場合、プラグインの[スキーマバージョン](craft3:craft\base\PluginTrait::$schemaVersion)を上げてください。そうすることで、Craft は新しいバージョンにアップデートするように新しいプラグインのマイグレーションをチェックすることを知ります。
 
 ### 内部で行うこと
 
@@ -50,7 +50,7 @@ cd /path/to/project
 
 ### データベースデータの操作
 
-マイグレーションクラスは <api3:craft\db\Migration> を拡張し、データベースを操作するためのいくつかのメソッドを提供しています。マイグレーションメソッドはどちらも使いやすく、ターミナルにステータスメッセージを出力するため、<api3:craft\db\Command> よりもこれらを使う方が良いでしょう。
+マイグレーションクラスは <craft3:craft\db\Migration> を拡張し、データベースを操作するためのいくつかのメソッドを提供しています。マイグレーションメソッドはどちらも使いやすく、ターミナルにステータスメッセージを出力するため、<craft3:craft\db\Command> よりもこれらを使う方が良いでしょう。
 
 ```php
 // Bad:
@@ -63,11 +63,11 @@ $this->insert('{{%tablename}}', $rows);
 ```
 
 ::: warning
-<yii2:yii\db\Migration::insert()>、[batchInsert()](api3:craft\db\Migration::batchInsert())、および、[update()](yii2:yii\db\Migration::update()) マイグレーションメソッドは、引数 `$columns` で指定したものに加えて `dateCreated`、 `dateUpdated`、`uid` テーブルのカラムにあるデータを自動的に挿入 / アップデートします。操作しているテーブルにこれらのカラムがない場合、引数 `$includeAuditColumns` に `false` を渡して、SQL エラーにならないようにしてください。
+<yii2:yii\db\Migration::insert()>、[batchInsert()](craft3:craft\db\Migration::batchInsert())、および、[update()](yii2:yii\db\Migration::update()) マイグレーションメソッドは、引数 `$columns` で指定したものに加えて `dateCreated`、 `dateUpdated`、`uid` テーブルのカラムにあるデータを自動的に挿入 / アップデートします。操作しているテーブルにこれらのカラムがない場合、引数 `$includeAuditColumns` に `false` を渡して、SQL エラーにならないようにしてください。
 :::
 
 ::: tip
-<api3:craft\db\Migration> はデータを <em x-id="4">選択する</em> ためのメソッドを持たないため、Yii の<a href="https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder">クエリビルダー</a>を通す必要があります。
+<craft3:craft\db\Migration> はデータを <em x-id="4">選択する</em> ためのメソッドを持たないため、Yii の<a href="https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder">クエリビルダー</a>を通す必要があります。
 
 ```php
 use craft\db\Query;
@@ -110,7 +110,7 @@ echo "    > some note\n";
 ./craft migrate/all
 ```
 
-Craft はコントロールパネルのリクエストで新しい[スキーマバージョン](api3:craft\base\PluginTrait::$schemaVersion)を持つプラグインの新しいプラグインのマイグレーションをチェックし、コンテンツのマイグレーションはコントロールパネルの「ユーティリティ > マイグレーション」から適用できます。
+Craft はコントロールパネルのリクエストで新しい[スキーマバージョン](craft3:craft\base\PluginTrait::$schemaVersion)を持つプラグインの新しいプラグインのマイグレーションをチェックし、コンテンツのマイグレーションはコントロールパネルの「ユーティリティ > マイグレーション」から適用できます。
 
 ## プラグインのインストールマイグレーション
 
@@ -142,7 +142,7 @@ class Install extends Migration
 ./craft migrate/create install --plugin=<plugin-handle>
 ```
 
-プラグインがインストールマイグレーションを持つ場合、`safeUp()` メソッドはプラグインがインストールされるときに呼び出されます。そして、`safeDown()` メソッドはプラグインがアンインストールされるときに呼び出されます（プラグインの [install()](api3:craft\base\Plugin::install())、および、[uninstall()](api3:craft\base\Plugin::uninstall()) メソッドによって呼び出されます）。
+プラグインがインストールマイグレーションを持つ場合、`safeUp()` メソッドはプラグインがインストールされるときに呼び出されます。そして、`safeDown()` メソッドはプラグインがアンインストールされるときに呼び出されます（プラグインの [install()](craft3:craft\base\Plugin::install())、および、[uninstall()](craft3:craft\base\Plugin::uninstall()) メソッドによって呼び出されます）。
 
 ::: tip
 `plugins` データベーステーブルの行を管理するのはプラグインの責任 *ではありません*。Craft がそれをケアします。

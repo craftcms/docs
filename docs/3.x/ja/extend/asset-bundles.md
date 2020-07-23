@@ -92,7 +92,7 @@ public function actionFoo()
 
 ### 公開されたファイル URL の取得
 
-公開 URL を必要とするものの、CSS や JS ファイルのように現在のページで登録する必要がないファイルがある場合、<api3:craft\web\AssetManager::getPublishedUrl()> を使用できます。
+公開 URL を必要とするものの、CSS や JS ファイルのように現在のページで登録する必要がないファイルがある場合、<craft3:craft\web\AssetManager::getPublishedUrl()> を使用できます。
 
 ```php
 $url = \Craft::$app->assetManager->getPublishedUrl('@ns/prefix/path/to/file.svg', true);

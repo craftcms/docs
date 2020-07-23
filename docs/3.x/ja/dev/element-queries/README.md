@@ -160,7 +160,7 @@ $entryIds = Entry::find()
 
 ## 高度なエレメントクエリ
 
-エレメントクエリは、専門的な[クエリビルダー](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder)です。そのため、<api3:craft\db\Query> によって提供されるものとほとんど同じメソッドをサポートしています。
+エレメントクエリは、専門的な[クエリビルダー](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder)です。そのため、<craft3:craft\db\Query> によって提供されるものとほとんど同じメソッドをサポートしています。
 
 ### 選択
 
@@ -188,7 +188,7 @@ $entryIds = Entry::find()
 
 - [all()](yii2:yii\db\Query::all())
 - [one()](yii2:yii\db\Query::one())
-- [nth()](api3:craft\db\Query::nth())
+- [nth()](craft3:craft\db\Query::nth())
 - [exists()](yii2:yii\db\Query::exists())
 - [count()](yii2:yii\db\Query::count())
 - [column()](yii2:yii\db\Query::column())
@@ -199,7 +199,7 @@ $entryIds = Entry::find()
 - [max()](yii2:yii\db\Query::max())
 
 ::: tip
-エレメントクエリをカスタマイズする際、[getRawSql()](api3:craft\db\Query::getRawSql()) を呼び出すことで、クエリによって実行される完全な SQL を取得できます。そのため、何を修正すればよいかの良いアイデアを得られるでしょう。
+エレメントクエリをカスタマイズする際、[getRawSql()](craft3:craft\db\Query::getRawSql()) を呼び出すことで、クエリによって実行される完全な SQL を取得できます。そのため、何を修正すればよいかの良いアイデアを得られるでしょう。
 
 ```twig
 {{ dump(query.getRawSql()) }}

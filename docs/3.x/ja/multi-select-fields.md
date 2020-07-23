@@ -38,7 +38,7 @@
 {% set value = entry.myFieldHandle %}
 ```
 
-それは、フィールドデータを含む <api3:craft\fields\data\MultiOptionsFieldData> オブジェクトを提供します。
+それは、フィールドデータを含む <craft3:craft\fields\data\MultiOptionsFieldData> オブジェクトを提供します。
 
 選択されたオプションすべてをループするには、フィールド値を反復してください。
 
@@ -49,7 +49,7 @@
 {% endfor %}
 ```
 
-利用可能なオプションすべてをループするには、[options](api3:craft\fields\data\MultiOptionsFieldData::getOptions()) プロパティを反復してください。
+利用可能なオプションすべてをループするには、[options](craft3:craft\fields\data\MultiOptionsFieldData::getOptions()) プロパティを反復してください。
 
 ```twig
 {% for option in entry.myFieldHandle.options %}
@@ -65,7 +65,7 @@
 {% if entry.myFieldHandle|length %}
 ```
 
-特定のオプションが選択されているかを確認するには、[contains()](api3:craft\fields\data\MultiOptionsFieldData::contains()) を使用してください。
+特定のオプションが選択されているかを確認するには、[contains()](craft3:craft\fields\data\MultiOptionsFieldData::contains()) を使用してください。
 
 ```twig
 {% if entry.myFieldHandle.contains('foo') %}

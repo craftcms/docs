@@ -25,7 +25,7 @@ Craft Commerce で製品タイプを保存するためにどのように機能�
 
 ### ステップ 1：設定変更の感知
 
-プラグインの `init()` メソッドで <api3:craft\services\ProjectConfig::onAdd()>、[onUpdate()](api3:craft\services\ProjectConfig::onUpdate())、および、[onRemove()](api3:craft\services\ProjectConfig::onRemove()) を使用し、プロジェクトコンフィグから製品タイプが登録、更新、削除されたときに発動されるイベントリスナーを登録します。
+プラグインの `init()` メソッドで <craft3:craft\services\ProjectConfig::onAdd()>、[onUpdate()](craft3:craft\services\ProjectConfig::onUpdate())、および、[onRemove()](craft3:craft\services\ProjectConfig::onRemove()) を使用し、プロジェクトコンフィグから製品タイプが登録、更新、削除されたときに発動されるイベントリスナーを登録します。
 
 ```php
 use craft\events\ConfigEvent;
@@ -43,7 +43,7 @@ public function init()
 ```
 
 ::: tip
-`{uid}` は（[StringHelper::UUID()](api3:craft\helpers\StringHelper::UUID()) で生成されたもののような）有効な UID にマッチする特別な設定パストークンです。イベントハンドラが呼び出されたときにパスが `{uid}` トークンを含んでいると、マッチする UID が [ConfigEvent::$tokenMatches](api3:craft\events\ConfigEvent::$tokenMatches) 経由で利用可能になります。
+`{uid}` は（[StringHelper::UUID()](craft3:craft\helpers\StringHelper::UUID()) で生成されたもののような）有効な UID にマッチする特別な設定パストークンです。イベントハンドラが呼び出されたときにパスが `{uid}` トークンを含んでいると、マッチする UID が [ConfigEvent::$tokenMatches](craft3:craft\events\ConfigEvent::$tokenMatches) 経由で利用可能になります。
 :::
 
 ### ステップ 2：設定変更の操作
@@ -135,7 +135,7 @@ public function handleDeletedProductType(ConfigEvent $event)
 この時点で、プロジェクトコンフィグに手動で製品タイプを追加または削除した場合、それらの変更はデータベースに同期され、イベントトリガーの `afterSaveProductType`、`beforeApplyProductTypeDelete`、および、`afterDeleteProductType` が発動します。
 
 ::: tip
-あなたのコンポーネント設定が他のコンポーネント設定を参照している場合、ハンドラーメソッド内で [ProjectConfig::processConfigChanges()](api3:craft\services\ProjectConfig::processConfigChanges()) を呼び出すことで、他の設定変更が最初に処理されることが保証されます。
+あなたのコンポーネント設定が他のコンポーネント設定を参照している場合、ハンドラーメソッド内で [ProjectConfig::processConfigChanges()](craft3:craft\services\ProjectConfig::processConfigChanges()) を呼び出すことで、他の設定変更が最初に処理されることが保証されます。
 
 ```php
 Craft::$app->projectConfig->processConfigChanges('productTypeGroups');
@@ -146,7 +146,7 @@ Craft::$app->projectConfig->processConfigChanges('productTypeGroups');
 
 あとは、データベースの更新ではなくプロジェクトコンフィグを更新するよう、サービスメソッドをアップデートするだけです。
 
-プロジェクトコンフィグの項目は、<api3:craft\services\ProjectConfig::set()> を使用して追加または更新したり、[remove()](api3:craft\services\ProjectConfig::remove()) を使用して削除できます。
+プロジェクトコンフィグの項目は、<craft3:craft\services\ProjectConfig::set()> を使用して追加または更新したり、[remove()](craft3:craft\services\ProjectConfig::remove()) を使用して削除できます。
 
 ```php
 use Craft;
@@ -222,7 +222,7 @@ public function deleteProductType($productType)
 
 プラグインのマイグレーションで環境 B に対して同じプロジェクトコンフィグの変更が行われる場合、`project.yaml` で保留中の変更と競合します。
 
-これを避けるために、プロジェクトコンフィグを変更する前に必ず _`project.yaml` の_プラグインのスキーマバージョンを確認してください。（[ProjectConfig::get()](api3:craft\services\ProjectConfig::get()) を呼び出す際の第2引数に `true`を渡すことによって、それを行います。）
+これを避けるために、プロジェクトコンフィグを変更する前に必ず _`project.yaml` の_プラグインのスキーマバージョンを確認してください。（[ProjectConfig::get()](craft3:craft\services\ProjectConfig::get()) を呼び出す際の第2引数に `true`を渡すことによって、それを行います。）
 
 ```php
 public function safeUp()
@@ -239,7 +239,7 @@ public function safeUp()
 
 ## プロジェクトコンフィグデータの再構築
 
-プラグインがプロジェクトコンフィグとデータベースの両方にデータを保存している場合、`./craft project-config/rebuild` コマンドが実行されたときに Craft がデータベースに保存されたデータに基づいてプロジェクトコンフィグを再構築するのを支援するよう（Craft 3.1.20 で追加された）<api3:craft\services\ProjectConfig::EVENT_REBUILD> を感知してください。
+プラグインがプロジェクトコンフィグとデータベースの両方にデータを保存している場合、`./craft project-config/rebuild` コマンドが実行されたときに Craft がデータベースに保存されたデータに基づいてプロジェクトコンフィグを再構築するのを支援するよう（Craft 3.1.20 で追加された）<craft3:craft\services\ProjectConfig::EVENT_REBUILD> を感知してください。
 
 ```php
 use craft\events\RebuildConfigEvent;

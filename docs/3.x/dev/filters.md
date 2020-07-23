@@ -361,7 +361,7 @@ arrays passed into the filter.
 
 ## `duration`
 
-Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object through <api3:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
+Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object through <craft3:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
 
 ```twig
 <p>Posted {{ entry.postDate.diff(now)|duration(false) }} ago.</p>
@@ -468,7 +468,7 @@ if ($foo !== false) {
 
 ## `id`
 
-Formats a string into something that will work well as an HTML input `id`, via <api3:craft\web\View::formatInputId()>.
+Formats a string into something that will work well as an HTML input `id`, via <craft3:craft\web\View::formatInputId()>.
 
 ```twig
 {% set name = 'input[name]' %}
@@ -563,7 +563,7 @@ Lowercases the first character of a string.
 
 ## `literal`
 
-Runs a string through <api3:craft\helpers\Db::escapeParam()>.
+Runs a string through <craft3:craft\helpers\Db::escapeParam()>.
 
 ```twig
 {{ 'SELECT id, * FROM table'|literal }}
@@ -895,7 +895,7 @@ You can customize the timezone the time is output in, using the `timezone` param
 
 ## `timestamp`
 
-Formats a date as a human-readable timestamp, via <api3:craft\i18n\Formatter::asTimestamp()>.
+Formats a date as a human-readable timestamp, via <craft3:craft\i18n\Formatter::asTimestamp()>.
 
 ```twig
 {{ now|timestamp }}
@@ -961,7 +961,7 @@ Returns an array of all the values in a given array, but without any custom keys
 
 ## `where`
 
-Runs an array through <api3:craft\helpers\ArrayHelper::where()>.
+Runs an array through <craft3:craft\helpers\ArrayHelper::where()>.
 
 ```twig
 {% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}

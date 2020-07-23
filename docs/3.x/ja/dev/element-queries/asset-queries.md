@@ -13,7 +13,7 @@ $myAssetQuery = \craft\elements\Asset::find();
 ```
 :::
 
-アセットクエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[Asset](api3:craft\elements\Asset) オブジェクトの配列が返されます。
+アセットクエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[Asset](craft3:craft\elements\Asset) オブジェクトの配列が返されます。
 
 ::: tip
 エレメントクエリがどのように機能するかについては、[エレメントクエリについて](README.md)を参照してください。
@@ -78,7 +78,7 @@ $assets = \craft\elements\Asset::find()
 
 ### `asArray`
 
-[Asset](api3:craft\elements\Asset) オブジェクトではなく、データの配列として、マッチしたアセットをクエリが返します。
+[Asset](craft3:craft\elements\Asset) オブジェクトではなく、データの配列として、マッチしたアセットをクエリが返します。
 
 
 
@@ -288,7 +288,7 @@ $assets = \craft\elements\Asset::find()
 | 値                                            | 取得するアセット        |
 | -------------------------------------------- | --------------- |
 | `00100669100`                                | 高さ 100px。       |
-| a [Asset](api3:craft\elements\Asset) object | 少なくとも、高さ 100px。 |
+| a [Asset](craft3:craft\elements\Asset) object | 少なくとも、高さ 100px。 |
 
 
 
@@ -826,7 +826,7 @@ $asset = \craft\elements\Asset::find()
 | 値                                            | 取得するアセット       |
 | -------------------------------------------- | -------------- |
 | `587390100`                                  | 幅 100px。       |
-| a [Asset](api3:craft\elements\Asset) object | 少なくとも、幅 100px。 |
+| a [Asset](craft3:craft\elements\Asset) object | 少なくとも、幅 100px。 |
 
 
 
@@ -1128,7 +1128,7 @@ Possible values include:
 | `'not foo'`                                | not in a volume with a handle of `foo`.          |
 | `['foo', 'bar']`                           | in a volume with a handle of `foo` or `bar`.     |
 | `['not', 'foo', 'bar']`                    | not in a volume with a handle of `foo` or `bar`. |
-| a [Volume](api3:craft\base\Volume) object | in a volume represented by the object.           |
+| a [Volume](craft3:craft\base\Volume) object | in a volume represented by the object.           |
 
 
 

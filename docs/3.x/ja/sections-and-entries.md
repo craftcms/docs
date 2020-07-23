@@ -108,7 +108,7 @@ Each preview target has Name and a URI. Give each of your targets a clear name t
 
 タイトル形式は本格的な Twig テンプレートで、エントリが保存されるたびに解析されます。
 
-エントリは `object` という名称の変数としてこのテンプレートに渡されます。エントリの [プロパティ](api3:craft\elements\Entry#public-properties) は、次の2つの方法で参照できます。
+エントリは `object` という名称の変数としてこのテンプレートに渡されます。エントリの [プロパティ](craft3:craft\elements\Entry#public-properties) は、次の2つの方法で参照できます。
 
 _ショートカット構文には、中括弧が1つしかないことに注意してください_。
 
@@ -136,7 +136,7 @@ Craft の[グローバル変数](dev/global-variables.md)は、これらのテ�
 
 投稿日を空のままにした場合、Craft はエントリが有効な状態で保存された最初のタイミングで自動的にセットします。
 
-The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](api3:craft\elements\Entry#public-properties) in two ways:
+The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](craft3:craft\elements\Entry#public-properties) in two ways:
 
 * `{{ object.property }}` _（標準の Twig 構文）_
 * `{property}` _（ショートカット構文）_

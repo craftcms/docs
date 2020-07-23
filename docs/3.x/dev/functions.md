@@ -174,7 +174,7 @@ This works identically to Twig’s core [`constant`](https://twig.symfony.com/do
 
 ## `create`
 
-Creates a new object instance based on a given class name or object configuration. See <api3:Yii::createObject()> for a full explanation of supported arguments.
+Creates a new object instance based on a given class name or object configuration. See <craft3:Yii::createObject()> for a full explanation of supported arguments.
 
 ```twig
 {# Pass in a class name #}
@@ -466,7 +466,7 @@ You can pass the following things into it:
   {{ svg('@webroot/icons/lemon.svg') }}
   ```
 
-- A <api3:craft\elements\Asset> object, such as one pulled in from an [Assets field](../assets-fields.md).
+- A <craft3:craft\elements\Asset> object, such as one pulled in from an [Assets field](../assets-fields.md).
 
   ```twig
   {% set image = entry.myAssetsField.one() %}

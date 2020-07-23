@@ -1,6 +1,6 @@
 # コントロールパネルのセクション
 
-モジュールとプラグインは、[EVENT_REGISTER_CP_NAV_ITEMS](api3:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) イベントを使用して新しいセクションをコントロールパネルに追加できます。
+モジュールとプラグインは、[EVENT_REGISTER_CP_NAV_ITEMS](craft3:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) イベントを使用して新しいセクションをコントロールパネルに追加できます。
 
 ```php
 use craft\events\RegisterCpNavItemsEvent;
@@ -27,9 +27,9 @@ public function init()
 }
 ```
 
-[navItems](api3:craft\events\RegisterCpNavItemsEvent::$navItems) 配列内のそれぞれの項目は、次のキーを持つことができます。
+[navItems](craft3:craft\events\RegisterCpNavItemsEvent::$navItems) 配列内のそれぞれの項目は、次のキーを持つことができます。
 
-- `url` – ナビゲーション項目がリンクする URL。（<api3:craft\helpers\UrlHelper::cpUrl()> を実行します。）
+- `url` – ナビゲーション項目がリンクする URL。（<craft3:craft\helpers\UrlHelper::cpUrl()> を実行します。）
 - `label` – ユーザーが目にするナビゲーション項目のラベル。
 - `icon` – 使用するアイコン SVG のパス。（エイリアスではじめることができます。）
 - `badgeCount` _（オプション）_ – ナビゲーション項目に表示されるバッジの数。
@@ -55,7 +55,7 @@ public function init()
 
 ## プラグインセクション
 
-1つのセクションだけを追加したいプラグインは、[EVENT_REGISTER_CP_NAV_ITEMS](api3:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) イベントを使うのではなく、プライマリプラグインクラスの `$hasCpSection` プロパティで設定できます。
+1つのセクションだけを追加したいプラグインは、[EVENT_REGISTER_CP_NAV_ITEMS](craft3:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) イベントを使うのではなく、プライマリプラグインクラスの `$hasCpSection` プロパティで設定できます。
 
 ```php
 <?php
@@ -70,7 +70,7 @@ class Plugin extends \craft\base\Plugin
 }
 ```
 
-[getCpNavItem()](api3:craft\base\PluginInterface::getCpNavItem()) メソッドで上書きすることによって、プラグインのコントロールパネルのナビゲーション項目の外観を変更できます。
+[getCpNavItem()](craft3:craft\base\PluginInterface::getCpNavItem()) メソッドで上書きすることによって、プラグインのコントロールパネルのナビゲーション項目の外観を変更できます。
 
 ```php
 public function getCpNavItem()

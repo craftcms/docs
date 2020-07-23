@@ -1,8 +1,8 @@
 # ユーティリティタイプ
 
-プラグインは、<api3:craft\base\UtilityInterface> を実装するクラスを作成することによって、ユーティリティセクション向けのカスタムユーティリティタイプを提供できます。
+プラグインは、<craft3:craft\base\UtilityInterface> を実装するクラスを作成することによって、ユーティリティセクション向けのカスタムユーティリティタイプを提供できます。
 
-便利なものとして、基本ユーティリティタイプの実装を提供する <api3:craft\base\Utility> を拡張できます。
+便利なものとして、基本ユーティリティタイプの実装を提供する <craft3:craft\base\Utility> を拡張できます。
 
 例えば、Craft 自身のユーティリティクラスを参照することもできます。それらは `vendor/craftcms/cms/src/utilities/` にあります。
 

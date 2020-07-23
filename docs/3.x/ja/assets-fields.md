@@ -90,7 +90,7 @@
 
 これは、所定のフィールドで関連付けられたすべてのアセットを出力するよう準備された[アセットクエリ](dev/element-queries/asset-queries.md)を提供します。
 
-関連付けられたすべてのアセットをループするには、[all()](api3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
+関連付けられたすべてのアセットをループするには、[all()](craft3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
 ```twig
 {% set relatedAssets = entry.myFieldHandle.all() %}
@@ -103,7 +103,7 @@
 {% endif %}
 ```
 
-関連付けられた最初のアセットだけが欲しい場合、代わりに [one()](api3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
+関連付けられた最初のアセットだけが欲しい場合、代わりに [one()](craft3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
 
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
@@ -112,7 +112,7 @@
 {% endif %}
 ```
 
-（取得する必要はなく）いずれかの関連付けられたアセットがあるかを確認したい場合、[exists()](api3:craft\db\Query::exists()) を呼び出すことができます。
+（取得する必要はなく）いずれかの関連付けられたアセットがあるかを確認したい場合、[exists()](craft3:craft\db\Query::exists()) を呼び出すことができます。
 
 ```twig
 {% if entry.myFieldHandle.exists() %}
@@ -157,5 +157,5 @@
 ## 関連項目
 
 * [アセットクエリ](dev/element-queries/asset-queries.md)
-* <api3:craft\elements\Asset>
+* <craft3:craft\elements\Asset>
 * [リレーション](relations.md)

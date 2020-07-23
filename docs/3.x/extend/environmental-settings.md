@@ -2,7 +2,7 @@
 
 Plugin settings that may need to change per-environment, or contain sensitive information, should be implemented as **environmental settings**.
 
-Environmental settings are settings whose raw values may reference an environment variable or alias, and which get parsed by <api3:Craft::parseEnv()> at runtime.
+Environmental settings are settings whose raw values may reference an environment variable or alias, and which get parsed by <craft3:Craft::parseEnv()> at runtime.
 
 Here’s an example model with a `$secretKey` property that may be set to an environment variable, and a `getSecretKey()` method that is responsible for parsing the value.
 
@@ -29,7 +29,7 @@ class MyModel extends Model
 
 ## Validation
 
-If your environmental settings require special validation rules, you can have the validators check the parsed values rather than the raw values using <api3:craft\behaviors\EnvAttributeParserBehavior>.
+If your environmental settings require special validation rules, you can have the validators check the parsed values rather than the raw values using <craft3:craft\behaviors\EnvAttributeParserBehavior>.
 
 ```php
 use Craft;
@@ -76,7 +76,7 @@ To guide users when entering your setting’s value in the control panel, give y
 }) }}
 ```
 
-When `suggestEnvVars` is set to `true`, the autosuggest input will call <api3:craft\web\twig\variables\Cp::getEnvSuggestions()> to get its suggestions, and a tip will show up below the form field advising the user that they can set the value to an environment variable.
+When `suggestEnvVars` is set to `true`, the autosuggest input will call <craft3:craft\web\twig\variables\Cp::getEnvSuggestions()> to get its suggestions, and a tip will show up below the form field advising the user that they can set the value to an environment variable.
 
 If your setting is for a URL or file system path, you should also set `suggestAliases` to `true`.
 

@@ -55,9 +55,9 @@
 {% endfor %}
 ```
 
-for ループ内に記述されたすべてのコードは、 フィールドに含まれるそれぞれの行列ブロックに対して繰り返されます。定義済みの変数 `block` にセットされる現在のブロックは、<api3:craft\elements\MatrixBlock> モデルになります。
+for ループ内に記述されたすべてのコードは、 フィールドに含まれるそれぞれの行列ブロックに対して繰り返されます。定義済みの変数 `block` にセットされる現在のブロックは、<craft3:craft\elements\MatrixBlock> モデルになります。
 
-次に、4つのブロックタイプ（見出し、テキスト、画像、および、引用）を持つ行列フィールドのテンプレートの実例を示します。`block.type` （<api3:craft\elements\MatrixBlock::getType()>）をチェックすることによって、現在のブロックタイプのハンドルを確認できます。
+次に、4つのブロックタイプ（見出し、テキスト、画像、および、引用）を持つ行列フィールドのテンプレートの実例を示します。`block.type` （<craft3:craft\elements\MatrixBlock::getType()>）をチェックすることによって、現在のブロックタイプのハンドルを確認できます。
 
 ```twig
 {% for block in entry.myFieldHandle.all() %}
@@ -137,4 +137,4 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 ## 関連項目
 
 * [エレメントクエリ](dev/element-queries/README.md)
-* <api3:craft\elements\MatrixBlock>
+* <craft3:craft\elements\MatrixBlock>

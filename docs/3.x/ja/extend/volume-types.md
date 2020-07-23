@@ -1,8 +1,8 @@
 # ボリュームタイプ
 
-プラグインは、<api3:craft\base\VolumeInterface> および <api3:craft\base\VolumeTrait> を実装するクラスを作成することによって、カスタムアセットボリュームタイプを提供できます。そのクラスは（静的メソッドで）ボリュームタイプについて様々なことを伝える手段として、さらに、そのタイプのボリュームが一緒にインスタンス化されるであろうモデルとしての両方の役割を果たします。
+プラグインは、<craft3:craft\base\VolumeInterface> および <craft3:craft\base\VolumeTrait> を実装するクラスを作成することによって、カスタムアセットボリュームタイプを提供できます。そのクラスは（静的メソッドで）ボリュームタイプについて様々なことを伝える手段として、さらに、そのタイプのボリュームが一緒にインスタンス化されるであろうモデルとしての両方の役割を果たします。
 
-便利なものとして、[Flysystem](https://flysystem.thephpleague.com/) アダプタ向けに最適化された基本ボリュームタイプの実装を提供する <api3:craft\base\Volume> を拡張することができます。
+便利なものとして、[Flysystem](https://flysystem.thephpleague.com/) アダプタ向けに最適化された基本ボリュームタイプの実装を提供する <craft3:craft\base\Volume> を拡張することができます。
 
 例えば、Craft 自身のボリュームクラスを参照することもできます。それらは `vendor/craftcms/cms/src/volumes/` にあります。
 

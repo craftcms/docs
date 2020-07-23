@@ -13,7 +13,7 @@ $myGlobalSetQuery = \craft\elements\GlobalSet::find();
 ```
 :::
 
-グローバル設定クエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。 さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[GlobalSet](api3:craft\elements\GlobalSet) オブジェクトの配列が返されます。
+グローバル設定クエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。 さらに、`.all()` を呼び出して[実行](README.md#executing-element-queries)できます。[GlobalSet](craft3:craft\elements\GlobalSet) オブジェクトの配列が返されます。
 
 ::: tip
 エレメントクエリがどのように機能するかについては、[エレメントクエリについて](README.md)を参照してください。
@@ -78,7 +78,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 ### `asArray`
 
-[GlobalSet](api3:craft\elements\GlobalSet) オブジェクトではなく、データの配列として、マッチしたグローバル設定をクエリが返します。
+[GlobalSet](craft3:craft\elements\GlobalSet) オブジェクトではなく、データの配列として、マッチしたグローバル設定をクエリが返します。
 
 
 
@@ -637,7 +637,7 @@ Possible values include:
 | Value                                                | Fetches revisions…                            |
 | ---------------------------------------------------- | --------------------------------------------- |
 | `1`                                                  | for the global set with an ID of 1.           |
-| a [GlobalSet](api3:craft\elements\GlobalSet) object | for the global set represented by the object. |
+| a [GlobalSet](craft3:craft\elements\GlobalSet) object | for the global set represented by the object. |
 
 
 

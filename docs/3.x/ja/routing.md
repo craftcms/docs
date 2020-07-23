@@ -25,7 +25,7 @@ Craft はリクエストを次のように処理します。
 
    URL がエレメントの URI にマッチする場合、Craft はエレメントにそのリクエストのルーティング方法を決定させます。例えば、ある[エントリの](sections-and-entries.md) URI がリクエストされた場合、エントリはそのセクションの設定で指定されたテンプレートにリクエストをルーティングし、`entry` 変数が事前定義され、リクエストされたエントリをセットします。
 
-   ::: tip モジュールとプラグインは、[EVENT_SET_ROUTE](api3:craft\base\Element::EVENT_SET_ROUTE) イベントを使用してエレメントルートを上書きできます。
+   ::: tip モジュールとプラグインは、[EVENT_SET_ROUTE](craft3:craft\base\Element::EVENT_SET_ROUTE) イベントを使用してエレメントルートを上書きできます。
 :::
 
 3. **URI がルート、または、URI ルールにマッチするか？**

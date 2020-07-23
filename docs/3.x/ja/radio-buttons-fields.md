@@ -38,27 +38,27 @@
 {% set value = entry.myFieldHandle %}
 ```
 
-それは、フィールドデータを含む <api3:craft\fields\data\SingleOptionFieldData> オブジェクトを提供します。
+それは、フィールドデータを含む <craft3:craft\fields\data\SingleOptionFieldData> オブジェクトを提供します。
 
-選択されたオプションを表示するには、それを文字列として出力するか、[value](api3:craft\fields\data\SingleOptionFieldData::$value) プロパティを出力してください。
+選択されたオプションを表示するには、それを文字列として出力するか、[value](craft3:craft\fields\data\SingleOptionFieldData::$value) プロパティを出力してください。
 
 ```twig
 {{ entry.myFieldHandle }} or {{ entry.myFieldHandle.value }}
 ```
 
-任意のオプションが選択されているかを確認するには、[value](api3:craft\fields\data\SingleOptionFieldData::$value) プロパティを使用してください。
+任意のオプションが選択されているかを確認するには、[value](craft3:craft\fields\data\SingleOptionFieldData::$value) プロパティを使用してください。
 
 ```twig
 {% if entry.myFieldHandle.value %}
 ```
 
-選択されたオプションのラベルを表示するには、[label](api3:craft\fields\data\SingleOptionFieldData::$label) プロパティを出力してください。
+選択されたオプションのラベルを表示するには、[label](craft3:craft\fields\data\SingleOptionFieldData::$label) プロパティを出力してください。
 
 ```twig
 {{ entry.myFieldHandle.label }}
 ```
 
-利用可能なオプションすべてをループするには、[options](api3:craft\fields\data\SingleOptionFieldData::getOptions()) プロパティを反復してください。
+利用可能なオプションすべてをループするには、[options](craft3:craft\fields\data\SingleOptionFieldData::getOptions()) プロパティを反復してください。
 
 ```twig
 {% for option in entry.myFieldHandle.options %}
