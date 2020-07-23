@@ -1,7 +1,7 @@
 module.exports = {
   title: "Intro to Craft CMS",
   handle: "getting-started",
-  icon: "/icons/tutorial.svg",
+  icon: "/docs/icons/tutorial.svg",
   baseDir: "getting-started-tutorial",
   searchPlaceholder: "Search the tutorial (Press “/” to focus)",
   primarySet: false,

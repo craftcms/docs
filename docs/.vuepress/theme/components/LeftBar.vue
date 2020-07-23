@@ -123,7 +123,7 @@
     content: "";
     @apply block absolute w-4 h-4 left-0 mt-2 ml-4;
     margin-right: 0.125rem;
-    background: transparent url("/icons/icon-globe.svg") no-repeat 0 0;
+    background: transparent url("/docs/icons/icon-globe.svg") no-repeat 0 0;
   }
 }
 
