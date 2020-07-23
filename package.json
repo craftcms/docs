@@ -30,7 +30,6 @@
     "vuepress-plugin-medium-zoom": "^1.1.8",
     "vuepress-plugin-sitemap": "^2.0.0",
     "vuepress-plugin-smooth-scroll": "0.0.9",
-    "vuepress-theme-craftdocs": "../vuepress-theme-craftdocs/",
     "vuex": "^3.4.0"
   },
   "scripts": {
