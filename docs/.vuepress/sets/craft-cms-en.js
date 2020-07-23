@@ -203,7 +203,7 @@ module.exports = {
             "static-translations",
             "plugins"
           ],
-          toggleChildren: ["foo", "bar", "baz"]
+          //toggleChildren: ["foo", "bar", "baz"]
         },
         {
           title: "Field Types",
