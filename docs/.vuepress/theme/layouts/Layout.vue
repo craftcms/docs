@@ -5,6 +5,7 @@
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
   >
+    <div id="nprogress-container"></div>
     <div class="sidebar-mask" @click="toggleSidebar(false)" />
     <LeftBar
       :set="$activeSet"
@@ -17,10 +18,7 @@
     <div id="main" class="main-container">
       <div id="top-bar" class="top-bar">
         <Hamburger @click="toggleSidebar" />
-        <div
-          id="search"
-          class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center"
-        >
+        <div id="search" class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center">
           <SearchBox
             v-if="
               $site.themeConfig.search !== false &&
@@ -43,6 +41,12 @@
 </template>
 
 <style lang="postcss">
+#nprogress-container {
+  @apply block absolute top-0 left-0 right-0 overflow-hidden w-full;
+  height: 2px;
+  z-index: 1050;
+}
+
 .theme-container {
   @apply relative w-full;
 }
@@ -131,7 +135,7 @@ import {
   getAlternateVersion,
   getPageWithRelativePath,
   fixDoubleSlashes,
-  getSameContentForVersion
+  getSameContentForVersion,
 } from "../util";
 
 export default {
@@ -142,7 +146,7 @@ export default {
     LeftBar,
     RightBar,
     SearchBox,
-    Hamburger
+    Hamburger,
   },
 
   data() {
@@ -150,7 +154,7 @@ export default {
       isSidebarOpen: false,
       isSidebarTransitioning: false,
       version: null,
-      suggestedUpdatePath: null
+      suggestedUpdatePath: null,
     };
   },
 
@@ -185,9 +189,9 @@ export default {
         {
           "no-navbar": !this.shouldShowNavbar,
           "sidebar-open": this.isSidebarOpen,
-          "sidebar-transitioning": this.isSidebarTransitioning
+          "sidebar-transitioning": this.isSidebarTransitioning,
         },
-        userPageClass
+        userPageClass,
       ];
     },
 
@@ -205,7 +209,7 @@ export default {
 
     headingItems() {
       return resolveHeaders(this.$page);
-    }
+    },
   },
 
   mounted() {
@@ -230,7 +234,7 @@ export default {
       }
     }
 
-    this.$nextTick(function() {
+    this.$nextTick(function () {
       window.addEventListener("resize", () => {
         this.isSidebarOpen = false;
       });
@@ -309,7 +313,7 @@ export default {
     onTouchStart(e) {
       this.touchStart = {
         x: e.changedTouches[0].clientX,
-        y: e.changedTouches[0].clientY
+        y: e.changedTouches[0].clientY,
       };
     },
 
@@ -336,7 +340,7 @@ export default {
     dewidow() {
       let typemate = new TypeMate(document.getElementById("content"));
       typemate.apply();
-    }
+    },
   },
 
   watch: {
@@ -344,7 +348,7 @@ export default {
       this.$nextTick(() => {
         this.dewidow();
       });
-    }
-  }
+    },
+  },
 };
 </script>
