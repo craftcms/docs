@@ -1,4 +1,5 @@
 const { path } = require("@vuepress/shared-utils");
+const { resolve } = require("path");
 const htmlToText = require("html-to-text");
 
 module.exports = options => ({
@@ -48,6 +49,7 @@ module.exports = options => ({
       console.error("Error when applying fulltext-search plugin:", e);
     }
   },
+  clientRootMixin: resolve(__dirname, "clientRootMixin.js"),
   alias: {
     "@SearchBox": path.resolve(__dirname, "components/SearchBox.vue")
   }

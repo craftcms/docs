@@ -2,6 +2,7 @@ import Vuex from "vuex";
 import CodeToggle from "./components/CodeToggle";
 import PreHeading from "./components/PreHeading";
 import PostHeading from "./components/PostHeading";
+
 import { getDocSetLocaleSettings } from "./util";
 import { setStorage } from "./Storage";
 
@@ -39,7 +40,7 @@ export default ({ Vue, options, router, siteData }) => {
           "VuePress"
         ).replace("%v", this.$activeVersion);
 
-        if (pageTitle && siteTitle && (pageTitle !== siteTitle)) {
+        if (pageTitle && siteTitle && pageTitle !== siteTitle) {
           return `${pageTitle} | ${siteTitle}`;
         }
 
