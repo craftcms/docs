@@ -46,11 +46,11 @@ Your settings may look different, but a successful setup will look like this:
 
 ```
 Which database driver are you using? [mysql,pgsql,?]: mysql
-Database server name or IP address: [127.0.0.1] db
+Database server name or IP address: [127.0.0.1]
 Database port: [3306]
-Database username: [root] db
+Database username: [root] homestead
 Database password:
-Database name: db
+Database name: homestead
 Database table prefix:
 Testing database credentials ... success!
 Saving database credentials to your .env file ... done
@@ -69,19 +69,19 @@ SECURITY_KEY="••••••••••••••••••••••
 DB_DRIVER="mysql"
 
 # The database server name or IP address
-DB_SERVER="db"
+DB_SERVER="127.0.0.1"
 
 # The port to connect to the database with
 DB_PORT="3306"
 
 # The name of the database to select
-DB_DATABASE="db"
+DB_DATABASE="homestead"
 
 # The database username to connect with
-DB_USER="db"
+DB_USER="homestead"
 
 # The database password to connect with
-DB_PASSWORD="db"
+DB_PASSWORD="secret"
 
 # The database schema that will be used (PostgreSQL only)
 DB_SCHEMA="public"
