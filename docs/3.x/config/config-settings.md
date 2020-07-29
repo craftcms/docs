@@ -1211,7 +1211,7 @@ Since
 
 
 
-Bool Whether the system should run in Headless Mode, which
+Whether the system should run in Headless Mode, which
 optimizes the system and control panel for headless CMS implementations.
 
 When this is enabled, the following changes will take place:
@@ -1225,7 +1225,9 @@ When this is enabled, the following changes will take place:
 - The <config3:loginPath>, <config3:logoutPath>, <config3:setPasswordPath>, and
   <config3:verifyEmailPath> settings will be ignored.
 
-
+::: tip
+When Headless Mode is enabled, users will not be able to set an initial password, set a new password, or verify their email address unless they have the “Access the control panel” permission. Make sure to grant this permission to content editors and administrators who should be able to log into the control panel.
+:::
 
 ### `imageDriver`
 
