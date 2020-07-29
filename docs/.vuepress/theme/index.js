@@ -6,7 +6,7 @@ module.exports = options => ({
   extendPageData($page) {
     // add lang, set, version
     try {
-      const hasContent = $page._content !== "";
+      const hasContent = typeof($page._strippedContent) === "string" && $page._strippedContent !== "";
 
       const { html } = hasContent
         ? $page._context.markdown.render($page._strippedContent)
