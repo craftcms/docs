@@ -2,31 +2,19 @@ const dictionary = require("../../anchor-prefixes");
 const placeholders = Object.keys(dictionary);
 
 function replacePrefixes(md) {
-  // code adapted from the markdown-it-replace-link plugin
-  md.core.ruler.after("inline", "replace-link", function(state) {
-    state.tokens.forEach(function(blockToken) {
-      if (blockToken.type === "inline" && blockToken.children) {
-        blockToken.children.forEach(function(token, tokenIndex) {
-          if (token.type === "link_open") {
-            token.attrs.forEach(function(attr) {
-              if (attr[0] === "href") {
-                let replace = replacePrefix(attr[1]);
-                if (replace) {
-                  attr[1] = replace;
-                  let next = blockToken.children[tokenIndex + 1];
-                  if (next.type === "text") {
-                    next.content = removePrefix(next.content);
-                  }
-                }
-              }
-              return false;
-            });
-          }
-        });
-      }
-    });
-    return false;
-  });
+  // expand custom prefix into full URL
+  md.normalizeLink = url => {
+    return replacePrefix(url);
+  }
+
+  // remove custom prefix from link text
+  md.normalizeLinkText = linkText => {
+    if (usesCustomPrefix(linkText)) {
+      return removePrefix(linkText);
+    }
+  
+    return linkText;
+  }
 }
 
 /**
@@ -40,10 +28,10 @@ function replacePrefix(link) {
   const prefix = getPrefix(link);
 
   if (!prefix) {
-    return;
+    return link;
   }
 
-  // is one of our custom filters being used?
+  // is one of our custom placeholders being used?
   const inUse = placeholders.filter(placeholder => {
     return placeholder === prefix;
   });
@@ -53,7 +41,7 @@ function replacePrefix(link) {
   }
 
   if (!inUse || inUse.length === 0) {
-    return;
+    return link;
   }
 
   // get relevant settings from `anchor-prefixes.js`
@@ -105,6 +93,8 @@ function replacePrefix(link) {
       return link.replace(`${prefix}:`, prefixSettings.base);
     }
   }
+
+  return link;
 }
 
 /**
@@ -114,6 +104,20 @@ function replacePrefix(link) {
 function getPrefix(link) {
   const linkParts = link.split(":");
   return linkParts.length === 0 ? undefined : linkParts[0];
+}
+
+/**
+ * Returns `true` if the provided string uses one of our custom anchor prefixes.
+ * @param {string} link 
+ */
+function usesCustomPrefix(link) {
+  const prefix = getPrefix(link);
+
+  const inUse = placeholders.filter(placeholder => {
+    return placeholder === prefix;
+  });
+
+  return inUse.length > 0;
 }
 
 /**
