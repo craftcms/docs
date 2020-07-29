@@ -205,7 +205,7 @@ Or you might want to pass an element query to find other users’ favorite drink
     .section('drinks')
     .relatedTo([
         'and',
-        { sourcElement: otherUsers, field: 'favoriteDrinks' },
+        { sourceElement: otherUsers, field: 'favoriteDrinks' },
         { targetElement: drink.ingredients.one(), field: 'ingredients' }
     ])
     .all() %}
