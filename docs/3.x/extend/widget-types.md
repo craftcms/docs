@@ -12,7 +12,7 @@ Once you have created your widget class, you will need to register it with the D
 
 ```php
 <?php
-namespace ns\prefix;
+namespace mynamespace;
 
 use craft\events\RegisterComponentTypesEvent;
 use craft\services\Dashboard;
@@ -22,9 +22,13 @@ class Plugin extends \craft\base\Plugin
 {
     public function init()
     {
-        Event::on(Dashboard::class, Dashboard::EVENT_REGISTER_WIDGET_TYPES, function(RegisterComponentTypesEvent $event) {
-            $event->types[] = MyWidget::class;
-        });
+        Event::on(
+            Dashboard::class,
+            Dashboard::EVENT_REGISTER_WIDGET_TYPES,
+            function(RegisterComponentTypesEvent $event) {
+                $event->types[] = MyWidget::class;
+            }
+        );
 
         // ...
     }

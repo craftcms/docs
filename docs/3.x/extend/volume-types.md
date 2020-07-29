@@ -12,7 +12,7 @@ Once you have created your volume class, you will need to register it with the V
 
 ```php
 <?php
-namespace ns\prefix;
+namespace mynamespace;
 
 use craft\events\RegisterComponentTypesEvent;
 use craft\services\Volumes;
@@ -22,9 +22,13 @@ class Plugin extends \craft\base\Plugin
 {
     public function init()
     {
-        Event::on(Volumes::class, Volumes::EVENT_REGISTER_VOLUME_TYPES, function(RegisterComponentTypesEvent $event) {
-            $event->types[] = MyVolume::class;
-        });
+        Event::on(
+            Volumes::class,
+            Volumes::EVENT_REGISTER_VOLUME_TYPES,
+                function(RegisterComponentTypesEvent $event) {
+                $event->types[] = MyVolume::class;
+            }
+        );
 
         // ...
     }
