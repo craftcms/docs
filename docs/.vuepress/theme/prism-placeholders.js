@@ -4,7 +4,7 @@ const dictionary = require("../placeholders");
 const placeholderClass = "code-placeholder";
 
 // token types to try find/replace (more = slower build)
-const searchTypes = ["string", "other"];
+const searchTypes = ["string", "other", "package", "single-quoted-string"];
 
 /**
  * Uses Prism’s `wrap` hook to check each token’s content for placeholder strings.
@@ -26,11 +26,20 @@ Prism.hooks.add("wrap", function(env) {
         env.attributes["title"] = title;
       }
     } else if (searchTypes.includes(env.type)) {
-      let placeholders = findDictionaryStrings(env.content);
+      let content =
+        env.type === "package"
+          ? env.content.replace(/<\/?[^>]+(>|$)/g, "")
+          : env.content;
+      let placeholders = findDictionaryStrings(content);
 
       if (placeholders.length > 0) {
         placeholders.forEach(placeholder => {
-          let replaceRegex = new RegExp(placeholder, "g");
+          // https://stackoverflow.com/a/6969486/897279
+          let replaceRegex = new RegExp(
+            placeholder.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+            "g"
+          );
+
           let title = getTitle(placeholder);
 
           env.content = env.content.replace(
@@ -40,6 +49,21 @@ Prism.hooks.add("wrap", function(env) {
         });
       }
     }
+  }
+});
+
+/**
+ * Add simple placeholder support for shell commands.
+ */
+Prism.hooks.add("after-tokenize", function(env) {
+  let placeholderVars = Object.keys(dictionary);
+  let matchPattern = placeholderVars.join("|");
+  let match = new RegExp(matchPattern);
+
+  if (env.code && env.language === "bash") {
+    env.grammar["code-placeholder"] = {
+      pattern: match
+    };
   }
 });
 
