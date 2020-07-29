@@ -34,7 +34,7 @@ return [
 ];
 ```
 
-::: tip NOTE
+::: tip
 You may also provide a `DB_DSN` environment variable. If defined, Craft will use that.
 :::
 
