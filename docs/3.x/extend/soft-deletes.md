@@ -12,13 +12,13 @@ Components that are soft-deletable must have a `dateDeleted` column in their dat
 
 ```php
 // New table migration
-$this->createTable('{{%tablename}}', [
+$this->createTable('{{%mytablename}}', [
     // other columns...
     'dateDeleted' => $this->dateTime()->null(),
 ]);
 
 // Existing table migration
-$this->addColumn('{{%tablename}}', 'dateDeleted',
+$this->addColumn('{{%mytablename}}', 'dateDeleted',
     $this->dateTime()->null()->after('dateUpdated'));
 ```
 
@@ -28,8 +28,8 @@ Tables containing soft-deletable component data should not enforce any unique co
 use craft\helpers\MigrationHelper;
 
 // Stop enforcing unique handles at the database level
-MigrationHelper::dropIndexIfExists('{{%tablename}}', ['handle'], true, $this);
-$this->createIndex(null, '{{%tablename}}', ['handle'], false);
+MigrationHelper::dropIndexIfExists('{{%mytablename}}', ['handle'], true, $this);
+$this->createIndex(null, '{{%mytablename}}', ['handle'], false);
 ```
 
 ## Hard-Delete Rows When Their Time Is Up
@@ -47,9 +47,9 @@ use yii\base\Event;
 public function init()
 {
     paren::init();
-    
+
     Event::on(Gc::class, Gc::EVENT_RUN, function() {
-        Craft::$app->gc->hardDelete('{{%tablename}}');
+        Craft::$app->gc->hardDelete('{{%mytablename}}');
     }
 }
 ```
@@ -71,7 +71,7 @@ use craft\db\SoftDeleteTrait;
 class MyRecord extends ActiveRecord
 {
     use SoftDeleteTrait;
-    
+
     // ...
 }
 ```
@@ -130,7 +130,7 @@ Check your code for any database queries that involve your component’s table. 
   ```php{4}
   $results = (new \craft\db\Query())
       ->select(['...'])
-      ->from(['{{%tableName}}'])
+      ->from(['{{%mytablename}}'])
       ->where(['dateDeleted' => null])
       ->all();
   ```
@@ -145,7 +145,7 @@ Check your code for any database queries that involve your component’s table. 
 
   ```php
   \Craft::$app->db->createCommand()
-      ->softDelete('{{%tablename}}', ['id' => $id])
+      ->softDelete('{{%mytablename}}', ['id' => $id])
       ->execute(); 
   ```
 
@@ -167,6 +167,6 @@ There are two ways to restore soft-deleted rows that haven’t been hard-deleted
 
   ```php
   \Craft::$app->db->createCommand()
-      ->restore('{{%tablename}}', ['id' => $id])
+      ->restore('{{%mytablename}}', ['id' => $id])
       ->execute();
   ```

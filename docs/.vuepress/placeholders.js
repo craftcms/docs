@@ -3,5 +3,6 @@ module.exports = {
   mynamespace: { title: "Replace this with your actual namespace." },
   my_migration_name: { title: "Replace this with your snake_case migration name." },
   "my-plugin-handle": { title: "Replace this with your kebab-case plugin handle." },
-  "my-field-handle": { title: "Replace this with your kebab-case field handle." }
+  "my-field-handle": { title: "Replace this with your kebab-case field handle." },
+  "mytablename": { title: "Replace this with your database table name, without any prefix." }
 };

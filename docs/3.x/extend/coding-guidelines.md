@@ -248,15 +248,15 @@ $this->requireAcceptsJson();
 
 ## DB Queries
 
-- Always wrap table names with `{{%` and `}}` (e.g. `{{%entries}}`) so it gets properly quoted and the table prefix gets inserted.
-- Use the `['col1', 'col2']` syntax with `select()` and `groupBy()` instead of `'col1, col2'`,  even if only referencing a single column
+- Always wrap a table name with `{{%` and `}}` (e.g. `{{%entries}}`) so it’s properly quoted and the table prefix gets inserted.
+- Use the `['col1', 'col2']` syntax with `select()` and `groupBy()` instead of `'col1, col2'` even if you’re only referencing a single column.
 - Use the `['{{%tablename}}']` syntax with `from()` instead of `'{{%tablename}}'`.
 - Use the `['col1' => SORT_ASC, 'col2' => SORT_DESC]` syntax with `orderBy()` instead of `'col1, col2 desc'`.
 
 ### Conditions
 - Always use Yii’s [declarative condition syntax](yii2:yii\db\QueryInterface::where()) when possible, as it will automatically quote table/column names and values for you.
 - For consistency, use:
-  -  `['col' => $values]`  instead of `['in', 'col', $values]`
+  - `['col' => $values]`  instead of `['in', 'col', $values]`
   - `['col' => $value]`  instead of `['=', 'col', $value]`
   - `['like', 'col', 'value']`  instead of `['like', 'col', '%value%', false]`
     *(unless the `%` is only needed on one side of `value`)*

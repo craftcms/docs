@@ -119,7 +119,7 @@ To keep front-end Twig code looking clean, the `|t` and `|translate` filters don
 
 ### Table Names
 
-Craft no longer auto-prepends the DB table prefix to table names, so you must write table names in Yii’s `{{%tablename}}` syntax.
+Craft no longer auto-prepends the DB table prefix to table names, so you must write table names in Yii’s `{{%mytablename}}` syntax.
 
 ### Select Queries
 
@@ -130,7 +130,7 @@ use craft\db\Query;
 
 $results = (new Query())
     ->select(['column1', 'column2'])
-    ->from(['{{%tablename}}'])
+    ->from(['{{%mytablename}}'])
     ->where(['foo' => 'bar'])
     ->all();
 ```
@@ -143,7 +143,7 @@ One notable difference is that the helper methods no longer automatically execut
 
 ```php
 $result = \Craft::$app->db->createCommand()
-    ->insert('{{%tablename}}', $rowData)
+    ->insert('{{%mytablename}}', $rowData)
     ->execute();
 ```
 
@@ -1139,8 +1139,8 @@ The data should be good to go, but you will probably want to drop the old column
 
 ```php
 // Drop the old locale FK column
-$this->dropColumn('{{%tablename}}', 'oldName');
+$this->dropColumn('{{%mytablename}}', 'oldName');
 
 // Rename the new siteId FK column
-MigrationHelper::renameColumn('{{%tablename}}', 'oldName__siteId', 'newName', $this);
+MigrationHelper::renameColumn('{{%mytablename}}', 'oldName__siteId', 'newName', $this);
 ```

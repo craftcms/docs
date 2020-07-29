@@ -55,11 +55,11 @@ Your migration class extends <craft3:craft\db\Migration>, which provides several
 ```php
 // Bad:
 $this->db->createCommand()
-    ->insert('{{%tablename}}', $rows)
+    ->insert('{{%mytablename}}', $rows)
     ->execute();
 
 // Good:
-$this->insert('{{%tablename}}', $rows);
+$this->insert('{{%mytablename}}', $rows);
 ```
 
 ::: warning
