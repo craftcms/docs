@@ -212,7 +212,10 @@ function closeBlock(level) {
 }
 
 /**
- * Add PreHeading component before and PostHeading component after first h1.
+ * Surround first `<h1>` with special PreHeading and PostHeading components.
+ *
+ * We use these for things like smaller intro headings, displaying post metadata,
+ * and the conditionally-displayed automatic table of contents.
  */
 function customHeadingSlots(tokens) {
   for (let i = 0; i < tokens.length; i++) {
