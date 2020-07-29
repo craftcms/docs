@@ -65,10 +65,9 @@ Defined by
 
 An array of key => value pairs of PDO attributes to pass into the PDO constructor.
 
-For example, when using the MySQL PDO driver (http://php.net/manual/en/ref.pdo-mysql.php),
-if you wanted to enable a SSL database connection (assuming SSL is enabled in MySQL
-(https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html) and `'user'`
-can connect via SSL, you'd set these:
+For example, when using the [MySQL PDO driver](http://php.net/manual/en/ref.pdo-mysql.php),
+if you wanted to enable a SSL database connection—assuming [SSL is enabled in MySQL](https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html) and `'user'`
+can connect via SSL—you’d set these:
 
 ```php
 [
@@ -161,8 +160,8 @@ The Data Source Name (“DSN”) that tells Craft how to connect to the database
 DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by driver-specific parameters.
 For example, `mysql:host=127.0.0.1;port=3306;dbname=acme_corp`.
 
-- MySQL parameters: http://php.net/manual/en/ref.pdo-mysql.connection.php
-- PostgreSQL parameters: http://php.net/manual/en/ref.pdo-pgsql.connection.php
+- MySQL parameters: <http://php.net/manual/en/ref.pdo-mysql.connection.php>
+- PostgreSQL parameters: <http://php.net/manual/en/ref.pdo-pgsql.connection.php>
 
 
 
