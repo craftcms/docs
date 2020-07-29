@@ -16,7 +16,7 @@ If it’s for an element type that is out of the plugin’s control, you can reg
 
 ```php
 <?php
-namespace ns\prefix;
+namespace mynamespace;
 
 use craft\base\Element;
 use craft\elements\Entry;
@@ -27,9 +27,13 @@ class Plugin extends \craft\base\Plugin
 {
     public function init()
     {
-        Event::on(Entry::class, Element::EVENT_REGISTER_ACTIONS, function(RegisterElementActionsEvent $event) {
-            $event->actions[] = MyAction::class;
-        });
+        Event::on(
+            Entry::class,
+            Element::EVENT_REGISTER_ACTIONS,
+            function(RegisterElementActionsEvent $event) {
+                $event->actions[] = MyAction::class;
+            }
+        );
 
         // ...
     }

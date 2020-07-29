@@ -50,6 +50,10 @@
   .inner {
     min-height: 2rem;
   }
+
+  .paging-arrow {
+    color: #718096;
+  }
 }
 </style>
 

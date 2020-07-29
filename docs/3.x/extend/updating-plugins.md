@@ -238,8 +238,8 @@ The concept of “plugin hooks” has been removed in Craft 3. Here’s a list o
 
 #### `addRichTextLinkOptions`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function addRichTextLinkOptions()
 {
     return [
@@ -249,38 +249,48 @@ public function addRichTextLinkOptions()
         ],
     ];
 }
+```
 
-// New:
+```php Craft 3
 use craft\events\RegisterRichTextLinkOptionsEvent;
 use craft\fields\RichText;
 use yii\base\Event;
 
-Event::on(RichText::class, RichText::EVENT_REGISTER_LINK_OPTIONS, function(RegisterRichTextLinkOptionsEvent $event) {
-    $event->linkOptions[] = [
-        'optionTitle' => \Craft::t('plugin-handle', 'Link to a product'),
-        'elementType' => Product::class,
-    ];
-});
+Event::on(
+    RichText::class,
+    RichText::EVENT_REGISTER_LINK_OPTIONS,
+    function(RegisterRichTextLinkOptionsEvent $event) {
+        $event->linkOptions[] = [
+            'optionTitle' => \Craft::t('plugin-handle', 'Link to a product'),
+            'elementType' => Product::class,
+        ];
+    }
+);
 ```
+
+:::
+
 
 #### `addTwigExtension`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function addTwigExtension()
 {
     Craft::import('plugins.cocktailrecipes.twigextensions.MyExtension');
     return new MyExtension();
 }
+```
 
-// New:
+```php Craft 3
 \Craft::$app->view->registerTwigExtension($extension);
 ```
+:::
 
 #### `addUserAdministrationOptions`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function addUserAdministrationOptions(UserModel $user)
 {
     if (!$user->isCurrent()) {
@@ -292,8 +302,9 @@ public function addUserAdministrationOptions(UserModel $user)
         ];
     }
 }
+```
 
-// New:
+```php Craft 3
 use craft\controllers\UsersController;
 use craft\events\RegisterUserActionsEvent;
 use yii\base\Event;
@@ -307,11 +318,12 @@ Event::on(UsersController::class, UsersController::EVENT_REGISTER_USER_ACTIONS, 
     }
 });
 ```
+:::
 
 #### `getResourcePath`
 
 ```php
-// Old:
+// Craft 2:
 public function getResourcePath($path)
 {
     if (strpos($path, 'myplugin/') === 0) {
@@ -320,14 +332,14 @@ public function getResourcePath($path)
 }
 ```
 
-::: warning NOTE
+::: warning
 There is no direct Craft 3 equivalent for this hook, which allowed plugins to handle resource requests, because the concept of resource requests has been removed in Craft 3. See [Asset Bundles](asset-bundles.md) to learn how plugins can serve resources in Craft 3.
 :::
 
 #### `modifyCpNav`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function modifyCpNav(&$nav)
 {
     if (craft()->userSession->isAdmin()) {
@@ -337,79 +349,97 @@ public function modifyCpNav(&$nav)
         ];
     }
 }
+```
 
-// New:
+```php Craft 3
 use craft\events\RegisterCpNavItemsEvent;
 use craft\web\twig\variables\Cp;
 use yii\base\Event;
 
-Event::on(Cp::class, Cp::EVENT_REGISTER_CP_NAV_ITEMS, function(RegisterCpNavItemsEvent $event) {
-    if (\Craft::$app->user->identity->admin) {
-        $event->navItems['foo'] = [
-            'label' => \Craft::t('plugin-handle', 'Utils'),
-            'url' => 'utils'
-        ];
+Event::on(
+    Cp::class,
+    Cp::EVENT_REGISTER_CP_NAV_ITEMS,
+    function(RegisterCpNavItemsEvent $event) {
+        if (\Craft::$app->user->identity->admin) {
+            $event->navItems['foo'] = [
+                'label' => \Craft::t('plugin-handle', 'Utils'),
+                'url' => 'utils'
+            ];
+        }
     }
-});
+);
 ```
+:::
 
 #### `registerCachePaths`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function registerCachePaths()
 {
     return [
         craft()->path->getStoragePath().'drinks/' => Craft::t('Drink images'),
     ];
 }
+```
 
-// New:
+```php Craft 3
 use craft\events\RegisterCacheOptionsEvent;
 use craft\utilities\ClearCaches;
 use yii\base\Event;
 
-Event::on(ClearCaches::class, ClearCaches::EVENT_REGISTER_CACHE_OPTIONS, function(RegisterCacheOptionsEvent $event) {
-    $event->options[] = [
-        'key' => 'drink-images',
-        'label' => \Craft::t('plugin-handle', 'Drink images'),
-        'action' => \Craft::$app->path->getStoragePath().'/drinks'
-    ];
-});
+Event::on(
+    ClearCaches::class,
+    ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
+    function(RegisterCacheOptionsEvent $event) {
+        $event->options[] = [
+            'key' => 'drink-images',
+            'label' => \Craft::t('plugin-handle', 'Drink images'),
+            'action' => \Craft::$app->path->getStoragePath().'/drinks'
+        ];
+    }
+);
 ```
+:::
 
 #### `registerEmailMessages`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function registerEmailMessages()
 {
     return ['my_message_key'];
 }
+```
 
-// New:
+```php Craft 3
 use craft\events\RegisterEmailMessagesEvent;
 use craft\services\SystemMessages;
 use yii\base\Event;
 
-Event::on(SystemMessages::class, SystemMessages::EVENT_REGISTER_MESSAGES, function(RegisterEmailMessagesEvent $event) {
-    $event->messages[] = [
-        'key' => 'my_message_key',
-        'heading' => Craft::t('plugin-handle', 'Email Heading'),
-        'subject' => Craft::t('plugin-handle', 'Email Subject'),
-        'body' => Craft::t('plugin-handle', 'The plain text email body...'),
-    ];
-});
+Event::on(
+    SystemMessages::class,
+    SystemMessages::EVENT_REGISTER_MESSAGES,
+    function(RegisterEmailMessagesEvent $event) {
+        $event->messages[] = [
+            'key' => 'my_message_key',
+            'heading' => Craft::t('plugin-handle', 'Email Heading'),
+            'subject' => Craft::t('plugin-handle', 'Email Subject'),
+            'body' => Craft::t('plugin-handle', 'The plain text email body...'),
+        ];
+    }
+);
 ```
+:::
 
 ::: tip
-Rather than defining the full message heading/subject/body right within the <craft3:Craft::t()> call, you can pass placeholder strings (e.g. `'email_heading'`) and define the actual string in your plugin’s translation file.
+Rather than defining the full message heading/subject/body right within the <craft3:Craft::t()> call, you can pass placeholder strings (e.g. `'email_heading'`) and define the actual string in your plugin’s [translation file](../static-translations.md).
 :::
 
 #### `registerUserPermissions`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function registerUserPermissions()
 {
     return [
@@ -417,71 +447,89 @@ public function registerUserPermissions()
         'stayUpLate' => ['label' => Craft::t('Stay up late')],
     ];
 }
+```
 
-// New:
+```php Craft 3
 use craft\events\RegisterUserPermissionsEvent;
 use craft\services\UserPermissions;
 use yii\base\Event;
 
-Event::on(UserPermissions::class, UserPermissions::EVENT_REGISTER_PERMISSIONS, function(RegisterUserPermissionsEvent $event) {
-    $event->permissions[\Craft::t('plugin-handle', 'Vices')] = [
-        'drinkAlcohol' => ['label' => \Craft::t('plugin-handle', 'Drink alcohol')],
-        'stayUpLate' => ['label' => \Craft::t('plugin-handle', 'Stay up late')],
-    ];
-});
+Event::on(
+    UserPermissions::class,
+    UserPermissions::EVENT_REGISTER_PERMISSIONS,
+    function(RegisterUserPermissionsEvent $event) {
+        $event->permissions[\Craft::t('plugin-handle', 'Vices')] = [
+            'drinkAlcohol' => ['label' => \Craft::t('plugin-handle', 'Drink alcohol')],
+            'stayUpLate' => ['label' => \Craft::t('plugin-handle', 'Stay up late')],
+        ];
+    }
+);
 ```
+:::
 
 #### `getCpAlerts`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function getCpAlerts($path, $fetch)
 {
     if (craft()->config->devMode) {
         return [Craft::t('Dev Mode is enabled!')];
     }
 }
+```
 
-// New:
+```php Craft 3
 use craft\events\RegisterCpAlertsEvent;
 use craft\helpers\Cp;
 use yii\base\Event;
 
-Event::on(Cp::class, Cp::EVENT_REGISTER_ALERTS, function(RegisterCpAlertsEvent $event) {
-    if (\Craft::$app->config->general->devMode) {
-        $event->alerts[] = \Craft::t('plugin-handle', 'Dev Mode is enabled!');
+Event::on(
+    Cp::class,
+    Cp::EVENT_REGISTER_ALERTS,
+    function(RegisterCpAlertsEvent $event) {
+        if (\Craft::$app->config->general->devMode) {
+            $event->alerts[] = \Craft::t('plugin-handle', 'Dev Mode is enabled!');
+        }
     }
-});
+);
 ```
+:::
 
 #### `modifyAssetFilename`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function modifyAssetFilename($filename)
 {
     return 'KittensRule-'.$filename;
 }
+```
 
-// New:
+```php Craft 3
 use craft\events\SetElementTableAttributeHtmlEvent;
 use craft\helpers\Assets;
 use yii\base\Event;
 
-Event::on(Assets::class, Assets::EVENT_SET_FILENAME, function(SetElementTableAttributeHtmlEvent $event) {
-    $event->filename = 'KittensRule-'.$event->filename;
+Event::on(
+    Assets::class,
+    Assets::EVENT_SET_FILENAME,
+    function(SetElementTableAttributeHtmlEvent $event) {
+        $event->filename = 'KittensRule-'.$event->filename;
 
-    // Prevent other event listeners from getting invoked
-    $event->handled = true;
-});
+        // Prevent other event listeners from getting invoked
+        $event->handled = true;
+    }
+);
 ```
+:::
 
 ### Routing Hooks
 
 #### `registerCpRoutes`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function registerCpRoutes()
 {
     return [
@@ -489,22 +537,28 @@ public function registerCpRoutes()
         'cocktails/(?P<widgetId>\d+)' => ['action' => 'cocktails/editCocktail'],
     ];
 }
+```
 
-// New:
+```php Craft 3
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
 use yii\base\Event;
 
-Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, function(RegisterUrlRulesEvent $event) {
-    $event->rules['cocktails/new'] = ['template' => 'cocktails/_edit'];
-    $event->rules['cocktails/<widgetId:\d+>'] = 'cocktails/edit-cocktail';
-});
+Event::on(
+    UrlManager::class,
+    UrlManager::EVENT_REGISTER_CP_URL_RULES,
+    function(RegisterUrlRulesEvent $event) {
+        $event->rules['cocktails/new'] = ['template' => 'cocktails/_edit'];
+        $event->rules['cocktails/<widgetId:\d+>'] = 'cocktails/edit-cocktail';
+    }
+);
 ```
+:::
 
 #### `registerSiteRoutes`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function registerSiteRoutes()
 {
     return [
@@ -512,22 +566,28 @@ public function registerSiteRoutes()
         'cocktails/(?P<widgetId>\d+)' => ['action' => 'cocktails/editCocktail'],
     ];
 }
+```
 
-// New:
+```php Craft 3
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
 use yii\base\Event;
 
-Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_SITE_URL_RULES, function(RegisterUrlRulesEvent $event) {
-    $event->rules['cocktails/new'] = ['template' => 'cocktails/_edit'];
-    $event->rules['cocktails/<widgetId:\d+>'] = 'cocktails/edit-cocktail';
-});
+Event::on(
+    UrlManager::class,
+    UrlManager::EVENT_REGISTER_SITE_URL_RULES,
+    function(RegisterUrlRulesEvent $event) {
+        $event->rules['cocktails/new'] = ['template' => 'cocktails/_edit'];
+        $event->rules['cocktails/<widgetId:\d+>'] = 'cocktails/edit-cocktail';
+    }
+);
 ```
+:::
 
 #### `getElementRoute`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function getElementRoute(BaseElementModel $element)
 {
     if (
@@ -537,25 +597,31 @@ public function getElementRoute(BaseElementModel $element)
         return ['action' => 'products/viewEntry'];
     }
 }
+```
 
-// New:
+```php Craft 3
 use craft\base\Element;
 use craft\elements\Entry;
 use craft\events\SetElementRouteEvent;
 use yii\base\Event;
 
-Event::on(Entry::class, Element::EVENT_SET_ROUTE, function(SetElementRouteEvent $event) {
-    /** @var Entry $entry */
-    $entry = $event->sender;
+Event::on(
+    Entry::class,
+    Element::EVENT_SET_ROUTE,
+    function(SetElementRouteEvent $event) {
+        /** @var Entry $entry */
+        $entry = $event->sender;
 
-    if ($entry->section->handle === 'products') {
-        $event->route = 'products/view-entry';
+        if ($entry->section->handle === 'products') {
+            $event->route = 'products/view-entry';
 
-        // Prevent other event listeners from getting invoked
-        $event->handled = true;
+            // Prevent other event listeners from getting invoked
+            $event->handled = true;
+        }
     }
-});
+);
 ```
+:::
 
 ### Element Hooks
 
@@ -565,14 +631,15 @@ For each of these, you could either pass <craft3:craft\base\Element::class> to t
 
 #### `addEntryActions`, `addCategoryActions`, `addAssetActions`, & `addUserActions`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function addEntryActions($source)
 {
     return [new MyElementAction()];
 }
+```
 
-// New:
+```php Craft 3
 use craft\elements\Entry;
 use craft\events\RegisterElementActionsEvent;
 use yii\base\Event;
@@ -581,31 +648,38 @@ Event::on(Entry::class, Element::EVENT_REGISTER_ACTIONS, function(RegisterElemen
     $event->actions[] = new MyElementAction();
 });
 ```
+:::
 
 #### `modifyEntrySortableAttributes`, `modifyCategorySortableAttributes`, `modifyAssetSortableAttributes`, & `modifyUserSortableAttributes`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function modifyEntrySortableAttributes(&$attributes)
 {
     $attributes['id'] = Craft::t('ID');
 }
+```
 
-// New:
+```php Craft 3
 use craft\base\Element;
 use craft\elements\Entry;
 use craft\events\RegisterElementSortOptionsEvent;
 use yii\base\Event;
 
-Event::on(Entry::class, Element::EVENT_REGISTER_SORT_OPTIONS, function(RegisterElementSortOptionsEvent $event) {
-    $event->sortOptions['id'] = \Craft::t('app', 'ID');
-});
+Event::on(
+    Entry::class,
+    Element::EVENT_REGISTER_SORT_OPTIONS,
+    function(RegisterElementSortOptionsEvent $event) {
+        $event->sortOptions['id'] = \Craft::t('app', 'ID');
+    }
+);
 ```
+:::
 
 #### `modifyEntrySources`, `modifyCategorySources`, `modifyAssetSources`, & `modifyUserSources`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function modifyEntrySources(&$sources, $context)
 {
     if ($context == 'index') {
@@ -623,8 +697,9 @@ public function modifyEntrySources(&$sources, $context)
         }
     }
 }
+```
 
-// New:
+```php Craft 3
 use craft\base\Element;
 use craft\elements\Entry;
 use craft\events\RegisterElementSourcesEvent;
@@ -646,11 +721,12 @@ Event::on(Entry::class, Element::EVENT_REGISTER_SOURCES, function(RegisterElemen
     }
 });
 ```
+:::
 
 #### `defineAdditionalEntryTableAttributes`, `defineAdditionalCategoryTableAttributes`, `defineAdditionalAssetTableAttributes`, & `defineAdditionalUserTableAttributes`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function defineAdditionalEntryTableAttributes()
 {
     return [
@@ -658,52 +734,64 @@ public function defineAdditionalEntryTableAttributes()
         'bar' => Craft::t('Bar'),
     ];
 }
+```
 
-// New:
+```php Craft 3
 use craft\elements\Entry;
 use craft\events\RegisterElementTableAttributesEvent;
 use yii\base\Event;
 
-Event::on(Entry::class, Element::EVENT_REGISTER_TABLE_ATTRIBUTES, function(RegisterElementTableAttributesEvent $event) {
-    $event->tableAttributes['foo'] = ['label' => \Craft::t('plugin-handle', 'Foo')];
-    $event->tableAttributes['bar'] = ['label' => \Craft::t('plugin-handle', 'Bar')];
-});
+Event::on(
+    Entry::class,
+    Element::EVENT_REGISTER_TABLE_ATTRIBUTES,
+    function(RegisterElementTableAttributesEvent $event) {
+        $event->tableAttributes['foo'] = ['label' => \Craft::t('plugin-handle', 'Foo')];
+        $event->tableAttributes['bar'] = ['label' => \Craft::t('plugin-handle', 'Bar')];
+    }
+);
 ```
+:::
 
 #### `getEntryTableAttributeHtml`, `getCategoryTableAttributeHtml`, `getAssetTableAttributeHtml`, & `getUserTableAttributeHtml`
 
-```php
-// Old:
+::: code
+```php Craft 2
 public function getEntryTableAttributeHtml(EntryModel $entry, $attribute)
 {
     if ($attribute === 'price') {
         return '$'.$entry->price;
     }
 }
+```
 
-// New:
+```php Craft 3
 use craft\base\Element;
 use craft\elements\Entry;
 use craft\events\SetElementTableAttributeHtmlEvent;
 use yii\base\Event;
 
-Event::on(Entry::class, Element::EVENT_SET_TABLE_ATTRIBUTE_HTML, function(SetElementTableAttributeHtmlEvent $event) {
-    if ($event->attribute === 'price') {
-        /** @var Entry $entry */
-        $entry = $event->sender;
+Event::on(
+    Entry::class,
+    Element::EVENT_SET_TABLE_ATTRIBUTE_HTML,
+    function(SetElementTableAttributeHtmlEvent $event) {
+        if ($event->attribute === 'price') {
+            /** @var Entry $entry */
+            $entry = $event->sender;
 
-        $event->html = '$'.$entry->price;
+            $event->html = '$'.$entry->price;
 
-        // Prevent other event listeners from getting invoked
-        $event->handled = true;
+            // Prevent other event listeners from getting invoked
+            $event->handled = true;
+        }
     }
-});
+);
 ```
+:::
 
 #### `getTableAttributesForSource`
 
 ```php
-// Old:
+// Craft 2:
 public function getTableAttributesForSource($elementType, $sourceKey)
 {
     if ($sourceKey == 'foo') {
@@ -712,7 +800,7 @@ public function getTableAttributesForSource($elementType, $sourceKey)
 }
 ```
 
-::: warning NOTE
+::: warning
 There is no direct Craft 3 equivalent for this hook, which allowed plugins to completely change the table attributes for an element type right before the element index view was rendered. The closest thing in Craft 3 is the <craft3:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> event, which can be used to change the available table attributes for an element type when an admin is customizing the element index sources.
 :::
 
@@ -721,6 +809,7 @@ There is no direct Craft 3 equivalent for this hook, which allowed plugins to co
 Template variables are no longer a thing in Craft 3, however plugins can still register custom services on the global `craft` variable by listening to its `init` event:
 
 ```php
+// Craft 3:
 use craft\web\twig\variables\CraftVariable;
 use yii\base\Event;
 
@@ -737,39 +826,44 @@ Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function(Event $event
 
 The TemplatesService has been replaced with a View component.
 
-```php
-// Old:
+::: code
+```php Craft 2
 craft()->templates->render('pluginHandle/path/to/template', $variables);
+```
 
-// New:
+```php Craft 3
 \Craft::$app->view->renderTemplate('plugin-handle/path/to/template', $variables);
 ```
+:::
 
 ### Controller Action Templates
 
 Controllers’ `renderTemplate()` method hasn’t changed much. The only difference is that it used to output the template and end the request for you, whereas now it returns the rendered template, which your controller action should return.
 
-```php
-// Old:
+::: code
+```php Craft 2
 $this->renderTemplate('pluginHandle/path/to/template', $variables);
+```
 
-// New:
+```php Craft 3
 return $this->renderTemplate('plugin-handle/path/to/template', $variables);
 ```
+:::
 
 ### Rendering Plugin Templates on Front End Requests
 
 If you want to render a plugin-supplied template on a front-end request, you need to set the View component to the CP’s template mode:
 
-```php
-// Old:
+::: code
+```php Craft 2
 $oldPath = craft()->templates->getTemplatesPath();
 $newPath = craft()->path->getPluginsPath().'pluginhandle/templates/';
 craft()->templates->setTemplatesPath($newPath);
 $html = craft()->templates->render('path/to/template');
 craft()->templates->setTemplatesPath($oldPath);
+```
 
-// New:
+```php Craft 3
 use craft\web\View;
 
 $oldMode = \Craft::$app->view->getTemplateMode();
@@ -777,6 +871,7 @@ $oldMode = \Craft::$app->view->getTemplateMode();
 $html = \Craft::$app->view->renderTemplate('plugin-handle/path/to/template');
 \Craft::$app->view->setTemplateMode($oldMode);
 ```
+:::
 
 ## Control Panel Templates
 
@@ -786,17 +881,19 @@ If your plugin has any templates that extend Craft’s `_layouts/cp.html` contro
 
 Support for the `extraPageHeaderHtml` variable has been removed. To create a primary action button in the page header, use the new `actionButton` block.
 
-```twig
-{# Old: #}
+::: code
+```twig Craft 2
 {% set extraPageHeaderHtml %}
     <a href="{{ url('recipes/new') }}" class="btn submit">{{ 'New recipe'|t('app') }}</a>
 {% endset %}
+```
 
-{# New: #}
+```twig Craft 3
 {% block actionButton %}
     <a href="{{ url('recipes/new') }}" class="btn submit">{{ 'New recipe'|t('app') }}</a>
 {% endblock %}
 ```
+:::
 
 ### Full-Page Grids
 
@@ -804,8 +901,8 @@ If you had a template that overrode the `main` block, and defined a full-page gr
 
 Additionally, any `<div class="pane">`s you had should generally lose their `pane` classes.
 
-```twig
-{# Old: #}
+::: code
+```twig Craft 2
 {% block main %}
     <div class="grid first" data-max-cols="3">
         <div class="item" data-position="left" data-colspan="2">
@@ -820,8 +917,9 @@ Additionally, any `<div class="pane">`s you had should generally lose their `pan
         </div>
     </div>
 {% endblock %}
+```
 
-{# New: #}
+```twig Craft 3
 {% block content %}
     <div id="recipe-fields">
         <!-- Primary Content -->
@@ -834,6 +932,7 @@ Additionally, any `<div class="pane">`s you had should generally lose their `pan
     </div>
 {% endblock %}
 ```
+:::
 
 ### Control Panel Template Hooks
 
@@ -853,11 +952,12 @@ Craft 3 doesn’t have the concept of resource requests. See [Asset Bundles](ass
 
 If you need to include arbitrary HTML somewhere on the page, use the `beginBody` or `endBody` events on the View component:
 
-```php
-// Old:
+::: code
+```php Craft 2
 craft()->templates->includeFootHtml($html);
+```
 
-// New:
+```php Craft 3
 use craft\web\View;
 use yii\base\Event;
 
@@ -866,6 +966,7 @@ Event::on(View::class, View::EVENT_END_BODY, function(Event $event) {
     echo $html;
 });
 ```
+:::
 
 ## Background Tasks
 
@@ -873,8 +974,8 @@ Craft’s Tasks service has been replaced with a job queue, powered by the [Yii 
 
 If your plugin provides any custom task types, they will need to be converted to jobs:
 
-```php
-// Old:
+::: code
+```php Craft 2
 class MyTask extends BaseTask
 {
     public function getDescription()
@@ -893,8 +994,9 @@ class MyTask extends BaseTask
         return true;
     }
 }
+```
 
-// New:
+```php Craft 3
 use craft\queue\BaseJob;
 
 class MyJob extends BaseJob
@@ -915,21 +1017,24 @@ class MyJob extends BaseJob
     }
 }
 ```
+:::
 
 Adding jobs to the queue is a little different as well:
 
-```php
-// Old:
+::: code
+```php Craft 2
 craft()->tasks->createTask('MyTask', 'Custom description', array(
     'mySetting' => 'value',
 ));
+```
 
-// New:
+```php Craft 3
 Craft::$app->queue->push(new MyJob([
     'description' => 'Custom description',
     'mySetting' => 'value',
 ]));
 ```
+:::
 
 ## Writing an Upgrade Migration
 
@@ -944,7 +1049,7 @@ If the handle has changed, you’ll need to put your upgrade code in your [Insta
 
 ```php
 <?php
-namespace ns\prefix\migrations;
+namespace mynamespace\migrations;
 
 use craft\db\Migration;
 

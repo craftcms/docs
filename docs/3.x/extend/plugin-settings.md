@@ -11,7 +11,7 @@ Settings models are just like any other [model](https://www.yiiframework.com/doc
 ```php
 <?php
 
-namespace ns\prefix\models;
+namespace mynamespace\models;
 
 use craft\base\Model;
 
@@ -34,13 +34,13 @@ Next up, add a `createSettingsModel()` method on your main plugin class, which r
 
 ```php
 <?php
-namespace ns\prefix;
+namespace mynamespace;
 
 class Plugin extends \craft\base\Plugin
 {
     protected function createSettingsModel()
     {
-        return new \ns\prefix\models\Settings();
+        return new \mynamespace\models\Settings();
     }
 
     // ...
@@ -48,9 +48,8 @@ class Plugin extends \craft\base\Plugin
 ```
 
 ::: warning
-The setting model’s [`fields()`](https://www.yiiframework.com/doc/api/2.0/yii-base-model#fields()-detail) are serialized for project config, so any complex or nested data types that aren’t compatible with [`toArray()`](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) should be excluded from `fields()` and declared in [`extraFields()`](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#extraFields()-detail) instead.
+The setting model’s [`fields()`](<https://www.yiiframework.com/doc/api/2.0/yii-base-model#fields()-detail>) are serialized for project config, so any complex or nested data types that aren’t compatible with [`toArray()`](<https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail>) should be excluded from `fields()` and declared in [`extraFields()`](<https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#extraFields()-detail>) instead.
 :::
-
 
 ## Accessing Settings
 
@@ -61,7 +60,7 @@ With your settings model and `createSettingsModel()` method in place, you can no
 $foo = $this->getSettings()->foo;
 
 // From elsewhere:
-$foo = \ns\prefix\Plugin::getInstance()->getSettings()->foo;
+$foo = \mynamespace\Plugin::getInstance()->getSettings()->foo;
 ```
 
 Or you can use the `$settings` magic property:
@@ -71,7 +70,7 @@ Or you can use the `$settings` magic property:
 $foo = $this->settings->foo;
 
 // From elsewhere:
-$foo = \ns\prefix\Plugin::getInstance()->settings->foo;
+$foo = \mynamespace\Plugin::getInstance()->settings->foo;
 ```
 
 ## Overriding Setting Values
@@ -90,7 +89,6 @@ return [
 ```
 
 It can also be a multi-environment config:
-
 
 ```php
 <?php
@@ -137,7 +135,7 @@ Then, within your main plugin class, set the `$hasCpSettings` property to `true`
 ```php
 <?php
 
-namespace ns\prefix;
+namespace mynamespace;
 
 class Plugin extends \craft\base\Plugin
 {
@@ -145,25 +143,26 @@ class Plugin extends \craft\base\Plugin
 
     protected function createSettingsModel()
     {
-        return new \ns\prefix\models\Settings();
+        return new \mynamespace\models\Settings();
     }
 
     protected function settingsHtml()
     {
-        return \Craft::$app->getView()->renderTemplate('plugin-handle/settings', [
-            'settings' => $this->getSettings()
-        ]);
+        return \Craft::$app->getView()->renderTemplate(
+            'my-plugin-handle/settings',
+            [ 'settings' => $this->getSettings() ]
+        );
     }
 
     // ...
 }
 ```
 
-With all that in place, your plugin will now get its own icon on the Settings page, and a cog icon in its row on the Settings → Plugins page, which will link to `/admin/settings/plugins/plugin-handle`.
+With all that in place, your plugin will now get its own icon on the Settings page, and a cog icon in its row on the Settings → Plugins page, which will link to `/admin/settings/plugins/my-plugin-handle`.
 
 ### Advanced Settings Pages
 
-When the `/admin/settings/plugins/plugin-handle` control panel URL is requested, your plugin is ultimately in charge of the response. Namely, your plugin’s `getSettingsResponse()` method. The default `getSettingsResponse()` implementation in <craft3:craft\base\Plugin> will call your plugin’s `settingsHtml()` method, and then tell the active controller to render Craft’s `settings/plugins/_settings` template (the layout template for plugin settings pages), passing it the HTML returned by `settingsHtml()`.
+When the `/admin/settings/plugins/my-plugin-handle` control panel URL is requested, your plugin is ultimately in charge of the response. Namely, your plugin’s `getSettingsResponse()` method. The default `getSettingsResponse()` implementation in <craft3:craft\base\Plugin> will call your plugin’s `settingsHtml()` method, and then tell the active controller to render Craft’s `settings/plugins/_settings` template (the layout template for plugin settings pages), passing it the HTML returned by `settingsHtml()`.
 
 If a plugin needs more control over its settings page(s), it can override its `getSettingsResponse()` method and do whatever it wants with the request.
 
@@ -172,7 +171,9 @@ It can choose to render its own template, rather than being confined to Craft’
 ```php
 public function getSettingsResponse()
 {
-    return \Craft::$app->controller->renderTemplate('plugin-handle/settings/template');
+    return \Craft::$app
+        ->controller
+        ->renderTemplate('my-plugin-handle/settings/template');
 }
 ```
 
@@ -181,7 +182,7 @@ It can redirect the request to a completely different URL, too:
 ```php
 public function getSettingsResponse()
 {
-    $url = \craft\helpers\UrlHelper::cpUrl('plugin-handle/settings');
+    $url = \craft\helpers\UrlHelper::cpUrl('my-plugin-handle/settings');
 
     return \Craft::$app->controller->redirect($url);
 }

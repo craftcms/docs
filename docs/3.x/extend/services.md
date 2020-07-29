@@ -9,7 +9,7 @@ They have two jobs:
 - They contain most of your plugin’s business logic.
 - They define your plugin’s API, which your plugin (and other plugins) can access.
 
-For example, Craft’s field management code is located in <craft3:craft\services\Fields>, which is available at `Craft::$app->fields`. It has a `getFieldByHandle()` method that returns a field model by its handle. If that’s something you want to do, you can call `Craft::$app->fields->getFieldByHandle('foo')`.
+For example, Craft’s field management code is located in <craft3:craft\services\Fields>, which is available at `Craft::$app->fields`. It has a `getFieldByHandle()` method that returns a field model by its handle. If that’s something you want to do, you can call `Craft::$app->fields->getFieldByHandle('my-field-handle')`.
 
 ## Creating a Service
 
@@ -19,7 +19,7 @@ Open the file in your text editor and use this template as its starting point:
 
 ```php
 <?php
-namespace ns\prefix\services;
+namespace mynamespace\services;
 
 use yii\base\Component;
 
@@ -37,7 +37,7 @@ public function init()
     parent::init();
 
     $this->setComponents([
-        'foo' => \ns\prefix\services\Foo::class,
+        'foo' => \mynamespace\services\Foo::class,
     ]);
 
     // ...
@@ -52,7 +52,7 @@ You can access your service from anywhere in the codebase using `MyPlugin::getIn
 MyPlugin::getInstance()->foo->bar()
 ```
 
-If you need to call a service method directly from your primary Plugin class, you can skip `MyPlugin::getInstance()` and just use `$this`:
+If you need to call a service method directly from your primary plugin class, you can skip `MyPlugin::getInstance()` and use `$this` instead:
 
 ```php
 $this->foo->bar()

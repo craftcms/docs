@@ -12,7 +12,7 @@ Once you have created your utility class, you will need to register it with the 
 
 ```php
 <?php
-namespace ns\prefix;
+namespace mynamespace;
 
 use craft\events\RegisterComponentTypesEvent;
 use craft\services\Utilities;

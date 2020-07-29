@@ -12,7 +12,7 @@ Once you have created your field class, you will need to register it with the Fi
 
 ```php
 <?php
-namespace ns\prefix;
+namespace mynamespace;
 
 use craft\events\RegisterComponentTypesEvent;
 use craft\services\Fields;

@@ -5,7 +5,7 @@
 Before you begin working on a plugin, you need to decide on a few things:
 
 - **Package name** – Used to name your Composer package for the plugin. (See Composer’s [documentation][package name] for details.) We recommend prefixing the second segment (after the `/`) with `craft-`, to help identify that this is a Craft plugin. For example, `pixelandtonic/craft-recipes`.
-- **Namespace** – The root namespace that your plugin’s classes will live in. (See the [PSR-4] autoloading specification for details.) Note that this should *not* begin with `craft\`; use something that identifies you, the developer.
+- **Namespace** – The root namespace that your plugin’s classes will live in. (See the [PSR-4] autoloading specification for details.) Note that this should _not_ begin with `craft\`; use something that identifies you, the developer.
 - **Plugin handle** – Something that uniquely identifies your plugin within the Craft ecosystem. (Plugin handles must begin with a letter and contain only lowercase letters, numbers, and dashes. They should be `kebab-cased`.)
 - **Plugin name** – What your plugin will be called within the control panel.
 
@@ -66,7 +66,7 @@ Create a `composer.json` file at the root of your plugin directory, and use this
   },
   "extra": {
     "name": "Plugin Name",
-    "handle": "plugin-handle"
+    "handle": "my-plugin-handle"
   }
 }
 ```
@@ -81,7 +81,7 @@ Replace:
 - `master` with the actual primary branch name of your GitHub repository.
 - `namespace\\prefix\\` with your namespace prefix. (Use double-backslashes because this is JSON, and note this must end with `\\`.)
 - `Plugin Name` with your plugin name.
-- `plugin-handle` with your plugin handle.
+- `my-plugin-handle` with your plugin handle.
 - `MIT` with `proprietary` if you plan to use [Craft License](https://craftcms.github.io/license/) (see [Choose a License](plugin-store.md#choose-a-license) on the “Publishing to the Plugin Store” page).
 
 If you’d prefer to release your plugin with the [Craft license](https://craftcms.github.io/license/) rather than [MIT](https://opensource.org/licenses/MIT), change the `license` value to `"proprietary"`.
@@ -111,7 +111,7 @@ Use this template as a starting point for your `Plugin.php` file:
 
 ```php
 <?php
-namespace ns\prefix;
+namespace mynamespace;
 
 class Plugin extends \craft\base\Plugin
 {
@@ -123,8 +123,6 @@ class Plugin extends \craft\base\Plugin
     }
 }
 ```
-
-Replace `ns\prefix` with your plugin’s namespace prefix.
 
 ## Loading your plugin into a Craft project
 
@@ -186,6 +184,7 @@ composer remove package/name
 # re-require the plugin package
 composer require package/name
 ```
+
 :::
 
 ### Packagist
@@ -210,14 +209,14 @@ Plugin icons must be square SVG files, saved as `icon.svg` at the root of your p
 
 If your plugin has a [control panel section](cp-section.md), you can also give its global nav item a custom icon by saving an `icon-mask.svg` file in the root of your plugin’s source directory. Note that this icon cannot contain strokes, and will always be displayed in a solid color (respecting alpha transparency).
 
-[Yii Modules]: https://www.yiiframework.com/doc/guide/2.0/en/structure-modules
+[yii modules]: https://www.yiiframework.com/doc/guide/2.0/en/structure-modules
 [models]: https://www.yiiframework.com/doc/guide/2.0/en/structure-models
 [active record classes]: https://www.yiiframework.com/doc/guide/2.0/en/db-active-record
 [controllers]: https://www.yiiframework.com/doc/guide/2.0/en/structure-controllers
 [application components]: https://www.yiiframework.com/doc/guide/2.0/en/structure-application-components
 [package name]: https://getcomposer.org/doc/04-schema.md#name
 [two hardest things]: https://twitter.com/codinghorror/status/506010907021828096
-[PSR-4]: https://www.php-fig.org/psr/psr-4/
-[Yii alias]: https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases
+[psr-4]: https://www.php-fig.org/psr/psr-4/
+[yii alias]: https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases
 [component configs]: https://www.yiiframework.com/doc/guide/2.0/en/structure-application-components
 [path]: https://getcomposer.org/doc/05-repositories.md#path

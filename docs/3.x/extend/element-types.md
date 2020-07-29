@@ -30,7 +30,7 @@ Define the class within the file, and give a display name and some public proper
 
 ```php
 <?php
-namespace ns\prefix\elements;
+namespace mynamespace\elements;
 
 use craft\base\Element;
 
@@ -85,7 +85,7 @@ if (!$this->db->tableExists('{{%products}}')) {
         'PRIMARY KEY(id)',
     ]);
 
-    // give it a FK to the elements table
+    // give it a foreign key to the elements table
     $this->addForeignKey(
         $this->db->getForeignKeyName('{{%products}}', 'id'),
         '{{%products}}', 'id', '{{%elements}}', 'id', 'CASCADE', null);
@@ -146,12 +146,12 @@ To give your plugin an element query, create a `db/` directory within your `elem
 
 ```php
 <?php
-namespace ns\prefix\elements\db;
+namespace mynamespace\elements\db;
 
 use craft\db\Query;
 use craft\elements\db\ElementQuery;
 use craft\helpers\Db;
-use ns\prefix\elements\Product;
+use mynamespace\elements\Product;
 
 class ProductQuery extends ElementQuery
 {
@@ -200,7 +200,7 @@ With the element query class in place, the last step is to tie it into your elem
 
 ```php
 use craft\elements\db\ElementQueryInterface;
-use ns\prefix\elements\db\ProductQuery;
+use mynamespace\elements\db\ProductQuery;
 
 // ...
 
@@ -235,7 +235,7 @@ If you want to make it possible for templates to query for your elements, you ca
 
 ```php
 <?php
-namespace ns\prefix;
+namespace mynamespace;
 
 use Craft;
 use yii\base\Behavior;
@@ -856,10 +856,10 @@ That base class does most of the grunt work for you, so you can get your field u
 
 ```php
 <?php
-namespace ns\prefix\fields;
+namespace mynamespace\fields;
 
 use craft\fields\BaseRelationField;
-use ns\prefix\elements\Product;
+use mynamespace\elements\Product;
 
 class Products extends BaseRelationField
 {

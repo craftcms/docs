@@ -7,7 +7,7 @@ Element index pages in the control panel have the ability to export elements as 
 The data included in these files is determined by the selected **exporter type**. Craft comes with two exporter types out of the box:
 
 1. **Raw Data (fastest)**: a simple dump of the raw element query results
-2. **Expanded**: a more fleshed-out export that includes data for all custom fields (including Matrix and relational fields)
+2. **Expanded**: a more fleshed-out export that includes data for all custom fields, including Matrix and relational fields
 
 ## Creating Custom Exporter Types
 
@@ -29,7 +29,7 @@ Here’s an example exporter type that provides the title, status, and URL of th
 ```php
 <?php
 
-namespace ns\prefix\exporters;
+namespace mynamespace\exporters;
 
 use Craft;
 use craft\base\EagerLoadingFieldInterface;
@@ -77,7 +77,7 @@ The user-selected output format determines how a value will be rendered. Here’
 
 ::: code
 
-```csv
+```markdown CSV
 RelatedEntries
 "[""Title 1"",""Title 2""]"
 ```
@@ -110,7 +110,7 @@ If it’s for an element type that is out of the plugin’s control, you can reg
 
 ```php
 <?php
-namespace ns\prefix;
+namespace mynamespace;
 
 use craft\base\Element;
 use craft\elements\Entry;

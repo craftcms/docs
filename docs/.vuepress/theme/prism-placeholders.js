@@ -4,7 +4,13 @@ const dictionary = require("../placeholders");
 const placeholderClass = "code-placeholder";
 
 // token types to try find/replace (more = slower build)
-const searchTypes = ["string", "other", "package", "single-quoted-string"];
+const searchTypes = [
+  "string",
+  "other",
+  "package",
+  "property",
+  "single-quoted-string"
+];
 
 /**
  * Uses Prism’s `wrap` hook to check each token’s content for placeholder strings.
