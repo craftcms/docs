@@ -2,7 +2,7 @@ module.exports = {
   title: "Craft Commerce Documentation | %v",
   setTitle: "Craft Commerce",
   handle: "commerce",
-  icon: "/docs/icons/commerce.svg",
+  icon: "/narnia/icons/commerce.svg",
   baseDir: "commerce",
   versions: [
     ["3.x", { label: "3.x" }],

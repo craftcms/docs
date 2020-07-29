@@ -11,15 +11,15 @@ Everything here is about building with Craft CMS.
 ## Browse Product Documentation
 
 <div class="w-full flex -mx-2">
-    <LinkPanel title="Craft CMS" subtitle="Flexible content management." link="/3.x/" icon="/docs/icons/craft.svg" />
-    <LinkPanel title="Craft Commerce" subtitle="Custom, extensible ecommerce." link="/commerce/3.x/" icon="/docs/icons/commerce.svg" />
+    <LinkPanel title="Craft CMS" subtitle="Flexible content management." link="/3.x/" icon="/narnia/icons/craft.svg" />
+    <LinkPanel title="Craft Commerce" subtitle="Custom, extensible ecommerce." link="/commerce/3.x/" icon="/narnia/icons/commerce.svg" />
 </div>
 
 ## Follow Tutorials
 
 Self-contained, step-by-step training materials.
 
-<IconLink title="Getting Started with Craft" subtitle="Learn the fundamentals building a simple blog." link="/getting-started-tutorial/" icon="/docs/icons/icon-tutorial.svg" />
+<IconLink title="Getting Started with Craft" subtitle="Learn the fundamentals building a simple blog." link="/getting-started-tutorial/" icon="/narnia/icons/icon-tutorial.svg" />
 
 ## Clone a Starter
 
@@ -36,7 +36,7 @@ Complete projects you can use to learn or jump start your own.
         <IconLink title="Knowledge Base" 
             subtitle="Read support articles." 
             link="https://craftcms.com/knowledge-base" 
-            icon="/docs/icons/icon-knowledge-base.svg" 
+            icon="/narnia/icons/icon-knowledge-base.svg" 
             icon-size="large" 
         />
     </div>
@@ -44,7 +44,7 @@ Complete projects you can use to learn or jump start your own.
         <IconLink title="Stack Exchange" 
             subtitle="Get help and help others." 
             link="https://craftcms.stackexchange.com/" 
-            icon="/docs/icons/icon-stack-exchange.svg" 
+            icon="/narnia/icons/icon-stack-exchange.svg" 
             icon-size="large" 
         />
     </div>
@@ -52,7 +52,7 @@ Complete projects you can use to learn or jump start your own.
         <IconLink title="Discord" 
             subtitle="Meet the community." 
             link="https://craftcms.com/discord" 
-            icon="/docs/icons/icon-discord.svg" 
+            icon="/narnia/icons/icon-discord.svg" 
             icon-size="large" 
         />
     </div>
@@ -60,7 +60,7 @@ Complete projects you can use to learn or jump start your own.
         <IconLink title="Twitter" 
             subtitle="See the latest Craft tweets." 
             link="https://twitter.com/craftcms" 
-            icon="/docs/icons/icon-twitter.svg" 
+            icon="/narnia/icons/icon-twitter.svg" 
             icon-size="large" 
         />
     </div>
@@ -68,7 +68,7 @@ Complete projects you can use to learn or jump start your own.
         <IconLink title="CraftQuest" 
             subtitle="Watch video courses." 
             link="https://craftquest.io/" 
-            icon="/docs/icons/icon-craft-quest.svg" 
+            icon="/narnia/icons/icon-craft-quest.svg" 
             icon-size="large" 
         />
     </div>
@@ -76,7 +76,7 @@ Complete projects you can use to learn or jump start your own.
         <IconLink title="Craft Link List" 
             subtitle="Stay in-the-know." 
             link="https://craftlinklist.com/" 
-            icon="/docs/icons/icon-craft-link-list.svg" 
+            icon="/narnia/icons/icon-craft-link-list.svg" 
             icon-size="large" 
         />
     </div>
@@ -84,7 +84,7 @@ Complete projects you can use to learn or jump start your own.
         <IconLink title="nystudio107 Blog" 
             subtitle="Learn Craft & web dev." 
             link="https://nystudio107.com/blog" 
-            icon="/docs/icons/icon-nystudio107.svg" 
+            icon="/narnia/icons/icon-nystudio107.svg" 
             icon-size="large" 
         />
     </div>

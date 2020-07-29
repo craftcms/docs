@@ -2,7 +2,7 @@ module.exports = {
   title: "Craft CMS Documentation | %v",
   setTitle: "Craft CMS",
   handle: "craft",
-  icon: "/docs/icons/craft.svg",
+  icon: "/narnia/icons/craft.svg",
   baseDir: "",
   versions: [
     ["3.x", { label: "3.x" }],
