@@ -10,10 +10,10 @@ Craft can be downloaded with [Composer](#downloading-with-composer) or by [manua
 You should be running Composer 1.3.0 or later. You can find out your installed version of Composer by running `composer -V` from your terminal. If that outputs something lower than 1.3.0, run `composer self-update` to update your Composer installation.
 :::
 
-To create a new Craft project, run this command (substituting `<Path>` with the path where Composer should create the project):
+To create a new Craft project, run this command (substituting `my/project/path` with the path where Composer should create the project):
 
 ```bash
-composer create-project craftcms/craft <Path>
+composer create-project craftcms/craft my/project/path
 ```
 
 Composer will take a couple minutes to load everything. Once it’s done you will be shown a success message:
