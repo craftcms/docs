@@ -16,12 +16,13 @@ const cjkRegex = /[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3]|[\u4E00-\u9FCC\u34
 
 export default {
   buildIndex(pages) {
+    console.log(pages);
     const indexSettings = {
       async: true,
       doc: {
         id: "key",
         // fields we want to index
-        field: ["title", "headersStr", "content"]
+        field: ["title", "keywords", "headersStr", "content"]
         // fields to be stored (acts as explicit allow list; `page` object otherwise stored)
         // store: [
         //   "key",
@@ -151,7 +152,7 @@ export default {
 
     pagesByPath = _.keyBy(pages, "path");
   },
-  // TODO: consider adding search tags for controlled boosts
+
   async match(queryString, queryTerms, docSet, version, language, limit = 7) {
     const index = resolveSearchIndex(docSet, version, language, indexes);
     const cyrillicIndex = resolveSearchIndex(
@@ -179,7 +180,13 @@ export default {
         field: "content",
         query: queryString,
         suggest: false
-      }
+      },
+      {
+        field: "keywords",
+        query: queryString,
+        boost: 8,
+        suggest: false
+      },
     ];
     const searchResult1 = await index.search(searchParams, limit);
     const searchResult2 = cyrillicIndex
@@ -235,6 +242,12 @@ function getParentPageTitle(page) {
   return parentPage.title;
 }
 
+/**
+ * Returns contextual details for displaying search result.
+ * @param {*} page
+ * @param {*} queryString
+ * @param {*} queryTerms
+ */
 function getAdditionalInfo(page, queryString, queryTerms) {
   const query = queryString.toLowerCase();
 
@@ -251,6 +264,16 @@ function getAdditionalInfo(page, queryString, queryTerms) {
       slug: "",
       contentStr: getBeginningContent(page),
       match: "title"
+    };
+  }
+
+  if (page.keywords.includes(query)) {
+    console.log(page);
+    return {
+      headingStr: getFullHeading(page),
+      slug: "",
+      contentStr: getBeginningContent(page),
+      match: "keywords"
     };
   }
 

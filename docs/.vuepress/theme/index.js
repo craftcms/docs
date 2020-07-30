@@ -6,7 +6,9 @@ module.exports = options => ({
   extendPageData($page) {
     // add lang, set, version
     try {
-      const hasContent = typeof($page._strippedContent) === "string" && $page._strippedContent !== "";
+      const hasContent =
+        typeof $page._strippedContent === "string" &&
+        $page._strippedContent !== "";
 
       const { html } = hasContent
         ? $page._context.markdown.render($page._strippedContent)
@@ -27,6 +29,10 @@ module.exports = options => ({
       $page.headersStr = $page.headers
         ? $page.headers.map(h => h.title).join(" ")
         : null;
+
+      $page.keywords = $page.frontmatter.keywords
+        ? $page.frontmatter.keywords
+        : "";
       $page.content = plaintext;
       $page.contentLowercase = plaintext.toLowerCase();
       $page.charsets = getCharsets(plaintext);
