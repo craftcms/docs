@@ -169,6 +169,58 @@ export function resolveSidebarItems(
   }
 }
 
+/**
+ * @param { Page } page
+ * @param { string } regularPath
+ * @param { SiteData } site
+ * @param { string } localePath
+ * @returns { SidebarGroup }
+ */
+export function resolveExtraSidebarItems(
+  page,
+  regularPath,
+  site,
+  localePath,
+  activeSet,
+  activeVersion,
+  localeConfig
+) {
+  const { pages, themeConfig } = site;
+
+  // get the config object for whatever sidebar items we should be showing
+  const sidebarConfig = resolveExtraSidebarConfig(
+    site,
+    page,
+    activeSet,
+    activeVersion,
+    localeConfig,
+    themeConfig
+  );
+
+  if (!sidebarConfig) {
+    return [];
+  } else {
+    // get the correct sidebar, whether the config is an array or path-indexed object
+    let { base, config } = resolveMatchingConfig(
+      regularPath,
+      sidebarConfig,
+      activeSet,
+      activeVersion
+    );
+
+    if (!config) {
+      console.log("didn’t resolve config");
+      return [];
+    }
+
+    const resolved = config.map(item => {
+      return resolveExtraItem(item, pages, base);
+    });
+
+    return resolved;
+  }
+}
+
 export function resolveSidebarConfig(
   site,
   page,
@@ -193,6 +245,37 @@ export function resolveSidebarConfig(
     sidebarConfig = appliedConfig.sidebar;
   } else if (themeConfig.sidebar) {
     sidebarConfig = themeConfig.sidebar;
+  }
+
+  if (activeVersion) {
+    sidebarConfig = sidebarConfig[activeVersion];
+  }
+
+  return sidebarConfig;
+}
+
+export function resolveExtraSidebarConfig(
+  site,
+  page,
+  activeSet,
+  activeVersion,
+  localeConfig,
+  themeConfig
+) {
+  // no set, no sidebar items (just list sets)
+  if (!activeSet) {
+    //console.log("no sidebar set available");
+    return [];
+  }
+
+  // get the active set locale config if it exists, otherwise the set config
+  const appliedConfig = activeSet.locales ? localeConfig.config : activeSet;
+  let sidebarConfig;
+
+  if (appliedConfig.sidebarExtra) {
+    sidebarConfig = appliedConfig.sidebarExtra;
+  } else if (themeConfig.sidebarExtra) {
+    sidebarConfig = themeConfig.sidebarExtra;
   }
 
   if (activeVersion) {
@@ -403,6 +486,25 @@ export function resolveItem(item, pages, base, groupDepth = 1) {
       collapsable: item.collapsable !== false
     };
   }
+}
+
+/**
+ * Find the given item among the available pages, taking into account
+ * the provided base and depth.
+ *
+ * @param {*} item  Can be a string like `coc`, or an object with `title`,`collapsable` and `children`.
+ * @param {*} pages
+ * @param {*} base
+ * @param {*} groupDepth
+ */
+export function resolveExtraItem(item, pages, base, groupDepth = 1) {
+  return {
+    path: item.path,
+    title: item.title,
+    link: item.link,
+    icon: item.icon,
+    sidebarDepth: item.sidebarDepth
+  };
 }
 
 /**

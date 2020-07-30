@@ -188,12 +188,7 @@ module.exports = {
         {
           title: "Front End Development",
           collapsable: false,
-          children: [
-            "element-queries",
-            "graphql",
-            "routing",
-            "testing"
-          ]
+          children: ["element-queries", "graphql", "routing", "testing"]
         },
         {
           title: "Twig Templating",
@@ -237,11 +232,6 @@ module.exports = {
             "dev/examples/forgot-password-form",
             "dev/examples/set-password-form"
           ]
-        },
-        {
-          title: "TEMPORARY",
-          collapsable: false,
-          children: ["extend/"]
         }
       ]
     },
@@ -440,23 +430,23 @@ module.exports = {
   },
   sidebarExtra: {
     "3.x": {
-      "/": [
-        {
-          title: "Extending Craft",
-          icon: "/narnia/icons/book.svg",
-          link: "/extend/"
-        }
-      ],
       "/extend/": [
         {
           title: "Class Reference",
-          icon: "/narnia/icons/book.svg",
+          icon: "/narnia/icons/craft-api.svg",
           link: "https://docs.craftcms.com/api/v3/"
         },
         {
           title: "Back to Craft Docs",
-          icon: "/narnia/icons/back.svg",
-          link: "/"
+          icon: "/narnia/icons/icon-back.svg",
+          link: "../"
+        }
+      ],
+      "/": [
+        {
+          title: "Extending Craft",
+          icon: "/narnia/icons/icon-book.svg",
+          link: "extend/"
         }
       ]
     }

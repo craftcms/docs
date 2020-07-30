@@ -27,6 +27,7 @@
                   class="left-bar-links"
                   :depth="0"
                   :items="items"
+                  :extra-items="extraItems"
                   :class="{ 'has-bottom': hasBottomLinks }"
                 />
               </transition>
@@ -36,6 +37,7 @@
                   class="left-bar-links"
                   :depth="0"
                   :items="items"
+                  :extra-items="extraItems"
                   :class="{ 'has-bottom': hasBottomLinks }"
                 />
               </transition>
@@ -195,7 +197,7 @@ import {
 } from "../util";
 
 export default {
-  props: ["items", "set", "language"],
+  props: ["items", "extraItems", "set", "language"],
   components: { DocSetPanel, SidebarLinks },
   data() {
     return {

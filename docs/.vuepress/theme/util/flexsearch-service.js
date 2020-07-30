@@ -185,7 +185,7 @@ export default {
         query: queryString,
         boost: 8,
         suggest: false
-      },
+      }
     ];
     const searchResult1 = await index.search(searchParams, limit);
     const searchResult2 = cyrillicIndex
@@ -267,7 +267,6 @@ function getAdditionalInfo(page, queryString, queryTerms) {
   }
 
   if (page.keywords.includes(query)) {
-    console.log(page);
     return {
       headingStr: getFullHeading(page),
       slug: "",

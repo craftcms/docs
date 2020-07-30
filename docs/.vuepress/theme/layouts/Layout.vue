@@ -11,6 +11,7 @@
       :set="$activeSet"
       :version="$activeVersion"
       :items="sidebarItems"
+      :extra-items="extraSidebarItems"
       @toggle-sidebar="toggleSidebar"
       @select-version="handleVersionUpdate"
       @select-language="handleLanguageUpdate"
@@ -131,6 +132,7 @@ import Hamburger from "../components/Hamburger";
 
 import {
   resolveSidebarItems,
+  resolveExtraSidebarItems,
   resolveHeaders,
   getAlternateVersion,
   getPageWithRelativePath,
@@ -197,6 +199,18 @@ export default {
 
     sidebarItems() {
       return resolveSidebarItems(
+        this.$page,
+        this.$page.regularPath,
+        this.$site,
+        this.$localePath,
+        this.$activeSet,
+        this.$activeVersion,
+        this.$localeConfig
+      );
+    },
+
+    extraSidebarItems() {
+      return resolveExtraSidebarItems(
         this.$page,
         this.$page.regularPath,
         this.$site,

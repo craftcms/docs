@@ -23,6 +23,11 @@
         :sidebar-depth="sidebarDepth || 0"
         :item="item"
       />
+      <!-- insert only after last group -->
+      <ExtraSidebarItems
+        v-if="extraItems && extraItems.length && item.type == 'group' && i == items.length - 1"
+        :items="extraItems"
+      />
     </li>
   </ul>
 </template>
@@ -31,30 +36,37 @@
 import SidebarGroup from "./SidebarGroup.vue";
 import ToggleSidebarGroup from "./ToggleSidebarGroup.vue";
 import SidebarLink from "./SidebarLink.vue";
+import ExtraSidebarItems from "./ExtraSidebarItems.vue";
 import { isActive } from "../util";
 
 export default {
   name: "SidebarLinks",
 
-  components: { SidebarGroup, ToggleSidebarGroup, SidebarLink },
+  components: {
+    SidebarGroup,
+    ToggleSidebarGroup,
+    SidebarLink,
+    ExtraSidebarItems,
+  },
 
   props: [
     "items",
+    "extraItems",
     "depth", // depth of current sidebar links
     "sidebarDepth",
-    "fixedHeading"
+    "fixedHeading",
   ],
 
   data() {
     return {
-      openGroupIndex: 0
+      openGroupIndex: 0,
     };
   },
 
   watch: {
     $route() {
       this.refreshIndex();
-    }
+    },
   },
 
   created() {
@@ -83,8 +95,8 @@ export default {
 
     hasToggleChildItems(groupItem) {
       return groupItem.toggleChildren && groupItem.toggleChildren.length > 0;
-    }
-  }
+    },
+  },
 };
 
 function resolveOpenGroupIndex(route, items) {
@@ -99,7 +111,7 @@ function resolveOpenGroupIndex(route, items) {
 
 function descendantIsActive(route, item) {
   if (item.type === "group") {
-    return item.children.some(child => {
+    return item.children.some((child) => {
       if (child.type === "group") {
         return descendantIsActive(route, child);
       } else {
