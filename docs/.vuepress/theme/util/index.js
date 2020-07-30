@@ -278,6 +278,10 @@ export function resolveExtraSidebarConfig(
     sidebarConfig = themeConfig.sidebarExtra;
   }
 
+  if (!sidebarConfig) {
+    return [];
+  }
+
   if (activeVersion) {
     sidebarConfig = sidebarConfig[activeVersion];
   }
