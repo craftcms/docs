@@ -235,7 +235,7 @@ export default {
     },
     getIssueUrl() {
       return encodeURI(
-        `https://github.com/pixelandtonic/craft-docs/issues/new?title=Improve “${this
+        `https://github.com/${this.$themeConfig.docsRepo}/issues/new?title=Improve “${this
           .$page.title}”&body=I have a suggestion for https://craftcms.com/docs${this.$route.fullPath}:\n`
       );
     }

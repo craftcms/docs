@@ -54,9 +54,9 @@ module.exports = {
       require("./sets/craft-commerce"),
       require("./sets/getting-started-tutorial")
     ],
-    docsRepo: "craftcms/craft-docs",
+    docsRepo: "craftcms/narnia",
     docsDir: "docs",
-    docsBranch: "master",
+    docsBranch: "main",
     searchPlaceholder:
       "Search the Craft and Commerce docs (Press “/” to focus)",
     editLinks: true,
