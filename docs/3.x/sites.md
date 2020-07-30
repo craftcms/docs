@@ -1,4 +1,4 @@
-# Sites
+# Sites & Localization
 
 In Craft 3 you can host multiple websites in a single Craft installation.
 
@@ -141,3 +141,5 @@ If you have any local asset volumes, you will need to make sure those assets are
 
 1. Configure your web server so the domain (e.g. `beta.craftcms.com`) points at the `web` directory. Craft will automatically detect which site the browser is requesting.
 2. Update your DNS records so the domain points at the web server.
+
+TODO: add [Localization](localization.md) and [Static Message Translations](static-translations.md) content.

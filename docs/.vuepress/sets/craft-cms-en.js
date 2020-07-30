@@ -74,92 +74,42 @@ module.exports = {
           ]
         }
       ],
-      "/testing/": [
-        {
-          title: "About testing",
-          collapsable: false,
-          children: [["", "Introduction"], "testing", "codeception", "ci"]
-        },
-        {
-          title: "Testing Craft",
-          collapsable: false,
-          children: [
-            "testing-craft/getting-started",
-            "testing-craft/testing-tips",
-            "testing-craft/plugins-and-modules",
-            "testing-craft/fixtures",
-            "testing-craft/console",
-            "testing-craft/queue",
-            "testing-craft/events"
-          ]
-        },
-        {
-          title: "Craft testing framework",
-          collapsable: false,
-          children: [
-            "framework/config-options",
-            "framework/mocking",
-            "framework/support-classes",
-            "framework/full-mock",
-            "framework/assertion-helpers"
-          ]
-        }
-      ],
-      "/dev/": [
-        {
-          title: "Front-End Development",
-          collapsable: false,
-          children: [["", "Introduction"], "headless"]
-        },
-        {
-          title: "Templating",
-          collapsable: false,
-          children: [
-            "twig-primer",
-            "global-variables",
-            "filters",
-            "functions",
-            "tags",
-            "tests"
-          ]
-        },
-        {
-          title: "Querying Elements",
-          collapsable: false,
-          children: [
-            "element-queries/",
-            "element-queries/asset-queries",
-            "element-queries/category-queries",
-            "element-queries/entry-queries",
-            "element-queries/global-set-queries",
-            "element-queries/matrix-block-queries",
-            "element-queries/tag-queries",
-            "element-queries/user-queries",
-            "eager-loading-elements"
-          ]
-        },
-        {
-          title: "Templating Examples",
-          collapsable: false,
-          children: [
-            "examples/integrating-disqus",
-            "examples/rss-feed",
-            "examples/atom-feed",
-            "examples/entry-form",
-            "examples/search-form",
-            "examples/login-form",
-            "examples/user-profile-form",
-            "examples/user-registration-form",
-            "examples/forgot-password-form",
-            "examples/set-password-form"
-          ]
-        }
-      ],
+      // "/testing/": [
+      //   {
+      //     title: "About testing",
+      //     collapsable: false,
+      //     children: [["", "Introduction"], "testing", "codeception", "ci"]
+      //   },
+      //   {
+      //     title: "Testing Craft",
+      //     collapsable: false,
+      //     children: [
+      //       "testing-craft/getting-started",
+      //       "testing-craft/testing-tips",
+      //       "testing-craft/plugins-and-modules",
+      //       "testing-craft/fixtures",
+      //       "testing-craft/console",
+      //       "testing-craft/queue",
+      //       "testing-craft/events"
+      //     ]
+      //   },
+      //   {
+      //     title: "Craft testing framework",
+      //     collapsable: false,
+      //     children: [
+      //       "framework/config-options",
+      //       "framework/mocking",
+      //       "framework/support-classes",
+      //       "framework/full-mock",
+      //       "framework/assertion-helpers"
+      //     ]
+      //   }
+      // ],
       "/": [
         {
           title: "Introduction",
           collapsable: false,
-          children: ["", "coc", "directory-structure"]
+          children: ["", "coc"]
         },
         {
           title: "Installing & Updating",
@@ -168,8 +118,8 @@ module.exports = {
             "requirements",
             "installation",
             "updating",
-            "upgrade",
-            "changes-in-craft-3"
+            "upgrade"
+            //"changes-in-craft-3"
           ]
         },
         {
@@ -178,32 +128,40 @@ module.exports = {
           children: [
             "config/",
             "config/config-settings",
-            "config/db-settings",
-            "config/environments",
-            "config/php-constants",
-            "config/app"
+            "config/db-settings"
+            //"config/environments",
+            //"config/php-constants",
+            //"config/app"
           ]
         },
         {
-          title: "Core Concepts",
+          title: "System Overview",
+          collapsable: false,
+          children: [
+            "directory-structure",
+            "elements",
+            "fields",
+            "relations",
+            "user-management",
+            "sites",
+            "console-commands",
+            "project-config",
+            "plugins"
+          ],
+          toggleChildren: ["searching", "reference-tags", "gc"]
+        },
+        {
+          title: "Element Types",
           collapsable: false,
           children: [
             "sections-and-entries",
-            "fields",
             "categories",
-            "assets",
-            "users",
-            "globals",
             "tags",
-            "routing",
-            "relations",
-            "searching",
-            "sites",
-            ["localization", "Localization"],
-            "static-translations",
-            "plugins"
-          ],
-          //toggleChildren: ["foo", "bar", "baz"]
+            "assets",
+            "globals",
+            "matrix-blocks",
+            "users"
+          ]
         },
         {
           title: "Field Types",
@@ -228,14 +186,62 @@ module.exports = {
           ]
         },
         {
-          title: "Development",
+          title: "Front End Development",
           collapsable: false,
-          children: ["graphql", "dev/", "extend/", "testing/"]
+          children: [
+            "element-queries",
+            "graphql",
+            "routing",
+            "testing"
+          ]
         },
         {
-          title: "More",
+          title: "Twig Templating",
           collapsable: false,
-          children: ["project-config", "gc", "reference-tags"]
+          children: [
+            "dev/twig-primer",
+            "dev/global-variables",
+            "dev/filters",
+            "dev/functions",
+            "dev/tags",
+            "dev/tests"
+          ]
+        },
+        {
+          title: "Querying Elements",
+          collapsable: false,
+          children: [
+            "dev/element-queries/",
+            "dev/element-queries/asset-queries",
+            "dev/element-queries/category-queries",
+            "dev/element-queries/entry-queries",
+            "dev/element-queries/global-set-queries",
+            "dev/element-queries/matrix-block-queries",
+            "dev/element-queries/tag-queries",
+            "dev/element-queries/user-queries",
+            "dev/eager-loading-elements"
+          ]
+        },
+        {
+          title: "Templating Examples",
+          collapsable: false,
+          children: [
+            "dev/examples/integrating-disqus",
+            "dev/examples/rss-feed",
+            "dev/examples/atom-feed",
+            "dev/examples/entry-form",
+            "dev/examples/search-form",
+            "dev/examples/login-form",
+            "dev/examples/user-profile-form",
+            "dev/examples/user-registration-form",
+            "dev/examples/forgot-password-form",
+            "dev/examples/set-password-form"
+          ]
+        },
+        {
+          title: "TEMPORARY",
+          collapsable: false,
+          children: ["extend/"]
         }
       ]
     },
@@ -428,6 +434,29 @@ module.exports = {
           title: "Plugin Development",
           collapsable: false,
           children: [["plugins/introduction", "Plugin Development"]]
+        }
+      ]
+    }
+  },
+  sidebarExtra: {
+    "3.x": {
+      "/": [
+        {
+          title: "Extending Craft",
+          icon: "/narnia/icons/book.svg",
+          link: "/extend/"
+        }
+      ],
+      "/extend/": [
+        {
+          title: "Class Reference",
+          icon: "/narnia/icons/book.svg",
+          link: "https://docs.craftcms.com/api/v3/"
+        },
+        {
+          title: "Back to Craft Docs",
+          icon: "/narnia/icons/back.svg",
+          link: "/"
         }
       ]
     }
