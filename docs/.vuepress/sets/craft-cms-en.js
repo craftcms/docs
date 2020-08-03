@@ -117,9 +117,7 @@ module.exports = {
           children: [
             "requirements",
             "installation",
-            "updating",
-            "upgrade"
-            //"changes-in-craft-3"
+            "updating"
           ]
         },
         {
