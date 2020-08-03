@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="border-t mt-12 pt-3 mx-4"></div>
+    <div class="sidebar-extra-top"></div>
     <div v-for="item in items">
       <RouterLink v-if=" ! isExternal(item.link)" :to="item.link" class="sidebar-extra-item">
         <span class="sidebar-extra-icon">
@@ -26,6 +26,10 @@
 </template>
 
 <style lang="postcss">
+.sidebar-extra-top {
+  @apply border-t mt-12 pt-3 mx-4;
+}
+
 .sidebar-extra-item {
   @apply flex px-4 py-2 items-center text-base text-slate leading-none font-medium;
 
