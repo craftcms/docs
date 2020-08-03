@@ -35,8 +35,6 @@ module.exports = {
           children: [
             "cp-section",
             "cp-templates"
-            // 'cp-components',
-            // 'cp-controllers',
           ]
         },
         {
@@ -63,48 +61,46 @@ module.exports = {
             "services",
             "controllers",
             "commands",
-            // 'behaviors',
             "template-roots",
             "extending-twig",
             "template-hooks",
             "soft-deletes",
             "environmental-settings",
             "extending-system-components"
-            // 'front-end-controllers',
           ]
         }
       ],
-      // "/testing/": [
-      //   {
-      //     title: "About testing",
-      //     collapsable: false,
-      //     children: [["", "Introduction"], "testing", "codeception", "ci"]
-      //   },
-      //   {
-      //     title: "Testing Craft",
-      //     collapsable: false,
-      //     children: [
-      //       "testing-craft/getting-started",
-      //       "testing-craft/testing-tips",
-      //       "testing-craft/plugins-and-modules",
-      //       "testing-craft/fixtures",
-      //       "testing-craft/console",
-      //       "testing-craft/queue",
-      //       "testing-craft/events"
-      //     ]
-      //   },
-      //   {
-      //     title: "Craft testing framework",
-      //     collapsable: false,
-      //     children: [
-      //       "framework/config-options",
-      //       "framework/mocking",
-      //       "framework/support-classes",
-      //       "framework/full-mock",
-      //       "framework/assertion-helpers"
-      //     ]
-      //   }
-      // ],
+      "/testing/": [
+        {
+          title: "About testing",
+          collapsable: false,
+          children: [["", "Introduction"], "testing", "codeception", "ci"]
+        },
+        {
+          title: "Testing Craft",
+          collapsable: false,
+          children: [
+            "testing-craft/getting-started",
+            "testing-craft/testing-tips",
+            "testing-craft/plugins-and-modules",
+            "testing-craft/fixtures",
+            "testing-craft/console",
+            "testing-craft/queue",
+            "testing-craft/events"
+          ]
+        },
+        {
+          title: "Craft testing framework",
+          collapsable: false,
+          children: [
+            "framework/config-options",
+            "framework/mocking",
+            "framework/support-classes",
+            "framework/full-mock",
+            "framework/assertion-helpers"
+          ]
+        }
+      ],
       "/": [
         {
           title: "Introduction",
@@ -114,20 +110,12 @@ module.exports = {
         {
           title: "Installing & Updating",
           collapsable: false,
-          children: [
-            "requirements",
-            "installation",
-            "updating"
-          ]
+          children: ["requirements", "installation", "updating"]
         },
         {
           title: "Configuration",
           collapsable: false,
-          children: [
-            "config/",
-            "config/config-settings",
-            "config/db-settings"
-          ]
+          children: ["config/", "config/config-settings", "config/db-settings"]
         },
         {
           title: "System Overview",
@@ -149,7 +137,7 @@ module.exports = {
           title: "Element Types",
           collapsable: false,
           children: [
-            "sections-and-entries",
+            "entries",
             "categories",
             "tags",
             "assets",
@@ -183,7 +171,12 @@ module.exports = {
         {
           title: "Front End Development",
           collapsable: false,
-          children: ["element-queries", "graphql", "routing", "testing"]
+          children: [
+            "element-queries",
+            "dev/eager-loading-elements",
+            "graphql",
+            "routing"
+          ]
         },
         {
           title: "Twig Templating",
@@ -195,21 +188,6 @@ module.exports = {
             "dev/functions",
             "dev/tags",
             "dev/tests"
-          ]
-        },
-        {
-          title: "Querying Elements",
-          collapsable: false,
-          children: [
-            "dev/element-queries/",
-            "dev/element-queries/asset-queries",
-            "dev/element-queries/category-queries",
-            "dev/element-queries/entry-queries",
-            "dev/element-queries/global-set-queries",
-            "dev/element-queries/matrix-block-queries",
-            "dev/element-queries/tag-queries",
-            "dev/element-queries/user-queries",
-            "dev/eager-loading-elements"
           ]
         },
         {
@@ -437,11 +415,23 @@ module.exports = {
           link: "../"
         }
       ],
+      "/testing/": [
+        {
+          title: "Back to Craft Docs",
+          icon: "/narnia/icons/icon-back.svg",
+          link: "../"
+        }
+      ],
       "/": [
         {
           title: "Extending Craft",
           icon: "/narnia/icons/icon-book.svg",
           link: "extend/"
+        },
+        {
+          title: "Testing Craft",
+          icon: "/narnia/icons/icon-flask.svg",
+          link: "testing/"
         }
       ]
     }
