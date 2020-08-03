@@ -296,7 +296,6 @@ function getAdditionalInfo(page, queryString, queryTerms) {
     };
   }
 
-  // TODO: highlight query string in content match
   // content match
   let headerIndex = _.findLastIndex(
     page.headers || [],
