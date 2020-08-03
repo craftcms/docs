@@ -412,26 +412,35 @@ module.exports = {
         {
           title: "Back to Craft Docs",
           icon: "/narnia/icons/icon-back.svg",
-          link: "../"
+          link: "/3.x/"
         }
       ],
       "/testing/": [
         {
           title: "Back to Craft Docs",
           icon: "/narnia/icons/icon-back.svg",
-          link: "../"
+          link: "/3.x/"
         }
       ],
       "/": [
         {
           title: "Extending Craft",
           icon: "/narnia/icons/icon-book.svg",
-          link: "extend/"
+          link: "/3.x/extend/"
         },
         {
           title: "Testing Craft",
           icon: "/narnia/icons/icon-flask.svg",
-          link: "testing/"
+          link: "/3.x/testing/"
+        }
+      ]
+    },
+    "2.x": {
+      "/": [
+        {
+          title: "Class Reference",
+          icon: "/narnia/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/api/v2/"
         }
       ]
     }
