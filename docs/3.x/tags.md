@@ -1,6 +1,6 @@
 # Tags
 
-You can create folksonomies for your [entries](sections-and-entries.md), [users](users.md), and [assets](assets.md) using Tags.
+You can create folksonomies for your [entries](entries.md), [users](users.md), and [assets](assets.md) using Tags.
 
 ## Tag Groups
 

@@ -1,6 +1,6 @@
 # Categories
 
-You can create taxonomies for your [entries](sections-and-entries.md), [users](users.md), and [assets](assets.md) using Categories.
+You can create taxonomies for your [entries](entries.md), [users](users.md), and [assets](assets.md) using Categories.
 
 ## Category Groups
 

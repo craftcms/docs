@@ -1,66 +1,8 @@
-# Updating Instructions
-
-This page covers [getting your Craft version up to date](#updating-craft), [upgrading from Craft 2](#upgrading-from-craft-2), and [changes that may impact your site](#changes-in-craft-3) from v2 to v3.
-
-## Updating Craft
-
-### Updating from the Control Panel
-
-When an update is available, users with the permission to update Craft will see a badge in the CP next to the Utilities navigation item in the sidebar. Click on Utilities and then choose Updates. You can also use the Updates widget on the control panel dashboard, which is installed by default.
-
-This section displays both Craft CMS updates and plugin updates. Each update has its own Update button. Clicking that will initiate Craft’s self-updating process.
-
-You can run all of the updates (Craft, all plugin updates available) using the Update All button at the top left of the Updates page.
-
-::: tip
-Craft’s [changelog](https://github.com/craftcms/cms/blob/master/CHANGELOG-v3.md) will warn you of any critical changes at the top of the release notes. While there aren’t usually any warnings, it’s always a good idea to check before updating.
-:::
-
-### Updating from the Terminal
-
-Craft 3.0.38 and 3.1.4 introduced a new `update` console command that can be used to update Craft and plugins.
-
-To see available updates, go to your Craft project in your terminal and run this command:
-
-```bash
-./craft update
-```
-
-![An example interaction with the `update` command.](./images/cli-update-info.png)
-
-To update everything all at once, run this command:
-
-```bash
-./craft update all
-```
-
-To update a specific thing, replace `all` with its handle (either `craft` to update Craft, or a plugin’s handle).
-
-```bash
-./craft update element-api
-```
-
-![An example interaction with the `update <handle>` command.](./images/cli-update-plugin.png)
-
-You can also pass multiple handles in at once:
-
-```bash
-./craft update element-api commerce
-```
-
-By default, Craft will update you to the latest available version. To update to a specific version, append `:<version>` to the handle:
-
-```bash
-./craft update element-api:2.5.4
-```
-
-Craft also provides an `update/composer-install` command, which behaves like the `composer install` command, but doesn’t require you to have Composer installed.
-
-## Upgrading from Craft 2
+# Upgrading from Craft 2
 
 The first step to upgrading your site to Craft 3 is updating the CMS itself.
 
-### Preparing for the Upgrade
+## Preparing for the Upgrade
 
 Before you begin, make sure that:
 
@@ -72,7 +14,7 @@ Before you begin, make sure that:
 
 Once you've completed everything listed above you can continue with the upgrade process.
 
-### Performing the Upgrade
+## Performing the Upgrade
 
 The best way to upgrade a Craft 2 site is to approach it like you’re building a new Craft 3 site. So to begin, create a new directory alongside your current project, and follow steps 1-3 in the [installation instructions](installation.md).
 
@@ -106,7 +48,7 @@ With Craft 3 downloaded and prepped, follow these steps to complete the upgrade:
 
 12. If you had any plugins installed, you’ll need to install their Craft 3 counterparts from the “Plugin Store” section in the control panel. (See the plugins’ documentation for any additional upgrade instructions.)
 
-Now that you have successfully upgraded your Craft 2 project to Craft 3, please take some time to review the [changes in Craft 3](changes-in-craft-3.md).
+Now that you’ve upgraded your install to use Craft 3, please take some time to review the changes on this page and update your project to follow the changes in Craft 3.
 
 ### Troubleshooting
 
@@ -118,15 +60,13 @@ If this happens, it’s because your database connection settings in the `.env` 
 
 The `initSQLs` database config setting was removed in Craft 3, as it was generally only used to fix MySQL 5.7 support in Craft 2, which isn’t necessary in Craft 3. Just open your `config/db.php` file and delete the line that begins with `'initSQLs'`.
 
-## Changes in Craft 3
-
-### Rich Text Fields
+## Rich Text Fields
 
 The “Rich Text” field type has been removed from Craft 3, in favor of new [Redactor](https://github.com/craftcms/redactor) and [CKEditor](https://github.com/craftcms/ckeditor) plugins.
 
 If you have any existing Rich Text fields, they will be automatically converted to Redactor fields when you install the Redactor plugin.
 
-#### Redactor Configs
+### Redactor Configs
 
 If you do install the Redactor plugin, you will need to ensure that your Redactor configs in `config/redactor/` are valid JSON. That means:
 
@@ -147,17 +87,17 @@ If you do install the Redactor plugin, you will need to ensure that your Redacto
 }
 ```
 
-### Position Select Fields
+## Position Select Fields
 
 The “Position Select” field type has been removed from Craft 3. If you had any Position Select fields, they will be converted to Dropdown fields, with all the same options.
 
 If you miss Position Select, you can try installing the [Position Fieldtype](https://github.com/Rias500/craft-position-fieldtype) plugin, which brings it back.
 
-### Lightswitch Fields
+## Lightswitch Fields
 
 Lightswitch field values are now always `true` or `false`. If you’re accessing a Lightswitch field value for an element that doesn’t have an explicit value set yet, the field’s default value will be returned instead.
 
-### Remote Volumes
+## Remote Volumes
 
 Support for Amazon S3, Rackspace Cloud Files, and Google Cloud Storage have been moved into plugins. If you have any asset volumes that were using those services in Craft 2, you will need to install the new plugins:
 
@@ -165,9 +105,9 @@ Support for Amazon S3, Rackspace Cloud Files, and Google Cloud Storage have been
 - [Rackspace Cloud Files](https://github.com/craftcms/rackspace)
 - [Google Cloud Storage](https://github.com/craftcms/google-cloud)
 
-### Configuration
+## Configuration
 
-#### Config Settings
+### Config Settings
 
 Some general config settings have been renamed in Craft 3. The old setting names have been deprecated, but will continue to work until Craft 4.
 
@@ -205,7 +145,7 @@ The `omitScriptNameInUrls` setting can no longer be set to `'auto'`, as it was b
 
 Similarly, the `usePathInfo` setting can no longer be set to `'auto'` either. If your server is configured to support [PATH_INFO](https://craftcms.com/support/enable-path-info), you can set this to `true`. This is only necessary if you can’t set `omitScriptNameInUrls` to `true`, though.
 
-### URL Rules
+## URL Rules
 
 If you have any [URL rules](config/README.md#url-rules) saved in `config/routes.php`, you will need to update them to Yii 2’s [pattern-route syntax](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules).
 
@@ -228,7 +168,7 @@ If you have any [URL rules](config/README.md#url-rules) saved in `config/routes.
 'blog/type/<type:[^\/]+>' => ['template' => 'blog/_type'],
 ```
 
-### PHP Constants
+## PHP Constants
 
 Some PHP constants have been deprecated in Craft 3, and will no longer work in Craft 4:
 
@@ -239,7 +179,7 @@ Some PHP constants have been deprecated in Craft 3, and will no longer work in C
 
 *<sup>1</sup> Craft 3 doesn’t require each site/locale to have its own `index.php` file anymore, so alternatively you can remove all unnecessary site/locale web roots and subfolders. See the new [Localization guide](localization.md) for more info.*
 
-### Static Translation Files
+## Static Translation Files
 
 Craft 3 still supports [static message translations](static-translations.md), but the directory structure has changed. Now within your `translations/` folder, you should create subdirectories for each locale, and within them, PHP files for each **translation category**.
 
@@ -261,7 +201,7 @@ translations/
     └── site.php
 ```
 
-### User Photos
+## User Photos
 
 User photos are stored as assets now. When upgrading to Craft 3, Craft will automatically create a new asset volume called “User Photos” at `storage/userphotos/` (where Craft previously stored all user photos, but without the `<Username>/` subfolders). However this folder is above your web root and inaccessible to HTTP requests, so until you make this volume publicly accessible, user photos will not work on the front end.
 
@@ -274,11 +214,11 @@ Here’s how you can resolve this:
     - Set the correct URL setting for the folder
     - Save the volume
 
-### Twig 2
+## Twig 2
 
 Craft 3 uses Twig 2, which has its own breaking changes for templates:
 
-#### Macros
+### Macros
 
 Twig 2 requires that you explicitly import macros in each template where you are using them. They are no longer automatically available if a parent template is including them, or even if they were defined in the same template file.
 
@@ -293,7 +233,7 @@ New:
 {{ macros.foo() }}
 ```
 
-#### Undefined Blocks
+### Undefined Blocks
 
 Twig 1 let you call `block()` even for blocks that didn’t exist:
 
@@ -311,7 +251,7 @@ Twig 2 will throw an error unless it’s a `defined` test:
 {% endif %}
 ```
 
-### Template Tags
+## Template Tags
 
 The [{% paginate %}](dev/tags/paginate.md) tag no longer has an `{% endpaginate %}` closing tag, so remove any instances of that.
 
@@ -327,7 +267,7 @@ Some Twig template tags have been deprecated in Craft 3, and will be completely 
 | `{% includeCssResource path %}` | Use an [asset bundle](extend/asset-bundles.md)
 | `{% includeJsResource path %}`  | Use an [asset bundle](extend/asset-bundles.md)
 
-### Template Functions
+## Template Functions
 
 Some template functions have been removed completely:
 
@@ -466,7 +406,7 @@ Some template functions have been deprecated in Craft 3, and will be completely 
 
 *<sup>1</sup> `craft.app.request.isLivePreview` is also deprecated, and only will return `true` when previewing categories or plugin-supplied element types that don’t support the new previewing system. If you were calling this to work around Craft templating bugs in Live Preview requests, you can simply delete the condition now, and treat Live Preview requests the same as any other request type.*
 
-### Date Formatting
+## Date Formatting
 
 Craft’s extended DateTime class has been removed in Craft 3. Here’s a list of things you used to be able to do in your templates, and what the Craft 3 equivalent is. (The DateTime object is represented by the `d` variable. In reality it could be `entry.postDate`, `now`, etc.)
 
@@ -494,7 +434,7 @@ Craft’s extended DateTime class has been removed in Craft 3. Here’s a list o
 | `{{ d.w3cDate() }}`               | `{{ d|date('Y-m-d') }}`
 | `{{ d.year() }}`                  | `{{ d|date('Y') }}`
 
-### Currency Formatting
+## Currency Formatting
 
 The `|currency` filter now maps to <craft3:craft\i18n\Formatter::asCurrency()>. It still works the same, but the `stripZeroCents` argument has been renamed to `stripZeros`, and pushed back a couple notches, so you will need to update your templates if you were setting that argument.
 
@@ -507,9 +447,9 @@ New:
 {{ num|currency('USD', stripZeros = true) }}
 ```
 
-### Element Queries
+## Element Queries
 
-#### Query Params
+### Query Params
 
 Some element query params have been removed:
 
@@ -537,11 +477,11 @@ Some element query params have been renamed in Craft 3. The old params have been
 | Asset        | `sourceId`               | `volumeId`
 | Matrix Block | `ownerLocale`            | `site` or `siteId`
 
-##### `limit` Param
+#### `limit` Param
 
 The `limit` param is now set to `null` (no limit) by default, rather than 100.
 
-##### Setting Params to Arrays
+#### Setting Params to Arrays
 
 If you want to set a param value to an array, you now **must** type out the array brackets.
 
@@ -555,7 +495,7 @@ New:
     .relatedTo(['and', 1, 2, 3]) %}
 ```
 
-##### Cloning Element Queries
+#### Cloning Element Queries
 
 In Craft 2, each time you call a parameter-setter method (e.g. `.type('article')`), the method would:
 
@@ -588,7 +528,7 @@ If you have any templates that count on the Craft 2 behavior, you can fix them u
 {% set totalEntries = query.count() %}
 ```
 
-#### Query Methods
+### Query Methods
 
 The `findElementAtOffset()` element query method has been removed in Craft 3. Use `nth()` instead.
 
@@ -602,7 +542,7 @@ Some element query methods have been renamed in Craft 3. The old methods have be
 | `last()`        | `inReverse().one()` _(see [last()](#last))_
 | `total()`       | `count()`
 
-#### Treating Queries as Arrays
+### Treating Queries as Arrays
 
 Support for treating element queries as if they’re arrays has been deprecated in Craft 3, and will be completely removed in Craft 4.
 
@@ -637,7 +577,7 @@ Alternatively, if you already needed to fetch the actual query results, and you 
 {% set total = entries|length %}
 ```
 
-#### `last()`
+### `last()`
 
 `last()` was deprecated in Craft 3 because it isn’t clear that it needs to run two database queries behind the scenes (the equivalent of `query.nth(query.count() - 1)`).
 
@@ -667,17 +607,17 @@ In those cases, you can just replace the `.last()` call with what it’s already
 {% set last = query.nth(total - 1) %}
 ```
 
-### Elements
+## Elements
 
 Tag elements no longer have a `name` property. Use `title` instead.
 
 All elements’ `locale` properties have been deprecated, and will be completely removed in Craft 4. Use `siteId` if you need to know an element’s site ID, `site.handle` if you need to know its handle, or `site.language` if you need to know its site’s language.
 
-### Models
+## Models
 
 Models’ `getError('attribute')` methods have been deprecated, and will be completely removed in Craft 4. Use `getFirstError('attribute')` instead.
 
-### Locales
+## Locales
 
 Some locale methods have been deprecated in Craft 3, and will be completely removed in Craft 4:
 
@@ -687,11 +627,11 @@ Some locale methods have been deprecated in Craft 3, and will be completely remo
 | `getName()`        | `getDisplayName(craft.app.language)`
 | `getNativeName()`  | `getDisplayName()`
 
-### Request Params
+## Request Params
 
 Your front-end `<form>`s and JS scripts that submit to a controller action will need to be updated with the following changes.
 
-#### `action` Params
+### `action` Params
 
 `action` params must be rewritten in `kebab-case` rather than `camelCase`.
 
@@ -712,7 +652,7 @@ Some controller actions have been renamed:
 | `users/saveProfile`         | `users/save-user`
 | `users/forgotPassword`      | `users/send-password-reset-email`
 
-#### `redirect` Params
+### `redirect` Params
 
 `redirect` params must be hashed now.
 
@@ -742,7 +682,7 @@ Some `redirect` param tokens have been renamed:
 | `sections/save-section`         | `{sectionId}` | `{id}`
 | `users/save-user`               | `{userId}`    | `{id}`
 
-#### CSRF Token Params
+### CSRF Token Params
 
 CSRF protection is enabled by default in Craft 3. If you didn’t already have it enabled (via the `enableCsrfProtection` config setting), each of your front-end `<form>`s and JS scripts that submit to a controller action will need to be updated with a new CSRF token param.
 
@@ -758,6 +698,6 @@ The `csrfInput()` function is provided as a shortcut.
 {{ csrfInput() }}
 ```
 
-### Plugins
+## Plugins
 
 See [Updating Plugins for Craft 3](extend/updating-plugins.md).

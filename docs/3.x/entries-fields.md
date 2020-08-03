@@ -1,6 +1,6 @@
 # Entries Fields
 
-Entries fields allow you to relate [entries](sections-and-entries.md) to other elements.
+Entries fields allow you to relate [entries](entries.md) to other elements.
 
 ## Settings
 

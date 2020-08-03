@@ -8,7 +8,7 @@ Craft has a powerful engine for relating elements to one another with five relat
 * [Tags Fields](tags-fields.md)
 * [Users Fields](users-fields.md)
 
-Just like the other field types, you can add these to your [section](sections-and-entries.md#sections), [user](users.md), [asset](assets.md), [category group](categories.md), [tag group](tags.md), and [global sets](globals.md)’ field layouts.
+Just like the other field types, you can add these to your [section](entries.md#sections), [user](users.md), [asset](assets.md), [category group](categories.md), [tag group](tags.md), and [global sets](globals.md)’ field layouts.
 
 ## Terminology
 

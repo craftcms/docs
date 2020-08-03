@@ -14,7 +14,7 @@ PHP code isn’t allowed in your templates, but Craft provides various ways to [
 
 There are several times when you’ll need to enter a path to one of your templates:
 
-* When choosing which template [entry](../sections-and-entries.md) and [category](../categories.md) URLs should load
+* When choosing which template [entry](../entries.md) and [category](../categories.md) URLs should load
 * When assigning a template to a [route](../routing.md#dynamic-routes)
 * Within [include](https://twig.symfony.com/doc/tags/include.html), [extends](https://twig.symfony.com/doc/tags/extends.html), and [embed](https://twig.symfony.com/doc/tags/embed.html) template tags
 

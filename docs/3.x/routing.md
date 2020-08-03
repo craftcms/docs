@@ -23,7 +23,7 @@ Here is how Craft handles each request:
 
 2. **Is it an element request?**
 
-   If the URI matches an element’s URI, Craft lets the element decide how to route the request. For example, if an [entry’s](sections-and-entries.md) URI is requested, then the entry will route the request to the template specified in its section’s settings, with an `entry` variable predefined, set to the requested entry.
+   If the URI matches an element’s URI, Craft lets the element decide how to route the request. For example, if an [entry’s](entries.md) URI is requested, then the entry will route the request to the template specified in its section’s settings, with an `entry` variable predefined, set to the requested entry.
 
    ::: tip
    Modules and plugins can override element routes using the [EVENT_SET_ROUTE](craft3:craft\base\Element::EVENT_SET_ROUTE) event.
