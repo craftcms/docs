@@ -1,6 +1,6 @@
 # Craft Docs
 
-This project includes all project documentation and tutorials that (will) live at craftcms.com/docs. It does not include the class reference documentation.
+This project includes all project documentation and tutorials at craftcms.com/docs. It does not include the class reference documentation.
 
 It consists of markdown content in nested `docs/` folders, and VuePress configuration and a highly customized theme in `docs/.vuepress/`. The theme is comprised of single-file Vue components just like the VuePress default, but integrates PostCSS with [Tailwind CSS](https://tailwindcss.com/) to replace most of the Stylus used by VuePress.
 
