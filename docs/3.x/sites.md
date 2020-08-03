@@ -93,7 +93,7 @@ When enabled, Craft will create the new entry in each site enabled for that sect
 
 If you would like the section's content to be separate then disable this option for that section.
 
-## Guide: Setting Up a New Site
+## Setting Up a New Site
 
 In this short guide we'll walk through the steps of setting up a new site in Craft. This guide assumes you already have Craft installed and the default site setup and configured.
 
@@ -142,4 +142,143 @@ If you have any local asset volumes, you will need to make sure those assets are
 1. Configure your web server so the domain (e.g. `beta.craftcms.com`) points at the `web` directory. Craft will automatically detect which site the browser is requesting.
 2. Update your DNS records so the domain points at the web server.
 
-TODO: add [Localization](localization.md) and [Static Message Translations](static-translations.md) content.
+## Setting Up a Localized Site
+
+This guide will walk you through all of the steps that are typically involved in setting up a localized site using Craft’s multi-site feature and translation support.
+
+### Step 1: Defining Your Sites and Languages
+
+The first step to creating localized site is to decide the languages you need to support. After that, create a new Site in Craft for each supported language using the [guide on configuring a multi-site setup in Craft](sites.md).
+
+### Step 2: Update Your Sections
+
+After creating a new site for a language, enable the new site in each Section. In Settings → Sections, go into each section settings you want included in the localized site and enable the site in the Site Settings. Fill out the Entry URI Format (for Channel and Structure sections) or URI (for Single sections) to reflect how you want the URIs structured for that site.
+
+### Step 3: Define Your Translatable Fields
+
+In Settings → Fields, choose the fields you want to have translatable. Under Translation Method, choose "Translate for each language."
+
+Craft will allow you to update this field's content in each entry on a per-language basis.
+
+### Step 4: Update Your Templates
+
+If you have any templates that you only want to serve from a specific site, you can create a new sub-folder in your templates folder, named after your site's handle, and place the templates in there.
+
+For example, if you wanted to give your German site its own homepage template, you might set your templates folder up like this:
+
+```treeview
+templates/
+├── index.twig (default homepage template)
+└── de/
+    └── index.twig (German homepage template)
+```
+
+Use `craft.app.language` to toggle specific parts of your templates, depending on the language:
+
+```twig
+{% if craft.app.language == 'de' %}
+    <p>I like bread and beer.</p>
+{% endif %}
+```
+
+You can also take advantage of Craft’s [static translation](static-translations.md) support for strings throughout your templates.
+
+```twig
+{{ "Welcome!"|t }}
+```
+
+### Step 5: Give your authors access to the sites
+
+As soon as you add an additional site to your Craft installation, Craft will start checking for site permissions whenever users try to edit content. By default, no users or groups have access to any site, so you need to assign them.
+
+When you edit a user group or a user account, you will find a new Sites permissions section, which lists all of your sites. Assign them where appropriate.
+
+
+## Static Message Translations
+
+Most websites and apps will have some UI messages that are hard-coded into the templates or PHP files. These are called “static messages”, because they aren’t being dynamically defined by content in the CMS.
+
+If you’re building a multilingual site or app, then these messages will need to be translatable just like your CMS-driven content.
+
+To do that, Craft employs Yii’s [Message Translations](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n#message-translation) feature, and pre-defines special translation categories:
+
+- `site` is used for messages that belong to the project.
+- `app` is used for Craft control panel messages.
+- Each plugin gets its own category as well, based on the plugin’s handle.
+
+### Prep Your Messages
+
+The first step is to run all of your static messages through the translator. If you’re working on a template, use the [translate](dev/filters.md#translate-or-t) filter (`|t`). If you’re working in PHP code, use [Craft::t()](yii2:yii\BaseYii::t()).
+
+::: code
+```twig
+{# old #}
+<a href="/contact">Contact us</a>
+
+{# new #}
+<a href="/contact">{{ 'Contact us'|t }}</a>
+```
+```php
+// old
+echo 'Contact us';
+
+// new
+echo Craft::t('site', 'Contact us');
+```
+:::
+
+### Provide the Translations
+
+Once you’ve prepped a message for translations, you need to supply the actual translation.
+
+To do that, create a new folder in your project’s base directory called `translations/`, and within that, create a new folder named after the target language’s ID. Within that, create a file named after the translation category you want to create massages for (`site.php` for project messages, `app.php` to overwrite Craft's control panel messages, or `<plugin-handle>.php` to overwrite a plugin’s messages).
+
+For example, if you want to translate your project’s messages into German, this is what your project’s directory structure should look like:
+
+```
+my-project.test/
+├── config/
+├── ...
+└── translations/
+    └── de/
+        └── site.php
+```
+
+Now open `site.php` in a text editor, and have it return an array that maps the source messages to their translated messages.
+
+```php
+<?php
+
+return [
+    'Contact us' => 'Kontaktiere uns',
+];
+```
+
+Now, when Craft is processing the message translation for a German site, “Contact us” will be replaced with  “Kontaktiere uns”.
+
+#### Message Parameters
+
+Static messages can have [placeholder values](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n#message-parameters). For example:
+
+```php
+<?php
+
+return [
+    'Welcome back, {name}' => 'Willkommen zurück {name}',
+];
+```
+
+To replace the placeholder values with dynamic values when translating the message, pass the `params` argument when using the [translate](dev/filters.md#translate-or-t) filter or calling [Craft::t()](yii2:yii\BaseYii::t()):
+
+::: code
+```twig
+<a href="/contact">{{ 'Welcome back, {name}'|t(params = {
+    name: currentUser.friendlyName,
+}) }}</a>
+```
+```php
+echo Craft::t('site', 'Welcome back, {name}', [
+    'name' => Craft::$app->user->identity->friendlyName,
+]);
+```
+:::
