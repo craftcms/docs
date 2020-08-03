@@ -290,5 +290,34 @@ module.exports = {
         }
       ]
     }
+  },
+  sidebarExtra: {
+    "3.x": {
+      "/": [
+        {
+          title: "Class Reference",
+          icon: "/narnia/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/commerce/api/v3/"
+        },
+      ]
+    },
+    "2.x": {
+      "/": [
+        {
+          title: "Class Reference",
+          icon: "/narnia/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/commerce/api/v2/"
+        }
+      ]
+    },
+    "1.x": {
+      "/": [
+        {
+          title: "Class Reference",
+          icon: "/narnia/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/commerce/api/v1/"
+        }
+      ]
+    },
   }
 };
