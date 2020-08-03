@@ -110,7 +110,7 @@ module.exports = {
         {
           title: "Installing & Updating",
           collapsable: false,
-          children: ["requirements", "installation", "updating"]
+          children: ["requirements", "installation", "updating", "upgrade"]
         },
         {
           title: "Configuration",
