@@ -6,5 +6,5 @@ module.exports = {
   "my-field-handle": { title: "Replace this with your kebab-case field handle." },
   "mytablename": { title: "Replace this with your database table name, without any prefix." },
   "my/project/path": { title: "Replace this with your project path." },
-  "my-base64-data": { title: "Replace this with your project path." }
+  "my-base64-data": { title: "Replace this with your base64-encoded string." }
 };
