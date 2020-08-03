@@ -209,7 +209,10 @@ Don’t forget to set `enctype="multipart/form-data"` on your `<form>` tag so yo
 Alternatively, you can submit Base64-encoded file data, which the Assets field will decode and treat as an uploaded file. To do that, you have to specify both the data and the filename like this:
 
 ```twig
-{{ hiddenInput('fields[myFieldHandle][data][]', 'data:image/jpeg;base64,my-base64-data') }}
+{{ hiddenInput(
+    'fields[myFieldHandle][data][]',
+    'data:image/jpeg;base64,my-base64-data'
+) }}
 {{ hiddenInput('fields[myFieldHandle][filename][]', 'myFile.ext') }}
 ```
 
