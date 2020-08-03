@@ -410,7 +410,7 @@ You can register and bootstrap custom Yii modules into the application from `con
 
 Some settings should be defined on a per-environment basis. For example, when developing locally, you may want your site’s base URL to be `http://my-project.test`, but on production it should be `https://my-project.com`.
 
-## Control Panel Settings
+### Control Panel Settings
 
 Some settings in the control panel can be set to environment variables (like the ones defined in your `.env` file):
 
@@ -442,7 +442,7 @@ Only the environment variable’s name will be stored in your database or projec
 Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](../extend/environmental-settings.md) to learn how.
 :::
 
-### Using Aliases in Control Panel Settings
+#### Using Aliases in Control Panel Settings
 
 Some of these settings—the ones that store a URL or a file system path—can also be set to [aliases](README.md#aliases), which is helpful if you just want to store a base URL or path in an environment variable, and append additional segments onto it.
 
@@ -463,7 +463,7 @@ Then create a `@rootUrl` alias that references it:
 
 Then you could go into your User Photos volume’s settings (for example) and set its Base URL to `@rootUrl/images/user-photos`.  
 
-## Config Files
+### Config Files
 
 You can set your [general config settings](config-settings.md), [database connection settings](db-settings.md), and other PHP config files to environment variables using PHP’s [getenv()](http://php.net/manual/en/function.getenv.php) function:
 
@@ -477,7 +477,7 @@ CP_TRIGGER="secret-word"
 'cpTrigger' => getenv('CP_TRIGGER') ?: 'admin',
 ```
 
-### Multi-Environment Configs
+#### Multi-Environment Configs
 
 Craft’s PHP config files can optionally define separate config settings for each individual environment.
 
