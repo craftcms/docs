@@ -275,8 +275,6 @@ function getAdditionalInfo(page, queryString, queryTerms) {
     };
   }
 
-  // TODO: include excerpt with heading string match
-
   const match = getMatch(page, query, queryTerms);
   if (!match)
     return {
