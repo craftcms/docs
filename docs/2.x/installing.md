@@ -18,8 +18,8 @@ Before installing Craft, make sure that you’ve got everything you need:
 
 Download the archive format you prefer to work with:
 
-- **zip**: <https://craftcms.com/latest-v2.zip>
-- **tar.gz**: <https://craftcms.com/latest-v2.tar.gz>
+- [zip](https://craftcms.com/latest-v2.zip)
+- [tar.gz](https://craftcms.com/latest-v2.tar.gz)
 
 Extract the archive wherever you want your new Craft project to live.
 

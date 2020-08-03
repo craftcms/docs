@@ -19,9 +19,14 @@ Here are some recommended permissions depending on that relationship:
 
 ## Manually Updating
 
-The “Update” button on the Updates page has a context menu with an alternative “Download” option. Clicking on that will give you the same `Craft.zip` file you could have gotten by downloading Craft from [craftcms.com](https://craftcms.com).
+You can download the latest release in the format you prefer to work with:
 
-When the zip has finished downloading, you can manually update your Craft install by replacing the old `craft/app/` folder with the new one.
+- [zip](http://craftcms.com/latest-v2.zip)
+- [tar.gz](http://craftcms.com/latest-v2.tar.gz)
+
+Or click the menu button beside your “Update” button on the Updates page of your control panel, which will give you the zip file.
+
+When the archive has finished downloading, you can manually update your Craft install by replacing the old `craft/app/` folder with the new one.
 
 If you’re manually updating a live site, we recommend you follow these instructions to minimize your site’s down time:
 
