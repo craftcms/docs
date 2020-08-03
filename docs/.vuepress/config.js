@@ -1,6 +1,6 @@
 module.exports = {
   theme: "craftdocs",
-  base: "/narnia/",
+  base: "/docs/",
   plugins: [
     ["@vuepress/google-analytics", { ga: "UA-39036834-9" }],
     "vuepress-plugin-smooth-scroll",

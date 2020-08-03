@@ -2,7 +2,7 @@ module.exports = {
   title: "Craft Commerce Documentation | %v",
   setTitle: "Craft Commerce",
   handle: "commerce",
-  icon: "/narnia/icons/commerce.svg",
+  icon: "/docs/icons/commerce.svg",
   baseDir: "commerce",
   versions: [
     ["3.x", { label: "3.x" }],
@@ -296,7 +296,7 @@ module.exports = {
       "/": [
         {
           title: "Class Reference",
-          icon: "/narnia/icons/craft-api.svg",
+          icon: "/docs/icons/craft-api.svg",
           link: "https://docs.craftcms.com/commerce/api/v3/"
         },
       ]
@@ -305,7 +305,7 @@ module.exports = {
       "/": [
         {
           title: "Class Reference",
-          icon: "/narnia/icons/craft-api.svg",
+          icon: "/docs/icons/craft-api.svg",
           link: "https://docs.craftcms.com/commerce/api/v2/"
         }
       ]
@@ -314,7 +314,7 @@ module.exports = {
       "/": [
         {
           title: "Class Reference",
-          icon: "/narnia/icons/craft-api.svg",
+          icon: "/docs/icons/craft-api.svg",
           link: "https://docs.craftcms.com/commerce/api/v1/"
         }
       ]

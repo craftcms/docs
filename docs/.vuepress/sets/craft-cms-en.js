@@ -406,31 +406,31 @@ module.exports = {
       "/extend/": [
         {
           title: "Class Reference",
-          icon: "/narnia/icons/craft-api.svg",
+          icon: "/docs/icons/craft-api.svg",
           link: "https://docs.craftcms.com/api/v3/"
         },
         {
           title: "Back to Craft Docs",
-          icon: "/narnia/icons/icon-back.svg",
+          icon: "/docs/icons/icon-back.svg",
           link: "/3.x/"
         }
       ],
       "/testing/": [
         {
           title: "Back to Craft Docs",
-          icon: "/narnia/icons/icon-back.svg",
+          icon: "/docs/icons/icon-back.svg",
           link: "/3.x/"
         }
       ],
       "/": [
         {
           title: "Extending Craft",
-          icon: "/narnia/icons/icon-book.svg",
+          icon: "/docs/icons/icon-book.svg",
           link: "/3.x/extend/"
         },
         {
           title: "Testing Craft",
-          icon: "/narnia/icons/icon-flask.svg",
+          icon: "/docs/icons/icon-flask.svg",
           link: "/3.x/testing/"
         }
       ]
@@ -439,7 +439,7 @@ module.exports = {
       "/": [
         {
           title: "Class Reference",
-          icon: "/narnia/icons/craft-api.svg",
+          icon: "/docs/icons/craft-api.svg",
           link: "https://docs.craftcms.com/api/v2/"
         }
       ]
