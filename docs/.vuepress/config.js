@@ -7,7 +7,7 @@ module.exports = {
     [
       "@vuepress/active-header-links",
       {
-        sidebarLinkSelector: ".right-nav .sidebar-link",
+        sidebarLinkSelector: ".right-bar .sidebar-link",
         headerAnchorSelector: ".header-anchor"
       }
     ],
