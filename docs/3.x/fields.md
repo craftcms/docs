@@ -1,4 +1,4 @@
-# Fields
+# Custom Fields
 
 All of the content on your site will get entered into fields.
 
