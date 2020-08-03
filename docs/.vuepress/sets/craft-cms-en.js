@@ -127,9 +127,6 @@ module.exports = {
             "config/",
             "config/config-settings",
             "config/db-settings"
-            //"config/environments",
-            //"config/php-constants",
-            //"config/app"
           ]
         },
         {
