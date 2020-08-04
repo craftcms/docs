@@ -133,6 +133,11 @@ A [duration interval](https://en.wikipedia.org/wiki/ISO_8601#Durations) that det
 
 Default: `'PT1H'` (1 hour)
 
+## `freeOrderPaymentStrategy`
+
+Determines how Commerce should handle free orders. The default `complete` setting automatically completes zero-balance orders without forwarding them to the payment gateway. Alternatively, a `process` strategy forwards zero-balance orders to the payment gateway for processing. This can be useful if the customer’s balance needs to be updated or otherwise adjusted by the payment gateway.
+
+Default: `complete`
 
 ## `gatewayPostRedirectTemplate`
 
