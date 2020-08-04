@@ -218,6 +218,6 @@ Alternatively, you can submit Base64-encoded file data, which the Assets field w
 
 ## See Also
 
-* [Asset Queries](dev/element-queries/asset-queries.md)
+* [Asset Queries](assets.md#querying-assets)
 * <craft3:craft\elements\Asset>
 * [Relations](relations.md)
