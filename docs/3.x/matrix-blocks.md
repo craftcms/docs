@@ -1,6 +1,8 @@
 # Matrix Blocks
 
-TODO: write
+If you’ve ever worked with a hairball of content and markup managed in an increasingly-fragile WYSIWYG field, you’re probably going to like Matrix blocks.
+
+Matrix blocks are groupings of fields an editor can use to build and rearrange content. They can be critical in supporting flexible, customizable content for an editor that’s balanced with the kind of discrete, well-modeled content a developer wants to work with.
 
 ## Querying Matrix Blocks
 

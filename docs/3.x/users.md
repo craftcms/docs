@@ -1,6 +1,12 @@
 # Users
 
-TODO: write
+Users are Craft’s representation of people.
+
+Each user has an email address and username by default, and optional fields for a name, photo, and password. Like other elements, users can have any number of additional custom fields.
+
+There are also preferences for localization, accessibility, and debugging that may be relevant depending on how you build your site and whether you grant the user access to the control panel.
+
+Users can be part of groups you create that [fine-tune permissions](user-management.md).
 
 ## Querying Users
 
