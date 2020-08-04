@@ -1737,6 +1737,51 @@ Event::on(
     }
 );
 ```
+### `beforeSavePdf`
+
+The event that is triggered before a PDF is saved.
+
+```php
+use craft\commerce\events\PdfSaveEvent;
+use craft\commerce\services\Pdfs;
+use craft\commerce\models\Pdf;
+use yii\base\Event;
+
+Event::on(
+    Pdfs::class,
+    Pdfs::EVENT_BEFORE_SAVE_PDF,
+    function(PdfSaveEvent $event) {
+        // @var Pdf $pdf
+        $pdf = $event->pdf;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+        // ...
+    }
+);
+```
+
+### `afterSavePdf`
+
+The event that is triggered after a PDF is saved.
+
+```php
+use craft\commerce\events\PdfSaveEvent;
+use craft\commerce\services\Pdfs;
+use craft\commerce\models\Pdf;
+use yii\base\Event;
+
+Event::on(
+    Pdfs::class,
+    Pdfs::EVENT_AFTER_SAVE_PDF,
+    function(PdfSaveEvent $event) {
+        // @var Pdf $pdf
+        $pdf = $event->pdf;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+        // ...
+    }
+);
+```
 
 ### `beforeSaveProductType`
 
