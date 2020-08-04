@@ -144,8 +144,7 @@ Whether admins should be allowed to make administrative changes to the system.
 If this is disabled, the Settings and Plugin Store sections will be hidden,
 the Craft edition and Craft/plugin versions will be locked, and the project config will become read-only.
 
-Therefore you should only disable this in production environments when <config3:useProjectConfigFile> is enabled,
-and you have a deployment workflow that runs `composer install` automatically on deploy.
+Therefore you should only disable this in production environments when you have a deployment workflow that runs `composer install` automatically on deploy.
 
 ::: warning
 Don’t disable this setting until **all** environments have been updated to Craft 3.1.0 or later.
@@ -446,26 +445,6 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 
 
-### `cacheElementQueries`
-
-Allowed types
-
-:   [boolean](http://php.net/language.types.boolean)
-
-Default value
-
-:   `true`
-
-Defined by
-
-:   [GeneralConfig::$cacheElementQueries](craft3:craft\config\GeneralConfig::$cacheElementQueries)
-
-
-
-Whether Craft should cache element queries that fall inside `{% cache %}` tags.
-
-
-
 ### `convertFilenamesToAscii`
 
 Allowed types
@@ -578,8 +557,7 @@ the front-end website.
 This can be set to `null` if you have a dedicated host name for the control panel (e.g. `cms.example.com`),
 or you are running Craft in [Headless Mode](config3:headlessMode). If you do that, you will need to ensure
 that the control panel is being served from its own webroot directory on your server, with an `index.php`
-file that defines the [CRAFT_CP](README.md#craft-cp) PHP
-constant.
+file that defines the `CRAFT_CP` PHP constant.
 
 ```php
 define('CRAFT_CP', true);
@@ -651,6 +629,34 @@ Defined by
 
 
 The default language the control panel should use for users who haven’t set a preferred language yet.
+
+
+
+### `defaultCpLocale`
+
+Allowed types
+
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+
+Default value
+
+:   `null`
+
+Defined by
+
+:   [GeneralConfig::$defaultCpLocale](craft3:craft\config\GeneralConfig::$defaultCpLocale)
+
+Since
+
+:   3.5.0
+
+
+
+The default locale the control panel should use for date/number formatting,
+for users who haven’t set a preferred language or preferred formatting locale yet.
+
+If this is `null`, then the <config3:defaultCpLanguage> config setting will determine which locale is used for
+date/number formatting by default.
 
 
 
@@ -915,6 +921,30 @@ The amount of time a user’s elevated session will last, which is required for 
 Set to `0` to disable elevated session support.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+
+
+### `enableBasicHttpAuth`
+
+Allowed types
+
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+
+:   `false`
+
+Defined by
+
+:   [GeneralConfig::$enableBasicHttpAuth](craft3:craft\config\GeneralConfig::$enableBasicHttpAuth)
+
+Since
+
+:   3.5.0
+
+
+
+Whether front-end web requests should support basic HTTP authentication.
 
 
 
@@ -1191,6 +1221,26 @@ Whether images transforms should be generated before page load.
 
 
 
+### `gqlTypePrefix`
+
+Allowed types
+
+:   [string](http://php.net/language.types.string)
+
+Default value
+
+:   `''`
+
+Defined by
+
+:   [GeneralConfig::$gqlTypePrefix](craft3:craft\config\GeneralConfig::$gqlTypePrefix)
+
+
+
+Prefix to use for all type names returned by GraphQL.
+
+
+
 ### `headlessMode`
 
 Allowed types
@@ -1226,8 +1276,10 @@ When this is enabled, the following changes will take place:
   <config3:verifyEmailPath> settings will be ignored.
 
 ::: tip
-When Headless Mode is enabled, users will not be able to set an initial password, set a new password, or verify their email address unless they have the “Access the control panel” permission. Make sure to grant this permission to content editors and administrators who should be able to log into the control panel.
+When Headless Mode is enabled, users will not be able to set an initial password, set a new password, or verify their email address unless they have the "Access the control panel" permission. Make sure to grant this permission to content editors and administrators who should be able to log into the control panel.
 :::
+
+
 
 ### `imageDriver`
 
@@ -1247,6 +1299,27 @@ Defined by
 
 The image driver Craft should use to cleanse and transform images. By default Craft will auto-detect if ImageMagick is installed and fallback to GD if not. You can explicitly set
 either `'imagick'` or `'gd'` here to override that behavior.
+
+
+
+### `imageEditorRatios`
+
+Allowed types
+
+:   [array](http://php.net/language.types.array)
+
+Default value
+
+:   `['Unconstrained' => 'none', 'Original' => 'original', 'Square' => 1, '16:9' => 1.78, '10:8' => 1.25, '7:5' => 1.4, '4:3' => 1.33, '5:3' => 1.67, '3:2' => 1.5]`
+
+Defined by
+
+:   [GeneralConfig::$imageEditorRatios](craft3:craft\config\GeneralConfig::$imageEditorRatios)
+
+
+
+An array containing the selectable image aspect ratios for image editor. The array must be in the format of `label` => `ratio`, where ratio must be a float or a string.
+For string values, only values of "none" and "original" are allowed.
 
 
 
@@ -1887,6 +1960,38 @@ your email for further instructions. This can allow for username/email enumerati
 
 
 
+### `previewIframeResizerOptions`
+
+Allowed types
+
+:   [array](http://php.net/language.types.array), [false](http://php.net/language.types.boolean)
+
+Default value
+
+:   `[]`
+
+Defined by
+
+:   [GeneralConfig::$previewIframeResizerOptions](craft3:craft\config\GeneralConfig::$previewIframeResizerOptions)
+
+Since
+
+:   3.5.0
+
+
+
+Custom [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#options) that should be used for preview iframes.
+
+Set this to `false` to disable the iFrame Resizer altogether.
+
+```php
+'previewIframeResizerOptions' => [
+    'autoResize' => false,
+],
+```
+
+
+
 ### `privateTemplateTrigger`
 
 Allowed types
@@ -2197,7 +2302,7 @@ If disabled, an alternate queue worker *must* be set up separately, either as an
 [always-running daemon](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/worker.md), or a
 cron job that runs the `queue/run` command every minute:
 
-```
+```cron
 * * * * * /path/to/project/craft queue/run
 ```
 
@@ -2707,27 +2812,6 @@ Whether images should be upscaled if the provided transform size is larger than 
 
 
 
-### `useCompressedJs`
-
-Allowed types
-
-:   [boolean](http://php.net/language.types.boolean)
-
-Default value
-
-:   `true`
-
-Defined by
-
-:   [GeneralConfig::$useCompressedJs](craft3:craft\config\GeneralConfig::$useCompressedJs)
-
-
-
-Whether Craft should include minified JavaScript files whenever possible, and minify JavaScript code
-passed to `\craft\web\View::includeJs()` or `{% js %}` Twig tags.
-
-
-
 ### `useEmailAsUsername`
 
 Allowed types
@@ -2792,39 +2876,6 @@ Defined by
 Whether Craft should specify the path using `PATH_INFO` or as a query string parameter when generating URLs.
 
 Note that this setting only takes effect if <config3:omitScriptNameInUrls> is set to false.
-
-
-
-### `useProjectConfigFile`
-
-Allowed types
-
-:   [boolean](http://php.net/language.types.boolean)
-
-Default value
-
-:   `false`
-
-Defined by
-
-:   [GeneralConfig::$useProjectConfigFile](craft3:craft\config\GeneralConfig::$useProjectConfigFile)
-
-Since
-
-:   3.1.0
-
-
-
-Whether the project config should be saved out to `config/project.yaml`.
-
-If set to `true`, a hard copy of your system’s project config will be saved in `config/project.yaml`,
-and any changes to `config/project.yaml` will be applied back to the system, making it possible for
-multiple environments to share the same project config despite having separate databases.
-
-::: warning
-Make sure you’ve read the entire [Project Config](../project-config.md)
-documentation, and carefully follow the “Enabling the Project Config File” steps when enabling this setting.
-:::
 
 
 

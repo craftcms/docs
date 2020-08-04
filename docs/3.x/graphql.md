@@ -218,8 +218,8 @@ This query is used to query for assets.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -247,6 +247,7 @@ This query is used to query for assets.
 | `dateModified`| `String` | Narrows the query results based on the assets’ files’ last-modified dates.
 | `includeSubfolders`| `Boolean` | Broadens the query results to include assets from any of the subfolders of the folder specified by `folderId`.
 | `withTransforms`| `[String]` | A list of transform handles to preload.
+| `uploader`| `QueryArgument` | Narrows the query results based on the user the assets were uploaded by, per the user’s ID.
 
 ### The `assetCount` query
 This query is used to return the number of assets.
@@ -294,6 +295,7 @@ This query is used to return the number of assets.
 | `dateModified`| `String` | Narrows the query results based on the assets’ files’ last-modified dates.
 | `includeSubfolders`| `Boolean` | Broadens the query results to include assets from any of the subfolders of the folder specified by `folderId`.
 | `withTransforms`| `[String]` | A list of transform handles to preload.
+| `uploader`| `QueryArgument` | Narrows the query results based on the user the assets were uploaded by, per the user’s ID.
 
 ### The `asset` query
 This query is used to query for a single asset.
@@ -341,6 +343,7 @@ This query is used to query for a single asset.
 | `dateModified`| `String` | Narrows the query results based on the assets’ files’ last-modified dates.
 | `includeSubfolders`| `Boolean` | Broadens the query results to include assets from any of the subfolders of the folder specified by `folderId`.
 | `withTransforms`| `[String]` | A list of transform handles to preload.
+| `uploader`| `QueryArgument` | Narrows the query results based on the user the assets were uploaded by, per the user’s ID.
 
 ### The `entries` query
 This query is used to query for entries.
@@ -359,8 +362,8 @@ This query is used to query for entries.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -616,8 +619,8 @@ This query is used to query for users.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -638,6 +641,7 @@ This query is used to query for users.
 | `username`| `[String]` | Narrows the query results based on the users’ usernames.
 | `firstName`| `[String]` | Narrows the query results based on the users’ first names.
 | `lastName`| `[String]` | Narrows the query results based on the users’ last names.
+| `hasPhoto`| `Boolean` | Narrows the query results to only users that have (or don’t have) a user photo.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 | `group`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to.
 
@@ -680,6 +684,7 @@ This query is used to return the number of users.
 | `username`| `[String]` | Narrows the query results based on the users’ usernames.
 | `firstName`| `[String]` | Narrows the query results based on the users’ first names.
 | `lastName`| `[String]` | Narrows the query results based on the users’ last names.
+| `hasPhoto`| `Boolean` | Narrows the query results to only users that have (or don’t have) a user photo.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 | `group`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to.
 
@@ -722,6 +727,7 @@ This query is used to query for a single user.
 | `username`| `[String]` | Narrows the query results based on the users’ usernames.
 | `firstName`| `[String]` | Narrows the query results based on the users’ first names.
 | `lastName`| `[String]` | Narrows the query results based on the users’ last names.
+| `hasPhoto`| `Boolean` | Narrows the query results to only users that have (or don’t have) a user photo.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 | `group`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to.
 
@@ -742,8 +748,8 @@ This query is used to query for tags.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -856,8 +862,8 @@ This query is used to query for categories.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
-| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the primary site.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
@@ -1012,7 +1018,7 @@ This directive allows for formatting any date to the desired format. It can be a
 
 
 ### The `transform` directive
-This directive is used to return a URL for an [asset tranform](image-transforms.md). It accepts the same arguments you would use for a transform in Craft and adds the `immediately` argument.
+This directive is used to return a URL for an [asset transform](https://craftcms.com/docs/3.x/image-transforms.html). It accepts the same arguments you would use for a transform in Craft and adds the `immediately` argument.
 | Argument | Type | Description
 | - | - | -
 | `handle`| `String` | The handle of the named transform to use.
@@ -1054,6 +1060,7 @@ This is the interface implemented by all assets.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
 | `status`| `String` | The element's status.
@@ -1074,6 +1081,8 @@ This is the interface implemented by all assets.
 | `mimeType`| `String` | The file’s MIME type, if it can be determined.
 | `path`| `String` | The asset's path in the volume.
 | `dateModified`| `DateTime` | The date the asset file was last modified.
+| `prev`| `AssetInterface` | Returns the previous element relative to this one, from a given set of criteria. CAUTION: Applying arguments to this field severely degrades the performance of the query.
+| `next`| `AssetInterface` | Returns the next element relative to this one, from a given set of criteria. CAUTION: Applying arguments to this field severely degrades the performance of the query.
 
 
 ### The `EntryInterface` interface
@@ -1089,6 +1098,7 @@ This is the interface implemented by all entries.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
 | `status`| `String` | The element's status.
@@ -1116,6 +1126,9 @@ This is the interface implemented by all entries.
 | `children`| `[EntryInterface]` | The entry’s children, if the section is a structure. Accepts the same arguments as the `entries` query.
 | `parent`| `EntryInterface` | The entry’s parent, if the section is a structure.
 | `url`| `String` | The element’s full URL
+| `localized`| `[EntryInterface]` | The same element in other locales.
+| `prev`| `EntryInterface` | Returns the previous element relative to this one, from a given set of criteria. CAUTION: Applying arguments to this field severely degrades the performance of the query.
+| `next`| `EntryInterface` | Returns the next element relative to this one, from a given set of criteria. CAUTION: Applying arguments to this field severely degrades the performance of the query.
 
 
 ### The `GlobalSetInterface` interface
@@ -1131,6 +1144,7 @@ This is the interface implemented by all global sets.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
 | `status`| `String` | The element's status.
@@ -1153,6 +1167,7 @@ This is the interface implemented by all matrix blocks.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
 | `status`| `String` | The element's status.
@@ -1178,6 +1193,7 @@ This is the interface implemented by all users.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
 | `status`| `String` | The element's status.
@@ -1208,6 +1224,7 @@ This is the interface implemented by all categories.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
 | `status`| `String` | The element's status.
@@ -1223,6 +1240,9 @@ This is the interface implemented by all categories.
 | `children`| `[CategoryInterface]` | The category’s children.
 | `parent`| `CategoryInterface` | The category’s parent.
 | `url`| `String` | The element’s full URL
+| `localized`| `[CategoryInterface]` | The same element in other locales.
+| `prev`| `CategoryInterface` | Returns the previous element relative to this one, from a given set of criteria. CAUTION: Applying arguments to this field severely degrades the performance of the query.
+| `next`| `CategoryInterface` | Returns the next element relative to this one, from a given set of criteria. CAUTION: Applying arguments to this field severely degrades the performance of the query.
 
 
 ### The `TagInterface` interface
@@ -1238,6 +1258,7 @@ This is the interface implemented by all tags.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
 | `status`| `String` | The element's status.
