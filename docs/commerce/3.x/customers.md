@@ -38,11 +38,11 @@ The addresses for a customer can be reached via the customer view. Select any ad
 
 The [address model](commerce3:craft\commerce\models\Address) has a read-only `addressLines` parameter. This is an array that is returned containing the lines of the address.
 
-This parameter is designed to allow consistency when displaying a customer's address both in the front-end and in the control panel.
+This parameter is designed to allow consistency when displaying a customer's address both in the front end and in the control panel.
 
-For example, it is used when the addresses are displayed on the Edit Order page. There are also instances shown on how this could be used when [display an address](https://github.com/craftcms/commerce/tree/master/example-templates/shop/_includes/addresses/address.twig) in the front-end on the [example templates](example-templates.md).
+Address lines are used, for example, on the Edit Order page in the control panel. There are examples for [displaying an address](https://github.com/craftcms/commerce/blob/develop/example-templates/shop/_includes/addresses/address.twig) in the [example templates](example-templates.md).
 
-The [defineAddressLines event](events.md#defineaddresslines) is provided to allow extensibility and customisation of the array.
+You can use the [defineAddressLines event](events.md#defineaddresslines) to customize the array.
 
 ## User Customer Info Tab
 
