@@ -187,9 +187,9 @@ export default {
           "send",
           "event",
           "HelpfulVote",
-          helpful ? "yes" : "no",
+          wasHelpful ? "yes" : "no",
           "Vote",
-          helpful ? 1 : 0
+          wasHelpful ? 1 : 0
         );
       } else {
         console.log(`Couldn’t log vote. :(`);
