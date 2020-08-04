@@ -94,7 +94,7 @@ This field takes plain text as well as Twig values. Two special variables are av
 
 ### HTML Email Template Path
 
-The path to a template in your site’s `templates/` folder.
+The path to an HTML template in your site’s `templates/` folder.
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
@@ -112,3 +112,16 @@ Craft [global set variables](https://docs.craftcms.com/api/v3/craft-web-twig-var
 ```
 
 :::
+
+### Plain Text Email Template Path
+
+The path to a plain text template in your site’s `templates/` folder.
+
+This works the same way as the “HTML Email Template Path”.
+
+
+### PDF Attachment
+
+Choose a PDF that will be attached to this email.
+
+

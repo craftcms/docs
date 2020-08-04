@@ -49,7 +49,7 @@ This example creates a form for each available plan, posting the selection to th
 
 There are several things to note:
 
-- Subscribing a user to a plan requires the user to have a stored payment source. If a user doesn’t have one, you can add it by displaying the payment form.
+- Subscribing a user to a plan requires the user to have a stored payment source. If a user doesn’t have one, you can add it by displaying the payment form with `{{ plan.getGateway().getPaymentFormHtml({})|raw }}`.
 - If you wish to set subscription parameters, such as amount of trial days, it is strongly recommended to make use of [subscription events](events.md#beforecreatesubscription) instead of POST data.
 - When using Stripe, it’s not possible to choose which payment source to use if more than one is saved. Stripe will use the default payment source associated with that customer.
 

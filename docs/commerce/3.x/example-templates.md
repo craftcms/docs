@@ -2,17 +2,17 @@
 
 Commerce provides [example templates](https://github.com/craftcms/commerce/tree/master/templates) for you to reference when building out your commerce solution.
 
-You’ll find these in the `vendor/craftcms/commerce/templates/` folder, and you may want to copy them to your project’s top level `templates/` folder:
+You’ll find these in the `vendor/craftcms/commerce/example-templates/` folder, and you may want to copy them to your project’s top level `templates/` folder:
 
 ```bash
-cp -r vendor/craftcms/commerce/templates/* ./templates
+cp -r vendor/craftcms/commerce/example-templates/* ./templates
 ```
 
 If your system supports it, you could also symlink these folders into your project’s `templates/` folder so you always have up-to-date examples _while in development_:
 
 ```bash
-ln -s vendor/craftcms/commerce/templates/shop ./templates/shop
-ln -s vendor/craftcms/commerce/templates/buy ./templates/buy
+ln -s vendor/craftcms/commerce/example-templates/shop ./templates/shop
+ln -s vendor/craftcms/commerce/example-templates/buy ./templates/buy
 ```
 
 The two main sets of templates are in the `shop` and `buy` folders.

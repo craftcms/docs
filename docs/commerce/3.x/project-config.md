@@ -6,6 +6,7 @@ Craft Commerce stores the following items in the project config:
 
 - Commerce general settings
 - Email settings
+- PDF settings
 - Gateways settings
 - Order field layout
 - Order Statuses

@@ -34,6 +34,16 @@ The customer view will show you important information about the customer. The in
 
 The addresses for a customer can be reached via the customer view. Select any address to edit it.
 
+#### Address Lines
+
+The [address model](commerce3:craft\commerce\models\Address) has a read-only `addressLines` parameter. This is an array that is returned containing the lines of the address.
+
+This parameter is designed to allow consistency when displaying a customer's address both in the front end and in the control panel.
+
+Address lines are used, for example, on the Edit Order page in the control panel. There are examples for [displaying an address](https://github.com/craftcms/commerce/blob/develop/example-templates/shop/_includes/addresses/address.twig) in the [example templates](example-templates.md).
+
+You can use the [defineAddressLines event](events.md#defineaddresslines) to customize the array.
+
 ## User Customer Info Tab
 
 A “Customer Info” tab will be available on every user’s account page in the control panel.

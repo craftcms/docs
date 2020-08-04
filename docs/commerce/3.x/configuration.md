@@ -133,6 +133,11 @@ A [duration interval](https://en.wikipedia.org/wiki/ISO_8601#Durations) that det
 
 Default: `'PT1H'` (1 hour)
 
+## `freeOrderPaymentStrategy`
+
+Determines how Commerce should handle free orders. The default `complete` setting automatically completes zero-balance orders without forwarding them to the payment gateway. Alternatively, a `process` strategy forwards zero-balance orders to the payment gateway for processing. This can be useful if the customer’s balance needs to be updated or otherwise adjusted by the payment gateway.
+
+Default: `complete`
 
 ## `gatewayPostRedirectTemplate`
 
@@ -170,12 +175,6 @@ A barebones template is used  by default if this setting isn’t set.
 Determines what URL the customer should be redirected to after loading a cart via the load cart action URL.
 
 Default: `siteUrl()`
-
-## `mergeLastCartOnLogin`
-
-Determines whether a user’s previous cart should be merged with the active cart after they log in.
-
-Default: `true`
 
 ## `pdfAllowRemoteImages`
 
@@ -242,7 +241,7 @@ The URL for a user to resolve billing issues with their subscription.
 Default: `''`
 
 ::: tip
-The [example templates](example-templates.md) folder contains an example of this page. It can be found at `templates/shop/services/update-billing-details.html`
+The [example templates](example-templates.md) folder contains an example of this page. It can be found at [shop/plans/update-billing-details.twig](https://github.com/craftcms/commerce/tree/master/example-templates/shop/plans/update-billing-details.twig)
 :::
 
 ## `useBillingAddressForTax`
