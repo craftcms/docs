@@ -115,7 +115,7 @@ Cart/order subtotals and totals are computed values that always reflect the sum 
 
 You can manually recalculate an order by choosing “Recalculate order” at the bottom of the order edit screen:
 
-![](assets/recalculate-order.png)
+![](./assets/recalculate-order.png)
 
 This will set temporarily the order’s calculation mode to *Recalculate All* and trigger recalculation. You can then apply the resulting changes to the order by choosing “Update Order”, or discard them by choosing “Cancel”.
 
