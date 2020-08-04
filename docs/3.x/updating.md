@@ -1,10 +1,6 @@
 # Updating Instructions
 
-This page covers [upgrading from Craft 2](#upgrading-from-craft-2), and changes that may impact your site from v2 to v3.
-
-## Updating Craft
-
-### Updating from the Control Panel
+## Updating from the Control Panel
 
 When an update is available, users with the permission to update Craft will see a badge in the CP next to the Utilities navigation item in the sidebar. Click on Utilities and then choose Updates. You can also use the Updates widget on the control panel dashboard, which is installed by default.
 
@@ -16,7 +12,7 @@ You can run all of the updates (Craft, all plugin updates available) using the U
 Craft’s [changelog](https://github.com/craftcms/cms/blob/master/CHANGELOG-v3.md) will warn you of any critical changes at the top of the release notes. While there aren’t usually any warnings, it’s always a good idea to check before updating.
 :::
 
-### Updating from the Terminal
+## Updating from the Terminal
 
 Craft 3.0.38 and 3.1.4 introduced a new `update` console command that can be used to update Craft and plugins.
 
