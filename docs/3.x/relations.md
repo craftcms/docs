@@ -37,7 +37,7 @@ Once we have our relations field set up, we can look at the options for outputti
 
 If you’ve already got a hold of the source element in your template, like in the example below where we're outputting the Drink entry, you can access its target elements for a particular field in the same way you access any other field’s value: by the handle.
 
-Calling the source’s relational field handle (`ingredients`) returns an [entry query](dev/element-queries/entry-queries.md) that can output the field’s target elements, in the field-defined order.
+Calling the source’s relational field handle (`ingredients`) returns an [entry query](entries.md#querying-entries) that can output the field’s target elements, in the field-defined order.
 
 If we want to output the ingredients list for a drink recipe, we'd use the following:
 

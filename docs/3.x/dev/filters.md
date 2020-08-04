@@ -917,7 +917,7 @@ If no category is specified, it will default to `site`.
 ```
 
 ::: tip
-See [Static Message Translations](../static-translations.md) for a full explanation on how this works.
+See [Static Message Translations](../sites.md#static-message-translations) for a full explanation on how this works.
 :::
 
 ## `ucfirst`

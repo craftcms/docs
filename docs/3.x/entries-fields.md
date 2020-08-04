@@ -36,7 +36,7 @@ When you double-click on a related entry, a HUD will appear where you can edit t
 
 ### Querying Elements with Entries Fields
 
-When [querying for elements](dev/element-queries/README.md) that have an Entries field, you can filter the results based on the Entries field data using a query param named after your field’s handle.
+When [querying for elements](element-queries.md) that have an Entries field, you can filter the results based on the Entries field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -66,7 +66,7 @@ If you have an element with an Entries field in your template, you can access it
 {% set query = entry.myFieldHandle %}
 ```
 
-That will give you an [entry query](dev/element-queries/entry-queries.md), prepped to output all of the related entries for the given field.
+That will give you an [entry query](entries.md#querying-entries), prepped to output all of the related entries for the given field.
 
 To loop through all of the related entries, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 
@@ -98,7 +98,7 @@ If you just need to check if there are any related entries (but don’t need to 
 {% endif %}
 ```
 
-You can set [parameters](dev/element-queries/entry-queries.md#parameters) on the entry query as well. For example, to only fetch entries in the `news` section, set the [section](dev/element-queries/entry-queries.md#section) param:
+You can set [parameters](entries.md#parameters) on the entry query as well. For example, to only fetch entries in the `news` section, set the [section](entries.md#section) param:
 
 ```twig
 {% set relatedEntries = clone(entry.myFieldHandle)
@@ -153,6 +153,6 @@ You could then make the checkbox list sortable, so users have control over the o
 
 ## See Also
 
-* [Entry Queries](dev/element-queries/entry-queries.md)
+* [Entry Queries](entries.md#querying-entries)
 * <craft3:craft\elements\Entry>
 * [Relations](relations.md)

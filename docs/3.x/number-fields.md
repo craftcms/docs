@@ -17,7 +17,7 @@ Number fields have the following settings:
 
 ### Querying Elements with Number Fields
 
-When [querying for elements](dev/element-queries/README.md) that have a Number field, you can filter the results based on the Number field data using a query param named after your field’s handle.
+When [querying for elements](element-queries.md) that have a Number field, you can filter the results based on the Number field data using a query param named after your field’s handle.
 
 Possible values include:
 

@@ -1,6 +1,6 @@
 # Updating Instructions
 
-This page covers [getting your Craft version up to date](#updating-craft), [upgrading from Craft 2](#upgrading-from-craft-2), and [changes that may impact your site](#changes-in-craft-3) from v2 to v3.
+This page covers [upgrading from Craft 2](#upgrading-from-craft-2), and changes that may impact your site from v2 to v3.
 
 ## Updating Craft
 
@@ -186,7 +186,7 @@ Some general config settings have been renamed in Craft 3. The old setting names
 
 *<sup>2</sup> `defaultFileMode` is now `null` by default, meaning it will be determined by the current environment.*
 
-*<sup>3</sup> Settings that supported values defined by your `environmentVariables` config setting in Craft 2 can now be set to system environment variables and aliases in Craft 3. (See [Environmental Configuration](config/environments.md) to learn more about those.) Site URL and Local volume settings will automatically be converted to the new `@alias/sub/path` syntax when updating to Craft 3.
+*<sup>3</sup> Settings that supported values defined by your `environmentVariables` config setting in Craft 2 can now be set to system environment variables and aliases in Craft 3. (See [Environmental Configuration](config/#environmental-configuration) to learn more about those.) Site URL and Local volume settings will automatically be converted to the new `@alias/sub/path` syntax when updating to Craft 3.
 
 *<sup>4</sup> `securityKey` is no longer optional. If you haven’t set it yet, set it to the value in `storage/runtime/validation.key` (if the file exists). The auto-generated `validation.key` file fallback will be removed in Craft 4.*
 
@@ -234,14 +234,14 @@ Some PHP constants have been deprecated in Craft 3, and will no longer work in C
 
 | Old PHP Constant | What to do instead
 | ---------------- | ----------------------------------------
-| `CRAFT_LOCALE`   | Use the [CRAFT_SITE](config/php-constants.md#craft-site) constant<sup>1</sup>
-| `CRAFT_SITE_URL` | Use the <config3:siteUrl> config setting or [environment variables](config/environments.md)
+| `CRAFT_LOCALE`   | Use the [CRAFT_SITE](config/README.md#craft-site) constant<sup>1</sup>
+| `CRAFT_SITE_URL` | Use the <config3:siteUrl> config setting or [environment variables](config/#environmental-configuration)
 
-*<sup>1</sup> Craft 3 doesn’t require each site/locale to have its own `index.php` file anymore, so alternatively you can remove all unnecessary site/locale web roots and subfolders. See the new [Localization guide](localization.md) for more info.*
+*<sup>1</sup> Craft 3 doesn’t require each site/locale to have its own `index.php` file anymore, so alternatively you can remove all unnecessary site/locale web roots and subfolders. See the [Localization guide](sites.md) for more info.*
 
 ### Static Translation Files
 
-Craft 3 still supports [static message translations](static-translations.md), but the directory structure has changed. Now within your `translations/` folder, you should create subdirectories for each locale, and within them, PHP files for each **translation category**.
+Craft 3 still supports [static message translations](sites.md#static-message-translations), but the directory structure has changed. Now within your `translations/` folder, you should create subdirectories for each locale, and within them, PHP files for each **translation category**.
 
 The acceptable translation categories are:
 
@@ -313,7 +313,7 @@ Twig 2 will throw an error unless it’s a `defined` test:
 
 ### Template Tags
 
-The [{% paginate %}](dev/tags/paginate.md) tag no longer has an `{% endpaginate %}` closing tag, so remove any instances of that.
+The [{% paginate %}](dev/tags.md#paginate) tag no longer has an `{% endpaginate %}` closing tag, so remove any instances of that.
 
 Some Twig template tags have been deprecated in Craft 3, and will be completely removed in Craft 4:
 
@@ -656,7 +656,7 @@ In most cases you can replace calls to `.last()` with `.inReverse().one()` and g
 There are two cases where `inReverse()` won’t work as expected, though:
 
 - when there is no `ORDER BY` clause in the SQL, therefore nothing to reverse
-- when the `orderBy` param contains a <craft3:yii\db\Expression> object
+- when the `orderBy` param contains a <yii2:yii\db\Expression> object
 
 In those cases, you can just replace the `.last()` call with what it’s already doing internally:
 

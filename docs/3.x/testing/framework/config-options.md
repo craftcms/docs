@@ -85,7 +85,7 @@ the production site. Ensure it’s located within the `tests/_craft/` folder.
 The path to the folder where all your [migration](../../extend/migrations.md) classes are stored. 
 
 ### `CRAFT_TRANSLATIONS_PATH`
-The path to the folder where all your [translations](../../static-translations.md) are stored.
+The path to the folder where all your [translations](../../sites.md#static-message-translations) are stored.
 
 ### `CRAFT_VENDOR_PATH`
 Path to the [vendor](../../directory-structure.md#vendor) directory.

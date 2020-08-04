@@ -12,7 +12,7 @@ Radio Buttons fields have the following settings:
 
 ### Querying Elements with Radio Buttons Fields
 
-When [querying for elements](dev/element-queries/README.md) that have a Radio Buttons field, you can filter the results based on the Radio Buttons field data using a query param named after your field’s handle.
+When [querying for elements](element-queries.md) that have a Radio Buttons field, you can filter the results based on the Radio Buttons field data using a query param named after your field’s handle.
 
 Possible values include:
 

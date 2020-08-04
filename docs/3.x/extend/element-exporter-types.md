@@ -18,7 +18,7 @@ As a convenience, you can extend <craft3:craft\base\ElementExporter>, which prov
 There are two methods that your exporter type should define:
 
 - **[displayName()](craft3:craft\base\ComponentInterface::displayName())** _(static)_ – returns the user-facing name of the exporter type (shown in the **Export Type** dropdown menu within the Export HUD).
-- **[export()](craft\base\ElementExporterInterface::export())** – Accepts an element query, and returns the export data. Each item of the returned array represents one row of data, and should be set to a nested array of the column values.
+- **[export()](craft3:craft\base\ElementExporterInterface::export())** – Accepts an element query, and returns the export data. Each item of the returned array represents one row of data, and should be set to a nested array of the column values.
 
 ::: tip
 Make sure that each of the nested arrays returned by `export()` contain the exact same array keys.

@@ -68,7 +68,7 @@ Some of your system components may have required sensitive information in their 
 - a Gmail/SMTP password in your email settings
 - a secret access key in an AWS S3 volume
 
-To prevent those values from being saved into your `project.yaml` file, make sure that you are setting those fields to environment variables. See [Environmental Configuration](config/environments.md) for more information.
+To prevent those values from being saved into your `project.yaml` file, make sure that you are setting those fields to environment variables. See [Environmental Configuration](config/#environmental-configuration) for more information.
 
 ::: tip
 If you’re overriding volume settings with `config/volumes.php`, you can set sensitive values to the environment variable name rather than calling [getenv()](http://php.net/manual/en/function.getenv.php) to avoid the real values being saved to `project.yaml`.

@@ -30,7 +30,7 @@ When you double-click on a related user, a HUD will appear where you can edit th
 
 ### Querying Elements with Users Fields
 
-When [querying for elements](dev/element-queries/README.md) that have a Users field, you can filter the results based on the Users field data using a query param named after your field’s handle.
+When [querying for elements](element-queries.md) that have a Users field, you can filter the results based on the Users field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -59,7 +59,7 @@ If you have an element with a Users field in your template, you can access its r
 {% set query = entry.myFieldHandle %}
 ```
 
-That will give you a [user query](dev/element-queries/user-queries.md), prepped to output all of the related users for the given field.
+That will give you a [user query](users.md#querying-users), prepped to output all of the related users for the given field.
 
 To loop through all of the related users, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 
@@ -91,7 +91,7 @@ If you just need to check if there are any related users (but don’t need to fe
 {% endif %}
 ```
 
-You can set [parameters](dev/element-queries/user-queries.md#parameters) on the user query as well. For example, to only fetch users in the `authors` group, set the [groupId](dev/element-queries/user-queries.md#groupid) param:
+You can set [parameters](users.md#parameters) on the user query as well. For example, to only fetch users in the `authors` group, set the [groupId](users.md#groupid) param:
 
 ```twig
 {% set relatedUsers = clone(entry.myFieldHandle)
@@ -105,6 +105,6 @@ It’s always a good idea to clone the user query using the [clone()](./dev/func
 
 ## See Also
 
-* [User Queries](dev/element-queries/user-queries.md)
+* [User Queries](users.md#querying-users)
 * <craft3:craft\elements\User>
 * [Relations](relations.md)

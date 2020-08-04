@@ -29,7 +29,7 @@ Blocks can also be reordered by dragging the “Move” icon at the end of the b
 
 ### Querying Elements with Matrix Fields
 
-When [querying for elements](dev/element-queries/README.md) that have a Matrix field, you can filter the results based on the Matrix field data using a query param named after your field’s handle.
+When [querying for elements](element-queries.md) that have a Matrix field, you can filter the results based on the Matrix field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -53,7 +53,7 @@ If you have an element with a Matrix field in your template, you can access its 
 {% set query = entry.myFieldHandle %}
 ```
 
-That will give you a [Matrix block query](dev/element-queries/matrix-block-queries.md), prepped to output all of the enabled blocks for the given field.
+That will give you a [Matrix block query](matrix-blocks.md#querying-matrix-blocks), prepped to output all of the enabled blocks for the given field.
 
 To loop through all of the blocks, call [all()](<craft3:craft\db\Query::all()>) and then loop over the results:
 
@@ -120,7 +120,7 @@ If you just need to check if are blocks exist (but don’t need to fetch them), 
 {% endif %}
 ```
 
-You can set [parameters](dev/element-queries/matrix-block-queries.md#parameters) on the Matrix block query as well. For example, to only fetch blocks of type `text`, set the [type](dev/element-queries/matrix-block-queries.md#type) param:
+You can set [parameters](matrix-blocks.md#parameters) on the Matrix block query as well. For example, to only fetch blocks of type `text`, set the [type](matrix-blocks.md#type) param:
 
 ```twig
 {% set blocks = clone(entry.myFieldHandle)
@@ -223,5 +223,6 @@ Then define the form inputs for any additional blocks that should be appended to
 
 ## See Also
 
-- [Element Queries](dev/element-queries/README.md)
+- [Matrix Block Queries](matrix-blocks.md#querying-matrix-blocks)
+- [Element Queries](element-queries.md)
 - <craft3:craft\elements\MatrixBlock>

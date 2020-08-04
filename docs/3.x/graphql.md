@@ -1260,7 +1260,7 @@ Mutations take the data as arguments and, while for most part they are pretty st
 
 ### Matrix fields in mutations
 
-Due to the limitations of GraphQL, input types are not very flexible and Matrix fields are quite complex. For this reason, they are entitled to their own section in the docs. It is recommended to read up on [how to save matrix field data in entry forms](hmatrix-fields.md#saving-matrix-fields-in-entry-forms) if you are unfamiliar with that, first.
+Due to the limitations of GraphQL, input types are not very flexible and Matrix fields are quite complex. For this reason, they are entitled to their own section in the docs. It is recommended to read up on [how to save matrix field data in entry forms](matrix-fields.md#saving-matrix-fields-in-entry-forms) if you are unfamiliar with that, first.
 
 In general, the Matrix Input types have the same structure:
 

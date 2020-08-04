@@ -7,7 +7,7 @@ When you download a fresh copy of Craft 3, your project will have the following 
 Holds all of your Craft and plugin [configuration files](config/README.md), as well as your `license.key` file.
 
 ::: tip
-You can customize the name and location of this folder by setting the [CRAFT_CONFIG_PATH](config/php-constants.md#craft-config-path) PHP constant in `web/index.php`.
+You can customize the name and location of this folder by setting the [CRAFT_CONFIG_PATH](config/README.md#craft-config-path) PHP constant in `web/index.php`.
 :::
 
 ### `modules/`
@@ -36,7 +36,7 @@ Some of the folders you might find in there include:
   - `validation.key` – A randomly-generated, cryptographically secure key that is used for hashing and validating data between requests.
 
 ::: tip
-You can customize the name and location of this folder by setting the [CRAFT_STORAGE_PATH](config/php-constants.md#craft-storage-path) PHP constant in `web/index.php`.
+You can customize the name and location of this folder by setting the [CRAFT_STORAGE_PATH](config/README.md#craft-storage-path) PHP constant in `web/index.php`.
 :::
 
 ### `templates/`
@@ -44,7 +44,7 @@ You can customize the name and location of this folder by setting the [CRAFT_STO
 Your front-end Twig templates go in here. Any local site assets, such as images, CSS, and JS that should be statically served, should live in the [web](directory-structure.md#web) folder.
 
 ::: tip
-You can customize the name and location of this folder by setting the [CRAFT_TEMPLATES_PATH](config/php-constants.md#craft-templates-path) PHP constant in `web/index.php`.
+You can customize the name and location of this folder by setting the [CRAFT_TEMPLATES_PATH](config/README.md#craft-templates-path) PHP constant in `web/index.php`.
 :::
 
 ### `vendor/`
@@ -52,7 +52,7 @@ You can customize the name and location of this folder by setting the [CRAFT_TEM
 This is where all of your Composer dependencies go, including Craft itself, and any plugins you’ve installed via Composer.
 
 ::: tip
-You can customize the name and location of this folder by changing the [CRAFT_VENDOR_PATH](config/php-constants.md#craft-vendor-path) PHP constant in `web/index.php`.
+You can customize the name and location of this folder by changing the [CRAFT_VENDOR_PATH](config/README.md#craft-vendor-path) PHP constant in `web/index.php`.
 :::
 
 ### `web/`
@@ -60,7 +60,7 @@ You can customize the name and location of this folder by changing the [CRAFT_VE
 This directory represents your server’s webroot. The public `index.php` file lives here and this is where any of the local site images, CSS, and JS that is statically served should live.
 
 ::: tip
-You can customize the name and location of this folder. If you move it so it’s no longer living alongside the other Craft folders, make sure to update the [CRAFT_BASE_PATH](config/php-constants.md#craft-vendor-path) PHP constant in `<Webroot>/index.php`.
+You can customize the name and location of this folder. If you move it so it’s no longer living alongside the other Craft folders, make sure to update the [CRAFT_BASE_PATH](config/README.md#craft-vendor-path) PHP constant in `<Webroot>/index.php`.
 :::
 
 ### `.env`

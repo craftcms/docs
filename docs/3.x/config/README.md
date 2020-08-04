@@ -59,7 +59,7 @@ The following aliases are available out of the box:
 | `@contentMigrations` | The path to your `migrations/` folder
 | `@craft` | The path to `vendor/craftcms/cms/src/`
 | `@lib` | The path to `vendor/craftcms/cms/lib/`
-| `@root` | The root project path (same as the [CRAFT_BASE_PATH](php-constants.md#craft-base-path) PHP constant)
+| `@root` | The root project path (same as the [CRAFT_BASE_PATH](#craft-base-path) PHP constant)
 | `@runtime` | The path to your `storage/runtime/` folder
 | `@storage` | The path to your `storage/` folder
 | `@templates` | The path to your `templates/` folder
@@ -130,10 +130,6 @@ You can parse aliases in your templates by passing them to the [alias()](../dev/
 
 You can define custom [URL rules](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) in `config/routes.php`. See [Routing](../routing.md) for more details.
 
-## PHP Constants
-
-You can configure core settings like system file paths and the active environment by defining certain [PHP constants](php-constants.md) in `web/index.php`.
-
 ## Application Configuration
 
 You can customize Craft’s entire [Yii application configuration](https://www.yiiframework.com/doc/guide/2.0/en/structure-applications#application-configurations) from `config/app.php`. Any items returned by that array will get merged into the main application configuration array.
@@ -144,7 +140,7 @@ You can also customize Craft’s application configuration for only web requests
 Craft’s default configuration is defined by [src/config/app.php](https://github.com/craftcms/cms/blob/master/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/master/src/config/app.web.php), and [app.console.php](https://github.com/craftcms/cms/blob/master/src/config/app.console.php). Refer to these files when you need to override existing application components.
 :::
 
-## Cache Component
+### Cache Component
 
 By default, Craft will store data caches in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) by overriding the `cache` application component from `config/app.php`.
 
@@ -239,7 +235,7 @@ return [
 ];
 ```
 
-## Database Component
+### Database Component
 
 If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component:
 
@@ -281,7 +277,7 @@ return [
 ];
 ```
 
-## Session Component
+### Session Component
 
 In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location.
 
@@ -340,7 +336,7 @@ return [
 The `session` component **must** be configured with the <craft3:craft\behaviors\SessionBehavior> behavior, which adds methods to the component that the system relies on.
 :::
 
-## Mailer Component
+### Mailer Component
 
 To override the `mailer` component config (which is responsible for sending emails), do this in `config/app.php`:
 
@@ -375,7 +371,7 @@ return [
 Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing email settings from Settings → Email.
 :::
 
-## Queue Component
+### Queue Component
 
 Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default Craft will use a [custom queue driver](craft3:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md), but you can switch to a different driver by overriding Craft’s `queue` component from `config/app.php`:
 
@@ -402,7 +398,7 @@ Only drivers that implement <craft3:craft\queue\QueueInterface> will be visible 
 If your queue driver supplies its own worker, set the <config3:runQueueAutomatically> config setting to `false` in `config/general.php`.
 :::
 
-## Modules
+### Modules
 
 You can register and bootstrap custom Yii modules into the application from `config/app.php` as well. See [How to Build a Module](../extend/module-guide.md) for more info.
 
@@ -501,9 +497,9 @@ return [
 ];
 ```
 
-The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you. Craft will look for the key(s) that match the [CRAFT_ENVIRONMENT](php-constants.md#craft-environment) PHP constant, which should be defined by your `web/index.php` file. (Your server’s hostname will be used as a fallback.)
+The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you. Craft will look for the key(s) that match the [CRAFT_ENVIRONMENT](#craft-environment) PHP constant, which should be defined by your `web/index.php` file. (Your server’s hostname will be used as a fallback.)
 
-By default, new Craft 3 projects will define the [CRAFT_ENVIRONMENT](php-constants.md#craft-environment) constant using an environment variable called `ENVIRONMENT`, which is defined in the `.env` file:
+By default, new Craft 3 projects will define the [CRAFT_ENVIRONMENT](#craft-environment) constant using an environment variable called `ENVIRONMENT`, which is defined in the `.env` file:
 
 ```bash
 # -- .env --

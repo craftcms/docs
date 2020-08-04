@@ -149,7 +149,7 @@ $result = \Craft::$app->db->createCommand()
 
 ## Element Queries
 
-`ElementCriteriaModel` has been replaced with [Element Queries](../dev/element-queries/README.md) in Craft 3:
+`ElementCriteriaModel` has been replaced with [Element Queries](../element-queries.md) in Craft 3:
 
 ```php
 // Old:
@@ -433,7 +433,7 @@ Event::on(
 :::
 
 ::: tip
-Rather than defining the full message heading/subject/body right within the <craft3:Craft::t()> call, you can pass placeholder strings (e.g. `'email_heading'`) and define the actual string in your plugin’s [translation file](../static-translations.md).
+Rather than defining the full message heading/subject/body right within the <craft3:Craft::t()> call, you can pass placeholder strings (e.g. `'email_heading'`) and define the actual string in your plugin’s [translation file](../sites.md#static-message-translations).
 :::
 
 #### `registerUserPermissions`

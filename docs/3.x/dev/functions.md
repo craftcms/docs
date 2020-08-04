@@ -174,7 +174,7 @@ This works identically to Twig’s core [`constant`](https://twig.symfony.com/do
 
 ## `create`
 
-Creates a new object instance based on a given class name or object configuration. See <craft3:Yii::createObject()> for a full explanation of supported arguments.
+Creates a new object instance based on a given class name or object configuration. See <yii2:Yii::createObject()> for a full explanation of supported arguments.
 
 ```twig
 {# Pass in a class name #}

@@ -55,7 +55,7 @@ When you double-click on a related category, a HUD will appear where you can edi
 
 ### Querying Elements with Categories Fields
 
-When [querying for elements](dev/element-queries/README.md) that have a Categories field, you can filter the results based on the Categories field data using a query param named after your field’s handle.
+When [querying for elements](element-queries.md) that have a Categories field, you can filter the results based on the Categories field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -84,7 +84,7 @@ If you have an element with a Categories field in your template, you can access 
 {% set relatedCategories = entry.myFieldHandle %}
 ```
 
-That will give you a [category query](dev/element-queries/category-queries.md), prepped to output all of the related categories for the given field.
+That will give you a [category query](categories.md#querying-categories), prepped to output all of the related categories for the given field.
 
 To loop through all of the related categories as a flat list, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 
@@ -99,7 +99,7 @@ To loop through all of the related categories as a flat list, call [all()](craft
 {% endif %}
 ```
 
-Or you can show them as a hierarchical list with the [nav](dev/tags/nav.md) tag:
+Or you can show them as a hierarchical list with the [nav](dev/tags.md#nav) tag:
 
 ```twig
 {% set relatedCategories = entry.myFieldHandle.all() %}
@@ -136,7 +136,7 @@ If you just need to check if there are any related categories (but don’t need 
 {% endif %}
 ```
 
-You can set [parameters](dev/element-queries/category-queries.md#parameters) on the category query as well. For example, to only fetch the “leaves” (categories without any children), set the [leaves](dev/element-queries/category-queries.md#leaves) param:
+You can set [parameters](categories.md#parameters) on the category query as well. For example, to only fetch the “leaves” (categories without any children), set the [leaves](categories.md#leaves) param:
 
 ```twig
 {% set relatedCategories = entry.myFieldHandle
@@ -146,6 +146,6 @@ You can set [parameters](dev/element-queries/category-queries.md#parameters) on 
 
 ## See Also
 
-* [Category Queries](dev/element-queries/category-queries.md)
+* [Category Queries](categories.md#querying-categories)
 * <craft3:craft\elements\Category>
 * [Relations](relations.md)

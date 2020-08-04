@@ -12,7 +12,7 @@ Dropdown fields have the following settings:
 
 ### Querying Elements with Dropdown Fields
 
-When [querying for elements](dev/element-queries/README.md) that have a Dropdown field, you can filter the results based on the Dropdown field data using a query param named after your field’s handle.
+When [querying for elements](element-queries.md) that have a Dropdown field, you can filter the results based on the Dropdown field data using a query param named after your field’s handle.
 
 Possible values include:
 

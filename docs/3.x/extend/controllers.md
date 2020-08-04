@@ -63,7 +63,7 @@ curl -d "action=plugin-handle/controller/action" \
 
 ### Custom Route
 
-Create your own endpoint for requests with a [custom URL rule](/routing.md#advanced-routing-with-url-rules) that resolves to your controller action.
+Create your own endpoint for requests with a [custom URL rule](../routing.md#advanced-routing-with-url-rules) that resolves to your controller action.
 
 For example, in `config/routes.php`:
 
@@ -157,7 +157,7 @@ public function actionFoo(): Response
 
 If the controller action is saving something, you may want to allow forms’ `redirect` params to include dynamic tokens
 such as `{id}`, which should be replaced with the object’s attribute values. To support that, pass the object into
-[redirectToPostedUrl()](craft\web\Controller::redirectToPostedUrl()).
+[redirectToPostedUrl()](craft3:craft\web\Controller::redirectToPostedUrl()).
 
 ```php
 use yii\web\Response;
