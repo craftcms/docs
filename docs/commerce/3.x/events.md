@@ -278,6 +278,27 @@ Event::on(
     }
 );
 ```
+### `afterApplyAddLineItemToOrder`
+
+The event that is triggered after a line item has been added to an order.
+
+```php
+use craft\commerce\elements\Order;
+use craft\commerce\events\LineItemEvent;
+use craft\commerce\models\LineItem;
+use yii\base\Event;
+Event::on(
+    Order::class,
+    Order::EVENT_AFTER_APPLY_ADD_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+        // ...
+    }
+);
+```
 
 ### `afterRemoveLineItemToOrder`
 
@@ -292,6 +313,28 @@ use yii\base\Event;
 Event::on(
     Order::class,
     Order::EVENT_AFTER_REMOVE_LINE_ITEM,
+    function(LineItemEvent $event) {
+        // @var LineItem $lineItem
+        $lineItem = $event->lineItem;
+        // @var bool $isNew
+        $isNew = $event->isNew;
+        // ...
+    }
+);
+```
+
+### `afterApplyRemoveLineItemFromOrder`
+
+The event that is triggered after a line item has been removed from an order.
+
+```php
+use craft\commerce\elements\Order;
+use craft\commerce\events\LineItemEvent;
+use craft\commerce\models\LineItem;
+use yii\base\Event;
+Event::on(
+    Order::class,
+    Order::EVENT_AFTER_APPLY_REMOVE_LINE_ITEM,
     function(LineItemEvent $event) {
         // @var LineItem $lineItem
         $lineItem = $event->lineItem;
@@ -1391,7 +1434,7 @@ Event::on(
 );
 ```
 
-## Other events
+## Other Events
 
 ### `beforeSaveAddress`
 
@@ -1461,6 +1504,26 @@ Event::on(
         $address = $event->address;
 
         // Remove this address from a payment gateway
+        // ...
+    }
+);
+```
+
+### `defineAddressLines`
+
+The event that is triggered when defining the [arrayable address fields](api:craft\commerce\models\Address::getAddressLines()).
+
+```php
+use craft\commerce\events\DefineAddressLinesEvent;
+use craft\commerce\models\Address;
+use yii\base\Event;
+Event::on(
+    Address::class,
+    Address::EVENT_DEFINE_ADDRESS_LINES,
+    function(DefineAddressLinesEvent $event) {
+        // @var array $addressLines
+        $addressLines = $event->addressLines;
+        // Modify default address lines array
         // ...
     }
 );
