@@ -1,3 +1,7 @@
+---
+preheading: Tutorial
+---
+
 # Welcome to Craft CMS!
 
 This tutorial will guide you through installing Craft CMS and creating a demo blog. While it assumes you’re technically-inclined, you don’t need web development experience to follow along. You can also skip any parts you’re already familiar with.
