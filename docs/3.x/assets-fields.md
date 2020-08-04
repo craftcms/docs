@@ -101,7 +101,7 @@ If you have an element with an Assets field in your template, you can access its
 {% set query = entry.myFieldHandle %}
 ```
 
-That will give you an [asset query](dev/element-queries/asset-queries.md), prepped to output all of the related assets for the given field.
+That will give you an [asset query](assets.md#querying-assets), prepped to output all of the related assets for the given field.
 
 To loop through all of the related assets, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 

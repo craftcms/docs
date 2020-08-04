@@ -65,7 +65,7 @@ Assets, categories, entries, users, and tags each support their own set of addit
 
 
 ::: warning
-Searching is a great way to quickly query content broadly across elements, but if you’re querying field attributes the most precise way is through that field type’s [query parameter](dev/element-queries/#executing-element-queries).
+Searching is a great way to quickly query content broadly across elements, but if you’re querying field attributes the most precise way is through that field type’s [query parameter](element-queries.md#executing-element-queries).
 :::
 
 ## Templating

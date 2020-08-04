@@ -455,7 +455,7 @@ The first thing to follow “`{% nav`” is the variable name you’d like to us
 
 #### `in`
 
-Next you need to type the word “`in`”, followed by the array of entries the tag should loop through. This can be an array of elements, or an [element query](element-queries.md).
+Next you need to type the word “`in`”, followed by the array of entries the tag should loop through. This can be an array of elements, or an [element query](../element-queries.md).
 
 ::: warning
 The `{% nav %}` tag requires elements to be queried in a specific (hierarchical) order, so make sure you don’t override the `order` criteria parameter in conjunction with this tag.
@@ -509,7 +509,7 @@ The `{% paginate %}` tag has the following parameters:
 
 #### Query
 
-The first thing you pass into the `{% paginate %}` tag is a query object (such as an [element query](element-queries.md)), which defines all of the results that should be paginated. Use the `limit` parameter to define how many results should show up per page (100 by default).
+The first thing you pass into the `{% paginate %}` tag is a query object (such as an [element query](../element-queries.md)), which defines all of the results that should be paginated. Use the `limit` parameter to define how many results should show up per page (100 by default).
 
 ::: warning
 This parameter needs to be an actual query object, not an array of pre-fetched results. So don’t call `all()` on the query before passing it in.

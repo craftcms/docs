@@ -112,7 +112,7 @@ You can query more specifically by passing `relatedTo` a [hash](dev/twig-primer.
 
 | Property | Accepts | Description |
 | -------- | -------- | ----------- | -- |
-| `element`, `sourceElement`, or `targetElement` | Element ID, element, [element query](dev/element-queries/), or an array with any of those. | Use `element` for source *or* target relations, `sourceElement` for relations where provided item/set is the source, or `targetElement` for relations where provided item/set is the target. |
+| `element`, `sourceElement`, or `targetElement` | Element ID, element, [element query](element-queries.md), or an array with any of those. | Use `element` for source *or* target relations, `sourceElement` for relations where provided item/set is the source, or `targetElement` for relations where provided item/set is the target. |
 | `field` (optional) | Field handle, field ID, or an array with either of those. | Limits scope to relations created by the supplied field(s). |
 | `sourceSite` (optional) | [Site](craft3:craft\models\Site) object, site ID, or site handle. | Limits scope to relations created from the supplied site(s). |
 
