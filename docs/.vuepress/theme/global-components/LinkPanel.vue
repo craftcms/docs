@@ -1,5 +1,5 @@
 <template>
-  <fragment>
+  <div class="link-panel-wrapper">
     <RouterLink v-if="isInternal" class="link-panel" :to="link" :class="{ 'has-icon': icon }">
       <div v-if="icon" class="link-panel-icon">
         <img :src="icon" alt />
@@ -31,12 +31,16 @@
         <Octocat />
       </div>
     </a>
-  </fragment>
+  </div>
 </template>
 
 <style lang="postcss">
+.link-panel-wrapper {
+  @apply block w-1/2 mx-2 relative;
+}
+
 .link-panel {
-  @apply rounded border block w-1/2 p-4 mx-2 relative;
+  @apply rounded border block w-full p-4 ;
   transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
 
   .title {
@@ -72,7 +76,7 @@
 }
 
 @screen sm {
-  .link-panel {
+  .link-panel-wrapper {
     @apply w-1/3;
   }
 }
@@ -80,13 +84,11 @@
 
 <script>
 import { isExternal, isMailto, isTel, ensureExt } from "../util";
-import { Fragment } from "vue-fragment";
 import Octocat from "../icons/Octocat";
 
 export default {
   props: ["icon", "title", "link", "subtitle", "repo"],
   components: {
-    Fragment,
     Octocat
   },
   computed: {
