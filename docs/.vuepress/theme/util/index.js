@@ -689,7 +689,7 @@ export function getSameContentForVersion(
   strict = false
 ) {
   // default to target version in current docset
-  let targetPath = "/" + activeSet.baseDir + version + "/";
+  let targetPath = "/" + activeSet.baseDir + "/" + version + "/";
 
   const alternatePath = getAlternateVersion(
     page,
