@@ -241,7 +241,7 @@ The URL for a user to resolve billing issues with their subscription.
 Default: `''`
 
 ::: tip
-The [example templates](example-templates.md) folder contains an example of this page. It can be found at `templates/shop/services/update-billing-details.html`
+The [example templates](example-templates.md) folder contains an example of this page. It can be found at [shop/plans/update-billing-details.twig](https://github.com/craftcms/commerce/tree/master/example-templates/shop/plans/update-billing-details.twig)
 :::
 
 ## `useBillingAddressForTax`

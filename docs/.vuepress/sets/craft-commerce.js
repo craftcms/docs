@@ -87,6 +87,7 @@ module.exports = {
             "estimate-cart-addresses",
             "update-cart-addresses",
             "update-cart-customer",
+            "update-cart-custom-fields",
             "coupon-codes",
             "customer-address-management",
             "twig-filters",
