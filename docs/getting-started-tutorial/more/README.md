@@ -6,25 +6,25 @@ If you’d like to explore further, here are some immediate tasks you might tack
 
 ## Beginner: extend the demo
 
-- Expose blog post author details. (Hint: use [`dd`](https://docs.craftcms.com/v3/dev/tags/dd.html) on `entry.author` to see what’s there, or consult the [User element API documentation](https://docs.craftcms.com/api/v3/craft-elements-user.html).)
+- Expose blog post author details. (Hint: use [`dd`](/3.x/dev/tags.md#dd) on `entry.author` to see what’s there, or consult the [User element API documentation](https://docs.craftcms.com/api/v3/craft-elements-user.html).)
 - Customize the homepage (`index.twig`) to match your site.
-- Add more posts and integrate [pagination](https://docs.craftcms.com/v3/dev/tags/paginate.html) in your templates.
-- Add an RSS feed using the example [in the documentation](https://docs.craftcms.com/v3/dev/examples/rss-feed.html).
+- Add more posts and integrate [pagination](/3.x/dev/tags.md#paginate) in your templates.
+- Add an RSS feed using the example [in the documentation](/3.x/dev/examples/rss-feed.md).
 - Use the [Contact Form plugin](https://plugins.craftcms.com/contact-form) to add a form to your site.
 
 ## Intermediate: go deeper with Craft
 
 - Add a new section to the site like portfolios, press releases, or recipes.
-- Add multiple [sites](https://docs.craftcms.com/v3/sites.html) to your installation that cross-promote content or offer it [in different languages](https://docs.craftcms.com/v3/localization.html).
-- Add a [Structure section](https://docs.craftcms.com/v3/sections-and-entries.html#sections) to the site for creating specialized marketing landing pages.
+- Add multiple [sites](/3.x/sites.md) to your installation that cross-promote content or offer it [in different languages](/3.x/sites.md#setting-up-a-localized-site).
+- Add a [Structure section](/3.x/entries.md#sections) to the site for creating specialized marketing landing pages.
 - Create a store using [Craft Commerce](https://craftcms.com/commerce).
-- Optimize template performance with [caching](https://docs.craftcms.com/v3/dev/tags/cache.html) and [eager loading](https://docs.craftcms.com/v3/dev/eager-loading-elements.html).
+- Optimize template performance with [caching](/3.x/dev/tags.md#cache) and [eager loading](/3.x/dev/eager-loading-elements.md).
 
 ## Advanced: extend Craft’s core functionality
 
-- [Build a custom plugin or module](https://docs.craftcms.com/v3/extend/) using your own business logic.
+- [Build a custom plugin or module](/3.x/extend/) using your own business logic.
 - Familiarize yourself with [the Yii 2.0 documentation](https://www.yiiframework.com/doc/guide/2.0/en), since Craft CMS is an application built on that framework.
 
 ## Additional Resources
 
-This tutorial is an introduction to the more in-depth [official documentation](https://docs.craftcms.com/v3/). Take a look, [join us in Discord](https://craftcms.com/discord), and we hope you’ll build something great with Craft CMS!
+This tutorial is an introduction to the more in-depth [official documentation](/3.x/). Take a look, [join us in Discord](https://craftcms.com/discord), and we hope you’ll build something great with Craft CMS!
