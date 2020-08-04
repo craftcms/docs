@@ -94,7 +94,7 @@ This field takes plain text as well as Twig values. Two special variables are av
 
 ### HTML Email Template Path
 
-The path to a HTML template in your site’s `templates/` folder.
+The path to an HTML template in your site’s `templates/` folder.
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
