@@ -137,7 +137,7 @@ If you just need to check if there are any related assets (but don’t need to f
 {% endif %}
 ```
 
-You can set [parameters](dev/element-queries/asset-queries.md#parameters) on the asset query as well. For example, to ensure that only images are returned, you can set the [kind](dev/element-queries/asset-queries.md#kind) param:
+You can set [parameters](assets.md#parameters) on the asset query as well. For example, to ensure that only images are returned, you can set the [kind](assets.md#kind) param:
 
 ```twig
 {% set relatedAssets = clone(entry.myFieldHandle)
