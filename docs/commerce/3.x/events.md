@@ -1511,7 +1511,7 @@ Event::on(
 
 ### `defineAddressLines`
 
-The event that is triggered when defining the [arrayable address fields](api:craft\commerce\models\Address::getAddressLines()).
+The event that is triggered when defining the [arrayable address fields](commerce3:craft\commerce\models\Address::getAddressLines()).
 
 ```php
 use craft\commerce\events\DefineAddressLinesEvent;
