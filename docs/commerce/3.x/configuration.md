@@ -171,12 +171,6 @@ Determines what URL the customer should be redirected to after loading a cart vi
 
 Default: `siteUrl()`
 
-## `mergeLastCartOnLogin`
-
-Determines whether a user’s previous cart should be merged with the active cart after they log in.
-
-Default: `true`
-
 ## `pdfAllowRemoteImages`
 
 Determines whether order PDFs can include remote images.
