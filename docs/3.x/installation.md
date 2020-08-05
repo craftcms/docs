@@ -74,6 +74,7 @@ For Craft to run properly, PHP needs to be able to write to the following places
 - `composer.json`
 - `composer.lock`
 - `config/license.key`
+- `config/project/*`
 - `storage/*`
 - `vendor/*`
 - `web/cpresources/*`
