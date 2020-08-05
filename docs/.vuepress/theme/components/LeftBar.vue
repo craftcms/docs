@@ -114,7 +114,7 @@
 
 @media screen and (min-width: 1408px) {
   .left-bar-links.has-bottom {
-    height: calc(100vh - 180px - 3rem - 3rem);
+    height: calc(100vh - 180px - 6.5rem);
   }
 }
 
