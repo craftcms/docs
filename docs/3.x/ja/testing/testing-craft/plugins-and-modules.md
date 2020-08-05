@@ -6,8 +6,7 @@ Setting up modules for testing is quite simple. Ensure that an `app.php` is pres
 
 ## Testing Plugins
 
-Plugins must be registered via the `codeception.yml` file in accordance with the [configuration options](../framework/config-options.md#plugins). Once it’s registered the plugin will be installed and available via
-`MyPlugin::getInstance()`.
+Plugins must be registered via the `codeception.yml` file in accordance with the [configuration options](../framework/config-options.md#plugins). Once it’s registered the plugin will be installed and available via `MyPlugin::getInstance()`.
 
 ::: tip
 Unsure where to start with tests for your module or plugin? See [Getting Started](getting-started.md).
