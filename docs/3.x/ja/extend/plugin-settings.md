@@ -4,7 +4,9 @@
 
 グローバル設定を持つプラグインは、設定値の保存と検証のための責任を持つ「設定モデル」を定義する必要があります。
 
-設定モデルは、他のいかなる [model](https://www.yiiframework.com/doc/guide/2.0/en/structure-models) とも全く同じです。作成するには、プラグインのソースディレクトリ内に `models/` ディレクトリを作成し、その中に `Settings.php` ファイルを作成します。
+This “settings model” is responsible for storing and validating the setting values.
+
+設定モデルは、他のいかなる [model](https://www.yiiframework.com/doc/guide/2.0/en/structure-models) とも全く同じです。 作成するには、プラグインのソースディレクトリ内に `models/` ディレクトリを作成し、その中に `Settings.php` ファイルを作成します。
 
 ```php
 <?php
@@ -28,7 +30,7 @@ class Settings extends Model
 }
 ```
 
-次に、メインプラグインクラスに設定モデルの新しいインスタンスを返す `createSettingsModel()` メソッドを追加します。
+設定モデルと `createSettingsModel()` メソッドを適切に配置すると、メインプラグインクラスの `getSettings()` メソッド経由で、現在のプロジェクトにセットされたすべてのカスタム値が入った設定モデルにアクセスできるようになります。
 
 ```php
 <?php
@@ -45,9 +47,21 @@ class Plugin extends \craft\base\Plugin
 }
 ```
 
+&lt;?php namespace ns\prefix; class Plugin extends \craft\base\Plugin
+{
+    public $hasCpSettings = true;
+
+    protected function createSettingsModel()
+    {
+        return new \ns\prefix\models\Settings();
+    }
+ protected function settingsHtml()
+    { return \Craft::$app-&gt;getView()-&gt;renderTemplate('plugin-handle/settings', [ 'settings' =&gt; $this-&gt;getSettings() ]); } // ...
+:::
+
 ## 設定へのアクセス
 
-設定モデルと `createSettingsModel()` メソッドを適切に配置すると、メインプラグインクラスの `getSettings()` メソッド経由で、現在のプロジェクトにセットされたすべてのカスタム値が入った設定モデルにアクセスできるようになります。
+次に、メインプラグインクラスに設定モデルの新しいインスタンスを返す `createSettingsModel()` メソッドを追加します。
 
 ```php
 // From your main plugin class:
@@ -57,7 +71,7 @@ $foo = $this->getSettings()->foo;
 $foo = \ns\prefix\Plugin::getInstance()->getSettings()->foo;
 ```
 
-または、`$settings` マジックプロパティを使用できます。
+ファイルは、上書きしたい値を持つ配列を返すだけです。
 
 ```php
 // From your main plugin class:
@@ -69,9 +83,11 @@ $foo = \ns\prefix\Plugin::getInstance()->settings->foo;
 
 ## 設定値の上書き
 
-設定値は、プラグインハンドルの名前にちなんだプロジェクトの`config/` フォルダに含まれる PHP ファイルから、プロジェクトごとに上書きできます。例えば、プラグインハンドルが `foo-bar` の場合、その設定は `config/foo-bar.php` ファイルから上書きできます。
+設定値は、プラグインハンドルの名前にちなんだプロジェクトの`config/` フォルダに含まれる PHP ファイルから、プロジェクトごとに上書きできます。 例えば、プラグインハンドルが `foo-bar` の場合、その設定は `config/foo-bar.php` ファイルから上書きできます。
 
-ファイルは、上書きしたい値を持つ配列を返すだけです。
+::: warning
+設定ファイルは、プラグインの設定モデルで定義されていないキーを含めることはできません。
+:::
 
 ```php
 <?php
@@ -82,8 +98,7 @@ return [
 ];
 ```
 
-マルチ環境設定も可能です。
-
+プラグインは、管理者がプラグインに依存する設定値を管理しやすくするために、コントロールパネルに設定ページを提供することもできます。
 
 ```php
 <?php
@@ -99,14 +114,14 @@ return [
 ```
 
 ::: warning
-設定ファイルは、プラグインの設定モデルで定義されていないキーを含めることはできません。
+The config file cannot contain any keys that are not defined in the plugin’s settings model.
 :::
 
 ## 設定ページ
 
-プラグインは、管理者がプラグインに依存する設定値を管理しやすくするために、コントロールパネルに設定ページを提供することもできます。
+次に、メインプラグインクラス内で `$hasCpSettings` プロパティを `true` にセットし、新しいレンダリングテンプレートを返す `settingsHtml()` メソッドを定義します。
 
-プラグインに設定ページを追加するには、プラグインのソースディレクトリに `templates/` フォルダを作成し、その中に  `settings.twig` ファイルを作成します。
+これで、プラグインは設定ページの独自アイコンと「設定 > プラグイン」ページの自身の行へ `/admin/settings/plugin-handle` にリンクする歯車アイコンを表示するようになります。
 
 ```twig
 {% import "_includes/forms" as forms %}
@@ -125,12 +140,12 @@ return [
 }) }}
 ```
 
-次に、メインプラグインクラス内で `$hasCpSettings` プロパティを `true` にセットし、新しいレンダリングテンプレートを返す `settingsHtml()` メソッドを定義します。
+Then, within your main plugin class, set the `$hasCpSettings` property to `true`, and define a `settingsHtml()` method that returns your new rendered template:
 
 ```php
 <?php
 
-namespace ns\prefix;
+namespace mynamespace;
 
 class Plugin extends \craft\base\Plugin
 {
@@ -138,27 +153,28 @@ class Plugin extends \craft\base\Plugin
 
     protected function createSettingsModel()
     {
-        return new \ns\prefix\models\Settings();
+        return new \mynamespace\models\Settings();
     }
 
     protected function settingsHtml()
     {
-        return \Craft::$app->getView()->renderTemplate('plugin-handle/settings', [
-            'settings' => $this->getSettings()
-        ]);
+        return \Craft::$app->getView()->renderTemplate(
+            'my-plugin-handle/settings',
+            [ 'settings' => $this->getSettings() ]
+        );
     }
 
     // ...
 }
 ```
 
-これで、プラグインは設定ページの独自アイコンと「設定 > プラグイン」ページの自身の行へ `/admin/settings/plugin-handle` にリンクする歯車アイコンを表示するようになります。
+プラグインが設定ページをもっとコントルールスル必要がある場合、`getSettingsResponse()` メソッドを上書きして、リクエストでしたいことを実行できます。
 
 ### 高度な設定ページ
 
-コントロールパネル URL の `/admin/settings/plugin-handle` がリクエストされると、プラグインは最終的にレスポンスを担当します。すなわち、プラグインの `getSettingsResponse()` メソッドです。<craft3:craft\base\Plugin> のデフォルトの `getSettingsResponse()` 実装は、プラグインの `settingsHtml()` メソッドを呼び出します。そして、Craft の（プラグイン設定ページのレイアウトテンプレートである）`settings/plugins/_settings` テンプレートをレンダリングし、`settingsHtml()` によって返された HTML を渡すようアクティブなコントローラーに伝えます。
+コントロールパネル URL の `/admin/settings/plugin-handle` がリクエストされると、プラグインは最終的にレスポンスを担当します。 すなわち、プラグインの `getSettingsResponse()` メソッドです。 <craft3:craft\base\Plugin> のデフォルトの `getSettingsResponse()` 実装は、プラグインの `settingsHtml()` メソッドを呼び出します。 そして、Craft の（プラグイン設定ページのレイアウトテンプレートである）`settings/plugins/_settings` テンプレートをレンダリングし、`settingsHtml()` によって返された HTML を渡すようアクティブなコントローラーに伝えます。
 
-プラグインが設定ページをもっとコントルールスル必要がある場合、`getSettingsResponse()` メソッドを上書きして、リクエストでしたいことを実行できます。
+リクエストを全く別の URL にリダイレクトすることもできます。
 
 それは Craft の `settings/plugins/_settings` レイアウトに制限されず、テンプレート独自のテンプレートをレンダリングするよう選択できます。
 
@@ -169,7 +185,7 @@ public function getSettingsResponse()
 }
 ```
 
-リクエストを全く別の URL にリダイレクトすることもできます。
+It can redirect the request to a completely different URL, too:
 
 ```php
 public function getSettingsResponse()
@@ -180,4 +196,4 @@ public function getSettingsResponse()
 }
 ```
 
-そこで返るものは、そこで正に起きている何かであるため、コントローラーアクションが返す何かとして筋が通っている必要があることに注意してください。<craft3:craft\controllers\PluginsController::actionEditPluginSettings()> メソッドは、`getSettingsResponse()` の戻り値を直接返します。
+そこで返るものは、そこで正に起きている何かであるため、コントローラーアクションが返す何かとして筋が通っている必要があることに注意してください。 <craft3:craft\controllers\PluginsController::actionEditPluginSettings()> メソッドは、`getSettingsResponse()` の戻り値を直接返します。
