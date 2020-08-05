@@ -2,11 +2,14 @@
 
 Craft は古いデータを削除するためにいくつかのガベージコレクションルーチンを実行することがあります。
 
-- （コンフィグ設定の <config3:purgePendingUsersDuration> ごとに）期限切れの保留中のユーザーアカウントを削除します。
-- （コンフィグ設定の <config3:softDeleteDuration> ごとに）期限切れのソフトデリート行を完全に削除します。
+- （コンフィグ設定の <config3:purgeUnsavedDraftsDuration> （コンフィグ設定の
+- Delete expired template caches.
+- ごとに）期限切れの保留中のユーザーアカウントを削除します。 <config3:purgePendingUsersDuration> config setting).
+- ごとに）期限切れのソフトデリート行を完全に削除します。 <config3:softDeleteDuration> config setting).
 - 古いユーザーセッションデータを削除します。
+- Delete orphaned search indexes (any indexes belonging to elements that don’t exist anymore).
 
-デフォルトでは、すべてのウェブリクエストがガベージコレクションを発動する 100,000 分の 1 のチャンスを持っています。それは <craft3:craft\services\Gc::$probability> を上書きすることによって `config/app.php` から設定できます。
+デフォルトでは、すべてのウェブリクエストがガベージコレクションを発動する 100,000 分の 1 のチャンスを持っています。 それは <craft3:craft\services\Gc::$probability> を上書きすることによって `config/app.php` から設定できます。
 
 ```php
 return [
@@ -33,7 +36,7 @@ return [
 ./craft gc
 ```
 
-シェルが対話型である場合、Craft がすべての破棄済み項目を削除すべきかどうか尋ねられます。プロンプトで `yes` を入力した場合、まだ [softDeleteDuration](config3:softDeleteDuration) に満たないものでも、ソフトデリートされたすべてのデータベース行が即座に完全に削除されます。
+シェルが対話型である場合、Craft がすべての破棄済み項目を削除すべきかどうか尋ねられます。 プロンプトで `yes` を入力した場合、まだ [softDeleteDuration](config3:softDeleteDuration) に満たないものでも、ソフトデリートされたすべてのデータベース行が即座に完全に削除されます。
 
 `delete-all-trashed` オプションを使用して、すべてのソフトデリート行を強制削除することもできます。
 
