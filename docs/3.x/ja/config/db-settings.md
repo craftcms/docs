@@ -2,7 +2,7 @@
 
 Craft は、Craft がどのようにデータベースへ接続するかを制御するためのいくつかのデータベース接続設定をサポートしています。
 
-最終的に、データベース接続設定は `config/db.php` からセットしなければなりません。しかし、最初に（`.env` ファイルのような）環境変数としてセットしてから、`config/db.php` 内で [getenv()](http://php.net/manual/en/function.getenv.php) を使用して環境変数の値を取得することを推奨します。
+最終的に、データベース接続設定は `config/db.php` からセットしなければなりません。 しかし、最初に（`.env` ファイルのような）環境変数としてセットしてから、`config/db.php` 内で [getenv()](http://php.net/manual/en/function.getenv.php) を使用して環境変数の値を取得することを推奨します。
 
 例えば、新しい Craft 3 プロジェクト内の `.env` ファイルでは、次の環境変数を定義する必要があります。
 
@@ -34,37 +34,41 @@ return [
 ];
 ```
 
-私たちがこのような環境変数のアプローチを推奨するには、2つの理由があります。
-
-1. 機密情報をプロジェクトのコードベースから守ります。（`.env` ファイルは、共有したり Git にコミットするべきではありません。）
-2. それぞれの開発者が他者の設定を上書きすることなく独自の設定を定義できるため、他の開発者とのコラボレーションを容易にします。
+::: tip
+You may also provide a `DB_DSN` environment variable. If defined, Craft will use that.
+:::
 
 Craft がサポートするデータベース接続設定の完全なリストは、次の通りです。
+
+1. 機密情報をプロジェクトのコードベースから守ります。 （`.env` ファイルは、共有したり Git にコミットするべきではありません。
+2. それぞれの開発者が他者の設定を上書きすることなく独自の設定を定義できるため、他の開発者とのコラボレーションを容易にします。
+
+許可される型 :
 
 <!-- BEGIN SETTINGS -->
 
 ### `attributes`
 
-許可される型
+許可される型 :
 :
 
 [array](http://php.net/language.types.array)
 
-デフォルト値
+デフォルト値 :
 :
 
 `[]`
 
-定義元
+定義元 :
 :
 
 [DbConfig::$attributes](craft3:craft\config\DbConfig::$attributes)
 
 
 
-PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
+An array of key => value pairs of PDO attributes to pass into the PDO constructor.
 
-例えば、MySQL PDO ドライバ（http://php.net/manual/en/ref.pdo-mysql.php）を使用する場合、（MySQL で SSL が利用できると仮定する https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html）SSL データベース接続で `'user'` が SSL 経由で接続できる場合、次のように設定します。
+デフォルト値 :
 
 ```php
 [
@@ -78,93 +82,95 @@ PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 
 ### `charset`
 
-許可される型
+許可される型 :
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値
+デフォルト値 :
 :
 
 `'utf8'`
 
-定義元
+定義元 :
 :
 
 [DbConfig::$charset](craft3:craft\config\DbConfig::$charset)
 
 
 
-テーブルを作成する際に使用する文字セット。
+The charset to use when creating tables.
 
 
 
 ### `database`
 
-許可される型
+許可される型 :
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値
+デフォルト値 :
 :
 
-`''`
+`null`
 
-定義元
+定義元 :
 :
 
 [DbConfig::$database](craft3:craft\config\DbConfig::$database)
 
 
 
-選択するデータベースの名前。
+定義元 :
 
 
 
 ### `driver`
 
-許可される型
+許可される型 :
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値
+デフォルト値 :
 :
 
-`self::DRIVER_MYSQL`
+`null`
 
-定義元
+定義元 :
 :
 
 [DbConfig::$driver](craft3:craft\config\DbConfig::$driver)
 
 
 
-使用するデータベースのドライバ。MySQL 向けの 'mysql'、または、PostgreSQL 向けの 'pgsql'。
+使用するデータベースのドライバ。 MySQL 向けの 'mysql'、または、PostgreSQL 向けの 'pgsql'。
 
 
 
 ### `dsn`
 
-許可される型
+許可される型 :
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値
+デフォルト値 :
 :
 
 `null`
 
-定義元
+定義元 :
 :
 
 [DbConfig::$dsn](craft3:craft\config\DbConfig::$dsn)
 
 
 
-手動で PDO DSN 接続文字列を指定する場合は、ここで設定できます。
+PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
+
+DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by driver-specific parameters. For example, `mysql:host=127.0.0.1;port=3306;dbname=acme_corp`.
 
 - MySQL: http://php.net/manual/en/ref.pdo-mysql.connection.php
 - PostgreSQL: http://php.net/manual/en/ref.pdo-pgsql.connection.php これを設定すると、コンフィグ設定の [server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server)、[port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port)、[user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user)、[password](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#password)、[database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database)、[driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver)、および、[unixSocket](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#unixsocket) は無視されます。
@@ -173,180 +179,180 @@ PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 
 ### `password`
 
-許可される型
+許可される型 :
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値
+デフォルト値 :
 :
 
 `''`
 
-定義元
+定義元 :
 :
 
 [DbConfig::$password](craft3:craft\config\DbConfig::$password)
 
 
 
-接続するデータベースのパスワード。
+許可される型 :
 
 
 
 ### `port`
 
-許可される型
+許可される型 :
 :
 
 [integer](http://php.net/language.types.integer)
 
-デフォルト値
+デフォルト値 :
 :
 
 `null`
 
-定義元
+定義元 :
 :
 
 [DbConfig::$port](craft3:craft\config\DbConfig::$port)
 
 
 
-データベースサーバーのポート。デフォルトは、MySQL 向けの 3306、および、PostgreSQL 向けの 5432。
+データベースサーバーのポート。 デフォルトは、MySQL 向けの 3306、および、PostgreSQL 向けの 5432。
 
 
 
 ### `schema`
 
-許可される型
+許可される型 :
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値
+デフォルト値 :
 :
 
 `'public'`
 
-定義元
+定義元 :
 :
 
 [DbConfig::$schema](craft3:craft\config\DbConfig::$schema)
 
 
 
-使用するデータベースのスキーマ（PostgreSQL のみ）。
+デフォルト値 :
 
 
 
 ### `server`
 
-許可される型
+許可される型 :
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値
+デフォルト値 :
 :
 
-`'localhost'`
+`null`
 
-定義元
+定義元 :
 :
 
 [DbConfig::$server](craft3:craft\config\DbConfig::$server)
 
 
 
-データベースのサーバー名、または、IP アドレス。通常は 'localhost' または '127.0.0.1' です。
+データベースのサーバー名、または、IP アドレス。 通常は 'localhost' または '127.0.0.1' です。
 
 
 
 ### `tablePrefix`
 
-許可される型
+許可される型 :
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値
+デフォルト値 :
 :
 
 `''`
 
-定義元
+定義元 :
 :
 
 [DbConfig::$tablePrefix](craft3:craft\config\DbConfig::$tablePrefix)
 
 
 
-共有するCraft のインストールを単一のデータベース（MySQL）、または、単一のデータベースで共有スキーマ（PostgreSQL）を使用する場合、インストールごとにテーブル名の競合を避けるために、テーブル接頭辞をセットできます。これは5文字以内、かつ、すべて小文字でなければなりません。
+共有するCraft のインストールを単一のデータベース（MySQL）、または、単一のデータベースで共有スキーマ（PostgreSQL）を使用する場合、インストールごとにテーブル名の競合を避けるために、テーブル接頭辞をセットできます。 これは5文字以内、かつ、すべて小文字でなければなりません。
 
 
 
 ### `unixSocket`
 
-許可される型
+Allowed types
 :
 
 [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
-デフォルト値
+デフォルト値 :
 :
 
 `null`
 
-定義元
+定義元 :
 :
 
 [DbConfig::$unixSocket](craft3:craft\config\DbConfig::$unixSocket)
 
 
 
-MySQL のみ。セットされている場合、（yiic で使用される）CLI 接続文字列は、 サーバーやポートの代わりに Unix ソケットに接続します。これを指定すると、'server' と 'port' 設定が無視されます。
+MySQL のみ。 セットされている場合、（yiic で使用される）CLI 接続文字列は、 サーバーやポートの代わりに Unix ソケットに接続します。 これを指定すると、'server' と 'port' 設定が無視されます。
 
 
 
 ### `url`
 
-許可される型
+Allowed types
 :
 
 [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
-デフォルト値
+Default value
 :
 
 `null`
 
-定義元
+定義元 :
 :
 
 [DbConfig::$url](craft3:craft\config\DbConfig::$url)
 
 
 
-ホスティング環境によって提供された場合、データベースの接続 URL。
+テーブルを作成する際に使用する文字セット。
 
-これがセットされている場合、[driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver)、[user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user)、[database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database)、[server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server)、[port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port)、および、[database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database) の値は、そこから抽出されます。
+許可される型 :
 
 
 
 ### `user`
 
-許可される型
+Allowed types
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値
+Default value
 :
 
 `'root'`
 
-定義元
+Defined by
 :
 
 [DbConfig::$user](craft3:craft\config\DbConfig::$user)
@@ -359,4 +365,3 @@ MySQL のみ。セットされている場合、（yiic で使用される）CLI
 
 
 <!-- END SETTINGS -->
-
