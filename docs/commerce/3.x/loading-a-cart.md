@@ -12,7 +12,7 @@ If the cart being loaded belongs to a user, the user must be logged in to load i
 
 Loading a cart using a form requires passing a cart `number` to the `commerce/cart/load-cart` action.
 
-A working example can be seen in the [example templates](https://github.com/craftcms/commerce/tree/master/templates/shop/cart/load.twig). Below is a simplified version of that form.
+A working example can be seen in the [example templates](https://github.com/craftcms/commerce/tree/master/example-templates/shop/cart/load.twig). Below is a simplified version of that form.
 
 ```twig
 <form method="post">
