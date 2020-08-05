@@ -14,16 +14,13 @@ For traditional database rows regular fixtures will suffice. However Craft intro
 
 Element types are one of Craft’s main selling points for developers. They yield a lot of power. That power is courtesy of a complicated data structure and set of APIs. A by-product of this is that some heavy lifting is required if element types are to be defined in a single fixture and data file. For this reason support is provided out of the box for setting up various element types.
 
-Provide your own custom element type?
-You can extend `craft\test\fixtures\elements\ElementFixture` to provide developers using your module/plugin support
-for their testing code - or just provide yourself support for testing your own module/plugin.
+Provide your own custom element type? You can extend `craft\test\fixtures\elements\ElementFixture` to provide developers using your module/plugin support for their testing code - or just provide yourself support for testing your own module/plugin.
 
 ::: tip
-Craft’s element fixtures are based on the excellent team over at [robuust](https://robuust.digital/)
-and their `craft-fixtures` [plugin](https://github.com/robuust/craft-fixtures).
+Craft’s element fixtures are based on the excellent team over at [robuust](https://robuust.digital/) and their `craft-fixtures` [plugin](https://github.com/robuust/craft-fixtures).
 :::
 
-### `Asset fixtures`
+### Asset fixtures
 
 If you want to add fixtures for Assets, extend `craft\test\fixtures\elements\AssetFixture`.
 
@@ -51,11 +48,10 @@ This will upload and link `product.jpg` as an asset.
 The primary keys are: `volumeId`, `folderId`, `filename` and `title`.
 
 ::: warning
-The `AssetFixture` class will automatically copy your assets into the `tests/_craft/storage/runtime/temp` folder.
-Please ensure that the `tempFilePath` points to a filename this directory.
+The `AssetFixture` class will automatically copy your assets into the `tests/_craft/storage/runtime/temp` folder. Please ensure that the `tempFilePath` points to a filename this directory.
 :::
 
-### `Category fixtures`
+### Category fixtures
 
 Extend `craft\test\fixtures\elements\CategoryFixture` to add categories.
 
@@ -76,7 +72,7 @@ return [
 
 The primary keys are: `siteId`, `groupId` and `title`.
 
-### `Entry fixtures`
+### Entry fixtures
 
 Extend `craft\test\fixtures\elements\EntryFixture` to add entries.
 
@@ -98,7 +94,7 @@ return [
 
 The primary keys are: `siteId`, `sectionId`, `typeId` and `title`.
 
-### `Global set fixture`
+### Global set fixture
 
 Extend `craft\test\fixtures\elements\GlobalSetFixture` to add Global Sets.
 
@@ -120,7 +116,7 @@ The primary keys are: `handle`.
 Global sets do not get their own database row by default. If you need the Global Sets to have their own database row you can set `$useActiveRecord` to `true`.
 :::
 
-### `Tag fixtures`
+### Tag fixtures
 
 Extend `craft\test\fixtures\elements\TagFixture` to add tags.
 
@@ -141,7 +137,7 @@ return [
 
 The primary keys are: `siteId`, `groupId` and `title`.
 
-### `User fixtures`
+### User fixtures
 
 Extend `craft\test\fixtures\elements\UserFixture` to add users.
 
@@ -294,6 +290,5 @@ return [
 ```
 
 ::: tip
-The value part of the key-value pairs can be set to whatever is required
-for your project. It’s crucial that the array keys are set with **any** string value. You can add your own parameters to the array value of the `field` key, as long as they correspond to `public` properties in the class defined in the `fieldType` key.
+The value part of the key-value pairs can be set to whatever is required for your project. It’s crucial that the array keys are set with **any** string value. You can add your own parameters to the array value of the `field` key, as long as they correspond to `public` properties in the class defined in the `fieldType` key.
 :::
