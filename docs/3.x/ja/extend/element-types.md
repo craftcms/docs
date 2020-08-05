@@ -12,7 +12,7 @@ Craft には、7つの組み込みフィールドタイプがあります。
 - <craft3:craft\elements\Tag>
 - <craft3:craft\elements\User>
 
-これらのクラスの実例を参照できます。それらは `vendor/craftcms/cms/src/elements/` にあります。
+これらのクラスの実例を参照できます。 それらは `vendor/craftcms/cms/src/elements/` にあります。
 
 プラグインが新しいコンテンツタイプを提供する必要がある場合、エレメントタイプとして設計することが通常は最善の方法です。
 
@@ -20,7 +20,7 @@ Craft には、7つの組み込みフィールドタイプがあります。
 
 ### エレメントクラス
 
-エレメントタイプは、<craft3:craft\base\ElementInterface> と <craft3:craft\base\ElementTrait> を実装するクラスによって定義されます。クラスは、（静的メソッドで）エレメントタイプについての様々なことと伝える手段としてだけでなく、その型のエレメントがインスタンス化されるモデルとしても役立ちます。
+エレメントタイプは、<craft3:craft\base\ElementInterface> と <craft3:craft\base\ElementTrait> を実装するクラスによって定義されます。 クラスは、（静的メソッドで）エレメントタイプについての様々なことと伝える手段としてだけでなく、その型のエレメントがインスタンス化されるモデルとしても役立ちます。
 
 便利なものとして、基本エレメントタイプの実装を提供する <craft3:craft\base\Element> を拡張できます。
 
@@ -52,7 +52,7 @@ class Product extends Element
 
 ### データベーステーブル
 
-`elements` データベーステーブルのカラムにフィットしない、エレメント自身について保存したいことがあるでしょう。そこで、その情報を保持するための新しいテーブルを作成する必要があります。
+`elements` データベーステーブルのカラムにフィットしない、エレメント自身について保存したいことがあるでしょう。 そこで、その情報を保持するための新しいテーブルを作成する必要があります。
 
 （まだ用意していない場合）[インストールマイグレーション](migrations.md#plugin-install-migrations)を作成し、 `safeUp()` メソッドにこれを追加してください。
 
@@ -77,12 +77,12 @@ if (!$this->db->tableExists('{{%products}}')) {
 ```
 
 ::: tip
-既存のプラグインのアップデートとしてこれを追加する場合、同様に新しい通常のマイグレーションを作成し、同じコードをその中にコピーする必要があります。
+既存のプラグインのアップデートとしてこれを追加する場合、同様に新しい通常のマイグレーションを作成し、同じコードをその中にコピーする必要があります。 :::
 :::
 
 プラグインをインストールすると、データベーステーブルが作成されるでしょう。
 
-エレメントが保存された際、エレメントテーブルをアップデートし続ける責任があるエレメントクラスに `afterSave()` メソッドを追加する必要もあります。`afterSave()` メソッドは、エレメントを保存する標準的な[制御フロー](services.md#interface-oriented-methods)の一部です。
+エレメントが保存された際、エレメントテーブルをアップデートし続ける責任があるエレメントクラスに `afterSave()` メソッドを追加する必要もあります。 `afterSave()` メソッドは、エレメントを保存する標準的な[制御フロー](services.md#interface-oriented-methods)の一部です。
 
 ```php
 public function afterSave(bool $isNew)
@@ -108,23 +108,25 @@ public function afterSave(bool $isNew)
 }
 ```
 
-すべてのエレメントタイプは、対応するエレメントクエリクラスが必要です。エレメントクエリクラスは、エレメントを取得するためにチューニングされた[クエリビルダー](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder)の拡張です。
+::: tip
+`afterSave()` gets called by <craft3:craft\services\Elements::saveElement()>, after the main element rows in the `elements`, `elements_sites`, and `content` tables have been saved, and the element has been assigned an `id` and `uid` (if new).
+:::
 
 ### エレメントクエリクラス
 
-すべてのエレメントクエリクラスは、基本機能を提供する <craft3:craft\elements\db\ElementQuery> を拡張する必要があります。
+すべてのエレメントタイプは、対応するエレメントクエリクラスが必要です。 エレメントクエリクラスは、エレメントを取得するためにチューニングされた[クエリビルダー](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder)の拡張です。
 
 それらには、3つの責任があります。
 
-実例として、Craft 独自のエレメントクラスを参照できます。それらは `vendor/craftcms/cms/src/elements/db/` にあります。
+They have three responsibilities:
 
 - カスタム基準パラメータをキャプチャするためのパブリックプロパティと Setter メソッドを提供します
 - カスタムエレメントテーブルに結合し、その中にある適切なカラムを選択します
 - カスタム基準パラメータをクエリの条件として適用します
 
-プラグインにエレメントクエリを渡すために、`elements/` ディレクトリ内に `db/` ディレクトリを作成し、提供したいエレメントクエリにちなんで名付けられた PHP クラスファイルを作成します（例：`ProductQuery.php`）。
+実例として、Craft 独自のエレメントクラスを参照できます。 それらは `vendor/craftcms/cms/src/elements/db/` にあります。
 
-エレメントクエリクラスが配置されていれば、最後のステップはエレメントタイプに結びつけることです。エレメントクラスに次のメソッドを追加してください。
+プラグインにエレメントクエリを渡すために、`elements/` ディレクトリ内に `db/` ディレクトリを作成し、提供したいエレメントクエリにちなんで名付けられた PHP クラスファイルを作成します（例：`ProductQuery.php`）。
 
 ```php
 <?php
@@ -178,7 +180,7 @@ class ProductQuery extends ElementQuery
 }
 ```
 
-あなたの型のエレメント向けに照会しはじめる準備ができました。
+エレメントクエリクラスが配置されていれば、最後のステップはエレメントタイプに結びつけることです。 エレメントクラスに次のメソッドを追加してください。
 
 ```php
 use craft\elements\db\ElementQueryInterface;
@@ -197,7 +199,7 @@ class Product
 }
 ```
 
-その裏で、<craft3:craft\elements\db\ElementQuery> は2つの <craft3:craft\db\Query> インスタンスを作成します。メインクエリ（`$this->query`）とサブクエリ（`$this->subQuery`）です。カラムの選択はメインクエリで行い、条件 / 結合はサブクエリに適用する必要があります。最終的に、サブクエリはメインクエリの `FROM` 句になります。
+あなたの型のエレメント向けに照会しはじめる準備ができました。
 
 ```php
 Product::find()
@@ -207,13 +209,13 @@ Product::find()
 
 #### `$this->query` 対 `$this->subQuery`
 
-このように分かれている理由は、パフォーマンスです。一時テーブルでコストの高い条件操作を実行する必要を避け、どのカラムを選択するかなどを気にすることなく、どのエレメント行を取得するかを MySQL / PostgreSQL が正確に把握できるようにします。
+その裏で、<craft3:craft\elements\db\ElementQuery> は2つの <craft3:craft\db\Query> インスタンスを作成します。 メインクエリ（`$this->query`）とサブクエリ（`$this->subQuery`）です。 カラムの選択はメインクエリで行い、条件 / 結合はサブクエリに適用する必要があります。 最終的に、サブクエリはメインクエリの `FROM` 句になります。
 
-テンプレートでエレメントを照会できるようにする場合、新しいエレメントクエリを返す新しいテンプレートファンクションを作成できます。（詳細については、[Twig の拡張](extending-twig.md) を参照してください。）
+このように分かれている理由は、パフォーマンスです。 一時テーブルでコストの高い条件操作を実行する必要を避け、どのカラムを選択するかなどを気にすることなく、どのエレメント行を取得するかを MySQL / PostgreSQL が正確に把握できるようにします。
 
 ### テンプレートファンクション
 
-エレメントが `content` テーブル内の独自の行を取得する必要がある場合、[タイトル](#titles)や[コンテンツフィールド](#custom-fields)を持つ必要があるため、エレメントクラスに static な `hasContent()` メソッドを追加します。
+テンプレートでエレメントを照会できるようにする場合、新しいエレメントクエリを返す新しいテンプレートファンクションを作成できます。 （詳細については、[Twig の拡張](extending-twig.md) を参照してください。 ）
 
 ```php
 <?php
@@ -260,7 +262,7 @@ public static function hasTitles(): bool
 }
 ```
 
-エレメントタイプでカスタムフィールドをサポートする場合、エレメントタイプのフィールドレイアウトを管理するためにコントロールパネル内のどこかにページを作成する必要があります。Craft は Field Layout Designer を出力するテンプレートのインクルードを提供します。
+エレメントが `content` テーブル内の独自の行を取得する必要がある場合、[タイトル](#titles)や[コンテンツフィールド](#custom-fields)を持つ必要があるため、エレメントクラスに static な `hasContent()` メソッドを追加します。
 
 ```php
 public function getEditorHtml(): string
@@ -291,7 +293,7 @@ public function getEditorHtml(): string
 
 #### フィールドレイアウトの管理
 
-プラグインのコントローラーの1つの投稿のための `<form>` 内に include を配置してください。コントローラーは、次のようにフィールドレイアウトを保存できます。
+エレメントタイプでカスタムフィールドをサポートする場合、エレメントタイプのフィールドレイアウトを管理するためにコントロールパネル内のどこかにページを作成する必要があります。 Craft は Field Layout Designer を出力するテンプレートのインクルードを提供します。
 
 ```twig
 {% include "_includes/fieldlayoutdesigner" with {
@@ -299,26 +301,116 @@ public function getEditorHtml(): string
 } only %}
 ```
 
-エレメントタイプ全体で1つのフィールドレイアウトを持つのではなく、必要であれば複数のフィールドレイアウトを管理することもできます。例えば、エントリのフィールドレイアウトはそれぞれの入力タイプ向けに定義され、アセットのフィールドレイアウトはそれぞれのアセットボリューム向けに定義されます。
+プラグインのコントローラーの1つの投稿のための `<form>` 内に include を配置してください。 コントローラーは、次のようにフィールドレイアウトを保存できます。
 
 ```php
-use ns\prefix\elements\Product;
+<code>$fieldLayoutId</code> プロパティがセットされている場合、<craft3:craft\services\Elements::saveElement()> はデータベースの <code>elements.fieldLayoutId</code> カラムに保存し、ロード時に取得されたその値をエレメントに再設定します。
+```
+ プロパティがセットされている場合、<craft3:craft\services\Elements::saveElement()> はデータベースの elements.fieldLayoutId カラムに保存し、ロード時に取得されたその値をエレメントに再設定します。
+</code>
 
-// ...
+Your service can then save the field layout by passing it to <craft3:craft\services\Fields::saveLayout()>:
 
+```php
 // assemble the new one from the post data, and save it
 $fieldLayout = \Craft::$app->getFields()->assembleLayoutFromPost();
 $fieldLayout->type = Product::class;
 \Craft::$app->getFields()->saveLayout($fieldLayout);
 ```
 
-あなたがしたいように、セットすることができます。データベースのどこかに、新しいフィールドレイアウトの ID を保存することを忘れないでください。（`$fieldLayout->id` 経由で `saveLayout()` を呼び出した後、フィールドレイアウトの ID にアクセスできます。)
+Or, if the layout is being used by a component that’s stored in the [project config](project-config.md), you can add the field layout to the component’s config, and save it alongside your component.
 
-エレメントの `getFieldLayout()` メソッドは（存在する場合）現在のエレメントに関連付けられたフィールドレイアウトを返す責任があります。デフォルトでは、エレメントの `$fieldLayoutId` プロパティをチェックします。セットされている場合、同じ ID のフィールドレイアウトを返します。そのため、それらを保存する際、エレメントに `$fieldLayoutId` プロパティをセットすることを推奨します。
+```php
+use craft\db\Query;
+use craft\elements\User;
+use craft\helpers\ArrayHelper;
+
+// ...
+
+public function saveComponent($myComponent)
+{
+    // ...
+
+    （<code>$fieldLayout->id</code> 経由で <code>saveLayout()</code> を呼び出した後、フィールドレイアウトの ID にアクセスできます。
+}
+
+public function handleChangedComponent(ConfigEvent $event)
+{
+    // ...
+
+    if (!empty($data['fieldLayouts'])) {
+        // Save the field layout
+        $layout = FieldLayout::createFromConfig(reset($data['fieldLayouts']));
+        $layout->id = $myComponentRecord->fieldLayoutId;
+        $layout->type = MyComponent::class;
+        $layout->uid = key($data['fieldLayouts']);
+        Craft::$app->fields->saveLayout($layout);
+        $myComponentRecord->fieldLayoutId = $layout->id;
+    } else if ($myComponentRecord->fieldLayoutId) {
+        // Delete the field layout
+        Craft::$app->fields->deleteLayoutById($myComponentRecord->fieldLayoutId);
+        $myComponentRecord->fieldLayoutId = null;
+    }
+
+    // ...
+}
+
+public function handleDeletedComponent(ConfigEvent $event)
+{
+    // ...
+
+    // Delete the field layout
+    if ($myComponentRecord->fieldLayoutId) {
+        Craft::$app->fields->deleteLayoutById($myComponentRecord->fieldLayoutId);
+    }
+
+    // ...
+}
+```
+ 経由で saveLayout() を呼び出した後、フィールドレイアウトの ID にアクセスできます。
+}
+
+public function handleChangedComponent(ConfigEvent $event)
+{
+    // ...
+
+    if (!empty($data['fieldLayouts'])) {
+        // Save the field layout
+        $layout = FieldLayout::createFromConfig(reset($data['fieldLayouts']));
+        $layout->id = $myComponentRecord->fieldLayoutId;
+        $layout->type = MyComponent::class;
+        $layout->uid = key($data['fieldLayouts']);
+        Craft::$app->fields->saveLayout($layout);
+        $myComponentRecord->fieldLayoutId = $layout->id;
+    } else if ($myComponentRecord->fieldLayoutId) {
+        // Delete the field layout
+        Craft::$app->fields->deleteLayoutById($myComponentRecord->fieldLayoutId);
+        $myComponentRecord->fieldLayoutId = null;
+    }
+
+    // ...
+}
+
+public function handleDeletedComponent(ConfigEvent $event)
+{
+    // ...
+
+    // Delete the field layout
+    if ($myComponentRecord->fieldLayoutId) {
+        Craft::$app->fields->deleteLayoutById($myComponentRecord->fieldLayoutId);
+    }
+
+    // ...
+}
+</code>
+
+エレメントタイプ全体で1つのフィールドレイアウトを持つのではなく、必要であれば複数のフィールドレイアウトを管理することもできます。 例えば、エントリのフィールドレイアウトはそれぞれの入力タイプ向けに定義され、アセットのフィールドレイアウトはそれぞれのアセットボリューム向けに定義されます。
+
+あなたがしたいように、セットすることができます。 Just make sure you’re passing the right field layout into the `fieldLayout` key when rendering the field layout designer.
 
 #### フィールドレイアウトへのエレメントの関連付け
 
-`$fieldLayoutId` プロパティがセットされている場合、<craft3:craft\services\Elements::saveElement()> はデータベースの `elements.fieldLayoutId` カラムに保存し、ロード時に取得されたその値をエレメントに再設定します。
+エレメントの `getFieldLayout()` メソッドは（存在する場合）現在のエレメントに関連付けられたフィールドレイアウトを返す責任があります。 デフォルトでは、エレメントの `$fieldLayoutId` プロパティをチェックします。 セットされている場合、同じ ID のフィールドレイアウトを返します。 そのため、それらを保存する際、エレメントに `$fieldLayoutId` プロパティをセットすることを推奨します。
 
 ```php
 // ...
@@ -326,9 +418,9 @@ $product->fieldLayoutId = $productType->fieldLayoutId;
 \Craft::$app->elements->saveElement($product);
 ```
 
-あるいは、`getFieldLayout()` メソッドを上書きし、フィールドレイアウトを fetch / return することもできます。これは（ユーザーアカウントのように）エレメントタイプが単一のフィールドレイアウトしか持たない場合、むしろ望ましいかもしれません。
+If the `$fieldLayoutId`  property is set, <craft3:craft\services\Elements::saveElement()> will store it in the `elements.fieldLayoutId` column in the database, and your elements will be re-populated with the values when they are fetched down the road.
 
-エレメントのタイトルやカスタムフィールドの値がサイト単位で保存されている場合、static な `isLocalized()` メソッドを追加してください。
+あるいは、`getFieldLayout()` メソッドを上書きし、フィールドレイアウトを fetch / return することもできます。 これは（ユーザーアカウントのように）エレメントタイプが単一のフィールドレイアウトしか持たない場合、むしろ望ましいかもしれません。
 
 ```php
 public function getFieldLayout()
@@ -337,9 +429,19 @@ public function getFieldLayout()
 }
 ```
 
+エレメントに独自のステータスが必要な場合、エレメントクラスに static な `hasStatuses()` メソッドを加えます。
+
+#### Validating Required Custom Fields
+
+Required custom fields are only enforced when the element is saved using the `live` validation scenario. To make sure required custom fields are validated, set the scenario before calling `saveElement()`:
+
+```php
+$element->setScenario(\craft\base\Element::SCENARIO_LIVE);
+```
+
 ### ローカライゼーション
 
-デフォルトでは、エレメントはすべてのサイトに保存されます。特定のサイトだけにエレメントを保存する必要がある場合、`getSupportedSites()` メソッドを追加してください。
+エレメントタイプは、基準パラメータで定義されたエレメントのグループである「ソース」を定義できます。
 
 ```php
 public static function isLocalized(): bool
@@ -348,7 +450,7 @@ public static function isLocalized(): bool
 }
 ```
 
-`getSupportedSites()` によって返される配列内の値は、整数値（サイト ID）、または、`siteId` キーとそのサイトでエレメントがデフィルトで使用可能であるべきかを示すオプションの `enabledbyDefault` キー（ブール値）の配列のいずれかにできます。
+デフォルトでは、エレメントはすべてのサイトに保存されます。 特定のサイトだけにエレメントを保存する必要がある場合、`getSupportedSites()` メソッドを追加してください。
 
 ```php
 public function getSupportedSites(): array
@@ -361,13 +463,15 @@ public function getSupportedSites(): array
 }
 ```
 
-エレメントに独自のステータスが必要な場合、エレメントクラスに static な `hasStatuses()` メソッドを加えます。
+エレメントタイプのソースを定義するために、エレメントクラスに protected static な `defineSources()` メソッドを追加してください。
 
-次に、`enabled` と `disabled` 以外のステータスを持つことができる場合、それらを定義するために static な `statuses()` メソッドを追加してください。
+::: tip
+Elements that support multiple sites will have their `afterSave()` method called multiple times on save – once for each site that the element supports. You can tell whether it’s being called for the originally-submitted site versus a propagated site by checking `$this->propagating`.
+:::
 
 ## ステータス
 
-エレメントタイプは、基準パラメータで定義されたエレメントのグループである「ソース」を定義できます。
+次のテンプレートを使用して、[コントロールパネルのセクション](cp-section.md)にエレメントタイプのインデックスページを加えることができます。
 
 ```php
 public static function hasStatuses(): bool
@@ -378,7 +482,7 @@ public static function hasStatuses(): bool
 
 ### インデックスページアクション
 
-エレメントタイプのソースは、エレメントインデックスのサイドバーとエレメントの関連フィールドの設定内に表示されます。
+By default your elements will support two statuses: Enabled and Disabled. If you’d like to give your element type its own custom statuses, first define what they are by overriding its static <craft3:craft\base\ElementInterface::statuses()> method:
 
 ```php
 public static function statuses(): array
@@ -390,7 +494,34 @@ public static function statuses(): array
 }
 ```
 
-エレメントタイプのソースを定義するために、エレメントクラスに protected static な `defineSources()` メソッドを追加してください。
+内部的には、<craft3:craft\base\Element::getRoute()> はエレメントクラスで上書きしたい protected な `route()` メソッドを呼び出します。
+
+```php
+public function getStatus()
+{
+    if ($this->fooIsTrue) {
+        return 'foo';
+    }
+
+    return 'bar';
+}
+```
+
+すべてのエレメントクエリクラスは、基本機能を提供する <craft3:craft\elements\db\ElementQuery> を拡張する必要があります。
+
+```php
+次に、<code>enabled</code> と <code>disabled</code> 以外のステータスを持つことができる場合、それらを定義するために static な <code>statuses()</code> メソッドを追加してください。
+```
+ と disabled 以外のステータスを持つことができる場合、それらを定義するために static な statuses() メソッドを追加してください。
+</code>
+
+## ソース
+
+エレメントクラスに protected static な `defineSortOptions()` メソッドを追加することで、エレメントインデックス向けのソートオプションを定義できます。
+
+ソートオプションがインデックスで選択されると、キーが[エレメントクエリ](#element-query-class)クラスの `$orderBy` プロパティに渡されます（例：`['price' => SORT_ASC]`）。
+
+エレメントクラスに protected な `defineTableAttributes()` メソッドを追加することで、エレメントインデックスのテーブルビューで利用可能な列をカスタマイズできます。
 
 ```php
 protected static function defineSources(string $context = null): array
@@ -421,19 +552,19 @@ protected static function defineSources(string $context = null): array
 
 ソースが選択されると、Craft はソースの `criteria` 配列にリストされている値で[エレメントクエリ](#element-query-class)を設定します。
 
-```php
+## インデックスページ
+
+大きなリストの場合、エレメントクラスに protected な `defineDefaultTableAttributes()` メソッドを追加することで、新しい[ソース](#sources)向けのデフォルトで表示する列を制限することもできます。
+
+```twig
 {% extends '_layouts/elementindex' %}
 {% set title = 'Products' %}
 {% set elementType = 'ns\\prefix\\elements\\Product' %}
 ```
 
-## ソース
-
-次のテンプレートを使用して、[コントロールパネルのセクション](cp-section.md)にエレメントタイプのインデックスページを加えることができます。
+### 復元アクション
 
 エレメントクラスに protected static な `defineActions()`メソッドを追加することで、インデックスページでエレメントタイプをサポートする[アクション](element-action-types.md)を定義できます。
-
-すべてのエレメントは、デフォルトで[ソフトデリート](soft-deletes.md)できます。しかしながら、復元可能かどうかはそれぞれのエレメントタイプによって決まります。
 
 ```php
 protected static function defineActions(string $source = null): array
@@ -445,13 +576,30 @@ protected static function defineActions(string $source = null): array
 }
 ```
 
-要素を復元可能にするには、static な `defineActions()` メソッドによって返される配列に <craft3:craft\elements\actions\Restore> アクションを追加するだけです。Craft は通常のインデックスビューから自動的にそれを隠し、ステータスオプションで「破棄済み」を選択したときだけ表示します。
+### ソートオプション
 
-## インデックスページ
+サムネイルビューは、[ソース](#sources)単位でエレメントインデックスページ向けに有効にすることができます。
 
-エレメントクラスに protected static な `defineSortOptions()` メソッドを追加することで、エレメントインデックス向けのソートオプションを定義できます。
+要素を復元可能にするには、static な `defineActions()` メソッドによって返される配列に <craft3:craft\elements\actions\Restore> アクションを追加するだけです。 Craft は通常のインデックスビューから自動的にそれを隠し、ステータスオプションで「破棄済み」を選択したときだけ表示します。
 
-```twig
+### テーブル属性
+
+次に、エレメントクラスに現在のエレメントのサムネイルの URL を返す `getThumbUrl()` メソッドを追加してください。
+
+```php
+protected static function defineExporters(string $source): array
+{
+    $exporters = parent::defineExporters($source);
+    $exporters[] = MyExporter::class;
+    return $exporters;
+}
+```
+
+### サムネイルビュー
+
+You can define the sort options for your element indexes by adding a protected static [defineSortOptions()](craft3:craft\base\Element::defineSortOptions()) method to your element class:
+
+```php
 protected static function defineSortOptions(): array
 {
     return [
@@ -461,9 +609,11 @@ protected static function defineSortOptions(): array
 }
 ```
 
-### 復元アクション
+エレメントタイプに検索可能な属性を追加したい場合、エレメントに protected static な `defineSearchableAttributes()` メソッドを追加し、それらをリストに入れてください。
 
-ソートオプションがインデックスで選択されると、キーが[エレメントクエリ](#element-query-class)クラスの `$orderBy` プロパティに渡されます（例：`['price' => SORT_ASC]`）。
+### エディタの HUD
+
+エレメントが保存される際、エレメントがシステム内で独自の URI を持ち、存在する場合はどのような見た目になるかを探すために `getUriFormat()` メソッドが呼び出されます。
 
 ```php
 protected static function defineTableAttributes(): array
@@ -476,17 +626,11 @@ protected static function defineTableAttributes(): array
 }
 ```
 
-### ソートオプション
-
-エレメントクラスに protected な `defineTableAttributes()` メソッドを追加することで、エレメントインデックスのテーブルビューで利用可能な列をカスタマイズできます。
-
 ::: tip
-ここでリストする最初の属性は、特別なケースです。唯一管理者が削除できない、テーブルビューの最初の列のヘッダーを定義します。その値は（`__toString()` メソッドが返す）エレメントの文字列表現です。
+ここでリストする最初の属性は、特別なケースです。 唯一管理者が削除できない、テーブルビューの最初の列のヘッダーを定義します。 Its values will come from your elements’ <craft3:craft\base\ElementInterface::getUiLabel()> method.
 :::
 
-### テーブル属性
-
-大きなリストの場合、エレメントクラスに protected な `defineDefaultTableAttributes()` メソッドを追加することで、新しい[ソース](#sources)向けのデフォルトで表示する列を制限することもできます。
+エレメントの URL がリクエストされるたびに、Craft はエレメントをインスタンス化し、その `getRoute()` メソッドを呼び出し、リクエストがどのように[ルーティングされる](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing)べきか、エレメントに決定するチャンスを与えます。
 
 ```php
 protected static function defineDefaultTableAttributes(string $source): array
@@ -495,11 +639,7 @@ protected static function defineDefaultTableAttributes(string $source): array
 }
 ```
 
-テーブルセル向けに、Craft はデフォルトでエレメント属性の文字列の型を出力します。エレメントクラスに protected な `tableAttributeHtml()` メソッドを追加することで、セルの HTML を上書きできます。
-
-### サムネイルビュー
-
-サムネイルビューは、[ソース](#sources)単位でエレメントインデックスページ向けに有効にすることができます。
+テーブルセル向けに、Craft はデフォルトでエレメント属性の文字列の型を出力します。 エレメントクラスに protected な `tableAttributeHtml()` メソッドを追加することで、セルの HTML を上書きできます。
 
 ```php
 protected function tableAttributeHtml(string $attribute): string
@@ -516,9 +656,11 @@ protected function tableAttributeHtml(string $attribute): string
 }
 ```
 
-ソースのサムネイルビューを有効にするには、その定義に `hasThumbs` キーを追加してください。
+### ページの編集
 
-次に、エレメントクラスに現在のエレメントのサムネイルの URL を返す `getThumbUrl()` メソッドを追加してください。
+インデックスページや関連フィールド内でダブルクリックした際、エレメントエディタの HUD 経由でエレメントを編集できるようにするには、エレメントクラスに現在のユーザーがエレメントを編集する権限を持っているかどうかを返す `getIsEditable()` メソッドを追加してください。
+
+ソースのサムネイルビューを有効にするには、その定義に `hasThumbs` キーを追加してください。
 
 ```php
 protected static function defineSources(string $context = null): array
@@ -537,7 +679,7 @@ protected static function defineSources(string $context = null): array
 }
 ```
 
-エレメントが保存されると、Craft の検索サービスはそのエレメントの検索キーワードとして「検索可能な属性」をインデックスします。デフォルトでは、検索可能な属性のリストにはエレメントのタイトルとスラグ、および、カスタムフィールドの値のみが含まれます。
+エレメントタイプにフルサイズの編集ページを与えたい場合、テンプレート、ルート、コントローラーアクションのすべてをセットする必要があります。
 
 ```php
 use craft\helpers\UrlHelper;
@@ -550,11 +692,11 @@ public function getThumbUrl(int $size)
 }
 ```
 
-### エディタの HUD
+## 検索可能な属性
 
-エレメントタイプに検索可能な属性を追加したい場合、エレメントに protected static な `defineSearchableAttributes()` メソッドを追加し、それらをリストに入れてください。
+エレメントが保存されると、Craft の検索サービスはそのエレメントの検索キーワードとして「検索可能な属性」をインデックスします。 デフォルトでは、検索可能な属性のリストにはエレメントのタイトルとスラグ、および、カスタムフィールドの値のみが含まれます。
 
-エレメントが保存される際、エレメントがシステム内で独自の URI を持ち、存在する場合はどのような見た目になるかを探すために `getUriFormat()` メソッドが呼び出されます。
+エレメントの編集ページをセットアップしたら、エレメントクラスにコントロールパネル内でエレメントの編集ページ URL を伝える [getCpEditUrl()](craft3:craft\base\ElementInterface::getCpEditUrl()) メソッドを追加してください。
 
 ```php
 protected static function defineSearchableAttributes(): array
@@ -563,7 +705,11 @@ protected static function defineSearchableAttributes(): array
 }
 ```
 
-そのため、エレメントの独自の URL を得る場合、このメソッドを実装し、<craft3:craft\web\View::renderObjectTemplate()> で解析できる文字列（例：`products/{slug}`）を返さなければなりません。通常、これはハードコードされたものではなく、ユーザー定義の文字列である必要があります。
+## エレメント URL
+
+を拡張する新しい[フィールドタイプ](field-types.md)を作成することで、エレメントに独自の関連フィールドを与えることができます。
+
+そのため、エレメントの独自の URL を得る場合、このメソッドを実装し、<craft3:craft\web\View::renderObjectTemplate()> で解析できる文字列（例：`products/{slug}`）を返さなければなりません。 通常、これはハードコードされたものではなく、ユーザー定義の文字列である必要があります。
 
 ```php
 public function getUriFormat()
@@ -572,11 +718,9 @@ public function getUriFormat()
 }
 ```
 
-## 検索可能な属性
+エレメントで参照タグ（例：`{product:100}`）をサポートする場合、エレメントクラスに参照タグに使用されるユニークなハンドルを返す static な `refHandle()` メソッドを追加してください。
 
-エレメントの URL がリクエストされるたびに、Craft はエレメントをインスタンス化し、その `getRoute()` メソッドを呼び出し、リクエストがどのように[ルーティングされる](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing)べきか、エレメントに決定するチャンスを与えます。
-
-内部的には、<craft3:craft\base\Element::getRoute()> はエレメントクラスで上書きしたい protected な `route()` メソッドを呼び出します。
+ユーザーがエレメントの参照タグを簡単にコピーできるようにするには、エレメントのインデックスページに「リファレンスタグのコピー」[アクション](#index-page-actions)を追加する必要があります。
 
 ```php
 protected function route()
@@ -592,11 +736,11 @@ protected function route()
 }
 ```
 
-## エレメント URL
+## エレメントの編集
 
-インデックスページや関連フィールド内でダブルクリックした際、エレメントエディタの HUD 経由でエレメントを編集できるようにするには、エレメントクラスに現在のユーザーがエレメントを編集する権限を持っているかどうかを返す `getIsEditable()` メソッドを追加してください。
+### リレーションフィールド
 
-デフォルトでは、エレメントエディターの HUD はカスタムフィールドだけが含まれます。タイトルフィールド、および / または、エレメント固有の属性フィールドを含めるには、エレメントクラスに `getEditorHtml()` メソッドを追加してください。
+To make your elements editable via Element Editor HUDs when double-clicked on within the index page or relation fields, add a `getIsEditable()` method to your element class, which returns whether the current user has permission to edit the element:
 
 ```php
 public function getIsEditable(): bool
@@ -605,9 +749,7 @@ public function getIsEditable(): bool
 }
 ```
 
-エレメントタイプにフルサイズの編集ページを与えたい場合、テンプレート、ルート、コントローラーアクションのすべてをセットする必要があります。
-
-カテゴリの編集ページは、それを実行するための比較的簡単な実例を提供します。
+デフォルトでは、エレメントエディターの HUD はカスタムフィールドだけが含まれます。 タイトルフィールド、および / または、エレメント固有の属性フィールドを含めるには、エレメントクラスに `getEditorHtml()` メソッドを追加してください。
 
 ```php
 public function getEditorHtml(): string
@@ -632,20 +774,52 @@ public function getEditorHtml(): string
 }
 ```
 
-## エレメントの編集
+### Edit Page
 
-### ページの編集
+エレメントに他のエレメントとハードコーディングされたリレーションがあり、それらのエレメントを eager-loadable にしたい場合、エレメントクラスに `eagerLoadingMap()` メソッドを追加してください。
 
-エレメントの編集ページをセットアップしたら、エレメントクラスにコントロールパネル内でエレメントの編集ページ URL を伝える [getCpEditUrl()](craft3:craft\base\ElementInterface::getCpEditUrl()) メソッドを追加してください。
+カテゴリの編集ページは、それを実行するための比較的簡単な実例を提供します。
 
+- URL ルール：
+
+  ```php
+  'categories/<groupHandle:{handle}>/new' => 'categories/edit-category',
+    'categories/<groupHandle:{handle}>/<categoryId:\d+><slug:(?:-{slug})?>' => 'categories/edit-category',
+    'categories/<groupHandle:{handle}>/<categoryId:\d+><slug:(?:-{slug})?>/<siteHandle:{handle}>' => 'categories/edit-category',
+    'categories/<groupHandle:{handle}>/new/<siteHandle:{handle}>' => 'categories/edit-category',
+  ```
+
+- コントローラーアクション：
+
+  - [actionEditCategory()](craft3:craft\controllers\CategoriesController::actionEditCategory()) – カテゴリの編集ページをレンダリングします
+  - [actionPreviewCategory()](craft3:craft\controllers\CategoriesController::actionPreviewCategory()) – ライブプレビューリクエストのカテゴリのフロントエンドページをレンダリングします
+  - [actionSaveCategory()](craft3:craft\controllers\CategoriesController::actionSaveCategory()) – カテゴリを保存します
+  - [actionDeleteCategory()](craft3:craft\controllers\CategoriesController::actionDeleteCategory()) – カテゴリを削除します
+  - [actionShareCategory()](craft3:craft\controllers\CategoriesController::actionShareCategory()) – Share Category リクエストを操作し、`categories/view-shared-category` のトークンを作成し、ユーザーをそこにリダイレクトします
+  - [actionViewSharedCategory()](craft3:craft\controllers\CategoriesController::actionViewSharedCategory()) – Share Category トークンのカテゴリのフロントエンドページをレンダリングします
+
+#### カテゴリの編集ページテンプレート： [categories/_edit.html](https://github.com/craftcms/cms/blob/develop/src/templates/categories/_edit.html)
+
+eager-loaded エレメントが保存されている場所を上書きする必要がある場合、エレメントクラスに `setEagerLoadedElements()` メソッドを追加してください。
+
+::: code
 ```php
-public function getCpEditUrl()
-{
-    return 'plugin-handle/products/'.$this->id;
-}
+$fieldLayout = $myElement->getFieldLayout();
+$form = $fieldLayout->createForm($myElement);
+$tabs = $form->getTabMenu();
+$fieldsHtml = $form->render();
 ```
+```twig
+{% set fieldLayout = myElement.getFieldLayout() %}
+{% set form = fieldLayout.createForm(myElement) %}
+{% set tabs = form.getTabMenu() %}
+{% set fieldsHtml = form.render() %}
+```
+:::
 
-を拡張する新しい[フィールドタイプ](field-types.md)を作成することで、エレメントに独自の関連フィールドを与えることができます。
+- Edit Category page template: [categories/_edit.html](https://github.com/craftcms/cms/blob/develop/src/templates/categories/_edit.html)
+
+Here’s a simple example of the code needed to save an element programatically, which could live within an `actionSave()` controller action:
 
 ```php
 <?php
@@ -673,33 +847,52 @@ class Products extends BaseRelationField
 }
 ```
 
-### リレーションフィールド
+Once you’ve set up an edit page for your element type, you can add a [getCpEditUrl()](craft3:craft\base\ElementInterface::getCpEditUrl()) method to your element class, which will communicate your elements’ edit page URLs within the control panel.
 
-その基本クラスは単純な作業のほとんどを行います。そのため、3つのシンプルなメソッドを実装することで、フィールドを稼働させることができます。
+```php
+public function getCpEditUrl()
+{
+    return 'plugin-handle/products/'.$this->id;
+}
+```
 
-エレメントで参照タグ（例：`{product:100}`）をサポートする場合、エレメントクラスに参照タグに使用されるユニークなハンドルを返す static な `refHandle()` メソッドを追加してください。
+## リレーション
 
-- URL ルール：
+### Relation Field
 
-  ```php
-  'categories/<groupHandle:{handle}>/new' => 'categories/edit-category',
-    'categories/<groupHandle:{handle}>/<categoryId:\d+><slug:(?:-{slug})?>' => 'categories/edit-category',
-    'categories/<groupHandle:{handle}>/<categoryId:\d+><slug:(?:-{slug})?>/<siteHandle:{handle}>' => 'categories/edit-category',
-    'categories/<groupHandle:{handle}>/new/<siteHandle:{handle}>' => 'categories/edit-category',
-  ```
+エレメントタイプが独自の[関連フィールド](#relation-field)を持っているなら、それはすでに eager-loadable です。
 
-- コントローラーアクション：
+その基本クラスは単純な作業のほとんどを行います。 そのため、3つのシンプルなメソッドを実装することで、フィールドを稼働させることができます。
 
-  - [actionEditCategory()](craft3:craft\controllers\CategoriesController::actionEditCategory()) – カテゴリの編集ページをレンダリングします
-  - [actionPreviewCategory()](craft3:craft\controllers\CategoriesController::actionPreviewCategory()) – ライブプレビューリクエストのカテゴリのフロントエンドページをレンダリングします
-  - [actionSaveCategory()](craft3:craft\controllers\CategoriesController::actionSaveCategory()) – カテゴリを保存します
-  - [actionDeleteCategory()](craft3:craft\controllers\CategoriesController::actionDeleteCategory()) – カテゴリを削除します
-  - [actionShareCategory()](craft3:craft\controllers\CategoriesController::actionShareCategory()) – Share Category リクエストを操作し、`categories/view-shared-category` のトークンを作成し、ユーザーをそこにリダイレクトします
-  - [actionViewSharedCategory()](craft3:craft\controllers\CategoriesController::actionViewSharedCategory()) – Share Category トークンのカテゴリのフロントエンドページをレンダリングします
+```php
+<?php
+namespace mynamespace\fields;
 
-- カテゴリの編集ページテンプレート： [categories/_edit.html](https://github.com/craftcms/cms/blob/develop/src/templates/categories/_edit.html)
+use craft\fields\BaseRelationField;
+use mynamespace\elements\Product;
 
-ユーザーがエレメントの参照タグを簡単にコピーできるようにするには、エレメントのインデックスページに「リファレンスタグのコピー」[アクション](#index-page-actions)を追加する必要があります。
+class Products extends BaseRelationField
+{
+    public static function displayName(): string
+    {
+        return \Craft::t('plugin-handle', 'Products');
+    }
+
+    protected static function elementType(): string
+    {
+        return Product::class;
+    }
+
+    public static function defaultSelectionLabel(): string
+    {
+        return \Craft::t('plugin-handle', 'Add a product');
+    }
+}
+```
+
+## リファレンスタグ
+
+If you want your elements to support reference tags (e.g. `{product:100}`), add a static `refHandle()` method to your element class that returns a unique handle that should be used for its reference tags.
 
 ```php
 public static function refHandle()
@@ -708,79 +901,7 @@ public static function refHandle()
 }
 ```
 
-エレメントタイプが独自の[関連フィールド](#relation-field)を持っているなら、それはすでに eager-loadable です。そして、[カスタムフィールド](#custom-fields)をサポートする場合、関連フィールドでエレメントに関連づけられているすべてのエレメントは eager-loadable になります。
-
-```php
-use craft\elements\actions\CopyReferenceTag;
-
-// ...
-
-protected static function defineActions(string $source = null): array
-{
-    return [
-        [
-            'type' => CopyReferenceTag::class,
-            'elementType' => static::class,
-        ],
-        // ...
-    ];
-}
-```
-
-## リレーション
-
-### Relation Field
-
-eager-loading サポートが自由に提供されない唯一のケースは、エレメントタイプが他のエレメントと「ハードコーディングされた」関連付けを持っている場合です。例えば、エントリは著者（ユーザーエレメント）を持ちますが、これらのリレーションはカスタムのユーザーフィールドではなく、`entries` テーブルの `authorId` カラムに定義されています。
-
-エレメントに他のエレメントとハードコーディングされたリレーションがあり、それらのエレメントを eager-loadable にしたい場合、エレメントクラスに `eagerLoadingMap()` メソッドを追加してください。
-
-```php
-use craft\db\Query;
-use craft\elements\User;
-use craft\helpers\ArrayHelper;
-
-// ...
-
-public static function eagerLoadingMap(array $sourceElements, string $handle)
-{
-    if ($handle === 'author') {
-        // get the source element IDs
-        $sourceElementIds = ArrayHelper::getColumn($sourceElements, 'id');
-
-        $map = (new Query())
-            ->select(['id as source', 'authorId as target'])
-            ->from(['{{%entries}}'])
-            ->where(['and', ['id' => $sourceElementIds], ['not', ['authorId' => null]]])
-            ->all();
-
-        return [
-            'elementType' => User::class,
-            'map' => $map
-        ];
-    }
-
-    return parent::eagerLoadingMap($sourceElements, $handle);
-}
-```
-
-## リファレンスタグ
-
-このファンクションは、すでに照会されたエレメント（「ソース」エレメント）と、eager-loading のハンドルを受け入れます。どのソースエレメント ID がどの「ターゲット」エレメント ID を eager-load すべきかのマッピングを返すサポートをします。
-
-```php
-public function setEagerLoadedElements(string $handle, array $elements)
-{
-    if ($handle === 'author') {
-        $author = $elements[0] ?? null;
-        $this->setAuthor($author);
-    } else {
-        parent::setEagerLoadedElements($handle, $elements);
-    }
-}
-```
-
-eager-loaded エレメントが保存されている場所を上書きする必要がある場合、エレメントクラスに `setEagerLoadedElements()` メソッドを追加してください。
+To make it easier for users to copy your elements’ reference tags, you may want to add a “Copy reference tag” [action](#index-page-actions) to your element’s index page.
 
 ```php
 use craft\elements\actions\CopyReferenceTag;
