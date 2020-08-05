@@ -76,7 +76,7 @@ class MyModel extends Model
 }) }}
 ```
 
-`suggestEnvVars` が `true` にセットされている場合、オートサジェスト入力はサジェストを取得するために <craft3:craft\web\twig\variables\Cp::getEnvSuggestions()> を呼び出します。そして、フォームフィールドの下にヒントを表示し、環境変数にセットできる値をユーザーにアドバイスします。
+`suggestEnvVars` が `true` にセットされている場合、オートサジェスト入力はサジェストを取得するために <craft3:craft\web\twig\variables\Cp::getEnvSuggestions()> を呼び出します。 そして、フォームフィールドの下にヒントを表示し、環境変数にセットできる値をユーザーにアドバイスします。
 
 設定が URL、または、ファイルシステムパスの場合、`suggestAliases` も `true` に設定する必要があります。
 
