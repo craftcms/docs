@@ -4,12 +4,12 @@ Craft は、プラグイン向けに Twig テンプレート環境を拡張す�
 
 ## グローバル `craft` 変数の拡張
 
-グローバル `craft` テンプレート変数は、<craft3:craft\web\twig\variables\CraftVariable> のインスタンスです。例えば、テンプレートが `craft.entries` または `craft.entries()` を参照する際、 その裏で [CraftVariable::entries()](craft3:craft\web\twig\variables\CraftVariable::entries()) が呼び出されます。
+グローバル `craft` テンプレート変数は、<craft3:craft\web\twig\variables\CraftVariable> のインスタンスです。 例えば、テンプレートが `craft.entries` または `craft.entries()` を参照する際、 その裏で [CraftVariable::entries()](craft3:craft\web\twig\variables\CraftVariable::entries()) が呼び出されます。
 
-`CraftVariable` インスタンスは、[ビヘイビア](https://www.yiiframework.com/doc/guide/2.0/en/concept-behaviors)、および、[サービス](https://www.yiiframework.com/doc/guide/2.0/en/concept-service-locator)を持つプラグインによって拡張できます。正しいアプローチを選択することは、何を追加しようとしているかに依存します。
+`CraftVariable` インスタンスは、[ビヘイビア](https://www.yiiframework.com/doc/guide/2.0/en/concept-behaviors)、および、[サービス](https://www.yiiframework.com/doc/guide/2.0/en/concept-service-locator)を持つプラグインによって拡張できます。 正しいアプローチを選択することは、何を追加しようとしているかに依存します。
 
 - カスタムプロパティ、または、メソッドを直接 `craft` 変数に追加するために、**ビヘイビア**を使用します（例：`craft.foo()`）。
-- `craft` 変数に、サービスの「ID」と呼ばれるカスタムプロパティ名でアクセスできるサブオブジェクトを追加するために、**サービス**を使用します（例：`craft.foo.*`）。
+- `craft` 変数に、サービスの「ID」と呼ばれるカスタムプロパティ名でアクセスできるサブオブジェクトを追加するために、**サービス**を使用します（例：`craft.foo.*`）。 (e.g. `craft.foo.*`).
 
 プラグインの `init()` メソッドから [EVENT_INIT](craft3:craft\web\twig\variables\CraftVariable::EVENT_INIT) イベントハンドラを登録することで、`CraftVariable` インスタンスにビヘイビア、または、サービスを付加できます。
 
