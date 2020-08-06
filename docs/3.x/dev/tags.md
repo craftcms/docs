@@ -72,7 +72,7 @@ Caches the output globally (for the current site locale), rather than on a per-U
 
 #### `using key`
 
-Specifies the name of the key the cache should use. When the key changes, the cache is invalidated and the tag’s contents are re-rendered. If this parameter is not provided, a random key will be generated when Twig first parses the template.
+Specifies the name of the key the cache should use. When the key changes, the tag’s contents are re-rendered. If this parameter is not provided, a random key will be generated each time Twig re-parses the template.
 
 ```twig
 {% cache using key "page-header" %}
@@ -85,7 +85,9 @@ If you change the template code within a `{% cache %}` that uses a custom key, a
 You can provide a dynamic key and combine it with [globally](#globally) for more control over template caching. For example, you could cache based on the URL *with* the query string that’s ignored by default:
 
 ```twig
-{% cache globally using key craft.app.request.queryString %}
+{% set request = craft.app.request %}
+{% set uriWithQueryString = request.fullUri ~ request.queryStringWithoutPath %}
+{% cache globally using key uriWithQueryString %}
 ```
 
 #### `for`
