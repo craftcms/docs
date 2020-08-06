@@ -40,7 +40,7 @@
 
 ## `cache`
 
-This tag will cache a portion of your template, which can improve performance for subsequent requests, as they will have less work to do.
+This tag will cache a portion of your template, which can improve performance for subsequent requests because they’ll have less work to do.
 
 ```twig
 {% cache %}
@@ -50,9 +50,13 @@ This tag will cache a portion of your template, which can improve performance fo
 {% endcache %}
 ```
 
-The cache tag is for caching output, not logic. Take care not to cache `{{ csrfInput() }}`, form fields, or parts of templates where dynamic output is expected.
+Since the cache tag is for caching output and not logic, avoid caching `{{ csrfInput() }}`, form fields, or parts of templates where dynamic output is expected.
 
 Warning: If you’re suffering from abnormal page load times, you may be experiencing a suboptimal hosting environment. Please consult a specialist before trying `{% cache %}`. `{% cache %}` is not a substitute for fast database connections, efficient templates, or moderate query counts. Possible side effects include stale content, excessively long-running background tasks, stuck tasks, and in rare cases, death. Ask your hosting provider if `{% cache %}` is right for you.
+
+By default, cached output will be kept by URL without regard for the query string.
+
+While carefully-placed `{% cache %}` tags can offer significant boosts to performance, it’s important to know how the cache tag’s parameters can be used to fine-tune its behavior.
 
 ### Parameters
 
@@ -68,23 +72,23 @@ tags/cache.md
 
 #### `using key`
 
-Specifies the name of the key the cache should use. If this is not provided, a random key will be generated when Twig first parses the template.
+Specifies the name of the key the cache should use. When the key changes, the tag’s contents are re-rendered. If this parameter is not provided, a random key will be generated each time Twig re-parses the template.
 
 ```twig
 {% cache using key "page-header" %}
 ```
 
-::: tip
-You can combine this parameter with [globally](#globally) to cache templates on a per-page basis, without letting any query string variables get included in the path:
-
-```twig
-{% cache globally using key craft.app.request.pathInfo %}
-```
-:::
-
 ::: warning
 If you change the template code within a `{% cache %}` that uses a custom key, any existing template caches will not automatically be purged. You will either need to assign the tag a new key, or clear your existing template caches manually selecting “Data Caches” in the Utilities → Clear Caches tool.
 :::
+
+You can provide a dynamic key and combine it with [globally](#globally) for more control over template caching. For example, you could cache based on the URL *with* the query string that’s ignored by default:
+
+```twig
+{% set request = craft.app.request %}
+{% set uriWithQueryString = request.fullUri ~ request.queryStringWithoutPath %}
+{% cache globally using key uriWithQueryString %}
+```
 
 #### `for`
 
