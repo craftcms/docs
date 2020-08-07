@@ -2,7 +2,7 @@
 
 エレメントタイプは、Craft で管理できる様々なタイプのコンテンツを定義します。
 
-Craft には、7つの組み込みフィールドタイプがあります。
+Craft comes with seven built-in element types:
 
 - <craft3:craft\elements\Asset>
 - <craft3:craft\elements\Category>
