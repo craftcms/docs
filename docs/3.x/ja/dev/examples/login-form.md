@@ -31,7 +31,7 @@
 
 `craft.session.returnUrl` には、このログインフォームへリダイレクトした `{% requireLogin %}` タグを含む元の URL がセットされます。
 
-デフォルトでは、ユーザーがログイン後にコンフィグ設定 `postLoginRedirect` の値に基づきリダイレクトされます。`redirect` パラメータを利用して、ログインフォーム内で設定を上書きすることもできます。
+デフォルトでは、ユーザーがログイン後にコンフィグ設定 `postLoginRedirect` の値に基づきリダイレクトされます。 `redirect` パラメータを利用して、ログインフォーム内で設定を上書きすることもできます。
 
 ```twig
 {{ redirectInput('some/custom/path') }}
