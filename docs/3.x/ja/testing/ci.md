@@ -1,14 +1,10 @@
 # Continuous Integration (CI)
 
-There are [many](https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software)
-[Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration)
-platforms available to choose from.
+There are [many](https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software) [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) platforms available to choose from.
 
-Craft uses [Travis](https://travis-ci.com/craftcms/cms) for its public repo, but
-you're free to use what you're comfortable with and modify things to your workflow.
+Craft uses [Travis](https://travis-ci.com/craftcms/cms) for its public repo, but you're free to use what you're comfortable with and modify things to your workflow.
 
-There are [many options](https://docs.travis-ci.com/) for configuring Travis, but
-let's examine [Craft's `.travis.yml` file](https://github.com/craftcms/cms/blob/3.2/.travis.yml).
+There are [many options](https://docs.travis-ci.com/) for configuring Travis, but let's examine [Craft's `.travis.yml` file](https://github.com/craftcms/cms/blob/3.2/.travis.yml).
 
 ```yaml
 services:
@@ -36,13 +32,9 @@ matrix:
     env: TASK_TESTS_COVERAGE=1 DB=pgsql
 ```
 
-The `matrix` is where we explicitly define the different environments we want the
-tests to run in.  That includes PHP 7.1 - 7.3 and we define an environment variable
-called `DB` that sets both `mysql` and `pgsql` we can use later.
+The `matrix` is where we explicitly define the different environments we want the tests to run in.  That includes PHP 7.1 - 7.3 and we define an environment variable called `DB` that sets both `mysql` and `pgsql` we can use later.
 
-PHP 7.1 also sets an environment variable called `TASK_TESTS_COVERAGE` we'll use later
-because that's the only environment we want code coverage reports to generate in (for
-performance reasons).
+PHP 7.1 also sets an environment variable called `TASK_TESTS_COVERAGE` we'll use later because that's the only environment we want code coverage reports to generate in (for performance reasons).
 
 ```yaml
 install:
@@ -56,8 +48,7 @@ install:
   travis_retry composer install $DEFAULT_COMPOSER_FLAGS
 ```
 
-If `TASK_TESTS_COVERAGE` isn't set, we're going to disable xDebug to speed things up.
-It's only needed for generated code coverage reports in this context.
+If `TASK_TESTS_COVERAGE` isn't set, we're going to disable xDebug to speed things up. It's only needed for generated code coverage reports in this context.
 
 Then we `composer install` to pull down all of Craft's dependencies.
 
@@ -80,9 +71,7 @@ before_script:
 - cp tests/.env.example.$DB tests/.env
 ```
 
-Before we run tests, we output some relevant debugging information to the console
-and then create a MySQL and PostgreSQL database called `craft-test` that the tests
-are going to use.
+Before we run tests, we output some relevant debugging information to the console and then create a MySQL and PostgreSQL database called `craft-test` that the tests are going to use.
 
 Then we install Imagick on the server as some image specific tests require it to complete.
 
@@ -90,9 +79,7 @@ Then we install Imagick on the server as some image specific tests require it to
 - cp tests/.env.example.$DB tests/.env
 ```
 
-Finally, for each build environment, we take the `.env.example.mysql` and `.env.example.pgsql`
-files that are in the root of the `tests` folder and copy them to `tests/.env` so the test
-environments know how to connect to each type of database.
+Finally, for each build environment, we take the `.env.example.mysql` and `.env.example.pgsql` files that are in the root of the `tests` folder and copy them to `tests/.env` so the test environments know how to connect to each type of database.
 
 ```yaml
 script:
@@ -105,8 +92,7 @@ script:
   fi
 ```
 
-If `TASK_TESTS_COVERAGE` is set, then we pass in the flags to Codeception to generate
-code coverage reports.  If not, we just run the tests.
+If `TASK_TESTS_COVERAGE` is set, then we pass in the flags to Codeception to generate code coverage reports.  If not, we just run the tests.
 
 ```yaml
 after_script:
@@ -116,5 +102,4 @@ after_script:
   fi
 ```
 
-After tests are done executing, if `TASK_TESTS_COVERAGE` is set, we upload the code
-coverage reports to a 3rd party service, [https://codecov.io](https://codecov.io/gh/craftcms/cms).
+After tests are done executing, if `TASK_TESTS_COVERAGE` is set, we upload the code coverage reports to a 3rd party service, [https://codecov.io](https://codecov.io/gh/craftcms/cms).
