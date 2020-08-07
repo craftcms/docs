@@ -15,11 +15,11 @@ You can set up your email gateway by navigating to Settings → Email in the con
 Commerce emails are sent in Craft queue jobs, so sending may be delayed depending on how your queue is configured to run. See the [runQueueAutomatically](https://docs.craftcms.com/v3/config/config-settings.html#runqueueautomatically) config setting and notes.
 :::
 
-By default, Commerce will send messages using Craft’s “System Email Address” and “Sender Name” found in Settings → Email Settings in the control panel. If you’d like to override this and provide your own from name/address, navigate to Commerce → System Settings → General Settings and enter your own “Status Email Address” and “From Name”.
+By default, Commerce will send messages using Craft’s “System Email Address” and “Sender Name” found in Settings → Email Settings in the control panel. If you’d like to override this and provide your own from name/address, navigate to _Commerce_ → _System Settings_ → _General Settings_ and enter your own “Status Email Address” and “From Name”.
 
 ## Creating an Email
 
-To create a new email, navigate to Commerce → System Settings → Emails, and click “New Email”:
+To create a new email, navigate to _Commerce_ → _System Settings_ → _Emails_, and click “New Email”:
 
 <img src="./assets/new-email-settings.png" width="645" alt="New Email Settings.">
 
@@ -110,7 +110,6 @@ Craft [global set variables](https://docs.craftcms.com/api/v3/craft-web-twig-var
 {% set globalSetName = craft.globals.getSetByHandle('globalSetName') %}
 {{ globalSetName.customFieldName }}
 ```
-
 :::
 
 ### Plain Text Email Template Path
@@ -125,3 +124,12 @@ This works the same way as the “HTML Email Template Path”.
 Choose a PDF that will be attached to this email.
 
 
+## Selecting an Email
+
+To use the email you’ve created, visit _Commerce_ → _System Settings_ → _Order Status_ and choose the Order Status that should send this email when it updates.
+
+Select the email by name in the _Status Emails_ field. You can select as many emails as you’d like for any given Order Status.
+
+![](./assets/order-status-email-selection.png)
+
+Once you choose “Save” the designated emails will be sent when an order is assigned to that status.
