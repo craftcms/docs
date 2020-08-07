@@ -300,6 +300,11 @@ return [
             // Override the class to use Redis' session class
             $config['class'] = yii\redis\Session::class;
 
+            // Attach Craft's session behaviour
+            $config['as session'] = [
+                'class' => craft\behaviors\SessionBehavior::class,
+            ];
+
             // Instantiate and return it
             return Craft::createObject($config);
         },
