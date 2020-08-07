@@ -29,15 +29,18 @@ public function init()
 
 [navItems](craft3:craft\events\RegisterCpNavItemsEvent::$navItems) 配列内のそれぞれの項目は、次のキーを持つことができます。
 
-- `url` – ナビゲーション項目がリンクする URL。（<craft3:craft\helpers\UrlHelper::cpUrl()> を実行します。）
+- `url` – ナビゲーション項目がリンクする URL。 （<craft3:craft\helpers\UrlHelper::cpUrl()> を実行します。 ）
 - `label` – ユーザーが目にするナビゲーション項目のラベル。
-- `icon` – 使用するアイコン SVG のパス。（エイリアスではじめることができます。）
+- `icon` – 使用するアイコン SVG のパス。 （エイリアスではじめることができます。 ）
 - `badgeCount` _（オプション）_ – ナビゲーション項目に表示されるバッジの数。
-- `subnav` _（オプション）_ – セクションにアクセスしたときに表示される、サブナビゲーション項目の配列。（[サブナビゲーション](#subnavs)を参照してください。）
+- `subnav` _（オプション）_ – セクションにアクセスしたときに表示される、サブナビゲーション項目の配列。 （[サブナビゲーション](#subnavs)を参照してください。 ）
+
+
+For Craft to properly designate an item as “active,” its `url` must be registered with a relative path to the plugin or module’s control panel section. Any `subnav` paths should begin with `url` in order to appear selected when active.
 
 ## サブナビゲーション
 
-セクションがサブナビゲーションを持つ場合、`subnav` 配列内のそれぞれのサブナビゲーション項目は、`url` および `label` キーを持つサブ配列で表される必要があります。
+テンプレートでは、`selectedSubnavItem` 変数にナビゲーション項目のキーをセットすることによって、どのサブナビゲーション項目が選択されているかを指定できます。
 
 ```php
 'subnav' => [
@@ -47,7 +50,7 @@ public function init()
 ],
 ```
 
-テンプレートでは、`selectedSubnavItem` 変数にナビゲーション項目のキーをセットすることによって、どのサブナビゲーション項目が選択されているかを指定できます。
+1つのセクションだけを追加したいプラグインは、[EVENT_REGISTER_CP_NAV_ITEMS](craft3:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) イベントを使うのではなく、プライマリプラグインクラスの `$hasCpSection` プロパティで設定できます。
 
 ```twig
 {% set selectedSubnavItem = 'bar' %}
@@ -55,7 +58,7 @@ public function init()
 
 ## プラグインセクション
 
-1つのセクションだけを追加したいプラグインは、[EVENT_REGISTER_CP_NAV_ITEMS](craft3:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) イベントを使うのではなく、プライマリプラグインクラスの `$hasCpSection` プロパティで設定できます。
+[getCpNavItem()](craft3:craft\base\PluginInterface::getCpNavItem()) メソッドで上書きすることによって、プラグインのコントロールパネルのナビゲーション項目の外観を変更できます。
 
 ```php
 <?php
@@ -70,7 +73,11 @@ class Plugin extends \craft\base\Plugin
 }
 ```
 
-[getCpNavItem()](craft3:craft\base\PluginInterface::getCpNavItem()) メソッドで上書きすることによって、プラグインのコントロールパネルのナビゲーション項目の外観を変更できます。
+::: tip
+You can alternatively set a `hasCpSection` value in `composer.json` as noted in the [plugin guide](plugin-guide.md#compser-json). We don’t recommend setting it in both places, however, since the value set in `composer.json` will override your public class property’s value and likely create confusion.
+:::
+
+プラグインのセクションをクリックすると、ユーザーは`/admin/plugin-handle` に移動し、プラグインの[テンプレートルート](template-roots.md)（ベースソースフォルダ内の `templates/` フォルダ）内の `index.html` または `index.twig` テンプレートをロードしようと試みます。
 
 ```php
 public function getCpNavItem()
@@ -86,15 +93,17 @@ public function getCpNavItem()
 }
 ```
 
-これをする場合、Craft はプラグインの新しい[ユーザー権限](user-permissions.md)を自動的に追加し、その権限を持つユーザーだけにナビゲーション項目を表示します。
-
-プラグインのセクションをクリックすると、ユーザーは`/admin/plugin-handle` に移動し、プラグインの[テンプレートルート](template-roots.md)（ベースソースフォルダ内の `templates/` フォルダ）内の `index.html` または `index.twig` テンプレートをロードしようと試みます。
-
 ::: tip
 コントロールパネルのテンプレート開発の詳細については、[コントロールパネルのテンプレート](cp-templates.md)を参照してください。
 :::
 
 あるいは、プラグインの `init()` メソッドからコントロールパネルのルートを登録することによって、`/admin/plugin-handle` のリクエストをコントローラーアクション（または、他のテンプレート）にルーティングできます。
+
+::: tip
+See [Control Panel Templates](cp-templates.md) for more information about developing Control Panel templates.
+:::
+
+Alternatively, you can route `/admin/plugin-handle` requests to a controller action (or a different template) by registering a control panel route from your plugin’s `init()` method:
 
 ```php
 use craft\events\RegisterUrlRulesEvent;
