@@ -57,7 +57,7 @@ For example, if a field’s translation key format were `{site.handle[0:2]}`, th
 
 ## Field Layouts
 
-Once you’ve created your fields, you can get it to show up in your edit forms by adding them to a “field layouts”.
+Once you’ve created your fields, you can display them in your edit forms by adding them to “field layouts”.
 
 Everything in Craft that has content associated with it will provide a field layout for selecting fields:
 
