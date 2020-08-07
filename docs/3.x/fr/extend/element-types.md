@@ -2,7 +2,7 @@
 
 Element types define the different types of content that can be managed in Craft.
 
-Craft comes with 7 built-in element types:
+Craft comes with seven built-in element types:
 
 - <craft3:craft\elements\Asset>
 - <craft3:craft\elements\Category>
