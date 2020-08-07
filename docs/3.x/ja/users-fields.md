@@ -7,12 +7,12 @@
 ユーザーフィールドの設定は、次の通りです。
 
 - **ソース** – フィールドが、どのユーザーグループ（または、他のユーザーインデックスソース）からユーザーを関連付けられるか。
-- **リミット** – フィールドと一度に関連付けできるユーザー数の上限（デフォルトは無制限です）
+- **リミット** – フィールドと一度に関連付けできるユーザー数の上限（デフォルトは無制限です） (Default is no limit.)
 - **選択ラベル** – フィールドの選択ボタンのラベルに使用されます
 
 ### マルチサイト設定
 
-マルチサイトがインストールされている場合、次の設定も有効になります。（「高度」のトグルボタンで表示されます）
+マルチサイトがインストールされている場合、次の設定も有効になります。 （「高度」のトグルボタンで表示されます）
 
 - **サイトごとにリレーションを管理** – それぞれのサイトが関連付けられたユーザーの独自のセットを取得するかどうか。
 
@@ -34,10 +34,15 @@
 
 利用可能な値には、次のものが含まれます。
 
-| 値              | 取得するエレメント               |
-| -------------- | ----------------------- |
-| `':empty:'`    | 関連付けられたユーザーを持たない。       |
-| `':notempty:'` | 少なくとも1つの関連付けられたユーザーを持つ。 |
+| 値                                                            | 取得するエレメント                                              |
+| ------------------------------------------------------------ | ------------------------------------------------------ |
+| `':empty:'`                                                  | 関連付けられたユーザーを持たない。                                      |
+| `':notempty:'`                                               | 少なくとも1つの関連付けられたユーザーを持つ。                                |
+| `100`                                                        | that are related to the user with an ID of 100.        |
+| `[100, 200]`                                                 | that are related to a user with an ID of 100 or 200.   |
+| `['and', 100, 200]`                                          | that are related to the users with IDs of 100 and 200. |
+| an [User](craft3:craft\elements\User) object               | that are related to the user.                          |
+| an [UserQuery](craft3:craft\elements\db\UserQuery) object | that are related to any of the resulting users.        |
 
 ```twig
 {# Fetch entries with a related user #}
@@ -86,7 +91,7 @@
 {% endif %}
 ```
 
-ユーザークエリで[パラメータ](dev/element-queries/user-queries.md#parameters)をセットすることもできます。例えば、`authors` グループに含まれるユーザーだけを取得するには、[groupId](dev/element-queries/user-queries.md#groupid) パラメータをセットします。
+ユーザークエリで[パラメータ](dev/element-queries/user-queries.md#parameters)をセットすることもできます。 例えば、`authors` グループに含まれるユーザーだけを取得するには、[groupId](dev/element-queries/user-queries.md#groupid) パラメータをセットします。
 
 ```twig
 {% set relatedUsers = clone(entry.myFieldHandle)
@@ -94,8 +99,12 @@
     .all() %}
 ```
 
+::: tip
+It’s always a good idea to clone the user query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
+:::
+
 ## 関連項目
 
-* [ユーザークエリ](dev/element-queries/user-queries.md)
+* [ユーザークエリ](users.md#querying-users)
 * <craft3:craft\elements\User>
 * [リレーション](relations.md)
