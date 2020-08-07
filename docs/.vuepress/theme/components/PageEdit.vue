@@ -3,8 +3,7 @@
     <div v-if="editLink" class="edit-link">
       <a :href="editLink" target="_blank" rel="noopener noreferrer">{{
         editLinkText
-      }}</a>
-      <OutboundLink />
+      }}<OutboundLink /></a>
     </div>
 
     <div v-if="lastUpdated" class="last-updated">
@@ -89,10 +88,6 @@ export default {
 <style lang="postcss">
 .edit-link {
   @apply inline-block;
-
-  a {
-    @apply mr-1;
-  }
 }
 
 .content-wrapper {
