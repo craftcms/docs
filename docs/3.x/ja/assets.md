@@ -153,7 +153,7 @@ Asset queries support the following parameters:
 
 | Param                                     | Description                                                                                                                                                                                                                                                                              |
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [anyStatus](#anystatus)                   | Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.                                             |
+| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.                                                                                                                                                                                                                                         |
 | [asArray](#asarray)                       | Causes the query to return matching assets as arrays of data, rather than [Asset](craft3:craft\elements\Asset) objects.                                                                                                                                                                |
 | [clearCachedResult](#clearcachedresult)   | Clears the cached result.                                                                                                                                                                                                                                                                |
 | [dateCreated](#datecreated)               | Narrows the query results based on the assets’ creation dates.                                                                                                                                                                                                                           |
@@ -190,7 +190,7 @@ Asset queries support the following parameters:
 
 #### `anyStatus`
 
-Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+Removes element filters based on their statuses.
 
 
 
@@ -757,7 +757,7 @@ Narrows the query results to only assets that are related to certain other eleme
 
 
 
-See [Relations](https://docs.craftcms.com/v3/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -784,7 +784,7 @@ Narrows the query results to only assets that match a search query.
 
 
 
-See [Searching](https://docs.craftcms.com/v3/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -859,6 +859,15 @@ Determines which site(s) the assets should be queried in, per the site’s ID.
 
 
 The current site will be used by default.
+
+Possible values include:
+
+| Value           | Fetches assets…                         |
+| --------------- | --------------------------------------- |
+| `1`             | from the site with an ID of `1`.        |
+| `[1, 2]`        | from a site with an ID of `1` or `2`.   |
+| `['not', 1, 2]` | not in a site with an ID of `1` or `2`. |
+| `'*'`           | from any site.                          |
 
 
 
@@ -1095,12 +1104,13 @@ Narrows the query results based on the volumes the assets belong to, per the vol
 
 Possible values include:
 
-| Value           | Fetches assets…                       |
-| --------------- | ------------------------------------- |
-| `1`             | in a volume with an ID of 1.          |
-| `'not 1'`       | not in a volume with an ID of 1.      |
-| `[1, 2]`        | in a volume with an ID of 1 or 2.     |
-| `['not', 1, 2]` | not in a volume with an ID of 1 or 2. |
+| Value           | Fetches assets…                          |
+| --------------- | ---------------------------------------- |
+| `1`             | in a volume with an ID of 1.             |
+| `'not 1'`       | not in a volume with an ID of 1.         |
+| `[1, 2]`        | in a volume with an ID of 1 or 2.        |
+| `['not', 1, 2]` | not in a volume with an ID of 1 or 2.    |
+| `':empty:'`     | that haven’t been stored in a volume yet |
 
 
 
@@ -1160,7 +1170,7 @@ Causes the query to return matching assets eager-loaded with related elements.
 
 
 
-See [Eager-Loading Elements](https://docs.craftcms.com/v3/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 
