@@ -112,14 +112,13 @@ Category queries support the following parameters:
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [ancestorDist](#ancestordist)             | Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
 | [ancestorOf](#ancestorof)                 | Narrows the query results to only categories that are ancestors of another category.
-| [anyStatus](#anystatus)                   | Clears out the [status](#status) and [enabledForSite](#enabledforsite) parameters.
+| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
 | [asArray](#asarray)                       | Causes the query to return matching categories as arrays of data, rather than [Category](craft3:craft\elements\Category) objects.
 | [clearCachedResult](#clearcachedresult)   | Clears the cached result.
 | [dateCreated](#datecreated)               | Narrows the query results based on the categories’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the categories’ last-updated dates.
 | [descendantDist](#descendantdist)         | Narrows the query results to only categories that are up to a certain distance away from the category specified by [descendantOf](#descendantof).
 | [descendantOf](#descendantof)             | Narrows the query results to only categories that are descendants of another category.
-| [enabledForSite](#enabledforsite)         | Narrows the query results based on whether the categories are enabled in the site they’re being queried in, per the [site](#site) parameter.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [group](#group)                           | Narrows the query results based on the category groups the categories belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
@@ -218,7 +217,7 @@ This can be combined with [ancestorDist](#ancestordist) if you want to limit how
 
 #### `anyStatus`
 
-Clears out the [status](#status) and [enabledForSite](#enabledforsite) parameters.
+Removes element filters based on their statuses.
 
 
 
@@ -413,38 +412,6 @@ $categories = \craft\elements\Category::find()
 
 ::: tip
 This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant categories can be.
-:::
-
-
-#### `enabledForSite`
-
-Narrows the query results based on whether the categories are enabled in the site they’re being queried in, per the [site](#site) parameter.
-
-
-
-Possible values include:
-
-| Value | Fetches categories…
-| - | -
-| `true` _(default)_ | that are enabled in the site.
-| `false` | whether they are enabled or not in the site.
-
-
-
-::: code
-```twig
-{# Fetch all categories, including ones disabled for this site #}
-{% set categories = craft.categories()
-    .enabledForSite(false)
-    .all() %}
-```
-
-```php
-// Fetch all categories, including ones disabled for this site
-$categories = \craft\elements\Category::find()
-    ->enabledForSite(false)
-    ->all();
-```
 :::
 
 
@@ -946,7 +913,7 @@ Narrows the query results to only categories that are related to certain other e
 
 
 
-See [Relations](https://docs.craftcms.com/v3/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -973,7 +940,7 @@ Narrows the query results to only categories that match a search query.
 
 
 
-See [Searching](https://docs.craftcms.com/v3/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1081,6 +1048,15 @@ Determines which site(s) the categories should be queried in, per the site’s I
 
 
 The current site will be used by default.
+
+Possible values include:
+
+| Value | Fetches categories…
+| - | -
+| `1` | from the site with an ID of `1`.
+| `[1, 2]` | from a site with an ID of `1` or `2`.
+| `['not', 1, 2]` | not in a site with an ID of `1` or `2`.
+| `'*'` | from any site.
 
 
 
@@ -1342,7 +1318,7 @@ Causes the query to return matching categories eager-loaded with related element
 
 
 
-See [Eager-Loading Elements](https://docs.craftcms.com/v3/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 

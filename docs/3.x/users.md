@@ -63,7 +63,7 @@ User queries support the following parameters:
 | Param                                     | Description
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [admin](#admin)                           | Narrows the query results to only users that have admin accounts.
-| [anyStatus](#anystatus)                   | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
 | [asArray](#asarray)                       | Causes the query to return matching users as arrays of data, rather than [User](craft3:craft\elements\User) objects.
 | [can](#can)                               | Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
 | [clearCachedResult](#clearcachedresult)   | Clears the cached result.
@@ -74,6 +74,7 @@ User queries support the following parameters:
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [group](#group)                           | Narrows the query results based on the user group the users belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
+| [hasPhoto](#hasphoto)                     | Narrows the query results to only users that have (or don’t have) a user photo.
 | [id](#id)                                 | Narrows the query results based on the users’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching users as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
@@ -116,7 +117,7 @@ $users = \craft\elements\User::find()
 
 #### `anyStatus`
 
-Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+Removes element filters based on their statuses.
 
 
 
@@ -168,7 +169,7 @@ $users = \craft\elements\User::find()
 
 Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
 
-See [Users](https://docs.craftcms.com/v3/users.html) for a full list of available user permissions defined by Craft.
+See [User Management](https://craftcms.com/docs/3.x/user-management.html) for a full list of available user permissions defined by Craft.
 
 
 
@@ -422,6 +423,29 @@ Possible values include:
 // Fetch users in a group with an ID of 1
 $users = \craft\elements\User::find()
     ->groupId(1)
+    ->all();
+```
+:::
+
+
+#### `hasPhoto`
+
+Narrows the query results to only users that have (or don’t have) a user photo.
+
+
+
+::: code
+```twig
+{# Fetch users with photos #}
+{% set users = craft.users()
+    .hasPhoto()
+    .all() %}
+```
+
+```php
+// Fetch users without photos
+$users = \craft\elements\User::find()
+    ->hasPhoto()
     ->all();
 ```
 :::
@@ -681,7 +705,7 @@ Narrows the query results to only users that are related to certain other elemen
 
 
 
-See [Relations](https://docs.craftcms.com/v3/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -708,7 +732,7 @@ Narrows the query results to only users that match a search query.
 
 
 
-See [Searching](https://docs.craftcms.com/v3/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -860,7 +884,7 @@ Causes the query to return matching users eager-loaded with related elements.
 
 
 
-See [Eager-Loading Elements](https://docs.craftcms.com/v3/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 
