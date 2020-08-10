@@ -1,9 +1,5 @@
 # Installing
 
-::: tip
-[Skip to the bottom](#additional-resources) for additional resources and alternative installation options.
-:::
-
 ## Pre-flight check
 
 Before installing Craft, make sure that you’ve got everything you need:
@@ -134,57 +130,3 @@ Click “Go to Craft” and you’ll get taken straight to the dashboard.
 Congratulations, you’ve just installed Craft!
 
 Now get back to work.
-
-## Additional Resources
-
-Here are some additional resources for getting Craft installed in various environments:
-
-### Local Environments
-
-#### [Installing Craft CMS on Mac OS X Using MAMP & Sequel Pro](http://a73cram5ay.blogspot.com/2015/04/installing-craft-cms-on-mac-os-x-using.html)
-
-Guide by Alec Ramsay
-
-#### [The Absolute Beginners Guide to Setting Up Craft on Mac](https://una.im/2013/08/13/the-absolute-beginners-guide-to-setting-up-craft-on-mac/)
-
-Guide by Una Kravets
-
-#### [Craft CMS with Laravel Valet, How to Setup Local Web Development Environment on a Mac](https://3redkites.com/blog/entry/craft-cms-with-laravel-valet-how-to-setup-local-web-development-environment-on-a-mac/)
-
-Guide by Joann, 3 Red Kites
-
-#### [Setting up a local dev environment for Craft CMS with Laravel Homestead](https://medium.com/@mattcollins_6/setting-up-a-local-dev-environment-for-craft-cms-using-laravel-homestead-2724be3954a5)
-
-Guide by Matt Collins
-
-### Remote Environments
-
-#### [How To Install Craft CMS On Cloudways](https://www.cloudways.com/blog/install-craft-cms-on-cloud/)
-
-[Cloudways](https://www.cloudways.com/en/) installation guide by Ahmed Khan
-
-#### [Installing a fresh Craft CMS Installation on Laravel Forge](https://mattstauffer.com/blog/installing-a-fresh-craft-cms-installation-on-laravel-forge/)
-
-Guide by Matt Stauffer
-
-#### [One-click Deploy: Craft CMS to DigitalOcean](http://blog.deploybot.com/blog/deploying-craft-cms-to-a-digitalocean-with-deploybot)
-
-[DeployBot](http://deploybot.com/) deployment guide by Eugene Fedorenko, [Wildbit](https://wildbit.com/)
-
-#### [Craft on Heroku](https://medium.com/@aj1215/craft-cms-on-heroku-79b991665b0b)
-
-Guide by AJ Griem
-
-#### [Install Craft CMS 2 on fortrabbit](https://help.fortrabbit.com/install-craft-2)
-
-[fortrabbit](https://www.fortrabbit.com/) installation guide
-
-### Utilities
-
-#### [Craft Deploy](https://github.com/Bluegg/craft-deploy/)
-
-Capistrano deployment utility by [Bluegg](https://bluegg.co.uk/)
-
-#### [Craft Command Line Installer](https://github.com/themccallister/craft)
-
-Local installation utility by Jason McCallister
