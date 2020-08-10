@@ -791,7 +791,7 @@ nitro xoff [<options>]
 : The name of the machine to use. Defaults to `nitro-dev`.
 
 `--php-version`
-: The PHP version to disable Xdebug for
+: The PHP version for which Xdebug should be disabled.
 
 ## `xdebug on` / `xon`
 
@@ -807,6 +807,6 @@ nitro xon [<options>]
 : The name of the machine to use. Defaults to `nitro-dev`.
 
 `--php-version`
-: The PHP version to enable Xdebug for
+: The PHP version for which Xdebug should be enabled.
 
 Ensures Xdebug is installed for PHP and enables it.
