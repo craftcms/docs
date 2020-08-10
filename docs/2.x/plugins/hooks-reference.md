@@ -48,7 +48,7 @@ Called by
 
 Return
 
-:   A new [\Twig_Extension](https://twig.symfony.com/api/master/Twig_Extension.html) object
+:   A new [\Twig_Extension](https://github.com/pixelandtonic/Twig/blob/master/src/Extension/AbstractExtension.php) object
 
 Gives plugins a chance to add a new [Twig extension](https://twig.symfony.com/doc/api.html#using-extensions).
 
