@@ -11,7 +11,7 @@ module.exports = {
       {
         title: "Introduction",
         collapsable: false,
-        children: ["", "install", "upgrade"]
+        children: ["", "installation", "updating"]
       },
       {
         title: "Using Nitro",

@@ -1,4 +1,4 @@
-# Upgrading
+# Updating Instructions
 
 ## Upgrading to Nitro 0.10.0
 
