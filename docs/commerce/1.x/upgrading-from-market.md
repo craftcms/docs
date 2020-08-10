@@ -6,7 +6,7 @@ Craft Commerce is the successor to Market Commerce. To upgrade from Market Comme
 
 Before you perform the upgrade, make sure you are prepared.
 
-* Ensure you are running [Market 0.8.09](http://buildwithmarket.com/downloads/market-0.8.09.zip). (Do NOT uninstall Market Commerce!)
+* Ensure you are running [Market 0.8.09](https://www.dropbox.com/s/anue7ts5enp327q/market-0.8.09.zip?dl=1). (Do NOT uninstall Market Commerce!)
 * Ensure you are running Craft 2.5 or later.
 * Backup your database.
 
