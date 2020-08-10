@@ -107,9 +107,6 @@ $ nitro context
 Machine: nitro-dev
 ------
 php: "7.4"
-cpus: "1"
-disk: 40G
-memory: 4G
 mounts:
 - source: ~/sites/demo-site
   dest: /home/ubuntu/sites/demo-site
