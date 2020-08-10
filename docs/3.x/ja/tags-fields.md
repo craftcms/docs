@@ -11,7 +11,7 @@
 
 ### マルチサイト設定
 
-マルチサイトがインストールされている場合、次の設定も有効になります。（「高度」のトグルボタンで表示されます）
+マルチサイトがインストールされている場合、次の設定も有効になります。 （「高度」のトグルボタンで表示されます）
 
 - **特定のサイトから タグ を関連付けますか?** – 特定のサイトのタグとの関連付けのみを許可するかどうか。
 
@@ -25,10 +25,10 @@
 
 タグフィールドには、現在関連付けられているすべてのタグのリストと、新しいタグを追加するための入力欄があります。
 
-テキスト入力欄に入力すると、タグフィールドはそのタググループに属する既存のタグを（ソースの設定ごとに）検索し、入力欄の下のメニューにタグのサジェストを表示します。完全に一致するものが見つからない場合、メニューの最初のオプションから入力した値を名前にもつ新しいタグを作成できます。
+テキスト入力欄に入力すると、タグフィールドはそのタググループに属する既存のタグを（ソースの設定ごとに）検索し、入力欄の下のメニューにタグのサジェストを表示します。 完全に一致するものが見つからない場合、メニューの最初のオプションから入力した値を名前にもつ新しいタグを作成できます。
 
 ::: tip
-デフォルトでは、名前があまりにも似ている複数のタグを作成できません。コンフィグ設定の <config3:allowSimilarTags> を有効にすると、その振る舞いを変更することができます。
+デフォルトでは、名前があまりにも似ている複数のタグを作成できません。 コンフィグ設定の <config3:allowSimilarTags> config setting.
 :::
 
 ### インラインのタグ編集
@@ -43,10 +43,15 @@
 
 利用可能な値には、次のものが含まれます。
 
-| 値              | 取得するエレメント             |
-| -------------- | --------------------- |
-| `':empty:'`    | 関連付けられたタグを持たない。       |
-| `':notempty:'` | 少なくとも1つの関連付けられたタグを持つ。 |
+| 値                                                          | 取得するエレメント                                             |
+| ---------------------------------------------------------- | ----------------------------------------------------- |
+| `':empty:'`                                                | 関連付けられたタグを持たない。                                       |
+| `':notempty:'`                                             | 少なくとも1つの関連付けられたタグを持つ。                                 |
+| `100`                                                      | that are related to the tag with an ID of 100.        |
+| `[100, 200]`                                               | that are related to a tag with an ID of 100 or 200.   |
+| `['and', 100, 200]`                                        | that are related to the tags with IDs of 100 and 200. |
+| an [Tag](craft3:craft\elements\Tag) object               | that are related to the tag.                          |
+| an [TagQuery](craft3:craft\elements\db\TagQuery) object | that are related to any of the resulting tags.        |
 
 ```twig
 {# Fetch entries with a related tag #}
@@ -103,8 +108,12 @@
     .all() %}
 ```
 
+::: tip
+It’s always a good idea to clone the tag query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
+:::
+
 ## 関連項目
 
-* [タグクエリ](dev/element-queries/tag-queries.md)
+* [タグクエリ](tags.md#querying-tags)
 * <craft3:craft\elements\Tag>
 * [リレーション](relations.md)

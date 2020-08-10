@@ -4,16 +4,16 @@
 
 プラグイン作成に取り組む前に、いくつかのことを決めておく必要があります。
 
-- **パッケージ名** – プラグイン向けに Composer パッケージの名前として使用されます。（詳細については、[documentation](https://getcomposer.org/doc/04-schema.md#name) を参照してください。）これが Craft のプラグインだと識別する手助けになるため、2番目のセグメント（`/` の後）に接頭辞 `craft-` を付けることをお勧めします。例えば `pixelandtonic/craft-recipes` のような形です。
-- **名前空間** – プラグインのクラスが稼働する、ルート名前空間。（詳細については、[PSR-4](https://www.php-fig.org/psr/psr-4/) オートローディング仕様を参照してください。）これは `craft\` ではじめるべき *ではない* ことに注意してください。あなたやデベロッパーを識別する何かを使用してください。
-- **プラグインハンドル** – Craft のエコシステム内でプラグインを一意に識別する何か。（プラグインハンドルは、文字ではじまり、小文字の英字、数字、および、ダッシュのみでなければなりません。`kebab-cased` にすべきです。）
+- **パッケージ名** – プラグイン向けに Composer パッケージの名前として使用されます。 （詳細については、[documentation](https://getcomposer.org/doc/04-schema.md#name) を参照してください。 ）これが Craft のプラグインだと識別する手助けになるため、2番目のセグメント（`/` の後）に接頭辞 `craft-` を付けることをお勧めします。 例えば `pixelandtonic/craft-recipes` のような形です。
+- **名前空間** – プラグインのクラスが稼働する、ルート名前空間。 （詳細については、[PSR-4](https://www.php-fig.org/psr/psr-4/) オートローディング仕様を参照してください。 ）これは `craft\` ではじめるべき *ではない* ことに注意してください。 あなたやデベロッパーを識別する何かを使用してください。
+- **プラグインハンドル** – Craft のエコシステム内でプラグインを一意に識別する何か。 （プラグインハンドルは、文字ではじまり、小文字の英字、数字、および、ダッシュのみでなければなりません。 `kebab-cased` にすべきです。 ）
 - **プラグイン名** – コントロールパネル内でプラグインを何と呼ぶか。
 
 ## 基本ファイル構造の設定
 
-プラグインを作るため、コンピュータのどこかに新しいディレクトリを作成してください。一般的なアプローチは、Craft プロジェクトと並ぶ `~/dev/` フォルダに保管することです。
+プラグインを作るため、コンピュータのどこかに新しいディレクトリを作成してください。 一般的なアプローチは、Craft プロジェクトと並ぶ `~/dev/` フォルダに保管することです。
 
-```
+```treeview
 ~/dev/
 ├── my-project.test/
 │   └── ...
@@ -26,10 +26,10 @@
         └── Plugin.php
 ```
 
-プラグインディレクトリの名前は、重要ではありません。簡単に識別できるものを選んでください。
+プラグインディレクトリの名前は、重要ではありません。 簡単に識別できるものを選んでください。
 
 ::: tip
-数クリックでプラグインの土台を作成できる [pluginfactory.io](https://pluginfactory.io/) を利用してください。
+数クリックでプラグインの土台を作成できる [pluginfactory.io](https://pluginfactory.io/) を利用してください。 :::
 :::
 
 ## composer.json
@@ -80,48 +80,40 @@
 - `email@developer-website.tld` をサポートのメールアドレスにします。
 - `developer/repo` をプラグインが稼働している実際の GitHub アカウントとリポジトリ名にします。
 - `master` を GitHub リポジトリの実際のプライマリブランチ名にします。
-- ``namespace\\prefix\\` を名前空間接頭辞にします。（これは JSON であるため、二重バックスラッシュを使用し、最後が``\\` でなければならない点に注意してください。）
+- ``namespace\\prefix\\` を名前空間接頭辞にします。 （これは JSON であるため、二重バックスラッシュを使用し、最後が``\\` でなければならない点に注意してください。 ）
 - `plugin-handle` をプラグインハンドルにします。
 - `Plugin Name` をプラグイン名にします。
 - [Craft License](https://craftcms.github.io/license/) を使用する計画の場合、`MIT` を `proprietary` にします（「プラグインストアでの配布」ページの[ライセンスの選択](plugin-store.md#choose-a-license)を参照してください）。
 
 [MIT](https://opensource.org/licenses/MIT) よりむしろ [Craft license](https://craftcms.github.io/license/) でプラグインをリリースしたい場合、`license` 値を `"proprietary"` に変更してください。
 
-`extra` オブジェクトにセットできるプロパティの完全なリストは、次の通りです。
-
-- `handle` – プラグインハンドル _（必須）_ 。
-- `class` – [プラグインクラス](#the-plugin-class)名。設定されていない場合、インストーラーはそれぞれの `autoload` パスのルートで `Plugin.php` ファイルを探します。
-- `basePath` – プラグインのソースファイルへのベースパス。[Yii alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)（例： `@vendorname/foo`） としてフォーマットされた `autoload` 名前空間の1つからはじめることができます。設定されてない場合、プライマリプラグインクラスを含むディレクトリが使用されます。
-- `name` – プラグイン名。設定されていない場合、（ベンダー接頭辞なしの）パッケージ名が使用されます。
-- `version` - プラグインのバージョン。設定されていない場合、現在のパッケージバージョンが使用されます。
-- `schemaVersion` – プラグインスキーマのバージョン。
-- `description` – プラグインの説明。設定されていない場合、メインの `description` プロパティが使用されます。
-- `developer` – 開発者の名前。設定されていない場合、（`authors` プロパティ経由で）最初の作者の `name` が使用されます。
-- `developerUrl` – 開発者の URL。設定されていない場合、`homepage` プロパティ、または、（`authors` プロパティ経由で）最初の作者の `homepage` が使用されます。
-- `developerEmail` – サポートのメールアドレス。設定されていない場合、`support.email` プロパティが使用されます。
-- `documentationUrl` – プラグインのドキュメントの URL。設定されていない場合、`support.docs` プロパティが使用されます。
-- `sourceLanguage` – プラグインのソース言語（デフォルトは `en-US`）。
-- `hasSettings` – プラグインの設定があるかどうか（`true` または `false`）。
-- `hasCpSection` – コントロールパネルにプラグイン独自のセクションを持つかどうか（`true` または `false`）。
-- `components` – プラグイン上に存在するべき [component configs](https://www.yiiframework.com/doc/guide/2.0/en/structure-application-components) を定義するオブジェクト。
-
 ::: tip
-Composer が厳密に要求しているわけではありませんが、プラグインを開発する際にいくつかのことが簡単に行えるよう `composer.json` へ明示的に`version` を設定することをお勧めします。そして、アップデートし続けることを忘れないでください！
+Composer が厳密に要求しているわけではありませんが、プラグインを開発する際にいくつかのことが簡単に行えるよう `composer.json` へ明示的に`version` を設定することをお勧めします。 そして、アップデートし続けることを忘れないでください！ :::
 :::
 
-::: warning
-Craft 2 プラグインをアップデートする場合、`composer/installers` 依存があれば確実に削除してください。
+In addition to `name` and `handle` (which are both required), there are a few other things you can include in that `extra` object:
+
+- `class` – [プラグインクラス](#the-plugin-class)名。 設定されていない場合、インストーラーはそれぞれの `autoload` パスのルートで `Plugin.php` ファイルを探します。
+- `description` – プラグインの説明。 設定されていない場合、メインの `description` プロパティが使用されます。
+- `developer` – 開発者の名前。 設定されていない場合、（`authors` プロパティ経由で）最初の作者の `name` が使用されます。
+- `developerUrl` – 開発者の URL。 設定されていない場合、`homepage` プロパティ、または、（`authors` プロパティ経由で）最初の作者の `homepage` が使用されます。
+- `developerEmail` – サポートのメールアドレス。 設定されていない場合、`support.email` プロパティが使用されます。
+- `documentationUrl` – プラグインのドキュメントの URL。 設定されていない場合、`support.docs` プロパティが使用されます。
+
+&lt;?php namespace ns\prefix; class Plugin extends \craft\base\Plugin
+{ public function init()
+    { parent::init(); // Custom initialization code goes here...
 :::
 
 ## プラグインクラス
 
-`src/Plugin.php` ファイルは、システム向けのプラグインのエントリポイントです。すべてのリクエスト開始時に、インスタンスが作られます。`init()` メソッドはイベントリスナーやそれ自体の初期化を必要とする他のステップを登録するのに最適な場所です。
+`src/Plugin.php` ファイルは、システム向けのプラグインのエントリポイントです。 すべてのリクエスト開始時に、インスタンスが作られます。 `init()` メソッドはイベントリスナーやそれ自体の初期化を必要とする他のステップを登録するのに最適な場所です。
 
 このテンプレートを `Plugin.php` ファイルの出発点として使用してください。
 
 ```php
 <?php
-namespace ns\prefix;
+namespace mynamespace;
 
 class Plugin extends \craft\base\Plugin
 {
@@ -134,17 +126,15 @@ class Plugin extends \craft\base\Plugin
 }
 ```
 
-`ns\prefix` を実際のプラグインの名前空間接頭辞に置き換えてください。
-
 ## Craft プロジェクトへのプラグインの読み込み
 
-Craft にプラグインを表示するには、Craft プロジェクトの Composer 依存としてインストールする必要があります。そのためには複数の方法があります。
+Craft にプラグインを表示するには、Craft プロジェクトの Composer 依存としてインストールする必要があります。 そのためには複数の方法があります。
 
 ### Path Repository
 
-開発中にプラグインを動作させる最も簡単な方法は、他の依存関係と同様に `vendor/` フォルダへシンボリックリンクするよう Composer に伝える [path repository](https://getcomposer.org/doc/05-repositories.md#path) を利用することです。
+During development, the easiest way to work on your plugin is with a [path repository][path], which will tell Composer to symlink your plugin into the `vendor/` folder right alongside other dependencies.
 
-設定するには、Craft プロジェクトの `composer.json` ファイルを開き、次の変更を加えます。
+開発中にプラグインを動作させる最も簡単な方法は、他の依存関係と同様に `vendor/` フォルダへシンボリックリンクするよう Composer に伝える [path repository](https://getcomposer.org/doc/05-repositories.md#path) を利用することです。
 
 - [minimum-stability](https://getcomposer.org/doc/04-schema.md#minimum-stability) を `"dev"` に設定します。
 - [prefer-stable](https://getcomposer.org/doc/04-schema.md#prefer-stable) を `true` に設定します。
@@ -164,10 +154,10 @@ Craft にプラグインを表示するには、Craft プロジェクトの Comp
 ```
 
 ::: tip
-`url` 値にプラグインのソースディレクトリを絶対パスまたは相対パスで設定します。（サンプルの `../my-plugin` は、プロジェクトフォルダーと並んでプラグインのフォルダが存在することを前提としています。）
+`url` 値にプラグインのソースディレクトリを絶対パスまたは相対パスで設定します。 （サンプルの `../my-plugin` は、プロジェクトフォルダーと並んでプラグインのフォルダが存在することを前提としています。
 :::
 
-ターミナル上で Craft プロジェクトへ移動し、Composer にプラグインの追加を伝えてください。（`composer.json` ファイルでプラグインに付けたパッケージ名と同じものを使用してください。）
+ターミナル上で Craft プロジェクトへ移動し、Composer にプラグインの追加を伝えてください。 （`composer.json` ファイルでプラグインに付けたパッケージ名と同じものを使用してください。
 
 ```bash
 # go to the project directory
@@ -184,7 +174,7 @@ Composer のインストールログは、シンボリックリンク経由で�
 ```
 
 ::: warning
-`path` Composer リポジトリの難点の1つは、`composer update` を実行した際に Composer が `path` ベースの依存関係を無視することです。そのため、プラグインの依存要件やプラグインの情報のような `composer.json` の内容に変更を加える際は、それらの変化が効力を発揮するようプロジェクト内のプラグインを完全に削除してから再要求する必要があります。
+`path` Composer リポジトリの難点の1つは、`composer update` を実行した際に Composer が `path` ベースの依存関係を無視することです。 そのため、プラグインの依存要件やプラグインの情報のような `composer.json` の内容に変更を加える際は、それらの変化が効力を発揮するようプロジェクト内のプラグインを完全に削除してから再要求する必要があります。
 
 ```bash
 # go to the project directory
@@ -196,11 +186,12 @@ composer remove package/name
 # re-require the plugin package
 composer require package/name
 ```
+
 :::
 
 ### Packagist
 
-プラグインを一般公開する準備ができたら、新しい Composer パッケージを [Packagist](https://packagist.org/) に登録してください。そうすれば、Composer の `require` コマンドにパッケージ名を渡すだけで、他のパッケージと同様にインストールできます。
+プラグインを一般公開する準備ができたら、新しい Composer パッケージを [Packagist](https://packagist.org/) に登録してください。 そうすれば、Composer の `require` コマンドにパッケージ名を渡すだけで、他のパッケージと同様にインストールできます。
 
 ```bash
 # go to the project directory
@@ -218,4 +209,6 @@ composer require package/name
 
 プラグインアイコンは、プラグインのソースディレクトリ（例：`src/`）のルートに `icon.svg` として保存された、正方形の SVG ファイルでなければいけません。
 
-プラグインが [コントロールパネルのセクション](cp-section.md) を持つ場合は、プラグインのソースディレクトリのルートに `icon-mask.svg` ファイルを保存することによって、グローバルナビゲーション項目にカスタムアイコンを付けることもできます。このアイコンにはストロークを含めることができず、常に（アルファ透明度に関して）ソリッドカラーで表示されることに注意してください。
+プラグインが [コントロールパネルのセクション](cp-section.md) を持つ場合は、プラグインのソースディレクトリのルートに `icon-mask.svg` ファイルを保存することによって、グローバルナビゲーション項目にカスタムアイコンを付けることもできます。 このアイコンにはストロークを含めることができず、常に（アルファ透明度に関して）ソリッドカラーで表示されることに注意してください。
+
+[path]: https://getcomposer.org/doc/05-repositories.md#path
