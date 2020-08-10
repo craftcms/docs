@@ -613,7 +613,7 @@ nitro php restart [<options>]
 : The name of the machine to use. Defaults to `nitro-dev`.
 
 `--php-version`
-: The PHP version to restart.
+: The PHP version to restart. If omitted, the machine’s default PHP version is used.
 
 ## `php start`
 
@@ -629,7 +629,7 @@ nitro php start [<options>]
 : The name of the machine to use. Defaults to `nitro-dev`.
 
 `--php-version`
-: The PHP version to start.
+: The PHP version to start. If omitted, the machine’s default PHP version is used.
 
 ## `php stop`
 
@@ -645,7 +645,7 @@ nitro php stop [<options>]
 : The name of the machine to use. Defaults to `nitro-dev`.
 
 `--php-version`
-: The PHP version to stop.
+: The PHP version to stop. If omitted, the machine’s default PHP version is used.
 
 ## `redis`
 
@@ -797,7 +797,7 @@ nitro xoff [<options>]
 : The name of the machine to use. Defaults to `nitro-dev`.
 
 `--php-version`
-: The PHP version for which Xdebug should be disabled.
+: The PHP version for which Xdebug should be disabled. If omitted, the machine’s default PHP version is used.
 
 ## `xdebug on` / `xon`
 
@@ -813,6 +813,6 @@ nitro xon [<options>]
 : The name of the machine to use. Defaults to `nitro-dev`.
 
 `--php-version`
-: The PHP version for which Xdebug should be enabled.
+: The PHP version for which Xdebug should be enabled. If omitted, the machine’s default PHP version is used.
 
 Ensures Xdebug is installed for PHP and enables it.
