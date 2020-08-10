@@ -86,6 +86,8 @@ There are 2 mounted directories and 1 new mount(s) in the config file.
 Applied changes from nitro.yaml.
 ```
 
+## `completion`
+
 ## `context`
 
 Shows the machine’s configuration.
@@ -657,6 +659,10 @@ nitro redis [<options>]
 
 `-m`, `--machine`
 : The name of the machine to use. Defaults to `nitro-dev`.
+
+## `refresh`
+
+Updates the Nitro CLI’s internal API. (This should be run after a self-update.)
 
 ## `remove`
 
