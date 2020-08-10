@@ -1,6 +1,6 @@
 # Using Xdebug & PhpStorm
 
-Once you’ve created a machine, you can run `nitro xdebug on` and `nitro xdebug configure` to enable [Xdebug](https://xdebug.org/) and set it up for automatic connections from your host machine.
+Once you’ve created a machine, you can run [`nitro xdebug on`](commands.md#xdebug-on-xon) to enable [Xdebug](https://xdebug.org/) and set it up for automatic connections from your host machine.
 
 You can use `nitro xdebug off` to disable Xdebug without having to restart the machine.
 
