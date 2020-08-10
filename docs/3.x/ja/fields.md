@@ -57,7 +57,7 @@ Craft は次の組み込みのフィールドタイプがあります。
 
 ## フィールドレイアウト
 
-フィールドを作成すると、「フィールドレイアウト」にそれらを加えることによって編集フォームに表示させることができます。
+Once you’ve created your fields, you can display them in your edit forms by adding them to “field layouts”.
 
 関連するコンテンツを持つ Craft 内のすべての場所で、フィールドを選択するためのフィールドレイアウトを提供します。
 

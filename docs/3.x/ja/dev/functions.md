@@ -483,7 +483,7 @@ By default, if you pass an asset or raw markup into the function, the SVG will b
 {{ svg(image, sanitize=false, namespace=false) }}
 ```
 
-You can also specify a custom class name that should be added to the root `<svg>` node using the [attr](../filters.md#attr) filter:
+You can also specify a custom class name that should be added to the root `<svg>` node using the [attr](filters.md#attr) filter:
 
 ```twig
 {{ svg('@webroot/icons/lemon.svg')|attr({ class: 'lemon-icon' }) }}

@@ -64,7 +64,7 @@ Matrix block queries support the following parameters:
 | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the Matrix blocks’ owners are drafts.                                                                                                                                                                                                                |
 | [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the Matrix blocks’ owners are revisions.                                                                                                                                                                                                             |
-| [anyStatus](#anystatus)                     | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.                                                                                                                                 |
+| [anyStatus](#anystatus)                     | Removes element filters based on their statuses.                                                                                                                                                                                                                                                |
 | [asArray](#asarray)                         | Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft3:craft\elements\MatrixBlock) objects.                                                                                                                                                    |
 | [clearCachedResult](#clearcachedresult)     | Clears the cached result.                                                                                                                                                                                                                                                                       |
 | [dateCreated](#datecreated)                 | Narrows the query results based on the Matrix blocks’ creation dates.                                                                                                                                                                                                                           |
@@ -123,7 +123,7 @@ Possible values include:
 
 #### `anyStatus`
 
-Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+Removes element filters based on their statuses.
 
 
 
@@ -589,7 +589,7 @@ Narrows the query results to only Matrix blocks that are related to certain othe
 
 
 
-See [Relations](https://docs.craftcms.com/v3/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -616,7 +616,7 @@ Narrows the query results to only Matrix blocks that match a search query.
 
 
 
-See [Searching](https://docs.craftcms.com/v3/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -691,6 +691,15 @@ Determines which site(s) the Matrix blocks should be queried in, per the site’
 
 
 The current site will be used by default.
+
+Possible values include:
+
+| Value           | Fetches Matrix blocks…                  |
+| --------------- | --------------------------------------- |
+| `1`             | from the site with an ID of `1`.        |
+| `[1, 2]`        | from a site with an ID of `1` or `2`.   |
+| `['not', 1, 2]` | not in a site with an ID of `1` or `2`. |
+| `'*'`           | from any site.                          |
 
 
 
@@ -893,7 +902,7 @@ Causes the query to return matching Matrix blocks eager-loaded with related elem
 
 
 
-See [Eager-Loading Elements](https://docs.craftcms.com/v3/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 
