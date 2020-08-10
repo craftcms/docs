@@ -18,7 +18,7 @@ nitro apply [<options>]
 
 ##### Example
 
-```bash
+```
 $ nitro apply
 There are 2 mounted directories and 1 new mount(s) in the config file.
 Applied changes from nitro.yaml.
@@ -28,7 +28,7 @@ Applied changes from nitro.yaml.
 
 Adds a new site to the machine.
 
-```bash
+```
 nitro add [<options>]
 ```
 
@@ -62,11 +62,35 @@ Editing your hosts file
 Password: ******
 ```
 
+## `apply`
+
+Ensures the machine exists and applies any config changes to it.
+
+```
+nitro apply [<options>]
+```
+
+#### Options
+
+`-m`, `--machine`
+: The name of the machine to use. Defaults to `nitro-dev`.
+
+`--skip-hosts`
+: Skips updating the `hosts` file.
+
+#### Example
+
+```
+$ nitro apply
+There are 2 mounted directories and 1 new mount(s) in the config file.
+Applied changes from nitro.yaml.
+```
+
 ## `context`
 
 Shows the machine’s configuration.
 
-```bash
+```
 nitro context [<options>]
 ```
 
@@ -104,7 +128,7 @@ sites:
 
 ## `db add`
 
-Create a new database on a database engine in a machine.
+Creates a new database on a database engine in a machine.
 
 ```bash
 nitro db add [<options>]
@@ -118,7 +142,7 @@ nitro db add [<options>]
 
 #### Example
 
-```bash
+```
 $ nitro db add
   1 - postgres_11_5432
   2 - mysql_5.7_3306
@@ -129,9 +153,9 @@ Added database "mynewproject" to "mysql_5.7_3306".
 
 ## `db backup`
 
-Backup one or all databases from a database engine in a machine. 
+Backs up one or all databases from a database engine in a machine.
 
-```bash
+```
 nitro db backup [<options>]
 ```
 
@@ -143,7 +167,7 @@ nitro db backup [<options>]
 
 #### Example
 
-```bash
+```
 $ nitro db backup
   1 - postgres_11_5432
   2 - mysql_5.7_3306
@@ -159,10 +183,10 @@ Backup completed and stored in "/Users/vin/.nitro/backups/nitro-dev/postgres_11_
 
 ## `db import`
 
-Import a SQL file into a database engine in a machine. You will be prompted with a list of running database engines
-(MySQL and PostgreSQL) to import the file into.
+Imports an SQL file into a database engine in a machine. You’ll be prompted with a list of running database engines
+(MySQL and PostgreSQL) that should receive the import.
 
-```bash
+```
 nitro db import <file> [<options>]
 ```
 
@@ -174,7 +198,7 @@ nitro db import <file> [<options>]
 
 #### Example
 
-```bash
+```
 $ nitro db import mybackup.sql
   1 - mysql_5.7_3306
   2 - postgres_11_5432
@@ -186,7 +210,7 @@ Successfully import the database backup into new-project
 
 ## `db remove`
 
-Will remove a database from a database engine in a machine, but not from the config file.
+Removes a database from a database engine in a machine, but not from the config file.
 
 ```bash
 nitro db remove [<options>]
@@ -200,7 +224,7 @@ nitro db remove [<options>]
 
 #### Example
 
-```bash
+```
 $ nitro db remove
   1 - postgres_11_5432
   2 - mysql_5.7_3306
@@ -208,15 +232,15 @@ Select database engine: [1]
   1 - nitro
   2 - project-one
  
-Are you sure you want to permanently remove the database nitro? [no] 
+Are you sure you want to permanently remove the database nitro? [no]
 Removed database nitro
 ```
 
 ## `db restart`
 
-Will restart a database engine in a machine.
+Restarts a database engine in a machine.
 
-```bash
+```
 nitro db restart [<options>]
 ```
 
@@ -238,9 +262,9 @@ Restarted database engine postgres_11_5432
 
 ## `db start`
 
-Will start a stopped database engine in a machine.
+Starts a stopped database engine in a machine.
 
-```bash
+```
 nitro db start [<options>]
 ```
 
@@ -252,7 +276,7 @@ nitro db start [<options>]
 
 #### Example
 
-```bash
+```
 $ nitro db start
   1 - postgres_11_5432
   2 - mysql_5.7_3306
@@ -262,9 +286,9 @@ Started database engine postgres_11_5432
 
 ## `db stop`
 
-Will stop a database engine in a machine.
+Stops a database engine in a machine.
 
-```bash
+```
 nitro db stop [<options>]
 ```
 
@@ -276,7 +300,7 @@ nitro db stop [<options>]
 
 #### Example
 
-```bash
+```
 $ nitro db stop
   1 - postgres_11_5432
   2 - mysql_5.7_3306
@@ -306,9 +330,9 @@ nitro destroy [<options>]
 
 ## `edit`
 
-Edit allows you to quickly open your machine configuration to make changes.
+Opens your machine configuration file in your default editor for quickly making changes.
 
-```bash
+```
 nitro edit [<options>]
 ```
 
@@ -319,7 +343,7 @@ nitro edit [<options>]
 
 #### Example
 
-```bash
+```
 nitro edit
 ```
 
@@ -343,9 +367,9 @@ open ~/.nitro/nitro-dev.yaml
 
 ## `info`
 
-Shows the _running_ information for a machine like the IP address, memory, disk usage, and mounts.
+Shows machine details like its IP address and PHP version.
 
-```bash
+```
 nitro info [<options>]
 ```
 
@@ -357,26 +381,30 @@ nitro info [<options>]
 
 #### Example
 
-```bash
+```
 $ nitro info
-Name:           nitro-dev
-State:          Running
-IPv4:           192.168.64.48
-Release:        Ubuntu 18.04.4 LTS
-Image hash:     2f6bc5e7d9ac (Ubuntu 18.04 LTS)
-Load:           0.09 0.15 0.22
-Disk usage:     2.7G out of 38.6G
-Memory usage:   379.8M out of 3.9G
-Mounts:         /Users/vin/sites/demo-site => /home/ubuntu/sites/demo-site
-                    UID map: 501:default
-                    GID map: 20:default
+$ nitro info
+Nitro installed, ready for something incredible at 192.168.64.21.
+
+Add a project with "nitro add <directory>".
+
+Server Information
+-------------------------
+IP address: 192.168.64.21
+PHP version: 7.4
+
+Need help setting up Xdebug?
+https://github.com/craftcms/nitro/blob/master/XDEBUG.md
+
+Need help using Nitro? 
+https://github.com/craftcms/nitro/blob/master/README.md
 ```
 
 ## `init`
 
 Initializes a machine.
 
-```bash
+```
 nitro init [<options>]
 ```
 
@@ -386,25 +414,25 @@ nitro init [<options>]
 : The name of the machine to use. Defaults to `nitro-dev`.
 
 `--php-version`
-: The PHP version to use. If not passed, the command will prompt for it.
+: The PHP version to use. If omitted, the command will prompt for it.
 
 `--cpus`
-: The max number of CPUs that the machine can use. If not passed, Nitro will try to determine the best number based on the host computer.
+: The max number of CPUs the machine can use. If omitted, Nitro will try to determine the best number based on the host computer.
 
 `--memory`
-: The max amount of system RAM that the machine can use. If not passed, the command will prompt for it.
+: The max amount of system RAM the machine can use. If omitted, the command will prompt for it.
 
 `--disk`
-: The max amount of disk space that the machine can use. If not passed, the command will prompt for it.
+: The max amount of disk space the machine can use. If omitted, the command will prompt for it.
 
 
 If the machine already exists, it will be reconfigured.
 
 ## `install composer`
 
-Install composer inside of a virtual machine.
+Installs composer inside a virtual machine.
 
-```bash
+```
 nitro install composer
 ```
 
@@ -416,16 +444,16 @@ nitro install composer
 
 #### Example
 
-```bash
+```
 $ nitro install composer
 Composer is now installed on "nitro-dev".
 ```
 
 ## `install mysql`
 
-This will add a new MySQL database engine.
+Adds a new MySQL database engine.
 
-```bash
+```
 nitro install mysql
 ```
 
@@ -437,7 +465,7 @@ nitro install mysql
 
 #### Example
 
-```bash
+```
 $ nitro install mysql
 Enter the MySQL version to install: 5.6
 Enter the MySQL port number: 3306
@@ -447,9 +475,9 @@ Apply changes from config now? [yes]
 
 ## `install postgres`
 
-This will add a new PostgreSQL database engine. 
+Adds a new PostgreSQL database engine.
 
-```bash
+```
 nitro install postgres
 ```
 
@@ -461,7 +489,7 @@ nitro install postgres
 
 #### Example
 
-```bash
+```
 $ nitro install postgres
 Enter the PostgreSQL version to install: 11
 Enter the MySQL port number: 5432
@@ -471,9 +499,9 @@ Apply changes from config now? [yes]
 
 ## `keys`
 
-Import SSH keys intro a virtual machine for use with Composer, git, etc.
+Imports SSH keys into a virtual machine for use with Composer, git, etc.
 
-```bash
+```
 nitro keys [<options>]
 ```
 
@@ -485,7 +513,7 @@ nitro keys [<options>]
 
 #### Example
 
-```bash
+```
 $ nitro keys
   1 - id_rsa
   2 - personal_rsa
@@ -495,10 +523,10 @@ Transferred the key "id_rsa" into "nitro-dev".
 
 ## `logs`
 
-Views the machine’s logs. This command will prompt you for a type of logs to view, including e.g. `nginx`,
+Displays the machine’s logs. This command will prompt you for a type of logs to view, including e.g. `nginx`,
 `database`, or `docker` (for a specific container).
 
-```bash
+```
 nitro logs [<options>]
 ```
 
@@ -507,12 +535,124 @@ nitro logs [<options>]
 `-m`, `--machine`
 : The name of the machine to use. Defaults to `nitro-dev`.
 
+## `nginx restart`
+
+Restarts nginx on a machine.
+
+```
+nitro nginx restart [<options>]
+```
+
+#### Options
+
+`-m`, `--machine`
+: The name of the machine to use. Defaults to `nitro-dev`.
+
+## `nginx start`
+
+Starts nginx on the machine.
+
+```
+nitro nginx start [<options>]
+```
+
+#### Options
+
+`-m`, `--machine`
+: The name of the machine to use. Defaults to `nitro-dev`.
+
+## `nginx stop`
+
+Stops nginx on the machine.
+
+```shell script
+nitro nginx stop [<options>]
+```
+
+#### Options
+
+`-m`, `--machine`
+: The name of the machine to use. Defaults to `nitro-dev`.
+
+## `php iniget`
+
+Outputs PHP ini setting values.
+
+```
+nitro php iniget [<options>] <setting> 
+```
+
+#### Options
+
+`-m`, `--machine`
+: The name of the machine to use. Defaults to `nitro-dev`.
+
+## `php iniset`
+
+Changes PHP ini settings from the command line. This command will prompt for the setting to change, including e.g. `max_execution_time`, `max_input_vars`, `max_input_time`, `max_file_upload`, `memory_limit`, `upload_max_filesize`.
+
+```
+nitro php iniset [<options>] <setting> <value> 
+```
+
+#### Options
+
+`-m`, `--machine`
+: The name of the machine to use. Defaults to `nitro-dev`.
+
+## `php restart`
+
+Restarts PHP-FPM on the machine.
+
+```
+nitro php restart [<options>]
+```
+
+#### Options
+
+`-m`, `--machine`
+: The name of the machine to use. Defaults to `nitro-dev`.
+
+`--php-version`
+: The PHP version to restart.
+
+## `php start`
+
+Starts PHP-FPM on the machine.
+
+```
+nitro php start [<options>]
+```
+
+#### Options
+
+`-m`, `--machine`
+: The name of the machine to use. Defaults to `nitro-dev`.
+
+`--php-version`
+: The PHP version to start.
+
+## `php stop`
+
+Stops PHP-FPM on the machine.
+
+```shell script
+nitro php stop [<options>]
+```
+
+#### Options
+
+`-m`, `--machine`
+: The name of the machine to use. Defaults to `nitro-dev`.
+
+`--php-version`
+: The PHP version to stop.
 
 ## `redis`
 
 Starts a Redis shell.
 
-```bash
+```
 nitro redis [<options>]
 ```
 
@@ -521,17 +661,16 @@ nitro redis [<options>]
 `-m`, `--machine`
 : The name of the machine to use. Defaults to `nitro-dev`.
 
-
 ## `remove`
 
 Removes a site from the machine.
 
-```bash
+```
 nitro remove [<options>]
 ```
 
-You will be prompted to select the site that should be removed. If the site has a corresponding
-[mount](#adding-mounts) at `/home/ubuntu/sites/<hostname>`, the mount will be removed as well.
+You’ll be prompted to select the site that should be removed. If the site has a corresponding
+[mount](usage.md#adding-mounts) at `/home/ubuntu/sites/<hostname>`, the mount will be removed as well.
 
 #### Options
 
@@ -541,9 +680,9 @@ You will be prompted to select the site that should be removed. If the site has 
 
 ## `rename`
 
-Rename a site in a configuration file. Will prompt for which site to rename.
+Renames a site in a configuration file, prompting for which site should be renamed.
 
-```bash
+```
 nitro rename [<options>]
 ```
 
@@ -552,12 +691,11 @@ nitro rename [<options>]
 `-m`, `--machine`
 : The name of the machine to use. Defaults to `nitro-dev`.
 
-
 ## `restart`
 
 Restarts a machine.
 
-```bash
+```
 nitro restart [<options>]
 ```
 
@@ -569,21 +707,21 @@ nitro restart [<options>]
 
 ## `self-update`
 
-Perform updates to the Nitro CLI.
+Updates the Nitro CLI.
 
-```bash
+```
 nitro self-update
 ```
 
 ::: warning
-This command does not work on Windows. You will need to perform a [manual installation.](https://github.com/craftcms/nitro/blob/master/README.md#installation)
+This command does not work on Windows. You will need to perform a [manual installation.](install.md)
 :::
 
 ## `ssh`
 
-Tunnels into the machine as the default `ubuntu` user over SSH.
+Tunnels into the machine over SSH as the default `ubuntu` user.
 
-```bash
+```
 nitro ssh [<options>]
 ```
 
@@ -597,7 +735,7 @@ nitro ssh [<options>]
 
 Starts the machine.
 
-```bash
+```
 nitro start [<options>]
 ```
 
@@ -611,7 +749,7 @@ nitro start [<options>]
 
 Stops the machine.
 
-```bash
+```
 nitro stop [<options>]
 ```
 
@@ -620,12 +758,11 @@ nitro stop [<options>]
 `-m`, `--machine`
 : The name of the machine to use. Defaults to `nitro-dev`.
 
-
 ## `update`
 
-Performs system updates (e.g. `sudo apt get update && sudo apt upgrade -y`).
+Performs machine system updates (e.g. `sudo apt get update && sudo apt upgrade -y`).
 
-```bash
+```
 nitro update [<options>]
 ```
 
@@ -637,37 +774,18 @@ nitro update [<options>]
 
 ## `version`
 
-Checks the currently version of nitro against the releases and shows any updated versions.
+Checks the current version of Nitro against the releases and shows any updated versions.
 
-```bash
+```
 nitro version
 ```
 
-## `xdebug on`
-
-Enables Xdebug, which is installed and disabled by default on each machine.
-
-```bash
-nitro xdebug on [<options>]
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-`--php-version`
-: The PHP version to enable Xdebug for.
-
-
-This ensures Xdebug is installed for PHP and enables it:
-
-## `xdebug off`
+## `xdebug off` / `xoff`
 
 Disables Xdebug on a machine.
 
-```bash
-nitro xdebug off [<options>]
+```
+nitro xoff [<options>]
 ```
 
 #### Options
@@ -676,5 +794,22 @@ nitro xdebug off [<options>]
 : The name of the machine to use. Defaults to `nitro-dev`.
 
 `--php-version`
-: The PHP version to disable Xdebug for.
+: The PHP version to disable Xdebug for
 
+## `xdebug on` / `xon`
+
+Enables Xdebug, which is installed and disabled by default on each machine.
+
+```shell script
+nitro xon [<options>]
+```
+
+#### Options
+
+`-m`, `--machine`
+: The name of the machine to use. Defaults to `nitro-dev`.
+
+`--php-version`
+: The PHP version to enable Xdebug for
+
+Ensures Xdebug is installed for PHP and enables it.
