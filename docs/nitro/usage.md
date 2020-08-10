@@ -31,14 +31,30 @@ Password: ******
 Multipass requires Full Disk Access on macOS. If you’re seeing mount “not readable” issues, ensure `multipassd` is checked under System Preferences → Security & Privacy → Privacy → Full Disk Access.
 :::
 
+::: tip Windows 10
+To avoid runtime exceptions due to incorrect handling of file-based mutex locks, Windows users should add the following snippet to the array returned by `config/app.php`. This manual change is required since there is no reliable way for Craft to know that it is running in a VM with a Windows host. For more info see [Craft #4355](https://github.com/craftcms/cms/issues/4355) and [#195](https://github.com/craftcms/nitro/issues/195).
+```php
+return [
+    'components' => [
+        'mutex' => function() {
+            $config = craft\helpers\App::mutexConfig();
+            $config['isWindows'] = true;
+            return Craft::createObject($config);
+        },
+    ],
+];
+```
+:::
+
+::: tip
+Instead of hardcoding the value of `isWindows` inside `config/app.php`, you can instead use an [environment variable](/3.x/config/#config-files) defined in your `.env` file.
+:::
+
 ### Mounting your entire dev folder at once
 
-If you manage all of your projects within a single dev folder, you can mount that entire folder once within Nitro,
-and point your sites’ webroots to the appropriate folders within it.
+If you manage all of your projects within a single dev folder, you can mount that entire folder once within Nitro, and point your sites’ webroots to the appropriate folders within it.
 
-To do that, open your `~/.nitro/nitro-dev.yaml` file in a text editor (or run the [`edit`](#edit) command), and add
-a new mount for the folder that contains all of your projects, plus list out all of your sites you wish to add to
-Nitro within that folder:
+To do that, open your `~/.nitro/nitro-dev.yaml` file in a text editor (or run the [`edit`](commands.md#edit) command), and add a new mount for the folder that contains all of your projects, plus list out all of your sites you wish to add to Nitro within that folder:
 
 ```yaml
 mounts:
@@ -74,13 +90,13 @@ DB_DATABASE="nitro"
 
 To connect to the database from your host operating system, you’ll first need to get the IP address of your Nitro machine. You can find that by running the [info](#info) command.
 
-```bash
+```
 $ nitro info
 Name:           nitro-dev
 State:          Running
 IPv4:           192.168.64.2
-Release:        Ubuntu 18.04.4 LTS
-Image hash:     2f6bc5e7d9ac (Ubuntu 18.04 LTS)
+Release:        Ubuntu 20.04 LTS
+Image hash:     2f6bc5e7d9ac (Ubuntu 20.04 LTS)
 Load:           0.71 0.74 0.60
 Disk usage:     2.7G out of 38.6G
 Memory usage:   526.4M out of 3.9G
@@ -140,13 +156,13 @@ This command will run through the same prompts you saw when creating your primar
 Nitro. Once it’s done, you’ll have a new Multipass machine, as well as a new configuration file for it at
 `~/.nitro/my-machine.yaml`.
 
-All of Nitro’s [commands](#commands) accept an `-m` option, which you can use to specify which machine the command
+All of Nitro’s [commands](commands.md) accept an `-m` option, which you can use to specify which machine the command
 should be run against. (`nitro-dev` will always be used by default.)
 
 ## Adding Multiple Database Engines
 
 To run multiple database engines on the same machine, open your `~/.nitro/nitro-dev.yaml` file in a text editor (or
-run the [`edit`](#edit) command), and list additional databases under the `databases` key:
+run the [`edit`](commands.md#edit) command), and list additional databases under the `databases` key:
 
 ```yaml
 databases:
@@ -165,4 +181,4 @@ databases:
 Each database engine needs its own unique port.
 :::
 
-Then run `nitro apply` to apply your `nitro.yaml` changes to the machine.
+Run `nitro apply` to apply your `nitro.yaml` changes to the machine.
