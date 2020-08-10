@@ -13,7 +13,7 @@ Nitro installs the following on every machine:
 - Xdebug
 - Blackfire
 
-## Requirements
+## System Requirements
 
 - macOS, Linux, or Windows 10 Pro with Hyper-V enabled
 - [Multipass](https://multipass.run/) 1.4.0+
