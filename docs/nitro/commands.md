@@ -88,6 +88,8 @@ Applied changes from nitro.yaml.
 
 ## `completion`
 
+Generates shell completion for Nitro commands.
+
 ## `context`
 
 Shows the machine’s configuration.
