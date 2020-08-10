@@ -4,7 +4,7 @@
 
 ### macOS and Linux
 
-1. Install [Multipass](https://multipass.run) (requires 1.2.0+).
+1. Install [Multipass](https://multipass.run) (requires 1.4.0+).
 2. Run this terminal command:
 
     ```bash
