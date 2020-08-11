@@ -29,7 +29,7 @@ Adding or updating the addresses on the order is done using the `commerce/cart/u
 This example creates a form for adding the customer’s first address as the `shippingAddressId`, also using it for the billing address with the `billingAddressSameAsShipping` parameter:
 
 ```twig
-{% set address = craft.commerce.customer.addresses|first %}
+{% set address = craft.commerce.customers.customer.addresses|first %}
 
 <form method="post">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
@@ -45,7 +45,7 @@ You could achieve the inverse by providing the first address as the `billingAddr
 The same thing could also be done setting both addresses explicitly:
 
 ```twig
-{% set address = craft.commerce.customer.addresses|first %}
+{% set address = craft.commerce.customers.customer.addresses|first %}
 
 <form method="post">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
@@ -96,7 +96,7 @@ If your customers have added multiple addresses, you can use radio buttons to se
     <input type="hidden" name="cartUpdatedNotice" value="Updated addresses.">
     {{ csrfInput() }}
 
-    {% set customerAddresses = craft.commerce.customer.addresses %}
+    {% set customerAddresses = craft.commerce.customers.customer.addresses %}
 
     {# check if we have saved addresses #}
     {% if customerAddresses | length %}
