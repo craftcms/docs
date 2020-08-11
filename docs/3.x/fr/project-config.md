@@ -24,6 +24,10 @@ Craft stores the following settings in the project config:
 Plugins can store additional things in the project config as well. See [Supporting Project Config](extend/project-config.md) to learn how.
 :::
 
+::: warning
+Craft 3.5 added changes to project config, see [craftcms.com/knowledge-base/upgrading-to-craft-3-5](https://craftcms.com/knowledge-base/upgrading-to-craft-3-5#project-config-workflow).
+:::
+
 ## Enabling the Project Config File
 
 To start sharing a project config across multiple environments, follow these steps:
@@ -119,13 +123,13 @@ If any settings managed by the project config are modified elsewhere in the data
 One way to keep project config in sync is to version control `project.yaml` and use the console command for syncing any changes with Craft:
 
 ```bash
-./craft project-config/sync
+./craft project-config/apply
 ```
 
 If changes are not being picked up during the sync process, you can use the `--force` option:
 
 ```bash
-./craft project-config/sync --force
+./craft project-config/apply --force
 ```
 
 This will treat all project config values as added or updated, resulting in a longer sync process and potentially overriding any expected changes that might have been favored in the database.
