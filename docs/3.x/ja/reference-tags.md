@@ -33,11 +33,11 @@
 
     利用可能なプロパティのリストは、エレメントタイプのクラスリファレンスを参照してください。
 
-    - [craft3:craft\elements\Entry](craft3:craft\elements\Entry#public-properties)
-    - [craft3:craft\elements\Asset](craft3:craft\elements\Asset#public-properties)
-    - [craft3:craft\elements\Tag](craft3:craft\elements\Tag#public-properties)
-    - [craft3:craft\elements\User](craft3:craft\elements\User#public-properties)
-    - [craft3:craft\elements\GlobalSet](craft3:craft\elements\GlobalSet#public-properties)
+    - [craft\elements\Entry](craft3:craft\elements\Entry#public-properties)
+    - [craft\elements\Asset](craft3:craft\elements\Asset#public-properties)
+    - [craft\elements\Tag](craft3:craft\elements\Tag#public-properties)
+    - [craft\elements\User](craft3:craft\elements\User#public-properties)
+    - [craft\elements\GlobalSet](craft3:craft\elements\GlobalSet#public-properties)
 
     カスタムフィールドのハンドルもサポートされています。 フィールドタイプは文字列として表すことができる値を持っています。
 
