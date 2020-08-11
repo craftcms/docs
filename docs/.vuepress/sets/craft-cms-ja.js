@@ -7,17 +7,17 @@ module.exports = {
     "3.x": {
       "/ja/extend/": [
         {
-          title: "Extending Craft",
+          title: "Craft の拡張",
           collapsable: false,
-          children: [["", "Introduction"], "coding-guidelines"]
+          children: [["", "はじめに"], "coding-guidelines"]
         },
         {
-          title: "Module Development",
+          title: "モジュール開発",
           collapsable: false,
           children: ["module-guide"]
         },
         {
-          title: "Plugin Development",
+          title: "プラグイン開発",
           collapsable: false,
           children: [
             "plugin-guide",
@@ -30,12 +30,12 @@ module.exports = {
           ]
         },
         {
-          title: "Extending the Control Panel",
+          title: "コントロールパネルの拡張",
           collapsable: false,
           children: ["cp-section", "cp-templates"]
         },
         {
-          title: "System Components",
+          title: "システムコンポーネント",
           collapsable: false,
           children: [
             "widget-types",
@@ -48,7 +48,7 @@ module.exports = {
           ]
         },
         {
-          title: "More",
+          title: "追加情報",
           collapsable: false,
           children: [
             "migrations",
@@ -100,22 +100,22 @@ module.exports = {
       ],
       "/ja/": [
         {
-          title: "Introduction",
+          title: "導入",
           collapsable: false,
           children: ["", "coc"]
         },
         {
-          title: "Installing & Updating",
+          title: "インストールとアップデート",
           collapsable: false,
           children: ["requirements", "installation", "updating", "upgrade"]
         },
         {
-          title: "Configuration",
+          title: "コンフィギュレーション",
           collapsable: false,
           children: ["config/", "config/config-settings", "config/db-settings"]
         },
         {
-          title: "System Overview",
+          title: "コアコンセプト",
           collapsable: false,
           children: [
             "directory-structure",
@@ -144,7 +144,7 @@ module.exports = {
           ]
         },
         {
-          title: "Field Types",
+          title: "フィールドタイプ",
           collapsable: false,
           children: [
             "assets-fields",
