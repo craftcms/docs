@@ -464,7 +464,7 @@ Defined by
 Whether uploaded filenames with non-ASCII characters should be converted to ASCII (i.e. `ñ` → `n`).
 
 ::: tip
-You can run `php craft utils/ascii-filenames` in your terminal to apply ASCII filenames to all existing assets.
+You can run `./craft utils/ascii-filenames` in your terminal to apply ASCII filenames to all existing assets.
 :::
 
 
