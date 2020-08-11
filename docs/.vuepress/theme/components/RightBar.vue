@@ -33,7 +33,7 @@ export default {
 
   .sidebar-links {
     @apply ml-0 pl-0 overflow-y-auto;
-    max-height: 94vh;
+    max-height: 92vh;
 
     .sidebar-link {
       @apply mx-0 px-0 text-slate border-0 pr-4;
