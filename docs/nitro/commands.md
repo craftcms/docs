@@ -718,7 +718,7 @@ nitro self-update
 ```
 
 ::: warning
-This command does not work on Windows. You will need to perform a [manual installation](install.md).
+This command does not work on Windows. You will need to perform a [manual installation](installation.md).
 :::
 
 ## `ssh`

@@ -8,5 +8,5 @@ nitro refresh
 ```
 
 ::: warning
-If you’re running Windows, you’ll need to perform a [manual installation](install.md).
+If you’re running Windows, you’ll need to perform a [manual installation](installation.md).
 :::
