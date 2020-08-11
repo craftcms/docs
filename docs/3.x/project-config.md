@@ -24,6 +24,10 @@ Craft stores the following settings in the project config:
 Plugins can store additional things in the project config as well. See [Supporting Project Config](extend/project-config.md) to learn how.
 :::
 
+::: warning
+Craft 3.5 added changes to project config, see [craftcms.com/knowledge-base/upgrading-to-craft-3-5](https://craftcms.com/knowledge-base/upgrading-to-craft-3-5#project-config-workflow).
+:::
+
 ## Enabling the Project Config File
 
 To start sharing a project config across multiple environments, follow these steps:
