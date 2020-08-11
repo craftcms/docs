@@ -119,13 +119,13 @@ return [
 One way to keep project config in sync is to version control `project.yaml` and use the console command for syncing any changes with Craft:
 
 ```bash
-./craft project-config/sync
+./craft project-config/apply
 ```
 
 If changes are not being picked up during the sync process, you can use the `--force` option:
 
 ```bash
-./craft project-config/sync --force
+./craft project-config/apply --force
 ```
 
 This will treat all project config values as added or updated, resulting in a longer sync process and potentially overriding any expected changes that might have been favored in the database.
