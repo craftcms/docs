@@ -12,6 +12,7 @@ Nitro installs the following on every machine:
 - Redis
 - Xdebug
 - Blackfire
+- MailHog
 
 ## System Requirements
 
