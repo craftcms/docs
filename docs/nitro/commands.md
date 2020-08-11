@@ -384,7 +384,6 @@ nitro info [<options>]
 
 ```
 $ nitro info
-$ nitro info
 Nitro installed, ready for something incredible at 192.168.64.21.
 
 Add a project with "nitro add <directory>".
