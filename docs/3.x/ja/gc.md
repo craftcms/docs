@@ -30,7 +30,7 @@ return [
 ターミナル上で Craft プロジェクトに移動し、次のコマンドを実行してください。
 
 ```bash
-./craft gc
+php craft gc
 ```
 
 シェルが対話型である場合、Craft がすべての破棄済み項目を削除すべきかどうか尋ねられます。プロンプトで `yes` を入力した場合、まだ [softDeleteDuration](config3:softDeleteDuration) に満たないものでも、ソフトデリートされたすべてのデータベース行が即座に完全に削除されます。
@@ -38,5 +38,5 @@ return [
 `delete-all-trashed` オプションを使用して、すべてのソフトデリート行を強制削除することもできます。
 
 ```bash
-./craft gc --delete-all-trashed=1
+php craft gc --delete-all-trashed=1
 ```

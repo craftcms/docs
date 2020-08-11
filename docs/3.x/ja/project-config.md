@@ -30,7 +30,7 @@ Craft はプロジェクトコンフィグに次の設定を保存します。
 
 1. Pick a primary environment that has the most up-to-date data. (If your project is already live, this should be your production environment.)
 2. Ensure that your primary environment is running the latest version of Craft.
-3. If you were already running Craft 3.1 or later, run `./craft project-config/rebuild` on that environment, to ensure that its project config is up-to-date with config settings stored throughout the database.
+3. If you were already running Craft 3.1 or later, run `php craft project-config/rebuild` on that environment, to ensure that its project config is up-to-date with config settings stored throughout the database.
 4. プライマリ環境の `config/general.php` で <config3:useProjectConfigFile> 設定を有効にしてください。
 
     ```php
@@ -113,5 +113,5 @@ return [
 手動、または、適切なサービスを使用していないプラグイン / モジュール経由で、プロジェクトコンフィグによって管理されている設定がデータベースの他の場所で変更されている場合、プロジェクトコンフィグはデータベースの値と同期しなくなり、おそらくエラーに繋がるでしょう。そうなった場合、Craft はプロジェクトコンフィグを修正するために実行できるコンソールコマンドを提供します。
 
 ```bash
-./craft project-config/rebuild
+php craft project-config/rebuild
 ``` 

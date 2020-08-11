@@ -15,7 +15,7 @@ Craft 3.0.38 および 3.1.4 では、Craft およびプラグインのアップ
 利用可能なアップデートを確認するには、ターミナルで Craft プロジェクトに移動し、次のコマンドを実行してください。
 
 ```bash
-./craft update
+php craft update
 ```
 
 ![<code>update</code> コマンドによるインタラクションの例。](./images/cli-update-info.png)
@@ -23,13 +23,13 @@ Craft 3.0.38 および 3.1.4 では、Craft およびプラグインのアップ
 一度にすべてをアップデートするには、次のコマンドを実行します。
 
 ```bash
-./craft update all
+php craft update all
 ```
 
 特定のものをアップデートするには、`all` をそのハンドル（Craft をアップデートするための `craft`、または、プラグインのハンドルのいずれか）に置き換えます。
 
 ```bash
-./craft update element-api
+php craft update element-api
 ```
 
 ![<code>update <handle></code> コマンドによるインタラクションの例。](./images/cli-update-plugin.png)
@@ -37,13 +37,13 @@ Craft 3.0.38 および 3.1.4 では、Craft およびプラグインのアップ
 一度に複数のハンドルを渡すこともできます。
 
 ```bash
-./craft update element-api commerce
+php craft update element-api commerce
 ```
 
 デフォルトでは、Craft は利用可能な最新バージョンにアップデートします。特定バージョンにアップデートするには、ハンドルに `:<version>` を追加します。
 
 ```bash
-./craft update element-api:2.5.4
+php craft update element-api:2.5.4
 ```
 
 Craft は `composer install` コマンドのように動作する `update/composer-install` コマンドも提供しますが、Composer をインストールする必要はありません。

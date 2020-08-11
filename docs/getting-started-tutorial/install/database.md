@@ -37,7 +37,7 @@ DB_TABLE_PREFIX=""
 See the setup guide for your environment for your database settings, then run the following console command:
 
 ```bash
-./craft setup/db
+php craft setup/db
 ```
 
 This will prompt you for the settings to fill in. For each step, type your response and press return. Once you’ve finished adding settings, Craft will immediately test them. If it’s successful, it will update the `.env` file for you.

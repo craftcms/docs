@@ -24,7 +24,7 @@ composer require craftcms/commerce
 ```
 
 ::: tip
-Don’t forget to install Commerce after you’ve required it with Composer. You can do this from the control panel via Settings → Plugins, or using the `./craft install/plugin commerce` console command.
+Don’t forget to install Commerce after you’ve required it with Composer. You can do this from the control panel via Settings → Plugins, or using the `php craft install/plugin commerce` console command.
 :::
 
 ## Example Templates

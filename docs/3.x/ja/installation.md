@@ -113,7 +113,7 @@ Craft のダウンロードに Composer を利用した場合、おそらく安�
 次に、Craft プロジェクト向けのデータベースを作成する必要があります。Craft 3 は MySQL 5.5 以上と PostgreSQL 9.5 以上の両方をサポートします。
 
 ```bash
-./craft setup/security-key
+php craft setup/security-key
 ```
 
 ## ステップ 4：データベースの作成
@@ -149,7 +149,7 @@ Craft プロジェクトをホストするための新しいウェブサーバ�
 このコマンドは、データベースへの接続方法を学んだ上で Craft のインストーラーを開始するために、いくつかの質問をします。それが終われば、ウェブブラウザから新しい Craft サイトにアクセスできるはずです。
 
 ```bash
-./craft setup
+php craft setup
 ```
 
 ウェブブラウザで `http://<Hostname>/index.php?p=admin/install`（ウェブサーバーのホスト名で `<Hostname>` を置き換える）に移動します。ここまでのステップがうまくいっていれば、Craft のセットアップウィザードが迎えてくれるでしょう。

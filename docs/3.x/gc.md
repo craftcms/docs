@@ -33,7 +33,7 @@ You can force garbage collection to run at any time with a terminal command.
 In your terminal, go to your Craft project and then run:
 
 ```bash
-./craft gc
+php craft gc
 ```
 
 If the shell is interactive, you will be asked whether Craft should delete all trashed items. If you enter `yes` at that prompt, all of your database rows that have been soft-deleted will get hard-deleted immediately, even if they hadn’t waited the full [soft delete duration](config3:softDeleteDuration) yet.
@@ -41,5 +41,5 @@ If the shell is interactive, you will be asked whether Craft should delete all t
 You can also force hard-deletion for all soft-deleted rows with the `delete-all-trashed` option:
 
 ```bash
-./craft gc --delete-all-trashed=1
+php craft gc --delete-all-trashed=1
 ```

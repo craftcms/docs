@@ -100,7 +100,7 @@ Craft は次の検索構文をサポートしています。
 Craft は検索インデックスを可能な限り最新に保つよう、最善を尽くしています。しかし、その一部を不正確にするかもしれない可能性がいくつかあります。検索インデックスが最新かつ最高データでないと疑われる場合、設定にある検索インデックスの再構築ツールで Craft に再構築させることができます。
 
 ```bash
-./craft resave/entries
+php craft resave/entries
 ```
 
 You can specify which entries should be resaved with the `--section` and `--type` options, among others. Run `resave/entries --help` to see a full list of supported options. 
