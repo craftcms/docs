@@ -763,6 +763,19 @@ nitro stop [<options>]
 `-m`, `--machine`
 : The name of the machine to use. Defaults to `nitro-dev`.
 
+## `support`
+
+Quickly create a GitHub issue with helpful details for getting support.
+
+```
+nitro support [<options>]
+```
+
+#### Options
+
+`-m`, `--machine`
+: The name of the machine to use. Defaults to `nitro-dev`.
+
 ## `update`
 
 Performs machine system updates (e.g. `sudo apt get update && sudo apt upgrade -y`).
