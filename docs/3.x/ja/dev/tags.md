@@ -150,11 +150,15 @@ You can only use [if](#if) **_or_** [unless](#unless) in a single `{% cache %}` 
 
 ### Cache clearing
 
-Your caches will automatically clear when any elements (entries, assets, etc.) within the tags are saved or deleted.
+Your template caches will automatically clear when any elements (entries, assets, etc.) within the tags are saved or deleted.
 
 If you have any element _queries_ within the tags (e.g. a `craft.entries`), and you create a new element that should be returned by one of the queries, Craft will also be able to figure that out and clear the cache.
 
-You can also manually clear your caches from the Utilities page, using the “Clear Caches” tool, or by using the `./craft clear-caches` console command.
+You can also manually clear your template caches from the Utilities page, using the “Clear Caches” tool, or by using the `invalidate-tags/template` console command.
+
+```bash
+php craft invalidate-tags/template
+```
 
 ### When to use `{% cache %}` tags
 
@@ -325,7 +329,7 @@ You can specify where the HTML code should be injected into the page using one o
 | `at endBody`   | At the end of the page’s `<body>`       |
 
 ```twig
-tags/header.md
+{% html at head %}
 ```
 
 By default, `at endBody` will be used.
@@ -694,7 +698,7 @@ You can place this tag anywhere in your template, including within a conditional
 This tag will ensure that the user is logged in. If they aren’t, they’ll be redirected to a Login page and returned to the original page after successfully logging in.
 
 ```twig
-tags/requirelogin.md
+{% requireLogin %}
 ```
 
 You can place this tag anywhere in your template, including within a conditional. If/when Twig gets to it, the login enforcement will take place.
