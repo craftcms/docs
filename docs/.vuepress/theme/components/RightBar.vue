@@ -1,17 +1,24 @@
 <template>
   <div class="right-bar">
+    <ColorModeToggle v-on="$listeners" />
     <div class="fixed mt-24 w-64 pt-1">
-      <SidebarLinks :depth="0" :items="headingItems" fixed-heading="On this Page" />
+      <SidebarLinks
+        :depth="0"
+        :items="headingItems"
+        fixed-heading="On this Page"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import SidebarLinks from "./SidebarLinks";
+import ColorModeToggle from "./ColorModeToggle";
 
 export default {
   components: {
-    SidebarLinks
+    SidebarLinks,
+    ColorModeToggle
   },
   props: ["headingItems"]
 };

@@ -19,7 +19,10 @@
     <div id="main" class="main-container">
       <div id="top-bar" class="top-bar">
         <Hamburger @click="toggleSidebar" />
-        <div id="search" class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center">
+        <div
+          id="search"
+          class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center"
+        >
           <SearchBox
             v-if="
               $site.themeConfig.search !== false &&
@@ -37,7 +40,10 @@
         </template>
       </Page>
     </div>
-    <RightBar :heading-items="headingItems" />
+    <RightBar
+      :heading-items="headingItems"
+      @toggle-color-mode="handleColorModeUpdate"
+    />
   </div>
 </template>
 
@@ -137,7 +143,7 @@ import {
   getAlternateVersion,
   getPageWithRelativePath,
   fixDoubleSlashes,
-  getSameContentForVersion,
+  getSameContentForVersion
 } from "../util";
 
 export default {
@@ -148,7 +154,7 @@ export default {
     LeftBar,
     RightBar,
     SearchBox,
-    Hamburger,
+    Hamburger
   },
 
   data() {
@@ -157,6 +163,11 @@ export default {
       isSidebarTransitioning: false,
       version: null,
       suggestedUpdatePath: null,
+      colorMode: null,
+      colorModes: {
+        light: "theme-light",
+        dark: "theme-dark"
+      }
     };
   },
 
@@ -191,9 +202,10 @@ export default {
         {
           "no-navbar": !this.shouldShowNavbar,
           "sidebar-open": this.isSidebarOpen,
-          "sidebar-transitioning": this.isSidebarTransitioning,
+          "sidebar-transitioning": this.isSidebarTransitioning
         },
         userPageClass,
+        this.colorMode
       ];
     },
 
@@ -223,7 +235,7 @@ export default {
 
     headingItems() {
       return resolveHeaders(this.$page);
-    },
+    }
   },
 
   mounted() {
@@ -248,7 +260,7 @@ export default {
       }
     }
 
-    this.$nextTick(function () {
+    this.$nextTick(function() {
       window.addEventListener("resize", () => {
         this.isSidebarOpen = false;
       });
@@ -323,11 +335,15 @@ export default {
       this.$router.push(fixDoubleSlashes(targetPath));
     },
 
+    handleColorModeUpdate(e) {
+      this.colorMode = this.colorModes[e];
+    },
+
     // side swipe
     onTouchStart(e) {
       this.touchStart = {
         x: e.changedTouches[0].clientX,
-        y: e.changedTouches[0].clientY,
+        y: e.changedTouches[0].clientY
       };
     },
 
@@ -354,7 +370,7 @@ export default {
     dewidow() {
       let typemate = new TypeMate(document.getElementById("content"));
       typemate.apply();
-    },
+    }
   },
 
   watch: {
@@ -362,7 +378,7 @@ export default {
       this.$nextTick(() => {
         this.dewidow();
       });
-    },
-  },
+    }
+  }
 };
 </script>
