@@ -4,7 +4,7 @@
 
 Ensures that the machine exists, and applies any changes in its config file to it.
 
-```bash
+```
 nitro apply [<options>]
 ```
 
@@ -48,7 +48,7 @@ nitro add [<options>]
 
 #### Example
 
-```bash
+```
 $ cd /path/to/project
 $ nitro add
 Enter the hostname [plugins-dev] example.test
@@ -106,7 +106,7 @@ nitro context [<options>]
 
 #### Example
 
-```bash
+```
 $ nitro context
 Machine: nitro-dev
 ------
@@ -131,7 +131,7 @@ sites:
 
 Creates a new database on a database engine in a machine.
 
-```bash
+```
 nitro db add [<options>]
 ```
 
@@ -213,7 +213,7 @@ Successfully import the database backup into new-project
 
 Removes a database from a database engine in a machine, but not from the config file.
 
-```bash
+```
 nitro db remove [<options>]
 ```
 
@@ -253,7 +253,7 @@ nitro db restart [<options>]
 
 #### Example
 
-```bash
+```
 $ nitro db restart
   1 - postgres_11_5432
   2 - mysql_5.7_3306
@@ -313,7 +313,7 @@ Stopped database engine postgres_11_5432
 
 Destroys a machine.
 
-```bash
+```
 nitro destroy [<options>]
 ```
 
@@ -351,7 +351,7 @@ nitro edit
 ::: tip
 If you’re running macOS or Linux, you can set an `EDITOR` environment variable in `~/.bash_profile` (or `~/.zshrc` for ZSH) to your preferred text editor of choice.
 
-```bash
+```
 export EDITOR="/Applications/Sublime Text.app/Contents/MacOS/Sublime Text"
 ```
 
@@ -359,7 +359,7 @@ After adding that line, restart your terminal or run `source ~/.bash_profile` fo
 
 Alternatively, you can open the configuration file using your operating system’s default text editor for `.yaml` files by running this command:
 
-```bash
+```
 open ~/.nitro/nitro-dev.yaml
 ```
 
