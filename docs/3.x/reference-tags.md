@@ -33,11 +33,11 @@ As you can see, they are made up three segments:
 
     You can refer to the element types’ class references for a list of available properties:
 
-    - [craft3:craft\elements\Entry](craft3:craft\elements\Entry#public-properties)
-    - [craft3:craft\elements\Asset](craft3:craft\elements\Asset#public-properties)
-    - [craft3:craft\elements\Tag](craft3:craft\elements\Tag#public-properties)
-    - [craft3:craft\elements\User](craft3:craft\elements\User#public-properties)
-    - [craft3:craft\elements\GlobalSet](craft3:craft\elements\GlobalSet#public-properties)
+    - [craft\elements\Entry](craft3:craft\elements\Entry#public-properties)
+    - [craft\elements\Asset](craft3:craft\elements\Asset#public-properties)
+    - [craft\elements\Tag](craft3:craft\elements\Tag#public-properties)
+    - [craft\elements\User](craft3:craft\elements\User#public-properties)
+    - [craft\elements\GlobalSet](craft3:craft\elements\GlobalSet#public-properties)
 
     Custom field handles are also supported, for field types with values that can be represented as strings.
 
