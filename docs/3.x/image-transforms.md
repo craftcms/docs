@@ -113,6 +113,27 @@ In this example, we’re using the rules defined in `myNamedTransform` but expli
 
 It’s common to need not just one sized image, but a range of them for use with [`srcset`](https://www.w3schools.com/tags/att_source_srcset.asp).
 
+One way you could achieve this is by combining the [`tag` template function](dev/functions.md#tag) with Craft 3.5’s new [`getSrcSet()`](craft3:craft\elements\Asset::getSrcSet()) method to output an image tag with a range of `srcset` sizes relative to the initial dimensions:
+
+```twig
+{% do asset.setTransform({ width: 300, height: 300 }) %}
+{{ tag('img', {
+    src: asset.url,
+    width: asset.width,
+    height: asset.height,
+    srcset: asset.getSrcset(['1x', '1.5x', '2x', '3x']),
+    alt: asset.title,
+}) }}
+```
+
+You can also pass a `sizes` argument to the [`getImg()`](craft3:craft\elements\Asset::getImg()) method to accomplish the same thing:
+
+```twig
+{{ asset.getImg({ width: 300, height: 300 }, ['1x', '1.5x', '2x', '3x']) }}
+```
+
+### Eager-Loading Relative Image Sizes
+
 Prior to Craft 3.5, you would need to specify individual transform parameters for each image variation in the `withTransforms()` array:
 
 ```twig
@@ -126,9 +147,7 @@ Prior to Craft 3.5, you would need to specify individual transform parameters fo
     .all() %}
 ```
 
-Starting in Craft 3.5, you can define a single transform’s parameters and express subsequent variations as multipliers relative to the first.
-
-This example would produce the same result as the previous one:
+Craft 3.5 supports relative transform parameters for [eager-loaded transform indexes](dev/eager-loading-elements.html#eager-loading-image-transform-indexes) as well. The first item must describe dimensions that subsequent relative variations will be based on. This example would produce the same result as the previous one:
 
 ```twig
 {% set assets = entry.myAssetsField
@@ -136,25 +155,4 @@ This example would produce the same result as the previous one:
     .all() %}
 ```
 
-Each of these examples results in an array of assets that can be used in a template however you’d like.
 
-For example, you could combine [`tag`](dev/functions.md#tag) with Craft 3.5’s new [`getSrcSet()`](craft3:craft\elements\Asset::getSrcSet()) method to output an image tag with a range of `srcset` sizes:
-
-```twig
-{% do asset.setTransform({ width: 300, height: 300 }) %}
-{{ tag('img', {
-    src: asset.url,
-    width: asset.width,
-    height: asset.height,
-    srcset: asset.getSrcset(['1x', '1.5x', '2x', '3x']),
-    alt: asset.title,
-}) }}
-```
-
-You could also pass a `sizes` argument to the [`getImg()`](craft3:craft\elements\Asset::getImg()) method to accomplish the same thing:
-
-```twig
-{{ asset.getImg({ width: 300, height: 300 }, ['1x', '1.5x', '2x', '3x']) }}
-```
-
-### Eager-Loading Relative Image Sizes
