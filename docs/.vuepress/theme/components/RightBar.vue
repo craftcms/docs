@@ -11,9 +11,9 @@ import SidebarLinks from "./SidebarLinks";
 
 export default {
   components: {
-    SidebarLinks
+    SidebarLinks,
   },
-  props: ["headingItems"]
+  props: ["headingItems"],
 };
 </script>
 
@@ -36,7 +36,7 @@ export default {
   }
 
   .sidebar-links {
-    @apply ml-0 pl-0 pb-4 overflow-y-scroll;
+    @apply ml-0 pl-0 pb-4 overflow-y-auto;
     max-height: calc(100vh - 6.5rem);
 
     .sidebar-links {
