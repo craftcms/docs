@@ -61,4 +61,8 @@ See [Order Status Emails](order-status-emails.md).
 
 ## Line item statuses
 
-Line item statuses are not the same as order statuses: they cannot trigger emails and are only for internal management of the order. Line items do not get a status by default, and can have a `null` or “None” status.
+Line item statuses are not the same as order statuses: they cannot trigger emails and are only for internal management of the order. 
+
+When creating a line item status you can choose which status, if required, is applied by default using the default line item status checkbox. This default status is applied when an order is completed.
+
+Otherwise, line items do not get a status by default, and can have a `null` or “None” status.
