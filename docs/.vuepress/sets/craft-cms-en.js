@@ -433,7 +433,12 @@ module.exports = {
           title: "Testing Craft",
           icon: "/docs/icons/icon-flask.svg",
           link: "/3.x/testing/"
-        }
+        },
+        {
+          title: "Class Reference",
+          icon: "/docs/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/api/v3/"
+        },
       ]
     },
     "2.x": {
