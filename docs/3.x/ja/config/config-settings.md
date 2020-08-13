@@ -509,7 +509,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 アップロードされたファイル名に含まれる ASCII 以外の文字を ASCII に変換するかどうか（例： `ñ` → `n`）。
 
 ::: tip
-You can run `./craft utils/ascii-filenames` in your terminal to apply ASCII filenames to all existing assets.
+You can run `php craft utils/ascii-filenames` in your terminal to apply ASCII filenames to all existing assets.
 :::
 
 
