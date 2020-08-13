@@ -25,11 +25,11 @@ cd /path/to/project
 ::: code
 
 ```bash Plugin Migration
-./craft migrate/create <migration_name> --plugin=<plugin-handle>
+php craft migrate/create <migration_name> --plugin=<plugin-handle>
 ```
 
 ```bash Content Migration
-./craft migrate/create <migration_name>
+php craft migrate/create <migration_name>
 ```
 
 :::
@@ -96,11 +96,11 @@ echo "    > some note\n";
 ::: code
 
 ```bash Plugin Migration
-./craft migrate/up --plugin=<plugin-handle>
+php craft migrate/up --plugin=<plugin-handle>
 ```
 
 ```bash Content Migration
-./craft migrate/up
+php craft migrate/up
 ```
 
 :::
@@ -108,7 +108,7 @@ echo "    > some note\n";
 または、すべてのマイグレーショントラックを通じて Craft にすべての新しいマイグレーションを適用することもできます。
 
 ```bash
-./craft migrate/all
+php craft migrate/all
 ```
 
 Craft はコントロールパネルのリクエストで新しい[スキーマバージョン](craft3:craft\base\PluginTrait::$schemaVersion)を持つプラグインの新しいプラグインのマイグレーションをチェックし、コンテンツのマイグレーションはコントロールパネルの「ユーティリティ > マイグレーション」から適用できます。
@@ -140,7 +140,7 @@ class Install extends Migration
 マイグレーション名「`install`」を渡すと、`migrate/create` コマンドでプラグインにインストールマイグレーションを与えることができます。
 
 ```bash
-./craft migrate/create install --plugin=<plugin-handle>
+php craft migrate/create install --plugin=<plugin-handle>
 ```
 
 ::: tip

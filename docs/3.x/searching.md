@@ -104,7 +104,7 @@ See our [Search Form](dev/examples/search-form.md) tutorial for a complete examp
 Craft does its best to keep its search indexes as up-to-date as possible, but there are a couple things that might render portions of them inaccurate. If you suspect that your search indexes don’t have the latest and greatest data, you can have Craft rebuild them by bulk-resaving your entries with the `resave/entries` command:
 
 ```bash
-./craft resave/entries --update-search-index
+php craft resave/entries --update-search-index
 ```
 
 You can specify which entries should be resaved with the `--section` and `--type` options, among others. Run `resave/entries --help` to see a full list of supported options.

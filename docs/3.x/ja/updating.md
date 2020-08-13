@@ -19,7 +19,7 @@ Craft’s [changelog](https://github.com/craftcms/cms/blob/master/CHANGELOG.md) 
 一度にすべてをアップデートするには、次のコマンドを実行します。
 
 ```bash
-./craft update
+php craft update
 ```
 
 ![update</code> コマンドによるインタラクションの例。](./images/cli-update-info.png)
@@ -27,13 +27,13 @@ Craft’s [changelog](https://github.com/craftcms/cms/blob/master/CHANGELOG.md) 
 特定のものをアップデートするには、`all` をそのハンドル（Craft をアップデートするための `craft`、または、プラグインのハンドルのいずれか）に置き換えます。
 
 ```bash
-./craft update all
+php craft update all
 ```
 
 To update a specific thing, replace `all` with its handle (either `craft` to update Craft, or a plugin’s handle).
 
 ```bash
-./craft update element-api
+php craft update element-api
 ```
 
 ![An example interaction with the <code>update <handle></code> command.](./images/cli-update-plugin.png)
@@ -41,13 +41,13 @@ To update a specific thing, replace `all` with its handle (either `craft` to upd
 一度に複数のハンドルを渡すこともできます。
 
 ```bash
-./craft update element-api commerce
+php craft update element-api commerce
 ```
 
 デフォルトでは、Craft は利用可能な最新バージョンにアップデートします。 特定バージョンにアップデートするには、ハンドルに `:<version>` を追加します。
 
 ```bash
-./craft update element-api:2.5.4
+php craft update element-api:2.5.4
 ```
 
 Craft は `composer install` コマンドのように動作する `update/composer-install` コマンドも提供しますが、Composer をインストールする必要はありません。

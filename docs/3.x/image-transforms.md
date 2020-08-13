@@ -1,10 +1,12 @@
 # Image Transforms
 
-Rather than requiring that everyone upload images at a certain size, Craft lets you define “image transforms”, which set those rules on Craft’s end instead. Transforms are _non-destructive_, meaning that they have no effect on the original image that was uploaded.
+Instead of requiring content editors to upload images at a certain size, Craft lets you define “image transforms” for automatically manipulating images on demand. Transforms are _non-destructive_, meaning they have no effect on the original uploaded image.
+
+Transforms can be defined both in the control panel and directly from templates or GraphQL queries.
 
 ## Defining Transforms from the Control Panel
 
-You can define transforms from the control panel by going to Settings → Assets → Image Transforms and clicking the “New Transform” button.
+You can define transforms from the control panel by navigating to Settings → Assets → Image Transforms and clicking the “New Transform” button.
 
 Each transform has the following settings:
 
@@ -51,7 +53,10 @@ If you leave **Image Format** blank, Craft will use the original image’s forma
 To output an image with a transform applied, simply pass your transform’s handle into your asset’s [getUrl()](craft3:craft\elements\Asset::getUrl()), [getWidth()](craft3:craft\elements\Asset::getWidth()), and [getHeight()](craft3:craft\elements\Asset::getHeight()) functions:
 
 ```twig
-<img src="{{ asset.getUrl('thumb') }}" width="{{ asset.getWidth('thumb') }}" height="{{ asset.getHeight('thumb') }}">
+<img src="{{ asset.getUrl('thumb') }}" 
+     width="{{ asset.getWidth('thumb') }}" 
+     height="{{ asset.getHeight('thumb') }}"
+>
 ```
 
 ## Defining Transforms in your Templates
@@ -73,7 +78,10 @@ First, you must create a [hash](dev/twig-primer.md#hashes) that defines the tran
 Then you can pass that hash into your asset’s `getUrl()`, `getWidth()`, and `getHeight()` functions:
 
 ```twig
-<img src="{{ asset.getUrl(thumb) }}" width="{{ asset.getWidth(thumb) }}" height="{{ asset.getHeight(thumb) }}">
+<img src="{{ asset.getUrl(thumb) }}" 
+     width="{{ asset.getWidth(thumb) }}" 
+     height="{{ asset.getHeight(thumb) }}"
+>
 ```
 
 Note how in that example there are no quotes around “`thumb`”, like there were in the first one. That’s because in the first one, we were passing a [string](dev/twig-primer.md#strings) set to a CP-defined transform’s handle, whereas in this example we’re passing a [variable](dev/twig-primer.md#variables) referencing the `thumb` hash we created within the template.
@@ -87,3 +95,43 @@ All of the same settings available to CP-defined transforms are also available t
 * `width` and `height` can be set to integers or omitted.
 * `quality` can be set to a number between 0 and 100, or omitted.
 * `format` can be set to `'jpg'`, `'gif'`, `'png'`, or omitted.
+
+### Overriding Named Transforms
+
+As of Craft 3.5 it’s possible to [use named transforms in templates](#applying-cp-defined-transforms-to-images) with `getUrl()`’s `transform` property and override other properties as needed.
+
+In this example, we’re using the rules defined in `myNamedTransform` but explicitly outputting a `webp` image:
+
+```twig
+<source type="image/webp" srcset="{{ asset.getUrl({
+    transform: 'myNamedTransform',
+    format: 'webp',
+}) }}">
+```
+
+### Generating `srcset` Sizes
+
+It’s common to need not just one sized image, but a range of them for use with [`srcset`](https://www.w3schools.com/tags/att_source_srcset.asp).
+
+One way you could achieve this is by combining the [`tag` template function](dev/functions.md#tag) with Craft 3.5’s new [`getSrcSet()`](craft3:craft\elements\Asset::getSrcSet()) method to output an image tag with a range of `srcset` sizes relative to the initial dimensions:
+
+```twig
+{% do asset.setTransform({ width: 300, height: 300 }) %}
+{{ tag('img', {
+    src: asset.url,
+    width: asset.width,
+    height: asset.height,
+    srcset: asset.getSrcset(['1.5x', '2x', '3x']),
+    alt: asset.title,
+}) }}
+```
+
+You can also pass a `sizes` argument to the [`getImg()`](craft3:craft\elements\Asset::getImg()) method to accomplish the same thing:
+
+```twig
+{{ asset.getImg({ width: 300, height: 300 }, ['1.5x', '2x', '3x']) }}
+```
+
+::: tip
+You can also provide relative image sizes when eager-loading asset transforms. See [`AssetQuery::withTransforms()`](craft3:craft\elements\db\AssetQuery::withTransforms()) in the class reference for an example.
+:::

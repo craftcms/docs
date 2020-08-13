@@ -19,7 +19,7 @@ Craft 3.0.38 and 3.1.4 introduced a new `update` console command that can be use
 To see available updates, go to your Craft project in your terminal and run this command:
 
 ```bash
-./craft update
+php craft update
 ```
 
 ![An example interaction with the `update` command.](./images/cli-update-info.png)
@@ -27,13 +27,13 @@ To see available updates, go to your Craft project in your terminal and run this
 To update everything all at once, run this command:
 
 ```bash
-./craft update all
+php craft update all
 ```
 
 To update a specific thing, replace `all` with its handle (either `craft` to update Craft, or a plugin’s handle).
 
 ```bash
-./craft update element-api
+php craft update element-api
 ```
 
 ![An example interaction with the `update <handle>` command.](./images/cli-update-plugin.png)
@@ -41,13 +41,13 @@ To update a specific thing, replace `all` with its handle (either `craft` to upd
 You can also pass multiple handles in at once:
 
 ```bash
-./craft update element-api commerce
+php craft update element-api commerce
 ```
 
 By default, Craft will update you to the latest available version. To update to a specific version, append `:<version>` to the handle:
 
 ```bash
-./craft update element-api:2.5.4
+php craft update element-api:2.5.4
 ```
 
 Craft also provides an `update/composer-install` command, which behaves like the `composer install` command, but doesn’t require you to have Composer installed.

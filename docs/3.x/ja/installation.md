@@ -118,7 +118,7 @@ You can generate and assign the key [manually](#set-the-key-manually), or have C
 ターミナル上でプロジェクトのルートディレクトリに移動し、次のコマンドを実行してセットアップウィザードを開始します。
 
 ```bash
-./craft setup/security-key
+php craft setup/security-key
 ```
 
 ## ステップ 4：データベースの作成
@@ -158,7 +158,7 @@ We recommend using the `.test` TLD for local development, and specifically not `
 In your terminal, go to your project’s root directory and run the following command to kick off the Setup Wizard:
 
 ```bash
-./craft setup
+php craft setup
 ```
 
 このコマンドは、データベースへの接続方法を学んだ上で Craft のインストーラーを開始するために、いくつかの質問をします。 それが終われば、ウェブブラウザから新しい Craft サイトにアクセスできるはずです。

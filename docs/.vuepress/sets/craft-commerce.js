@@ -310,15 +310,6 @@ module.exports = {
           link: "https://docs.craftcms.com/commerce/api/v2/"
         }
       ]
-    },
-    "1.x": {
-      "/": [
-        {
-          title: "Class Reference",
-          icon: "/docs/icons/craft-api.svg",
-          link: "https://docs.craftcms.com/commerce/api/v1/"
-        }
-      ]
-    },
+    }
   }
 };

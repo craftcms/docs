@@ -34,7 +34,7 @@
           class="title text-slate leading-none font-medium"
         >{{ $activeSet.setTitle ? $activeSet.setTitle : $activeSet.title }}</div>
       </RouterLink>
-      <div v-if="$activeSet.versions" class="relative">
+      <div v-if="$activeSet.versions" class="doc-set-version-wrapper">
         <select name class="doc-set-version" @change="handleVersionSelect($event)">
           <option
             v-for="version in $activeSet.versions"
@@ -109,8 +109,12 @@
     }
   }
 
+  .doc-set-version-wrapper {
+    @apply relative;
+  }
+
   .doc-set-version {
-    @apply border pr-5 py-1 rounded-md leading-none block flex content-center items-center appearance-none font-medium text-sm bg-transparent cursor-pointer;
+    @apply border pr-5 py-1 rounded-md leading-none flex content-center items-center appearance-none font-medium text-sm bg-transparent cursor-pointer;
     padding-left: 0.375rem;
   }
 
@@ -128,6 +132,14 @@
     right: 0.385rem;
   }
 }
+
+/* hackish reduction of mysterious extra h-padding in Firefox */
+@-moz-document url-prefix() {
+  .doc-set-panel .doc-set-version {
+    padding-left: 0.125rem;
+    padding-right: 1rem;
+  }
+}
 </style>
 
 <script>
@@ -140,11 +152,11 @@ export default {
   components: {
     BackChevron,
     Home,
-    VersionArrow
+    VersionArrow,
   },
   data() {
     return {
-      currentVersion: this.version
+      currentVersion: this.version,
     };
   },
   methods: {
@@ -155,7 +167,7 @@ export default {
     },
     defaultUri(set) {
       return getDocSetDefaultUri(set);
-    }
-  }
+    },
+  },
 };
 </script>

@@ -34,7 +34,7 @@ To start sharing a project config across multiple environments, follow these ste
 
 1. Pick a primary environment that has the most up-to-date data. (If your project is already live, this should be your production environment.)
 2. Ensure that your primary environment is running the latest version of Craft.
-3. If you were already running Craft 3.1 or later, run `./craft project-config/rebuild` on that environment, to ensure that its project config is up-to-date with config settings stored throughout the database.
+3. If you were already running Craft 3.1 or later, run `php craft project-config/rebuild` on that environment, to ensure that its project config is up-to-date with config settings stored throughout the database.
 4. プライマリ環境の `config/general.php` で <config3:useProjectConfigFile> 設定を有効にしてください。
 
     ```php
@@ -117,7 +117,7 @@ Any plugins that are storing configuration settings outside of their main plugin
 If any settings managed by the project config are modified elsewhere in the database, either manually or via a plugin/module that isn’t using the appropriate service, then the project config will be out of sync with those database values, which will likely lead to errors. If that happens, Craft provides a console command that can be run to patch up your project config.
 
 ```bash
-./craft project-config/rebuild
+php craft project-config/rebuild
 ```
 
 One way to keep project config in sync is to version control `project.yaml` and use the console command for syncing any changes with Craft:
