@@ -1,6 +1,6 @@
 # Craft 3 向けのプラグインアップデート
 
-Craft 3 は CMS の完全な書き換えで、Yii 2 上で構築されています。Yii 2 の変更のスコープのために、プロセス内のすべてのプラグインを壊すことなく、Craft を移植する実現可能な方法はありませんでした。そのため、私たちはシステムのいくつかの主要なエリアをリファクタリングするための[機会](https://www.urbandictionary.com/define.php?term=double%20transgression%20theory)として捉えました。
+Craft 3 は CMS の完全な書き換えで、Yii 2 上で構築されています。 Yii 2 の変更のスコープのために、プロセス内のすべてのプラグインを壊すことなく、Craft を移植する実現可能な方法はありませんでした。 そのため、私たちはシステムのいくつかの主要なエリアをリファクタリングするための[機会](https://www.urbandictionary.com/define.php?term=double%20transgression%20theory)として捉えました。
 
 リファクタリングの主たるゴールは次の通りでした。
 
@@ -8,10 +8,10 @@ Craft 3 は CMS の完全な書き換えで、Yii 2 上で構築されていま�
 - Craft が不必要に車輪を再発明しているエリアを識別し、それを止める。
 - モダンな開発ツールキット（Composer、PostgreSQL など）をサポートする。
 
-最終的な結果はコアの開発とプラグイン開発で同様に、より高速で、よりスリムで、より洗練されたコードベースになりました。あなたにも、楽しんでもらえることを望みます。
+最終的な結果はコアの開発とプラグイン開発で同様に、より高速で、よりスリムで、より洗練されたコードベースになりました。 あなたにも、楽しんでもらえることを望みます。
 
 ::: tip
-何かが欠けていると思う場合は、[issue を作成してください](https://github.com/craftcms/docs/issues/new)。
+何かが欠けていると思う場合は、[issue を作成してください](https://github.com/craftcms/docs/issues/new)。 :::
 :::
 
 ## ハイレベルなメモ
@@ -38,7 +38,7 @@ curl https://api.craftcms.com/v1/utils/releases-2-changelog --data-binary @relea
 
 ## Yii 2
 
-Craft が構築されているフレームワーク の Yii は、2.0 向けに完全に書き直されました。どのように変化したかについて知るには、包括的な[アップグレードガイド](https://www.yiiframework.com/doc/guide/2.0/en/intro-upgrade-from-v1)を参照してください。
+Craft が構築されているフレームワーク の Yii は、2.0 向けに完全に書き直されました。 どのように変化したかについて知るには、包括的な[アップグレードガイド](https://www.yiiframework.com/doc/guide/2.0/en/intro-upgrade-from-v1)を参照してください。
 
 該当するセクションは、次の通りです。
 
@@ -74,7 +74,7 @@ Craft が構築されているフレームワーク の Yii は、2.0 向けに�
 
 コンポーネントクラス（エレメントタイプ、フィールドタイプ、ウィジェットタイプなど）は、Craft 3 の新しいデザインパターンに従います。
 
-Craft 2 では、それぞれのコンポーネントはモデル（例：`FieldModel`）とタイプ（例：`PlainTextFieldType`）の2つのクラスによって表されていました。モデルはコンポーネントの主な表現であり、コンポーネントのタイプ（ 例：`id`、`name`、および、`handle`）に関わらず、常にそこにあるであろう共通のプロパティを定義しました。その一方で、タイプは特定のコンポーネントタイプを一意（例：入力の UI）にするものを定義するための責任を負っていました。
+Craft 2 では、それぞれのコンポーネントはモデル（例：`FieldModel`）とタイプ（例：`PlainTextFieldType`）の2つのクラスによって表されていました。 モデルはコンポーネントの主な表現であり、コンポーネントのタイプ（ 例：`id`、`name`、および、`handle`）に関わらず、常にそこにあるであろう共通のプロパティを定義しました。 その一方で、タイプは特定のコンポーネントタイプを一意（例：入力の UI）にするものを定義するための責任を負っていました。
 
 Craft 3 では、コンポーネントタイプはモデルにとってあまり重要なクラスではなく、もはや個別の役割を果たしません。
 
@@ -108,7 +108,7 @@ Craft 3 では、コンポーネントタイプはモデルにとってあまり
 ])
 ```
 
-フロントエンドの Twig コードを綺麗に保つために、 `|t` および `|translate` フィルタには特定のカテゴリを必要とせず、デフォルトで `site` になります。そのため、これら2つのタグは同じ出力になります。
+フロントエンドの Twig コードを綺麗に保つために、 `|t` および `|translate` フィルタには特定のカテゴリを必要とせず、デフォルトで `site` になります。 そのため、これら2つのタグは同じ出力になります。
 
 ```twig
 {{ "News"|t }}
@@ -139,7 +139,7 @@ $results = (new Query())
 
 操作クエリは、Craft 2 の [`DbCommand`](https://docs.craftcms.com/api/v2/craft-dbcommand.html) クラスと同様に（ `Craft::$app->db->createCommand()` 経由でアクセスされる）<craft3:craft\db\Command> のヘルパーメソッドから構築できます。
 
-1つの顕著な違いは、ヘルパーメソッドはもはや自動的にクエリを実行しません。そのため、`execute()` の呼び出しを連鎖させる必要があります。
+1つの顕著な違いは、ヘルパーメソッドはもはや自動的にクエリを実行しません。 そのため、`execute()` の呼び出しを連鎖させる必要があります。
 
 ```php
 $result = \Craft::$app->db->createCommand()
@@ -167,7 +167,7 @@ $entries = Entry::find()
 
 ## Craft コンフィグ設定
 
-Craft のコンフィグ設定のすべては、`vendor/craftcms/cms/src/config/` にあるいくつかのコンフィグクラスの実際のプロパティに移動されました。新しいコンフィグサービス（<craft3:craft\services\Config>）は、それらのクラスを返すための Getter メソッド / プロパティを提供します。
+Craft のコンフィグ設定のすべては、`vendor/craftcms/cms/src/config/` にあるいくつかのコンフィグクラスの実際のプロパティに移動されました。 新しいコンフィグサービス（<craft3:craft\services\Config>）は、それらのクラスを返すための Getter メソッド / プロパティを提供します。
 
 ```php
 // Old:
@@ -185,7 +185,7 @@ $tablePrefix = Craft::$app->config->db->tablePrefix;
 - および <craft3:craft\services\Path> メソッドから返されるディレクトリパスには、スラッシュが含まれなくなりました。
 - Craft のファイルシステムパスは、ハードコードされたスラッシュ（`/`）ではなく、（環境に依存して `/` または ``\` のどちらかがセットされる）PHP 定数の``DIRECTORY_SEPARATOR` を使用します。
 
-## イベント
+## Events
 
 Craft 2 / Yii 1 のイベントハンドルを登録する伝統的な方法は、次の通りです。
 
@@ -207,7 +207,7 @@ Craft 2 は、サービス上にイベントハンドルを登録するために
 craft()->on('elements.beforeSaveElement', $callback);
 ```
 
-Craft 3 には直接匹敵するものがありません。しかし、一般的に Craft 2 で `craft()->on()` を使用していたイベントハンドラは、Craft 3 で[クラスレベルのイベントハンドラ](https://www.yiiframework.com/doc/guide/2.0/en/concept-events#class-level-event-handlers)を使用する必要があります。
+Craft 3 には直接匹敵するものがありません。 しかし、一般的に Craft 2 で `craft()->on()` を使用していたイベントハンドラは、Craft 3 で[クラスレベルのイベントハンドラ](https://www.yiiframework.com/doc/guide/2.0/en/concept-events#class-level-event-handlers)を使用する必要があります。
 
 ```php
 use craft\services\Elements;
@@ -232,13 +232,14 @@ Event::on(Matrix::class, Matrix::EVENT_AFTER_SAVE, function(ModelEvent $event) {
 
 ## プラグインフック
 
-「プラグインフック」のコンセプトは Craft 3 で削除されました。ここに以前サポートされていたフックと、Craft 3 で同じことをどのように達成できるかのリストがあります。
+「プラグインフック」のコンセプトは Craft 3 で削除されました。 ここに以前サポートされていたフックと、Craft 3 で同じことをどのように達成できるかのリストがあります。
 
 ### 一般フック
 
 #### `addRichTextLinkOptions`
 
-```php
+::: code
+```php Craft 2
 // Old:
 public function addRichTextLinkOptions()
 {
@@ -263,9 +264,7 @@ Event::on(RichText::class, RichText::EVENT_REGISTER_LINK_OPTIONS, function(Regis
 });
 ```
 
-#### `addTwigExtension`
-
-```php
+```php Craft 3
 // Old:
 public function addTwigExtension()
 {
@@ -277,9 +276,13 @@ public function addTwigExtension()
 \Craft::$app->view->registerTwigExtension($extension);
 ```
 
-#### `addUserAdministrationOptions`
+:::
 
-```php
+
+#### `addTwigExtension`
+
+次のフックのセットは、すべてのエレメントタイプで共有されている単一のイベントに結合されました。
+```php Craft 2
 // Old:
 public function addUserAdministrationOptions(UserModel $user)
 {
@@ -308,9 +311,7 @@ Event::on(UsersController::class, UsersController::EVENT_REGISTER_USER_ACTIONS, 
 });
 ```
 
-#### `getResourcePath`
-
-```php
+```php Craft 3
 // Old:
 public function getResourcePath($path)
 {
@@ -319,14 +320,12 @@ public function getResourcePath($path)
     }
 }
 ```
-
-::: warning
-NOTE リソースリクエストのコンセプトが Craft 3 で削除されたため、プラグインにリソースリクエストの処理を許可するこのフックには、直接 Craft 3 で匹敵するものがありません。Craft 3 でプラグインがどのようにリソースを提供できるかを知るには[アセットバンドル](asset-bundles.md)を参照してください。
 :::
 
-#### `modifyCpNav`
+#### `addUserAdministrationOptions`
 
-```php
+::: code
+```php Craft 2
 // Old:
 public function modifyCpNav(&$nav)
 {
@@ -353,9 +352,7 @@ Event::on(Cp::class, Cp::EVENT_REGISTER_CP_NAV_ITEMS, function(RegisterCpNavItem
 });
 ```
 
-#### `registerCachePaths`
-
-```php
+```php Craft 3
 // Old:
 public function registerCachePaths()
 {
@@ -377,8 +374,9 @@ Event::on(ClearCaches::class, ClearCaches::EVENT_REGISTER_CACHE_OPTIONS, functio
     ];
 });
 ```
+:::
 
-#### `registerEmailMessages`
+#### `getResourcePath`
 
 ```php
 // Old:
@@ -402,13 +400,14 @@ Event::on(SystemMessages::class, SystemMessages::EVENT_REGISTER_MESSAGES, functi
 });
 ```
 
-::: tip
-<craft3:Craft::t()> の呼び出し内で heading / subject / body の右側の完全なメッセージを定義するのではなく、プレースホルダ文字列（例：`'email_heading'`） を渡してプラグインの翻訳ファイルに実際の文字列を定義することもできます。
+::: warning
+NOTE リソースリクエストのコンセプトが Craft 3 で削除されたため、プラグインにリソースリクエストの処理を許可するこのフックには、直接 Craft 3 で匹敵するものがありません。 Craft 3 でプラグインがどのようにリソースを提供できるかを知るには[アセットバンドル](asset-bundles.md)を参照してください。 :::
 :::
 
-#### `registerUserPermissions`
+#### `modifyCpNav`
 
-```php
+テンプレートサービスは View コンポーネントに置き換えられました。
+```php Craft 2
 // Old:
 public function registerUserPermissions()
 {
@@ -431,9 +430,7 @@ Event::on(UserPermissions::class, UserPermissions::EVENT_REGISTER_PERMISSIONS, f
 });
 ```
 
-#### `getCpAlerts`
-
-```php
+```php Craft 3
 // Old:
 public function getCpAlerts($path, $fetch)
 {
@@ -453,10 +450,12 @@ Event::on(Cp::class, Cp::EVENT_REGISTER_ALERTS, function(RegisterCpAlertsEvent $
     }
 });
 ```
+:::
 
-#### `modifyAssetFilename`
+#### `registerCachePaths`
 
-```php
+フロンドエンドリクエストでプラグインが提供するテンプレートをレンダリングしたい場合、View コンポーネントを CP のテンプレートモードに設定する必要があります。
+```php Craft 2
 // Old:
 public function modifyAssetFilename($filename)
 {
@@ -476,11 +475,7 @@ Event::on(Assets::class, Assets::EVENT_SET_FILENAME, function(SetElementTableAtt
 });
 ```
 
-### ルーティングフック
-
-#### `registerCpRoutes`
-
-```php
+```php Craft 3
 // Old:
 public function registerCpRoutes()
 {
@@ -500,10 +495,12 @@ Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, function(R
     $event->rules['cocktails/<widgetId:\d+>'] = 'cocktails/edit-cocktail';
 });
 ```
+:::
 
-#### `registerSiteRoutes`
+#### `registerEmailMessages`
 
-```php
+::: code
+```php Craft 2
 // Old:
 public function registerSiteRoutes()
 {
@@ -524,9 +521,7 @@ Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_SITE_URL_RULES, function
 });
 ```
 
-#### `getElementRoute`
-
-```php
+```php Craft 3
 // Old:
 public function getElementRoute(BaseElementModel $element)
 {
@@ -556,16 +551,16 @@ Event::on(Entry::class, Element::EVENT_SET_ROUTE, function(SetElementRouteEvent 
     }
 });
 ```
+:::
 
-### エレメントフック
+::: tip
+Rather than defining the full message heading/subject/body right within the <craft3:Craft::t()> call, you can pass placeholder strings (e.g. `'email_heading'`) and define the actual string in your plugin’s [translation file](../sites.md#static-message-translations).
+:::
 
-次のフックのセットは、すべてのエレメントタイプで共有されている単一のイベントに結合されました。
+#### `registerUserPermissions`
 
-これらのそれぞれのために、（*すべての* エレメントタイプ向けにイベントリスナーを登録している）`yii\base\Event::on()` の第一引数に <craft3:craft\base\Element::class>、または（1つのエレメントタイプのためだけのイベントリスナーを登録している）特定のエレメントタイプのいずれかを渡すことができます。
-
-#### `addEntryActions`, `addCategoryActions`, `addAssetActions`, & `addUserActions`
-
-```php
+次のコントロールパネル[テンプレートフック](template-hooks.md)はリネームされました。
+```php Craft 2
 // Old:
 public function addEntryActions($source)
 {
@@ -582,9 +577,7 @@ Event::on(Entry::class, Element::EVENT_REGISTER_ACTIONS, function(RegisterElemen
 });
 ```
 
-#### `modifyEntrySortableAttributes`, `modifyCategorySortableAttributes`, `modifyAssetSortableAttributes`, & `modifyUserSortableAttributes`
-
-```php
+```php Craft 3
 // Old:
 public function modifyEntrySortableAttributes(&$attributes)
 {
@@ -601,10 +594,12 @@ Event::on(Entry::class, Element::EVENT_REGISTER_SORT_OPTIONS, function(RegisterE
     $event->sortOptions['id'] = \Craft::t('app', 'ID');
 });
 ```
+:::
 
-#### `modifyEntrySources`, `modifyCategorySources`, `modifyAssetSources`, & `modifyUserSources`
+#### `getCpAlerts`
 
-```php
+ページのどこかに任意の HTML を含めたい場合、View コンポーネントで `beginBody` または `endBody` イベントを使用してください。
+```php Craft 2
 // Old:
 public function modifyEntrySources(&$sources, $context)
 {
@@ -647,9 +642,7 @@ Event::on(Entry::class, Element::EVENT_REGISTER_SOURCES, function(RegisterElemen
 });
 ```
 
-#### `defineAdditionalEntryTableAttributes`, `defineAdditionalCategoryTableAttributes`, `defineAdditionalAssetTableAttributes`, & `defineAdditionalUserTableAttributes`
-
-```php
+```php Craft 3
 // Old:
 public function defineAdditionalEntryTableAttributes()
 {
@@ -669,10 +662,12 @@ Event::on(Entry::class, Element::EVENT_REGISTER_TABLE_ATTRIBUTES, function(Regis
     $event->tableAttributes['bar'] = ['label' => \Craft::t('plugin-handle', 'Bar')];
 });
 ```
+:::
 
-#### `getEntryTableAttributeHtml`, `getCategoryTableAttributeHtml`, `getAssetTableAttributeHtml`, & `getUserTableAttributeHtml`
+#### `modifyAssetFilename`
 
-```php
+プラグインがカスタムタスクタイプを提供する場合、それらをジョブに変換する必要があります。
+```php Craft 2
 // Old:
 public function getEntryTableAttributeHtml(EntryModel $entry, $attribute)
 {
@@ -700,9 +695,7 @@ Event::on(Entry::class, Element::EVENT_SET_TABLE_ATTRIBUTE_HTML, function(SetEle
 });
 ```
 
-#### `getTableAttributesForSource`
-
-```php
+```php Craft 3
 // Old:
 public function getTableAttributesForSource($elementType, $sourceKey)
 {
@@ -711,16 +704,14 @@ public function getTableAttributesForSource($elementType, $sourceKey)
     }
 }
 ```
-
-::: warning
-NOTE エレメントインデックスがレンダリングされる前に、プラグインがエレメントタイプのテーブル属性を完全に変更することを許可するこのフックには、直接 Craft 3 で匹敵するものがありません。Craft 3 で最も近いのは、管理者がエレメントインデックスのソースをカスタマイズする際に、エレメントタイプの利用可能なテーブル属性を変更するために使用できる <craft3:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> イベントです。
 :::
 
-## テンプレート変数
+### ルーティングフック
 
-テンプレート変数は、もはや Craft 3 のものではありません。しかしながら、プラグインは `init` イベントをリスニングすることで、グローバルな `craft` 変数にカスタムサービスを登録することができます。
+#### `registerCpRoutes`
 
-```php
+::: code
+```php Craft 2
 use craft\web\twig\variables\CraftVariable;
 use yii\base\Event;
 
@@ -731,25 +722,19 @@ Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function(Event $event
 });
 ```
 
-（`componentName` をあなたが望む `craft` オブジェクトの変数名に置き換えてください。後方互換性のために、古い `camelCased` プラグインハンドルにすることをお勧めします。）
-
-## テンプレートのレンダリング
-
-テンプレートサービスは View コンポーネントに置き換えられました。
-
-```php
+```php Craft 3
 // Old:
 craft()->templates->render('pluginHandle/path/to/template', $variables);
 
 // New:
 \Craft::$app->view->renderTemplate('plugin-handle/path/to/template', $variables);
 ```
+:::
 
-### コントローラーアクションのテンプレート
+#### `registerSiteRoutes`
 
-コントローラーの `renderTemplate()` メソッドは、あまり変更されていません。唯一の違いは、テンプレートの出力やリクエストの最後に使用されていたのに対して、現在ではコントローラーアクションが返すべきレンダリングされたテンプレートを返します。
-
-```php
+::: code
+```php Craft 2
 // Old:
 $this->renderTemplate('pluginHandle/path/to/template', $variables);
 
@@ -757,11 +742,7 @@ $this->renderTemplate('pluginHandle/path/to/template', $variables);
 return $this->renderTemplate('plugin-handle/path/to/template', $variables);
 ```
 
-### フロントエンドリクエストのプラグインテンプレートのレンダリング
-
-フロンドエンドリクエストでプラグインが提供するテンプレートをレンダリングしたい場合、View コンポーネントを CP のテンプレートモードに設定する必要があります。
-
-```php
+```php Craft 3
 // Old:
 $oldPath = craft()->templates->getTemplatesPath();
 $newPath = craft()->path->getPluginsPath().'pluginhandle/templates/';
@@ -777,16 +758,12 @@ $oldMode = \Craft::$app->view->getTemplateMode();
 $html = \Craft::$app->view->renderTemplate('plugin-handle/path/to/template');
 \Craft::$app->view->setTemplateMode($oldMode);
 ```
+:::
 
-## コントロールパネルのテンプレート
+#### `getElementRoute`
 
-プラグインが Craft の`_layouts/cp.html` コントロールパネルレイアウトテンプレートを拡張するプラグインを持つ場合、アップデートが必要がことがいくつかあります。
-
-### `extraPageHeaderHtml`
-
-`extraPageHeaderHtml` 変数のサポートは削除されました。ページヘッダーのプライマリアクションボタンを作成するには、新しい `actionButton` を使用してください。
-
-```twig
+`<old-handle>` と `<oldhandle>` を以前のプラグインハンドル（`kebab-case` と `onewordalllowercase`）に、`<new-handle>` を新しいプラグインハンドルに置き換えてください。
+```php Craft 2
 {# Old: #}
 {% set extraPageHeaderHtml %}
     <a href="{{ url('recipes/new') }}" class="btn submit">{{ 'New recipe'|t('app') }}</a>
@@ -798,13 +775,7 @@ $html = \Craft::$app->view->renderTemplate('plugin-handle/path/to/template');
 {% endblock %}
 ```
 
-### ページ全体のグリッド
-
-`main` ブロックを上書きし、その中にページ全体のグリッドを定義する場合、グリッドアイテムのコンテンツを新しい `content` と `details` ブロックに分割する必要があります。
-
-さらに、すでに持っていたいくつかの `<div class="pane">` は、 通常 `pane` クラスを失っています。
-
-```twig
+```php Craft 3
 {# Old: #}
 {% block main %}
     <div class="grid first" data-max-cols="3">
@@ -834,10 +805,313 @@ $html = \Craft::$app->view->renderTemplate('plugin-handle/path/to/template');
     </div>
 {% endblock %}
 ```
+:::
+
+### エレメントフック
+
+プラグインがカスタムエレメントタイプ、フォールドタイプ、または、ウィジェットタイプを提供する場合、新しいクラス名とマッチする適切なテーブルの `type` カラムをアップデートする必要があります。
+
+プラグインが Craft 2 の `locales` テーブルにカスタム外部キーを作成していた場合、Craft 3 のアップグレードでは、`locales` テーブルがもはや存在しないため、代わりに`sites` テーブルの外部キーを付けた新しいカラムが自動的に追加されます。
+
+#### `addEntryActions`, `addCategoryActions`, `addAssetActions`, & `addUserActions`
+
+データは問題なく動作するはずですが、古いカラムを削除し、Craft によって新しく作成されたものをリネームすることを望むでしょう。
+```php Craft 2
+public function addEntryActions($source)
+{
+    return [new MyElementAction()];
+}
+```
+
+```php Craft 3
+use craft\elements\Entry;
+use craft\events\RegisterElementActionsEvent;
+use yii\base\Event;
+
+Event::on(Entry::class, Element::EVENT_REGISTER_ACTIONS, function(RegisterElementActionsEvent $event) {
+    $event->actions[] = new MyElementAction();
+});
+```
+:::
+
+#### `modifyEntrySortableAttributes`, `modifyCategorySortableAttributes`, `modifyAssetSortableAttributes`, & `modifyUserSortableAttributes`
+
+::: code
+```php Craft 2
+// Old:
+craft()->tasks->createTask('MyTask', 'Custom description', array(
+    'mySetting' => 'value',
+));
+
+// New:
+Craft::$app->queue->push(new MyJob([
+    'description' => 'Custom description',
+    'mySetting' => 'value',
+]));
+```
+
+```php Craft 3
+use craft\base\Element;
+use craft\elements\Entry;
+use craft\events\RegisterElementSortOptionsEvent;
+use yii\base\Event;
+
+Event::on(
+    Entry::class,
+    Element::EVENT_REGISTER_SORT_OPTIONS,
+    function(RegisterElementSortOptionsEvent $event) {
+        $event->sortOptions['id'] = \Craft::t('app', 'ID');
+    }
+);
+```
+:::
+
+#### `modifyEntrySources`, `modifyCategorySources`, `modifyAssetSources`, & `modifyUserSources`
+
+::: code
+```php Craft 2
+public function modifyEntrySources(&$sources, $context)
+{
+    if ($context == 'index') {
+        $sources[] = [
+            'heading' => Craft::t('Statuses'),
+        ];
+
+        $statuses = craft()->elements->getElementType(ElementType::Entry)
+            ->getStatuses();
+        foreach ($statuses as $status => $label) {
+            $sources['status:'.$status] = [
+                'label' => $label,
+                'criteria' => ['status' => $status]
+            ];
+        }
+    }
+}
+```
+
+```php Craft 3
+use craft\base\Element;
+use craft\elements\Entry;
+use craft\events\RegisterElementSourcesEvent;
+use yii\base\Event;
+
+Event::on(Entry::class, Element::EVENT_REGISTER_SOURCES, function(RegisterElementSourcesEvent $event) {
+    if ($event->context === 'index') {
+        $event->sources[] = [
+            'heading' => \Craft::t('plugin-handle', 'Statuses'),
+        ];
+
+        foreach (Entry::statuses() as $status => $label) {
+            $event->sources[] = [
+                'key' => 'status:'.$status,
+                'label' => $label,
+                'criteria' => ['status' => $status]
+            ];
+        }
+    }
+});
+```
+:::
+
+#### `defineAdditionalEntryTableAttributes`, `defineAdditionalCategoryTableAttributes`, `defineAdditionalAssetTableAttributes`, & `defineAdditionalUserTableAttributes`
+
+::: code
+```php Craft 2
+public function defineAdditionalEntryTableAttributes()
+{
+    return [
+        'foo' => Craft::t('Foo'),
+        'bar' => Craft::t('Bar'),
+    ];
+}
+```
+
+```php Craft 3
+// Drop the old locale FK column
+$this->dropColumn('{{%tablename}}', 'oldName');
+
+// Rename the new siteId FK column
+MigrationHelper::renameColumn('{{%tablename}}', 'oldName__siteId', 'newName', $this);
+```
+:::
+
+#### `getEntryTableAttributeHtml`, `getCategoryTableAttributeHtml`, `getAssetTableAttributeHtml`, & `getUserTableAttributeHtml`
+
+::: code
+```php Craft 2
+public function getEntryTableAttributeHtml(EntryModel $entry, $attribute)
+{
+    if ($attribute === 'price') {
+        return '$'.$entry->price;
+    }
+}
+```
+
+```php Craft 3
+use craft\base\Element;
+use craft\elements\Entry;
+use craft\events\SetElementTableAttributeHtmlEvent;
+use yii\base\Event;
+
+Event::on(
+    Entry::class,
+    Element::EVENT_SET_TABLE_ATTRIBUTE_HTML,
+    function(SetElementTableAttributeHtmlEvent $event) {
+        if ($event->attribute === 'price') {
+            /** @var Entry $entry */
+            $entry = $event->sender;
+
+            $event->html = '$'.$entry->price;
+
+            // Prevent other event listeners from getting invoked
+            $event->handled = true;
+        }
+    }
+);
+```
+:::
+
+#### `getTableAttributesForSource`
+
+```php
+// Craft 2:
+public function getTableAttributesForSource($elementType, $sourceKey)
+{
+    if ($sourceKey == 'foo') {
+        return craft()->elementIndexes->getTableAttributes($elementType, 'bar');
+    }
+}
+```
+
+::: warning
+NOTE エレメントインデックスがレンダリングされる前に、プラグインがエレメントタイプのテーブル属性を完全に変更することを許可するこのフックには、直接 Craft 3 で匹敵するものがありません。 Craft 3 で最も近いのは、管理者がエレメントインデックスのソースをカスタマイズする際に、エレメントタイプの利用可能なテーブル属性を変更するために使用できる <craft3:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> イベントです。 :::
+:::
+
+## テンプレート変数
+
+テンプレート変数は、もはや Craft 3 のものではありません。 しかしながら、プラグインは `init` イベントをリスニングすることで、グローバルな `craft` 変数にカスタムサービスを登録することができます。
+
+```php
+// Craft 3:
+use craft\web\twig\variables\CraftVariable;
+use yii\base\Event;
+
+Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function(Event $event) {
+    /** @var CraftVariable $variable */
+    $variable = $event->sender;
+    $variable->set('componentName', YourVariableClass::class);
+});
+```
+
+（`componentName` をあなたが望む `craft` オブジェクトの変数名に置き換えてください。 後方互換性のために、古い `camelCased` プラグインハンドルにすることをお勧めします。 ）
+
+## テンプレートのレンダリング
+
+The TemplatesService has been replaced with a View component.
+
+::: code
+```php Craft 2
+craft()->templates->render('pluginHandle/path/to/template', $variables);
+```
+
+```php Craft 3
+\Craft::$app->view->renderTemplate('plugin-handle/path/to/template', $variables);
+```
+:::
+
+### コントローラーアクションのテンプレート
+
+コントローラーの `renderTemplate()` メソッドは、あまり変更されていません。 唯一の違いは、テンプレートの出力やリクエストの最後に使用されていたのに対して、現在ではコントローラーアクションが返すべきレンダリングされたテンプレートを返します。
+
+::: code
+```php Craft 2
+$this->renderTemplate('pluginHandle/path/to/template', $variables);
+```
+
+```php Craft 3
+return $this->renderTemplate('plugin-handle/path/to/template', $variables);
+```
+:::
+
+### フロントエンドリクエストのプラグインテンプレートのレンダリング
+
+If you want to render a plugin-supplied template on a front-end request, you need to set the View component to the CP’s template mode:
+
+::: code
+```php Craft 2
+$oldPath = craft()->templates->getTemplatesPath();
+$newPath = craft()->path->getPluginsPath().'pluginhandle/templates/';
+craft()->templates->setTemplatesPath($newPath);
+$html = craft()->templates->render('path/to/template');
+craft()->templates->setTemplatesPath($oldPath);
+```
+
+```php Craft 3
+use craft\web\View;
+
+$oldMode = \Craft::$app->view->getTemplateMode();
+\Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
+$html = \Craft::$app->view->renderTemplate('plugin-handle/path/to/template');
+\Craft::$app->view->setTemplateMode($oldMode);
+```
+:::
+
+## コントロールパネルのテンプレート
+
+If your plugin has any templates that extend Craft’s `_layouts/cp.html` control panel layout template, there are a few things that might need to be updated.
+
+### `extraPageHeaderHtml`
+
+`extraPageHeaderHtml` 変数のサポートは削除されました。 ページヘッダーのプライマリアクションボタンを作成するには、新しい `actionButton` を使用してください。
+
+::: code
+```twig Craft 2
+{% set extraPageHeaderHtml %}
+    <a href="{{ url('recipes/new') }}" class="btn submit">{{ 'New recipe'|t('app') }}</a>
+{% endset %}
+```
+
+```twig Craft 3
+{% block actionButton %}
+    <a href="{{ url('recipes/new') }}" class="btn submit">{{ 'New recipe'|t('app') }}</a>
+{% endblock %}
+```
+:::
+
+### ページ全体のグリッド
+
+If you had a template that overrode the `main` block, and defined a full-page grid inside it, you should divide the grid items’ contents into the new `content` and `details` blocks.
+
+さらに、すでに持っていたいくつかの `<div class="pane">` は、 通常 `pane` クラスを失っています。
+
+::: code
+```twig Craft 2
+{% block main %}
+    <div class="grid first" data-max-cols="3">
+        <div class="item" data-position="left" data-colspan="2">
+            <div id="recipe-fields" class="pane"><!-- Primary Content --></div>
+        </div>
+        <div class="item" data-position="right">
+            <div class="pane meta"><!-- Secondary Content --></div>
+        </div>
+    </div>
+{% endblock %}
+```
+
+```twig Craft 3
+{% block content %}
+    <div id="recipe-fields"><!-- Primary Content --></div>
+{% endblock %}
+
+{% block details %}
+    <div class="meta"><!-- Secondary Content --></div>
+{% endblock %}
+```
+:::
 
 ### コントロールパネルテンプレートフック
 
-次のコントロールパネル[テンプレートフック](template-hooks.md)はリネームされました。
+The following control panel [template hooks](template-hooks.md) have been renamed:
 
 | 旧                               | 新                            |
 | ------------------------------- | ---------------------------- |
@@ -847,13 +1121,18 @@ $html = \Craft::$app->view->renderTemplate('plugin-handle/path/to/template');
 
 ## リソースリクエスト
 
-Craft 3 にはリソースリクエストのコンセプトがありません。フロントエンドリソースの働きについての情報は、[アセットバンドル](asset-bundles.md) を参照してください。
+Craft 3 にはリソースリクエストのコンセプトがありません。 フロントエンドリソースの働きについての情報は、[アセットバンドル](asset-bundles.md) を参照してください。
 
 ## 任意の HTML の登録
 
-ページのどこかに任意の HTML を含めたい場合、View コンポーネントで `beginBody` または `endBody` イベントを使用してください。
+If you need to include arbitrary HTML somewhere on the page, use the `beginBody` or `endBody` events on the View component:
 
-```php
+::: code
+```php Craft 2
+craft()->templates->includeFootHtml($html);
+```
+
+```php Craft 3
 // Old:
 craft()->templates->includeFootHtml($html);
 
@@ -866,14 +1145,16 @@ Event::on(View::class, View::EVENT_END_BODY, function(Event $event) {
     echo $html;
 });
 ```
+:::
 
 ## バックグラウンドタスク
 
-Craft のタスクサービスは、[Yii 2 Queue Extension](https://github.com/yiisoft/yii2-queue) を備えたジョブキューに置き換えられました。
+Craft’s Tasks service has been replaced with a job queue, powered by the [Yii 2 Queue Extension](https://github.com/yiisoft/yii2-queue).
 
-プラグインがカスタムタスクタイプを提供する場合、それらをジョブに変換する必要があります。
+If your plugin provides any custom task types, they will need to be converted to jobs:
 
-```php
+::: code
+```php Craft 2
 // Old:
 class MyTask extends BaseTask
 {
@@ -891,6 +1172,12 @@ class MyTask extends BaseTask
     {
         // do something...
         return true;
+    }
+}
+```
+
+```php Craft 3
+return true;
     }
 }
 
@@ -915,32 +1202,35 @@ class MyJob extends BaseJob
     }
 }
 ```
+:::
 
-ジョブをキューに追加する方法も少し異なります。
+Adding jobs to the queue is a little different as well:
 
-```php
-// Old:
+::: code
+```php Craft 2
 craft()->tasks->createTask('MyTask', 'Custom description', array(
     'mySetting' => 'value',
 ));
+```
 
-// New:
+```php Craft 3
 Craft::$app->queue->push(new MyJob([
     'description' => 'Custom description',
     'mySetting' => 'value',
 ]));
 ```
+:::
 
 ## アップグレードマイグレーションの記述
 
-Craft 2 インストール向けにプラグインにマイグレーションパスを与える必要があるかもしれません。それによって、それらが立ち往生することはなくなります。
+Craft 2 インストール向けにプラグインにマイグレーションパスを与える必要があるかもしれません。
 
-Craft がプラグインを**アップデート**なのか、**新規インストール**なのか判断させることを最初に決定する必要があります。プラグインハンドルが（`UpperCamelCase` から `kebab-case` になる他に）変更されない場合、Craft は新しいバージョンの**アップデート**とみなします。しかし、ハンドルがより重要な形で変わっているなら、Craft はそれを認識せず、完全に新しいプラグインとして判断します。
+Craft がプラグインを**アップデート**なのか、**新規インストール**なのか判断させることを最初に決定する必要があります。 プラグインハンドルが（`UpperCamelCase` から `kebab-case` になる他に）変更されない場合、Craft は新しいバージョンの**アップデート**とみなします。 しかし、ハンドルがより重要な形で変わっているなら、Craft はそれを認識せず、完全に新しいプラグインとして判断します。
 
 
-ハンドルが（一般的に）同じ名前で止まる場合、“`craft3_upgrade`” のように名付けられた新しい[マイグレーション](migrations.md)を作成してください。アップグレードコードは、他のマイグレーション同様に `safeUp()` メソッドに入れます。
+ハンドルが（一般的に）同じ名前で止まる場合、“`craft3_upgrade`” のように名付けられた新しい[マイグレーション](migrations.md)を作成してください。 アップグレードコードは、他のマイグレーション同様に `safeUp()` メソッドに入れます。
 
-ハンドルが変更されている場合、代わりに[インストールマイグレーション](migrations.md#plugin-install-migrations)にアップグレードコードを配置する必要があります。これを出発点として使用してください。
+ハンドルが変更されている場合、代わりに[インストールマイグレーション](migrations.md#plugin-install-migrations)にアップグレードコードを配置する必要があります。 これを出発点として使用してください。
 
 ```php
 <?php
@@ -994,13 +1284,13 @@ class Install extends Migration
 }
 ```
 
-`<old-handle>` と `<oldhandle>` を以前のプラグインハンドル（`kebab-case` と `onewordalllowercase`）に、`<new-handle>` を新しいプラグインハンドルに置き換えてください。
+Replace `<old-handle>` and `<oldhandle>` with your plugin’s previous handle (in `kebab-case` and `onewordalllowercase`), and `<new-handle>` with your new plugin handle.
 
-追加のアップグレード処理を加える必要がある場合、`_upgradeFromCraft2()` メソッドの最後（`return` 文の前）に配置してください。（プラグインの新規インストール向けの）通常のインストールマイグレーションコードは、`safeUp()` の最後に入れる必要があります。
+追加のアップグレード処理を加える必要がある場合、`_upgradeFromCraft2()` メソッドの最後（`return` 文の前）に配置してください。 （プラグインの新規インストール向けの）通常のインストールマイグレーションコードは、`safeUp()` の最後に入れる必要があります。
 
 ### コンポーネントクラス名
 
-プラグインがカスタムエレメントタイプ、フォールドタイプ、または、ウィジェットタイプを提供する場合、新しいクラス名とマッチする適切なテーブルの `type` カラムをアップデートする必要があります。
+If your plugin provides any custom element types, field types, or widget types, you will need to update the `type` column in the appropriate tables to match their new class names.
 
 #### エレメント
 
@@ -1028,14 +1318,14 @@ $this->update('{{%widgets}}', [
 
 ### ロケールの外部キー
 
-プラグインが Craft 2 の `locales` テーブルにカスタム外部キーを作成していた場合、Craft 3 のアップグレードでは、`locales` テーブルがもはや存在しないため、代わりに`sites` テーブルの外部キーを付けた新しいカラムが自動的に追加されます。
+If your plugin created any custom foreign keys to the `locales` table in Craft 2, the Craft 3 upgrade will have automatically added new columns alongside them, with foreign keys to the `sites` table instead, as the `locales` table is no longer with us.
 
-データは問題なく動作するはずですが、古いカラムを削除し、Craft によって新しく作成されたものをリネームすることを望むでしょう。
+The data should be good to go, but you will probably want to drop the old column, and rename the new one Craft created for you.
 
 ```php
 // Drop the old locale FK column
-$this->dropColumn('{{%tablename}}', 'oldName');
+$this->dropColumn('{{%mytablename}}', 'oldName');
 
 // Rename the new siteId FK column
-MigrationHelper::renameColumn('{{%tablename}}', 'oldName__siteId', 'newName', $this);
+MigrationHelper::renameColumn('{{%mytablename}}', 'oldName__siteId', 'newName', $this);
 ```

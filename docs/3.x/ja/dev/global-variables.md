@@ -2,6 +2,37 @@
 
 ありとあらゆるテンプレートでは、次の変数を読み込むことができます。
 
+| Variable                                      | Description                                                                    |
+| --------------------------------------------- | ------------------------------------------------------------------------------ |
+| `_self`                                       | The current template name.                                                     |
+| `_context`                                    | The currently-defined variables.                                               |
+| `_charset`                                    | The current charset.                                                           |
+| [craft](#craft)                               | A <craft3:craft\web\twig\variables\CraftVariable> object.                  |
+| [currentSite](#currentsite)                   | The requested site.                                                            |
+| [currentUser](#currentuser)                   | The currently logged-in user.                                                  |
+| [devMode](#devmode)                           | Whether Dev Mode is enabled.                                                   |
+| [Global set variables](#global-set-variables) | Variables for each of the global sets.                                         |
+| [loginUrl](#loginurl)                         | The URL to the front-end Login page.                                           |
+| [logoutUrl](#logouturl)                       | The URL to the front-end Logout page.                                          |
+| [now](#now)                                   | The current date/time.                                                         |
+| [POS_BEGIN](#pos-begin)                       | The [craft\web\View::POS_BEGIN](craft3:craft\web\View#constants) constant. |
+| [POS_END](#pos-end)                           | The [craft\web\View::POS_END](craft3:craft\web\View#constants) constant.   |
+| [POS_HEAD](#pos-head)                         | The [craft\web\View::POS_HEAD](craft3:craft\web\View#constants) constant.  |
+| [POS_LOAD](#pos-load)                         | The [craft\web\View::POS_LOAD](craft3:craft\web\View#constants) constant.  |
+| [POS_READY](#pos-ready)                       | The [craft\web\View::POS_READY](craft3:craft\web\View#constants) constant. |
+| [siteName](#sitename)                         | The name of the current site.                                                  |
+| [siteUrl](#siteurl)                           | The base URL of the current site.                                              |
+| [SORT_ASC](#sort-asc)                         | The `SORT_ASC` PHP constant.                                                   |
+| [SORT_DESC](#sort-desc)                       | The `SORT_DESC` PHP constant.                                                  |
+| [SORT_FLAG_CASE](#sort-flag-case)           | The `SORT_FLAG_CASE` PHP constant.                                             |
+| [SORT_LOCALE_STRING](#sort-locale-string)   | The `SORT_LOCALE_STRING` PHP constant.                                         |
+| [SORT_NATURAL](#sort-natural)                 | The `SORT_NATURAL` PHP constant.                                               |
+| [SORT_NUMERIC](#sort-numeric)                 | The `SORT_NUMERIC` PHP constant.                                               |
+| [SORT_REGULAR](#sort-regular)                 | The `SORT_REGULAR` PHP constant.                                               |
+| [SORT_STRING](#sort-string)                   | The `SORT_STRING` PHP constant.T                                               |
+| [systemName](#systemname)                     | The system name.                                                               |
+| [view](#view)                                 | The app’s `view` component.                                                    |
+
 ## `craft`
 
 様々なヘルパーファンクションやオブジェクトのアクセスポイントを提供する <craft3:craft\web\twig\variables\CraftVariable>  オブジェクト。
@@ -11,7 +42,7 @@
 インスタンス（PHP コード内で `Craft::$app` と記述したときに取得できるもの）への参照は、`craft.app` 経由でテンプレートでも利用可能です。
 
 ::: warning
-`craft.app` 経由でアクセスすることは、先進的であると考えられます。他の Twig 特有の変数やファンクションよりもセキュリティの上で意味があります。さらに、Craft のメジャーバージョン間で生じる互換性を破る変更に、テンプレートを反応させやすくするでしょう。
+`craft.app` 経由でアクセスすることは、先進的であると考えられます。 他の Twig 特有の変数やファンクションよりもセキュリティの上で意味があります。
 :::
 
 ```twig
@@ -40,7 +71,7 @@
 
 ## `currentUser`
 
-オブジェクトで表される、現在ログインしているユーザー。誰もログインしていない場合は、`null`。
+オブジェクトで表される、現在ログインしているユーザー。 誰もログインしていない場合は、`null`。
 
 ```twig
 {% if currentUser %}
@@ -70,7 +101,7 @@ The URL to your site’s login page, based on the <config3:loginPath> コンフ�
 
 ## `logoutUrl`
 
-The URL Craft uses to log users out, based on the <config3:logoutPath> コンフィグ設定に基づく、Craft ユーザーのログアウト URL。ここに遷移した後、Craft はユーザーをホームページへ自動的にリダイレクトします。「ログアウト _ページ_ 」といったものはありません。
+The URL Craft uses to log users out, based on the <config3:logoutPath> config setting. ここに遷移した後、Craft はユーザーをホームページへ自動的にリダイレクトします。 「ログアウト _ページ_ 」といったものはありません。
 
 ```twig
 {% if currentUser %}

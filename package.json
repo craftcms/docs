@@ -12,6 +12,7 @@
     "autoprefixer": "^9.8.4",
     "babel-loader": "^8.1.0",
     "babel-preset-vue": "^2.0.2",
+    "commander": "^2.20.3",
     "esm": "^3.2.25",
     "jest": "^26.1.0",
     "markdown-it-deflist": "^2.0.3",
@@ -29,7 +30,7 @@
     "vuepress": "^1.5.2",
     "vuepress-plugin-container": "^2.1.4",
     "vuepress-plugin-medium-zoom": "^1.1.8",
-    "vuepress-plugin-sitemap": "^2.0.0",
+    "vuepress-plugin-sitemap": "docs/.vuepress/theme/vuepress-plugin-sitemap",
     "vuepress-plugin-smooth-scroll": "0.0.9",
     "vuex": "^3.4.0"
   },
@@ -38,7 +39,7 @@
     "docs:devdebug": "node --nolazy --inspect-brk=9229 ./node_modules/.bin/vuepress dev docs",
     "docs:devnocache": "vuepress dev docs --no-cache",
     "docs:build": "vuepress build docs --dest=docs/.vuepress/dist/docs && npm run docs:sitemap",
-    "docs:sitemap": "vuepress-sitemap -H https://craftcms.com/docs/ -d docs/.vuepress/dist/docs",
+    "docs:sitemap": "vuepress-sitemap -H https://craftcms.com/docs/ -d docs/.vuepress/dist/docs -e /3.x/fr/**",
     "storybook": "start-storybook -c docs/.storybook -s docs/.vuepress/public",
     "test": "node ./node_modules/.bin/jest"
   },

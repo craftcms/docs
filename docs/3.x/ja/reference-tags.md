@@ -1,6 +1,6 @@
 # リファレンスタグ
 
-リファレンスタグを利用して、サイト内の様々なエレメントへの参照を作成できます。テーブルフィールド内のテキストセルを含む、あらゆるテキストフィールドで使用できます。
+リファレンスタグを利用して、サイト内の様々なエレメントへの参照を作成できます。 テーブルフィールド内のテキストセルを含む、あらゆるテキストフィールドで使用できます。
 
 リファレンスタグの構文は、次のようになります。
 
@@ -10,7 +10,7 @@
 
 ご覧の通り、それらは3つのセグメントで構成されています。
 
-1.  `<Type>` – 参照を作成するエレメントのタイプ。これは完全修飾のエレメントクラス名（例：`craft\elements\Entry`）、または、エレメントタイプの「リファレンスハンドル」です。
+1.  `<Type>` – 参照を作成するエレメントのタイプ。 これは完全修飾のエレメントクラス名（例：`craft\elements\Entry`）、または、エレメントタイプの「リファレンスハンドル」です。
 
     コアのエレメントタイプは、次のリファレンスハンドルを持っています。
 
@@ -29,17 +29,17 @@
 
     Identifiers can also include the site ID, UUID, or handle that the element should be loaded from, using an `@<Site>` syntax.
 
-3.  `<Property>` _（オプション）_ – リファレンスタグが返すべきエレメントのプロパティ。省略した場合、エレメントの URL が返されます。
+3.  `<Property>` _（オプション）_ – リファレンスタグが返すべきエレメントのプロパティ。 省略した場合、エレメントの URL が返されます。
 
     利用可能なプロパティのリストは、エレメントタイプのクラスリファレンスを参照してください。
 
-    - [craft3:craft\elements\Entry](craft3:craft\elements\Entry#public-properties)
-    - [craft3:craft\elements\Asset](craft3:craft\elements\Asset#public-properties)
-    - [craft3:craft\elements\Tag](craft3:craft\elements\Tag#public-properties)
-    - [craft3:craft\elements\User](craft3:craft\elements\User#public-properties)
-    - [craft3:craft\elements\GlobalSet](craft3:craft\elements\GlobalSet#public-properties)
+    - [craft\elements\Entry](craft3:craft\elements\Entry#public-properties)
+    - [craft\elements\Asset](craft3:craft\elements\Asset#public-properties)
+    - [craft\elements\Tag](craft3:craft\elements\Tag#public-properties)
+    - [craft\elements\User](craft3:craft\elements\User#public-properties)
+    - [craft\elements\GlobalSet](craft3:craft\elements\GlobalSet#public-properties)
 
-    カスタムフィールドのハンドルもサポートされています。フィールドタイプは文字列として表すことができる値を持っています。
+    カスタムフィールドのハンドルもサポートされています。 フィールドタイプは文字列として表すことができる値を持っています。
 
 ### 実例
 

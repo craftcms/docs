@@ -6,9 +6,7 @@ The Craft module provides a `cleanup` and `transaction` option for the `codecept
 
 ### `transactions`
 
-The transaction option ensures that changes made to the database during your test are rolled back using a Yii2
-[transaction](https://www.yiiframework.com/doc/api/2.0/yii-db-transaction). This means that if you,
-for example, save a `craft\db\ActiveRecord` instance before the next test that database row is removed. This prevents collisions and prevents you from spending hours debugging your tests.
+The transaction option ensures that changes made to the database during your test are rolled back using a Yii2 [transaction](https://www.yiiframework.com/doc/api/2.0/yii-db-transaction). This means that if you, for example, save a `craft\db\ActiveRecord` instance before the next test that database row is removed. This prevents collisions and prevents you from spending hours debugging your tests.
 
 ::: warning
 If you are running MySQL the `[[%searchindex]]` table may be running the MyISAM Database driver. If this is the case transactions are [not-supported](https://dev.mysql.com/doc/refman/5.6/en/myisam-storage-engine.html).

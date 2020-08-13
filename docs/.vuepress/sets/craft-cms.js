@@ -22,6 +22,11 @@ module.exports = {
       lang: "ja",
       title: "Craft CMS ドキュメント | %v",
       config: require("./craft-cms-ja.js")
+    },
+    "/fr/": {
+      lang: "fr",
+      title: "Craft CMS Documentation | %v",
+      config: require("./craft-cms-fr.js")
     }
   }
 };
