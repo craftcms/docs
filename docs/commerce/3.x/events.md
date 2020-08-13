@@ -787,7 +787,7 @@ Event::on(
 
 The event that is triggered when getting a default status for a line item.
 
-You may set [[DefaultLineItemStatusEvent::lineItemStatus]] to a desired LineItemStatus to override the default status set in the control panel.
+You may set [DefaultLineItemStatusEvent::lineItemStatus](commerce3:craft\commerce\events\DefaultLineItemStatusEvent) to a desired LineItemStatus to override the default status set in the control panel.
 
 Plugins can get notified when a default line item status is being fetched.
 
