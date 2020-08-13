@@ -1,6 +1,6 @@
 # テンプレートフック
 
-Craft テンプレートでは、[hook](../dev/tags/hook.md) タグを使用してモジュールやプラグインにフックする機会を与えることができます。
+Craft テンプレートでは、[hook](../dev/tags.md#hook) タグを使用してモジュールやプラグインにフックする機会を与えることができます。
 
 ```twig
 {# Give plugins a chance to make changes here #}
