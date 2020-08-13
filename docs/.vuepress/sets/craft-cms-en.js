@@ -172,6 +172,7 @@ module.exports = {
           title: "Front End Development",
           collapsable: false,
           children: [
+            "image-transforms",
             "element-queries",
             "dev/eager-loading-elements",
             "graphql",

@@ -121,7 +121,7 @@ One way you could achieve this is by combining the [`tag` template function](dev
     src: asset.url,
     width: asset.width,
     height: asset.height,
-    srcset: asset.getSrcset(['1x', '1.5x', '2x', '3x']),
+    srcset: asset.getSrcset(['1.5x', '2x', '3x']),
     alt: asset.title,
 }) }}
 ```
@@ -129,30 +129,9 @@ One way you could achieve this is by combining the [`tag` template function](dev
 You can also pass a `sizes` argument to the [`getImg()`](craft3:craft\elements\Asset::getImg()) method to accomplish the same thing:
 
 ```twig
-{{ asset.getImg({ width: 300, height: 300 }, ['1x', '1.5x', '2x', '3x']) }}
+{{ asset.getImg({ width: 300, height: 300 }, ['1.5x', '2x', '3x']) }}
 ```
 
-### Eager-Loading Relative Image Sizes
-
-Prior to Craft 3.5, you would need to specify individual transform parameters for each image variation in the `withTransforms()` array:
-
-```twig
-{% set assets = entry.myAssetsField
-    .withTransforms([
-        {width: 300, height: 300},
-        {width: 450, height: 450},
-        {width: 600, height: 600},
-        {width: 900, height: 900},
-    ])
-    .all() %}
-```
-
-Craft 3.5 supports relative transform parameters for [eager-loaded transform indexes](dev/eager-loading-elements.html#eager-loading-image-transform-indexes) as well. The first item must describe dimensions that subsequent relative variations will be based on. This example would produce the same result as the previous one:
-
-```twig
-{% set assets = entry.myAssetsField
-    .withTransforms([{width: 300, height: 300}, '1.5x', '2x', '3x'])
-    .all() %}
-```
-
-
+::: tip
+You can also provide relative image sizes when eager-loading asset transforms. See [`AssetQuery::withTransforms()`](craft3:craft\elements\db\AssetQuery::withTransforms()) in the class reference for an example.
+:::
