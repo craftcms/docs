@@ -151,7 +151,7 @@ By default, Craft will store data caches in the `storage/runtime/cache/` folder.
 If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a CLI command for convenience:
 
 ```bash
-./craft setup/db-cache-table
+php craft setup/db-cache-table
 ```
 
 Once that’s done, you can set your `cache` application component to use <craft3:craft\cache\DbCache>.

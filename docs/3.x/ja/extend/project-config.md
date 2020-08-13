@@ -242,7 +242,7 @@ public function safeUp()
 
 ## プロジェクトコンフィグデータの再構築
 
-プラグインがプロジェクトコンフィグとデータベースの両方にデータを保存している場合、`php craft project-config/rebuild` コマンドが実行されたときに Craft がデータベースに保存されたデータに基づいてプロジェクトコンフィグを再構築するのを支援するよう（Craft 3.1.20 で追加された）<craft3:craft\services\ProjectConfig::EVENT_REBUILD> を感知してください。
+If your plugin is storing data in both the project config and elsewhere in the database, you should listen to <craft3:craft\services\ProjectConfig::EVENT_REBUILD> (added in Craft 3.1.20) to aid Craft in rebuilding the project config based on database-stored data, when the `php craft project-config/rebuild` command is run.
 
 ```php
 use craft\events\RebuildConfigEvent;

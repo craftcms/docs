@@ -25,11 +25,11 @@ cd /path/to/project
 ::: code
 
 ```bash Plugin Migration
-php craft migrate/create <migration_name> --plugin=<plugin-handle>
+php craft migrate/create my_migration_name --plugin=my-plugin-handle
 ```
 
 ```bash Content Migration
-php craft migrate/create <migration_name>
+php craft migrate/create my_migration_name
 ```
 
 :::
@@ -96,7 +96,7 @@ echo "    > some note\n";
 ::: code
 
 ```bash Plugin Migration
-php craft migrate/up --plugin=<plugin-handle>
+php craft migrate/up --plugin=my-plugin-handle
 ```
 
 ```bash Content Migration
@@ -140,7 +140,7 @@ class Install extends Migration
 マイグレーション名「`install`」を渡すと、`migrate/create` コマンドでプラグインにインストールマイグレーションを与えることができます。
 
 ```bash
-php craft migrate/create install --plugin=<plugin-handle>
+php craft migrate/create install --plugin=my-plugin-handle
 ```
 
 ::: tip
