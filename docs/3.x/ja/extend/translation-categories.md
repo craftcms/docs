@@ -24,7 +24,7 @@ public function init()
 }
 ```
 
-[アプリケーション設定](../config/app.md)をコントロールできる場合、そこから翻訳カテゴリを追加することもできます。
+[アプリケーション設定](../config/#application-configuration)をコントロールできる場合、そこから翻訳カテゴリを追加することもできます。
 
 ```php
 // -- config/app.php --
