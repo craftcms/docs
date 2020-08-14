@@ -10,7 +10,7 @@ We want to follow [DRY methodology](https://en.wikipedia.org/wiki/Don%27t_repeat
 
 The layout is important for this because it will be the base from which our other templates _extend_.
 
-The underscore (`_`) at the beginning of the filename, `_layout.twig`, means the template is private: unlike the quick example we started with, you _cannot_ view the template by visiting `https://tutorial.test/_layout`. We can use underscores when it makes sense—in this case it’s because the layout is only a shell and isn’t meant to appear on its own.
+The underscore (`_`) at the beginning of the filename, `_layout.twig`, means the template is private: unlike the quick example we started with, you _cannot_ view the template by visiting `http://tutorial.test/_layout`. We can use underscores when it makes sense—in this case it’s because the layout is only a shell and isn’t meant to appear on its own.
 
 Copy this into the `templates/_layout.twig` file you created:
 
@@ -76,7 +76,7 @@ The first line _extends_ the layout template, meaning it will use that as a star
 
 Now that the blog section’s template is ready, you can visit the URL for a published post:
 
-<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="">
 <img src="../images/tutorial-entry-static.png" alt="Screenshot of empty page with generic title" />
 </BrowserShot>
 
@@ -98,11 +98,11 @@ That’s clearly not the title we should display on every page. For any detail p
 
 Now it’s looking better!
 
-<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="">
 <img src="../images/tutorial-entry-dynamic.png" alt="Screenshot of detail page with dynamic title and entry date" />
 </BrowserShot>
 
-Notice how we’re using the [`|date()` Twig filter](https://docs.craftcms.com/v3/dev/filters.html#date) to specify formats for the `entry.postDate` value. This is a typical example of using a filter to modify something in Twig; a value you want to modify or transform is followed by a pipe (`|`), the name of the filter, and sometimes settings specific to that filter. You can see all Craft’s available [filters](https://docs.craftcms.com/v3/dev/filters.html) to get a better idea of what you can do with them.
+Notice how we’re using the [`|date` Twig filter](/3.x/dev/filters.md#date) to specify formats for the `entry.postDate` value. This is a typical example of using a filter to modify something in Twig; a value you want to modify or transform is followed by a pipe (`|`), the name of the filter, and sometimes settings specific to that filter. You can see all Craft’s available [filters](/3.x/dev/filters.md) to get a better idea of what you can do with them.
 
 Let’s display the “Feature Image” next, using the `featureImage` handle we created with that custom field:
 
@@ -122,7 +122,7 @@ Let’s display the “Feature Image” next, using the `featureImage` handle we
 {% endblock %}
 ```
 
-This first uses an [`if` conditional statement](https://twig.symfony.com/doc/3.x/tags/if.html) to see whether the editor added an image in this field. The “Assets” field we used can have one or many images depending on how we configure it, so the statement uses the [`|length` Twig filter](https://docs.craftcms.com/v3/dev/filters.html#length) to count the number of items—where `0` will be `false` and anything else will be `true`.
+This first uses an [`if` conditional statement](https://twig.symfony.com/doc/3.x/tags/if.html) to see whether the editor added an image in this field. The “Assets” field we used can have one or many images depending on how we configure it, so the statement uses the [`|length` Twig filter](/3.x/dev/filters.md#length) to count the number of items—where `0` will be `false` and anything else will be `true`.
 
 If the statement is `true`, meaning we have at least one feature image, we’ll use `entry.featureImage.all()` to get the set and a `for` statement to loop through and display each item using the `image` variable. (We limited the field settings to allow only one image, but increasing that limit means _every_ image would be shown here!)
 
@@ -130,13 +130,13 @@ For each asset, we output a `img` HTML tag using `{{ image.url }}` to get the we
 
 We should now see the image after refreshing the page:
 
-<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="">
 <img src="../images/tutorial-entry-with-image.png" alt="Screenshot of detail page with dynamic image added" />
 </BrowserShot>
 
 ## Transform an asset
 
-[Image Transforms](https://docs.craftcms.com/v3/image-transforms.html) let you specify the exact dimensions you need and have Craft CMS crop and size an image accordingly. Let’s specify a size for our “Feature Image”.
+[Image Transforms](/3.x/image-transforms.md) let you specify the exact dimensions you need and have Craft CMS crop and size an image accordingly. Let’s specify a size for our “Feature Image”.
 
 We’ll use Twig to create an object called `featureImage` with the settings we want, then pass those settings to `image.getUrl()` in place of `image.url`:
 
@@ -165,7 +165,7 @@ We’ll use Twig to create an object called `featureImage` with the settings we 
 
 You can now refresh the front end and see your transformed asset:
 
-<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="Automatically-resized image, cropped at 900×600px.">
+<BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="Automatically-resized image, cropped at 900×600px.">
 <img src="../images/tutorial-image-resized.png" alt="Screenshot of detail page with auto-sized image" />
 </BrowserShot>
 
@@ -217,7 +217,7 @@ Matrix content is stored in whatever blocks we’ve defined. To display that con
 
 The Matrix content will now be included on the page:
 
-<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="Detail page with post content added." :max-height="600">
+<BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="Detail page with post content added." :max-height="600">
 <img src="../images/tutorial-matrix-content.png" alt="Screenshot of detail page with post content" />
 </BrowserShot>
 
@@ -412,7 +412,7 @@ We used a global set to store a blurb to be displayed at the bottom of all the s
 </html>
 ```
 
-The “Site Description” field is Plain Text without any formatting, and just for fun we can use Craft’s [`markdown` filter](https://docs.craftcms.com/v3/dev/filters.html#markdown) to output it in a paragaph tag (`<p></p>`) and support [markdown syntax](https://daringfireball.net/projects/markdown/).
+The “Site Description” field is Plain Text without any formatting, and just for fun we can use Craft’s [`markdown` filter](/3.x/dev/filters.md#markdown) to output it in a paragaph tag (`<p></p>`) and support [markdown syntax](https://daringfireball.net/projects/markdown/).
 
 ## Add a listing page
 
@@ -420,7 +420,7 @@ We’ll display a listing of posts in two places: in the blog index and again on
 
 Let’s start with our landing page first.
 
-Create `templates/blog/index.twig`. Any time you use `index.twig` or `index.html`, that will be the default template or page in a given folder. So when we visit `https://tutorial.test/blog/`, that folder’s `blog/index.twig` will be used for rendering the result. Add the following to that template:
+Create `templates/blog/index.twig`. Any time you use `index.twig` or `index.html`, that will be the default template or page in a given folder. So when we visit `http://tutorial.test/blog/`, that folder’s `blog/index.twig` will be used for rendering the result. Add the following to that template:
 
 ```twig
 {% extends "_layout" %}
@@ -441,7 +441,7 @@ Our entry detail page came with an automatically-available `entry` variable, but
 {% set posts = craft.entries.section('blog').all() %}
 ```
 
-The technical term for what we’re doing is [querying entries](https://docs.craftcms.com/v3/dev/element-queries/entry-queries.html). Once these content elements are stored in Craft CMS, there are lots of options and parameters you can use in these queries to get exactly what you need wherever you need it.
+The technical term for what we’re doing is [querying entries](/3.x/entries.md#querying-entries). Once these content elements are stored in Craft CMS, there are lots of options and parameters you can use in these queries to get exactly what you need wherever you need it.
 
 Now create `templates/_includes/listing.twig`. We’ll use this for listing blog entries here and re-use it again shortly:
 
@@ -468,13 +468,13 @@ The image transform is similar to what we did earlier, except we used `.one()` i
 
 Here’s what the result looks like:
 
-<BrowserShot url="https://tutorial.test/blog/" :link="false" caption="">
+<BrowserShot url="http://tutorial.test/blog/" :link="false" caption="">
 <img src="../images/tutorial-listing.png" alt="Screenshot of listing page" />
 </BrowserShot>
 
 In this template we’ve chosen to display a square thumbnail of the “Feature Image” along with the post title. Some of these images may crop weirdly into squares, but we can use focal points to have some control over how they’re cropped!
 
-Transformed images will automatically be cropped from the center, but a content editor may also adjust this by setting a [focal point](https://docs.craftcms.com/v3/assets.html#focal-points) in the control panel:
+Transformed images will automatically be cropped from the center, but a content editor may also adjust this by setting a [focal point](/3.x/assets.md#focal-points) in the control panel:
 
 1. In the control panel, navigate to the image either using the “Assets” menu item or “Entries” and choosing the relevant blog post.
 2. Double-click the asset, then choose “Edit” from the top-right corner of the image preview. (This will open the editor.)
@@ -485,7 +485,7 @@ Transformed images will automatically be cropped from the center, but a content 
 
 Back on the front end, refresh the listing page and you’ll see the re-cropped thumbnail:
 
-<BrowserShot url="https://tutorial.test/blog/" :link="false" caption="Listing page with adjusted thumbnail focal point.">
+<BrowserShot url="http://tutorial.test/blog/" :link="false" caption="Listing page with adjusted thumbnail focal point.">
 <img src="../images/tutorial-listing-with-custom-focal-point.png" alt="Screenshot of listing page where post thumbnail is cropped toward focal point of image" />
 </BrowserShot>
 
@@ -508,7 +508,7 @@ Create `templates/blog/_category.twig` and add the following:
 {% endblock %}
 ```
 
-In the same way that entry detail pages came automatically loaded with an `entry` variable, category pages come with a special `category` variable. We’re using that here to limit only to posts in the selected category using the [`relatedTo` query parameter](https://docs.craftcms.com/v3/dev/element-queries/entry-queries.html#relatedto):
+In the same way that entry detail pages came automatically loaded with an `entry` variable, category pages come with a special `category` variable. We’re using that here to limit only to posts in the selected category using the [`relatedTo` query parameter](/3.x/entries.md#relatedto):
 
 ```twig
 {% set posts = craft.entries.section('blog').relatedTo(category).all() %}
@@ -516,7 +516,7 @@ In the same way that entry detail pages came automatically loaded with an `entry
 
 Our post category listings, which you can navigate to by choosing any of a blog post’s tags, should be working now:
 
-<BrowserShot url="https://tutorial.test/blog/category/ramblings" :link="false" caption="Listing page for posts in the `Ramblings` category.">
+<BrowserShot url="http://tutorial.test/blog/category/ramblings" :link="false" caption="Listing page for posts in the `Ramblings` category.">
 <img src="../images/tutorial-listing-category.png" alt="Screenshot of listing page limited by category" />
 </BrowserShot>
 
@@ -569,7 +569,7 @@ Now let’s include that in `templates/_layout.twig`:
 </html>
 ```
 
-<BrowserShot url="https://tutorial.test/blog" :link="false" caption="Blog listing with navigation." :max-height="600">
+<BrowserShot url="http://tutorial.test/blog" :link="false" caption="Blog listing with navigation." :max-height="600">
 <img src="../images/tutorial-navigation.png" alt="Screenshot of blog listing with new top navigation" />
 </BrowserShot>
 
@@ -602,6 +602,6 @@ Create `template/_singles/about.twig` and add the following to it:
 
 We’re using some CSS utility classes to create a two-column layout here, but otherwise you’ll recognize all the pieces from previous examples!
 
-<BrowserShot url="https://tutorial.test/about" :link="false" caption="The About page.">
+<BrowserShot url="http://tutorial.test/about" :link="false" caption="The About page.">
 <img src="../images/tutorial-single.png" alt="Screenshot of two-colum About page" />
 </BrowserShot>

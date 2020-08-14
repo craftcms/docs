@@ -16,7 +16,7 @@ The idea is that you build whatever normal parts you would need for a web page a
 
 In technical terms, Twig gets compiled behind the scenes. This means you can use templates however you’d like without having to worry about performance.
 
-Its syntax is also clean and easy to understand, and it doesn’t allow PHP tags that often lead to messy or confusing templates.
+Its syntax is also clean and easy to understand, and it doesn’t allow PHP tags that often lead to messy or confusing templates. Twig is also a popular templating language beyond Craft CMS—so even though Craft adds unique functionality, learning Twig can be useful for other projects.
 
 ::: tip
 Starting with your own static project? You can drag your existing `.html` files to the `templates/` folder and have a great starting point for adding bits of Twig.
@@ -52,7 +52,7 @@ For a quick example of what we’ll be doing, create `templates/twig-hello.twig`
 Hi! This site’s name is {{ siteName }}.
 ```
 
-Without any setup in Craft CMS, you can go directly to `https://tutorial.test/twig-hello` and `https://tutorial.test/html-hello.html` to see each one in your browser.
+Without any setup in Craft CMS, you can go directly to `http://tutorial.test/twig-hello` and `http://tutorial.test/html-hello.html` to see each one in your browser.
 
 The Twig version gets parsed and displays the name of your site, with a clean URL that doesn’t require a file extension.
 
@@ -79,5 +79,5 @@ Once the extensions are installed, your Twig templates will get helpful syntax h
 ![](../images/tutorial-vs-code-extensions.png)
 
 ::: tip
-You’ll be able to copy and paste everything in the section that follows, but we have [an entire Twig primer](https://docs.craftcms.com/v3/dev/twig-primer.html) if you’d like to learn how to work with it!
+You’ll be able to copy and paste everything in the section that follows, but we have [an introduction to templating](/3.x/dev/twig-primer.md) if you’d like to learn how to work with it!
 :::

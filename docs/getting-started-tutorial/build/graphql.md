@@ -8,7 +8,7 @@ Building a front end this way requires more development experience than we’ve 
 
 ## Overview
 
-GraphQL is a developer API for querying Craft CMS content. Fetching content, or [querying elements](https://docs.craftcms.com/v3/dev/element-queries/) in Craft-specific terms, is almost identical to how you would fetch content in Twig templates. Before you can use the API, you need to configured Craft CMS to make it available.
+GraphQL is a developer API for querying Craft CMS content. Fetching content, or [querying elements](/3.x/element-queries.md) in Craft-specific terms, is almost identical to how you would fetch content in Twig templates. Before you can use the API, you need to configured Craft CMS to make it available.
 
 ## Configure GraphQL
 
@@ -19,7 +19,7 @@ First upgrade your Craft Solo edition to Craft Pro:
 1. From the control panel, choose the “Solo” badge in the bottom left corner.
 2. In the “Pro” panel, choose “Try for free”.
 
-<BrowserShot url="https://tutorial.test/admin/plugin-store/upgrade-craft" :link="false" caption="Upgrading from Solo to Pro.">
+<BrowserShot url="http://tutorial.test/admin/plugin-store/upgrade-craft" :link="false" caption="Upgrading from Solo to Pro.">
 <img src="../images/tutorial-upgrade-pro.png" alt="Screenshot of plugin store upgrading to Craft Pro trial" />
 </BrowserShot>
 
@@ -27,7 +27,7 @@ Your edition will be upgraded and you’ll see a new GraphQL item in the navigat
 
 This is the GraphiQL explorer for browsing API documentation and running queries directly in the browser:
 
-<BrowserShot url="https://tutorial.test/admin/graphql" :link="false" caption="The GraphiQL explorer.">
+<BrowserShot url="http://tutorial.test/admin/graphql" :link="false" caption="The GraphiQL explorer.">
 <img src="../images/tutorial-graphql.png" alt="Screenshot of GraphiQL" />
 </BrowserShot>
 
@@ -45,7 +45,7 @@ Try running a test GraphQL query:
 
 You’ll see `pong` in the response signaling that everything’s ready to go:
 
-<BrowserShot url="https://tutorial.test/admin/graphql?query=%7B%20ping%20%7D%0A" :link="false" caption="It’s working!">
+<BrowserShot url="http://tutorial.test/admin/graphql?query=%7B%20ping%20%7D%0A" :link="false" caption="It’s working!">
 <img src="../images/tutorial-graphql-ping.png" alt="Screenshot of GraphiQL with simple query and response" />
 </BrowserShot>
 
@@ -53,12 +53,12 @@ By default, the Craft CMS GraphiQL interface will use the full schema, or availa
 
 To use GraphQL externally, you’ll need to do two things:
 
-1. [Establish a GraphQL API endpoint](https://docs.craftcms.com/v3/graphql.html#create-your-api-endpoint) for querying externally.
-2. Either create your own private schema with a secret access token, or edit the public schema to enable querying content without an access token. (By default, the public schema leaves all content disabled.) See [Define Your Schemas](https://docs.craftcms.com/v3/graphql.html#getting-started) in the GraphQL documentation.
+1. [Establish a GraphQL API endpoint](/3.x/graphql.md#create-your-api-endpoint) for querying externally.
+2. Either create your own private schema with a secret access token, or edit the public schema to enable querying content without an access token. (By default, the public schema leaves all content disabled.) See [Define Your Schemas](/3.x/graphql.md#getting-started) in the GraphQL documentation.
 
 ## Optionally enable headless mode
 
-If you want to query Craft CMS for content but handle your own routing, you can enable [`headlessMode`](https://docs.craftcms.com/v3/config/config-settings.html#headlessmode). This will optimize the installation to hide template settings and route management and return all front end responses as JSON.
+If you want to query Craft CMS for content but handle your own routing, you can enable [`headlessMode`](/3.x/config/config-settings.md#headlessmode). This will optimize the installation to hide template settings and route management and return all front end responses as JSON.
 
 To enable headless mode, add `'headlessMode' => true` to `config/general.php`:
 
@@ -78,7 +78,7 @@ return [
 
 ## Twig examples as GraphQL queries
 
-Content may be fetched with GraphQL in the same way as with Twig: using [element queries](https://docs.craftcms.com/v3/dev/element-queries/).
+Content may be fetched with GraphQL in the same way as with Twig: using [element queries](/3.x/element-queries.md).
 
 Let’s retrace each step of the tutorial where we fetched content, seeing how the Twig example maps to a GraphQL query.
 
@@ -167,12 +167,12 @@ The response should be something like this:
       "title": "My first post",
       "postDate": "20 Mar 2020",
       "postDateAlt": "2020-03-20",
-      "url": "https://tutorial.test/blog/my-first-post",
+      "url": "http://tutorial.test/blog/my-first-post",
       "featureImage": [
         {
           "title": "Craft Image from Unsplash",
-          "url": "https://tutorial.test/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
-          "sized": "https://tutorial.test/assets/blog/_900x600_crop_center-center_90_none/tim-gouw-rXBwosfgG-c-unsplash.jpg"
+          "url": "http://tutorial.test/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
+          "sized": "http://tutorial.test/assets/blog/_900x600_crop_center-center_90_none/tim-gouw-rXBwosfgG-c-unsplash.jpg"
         }
       ],
       "postContent": [
@@ -185,7 +185,7 @@ The response should be something like this:
           "image": [
             {
               "title": "Little Drinks",
-              "url": "https://tutorial.test/assets/blog/rosie-kerr-Z0iBELYV8uk-unsplash.jpg"
+              "url": "http://tutorial.test/assets/blog/rosie-kerr-Z0iBELYV8uk-unsplash.jpg"
             }
           ]
         },
@@ -197,7 +197,7 @@ The response should be something like this:
       "postCategories": [
         {
           "title": "Ramblings",
-          "uri": "https://tutorial.test/blog/category/ramblings"
+          "uri": "http://tutorial.test/blog/category/ramblings"
         }
       ]
     },
@@ -239,12 +239,12 @@ Result:
     "entries": [
       {
         "title": "My first post",
-        "url": "https://tutorial.test/blog/my-first-post",
+        "url": "http://tutorial.test/blog/my-first-post",
         "featureImage": [
           {
             "title": "Craft Image from Unsplash",
-            "url": "https://tutorial.test/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
-            "sized": "https://tutorial.test/assets/blog/_300x300_crop_center-center_none/tim-gouw-rXBwosfgG-c-unsplash.jpg",
+            "url": "http://tutorial.test/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
+            "sized": "http://tutorial.test/assets/blog/_300x300_crop_center-center_none/tim-gouw-rXBwosfgG-c-unsplash.jpg",
             "focalPoint": [0.2059, 0.6287]
           }
         ]
@@ -304,7 +304,7 @@ Limiting on more than one category ID, like entries in category `30` or `40`, wo
 }
 ```
 
-For more on relationship querying, see the [Relations](https://docs.craftcms.com/v3/relations.html) page in the Craft CMS documentation.
+For more on relationship querying, see the [Relations](/3.x/relations.md) page in the Craft CMS documentation.
 
 ### `_singles/about`
 
@@ -354,7 +354,7 @@ Result:
       "aboutImage": [
         {
           "title": "Floating in Space",
-          "url": "https://tutorial.test/assets/general/nasa-Yj1M5riCKk4-unsplash.jpg"
+          "url": "http://tutorial.test/assets/general/nasa-Yj1M5riCKk4-unsplash.jpg"
         }
       ],
       "postContent": [
@@ -372,6 +372,6 @@ Result:
 
 As with the Twig examples, we’re just scratching the surface of ways you can fetch content with Craft CMS.
 
-See the [GraphQL API](https://docs.craftcms.com/v3/graphql.html) section of the Craft CMS documentation to learn more about working with GraphQL.
+See the [GraphQL API](/3.x/graphql.md) section of the Craft CMS documentation to learn more about working with GraphQL.
 
 You may also want to check out our [blog starter project](https://github.com/craftcms/starter-blog) that includes an example Craft CMS + [Gatsby](https://www.gatsbyjs.org/) integration.

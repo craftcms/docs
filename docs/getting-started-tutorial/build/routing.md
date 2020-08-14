@@ -4,13 +4,13 @@ Every web server has the straightforward job of translating a URL into a respons
 
 ## Static routes
 
-At this very moment, you can add a cat photo to your project at `web/cat.jpg` and see it in your browser at `https://tutorial.test/cat.jpg`. The web server reads that URL, finds the file in the web root, and gives it back in a response the browser displays. This is a _static_ route where Craft CMS never gets involved; normal web server stuff.
+At this very moment, you can add a cat photo to your project at `web/cat.jpg` and see it in your browser at `http://tutorial.test/cat.jpg`. The web server reads that URL, finds the file in the web root, and gives it back in a response the browser displays. This is a _static_ route where Craft CMS never gets involved; normal web server stuff.
 
 ![](../images/tutorial-web-root.png)
 
 ## Dynamic routes
 
-When we build a template-driven CMS website, the CMS is responsible for handling _dynamic_ routes. If the web server doesn’t find a static route in our case, it hands off to Craft CMS which then looks at [a series of things](https://docs.craftcms.com/v3/routing.html) to see if it can return a response. (If not, it returns a 404.)
+When we build a template-driven CMS website, the CMS is responsible for handling _dynamic_ routes. If the web server doesn’t find a static route in our case, it hands off to Craft CMS which then looks at [a series of things](/3.x/routing.md) to see if it can return a response. (If not, it returns a 404.)
 
 ![](../images/tutorial-dynamic-request.png)
 

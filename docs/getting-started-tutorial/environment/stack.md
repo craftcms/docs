@@ -1,8 +1,8 @@
 # Set up a development stack
 
-The word “stack” refers to the web software that’s needed to work with Craft CMS, which is detailed in [Craft’s minimum requirements](https://docs.craftcms.com/v3/requirements.html).
+The word “stack” refers to the web software that’s needed to work with Craft CMS, which is detailed in [Craft’s minimum requirements](/3.x/requirements.md).
 
-Like your workstation, a web server can run different operating systems and applications. Web servers, however, are configured with an operating system and software for running websites. There are common combinations of web software referred to as “stacks”. (You’ve probably heard of a “full stack developer”, which means someone has experience with each of the software components in a particular stack.)
+Like your workstation, a web server can run different operating systems and apps. Web servers, however, use an OS and software specifically for running websites where common bundles of web software are referred to as “stacks”. (You’ve probably heard of a “full stack developer”, which means someone has experience with each of the software components in a particular stack.)
 
 Craft can run on a number of different stacks, but the main ingredients are...
 
@@ -16,150 +16,105 @@ The best way to get working quickly is to use a pre-packaged web stack that runs
 You won’t be able to set a web root until we get to installing Craft—skip that part and we’ll come back to it.
 :::
 
-## Set up Laravel Homestead for Craft CMS
+## Set up Craft Nitro
 
-We’ll walk through setup using [Laravel Homestead](https://laravel.com/docs/6.x/homestead), a tool for managing your local development environment on macOS, Windows, and Linux.
+We’ll walk through setup using [Nitro](https://github.com/craftcms/nitro), a tool for managing your local development environment on macOS, Windows, and Linux.
 
-### Why Homestead?
+### Why Nitro?
 
-Before we dive in, here’s why we’re going to use Homestead:
+Before we dive in, here’s why we’re going to use Nitro:
 
-- it’s free, available on multiple platforms, and straightforward to install
-- it runs its included software inside a virtual environment, which can be updated, rebuilt or destroyed without affecting your system
-- it’s highly configurable and well-documented
-- it supports running multiple projects efficiently for the long haul
+- It’s made and supported by the Craft CMS team to simplify local development.
+- It’s free, available on multiple platforms, and straightforward to install.
+- It runs its included software inside a virtual environment, which can be updated, rebuilt, and destroyed without affecting your system.
+- It supports running multiple projects, including non-Craft ones, so it’s useful for the long haul.
 
-Some other options are limited to a specific operating system, rely on your system software, or end up being complex to manage. Homestead offers a nice balance of portability, flexibility, and simplicity.
+Some other options are limited to a specific OS, rely on your system software, or end up being complicated to manage. Nitro offers a nice balance of portability, flexibility, and simplicity.
 
-Homestead provisions [Vagrant](https://www.vagrantup.com/) boxes, which are virtual environments similar to running an entire computer inside your computer. Vagrant can use any of several virtualization packages (VirtualBox, VMWare, Parallels, or Hyper-V) that do the lower-level work of emulating hardware on which Vagrant and Homestead manage software.
+Nitro uses [Multipass](https://multipass.run/) to efficiently set up and manage web servers inside your computer. If you decide you’d rather use something else, you can safely and easily [uninstall Nitro and Multiplass](/nitro/installation.md#uninstalling-nitro).
 
-These extra layers add complexity, but Homestead makes all of it simple to manage. You’ll get the benefit of having a dedicated machine for web development without buying and setting one up. Plus, you can uninstall everything cleanly if you decide you’d rather use something else.
+### Step 1: Install Multipass
 
-### Step 1: Install a virtualization provider
-
-Whatever system you’re on, you’ll need to choose a package and run its installer.
-
-- [VirtualBox](https://www.virtualbox.org/wiki/Downloads) is a great free option whatever OS you’re on.
-- [VMWare](https://www.vmware.com/products/personal-desktop-virtualization.html) and [Parallels](https://www.parallels.com/) are commercial options that offer better performance. (To use Parallels for this setup you’ll need a [Pro or Business edition](https://parallels.github.io/vagrant-parallels/)!) With either of these, you’ll also need to [install a Vagrant plugin](https://laravel.com/docs/6.x/homestead#first-steps).
-- [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) can be enabled and used in Windows 10 Enterprise, Pro, or Education editions.
-
-### Step 2: Install Vagrant
-
-Once you’ve installed a provider, you’ll need to [download and install Vagrant](https://www.vagrantup.com/downloads.html) for your operating system.
-
-### Step 3: Install the Homestead machine
-
-Now we’ll install the virtual machine Homestead uses to power your local development projects.
-
-Run the following command in your terminal:
-
-```bash
-vagrant box add laravel/homestead
-```
-
-### Step 4: Install Homestead
-
-Next we’ll add configuration files to a project folder for controlling how Homestead creates environments for our web projects to use.
-
-First, use git to clone a copy of the Homestead repository. If you don’t have git installed, you can [visit the Homestead repository](https://github.com/laravel/homestead), choose “Clone or download” and “Download ZIP”, then extract the contents of the archive to the `~/Homestead` directory.
-
-```bash
-git clone https://github.com/laravel/homestead.git ~/Homestead
-cd ~/Homestead
-git checkout release
-```
-
-Once those files are established, run the setup script from that directory:
-
-```bash
-# Mac / Linux...
-bash init.sh
-
-# Windows...
-init.bat
-```
+Visit <https://multipass.run/#install>, choose the installer for your operating system, and run it.
 
 ::: tip
-You may also need to run `chmod +x init.sh` on macOS or Linux in order to execute the setup script.
+You can alternatively install Multipass with [brew](https://brew.sh/), [snap](https://snapcraft.io/), or [chocolatey](https://chocolatey.org/). If you aren’t already using any of those, it’ll be easiest to stick with the Multipass installer.
 :::
 
-This will create a configuration file named `Homestead.yaml`.
+### Step 2: Install Nitro
 
-### Step 5: Configure Homestead
+Run the following terminal command:
 
-Open `Homestead.yaml` in your code editor to customize it.
-
-#### Set your provider
-
-```yaml
-provider: virtualbox
+```sh
+bash <(curl -sLS http://installer.getnitro.sh)
 ```
 
-If you didn’t install VirtualBox, this should be set to whichever is relevant: `vmware_fusion`, `vmware_workstation`, `parallels`, or `hyperv`.
+![](../images/tutorial-nitro-install.gif)
 
-#### Configure shared folders
+### Step 3: Create a Nitro Machine
 
-The `folders` property lists the directories that should be available to your Homestead machine. Each line will map a folder on your computer to a location inside that virtual machine, where each one should be in the `/home/vagrant` folder.
+Before adding a development server, we first have to create a Nitro machine. This is like creating a new computer just for web development, and if you’ve ever set up a VPS with a hosting provider that’s exactly what we’re doing in this step—but your PC is the data center and Multipass virtualizes the new machine.
 
-At this point, it’ll be a good idea to create a folder on your disk you’ll use for setting up projects if you don’t already have one. We’ll assume here that you use `~/projects/`, which is the same as `/Users/bjorn/projects` on a Mac. Each project should live in a subfolder. In this case we’ll install Craft CMS in a project folder called `tutorial`. We can then edit the following:
+To create a machine, run this terminal command:
 
-```yaml
-folders:
-  - map: ~/projects/tutorial
-    to: /home/vagrant/tutorial
+```sh
+nitro init
 ```
 
-::: warning
-The `~/` syntax does not work on Windows. Use the full path instead, like `C:\Users\bjorn\projects\tutorial`.
-:::
+Follow the prompts to create your machine.
 
-For future reference, you can add a folder for each new project and have as many as you’d like:
+![](../images/tutorial-nitro-init.gif)
 
-```yaml{4-5}
-folders:
-  - map: ~/projects/tutorial
-    to: /home/vagrant/tutorial
-  - map: ~/projects/pretend-new-project
-    to: /home/vagrant/pretend-new-project
-```
+This will be the longest part of the install process, as the machine is built and initialized.
 
-#### Add a site
+Once complete, you will have a Multipass machine called `nitro-dev`, and a new configuration file for the machine stored at `~/.nitro/nitro-dev.yaml`.
 
-When we install Craft CMS, or any PHP application, the project files will come with a _web root_. This is often named `public/`, `public_html/`, or in Craft’s case `web/`.
+### Step 4: Add a Site to the Machine
 
-In this step, we’ll tell Homestead to provide a special domain name—`tutorial.test`—and map it to our project’s web root.
+When we install Craft CMS, or any PHP application, the project files will rely on a _web root_ for files that need to be publicly available on the internet. This is often named `public/`, `public_html/`, or in Craft’s case `web/`.
+
+In this step, we’ll create a site that has the Nitro machine set up a special domain name—`tutorial.test`—and map it to our project’s web root.
 
 If you’ve not installed Craft CMS yet, that’s okay. You can either point to the directory to be created, or come back to this step after installation.
 
-```yaml
-sites:
-  - map: tutorial.test
-    to: /home/vagrant/tutorial/web
+At this point, it’ll be a good idea to create a folder on your disk you’ll use for setting up projects if you don’t already have one. We’ll assume here that you use `~/projects/`, which is the same as `/Users/bjorn/projects` on a Mac. Each project should live in a subfolder. In this case we’ll install Craft CMS in a project folder called `tutorial`. The full path on macOS will look like `/Users/bjorn/projects/tutorial`, and on Windows it would look like `C:\Users\bjorn\projects\tutorial`.
+
+::: warning
+The home folder path alias `~/` can only be used on macOS and Linux. With Windows, you must supply the full path instead, like `C:\Users\bjorn\projects\tutorial`.
+:::
+
+1. Once you’ve created a project folder, navigate to it in your terminal:
+
+```sh
+cd ~/projects/tutorial
 ```
 
-If you’re updating `sites` later and need your changes to be applied, run `vagrant reload --provision`.
+2. Run `nitro add` and follow the prompts.
 
-#### Add the hostname
+- hostname: `tutorial.test`
+- webroot: `web`
+- apply changes: `yes`
+- password (for mapping `tutorial.test`): [your operating system password]
 
-To have your special host name work locally, you’ll need to make a quick edit to `/etc/hosts` so your local machine knows to route that special domain to your computer instead of the internet.
+The whole process will look something like this when you’re finished:
 
-On macOS and Linux, you’ll need to open `/etc/hosts` in your code editor. On Windows, it may be at `C:\Windows\System32\drivers\etc\hosts\`.
-
-Don’t edit anything else in that file, just add the following and save the file:
-
+```sh
+nitro add
+→ What should the hostname be? tutorial.test
+→ Where is the webroot? web
+✔ tutorial.test has been added to nitro.yaml.
+→ apply nitro.yaml changes now? yes
+✔ Applied the changes and added tutorial.test to nitro-dev
+Adding tutorial.test to your hosts file
+Password:
+✔ tutorial.test added successfully!
 ```
-192.168.10.10 tutorial.test
-```
 
-Make sure the IP address listed matches the one in your `Homestead.yaml` file.
+You should now be able to visit `http://tutorial.test` in your browser and get a 404 error message. That’s exactly what we want, because next we’ll add the files that actually make the site go!
 
-#### Launch the Vagrant box
-
-Last step!
-
-From your Homestead directory, run `vagrant up`. The virtual machine will be brought to life.
-
-You should now be able to visit `https://tutorial.test` in your browser and get a “No input file specified.” error message.
+<BrowserShot url="http://tutorial.test" :link="false">
+<img src="../images/tutorial-nitro-404.png" alt="Screenshot of 404 error from the web server" />
+</BrowserShot>
 
 ## Other local environments
 
@@ -167,6 +122,7 @@ You can also choose one of the following guides to set up a development environm
 
 ### MacOS, Windows, and Linux
 
+- [Homestead](https://laravel.com/docs/6.x/homestead)
 - [DDEV](https://ddev.readthedocs.io/en/stable/)
 - [Lando](https://lando.dev/)
 

@@ -6,11 +6,13 @@ Now that we’ve set up sections and fields, we can focus on editing content.
 
 Navigate to “Entries” and create a new blog entry. Fill in each field.
 
-<BrowserShot url="https://tutorial.test/admin/entries/blog/9?draftId=7&fresh=1" :link="false" caption="A complete new blog post ready to be saved.">
+<BrowserShot url="http://tutorial.test/admin/entries/blog/9?draftId=7&fresh=1" :link="false" caption="A complete new blog post ready to be saved.">
 <img src="../images/tutorial-new-entry.png" alt="Screenshot of blog post entry with fields filled in" />
 </BrowserShot>
 
-While this should be fairly intuitive, there are a few things you might want to know about:
+## Check out some editing features
+
+While adding content should be intuitive, there are a few things you might want to know about:
 
 ### Edits are automatically saved while you work.
 
@@ -40,7 +42,7 @@ Craft will set a slug for you by default, and it’ll be used in the post URL on
 
 ### You can share drafts privately.
 
-Choosing “Share” at the top of the entry will always give you a URL for viewing the content you’re looking at. If it’s unpublished content, the URL will include an `x-craft-preview` token that can be used for a limited time [determined by your settings](https://docs.craftcms.com/v3/config/config-settings.html#defaulttokenduration).
+Choosing “Share” at the top of the entry will always give you a URL for viewing the content you’re looking at. If it’s unpublished content, the URL will include an `x-craft-preview` token that can be used for a limited time [determined by your settings](/3.x/config/config-settings.md#defaulttokenduration).
 
 ## Add about content
 
@@ -54,7 +56,7 @@ Go ahead and fill in some content!
 
 Once you’ve saved an entry, you can use the globe icon from the Entries listing to jump to its public URL. The result foreshadows what’s next:
 
-<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="The front end is missing.">
+<BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="The front end is missing.">
 <img src="../images/tutorial-404.png" alt="Screenshot of public post URL 404" />
 </BrowserShot>
 
