@@ -18,7 +18,7 @@ You won’t be able to set a web root until we get to installing Craft—skip th
 
 ## Set up Craft Nitro
 
-We’ll walk through setup using [Nitro](https://github.com/craftcms/nitro), a tool for managing your local development environment on macOS, Windows, and Linux.
+We’ll walk through setup using [Nitro](/nitro/), a tool for managing your local development environment on macOS, Windows, and Linux.
 
 ### Why Nitro?
 
