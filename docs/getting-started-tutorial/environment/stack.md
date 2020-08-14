@@ -10,17 +10,9 @@ Craft can run on a number of different stacks, but the main ingredients are...
 - **A database**: the place where content and most information is stored, sort of like a collection of Excel files used by code that can work with lots of data quickly. Commonly MySQL or PostgreSQL.
 - **A web server**: the software that listens for requests made by your web browser, hands them off to a web application (like Craft), and gives a response back to the browser. Commonly Apache or nginx.
 
-The best way to get working quickly is to use a pre-packaged web stack that runs on your operating system. The good news is that you’ve got plenty of options no matter what OS you’re using. The bad news is that the _best_ option depends on your OS and whatever software you’ve already installed.
+The best way to get working quickly is to use a pre-packaged web stack that runs on your operating system. We’ll walk through setup using [Craft Nitro](/nitro/), a tool for managing your local development environment on macOS, Windows, and Linux.
 
-::: warning
-You won’t be able to set a web root until we get to installing Craft—skip that part and we’ll come back to it.
-:::
-
-## Set up Craft Nitro
-
-We’ll walk through setup using [Nitro](/nitro/), a tool for managing your local development environment on macOS, Windows, and Linux.
-
-### Why Nitro?
+## Why Nitro?
 
 Before we dive in, here’s why we’re going to use Nitro:
 
@@ -33,7 +25,7 @@ Some other options are limited to a specific OS, rely on your system software, o
 
 Nitro uses [Multipass](https://multipass.run/) to efficiently set up and manage web servers inside your computer. If you decide you’d rather use something else, you can safely and easily [uninstall Nitro and Multiplass](/nitro/installation.md#uninstalling-nitro).
 
-### Step 1: Install Multipass
+## Step 1: Install Multipass
 
 Visit <https://multipass.run/#install>, choose the installer for your operating system, and run it.
 
@@ -41,7 +33,7 @@ Visit <https://multipass.run/#install>, choose the installer for your operating 
 You can alternatively install Multipass with [brew](https://brew.sh/), [snap](https://snapcraft.io/), or [chocolatey](https://chocolatey.org/). If you aren’t already using any of those, it’ll be easiest to stick with the Multipass installer.
 :::
 
-### Step 2: Install Nitro & Create Machine
+## Step 2: Install Nitro & Create Machine
 
 Run the following terminal command:
 
@@ -57,7 +49,7 @@ This is like creating a new computer just for web development, and if you’ve e
 
 Once complete, you will have a Multipass machine called `nitro-dev`, and a new configuration file for the machine stored at `~/.nitro/nitro-dev.yaml`.
 
-### Step 3: Add a Site to the Machine
+## Step 3: Add a Site to the Machine
 
 When we install Craft CMS, or any PHP application, the project files will rely on a _web root_ for files that need to be publicly available on the internet. This is often named `public/`, `public_html/`, or in Craft’s case `web/`.
 
