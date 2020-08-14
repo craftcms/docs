@@ -48,9 +48,9 @@ Your settings may look different, but a successful setup will look like this:
 Which database driver are you using? [mysql,pgsql,?]: mysql
 Database server name or IP address: [127.0.0.1]
 Database port: [3306]
-Database username: [root] homestead
+Database username: [root] nitro
 Database password:
-Database name: homestead
+Database name: nitro
 Database table prefix:
 Testing database credentials ... success!
 Saving database credentials to your .env file ... done
@@ -75,13 +75,13 @@ DB_SERVER="127.0.0.1"
 DB_PORT="3306"
 
 # The name of the database to select
-DB_DATABASE="homestead"
+DB_DATABASE="nitro"
 
 # The database username to connect with
-DB_USER="homestead"
+DB_USER="nitro"
 
 # The database password to connect with
-DB_PASSWORD="secret"
+DB_PASSWORD="nitro"
 
 # The database schema that will be used (PostgreSQL only)
 DB_SCHEMA="public"
