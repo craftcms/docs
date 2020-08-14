@@ -99,7 +99,7 @@
 {% endif %}
 ```
 
-または、[nav](dev/tags/nav.md) タグで階層リストとして表示することもできます。
+または、[nav](dev/tags.md#nav) タグで階層リストとして表示することもできます。
 
 ```twig
 {% set relatedCategories = entry.<FieldHandle.all() %}

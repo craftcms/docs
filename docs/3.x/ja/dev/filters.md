@@ -279,7 +279,7 @@ You can customize the timezone the time is output in, using the `timezone` param
 ```
 
 ::: tip
-See [Static Message Translations](../static-translations.md) for a full explanation on how this works.
+See [Static Message Translations](../sites.md) for a full explanation on how this works.
 :::
 
 ## `datetime`
@@ -552,7 +552,7 @@ This filter supports two arguments:
 カテゴリの指定がない場合、デフォルトで `site` になります。
 
 ::: tip
-これがどのように機能するかの詳細については、[静的メッセージの翻訳](../static-translations.md)を参照してください。
+これがどのように機能するかの詳細については、[静的メッセージの翻訳](../sites.md)を参照してください。
 :::
 
 ```twig

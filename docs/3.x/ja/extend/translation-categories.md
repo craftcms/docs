@@ -3,7 +3,7 @@
 モジュールやプラグインは、Yii の [Message Translations](https://www.yiiframework.com/doc/guide/1.1/en/topics.i18n#message-translation) 機能を使用することによって、カスタム翻訳カテゴリを提供できます。
 
 ::: tip
-メッセージ変換がどのように機能するかの詳細については、[静的メッセージの翻訳](../static-translations.md)を参照してください。 :::
+メッセージ変換がどのように機能するかの詳細については、[静的メッセージの翻訳](../sites.md)を参照してください。 :::
 :::
 
 翻訳カテゴリは、 <yii2:yii\i18n\I18N::$translations> 配列に新しい翻訳ソースを加えることにより、プログラムで追加できます。

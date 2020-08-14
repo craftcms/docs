@@ -77,7 +77,7 @@ If you are testing an actual Craft site this directory cannot be the config dire
 The path to the folder where all your [migration](../../extend/migrations.md) classes are stored.
 
 ### `CRAFT_TRANSLATIONS_PATH`
-The path to the folder where all your [translations](../../static-translations.md) are stored.
+The path to the folder where all your [translations](../../sites.md) are stored.
 
 ### `CRAFT_VENDOR_PATH`
 Path to the [vendor](../../directory-structure.md#vendor) directory.

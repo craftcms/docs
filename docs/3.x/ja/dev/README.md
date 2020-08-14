@@ -14,7 +14,7 @@ PHP コードはテンプレート内で使用できませんが、Craft はニ�
 
 テンプレートのパスを入力する必要があるときが、いくつかあります。
 
-* [エントリ](../sections-and-entries.md)や[カテゴリ](../categories.md)で読み込む、テンプレートの URL を選択するとき
+* [エントリ](../entries.md)や[カテゴリ](../categories.md)で読み込む、テンプレートの URL を選択するとき
 * テンプレートを[ルート](../routing.md#dynamic-routes)に割り当てるとき
 * [include](https://twig.symfony.com/doc/tags/include.html)、[extends](https://twig.symfony.com/doc/tags/extends.html)、および、[embed](https://twig.symfony.com/doc/tags/embed.html) テンプレートタグ内
 
@@ -54,4 +54,4 @@ Craft でマルチサイトを運用している場合、特定のサイトだ�
 
 例えば、ドイツのカスタマーを歓迎するための特別なテンプレートを作成したいものの、英語版サイトで必要ない場合、`templates/de/welcome.twig` に保存します。 そのテンプレートは `http://example.de/welcome` からアクセスできるでしょう。
 
-Craft は、通常のテンプレートを探す_前に_ローカライズ用のテンプレートを探します。 それによって、ローカライズされていないテンプレートを上書きすることができます。 詳細については、[ローカライゼーションガイド](../localization.md)を参照してください。
+Craft は、通常のテンプレートを探す_前に_ローカライズ用のテンプレートを探します。 それによって、ローカライズされていないテンプレートを上書きすることができます。 詳細については、[ローカライゼーションガイド](../sites.md)を参照してください。

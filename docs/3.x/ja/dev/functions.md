@@ -163,7 +163,7 @@ This works identically to Twig’s core [`constant`](https://twig.symfony.com/do
 
 ## `getenv( name )`
 
-与えられたクラス名やオブジェクト設定に基づいて新しいオブジェクトインスタンスを作成します。 サポートされる引数の詳細については、<craft3:Yii::createObject()> を参照してください。
+与えられたクラス名やオブジェクト設定に基づいて新しいオブジェクトインスタンスを作成します。 サポートされる引数の詳細については、<yii2:Yii::createObject()> を参照してください。
 
 ```twig
 {# Pass in a class name #}

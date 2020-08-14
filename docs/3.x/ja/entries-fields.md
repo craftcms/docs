@@ -1,6 +1,6 @@
 # エントリフィールド
 
-エントリフィールドでは、[エントリ](sections-and-entries.md)を他のエレメントに関連付けることができます。
+エントリフィールドでは、[エントリ](entries.md)を他のエレメントに関連付けることができます。
 
 ## 設定
 
@@ -36,7 +36,7 @@
 
 ### エントリフィールドによるエレメントの照会
 
-エントリフィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、エントリフィールドのデータに基づいた結果をフィルタできます。
+エントリフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、エントリフィールドのデータに基づいた結果をフィルタできます。
 
 利用可能な値には、次のものが含まれます。
 
@@ -65,7 +65,7 @@
 {% set query = entry.myFieldHandle %}
 ```
 
-これは、所定のフィールドで関連付けられたすべてのエントリを出力するよう定義された[エレメントクエリ](dev/element-queries/entry-queries.md)を提供します。
+これは、所定のフィールドで関連付けられたすべてのエントリを出力するよう定義された[エレメントクエリ](entries.md#querying-entries)を提供します。
 
 関連付けられたすべてのエントリをループするには、[all()](craft3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
@@ -97,7 +97,7 @@
 {% endif %}
 ```
 
-エントリクエリで[パラメータ](dev/element-queries/entry-queries.md#parameters)をセットすることもできます。 例えば、`news` セクションに含まれるエントリだけを取得するには、[section](dev/element-queries/entry-queries.md#section) パラメータをセットしてください。
+エントリクエリで[パラメータ](entries.md#parameters)をセットすることもできます。 例えば、`news` セクションに含まれるエントリだけを取得するには、[section](entries.md#section) パラメータをセットしてください。
 
 ```twig
 {% set relatedEntries = clone(entry.myFieldHandle)

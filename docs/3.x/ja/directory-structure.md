@@ -7,7 +7,7 @@ Craft 3 の新しいコピーをダウンロードすると、プロジェクト
 すべての Craft とプラグインの[設定ファイル](config/README.md)と `license.key` ファイルを保持します。
 
 ::: tip
-`web/index.php` に [CRAFT_CONFIG_PATH](config/php-constants.md#craft-config-path) PHP 定数を設定すると、このフォルダの名前や場所をカスタマイズできます。 :::
+`web/index.php` に [CRAFT_CONFIG_PATH](config/README.md##craft-config-path) PHP 定数を設定すると、このフォルダの名前や場所をカスタマイズできます。 :::
 :::
 
 ### `modules/`
@@ -36,7 +36,7 @@ Craft 3 の新しいコピーをダウンロードすると、プロジェクト
   - `validation.key` – リクエスト間のハッシングやデータ検証に使われる、ランダムに生成され、暗号的に安全な鍵です。
 
 ::: tip
-`web/index.php` に [CRAFT_STORAGE_PATH](config/php-constants.md#craft-storage-path) PHP 定数を設定すると、このフォルダの名前や場所をカスタマイズできます。 :::
+`web/index.php` に [CRAFT_STORAGE_PATH](config/README.md##craft-storage-path) PHP 定数を設定すると、このフォルダの名前や場所をカスタマイズできます。 :::
 :::
 
 ### `templates/`
@@ -44,7 +44,7 @@ Craft 3 の新しいコピーをダウンロードすると、プロジェクト
 フロントエンド向けのテンプレートがここに入ります。 静的に配信する画像、CSS、JS などのローカルサイトのアセットは、[web](directory-structure.md#web) フォルダに保存します。
 
 ::: tip
-`web/index.php` に [CRAFT_TEMPLATES_PATH](config/php-constants.md#craft-templates-path) PHP 定数を設定すると、このフォルダの名前や場所をカスタマイズできます。 :::
+`web/index.php` に [CRAFT_TEMPLATES_PATH](config/README.md##craft-templates-path) PHP 定数を設定すると、このフォルダの名前や場所をカスタマイズできます。 :::
 :::
 
 ### `vendor/`
@@ -52,7 +52,7 @@ Craft 3 の新しいコピーをダウンロードすると、プロジェクト
 これは Composer で依存関係にあるすべてのもので、Craft 自身や Composer 経由でインストールしたすべてのプラグインが含まれます。
 
 ::: tip
-`web/index.php` の [CRAFT_VENDOR_PATH](config/php-constants.md#craft-vendor-path) PHP 定数を変更すると、このフォルダの名前や場所をカスタマイズできます。 :::
+`web/index.php` の [CRAFT_VENDOR_PATH](config/README.md##craft-vendor-path) PHP 定数を変更すると、このフォルダの名前や場所をカスタマイズできます。 :::
 :::
 
 ### `web/`
@@ -60,7 +60,7 @@ Craft 3 の新しいコピーをダウンロードすると、プロジェクト
 このディレクトリはサーバーのウェブルートを表します。 パブリックの `index.php` ファイルがここにあり、静的に配信されるローカルサイトの画像、CSS、JS などがあります。
 
 ::: tip
-このフォルダの名前や場所をカスタマイズできます。 もし、他の Craft フォルダと並んでいる状態から移動するならば、`<Webroot>/index.php` の [CRAFT_BASE_PATH](config/php-constants.md#craft-vendor-path) PHP 定数を確実に更新してください。 :::
+このフォルダの名前や場所をカスタマイズできます。 もし、他の Craft フォルダと並んでいる状態から移動するならば、`<Webroot>/index.php` の [CRAFT_BASE_PATH](config/README.md##craft-vendor-path) PHP 定数を確実に更新してください。 :::
 :::
 
 ### `.env`

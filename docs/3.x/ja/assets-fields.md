@@ -62,7 +62,7 @@ You can also upload assets by dragging files directly onto the assets field or m
 
 ### インラインのアセット編集
 
-アセットフィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、アセットフィールドのデータに基づいた結果をフィルタできます。
+アセットフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、アセットフィールドのデータに基づいた結果をフィルタできます。
 
 ::: tip
 アセットで使用するカスタムフィールドは、「設定 > アセット > [ボリューム名] > フィールドレイアウト」から選択できます。 :::
@@ -74,7 +74,7 @@ You can also upload assets by dragging files directly onto the assets field or m
 
 テンプレート内でアセットフィールドのエレメントを取得する場合、アセットフィールドのハンドルを利用して関連付けられたアセットにアクセスできます。
 
-これは、所定のフィールドで関連付けられたすべてのアセットを出力するよう準備された[アセットクエリ](dev/element-queries/asset-queries.md)を提供します。
+これは、所定のフィールドで関連付けられたすべてのアセットを出力するよう準備された[アセットクエリ](assets.md#querying-assets)を提供します。
 
 | 値                                                              | 取得するエレメント                                               |
 | -------------------------------------------------------------- | ------------------------------------------------------- |
@@ -137,7 +137,7 @@ When using `asset.url` or `asset.getUrl()`, the asset’s source volume must hav
 {% endif %}
 ```
 
-アセットクエリで[パラメータ](dev/element-queries/asset-queries.md#parameters)をセットすることもできます。 例えば、画像だけが返されることを保証するために、[kind](dev/element-queries/asset-queries.md#kind) パラメータをセットできます。
+アセットクエリで[パラメータ](assets.md#parameters)をセットすることもできます。 例えば、画像だけが返されることを保証するために、[kind](assets.md#kind) パラメータをセットできます。
 
 ```twig
 {% set relatedAssets = clone(entry.myFieldHandle)

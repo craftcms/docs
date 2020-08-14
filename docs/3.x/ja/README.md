@@ -29,7 +29,7 @@ Craft は [Yii 2](https://www.yiiframework.com/) をベースとするセルフ�
 
 ## 打ち込む
 
-Craft のコンテンツモデリングがどのように機能するのか詳しく知るには、[セクションとエントリ](sections-and-entries.md) および [フィールド](fields.md)を読んでください。
+Craft のコンテンツモデリングがどのように機能するのか詳しく知るには、[セクションとエントリ](entries.md) および [フィールド](fields.md)を読んでください。
 
 Craft をインストールする準備ができたら、[サーバー要件](requirements.md) および [インストールガイド](installation.md)を読んでください。
 

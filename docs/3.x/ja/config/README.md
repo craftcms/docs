@@ -59,7 +59,7 @@ Craft のいくつかの設定やファンクションでは、基本ファイ�
 | `@contentMigrations` | `migrations/` フォルダのパス                                                           |
 | `@craft`             | `vendor/craftcms/cms/src/` のパス                                                  |
 | `@lib`               | `vendor/craftcms/cms/lib/` のパス                                                  |
-| `@root`              | ルートプロジェクトのパス（PHP 定数の [CRAFT_BASE_PATH](php-constants.md#craft-base-path) と同じ） |
+| `@root`              | ルートプロジェクトのパス（PHP 定数の [CRAFT_BASE_PATH](#craft-base-path) と同じ） |
 | `@runtime`           | `storage/runtime/` フォルダのパス                                                      |
 | `@storage`           | `storage/` フォルダのパス                                                              |
 | `@templates`         | `templates/` フォルダのパス                                                            |
@@ -442,7 +442,7 @@ Plugins can add support for environment variables and aliases in their settings 
 
 #### Using Aliases in Control Panel Settings
 
-You can configure core settings like system file paths and the active environment by defining certain [PHP constants](php-constants.md) in `web/index.php`.
+You can configure core settings like system file paths and the active environment by defining certain [PHP constants]() in `web/index.php`.
 
 For example, you can define a `ROOT_URL` environment variable that is set to the root URL of your site:
 
