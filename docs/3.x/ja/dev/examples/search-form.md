@@ -9,7 +9,7 @@
 </form>
 ```
 
-次に、フォームの送信先にあたるテンプレート（例：`search/results.twig`）で `GET` / `POST` データから検索クエリを取り出し、それを `search` [エントリクエリパラメータ](../entries.md#search)に渡します。
+次に、フォームの送信先にあたるテンプレート（例：`search/results.twig`）で `GET` / `POST` データから検索クエリを取り出し、それを `search` [エントリクエリパラメータ](../../entries.md#search)に渡します。
 
 ```twig
 <h1>Search Results</h1>
