@@ -41,7 +41,7 @@ Visit <https://multipass.run/#install>, choose the installer for your operating 
 You can alternatively install Multipass with [brew](https://brew.sh/), [snap](https://snapcraft.io/), or [chocolatey](https://chocolatey.org/). If you aren’t already using any of those, it’ll be easiest to stick with the Multipass installer.
 :::
 
-### Step 2: Install Nitro
+### Step 2: Install Nitro & Create Machine
 
 Run the following terminal command:
 
@@ -49,27 +49,15 @@ Run the following terminal command:
 bash <(curl -sLS http://installer.getnitro.sh)
 ```
 
-![](../images/tutorial-nitro-install.gif)
+The longest part of the install process is where Nitro downloads, builds, and initializes a virtual machine. It will prompt you for machine settings, where each time you can hit <kbd>return</kbd> to accept the default.
 
-### Step 3: Create a Nitro Machine
+This is like creating a new computer just for web development, and if you’ve ever set up a VPS with a hosting provider that’s exactly what we’re doing in this step—but your PC is the data center and Multipass virtualizes the new machine.
 
-Before adding a development server, we first have to create a Nitro machine. This is like creating a new computer just for web development, and if you’ve ever set up a VPS with a hosting provider that’s exactly what we’re doing in this step—but your PC is the data center and Multipass virtualizes the new machine.
-
-To create a machine, run this terminal command:
-
-```sh
-nitro init
-```
-
-Follow the prompts to create your machine.
-
-![](../images/tutorial-nitro-init.gif)
-
-This will be the longest part of the install process, as the machine is built and initialized.
+<img src="../images/tutorial-nitro-install.gif" alt="Animation of console installing Nitro" class="rounded-md" />
 
 Once complete, you will have a Multipass machine called `nitro-dev`, and a new configuration file for the machine stored at `~/.nitro/nitro-dev.yaml`.
 
-### Step 4: Add a Site to the Machine
+### Step 3: Add a Site to the Machine
 
 When we install Craft CMS, or any PHP application, the project files will rely on a _web root_ for files that need to be publicly available on the internet. This is often named `public/`, `public_html/`, or in Craft’s case `web/`.
 
@@ -77,10 +65,10 @@ In this step, we’ll create a site that has the Nitro machine set up a special 
 
 If you’ve not installed Craft CMS yet, that’s okay. You can either point to the directory to be created, or come back to this step after installation.
 
-At this point, it’ll be a good idea to create a folder on your disk you’ll use for setting up projects if you don’t already have one. We’ll assume here that you use `~/projects/`, which is the same as `/Users/bjorn/projects` on a Mac. Each project should live in a subfolder. In this case we’ll install Craft CMS in a project folder called `tutorial`. The full path on macOS will look like `/Users/bjorn/projects/tutorial`, and on Windows it would look like `C:\Users\bjorn\projects\tutorial`.
+At this point, it’ll be a good idea to create a folder on your disk you’ll use for setting up projects if you don’t already have one. We’ll assume here that you use `~/projects/`, which is the same as `/Users/oli/projects` on a Mac. Each project should live in a subfolder. In this case we’ll install Craft CMS in a project folder called `tutorial`. The full path on macOS will look like `/Users/oli/projects/tutorial`, and on Windows it would look like `C:\Users\oli\projects\tutorial`.
 
 ::: warning
-The home folder path alias `~/` can only be used on macOS and Linux. With Windows, you must supply the full path instead, like `C:\Users\bjorn\projects\tutorial`.
+The home folder path alias `~/` can only be used on macOS and Linux. With Windows, you must supply the full path instead, like `C:\Users\oli\projects\tutorial`.
 :::
 
 1. Once you’ve created a project folder, navigate to it in your terminal:
@@ -98,16 +86,17 @@ cd ~/projects/tutorial
 
 The whole process will look something like this when you’re finished:
 
-```sh
-nitro add
-→ What should the hostname be? tutorial.test
-→ Where is the webroot? web
-✔ tutorial.test has been added to nitro.yaml.
-→ apply nitro.yaml changes now? yes
-✔ Applied the changes and added tutorial.test to nitro-dev
-Adding tutorial.test to your hosts file
+```
+$ nitro add
+Enter the hostname [tutorial] tutorial.test
+Enter the webroot [web]
+Added tutorial.test to config file
+Apply changes from config? [yes]
+Mounting ~/projects/tutorial to nitro-dev
+Adding site tutorial.test to nitro-dev
+Applied changes from /Users/oli/.nitro/nitro-dev.yaml
 Password:
-✔ tutorial.test added successfully!
+$
 ```
 
 You should now be able to visit `http://tutorial.test` in your browser and get a 404 error message. That’s exactly what we want, because next we’ll add the files that actually make the site go!
