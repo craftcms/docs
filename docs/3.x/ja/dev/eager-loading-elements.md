@@ -57,7 +57,7 @@ eager-loaded エレメントへのアクセスは、lazy-loaded エレメント�
 {% set image = entry.assetsField[0] ?? null %}
 ```
 
-アセットを eager-loaded _していない_ 場合、`entry.assetsField` は関連付けられたアセットを返すよう事前設定された[アセットクエリ](element-queries/asset-queries.md)を提供します。
+アセットを eager-loaded _していない_ 場合、`entry.assetsField` は関連付けられたアセットを返すよう事前設定された[アセットクエリ](../assets.md#querying-assets)を提供します。
 
 しかしながら、アセットを eager-loaded _している_ 場合、`entry.assetsField` は eager-loaded されたアセットの配列で上書きされます。 そのため、`one()`、`all()`、またはその他のエレメントクエリのメソッドを利用することができません。 代わりに、あなたは標準の配列構文に耐えなければなりません。 この例では、最初のアセットを `entry.assetsField[0]` で取得しています。 そして、関連付けられたアセットがない場合のデフォルト値（`null`）を定義するため、Twig の _null 合体演算子_ (`??`) を使っています。
 

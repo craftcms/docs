@@ -149,7 +149,7 @@ $result = \Craft::$app->db->createCommand()
 
 ## エレメントクエリ
 
-`ElementCriteriaModel` は、Craft 3 で[エレメントクエリ](element-queries.md)に置き換えられました。
+`ElementCriteriaModel` は、Craft 3 で[エレメントクエリ](../element-queries.md)に置き換えられました。
 
 ```php
 // Old:
