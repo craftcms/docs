@@ -11,7 +11,7 @@
 すべてのボリュームは、その中に含まれるアセットがパプリック URL を持つかどうか、持つ場合に**ベース URL** をどうするかを選択できます。
 
 ::: tip
-ボリュームのベース URL は環境変数をセットしたり、エイリアスではじめることができます。 詳細については、[環境設定](config/#environmental-configuration)を参照してください。 :::
+ボリュームのベース URL は環境変数をセットしたり、エイリアスではじめることができます。 詳細については、[環境設定](config/environments.md)を参照してください。 :::
 :::
 
 ### ローカルボリューム
@@ -21,7 +21,7 @@
 ローカルボリュームは、**ファイルシステムのパス**という1つの設定があります。 この設定を使用して、サーバー上のボリュームのルートディレクトリからのパスを定義します。
 
 ::: tip
-ボリュームのファイルシステムのパスは環境変数をセットしたり、エイリアスではじめることができます。 詳細については、[環境設定](config/#environmental-configuration)を参照してください。 :::
+ボリュームのファイルシステムのパスは環境変数をセットしたり、エイリアスではじめることができます。 詳細については、[環境設定](config/environments.md)を参照してください。 :::
 :::
 
 Craft もしくは PHP が、作成したディレクトリに書き込み可能でなければならないことに注意してください。
@@ -109,10 +109,10 @@ $myAssetQuery = \craft\elements\Asset::find();
 ```
 :::
 
-Once you’ve created an asset query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Asset](craft3:craft\elements\Asset) objects will be returned.
+Once you’ve created an asset query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries)) by calling `.all()`. An array of [Asset](craft3:craft\elements\Asset) objects will be returned.
 
 ::: tip
-See [Element Queries](README.md) to learn about how element queries work.
+See [Element Queries](element-queries.md) to learn about how element queries work.
 :::
 
 ### Example
