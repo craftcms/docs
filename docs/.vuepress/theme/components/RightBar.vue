@@ -62,7 +62,7 @@ export default {
   }
 }
 
-@media screen and (min-width: 1408px) {
+@screen xxl {
   .right-bar {
     .sidebar-links {
       max-height: calc(100vh - 12.5rem);
