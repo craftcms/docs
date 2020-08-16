@@ -23,7 +23,7 @@ $myUserQuery = \craft\elements\User::find();
 ```
 :::
 
-Once you’ve created a user query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries)) by calling `.all()`. An array of [User](craft3:craft\elements\User) objects will be returned.
+Once you’ve created a user query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [User](craft3:craft\elements\User) objects will be returned.
 
 ::: tip
 See [Element Queries](element-queries.md) to learn about how element queries work.

@@ -19,7 +19,7 @@ $myMatrixBlockQuery = \craft\elements\MatrixBlock::find();
 ```
 :::
 
-Once you’ve created a Matrix block query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries)) by calling `.all()`. An array of [MatrixBlock](craft3:craft\elements\MatrixBlock) objects will be returned.
+Once you’ve created a Matrix block query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [MatrixBlock](craft3:craft\elements\MatrixBlock) objects will be returned.
 
 ::: tip
 See [Element Queries](element-queries.md) to learn about how element queries work.
