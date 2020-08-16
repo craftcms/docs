@@ -217,10 +217,10 @@ $myEntryQuery = \craft\elements\Entry::find();
 ```
 :::
 
-Once you’ve created an entry query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Entry](craft3:craft\elements\Entry) objects will be returned.
+Once you’ve created an entry query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries)) by calling `.all()`. An array of [Entry](craft3:craft\elements\Entry) objects will be returned.
 
 ::: tip
-See [Element Queries](README.md) to learn about how element queries work.
+See [Element Queries](element-queries.md) to learn about how element queries work.
 :::
 
 ### Example
