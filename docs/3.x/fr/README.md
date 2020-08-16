@@ -18,7 +18,7 @@ Craft is a self-hosted PHP 7 application, built on [Yii 2](https://www.yiiframew
 
 ## Popular Resources
 
-- **[Documentation](http://docs.craftcms.com/v3/)** – Read the official docs.
+- **[Documentation](https://craftcms.com/docs/3.x/)** – Read the official docs.
 - **[Guides](https://craftcms.com/guides)** – Follow along with the official guides.
 - **[#craftcms](https://twitter.com/hashtag/craftcms)** – See the latest tweets about Craft.
 - **[Discord](https://craftcms.com/discord)** – Meet the community.

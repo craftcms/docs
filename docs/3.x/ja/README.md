@@ -18,7 +18,7 @@ Craft は [Yii 2](https://www.yiiframework.com/) をベースとするセルフ�
 
 ## 人気のリソース
 
-- **[Documentation](http://docs.craftcms.com/v3/)** – 公式ドキュメントを読んでください。
+- **[Documentation](https://craftcms.com/docs/3.x/)** – 公式ドキュメントを読んでください。
 - **[Guides](https://craftcms.com/guides)** – 公式ガイドに従ってください。
 - **[#craftcms](https://twitter.com/hashtag/craftcms)** – Craft に関する最新ツイートをみてください。
 - **[Discord](https://craftcms.com/discord)** – コミュニティとの出会ってください。

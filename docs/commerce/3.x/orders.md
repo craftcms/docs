@@ -2,7 +2,7 @@
 
 When a cart is completed, it becomes an order. You can view orders in the control panel’s Commerce → Orders section.
 
-Orders are [Element Types](https://docs.craftcms.com/v3/extend/element-types.html) and can have custom fields associated with them.
+Orders are [Element Types](https://craftcms.com/docs/3.x/extend/element-types.html) and can have custom fields associated with them.
 
 If you’d like to jump straight to displaying order information in your templates, take a look at the the <commerce3:craft\commerce\elements\Order> class reference for a complete list of available properties.
 
@@ -59,7 +59,7 @@ Output:
 2018-43
 ```
 
-In this example, `{{ id }}` refers to the order’s element ID, which is not sequential. If you would rather generate a unique sequential number, a simple way would be to use Craft’s [seq()](https://docs.craftcms.com/v3/dev/functions.html#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
+In this example, `{{ id }}` refers to the order’s element ID, which is not sequential. If you would rather generate a unique sequential number, a simple way would be to use Craft’s [seq()](https://craftcms.com/docs/3.x/dev/functions.html#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
 
 The `seq()` function takes the following parameters:
 

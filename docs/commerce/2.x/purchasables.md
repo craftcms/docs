@@ -4,7 +4,7 @@ A purchasable is a custom Craft Element Type that can be sold through the cart.
 
 A purchasable:
 
-- is an [element types](https://docs.craftcms.com/v3/extend/element-types.html)
+- is an [element type](https://craftcms.com/docs/3.x/extend/element-types.html)
 - implements `craft\commerce\base\PurchasableInterface`
 - should extend `craft\commerce\base\Purchasable`
 

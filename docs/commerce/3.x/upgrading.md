@@ -1,7 +1,7 @@
 # Upgrading to Commerce 3
 
 ::: warning
-If you’re upgrading from Commerce 1, see the [Changes in Commerce 2](https://docs.craftcms.com/commerce/v2/changes-in-commerce-2.html) and upgrade to the latest Commerce 2 version before upgrading to Commerce 3.
+If you’re upgrading from Commerce 1, see the [Changes in Commerce 2](https://craftcms.com/docs/commerce/2.x/changes-in-commerce-2.html) and upgrade to the latest Commerce 2 version before upgrading to Commerce 3.
 :::
 
 ## Preparing for the Upgrade
@@ -114,7 +114,7 @@ Custom adjusters must extend the included <commerce3:craft\commerce\adjusters\Di
 
 ## Discount Category Matching
 
-Commerce 3 adds a *Categories Relationship Type* field for choosing how designated purchasable categories may be used to match a discount or sale promotion. Its options are “Source”, “Target”, and “Either”. (See the Craft CMS [Relations](https://docs.craftcms.com/v3/relations.html) page for more on what each means.)
+Commerce 3 adds a *Categories Relationship Type* field for choosing how designated purchasable categories may be used to match a discount or sale promotion. Its options are “Source”, “Target”, and “Either”. (See the Craft CMS [Relations](https://craftcms.com/docs/3.x/relations.html) page for more on what each means.)
 
 Commerce 2 used discount categories as the “Source” for discount matches, and existing discounts are migrated from Commerce 2 with that option selected. It’s important to consider the relationship type as you work with discounts in Commerce 3 since the *Categories Relationship Type* can impact how discounts and sales are applied and its default match type is “Either”.
 

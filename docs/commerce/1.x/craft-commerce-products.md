@@ -3,7 +3,7 @@
 ## How to get products
 
 You can access your site’s products from your templates via `craft.commerce.products`
-It returns an [ElementCriteriaModel](https://docs.craftcms.com/v2/templating/elementcriteriamodel.html) object.
+It returns an [ElementCriteriaModel](https://craftcms.com/docs/2.x/templating/elementcriteriamodel.html) object.
 
 ```twig
 {% set products = craft.commerce.products.type('normal').find() %}

@@ -16,7 +16,7 @@ Several options are available for adding shipping costs to the cart:
    You can still utilize the shipping engine in option 1, but add functionality that presents more than one option to the customer, utilizes an external API, or uses your own custom pricing logic.
 
 ::: tip
-Before writing your own shipping adjuster or shipping method (option 2 or 3), make sure you’re comfortable [creating a plugin or module for Craft CMS](https://docs.craftcms.com/v3/extend/).
+Before writing your own shipping adjuster or shipping method (option 2 or 3), make sure you’re comfortable [creating a plugin or module for Craft CMS](https://craftcms.com/docs/3.x/extend/).
 :::
 
 ## Creating a Shipping Adjuster
