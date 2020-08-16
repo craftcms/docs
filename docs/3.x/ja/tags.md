@@ -1,6 +1,6 @@
 # タグ
 
-タグを利用して、[エントリ](entries.md)、[ユーザー](users.md)、および、[アセット](assets.md)の分類を作成できます。
+タグを利用して、[エントリ](sections-and-entries.md)、[ユーザー](users.md)、および、[アセット](assets.md)の分類を作成できます。
 
 ## タググループ
 
@@ -31,10 +31,10 @@ $myTagQuery = \craft\elements\Tag::find();
 ```
 :::
 
-Once you’ve created a tag query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Tag](craft3:craft\elements\Tag) objects will be returned.
+Once you’ve created a tag query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries)) by calling `.all()`. An array of [Tag](craft3:craft\elements\Tag) objects will be returned.
 
 ::: tip
-See [Element Queries](README.md) to learn about how element queries work.
+See [Element Queries](element-queries.md) to learn about how element queries work.
 :::
 
 ### Example
