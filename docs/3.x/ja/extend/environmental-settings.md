@@ -19,7 +19,7 @@ class MyModel extends Model
 
     /**
      * @return string the parsed secret key (e.g. 'XXXXXXXXXXX')
-     */ 
+     */
     public function getSecretKey(): string
     {
         return Craft::parseEnv($this->secretKey);
