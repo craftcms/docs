@@ -9,7 +9,7 @@ in the format `FooBarController.php` (the `Controller` suffix is required).
 For the most part, writing controllers for Craft is identical to writing controllers for Yii, so be sure to read the
 [Yii documentation][yii] as a starting point.
 :::
- 
+
 Craft controllers should extend <craft3:craft\web\Controller>, which offers a few advantages over its parent,
 <yii2:yii\web\Controller>:
 
@@ -132,7 +132,7 @@ You can call <craft3:craft\web\Controller::asErrorJson()> instead for an easy wa
 
 ### Redirecting the Request
 
-Controller actions can redirect the request using <craft3:craft\web\Controller::redirect()>. 
+Controller actions can redirect the request using <craft3:craft\web\Controller::redirect()>.
 
 ```php
 use yii\web\Response;

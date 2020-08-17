@@ -13,7 +13,7 @@ Craft Commerce 2 stores the following items in the project config:
 - Fields and field groups
 - Subscription field layout
 
-Not everything should be stored in the project config. Some items are considered content, which will change in production.  
+Not everything should be stored in the project config. Some items are considered content, which will change in production.
 The following items are not stored in the project config:
 
 - Discount promotions
@@ -22,7 +22,7 @@ The following items are not stored in the project config:
 - Shipping zones
 - Shipping methods and rules
 - Subscription plans
-- Subscriptions elements 
+- Subscriptions elements
 - Tax categories
 - Tax zones
 - Tax rates

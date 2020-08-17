@@ -38,7 +38,7 @@ Table rows that have been soft-deleted should only stick around as long as the <
 
 Rather than check for stale rows on every request, we can make this a part of Craft’s [garbage collection](../gc.md) routines.
 
-<craft3:craft\services\Gc> will fire a `run` event each time that it is running. You can tap into that from your module/plugin’s `init()` method. 
+<craft3:craft\services\Gc> will fire a `run` event each time that it is running. You can tap into that from your module/plugin’s `init()` method.
 
 ```php
 use craft\services\Gc;
@@ -54,7 +54,7 @@ public function init()
 }
 ```
 
-[hardDelete()](craft3:craft\services\Gc::hardDelete()) method will delete any rows with a `dateDeleted` value set to a timestamp that’s older than the <config3:softDeleteDuration> config setting. 
+[hardDelete()](craft3:craft\services\Gc::hardDelete()) method will delete any rows with a `dateDeleted` value set to a timestamp that’s older than the <config3:softDeleteDuration> config setting.
 
 ::: tip
 If you need to check multiple tables for stale rows, you can pass an array of table names into [hardDelete()](craft3:craft\services\Gc::hardDelete()) instead.
@@ -146,7 +146,7 @@ Check your code for any database queries that involve your component’s table. 
   ```php
   \Craft::$app->db->createCommand()
       ->softDelete('{{%mytablename}}', ['id' => $id])
-      ->execute(); 
+      ->execute();
   ```
 
 ## Restoring Soft-Deleted Rows

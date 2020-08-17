@@ -133,7 +133,7 @@ If you have a reason to link directly to a controller action, opposed to posting
 namespace Craft;
 
 $url = UrlHelper::getActionUrl(
-    'cocktailRecipes/ingredients/deleteIngredient', 
+    'cocktailRecipes/ingredients/deleteIngredient',
     array('id' => 10)
 );
 ```

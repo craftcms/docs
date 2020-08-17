@@ -24,13 +24,13 @@ Craft saves your work as you go, but you always decide when to _publish_. Edits 
 
 Here, the default Title has been cleaned up so it’s more presentable:
 
-![](../images/tutorial-edit-asset.png =400x)  
+![](../images/tutorial-edit-asset.png =400x)
 
 When you do this, you’re editing that asset or category so any changes will carry over if you re-use it somewhere else. (Navigate to “Assets” and observe the update there as well, for example.)
 
 ### Matrix is pretty cool.
 
-You can grab the handles next to Matrix blocks to re-order them, and each block also has a menu just to the left of that handle you can use to collapse, disable or delete the block. You can also use this as a convenient place to insert new blocks:  
+You can grab the handles next to Matrix blocks to re-order them, and each block also has a menu just to the left of that handle you can use to collapse, disable or delete the block. You can also use this as a convenient place to insert new blocks:
 
 ![](../images/tutorial-matrix-menu.png =800x)
 

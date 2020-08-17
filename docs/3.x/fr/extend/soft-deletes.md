@@ -146,7 +146,7 @@ Check your code for any database queries that involve your component’s table. 
   ```php
   \Craft::$app->db->createCommand()
       ->softDelete('{{%mytablename}}', ['id' => $id])
-      ->execute(); 
+      ->execute();
   ```
 
 ## Restoring Soft-Deleted Rows

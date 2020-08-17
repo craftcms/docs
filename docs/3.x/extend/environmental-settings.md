@@ -16,10 +16,10 @@ class MyModel extends Model
      * @var string the raw secret key (e.g. '$ENV_NAME')
      */
     public $secretKey;
-    
+
     /**
      * @return string the parsed secret key (e.g. 'XXXXXXXXXXX')
-     */ 
+     */
     public function getSecretKey(): string
     {
         return Craft::parseEnv($this->secretKey);
@@ -47,7 +47,7 @@ class MyModel extends Model
             ],
         ];
     }
-    
+
     public function rules()
     {
         return [
@@ -55,7 +55,7 @@ class MyModel extends Model
             ['secretKey', 'string', 'length' => 50],
         ];
     }
-    
+
     // ...
 }
 ```

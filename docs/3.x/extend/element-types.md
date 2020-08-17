@@ -378,7 +378,7 @@ public function handleChangedComponent(ConfigEvent $event)
         Craft::$app->fields->deleteLayoutById($myComponentRecord->fieldLayoutId);
         $myComponentRecord->fieldLayoutId = null;
     }
-    
+
     // ...
 }
 
@@ -390,7 +390,7 @@ public function handleDeletedComponent(ConfigEvent $event)
     if ($myComponentRecord->fieldLayoutId) {
         Craft::$app->fields->deleteLayoutById($myComponentRecord->fieldLayoutId);
     }
-    
+
     // ...
 }
 ```

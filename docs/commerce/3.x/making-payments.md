@@ -20,9 +20,9 @@ For this example, we’re assuming the payment gateway is set on the cart and th
 </form>
 ```
 
-If you’d like to have more control over the form’s markup and styles, you can render them manually. 
+If you’d like to have more control over the form’s markup and styles, you can render them manually.
 
-The example below assumes the availability of a `paymentForm` variable, as discussed in [Payment Form Models](payment-form-models.md), and might be what a simple credit card payment form would look like: 
+The example below assumes the availability of a `paymentForm` variable, as discussed in [Payment Form Models](payment-form-models.md), and might be what a simple credit card payment form would look like:
 
 ```twig
 {% import "_includes/forms" as forms %}
@@ -125,7 +125,7 @@ Below is a simplified example of the fields required to make a payment using Twi
     <input type="hidden" name="cancelUrl" value="{{ cancelUrl }}"/>
     <input type="hidden" name="email" value="{{ email }}"/>
     <input type="hidden" name="orderNumber" value="{{ cart.number }}">
-    
+
     {{ cart.gateway.getPaymentFormHtml({})|raw }}
 
     <input type="submit" value="submit">

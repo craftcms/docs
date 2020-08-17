@@ -61,7 +61,7 @@ public function handleChangedProductType(ConfigEvent $event)
 {
     // Get the UID that was matched in the config path
     $uid = $event->tokenMatches[0];
-    
+
     // Does this product type exist?
     $id = (new Query())
         ->select(['id'])
@@ -132,7 +132,7 @@ public function handleDeletedProductType(ConfigEvent $event)
 }
 ```
 
-At this point, if product types were to be added or removed from the project config manually, those changes should be syncing with the database, and any `afterSaveProductType`, `beforeApplyProductTypeDelete`, and `afterDeleteProductType` event listeners will be triggered. 
+At this point, if product types were to be added or removed from the project config manually, those changes should be syncing with the database, and any `afterSaveProductType`, `beforeApplyProductTypeDelete`, and `afterDeleteProductType` event listeners will be triggered.
 
 ::: tip
 If your component config references another component config, you can ensure that the other config changes are processed first by calling [ProjectConfig::processConfigChanges()](craft3:craft\services\ProjectConfig::processConfigChanges()) within your handler method.
@@ -254,4 +254,4 @@ Event::on(ProjectConfig::class, ProjectConfig::EVENT_REBUILD, function(RebuildCo
     // Add plugin's project config data...
    $e->config['myPlugin']['key'] = $value;
 });
-``` 
+```

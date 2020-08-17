@@ -33,59 +33,59 @@ Complete projects you can use to learn or jump start your own.
 
 <div class="flex flex-wrap">
     <div class="w-1/2">
-        <IconLink title="Knowledge Base" 
-            subtitle="Read support articles." 
-            link="https://craftcms.com/knowledge-base" 
-            icon="/docs/icons/icon-knowledge-base.svg" 
-            icon-size="large" 
+        <IconLink title="Knowledge Base"
+            subtitle="Read support articles."
+            link="https://craftcms.com/knowledge-base"
+            icon="/docs/icons/icon-knowledge-base.svg"
+            icon-size="large"
         />
     </div>
     <div class="w-1/2">
-        <IconLink title="Stack Exchange" 
-            subtitle="Get help and help others." 
-            link="https://craftcms.stackexchange.com/" 
-            icon="/docs/icons/icon-stack-exchange.svg" 
-            icon-size="large" 
+        <IconLink title="Stack Exchange"
+            subtitle="Get help and help others."
+            link="https://craftcms.stackexchange.com/"
+            icon="/docs/icons/icon-stack-exchange.svg"
+            icon-size="large"
         />
     </div>
     <div class="w-1/2">
-        <IconLink title="Discord" 
-            subtitle="Meet the community." 
-            link="https://craftcms.com/discord" 
-            icon="/docs/icons/icon-discord.svg" 
-            icon-size="large" 
+        <IconLink title="Discord"
+            subtitle="Meet the community."
+            link="https://craftcms.com/discord"
+            icon="/docs/icons/icon-discord.svg"
+            icon-size="large"
         />
     </div>
     <div class="w-1/2">
-        <IconLink title="Twitter" 
-            subtitle="See the latest Craft tweets." 
-            link="https://twitter.com/craftcms" 
-            icon="/docs/icons/icon-twitter.svg" 
-            icon-size="large" 
+        <IconLink title="Twitter"
+            subtitle="See the latest Craft tweets."
+            link="https://twitter.com/craftcms"
+            icon="/docs/icons/icon-twitter.svg"
+            icon-size="large"
         />
     </div>
     <div class="w-1/2">
-        <IconLink title="CraftQuest" 
-            subtitle="Watch video courses." 
-            link="https://craftquest.io/" 
-            icon="/docs/icons/icon-craft-quest.svg" 
-            icon-size="large" 
+        <IconLink title="CraftQuest"
+            subtitle="Watch video courses."
+            link="https://craftquest.io/"
+            icon="/docs/icons/icon-craft-quest.svg"
+            icon-size="large"
         />
     </div>
     <div class="w-1/2">
-        <IconLink title="Craft Link List" 
-            subtitle="Stay in-the-know." 
-            link="https://craftlinklist.com/" 
-            icon="/docs/icons/icon-craft-link-list.svg" 
-            icon-size="large" 
+        <IconLink title="Craft Link List"
+            subtitle="Stay in-the-know."
+            link="https://craftlinklist.com/"
+            icon="/docs/icons/icon-craft-link-list.svg"
+            icon-size="large"
         />
     </div>
     <div class="w-1/2">
-        <IconLink title="nystudio107 Blog" 
-            subtitle="Learn Craft & web dev." 
-            link="https://nystudio107.com/blog" 
-            icon="/docs/icons/icon-nystudio107.svg" 
-            icon-size="large" 
+        <IconLink title="nystudio107 Blog"
+            subtitle="Learn Craft & web dev."
+            link="https://nystudio107.com/blog"
+            icon="/docs/icons/icon-nystudio107.svg"
+            icon-size="large"
         />
     </div>
 </div>

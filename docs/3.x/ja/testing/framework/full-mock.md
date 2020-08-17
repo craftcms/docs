@@ -7,7 +7,7 @@ Obviously, this forces your unit tests into a specific style which you may not p
 Under the hood Craft will setup a mock of each service that is set on the `Craft::$app` using `craft\test\TestSetup:getMockApp()`. The _actual_ mock is setup using `craft\test\TestSetup:getMock()`.
 
 ::: warning
-Some Craft module methods such as [consoleCommand](../testing-craft/console.md) may not work as expected with `fullMock` on. Please be aware of the implications of enabling this option. If you are just starting testing use the [getting started guide](../testing-craft/getting-started.md) to first get an overview of what tests are and what the differences are between `fullMock` on and off.  
+Some Craft module methods such as [consoleCommand](../testing-craft/console.md) may not work as expected with `fullMock` on. Please be aware of the implications of enabling this option. If you are just starting testing use the [getting started guide](../testing-craft/getting-started.md) to first get an overview of what tests are and what the differences are between `fullMock` on and off.
 :::
 
 ## Plugins and modules

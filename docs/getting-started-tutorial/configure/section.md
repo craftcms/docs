@@ -96,17 +96,17 @@ Next, let’s create the individual fields for our blog posts:
 
 1. Navigate to “Settings” and choose “Fields”.
 2. Choose “+ New group” to create a new field group with the name “Blog Post Fields”. Save the group.
-3. Create a Plain Text “Summary” field.  
+3. Create a Plain Text “Summary” field.
    Choose “New Field”, and start by creating a new Plain Text field named “Summary”. Use the “Instructions” input to help the content editor know what to do. Add “Enter a brief, one or two sentence post summary.”. Enable “Allow line breaks” and set “Initial Rows” to `1`. Save the field.
-4. Create an Assets “Feature Image” field.  
+4. Create an Assets “Feature Image” field.
    Choose “New Field” again, enter “Feature Image” for its name, and choose “Assets” from the “Field Type” dropdown menu. Enable “Restrict uploads to a single folder?” and select the “Blog” volume. Enable “Restrict allowed file types?” and check “Image” to ensure content editors can only select files that are images. Set Limit to `1` and save the field.
-5. Create a Categories field named “Post Categories”.  
+5. Create a Categories field named “Post Categories”.
    Again choose “New Field”, enter “Post Categories” for its name, and select “Categories” as the field type. The “Source” setting will default to our “Blog Categories”, so we can just save the field.
-6. Create a Matrix field named “Post Content”.  
+6. Create a Matrix field named “Post Content”.
    Choose “New Field” once more, enter “Post Content” for its name, and choose “Matrix” from the “Field Type” dropdown menu. We’ll use the Configuration setting to define two Block Types that can be added and reordered to build the post content.
-   1. First add a text block an author can use to enter rich text.  
+   1. First add a text block an author can use to enter rich text.
       Choose “+ New block type” and enter “Text” for its name. In the Field Settings section, enter the name “Text” again and select “Rich Text” from the “Field Type” dropdown menu. Since every post should have at least some text, make sure “This field is required” is checked.
-   2. Add one more block for images.  
+   2. Add one more block for images.
       Choose “+ New block type” again and enter “Image” for its name. Enter “Image” again for the “Name” under Field Settings. Mark this field required as well and select “Assets” from the “Field Type” dropdown menu. Restrict uploads to the “Blog” volume, enable “Restrict allowed file types?” and make sure “Image” is checked.
    3. Save the field.
 

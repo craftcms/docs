@@ -104,7 +104,7 @@ class Module extends \yii\base\Module
 }
 ```
 
-Replace `bar` with your module’s actual namespace, and `'@bar'` with an [alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) name based on your actual namespace (with any `\`s converted to `/`s). 
+Replace `bar` with your module’s actual namespace, and `'@bar'` with an [alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) name based on your actual namespace (with any `\`s converted to `/`s).
 
 ## Further Reading
 

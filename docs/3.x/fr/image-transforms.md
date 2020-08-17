@@ -53,8 +53,8 @@ If you leave **Image Format** blank, Craft will use the original image’s forma
 To output an image with a transform applied, simply pass your transform’s handle into your asset’s [getUrl()](craft3:craft\elements\Asset::getUrl()), [getWidth()](craft3:craft\elements\Asset::getWidth()), and [getHeight()](craft3:craft\elements\Asset::getHeight()) functions:
 
 ```twig
-<img src="{{ asset.getUrl('thumb') }}" 
-     width="{{ asset.getWidth('thumb') }}" 
+<img src="{{ asset.getUrl('thumb') }}"
+     width="{{ asset.getWidth('thumb') }}"
      height="{{ asset.getHeight('thumb') }}"
 >
 ```
@@ -78,8 +78,8 @@ First, you must create a [hash](dev/twig-primer.md#hashes) that defines the tran
 Then you can pass that hash into your asset’s `getUrl()`, `getWidth()`, and `getHeight()` functions:
 
 ```twig
-<img src="{{ asset.getUrl(thumb) }}" 
-     width="{{ asset.getWidth(thumb) }}" 
+<img src="{{ asset.getUrl(thumb) }}"
+     width="{{ asset.getWidth(thumb) }}"
      height="{{ asset.getHeight(thumb) }}"
 >
 ```

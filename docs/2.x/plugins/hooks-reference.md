@@ -170,7 +170,7 @@ Return
 
 :   An array of email messages.
 
-Gives plugins a chance to register their own email messages.  
+Gives plugins a chance to register their own email messages.
 
 Craft will look for the email keys and messages in a translation file matching the plugins [source language](setting-things-up.md).
 
@@ -498,7 +498,7 @@ public function modifyEntrySources(&$sources, $context)
             ->elements
             ->getElementType(ElementType::Entry)
             ->getStatuses();
-        
+
         foreach ($statuses as $status => $label) {
             $sources['status:'.$status] = array(
                 'label' => $label,

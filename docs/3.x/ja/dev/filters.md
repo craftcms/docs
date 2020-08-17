@@ -369,7 +369,7 @@ Twig の [json_encode](https://twig.symfony.com/doc/2.x/filters/json_encode.html
 
 ```twig
 {{ 42.1|round }} → 42
-{{ 42.9|round }} → 43 
+{{ 42.9|round }} → 43
 ```
 
 ## `filesize`

@@ -103,7 +103,7 @@ return [
     'production' => [
         // Disable project config changes on production
         'allowAdminChanges' => false,
-    ], 
+    ],
 ];
 ```
 

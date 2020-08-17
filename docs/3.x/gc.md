@@ -5,7 +5,7 @@ Craft occasionally runs a few garbage collection routines to remove stale data, 
 - Purge unsaved drafts (per the <config3:purgeUnsavedDraftsDuration> config setting).
 - Delete expired template caches.
 - Purge any expired pending user accounts (per the <config3:purgePendingUsersDuration> config setting).
-- Hard delete expired soft-deleted rows (per the <config3:softDeleteDuration> config setting). 
+- Hard delete expired soft-deleted rows (per the <config3:softDeleteDuration> config setting).
 - Delete stale user session data.
 - Delete orphaned search indexes (any indexes belonging to elements that don’t exist anymore).
 

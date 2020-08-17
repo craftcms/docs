@@ -24,7 +24,7 @@ The following items are not stored in the project config:
 - Shipping zones
 - Shipping methods and rules
 - Subscription plans
-- Subscriptions elements 
+- Subscriptions elements
 - Tax categories
 - Tax zones
 - Tax rates

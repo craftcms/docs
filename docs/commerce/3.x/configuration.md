@@ -9,7 +9,7 @@ The following permissions are available for users or user groups to have for Com
 
 This permission lets the user get access to the Commerce section of the control panel.
 
-This permission is found under Craft’s “Access the control panel” permission. 
+This permission is found under Craft’s “Access the control panel” permission.
 
 
 ### Manage products
@@ -236,7 +236,7 @@ Default: `true`
 
 ## `updateBillingDetailsUrl`
 
-The URL for a user to resolve billing issues with their subscription. 
+The URL for a user to resolve billing issues with their subscription.
 
 Default: `''`
 
@@ -253,6 +253,6 @@ Default: `false` (use the shipping address)
 ## `updateCartSearchIndexes`
 
 Determines whether the search index should be updated when a cart is saved by a customer when they use the `commerce/cart/*` controller actions.
-Making this `false` will reduce the number of search index update jobs created, but will also reduce the ability to search carts in the control panel. 
+Making this `false` will reduce the number of search index update jobs created, but will also reduce the ability to search carts in the control panel.
 
 Default `true`

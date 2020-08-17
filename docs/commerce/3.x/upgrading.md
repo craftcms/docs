@@ -140,7 +140,7 @@ Event::on(
     function(LineItemEvent $event) {
         // @var LineItem $lineItem
         $lineItem = $event->lineItem;
-        
+
         // setting custom price
         $lineItem->price = 20;
 
@@ -166,7 +166,7 @@ Event::on(
     function(LineItemEvent $event) {
         // @var LineItem $lineItem
         $lineItem = $event->lineItem;
-        
+
         // setting custom price
         $lineItem->price = 20;
 

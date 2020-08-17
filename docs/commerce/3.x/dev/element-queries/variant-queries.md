@@ -61,7 +61,7 @@ Fetching the equivalent with GraphQL could look like this:
 
 ```graphql
 # Fetch variant having ID = 46
-{  
+{
   variants(id: 46) {
     title
   }

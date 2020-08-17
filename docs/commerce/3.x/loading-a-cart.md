@@ -43,5 +43,5 @@ $loadCartUrl = UrlHelper('commerce/cart/load-cart', ['number' => $cart->number])
 ```
 
 ::: tip
-This method can be useful in an email, allowing customers to retrieve an abandoned cart. 
+This method can be useful in an email, allowing customers to retrieve an abandoned cart.
 :::

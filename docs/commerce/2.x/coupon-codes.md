@@ -1,14 +1,14 @@
 # Coupon Codes
 
-Coupon codes are set up as a condition within a discount promotion. 
+Coupon codes are set up as a condition within a discount promotion.
 
-To create a new discount, go to Commerce → Promotions → Discounts in the Control Panel. 
+To create a new discount, go to Commerce → Promotions → Discounts in the Control Panel.
 To see the coupon condition, go to the “Coupon” tab.
 
 Discounts are only available in the Pro edition of Craft Commerce.
 
 An empty coupon field on the discount means there is no requirement for a coupon
-for the discount to work. Adding a coupon requires that a coupon is submitted to 
+for the discount to work. Adding a coupon requires that a coupon is submitted to
 the cart. This makes the discount available to match the order but still needs to match all other discount conditions.
 
 Read more about [Discounts](discounts.md).
@@ -31,12 +31,12 @@ Example:
        class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}"
        value="{{ cart.couponCode }}"
        placeholder="{{ "Coupon Code"|t }}">
-       
+
     <input type="submit" value="Update Cart"/>
 <form>
 ```
 
-Only one coupon code can exist on the cart at a time. The current coupon code 
+Only one coupon code can exist on the cart at a time. The current coupon code
 submitted to the cart can be seen by outputting `{{ cart.couponCode }}`.
 
 You can retrieve the discount associated with the coupon code with:
@@ -51,6 +51,5 @@ You can retrieve the discount associated with the coupon code with:
 
 
 
- 
 
- 
+

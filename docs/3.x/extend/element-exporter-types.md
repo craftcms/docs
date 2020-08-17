@@ -13,7 +13,7 @@ The data included in these files is determined by the selected **exporter type**
 
 Plugins can provide custom exporter types for element index pages by creating a class that implements <craft3:craft\base\ElementExporterInterface>.
 
-As a convenience, you can extend <craft3:craft\base\ElementExporter>, which provides a base exporter type implementation. 
+As a convenience, you can extend <craft3:craft\base\ElementExporter>, which provides a base exporter type implementation.
 
 There are two methods that your exporter type should define:
 
