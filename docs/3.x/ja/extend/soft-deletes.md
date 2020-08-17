@@ -151,7 +151,7 @@ public static function find()
   ```php
   \Craft::$app->db->createCommand()
     ->softDelete('{{%tablename}}', ['id' => $id])
-    ->execute(); 
+    ->execute();
   ```
 
 ## ソフトデリートされた行の復元
