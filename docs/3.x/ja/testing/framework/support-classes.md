@@ -31,5 +31,5 @@ A class the implements the `craft\base\Serializable` interface.
 
 ### `craft\test\mockclasses\TwigExtension`
 `TwigExtension` is a twig extension that extends the `Twig\Extension\AbstractExtension`.
- 
+
 
