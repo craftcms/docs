@@ -1964,7 +1964,7 @@ your email for further instructions. This can allow for username/email enumerati
 
 Allowed types
 
-:   [array](http://php.net/language.types.array), [false](http://php.net/language.types.boolean)
+:   [array](http://php.net/language.types.array)
 
 Default value
 
@@ -1981,8 +1981,6 @@ Since
 
 
 Custom [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#options) that should be used for preview iframes.
-
-Set this to `false` to disable the iFrame Resizer altogether.
 
 ```php
 'previewIframeResizerOptions' => [
@@ -2854,6 +2852,45 @@ Some file systems, such as NFS, do not support exclusive file locking.
 
 If not set to `true` or `false`, Craft will automatically try to detect if the underlying file system supports exclusive file
 locking and cache the results.
+
+
+
+### `useIframeResizer`
+
+Allowed types
+
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+
+:   `false`
+
+Defined by
+
+:   [GeneralConfig::$useIframeResizer](craft3:craft\config\GeneralConfig::$useIframeResizer)
+
+Since
+
+:   3.5.5
+
+
+
+Whether [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#options) should be used for Live Preview.
+
+Using iFrame Resizer makes it possible for Craft to retain the preview’s scroll position between page loads, for cross-origin web pages.
+
+It works by setting the height of the iframe to match the height of the inner web page, and the iframe’s container will
+be scrolled rather than the iframe document itself. This can lead to some unexpected CSS issues, however, because the previewed viewport height
+will be taller than the visible portion of the iframe.
+
+If you have a [decoupled front-end](https://craftcms.com/docs/3.x/entries.html#previewing-decoupled-front-ends), you will need to include
+[iframeResizer.contentWindow.min.js](https://raw.github.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js) on your
+page as well for this to work. You can conditionally include it for only Live Preview requests by checking if the requested URL contains a
+`x-craft-live-preview` query string parameter.
+
+::: tip
+You can customize the behavior of iFrame Resizer via the <config3:previewIframeResizerOptions> config setting.
+:::
 
 
 
