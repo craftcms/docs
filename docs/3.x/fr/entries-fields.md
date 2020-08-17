@@ -137,9 +137,9 @@ For example, you could create a list of checkboxes for each of the possible rela
         <li>
             <label>
                 {{ input(
-                    'checkbox', 
-                    'fields[myFieldHandle][]', 
-                    possibleEntry.id, 
+                    'checkbox',
+                    'fields[myFieldHandle][]',
+                    possibleEntry.id,
                     { checked: possibleEntry.id in relatedEntryIds }
                 ) }}
                 {{ possibleEntry.title }}
