@@ -253,4 +253,4 @@ Event::on(ProjectConfig::class, ProjectConfig::EVENT_REBUILD, function(RebuildCo
     // Add plugin's project config data...
    $e->config['myPlugin']['key'] = $value;
 });
-``` 
+```
