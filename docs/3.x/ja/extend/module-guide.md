@@ -53,7 +53,7 @@ composer dump-autoload -a
 
 ## アプリケーション設定のアップデート
 
-[modules](yii2:yii\base\Module::modules) および [bootstrap](yii2:yii\base\Application::bootstrap) 配列にリストすることによって、プロジェクトの[アプリケーション設定](../config/#application-configuration)にモジュールを追加できます。 例えば、モジュール ID が `foo` でモジュールのクラス名が `foo\Module` の場合、`config/app.php` に次のように追加します。
+[modules](yii2:yii\base\Module::modules) および [bootstrap](yii2:yii\base\Application::bootstrap) 配列にリストすることによって、プロジェクトの[アプリケーション設定](../config/app.md)にモジュールを追加できます。 例えば、モジュール ID が `foo` でモジュールのクラス名が `foo\Module` の場合、`config/app.php` に次のように追加します。
 
 ```php
 return [
