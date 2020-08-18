@@ -135,7 +135,7 @@ Default: `false`
 
 ## `updateBillingDetailsUrl`
 
-The URL for a user to resolve billing issues with their subscription. 
+The URL for a user to resolve billing issues with their subscription.
 
 Default: `''`
 

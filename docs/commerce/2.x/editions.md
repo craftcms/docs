@@ -8,7 +8,7 @@ The Pro edition of Craft Commerce is designed for professional ecommerce sites. 
 
 The Pro edition has the following features that Lite does not:
 
-- Discount promotions, which include coupon codes and custom rules that can reduce the price of items in the cart based on things like minimum order quantity or minimum order price. 
+- Discount promotions, which include coupon codes and custom rules that can reduce the price of items in the cart based on things like minimum order quantity or minimum order price.
 - Unlimited shipping methods that can have complex shipping rules.
 - Custom tax rules based on configurable multi-state or multi-country zones.
 

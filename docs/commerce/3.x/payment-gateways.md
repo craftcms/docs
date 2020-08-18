@@ -30,7 +30,7 @@ After installation, Craft Commerce will install some demo products and a basic c
 
 This dummy gateway driver is only for testing with placeholder credit card numbers. A valid card number ending in an even digit will get a successful response. If the last digit is an odd number, the driver will return a generic failure response:
 
-`4242424242424242` <span style="color:green"> ✓ Success</span>  
+`4242424242424242` <span style="color:green"> ✓ Success</span>
 `4444333322221111` <span style="color:red"> ✗ Failure</span>
 
 ## Manual Gateway

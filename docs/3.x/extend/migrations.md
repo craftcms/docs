@@ -25,11 +25,11 @@ Then run the following command to generate a new migration file for your plugin 
 ::: code
 
 ```bash Plugin Migration
-./craft migrate/create my_migration_name --plugin=my-plugin-handle
+php craft migrate/create my_migration_name --plugin=my-plugin-handle
 ```
 
 ```bash Content Migration
-./craft migrate/create my_migration_name
+php craft migrate/create my_migration_name
 ```
 
 :::
@@ -96,11 +96,11 @@ You can have Craft apply your new migration from the terminal:
 ::: code
 
 ```bash Plugin Migration
-./craft migrate/up --plugin=my-plugin-handle
+php craft migrate/up --plugin=my-plugin-handle
 ```
 
 ```bash Content Migration
-./craft migrate/up
+php craft migrate/up
 ```
 
 :::
@@ -108,7 +108,7 @@ You can have Craft apply your new migration from the terminal:
 Or you can have Craft apply all new migrations across all migration tracks:
 
 ```bash
-./craft migrate/all
+php craft migrate/all
 ```
 
 Craft will also check for new plugin migrations on control panel requests, for any plugins that have a new [schema version](craft3:craft\base\PluginTrait::$schemaVersion), and content migrations can be applied from the Control Panel by going to Utilities → Migrations.
@@ -140,7 +140,7 @@ class Install extends Migration
 You can give your plugin an install migration with the `migrate/create` command if you pass the migration name “`install`”:
 
 ```bash
-./craft migrate/create install --plugin=my-plugin-handle
+php craft migrate/create install --plugin=my-plugin-handle
 ```
 
 When a plugin has an Install migration, its `safeUp()` method will be called when the plugin is installed, and its `safeDown()` method will be called when the plugin is uninstalled (invoked by the plugin’s [install()](<craft3:craft\base\Plugin::install()>) and [uninstall()](<craft3:craft\base\Plugin::uninstall()>) methods).

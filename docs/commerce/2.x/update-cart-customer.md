@@ -1,19 +1,19 @@
 # Update Cart Customer
 
-A cart always has an associated customer. That customer can be a guest (no associated user), or a customer that is not a guest 
+A cart always has an associated customer. That customer can be a guest (no associated user), or a customer that is not a guest
 and is associated with a registered user.
 
 When a user logs in, the current customer switches to the customer associated to the logged in user.
 
-The only information stored about a customer is the email address, and their related address book addresses, as well as their 
+The only information stored about a customer is the email address, and their related address book addresses, as well as their
 primary shipping and billing address IDs.
 
-As guest customer the address book is pretty useless as the next time they visit the site 
-all addresses in their address book will be lost. If they register on checkout the address book will survive. 
+As guest customer the address book is pretty useless as the next time they visit the site
+all addresses in their address book will be lost. If they register on checkout the address book will survive.
 
 ## Updating the email address on an order
 
-If a customer is currently a guest, the email address of the customer is updated by updating the cart’s email. This can be done with 
+If a customer is currently a guest, the email address of the customer is updated by updating the cart’s email. This can be done with
 the same controller action as updating anything else on the cart.
 
 Example:
@@ -29,16 +29,16 @@ Example:
        class="{% if cart.getFirstError('email') %}has-error{% endif %}"
        value="{{ cart.email }}"
        placeholder="{{ "your@email.com"|t }}">
-       
+
 <input type="submit" value="Update Cart Email"/>
 <form>
 ```
-If a customer is a logged in user, you can not update the email address of the order, it is always set as the email 
+If a customer is a logged in user, you can not update the email address of the order, it is always set as the email
 address of the user.
 
 ## Checking if a guest customer has a user account
 
-When guiding users through the checkout, it is a good idea to collect the email address from them early, this would 
+When guiding users through the checkout, it is a good idea to collect the email address from them early, this would
 enable the checking if they have an account with your site already:
 
 ```twig
@@ -48,10 +48,10 @@ Once a user logs in, the cart's customer will switch to be the registered user�
 
 ## Registering a guest customer as a user
 
-If the customer is a guest, and they do not have an account, you can always show them a standard [Craft CMS registration 
-form](https://docs.craftcms.com/v3/dev/examples/user-registration-form.html) during checkout.
+If the customer is a guest, and they do not have an account, you can always show them a standard [Craft CMS registration
+form](https://craftcms.com/docs/3.x/dev/examples/user-registration-form.html) during checkout.
 
-If you would like to allow the customer to register on checkout, you can update the order and flag it to register the user on 
+If you would like to allow the customer to register on checkout, you can update the order and flag it to register the user on
 order completion. This can be done with the same controller action as updating anything else on the cart.
 
 Example:
@@ -67,11 +67,11 @@ Example:
  <input type="submit" value="Update Cart"/>
 <form>
  ```
- 
+
  Alternatively, as in our example templates, you can set this flag on the `commerce/payments/pay` controller action form.
- 
+
  Example:
- 
+
 ```twig
 <input type="hidden" name="action" value="commerce/payments/pay">
 <!-- payment form...-->

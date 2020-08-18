@@ -394,7 +394,7 @@ If an array is passed in, it will be returned as-is.
 
 ```twig
 {% set styles = 'font-weight: bold; color: red;'|explodeStyle %}
-{# Result: {'font-weight': 'bold', 'color': 'red'} #} 
+{# Result: {'font-weight': 'bold', 'color': 'red'} #}
 ```
 
 ## `filesize`

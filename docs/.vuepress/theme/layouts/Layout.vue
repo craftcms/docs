@@ -107,8 +107,7 @@
 @screen lg {
   .main-container {
     @apply relative;
-    max-width: 1028px;
-    left: 16rem;
+    left: 8rem;
   }
 
   .left-bar {
@@ -118,7 +117,7 @@
 
 @screen xl {
   .main-container {
-    left: 8rem;
+    left: 0;
   }
 }
 </style>

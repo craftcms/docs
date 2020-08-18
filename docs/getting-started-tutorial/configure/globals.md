@@ -22,6 +22,6 @@ You’ll now see a “Globals” section in Craft’s main navigation. The site�
 
 Visit Globals and add some kind of public description for this blog project.
 
-<BrowserShot url="https://tutorial.test/admin/globals/siteInformation" :link="false" caption="Site Description field we added to Globals.">
+<BrowserShot url="http://tutorial.test/admin/globals/siteInformation" :link="false" caption="Site Description field we added to Globals.">
 <img src="../images/tutorial-globals.png" alt="Screenshot of Globals section displaying the newly-added Site Description field" />
 </BrowserShot>

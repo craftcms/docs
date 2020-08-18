@@ -377,7 +377,7 @@ Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML
 ```
 
 ::: tip
-This works similarly to the [raw](https://twig.symfony.com/doc/2.x/filters/raw.html) filter, except that Twig will remember not to escape the HTML even if the variable is passed to another template/macro, whereas `|raw` filters only have an effect if used directly in an output tag. 
+This works similarly to the [raw](https://twig.symfony.com/doc/2.x/filters/raw.html) filter, except that Twig will remember not to escape the HTML even if the variable is passed to another template/macro, whereas `|raw` filters only have an effect if used directly in an output tag.
 :::
 
 ## `redirectInput`

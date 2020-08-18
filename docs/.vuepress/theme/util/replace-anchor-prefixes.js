@@ -12,7 +12,7 @@ function replacePrefixes(md) {
     if (usesCustomPrefix(linkText)) {
       return removePrefix(linkText);
     }
-  
+
     return linkText;
   }
 }
@@ -108,7 +108,7 @@ function getPrefix(link) {
 
 /**
  * Returns `true` if the provided string uses one of our custom anchor prefixes.
- * @param {string} link 
+ * @param {string} link
  */
 function usesCustomPrefix(link) {
   const prefix = getPrefix(link);

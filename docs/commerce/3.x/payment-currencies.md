@@ -58,7 +58,7 @@ The customer’s payment currency may be defined by a valid 3-digit ISO code for
 
 ## Conversion and currency formatting
 
-While you can use the `|commerceCurrency` filter as a drop-in replacement for [Craft’s `|currency` filter](https://docs.craftcms.com/v3/dev/filters.html#currency), it offers additional control over formatting and conversion:
+While you can use the `|commerceCurrency` filter as a drop-in replacement for [Craft’s `|currency` filter](https://craftcms.com/docs/3.x/dev/filters.html#currency), it offers additional control over formatting and conversion:
 
 - A `convert` parameter used to convert the base price into the supplied+valid payment currency.
 - A `format` parameter that can disable formatting and return the raw currency value as a float.

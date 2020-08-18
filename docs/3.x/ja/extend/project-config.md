@@ -4,7 +4,7 @@
 
 ## プロジェクトコンフィグのサポートがあなたに向いているか？
 
-コンポーネントにプロジェクトコンフィグのサポートを追加する前に、トレードオフについて考慮してください。プロジェクトコンフィグによって管理されるコンポーネントは、開発環境の管理者だけが編集可能[であるべき](../project-config.md#production-changes-may-be-forgotten)です。
+プロジェクトコンフィグによって管理されるコンポーネントは、開発環境の管理者だけが編集可能[であるべき](../project-config.md#production-changes-may-be-forgotten)です。
 
 自身に問いかけてください。
 
@@ -42,8 +42,7 @@ public function init()
 }
 ```
 
-::: tip
-`{uid}` は（[StringHelper::UUID()](craft3:craft\helpers\StringHelper::UUID()) で生成されたもののような）有効な UID にマッチする特別な設定パストークンです。イベントハンドラが呼び出されたときにパスが `{uid}` トークンを含んでいると、マッチする UID が [ConfigEvent::$tokenMatches](craft3:craft\events\ConfigEvent::$tokenMatches) 経由で利用可能になります。
+これを避けるために、プロジェクトコンフィグを変更する前に必ず _`project.yaml` の_プラグインのスキーマバージョンを確認してください。 （[ProjectConfig::get()](craft3:craft\services\ProjectConfig::get()) を呼び出す際の第2引数に `true`を渡すことによって、それを行います。
 :::
 
 ### ステップ 2：設定変更の操作
@@ -148,6 +147,10 @@ Craft::$app->projectConfig->processConfigChanges('productTypeGroups');
 
 プロジェクトコンフィグの項目は、<craft3:craft\services\ProjectConfig::set()> を使用して追加または更新したり、[remove()](craft3:craft\services\ProjectConfig::remove()) を使用して削除できます。
 
+::: tip
+`ProjectConfig::set()` will sort all associative arrays by their keys, recursively. If you are storing an associative array where the order of the items is important (e.g. editable table data), then you must run the array through <craft3:craft\helpers\ProjectConfig::packAssociativeArray()> before passing it to `ProjectConfig::set()`.
+:::
+
 ```php
 use Craft;
 use craft\helpers\Db;
@@ -210,19 +213,19 @@ public function deleteProductType($productType)
 
 ## プロジェクトコンフィグのマイグレーション
 
-プラグインの[マイグレーション](migrations.md)から、プロジェクトコンフィグの項目を追加、更新、削除することができます。ただし、データベースを変更するよりも少し複雑です。というのも、異なる環境の同じ設定に対し同じマイグレーションがすでに実行されている可能性があるためです。
+プラグインの[マイグレーション](migrations.md)から、プロジェクトコンフィグの項目を追加、更新、削除することができます。 ただし、データベースを変更するよりも少し複雑です。 というのも、異なる環境の同じ設定に対し同じマイグレーションがすでに実行されている可能性があるためです。
 
-次のシナリオを考慮してください。
+新しいプラグインのマイグレーションが保留中、_かつ_、 `project.yaml` の変更が保留中の場合、Craft は最初にマイグレーションを実行してから `project.yaml` の変更を同期します。
 
 1. プロジェクトコンフィグを変更する新しいマイグレーションが含まれるプラグインが、環境 A でアップデートされました。
 3. 更新された `composer.lock`、および、`project.yaml` が Git にコミットされました。
 4. Craft が新しいプラグインのマイグレーションを実行し、_さらに_、`project.yaml` の変更を同期しなければならない環境 B に、その Git のコミットがプルされました。
 
-新しいプラグインのマイグレーションが保留中、_かつ_、 `project.yaml` の変更が保留中の場合、Craft は最初にマイグレーションを実行してから `project.yaml` の変更を同期します。
-
 プラグインのマイグレーションで環境 B に対して同じプロジェクトコンフィグの変更が行われる場合、`project.yaml` で保留中の変更と競合します。
 
-これを避けるために、プロジェクトコンフィグを変更する前に必ず _`project.yaml` の_プラグインのスキーマバージョンを確認してください。（[ProjectConfig::get()](craft3:craft\services\ProjectConfig::get()) を呼び出す際の第2引数に `true`を渡すことによって、それを行います。）
+If your plugin migration were to make the same project config changes again on Environment B, those changes will conflict with the pending changes in `project.yaml`.
+
+To avoid this, always check your plugin’s schema version _in `project.yaml`_ before making project config changes. (You do that by passing `true` as the second argument when calling [ProjectConfig::get()](craft3:craft\services\ProjectConfig::get()).)
 
 ```php
 public function safeUp()
@@ -239,7 +242,7 @@ public function safeUp()
 
 ## プロジェクトコンフィグデータの再構築
 
-プラグインがプロジェクトコンフィグとデータベースの両方にデータを保存している場合、`./craft project-config/rebuild` コマンドが実行されたときに Craft がデータベースに保存されたデータに基づいてプロジェクトコンフィグを再構築するのを支援するよう（Craft 3.1.20 で追加された）<craft3:craft\services\ProjectConfig::EVENT_REBUILD> を感知してください。
+If your plugin is storing data in both the project config and elsewhere in the database, you should listen to <craft3:craft\services\ProjectConfig::EVENT_REBUILD> (added in Craft 3.1.20) to aid Craft in rebuilding the project config based on database-stored data, when the `php craft project-config/rebuild` command is run.
 
 ```php
 use craft\events\RebuildConfigEvent;
@@ -250,4 +253,4 @@ Event::on(ProjectConfig::class, ProjectConfig::EVENT_REBUILD, function(RebuildCo
     // Add plugin's project config data...
    $e->config['myPlugin']['key'] = $value;
 });
-``` 
+```

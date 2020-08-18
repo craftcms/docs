@@ -64,10 +64,10 @@ $myCategoryQuery = \craft\elements\Category::find();
 ```
 :::
 
-Once you’ve created a category query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](README.md#executing-element-queries) by calling `.all()`. An array of [Category](craft3:craft\elements\Category) objects will be returned.
+Once you’ve created a category query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [Category](craft3:craft\elements\Category) objects will be returned.
 
 ::: tip
-See [Introduction to Element Queries](README.md) to learn about how element queries work.
+See [Element Queries](element-queries.md) to learn about how element queries work.
 :::
 
 ### Example

@@ -199,7 +199,9 @@ You could then make the checkbox list sortable, so users have control over the o
 Assets fields can handle new file uploads as well:
 
 ```twig
-{{ input('file', 'fields[myFieldHandle][]', options={ multiple: true }) }}
+{{ input('file', 'fields[myFieldHandle][]', options={
+  multiple: true,
+}) }}
 ```
 
 ::: tip

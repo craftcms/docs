@@ -76,7 +76,7 @@ You can override these default aliases with the <config3:aliases> config setting
 ];
 ```
 
-If your webroot is something besides `web/`, `public/`, `public_html/`, or `html/`, or it’s not located alongside your `craft` executable, you will also need to override the `@webroot` alias, so it can be defined properly for console commands. 
+If your webroot is something besides `web/`, `public/`, `public_html/`, or `html/`, or it’s not located alongside your `craft` executable, you will also need to override the `@webroot` alias, so it can be defined properly for console commands.
 
 ```php
 'aliases' => [
@@ -149,7 +149,7 @@ By default, Craft will store data caches in the `storage/runtime/cache/` folder.
 If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a CLI command for convenience:
 
 ```bash
-./craft setup/db-cache-table
+php craft setup/db-cache-table
 ```
 
 Once that’s done, you can set your `cache` application component to use <craft3:craft\cache\DbCache>.
@@ -455,9 +455,9 @@ Then create a `@rootUrl` alias that references it:
 'aliases' => [
     '@rootUrl' => getenv('ROOT_URL'),
 ],
-``` 
+```
 
-Then you could go into your User Photos volume’s settings (for example) and set its Base URL to `@rootUrl/images/user-photos`.  
+Then you could go into your User Photos volume’s settings (for example) and set its Base URL to `@rootUrl/images/user-photos`.
 
 ### Config Files
 
@@ -582,7 +582,7 @@ Can be set to `false` to prevent Craft from setting PHP’s [log_errors](http://
 ```php
 // Don't send PHP error logs to storage/logs/phperrors.log
 define('CRAFT_LOG_PHP_ERRORS', false);
-``` 
+```
 
 ### `CRAFT_SITE`
 

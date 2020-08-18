@@ -133,7 +133,7 @@ If you have a reason to link directly to a controller action, opposed to posting
 namespace Craft;
 
 $url = UrlHelper::getActionUrl(
-    'cocktailRecipes/ingredients/deleteIngredient', 
+    'cocktailRecipes/ingredients/deleteIngredient',
     array('id' => 10)
 );
 ```
@@ -190,7 +190,7 @@ BaseController makes several methods available to your action methods:
 
 ### `$this->renderTemplate($template, $variables)`
 
-This is a shortcut for <craft2:Craft\TemplatesService::render()>, but rather than returning the rendered template, it will output it to the browser and end the request. It will also include any CSS and JS that is queued up via <craft2:Craft\includeCssFile()>, <craft2:Craft\includeJsFile()>, et al., and it will set the appropriate MIME type header based on the template file’s extension.
+This is a shortcut for <craft2:Craft\TemplatesService::render()>, but rather than returning the rendered template, it will output it to the browser and end the request. It will also include any CSS and JS that is queued up via <craft2:Craft\TemplatesService::includeCssFile()>, <craft2:Craft\TemplatesService::includeJsFile()>, et al., and it will set the appropriate MIME type header based on the template file’s extension.
 
 ### `$this->requireLogin()`
 

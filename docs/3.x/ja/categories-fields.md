@@ -7,7 +7,7 @@
 カテゴリフィールドの設定は、次の通りです。
 
 - **Source** – Which category group (or other category index source) the field should be able to relate categories from.
-- **ブランチ制限** – フィールドと一度に関連付けできるカテゴリ数の上限。（デフォルトは無制限です）
+- **ブランチ制限** – フィールドと一度に関連付けできるカテゴリ数の上限。 （デフォルトは無制限です）
 
   例えば、次のカテゴリグループがあるとします。
 
@@ -29,7 +29,7 @@
 
 ### マルチサイト設定
 
-マルチサイトがインストールされている場合、次の設定も有効になります。（「高度」のトグルボタンで表示されます）
+マルチサイトがインストールされている場合、次の設定も有効になります。 （「高度」のトグルボタンで表示されます）
 
 - **特定のサイトから カテゴリ を関連付けますか?** – 特定のサイトのカテゴリとの関連付けのみを許可するかどうか。
 
@@ -43,9 +43,9 @@
 
 カテゴリフィールドには、現在関連付けられているすべてのカテゴリのリストと、新しいカテゴリを追加するためのボタンがあります。
 
-「カテゴリーを追加」ボタンをクリックすると、すでに追加されているカテゴリの検索や選択ができるモーダルウィンドウが表示されます。このモーダルから新しいカテゴリを作るには、「新しいカテゴリー」ボタンをクリックします。
+「カテゴリーを追加」ボタンをクリックすると、すでに追加されているカテゴリの検索や選択ができるモーダルウィンドウが表示されます。 このモーダルから新しいカテゴリを作るには、「新しいカテゴリー」ボタンをクリックします。
 
-ネストされたカテゴリを選択すると、そのカテゴリに至るすべての先祖カテゴリも自動的に関連付けられます。同様に、メインフィールドの入力からカテゴリを削除すると、そのすべての子孫カテゴリも削除されます。
+ネストされたカテゴリを選択すると、そのカテゴリに至るすべての先祖カテゴリも自動的に関連付けられます。 同様に、メインフィールドの入力からカテゴリを削除すると、そのすべての子孫カテゴリも削除されます。
 
 ### インラインのカテゴリ編集
 
@@ -55,14 +55,19 @@
 
 ### カテゴリフィールドによるエレメントの照会
 
-カテゴリフィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、カテゴリフィールドのデータに基づいた結果をフィルタできます。
+カテゴリフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、カテゴリフィールドのデータに基づいた結果をフィルタできます。
 
 利用可能な値には、次のものが含まれます。
 
-| 値              | 取得するエレメント               |
-| -------------- | ----------------------- |
-| `':empty:'`    | 関連付けられたカテゴリを持たない。       |
-| `':notempty:'` | 少なくとも1つの関連付けられたカテゴリを持つ。 |
+| 値                                                                    | 取得するエレメント                                                   |
+| -------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `':empty:'`                                                          | 関連付けられたカテゴリを持たない。                                           |
+| `':notempty:'`                                                       | 少なくとも1つの関連付けられたカテゴリを持つ。                                     |
+| `100`                                                                | that are related to the category with an ID of 100.         |
+| `[100, 200]`                                                         | that are related to a category with an ID of 100 or 200.    |
+| `['and', 100, 200]`                                                  | that are related to the categories with IDs of 100 and 200. |
+| an [Category](craft3:craft\elements\Category) object               | that are related to the category.                           |
+| an [CategoryQuery](craft3:craft\elements\db\CategoryQuery) object | that are related to any of the resulting categories.        |
 
 ```twig
 {# Fetch entries with a related category #}
@@ -79,7 +84,7 @@
 {% set relatedCategories = entry.myFieldHandle %}
 ```
 
-これは、所定のフィールドで関連付けられたすべてのカテゴリを出力するよう準備された[カテゴリクエリ](dev/element-queries/category-queries.md)を提供します。
+これは、所定のフィールドで関連付けられたすべてのカテゴリを出力するよう準備された[カテゴリクエリ](categories.md#querying-categories)を提供します。
 
 関連付けられたすべてのカテゴリをループするには、[all()](craft3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
@@ -94,7 +99,7 @@
 {% endif %}
 ```
 
-または、[nav](dev/tags/nav.md) タグで階層リストとして表示することもできます。
+または、[nav](dev/tags.md#nav) タグで階層リストとして表示することもできます。
 
 ```twig
 {% set relatedCategories = entry.<FieldHandle.all() %}
@@ -131,7 +136,7 @@
 {% endif %}
 ```
 
-カテゴリクエリで[パラメータ](dev/element-queries/category-queries.md#parameters)をセットすることもできます。例えば、“leaves”（子を持たないカテゴリ）だけを取得するには、[leaves](dev/element-queries/category-queries.md#leaves) パラメータをセットします。
+カテゴリクエリで[パラメータ](categories.md#parameters)をセットすることもできます。 例えば、“leaves”（子を持たないカテゴリ）だけを取得するには、[leaves](categories.md#leaves) パラメータをセットします。
 
 ```twig
 {% set relatedCategories = entry.myFieldHandle
@@ -141,6 +146,6 @@
 
 ## 関連項目
 
-* [カテゴリクエリ](dev/element-queries/category-queries.md)
+* [カテゴリクエリ](categories.md#querying-categories)
 * <craft3:craft\elements\Category>
 * [リレーション](relations.md)

@@ -7,7 +7,7 @@ You can translate all of that static copy using **translation files**.
 Translation files are PHP files that live in `craft/translations/` (a folder you must create yourself). They simply return an array which maps the source language’s strings to the target language.
 
 For example, if you have a section called “News” in your English site, and you want it to be called “Noticias” in your Spanish site, create a file in `craft/translations/` called `es.php`:
- 
+
 ```
 craft/
 ├── config/

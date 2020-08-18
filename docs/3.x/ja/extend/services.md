@@ -9,11 +9,11 @@
 - プラグインのビジネスロジックの大半を含んでいます。
 - プラグイン（および、他のプラグイン）がアクセスできる、プラグインの API を定義します。
 
-例えば、Craft のフィールド管理コードは <craft3:craft\services\Fields> にあり、`Craft::$app->fields` で利用できます。それは、ハンドルによってフィールドモデルを返す `getFieldByHandle()` メソッドを持ちます。そうしたい場合は、`Craft::$app->fields->getFieldByHandle('foo')` で呼び出すことができます。
+例えば、Craft のフィールド管理コードは <craft3:craft\services\Fields> にあり、`Craft::$app->fields` で利用できます。 それは、ハンドルによってフィールドモデルを返す `getFieldByHandle()` メソッドを持ちます。 そうしたい場合は、`Craft::$app->fields->getFieldByHandle('foo')` で呼び出すことができます。
 
 ## サービスの作成
 
-プラグインのサービスクラスを作成するために、プラグインの `src/` ディレクトリ内に `services/` サブディレクトリを作成し、提供したいサービスのクラス名にちなんで名付けられたファイルを作成します。サービスクラスの名前を `Foo` にしたい場合、ファイルに `Foo.php` という名前をつけます。
+プラグインのサービスクラスを作成するために、プラグインの `src/` ディレクトリ内に `services/` サブディレクトリを作成し、提供したいサービスのクラス名にちなんで名付けられたファイルを作成します。 サービスクラスの名前を `Foo` にしたい場合、ファイルに `Foo.php` という名前をつけます。
 
 テキストエディタでファイルを開き、出発点としてこのテンプレートを使用してください。
 
@@ -46,7 +46,7 @@ public function init()
 
 ## サービスメソッドの呼び出し
 
-`MyPlugin::getInstance()->serviceName` を使用して、コードベースのどこからでもサービスにアクセスできます。そのため、サービス名が `foo` で `bar()` と名付けられたメソッドを持つ場合、次のように呼び出すことができます。
+`MyPlugin::getInstance()->serviceName` を使用して、コードベースのどこからでもサービスにアクセスできます。 そのため、サービス名が `foo` で `bar()` と名付けられたメソッドを持つ場合、次のように呼び出すことができます。
 
 ```php
 MyPlugin::getInstance()->foo->bar()
@@ -64,22 +64,22 @@ $this->foo->bar()
 
 Craft には、2つの一般的なモデル操作メソッドがあります。
 
-1. *特定のモデルクラス*（例：指定された <craft3:craft\models\CategoryGroup> モデルによって表されるカテゴリグループを保存する <craft3:craft\services\Categories::saveGroup()>）を受け入れるメソッド。私たちは、これらを**クラス指向メソッド**と呼びます。
+1. *特定のモデルクラス*（例：指定された <craft3:craft\models\CategoryGroup> モデルによって表されるカテゴリグループを保存する <craft3:craft\services\Categories::saveGroup()>）を受け入れるメソッド。 私たちは、これらを**クラス指向メソッド**と呼びます。
 
-2. *インターフェース*（例：実際のクラスかどうかに関わらず、指定された <craft3:craft\base\FieldInterface> インターフェースで表されるフィールドを削除する <craft3:craft\services\Fields::deleteField()>）を実装している限り、すべてのクラスを受け入れるメソッド。私たちは、これらを**インターフェース指向メソッド**と呼びます。
+2. *インターフェース*（例：実際のクラスかどうかに関わらず、指定された <craft3:craft\base\FieldInterface> インターフェースで表されるフィールドを削除する <craft3:craft\services\Fields::deleteField()>）を実装している限り、すべてのクラスを受け入れるメソッド。 私たちは、これらを**インターフェース指向メソッド**と呼びます。
 
-両方のタイプのメソッドは、1つの違いを除き同じ一般的な制御フローに従う必要があります。インターフェース指向メソッドは、アクションが実行される前後にモデルのコールバックメソッドをトリガし、モデルに独自のカスタムロジックを実行するチャンスを与えるべきです。
+両方のタイプのメソッドは、1つの違いを除き同じ一般的な制御フローに従う必要があります。 インターフェース指向メソッドは、アクションが実行される前後にモデルのコールバックメソッドをトリガし、モデルに独自のカスタムロジックを実行するチャンスを与えるべきです。
 
-ここに例を示します。<craft3:craft\services\Elements::saveElement()> は、`elements` データベーステーブルにエレメントのレコードを保存する前後で、エレメントモデルの `beforeSave()` および `afterSave()` メソッドを呼び出します。 エントリエレメント（<craft3:craft\elements\Entry>）は、エントリ特有の `entries` データベーステーブルに行を保存する機会として、`afterSave()` メソッドを使用します。
+ここに例を示します。 <craft3:craft\services\Elements::saveElement()> は、`elements` データベーステーブルにエレメントのレコードを保存する前後で、エレメントモデルの `beforeSave()` および `afterSave()` メソッドを呼び出します。 エントリエレメント（<craft3:craft\elements\Entry>）は、エントリ特有の `entries` データベーステーブルに行を保存する機会として、`afterSave()` メソッドを使用します。
 
 ### クラス指向メソッド
 
 クラス指向メソッドの制御フロー図です。
 
-![An example flow for a saveRecipe() method.](../../images/save-component--class.png)
+An example flow for a saveRecipe() method.
 
 ::: tip
-操作が複数データベースの変更を含む場合、データベーストランザクションで操作をラップする必要があるだけです。
+操作が複数データベースの変更を含む場合、データベーストランザクションで操作をラップする必要があるだけです。 :::
 :::
 
 完全なコードの実例は、次のようになります。
@@ -116,7 +116,7 @@ public function saveRecipe(Recipe $recipe, $runValidation = true)
 
 インターフェース指向メソッドの制御フロー図です。
 
-![An example flow for a saveIngredient() method.](../../images/save-component--interface.png)
+An example flow for a saveIngredient() method.
 
 完全なコードの実例は、次のようになります。
 

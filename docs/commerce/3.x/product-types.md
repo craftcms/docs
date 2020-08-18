@@ -2,7 +2,7 @@
 
 Product Types are a way to distinguish products in your system. They can determine the URL format of a product, whether it has multiple variants, and configure other product behaviors.
 
-You can also attach fields and tab layouts to Product Types just like you can with Craft’s [Entry Types](https://docs.craftcms.com/v3/sections-and-entries.html#entry-types).
+You can also attach fields and tab layouts to Product Types just like you can with Craft’s [Entry Types](https://craftcms.com/docs/3.x/entries.html#entry-types).
 
 <img src="./assets/product-type-entry-screen.png" width="797" alt="Edit Product Type page">
 
@@ -34,7 +34,7 @@ How you access properties in the SKU format depends on whether the product type 
 
 Be sure to choose this carefully and avoid using the `id` property to ensure a unique SKU.
 
-Since `id` refers to the element’s ID and Craft may have many other elements, this won’t be sequential. If you’d rather generate a unique sequential number, consider using Craft’s [seq()](https://docs.craftcms.com/v3/dev/functions.html#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
+Since `id` refers to the element’s ID and Craft may have many other elements, this won’t be sequential. If you’d rather generate a unique sequential number, consider using Craft’s [seq()](https://craftcms.com/docs/3.x/dev/functions.html#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
 
 The following example generates a sequential number, per variant, with the given product slug:
 
@@ -68,7 +68,7 @@ Whether or not to show the “Variant Title” field when adding or editing vari
 
 ### Products of this type have their own URLs
 
-This works just like Craft’s [section entry](https://docs.craftcms.com/v3/sections-and-entries.html) URLs.
+This works just like Craft’s [entry](https://craftcms.com/docs/3.x/entries.html) URLs.
 
 ::: tip
 When a site visitor hits the URL of a product, the `product` variable is automatically available to your templates, just like the `entry` variable for Craft’s entries.

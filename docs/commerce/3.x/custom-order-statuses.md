@@ -12,7 +12,7 @@ The only differences between an order and a cart is:
 
 When a customer completes their order, the `dateOrdered` is set to the current time and date and it gets a custom order status. The custom order status set depends on which order status you’ve established as the default.
 
-Custom order statuses can be managed from Commerce → Settings → Order Statuses in the control panel. There you can choose the default order status for new orders.
+Custom order statuses can be managed from Commerce → System Settings → Order Statuses in the control panel. There you can choose the default order status for new orders.
 
 ## Functionality
 
@@ -59,6 +59,12 @@ In addition to using order statuses to manage your orders, you can choose emails
 
 See [Order Status Emails](order-status-emails.md).
 
-## Line item statuses
+## Line Item Statuses
 
-Line item statuses are not the same as order statuses: they cannot trigger emails and are only for internal management of the order. Line items do not get a status by default, and can have a `null` or “None” status.
+Line item statuses are similar to order statuses except they’re for *internal* management of an order and do not trigger emails.
+
+You can create a new line item status by navigating to Commerce → System Settings → Line Item Statuses and choosing “New line item status”.
+
+When creating a line item status you can optionally designate that status to be applied by default using the “New line items get this status by default” checkbox. When checked, the status is applied by default when an order is completed.
+
+If no line item status is designated as the default, line items have a `null` or “None” status.

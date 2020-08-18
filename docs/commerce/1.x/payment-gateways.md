@@ -83,7 +83,7 @@ For general usage instructions, please see the main Omnipay repository.
 
 ### Important
 
-If you’re going to use the PayPal Express payment gateway you are required to change the default value of [tokenParam](https://docs.craftcms.com/v2/config-settings.html#tokenparam) in your Craft config.
+If you’re going to use the PayPal Express payment gateway you are required to change the default value of [tokenParam](https://craftcms.com/docs/2.x/config-settings.html#tokenparam) in your Craft config.
 
 Choose any different token name other than `token`, for example you could put `craftToken`. Otherwise redirects from PayPal will fail.
 

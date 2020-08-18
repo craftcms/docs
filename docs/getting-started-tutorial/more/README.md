@@ -6,7 +6,7 @@ If you’d like to explore further, here are some immediate tasks you might tack
 
 ## Beginner: extend the demo
 
-- Expose blog post author details. (Hint: use [`dd`](/3.x/dev/tags.md#dd) on `entry.author` to see what’s there, or consult the [User element API documentation](https://docs.craftcms.com/api/v3/craft-elements-user.html).)
+- Expose blog post author details. (Hint: use [`dd`](/3.x/dev/tags.md#dd) on `entry.author` to see what’s there, or consult the [User element API documentation](craft3:\craft\elements\User).)
 - Customize the homepage (`index.twig`) to match your site.
 - Add more posts and integrate [pagination](/3.x/dev/tags.md#paginate) in your templates.
 - Add an RSS feed using the example [in the documentation](/3.x/dev/examples/rss-feed.md).

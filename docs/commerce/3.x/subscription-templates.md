@@ -34,7 +34,7 @@ This example creates a form for each available plan, posting the selection to th
                 currentUser.id ?? null
             )
         %}
-        
+
         {# if we don’t have a saved payment soruce, collect details for the gateway #}
         {% if not paymentSources|length %}
             <div class="paymentForm">

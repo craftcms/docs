@@ -7,8 +7,8 @@ In the Lite edition of Craft Commerce only two fixed shipping costs can be confi
 1) A single fixed per order shipping cost
 2) A per item fixed shipping cost
 
-These shipping cost settings can be updated in Commerce → Settings → General. These costs show up on every order made when running the Lite edition of Craft Commerce. 
-You can set these to zero if no shipping costs are to be added to the order. 
+These shipping cost settings can be updated in Commerce → Settings → General. These costs show up on every order made when running the Lite edition of Craft Commerce.
+You can set these to zero if no shipping costs are to be added to the order.
 
 In the Pro edition of Commerce complex shipping rules including categories, zones and rules are available. The core components of the shipping system are:
 
@@ -16,7 +16,7 @@ In the Pro edition of Commerce complex shipping rules including categories, zone
 - Shipping zones
 - Shipping methods and rules
 
-Shipping methods and rules are at the core of the shipping engine in the Pro edition of Craft Commerce. 
+Shipping methods and rules are at the core of the shipping engine in the Pro edition of Craft Commerce.
 The shipping rules uses shipping categories, shipping zones, and additional order conditions to determine which shipping methods are available to the cart for your customer to select from.
 
 ## Shipping Categories
@@ -39,7 +39,7 @@ For example, you might make a zone for USA & Canada, and a different zone for th
 
 These zones can then be used within the shipping rules as conditions to match on the customers shipping address.
 
-Tax Zones are either country based (matching the shipping address to the list of countries in the zone) or state based (matching the shipping address to the list of states in the zone). In addition 
+Tax Zones are either country based (matching the shipping address to the list of countries in the zone) or state based (matching the shipping address to the list of states in the zone). In addition
 to country and state matching, an address can match zip code condition formula.
 
 ### Zip code condition formula
@@ -48,11 +48,11 @@ A zip code condition formula is a short expression of logic that returns either 
 
 Below are some examples of a zip code condition formula:
 
-`zipCode[0:2] == '60' or zipCode[0:2] == '70'`  
+`zipCode[0:2] == '60' or zipCode[0:2] == '70'`
 The zip code condition will match if the zip code has `60` or `70` as it’s first 2 characters.
 
-`zipCode in ['NG102', 'NG103', 'NG102']`  
-The zip code condition will match if the zip code is any of the above values. 
+`zipCode in ['NG102', 'NG103', 'NG102']`
+The zip code condition will match if the zip code is any of the above values.
 
 ## Shipping Methods
 

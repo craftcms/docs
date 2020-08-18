@@ -1,6 +1,6 @@
 # 日/時フィールド
 
-日付フィールドは date picker を提供します。同様に、オプションで time picker を提供します。
+日付フィールドは date picker を提供します。 同様に、オプションで time picker を提供します。
 
 ## 設定
 
@@ -10,7 +10,7 @@
 
 ### 日/時フィールドによるエレメントの照会
 
-日/時フィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、日/時フィールドのデータに基づいた結果をフィルタできます。
+日/時フィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、日/時フィールドのデータに基づいた結果をフィルタできます。
 
 利用可能な値には、次のものが含まれます。
 
@@ -34,7 +34,7 @@
 ```
 
 ::: tip
-[atom](dev/filters.md#atom) フィルタは日付を ISO-8601 タイムスタンプに変換します。
+[atom](dev/filters.md#atom) フィルタは日付を ISO-8601 タイムスタンプに変換します。 :::
 :::
 
 ### 日/時フィールドデータの操作
@@ -45,7 +45,8 @@
 {% set value = entry.myFieldHandle %}
 ```
 
-それは、選択された日付を表す [DateTime](http://php.net/manual/en/class.datetime.php) オブジェクトを提供します。日付が選択されていない場合、`null` になります。
+次に、PHP の [date()](http://php.net/manual/en/function.date.php) ファンクションのドキュメントを参照し、各フォーマットの文字の意味を確認してください。
+:::
 
 ```twig
 {% if entry.myFieldHandle %}
@@ -88,12 +89,12 @@ Craft と Twig は、必要に応じて使用できる日付を操作するた�
 ```
 
 ::: tip
-より良いブラウザサポートを[待っている間](https://caniuse.com/#feat=input-datetime)に `date` と `datetime-local` 入力欄を導入するため、[HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) ポリフィルを使用することができます。
+より良いブラウザサポートを[待っている間](https://caniuse.com/#feat=input-datetime)に `date` と `datetime-local` 入力欄を導入するため、[HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) ポリフィルを使用することができます。 :::
 :::
 
 #### タイムゾーンのカスタマイズ
 
-デフォルトでは、Craft は日付が UTC で投稿されていると想定します。Craft 3.1.6 から、入力欄の name を `fields[myFieldHandle][datetime]`、不可視項目の name を `fields[myFieldHandle][timezone]` とし、[有効な PHP タイムゾーン](http://php.net/manual/en/timezones.php)をセットすることによって、異なるタイムゾーンの日付を投稿できます。
+デフォルトでは、Craft は日付が UTC で投稿されていると想定します。 Craft 3.1.6 から、入力欄の name を `fields[myFieldHandle][datetime]`、不可視項目の name を `fields[myFieldHandle][timezone]` とし、[有効な PHP タイムゾーン](http://php.net/manual/en/timezones.php)をセットすることによって、異なるタイムゾーンの日付を投稿できます。
 
 ```twig
 {% set pt = 'America/Los_Angeles' %}
@@ -137,5 +138,5 @@ Craft と Twig は、必要に応じて使用できる日付を操作するた�
 時刻のフォーマット： <code>{{ craft.app.locale.getTimeFormat('short', 'php') }}</code>
 ```
 
-次に、PHP の [date()](http://php.net/manual/en/function.date.php) ファンクションのドキュメントを参照し、各フォーマットの文字の意味を確認してください。
+Then refer to PHP’s [date()](http://php.net/manual/en/function.date.php) function docs to see what each of the format letters mean.
 :::

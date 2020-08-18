@@ -4,7 +4,7 @@ A purchasable is a custom Craft Element Type that can be sold through the cart.
 
 A purchasable:
 
-- is an [element types](https://docs.craftcms.com/v3/extend/element-types.html)
+- is an [element type](https://craftcms.com/docs/3.x/extend/element-types.html)
 - implements `craft\commerce\base\PurchasableInterface`
 - should extend `craft\commerce\base\Purchasable`
 
@@ -28,8 +28,8 @@ The default price of the item.
 
 The stock keeping unit number of the purchasable. Must be unique based on the `commerce_purchasables` table.
 
-When you inherit from `craft\commerce\base\Purchasable` a unique validation rule for the `sku` attribute is added to the `rules()` method. 
-This validator ignored soft-deleted purchasables in it’s validator. Uniqueness if only checked for non-trashed purchasables. 
+When you inherit from `craft\commerce\base\Purchasable` a unique validation rule for the `sku` attribute is added to the `rules()` method.
+This validator ignored soft-deleted purchasables in it’s validator. Uniqueness if only checked for non-trashed purchasables.
 
 ### `getSnapshot()`
 
@@ -86,7 +86,7 @@ Defaults to the ID of the purchasable element, which would be sufficient for mos
 
 Soft-deletion was added in Craft 3.1 and all elements get soft-deleted automatically without needing to do anything.
 
-When you inherit from `craft\commerce\base\Purchasable` and your element is saved, we automatically update the `commerce_purchasables` table with the 
+When you inherit from `craft\commerce\base\Purchasable` and your element is saved, we automatically update the `commerce_purchasables` table with the
 purchasable’s `sku` so that all purchasables have a central location to check their `sku` uniqueness.
 
 The uniqueness of your `sku` is automatically validated for you when extending `craft\commerce\base\Purchasable`.
@@ -107,7 +107,7 @@ You would do this in the following way:
 if (!parent::beforeDelete()) {
     return false;
 }
-        
+
 $found = (new Query())->select(['[[p.sku]]', '[[e.id]]'])
     ->from('{{%commerce_purchasables}} p')
     ->leftJoin(Table::ELEMENTS . ' e', '[[p.id]]=[[e.id]]')
@@ -120,7 +120,7 @@ $found = (new Query())->select(['[[p.sku]]', '[[e.id]]'])
 
 ```php
 if ($found) {
-    
+
     $this->sku = $this->getSku() . '-1'; // make unique
 
     // Update variant table with new SKU

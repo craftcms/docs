@@ -17,7 +17,7 @@ Copyright © <YourName>
 
 ::: tip
 If you are going with the Craft License, don’t forget to change the `license` value in your `composer.json` file from `MIT` to `proprietary`.
-::: 
+:::
 
 ## Registering your Plugin
 

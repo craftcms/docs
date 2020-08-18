@@ -7,5 +7,8 @@ module.exports = {
   "mytablename": { title: "Replace this with your database table name, without any prefix." },
   "my/project/path": { title: "Replace this with your project path." },
   "my-base64-data": { title: "Replace this with your base64-encoded string." },
-  "myFile.ext": { title: "Replace this with your upload filename." }
+  "myFile.ext": { title: "Replace this with your upload filename." },
+  "my-machine": { title: "Replace with the name of your machine, using only letters, numbers, underscores, and hyphens." },
+  "myNamedTransform": { title: "Replace with the named transform you created in the control panel." },
+  "myAssetsField": { title: "Replace with your Assets field handle." }
 };

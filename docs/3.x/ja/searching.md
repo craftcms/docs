@@ -64,9 +64,13 @@ Craft は次の検索構文をサポートしています。
   * title
 
 
+::: warning
+Searching is a great way to quickly query content broadly across elements, but if you’re querying field attributes the most precise way is through that field type’s [query parameter](element-queries.md#executing-element-queries).
+:::
+
 ## テンプレート記法
 
-`craft.assets()`、`craft.entries()`、`craft.tags()`、および、`craft.users()`は、検索クエリを指定したエレメントの絞り込みに利用できる `search` パラメータをサポートしています。
+検索結果をベストマッチからワーストマッチの順に並び替えたい場合、`orderBy` パラメータに `'score'` をセットすることもできます。
 
 ```twig
 {# Get the user's search query from the 'q' query-string param #}
@@ -80,7 +84,7 @@ Craft は次の検索構文をサポートしています。
 
 ### スコアによる検索結果の順位付け
 
-検索結果をベストマッチからワーストマッチの順に並び替えたい場合、`orderBy` パラメータに `'score'` をセットすることもできます。
+この場合、返されるすべてのエレメントに `searchScore` 属性がセットされ、それぞれの検索スコアを知ることができます。
 
 ```twig
 {% set results = craft.entries()
@@ -89,18 +93,20 @@ Craft は次の検索構文をサポートしています。
     .all() %}
 ```
 
-この場合、返されるすべてのエレメントに `searchScore` 属性がセットされ、それぞれの検索スコアを知ることができます。
-
 ::: tip
 動的な検索結果をリスト化する完全な例については、[検索フォーム](dev/examples/search-form.md)チュートリアルを参照してください。
 :::
 
+::: tip
+See our [Search Form](dev/examples/search-form.md) tutorial for a complete example of listing dynamic search results.
+:::
+
 ## 検索インデックスの再構築
 
-Craft は検索インデックスを可能な限り最新に保つよう、最善を尽くしています。しかし、その一部を不正確にするかもしれない可能性がいくつかあります。検索インデックスが最新かつ最高データでないと疑われる場合、設定にある検索インデックスの再構築ツールで Craft に再構築させることができます。
+Craft は検索インデックスを可能な限り最新に保つよう、最善を尽くしています。 しかし、その一部を不正確にするかもしれない可能性がいくつかあります。 検索インデックスが最新かつ最高データでないと疑われる場合、設定にある検索インデックスの再構築ツールで Craft に再構築させることができます。
 
 ```bash
-./craft resave/entries
+php craft resave/entries --update-search-index
 ```
 
-You can specify which entries should be resaved with the `--section` and `--type` options, among others. Run `resave/entries --help` to see a full list of supported options. 
+You can specify which entries should be resaved with the `--section` and `--type` options, among others. Run `resave/entries --help` to see a full list of supported options.

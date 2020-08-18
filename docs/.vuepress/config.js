@@ -52,13 +52,14 @@ module.exports = {
     docSets: [
       require("./sets/craft-cms"),
       require("./sets/craft-commerce"),
+      require("./sets/craft-nitro"),
       require("./sets/getting-started-tutorial")
     ],
     docsRepo: "craftcms/docs",
     docsDir: "docs",
     docsBranch: "main",
     searchPlaceholder:
-      "Search the Craft and Commerce docs (Press “/” to focus)",
+      "Search Craft, Commerce, and Nitro docs (Press “/” to focus)",
     editLinks: true,
     nextLinks: true,
     prevLinks: true,
