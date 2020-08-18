@@ -13,8 +13,8 @@ Accepts: Object
 
 The `setupDb` parameter controls how the database is setup before tests. It accepts an object with the following parameters.
 
-- **folder** (required): What folder the Project Config files must be copied from. Typically, this is `config/project` starting from the root of your project. The contents of that folder will be copied into `tests/_craft/config/project`.
-- **reset**: Whether Project Config should be reset before each test is run. If enabled, Craft will reset the Project Config state to what is specified in the `folder` parameter. Can safely be disabled if you are not making changes to project config during your tests.
+- **folder** (required): What folder the Project Config files must be copied from.\ Typically, this is `config/project` starting from the root of your project. The contents of that folder will be copied into `tests/_craft/config/project`.
+- **reset**: Whether Project Config should be reset before each test is run.\ If enabled, Craft will reset the Project Config state to what is specified in the `folder` parameter. Can safely be disabled if you are not making changes to project config during your tests.
 
 ::: warning
 If you have enabled `projectConfig`, regular DB based fixtures for Project Config data (i.e sections) may cause syncing issues. It is recommended to setup your environment using the `project.yml` file only.
