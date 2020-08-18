@@ -144,7 +144,7 @@ import {
   getSameContentForVersion,
 } from "../util";
 
-import { getStorage, setStorage } from "../Storage";
+import { getStorage, setStorage, unsetStorage } from "../Storage";
 
 export default {
   name: "Layout",
@@ -266,7 +266,6 @@ export default {
             element.scrollIntoView();
           }
         }, 750);
-
       }
     }
 
@@ -352,9 +351,15 @@ export default {
       this.handleColorModeUpdate(true);
     },
 
-    handleColorModeUpdate(save = false) {
-      if (save) {
-        setStorage("theme", this.colorMode, this.$site.base);
+    handleColorModeUpdate(updateStorage = false) {
+      if (updateStorage) {
+        if (this.colorMode !== this.getBrowserColorMode()) {
+          // save the current setting if != browser default
+          setStorage("theme", this.colorMode, this.$site.base);
+        } else {
+          // remove saved setting if it equals the browser default
+          unsetStorage("theme", this.$site.base);
+        }
       }
 
       let htmlElement = document.getElementsByTagName("html")[0];
@@ -374,13 +379,22 @@ export default {
       if (storedValue) {
         this.isDark = storedValue === "dark";
       } else if (!window.matchMedia) {
-        // browser doesn’t support `matchMedia`, default to light
-        this.isDark = false;
-      } else {
-        this.isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        this.isDark = this.getBrowserPrefersDark();
       }
 
       this.handleColorModeUpdate();
+    },
+
+    getBrowserColorMode() {
+      return this.getBrowserPrefersDark() ? "dark" : "light";
+    },
+
+    getBrowserPrefersDark() {
+      if (!window.matchMedia) {
+        return false;
+      }
+
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
     },
 
     // side swipe

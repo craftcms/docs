@@ -24,4 +24,15 @@ const getStorage = function(name, base) {
   return localStorage[name];
 };
 
-export { storagePrefix, getStorage, setStorage };
+const unsetStorage = function(name, base) {
+  if (typeof localStorage === "undefined") {
+    return;
+  }
+  name = storagePrefix(base) + name;
+  if (typeof localStorage[name] === "undefined") {
+    return;
+  }
+  delete localStorage[name];
+};
+
+export { storagePrefix, getStorage, setStorage, unsetStorage };
