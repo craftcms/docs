@@ -275,6 +275,8 @@ export default {
         this.isSidebarOpen = false;
       });
     });
+
+    this.detectColorScheme();
   },
 
   methods: {
