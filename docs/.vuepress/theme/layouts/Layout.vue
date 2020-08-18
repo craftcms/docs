@@ -256,10 +256,17 @@ export default {
       const element = document.getElementById(id);
 
       if (element) {
-        const yOffset = -54;
-        const y =
-          element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: "smooth" });
+        // const yOffset = -54;
+        // const y =
+        //   element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        // window.scrollTo({ top: y, behavior: "smooth" });
+
+        setTimeout(() => {
+          if (element) {
+            element.scrollIntoView();
+          }
+        }, 750);
+
       }
     }
 
