@@ -6,13 +6,13 @@ Shipping methods are only available in the [Pro edition](editions.md) of Craft C
 
 Several options are available for adding shipping costs to the cart:
 
-1. **Use the [included shipping method and shipping rules engine](shipping.md).**
+1. **Use the [included shipping method and shipping rules engine](shipping.md).**\
    Define your rules and prices based on individual product details and the cart as a whole. Costs may come from the overall order, weight, cost percentage, and per-item attributes. This engine is fairly powerful and can meet the needs of most small businesses with simple to moderately complex shipping needs.
 
-2. **Write an order adjuster class.**
+2. **Write an order adjuster class.**\
    If you need to add dynamic shipping costs to the cart _without_ providing options to your customer, an order adjuster class offers flexibility beyond the native shipping engine UI.
 
-3. **Write a plugin or module that provides its own shipping method.**
+3. **Write a plugin or module that provides its own shipping method.**\
    You can still utilize the shipping engine in option 1, but add functionality that presents more than one option to the customer, utilizes an external API, or uses your own custom pricing logic.
 
 ::: tip
