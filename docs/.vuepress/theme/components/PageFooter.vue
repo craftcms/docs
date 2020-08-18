@@ -10,9 +10,9 @@
           <div class="pane options">
             <h4 class="heading block">
               {{
-                hasVoted
-                  ? this.$themeConfig.feedback.thanks
-                  : this.$themeConfig.feedback.helpful
+              hasVoted
+              ? this.$themeConfig.feedback.thanks
+              : this.$themeConfig.feedback.helpful
               }}
             </h4>
             <div class="vote-buttons inline-block">
@@ -39,12 +39,11 @@
               :href="getIssueUrl()"
               target="_blank"
               rel="noopener"
-              >{{ this.$themeConfig.feedback.more }}</a
-            >
+            >{{ this.$themeConfig.feedback.more }}</a>
           </div>
         </div>
       </div>
-      <div class="w-2/5 text-sm text-right">
+      <div class="footer-links">
         <p>
           <a href="https://craftcms.com/contact" target="_blank" rel="noopener">
             <span class="right-footer-icon">
@@ -61,6 +60,9 @@
             back to craftcms.com
           </a>
         </p>
+        <div class="switch-wrapper block xl:hidden">
+          <ColorModeSwitch v-on="$listeners" :on="isDark" />
+        </div>
       </div>
     </div>
   </div>
@@ -111,8 +113,22 @@ h4 {
 }
 
 .right-footer-icon {
-  @apply inline-block relative mr-1;
+  @apply inline-block relative mr-1 text-light-slate opacity-25;
   top: 2px;
+}
+
+.footer-links {
+  @apply w-2/5 text-sm text-right;
+
+  a:hover .right-footer-icon {
+    @apply opacity-100;
+  }
+
+  .switch-wrapper {
+    @apply relative;
+    right: -2px;
+    top: -0.575rem;
+  }
 }
 
 .option {
@@ -163,18 +179,21 @@ import ThumbUp from "../icons/ThumbUp";
 import ThumbDown from "../icons/ThumbDown";
 import Envelope from "../icons/Envelope";
 import Reply from "../icons/Reply";
+import ColorModeSwitch from "./ColorModeSwitch";
 
 export default {
   components: {
     ThumbUp,
     ThumbDown,
     Envelope,
-    Reply
+    Reply,
+    ColorModeSwitch,
   },
+  props: ["isDark"],
   data() {
     return {
       vote: null,
-      hasVoted: null
+      hasVoted: null,
     };
   },
   mounted() {
@@ -211,7 +230,7 @@ export default {
     getVoteForPath(path) {
       let votes = this.getStoredVotes();
 
-      let votesForPath = votes.filter(item => {
+      let votesForPath = votes.filter((item) => {
         return item.path === path;
       }, this);
 
@@ -235,15 +254,14 @@ export default {
     },
     getIssueUrl() {
       return encodeURI(
-        `https://github.com/${this.$themeConfig.docsRepo}/issues/new?title=Improve “${this
-          .$page.title}”&body=I have a suggestion for https://craftcms.com/docs${this.$route.fullPath}:\n`
+        `https://github.com/${this.$themeConfig.docsRepo}/issues/new?title=Improve “${this.$page.title}”&body=I have a suggestion for https://craftcms.com/docs${this.$route.fullPath}:\n`
       );
-    }
+    },
   },
   watch: {
     $route() {
       this.refreshState();
-    }
-  }
+    },
+  },
 };
 </script>

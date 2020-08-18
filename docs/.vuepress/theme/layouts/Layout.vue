@@ -19,10 +19,7 @@
     <div id="main" class="main-container">
       <div id="top-bar" class="top-bar">
         <Hamburger @click="toggleSidebar" />
-        <div
-          id="search"
-          class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center"
-        >
+        <div id="search" class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center">
           <SearchBox
             v-if="
               $site.themeConfig.search !== false &&
@@ -31,7 +28,12 @@
           />
         </div>
       </div>
-      <Page :sidebar-items="sidebarItems" :heading-items="headingItems">
+      <Page
+        :sidebar-items="sidebarItems"
+        :heading-items="headingItems"
+        :is-dark="isDark"
+        @toggle-color-mode="toggleColorMode"
+      >
         <template #top>
           <slot name="page-top" />
         </template>
@@ -40,10 +42,7 @@
         </template>
       </Page>
     </div>
-    <RightBar
-      :heading-items="headingItems"
-      @toggle-color-mode="handleColorModeUpdate"
-    />
+    <RightBar :heading-items="headingItems" :is-dark="isDark" @toggle-color-mode="toggleColorMode" />
   </div>
 </template>
 
@@ -142,8 +141,10 @@ import {
   getAlternateVersion,
   getPageWithRelativePath,
   fixDoubleSlashes,
-  getSameContentForVersion
+  getSameContentForVersion,
 } from "../util";
+
+import { getStorage, setStorage } from "../Storage";
 
 export default {
   name: "Layout",
@@ -153,7 +154,7 @@ export default {
     LeftBar,
     RightBar,
     SearchBox,
-    Hamburger
+    Hamburger,
   },
 
   data() {
@@ -162,11 +163,11 @@ export default {
       isSidebarTransitioning: false,
       version: null,
       suggestedUpdatePath: null,
-      colorMode: null,
+      isDark: false,
       colorModes: {
         light: "theme-light",
-        dark: "theme-dark"
-      }
+        dark: "theme-dark",
+      },
     };
   },
 
@@ -201,10 +202,9 @@ export default {
         {
           "no-navbar": !this.shouldShowNavbar,
           "sidebar-open": this.isSidebarOpen,
-          "sidebar-transitioning": this.isSidebarTransitioning
+          "sidebar-transitioning": this.isSidebarTransitioning,
         },
         userPageClass,
-        this.colorMode
       ];
     },
 
@@ -234,7 +234,11 @@ export default {
 
     headingItems() {
       return resolveHeaders(this.$page);
-    }
+    },
+
+    colorMode() {
+      return this.isDark ? "dark" : "light";
+    },
   },
 
   mounted() {
@@ -259,7 +263,7 @@ export default {
       }
     }
 
-    this.$nextTick(function() {
+    this.$nextTick(function () {
       window.addEventListener("resize", () => {
         this.isSidebarOpen = false;
       });
@@ -334,15 +338,45 @@ export default {
       this.$router.push(fixDoubleSlashes(targetPath));
     },
 
-    handleColorModeUpdate(e) {
-      this.colorMode = this.colorModes[e];
+    toggleColorMode() {
+      this.isDark = !this.isDark;
+      this.handleColorModeUpdate();
+    },
+
+    handleColorModeUpdate() {
+      setStorage("theme", this.colorMode, this.$site.base);
+
+      let htmlElement = document.getElementsByTagName("html")[0];
+
+      for (const [key, value] of Object.entries(this.colorModes)) {
+        if (this.colorMode === key) {
+          htmlElement.classList.add(value);
+        } else {
+          htmlElement.classList.remove(value);
+        }
+      }
+    },
+
+    detectColorScheme() {
+      let storedValue = getStorage("theme", this.$site.base);
+
+      if (storedValue) {
+        this.isDark = storedValue === "dark";
+      } else if (!window.matchMedia) {
+        // browser doesn’t support `matchMedia`, default to light
+        this.isDark = false;
+      } else {
+        this.isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      }
+
+      this.handleColorModeUpdate();
     },
 
     // side swipe
     onTouchStart(e) {
       this.touchStart = {
         x: e.changedTouches[0].clientX,
-        y: e.changedTouches[0].clientY
+        y: e.changedTouches[0].clientY,
       };
     },
 
@@ -369,7 +403,7 @@ export default {
     dewidow() {
       let typemate = new TypeMate(document.getElementById("content"));
       typemate.apply();
-    }
+    },
   },
 
   watch: {
@@ -377,7 +411,7 @@ export default {
       this.$nextTick(() => {
         this.dewidow();
       });
-    }
-  }
+    },
+  },
 };
 </script>

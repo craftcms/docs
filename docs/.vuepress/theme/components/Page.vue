@@ -8,7 +8,7 @@
 
     <PageNav v-bind="{ sidebarItems }" />
 
-    <PageFooter />
+    <PageFooter v-on="$listeners" :is-dark="isDark" />
 
     <slot name="bottom" />
   </main>
@@ -28,6 +28,6 @@ import PageFooter from "./PageFooter";
 export default {
   name: "Page",
   components: { PageEdit, PageNav, PageFooter },
-  props: ["sidebarItems"]
+  props: ["sidebarItems", "isDark"],
 };
 </script>

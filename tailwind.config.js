@@ -14,7 +14,8 @@ module.exports = {
         softer: "#fafbfe",
         blue: "#4a7cf6",
         red: "#da5a47",
-        cinder: "#131119"
+        cinder: "#131119",
+        "light-slate": "#718096"
       },
       width: {
         80: "20rem"

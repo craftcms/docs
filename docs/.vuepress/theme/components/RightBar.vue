@@ -1,26 +1,24 @@
 <template>
   <div class="right-bar">
-    <ColorModeToggle v-on="$listeners" />
+    <div class="switch-wrapper hidden xl:block">
+      <ColorModeSwitch v-on="$listeners" :on="isDark" />
+    </div>
     <div class="sidebar-link-wrapper">
-      <SidebarLinks
-        :depth="0"
-        :items="headingItems"
-        fixed-heading="On this Page"
-      />
+      <SidebarLinks :depth="0" :items="headingItems" fixed-heading="On this Page" />
     </div>
   </div>
 </template>
 
 <script>
 import SidebarLinks from "./SidebarLinks";
-import ColorModeToggle from "./ColorModeToggle";
+import ColorModeSwitch from "./ColorModeSwitch";
 
 export default {
   components: {
     SidebarLinks,
-    ColorModeToggle
+    ColorModeSwitch,
   },
-  props: ["headingItems"],
+  props: ["headingItems", "isDark"],
 };
 </script>
 
@@ -33,7 +31,7 @@ export default {
     padding: 0.35rem 0;
     border-left: none;
   }
-  
+
   .sidebar-link-wrapper {
     @apply fixed mt-24 w-64 pt-1 overflow-hidden;
   }
@@ -59,6 +57,12 @@ export default {
         @apply opacity-100 text-slate;
       }
     }
+  }
+
+  .switch-wrapper {
+    @apply absolute;
+    top: 0.25rem;
+    right: 1.25rem;
   }
 }
 

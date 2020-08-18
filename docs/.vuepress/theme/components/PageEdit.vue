@@ -1,9 +1,12 @@
 <template>
   <footer class="page-edit content-wrapper">
     <div v-if="editLink" class="edit-link">
-      <a :href="editLink" target="_blank" rel="noopener noreferrer">{{
+      <a :href="editLink" target="_blank" rel="noopener noreferrer">
+        {{
         editLinkText
-      }}<OutboundLink /></a>
+        }}
+        <OutboundLink />
+      </a>
     </div>
 
     <div v-if="lastUpdated" class="last-updated">
@@ -44,7 +47,7 @@ export default {
         repo,
         docsDir = "",
         docsBranch = "master",
-        docsRepo = repo
+        docsRepo = repo,
       } = this.$site.themeConfig;
 
       if (showEditLink && docsRepo && this.$page.relativePath) {
@@ -65,7 +68,7 @@ export default {
         this.$site.themeConfig.editLinkText ||
         `Edit this page`
       );
-    }
+    },
   },
 
   methods: {
@@ -80,14 +83,14 @@ export default {
         (docsDir ? docsDir.replace(endingSlashRE, "") + "/" : "") +
         path
       );
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="postcss">
 .edit-link {
-  @apply inline-block;
+  @apply inline-block text-sm;
 }
 
 .content-wrapper {
