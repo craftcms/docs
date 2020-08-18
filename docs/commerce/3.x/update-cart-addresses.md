@@ -155,7 +155,7 @@ You may need to create custom routes to allow customers to manage these addresse
 An address in the cart may be updated by passing the `id` part of the address model e.g. `shippingAddress[id]`.
 
 ::: warning
-If the ID of the address belongs to a customer, the customer’s address will also be updated at the same time. 
+If the ID of the address belongs to a customer, the customer’s address will also be updated at the same time.
 :::
 
 This example starts a form that could be used to update the shipping address attached to the cart:
@@ -169,12 +169,12 @@ This example starts a form that could be used to update the shipping address att
     <input type="hidden" name="cartUpdatedNotice" value="Updated addresses.">
     {{ csrfInput() }}
     <input type="hidden" name="shippingAddress[id]" value="{{ address.id }}">
-    
+
     <input type="text" name="shippingAddress[firstName]" value="{{ address.firstName }}">
     <input type="text" name="shippingAddress[lastName]" value="{{ address.lastName }}">
 
     {# ... #}
-    
+
     <button type="submit">Update Address</button>
 </form>
 ```

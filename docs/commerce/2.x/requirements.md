@@ -1,6 +1,6 @@
 # Server Requirements
 
-The server requirements for Commerce are the [same as Craft 3.1](https://docs.craftcms.com/v3/requirements.html) but with the following additions
+The server requirements for Commerce are the [same as Craft 3](https://craftcms.com/docs/3.x/requirements.html) but with the following additions.
 
 ## PHP package dependencies
 ```

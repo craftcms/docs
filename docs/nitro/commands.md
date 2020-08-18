@@ -172,12 +172,12 @@ nitro db backup [<options>]
 $ nitro db backup
   1 - postgres_11_5432
   2 - mysql_5.7_3306
-Select database engine [1] 
+Select database engine [1]
   1 - all-dbs
   2 - postgres
   3 - nitro
   4 - project-one
-Select database to backup? [1] 
+Select database to backup? [1]
 Created backup "all-dbs-200519_100730.sql", downloading...
 Backup completed and stored in "/Users/vin/.nitro/backups/nitro-dev/postgres_11_5432/all-dbs-200519_100730.sql"
 ```
@@ -203,7 +203,7 @@ nitro db import <file> [<options>]
 $ nitro db import mybackup.sql
   1 - mysql_5.7_3306
   2 - postgres_11_5432
-Select database engine [1] 
+Select database engine [1]
 Enter the database name to create for the import: new-project
 Uploading "mybackup.sql" into "nitro-dev" (large files may take a while)...
 Successfully import the database backup into new-project
@@ -229,10 +229,10 @@ nitro db remove [<options>]
 $ nitro db remove
   1 - postgres_11_5432
   2 - mysql_5.7_3306
-Select database engine: [1] 
+Select database engine: [1]
   1 - nitro
   2 - project-one
- 
+
 Are you sure you want to permanently remove the database nitro? [no]
 Removed database nitro
 ```
@@ -257,7 +257,7 @@ nitro db restart [<options>]
 $ nitro db restart
   1 - postgres_11_5432
   2 - mysql_5.7_3306
-Select database engine to restart: [1]  
+Select database engine to restart: [1]
 Restarted database engine postgres_11_5432
 ```
 
@@ -281,7 +281,7 @@ nitro db start [<options>]
 $ nitro db start
   1 - postgres_11_5432
   2 - mysql_5.7_3306
-Select database engine to start: [1]  
+Select database engine to start: [1]
 Started database engine postgres_11_5432
 ```
 
@@ -396,7 +396,7 @@ PHP version: 7.4
 Need help setting up Xdebug?
 https://github.com/craftcms/nitro/blob/master/XDEBUG.md
 
-Need help using Nitro? 
+Need help using Nitro?
 https://github.com/craftcms/nitro/blob/master/README.md
 ```
 
@@ -579,7 +579,7 @@ nitro nginx stop [<options>]
 Outputs PHP ini setting values.
 
 ```
-nitro php iniget [<options>] <setting> 
+nitro php iniget [<options>] <setting>
 ```
 
 #### Options
@@ -592,7 +592,7 @@ nitro php iniget [<options>] <setting>
 Changes PHP ini settings from the command line. This command will prompt for the setting to change, including e.g. `max_execution_time`, `max_input_vars`, `max_input_time`, `max_file_upload`, `memory_limit`, `upload_max_filesize`.
 
 ```
-nitro php iniset [<options>] <setting> <value> 
+nitro php iniset [<options>] <setting> <value>
 ```
 
 #### Options

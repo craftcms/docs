@@ -45,7 +45,7 @@ Raised before an order is saved.
 
 ### Params
 
-- `type` – The transaction type `authorize`,`purchase`,`refund`,`capture` 
+- `type` – The transaction type `authorize`,`purchase`,`refund`,`capture`
 - `request` – The Omnipay Request object (Omnipay\Common\Message\AbstractRequest)
 - `transaction` – The [Transaction model](transaction-model.md) for this request
 
@@ -277,7 +277,7 @@ Raised after a transaction was attempted to be refunded.
 
 ```php
 craft()->on('commerce_payments.onRefundTransaction', function($event) {
-    $transaction = $event->params['transaction];    
+    $transaction = $event->params['transaction];
     if ($transaction->status == 'success') {
         $transaction->order->orderStatusId = 2;
         craft()->commerce_orders->saveOrder($transaction->order);
@@ -312,7 +312,7 @@ craft()->on('commerce_cart.onAddToCart', ['MyClass', 'beforAddToCartHandlerMetho
 ```
 
 ::: tip
-Event handlers can prevent the add to cart by setting `$event->performAction` to `false`. 
+Event handlers can prevent the add to cart by setting `$event->performAction` to `false`.
 :::
 
 ## commerce_cart.onAddToCart

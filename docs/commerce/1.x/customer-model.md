@@ -18,7 +18,7 @@ If you add the [Customer Info](customer-info-fields.md) field to the user profil
 
 ### user
 
-Returns a [UserModel](https://docs.craftcms.com/v2/templating/usermodel.html#simple-output) object if the customer is logged in, or `null` if the customer is a guest.
+Returns a [UserModel](https://craftcms.com/docs/2.x/templating/usermodel.html) object if the customer is logged in, or `null` if the customer is a guest.
 
 ### addresses
 

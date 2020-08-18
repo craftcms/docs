@@ -2,9 +2,9 @@
 
 [Disqus](https://disqus.com/) のようなサードパーティのコメントサービスを利用して、Craft のエントリページに簡単にコメント機能を追加することができます。
 
-これを行うためには、コメントを許可する単一のエントリを表示するための出力設定が必要です。この例では、`templates/_entry.twig` にあるテンプレートを使用します。
+これを行うためには、コメントを許可する単一のエントリを表示するための出力設定が必要です。 この例では、`templates/_entry.twig` にあるテンプレートを使用します。
 
-あなたは Disqus にサインアップし、Disqus のサイトの「Admin → Settings → Install」からユニバーサルコードを入手できるでしょう。Disqus には意図したポストへのコメントを保証するために使うことができる、規定のコンフィグ変数があります。次のコメントを探してください。
+あなたは Disqus にサインアップし、Disqus のサイトの「Admin → Settings → Install」からユニバーサルコードを入手できるでしょう。 Disqus には意図したポストへのコメントを保証するために使うことができる、規定のコンフィグ変数があります。  次のコメントを探してください。
 
 ```javascript
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */

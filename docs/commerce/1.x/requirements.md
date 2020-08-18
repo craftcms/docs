@@ -1,6 +1,6 @@
 # Requirements
 
-The server requirements for Commerce 1.x are the [same as Craft 2.x](https://docs.craftcms.com/v2/requirements.html) but with the following additions:
+The server requirements for Commerce 1.x are the [same as Craft 2.x](https://craftcms.com/docs/2.x/requirements.html) but with the following additions:
 
 ## PHP
 

@@ -36,8 +36,8 @@ Choose a new path on your computer where you’d like to install Craft CMS. It c
 
 We’ll tell Composer where to add these new files using an _absolute_ or _relative_ path:
 
-- The full _absolute_ path is long and specific, like `/Users/bjorn/projects/tutorial` or `C:\Users\bjorn\projects\tutorial`.
-- To use a _relative_ path, you first need to use the `cd` command and change your working directory to the existing parent folder. The relative path you provide will be within this working directory. If you’ve navigated to `/Users/bjorn/projects`, for example, you can simply pass Composer the value of `tutorial` to have that folder created.
+- The full _absolute_ path is long and specific, like `/Users/oli/projects/tutorial` or `C:\Users\oli\projects\tutorial`.
+- To use a _relative_ path, you first need to use the `cd` command and change your working directory to the existing parent folder. The relative path you provide will be within this working directory. If you’ve navigated to `/Users/oli/projects`, for example, you can simply pass Composer the value of `tutorial` to have that folder created.
 
 Whichever option you choose, run the following command and substitute your desired path for `<Path>`:
 

@@ -1,8 +1,8 @@
 /**
  * Each key, when used as an anchor prefix, will be expanded into a full link
  * based on the rules of `format`.
- * 
- * Format can be... 
+ *
+ * Format can be...
  * - `internal` for Craft+Commerce class docs
  * - `yii2` and `yii1` for Yii docs
  * - `config` for Craft config settings

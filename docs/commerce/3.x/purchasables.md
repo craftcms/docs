@@ -1,8 +1,8 @@
 # Purchasables
 
-The core of anything sold with Commerce is a purchasable, a custom [element type](https://docs.craftcms.com/v3/extend/element-types.html) that can be added to a cart.
+The core of anything sold with Commerce is a purchasable, a custom [element type](https://craftcms.com/docs/3.x/extend/element-types.html) that can be added to a cart.
 
-It should be extended to add useful attributes like Commerce’s included [product variant](products.md#variants) and [donation](donations.md) purchasables. [Plugins and modules](https://docs.craftcms.com/v3/extend) can provide their own purchasables.
+It should be extended to add useful attributes like Commerce’s included [product variant](products.md#variants) and [donation](donations.md) purchasables. [Plugins and modules](https://craftcms.com/docs/3.x/extend/) can provide their own purchasables.
 
 ## Purchasables and Line Items
 
@@ -214,7 +214,7 @@ Defaults to the ID of the purchasable element, which would be sufficient for mos
 ## Purchasable deletion
 
 ::: tip
-Craft 3.1 added [soft delete support](https://docs.craftcms.com/v3/extend/soft-deletes.html) for all element types, including purchasables. You might want to familiarize yourself with soft deletion before adding delete and restore capabilities for your purchasable element.
+Craft 3.1 added [soft delete support](https://craftcms.com/docs/3.x/extend/soft-deletes.html) for all element types, including purchasables. You might want to familiarize yourself with soft deletion before adding delete and restore capabilities for your purchasable element.
 :::
 
 When you inherit from `craft\commerce\base\Purchasable` and your element is saved, Commerce automatically updates the `commerce_purchasables` table with the purchasable’s `sku` so that all purchasables have a central location to check their `sku` uniqueness.

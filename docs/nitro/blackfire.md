@@ -9,20 +9,20 @@ If Xdebug is active it may significantly degrade performance measures. You can d
 :::
 
 ## With Browser Extensions
- 
+
 1. Log in or create an account at [blackfire.io](https://blackfire.io/).
 
-2. SSH into Nitro: 
+2. SSH into Nitro:
 ```
 nitro ssh
 ```
 
-3. Configure the local agent with the [server credentials](https://blackfire.io/my/settings/credentials): 
+3. Configure the local agent with the [server credentials](https://blackfire.io/my/settings/credentials):
 ```
 sudo blackfire-agent --register
 ```
 
-4. Restart the agent service: 
+4. Restart the agent service:
 ```
 sudo /etc/init.d/blackfire-agent restart
 ```

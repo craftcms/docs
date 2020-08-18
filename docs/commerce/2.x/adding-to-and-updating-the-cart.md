@@ -45,7 +45,7 @@ The above is a simple example, if your product’s type has multiple variants yo
 
 ::: warning
 In the Lite edition of Craft Commerce only single line item can exist in the cart. Whenever a customer adds something to the cart, it replaces whatever item was in the cart.
-If multiple items are added to the cart in a single request, only the last item submitted is added to the cart.    
+If multiple items are added to the cart in a single request, only the last item submitted is added to the cart.
 :::
 
 ::: warning
@@ -183,12 +183,12 @@ Example:
 
 By default the current cart begins blank and customers add things to it.
 
-If the customer is a registered user they may expect to be able to log into another computer and continue their cart from 
-a previous session. If the user arrives at the store page logged-in, without a cart in session the most recent cart belonging to that user is restored to the session.  
+If the customer is a registered user they may expect to be able to log into another computer and continue their cart from
+a previous session. If the user arrives at the store page logged-in, without a cart in session the most recent cart belonging to that user is restored to the session.
 
 If the user logs in, but already has a cart in session (even an empty one), this does not happen automatically.
 
-When retrieving the current cart you can optionally tell the system to merge in the line items from a previous session 
+When retrieving the current cart you can optionally tell the system to merge in the line items from a previous session
 in 2 ways:
 
 1) Submit the `mergeCarts` parameter in either the `commerce/cart/get-cart` ajax controller action or the `commerce/cart/update-cart` controller action.
@@ -199,11 +199,11 @@ in 2 ways:
 
 Please note, using the above two methods will only merge previous carts of a logged-in user and only carts that belong to that user. If the user is a guest, no errors are raised, and everything behaves as normal.
 
-Calling `craft.commerce.cart.mergedCart` which the user is a guest behaves the same way as `craft.commetce.cart.cart`, so there is no harm in using it on most cart pages. 
+Calling `craft.commerce.cart.mergedCart` which the user is a guest behaves the same way as `craft.commetce.cart.cart`, so there is no harm in using it on most cart pages.
 
 You might not want to use it on final checkout pages, so that customers don't get confused seeing new items in the cart before payment.
 
-Before merging, you may want to show the user what will be merged. 
+Before merging, you may want to show the user what will be merged.
 
 You could do this by showing the other cart’s contents from the previous session with:
 

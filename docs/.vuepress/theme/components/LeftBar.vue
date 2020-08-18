@@ -57,7 +57,7 @@
               @change="handleLanguageSelect($event)"
             >
               <option
-                v-for="(locale, path) in set.locales"
+                v-for="(locale, path) in availableLocales"
                 :value="locale.lang"
                 :selected="$lang == locale.lang"
               >{{ locale.config.label }}</option>
@@ -112,7 +112,7 @@
   }
 }
 
-@media screen and (min-width: 1408px) {
+@screen xxl {
   .left-bar-links.has-bottom {
     height: calc(100vh - 180px - 6.5rem);
   }
@@ -211,6 +211,26 @@ export default {
     },
     defaultUri() {
       return getDocSetDefaultUri(this.$activeSet);
+    },
+    availableLocales() {
+      if ( ! this.set.hasOwnProperty("locales")) {
+        return {};
+      }
+
+      let available = {};
+
+      for (const key in this.set.locales) {
+        if (this.set.locales.hasOwnProperty(key)) {
+          const locale = this.set.locales[key];
+          const config = locale.config;
+
+          if ( ! config.hasOwnProperty("disabled") || ! config.disabled) {
+            available[key] = locale;
+          }
+        }
+      }
+
+      return available;
     }
   },
   mounted() {

@@ -3,21 +3,15 @@
 Console commands are a regular feature in many Craft modules and plugins as well as the Craft core itself. They are an extremely useful developer tool to cut straight through to application functionality without the fuss of a UI. They’re fundamentally different to test than web applications, and Craft offers native support for testing them.
 
 ::: tip
-The way you can test your console commands with Craft is inspired by the excellent work
-done over at [Laravel](https://laravel.com/docs/5.8/console-tests) by [@themsaid](https://github.com/laravel/framework/pull/25270). If you are familiar with testing Laravel applications this will feel quite familiar.
+The way you can test your console commands with Craft is inspired by the excellent work done over at [Laravel](https://laravel.com/docs/5.8/console-tests) by [@themsaid](https://github.com/laravel/framework/pull/25270). If you are familiar with testing Laravel applications this will feel quite familiar.
 :::
 
 ## How it works
 
-You can test console controllers by creating a unit test and setting it up in a specific way
-([see the guide below for a practical example](#step-1-extend-a-specific-class)). Within this unit test Craft makes
-available the following method `$this->consoleCommand()`. This method creates a `craft\test\console\CommandTest` object which is set up with a [fluid interface](https://en.wikipedia.org/wiki/Fluent_interface#PHP). This allows you
-to build out your console command’s user-based output methods (i.e. what `stdOut`, `stderr`, `prompt`, `confirm`, etc.) must be called when triggering your console command and according to what specification.
+You can test console controllers by creating a unit test and setting it up in a specific way ([see the guide below for a practical example](#step-1-extend-a-specific-class)). Within this unit test Craft makes available the following method `$this->consoleCommand()`. This method creates a `craft\test\console\CommandTest` object which is set up with a [fluid interface](https://en.wikipedia.org/wiki/Fluent_interface#PHP). This allows you to build out your console command’s user-based output methods (i.e. what `stdOut`, `stderr`, `prompt`, `confirm`, etc.) must be called when triggering your console command and according to what specification.
 
-::: tip
-Underneath, Craft executes your console command exactly like you would when calling it through
-command line. So any resulting actions to the database, filesystem etc. can be tested like any
-other unit test.
+::: warning
+Please ensure you call `$this->outputCommand()` in your console commands and not `craft\helpers\Console::outputCommand()`. This static method will not be taken into account as it is currently not possible to mock static methods, something required for the `CommandTest` class to work.
 :::
 
 ### Step 1: Extend a specific class
@@ -34,7 +28,6 @@ use \craft\test\console\ConsoleTest;
 class MyConsoleTest extends ConsoleTest
 {
 }
-
 ```
 
 ### Step 2: Create a test
@@ -54,7 +47,6 @@ class MyConsoleTest extends ConsoleTest
     {
     }
 }
-
 ```
 
 ### Step 3: Invoke the `consoleCommand` method
@@ -67,15 +59,11 @@ public function testSomething()
 {
     $this->consoleCommand('test-controller/test-action');
 }
-
-
 ```
 
 ### Step 4: Add steps and run the command
 
-Because the `consoleCommand` returns a [fluid interface](https://en.wikipedia.org/wiki/Fluent_interface#PHP)
-you can add as many methods ([see options below](#methods)) in order to
-specify what 'user journey' your console command will follow.
+Because the `consoleCommand` returns a [fluid interface](https://en.wikipedia.org/wiki/Fluent_interface#PHP) you can add as many methods ([see options below](#methods)) in order to specify what 'user journey' your console command will follow.
 
 ```php
 public function testSomething()
@@ -122,9 +110,7 @@ If you want to ignore all `stdOut` calls you can pass `false` as the third param
 
 - **string \$desiredOutput:** The string that should be output by your console command
 
-If your console command calls `$this->stdOut()` you should test that this method is correctly
-called using the `stdOut` method. The value you pass in will be checked against what your
-console command passes in when calling `$this->stdOut()`.
+If your console command calls `$this->stdOut()` you should test that this method is correctly called using the `stdOut` method. The value you pass in will be checked against what your console command passes in when calling `$this->stdOut()`.
 
 ### `stderr`
 
@@ -138,8 +124,7 @@ Exactly the same principal as `stdOut` above - except for the `$this->stderr()` 
 - **\$returnValue:** What value should be returned by `$this->prompt()` when it is called in your console command.
 - **array \$options = []:** The options your console command should pass into the `$this->prompt()` call.
 
-If your console command calls `$this->prompt()` this method ensures that you can test
-how this method is called and what user input is returned (as there is no _actual_ user in testing).
+If your console command calls `$this->prompt()` this method ensures that you can test how this method is called and what user input is returned (as there is no _actual_ user in testing).
 
 ### `confirm`
 
@@ -160,8 +145,7 @@ If your console command calls `$this->confirm()` this method ensures that you ca
 - **string \$command:** The command to output when calling `$this->outputCommand()`
 - **bool \$withScriptName = true:** What value should be passed as second argument when your console command calls `$this->outputCommand()`
 
-If your console command calls `$this->outputCommand()` this method ensures that you can test
-how this method is called and what is output to the user.
+If your console command calls `$this->outputCommand()` this method ensures that you can test how this method is called and what is output to the user.
 
 ::: warning
 Please ensure you call `$this->outputCommand()` in your console commands and not `craft\helpers\Console::outputCommand()`. This static method will not be taken into account as it is currently not possible to mock static methods, something required for the `CommandTest` class to work.

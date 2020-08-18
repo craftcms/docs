@@ -8,15 +8,15 @@ You can use `nitro xdebug off` to disable Xdebug without having to restart the m
 
 First, you’ll need to configure PhpStorm to listen for requests from the browser or console.
 
-1. Create a new server in PhpStorm using your machine’s domain name. (“Preferences” → “Languages & Frameworks” → “PHP” → “Servers”.)  
+1. Create a new server in PhpStorm using your machine’s domain name. (“Preferences” → “Languages & Frameworks” → “PHP” → “Servers”.)
 ![PhpStorm Server Settings](./images/phpstorm-server.png)
 
 2. Enable “Use path mappings” and set your existing project root to the absolute path on the server. The absolute path will look like `/home/ubuntu/sites/my-site`, where `my-site` reflects your actual project’s folder name in the Nitro machine. (Use `nitro context` if you need to check the path, and keep in mind this is the project root and not necessarily the web root.)
 
-3. Choose “Run” → “Edit Configurations...” and create a new “PHP Remote Debug” configuration, selecting the server you just created. Check “Filter debug connection by IDE key” and enter `PHPSTORM`.  
+3. Choose “Run” → “Edit Configurations...” and create a new “PHP Remote Debug” configuration, selecting the server you just created. Check “Filter debug connection by IDE key” and enter `PHPSTORM`.
 ![PhpStorm Remote Debug Settings](./images/phpstorm-remote-debug.png)
 
-4. Choose “Run” → “Start Listening for PHP Debug Connections”.  
+4. Choose “Run” → “Start Listening for PHP Debug Connections”.
 ![PhpStorm Remote Debug Settings](./images/start-listening.png)
 
 ## Debugging Web Requests
@@ -29,10 +29,10 @@ First, you’ll need to configure PhpStorm to listen for requests from the brows
 - [Safari](https://github.com/benmatselby/xdebug-toggler)
 - [Opera](https://addons.opera.com/addons/extensions/details/xdebug-launcher/)
 
-2. In the browser helper’s options, choose “PhpStorm” and save.  
+2. In the browser helper’s options, choose “PhpStorm” and save.
 ![Xdebug Browser Helper Chrome](./images/xdebug-chrome-settings.png)
 
-3. Choose “Debug” on your browser’s Xdebug helper.  
+3. Choose “Debug” on your browser’s Xdebug helper.
 ![PhpStorm Remote Debug Settings](./images/xdebug-chrome.png)
 
 4. Load the site in your browser and whatever breakpoints you’ve set will be hit.

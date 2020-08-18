@@ -39,7 +39,7 @@ Restrict the discount to a specific time period defined by start and end date fi
 
 ### Discount Condition Formula
 
-The discount condition formula lets you use a simple twig condition syntax to add a matching rule to the discount. 
+The discount condition formula lets you use a simple twig condition syntax to add a matching rule to the discount.
 If the field is left blank, then the condition will match the order being matched to the discount (the other conditions will still apply).
 
 The field accepts the [Twig’s expression syntax](https://twig.symfony.com/doc/2.x/templates.html#expressions), which is an expression that returns `true` or `false`.
@@ -47,7 +47,7 @@ The field accepts the [Twig’s expression syntax](https://twig.symfony.com/doc/
 If the expression is calculated as `true` then the discount matches the order. If not, the condition disqualifies the order from the discount. A blank condition is the same as
 a `true` expression.
 
-Inside the condition formula you have access to the `order` variable. This is a data only representation of the order. 
+Inside the condition formula you have access to the `order` variable. This is a data only representation of the order.
 The `variable` contains the same data that would be exported when clicking the export button on the order index page.
 
 Here are some examples of an discount’s condition formula:
@@ -92,7 +92,7 @@ This field specifies the type of relationship must exist between the purchasable
 - **Target**: the category has a product/variant relational field.
 - **Both**: the relationship can be either **Source** or **Target**
 
-For more information on how this works please see [Relations Terminology](https://docs.craftcms.com/v3/relations.html#terminology).
+For more information on how this works please see [Relations Terminology](https://craftcms.com/docs/3.x/relations.html#terminology).
 
 ### Purchase Total
 
@@ -151,12 +151,12 @@ To determine which line items in the order will be discounted, a discount has an
 
 The options are:
 
-**Discount the matching items only**  
+**Discount the matching items only**
 This will only add “Per Item Amount Off” and “Per Item Percentage Off” discount amounts to the matching line items.
 
 Matching items are those items used to match this discount’s conditions, like “Product Variant” or “Category” conditions.
 
-**Discount all line items**  
+**Discount all line items**
 This will add “Per Item Amount Off” and “Per Item Percentage Off” discount amounts to all line items.
 
 Please note that the “Flat Amount Off Order” is applied to the whole order, so it’s not affected by the applied scope option and applies its discount to every line item—most expensive to least expensive—until it’s used up.
@@ -167,9 +167,9 @@ The flat value which should discount each item in the order e.g. \$1. This is co
 
 ### Per Item Percentage Off
 
-The percentage value which should discount each item in the order, and whether it should be off the original or discounted price. 
+The percentage value which should discount each item in the order, and whether it should be off the original or discounted price.
 
-Original price is the sale price of the item. The Discounted price is the sale price of the item minus any other discounts that were applied before this one.  
+Original price is the sale price of the item. The Discounted price is the sale price of the item minus any other discounts that were applied before this one.
 
 Whether it is based on the Original or Dicounted price, it is always calculated after the “Per Item Amount Off” has been taken off the item.
 

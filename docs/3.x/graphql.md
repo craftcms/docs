@@ -1394,7 +1394,7 @@ For publishing a draft, you should use the `publishDraft` mutation, which requir
 
 To delete an entry use the `deleteEntry` mutation, which requires the `id` of the entry that must be deleted. It returns a boolean value as the result to indicate whether the operation was successful.
 
-### Mutating Assets 
+### Mutating Assets
 
 #### Saving an asset
 
@@ -1479,7 +1479,7 @@ Entries that belong to a structure section and categories are parts of structure
 
 <!-- END STRUCTURE MUTATION ARGS -->
 
-### Mutating Global Sets 
+### Mutating Global Sets
 
 To update a global set use the appropriate mutations which will have the name in the form of `save_<globalSetHandle>_GlobalSet`.
 

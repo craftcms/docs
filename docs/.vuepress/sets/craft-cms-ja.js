@@ -32,12 +32,7 @@ module.exports = {
         {
           title: "コントロールパネルの拡張",
           collapsable: false,
-          children: [
-            "cp-section",
-            "cp-templates"
-            // 'cp-components',
-            // 'cp-controllers',
-          ]
+          children: ["cp-section", "cp-templates"]
         },
         {
           title: "システムコンポーネント",
@@ -48,7 +43,8 @@ module.exports = {
             "volume-types",
             "utility-types",
             "element-types",
-            "element-action-types"
+            "element-action-types",
+            "element-exporter-types"
           ]
         },
         {
@@ -60,74 +56,45 @@ module.exports = {
             "translation-categories",
             "asset-bundles",
             "services",
-            // 'behaviors',
+            "controllers",
+            "commands",
             "template-roots",
             "extending-twig",
             "template-hooks",
             "soft-deletes",
-            "environmental-settings"
-            // 'front-end-controllers',
+            "environmental-settings",
+            "extending-system-components"
           ]
         }
       ],
-      "/ja/dev/": [
+      "/ja/testing/": [
         {
-          title: "フロントエンド開発",
+          title: "About testing",
           collapsable: false,
-          children: [["", "導入"], "headless"]
+          children: [["", "Introduction"], "testing", "codeception", "ci"]
         },
         {
-          title: "テンプレート",
+          title: "Testing Craft",
           collapsable: false,
           children: [
-            "twig-primer",
-            "filters",
-            "functions",
-            "global-variables",
-            "tests",
-            "tags/cache",
-            "tags/css",
-            "tags/exit",
-            "tags/header",
-            "tags/hook",
-            "tags/js",
-            "tags/nav",
-            "tags/paginate",
-            "tags/redirect",
-            "tags/requirelogin",
-            "tags/requirepermission",
-            "tags/switch"
+            "testing-craft/getting-started",
+            "testing-craft/testing-tips",
+            "testing-craft/plugins-and-modules",
+            "testing-craft/fixtures",
+            "testing-craft/console",
+            "testing-craft/queue",
+            "testing-craft/events"
           ]
         },
         {
-          title: "エレメントのクエリ",
+          title: "Craft testing framework",
           collapsable: false,
           children: [
-            ["element-queries/", "エレメントクエリについて"],
-            "element-queries/asset-queries",
-            "element-queries/category-queries",
-            "element-queries/entry-queries",
-            "element-queries/global-set-queries",
-            "element-queries/matrix-block-queries",
-            "element-queries/tag-queries",
-            "element-queries/user-queries",
-            "eager-loading-elements"
-          ]
-        },
-        {
-          title: "テンプレートの実例",
-          collapsable: false,
-          children: [
-            "examples/integrating-disqus",
-            "examples/rss-feed",
-            "examples/atom-feed",
-            "examples/entry-form",
-            "examples/search-form",
-            "examples/login-form",
-            "examples/user-profile-form",
-            "examples/user-registration-form",
-            "examples/forgot-password-form",
-            "examples/set-password-form"
+            "framework/config-options",
+            "framework/mocking",
+            "framework/support-classes",
+            "framework/full-mock",
+            "framework/assertion-helpers"
           ]
         }
       ],
@@ -135,49 +102,45 @@ module.exports = {
         {
           title: "導入",
           collapsable: false,
-          children: ["", "coc", "directory-structure"]
+          children: ["", "coc"]
         },
         {
           title: "インストールとアップデート",
           collapsable: false,
-          children: [
-            "requirements",
-            "installation",
-            "updating",
-            "upgrade",
-            "changes-in-craft-3"
-          ]
+          children: ["requirements", "installation", "updating", "upgrade"]
         },
         {
           title: "コンフィギュレーション",
           collapsable: false,
-          children: [
-            "config/",
-            "config/config-settings",
-            "config/db-settings",
-            "config/environments",
-            "config/php-constants",
-            "config/app"
-          ]
+          children: ["config/", "config/config-settings", "config/db-settings"]
         },
         {
           title: "コアコンセプト",
           collapsable: false,
           children: [
-            "sections-and-entries",
+            "directory-structure",
+            "elements",
             "fields",
-            "categories",
-            "assets",
-            "users",
-            "globals",
-            "tags",
-            "routing",
             "relations",
-            "searching",
+            "user-management",
             "sites",
-            ["localization", "ローカライゼーション"],
-            "static-translations",
+            "console-commands",
+            "project-config",
             "plugins"
+          ],
+          toggleChildren: ["searching", "reference-tags", "gc"]
+        },
+        {
+          title: "Element Types",
+          collapsable: false,
+          children: [
+            "entries",
+            "categories",
+            "tags",
+            "assets",
+            "globals",
+            "matrix-blocks",
+            "users"
           ]
         },
         {
@@ -203,14 +166,83 @@ module.exports = {
           ]
         },
         {
-          title: "開発",
+          title: "Front End Development",
           collapsable: false,
-          children: ["dev/", "extend/"]
+          children: [
+            "image-transforms",
+            "element-queries",
+            "dev/eager-loading-elements",
+            "graphql",
+            "routing"
+          ]
         },
         {
-          title: "追加情報",
+          title: "Twig Templating",
           collapsable: false,
-          children: ["project-config", "gc", "reference-tags"]
+          children: [
+            "dev/twig-primer",
+            "dev/global-variables",
+            "dev/filters",
+            "dev/functions",
+            "dev/tags",
+            "dev/tests"
+          ]
+        },
+        {
+          title: "Templating Examples",
+          collapsable: false,
+          children: [
+            "dev/examples/integrating-disqus",
+            "dev/examples/rss-feed",
+            "dev/examples/atom-feed",
+            "dev/examples/entry-form",
+            "dev/examples/search-form",
+            "dev/examples/login-form",
+            "dev/examples/user-profile-form",
+            "dev/examples/user-registration-form",
+            "dev/examples/forgot-password-form",
+            "dev/examples/set-password-form"
+          ]
+        }
+      ]
+    }
+  },
+  sidebarExtra: {
+    "3.x": {
+      "/ja/extend/": [
+        {
+          title: "Class Reference",
+          icon: "/docs/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/api/v3/"
+        },
+        {
+          title: "Back to Craft Docs",
+          icon: "/docs/icons/icon-back.svg",
+          link: "/3.x/ja/"
+        }
+      ],
+      "/ja/testing/": [
+        {
+          title: "Back to Craft Docs",
+          icon: "/docs/icons/icon-back.svg",
+          link: "/3.x/ja/"
+        }
+      ],
+      "/ja/": [
+        {
+          title: "Extending Craft",
+          icon: "/docs/icons/icon-book.svg",
+          link: "/3.x/ja/extend/"
+        },
+        {
+          title: "Testing Craft",
+          icon: "/docs/icons/icon-flask.svg",
+          link: "/3.x/ja/testing/"
+        },
+        {
+          title: "Class Reference",
+          icon: "/docs/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/api/v3/"
         }
       ]
     }

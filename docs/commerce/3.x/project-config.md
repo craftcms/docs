@@ -1,6 +1,6 @@
 # Project Config
 
-Craft 3.1 introduced the [**project config**](https://docs.craftcms.com/v3/project-config.html), a sharable configuration store that makes it easier for developers to collaborate and deploy site changes across multiple environments.
+Craft 3.1 introduced the [**project config**](https://craftcms.com/docs/3.x/project-config.html), a sharable configuration store that makes it easier for developers to collaborate and deploy site changes across multiple environments.
 
 Craft Commerce stores the following items in the project config:
 
@@ -24,7 +24,7 @@ The following items are not stored in the project config:
 - Shipping zones
 - Shipping methods and rules
 - Subscription plans
-- Subscriptions elements 
+- Subscriptions elements
 - Tax categories
 - Tax zones
 - Tax rates

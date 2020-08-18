@@ -20,7 +20,7 @@ module.exports = {
         80: "20rem"
       },
       screens: {
-        xxl: "1600px"
+        xxl: "1408px"
       }
     }
   },

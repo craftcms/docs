@@ -13,4 +13,4 @@ You can customize Nitro’s MySQL settings by editing `mysql.conf` and restartin
 
 If you add a `NITRO_EDIT_HOSTS` environment variable to your system and set it to `false`, Nitro will never edit the `hosts` file on the host machine.
 
-This is useful for people running some host file manager applications. 
+This is useful for people running some host file manager applications.

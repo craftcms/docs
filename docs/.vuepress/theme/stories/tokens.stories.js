@@ -42,8 +42,8 @@ export const Shadow = () => ({
   },
   template: `
       <div class="p-6 flex flex-wrap w-full h-screen items-center justify-center">
-        <div v-for="[name, value] in boxShadow" 
-          class="w-64 h-32 m-8 p-6 rounded leading-tight" 
+        <div v-for="[name, value] in boxShadow"
+          class="w-64 h-32 m-8 p-6 rounded leading-tight"
           :class="name == 'default' ? 'shadow' : 'shadow-' + name"
         >
           <p class="text-sm font-bold p-0 m-0">{{ name }}</p>
@@ -62,7 +62,7 @@ export const BorderRadius = () => ({
   },
   template: `
     <div class="flex w-full h-screen items-center content-center justify-center flex-wrap">
-      <div v-for="[name, value] in borderRadius" 
+      <div v-for="[name, value] in borderRadius"
         class="w-24 h-24 m-8 p-4 bg-gray-300 flex content-center justify-center items-center text-center"
         :class="name == 'default' ? 'rounded' : 'rounded-' + name"
       >

@@ -2,7 +2,7 @@
 
 When a cart is completed, it becomes an order. You can view orders in the control panel’s Commerce → Orders section.
 
-Orders are [Element Types](https://docs.craftcms.com/v3/extend/element-types.html) and can have custom fields associated with them.
+Orders are [Element Types](https://craftcms.com/docs/3.x/extend/element-types.html) and can have custom fields associated with them.
 
 If you’d like to jump straight to displaying order information in your templates, take a look at the the <commerce3:craft\commerce\elements\Order> class reference for a complete list of available properties.
 
@@ -59,7 +59,7 @@ Output:
 2018-43
 ```
 
-In this example, `{{ id }}` refers to the order’s element ID, which is not sequential. If you would rather generate a unique sequential number, a simple way would be to use Craft’s [seq()](https://docs.craftcms.com/v3/dev/functions.html#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
+In this example, `{{ id }}` refers to the order’s element ID, which is not sequential. If you would rather generate a unique sequential number, a simple way would be to use Craft’s [seq()](https://craftcms.com/docs/3.x/dev/functions.html#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
 
 The `seq()` function takes the following parameters:
 
@@ -106,7 +106,7 @@ Let’s take a closer look at how carts and orders can be recalculated.
 
 A cart or order must always be in one of three calculation modes:
 
-- **Recalculate All** is active for a cart, or an order which is not yet completed.  
+- **Recalculate All** is active for a cart, or an order which is not yet completed.
 This mode refreshes each line item’s details from the related purchasable and re-applies all adjustments to the cart. In other words, it rebuilds and recalculates cart details based on information from purchasables and how Commerce is configured. This mode merges duplicate line items and removes any that are out of stock or whose purchasables were deleted.
 - **Adjustments Only** doesn’t touch line items, but re-applies adjustments on the cart or order. This can only be set programmatically and is not available from the control panel.
 - **None** doesn’t change anything at all, and is active for an order (completed cart) so only manual edits or admin-initiated recalculation can modify order details.

@@ -3,12 +3,12 @@
 このガイドに従うことで、モジュールとプラグインはコンポーネントにソフトデリートのサポートを追加できます。
 
 ::: tip
-すべてのエレメントタイプは、ソフトデリートをそのままサポートできます。復元できるようにするための情報は、[エレメントタイプ](element-types.md#restore-action)を参照してください。
+すべてのエレメントタイプは、ソフトデリートをそのままサポートできます。 復元できるようにするための情報は、[エレメントタイプ](element-types.md#restore-action)を参照してください。 :::
 :::
 
 ## データベーステーブルの準備
 
-ソフトデリート可能なコンポーネントは、データベーステーブルに `dateDeleted` カラムを持たなければなりません。`dateDeleted` 値を持つ行は、ソフトデリートされたとみなされます。
+ソフトデリート可能なコンポーネントは、データベーステーブルに `dateDeleted` カラムを持たなければなりません。 `dateDeleted` 値を持つ行は、ソフトデリートされたとみなされます。
 
 ```php
 // New table migration
@@ -22,7 +22,7 @@ $this->addColumn('{{%tablename}}', 'dateDeleted',
     $this->dateTime()->null()->after('dateUpdated'));
 ```
 
-ソフトデリート可能なコンポーネントデータを含むテーブルは、（主キー以外に）固有の制約を適用するべきではありません。もしそうしているなら、それらを削除する必要があります。
+ソフトデリート可能なコンポーネントデータを含むテーブルは、（主キー以外に）固有の制約を適用するべきではありません。 もしそうしているなら、それらを削除する必要があります。
 
 ```php
 use craft\helpers\MigrationHelper;
@@ -38,7 +38,7 @@ $this->createIndex(null, '{{%tablename}}', ['handle'], false);
 
 すべてのリクエストごとに古い行をチェックするのではなく、Craft の[ガベージコレクション](../gc.md)ルーチンの一部にできます。
 
-<craft3:craft\services\Gc> は、実行されるたびに `run` イベントを発火します。あなたのモジュール / プラグインの `init()` メソッドから、それを利用できます。
+<craft3:craft\services\Gc> は、実行されるたびに `run` イベントを発火します。 あなたのモジュール / プラグインの `init()` メソッドから、それを利用できます。
 
 ```php
 use craft\services\Gc;
@@ -56,8 +56,13 @@ public function init()
 
 [hardDelete()](craft3:craft\services\Gc::hardDelete()) メソッドは、`dateDeleted` 値にコンフィグ設定 <config3:softDeleteDuration> よりも古いタイムスタンプがセットされたすべての行を削除します。
 
-::: tip
-複数のテーブルで古い行をチェックする必要がある場合、代わりに [hardDelete()](craft3:craft\services\Gc::hardDelete()) へテーブル名の配列を渡すことができます。
+use craft\db\ActiveRecord; use craft\db\SoftDeleteTrait; class MyRecord extends ActiveRecord
+{
+    use SoftDeleteTrait {
+        behaviors as softDeleteBehaviors;
+    }
+ public function behaviors()
+    { $behaviors = $this-&gt;softDeleteBehaviors(); $behaviors['myBehavior'] = MyBehavior::class; return $behaviors; } // ...
 :::
 
 ## Active Record クラスのアップデート
@@ -123,14 +128,14 @@ public static function find()
 
 ## その他のコードの更新
 
-コンポーネントのテーブルを含む、データベースクエリのコードを確認してください。それらも更新する必要があるでしょう。
+コンポーネントのテーブルを含む、データベースクエリのコードを確認してください。 それらも更新する必要があるでしょう。
 
 - テーブルからデータを選択するときは、`dateDeleted` 値がある行を無視していることを確認してください。
 
   ```php{4}
   $results = (new \craft\db\Query())
     ->select(['...'])
-    ->from(['{{%tableName}}'])
+      ->from(['{{%tableName}}'])
     ->where(['dateDeleted' => null])
     ->all();
   ```
@@ -146,7 +151,7 @@ public static function find()
   ```php
   \Craft::$app->db->createCommand()
     ->softDelete('{{%tablename}}', ['id' => $id])
-    ->execute(); 
+    ->execute();
   ```
 
 ## ソフトデリートされた行の復元
