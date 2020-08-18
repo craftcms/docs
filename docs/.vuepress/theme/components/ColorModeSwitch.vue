@@ -53,7 +53,6 @@
         width: 160%;
         right: 40%;
         top: -5%;
-        background: rgb(35, 31, 32);
         border-radius: 40%/60%;
       }
     }
