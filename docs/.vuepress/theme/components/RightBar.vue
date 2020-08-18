@@ -32,6 +32,8 @@ export default {
     @apply text-xs mx-0 tracking-wide uppercase;
     padding: 0.35rem 0;
     border-left: none;
+  }
+  
   .sidebar-link-wrapper {
     @apply fixed mt-24 w-64 pt-1 overflow-hidden;
   }
