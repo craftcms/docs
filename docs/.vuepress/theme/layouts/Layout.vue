@@ -349,11 +349,13 @@ export default {
 
     toggleColorMode() {
       this.isDark = !this.isDark;
-      this.handleColorModeUpdate();
+      this.handleColorModeUpdate(true);
     },
 
-    handleColorModeUpdate() {
-      setStorage("theme", this.colorMode, this.$site.base);
+    handleColorModeUpdate(save = false) {
+      if (save) {
+        setStorage("theme", this.colorMode, this.$site.base);
+      }
 
       let htmlElement = document.getElementsByTagName("html")[0];
 
