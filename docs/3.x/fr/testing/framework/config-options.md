@@ -13,8 +13,8 @@ Accepts: Object
 
 The `projectConfig` option instructs the Craft module if and how to set-up Project Config support for your tests. It accepts an object with the following parameters:
 
-- **folder** (required): What folder the Project Config files must be copied from. Typically, this is `config/project` starting from the root of your project. The contents of that folder will be copied into `tests/_craft/config/project`.
-- **reset**: Whether Project Config should be reset before each test is run. If enabled, Craft will reset the Project Config state to what is specified in the `folder` parameter. Can safely be disabled if you are not making changes to project config during your tests.
+- **folder** (required): What folder the Project Config files must be copied from.\ Typically, this is `config/project` starting from the root of your project. The contents of that folder will be copied into `tests/_craft/config/project`.
+- **reset**: Whether Project Config should be reset before each test is run.\ If enabled, Craft will reset the Project Config state to what is specified in the `folder` parameter. Can safely be disabled if you are not making changes to project config during your tests.
 
 ::: warning
 If you are using Project Config for your tests, regular database-backed fixtures for Project Config data (i.e sections) may cause syncing issues. We recommended that you set up your environment using the Project Config support only.
