@@ -61,8 +61,8 @@ export default {
 
   .switch-wrapper {
     @apply absolute;
-    top: 0.25rem;
-    right: 1.25rem;
+    top: 0.125rem;
+    right: 1.325rem;
   }
 }
 

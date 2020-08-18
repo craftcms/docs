@@ -13,18 +13,20 @@
 
 <style lang="postcss">
 .dark-mode-toggle {
-  @apply inline-block rounded-full w-10 h-5 relative mt-4 outline-none appearance-none overflow-hidden;
-  background: #f1f5fd;
-  border: 1px solid transparent;
+  @apply inline-block border border-2 rounded-full h-5 relative mt-4 outline-none appearance-none overflow-hidden;
+  width: 44px;
+  height: 22px;
 
   &:focus {
     @apply outline-none;
   }
 
   .knob {
-    @apply block rounded-full absolute top-0 left-0;
-    width: calc(1.25rem - 2px);
-    height: calc(1.25rem - 2px);
+    @apply block rounded-full absolute;
+    left: 2px;
+    top: 2px;
+    width: 14px;
+    height: 14px;
     transition: all 0.25s cubic-bezier(0.86, 0, 0.07, 1);
     background: #a0aec0;
 
@@ -42,7 +44,7 @@
     background: transparent;
 
     .knob {
-      left: 1.25rem;
+      left: 23px;
 
       &:after {
         content: "";
@@ -54,6 +56,15 @@
         background: rgb(35, 31, 32);
         border-radius: 40%/60%;
       }
+    }
+  }
+}
+
+@screen xxl {
+  .dark-mode-toggle {
+    height: 21px;
+    .knob {
+      top: 1px;
     }
   }
 }
