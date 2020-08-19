@@ -63,6 +63,12 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-transitioning .main-container {
+    transition: none;
+  }
+}
+
 .main-container {
   @apply mx-auto relative max-w-screen-md;
 }
@@ -256,14 +262,11 @@ export default {
       const element = document.getElementById(id);
 
       if (element) {
-        // const yOffset = -54;
-        // const y =
-        //   element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        // window.scrollTo({ top: y, behavior: "smooth" });
-
         setTimeout(() => {
           if (element) {
-            element.scrollIntoView();
+            element.scrollIntoView({
+              behavior: this.getPrefersReducedMotion() ? "auto" : "smooth",
+            });
           }
         }, 750);
       }
@@ -395,6 +398,14 @@ export default {
       }
 
       return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    },
+
+    getPrefersReducedMotion() {
+      if (!window.matchMedia) {
+        return false;
+      }
+
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     },
 
     // side swipe

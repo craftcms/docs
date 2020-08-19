@@ -184,6 +184,18 @@
   transform: translateY(4rem);
   opacity: 0;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-transitioning .left-bar,
+  .slide-left-enter-active,
+  .slide-left-leave-active,
+  .slide-right-enter-active,
+  .slide-right-leave-active,
+  .slide-up-enter-active,
+  .slide-up-leave-active {
+    transition: none;
+  }
+}
 </style>
 
 <script>
@@ -193,7 +205,7 @@ import {
   resolveSidebarConfig,
   getRelativeActiveBaseFromConfig,
   getRegularPathWithoutVersion,
-  getDocSetDefaultUri
+  getDocSetDefaultUri,
 } from "../util";
 
 export default {
@@ -202,7 +214,7 @@ export default {
   data() {
     return {
       currentSidebarDepth: null,
-      previousSidebarDepth: null
+      previousSidebarDepth: null,
     };
   },
   computed: {
@@ -213,7 +225,7 @@ export default {
       return getDocSetDefaultUri(this.$activeSet);
     },
     availableLocales() {
-      if ( ! this.set.hasOwnProperty("locales")) {
+      if (!this.set.hasOwnProperty("locales")) {
         return {};
       }
 
@@ -224,14 +236,14 @@ export default {
           const locale = this.set.locales[key];
           const config = locale.config;
 
-          if ( ! config.hasOwnProperty("disabled") || ! config.disabled) {
+          if (!config.hasOwnProperty("disabled") || !config.disabled) {
             available[key] = locale;
           }
         }
       }
 
       return available;
-    }
+    },
   },
   mounted() {
     this.currentSidebarDepth = this.getSidebarNavigationDepth();
@@ -286,13 +298,13 @@ export default {
 
       // invert if we’re moving to the left
       return depth < this.currentSidebarDepth ? "slide-right" : "slide-left";
-    }
+    },
   },
   watch: {
     items(items) {
       this.previousSidebarDepth = this.currentSidebarDepth;
       this.currentSidebarDepth = this.getSidebarNavigationDepth();
-    }
-  }
+    },
+  },
 };
 </script>

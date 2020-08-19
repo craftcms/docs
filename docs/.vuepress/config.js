@@ -3,7 +3,6 @@ module.exports = {
   base: "/docs/",
   plugins: [
     ["@vuepress/google-analytics", { ga: "UA-39036834-9" }],
-    "vuepress-plugin-smooth-scroll",
     [
       "@vuepress/active-header-links",
       {
