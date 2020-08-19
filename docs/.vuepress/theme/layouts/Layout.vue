@@ -19,7 +19,10 @@
     <div id="main" class="main-container">
       <div id="top-bar" class="top-bar">
         <Hamburger @click="toggleSidebar" />
-        <div id="search" class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center">
+        <div
+          id="search"
+          class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center"
+        >
           <SearchBox
             v-if="
               $site.themeConfig.search !== false &&
@@ -42,7 +45,11 @@
         </template>
       </Page>
     </div>
-    <RightBar :heading-items="headingItems" :is-dark="isDark" @toggle-color-mode="toggleColorMode" />
+    <RightBar
+      :heading-items="headingItems"
+      :is-dark="isDark"
+      @toggle-color-mode="toggleColorMode"
+    />
   </div>
 </template>
 
@@ -147,7 +154,7 @@ import {
   getAlternateVersion,
   getPageWithRelativePath,
   fixDoubleSlashes,
-  getSameContentForVersion,
+  getSameContentForVersion
 } from "../util";
 
 import { getStorage, setStorage, unsetStorage } from "../Storage";
@@ -160,7 +167,7 @@ export default {
     LeftBar,
     RightBar,
     SearchBox,
-    Hamburger,
+    Hamburger
   },
 
   data() {
@@ -172,8 +179,8 @@ export default {
       isDark: false,
       colorModes: {
         light: "theme-light",
-        dark: "theme-dark",
-      },
+        dark: "theme-dark"
+      }
     };
   },
 
@@ -208,9 +215,9 @@ export default {
         {
           "no-navbar": !this.shouldShowNavbar,
           "sidebar-open": this.isSidebarOpen,
-          "sidebar-transitioning": this.isSidebarTransitioning,
+          "sidebar-transitioning": this.isSidebarTransitioning
         },
-        userPageClass,
+        userPageClass
       ];
     },
 
@@ -244,7 +251,7 @@ export default {
 
     colorMode() {
       return this.isDark ? "dark" : "light";
-    },
+    }
   },
 
   mounted() {
@@ -265,14 +272,14 @@ export default {
         setTimeout(() => {
           if (element) {
             element.scrollIntoView({
-              behavior: this.getPrefersReducedMotion() ? "auto" : "smooth",
+              behavior: this.getPrefersReducedMotion() ? "auto" : "smooth"
             });
           }
         }, 750);
       }
     }
 
-    this.$nextTick(function () {
+    this.$nextTick(function() {
       window.addEventListener("resize", () => {
         this.isSidebarOpen = false;
       });
@@ -381,7 +388,7 @@ export default {
 
       if (storedValue) {
         this.isDark = storedValue === "dark";
-      } else if (!window.matchMedia) {
+      } else {
         this.isDark = this.getBrowserPrefersDark();
       }
 
@@ -412,7 +419,7 @@ export default {
     onTouchStart(e) {
       this.touchStart = {
         x: e.changedTouches[0].clientX,
-        y: e.changedTouches[0].clientY,
+        y: e.changedTouches[0].clientY
       };
     },
 
@@ -439,7 +446,7 @@ export default {
     dewidow() {
       let typemate = new TypeMate(document.getElementById("content"));
       typemate.apply();
-    },
+    }
   },
 
   watch: {
@@ -447,7 +454,7 @@ export default {
       this.$nextTick(() => {
         this.dewidow();
       });
-    },
-  },
+    }
+  }
 };
 </script>
