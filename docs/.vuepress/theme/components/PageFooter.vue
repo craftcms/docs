@@ -10,9 +10,9 @@
           <div class="pane options">
             <h4 class="heading block">
               {{
-              hasVoted
-              ? this.$themeConfig.feedback.thanks
-              : this.$themeConfig.feedback.helpful
+                hasVoted
+                  ? this.$themeConfig.feedback.thanks
+                  : this.$themeConfig.feedback.helpful
               }}
             </h4>
             <div class="vote-buttons inline-block">
@@ -39,11 +39,15 @@
               :href="getIssueUrl()"
               target="_blank"
               rel="noopener"
-            >{{ this.$themeConfig.feedback.more }}</a>
+              >{{ this.$themeConfig.feedback.more }}</a
+            >
           </div>
         </div>
       </div>
       <div class="footer-links">
+        <p>
+          <PageEdit />
+        </p>
         <p>
           <a href="https://craftcms.com/contact" target="_blank" rel="noopener">
             <span class="right-footer-icon">
@@ -129,6 +133,14 @@ h4 {
     right: -2px;
     top: -0.575rem;
   }
+
+  .edit-link {
+    @apply inline-block;
+  }
+
+  .page-edit {
+    @apply py-0 overflow-auto mt-6;
+  }
 }
 
 .option {
@@ -180,6 +192,7 @@ import ThumbDown from "../icons/ThumbDown";
 import Envelope from "../icons/Envelope";
 import Reply from "../icons/Reply";
 import ColorModeSwitch from "./ColorModeSwitch";
+import PageEdit from "./PageEdit";
 
 export default {
   components: {
@@ -188,12 +201,13 @@ export default {
     Envelope,
     Reply,
     ColorModeSwitch,
+    PageEdit
   },
   props: ["isDark"],
   data() {
     return {
       vote: null,
-      hasVoted: null,
+      hasVoted: null
     };
   },
   mounted() {
@@ -230,7 +244,7 @@ export default {
     getVoteForPath(path) {
       let votes = this.getStoredVotes();
 
-      let votesForPath = votes.filter((item) => {
+      let votesForPath = votes.filter(item => {
         return item.path === path;
       }, this);
 
@@ -256,12 +270,12 @@ export default {
       return encodeURI(
         `https://github.com/${this.$themeConfig.docsRepo}/issues/new?title=Improve “${this.$page.title}”&body=I have a suggestion for https://craftcms.com/docs${this.$route.fullPath}:\n`
       );
-    },
+    }
   },
   watch: {
     $route() {
       this.refreshState();
-    },
-  },
+    }
+  }
 };
 </script>

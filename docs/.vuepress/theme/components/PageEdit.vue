@@ -1,19 +1,19 @@
 <template>
-  <footer class="page-edit content-wrapper">
-    <div v-if="editLink" class="edit-link">
-      <a :href="editLink" target="_blank" rel="noopener noreferrer">
-        {{
-        editLinkText
-        }}
-        <OutboundLink />
-      </a>
-    </div>
-
-    <div v-if="lastUpdated" class="last-updated">
+  <div class="edit-link">
+    <span v-if="lastUpdated" class="last-updated">
       <span class="prefix">{{ lastUpdatedText }}:</span>
       <span class="time">{{ lastUpdated }}</span>
-    </div>
-  </footer>
+    </span>
+    <a
+      :href="editLink"
+      v-if="editLink"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {{ editLinkText }}
+      <OutboundLink />
+    </a>
+  </div>
 </template>
 
 <script>
@@ -35,7 +35,7 @@ export default {
       if (typeof this.$site.themeConfig.lastUpdated === "string") {
         return this.$site.themeConfig.lastUpdated;
       }
-      return "Last Updated";
+      return "last Updated";
     },
 
     editLink() {
@@ -47,7 +47,7 @@ export default {
         repo,
         docsDir = "",
         docsBranch = "master",
-        docsRepo = repo,
+        docsRepo = repo
       } = this.$site.themeConfig;
 
       if (showEditLink && docsRepo && this.$page.relativePath) {
@@ -66,9 +66,9 @@ export default {
       return (
         this.$themeLocaleConfig.editLinkText ||
         this.$site.themeConfig.editLinkText ||
-        `Edit this page`
+        `edit this page`
       );
-    },
+    }
   },
 
   methods: {
@@ -83,22 +83,12 @@ export default {
         (docsDir ? docsDir.replace(endingSlashRE, "") + "/" : "") +
         path
       );
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="postcss">
-.edit-link {
-  @apply inline-block text-sm;
-}
-
-.content-wrapper {
-  &.page-edit {
-    @apply py-0 overflow-auto mt-6;
-  }
-}
-
 .last-updated {
   @apply float-right text-sm;
 
