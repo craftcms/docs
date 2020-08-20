@@ -106,7 +106,7 @@ Let’s take a closer look at how carts and orders can be recalculated.
 
 A cart or order must always be in one of three calculation modes:
 
-- **Recalculate All** is active for a cart, or an order which is not yet completed.
+- **Recalculate All** is active for a cart, or an order which is not yet completed.\
 This mode refreshes each line item’s details from the related purchasable and re-applies all adjustments to the cart. In other words, it rebuilds and recalculates cart details based on information from purchasables and how Commerce is configured. This mode merges duplicate line items and removes any that are out of stock or whose purchasables were deleted.
 - **Adjustments Only** doesn’t touch line items, but re-applies adjustments on the cart or order. This can only be set programmatically and is not available from the control panel.
 - **None** doesn’t change anything at all, and is active for an order (completed cart) so only manual edits or admin-initiated recalculation can modify order details.

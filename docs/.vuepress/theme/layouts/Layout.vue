@@ -19,7 +19,10 @@
     <div id="main" class="main-container">
       <div id="top-bar" class="top-bar">
         <Hamburger @click="toggleSidebar" />
-        <div id="search" class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center">
+        <div
+          id="search"
+          class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center"
+        >
           <SearchBox
             v-if="
               $site.themeConfig.search !== false &&
@@ -28,7 +31,12 @@
           />
         </div>
       </div>
-      <Page :sidebar-items="sidebarItems" :heading-items="headingItems">
+      <Page
+        :sidebar-items="sidebarItems"
+        :heading-items="headingItems"
+        :is-dark="isDark"
+        @toggle-color-mode="toggleColorMode"
+      >
         <template #top>
           <slot name="page-top" />
         </template>
@@ -37,7 +45,11 @@
         </template>
       </Page>
     </div>
-    <RightBar :heading-items="headingItems" />
+    <RightBar
+      :heading-items="headingItems"
+      :is-dark="isDark"
+      @toggle-color-mode="toggleColorMode"
+    />
   </div>
 </template>
 
@@ -55,6 +67,12 @@
 .sidebar-transitioning {
   .main-container {
     transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-transitioning .main-container {
+    transition: none;
   }
 }
 
@@ -136,8 +154,10 @@ import {
   getAlternateVersion,
   getPageWithRelativePath,
   fixDoubleSlashes,
-  getSameContentForVersion,
+  getSameContentForVersion
 } from "../util";
+
+import { getStorage, setStorage, unsetStorage } from "../Storage";
 
 export default {
   name: "Layout",
@@ -147,7 +167,7 @@ export default {
     LeftBar,
     RightBar,
     SearchBox,
-    Hamburger,
+    Hamburger
   },
 
   data() {
@@ -156,6 +176,11 @@ export default {
       isSidebarTransitioning: false,
       version: null,
       suggestedUpdatePath: null,
+      isDark: false,
+      colorModes: {
+        light: "theme-light",
+        dark: "theme-dark"
+      }
     };
   },
 
@@ -190,9 +215,9 @@ export default {
         {
           "no-navbar": !this.shouldShowNavbar,
           "sidebar-open": this.isSidebarOpen,
-          "sidebar-transitioning": this.isSidebarTransitioning,
+          "sidebar-transitioning": this.isSidebarTransitioning
         },
-        userPageClass,
+        userPageClass
       ];
     },
 
@@ -223,6 +248,10 @@ export default {
     headingItems() {
       return resolveHeaders(this.$page);
     },
+
+    colorMode() {
+      return this.isDark ? "dark" : "light";
+    }
   },
 
   mounted() {
@@ -240,18 +269,23 @@ export default {
       const element = document.getElementById(id);
 
       if (element) {
-        const yOffset = -54;
-        const y =
-          element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: "smooth" });
+        setTimeout(() => {
+          if (element) {
+            element.scrollIntoView({
+              behavior: this.getPrefersReducedMotion() ? "auto" : "smooth"
+            });
+          }
+        }, 750);
       }
     }
 
-    this.$nextTick(function () {
+    this.$nextTick(function() {
       window.addEventListener("resize", () => {
         this.isSidebarOpen = false;
       });
     });
+
+    this.detectColorScheme();
   },
 
   methods: {
@@ -322,11 +356,70 @@ export default {
       this.$router.push(fixDoubleSlashes(targetPath));
     },
 
+    toggleColorMode() {
+      this.isDark = !this.isDark;
+      this.handleColorModeUpdate(true);
+    },
+
+    handleColorModeUpdate(updateStorage = false) {
+      if (updateStorage) {
+        if (this.colorMode !== this.getBrowserColorMode()) {
+          // save the current setting if != browser default
+          setStorage("theme", this.colorMode, this.$site.base);
+        } else {
+          // remove saved setting if it equals the browser default
+          unsetStorage("theme", this.$site.base);
+        }
+      }
+
+      let htmlElement = document.getElementsByTagName("html")[0];
+
+      for (const [key, value] of Object.entries(this.colorModes)) {
+        if (this.colorMode === key) {
+          htmlElement.classList.add(value);
+        } else {
+          htmlElement.classList.remove(value);
+        }
+      }
+    },
+
+    detectColorScheme() {
+      let storedValue = getStorage("theme", this.$site.base);
+
+      if (storedValue) {
+        this.isDark = storedValue === "dark";
+      } else {
+        this.isDark = this.getBrowserPrefersDark();
+      }
+
+      this.handleColorModeUpdate();
+    },
+
+    getBrowserColorMode() {
+      return this.getBrowserPrefersDark() ? "dark" : "light";
+    },
+
+    getBrowserPrefersDark() {
+      if (!window.matchMedia) {
+        return false;
+      }
+
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    },
+
+    getPrefersReducedMotion() {
+      if (!window.matchMedia) {
+        return false;
+      }
+
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    },
+
     // side swipe
     onTouchStart(e) {
       this.touchStart = {
         x: e.changedTouches[0].clientX,
-        y: e.changedTouches[0].clientY,
+        y: e.changedTouches[0].clientY
       };
     },
 
@@ -353,7 +446,7 @@ export default {
     dewidow() {
       let typemate = new TypeMate(document.getElementById("content"));
       typemate.apply();
-    },
+    }
   },
 
   watch: {
@@ -361,7 +454,7 @@ export default {
       this.$nextTick(() => {
         this.dewidow();
       });
-    },
-  },
+    }
+  }
 };
 </script>

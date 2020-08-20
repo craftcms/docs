@@ -151,12 +151,12 @@ To determine which line items in the order will be discounted, a discount has an
 
 The options are:
 
-**Discount the matching items only**
+**Discount the matching items only**\
 This will only add “Per Item Amount Off” and “Per Item Percentage Off” discount amounts to the matching line items.
 
 Matching items are those items used to match this discount’s conditions, like “Product Variant” or “Category” conditions.
 
-**Discount all line items**
+**Discount all line items**\
 This will add “Per Item Amount Off” and “Per Item Percentage Off” discount amounts to all line items.
 
 Please note that the “Flat Amount Off Order” is applied to the whole order, so it’s not affected by the applied scope option and applies its discount to every line item—most expensive to least expensive—until it’s used up.

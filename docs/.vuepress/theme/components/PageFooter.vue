@@ -44,7 +44,10 @@
           </div>
         </div>
       </div>
-      <div class="w-2/5 text-sm text-right">
+      <div class="footer-links">
+        <p>
+          <PageEdit />
+        </p>
         <p>
           <a href="https://craftcms.com/contact" target="_blank" rel="noopener">
             <span class="right-footer-icon">
@@ -61,6 +64,9 @@
             back to craftcms.com
           </a>
         </p>
+        <div class="switch-wrapper block xl:hidden">
+          <ColorModeSwitch v-on="$listeners" :on="isDark" />
+        </div>
       </div>
     </div>
   </div>
@@ -111,8 +117,30 @@ h4 {
 }
 
 .right-footer-icon {
-  @apply inline-block relative mr-1;
+  @apply inline-block relative mr-1 text-light-slate opacity-25;
   top: 2px;
+}
+
+.footer-links {
+  @apply w-2/5 text-sm text-right;
+
+  a:hover .right-footer-icon {
+    @apply opacity-100;
+  }
+
+  .switch-wrapper {
+    @apply relative;
+    right: -2px;
+    top: -0.575rem;
+  }
+
+  .edit-link {
+    @apply inline-block;
+  }
+
+  .page-edit {
+    @apply py-0 overflow-auto mt-6;
+  }
 }
 
 .option {
@@ -163,14 +191,19 @@ import ThumbUp from "../icons/ThumbUp";
 import ThumbDown from "../icons/ThumbDown";
 import Envelope from "../icons/Envelope";
 import Reply from "../icons/Reply";
+import ColorModeSwitch from "./ColorModeSwitch";
+import PageEdit from "./PageEdit";
 
 export default {
   components: {
     ThumbUp,
     ThumbDown,
     Envelope,
-    Reply
+    Reply,
+    ColorModeSwitch,
+    PageEdit
   },
+  props: ["isDark"],
   data() {
     return {
       vote: null,
@@ -235,8 +268,7 @@ export default {
     },
     getIssueUrl() {
       return encodeURI(
-        `https://github.com/${this.$themeConfig.docsRepo}/issues/new?title=Improve “${this
-          .$page.title}”&body=I have a suggestion for https://craftcms.com/docs${this.$route.fullPath}:\n`
+        `https://github.com/${this.$themeConfig.docsRepo}/issues/new?title=Improve “${this.$page.title}”&body=I have a suggestion for https://craftcms.com/docs${this.$route.fullPath}:\n`
       );
     }
   },

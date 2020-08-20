@@ -4,11 +4,9 @@
 
     <Content id="content" class="theme-default-content" />
 
-    <PageEdit />
-
     <PageNav v-bind="{ sidebarItems }" />
 
-    <PageFooter />
+    <PageFooter v-on="$listeners" :is-dark="isDark" />
 
     <slot name="bottom" />
   </main>
@@ -21,13 +19,12 @@
 </style>
 
 <script>
-import PageEdit from "./PageEdit";
 import PageNav from "./PageNav";
 import PageFooter from "./PageFooter";
 
 export default {
   name: "Page",
-  components: { PageEdit, PageNav, PageFooter },
-  props: ["sidebarItems"]
+  components: { PageNav, PageFooter },
+  props: ["sidebarItems", "isDark"]
 };
 </script>

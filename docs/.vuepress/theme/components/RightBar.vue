@@ -1,5 +1,8 @@
 <template>
   <div class="right-bar">
+    <div class="switch-wrapper hidden xl:block">
+      <ColorModeSwitch v-on="$listeners" :on="isDark" />
+    </div>
     <div class="sidebar-link-wrapper">
       <SidebarLinks :depth="0" :items="headingItems" fixed-heading="On this Page" />
     </div>
@@ -8,12 +11,14 @@
 
 <script>
 import SidebarLinks from "./SidebarLinks";
+import ColorModeSwitch from "./ColorModeSwitch";
 
 export default {
   components: {
     SidebarLinks,
+    ColorModeSwitch,
   },
-  props: ["headingItems"],
+  props: ["headingItems", "isDark"],
 };
 </script>
 
@@ -52,6 +57,12 @@ export default {
         @apply opacity-100 text-slate;
       }
     }
+  }
+
+  .switch-wrapper {
+    @apply absolute;
+    top: 0.125rem;
+    right: 1.325rem;
   }
 }
 
