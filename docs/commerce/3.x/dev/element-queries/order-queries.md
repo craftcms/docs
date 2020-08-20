@@ -102,10 +102,6 @@ Order queries support the following parameters:
 
 Clears out the [status()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
 
-
-
-
-
 ::: code
 ```twig
 {# Fetch all orders, regardless of status #}
@@ -122,14 +118,9 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `asArray`
 
 Causes the query to return matching orders as arrays of data, rather than [Order](commerce3:craft\commerce\elements\Order) objects.
-
-
-
-
 
 ::: code
 ```twig
@@ -147,15 +138,9 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `clearCachedResult`
 
 Clears the cached result.
-
-
-
-
-
 
 ### `customer`
 
@@ -166,8 +151,6 @@ Possible values include:
 | Value | Fetches orders…
 | - | -
 | a [Customer](commerce3:craft\commerce\models\Customer) object | with a customer represented by the object.
-
-
 
 ::: code
 ```twig
@@ -186,7 +169,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `customerId`
 
 Narrows the query results based on the customer, per their ID.
@@ -199,8 +181,6 @@ Possible values include:
 | `'not 1'` | not with a customer with an ID of 1.
 | `[1, 2]` | with a customer with an ID of 1 or 2.
 | `['not', 1, 2]` | not with a customer with an ID of 1 or 2.
-
-
 
 ::: code
 ```twig
@@ -219,7 +199,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `dateAuthorized`
 
 Narrows the query results based on the orders’ authorized dates.
@@ -231,8 +210,6 @@ Possible values include:
 | `'>= 2018-04-01'` | that were authorized on or after 2018-04-01.
 | `'< 2018-05-01'` | that were authorized before 2018-05-01
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that were completed between 2018-04-01 and 2018-05-01.
-
-
 
 ::: code
 ```twig
@@ -254,12 +231,9 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `dateCreated`
 
 Narrows the query results based on the orders’ creation dates.
-
-
 
 Possible values include:
 
@@ -268,8 +242,6 @@ Possible values include:
 | `'>= 2018-04-01'` | that were created on or after 2018-04-01.
 | `'< 2018-05-01'` | that were created before 2018-05-01
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that were created between 2018-04-01 and 2018-05-01.
-
-
 
 ::: code
 ```twig
@@ -293,7 +265,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `dateOrdered`
 
 Narrows the query results based on the orders’ completion dates.
@@ -305,8 +276,6 @@ Possible values include:
 | `'>= 2018-04-01'` | that were completed on or after 2018-04-01.
 | `'< 2018-05-01'` | that were completed before 2018-05-01
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that were completed between 2018-04-01 and 2018-05-01.
-
-
 
 ::: code
 ```twig
@@ -328,7 +297,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `datePaid`
 
 Narrows the query results based on the orders’ paid dates.
@@ -340,8 +308,6 @@ Possible values include:
 | `'>= 2018-04-01'` | that were paid on or after 2018-04-01.
 | `'< 2018-05-01'` | that were paid before 2018-05-01
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that were completed between 2018-04-01 and 2018-05-01.
-
-
 
 ::: code
 ```twig
@@ -363,12 +329,9 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `dateUpdated`
 
 Narrows the query results based on the orders’ last-updated dates.
-
-
 
 Possible values include:
 
@@ -377,8 +340,6 @@ Possible values include:
 | `'>= 2018-04-01'` | that were updated on or after 2018-04-01.
 | `'< 2018-05-01'` | that were updated before 2018-05-01
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that were updated between 2018-04-01 and 2018-05-01.
-
-
 
 ::: code
 ```twig
@@ -400,7 +361,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `email`
 
 Narrows the query results based on the customers’ email addresses.
@@ -412,8 +372,6 @@ Possible values include:
 | `'foo@bar.baz'` | with an email of `foo@bar.baz`.
 | `'not foo@bar.baz'` | not with an email of `foo@bar.baz`.
 | `'*@bar.baz'` | with an email that ends with `@bar.baz`.
-
-
 
 ::: code
 ```twig
@@ -431,7 +389,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `expiryDate`
 
 Narrows the query results based on the orders’ expiry dates.
@@ -443,8 +400,6 @@ Possible values include:
 | `'>= 2020-04-01'` | that will expire on or after 2020-04-01.
 | `'< 2020-05-01'` | that will expire before 2020-05-01
 | `['and', '>= 2020-04-04', '< 2020-05-01']` | that will expire between 2020-04-01 and 2020-05-01.
-
-
 
 ::: code
 ```twig
@@ -466,14 +421,9 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `fixedOrder`
 
 Causes the query results to be returned in the order specified by [id](#id).
-
-
-
-
 
 ::: code
 ```twig
@@ -493,7 +443,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `gateway`
 
 Narrows the query results based on the gateway.
@@ -503,9 +452,6 @@ Possible values include:
 | Value | Fetches orders…
 | - | -
 | a [Gateway](commerce3:craft\commerce\base\Gateway) object | with a gateway represented by the object.
-
-
-
 
 ### `gatewayId`
 
@@ -520,19 +466,21 @@ Possible values include:
 | `[1, 2]` | with a gateway with an ID of 1 or 2.
 | `['not', 1, 2]` | not with a gateway with an ID of 1 or 2.
 
-
-
-
 ### `hasLineItems`
 
-Narrows the query results to only orders that have line items.
+Narrows the query results to only orders that have line items. (If empty, defaults to `true`.)
 
+Possible values include:
 
+| Value | Fetches orders…
+| - | -
+| `true` | that have line items.
+| `false` | that do not have any line items.
 
 ::: code
 ```twig
 {# Fetch orders that do or do not have line items #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
     .hasLineItems()
     .all() %}
 ```
@@ -545,7 +493,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `hasPurchasables`
 
 Narrows the query results to only orders that have certain purchasables.
@@ -554,22 +501,42 @@ Possible values include:
 
 | Value | Fetches orders…
 | - | -
+| `1` | with a purchasable with an ID of 1.
+| `[1, 2]` | with a purchasable with an ID of 1 or 2.
 | a [PurchasableInterface](commerce3:craft\commerce\base\PurchasableInterface) object | with a purchasable represented by the object.
 | an array of [PurchasableInterface](commerce3:craft\commerce\base\PurchasableInterface) objects | with all the purchasables represented by the objects.
-
-
-
-
-### `hasTransactions`
-
-Narrows the query results to only carts that have at least one transaction.
-
-
 
 ::: code
 ```twig
 {# Fetch carts that have attempted payments #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
+    .hasPurchasables(1)
+    .all() %}
+```
+
+```php
+// Fetch carts that have attempted payments
+$orders = \craft\commerce\elements\Order::find()
+    ->hasPurchasables(1)
+    ->all();
+```
+:::
+
+### `hasTransactions`
+
+Narrows the query results to only carts that have at least one transaction. (If empty, defaults to `true`.)
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `true` | that have transactions.
+| `false` | that do not have any transactions.
+
+::: code
+```twig
+{# Fetch carts that have attempted payments #}
+{% set orders = craft.orders()
     .hasTransactions()
     .all() %}
 ```
@@ -582,12 +549,9 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `id`
 
 Narrows the query results based on the orders’ IDs.
-
-
 
 Possible values include:
 
@@ -597,8 +561,6 @@ Possible values include:
 | `'not 1'` | not with an ID of 1.
 | `[1, 2]` | with an ID of 1 or 2.
 | `['not', 1, 2]` | not with an ID of 1 or 2.
-
-
 
 ::: code
 ```twig
@@ -616,34 +578,18 @@ $order = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
-
 ::: tip
 This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
 :::
-
 
 ### `ignorePlaceholders`
 
 Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 
-
-
-
-
-
-
-
-
-
 ### `inReverse`
 
 Causes the query results to be returned in reverse order.
-
-
-
-
 
 ::: code
 ```twig
@@ -661,17 +607,14 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `isCompleted`
 
 Narrows the query results to only orders that are completed.
 
-
-
 ::: code
 ```twig
 {# Fetch completed orders #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
     .isCompleted()
     .all() %}
 ```
@@ -684,17 +627,14 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `isPaid`
 
 Narrows the query results to only orders that are paid.
 
-
-
 ::: code
 ```twig
 {# Fetch paid orders #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
     .isPaid()
     .all() %}
 ```
@@ -707,17 +647,14 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `isUnpaid`
 
 Narrows the query results to only orders that are not paid.
 
-
-
 ::: code
 ```twig
 {# Fetch unpaid orders #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
     .isUnpaid()
     .all() %}
 ```
@@ -730,12 +667,9 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `limit`
 
 Determines the number of orders that should be returned.
-
-
 
 ::: code
 ```twig
@@ -753,7 +687,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `number`
 
 Narrows the query results based on the order number.
@@ -763,8 +696,6 @@ Possible values include:
 | Value | Fetches orders…
 | - | -
 | `'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'` | with a matching order number
-
-
 
 ::: code
 ```twig
@@ -784,12 +715,9 @@ $order = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `offset`
 
 Determines how many orders should be skipped in the results.
-
-
 
 ::: code
 ```twig
@@ -807,12 +735,9 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `orderBy`
 
 Determines the order that the orders should be returned in. (If empty, defaults to `id ASC`.)
-
-
 
 ::: code
 ```twig
@@ -830,7 +755,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `orderStatus`
 
 Narrows the query results based on the order statuses.
@@ -844,8 +768,6 @@ Possible values include:
 | `['foo', 'bar']` | with an order status with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not with an order status with a handle of `foo` or `bar`.
 | a [OrderStatus](commerce3:craft\commerce\models\OrderStatus) object | with an order status represented by the object.
-
-
 
 ::: code
 ```twig
@@ -863,7 +785,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `orderStatusId`
 
 Narrows the query results based on the order statuses, per their IDs.
@@ -876,8 +797,6 @@ Possible values include:
 | `'not 1'` | not with an order status with an ID of 1.
 | `[1, 2]` | with an order status with an ID of 1 or 2.
 | `['not', 1, 2]` | not with an order status with an ID of 1 or 2.
-
-
 
 ::: code
 ```twig
@@ -895,7 +814,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `origin`
 
 Narrows the query results based on the origin.
@@ -908,8 +826,6 @@ Possible values include:
 | `'not remote'` | not with an origin of `remote`.
 | `['web', 'cp']` | with an order origin of `web` or `cp`.
 | `['not', 'remote', 'cp']` | not with an origin of `web` or `cp`.
-
-
 
 ::: code
 ```twig
@@ -927,20 +843,15 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `preferSites`
 
 If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
-
-
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
 and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
 for Site B.
 
 If this isn’t set, then preference goes to the current site.
-
-
 
 ::: code
 ```twig
@@ -962,7 +873,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `reference`
 
 Narrows the query results based on the order reference.
@@ -972,8 +882,6 @@ Possible values include:
 | Value | Fetches orders…
 | - | -
 | `'xxxx'` | with a matching order reference
-
-
 
 ::: code
 ```twig
@@ -993,16 +901,11 @@ $order = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `relatedTo`
 
 Narrows the query results to only orders that are related to certain other elements.
 
-
-
 See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
-
-
 
 ::: code
 ```twig
@@ -1020,16 +923,11 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `search`
 
 Narrows the query results to only orders that match a search query.
 
-
-
 See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
-
-
 
 ::: code
 ```twig
@@ -1053,7 +951,6 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `shortNumber`
 
 Narrows the query results based on the order short number.
@@ -1063,8 +960,6 @@ Possible values include:
 | Value | Fetches orders…
 | - | -
 | `'xxxxxxx'` | with a matching order number
-
-
 
 ::: code
 ```twig
@@ -1084,14 +979,9 @@ $order = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `trashed`
 
 Narrows the query results to only orders that have been soft-deleted.
-
-
-
-
 
 ::: code
 ```twig
@@ -1109,14 +999,9 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `uid`
 
 Narrows the query results based on the orders’ UIDs.
-
-
-
-
 
 ::: code
 ```twig
@@ -1134,7 +1019,6 @@ $order = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `user`
 
 Narrows the query results based on the customer’s user account.
@@ -1145,8 +1029,6 @@ Possible values include:
 | - | -
 | `1` | with a customer with a user account ID of 1.
 | a [User](https://docs.craftcms.com/api/v3/craft-elements-user.html) object | with a customer with a user account represented by the object.
-
-
 
 ::: code
 ```twig
@@ -1165,16 +1047,11 @@ $orders = \craft\commerce\elements\Order::find()
 ```
 :::
 
-
 ### `with`
 
 Causes the query to return matching orders eager-loaded with related elements.
 
-
-
 See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
-
-
 
 ::: code
 ```twig
@@ -1191,7 +1068,5 @@ $orders = \craft\commerce\elements\Order::find()
     ->all();
 ```
 :::
-
-
 
 <!-- END PARAMS -->
