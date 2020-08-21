@@ -531,6 +531,19 @@ If `html` is included in the attributes argument (and `text` isn’t), its value
 
 All other keys passed to the second argument will be set as attributes on the tag, using <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
 
+If an attribute is set to `true`, it will be added without a value.
+
+```twig
+{{ tag('input', {
+    id: "foo",
+    name: "bar",
+    required: true
+}) }}
+{# Output: <input id="foo" name="bar" required> #}
+```
+
+Any attribute set to `null` or `false` will be omitted.
+
 ## `url`
 
 Returns a URL.
