@@ -543,6 +543,7 @@ export function getDocSetDefaultVersionByHandle(docSets, handle) {}
  * @param {*} activeVersion
  * @param {*} targetVersion
  * @param {*} pages
+ * @param {*} localOnly
  */
 export function getAlternateVersion(
   page,
@@ -569,7 +570,8 @@ export function getAlternateVersion(
 
     // return the updated path if it exists for a page
     if (updatedPage) {
-      return updatedPage.relativePath;
+      const anchorHash = getAnchorHash(updatedLocation);
+      return updatedPage.relativePath + (anchorHash ? "#" + anchorHash : "");
     }
   }
 
@@ -587,12 +589,30 @@ export function getPageWithRelativePath(pages, relativePath) {
     const sitePage = pages[i];
 
     // make sure the specified update actually exists
-    if (sitePage.relativePath == relativePath) {
+    if (sitePage.relativePath == getPathWithoutHash(relativePath)) {
       return sitePage;
     }
   }
 
   return null;
+}
+
+function getPathWithoutHash(path) {
+  if (path.includes("#")) {
+    let parts = path.split("#");
+    return parts[0];
+  }
+
+  return path;
+}
+
+function getAnchorHash(path) {
+  if (path.includes("#")) {
+    let parts = path.split("#");
+    return parts[1];
+  }
+
+  return false;
 }
 
 /**
@@ -701,7 +721,8 @@ export function getSameContentForVersion(
 
   if (alternatePath) {
     const targetPage = getPageWithRelativePath(pages, alternatePath);
-    targetPath = "/" + targetPage.path;
+    const anchorHash = getAnchorHash(alternatePath);
+    targetPath = "/" + targetPage.path + (anchorHash ? "#" + anchorHash : "");
   } else if (strict) {
     return false;
   }
