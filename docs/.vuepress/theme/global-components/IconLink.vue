@@ -7,7 +7,7 @@
       :class="{ 'large': iconSize == 'large' }"
     >
       <div class="icon absolute left-0">
-        <img :src="icon" alt />
+        <img :src="icon" class="no-zoom" alt />
       </div>
       <div class="text">
         <span class="leading-none text-lg font-medium block mb-1">
@@ -31,7 +31,7 @@
       :class="{ 'large': iconSize == 'large' }"
     >
       <div class="icon absolute left-0">
-        <img :src="icon" alt />
+        <img :src="icon" class="no-zoom" alt />
       </div>
       <div class="text">
         <span class="leading-none text-lg font-medium block mb-1">
@@ -95,7 +95,7 @@ import { Fragment } from "vue-fragment";
 
 export default {
   components: {
-    Fragment
+    Fragment,
   },
   props: ["icon", "iconSize", "title", "link", "subtitle", "repo"],
   computed: {
@@ -123,7 +123,7 @@ export default {
         return null;
       }
       return this.isBlankTarget ? "noopener noreferrer" : "";
-    }
-  }
+    },
+  },
 };
 </script>
