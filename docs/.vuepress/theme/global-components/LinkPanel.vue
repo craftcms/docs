@@ -2,7 +2,7 @@
   <div class="link-panel-wrapper">
     <RouterLink v-if="isInternal" class="link-panel" :to="link" :class="{ 'has-icon': icon }">
       <div v-if="icon" class="link-panel-icon">
-        <img :src="icon" alt />
+        <img :src="icon" class="no-zoom" alt />
       </div>
 
       <span class="title">{{ title }}</span>
@@ -21,7 +21,7 @@
       :class="{ 'has-icon': icon }"
     >
       <div v-if="icon" class="link-panel-icon">
-        <img :src="icon" alt />
+        <img :src="icon" class="no-zoom" alt />
       </div>
 
       <span class="title">{{ title }}</span>
