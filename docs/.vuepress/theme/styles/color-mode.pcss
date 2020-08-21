@@ -16,6 +16,8 @@
     --doc-set-color: theme("colors.gray.200");
     --code-highlight-color: rgba(45, 55, 72, 0.25);
     --code-bg-color: theme("colors.cinder");
+    --custom-block-bg-color: theme("colors.slate");
+    --custom-block-border-color: transparent;
   }
 }
 
@@ -34,6 +36,8 @@
   --doc-set-color: theme("colors.gray.200");
   --code-highlight-color: rgba(45, 55, 72, 0.25);
   --code-bg-color: theme("colors.cinder");
+  --custom-block-bg-color: theme("colors.slate");
+  --custom-block-border-color: transparent;
 
   .link-panel {
     background-color: var(--border-color);
@@ -125,9 +129,9 @@
 
     &.tip,
     &.warning,
-    &.danger {
-      border-color: transparent;
-      background-color: var(--border-color);
+    &.danger,
+    &.details {
+      border-color: var(--custom-block-border-color);
     }
   }
 

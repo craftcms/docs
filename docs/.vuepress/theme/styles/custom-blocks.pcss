@@ -3,7 +3,9 @@
  */
 
 .custom-block {
-  @apply px-5 rounded-sm overflow-hidden;
+  @apply px-5 rounded-sm overflow-hidden relative;
+  background-color: var(--custom-block-bg-color);
+  border: 1px solid var(--custom-block-border-color);
 
   .custom-block-title {
     @apply font-medium mt-4 -mb-3 text-sm;
@@ -18,10 +20,7 @@
   &.tip,
   &.warning,
   &.danger {
-    @apply relative;
     padding-left: 3.75rem;
-    background-color: #fafbfe;
-    border: 1px solid #f1f5fd;
     border-bottom: 1px solid #e5edfd;
 
     &:before {
@@ -47,7 +46,7 @@
     border-bottom: 1px solid rgba(229, 66, 43, 0.45);
 
     .custom-block-title {
-      color: rgba(229, 66, 43, 1.00);
+      color: rgba(229, 66, 43, 1);
     }
 
     &:before {
@@ -56,10 +55,8 @@
   }
 
   &.details {
-    @apply block relative rounded-sm;
+    @apply py-4 px-6;
     margin: 1.6em 0;
-    padding: 1.6em;
-    background-color: #eee;
 
     h4 {
       @apply mt-0;
