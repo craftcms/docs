@@ -1,3 +1,7 @@
+---
+updatedVersion: 3.x/sites.md#static-message-translations
+---
+
 # Static Message Translations
 
 Craft Pro’s localization features are great for translating your dynamic content. But a lot of the copy on your site probably doesn't come from custom fields. Sometimes it comes from a non-translatable field in the CP (such as the Site Name), and other times it’s hard-coded right into the templates. So how do you translate _that stuff?_
@@ -8,7 +12,7 @@ Translation files are PHP files that live in `craft/translations/` (a folder you
 
 For example, if you have a section called “News” in your English site, and you want it to be called “Noticias” in your Spanish site, create a file in `craft/translations/` called `es.php`:
 
-```
+```treeview
 craft/
 ├── config/
 ├── ...

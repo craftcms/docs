@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-08-21
+### Added
+- Added URL hash support for `updatedContent` frontmatter links.
+
 ## 2020-08-20
 ### Added
 - Added changelog!
