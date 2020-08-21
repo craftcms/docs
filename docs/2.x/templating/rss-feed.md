@@ -12,7 +12,7 @@ If you save this in a template that ends with a “.rss” file extension, Craft
     <channel>
         <title>{{ siteName }}</title>
         <link>{{ siteUrl }}</link>
-        <atom:link href="{{ craft.request.url }}" rel="self" type="application/rss+xml" />
+        <atom:link href="{{ url(craft.request.path) }}" rel="self" type="application/rss+xml" />
         <description>{{ globals.siteDescription }}</description>
         <language>en-us</language>
         <pubDate>{{ now.rss }}</pubDate>

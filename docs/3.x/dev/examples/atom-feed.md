@@ -12,9 +12,9 @@ If you save this in a template that ends with an `.atom` file extension, Craft w
 
     <title>{{ siteName }}</title>
     <link href="{{ siteUrl }}" />
-    <link type="application/atom+xml" rel="self" href="{{ craft.app.request.absoluteUrl }}" />
+    <link type="application/atom+xml" rel="self" href="{{ url(craft.app.request.pathInfo) }}" />
     <updated>{{ now|atom }}</updated>
-    <id>{{ craft.app.request.absoluteUrl }}</id>
+    <id>{{ url(craft.app.request.pathInfo) }}</id>
     <author>
         <name>{{ globals.feedAuthorName }}</name>
         <email>{{ globals.feedAuthorEmail }}</email>

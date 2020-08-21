@@ -5,6 +5,7 @@ Theme and significant content changes will be documented in this file.
 ## 2020-08-21
 ### Added
 - Added URL hash support for `updatedContent` frontmatter links.
+- Updated the feed template examples in both Craft 2 and 3 docs, to stop calling `craft.request.url` / `craft.app.request.absoluteUrl` to avoid Host header injection attacks.
 
 ## 2020-08-20
 ### Added
