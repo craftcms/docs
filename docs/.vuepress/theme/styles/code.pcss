@@ -29,11 +29,11 @@
     }
   }
 
-  code[class*=language-]::selection,
-  code[class*=language-] ::selection,
-  pre[class*=language-]::selection,
-  pre[class*=language-] ::selection {
-      background: rgba(74, 124, 246, 0.3);
+  code[class*="language-"]::selection,
+  code[class*="language-"] ::selection,
+  pre[class*="language-"]::selection,
+  pre[class*="language-"] ::selection {
+    background: var(--selection-color);
   }
 
   /* make sure fenced code blocks look nice in tips */
@@ -70,9 +70,10 @@ div[class*="language-"] {
 
   .highlight-lines {
     @apply pt-3 absolute select-none top-0 left-0 w-full leading-snug;
+    z-index: 2;
 
     .highlighted {
-      background-color: rgba(252, 233, 106, 0.3);
+      background-color: var(--code-highlight-color);
     }
   }
 

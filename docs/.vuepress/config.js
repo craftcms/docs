@@ -17,7 +17,7 @@ module.exports = {
         delay: 1000,
         options: {
           margin: 24,
-          background: "#f1f5fd",
+          background: "var(--medium-zoom-overlay-color)",
           scrollOffset: 0
         }
       }

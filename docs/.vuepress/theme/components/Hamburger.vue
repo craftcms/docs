@@ -19,7 +19,8 @@
   }
 
   span {
-    @apply block bg-black absolute left-0;
+    @apply block absolute left-0;
+    background: var(--hamburger-color);
     top: 12px;
     left: 9px;
     width: 19px;
@@ -45,7 +46,7 @@ export default {
   methods: {
     handleClick(e) {
       this.$emit("click", e);
-    }
-  }
+    },
+  },
 };
 </script>

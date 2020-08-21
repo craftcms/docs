@@ -1,49 +1,41 @@
-.theme-dark {
-  body {
-    @apply bg-gray-900 text-white;
+/* initial load, no class on html element */
+@media (prefers-color-scheme: light) {
+  html:not([class]) {
+    --bg-color: theme("colors.white");
   }
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([class]) {
+    --text-color: theme("colors.white");
+    --bg-color: theme("colors.gray.900");
+    --sidebar-bg-color: rgba(0, 0, 0, 0.1);
+    --search-bg-color: theme("colors.slate");
+    --heading-color: theme("colors.gray.100");
+    --border-color: theme("colors.slate");
+    --doc-set-color: theme("colors.gray.200");
+    --code-highlight-color: rgba(45, 55, 72, 0.25);
+  }
+}
+
+/* JS-applied, which may differ from browser setting */
+.theme-dark {
+  --text-color: theme("colors.white");
+  --bg-color: theme("colors.gray.900");
+  --sidebar-bg-color: rgba(0, 0, 0, 0.1);
+  --search-bg-color: theme("colors.slate");
+  --medium-zoom-overlay-color: rgba(23, 29, 40, 1);
+  --heading-color: theme("colors.gray.100");
+  --sidebar-link-color: theme("colors.gray.100");
+  --hamburger-color: theme("colors.white");
+  --tooltip-bg-color: theme("colors.gray.800");
+  --border-color: theme("colors.slate");
+  --doc-set-color: theme("colors.gray.200");
+  --code-highlight-color: rgba(45, 55, 72, 0.25);
 
   .theme-container {
-    .medium-zoom-overlay {
-      background: rgba(23, 29, 40, 1) !important;
-    }
-
-    .site-name {
-      @apply text-gray-100;
-    }
-
-    .doc-set-panel {
-      .doc-set {
-        @apply text-gray-200;
-      }
-    }
-
-    .doc-set-current .title {
-      @apply text-gray-100;
-    }
-
-    .right-bar .sidebar-links .sidebar-link {
-      @apply text-gray-100;
-
-      &.active {
-        @apply text-gray-100;
-      }
-    }
-
-    .page-nav .inner {
-      @apply border-slate;
-    }
-
-    .vote-buttons .option {
-      @apply border-slate;
-    }
-
-    .left-bar {
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-
     .link-panel {
-      background-color: rgba(45, 55, 72, var(--bg-opacity));
+      background-color: var(--border-color);
       border-color: rgba(255, 255, 255, 0.05);
 
       .subtitle {
@@ -54,12 +46,6 @@
     .icon-link {
       .text-slate {
         color: rgba(255, 255, 255, 0.4);
-      }
-    }
-
-    .nav-hamburger {
-      span {
-        background-color: #fff;
       }
     }
 
@@ -107,29 +93,9 @@
         color: #a0aec0;
       }
     }
-
-    .tooltip {
-      @apply bg-gray-800;
-
-      .tooltip-arrow {
-        @apply border-gray-800;
-      }
-    }
   }
 
   .theme-default-content {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5 {
-      @apply text-gray-100;
-    }
-
-    h2 {
-      @apply border-slate;
-    }
-
     code {
       @apply bg-cinder;
     }
@@ -149,7 +115,7 @@
     }
 
     .pre-heading-title {
-      @apply text-slate border-slate;
+      @apply text-slate;
     }
 
     .custom-block {
@@ -165,7 +131,7 @@
       &.warning,
       &.danger {
         border-color: transparent;
-        background-color: rgba(45, 55, 72, var(--bg-opacity));
+        background-color: var(--border-color);
       }
     }
 
@@ -184,41 +150,36 @@
       }
     }
 
-    th,
-    td {
-      border-color: rgba(45, 55, 72, 1);
-    }
-
     div.table {
-      border-color: rgba(45, 55, 72, 1);
+      border-color: var(--border-color);
     }
 
     dl {
-      background-color: rgba(45, 55, 72, var(--bg-opacity));
+      background-color: var(--border-color);
     }
 
     .post-heading {
       .auto-toc {
-        border-color: rgba(45, 55, 72, 1);
+        border-color: var(--border-color);
       }
     }
 
     .token.treeview-part .line-h:before,
     .token.treeview-part .line-v:before {
-      border-left: 1px solid rgba(45, 55, 72, 1);
+      border-left: 1px solid var(--border-color);
     }
 
     .token.treeview-part .line-h:after {
-      border-bottom: 1px solid rgba(45, 55, 72, 1);
+      border-bottom: 1px solid var(--border-color);
     }
 
     .token.treeview-part .line-v-last:before {
-      border-left: 1px solid rgba(45, 55, 72, 1);
-      border-bottom: 1px solid rgba(45, 55, 72, 1);
+      border-left: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
     }
 
     ul.code-language-switcher {
-      background: rgba(45, 55, 72, var(--bg-opacity));
+      background: var(--border-color);
 
       li a.active {
         @apply text-cinder;
@@ -230,32 +191,13 @@
   div[class*="language-"] {
     @apply bg-cinder;
 
-    .highlight-lines {
-      .highlighted {
-        @apply bg-black;
-        background-color: rgba(45, 55, 72, 0.25);
-      }
+    &:before {
+      color: rgba(255, 255, 255, 0.2);
     }
   }
 
   a.sidebar-link,
   .sidebar-extra-item {
     @apply text-gray-500;
-  }
-
-  .sidebar-extra-top {
-    border-color: rgba(45, 55, 72, 1);
-  }
-
-  .left-bar-bottom {
-    @apply border-slate;
-  }
-
-  .doc-set-version {
-    @apply border-slate;
-  }
-
-  #search input {
-    @apply bg-slate;
   }
 }

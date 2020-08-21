@@ -1,3 +1,19 @@
+:root {
+  --text-color: theme("colors.slate");
+  --bg-color: theme("colors.white");
+  --sidebar-bg-color: theme("colors.softer");
+  --search-bg-color: theme("colors.soft");
+  --medium-zoom-overlay-color: theme("colors.soft");
+  --heading-color: theme("colors.slate");
+  --sidebar-link-color: theme("colors.slate");
+  --hamburger-color: theme("colors.black");
+  --tooltip-bg-color: theme("colors.white");
+  --border-color: #e2e8f0;
+  --doc-set-color: theme("colors.slate");
+  --code-highlight-color: rgba(252, 233, 106, 0.3);
+  --selection-color: rgba(74, 124, 246, 0.3);
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -9,7 +25,9 @@ html {
 }
 
 body {
-  @apply text-slate font-sans font-normal;
+  @apply font-sans font-normal;
+  color: var(--text-color);
+  background-color: var(--bg-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
@@ -51,7 +69,7 @@ img {
   }
 }
 
-@media screen and (min-width: 1408px) {
+@screen xxl {
   body {
     zoom: 1.08;
   }

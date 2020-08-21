@@ -28,6 +28,7 @@
 <style lang="postcss">
 .sidebar-extra-top {
   @apply border-t mt-12 pt-3 mx-4;
+  border-color: var(--border-color);
 }
 
 .sidebar-extra-item {

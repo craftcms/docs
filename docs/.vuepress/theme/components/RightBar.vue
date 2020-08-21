@@ -50,11 +50,14 @@ export default {
     }
 
     .sidebar-link {
-      @apply mx-0 px-0 text-slate border-0 pr-4;
+      @apply mx-0 px-0 border-0 pr-4;
+      color: var(--sidebar-link-color);
+
       opacity: 0.6;
 
       &.active {
-        @apply opacity-100 text-slate;
+        @apply opacity-100;
+        color: var(--sidebar-link-color);
       }
     }
   }
