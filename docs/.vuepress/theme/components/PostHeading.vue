@@ -21,6 +21,7 @@
   .post-heading {
     .auto-toc {
       @apply w-full mt-3 mb-6 border-t border-b;
+      border-color: var(--border-color);
     }
     .sidebar-links {
       @apply list-none p-0 mx-0 mb-3;
@@ -45,20 +46,20 @@ import SidebarLinks from "./SidebarLinks";
 
 export default {
   components: {
-    SidebarLinks
+    SidebarLinks,
   },
   mounted() {
     this.checkReferrer();
   },
   data() {
     return {
-      suggestedUpdatePath: null
+      suggestedUpdatePath: null,
     };
   },
   computed: {
     headingItems() {
       return resolveHeaders(this.$page);
-    }
+    },
   },
   methods: {
     checkReferrer() {
@@ -96,18 +97,18 @@ export default {
         /google\.com/,
         /yahoo\.com/,
         /bing\.com/,
-        /duckduckgo\.com/
+        /duckduckgo\.com/,
       ];
 
       // does it look like the visitor came from a search engine?
-      const isSearchReferral = searchMatch.some(item =>
+      const isSearchReferral = searchMatch.some((item) =>
         item.test(document.referrer)
       );
 
       if (isSearchReferral) {
         this.suggestedUpdatePath = alternateVersionPath;
       }
-    }
-  }
+    },
+  },
 };
 </script>

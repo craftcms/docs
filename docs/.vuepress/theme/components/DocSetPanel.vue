@@ -31,7 +31,7 @@
           <img :src="$activeSet.icon" width="28" height="28" alt />
         </span>
         <div
-          class="title text-slate leading-none font-medium"
+          class="title leading-none font-medium"
         >{{ $activeSet.setTitle ? $activeSet.setTitle : $activeSet.title }}</div>
       </RouterLink>
       <div v-if="$activeSet.versions" class="doc-set-version-wrapper">
@@ -64,7 +64,12 @@
   }
 
   .doc-set {
-    @apply block px-4 mt-2 text-slate font-medium text-lg;
+    @apply block px-4 mt-2 font-medium text-lg;
+    color: var(--doc-set-color);
+
+    .title {
+      color: var(--doc-set-color);
+    }
   }
 
   .home {
@@ -103,7 +108,7 @@
       }
 
       .home-title {
-        @apply relative pl-0;
+        @apply relative pl-0 text-blue;
         left: -2px;
       }
     }
@@ -116,6 +121,7 @@
   .doc-set-version {
     @apply border pr-5 py-1 rounded-md leading-none flex content-center items-center appearance-none font-medium text-sm bg-transparent cursor-pointer;
     padding-left: 0.375rem;
+    border-color: var(--border-color);
   }
 
   .doc-set-current {
@@ -123,6 +129,7 @@
 
     .title {
       font-size: 1.125rem;
+      color: var(--doc-set-color);
     }
   }
 

@@ -40,7 +40,7 @@
 }
 
 .link-panel {
-  @apply rounded border block w-full p-4 ;
+  @apply rounded border block w-full p-4;
   transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
 
   .title {
@@ -89,7 +89,7 @@ import Octocat from "../icons/Octocat";
 export default {
   props: ["icon", "title", "link", "subtitle", "repo"],
   components: {
-    Octocat
+    Octocat,
   },
   computed: {
     isNonHttpURI() {
@@ -116,7 +116,7 @@ export default {
         return null;
       }
       return this.isBlankTarget ? "noopener noreferrer" : "";
-    }
-  }
+    },
+  },
 };
 </script>

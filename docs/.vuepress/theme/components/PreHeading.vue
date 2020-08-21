@@ -12,6 +12,7 @@
   .pre-heading-title {
     @apply my-0 py-0 px-2 relative inline-block leading-normal uppercase rounded text-xs border tracking-wider;
     color: #a0aec0;
+    border-color: var(--border-color);
   }
 }
 </style>

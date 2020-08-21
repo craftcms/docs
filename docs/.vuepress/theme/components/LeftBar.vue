@@ -2,11 +2,7 @@
   <aside class="left-bar">
     <div class="wrap">
       <div id="top" class="h-12 flex items-center">
-        <RouterLink
-          :to="`/`"
-          ref="siteName"
-          class="site-name text-slate font-bold px-4 mt-1"
-        >{{ $siteTitle }}</RouterLink>
+        <RouterLink :to="`/`" ref="siteName" class="site-name font-bold px-4 mt-1">{{ $siteTitle }}</RouterLink>
       </div>
 
       <slot name="top" />
@@ -70,6 +66,10 @@
 </template>
 
 <style lang="postcss">
+.site-name {
+  color: var(--sidebar-link-color);
+}
+
 .left-bar-links {
   @apply h-screen overflow-y-auto pb-32;
   /* browser height - approx. .doc-set-panel height - #top height */
@@ -88,7 +88,8 @@
 }
 
 .left-bar {
-  @apply w-64 h-screen bg-softer fixed z-10;
+  @apply w-64 h-screen fixed z-10;
+  background-color: var(--sidebar-bg-color);
   transform: translateX(-16rem);
 
   .wrap {
@@ -97,6 +98,7 @@
 
   .left-bar-bottom {
     @apply absolute w-full border-t;
+    border-color: var(--border-color);
   }
 }
 
