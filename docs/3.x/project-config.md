@@ -2,7 +2,12 @@
 
 Craft keeps track of each project’s configuration in a central store called **project config**.
 
-It writes static YAML files that can be versioned and used to deploy site changes across multiple environments, making it easier for developers to collaborate without having to pass around database dumps or write migrations to update basic configuration.
+As you make changes to system settings, Craft will record those setting values to YAML files in a `config/project/` folder. You can then commit those files to your Git repository, just like your templates and front-end resources.
+
+It offers two benefits:
+
+1. You’ll be able to keep track of your project’s changing state over time.
+2. You can apply new changes to other development/staging/production environments, rather than restoring a database backup or manually recreating changes.
 
 ### What’s Stored in Project Config
 
@@ -27,27 +32,26 @@ It writes static YAML files that can be versioned and used to deploy site change
 Plugins can store additional things in the project config as well. See [Supporting Project Config](extend/project-config.md) to learn how.
 :::
 
-## Getting Started with Project Config Files
+## Environment Setup
 
-As of Craft 3.5, project config is always enabled and writing multiple files to `config/project/`. (Multiple files reduce the frequency and complexity of merge conflicts, compared to previous versions’ single `project.yaml` file.) This doesn’t have any impact on your Craft install unless you decide to apply changes from these files.
-
-::: warning
-For more specifically on the project config updates in Craft 3.5, see [craftcms.com/knowledge-base/upgrading-to-craft-3-5](https://craftcms.com/knowledge-base/upgrading-to-craft-3-5#project-config-workflow).
-:::
-
-Before sharing your project config with a team or regularly applying changes in your deployments, it’s important to start by pulling a clean, intentional starting point into each of your environments:
+Before you start applying project config changes, make sure each environment is in a consistent state.
 
 1. Pick a primary environment that has the most up-to-date data. (If your project is already live, this should be your production environment.)
 2. Ensure your primary environment is running the latest version of Craft.
 3. Run `php craft project-config/rebuild` on that environment to ensure that its project config is up to date with settings stored throughout the database.
 4. Back up the database on the primary environment.
 5. For all other environments, restore the database backup created in the previous step, and replace the local project’s `config/project/` directory with the one generated in the primary environment in step 3.
+6. Disable the <config3:allowAdminChanges> config setting on all non-development environments, to avoid [losing changes unexpectedly](#production-changes-may-be-forgotten).
 
-Craft will continue updating the files in `config/project/` any time something changes [that’s managed by the project config](#whats-stored-in-project-config). Whenever you run `php craft project-config/apply`, any changes found in `config/project/` will be propagated into the local Craft install, regardless of whether they were changes you made yourself or pulled down from Git. Or even—and take a moment to consider this—both!
+Now you’re ready to start applying changes in your `config/project/` folder to other environments.
 
-::: tip
-If you’re approaching project config after regularly copying down database dumps from production, a critical shift in thinking is to separate the idea of Craft’s *state*, formerly handled by `composer.json` and a database dump, into *configuration* via project config and *content* in the database. Content ultimately lives in one place, but configuration can be shared using project config in any number of places—often starting with your local environment.
-:::
+## Applying Changes
+
+There are three ways to apply new changes to an environment:
+
+1. If [Dev Mode](config3:devMode) is enabled, Craft’s control panel will notify you of changes and prompt you to apply them.
+2. You can apply pending changes from the “Project Config” utility in the control panel.
+3. You can run the `php craft project-config/apply` terminal command to apply pending changes.
 
 ## Caveats
 
@@ -90,10 +94,6 @@ return [
 
 That will remove the UI for most administrative settings that affect the project config, and also places the project config in a read-only state so there’s no chance its YAML will be altered.
 
-### Plugins May Not Support It Yet
-
-Any plugins that are storing configuration settings outside of their main plugin settings will need to be updated to [support the project config](extend/project-config.md). So there may still be some cases where changes need to be manually made on each environment.
-
 ### Config Data Could Get Out of Sync
 
 If any settings managed by the project config are modified elsewhere in the database, either manually or via a plugin/module that isn’t using the appropriate service, the project config will be out of sync with those database values and likely result in errors. If that happens, Craft provides a console command that can be run to patch up your project config:
@@ -115,3 +115,20 @@ php craft project-config/apply --force
 ```
 
 This will treat all project config values as added or updated, resulting in a longer sync process and potentially overriding any expected changes that might have been favored in the database.
+
+## Opting Out
+
+You can opt out of sharing your project config files with other environments by adding the following line to the `.gitignore` file at the root of your project:
+
+```
+/config/project
+```
+
+Then run the following terminal commands to delete all existing `config/project/` files from your repository:
+
+```bash
+git rm -r --cached config/project/\*
+git commit -a -m 'Remove project config files'
+```
+
+Craft will continue recording changes to YAML files within the `config/project/` folder, but they will no longer get committed to your project’s Git repository or shared with other environments.
