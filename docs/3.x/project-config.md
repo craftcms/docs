@@ -38,7 +38,7 @@ Before you start propagating project config changes across your environments, ma
 
 1. Pick a primary environment that has the most up-to-date data. (If your project is already live, this should be your production environment.)
 2. Ensure your primary environment is running the latest version of Craft.
-3. Go to Utilities → Project Config on that environment, and click the “Rebuild” button to ensure that its project config is up-to-date with settings stored throughout the database.
+3. Go to Utilities → Project Config on that environment, and click the “Rebuild” button to ensure that its project config is up to date with settings stored throughout the database.
 4. Back up the database on the primary environment.
 5. For all other environments, restore the database backup created in the previous step, delete the contents of the `config/project/` folder, and then load the site in your browser to ensure it works. (Craft will regenerate the YAML files in `config/project/` the first time it’s accessed.)
 6. Disable the <config3:allowAdminChanges> config setting on all non-development environments, to avoid [losing changes unexpectedly](#production-changes-may-be-forgotten) going forward.
