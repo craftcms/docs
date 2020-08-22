@@ -7,7 +7,7 @@ As you make changes to system settings, Craft will record those setting values t
 It offers two benefits:
 
 1. You’ll be able to keep track of your project’s changing state over time.
-2. You can apply new changes to other development/staging/production environments, rather than restoring a database backup or manually recreating changes.
+2. You can propagate new changes to other development/staging/production environments, rather than manually applying them.
 
 ### What’s Stored in Project Config
 
@@ -34,24 +34,28 @@ Plugins can store additional things in the project config as well. See [Supporti
 
 ## Environment Setup
 
-Before you start applying project config changes, make sure each environment is in a consistent state.
+Before you start propagating project config changes across your environments, make sure each environment is in a consistent state.
 
 1. Pick a primary environment that has the most up-to-date data. (If your project is already live, this should be your production environment.)
 2. Ensure your primary environment is running the latest version of Craft.
-3. Run `php craft project-config/rebuild` on that environment to ensure that its project config is up to date with settings stored throughout the database.
+3. Go to Utilities → Project Config on that environment, and click the “Rebuild” button to ensure that its project config is up-to-date with settings stored throughout the database.
 4. Back up the database on the primary environment.
-5. For all other environments, restore the database backup created in the previous step, and replace the local project’s `config/project/` directory with the one generated in the primary environment in step 3.
-6. Disable the <config3:allowAdminChanges> config setting on all non-development environments, to avoid [losing changes unexpectedly](#production-changes-may-be-forgotten).
+5. For all other environments, restore the database backup created in the previous step, delete the contents of the `config/project/` folder, and then load the site in your browser to ensure it works. (Craft will regenerate the YAML files in `config/project/` the first time it’s accessed.)
+6. Disable the <config3:allowAdminChanges> config setting on all non-development environments, to avoid [losing changes unexpectedly](#production-changes-may-be-forgotten) going forward.
 
-Now you’re ready to start applying changes in your `config/project/` folder to other environments.
+Now you’re ready to start propagating changes in your `config/project/` folder to other environments.
 
-## Applying Changes
+## Propagating Changes
 
-There are three ways to apply new changes to an environment:
+As you make changes in a development environment, you will notice the contents of your `config/project/` folder are updated to reflect those changes. Commit those files to your Git repository just like your templates, front-end resources, and other project files.
+
+When you deploy your changes to other environments, you can then _apply_ the project config changes in one of three ways:
 
 1. If [Dev Mode](config3:devMode) is enabled, Craft’s control panel will notify you of changes and prompt you to apply them.
 2. You can apply pending changes from the “Project Config” utility in the control panel.
-3. You can run the `php craft project-config/apply` terminal command to apply pending changes.
+3. You can run the `php craft project-config/apply` terminal command.
+
+Either way, Craft will compare the files in the local `config/project/` folder with its already-loaded project config, and pull in whatever changes it finds.
 
 ## Caveats
 
