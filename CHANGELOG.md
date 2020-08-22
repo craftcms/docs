@@ -6,6 +6,9 @@ Theme and significant content changes will be documented in this file.
 ### Added
 - Added URL hash support for `updatedContent` frontmatter links.
 
+### Changed
+- Updated Project Config page for Craft 3.5.
+
 ### Security
 - Updated the feed template examples in both Craft 2 and 3 docs, to stop calling `craft.request.url` / `craft.app.request.absoluteUrl` to avoid Host header injection attacks.
 
