@@ -217,15 +217,15 @@ public function deleteProductType($productType)
 
 新しいプラグインのマイグレーションが保留中、_かつ_、 `project.yaml` の変更が保留中の場合、Craft は最初にマイグレーションを実行してから `project.yaml` の変更を同期します。
 
-1. プロジェクトコンフィグを変更する新しいマイグレーションが含まれるプラグインが、環境 A でアップデートされました。
-3. 更新された `composer.lock`、および、`project.yaml` が Git にコミットされました。
-4. Craft が新しいプラグインのマイグレーションを実行し、_さらに_、`project.yaml` の変更を同期しなければならない環境 B に、その Git のコミットがプルされました。
+1. Your plugin is updated in a development environment, which includes a new migration that makes a change to the project config.
+3. The updated `composer.lock` and project config YAML files are committed to Git.
+4. The Git commit is pulled into the production environment, where Craft must now run the new plugin migration _and_ apply the changes in the project config YAML files.
 
-プラグインのマイグレーションで環境 B に対して同じプロジェクトコンフィグの変更が行われる場合、`project.yaml` で保留中の変更と競合します。
+When new migrations _and_ project config YAML changes are both pending, Craft will first run the migrations, then apply the project config YAML changes.
 
-If your plugin migration were to make the same project config changes again on Environment B, those changes will conflict with the pending changes in `project.yaml`.
+If your plugin migration were to make the same project config changes again on Environment B, those changes will conflict with the pending project config YAML changes.
 
-To avoid this, always check your plugin’s schema version _in `project.yaml`_ before making project config changes. (You do that by passing `true` as the second argument when calling [ProjectConfig::get()](craft3:craft\services\ProjectConfig::get()).)
+To avoid this, always check your plugin’s schema version _in the YAML file_ before making project config changes. (You do that by passing `true` as the second argument when calling [ProjectConfig::get()](craft3:craft\services\ProjectConfig::get()).)
 
 ```php
 public function safeUp()
