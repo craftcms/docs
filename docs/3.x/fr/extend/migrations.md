@@ -151,7 +151,7 @@ It is _not_ a plugin’s responsibility to manage its row in the `plugins` datab
 
 ### Setting Default Project Config Data
 
-If you want to add things to the [project config](project-config.md) on install, either directly or via your plugin’s API, be sure to only do that if the incoming `project.yaml` file doesn’t already have a record of your plugin.
+If you want to add things to the [project config](project-config.md) on install, either directly or via your plugin’s API, be sure to only do that if the incoming project config YAML doesn’t already have a record of your plugin.
 
 ```php
 public function safeUp()
@@ -165,4 +165,4 @@ public function safeUp()
 }
 ```
 
-That’s because there’s a chance that your plugin is being installed as part of a project config sync, and if its install migration were to make any project config changes of its own, they would overwrite all of the incoming changes from `project.yaml`.
+That’s because there’s a chance that your plugin is being installed as part of a project config sync, and if its install migration were to make any project config changes of its own, they would overwrite all of the incoming project config YAML changes.
