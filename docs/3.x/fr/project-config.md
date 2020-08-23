@@ -7,7 +7,7 @@ As you make changes to system settings, Craft will record those setting values t
 It offers two benefits:
 
 1. You’ll be able to keep track of your project’s changing state over time.
-2. You can propagate new changes to other development/staging/production environments, rather than manually applying them.
+2. You can propagate new changes to other development/staging/production environments, rather than manually reapplying them.
 
 ### What’s Stored in Project Config
 
