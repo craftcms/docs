@@ -153,7 +153,7 @@ php craft migrate/create install --plugin=my-plugin-handle
 
 ### デフォルトのプロジェクトコンフィグデータの設定
 
-直接、または、プラグインの API を経由して、インストール時に [project config](project-config.md) に何かを追加したい場合、必ず新しい `project.yaml` ファイルにそのプラグインのレコードを持っていないことを確認してください。
+If you want to add things to the [project config](project-config.md) on install, either directly or via your plugin’s API, be sure to only do that if the incoming project config YAML doesn’t already have a record of your plugin.
 
 ```php
 public function safeUp()
@@ -167,4 +167,4 @@ public function safeUp()
 }
 ```
 
-なぜなら、プロジェクトコンフィグの同期の一部としてプラグインがインストールされている可能性があるためです。 インストールマイグレーションが独自にプロジェクトコンフィグを変更する場合、`project.yaml` からの新しい変更をすべて上書きしてしまいます。
+That’s because there’s a chance that your plugin is being installed as part of a project config sync, and if its install migration were to make any project config changes of its own, they would overwrite all of the incoming project config YAML changes.
