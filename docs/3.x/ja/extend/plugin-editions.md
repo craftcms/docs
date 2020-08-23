@@ -68,11 +68,6 @@ Operator | Tests if the active edition is ____ the given edition
 
 ## テスト
 
-::: tip
-`config/project.yaml` ファイルを持たない場合、コンフィグ設定の
+You can toggle the active edition by changing the `plugins.<plugin-handle>.edition` property in `config/project/project.yaml`.
 
-::: tip
-If you don’t have a `config/project.yaml` file, you need to enable the <config3:useProjectConfigFile> config setting.
-:::
-
-（プラグインの `editions()` メソッドで返される）有効なエディションハンドルの値に変更すると、Craft は `project.yaml` の変更を読み込まれたプロジェクトコンフィグと同期するよう促します。 それが完了すると、プラグインのアクティブなエディションが新しいエディションにセットされ、機能トグルはそれに応じて動作しはじめます。
+After changing the value to a valid edition handle (one returned by your plugin’s `editions()` method), Craft will prompt you to sync your project config YAML changes into the loaded project config. Once that’s done, your plugin’s active edition will be set to the new edition, and feature toggles should start behaving accordingly.
