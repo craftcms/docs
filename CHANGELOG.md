@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-08-23
+### Changed
+- Updated remaining `project.yaml` references throughout the Craft 3 docs.
+
 ## 2020-08-22
 ### Changed
 - Improved the Project Config page.
