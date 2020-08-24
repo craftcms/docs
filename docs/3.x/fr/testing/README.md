@@ -13,5 +13,5 @@ As of 3.2, Craft provides a formalized testing framework that is based on [Codec
 On top of all the tools that Codeception and Yii 2 natively provide for testing. Craft adds its own layer of support to ensure Craft specific concepts such as Elements & Project config are supported.
 
 ::: tip
-Ready to rock? Start by reading a description of what testing is within [Craft](testing.md) as well as how to test using [Codeception](https://codeception.com/docs/01-Introduction). Then there is a handy [get started guide](./testing-craft/getting-started.md) to setup your test suite.
+Ready to rock? Start by reading a description of what testing is within [Craft](testing.md) as well as how to test using [Codeception](https://codeception.com/docs/01-Introduction). Then there is a handy [setup guide](./testing-craft/setup.md) to setup your test suite.
 :::
