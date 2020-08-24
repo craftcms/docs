@@ -20,7 +20,7 @@ The cleanup option ensures that fixtures are removed after a test. This cleans a
 
 ## Use .gitignore
 
-In the [getting started](../testing-craft/getting-started.md) section you set up a `_craft` folder which contains various directories for testing. One of these directories is the `storage` directory. While tests are running, Craft will create a lot of temporary files and logs in this folder. Use a [.gitignore](https://git-scm.com/docs/gitignore) file to keep these files out of your version control system (i.e. Git). The same policy should apply to the `tests/_output/` directory Codeception creates for tests.
+In the [setup](../testing-craft/setup.md) section you set up a `_craft` folder which contains various directories for testing. One of these directories is the `storage` directory. While tests are running, Craft will create a lot of temporary files and logs in this folder. Use a [.gitignore](https://git-scm.com/docs/gitignore) file to keep these files out of your version control system (i.e. Git). The same policy should apply to the `tests/_output/` directory Codeception creates for tests.
 
 ## Namespacing
 
