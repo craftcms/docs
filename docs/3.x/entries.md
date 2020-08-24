@@ -286,7 +286,7 @@ Entry queries support the following parameters:
 | [limit](#limit)                           | Determines the number of entries that should be returned.
 | [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the entry that comes immediately after another entry.
 | [offset](#offset)                         | Determines how many entries should be skipped in the results.
-| [orderBy](#orderby)                       | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`.)
+| [orderBy](#orderby)                       | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
 | [positionedAfter](#positionedafter)       | Narrows the query results to only entries that are positioned after another entry.
 | [positionedBefore](#positionedbefore)     | Narrows the query results to only entries that are positioned before another entry.
 | [postDate](#postdate)                     | Narrows the query results based on the entries’ post dates.
@@ -1178,7 +1178,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `orderBy`
 
-Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`.)
+Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
 
 
 

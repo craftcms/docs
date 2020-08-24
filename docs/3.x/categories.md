@@ -131,7 +131,7 @@ Category queries support the following parameters:
 | [limit](#limit)                           | Determines the number of categories that should be returned.
 | [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the category that comes immediately after another category.
 | [offset](#offset)                         | Determines how many categories should be skipped in the results.
-| [orderBy](#orderby)                       | Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC`.)
+| [orderBy](#orderby)                       | Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC`, or the order defined by the category group if the [group](#group) or [groupId](#groupid) params are set to a single group.)
 | [positionedAfter](#positionedafter)       | Narrows the query results to only categories that are positioned after another category.
 | [positionedBefore](#positionedbefore)     | Narrows the query results to only categories that are positioned before another category.
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
@@ -755,7 +755,7 @@ $categories = \craft\elements\Category::find()
 
 #### `orderBy`
 
-Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC`.)
+Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC`, or the order defined by the category group if the [group](#group) or [groupId](#groupid) params are set to a single group.)
 
 
 
