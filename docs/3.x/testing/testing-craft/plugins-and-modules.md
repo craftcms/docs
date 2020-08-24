@@ -10,5 +10,5 @@ Plugins must be registered via the `codeception.yml` file in accordance with the
 `MyPlugin::getInstance()`.
 
 ::: tip
-Unsure where to start with tests for your module or plugin? See [Getting Started](getting-started.md).
+Unsure where to start with tests for your module or plugin? See the [setup guide](setup.md).
 :::

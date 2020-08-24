@@ -1,4 +1,4 @@
-# Fully mocking the `Craft::$app` object.
+# Fully Mocking `Craft::$app`
 
 Most of the Craft testing framework resolves around an integration style of testing.
 Inherently this means we perform a lot of setup work in order to make it appear
@@ -10,8 +10,7 @@ unit, functional and acceptance testing.
 
 Obviously, this forces your unit tests into a specific style which you may not prefer.
 For this reason, the Craft testing framework provides the `fullMock` option
-to be set
-in your `codeception.yaml` or `unit.suite.yaml` file. If you set this option to true,
+to be set in your `codeception.yaml` or `unit.suite.yaml` file. If you set this option to true,
 instead of creating a `Craft::$app` that is as close to the real thing, Craft will
 setup the `Craft::$app` object and all services to be mocks according to
 PHP Unit's mocking system.
@@ -23,7 +22,7 @@ using `craft\test\TestSetup:getMockApp()`. The _actual_ mock is setup using
 ::: warning
 Some Craft module methods such as [consoleCommand](../testing-craft/console.md) may not work as expected with `fullMock` on.
 Please be aware of the implications of enabling this option. If you are just starting testing
-use the [getting started guide](../testing-craft/getting-started.md)
+use the [getting started guide](../testing-craft/setup.md)
 to first get an overview of what tests are and
 what the differences are between `fullMock` on and off.
 :::

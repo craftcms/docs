@@ -1,4 +1,4 @@
-# Getting Started
+# Setting Up Tests
 
 In order to get started please ensure you have a basic understanding of the following:
 
@@ -143,7 +143,7 @@ modules:
     # Don't delete any other enabled modules.
 ```
 
-## Setup required config
+## Setup Required Config
 
 Craft requires a `db.php` file to be present in the config directory. To satisfy this requirement
 add a `db.php` file in `tests/_craft/config/` and fill it with the following:

@@ -77,7 +77,7 @@ module.exports = {
           title: "Testing Craft",
           collapsable: false,
           children: [
-            "testing-craft/getting-started",
+            "testing-craft/setup",
             "testing-craft/testing-tips",
             "testing-craft/plugins-and-modules",
             "testing-craft/fixtures",
