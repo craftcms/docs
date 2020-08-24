@@ -2,6 +2,12 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-08-24
+### Changed
+- Retitled + renamed testing setup page to improve search experience and indexing.
+### Fixed
+- Fixed sidebar active link color in dark mode.
+
 ## 2020-08-23
 ### Changed
 - Updated remaining `project.yaml` references throughout the Craft 3 docs.

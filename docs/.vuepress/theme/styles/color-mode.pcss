@@ -12,6 +12,7 @@
     --sidebar-bg-color: rgba(0, 0, 0, 0.1);
     --search-bg-color: theme("colors.slate");
     --heading-color: theme("colors.gray.100");
+    --sidebar-link-color: theme("colors.gray.500");
     --border-color: theme("colors.slate");
     --doc-set-color: theme("colors.gray.200");
     --code-highlight-color: rgba(45, 55, 72, 0.25);
@@ -29,7 +30,7 @@
   --search-bg-color: theme("colors.slate");
   --medium-zoom-overlay-color: rgba(23, 29, 40, 1);
   --heading-color: theme("colors.gray.100");
-  --sidebar-link-color: theme("colors.gray.100");
+  --sidebar-link-color: theme("colors.gray.500");
   --hamburger-color: theme("colors.white");
   --tooltip-bg-color: theme("colors.gray.800");
   --border-color: theme("colors.slate");
@@ -193,10 +194,5 @@
     &:before {
       color: rgba(255, 255, 255, 0.2);
     }
-  }
-
-  a.sidebar-link,
-  .sidebar-extra-item {
-    @apply text-gray-500;
   }
 }

@@ -125,7 +125,7 @@ function renderExternal(h, to, text) {
 
 a.sidebar-link {
   @apply px-2 py-1 font-normal inline-block w-full box-border;
-  color: #2c3e50;
+  color: var(--sidebar-link-color);
   line-height: 1.4;
   transition: all 0.25s ease-out;
 
@@ -144,7 +144,7 @@ a.sidebar-link {
 
   &:hover,
   &.active {
-    @apply text-blue;
+    color: var(--sidebar-active-link-color);
   }
 }
 </style>
