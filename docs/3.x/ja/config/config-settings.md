@@ -315,6 +315,36 @@ If this is set to `false`, then the `Access-Control-Allow-Origin` response heade
 
 
 
+### `autosaveDrafts`
+
+許可される型 :
+:
+
+[boolean](http://php.net/language.types.boolean)
+
+デフォルト値 :
+:
+
+`true`
+
+定義元 :
+:
+
+[GeneralConfig::$autosaveDrafts](craft3:craft\config\GeneralConfig::$autosaveDrafts)
+
+Since
+:
+
+3.5.6
+
+
+
+Whether drafts should be saved automatically as they are edited.
+
+Note that drafts *will* be autosaved while Live Preview is open, regardless of this setting.
+
+
+
 ### `backupCommand`
 
 許可される型 :
@@ -334,11 +364,11 @@ If this is set to `false`, then the `Access-Control-Allow-Origin` response heade
 
 
 
-データベースのバックアップを復元するために Craft が実行するシェルコマンド。
+The shell command that Craft should execute to create a database backup.
 
-定義元 :
+By default Craft will run `mysqldump` or `pg_dump`, provided that those libraries are in the `$PATH` variable for the user the web server  is running as.
 
-ランタイムで Craft がスワップアウトするために利用できるいくつかのトークンがあります。
+There are several tokens you can use that Craft will swap out at runtime:
 
 - `{path}` - バックアップファイルのターゲットパス
 - `{port}` - the current database port
@@ -347,7 +377,7 @@ If this is set to `false`, then the `Access-Control-Allow-Origin` response heade
 - `{database}` - the current database name
 - `{schema}` - the current database schema (if any)
 
-自動生成された URL にスラッシュをつけるかどうか。
+This can also be set to `false` to disable database backups completely.
 
 
 
@@ -370,7 +400,7 @@ If this is set to `false`, then the `Access-Control-Allow-Origin` response heade
 
 
 
-許可される型 :
+Whether Craft should create a database backup before applying a new system update.
 
 
 
@@ -393,9 +423,9 @@ If this is set to `false`, then the `Access-Control-Allow-Origin` response heade
 
 
 
-コントロールパネルの URL を生成する際に、Craft が使用するベース URL。
+The base URL that Craft should use when generating control panel URLs.
 
-デフォルト値 :
+It will be determined automatically if left blank.
 
 ::: tip
 The base control panel URL should **not** include the [control panel trigger word](config3:cpTrigger) (e.g. `/admin`).
@@ -422,15 +452,15 @@ The base control panel URL should **not** include the [control panel trigger wor
 
 
 
-コスト値が高いと、パスワードハッシュの生成とそれに対する検証に時間がかかります。 そのため、より高いコストはブルートフォース攻撃を遅くさせます。
+The higher the cost value, the longer it takes to generate a password hash and to verify against it. Therefore, higher cost slows down a brute-force attack.
 
-ブルートフォース攻撃に対するベストな保護のために、production サーバーで許容される最高の値をセットしてください。
+For best protection against brute force attacks, set it to the highest value that is tolerable on production servers.
 
-この値が増加するごとに、ハッシュを計算するためにかかる時間は倍になります。 例えば、値が14のときハッシュの計算に1秒かかる場合、計算時間は「2^(値 - 14) 」秒で変化します。
+The time taken to compute the hash doubles for every increment by one for this value. For example, if the hash takes 1 second to compute when the value is 14 then the compute time varies as 2^(value - 14) seconds.
 
 
 
-### `cacheElementQueries`
+### `brokenImagePath`
 
 許可される型 :
 :
@@ -445,7 +475,7 @@ The base control panel URL should **not** include the [control panel trigger wor
 定義元 :
 :
 
-[GeneralConfig::$suppressTemplateErrors](craft3:craft\config\GeneralConfig::$brokenImagePath)
+[GeneralConfig::$brokenImagePath](craft3:craft\config\GeneralConfig::$brokenImagePath)
 
 Since
 :
@@ -454,7 +484,7 @@ Since
 
 
 
-許可される型 :
+The server path to an image file that should be sent when responding to an image request with a 404 status code.
 
 This can be set to an aliased path such as `@webroot/assets/404.svg`.
 
@@ -479,9 +509,9 @@ This can be set to an aliased path such as `@webroot/assets/404.svg`.
 
 
 
-デフォルト値 :
+The default length of time Craft will store data, RSS feed, and template caches.
 
-`0` をセットすると、データと RSS フィードのキャッシュは無期限に保管されます。 テンプレートキャッシュは1年間保管されます。
+If set to `0`, data and RSS feed caches will be stored indefinitely; template caches will be stored for one year.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
@@ -506,7 +536,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 
 
-アップロードされたファイル名に含まれる ASCII 以外の文字を ASCII に変換するかどうか（例： `ñ` → `n`）。
+Whether uploaded filenames with non-ASCII characters should be converted to ASCII (i.e. `ñ` → `n`).
 
 ::: tip
 You can run `php craft utils/ascii-filenames` in your terminal to apply ASCII filenames to all existing assets.
@@ -533,9 +563,9 @@ You can run `php craft utils/ascii-filenames` in your terminal to apply ASCII fi
 
 
 
-これを無効にすると、設定およびプラグインストアのセクションは非表示になり、Craft 本体のエディションとプラグインのバージョンがロックされ、プロジェクトコンフィグは読み取り専用になります。
+The amount of time a user must wait before re-attempting to log in after their account is locked due to too many failed login attempts.
 
-「ログイン状態を維持する」機能を完全に無効化するには、`0` をセットしてください。
+Set to `0` to keep the account locked indefinitely, requiring an admin to manually unlock the account.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
@@ -556,7 +586,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 定義元 :
 :
 
-[GeneralConfig::$useCompressedJs](craft3:craft\config\GeneralConfig::$cpHeadTags)
+[GeneralConfig::$cpHeadTags](craft3:craft\config\GeneralConfig::$cpHeadTags)
 
 Since
 :
@@ -565,11 +595,11 @@ Since
 
 
 
-許可される型 :
+List of additional HTML tags that should be included in the `<head>` of control panel pages.
 
 Each tag can be specified as an array of the tag name and its attributes.
 
-デフォルト値 :
+For example, you can give the control panel a custom favicon (etc.) like this:
 
 ```php
 'cpHeadTags' => [
@@ -605,7 +635,7 @@ Each tag can be specified as an array of the tag name and its attributes.
 
 
 
-現在のリクエストをフロントエンドのウェブサイトではなくコントロールパネルにルーティングするかどうかを決定するとき、Craft が探す URI セグメント。
+The URI segment Craft should look for when determining if the current request should route to the control panel rather than the front-end website.
 
 This can be set to `null` if you have a dedicated host name for the control panel (e.g. `cms.example.com`), or you are running Craft in [Headless Mode](config3:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own webroot directory on your server, with an `index.php` file that defines the `CRAFT_CP` PHP constant.
 
@@ -636,7 +666,7 @@ Alternatively, you can set the <config3:baseCpUrl> config setting, but then you 
 
 
 
-[enableCsrfProtection](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablecsrfprotection) が `true` にセットされている場合、CSRF の検証に使用される CSRF トークン名。 <config3:enableCsrfProtection> `true` をセットすると、画像ファイルのサイズが大きくなります。
+The name of CSRF token used for CSRF validation if <config3:enableCsrfProtection> is set to `true`.
 
 
 
@@ -659,7 +689,7 @@ Alternatively, you can set the <config3:baseCpUrl> config setting, but then you 
 
 
 
-Craft によって生成される Cookie が作成されるべきドメイン。 空白の場合、使用するドメイン（ほとんどの場合、現在のもの）の決定はブラウザに任されます。 すべてのサブドメインで機能する Cookie を望むなら、例えば、これを `'.domain.com'` にセットします。
+The domain that cookies generated by Craft should be created for. If blank, it will be left up to the browser to determine which domain to use (almost always the current). If you want the cookies to work for all subdomains, for example, you could set this to `'.domain.com'`.
 
 
 
@@ -682,7 +712,7 @@ Craft によって生成される Cookie が作成されるべきドメイン。
 
 
 
-優先言語をまだセットしてないユーザー向けに、コントロールパネルが使用するデフォルトの言語。
+The default language the control panel should use for users who haven’t set a preferred language yet.
 
 
 
@@ -701,7 +731,7 @@ Craft によって生成される Cookie が作成されるべきドメイン。
 定義元 :
 :
 
-[GeneralConfig::$cacheElementQueries](craft3:craft\config\GeneralConfig::$defaultCpLocale)
+[GeneralConfig::$defaultCpLocale](craft3:craft\config\GeneralConfig::$defaultCpLocale)
 
 Since
 :
@@ -710,9 +740,9 @@ Since
 
 
 
-デフォルト値 :
+The default locale the control panel should use for date/number formatting, for users who haven’t set a preferred language or preferred formatting locale yet.
 
-この機能を無効化するには、`0` をセットしてください。 <config3:defaultCpLanguage> config setting will determine which locale is used for date/number formatting by default.
+If this is `null`, then the <config3:defaultCpLanguage> config setting will determine which locale is used for date/number formatting by default.
 
 
 
@@ -735,9 +765,9 @@ Since
 
 
 
-定義元 :
+The default permission to be set for newly generated directories.
 
-`null` をセットすると、パーミッションは現在の環境によって決定されます。
+[allowAdminChanges](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#allowadminchanges) が無効になっている場合、この設定は自動的に無効になります。
 
 
 
@@ -760,9 +790,9 @@ Since
 
 
 
-コントロールパネルでのシステムとプラグインのアップデート、および、プラグインストアからのプラグインのインストールを Craft が許可するかどうか。
+The default permission to be set for newly generated files.
 
-[allowAdminChanges](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#allowadminchanges) が無効になっている場合、この設定は自動的に無効になります。
+If set to `null`, the permission will be determined by the current environment.
 
 
 
@@ -785,7 +815,7 @@ Since
 
 
 
-JPG と PNG ファイルを保存する際に、Craft が使用する品質レベル。 0（最低品質、最小ファイルサイズ）から100（最高品質、最大ファイルサイズ）までの範囲。
+The quality level Craft will use when saving JPG and PNG files. Ranges from 0 (worst quality, smallest file) to 100 (best quality, biggest file).
 
 
 
@@ -808,9 +838,9 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 
 
 
-それぞれの検索用語に適用されるデフォルトのオプション。
+The default options that should be applied to each search term.
 
-デフォルト値 :
+Options include:
 
 - `attribute` – （もしある場合）用語が適用される属性（例：'title'）。 （デフォルトは `null`）
 - `exact` – 用語が完全一致でなければならないかどうか（`attribute` がセットされている場合のみ、適用されます）。 （デフォルトは `false`）
@@ -839,7 +869,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 
 
 
-フロントエンドでテンプレートパスとファイルの照合をする際に、Craft が探すテンプレートファイルの拡張子。
+The template file extensions Craft will look for when matching a template path to a file on the front end.
 
 
 
@@ -862,7 +892,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 
 
 
-定義元 :
+The default amount of time tokens can be used before expiring.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
@@ -887,9 +917,9 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 
 
-スラグに大文字を使うことを許可するかどうか。
+The default day that new users should have set as their Week Start Day.
 
-許可される型 :
+This should be set to one of the following integers:
 
 - `0` – 日曜日
 - `1` – 月曜日
@@ -920,9 +950,9 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 
 
-デフォルトでは、フロントエンドの一般ユーザー登録で「パスワード」フィールドを送信する必要があります。 `true` をセットすると、最初の登録フォームでパスワードを必要としなくなります。
+By default, Craft will require a 'password' field to be submitted on front-end, public user registrations. Setting this to `true` will no longer require it on the initial registration form.
 
-メールアドレスの確認が有効になっている場合、新しいユーザーは通知メールに記載されたリンクをクリックしてパスワードを設定できます。 そうでなければ、「パスワードを忘れた」際のワークフローを経由することがパスワードをセットできる唯一の方法となります。
+If you have email verification enabled, new users will set their password once they've clicked on the verification link in the email. If you don't, the only way they can set their password is to go through your "forgot password" workflow.
 
 
 
@@ -945,7 +975,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 
 
-システムを [Dev Mode](https://craftcms.com/support/dev-mode) で実行するかどうか。
+Whether the system should run in [Dev Mode](https://craftcms.com/support/dev-mode).
 
 
 
@@ -973,7 +1003,7 @@ Since
 
 
 
-定義元 :
+Array of plugin handles that should be disabled, regardless of what the project config says.
 
 ```php
 'dev' => [
@@ -1000,9 +1030,9 @@ Since
 
 
 
-機密性の高い操作（例：ユーザーのグループや権限の割り当てなど）に必要な、ユーザーの昇格されたセッションの時間。
+The amount of time a user’s elevated session will last, which is required for some sensitive actions (e.g. user group/permission assignment).
 
-ユーザーがファイルをアップロードする際に、Craft が許可するファイル拡張子。
+Set to `0` to disable elevated session support.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
@@ -1023,7 +1053,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 定義元 :
 :
 
-[craft3:craft\config\GeneralConfig::$useProjectConfigFile](craft3:craft\config\GeneralConfig::$enableBasicHttpAuth)
+[GeneralConfig::$enableBasicHttpAuth](craft3:craft\config\GeneralConfig::$enableBasicHttpAuth)
 
 Since
 :
@@ -1055,7 +1085,7 @@ Whether front-end web requests should support basic HTTP authentication.
 
 
 
-Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtection> [enableCsrfProtection](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablecsrfprotection) が有効な場合、CSRF トークンを保持するために Cookie を使用するかどうか。 false の場合、CSRF トークンはコンフィグ設定名 `csrfTokenName` 配下のセッション内に保管されます。 セッションの CSRF トークンを保存することでセキュリティが向上している間は、CSRF トークンをすべてのページでセッションを開始する必要があるため、サイトのパフォーマンスが低下する可能性がある点に注意してください。
+Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtection> is enabled. If false, the CSRF token will be stored in session under the `csrfTokenName` config setting name. Note that while storing CSRF tokens in session increases security, it requires starting a session for every page that a CSRF token is needed, which may degrade site performance.
 
 
 
@@ -1078,7 +1108,7 @@ Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtecti
 
 
 
-Craft 経由で送信されるすべてのフォームで、不可視項目による CSRF 保護を有効にするかどうか。
+Whether to enable CSRF protection via hidden form inputs for all forms submitted via Craft.
 
 
 
@@ -1106,7 +1136,7 @@ Since
 
 
 
-定義元 :
+Whether the GraphQL API should be enabled.
 
 Note that the GraphQL API is only available for Craft Pro.
 
@@ -1136,11 +1166,11 @@ Since
 
 
 
-ユーザーがアカウントを有効化、または、パスワードをリセットした後で、自動的にログインさせるかどうか。
+Whether Craft should cache GraphQL queries.
 
 If set to `true`, Craft will cache the results for unique GraphQL queries per access token. The cache is automatically invalidated any time an element is saved, the site structure is updated, or a GraphQL schema is saved.
 
-この設定は、[omitScriptNameInUrls](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#omitscriptnameinurls) が false にセットされている場合のみ影響することに注意してください。
+This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v3/craft-services-gql.html#event-before-execute-gql-query) event to provide its own caching logic and setting the `result` property.
 
 
 
@@ -1163,7 +1193,7 @@ If set to `true`, Craft will cache the results for unique GraphQL queries per ac
 
 
 
-デフォルト値 :
+Whether to enable Craft's template `{% cache %}` tag on a global basis.
 
 
 
@@ -1186,9 +1216,9 @@ If set to `true`, Craft will cache the results for unique GraphQL queries per ac
 
 
 
-エラーテンプレートを探すためのパスを決定するときに、HTTP エラーステータスコードの前につける接頭辞。
+The prefix that should be prepended to HTTP error status codes when determining the path to look for an error’s template.
 
-定義元 :
+If set to `'_'`, then your site’s 404 template would live at `templates/_404.html`, for example.
 
 
 
@@ -1239,9 +1269,9 @@ Since
 
 
 
-データベースのバックアップを作成するために Craft が実行するシェルコマンド。
+List of extra locale IDs that the application should support, and users should be able to select as their Preferred Language.
 
-ウェブサーバーを実行しているユーザーの `$PATH` 変数にライブラリが含まれている場合、デフォルトで Craft は `mysqldump` または `pg_dump` を実行します。
+Only use this setting if your server has the Intl PHP extension, or if you’ve saved the corresponding [locale data](https://github.com/craftcms/locales) into your `config/locales/` folder.
 
 
 
@@ -1269,7 +1299,7 @@ Since
 
 
 
-Craft がサポートすべき追加のファイル種類のリスト。 この配列は `\craft\config\craft\helpers\Assets::_buildFileKinds()` 内で定義されたものとマージされます。
+List of additional file kinds Craft should support. This array will get merged with the one defined in `\craft\helpers\Assets::_buildFileKinds()`.
 
 ```php
 'extraFileKinds' => [
@@ -1286,7 +1316,7 @@ Craft がサポートすべき追加のファイル種類のリスト。 この�
 ```
 
 ::: tip
-ここにリストされたファイル拡張子が、即座にアップロードを許可されるわけではありません。 You will also need to list them with the <config3:extraAllowedFileExtensions> config setting.
+File extensions listed here won’t immediately be allowed to be uploaded. You will also need to list them with the <config3:extraAllowedFileExtensions> config setting.
 :::
 
 
@@ -1310,7 +1340,7 @@ Craft がサポートすべき追加のファイル種類のリスト。 この�
 
 
 
-アセットをアップロードする際に、単語を区切るために使用する文字列。 `false` の場合、空白だけが残ります。
+The string to use to separate words when uploading Assets. If set to `false`, spaces will be left alone.
 
 
 
@@ -1333,7 +1363,7 @@ Craft がサポートすべき追加のファイル種類のリスト。 この�
 
 
 
-ページの読み込み前に画像の変形によるサムネイルの生成をするかどうか。
+Whether images transforms should be generated before page load.
 
 
 
@@ -1356,23 +1386,23 @@ Craft がサポートすべき追加のファイル種類のリスト。 この�
 
 
 
-デフォルト値 :
+Prefix to use for all type names returned by GraphQL.
 
 
 
 ### `headlessMode`
 
-許可される型 :
+Allowed types
 :
 
 [boolean](http://php.net/language.types.boolean)
 
-デフォルト値 :
+Default value
 :
 
 `false`
 
-定義元 :
+Defined by
 :
 
 [GeneralConfig::$headlessMode](craft3:craft\config\GeneralConfig::$headlessMode)
@@ -1386,7 +1416,7 @@ Since
 
 Whether the system should run in Headless Mode, which optimizes the system and control panel for headless CMS implementations.
 
-定義元 :
+When this is enabled, the following changes will take place:
 
 - `{path}` - バックアップファイルのパス
 - `{port}` -現在のデータベースポート
