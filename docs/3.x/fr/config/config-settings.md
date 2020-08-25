@@ -315,6 +315,36 @@ Whether users should automatically be logged in after activating their account o
 
 
 
+### `autosaveDrafts`
+
+Allowed types
+:
+
+[boolean](http://php.net/language.types.boolean)
+
+Default value
+:
+
+`true`
+
+Defined by
+:
+
+[GeneralConfig::$autosaveDrafts](craft3:craft\config\GeneralConfig::$autosaveDrafts)
+
+Since
+:
+
+3.5.6
+
+
+
+Whether drafts should be saved automatically as they are edited.
+
+Note that drafts *will* be autosaved while Live Preview is open, regardless of this setting.
+
+
+
 ### `backupCommand`
 
 Allowed types
