@@ -15,6 +15,7 @@ Function | Description
 [className](#classname) | Returns the fully qualified class name of a given object.
 [clone](#clone) | Clones an object.
 [combine](#combine) | Combines two arrays into one.
+[configure](#configure) | Sets attributes on the passed object.
 [constant](https://twig.symfony.com/doc/2.x/functions/constant.html) | Returns the constant value for a given string.
 [create](#create) | Creates a new object.
 [csrfInput](#csrfinput) | Returns a hidden CSRF token input.
@@ -164,6 +165,35 @@ Combines two arrays into one, using the first array to define the keys, and the 
 {% set arr2 = ['foo', 'bar', 'baz'] %}
 {% set arr3 = combine(arr1, arr2) %}
 {# arr3 will now be `{a: 'foo', b: 'bar', c: 'baz'}` #}
+```
+
+## `configure`
+
+This just passes through the behavior of the `Craft::configure()` method, inherited from Yii. It's similar to [`create`](#create) in that it applies attributes to an object, but instead of creating new instances, it accepts an existing object and modifies it.
+
+```twig
+{# Modify an `EntryQuery` object set up by a Relational field: #}
+{% set myRelatedEntries = configure(entry.relationFieldHandle, {
+    section: 'blog'
+}).all() %}
+```
+
+It's also possible to use it instead of the [`merge`](#merge) filter:
+
+```twig
+{% set myObject = { one: 'Original' } #}
+{# With `merge`: #}
+{% set myObject = myObject | merge({ one: 'Overridden', two: 'New' }) %}
+
+{# With `configure`: #}
+{% do configure(myObject, { one: 'Overridden', two: 'New' }) %}
+```
+
+Although not encouraged, you can technically use it to set any Model or Element's attributes:
+
+```twig
+{% do configure(entry, { title: 'New Title' }) %}
+{% do craft.app.elements.saveElement(entry) %}
 ```
 
 ## `constant`
