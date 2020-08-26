@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-08-26
+### Changed
+- Updated the `{% css %}` and `{% js %}` tag documentation with their new ability to include CSS/JS files in Craft 3.5.6.
+
 ## 2020-08-24
 ### Changed
 - Retitled + renamed testing setup page to improve search experience and indexing.
