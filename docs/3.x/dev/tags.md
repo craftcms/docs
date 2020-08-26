@@ -201,9 +201,13 @@ Tip: The `{% cache %}` tag will detect if there are any ungenerated [image trans
 
 ## `css`
 
-The `{% css %}` tag can be used to register a `<style>` tag in the page’s `<head>`.
+The `{% css %}` tag can be used to register a CSS file or a CSS code block.
 
-```css
+```twig
+{# Register a CSS file #}
+{% css "/assets/css/style.css" %}
+
+{# Register a CSS code block #}
 {% css %}
     .content {
         color: {{ entry.textColor }};
@@ -212,12 +216,7 @@ The `{% css %}` tag can be used to register a `<style>` tag in the page’s `<he
 ```
 
 ::: tip
-The tag calls <yii2:yii\web\View::registerCss()> under the hood, which can also be accessed via the global `view` variable.
-
-```twig
-{% set styles = ".content { color: #{entry.textColor}; }" %}
-{% do view.registerCss(styles) %}
-```
+To register a CSS file, the URL must end in `.css`.
 :::
 
 ### Parameters
@@ -336,9 +335,13 @@ By default, `at endBody` will be used.
 
 ## `js`
 
-The `{% js %}` tag can be used to register a `<script>` tag on the page.
+The `{% js %}` tag can be used to register a JavaScript file, or a JavaScript code block.
 
-```javascript
+```twig
+{# Register a JS file #}
+{% js "/assets/js/script.js" %}
+
+{# Register a JS code block #}
 {% js %}
     _gaq.push([
         "_trackEvent",
@@ -349,13 +352,7 @@ The `{% js %}` tag can be used to register a `<script>` tag on the page.
 ```
 
 ::: tip
-The tag calls <yii2:yii\web\View::registerJs()> under the hood, which can also be accessed via the global `view` variable.
-
-```twig
-{% set keyword = searchTerm|e('js') %}
-{% set script = '_gaq.push(["_trackEvent", "Search", "'~keyword~'"])' %}
-{% do view.registerJs(script) %}
-```
+To register a JavaScript file, the URL must end in `.js`.
 :::
 
 ### Parameters
