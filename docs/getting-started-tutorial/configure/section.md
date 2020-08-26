@@ -43,13 +43,14 @@ First, let’s create a place to upload the files we’ll use for our feature an
 
 Craft uses the concept of Assets to describe uploaded files. Assets consist of the files themselves and any other fields we’d like to attach to them. All Assets are stored in folders referred to as Volumes. These can be in your filesystem or different cloud storage providers—see the documentation on [Volumes](/3.x/assets.md#volumes) for more about those options.
 
-Create a local Asset Volume for storing blog post images:
+We’ll create a local Asset Volume within the web root for blog post images:
 
-1. In your local filesystem, find Craft’s `web/` folder and create a new folder inside that called `assets`. Inside that folder, create one more named `blog`. This is where we’ll store uploaded blog post files.
-2. Back in the Craft CMS control panel, navigate to “Settings” and choose “Assets”.
-3. Choose “+ New volume”.
-4. Enter the name “Blog”, enable the “Assets in this volume have public URLs” switch, enter a “Base URL” value of `@web/assets/blog`, and a “File System Path” of `@webroot/assets/blog`.
-5. Save the Asset Volume.
+1. In the control panel, navigate to “Settings” and choose “Assets”.
+2. Choose “+ New volume”.
+3. Enter the name “Blog”, enable the “Assets in this volume have public URLs” switch, enter a “Base URL” value of `@web/assets/blog`, and a “File System Path” of `@webroot/assets/blog`.
+4. Save the Asset Volume.
+
+Craft will create that folder and let you upload and manage its Assets from the control panel.
 
 ::: tip
 `@web` and `@webroot` are [aliases](/3.x/config/#aliases) Craft includes by default, pointing to the base website URL and document root file path respectively.
