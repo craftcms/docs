@@ -76,8 +76,7 @@ craft/
 ├── .gitignore
 ├── composer.json
 ├── composer.lock
-├── craft
-└── craft.bat
+└── craft
 ```
 
 It’s important to maintain this folder structure. You can add files and folders to it, but if you want to rename any of these files we’re starting with you may need to change some settings.
@@ -95,7 +94,6 @@ Let’s take a look at each top-level item:
 - **`.gitignore`** is another special file for telling Git, if it’s used, not to care about certain files.
 - **`composer.json`** is the file Composer uses to know what packages it should install.
 - **`composer.lock`** is Composer’s own detailed record of what it has actually installed.
-- **`craft`** is Craft’s own console command for macOS and Linux.
-- **`craft.bat`** is the same console command for Windows.
+- **`craft`** is Craft’s command line executable.
 
 It’s okay if you’ve never used Git or if any of these pieces isn’t clear; we’ll be using them shortly!

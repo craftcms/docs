@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-08-27
+### Changed
+- Removed references to the `craft.bat` file, which is no longer distributed with the `craftcms/craft` starter project.
+
 ## 2020-08-26
 ### Changed
 - Updated the `{% css %}` and `{% js %}` tag documentation with their new ability to include CSS/JS files in Craft 3.5.6.

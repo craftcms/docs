@@ -52,8 +52,7 @@ my-project.test/
 ├── .env
 ├── .env.example
 ├── composer.json
-├── craft
-└── craft.bat
+└── craft
 ```
 
 ::: tip
