@@ -4,9 +4,9 @@ While most of your interaction with Craft happens in a browser, a number of impo
 
 This can be useful for a variety of reasons, including automating tasks with `cron`, privately triggering actions via SSH or as part of a deployment process, or running resource-intensive tasks that might be constrained by the limits of your web server.
 
-The Craft console application lives in the root of your project (`craft` for Mac/Linux, `craft.bat` for Windows) and requires PHP to run.
+The Craft console application (`craft`) lives in the root of your project and requires PHP to run.
 
-::: warning
+::: tip
 You may need to configure your environment in order to run PHP from your terminal; `php-fpm` and `mod_php` are meant to run with a web server while `php-cli` is a separate process for the command line.
 :::
 
