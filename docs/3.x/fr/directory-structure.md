@@ -85,8 +85,4 @@ This is a Composer file that tells Composer exactly which dependencies and versi
 
 ### `craft`
 
-This is a command line executable that will bootstrap a Craft console application.
-
-### `craft.bat`
-
-This is a Windows Command Prompt wrapper for the `craft` executable.
+This is a command line executable used to execute Craft’s [console commands](console-commands.md).
