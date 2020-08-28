@@ -40,10 +40,6 @@ The following commands are available:
     clear-caches/temp-files                 Temp files
     clear-caches/transform-indexes          Asset transform index
 
-- craftnet-cp/license
-    craftnet-cp/license/generate            Generate one or more licenses
-    craftnet-cp/license/import-csv          Import a CSV file of licenses
-
 - fixture                                   Allows you to manage test fixtures.
     fixture/load (default)                  Loads the specified fixture data.
     fixture/unload                          Unloads the specified fixtures.
