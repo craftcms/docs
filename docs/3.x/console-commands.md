@@ -13,7 +13,7 @@ You may need to configure your environment in order to run PHP from your termina
 Running the `craft` console command without any arguments will output a complete list of available options. (This will include any console commands added by plugins or custom modules.)
 
 ```
-$ ./craft
+$ php craft
 
 This is Yii version 2.0.36.
 
