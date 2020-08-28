@@ -131,7 +131,7 @@ module.exports = {
             "project-config",
             "plugins"
           ],
-          toggleChildren: ["searching", "reference-tags", "gc"]
+          toggleChildren: ["searching", "deployment", "reference-tags", "gc"]
         },
         {
           title: "Element Types",
