@@ -98,6 +98,12 @@ The following commands are available:
     migrate/up (default)                    Upgrades the application by applying new
                                             migrations.
 
+- off                                       Takes the system offline
+    off/index (default)                     Turns the system on
+
+- on                                        Takes the system online
+    on/index (default)                      Turns the system on
+
 - plugin                                    Manage plugins
     plugin/disable                          Disables a plugin.
     plugin/enable                           Enables a plugin.
@@ -106,6 +112,8 @@ The following commands are available:
 
 - project-config                            Manages the Project Config.
     project-config/apply                    Applies project config file changes.
+    project-config/diff                     See a diff of the pending project config YAML
+                                            changes.
     project-config/rebuild                  Rebuilds the project config.
     project-config/sync                     Alias for `apply`.
 
@@ -174,6 +182,10 @@ The following commands are available:
                                             project config.
     utils/repair/section-structure          Repairs structure data for a section
 
+- utils/update-usernames                    Updates all users’ usernames to ensure they match
+                                            their email address
+    utils/update-usernames/index (default)  Updates all users’ usernames to ensure they match
+                                            their email address
 
 To see the help of each command, enter:
 
