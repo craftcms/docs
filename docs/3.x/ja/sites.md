@@ -1,18 +1,22 @@
+- - -
+keywords: multi multisite multilingual translation
+- - -
+
 # サイト
 
-Craft 3では、1つインストールするだけで複数のウェブサイトをホストできます。
+In Craft 3 you can host multiple websites in a single Craft installation.
 
-ドメインが異なったり、異なるテンプレートセットを使用したり、エントリコンテンツの異なるバージョンを持っている、1つ以上のサイトを定義できます。
+You can define one or more sites at different domains, using a different set of templates, and different versions of entry content.
 
-Craft のマルチサイト機能は、同じパブリッシングチームを持つサイトに向いています。 サイトに含めたいセクションだけを有効化できる能力により、エントリレベルでマルチサイトのコンテンツを管理します。
+The multi-site feature in Craft is for sites with the same publishing team. You manage the multi-site content at the entry level, with the ability to enable Sections you want included in a site.
 
 ## サイトの作成
 
-Craft のインストールは、1つのデフォルトサイトからはじまります。 サイト名はインストール時に定義され、ハンドルは `default` となります。
+Every Craft installation starts with one default site. The site name is what you defined at time of installation, and the handle is `default`.
 
-サイトを追加するには、「設定 > サイト」を使用します。
+You add additional sites using the Sites settings in Settings → Sites.
 
-それぞれのサイトは、次の属性を持っています。
+Each site has the following attributes:
 
 * グループ
 * 名前
@@ -24,13 +28,13 @@ Craft のインストールは、1つのデフォルトサイトからはじま�
 
 ### サイトグループ
 
-サイトグループでは、言語や種類などの共通点によってサイトをひとまとめに整理できます。
+Site Groups allow you to organize your sites together by commonality, like language or site type.
 
-Craft は（デフォルトサイトの名前を付けた）最初のサイトグループを作成し、そのグループにデフォルトサイトを割り当てます。
+Craft creates the first Site Group for you – named after the default site – and assigns the default site to that group.
 
-フィールドグループに似ていて、サイトグループは整理するためだけにあります。
+Similar to Field Groups, Site Groups are for organization only.
 
-現在のサイトグループの情報には、次のようにアクセスできます。
+You can access the current site's group information using:
 
 ```twig
 Site ID:            {{ currentSite.id }}
@@ -44,9 +48,9 @@ Base URL:           {{ currentSite.baseUrl }}
 
 ### 言語
 
-サイトの言語を選択すると、日付、時間、および、数字の書式と、翻訳の静的メッセージで使用するための言語を Craft に伝えます。
+Choosing the language for the site tells Craft the language to use when formatting dates, times, and numbers, and translating static messages.
 
-テンプレート内では、`craft.app.language` 経由で言語設定にアクセスすることもできます。 これを条件文で使えます。
+In your templates, you can also access the language setting via `craft.app.language`. You can use this in a conditional:
 
 ```twig
 {% if craft.app.language == 'de' %}
@@ -54,52 +58,52 @@ Base URL:           {{ currentSite.baseUrl }}
 {% endif %}
 ```
 
-あるいは、言語ごとの固有なテンプレートを自動的に含む方法もあります。
+Or as a way to automatically include the proper template for each language:
 
 ```twig
 {% include '_share/footer-' ~ craft.app.language %}
 ```
 
-この例では、読み込まれるテンプレート名は `_share/footer-de` になります。
+where your template name would be, for example, `_share/footer-de`.
 
 
 ### プライマリサイト
 
-Craft はデフォルトサイトをプライマリサイトとしてセットします。 すなわち、どのサイトをロードするか決定できない場合に Craft がフロントエンドのデフォルトとしてロードします。 1つしかサイトがない場合、プライマリサイトを無効にできません。
+Craft sets the default site as the Primary site, meaning Craft will load it by default on the front end, if it is unable to determine which site to load. If you only have one site then you cannot disable it as the Primary site.
 
-追加のサイトを作成すると、プライマリサイトを変更できます。 Craft は現在のプライマリサイトを自動的に切り替えます。
+You can change the Primary site once you create additional sites. Craft will automatically toggle the current Primary site.
 
 ### サイト URL
 
-すべてのサイトはベース URL を持っていて、Craft がエントリや他のサイトコンテンツの動的なリンクを生成する際に出発点として使用します。
+Each site has a Base URL, which Craft uses as the starting point when generating dynamic links to entries and other site content.
 
-マルチサイトは `https://craftcms.com/` や `https://craftcms.com/de/` のように同じホスト名を共有したり、`https://craftcms.com/` や `https://de.craftcms.com/` のように異なるホスト名を持つこともできます。
+Multiple sites can share the same host name, such as `https://craftcms.com/` and `https://craftcms.com/de/`, or they can have different host names, such as `https://craftcms.com/` and `https://de.craftcms.com/`.
 
-異なるホスト名でサイトを作成したい場合、それに対するトラフィックを処理するようサーバーを設定しなければなりません。 ホスト名は現在のサイトと同じウェブルート（`web/`）を指すことも、独自の別のウェブルートにすることもできます。 後者の場合、`.htaccess`、および、`index.php` ファイルを新しいウェブルートへ確実にコピーしてください。
+If you want to create a site with a different host name, you must configure your server to handle traffic for it. The host name can either point to the same web root as your current site (e.g. `web/`), or you may want to give it its own separate web root. If you do the latter, make sure you copy your `.htaccess` and `index.php` files into the new web root.
 
 ::: tip
-`https://site-a.com` と `https://site-b.com` のような異なるルートドメインを使用するマルチサイトを持つ場合、Craft の [license enforcements works](https://craftcms.com/support/license-enforcement) の仕組みによって、_すべて_ のサイトのためにアクセスする Craft コントロールパネルのドメインをその中の1つから選択することができます。 :::
+If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](https://craftcms.com/support/license-enforcement), you’ll want to pick one of the domains to access the Craft control panel from for _all_ of the sites.
 :::
 
 ::: warning
-サイトのベース URL を定義する場合、`@web` エイリアスを使用しないでください。 それは [cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) の脆弱性をもたらすことができ、リクエストされたサイトを Craft が確実に判断することができなくなります。 :::
+Don’t ever use the `@web` alias when defining your sites’ Base URLs. It could introduce a [cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) vulnerability, and Craft won’t be able to reliably determine which site is being requested.
 :::
 
 ## すべての有効サイトにエントリを広げる
 
-それぞれのチャンネルセクションの設定には、すべてのサイトにエントリを広げるためのオプションがあります。 これはデフォルトで有効になっていて、シングルやストラクチャーセクションでは、必ず有効な状態となります。
+In the settings for each Channel Section is an option to propagate entries in that section across all sites. This is enabled by default, and is the only option for Single and Structure sections.
 
-有効にすると、Craft は送信されたコンテンツを使用して、そのセクションで有効になっているそれぞれのサイトに新しいエントリを作成します。
+When enabled, Craft will create the new entry in each site enabled for that section using the submitted content.
 
-セクションのコンテンツをサイトごとに分離したい場合、そのセクションにあるこのオプションを無効にします。
+If you would like the section's content to be separate then disable this option for that section.
 
 ## ガイド：新しいサイトの設定
 
-これは、Craft で新しいサイトをセットアップするステップを段階的に説明するショートガイドです。 このガイドは、すでに Craft がインストールされていて、デフォルトのセットアップや設定が済んでいることを前提としています。
+In this short guide we'll walk through the steps of setting up a new site in Craft. This guide assumes you already have Craft installed and the default site setup and configured.
 
 ### ステップ 1：設定でサイトを作成
 
-最初のステップは、インストール済みの Craft の設定で新しいサイトを作成することです。
+The first step is to create the new site in the Settings of your Craft installation.
 
 1. 「設定 > サイト」に移動し、「新しいサイト」ボタンをクリックします。
 2. ドロップダウンメニューからサイトが所属するグループを選択します。 グループの選択により、サイトの機能に影響することはありません。
@@ -112,9 +116,9 @@ Craft はデフォルトサイトをプライマリサイトとしてセット�
 
 ### ステップ 2：テンプレートディレクトリの作成
 
-新しいサイト向けに、テンプレートディレクトリとテンプレートを作成します。
+Create the template directories and templates for your new site.
 
-サイトハンドルを名前に付けたテンプレートディレクトリ（例： `templates/default` と `templates/beta`）を持たせることをオススメします。 それぞれのサイトのテンプレートディレクトリに、サイト固有のテンプレートを保管します。
+We recommend you have template directories named after the sites handles (e.g. `templates/default` and `templates/beta`). You store the site-specific templates in each site template directory.
 
 ### ステップ 3：サイトのセクションとフィールドのアップデート
 
@@ -124,15 +128,15 @@ Craft はデフォルトサイトをプライマリサイトとしてセット�
 
 ### ステップ 4：フィールドの翻訳方法の定義
 
-デフォルトでは、カスタムフィールドはサイト単位で値を保存します。 本文フィールドがある場合、それぞれのサイトはそのフィールドのコンテンツだけを保存できます。
+By default, custom fields are set to store the same value across all sites. If any fields should have unique values across your sites, then you will need to edit their [Translation Method](fields.md#translation-methods) settings.
 
 ### ステップ 5：設定のテスト
 
-サイトがデフォルトの言語と異なる言語を持つ場合、それぞれのフィールドを（サイト、言語、またはサイトグループに対して）翻訳可能に設定する必要があります。
+Using new or existing entries, test that the Section, Field, and Translation Method settings work as you expect.
 
 ### ステップ 6：アセットボリューム設定の確認
 
-翻訳方法をセットするには、翻訳したいそれぞれのフィールドに移動し、翻訳方法で適切なオプションを選択します。
+If you have any local asset volumes, you will need to make sure those assets are available from each of your sites.
 
 * 「ファイルシステムのパス」設定は、相対的（`uploads/images/`）であるべきです
 * URL の設定は、 相対的（`/images`）であるべきです
