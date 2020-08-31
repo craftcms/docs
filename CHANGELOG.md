@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## Unreleased
+### Changed
+- Overhauled the Console Commands page to detail each command and its options.
+
 ## 2020-08-27
 ### Changed
 - Removed references to the `craft.bat` file, which is no longer distributed with the `craftcms/craft` starter project.
