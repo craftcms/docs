@@ -1255,3 +1255,10 @@ boolean, 0 or 1 (defaults to 0)
 #### `utils/update-usernames/index` <badge>default</badge>
 
 Updates all users’ usernames to ensure they match their email address.
+
+**Example**
+
+```
+$ php craft utils/update-usernames
+10 usernames updated.
+```
