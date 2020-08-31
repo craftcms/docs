@@ -101,8 +101,6 @@ module.exports = (options, context) => {
         xslUrl
       })
 
-      console.log(exclude);
-
       const isExcluded = (url) => {
         for (let i = 0; i < exclude.length; i++) {
           const ex = exclude[i];
