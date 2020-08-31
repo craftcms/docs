@@ -164,27 +164,36 @@ export default {
 
     const searchParams = [
       {
+        field: "keywords",
+        query: queryString,
+        boost: 8,
+        suggest: false,
+        threshold: 0,
+        bool: "or",
+      },
+      {
         field: "title",
         query: queryString,
         boost: 10,
-        suggest: false
+        suggest: false,
+        threshold: 0,
+        bool: "or",
       },
       {
         field: "headersStr",
         query: queryString,
         boost: 7,
-        suggest: false
+        suggest: false,
+        threshold: 0,
+        bool: "or",
       },
       {
         field: "content",
         query: queryString,
-        suggest: false
-      },
-      {
-        field: "keywords",
-        query: queryString,
-        boost: 8,
-        suggest: false
+        boost: 0,
+        suggest: false,
+        threshold: 8,
+        bool: "or",
       }
     ];
     const searchResult1 = await index.search(searchParams, limit);
