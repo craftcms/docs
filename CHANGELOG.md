@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-08-31
+### Changed
+- Adjusted search configuration to generally return more results and further promote custom keywords.
+
 ## 2020-08-27
 ### Changed
 - Removed references to the `craft.bat` file, which is no longer distributed with the `craftcms/craft` starter project.
