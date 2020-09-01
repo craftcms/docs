@@ -1,4 +1,4 @@
-# サーバー要件
+# Requirements
 
 ::: tip
 [Craft Server Check](https://github.com/craftcms/server-check) スクリプトを使うことで、サーバーが Craft の要件を満たしているかどうかを素早く確認できます。 :::
