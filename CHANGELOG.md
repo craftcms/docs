@@ -5,7 +5,6 @@ Theme and significant content changes will be documented in this file.
 ## 2020-09-01
 ### Added
 - Documented Craft 3.5.8 features: “Retry Duration” general setting; `off`, `on`, and `utils/update-usernames` commands; `configure()` Twig function.
-
 ### Changed
 - Overhauled the Console Commands page to detail each command and its options.
 - Adjusted search configuration again to stop applying a relevance threshold to in-body results.
