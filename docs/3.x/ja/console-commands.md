@@ -2,7 +2,7 @@
 
 While most of your interaction with Craft happens in a browser, a number of important tools are available via console commands that are run in a terminal.
 
-This can be useful for a variety of reasons, including automating tasks with `cron`, privately triggering actions via SSH or as part of a deployment process, or running resource-intensive tasks that might be constrained by the limits of your web server.
+This can be useful for a variety of reasons, including automating tasks with `cron`, privately triggering actions via SSH or as part of a [deployment process](https://craftcms.com/knowledge-base/deployment-best-practices), or running resource-intensive tasks that might be constrained by the limits of your web server.
 
 The Craft console application (`craft`) lives in the root of your project and requires PHP to run.
 
