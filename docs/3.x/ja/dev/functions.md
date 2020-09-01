@@ -158,19 +158,19 @@ This works identically to Twig’s core [`block`](https://twig.symfony.com/doc/2
 
 ## `configure`
 
-This just passes through the behavior of the `Craft::configure()` method, inherited from Yii. It's similar to [`create`](#create) in that it applies attributes to an object, but instead of creating new instances, it accepts an existing object and modifies it.
+Passes through the behavior of the `Craft::configure()` method inherited from [`Yii::configure()`](yii2:yii\BaseYii::configure()). It’s similar to [`create`](#create) in that it applies attributes to an object, but instead of creating new instances it accepts an existing object and modifies it.
 
 ```twig
-{# Modify an `EntryQuery` object set up by a Relational field: #}
-{% set myRelatedEntries = configure(entry.relationFieldHandle, {
+{# Modify an `EntryQuery` object set up by a relational field: #}
+{% set myRelatedEntries = configure(entry.myEntriesFieldHandle, {
     section: 'blog'
 }).all() %}
 ```
 
-It's also possible to use it instead of the [`merge`](#merge) filter:
+It can also be used instead of the [`merge`](https://twig.symfony.com/doc/2.x/filters/merge.html) filter:
 
 ```twig
-{% set myObject = { one: 'Original' } #}
+{% set myObject = { one: 'Original' } %}
 {# With `merge`: #}
 {% set myObject = myObject | merge({ one: 'Overridden', two: 'New' }) %}
 
@@ -178,7 +178,7 @@ It's also possible to use it instead of the [`merge`](#merge) filter:
 {% do configure(myObject, { one: 'Overridden', two: 'New' }) %}
 ```
 
-Although not encouraged, you can technically use it to set any Model or Element's attributes:
+It could technically even be used to set a model or element’s attributes, even though that’s not a great idea:
 
 ```twig
 {% do configure(entry, { title: 'New Title' }) %}
