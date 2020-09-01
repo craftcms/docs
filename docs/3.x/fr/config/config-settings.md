@@ -3151,6 +3151,12 @@ Defined by
 
 Whether Craft should set users’ usernames to their email addresses, rather than let them set their username separately.
 
+If you enable this setting after user accounts already exist, run this terminal command to update existing usernames:
+
+```bash
+php craft utils/update-usernames
+```
+
 
 
 ### `useFileLocks`
