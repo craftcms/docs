@@ -2,6 +2,11 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-09-01
+### Changed
+- Overhauled the Console Commands page to detail each command and its options.
+- Adjusted search configuration again to stop applying a relevance threshold to in-body results.
+
 ## 2020-08-31
 ### Changed
 - Adjusted search configuration to generally return more results and further promote custom keywords.
