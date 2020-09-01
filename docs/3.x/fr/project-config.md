@@ -49,7 +49,7 @@ Now you’re ready to start propagating changes in your `config/project/` folder
 
 As you make changes in a development environment, you will notice the contents of your `config/project/` folder are updated to reflect those changes. Commit those files to your Git repository just like your templates, front-end resources, and other project files.
 
-When you deploy your changes to other environments, you can then _apply_ the project config changes in one of three ways:
+When you [deploy your changes to other environments](https://craftcms.com/knowledge-base/deployment-best-practices), you can then _apply_ the project config changes in one of three ways:
 
 1. If [Dev Mode](config3:devMode) is enabled, Craft’s control panel will notify you of changes and prompt you to apply them.
 2. You can apply pending changes from the “Project Config” utility in the control panel.
