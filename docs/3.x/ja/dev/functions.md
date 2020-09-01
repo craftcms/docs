@@ -162,7 +162,7 @@ Passes through the behavior of the `Craft::configure()` method inherited from [`
 
 ```twig
 {# Modify an `EntryQuery` object set up by a relational field: #}
-{% set myRelatedEntries = configure(entry.myEntriesFieldHandle, {
+{% set myRelatedEntries = configure(entry.myEntriesField, {
     section: 'blog'
 }).all() %}
 ```
