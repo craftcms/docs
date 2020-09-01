@@ -168,7 +168,6 @@ export default {
         query: queryString,
         boost: 8,
         suggest: false,
-        threshold: 0,
         bool: "or",
       },
       {
@@ -176,7 +175,6 @@ export default {
         query: queryString,
         boost: 10,
         suggest: false,
-        threshold: 0,
         bool: "or",
       },
       {
@@ -184,7 +182,6 @@ export default {
         query: queryString,
         boost: 7,
         suggest: false,
-        threshold: 0,
         bool: "or",
       },
       {
@@ -192,7 +189,6 @@ export default {
         query: queryString,
         boost: 0,
         suggest: false,
-        threshold: 8,
         bool: "or",
       }
     ];
