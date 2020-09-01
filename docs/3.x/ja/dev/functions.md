@@ -15,6 +15,7 @@
 | [className](#classname)                                                                        | 指定されたオブジェクトの完全修飾クラス名を返します。                                                                             |
 | [clone](#clone)                                                                                | Clones an object.                                                                                      |
 | [combine](#combine)                                                                            | Combines two arrays into one.                                                                          |
+| [configure](#configure)                                                                        | Sets attributes on the passed object.                                                                  |
 | [constant](https://twig.symfony.com/doc/2.x/functions/constant.html)                           | Returns the constant value for a given string.                                                         |
 | [create](#create)                                                                              | Creates a new object.                                                                                  |
 | [csrfInput](#csrfinput)                                                                        | Returns a hidden CSRF token input.                                                                     |
@@ -35,13 +36,13 @@
 | [max](https://twig.symfony.com/doc/2.x/functions/max.html)                                     | Returns the biggest value in an array.                                                                 |
 | [min](https://twig.symfony.com/doc/2.x/functions/min.html)                                     | Returns the lowest value in an array.                                                                  |
 | [parent](https://twig.symfony.com/doc/2.x/functions/parent.html)                               | Returns the parent block’s output.                                                                     |
-| [plugin](#plugin)                                                                              | ハンドルに従ってプラグインインスタンスを返します。                                                                              |
+| [plugin](#plugin)                                                                              | Returns a plugin instance by its handle.                                                               |
 | [random](https://twig.symfony.com/doc/2.x/functions/random.html)                               | Returns a random value.                                                                                |
 | [range](https://twig.symfony.com/doc/2.x/functions/range.html)                                 | Returns a list containing an arithmetic progression of integers.                                       |
 | [raw](#raw)                                                                                    | Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML-encoded when output. |
-| [redirectInput](#redirectinput)                                                                | `<input type="hidden" name="redirect" value="{{ url|hash }}">` を入力するためのショートカットです。                |
-| [seq](#seq)                                                                                    | `name` で定義されたシーケンスの次または現在の番号を出力します。                                                                    |
-| [shuffle](#shuffle)                                                                            | 配列内のエレメントの順序をランダム化します。                                                                                 |
+| [redirectInput](#redirectinput)                                                                | Outputs a hidden `redirect` input.                                                                     |
+| [seq](#seq)                                                                                    | Outputs the next or current number in a sequence.                                                      |
+| [shuffle](#shuffle)                                                                            | Randomizes the order of the items in an array.                                                         |
 | [siteUrl](#siteurl)                                                                            | Generates a front-end URL.                                                                             |
 | [svg](#svg)                                                                                    | Outputs an SVG document.                                                                               |
 | [source](https://twig.symfony.com/doc/2.x/functions/source.html)                               | Returns the content of a template without rendering it.                                                |
@@ -155,15 +156,44 @@ This works identically to Twig’s core [`block`](https://twig.symfony.com/doc/2
 {{ floor(42.9) }} → 42
 ```
 
-## `floor( num )`
+## `configure`
+
+This just passes through the behavior of the `Craft::configure()` method, inherited from Yii. It's similar to [`create`](#create) in that it applies attributes to an object, but instead of creating new instances, it accepts an existing object and modifies it.
+
+```twig
+{# Modify an `EntryQuery` object set up by a Relational field: #}
+{% set myRelatedEntries = configure(entry.relationFieldHandle, {
+    section: 'blog'
+}).all() %}
+```
+
+It's also possible to use it instead of the [`merge`](#merge) filter:
+
+```twig
+{% set myObject = { one: 'Original' } #}
+{# With `merge`: #}
+{% set myObject = myObject | merge({ one: 'Overridden', two: 'New' }) %}
+
+{# With `configure`: #}
+{% do configure(myObject, { one: 'Overridden', two: 'New' }) %}
+```
+
+Although not encouraged, you can technically use it to set any Model or Element's attributes:
+
+```twig
+{% do configure(entry, { title: 'New Title' }) %}
+{% do craft.app.elements.saveElement(entry) %}
+```
+
+## `constant`
 
 Returns the constant value for a given string.
 
 This works identically to Twig’s core [`constant`](https://twig.symfony.com/doc/2.x/functions/constant.html) function.
 
-## `getenv( name )`
+## `create`
 
-与えられたクラス名やオブジェクト設定に基づいて新しいオブジェクトインスタンスを作成します。 サポートされる引数の詳細については、<craft3:Yii::createObject()> を参照してください。
+Creates a new object instance based on a given class name or object configuration. See <yii2:Yii::createObject()> for a full explanation of supported arguments.
 
 ```twig
 {# Pass in a class name #}
@@ -177,7 +207,7 @@ This works identically to Twig’s core [`constant`](https://twig.symfony.com/do
 }) %}
 ```
 
-## `parseEnv( str )`
+## `cpUrl`
 
 Returns a control panel URL, automatically accounting for relative vs. absolute format and the active <config3:cpTrigger> setting.
 
@@ -187,15 +217,15 @@ Returns a control panel URL, automatically accounting for relative vs. absolute 
 
 ### 引数
 
-ファンクションが呼び出されるたびに、与えられたシーケンスは自動的にインクリメントされます。
+The `cpUrl()` function has the following arguments:
 
 * **`path`** – 結果となる URL がサイトで指すべきパス。 それは、ベースサイト URL に追加されます。
 * **`params`** – URL に追加するクエリ文字列パラメータ。 これは文字列（例：`'foo=1&bar=2'`）またはオブジェクト（例：`{foo:'1', bar:'2'}`）が利用可能です。
 * **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。 デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。 そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
 
-## `head()`
+## `csrfInput`
 
-不可視の CSRF トークン入力欄を返します。 CSRF 保護が有効になっているすべてのサイトでは、POST 経由で送信するそれぞれのフォームにこれを含めなければなりません。
+Returns a hidden CSRF Token input. All sites that have CSRF Protection enabled must include this in each form that submits via POST.
 
 ```twig
 {{ csrfInput() }}
@@ -209,9 +239,9 @@ You can optionally set additional attributes on the tag by passing an `options` 
 }) }}
 ```
 
-## `plugin( handle )`
+## `endBody`
 
-「end body」に登録されたスクリプトやスタイルを出力します。 `</body>` タグの直前に配置する必要があります。
+Outputs any scripts and styles that were registered for the “end body” position. It should be placed right before your `</body>` tag.
 
 ```twig
 <body>
@@ -222,9 +252,9 @@ You can optionally set additional attributes on the tag by passing an `options` 
 </body>
 ```
 
-## `redirectInput( url )`
+## `expression`
 
-サイト上のページへの URL を作成するため _だけ_ という点を除けば、[url()](#url-path-params-scheme-mustshowscriptname) と似ています。
+Creates and returns a new <yii2:yii\db\Expression> object, for use in database queries.
 
 ```twig
 {% set entries = craft.entries()
@@ -232,33 +262,26 @@ You can optionally set additional attributes on the tag by passing an `options` 
     .all() %}
 ```
 
-## `seq( name, length, next )`
+## `floor`
 
-`siteUrl()` ファンクションは、次の引数を持っています。
+Rounds a number down.
 
 ```twig
-{% set promos = shuffle(homepage.promos) %}
-
-{% for promo in promos %}
-    <div class="promo {{ promo.slug }}">
-        <h3>{{ promo.title }}</h3>
-        <p>{{ promo.description }}</p>
-        <a class="cta" href="{{ promo.ctaUrl }}">{{ promo.ctaLabel }}</a>
-    </div>
-{% endfor %}
+{{ floor(42.9) }}
+{# Output: 42 #}
 ```
 
-## `shuffle( array )`
+## `getenv`
 
-SVG 文書を出力します。
+Returns the value of an environment variable.
 
 ```twig
 {{ getenv('MAPS_API_KEY') }}
 ```
 
-## `siteUrl( path, params, scheme, siteId )`
+## `gql`
 
-次のものを渡すことができます。
+Executes a GraphQL query against the full schema.
 
 ```twig
 {% set result = gql('{
@@ -288,13 +311,13 @@ SVG 文書を出力します。
 {% endfor %}
 ```
 
-## `svg( svg, sanitize, namespace, class )`
+## `parseEnv`
 
 Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
 
-## `url( path, params, scheme, mustShowScriptName )`
+## `head`
 
-「head」に登録されたスクリプトやスタイルを出力します。 `</head>` タグの直前に配置する必要があります。
+Outputs any scripts and styles that were registered for the “head” position. It should be placed right before your `</head>` tag.
 
 ```twig
 <head>
@@ -421,9 +444,10 @@ To view the current number in the sequence without incrementing it, set the `nex
 Randomizes the order of the elements within an array.
 
 ```twig
-{% set promos = shuffle(homepage.promos) %}
+{% set promos = craft.entries.section('promos').all() %}
+{% set shuffledPromos = shuffle(promos) %}
 
-{% for promo in promos %}
+{% for promo in shuffledPromos %}
     <div class="promo {{ promo.slug }}">
         <h3>{{ promo.title }}</h3>
         <p>{{ promo.description }}</p>
