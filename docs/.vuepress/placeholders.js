@@ -10,5 +10,6 @@ module.exports = {
   "myFile.ext": { title: "Replace this with your upload filename." },
   "my-machine": { title: "Replace with the name of your machine, using only letters, numbers, underscores, and hyphens." },
   "myNamedTransform": { title: "Replace with the named transform you created in the control panel." },
-  "myAssetsField": { title: "Replace with your Assets field handle." }
+  "myAssetsField": { title: "Replace with your Assets field handle." },
+  "myEntriesFieldHandle": { title: "Replace with your Entries field handle." },
 };
