@@ -944,9 +944,9 @@ Runs an array through [array_unique()](http://php.net/manual/en/function.array-u
 Prepends one or more items to the beginning of an array, and returns the new array.
 
 ```twig
-{% set array1 = ['baz'] %}
-{% set array2 = array|push('foo', 'bar') %}
-{# Result: ['foo', 'bar', 'baz'] #}
+{% set array1 = ['foo'] %}
+{% set array2 = array|unshift('bar', 'baz') %}
+{# Result: ['bar', 'baz', 'foo'] #}
 ```
 
 ## `values`
