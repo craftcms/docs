@@ -386,7 +386,9 @@ Setting the position to `on load` or `on ready` will cause Craft to load its int
 Any HTML attributes that should be included on the `<script>` tag.
 
 ```twig
-{% js with {defer: 'defer'} %}
+{% js with {
+  defer: true,
+} %}
 ```
 
 Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
