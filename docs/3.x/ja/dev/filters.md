@@ -900,9 +900,9 @@ Runs an array through [array_unique()](http://php.net/manual/en/function.array-u
 This works identically to Twig’s core [`slice`](https://twig.symfony.com/doc/2.x/filters/slice.html) filter.
 
 ```twig
-{% set array1 = ['baz'] %}
-{% set array2 = array|push('foo', 'bar') %}
-{# Result: ['foo', 'bar', 'baz'] #}
+{% set array1 = ['foo'] %}
+{% set array2 = array|unshift('bar', 'baz') %}
+{# Result: ['bar', 'baz', 'foo'] #}
 ```
 
 ## `values`
