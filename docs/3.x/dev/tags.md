@@ -386,12 +386,16 @@ Setting the position to `on load` or `on ready` will cause Craft to load its int
 Any HTML attributes that should be included on the `<script>` tag.
 
 ```twig
-{% js with {
-  defer: true,
+{% js "/assets/js/script.js" with {
+    defer: true
 } %}
 ```
 
 Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
+
+::: warning
+The `with` parameter is only available when you specify a JavaScript file; it won’t have any effect with a JavaScript code block.
+:::
 
 ## `namespace`
 
