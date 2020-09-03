@@ -381,6 +381,22 @@ By default, `at endBody` will be used.
 Setting the position to `on load` or `on ready` will cause Craft to load its internal copy of jQuery onto the page (even if the template is already including its own copy), so you should probably avoid using them in front-end templates.
 :::
 
+#### `with`
+
+Any HTML attributes that should be included on the `<script>` tag.
+
+```twig
+{% js "/assets/js/script.js" with {
+    defer: true
+} %}
+```
+
+Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
+
+::: warning
+The `with` parameter is only available when you specify a JavaScript file; it won’t have any effect with a JavaScript code block.
+:::
+
 ## `namespace`
 
 The `{% namespace %}` tag can be used to namespace input names and other HTML attributes, as well as CSS selectors.
