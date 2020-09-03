@@ -20,7 +20,7 @@ The callback method will pass a `$context` argument, which represents the curren
 
 The method can optionally return a string, which will be output where the `{% hook %}` tag is in the template.
 
-## Available Control Panel Template Hooks
+## Control Panel Template Hooks
 
 | Hook                         | Description                                                         | Template                                                                                                   |
 | ---------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
