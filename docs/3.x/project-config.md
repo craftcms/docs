@@ -51,8 +51,8 @@ As you make changes in a development environment, you will notice the contents o
 
 When you [deploy your changes to other environments](https://craftcms.com/knowledge-base/deployment-best-practices), you can then _apply_ the project config changes in one of two ways:
 
-2. From the “Project Config” utility in the control panel.
-3. By running the `php craft project-config/apply` terminal command.
+1. From the “Project Config” utility in the control panel.
+2. By running the `php craft project-config/apply` terminal command.
 
 Either way, Craft will compare the files in the local `config/project/` folder with its already-loaded project config, and pull in whatever changes it finds.
 
