@@ -1,3 +1,7 @@
+---
+updatedVersion: 3.x/extend/extending-twig.md
+---
+
 # Template Variables
 
 Craft allows plugins to provide their own template variables, accessible from the `{{ craft }}` global variable (e.g. `{{ craft.pluginName }}`).
