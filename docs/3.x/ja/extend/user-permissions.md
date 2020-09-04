@@ -52,7 +52,7 @@ public function actionStayUpLate()
 
 ユーザーがその権限を持たない場合、403 エラーが返されます。
 
-テンプレートでは、[requirePermission](../dev/tags.md#requirepermission) タグでユーザー権限を持っていることを保証することもできます。
+テンプレートでは、[requirePermission](../dev/tags/requirepermission.md) タグでユーザー権限を持っていることを保証することもできます。
 
 ```twig
 {% requirePermission 'stayUpLate' %}
