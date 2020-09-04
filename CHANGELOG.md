@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2002-09-04
+### Changed
+- Updated the “Propagating Changes” section of the Project Config page, per chanegs in Craft 3.5.6. 
+
 ## 2020-09-01
 ### Added
 - Documented Craft 3.5.8 features: “Retry Duration” general setting; `off`, `on`, and `utils/update-usernames` commands; `configure()` Twig function.
