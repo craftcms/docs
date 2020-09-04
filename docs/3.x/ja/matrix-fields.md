@@ -29,7 +29,7 @@
 
 ### 行列フィールドによるエレメントの照会
 
-行列フィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、行列フィールドのデータに基づいた結果をフィルタできます。
+行列フィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、行列フィールドのデータに基づいた結果をフィルタできます。
 
 利用可能な値には、次のものが含まれます。
 
@@ -98,7 +98,7 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 ```
 
 ::: tip
-このコードは [switch](dev/tags.md#switch) タグを利用して、簡略化できます。 :::
+このコードは [switch](dev/tags/switch.md) タグを利用して、簡略化できます。 :::
 :::
 
 If you only want the first block, call [one()](craft3:craft\db\Query::one()) instead of `all()`, and then make sure it returned something:
