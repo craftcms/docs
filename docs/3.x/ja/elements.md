@@ -1,21 +1,21 @@
-# Elements
+# エレメント
 
-A fundamentally important and unique aspect of Craft CMS is the concept of elements.
+Craft CMS の根本的に重要でユニークな特徴は、エレメントという概念です。
 
-An element is the most basic unit of content.
+エレメントは、コンテンツの最も基本的な単位です。
 
-Since this is a web-based content management system, often an element will include a unique URL. It may involve text, imagery, important relationships to other content, even variations by language or site or drafts that aren’t ready to be published.
+ウェブベースのコンテンツ管理システムであるため、多くの場合、エレメントにはユニークな URL が含まれています。テキスト、画像、他のコンテンツとの重要な関係性、言語・サイト・まだ公開されていない下書きによるバリエーションさえも含むかもしれません。
 
-In the control panel, you’ll encounter the element *types* Craft makes available:
+コントロールパネルには、Craft が利用可能なエレメントの *種類* が表示されます。
 
-- [**Assets**](assets.md) store files that are uploaded to a volume.
-- [**Categories**](categories.md) are taxonomies that resemble folder structures and can be nested.
-- [**Entries**](entries.md) are posts that can have drafts, revisions, and live previews. They can exist as one-offs called “Singles”, ordered by date in “Sections” or visually sorted as “Structures”.
-- [**Global Sets**](globals.md) are floating bits of content that aren’t tied to any particular page or other piece of content, ideal for bits of information you might want to show on every page of your site.
-- [**Matrix Blocks**](matrix-blocks.md) are powerful, easily combined and reordered groupings of content that can be used within the other element types.
-- [**Tags**](tags.md) are flat taxonomies optimized for quick input and re-use.
-- [**Users**](users.md) are accounts for human beings with email addresses and permissions, organized into customizable groups.
+- [**アセット**](assets.md)はボリュームにアップロードされたファイルを保管します。
+- [**カテゴリ**](categories.md)はフォルダ構造に似た分類で、ネストさせることができます。
+- [**エントリ**](entries.md)は下書き、リビジョン、および、ライブプレビューが可能な投稿です。それらは「シングル」と呼ばれる一回限りのものとして存在したり、「セクション」へ日付で順序づけられていたり、「ストラクチャー」として視覚的に並べられたりします。
+- [**グローバル設定**](globals.md)は特定のページや他のコンテンツに紐づかない流動的なコンテンツのかたまりで、サイトの各ページに表示したい情報のかたまりに最適です。
+- [**行列ブロック**](matrix-blocks.md)は強力で、他のエレメントタイプで使用できるコンテンツを簡単に結び付けたり、グループ化して並び替えることができます。
+- [**タグ**](tags.md)は素早く入力して再利用できるように最適化されたフラットな分類です。
+- [**ユーザー**](users.md)はメールアドレスと権限を持つ人間向けのアカウントで、カスタマイズ可能なグループに編成されます。
 
-There’s no limit to how many element types you use or how you combine them. You can use third-party plugins or write your own to include additional element types.
+使用するエレメントタイプの数や組み合わせ方に制限はありません。サードバーティ製のプラグインを使用したり、追加のエレメントタイプを含む独自のプラグインを作成できます。
 
-While each element type is unique in some way, it’s important to know that **all** elements are made up of their own [custom fields](fields.md) that determine exactly what content should be collected and stored.
+それぞれのエレメントタイプは何らかの点でユニークですが、**すべての** エレメントはどのようなコンテンツを収集・保管すべきかを厳密に特定する独自の[カスタムフィールド](fields.md)で構成されていることを理解することが重要です。

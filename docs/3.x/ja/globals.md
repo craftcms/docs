@@ -1,22 +1,22 @@
 # グローバル
 
-グローバルは、テンプレート全体で包括的に利用可能なコンテンツを保存できます。 これは、コントロールパネル経由でエントリではないコンテンツを簡単に編集できるようにする便利な方法です。
+グローバルは、テンプレート全体で包括的に利用可能なコンテンツを保存できます。これは、コントロールパネル経由でエントリではないコンテンツを簡単に編集できるようにする便利な方法です。
 
-Craft はグローバル設定内でグローバルを整理します。 それぞれのグローバル設定は、存在するすべてのフィールドや新しいフィールドを利用する独自の[フィールドレイアウト](fields.md#field-layouts)を持ちます。
+Craft はグローバル設定内でグローバルを整理します。それぞれのグローバル設定は、存在するすべてのフィールドや新しいフィールドを利用する独自の[フィールドレイアウト](fields.md#field-layouts)を持ちます。
 
 グローバル設定を作るには、「設定 > グローバル」に移動します。
 
-少なくとも1つのグローバル設定があれば、Craft はコントロールパネルのメインナビゲーションに「グローバル」項目を追加します。 これをクリックすると、サイドバーにすべてのグローバル設定のリスト、メインコンテンツエリアに選択されたグローバル設定に関連するすべてのフィールドが表示されたページに移動します。
+少なくとも1つのグローバル設定があれば、Craft はコントロールパネルのメインナビゲーションに「グローバル」項目を追加します。これをクリックすると、サイドバーにすべてのグローバル設定のリスト、メインコンテンツエリアに選択されたグローバル設定に関連するすべてのフィールドが表示されたページに移動します。
 
 ::: tip
-[エントリ](sections-and-entries.md#entries)とは異なり、特定の URL と関連付けられていないグローバル設定では、ライブプレビュー機能がありません。 :::
+[エントリ](entries.md#entries)とは異なり、特定の URL と関連付けられていないグローバル設定では、ライブプレビュー機能がありません。
 :::
 
 ## テンプレートでのグローバル設定
 
 任意のテンプレートからハンドル経由でグローバル設定にアクセスできます。
 
-`companyInfo` というハンドルのグローバル設定があり、`yearEstablished` というハンドルのフィールドがある場合、次のコードを使用してそのフィールドへどこからでもアクセスすることができます。
+`companyInfo` というハンドルのグローバル設定があり、`yearEstablished` というハンドルのフィールドがある場合、次のコードを利用してそのフィールドへどこからでもアクセスできます。
 
 ```twig
 {{ companyInfo.yearEstablished }}
@@ -24,11 +24,11 @@ Craft はグローバル設定内でグローバルを整理します。 それ�
 
 カスタムフィールド以外で利用できる追加のグローバル設定のプロパティについては、リファレンスの <craft3:craft\elements\GlobalSet> を参照してください。
 
-### Manually Loading Global Sets
+### グローバル設定の手動読み込み
 
-In some special situations, like within email templates, Global Sets won’t be available by default. Any Global Set may still be loaded manually. The above example could be loaded with `getSetByHandle()`:
+メールテンプレートのような特殊な状況では、グローバル設定はデフォルトでは利用できません。グローバル設定は手動でも読み込めます。上記の例では、`getSetByHandle()` で読み込むことができます。
 
-そのためには、グローバルセットのフィールドを編集し、それぞれの「翻訳方法」設定で「各サイトに対して翻訳」をセットします。
+::: code
 ```twig
 {% set companyInfo = craft.globals().getSetByHandle('companyInfo') %}
 ```
@@ -37,21 +37,21 @@ $companyInfo = \Craft::$app->getGlobals()->getSetByHandle('companyInfo');
 ```
 :::
 
-More details are available in the [Globals service class documentation](craft3:craft\services\Globals).
+詳細については、[Globals サービスクラスのドキュメント](craft3:craft\services\Globals) を参照してください。
 
 ## マルチサイトでのグローバル設定
 
-Craft でマルチサイトを運用している場合、グローバル設定はすべてのサイトで利用可能です。 しかしながら、必要に応じていくつかのフィールドを空のままにするなど、それぞれの設定値をサイトごとにセットできます。
+Craft でマルチサイトを運用している場合、グローバル設定はすべてのサイトで利用可能です。しかしながら、必要に応じていくつかのフィールドを空のままにするなど、それぞれの設定値をサイトごとにセットできます。
 
-To do that, edit the global set’s fields, and make sure that their “Translation Method” settings are set to “Translate for each site”.
+そのためには、グローバル設定のフィールドを編集し、それぞれの「翻訳方法」設定で「各サイトに対して翻訳」をセットします。
 
-To toggle between sites while viewing Global Sets, use the drop-down menu at the top left of the Global Sets page in the control panel.
+グローバル設定を表示中にサイトを切り替えるには、コントロールパネルのグローバル設定ページの左上にあるドロップダウンメニューを使用します。
 
 ![グローバル内のサイトの切り替え](./images/globals-multisite-nav.png)
 
-## Querying Globals
+## グローバルの照会
 
-You can fetch global sets in your templates or PHP code using **global set queries**.
+**グローバル設定クエリ**を利用して、テンプレートや PHP コード内でグローバル設定を取得できます。
 
 ::: code
 ```twig
@@ -64,20 +64,20 @@ $myGlobalSetQuery = \craft\elements\GlobalSet::find();
 ```
 :::
 
-Once you’ve created a global set query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [GlobalSet](craft3:craft\elements\GlobalSet) objects will be returned.
+グローバル設定クエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。 さらに、`.all()` を呼び出して[実行](element-queries.md#executing-element-queries)できます。[GlobalSet](craft3:craft\elements\GlobalSet) オブジェクトの配列が返されます。
 
 ::: tip
-See [Element Queries](element-queries.md) to learn about how element queries work.
+エレメントクエリがどのように機能するかについては、[エレメントクエリ](element-queries.md)を参照してください。
 :::
 
-### Example
+### 実例
 
-We can load a global set from the primary site and display its content by doing the following:
+次の操作をすることで、プライマリサイトからグローバル設置をロードし、コンテンツを表示できます。
 
-1. Create a global set query with `craft.globalSets()`.
-2. Set the [handle](#handle) and [siteId](#siteid) parameters on it.
-3. Fetch the global set with `.one()`.
-4. Output its content.
+1. `craft.globalSets()` でグローバル設定クエリを作成します。
+2. [handle](#handle) および [siteId](#siteid) パラメータをセットします。
+3. `.one()` でグローバル設定を取得します。
+4. コンテンツを出力します。
 
 ```twig
 {# Create a global set query with the 'handle' and 'siteId' parameters #}
@@ -93,43 +93,43 @@ We can load a global set from the primary site and display its content by doing 
 ```
 
 ::: tip
-All global sets are already available as global variables to Twig templates. So you only need to fetch them through  `craft.globalSets()` if you need to access their content for a different site than the current site.
+すべてのグローバル設定は、Twig テンプレートのグローバル変数としてすでに利用可能です。そのため、現在のサイトとは異なるサイトのコンテンツにアクセスする場合、`craft.globalSets()` を通して取得する必要があります。
 :::
 
-### Parameters
+### パラメータ
 
-Global set queries support the following parameters:
+グローバル設定クエリは、次のパラメータをサポートしています。
 
 <!-- BEGIN PARAMS -->
 
-| Param                                     | Description                                                                                                                                                                                                                                                                                   |
-| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.                                                                                                                                                                                                                                              |
-| [asArray](#asarray)                       | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft3:craft\elements\GlobalSet) objects.                                                                                                                                                        |
-| [clearCachedResult](#clearcachedresult)   | Clears the cached result.                                                                                                                                                                                                                                                                     |
-| [dateCreated](#datecreated)               | Narrows the query results based on the global sets’ creation dates.                                                                                                                                                                                                                           |
-| [dateUpdated](#dateupdated)               | Narrows the query results based on the global sets’ last-updated dates.                                                                                                                                                                                                                       |
-| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).                                                                                                                                                                                                                  |
-| [handle](#handle)                         | Narrows the query results based on the global sets’ handles.                                                                                                                                                                                                                                  |
-| [id](#id)                                 | Narrows the query results based on the global sets’ IDs.                                                                                                                                                                                                                                      |
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching global sets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement). |
-| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.                                                                                                                                                                                                                                     |
-| [limit](#limit)                           | Determines the number of global sets that should be returned.                                                                                                                                                                                                                                 |
-| [offset](#offset)                         | Determines how many global sets should be skipped in the results.                                                                                                                                                                                                                             |
-| [orderBy](#orderby)                       | Determines the order that the global sets should be returned in. (If empty, defaults to `name ASC`.)                                                                                                                                                                                          |
-| [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.                                                                                                                                                                                 |
-| [relatedTo](#relatedto)                   | Narrows the query results to only global sets that are related to certain other elements.                                                                                                                                                                                                     |
-| [search](#search)                         | Narrows the query results to only global sets that match a search query.                                                                                                                                                                                                                      |
-| [site](#site)                             | Determines which site(s) the global sets should be queried in.                                                                                                                                                                                                                                |
-| [siteId](#siteid)                         | Determines which site(s) the global sets should be queried in, per the site’s ID.                                                                                                                                                                                                             |
-| [trashed](#trashed)                       | Narrows the query results to only global sets that have been soft-deleted.                                                                                                                                                                                                                    |
-| [uid](#uid)                               | Narrows the query results based on the global sets’ UIDs.                                                                                                                                                                                                                                     |
-| [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                                                             |
-| [with](#with)                             | Causes the query to return matching global sets eager-loaded with related elements.                                                                                                                                                                                                           |
+| パラメータ | 説明 |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [anyStatus](#anystatus) | ステータスに基づくエレメントのフィルタを削除します。 |
+| [asArray](#asarray) | [GlobalSet](craft3:craft\elements\GlobalSet) オブジェクトではなく、データの配列として、マッチしたグローバル設定をクエリが返します。 |
+| [clearCachedResult](#clearcachedresult) | キャッシュされた結果をクリアします。 |
+| [dateCreated](#datecreated) | グローバル設定の作成日に基づいて、クエリの結果を絞り込みます。 |
+| [dateUpdated](#dateupdated) | グローバル設定の最終アップデート日に基づいて、クエリの結果を絞り込みます。 |
+| [fixedOrder](#fixedorder) | クエリの結果を [id](#id) で指定された順序で返します。 |
+| [handle](#handle) | グローバル設定のハンドルに基づいて、クエリの結果を絞り込みます。 |
+| [id](#id) | グローバル設定の ID に基づいて、クエリの結果を絞り込みます。 |
+| [ignorePlaceholders](#ignoreplaceholders) | [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement) によってセットされたマッチするプレースホルダーエレメントを無視して、データベースに保存されたマッチするグローバル設定をクエリが返します。 |
+| [inReverse](#inreverse) | クエリの結果を逆順で返します。 |
+| [limit](#limit) | 返されるグローバル設定の数を決定します。 |
+| [offset](#offset) | 結果からスキップされるグローバル設定の数を決定します。 |
+| [orderBy](#orderby) | 返されるグローバル設定の順序を決定します。（空の場合、デフォルトは `name ASC`） |
+| [preferSites](#prefersites) | [unique](#unique) がセットされている場合、マルチサイトでエレメント照会する際に選択されるべきサイトを決定します |
+| [relatedTo](#relatedto) | 特定の他のエレメントと関連付けられたグローバル設定だけに、クエリの結果を絞り込みます。 |
+| [search](#search) | 検索クエリにマッチするグローバル設定だけに、クエリの結果を絞り込みます。 |
+| [site](#site) | グローバル設定を照会するサイトを決定します。 |
+| [siteId](#siteid) | サイトの ID ごとに、グローバル設定を照会するサイトを決定します。 |
+| [trashed](#trashed) | ソフトデリートされたグローバル設定だけに、クエリの結果を絞り込みます。 |
+| [uid](#uid) | グローバル設定の UID に基づいて、クエリの結果を絞り込みます。 |
+| [unique](#unique) | クエリによってユニークな ID のエレメントだけが返されるかを決定します。 |
+| [with](#with) | 関連付けられたエレメントを eager-loaded した状態で、マッチしたグローバル設定をクエリが返します。 |
 
 #### `anyStatus`
 
-Removes element filters based on their statuses.
+ステータスに基づくエレメントのフィルタを削除します。
 
 
 
@@ -154,7 +154,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `asArray`
 
-Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft3:craft\elements\GlobalSet) objects.
+[GlobalSet](craft3:craft\elements\GlobalSet) オブジェクトではなく、データの配列として、マッチしたグローバル設定をクエリが返します。
 
 
 
@@ -179,7 +179,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `clearCachedResult`
 
-Clears the cached result.
+キャッシュされた結果をクリアします。
 
 
 
@@ -188,17 +188,17 @@ Clears the cached result.
 
 #### `dateCreated`
 
-Narrows the query results based on the global sets’ creation dates.
+グローバル設定の作成日に基づいて、クエリの結果を絞り込みます。
 
 
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value                                            | Fetches global sets…                                 |
-| ------------------------------------------------ | ---------------------------------------------------- |
-| `'>= 2018-04-01'`                             | that were created on or after 2018-04-01.            |
-| `'< 2018-05-01'`                              | that were created before 2018-05-01                  |
-| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were created between 2018-04-01 and 2018-05-01. |
+| 値 | 取得するグローバル設定
+| - | -
+| `'>= 2018-04-01'` | 2018-04-01 以降に作成されたもの。
+| `'< 2018-05-01'` | 2018-05-01 より前に作成されたもの。
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | 2018-04-01 から 2018-05-01 の間に作成されたもの。
 
 
 
@@ -227,17 +227,17 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `dateUpdated`
 
-Narrows the query results based on the global sets’ last-updated dates.
+グローバル設定の最終アップデート日に基づいて、クエリの結果を絞り込みます。
 
 
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value                                            | Fetches global sets…                                 |
-| ------------------------------------------------ | ---------------------------------------------------- |
-| `'>= 2018-04-01'`                             | that were updated on or after 2018-04-01.            |
-| `'< 2018-05-01'`                              | that were updated before 2018-05-01                  |
-| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were updated between 2018-04-01 and 2018-05-01. |
+| 値 | 取得するグローバル設定
+| - | -
+| `'>= 2018-04-01'` | 2018-04-01 以降にアップデートされたもの。
+| `'< 2018-05-01'` | 2018-05-01 より前にアップデートされたもの。
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | 2018-04-01 から 2018-05-01 の間にアップデートされたもの。
 
 
 
@@ -264,7 +264,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `fixedOrder`
 
-Causes the query results to be returned in the order specified by [id](#id).
+クエリの結果を [id](#id) で指定された順序で返します。
 
 
 
@@ -291,16 +291,16 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `handle`
 
-Narrows the query results based on the global sets’ handles.
+グローバル設定のハンドルに基づいて、クエリの結果を絞り込みます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value                   | Fetches global sets…                 |
-| ----------------------- | ------------------------------------ |
-| `'foo'`                 | with a handle of `foo`.              |
-| `'not foo'`             | not with a handle of `foo`.          |
-| `['foo', 'bar']`        | with a handle of `foo` or `bar`.     |
-| `['not', 'foo', 'bar']` | not with a handle of `foo` or `bar`. |
+| 値 | 取得するグローバル設定
+| - | -
+| `'foo'` | ハンドルが `foo`。
+| `'not foo'` | ハンドルが `foo` ではない。
+| `['foo', 'bar']` | ハンドルが `foo` または `bar`。
+| `['not', 'foo', 'bar']` | ハンドルが `foo` または `bar` ではない。
 
 
 
@@ -323,18 +323,18 @@ $globalSet = \craft\elements\GlobalSet::find()
 
 #### `id`
 
-Narrows the query results based on the global sets’ IDs.
+グローバル設定の ID に基づいて、クエリの結果を絞り込みます。
 
 
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value           | Fetches global sets…      |
-| --------------- | ------------------------- |
-| `1`             | with an ID of 1.          |
-| `'not 1'`       | not with an ID of 1.      |
-| `[1, 2]`        | with an ID of 1 or 2.     |
-| `['not', 1, 2]` | not with an ID of 1 or 2. |
+| 値 | 取得するグローバル設定
+| - | -
+| `1` | ID が 1。
+| `'not 1'` | ID が 1ではない。
+| `[1, 2]` | ID が 1 または 2。
+| `['not', 1, 2]` | ID が 1 または 2 ではない。
 
 
 
@@ -357,13 +357,13 @@ $globalSet = \craft\elements\GlobalSet::find()
 
 
 ::: tip
-This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
+特定の順序で結果を返したい場合、[fixedOrder](#fixedorder) と組み合わせることができます。
 :::
 
 
 #### `ignorePlaceholders`
 
-Causes the query to return matching global sets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+[craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement) によってセットされたマッチするプレースホルダーエレメントを無視して、データベースに保存されたマッチするグローバル設定をクエリが返します。
 
 
 
@@ -376,7 +376,7 @@ Causes the query to return matching global sets as they are stored in the databa
 
 #### `inReverse`
 
-Causes the query results to be returned in reverse order.
+クエリの結果を逆順で返します。
 
 
 
@@ -401,7 +401,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `limit`
 
-Determines the number of global sets that should be returned.
+返されるグローバル設定の数を決定します。
 
 
 
@@ -424,7 +424,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `offset`
 
-Determines how many global sets should be skipped in the results.
+結果からスキップされるグローバル設定の数を決定します。
 
 
 
@@ -447,7 +447,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `orderBy`
 
-Determines the order that the global sets should be returned in. (If empty, defaults to `name ASC`.)
+返されるグローバル設定の順序を決定します。（空の場合、デフォルトは `name ASC`）
 
 
 
@@ -470,13 +470,13 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `preferSites`
 
-If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+[unique](#unique) がセットされている場合、マルチサイトでエレメント照会する際に選択されるべきサイトを決定します
 
 
 
-For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C, and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned for Site B.
+例えば、エレメント “Foo” がサイト A とサイト B に存在し、エレメント “Bar” がサイト B とサイト C に存在し、ここに `['c', 'b', 'a']` がセットされている場合、Foo will はサイト C に対して返され、Bar はサイト B に対して返されます。
 
-If this isn’t set, then preference goes to the current site.
+これがセットされていない場合、現在のサイトが優先されます。
 
 
 
@@ -503,11 +503,11 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `relatedTo`
 
-Narrows the query results to only global sets that are related to certain other elements.
+特定の他のエレメントと関連付けられたグローバル設定だけに、クエリの結果を絞り込みます。
 
 
 
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+このパラメーターがどのように機能するかの詳細については、[リレーション](/docs/3.x/ja/relations.html)を参照してください。
 
 
 
@@ -530,11 +530,11 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `search`
 
-Narrows the query results to only global sets that match a search query.
+検索クエリにマッチするグローバル設定だけに、クエリの結果を絞り込みます。
 
 
 
-See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
+このパラメーターがどのように機能するかの詳細については、[検索](/docs/3.x/ja/searching.html)を参照してください。
 
 
 
@@ -563,24 +563,24 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `site`
 
-Determines which site(s) the global sets should be queried in.
+グローバル設定を照会するサイトを決定します。
 
 
 
-The current site will be used by default.
+デフォルトでは、現在のサイトが使用されます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value                                                      | Fetches global sets…                           |
-| ---------------------------------------------------------- | ---------------------------------------------- |
-| `'foo'`                                                    | from the site with a handle of `foo`.          |
-| `['foo', 'bar']`                                           | from a site with a handle of `foo` or `bar`.   |
-| `['not', 'foo', 'bar']`                                    | not in a site with a handle of `foo` or `bar`. |
-| a [craft\models\Site](craft3:craft\models\Site) object | from the site represented by the object.       |
-| `'*'`                                                      | from any site.                                 |
+| 値 | 取得するグローバル設定
+| - | -
+| `'foo'` | ハンドルが `foo` のサイトから。
+| `['foo', 'bar']` | ハンドルが `foo` または `bar` のサイトから。
+| `['not', 'foo', 'bar']` | ハンドルが `foo` または `bar` のサイトではない。
+| [craft\models\Site](craft3:craft\models\Site) オブジェクト | オブジェクトで表されるサイトから。
+| `'*'` | すべてのサイトから。
 
 ::: tip
-If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you only want unique elements to be returned, use [unique](#unique) in conjunction with this.
+複数のサイトを指定した場合、複数のサイトに属するエレメントは複数回返されます。単一のエレメントだけを返したい場合、これと併せて [unique](#unique) を利用してください。
 :::
 
 
@@ -604,20 +604,20 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `siteId`
 
-Determines which site(s) the global sets should be queried in, per the site’s ID.
+サイトの ID ごとに、グローバル設定を照会するサイトを決定します。
 
 
 
-The current site will be used by default.
+デフォルトでは、現在のサイトが使用されます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value           | Fetches global sets…                    |
-| --------------- | --------------------------------------- |
-| `1`             | from the site with an ID of `1`.        |
-| `[1, 2]`        | from a site with an ID of `1` or `2`.   |
-| `['not', 1, 2]` | not in a site with an ID of `1` or `2`. |
-| `'*'`           | from any site.                          |
+| 値 | 取得するグローバル設定
+| - | -
+| `1` | ID が `1` のサイトから。
+| `[1, 2]` | ID が `1` または `2` のサイトから。
+| `['not', 1, 2]` | ID が `1` または `2` のサイトではない。
+| `'*'` | すべてのサイトから。
 
 
 
@@ -640,7 +640,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `trashed`
 
-Narrows the query results to only global sets that have been soft-deleted.
+ソフトデリートされたグローバル設定だけに、クエリの結果を絞り込みます。
 
 
 
@@ -665,7 +665,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `uid`
 
-Narrows the query results based on the global sets’ UIDs.
+グローバル設定の UID に基づいて、クエリの結果を絞り込みます。
 
 
 
@@ -690,11 +690,11 @@ $globalSet = \craft\elements\GlobalSet::find()
 
 #### `unique`
 
-Determines whether only elements with unique IDs should be returned by the query.
+クエリによってユニークな ID のエレメントだけが返されるかを決定します。
 
 
 
-This should be used when querying elements from multiple sites at the same time, if “duplicate” results is not desired.
+一度に複数のサイトからエレメントを照会する際、「重複する」結果を望まない場合に使用します。
 
 
 
@@ -719,11 +719,11 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `with`
 
-Causes the query to return matching global sets eager-loaded with related elements.
+関連付けられたエレメントを eager-loaded した状態で、マッチしたグローバル設定をクエリが返します。
 
 
 
-See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+このパラメーターがどのように機能するかの詳細については、[エレメントの Eager-Loading](/docs/3.x/ja/dev/eager-loading-elements.html) を参照してください。
 
 
 

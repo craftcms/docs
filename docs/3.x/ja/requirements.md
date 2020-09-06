@@ -1,7 +1,7 @@
-# サーバー要件
+# 要件
 
 ::: tip
-[Craft Server Check](https://github.com/craftcms/server-check) スクリプトを使うことで、サーバーが Craft の要件を満たしているかどうかを素早く確認できます。 :::
+[Craft Server Check](https://github.com/craftcms/server-check) スクリプトを使うことで、サーバーが Craft の要件を満たしているかどうかを素早く確認できます。
 :::
 
 Craft は次の項目が必要です。
@@ -17,7 +17,7 @@ Craft は次の PHP エクステンションが必要です。
 
 * [ctype](https://secure.php.net/manual/en/book.ctype.php)
 * [cURL](http://php.net/manual/en/book.curl.php)
-* [GD](http://php.net/manual/en/book.image.php) または [ImageMagick](http://php.net/manual/en/book.imagick.php)。 ImageMagick が好ましいです。
+* [GD](http://php.net/manual/en/book.image.php) または [ImageMagick](http://php.net/manual/en/book.imagick.php)。ImageMagick が好ましいです。
 * [iconv](http://php.net/manual/en/book.iconv.php)
 * [JSON](http://php.net/manual/en/book.json.php)
 * [Multibyte String](http://php.net/manual/en/book.mbstring.php)
@@ -38,15 +38,15 @@ Craft は次の PHP エクステンションが必要です。
 
 一部の共用ホスティング環境では、Craft の機能に影響を与える PHP メソッドや設定が無効になっています。
 
-- [allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen) - アップデートやプラグインストアからのプラグインインストールを可能にするため、Craft では PHP 設定を有効にする必要があります。
-- [proc_*](http://php.net/manual/en/ref.exec.php) - プラグインストアを利用したり、メールの送信ができるよう PHP の `proc_` メソッドを有効にする必要があります。
-- [ignore_user_abort](https://www.php.net/manual/en/function.ignore-user-abort.php) must be enabled for the [default, web-based queue runner](config3:runQueueAutomatically) to operate.
+- プラグインのアップデートやプラグインストアからインストールするために、[allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen) を有効にする必要があります。
+- プラグインストアの利用やメールの送信ができるよう [proc_*](http://php.net/manual/en/ref.exec.php) メソッドを有効にする必要があります。
+- [デフォルトのウェブベースのキューランナー](config3:runQueueAutomatically)が動作するために、[ignore_user_abort](https://www.php.net/manual/en/function.ignore-user-abort.php) を有効にする必要があります。
+
+## 追加オプション
+
+* [Composer 1.30+](installation.md#downloading-with-composer) - Composer で Craft をインストールする場合
 
 ## 必要なデータベースユーザー特権
-
-* [Composer 1.30+](installation.md#downloading-with-composer) - When installing Craft with Composer
-
-## コントロールパネルのブラウザ要件
 
 Craft のデータベースに接続するユーザーには、次の特権がなければなりません。
 
@@ -73,22 +73,22 @@ Craft のデータベースに接続するユーザーには、次の特権が�
 * `REFERENCES`
 * `CONNECT`
 
-## Control Panel Browser Requirements
+## コントロールパネルのブラウザ要件
 
-Craft のコントロールパネルは、モダンブラウザが必要です。
+Craft のコントロールパネルは、[JavaScript モジュールをサポートする](https://caniuse.com/#feat=es6-module-dynamic-import)ブラウザが必要です。
 
 #### Windows と macOS
 
-- iOS: Safari 9.1 以降
-- Android: Chrome 4.4 以降
-- Safari 9.0 以降
-- Microsoft Edge
+- Firefox 67+
+- Chrome 63+
+- Safari 11.1+
+- Edge 79+
 
 #### モバイル
 
 - iOS: Safari 11+
-- Chrome 29 以降
+- Android: Chrome 81+ または Firefox 68+
 
 ::: tip
-Craft の CP のブラウザ要件は、実際のウェブサイトとは関係がありません。 もしあなたがつらい仕事を苦にせず、IE 6 で完璧に表示されるサイトを望むのであれば、あたなの望む通りにできます。 :::
+Craft のコントロールパネルのブラウザ要件は、実際のウェブサイトとは関係がありません。もしあなたがつらい仕事を苦にせず、IE 6 で完璧に表示されるサイトを望むのであれば、あたなの望む通りにできます。
 :::
