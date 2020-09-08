@@ -27,4 +27,4 @@ Please see our separate page on [events testing](../testing-craft/events.md) for
 
 ## `assertPushedToQueue`
 
-See the separate page on [queue testing](../testing-craft/queue.md) for everything you need to know about testing the [queue](../../config/app.md#queue-component).
+See the separate page on [queue testing](../testing-craft/queue.md) for everything you need to know about testing the [queue](../../config/#queue-component).
