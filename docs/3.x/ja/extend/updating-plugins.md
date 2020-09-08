@@ -11,7 +11,7 @@ Craft 3 は CMS の完全な書き換えで、Yii 2 上で構築されていま�
 最終的な結果はコアの開発とプラグイン開発で同様に、より高速で、よりスリムで、より洗練されたコードベースになりました。 あなたにも、楽しんでもらえることを望みます。
 
 ::: tip
-何かが欠けていると思う場合は、[issue を作成してください](https://github.com/craftcms/docs/issues/new)。 :::
+何かが欠けていると思う場合は、[issue を作成してください](https://github.com/craftcms/docs/issues/new)。
 :::
 
 ## ハイレベルなメモ
@@ -401,7 +401,7 @@ Event::on(SystemMessages::class, SystemMessages::EVENT_REGISTER_MESSAGES, functi
 ```
 
 ::: warning
-NOTE リソースリクエストのコンセプトが Craft 3 で削除されたため、プラグインにリソースリクエストの処理を許可するこのフックには、直接 Craft 3 で匹敵するものがありません。 Craft 3 でプラグインがどのようにリソースを提供できるかを知るには[アセットバンドル](asset-bundles.md)を参照してください。 :::
+NOTE リソースリクエストのコンセプトが Craft 3 で削除されたため、プラグインにリソースリクエストの処理を許可するこのフックには、直接 Craft 3 で匹敵するものがありません。 Craft 3 でプラグインがどのようにリソースを提供できるかを知るには[アセットバンドル](asset-bundles.md)を参照してください。
 :::
 
 #### `modifyCpNav`
@@ -984,7 +984,7 @@ public function getTableAttributesForSource($elementType, $sourceKey)
 ```
 
 ::: warning
-NOTE エレメントインデックスがレンダリングされる前に、プラグインがエレメントタイプのテーブル属性を完全に変更することを許可するこのフックには、直接 Craft 3 で匹敵するものがありません。 Craft 3 で最も近いのは、管理者がエレメントインデックスのソースをカスタマイズする際に、エレメントタイプの利用可能なテーブル属性を変更するために使用できる <craft3:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> イベントです。 :::
+NOTE エレメントインデックスがレンダリングされる前に、プラグインがエレメントタイプのテーブル属性を完全に変更することを許可するこのフックには、直接 Craft 3 で匹敵するものがありません。 Craft 3 で最も近いのは、管理者がエレメントインデックスのソースをカスタマイズする際に、エレメントタイプの利用可能なテーブル属性を変更するために使用できる <craft3:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> イベントです。
 :::
 
 ## テンプレート変数
