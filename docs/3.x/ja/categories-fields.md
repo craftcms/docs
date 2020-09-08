@@ -55,7 +55,7 @@
 
 ### カテゴリフィールドによるエレメントの照会
 
-カテゴリフィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、カテゴリフィールドのデータに基づいた結果をフィルタできます。
+カテゴリフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、カテゴリフィールドのデータに基づいた結果をフィルタできます。
 
 利用可能な値には、次のものが含まれます。
 
@@ -84,7 +84,7 @@
 {% set relatedCategories = entry.myFieldHandle %}
 ```
 
-これは、所定のフィールドで関連付けられたすべてのカテゴリを出力するよう準備された[カテゴリクエリ](dev/element-queries/category-queries.md)を提供します。
+これは、所定のフィールドで関連付けられたすべてのカテゴリを出力するよう準備された[カテゴリクエリ](categories.md#querying-categories)を提供します。
 
 関連付けられたすべてのカテゴリをループするには、[all()](craft3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
@@ -99,7 +99,7 @@
 {% endif %}
 ```
 
-または、[nav](dev/tags/nav.md) タグで階層リストとして表示することもできます。
+または、[nav](dev/tags.md#nav) タグで階層リストとして表示することもできます。
 
 ```twig
 {% set relatedCategories = entry.<FieldHandle.all() %}
@@ -136,7 +136,7 @@
 {% endif %}
 ```
 
-カテゴリクエリで[パラメータ](dev/element-queries/category-queries.md#parameters)をセットすることもできます。 例えば、“leaves”（子を持たないカテゴリ）だけを取得するには、[leaves](dev/element-queries/category-queries.md#leaves) パラメータをセットします。
+カテゴリクエリで[パラメータ](categories.md#parameters)をセットすることもできます。 例えば、“leaves”（子を持たないカテゴリ）だけを取得するには、[leaves](categories.md#leaves) パラメータをセットします。
 
 ```twig
 {% set relatedCategories = entry.myFieldHandle
