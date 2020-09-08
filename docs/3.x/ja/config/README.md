@@ -52,21 +52,21 @@ Craft のいくつかの設定やファンクションでは、基本ファイ�
 
 次のエイリアスは、そのまま利用可能です。
 
-| エイリアス                | 説明                                                                              |
-| -------------------- | ------------------------------------------------------------------------------- |
-| `@app`               | `vendor/craftcms/cms/src/` のパス                                                  |
-| `@config`            | `config/` フォルダのパス                                                               |
-| `@contentMigrations` | `migrations/` フォルダのパス                                                           |
-| `@craft`             | `vendor/craftcms/cms/src/` のパス                                                  |
-| `@lib`               | `vendor/craftcms/cms/lib/` のパス                                                  |
-| `@root`              | ルートプロジェクトのパス（PHP 定数の [CRAFT_BASE_PATH](php-constants.md#craft-base-path) と同じ） |
-| `@runtime`           | `storage/runtime/` フォルダのパス                                                      |
-| `@storage`           | `storage/` フォルダのパス                                                              |
-| `@templates`         | `templates/` フォルダのパス                                                            |
-| `@translations`      | `translations/` フォルダのパス                                                         |
-| `@vendor`            | `vendor/` フォルダのパス                                                               |
-| `@web`               | リクエストのために読み込まれた `index.php` ファイルを含むフォルダの URL                                    |
-| `@webroot`           | リクエストのために読み込まれた `index.php` ファイルを含むフォルダのパス                                      |
+| エイリアス                | 説明                                                              |
+| -------------------- | --------------------------------------------------------------- |
+| `@app`               | `vendor/craftcms/cms/src/` のパス                                  |
+| `@config`            | `config/` フォルダのパス                                               |
+| `@contentMigrations` | `migrations/` フォルダのパス                                           |
+| `@craft`             | `vendor/craftcms/cms/src/` のパス                                  |
+| `@lib`               | `vendor/craftcms/cms/lib/` のパス                                  |
+| `@root`              | ルートプロジェクトのパス（PHP 定数の [CRAFT_BASE_PATH](#craft-base-path) と同じ） |
+| `@runtime`           | `storage/runtime/` フォルダのパス                                      |
+| `@storage`           | `storage/` フォルダのパス                                              |
+| `@templates`         | `templates/` フォルダのパス                                            |
+| `@translations`      | `translations/` フォルダのパス                                         |
+| `@vendor`            | `vendor/` フォルダのパス                                               |
+| `@web`               | リクエストのために読み込まれた `index.php` ファイルを含むフォルダの URL                    |
+| `@webroot`           | リクエストのために読み込まれた `index.php` ファイルを含むフォルダのパス                      |
 
 コンフィグ設定 <config3:aliases> config setting if needed. It’s recommended to override the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
 
@@ -117,7 +117,7 @@ ASSETS_BASE_PATH=/path/to/web/assets
 ```
 
 ::: tip
-設定でエイリアスを参照する場合、URL やパスに追加のセグメントを付加することができます。 例えば、`@assetBaseUrl/user-photos` をボリュームのベース URL  にセットできます。 :::
+設定でエイリアスを参照する場合、URL やパスに追加のセグメントを付加することができます。 例えば、`@assetBaseUrl/user-photos` をボリュームのベース URL  にセットできます。
 :::
 
 ::: tip
@@ -136,7 +136,7 @@ You can parse aliases in your templates by passing them to the [alias()](../dev/
 
 You can customize Craft’s entire [Yii application configuration](https://www.yiiframework.com/doc/guide/2.0/en/structure-applications#application-configurations) from `config/app.php`. Any items returned by that array will get merged into the main application configuration array.
 
-You can customize Craft’s [application configuration](app.md) from `config/app.php`, such as overriding component configs, or adding new modules and components.
+You can customize Craft’s application configuration from `config/app.php`, such as overriding component configs, or adding new modules and components.
 
 ::: tip
 Craft’s default configuration is defined by [src/config/app.php](https://github.com/craftcms/cms/blob/master/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/master/src/config/app.web.php), and [app.console.php](https://github.com/craftcms/cms/blob/master/src/config/app.console.php). Refer to these files when you need to override existing application components.
@@ -442,7 +442,7 @@ Plugins can add support for environment variables and aliases in their settings 
 
 #### Using Aliases in Control Panel Settings
 
-You can configure core settings like system file paths and the active environment by defining certain [PHP constants](php-constants.md) in `web/index.php`.
+You can configure core settings like system file paths and the active environment by defining certain [PHP constants]() in `web/index.php`.
 
 For example, you can define a `ROOT_URL` environment variable that is set to the root URL of your site:
 
