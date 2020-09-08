@@ -13,8 +13,8 @@ Accepts: Object
 
 The `setupDb` parameter controls how the database is setup before tests. It accepts an object with the following parameters.
 
-- **folder** (required): What folder the Project Config files must be copied from.\ Typically, this is `config/project` starting from the root of your project. The contents of that folder will be copied into `tests/_craft/config/project`.
-- **reset**: Whether Project Config should be reset before each test is run.\ If enabled, Craft will reset the Project Config state to what is specified in the `folder` parameter. Can safely be disabled if you are not making changes to project config during your tests.
+- file (Required): What file the project config setting must be copied from. This is not the `project.yml` file in `CRAFT_CONFIG_PATH` but instead the file whose contents will be copied into the `project.yml` file located here.
+- reset: Whether the project config should be reset before each test is run. If enabled Craft will reset the project config to what is specified in the `project.yml` file located in `CRAFT_CONFIG_PATH`. Can safely be disabled if you are not making changes to project config during your tests.
 
 ::: warning
 If you have enabled `projectConfig`, regular DB based fixtures for Project Config data (i.e sections) may cause syncing issues. It is recommended to setup your environment using the `project.yml` file only.
@@ -77,7 +77,7 @@ If you are testing an actual Craft site this directory cannot be the config dire
 The path to the folder where all your [migration](../../extend/migrations.md) classes are stored.
 
 ### `CRAFT_TRANSLATIONS_PATH`
-The path to the folder where all your [translations](../../static-translations.md) are stored.
+The path to the folder where all your [translations](../../sites.md) are stored.
 
 ### `CRAFT_VENDOR_PATH`
 Path to the [vendor](../../directory-structure.md#vendor) directory.
