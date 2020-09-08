@@ -124,10 +124,8 @@ If your site’s front end lives outside of Craft, for example as a Vue or React
 
 You can pass the token via either a query string parameter named after your <config3:tokenParam> config setting, or an `X-Craft-Token` header.
 
-You should also check for a `x-craft-live-preview` query string parameter, which will tell you the request is specifically a Live Preview request within the control panel (as opposed to a full-page preview via the “Share” button). If this is set, then you should include [iframeResizer.contentWindow.min.js](https://raw.github.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js) on the page. That script, provided by the [iFrame Resizer](http://davidjbradshaw.github.io/iframe-resizer/) library, aids in cross-domain preview iframe resizing and maintaining scroll position between page loads. (The full library is also available [on npm](https://www.npmjs.com/package/iframe-resizer).)
-
 ::: tip
-In cases where the preview target’s styles have issues with iFrame Resizer’s document-based sizing—like layouts with dominant `vh`-measured elements—the <config3:previewIframeResizerOptions> config setting lets you override iFrame Resizer’s options or disable it altogether.
+This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor entries can be.
 :::
 
 ## Entry Types
@@ -411,7 +409,7 @@ $entries = \craft\elements\Entry::find()
 
 
 ::: tip
-This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor entries can be.
+This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant entries can be.
 :::
 
 
@@ -742,7 +740,7 @@ $entries = \craft\elements\Entry::find()
 
 
 ::: tip
-This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant entries can be.
+This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
 :::
 
 
@@ -994,8 +992,7 @@ $entry = \craft\elements\Entry::find()
 
 
 
-::: tip
-This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
+config setting lets you override iFrame Resizer’s options or disable it altogether.
 :::
 
 
