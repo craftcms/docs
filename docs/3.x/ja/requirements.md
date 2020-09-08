@@ -1,7 +1,7 @@
-# Requirements
+# サーバー要件
 
 ::: tip
-[Craft Server Check](https://github.com/craftcms/server-check) スクリプトを使うことで、サーバーが Craft の要件を満たしているかどうかを素早く確認できます。 :::
+[Craft Server Check](https://github.com/craftcms/server-check) スクリプトを使うことで、サーバーが Craft の要件を満たしているかどうかを素早く確認できます。
 :::
 
 Craft は次の項目が必要です。
@@ -90,5 +90,5 @@ Craft のコントロールパネルは、モダンブラウザが必要です�
 - Chrome 29 以降
 
 ::: tip
-Craft の CP のブラウザ要件は、実際のウェブサイトとは関係がありません。 もしあなたがつらい仕事を苦にせず、IE 6 で完璧に表示されるサイトを望むのであれば、あたなの望む通りにできます。 :::
+Craft の CP のブラウザ要件は、実際のウェブサイトとは関係がありません。 もしあなたがつらい仕事を苦にせず、IE 6 で完璧に表示されるサイトを望むのであれば、あたなの望む通りにできます。
 :::
