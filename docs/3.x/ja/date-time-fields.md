@@ -10,7 +10,7 @@
 
 ### 日/時フィールドによるエレメントの照会
 
-日/時フィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、日/時フィールドのデータに基づいた結果をフィルタできます。
+日/時フィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、日/時フィールドのデータに基づいた結果をフィルタできます。
 
 利用可能な値には、次のものが含まれます。
 
@@ -34,7 +34,7 @@
 ```
 
 ::: tip
-[atom](dev/filters.md#atom) フィルタは日付を ISO-8601 タイムスタンプに変換します。 :::
+[atom](dev/filters.md#atom) フィルタは日付を ISO-8601 タイムスタンプに変換します。
 :::
 
 ### 日/時フィールドデータの操作
@@ -89,7 +89,7 @@ Craft と Twig は、必要に応じて使用できる日付を操作するた�
 ```
 
 ::: tip
-より良いブラウザサポートを[待っている間](https://caniuse.com/#feat=input-datetime)に `date` と `datetime-local` 入力欄を導入するため、[HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) ポリフィルを使用することができます。 :::
+より良いブラウザサポートを[待っている間](https://caniuse.com/#feat=input-datetime)に `date` と `datetime-local` 入力欄を導入するため、[HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) ポリフィルを使用することができます。
 :::
 
 #### タイムゾーンのカスタマイズ
