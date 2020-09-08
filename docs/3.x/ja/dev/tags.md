@@ -201,13 +201,9 @@ Tip: The `{% cache %}` tag will detect if there are any ungenerated [image trans
 
 ## `css`
 
-The `{% css %}` tag can be used to register a CSS file or a CSS code block.
+The `{% css %}` tag can be used to register a `<style>` tag in the page’s `<head>`.
 
 ```twig
-{# Register a CSS file #}
-{% css "/assets/css/style.css" %}
-
-{# Register a CSS code block #}
 {% css %}
     .content {
         color: {{ entry.textColor }};
@@ -215,8 +211,8 @@ The `{% css %}` tag can be used to register a CSS file or a CSS code block.
 {% endcss %}
 ```
 
-::: tip
-To register a CSS file, the URL must end in `.css`.
+::: warning
+Only a single `{% paginate %}` tag should be used per request.
 :::
 
 ### Parameters
@@ -335,13 +331,9 @@ By default, `at endBody` will be used.
 
 ## `js`
 
-The `{% js %}` tag can be used to register a JavaScript file, or a JavaScript code block.
+The `{% js %}` tag can be used to register a `<script>` tag on the page.
 
 ```twig
-{# Register a JS file #}
-{% js "/assets/js/script.js" %}
-
-{# Register a JS code block #}
 {% js %}
     _gaq.push([
         "_trackEvent",
@@ -351,8 +343,8 @@ The `{% js %}` tag can be used to register a JavaScript file, or a JavaScript co
 {% endjs %}
 ```
 
-::: tip
-To register a JavaScript file, the URL must end in `.js`.
+::: warning
+Setting the position to `on load` or `on ready` will cause Craft to load its internal copy of jQuery onto the page (even if the template is already including its own copy), so you should probably avoid using them in front-end templates.
 :::
 
 ### Parameters
@@ -378,7 +370,7 @@ You can specify where the `<script>` tag should be added to the page using one o
 By default, `at endBody` will be used.
 
 ::: warning
-Setting the position to `on load` or `on ready` will cause Craft to load its internal copy of jQuery onto the page (even if the template is already including its own copy), so you should probably avoid using them in front-end templates.
+The `{% nav %}` tag requires elements to be queried in a specific (hierarchical) order, so make sure you don’t override the `order` criteria parameter in conjunction with this tag.
 :::
 
 #### `with`
@@ -386,15 +378,14 @@ Setting the position to `on load` or `on ready` will cause Craft to load its int
 Any HTML attributes that should be included on the `<script>` tag.
 
 ```twig
-{% js "/assets/js/script.js" with {
-    defer: true
-} %}
+{% set script = '_gaq.push(["_trackEvent", "Search", "'~searchTerm|e('js')~'"' %}
+{% do view.registerJs(script) %}
 ```
 
 Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
 
-::: warning
-The `with` parameter is only available when you specify a JavaScript file; it won’t have any effect with a JavaScript code block.
+::: tip
+If you only specify one variable name here, the `pageInfo` variable will be called `paginate` by default for backwards compatibility.
 :::
 
 ## `namespace`
