@@ -7,7 +7,7 @@
 - プラグインはアクティブなエディションをチェックすることにより、機能トグルを実装できます。
 
 ::: warning
-すべてのプラグインがエディションをサポートできるわけではありません。 あなたのプラグインが許可されるかどうかを確認するため、エディションサポートを追加しはじめる前に、Pixel & Tonic に[問い合わせ](https://craftcms.com/contact)してください。 :::
+すべてのプラグインがエディションをサポートできるわけではありません。 あなたのプラグインが許可されるかどうかを確認するため、エディションサポートを追加しはじめる前に、Pixel & Tonic に[問い合わせ](https://craftcms.com/contact)してください。
 :::
 
 ## エディションの定義
@@ -47,27 +47,26 @@ if (Plugin::getInstance()->is(Plugin::EDITION_PRO) {
 ```twig
 <code>config/project.yaml</code> の <code>plugins.<plugin-handle>.edition</code> プロパティを変更することにより、アクティブなエディションを切り替えることができます。
 ```
- の plugins.<plugin-handle>.edition プロパティを変更することにより、アクティブなエディションを切り替えることができます。
-</code>
 
 :::
 
 `is()` は2つの引数 `$edition`、および、`$operator` を受け入れます。
 
-`$edition` はあなたが関心を寄せているエディションの名前です。
+`is()` は2つの引数 `$edition`、および、`$operator` を受け入れます。
 
 `$operator` はそのエディションとインストールされているエディションをどのように比較するかの方法です。 デフォルトでは `=` にセットされていて、バージョンが等しいかどうかをテストします。
 
-次の演算子もサポートされています。 演算子 | アクティブなエディションが与えられたエディションより◯◯かテスト
-Operator | Tests if the active edition is ____ the given edition
-- | - `<` or `lt` | …less than… | - `<` または `lt` | 未満 `<=` または `le` | 以下 `>` または `gt` | より大きい `>=` または `ge` | 以上 `==` または `eq` | 等しい（デフォルトと同じ振る舞い） `!=`、`<>` または `ne` | 等しくない `>` or `gt` | …greater than… `>=` or `ge` | …greater than or equal to… `==` or `eq` | …equal to… (same as default behavior) `!=`, `<>`, or `ne` | …not equal to…
+次の演算子もサポートされています。
+演算子 | アクティブなエディションが与えられたエディションより◯◯かテスト Operator | Tests if the active edition is ____ the given edition
+- | - `<` or `lt` | … | - `<` または `lt` | 未満 `<=` または `le` | 以下 `>` または `gt` | より大きい `>=` または `ge` | 以上 `==` または `eq` | 等しい（デフォルトと同じ振る舞い） `!=`、`<>` または `ne` | 等しくない `>` or `gt` | …greater than… `>=` or `ge` | … greater than or equal to… `==` or `eq` | … equal to… (same as default behavior) `!=`, `<>`, or `ne` | … not equal to…
 
 ::: tip
-エディションの変更は常に可逆的な操作であり、エディション変更の結果としてプラグインデータが変わるべきではありません。 エディションはいつでも交互に変更することができ、プラグインがそれによる問題を持つべきではありません。 :::
+エディションの変更は常に可逆的な操作であり、エディション変更の結果としてプラグインデータが変わるべきではありません。 エディションはいつでも交互に変更することができ、プラグインがそれによる問題を持つべきではありません。
 :::
 
 ## テスト
 
-You can toggle the active edition by changing the `plugins.<plugin-handle>.edition` property in `config/project/project.yaml`.
+::: tip
+`config/project.yaml` ファイルを持たない場合、コンフィグ設定の
 
-After changing the value to a valid edition handle (one returned by your plugin’s `editions()` method), Craft will prompt you to sync your project config YAML changes into the loaded project config. Once that’s done, your plugin’s active edition will be set to the new edition, and feature toggles should start behaving accordingly.
+（プラグインの `editions()` メソッドで返される）有効なエディションハンドルの値に変更すると、Craft は `project.yaml` の変更を読み込まれたプロジェクトコンフィグと同期するよう促します。 それが完了すると、プラグインのアクティブなエディションが新しいエディションにセットされ、機能トグルはそれに応じて動作しはじめます。
