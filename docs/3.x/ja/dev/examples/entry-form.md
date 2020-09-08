@@ -39,6 +39,7 @@
 
     <input type="submit" value="Publish">
 </form> If that’s not
+   set, we’ll default to a new entry. If that’s not
    set, we’ll default to a new entry. #}
 {% set entry = entry ?? create('craft\\elements\\Entry') %}
 
