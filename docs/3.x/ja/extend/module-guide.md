@@ -8,7 +8,7 @@
 - **モジュール ID** – プロジェクト内のプラグインを一意に識別する何か。 （モジュール ID は、文字ではじまり、小文字の英字、数字、および、ダッシュのみでなければなりません。 `kebab-cased` にすべきです。 ）
 
 ::: warning
-モジュール ID を選択する場合、Craft のコア[コントローラー](https://github.com/craftcms/cms/tree/develop/src/controllers)（例：`app` などの `AppController.php` と競合する）やインストールされているプラグインハンドルと競合する名前は避けてください。 そうでなければ、悪いことが起こります。 :::
+モジュール ID を選択する場合、Craft のコア[コントローラー](https://github.com/craftcms/cms/tree/develop/src/controllers)（例：`app` などの `AppController.php` と競合する）やインストールされているプラグインハンドルと競合する名前は避けてください。 そうでなければ、悪いことが起こります。
 :::
 
 ## 基本ファイル構造の設定
@@ -25,7 +25,7 @@ my-project.test/
 ```
 
 ::: tip
-数クリックでモジュールの土台を作成できる [pluginfactory.io](https://pluginfactory.io/) を利用してください。 :::
+数クリックでモジュールの土台を作成できる [pluginfactory.io](https://pluginfactory.io/) を利用してください。
 :::
 
 ## クラスのオートロードの設定
@@ -68,7 +68,7 @@ return [
 ```
 
 ::: tip
-モジュールがすべてのリクエストでロードされる必要がない場合、`bootstrap` 配列から削除できます。 :::
+モジュールがすべてのリクエストでロードされる必要がない場合、`bootstrap` 配列から削除できます。
 :::
 
 ## モジュールクラス
