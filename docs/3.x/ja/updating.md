@@ -36,7 +36,7 @@ To update a specific thing, replace `all` with its handle (either `craft` to upd
 php craft update element-api
 ```
 
-![An example interaction with the <code>update <handle></code> command.](./images/cli-update-plugin.png)
+![update <handle></code> command."](./images/cli-update-plugin.png)
 
 一度に複数のハンドルを渡すこともできます。
 
