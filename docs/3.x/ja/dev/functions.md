@@ -36,12 +36,12 @@
 | [max](https://twig.symfony.com/doc/2.x/functions/max.html)                                     | Returns the biggest value in an array.                                                                 |
 | [min](https://twig.symfony.com/doc/2.x/functions/min.html)                                     | Returns the lowest value in an array.                                                                  |
 | [parent](https://twig.symfony.com/doc/2.x/functions/parent.html)                               | Returns the parent block’s output.                                                                     |
-| [plugin](#plugin)                                                                              | Returns a plugin instance by its handle.                                                               |
+| [plugin](#plugin)                                                                              | ハンドルに従ってプラグインインスタンスを返します。                                                                              |
 | [random](https://twig.symfony.com/doc/2.x/functions/random.html)                               | Returns a random value.                                                                                |
 | [range](https://twig.symfony.com/doc/2.x/functions/range.html)                                 | Returns a list containing an arithmetic progression of integers.                                       |
 | [raw](#raw)                                                                                    | Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML-encoded when output. |
-| [redirectInput](#redirectinput)                                                                | Outputs a hidden `redirect` input.                                                                     |
-| [seq](#seq)                                                                                    | Outputs the next or current number in a sequence.                                                      |
+| [redirectInput](#redirectinput)                                                                | `name` で定義されたシーケンスの次または現在の番号を出力します。                                                                    |
+| [seq](#seq)                                                                                    | 配列内のエレメントの順序をランダム化します。                                                                                 |
 | [shuffle](#shuffle)                                                                            | Randomizes the order of the items in an array.                                                         |
 | [siteUrl](#siteurl)                                                                            | Generates a front-end URL.                                                                             |
 | [svg](#svg)                                                                                    | Outputs an SVG document.                                                                               |
@@ -156,7 +156,7 @@ This works identically to Twig’s core [`block`](https://twig.symfony.com/doc/2
 {{ floor(42.9) }} → 42
 ```
 
-## `configure`
+## `floor( num )`
 
 Passes through the behavior of the `Craft::configure()` method inherited from [`Yii::configure()`](yii2:yii\BaseYii::configure()). It’s similar to [`create`](#create) in that it applies attributes to an object, but instead of creating new instances it accepts an existing object and modifies it.
 
@@ -193,7 +193,7 @@ This works identically to Twig’s core [`constant`](https://twig.symfony.com/do
 
 ## `create`
 
-Creates a new object instance based on a given class name or object configuration. See <yii2:Yii::createObject()> for a full explanation of supported arguments.
+与えられたクラス名やオブジェクト設定に基づいて新しいオブジェクトインスタンスを作成します。 サポートされる引数の詳細については、<yii2:Yii::createObject()> を参照してください。
 
 ```twig
 {# Pass in a class name #}
@@ -217,7 +217,7 @@ Returns a control panel URL, automatically accounting for relative vs. absolute 
 
 ### 引数
 
-The `cpUrl()` function has the following arguments:
+`siteUrl()` ファンクションは、次の引数を持っています。
 
 * **`path`** – 結果となる URL がサイトで指すべきパス。 それは、ベースサイト URL に追加されます。
 * **`params`** – URL に追加するクエリ文字列パラメータ。 これは文字列（例：`'foo=1&bar=2'`）またはオブジェクト（例：`{foo:'1', bar:'2'}`）が利用可能です。
@@ -225,7 +225,7 @@ The `cpUrl()` function has the following arguments:
 
 ## `csrfInput`
 
-Returns a hidden CSRF Token input. All sites that have CSRF Protection enabled must include this in each form that submits via POST.
+不可視の CSRF トークン入力欄を返します。 CSRF 保護が有効になっているすべてのサイトでは、POST 経由で送信するそれぞれのフォームにこれを含めなければなりません。
 
 ```twig
 {{ csrfInput() }}
@@ -241,7 +241,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ## `endBody`
 
-Outputs any scripts and styles that were registered for the “end body” position. It should be placed right before your `</body>` tag.
+「end body」に登録されたスクリプトやスタイルを出力します。 `</body>` タグの直前に配置する必要があります。
 
 ```twig
 <body>
@@ -254,7 +254,7 @@ Outputs any scripts and styles that were registered for the “end body” posit
 
 ## `expression`
 
-Creates and returns a new <yii2:yii\db\Expression> object, for use in database queries.
+次のものを渡すことができます。
 
 ```twig
 {% set entries = craft.entries()
@@ -307,7 +307,7 @@ Executes a GraphQL query against the full schema.
     <img class="thumb" src="{{ image.url }}" alt="{{ image.altText }}">
 
     {{ entry.shortDescription|markdown }}
-    <p><a href="{{ entry.url }}">Continue reading…</a></p>
+    <p><a href="{{ entry.url }}">Continue reading… </a></p>
 {% endfor %}
 ```
 
@@ -317,7 +317,7 @@ Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or 
 
 ## `head`
 
-Outputs any scripts and styles that were registered for the “head” position. It should be placed right before your `</head>` tag.
+「head」に登録されたスクリプトやスタイルを出力します。 `</head>` タグの直前に配置する必要があります。
 
 ```twig
 <head>
@@ -444,10 +444,9 @@ To view the current number in the sequence without incrementing it, set the `nex
 Randomizes the order of the elements within an array.
 
 ```twig
-{% set promos = craft.entries.section('promos').all() %}
-{% set shuffledPromos = shuffle(promos) %}
+{% set promos = shuffle(homepage.promos) %}
 
-{% for promo in shuffledPromos %}
+{% for promo in promos %}
     <div class="promo {{ promo.slug }}">
         <h3>{{ promo.title }}</h3>
         <p>{{ promo.description }}</p>
@@ -468,9 +467,9 @@ Similar to [url()](#url-path-params-scheme-mustshowscriptname), except _only_ fo
 
 The `siteUrl()` function has the following arguments:
 
-* **`siteId`** – URL が指すべきサイト ID。 デフォルトでは、現在のサイトが使用されます。
+* **`path`** – 結果となる URL がサイトで指すべきパス。 それは、ベースサイト URL に追加されます。
 * **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+* **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。 デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。 そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
 * **`siteId`** – The ID of the site that the URL should point to. By default the current site will be used.
 
 ## `svg`
@@ -575,9 +574,9 @@ Returns a URL.
 
 The `url()` function has the following arguments:
 
-* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+* **`siteId`** – URL が指すべきサイト ID。 デフォルトでは、現在のサイトが使用されます。
 * **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+* **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。 デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。 そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
 * **`mustShowScriptName`** – ここに `true` がセットされている場合、「index.php」を含めた URL が返され、コンフィグ設定の <config3:omitScriptNameInUrls> config setting. （ブラウザのアドレスバーに表示されない URL と .htaccess ファイルのリダイレクトとの衝突を避けたいような、Ajax 経由の POST リクエストで使用される URL の場合に有用です。 ）
 
 ::: tip
