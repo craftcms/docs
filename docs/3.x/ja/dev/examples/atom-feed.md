@@ -3,7 +3,7 @@
 次のテンプレートは、あなたのサイトで Atom 1.0 フィードを提供するために使用できます。 `feedAuthorName` と `feedAuthorEmail` 2つのフィールドを持つ、`globals` というハンドルの[グローバルのセット](../../globals.md)があることを前提としています。
 
 ::: tip
-ファイル拡張子 `.atom` で終わるテンプレートとして保存すると、Craft はそれを MIME タイプ `application/atom+xml` で配信します。 :::
+ファイル拡張子 `.atom` で終わるテンプレートとして保存すると、Craft はそれを MIME タイプ `application/atom+xml` で配信します。
 :::
 
 ```twig
