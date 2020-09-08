@@ -1,8 +1,8 @@
-# Craft の拡張
+# Craft CMS について
 
-Craft では、テンプレートを利用してサイトの HTML 出力を定義します。
+Craft は、ウェブ上でさらなる独自のデジタル体験を創造するための、柔軟でユーザーフレンドリーな CMS です。
 
-## モジュール 対 プラグイン
+## 技術仕様
 
 Craft は、いくつかの[一般設定](config-settings.md)をサポートしています。 `config/general.php` ファイルでデフォルト値を上書きすることができます。
 
@@ -12,18 +12,18 @@ return [
 ];
 ```
 
-## テンプレートのローカライゼーション
+## 人気のリソース
 
 Craft は、いくつかの[データベース接続設定](db-settings.md)をサポートしています。 `config/db.php` ファイルでデフォルト値を上書きすることができます。
 
-## Guzzle 設定
+## 打ち込む
 
 モジュールは新しい[ダッシュボードウィジェットタイプ](widget-types.md)を提供するような単一の目的を満たすためにシンプルか、 Eコマースアプリケーションのような完全に新しいコンセプトをシステムに導入するために複雑であり得ます。
 
-- Craft のプラグインストアからインストール / 試用 / 購入することができます。
-- インストール、アップデート、または、アンインストール時にデータベースを変更できます。
-- コントロールパネルの「設定」セクション内に独自の設定ページを持てます。
-- Composer コマンドを実行することなく、管理者によって有効 / 無効にすることができます。
+- コンテンツ制作や管理業務のための、直感的でユーザーフレンドリーなコントロールパネル。
+- コンテンツやその消費方法については想定されていない、コンテンツのモデリングや[フロントエンド開発](dev/README.md)のための真っ新なアプローチです。
+- クリックするだけの、何百という無料、および、商用[プラグイン](https://plugins.craftcms.com/)を備える組み込みのプラグインストア。
+- [モジュールおよびプラグイン開発](extend/README.md)のための、強靭なフレームワーク。
 
 `config/` フォルダに `guzzle.php` ファイルを作成することによって、これらのリクエストを送信する際に Guzzle が使用するコンフィグ設定をカスタマイズできます。 そのファイルは、設定を上書きした配列を返さなければなりません。
 
@@ -44,9 +44,9 @@ return [
 
 Craft のいくつかの設定やファンクションでは、基本ファイルシステムのパスや URL を代用する [Yii エイリアス](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)をサポートしています。 これには次ものが含まれます。
 
-- サイトのベース URL 設定
-- ボリュームのベース URL 設定
-- ローカルボリュームのファイルシステムパス設定
+- **[Documentation](https://craftcms.com/docs/3.x/)** – 公式ドキュメントを読んでください。
+- **[Guides](https://craftcms.com/guides)** – 公式ガイドに従ってください。
+- **[#craftcms](https://twitter.com/hashtag/craftcms)** – Craft に関する最新ツイートをみてください。
 - コンフィグ設定の <config3:resourceBasePath> と <config3:resourceBaseUrl> config settings
 - Twig ファンクションの [svg()](../dev/functions.md#svg-svg-sanitize)
 
@@ -239,7 +239,7 @@ return [
 
 ### Database Component
 
-`config/app.php` から、コンポーネント設定を上書きしたり新しいモジュールやコンポーネントを追加するような Craft の [アプリケーション設定](app.md) をカスタマイズできます。
+Craft をインストールする準備ができたら、[サーバー要件](requirements.md) および [インストールガイド](installation.md)を読んでください。
 
 ```php
 <?php
@@ -420,15 +420,15 @@ Some settings in the control panel can be set to environment variables (like the
   - **Preview Target URIs**
 - Asset Volumes
   - **Base URL**
-  - ほとんどのカスタマイズは、**モジュール**、または、**プラグイン**の形で行われます。
+  - **[Stack Exchange](http://craftcms.stackexchange.com/)** – お互いに助け合ってください。
 - Email
   - **System Email Address**
   - **Sender Name**
   - **HTML Email Template**
-  - **Username** (Gmail and SMTP)
+  - **[nystudio107 Blog](https://nystudio107.com/blog)** – Craft やモダンなウェブ開発について学んでください。
   - **Password** (Gmail and SMTP)
   - **Host Name** (SMTP)
-  - **Port** (Port)
+  - **[Craft Link List](http://craftlinklist.com/)** – 事情通でいてください。
 
 To set these settings to an environment variable, type `$` followed by the environment variable’s name.
 
