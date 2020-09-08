@@ -11,7 +11,7 @@
 ## マイグレーションの作成
 
 ::: tip
-Craft のインストールが Vagrant box から実行されている場合、これらのコマンドを実行するために box に SSH 接続する必要があります。 :::
+Craft のインストールが Vagrant box から実行されている場合、これらのコマンドを実行するために box に SSH 接続する必要があります。
 :::
 
 プラグインやプロジェクトのための新しいマイグレーションを作成するために、ターミナルを開き Craft プロジェクトに移動してください。
@@ -63,7 +63,7 @@ $this->insert('{{%tablename}}', $rows);
 ```
 
 ::: warning
-<yii2:yii\db\Migration::insert()>、[batchInsert()](craft3:craft\db\Migration::batchInsert())、および、[update()](yii2:yii\db\Migration::update()) マイグレーションメソッドは、引数 `$columns` で指定したものに加えて `dateCreated`、 `dateUpdated`、`uid` テーブルのカラムにあるデータを自動的に挿入 / アップデートします。 操作しているテーブルにこれらのカラムがない場合、引数 `$includeAuditColumns` に `false` を渡して、SQL エラーにならないようにしてください。 :::
+<yii2:yii\db\Migration::insert()>、[batchInsert()](craft3:craft\db\Migration::batchInsert())、および、[update()](yii2:yii\db\Migration::update()) マイグレーションメソッドは、引数 `$columns` で指定したものに加えて `dateCreated`、 `dateUpdated`、`uid` テーブルのカラムにあるデータを自動的に挿入 / アップデートします。 操作しているテーブルにこれらのカラムがない場合、引数 `$includeAuditColumns` に `false` を渡して、SQL エラーにならないようにしてください。
 :::
 
 ::: tip
@@ -148,12 +148,12 @@ php craft migrate/create install --plugin=my-plugin-handle
 :::
 
 ::: tip
-`plugins` データベーステーブルの行を管理するのはプラグインの責任 *ではありません*。 Craft がそれをケアします。 :::
+`plugins` データベーステーブルの行を管理するのはプラグインの責任 *ではありません*。 Craft がそれをケアします。
 :::
 
 ### デフォルトのプロジェクトコンフィグデータの設定
 
-If you want to add things to the [project config](project-config.md) on install, either directly or via your plugin’s API, be sure to only do that if the incoming project config YAML doesn’t already have a record of your plugin.
+直接、または、プラグインの API を経由して、インストール時に [project config](project-config.md) に何かを追加したい場合、必ず新しい `project.yaml` ファイルにそのプラグインのレコードを持っていないことを確認してください。
 
 ```php
 public function safeUp()
@@ -167,4 +167,4 @@ public function safeUp()
 }
 ```
 
-That’s because there’s a chance that your plugin is being installed as part of a project config sync, and if its install migration were to make any project config changes of its own, they would overwrite all of the incoming project config YAML changes.
+なぜなら、プロジェクトコンフィグの同期の一部としてプラグインがインストールされている可能性があるためです。 インストールマイグレーションが独自にプロジェクトコンフィグを変更する場合、`project.yaml` からの新しい変更をすべて上書きしてしまいます。
