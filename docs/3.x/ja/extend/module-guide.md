@@ -8,7 +8,7 @@
 - **モジュール ID** – プロジェクト内のプラグインを一意に識別する何か。 （モジュール ID は、文字ではじまり、小文字の英字、数字、および、ダッシュのみでなければなりません。 `kebab-cased` にすべきです。 ）
 
 ::: warning
-モジュール ID を選択する場合、Craft のコア[コントローラー](https://github.com/craftcms/cms/tree/develop/src/controllers)（例：`app` などの `AppController.php` と競合する）やインストールされているプラグインハンドルと競合する名前は避けてください。 そうでなければ、悪いことが起こります。 :::
+モジュール ID を選択する場合、Craft のコア[コントローラー](https://github.com/craftcms/cms/tree/develop/src/controllers)（例：`app` などの `AppController.php` と競合する）やインストールされているプラグインハンドルと競合する名前は避けてください。 そうでなければ、悪いことが起こります。
 :::
 
 ## 基本ファイル構造の設定
@@ -25,7 +25,7 @@ my-project.test/
 ```
 
 ::: tip
-数クリックでモジュールの土台を作成できる [pluginfactory.io](https://pluginfactory.io/) を利用してください。 :::
+数クリックでモジュールの土台を作成できる [pluginfactory.io](https://pluginfactory.io/) を利用してください。
 :::
 
 ## クラスのオートロードの設定
@@ -53,7 +53,7 @@ composer dump-autoload -a
 
 ## アプリケーション設定のアップデート
 
-[modules](yii2:yii\base\Module::modules) および [bootstrap](yii2:yii\base\Application::bootstrap) 配列にリストすることによって、プロジェクトの[アプリケーション設定](../config/app.md)にモジュールを追加できます。 例えば、モジュール ID が `foo` でモジュールのクラス名が `foo\Module` の場合、`config/app.php` に次のように追加します。
+[modules](yii2:yii\base\Module::modules) および [bootstrap](yii2:yii\base\Application::bootstrap) 配列にリストすることによって、プロジェクトの[アプリケーション設定](../config/#application-configuration)にモジュールを追加できます。 例えば、モジュール ID が `foo` でモジュールのクラス名が `foo\Module` の場合、`config/app.php` に次のように追加します。
 
 ```php
 return [
@@ -68,7 +68,7 @@ return [
 ```
 
 ::: tip
-モジュールがすべてのリクエストでロードされる必要がない場合、`bootstrap` 配列から削除できます。 :::
+モジュールがすべてのリクエストでロードされる必要がない場合、`bootstrap` 配列から削除できます。
 :::
 
 ## モジュールクラス
