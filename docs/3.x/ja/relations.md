@@ -12,7 +12,7 @@ Craft は次の5つの関連フィールドタイプがあります。
 
 ## 専門用語
 
-他のフィールドタイプと同様に、これらを[セクション](sections-and-entries.md#sections)、[ユーザー](users.md)、[アセット](assets.md)、[カテゴリグループ](categories.md)、[タググループ](tags.md)、および、[グローバル設定](globals.md)のフィールドレイアウトに追加できます。
+他のフィールドタイプと同様に、これらを[セクション](entries.md#sections)、[ユーザー](users.md)、[アセット](assets.md)、[カテゴリグループ](categories.md)、[タググループ](tags.md)、および、[グローバル設定](globals.md)のフィールドレイアウトに追加できます。
 
 - **ソース**エレメント - 他のエレメントを選択した関連フィールドを持つもの
 - **ターゲット**エレメント - ソースによって選択されたエレメント
@@ -69,7 +69,7 @@ Craft のリレーションを操作する前に、それがテンプレート�
 
 エレメントタイプでサポートされている追加パラメータを付加することもできます。
 
-- ドリンクレシピエントリ：ソース <craft3:craft\elements\Tag>
+- ドリンクレシピエントリ：ソース  <craft3:craft\elements\Tag>
 - 原材料：ターゲット
 - A [**hash**](dev/twig-primer.md#hashes) with properties we’ll get into below: `element`, `sourceElement` or `targetElement` optionally with `field` and/or `sourceSite`
 - An [**array**](dev/twig-primer.md#arrays) containing any mixture of the above options, which can start with `and` for relations on all elements rather than _any_ elements (default behavior is `or`, which you can omit or pass explicitly)
