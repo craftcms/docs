@@ -39,7 +39,7 @@
 
 ### タグフィールドによるエレメントの照会
 
-タグフィールドを持つ[エレメントを照会](dev/element-queries/README.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、タグフィールドのデータに基づいた結果をフィルタできます。
+タグフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、タグフィールドのデータに基づいた結果をフィルタできます。
 
 利用可能な値には、次のものが含まれます。
 
@@ -68,7 +68,7 @@
 {% set query = entry.myFieldHandle %}
 ```
 
-これは、所定のフィールドで関連付けられたすべてのタグを出力するよう準備された[タグクエリ](dev/element-queries/tag-queries.md)を提供します。
+これは、所定のフィールドで関連付けられたすべてのタグを出力するよう準備された[タグクエリ](tags.md#querying-tags)を提供します。
 
 関連付けられたすべてのタグをループするには、[all()](craft3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
@@ -100,7 +100,7 @@
 {% endif %}
 ```
 
-タグクエリで[パラメータ](dev/element-queries/tag-queries.md#parameters)をセットすることもできます。
+タグクエリで[パラメータ](tags.md#parameters)をセットすることもできます。
 
 ```twig
 {% set relatedTags = clone(entry.myFieldHandle)
