@@ -1,8 +1,12 @@
+- - -
+Craft 3では、1つインストールするだけで複数のウェブサイトをホストできます。
+- - -
+
 # サイト
 
-Craft 3では、1つインストールするだけで複数のウェブサイトをホストできます。
-
 ドメインが異なったり、異なるテンプレートセットを使用したり、エントリコンテンツの異なるバージョンを持っている、1つ以上のサイトを定義できます。
+
+You can define one or more sites at different domains, using a different set of templates, and different versions of entry content.
 
 Craft のマルチサイト機能は、同じパブリッシングチームを持つサイトに向いています。 サイトに含めたいセクションだけを有効化できる能力により、エントリレベルでマルチサイトのコンテンツを管理します。
 
@@ -10,9 +14,9 @@ Craft のマルチサイト機能は、同じパブリッシングチームを�
 
 Craft のインストールは、1つのデフォルトサイトからはじまります。 サイト名はインストール時に定義され、ハンドルは `default` となります。
 
-サイトを追加するには、「設定 > サイト」を使用します。
-
 それぞれのサイトは、次の属性を持っています。
+
+サイトグループでは、言語や種類などの共通点によってサイトをひとまとめに整理できます。
 
 * グループ
 * 名前
@@ -24,13 +28,13 @@ Craft のインストールは、1つのデフォルトサイトからはじま�
 
 ### サイトグループ
 
-サイトグループでは、言語や種類などの共通点によってサイトをひとまとめに整理できます。
-
 Craft は（デフォルトサイトの名前を付けた）最初のサイトグループを作成し、そのグループにデフォルトサイトを割り当てます。
 
 フィールドグループに似ていて、サイトグループは整理するためだけにあります。
 
 現在のサイトグループの情報には、次のようにアクセスできます。
+
+サイトの言語を選択すると、日付、時間、および、数字の書式と、翻訳の静的メッセージで使用するための言語を Craft に伝えます。
 
 ```twig
 Site ID:            {{ currentSite.id }}
@@ -44,7 +48,7 @@ Base URL:           {{ currentSite.baseUrl }}
 
 ### 言語
 
-サイトの言語を選択すると、日付、時間、および、数字の書式と、翻訳の静的メッセージで使用するための言語を Craft に伝えます。
+Choosing the language for the site tells Craft the language to use when formatting dates, times, and numbers, and translating static messages.
 
 テンプレート内では、`craft.app.language` 経由で言語設定にアクセスすることもできます。 これを条件文で使えます。
 
@@ -54,13 +58,13 @@ Base URL:           {{ currentSite.baseUrl }}
 {% endif %}
 ```
 
-あるいは、言語ごとの固有なテンプレートを自動的に含む方法もあります。
+この例では、読み込まれるテンプレート名は `_share/footer-de` になります。
 
 ```twig
 {% include '_share/footer-' ~ craft.app.language %}
 ```
 
-この例では、読み込まれるテンプレート名は `_share/footer-de` になります。
+where your template name would be, for example, `_share/footer-de`.
 
 
 ### プライマリサイト
@@ -71,27 +75,27 @@ Craft はデフォルトサイトをプライマリサイトとしてセット�
 
 ### サイト URL
 
-すべてのサイトはベース URL を持っていて、Craft がエントリや他のサイトコンテンツの動的なリンクを生成する際に出発点として使用します。
-
 マルチサイトは `https://craftcms.com/` や `https://craftcms.com/de/` のように同じホスト名を共有したり、`https://craftcms.com/` や `https://de.craftcms.com/` のように異なるホスト名を持つこともできます。
+
+Multiple sites can share the same host name, such as `https://craftcms.com/` and `https://craftcms.com/de/`, or they can have different host names, such as `https://craftcms.com/` and `https://de.craftcms.com/`.
 
 異なるホスト名でサイトを作成したい場合、それに対するトラフィックを処理するようサーバーを設定しなければなりません。 ホスト名は現在のサイトと同じウェブルート（`web/`）を指すことも、独自の別のウェブルートにすることもできます。 後者の場合、`.htaccess`、および、`index.php` ファイルを新しいウェブルートへ確実にコピーしてください。
 
 ::: tip
-`https://site-a.com` と `https://site-b.com` のような異なるルートドメインを使用するマルチサイトを持つ場合、Craft の [license enforcements works](https://craftcms.com/support/license-enforcement) の仕組みによって、_すべて_ のサイトのためにアクセスする Craft コントロールパネルのドメインをその中の1つから選択することができます。 :::
+`https://site-a.com` と `https://site-b.com` のような異なるルートドメインを使用するマルチサイトを持つ場合、Craft の [license enforcements works](https://craftcms.com/support/license-enforcement) の仕組みによって、_すべて_ のサイトのためにアクセスする Craft コントロールパネルのドメインをその中の1つから選択することができます。
 :::
 
 ::: warning
-サイトのベース URL を定義する場合、`@web` エイリアスを使用しないでください。 それは [cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) の脆弱性をもたらすことができ、リクエストされたサイトを Craft が確実に判断することができなくなります。 :::
+サイトのベース URL を定義する場合、`@web` エイリアスを使用しないでください。 それは [cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) の脆弱性をもたらすことができ、リクエストされたサイトを Craft が確実に判断することができなくなります。
 :::
 
 ## すべての有効サイトにエントリを広げる
 
 それぞれのチャンネルセクションの設定には、すべてのサイトにエントリを広げるためのオプションがあります。 これはデフォルトで有効になっていて、シングルやストラクチャーセクションでは、必ず有効な状態となります。
 
-有効にすると、Craft は送信されたコンテンツを使用して、そのセクションで有効になっているそれぞれのサイトに新しいエントリを作成します。
-
 セクションのコンテンツをサイトごとに分離したい場合、そのセクションにあるこのオプションを無効にします。
+
+If you would like the section's content to be separate then disable this option for that section.
 
 ## ガイド：新しいサイトの設定
 
@@ -99,7 +103,7 @@ Craft はデフォルトサイトをプライマリサイトとしてセット�
 
 ### ステップ 1：設定でサイトを作成
 
-最初のステップは、インストール済みの Craft の設定で新しいサイトを作成することです。
+新しいサイト向けに、テンプレートディレクトリとテンプレートを作成します。
 
 1. 「設定 > サイト」に移動し、「新しいサイト」ボタンをクリックします。
 2. ドロップダウンメニューからサイトが所属するグループを選択します。 グループの選択により、サイトの機能に影響することはありません。
@@ -112,7 +116,7 @@ Craft はデフォルトサイトをプライマリサイトとしてセット�
 
 ### ステップ 2：テンプレートディレクトリの作成
 
-新しいサイト向けに、テンプレートディレクトリとテンプレートを作成します。
+Create the template directories and templates for your new site.
 
 サイトハンドルを名前に付けたテンプレートディレクトリ（例： `templates/default` と `templates/beta`）を持たせることをオススメします。 それぞれのサイトのテンプレートディレクトリに、サイト固有のテンプレートを保管します。
 
@@ -128,11 +132,11 @@ Craft はデフォルトサイトをプライマリサイトとしてセット�
 
 ### ステップ 5：設定のテスト
 
-サイトがデフォルトの言語と異なる言語を持つ場合、それぞれのフィールドを（サイト、言語、またはサイトグループに対して）翻訳可能に設定する必要があります。
+翻訳方法をセットするには、翻訳したいそれぞれのフィールドに移動し、翻訳方法で適切なオプションを選択します。
 
 ### ステップ 6：アセットボリューム設定の確認
 
-翻訳方法をセットするには、翻訳したいそれぞれのフィールドに移動し、翻訳方法で適切なオプションを選択します。
+If you have any local asset volumes, you will need to make sure those assets are available from each of your sites.
 
 * 「ファイルシステムのパス」設定は、相対的（`uploads/images/`）であるべきです
 * URL の設定は、 相対的（`/images`）であるべきです
