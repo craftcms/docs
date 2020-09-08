@@ -125,7 +125,7 @@ If your site’s front end lives outside of Craft, for example as a Vue or React
 You can pass the token via either a query string parameter named after your <config3:tokenParam> config setting, or an `X-Craft-Token` header.
 
 ::: tip
-For Live Preview, you should also consider [enabling iFrame Resizer](config3:useIframeResizer) so that Craft can maintain the page scroll position between page loads.
+This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor entries can be.
 :::
 
 ## Entry Types
@@ -286,7 +286,7 @@ Entry queries support the following parameters:
 | [limit](#limit)                           | Determines the number of entries that should be returned.                                                                                                                                                                                                                                 |
 | [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the entry that comes immediately after another entry.                                                                                                                                                                                                   |
 | [offset](#offset)                         | Determines how many entries should be skipped in the results.                                                                                                                                                                                                                             |
-| [orderBy](#orderby)                       | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)                                             |
+| [orderBy](#orderby)                       | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`.)                                                                                                                                                                                     |
 | [positionedAfter](#positionedafter)       | Narrows the query results to only entries that are positioned after another entry.                                                                                                                                                                                                        |
 | [positionedBefore](#positionedbefore)     | Narrows the query results to only entries that are positioned before another entry.                                                                                                                                                                                                       |
 | [postDate](#postdate)                     | Narrows the query results based on the entries’ post dates.                                                                                                                                                                                                                               |
@@ -409,7 +409,7 @@ $entries = \craft\elements\Entry::find()
 
 
 ::: tip
-This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor entries can be.
+This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant entries can be.
 :::
 
 
@@ -740,7 +740,7 @@ $entries = \craft\elements\Entry::find()
 
 
 ::: tip
-This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant entries can be.
+This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
 :::
 
 
@@ -992,8 +992,7 @@ $entry = \craft\elements\Entry::find()
 
 
 
-::: tip
-This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
+config setting lets you override iFrame Resizer’s options or disable it altogether.
 :::
 
 
@@ -1177,7 +1176,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `orderBy`
 
-Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
+Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`.)
 
 
 
