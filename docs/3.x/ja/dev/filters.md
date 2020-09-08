@@ -279,7 +279,7 @@ You can customize the timezone the time is output in, using the `timezone` param
 ```
 
 ::: tip
-See [Static Message Translations](../sites.md) for a full explanation on how this works.
+If this is used within a [namespace](tags.md#namespace) tag, the namespace applied by the tag will be used by default.
 :::
 
 ## `datetime`
@@ -334,7 +334,7 @@ Twig の [json_encode](https://twig.symfony.com/doc/2.x/filters/json_encode.html
 
 ## `duration`
 
-「kebab-case」でフォーマットされた文字列を返します。 <craft3:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
+「kebab-case」でフォーマットされた文字列を返します。  <craft3:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
 
 ```twig
 <p>Posted {{ entry.postDate.diff(now)|duration(false) }} ago.</p>
@@ -676,7 +676,7 @@ foo[bar]
 ```
 
 ::: tip
-If this is used within a [namespace](tags.md#namespace) tag, the namespace applied by the tag will be used by default.
+See [Static Message Translations](../sites.md) for a full explanation on how this works.
 :::
 
 ## `number`
