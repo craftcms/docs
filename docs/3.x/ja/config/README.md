@@ -1,8 +1,8 @@
-# Craft CMS について
+# Testing
 
 Craft は、ウェブ上でさらなる独自のデジタル体験を創造するための、柔軟でユーザーフレンドリーな CMS です。
 
-## 技術仕様
+## Introduction
 
 Craft は、いくつかの[一般設定](config-settings.md)をサポートしています。 `config/general.php` ファイルでデフォルト値を上書きすることができます。
 
@@ -12,7 +12,7 @@ return [
 ];
 ```
 
-## 人気のリソース
+## Craft testing framework
 
 Craft は、いくつかの[データベース接続設定](db-settings.md)をサポートしています。 `config/db.php` ファイルでデフォルト値を上書きすることができます。
 
