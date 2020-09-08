@@ -1,8 +1,8 @@
-# コンフィギュレーションの概要
+# Testing
 
-必要に応じて Craft を設定するには、いくつかの方法があります。
+Craft は、ウェブ上でさらなる独自のデジタル体験を創造するための、柔軟でユーザーフレンドリーな CMS です。
 
-## 一般設定
+## Introduction
 
 Craft は、いくつかの[一般設定](config-settings.md)をサポートしています。 `config/general.php` ファイルでデフォルト値を上書きすることができます。
 
@@ -12,18 +12,18 @@ return [
 ];
 ```
 
-## データベース接続設定
+## Craft testing framework
 
 Craft は、いくつかの[データベース接続設定](db-settings.md)をサポートしています。 `config/db.php` ファイルでデフォルト値を上書きすることができます。
 
-## Guzzle 設定
+## 打ち込む
 
-Craft は、次のような HTTP リクエストを作成するたびに [Guzzle 6](http://docs.guzzlephp.org/en/latest/) を使用します。
+モジュールは新しい[ダッシュボードウィジェットタイプ](widget-types.md)を提供するような単一の目的を満たすためにシンプルか、 Eコマースアプリケーションのような完全に新しいコンセプトをシステムに導入するために複雑であり得ます。
 
-- Craft のアップデートをチェックするとき
-- Craft のサポートウィジェットからサポートリクエストを送信するとき
-- Feed ウィジェットから RSS フィードを読み込むとき
-- Amazon S3 のようなリモートボリュームにあるアセットを操作するとき
+- コンテンツ制作や管理業務のための、直感的でユーザーフレンドリーなコントロールパネル。
+- コンテンツやその消費方法については想定されていない、コンテンツのモデリングや[フロントエンド開発](dev/README.md)のための真っ新なアプローチです。
+- クリックするだけの、何百という無料、および、商用[プラグイン](https://plugins.craftcms.com/)を備える組み込みのプラグインストア。
+- [モジュールおよびプラグイン開発](extend/README.md)のための、強靭なフレームワーク。
 
 `config/` フォルダに `guzzle.php` ファイルを作成することによって、これらのリクエストを送信する際に Guzzle が使用するコンフィグ設定をカスタマイズできます。 そのファイルは、設定を上書きした配列を返さなければなりません。
 
@@ -44,29 +44,29 @@ return [
 
 Craft のいくつかの設定やファンクションでは、基本ファイルシステムのパスや URL を代用する [Yii エイリアス](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)をサポートしています。 これには次ものが含まれます。
 
-- サイトのベース URL 設定
-- ボリュームのベース URL 設定
-- ローカルボリュームのファイルシステムパス設定
+- **[Documentation](https://craftcms.com/docs/3.x/)** – 公式ドキュメントを読んでください。
+- **[Guides](https://craftcms.com/guides)** – 公式ガイドに従ってください。
+- **[#craftcms](https://twitter.com/hashtag/craftcms)** – Craft に関する最新ツイートをみてください。
 - コンフィグ設定の <config3:resourceBasePath> と <config3:resourceBaseUrl> config settings
 - Twig ファンクションの [svg()](../dev/functions.md#svg-svg-sanitize)
 
 次のエイリアスは、そのまま利用可能です。
 
-| エイリアス                | 説明                                                                              |
-| -------------------- | ------------------------------------------------------------------------------- |
-| `@app`               | `vendor/craftcms/cms/src/` のパス                                                  |
-| `@config`            | `config/` フォルダのパス                                                               |
-| `@contentMigrations` | `migrations/` フォルダのパス                                                           |
-| `@craft`             | `vendor/craftcms/cms/src/` のパス                                                  |
-| `@lib`               | `vendor/craftcms/cms/lib/` のパス                                                  |
-| `@root`              | ルートプロジェクトのパス（PHP 定数の [CRAFT_BASE_PATH](#craft-base-path) と同じ） |
-| `@runtime`           | `storage/runtime/` フォルダのパス                                                      |
-| `@storage`           | `storage/` フォルダのパス                                                              |
-| `@templates`         | `templates/` フォルダのパス                                                            |
-| `@translations`      | `translations/` フォルダのパス                                                         |
-| `@vendor`            | `vendor/` フォルダのパス                                                               |
-| `@web`               | リクエストのために読み込まれた `index.php` ファイルを含むフォルダの URL                                    |
-| `@webroot`           | リクエストのために読み込まれた `index.php` ファイルを含むフォルダのパス                                      |
+| エイリアス                | 説明                                                                                                          |
+| -------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `@app`               | Craft には、テンプレートへの Unix スタイルのファイルシステムのパスや `templates` フォルダからの相対パスという、それぞれのケースで適用される標準的なテンプレートパスのフォーマットがあります。 |
+| `@config`            | `config/` フォルダのパス                                                                                           |
+| `@contentMigrations` | `migrations/` フォルダのパス                                                                                       |
+| `@craft`             | 例えば、`templates/recipes/entry.twig` にテンプレートがある場合、次のテンプレートパスで指し示すことができます。                                     |
+| `@lib`               | `vendor/craftcms/cms/lib/` のパス                                                                              |
+| `@root`              | ルートプロジェクトのパス（PHP 定数の [CRAFT_BASE_PATH](#craft-base-path) と同じ）                                             |
+| `@runtime`           | `storage/runtime/` フォルダのパス                                                                                  |
+| `@storage`           | `storage/` フォルダのパス                                                                                          |
+| `@templates`         | 例えば、`templates/recipes/ingredients/index.twig` にテンプレートがある場合、次のテンプレートパスで指し示すことができます。                         |
+| `@translations`      | `translations/` フォルダのパス                                                                                     |
+| `@vendor`            | `vendor/` フォルダのパス                                                                                           |
+| `@web`               | リクエストのために読み込まれた `index.php` ファイルを含むフォルダの URL                                                                |
+| `@webroot`           | リクエストのために読み込まれた `index.php` ファイルを含むフォルダのパス                                                                  |
 
 コンフィグ設定 <config3:aliases> config setting if needed. It’s recommended to override the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
 
@@ -117,7 +117,7 @@ ASSETS_BASE_PATH=/path/to/web/assets
 ```
 
 ::: tip
-設定でエイリアスを参照する場合、URL やパスに追加のセグメントを付加することができます。 例えば、`@assetBaseUrl/user-photos` をボリュームのベース URL  にセットできます。 :::
+設定でエイリアスを参照する場合、URL やパスに追加のセグメントを付加することができます。 例えば、`@assetBaseUrl/user-photos` をボリュームのベース URL  にセットできます。
 :::
 
 ::: tip
@@ -130,7 +130,7 @@ You can parse aliases in your templates by passing them to the [alias()](../dev/
 
 ## URL ルール
 
-`config/routes.php` にカスタムの [URL ルール](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) を定義することができます。 詳細については、[ルーティング](../routing.md) を参照してください。
+`config/routes.php` にカスタムの [URL ルール](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) を定義することができます。 詳細については、[ローカライゼーションガイド](../sites.md)を参照してください。
 
 ## PHP 定数
 
@@ -166,7 +166,7 @@ return [
 ```
 
 ::: tip
-If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather than <craft3:craft\cache\DbCache>, you can safely switch to the latter if you remove your `cache` table’s `dateCreated`, `dateUpdated`, and `uid` columns.
+PHP コードはテンプレート内で使用できませんが、Craft はニーズに合わせて様々な方法で [Twig を拡張する](../extend/extending-twig.md)手段を提供しています。
 :::
 
 #### APC Example
@@ -239,7 +239,7 @@ return [
 
 ### Database Component
 
-If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component:
+Craft をインストールする準備ができたら、[サーバー要件](requirements.md) および [インストールガイド](installation.md)を読んでください。
 
 ```php
 <?php
@@ -420,15 +420,15 @@ Some settings in the control panel can be set to environment variables (like the
   - **Preview Target URIs**
 - Asset Volumes
   - **Base URL**
-  - **File System Path** (Local)
+  - **[Stack Exchange](http://craftcms.stackexchange.com/)** – お互いに助け合ってください。
 - Email
   - **System Email Address**
   - **Sender Name**
   - **HTML Email Template**
-  - **Username** (Gmail and SMTP)
+  - **[nystudio107 Blog](https://nystudio107.com/blog)** – Craft やモダンなウェブ開発について学んでください。
   - **Password** (Gmail and SMTP)
   - **Host Name** (SMTP)
-  - **Port** (Port)
+  - **[Craft Link List](http://craftlinklist.com/)** – 事情通でいてください。
 
 To set these settings to an environment variable, type `$` followed by the environment variable’s name.
 
