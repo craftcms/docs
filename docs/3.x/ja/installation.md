@@ -1,4 +1,4 @@
-# Installation
+# インストールガイド
 
 ## ステップ 1：Craft のダウンロード
 
@@ -7,7 +7,7 @@ Craft は [Composer](#downloading-with-composer) でダウンロードするか�
 ### Composer でダウンロード
 
 ::: tip
-Composer 1.3.0 以降を稼働させるべきです。 起動しているターミナル上で `composer -V` を実行することによって、インストールされている Composer のバージョンを確認できます。 1.3.0 より前のバージョンであれば、Composer をアップデートするために `composer self-update` を実行します。 :::
+Composer 1.3.0 以降を稼働させるべきです。 起動しているターミナル上で `composer -V` を実行することによって、インストールされている Composer のバージョンを確認できます。 1.3.0 より前のバージョンであれば、Composer をアップデートするために `composer self-update` を実行します。
 :::
 
 新しい Craft プロジェクトを作成するため、次のコマンドを実行してください。 （Composer が作成するプロジェクトのパスの代わりに`<Path>` と記載しています。 ）
@@ -30,7 +30,7 @@ Composer がすべてをロードするのに、数分かかるでしょう。 �
 新しい Craft プロジェクトを稼働したい場所でアーカイブを展開します。
 
 ::: tip
-macOS を使用している場合、そこにある不可視ファイル（`.env`、`.env.example`、`.gitignore`、および、`web/.htaccess`）を失わないよう注意してください。 Finder で <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>.</kbd> を押すことで、不可視ファイルの表示を切り替えることができます。 :::
+macOS を使用している場合、そこにある不可視ファイル（`.env`、`.env.example`、`.gitignore`、および、`web/.htaccess`）を失わないよう注意してください。 Finder で <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>.</kbd> を押すことで、不可視ファイルの表示を切り替えることができます。
 :::
 
 ### ディレクトリ構造
@@ -55,8 +55,8 @@ my-project.test/
 └── craft
 ```
 
-::: tip
-If the Setup Wizard skips this step, it’s because Craft is already able to connect to your database.
+::: warning
+HEY IIS FANS Make sure your site’s AppPool account has write permissions to these folders/files as well.
 :::
 
 ::: tip
@@ -88,14 +88,14 @@ IS ファンへ サイトの AppPool アカウントがこれらのフォルダ�
 - 同じグループであれば、`774` を利用します。
 - 確信が持てず、緊張感がある生活を好むなら、`777` を利用します。
 
-::: warning
-HEY IIS FANS Make sure your site’s AppPool account has write permissions to these folders/files as well.
+::: tip
+If the Setup Wizard skips this step, it’s because Craft is already able to connect to your database.
 :::
 
 ## ステップ 3：セキュリティキーの設定
 
 ::: tip
-If you used Composer to download Craft, you can probably safely skip this step.
+Craft のダウンロードに Composer を利用した場合、おそらく安全にこのステップをスキップできます。
 :::
 
 [手動](#set-the-key-manually)でキーの生成と割り当てを行うか、[ターミナルコマンド](#set-the-key-from-your-terminal)で Craft に任せることもできます。
@@ -175,7 +175,7 @@ The first step of the installer is to accept the [license agreement](https://cra
 The second step is to enter your database connection information.
 
 ::: tip
-Craft がすでにデータベースに接続可能な状態であれば、このステップはスキップされます。 :::
+Craft がすでにデータベースに接続可能な状態であれば、このステップはスキップされます。
 :::
 
 ![Craft Installation Database Connection Information](./images/installation-step-2.png)
