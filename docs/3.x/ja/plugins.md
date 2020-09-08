@@ -1,7 +1,7 @@
 # プラグイン
 
 ::: tip
-プラグイン _開発_ のためのドキュメントをお探しの場合は、[Craft の拡張](extend/README.md) セクションをチェックしてください。 :::
+プラグイン _開発_ のためのドキュメントをお探しの場合は、[Craft の拡張](extend/README.md) セクションをチェックしてください。
 :::
 
 プラグインは Craft のコア機能を拡張します。 新しいダッシュボードウィジェット、フィールドタイプ、コントロールパネルセクション、Twig テンプレート機能、ワークフローアクションなどを導入することができます。
@@ -44,7 +44,7 @@ Craft ID アカウントと同じメールアドレスで購入されたすべ�
 
 ### Safeguarding Plugin License Keys
 
-By default your plugin license key will be stored in the database and the [project config](project-config.md). You may, however, move that license key to a custom PHP constant and set the key using the `$VARIABLE_NAME` syntax.
+By default your plugin license key will be stored in the database and `project.yaml`. You may, however, move that license key to a custom PHP constant and set the key using the `$VARIABLE_NAME` syntax.
 
 プラグインストアの商用ライセンスは、Craft のライセンスモデルに従わなければなりません。
 
