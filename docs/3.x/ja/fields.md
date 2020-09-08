@@ -51,7 +51,7 @@ Fields can have the following translation method:
 - **Translate for each language** – The field can have a different value for each unique language associated with your sites.
 - **Custom… ** – The field can have different values based on a custom differentiator.
 
-If you choose “Custom…”, a “Translation Key Format” setting will appear below, where you can define a template that will help Craft which sites to copy the field value over to. フィールドのカスタム「翻訳キー」フォーマットを定義することができ、フィールド値は同じキーを生成するすべてのサイトにコピーされます。
+If you choose “Custom… ”, a “Translation Key Format” setting will appear below, where you can define a template that will help Craft which sites to copy the field value over to. フィールドのカスタム「翻訳キー」フォーマットを定義することができ、フィールド値は同じキーを生成するすべてのサイトにコピーされます。
 
 Craft は次の組み込みのフィールドタイプがあります。
 
