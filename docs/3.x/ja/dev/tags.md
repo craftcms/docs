@@ -1,81 +1,91 @@
 # タグ
 
-[Twig に付随する](https://twig.symfony.com/doc/tags/index.html)テンプレートタグに加えて、Craft がいくつか独自のものを提供します。
+タグを利用して、[エントリ](sections-and-entries.md)、[ユーザー](users.md)、および、[アセット](assets.md)の分類を作成できます。
 
-| tags/hook.md                                                        | Description                                                                 |
-| ------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [apply](https://twig.symfony.com/doc/2.x/tags/apply.html)           | Applies Twig filters to the nested template code.                           |
-| [autoescape](https://twig.symfony.com/doc/2.x/tags/autoescape.html) | Controls the escaping strategy for the nested template code.                |
-| [block](https://twig.symfony.com/doc/2.x/tags/block.html)           | Defines a template block.                                                   |
-| [cache](#cache)                                                     | Caches a portion of your template.                                          |
-| [css](#css)                                                         | Registers a `<style>` tag on the page.                                |
-| [dd](#dd)                                                           | Dump and die.                                                               |
-| [deprecated](https://twig.symfony.com/doc/2.x/tags/deprecated.html) | Triggers a PHP deprecation error.                                           |
-| [do](https://twig.symfony.com/doc/2.x/tags/do.html)                 | Does.                                                                       |
-| [embed](https://twig.symfony.com/doc/2.x/tags/embed.html)           | Embeds another template.                                                    |
-| [exit](#exit)                                                       | Ends the request.                                                           |
-| [extends](https://twig.symfony.com/doc/2.x/tags/extends.html)       | Extends another template.                                                   |
-| [for](https://twig.symfony.com/doc/2.x/tags/for.html)               | Loops through an array.                                                     |
-| [from](https://twig.symfony.com/doc/2.x/tags/from.html)             | Imports macros from a template.                                             |
-| [header](#header)                                                   | Sets an HTTP header on the response.                                        |
-| [hook](#hook)                                                       | Invokes a template hook.                                                    |
-| [tags/css.md](#html)                                                | Registers arbitrary HTML code on the page.                                  |
-| [if](https://twig.symfony.com/doc/2.x/tags/if.html)                 | Conditionally executes the nested template code.                            |
-| [import](https://twig.symfony.com/doc/2.x/tags/import.html)         | Imports macros from a template.                                             |
-| [include](https://twig.symfony.com/doc/2.x/tags/include.html)       | Includes another template.                                                  |
-| [js](#js)                                                           | Registers a `<script>` tag on the page.                               |
-| [macro](https://twig.symfony.com/doc/2.x/tags/macro.html)           | Defines a macro.                                                            |
-| [namespace](#namespace)                                             | Namespaces input names and other HTML attributes, as well as CSS selectors. |
-| [nav](#nav)                                                         | Creates a hierarchical nav menu.                                            |
-| [paginate](#paginate)                                               | Paginates an element query.                                                 |
-| [redirect](#redirect)                                               | Redirects the browser.                                                      |
-| [requireGuest](#requireguest)                                       | Requires that no user is logged-in.                                         |
-| [requireLogin](#requirelogin)                                       | Requires that a user is logged-in.                                          |
-| [requirePermission](#requirepermission)                             | Requires that a user is logged-in with a given permission.                  |
-| [set](https://twig.symfony.com/doc/2.x/tags/set.html)               | Sets a variable.                                                            |
-| [switch](#switch)                                                   | Switch the template output based on a give value.                           |
-| [use](https://twig.symfony.com/doc/2.x/tags/use.html)               | Inherits from another template horizontally.                                |
-| [verbatim](https://twig.symfony.com/doc/2.x/tags/verbatim.html)     | Disables parsing of nested Twig code.                                       |
-| [with](https://twig.symfony.com/doc/2.x/tags/with.html)             | Creates a nested template scope.                                            |
+| Param                                                                 | Description                                                                                                                                                                                                                                                                            |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [anyStatus](https://twig.symfony.com/doc/2.x/tags/apply.html)         | Removes element filters based on their statuses.                                                                                                                                                                                                                                       |
+| [asArray](https://twig.symfony.com/doc/2.x/tags/autoescape.html)      | Causes the query to return matching tags as arrays of data, rather than [Tag](craft3:craft\elements\Tag) objects.                                                                                                                                                                    |
+| [clearCachedResult](https://twig.symfony.com/doc/2.x/tags/block.html) | Clears the cached result.                                                                                                                                                                                                                                                              |
+| [dateCreated](#cache)                                                 | Narrows the query results based on the tags’ creation dates.                                                                                                                                                                                                                           |
+| [dateUpdated](#css)                                                   | Narrows the query results based on the tags’ last-updated dates.                                                                                                                                                                                                                       |
+| [fixedOrder](#dd)                                                     | Causes the query results to be returned in the order specified by [id](#id).                                                                                                                                                                                                           |
+| [group](https://twig.symfony.com/doc/2.x/tags/deprecated.html)        | Narrows the query results based on the tag groups the tags belong to.                                                                                                                                                                                                                  |
+| [groupId](https://twig.symfony.com/doc/2.x/tags/do.html)              | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.                                                                                                                                                                                             |
+| [id](https://twig.symfony.com/doc/2.x/tags/embed.html)                | Narrows the query results based on the tags’ IDs.                                                                                                                                                                                                                                      |
+| [ignorePlaceholders](#exit)                                           | Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement). |
+| [inReverse](https://twig.symfony.com/doc/2.x/tags/extends.html)       | Causes the query results to be returned in reverse order.                                                                                                                                                                                                                              |
+| [limit](https://twig.symfony.com/doc/2.x/tags/for.html)               | Determines the number of tags that should be returned.                                                                                                                                                                                                                                 |
+| [offset](https://twig.symfony.com/doc/2.x/tags/from.html)             | Determines how many tags should be skipped in the results.                                                                                                                                                                                                                             |
+| [orderBy](#header)                                                    | Sets an HTTP header on the response.                                                                                                                                                                                                                                                   |
+| [preferSites](#hook)                                                  | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.                                                                                                                                                                          |
+| [relatedTo](#html)                                                    | Narrows the query results to only tags that are related to certain other elements.                                                                                                                                                                                                     |
+| [search](https://twig.symfony.com/doc/2.x/tags/if.html)               | Narrows the query results to only tags that match a search query.                                                                                                                                                                                                                      |
+| [site](https://twig.symfony.com/doc/2.x/tags/import.html)             | Determines which site(s) the tags should be queried in.                                                                                                                                                                                                                                |
+| [siteId](https://twig.symfony.com/doc/2.x/tags/include.html)          | Determines which site(s) the tags should be queried in, per the site’s ID.                                                                                                                                                                                                             |
+| [title](#js)                                                          | Narrows the query results based on the tags’ titles.                                                                                                                                                                                                                                   |
+| [trashed](https://twig.symfony.com/doc/2.x/tags/macro.html)           | Narrows the query results to only tags that have been soft-deleted.                                                                                                                                                                                                                    |
+| [uid](#namespace)                                                     | Narrows the query results based on the tags’ UIDs.                                                                                                                                                                                                                                     |
+| [unique](#nav)                                                        | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                                                      |
+| [uri](#paginate)                                                      | Narrows the query results based on the tags’ URIs.                                                                                                                                                                                                                                     |
+| [inReverse](#redirect)                                                | Causes the query to return matching tags eager-loaded with related elements.                                                                                                                                                                                                           |
+| [requireGuest](#requireguest)                                         | Requires that no user is logged-in.                                                                                                                                                                                                                                                    |
+| [requireLogin](#requirelogin)                                         | Requires that a user is logged-in.                                                                                                                                                                                                                                                     |
+| [requirePermission](#requirepermission)                               | Requires that a user is logged-in with a given permission.                                                                                                                                                                                                                             |
+| [group](https://twig.symfony.com/doc/2.x/tags/set.html)               | Sets a variable.                                                                                                                                                                                                                                                                       |
+| [switch](#switch)                                                     | Switch the template output based on a give value.                                                                                                                                                                                                                                      |
+| [use](https://twig.symfony.com/doc/2.x/tags/use.html)                 | Inherits from another template horizontally.                                                                                                                                                                                                                                           |
+| [unique](https://twig.symfony.com/doc/2.x/tags/verbatim.html)         | Disables parsing of nested Twig code.                                                                                                                                                                                                                                                  |
+| [with](https://twig.symfony.com/doc/2.x/tags/with.html)               | Creates a nested template scope.                                                                                                                                                                                                                                                       |
 
-## `cache`
+## `search`
 
-This tag will cache a portion of your template, which can improve performance for subsequent requests because they’ll have less work to do.
+タグを作成する前に、それらを含めるためのタググループを作成しなければなりません。
 
 ```twig
-{% cache %}
-    {% for block in entry.myMatrixField.all() %}
-        <p>{{ block.text }}</p>
-    {% endfor %}
-{% endcache %}
+{# Create a new tag query #}
+{% set myTagQuery = craft.tags() %}
 ```
 
-Since the cache tag is for caching output and not logic, avoid caching `{{ csrfInput() }}`, form fields, or parts of templates where dynamic output is expected.
+新しいタググループを作るには、「設定 > タグ」に移動し、「新しいタググループ」ボタンをクリックします。
 
 Warning: If you’re suffering from abnormal page load times, you may be experiencing a suboptimal hosting environment. Please consult a specialist before trying `{% cache %}`. `{% cache %}` is not a substitute for fast database connections, efficient templates, or moderate query counts. Possible side effects include stale content, excessively long-running background tasks, stuck tasks, and in rare cases, death. Ask your hosting provider if `{% cache %}` is right for you.
 
-By default, cached output will be kept by URL without regard for the query string.
+どこか（エントリなど）にタグを割り当てるには、[タグフィールド](tags-fields.md)を作成し、フィールドレイアウトで追加しなければなりません。
 
 While carefully-placed `{% cache %}` tags can offer significant boosts to performance, it’s important to know how the cache tag’s parameters can be used to fine-tune its behavior.
 
 ### Parameters
 
-The `{% cache %}` tag supports the following parameters:
+You can fetch tags in your templates or PHP code using **tag queries**.
 
-#### `globally`
+#### `anyStatus`
 
-Caches the output globally (for the current site locale), rather than on a per-URL basis.
+::: code
 
 ```twig
-tags/cache.md
+// Create a new tag query
+$myTagQuery = \craft\elements\Tag::find();
 ```
 
-#### `using key`
+#### `asArray`
 
 Specifies the name of the key the cache should use. When the key changes, the tag’s contents are re-rendered. If this parameter is not provided, a random key will be generated each time Twig re-parses the template.
 
 ```twig
-{% cache using key "page-header" %}
+{# Create a tag query with the 'group' parameter #}
+{% set myTagQuery = craft.tags()
+    .group('blogTags') %}
+
+{# Fetch the tags #}
+{% set tags = myTagQuery.all() %}
+
+{# Display the tag list #}
+<ul>
+    {% for tag in tags %}
+        <li><a href="{{ url('blog/tags/'~tag.id) }}">{{ tag.title }}</a></li>
+    {% endfor %}
+</ul>
 ```
 
 ::: warning
@@ -85,84 +95,104 @@ If you change the template code within a `{% cache %}` that uses a custom key, a
 You can provide a dynamic key and combine it with [globally](#globally) for more control over template caching. For example, you could cache based on the URL *with* the query string that’s ignored by default:
 
 ```twig
-{% set request = craft.app.request %}
-{% set uriWithQueryString = request.fullUri ~ request.queryStringWithoutPath %}
-{% cache globally using key uriWithQueryString %}
+{# Fetch all tags, regardless of status #}
+{% set tags = craft.tags()
+    .anyStatus()
+    .all() %}
 ```
 
-#### `for`
+#### `clearCachedResult`
 
-The amount of time it should take for the cache to expire.
+We can display a list of the tags in a “Blog Tags” tag group by doing the following:
 
 ```twig
-{% cache for 3 weeks %}
+// Fetch all tags, regardless of status
+$tags = \craft\elements\Tag::find()
+    ->anyStatus()
+    ->all();
 ```
 
-The accepted duration units are:
+Tag queries support the following parameters:
 
-- `sec`(`s`)
-- `second`(`s`)
-- `min`(`s`)
-- `minute`(`s`)
-- `hour`(`s`)
-- `day`(`s`)
-- `fortnight`(`s`)
-- `forthnight`(`s`)
-- `month`(`s`)
-- `year`(`s`)
-- `week`(`s`)
+- with a URI of `foo`.
+- from a site with an ID of `1` or `2`.
+- ::: code
+- from the site with a handle of `foo`.
+- with a title of `Foo`.
+- Fetch the tags with `.all()`.
+- ::: code
+- ::: code
+- ::: code
+- ::: code
+- from a site with a handle of `foo` or `bar`.
 
 Tip: If this parameter is omitted, your <config3:cacheDuration> config setting will be used to define the default duration.
 
-#### `until`
+#### `dateCreated`
 
-A [DateTime](http://php.net/manual/en/class.datetime.php) object defining when the cache should expire.
+::: code
 
 ```twig
-{% cache until entry.eventDate %}
+{# Fetch tags as arrays #}
+{% set tags = craft.tags()
+    .asArray()
+    .all() %}
 ```
 
 ::: tip
-You can only use [for](#for) **_or_** [until](#until) in a single `{% cache %}` tag.
+This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
 :::
 
-#### `if`
+#### `dateUpdated`
 
-Only activates the `{% cache %}` tag if a certain condition is met.
+Causes the query to return matching tags as arrays of data, rather than [Tag](craft3:craft\elements\Tag) objects.
 
 ```twig
-{## Only cache if this is a mobile browser #}
-{% cache if craft.app.request.isMobileBrowser() %}
+// Fetch tags as arrays
+$tags = \craft\elements\Tag::find()
+    ->asArray()
+    ->all();
 ```
 
-#### `unless`
+#### `fixedOrder`
 
-Prevents the `{% cache %}` tag from activating if a certain condition is met.
+::: code
 
 ```twig
-{## Don't cache if someone is logged in #}
-{% cache unless currentUser %}
+{# Fetch tags created last month #}
+{% set start = date('first day of last month')|atom %}
+{% set end = date('first day of this month')|atom %}
+
+{% set tags = craft.tags()
+    .dateCreated(['and', ">= #{start}", "< #{end}"])
+    .all() %}
 ```
 
 ::: tip
-You can only use [if](#if) **_or_** [unless](#unless) in a single `{% cache %}` tag.
+See [Element Queries](element-queries.md) to learn about how element queries work.
 :::
 
 ### Cache clearing
 
-Your template caches will automatically clear when any elements (entries, assets, etc.) within the tags are saved or deleted.
+Clears the cached result.
 
-If you have any element _queries_ within the tags (e.g. a `craft.entries`), and you create a new element that should be returned by one of the queries, Craft will also be able to figure that out and clear the cache.
+Narrows the query results based on the tags’ creation dates.
 
-You can also manually clear your template caches from the Utilities page, using the “Clear Caches” tool, or by using the `invalidate-tags/template` console command.
+Possible values include:
 
 ```bash
-php craft invalidate-tags/template
+// Fetch tags created last month
+$start = (new \DateTime('first day of last month'))->format(\DateTime::ATOM);
+$end = (new \DateTime('first day of this month'))->format(\DateTime::ATOM);
+
+$tags = \craft\elements\Tag::find()
+    ->dateCreated(['and', ">= {$start}", "< {$end}"])
+    ->all();
 ```
 
 ### When to use `{% cache %}` tags
 
-You should use `{% cache %}` tags any time you’ve got a template that’s causing a lot of database queries, or you’re doing something very computationally expensive with Twig.
+::: code
 
 Here are some examples of when to use them:
 
@@ -170,7 +200,7 @@ Here are some examples of when to use them:
 * A Matrix field loop, where some of the blocks have relational fields on them, adding their own additional database queries to the page
 * Whenever you’re pulling in data from another site
 
-There are also some cases where it’s _not_ a good idea to use them:
+Narrows the query results based on the tags’ last-updated dates.
 
 * Don’t use them to cache static text; that will be more expensive than simply outputting the text.
 * You can’t use them outside of top-level `{% block %}` tags within a template that extends another.
@@ -199,16 +229,17 @@ There are also some cases where it’s _not_ a good idea to use them:
 
 Tip: The `{% cache %}` tag will detect if there are any ungenerated [image transform](../image-transforms.md) URLs within it. If there are, it will hold off on caching the template until the next request, so those temporary image URLs won’t get cached.
 
-## `css`
+## `site`
 
-The `{% css %}` tag can be used to register a `<style>` tag in the page’s `<head>`.
+::: code
 
 ```twig
-{% css %}
-    .content {
-        color: {{ entry.textColor }};
-    }
-{% endcss %}
+{# Fetch tags updated in the last week #}
+{% set lastWeek = date('1 week ago')|atom %}
+
+{% set tags = craft.tags()
+    .dateUpdated(">= #{lastWeek}")
+    .all() %}
 ```
 
 ::: warning
@@ -217,95 +248,105 @@ Only a single `{% paginate %}` tag should be used per request.
 
 ### Parameters
 
-The `{% css %}` tag supports the following parameters:
+Causes the query results to be returned in the order specified by [id](#id).
 
 #### `with`
 
-Any HTML attributes that should be included on the `<style>` tag.
+::: code
 
 ```twig
-{% css with {type: 'text/css'} %}
+// Fetch tags updated in the last week
+$lastWeek = (new \DateTime('1 week ago'))->format(\DateTime::ATOM);
+
+$tags = \craft\elements\Tag::find()
+    ->dateUpdated(">= {$lastWeek}")
+    ->all();
 ```
 
 Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
 
-## `dd`
+## `uid`
 
 This tag will dump a variable out to the browser and then end the request. (`dd` stands for “Dump-and-Die”.)
 
 ```twig
-{% set entry = craft.entries.id(entryId).one() %}
-{% dd entry %}
+{# Fetch tags in a specific order #}
+{% set tags = craft.tags()
+    .id([1, 2, 3, 4, 5])
+    .fixedOrder()
+    .all() %}
 ```
 
-## `exit`
+## `offset`
 
-This tag will prevent the rest of the template from executing, and end the request.
+Possible values include:
 
 ```twig
-{% set entry = craft.entries.id(entryId).one() %}
-
-{% if not entry %}
-    {% exit 404 %}
-{% endif %}
+// Fetch tags in a specific order
+$tags = \craft\elements\Tag::find()
+    ->id([1, 2, 3, 4, 5])
+    ->fixedOrder()
+    ->all();
 ```
 
 ### Parameters
 
-The `{% exit %}` tag supports the following parameter:
+::: code
 
 #### Status
 
 You can optionally set the HTTP status code that should be included with the response. If you do, Craft will look for the appropriate error template to render. For example, `{% exit 404 %}` will get Craft to return the `404.twig` template. If the template doesn’t exist. Craft will fallback on its own template corresponding to the status code.
 
-## `header`
+## `title`
 
-This tag will set a new HTTP header on the response.
+Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 
 ```twig
-{## Tell the browser to cache this page for 30 days #}
-{% set expiry = now|date_modify('+30 days') %}
-
-{% header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp) %}
-{% header "Pragma: cache" %}
-{% header "Expires: " ~ expiry|date('D, d M Y H:i:s', 'GMT') ~ " GMT" %}
+{# Fetch tags in the Foo group #}
+{% set tags = craft.tags()
+    .group('foo')
+    .all() %}
 ```
 
 ### Parameters
 
-The `{% header %}` tag supports the following parameter:
+Possible values include:
 
 #### Header
 
 You specify the actual header that should be set by typing it as a string after the word `header`. This parameter is required.
 
-## `hook`
+## `trashed`
 
 This tag gives plugins and modules an opportunity to hook into the template, to either return additional HTML or make changes to the available template variables.
 
 ```twig
-{## Give plugins a chance to make changes here #}
-{% hook 'my-custom-hook-name' %}
+// Fetch tags in the Foo group
+$tags = \craft\elements\Tag::find()
+    ->group('foo')
+    ->all();
 ```
 
-See [Template Hooks](../extend/template-hooks.md) for details on plugins and modules can work with `{% hook %}` tags.
+Narrows the query results based on the tags’ IDs.
 
-## `tags/js.md`
+## `siteId`
 
-The `{% html %}` tag can be used to register arbitrary HTML code on the page.
+Possible values include:
 
 ```twig
-{% html %}
-    <p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>
-{% endhtml %}
+{# Fetch tags in the group with an ID of 1 #}
+{% set tags = craft.tags()
+    .groupId(1)
+    .all() %}
 ```
 
-::: tip
-The tag calls <craft3:craft\web\View::registerHtml()> under the hood, which can also be accessed via the global `view` variable.
+::: code
 
 ```twig
-{% set para = '<p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>' %}
-{% do view.registerHtml(para) %}
+// Fetch tags in the group with an ID of 1
+$tags = \craft\elements\Tag::find()
+    ->groupId(1)
+    ->all();
 ```
 :::
 
@@ -315,32 +356,32 @@ The `{% html %}` tag supports the following parameters:
 
 #### Position
 
-You can specify where the HTML code should be injected into the page using one of these position keywords:
+Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 
-| Keyword        | Description                                   |
-| -------------- | --------------------------------------------- |
-| `at head`      | In the page’s `<head>`                  |
-| `at beginBody` | At the beginning of the page’s `<body>` |
-| `at endBody`   | At the end of the page’s `<body>`       |
+| Value                                            | Description                                          |
+| ------------------------------------------------ | ---------------------------------------------------- |
+| `'>= 2018-04-01'`                             | that were created on or after 2018-04-01.            |
+| `'< 2018-05-01'`                              | that were created before 2018-05-01                  |
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were created between 2018-04-01 and 2018-05-01. |
 
 ```twig
-{% html at head %}
+{# Fetch the tag by its ID #}
+{% set tag = craft.tags()
+    .id(1)
+    .one() %}
 ```
 
-By default, `at endBody` will be used.
+Causes the query results to be returned in reverse order.
 
-## `js`
+## `id`
 
-The `{% js %}` tag can be used to register a `<script>` tag on the page.
+::: code
 
 ```twig
-{% js %}
-    _gaq.push([
-        "_trackEvent",
-        "Search",
-        "{{ searchTerm|e('js') }}"
-    ]);
-{% endjs %}
+// Fetch the tag by its ID
+$tag = \craft\elements\Tag::find()
+    ->id(1)
+    ->one();
 ```
 
 ::: warning
@@ -349,22 +390,25 @@ Setting the position to `on load` or `on ready` will cause Craft to load its int
 
 ### Parameters
 
-The `{% js %}` tag supports the following parameters:
+Determines the number of tags that should be returned.
 
 #### Position
 
-You can specify where the `<script>` tag should be added to the page using one of these position keywords:
+::: code
 
-| Keyword        | Description                                                                |
-| -------------- | -------------------------------------------------------------------------- |
-| `at head`      | In the page’s `<head>`                                               |
-| `at beginBody` | At the beginning of the page’s `<body>`                              |
-| `at endBody`   | At the end of the page’s `<body>`                                    |
-| `on load`      | At the end of the page’s `<body>`, within `jQuery(window).load()`    |
-| `on ready`     | At the end of the page’s `<body>`, within `jQuery(document).ready()` |
+| Value                                            | Description                                                                |
+| ------------------------------------------------ | -------------------------------------------------------------------------- |
+| `'>= 2018-04-01'`                             | that were updated on or after 2018-04-01.                                  |
+| `'< 2018-05-01'`                              | that were updated before 2018-05-01                                        |
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were updated between 2018-04-01 and 2018-05-01.                       |
+| `on load`                                        | At the end of the page’s `<body>`, within `jQuery(window).load()`    |
+| `on ready`                                       | At the end of the page’s `<body>`, within `jQuery(document).ready()` |
 
 ```twig
-{% js at head %}
+{# Fetch tags in reverse #}
+{% set tags = craft.tags()
+    .inReverse()
+    .all() %}
 ```
 
 By default, `at endBody` will be used.
@@ -375,11 +419,13 @@ The `{% nav %}` tag requires elements to be queried in a specific (hierarchical)
 
 #### `with`
 
-Any HTML attributes that should be included on the `<script>` tag.
+::: code
 
 ```twig
-{% set script = '_gaq.push(["_trackEvent", "Search", "'~searchTerm|e('js')~'"' %}
-{% do view.registerJs(script) %}
+// Fetch tags in reverse
+$tags = \craft\elements\Tag::find()
+    ->inReverse()
+    ->all();
 ```
 
 Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
@@ -390,46 +436,44 @@ If you only specify one variable name here, the `pageInfo` variable will be call
 
 ## `namespace`
 
-The `{% namespace %}` tag can be used to namespace input names and other HTML attributes, as well as CSS selectors.
+::: code
 
 For example, this:
 
 ```twig
-{% namespace 'foo' %}
-<style>
-  .text { font-size: larger; }
-  #title { font-weight: bold; }
-</style>
-<input class="text" id="title" name="title" type="text">
-{% endnamespace %}
+{# Fetch up to 10 tags  #}
+{% set tags = craft.tags()
+    .limit(10)
+    .all() %}
 ```
 
-would become this:
+If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 
 ```html
-<style>
-  .text { font-size: larger; }
-  #foo-title { font-weight: bold; }
-</style>
-<input class="text" id="foo-title" name="foo[title]" type="text">
+// Fetch up to 10 tags
+$tags = \craft\elements\Tag::find()
+    ->limit(10)
+    ->all();
 ```
 
-Notice how the `#title` CSS selector became `#foo-title`, the `id` attribute changed from `title` to `foo-title`, and the `name` attribute changed from `title` to `foo[title]`.
+For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C, and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned for Site B.
 
 If you want class names to get namespaced as well, add the `withClasses` flag. That will affect both class CSS selectors and `class` attributes:
 
 ```twig
-{% namespace 'foo' withClasses %}
+{# Fetch all tags except for the first 3 #}
+{% set tags = craft.tags()
+    .offset(3)
+    .all() %}
 ```
 
-That would result in:
+::: code
 
 ```html{2,5}
-<style>
-  .foo-text { font-size: larger; }
-  #foo-title { font-weight: bold; }
-</style>
-<input class="foo-text" id="foo-title" name="foo[title]" type="text">
+// Fetch all tags except for the first 3
+$tags = \craft\elements\Tag::find()
+    ->offset(3)
+    ->all();
 ```
 
 ::: tip
@@ -438,35 +482,25 @@ This tag works identically to the [namespace](filters.md#namespace) filter, exce
 
 ## `nav`
 
-This tag helps create a hierarchical navigation menu for entries in a [Structure section](../entries.md#section-types) or a [Category Group](../categories.md).
+Narrows the query results to only tags that are related to certain other elements.
 
 
 ```twig
-{% set entries = craft.entries.section('pages').all() %}
-
-<ul id="nav">
-    {% nav entry in entries %}
-        <li>
-            <a href="{{ entry.url }}">{{ entry.title }}</a>
-            {% ifchildren %}
-                <ul>
-                    {% children %}
-                </ul>
-            {% endifchildren %}
-        </li>
-    {% endnav %}
-</ul>
+{# Fetch all tags in order of date created #}
+{% set tags = craft.tags()
+    .orderBy('dateCreated asc')
+    .all() %}
 ```
 
 ### Parameters
 
-The `{% nav %}` tag has the following parameters:
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
 
 #### Item name
 
 The first thing to follow “`{% nav`” is the variable name you’d like to use to represent each item in the loop, e.g. `item`, `entry`, or `category`. You will be using this variable name to reference the items inside the loop.
 
-#### `in`
+#### `orderBy`
 
 Next you need to type the word “`in`”, followed by the array of entries the tag should loop through. This can be an array of elements, or an [element query](../element-queries.md).
 
@@ -478,35 +512,24 @@ The `{% nav %}` tag requires elements to be queried in a specific (hierarchical)
 
 To show the children of the current element in the loop, use the `{% children %}` tag. When Craft gets to this tag, it will loop through the element’s children, applying the same template defined between your `{% nav %}` and `{% endnav %}` tags to those children.
 
-If you want to show some additional HTML surrounding the children, but only in the event that the element actually has children, wrap your `{% children %}` tag with `{% ifchildren %}` and `{% endifchildren %}` tags.
+::: code
 
 ::: tip
-The `{% nav %}` tag should _only_ be used in times when you want to show elements in a hierarchy, and you want the DOM to express that hierarchy. If you want to loop through elements linearly, use Twig’s [for](https://twig.symfony.com/doc/tags/for.html) tag instead.
+If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you only want unique elements to be returned, use [unique](#unique) in conjunction with this.
 :::
 
-## `paginate`
+## `preferSites`
 
-This tag makes it easy to paginate query results across multiple pages.
+Determines which site(s) the tags should be queried in.
 
 ```twig
-{% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
-
-{% paginate query as pageInfo, pageEntries %}
-
-{% for entry in pageEntries %}
-    <article>
-        <h1>{{ entry.title }}</h1>
-        {{ entry.body }}
-    </article>
-{% endfor %}
-
-{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
-{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
+// Fetch all tags in order of date created
+$tags = \craft\elements\Tag::find()
+    ->orderBy('dateCreated asc')
+    ->all();
 ```
 
-Paginated URLs will be identical to the first page’s URL, except that “/p_X_” will be appended to the end (where _X_ is the page number), e.g. `http://my-project.test/news/p2`.
+The current site will be used by default.
 
 ::: tip
 You can use the <config3:pageTrigger> config setting to customize what comes before the actual page number in your URLs. For example you could set it to `'page/'`, and your paginated URLs would start looking like `http://my-project.test/news/page/2`.
@@ -518,24 +541,24 @@ Only a single `{% paginate %}` tag should be used per request.
 
 ### Parameters
 
-The `{% paginate %}` tag has the following parameters:
+::: code
 
-#### Query
+#### Querying Tags
 
-The first thing you pass into the `{% paginate %}` tag is a query object (such as an [element query](../element-queries.md)), which defines all of the results that should be paginated. Use the `limit` parameter to define how many results should show up per page (100 by default).
+Once you’ve created a tag query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. Use the `limit` parameter to define how many results should show up per page (100 by default).
 
 ::: warning
 This parameter needs to be an actual query object, not an array of pre-fetched results. So don’t call `all()` on the query before passing it in.
 :::
 
-#### `as`
+#### `relatedTo`
 
-Next up you need to type “`as`”, followed by one or two variable names:
+The current site will be used by default.
 
 * `as pageInfo, pageEntries`
 * `as pageEntries`
 
-Here’s what they get set to:
+Possible values include:
 
 * `pageInfo` gets set to a <craft3:craft\web\twig\variables\Paginate> object, which provides info about the current page, and some helper methods for creating links to other pages. (See [below](#the-pageInfo-variable) for more info.)
 * `pageEntries` gets set to an array of the results (e.g. the elements) that belong to the current page.
@@ -548,22 +571,20 @@ If you only specify one variable name here, the `pageInfo` variable will be call
 
 The `{% paginate %}` tag won’t actually output the current page’s results for you. It will only give you an array of the results that should be on the current page (referenced by the variable you defined in the `as` parameter.)
 
-Following your `{% paginate %}` tag, you will need to loop through this page’s results using a [for](https://twig.symfony.com/doc/tags/for.html) tag.
+Narrows the query results based on the tags’ titles.
 
 ```twig
-{% paginate craft.entries.section('blog').limit(10) as pageEntries %}
-
-{% for entry in pageEntries %}
-    <article>
-        <h1>{{ entry.title }}</h1>
-        {{ entry.body }}
-    </article>
-{% endfor %}
+{# Fetch unique tags from Site A, or Site B if they don’t exist in Site A #}
+{% set tags = craft.tags()
+    .site('*')
+    .unique()
+    .preferSites(['a', 'b'])
+    .all() %}
 ```
 
 ### The `pageInfo` variable
 
-The `pageInfo` variable (or whatever you’ve called it) provides the following properties and methods:
+Possible values include:
 
 * **`pageInfo.first`** – The offset of the first result on the current page.
 * **`pageInfo.last`** – The offset of the last result on the current page.
@@ -572,15 +593,15 @@ The `pageInfo` variable (or whatever you’ve called it) provides the following 
 * **`pageInfo.totalPages`** – The total number of pages.
 * **`pageInfo.prevUrl`** – The URL to the previous page, or `null` if you’re on the first page.
 * **`pageInfo.nextUrl`** – The URL to the next page, or `null` if you’re on the last page.
-* **`pageInfo.firstUrl`** – The URL to the first page.
+* from the site with an ID of `1`.
 * **`pageInfo.lastUrl`** – The URL to the last page.
-* **`pageInfo.getPageUrl( page )`** – Returns the URL to a given page number, or `null` if the page doesn’t exist.
+* not in a site with an ID of `1` or `2`.
 * **`pageInfo.getPrevUrls( [dist] )`** – Returns an array of URLs to the previous pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
 * **`pageInfo.getNextUrls( [dist] )`** – Returns an array of URLs to the next pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
 * **`pageInfo.getRangeUrls( start, end )`** – Returns an array of URLs to pages in a given range of page numbers, with keys set to the page numbers.
 
 
-### Navigation examples
+### Example
 
 The [pageInfo](#the-pageInfo-variable) variable gives you lots of options for building the pagination navigation that’s right for you. Here are a few common examples.
 
@@ -589,63 +610,38 @@ The [pageInfo](#the-pageInfo-variable) variable gives you lots of options for bu
 If you just want simple Previous Page and Next Page links to appear, you can do this:
 
 ```twig
-{% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
-
-{% paginate query as pageInfo, pageEntries %}
-
-{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
-{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
+// Fetch unique tags from Site A, or Site B if they don’t exist in Site A
+$tags = \craft\elements\Tag::find()
+    ->site('*')
+    ->unique()
+    ->preferSites(['a', 'b'])
+    ->all();
 ```
 
-Note that we’re wrapping those links in conditionals because there won’t always be a previous or next page.
+Narrows the query results to only tags that have been soft-deleted.
 
 #### First/Last Page Links
 
-You can add First Page and Last Page links into the mix, you can do that too:
+::: code
 
 ```twig
-{% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
-
-{% paginate query as pageInfo, pageEntries %}
-
-<a href="{{ pageInfo.firstUrl }}">First Page</a>
-{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
-{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
-<a href="{{ pageInfo.lastUrl }}">Last Page</a>
+{# Fetch all tags that are related to myCategory #}
+{% set tags = craft.tags()
+    .relatedTo(myCategory)
+    .all() %}
 ```
 
 There’s no reason to wrap those links in conditionals since there will always be a first and last page.
 
 #### Nearby Page Links
 
-If you want to create a list of nearby pages, perhaps surrounding the current page number, you can do that too!
+Narrows the query results based on the tags’ UIDs.
 
 ```twig
-{% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
-
-{% paginate query as pageInfo, pageEntries %}
-
-<a href="{{ pageInfo.firstUrl }}">First Page</a>
-{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
-
-{% for page, url in pageInfo.getPrevUrls(5) %}
-    <a href="{{ url }}">{{ page }}</a>
-{% endfor %}
-
-<span class="current">{{ pageInfo.currentPage }}</span>
-
-{% for page, url in pageInfo.getNextUrls(5) %}
-    <a href="{{ url }}">{{ page }}</a>
-{% endfor %}
-
-{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
-<a href="{{ pageInfo.lastUrl }}">Last Page</a>
+// Fetch all tags that are related to $myCategory
+$tags = \craft\elements\Tag::find()
+    ->relatedTo($myCategory)
+    ->all();
 ```
 
 In this example we’re only showing up to five page links in either direction of the current page. If you’d prefer to show more or less, just change the numbers that are passed into `getPrevUrls()` and `getNextUrls()`. You can also choose to not pass any number in at all, in which case *all* previous/next page URLs will be returned.
@@ -655,14 +651,18 @@ In this example we’re only showing up to five page links in either direction o
 This tag will redirect the browser to a different URL.
 
 ```twig
-{% if not user or not user.isInGroup('members') %}
-    {% redirect "pricing" %}
-{% endif %}
+{# Get the search query from the 'q' query string param #}
+{% set searchQuery = craft.app.request.getQueryParam('q') %}
+
+{# Fetch all tags that match the search query #}
+{% set tags = craft.tags()
+    .search(searchQuery)
+    .all() %}
 ```
 
 ### Parameters
 
-The `{% redirect %}` tag has the following parameter:
+Determines whether only elements with unique IDs should be returned by the query.
 
 #### The URL
 
@@ -670,17 +670,23 @@ Immediately after typing “`{% redirect`”, you need to tell the tag where to 
 
 #### The Status Code
 
-By default, redirects will have `302` status codes, which tells the browser that the requested URL has only been moved to the redirected URL _temporarily_.
+::: code
 
 You can customize which status code accompanies your redirect response by typing it right after the URL. For example, the following code would return a `301` redirect (permanent):
 
 ```twig
-{% redirect "pricing" 301 %}
+// Get the search query from the 'q' query string param
+$searchQuery = \Craft::$app->request->getQueryParam('q');
+
+// Fetch all tags that match the search query
+$tags = \craft\elements\Tag::find()
+    ->search($searchQuery)
+    ->all();
 ```
 
 #### Flash Messages
 
-You can optionally set flash messages that will show up for the user on the next request using the `with notice` and/or `with error` params:
+Narrows the query results based on the tags’ URIs.
 
 ```twig
 {% if not currentUser.isInGroup('members') %}
@@ -693,7 +699,10 @@ You can optionally set flash messages that will show up for the user on the next
 This tag will ensure that the user is **not** logged in. If they’re already logged in, they’ll be redirected to the page specified by your <config3:postLoginRedirect> config setting.
 
 ```twig
-{% requireGuest %}
+// Fetch tags from the Foo site
+$tags = \craft\elements\Tag::find()
+    ->site('foo')
+    ->all();
 ```
 
 You can place this tag anywhere in your template, including within a conditional. If/when Twig gets to it, the guest enforcement will take place.
@@ -703,7 +712,10 @@ You can place this tag anywhere in your template, including within a conditional
 This tag will ensure that the user is logged in. If they aren’t, they’ll be redirected to a Login page and returned to the original page after successfully logging in.
 
 ```twig
-{% requireLogin %}
+{# Fetch tags from the site with an ID of 1 #}
+{% set tags = craft.tags()
+    .siteId(1)
+    .all() %}
 ```
 
 You can place this tag anywhere in your template, including within a conditional. If/when Twig gets to it, the login enforcement will take place.
