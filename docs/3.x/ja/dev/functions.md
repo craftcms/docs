@@ -15,6 +15,7 @@
 | [className](#classname)                                                                        | 指定されたオブジェクトの完全修飾クラス名を返します。                                                                             |
 | [clone](#clone)                                                                                | Clones an object.                                                                                      |
 | [combine](#combine)                                                                            | Combines two arrays into one.                                                                          |
+| [configure](#configure)                                                                        | Sets attributes on the passed object.                                                                  |
 | [constant](https://twig.symfony.com/doc/2.x/functions/constant.html)                           | Returns the constant value for a given string.                                                         |
 | [create](#create)                                                                              | Creates a new object.                                                                                  |
 | [csrfInput](#csrfinput)                                                                        | Returns a hidden CSRF token input.                                                                     |
@@ -39,9 +40,9 @@
 | [random](https://twig.symfony.com/doc/2.x/functions/random.html)                               | Returns a random value.                                                                                |
 | [range](https://twig.symfony.com/doc/2.x/functions/range.html)                                 | Returns a list containing an arithmetic progression of integers.                                       |
 | [raw](#raw)                                                                                    | Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML-encoded when output. |
-| [redirectInput](#redirectinput)                                                                | `<input type="hidden" name="redirect" value="{{ url|hash }}">` を入力するためのショートカットです。                |
-| [seq](#seq)                                                                                    | `name` で定義されたシーケンスの次または現在の番号を出力します。                                                                    |
-| [shuffle](#shuffle)                                                                            | 配列内のエレメントの順序をランダム化します。                                                                                 |
+| [redirectInput](#redirectinput)                                                                | `name` で定義されたシーケンスの次または現在の番号を出力します。                                                                    |
+| [seq](#seq)                                                                                    | 配列内のエレメントの順序をランダム化します。                                                                                 |
+| [shuffle](#shuffle)                                                                            | Randomizes the order of the items in an array.                                                         |
 | [siteUrl](#siteurl)                                                                            | Generates a front-end URL.                                                                             |
 | [svg](#svg)                                                                                    | Outputs an SVG document.                                                                               |
 | [source](https://twig.symfony.com/doc/2.x/functions/source.html)                               | Returns the content of a template without rendering it.                                                |
@@ -157,11 +158,40 @@ This works identically to Twig’s core [`block`](https://twig.symfony.com/doc/2
 
 ## `floor( num )`
 
+Passes through the behavior of the `Craft::configure()` method inherited from [`Yii::configure()`](yii2:yii\BaseYii::configure()). It’s similar to [`create`](#create) in that it applies attributes to an object, but instead of creating new instances it accepts an existing object and modifies it.
+
+```twig
+{# Modify an `EntryQuery` object set up by a relational field: #}
+{% set myRelatedEntries = configure(entry.myEntriesField, {
+    section: 'blog'
+}).all() %}
+```
+
+It can also be used instead of the [`merge`](https://twig.symfony.com/doc/2.x/filters/merge.html) filter:
+
+```twig
+{% set myObject = { one: 'Original' } %}
+{# With `merge`: #}
+{% set myObject = myObject | merge({ one: 'Overridden', two: 'New' }) %}
+
+{# With `configure`: #}
+{% do configure(myObject, { one: 'Overridden', two: 'New' }) %}
+```
+
+It could technically even be used to set a model or element’s attributes, even though that’s not a great idea:
+
+```twig
+{% do configure(entry, { title: 'New Title' }) %}
+{% do craft.app.elements.saveElement(entry) %}
+```
+
+## `constant`
+
 Returns the constant value for a given string.
 
 This works identically to Twig’s core [`constant`](https://twig.symfony.com/doc/2.x/functions/constant.html) function.
 
-## `getenv( name )`
+## `create`
 
 与えられたクラス名やオブジェクト設定に基づいて新しいオブジェクトインスタンスを作成します。 サポートされる引数の詳細については、<yii2:Yii::createObject()> を参照してください。
 
@@ -177,7 +207,7 @@ This works identically to Twig’s core [`constant`](https://twig.symfony.com/do
 }) %}
 ```
 
-## `parseEnv( str )`
+## `cpUrl`
 
 Returns a control panel URL, automatically accounting for relative vs. absolute format and the active <config3:cpTrigger> setting.
 
@@ -187,13 +217,13 @@ Returns a control panel URL, automatically accounting for relative vs. absolute 
 
 ### 引数
 
-ファンクションが呼び出されるたびに、与えられたシーケンスは自動的にインクリメントされます。
+`siteUrl()` ファンクションは、次の引数を持っています。
 
 * **`path`** – 結果となる URL がサイトで指すべきパス。 それは、ベースサイト URL に追加されます。
 * **`params`** – URL に追加するクエリ文字列パラメータ。 これは文字列（例：`'foo=1&bar=2'`）またはオブジェクト（例：`{foo:'1', bar:'2'}`）が利用可能です。
 * **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。 デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。 そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
 
-## `head()`
+## `csrfInput`
 
 不可視の CSRF トークン入力欄を返します。 CSRF 保護が有効になっているすべてのサイトでは、POST 経由で送信するそれぞれのフォームにこれを含めなければなりません。
 
@@ -209,7 +239,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 }) }}
 ```
 
-## `plugin( handle )`
+## `endBody`
 
 「end body」に登録されたスクリプトやスタイルを出力します。 `</body>` タグの直前に配置する必要があります。
 
@@ -222,9 +252,9 @@ You can optionally set additional attributes on the tag by passing an `options` 
 </body>
 ```
 
-## `redirectInput( url )`
+## `expression`
 
-サイト上のページへの URL を作成するため _だけ_ という点を除けば、[url()](#url-path-params-scheme-mustshowscriptname) と似ています。
+次のものを渡すことができます。
 
 ```twig
 {% set entries = craft.entries()
@@ -232,33 +262,26 @@ You can optionally set additional attributes on the tag by passing an `options` 
     .all() %}
 ```
 
-## `seq( name, length, next )`
+## `floor`
 
-`siteUrl()` ファンクションは、次の引数を持っています。
+Rounds a number down.
 
 ```twig
-{% set promos = shuffle(homepage.promos) %}
-
-{% for promo in promos %}
-    <div class="promo {{ promo.slug }}">
-        <h3>{{ promo.title }}</h3>
-        <p>{{ promo.description }}</p>
-        <a class="cta" href="{{ promo.ctaUrl }}">{{ promo.ctaLabel }}</a>
-    </div>
-{% endfor %}
+{{ floor(42.9) }}
+{# Output: 42 #}
 ```
 
-## `shuffle( array )`
+## `getenv`
 
-SVG 文書を出力します。
+Returns the value of an environment variable.
 
 ```twig
 {{ getenv('MAPS_API_KEY') }}
 ```
 
-## `siteUrl( path, params, scheme, siteId )`
+## `gql`
 
-次のものを渡すことができます。
+Executes a GraphQL query against the full schema.
 
 ```twig
 {% set result = gql('{
@@ -284,15 +307,15 @@ SVG 文書を出力します。
     <img class="thumb" src="{{ image.url }}" alt="{{ image.altText }}">
 
     {{ entry.shortDescription|markdown }}
-    <p><a href="{{ entry.url }}">Continue reading…</a></p>
+    <p><a href="{{ entry.url }}">Continue reading… </a></p>
 {% endfor %}
 ```
 
-## `svg( svg, sanitize, namespace, class )`
+## `parseEnv`
 
 Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
 
-## `url( path, params, scheme, mustShowScriptName )`
+## `head`
 
 「head」に登録されたスクリプトやスタイルを出力します。 `</head>` タグの直前に配置する必要があります。
 
@@ -444,9 +467,9 @@ Similar to [url()](#url-path-params-scheme-mustshowscriptname), except _only_ fo
 
 The `siteUrl()` function has the following arguments:
 
-* **`siteId`** – URL が指すべきサイト ID。 デフォルトでは、現在のサイトが使用されます。
+* **`path`** – 結果となる URL がサイトで指すべきパス。 それは、ベースサイト URL に追加されます。
 * **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+* **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。 デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。 そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
 * **`siteId`** – The ID of the site that the URL should point to. By default the current site will be used.
 
 ## `svg`
@@ -526,6 +549,19 @@ If `html` is included in the attributes argument (and `text` isn’t), its value
 
 All other keys passed to the second argument will be set as attributes on the tag, using <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
 
+If an attribute is set to `true`, it will be added without a value.
+
+```twig
+{{ tag('input', {
+    id: "foo",
+    name: "bar",
+    required: true
+}) }}
+{# Output: <input id="foo" name="bar" required> #}
+```
+
+Any attribute set to `null` or `false` will be omitted.
+
 ## `url`
 
 Returns a URL.
@@ -538,9 +574,9 @@ Returns a URL.
 
 The `url()` function has the following arguments:
 
-* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+* **`siteId`** – URL が指すべきサイト ID。 デフォルトでは、現在のサイトが使用されます。
 * **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+* **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。 デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。 そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
 * **`mustShowScriptName`** – ここに `true` がセットされている場合、「index.php」を含めた URL が返され、コンフィグ設定の <config3:omitScriptNameInUrls> config setting. （ブラウザのアドレスバーに表示されない URL と .htaccess ファイルのリダイレクトとの衝突を避けたいような、Ajax 経由の POST リクエストで使用される URL の場合に有用です。 ）
 
 ::: tip
