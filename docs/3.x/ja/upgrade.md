@@ -22,7 +22,7 @@ Craft 3 をダウンロードして準備したら、次のステップに従っ
 
 1. 古い `craft/config/db.php` から新しいプロジェクトの `.env` ファイルにデータベース接続設定を定義します。
 
-   ::: tip 現在のテーブル接頭辞がそれである場合、`DB_TABLE_PREFIX="craft"` を忘れずにセットしてください。 :::
+   ::: tip 現在のテーブル接頭辞がそれである場合、`DB_TABLE_PREFIX="craft"` を忘れずにセットしてください。
 :::
 
 2. 古い `craft/config/general.php` ファイルのすべての設定を新しいプロジェクトの `config/general.php` ファイルにコピーします。
