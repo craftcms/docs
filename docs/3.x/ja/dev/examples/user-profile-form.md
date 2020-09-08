@@ -116,6 +116,11 @@ You can create a form that allows users to edit their profile using the followin
   {{ _self.errorList(user.getErrors('bio')) }}
 
   <input type="submit" value="Save Profile">
+</form> 'error',
+  }) }}
+  {{ _self.errorList(user.getErrors('bio')) }}
+
+  <input type="submit" value="Save Profile">
 </form>
 ```
 
