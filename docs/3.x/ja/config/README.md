@@ -1,8 +1,8 @@
-# コンフィギュレーションの概要
+# Craft の拡張
 
-必要に応じて Craft を設定するには、いくつかの方法があります。
+Craft では、テンプレートを利用してサイトの HTML 出力を定義します。
 
-## 一般設定
+## モジュール 対 プラグイン
 
 Craft は、いくつかの[一般設定](config-settings.md)をサポートしています。 `config/general.php` ファイルでデフォルト値を上書きすることができます。
 
@@ -12,18 +12,18 @@ return [
 ];
 ```
 
-## データベース接続設定
+## テンプレートのローカライゼーション
 
 Craft は、いくつかの[データベース接続設定](db-settings.md)をサポートしています。 `config/db.php` ファイルでデフォルト値を上書きすることができます。
 
 ## Guzzle 設定
 
-Craft は、次のような HTTP リクエストを作成するたびに [Guzzle 6](http://docs.guzzlephp.org/en/latest/) を使用します。
+モジュールは新しい[ダッシュボードウィジェットタイプ](widget-types.md)を提供するような単一の目的を満たすためにシンプルか、 Eコマースアプリケーションのような完全に新しいコンセプトをシステムに導入するために複雑であり得ます。
 
-- Craft のアップデートをチェックするとき
-- Craft のサポートウィジェットからサポートリクエストを送信するとき
-- Feed ウィジェットから RSS フィードを読み込むとき
-- Amazon S3 のようなリモートボリュームにあるアセットを操作するとき
+- Craft のプラグインストアからインストール / 試用 / 購入することができます。
+- インストール、アップデート、または、アンインストール時にデータベースを変更できます。
+- コントロールパネルの「設定」セクション内に独自の設定ページを持てます。
+- Composer コマンドを実行することなく、管理者によって有効 / 無効にすることができます。
 
 `config/` フォルダに `guzzle.php` ファイルを作成することによって、これらのリクエストを送信する際に Guzzle が使用するコンフィグ設定をカスタマイズできます。 そのファイルは、設定を上書きした配列を返さなければなりません。
 
@@ -52,21 +52,21 @@ Craft のいくつかの設定やファンクションでは、基本ファイ�
 
 次のエイリアスは、そのまま利用可能です。
 
-| エイリアス                | 説明                                                              |
-| -------------------- | --------------------------------------------------------------- |
-| `@app`               | `vendor/craftcms/cms/src/` のパス                                  |
-| `@config`            | `config/` フォルダのパス                                               |
-| `@contentMigrations` | `migrations/` フォルダのパス                                           |
-| `@craft`             | `vendor/craftcms/cms/src/` のパス                                  |
-| `@lib`               | `vendor/craftcms/cms/lib/` のパス                                  |
-| `@root`              | ルートプロジェクトのパス（PHP 定数の [CRAFT_BASE_PATH](#craft-base-path) と同じ） |
-| `@runtime`           | `storage/runtime/` フォルダのパス                                      |
-| `@storage`           | `storage/` フォルダのパス                                              |
-| `@templates`         | `templates/` フォルダのパス                                            |
-| `@translations`      | `translations/` フォルダのパス                                         |
-| `@vendor`            | `vendor/` フォルダのパス                                               |
-| `@web`               | リクエストのために読み込まれた `index.php` ファイルを含むフォルダの URL                    |
-| `@webroot`           | リクエストのために読み込まれた `index.php` ファイルを含むフォルダのパス                      |
+| エイリアス                | 説明                                                                                                          |
+| -------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `@app`               | Craft には、テンプレートへの Unix スタイルのファイルシステムのパスや `templates` フォルダからの相対パスという、それぞれのケースで適用される標準的なテンプレートパスのフォーマットがあります。 |
+| `@config`            | `config/` フォルダのパス                                                                                           |
+| `@contentMigrations` | `migrations/` フォルダのパス                                                                                       |
+| `@craft`             | 例えば、`templates/recipes/entry.twig` にテンプレートがある場合、次のテンプレートパスで指し示すことができます。                                     |
+| `@lib`               | `vendor/craftcms/cms/lib/` のパス                                                                              |
+| `@root`              | ルートプロジェクトのパス（PHP 定数の [CRAFT_BASE_PATH](#craft-base-path) と同じ）                                             |
+| `@runtime`           | `storage/runtime/` フォルダのパス                                                                                  |
+| `@storage`           | `storage/` フォルダのパス                                                                                          |
+| `@templates`         | 例えば、`templates/recipes/ingredients/index.twig` にテンプレートがある場合、次のテンプレートパスで指し示すことができます。                         |
+| `@translations`      | `translations/` フォルダのパス                                                                                     |
+| `@vendor`            | `vendor/` フォルダのパス                                                                                           |
+| `@web`               | リクエストのために読み込まれた `index.php` ファイルを含むフォルダの URL                                                                |
+| `@webroot`           | リクエストのために読み込まれた `index.php` ファイルを含むフォルダのパス                                                                  |
 
 コンフィグ設定 <config3:aliases> config setting if needed. It’s recommended to override the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
 
@@ -130,7 +130,7 @@ You can parse aliases in your templates by passing them to the [alias()](../dev/
 
 ## URL ルール
 
-`config/routes.php` にカスタムの [URL ルール](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) を定義することができます。 詳細については、[ルーティング](../routing.md) を参照してください。
+`config/routes.php` にカスタムの [URL ルール](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) を定義することができます。 詳細については、[ローカライゼーションガイド](../sites.md)を参照してください。
 
 ## PHP 定数
 
@@ -166,7 +166,7 @@ return [
 ```
 
 ::: tip
-If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather than <craft3:craft\cache\DbCache>, you can safely switch to the latter if you remove your `cache` table’s `dateCreated`, `dateUpdated`, and `uid` columns.
+PHP コードはテンプレート内で使用できませんが、Craft はニーズに合わせて様々な方法で [Twig を拡張する](../extend/extending-twig.md)手段を提供しています。
 :::
 
 #### APC Example
@@ -420,7 +420,7 @@ Some settings in the control panel can be set to environment variables (like the
   - **Preview Target URIs**
 - Asset Volumes
   - **Base URL**
-  - **File System Path** (Local)
+  - ほとんどのカスタマイズは、**モジュール**、または、**プラグイン**の形で行われます。
 - Email
   - **System Email Address**
   - **Sender Name**
