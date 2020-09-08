@@ -7,7 +7,7 @@
 行列フィールドの設定は、次の通りです。
 
 - **構成** – ここでは、行列フィールドでどのようなブロックタイプが利用可能か、それらのブロックタイプがどのようなサブフィールドを持つ必要があるかを設定します。
-- **最大ブロック数** – フィールドに作成できるブロック数の上限（デフォルトは無制限です） (Default is no limit.)
+- **最大ブロック数** – フィールドに作成できるブロック数の上限（デフォルトは無制限です） (Default is no limit.) (Default is no limit.)
 
 ## フィールド
 
@@ -98,7 +98,7 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 ```
 
 ::: tip
-このコードは [switch](dev/tags.md#switch) タグを利用して、簡略化できます。 :::
+このコードは [switch](dev/tags.md#switch) タグを利用して、簡略化できます。
 :::
 
 If you only want the first block, call [one()](craft3:craft\db\Query::one()) instead of `all()`, and then make sure it returned something:
