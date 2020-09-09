@@ -2,9 +2,15 @@
 
 Theme and significant content changes will be documented in this file.
 
-## 2002-09-04
+## 2020-09-07
+### Added
+- Documented Craft and Commerce template hooks.
+### Fixed
+- Updated references to deprecated `currentUser.customerFieldHandle` and documented the change in the Commerce 3 upgrade notes.
+
+## 2020-09-04
 ### Changed
-- Updated the “Propagating Changes” section of the Project Config page, per chanegs in Craft 3.5.6. 
+- Updated the “Propagating Changes” section of the Project Config page, per chanegs in Craft 3.5.6.
 
 ## 2020-09-01
 ### Added

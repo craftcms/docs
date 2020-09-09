@@ -29,7 +29,7 @@
 プラグインディレクトリの名前は、重要ではありません。 簡単に識別できるものを選んでください。
 
 ::: tip
-数クリックでプラグインの土台を作成できる [pluginfactory.io](https://pluginfactory.io/) を利用してください。 :::
+数クリックでプラグインの土台を作成できる [pluginfactory.io](https://pluginfactory.io/) を利用してください。
 :::
 
 ## composer.json
@@ -88,7 +88,7 @@
 [MIT](https://opensource.org/licenses/MIT) よりむしろ [Craft license](https://craftcms.github.io/license/) でプラグインをリリースしたい場合、`license` 値を `"proprietary"` に変更してください。
 
 ::: tip
-Composer が厳密に要求しているわけではありませんが、プラグインを開発する際にいくつかのことが簡単に行えるよう `composer.json` へ明示的に`version` を設定することをお勧めします。 そして、アップデートし続けることを忘れないでください！ :::
+Composer が厳密に要求しているわけではありませんが、プラグインを開発する際にいくつかのことが簡単に行えるよう `composer.json` へ明示的に`version` を設定することをお勧めします。 そして、アップデートし続けることを忘れないでください！
 :::
 
 In addition to `name` and `handle` (which are both required), there are a few other things you can include in that `extra` object:
@@ -154,7 +154,7 @@ During development, the easiest way to work on your plugin is with a [path repos
 ```
 
 ::: tip
-`url` 値にプラグインのソースディレクトリを絶対パスまたは相対パスで設定します。 （サンプルの `../my-plugin` は、プロジェクトフォルダーと並んでプラグインのフォルダが存在することを前提としています。
+`url` 値にプラグインのソースディレクトリを絶対パスまたは相対パスで設定します。 （サンプルの `../my-plugin` は、プロジェクトフォルダーと並んでプラグインのフォルダが存在することを前提としています。 :::
 :::
 
 ターミナル上で Craft プロジェクトへ移動し、Composer にプラグインの追加を伝えてください。 （`composer.json` ファイルでプラグインに付けたパッケージ名と同じものを使用してください。

@@ -89,6 +89,7 @@ Use the table below to update each breaking change in your Twig templates.
 | `craft.commerce.primaryPaymentCurrency`   | `craft.commerce.paymentCurrencies.primaryPaymentCurrency`           |
 | `craft.commerce.statesArray`              | `craft.commerce.states.allStatesAsList`                             |
 | `craft.commerce.states.allStatesAsList`   | `craft.commerce.states.getAllEnabledStatesAsListGroupedByCountryId` |
+| `currentUser.customerFieldHandle`         | `craft.commerce.customers.customer` |
 
 ## Form Action Changes
 
@@ -175,3 +176,21 @@ Event::on(
     }
 );
 ```
+
+## Current Customer
+
+The Customer field on Craft’s [`currentUser`](/3.x/dev/global-variables.md#currentuser) (i.e. `currentUser.customerFieldHandle`, where `customerFieldHandle` is the field handle you chose) was removed in Commerce 3. Retrieving the current customer can now be done consistently through the customers service:
+
+::: code
+```twig
+// gets the customer active in the current session
+{% set customer = craft.commerce.customers.customer %}
+```
+
+```php
+// gets the customer active in the current session
+$customer = \craft\commerce\Plugin::getInstance()
+    ->getCustomers()
+    ->customer;
+```
+:::

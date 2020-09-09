@@ -1,51 +1,45 @@
-# プロジェクトコンフィグのサポート
+# プロジェクトコンフィグ
 
-あなたのプラグインがメインの[プラグイン設定](plugin-settings.md)以外の設定を保存するコンポーネントを持つ場合、[プロジェクトコンフィグ](../project-config.md)のサポートに適しているかもしれません。
+Each Craft installation has a central place it keeps track of **project config**, a sharable configuration store that makes it easier for developers to collaborate and deploy site changes across multiple environments.
 
-## プロジェクトコンフィグのサポートがあなたに向いているか？
+## プロジェクトコンフィグファイルの有効化
 
-プロジェクトコンフィグによって管理されるコンポーネントは、開発環境の管理者だけが編集可能[であるべき](../project-config.md#production-changes-may-be-forgotten)です。
+Craft はプロジェクトコンフィグに次の設定を保存します。
 
 自身に問いかけてください。
 
-- このコンポーネントは管理者以外でも管理できるのか？
-- 管理者以外が管理可能な何かに依存していないか？
-- コンポーネントが開発環境でしか編集できない場合、管理者のワークフローにとって扱いにくくならないか？
+- アセットボリューム、および、名前付けされた画像の変形
+- カテゴリグループ
+- Craft、および、プラグインのスキーマのバーション
 
 いずれかの答えが（現在、または、近い将来において）「はい」の場合、プロジェクトコンフィグのサポートに向いていません。
 
-## プロジェクトコンフィグサポートの実装
+## 注意事項
 
-プラグインにプロジェクトコンフィグのサポートを追加するには、サービスの CRUD コードを少し変える必要があります。
+To start sharing a project config across multiple environments, follow these steps:
 
-- CRUD メソッドは、データベース内のものを直接変更するのではなく、プロジェクトコンフィグを更新する必要があります。
-- データベースの変更は、プロジェクトコンフィグの変更の結果によってのみ発生します。
+- メール設定の Gmail / SMTP パスワード
+- AWS S3 ボリュームのシークレットアクセスキー
 
 Craft Commerce で製品タイプを保存するためにどのように機能するかを見てみましょう。
 
-### ステップ 1：設定変更の感知
+### Composer があるでしょう
 
-プラグインの `init()` メソッドで <craft3:craft\services\ProjectConfig::onAdd()>、[onUpdate()](craft3:craft\services\ProjectConfig::onUpdate())、および、[onRemove()](craft3:craft\services\ProjectConfig::onRemove()) を使用し、プロジェクトコンフィグから製品タイプが登録、更新、削除されたときに発動されるイベントリスナーを登録します。
+There are a few things you should keep in mind when working with the project config:
 
 ```php
-use craft\events\ConfigEvent;
-use craft\services\ProjectConfig;
+// Bad:
+'secret' => getenv('SECRET_ACCESS_KEY'),
 
-public function init()
-{
-    parent::init();
-
-    Craft::$app->projectConfig
-        ->onAdd('productTypes.{uid}', [$this->productTypes, 'handleChangedProductType'])
-        ->onUpdate('productTypes.{uid}', [$this->productTypes, 'handleChangedProductType'])
-        ->onRemove('productTypes.{uid}', [$this->productTypes, 'handleDeletedProductType']);
-}
+// Good:
+'secret' => '$SECRET_ACCESS_KEY',
 ```
 
-これを避けるために、プロジェクトコンフィグを変更する前に必ず _`project.yaml` の_プラグインのスキーマバージョンを確認してください。 （[ProjectConfig::get()](craft3:craft\services\ProjectConfig::get()) を呼び出す際の第2引数に `true`を渡すことによって、それを行います。
+::: tip
+プラグインがプロジェクトコンフィグに追加情報を保存できます。 どのようにするかを知るには、[プロジェクトコンフィグのサポート](extend/project-config.md)を参照してください。
 :::
 
-### ステップ 2：設定変更の操作
+### 機密情報は `project.yaml` に保存できます
 
 次に、config イベントリスナーで参照している `handleChangedProductType()`、および、`handleDeletedProductType()` メソッドを追加してください。
 
@@ -131,21 +125,21 @@ public function handleDeletedProductType(ConfigEvent $event)
 }
 ```
 
-この時点で、プロジェクトコンフィグに手動で製品タイプを追加または削除した場合、それらの変更はデータベースに同期され、イベントトリガーの `afterSaveProductType`、`beforeApplyProductTypeDelete`、および、`afterDeleteProductType` が発動します。
+Some of your system components may have required sensitive information in their settings, such as:
 
 ::: tip
 あなたのコンポーネント設定が他のコンポーネント設定を参照している場合、ハンドラーメソッド内で [ProjectConfig::processConfigChanges()](craft3:craft\services\ProjectConfig::processConfigChanges()) を呼び出すことで、他の設定変更が最初に処理されることが保証されます。
 
 ```php
-Craft::$app->projectConfig->processConfigChanges('productTypeGroups');
+php craft project-config/rebuild
 ```
 :::
 
-### ステップ 3：設定への変更のプッシュ
+### 本番環境の変更は忘れられるかもしれません
 
 あとは、データベースの更新ではなくプロジェクトコンフィグを更新するよう、サービスメソッドをアップデートするだけです。
 
-プロジェクトコンフィグの項目は、<craft3:craft\services\ProjectConfig::set()> を使用して追加または更新したり、[remove()](craft3:craft\services\ProjectConfig::remove()) を使用して削除できます。
+If any updates are made on production that updates `project.yaml` there, those changes will be lost the next time your project is deployed and `project.yaml` is overwritten.
 
 ::: tip
 `ProjectConfig::set()` will sort all associative arrays by their keys, recursively. If you are storing an associative array where the order of the items is important (e.g. editable table data), then you must run the array through <craft3:craft\helpers\ProjectConfig::packAssociativeArray()> before passing it to `ProjectConfig::set()`.
@@ -213,36 +207,30 @@ public function deleteProductType($productType)
 
 ## プロジェクトコンフィグのマイグレーション
 
-プラグインの[マイグレーション](migrations.md)から、プロジェクトコンフィグの項目を追加、更新、削除することができます。 ただし、データベースを変更するよりも少し複雑です。 というのも、異なる環境の同じ設定に対し同じマイグレーションがすでに実行されている可能性があるためです。
+Any plugins that are storing configuration settings outside of their main plugin settings will need to be updated to [support the project config](extend/project-config.md). So there may still be some cases where changes need to be manually made on each environment.
 
 新しいプラグインのマイグレーションが保留中、_かつ_、 `project.yaml` の変更が保留中の場合、Craft は最初にマイグレーションを実行してから `project.yaml` の変更を同期します。
 
 1. プロジェクトコンフィグを変更する新しいマイグレーションが含まれるプラグインが、環境 A でアップデートされました。
-3. 更新された `composer.lock`、および、`project.yaml` が Git にコミットされました。
-4. Craft が新しいプラグインのマイグレーションを実行し、_さらに_、`project.yaml` の変更を同期しなければならない環境 B に、その Git のコミットがプルされました。
+3. Ensure that your primary environment is running the latest version of Craft.
+4. If you were already running Craft 3.1 or later, run `php craft project-config/rebuild` on that environment, to ensure that its project config is up-to-date with config settings stored throughout the database.
 
-プラグインのマイグレーションで環境 B に対して同じプロジェクトコンフィグの変更が行われる場合、`project.yaml` で保留中の変更と競合します。
+Going forward, Craft will start updating `config/project.yaml` any time something changes that is managed by the project config.
 
-If your plugin migration were to make the same project config changes again on Environment B, those changes will conflict with the pending changes in `project.yaml`.
+One way to keep project config in sync is to version control `project.yaml` and use the console command for syncing any changes with Craft:
 
 To avoid this, always check your plugin’s schema version _in `project.yaml`_ before making project config changes. (You do that by passing `true` as the second argument when calling [ProjectConfig::get()](craft3:craft\services\ProjectConfig::get()).)
 
 ```php
-public function safeUp()
-{
-    // Don't make the same config changes twice
-    $schemaVersion = Craft::$app->projectConfig
-        ->get('plugins.<plugin-handle>.schemaVersion', true);
+::: warning
+Craft 3.5 added changes to project config, see <a href="https://craftcms.com/knowledge-base/upgrading-to-craft-3-5#project-config-workflow">craftcms.com/knowledge-base/upgrading-to-craft-3-5</a>.
 
-    if (version_compare($schemaVersion, '<NewSchemaVersion>', '<')) {
-        // Make the config changes here...
-    }
-}
+:::
 ```
 
 ## プロジェクトコンフィグデータの再構築
 
-If your plugin is storing data in both the project config and elsewhere in the database, you should listen to <craft3:craft\services\ProjectConfig::EVENT_REBUILD> (added in Craft 3.1.20) to aid Craft in rebuilding the project config based on database-stored data, when the `php craft project-config/rebuild` command is run.
+This will treat all project config values as added or updated, resulting in a longer sync process and potentially overriding any expected changes that might have been favored in the database.
 
 ```php
 use craft\events\RebuildConfigEvent;

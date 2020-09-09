@@ -110,6 +110,11 @@
   {{ _self.errorList(user.getErrors('bio')) }}
 
   <input type="submit" value="Save Profile">
+</form> 'error',
+  }) }}
+  {{ _self.errorList(user.getErrors('bio')) }}
+
+  <input type="submit" value="Save Profile">
 </form>
 ```
 

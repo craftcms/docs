@@ -1,4 +1,4 @@
-# Installation Instructions
+# Installation
 
 ## Step 1: Download Craft
 

@@ -320,6 +320,8 @@ boolean, 0 or 1 (defaults to 0)
 
 Re-indexes assets from the given volume handle.
 
+It’s possible to provide a volume sub-path to index, e.g. `php craft index-assets/one volume-handle/path/to/folder`.
+
 **Parameters**
 
 `handle`
