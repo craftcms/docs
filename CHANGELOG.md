@@ -2,6 +2,11 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-09-09
+### Added
+- Added Japanese translations kindly provided by @dreamseeker ([#69](https://github.com/craftcms/docs/pull/69)).
+- Merged updates from Crowdin.
+
 ## 2020-09-07
 ### Added
 - Documented Craft and Commerce template hooks.
