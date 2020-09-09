@@ -1,8 +1,15 @@
 # プロジェクトコンフィグ
 
-Each Craft installation has a central place it keeps track of **project config**, a sharable configuration store that makes it easier for developers to collaborate and deploy site changes across multiple environments.
+Craft keeps track of each project’s configuration in a central store called **project config**.
 
-Craft はプロジェクトコンフィグに次の設定を保存します。
+As you make changes to system settings, Craft will record those setting values to YAML files in a `config/project/` folder. You can then commit those files to your Git repository, just like your templates and front-end resources.
+
+It offers two benefits:
+
+1. You’ll be able to keep track of your project’s changing state over time.
+2. You can propagate new changes to other development/staging/production environments, rather than manually reapplying them.
+
+### What’s Stored in Project Config
 
 - アセットボリューム、および、名前付けされた画像の変形
 - カテゴリグループ
@@ -22,84 +29,65 @@ Craft はプロジェクトコンフィグに次の設定を保存します。
 - User settings and user groups
 
 ::: tip
-プラグインがプロジェクトコンフィグに追加情報を保存できます。 どのようにするかを知るには、[プロジェクトコンフィグのサポート](extend/project-config.md)を参照してください。 :::
+Plugins can store additional things in the project config as well. See [Supporting Project Config](extend/project-config.md) to learn how.
 :::
 
-::: warning
-Craft 3.5 added changes to project config, see [craftcms.com/knowledge-base/upgrading-to-craft-3-5](https://craftcms.com/knowledge-base/upgrading-to-craft-3-5#project-config-workflow).
-:::
+## Environment Setup
 
-## プロジェクトコンフィグファイルの有効化
-
-To start sharing a project config across multiple environments, follow these steps:
+Before you start propagating project config changes across your environments, make sure each environment is in a consistent state.
 
 1. Pick a primary environment that has the most up-to-date data. (If your project is already live, this should be your production environment.)
-2. Ensure that your primary environment is running the latest version of Craft.
-3. If you were already running Craft 3.1 or later, run `php craft project-config/rebuild` on that environment, to ensure that its project config is up-to-date with config settings stored throughout the database.
-4. プライマリ環境の `config/general.php` で <config3:useProjectConfigFile> 設定を有効にしてください。
+2. Ensure your primary environment is running the latest version of Craft.
+3. Go to Utilities → Project Config on that environment, and click the “Rebuild” button to ensure that its project config is up to date with settings stored throughout the database.
+4. Back up the database on the primary environment.
+5. For all other environments, restore the database backup created in the previous step, delete the contents of the `config/project/` folder, and then load the site in your browser to ensure it works. (Craft will regenerate the YAML files in `config/project/` the first time the control panel is accessed.)
+6. Disable the <config3:allowAdminChanges> config setting on all non-development environments, to avoid [losing changes unexpectedly](#production-changes-may-be-forgotten) going forward.
 
-    ```php
-    return [
-    '*' => [
-        'useProjectConfigFile' => true,
-    ],
-   ];
-    ```
+Now you’re ready to start propagating changes in your `config/project/` folder to other environments.
 
-5. プライマリ環境の任意のページをロードすると、Craft は `config/project.yaml` ファイルを生成できます。
-6. Backup the database on the primary environment.
-7. For all other environments, restore the database backup created in step 6, and save a copy of the `config/project.yaml` file created in step 5.
+## Propagating Changes
 
-Going forward, Craft will start updating `config/project.yaml` any time something changes that is managed by the project config. And any time Craft detects that `project.yaml` has been updated on its own (e.g. if it was changed in a Git commit that was recently pulled down), any changes in it will be propagated to the local Craft install.
+As you make changes in a development environment, you will notice the contents of your `config/project/` folder are updated to reflect those changes. Commit those files to your Git repository just like your templates, front-end resources, and other project files.
 
-## 注意事項
+When you [deploy your changes to other environments](https://craftcms.com/knowledge-base/deployment-best-practices), you can then _apply_ the project config changes in one of two ways:
+
+1. From the “Project Config” utility in the control panel.
+2. By running the `php craft project-config/apply` terminal command.
+
+Either way, Craft will compare the files in the local `config/project/` folder with its already-loaded project config, and pull in whatever changes it finds.
+
+## Caveats
 
 There are a few things you should keep in mind when working with the project config:
 
-### Composer があるでしょう
+### There Will Be Composer
 
-When Craft detects that `project.yaml` has changed, it will ensure that the versions of Craft and plugins described in the file are compatible with what’s actually installed.
+When Craft detects project config has changed, it will ensure the YAML’s Craft and plugin versions are compatible with what’s actually installed.
 
-If there’s a discrepancy, you will need to fix that before Craft can begin syncing the file’s changes into the loaded project config. The only practical way to do that is by running `composer install`, as access to the control panel will be denied until the discrepancy is resolved.
+If there’s a discrepancy, you’ll need to fix that before Craft can begin syncing the file’s changes into the loaded project config. The only practical way to do that is by running `composer install`, as access to the control panel will be denied until the discrepancy is resolved.
 
 ::: tip
-To avoid downtime on production, you should ensure that `composer install` is built into your deployment workflow.
+It’s a good idea to always run `composer install` before `php craft project-config/apply`.
 :::
 
-### 機密情報は `project.yaml` に保存できます
+### Sensitive Information Could Be Saved in Project Config YAML
 
-Some of your system components may have required sensitive information in their settings, such as:
+Some of your system components may require sensitive information in their settings, such as:
 
 - メール設定の Gmail / SMTP パスワード
 - AWS S3 ボリュームのシークレットアクセスキー
 
-To prevent those values from being saved into your `project.yaml` file, make sure that you are setting those fields to environment variables. See [Environmental Configuration](config/#environmental-configuration) for more information.
+To prevent those values from being saved into your YAML files, make sure you’re setting those fields to environment variables. See [Environmental Configuration](config/#environmental-configuration) for more information.
 
-::: tip
-If you’re overriding volume settings with `config/volumes.php`, you can set sensitive values to the environment variable name rather than calling [getenv()](http://php.net/manual/en/function.getenv.php) to avoid the real values being saved to `project.yaml`.
+### Production Changes May Be Forgotten
 
-```php
-// Bad:
-'secret' => getenv('SECRET_ACCESS_KEY'),
+If any updates are made on production that change project config YAML there, those changes will be lost the next time your project is deployed and `config/project/` is overwritten. For simple Git-based deployments, these changes could result in a conflict that actually _prevents_ the deployment from succeeding.
 
-// Good:
-'secret' => '$SECRET_ACCESS_KEY',
-```
-
-Once you’ve made that change, re-save your volume in the control panel so your `project.yaml` file gets updated with the environment variable name.
-:::
-
-### 本番環境の変更は忘れられるかもしれません
-
-If any updates are made on production that updates `project.yaml` there, those changes will be lost the next time your project is deployed and `project.yaml` is overwritten.
-
-To prevent that, you can set the <config3:allowAdminChanges> config setting to `false` in `config/general.php`:
+To prevent either of these situations, you can set the <config3:allowAdminChanges> config setting to `false` in `config/general.php`:
 
 ```php
 return [
-    '*' => [
-        'useProjectConfigFile' => true,
-    ],
+    '*' => [],
     'production' => [
         // Disable project config changes on production
         'allowAdminChanges' => false,
@@ -107,30 +95,43 @@ return [
 ];
 ```
 
-That will remove the UI for most administrative settings that affect the project config, and also places the project config in a read-only state, so there’s no chance that `project.yaml` will be tampered with.
-
-### プラグインはまだサポートしていないかもしれません
-
-Any plugins that are storing configuration settings outside of their main plugin settings will need to be updated to [support the project config](extend/project-config.md). So there may still be some cases where changes need to be manually made on each environment.
+That will remove the UI for most administrative settings that affect the project config, and also places the project config in a read-only state so there’s no chance its YAML will be altered.
 
 ### 設定データが同期しなくなる可能性があります
 
-If any settings managed by the project config are modified elsewhere in the database, either manually or via a plugin/module that isn’t using the appropriate service, then the project config will be out of sync with those database values, which will likely lead to errors. If that happens, Craft provides a console command that can be run to patch up your project config.
+If any settings managed by the project config are modified elsewhere in the database, either manually or via a plugin/module that isn’t using the appropriate service, the project config will be out of sync with those database values and likely result in errors. If that happens, Craft provides a console command that can be run to patch up your project config:
 
 ```bash
 php craft project-config/rebuild
 ```
 
-One way to keep project config in sync is to version control `project.yaml` and use the console command for syncing any changes with Craft:
+One way to keep project config in sync is to version control `config/project/` and use the console command for applying any changes to Craft:
 
 ```bash
 php craft project-config/apply
 ```
 
-If changes are not being picked up during the sync process, you can use the `--force` option:
+If changes are not being picked up during the apply process, you can use the `--force` option:
 
 ```bash
 php craft project-config/apply --force
 ```
 
 This will treat all project config values as added or updated, resulting in a longer sync process and potentially overriding any expected changes that might have been favored in the database.
+
+## Opting Out
+
+You can opt out of sharing your project config files with other environments by adding the following line to the `.gitignore` file at the root of your project:
+
+```
+/config/project
+```
+
+Then run the following terminal commands to delete all existing `config/project/` files from your repository:
+
+```bash
+git rm -r --cached config/project/\*
+git commit -a -m 'Remove project config files'
+```
+
+Craft will continue recording changes to YAML files within the `config/project/` folder, but they will no longer get committed to your project’s Git repository or shared with other environments.

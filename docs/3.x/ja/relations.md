@@ -69,7 +69,7 @@ Craft のリレーションを操作する前に、それがテンプレート�
 
 エレメントタイプでサポートされている追加パラメータを付加することもできます。
 
-- ドリンクレシピエントリ：ソース <craft3:craft\elements\Tag>
+- ドリンクレシピエントリ：ソース  <craft3:craft\elements\Tag>
 - 原材料：ターゲット
 - A [**hash**](dev/twig-primer.md#hashes) with properties we’ll get into below: `element`, `sourceElement` or `targetElement` optionally with `field` and/or `sourceSite`
 - An [**array**](dev/twig-primer.md#arrays) containing any mixture of the above options, which can start with `and` for relations on all elements rather than _any_ elements (default behavior is `or`, which you can omit or pass explicitly)

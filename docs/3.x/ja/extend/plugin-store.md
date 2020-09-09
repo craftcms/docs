@@ -24,7 +24,7 @@ If you are going with the Craft License, don’t forget to change the `license` 
 プラグインを登録するには、はじめに GitHub の公開リポジトリに公開されていることを確認してください。 次に [id.craftcms.com](https://id.craftcms.com) で Craft ID アカウントを作成し、GitHub アカウントに接続します。
 
 ::: warning
-プラグインが GitHub の organization アカウントで公開されている場合、GitHub アカウントの認証時にその組織がチェックされていることを確認してください。 :::
+プラグインが GitHub の organization アカウントで公開されている場合、GitHub アカウントの認証時にその組織がチェックされていることを確認してください。
 :::
 
 From your Craft ID account, you’ll need to first go to “Account Settings”, make sure “Enable plugin developer features” is checked under your username, and choose “Save”.
@@ -47,7 +47,7 @@ Craft ID アカウントから「Plugins」へ移動後に「Add a plugin」を�
 Pixel & Tonic takes a 20% processing fee on all plugin sales; be sure to factor that into your plugin pricing.
 
 ::: warning
-最初にプラグインを無料で提出した場合、あとから商用に変更することはできません。 ただし、無料エディションから重要な機能を削除しない限り、拡張機能を提供する商用[エディション](plugin-editions.md)を提供できます。 :::
+最初にプラグインを無料で提出した場合、あとから商用に変更することはできません。 ただし、無料エディションから重要な機能を削除しない限り、拡張機能を提供する商用[エディション](plugin-editions.md)を提供できます。
 :::
 
 ### 承認のための提出
@@ -67,7 +67,7 @@ Craft ライセンスにする場合、`composer.json` ファイルの `license`
 プラグインを提出するための準備ができたら、「Submit for approval」ボタンをクリックしてください。 プラグインが承認されると、[plugins.craftcms.com](https://plugins.craftcms.com/) で表示されるようになります。 プラグインが少なくとも1つの[リリース](#plugin-releases)を持っていない限り、アプリ内のプラグインストアで利用可能にならない点に注意してください。
 
 ::: tip
-人々がコマンドラインからプラグインのインストールとアップデートすることもできるよう、プラグインストアに加えて [Packagist](https://packagist.org/) でプラグインを登録したいかもしれません。 しかし、Packagist はプラグインストアの必須要件ではありません。 :::
+人々がコマンドラインからプラグインのインストールとアップデートすることもできるよう、プラグインストアに加えて [Packagist](https://packagist.org/) でプラグインを登録したいかもしれません。 しかし、Packagist はプラグインストアの必須要件ではありません。
 :::
 
 ## プラグインのリリース

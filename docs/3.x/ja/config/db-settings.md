@@ -49,17 +49,17 @@ Craft がサポートするデータベース接続設定の完全なリスト�
 
 ### `attributes`
 
-許可される型 :
+Allowed types :
 :
 
 [array](http://php.net/language.types.array)
 
-デフォルト値 :
+Default value :
 :
 
 `[]`
 
-定義元 :
+Defined by :
 :
 
 [DbConfig::$attributes](craft3:craft\config\DbConfig::$attributes)
@@ -82,12 +82,12 @@ An array of key => value pairs of PDO attributes to pass into the PDO constructo
 
 ### `charset`
 
-許可される型 :
+Allowed types :
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値 :
+Default value :
 :
 
 `'utf8'`
@@ -105,7 +105,7 @@ The charset to use when creating tables.
 
 ### `database`
 
-許可される型 :
+Allowed types :
 :
 
 [string](http://php.net/language.types.string)
@@ -115,14 +115,14 @@ The charset to use when creating tables.
 
 `null`
 
-定義元 :
+定義元 : :
 :
 
 [DbConfig::$database](craft3:craft\config\DbConfig::$database)
 
 
 
-定義元 :
+接続するデータベースのユーザー名。
 
 
 
@@ -133,12 +133,12 @@ The charset to use when creating tables.
 
 [string](http://php.net/language.types.string)
 
-デフォルト値 :
+デフォルト値 : :
 :
 
 `null`
 
-定義元 :
+定義元 : :
 :
 
 [DbConfig::$driver](craft3:craft\config\DbConfig::$driver)
@@ -156,12 +156,12 @@ The charset to use when creating tables.
 
 [string](http://php.net/language.types.string)
 
-デフォルト値 :
+デフォルト値 : :
 :
 
 `null`
 
-定義元 :
+定義元 : :
 :
 
 [DbConfig::$dsn](craft3:craft\config\DbConfig::$dsn)
@@ -179,40 +179,40 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 ### `password`
 
-許可される型 :
+許可される型 : :
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値 :
+デフォルト値 : :
 :
 
 `''`
 
-定義元 :
+定義元 : :
 :
 
 [DbConfig::$password](craft3:craft\config\DbConfig::$password)
 
 
 
-許可される型 :
+デフォルト値 :
 
 
 
 ### `port`
 
-許可される型 :
+許可される型 : :
 :
 
 [integer](http://php.net/language.types.integer)
 
-デフォルト値 :
+デフォルト値 : :
 :
 
 `null`
 
-定義元 :
+定義元 : :
 :
 
 [DbConfig::$port](craft3:craft\config\DbConfig::$port)
@@ -225,17 +225,17 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 ### `schema`
 
-許可される型 :
+許可される型 : :
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値 :
+デフォルト値 : :
 :
 
 `'public'`
 
-定義元 :
+定義元 : :
 :
 
 [DbConfig::$schema](craft3:craft\config\DbConfig::$schema)
@@ -248,17 +248,17 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 ### `server`
 
-許可される型 :
+許可される型 : :
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値 :
+デフォルト値 : :
 :
 
 `null`
 
-定義元 :
+定義元 : :
 :
 
 [DbConfig::$server](craft3:craft\config\DbConfig::$server)
@@ -271,17 +271,17 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 ### `tablePrefix`
 
-許可される型 :
+許可される型 : :
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値 :
+デフォルト値 : :
 :
 
 `''`
 
-定義元 :
+定義元 : :
 :
 
 [DbConfig::$tablePrefix](craft3:craft\config\DbConfig::$tablePrefix)
@@ -294,17 +294,17 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 ### `unixSocket`
 
-Allowed types
+許可される型 : :
 :
 
 [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
-デフォルト値 :
+デフォルト値 : :
 :
 
 `null`
 
-定義元 :
+定義元 : :
 :
 
 [DbConfig::$unixSocket](craft3:craft\config\DbConfig::$unixSocket)
@@ -317,17 +317,17 @@ MySQL のみ。 セットされている場合、（yiic で使用される）CL
 
 ### `url`
 
-Allowed types
+許可される型 : :
 :
 
 [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
-Default value
+デフォルト値 : :
 :
 
 `null`
 
-定義元 :
+定義元 : :
 :
 
 [DbConfig::$url](craft3:craft\config\DbConfig::$url)
@@ -342,24 +342,24 @@ Default value
 
 ### `user`
 
-Allowed types
+許可される型 : :
 :
 
 [string](http://php.net/language.types.string)
 
-Default value
+デフォルト値 : :
 :
 
 `'root'`
 
-Defined by
+定義元 : :
 :
 
 [DbConfig::$user](craft3:craft\config\DbConfig::$user)
 
 
 
-接続するデータベースのユーザー名。
+許可される型 : :
 
 
 

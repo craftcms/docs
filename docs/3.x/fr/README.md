@@ -16,20 +16,9 @@ You can learn all about it at [craftcms.com](https://craftcms.com).
 
 Craft is a self-hosted PHP 7 application, built on [Yii 2](https://www.yiiframework.com/). It can connect to MySQL and PostgreSQL for content storage. Templating is powered by [Twig](https://twig.symfony.com).
 
-## Popular Resources
-
-- **[Documentation](https://craftcms.com/docs/3.x/)** – Read the official docs.
-- **[Guides](https://craftcms.com/guides)** – Follow along with the official guides.
-- **[#craftcms](https://twitter.com/hashtag/craftcms)** – See the latest tweets about Craft.
-- **[Discord](https://craftcms.com/discord)** – Meet the community.
-- **[Stack Exchange](http://craftcms.stackexchange.com/)** – Get help and help others.
-- **[CraftQuest](https://craftquest.io/)** – Watch unlimited video lessons and courses.
-- **[Craft Link List](http://craftlinklist.com/)** – Stay in-the-know.
-- **[nystudio107 Blog](https://nystudio107.com/blog)** – Learn Craft and modern web development.
-
 ## Diving In
 
-If you’re new to Craft CMS the best place to start is [the tutorial](https://docs.craftcms.com/tutorial/).
+If you’re new to Craft CMS the best place to start is [the tutorial](/getting-started-tutorial/).
 
 To start getting acquainted with how content modeling works in Craft, read [Entries](entries.md) and [Fields](fields.md).
 

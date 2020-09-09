@@ -6,7 +6,7 @@
 
 はじめる前に、次のことを確認してください。
 
-- you’ve reviewed the changes in Craft 3 further down this page
+- あなたは[Craft 3 の変更点](changes-in-craft-3.md)を確認しました。
 - あなたのサーバーは Craft 3 の[最小要件](requirements.md)（Craft 3 には PHP 7 以降が必要で、PHP 割当メモリが少なくとも 256 MB 必要です）を満たしています。
 - あなたのサイトは、少なくとも **Craft 2.6.2788** が実行されています。
 - プラグインはすべて最新の状態で、それらが Craft 3 向けにアップデートされていることを確かめました。 （Craft 2 コントロールパネルのアップデートページから、プラグインの Craft 3 互換ステータスのレポートを見ることができます。 ）
@@ -22,7 +22,7 @@ Craft 3 をダウンロードして準備したら、次のステップに従っ
 
 1. 古い `craft/config/db.php` から新しいプロジェクトの `.env` ファイルにデータベース接続設定を定義します。
 
-   ::: tip 現在のテーブル接頭辞がそれである場合、`DB_TABLE_PREFIX="craft"` を忘れずにセットしてください。 :::
+   ::: tip 現在のテーブル接頭辞がそれである場合、`DB_TABLE_PREFIX="craft"` を忘れずにセットしてください。
 :::
 
 2. 古い `craft/config/general.php` ファイルのすべての設定を新しいプロジェクトの `config/general.php` ファイルにコピーします。
@@ -47,7 +47,7 @@ Craft 3 をダウンロードして準備したら、次のステップに従っ
 
 12. プラグインをインストールしている場合、コントロールパネルの「プラグインストア」セクションから Craft 3 対応版をインストールする必要があります。 （追加のアップグレードガイドについては、プラグインのドキュメントを参照してください。 ）
 
-Now that you’ve upgraded your install to use Craft 3, please take some time to review the changes on this page and update your project to follow the changes in Craft 3.
+これで Craft 2 プロジェクトから Craft 3 へのアップグレードが完了しました。 [Craft 3 の変更点](changes-in-craft-3.md)を確認する時間を設けてください。
 
 ### Troubleshooting
 

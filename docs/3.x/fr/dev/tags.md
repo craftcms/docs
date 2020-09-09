@@ -201,9 +201,13 @@ Tip: The `{% cache %}` tag will detect if there are any ungenerated [image trans
 
 ## `css`
 
-The `{% css %}` tag can be used to register a `<style>` tag in the page’s `<head>`.
+The `{% css %}` tag can be used to register a CSS file or a CSS code block.
 
-```css
+```twig
+{# Register a CSS file #}
+{% css "/assets/css/style.css" %}
+
+{# Register a CSS code block #}
 {% css %}
     .content {
         color: {{ entry.textColor }};
@@ -212,12 +216,7 @@ The `{% css %}` tag can be used to register a `<style>` tag in the page’s `<he
 ```
 
 ::: tip
-The tag calls <yii2:yii\web\View::registerCss()> under the hood, which can also be accessed via the global `view` variable.
-
-```twig
-{% set styles = ".content { color: #{entry.textColor}; }" %}
-{% do view.registerCss(styles) %}
-```
+To register a CSS file, the URL must end in `.css`.
 :::
 
 ### Parameters
@@ -336,9 +335,13 @@ By default, `at endBody` will be used.
 
 ## `js`
 
-The `{% js %}` tag can be used to register a `<script>` tag on the page.
+The `{% js %}` tag can be used to register a JavaScript file, or a JavaScript code block.
 
-```javascript
+```twig
+{# Register a JS file #}
+{% js "/assets/js/script.js" %}
+
+{# Register a JS code block #}
 {% js %}
     _gaq.push([
         "_trackEvent",
@@ -349,12 +352,7 @@ The `{% js %}` tag can be used to register a `<script>` tag on the page.
 ```
 
 ::: tip
-The tag calls <yii2:yii\web\View::registerJs()> under the hood, which can also be accessed via the global `view` variable.
-
-```twig
-{% set script = '_gaq.push(["_trackEvent", "Search", "'~searchTerm|e('js')~'"' %}
-{% do view.registerJs(script) %}
-```
+To register a JavaScript file, the URL must end in `.js`.
 :::
 
 ### Parameters
@@ -381,6 +379,22 @@ By default, `at endBody` will be used.
 
 ::: warning
 Setting the position to `on load` or `on ready` will cause Craft to load its internal copy of jQuery onto the page (even if the template is already including its own copy), so you should probably avoid using them in front-end templates.
+:::
+
+#### `with`
+
+Any HTML attributes that should be included on the `<script>` tag.
+
+```twig
+{% js "/assets/js/script.js" with {
+    defer: true
+} %}
+```
+
+Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
+
+::: warning
+The `with` parameter is only available when you specify a JavaScript file; it won’t have any effect with a JavaScript code block.
 :::
 
 ## `namespace`
