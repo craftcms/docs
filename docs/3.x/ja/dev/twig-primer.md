@@ -1,52 +1,53 @@
-# Twig 入門書
+# テンプレート入門
 
-これは Craft のテンプレートエンジンである Twig のコアコンセプトの要約です。
+[Twig](http://twig.sensiolabs.org/) は高速で強力なテンプレートシステムで、一般的に Craft、Drupal、および、（[Timber](https://www.upstatement.com/timber/) プラグイン経由の）WordPress などのコンテンツ管理システムのフロントエンドビューを強化するために利用されています。
 
-これはあくまで入門書であり、 Twig が行うことができるすべての包括的なドキュメントではありません。
+どのように機能するかを見てみましょう。
 
-## 3種類の Twig タグ
+## Twig コードの種類
 
-Twig templates are HTML files that are sprinkled with bits of Twig code. When Twig loads a template, the first thing it will do is separate the raw HTML code from the Twig code. The raw HTML code will be output to the browser without any tampering.
+Twig テンプレートは、Twig コードが散りばめられた HTML ファイルです。Twig がテンプレートを読み込むとき、最初に Twig コードから生の HTML コードを分離することを行います。生の HTML コードは干渉されることなくブラウザに出力されます。
 
-All Twig code follows a basic pattern that separates it from the surrounding HTML. At its outer edges you will find left and right curly braces (`{` and `}`), coupled with another character that signifies what _type_ of Twig code it is. These sets of characters are called “delimiters”.
+すべての Twig コードは、周囲の HTML と区別するための基本的なパターンに従います。その外縁には左右の波括弧（`{` と `}`）があり、Twig コードのどんな _種類_ かを示す別の文字と対になっています。これらの文字セットは「デリミタ」と呼ばれます。
 
-それぞれについて、詳しく見てみましょう。
+Twig で注意しなければいけないデリミタは、3種類あります。
 
-- ロジックタグ
-- 出力タグ
-- コメントタグ
+- `{#` – [コメント](#comments)
+- `{%` – [タグ](#tags)
+- `{{` – [プリント文](#print-statements)
 
-### ロジックタグ
+### コメント
 
-コメント構文は常に `{#` ではじまり `#}` で終わります。 You can use them to leave little notes for yourself in the code.
+Twig コメントは `{#` と `#}` デリミタで囲まれます。これらを利用して、コードの中に自分のための小さなメモを残すことができます。
 
-They are similar to HTML comments in that they won’t show up as rendered text in the browser. The difference is that they will never make it into the HTML source in the first place.
+ブラウザでレンダリングされたテキストとして表示されないという点で、HTML コメントに似ています。違いは、そもそも HTML ソースにもならないということです。
 
 ```twig
 <!-- This will be visible in the HTML source -->
 {# This won’t! #}
 ```
 
-### 出力タグ
+### タグ
 
-出力タグはテンプレートにアプトプットするためのものなので、 Twig の命令タグ内に記述することは絶対にできません
+Twig タグは `{%` と `%}` デリミタで囲まれていて、条件文やループ、変数の定義、テンプレートのインクルードなど、テンプレートの _ロジック_ を定義するために使用されます。
 
-出力タグは、レンダリングされた HTML にプリントする責任があります。
+`{%` and `%}` デリミタ内の構文はタグごとに異なりますが、常に同じもの、つまりタグ名ではじまります。
 
-In their simplest form, the tag name might be all that’s required. Take Craft’s [requireLogin](tags.md#requirelogin) tag, for example:
-
-```twig
-<p>The current time is {{ now|date("g:i a") }}.</p>
-```
-
-Other tags can accept parameters. In the case of Craft’s [exit](tags.md#exit) tag, you can optionally set the HTTP status code that should be sent to the browser in the response:
+最も単純な形式では、タグ名だけを必要とします。例えば、Craft の [requireLogin](tags.md#requirelogin) タグを見てみましょう。
 
 ```twig
-{% set entry = craft.entries.section( {{ sectionId }} ).one() %}
-{% set entry = craft.entries.section( {% if filterBySection %} sectionId {% endif %} ) %}
+{# A user must be logged in to visit this page #}
+{% requireLogin %}
 ```
 
-これらの例は、正しくありません。
+他のタグは、パラメータを受け取ることができます。Craft の [exit](tags.md#exit) タグの場合、レスポンスでブラウザに送信されるべき HTTP ステータスコードをオプションでセットできます。
+
+```twig
+{# This is not the page you are looking for #}
+{% exit 404 %}
+```
+
+JavaScript コードをページに登録する [js](tags.md#js) タグのように、いくつかのタグはペアで使用するためのものです。
 
 ```twig
 {% js %}
@@ -54,74 +55,85 @@ Other tags can accept parameters. In the case of Craft’s [exit](tags.md#exit) 
 {% endjs %}
 ```
 
-こちらは正しいです。
+いくつかのタグは、開始タグと終了タグの _間に_ ネストされたタグを持つことができます。
 
 ```twig
-{# Loop through the recipes #}
+{% if currentUser %}
+  <a href="/logout">Logout</a>
+{% else %}
+  <a href="/login">Login</a>
+{% endif %}
 ```
 
-リソース：
+Craft テンプレートで利用可能なタグのリストは、[タグ](tags.md)ページを参照してください。
 
-### コメントタグ
+### プリント文
 
-To output additional HTML code dynamically, use a print statement. They are wrapped in `{{` and `}}` delimiters, and you can put just about anything inside them, as long as it can be treated as a [string](#strings).
+追加の HTML コードを動的に出力するには、プリント文を使用します。それらは `{{` と `}}` デリミタで囲まれ、Twig が[文字列](#strings)として扱えるものであれば、その中にほぼ何でも記述できます。
 
 ```twig
-{% set style = 'stirred' %}
-
-{{ style }}
+<p>Hi, {{ currentUser.name }}</p>
 ```
 
 ::: tip
-Don’t place a print statement (or any other Twig code) within another print statement. See [Combining Strings](#combining-strings) to learn how to combine strings with other expressions.
+プリント文（または、他の Twig コード）を他のプリント文の中に配置しないでください。文字列を他の式と組み合わせる方法について知るには、[文字列の組み合わせ](#combining-strings)を参照してください。
 :::
 
-#### Auto-escaping
+#### 自動エスケープ
 
-コメントタグの内側に記述された内容は、HTML コメントとは異なり、最終的なテンプレートにレンダリングされません。
+ほとんどの場合、プリント文はコンテンツを実際に出力する前に自動的に HTML エンコード します（**自動エスケープ**と呼ばれます）。これは、クロスサイトスクリプティング（XSS）の脆弱性から保護するのに役立ちます。
 
-For example, let’s say you have a search results page, where the search query is defined by a `q` query string parameter, and in the event that there are no results, you want to output a message to the user that includes the query:
+例えば、検索クエリが `q` クエリ文字列パラメータで定義されている検索結果ページがあるとします。そして、検索結果がない場合、クエリを含むメッセージをユーザーに出力したいとします。
 
 ```twig{16}
-{{ siteName|upper }}
-```
+{% set query = craft.app.request.getQueryParam('q') %}
 
-`set` タグを利用して、独自の変数を割り当てることができます。
+{% set entries = craft.entries()
+  .section('blog')
+  .search(query)
+  .all() %}
 
-```html
-{{ now|date("M d, Y") }}
-```
-
-Which would cause JavaScript to execute on the page, even though it wasn’t part of the original Twig template. But thanks to auto-escaping, you’d actually end up with this HTML:
-
-```html
-<h3>Watch me count to ten!</h3>
-<ul>
-    {% for num in range(1, 10) %}
-        <li class="{{ cycle(['odd', 'even'], loop.index0) }}">
-            {{ num }}
-        </li>
+{% if entries %}
+  <h3>Search Results</h3>
+  <ul>
+    {% for entry in entries %}
+      <li>{{ entry.getLink() }}</li>
     {% endfor %}
-</ul>
+  </ul>
+{% else %}
+  <p>Sorry, no results for <strong>{{ query }}</strong> were found.</p>
+{% endif %}
 ```
 
-There are two cases where print statements will output content directly, without auto-escaping it first:
+自動エスケープではない場合、`<script>alert('Uh-oh')</script>` を検索すると次のような HTML になります。
 
-- When the content is deemed safe by the last tag or function that was called within the print statement (such as the [markdown](filters.md#markdown-or-md) filter).
-- When you explicitly mark the content as safe using a [raw](https://twig.symfony.com/doc/2.x/filters/raw.html) filter.
+```html
+<p>Sorry, no results for <strong><script>alert('Uh-oh')</script></strong>.</p>
+```
 
-#### Manual escaping
+これにより、元の Twig テンプレートに含まれない場合でも、JavaScript が実行される原因となります。しかし、自動エスケープのお陰で、実際には次のような HTML になります。
 
-There are times where you may need to work with both trusted and untrusted content together. For example, let’s say you want to output user-supplied content as Markdown, but you want to ensure they haven’t put anything nefarious in there first.
+```html
+<p>Sorry, no results for <strong>&lt;script&gt;alert('Uh-oh')&lt;/script&gt;</strong>.</p>
+```
 
-リソース：
+最初に自動エスケープせずに、プリント文がコンテンツを直接出力するケースは2つあります。
+
+- プリント文の中で呼び出された最後のタグや（[markdown](filters.md#markdown-or-md) フィルタのような）ファンクションによって、コンテンツが安全であるとみなされた場合
+- [raw](https://twig.symfony.com/doc/2.x/filters/raw.html) フィルタを利用して、コンテンツが安全だと明示的に示した場合
+
+#### 手動エスケープ
+
+信頼されたコンテンツと信頼されてないコンテンツの両方を一緒に扱う必要がある場合があります。例えば、ユーザーが提供したコンテンツを Markdown として出力したいものの、ユーザーが悪意のあるものを入れていないことを最初に確認したいとします。
+
+それを行うには、[markdown](filters.md#markdown-or-md) フィルタに渡す前に [escape](https://twig.symfony.com/doc/2.x/filters/escape.html) フィルタを利用して、ユーザーが提供したコンテンツないの _すべての_ HTML を明示的にエンコードします。
 
 ```twig
 {# Escape any HTML in the Body field, then format as Markdown #}
 {{ entry.body|escape|markdown }}
 ```
 
-Twig と Craft は、テンプレートタグ内で利用できるいくつかのファンクションを提供します。
+あるいは、_いくつかの_ HTML を許可したい場合、それが使い慣れているなら、[HTML Purifier](http://htmlpurifier.org/) を使ってコンテンツをサニタイズする [purify](#purify) フィルターを利用できます。
 
 ```twig
 {# Purify the content in the Body field, then format as Markdown #}
@@ -130,9 +142,9 @@ Twig と Craft は、テンプレートタグ内で利用できるいくつか�
 
 ## 変数
 
-リソース：
+Twig はテンプレート内でカスタム**変数**の設定をサポートしています。これによって、後でテンプレートから参照される [値](#types-of-values) を保存できます。
 
-Twig を学ぶためにオンラインで利用できるいくつかの学習リソースがあります。
+[set](https://twig.symfony.com/doc/2.x/tags/set.html) タグを利用して変数を定義できます。
 
 ```twig
 {% set title = "About Us" %}
@@ -149,22 +161,22 @@ Twig を学ぶためにオンラインで利用できるいくつかの学習リ
 </html>
 ```
 
-Craft provides a few predefined variables that will be available in addition to the variables you define yourself. Refer to the [Global Variables](global-variables.md) page for a full list of global variables available to your Craft templates.
+Craft は、ユーザー自身が定義する変数に加えて、いくつかの定義済み変数を提供しています。Craft テンプレートで利用可能なグローバル変数のリストは、[グローバル変数](global-variables.md)ページを参照してください。
 
-## フィルタ
+## ファンクション
 
-There are several functions available to your Twig templates, which can do a wide variety of things. For example, Craft provides a [hiddenInput](functions.md#hiddeninput) function that can be used to generate the HTML for a hidden input:
+Twig テンプレートには様々なことを行うことができるいくつかのファンクションが用意されています。例えば、Craft は不可視項目の HTML を生成するために利用できる [hiddenInput](functions.md#hiddeninput) ファンクションを提供しています。
 
 ```twig
 {{ hiddenInput('entryId', 100) }}
 {# Output: <input type="hidden" name="entryId" value="100"> #}
 ```
 
-さらに、すべての Craft テンプレートは、いくつかの[グローバル変数](global-variables.md)があらかじめロードされています。
+Craft テンプレートで利用可能なファンクションのリストは、[ファンクション](functions.md)ページを参照してください。
 
-## ファンクション
+## フィルタ
 
-Filters are like functions, but they use a pipe syntax (`|`), and they are always meant to manipulate a value of some sort. For example, Craft provides an [markdown](filters.md#markdown-or-md) filter, which converts [Markdown](https://daringfireball.net/projects/markdown/)-formatted text into HTML:
+フィルタはファンクションに似ていますが、パイプ構文（`|`）を利用し、常に何らかの値を操作するためのものです。例えば、Craft は [Markdown](https://daringfireball.net/projects/markdown/) 形式のテキストを HTML に変換する [markdown](filters.md#markdown-or-md) フィルタを提供しています。
 
 ```twig
 {% set text = "I **really** love Tom Petty." %}
@@ -172,7 +184,7 @@ Filters are like functions, but they use a pipe syntax (`|`), and they are alway
 {# Output: <p>I <strong>really</strong> love Tom Petty.</p> #}
 ```
 
-You can chain filters together. Each subsequent filters will use the result of the previous filter as its starting point.
+フィルタを連鎖できます。後続のフィルタは、先行するフィルタの結果を出発点として利用します。
 
 ```twig
 {% set text = "I **really** love Tom Petty." %}
@@ -180,7 +192,7 @@ You can chain filters together. Each subsequent filters will use the result of t
 {# Output: I REALLY LOVE TOM PETTY.</p> #}
 ```
 
-Note that filters will only apply to the value that immediately precedes it. If you want to apply the filter to the result of an expression, you must wrap the expression in parentheses first.
+フィルタは直前の値だけに適用されることに注意してください。フィルタを式の結果に適用したい場合、最初に式を括弧で囲まなければなりません。
 
 ```twig
 {{ 100.3 + 50.3|round }}
@@ -190,11 +202,11 @@ Note that filters will only apply to the value that immediately precedes it. If 
 {# Output: 151 #}
 ```
 
-Refer to the [Filters](filters.md) page for a full list of filters available to your Craft templates.
+Craft テンプレートで利用可能なフィルタのリストは、[フィルタ](filters.md)ページを参照してください。
 
-## 続きを読む
+## テスト
 
-Tests are like functions that only return `true` or `false`, and are meant to reveal something about the nature of a value. For example, the [defined](https://twig.symfony.com/doc/2.x/tests/defined.html) test will return `true` or `false` depending on whether a variable or hash/object property is defined:
+テストは、`true` または `false` だけを返すファンクションのようなもので、値の性質について何かを明らかにすることを目的としています。例えば、[defined](https://twig.symfony.com/doc/2.x/tests/defined.html) テストは、変数やハッシュ / オブジェクトのプロパティが定義されているかどうかに依存して、`true` または `false` を返します。
 
 ```twig
 {% if specs.weight is defined %}
@@ -203,7 +215,7 @@ Tests are like functions that only return `true` or `false`, and are meant to re
 {% endif %}
 ```
 
-If you are looking for whether a test returns `false`, use the `is not` syntax:
+テストが `false` を返すかどうかを調べる場合、`is not` 構文を利用します。
 
 ```twig
 {% if entry is not defined %}
@@ -211,45 +223,45 @@ If you are looking for whether a test returns `false`, use the `is not` syntax:
 {% endif %}
 ```
 
-Refer to the [Tests](tests.md) page for a full list of filters available to your Craft templates.
+Craft テンプレートで利用可能なテストのリストは、[テスト](tests.md)ページを参照してください。
 
-## Types of values
+## 値の種類
 
-There are six types of values you’ll be working with in Twig:
+Twig で扱う値は、6種類あります。
 
-- [Strings](#strings)
-- [Numbers](#numbers)
-- [Booleans](#booleans)
-- [Arrays](#arrays)
-- [Hashes](#hashes)
-- [functions.md](#arrow-functions)
+- [文字列](#strings)
+- [数字](#numbers)
+- [ブーリアン](#booleans)
+- [配列](#arrays)
+- [ハッシュ](#hashes)
+- [アローファンクション](#arrow-functions)
 
-Let’s take a look at each of them in detail.
+それぞれについて、詳しく見ていきましょう。
 
-### Strings
+### 文字列
 
-Textual values are called **strings**. To identify a string, wrap some text in either double or single quotation marks (but _not_ curly/smart quotes).
+テキスト値は**文字列**と呼ばれます。文字列を識別するために、いくつかのテキストをダブル、または、シングルクォーテーションで囲みます（ただし、カーリー / スマートクォートを _除きます_）。
 
 ```twig
 {% set greeting = "Hello there" %}
 ```
 
-Once you’ve started a string, Twig will keep parsing it until it comes across another matching quotation mark. Which means that you can safely add other quotation marks inside the string—as long as it’s not the same type of quotation mark.
+一度文字列をはじめると、Twig はマッチする別の引用符に出会うまで解析を続けます。つまり、同じタイプの引用符でない限り、文字列の中に他の引用符を安全に追加できます。
 
 ```twig
 {% set heading = 'Try the new 7" folding tablet' %}
 {% set subheading = "The original Microsoft Surface was 3.5' long." %}
 ```
 
-If you need to use both types of quotation marks in the same string, you can place a backslash (`\`) right before the one that matches the string’s opening delimiter to “escape” it from being parsed as the closing delimiter.
+同じ文字列で両方のタイプの引用符を利用する必要がある場合、文字列の開始デリミタとマッチするものの直前にバックスラッシュ（`\`）を配置して、終了デリミタとして解析されないよう「エスケープ」できます。
 
 ```twig
 {% set subheading = "The original Microsoft Surface was 3' 6\" long." %}
 ```
 
-#### Combining strings
+#### 文字列の結合
 
-Twig provides two ways to combine strings together: You can concatenate them using the **tilde** (`~`) operator, or you can inject a string into the middle of another string using **string interpolation**.
+Twig は文字列を結合する2つの方法を提供します。**チルダ**（`~`）演算子を利用して文字列を連結するか、**文字列補完**を利用して他の文字列の途中に文字列を挿入できます。
 
 ```twig
 {# Concatenation #}
@@ -260,38 +272,38 @@ Twig provides two ways to combine strings together: You can concatenate them usi
 ```
 
 ::: tip
-String interpolation only works in double-quoted strings.
+文字列補完は、ダブルクォートで囲まれた文字列でのみ機能します。
 :::
 
-### Numbers
+### 数字
 
-Numbers can be written verbatim without any special delimiters.
+数字は特別なデリミタなしで、逐語的に書くことができます。
 
 ```twig
 {% set answer = 42 %}
 ```
 
-Numbers can be output in a print statement, or combined with a string.
+数字はプリント文で出力したり、文字列と結合できます。
 
 ```twig
 <p>The answer is {{ answer }}</p>
 ```
 
-### Booleans
+### ブーリアン
 
-Boolean values are either `true` or `false`. Those are reserved words in Twig, so if you want to create a boolean value, you just type it out.
+ブーリアン値は `true` または `false` のどちらかです。これらは Twig の予約後のため、ブーリアン値を作成したい場合、それを入力するだけです。
 
 ```twig
 {% set havingABud = true %}
 ```
 
-Booleans are most often used within [conditionals](#conditionals), which switch a part of the template on or off depending on an expression.
+ブーリアンは、式に応じてテンプレートの一部をオンまたはオフに切り替えるような[条件文](#conditionals)の中で最もよく利用されます。
 
-If you were to output a boolean value in a print statement, or combine it with another string, the value will be converted to either `'1'` or `'0'`.
+プリント文でブーリアン値を出力したり、別の文字列と結合すると、値は `'1'` または `'0'` のどちらかに変換されます。
 
-### Arrays
+### 配列
 
-Arrays are ordered lists of nested values. They are delimited with left and right square brackets (`[` and `]`), and their values are separated by commas.
+配列は、ネストされた値の順序付きリストです。配列は左右の角括弧（`[` および `]`）で区切られ、値はカンマで区切られます。
 
 ```twig
 {% set todoList = [
@@ -301,7 +313,7 @@ Arrays are ordered lists of nested values. They are delimited with left and righ
 ] %}
 ```
 
-より詳しいことは、このページの下段にある「続きを読む」セクションを見るか、[Twig 公式ドキュメント](https://twig.symfony.com/doc/templates.html)を直接参照してください。
+[for](https://twig.symfony.com/doc/2.x/tags/for.html) タグを利用して、配列をループできます。
 
 ```twig
 <ol class="todo">
@@ -311,17 +323,17 @@ Arrays are ordered lists of nested values. They are delimited with left and righ
 </ol>
 ```
 
-Note that you can’t output an array directly in a print statement, or combine it with another string. If you want to quickly output a comma-separated list of an array’s values, you could use the [join](https://twig.symfony.com/doc/2.x/filters/join.html) filter:
+配列をプリント文で直接出力したり、他の文字列と結合したりできないことに注意してください。配列の値をカンマ区切りで素早く出力したい場合、[join](https://twig.symfony.com/doc/2.x/filters/join.html) フィルタを利用できます。
 
 ```twig
 {{ todoList|join(', ') }}
 ```
 
-### Hashes
+### ハッシュ
 
-Hashes are similar to [arrays](#arrays), except that the values are indexed by custom **keys**.
+ハッシュは[配列](#arrays)に似ていますが、値はカスタム**キー**によってインデックスが付けられます。
 
-To define a hash, use left and right curly braces as the delimiters (`{` and `}`). Separate your hash’s key-value pairs with commas, like arrays, and separate the individual keys from the values with a colon.
+ハッシュを定義するには、左右の波括弧（`{` および `}`）をデリミタとして利用します。ハッシュのキーと値のペアを配列のようにカンマで区切り、個々のキーと値をコロンで区切ります。
 
 ```twig
 {% set specs = {
@@ -332,7 +344,7 @@ To define a hash, use left and right curly braces as the delimiters (`{` and `}`
 } %}
 ```
 
-If you need to create a hash with a dynamic key, wrap the key in parentheses:
+動的キーでハッシュを作成する必要がある場合、キーを括弧で囲みます。
 
 ```twig{5}
 {% set myKey = 'weight' %}
@@ -343,7 +355,7 @@ If you need to create a hash with a dynamic key, wrap the key in parentheses:
 } %}
 ```
 
-https://twig.symfony.com/doc/tags/index.html
+配列と同様に、[for](https://twig.symfony.com/doc/2.x/tags/for.html) タグを利用してハッシュ内のすべての値をループできます。
 
 ```twig
 <dl class="specs">
@@ -354,7 +366,7 @@ https://twig.symfony.com/doc/tags/index.html
 </dl>
 ```
 
-You can also access hash values directly by their keys, using either dot or array syntax:
+ドットや配列構文を利用して、キーを指定してハッシュ値に直接アクセスすることもできます。
 
 ```twig
 <dl class="specs">
@@ -366,11 +378,11 @@ You can also access hash values directly by their keys, using either dot or arra
 </dl>
 ```
 
-### Twig に付随するファンクション
+### アローファンクション
 
-Some [functions](#functions) and [filters](#filters) let you pass an **arrow function** as an argument. Arrow functions are compact functions that you define right in your template, which return a single value.
+いくつかの[ファンクション](#functions)と[フィルタ](#filters)では、引数に**アローファンクション**を渡すことができます。アローファンクションは、テンプレート内で直接定義するコンパクトなファンクションで、単一の値を返します。
 
-For example, Craft’s [group](filters.md#group) filter will group all of the items in an array, based on the result of an arrow function you pass in:
+例えば、Craft の [group](filters.md#group) フィルタは、渡されたアローファンクションの結果に基づいて、配列内のすべてのアイテムをグループ化します。
 
 ```twig{9}
 {% set groceryList = [
@@ -392,9 +404,9 @@ For example, Craft’s [group](filters.md#group) filter will group all of the it
 {% endfor %}
 ```
 
-## Loops
+## ループ
 
-You’ll frequently need to loop over multiple items in an [array](#arrays) or [hash](#hashes). To do that, you’ll use a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag.
+[配列](#arrays)や[ハッシュ](#hashes)内の複数のアイテムをループさせなければならないことがよくあります。そのために、[for](https://twig.symfony.com/doc/2.x/tags/for.html) タグを利用します。
 
 ```twig{8-10}
 {% set todoList = [
@@ -410,9 +422,9 @@ You’ll frequently need to loop over multiple items in an [array](#arrays) or [
 </ol>
 ```
 
-## Conditionals
+## 条件文
 
-Your templates can contain **conditionals**, which are initiated by an [if](https://twig.symfony.com/doc/2.x/tags/if.html) tag, which contains an expression that will be evaluated as either `true` or `false`, and will show part of a template depending on the result of that expression.
+テンプレートには [if](https://twig.symfony.com/doc/2.x/tags/if.html) タグではじまる**条件文**を含めることができます。これは、`true` または `false` のいずれかで評価される式を含み、その式の結果に応じてテンプレートの一部を表示します。
 
 ```twig
 {% if currentUser %}
@@ -420,7 +432,7 @@ Your templates can contain **conditionals**, which are initiated by an [if](http
 {% endif %}
 ```
 
-You can include a nested `{% else %}` tag, if you wish to show a different part of your template when the condition is `false`:
+条件が `false` のときにテンプレートの別の部分を表示したい場合、ネストされた `{% else %}` タグを含めることができます。
 
 ```twig
 {% if currentUser %}
@@ -430,41 +442,42 @@ You can include a nested `{% else %}` tag, if you wish to show a different part 
 {% endif %}
 ```
 
-You can also include nested `{% elseif %}` tags (before the `{% else %}` tag, if there is one), to create additional fallback conditions in the event that the original condition is `false`:
+ネストされた `{% elseif %}` タグ（`{% else %}` タグがある場合は、その前）を含めることで、元の条件が `false` の場合に追加のフォールバック条件を作成することもできます。
 
 ```twig
-<p>Is it quitting time?</p>
+{% set hour = now|date('G') %}
 
-{% set hour = now|date("G") %}
-{% if hour >= 16 and hour < 18 %}
-    <p>Yes!</p>
+{% if hour < 12 %}
+  <p>Good morning, {{ currentUser.friendlyName }}</p>
+{% elseif hour < 17 %}
+  <p>Good afternoon, {{ currentUser.friendlyName }}</p>
 {% else %}
-    <p>Nope.</p>
+  <p>Good evening, {{ currentUser.friendlyName }}</p>
 {% endif %}
 ```
 
 ::: tip
-If you want to switch between different parts of your template depending on the value of something, [switch](tags.md#switch) tags provide a simpler syntax than multiple `{% if %}` and `{% elseif %}` tags each comparing the same value over and over again.
+何かの値に応じてテンプレートの異なる部分を切り替えたい場合、複数の `{% if %}` と `{% elseif %}` タグで何度も同じ値を比較するよりもシンプルな構文を [switch](tags.md#switch) タグが提供します。
 :::
 
 
 
-## DRY templating
+## DRY テンプレート
 
-Whenever you’re coding anything, it’s always a good practice to keep your code “DRY” (Don’t Repeat Yourself), to avoid writing and maintaining the same general logic or HTML in multiple places. This applies to Twig as well: each page on your website is likely to have the same header and footer, and the vast majority of your pages should be made up of shared, reusable components.
+何かをコーディングするときは、常にコードを「DRY」（Don’t Repeat Yourself）に保ち、 同じ一般的なロジックや HTML を複数箇所に書いたり、保守したりしないようにするのは良い習慣です。これは Twig にも当てはまります。ウェブサイトの各ページには同じヘッダーとフッターがあり、ページの大部分は共有された再利用可能なコンポーネントで構成されているはずです。
 
-Twig provides four ways to keep your templates DRY:
+Twig はテンプレートを DRY に保つための4つの方法を提供します。
 
-- [Twig に付随するフィルタ](#template-inheritance)
-- [Craft の独自フィルタ](#includes)
-- [Embeds](#embeds)
-- [Macros](#macros)
+- [テンプレートの継承](#template-inheritance)
+- [インクルード](#includes)
+- [エンベッド](#embeds)
+- [マクロ](#macros)
 
-### Template inheritance
+### テンプレートの継承
 
-Twig templates can **extend** other templates, filling in more details than their parent. This concept is called **template inheritance** because sub-templates _inherit_ a base set of HTML from their parent.
+Twig テンプレートは他のテンプレートを**拡張**して、親よりも詳細を入力できます。サブテンプレートが親から HTML の基本セットを _受け継ぐ_ ため、このコンセプトは**テンプレートの継承**と呼ばれます。
 
-For example, you can create an `_html5.twig` template in your `templates/` folder, which defines the base HTML boilerplate that _all_ pages on your website should have:
+例えば、`templates/` フォルダに `_html5.twig` テンプレートを作成できます。これは、ウェブサイトの _すべての_ ページで持つべき基本 HTML の雛形を定義します。
 
 ```twig
 <!DOCTYPE html>
@@ -484,13 +497,13 @@ For example, you can create an `_html5.twig` template in your `templates/` folde
 </html>
 ```
 
-This template is pretty worthless on its own, but it provides a framework for nested templates to take advantage of:
+このテンプレート自体にあまり価値はありませんが、ネストされたテンプレートを活用するためのフレームワークを提供します。
 
-- It defines `head` and `body` **blocks**, which give nested templates a way to override the contents of the `<head>` and `<body>` elements.
-- It allows nested templates to define a `docTitle` variable, which will become the `<title>` value, and defaults to the site name if that’s not defined.
-- It gives nested templates the ability to set custom attributes on the `<body>` element, by defining a `bodyAttributes` hash. (We’re using the [attr](functions.md#attr) function to convert that hash into a list of HTML attributes.)
+- ネストされたテンプレートに `<head>` および `<body>` 要素のコンテンツを上書きするための方法を与える、`head` および `body` **ブロック**を定義します。
+- ネストされたテンプレートで、変数 `docTitle` を定義できます。これは `<title>` の値になり、定義されていない場合、デフォルトでサイト名になります。
+- `bodyAttributes` ハッシュを定義することで、ネストされたテンプレートで `<body>` 要素にカスタム属性をセットできるようになります。（このハッシュを HTML 属性のリストに変換するため、[attr](functions.md#attr) ファンクションを利用しています。)
 
-With that template in place, you can now create a `hello-world.twig` template in your `templates/` folder, which **extends** your `_html5.twig` template:
+これで、`templates/` フォルダに `_html5.twig` テンプレートを**拡張する** `hello-world.twig` テンプレートを作成できます。
 
 ```twig
 {% extends "_html5" %}
@@ -511,24 +524,24 @@ With that template in place, you can now create a `hello-world.twig` template in
 {% endblock %}
 ```
 
-This template is doing a few things:
+このテンプレートは、いくつかのことを行っています。
 
-- It’s declaring that it is meant to **extend** our `_html5.twig` template.
-- [Twig Templates in Craft](https://mijingo.com/products/screencasts/twig-templates-in-craft/) は、Craft の Twig を快適に使えるようになることを目的とした、Mijingo によるビデオコースです。
-- [Straight up Craft](https://straightupcraft.com/twig-templating) は、Craft での Twig の使い方に関する素晴らしい記事があります。
-- [Twig for Designers](https://github.com/brandonkelly/TwigForDesigners) は進行中の eBook で、非開発者が Twig をどのように使えるか説明することを目的としています。
+- `_html5.twig` テンプレートを**拡張する**ものであると宣言しています。
+- 親テンプレートに渡される、変数 `docTitle` および `bodyAttributes` を設定しています。
+- 親テンプレートの `head` および `body` ブロックを上書きしています。
+- プリント文 `{{ parent() }}` を経由して、親テンプレートの `head` ブロックのコンテンツを上書きするブロック内に取り込んでいます。
 
-Note that when a template extends another template, it doesn’t have any HTML code that will be output to the browser directly. _All_ of its HTML code must be defined within template blocks.
+テンプレートが別のテンプレートを拡張する場合、ブラウザに直接出力される HTML コードを持たないことに注意してください。HTML コードの _すべて_ は、テンプレートブロック内で定義されなければなりません。
 
 ::: tip
-You can extend templates recursively. Try creating another template that extends `hello-world.twig` and adds additional HTML to the `body` block.
+テンプレートは再起的に拡張できます。`hello-world.twig` を拡張し、`body` ブロックに HTML を追加する別のテンプレートを作成してみてください。
 :::
 
-### Includes
+### インクルード
 
-You can create “partial” templates, which only output the HTML for an individual component, and then include them within other templates using an [include](https://twig.symfony.com/doc/2.x/tags/include.html) tag.
+独立したコンポーネントの HTML のみを出力する「部分的な」テンプレートを作成し、[include](https://twig.symfony.com/doc/2.x/tags/include.html) タグを利用して他のテンプレートに含めることができます。
 
-For example, create a template called `_tip.twig` in your `templates/` folder, with this:
+例えば、`templates/` フォルダに `_tip.twig` というテンプレートを次のように作成します。
 
 ```twig
 <div class="tip">
@@ -537,7 +550,7 @@ For example, create a template called `_tip.twig` in your `templates/` folder, w
 </div>
 ```
 
-Now you can include that from another template, passing in the `tipText` value:
+これで、`tipText` 値を渡して別のテンプレートからインクルードできます。
 
 ```twig
 {% include '_tip' with {
@@ -545,9 +558,9 @@ Now you can include that from another template, passing in the `tipText` value:
 } %}
 ```
 
-### Embeds
+### エンベッド
 
-Embeds are similar to [includes](#includes), with a superpower: they can override template blocks within the included template. Going with our tip example, let’s say you want to make the content more customizable. you could do that by wrapping the `<p>` tag in a block:
+エンベッドは[インクルード](#includes)に似ていて、さらに強大な力を持っています。インクルードしたテンプレート内のテンプレートブロックを上書きできます。例として、コンテンツをよりカスタマイズしやすくしてみましょう。`<p>` タグをブロックで囲むことで、それが可能になります。
 
 ```twig
 <div class="tip">
@@ -558,7 +571,7 @@ Embeds are similar to [includes](#includes), with a superpower: they can overrid
 </div>
 ```
 
-https://twig.symfony.com/doc/functions/index.html
+テンプレートは以前と同様に [include](https://twig.symfony.com/doc/2.x/tags/include.html) タグで動作しますが、他のテンプレートでは代わりに [embed](https://twig.symfony.com/doc/2.x/tags/embed.html) タグを利用して `content` ブロック全体を上書きするオプションがあります。
 
 ```twig
 {% embed '_tip' %}
@@ -568,11 +581,11 @@ https://twig.symfony.com/doc/functions/index.html
 {% endembed %}
 ```
 
-### Macros
+### マクロ
 
-Your templates can define **macros**, which are reusable functions that output HTML. These are especially useful when a template needs to output similar HTML multiple times, but it’s not worth using an [include](#includes) because no other templates are going to need it.
+テンプレートでは、HTML を出力する再利用可能なファンクションである**マクロ**を定義できます。これらはテンプレートが似たような HTML を複数回出力する必要がある場合に特に便利ですが、他のテンプレートでは必要としないため、[include](#includes) を利用する価値はありません。
 
-For example, let’s say you find yourself repeating the same HTML and Twig code for each the global nav items in your site layout template:
+例えば、サイトのレイアウトテンプレート内でグローバルナビゲーションのアイテムごとに同じ HTML と Twig コードを繰り返しているとしましょう。
 
 ```twig
 <nav class="global-nav">
@@ -584,7 +597,7 @@ For example, let’s say you find yourself repeating the same HTML and Twig code
 </nav>
 ```
 
-You could pull that `<li>` HTML into a [macro](https://twig.symfony.com/doc/2.x/tags/macro.html) tag, and then call it for each of your nav items instead:
+[macro](https://twig.symfony.com/doc/2.x/tags/macro.html) タグに `<li>` の HTMLをプルしておき、代わりにナビのアイテムごとに呼び出すことができます。
 
 ```twig
 {% macro navItem(label, path) %}
@@ -601,12 +614,12 @@ You could pull that `<li>` HTML into a [macro](https://twig.symfony.com/doc/2.x/
 ```
 
 ::: tip
-You can import macros from other templates using an [import](https://twig.symfony.com/doc/2.x/tags/import.html) tag.
+[import](https://twig.symfony.com/doc/2.x/tags/import.html) タグを利用して、他のテンプレートからマクロをインポートできます。
 :::
 
-## Additional resources
+## 追加リソース
 
-To learn more about Twig, check out these resources:
+Twig の詳細については、これらのリソースをチェックしてください。
 
-- [Twig for Template Designers](https://twig.symfony.com/doc/templates.html) は、すべての Twig の機能を詳細なドキュメントです。
-- [Twig Templates in Craft](https://craftquest.io/courses/twig-templates-in-craft) – CraftQuest’s 12-part video course introducing Twig templating in Craft
+- [Twig for Template Designers](https://twig.symfony.com/doc/2.x/templates.html) – Twig の公式テンプレートドキュメント
+- [Twig Templates in Craft](https://craftquest.io/courses/twig-templates-in-craft) – Craft の Twig テンプレート手法を紹介する、CraftQuest の全12回のビデオコース

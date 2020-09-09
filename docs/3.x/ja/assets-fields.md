@@ -6,31 +6,31 @@
 
 アセットフィールドの設定は、次の通りです。
 
-- ** – ファイルのアップロード / 関連付けを単一のフォルダに制限するかどうか。
+- **アップロードを単一のフォルダに限定しますか** – ファイルのアップロード / 関連付けを単一のフォルダに制限するかどうか。
 
-  有効にすると、次の設定が表示されます。
+   有効にすると、次の設定が表示されます。
 
-  - **Upload Location** – The location that files dragged directly onto the field should be saved in.
+   - **ロケーションをアップロードする** – フィールドに直接ドラッグされたファイルを保存するロケーション。
 
-  If disabled, the following settings will be visible:
+   無効にすると、次の設定が表示されます。
 
-  - **Sources** – Which asset volumes (or other asset index sources) the field should be able to relate assets from.
-  - **Default Upload Location** – The default location that files dragged directly onto the field should be saved in.
+   - **ソース** – フィールドが、どのアセットボリューム（または、他のアセットインデックスソース）からアセットを関連付けられるか。
+   - **既定のアップロードロケーション** – フィールドに直接ドラッグされたファイルを保存するデフォルトのロケーション。
 
-- **許可されるファイルの種類を制限しますか？ ** 特定の種類のファイルだけをアップロード / 関連付けできるフィールドにするかどうか。
-- **Limit** – The maximum number of assets that can be related with the field at once. (Default is no limit.)
-- **View Mode** – How the field should appear for authors.
-- **Selection Label** – The label that should be used on the field’s selection button.
+- **許可されるファイルの種類を制限する** 特定の種類のファイルだけをアップロード / 関連付けできるフィールドにするかどうか。
+- **リミット** – フィールドに関連付けできるアセット数の上限。（デフォルトは無制限です）
+- **モードを見る。** – 投稿者のために、フィールドをどのように表示するか。
+- **選択ラベル** – フィールドの選択ボタンのラベルに利用されます。
 
 ### マルチサイト設定
 
-マルチサイトがインストールされている場合、次の設定も有効になります。 （「高度」のトグルボタンで表示されます）
+マルチサイトがインストールされている場合、次の設定も有効になります。（「高度」のトグルボタンで表示されます）
 
-- **特定のサイトから アセット を関連付けますか?** – 特定のサイトのアセットとの関連付けのみを許可するかどうか。
+- **特定のサイトから アセット を関連付けますか？** – 特定のサイトのアセットとの関連付けのみを許可するかどうか。
 
-  有効にすると、サイトを選択するための新しい設定が表示されます。
+   有効にすると、サイトを選択するための新しい設定が表示されます。
 
-  無効にすると、関連付けられたアセットは常に現在のサイトから取得されます。
+   無効にすると、関連付けられたアセットは常に現在のサイトから取得されます。
 
 - **サイトごとにリレーションを管理** – それぞれのサイトが関連付けられたアセットの独自のセットを取得するかどうか。
 
@@ -38,31 +38,31 @@
 
 「ロケーションをアップロードする」と「既定のアップロードロケーション」設定に定義されるサブフォルダには、オプションで Twig タグ（例：`news/{{ slug }}`）を含めることができます。
 
-ソースエレメント（アセットフィールドを持つエレメント）でサポートされているすべてのプロパティは、ここで使用できます。
+ソースエレメント（アセットフィールドを持つエレメント）でサポートされているすべてのプロパティは、ここで利用できます。
 
 ::: tip
-If you want to include the entry’s ID or UID in a dynamic subfolder path, use `{sourceId}` or `{sourceUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the revision / draft’s.
+動的なサブフォルダパスにエントリの ID や UID を含めたい場合、`{id}` や `{uid}` ではなく `{sourceId}` や `{sourceUid}` を利用してください。それによって、下書きではなくソースエントリの ID や UID が利用されます。
 :::
 
-そのため、行列フィールドがエントリに紐づけられていて、動的なサブフォルダパスにエントリ ID を出力したい場合、`id` ではなく `owner.id` を使用します。
-:::
+::: tip
+[行列フィールド](matrix-fields.md)の中にアセットフィールドを作成する場合、ソースエレメントは作成された行列フィールドのエレメント _ではなく_ 行列ブロックになります。
 
-So if your Matrix field is attached to an entry, and you want to output the entry ID in your dynamic subfolder path, use `owner.id` rather than `id`.
+そのため、行列フィールドがエントリに紐づけられていて、動的なサブフォルダパスにエントリ ID を出力したい場合、`id` ではなく `owner.id` を利用します。
 :::
 
 ## フィールド
 
+アセットフィールドには、現在関連付けられているすべてのアセットのリストと、新しいアセットを追加するためのボタンがあります。
+
 「アセットを追加」ボタンをクリックすると、新しいアセットのアップロードはもちろん、すでに追加されているアセットの検索や選択ができるモーダルウィンドウが表示されます。
 
-関連付けられたアセットをダブルクリックすると、アセットのタイトルやカスタムフィールドを編集したり、（画像の場合）イメージエディタを起動できる HUD を表示します。
-
 ::: tip
-You can also upload assets by dragging files directly onto the assets field or modal window.
+アセットフィールドやモーダルウィンドウに直接ファイルをドラックして、アップロードすることもできます。
 :::
 
 ### インラインのアセット編集
 
-アセットフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、アセットフィールドのデータに基づいた結果をフィルタできます。
+関連付けられたアセットをダブルクリックすると、アセットのタイトルやカスタムフィールドを編集したり、（画像の場合）イメージエディタを起動できる HUD を表示します。
 
 ::: tip
 アセットで使用するカスタムフィールドは、「設定 > アセット > [ボリューム名] > フィールドレイアウト」から選択できます。
@@ -72,19 +72,19 @@ You can also upload assets by dragging files directly onto the assets field or m
 
 ### アセットフィールドによるエレメントの照会
 
-テンプレート内でアセットフィールドのエレメントを取得する場合、アセットフィールドのハンドルを利用して関連付けられたアセットにアクセスできます。
+アセットフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを利用して、アセットフィールドのデータに基づいた結果をフィルタできます。
 
-これは、所定のフィールドで関連付けられたすべてのアセットを出力するよう準備された[アセットクエリ](assets.md#querying-assets)を提供します。
+利用可能な値には、次のものが含まれます。
 
-| 値                                                              | 取得するエレメント                                               |
-| -------------------------------------------------------------- | ------------------------------------------------------- |
-| `':empty:'`                                                    | 関連付けられたアセットを持たない。                                       |
-| `':notempty:'`                                                 | 少なくとも1つの関連付けられたアセットを持つ。                                 |
-| `100`                                                          | that are related to the asset with an ID of 100.        |
-| `[100, 200]`                                                   | that are related to an asset with an ID of 100 or 200.  |
-| `['and', 100, 200]`                                            | that are related to the assets with IDs of 100 and 200. |
-| an [Asset](craft3:craft\elements\Asset) object               | that are related to the asset.                          |
-| an [AssetQuery](craft3:craft\elements\db\AssetQuery) object | that are related to any of the resulting assets.        |
+| 値 | 取得するエレメント
+| - | -
+| `':empty:'` | 関連付けられたアセットを持たない。
+| `':notempty:'` | 少なくとも1つの関連付けられたアセットを持つ。
+| `100` | ID が 100 のアセットが関連付けられている。
+| `[100, 200]` | ID が 100 または 200 のアセットが関連付けられている。
+| `['and', 100, 200]` | ID が 100 と 200 のアセットが関連付けられている。
+| [Asset](craft3:craft\elements\Asset) オブジェクト | アセットに関連付けられている。
+| [AssetQuery](craft3:craft\elements\db\AssetQuery) オブジェクト | 結果のアセットのいずれかに関連付けられている。
 
 ```twig
 {# Fetch entries with a related asset #}
@@ -95,15 +95,15 @@ You can also upload assets by dragging files directly onto the assets field or m
 
 ### アセットフィールドデータの操作
 
-関連付けられたすべてのアセットをループするには、[all()](craft3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
+テンプレート内でアセットフィールドのエレメントを取得する場合、アセットフィールドのハンドルを利用して関連付けられたアセットにアクセスできます。
 
 ```twig
 {% set query = entry.myFieldHandle %}
 ```
 
-関連付けられた最初のアセットだけが欲しい場合、代わりに [one()](craft3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
+これは、所定のフィールドで関連付けられたすべてのアセットを出力するよう準備された[アセットクエリ](assets.md#querying-assets)を提供します。
 
-（取得する必要はなく）いずれかの関連付けられたアセットがあるかを確認したい場合、[exists()](craft3:craft\db\Query::exists()) を呼び出すことができます。
+関連付けられたすべてのアセットをループするには、[all()](craft3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
 ```twig
 {% set relatedAssets = entry.myFieldHandle.all() %}
@@ -117,10 +117,10 @@ You can also upload assets by dragging files directly onto the assets field or m
 ```
 
 ::: warning
-When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have “Assets in this volume have public URLs” enabled and a “Base URL” setting. Otherwise, the result will always be empty.
+`asset.url` または `asset.getUrl()` を使用する場合、そのアセットのソースボリュームは「このボリュームのアセットにはパブリック URL が含まれます」が有効で、「ベース URL」がセットされていなければなりません。さもなければ、結果は常に空になります。
 :::
 
-フロントエンドの[投稿フォーム](dev/examples/entry-form.md)から、アセットフィールドへのファイルアップロードをユーザーに許可するには、2つの調整が必要です。
+関連付けられた最初のアセットだけが欲しい場合、代わりに [one()](craft3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
 
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
@@ -129,7 +129,7 @@ When using `asset.url` or `asset.getUrl()`, the asset’s source volume must hav
 {% endif %}
 ```
 
-まず、`<form>` タグに `enctype="multipart/form-data"` 属性があることを確認して、ファイルをアップロードできるようにします。
+（取得する必要はなく）いずれかの関連付けられたアセットがあるかを確認したい場合、[exists()](craft3:craft\db\Query::exists()) を呼び出すことができます。
 
 ```twig
 {% if entry.myFieldHandle.exists() %}
@@ -137,7 +137,7 @@ When using `asset.url` or `asset.getUrl()`, the asset’s source volume must hav
 {% endif %}
 ```
 
-アセットクエリで[パラメータ](assets.md#parameters)をセットすることもできます。 例えば、画像だけが返されることを保証するために、[kind](assets.md#kind) パラメータをセットできます。
+アセットクエリで[パラメータ](assets.md#parameters)をセットすることもできます。例えば、画像だけが返されることを保証するために、[kind](assets.md#kind) パラメータをセットできます。
 
 ```twig
 {% set relatedAssets = clone(entry.myFieldHandle)
@@ -146,14 +146,14 @@ When using `asset.url` or `asset.getUrl()`, the asset’s source volume must hav
 ```
 
 ::: tip
-It’s always a good idea to clone the asset query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
+パラメータを調整する前に [clone()](./dev/functions.md#clone) ファンクションを利用してアセットクエリのクローンを作成するのは、とても良いアイデアです。それによって、テンプレートの後半でパラメータが予期しない結果をもたらすことはありません。
 :::
 
-### フロントエンドの投稿フォームからのファイルアップロード
+### 投稿フォームでアセットフィールドを保存
 
-複数ファイルをアップロードできるようにする場合、`multiple` 属性を追加し、input 名の末尾に `[]` を追加します。
+アセットフィールドを含む必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、フィールド値をアセット ID のリストとして、関連付ける順番で送信する必要があります。
 
-For example, you could create a list of checkboxes for each of the possible relations:
+例えば、可能なリレーションごとにチェックボックスのリストを作成できます。
 
 ```twig
 {# Include a hidden input first so Craft knows to update the existing value
@@ -192,28 +192,34 @@ For example, you could create a list of checkboxes for each of the possible rela
 </ul>
 ```
 
-You could then make the checkbox list sortable, so users have control over the order of related assets.
+チェックボックスのリストをソート可能にすれば、ユーザーが関連付けられたアセットの順序をコントロールできるようになります。
 
-#### Creating New Assets
+#### 新しいアセットの作成
 
-Assets fields can handle new file uploads as well:
+アセットフィールドは、新規ファイルのアップロードにも対応しています。
 
 ```twig
-<input type="file" name="fields[myFieldHandle]">
+{{ input('file', 'fields[myFieldHandle][]', options={
+  multiple: true,
+}) }}
 ```
 
 ::: tip
-Don’t forget to set `enctype="multipart/form-data"` on your `<form>` tag so your browser knows to submit the form as a multipart request.
+ブラウザがフォームをマルチパートリクエストとして送信することを認識できるよう、`<form>` タグに `enctype="multipart/form-data"` をセットすることを忘れないでください。
 :::
 
-Alternatively, you can submit Base64-encoded file data, which the Assets field will decode and treat as an uploaded file. To do that, you have to specify both the data and the filename like this:
+あるいは、アセットフィールドがアップロードファイルをデコードして扱うよう、Base64 エンコードされたファイルデータを送信することもできます。そのためには、次のようにデータとファイル名の両方を指定しなければなりません。
 
 ```twig
-<input type="file" name="fields[<FieldHanlde>][]" multiple>
+{{ hiddenInput(
+    'fields[myFieldHandle][data][]',
+    'data:image/jpeg;base64,my-base64-data'
+) }}
+{{ hiddenInput('fields[myFieldHandle][filename][]', 'myFile.ext') }}
 ```
 
 ## 関連項目
 
 * [アセットクエリ](assets.md#querying-assets)
 * <craft3:craft\elements\Asset>
-* [リレーション](relations.md)
+* [Relations](relations.md)

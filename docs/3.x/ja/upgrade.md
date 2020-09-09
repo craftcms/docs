@@ -6,26 +6,27 @@
 
 はじめる前に、次のことを確認してください。
 
-- あなたは[Craft 3 の変更点](changes-in-craft-3.md)を確認しました。
-- あなたのサーバーは Craft 3 の[最小要件](requirements.md)（Craft 3 には PHP 7 以降が必要で、PHP 割当メモリが少なくとも 256 MB 必要です）を満たしています。
-- あなたのサイトは、少なくとも **Craft 2.6.2788** が実行されています。
-- プラグインはすべて最新の状態で、それらが Craft 3 向けにアップデートされていることを確かめました。 （Craft 2 コントロールパネルのアップデートページから、プラグインの Craft 3 互換ステータスのレポートを見ることができます。 ）
-- なんらかの問題が起こった場合に備えて、**データベースをバックアップ**してあります。
+- このページの下段にある Craft 3 の変更点を確認しました
+- あなたのサーバーは Craft 3 の[最小要件](requirements.md)（Craft 3 には PHP 7 以降が必要で、PHP 割当メモリが少なくとも 256 MB 必要です）を満たしています
+- あなたのサイトは、少なくとも **Craft 2.6.2788** が実行されています
+- プラグインはすべて最新の状態で、それらが Craft 3 向けにアップデートされていることを確かめました（Craft 2 コントロールパネルのアップデートページから、プラグインの Craft 3 互換ステータスのレポートを見ることができます。）
+- なんらかの問題が起こった場合に備えて、**データーベースはバックアップ**されています
 
 上記リストをすべて満たしているなら、アップグレードプロセスを続行できます。
 
 ## アップグレードの実行
 
-Craft 2 サイトをアップグレードする最善の方法は、新しい Craft 3 サイトを構築するときと同様のアプローチをとることです。 はじめに、既存のプロジェクトと並行する新しいディレクトリを作成し、[インストールガイド](installation.md)のステップ 1 〜 3 に従ってください。
+Craft 2 サイトをアップグレードする最善の方法は、新しい Craft 3 サイトを構築するときと同様のアプローチをとることです。はじめに、既存のプロジェクトと並行する新しいディレクトリを作成し、[インストールガイド](installation.md)のステップ 1 〜 3 に従ってください。
 
 Craft 3 をダウンロードして準備したら、次のステップに従ってアップグレードを完了します。
 
-1. 古い `craft/config/db.php` から新しいプロジェクトの `.env` ファイルにデータベース接続設定を定義します。
+1. 古い `craft/config/db.php` ファイルから新しいプロジェクトの `.env` ファイルにデータベース接続設定を定義します。
 
-   ::: tip 現在のテーブル接頭辞がそれである場合、`DB_TABLE_PREFIX="craft"` を忘れずにセットしてください。
-:::
+   ::: tip
+   現在のテーブル接頭辞がそれである場合、`DB_TABLE_PREFIX="craft"` を忘れずにセットしてください。
+   :::
 
-2. 古い `craft/config/general.php` ファイルのすべての設定を新しいプロジェクトの `config/general.php` ファイルにコピーします。
+2. 古い `craft/config/general.php`ファイルのすべての設定を新しいプロジェクトの `config/general.php` ファイルにコピーします。
 
 3. 古い `craft/config/license.key` ファイルを新しいプロジェクトの `config/` フォルダにコピーします。
 
@@ -43,35 +44,35 @@ Craft 3 をダウンロードして準備したら、次のステップに従っ
 
 10. 新しいプロジェクトの `web/` ディレクトリを参照するよう、ウェブサーバーの設定をアップデートします。
 
-11. ブラウザでコントロールパネルの URL（例： `http://my-project.test/admin`）にアクセスします。 アップデートのプロンプトが表示されたら、すべてが正しく実行されています！ 「Finish up（完了）」ボタンをクリックしてデータベースを更新してください。
+11. ブラウザでコントロールパネルの URL（例： `http://my-project.test/admin`）にアクセスします。アップデートのプロンプトが表示されたら、すべてが正しく実行されています！「Finish up（完了）」ボタンをクリックしてデータベースを更新してください。
 
-12. プラグインをインストールしている場合、コントロールパネルの「プラグインストア」セクションから Craft 3 対応版をインストールする必要があります。 （追加のアップグレードガイドについては、プラグインのドキュメントを参照してください。 ）
+12. プラグインをインストールしている場合、コントロールパネルの「プラグインストア」セクションから Craft 3 対応版をインストールする必要があります。（追加のアップグレードガイドについては、プラグインのドキュメントを参照してください。）
 
-これで Craft 2 プロジェクトから Craft 3 へのアップグレードが完了しました。 [Craft 3 の変更点](changes-in-craft-3.md)を確認する時間を設けてください。
+これで Craft 3 へのアップグレードが完了しました。このページに記載された変更点を確認し、Craft 3 での変更に伴うプロジェクトのアップデートを行ってください。
 
-### Troubleshooting
+### トラブルシューティング
 
 #### コントロールパネルにアクセスすると Craft のインストーラーが表示されます。
 
-これが起こるのは、`.env` ファイルのデータベース接続情報が実際に必要な情報と完全に一致しないためです。 多くの場合、正しい `DB_TABLE_PREFIX` を設定するのを忘れています。
+これが起こるのは、`.env` ファイルのデータベース接続情報が実際に必要な情報と完全に一致しないためです。多くの場合、正しい `DB_TABLE_PREFIX` を設定するのを忘れています。
 
 #### 「Setting unknown property: craft\config\DbConfig::initSQLs」エラーが表示されます。
 
-Craft 2 の MySQL 5.7 サポートのための修正のみに使用され、もはや必要ではなくなった `initSQLs` データベース設定が Craft 3 で削除されました。 `config/db.php` ファイルを開いて、`'initSQLs'` からはじまる行を削除してください。
+Craft 2 の MySQL 5.7 サポートのための修正のみに使用され、もはや必要ではなくなった `initSQLs` データベース設定が Craft 3 で削除されました。`config/db.php` ファイルを開いて、`'initSQLs'` からはじまる行を削除してください。
 
-## トラブルシューティング
+## リッチテキストフィールド
 
-The “Rich Text” field type has been removed from Craft 3, in favor of new [Redactor](https://github.com/craftcms/redactor) and [CKEditor](https://github.com/craftcms/ckeditor) plugins.
+「リッチテキスト」フィールドタイプは Craft 3 から削除され、新しい [Redactor](https://github.com/craftcms/redactor) プラグインと [CKEditor](https://github.com/craftcms/ckeditor) プラグインが追加されました。
 
-If you have any existing Rich Text fields, they will be automatically converted to Redactor fields when you install the Redactor plugin.
+いくつかのリッチテキストフィールドがすでに存在する場合、Redactor プラグインをインストールした時点で自動的に Redactor フィールドに変換されます。
 
-### Redactor Configs
+### Redactor 設定
 
-If you do install the Redactor plugin, you will need to ensure that your Redactor configs in `config/redactor/` are valid JSON. That means:
+Redactor プラグインをインストールする場合、`config/redactor/` に定義された Redactor 設定が有効な JSON であることを保証する必要があります。すなわち、
 
-- No comments
-- All object properties (the config setting names) must be wrapped in double quotes
-- All strings must use double quotes rather than single quotes
+- コメントは使えません
+- （コンフィグ設定名である）すべてのオブジェクトプロパティは、ダブルクォートで囲まれていなければなりません
+- すべての文字列は、シングルクォートではなくダブルクォートを使用しなければなりません
 
 ```javascript
 // Bad:
@@ -86,72 +87,72 @@ If you do install the Redactor plugin, you will need to ensure that your Redacto
 }
 ```
 
-## Position Select Fields
+## 位置選択フィールド
 
-The “Position Select” field type has been removed from Craft 3. If you had any Position Select fields, they will be converted to Dropdown fields, with all the same options.
+「位置選択」フィールドタイプは Craft 3 で削除されました。位置選択フィールドがある場合、すべてのオプションを保持したままドロップダウンフィールドに変換されます。
 
-If you miss Position Select, you can try installing the [Position Fieldtype](https://github.com/Rias500/craft-position-fieldtype) plugin, which brings it back.
+位置選択フィールドが必要な場合、[Position Fieldtype](https://github.com/Rias500/craft-position-fieldtype) プラグインをインストールしてください。
 
-## Lightswitch Fields
+## Lightswitch フィールド
 
-Lightswitch field values are now always `true` or `false`. If you’re accessing a Lightswitch field value for an element that doesn’t have an explicit value set yet, the field’s default value will be returned instead.
+Lightswitch フィールドの値は、常に `true` または `false` になりました。明示的な値がセットされていない要素の Lightswitch フィールドにアクセスした場合、代わりにフィールドのデフォルト値が返されます。
 
-## Remote Volumes
+## リモートボリューム
 
-Support for Amazon S3, Rackspace Cloud Files, and Google Cloud Storage have been moved into plugins. If you have any asset volumes that were using those services in Craft 2, you will need to install the new plugins:
+Amazon S3、Rackspace Cloud Files、および、Google Cloud Storage のサポートは、プラグインに移行されました。それらのサービスを Craft 2 で利用していたアセットボリュームがある場合、新しいプラグインをインストールする必要があります。
 
 - [Amazon S3](https://github.com/craftcms/aws-s3)
 - [Rackspace Cloud Files](https://github.com/craftcms/rackspace)
 - [Google Cloud Storage](https://github.com/craftcms/google-cloud)
 
-## Configuration
+## コンフィギュレーション
 
-### Config Settings
+### コンフィグ設定
 
-Some general config settings have been renamed in Craft 3. The old setting names have been deprecated, but will continue to work until Craft 4.
+いくつかの一般設定は Craft 3 でリネームされました。古い設定名は非推奨となりますが、Craft 4 までは動作し続けます。
 
-| Old Setting                  | New Setting                   |
-| ---------------------------- | ----------------------------- |
-| `activateAccountFailurePath` | `invalidUserTokenPath`        |
-| `backupDbOnUpdate`           | `backupOnUpdate`<sup>1</sup>  |
-| `defaultFilePermissions`     | `defaultFileMode`<sup>2</sup> |
-| `defaultFolderPermissions`   | `defaultDirMode`              |
-| `environmentVariables`       | `aliases` <sup>3</sup>        |
-| `restoreDbOnUpdateFailure`   | `restoreOnUpdateFailure`      |
-| `useWriteFileLock`           | `useFileLocks`                |
-| `validationKey`              | `securityKey`<sup>4</sup>     |
+| 旧設定 | 新設定 |
+| ---------------------------- | -----------------------------
+| `activateAccountFailurePath` | `invalidUserTokenPath` |
+| `backupDbOnUpdate` | `backupOnUpdate`<sup>1</sup> |
+| `defaultFilePermissions` | `defaultFileMode`<sup>2</sup> |
+| `defaultFolderPermissions` | `defaultDirMode` |
+| `environmentVariables` | `aliases` <sup>3</sup> |
+| `restoreDbOnUpdateFailure` | `restoreOnUpdateFailure` |
+| `useWriteFileLock` | `useFileLocks` |
+| `validationKey` | `securityKey`<sup>4</sup> |
 
-*<sup>1</sup> Performance should no longer be a major factor when setting `backupOnUpdate` to `false`, since backups aren’t generated by PHP anymore.*
+*<sup>1</sup> `backupOnUpdate` を `false` にすると、PHP によるバックアップの生成が行われないため、パフォーマンスは大きな要因になりえません。*
 
-*<sup>2</sup> `defaultFileMode` is now `null` by default, meaning it will be determined by the current environment.*
+*<sup>2</sup> `defaultFileMode` はデフォルトで `null` になりました。これは、現在の環境によって決定されることを意味します。*
 
-*<sup>3</sup> Settings that supported values defined by your `environmentVariables` config setting in Craft 2 can now be set to system environment variables and aliases in Craft 3. (See [Environmental Configuration](config/#environmental-configuration) to learn more about those.) Site URL and Local volume settings will automatically be converted to the new `@alias/sub/path` syntax when updating to Craft 3.
+*<sup>3</sup> Craft 2 のコンフィグ設定 `environmentVariables` で定義された値をサポートする設定項目は、Craft 3 のシステム環境設定とエイリアスにセットできるようになりました。（詳細については、[環境設定](config/#environmental-configuration)を参照してください。）Craft 3 にアップデートすると、サイト URL やローカルボリュームの設定は新しい `@alias/sub/path` 構文へ自動的に変換されます。
 
-*<sup>4</sup> `securityKey` is no longer optional. If you haven’t set it yet, set it to the value in `storage/runtime/validation.key` (if the file exists). The auto-generated `validation.key` file fallback will be removed in Craft 4.*
+*<sup>4</sup> `securityKey` は、もはやオプションではありません。まだ設定していない場合、（ファイルが存在していれば）`storage/runtime/validation.key` に設定してください。自動生成された `validation.key` ファイルのバックアップは、Craft 4 で削除されます。*
 
-Some config settings have been removed entirely:
+いくつかの設定は完全に削除されました。
 
-| File          | Setting                                                                                         |
-| ------------- | ----------------------------------------------------------------------------------------------- |
-| `db.php`      | `collation`                                                                                     |
-| `db.php`      | `initSQLs`                                                                                      |
-| `general.php` | `appId`                                                                                         |
-| `general.php` | `cacheMethod` (see [Configuration → Data Caching Config](config/README.md#data-caching-config)) |
+| ファイル | 設定 |
+| ------------- | -----------
+| `db.php` | `collation` |
+| `db.php` | `initSQLs` |
+| `general.php` | `appId` |
+| `general.php` | `cacheMethod`（[コンフィギュレーション > データキャッシュ設定](config/README.md#data-caching-config)を参照してください。） |
 
-### `omitScriptNameInUrls` and `usePathInfo`
+### `omitScriptNameInUrls` と `usePathInfo`
 
-The `omitScriptNameInUrls` setting can no longer be set to `'auto'`, as it was by default in Craft 2. Which means you will need to explicitly set it to `true` in `config/general.php` if you’ve configured your server to route HTTP requests to `index.php`.
+`omitScriptNameInUrls` 設定は、Craft 2 のデフォルトがそうであったように `'auto'` にすることはもはやできません。HTTP リクエストを `index.php` にルーティングするようにサーバーを設定した場合、`config/general.php` で明示的に `true` にする必要があることを意味しています。
 
-Similarly, the `usePathInfo` setting can no longer be set to `'auto'` either. If your server is configured to support [PATH_INFO](https://craftcms.com/support/enable-path-info), you can set this to `true`. This is only necessary if you can’t set `omitScriptNameInUrls` to `true`, though.
+同様に、`usePathInfo` 設定も `'auto'` にすることはできません。サーバーが [PATH_INFO](https://craftcms.com/support/enable-path-info) をサポートするよう設定されているならば、ここに `true` をセットできます。ただし、`omitScriptNameInUrls` を `true` にセットできない場合のみ、必要となります。
 
-## URL Rules
+## URL ルール
 
-If you have any [URL rules](config/README.md#url-rules) saved in `config/routes.php`, you will need to update them to Yii 2’s [pattern-route syntax](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules).
+`config/routes.php` に [URL ルール](config/README.md#url-rules)を保存しているならば、Yii 2 の [pattern-route 構文](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules)にアップデートする必要があります。
 
-- Named parameters in the pattern should be defined using the format (`<ParamName:RegExp>`) rather than as a regular expression subpattern (`(?P<ParamName>RegExp)`).
-- Unnamed parameters are no longer allowed (e.g. `([^\/]+)`). They must also be converted to the new named parameter syntax (`<ParamName:RegExp>`).
-- Controller action routes should be defined as a string (`'action/path'`) rather than an array with an `action` key (`['action' => 'action/path']`).
-- Template routes should be defined as an array with a `template` key (`['template' => 'template/path']`) rather than a string (`'template/path'`).
+- パターンの名前付けされたパラメータは、正規表現のサブパターン（`(?P<ParamName>RegExp)`）ではなく、フォーマット（`<ParamName:RegExp>`）を利用して定義する必要があります。
+- 名前付けされていないパラメータ（例：`([^\/]+)`）は、もはや許可されません。新しい名前付けされたパラメータ構文（`<ParamName:RegExp>`）に変換しなければなりません。
+- コントローラーアクションのルーティングは、`action` キーを持つ配列（`['action' => 'action/path']`）ではなく、文字列（`'action/path'`）として定義する必要があります。
+- テンプレートのルーティングは、文字列（`'template/path'`）ではなく、`template` キーを持つ配列（`['template' => 'template/path']`）として定義する必要があります。
 
 ```php
 // Old:
@@ -167,31 +168,31 @@ If you have any [URL rules](config/README.md#url-rules) saved in `config/routes.
 'blog/type/<type:[^\/]+>' => ['template' => 'blog/_type'],
 ```
 
-## PHP Constants
+## PHP 定数
 
-Some PHP constants have been deprecated in Craft 3, and will no longer work in Craft 4:
+いくつかの PHP 定数は Craft 3 で非推奨となり、Craft 4 で動作しなくなります
 
-| Old PHP Constant | What to do instead                                                                                       |
-| ---------------- | -------------------------------------------------------------------------------------------------------- |
-| `CRAFT_LOCALE`   | Use the [CRAFT_SITE](config/README.md#craft-site) constant<sup>1</sup>                                   |
-| `CRAFT_SITE_URL` | Use the <config3:siteUrl> config setting or [environment variables](config/#environmental-configuration) |
+| 旧 PHP 定数 | 代わりにすべきこと |
+| ---------------- | ----------------------------------------
+| `CRAFT_LOCALE` | [CRAFT_SITE](config/README.md#craft-site) 定数<sup>1</sup> を利用してください |
+| `CRAFT_SITE_URL` | コンフィグ設定 <config3:siteUrl>、または、[環境変数](config/#environmental-configuration)を利用してください |
 
-*<sup>1</sup> Craft 3 doesn’t require each site/locale to have its own `index.php` file anymore, so alternatively you can remove all unnecessary site/locale web roots and subfolders. See the [Localization guide](sites.md) for more info.*
+*<sup>1</sup> Craft 3 ではそれぞれのサイト / ロケールごとに独自の `index.php` ファイルを用意することが必須ではなくなりました。そのため、不要になったすべてのサイト / ロケールのウェブルート、および、サブフォルダーを削除することもできます。詳細については、[ローカライゼーションガイド](sites.md)を参照してください。*
 
-## Static Translation Files
+## 静的な翻訳ファイル
 
-Craft 3 still supports [static message translations](sites.md#static-message-translations), but the directory structure has changed. Now within your `translations/` folder, you should create subdirectories for each locale, and within them, PHP files for each **translation category**.
+Craft 3 でも[静的メッセージの翻訳](sites.md#static-message-translations)をサポートしていますが、ディレクトリ構造が変わりました。`translations/` フォルダの中にローケルごとのサブディレクトリを作成し、それぞれに**翻訳カテゴリ**ごとの PHP ファイルを作成する必要があります。
 
-The acceptable translation categories are:
+受け入れられる翻訳カテゴリは、次の通りです。
 
-| Category        | Description                               |
-| --------------- | ----------------------------------------- |
-| `app`           | Craft’s translation messages              |
-| `yii`           | Yii’s translation messages                |
-| `site`          | custom site-specific translation messages |
-| `plugin-handle` | Plugins’ translation messages             |
+| カテゴリ | 説明 |
+| --------------- | -----------------------------------------
+| `app` | Craft 向けの翻訳メッセージ |
+| `yii` | Yii 向けの翻訳メッセージ |
+| `site` | サイト固有の翻訳メッセージ |
+| `plugin-handle` | プラグイン向けの翻訳メッセージ |
 
-In Craft 3, your `translations/` folder might look something like this:
+Craft 3 の `translations/` フォルダの構成は、次のようになります。
 
 ```treeview
 translations/
@@ -200,26 +201,26 @@ translations/
     └── site.php
 ```
 
-## User Photos
+## ユーザーフォト
 
-User photos are stored as assets now. When upgrading to Craft 3, Craft will automatically create a new asset volume called “User Photos” at `storage/userphotos/` (where Craft previously stored all user photos, but without the `<Username>/` subfolders). However this folder is above your web root and inaccessible to HTTP requests, so until you make this volume publicly accessible, user photos will not work on the front end.
+ユーザーフォトはアセットとして保存されるようになりました。Craft 3 にアップグレードすると、Craft は（ `<Username>/` サブフォルダを除く、Craft が事前にすべてのユーザー画像を保管している） `storage/userphotos/` を「User Photos」と呼ばれる新しいアセットボリュームとして自動的に作成します。しかしながら、このフォルダはウェブルートよりも上位階層にあるため、HTTP リクエストでアクセスできません。 そのため、このボリュームをアクセスできる状態にするまで、ユーサーフォトはフロントエンドで動作しません。
 
-Here’s how you can resolve this:
+次の方法で解決してください。
 
-1. Move the `storage/userphotos/` folder somewhere below your web root (e.g. `web/userphotos/`)
-2. Go to Settings → Assets → Volumes → User Photos and configure the volume based on the new folder location:
-    - Update the File System Path setting to point to the new folder location
-    - Enable the “Assets in this volume have public URLs” setting
-    - Set the correct URL setting for the folder
-    - Save the volume
+1. `storage/userphotos/` フォルダをウェブルート下層のどこかに移動します。（例：`web/userphotos/`）
+2. 「設定 > アセット > ボリューム > User Photos」に移動し、新しいフォルダのロケーションに基づいてボリュームを設定します。
+   - 「ファイルシステムのパス」設定を新しいフォルダのロケーションにしてアップデートします。
+   - 「このボリュームのアセットにはパブリック URL が含まれます」設定を有効化します。
+   - フォルダに対応する正しい「ベース URL」を設定します。
+   - ボリュームを保存します。
 
 ## Twig 2
 
-Craft 3 uses Twig 2, which has its own breaking changes for templates:
+Craft 3 では、テンプレート向けに独自の変更を加えた Twig 2 を利用しています。
 
-### Macros
+### マクロ
 
-Twig 2 requires that you explicitly import macros in each template where you are using them. They are no longer automatically available if a parent template is including them, or even if they were defined in the same template file.
+Twig 2 では、利用先となる各テンプレートで明示的にマクロをインポートする必要があります。親テンプレートでインクルードしている場合だけでなく、同じテンプレートファイルで定義されているときでさえも、自動的に利用することはできません。
 
 ```twig
 Old:
@@ -232,9 +233,9 @@ New:
 {{ macros.foo() }}
 ```
 
-### Undefined Blocks
+### 未定義のブロック
 
-Twig 1 let you call `block()` even for blocks that didn’t exist:
+Twig 1 では、存在しないブロックでさえも `block()` で呼び出すことができます。
 
 ```twig
 {% if block('foo') is not empty %}
@@ -242,7 +243,7 @@ Twig 1 let you call `block()` even for blocks that didn’t exist:
 {% endif %}
 ```
 
-Twig 2 will throw an error unless it’s a `defined` test:
+Twig 2 では、`defined` のテストでない限り、エラーを返します。
 
 ```twig
 {% if block('foo') is defined %}
@@ -250,192 +251,192 @@ Twig 2 will throw an error unless it’s a `defined` test:
 {% endif %}
 ```
 
-## Template Tags
+## テンプレートタグ
 
-The [{% paginate %}](dev/tags.md#paginate) tag no longer has an `{% endpaginate %}` closing tag, so remove any instances of that.
+[{% paginate %}](dev/tags.md#paginate) タグは `{% endpaginate %}` 終了タグを持たなくなったため、そのインスタンスをすべて削除します。
 
-Some Twig template tags have been deprecated in Craft 3, and will be completely removed in Craft 4:
+いくつかの Twig テンプレートタグは Craft 3 で非推奨となり、Craft 4 で完全に削除されます。
 
-| Old Tag                         | What to do instead                                                         |
-| ------------------------------- | -------------------------------------------------------------------------- |
-| `{% includeCss %}`              | Use the [{% css %}](dev/tags.md#css) tag                                   |
-| `{% includeHiResCss %}`         | Use the [{% css %}](dev/tags.md#css) tag and write your own media selector |
-| `{% includeJs %}`               | Use the [{% js %}](dev/tags.md#js) tag                                     |
-| `{% includeCssFile url %}`      | `{% do view.registerCssFile(url) %}`                                       |
-| `{% includeJsFile url %}`       | `{% do view.registerJsFile(url) %}`                                        |
-| `{% includeCssResource path %}` | Use an [asset bundle](extend/asset-bundles.md)                             |
-| `{% includeJsResource path %}`  | Use an [asset bundle](extend/asset-bundles.md)                             |
+| 旧タグ | 代わりにすべきこと |
+| ------------------------------- | ---------------------------------------------
+| `{% includeCss %}` | [{% css %}](dev/tags.md#css) タグを利用してください |
+| `{% includeHiResCss %}` | [{% css %}](dev/tags.md#css) タグを使用し、自身のメディアセレクタを記述してください |
+| `{% includeJs %}` | [{% js %}](dev/tags.md#js) タグを利用してください |
+| `{% includeCssFile url %}` | `{% do view.registerCssFile(url) %}` |
+| `{% includeJsFile url %}` | `{% do view.registerJsFile(url) %}` |
+| `{% includeCssResource path %}` | [アセットバンドル](extend/asset-bundles.md)を利用してください |
+| `{% includeJsResource path %}` | [アセットバンドル](extend/asset-bundles.md)を利用してください |
 
-## Template Functions
+## テンプレートファンクション
 
-Some template functions have been removed completely:
+いくつかのテンプレートファンクションは完全に削除されました。
 
-| Old Template Function                       | What to do instead                                 |
-| ------------------------------------------- | -------------------------------------------------- |
-| `craft.hasPackage()`                        | *(n/a)*                                            |
-| `craft.entryRevisions.getDraftByOffset()`   | *(n/a)*                                            |
-| `craft.entryRevisions.getVersionByOffset()` | *(n/a)*                                            |
-| `craft.fields.getFieldType(type)`           | `craft.app.fields.createField(type)`               |
-| `craft.fields.populateFieldType()`          | *(n/a)*                                            |
-| `craft.tasks.areTasksPending()`             | `craft.app.queue.getHasWaitingJobs()`<sup>1</sup>  |
-| `craft.tasks.getRunningTask()`              | *(n/a)*                                            |
-| `craft.tasks.getTotalTasks()`               | *(n/a)*                                            |
-| `craft.tasks.haveTasksFailed()`             | *(n/a)*                                            |
-| `craft.tasks.isTaskRunning()`               | `craft.app.queue.getHasReservedJobs()`<sup>1</sup> |
+| 旧テンプレートファンクション | 代わりにすべきこと |
+| ------------------------------------------- | ------------------------------------
+| `craft.hasPackage()` | *(n/a)* |
+| `craft.entryRevisions.getDraftByOffset()` | *(n/a)* |
+| `craft.entryRevisions.getVersionByOffset()` | *(n/a)* |
+| `craft.fields.getFieldType(type)` | `craft.app.fields.createField(type)` |
+| `craft.fields.populateFieldType()` | *(n/a)* |
+| `craft.tasks.areTasksPending()` | `craft.app.queue.getHasWaitingJobs()`<sup>1</sup> |
+| `craft.tasks.getRunningTask()` | *(n/a)* |
+| `craft.tasks.getTotalTasks()` | *(n/a)* |
+| `craft.tasks.haveTasksFailed()` | *(n/a)* |
+| `craft.tasks.isTaskRunning()` | `craft.app.queue.getHasReservedJobs()`<sup>1</sup> |
 
-*<sup>1</sup> Only available if the `queue` component implements <craft3:craft\queue\QueueInterface>.*
+*<sup>1</sup> `queue` コンポーネントが <craft3:craft\queue\QueueInterface> を実装している場合のみ、使用可能です。*
 
-Some template functions have been deprecated in Craft 3, and will be completely removed in Craft 4:
+いくつかのテンプレートファンクションは Craft 3 で非推奨となり、Craft 4 で完全に削除されます。
 
-| Old Template Function                                   | What to do instead                                          |
-| ------------------------------------------------------- | ----------------------------------------------------------- |
-| `round(num)`                                            | `num|round`                                                 |
-| `getCsrfInput()`                                        | `csrfInput()`                                               |
-| `getHeadHtml()`                                         | `head()`                                                    |
-| `getFootHtml()`                                         | `endBody()`                                                 |
-| `getTranslations()`                                     | `view.getTranslations()|json_encode|raw`                    |
-| `craft.categoryGroups.getAllGroupIds()`                 | `craft.app.categories.allGroupIds`                          |
-| `craft.categoryGroups.getEditableGroupIds()`            | `craft.app.categories.editableGroupIds`                     |
-| `craft.categoryGroups.getAllGroups()`                   | `craft.app.categories.allGroups`                            |
-| `craft.categoryGroups.getEditableGroups()`              | `craft.app.categories.editableGroups`                       |
-| `craft.categoryGroups.getTotalGroups()`                 | `craft.app.categories.totalGroups`                          |
-| `craft.categoryGroups.getGroupById(id)`                 | `craft.app.categories.getGroupById(id)`                     |
-| `craft.categoryGroups.getGroupByHandle(handle)`         | `craft.app.categories.getGroupByHandle(handle)`             |
-| `craft.config.[setting]` *(magic getter)*               | `craft.app.config.general.[setting]`                        |
-| `craft.config.get(setting)`                             | `craft.app.config.general.[setting]`                        |
-| `craft.config.usePathInfo()`                            | `craft.app.config.general.usePathInfo`                      |
-| `craft.config.omitScriptNameInUrls()`                   | `craft.app.config.general.omitScriptNameInUrls`             |
-| `craft.config.getResourceTrigger()`                     | `craft.app.config.general.resourceTrigger`                  |
-| `craft.locale()`                                        | `craft.app.language`                                        |
-| `craft.isLocalized()`                                   | `craft.app.isMultiSite`                                     |
-| `craft.deprecator.getTotalLogs()`                       | `craft.app.deprecator.totalLogs`                            |
-| `craft.elementIndexes.getSources()`                     | `craft.app.elementIndexes.sources`                          |
-| `craft.emailMessages.getAllMessages()`                  | `craft.emailMessages.allMessages`                           |
-| `craft.emailMessages.getMessage(key)`                   | `craft.app.emailMessages.getMessage(key)`                   |
-| `craft.entryRevisions.getDraftsByEntryId(id)`           | `craft.app.entryRevisions.getDraftsByEntryId(id)`           |
-| `craft.entryRevisions.getEditableDraftsByEntryId(id)`   | `craft.entryRevisions.getEditableDraftsByEntryId(id)`       |
-| `craft.entryRevisions.getDraftById(id)`                 | `craft.app.entryRevisions.getDraftById(id)`                 |
-| `craft.entryRevisions.getVersionsByEntryId(id)`         | `craft.app.entryRevisions.getVersionsByEntryId(id)`         |
-| `craft.entryRevisions.getVersionById(id)`               | `craft.app.entryRevisions.getVersionById(id)`               |
-| `craft.feeds.getFeedItems(url)`                         | `craft.app.feeds.getFeedItems(url)`                         |
-| `craft.fields.getAllGroups()`                           | `craft.app.fields.allGroups`                                |
-| `craft.fields.getGroupById(id)`                         | `craft.app.fields.getGroupById(id)`                         |
-| `craft.fields.getFieldById(id)`                         | `craft.app.fields.getFieldById(id)`                         |
-| `craft.fields.getFieldByHandle(handle)`                 | `craft.app.fields.getFieldByHandle(handle)`                 |
-| `craft.fields.getAllFields()`                           | `craft.app.fields.allFields`                                |
-| `craft.fields.getFieldsByGroupId(id)`                   | `craft.app.fields.getFieldsByGroupId(id)`                   |
-| `craft.fields.getLayoutById(id)`                        | `craft.app.fields.getLayoutById(id)`                        |
-| `craft.fields.getLayoutByType(type)`                    | `craft.app.fields.getLayoutByType(type)`                    |
-| `craft.fields.getAllFieldTypes()`                       | `craft.app.fields.allFieldTypes`                            |
-| `craft.globals.getAllSets()`                            | `craft.app.globals.allSets`                                 |
-| `craft.globals.getEditableSets()`                       | `craft.app.globals.editableSets`                            |
-| `craft.globals.getTotalSets()`                          | `craft.app.globals.totalSets`                               |
-| `craft.globals.getTotalEditableSets()`                  | `craft.app.globals.totalEditableSets`                       |
-| `craft.globals.getSetById(id)`                          | `craft.app.globals.getSetById(id)`                          |
-| `craft.globals.getSetByHandle(handle)`                  | `craft.app.globals.getSetByHandle(handle)`                  |
-| `craft.i18n.getAllLocales()`                            | `craft.app.i18n.allLocales`                                 |
-| `craft.i18n.getAppLocales()`                            | `craft.app.i18n.appLocales`                                 |
-| `craft.i18n.getCurrentLocale()`                         | `craft.app.locale`                                          |
-| `craft.i18n.getLocaleById(id)`                          | `craft.app.i18n.getLocaleById(id)`                          |
-| `craft.i18n.getSiteLocales()`                           | `craft.app.i18n.siteLocales`                                |
-| `craft.i18n.getSiteLocaleIds()`                         | `craft.app.i18n.siteLocaleIds`                              |
-| `craft.i18n.getPrimarySiteLocale()`                     | `craft.app.i18n.primarySiteLocale`                          |
-| `craft.i18n.getEditableLocales()`                       | `craft.app.i18n.editableLocales`                            |
-| `craft.i18n.getEditableLocaleIds()`                     | `craft.app.i18n.editableLocaleIds`                          |
-| `craft.i18n.getLocaleData()`                            | `craft.app.i18n.getLocaleById(id)`                          |
-| `craft.i18n.getDatepickerJsFormat()`                    | `craft.app.locale.getDateFormat('short', 'jui')`            |
-| `craft.i18n.getTimepickerJsFormat()`                    | `craft.app.locale.getTimeFormat('short', 'php')`            |
-| `craft.request.isGet()`                                 | `craft.app.request.isGet`                                   |
-| `craft.request.isPost()`                                | `craft.app.request.isPost`                                  |
-| `craft.request.isDelete()`                              | `craft.app.request.isDelete`                                |
-| `craft.request.isPut()`                                 | `craft.app.request.isPut`                                   |
-| `craft.request.isAjax()`                                | `craft.app.request.isAjax`                                  |
-| `craft.request.isSecure()`                              | `craft.app.request.isSecureConnection`                      |
-| `craft.request.isLivePreview()`                         | `craft.app.request.isLivePreview`<sup>1</sup>               |
-| `craft.request.getScriptName()`                         | `craft.app.request.scriptFilename`                          |
-| `craft.request.getPath()`                               | `craft.app.request.pathInfo`                                |
-| `craft.request.getUrl()`                                | `url(craft.app.request.pathInfo)`                           |
-| `craft.request.getSegments()`                           | `craft.app.request.segments`                                |
-| `craft.request.getSegment(num)`                         | `craft.app.request.getSegment(num)`                         |
-| `craft.request.getFirstSegment()`                       | `craft.app.request.segments|first`                          |
-| `craft.request.getLastSegment()`                        | `craft.app.request.segments|last`                           |
-| `craft.request.getParam(name)`                          | `craft.app.request.getParam(name)`                          |
-| `craft.request.getQuery(name)`                          | `craft.app.request.getQueryParam(name)`                     |
-| `craft.request.getPost(name)`                           | `craft.app.request.getBodyParam(name)`                      |
-| `craft.request.getCookie(name)`                         | `craft.app.request.cookies.get(name)`                       |
-| `craft.request.getServerName()`                         | `craft.app.request.serverName`                              |
-| `craft.request.getUrlFormat()`                          | `craft.app.config.general.usePathInfo`                      |
-| `craft.request.isMobileBrowser()`                       | `craft.app.request.isMobileBrowser()`                       |
-| `craft.request.getPageNum()`                            | `craft.app.request.pageNum`                                 |
-| `craft.request.getHostInfo()`                           | `craft.app.request.hostInfo`                                |
-| `craft.request.getScriptUrl()`                          | `craft.app.request.scriptUrl`                               |
-| `craft.request.getPathInfo()`                           | `craft.app.request.getPathInfo(true)`                       |
-| `craft.request.getRequestUri()`                         | `craft.app.request.url`                                     |
-| `craft.request.getServerPort()`                         | `craft.app.request.serverPort`                              |
-| `craft.request.getUrlReferrer()`                        | `craft.app.request.referrer`                                |
-| `craft.request.getUserAgent()`                          | `craft.app.request.userAgent`                               |
-| `craft.request.getUserHostAddress()`                    | `craft.app.request.userIP`                                  |
-| `craft.request.getUserHost()`                           | `craft.app.request.userHost`                                |
-| `craft.request.getPort()`                               | `craft.app.request.port`                                    |
-| `craft.request.getCsrfToken()`                          | `craft.app.request.csrfToken`                               |
-| `craft.request.getQueryString()`                        | `craft.app.request.queryString`                             |
-| `craft.request.getQueryStringWithoutPath()`             | `craft.app.request.queryStringWithoutPath`                  |
-| `craft.request.getIpAddress()`                          | `craft.app.request.userIP`                                  |
-| `craft.request.getClientOs()`                           | `craft.app.request.clientOs`                                |
-| `craft.sections.getAllSections()`                       | `craft.app.sections.allSections`                            |
-| `craft.sections.getEditableSections()`                  | `craft.app.sections.editableSections`                       |
-| `craft.sections.getTotalSections()`                     | `craft.app.sections.totalSections`                          |
-| `craft.sections.getTotalEditableSections()`             | `craft.app.sections.totalEditableSections`                  |
-| `craft.sections.getSectionById(id)`                     | `craft.app.sections.getSectionById(id)`                     |
-| `craft.sections.getSectionByHandle(handle)`             | `craft.app.sections.getSectionByHandle(handle)`             |
-| `craft.systemSettings.[category]` *(magic getter)*      | `craft.app.systemSettings.getSettings('category')`          |
-| `craft.userGroups.getAllGroups()`                       | `craft.app.userGroups.allGroups`                            |
-| `craft.userGroups.getGroupById(id)`                     | `craft.app.userGroups.getGroupById(id)`                     |
-| `craft.userGroups.getGroupByHandle(handle)`             | `craft.app.userGroups.getGroupByHandle(handle)`             |
-| `craft.userPermissions.getAllPermissions()`             | `craft.app.userPermissions.allPermissions`                  |
+| 旧テンプレートファンクション | 代わりにすべきこと |
+| ------------------------------------------------------- | ---------------------------------------------
+| `round(num)` | `num|round` |
+| `getCsrfInput()` | `csrfInput()` |
+| `getHeadHtml()` | `head()` |
+| `getFootHtml()` | `endBody()` |
+| `getTranslations()` | `view.getTranslations()|json_encode|raw` |
+| `craft.categoryGroups.getAllGroupIds()` | `craft.app.categories.allGroupIds` |
+| `craft.categoryGroups.getEditableGroupIds()` | `craft.app.categories.editableGroupIds` |
+| `craft.categoryGroups.getAllGroups()` | `craft.app.categories.allGroups` |
+| `craft.categoryGroups.getEditableGroups()` | `craft.app.categories.editableGroups` |
+| `craft.categoryGroups.getTotalGroups()` | `craft.app.categories.totalGroups` |
+| `craft.categoryGroups.getGroupById(id)` | `craft.app.categories.getGroupById(id)` |
+| `craft.categoryGroups.getGroupByHandle(handle)` | `craft.app.categories.getGroupByHandle(handle)` |
+| `craft.config.[setting]` *(magic getter)* | `craft.app.config.general.[setting]` |
+| `craft.config.get(setting)` | `craft.app.config.general.[setting]` |
+| `craft.config.usePathInfo()` | `craft.app.config.general.usePathInfo` |
+| `craft.config.omitScriptNameInUrls()` | `craft.app.config.general.omitScriptNameInUrls` |
+| `craft.config.getResourceTrigger()` | `craft.app.config.general.resourceTrigger` |
+| `craft.locale()` | `craft.app.language` |
+| `craft.isLocalized()` | `craft.app.isMultiSite` |
+| `craft.deprecator.getTotalLogs()` | `craft.app.deprecator.totalLogs` |
+| `craft.elementIndexes.getSources()` | `craft.app.elementIndexes.sources` |
+| `craft.emailMessages.getAllMessages()` | `craft.emailMessages.allMessages` |
+| `craft.emailMessages.getMessage(key)` | `craft.app.emailMessages.getMessage(key)` |
+| `craft.entryRevisions.getDraftsByEntryId(id)` | `craft.app.entryRevisions.getDraftsByEntryId(id)` |
+| `craft.entryRevisions.getEditableDraftsByEntryId(id)` | `craft.entryRevisions.getEditableDraftsByEntryId(id)` |
+| `craft.entryRevisions.getDraftById(id)` | `craft.app.entryRevisions.getDraftById(id)` |
+| `craft.entryRevisions.getVersionsByEntryId(id)` | `craft.app.entryRevisions.getVersionsByEntryId(id)` |
+| `craft.entryRevisions.getVersionById(id)` | `craft.app.entryRevisions.getVersionById(id)` |
+| `craft.feeds.getFeedItems(url)` | `craft.app.feeds.getFeedItems(url)` |
+| `craft.fields.getAllGroups()` | `craft.app.fields.allGroups` |
+| `craft.fields.getGroupById(id)` | `craft.app.fields.getGroupById(id)` |
+| `craft.fields.getFieldById(id)` | `craft.app.fields.getFieldById(id)` |
+| `craft.fields.getFieldByHandle(handle)` | `craft.app.fields.getFieldByHandle(handle)` |
+| `craft.fields.getAllFields()` | `craft.app.fields.allFields` |
+| `craft.fields.getFieldsByGroupId(id)` | `craft.app.fields.getFieldsByGroupId(id)` |
+| `craft.fields.getLayoutById(id)` | `craft.app.fields.getLayoutById(id)` |
+| `craft.fields.getLayoutByType(type)` | `craft.app.fields.getLayoutByType(type)` |
+| `craft.fields.getAllFieldTypes()` | `craft.app.fields.allFieldTypes` |
+| `craft.globals.getAllSets()` | `craft.app.globals.allSets` |
+| `craft.globals.getEditableSets()` | `craft.app.globals.editableSets` |
+| `craft.globals.getTotalSets()` | `craft.app.globals.totalSets` |
+| `craft.globals.getTotalEditableSets()` | `craft.app.globals.totalEditableSets` |
+| `craft.globals.getSetById(id)` | `craft.app.globals.getSetById(id)` |
+| `craft.globals.getSetByHandle(handle)` | `craft.app.globals.getSetByHandle(handle)` |
+| `craft.i18n.getAllLocales()` | `craft.app.i18n.allLocales` |
+| `craft.i18n.getAppLocales()` | `craft.app.i18n.appLocales` |
+| `craft.i18n.getCurrentLocale()` | `craft.app.locale` |
+| `craft.i18n.getLocaleById(id)` | `craft.app.i18n.getLocaleById(id)` |
+| `craft.i18n.getSiteLocales()` | `craft.app.i18n.siteLocales` |
+| `craft.i18n.getSiteLocaleIds()` | `craft.app.i18n.siteLocaleIds` |
+| `craft.i18n.getPrimarySiteLocale()` | `craft.app.i18n.primarySiteLocale` |
+| `craft.i18n.getEditableLocales()` | `craft.app.i18n.editableLocales` |
+| `craft.i18n.getEditableLocaleIds()` | `craft.app.i18n.editableLocaleIds` |
+| `craft.i18n.getLocaleData()` | `craft.app.i18n.getLocaleById(id)` |
+| `craft.i18n.getDatepickerJsFormat()` | `craft.app.locale.getDateFormat('short', 'jui')` |
+| `craft.i18n.getTimepickerJsFormat()` | `craft.app.locale.getTimeFormat('short', 'php')` |
+| `craft.request.isGet()` | `craft.app.request.isGet` |
+| `craft.request.isPost()` | `craft.app.request.isPost` |
+| `craft.request.isDelete()` | `craft.app.request.isDelete` |
+| `craft.request.isPut()` | `craft.app.request.isPut` |
+| `craft.request.isAjax()` | `craft.app.request.isAjax` |
+| `craft.request.isSecure()` | `craft.app.request.isSecureConnection` |
+| `craft.request.isLivePreview()` | `craft.app.request.isLivePreview`<sup>1</sup> |
+| `craft.request.getScriptName()` | `craft.app.request.scriptFilename` |
+| `craft.request.getPath()` | `craft.app.request.pathInfo` |
+| `craft.request.getUrl()` | `url(craft.app.request.pathInfo)` |
+| `craft.request.getSegments()` | `craft.app.request.segments` |
+| `craft.request.getSegment(num)` | `craft.app.request.getSegment(num)` |
+| `craft.request.getFirstSegment()` | `craft.app.request.segments|first` |
+| `craft.request.getLastSegment()` | `craft.app.request.segments|last` |
+| `craft.request.getParam(name)` | `craft.app.request.getParam(name)` |
+| `craft.request.getQuery(name)` | `craft.app.request.getQueryParam(name)` |
+| `craft.request.getPost(name)` | `craft.app.request.getBodyParam(name)` |
+| `craft.request.getCookie(name)` | `craft.app.request.cookies.get(name)` |
+| `craft.request.getServerName()` | `craft.app.request.serverName` |
+| `craft.request.getUrlFormat()` | `craft.app.config.general.usePathInfo` |
+| `craft.request.isMobileBrowser()` | `craft.app.request.isMobileBrowser()` |
+| `craft.request.getPageNum()` | `craft.app.request.pageNum` |
+| `craft.request.getHostInfo()` | `craft.app.request.hostInfo` |
+| `craft.request.getScriptUrl()` | `craft.app.request.scriptUrl` |
+| `craft.request.getPathInfo()` | `craft.app.request.getPathInfo(true)` |
+| `craft.request.getRequestUri()` | `craft.app.request.url` |
+| `craft.request.getServerPort()` | `craft.app.request.serverPort` |
+| `craft.request.getUrlReferrer()` | `craft.app.request.referrer` |
+| `craft.request.getUserAgent()` | `craft.app.request.userAgent` |
+| `craft.request.getUserHostAddress()` | `craft.app.request.userIP` |
+| `craft.request.getUserHost()` | `craft.app.request.userHost` |
+| `craft.request.getPort()` | `craft.app.request.port` |
+| `craft.request.getCsrfToken()` | `craft.app.request.csrfToken` |
+| `craft.request.getQueryString()` | `craft.app.request.queryString` |
+| `craft.request.getQueryStringWithoutPath()` | `craft.app.request.queryStringWithoutPath` |
+| `craft.request.getIpAddress()` | `craft.app.request.userIP` |
+| `craft.request.getClientOs()` | `craft.app.request.clientOs` |
+| `craft.sections.getAllSections()` | `craft.app.sections.allSections` |
+| `craft.sections.getEditableSections()` | `craft.app.sections.editableSections` |
+| `craft.sections.getTotalSections()` | `craft.app.sections.totalSections` |
+| `craft.sections.getTotalEditableSections()` | `craft.app.sections.totalEditableSections` |
+| `craft.sections.getSectionById(id)` | `craft.app.sections.getSectionById(id)` |
+| `craft.sections.getSectionByHandle(handle)` | `craft.app.sections.getSectionByHandle(handle)` |
+| `craft.systemSettings.[category]` *(magic getter)* | `craft.app.systemSettings.getSettings('category')` |
+| `craft.userGroups.getAllGroups()` | `craft.app.userGroups.allGroups` |
+| `craft.userGroups.getGroupById(id)` | `craft.app.userGroups.getGroupById(id)` |
+| `craft.userGroups.getGroupByHandle(handle)` | `craft.app.userGroups.getGroupByHandle(handle)` |
+| `craft.userPermissions.getAllPermissions()` | `craft.app.userPermissions.allPermissions` |
 | `craft.userPermissions.getGroupPermissionsByUserId(id)` | `craft.app.userPermissions.getGroupPermissionsByUserId(id)` |
-| `craft.session.isLoggedIn()`                            | `not craft.app.user.isGuest`                                |
-| `craft.session.getUser()`                               | `currentUser`                                               |
-| `craft.session.getRemainingSessionTime()`               | `craft.app.user.remainingSessionTime`                       |
-| `craft.session.getRememberedUsername()`                 | `craft.app.user.rememberedUsername`                         |
-| `craft.session.getReturnUrl()`                          | `craft.app.user.getReturnUrl()`                             |
-| `craft.session.getFlashes()`                            | `craft.app.session.getAllFlashes()`                         |
-| `craft.session.getFlash()`                              | `craft.app.session.getFlash()`                              |
-| `craft.session.hasFlash()`                              | `craft.app.session.hasFlash()`                              |
+| `craft.session.isLoggedIn()` | `not craft.app.user.isGuest` |
+| `craft.session.getUser()` | `currentUser` |
+| `craft.session.getRemainingSessionTime()` | `craft.app.user.remainingSessionTime` |
+| `craft.session.getRememberedUsername()` | `craft.app.user.rememberedUsername` |
+| `craft.session.getReturnUrl()` | `craft.app.user.getReturnUrl()` |
+| `craft.session.getFlashes()` | `craft.app.session.getAllFlashes()` |
+| `craft.session.getFlash()` | `craft.app.session.getFlash()` |
+| `craft.session.hasFlash()` | `craft.app.session.hasFlash()` |
 
-*<sup>1</sup> `craft.app.request.isLivePreview` is also deprecated, and only will return `true` when previewing categories or plugin-supplied element types that don’t support the new previewing system. If you were calling this to work around Craft templating bugs in Live Preview requests, you can simply delete the condition now, and treat Live Preview requests the same as any other request type.*
+*<sup>1</sup> `craft.app.request.isLivePreview` は非推奨となり、新しいプレビューシステムをサポートしないカテゴリ、または、プラグインが提供するエレメントタイプをプレビューする場合のみ `true` を返します。ライブプレビューリクエストの Craft のテンプレートバグへ対処するためにこれを呼び出していた場合は、今すぐ条件を削除し、ライブプレビューリクエストを他のリクエストタイプと同様に取り扱ってください。*
 
-## Date Formatting
+## 日付フォーマット
 
-Craft’s extended DateTime class has been removed in Craft 3. Here’s a list of things you used to be able to do in your templates, and what the Craft 3 equivalent is. (The DateTime object is represented by the `d` variable. In reality it could be `entry.postDate`, `now`, etc.)
+Craft によって拡張された DateTime クラスは Craft 3 で削除されました。ここに、テンプレート内で使用可能だったものと、Craft 3 で同様の働きをするもののリストを掲載します。（DateTime オブジェクトは、変数 `d` で表されます。実際には `entry.postDate` や `now` などになる可能性があります。）
 
-| Old                               | New                                |
-| --------------------------------- | ---------------------------------- |
-| `{{ d }}` *(treated as a string)* | `{{ d|date('Y-m-d') }}`            |
-| `{{ d.atom() }}`                  | `{{ d|atom }}`                     |
-| `{{ d.cookie() }}`                | `{{ d|date('l, d-M-y H:i:s T')}}`  |
-| `{{ d.day() }}`                   | `{{ d|date('j') }}`                |
-| `{{ d.iso8601() }}`               | `{{ d|date('c') }}`                |
-| `{{ d.localeDate() }}`            | `{{ d|date('short') }}`            |
-| `{{ d.localeTime() }}`            | `{{ d|time('short') }}`            |
-| `{{ d.month() }}`                 | `{{ d|date('n') }}`                |
-| `{{ d.mySqlDateTime() }}`         | `{{ d|date('Y-m-d H:i:s') }}`      |
-| `{{ d.nice() }}`                  | `{{ d|datetime('short') }}`        |
-| `{{ d.rfc1036() }}`               | `{{ d|date('D, d M y H:i:s O') }}` |
-| `{{ d.rfc1123() }}`               | `{{ d|date('r') }}`                |
-| `{{ d.rfc2822() }}`               | `{{ d|date('r') }}`                |
-| `{{ d.rfc3339() }}`               | `{{ d|date('Y-m-d\\TH:i:sP') }}` |
-| `{{ d.rfc822() }}`                | `{{ d|date('D, d M y H:i:s O') }}` |
-| `{{ d.rfc850() }}`                | `{{ d|date('l, d-M-y H:i:s T') }}` |
-| `{{ d.rss() }}`                   | `{{ d|rss }}`                      |
-| `{{ d.uiTimestamp() }}`           | `{{ d|timestamp('short') }}`       |
-| `{{ d.w3c() }}`                   | `{{ d|date('Y-m-d\\TH:i:sP') }}` |
-| `{{ d.w3cDate() }}`               | `{{ d|date('Y-m-d') }}`            |
-| `{{ d.year() }}`                  | `{{ d|date('Y') }}`                |
+| 旧 | 新 |
+| --------------------------------- | ----------------------------------
+| `{{ d }}` *(treated as a string)* | `{{ d|date('Y-m-d') }}` |
+| `{{ d.atom() }}` | `{{ d|atom }}` |
+| `{{ d.cookie() }}` | `{{ d|date('l, d-M-y H:i:s T')}}` |
+| `{{ d.day() }}` | `{{ d|date('j') }}` |
+| `{{ d.iso8601() }}` | `{{ d|date('c') }}` |
+| `{{ d.localeDate() }}` | `{{ d|date('short') }}` |
+| `{{ d.localeTime() }}` | `{{ d|time('short') }}` |
+| `{{ d.month() }}` | `{{ d|date('n') }}` |
+| `{{ d.mySqlDateTime() }}` | `{{ d|date('Y-m-d H:i:s') }}` |
+| `{{ d.nice() }}` | `{{ d|datetime('short') }}` |
+| `{{ d.rfc1036() }}` | `{{ d|date('D, d M y H:i:s O') }}` |
+| `{{ d.rfc1123() }}` | `{{ d|date('r') }}` |
+| `{{ d.rfc2822() }}` | `{{ d|date('r') }}` |
+| `{{ d.rfc3339() }}` | `{{ d|date('Y-m-d\\TH:i:sP') }}` |
+| `{{ d.rfc822() }}` | `{{ d|date('D, d M y H:i:s O') }}` |
+| `{{ d.rfc850() }}` | `{{ d|date('l, d-M-y H:i:s T') }}` |
+| `{{ d.rss() }}` | `{{ d|rss }}` |
+| `{{ d.uiTimestamp() }}` | `{{ d|timestamp('short') }}` |
+| `{{ d.w3c() }}` | `{{ d|date('Y-m-d\\TH:i:sP') }}` |
+| `{{ d.w3cDate() }}` | `{{ d|date('Y-m-d') }}` |
+| `{{ d.year() }}` | `{{ d|date('Y') }}` |
 
-## Currency Formatting
+## 通貨フォーマット
 
-The `|currency` filter now maps to <craft3:craft\i18n\Formatter::asCurrency()>. It still works the same, but the `stripZeroCents` argument has been renamed to `stripZeros`, and pushed back a couple notches, so you will need to update your templates if you were setting that argument.
+`|currency` フィルタは <craft3:craft\i18n\Formatter::asCurrency()> にマップされるようになりました。それでも同じ働きとなりますが、引数  `stripZeroCents` は `stripZeros` にリネームされ、キーと値の両方が必要となっているため、この引数をセットしている場合はテンプレートを更新する必要があります。
 
 ```twig
 Old:
@@ -446,43 +447,43 @@ New:
 {{ num|currency('USD', stripZeros = true) }}
 ```
 
-## Element Queries
+## エレメントクエリ
 
-### Query Params
+### クエリパラメータ
 
-Some element query params have been removed:
+いくつかのエレメントクエリパラメータは削除されました。
 
-| Element Type | Old Param        | What to do instead                                 |
-| ------------ | ---------------- | -------------------------------------------------- |
-| All of them  | `childOf`        | Use a `relatedTo` param with a `sourceElement` key |
-| All of them  | `childField`     | Use a `relatedTo` param with a `field` key         |
-| All of them  | `parentOf`       | Use a `relatedTo` param with a `targetElement` key |
-| All of them  | `parentField`    | Use a `relatedTo` param with a `field` key         |
-| All of them  | `depth`          | Use the `level` param                              |
-| Tag          | `name`           | Use the `title` param                              |
-| Tag          | `setId`          | Use the `groupId` param                            |
-| Tag          | `set`            | Use the `group` param                              |
-| Tag          | `orderBy:"name"` | Set the `orderBy` param to `'title'`               |
+| エレメントタイプ | 旧パラメータ | 代わりにすべきこと |
+| ------------ | ------------------ | -------------------------
+| すべて | `childOf` | `sourceElement` キーと共に `relatedTo` パラメータを利用してください |
+| すべて | `childField` | `field` キーと共に `relatedTo` パラメータを利用してください |
+| すべて | `parentOf` | `targetElement` キーと共に `relatedTo` パラメータを利用してください |
+| すべて | `parentField` | `field` キーと共に `relatedTo` パラメータを利用してください |
+| すべて | `depth` | `level` パラメータを利用してください |
+| タグ | `name` | `title` パラメータを利用してください |
+| タグ | `setId` | `groupId` パラメータを利用してください |
+| タグ | `set` | `group` パラメータを利用してください |
+| タグ | `orderBy:"name"` | `orderBy` パラメータに `'title'` をセットしてください |
 
-Some element query params have been renamed in Craft 3. The old params have been deprecated, but will continue to work until Craft 4.
+いくつかのエレメントクエリパラメータは Craft 3 でリネームされました。古いパラメータは非推奨となりますが、Craft 4 までは動作し続けます。
 
-| Element Type | Old Param                | New Param              |
-| ------------ | ------------------------ | ---------------------- |
-| All of them  | `order`                  | `orderBy`              |
-| All of them  | `locale`                 | `siteId` or `site`     |
-| All of them  | `localeEnabled`          | `enabledForSite`       |
-| All of them  | `relatedTo.sourceLocale` | `relatedTo.sourceSite` |
-| Asset        | `source`                 | `volume`               |
-| Asset        | `sourceId`               | `volumeId`             |
-| Matrix Block | `ownerLocale`            | `site` or `siteId`     |
+| エレメントタイプ | 旧パラメータ | 新パラメータ |
+| ------------ | ------------------------ | ----------------------------
+| すべて | `order` | `orderBy` |
+| すべて | `locale` | `siteId` または `site` |
+| すべて | `localeEnabled` | `enabledForSite` |
+| すべて | `relatedTo.sourceLocale` | `relatedTo.sourceSite` |
+| アセット | `source` | `volume` |
+| アセット | `sourceId` | `volumeId` |
+| 行列ブロック | `ownerLocale` | `site` または `siteId` |
 
 #### `limit` Param
 
-The `limit` param is now set to `null` (no limit) by default, rather than 100.
+`limit` パラメータは、100ではなく、デフォルトで `null`（無制限）がセットされるようになりました。
 
-#### Setting Params to Arrays
+#### パラメータを配列にセットする
 
-If you want to set a param value to an array, you now **must** type out the array brackets.
+パラメータ値を配列にセットする場合、配列の大括弧を記述**しなければなりません**。
 
 ```twig
 Old:
@@ -494,15 +495,15 @@ New:
     .relatedTo(['and', 1, 2, 3]) %}
 ```
 
-#### Cloning Element Queries
+#### エレメントクエリの複製
 
-In Craft 2, each time you call a parameter-setter method (e.g. `.type('article')`), the method would:
+Craft 2 では、パラメータ設定メソッド（例：`.type('article')`）を呼び出すときは、次のような手順になります。
 
-1. clone the `ElementCriteriaModel` object
-2. set the parameter value on the cloned object
-3. return the cloned object
+1. `ElementCriteriaModel` オブジェクトを複製する
+2. 複製したオブジェクトのパラメータ値を設定する
+3. 複製したオブジェクトを返す
 
-That made it possible to execute variations of an element query, without affecting subsequent queries. For example:
+これによって、後続のクエリに影響を与えることなく、エレメントクエリのバリエーションを実行できるようにしています。例えば、
 
 ```twig
 {% set query = craft.entries.section('news') %}
@@ -510,16 +511,16 @@ That made it possible to execute variations of an element query, without affecti
 {% set totalEntries = query.total() %}
 ```
 
-Here `.type()` is applying the `type` parameter to a _clone_ of `query`, so it had no effect on `query.total()`, which will still return the total number of News entries, regardless of their entry types.
+この `.type()` は `type` パラメータを `query` の _clone_ に適用しているため、`query.total()` には影響を与えません。入力タイプに関わらず、News エントリの総数を返します。
 
-This behavior has changed in Craft 3, though. Now any time you call a parameter-setter method, the method will:
+しかし、この動作は Craft 3 で変更されました。今では、パラメータ設定メソッドを呼び出すときは、次のような手順になります。
 
-1. set the parameter value on the current element query
-2. return the element query
+1. 現在のエレメントクエリにパラメータ値を設定する
+2. エレメントクエリを返す
 
-Which means in the above code example, `totalEntries` will be set to the total _Article_ entries, as the `type` parameter will still be applied.
+つまり、上記のサンプルコードでは `type` パラメータが適用されてしまうため、`totalEntries` には _Article_ エントリの総数がセットされます。
 
-If you have any templates that count on the Craft 2 behavior, you can fix them using the [clone()](dev/functions.md#clone-object) function.
+Craft 2 動作に影響を与えるテンプレートがある場合、[clone()](dev/functions.md#clone-object) ファンクションを用いて修正できます。
 
 ```twig
 {% set query = craft.entries.section('news') %}
@@ -527,25 +528,25 @@ If you have any templates that count on the Craft 2 behavior, you can fix them u
 {% set totalEntries = query.count() %}
 ```
 
-### Query Methods
+### クエリメソッド
 
-The `findElementAtOffset()` element query method has been removed in Craft 3. Use `nth()` instead.
+`findElementAtOffset()` エレメントクエリメソッドは Craft 3 で削除されました。代わりに、`nth()` を利用してください。
 
-Some element query methods have been renamed in Craft 3. The old methods have been deprecated, but will continue to work until Craft 4.
+いくつかのエレメントクエリメソッドは Craft 3 でリネームされました。古いメソッドは非推奨となりますが、Craft 4 までは動作し続けます。
 
-| Old Method      | New Method                                               |
-| --------------- | -------------------------------------------------------- |
-| `ids(criteria)` | `ids()` (setting criteria params here is now deprecated) |
-| `find()`        | `all()`                                                  |
-| `first()`       | `one()`                                                  |
-| `last()`        | `inReverse().one()` _(see [last()](#last))_              |
-| `total()`       | `count()`                                                |
+| 旧メソッド | 新メソッド |
+| --------------- | --------------------------------------------------------
+| `ids(criteria)` | `ids()`（criteria パラメータは非推奨になりました） |
+| `find()` | `all()` |
+| `first()` | `one()` |
+| `last()` | `inReverse().one()` _（[last()](#last) を参照してください)_ |
+| `total()` | `count()` |
 
-### Treating Queries as Arrays
+### クエリを配列として扱う
 
-Support for treating element queries as if they’re arrays has been deprecated in Craft 3, and will be completely removed in Craft 4.
+エレメントクエリを配列のように扱うサポートは Craft 3 で非推奨になり、Craft 4 で完全に削除されます。
 
-When you need to loop over an element query, you should start explicitly calling `.all()`, which will execute the database query and return the array of results:
+エレメントクエリをループする必要があるときは、明示的に `.all()` をコールし、データベースクエリを実行して得られる結果の配列を返す必要があります。
 
 ```twig
 Old:
@@ -557,7 +558,7 @@ New:
 {% for asset in entry.myAssetsField.all() %}...{% endfor %}
 ```
 
-When you need to get the total number of results from an element query, you should call the `.count()` method:
+エレメントクエリから結果の総数を取得したいときは、`.count()` メソッドを呼び出す必要があります。
 
 ```twig
 Old:
@@ -567,7 +568,7 @@ New:
 {% set total = craft.entries.section('news').count() %}
 ```
 
-Alternatively, if you already needed to fetch the actual query results, and you didn’t set the `offset` or `limit` params, you can use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter to find the total size of the results array without the need for an extra database query.
+代替方法として、実際のクエリ結果を事前にフェッチする必要があり、かつ `offset` や `limit` パラメータをセットしていない場合、[length](https://twig.symfony.com/doc/2.x/filters/length.html) フィルタを使うことで、余分なデータベースクエリを必要とせず、結果の配列の合計サイズを確認できます。
 
 ```twig
 {% set entries = craft.entries()
@@ -578,9 +579,9 @@ Alternatively, if you already needed to fetch the actual query results, and you 
 
 ### `last()`
 
-`last()` was deprecated in Craft 3 because it isn’t clear that it needs to run two database queries behind the scenes (the equivalent of `query.nth(query.count() - 1)`).
+`last()` は Craft 3 で非推奨になりました。なぜなら（`query.nth(query.count() - 1)` に相当する）2つのデータベースクエリを背後で実行する必要があることが明確ではないからです。
 
-In most cases you can replace calls to `.last()` with `.inReverse().one()` and get the same result, without the extra database query. (`inReverse()` will reverse the sort direction of all of the `ORDER BY` columns in the generated SQL.)
+ほとんどのケースでは、`.last()` の呼び出しを `.inReverse().one()` に置き換えることで、余分なデータベースクエリを必要とせず、同じ結果を得ることができます。（`inReverse()` は、生成された SQL のすべての `ORDER BY` カラムのソート方向を反転させます。）
 
 ```twig
 {# Channel entries are ordered by `postDate DESC` by default, so this will swap
@@ -592,12 +593,12 @@ In most cases you can replace calls to `.last()` with `.inReverse().one()` and g
     .one() %}
 ```
 
-There are two cases where `inReverse()` won’t work as expected, though:
+`inReverse()` が期待した通りに動作しないケースが2つあります。
 
-- when there is no `ORDER BY` clause in the SQL, therefore nothing to reverse
-- when the `orderBy` param contains a <yii2:yii\db\Expression> object
+- SQL に `ORDER BY` 句が存在しない場合、反転できるものがありません
+- `orderBy` パラメータに <yii2:yii\db\Expression> オブジェクトが含まれている場合
 
-In those cases, you can just replace the `.last()` call with what it’s already doing internally:
+このようなケースでは、`.last()` の呼び出しを内部的な処理で置き換えることができます。
 
 ```twig
 {% set query = craft.entries()
@@ -606,33 +607,33 @@ In those cases, you can just replace the `.last()` call with what it’s already
 {% set last = query.nth(total - 1) %}
 ```
 
-## Elements
+## エレメント
 
-Tag elements no longer have a `name` property. Use `title` instead.
+タグエレメントは、もはや `name` プロパティを持ちません。代わりに、`title` を利用してください。
 
-All elements’ `locale` properties have been deprecated, and will be completely removed in Craft 4. Use `siteId` if you need to know an element’s site ID, `site.handle` if you need to know its handle, or `site.language` if you need to know its site’s language.
+すべてのエレメントの `locale` プロパティは非推奨となり、Craft 4 で完全に削除されます。エレメントのサイト ID が判る場合は `siteId`、ハンドルが判る場合は `site.handle`、サイトの言語が判る場合は `site.language` をそれぞれ利用してください。
 
-## Models
+## モデル
 
-Models’ `getError('attribute')` methods have been deprecated, and will be completely removed in Craft 4. Use `getFirstError('attribute')` instead.
+モデルの `getError('attribute')` メソッドは非推奨となり、Craft 4 で完全に削除されます。代わりに、`getFirstError('attribute')` を利用してください。
 
-## Locales
+## ロケール
 
-Some locale methods have been deprecated in Craft 3, and will be completely removed in Craft 4:
+いくつかのロケールメソッドは Craft 3 で非推奨となり、Craft 4 で完全に削除されます。
 
-| Old Method        | What to do instead                   |
-| ----------------- | ------------------------------------ |
-| `getId()`         | `id`                                 |
-| `getName()`       | `getDisplayName(craft.app.language)` |
-| `getNativeName()` | `getDisplayName()`                   |
+| 旧メソッド | 代わりにすべきこと |
+| ------------------ | ------------------------------------
+| `getId()` | `id` |
+| `getName()` | `getDisplayName(craft.app.language)` |
+| `getNativeName()` | `getDisplayName()` |
 
-## Request Params
+## リクエストパラメータ
 
-Your front-end `<form>`s and JS scripts that submit to a controller action will need to be updated with the following changes.
+コントローラーアクションに送信するフロントエンドの `<form>` や JavaScript は、次の変更を加えてアップデートする必要があります。
 
-### `action` Params
+### `action` パラメータ
 
-`action` params must be rewritten in `kebab-case` rather than `camelCase`.
+`action` パラメータは `camelCase` ではなく `kebab-case` に書き換えなければなりません。
 
 ```twig
 Old:
@@ -642,18 +643,18 @@ New:
 <input type="hidden" name="action" value="entries/save-entry">
 ```
 
-Some controller actions have been renamed:
+いくつかのコントローラーアクションはリネームされました。
 
-| Old Controller Action       | New Controller Action             |
-| --------------------------- | --------------------------------- |
-| `categories/createCategory` | `categories/save-category`        |
-| `users/validate`            | `users/verify-email`              |
-| `users/saveProfile`         | `users/save-user`                 |
-| `users/forgotPassword`      | `users/send-password-reset-email` |
+| 旧コントローラーアクション | 新コントローラーアクション |
+| --------------------------- | --------------------------
+| `categories/createCategory` | `categories/save-category` |
+| `users/validate` | `users/verify-email` |
+| `users/saveProfile` | `users/save-user` |
+| `users/forgotPassword` | `users/send-password-reset-email` |
 
-### `redirect` Params
+### `redirect` パラメータ
 
-`redirect` params must be hashed now.
+`redirect` パラメータは、ハッシュ値に変換しなければなりません。
 
 ```twig
 Old:
@@ -663,27 +664,27 @@ New:
 <input type="hidden" name="redirect" value="{{ 'foo/bar'|hash }}">
 ```
 
-The `redirectInput()` function is provided as a shortcut.
+`redirectInput()` ファンクションは、ショートカットとして提供されています。
 
 ```twig
 {{ redirectInput('foo/bar') }}
 ```
 
-Some `redirect` param tokens have been renamed:
+いくつかの `redirect` パラメータトークンはリネームされました。
 
-| Controller Action               | Old Token     | New Token |
-| ------------------------------- | ------------- | --------- |
-| `entries/save-entry`            | `{entryId}`   | `{id}`    |
-| `entry-revisions/save-draft`    | `{entryId}`   | `{id}`    |
-| `entry-revisions/publish-draft` | `{entryId}`   | `{id}`    |
-| `fields/save-field`             | `{fieldId}`   | `{id}`    |
-| `globals/save-set`              | `{setId}`     | `{id}`    |
-| `sections/save-section`         | `{sectionId}` | `{id}`    |
-| `users/save-user`               | `{userId}`    | `{id}`    |
+| コントローラーアクション | 旧トークン | 新トークン |
+| ------------------------------- | ------------- | ---------
+| `entries/save-entry` | `{entryId}` | `{id}` |
+| `entry-revisions/save-draft` | `{entryId}` | `{id}` |
+| `entry-revisions/publish-draft` | `{entryId}` | `{id}` |
+| `fields/save-field` | `{fieldId}` | `{id}` |
+| `globals/save-set` | `{setId}` | `{id}` |
+| `sections/save-section` | `{sectionId}` | `{id}` |
+| `users/save-user` | `{userId}` | `{id}` |
 
-### CSRF Token Params
+### CSRF トークンパラメータ
 
-CSRF protection is enabled by default in Craft 3. If you didn’t already have it enabled (via the `enableCsrfProtection` config setting), each of your front-end `<form>`s and JS scripts that submit to a controller action will need to be updated with a new CSRF token param.
+CSRF プロテクションは、Craft 3 ではデフォルトで有効になりました。（コンフィグ設定 `enableCsrfProtection` で）有効化していなかった場合、 コントローラーアクションで送信するフロントエンドのすべての `<form>` と JavaScript に新しい CSRF トークンパラメータを追加するアップデートが必要です。
 
 ```twig
 {% set csrfParam = craft.app.request.csrfParam %}
@@ -691,12 +692,12 @@ CSRF protection is enabled by default in Craft 3. If you didn’t already have i
 <input type="hidden" name="{{ csrfParam }}" value="{{ csrfToken }}">
 ```
 
-The `csrfInput()` function is provided as a shortcut.
+`csrfInput()` ファンクションは、ショートカットとして提供されています。
 
 ```twig
 {{ csrfInput() }}
 ```
 
-## Plugins
+## プラグイン
 
-See [Updating Plugins for Craft 3](extend/updating-plugins.md).
+[Craft 3 向けののプラグインアップデート](extend/updating-plugins.md)を参照してください。

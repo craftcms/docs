@@ -1,19 +1,19 @@
-# Console Commands
+# コンソールコマンド
 
-While most of your interaction with Craft happens in a browser, a number of important tools are available via console commands that are run in a terminal.
+Craft とのインタラクションのほとんどはブラウザ上で行われますが、ターミナル上で実行されるコンソールコマンドを経由していくつかの重要なツールを利用できます。
 
-This can be useful for a variety of reasons, including automating tasks with `cron`, privately triggering actions via SSH or as part of a deployment process, or running resource-intensive tasks that might be constrained by the limits of your web server.
+`cron` でタスクを自動化したり、SSH 経由や[デプロイ処理](https://craftcms.com/knowledge-base/deployment-best-practices)の一部としてプライベートにアクションを発動したり、ウェブサーバーの制約によって制限されるリソース集約型のタスクを実行するなど、様々な理由で便利です。
 
-The Craft console application (`craft`) lives in the root of your project and requires PHP to run.
+Craft コンソールアプリケーション（`craft`）はプロジェクトのルートにあり、実行には PHP が必要です。
 
 ::: tip
-You may need to configure your environment in order to run PHP from your terminal; `php-fpm` and `mod_php` are meant to run with a web server while `php-cli` is a separate process for the command line.
+ターミナルから PHP を実行するために、環境を設定する必要があるかもしれません。`php-fpm` と `mod_php` はウェブサーバーと一緒に動作することを意味し、`php-cli` はコマンドライン向けの別プロセスです。
 :::
 
-Running the `craft` console command without any arguments will output a complete list of available options.
+`php craft` を引数なしで実行すると、利用可能なオプションのリストが出力されます。
 
 ```
-$ ./craft
+$ php craft
 
 This is Yii version 2.0.36.
 
@@ -31,58 +31,56 @@ The following commands are available:
 
 ...
 
-utils/repair/section-structure          Repairs structure data for a section
-
-
 To see the help of each command, enter:
 
   craft help <command-name>
 ```
 
-You can also run `php craft help <command-name>` to learn more about a command and whatever parameters and options it may accept.
+`php craft help <command-name>`を実行して、コマンド、および、コマンドが受け入れることができるパラメータやオプションの詳細を確認できます。
 
-While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default CLI commands:
+利用可能なコマンドのリストには、プロジェクトに追加されたプラグインやカスタムモジュールのものも含まれます。Craft のデフォルトの CLI コマンドは、次の通りです。
 
 ## `backup`
 
 #### `backup/db` <badge>default</badge>
 
-Creates a new database backup.
+新しいデータベースのバックアップを作成します。
 
-**Options**
+**オプション**
 
 `--path`
-:   The path the database backup should be created at. Can be any of the following:
+: The path the database backup should be created at. Can be any of the following:
     - A full file path
     - A folder path (backup will be saved in there with a dynamically-generated name)
     - A filename (backup will be saved in the working directory with the given name)
     - Blank (backup will be saved to the `config/backups/` folder with a dynamically-generated name)
 
 `--zip`
-:   Whether the backup should be saved as a zip file.\ boolean, 0 or 1 (defaults to 0)
+: Whether the backup should be saved as a zip file.\
+boolean, 0 or 1 (defaults to 0)
 
 ## `cache`
 
-Allows you to flush caches.
+キャッシュをフラッシュできます。
 
 #### `cache/flush`
 
-Flushes given cache components.
+指定されたキャッシュコンポーネントをフラッシュします。
 
 #### `cache/flush-all`
 
-Flushes all caches registered in the system.
+システムに登録されたすべてのキャッシュをフラッシュします。
 
 #### `cache/flush-schema`
 
-Clears DB schema cache for a given connection component.
+指定された接続コンポーネントの DB スキーマキャッシュをクリアします。
 
-**Parameters**
+**パラメータ**
 
 `componentId`
-:   ID of the connection component. (Defaults to `db`.)
+: ID of the connection component. (Defaults to `db`.)
 
-**Example**
+**実例**
 
 ```sh
 php craft cache/flush-schema
@@ -91,133 +89,135 @@ php craft cache/flush-schema
 
 #### `cache/index` <badge>default</badge>
 
-Lists the caches that can be flushed.
+フラッシュできるキャッシュの一覧を表示します。
 
 ## `clear-caches`
 
-Allows you to clear various Craft caches.
+様々な Craft のキャッシュをクリアできます。
 
 #### `clear-caches/all`
 
-Clears all caches.
+すべてのキャッシュをクリアします。
 
 #### `clear-caches/asset`
 
-Clears Asset caches.
+アセットキャッシュをクリアします。
 
 #### `clear-caches/asset-indexing-data`
 
-Clears Asset indexing data.
+アセットインデックスデータをクリアします。
 
 #### `clear-caches/compiled-templates`
 
-Clears compiled templates.
+コンパイル済みのテンプレートをクリアします。
 
 #### `clear-caches/cp-resources`
 
-Clears control panel resources.
+コントロールパネルのリソースをクリアします。
 
 #### `clear-caches/data`
 
-Clears data caches.
+データキャッシュをクリアします。
 
 #### `clear-caches/index` <badge>default</badge>
 
-Lists the caches that can be cleared.
+クリアできるキャッシュの一覧を表示します。
 
 #### `clear-caches/temp-files`
 
-Clears temporary files.
+一時的なファイルをクリアします。
 
 #### `clear-caches/transform-indexes`
 
-Clears the Asset transform index.
+アセット変換インデックスをクリアします。
 
 ## `fixture`
 
-Allows you to manage test fixtures.
+テストのフィクスチャを管理できます。
 
 #### `fixture/load` <badge>default</badge>
 
-Loads the specified fixture data.
+指定されたフィクスチャデータをロードします。
 
-**Parameters**
+**パラメータ**
 
 `fixturesInput`
-:   Array of fixtures to load.
+: Array of fixtures to load.
 
-**Options**
+**オプション**
 
 `--global-fixtures`, `-g`
-:   Array of global fixtures that should be applied when loading and unloading. Set to `InitDbFixture` by default, which disables and enables integrity check so your data can be safely loaded.
+: Array of global fixtures that should be applied when loading and unloading. Set to `InitDbFixture` by default, which disables and enables integrity check so your data can be safely loaded.
 
 `--namespace`, `-n`
-:   Namespace to search for fixtures. Defaults to `tests\unit\fixtures`.
+: Namespace to search for fixtures. Defaults to `tests\unit\fixtures`.
 
 #### `fixture/unload`
 
-Unloads the specified fixtures.
+指定されたフィクスチャをアンロードします。
 
-**Parameters**
+**パラメータ**
 
 `fixturesInput`
-:   Array of fixtures to load.
+: Array of fixtures to load.
 
-**Options**
+**オプション**
 
 `--global-fixtures`, `-g`
-:   Array of global fixtures that should be applied when loading and unloading. Set to `InitDbFixture` by default, which disables and enables integrity check so your data can be safely loaded.
+: Array of global fixtures that should be applied when loading and unloading. Set to `InitDbFixture` by default, which disables and enables integrity check so your data can be safely loaded.
 
 `--namespace`, `-n`
-:   Namespace to search for fixtures. Defaults to `tests\unit\fixtures`.
+: Namespace to search for fixtures. Defaults to `tests\unit\fixtures`.
 
 ## `gc`
 
 #### `gc/run` <badge>default</badge>
 
-Runs garbage collection.
+ガベージコレクションを実行します。
 
-**Options**
+**オプション**
 
 `--delete-all-trashed`
-:   Whether all soft-deleted items should be deleted, rather than just the ones that were deleted long enough ago to be ready for hard-deletion per the `softDeleteDuration` config setting.\ boolean, 0 or 1 (defaults to 0)
+: Whether all soft-deleted items should be deleted, rather than just the ones that were deleted long enough ago to be ready for hard-deletion per the `softDeleteDuration` config setting.\
+boolean, 0 or 1 (defaults to 0)
 
 ## `graphql`
 
-Allows you to manage GraphQL schemas.
+GraphQL スキーマを管理できます。
 
 #### `graphql/dump-schema`
 
-Dumps a given GraphQL schema to a file.
+指定された GraphQL スキーマをファイルにダンプします。
 
-**Options**
+**オプション**
 
 `--token`
-:   The token to look up to determine the appropriate GraphQL schema.
+: The token to look up to determine the appropriate GraphQL schema.
 
 #### `graphql/print-schema`
 
-Prints a given GraphQL schema.
+指定された GraphQL スキーマを出力します。
 
-**Options**
+**オプション**
 
 `--token`
-:   The token to look up to determine the appropriate GraphQL schema.
+: The token to look up to determine the appropriate GraphQL schema.
 
 ## `help`
 
-Provides help information about console commands.
+コンソールコマンドに関するヘルプ情報を提供します。
 
 #### `help/index` <badge>default</badge>
 
-Displays available commands or the detailed information.
+利用可能なコマンドや詳細情報を表示します。
 
-**Parameters**
+**パラメータ**
 
 `command`
-:   The name of the command to show help about.\ If not provided, all available commands will be displayed.
+: The name of the command to show help about.\
+If not provided, all available commands will be displayed.
 
-**Example**
+**実例**
 
 ```
 $ php craft help backup/db
@@ -273,355 +273,376 @@ $
 
 #### `help/list`
 
-Lists all available controllers and actions in machine-readable format.
+利用可能なすべてのコントローラーとアクションを機械可読形式でリストします。
 
 #### `help/list-action-options`
 
-List all available options for `action` in machine-readable format.
+`action` で利用可能なすべてのオプションを機械可読形式でリストします。
 
-**Parameters**
+**パラメータ**
 
 `action`
-:   Route to action. (required)
+: Route to action. (required)
 
 #### `help/usage`
 
-Displays usage information for `action`.
+`action` の使用法を表示します。
 
-**Parameters**
+**パラメータ**
 
 `action`
-:   Route to action. (required)
+: Route to action. (required)
 
 
 ## `index-assets`
 
-Allows you to re-index assets in volumes.
+ボリューム内のアセットのインデックスを再作成できます。
 
 #### `index-assets/all`
 
-Re-indexes assets across all volumes.
+すべてのボリュームに渡って、アセットのインデックスを再作成します。
 
-**Options**
+**オプション**
 
 `--cache-remote-images`
-:   Whether remote-stored images should be locally cached in the process.\ boolean, 0 or 1 (defaults to 0)
+: Whether remote-stored images should be locally cached in the process.\
+boolean, 0 or 1 (defaults to 0)
 
 `--create-missing-assets`
-:   Whether to auto-create new asset records when missing.\ boolean, 0 or 1 (defaults to 1)
+: Whether to auto-create new asset records when missing.\
+boolean, 0 or 1 (defaults to 1)
 
 `--delete-missing-assets`
-:   Whether to delete all asset records whose files are missing.\ boolean, 0 or 1 (defaults to 0)
+: Whether to delete all asset records whose files are missing.\
+boolean, 0 or 1 (defaults to 0)
 
 #### `index-assets/one` <badge>default</badge>
 
-Re-indexes assets from the given volume handle.
+指定されたボリュームのハンドルから、アセットのインデックスを再作成します。
 
-It’s possible to provide a volume sub-path to index, e.g. `php craft index-assets/one volume-handle/path/to/folder`.
-
-**Parameters**
+**パラメータ**
 
 `handle`
-:   The handle of the volume to index. (required)
+: The handle of the volume to index. (required)
 
 `startAt`
-:   Integer, defaults to 0.
+: Integer, defaults to 0.
 
-**Options**
+**オプション**
 
 `--cache-remote-images`
-:   Whether remote-stored images should be locally cached in the process.\ boolean, 0 or 1 (defaults to 0)
+: Whether remote-stored images should be locally cached in the process.\
+boolean, 0 or 1 (defaults to 0)
 
 `--create-missing-assets`
-:   Whether to auto-create new asset records when missing.\ boolean, 0 or 1 (defaults to 1)
+: Whether to auto-create new asset records when missing.\
+boolean, 0 or 1 (defaults to 1)
 
 `--delete-missing-assets`
-:   Whether to delete all asset records whose files are missing.\ boolean, 0 or 1 (defaults to 0)
+: Whether to delete all asset records whose files are missing.\
+boolean, 0 or 1 (defaults to 0)
 
 ## `install`
 
-Craft CMS CLI installer.
+Craft CMS の CLI インストーラーです。
 
 #### `install/check` <badge>default</badge>
 
-Checks whether Craft is already installed.
+Craft が既にインストールされているかどうかをチェックします。
 
 #### `install/craft`
 
-Runs the install migration.
+インストールマイグレーションを実行します。
 
-**Options**
+**オプション**
 
 `--email`
-:   The default email address for the first user to create during install.
+: The default email address for the first user to create during install.
 
 `--language`
-:   The default langcode for the first site to create during install.
+: The default langcode for the first site to create during install.
 
 `--password`
-:   The default password for the first user to create during install.
+: The default password for the first user to create during install.
 
 `--site-name`
-:   The default site name for the first site to create during install.
+: The default site name for the first site to create during install.
 
 `--site-url`
-:   The default site url for the first site to create during install.
+: The default site url for the first site to create during install.
 
 `--username`
-:   The default username for the first user to create during install.
+: The default username for the first user to create during install.
 
 #### `install/plugin`
 
-Installs a plugin. (**Deprecated**, use [`plugin/install`](#plugin-install) instead.)
+プラグインをインストールします。（**非推奨**、代わりに [`plugin/install`](#plugin-install) を利用してください。）
 
-**Parameters**
+**パラメータ**
 
 `handle`
-:   Handle of the plugin to be installed. (required)
+: Handle of the plugin to be installed. (required)
 
 ## `invalidate-tags`
 
-Allows you to invalidate cache tags.
+キャッシュタグを無効にできます。
 
 #### `invalidate-tags/all`
 
-Invalidates all cache tags.
+すべてのキャッシュタグを無効にします。
 
 #### `invalidate-tags/graphql`
 
-Invalidates all GraphQL query cache tags.
+すべての GraphQL クエリキャッシュタグを無効にします。
 
 #### `invalidate-tags/index` <badge>default</badge>
 
-Lists the caches that can be cleared.
+クリアできるキャッシュの一覧を表示します。
 
 #### `invalidate-tags/template`
 
-Invalidates all template cache tags.
+すべてのテンプレートキャッシュタグを無効にします。
 
 ## `mailer`
 
 #### `mailer/test`
 
-Tests sending an email with the current mailer settings.
+現在のメーラー設定で、メールの送信をテストします。
 
-**Options**
+**オプション**
 
 `--to`
-:   Email address that should receive the test message.
+: Email address that should receive the test message.
 
 ## `migrate`
 
-Manages Craft and plugin migrations.
+Craft とプラグインのマイグレーションを管理します。
 
 #### `migrate/all`
 
-Runs all pending Craft, plugin, and content migrations.
+保留中のすべての Craft、プラグイン、および、コンテンツのマイグレーションを実行します。
 
-**Options**
+**オプション**
 
 `--no-backup`
-:   Skip backing up the database.\ boolean, 0 or 1 (defaults to 0)
+: Skip backing up the database.\
+boolean, 0 or 1 (defaults to 0)
 
 `--no-content`
-:   Exclude pending content migrations.\ boolean, 0 or 1 (defaults to 0)
+: Exclude pending content migrations.\
+boolean, 0 or 1 (defaults to 0)
 
 #### `migrate/create`
 
-Creates a new migration.
+新しいマイグレーションを作成します。
 
-**Parameters**
+**パラメータ**
 
 `name`
-:   The name of the new migration. This should only contain letters, digits, and underscores. (required)
+: The name of the new migration. This should only contain letters, digits, and underscores. (required)
 
-**Options**
+**オプション**
 
 `--plugin`, `-p`
-:   The handle of the plugin to use during migration operations, or the plugin itself.
+: The handle of the plugin to use during migration operations, or the plugin itself.
 
 `--template-file`
-:   The template file for generating new migrations.\ This can be either a [path alias](config3:aliases) (e.g. "@app/migrations/template.php") or a file path.\ defaults to `/var/www/html/vendor/craftcms/cms/src/updates/migration.php.template`
+: The template file for generating new migrations.\
+This can be either a [path alias](config3:aliases) (e.g. "@app/migrations/template.php") or a file path.\
+defaults to `/var/www/html/vendor/craftcms/cms/src/updates/migration.php.template`
 
 `--track`
-:   The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\ If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
+: The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\
+If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
 
 `--type`, `-t`
-:   The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
+: The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
 
 #### `migrate/down`
 
-Downgrades the application by reverting old migrations.
+古いマイグレーションを戻すことで、アプリケーションをダウングレードします。
 
-**Parameters**
+**パラメータ**
 
 `limit`
-:   The number of migrations to be reverted. Defaults to 1, meaning the last applied migration will be reverted. When value is `all`, all migrations will be reverted.
+: The number of migrations to be reverted. Defaults to 1, meaning the last applied migration will be reverted. When value is `all`, all migrations will be reverted.
 
-**Options**
+**オプション**
 
 `--plugin`, `-p`
-:   The handle of the plugin to use during migration operations, or the plugin itself.
+: The handle of the plugin to use during migration operations, or the plugin itself.
 
 `--track`
-:   The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\ If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
+: The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\
+If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
 
 `--type`, `-t`
-:   The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
+: The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
 
 #### `migrate/fresh`
 
-Drops all tables and related constraints. Starts the migration from the beginning.
+すべてのテーブルと関連する制約を削除します。最初からマイグレーションを開始します。
 
-**Options**
+**オプション**
 
 `--plugin`, `-p`
-:   The handle of the plugin to use during migration operations, or the plugin itself.
+: The handle of the plugin to use during migration operations, or the plugin itself.
 
 `--track`
-:   The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\ If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
+: The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\
+If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
 
 `--type`, `-t`
-:   The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
+: The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
 
 #### `migrate/history`
 
-Displays the migration history.
+マイグレーション履歴を表示します。
 
-**Parameters**
+**パラメータ**
 
 `limit`
-:   The maximum number of migrations to be displayed. (Defaults to 10.)\ If `all`, the whole migration history will be displayed.
+: The maximum number of migrations to be displayed. (Defaults to 10.)\
+If `all`, the whole migration history will be displayed.
 
-**Options**
+**オプション**
 
 `--plugin`, `-p`
-:   The handle of the plugin to use during migration operations, or the plugin itself.
+: The handle of the plugin to use during migration operations, or the plugin itself.
 
 `--track`
-:   The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\ If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
+: The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\
+If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
 
 `--type`, `-t`
-:   The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
+: The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
 
 #### `migrate/mark`
 
-Modifies the migration history to the specified version.
+マイグレーション履歴を指定したバージョンに変更します。
 
-**Parameters**
+**パラメータ**
 
 `version`
-:   The version at which the migration history should be marked. (required)\ This can be either the timestamp or the full name of the migration.\ You may specify the name `m000000_000000_base` to set the migration history to a state where no migration has been applied.
+: The version at which the migration history should be marked. (required)\
+This can be either the timestamp or the full name of the migration.\
+You may specify the name `m000000_000000_base` to set the migration history to a state where no migration has been applied.
 
-**Options**
+**オプション**
 
 `--plugin`, `-p`
-:   The handle of the plugin to use during migration operations, or the plugin itself.
+: The handle of the plugin to use during migration operations, or the plugin itself.
 
 `--track`
-:   The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\ If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
+: The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\
+If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
 
 `--type`, `-t`
-:   The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
+: The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
 
 #### `migrate/new`
 
-Displays the un-applied new migrations.
+適用されていない新しいマイグレーションを表示します。
 
-**Parameters**
+**パラメータ**
 
 `limit`
-:   The maximum number of new migrations to be displayed. (default: 10)\ If `all`, all available new migrations will be displayed.
+: The maximum number of new migrations to be displayed. (default: 10)\
+If `all`, all available new migrations will be displayed.
 
-**Options**
+**オプション**
 
 `--plugin`, `-p`
-:   The handle of the plugin to use during migration operations, or the plugin itself.
+: The handle of the plugin to use during migration operations, or the plugin itself.
 
 `--track`
-:   The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\ If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
+: The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\
+If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
 
 `--type`, `-t`
-:   The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
+: The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
 
 #### `migrate/redo`
 
-Reapplies the last few migrations.
+最後のいくつかのマイグレーションを再適用します。
 
-**Parameters**
+**パラメータ**
 
 `limit`
-:   The number of migrations to be redone. Defaults to 1, meaning the last applied migration will be redone. When `all`, all migrations will be redone.
+: The number of migrations to be redone. Defaults to 1, meaning the last applied migration will be redone. When `all`, all migrations will be redone.
 
-**Options**
+**オプション**
 
 `--plugin`, `-p`
-:   The handle of the plugin to use during migration operations, or the plugin itself.
+: The handle of the plugin to use during migration operations, or the plugin itself.
 
 `--track`
-:   The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\ If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
+: The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\
+If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
 
 `--type`, `-t`
-:   The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
+: The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
 
 #### `migrate/to`
 
-Upgrades or downgrades till the specified version.
+指定されたバージョンまでアップグレード、または、ダウングレードします。
 
-**Parameters**
+**パラメータ**
 
 `version`
-:   Either the version name or the certain time value in the past that the application should be migrated to. This can be either the timestamp, the full name of the migration, the UNIX timestamp, or the parseable datetime string. (required)
+: Either the version name or the certain time value in the past that the application should be migrated to. This can be either the timestamp, the full name of the migration, the UNIX timestamp, or the parseable datetime string. (required)
 
-**Options**
+**オプション**
 
 `--plugin`, `-p`
-:   The handle of the plugin to use during migration operations, or the plugin itself.
+: The handle of the plugin to use during migration operations, or the plugin itself.
 
 `--track`
-:   The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\ If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
+: The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\
+If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
 
 `--type`, `-t`
-:   The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
+: The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
 
 #### `migrate/up` <badge>default</badge>
 
-Upgrades the application by applying new migrations.
+新しいマイグレーションを適用して、アプリケーションをアップグレードします。
 
-**Parameters**
+**パラメータ**
 
 `limit`
-:   The number of new migrations to be applied. If 0, it means applying all available new migrations. (Defaults to 0.)
+: The number of new migrations to be applied. If 0, it means applying all available new migrations. (Defaults to 0.)
 
-**Options**
+**オプション**
 
 `--plugin`, `-p`
-:   The handle of the plugin to use during migration operations, or the plugin itself.
+: The handle of the plugin to use during migration operations, or the plugin itself.
 
 `--track`
-:   The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\ If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
+: The migration track to work with (e.g. `craft`, `content`, `plugin:commerce`, etc.)\
+If `--plugin` is passed, this will automatically be set to the plugin’s track. Otherwise defaults to `content`.
 
 `--type`, `-t`
-:   The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
+: The type of migrations we’re dealing with here. Can be `app`, `plugin`, or `content`.
 
 ## `off`
 
-Disables `system.live` project config value—bypassing any <config3:allowAdminChanges> restrictions—meant for temporary use during the deployment process.
+<config3:allowAdminChanges> の制限をバイパスして、プロジェクトコンフィグの `system.live` 値を無効にします。これは、デプロイ処理中に一時的に利用するためのものです。
 
-**Options**
+**オプション**
 
 `--retry`
-:   Number of seconds that the `Retry-After` HTTP header should be set to for 503 responses.
+: Number of seconds that the `Retry-After` HTTP header should be set to for 503 responses.
 
-The [Retry Duration](config3:retryDuration) setting can be used to configure a *system-wide* `Retry-After` header.
+[Retry Duration](config3:retryDuration) 設定を利用して、*システム全体* の `Retry-After` ヘッダーを構成できます。
 
 ::: warning
-The <config3:isSystemLive> setting takes precedence over the `system.live` project config value, so if `config/general.php` sets `isSystemLive` to `true` or `false` these `on`/`off` commands to error out.
+<config3:isSystemLive> 設定はプロジェクトコンフィグの `system.live` 値よりも優先されるため、`config/general.php` で `isSystemLive` を `true` または `false` にセットしている場合、これらの`on`/`off` コマンドはエラーになります。
 :::
 
-**Example**
+**実例**
 
-Running the following will take the system offline and return 503 responses until it’s switched [on](#on) again:
+次のコードを実行するとシステムがオフラインになり、再び [on](#on) に切り替えるまで 503 レスポンスを返します。
 
 ```
 $ php craft off --retry=60
@@ -631,9 +652,9 @@ The retry duration is now set to 60.
 
 ## `on`
 
-Turns the system on again.
+システムを再びオンにします。
 
-**Example**
+**実例**
 
 ```
 $ php craft on
@@ -642,130 +663,135 @@ The system is now online.
 
 ## `plugin`
 
-Manage plugins.
+プラグインを管理します。
 
 #### `plugin/disable`
 
-Disables a plugin.
+プラグインを無効にします。
 
-**Parameters**
+**パラメータ**
 
 `handle`
-:   The plugin handle. (required)
+: The plugin handle. (required)
 
 #### `plugin/enable`
 
-Enables a plugin.
+プラグインを有効にします。
 
-**Parameters**
+**パラメータ**
 
 `handle`
-:   The plugin handle. (required)
+: The plugin handle. (required)
 
 #### `plugin/install`
 
-Installs a plugin.
+プラグインをインストールします。
 
-**Parameters**
+**パラメータ**
 
 `handle`
-:   The plugin handle. (required)
+: The plugin handle. (required)
 
 #### `plugin/uninstall`
 
-Uninstalls a plugin.
+プラグインをアンインストールします。
 
-**Parameters**
+**パラメータ**
 
 `handle`
-:   The plugin handle. (required)
+: The plugin handle. (required)
 
 ## `project-config`
 
-Manages the Project Config.
+プロジェクトコンフィグを管理します。
 
 #### `project-config/apply`
 
-Applies project config file changes.
+プロジェクトコンフィグファイルの変更を適用します。
 
-**Options**
+**オプション**
 
 `--force`
-:   Whether every entry change should be force-applied.\ boolean, 0 or 1 (defaults to 0)
+: Whether every entry change should be force-applied.\
+boolean, 0 or 1 (defaults to 0)
 
 #### `project-config/diff`
 
-Prints a diff of the pending project config YAML changes.
+保留中のプロジェクトコンフィグの YAML の変更点との差分を出力します。
 
 #### `project-config/rebuild`
 
-Rebuilds the project config.
+プロジェクトコンフィグを再構築します。
 
 #### `project-config/sync`
 
-Alias for [`apply`](#project-config-apply).
+[`apply`](#project-config-apply) のエイリアスです。
 
 ## `queue`
 
-Manages the queue.
+キューを管理します。
 
 #### `queue/exec`
 
-Executes a job.
+ジョブを実行します。
 
-**Parameters**
+**パラメータ**
 
 `id`
-:   Of a message. (required string)
+: Of a message. (required string)
 
 `ttr`
-:   Time to reserve. (required int)
+: Time to reserve. (required int)
 
 `attempt`
-:   Number. (required int)
+: Number. (required int)
 
 `pid`
-:   Of a worker. (required int)
+: Of a worker. (required int)
 
-**Options**
+**オプション**
 
 `--verbose`, `-v`
-:   Verbose mode of a job execute. If enabled, execute result of each job will be printed.\ boolean, 0 or 1 (defaults to 0)
+: Verbose mode of a job execute. If enabled, execute result of each job will be printed.\
+boolean, 0 or 1 (defaults to 0)
 
 #### `queue/info` <badge>default</badge>
 
-Info about queue status.
+キューのステータスに関する情報です。
 
 #### `queue/listen`
 
-Listens for newly-added queue jobs and runs them.
+新しく追加されたキュージョブを待ち受けて、それを実行します。
 
-**Parameters**
+**パラメータ**
 
 `delay`
-:   Number of seconds for waiting new job. (Defaults to 3.)
+: Number of seconds for waiting new job. (Defaults to 3.)
 
-**Options**
+**オプション**
 
 `--isolate`
-:   isolate mode. It executes a job in a child process.\ boolean, 0 or 1 (defaults to 1)
+: isolate mode. It executes a job in a child process.\
+boolean, 0 or 1 (defaults to 1)
 
 `--php-binary`
-:   Path to php interpreter that uses to run child processes.\ If undefined, `PHP_BINARY` will be used.
+: Path to php interpreter that uses to run child processes.\
+If undefined, `PHP_BINARY` will be used.
 
 `--verbose`, `-v`
-:   Verbose mode of a job execute. If enabled, execute result of each job will be printed.\ boolean, 0 or 1 (defaults to 0)
+: Verbose mode of a job execute. If enabled, execute result of each job will be printed.\
+boolean, 0 or 1 (defaults to 0)
 
 #### `queue/release`
 
-Releases job(s) from the queue.
+キューからジョブを解放します。
 
-**Parameters**
+**パラメータ**
 
 `job`
-:   The job ID to release. Pass `all` to release all jobs. (required)
+: The job ID to release. Pass `all` to release all jobs. (required)
 
-**Example**
+**実例**
 
 ```
 php craft queue/release all
@@ -773,435 +799,464 @@ php craft queue/release all
 
 #### `queue/retry`
 
-Re-adds failed job(s) to the queue.
+失敗したジョブをキューに再度追加します。
 
-**Parameters**
+**パラメータ**
 
 `job`
-:   The job ID that should be retried, or pass `all` to retry all failed jobs. (required)
+: The job ID that should be retried, or pass `all` to retry all failed jobs. (required)
 
 #### `queue/run`
 
-Runs all jobs in the queue.
+キュー内のすべてのジョブを実行します。
 
-**Options**
+**オプション**
 
 `--isolate`
-:   isolate mode. It executes a job in a child process.\ boolean, 0 or 1 (defaults to 1)
+: isolate mode. It executes a job in a child process.\
+boolean, 0 or 1 (defaults to 1)
 
 `--php-binary`
-:   Path to php interpreter that uses to run child processes.\ If undefined, `PHP_BINARY` will be used.
+: Path to php interpreter that uses to run child processes.\
+If undefined, `PHP_BINARY` will be used.
 
 `--verbose`, `-v`
-:   Verbose mode of a job execute. If enabled, execute result of each job will be printed.\ boolean, 0 or 1 (defaults to 0)
+: Verbose mode of a job execute. If enabled, execute result of each job will be printed.\
+boolean, 0 or 1 (defaults to 0)
 
 ## `resave`
 
-Allows you to bulk-save elements.
+エレメントを一括保存できます。
 
 #### `resave/assets`
 
-Re-saves assets.
+アセットを再保存します。
 
-**Options**
+**オプション**
 
 `--element-id`
-:   The ID(s) of the elements to resave.
+: The ID(s) of the elements to resave.
 
 `--limit`
-:   The number of elements to resave.
+: The number of elements to resave.
 
 `--offset`
-:   The number of elements to skip.
+: The number of elements to skip.
 
 `--propagate`
-:   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
+: Whether to save the elements across all their enabled sites.\
+boolean, 0 or 1 (defaults to 1)
 
 `--site`
-:   The site handle to save elements from.
+: The site handle to save elements from.
 
 `--status`
-:   The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\ (defaults to `any`)
+: The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\
+(defaults to `any`)
 
 `--uid`
-:   The UUID(s) of the elements to resave.
+: The UUID(s) of the elements to resave.
 
 `--update-search-index`
-:   Whether to update the search indexes for the resaved elements.\ boolean, 0 or 1 (defaults to 0)
+: Whether to update the search indexes for the resaved elements.\
+boolean, 0 or 1 (defaults to 0)
 
 `--volume`
-:   The volume handle(s) to save assets from. Can be set to multiple comma-separated volumes.
+: The volume handle(s) to save assets from. Can be set to multiple comma-separated volumes.
 
 #### `resave/categories`
 
-Re-saves categories.
+カテゴリを再保存します。
 
-**Options**
+**オプション**
 
 `--element-id`
-:   The ID(s) of the elements to resave.
+: The ID(s) of the elements to resave.
 
 `--group`
-:   The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
+: The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
 
 `--limit`
-:   The number of elements to resave.
+: The number of elements to resave.
 
 `--offset`
-:   The number of elements to skip.
+: The number of elements to skip.
 
 `--propagate`
-:   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
+: Whether to save the elements across all their enabled sites.\
+boolean, 0 or 1 (defaults to 1)
 
 `--site`
-:   The site handle to save elements from.
+: The site handle to save elements from.
 
 `--status`
-:   The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\ (defaults to `any`)
+: The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\
+(defaults to `any`)
 
 `--uid`
-:   The UUID(s) of the elements to resave.
+: The UUID(s) of the elements to resave.
 
 `--update-search-index`
-:   Whether to update the search indexes for the resaved elements.\ boolean, 0 or 1 (defaults to 0)
+: Whether to update the search indexes for the resaved elements.\
+boolean, 0 or 1 (defaults to 0)
 
 #### `resave/entries`
 
-Re-saves entries.
+エントリを再保存します。
 
-**Options**
+**オプション**
 
 `--element-id`
-:   The ID(s) of the elements to resave.
+: The ID(s) of the elements to resave.
 
 `--limit`
-:   The number of elements to resave.
+: The number of elements to resave.
 
 `--offset`
-:   The number of elements to skip.
+: The number of elements to skip.
 
 `--propagate`
-:   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
+: Whether to save the elements across all their enabled sites.\
+boolean, 0 or 1 (defaults to 1)
 
 `--section`
-:   The section handle(s) to save entries from. Can be set to multiple comma-separated sections.
+: The section handle(s) to save entries from. Can be set to multiple comma-separated sections.
 
 `--site`
-:   The site handle to save elements from.
+: The site handle to save elements from.
 
 `--status`
-:   The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\ (defaults to `any`)
+: The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\
+(defaults to `any`)
 
 `--type`
-:   The type handle(s) of the elements to resave.
+: The type handle(s) of the elements to resave.
 
 `--uid`
-:   The UUID(s) of the elements to resave.
+: The UUID(s) of the elements to resave.
 
 `--update-search-index`
-:   Whether to update the search indexes for the resaved elements.\ boolean, 0 or 1 (defaults to 0)
+: Whether to update the search indexes for the resaved elements.\
+boolean, 0 or 1 (defaults to 0)
 
 #### `resave/matrix-blocks`
 
-Re-saves Matrix blocks.
+行列ブロックを再保存します。
 
-**Options**
+**オプション**
 
 `--element-id`
-:   The ID(s) of the elements to resave.
+: The ID(s) of the elements to resave.
 
 `--field`
-:   The field handle to save Matrix blocks for.
+: The field handle to save Matrix blocks for.
 
 `--limit`
-:   The number of elements to resave.
+: The number of elements to resave.
 
 `--offset`
-:   The number of elements to skip.
+: The number of elements to skip.
 
 `--propagate`
-:   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
+: Whether to save the elements across all their enabled sites.\
+boolean, 0 or 1 (defaults to 1)
 
 `--site`
-:   The site handle to save elements from.
+: The site handle to save elements from.
 
 `--status`
-:   The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\ (defaults to `any`)
+: The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\
+(defaults to `any`)
 
 `--type`
-:   The type handle(s) of the elements to resave.
+: The type handle(s) of the elements to resave.
 
 `--uid`
-:   The UUID(s) of the elements to resave.
+: The UUID(s) of the elements to resave.
 
 `--update-search-index`
-:   Whether to update the search indexes for the resaved elements.\ boolean, 0 or 1 (defaults to 0)
+: Whether to update the search indexes for the resaved elements.\
+boolean, 0 or 1 (defaults to 0)
 
 #### `resave/tags`
 
-Re-saves tags.
+タグを再保存します。
 
-**Options**
+**オプション**
 
 `--element-id`
-:   The ID(s) of the elements to resave.
+: The ID(s) of the elements to resave.
 
 `--group`
-:   The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
+: The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
 
 `--limit`
-:   The number of elements to resave.
+: The number of elements to resave.
 
 `--offset`
-:   The number of elements to skip.
+: The number of elements to skip.
 
 `--propagate`
-:   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
+: Whether to save the elements across all their enabled sites.\
+boolean, 0 or 1 (defaults to 1)
 
 `--site`
-:   The site handle to save elements from.
+: The site handle to save elements from.
 
 `--status`
-:   The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\ (defaults to `any`)
+: The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\
+(defaults to `any`)
 
 `--uid`
-:   The UUID(s) of the elements to resave.
+: The UUID(s) of the elements to resave.
 
 `--update-search-index`
-:   Whether to update the search indexes for the resaved elements.\ boolean, 0 or 1 (defaults to 0)
+: Whether to update the search indexes for the resaved elements.\
+boolean, 0 or 1 (defaults to 0)
 
 #### `resave/users`
 
-Re-saves users.
+ユーザーを再保存します。
 
-**Options**
+**オプション**
 
 `--element-id`
-:   The ID(s) of the elements to resave.
+: The ID(s) of the elements to resave.
 
 `--group`
-:   The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
+: The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
 
 `--limit`
-:   The number of elements to resave.
+: The number of elements to resave.
 
 `--offset`
-:   The number of elements to skip.
+: The number of elements to skip.
 
 `--propagate`
-:   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
+: Whether to save the elements across all their enabled sites.\
+boolean, 0 or 1 (defaults to 1)
 
 `--site`
-:   The site handle to save elements from.
+: The site handle to save elements from.
 
 `--status`
-:   The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\ (defaults to `any`)
+: The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\
+(defaults to `any`)
 
 `--uid`
-:   The UUID(s) of the elements to resave.
+: The UUID(s) of the elements to resave.
 
 `--update-search-index`
-:   Whether to update the search indexes for the resaved elements.\ boolean, 0 or 1 (defaults to 0)
+: Whether to update the search indexes for the resaved elements.\
+boolean, 0 or 1 (defaults to 0)
 
 ## `restore`
 
 #### `restore/db` <badge>default</badge>
 
-Restores a database from backup.
+バックアップからデータベースを復元します。
 
-**Parameters**
+**パラメータ**
 
 `path`
-:   The path to the database backup file.
+: The path to the database backup file.
 
 ## `serve`
 
 #### `serve/index` <badge>default</badge>
 
-Runs the PHP built-in web server.
+PHP の組み込みウェブサーバーを実行します。
 
 ## `setup`
 
-Craft CMS setup installer.
+Craft CMS のセットアップインストーラーです。
 
 #### `setup/app-id`
 
-Generates a new application ID and saves it in the `.env` file.
+新しいアプリケーション ID を生成し、それを `.env` ファイルに保存します。
 
 #### `setup/db`
 
-Alias for [`setup/db-creds`](#setup-db-creds).
+[`setup/db-creds`](#setup-db-creds) のエイリアスです。
 
 #### `setup/db-cache-table`
 
-Creates a database table for storing DB caches.
+DB キャッシュを保存するデータベーステーブルを作成します。
 
 #### `setup/db-creds`
 
-Stores new DB connection settings to the `.env` file.
+新しいデータベース接続設定を `.env` ファイルに保存します。
 
-**Options**
+**オプション**
 
 `--database`
-:   The name of the database to select.
+: The name of the database to select.
 
 `--driver`
-:   The database driver to use. Either `mysql` for MySQL or `pgsql` for PostgreSQL.
+: The database driver to use. Either `mysql` for MySQL or `pgsql` for PostgreSQL.
 
 `--password`
-:   The database password to connect with.
+: The database password to connect with.
 
 `--port`
-:   The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
+: The database server port. デフォルトは、MySQL 向けの 3306、および、PostgreSQL 向けの 5432。
 
 `--schema`
-:   The database schema to use (PostgreSQL only).
+: The database schema to use (PostgreSQL only).
 
 `--server`
-:   The database server name or IP address. Usually `localhost` or `127.0.0.1`.
+: The database server name or IP address. Usually `localhost` or `127.0.0.1`.
 
 `--table-prefix`
-:   The table prefix to add to all database tables. This can be no more than 5 characters, and must be all lowercase.
+: The table prefix to add to all database tables. This can be no more than 5 characters, and must be all lowercase.
 
 `--user`
-:   The database username to connect with.\ (defaults to `root`)
+: The database username to connect with.\
+(defaults to `root`)
 
 #### `setup/index` <badge>default</badge>
 
-Sets up all the things.
+すべてのものを設定します。
 
 #### `setup/php-session-table`
 
-Creates a database table for storing PHP session information.
+PHP セッション情報を保存するデータベーステーブルを作成します。
 
 #### `setup/security-key`
 
-Generates a new security key and saves it in the `.env` file.
+新しいセキュリティキーを生成し、それを `.env` ファイルに保存します。
 
 #### `setup/welcome`
 
-Called from the `post-create-project-cmd` Composer hook.
+Composer フック `post-create-project-cmd` から呼び出されます。
 
 ## `tests`
 
-Provides resources for testing Craft’s services and your Craft project.
+Craft のサービスや Craft プロジェクトをテストするためのリソースを提供します。
 
 #### `tests/setup`
 
-Sets up a test suite for the current project.
+現在のプロジェクトのテストスイートを設定します。
 
-**Parameters**
+**パラメータ**
 
 `dst`
-:   The folder that the test suite should be generated in.\ Defaults to the current working directory.
+: The folder that the test suite should be generated in.\
+Defaults to the current working directory.
 
 #### `tests/test`
 
-Don’t use this method; it won’t actually execute anything.
+このメソッドは利用しないでください。実際には何も実行しません。
 
 ## `update`
 
-Updates Craft and plugins.
+Craft とプラグインをアップデートします。
 
 #### `update/composer-install`
 
-Installs dependencies based on the current composer.json & composer.lock.
+現在の composer.json と composer.lock に基づいて、依存関係をインストールします。
 
 #### `update/info`
 
-Displays info about available updates.
+利用可能なアップデートに関する情報を表示します。
 
 #### `update/update` <badge>default</badge>
 
-Updates Craft and/or plugins.
+Craft、および / または、プラグインをアップデートします。
 
-**Parameters**
+**パラメータ**
 
 `handle`
-:   The update handle (`all`, `craft`, or a plugin handle). You can pass multiple handles separated by spaces, and you can update to a specific version using the syntax `<handle>:<version>`.
+: The update handle (`all`, `craft`, or a plugin handle). You can pass multiple handles separated by spaces, and you can update to a specific version using the syntax `<handle>:<version>`.
 
-**Options**
+**オプション**
 
 `--backup`
-:   Backup the database before updating.\ boolean, 0 or 1
+: Backup the database before updating.\
+boolean, 0 or 1
 
 `--force`, `-f`
-:   Force the update if `allowUpdates` is disabled.\ boolean, 0 or 1 (defaults to 0)
+: Force the update if `allowUpdates` is disabled.\
+boolean, 0 or 1 (defaults to 0)
 
 `--migrate`
-:   Run new database migrations after completing the update.\ boolean, 0 or 1 (defaults to 1)
+: Run new database migrations after completing the update.\
+boolean, 0 or 1 (defaults to 1)
 
 ## `utils/ascii-filenames`
 
 #### `utils/ascii-filenames/index` <badge>default</badge>
 
-Converts all non-ASCII asset filenames to ASCII.
+すべての非 ASCII なアセットファイル名を ASCII に変換します。
 
 ## `utils/fix-element-uids`
 
 #### `utils/fix-element-uids/index` <badge>default</badge>
 
-Ensures all element UIDs are unique.
+すべてのエレメントの UID がユニークであることを確認します。
 
 ## `utils/prune-revisions`
 
 #### `utils/utils/prune-revisions/index` <badge>default</badge>
 
-Prunes excess element revisions.
+余分なエレメントのリビジョンを削除します。
 
-**Options**
+**オプション**
 
 `--max-revisions`
-:   The maximum number of revisions an element can have.
+: The maximum number of revisions an element can have.
 
 ## `utils/repair`
 
-Repairs data.
+データを修復します。
 
 #### `utils/repair/category-group-structure`
 
-Repairs structure data for a category group.
+カテゴリグループの構造データを修復します。
 
-**Parameters**
+**パラメータ**
 
 `handle`
-:   The category group handle. (required)
+: The category group handle. (required)
 
-**Options**
+**オプション**
 
 `--dry-run`
-:   Whether to only do a dry run of the repair process.\ boolean, 0 or 1 (defaults to 0)
+: Whether to only do a dry run of the repair process.\
+boolean, 0 or 1 (defaults to 0)
 
 #### `utils/repair/project-config`
 
-Repairs double-packed associative arrays in the project config.
+プロジェクトコンフィグのダブルパックされた連想配列を修復します。
 
-**Options**
+**オプション**
 
 `--dry-run`
-:   Whether to only do a dry run of the repair process.\ boolean, 0 or 1 (defaults to 0)
+: Whether to only do a dry run of the repair process.\
+boolean, 0 or 1 (defaults to 0)
 
 #### `utils/repair/section-structure`
 
-Repairs structure data for a section.
+セクションの構造データを修復します。
 
-**Parameters**
+**パラメータ**
 
 `handle`
-:   The section handle. (required)
+: The section handle. (required)
 
-**Options**
+**オプション**
 
 `--dry-run`
-:   Whether to only do a dry run of the repair process.\ boolean, 0 or 1 (defaults to 0)
+: Whether to only do a dry run of the repair process.\
+boolean, 0 or 1 (defaults to 0)
 
 ## `utils/update-usernames`
 
 #### `utils/update-usernames/index` <badge>default</badge>
 
-Updates all users’ usernames to ensure they match their email address.
+すべてのユーザーのユーザー名を更新して、メールアドレスと一致するようにします。
 
-**Example**
+**実例**
 
 ```
 $ php craft utils/update-usernames

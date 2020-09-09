@@ -1,6 +1,6 @@
 # ユーザープロフィールの編集フォーム
 
-You can create a form that allows users to edit their profile using the following code as a starting point:
+出発点としてこのテンプレートを使用することで、ユーザーが自身のプロフィールを編集できるようにするためのフォームを作成できます。
 
 ```twig
 {# Require that a user is logged in to view this form. #}
@@ -19,99 +19,93 @@ You can create a form that allows users to edit their profile using the followin
 {# If there were any validation errors, a `user` variable will be passed to the
    template, which contains the posted values and validation errors. If that’s not
    set, we’ll default to the current user. #}
-{% set user = user ?? <form id="profile-form" class="profile-form" method="post" accept-charset="UTF-8">
-      {{ actionInput('users/save-user') }} <div class="group">
-  <label for="first-name">First Name</label>
-  <input type="text" id="first-name" name="firstName" value="{{ formUser.firstName }}">
-</div>
+{% set user = user ?? currentUser %}
 
-<div class="group">
-  <label for="last-name">Last Name</label>
-  <input type="text" id="last-name" name="lastName" value="{{ formUser.lastName }}">
-</div> Please check for errors.</p>
+{% if user.hasErrors() %}
+  <p>Unable to save your profile.</p>
+{% endif %}
 
-      <ul>
-        {% for error in formUser.getFirstErrors() %}
-          <li>{{ error }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
-
+<form method="post" accept-charset="UTF-8" enctype="multipart/form-data">
   {{ csrfInput() }}
-
-  {# {{ redirectInput('users/'~currentUser.username) }} #}
-
   {{ actionInput('users/save-user') }}
+  {{ hiddenInput('userId', user.id) }}
+  {{ redirectInput("users/#{currentUser.username}") }}
 
-  {{ hiddenInput('userId', formUser.id) }}
+  <label for="first-name">First Name</label>
+  {{ input('text', 'firstName', user.firstName, {
+    id: 'first-name',
+    class: user.hasErrors('firstName') ? 'error',
+  }) }}
+  {{ _self.errorList(user.getErrors('firstName')) }}
 
-  <div class="group">
-    <label for="first-name">First Name</label>
-    <input type="text" id="first-name" name="firstName" value="{{ formUser.firstName }}">
-  </div>
+  <label for="last-name">Last Name</label>
+  {{ input('text', 'lastName', user.firstName, {
+    id: 'last-name',
+    class: user.hasErrors('lastName') ? 'error',
+  }) }}
+  {{ _self.errorList(user.getErrors('lastName')) }}
 
-  <div class="group">
-    <label for="last-name">Last Name</label>
-    <input type="text" id="last-name" name="lastName" value="{{ formUser.lastName }}">
-  </div>
-
-  {% if formUser.photo %}
-  <div class="group">
+  {% if user.photo %}
     <label>Photo</label>
-    <img id="user-photo" src="{{ formUser.photo.url({width: 150}) }}" alt="">
-  </div>
+    {{ user.photo.getImg({width: 150, height: 150})|attr({
+      id: 'user-photo',
+      alt: user.friendlyName,
+    }) }}
 
-  <div class="group">
     <label for="delete-photo">
-      <input id="delete-photo" type="checkbox" name="deletePhoto">
+      {{ input('checkbox', 'deletePhoto', '1', {
+        id: 'delete-photo',
+      }) }}
       Delete photo
     </label>
-    <p class="instruction">If a new photo is selected, this checkbox has no effect.</p>
-  </div>
   {% endif %}
 
-  <div class="group">
-    <label for="photo">Select photo</label>
-    <input id="photo" type="file" name="photo" accept="image/png,image/jpeg">
-  </div>
+  <label for="photo">Upload a new photo</label>
+  {{ input('file', 'photo', null, {
+    id: 'photo',
+    accept: 'image/png,image/jpeg',
+  }) }}
 
   {% if not craft.app.config.general.useEmailAsUsername %}
-    {% set error = formUser.getFirstError('username')  %}
-    {% set class = error ? {% set error = formUser.getFirstError('email')  %}
-{% set class = error ? 'has-error' : '' %}
-<div class="group {{ class }}">
-  <label for="email">Email <span class="error-symbol">&#9888;</span></label>
-
-  {% if craft.app.projectConfig.get('users.requireEmailVerification') %}
-    <p class="instruction">New email addresses need to be verified.</p>
+    <label for="username">Username</label>
+    {{ input('text', 'username', user.username, {
+      id: 'username',
+      class: user.hasErrors('username') ? 'error',
+    }) }}
+    {{ _self.errorList(user.getErrors('username')) }}
   {% endif %}
 
-  <p class="error-message">{{ error }}</p>
-  <input type="text" id="email" name="email" value="{{ formUser.unverifiedEmail ?? user.email, {
+  <label for="email">Email</label>
+  {{ input('text', 'email', user.unverifiedEmail ?? user.email, {
     id: 'email',
-    class: user.hasErrors('email') ? 'has-error' : '' %}
-  <div class="group {{ class }}">
-    <label for="email">Email <span class="error-symbol">&#9888;</span></label>
+    class: user.hasErrors('email') ? 'error',
+  }) }}
+  {{ _self.errorList(user.getErrors('username')) }}
 
-    {% if craft.app.projectConfig.get('users.requireEmailVerification') %}
-      <p class="instruction">New email addresses need to be verified.</p>
-    {% endif %}
+  {% if craft.app.projectConfig.get('users.requireEmailVerification') %}
+    <p>New email addresses need to be verified.</p>
+  {% endif %}
 
-    <p class="error-message">{{ error }}</p>
-    <input type="text" id="email" name="email" value="{{ formUser.unverifiedEmail ?? {% set error = formUser.getFirstError('newPassword')  %}
-{% set class = error ? 'has-error' : '' %}
-<div class="group {{ class }}">
-  <label for="new-password">New Password  <span class="error-symbol">&#9888;</span></label>
-  <p class="error-message">{{ error }}</p>
-  <input type="password" id="new-password" name="newPassword" value="{{ formUser.newPassword }}">
-</div> {% set error = formUser.getFirstError('bio')  %}
-{% set class = error ? 'has-error' : '' %}
-<div class="group {{ class }}">
-  <label for="bio">Bio <span class="error-symbol">&#9888;</span></label>
-  <p class="error-message">{{ error }}</p>
-  <textarea id="bio" name="fields[bio]">{{ formUser.bio }}</textarea>
-</div> 'error',
+  <label for="new-password">New Password</label>
+  {{ input('password', 'newPassword', null, {
+    id: 'new-password',
+    class: user.hasErrors('newPassword') ? 'error',
+  }) }}
+  {{ _self.errorList(user.getErrors('newPassword')) }}
+
+  <label for="current-password">Current Password</label>
+  {{ input('password', 'password', null, {
+    id: 'current-password',
+    class: user.hasErrors('currentPassword') ? 'error'
+  }) }}
+  {{ _self.errorList(user.getErrors('currentPassword')) }}
+
+  {# Custom “Bio” field #}
+  <label for="bio">Bio</label>
+  {{ tag('textarea', user.bio, {
+    id: 'bio',
+    name: 'fields[bio]',
+    class: user.hasErrors('bio') ? 'error',
   }) }}
   {{ _self.errorList(user.getErrors('bio')) }}
 
@@ -124,9 +118,10 @@ You can create a form that allows users to edit their profile using the followin
 </form>
 ```
 
-可能な限りシンプルなプロフィールフォームとフル機能のプロフィールフォームの2つの例を紹介します。
+::: tip
+入力項目 `userVariable` をフォームに含めることで、バリデーションエラーを含む場合にユーザーがテンプレートから返されるべき変数名を変更できます。
 
 ```twig
-{{ hiddenInput('userId', formUser.id) }}
+{{ hiddenInput('userVariable', 'badUser'|hash) }}
 ```
 :::
