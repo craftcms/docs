@@ -169,7 +169,7 @@ $users = \craft\elements\User::find()
 
 直接ユーザーアカウントにセットされているかユーザーグループの1つを通してセットされている、特定のユーザー権限を持つユーザーだけに、クエリの結果を絞り込みます。
 
-Craft によって定義された利用可能なユーザー権限のリストは、[ユーザー管理](/docs/3.x/ja/user-management.html)を参照してください。
+Craft によって定義された利用可能なユーザー権限のリストは、[ユーザー管理](user-management.md)を参照してください。
 
 
 
@@ -702,7 +702,7 @@ $users = \craft\elements\User::find()
 
 
 
-このパラメーターがどのように機能するかの詳細については、[リレーション](/docs/3.x/ja/relations.html)を参照してください。
+このパラメーターがどのように機能するかの詳細については、[リレーション](relations.md)を参照してください。
 
 
 
@@ -729,7 +729,7 @@ $users = \craft\elements\User::find()
 
 
 
-このパラメーターがどのように機能するかの詳細については、[検索](/docs/3.x/ja/searching.html)を参照してください。
+このパラメーターがどのように機能するかの詳細については、[検索](searching.md)を参照してください。
 
 
 
@@ -881,7 +881,7 @@ $user = \craft\elements\User::find()
 
 
 
-このパラメーターがどのように機能するかの詳細については、[エレメントの Eager-Loading](/docs/3.x/ja/dev/eager-loading-elements.html) を参照してください。
+このパラメーターがどのように機能するかの詳細については、[エレメントの Eager-Loading](dev/eager-loading-elements.md) を参照してください。
 
 
 

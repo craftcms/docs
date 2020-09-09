@@ -757,7 +757,7 @@ $assets = \craft\elements\Asset::find()
 
 
 
-このパラメーターがどのように機能するかの詳細については、[リレーション](/docs/3.x/ja/relations.html)を参照してください。
+このパラメーターがどのように機能するかの詳細については、[リレーション](relations.md)を参照してください。
 
 
 
@@ -784,7 +784,7 @@ $assets = \craft\elements\Asset::find()
 
 
 
-このパラメーターがどのように機能するかの詳細については、[検索](/docs/3.x/ja/searching.html)を参照してください。
+このパラメーターがどのように機能するかの詳細については、[検索](searching.md)を参照してください。
 
 
 
@@ -1170,7 +1170,7 @@ $assets = \craft\elements\Asset::find()
 
 
 
-このパラメーターがどのように機能するかの詳細については、[エレメントの Eager-Loading](/docs/3.x/ja/dev/eager-loading-elements.html) を参照してください。
+このパラメーターがどのように機能するかの詳細については、[エレメントの Eager-Loading](dev/eager-loading-elements.md) を参照してください。
 
 
 
