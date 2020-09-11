@@ -176,7 +176,7 @@ return [
         'cache' => [
             'class' => yii\caching\ApcCache::class,
             'useApcu' => true,
-            'keyPrefix' => 'a_unique_key',
+            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
         ],
     ],
 ];
@@ -206,7 +206,7 @@ return [
                     'weight' => 1,
                 ],
             ],
-            'keyPrefix' => 'a_unique_key',
+            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
         ],
     ],
 ];
@@ -229,7 +229,7 @@ return [
         'cache' => [
             'class' => yii\redis\Cache::class,
             'defaultDuration' => 86400,
-            'keyPrefix' => 'a_unique_key',
+            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
         ],
     ],
 ];
