@@ -2,6 +2,12 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-09-11
+### Added
+- Added simple components for flex columns.
+### Changed
+- Updated Craft 3’s system requirements to list minimum and recommended specs.
+
 ## 2020-09-09
 ### Added
 - Added Japanese translations kindly provided by @dreamseeker ([#69](https://github.com/craftcms/docs/pull/69)).
