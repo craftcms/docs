@@ -146,6 +146,12 @@ Craft’s default configuration is defined by [src/config/app.php](https://githu
 
 By default, Craft will store data caches in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) by overriding the `cache` application component from `config/app.php`.
 
+::: tip
+Make sure that your `config/app.php` file is setting a unique `id` for your application, like [new Craft projects are doing](https://github.com/craftcms/craft/blob/master/config/app.php#L23). If not, add that missing line, and run the following command to add a unique `APP_ID` environment variable to your `.env` file:
+
+    php craft setup/app-id
+:::
+
 #### Database Cache Example
 
 If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a CLI command for convenience:
@@ -166,7 +172,7 @@ return [
 ```
 
 ::: tip
-PHP コードはテンプレート内で使用できませんが、Craft はニーズに合わせて様々な方法で [Twig を拡張する](../extend/extending-twig.md)手段を提供しています。
+If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather than <craft3:craft\cache\DbCache>, you can safely switch to the latter if you remove your `cache` table’s `dateCreated`, `dateUpdated`, and `uid` columns.
 :::
 
 #### APC Example
@@ -178,7 +184,7 @@ return [
         'cache' => [
             'class' => yii\caching\ApcCache::class,
             'useApcu' => true,
-            'keyPrefix' => 'a_unique_key',
+            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
         ],
     ],
 ];
@@ -208,7 +214,7 @@ return [
                     'weight' => 1,
                 ],
             ],
-            'keyPrefix' => 'a_unique_key',
+            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
         ],
     ],
 ];
@@ -231,7 +237,7 @@ return [
         'cache' => [
             'class' => yii\redis\Cache::class,
             'defaultDuration' => 86400,
-            'keyPrefix' => 'a_unique_key',
+            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
         ],
     ],
 ];
@@ -239,7 +245,7 @@ return [
 
 ### Database Component
 
-Craft をインストールする準備ができたら、[サーバー要件](requirements.md) および [インストールガイド](installation.md)を読んでください。
+If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component:
 
 ```php
 <?php
@@ -432,7 +438,7 @@ Some settings in the control panel can be set to environment variables (like the
 
 To set these settings to an environment variable, type `$` followed by the environment variable’s name.
 
-![例えば、アセットボリュームが存在するベース URL とベースパスを定義するエイリアスを作成したいかもしれません。](../images/volume-base-url-setting.jpg)
+![A volume’s Base URL setting](../images/volume-base-url-setting.jpg)
 
 Only the environment variable’s name will be stored in your database or project config, so this is a great way to set setting values that may change per-environment, or contain sensitive information.
 
@@ -442,7 +448,7 @@ Plugins can add support for environment variables and aliases in their settings 
 
 #### Using Aliases in Control Panel Settings
 
-You can configure core settings like system file paths and the active environment by defining certain [PHP constants]() in `web/index.php`.
+Some of these settings—the ones that store a URL or a file system path—can also be set to [aliases](README.md#aliases), which is helpful if you just want to store a base URL or path in an environment variable, and append additional segments onto it.
 
 For example, you can define a `ROOT_URL` environment variable that is set to the root URL of your site:
 
