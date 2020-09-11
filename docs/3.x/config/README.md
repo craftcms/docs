@@ -144,6 +144,12 @@ Craft’s default configuration is defined by [src/config/app.php](https://githu
 
 By default, Craft will store data caches in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) by overriding the `cache` application component from `config/app.php`.
 
+::: tip
+Make sure that your `config/app.php` file is setting a unique `id` for your application, like [new Craft projects are doing](https://github.com/craftcms/craft/blob/master/config/app.php#L23). If not, add that missing line, and run the following command to add a unique `APP_ID` environment variable to your `.env` file:
+
+    php craft setup/app-id
+:::
+
 #### Database Cache Example
 
 If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a CLI command for convenience:
