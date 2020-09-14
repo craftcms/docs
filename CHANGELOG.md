@@ -2,6 +2,11 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-09-14
+### Changed
+- Expanded page heading indexes to include `h4` and `h5`, which previously led to weird-looking results on heading matches at those depths.
+- Changed nested search result display to use arrows instead of greater than signs (`>` to `→`).
+
 ## 2020-09-11
 ### Added
 - Added simple components for flex columns.
