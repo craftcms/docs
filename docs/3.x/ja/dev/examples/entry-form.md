@@ -58,10 +58,11 @@
   {{ _self.errorList(entry.getErrors('title')) }}
 
   <label for="body">Body</label>
-  {{ tag('textarea', entry.body, {
+  {{ tag('textarea', {
     id: 'body',
     name: 'body',
     class: entry.hasErrors('body') ? 'error',
+    text: entry.body,
   }) }}
   {{ _self.errorList(entry.getErrors('body')) }}
 
