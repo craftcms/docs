@@ -913,7 +913,7 @@ Narrows the query results to only categories that are related to certain other e
 
 
 
-See [Relations](relations.md) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -940,7 +940,7 @@ Narrows the query results to only categories that match a search query.
 
 
 
-See [Searching](searching.md) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1318,7 +1318,7 @@ Causes the query to return matching categories eager-loaded with related element
 
 
 
-See [Eager-Loading Elements](dev/eager-loading-elements.md) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 

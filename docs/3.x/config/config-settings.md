@@ -926,6 +926,35 @@ Array of plugin handles that should be disabled, regardless of what the project 
 ],
 ```
 
+### `disallowRobots`
+
+Allowed types
+
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+
+:   `false`
+
+Defined by
+
+:   [GeneralConfig::$disallowRobots](craft3:craft\config\GeneralConfig::$disallowRobots)
+
+Since
+
+:   3.5.10
+
+
+
+Whether front end requests should respond with `X-Robots-Tag: none` HTTP headers, indicating that pages should not be indexed,
+and links on the page should not be followed, by web crawlers.
+
+::: tip
+This should be set to `true` for development and staging environments.
+:::
+
+
+
 ### `elevatedSessionDuration`
 
 Allowed types
