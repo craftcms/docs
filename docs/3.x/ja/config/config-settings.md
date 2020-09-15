@@ -1010,6 +1010,38 @@ Since
 ],
 ```
 
+### `disallowRobots`
+
+許可される型 : :
+:
+
+[boolean](http://php.net/language.types.boolean)
+
+デフォルト値 : :
+:
+
+`false`
+
+Since :
+:
+
+[GeneralConfig::$disallowRobots](craft3:craft\config\GeneralConfig::$disallowRobots)
+
+Since
+:
+
+3.5.10
+
+
+
+Whether front end requests should respond with `X-Robots-Tag: none` HTTP headers, indicating that pages should not be indexed, and links on the page should not be followed, by web crawlers.
+
+::: tip
+This should be set to `true` for development and staging environments.
+:::
+
+
+
 ### `elevatedSessionDuration`
 
 許可される型 : :
@@ -1029,9 +1061,9 @@ Since :
 
 
 
-機密性の高い操作（例：ユーザーのグループや権限の割り当てなど）に必要な、ユーザーの昇格されたセッションの時間。
+The amount of time a user’s elevated session will last, which is required for some sensitive actions (e.g. user group/permission assignment).
 
-コントロールパネルにアクセスできないユーザーが、アカウントをアクティベートしたときにリダイレクトする URI。
+Set to `0` to disable elevated session support.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
@@ -1052,7 +1084,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 Since :
 :
 
-[craft3:craft\config\GeneralConfig::$useProjectConfigFile](craft3:craft\config\GeneralConfig::$enableBasicHttpAuth)
+[GeneralConfig::$enableBasicHttpAuth](craft3:craft\config\GeneralConfig::$enableBasicHttpAuth)
 
 Since
 :
@@ -1084,7 +1116,7 @@ Since :
 
 
 
-Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtection> [enableCsrfProtection](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablecsrfprotection) が有効な場合、CSRF トークンを保持するために Cookie を使用するかどうか。 false の場合、CSRF トークンはコンフィグ設定名 `csrfTokenName` 配下のセッション内に保管されます。 セッションの CSRF トークンを保存することでセキュリティが向上している間は、CSRF トークンをすべてのページでセッションを開始する必要があるため、サイトのパフォーマンスが低下する可能性がある点に注意してください。
+Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtection> is enabled. If false, the CSRF token will be stored in session under the `csrfTokenName` config setting name. Note that while storing CSRF tokens in session increases security, it requires starting a session for every page that a CSRF token is needed, which may degrade site performance.
 
 
 
@@ -1107,7 +1139,7 @@ Since :
 
 
 
-Craft 経由で送信されるすべてのフォームで、不可視項目による CSRF 保護を有効にするかどうか。
+Whether to enable CSRF protection via hidden form inputs for all forms submitted via Craft.
 
 
 
@@ -1128,14 +1160,14 @@ Since :
 
 [GeneralConfig::$enableGql](craft3:craft\config\GeneralConfig::$enableGql)
 
-Since :
+Since
 :
 
 3.3.1
 
 
 
-定義元 : :
+Whether the GraphQL API should be enabled.
 
 Note that the GraphQL API is only available for Craft Pro.
 
@@ -1165,11 +1197,11 @@ Since
 
 
 
-Since :
+Whether Craft should cache GraphQL queries.
 
 If set to `true`, Craft will cache the results for unique GraphQL queries per access token. The cache is automatically invalidated any time an element is saved, the site structure is updated, or a GraphQL schema is saved.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
+This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v3/craft-services-gql.html#event-before-execute-gql-query) event to provide its own caching logic and setting the `result` property.
 
 
 
@@ -1192,7 +1224,7 @@ Since :
 
 
 
-許可される型 :
+Whether to enable Craft's template `{% cache %}` tag on a global basis.
 
 
 
@@ -1215,9 +1247,9 @@ Since :
 
 
 
-If this is set to `false`, then the `Access-Control-Allow-Origin` response header will never be sent.
+The prefix that should be prepended to HTTP error status codes when determining the path to look for an error’s template.
 
-許可される型 : :
+If set to `'_'`, then your site’s 404 template would live at `templates/_404.html`, for example.
 
 
 
@@ -1256,21 +1288,21 @@ List of file extensions that will be merged into the <config3:allowedFileExtensi
 
 `null`
 
-Since :
+定義元 : :
 :
 
 [GeneralConfig::$extraAppLocales](craft3:craft\config\GeneralConfig::$extraAppLocales)
 
-Since :
+Since
 :
 
 3.0.24
 
 
 
-デフォルト値 : :
+List of extra locale IDs that the application should support, and users should be able to select as their Preferred Language.
 
-この設定は、[omitScriptNameInUrls](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#omitscriptnameinurls) が false にセットされている場合のみ影響することに注意してください。
+Only use this setting if your server has the Intl PHP extension, or if you’ve saved the corresponding [locale data](https://github.com/craftcms/locales) into your `config/locales/` folder.
 
 
 
@@ -1298,7 +1330,7 @@ Since
 
 
 
-Craft がサポートすべき追加のファイル種類のリスト。 この配列は `\craft\config\craft\helpers\Assets::_buildFileKinds()` 内で定義されたものとマージされます。
+List of additional file kinds Craft should support. This array will get merged with the one defined in `\craft\helpers\Assets::_buildFileKinds()`.
 
 ```php
 'extraFileKinds' => [
@@ -1315,7 +1347,7 @@ Craft がサポートすべき追加のファイル種類のリスト。 この�
 ```
 
 ::: tip
-ここにリストされたファイル拡張子が、即座にアップロードを許可されるわけではありません。 You will also need to list them with the <config3:extraAllowedFileExtensions> config setting.
+File extensions listed here won’t immediately be allowed to be uploaded. You will also need to list them with the <config3:extraAllowedFileExtensions> config setting.
 :::
 
 
@@ -1339,7 +1371,7 @@ Craft がサポートすべき追加のファイル種類のリスト。 この�
 
 
 
-アセットをアップロードする際に、単語を区切るために使用する文字列。 `false` の場合、空白だけが残ります。
+The string to use to separate words when uploading Assets. If set to `false`, spaces will be left alone.
 
 
 
@@ -1362,18 +1394,18 @@ Craft がサポートすべき追加のファイル種類のリスト。 この�
 
 
 
-許可される型 : :
+Whether images transforms should be generated before page load.
 
 
 
 ### `gqlTypePrefix`
 
-許可される型 : :
+Allowed types
 :
 
 [string](http://php.net/language.types.string)
 
-デフォルト値 : :
+Default value
 :
 
 `''`
@@ -1401,7 +1433,7 @@ Default value
 
 `false`
 
-定義元 : :
+Defined by
 :
 
 [GeneralConfig::$headlessMode](craft3:craft\config\GeneralConfig::$headlessMode)
@@ -1413,7 +1445,7 @@ Since
 
 
 
-デフォルト値 : :
+Whether the system should run in Headless Mode, which optimizes the system and control panel for headless CMS implementations.
 
 When this is enabled, the following changes will take place:
 
