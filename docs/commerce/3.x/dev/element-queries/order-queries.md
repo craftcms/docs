@@ -188,7 +188,7 @@ Possible values include:
 ::: code
 ```twig
 {# Fetch the current customer’s orders #}
-{% set currentCustomerId = craft.commerce.customers.customerId %}
+{% set currentCustomerId = craft.commerce.customers.customer.id %}
 {% set orders = craft.orders()
     .customerId(currentCustomerId)
     .all() %}

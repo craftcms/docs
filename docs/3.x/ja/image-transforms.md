@@ -1,30 +1,30 @@
-# 画像の変形
+# 画像変換
 
-Instead of requiring content editors to upload images at a certain size, Craft lets you define “image transforms” for automatically manipulating images on demand. Transforms are _non-destructive_, meaning they have no effect on the original uploaded image.
+コンテンツ編集者に実サイズの画像アップロードを要求する代わりに、Craft では必要に応じて自動的に画像を操作するための「画像変換」を定義できます。トランスフォームは _非破壊的_ で、アップロードされた元画像には影響しません。
 
-Transforms can be defined both in the control panel and directly from templates or GraphQL queries.
+トランスフォームは、コントロールパネルで定義することも、テンプレートや GraphQL クエリから直接定義することもできます。
 
 ## コントロールパネルからトランスフォームの定義
 
-You can define transforms from the control panel by navigating to Settings → Assets → Image Transforms and clicking the “New Transform” button.
+「設定 > アセット > 画像変換」に移動し、「新しい画像変換」ボタンをクリックすることで、コントロールパネルからトランスフォームを定義できます。
 
-Each transform has the following settings:
+トランスフォームには、次の設定があります。
 
-* **名前** – ユーザーに対する画像変形の名前
-* **ハンドル** – テンプレートに対する画像変形のハンドル
+* **名前** – ユーザーに対する画像変換の名前
+* **ハンドル** – テンプレートに対する画像変換のハンドル
 * **モード** – 変換モード
 * **幅** – 変換結果の幅
 * **高さ** – 変換結果の高さ
 * **品質** - 変換結果の画像品質（0 から 100）
 * **画像フォーマット** – 変換結果の画像フォーマット
 
-**Mode** can be set to the following values:
+**モード**には、次の値をセットできます。
 
-* **切り抜き** – 指定された幅と高さに画像を切り抜き、必要であれば画像を拡大します。 （これがデフォルトのモードです。
+* **切り抜き** – 指定された幅と高さに画像を切り抜き、必要であれば画像を拡大します。（これがデフォルトのモードです。）
 * **フィット**  – すべての寸法が指定された幅と高さに収まる範囲で、可能な限り大きいサイズになるよう画像を拡大・縮小します。
 * **ストレッチ** – 指定された幅と高さに画像を伸張します。
 
-If **Mode** is set to “Crop”, an additional “Default Focal Point” setting will appear, where you can define which area of the image Craft should center the crop on, for images without a [focal point](assets.md#focal-points) set. Its options include:
+**モード**で「切り抜き」がセットされた場合、[焦点](assets.md#focal-points)が設定されていない画像に対して Craft がどのエリアを切り抜きの中心にすべきかを決定する「デフォルトの焦点」プルダウンが表示されます。オプションには、次のものが含まれます。
 
 * 上左
 * 上中
@@ -36,21 +36,21 @@ If **Mode** is set to “Crop”, an additional “Default Focal Point” settin
 * 下部中央
 * 下部右
 
-If you leave either **Width** or **Height** blank, that dimension will be set to whatever maintains the image’s aspect ratio. So for example, if you have an image that is 600 by 400 pixels, and you set a transform’s Width to 60, but leave Height blank, the resulting height will be 40.
+**幅**または**高さ**のいずれかを空白のままにすると、その寸法は画像の縦横比を維持するようセットされます。例えば、600 x 400 ピクセルの画像があり、変形の幅を 60 に設定し、高さを空白のままにした場合、変形した画像の高さは 40 になります。
 
-If you leave **Quality** blank, Craft will use the quality set by your <config3:defaultImageQuality> config setting.
+**品質**を空白のままにすると、Craft はコンフィグ設定 <config3:defaultImageQuality> にセットされた品質を使用します
 
-**Image Format** can be set to the following values:
+**画像フォーマット**には、次の値をセットできます。
 
 * jpg
 * png
 * gif
 
-If you leave **Image Format** blank, Craft will use the original image’s format if it’s web-safe (.jpg, .png, or .gif); otherwise it will try to figure out the best-suited image format for the job. If it can’t determine that (probably because ImageMagik isn’t installed), it will just go with .jpg.
+**画像フォーマット**を空欄のままにすると、Craft は web-safe（.jpg、 .png、または .gif） なら元画像のフォーマットを使い、そうでなければ、そのジョブに最適な画像フォーマットを見つけようと試みます。（おそらく、ImageMagik がインストールされていないために）それを決定できない場合は、.jpg として処理されます。
 
-### CP で定義された画像の変形を適用する
+### コントロールパネルで定義された画像変換を適用する
 
-To output an image with a transform applied, simply pass your transform’s handle into your asset’s [getUrl()](craft3:craft\elements\Asset::getUrl()), [getWidth()](craft3:craft\elements\Asset::getWidth()), and [getHeight()](craft3:craft\elements\Asset::getHeight()) functions:
+トランスフォームを適用した画像を出力するには、トランスフォームのハンドルをアセットの [getUrl()](craft3:craft\elements\Asset::getUrl())、[getWidth()](craft3:craft\elements\Asset::getWidth())、および、[getHeight()](craft3:craft\elements\Asset::getHeight()) ファンクションに渡します。
 
 ```twig
 <img src="{{ asset.getUrl('thumb') }}"
@@ -61,9 +61,9 @@ To output an image with a transform applied, simply pass your transform’s hand
 
 ## テンプレート内でトランスフォームを定義する
 
-You can also define transforms directly in your templates.
+テンプレート内で直接トランスフォームを定義することもできます。
 
-First, you must create a [hash](dev/twig-primer.md#hashes) that defines the transform’s parameters:
+はじめに、トランスフォームのパラメータを定義した[ハッシュ](dev/twig-primer.md#hashes)を作成する必要があります。
 
 ```twig
 {% set thumb = {
@@ -75,7 +75,7 @@ First, you must create a [hash](dev/twig-primer.md#hashes) that defines the tran
 } %}
 ```
 
-Then you can pass that hash into your asset’s `getUrl()`, `getWidth()`, and `getHeight()` functions:
+次に、そのハッシュをアセットの `getUrl()`、`getWidth()`、および、`getHeight()` ファンクションへ渡します。
 
 ```twig
 <img src="{{ asset.getUrl(thumb) }}"
@@ -84,23 +84,23 @@ Then you can pass that hash into your asset’s `getUrl()`, `getWidth()`, and `g
 >
 ```
 
-Note how in that example there are no quotes around “`thumb`”, like there were in the first one. That’s because in the first one, we were passing a [string](dev/twig-primer.md#strings) set to a CP-defined transform’s handle, whereas in this example we’re passing a [variable](dev/twig-primer.md#variables) referencing the `thumb` hash we created within the template.
+ここでは、最初の例のように「`thumb`」の周りに引用符がないことに注意してください。最初の例ではコントロールパネルで定義されたトランスフォームのハンドルを[文字列](dev/twig-primer.md#strings)として渡しているのに対して、この例ではテンプレート内で作成した `thumb` ハッシュを参照するための[変数](dev/twig-primer.md#variables)として渡しているためです。
 
 ### 利用可能な値
 
-All of the same settings available to CP-defined transforms are also available to template-defined transforms.
+コントロールパネルで定義されたトランスフォームで利用可能なすべて設定は、同様にテンプレートで定義されたトランスフォームでも利用できます。
 
-* `mode` プロパティには、`'crop'`、`'fit'`、または `'stretch'` をセットすることができます。
-* `mode` に `'crop'` をセットした場合、`position` プロパティに `'top-left'`、`'top-center'`、 `'top-right'`、`'center-left'`、`'center-center'`、`'center-right'`、`'bottom-left'`、`'bottom-center'`、または `'bottom-right'` のいずれかをセットして渡すことができます。
+* `mode` プロパティには、`'crop'`、`'fit'`、または、`'stretch'` をセットできます。
+* `mode` に `'crop'` をセットした場合、`position` プロパティに `'top-left'`、`'top-center'`、`'top-right'`、`'center-left'`、`'center-center'`、`'center-right'`、`'bottom-left'`、`'bottom-center'`、または、`'bottom-right'` のいずれかをセットして渡すことができます。
 * `width` と `height` は、整数をセットするか、省略できます。
 * `quality` は、0 から 100 の間の数値をセットするか、省略できます。
-* `format` には、`'jpg'`、`'gif'`、`'png'` をセットするか、省略できます。
+* `format` には `'jpg'`、`'gif'`、`'png'` をセットするか、省略できます。
 
-### Overriding Named Transforms
+### 名前付けされた画像変換の上書き
 
-As of Craft 3.5 it’s possible to [use named transforms in templates](#applying-cp-defined-transforms-to-images) with `getUrl()`’s `transform` property and override other properties as needed.
+Craft 3.5 から `getUrl()` の `transform` プロパティで [テンプレート内で名前付き画像変換を使用](#applying-cp-defined-transforms-to-images)し、必要に応じて他のプロパティを上書きできます。
 
-In this example, we’re using the rules defined in `myNamedTransform` but explicitly outputting a `webp` image:
+この例では、`myNamedTransform` で定義されたルールを利用していますが、明示的に `webp` 画像を出力しています。
 
 ```twig
 <source type="image/webp" srcset="{{ asset.getUrl({
@@ -109,11 +109,11 @@ In this example, we’re using the rules defined in `myNamedTransform` but expli
 }) }}">
 ```
 
-### Generating `srcset` Sizes
+### `srcset` サイズの生成
 
-It’s common to need not just one sized image, but a range of them for use with [`srcset`](https://www.w3schools.com/tags/att_source_srcset.asp).
+1つの画像サイズだけでなく、[`srcset`](https://www.w3schools.com/tags/att_source_srcset.asp) で使用するための様々な画像が必要になるのが一般的です。
 
-One way you could achieve this is by combining the [`tag` template function](dev/functions.md#tag) with Craft 3.5’s new [`getSrcSet()`](craft3:craft\elements\Asset::getSrcSet()) method to output an image tag with a range of `srcset` sizes relative to the initial dimensions:
+これを実現する方法の1つは、[テンプレートファンクションの `tag`](dev/functions.md#tag) と Craft 3.5 の新しい [`getSrcSet()`](craft3:craft\elements\Asset::getSrcSet()) メソッドを組み合わせて、初期の寸法から相対的な `srcset` サイズの画像タグを出力することです。
 
 ```twig
 {% do asset.setTransform({ width: 300, height: 300 }) %}
@@ -126,12 +126,12 @@ One way you could achieve this is by combining the [`tag` template function](dev
 }) }}
 ```
 
-You can also pass a `sizes` argument to the [`getImg()`](craft3:craft\elements\Asset::getImg()) method to accomplish the same thing:
+[`getImg()`](craft3:craft\elements\Asset::getImg()) メソッドに引数 `sizes` を渡せば、同じことができます。
 
 ```twig
 {{ asset.getImg({ width: 300, height: 300 }, ['1.5x', '2x', '3x']) }}
 ```
 
 ::: tip
-You can also provide relative image sizes when eager-loading asset transforms. See [`AssetQuery::withTransforms()`](craft3:craft\elements\db\AssetQuery::withTransforms()) in the class reference for an example.
+Eager-Loading でアセットトランスフォームする際に、相対的な画像サイズを指定することもできます。実例については、クラスリファレンスの [`AssetQuery::withTransforms()`](craft3:craft\elements\db\AssetQuery::withTransforms()) を参照してください。
 :::

@@ -1,5 +1,5 @@
 module.exports = {
-  title: "Craft Nitro Documentation | %v",
+  title: "Craft Nitro Documentation",
   setTitle: "Craft Nitro",
   handle: "nitro",
   icon: "/docs/icons/nitro.svg",

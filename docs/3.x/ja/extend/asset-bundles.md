@@ -64,7 +64,7 @@ class MyPluginAsset extends AssetBundle
 ```
 
 ::: tip
-`@ns/prefix` はプラグインのルート名前空間に基づいて、自動生成されたプラグインの [Yii alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) のためのプレースホルダーになります。 プラグインの `src/` ディレクトリのパスを表します。 :::
+`@ns/prefix` はプラグインのルート名前空間に基づいて、自動生成されたプラグインの [Yii alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) のためのプレースホルダーになります。 プラグインの `src/` ディレクトリのパスを表します。
 :::
 
 ### アセットバンドルの登録
@@ -109,5 +109,5 @@ $url = \Craft::$app->assetManager->getPublishedUrl('@ns/prefix/icons', true, 'sh
 ```
 
 ::: tip
-`@ns/prefix` はプラグインのルート名前空間に基づいて、自動生成されたプラグインの [Yii alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) のためのプレースホルダーになります。 プラグインの `src/` ディレクトリのパスを表します。 :::
+`@ns/prefix` はプラグインのルート名前空間に基づいて、自動生成されたプラグインの [Yii alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) のためのプレースホルダーになります。 プラグインの `src/` ディレクトリのパスを表します。
 :::

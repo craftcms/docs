@@ -710,6 +710,9 @@ nitro ssh [<options>]
 `-m`, `--machine`
 : The name of the machine to use. Defaults to `nitro-dev`.
 
+::: warning
+If you’re using Git Bash in Windows, you’ll need to use `winpty nitro ssh` to get an interactive prompt.
+:::
 
 ## `start`
 

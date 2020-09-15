@@ -6,22 +6,22 @@
 
 チェックボックスの設定は、次の通りです。
 
-* **チェックボックスのオプション** – フィールドで利用可能なチェックボックスを定義します。 オプションの値とラベルを別々に設定したり、デフォルトでチェックしておくものを選択できます。
+* **チェックボックスのオプション** – フィールドで利用可能なチェックボックスを定義します。オプションの値とラベルを別々に設定したり、デフォルトでチェックしておくものを選択できます。
 
 ## テンプレート記法
 
 ### チェックボックスフィールドによるエレメントの照会
 
-チェックボックスフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、チェックボックスフィールドのデータに基づいた結果をフィルタできます。
+チェックボックスフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを利用して、チェックボックスフィールドのデータに基づいた結果をフィルタできます。
 
 利用可能な値には、次のものが含まれます。
 
-| 値                       | 取得するエレメント                              |
-| ----------------------- | -------------------------------------- |
-| `'foo'`                 | `foo` オプションが選択されている。                   |
-| `'not foo'`             | `foo` オプションが選択されていない。                  |
-| `['foo', 'bar']`        | with `foo` or `bar` options selected.  |
-| `['and', 'foo', 'bar']` | with `foo` and `bar` options selected. |
+| 値 | 取得するエレメント
+| - | -
+| `'foo'` | `foo` オプションが選択されている。
+| `'not foo'` | `foo` オプションが選択されていない。
+| `['foo', 'bar']` | `foo` または `bar` オプションのいずれかが選択されている。
+| `['and', 'foo', 'bar']` | `foo` と `bar` オプションが選択されている。
 
 ```twig
 {# Fetch entries with the 'foo' option checked #}
@@ -59,13 +59,13 @@
 {% endfor %}
 ```
 
-いずれかのチェックボックスが選択されているかを確認するには、[length](https://twig.symfony.com/doc/2.x/filters/length.html) フィルタを使用してください。
+いずれかのチェックボックスが選択されているかを確認するには、[length](https://twig.symfony.com/doc/2.x/filters/length.html) フィルタを利用してください。
 
 ```twig
 {% if entry.myFieldHandle|length %}
 ```
 
-特定のオプションが選択されているかを確認するには、[contains()](craft3:craft\fields\data\MultiOptionsFieldData::contains()) を使用してください。
+特定のオプションが選択されているかを確認するには、[contains()](craft3:craft\fields\data\MultiOptionsFieldData::contains()) を利用してください。
 
 ```twig
 {% if entry.myFieldHandle.contains('foo') %}
@@ -73,7 +73,7 @@
 
 ### 投稿フォームでチェックボックスフィールドを保存
 
-チェックボックスフィールドを含める必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、出発点としてこのテンプレートを使用してください。
+チェックボックスフィールドを含める必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、出発点としてこのテンプレートを利用してください。
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}

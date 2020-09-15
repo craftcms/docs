@@ -1,6 +1,6 @@
 # テンプレートの実例
 
-Craft の一般的な使用例です。
+Craft の一般的な利用例です。
 
 - [Disqus の統合](integrating-disqus.md)
 - [RSS フィード](rss-feed.md)

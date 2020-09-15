@@ -95,6 +95,33 @@ class MyTest extends Unit {
         );
     }
 }
+     use Codeception\Test\Unit;
+class MyTest extends Unit {
+    public $salaryChecker;
+
+    public function _before()
+    {
+        parent::_before();
+
+        $this->salaryChecker = new SalaryChecker();
+    }
+
+    public function testMultiply()
+    {
+        $this->assertSame(
+            4,
+            $this->salaryChecker->multiply(2, 2)
+        );
+    }
+
+    public function testAdd()
+    {
+        $this->assertSame(
+            3,
+            $this->salaryChecker->add(2, 1)
+        );
+    }
+}
      */
     public function testAdd()
     {

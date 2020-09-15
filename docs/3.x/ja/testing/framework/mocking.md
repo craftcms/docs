@@ -40,7 +40,7 @@ You can call this method multiple times in a single test if you want to mock out
 Under the hood `mockMethods` uses `Codeception\Stub::construct()`.  You can read more about this method in the Codeception documentation.
 :::
 ## `mockCraftMethods`
-`mockCraftMethods` is a pass through function that calls `mockMethods`. `mockCraftMethods` can be called via `$this->tester` within your tests. The only difference is that the `Craft::$app` object is passed as the first argument into the `mockMethods` call. Argument 2, 3 and 4 of `mockMethods` are applicable and available within `mockCraftMethods`.
+`mockCraftMethods` is a pass through function that calls `mockMethods`. `mockCraftMethods` can be called via `$this->tester` within your tests. Argument 2, 3 and 4 of `mockMethods` are applicable and available within `mockCraftMethods`. The only difference is that the `Craft::$app` object is passed as the first argument into the `mockMethods` call.
 
 ## Full mock
 Craft provides a `fullMock` setting that can be enabled in your `codeception.yml` file. A full explanation of this setting is given [here](full-mock.md). The `fullMock` option ensures all components in `Craft::$app` are set to mocks using PHP Unit. If you prefer to isolate *all* your dependencies during testing this option is for you. `fullMock` also mocks any modules/plugins you define.

@@ -271,6 +271,10 @@ function getAdditionalInfo(page, queryString, queryTerms) {
     };
   }
 
+  /**
+   * If our special (and pretty much invisible) keywords include the query string,
+   * return the result using the page title, no slug, and opening sentence.
+   */
   if (page.keywords.includes(query)) {
     return {
       headingStr: getFullHeading(page),
@@ -281,6 +285,11 @@ function getAdditionalInfo(page, queryString, queryTerms) {
   }
 
   const match = getMatch(page, query, queryTerms);
+
+  /**
+   * If we can’t match the query string to anything specific, list the result
+   * with only the page heading.
+   */
   if (!match)
     return {
       headingStr: getFullHeading(page),
@@ -327,7 +336,7 @@ function getFullHeading(page, headerIndex) {
     );
     if (headerIndex === -1) headerIndex = null;
   }
-  return headersPath.map(h => h.title).join(" > ");
+  return headersPath.map(h => h.title).join(" → ");
 }
 
 function getMatch(page, query, terms) {

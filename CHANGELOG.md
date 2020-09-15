@@ -2,13 +2,29 @@
 
 Theme and significant content changes will be documented in this file.
 
-## Unreleased
+## 2020-09-14
+### Changed
+- Expanded page heading indexes to include `h4` and `h5`, which previously led to weird-looking results on heading matches at those depths.
+- Changed nested search result display to use arrows instead of greater than signs (`>` to `→`).
+
+## 2020-09-11
+### Added
+- Added simple components for flex columns.
+### Changed
+- Updated Craft 3’s system requirements to list minimum and recommended specs.
+
+## 2020-09-09
+### Added
+- Added Japanese translations kindly provided by @dreamseeker ([#69](https://github.com/craftcms/docs/pull/69)).
+- Merged updates from Crowdin.
+
+## 2020-09-07
 ### Added
 - Documented Craft and Commerce template hooks.
 ### Fixed
 - Updated references to deprecated `currentUser.customerFieldHandle` and documented the change in the Commerce 3 upgrade notes.
 
-## 2002-09-04
+## 2020-09-04
 ### Changed
 - Updated the “Propagating Changes” section of the Project Config page, per chanegs in Craft 3.5.6.
 

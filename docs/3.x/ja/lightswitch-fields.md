@@ -2,34 +2,33 @@
 
 Lightswitch フィールドでは、「はい」または「いいえ」の答えが必要なとき向けに、トグル入力を提供します。
 
-## フィールド
+## テンプレート記法
 
-### Querying Elements with Lightswitch Fields
+### Lightswitch フィールドによるエレメントの照会
 
-When [querying for elements](element-queries.md) that have a Lightswitch field, you can filter the results based on the Lightswitch field data using a query param named after your field’s handle.
+Lightswitch フィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを利用して、Lightswitch フィールドのデータに基づいた結果をフィルタできます。
 
-Possible values include:
+利用可能な値には、次のものが含まれます。
 
-| Value                    | Fetches elements…                  |
-| ------------------------ | ---------------------------------- |
-| `true` or `':notempty:'` | with an enabled Lightswitch value. |
-| `false` or `':empty:'`   | with a disabled Lightswitch value. |
+| 値 | 取得するエレメント
+| - | -
+| `true` or `':notempty:'` | Lightswitch 値が有効になっている。
+| `false` or `':empty:'` | Lightswitch 値が無効になっている。
 
 ```twig
-{% if entry.lightswitchFieldHandle %}
-    <p>I'm on!</p>
-{% else %}
-    <p>I'm off.</p>
-{% endif %}
+{# Fetch entries with the Lightswitch field enabled #}
+{% set entries = craft.entries()
+    .myFieldHandle(true)
+    .all() %}
 ```
 
 ::: tip
-Any elements that don’t have an explicit Lightswitch value set will be treated as if they have the default field value, per the field settings.
+明示的な Lightswitch 値の設定を持たないエレメントは、フィールドの設定にしたがって、デフォルトのフィールド値を持つかのように扱われます。
 :::
 
-### Working with Lightswitch Field Data
+### Lightswitch フィールドデータの操作
 
-If you have an element with a Lightswitch field in your template, you can access its data using your Lightswitch field’s handle:
+テンプレート内で Lightswitch フィールドのエレメントを取得する場合、Lightswitch フィールドのハンドルを利用して、そのデータにアクセスできます。
 
 ```twig
 {% if entry.myFieldHandle %}
@@ -40,12 +39,12 @@ If you have an element with a Lightswitch field in your template, you can access
 ```
 
 ::: tip
-If the element doesn’t have an explicit Lightswitch field value yet, the field’s default value will be returned.
+そのエレメントが明示的な Lightswitch フィールド値の設定を持たない場合、フィールドのデフォルト値が返されます。
 :::
 
-### Saving Lightswitch Fields in Entry Forms
+### 投稿フォームで Lightswitch フィールドを保存
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Lightswitch field, you can use this template as a starting point:
+Lightswitch フィールドを含める必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、出発点としてこのテンプレートを利用してください。
 
 ```twig
 {{ hiddenInput('fields[myFieldHandle]', '') }}
