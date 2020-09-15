@@ -6,7 +6,7 @@ Before installing Craft Commerce, make sure your web server meets Commerce’s [
 
 ## Plugin Store
 
-Log into the control panel, navigate to “Plugin Store”, then search for “Commerce”.
+Log into the control panel, navigate to “Plugin Store”, then search for “Commerce”. Choose “Craft Commerce”, and from there you can choose “Add to Cart” or “Try” for either edition.
 
 ## Composer
 
