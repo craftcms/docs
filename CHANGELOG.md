@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-09-15
+### Added
+- Documented the `truncate` filter that was added in Craft 3.5.10.
+
 ## 2020-09-14
 ### Changed
 - Expanded page heading indexes to include `h4` and `h5`, which previously led to weird-looking results on heading matches at those depths.
