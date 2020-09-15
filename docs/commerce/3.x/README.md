@@ -1,6 +1,6 @@
 # About Craft Commerce
 
-Craft Commerce is an amazingly powerful and flexible e-commerce platform for [Craft CMS](https://craftcms.com).
+Craft Commerce is an amazingly powerful and flexible ecommerce platform for [Craft CMS](https://craftcms.com).
 
 Craft Commerce gives web developers an enjoyable platform to build hand-crafted ecommerce solutions, while also delivering an easy to use administration control panel for users. Using the power and flexibility of Craft CMS, designers and developers can build rich ecommerce experiences.
 
