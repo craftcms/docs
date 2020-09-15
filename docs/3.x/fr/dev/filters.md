@@ -78,6 +78,7 @@ The following [filters](https://twig.symfony.com/doc/2.x/templates.html#filters)
 | [timestamp](#timestamp)                                                            | Formats a human-readable timestamp.                                                                              |
 | [title](https://twig.symfony.com/doc/2.x/filters/title.html)                       | Formats a string into “Title Case”.                                                                              |
 | [translate](#translate-or-t)                                                       | Translates a message.                                                                                            |
+| [truncate](#truncate)                                                              | Truncates a string to a given length, while ensuring that it does not split words.                               |
 | [trim](https://twig.symfony.com/doc/2.x/filters/trim.html)                         | Strips whitespace from the beginning and end of a string.                                                        |
 | [ucfirst](#ucfirst)                                                                | Capitalizes the first character of a string.                                                                     |
 | [unique](#unique)                                                                  | Removes duplicate values from an array.                                                                          |
@@ -918,6 +919,43 @@ If no category is specified, it will default to `site`.
 ::: tip
 See [Static Message Translations](../sites.md#static-message-translations) for a full explanation on how this works.
 :::
+
+## `truncate`
+
+::: tip
+The `truncate` filter was added in Craft 3.5.10.
+:::
+
+Truncates a string to a given length, while ensuring that it does not split words.
+
+```twig
+{{ 'Hello world'|truncate(10) }}
+{# Output: Hello… #}
+```
+
+An ellipsis (`…`) will be appended to the string if it needs to be truncated, by default. You can customize what gets appended by passing a second argument. (Note that a longer appended string could result in more of the original string getting truncated.)
+
+```twig
+{{ 'Hello world'|truncate(10, '...') }}
+{# Output: Hello... #}
+
+{{ 'Hello world'|truncate(10, '') }}
+{# Output: Hello #}
+```
+
+If the truncated string cuts down to less than a single word, that first word will be split by default.
+
+```twig
+{{ 'Hello world'|truncate(2) }}
+{# Output: H… #}
+```
+
+If you’d prefer to have the entire word removed, set the `splitSingleWord` argument to `false`.
+
+```twig
+{{ 'Hello world'|truncate(2, splitSingleWord=false) }}
+{# Output: … #}
+```
 
 ## `ucfirst`
 
