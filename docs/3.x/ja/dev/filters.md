@@ -78,13 +78,14 @@
 | [timestamp](#timestamp)                                                            | Formats a human-readable timestamp.                                                                                          |
 | [title](https://twig.symfony.com/doc/2.x/filters/title.html)                       | Formats a string into “Title Case”.                                                                                          |
 | [translate](#translate-or-t)                                                       | Translates a message.                                                                                                        |
+| [truncate](#truncate)                                                              | Truncates a string to a given length, while ensuring that it does not split words.                                           |
 | [trim](https://twig.symfony.com/doc/2.x/filters/trim.html)                         | Strips whitespace from the beginning and end of a string.                                                                    |
 | [ucfirst](#ucfirst)                                                                | Capitalizes the first character of a string.                                                                                 |
 | [unique](#unique)                                                                  | Removes duplicate values from an array.                                                                                      |
 | [unshift](#unshift)                                                                | Prepends one or more items to the beginning of an array.                                                                     |
 | [upper](https://twig.symfony.com/doc/2.x/filters/upper.html)                       | Formats a string into “UPPER CASE”.                                                                                          |
 | [url_encode](https://twig.symfony.com/doc/2.x/filters/url_encode.html)             | Percent-encodes a string as a URL segment or an array as a query string.                                                     |
-| [values](#values)                                                                  | 指定された配列のすべての値の配列を返しますが、カスタムキーは除かれます。                                                                                         |
+| [values](#values)                                                                  | Returns all the values in an array, resetting its keys.                                                                      |
 | [where](#where)                                                                    | Filters an array by key/value pairs.                                                                                         |
 | [withoutKey](#withoutkey)                                                          | Returns an array without the specified key.                                                                                  |
 | [without](#without)                                                                | Returns an array without the specified element(s).                                                                           |
@@ -878,6 +879,43 @@ If no category is specified, it will default to `site`.
 See [Static Message Translations](../sites.md#static-message-translations) for a full explanation on how this works.
 :::
 
+## `truncate`
+
+::: tip
+The `truncate` filter was added in Craft 3.5.10.
+:::
+
+Truncates a string to a given length, while ensuring that it does not split words.
+
+```twig
+{{ 'Hello world'|truncate(10) }}
+{# Output: Hello… #}
+```
+
+An ellipsis (`…`) will be appended to the string if it needs to be truncated, by default. You can customize what gets appended by passing a second argument. (Note that a longer appended string could result in more of the original string getting truncated.)
+
+```twig
+{{ 'Hello world'|truncate(10, '...') }}
+{# Output: Hello... #}
+
+{{ 'Hello world'|truncate(10, '') }}
+{# Output: Hello #}
+```
+
+If the truncated string cuts down to less than a single word, that first word will be split by default.
+
+```twig
+{{ 'Hello world'|truncate(2) }}
+{# Output: H… #}
+```
+
+If you’d prefer to have the entire word removed, set the `splitSingleWord` argument to `false`.
+
+```twig
+{{ 'Hello world'|truncate(2, splitSingleWord=false) }}
+{# Output: … #}
+```
+
 ## `ucfirst`
 
 Capitalizes the first character of a string.
@@ -892,17 +930,19 @@ Capitalizes the first character of a string.
 Runs an array through [array_unique()](http://php.net/manual/en/function.array-unique.php).
 
 ```twig
-配列に <a href="http://php.net/manual/en/function.array-unique.php">array_unique()</a> を実行します。
+{% set array = ['Larry', 'Darryl', 'Darryl'] %}
+{{ array|unique }}
+{# Result: ['Larry', 'Darryl'] #}
 ```
 
 ## `unshift`
 
-This works identically to Twig’s core [`slice`](https://twig.symfony.com/doc/2.x/filters/slice.html) filter.
+Prepends one or more items to the beginning of an array, and returns the new array.
 
 ```twig
-{% set array1 = ['baz'] %}
-{% set array2 = array|push('foo', 'bar') %}
-{# Result: ['foo', 'bar', 'baz'] #}
+{% set array1 = ['foo'] %}
+{% set array2 = array|unshift('bar', 'baz') %}
+{# Result: ['bar', 'baz', 'foo'] #}
 ```
 
 ## `values`
@@ -917,7 +957,7 @@ Returns an array of all the values in a given array, but without any custom keys
 
 ## `where`
 
-配列に [ArrayHelper::index()](yii2:yii\helpers\BaseArrayHelper::index()) を実行します。
+Runs an array through <craft3:craft\helpers\ArrayHelper::where()>.
 
 ```twig
 {% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}
