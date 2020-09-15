@@ -52,7 +52,7 @@ Instead of hardcoding the value of `isWindows` inside `config/app.php`, you can 
 
 ### Mounting your entire dev folder at once
 
-If you manage all of your projects within a single dev folder, you can mount that entire folder once within Nitro, and point your sites’ webroots to the appropriate folders within it.
+If you manage all of your projects within a single dev folder, you can mount that entire folder once within Nitro, and point your sites’ web roots to the appropriate folders within it.
 
 To do that, open your `~/.nitro/nitro-dev.yaml` file in a text editor (or run the [`edit`](commands.md#edit) command), and add a new mount for the folder that contains all of your projects, plus list out all of your sites you wish to add to Nitro within that folder:
 

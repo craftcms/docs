@@ -17,7 +17,7 @@ nitro add [<options>]
 : The hostname to use for accessing the site. If not passed, the command will prompt for it.
 
 `--webroot`
-: The relative path to the site’s webroot. If not passed, the command will prompt for it.
+: The relative path to the site’s web root. If not passed, the command will prompt for it.
 
 `--skip-hosts`
 : Skips updating the `hosts` file.
