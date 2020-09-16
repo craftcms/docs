@@ -4,13 +4,14 @@ export default {
   props: {
     type: {
       type: String,
-      default: "tip"
+      default: "tip",
     },
+    title: String,
     text: String,
     vertical: {
       type: String,
-      default: "top"
-    }
+      default: "top",
+    },
   },
   render(h, { props, slots }) {
     return h(
@@ -18,12 +19,15 @@ export default {
       {
         class: ["badge", props.type],
         style: {
-          verticalAlign: props.vertical
-        }
+          verticalAlign: props.vertical,
+        },
+        attrs: {
+          title: props.title,
+        },
       },
       props.text || slots().default
     );
-  }
+  },
 };
 </script>
 
