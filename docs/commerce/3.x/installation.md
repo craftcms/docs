@@ -1,6 +1,6 @@
 # Installation
 
-## Pre-flight check
+## Pre-Flight check
 
 Before installing Craft Commerce, make sure your web server meets Commerce’s [minimum requirements](requirements.md).
 
