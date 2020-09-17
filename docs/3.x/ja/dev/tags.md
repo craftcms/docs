@@ -484,7 +484,6 @@ This tag works identically to the [namespace](filters.md#namespace) filter, exce
 
 Narrows the query results to only tags that are related to certain other elements.
 
-
 ```twig
 {# Fetch all tags in order of date created #}
 {% set tags = craft.tags()
@@ -492,9 +491,13 @@ Narrows the query results to only tags that are related to certain other element
     .all() %}
 ```
 
+::: tip
+The `{% nav %}` tag should _only_ be used in times when you want to show elements in a hierarchical list. If you want to show elements in a flat list, use a [for](https://twig.symfony.com/doc/tags/for.html) tag instead.
+:::
+
 ### Parameters
 
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+The `{% nav %}` tag has the following parameters:
 
 #### Item name
 
@@ -510,17 +513,17 @@ The `{% nav %}` tag requires elements to be queried in a specific (hierarchical)
 
 ### Showing children
 
-To show the children of the current element in the loop, use the `{% children %}` tag. When Craft gets to this tag, it will loop through the element’s children, applying the same template defined between your `{% nav %}` and `{% endnav %}` tags to those children.
+The `{% children %}` tag will output the children of the current element in the loop, using the same template defined between your `{% nav %}` and `{% endnav %}` tags.
 
-::: code
+If you want to show some additional HTML surrounding the children, but only in the event that the element actually has children, wrap your `{% children %}` tag with `{% ifchildren %}` and `{% endifchildren %}` tags.
 
-::: tip
-If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you only want unique elements to be returned, use [unique](#unique) in conjunction with this.
+::: warning
+Don’t add any special logic between your `{% ifchildren %}` and `{% endifchildren %}` tags. These are special tags that are used to identify the raw HTML that should be output surrounding nested nav items. They don’t get parsed in the order you’d expect.
 :::
 
 ## `preferSites`
 
-Determines which site(s) the tags should be queried in.
+This tag makes it easy to paginate query results across multiple pages.
 
 ```twig
 // Fetch all tags in order of date created
@@ -529,7 +532,7 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 
-The current site will be used by default.
+Paginated URLs will be identical to the first page’s URL, except that “/p_X_” will be appended to the end (where _X_ is the page number), e.g. `http://my-project.test/news/p2`.
 
 ::: tip
 You can use the <config3:pageTrigger> config setting to customize what comes before the actual page number in your URLs. For example you could set it to `'page/'`, and your paginated URLs would start looking like `http://my-project.test/news/page/2`.
@@ -541,11 +544,11 @@ Only a single `{% paginate %}` tag should be used per request.
 
 ### Parameters
 
-::: code
+The `{% paginate %}` tag has the following parameters:
 
 #### Querying Tags
 
-Once you’ve created a tag query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. Use the `limit` parameter to define how many results should show up per page (100 by default).
+The first thing you pass into the `{% paginate %}` tag is a query object (such as an [element query](../element-queries.md)), which defines all of the results that should be paginated. Use the `limit` parameter to define how many results should show up per page (100 by default).
 
 ::: warning
 This parameter needs to be an actual query object, not an array of pre-fetched results. So don’t call `all()` on the query before passing it in.
@@ -553,12 +556,12 @@ This parameter needs to be an actual query object, not an array of pre-fetched r
 
 #### `relatedTo`
 
-The current site will be used by default.
+Next up you need to type “`as`”, followed by one or two variable names:
 
 * `as pageInfo, pageEntries`
 * `as pageEntries`
 
-Possible values include:
+Here’s what they get set to:
 
 * `pageInfo` gets set to a <craft3:craft\web\twig\variables\Paginate> object, which provides info about the current page, and some helper methods for creating links to other pages. (See [below](#the-pageInfo-variable) for more info.)
 * `pageEntries` gets set to an array of the results (e.g. the elements) that belong to the current page.
@@ -571,7 +574,7 @@ If you only specify one variable name here, the `pageInfo` variable will be call
 
 The `{% paginate %}` tag won’t actually output the current page’s results for you. It will only give you an array of the results that should be on the current page (referenced by the variable you defined in the `as` parameter.)
 
-Narrows the query results based on the tags’ titles.
+Following your `{% paginate %}` tag, you will need to loop through this page’s results using a [for](https://twig.symfony.com/doc/tags/for.html) tag.
 
 ```twig
 {# Fetch unique tags from Site A, or Site B if they don’t exist in Site A #}
@@ -584,21 +587,21 @@ Narrows the query results based on the tags’ titles.
 
 ### The `pageInfo` variable
 
-Possible values include:
+The `pageInfo` variable (or whatever you’ve called it) provides the following properties and methods:
 
-* **`pageInfo.first`** – The offset of the first result on the current page.
-* **`pageInfo.last`** – The offset of the last result on the current page.
+* **`pageInfo.first`** – The offset of the first result on the current page.
+* **`pageInfo.last`** – The offset of the last result on the current page.
 * **`pageInfo.total`** – The total number of results across all pages
-* **`pageInfo.currentPage`** – The current page number.
-* **`pageInfo.totalPages`** – The total number of pages.
+* **`pageInfo.currentPage`** – The current page number.
+* **`pageInfo.totalPages`** – The total number of pages.
 * **`pageInfo.prevUrl`** – The URL to the previous page, or `null` if you’re on the first page.
-* **`pageInfo.nextUrl`** – The URL to the next page, or `null` if you’re on the last page.
-* from the site with an ID of `1`.
-* **`pageInfo.lastUrl`** – The URL to the last page.
-* not in a site with an ID of `1` or `2`.
+* **`pageInfo.nextUrl`** – The URL to the next page, or `null` if you’re on the last page.
+* **`pageInfo.firstUrl`** – The URL to the first page.
+* **`pageInfo.lastUrl`** – The URL to the last page.
+* **`pageInfo.getPageUrl( page )`** – Returns the URL to a given page number, or `null` if the page doesn’t exist.
 * **`pageInfo.getPrevUrls( [dist] )`** – Returns an array of URLs to the previous pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
-* **`pageInfo.getNextUrls( [dist] )`** – Returns an array of URLs to the next pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
-* **`pageInfo.getRangeUrls( start, end )`** – Returns an array of URLs to pages in a given range of page numbers, with keys set to the page numbers.
+* **`pageInfo.getNextUrls( [dist] )`** – Returns an array of URLs to the next pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
+* **`pageInfo.getRangeUrls( start, end )`** – Returns an array of URLs to pages in a given range of page numbers, with keys set to the page numbers.
 
 
 ### Example
@@ -618,11 +621,11 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 
-Narrows the query results to only tags that have been soft-deleted.
+Note that we’re wrapping those links in conditionals because there won’t always be a previous or next page.
 
 #### First/Last Page Links
 
-::: code
+You can add First Page and Last Page links into the mix, you can do that too:
 
 ```twig
 {# Fetch all tags that are related to myCategory #}
@@ -635,7 +638,7 @@ There’s no reason to wrap those links in conditionals since there will always 
 
 #### Nearby Page Links
 
-Narrows the query results based on the tags’ UIDs.
+If you want to create a list of nearby pages, perhaps surrounding the current page number, you can do that too!
 
 ```twig
 // Fetch all tags that are related to $myCategory
@@ -662,7 +665,7 @@ This tag will redirect the browser to a different URL.
 
 ### Parameters
 
-Determines whether only elements with unique IDs should be returned by the query.
+The `{% redirect %}` tag has the following parameter:
 
 #### The URL
 
@@ -670,7 +673,7 @@ Immediately after typing “`{% redirect`”, you need to tell the tag where to 
 
 #### The Status Code
 
-::: code
+By default, redirects will have `302` status codes, which tells the browser that the requested URL has only been moved to the redirected URL _temporarily_.
 
 You can customize which status code accompanies your redirect response by typing it right after the URL. For example, the following code would return a `301` redirect (permanent):
 
@@ -686,7 +689,7 @@ $tags = \craft\elements\Tag::find()
 
 #### Flash Messages
 
-Narrows the query results based on the tags’ URIs.
+You can optionally set flash messages that will show up for the user on the next request using the `with notice` and/or `with error` params:
 
 ```twig
 {% if not currentUser.isInGroup('members') %}
@@ -751,7 +754,7 @@ Take this template for example, which is running different template code dependi
 {% endif %}
 ```
 
-Since all of the conditionals are evaluating the same thing – `matrixBlock.type` – we can simplify that code using a `{% switch %}` tag instead:
+Since all of the conditionals are evaluating the same thing – `matrixBlock.type` – we can simplify that code using a `{% switch %}` tag instead:
 
 ```twig
 {% switch matrixBlock.type %}
