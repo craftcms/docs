@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-09-07
+### Changed
+- Clarified that the `{% ifchildren %}` and `{% endifchildren %}` tags don’t support special template logic. ([craftcms/cms#6841](https://github.com/craftcms/cms/issues/6841))
+
 ## 2020-09-15
 ### Added
 - Documented the `truncate` filter that was added in Craft 3.5.10.

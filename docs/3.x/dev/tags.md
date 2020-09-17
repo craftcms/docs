@@ -466,6 +466,10 @@ This tag helps create a hierarchical navigation menu for entries in a [Structure
 </ul>
 ```
 
+::: tip
+The `{% nav %}` tag should _only_ be used in times when you want to show elements in a hierarchical list. If you want to show elements in a flat list, use a [for](https://twig.symfony.com/doc/tags/for.html) tag instead.
+:::
+
 ### Parameters
 
 The `{% nav %}` tag has the following parameters:
@@ -484,12 +488,12 @@ The `{% nav %}` tag requires elements to be queried in a specific (hierarchical)
 
 ### Showing children
 
-To show the children of the current element in the loop, use the `{% children %}` tag. When Craft gets to this tag, it will loop through the element’s children, applying the same template defined between your `{% nav %}` and `{% endnav %}` tags to those children.
+The `{% children %}` tag will output the children of the current element in the loop, using the same template defined between your `{% nav %}` and `{% endnav %}` tags.
 
 If you want to show some additional HTML surrounding the children, but only in the event that the element actually has children, wrap your `{% children %}` tag with `{% ifchildren %}` and `{% endifchildren %}` tags.
 
-::: tip
-The `{% nav %}` tag should _only_ be used in times when you want to show elements in a hierarchy, and you want the DOM to express that hierarchy. If you want to loop through elements linearly, use Twig’s [for](https://twig.symfony.com/doc/tags/for.html) tag instead.
+::: warning
+Don’t add any special logic between your `{% ifchildren %}` and `{% endifchildren %}` tags. These are special tags that are used to identify the raw HTML that should be output surrounding nested nav items. They don’t get parsed in the order you’d expect.
 :::
 
 ## `paginate`
