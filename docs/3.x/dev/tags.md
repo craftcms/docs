@@ -449,7 +449,6 @@ This tag works identically to the [namespace](filters.md#namespace) filter, exce
 
 This tag helps create a hierarchical navigation menu for entries in a [Structure section](../entries.md#section-types) or a [Category Group](../categories.md).
 
-
 ```twig
 {% set entries = craft.entries.section('pages').all() %}
 
@@ -487,7 +486,7 @@ The `{% nav %}` tag requires elements to be queried in a specific (hierarchical)
 
 To show the children of the current element in the loop, use the `{% children %}` tag. When Craft gets to this tag, it will loop through the element’s children, applying the same template defined between your `{% nav %}` and `{% endnav %}` tags to those children.
 
-If you want to show some additional HTML surrounding the children, but only in the event that the element actually has children, wrap your `{% children %}` tag with `{% ifchildren %}` and `{% endifchildren %}` tags.
+If you want to show some additional HTML surrounding the children, but only in the event that the element actually has children, wrap your `{% children %}` tag with `{% ifchildren %}` and `{% endifchildren %}` tags.
 
 ::: tip
 The `{% nav %}` tag should _only_ be used in times when you want to show elements in a hierarchy, and you want the DOM to express that hierarchy. If you want to loop through elements linearly, use Twig’s [for](https://twig.symfony.com/doc/tags/for.html) tag instead.
@@ -574,19 +573,19 @@ Following your `{% paginate %}` tag, you will need to loop through this page’s
 
 The `pageInfo` variable (or whatever you’ve called it) provides the following properties and methods:
 
-* **`pageInfo.first`** – The offset of the first result on the current page.
-* **`pageInfo.last`** – The offset of the last result on the current page.
+* **`pageInfo.first`** – The offset of the first result on the current page.
+* **`pageInfo.last`** – The offset of the last result on the current page.
 * **`pageInfo.total`** – The total number of results across all pages
-* **`pageInfo.currentPage`** – The current page number.
-* **`pageInfo.totalPages`** – The total number of pages.
+* **`pageInfo.currentPage`** – The current page number.
+* **`pageInfo.totalPages`** – The total number of pages.
 * **`pageInfo.prevUrl`** – The URL to the previous page, or `null` if you’re on the first page.
-* **`pageInfo.nextUrl`** – The URL to the next page, or `null` if you’re on the last page.
-* **`pageInfo.firstUrl`** – The URL to the first page.
-* **`pageInfo.lastUrl`** – The URL to the last page.
-* **`pageInfo.getPageUrl( page )`** – Returns the URL to a given page number, or `null` if the page doesn’t exist.
+* **`pageInfo.nextUrl`** – The URL to the next page, or `null` if you’re on the last page.
+* **`pageInfo.firstUrl`** – The URL to the first page.
+* **`pageInfo.lastUrl`** – The URL to the last page.
+* **`pageInfo.getPageUrl( page )`** – Returns the URL to a given page number, or `null` if the page doesn’t exist.
 * **`pageInfo.getPrevUrls( [dist] )`** – Returns an array of URLs to the previous pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
-* **`pageInfo.getNextUrls( [dist] )`** – Returns an array of URLs to the next pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
-* **`pageInfo.getRangeUrls( start, end )`** – Returns an array of URLs to pages in a given range of page numbers, with keys set to the page numbers.
+* **`pageInfo.getNextUrls( [dist] )`** – Returns an array of URLs to the next pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
+* **`pageInfo.getRangeUrls( start, end )`** – Returns an array of URLs to pages in a given range of page numbers, with keys set to the page numbers.
 
 
 ### Navigation examples
@@ -748,7 +747,7 @@ Take this template for example, which is running different template code dependi
 {% endif %}
 ```
 
-Since all of the conditionals are evaluating the same thing – `matrixBlock.type` – we can simplify that code using a `{% switch %}` tag instead:
+Since all of the conditionals are evaluating the same thing – `matrixBlock.type` – we can simplify that code using a `{% switch %}` tag instead:
 
 ```twig
 {% switch matrixBlock.type %}
