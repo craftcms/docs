@@ -6,6 +6,10 @@ Theme and significant content changes will be documented in this file.
 ### Removed
 - Removed example `mutex/` lock folder now that Craft 3.5+ use the database for mutex locking by default—meaning you’d only see that runtime folder overriding the default mutex component.
 
+## 2020-09-17
+### Fixed
+- Fixed the invisible hamburger navigation that could have secretly been clicked or tapped from wider viewports.
+
 ## 2020-09-07
 ### Changed
 - Clarified that the `{% ifchildren %}` and `{% endifchildren %}` tags don’t support special template logic. ([craftcms/cms#6841](https://github.com/craftcms/cms/issues/6841))
