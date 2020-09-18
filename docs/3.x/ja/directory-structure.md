@@ -23,66 +23,65 @@ Craft 3 の新しいコピーをダウンロードすると、プロジェクト
 - `backups/` – Craft のアップデートやデータベースバックアップユーティリティの実行時に生成される、データベースのバックアップを保管します。
 - `logs/` – Craft のログや PHP エラーログを保管します。
 - `rebrand/` – アップロードしてある場合、カスタムログインページのロゴとサイトアイコンファイルを保管します。
-- `runtime/` – ここにあるすべては、おおよそキャッシングやロギングを目的とするものです。 もしフォルダが削除されたとしても、Craft の稼働に影響はありません。
+- `runtime/` – Pretty much everything in here is there for caching and logging purposes. Nothing that Craft couldn’t live without, if the folder happened to get deleted.
 
-  興味がある方のために、（包括的なリストではありませんが）`storage/runtime/` で確認できるものを掲載します。
+For the curious, here are the types of things you will find in `storage/runtime/` (though this is not a comprehensive list):
 
-  - `assets/` – 新しいサムネイルやトランスフォームの生成にあたり画像が必要なときに Craft の HTTP リクエストを節約する目的で、画像サムネイル、リサイズされたファイルのアイコン、リモートアセットボリュームに保存された画像のコピーを保管します。
-  - `cache/` – データキャッシュを蓄積します。
-  - `compiled_classes/` – いくつかの動的に定義された PHP クラスを保管します。
-  - `compiled_templates/` – コンパイル済みのテンプレートを保管します。
-  - `mutex/` – ファイルロックデータを保管します。
-  - `temp/` – 一時ファイルを保管します。
-  - `validation.key` – リクエスト間のハッシングやデータ検証に使われる、ランダムに生成され、暗号的に安全な鍵です。
+  - `assets/` – Stores image thumbnails, resized file icons, and copies of images stored on remote asset volumes, to save Craft an HTTP request when it needs the images to generate new thumbnails or transforms.
+  - `cache/` – Stores data caches.
+  - `compiled_classes/` – Stores some dynamically-defined PHP classes.
+  - `compiled_templates/` – Stores compiled Twig templates.
+  - `temp/` – Stores temp files.
+  - `validation.key` – A randomly-generated, cryptographically secure key that is used for hashing and validating data between requests.
 
 ::: tip
-`web/index.php` に [CRAFT_STORAGE_PATH](config/README.md##craft-storage-path) PHP 定数を設定すると、このフォルダの名前や場所をカスタマイズできます。
+You can customize the name and location of this folder by setting the [CRAFT_STORAGE_PATH](config/README.md#craft-storage-path) PHP constant in `web/index.php`.
 :::
 
 ### `templates/`
 
-フロントエンド向けのテンプレートがここに入ります。 静的に配信する画像、CSS、JS などのローカルサイトのアセットは、[web](directory-structure.md#web) フォルダに保存します。
+Your front-end Twig templates go in here. Any local site assets, such as images, CSS, and JS that should be statically served, should live in the [web](directory-structure.md#web) folder.
 
 ::: tip
-`web/index.php` に [CRAFT_TEMPLATES_PATH](config/README.md##craft-templates-path) PHP 定数を設定すると、このフォルダの名前や場所をカスタマイズできます。
+You can customize the name and location of this folder by setting the [CRAFT_TEMPLATES_PATH](config/README.md#craft-templates-path) PHP constant in `web/index.php`.
 :::
 
 ### `vendor/`
 
-これは Composer で依存関係にあるすべてのもので、Craft 自身や Composer 経由でインストールしたすべてのプラグインが含まれます。
+This is where all of your Composer dependencies go, including Craft itself, and any plugins you’ve installed via Composer.
 
 ::: tip
-`web/index.php` の [CRAFT_VENDOR_PATH](config/README.md##craft-vendor-path) PHP 定数を変更すると、このフォルダの名前や場所をカスタマイズできます。
+You can customize the name and location of this folder by changing the [CRAFT_VENDOR_PATH](config/README.md#craft-vendor-path) PHP constant in `web/index.php`.
 :::
 
 ### `web/`
 
-このディレクトリはサーバーのウェブルートを表します。 パブリックの `index.php` ファイルがここにあり、静的に配信されるローカルサイトの画像、CSS、JS などがあります。
+This directory represents your server’s webroot. The public `index.php` file lives here and this is where any of the local site images, CSS, and JS that is statically served should live.
 
 ::: tip
-このフォルダの名前や場所をカスタマイズできます。 もし、他の Craft フォルダと並んでいる状態から移動するならば、`<Webroot>/index.php` の [CRAFT_BASE_PATH](config/README.md##craft-vendor-path) PHP 定数を確実に更新してください。
+You can customize the name and location of this folder. If you move it so it’s no longer living alongside the other Craft folders, make sure to update the [CRAFT_BASE_PATH](config/README.md#craft-vendor-path) PHP constant in `<Webroot>/index.php`.
 :::
 
 ### `.env`
 
-[PHP dotenv](https://github.com/vlucas/phpdotenv) の `.env` 設定ファイルです。 バージョン管理でコミットする必要のない、機密性が高い、または、特定の環境に依存する設定値を定義します。
+This is your [PHP dotenv](https://github.com/vlucas/phpdotenv) `.env` configuration file. It defines sensitive or environment-specific config values that don’t make sense to commit to version control.
 
 ### `.env.example`
 
-[PHP dotenv](https://github.com/vlucas/phpdotenv) の `.env` ファイルのひな形です。 実際の `.env` ファイルの出発点として使用する必要があります。 ファイルとして保存されていますが、動作している Craft プロジェクトの各環境のバージョン管理からは除外してください。
+This is your [PHP dotenv](https://github.com/vlucas/phpdotenv) `.env` file template. It should be used as a starting point for any actual `.env` files, stored alongside it but out of version control on each of the environments your Craft project is running in.
 
 ### `.gitignore`
 
-変更をコミットするときに、無視するファイルを Git に伝えます。
+Tells Git which files it should ignore when committing changes.
 
 ### `composer.json`
 
-すべての Craft プロジェクトで使用する必要がある、出発点の `composer.json` ファイルです。 詳細については、[Composer のドキュメント](https://getcomposer.org/doc/04-schema.md) を参照してください。
+The starting point `composer.json` file that should be used for all Craft projects. See the [Composer documentation](https://getcomposer.org/doc/04-schema.md) for details on what can go in here.
 
 ### `composer.lock`
 
-これは、`vendor/`へ現在インストールされている必要がある依存関係やバージョンを Composer へ正確に伝える Composer ファイルです。
+This is a Composer file that tells Composer exactly which dependencies and versions should be currently installed in `vendor/`.
 
 ### `craft`
 
-これは、Craft のコンソールアプリケーションを起動するコマンドライン実行可能プログラムです。
+This is a command line executable used to execute Craft’s [console commands](console-commands.md).
