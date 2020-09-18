@@ -25,13 +25,12 @@ Some of the folders you might find in there include:
 - `rebrand/` – Stores the custom Login Page Logo and Site Icon files, if you’ve uploaded them.
 - `runtime/` – Pretty much everything in here is there for caching and logging purposes. Nothing that Craft couldn’t live without, if the folder happened to get deleted.
 
-  For the curious, here are the types of things you will find in `storage/runtime/` (though this is not a comprehensive list):
+For the curious, here are the types of things you will find in `storage/runtime/` (though this is not a comprehensive list):
 
   - `assets/` – Stores image thumbnails, resized file icons, and copies of images stored on remote asset volumes, to save Craft an HTTP request when it needs the images to generate new thumbnails or transforms.
   - `cache/` – Stores data caches.
   - `compiled_classes/` – Stores some dynamically-defined PHP classes.
   - `compiled_templates/` – Stores compiled Twig templates.
-  - `mutex/` – Stores file lock data.
   - `temp/` – Stores temp files.
   - `validation.key` – A randomly-generated, cryptographically secure key that is used for hashing and validating data between requests.
 
