@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-09-21
+### Fixed
+- Fixed appearance of documentation version selector in Edge.
+
 ## 2020-09-18
 ### Removed
 - Removed example `mutex/` lock folder now that Craft 3.5+ use the database for mutex locking by default—meaning you’d only see that runtime folder overriding the default mutex component.
