@@ -46,17 +46,17 @@ The event that is triggered after a variant’s field data is captured. This mak
 
 ```php
 use craft\commerce\elements\Variant;
-use craft\commerce\events\CustomizeVariantSnapshotFieldsEvent;
+use craft\commerce\events\CustomizeVariantSnapshotDataEvent;
 use yii\base\Event;
 
 Event::on(
     Variant::class,
     Variant::EVENT_AFTER_CAPTURE_VARIANT_SNAPSHOT,
-    function(CustomizeVariantSnapshotFieldsEvent $event) {
+    function(CustomizeVariantSnapshotDataEvent $event) {
         // @var Variant $variant
         $variant = $event->variant;
-        // @var array|null $fields
-        $fields = $event->fields;
+        // @var array $data
+        $data = $event->fieldData;
 
         // Modify or redact captured `$data`
         // ...
