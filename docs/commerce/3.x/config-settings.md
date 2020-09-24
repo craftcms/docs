@@ -44,7 +44,7 @@ Default value
 :   `3600`
 
 Defined by
-:   [Settings::$activeCartDuration](api:craft\commerce\models\Settings::$activeCartDuration)
+:   [Settings::$activeCartDuration](commerce3:craft\commerce\models\Settings::$activeCartDuration)
 
 Since
 :   2.2
@@ -66,7 +66,7 @@ Default value
 :   `true`
 
 Defined by
-:   [Settings::$autoSetNewCartAddresses](api:craft\commerce\models\Settings::$autoSetNewCartAddresses)
+:   [Settings::$autoSetNewCartAddresses](commerce3:craft\commerce\models\Settings::$autoSetNewCartAddresses)
 
 
 
@@ -83,7 +83,7 @@ Default value
 :   `false`
 
 Defined by
-:   [Settings::$allowEmptyCartOnCheckout](api:craft\commerce\models\Settings::$allowEmptyCartOnCheckout)
+:   [Settings::$allowEmptyCartOnCheckout](commerce3:craft\commerce\models\Settings::$allowEmptyCartOnCheckout)
 
 Since
 :   2.2
@@ -103,7 +103,7 @@ Default value
 :   `'cart'`
 
 Defined by
-:   [Settings::$cartVariable](api:craft\commerce\models\Settings::$cartVariable)
+:   [Settings::$cartVariable](commerce3:craft\commerce\models\Settings::$cartVariable)
 
 
 
@@ -120,7 +120,7 @@ Default value
 :   `null`
 
 Defined by
-:   [Settings::$loadCartRedirectUrl](api:craft\commerce\models\Settings::$loadCartRedirectUrl)
+:   [Settings::$loadCartRedirectUrl](commerce3:craft\commerce\models\Settings::$loadCartRedirectUrl)
 
 Since
 :   3.1
@@ -142,7 +142,7 @@ Default value
 :   `true`
 
 Defined by
-:   [Settings::$purgeInactiveCarts](api:craft\commerce\models\Settings::$purgeInactiveCarts)
+:   [Settings::$purgeInactiveCarts](commerce3:craft\commerce\models\Settings::$purgeInactiveCarts)
 
 
 
@@ -163,7 +163,7 @@ Default value
 :   `7776000`
 
 Defined by
-:   [Settings::$purgeInactiveCartsDuration](api:craft\commerce\models\Settings::$purgeInactiveCartsDuration)
+:   [Settings::$purgeInactiveCartsDuration](commerce3:craft\commerce\models\Settings::$purgeInactiveCartsDuration)
 
 
 
@@ -182,7 +182,7 @@ Default value
 :   `true`
 
 Defined by
-:   [Settings::$updateCartSearchIndexes](api:craft\commerce\models\Settings::$updateCartSearchIndexes)
+:   [Settings::$updateCartSearchIndexes](commerce3:craft\commerce\models\Settings::$updateCartSearchIndexes)
 
 Since
 :   3.1.5
@@ -208,7 +208,7 @@ Default value
 :   `false`
 
 Defined by
-:   [Settings::$validateCartCustomFieldsOnSubmission](api:craft\commerce\models\Settings::$validateCartCustomFieldsOnSubmission)
+:   [Settings::$validateCartCustomFieldsOnSubmission](commerce3:craft\commerce\models\Settings::$validateCartCustomFieldsOnSubmission)
 
 Since
 :   3.0.12
@@ -232,7 +232,7 @@ Default value
 :   `'commerce/orders'`
 
 Defined by
-:   [Settings::$defaultView](api:craft\commerce\models\Settings::$defaultView)
+:   [Settings::$defaultView](commerce3:craft\commerce\models\Settings::$defaultView)
 
 Since
 :   2.2
@@ -252,7 +252,7 @@ Default value
 :   `null`
 
 Defined by
-:   [Settings::$emailSenderAddress](api:craft\commerce\models\Settings::$emailSenderAddress)
+:   [Settings::$emailSenderAddress](commerce3:craft\commerce\models\Settings::$emailSenderAddress)
 
 
 
@@ -271,7 +271,7 @@ Default value
 :   `null`
 
 Defined by
-:   [Settings::$emailSenderAddressPlaceholder](api:craft\commerce\models\Settings::$emailSenderAddressPlaceholder)
+:   [Settings::$emailSenderAddressPlaceholder](commerce3:craft\commerce\models\Settings::$emailSenderAddressPlaceholder)
 
 
 
@@ -290,7 +290,7 @@ Default value
 :   `null`
 
 Defined by
-:   [Settings::$emailSenderName](api:craft\commerce\models\Settings::$emailSenderName)
+:   [Settings::$emailSenderName](commerce3:craft\commerce\models\Settings::$emailSenderName)
 
 
 
@@ -309,7 +309,7 @@ Default value
 :   `null`
 
 Defined by
-:   [Settings::$emailSenderNamePlaceholder](api:craft\commerce\models\Settings::$emailSenderNamePlaceholder)
+:   [Settings::$emailSenderNamePlaceholder](commerce3:craft\commerce\models\Settings::$emailSenderNamePlaceholder)
 
 
 
@@ -328,7 +328,7 @@ Default value
 :   `true`
 
 Defined by
-:   [Settings::$showCustomerInfoTab](api:craft\commerce\models\Settings::$showCustomerInfoTab)
+:   [Settings::$showCustomerInfoTab](commerce3:craft\commerce\models\Settings::$showCustomerInfoTab)
 
 Since
 :   3.0
@@ -350,7 +350,7 @@ Default value
 :   `'complete'`
 
 Defined by
-:   [Settings::$freeOrderPaymentStrategy](api:craft\commerce\models\Settings::$freeOrderPaymentStrategy)
+:   [Settings::$freeOrderPaymentStrategy](commerce3:craft\commerce\models\Settings::$freeOrderPaymentStrategy)
 
 
 
@@ -371,7 +371,7 @@ Default value
 :   `'default'`
 
 Defined by
-:   [Settings::$minimumTotalPriceStrategy](api:craft\commerce\models\Settings::$minimumTotalPriceStrategy)
+:   [Settings::$minimumTotalPriceStrategy](commerce3:craft\commerce\models\Settings::$minimumTotalPriceStrategy)
 
 
 
@@ -394,7 +394,7 @@ Default value
 :   `'{{number[:7]}}'`
 
 Defined by
-:   [Settings::$orderReferenceFormat](api:craft\commerce\models\Settings::$orderReferenceFormat)
+:   [Settings::$orderReferenceFormat](commerce3:craft\commerce\models\Settings::$orderReferenceFormat)
 
 
 
@@ -413,7 +413,7 @@ Default value
 :   `'portrait'`
 
 Defined by
-:   [Settings::$pdfPaperOrientation](api:craft\commerce\models\Settings::$pdfPaperOrientation)
+:   [Settings::$pdfPaperOrientation](commerce3:craft\commerce\models\Settings::$pdfPaperOrientation)
 
 
 
@@ -432,7 +432,7 @@ Default value
 :   `'letter'`
 
 Defined by
-:   [Settings::$pdfPaperSize](api:craft\commerce\models\Settings::$pdfPaperSize)
+:   [Settings::$pdfPaperSize](commerce3:craft\commerce\models\Settings::$pdfPaperSize)
 
 
 
@@ -451,7 +451,7 @@ Default value
 :   `false`
 
 Defined by
-:   [Settings::$pdfAllowRemoteImages](api:craft\commerce\models\Settings::$pdfAllowRemoteImages)
+:   [Settings::$pdfAllowRemoteImages](commerce3:craft\commerce\models\Settings::$pdfAllowRemoteImages)
 
 
 
@@ -468,7 +468,7 @@ Default value
 :   `false`
 
 Defined by
-:   [Settings::$requireShippingAddressAtCheckout](api:craft\commerce\models\Settings::$requireShippingAddressAtCheckout)
+:   [Settings::$requireShippingAddressAtCheckout](commerce3:craft\commerce\models\Settings::$requireShippingAddressAtCheckout)
 
 
 
@@ -485,7 +485,7 @@ Default value
 :   `false`
 
 Defined by
-:   [Settings::$requireBillingAddressAtCheckout](api:craft\commerce\models\Settings::$requireBillingAddressAtCheckout)
+:   [Settings::$requireBillingAddressAtCheckout](commerce3:craft\commerce\models\Settings::$requireBillingAddressAtCheckout)
 
 
 
@@ -502,7 +502,7 @@ Default value
 :   `false`
 
 Defined by
-:   [Settings::$requireShippingMethodSelectionAtCheckout](api:craft\commerce\models\Settings::$requireShippingMethodSelectionAtCheckout)
+:   [Settings::$requireShippingMethodSelectionAtCheckout](commerce3:craft\commerce\models\Settings::$requireShippingMethodSelectionAtCheckout)
 
 
 
@@ -519,7 +519,7 @@ Default value
 :   `''`
 
 Defined by
-:   [Settings::$updateBillingDetailsUrl](api:craft\commerce\models\Settings::$updateBillingDetailsUrl)
+:   [Settings::$updateBillingDetailsUrl](commerce3:craft\commerce\models\Settings::$updateBillingDetailsUrl)
 
 
 
@@ -540,7 +540,7 @@ Default value
 :   `false`
 
 Defined by
-:   [Settings::$useBillingAddressForTax](api:craft\commerce\models\Settings::$useBillingAddressForTax)
+:   [Settings::$useBillingAddressForTax](commerce3:craft\commerce\models\Settings::$useBillingAddressForTax)
 
 
 
@@ -557,7 +557,7 @@ Default value
 :   `false`
 
 Defined by
-:   [Settings::$validateBusinessTaxIdAsVatId](api:craft\commerce\models\Settings::$validateBusinessTaxIdAsVatId)
+:   [Settings::$validateBusinessTaxIdAsVatId](commerce3:craft\commerce\models\Settings::$validateBusinessTaxIdAsVatId)
 
 
 
@@ -580,7 +580,7 @@ Default value
 :   `''`
 
 Defined by
-:   [Settings::$gatewayPostRedirectTemplate](api:craft\commerce\models\Settings::$gatewayPostRedirectTemplate)
+:   [Settings::$gatewayPostRedirectTemplate](commerce3:craft\commerce\models\Settings::$gatewayPostRedirectTemplate)
 
 
 
@@ -624,7 +624,7 @@ Default value
 :   `[]`
 
 Defined by
-:   [Settings::$gatewaySettings](api:craft\commerce\models\Settings::$gatewaySettings)
+:   [Settings::$gatewaySettings](commerce3:craft\commerce\models\Settings::$gatewaySettings)
 
 
 
@@ -643,7 +643,7 @@ Default value
 :   `null`
 
 Defined by
-:   [Settings::$paymentCurrency](api:craft\commerce\models\Settings::$paymentCurrency)
+:   [Settings::$paymentCurrency](commerce3:craft\commerce\models\Settings::$paymentCurrency)
 
 
 
@@ -664,7 +664,7 @@ Default value
 :   `'mm'`
 
 Defined by
-:   [Settings::$dimensionUnits](api:craft\commerce\models\Settings::$dimensionUnits)
+:   [Settings::$dimensionUnits](commerce3:craft\commerce\models\Settings::$dimensionUnits)
 
 
 
@@ -689,7 +689,7 @@ Default value
 :   `'g'`
 
 Defined by
-:   [Settings::$weightUnits](api:craft\commerce\models\Settings::$weightUnits)
+:   [Settings::$weightUnits](commerce3:craft\commerce\models\Settings::$weightUnits)
 
 
 
