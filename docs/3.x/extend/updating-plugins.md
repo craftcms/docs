@@ -85,7 +85,10 @@ Here’s how it works:
 - A base implementation of the component type is provided by an abstract base class (e.g. <craft3:craft\base\Field>).
 - The base class is extended by the various component classes (e.g. <craft3:craft\fields\PlainText>).
 
-
+::: tip
+Properties are consistently returned with the correct type in Craft 3.5.0 onward. \
+This may not have been the case in earlier releases when using MySQL, where ID columns could be returned as strings rather than ints and have a potential impact on strict comparisons.
+:::
 
 ## Translations
 
@@ -705,21 +708,25 @@ use craft\elements\Entry;
 use craft\events\RegisterElementSourcesEvent;
 use yii\base\Event;
 
-Event::on(Entry::class, Element::EVENT_REGISTER_SOURCES, function(RegisterElementSourcesEvent $event) {
-    if ($event->context === 'index') {
-        $event->sources[] = [
-            'heading' => \Craft::t('plugin-handle', 'Statuses'),
-        ];
-
-        foreach (Entry::statuses() as $status => $label) {
+Event::on(
+    Entry::class,
+    Element::EVENT_REGISTER_SOURCES,
+    function(RegisterElementSourcesEvent $event) {
+        if ($event->context === 'index') {
             $event->sources[] = [
-                'key' => 'status:'.$status,
-                'label' => $label,
-                'criteria' => ['status' => $status]
+                'heading' => \Craft::t('plugin-handle', 'Statuses'),
             ];
+
+            foreach (Entry::statuses() as $status => $label) {
+                $event->sources[] = [
+                    'key' => 'status:'.$status,
+                    'label' => $label,
+                    'criteria' => ['status' => $status]
+                ];
+            }
         }
     }
-});
+);
 ```
 :::
 
@@ -745,8 +752,13 @@ Event::on(
     Entry::class,
     Element::EVENT_REGISTER_TABLE_ATTRIBUTES,
     function(RegisterElementTableAttributesEvent $event) {
-        $event->tableAttributes['foo'] = ['label' => \Craft::t('plugin-handle', 'Foo')];
-        $event->tableAttributes['bar'] = ['label' => \Craft::t('plugin-handle', 'Bar')];
+        $event->tableAttributes['foo'] = [
+            'label' => \Craft::t('plugin-handle', 'Foo')
+        ];
+
+        $event->tableAttributes['bar'] = [
+            'label' => \Craft::t('plugin-handle', 'Bar')
+        ];
     }
 );
 ```
@@ -813,11 +825,15 @@ Template variables are no longer a thing in Craft 3, however plugins can still r
 use craft\web\twig\variables\CraftVariable;
 use yii\base\Event;
 
-Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function(Event $event) {
-    /** @var CraftVariable $variable */
-    $variable = $event->sender;
-    $variable->set('componentName', YourVariableClass::class);
-});
+Event::on(
+    CraftVariable::class,
+    CraftVariable::EVENT_INIT,
+        function(Event $event) {
+        /** @var CraftVariable $variable */
+        $variable = $event->sender;
+        $variable->set('componentName', YourVariableClass::class);
+    }
+);
 ```
 
 (Replace `componentName` with whatever you want your variable’s name to be off of the `craft` object. For backwards-compatibility, you might want to go with your old `camelCased` plugin handle.)
@@ -961,10 +977,14 @@ craft()->templates->includeFootHtml($html);
 use craft\web\View;
 use yii\base\Event;
 
-Event::on(View::class, View::EVENT_END_BODY, function(Event $event) {
-    // $html = ...
-    echo $html;
-});
+Event::on(
+    View::class,
+    View::EVENT_END_BODY,
+    function(Event $event) {
+        // $html = ...
+        echo $html;
+    }
+);
 ```
 :::
 

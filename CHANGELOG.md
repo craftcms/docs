@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-09-25
+### Added
+- Noted Craft 3.5.0+ typecasting in “Updating Plugins for Craft 3”.
+
 ## 2020-09-21
 ### Fixed
 - Fixed appearance of documentation version selector in Edge.
