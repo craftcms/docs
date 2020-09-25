@@ -85,6 +85,11 @@ Here’s how it works:
 - A base implementation of the component type is provided by an abstract base class (e.g. <craft3:craft\base\Field>).
 - The base class is extended by the various component classes (e.g. <craft3:craft\fields\PlainText>).
 
+::: tip
+Properties are consistently returned with the correct type in Craft 3.5.0 onward. \
+This may not have been the case in earlier releases when using MySQL, where ID columns could be returned as strings rather than ints and have a potential impact on strict comparisons.
+:::
+
 ## Translations
 
 <craft3:Craft::t()> requires a `$category` argument now, which should be set to one of these translation categories:
