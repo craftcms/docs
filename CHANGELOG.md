@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-09-28
+### Added
+- Added support for using `sidebarDepth` frontmatter to control the nesting level of the right sidebar (default `0`, flat).
+
 ## 2020-09-25
 ### Added
 - Noted Craft 3.5.0+ typecasting in “Updating Plugins for Craft 3”.
