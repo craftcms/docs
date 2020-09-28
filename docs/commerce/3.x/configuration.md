@@ -28,8 +28,8 @@ This permission lets the user see orders.
 
 This permission lets the user:
 
-- Create orders <Badge text="Pro" title="Commerce Pro only" />
-- Edit orders <badge text="Pro" :title="Commerce Pro only" />
+- Create orders <badge text="Pro" title="Commerce Pro only" />
+- Edit orders <badge text="Pro" title="Commerce Pro only" />
 
 #### Delete orders
 
