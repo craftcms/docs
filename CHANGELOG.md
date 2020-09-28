@@ -4,7 +4,8 @@ Theme and significant content changes will be documented in this file.
 
 ## 2020-09-28
 ### Added
-- Added support for using `sidebarDepth` frontmatter to control the nesting level of the right sidebar (default `0`, flat).
+- Added `sidebarDepth` frontmatter support for setting the nesting level of the right sidebar (default `0`, flat).
+- Added `sidebarLevel` frontmatter support for setting the heading level used to generate right sidebar (default `2` for using `h2` headings).
 
 ## 2020-09-25
 ### Added
