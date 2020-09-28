@@ -1,3 +1,6 @@
+---
+sidebarLevel: 3
+---
 # Database Connection Settings
 
 Craft supports several database connection settings that give you control over how Craft connects to the database.

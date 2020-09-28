@@ -37,7 +37,9 @@
 }
 
 @screen lg {
-  @apply hidden;
+  .nav-hamburger {
+    @apply hidden;
+  }
 }
 </style>
 

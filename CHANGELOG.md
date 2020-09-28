@@ -2,6 +2,31 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-09-28
+### Added
+- Added `sidebarDepth` frontmatter support for setting the nesting level of the right sidebar (default `0`, flat).
+- Added `sidebarLevel` frontmatter support for setting the heading level used to generate right sidebar (default `2` for using `h2` headings).
+
+## 2020-09-25
+### Added
+- Noted Craft 3.5.0+ typecasting in “Updating Plugins for Craft 3”.
+
+## 2020-09-21
+### Fixed
+- Fixed appearance of documentation version selector in Edge.
+
+## 2020-09-18
+### Removed
+- Removed example `mutex/` lock folder now that Craft 3.5+ use the database for mutex locking by default—meaning you’d only see that runtime folder overriding the default mutex component.
+
+## 2020-09-17
+### Fixed
+- Fixed the invisible hamburger navigation that could have secretly been clicked or tapped from wider viewports.
+
+## 2020-09-07
+### Changed
+- Clarified that the `{% ifchildren %}` and `{% endifchildren %}` tags don’t support special template logic. ([craftcms/cms#6841](https://github.com/craftcms/cms/issues/6841))
+
 ## 2020-09-15
 ### Added
 - Documented the `truncate` filter that was added in Craft 3.5.10.

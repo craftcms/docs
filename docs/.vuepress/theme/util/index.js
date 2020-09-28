@@ -290,11 +290,15 @@ export function resolveExtraSidebarConfig(
 }
 
 /**
+ * Translate page content headers into sidebar items.
  * @param { Page } page
  * @returns { SidebarGroup }
  */
 export function resolveHeaders(page) {
-  const headers = groupHeaders(page.headers || []);
+  const headers = groupHeaders(
+    page.headers || [],
+    page.frontmatter.sidebarLevel
+  );
   return [
     {
       type: "group",
@@ -312,30 +316,28 @@ export function resolveHeaders(page) {
   ];
 }
 
-export function groupHeaders(headers) {
-  let h3count = 0;
-
-  // group h3s under h2
+/**
+ * Collect headers grouped by specified target level. (Default is `h2`.)
+ * @param {*} headers
+ * @param {*} level
+ */
+export function groupHeaders(headers, level = 2) {
+  // normalize objects
   headers = headers.map(h => Object.assign({}, h));
-  let lastH2;
-  headers.forEach(h => {
-    if (h.level === 3) {
-      h3count++;
-    }
+  let lastHeadingAtLevel;
 
-    if (h.level === 2) {
-      lastH2 = h;
-    } else if (lastH2) {
-      (lastH2.children || (lastH2.children = [])).push(h);
+  // collect children of target level
+  headers.forEach(h => {
+    if (h.level === level) {
+      lastHeadingAtLevel = h;
+    } else if (lastHeadingAtLevel) {
+      (lastHeadingAtLevel.children || (lastHeadingAtLevel.children = [])).push(
+        h
+      );
     }
   });
 
-  // if we have no h2’s but lots of h3’s, return the h3’s instead
-  // if (!lastH2 && h3count) {
-  //   return headers.filter(h => h.level === 3);
-  // }
-
-  return headers.filter(h => h.level === 2);
+  return headers.filter(h => h.level === level);
 }
 
 export function resolveNavLinkItem(linkItem) {
