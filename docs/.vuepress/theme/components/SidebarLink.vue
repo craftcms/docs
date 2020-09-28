@@ -10,7 +10,7 @@ export default {
     h,
     {
       parent: { $page, $site, $route, $themeConfig, $themeLocaleConfig },
-      props: { item, sidebarDepth }
+      props: { item, sidebarDepth },
     }
   ) {
     // use custom active class matching logic
@@ -22,7 +22,7 @@ export default {
     const active =
       item.type === "auto"
         ? selfActive ||
-          item.children.some(c =>
+          item.children.some((c) =>
             isActive($route, item.basePath + "#" + c.slug)
           )
         : selfActive;
@@ -32,12 +32,11 @@ export default {
         : renderLink(h, item.path, item.title || item.path, active);
 
     const maxDepth = [
-      $page.frontmatter.sidebarDepth,
       sidebarDepth,
       $themeLocaleConfig.sidebarDepth,
       $themeConfig.sidebarDepth,
-      1
-    ].find(depth => depth !== undefined);
+      1,
+    ].find((depth) => depth !== undefined);
 
     const displayAllHeaders =
       $themeLocaleConfig.displayAllHeaders || $themeConfig.displayAllHeaders;
@@ -45,7 +44,7 @@ export default {
     if (item.type === "auto") {
       return [
         link,
-        renderChildren(h, item.children, item.basePath, $route, maxDepth)
+        renderChildren(h, item.children, item.basePath, $route, maxDepth),
       ];
     } else if (
       (active || displayAllHeaders) &&
@@ -57,7 +56,7 @@ export default {
     } else {
       return link;
     }
-  }
+  },
 };
 
 function renderLink(h, to, text, active, level) {
@@ -65,17 +64,17 @@ function renderLink(h, to, text, active, level) {
     props: {
       to,
       activeClass: "",
-      exactActiveClass: ""
+      exactActiveClass: "",
     },
     class: {
       active,
-      "sidebar-link": true
-    }
+      "sidebar-link": true,
+    },
   };
 
   if (level > 2) {
     component.style = {
-      "padding-left": level + "rem"
+      "padding-left": level + "rem",
     };
   }
 
@@ -87,11 +86,11 @@ function renderChildren(h, children, path, route, maxDepth, depth = 1) {
   return h(
     "ul",
     { class: "sidebar-sub-headers" },
-    children.map(c => {
+    children.map((c) => {
       const active = isActive(route, path + "#" + c.slug);
       return h("li", { class: "sidebar-sub-header" }, [
         renderLink(h, path + "#" + c.slug, c.title, active, c.level - 1),
-        renderChildren(h, c.children, path, route, maxDepth, depth + 1)
+        renderChildren(h, c.children, path, route, maxDepth, depth + 1),
       ]);
     })
   );
@@ -104,11 +103,11 @@ function renderExternal(h, to, text) {
       attrs: {
         href: to,
         target: "_blank",
-        rel: "noopener noreferrer"
+        rel: "noopener noreferrer",
       },
       class: {
-        "sidebar-link": true
-      }
+        "sidebar-link": true,
+      },
     },
     [text, h("OutboundLink")]
   );
@@ -116,11 +115,9 @@ function renderExternal(h, to, text) {
 </script>
 
 <style lang="postcss">
-.sidebar {
-  .sidebar-sub-headers {
-    @apply pl-4;
-    font-size: 0.95em;
-  }
+.sidebar-sub-headers {
+  @apply pl-2;
+  font-size: 0.95em;
 }
 
 a.sidebar-link {

@@ -4,7 +4,12 @@
       <ColorModeSwitch v-on="$listeners" :on="isDark" />
     </div>
     <div class="sidebar-link-wrapper">
-      <SidebarLinks :depth="0" :items="headingItems" fixed-heading="On this Page" />
+      <SidebarLinks
+        :depth="depth"
+        :sidebar-depth="$page.frontmatter.sidebarDepth || sidebarDepth"
+        :items="headingItems"
+        fixed-heading="On this Page"
+      />
     </div>
   </div>
 </template>
@@ -18,7 +23,22 @@ export default {
     SidebarLinks,
     ColorModeSwitch,
   },
-  props: ["headingItems", "isDark"],
+  props: {
+    headingItems: {
+      type: Array,
+    },
+    isDark: {
+      type: Boolean,
+    },
+    depth: {
+      type: Number,
+      default: 0,
+    },
+    sidebarDepth: {
+      type: Number,
+      default: 0,
+    },
+  },
 };
 </script>
 

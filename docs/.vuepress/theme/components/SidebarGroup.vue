@@ -4,9 +4,9 @@
     :class="[
       {
         collapsable,
-        'is-sub-group': depth !== 0
+        'is-sub-group': depth !== 0,
       },
-      `depth-${depth}`
+      `depth-${depth}`,
     ]"
   >
     <RouterLink
@@ -14,7 +14,7 @@
       class="sidebar-heading clickable"
       :class="{
         open,
-        'active': isActive($route, item.path)
+        active: isActive($route, item.path),
       }"
       :to="item.path"
       @click.native="$emit('toggle')"
@@ -23,7 +23,12 @@
       <span v-if="collapsable" class="arrow" :class="open ? 'down' : 'right'" />
     </RouterLink>
 
-    <p v-else class="sidebar-heading" :class="{ open }" @click="$emit('toggle')">
+    <p
+      v-else
+      class="sidebar-heading"
+      :class="{ open }"
+      @click="$emit('toggle')"
+    >
       <span>{{ fixedHeading || item.title }}</span>
       <span v-if="collapsable" class="arrow" :class="open ? 'down' : 'right'" />
     </p>
@@ -33,7 +38,7 @@
         v-if="open || !collapsable"
         class="sidebar-group-items"
         :items="item.children"
-        :sidebar-depth="item.sidebarDepth"
+        :sidebar-depth="item.sidebarDepth || sidebarDepth"
         :depth="depth + 1"
       />
     </DropdownTransition>
@@ -48,17 +53,24 @@ export default {
   name: "SidebarGroup",
 
   components: {
-    DropdownTransition
+    DropdownTransition,
   },
 
-  props: ["item", "open", "collapsable", "depth", "fixedHeading"],
+  props: [
+    "item",
+    "open",
+    "collapsable",
+    "depth",
+    "sidebarDepth",
+    "fixedHeading",
+  ],
 
   // ref: https://vuejs.org/v2/guide/components-edge-cases.html#Circular-References-Between-Components
   beforeCreate() {
     this.$options.components.SidebarLinks = require("./SidebarLinks.vue").default;
   },
 
-  methods: { isActive }
+  methods: { isActive },
 };
 </script>
 
