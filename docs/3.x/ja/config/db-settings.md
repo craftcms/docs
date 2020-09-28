@@ -1,10 +1,13 @@
+- - -
+sidebarLevel: 3
+- - -
 # データベース接続設定
 
-Craft は、Craft がどのようにデータベースへ接続するかを制御するためのいくつかのデータベース接続設定をサポートしています。
+Craft supports several database connection settings that give you control over how Craft connects to the database.
 
-最終的に、データベース接続設定は `config/db.php` からセットしなければなりません。 しかし、最初に（`.env` ファイルのような）環境変数としてセットしてから、`config/db.php` 内で [getenv()](http://php.net/manual/en/function.getenv.php) を使用して環境変数の値を取得することを推奨します。
+Ultimately, database connection settings must be set from  `config/db.php`, but we recommend you initially set them as environment variables (such as in your `.env` file), and then pull the environment variable value into `config/db.php` using [getenv()](http://php.net/manual/en/function.getenv.php).
 
-例えば、新しい Craft 3 プロジェクト内の `.env` ファイルでは、次の環境変数を定義する必要があります。
+For example, in a new Craft 3 project, your `.env` file should define these environment variables:
 
 ```bash
 ENVIRONMENT="dev"
@@ -19,7 +22,7 @@ DB_TABLE_PREFIX=""
 DB_PORT=""
 ```
 
-`DB_` ではじまる変数はデータベース接続設定で、`config/db.php` の中から次のように取得します。
+The variables that start with `DB_` are database connection settings, and they get pulled into `config/db.php` like this:
 
 ```php
 return [
@@ -38,12 +41,12 @@ return [
 You may also provide a `DB_DSN` environment variable. If defined, Craft will use that.
 :::
 
-Craft がサポートするデータベース接続設定の完全なリストは、次の通りです。
+We recommend this environment variable approach for two reasons:
 
 1. 機密情報をプロジェクトのコードベースから守ります。 （`.env` ファイルは、共有したり Git にコミットするべきではありません。
 2. それぞれの開発者が他者の設定を上書きすることなく独自の設定を定義できるため、他の開発者とのコラボレーションを容易にします。
 
-許可される型 :
+Here’s the full list of database connection settings that Craft supports:
 
 <!-- BEGIN SETTINGS -->
 
@@ -68,7 +71,7 @@ Defined by :
 
 An array of key => value pairs of PDO attributes to pass into the PDO constructor.
 
-デフォルト値 :
+For example, when using the MySQL PDO driver (http://php.net/manual/en/ref.pdo-mysql.php), if you wanted to enable a SSL database connection (assuming SSL is enabled in MySQL (https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html) and `'user'` can connect via SSL, you'd set these:
 
 ```php
 [
@@ -122,7 +125,7 @@ Allowed types :
 
 
 
-接続するデータベースのユーザー名。
+The name of the database to select.
 
 
 
@@ -145,7 +148,7 @@ Allowed types :
 
 
 
-使用するデータベースのドライバ。 MySQL 向けの 'mysql'、または、PostgreSQL 向けの 'pgsql'。
+The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
 
 
 
@@ -168,7 +171,7 @@ Allowed types :
 
 
 
-PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
+The Data Source Name (“DSN”) that tells Craft how to connect to the database.
 
 DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by driver-specific parameters. For example, `mysql:host=127.0.0.1;port=3306;dbname=acme_corp`.
 
@@ -196,7 +199,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 
 
-デフォルト値 :
+The database password to connect with.
 
 
 
@@ -219,7 +222,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 
 
-データベースサーバーのポート。 デフォルトは、MySQL 向けの 3306、および、PostgreSQL 向けの 5432。
+The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
 
 
 
@@ -242,7 +245,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 
 
-デフォルト値 :
+The schema that Postgres is configured to use by default (PostgreSQL only).
 
 
 
@@ -265,7 +268,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 
 
-データベースのサーバー名、または、IP アドレス。 通常は 'localhost' または '127.0.0.1' です。
+The database server name or IP address. Usually `localhost` or `127.0.0.1`.
 
 
 
@@ -288,7 +291,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 
 
-共有するCraft のインストールを単一のデータベース（MySQL）、または、単一のデータベースで共有スキーマ（PostgreSQL）を使用する場合、インストールごとにテーブル名の競合を避けるために、テーブル接頭辞をセットできます。 これは5文字以内、かつ、すべて小文字でなければなりません。
+If you're sharing Craft installs in a single database (MySQL) or a single database and using a shared schema (PostgreSQL), then you can set a table prefix here to avoid table naming conflicts per install. This can be no more than 5 characters, and must be all lowercase.
 
 
 
@@ -311,7 +314,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 
 
-MySQL のみ。 セットされている場合、（yiic で使用される）CLI 接続文字列は、 サーバーやポートの代わりに Unix ソケットに接続します。 これを指定すると、'server' と 'port' 設定が無視されます。
+MySQL only. If this is set, then the CLI connection string (used for yiic) will connect to the Unix socket, instead of the server and port. If this is specified, then 'server' and 'port' settings are ignored.
 
 
 
@@ -334,9 +337,9 @@ MySQL のみ。 セットされている場合、（yiic で使用される）CL
 
 
 
-テーブルを作成する際に使用する文字セット。
+The database connection URL, if one was provided by your hosting environment.
 
-許可される型 :
+If this is set, the values for [driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver), [user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user), [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database), [server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server), [port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port), and [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database) will be extracted from it.
 
 
 
@@ -359,7 +362,7 @@ MySQL のみ。 セットされている場合、（yiic で使用される）CL
 
 
 
-許可される型 : :
+The database username to connect with.
 
 
 
