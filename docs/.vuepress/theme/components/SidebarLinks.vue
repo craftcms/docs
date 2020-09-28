@@ -49,13 +49,27 @@ export default {
     ExtraSidebarItems,
   },
 
-  props: [
-    "items",
-    "extraItems",
-    "depth", // depth of current sidebar links
-    "sidebarDepth",
-    "fixedHeading",
-  ],
+  props: {
+    // items to be rendered
+    items: {
+      type: Array
+    },
+    // secondary items for a “more” expander
+    extraItems: {
+      type: Array
+    },
+    // depth of current sidebar links
+    depth: {
+      type: Number
+    },
+    sidebarDepth: {
+      type: Number
+    },
+    // heading to be displayed above links
+    fixedHeading: {
+      type: String
+    },
+  },
 
   data() {
     return {
