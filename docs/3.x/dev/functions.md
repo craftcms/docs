@@ -552,6 +552,8 @@ If `text` is included in the attributes argument, its value will be HTML-encoded
 
 If `html` is included in the attributes argument (and `text` isn’t), its value will be set as the inner HTML of the tag (without getting HTML-encoded).
 
+**Warning**: This can be an XSS (Cross-site scripting) attack vector. Make sure the input is trusted otherwise, sanitize the input beforehand e.g. using the [`purify`](https://craftcms.com/docs/3.x/dev/filters.html#purify) twig filter.
+
 ```twig
 {{ tag('div', {
     html: 'Hello<br>world'
