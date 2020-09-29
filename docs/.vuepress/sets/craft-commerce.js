@@ -18,7 +18,7 @@ module.exports = {
         {
           title: "Extending Commerce",
           collapsable: false,
-          children: ["events"]
+          children: [["", "Introduction"], "events"]
         },
         {
           title: "System Components",
