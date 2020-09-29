@@ -1,8 +1,11 @@
+- - -
+keywords: Twig Primer
+- - -
 # Twig 入門書
 
-これは Craft のテンプレートエンジンである Twig のコアコンセプトの要約です。
+[Twig](http://twig.sensiolabs.org/) is a fast and powerful templating system, commonly used to power front-end views in content management systems like Craft, Drupal, and WordPress (via the [Timber](https://www.upstatement.com/timber/) plugin).
 
-これはあくまで入門書であり、 Twig が行うことができるすべての包括的なドキュメントではありません。
+Let’s take a look at how it works.
 
 ## 3種類の Twig タグ
 
@@ -10,7 +13,7 @@ Twig templates are HTML files that are sprinkled with bits of Twig code. When Tw
 
 All Twig code follows a basic pattern that separates it from the surrounding HTML. At its outer edges you will find left and right curly braces (`{` and `}`), coupled with another character that signifies what _type_ of Twig code it is. These sets of characters are called “delimiters”.
 
-それぞれについて、詳しく見てみましょう。
+There are three types of delimiters that Twig looks out for:
 
 - ロジックタグ
 - 出力タグ
@@ -18,7 +21,7 @@ All Twig code follows a basic pattern that separates it from the surrounding HTM
 
 ### ロジックタグ
 
-コメント構文は常に `{#` ではじまり `#}` で終わります。 You can use them to leave little notes for yourself in the code.
+Twig comments are wrapped in `{#` and `#}` delimiters. You can use them to leave little notes for yourself in the code.
 
 They are similar to HTML comments in that they won’t show up as rendered text in the browser. The difference is that they will never make it into the HTML source in the first place.
 
@@ -29,9 +32,9 @@ They are similar to HTML comments in that they won’t show up as rendered text 
 
 ### 出力タグ
 
-出力タグはテンプレートにアプトプットするためのものなので、 Twig の命令タグ内に記述することは絶対にできません
+Twig tags are wrapped in `{%` and `%}` delimiters, and are used to define the _logic_ of your template, such as conditionals, loops, variable definitions, template includes, and other things.
 
-出力タグは、レンダリングされた HTML にプリントする責任があります。
+The syntax within the `{%` and `%}` delimiters varies from tag to tag, but they will always start with the same thing: the name of the tag.
 
 In their simplest form, the tag name might be all that’s required. Take Craft’s [requireLogin](tags.md#requirelogin) tag, for example:
 
@@ -46,7 +49,7 @@ Other tags can accept parameters. In the case of Craft’s [exit](tags.md#exit) 
 {% set entry = craft.entries.section( {% if filterBySection %} sectionId {% endif %} ) %}
 ```
 
-これらの例は、正しくありません。
+Some tags are meant to be used in pairs, such as the [js](tags.md#js) tag, which registers JavaScript code onto the page.
 
 ```twig
 {% js %}
@@ -54,13 +57,13 @@ Other tags can accept parameters. In the case of Craft’s [exit](tags.md#exit) 
 {% endjs %}
 ```
 
-こちらは正しいです。
+Some tags can have nested tags _between_ the opening and closing tags:
 
 ```twig
 {# Loop through the recipes #}
 ```
 
-リソース：
+Refer to the [Tags](tags.md) page for a full list of tags available to your Craft templates.
 
 ### コメントタグ
 
@@ -78,7 +81,7 @@ Don’t place a print statement (or any other Twig code) within another print st
 
 #### Auto-escaping
 
-コメントタグの内側に記述された内容は、HTML コメントとは異なり、最終的なテンプレートにレンダリングされません。
+Most of the time, print statements will automatically HTML-encode the content before actually outputting it (called **auto-escaping**), which helps defend against cross-site scripting (XSS) vulnerabilities.
 
 For example, let’s say you have a search results page, where the search query is defined by a `q` query string parameter, and in the event that there are no results, you want to output a message to the user that includes the query:
 
@@ -86,7 +89,7 @@ For example, let’s say you have a search results page, where the search query 
 {{ siteName|upper }}
 ```
 
-`set` タグを利用して、独自の変数を割り当てることができます。
+If it weren’t for auto-escaping, a search for `<script>alert('Uh-oh')</script>` would result in this HTML:
 
 ```html
 {{ now|date("M d, Y") }}
@@ -114,14 +117,14 @@ There are two cases where print statements will output content directly, without
 
 There are times where you may need to work with both trusted and untrusted content together. For example, let’s say you want to output user-supplied content as Markdown, but you want to ensure they haven’t put anything nefarious in there first.
 
-リソース：
+To do that, you could explicitly encode _all_ HTML within the user-supplied content using the [escape](https://twig.symfony.com/doc/2.x/filters/escape.html) filter, before passing it to the [markdown](filters.md#markdown-or-md) filter:
 
 ```twig
 {# Escape any HTML in the Body field, then format as Markdown #}
 {{ entry.body|escape|markdown }}
 ```
 
-Twig と Craft は、テンプレートタグ内で利用できるいくつかのファンクションを提供します。
+Alternatively if you want to allow _some_ HTML, so long as it’s tame, you can use the [purify](#purify) filter, which sanatizes the content using [HTML Purifier](http://htmlpurifier.org/).
 
 ```twig
 {# Purify the content in the Body field, then format as Markdown #}
@@ -130,9 +133,9 @@ Twig と Craft は、テンプレートタグ内で利用できるいくつか�
 
 ## 変数
 
-リソース：
+Twig supports setting custom **variables** in your templates, which let you save a [value](#types-of-values) to be referenced later on in your template.
 
-Twig を学ぶためにオンラインで利用できるいくつかの学習リソースがあります。
+You can define variables using the [set](https://twig.symfony.com/doc/2.x/tags/set.html) tag.
 
 ```twig
 {% set title = "About Us" %}
@@ -160,7 +163,7 @@ There are several functions available to your Twig templates, which can do a wid
 {# Output: <input type="hidden" name="entryId" value="100"> #}
 ```
 
-さらに、すべての Craft テンプレートは、いくつかの[グローバル変数](global-variables.md)があらかじめロードされています。
+Refer to the [Functions](functions.md) page for a full list of functions available to your Craft templates.
 
 ## ファンクション
 
@@ -301,7 +304,7 @@ Arrays are ordered lists of nested values. They are delimited with left and righ
 ] %}
 ```
 
-より詳しいことは、このページの下段にある「続きを読む」セクションを見るか、[Twig 公式ドキュメント](https://twig.symfony.com/doc/templates.html)を直接参照してください。
+You can loop over an array using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag:
 
 ```twig
 <ol class="todo">
@@ -343,7 +346,7 @@ If you need to create a hash with a dynamic key, wrap the key in parentheses:
 } %}
 ```
 
-https://twig.symfony.com/doc/tags/index.html
+Like arrays, you can loop over all the values in a hash using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag:
 
 ```twig
 <dl class="specs">
@@ -558,7 +561,7 @@ Embeds are similar to [includes](#includes), with a superpower: they can overrid
 </div>
 ```
 
-https://twig.symfony.com/doc/functions/index.html
+The template will continue to work with [include](https://twig.symfony.com/doc/2.x/tags/include.html) tags like before, but now other templates have the option of using an [embed](https://twig.symfony.com/doc/2.x/tags/embed.html) tag instead, and overwriting the entire `content` block:
 
 ```twig
 {% embed '_tip' %}
