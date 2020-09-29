@@ -85,7 +85,7 @@ This permission lets the user:
 
 ### Manage store settings
 
-This permission lets the user change settings for the commerce.
+This permission lets the user see and edit items in Commerce’s “Store Settings” area.
 
 
 ## General Config
