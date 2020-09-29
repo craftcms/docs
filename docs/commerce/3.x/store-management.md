@@ -18,81 +18,61 @@ The following permissions are available for users or user groups to have for Com
 
 ### Access Craft Commerce
 
-This permission lets the user get access to the Commerce section of the control panel.
-
-This permission is found under Craft’s “Access the control panel” permission.
+Whether the user is able to access the Commerce section of the control panel. (Unlike the others, you’ll find it under Craft’s “Access the control panel” permission.)
 
 ### Manage products
 
-This permission lets the user:
-
-- See products
-- Create products
-- Save products
-- Edit products
-- Delete products
+Whether the user can see, create, save, edit, and delete products by product type.
 
 ### Manage orders
 
-This permission lets the user see orders.
+Whether the user can access and interact with orders.
 
-#### Edit orders
+#### Create orders <badge text="Pro" title="Commerce Pro only" />
 
-This permission lets the user:
+Whether the user is allowed to create new orders from the control panel using Commerce Pro.
 
-- Create orders <badge text="Pro" title="Commerce Pro only" />
-- Edit orders <badge text="Pro" title="Commerce Pro only" />
+#### Edit orders <badge text="Pro" title="Commerce Pro only" />
+
+Whether the user is allowed to edit orders in the control panel using Commerce Pro.
 
 #### Delete orders
 
-This permission lets the user delete an order.
+Whether a user may delete orders.
 
 #### Capture payment
 
-This permission lets the user click the capture button on an authorized transaction.
+Whether the user may click the “Capture” button on an authorized transaction.
 
 #### Refund payment
 
-This permission lets the user click the refund button on a successful payment.
+Whether the user may click the “Refund” button on a successful payment.
 
 ### Manage customers
 
-This permission lets the user:
-
-- See the customers listing
-- See customer info
+Whether the user can see the customers listing and individual customer information.
 
 ### Manage promotions
 
-This permission lets the user:
-
-- See discounts and sales
-- Create & Edit discounts and sales
+Whether the user can see, create and edit discounts and sales.
 
 ### Manage subscriptions
 
-This permission lets the user:
+Whether the user can see subscriptions, refresh subscription payments, and cancel subscriptions.
 
-- See subscriptions
-- Refresh payments on subscriptions
-- Cancel subscriptions
+### Manage shipping <badge text="Pro" title="Commerce Pro only" />
 
-### Manage shipping
+Whether the user can create, edit, and delete the following:
 
-This permission lets the user:
+- Shipping methods
+- Shipping rules
+- Shipping categories
+- Shipping zones
 
-- Create, edit and delete shipping methods
-- Create, edit and delete shipping rules
-- Create, edit and delete shipping categories
-- Create, edit and delete shipping zones
+### Manage taxes <badge text="Pro" title="Commerce Pro only" />
 
-### Manage taxes
-
-This permission lets the user:
-- Create, edit and delete tax zones
-- Create, edit and delete tax categories
-- Create, edit and delete tax zones
+Whether the user can create, edit, and delete tax zones and tax categories.
 
 ### Manage store settings
 
-This permission lets the user change settings for the commerce.
+Whether the user may change settings in Commerce’s “Store Settings” area.
