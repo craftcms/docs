@@ -79,9 +79,9 @@ This permission lets the user:
 ### Manage taxes
 
 This permission lets the user:
+
 - Create, edit and delete tax zones
 - Create, edit and delete tax categories
-- Create, edit and delete tax zones
 
 ### Manage store settings
 
