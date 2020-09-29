@@ -1,89 +1,38 @@
 # Configuring Commerce
 
-## Permissions
+## Config Settings
 
-The following permissions are available for users or user groups to have for Commerce:
+Commerce supports a number of [config settings](config-settings.md). Like Craft’s config settings, you can override their default values in a `config/commerce.php` file.
 
-### Access Craft Commerce
+```php
+return [
+    'purgeInactiveCartsDuration' => 'P1D',
+];
+```
 
-This permission lets the user get access to the Commerce section of the control panel.
+## Aliases
 
-This permission is found under Craft’s “Access the control panel” permission.
+| Alias | Description
+| ----- | -----------
+| `@commerceLib` | The path to `vendor/craftcms/commerce/lib/`
 
-### Manage products
+## Environmental Configuration
 
-This permission lets the user:
+Some Commerce settings should be defined on a [per-environment basis](/3.x/config/#environmental-configuration).
 
-- See products
-- Create products
-- Save products
-- Edit products
-- Delete products
+- System Settings
+    - General Settings
+        - Email
+            - **Status Email Address**
+            - **From Name**
+        - Subscription Settings
+            - **Billing detail update URL**
 
-### Manage orders
+## PHP Constants
 
-This permission lets the user see orders.
+### `COMMERCE_PAYMENT_CURRENCY`
 
-#### Edit orders
-
-This permission lets the user:
-
-- Create orders <badge text="Pro" title="Commerce Pro only" />
-- Edit orders <badge text="Pro" title="Commerce Pro only" />
-
-#### Delete orders
-
-This permission lets the user delete an order.
-
-#### Capture payment
-
-This permission lets the user click the capture button on an authorized transaction.
-
-#### Refund payment
-
-This permission lets the user click the refund button on a successful payment.
-
-### Manage customers
-
-This permission lets the user:
-
-- See the customers listing
-- See customer info
-
-### Manage promotions
-
-This permission lets the user:
-
-- See discounts and sales
-- Create & Edit discounts and sales
-
-### Manage subscriptions
-
-This permission lets the user:
-
-- See subscriptions
-- Refresh payments on subscriptions
-- Cancel subscriptions
-
-### Manage shipping
-
-This permission lets the user:
-
-- Create, edit and delete shipping methods
-- Create, edit and delete shipping rules
-- Create, edit and delete shipping categories
-- Create, edit and delete shipping zones
-
-### Manage taxes
-
-This permission lets the user:
-- Create, edit and delete tax zones
-- Create, edit and delete tax categories
-- Create, edit and delete tax zones
-
-### Manage store settings
-
-This permission lets the user change settings for the commerce.
+This constant can be used to lock a valid payment currency ISO code, which otherwise defaults to the primary currency.
 
 ## Project Config
 
