@@ -19,4 +19,8 @@ php craft plugin/install commerce
 
 ## Example Templates
 
-See the included [example templates](example-templates.md) to start learning how to use Commerce.
+You may also want to copy the included [example templates](example-templates.md) into your project as a starting point, especially if you’re new to Commerce:
+
+```bash
+cp -r vendor/craftcms/commerce/example-templates templates/commerce-examples
+```
