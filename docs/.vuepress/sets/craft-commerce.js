@@ -72,10 +72,6 @@ module.exports = {
             "donations",
             "payment-gateways",
             "payment-currencies"
-            // "cart",
-            // "orders",
-            // "products",
-            // "product-types",
             // "custom-order-statuses",
             // "order-status-emails",
           ],
