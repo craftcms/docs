@@ -28,13 +28,9 @@ Whether the user can see, create, save, edit, and delete products by product typ
 
 Whether the user can access and interact with orders.
 
-#### Create orders <badge text="Pro" title="Commerce Pro only" />
-
-Whether the user is allowed to create new orders from the control panel using Commerce Pro.
-
 #### Edit orders <badge text="Pro" title="Commerce Pro only" />
 
-Whether the user is allowed to edit orders in the control panel using Commerce Pro.
+Whether the user is allowed to create and edit orders in the control panel using Commerce Pro.
 
 #### Delete orders
 
