@@ -219,6 +219,23 @@ curl \
   http://my-project.test/api
 ```
 
+::: warning
+If you’re unable to query a private schema because of a “missing authorization header”, make sure Craft receieved it from the web server with a quick post to a test template:
+
+```twig
+{{ craft.app.getRequest().getHeaders().has('authorization') ?
+    'auth token present ✓' : 
+    'auth token missing!' }}
+```
+
+Apache strips `Authorization` headers by default, which can be fixed by adding the following to your `.htaccess` file:
+
+```
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+```
+:::
+
 ## Caching
 
 All query results are cached, so that repeated queries can yield results faster. The GraphQL result cache does not have a sophisticated ruleset on invalidating the cache - if the site's content or structure changes, the entire cache is invalidated.
