@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-09-30
+### Fixed
+- Fixed a bug that prevented second-level docset navigation from resolving properly.
+
 ## 2020-09-28
 ### Added
 - Added `sidebarDepth` frontmatter support for setting the nesting level of the right sidebar (default `0`, flat).

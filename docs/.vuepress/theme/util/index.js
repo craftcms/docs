@@ -386,9 +386,10 @@ export function resolveMatchingConfig(
     };
   }
 
-  // remove version from regular path
-  const modifiedRegularPath = getRegularPathWithoutVersion(
+  // get a relative path with the docset or version
+  const modifiedRegularPath = getRelativeRegularPath(
     regularPath,
+    activeSet,
     activeVersion
   );
 
@@ -409,21 +410,26 @@ export function resolveMatchingConfig(
 }
 
 /**
- * Returns the regular path without its version segment.
+ * Returns the regular path without its version and docset segments.
  *
  * @param {*} regularPath
+ * @param {*} activeSet
  * @param {*} activeVersion
  */
-export function getRegularPathWithoutVersion(regularPath, activeVersion) {
-  // get ready to strip the version from the path for comparison
+export function getRelativeRegularPath(regularPath, activeSet, activeVersion) {
   let modifiedRegularPath = regularPath;
 
-  if (activeVersion) {
-    // strip from modified path
-    modifiedRegularPath = modifiedRegularPath.replace(activeVersion, "");
+  if (activeSet) {
+    // strip docset baseDir from path
+    modifiedRegularPath = fixDoubleSlashes(modifiedRegularPath.replace(activeSet.baseDir, ""));
   }
 
-  return fixDoubleSlashes(modifiedRegularPath);
+  if (activeVersion) {
+    // strip version segment from path
+    modifiedRegularPath = fixDoubleSlashes(modifiedRegularPath.replace(activeVersion, ""));
+  }
+
+  return modifiedRegularPath;
 }
 
 /**

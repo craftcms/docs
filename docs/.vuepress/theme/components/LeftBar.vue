@@ -206,7 +206,7 @@ import SidebarLinks from "./SidebarLinks.vue";
 import {
   resolveSidebarConfig,
   getRelativeActiveBaseFromConfig,
-  getRegularPathWithoutVersion,
+  getRelativeRegularPath,
   getDocSetDefaultUri,
 } from "../util";
 
@@ -272,8 +272,9 @@ export default {
         this.$themeConfig
       );
 
-      const sidebarPath = getRegularPathWithoutVersion(
+      const sidebarPath = getRelativeRegularPath(
         this.$page.regularPath,
+        this.$activeSet,
         this.$activeVersion
       );
 
