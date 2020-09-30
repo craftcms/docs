@@ -220,7 +220,7 @@ curl \
 ```
 
 ::: warning
-If you’re unable to query a private schema because of a “missing authorization header”, make sure Craft receieved it from the web server with a quick post to a test template:
+If you’re unable to query a private schema because of a “missing authorization header”, make sure Craft received it from the web server with a quick post to a test template:
 
 ```twig
 {{ craft.app.getRequest().getHeaders().has('authorization') ?
