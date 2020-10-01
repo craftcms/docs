@@ -6,6 +6,32 @@ Time fields provide a time picker input.
 
 You can customize the minute increment, and you can optionally choose minimum and maximum times that should be allowed.
 
+## Converting from a Date Field
+
+If you have an existing [Date](date-time-fields.md) field that you wish to convert to a Time field, you may need to update its existing values to compensate for the fact that Date fields store their values in UTC, whereas Time field values are timezone-less.
+
+For example, if your system timezone is set to `UTC-7 (PDT)`, and you have a Date field value whose time is set to 10:00 AM, its actual value in the database will be `17:00` (5:00 PM), because that’s what 10:00 AM PDT is in UTC.
+
+First go to Settings → General and check your system timezone. If it’s set to `UTC`, you have nothing to worry about. Go ahead and convert your field type.
+
+Otherwise, take note of the timezone offset, and then execute one of the following SQL queries, depending on the database engine you’re using:
+
+```sql
+# MySQL:
+UPDATE `content`
+SET `field_myFieldHandle` = CONVERT_TZ(`field_myFieldHandle`, '+00:00', '-07:00')
+WHERE `field_myFieldHandle` IS NOT NULL
+
+# PostgreSQL:
+UPDATE "content"
+SET "field_myFieldHandle" = "field_myFieldHandle" at time zone 'UTC' at time zone '-07:00'
+WHERE "field_myFieldHandle" IS NOT NULL
+```
+
+(Replace `myFieldHandle` with your Date field handle, and `-07:00` with your system timezone offset. You may also need to change the table name and/or column name prefix as well, depending on the field’s context and your tablePrefix DB connection setting.)
+
+Once you’ve updated your existing field values, go ahead and convert your field type.
+
 ## Templating
 
 ### Querying Elements with Time Fields
