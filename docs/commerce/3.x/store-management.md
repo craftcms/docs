@@ -28,7 +28,7 @@ Whether the user can see, create, save, edit, and delete products by product typ
 
 Whether the user can access and interact with orders.
 
-#### Edit orders <badge text="Pro" title="Commerce Pro only" />
+#### Edit orders <badge text="Pro" type="edition" vertical="middle" title="Commerce Pro only" />
 
 Whether the user is allowed to create and edit orders in the control panel using Commerce Pro.
 
@@ -56,7 +56,7 @@ Whether the user can see, create and edit discounts and sales.
 
 Whether the user can see subscriptions, refresh subscription payments, and cancel subscriptions.
 
-### Manage shipping <badge text="Pro" title="Commerce Pro only" />
+### Manage shipping <badge text="Pro" type="edition" vertical="middle" title="Commerce Pro only" />
 
 Whether the user can create, edit, and delete the following:
 
@@ -65,7 +65,7 @@ Whether the user can create, edit, and delete the following:
 - Shipping categories
 - Shipping zones
 
-### Manage taxes <badge text="Pro" title="Commerce Pro only" />
+### Manage taxes <badge text="Pro" type="edition" vertical="middle" title="Commerce Pro only" />
 
 Whether the user can create, edit, and delete tax zones and tax categories.
 
