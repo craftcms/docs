@@ -59,14 +59,16 @@ Prism.hooks.add("wrap", function(env) {
 });
 
 /**
- * Add simple placeholder support for shell commands.
+ * Add simple placeholder support for non-tokenized plain text in
+ * shell commands and SQL queries.
  */
 Prism.hooks.add("after-tokenize", function(env) {
   let placeholderVars = Object.keys(dictionary);
   let matchPattern = placeholderVars.join("|");
   let match = new RegExp(matchPattern);
+  let supported = ["bash", "sql"];
 
-  if (env.code && env.language === "bash") {
+  if (env.code && supported.includes(env.language)) {
     env.grammar["code-placeholder"] = {
       pattern: match
     };
