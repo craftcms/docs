@@ -99,11 +99,11 @@ Craft と Twig は、必要に応じて使用できる日付を操作するた�
 ```twig
 {% set pt = 'America/Los_Angeles' %}
 {% set currentValue = entry is defined and entry.myFieldHandle
-    ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone=pt)
+    ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone=tz)
     : '' %}
 
 <input type="datetime-local" name="fields[myFieldHandle][datetime]" value="{{ currentValue }}">
-{{ hiddenInput('fields[myFieldHandle][timezone]', pt) }}
+{{ hiddenInput('fields[myFieldHandle][timezone]', tz) }}
 ```
 
 または、どのタイムゾーンで日付を投稿するかをユーザーに決定させることもできます。
@@ -116,8 +116,8 @@ Craft と Twig は、必要に応じて使用できる日付を操作するた�
 <input type="datetime-local" name="fields[myFieldHandle][datetime]" value="{{ currentValue }}">
 
 <select name="fields[myFieldHandle][timezone]">
+    <option value="UTC" selected>UTC</option>
     <option value="America/Los_Angeles">Pacific Time</option>
-    <option value="UTC">UTC</option>
     <!-- ... -->
 </select>
 ```
