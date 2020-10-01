@@ -5,6 +5,7 @@ Theme and significant content changes will be documented in this file.
 ## 2020-10-01
 ### Added
 - Documented the new Time field type added in Craft 3.5.12.
+- Added an “edition” style to the Badge component for visually identifying edition-specific headings.
 
 ## 2020-09-30
 ### Fixed
