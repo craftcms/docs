@@ -366,7 +366,7 @@ Defined by
 
 The shell command that Craft should execute to create a database backup.
 
-By default Craft will run `mysqldump` or `pg_dump`, provided that those libraries are in the `$PATH` variable for the user the web server  is running as.
+By default Craft will run `mysqldump` or `pg_dump`, provided that those libraries are in the `$PATH` variable for the system user running the web server.
 
 There are several tokens you can use that Craft will swap out at runtime:
 
@@ -423,7 +423,7 @@ Defined by
 
 
 
-The base URL that Craft should use when generating control panel URLs.
+The base URL Craft should use when generating control panel URLs.
 
 It will be determined automatically if left blank.
 
@@ -452,11 +452,15 @@ Defined by
 
 
 
-The higher the cost value, the longer it takes to generate a password hash and to verify against it. Therefore, higher cost slows down a brute-force attack.
+The higher the cost value, the longer it takes to generate a password hash and to verify against it.
+
+Therefore, higher cost slows down a brute-force attack.
 
 For best protection against brute force attacks, set it to the highest value that is tolerable on production servers.
 
-The time taken to compute the hash doubles for every increment by one for this value. For example, if the hash takes 1 second to compute when the value is 14 then the compute time varies as 2^(value - 14) seconds.
+The time taken to compute the hash doubles for every increment by one for this value.
+
+For example, if the hash takes 1 second to compute when the value is 14 then the compute time varies as 2^(value - 14) seconds.
 
 
 
@@ -643,7 +647,9 @@ This can be set to `null` if you have a dedicated host name for the control pane
 define('CRAFT_CP', true);
 ```
 
-Alternatively, you can set the <config3:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your control panel due to URI conflicts with actual folders/files in your main webroot. (For example, if you have an `assets/` folder, that would conflict with the `/assets` page in the control panel.)
+Alternatively, you can set the <config3:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your control panel due to URI conflicts with actual folders/files in your main webroot.
+
+(For example, if you have an `assets/` folder, that would conflict with the `/assets` page in the control panel.)
 
 
 
@@ -740,9 +746,9 @@ Since
 
 
 
-The default locale the control panel should use for date/number formatting, for users who haven’t set a preferred language or preferred formatting locale yet.
+The default locale the control panel should use for date/number formatting, for users who haven’t set a preferred language or formatting locale.
 
-If this is `null`, then the <config3:defaultCpLanguage> config setting will determine which locale is used for date/number formatting by default.
+If this is `null`, the <config3:defaultCpLanguage> config setting will determine which locale is used for date/number formatting by default.
 
 
 
@@ -765,7 +771,7 @@ Defined by
 
 
 
-The default permission to be set for newly generated directories.
+The default permission to be set for newly-generated directories.
 
 If set to `null`, the permission will be determined by the current environment.
 
@@ -790,7 +796,7 @@ Defined by
 
 
 
-The default permission to be set for newly generated files.
+The default permission to be set for newly-generated files.
 
 If set to `null`, the permission will be determined by the current environment.
 
@@ -917,7 +923,7 @@ Defined by
 
 
 
-The default day that new users should have set as their Week Start Day.
+The default day new users should have set as their Week Start Day.
 
 This should be set to one of the following integers:
 
@@ -950,9 +956,9 @@ Defined by
 
 
 
-By default, Craft will require a 'password' field to be submitted on front-end, public user registrations. Setting this to `true` will no longer require it on the initial registration form.
+By default, Craft will require a ‘password’ field to be submitted on front-end, public user registrations. Setting this to `true` will no longer require it on the initial registration form.
 
-If you have email verification enabled, new users will set their password once they've clicked on the verification link in the email. If you don't, the only way they can set their password is to go through your "forgot password" workflow.
+If you have email verification enabled, new users will set their password once they’ve clicked on the verification link in the email. If you don’t, the only way they can set their password is to go through your “forgot password” workflow.
 
 
 
@@ -1225,7 +1231,7 @@ Defined by
 
 
 
-Whether to enable Craft's template `{% cache %}` tag on a global basis.
+Whether to enable Craft’s template `{% cache %}` tag on a global basis.
 
 
 
@@ -1250,7 +1256,7 @@ Defined by
 
 The prefix that should be prepended to HTTP error status codes when determining the path to look for an error’s template.
 
-If set to `'_'`, then your site’s 404 template would live at `templates/_404.html`, for example.
+If set to `'_'` your site’s 404 template would live at `templates/_404.html`, for example.
 
 
 
@@ -1395,7 +1401,7 @@ Defined by
 
 
 
-Whether images transforms should be generated before page load.
+Whether image transforms should be generated before page load.
 
 
 
@@ -1458,7 +1464,7 @@ When this is enabled, the following changes will take place:
 - The <config3:loginPath>, <config3:logoutPath>, <config3:setPasswordPath>, and <config3:verifyEmailPath> settings will be ignored.
 
 ::: tip
-When Headless Mode is enabled, users will not be able to set an initial password, set a new password, or verify their email address unless they have the "Access the control panel" permission. Make sure to grant this permission to content editors and administrators who should be able to log into the control panel.
+With Headless Mode enabled, users may only set passwords and verify email addresses via the control panel or controller actions. Be sure to grant “Access the control panel” permission to content editors and administrators that should be able to log into the control panel unless you’re providing your own auth forms.
 :::
 
 
@@ -1482,7 +1488,7 @@ Defined by
 
 
 
-The image driver Craft should use to cleanse and transform images. By default Craft will auto-detect if ImageMagick is installed and fallback to GD if not. You can explicitly set either `'imagick'` or `'gd'` here to override that behavior.
+The image driver Craft should use to cleanse and transform images. By default Craft will use ImageMagick if it’s installed and otherwise fall back to GD. You can explicitly set either `'imagick'` or `'gd'` here to override that behavior.
 
 
 
@@ -1505,7 +1511,7 @@ Defined by
 
 
 
-An array containing the selectable image aspect ratios for image editor. The array must be in the format of `label` => `ratio`, where ratio must be a float or a string. For string values, only values of "none" and "original" are allowed.
+An array containing the selectable image aspect ratios for the image editor. The array must be in the format of `label` => `ratio`, where ratio must be a float or a string. For string values, only values of “none” and “original” are allowed.
 
 
 
@@ -1678,7 +1684,7 @@ Defined by
 
 
 
-The URI Craft should use for user login on the front-end.
+The URI Craft should use for user login on the front end.
 
 This can be set to `false` to disable front-end login.
 
@@ -1705,7 +1711,7 @@ Defined by
 
 
 
-The URI Craft should use for user logout on the front-end.
+The URI Craft should use for user logout on the front end.
 
 This can be set to `false` to disable front-end logout.
 
@@ -1732,7 +1738,7 @@ Defined by
 
 
 
-The number of backups that Craft should make before it starts deleting the oldest backups. If it is set to `false`, then Craft will not delete any backups.
+The number of backups Craft should make before it starts deleting the oldest backups. If set to `false`, Craft will not delete any backups.
 
 
 
@@ -1944,7 +1950,7 @@ The string preceding a number which Craft will look for when determining if the 
 | `?page`       | `/news?page=5` |
 
 ::: tip
-If you want to set this to `?p` (e.g. `/news?p=5`), you will need to change your <config3:pathParam> setting as well, which is set to `p` by default, and if your server is running Apache, you will need to update the redirect code in your `.htaccess` file to match your new `pathParam` value.
+If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change your <config3:pathParam> setting which defaults to `p`. If your server is running Apache, you’ll need to update the redirect code in your `.htaccess` file to match your new `pathParam` value.
 :::
 
 
@@ -1968,11 +1974,13 @@ Defined by
 
 
 
-The query string param that Craft will check when determining the request's path.
+The query string param that Craft will check when determining the request’s path.
 
 This can be set to `null` if your web server is capable of directing traffic to `index.php` without a query string param. If you’re using Apache, that means you’ll need to change the `RewriteRule` line in your `.htaccess` file to:
 
-    RewriteRule (.+) index.php [QSA,L]
+```
+RewriteRule (.+) index.php [QSA,L]
+```
 
 
 
@@ -1995,7 +2003,7 @@ Defined by
 
 
 
-The maximum amount of memory Craft will try to reserve during memory intensive operations such as zipping, unzipping and updating. Defaults to an empty string, which means it will use as much memory as it possibly can.
+The maximum amount of memory Craft will try to reserve during memory-intensive operations such as zipping, unzipping and updating. Defaults to an empty string, which means it will use as much memory as it can.
 
 See <http://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> for a list of acceptable values.
 
@@ -2043,9 +2051,9 @@ Defined by
 
 
 
-The path that users should be redirected to after logging in from the control panel.
+The path users should be redirected to after logging into the control panel.
 
-This setting will also come into effect if a user visits the control panel’s Login page (`/admin/login`) or the control panel’s root URL (/admin) when they are already logged in.
+This setting will also come into effect if a user visits the control panel’s login page (`/admin/login`) or the control panel’s root URL (`/admin`) when they are already logged in.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -2070,9 +2078,9 @@ Defined by
 
 
 
-The path that users should be redirected to after logging in from the front-end site.
+The path users should be redirected to after logging in from the front-end site.
 
-This setting will also come into effect if the user visits the Login page (as specified by the loginPath config setting) when they are already logged in.
+This setting will also come into effect if the user visits the login page (as specified by the <config3:loginPath> config setting) when they are already logged in.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -2129,7 +2137,7 @@ Since
 
 Whether CMYK should be preserved as the colorspace when manipulating images.
 
-Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions it can cause color distortion in the image. This will only have effect if ImageMagick is in use.
+Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions it can cause image color distortion. This will only have an effect if ImageMagick is in use.
 
 
 
@@ -2204,7 +2212,9 @@ Defined by
 
 
 
-When set to `false` and you go through the "forgot password" workflow on the control panel login page, for example, you get distinct messages saying if the username/email didn't exist or the email was successfully sent and to check your email for further instructions. This can allow for username/email enumeration based on the response. If set `true`, you will always get a successful response even if there was an error making it difficult to enumerate users.
+When `true`, Craft will always return a successful response in the “forgot password” flow, making it difficult to enumerate users.
+
+When set to `false` and you go through the “forgot password” flow from the control panel login page, you’ll get distinct messages indicating whether the username/email exists and whether an email was sent with further instructions. This can be helpful for the user attempting to log in but allow for username/email enumeration based on the response.
 
 
 
@@ -2261,7 +2271,7 @@ Defined by
 
 
 
-The template path segment prefix that should be used to identify "private" templates (templates that aren't directly accessible via a matching URL).
+The template path segment prefix that should be used to identify “private” templates, which are templates that are not directly accessible via a matching URL.
 
 Set to an empty value to disable public template routing.
 
@@ -2288,11 +2298,15 @@ Defined by
 
 The amount of time to wait before Craft purges pending users from the system that have not activated.
 
-Note that any content assigned to a pending user will be deleted as well when the given time interval passes.
+Any content assigned to a pending user will be deleted as well when the given time interval passes.
 
 Set to `0` to disable this feature.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+::: tip
+Users will only be purged when [garbage collection](https://craftcms.com/docs/3.x/gc.html) is run.
+:::
 
 
 
@@ -2525,9 +2539,9 @@ Defined by
 
 
 
-The shell command that Craft should execute to restore a database backup.
+The shell command Craft should execute to restore a database backup.
 
-By default Craft will run `mysql` or `psql`, provided that those libraries are in the `$PATH` variable for the user the web server  is running as.
+By default Craft will run `mysql` or `psql`, provided those libraries are in the `$PATH` variable for the user the web server is running as.
 
 There are several tokens you can use that Craft will swap out at runtime:
 
@@ -2651,7 +2665,7 @@ Defined by
 
 
 
-Whether Craft should sanitize uploaded SVG files and strip out potential malicious looking content.
+Whether Craft should sanitize uploaded SVG files and strip out potential malicious-looking content.
 
 This should definitely be enabled if you are accepting SVG uploads from untrusted sources.
 
@@ -2732,7 +2746,7 @@ Defined by
 
 A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](craft3:craft\services\Security).
 
-This value should be the same across all environments. Note that if this key ever changes, any data that was encrypted with it will be inaccessible.
+This value should be the same across all environments. If this key ever changes, any data that was encrypted with it will be inaccessible.
 
 
 
@@ -2778,7 +2792,7 @@ Defined by
 
 
 
-The URI Craft should use for Set Password forms on the front-end.
+The URI Craft should use for Set Password forms on the front end.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -2807,7 +2821,7 @@ Defined by
 
 
 
-The URI Craft should redirect users to after setting their password from the front-end.
+The URI Craft should redirect users to after setting their password from the front end.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -3002,9 +3016,9 @@ Defined by
 
 
 
-Configures Craft to send all system emails to a single email address, or an array of email addresses for testing purposes.
+Configures Craft to send all system emails to either a single email address or an array of email addresses for testing purposes.
 
-By default the recipient name(s) will be “Test Recipient”, but you can customize that by setting the value with the format `['email@address.com' => 'Name']`.
+By default, the recipient name(s) will be “Test Recipient”, but you can customize that by setting the value with the format `['email@address.com' => 'Name']`.
 
 
 
@@ -3103,7 +3117,7 @@ Defined by
 
 
 
-Whether translated messages should be wrapped in special characters, to help find any strings that are not being run through `Craft::t()` or the `|translate` filter.
+Whether translated messages should be wrapped in special characters to help find any strings that are not being run through `Craft::t()` or the `|translate` filter.
 
 
 
@@ -3214,7 +3228,7 @@ Whether to grab an exclusive lock on a file when writing to it by using the `LOC
 
 Some file systems, such as NFS, do not support exclusive file locking.
 
-If not set to `true` or `false`, Craft will automatically try to detect if the underlying file system supports exclusive file locking and cache the results.
+If not set to `true` or `false`, Craft will try to detect if the underlying file system supports exclusive file locking and cache the results.
 
 
 
@@ -3277,7 +3291,7 @@ Defined by
 
 Whether Craft should specify the path using `PATH_INFO` or as a query string parameter when generating URLs.
 
-Note that this setting only takes effect if <config3:omitScriptNameInUrls> is set to false.
+Note that this setting only takes effect if <config3:omitScriptNameInUrls> is set to `false`.
 
 
 
@@ -3300,9 +3314,9 @@ Defined by
 
 
 
-Whether Craft will set the "secure" flag when saving cookies when using `Craft::cookieConfig() to create a cookie`.
+Whether Craft will set the “secure” flag when saving cookies when using `Craft::cookieConfig()` to create a cookie.
 
-Valid values are `true`, `false`, and `'auto'`. Defaults to `'auto'`, which will set the secure flag if the page you're currently accessing is over `https://`. `true` will always set the flag, regardless of protocol and `false` will never automatically set the flag.
+Valid values are `true`, `false`, and `'auto'`. Defaults to `'auto'`, which will set the secure flag if the page you’re currently accessing is over `https://`. `true` will always set the flag, regardless of protocol and `false` will never automatically set the flag.
 
 
 
@@ -3325,9 +3339,9 @@ Defined by
 
 
 
-Determines what protocol/schema Craft will use when generating tokenized URLs. If set to `'auto'`, Craft will check the siteUrl and the protocol of the current request and if either of them are https will use `https` in the tokenized URL. If not, will use `http`.
+Determines what protocol/schema Craft will use when generating tokenized URLs. If set to `'auto'`, Craft will check the <config3:siteUrl> and the protocol of the current request and if either of them are https will use `https` in the tokenized URL. If not, will use `http`.
 
-If set to `false`, the Craft will always use `http`. If set to `true`, then, Craft will always use `https`.
+If set to `false`, Craft will always use `http`. If set to `true`, then, Craft will always use `https`.
 
 
 
@@ -3407,7 +3421,7 @@ Since
 
 
 
-The URI Craft should use for email verification links on the front-end.
+The URI Craft should use for email verification links on the front end.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
