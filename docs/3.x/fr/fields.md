@@ -24,7 +24,7 @@ Craft comes with the following built-in field types:
 * [Categories](categories-fields.md)
 * [Checkboxes](checkboxes-fields.md)
 * [Color](color-fields.md)
-* [Date/Time](date-time-fields.md)
+* [Date](date-time-fields.md)
 * [Dropdown](dropdown-fields.md)
 * Email
 * [Entries](entries-fields.md)
@@ -36,6 +36,7 @@ Craft comes with the following built-in field types:
 * [Radio Buttons](radio-buttons-fields.md)
 * [Table](table-fields.md)
 * [Tags](tags-fields.md)
+* [Time](time-fields.md)
 * URL
 * [Users](users-fields.md)
 
