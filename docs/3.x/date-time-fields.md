@@ -1,16 +1,18 @@
-# Date/Time Fields
+# Date Fields
 
 Date fields give you a date picker, and optionally a time picker as well.
 
 ## Settings
 
-Date/Time fields let you choose whether you want to show the date, the time, or both.
+Date fields let you choose whether you want to show only the date, or the date and time.
+
+You can also pick minimum and maximum dates that should be allowed, and if you’re showing the time, you can choose what the minute increment should be.
 
 ## Templating
 
-### Querying Elements with Date/Time Fields
+### Querying Elements with Date Fields
 
-When [querying for elements](element-queries.md) that have a Date/Time field, you can filter the results based on the Date/Time field data using a query param named after your field’s handle.
+When [querying for elements](element-queries.md) that have a Date field, you can filter the results based on the Date field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -37,9 +39,9 @@ Possible values include:
 The [atom](dev/filters.md#atom) filter converts a date to an ISO-8601 timestamp.
 :::
 
-### Working with Date/Time Field Data
+### Working with Date Field Data
 
-If you have an element with a Date/Time field in your template, you can access its value using your Date/Time field’s handle:
+If you have an element with a Date field in your template, you can access its value by its handle:
 
 ```twig
 {% set value = entry.myFieldHandle %}
@@ -63,9 +65,9 @@ Craft and Twig provide several Twig filters for manipulating dates, which you ca
 - [rss](dev/filters.md#rss)
 - [date_modify](https://twig.symfony.com/doc/2.x/filters/date_modify.html)
 
-### Saving Date/Time Fields in Entry Forms
+### Saving Date Fields in Entry Forms
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Date/Time field, you can create a `date` or `datetime-local` input.
+If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Date field, you can create a `date` or `datetime-local` input.
 
 If you just want the user to be able to select a date, use a `date` input:
 
