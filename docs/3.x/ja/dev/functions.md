@@ -540,6 +540,10 @@ If `text` is included in the attributes argument, its value will be HTML-encoded
 
 If `html` is included in the attributes argument (and `text` isn’t), its value will be set as the inner HTML of the tag (without getting HTML-encoded).
 
+::: warning
+Be sure you trust any input you provide via `html` since it could be an XSS (cross-site scripting) attack vector. It’s safer to use `text` wherever possible.
+:::
+
 ```twig
 {{ tag('div', {
     html: 'Hello<br>world'
