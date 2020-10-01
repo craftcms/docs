@@ -103,7 +103,7 @@ By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you c
 {% set tz = 'America/Los_Angeles' %}
 
 {% set currentValue = entry is defined and entry.myFieldHandle
-    ? entry.myFieldHandle|date('Y-m-d\\TH:i', tz)
+    ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone=tz)
     : '' %}
 
 <input type="datetime-local" name="fields[myFieldHandle][datetime]" value="{{ currentValue }}">
@@ -120,8 +120,8 @@ Or you can let users decide which timezone the date should be posted in:
 <input type="datetime-local" name="fields[myFieldHandle][datetime]" value="{{ currentValue }}">
 
 <select name="fields[myFieldHandle][timezone]">
+    <option value="UTC" selected>UTC</option>
     <option value="America/Los_Angeles">Pacific Time</option>
-    <option value="UTC">UTC</option>
     <!-- ... -->
 </select>
 ```

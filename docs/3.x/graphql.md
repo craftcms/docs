@@ -228,7 +228,7 @@ If you’re unable to query a private schema because of a “missing authorizati
     'auth token missing!' }}
 ```
 
-Apache strips `Authorization` headers by default, which can be fixed by adding the following to your `.htaccess` file:
+Apache strips `Authorization` headers by default, which can be fixed by enabling [CGIPassAuth](https://httpd.apache.org/docs/2.4/en/mod/core.html#cgipassauth) or adding the following to your `.htaccess` file:
 
 ```
 RewriteCond %{HTTP:Authorization} ^(.*)
