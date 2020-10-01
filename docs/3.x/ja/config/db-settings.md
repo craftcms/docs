@@ -71,7 +71,7 @@ Defined by :
 
 An array of key => value pairs of PDO attributes to pass into the PDO constructor.
 
-For example, when using the MySQL PDO driver (http://php.net/manual/en/ref.pdo-mysql.php), if you wanted to enable a SSL database connection (assuming SSL is enabled in MySQL (https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html) and `'user'` can connect via SSL, you'd set these:
+For example, when using the [MySQL PDO driver](http://php.net/manual/en/ref.pdo-mysql.php), if you wanted to enable a SSL database connection (assuming [SSL is enabled in MySQL](https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html) and `'user'` can connect via SSL, you’d set these:
 
 ```php
 [
@@ -175,8 +175,8 @@ The Data Source Name (“DSN”) that tells Craft how to connect to the database
 
 DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by driver-specific parameters. For example, `mysql:host=127.0.0.1;port=3306;dbname=acme_corp`.
 
-- MySQL: http://php.net/manual/en/ref.pdo-mysql.connection.php
-- PostgreSQL: http://php.net/manual/en/ref.pdo-pgsql.connection.php これを設定すると、コンフィグ設定の [server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server)、[port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port)、[user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user)、[password](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#password)、[database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database)、[driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver)、および、[unixSocket](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#unixsocket) は無視されます。
+- MySQL parameters: <https://php.net/manual/en/ref.pdo-mysql.connection.php>
+- PostgreSQL parameters: <https://php.net/manual/en/ref.pdo-pgsql.connection.php>
 
 
 
@@ -291,7 +291,7 @@ The database server name or IP address. Usually `localhost` or `127.0.0.1`.
 
 
 
-If you're sharing Craft installs in a single database (MySQL) or a single database and using a shared schema (PostgreSQL), then you can set a table prefix here to avoid table naming conflicts per install. This can be no more than 5 characters, and must be all lowercase.
+If you’re sharing Craft installs in a single database (MySQL) or a single database and using a shared schema (PostgreSQL), you can set a table prefix here to avoid per-install table naming conflicts. This can be no more than 5 characters, and must be all lowercase.
 
 
 
@@ -314,7 +314,7 @@ If you're sharing Craft installs in a single database (MySQL) or a single databa
 
 
 
-MySQL only. If this is set, then the CLI connection string (used for yiic) will connect to the Unix socket, instead of the server and port. If this is specified, then 'server' and 'port' settings are ignored.
+MySQL only. If this is set, the CLI connection string (used for yiic) will connect to the Unix socket instead of the server and port. If this is specified, then `server` and `port` settings are ignored.
 
 
 
