@@ -165,6 +165,7 @@ module.exports = {
             "radio-buttons-fields",
             "table-fields",
             "tags-fields",
+            "time-fields",
             "users-fields"
           ]
         },
