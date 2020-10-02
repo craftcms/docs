@@ -298,6 +298,10 @@ function getAdditionalInfo(page, queryString, queryTerms) {
       match: "?"
     };
 
+  /**
+   * If we have a match that’s in a heading, display that heading and return
+   * a link to it without any content snippet.
+   */
   if (match.headerIndex != null) {
     // header match
     return {
@@ -308,7 +312,9 @@ function getAdditionalInfo(page, queryString, queryTerms) {
     };
   }
 
-  // content match
+  /**
+   * Get the index of the nearest preceding header relative to the content match.
+   */
   let headerIndex = _.findLastIndex(
     page.headers || [],
     h => h.charIndex != null && h.charIndex < match.charIndex
@@ -323,6 +329,11 @@ function getAdditionalInfo(page, queryString, queryTerms) {
   };
 }
 
+/**
+ * Return the target heading in the context of its parents. (Like a breadcrumb.)
+ * @param {*} page
+ * @param {*} headerIndex
+ */
 function getFullHeading(page, headerIndex) {
   if (headerIndex == null) return page.title;
   const headersPath = [];
