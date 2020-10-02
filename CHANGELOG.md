@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-10-02
+### Fixed
+- Updated `SidebarLink` to honor its `maxDepth` setting.
+
 ## 2020-10-01
 ### Added
 - Documented the new Time field type added in Craft 3.5.12.
