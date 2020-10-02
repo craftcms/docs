@@ -72,9 +72,9 @@ function renderLink(h, to, text, active, level) {
     },
   };
 
-  if (level > 2) {
+  if (level > 1) {
     component.style = {
-      "padding-left": level + "rem",
+      "padding-left": (level * 0.375) + "rem",
     };
   }
 
@@ -116,7 +116,6 @@ function renderExternal(h, to, text) {
 
 <style lang="postcss">
 .sidebar-sub-headers {
-  @apply pl-2;
   font-size: 0.95em;
 }
 
