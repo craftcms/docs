@@ -4,6 +4,7 @@ Theme and significant content changes will be documented in this file.
 
 ## 2020-10-02
 ### Fixed
+- Fixed an issue that may have led to incorrect search result headings when a heading match was preceded by the search keyword in body content.
 - Updated `SidebarLink` to honor its `maxDepth` setting.
 
 ## 2020-10-01
