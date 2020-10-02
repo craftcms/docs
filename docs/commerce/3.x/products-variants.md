@@ -1,6 +1,6 @@
 # Products & Variants
 
-A *product* describes what’s for sale and a *variant* is what the customer ultimately orders.
+A *product* is an [element](/3.x/elements.md) that describes what’s for sale and a *variant* is the [purchasable](purchasables.md) the customer ultimately orders.
 
 TODO: diagram product, product fields, variants + variant fields
 
@@ -14,7 +14,7 @@ A product itself is never sold; what goes into a cart for purchase is actually o
 
 Product Types are a way to distinguish products in your system. Similar to Craft’s [Entry Types](/3.x/entries.html#entry-types), they can determine the URL format of a product and include any number of custom fields. Each product type will also have one or more variants.
 
-You can manage Product Types in the control panel from “Commerce” → “System Settings” → “Product Types”.
+You can manage Product Types in the control panel from Commerce → System Settings → Product Types.
 
 <img src="./assets/product-type-entry-screen.png" width="797" alt="Edit Product Type page">
 
