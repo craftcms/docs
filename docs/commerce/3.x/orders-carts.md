@@ -1,20 +1,198 @@
+---
+sidebarDepth: 2
+---
+
 # Orders & Carts
 
-TODO: write
+Variants are added to a _cart_ that can be completed to become an _order_. Carts and orders are both listed in the control panel under Commerce → Orders.
+
+## Carts
+
+As a customer or store manager is building a cart, the goal is to maintain an up-to-date list of items with their relevant costs, discounts, and promotions. For this reason, the cart will be recalculated each time a change is made.
+
+Once a cart is completed, however, it becomes an [order](#orders) that represents choices explicitly finalized by whoever completed the cart. When the cart becomes an order, the customer will no longer be able to make edits.
+
+Carts and orders are both listed on the Orders index page in the control panel, where you can further limit your view to _active_ carts updated in the last 24 hours, and _inactive_ carts older than 24 hours and likely to be abandoned. (You can customize that time limit using the [`activeCartDuration`](config-settings.md#activeCartDuration) setting.)
+
+Craft will automatically to purge (delete) abandoned carts after 90 days, and you can customize this behavior with the [`purgeInactiveCarts`](config-settings.md#purgeInactiveCarts) and [`purgeInactiveCartsDuration`](config-settings.md#purgeInactiveCartsDuration) settings.
+
+### Fetching a Cart
+
+In your templates, you can get the current user’s cart with [craft.commerce.carts.cart](craft-commerce-carts-cart.md).
+
+```twig
+{% set cart = craft.commerce.carts.cart %}
+```
+
+You could also fetch the cart via AJAX. This jQuery example could be added to a Twig template, and outputs the cart data to the browser’s development console:
+
+```twig
+<script>
+$.ajax({
+    url: '',
+    data: {
+        '{{ craft.config.csrfTokenName|e('js') }}': '{{ craft.request.csrfToken|e('js') }}',
+        'action': 'commerce/cart/get-cart'
+    },
+    success: function(data) {
+        console.log(data);
+    },
+    dataType: 'json'
+});
+</script>
+```
+
+Either of the examples above will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
+
+To see what cart information you can use in your templates, take a look at the [Order](commerce3:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/develop/example-templates/shop/cart/index.twig).
+
+### Adding Items to a Cart
+
+You can add a purchasable like a [variant](variant.md) to a cart by submitting its `purchasableId` to the `commerce/cart/update-cart` action.
+
+This gets a product and creates a form that will add its default variant to the cart:
+
+```twig
+{% set product = craft.products().one() %}
+{% set variant = product.defaultVariant %}
+
+<form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/update-cart') }}
+    <input type="hidden" name="purchasableId" value="{{ variant.id }}">
+    <input type="submit" value="Add to cart">
+</form>
+```
+
+If the product has multiple variants, you could provide a dropdown menu to allow the customer to choose one of them:
+
+```twig{9-13}
+{% set product = craft.products().one() %}
+
+<form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/update-cart') }}
+    {{ redirectInput('shop/cart') }}
+    <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
+    <input type="hidden" name="qty" value="1">
+    <select name="purchasableId">
+        {% for variant in product.variants %}
+            <option value="{{ variant.id }}">{{ variant.sku }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Add to cart">
+</form>
+```
+
+We’re adding three things here as well:
+
+1. The `cartUpdatedNotice` parameter can be used to customize the default “Cart updated.” flash message.
+2. The `qty` parameter can be used to specify a quantity, which defaults to `1` if not supplied.
+3. Craft’s [`redirectInput`](/3.x/dev/functions.md#redirectinput) tag can be used to take the user to a specific URL after the cart is updated successfully. **If any part of the `commerce/cart/update-cart` action fails, the user will not be redirected.**
+
+You can add multiple purchasables to the cart in a single request by using a `purchasables` array instead of a single `purchasableId`. This form adds all a product’s variants to the cart at once:
+
+```twig{7-10}
+{% set product = craft.products().one() %}
+<form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/update-cart') }}
+    {{ redirectInput('shop/cart') }}
+    <input type="hidden" name="cartUpdatedNotice" value="Products added to the cart.">
+    {% for variant in product.variants %}
+        <input type="hidden" name="purchasables[{{ loop.index }}][id]" value="{{ variant.id }}">
+        <input type="hidden" name="purchasables[{{ loop.index }}][qty]" value="1">
+    {% endfor %}
+    <input type="submit" value="Add all variants to cart">
+</form>
+```
+
+A unique index key is required to group the purchasable `id` with its `qty`, and in this example we’re using `{{ loop.index }}` as a convenient way to provide it.
+
+::: warning
+Commerce Lite is limited to a single line in the cart.\
+If a customer adds a new item, it replaces whatever was already in the cart.\
+If multiple items are added in a request, only the last one gets added to the cart.
+:::
+
+### Working with Line Items
+
+Whenever a purchasable is added to a cart, the purchasable becomes a [line item](#purchasables-and-line-items) in that cart. In the examples above we set the line item’s quantity with the `qty` parameter, but we also have `note` and `options` to work with.
+
+#### Line Item Options and Notes
+
+---
+
+While using multi-add, the same rules apply whether you’re updating a quantity or adding to cart: the uniqueness of the line item is based on the `optionsSignature` attribute, which is a hash that line item’s `options`.
+
+---
+
+#### Options Uniqueness
+
+TODO: finish (see adding-to-and-updating-cart)
+
+#### Updating Line Items
+
+### Loading a Cart
+
+An existing cart can be loaded by its cart number into the current customer’s session. This can be accomplished in two ways using the `commerce/cart/load-cart` endpoint: via [form submission](#using-a-form) or [navigating to a URL](#using-a-url).
+
+Each method will store any errors in the session’s error flash data (`craft.app.session.getFlash('error')`), and the cart being loaded can be active or inactive.
+
+::: tip
+If the desired cart belongs to a user, that user must be logged in to load it into their session.
+:::
+
+The [`loadCartRedirectUrl`](config-settings.md#loadCartRedirectUrl) setting determines where the customer will be sent by default after the cart’s loaded.
+
+#### Loading a Cart with a Form
+
+Send a get or post action request with a `number` parameter referencing the cart you’d like to load. When posting the form data, you can include a specific redirect location like you can with any other Craft post data.
+
+This is a simplified version of [`shop/cart/load.twig`](https://github.com/craftcms/commerce/tree/master/example-templates/shop/cart/load.twig) in the example templates, where a `cart` variable has already been set to the cart that should be loaded:
+
+```twig
+<form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/load-cart') }}
+    {{ redirectInput('/shop/cart') }}
+
+    <input type="text" name="number" value="{{ cart.number }}">
+    <input type="submit" value="Submit">
+</form>
+```
+
+#### Loading a Cart with a URL
+
+You can also load a cart simply navigating to the `commerce/cart/load-cart` endpoint, as long as the `number` parameter is included in the URL.
+
+This example sets `loadCartUrl` to an absolute URL the customer can access to load their cart. Again we’re assuming a `cart` object already exists for the cart that should be loaded:
+
+::: code
+
+```twig
+{% set loadCartUrl = actionUrl('commerce/cart/load-cart', { number: cart.number }) %}
+```
+
+```php
+use craft\helpers\UrlHelper;
+
+$loadCartUrl = UrlHelper::actionUrl(
+    'commerce/cart/load-cart',
+    ['number' => $cart->number]
+);
+```
+:::
+
+::: tip
+This URL can be presented to the user however you’d like. It’s particularly useful in an email that allows the customer to retrieve an abandoned cart.
+:::
+
+#### Restoring a Previous Cart’s Contents
 
 ## Orders
 
-When a cart is completed, it becomes an order. You can view orders in the control panel’s Commerce → Orders section.
-
-Orders are [Element Types](https://craftcms.com/docs/3.x/extend/element-types.html) and can have custom fields associated with them.
-
-If you’d like to jump straight to displaying order information in your templates, take a look at the the <commerce3:craft\commerce\elements\Order> class reference for a complete list of available properties.
-
-## Carts and Orders
-
-When someone is building a cart, the goal is to maintain an always-accurate list of items with their relevant costs, discounts, and promotions. For this reason, the cart will be updated and recalculated each time a change is made.
-
-Once a cart is completed, however, it becomes an order that represents choices explicitly finalized by whoever completed the cart.
+Orders are [Element Types](/3.x/extend/element-types.md) and can have custom fields associated with them. You can browse orders in the control panel by navigating to Commerce → Orders.
 
 When a cart becomes an order, the following things happen:
 
@@ -25,11 +203,13 @@ When a cart becomes an order, the following things happen:
 
 Instead of being recalculated on each change like a cart, the order will only be recalculated if you [manually trigger recalculation](#recalculating-orders).
 
-## Order Numbers
+If you’d like to jump straight to displaying order information in your templates, take a look at the the <commerce3:craft\commerce\elements\Order> class reference for a complete list of available properties.
+
+### Order Numbers
 
 There are three ways to identify an order: by order number, short order number, and order reference number.
 
-### Order Number
+#### Order Number
 
 The order number is a hash generated when the cart is first created in the user’s session. It exists even before the cart is saved in the database, and remains the same for the entire life of the order.
 
@@ -37,11 +217,11 @@ This is different from the order reference number, which is only generated after
 
 We recommend using the order number when referencing the order in URLs or anytime the order is retrieved publicly.
 
-### Short Order Number
+#### Short Order Number
 
 The short order number is the first seven characters of the order number. This is short enough to still be unique, and is a little friendlier to customers, although not as friendly as the order reference number.
 
-### Order Reference Number
+#### Order Reference Number
 
 The order reference number is generated on cart completion according to the “Order Reference Number Format” in Commerce → Settings → System Settings → General Settings.
 
@@ -129,40 +309,4 @@ If [status emails](order-status-emails.md) are set up for a newly-updated order 
 
 You can manually re-send an order status email at any time. Navigate to an order’s edit page, then select the desired email from the Send Email menu at the top of the page.
 
-## Carts
 
-A cart is an [order](orders.md) that has not yet been completed. A customer can edit the contents of a cart,
-but once the cart becomes an order it is no longer editable by the customer.
-
-You can view all carts on the Orders index page. You can further limit your view to _active_ carts, which have been updated in the last 24 hours, and _inactive_ carts, which are carts older than 24 hours likely to be abandoned.
-
-You can set the system to purge (delete) abandoned carts after a given time period in [your config](configuration.md),
-where the default is three months.
-
-In your templates, you can get the current user’s cart with [craft.commerce.carts.cart](craft-commerce-carts-cart.md).
-
-```twig
-{% set cart = craft.commerce.carts.cart %}
-```
-
-You could also fetch the cart via AJAX. This jQuery example could be added to a Twig template, and outputs the cart data to the browser’s development console:
-
-```twig
-<script>
-$.ajax({
-    url: '',
-    data: {
-        '{{ craft.config.csrfTokenName|e('js') }}': '{{ craft.request.csrfToken|e('js') }}',
-        'action': 'commerce/cart/get-cart'
-    },
-    success: function(data) {
-        console.log(data);
-    },
-    dataType: 'json'
-});
-</script>
-```
-
-Either of the examples above will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
-
-To see what cart information you can use in your templates, take a look at the <commerce3:craft\commerce\elements\Order> class reference.
