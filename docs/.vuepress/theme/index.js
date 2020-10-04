@@ -24,7 +24,7 @@ module.exports = options => ({
       for (const h of $page.headers || []) {
         const titlePlaintext = $page._context.markdown.renderInline(h.title);
         // find the position of the header within the plain-text content
-        h.charIndex = plaintext.indexOf('# ' + titlePlaintext);
+        h.charIndex = plaintext.indexOf("# " + titlePlaintext);
         if (h.charIndex === -1) h.charIndex = null;
       }
 
@@ -34,7 +34,7 @@ module.exports = options => ({
 
       $page.keywords = $page.frontmatter.keywords
         ? $page.frontmatter.keywords
-        : "";
+        : null;
       $page.content = plaintext;
       $page.contentLowercase = plaintext.toLowerCase();
       $page.charsets = getCharsets(plaintext);

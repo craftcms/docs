@@ -1,96 +1,99 @@
-import Flexsearch from "flexsearch";
-// Use when flexSearch v0.7.0 will be available
-// import cyrillicCharset from 'flexsearch/dist/lang/cyrillic/default.min.js'
-// import cjkCharset from 'flexsearch/dist/lang/cjk/default.min.js'
 import _ from "lodash";
 import FlexSearch from "flexsearch";
 
 const defaultLang = "en-US";
+const defaultIndexSettings = {
+  async: true,
+  // https://github.com/nextapps-de/flexsearch#tokenizer
+  tokenize: "strict",
+  // https://github.com/nextapps-de/flexsearch#encoders
+  encode: "icase",
+  threshold: 0,
+  resolution: 9,
+  depth: 0,
+  stemmer: {
+    queries: "query",
+    querying: "query",
+    entries: "entry",
+    entry: "entries"
+  },
+  doc: {
+    id: "key",
+    // fields we want to index
+    field: {
+      title: {
+        encode: "advanced"
+        tokenize: "full"
+      },
+      headersStr: {
+        encode: "advanced"
+        tokenize: "full"
+      },
+      keywords: {
+        encode: "icase"
+        tokenize: "forward"
+      },
+      content: {
+        encode: "icase"
+        tokenize: "strict"
+      }
+    },
+    // fields to be explicitly stored (without `store` key, entire `$page` object is stored)
+    store: [
+      "key",
+      "title",
+      "headers",
+      "headersStr",
+      "content",
+      "contentLowercase",
+      "path",
+      "lang",
+      "docSetHandle",
+      "docSetTitle",
+      "isPrimary",
+      "keywords",
+      "version"
+    ]
+  }
+};
 
 let pagesByPath = null;
 let indexes = [];
 let cyrillicIndexes = [];
 let cjkIndexes = [];
 
-const cjkRegex = /[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3]|[\u4E00-\u9FCC\u3400-\u4DB5\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29]|[\ud840-\ud868][\udc00-\udfff]|\ud869[\udc00-\uded6\udf00-\udfff]|[\ud86a-\ud86c][\udc00-\udfff]|\ud86d[\udc00-\udf34\udf40-\udfff]|\ud86e[\udc00-\udc1d]/giu;
-
 export default {
   buildIndex(pages) {
-    const indexSettings = {
-      async: true,
-      doc: {
-        id: "key",
-        // fields we want to index
-        field: ["title", "keywords", "headersStr", "content"]
-        // fields to be stored (acts as explicit allow list; `page` object otherwise stored)
-        // store: [
-        //   "key",
-        //   "title",
-        //   "headers",
-        //   "headersStr",
-        //   "content",
-        //   "contentLowercase",
-        //   "path",
-        //   "lang",
-        //   "docSetHandle",
-        //   "docSetTitle",
-        //   "isPrimary",
-        //   "version"
-        // ]
-      }
-    };
-
-    const globalIndex = new Flexsearch(indexSettings);
-    globalIndex.add(
+    /**
+     * Add a global index for the docs homepage, including a `isPrimary` doc sets
+     * in their default language and primary version.
+     */
+    addIndex(
+      indexes,
+      "global",
       pages.filter(page => {
-        // default language, primary set, and primary version (designated or versionless set)
         return page.lang === defaultLang && page.isPrimary;
       })
     );
 
-    indexes["global"] = globalIndex;
-
-    // create sets keyed with format `setHandle|version|lang`
-    let docSets = pages
-      .map(page => {
-        return page.docSetHandle;
-      })
-      .filter((handle, index, self) => {
-        return handle && self.indexOf(handle) === index;
-      });
+    let docSets = getPageDocSetHandles(pages);
 
     for (let i = 0; i < docSets.length; i++) {
       const docSet = docSets[i];
-
       const docSetPages = pages.filter(page => {
         return page.docSetHandle === docSet;
       });
 
-      let versions = docSetPages
-        .map(page => {
-          return page.version;
-        })
-        .filter((handle, index, self) => {
-          return handle && self.indexOf(handle) === index;
-        });
-
-      let languages = docSetPages
-        .map(page => {
-          return page.lang;
-        })
-        .filter((handle, index, self) => {
-          return handle && self.indexOf(handle) === index;
-        });
+      let versions = getPageVersionHandles(docSetPages);
+      let languages = getPageLanguageHandles(docSetPages);
 
       if (versions.length) {
         for (let j = 0; j < versions.length; j++) {
+          // create sets keyed with `setHandle|version|lang`
           const version = versions[j];
 
           for (let k = 0; k < languages.length; k++) {
             const language = languages[k];
-            let currentIndexSettings = indexSettings;
-
-            const setIndex = new FlexSearch(currentIndexSettings);
             const setKey = `${docSet}|${version}|${language}`;
             const setPages = pages.filter(page => {
               return (
@@ -99,52 +102,41 @@ export default {
                 page.version === version
               );
             });
-
-            //console.log(setKey, setPages);
-            setIndex.add(setPages);
-            indexes[setKey] = setIndex;
-
             const cyrillicSetPages = setPages.filter(p => p.charsets.cyrillic);
             const cjkSetPages = setPages.filter(p => p.charsets.cjk);
 
+            addIndex(indexes, setKey, setPages);
+
             if (cyrillicSetPages.length) {
-              const setCyrillicIndex = new Flexsearch({
-                ...indexSettings,
+              addIndex(cyrillicIndexes, setKey, cyrillicPages, {
                 encode: false,
                 split: /\s+/,
                 tokenize: "forward"
               });
-              setCyrillicIndex.add(cyrillicPages);
-              cyrillicIndexes[setKey] = setCyrillicIndex;
             }
+
             if (cjkSetPages.length) {
-              const setCjkIndex = new Flexsearch({
-                ...indexSettings,
+              addIndex(cjkIndexes, setKey, cjkSetPages, {
                 encode: false,
                 tokenize: function(str) {
                   return str.replace(/[\x00-\x7F]/g, "").split("");
                 }
               });
-              setCjkIndex.add(cjkSetPages);
-              cjkIndexes[setKey] = setCjkIndex;
             }
           }
         }
       } else {
-        // docset-language
+        // set keyed with `setHandle|lang`
         for (let j = 0; j < languages.length; j++) {
           const language = languages[j];
 
-          let currentIndexSettings = indexSettings;
-
-          const setIndex = new FlexSearch(currentIndexSettings);
-          const setKey = `${docSet}|${language}`;
-          const setPages = pages.filter(page => {
-            return page.docSetHandle === docSet && page.lang === language;
-          });
-
-          setIndex.add(setPages);
-          indexes[setKey] = setIndex;
+          addIndex(
+            indexes,
+            `${docSet}|${language}`,
+            pages.filter(page => {
+              return page.docSetHandle === docSet && page.lang === language;
+            })
+          );
         }
       }
     }
@@ -164,34 +156,35 @@ export default {
 
     const searchParams = [
       {
-        field: "keywords",
-        query: queryString,
-        boost: 8,
-        suggest: false,
-        bool: "or",
-      },
-      {
         field: "title",
         query: queryString,
-        boost: 10,
+        boost: 3,
         suggest: false,
-        bool: "or",
+        bool: "or"
       },
       {
         field: "headersStr",
         query: queryString,
-        boost: 7,
+        boost: 2,
         suggest: false,
-        bool: "or",
+        bool: "or"
       },
       {
         field: "content",
         query: queryString,
         boost: 0,
         suggest: false,
-        bool: "or",
+        bool: "or"
+      },
+      {
+        field: "keywords",
+        query: queryString,
+        boost: 0,
+        suggest: false,
+        bool: "or"
       }
     ];
+
     const searchResult1 = await index.search(searchParams, limit);
     const searchResult2 = cyrillicIndex
       ? await cyrillicIndex.search(searchParams, limit)
@@ -223,7 +216,33 @@ export default {
   }
 };
 
-function resolveSearchIndex(docSet, version, language, indexes) {
+/**
+ * Instantiates a new FlexSearch index and adds it to the provided `indexArray` set.
+ *
+ * @param {Array} indexArray Collection of indexes.
+ * @param {string} key Array key for this new index in the collection.
+ * @param {Array} pages Pages to be added to this index.
+ * @param {Object} additionalSettings Any config settings that should override the defaults.
+ */
+function addIndex(indexArray, key, pages, additionalSettings = {}) {
+  const settings = {
+    ...defaultIndexSettings,
+    additionalSettings
+  };
+  const newIndex = new FlexSearch(settings);
+  newIndex.add(pages);
+  indexArray[key] = newIndex;
+}
+
+/**
+ * Returns a FlexSearch instance for the current search context.
+ *
+ * @param {string} docSet
+ * @param {string} version
+ * @param {string} language
+ * @param {Array} indexes
+ */
+function resolveSearchIndex(docSet, version, language, indexArray) {
   let key = docSet;
 
   if (version) {
@@ -234,7 +253,49 @@ function resolveSearchIndex(docSet, version, language, indexes) {
     key += `|${language}`;
   }
 
-  return indexes[key] || indexes["global"];
+  return indexArray[key] || indexArray["global"];
+}
+
+/**
+ * Returns an array of unique `docSetHandle` values used in the provided pages.
+ * @param {*} pages
+ */
+function getPageDocSetHandles(pages) {
+  return pages
+    .map(page => {
+      return page.docSetHandle;
+    })
+    .filter((handle, index, self) => {
+      return handle && self.indexOf(handle) === index;
+    });
+}
+
+/**
+ * Returns an array of unique `version` values used in the provided pages.
+ * @param {*} pages
+ */
+function getPageVersionHandles(pages) {
+  return pages
+    .map(page => {
+      return page.version;
+    })
+    .filter((handle, index, self) => {
+      return handle && self.indexOf(handle) === index;
+    });
+}
+
+/**
+ * Returns an array of unique `lang` values used in the provided pages.
+ * @param {*} pages
+ */
+function getPageLanguageHandles(pages) {
+  return pages
+    .map(page => {
+      return page.lang;
+    })
+    .filter((handle, index, self) => {
+      return handle && self.indexOf(handle) === index;
+    });
 }
 
 function getParentPageTitle(page) {
@@ -275,7 +336,7 @@ function getAdditionalInfo(page, queryString, queryTerms) {
    * If our special (and pretty much invisible) keywords include the query string,
    * return the result using the page title, no slug, and opening sentence.
    */
-  if (page.keywords.includes(query)) {
+  if (page.keywords && page.keywords.includes(query)) {
     return {
       headingStr: getFullHeading(page),
       slug: "",
@@ -350,7 +411,22 @@ function getFullHeading(page, headerIndex) {
   return headersPath.map(h => h.title).join(" → ");
 }
 
+/**
+ * Return an object representing the contextual match on the search result,
+ * which will either be a header or page content.
+ *
+ * @param {*} page
+ * @param {*} query
+ * @param {*} terms
+ */
 function getMatch(page, query, terms) {
+  let match = getHeaderMatch(page, query) || getContentMatch(page, query);
+
+  if (match) {
+    return match;
+  }
+
+  // look for individual terms
   const matches = terms
     .map(t => {
       return getHeaderMatch(page, t) || getContentMatch(page, t);

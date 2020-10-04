@@ -27,13 +27,15 @@
           v-if="!$activeSet && shouldShowSetTitle(s, i)"
           class="suggestion-doc-set"
           :class="{ first: shouldShowSetTitle(s, i) && i === 0 }"
-        >{{ s.docSetTitle }}</div>
+        >
+          {{ s.docSetTitle }}
+        </div>
         <div
           class="suggestion"
           :class="{
             focused: i === focusIndex,
             first: i === 0,
-            last: i === suggestions.length - 1
+            last: i === suggestions.length - 1,
           }"
           @mousedown="go(i)"
           @mouseenter="focus(i)"
@@ -56,7 +58,7 @@
               <div class="suggestion-content">
                 <div
                   class="header"
-                  v-if="s.headingStr"
+                  v-if="s.headingStr && s.title != s.headingStr"
                   v-html="
                     s.match == 'header' ? highlight(s.headingStr) : s.headingStr
                   "
