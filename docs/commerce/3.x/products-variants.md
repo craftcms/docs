@@ -1,14 +1,14 @@
 # Products & Variants
 
-A *product* is an [element](/3.x/elements.md) that describes what’s for sale and a *variant* is the [purchasable](purchasables.md) the customer ultimately orders.
-
-TODO: diagram product, product fields, variants + variant fields
+A _product_ is an [element](/3.x/elements.md) that describes what’s for sale. A _variant_ is the [purchasable](purchasables.md) the customer ultimately orders.
 
 ## Products
 
 Products are the items available in your store.
 
 A product itself is never sold; what goes into a cart for purchase is actually one of the product’s [variants](#variants). In the Craft control panel, you’ll see Products listed by Product Type.
+
+![](./assets/product-variant.png)
 
 ## Product Types
 
