@@ -22,19 +22,19 @@ const defaultIndexSettings = {
     // fields we want to index
     field: {
       title: {
-        encode: "advanced"
+        encode: "advanced",
         tokenize: "full"
       },
       headersStr: {
-        encode: "advanced"
+        encode: "advanced",
         tokenize: "full"
       },
       keywords: {
-        encode: "icase"
+        encode: "icase",
         tokenize: "forward"
       },
       content: {
-        encode: "icase"
+        encode: "icase",
         tokenize: "strict"
       }
     },
