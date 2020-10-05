@@ -55,11 +55,11 @@ export default {
   }
 
   &.edition {
-    @apply uppercase bg-transparent text-xs tracking-widest leading-none h-auto;
+    @apply uppercase bg-transparent text-xs tracking-widest leading-none h-auto text-center font-medium;
     border-width: 1px;
     border-color: var(--text-color);
     color: var(--text-color);
-    padding: 1px 3px;
+    padding: 1px 0.175rem 1px 0.25rem;
   }
 
   & + & {
