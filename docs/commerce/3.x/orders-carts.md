@@ -14,6 +14,19 @@ Carts and orders are both listed on the Orders index page in the control panel, 
 
 Craft will automatically to purge (delete) abandoned carts after 90 days, and you can customize this behavior with the [`purgeInactiveCarts`](config-settings.md#purgeInactiveCarts) and [`purgeInactiveCartsDuration`](config-settings.md#purgeInactiveCartsDuration) settings.
 
+Here’s what we’ll cover in the following sections:
+
+- [Fetching a Cart]()
+- [Adding Items to a Cart]()
+- [Working with Line Items]()
+- [Loading a Cart]()
+- [Forgetting a Cart]()
+
+More topics are covered in separate pages:
+
+- [Addresses]()
+- [Updating Custom Fields in a Cart]()
+
 ### Fetching a Cart
 
 In your templates, you can get the current user’s cart with [craft.commerce.carts.cart](craft-commerce-carts-cart.md).
@@ -343,7 +356,7 @@ You could then loop over the line items in those older carts and allow the custo
 You’ll find an example of this in the [example templates](example-templates.md).
 :::
 
-#### Forgetting a Cart
+### Forgetting a Cart
 
 A logged-in customer’s cart is removed from their session automatically when they log out. You can call the `forgetCart()` method directly at any time to remove the current cart from the session. The cart itself will not be deleted, but only disassociated with the active session.
 
