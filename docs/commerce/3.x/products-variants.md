@@ -1199,15 +1199,15 @@ A t-shirt, on the other hand, would have at least one variant for each available
 
 Each variant includes the following unique properties:
 
-| Property      | Type                | Required? |
-| ------------- | ------------------- | --------- |
-| SKU           | string              | ✓         |
-| Price         | number              | ✓         |
-| Stock         | number or unlimited | ✓         |
-| Allowed Qty   | range               |           |
-| Dimensions    | number (l × w × h)  |           |
-| Weight        | number              |           |
-| Related Sales | relationship (Sale) |           |
+| Property      | Type                | Required?      |
+| ------------- | ------------------- | -------------- |
+| SKU           | string              | <check-mark /> |
+| Price         | number              | <check-mark /> |
+| Stock         | number or unlimited | <check-mark /> |
+| Allowed Qty   | range               |                |
+| Dimensions    | number (l × w × h)  |                |
+| Weight        | number              |                |
+| Related Sales | relationship (Sale) |                |
 
 Each variant may also have any number of custom fields to allow other distinguishing traits.
 
