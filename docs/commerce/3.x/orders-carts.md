@@ -270,13 +270,14 @@ This example sets `loadCartUrl` to an absolute URL the customer can access to lo
 ::: code
 
 ```twig
-{% set loadCartUrl = actionUrl('commerce/cart/load-cart', { number: cart.number }) %}
+{% set loadCartUrl = actionUrl(
+    'commerce/cart/load-cart',
+    { number: cart.number }
+) %}
 ```
 
 ```php
-use craft\helpers\UrlHelper;
-
-$loadCartUrl = UrlHelper::actionUrl(
+$loadCartUrl = craft\helpers\UrlHelper::actionUrl(
     'commerce/cart/load-cart',
     ['number' => $cart->number]
 );
