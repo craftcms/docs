@@ -1,3 +1,0 @@
-# Purchasable Types
-
-TODO: write
