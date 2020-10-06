@@ -1,6 +1,6 @@
 # Events
 
-Craft Commerce provides a multitude of events for extending its functionality. Modules and plugins can register event listeners, typically in their `init()` methods, to modify Commerce’s behavior.
+Craft Commerce provides a multitude of events for extending its functionality. Modules and plugins can [register event listeners](https://craftcms.com/knowledge-base/custom-module-events), typically in their `init()` methods, to modify Commerce’s behavior.
 
 ## Variant Events
 
