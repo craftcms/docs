@@ -312,8 +312,6 @@ You could then loop over the line items in those older carts and allow the custo
 You’ll find an example of this in the [example templates](example-templates.md).
 :::
 
-## Querying Carts
-
 ## Orders
 
 Orders are [Element Types](/3.x/extend/element-types.md) and can have custom fields associated with them. You can browse orders in the control panel by navigating to Commerce → Orders.
