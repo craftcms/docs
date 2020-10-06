@@ -42,6 +42,10 @@ php craft setup/db
 
 This will prompt you for the settings to fill in. For each step, type your response and press return. Once you’ve finished adding settings, Craft will immediately test them. If it’s successful, it will update the `.env` file for you.
 
+::: tip
+If you’re using Nitro, run `nitro info` in your terminal and grab the IP address in “Server Information”. Enter that for the database server during setup or by editing the `DB_SERVER` environment variable.
+:::
+
 Your settings may look different, but a successful setup will look like this:
 
 ```
