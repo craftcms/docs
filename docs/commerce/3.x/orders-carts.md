@@ -295,22 +295,69 @@ If the customer’s a registered user they may want to continue shopping from an
 
 You can allow a customer to see carts from previous logged-in sessions:
 
+::: code
 ```twig
 {% if currentUser %}
     {% set currentCart = craft.commerce.carts.cart %}
     {% if currentCart.id %}
         {# return all incomplete carts *except* the one from this session #}
-        {% set oldCarts = craft.orders.isCompleted(false).id('not '~currentCart.id).user(currentUser).all() %}
+        {% set oldCarts = craft.orders()
+            .isCompleted(false)
+            .id('not '~currentCart.id)
+            .user(currentUser)
+            .all() %}
     {% else %}
-        {% set oldCarts = craft.orders.isCompleted(false).user(currentUser).all() %}
+        {% set oldCarts = craft.orders()
+            .isCompleted(false)
+            .user(currentUser)
+            .all() %}
     {% endif %}
 {% endif %}
 ```
+```php
+use craft\commerce\Plugin as Commerce;
+use craft\commerce\elements\Order;
+
+$currentUser = Craft::$app->getUser()->getIdentity();
+
+if ($currentUser) {
+    $currentCart = Commerce::getInstance()->getCarts()->getCart();
+    if ($currentCart->id) {
+        // return all incomplete carts *except* the one from this session
+        $oldCarts = Order::findAll()
+            ->isCompleted(false)
+            ->id('not '.$currentCart->id)
+            ->user($currentUser);
+    } else {
+        $oldCarts = Order::findAll()
+            ->isCompleted(false)
+            ->user($currentUser);
+    }
+}
+```
+:::
 
 You could then loop over the line items in those older carts and allow the customer to add them to the current order.
 
 ::: tip
 You’ll find an example of this in the [example templates](example-templates.md).
+:::
+
+#### Forgetting a Cart
+
+A logged-in customer’s cart is removed from their session automatically when they log out. You can call the `forgetCart()` method directly at any time to remove the current cart from the session. The cart itself will not be deleted, but only disassociated with the active session.
+
+::: code
+```twig
+{# Forget the cart in the current session. #}
+{{ craft.commerce.carts.forgetCart() }}
+```
+```php
+use craft\commerce\Plugin as Commerce;
+
+// Forget the cart in the current session.
+Commerce::getInstance()->getCarts()->forgetCart();
+```
 :::
 
 ## Orders
