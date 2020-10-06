@@ -77,3 +77,12 @@ if ($user->can('stayUpLate')) {
     // ...
 }
 ```
+
+Check for nested permissions using a colon (`:`) to separate each level:
+
+```php
+/** @var \craft\elements\User $user */
+if ($user->can('permissionName:nestedPermissionName')) {
+    // ...
+}
+```
