@@ -14,7 +14,7 @@ Carts and orders are both listed on the Orders index page in the control panel, 
 
 Craft will automatically to purge (delete) abandoned carts after 90 days, and you can customize this behavior with the [`purgeInactiveCarts`](config-settings.md#purgeInactiveCarts) and [`purgeInactiveCartsDuration`](config-settings.md#purgeInactiveCartsDuration) settings.
 
-Every front-end interaction with a cart must happen via the `commerce/cart/update-cart` form action.
+On the front end, cart interactions happen via the `commerce/cart/update-cart` form action.
 
 Here’s what we’ll cover in the following sections:
 
