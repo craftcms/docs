@@ -8,7 +8,7 @@ Once you’ve added a payment gateway that supports subscriptions, you can then 
 
 ## Subscription support across gateways
 
-Currently, only `craftcms/commerce-stripe` gateway supports subscriptions. If you need subscriptions for another gateway that supports them, a plugin first must be created that implements that gateway.
+Currently, only the [Commerce Stripe gateway](https://plugins.craftcms.com/commerce-stripe) supports subscriptions. If you need subscriptions for another gateway that supports them, a plugin first must be created that implements that gateway.
 
 ## Subscription statuses
 
