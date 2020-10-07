@@ -19,9 +19,9 @@ The form to add the donation to the cart would look like this:
 {% set donation = craft.commerce.donation %}
 {% if donation and donation.isAvailable %}
     <form method="post">
-        <input type="hidden" name="action" value="commerce/cart/update-cart">
-        {{ redirectInput('shop/cart') }}
         {{ csrfInput() }}
+        {{ actionInput('commerce/cart/update-cart') }}
+        {{ redirectInput('shop/cart') }}
         <input type="hidden" name="purchasableId" value="{{ donation.id }}">
         <input type="text"
             name="options[donationAmount]"
