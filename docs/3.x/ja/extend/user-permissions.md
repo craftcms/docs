@@ -38,9 +38,13 @@ public function init()
 ];
 ```
 
+::: tip
+Nesting is meant for UI only; if you wanted to reference `nestedPermissionName` in the example above you would use exactly that key.
+:::
+
 ## 権限の要求
 
-コントローラーは、[requirePermission()](craft3:craft\web\Controller::requirePermission()) を呼び出すことで、ログインしているユーザー権限を持っていることを要求できます。
+Controllers can require that the logged-in user has a permission by calling [requirePermission()](craft3:craft\web\Controller::requirePermission()).
 
 ```php
 public function actionStayUpLate()
@@ -50,9 +54,9 @@ public function actionStayUpLate()
 }
 ```
 
-ユーザーがその権限を持たない場合、403 エラーが返されます。
+If the user doesn’t have that permission, then a 403 error will be returned.
 
-テンプレートでは、[requirePermission](../dev/tags.md#requirepermission) タグでユーザー権限を持っていることを保証することもできます。
+Templates can also ensure that the user has a permission with the [requirePermission](../dev/tags.md#requirepermission) tag:
 
 ```twig
 {% requirePermission 'stayUpLate' %}
@@ -60,7 +64,7 @@ public function actionStayUpLate()
 
 ## 権限の確認
 
-を呼び出すことで、ログインしているユーザーが権限を持っているかを確認できます。
+You can check if the logged-in user has a permission by calling <craft3:craft\web\User::checkPermission()>:
 
 ```php
 // See if they have the `stayUpLate` permission
@@ -69,20 +73,11 @@ if (Craft::$app->user->checkPermission('stayUpLate')) {
 }
 ```
 
-を呼び出すことで、指定されたユーザーが権限を持っているかを確認することもできます。
+You can also see if any given user has a permission by calling <craft3:craft\elements\User::can()>:
 
 ```php
 /** @var \craft\elements\User $user */
 if ($user->can('stayUpLate')) {
-    // ...
-}
-```
-
-Check for nested permissions using a colon (`:`) to separate each level:
-
-```php
-/** @var \craft\elements\User $user */
-if ($user->can('permissionName:nestedPermissionName')) {
     // ...
 }
 ```
