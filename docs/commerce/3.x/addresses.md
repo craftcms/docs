@@ -1,16 +1,46 @@
 # Addresses
 
-Commerce manages shipping and billing addresses using [Address](commerce3:craft\commerce\models\Address) models.
+Commerce manages shipping and billing addresses using [Address](commerce3:craft\commerce\models\Address) models that are relevant to [Orders](orders-carts.md) and [Customers](customers.md).
+
+In the control panel, you’ll find addresses within the context of Orders and Customers. A Store Location may also be entered at Commerce → Store Settings → Store Location.
+
+## Managing Addresses
+
+TODO: describe how addresses work broadly for guests, member users, and store managers
 
 - Address Lines
-- Address Validation
 - Countries & States
+
+Even though you’re most likely to work with addresses [in the cart](#updating-cart-addresses) and in the control panel, an [Addresses Service](commerce3:craft\commerce\services\Addresses) provides methods for working directly with address data. We can use it here, for example, to get the store location address:
+
+::: code
+```twig
+{% set storeAddress = craft.commerce.addresses.storeLocationAddress %}
+```
+```php
+$storeAddress = craft\commerce\Plugin::getInstance()
+    ->getAddresses()
+    ->getStoreLocationAddress();
+```
+:::
+
+Several [Events](extend/events.md) may also be used, when [extending Commerce](extend/), to provide custom functionality as addresses are changed in the system:
+
+- [`beforeSaveAddress`](extend/events.md#beforesaveaddress)
+- [`afterSaveAddress`](extend/events.md#aftersaveaddress)
+- [`afterDeleteAddress`](extend/events.md#afterdeleteaddress)
+- [`defineAddressLines`](extend/events.md#defineaddresslines)
 
 ## Updating Cart Addresses
 
-Posts to the `commerce/cart/update-cart` action can be used to add or update shipping and billing address information.
+Any post to the `commerce/cart/update-cart` action can include parameters for modifying shipping and billing address information in two formats:
 
-When using the `update-cart` action, you may include both new shipping and billing address (properly nested under their respective keys, `shippingAddress[...]` and `billingAddress[...]`), or select existing addresses using one or the other of the `shippingAddressId` and `billingAddressId` params. In either example, you can include `shippingAddressSameAsBilling` or `billingAddressSameAsShipping` to synchronize the attached addresses.
+1. A `shippingAddress` and/or `billingAddress` array with details to be added or updated.
+2. A `shippingAddressId` and/or `billingAddressId` parameter for designating an existing addresses by its ID.
+
+With either approach, you can also use `shippingAddressSameAsBilling` or `billingAddressSameAsShipping` parameters to synchronize addresses and not have to send the same information in two places.
+
+TODO: what if I provide conflicting settings?
 
 You’ll probably want the customer to provide a shipping and billing address for the order. Although not required, the shipping address enables the tax and shipping engine to more accurately supply shipping options and tax costs.
 
@@ -193,3 +223,78 @@ This example starts a form that could be used to update the shipping address att
 ::: warning
 If billing address ID and shipping address ID are the same on the cart. Updating the shipping address will have no effect as the billing address takes precedence.
 :::
+
+## Estimate Cart Addresses
+
+It’s common to provide a shipping or tax cost estimate before a customer has entered full address details.
+
+To help with this, the cart can use estimated shipping and billing addresses for calculations before complete addresses are available.
+
+::: tip
+An estimated address is an [Address model](commerce3:craft\commerce\models\Address) with its `isEstimated` property set to `true`. This simple differentiation prevents any confusion between estimated and final calculations.
+:::
+
+### Adding a shipping estimate address to the cart
+
+Adding or updating the estimated addresses on the order is done using the `commerce/cart/update-cart` form action.
+
+You can check for existing estimate addresses with the `estimatedShippingAddressId` and `estimatedBillingAddressId` attributes on the [cart](commerce3:craft\commerce\elements\Order) object.
+
+This example renders a form for adding an estimated shipping country, state, and zip code to the cart:
+
+```twig
+{% set cart = craft.commerce.carts.cart %}
+
+<form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/update-cart') }}
+    <input type="hidden" name="estimatedBillingAddressSameAsShipping" value="1">
+
+    {% if not cart.estimatedShippingAddressId %}
+        {# show a country selection dropdown #}
+        <select name="estimatedShippingAddress[countryId]">
+            {% for key, option in craft.commerce.countries.allCountriesAsList %}
+                <option value="{{ key }}">{{ option }}</option>
+            {% endfor %}
+        </select>
+
+        {# show a state selection dropdown #}
+        <select name="estimatedShippingAddress[stateValue]">
+            {% for states in craft.commerce.states.allStatesAsList %}
+                {% for key, option in states %}
+                    <option value="{{ key }}">{{ option }}</option>
+                {% endfor %}
+            {% endfor %}
+        </select>
+
+        {# show a zip code input #}
+        <input type="text" name="estimatedShippingAddress[zipCode]" value="">
+    {% endif %}
+
+
+    {% if cart.availableShippingMethodOptions|length and cart.estimatedShippingAddressId %}
+        {# display name+price selection for each available shipping method #}
+        {% for handle, method in cart.availableShippingMethodOptions %}
+            {% set price = method.priceForOrder(cart)|commerceCurrency(cart.currency) %}
+            <label>
+                <input type="radio"
+                    name="shippingMethodHandle"
+                    value="{{ handle }}"
+                    {% if handle == cart.shippingMethodHandle %}checked{% endif %}
+                />
+                {{ method.name }} - {{ price }}
+            </label>
+        {% endfor %}
+    {% endif %}
+
+    <input type="submit" value="Submit">
+</form>
+```
+
+[Tax adjusters](commerce3:craft\commerce\adjusters\Tax) and [shipping adjusters](commerce3:craft\commerce\adjusters\Shipping) based on estimated address data contain an `isEstimated` attribute.
+
+A full example of this can be seen in the [example templates](example-templates.md) on the cart page.
+
+## Validating Address Information
+
+TODO: write
