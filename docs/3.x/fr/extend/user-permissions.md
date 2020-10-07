@@ -38,6 +38,10 @@ Permissions can also have nested permissions by adding a `nested` key to the per
 ];
 ```
 
+::: tip
+Nesting is meant for UI only; if you wanted to reference `nestedPermissionName` in the example above you would use exactly that key.
+:::
+
 ## Requiring Permissions
 
 Controllers can require that the logged-in user has a permission by calling [requirePermission()](craft3:craft\web\Controller::requirePermission()).
@@ -74,15 +78,6 @@ You can also see if any given user has a permission by calling <craft3:craft\ele
 ```php
 /** @var \craft\elements\User $user */
 if ($user->can('stayUpLate')) {
-    // ...
-}
-```
-
-Check for nested permissions using a colon (`:`) to separate each level:
-
-```php
-/** @var \craft\elements\User $user */
-if ($user->can('permissionName:nestedPermissionName')) {
     // ...
 }
 ```
