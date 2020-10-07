@@ -128,7 +128,7 @@ Below is a simplified example of the fields required to make a payment using Twi
 
     {{ cart.gateway.getPaymentFormHtml({})|raw }}
 
-    <input type="submit" value="submit">
+    <button type="submit">Submit</button>
 </form>
 ```
 

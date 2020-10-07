@@ -28,7 +28,7 @@ The form to add the donation to the cart would look like this:
             value=""
             placeholder="Donation"
         >
-        <input type="submit" value="Donate Now" />
+        <button type="submit">Donate Now</button>
     </form>
 {% endif %}
 ```

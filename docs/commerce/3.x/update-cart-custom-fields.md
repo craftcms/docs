@@ -14,6 +14,6 @@ You are able to update the custom fields on a cart by posting data to the `updat
 
     <input type="text" name="fields[myFieldHandle]" value="">
 
-    <input type="submit" value="Update cart">
+    <button type="submit">Update Cart</button>
 </form>
 ```

@@ -77,7 +77,7 @@ This gets a product and creates a form that will add its default variant to the 
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
     <input type="hidden" name="purchasableId" value="{{ variant.id }}">
-    <input type="submit" value="Add to cart">
+    <button type="submit">Add to Cart</button>
 </form>
 ```
 
@@ -97,7 +97,7 @@ If the product has multiple variants, you could provide a dropdown menu to allow
             <option value="{{ variant.id }}">{{ variant.sku }}</option>
         {% endfor %}
     </select>
-    <input type="submit" value="Add to cart">
+    <button type="submit">Add to Cart</button>
 </form>
 ```
 
@@ -122,7 +122,7 @@ You can add multiple purchasables to the cart in a single request using a `purch
         <input type="hidden" name="purchasables[{{ loop.index }}][id]" value="{{ variant.id }}">
         <input type="hidden" name="purchasables[{{ loop.index }}][qty]" value="1">
     {% endfor %}
-    <input type="submit" value="Add all variants to cart">
+    <button type="submit">Add all variants to cart</button>
 </form>
 ```
 
@@ -162,7 +162,7 @@ In this example, we’re providing the customer with an option to include a note
         <option value="no">No Thanks</option>
     </select>
     <input type="hidden" name="purchasableId" value="{{ variant.id }}">
-    <input type="submit" value="Add to cart">
+    <button type="submit">Add to Cart</button>
 </form>
 ```
 ```twig Multiple Items
@@ -183,7 +183,7 @@ In this example, we’re providing the customer with an option to include a note
             <option value="no">No Thanks</option>
         </select>
     {% endfor %}
-    <input type="submit" value="Add to cart">
+    <button type="submit">Add to Cart</button>
 </form>
 ```
 :::
@@ -211,7 +211,7 @@ You can directly modify any line item’s `qty`, `note`, and `options` using tha
         <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}"">
         <input type="text" name="lineItems[{{ item.id }}][note]" placeholder="My Note" value="{{ item.note }}">
     {% endfor %}
-    <input type="submit" value="Update Line Item">
+    <button type="submit">Update Line Item</button>
 </form>
 ```
 
@@ -227,7 +227,7 @@ You can remove a line item by including a `remove` parameter in the request. Thi
         <input type="text" name="lineItems[{{ item.id }}][note]" placeholder="My Note" value="{{ item.note }}">
         <input type="checkbox" name="lineItems[{{ item.id }}][remove]" value="1"> Remove item<br>
     {% endfor %}
-    <input type="submit" value="Update Line Item">
+    <button type="submit">Update Line Item</button>
 </form>
 ```
 
@@ -272,7 +272,7 @@ This is a simplified version of [`shop/cart/load.twig`](https://github.com/craft
     {{ redirectInput('/shop/cart') }}
 
     <input type="text" name="number" value="{{ cart.number }}">
-    <input type="submit" value="Submit">
+    <button type="submit">Submit</button>
 </form>
 ```
 

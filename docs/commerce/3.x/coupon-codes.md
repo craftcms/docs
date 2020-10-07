@@ -33,7 +33,7 @@ Example:
        value="{{ cart.couponCode }}"
        placeholder="{{ "Coupon Code"|t }}">
 
-    <input type="submit" value="Update Cart"/>
+    <button type="submit">Update Cart</button>
 <form>
 ```
 
