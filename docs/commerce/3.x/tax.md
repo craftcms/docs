@@ -2,6 +2,10 @@
 
 Commerce represents taxes for an order with tax categories and tax rates.
 
+::: warning
+Tax features differ depending on your [edition](editions.md) of Craft Commerce.
+:::
+
 Products within Commerce can be linked to tax categories, which are then used to influence the taxation rate for products when they’re purchased. A default tax category can be set for the entire system, applying automatically to any product that isn’t assigned to a specific tax category.
 
 A tax category may have many tax rates. Each tax rate indicates the rate at which products in its tax category will be taxed. Each tax rate matches all tax zones by default, but can optionally specify a specific tax zone.
