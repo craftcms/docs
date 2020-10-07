@@ -11,7 +11,7 @@ TODO: describe how addresses work broadly for guests, member users, and store ma
 - Address Lines
 - Countries & States
 
-Even though you’re most likely to work with addresses [in the cart](#updating-cart-addresses) and in the control panel, an [Addresses Service](commerce3:craft\commerce\services\Addresses) provides methods for working directly with address data. We can use it here, for example, to get the store location address:
+Even though you’ll most likely work with addresses [via carts](#updating-cart-addresses) the control panel, an [Addresses Service](commerce3:craft\commerce\services\Addresses) provides methods for working directly with address data. We can use it here, for example, to get the store location address:
 
 ::: code
 ```twig
@@ -21,6 +21,45 @@ Even though you’re most likely to work with addresses [in the cart](#updating-
 $storeAddress = craft\commerce\Plugin::getInstance()
     ->getAddresses()
     ->getStoreLocationAddress();
+```
+:::
+
+If you were to take `storeAddress` above and output it as JSON, this is what it might look like:
+
+::: details Example Address
+
+Note `countryId` and `stateId` are relational fields. (See [Countries & States](countries-states.md)).
+
+```json
+{
+    "id": "3",
+    "isStoreLocation": false,
+    "attention": "",
+    "title": "",
+    "firstName": "",
+    "lastName": "",
+    "fullName": "",
+    "address1": "1234 Balboa Towers Circle",
+    "address2": "#100",
+    "address3": "",
+    "city": "Los Angeles",
+    "zipCode": "92662",
+    "phone": "(555) 555-5555",
+    "alternativePhone": "",
+    "label": "",
+    "businessName": "Gobias Industries",
+    "businessTaxId": "12345",
+    "businessId": "",
+    "stateName": "",
+    "countryId": "236",
+    "stateId": "26",
+    "notes": "",
+    "custom1": "",
+    "custom2": "",
+    "custom3": "",
+    "custom4": "",
+    "isEstimated": false
+}
 ```
 :::
 
