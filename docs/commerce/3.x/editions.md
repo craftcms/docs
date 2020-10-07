@@ -8,7 +8,7 @@ The Pro edition of Craft Commerce is designed for professional ecommerce sites. 
 
 ## Lite
 
-The Lite edition of Craft Commerce is designed for websites that need only the basics, where one-off product sales, subscriptions, complex tax and shipping rules, promotion management, and shopping carts would be overkill.
+The Lite edition of Craft Commerce is designed for websites that need only the basics, where one-off product sales, complex tax and shipping rules, promotion management, and shopping carts would be overkill.
 
 In the Lite edition of Craft Commerce only a single line item can exist in the cart. Whenever a customer adds something to the cart, it replaces whatever item was in the cart. If multiple items are added to the cart in a single request, only the last item that was submitted is added to the cart.
 
