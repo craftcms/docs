@@ -6,12 +6,15 @@ In the control panel, you’ll find addresses within the context of Orders and C
 
 ## Managing Addresses
 
-TODO: describe how addresses work broadly for guests, member users, and store managers
+Every order may have a shipping and billing address. Customers with accounts can be offered the ability to keep multiple addresses on file and select whichever they’d prefer for a given order. How you collect and validate addresses on the front end is up to you, and Commerce provides tools that help streamline address management:
 
-- Address Lines
-- Countries & States
+- The ability to use minimal [estimated addresses](#estimate-addresses) for calculating shipping and tax costs with minimal data entry prior to checkout.
+- Multiple ways of [updating cart addresses](#update-cart-addresses) and avoid data re-entry.
+- Convenient handling of [Countries & States](countries-states.md) store managers can fully customize.
 
-Even though you’ll most likely work with addresses [via carts](#updating-cart-addresses) the control panel, an [Addresses Service](commerce3:craft\commerce\services\Addresses) provides methods for working directly with address data. We can use it here, for example, to get the store location address:
+TODO: clarify how addresses relate to orders (guest vs. account)
+
+Even though you’ll most likely work with addresses [via carts](#updating-cart-addresses) the control panel, an [Addresses service](commerce3:craft\commerce\services\Addresses) provides methods for working directly with address data. We can use it here, for example, to get the store location address:
 
 ::: code
 ```twig
@@ -147,9 +150,11 @@ In this example, it’s important to note that `shippingAddressId` must either b
 <form method="post">
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
-    <input type="hidden" name="cartUpdatedNotice" value="Updated Shipping Address.">
+    {{ hiddenInput('cartUpdatedNotice', 'Updated shipping address.') }}
 
-    <input type="hidden" name="shippingAddressId" value=""> {# In addition to sending a blank string, you can omit this param from the form altogether #}
+    {# You can send a blank string here or omit this form parameter #}
+    <input type="hidden" name="shippingAddressId" value="">
+
     <input type="text" name="shippingAddress[firstName]" value="">
     <input type="text" name="shippingAddress[lastName]" value="">
     <select name="shippingAddress[countryId]">
@@ -176,9 +181,9 @@ If your customers have added multiple addresses, you can use radio buttons to se
 <form method="post">
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
-    <input type="hidden" name="cartUpdatedNotice" value="Updated addresses.">
+    {{ hiddenInput('cartUpdatedNotice', 'Updated addresses.') }}
 
-    {# check if we have saved addresses #}
+    {# Do we have saved addresses? #}
     {% if customerAddresses | length %}
         <div class="shipping-address">
             {% for address in customerAddresses %}
@@ -187,7 +192,7 @@ If your customers have added multiple addresses, you can use radio buttons to se
                         name="shippingAddressId"
                         value="{{ address.id }}" {{- cart.shippingAddressId ? ' checked' : null }}
                     >
-                    {# identifying address information, up to you! #}
+                    {# Identifying address information, up to you! #}
                     {# ... #}
                 </label>
             {% endfor %}
@@ -200,19 +205,19 @@ If your customers have added multiple addresses, you can use radio buttons to se
                         name="billingAddressId"
                         value="{{ address.id }}" {{- cart.billingAddressId ? ' checked' : null }}
                     >
-                    {# identifying address information, up to you! #}
+                    {# Identifying address information, up to you! #}
                     {# ... #}
                 </label>
             {% endfor %}
         </div>
     {% else %}
-        {# no existing addresses; provide forms to add new ones #}
+        {# No existing addresses; provide forms to add new ones #}
         <div class="new-billing-address">
             <label>
                 First Name
                 <input type="text" name="billingAddress[firstName]">
             </label>
-            {# remaining address fields #}
+            {# Remaining address fields #}
             {# ... #}
         </div>
 
@@ -221,7 +226,7 @@ If your customers have added multiple addresses, you can use radio buttons to se
                 First Name
                 <input type="text" name="shippingAddress[firstName]">
             </label>
-            {# remaining address fields #}
+            {# Remaining address fields #}
             {# ... #}
         </div>
     {% endif %}
@@ -247,7 +252,7 @@ This example starts a form that could be used to update the shipping address att
 <form method="post">
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
-    <input type="hidden" name="cartUpdatedNotice" value="Updated addresses.">
+    {{ hiddenInput('cartUpdatedNotice', 'Updated addresses.') }}
 
     <input type="hidden" name="shippingAddress[id]" value="{{ address.id }}">
     <input type="text" name="shippingAddress[firstName]" value="{{ address.firstName }}">
@@ -287,17 +292,17 @@ This example renders a form for adding an estimated shipping country, state, and
 <form method="post">
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
-    <input type="hidden" name="estimatedBillingAddressSameAsShipping" value="1">
+    {{ hiddenInput('estimatedBillingAddressSameAsShipping', '1') }}
 
     {% if not cart.estimatedShippingAddressId %}
-        {# show a country selection dropdown #}
+        {# Display country selection dropdown #}
         <select name="estimatedShippingAddress[countryId]">
             {% for key, option in craft.commerce.countries.allCountriesAsList %}
                 <option value="{{ key }}">{{ option }}</option>
             {% endfor %}
         </select>
 
-        {# show a state selection dropdown #}
+        {# Display state selection dropdown #}
         <select name="estimatedShippingAddress[stateValue]">
             {% for states in craft.commerce.states.allStatesAsList %}
                 {% for key, option in states %}
@@ -306,13 +311,13 @@ This example renders a form for adding an estimated shipping country, state, and
             {% endfor %}
         </select>
 
-        {# show a zip code input #}
+        {# Display a zip code input #}
         <input type="text" name="estimatedShippingAddress[zipCode]" value="">
     {% endif %}
 
 
     {% if cart.availableShippingMethodOptions|length and cart.estimatedShippingAddressId %}
-        {# display name+price selection for each available shipping method #}
+        {# Display name+price selection for each available shipping method #}
         {% for handle, method in cart.availableShippingMethodOptions %}
             {% set price = method.priceForOrder(cart)|commerceCurrency(cart.currency) %}
             <label>
