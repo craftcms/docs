@@ -1,8 +1,4 @@
-# Discounts
-
-::: warning
-Discounts are only available in the [Pro edition](editions.md) of Craft Commerce.
-:::
+# Discounts <badge type="edition" vertical="middle" title="Discounts are only available in Commerce Pro">Pro</badge>
 
 Discounts are deductions that can be applied either to line items or the order as a whole.
 
