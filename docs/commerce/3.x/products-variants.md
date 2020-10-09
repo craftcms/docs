@@ -161,45 +161,45 @@ To fetch the same information with GraphQL, we could write a query like this:
 
 Product queries support the following parameters:
 
-<!-- BEGIN PARAMS -->
+<!-- BEGIN PRODUCTQUERY_PARAMS -->
 
-| Param                                         | Description
-| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [after](#after)                               | Narrows the query results to only products that were posted on or after a certain date.
-| [anyStatus](#anystatus)                       | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
-| [asArray](#asarray)                           | Causes the query to return matching products as arrays of data, rather than [Product](commerce3:craft\commerce\elements\Product) objects.
-| [availableForPurchase](#availableforpurchase) | Narrows the query results to only products that are available for purchase.
-| [before](#before)                             | Narrows the query results to only products that were posted before a certain date.
-| [clearCachedResult](#clearcachedresult)       | Clears the cached result.
-| [dateCreated](#datecreated)                   | Narrows the query results based on the products’ creation dates.
-| [dateUpdated](#dateupdated)                   | Narrows the query results based on the products’ last-updated dates.
-| [expiryDate](#expirydate)                     | Narrows the query results based on the products’ expiry dates.
-| [fixedOrder](#fixedorder)                     | Causes the query results to be returned in the order specified by [id](#id).
-| [hasVariant](#hasvariant)                     | Narrows the query results to only products that have certain variants.
-| [id](#id)                                     | Narrows the query results based on the products’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders)     | Causes the query to return matching products as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
-| [inReverse](#inreverse)                       | Causes the query results to be returned in reverse order.
-| [limit](#limit)                               | Determines the number of products that should be returned.
-| [offset](#offset)                             | Determines how many products should be skipped in the results.
-| [orderBy](#orderby)                           | Determines the order that the products should be returned in. (If empty, defaults to `postDate DESC`.)
-| [postDate](#postdate)                         | Narrows the query results based on the products’ post dates.
-| [preferSites](#prefersites)                   | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [relatedTo](#relatedto)                       | Narrows the query results to only products that are related to certain other elements.
-| [search](#search)                             | Narrows the query results to only products that match a search query.
-| [site](#site)                                 | Determines which site(s) the products should be queried in.
-| [siteId](#siteid)                             | Determines which site(s) the products should be queried in, per the site’s ID.
-| [slug](#slug)                                 | Narrows the query results based on the products’ slugs.
-| [status](#status)                             | Narrows the query results based on the products’ statuses.
-| [title](#title)                               | Narrows the query results based on the products’ titles.
-| [trashed](#trashed)                           | Narrows the query results to only products that have been soft-deleted.
-| [type](#type)                                 | Narrows the query results based on the products’ types.
-| [typeId](#typeid)                             | Narrows the query results based on the products’ types, per the types’ IDs.
-| [uid](#uid)                                   | Narrows the query results based on the products’ UIDs.
-| [unique](#unique)                             | Determines whether only elements with unique IDs should be returned by the query.
-| [uri](#uri)                                   | Narrows the query results based on the products’ URIs.
-| [with](#with)                                 | Causes the query to return matching products eager-loaded with related elements.
+| Param                                                 | Description
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [after](#product-after)                               | Narrows the query results to only products that were posted on or after a certain date.
+| [anyStatus](#product-anystatus)                       | Removes element filters based on their statuses.
+| [asArray](#product-asarray)                           | Causes the query to return matching products as arrays of data, rather than [Product](commerce3:craft\commerce\elements\Product) objects.
+| [availableForPurchase](#product-availableforpurchase) | Narrows the query results to only products that are available for purchase.
+| [before](#product-before)                             | Narrows the query results to only products that were posted before a certain date.
+| [clearCachedResult](#product-clearcachedresult)       | Clears the cached result.
+| [dateCreated](#product-datecreated)                   | Narrows the query results based on the products’ creation dates.
+| [dateUpdated](#product-dateupdated)                   | Narrows the query results based on the products’ last-updated dates.
+| [expiryDate](#product-expirydate)                     | Narrows the query results based on the products’ expiry dates.
+| [fixedOrder](#product-fixedorder)                     | Causes the query results to be returned in the order specified by [id](#product-id).
+| [hasVariant](#product-hasvariant)                     | Narrows the query results to only products that have certain variants.
+| [id](#product-id)                                     | Narrows the query results based on the products’ IDs.
+| [ignorePlaceholders](#product-ignoreplaceholders)     | Causes the query to return matching products as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#product-inreverse)                       | Causes the query results to be returned in reverse order.
+| [limit](#product-limit)                               | Determines the number of products that should be returned.
+| [offset](#product-offset)                             | Determines how many products should be skipped in the results.
+| [orderBy](#product-orderby)                           | Determines the order that the products should be returned in. (If empty, defaults to `postDate DESC`.)
+| [postDate](#product-postdate)                         | Narrows the query results based on the products’ post dates.
+| [preferSites](#product-prefersites)                   | If [unique](#product-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [relatedTo](#product-relatedto)                       | Narrows the query results to only products that are related to certain other elements.
+| [search](#product-search)                             | Narrows the query results to only products that match a search query.
+| [site](#product-site)                                 | Determines which site(s) the products should be queried in.
+| [siteId](#product-siteid)                             | Determines which site(s) the products should be queried in, per the site’s ID.
+| [slug](#product-slug)                                 | Narrows the query results based on the products’ slugs.
+| [status](#product-status)                             | Narrows the query results based on the products’ statuses.
+| [title](#product-title)                               | Narrows the query results based on the products’ titles.
+| [trashed](#product-trashed)                           | Narrows the query results to only products that have been soft-deleted.
+| [type](#product-type)                                 | Narrows the query results based on the products’ types.
+| [typeId](#product-typeid)                             | Narrows the query results based on the products’ types, per the types’ IDs.
+| [uid](#product-uid)                                   | Narrows the query results based on the products’ UIDs.
+| [unique](#product-unique)                             | Determines whether only elements with unique IDs should be returned by the query.
+| [uri](#product-uri)                                   | Narrows the query results based on the products’ URIs.
+| [with](#product-with)                                 | Causes the query to return matching products eager-loaded with related elements.
 
-### `after`
+<h4 id="product-after"><a href="#product-after" class="header-anchor">#</a> <code>after</code></h4>
 
 Narrows the query results to only products that were posted on or after a certain date.
 
@@ -233,9 +233,9 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `anyStatus`
+<h4 id="product-anystatus"><a href="#product-anystatus" class="header-anchor">#</a> <code>anyStatus</code></h4>
 
-Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+Removes element filters based on their statuses.
 
 
 
@@ -258,7 +258,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `asArray`
+<h4 id="product-asarray"><a href="#product-asarray" class="header-anchor">#</a> <code>asArray</code></h4>
 
 Causes the query to return matching products as arrays of data, rather than [Product](commerce3:craft\commerce\elements\Product) objects.
 
@@ -283,7 +283,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `availableForPurchase`
+<h4 id="product-availableforpurchase"><a href="#product-availableforpurchase" class="header-anchor">#</a> <code>availableForPurchase</code></h4>
 
 Narrows the query results to only products that are available for purchase.
 
@@ -306,7 +306,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `before`
+<h4 id="product-before"><a href="#product-before" class="header-anchor">#</a> <code>before</code></h4>
 
 Narrows the query results to only products that were posted before a certain date.
 
@@ -340,7 +340,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `clearCachedResult`
+<h4 id="product-clearcachedresult"><a href="#product-clearcachedresult" class="header-anchor">#</a> <code>clearCachedResult</code></h4>
 
 Clears the cached result.
 
@@ -349,7 +349,7 @@ Clears the cached result.
 
 
 
-### `dateCreated`
+<h4 id="product-datecreated"><a href="#product-datecreated" class="header-anchor">#</a> <code>dateCreated</code></h4>
 
 Narrows the query results based on the products’ creation dates.
 
@@ -388,7 +388,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `dateUpdated`
+<h4 id="product-dateupdated"><a href="#product-dateupdated" class="header-anchor">#</a> <code>dateUpdated</code></h4>
 
 Narrows the query results based on the products’ last-updated dates.
 
@@ -425,7 +425,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `expiryDate`
+<h4 id="product-expirydate"><a href="#product-expirydate" class="header-anchor">#</a> <code>expiryDate</code></h4>
 
 Narrows the query results based on the products’ expiry dates.
 
@@ -460,9 +460,9 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `fixedOrder`
+<h4 id="product-fixedorder"><a href="#product-fixedorder" class="header-anchor">#</a> <code>fixedOrder</code></h4>
 
-Causes the query results to be returned in the order specified by [id](#id).
+Causes the query results to be returned in the order specified by [id](#product-id).
 
 
 
@@ -487,7 +487,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `hasVariant`
+<h4 id="product-hasvariant"><a href="#product-hasvariant" class="header-anchor">#</a> <code>hasVariant</code></h4>
 
 Narrows the query results to only products that have certain variants.
 
@@ -500,7 +500,7 @@ Possible values include:
 
 
 
-### `id`
+<h4 id="product-id"><a href="#product-id" class="header-anchor">#</a> <code>id</code></h4>
 
 Narrows the query results based on the products’ IDs.
 
@@ -536,11 +536,11 @@ $product = \craft\commerce\elements\Product::find()
 
 
 ::: tip
-This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
+This can be combined with [fixedOrder](#product-fixedorder) if you want the results to be returned in a specific order.
 :::
 
 
-### `ignorePlaceholders`
+<h4 id="product-ignoreplaceholders"><a href="#product-ignoreplaceholders" class="header-anchor">#</a> <code>ignorePlaceholders</code></h4>
 
 Causes the query to return matching products as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -554,7 +554,7 @@ elements that were set by [craft\services\Elements::setPlaceholderElement()](htt
 
 
 
-### `inReverse`
+<h4 id="product-inreverse"><a href="#product-inreverse" class="header-anchor">#</a> <code>inReverse</code></h4>
 
 Causes the query results to be returned in reverse order.
 
@@ -579,7 +579,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `limit`
+<h4 id="product-limit"><a href="#product-limit" class="header-anchor">#</a> <code>limit</code></h4>
 
 Determines the number of products that should be returned.
 
@@ -602,7 +602,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `offset`
+<h4 id="product-offset"><a href="#product-offset" class="header-anchor">#</a> <code>offset</code></h4>
 
 Determines how many products should be skipped in the results.
 
@@ -625,7 +625,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `orderBy`
+<h4 id="product-orderby"><a href="#product-orderby" class="header-anchor">#</a> <code>orderBy</code></h4>
 
 Determines the order that the products should be returned in. (If empty, defaults to `postDate DESC`.)
 
@@ -648,7 +648,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `postDate`
+<h4 id="product-postdate"><a href="#product-postdate" class="header-anchor">#</a> <code>postDate</code></h4>
 
 Narrows the query results based on the products’ post dates.
 
@@ -685,9 +685,9 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `preferSites`
+<h4 id="product-prefersites"><a href="#product-prefersites" class="header-anchor">#</a> <code>preferSites</code></h4>
 
-If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+If [unique](#product-unique) is set, this determines which site should be selected when querying multi-site elements.
 
 
 
@@ -720,7 +720,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `relatedTo`
+<h4 id="product-relatedto"><a href="#product-relatedto" class="header-anchor">#</a> <code>relatedTo</code></h4>
 
 Narrows the query results to only products that are related to certain other elements.
 
@@ -747,7 +747,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `search`
+<h4 id="product-search"><a href="#product-search" class="header-anchor">#</a> <code>search</code></h4>
 
 Narrows the query results to only products that match a search query.
 
@@ -780,7 +780,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `site`
+<h4 id="product-site"><a href="#product-site" class="header-anchor">#</a> <code>site</code></h4>
 
 Determines which site(s) the products should be queried in.
 
@@ -800,7 +800,7 @@ Possible values include:
 
 ::: tip
 If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you
-only want unique elements to be returned, use [unique](#unique) in conjunction with this.
+only want unique elements to be returned, use [unique](#product-unique) in conjunction with this.
 :::
 
 
@@ -822,13 +822,22 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `siteId`
+<h4 id="product-siteid"><a href="#product-siteid" class="header-anchor">#</a> <code>siteId</code></h4>
 
 Determines which site(s) the products should be queried in, per the site’s ID.
 
 
 
 The current site will be used by default.
+
+Possible values include:
+
+| Value | Fetches products…
+| - | -
+| `1` | from the site with an ID of `1`.
+| `[1, 2]` | from a site with an ID of `1` or `2`.
+| `['not', 1, 2]` | not in a site with an ID of `1` or `2`.
+| `'*'` | from any site.
 
 
 
@@ -849,7 +858,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `slug`
+<h4 id="product-slug"><a href="#product-slug" class="header-anchor">#</a> <code>slug</code></h4>
 
 Narrows the query results based on the products’ slugs.
 
@@ -892,7 +901,7 @@ $product = \craft\commerce\elements\Product::find()
 :::
 
 
-### `status`
+<h4 id="product-status"><a href="#product-status" class="header-anchor">#</a> <code>status</code></h4>
 
 Narrows the query results based on the products’ statuses.
 
@@ -925,7 +934,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `title`
+<h4 id="product-title"><a href="#product-title" class="header-anchor">#</a> <code>title</code></h4>
 
 Narrows the query results based on the products’ titles.
 
@@ -962,7 +971,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `trashed`
+<h4 id="product-trashed"><a href="#product-trashed" class="header-anchor">#</a> <code>trashed</code></h4>
 
 Narrows the query results to only products that have been soft-deleted.
 
@@ -987,7 +996,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `type`
+<h4 id="product-type"><a href="#product-type" class="header-anchor">#</a> <code>type</code></h4>
 
 Narrows the query results based on the products’ types.
 
@@ -1020,7 +1029,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `typeId`
+<h4 id="product-typeid"><a href="#product-typeid" class="header-anchor">#</a> <code>typeId</code></h4>
 
 Narrows the query results based on the products’ types, per the types’ IDs.
 
@@ -1052,7 +1061,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `uid`
+<h4 id="product-uid"><a href="#product-uid" class="header-anchor">#</a> <code>uid</code></h4>
 
 Narrows the query results based on the products’ UIDs.
 
@@ -1077,7 +1086,7 @@ $product = \craft\commerce\elements\Product::find()
 :::
 
 
-### `unique`
+<h4 id="product-unique"><a href="#product-unique" class="header-anchor">#</a> <code>unique</code></h4>
 
 Determines whether only elements with unique IDs should be returned by the query.
 
@@ -1107,7 +1116,7 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-### `uri`
+<h4 id="product-uri"><a href="#product-uri" class="header-anchor">#</a> <code>uri</code></h4>
 
 Narrows the query results based on the products’ URIs.
 
@@ -1150,7 +1159,7 @@ $product = \craft\commerce\elements\Product::find()
 :::
 
 
-### `with`
+<h4 id="product-with"><a href="#product-with" class="header-anchor">#</a> <code>with</code></h4>
 
 Causes the query to return matching products eager-loaded with related elements.
 
@@ -1176,7 +1185,9 @@ $products = \craft\commerce\elements\Product::find()
 ```
 :::
 
-<!-- END PARAMS -->
+
+
+<!-- END PRODUCTQUERY_PARAMS -->
 
 ## Variants
 
@@ -1303,53 +1314,57 @@ Fetching the equivalent with GraphQL could look like this:
 
 Variant queries support the following parameters:
 
-<!-- BEGIN PARAMS -->
+<!-- BEGIN VARIANTQUERY_PARAMS -->
 
-| Param                                     | Description
-| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [anyStatus](#anystatus)                   | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
-| [asArray](#asarray)                       | Causes the query to return matching variants as arrays of data, rather than [Variant](commerce3:craft\commerce\elements\Variant) objects.
-| [clearCachedResult](#clearcachedresult)   | Clears the cached result.
-| [dateCreated](#datecreated)               | Narrows the query results based on the variants’ creation dates.
-| [dateUpdated](#dateupdated)               | Narrows the query results based on the variants’ last-updated dates.
-| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [hasProduct](#hasproduct)                 | Narrows the query results to only variants for certain products.
-| [hasSales](#hassales)                     | Narrows the query results to only variants that are on sale.
-| [hasStock](#hasstock)                     | Narrows the query results to only variants that have stock.
-| [height](#height)                         | Narrows the query results based on the variants’ height dimension.
-| [id](#id)                                 | Narrows the query results based on the variants’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching variants as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
-| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
-| [isDefault](#isdefault)                   | Narrows the query results to only default variants.
-| [length](#length)                         | Narrows the query results based on the variants’ length dimension.
-| [limit](#limit)                           | Determines the number of variants that should be returned.
-| [maxQty](#maxqty)                         | Narrows the query results based on the variants’ max quantity.
-| [minQty](#minqty)                         | Narrows the query results based on the variants’ min quantity.
-| [offset](#offset)                         | Determines how many variants should be skipped in the results.
-| [orderBy](#orderby)                       | Determines the order that the variants should be returned in. (If empty, defaults to `sortOrder ASC`.)
-| [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [price](#price)                           | Narrows the query results based on the variants’ price.
-| [product](#product)                       | Narrows the query results based on the variants’ product.
-| [productId](#productid)                   | Narrows the query results based on the variants’ products’ IDs.
-| [relatedTo](#relatedto)                   | Narrows the query results to only variants that are related to certain other elements.
-| [search](#search)                         | Narrows the query results to only variants that match a search query.
-| [site](#site)                             | Determines which site(s) the variants should be queried in.
-| [siteId](#siteid)                         | Determines which site(s) the variants should be queried in, per the site’s ID.
-| [sku](#sku)                               | Narrows the query results based on the variants’ SKUs.
-| [status](#status)                         | Narrows the query results based on the variants’ statuses.
-| [stock](#stock)                           | Narrows the query results based on the variants’ stock.
-| [title](#title)                           | Narrows the query results based on the variants’ titles.
-| [trashed](#trashed)                       | Narrows the query results to only variants that have been soft-deleted.
-| [typeId](#typeid)                         | Narrows the query results based on the variants’ product types, per their IDs.
-| [uid](#uid)                               | Narrows the query results based on the variants’ UIDs.
-| [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
-| [weight](#weight)                         | Narrows the query results based on the variants’ weight dimension.
-| [width](#width)                           | Narrows the query results based on the variants’ width dimension.
-| [with](#with)                             | Causes the query to return matching variants eager-loaded with related elements.
+| Param                                             | Description
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [anyStatus](#variant-anystatus)                   | Removes element filters based on their statuses.
+| [asArray](#variant-asarray)                       | Causes the query to return matching variants as arrays of data, rather than [Variant](commerce3:craft\commerce\elements\Variant) objects.
+| [clearCachedResult](#variant-clearcachedresult)   | Clears the cached result.
+| [dateCreated](#variant-datecreated)               | Narrows the query results based on the variants’ creation dates.
+| [dateUpdated](#variant-dateupdated)               | Narrows the query results based on the variants’ last-updated dates.
+| [fixedOrder](#variant-fixedorder)                 | Causes the query results to be returned in the order specified by [id](#variant-id).
+| [hasProduct](#variant-hasproduct)                 | Narrows the query results to only variants for certain products.
+| [hasSales](#variant-hassales)                     | Narrows the query results to only variants that are on sale.
+| [hasStock](#variant-hasstock)                     | Narrows the query results to only variants that have stock.
+| [height](#variant-height)                         | Narrows the query results based on the variants’ height dimension.
+| [id](#variant-id)                                 | Narrows the query results based on the variants’ IDs.
+| [ignorePlaceholders](#variant-ignoreplaceholders) | Causes the query to return matching variants as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#variant-inreverse)                   | Causes the query results to be returned in reverse order.
+| [isDefault](#variant-isdefault)                   | Narrows the query results to only default variants.
+| [length](#variant-length)                         | Narrows the query results based on the variants’ length dimension.
+| [limit](#variant-limit)                           | Determines the number of variants that should be returned.
+| [maxQty](#variant-maxqty)                         | Narrows the query results based on the variants’ max quantity.
+| [minQty](#variant-minqty)                         | Narrows the query results based on the variants’ min quantity.
+| [offset](#variant-offset)                         | Determines how many variants should be skipped in the results.
+| [orderBy](#variant-orderby)                       | Determines the order that the variants should be returned in. (If empty, defaults to `sortOrder ASC`.)
+| [preferSites](#variant-prefersites)               | If [unique](#variant-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [price](#variant-price)                           | Narrows the query results based on the variants’ price.
+| [product](#variant-product)                       | Narrows the query results based on the variants’ product.
+| [productId](#variant-productid)                   | Narrows the query results based on the variants’ products’ IDs.
+| [relatedTo](#variant-relatedto)                   | Narrows the query results to only variants that are related to certain other elements.
+| [search](#variant-search)                         | Narrows the query results to only variants that match a search query.
+| [site](#variant-site)                             | Determines which site(s) the variants should be queried in.
+| [siteId](#variant-siteid)                         | Determines which site(s) the variants should be queried in, per the site’s ID.
+| [sku](#variant-sku)                               | Narrows the query results based on the variants’ SKUs.
+| [status](#variant-status)                         | Narrows the query results based on the variants’ statuses.
+| [stock](#variant-stock)                           | Narrows the query results based on the variants’ stock.
+| [title](#variant-title)                           | Narrows the query results based on the variants’ titles.
+| [trashed](#variant-trashed)                       | Narrows the query results to only variants that have been soft-deleted.
+| [typeId](#variant-typeid)                         | Narrows the query results based on the variants’ product types, per their IDs.
+| [uid](#variant-uid)                               | Narrows the query results based on the variants’ UIDs.
+| [unique](#variant-unique)                         | Determines whether only elements with unique IDs should be returned by the query.
+| [weight](#variant-weight)                         | Narrows the query results based on the variants’ weight dimension.
+| [width](#variant-width)                           | Narrows the query results based on the variants’ width dimension.
+| [with](#variant-with)                             | Causes the query to return matching variants eager-loaded with related elements.
 
-### `anyStatus`
+<h4 id="variant-anystatus"><a href="#variant-anystatus" class="header-anchor">#</a> <code>anyStatus</code></h4>
 
-Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
+Removes element filters based on their statuses.
+
+
+
+
 
 ::: code
 ```twig
@@ -1367,9 +1382,14 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `asArray`
+
+<h4 id="variant-asarray"><a href="#variant-asarray" class="header-anchor">#</a> <code>asArray</code></h4>
 
 Causes the query to return matching variants as arrays of data, rather than [Variant](commerce3:craft\commerce\elements\Variant) objects.
+
+
+
+
 
 ::: code
 ```twig
@@ -1388,13 +1408,20 @@ $variants = \craft\commerce\elements\Variant::find()
 :::
 
 
-### `clearCachedResult`
+<h4 id="variant-clearcachedresult"><a href="#variant-clearcachedresult" class="header-anchor">#</a> <code>clearCachedResult</code></h4>
 
 Clears the cached result.
 
-### `dateCreated`
+
+
+
+
+
+<h4 id="variant-datecreated"><a href="#variant-datecreated" class="header-anchor">#</a> <code>dateCreated</code></h4>
 
 Narrows the query results based on the variants’ creation dates.
+
+
 
 Possible values include:
 
@@ -1403,6 +1430,8 @@ Possible values include:
 | `'>= 2018-04-01'` | that were created on or after 2018-04-01.
 | `'< 2018-05-01'` | that were created before 2018-05-01
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that were created between 2018-04-01 and 2018-05-01.
+
+
 
 ::: code
 ```twig
@@ -1426,9 +1455,12 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `dateUpdated`
+
+<h4 id="variant-dateupdated"><a href="#variant-dateupdated" class="header-anchor">#</a> <code>dateUpdated</code></h4>
 
 Narrows the query results based on the variants’ last-updated dates.
+
+
 
 Possible values include:
 
@@ -1437,6 +1469,8 @@ Possible values include:
 | `'>= 2018-04-01'` | that were updated on or after 2018-04-01.
 | `'< 2018-05-01'` | that were updated before 2018-05-01
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that were updated between 2018-04-01 and 2018-05-01.
+
+
 
 ::: code
 ```twig
@@ -1458,9 +1492,14 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `fixedOrder`
 
-Causes the query results to be returned in the order specified by [id](#id).
+<h4 id="variant-fixedorder"><a href="#variant-fixedorder" class="header-anchor">#</a> <code>fixedOrder</code></h4>
+
+Causes the query results to be returned in the order specified by [id](#variant-id).
+
+
+
+
 
 ::: code
 ```twig
@@ -1480,7 +1519,8 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `hasProduct`
+
+<h4 id="variant-hasproduct"><a href="#variant-hasproduct" class="header-anchor">#</a> <code>hasProduct</code></h4>
 
 Narrows the query results to only variants for certain products.
 
@@ -1490,7 +1530,10 @@ Possible values include:
 | - | -
 | a [ProductQuery](commerce3:craft\commerce\elements\db\ProductQuery) object | for products that match the query.
 
-### `hasSales`
+
+
+
+<h4 id="variant-hassales"><a href="#variant-hassales" class="header-anchor">#</a> <code>hasSales</code></h4>
 
 Narrows the query results to only variants that are on sale.
 
@@ -1501,7 +1544,10 @@ Possible values include:
 | `true` | on sale
 | `false` | not on sale
 
-### `hasStock`
+
+
+
+<h4 id="variant-hasstock"><a href="#variant-hasstock" class="header-anchor">#</a> <code>hasStock</code></h4>
 
 Narrows the query results to only variants that have stock.
 
@@ -1512,42 +1558,29 @@ Possible values include:
 | `true` | with stock.
 | `false` | with no stock.
 
-### `height`
+
+
+
+<h4 id="variant-height"><a href="#variant-height" class="header-anchor">#</a> <code>height</code></h4>
 
 Narrows the query results based on the variants’ height dimension.
 
-::: code
-```twig
-{# Fetch all variants with a height greater than 100 #}
-{% set variants = craft.variants()
-    .height("> 100")
-    .all() %}
-```
+Possible values include:
 
-```php
-// Fetch all variants with a height greater than 100
-$variants = \craft\commerce\elements\Variant::find()
-    ->height("> 100")
-    ->all();
-```
+| Value | Fetches variants…
+| - | -
+| `100` | with a height of 100.
+| `'>= 100'` | with a height of at least 100.
+| `'< 100'` | with a height of less than 100.
 
-```graphql
-# Fetch all variants with a height greater than 100
-{
-  variants(height: "> 100") {
-    # ...
-  }
-}
-```
-:::
 
-::: tip
-Querying variants by height will restrict the query to only those product types that have dimensions enabled.
-:::
 
-### `id`
+
+<h4 id="variant-id"><a href="#variant-id" class="header-anchor">#</a> <code>id</code></h4>
 
 Narrows the query results based on the variants’ IDs.
+
+
 
 Possible values include:
 
@@ -1557,6 +1590,8 @@ Possible values include:
 | `'not 1'` | not with an ID of 1.
 | `[1, 2]` | with an ID of 1 or 2.
 | `['not', 1, 2]` | not with an ID of 1 or 2.
+
+
 
 ::: code
 ```twig
@@ -1574,18 +1609,34 @@ $variant = \craft\commerce\elements\Variant::find()
 ```
 :::
 
+
+
 ::: tip
-This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
+This can be combined with [fixedOrder](#variant-fixedorder) if you want the results to be returned in a specific order.
 :::
 
-### `ignorePlaceholders`
+
+<h4 id="variant-ignoreplaceholders"><a href="#variant-ignoreplaceholders" class="header-anchor">#</a> <code>ignorePlaceholders</code></h4>
 
 Causes the query to return matching variants as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 
-### `inReverse`
+
+
+
+
+
+
+
+
+
+<h4 id="variant-inreverse"><a href="#variant-inreverse" class="header-anchor">#</a> <code>inReverse</code></h4>
 
 Causes the query results to be returned in reverse order.
+
+
+
+
 
 ::: code
 ```twig
@@ -1603,9 +1654,12 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `isDefault`
+
+<h4 id="variant-isdefault"><a href="#variant-isdefault" class="header-anchor">#</a> <code>isDefault</code></h4>
 
 Narrows the query results to only default variants.
+
+
 
 ::: code
 ```twig
@@ -1623,42 +1677,27 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `length`
+
+<h4 id="variant-length"><a href="#variant-length" class="header-anchor">#</a> <code>length</code></h4>
 
 Narrows the query results based on the variants’ length dimension.
 
-::: code
-```twig
-{# Fetch all variants with a length greater than 100 #}
-{% set variants = craft.variants()
-    .length("> 100")
-    .all() %}
-```
+Possible values include:
 
-```php
-// Fetch all variants with a length greater than 100
-$variants = \craft\commerce\elements\Variant::find()
-    ->length("> 100")
-    ->all();
-```
+| Value | Fetches variants…
+| - | -
+| `100` | with a length of 100.
+| `'>= 100'` | with a length of at least 100.
+| `'< 100'` | with a length of less than 100.
 
-```graphql
-# Fetch all variants with a length greater than 100
-{
-  variants(length: "> 100") {
-    # ...
-  }
-}
-```
-:::
 
-::: tip
-Querying variants by length will restrict the query to only those product types that have dimensions enabled.
-:::
 
-### `limit`
+
+<h4 id="variant-limit"><a href="#variant-limit" class="header-anchor">#</a> <code>limit</code></h4>
 
 Determines the number of variants that should be returned.
+
+
 
 ::: code
 ```twig
@@ -1676,7 +1715,8 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `maxQty`
+
+<h4 id="variant-maxqty"><a href="#variant-maxqty" class="header-anchor">#</a> <code>maxQty</code></h4>
 
 Narrows the query results based on the variants’ max quantity.
 
@@ -1688,7 +1728,10 @@ Possible values include:
 | `'>= 100'` | with a maxQty of at least 100.
 | `'< 100'` | with a maxQty of less than 100.
 
-### `minQty`
+
+
+
+<h4 id="variant-minqty"><a href="#variant-minqty" class="header-anchor">#</a> <code>minQty</code></h4>
 
 Narrows the query results based on the variants’ min quantity.
 
@@ -1700,9 +1743,14 @@ Possible values include:
 | `'>= 100'` | with a minQty of at least 100.
 | `'< 100'` | with a minQty of less than 100.
 
-### `offset`
+
+
+
+<h4 id="variant-offset"><a href="#variant-offset" class="header-anchor">#</a> <code>offset</code></h4>
 
 Determines how many variants should be skipped in the results.
+
+
 
 ::: code
 ```twig
@@ -1720,9 +1768,12 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `orderBy`
+
+<h4 id="variant-orderby"><a href="#variant-orderby" class="header-anchor">#</a> <code>orderBy</code></h4>
 
 Determines the order that the variants should be returned in. (If empty, defaults to `sortOrder ASC`.)
+
+
 
 ::: code
 ```twig
@@ -1740,15 +1791,20 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `preferSites`
 
-If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+<h4 id="variant-prefersites"><a href="#variant-prefersites" class="header-anchor">#</a> <code>preferSites</code></h4>
+
+If [unique](#variant-unique) is set, this determines which site should be selected when querying multi-site elements.
+
+
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
 and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
 for Site B.
 
 If this isn’t set, then preference goes to the current site.
+
+
 
 ::: code
 ```twig
@@ -1770,7 +1826,8 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `price`
+
+<h4 id="variant-price"><a href="#variant-price" class="header-anchor">#</a> <code>price</code></h4>
 
 Narrows the query results based on the variants’ price.
 
@@ -1782,7 +1839,10 @@ Possible values include:
 | `'>= 100'` | with a price of at least 100.
 | `'< 100'` | with a price of less than 100.
 
-### `product`
+
+
+
+<h4 id="variant-product"><a href="#variant-product" class="header-anchor">#</a> <code>product</code></h4>
 
 Narrows the query results based on the variants’ product.
 
@@ -1792,7 +1852,10 @@ Possible values include:
 | - | -
 | a [Product](commerce3:craft\commerce\elements\Product) object | for a product represented by the object.
 
-### `productId`
+
+
+
+<h4 id="variant-productid"><a href="#variant-productid" class="header-anchor">#</a> <code>productId</code></h4>
 
 Narrows the query results based on the variants’ products’ IDs.
 
@@ -1804,11 +1867,18 @@ Possible values include:
 | `[1, 2]` | for product with an ID of 1 or 2.
 | `['not', 1, 2]` | for product not with an ID of 1 or 2.
 
-### `relatedTo`
+
+
+
+<h4 id="variant-relatedto"><a href="#variant-relatedto" class="header-anchor">#</a> <code>relatedTo</code></h4>
 
 Narrows the query results to only variants that are related to certain other elements.
 
+
+
 See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+
+
 
 ::: code
 ```twig
@@ -1826,11 +1896,16 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `search`
+
+<h4 id="variant-search"><a href="#variant-search" class="header-anchor">#</a> <code>search</code></h4>
 
 Narrows the query results to only variants that match a search query.
 
+
+
 See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
+
+
 
 ::: code
 ```twig
@@ -1854,9 +1929,12 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `site`
+
+<h4 id="variant-site"><a href="#variant-site" class="header-anchor">#</a> <code>site</code></h4>
 
 Determines which site(s) the variants should be queried in.
+
+
 
 The current site will be used by default.
 
@@ -1872,8 +1950,10 @@ Possible values include:
 
 ::: tip
 If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you
-only want unique elements to be returned, use [unique](#unique) in conjunction with this.
+only want unique elements to be returned, use [unique](#variant-unique) in conjunction with this.
 :::
+
+
 
 ::: code
 ```twig
@@ -1891,11 +1971,25 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `siteId`
+
+<h4 id="variant-siteid"><a href="#variant-siteid" class="header-anchor">#</a> <code>siteId</code></h4>
 
 Determines which site(s) the variants should be queried in, per the site’s ID.
 
+
+
 The current site will be used by default.
+
+Possible values include:
+
+| Value | Fetches variants…
+| - | -
+| `1` | from the site with an ID of `1`.
+| `[1, 2]` | from a site with an ID of `1` or `2`.
+| `['not', 1, 2]` | not in a site with an ID of `1` or `2`.
+| `'*'` | from any site.
+
+
 
 ::: code
 ```twig
@@ -1913,7 +2007,8 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `sku`
+
+<h4 id="variant-sku"><a href="#variant-sku" class="header-anchor">#</a> <code>sku</code></h4>
 
 Narrows the query results based on the variants’ SKUs.
 
@@ -1928,6 +2023,8 @@ Possible values include:
 | `'not *foo*'` | with a SKU that doesn’t contain `foo`.
 | `['*foo*', '*bar*'` | with a SKU that contains `foo` or `bar`.
 | `['not', '*foo*', '*bar*']` | with a SKU that doesn’t contain `foo` or `bar`.
+
+
 
 ::: code
 ```twig
@@ -1951,9 +2048,12 @@ $variant = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `status`
+
+<h4 id="variant-status"><a href="#variant-status" class="header-anchor">#</a> <code>status</code></h4>
 
 Narrows the query results based on the variants’ statuses.
+
+
 
 Possible values include:
 
@@ -1961,6 +2061,8 @@ Possible values include:
 | - | -
 | `'enabled'`  _(default)_ | that are enabled.
 | `'disabled'` | that are disabled.
+
+
 
 ::: code
 ```twig
@@ -1978,7 +2080,8 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `stock`
+
+<h4 id="variant-stock"><a href="#variant-stock" class="header-anchor">#</a> <code>stock</code></h4>
 
 Narrows the query results based on the variants’ stock.
 
@@ -1990,9 +2093,14 @@ Possible values include:
 | `'>= 5'` | with a stock of at least 5.
 | `'< 10'` | with a stock of less than 10.
 
-### `title`
+
+
+
+<h4 id="variant-title"><a href="#variant-title" class="header-anchor">#</a> <code>title</code></h4>
 
 Narrows the query results based on the variants’ titles.
+
+
 
 Possible values include:
 
@@ -2005,6 +2113,8 @@ Possible values include:
 | `'not *Foo*'` | with a title that doesn’t contain `Foo`.
 | `['*Foo*', '*Bar*']` | with a title that contains `Foo` or `Bar`.
 | `['not', '*Foo*', '*Bar*']` | with a title that doesn’t contain `Foo` or `Bar`.
+
+
 
 ::: code
 ```twig
@@ -2022,9 +2132,14 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `trashed`
+
+<h4 id="variant-trashed"><a href="#variant-trashed" class="header-anchor">#</a> <code>trashed</code></h4>
 
 Narrows the query results to only variants that have been soft-deleted.
+
+
+
+
 
 ::: code
 ```twig
@@ -2042,7 +2157,8 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `typeId`
+
+<h4 id="variant-typeid"><a href="#variant-typeid" class="header-anchor">#</a> <code>typeId</code></h4>
 
 Narrows the query results based on the variants’ product types, per their IDs.
 
@@ -2054,9 +2170,16 @@ Possible values include:
 | `[1, 2]` | for product of a type with an ID of 1 or 2.
 | `['not', 1, 2]` | for product of a type not with an ID of 1 or 2.
 
-### `uid`
+
+
+
+<h4 id="variant-uid"><a href="#variant-uid" class="header-anchor">#</a> <code>uid</code></h4>
 
 Narrows the query results based on the variants’ UIDs.
+
+
+
+
 
 ::: code
 ```twig
@@ -2074,12 +2197,17 @@ $variant = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `unique`
+
+<h4 id="variant-unique"><a href="#variant-unique" class="header-anchor">#</a> <code>unique</code></h4>
 
 Determines whether only elements with unique IDs should be returned by the query.
 
+
+
 This should be used when querying elements from multiple sites at the same time, if “duplicate” results is not
 desired.
+
+
 
 ::: code
 ```twig
@@ -2099,77 +2227,46 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-### `weight`
+
+<h4 id="variant-weight"><a href="#variant-weight" class="header-anchor">#</a> <code>weight</code></h4>
 
 Narrows the query results based on the variants’ weight dimension.
 
-::: code
-```twig
-{# Fetch all variants with a weight greater than 100 #}
-{% set variants = craft.variants()
-    .weight("> 100")
-    .all() %}
-```
+Possible values include:
 
-```php
-// Fetch all variants with a weight greater than 100
-$variants = \craft\commerce\elements\Variant::find()
-    ->weight("> 100")
-    ->all();
-```
+| Value | Fetches variants…
+| - | -
+| `100` | with a weight of 100.
+| `'>= 100'` | with a weight of at least 100.
+| `'< 100'` | with a weight of less than 100.
 
-```graphql
-# Fetch all variants with a weight greater than 100
-{
-  variants(weight: "> 100") {
-    # ...
-  }
-}
-```
-:::
 
-::: tip
-Querying variants by weight will restrict the query to only those product types that have dimensions enabled.
-:::
 
-### `width`
+
+<h4 id="variant-width"><a href="#variant-width" class="header-anchor">#</a> <code>width</code></h4>
 
 Narrows the query results based on the variants’ width dimension.
 
-::: code
-```twig
-{# Fetch all variants with a width greater than 100 #}
-{% set variants = craft.variants()
-    .width("> 100")
-    .all() %}
-```
+Possible values include:
 
-```php
-// Fetch all variants with a width greater than 100
-$variants = \craft\commerce\elements\Variant::find()
-    ->width("> 100")
-    ->all();
-```
+| Value | Fetches variants…
+| - | -
+| `100` | with a width of 100.
+| `'>= 100'` | with a width of at least 100.
+| `'< 100'` | with a width of less than 100.
 
-```graphql
-# Fetch all variants with a width greater than 100
-{
-  variants(width: "> 100") {
-    # ...
-  }
-}
-```
-:::
 
-::: tip
-Querying variants by width will restrict the query to only those product types that have dimensions enabled.
-:::
 
-### `with`
+
+<h4 id="variant-with"><a href="#variant-with" class="header-anchor">#</a> <code>with</code></h4>
 
 Causes the query to return matching variants eager-loaded with related elements.
 
-See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html ) for a full explanation of how to work with this parameter.
+
+
+See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+
+
 
 ::: code
 ```twig
@@ -2187,4 +2284,6 @@ $variants = \craft\commerce\elements\Variant::find()
 ```
 :::
 
-<!-- END PARAMS -->
+
+
+<!-- END VARIANTQUERY_PARAMS -->
