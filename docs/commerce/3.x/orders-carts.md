@@ -208,7 +208,7 @@ You can directly modify any line item’s `qty`, `note`, and `options` using tha
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
     {% for item in cart.lineItems %}
-        <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}"">
+        <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}">
         <input type="text" name="lineItems[{{ item.id }}][note]" placeholder="My Note" value="{{ item.note }}">
     {% endfor %}
     <button type="submit">Update Line Item</button>
@@ -223,7 +223,7 @@ You can remove a line item by including a `remove` parameter in the request. Thi
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
     {% for item in cart.lineItems %}
-        <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}"">
+        <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}">
         <input type="text" name="lineItems[{{ item.id }}][note]" placeholder="My Note" value="{{ item.note }}">
         <input type="checkbox" name="lineItems[{{ item.id }}][remove]" value="1"> Remove item<br>
     {% endfor %}
