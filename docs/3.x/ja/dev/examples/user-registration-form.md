@@ -43,7 +43,10 @@ Craft Pro を使用し、サイトで誰でもユーザーアカウントを登�
         {{ _self.errorList(user.getErrors('password')) }}
     {% endif %}
 
-    <input type="submit" value="Register">
+    <button type="submit">Register</button>
 </form>
 ```
 
+::: tip
+If you’ve enabled the [`useEmailAsUsername`](config3:useEmailAsUsername) setting, the `username` field will no longer be required and may be omitted.
+:::
