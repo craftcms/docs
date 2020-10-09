@@ -150,7 +150,7 @@ In this example, each line item has its quantity and note exposed for the user t
     {{ csrfInput() }}
 
     {% for item in cart.lineItems %}
-        <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}"">
+        <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}">
         <input type="text" name="lineItems[{{ item.id }}][note]" placeholder="My Note" value="{{ item.note }}">
     {% endfor %}
 
