@@ -205,6 +205,10 @@ The SQL file to be imported may be plain text, or compressed with zip or gzip.
 nitro db import <file> [<options>]
 ```
 
+::: tip
+For uncompressed files, the command will detect and automatically select the database engine.
+:::
+
 #### Options
 
 `-m`, `--machine`
