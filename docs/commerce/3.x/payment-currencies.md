@@ -7,7 +7,7 @@ Craft Commerce allows you to accept payments in multiple currencies. All product
 To set up payment currencies for your store, navigate to Commerce → Store Settings → Payment Currencies in the control panel.
 
 ::: warning
-Only change your primary currency prior to taking orders in production. Changing the primary currency will delete any existing carts, which would disrupt incomplete orders.
+You can only change your primary currency before orders have been completed. Changing the primary currency will delete any existing carts.
 :::
 
 ## Example
