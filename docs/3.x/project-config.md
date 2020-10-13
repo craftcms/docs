@@ -135,3 +135,19 @@ git commit -a -m 'Remove project config files'
 ```
 
 Craft will continue recording changes to YAML files within the `config/project/` folder, but they will no longer get committed to your project’s Git repository or shared with other environments.
+
+To stop YAML from being written altogether, you can use `config/app.php` and set `craft\services\ProjectConfig::$writeToYaml` to `false`. Project config will still check `config/project/` for changes, but it will not write changes to that directory.
+
+```php
+return [
+    // ...
+    'components' => [
+        // ...
+        'projectConfig' => function() {
+            $config = craft\helpers\App::projectConfigConfig();
+            $config['writeToYaml'] = false;
+            return Craft::createObject($config);
+        },
+    ]
+];
+```
