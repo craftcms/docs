@@ -1,3 +1,7 @@
+---
+updatedVersion: 3.x/config/config-settings.md
+---
+
 # General Config Settings
 
 Craft comes with a bunch of config settings that give you control over various aspects of its behavior.

@@ -1,4 +1,4 @@
-# Server Requirements
+# Requirements
 
 The server requirements for Craft Commerce are the [same as Craft 3.5](https://craftcms.com/docs/3.x/requirements.html) as well as PHP’s [SOAP extension](https://www.php.net/manual/en/book.soap.php).
 

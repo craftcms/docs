@@ -1,10 +1,10 @@
-# コンフィギュレーションの概要
+# Craft の設定
 
 必要に応じて Craft を設定するには、いくつかの方法があります。
 
 ## 一般設定
 
-Craft は、いくつかの[一般設定](config-settings.md)をサポートしています。 `config/general.php` ファイルでデフォルト値を上書きすることができます。
+Craft は、いくつかの[一般設定](config-settings.md)をサポートしています。`config/general.php` ファイルでデフォルト値を上書きできます。
 
 ```php
 return [
@@ -14,7 +14,7 @@ return [
 
 ## データベース接続設定
 
-Craft は、いくつかの[データベース接続設定](db-settings.md)をサポートしています。 `config/db.php` ファイルでデフォルト値を上書きすることができます。
+Craft は、いくつかの[データベース接続設定](db-settings.md)をサポートしています。`config/db.php` ファイルでデフォルト値を上書きできます。
 
 ## Guzzle 設定
 
@@ -25,7 +25,7 @@ Craft は、次のような HTTP リクエストを作成するたびに [Guzzle
 - Feed ウィジェットから RSS フィードを読み込むとき
 - Amazon S3 のようなリモートボリュームにあるアセットを操作するとき
 
-`config/` フォルダに `guzzle.php` ファイルを作成することによって、これらのリクエストを送信する際に Guzzle が使用するコンフィグ設定をカスタマイズできます。 そのファイルは、設定を上書きした配列を返さなければなりません。
+`config/` フォルダに `guzzle.php` ファイルを作成することによって、これらのリクエストを送信する際に Guzzle が使用するコンフィグ設定をカスタマイズできます。そのファイルは、設定を上書きした配列を返さなければなりません。
 
 ```php
 <?php
@@ -38,7 +38,7 @@ return [
 ];
 ```
 
-ここで定義されたオプションは、新しい `GuzzleHttp\Client` インスタンスに渡されます。 利用可能なオプションのリストは、[Guzzle のドキュメント](http://docs.guzzlephp.org/en/latest/)を参照してください。
+ここで定義されたオプションは、新しい `GuzzleHttp\Client` インスタンスに渡されます。利用可能なオプションのリストは、[Guzzle のドキュメント](http://docs.guzzlephp.org/en/latest/)を参照してください。
 
 ## エイリアス
 
@@ -47,37 +47,36 @@ Craft のいくつかの設定やファンクションでは、基本ファイ�
 - サイトのベース URL 設定
 - ボリュームのベース URL 設定
 - ローカルボリュームのファイルシステムパス設定
-- コンフィグ設定の <config3:resourceBasePath> と <config3:resourceBaseUrl> config settings
+- コンフィグ設定 <config3:resourceBasePath> と <config3:resourceBaseUrl>
 - Twig ファンクションの [svg()](../dev/functions.md#svg-svg-sanitize)
 
 次のエイリアスは、そのまま利用可能です。
 
-| エイリアス                | 説明                                                                              |
-| -------------------- | ------------------------------------------------------------------------------- |
-| `@app`               | `vendor/craftcms/cms/src/` のパス                                                  |
-| `@config`            | `config/` フォルダのパス                                                               |
-| `@contentMigrations` | `migrations/` フォルダのパス                                                           |
-| `@craft`             | `vendor/craftcms/cms/src/` のパス                                                  |
-| `@lib`               | `vendor/craftcms/cms/lib/` のパス                                                  |
-| `@root`              | ルートプロジェクトのパス（PHP 定数の [CRAFT_BASE_PATH](#craft-base-path) と同じ） |
-| `@runtime`           | `storage/runtime/` フォルダのパス                                                      |
-| `@storage`           | `storage/` フォルダのパス                                                              |
-| `@templates`         | `templates/` フォルダのパス                                                            |
-| `@translations`      | `translations/` フォルダのパス                                                         |
-| `@vendor`            | `vendor/` フォルダのパス                                                               |
-| `@web`               | リクエストのために読み込まれた `index.php` ファイルを含むフォルダの URL                                    |
-| `@webroot`           | リクエストのために読み込まれた `index.php` ファイルを含むフォルダのパス                                      |
+| エイリアス | 説明 |
+| ----- | -----------
+| `@app` | `vendor/craftcms/cms/src/` のパス |
+| `@config` | `config/` フォルダのパス |
+| `@contentMigrations` | `migrations/` フォルダのパス |
+| `@craft` | `vendor/craftcms/cms/src/` のパス |
+| `@lib` | `vendor/craftcms/cms/lib/` のパス |
+| `@root` | ルートプロジェクトのパス（PHP 定数の [CRAFT_BASE_PATH](#craft-base-path) と同じ） |
+| `@runtime` | `storage/runtime/` フォルダのパス |
+| `@storage` | `storage/` フォルダのパス |
+| `@templates` | `templates/` フォルダのパス |
+| `@translations` | `translations/` フォルダのパス |
+| `@vendor` | `vendor/` フォルダのパス |
+| `@web` | リクエストのために読み込まれた `index.php` ファイルを含むフォルダの URL |
+| `@webroot` | リクエストのために読み込まれた `index.php` ファイルを含むフォルダのパス |
 
-コンフィグ設定 <config3:aliases> config setting if needed. It’s recommended to override the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+これらデフォルトのエイリアスは、必要に応じてコンフィグ設定 <config3:aliases> で上書きできます。キャッシュポイズニングの脆弱性を避けるために、`@web` エイリアスを使用する場合は上書きすることを推奨します。
 
 ```php
 'aliases' => [
-    '@assetBaseUrl' => 'http://my-project.com/assets',
-    '@assetBasePath' => '/path/to/web/assets',
-],
+    '@web' => 'http://my-project.com',
+];
 ```
 
-If your webroot is something besides `web/`, `public/`, `public_html/`, or `html/`, or it’s not located alongside your `craft` executable, you will also need to override the `@webroot` alias, so it can be defined properly for console commands.
+ウェブルートが `web/`、`public/`、`public_html/`、または、`html/` 以外だったり、Craft の実行ファイルと一緒に配置されていない場合、`@webroot` エイリアスを上書きして、コンソールコマンドに対して適切に定義されるようにする必要があります。
 
 ```php
 'aliases' => [
@@ -86,7 +85,7 @@ If your webroot is something besides `web/`, `public/`, `public_html/`, or `html
 ];
 ```
 
-You can define additional custom aliases using the <config3:aliases> config setting as well. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
+コンフィグ設定 <config3:aliases> を利用して、追加の独自エイリアスを定義することもできます。例えば、アセットボリュームが存在するベース URL とベースパスを定義するエイリアスを作成したいかもしれません。
 
 ```php
 'aliases' => [
@@ -97,17 +96,16 @@ You can define additional custom aliases using the <config3:aliases> config sett
 ],
 ```
 
-[getenv()](http://php.net/manual/en/function.getenv.php) を使用して、エイリアスの定義にセットすることができます。
+これらを利用して、アセットボリュームのベース URL やファイルシステムのパス設定を記入しはじめることができます。例： `@assetBaseUrl/user-photos` と `@assetBasePath/user-photos`
 
-If you’d like, you can set the alias values with environment variables, either from your `.env` file or somewhere in your environment’s configuration:
+必要であれば、`.env` ファイルや環境設定のどこかで、環境変数のエイリアス値をセットできます。
 
 ```bash
 ASSETS_BASE_URL=http://my-project.com/assets
-ASSETS_BASE_PATH=/path/to/web/assets
+ASSETS_BASE_PATH=/path/to/webroot/assets
 ```
 
-::: tip
-[alias()](../dev/functions.html#alias-string) ファンクションに渡すことによって、テンプレート内でエイリアスをパースできます。
+[getenv()](http://php.net/manual/en/function.getenv.php) を利用して、エイリアスの定義にセットできます。
 
 ```php
 'aliases' => [
@@ -117,11 +115,11 @@ ASSETS_BASE_PATH=/path/to/web/assets
 ```
 
 ::: tip
-設定でエイリアスを参照する場合、URL やパスに追加のセグメントを付加することができます。 例えば、`@assetBaseUrl/user-photos` をボリュームのベース URL  にセットできます。 :::
+設定でエイリアスを参照する場合、URL やパスに追加のセグメントを付加できます。例えば、`@assetBaseUrl/user-photos` をボリュームのベース URL  にセットできます。
 :::
 
 ::: tip
-You can parse aliases in your templates by passing them to the [alias()](../dev/functions.html#alias-string) function:
+[alias()](../dev/functions.html#alias-string) ファンクションに渡すことによって、テンプレート内でエイリアスを解析できます。
 
 ```twig
 {{ alias('@assetBaseUrl') }}
@@ -130,31 +128,31 @@ You can parse aliases in your templates by passing them to the [alias()](../dev/
 
 ## URL ルール
 
-`config/routes.php` にカスタムの [URL ルール](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) を定義することができます。 詳細については、[ルーティング](../routing.md) を参照してください。
+`config/routes.php` にカスタムの [URL ルール](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) を定義できます。詳細については、[ルーティング](../routing.md)を参照してください。
 
-## PHP 定数
+## アプリケーション設定
 
-You can customize Craft’s entire [Yii application configuration](https://www.yiiframework.com/doc/guide/2.0/en/structure-applications#application-configurations) from `config/app.php`. Any items returned by that array will get merged into the main application configuration array.
+`config/app.php` から、Craft の [Yii アプリケーション設定](https://www.yiiframework.com/doc/guide/2.0/en/structure-applications#application-configurations)全体をカスタマイズできます。配列として返された項目は、 メインのアプリケーション設定の配列にマージされます。
 
-You can customize Craft’s application configuration from `config/app.php`, such as overriding component configs, or adding new modules and components.
+`config/app.web.php` および `config/app.console.php` から、ウェブリクエストやコンソールリクエストだけに対して Craft のアプリケーション設定をカスタマイズすることもできます。
 
 ::: tip
-Craft’s default configuration is defined by [src/config/app.php](https://github.com/craftcms/cms/blob/master/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/master/src/config/app.web.php), and [app.console.php](https://github.com/craftcms/cms/blob/master/src/config/app.console.php). Refer to these files when you need to override existing application components.
+Craft のデフォルト設定は [src/config/app.php](https://github.com/craftcms/cms/blob/master/src/config/app.php)、[app.web.php](https://github.com/craftcms/cms/blob/master/src/config/app.web.php)、および、[app.console.php](https://github.com/craftcms/cms/blob/master/src/config/app.console.php) によって定義されています。既存のアプリケーションコンポーネントを上書きする必要がある場合、これらのファイルを参照してください。
 :::
 
-### Cache Component
+### Cache コンポーネント
 
-By default, Craft will store data caches in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) by overriding the `cache` application component from `config/app.php`.
+デフォルトでは、Craft は `storage/runtime/cache/` フォルダにデータキャッシュを蓄積します。`config/app.php` で `cache` アプリケーションコンポーネントを上書きすることによって、代替の[キャッシュストレージ](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage)を使うよう Craft を設定できます。
 
-#### Database Cache Example
+#### データベースキャッシュの実例
 
-If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a CLI command for convenience:
+データキャッシュをデータベースに保存したい場合、はじめに <yii2:yii\caching\DbCache::$cacheTable> で指定された `cache` テーブルを作成する必要があります。Craft は便利な CLI コマンドを提供します。
 
 ```bash
 php craft setup/db-cache-table
 ```
 
-Once that’s done, you can set your `cache` application component to use <craft3:craft\cache\DbCache>.
+それが完了したら、`cache` アプリケーションコンポーネントで <craft3:craft\cache\DbCache> を使うように設定できます。
 
 ```php
 <?php
@@ -166,10 +164,10 @@ return [
 ```
 
 ::: tip
-If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather than <craft3:craft\cache\DbCache>, you can safely switch to the latter if you remove your `cache` table’s `dateCreated`, `dateUpdated`, and `uid` columns.
+もし <craft3:craft\cache\DbCache> ではなく <yii2:yii\caching\DbCache> を使うよう既に Craft を設定している場合、`cache` テーブルの `dateCreated`、`dateUpdated`、および、 `uid` カラムを削除すれば、安全に切り替えることができます。
 :::
 
-#### APC Example
+#### APC の実例
 
 ```php
 <?php
@@ -185,7 +183,7 @@ return [
 ```
 
 
-#### Memcached Example
+#### Memcached の実例
 
 ```php
 <?php
@@ -214,9 +212,9 @@ return [
 ];
 ```
 
-#### Redis Example
+#### Redis の実例
 
-To use Redis cache storage, you will first need to install the [yii2-redis](https://github.com/yiisoft/yii2-redis) library. Then configure Craft’s `cache` component to use it:
+Redis キャッシュストレージを利用するには、あらかじめ [yii2-redis](https://github.com/yiisoft/yii2-redis) ライブラリをインストールする必要があります。次に、Craft の `cache` コンポーネントでそれを利用するよう設定します。
 
 ```php
 <?php
@@ -237,9 +235,9 @@ return [
 ];
 ```
 
-### Database Component
+### Database コンポーネント
 
-If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component:
+Craft の[データベース接続設定](db-settings.md)で可能な範囲を超えるデータベース接続の設定が必要な場合、`db` コンポーネントを上書きすることによって可能になります。
 
 ```php
 <?php
@@ -279,11 +277,11 @@ return [
 ];
 ```
 
-### Session Component
+### Session コンポーネント
 
-In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location.
+負荷分散された環境では、デフォルトの `session` コンポーネントを上書きして、PHP セッションデータを一元管理された場所に保存したいかもしれません。
 
-#### Redis Example
+#### Redis の実例
 
 ```php
 <?php
@@ -309,9 +307,9 @@ return [
 ];
 ```
 
-#### Database Example
+#### データベースの実例
 
-First, you must create the database table that will store PHP’s sessions. You can do that by running the `craft setup/php-session-table` console command from your project’s root folder.
+はじめに、PHP セッションを保存するデータベーステーブルを作成しなければなりません。プロジェクトのルートフォルダから `craft setup/php-session-table` コンソールコマンドを実行すればできます。
 
 ```php
 <?php
@@ -335,12 +333,12 @@ return [
 ```
 
 ::: tip
-The `session` component **must** be configured with the <craft3:craft\behaviors\SessionBehavior> behavior, which adds methods to the component that the system relies on.
+`session` コンポーネントは、システムが依存するコンポーネントにメソッドを加える <craft3:craft\behaviors\SessionBehavior> ビヘイビアで設定**しなければなりません**。
 :::
 
-### Mailer Component
+### Mailer コンポーネント
 
-To override the `mailer` component config (which is responsible for sending emails), do this in `config/app.php`:
+（メール送信を担っている）`mailer` コンポーネントの設定を上書きするために、`config/app.php` を調整します。
 
 ```php
 <?php
@@ -370,12 +368,12 @@ return [
 ```
 
 ::: tip
-Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing email settings from Settings → Email.
+`config/app.php` から Mailer コンポーネントに行った変更は、「設定 > メール」からメールの設定をテストする際には反映されません。
 :::
 
-### Queue Component
+### Queue コンポーネント
 
-Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default Craft will use a [custom queue driver](craft3:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md), but you can switch to a different driver by overriding Craft’s `queue` component from `config/app.php`:
+Craft のジョブキューは [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue) によって動いています。デフォルトでは、Craft はエクステンションの [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md) をベースとする [custom queue driver](craft3:craft\queue\Queue) を使用しますが、`config/app.php` から Craft の `queue` コンポーネントを上書きすることによって、別のドライバに切り替えることができます。
 
 ```php
 <?php
@@ -390,67 +388,67 @@ return [
 ];
 ```
 
-Available drivers are listed in the [Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide).
+利用可能なドライバは、[Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide) に記載されています。
 
 ::: warning
-Only drivers that implement <craft3:craft\queue\QueueInterface> will be visible within the control panel.
+<craft3:craft\queue\QueueInterface> を実装しているドライバだけがコントロールパネル内に表示されます。
 :::
 
 ::: tip
-If your queue driver supplies its own worker, set the <config3:runQueueAutomatically> config setting to `false` in `config/general.php`.
+キュードライバが独自のワーカーを提供している場合、`config/general.php` の <config3:runQueueAutomatically> コンフィグ設定を `false` に設定します。
 :::
 
-### Modules
+### モジュール
 
-You can register and bootstrap custom Yii modules into the application from `config/app.php` as well. See [How to Build a Module](../extend/module-guide.md) for more info.
+`config/app.php` からカスタム Yii モジュールを登録し bootstrap することもできます。詳細については、[モジュールの構築方法](../extend/module-guide.md)を参照してください。
 
-## アプリケーション設定
+## 環境設定
 
-Some settings should be defined on a per-environment basis. For example, when developing locally, you may want your site’s base URL to be `http://my-project.test`, but on production it should be `https://my-project.com`.
+いくつかの設定は、それぞれの環境ごとに定義する必要があります。例えば、ローカル環境での開発時はサイトのベース URL を `http://my-project.test`、本番環境では `https://my-project.com` にしたいかもしれません。
 
-### Control Panel Settings
+### コントロールパネルの設定
 
-Some settings in the control panel can be set to environment variables (like the ones defined in your `.env` file):
+コントロールパネル内のいくつかの設定は、（`.env` ファイルで定義されているような）環境変数にセットできます。
 
-- General Settings
-  - **System Name**
-- Sites
-  - **Base URL**
-- Sections
-  - **Preview Target URIs**
-- Asset Volumes
-  - **Base URL**
-  - **File System Path** (Local)
-- Email
-  - **System Email Address**
-  - **Sender Name**
-  - **HTML Email Template**
-  - **Username** (Gmail and SMTP)
-  - **Password** (Gmail and SMTP)
-  - **Host Name** (SMTP)
-  - **Port** (Port)
+- 一般
+   - **システム名**
+- サイト
+   - **ペース URL**
+- セクション
+   - **プレビューターゲットの URI**
+- アセットボリューム
+   - **ペース URL**
+   - **ファイルシステムのパス**（ローカル）
+- メール
+   - **システムのメールアドレス**
+   - **差出人の名前**
+   - **HTML メールのテンプレート**
+   - **ユーザー名**（Gmail、および、SMTP）
+   - **パスワード**（Gmail、および、SMTP）
+   - **ホスト名**（SMTP）
+   - **ポート**（Port）
 
-To set these settings to an environment variable, type `$` followed by the environment variable’s name.
+これらの設定を環境変数にセットするには、環境変数の名前を `$` に続けて入力してください。
 
-![例えば、アセットボリュームが存在するベース URL とベースパスを定義するエイリアスを作成したいかもしれません。](../images/volume-base-url-setting.jpg)
+![ボリュームのベース URL 設定](../images/volume-base-url-setting.jpg)
 
-Only the environment variable’s name will be stored in your database or project config, so this is a great way to set setting values that may change per-environment, or contain sensitive information.
+環境変数の名前だけがデータベース、または、プロジェクトコンフィグ内に保存さるため、環境ごとに変更したり機密性の高い情報を含む設定値をセットするのにとても良い方法です。
 
 ::: tip
-Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](../extend/environmental-settings.md) to learn how.
+プラグインも同様に、それぞれの設定内で環境設定やエイリアスのためのサポートを追加できます。どのようにするかを知るには、[環境設定](../extend/environmental-settings.md)を参照してください。
 :::
 
-#### Using Aliases in Control Panel Settings
+#### コントロールパネルの設定内でのエイリアスの利用
 
-You can configure core settings like system file paths and the active environment by defining certain [PHP constants]() in `web/index.php`.
+（URL やファイルステムのパスを保存する）これらの設定のいくつかは[エイリアス](README.md#aliases)に設定することもできます。ベース URL やパスを環境変数内に保存し、追加のセグメントを付加したい場合に役立ちます。
 
-For example, you can define a `ROOT_URL` environment variable that is set to the root URL of your site:
+例えば、サイトのルート URL にセットされる環境変数 `ROOT_URL` を定義できます。
 
 ```bash
 # -- .env --
 ROOT_URL="http://my-project.test"
 ```
-Then create a `@rootUrl` alias that references it:
+次に、それを参照するエイリアス `@rootUrl` を作成します。
 
 ```php
 // -- config/general.php --
@@ -459,11 +457,11 @@ Then create a `@rootUrl` alias that references it:
 ],
 ```
 
-Then you could go into your User Photos volume’s settings (for example) and set its Base URL to `@rootUrl/images/user-photos`.
+これで（例として）ユーザーフォトのボリュームの設定画面に移動し、ベース URL に `@rootUrl/images/user-photos` をセットできます。
 
-### Config Files
+### コンフィグファイル
 
-You can set your [general config settings](config-settings.md), [database connection settings](db-settings.md), and other PHP config files to environment variables using PHP’s [getenv()](http://php.net/manual/en/function.getenv.php) function:
+PHP の [getenv()](http://php.net/manual/en/function.getenv.php) ファンクションを利用して、環境変数を[一般設定](config-settings.md)、[データベース接続設定](db-settings.md)、および、他の PHP 設定ファイルにセットできます。
 
 ```bash
 # -- .env --
@@ -475,9 +473,9 @@ CP_TRIGGER="secret-word"
 'cpTrigger' => getenv('CP_TRIGGER') ?: 'admin',
 ```
 
-#### Multi-Environment Configs
+#### マルチ環境設定
 
-Craft’s PHP config files can optionally define separate config settings for each individual environment.
+Craft の PHP 設定ファイルは、オプションでそれぞれの環境ごとに別々の設定を定義できます。
 
 ```php
 // -- config/general.php --
@@ -499,9 +497,9 @@ return [
 ];
 ```
 
-The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you. Craft will look for the key(s) that match the [CRAFT_ENVIRONMENT](#craft-environment) PHP constant, which should be defined by your `web/index.php` file. (Your server’s hostname will be used as a fallback.)
+Craft がマルチ環境のキーとしてそれを取り扱うことを知るために、ここでは `'*'` キーが必須となりますが、他のキーはあなた次第です。Craft は `web/index.php` ファイルに定義されている PHP 定数  [CRAFT_ENVIRONMENT](#craft-environment) とマッチするキーを探します。（フォールバックとして、サーバーのホスト名が使用されます。）
 
-By default, new Craft 3 projects will define the [CRAFT_ENVIRONMENT](#craft-environment) constant using an environment variable called `ENVIRONMENT`, which is defined in the `.env` file:
+Craft 3 プロジェクトは `.env` ファイルに定義された `ENVIRONMENT` 環境変数を利用して [CRAFT_ENVIRONMENT](#craft-environment) 定数を定義します。
 
 ```bash
 # -- .env --
@@ -513,13 +511,13 @@ ENVIRONMENT="dev"
 define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
 ```
 
-## PHP Constants
+## PHP 定数
 
-Your `web/index.php` file can define certain PHP constants, which Craft’s bootstrap script will check for while loading and configuring Craft.
+`web/index.php` ファイルには、Craft の読み込みと環境設定を行う際に、Craft の起動スクリプトがチェックする PHP 定数を定義できます。
 
 ### `CRAFT_BASE_PATH`
 
-The path to the **base directory** that Craft will look for [config/](../directory-structure.md#config), [templates/](../directory-structure.md#templates), and other directories within by default. (It is assumed to be the parent of the `vendor/` folder by default.)
+Craft がデフォルトで探す [config/](../directory-structure.md#config)、[templates/](../directory-structure.md#templates)、および、他のディレクトリの**ベースディレクトリ**のパス。（デフォルトでは、`vendor/` フォルダの親とみなされます。）
 
 ```php
 // Tell Craft to look for config/, templates/, etc., two levels up from here
@@ -528,7 +526,7 @@ define('CRAFT_BASE_PATH', dirname(__DIR__, 2));
 
 ### `CRAFT_COMPOSER_PATH`
 
-The path to the [composer.json](../directory-structure.md#composer-json) file. (It is assumed to live within the base directory by default.)
+[composer.json](../directory-structure.md#composer-json) ファイルのパス。（デフォルトでは、ベースディレクトリ内に存在するものとします。）
 
 ```php
 define('CRAFT_COMPOSER_PATH', 'path/to/composer.json');
@@ -536,29 +534,29 @@ define('CRAFT_COMPOSER_PATH', 'path/to/composer.json');
 
 ### `CRAFT_CONFIG_PATH`
 
-The path to the [config/](../directory-structure.md#config) folder. (It is assumed to live within the base directory by default.)
+[config/](../directory-structure.md#config) フォルダのパス。（デフォルトでは、ベースディレクトリ内に存在するものとします。）
 
 ### `CRAFT_CONTENT_MIGRATIONS_PATH`
 
-The path to the [migrations/](../directory-structure.md#migrations) folder used to store content migrations. (It is assumed to live within the base directory by default.)
+コンテンツマイグレーションの保管に使用される [migrations/](../directory-structure.md#migrations) フォルダのパス。（デフォルトでは、ベースディレクトリ内に存在するものとします。）
 
 ### `CRAFT_CP`
 
-Dictates whether the current request should be treated as a control panel request.
+現在のリクエストをコントロールパネルのリクエストとして扱うかどうかを指定します。
 
 ```php
 // Tell Craft that this is a control panel request
 define('CRAFT_CP', true);
 ```
 
-If this isn’t defined, Craft will treat the request as a control panel request if either of these are true:
+これが定義されていない場合、Craft は次のいずれかが true であればコントロールパネルのリクエストとして扱います。
 
-- The <config3:baseCpUrl> setting **is** set, and the request URL begins with it (plus the <config3:cpTrigger> setting, if set).
-- The <config3:baseCpUrl> setting **is not** set, and the request URI begins with the <config3:cpTrigger> setting.
+- <config3:baseCpUrl> がセット**されている**、かつ、リクエスト URL がこれではじまる（<config3:cpTrigger> がセットされている場合、それも加えて）。
+- <config3:baseCpUrl> がセット**されていない**、かつ、リクエスト URI が <config3:cpTrigger> ではじまる。
 
 ### `CRAFT_ENVIRONMENT`
 
-The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays. (`$_SERVER['SERVER_NAME']` will be used by default.)
+環境特有の設定配列を定義する際に[マルチ環境設定](../config/README.md#multi-environment-configs)が参照できる環境名。（デフォルトでは `$_SERVER['SERVER_NAME']` が使用されます。）
 
 ```php
 // Set the environment from the ENVIRONMENT env var, or default to 'production'
@@ -567,19 +565,19 @@ define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
 
 ### `CRAFT_EPHEMERAL`
 
-When defined as `true`, Craft will skip file system permission checks and operations that are not available in an environment with ephemeral or read-only storage.
+`true` として定義されている場合、Craft は一時または読み取り専用ストレージのある環境で利用できないファイルシステムのパーミッションチェックや操作をスキップします。
 
 ### `CRAFT_LICENSE_KEY`
 
-Your Craft license key, if for some reason that must be defined by PHP rather than a license key file. (Don’t set this until you have a valid license key.)
+何らかの理由で、ライセンスキーファイルではなく PHP によって定義されなければならい場合の Craft のライセンスキー。（有効なライセンスキーを取得するまで、これをセットしないでください。）
 
 ### `CRAFT_LICENSE_KEY_PATH`
 
-The path that Craft should store its license key file, including its filename. (It will be stored as `license.key` within your [config/](../directory-structure.md#config) folder by default.)
+ファイル名を含めた Craft がライセンスキーファイルを保存するパス。（デフォルトでは、[config/](../directory-structure.md#config) フォルダ内に `license.key` が保存されます。）
 
 ### `CRAFT_LOG_PHP_ERRORS`
 
-Can be set to `false` to prevent Craft from setting PHP’s [log_errors](http://php.net/manual/en/errorfunc.configuration.php#ini.log-errors) setting, leaving it up to whatever’s set in `php.ini`.
+Craft が PHP の [log_errors](http://php.net/manual/en/errorfunc.configuration.php#ini.log-errors) 設定をセットすることを抑制し、`php.ini` 内の設定に任せるよう `false` をセットすることもできます。
 
 ```php
 // Don't send PHP error logs to storage/logs/phperrors.log
@@ -588,7 +586,7 @@ define('CRAFT_LOG_PHP_ERRORS', false);
 
 ### `CRAFT_SITE`
 
-The Site handle or ID that Craft should be serving from this `index.php` file. (Only set this if you have a good reason to. Craft will automatically serve the correct site by inspecting the requested URL, unless this is set.)
+Craft がこの `index.php` ファイルから提供するべき、サイトハンドル、または、サイト ID。（明確な理由がある場合のみ、これをセットしてください。セットされていなければ、Craft はリクエスト URL を調査することで正しいサイトを自動的に配信します。）
 
 ```php
 // Show the German site
@@ -597,22 +595,22 @@ define('CRAFT_SITE', 'de');
 
 ### `CRAFT_STORAGE_PATH`
 
-The path to the [storage/](../directory-structure.md#storage) folder. (It is assumed to live within the base directory by default.)
+[storage/](../directory-structure.md#storage) フォルダのパス。（デフォルトでは、ベースディレクトリ内に存在するものとします。）
 
 ::: tip
-Make sure you set this to a valid folder path, otherwise it will be ignored.
+必ず有効なフォルダパスをセットしてください。そうでなければ、無視されます。
 :::
 
 ### `CRAFT_TEMPLATES_PATH`
 
-The path to the [templates/](../directory-structure.md#templates) folder. (It is assumed to live within the base directory by default.)
+[templates/](../directory-structure.md#templates) フォルダのパス。（デフォルトでは、ベースディレクトリ内に存在するものとします。）
 
 ### `CRAFT_TRANSLATIONS_PATH`
 
-The path to the `translations/` folder. (It is assumed to live within the base directory by default.)
+`translations/` フォルダのパス。（デフォルトでは、ベースディレクトリ内に存在するものとします。）
 
 ### `CRAFT_VENDOR_PATH`
 
-The path to the [vendor/](../directory-structure.md#vendor) folder. (It is assumed to live 4 directories up from the bootstrap script by default.)
+[vendor/](../directory-structure.md#vendor) フォルダのパス。（デフォルトでは、起動スクリプトによって4つのディレクトリが稼働しているものとします。）
 
 

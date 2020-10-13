@@ -50,6 +50,14 @@ export default {
     background-color: #e7c000;
   }
 
+  &.edition {
+    @apply uppercase bg-transparent text-xs tracking-widest leading-none h-auto;
+    border-width: 1px;
+    border-color: var(--text-color);
+    color: var(--text-color);
+    padding: 1px 3px;
+  }
+
   & + & {
     margin-left: 5px;
   }

@@ -44,7 +44,7 @@ If you have a plugin license that isn’t showing up, go to Licenses → Claim L
 
 ### Safeguarding Plugin License Keys
 
-By default your plugin license key will be stored in the database and `project.yaml`. You may, however, move that license key to a custom PHP constant and set the key using the `$VARIABLE_NAME` syntax.
+By default your plugin license key will be stored in the database and the [project config](project-config.md). You may, however, move that license key to a custom PHP constant and set the key using the `$VARIABLE_NAME` syntax.
 
 If you were to create a `MY_PLUGIN_KEY` environment variable, for example, you could then use `$MY_PLUGIN_KEY` in place of the key itself anywhere the plugin license key is required.
 

@@ -6,7 +6,7 @@
   code {
     @apply py-1 px-2 m-0 rounded;
     font-size: 0.8rem;
-    background-color: rgba(27, 31, 35, 0.05);
+    background-color: var(--code-bg-color);
     color: #476582;
 
     .token {
@@ -22,24 +22,26 @@
 
   pre,
   pre[class*="language-"] {
-    @apply py-3 px-4 rounded overflow-auto leading-snug bg-soft;
+    @apply py-3 px-4 rounded overflow-auto leading-snug;
+    background-color: var(--code-bg-color);
 
     code {
       @apply p-0 rounded-none bg-transparent;
     }
   }
 
-  code[class*=language-]::selection,
-  code[class*=language-] ::selection,
-  pre[class*=language-]::selection,
-  pre[class*=language-] ::selection {
-      background: rgba(74, 124, 246, 0.3);
+  code[class*="language-"]::selection,
+  code[class*="language-"] ::selection,
+  pre[class*="language-"]::selection,
+  pre[class*="language-"] ::selection {
+    background: var(--selection-color);
   }
 
   /* make sure fenced code blocks look nice in tips */
   .custom-block {
     div[class*="language-"] {
-      @apply mb-5 bg-soft;
+      @apply mb-5;
+      background-color: var(--code-bg-color);
       margin-top: -0.25rem;
     }
   }
@@ -66,13 +68,14 @@
 }
 
 div[class*="language-"] {
-  @apply relative rounded my-4 bg-soft;
+  @apply relative rounded my-4;
+  background-color: var(--code-bg-color);
 
   .highlight-lines {
-    @apply pt-3 absolute select-none top-0 left-0 w-full leading-snug;
+    @apply pt-3 absolute select-none top-0 left-0 w-full leading-snug z-0;
 
     .highlighted {
-      background-color: rgba(252, 233, 106, 0.3);
+      background-color: var(--code-highlight-color);
     }
   }
 
@@ -138,7 +141,8 @@ div[class*="language-"] {
       z-index: 2;
       width: 3.5rem;
       border-right: 1px solid rgba(0, 0, 0, 66%);
-      @apply absolute top-0 left-0 h-full rounded-tr rounded-bl bg-soft;
+      @apply absolute top-0 left-0 h-full rounded-tr rounded-bl;
+      background-color: var(--code-bg-color);
     }
   }
 }

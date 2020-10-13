@@ -17,7 +17,7 @@ module.exports = {
         delay: 1000,
         options: {
           margin: 24,
-          background: "#f1f5fd",
+          background: "var(--medium-zoom-overlay-color)",
           scrollOffset: 0
         }
       }
@@ -41,6 +41,17 @@ module.exports = {
       {
         type: "danger",
         defaultTitle: ""
+      }
+    ],
+    [
+      "vuepress-plugin-container",
+      {
+        type: "details",
+        before: info =>
+          `<details class="custom-block details">${
+            info ? `<summary>${info}</summary>` : ""
+          }\n`,
+        after: () => "</details>\n"
       }
     ]
   ],
@@ -82,6 +93,7 @@ module.exports = {
     }
   },
   markdown: {
+    extractHeaders: [ 'h2', 'h3', 'h4', 'h5' ],
     anchor: {
       level: [2, 3, 4]
     },

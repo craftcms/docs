@@ -124,10 +124,8 @@ If your site’s front end lives outside of Craft, for example as a Vue or React
 
 You can pass the token via either a query string parameter named after your <config3:tokenParam> config setting, or an `X-Craft-Token` header.
 
-You should also check for a `x-craft-live-preview` query string parameter, which will tell you the request is specifically a Live Preview request within the control panel (as opposed to a full-page preview via the “Share” button). If this is set, then you should include [iframeResizer.contentWindow.min.js](https://raw.github.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js) on the page. That script, provided by the [iFrame Resizer](http://davidjbradshaw.github.io/iframe-resizer/) library, aids in cross-domain preview iframe resizing and maintaining scroll position between page loads. (The full library is also available [on npm](https://www.npmjs.com/package/iframe-resizer).)
-
 ::: tip
-In cases where the preview target’s styles have issues with iFrame Resizer’s document-based sizing—like layouts with dominant `vh`-measured elements—the <config3:previewIframeResizerOptions> config setting lets you override iFrame Resizer’s options or disable it altogether.
+For Live Preview, you should also consider [enabling iFrame Resizer](config3:useIframeResizer) so that Craft can maintain the page scroll position between page loads.
 :::
 
 ## Entry Types
@@ -288,7 +286,7 @@ Entry queries support the following parameters:
 | [limit](#limit)                           | Determines the number of entries that should be returned.                                                                                                                                                                                                                                 |
 | [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the entry that comes immediately after another entry.                                                                                                                                                                                                   |
 | [offset](#offset)                         | Determines how many entries should be skipped in the results.                                                                                                                                                                                                                             |
-| [orderBy](#orderby)                       | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`.)                                                                                                                                                                                     |
+| [orderBy](#orderby)                       | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)                                             |
 | [positionedAfter](#positionedafter)       | Narrows the query results to only entries that are positioned after another entry.                                                                                                                                                                                                        |
 | [positionedBefore](#positionedbefore)     | Narrows the query results to only entries that are positioned before another entry.                                                                                                                                                                                                       |
 | [postDate](#postdate)                     | Narrows the query results based on the entries’ post dates.                                                                                                                                                                                                                               |
@@ -1179,7 +1177,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `orderBy`
 
-Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`.)
+Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
 
 
 

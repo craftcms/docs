@@ -10,9 +10,9 @@
           <div class="pane options">
             <h4 class="heading block">
               {{
-                hasVoted
-                  ? this.$themeConfig.feedback.thanks
-                  : this.$themeConfig.feedback.helpful
+              hasVoted
+              ? this.$themeConfig.feedback.thanks
+              : this.$themeConfig.feedback.helpful
               }}
             </h4>
             <div class="vote-buttons inline-block">
@@ -39,8 +39,7 @@
               :href="getIssueUrl()"
               target="_blank"
               rel="noopener"
-              >{{ this.$themeConfig.feedback.more }}</a
-            >
+            >{{ this.$themeConfig.feedback.more }}</a>
           </div>
         </div>
       </div>
@@ -150,6 +149,7 @@ h4 {
   @apply fill-current text-center mr-3;
   @apply border text-blue;
   transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  border-color: var(--border-color);
 
   &::before {
     @apply absolute z-0 top-0 left-0 bottom-0;
@@ -201,13 +201,13 @@ export default {
     Envelope,
     Reply,
     ColorModeSwitch,
-    PageEdit
+    PageEdit,
   },
   props: ["isDark"],
   data() {
     return {
       vote: null,
-      hasVoted: null
+      hasVoted: null,
     };
   },
   mounted() {
@@ -244,7 +244,7 @@ export default {
     getVoteForPath(path) {
       let votes = this.getStoredVotes();
 
-      let votesForPath = votes.filter(item => {
+      let votesForPath = votes.filter((item) => {
         return item.path === path;
       }, this);
 
@@ -270,12 +270,12 @@ export default {
       return encodeURI(
         `https://github.com/${this.$themeConfig.docsRepo}/issues/new?title=Improve “${this.$page.title}”&body=I have a suggestion for https://craftcms.com/docs${this.$route.fullPath}:\n`
       );
-    }
+    },
   },
   watch: {
     $route() {
       this.refreshState();
-    }
-  }
+    },
+  },
 };
 </script>

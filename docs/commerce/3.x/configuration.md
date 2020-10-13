@@ -79,13 +79,13 @@ This permission lets the user:
 ### Manage taxes
 
 This permission lets the user:
+
 - Create, edit and delete tax zones
 - Create, edit and delete tax categories
-- Create, edit and delete tax zones
 
 ### Manage store settings
 
-This permission lets the user change settings for the commerce.
+This permission lets the user see and edit items in Commerce’s “Store Settings” area.
 
 
 ## General Config
@@ -120,6 +120,8 @@ return [
 ```
 
 Here’s the full list of config settings that Commerce supports:
+
+<!-- BEGIN SETTINGS -->
 
 ## `autoSetNewCartAddresses`
 
@@ -256,3 +258,5 @@ Determines whether the search index should be updated when a cart is saved by a 
 Making this `false` will reduce the number of search index update jobs created, but will also reduce the ability to search carts in the control panel.
 
 Default `true`
+
+<!-- END SETTINGS -->

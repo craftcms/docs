@@ -164,27 +164,32 @@ export default {
 
     const searchParams = [
       {
+        field: "keywords",
+        query: queryString,
+        boost: 8,
+        suggest: false,
+        bool: "or",
+      },
+      {
         field: "title",
         query: queryString,
         boost: 10,
-        suggest: false
+        suggest: false,
+        bool: "or",
       },
       {
         field: "headersStr",
         query: queryString,
         boost: 7,
-        suggest: false
+        suggest: false,
+        bool: "or",
       },
       {
         field: "content",
         query: queryString,
-        suggest: false
-      },
-      {
-        field: "keywords",
-        query: queryString,
-        boost: 8,
-        suggest: false
+        boost: 0,
+        suggest: false,
+        bool: "or",
       }
     ];
     const searchResult1 = await index.search(searchParams, limit);
@@ -266,6 +271,10 @@ function getAdditionalInfo(page, queryString, queryTerms) {
     };
   }
 
+  /**
+   * If our special (and pretty much invisible) keywords include the query string,
+   * return the result using the page title, no slug, and opening sentence.
+   */
   if (page.keywords.includes(query)) {
     return {
       headingStr: getFullHeading(page),
@@ -276,6 +285,11 @@ function getAdditionalInfo(page, queryString, queryTerms) {
   }
 
   const match = getMatch(page, query, queryTerms);
+
+  /**
+   * If we can’t match the query string to anything specific, list the result
+   * with only the page heading.
+   */
   if (!match)
     return {
       headingStr: getFullHeading(page),
@@ -284,6 +298,10 @@ function getAdditionalInfo(page, queryString, queryTerms) {
       match: "?"
     };
 
+  /**
+   * If we have a match that’s in a heading, display that heading and return
+   * a link to it without any content snippet.
+   */
   if (match.headerIndex != null) {
     // header match
     return {
@@ -294,7 +312,9 @@ function getAdditionalInfo(page, queryString, queryTerms) {
     };
   }
 
-  // content match
+  /**
+   * Get the index of the nearest preceding header relative to the content match.
+   */
   let headerIndex = _.findLastIndex(
     page.headers || [],
     h => h.charIndex != null && h.charIndex < match.charIndex
@@ -309,6 +329,11 @@ function getAdditionalInfo(page, queryString, queryTerms) {
   };
 }
 
+/**
+ * Return the target heading in the context of its parents. (Like a breadcrumb.)
+ * @param {*} page
+ * @param {*} headerIndex
+ */
 function getFullHeading(page, headerIndex) {
   if (headerIndex == null) return page.title;
   const headersPath = [];
@@ -322,7 +347,7 @@ function getFullHeading(page, headerIndex) {
     );
     if (headerIndex === -1) headerIndex = null;
   }
-  return headersPath.map(h => h.title).join(" > ");
+  return headersPath.map(h => h.title).join(" → ");
 }
 
 function getMatch(page, query, terms) {

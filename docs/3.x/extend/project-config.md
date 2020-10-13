@@ -218,15 +218,15 @@ You can add, update, and remove items from the project config from your plugin�
 
 Consider this scenario:
 
-1. Your plugin is updated on Environment A, which includes a new migration that makes a change to the project config.
-3. The updated `composer.lock` and `project.yaml` is committed to Git.
-4. The Git commit is pulled into Environment B, where Craft must now run the new plugin migration _and_ sync `project.yaml` changes.
+1. Your plugin is updated in a development environment, which includes a new migration that makes a change to the project config.
+3. The updated `composer.lock` and project config YAML files are committed to Git.
+4. The Git commit is pulled into the production environment, where Craft must now run the new plugin migration _and_ apply the changes in the project config YAML files.
 
-When new plugin migrations are pending _and_ `project.yaml` changes are pending, Craft will run migrations first and then sync the `project.yaml` changes.
+When new migrations _and_ project config YAML changes are both pending, Craft will first run the migrations, then apply the project config YAML changes.
 
-If your plugin migration were to make the same project config changes again on Environment B, those changes will conflict with the pending changes in `project.yaml`.
+If your plugin migration were to make the same project config changes again on Environment B, those changes will conflict with the pending project config YAML changes.
 
-To avoid this, always check your plugin’s schema version _in `project.yaml`_ before making project config changes. (You do that by passing `true` as the second argument when calling [ProjectConfig::get()](craft3:craft\services\ProjectConfig::get()).)
+To avoid this, always check your plugin’s schema version _in the YAML file_ before making project config changes. (You do that by passing `true` as the second argument when calling [ProjectConfig::get()](craft3:craft\services\ProjectConfig::get()).)
 
 ```php
 public function safeUp()

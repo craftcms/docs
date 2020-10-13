@@ -23,9 +23,11 @@ module.exports = options => ({
 
       for (const h of $page.headers || []) {
         const titlePlaintext = $page._context.markdown.renderInline(h.title);
-        h.charIndex = plaintext.indexOf(titlePlaintext);
+        // find the position of the header within the plain-text content
+        h.charIndex = plaintext.indexOf('# ' + titlePlaintext);
         if (h.charIndex === -1) h.charIndex = null;
       }
+
       $page.headersStr = $page.headers
         ? $page.headers.map(h => h.title).join(" ")
         : null;

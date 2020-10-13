@@ -9,6 +9,7 @@
   h5,
   h6 {
     @apply font-medium;
+    color: var(--heading-color);
 
     &:hover .header-anchor {
       @apply opacity-100;
@@ -33,6 +34,7 @@
 
   h2 {
     @apply text-2xl pb-1 border-b;
+    border-color: var(--border-color);
 
     code {
       @apply text-lg;
@@ -72,7 +74,7 @@
   }
 
   ::selection {
-    background: rgba(74, 124, 246, 0.3);
+    background: var(--selection-color);
   }
 
   p,
@@ -133,6 +135,10 @@
 
     dd {
       width: calc(100% - 9rem);
+    }
+
+    code {
+      background: #dadfe3;
     }
   }
 
@@ -206,6 +212,7 @@
   th,
   td {
     @apply px-4 py-2 border;
+    border-color: var(--border-color);
   }
 
   div.table {

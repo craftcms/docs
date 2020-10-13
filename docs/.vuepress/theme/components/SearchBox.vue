@@ -6,7 +6,7 @@
       :value="query"
       :class="{ focused: focused }"
       :placeholder="placeholder"
-      class="bg-soft rounded-md w-full px-5 py-2 text-sm"
+      class="rounded-md w-full px-5 py-2 text-sm"
       autocomplete="off"
       spellcheck="false"
       @input="query = $event.target.value"
@@ -27,9 +27,7 @@
           v-if="!$activeSet && shouldShowSetTitle(s, i)"
           class="suggestion-doc-set"
           :class="{ first: shouldShowSetTitle(s, i) && i === 0 }"
-        >
-          {{ s.docSetTitle }}
-        </div>
+        >{{ s.docSetTitle }}</div>
         <div
           class="suggestion"
           :class="{
@@ -93,7 +91,7 @@ export default {
       focusIndex: 0,
       maxSuggestions: 10,
       suggestions: null,
-      hotkeys: ["s", "/"]
+      hotkeys: ["s", "/"],
     };
   },
   computed: {
@@ -103,7 +101,7 @@ export default {
         .trim()
         .toLowerCase()
         .split(/[^\p{L}]+/iu)
-        .filter(t => t);
+        .filter((t) => t);
       return result;
     },
     showSuggestions() {
@@ -123,12 +121,12 @@ export default {
         this.$site.themeConfig.searchPlaceholder ||
         ""
       );
-    }
+    },
   },
   watch: {
     query() {
       this.getSuggestions();
-    }
+    },
   },
   mounted() {
     searchService.buildIndex(this.$site.pages);
@@ -142,7 +140,7 @@ export default {
       if (!this.queryTerms.length) return str;
       // safely use HTML lines in result
       str = this.escapeHtml(str.trim());
-      return str.replace(new RegExp(this.query, "gi"), match => {
+      return str.replace(new RegExp(this.query, "gi"), (match) => {
         return `<mark>${match}</mark>`;
       });
     },
@@ -236,12 +234,18 @@ export default {
         !previousSuggestion ||
         previousSuggestion.docSetTitle !== suggestion.docSetTitle
       );
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="postcss">
+.search-box {
+  input {
+    background-color: var(--search-bg-color);
+  }
+}
+
 .suggestions {
   @apply bg-white w-full absolute z-20 rounded list-none;
   box-shadow: 0 20px 55px rgba(0, 0, 0, 0.3);

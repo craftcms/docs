@@ -66,6 +66,24 @@ class Product extends Element
 }
 ```
 
+### Registration
+
+Register your element type using the [EVENT_REGISTER_ELEMENT_TYPES](craft3:craft\services\Elements::EVENT_REGISTER_ELEMENT_TYPES) event from your plugin or module’s `init()` method:
+
+```php
+use mynamespace\elements\Product;
+use craft\events\RegisterComponentTypesEvent;
+use craft\services\Elements;
+use yii\base\Event;
+
+Event::on(Elements::class,
+    Elements::EVENT_REGISTER_ELEMENT_TYPES,
+    function(RegisterComponentTypesEvent $event) {
+        $event->types[] = Product::class;
+    }
+);
+```
+
 ### Database Table
 
 There will be things your elements need to store about themselves that don’t fit into the columns in the `elements` database table. So you’ll need to create a new table to hold that info.
@@ -315,7 +333,9 @@ If you want your element type to support custom fields, you will also need to cr
 {% import '_includes/forms' as forms %}
 
 {{ forms.fieldLayoutDesignerField({
-    fieldLayout: craft.app.fields.getLayoutByType('ns\\prefix\\elements\\MyElementType'),
+    fieldLayout: craft.app.fields.getLayoutByType(
+        'ns\\prefix\\elements\\MyElementType'
+    ),
 }) }}
 ```
 

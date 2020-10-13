@@ -9,7 +9,7 @@ If you’re upgrading from Commerce 1, see the [Changes in Commerce 2](https://c
 Before you begin, make sure that:
 
 1. You’ve reviewed the [changes in Commerce 3](https://github.com/craftcms/commerce/blob/master/CHANGELOG.md#300---2020-01-28)
-2. Your site’s running at least **Craft 3.4** and **the latest version of Commerce 2** (2.2.19)
+2. Your site’s running at least **Craft 3.4** and **the latest version of Commerce 2** (2.2.22)
 3. Your **database is backed up** in case everything goes horribly wrong
 
 Once you’ve completed these steps, you’re ready continue.
@@ -89,6 +89,7 @@ Use the table below to update each breaking change in your Twig templates.
 | `craft.commerce.primaryPaymentCurrency`   | `craft.commerce.paymentCurrencies.primaryPaymentCurrency`           |
 | `craft.commerce.statesArray`              | `craft.commerce.states.allStatesAsList`                             |
 | `craft.commerce.states.allStatesAsList`   | `craft.commerce.states.getAllEnabledStatesAsListGroupedByCountryId` |
+| `currentUser.customerFieldHandle`         | `craft.commerce.customers.customer` |
 
 ## Form Action Changes
 
@@ -175,3 +176,21 @@ Event::on(
     }
 );
 ```
+
+## Current Customer
+
+The Customer field on Craft’s [`currentUser`](/3.x/dev/global-variables.md#currentuser) (i.e. `currentUser.customerFieldHandle`, where `customerFieldHandle` is the field handle you chose) was removed in Commerce 3. Retrieving the current customer can now be done consistently through the customers service:
+
+::: code
+```twig
+// gets the customer active in the current session
+{% set customer = craft.commerce.customers.customer %}
+```
+
+```php
+// gets the customer active in the current session
+$customer = \craft\commerce\Plugin::getInstance()
+    ->getCustomers()
+    ->customer;
+```
+:::

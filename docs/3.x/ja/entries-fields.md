@@ -7,18 +7,18 @@
 エントリフィールドの設定は、次の通りです。
 
 - **ソース** – フィールドが、どのエントリ（または、他のエントリインデックスソース）からエントリを関連付けられるか。
-- **リミット** – フィールドと一度に関連付けできるエントリ数の上限（デフォルトは無制限です） (Default is no limit.)
-- **選択ラベル** – フィールドの選択ボタンのラベルに使用されます
+- **リミット** – フィールドと一度に関連付けできるエントリ数の上限。（デフォルトは無制限です）
+- **選択ラベル** – フィールドの選択ボタンのラベルに利用されます。
 
 ### マルチサイト設定
 
-マルチサイトがインストールされている場合、次の設定も有効になります。 （「高度」のトグルボタンで表示されます）
+マルチサイトがインストールされている場合、次の設定も有効になります。（「高度」のトグルボタンで表示されます）
 
-- **特定のサイトから エントリ を関連付けますか?** – 特定のサイトのエントリとの関連付けのみを許可するかどうか。
+- **特定のサイトから エントリ を関連付けますか？** – 特定のサイトのエントリとの関連付けのみを許可するかどうか。
 
-  有効にすると、サイトを選択するための新しい設定が表示されます。
+   有効にすると、サイトを選択するための新しい設定が表示されます。
 
-  無効にすると、関連付けられたエントリは常に現在のサイトから取得されます。
+   無効にすると、関連付けられたエントリは常に現在のサイトから取得されます。
 
 - **サイトごとにリレーションを管理** – それぞれのサイトが関連付けられたエントリの独自のセットを取得するかどうか。
 
@@ -26,7 +26,7 @@
 
 エントリフィールドには、現在関連付けられているすべてのエントリのリストと、新しいエントリを追加するためのボタンがあります。
 
-「エントリを追加」ボタンをクリックすると、すでに追加されているエントリの検索や選択ができるモーダルウィンドウが表示されます。 このモーダルから新しいエントリを作るには、「新しいエントリの入力」ボタンをクリックします。
+「エントリを追加」ボタンをクリックすると、すでに追加されているエントリの検索や選択ができるモーダルウィンドウが表示されます。このモーダルから新しいエントリを作るには、「新しいエントリの入力」ボタンをクリックします。
 
 ### インラインのエントリ編集
 
@@ -36,24 +36,25 @@
 
 ### エントリフィールドによるエレメントの照会
 
-エントリフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、エントリフィールドのデータに基づいた結果をフィルタできます。
+エントリフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを利用して、エントリフィールドのデータに基づいた結果をフィルタできます。
 
 利用可能な値には、次のものが含まれます。
 
-| 値                                                              | 取得するエレメント                                                |
-| -------------------------------------------------------------- | -------------------------------------------------------- |
-| `':empty:'`                                                    | 関連付けられたエントリを持たない。                                        |
-| `':notempty:'`                                                 | 少なくとも1つの関連付けられたエントリを持つ。                                  |
-| `100`                                                          | that are related to the entry with an ID of 100.         |
-| `[100, 200]`                                                   | that are related to an entry with an ID of 100 or 200.   |
-| `['and', 100, 200]`                                            | that are related to the entries with IDs of 100 and 200. |
-| an [Entry](craft3:craft\elements\Entry) object               | that are related to the entry.                           |
-| an [EntryQuery](craft3:craft\elements\db\EntryQuery) object | that are related to any of the resulting entries.        |
+| 値 | 取得するエレメント
+| - | -
+| `':empty:'` | 関連付けられたエントリを持たない。
+| `':notempty:'` | 少なくとも1つの関連付けられたエントリを持つ。
+| `100` | ID が 100 のエントリが関連付けられている。
+| `[100, 200]` | ID が 100 または 200 のエントリが関連付けられている。
+| `['and', 100, 200]` | ID が 100 と 200 のエントリが関連付けられている。
+| [Entry](craft3:craft\elements\Entry) オブジェクト | エントリに関連付けられている。
+| [EntryQuery](craft3:craft\elements\db\EntryQuery) オブジェクト | 結果のエントリのいずれかに関連付けられている。
 
 ```twig
-{# Fetch entries with a related entry #}
-{% set entries = craft.entries()
-    .myFieldHandle(':notempty:')
+{# Fetch artwork entries that are related to `artist` #}
+{% set works = craft.entries()
+    .section('artwork')
+    .myFieldHandle(artist)
     .all() %}
 ```
 
@@ -65,7 +66,7 @@
 {% set query = entry.myFieldHandle %}
 ```
 
-これは、所定のフィールドで関連付けられたすべてのエントリを出力するよう定義された[エレメントクエリ](entries.md#querying-entries)を提供します。
+これは、所定のフィールドで関連付けられたすべてのエントリを出力するよう定義された[エントリクエリ](entries.md#querying-entries)を提供します。
 
 関連付けられたすべてのエントリをループするには、[all()](craft3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
 
@@ -97,7 +98,7 @@
 {% endif %}
 ```
 
-エントリクエリで[パラメータ](entries.md#parameters)をセットすることもできます。 例えば、`news` セクションに含まれるエントリだけを取得するには、[section](entries.md#section) パラメータをセットしてください。
+エントリクエリで[パラメータ](entries.md#parameters)をセットすることもできます。例えば、`news` セクションに含まれるエントリだけを取得するには、[section](entries.md#section) パラメータをセットしてください。
 
 ```twig
 {% set relatedEntries = clone(entry.myFieldHandle)
@@ -106,14 +107,14 @@
 ```
 
 ::: tip
-It’s always a good idea to clone the entry query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
+パラメータを調整する前に [clone()](./dev/functions.md#clone) ファンクションを利用してエントリクエリのクローンを作成するのは、とても良いアイデアです。それによって、テンプレートの後半でパラメータが予期しない結果をもたらすことはありません。
 :::
 
-### Saving Entries Fields in Entry Forms
+### 投稿フォームでエントリフィールドを保存
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain an Entries field, you will need to submit your field value as a list of entry IDs, in the order you want them to be related.
+エントリフィールドを含む必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、フィールド値をエントリ ID のリストとして、関連付ける順番で送信する必要があります。
 
-For example, you could create a list of checkboxes for each of the possible relations:
+例えば、可能なリレーションごとにチェックボックスのリストを作成できます。
 
 ```twig
 {# Include a hidden input first so Craft knows to update the existing value
@@ -148,10 +149,10 @@ For example, you could create a list of checkboxes for each of the possible rela
 </ul>
 ```
 
-You could then make the checkbox list sortable, so users have control over the order of related entries.
+チェックボックスのリストをソート可能にすれば、ユーザーが関連付けられたエントリの順序をコントロールできるようになります。
 
 ## 関連項目
 
 * [エントリクエリ](entries.md#querying-entries)
 * <craft3:craft\elements\Entry>
-* [リレーション](relations.md)
+* [Relations](relations.md)

@@ -14,25 +14,14 @@ Craft は、ウェブ上でさらなる独自のデジタル体験を創造す�
 
 ## 技術仕様
 
-Craft は [Yii 2](https://www.yiiframework.com/) をベースとするセルフホスティング型の PHP 7 アプリケーションです。 コンテンツストレージとして MySQL および PostgreSQL に接続できます。 テンプレートエンジンに [Twig](https://twig.symfony.com) を備えています。
+Craft は [Yii 2](https://www.yiiframework.com/) をベースとするセルフホスティング型の PHP 7 アプリケーションです。コンテンツストレージとして MySQL および PostgreSQL に接続できます。テンプレートエンジンに [Twig](https://twig.symfony.com) を備えています。
 
-## 人気のリソース
+## ダイビング
 
-- **[Documentation](https://craftcms.com/docs/3.x/)** – 公式ドキュメントを読んでください。
-- **[Guides](https://craftcms.com/guides)** – 公式ガイドに従ってください。
-- **[#craftcms](https://twitter.com/hashtag/craftcms)** – Craft に関する最新ツイートをみてください。
-- **[Discord](https://craftcms.com/discord)** – コミュニティとの出会ってください。
-- **[Stack Exchange](http://craftcms.stackexchange.com/)** – お互いに助け合ってください。
-- **[CraftQuest](https://craftquest.io/)** – 無制限のビデオレッスンやコースを見てください。
-- **[Craft Link List](http://craftlinklist.com/)** – 事情通でいてください。
-- **[nystudio107 Blog](https://nystudio107.com/blog)** – Craft やモダンなウェブ開発について学んでください。
+Craft CMS を初めて使う方は、[チュートリアル](/getting-started-tutorial/)からはじめると良いでしょう。
 
-## 打ち込む
+Craft のコンテンツモデリングがどのように機能するのか詳しく知るには、[エントリ](entries.md) および [フィールド](fields.md)を読んでください。
 
-Craft のコンテンツモデリングがどのように機能するのか詳しく知るには、[セクションとエントリ](entries.md) および [フィールド](fields.md)を読んでください。
-
-Craft をインストールする準備ができたら、[サーバー要件](requirements.md) および [インストールガイド](installation.md)を読んでください。
+インストールする前に、[サーバー要件](requirements.md) および [インストールガイド](installation.md)をチェックしてください。
 
 最後に、 サイトまたはアプリケーションのフロントエンドを構築する準備が整ったら[フロントエンド開発](dev/README.md)セクションを読んでください。
-
-Finally, read the [Front-End Development](dev/README.md) section when you’re ready to start building out the front-end of your site or application.

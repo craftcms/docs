@@ -1,9 +1,9 @@
 # RSS フィード
 
-次のテンプレートは、あなたのサイトで RSS 2.0 フィードを提供するために使用できます。 `siteDescription` と呼ばれるフィールドを持つ、`globals` というハンドルの[グローバルのセット](../../globals.md)があることを前提としています。
+次のテンプレートは、あなたのサイトで RSS 2.0 フィードを提供するために使用できます。`siteDescription` と呼ばれるフィールドを持つ、`globals` というハンドルの[グローバル設定](../../globals.md)があることを前提としています。
 
 ::: tip
-ファイル拡張子 `.rss` で終わるテンプレートとして保存すると、Craft はそれを MIME タイプ `application/rss+xml` で配信します。 :::
+ファイル拡張子 `.rss` で終わるテンプレートとして保存すると、Craft はそれを MIME タイプ `application/rss+xml` で配信します。
 :::
 
 ```twig
@@ -12,7 +12,7 @@
     <channel>
         <title>{{ siteName }}</title>
         <link>{{ siteUrl }}</link>
-        <atom:link href="{{ craft.app.request.absoluteUrl }}" rel="self" type="application/rss+xml" />
+        <atom:link href="{{ url(craft.app.request.pathInfo) }}" rel="self" type="application/rss+xml" />
         <description>{{ globals.siteDescription }}</description>
         <language>en-us</language>
         <pubDate>{{ now|rss }}</pubDate>

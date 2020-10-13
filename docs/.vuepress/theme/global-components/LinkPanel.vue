@@ -2,7 +2,7 @@
   <div class="link-panel-wrapper">
     <RouterLink v-if="isInternal" class="link-panel" :to="link" :class="{ 'has-icon': icon }">
       <div v-if="icon" class="link-panel-icon">
-        <img :src="icon" alt />
+        <img :src="icon" class="no-zoom" alt />
       </div>
 
       <span class="title">{{ title }}</span>
@@ -21,7 +21,7 @@
       :class="{ 'has-icon': icon }"
     >
       <div v-if="icon" class="link-panel-icon">
-        <img :src="icon" alt />
+        <img :src="icon" class="no-zoom" alt />
       </div>
 
       <span class="title">{{ title }}</span>
@@ -40,7 +40,7 @@
 }
 
 .link-panel {
-  @apply rounded border block w-full p-4 ;
+  @apply rounded border block w-full p-4;
   transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
 
   .title {
@@ -89,7 +89,7 @@ import Octocat from "../icons/Octocat";
 export default {
   props: ["icon", "title", "link", "subtitle", "repo"],
   components: {
-    Octocat
+    Octocat,
   },
   computed: {
     isNonHttpURI() {
@@ -116,7 +116,7 @@ export default {
         return null;
       }
       return this.isBlankTarget ? "noopener noreferrer" : "";
-    }
-  }
+    },
+  },
 };
 </script>

@@ -18,7 +18,7 @@ module.exports = {
         {
           title: "Introduction",
           collapsable: false,
-          children: ["editions"]
+          children: ["", "editions"]
         },
         {
           title: "Installing Craft Commerce",

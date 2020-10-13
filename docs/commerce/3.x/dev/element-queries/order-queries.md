@@ -154,17 +154,20 @@ Possible values include:
 
 ::: code
 ```twig
-{# Fetch the current user's orders #}
+{# Fetch the current customer’s orders #}
+{% set currentCustomer = craft.commerce.customers.customer %}
 {% set orders = craft.orders()
-    .customer(currentUser.customerFieldHandle)
+    .customer(currentCustomer)
     .all() %}
 ```
 
 ```php
-// Fetch the current user's orders
-$user = Craft::$app->user->getIdentity();
+// Fetch the current customer’s orders
+$currentCustomer = \craft\commerce\Plugin::getInstance()
+    ->getCustomers()
+    ->customer;
 $orders = \craft\commerce\elements\Order::find()
-    ->customer($user->customerFieldHandle)
+    ->customer($currentCustomer)
     ->all();
 ```
 :::
@@ -184,17 +187,20 @@ Possible values include:
 
 ::: code
 ```twig
-{# Fetch the current user's orders #}
+{# Fetch the current customer’s orders #}
+{% set currentCustomerId = craft.commerce.customers.customer.id %}
 {% set orders = craft.orders()
-    .customerId(currentUser.customerFieldHandle.id)
+    .customerId(currentCustomerId)
     .all() %}
 ```
 
 ```php
-// Fetch the current user's orders
-$user = Craft::$app->user->getIdentity();
+// Fetch the current customer’s orders
+$currentCustomerId = \craft\commerce\Plugin::getInstance()
+    ->getCustomers()
+    ->customerId;
 $orders = \craft\commerce\elements\Order::find()
-    ->customerId($user->customerFieldHandle->id)
+    ->customerId($currentCustomerId)
     ->all();
 ```
 :::

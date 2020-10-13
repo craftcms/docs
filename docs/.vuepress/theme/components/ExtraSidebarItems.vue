@@ -28,13 +28,15 @@
 <style lang="postcss">
 .sidebar-extra-top {
   @apply border-t mt-12 pt-3 mx-4;
+  border-color: var(--border-color);
 }
 
 .sidebar-extra-item {
   @apply flex px-4 py-2 items-center text-base text-slate leading-none font-medium;
+  color: var(--sidebar-link-color);
 
   &:hover {
-    @apply text-blue;
+    color: var(--sidebar-active-link-color);
   }
 }
 

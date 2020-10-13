@@ -77,7 +77,7 @@ module.exports = {
           title: "Testing Craft",
           collapsable: false,
           children: [
-            "testing-craft/getting-started",
+            "testing-craft/setup",
             "testing-craft/testing-tips",
             "testing-craft/plugins-and-modules",
             "testing-craft/fixtures",
@@ -131,7 +131,7 @@ module.exports = {
           toggleChildren: ["searching", "reference-tags", "gc"]
         },
         {
-          title: "Element Types",
+          title: "エレメントタイプ",
           collapsable: false,
           children: [
             "entries",
@@ -166,7 +166,7 @@ module.exports = {
           ]
         },
         {
-          title: "Front End Development",
+          title: "フロントエンド開発",
           collapsable: false,
           children: [
             "image-transforms",
@@ -177,7 +177,7 @@ module.exports = {
           ]
         },
         {
-          title: "Twig Templating",
+          title: "Twig テンプレート",
           collapsable: false,
           children: [
             "dev/twig-primer",
@@ -189,7 +189,7 @@ module.exports = {
           ]
         },
         {
-          title: "Templating Examples",
+          title: "テンプレート実例",
           collapsable: false,
           children: [
             "dev/examples/integrating-disqus",

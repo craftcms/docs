@@ -201,9 +201,13 @@ Tip: The `{% cache %}` tag will detect if there are any ungenerated [image trans
 
 ## `css`
 
-The `{% css %}` tag can be used to register a `<style>` tag in the page’s `<head>`.
+The `{% css %}` tag can be used to register a CSS file or a CSS code block.
 
-```css
+```twig
+{# Register a CSS file #}
+{% css "/assets/css/style.css" %}
+
+{# Register a CSS code block #}
 {% css %}
     .content {
         color: {{ entry.textColor }};
@@ -212,12 +216,7 @@ The `{% css %}` tag can be used to register a `<style>` tag in the page’s `<he
 ```
 
 ::: tip
-The tag calls <yii2:yii\web\View::registerCss()> under the hood, which can also be accessed via the global `view` variable.
-
-```twig
-{% set styles = ".content { color: #{entry.textColor}; }" %}
-{% do view.registerCss(styles) %}
-```
+To register a CSS file, the URL must end in `.css`.
 :::
 
 ### Parameters
@@ -336,9 +335,13 @@ By default, `at endBody` will be used.
 
 ## `js`
 
-The `{% js %}` tag can be used to register a `<script>` tag on the page.
+The `{% js %}` tag can be used to register a JavaScript file, or a JavaScript code block.
 
-```javascript
+```twig
+{# Register a JS file #}
+{% js "/assets/js/script.js" %}
+
+{# Register a JS code block #}
 {% js %}
     _gaq.push([
         "_trackEvent",
@@ -349,12 +352,7 @@ The `{% js %}` tag can be used to register a `<script>` tag on the page.
 ```
 
 ::: tip
-The tag calls <yii2:yii\web\View::registerJs()> under the hood, which can also be accessed via the global `view` variable.
-
-```twig
-{% set script = '_gaq.push(["_trackEvent", "Search", "'~searchTerm|e('js')~'"' %}
-{% do view.registerJs(script) %}
-```
+To register a JavaScript file, the URL must end in `.js`.
 :::
 
 ### Parameters
@@ -381,6 +379,22 @@ By default, `at endBody` will be used.
 
 ::: warning
 Setting the position to `on load` or `on ready` will cause Craft to load its internal copy of jQuery onto the page (even if the template is already including its own copy), so you should probably avoid using them in front-end templates.
+:::
+
+#### `with`
+
+Any HTML attributes that should be included on the `<script>` tag.
+
+```twig
+{% js "/assets/js/script.js" with {
+    defer: true
+} %}
+```
+
+Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
+
+::: warning
+The `with` parameter is only available when you specify a JavaScript file; it won’t have any effect with a JavaScript code block.
 :::
 
 ## `namespace`
@@ -435,7 +449,6 @@ This tag works identically to the [namespace](filters.md#namespace) filter, exce
 
 This tag helps create a hierarchical navigation menu for entries in a [Structure section](../entries.md#section-types) or a [Category Group](../categories.md).
 
-
 ```twig
 {% set entries = craft.entries.section('pages').all() %}
 
@@ -452,6 +465,10 @@ This tag helps create a hierarchical navigation menu for entries in a [Structure
     {% endnav %}
 </ul>
 ```
+
+::: tip
+The `{% nav %}` tag should _only_ be used in times when you want to show elements in a hierarchical list. If you want to show elements in a flat list, use a [for](https://twig.symfony.com/doc/tags/for.html) tag instead.
+:::
 
 ### Parameters
 
@@ -471,12 +488,12 @@ The `{% nav %}` tag requires elements to be queried in a specific (hierarchical)
 
 ### Showing children
 
-To show the children of the current element in the loop, use the `{% children %}` tag. When Craft gets to this tag, it will loop through the element’s children, applying the same template defined between your `{% nav %}` and `{% endnav %}` tags to those children.
+The `{% children %}` tag will output the children of the current element in the loop, using the same template defined between your `{% nav %}` and `{% endnav %}` tags.
 
-If you want to show some additional HTML surrounding the children, but only in the event that the element actually has children, wrap your `{% children %}` tag with `{% ifchildren %}` and `{% endifchildren %}` tags.
+If you want to show some additional HTML surrounding the children, but only in the event that the element actually has children, wrap your `{% children %}` tag with `{% ifchildren %}` and `{% endifchildren %}` tags.
 
-::: tip
-The `{% nav %}` tag should _only_ be used in times when you want to show elements in a hierarchy, and you want the DOM to express that hierarchy. If you want to loop through elements linearly, use Twig’s [for](https://twig.symfony.com/doc/tags/for.html) tag instead.
+::: warning
+Don’t add any special logic between your `{% ifchildren %}` and `{% endifchildren %}` tags. These are special tags that are used to identify the raw HTML that should be output surrounding nested nav items. They don’t get parsed in the order you’d expect.
 :::
 
 ## `paginate`
@@ -560,19 +577,19 @@ Following your `{% paginate %}` tag, you will need to loop through this page’s
 
 The `pageInfo` variable (or whatever you’ve called it) provides the following properties and methods:
 
-* **`pageInfo.first`** – The offset of the first result on the current page.
-* **`pageInfo.last`** – The offset of the last result on the current page.
+* **`pageInfo.first`** – The offset of the first result on the current page.
+* **`pageInfo.last`** – The offset of the last result on the current page.
 * **`pageInfo.total`** – The total number of results across all pages
-* **`pageInfo.currentPage`** – The current page number.
-* **`pageInfo.totalPages`** – The total number of pages.
+* **`pageInfo.currentPage`** – The current page number.
+* **`pageInfo.totalPages`** – The total number of pages.
 * **`pageInfo.prevUrl`** – The URL to the previous page, or `null` if you’re on the first page.
-* **`pageInfo.nextUrl`** – The URL to the next page, or `null` if you’re on the last page.
-* **`pageInfo.firstUrl`** – The URL to the first page.
-* **`pageInfo.lastUrl`** – The URL to the last page.
-* **`pageInfo.getPageUrl( page )`** – Returns the URL to a given page number, or `null` if the page doesn’t exist.
+* **`pageInfo.nextUrl`** – The URL to the next page, or `null` if you’re on the last page.
+* **`pageInfo.firstUrl`** – The URL to the first page.
+* **`pageInfo.lastUrl`** – The URL to the last page.
+* **`pageInfo.getPageUrl( page )`** – Returns the URL to a given page number, or `null` if the page doesn’t exist.
 * **`pageInfo.getPrevUrls( [dist] )`** – Returns an array of URLs to the previous pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
-* **`pageInfo.getNextUrls( [dist] )`** – Returns an array of URLs to the next pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
-* **`pageInfo.getRangeUrls( start, end )`** – Returns an array of URLs to pages in a given range of page numbers, with keys set to the page numbers.
+* **`pageInfo.getNextUrls( [dist] )`** – Returns an array of URLs to the next pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
+* **`pageInfo.getRangeUrls( start, end )`** – Returns an array of URLs to pages in a given range of page numbers, with keys set to the page numbers.
 
 
 ### Navigation examples
@@ -734,7 +751,7 @@ Take this template for example, which is running different template code dependi
 {% endif %}
 ```
 
-Since all of the conditionals are evaluating the same thing – `matrixBlock.type` – we can simplify that code using a `{% switch %}` tag instead:
+Since all of the conditionals are evaluating the same thing – `matrixBlock.type` – we can simplify that code using a `{% switch %}` tag instead:
 
 ```twig
 {% switch matrixBlock.type %}

@@ -1,29 +1,5 @@
 # Commands
 
-## `apply`
-
-Ensures that the machine exists, and applies any changes in its config file to it.
-
-```
-nitro apply [<options>]
-```
-
-##### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-`--skip-hosts`
-: Skips updating the `hosts` file.
-
-##### Example
-
-```
-$ nitro apply
-There are 2 mounted directories and 1 new mount(s) in the config file.
-Applied changes from nitro.yaml.
-```
-
 ## `add`
 
 Adds a new site to the machine.
@@ -734,6 +710,9 @@ nitro ssh [<options>]
 `-m`, `--machine`
 : The name of the machine to use. Defaults to `nitro-dev`.
 
+::: warning
+If you’re using Git Bash in Windows, you’ll need to use `winpty nitro ssh` to get an interactive prompt.
+:::
 
 ## `start`
 

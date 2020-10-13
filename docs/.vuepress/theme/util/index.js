@@ -290,11 +290,15 @@ export function resolveExtraSidebarConfig(
 }
 
 /**
+ * Translate page content headers into sidebar items.
  * @param { Page } page
  * @returns { SidebarGroup }
  */
 export function resolveHeaders(page) {
-  const headers = groupHeaders(page.headers || []);
+  const headers = groupHeaders(
+    page.headers || [],
+    page.frontmatter.sidebarLevel
+  );
   return [
     {
       type: "group",
@@ -312,30 +316,28 @@ export function resolveHeaders(page) {
   ];
 }
 
-export function groupHeaders(headers) {
-  let h3count = 0;
-
-  // group h3s under h2
+/**
+ * Collect headers grouped by specified target level. (Default is `h2`.)
+ * @param {*} headers
+ * @param {*} level
+ */
+export function groupHeaders(headers, level = 2) {
+  // normalize objects
   headers = headers.map(h => Object.assign({}, h));
-  let lastH2;
-  headers.forEach(h => {
-    if (h.level === 3) {
-      h3count++;
-    }
+  let lastHeadingAtLevel;
 
-    if (h.level === 2) {
-      lastH2 = h;
-    } else if (lastH2) {
-      (lastH2.children || (lastH2.children = [])).push(h);
+  // collect children of target level
+  headers.forEach(h => {
+    if (h.level === level) {
+      lastHeadingAtLevel = h;
+    } else if (lastHeadingAtLevel) {
+      (lastHeadingAtLevel.children || (lastHeadingAtLevel.children = [])).push(
+        h
+      );
     }
   });
 
-  // if we have no h2’s but lots of h3’s, return the h3’s instead
-  // if (!lastH2 && h3count) {
-  //   return headers.filter(h => h.level === 3);
-  // }
-
-  return headers.filter(h => h.level === 2);
+  return headers.filter(h => h.level === level);
 }
 
 export function resolveNavLinkItem(linkItem) {
@@ -384,9 +386,10 @@ export function resolveMatchingConfig(
     };
   }
 
-  // remove version from regular path
-  const modifiedRegularPath = getRegularPathWithoutVersion(
+  // get a relative path with the docset or version
+  const modifiedRegularPath = getRelativeRegularPath(
     regularPath,
+    activeSet,
     activeVersion
   );
 
@@ -407,21 +410,26 @@ export function resolveMatchingConfig(
 }
 
 /**
- * Returns the regular path without its version segment.
+ * Returns the regular path without its version and docset segments.
  *
  * @param {*} regularPath
+ * @param {*} activeSet
  * @param {*} activeVersion
  */
-export function getRegularPathWithoutVersion(regularPath, activeVersion) {
-  // get ready to strip the version from the path for comparison
+export function getRelativeRegularPath(regularPath, activeSet, activeVersion) {
   let modifiedRegularPath = regularPath;
 
-  if (activeVersion) {
-    // strip from modified path
-    modifiedRegularPath = modifiedRegularPath.replace(activeVersion, "");
+  if (activeSet) {
+    // strip docset baseDir from path
+    modifiedRegularPath = fixDoubleSlashes(modifiedRegularPath.replace(activeSet.baseDir, ""));
   }
 
-  return fixDoubleSlashes(modifiedRegularPath);
+  if (activeVersion) {
+    // strip version segment from path
+    modifiedRegularPath = fixDoubleSlashes(modifiedRegularPath.replace(activeVersion, ""));
+  }
+
+  return modifiedRegularPath;
 }
 
 /**
@@ -543,6 +551,7 @@ export function getDocSetDefaultVersionByHandle(docSets, handle) {}
  * @param {*} activeVersion
  * @param {*} targetVersion
  * @param {*} pages
+ * @param {*} localOnly
  */
 export function getAlternateVersion(
   page,
@@ -569,7 +578,8 @@ export function getAlternateVersion(
 
     // return the updated path if it exists for a page
     if (updatedPage) {
-      return updatedPage.relativePath;
+      const anchorHash = getAnchorHash(updatedLocation);
+      return updatedPage.relativePath + (anchorHash ? "#" + anchorHash : "");
     }
   }
 
@@ -587,12 +597,30 @@ export function getPageWithRelativePath(pages, relativePath) {
     const sitePage = pages[i];
 
     // make sure the specified update actually exists
-    if (sitePage.relativePath == relativePath) {
+    if (sitePage.relativePath == getPathWithoutHash(relativePath)) {
       return sitePage;
     }
   }
 
   return null;
+}
+
+function getPathWithoutHash(path) {
+  if (path.includes("#")) {
+    let parts = path.split("#");
+    return parts[0];
+  }
+
+  return path;
+}
+
+function getAnchorHash(path) {
+  if (path.includes("#")) {
+    let parts = path.split("#");
+    return parts[1];
+  }
+
+  return false;
 }
 
 /**
@@ -701,7 +729,8 @@ export function getSameContentForVersion(
 
   if (alternatePath) {
     const targetPage = getPageWithRelativePath(pages, alternatePath);
-    targetPath = "/" + targetPage.path;
+    const anchorHash = getAnchorHash(alternatePath);
+    targetPath = "/" + targetPage.path + (anchorHash ? "#" + anchorHash : "");
   } else if (strict) {
     return false;
   }

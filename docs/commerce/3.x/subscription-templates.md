@@ -25,7 +25,7 @@ This example creates a form for each available plan, posting the selection to th
         <input type="hidden" name="planUid" value="{{ plan.uid|hash }}">
         {{ csrfInput() }}
 
-        <h4>{{ plane.name }}</h4>
+        <h4>{{ plan.name }}</h4>
 
         {% set paymentSources = craft.commerce.
             getPaymentSources().

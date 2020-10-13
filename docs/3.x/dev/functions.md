@@ -15,6 +15,7 @@ Function | Description
 [className](#classname) | Returns the fully qualified class name of a given object.
 [clone](#clone) | Clones an object.
 [combine](#combine) | Combines two arrays into one.
+[configure](#configure) | Sets attributes on the passed object.
 [constant](https://twig.symfony.com/doc/2.x/functions/constant.html) | Returns the constant value for a given string.
 [create](#create) | Creates a new object.
 [csrfInput](#csrfinput) | Returns a hidden CSRF token input.
@@ -164,6 +165,35 @@ Combines two arrays into one, using the first array to define the keys, and the 
 {% set arr2 = ['foo', 'bar', 'baz'] %}
 {% set arr3 = combine(arr1, arr2) %}
 {# arr3 will now be `{a: 'foo', b: 'bar', c: 'baz'}` #}
+```
+
+## `configure`
+
+Passes through the behavior of the `Craft::configure()` method inherited from [`Yii::configure()`](yii2:yii\BaseYii::configure()). It’s similar to [`create`](#create) in that it applies attributes to an object, but instead of creating new instances it accepts an existing object and modifies it.
+
+```twig
+{# Modify an `EntryQuery` object set up by a relational field: #}
+{% set myRelatedEntries = configure(entry.myEntriesField, {
+    section: 'blog'
+}).all() %}
+```
+
+It can also be used instead of the [`merge`](https://twig.symfony.com/doc/2.x/filters/merge.html) filter:
+
+```twig
+{% set myObject = { one: 'Original' } %}
+{# With `merge`: #}
+{% set myObject = myObject | merge({ one: 'Overridden', two: 'New' }) %}
+
+{# With `configure`: #}
+{% do configure(myObject, { one: 'Overridden', two: 'New' }) %}
+```
+
+It could technically even be used to set a model or element’s attributes, even though that’s not a great idea:
+
+```twig
+{% do configure(entry, { title: 'New Title' }) %}
+{% do craft.app.elements.saveElement(entry) %}
 ```
 
 ## `constant`
@@ -522,6 +552,10 @@ If `text` is included in the attributes argument, its value will be HTML-encoded
 
 If `html` is included in the attributes argument (and `text` isn’t), its value will be set as the inner HTML of the tag (without getting HTML-encoded).
 
+::: warning
+Be sure you trust any input you provide via `html` since it could be an XSS (cross-site scripting) attack vector. It’s safer to use `text` wherever possible.
+:::
+
 ```twig
 {{ tag('div', {
     html: 'Hello<br>world'
@@ -530,6 +564,19 @@ If `html` is included in the attributes argument (and `text` isn’t), its value
 ```
 
 All other keys passed to the second argument will be set as attributes on the tag, using <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
+
+If an attribute is set to `true`, it will be added without a value.
+
+```twig
+{{ tag('input', {
+    id: "foo",
+    name: "bar",
+    required: true
+}) }}
+{# Output: <input id="foo" name="bar" required> #}
+```
+
+Any attribute set to `null` or `false` will be omitted.
 
 ## `url`
 
