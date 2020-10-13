@@ -22,7 +22,7 @@ Added plugins-dev to config file.
 Apply changes from config? [yes]
 Mounting /path/to/project to nitro-dev
 Adding site example.test to nitro-dev
-Applied changes from /Users/vin/.nitro/nitro-dev.yaml
+Applied changes from /Users/oli/.nitro/nitro-dev.yaml
 Editing your hosts file
 Password: ******
 ```
@@ -129,7 +129,7 @@ To add a new mount, follow these steps:
 
    ```yaml
    mounts:
-     - source: /Users/vin/dev
+     - source: /Users/oli/dev
        dest: /home/ubuntu/sites
    ```
 

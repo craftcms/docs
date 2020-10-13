@@ -24,12 +24,12 @@ At some point you’ll want to show a visitor their cart contents. There’s a m
                 <tr>
                     <td>{{ item.description }} <small>({{ item.sku }})</small></td>
                     <td>{{ item.qty }}</td>
-                    <td>{{ item.salePrice|commerceCurrency(cart.currency) }}</td>
+                    <td>{{ item.salePriceAsCurrency }}</td>
                 </tr>
             {% endfor %}
             <tr>
                 <td colspan="3">
-                    Cart Total: {{ cart.totalPrice|commerceCurrency(cart.currency) }}
+                    Cart Total: {{ cart.totalPriceAsCurrency }}
                 </td>
             </tr>
         </tbody>

@@ -33,7 +33,7 @@ Added plugins-dev to config file.
 Apply changes from config? [yes]
 Mounting /path/to/project to nitro-dev
 Adding site example.test to nitro-dev
-Applied changes from /Users/vin/.nitro/nitro-dev.yaml
+Applied changes from /Users/oli/.nitro/nitro-dev.yaml
 Editing your hosts file
 Password: ******
 ```
@@ -103,6 +103,42 @@ sites:
 ------
 ```
 
+## `create`
+
+Sets up a new Craft installation without requiring PHP or Composer to be installed locally.
+
+You’ll be prompted for a project name and hostname, and Nitro will...
+
+- Create a new directory with the supplied project name.
+- Download Craft CMS.
+- Establish a project `.env` with environment, app ID, security key, and primary site URL settings.
+- Update its configuration to include the new site.
+- Apply the configuration changes to the relevant machine.
+
+#### Options
+
+`-m`, `--machine`
+: The name of the machine to use. Defaults to `nitro-dev`.
+
+#### Example
+
+```
+$ nitro create
+What is the name of the project? example
+Enter the hostname [example] example.test
+Downloading Craft CMS...
+Creating project folder example...
+Added example.test to config file
+Apply changes from config? [yes]
+Mounting ~/sites/example to nitro-dev
+Adding site example.test to nitro-dev
+Applied changes from /Users/oli/.nitro/nitro-dev.yaml
+```
+
+::: tip
+[Add your database settings](usage.md#connecting-to-the-database) to `.env` before running the installer.
+:::
+
 ## `db add`
 
 Creates a new database on a database engine in a machine.
@@ -155,23 +191,28 @@ Select database engine [1]
   4 - project-one
 Select database to backup? [1]
 Created backup "all-dbs-200519_100730.sql", downloading...
-Backup completed and stored in "/Users/vin/.nitro/backups/nitro-dev/postgres_11_5432/all-dbs-200519_100730.sql"
+Backup completed and stored in "/Users/oli/.nitro/backups/nitro-dev/postgres_11_5432/all-dbs-200519_100730.sql"
 ```
 
 ## `db import`
 
-Imports an SQL file into a database engine in a machine. You’ll be prompted with a list of running database engines
-(MySQL and PostgreSQL) that should receive the import.
+Imports a database dump into a machine’s database engine. You’ll be prompted with a list of running database engines
+(MySQL and PostgreSQL) and the database name that should receive the import.
+
+The SQL file to be imported may be plain text, or compressed with zip or gzip.
 
 ```
 nitro db import <file> [<options>]
 ```
 
+::: tip
+For uncompressed files, the command will detect and automatically select the database engine.
+:::
+
 #### Options
 
 `-m`, `--machine`
 : The name of the machine to use. Defaults to `nitro-dev`.
-
 
 #### Example
 
@@ -563,9 +604,12 @@ nitro php iniget [<options>] <setting>
 `-m`, `--machine`
 : The name of the machine to use. Defaults to `nitro-dev`.
 
+`--silent`
+: Hides any output when the command is run.
+
 ## `php iniset`
 
-Changes PHP ini settings from the command line. This command will prompt for the setting to change, including e.g. `max_execution_time`, `max_input_vars`, `max_input_time`, `max_file_upload`, `memory_limit`, `upload_max_filesize`.
+Changes PHP ini settings from the command line. This command will prompt for the setting to change, including e.g. `display_errors`, `max_execution_time`, `max_input_vars`, `max_input_time`, `max_file_upload`, `memory_limit`, `upload_max_filesize`.
 
 ```
 nitro php iniset [<options>] <setting> <value>
@@ -792,6 +836,9 @@ nitro xoff [<options>]
 `--php-version`
 : The PHP version for which Xdebug should be disabled. If omitted, the machine’s default PHP version is used.
 
+`--silent`
+: Hides any output when the command is run.
+
 ## `xdebug on` / `xon`
 
 Enables Xdebug, which is installed and disabled by default on each machine.
@@ -807,5 +854,8 @@ nitro xon [<options>]
 
 `--php-version`
 : The PHP version for which Xdebug should be enabled. If omitted, the machine’s default PHP version is used.
+
+`--silent`
+: Hides any output when the command is run.
 
 Ensures Xdebug is installed for PHP and enables it.
