@@ -131,6 +131,10 @@ If that comes back with the following JSON response, then your GraphQL API is up
 {"data":{"ping":"pong"}}
 ```
 
+::: tip
+You may also want to limit allowed GraphQL origins using the [`allowedGraphqlOrigins`](config3:allowedGraphqlOrigins) setting, as Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses.
+:::
+
 ### Define Your Schemas
 
 Once you’ve created a GraphQL API endpoint, you need to tell Craft which content should be available from it. (No content is available by default.) You do that by defining a **Schema**.
