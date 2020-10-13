@@ -74,7 +74,8 @@ module.exports = {
             "extensibility",
             "purchasables",
             "adjusters",
-            "shipping-methods"
+            "shipping-methods",
+            "console-commands",
           ]
         },
         {

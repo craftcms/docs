@@ -75,24 +75,24 @@ Examples:
 
 {{ 10|commerceCurrency(baseCurrency) }} {# Output: $10.00 #}
 
-{{ order.totalPrice|commerceCurrency(
+{{ order.outstandingBalance|commerceCurrency(
     paymentCurrency,
     convert=true
 ) }} {# Output: A$13.00 #}
 
-{{ order.totalPrice|commerceCurrency(
+{{ order.outstandingBalance|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=false
 ) }} {# Output: 13 #}
 
-{{ order.totalPrice|commerceCurrency(
+{{ order.outstandingBalance|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=true
 ) }} {# Output: A$13.00 #}
 
-{{ order.totalPrice|commerceCurrency(
+{{ order.outstandingBalance|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=true,
