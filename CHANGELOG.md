@@ -6,6 +6,10 @@ Theme and significant content changes will be documented in this file.
 ### Added
 - Documented using `craft\services\ProjectConfig::$writeToYaml` to disable writing project config YAML files.
 
+## 2020-10-12
+### Added
+- Documented new `nitro create` command and `--silent` flag for `xon`, `xoff`, and `php iniset` commands.
+
 ## 2020-10-02
 ### Fixed
 - Fixed an issue that may have led to incorrect search result headings when a heading match was preceded by the search keyword in body content.

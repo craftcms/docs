@@ -6,6 +6,10 @@ Craft Commerce allows you to accept payments in multiple currencies. All product
 
 To set up payment currencies for your store, navigate to Commerce → Store Settings → Payment Currencies in the control panel.
 
+::: warning
+You can only change your primary currency before orders have been completed. Changing the primary currency will delete any existing carts.
+:::
+
 ## Example
 
 If you selected US Dollars (USD) as your store’s primary currency, you would enter all products, sales, discounts and orders in that currency.
@@ -75,24 +79,24 @@ Examples:
 
 {{ 10|commerceCurrency(baseCurrency) }} {# Output: $10.00 #}
 
-{{ order.totalPrice|commerceCurrency(
+{{ order.outstandingBalance|commerceCurrency(
     paymentCurrency,
     convert=true
 ) }} {# Output: A$13.00 #}
 
-{{ order.totalPrice|commerceCurrency(
+{{ order.outstandingBalance|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=false
 ) }} {# Output: 13 #}
 
-{{ order.totalPrice|commerceCurrency(
+{{ order.outstandingBalance|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=true
 ) }} {# Output: A$13.00 #}
 
-{{ order.totalPrice|commerceCurrency(
+{{ order.outstandingBalance|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=true,
