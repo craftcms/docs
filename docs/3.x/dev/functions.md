@@ -250,6 +250,25 @@ You can optionally set additional attributes on the tag by passing an `options` 
 }) }}
 ```
 
+## `dataUrl`
+
+Outputs an asset or file as a base64-encoded [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). You can pass it an <craft3:craft\elements\Asset> object or a file path (optionally using an [alias](../config/#aliases)).
+
+```twig
+{# Asset object `myLogoAsset` #}
+<img src="{{ dataUrl(myLogoAsset) }}" />
+
+{# File path, optionally using an alias #}
+<img src="{{ dataUrl('@webroot/images/my-logo-asset.svg') }}" />
+
+{# Output: <img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMCIgdmd(...)" /> #}
+```
+
+The `dataUrl()` function has the following arguments:
+
+* **`file`** - The asset or path to a file to be encoded.
+* **`mimeType`** - Optional MIME type. If omitted, the file’s MIME type will be determined automatically.
+
 ## `endBody`
 
 Outputs any scripts and styles that were registered for the “end body” position. It should be placed right before your `</body>` tag.
