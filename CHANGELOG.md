@@ -5,7 +5,7 @@ Theme and significant content changes will be documented in this file.
 ## 2020-10-13
 ### Added
 - Added Commerce 3 Console Commands page with new `commerce/reset-data` command.
-- Documented using `craft\services\ProjectConfig::$writeToYaml` to disable writing project config YAML files.
+- Documented using `craft\services\ProjectConfig::$writeYamlAutomatically` to disable writing project config YAML files automatically.
 
 ## 2020-10-12
 ### Added
