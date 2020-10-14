@@ -21,6 +21,7 @@ Function | Description
 [csrfInput](#csrfinput) | Returns a hidden CSRF token input.
 [cpUrl](#cpurl) | Generates a control panel URL.
 [cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html) | Cycles on an array of values.
+[dataUrl](#dataurl) | Outputs an asset or file as a base64-encoded data URL.
 [date](https://twig.symfony.com/doc/2.x/functions/date.html) | Creates a date.
 [dump](https://twig.symfony.com/doc/2.x/functions/dump.html) | Dumps information about a variable.
 [endBody](#endbody) | Outputs scripts and styles that were registered for the “end body” position.
@@ -36,6 +37,7 @@ Function | Description
 [max](https://twig.symfony.com/doc/2.x/functions/max.html) | Returns the biggest value in an array.
 [min](https://twig.symfony.com/doc/2.x/functions/min.html) | Returns the lowest value in an array.
 [parent](https://twig.symfony.com/doc/2.x/functions/parent.html) | Returns the parent block’s output.
+[parseEnv](#parseenv) | Checks for an environment variable and/or an alias (`@aliasName`) and returns the referenced value.
 [plugin](#plugin) | Returns a plugin instance by its handle.
 [random](https://twig.symfony.com/doc/2.x/functions/random.html) | Returns a random value.
 [range](https://twig.symfony.com/doc/2.x/functions/range.html) | Returns a list containing an arithmetic progression of integers.
