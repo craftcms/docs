@@ -322,10 +322,6 @@ Executes a GraphQL query against the full schema.
 {% endfor %}
 ```
 
-## `parseEnv`
-
-Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
-
 ## `head`
 
 Outputs any scripts and styles that were registered for the “head” position. It should be placed right before your `</head>` tag.
@@ -388,6 +384,10 @@ This works identically to Twig’s core [`max`](https://twig.symfony.com/doc/2.x
 Returns the lowest value in an array.
 
 This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) function.
+
+## `parseEnv`
+
+Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
 
 ## `plugin`
 
