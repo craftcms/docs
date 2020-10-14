@@ -109,7 +109,7 @@ With either approach, you can also use `shippingAddressSameAsBilling` or `billin
 
 If you provide a `shippingAddress` or `shippingAddressId`, for example, and the order’s billing address should be identical, you can simply pass `billingAddressSameAsShipping` with a value of `1` rather than supplying the same `billingAddress` or `billingAddressId`.
 
-TODO: what if I provide conflicting settings?
+If you provide conflicting information for an address, like passing `shippingAddress` fields *and* `shippingAddressId` for example, Commerce will ignore the `shippingAddress` information and honor `shippingAddressId`.
 
 ::: warning
 Commerce doesn’t require an order to have a shipping address, but providing one is important for the tax and shipping engine to calculate more accurate options and costs.
