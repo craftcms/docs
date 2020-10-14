@@ -866,6 +866,12 @@ public function getCpEditUrl()
 }
 ```
 
+::: tip
+Any `getIsEditable()` element providing a `getCpEditUrl()` may use the `/admin/edit/{id|uid}` redirect provided by Craft’s [EditController](craft3:craft\controllers\EditController).
+
+A request to `foo.test/admin/edit/1`, for example, redirects to the initial Craft user’s edit page if that account still exists and the logged-in user has permission to edit it.
+:::
+
 ## Relations
 
 ### Relation Field
