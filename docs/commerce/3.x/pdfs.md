@@ -74,11 +74,11 @@ It’s best to keep whatever you can in the template itself. Styles, for example
 
 The `@font-face` declaration is supported, but you’ll want to ensure the font itself is rendered properly. (Dompdf attempts to cache font files from remote URLs and can use local fonts in a special folder which requires more setup.)
 
-The [`pdfAllowRemoteImages`](config-settings.md#pdfallowremoteimages) setting is `false` by default, so any images in your templates must be provided with `data:` URLs:
+The [`pdfAllowRemoteImages`](config-settings.md#pdfallowremoteimages) setting is `false` by default, so any images in your templates must be provided with [data URLs](/3.x/dev/functions.md#dataurl):
 
 ```twig
 {# base64-encoded SVG image works when `pdfAllowRemoteImages` is `false` #}
-<img width="75" height="75" src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHdpZHRoPSIxMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTg5LjYgMGM1LjggMCAxMC41IDQuNyAxMC40IDEwLjV2NzljMCA1LjgtNC44IDEwLjUtMTAuNSAxMC41aC03OWMtNS44IDAtMTAuNS00LjctMTAuNS0xMC42di03OC45YzAtNS44IDQuNy0xMC41IDEwLjUtMTAuNXptLTE1LjEgNTBoLTQ4Ljh2MTIuOWMwIC45LjMgMS44LjkgMi40LjcuNiAxLjUuOSAyLjQuOWg0Mi4xYy45IDAgMS44LS4zIDIuNC0uOS42LS43LjktMS41LjktMi40em0tMjcuMiA4LjF2Mi43aC04LjF2LTIuN3ptLTEwLjkgMHYyLjdoLTUuNHYtMi43em0zNC41LTI0LjJoLTQyYy0uOSAwLTEuNy4zLTIuNC45LS42LjctLjkgMS41LS45IDIuNHY0LjdoNDguNnYtNC43YzAtLjktLjMtMS44LS45LTIuNC0uNy0uNi0xLjUtLjktMi40LS45eiIgZmlsbD0iI2U1NDIyYiIvPjwvc3ZnPg==" />
+<img width="75" height="75" src="{{ dataUrl('@webroot/images/store-logo.svg') }}>
 ```
 
 Enabling `pdfAllowRemoteImages` will make it possible to utilize image URLs in your templates, but you’ll likely need to experiment with URLs that work for your environment and Dompdf version.
