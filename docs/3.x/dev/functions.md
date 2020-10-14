@@ -440,7 +440,7 @@ You can optionally have the number be zero-padded to a certain length.
 
 ```twig
 {{ now|date('Y') ~ '-' ~ seq('orderNumber:' ~ now|date('Y'), 5) }}
-{# outputs: 2018-00001 #}
+{# Output: 2018-00001 #}
 ```
 
 To view the current number in the sequence without incrementing it, set the `next` argument to `false`.
@@ -599,6 +599,6 @@ The `url()` function has the following arguments:
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
 ```twig
 {{ url('http://my-project.com', 'foo=1', 'https') }}
-{# Outputs: "https://my-project.com?foo=1" #}
+{# Output: "https://my-project.com?foo=1" #}
 ```
 :::
