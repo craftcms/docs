@@ -129,8 +129,8 @@ This creates a form for adding the customer’s first saved address as the `ship
 <form method="post">
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
-    <input type="hidden" name="shippingAddressId" value="{{ address.id }}">
-    <input type="hidden" name="billingAddressSameAsShipping" value="1">
+    {{ hiddenInput('shippingAddressId', address.id) }}
+    {{ hiddenInput('billingAddressSameAsShipping', '1') }}
     <button type="submit">Submit</button>
 </form>
 ```
@@ -145,8 +145,8 @@ The same thing could also be done explicitly setting each address ID:
 <form method="post">
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
-    <input type="hidden" name="shippingAddressId" value="{{ address.id }}">
-    <input type="hidden" name="billingAddressId" value="{{ address.id }}">
+    {{ hiddenInput('shippingAddressId', address.id) }}
+    {{ hiddenInput('billingAddressId', address.id) }}
     <button type="submit">Submit</button>
 </form>
 ```
@@ -164,7 +164,7 @@ This example creates a form for collecting the customer’s name and country, wh
     {{ hiddenInput('cartUpdatedNotice', 'Updated shipping address.') }}
 
     {# You can send a blank string here or omit this form parameter #}
-    <input type="hidden" name="shippingAddressId" value="">
+    {{ hiddenInput('shippingAddressId', '') }}
 
     <input type="text" name="shippingAddress[firstName]" value="">
     <input type="text" name="shippingAddress[lastName]" value="">
@@ -173,7 +173,7 @@ This example creates a form for collecting the customer’s name and country, wh
             <option value="{{ id }}">{{ name }}</option>
         {% endfor %}
     </select>
-    <input type="hidden" name="billingAddressSameAsShipping" value="1">
+    {{ hiddenInput('billingAddressSameAsShipping', '1') }}
 
     <button type="submit">Add to Cart</button>
 </form>
@@ -267,7 +267,7 @@ This example starts a form that could be used to update the shipping address att
     {{ actionInput('commerce/cart/update-cart') }}
     {{ hiddenInput('cartUpdatedNotice', 'Updated addresses.') }}
 
-    <input type="hidden" name="shippingAddress[id]" value="{{ address.id }}">
+    {{ hiddenInput('shippingAddress[id]', address.id) }}
     <input type="text" name="shippingAddress[firstName]" value="{{ address.firstName }}">
     <input type="text" name="shippingAddress[lastName]" value="{{ address.lastName }}">
 
@@ -432,7 +432,7 @@ The form action for deleting a customer address is `commerce/customer-addresses/
     {{ csrfInput() }}
     {{ actionInput('commerce/customer-addresses/delete') }}
     {{ redirectInput('commerce/customer/addresses') }}
-    <input type="hidden" name="id" value="{{ address.id }}"/>
+    {{ hiddenInput('id', address.id) }}
     <button type="submit">Delete</button>
 </form>
 ```

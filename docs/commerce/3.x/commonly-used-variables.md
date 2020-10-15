@@ -111,19 +111,19 @@ Returns all payment gateways available to the customer.
 {% endif %}
 
 {% if craft.commerce.gateways.allFrontEndGateways|length %}
-<form method="post" id="paymentMethod" class="form-inline">
+<form method="post">
+    {{ csrfInput() }}
+    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+    {{ hiddenInput('redirect', 'commerce/checkout/payment') }}
 
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    <input type="hidden" name="redirect" value="commerce/checkout/payment">
-    {{ getCsrfInput() }}
-
-    <label for="">Payment Method</label>
-    <select id="gatewayId" name="gatewayId" class="form-control" >
+    <label for="gatewayId">Payment Method</label>
+    <select id="gatewayId" name="gatewayId" >
         {% for id,name in craft.commerce.gateways.allFrontEndGateways %}
-            <option value="{{ id }}" {% if id == cart.gatewayId %}selected{% endif %}>{{ name }}</option>
+            <option value="{{ id }}"{% if id == cart.gatewayId %} selected{% endif %}>
+                {{- name -}}
+            </option>
         {% endfor %}
     </select>
-
 </form>
 {% endif %}
 ```

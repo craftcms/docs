@@ -22,7 +22,7 @@ The form to add the donation to the cart would look like this:
         {{ csrfInput() }}
         {{ actionInput('commerce/cart/update-cart') }}
         {{ redirectInput('shop/cart') }}
-        <input type="hidden" name="purchasableId" value="{{ donation.id }}">
+        {{ hiddenInput('purchasableId', donation.id) }}
         <input type="text"
             name="options[donationAmount]"
             value=""

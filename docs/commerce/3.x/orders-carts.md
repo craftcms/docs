@@ -76,22 +76,23 @@ This gets a product and creates a form that will add its default variant to the 
 <form method="post">
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
-    <input type="hidden" name="purchasableId" value="{{ variant.id }}">
+    {{ hiddenInput('purchasableId', variant.id) }}
     <button type="submit">Add to Cart</button>
 </form>
 ```
 
 If the product has multiple variants, you could provide a dropdown menu to allow the customer to choose one of them:
 
-```twig{9-13}
+```twig{10-14}
 {% set product = craft.products().one() %}
 
 <form method="post">
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
     {{ redirectInput('shop/cart') }}
-    <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
-    <input type="hidden" name="qty" value="1">
+    {{ hiddenInput('cartUpdatedNotice', 'Added ' ~ product.title ~ ' to the cart.') }}
+    {{ hiddenInput('qty', 1) }}
+
     <select name="purchasableId">
         {% for variant in product.variants %}
             <option value="{{ variant.id }}">{{ variant.sku }}</option>
@@ -117,10 +118,10 @@ You can add multiple purchasables to the cart in a single request using a `purch
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
     {{ redirectInput('shop/cart') }}
-    <input type="hidden" name="cartUpdatedNotice" value="Products added to the cart.">
+    {{ hiddenInput('cartUpdatedNotice', 'Products added to the cart.') }}
     {% for variant in product.variants %}
-        <input type="hidden" name="purchasables[{{ loop.index }}][id]" value="{{ variant.id }}">
-        <input type="hidden" name="purchasables[{{ loop.index }}][qty]" value="1">
+        {{ hiddenInput('purchasables[' ~ loop.index ~ '][id]', variant.id) }}
+        {{ hiddenInput('purchasables[' ~ loop.index ~ '][qty]', 1) }}
     {% endfor %}
     <button type="submit">Add all variants to cart</button>
 </form>
@@ -151,7 +152,7 @@ In this example, we’re providing the customer with an option to include a note
 <form method="post">
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
-    <input type="hidden" name="qty" value="1">
+    {{ hiddenInput('qty', 1) }}
     <input type="text" name="note" value="">
     <select name="options[engraving]">
         <option value="happy-birthday">Happy Birthday</option>
@@ -161,7 +162,7 @@ In this example, we’re providing the customer with an option to include a note
         <option value="yes">Yes Please</option>
         <option value="no">No Thanks</option>
     </select>
-    <input type="hidden" name="purchasableId" value="{{ variant.id }}">
+    {{ hiddenInput('purchasableId', variant.id) }}
     <button type="submit">Add to Cart</button>
 </form>
 ```
@@ -171,8 +172,8 @@ In this example, we’re providing the customer with an option to include a note
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
     {% for variant in product.variants %}
-        <input type="hidden" name="purchasables[{{ loop.index }}][id]" value="{{ variant.id }}">
-        <input type="hidden" name="purchasables[{{ loop.index }}][qty]" value="1">
+        {{ hiddenInput('purchasables[' ~ loop.index ~ '][id]', variant.id) }}
+        {{ hiddenInput('purchasables[' ~ loop.index ~ '][qty]', 1) }}
         <input type="text" name="purchasables[{{ loop.index }}][note]" value="">
         <select name="purchasables[{{ loop.index }}][options][engraving]">
             <option value="happy-birthday">Happy Birthday</option>

@@ -22,10 +22,10 @@ Example:
 
 ```twig
 <form method="post">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    <input type="hidden" name="cartUpdatedNotice" value="Added coupon code.">
-    {{ redirectInput('shop/cart') }}
     {{ csrfInput() }}
+    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+    {{ hiddenInput('cartUpdatedNotice', 'Added coupon code.') }}
+    {{ redirectInput('shop/cart') }}
 
     <input type="text"
        name="couponCode"
