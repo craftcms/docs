@@ -866,6 +866,10 @@ public function getCpEditUrl()
 }
 ```
 
+::: tip
+Elements that are editable (per `getIsEditable()`) and which define a CP Edit URL (via `getCpEditUrl()`) will be accessible from a discoverable `/admin/edit/{id|uid}` URL, which will redirect to their edit page.
+:::
+
 ## Relations
 
 ### Relation Field
