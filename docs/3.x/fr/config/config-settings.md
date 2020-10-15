@@ -350,7 +350,7 @@ Note that drafts *will* be autosaved while Live Preview is open, regardless of t
 Allowed types
 :
 
-[string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+[string](http://php.net/language.types.string), [false](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
 
 Default value
 :
@@ -366,9 +366,9 @@ Defined by
 
 The shell command that Craft should execute to create a database backup.
 
-By default Craft will run `mysqldump` or `pg_dump`, provided that those libraries are in the `$PATH` variable for the system user running the web server.
+When set to `null` (default), Craft will run `mysqldump` or `pg_dump`, provided that those libraries are in the `$PATH` variable for the system user running the web server.
 
-There are several tokens you can use that Craft will swap out at runtime:
+You may provide your own command optionally using several tokens Craft will swap out at runtime:
 
 - `{path}` - the target backup file path
 - `{port}` - the current database port
@@ -990,12 +990,12 @@ Whether the system should run in [Dev Mode](https://craftcms.com/support/dev-mod
 Allowed types
 :
 
-[string](http://php.net/language.types.string)[]
+[string](http://php.net/language.types.string)[], [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
 Default value
 :
 
-`[]`
+`null`
 
 Defined by
 :
@@ -1016,6 +1016,16 @@ Array of plugin handles that should be disabled, regardless of what the project 
     'disabledPlugins' => ['webhooks'],
 ],
 ```
+
+This can also be set to `'*'` to disable **all** plugins.
+
+```php
+'dev' => [
+    'disabledPlugins' => '*',
+],
+```
+
+
 
 ### `disallowRobots`
 
