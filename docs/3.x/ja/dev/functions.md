@@ -21,6 +21,7 @@
 | [csrfInput](#csrfinput)                                                                        | Returns a hidden CSRF token input.                                                                     |
 | [cpUrl](#cpurl)                                                                                | Generates a control panel URL.                                                                         |
 | [cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html)                                 | Cycles on an array of values.                                                                          |
+| [dataUrl](#dataurl)                                                                            | Outputs an asset or file as a base64-encoded data URL.                                                 |
 | [date](https://twig.symfony.com/doc/2.x/functions/date.html)                                   | Creates a date.                                                                                        |
 | [dump](https://twig.symfony.com/doc/2.x/functions/dump.html)                                   | Dumps information about a variable.                                                                    |
 | [endBody](#endbody)                                                                            | Outputs scripts and styles that were registered for the “end body” position.                           |
@@ -36,12 +37,13 @@
 | [max](https://twig.symfony.com/doc/2.x/functions/max.html)                                     | Returns the biggest value in an array.                                                                 |
 | [min](https://twig.symfony.com/doc/2.x/functions/min.html)                                     | Returns the lowest value in an array.                                                                  |
 | [parent](https://twig.symfony.com/doc/2.x/functions/parent.html)                               | Returns the parent block’s output.                                                                     |
-| [plugin](#plugin)                                                                              | ハンドルに従ってプラグインインスタンスを返します。                                                                              |
+| [parseEnv](#parseenv)                                                                          | Checks for an environment variable and/or an alias (`@aliasName`) and returns the referenced value.    |
+| [plugin](#plugin)                                                                              | Returns a plugin instance by its handle.                                                               |
 | [random](https://twig.symfony.com/doc/2.x/functions/random.html)                               | Returns a random value.                                                                                |
 | [range](https://twig.symfony.com/doc/2.x/functions/range.html)                                 | Returns a list containing an arithmetic progression of integers.                                       |
 | [raw](#raw)                                                                                    | Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML-encoded when output. |
-| [redirectInput](#redirectinput)                                                                | `name` で定義されたシーケンスの次または現在の番号を出力します。                                                                    |
-| [seq](#seq)                                                                                    | 配列内のエレメントの順序をランダム化します。                                                                                 |
+| [redirectInput](#redirectinput)                                                                | Outputs a hidden `redirect` input.                                                                     |
+| [seq](#seq)                                                                                    | Outputs the next or current number in a sequence.                                                      |
 | [shuffle](#shuffle)                                                                            | Randomizes the order of the items in an array.                                                         |
 | [siteUrl](#siteurl)                                                                            | Generates a front-end URL.                                                                             |
 | [svg](#svg)                                                                                    | Outputs an SVG document.                                                                               |
@@ -239,9 +241,28 @@ You can optionally set additional attributes on the tag by passing an `options` 
 }) }}
 ```
 
+## `dataUrl`
+
+Outputs an asset or file as a base64-encoded [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). You can pass it an <craft3:craft\elements\Asset> object or a file path (optionally using an [alias](../config/#aliases)).
+
+```twig
+{# Asset object `myLogoAsset` #}
+<img src="{{ dataUrl(myLogoAsset) }}" />
+
+{# File path, optionally using an alias #}
+<img src="{{ dataUrl('@webroot/images/my-logo-asset.svg') }}" />
+
+{# Output: <img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMCIgdmd(...)" /> #}
+```
+
+The `dataUrl()` function has the following arguments:
+
+* **`file`** - The asset or path to a file to be encoded.
+* **`mimeType`** - Optional MIME type. If omitted, the file’s MIME type will be determined automatically.
+
 ## `endBody`
 
-「end body」に登録されたスクリプトやスタイルを出力します。 `</body>` タグの直前に配置する必要があります。
+Outputs any scripts and styles that were registered for the “end body” position. It should be placed right before your `</body>` tag.
 
 ```twig
 <body>
@@ -254,7 +275,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ## `expression`
 
-次のものを渡すことができます。
+Creates and returns a new <yii2:yii\db\Expression> object, for use in database queries.
 
 ```twig
 {% set entries = craft.entries()
@@ -307,17 +328,13 @@ Executes a GraphQL query against the full schema.
     <img class="thumb" src="{{ image.url }}" alt="{{ image.altText }}">
 
     {{ entry.shortDescription|markdown }}
-    <p><a href="{{ entry.url }}">Continue reading… </a></p>
+    <p><a href="{{ entry.url }}">Continue reading…</a></p>
 {% endfor %}
 ```
 
-## `parseEnv`
-
-Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
-
 ## `head`
 
-「head」に登録されたスクリプトやスタイルを出力します。 `</head>` タグの直前に配置する必要があります。
+Outputs any scripts and styles that were registered for the “head” position. It should be placed right before your `</head>` tag.
 
 ```twig
 <head>
@@ -378,6 +395,10 @@ Returns the lowest value in an array.
 
 This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) function.
 
+## `parseEnv`
+
+Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
+
 ## `plugin`
 
 Returns a plugin instance by its handle, or `null` if no plugin is installed and enabled with that handle.
@@ -429,7 +450,7 @@ You can optionally have the number be zero-padded to a certain length.
 
 ```twig
 {{ now|date('Y') ~ '-' ~ seq('orderNumber:' ~ now|date('Y'), 5) }}
-{# outputs: 2018-00001 #}
+{# Output: 2018-00001 #}
 ```
 
 To view the current number in the sequence without incrementing it, set the `next` argument to `false`.
@@ -444,9 +465,10 @@ To view the current number in the sequence without incrementing it, set the `nex
 Randomizes the order of the elements within an array.
 
 ```twig
-{% set promos = shuffle(homepage.promos) %}
+{% set promos = craft.entries.section('promos').all() %}
+{% set shuffledPromos = shuffle(promos) %}
 
-{% for promo in promos %}
+{% for promo in shuffledPromos %}
     <div class="promo {{ promo.slug }}">
         <h3>{{ promo.title }}</h3>
         <p>{{ promo.description }}</p>
@@ -467,9 +489,9 @@ Similar to [url()](#url-path-params-scheme-mustshowscriptname), except _only_ fo
 
 The `siteUrl()` function has the following arguments:
 
-* **`path`** – 結果となる URL がサイトで指すべきパス。 それは、ベースサイト URL に追加されます。
+* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
 * **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。 デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。 そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
+* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
 * **`siteId`** – The ID of the site that the URL should point to. By default the current site will be used.
 
 ## `svg`
@@ -478,7 +500,7 @@ Outputs an SVG document.
 
 You can pass the following things into it:
 
-- SVG ファイルのパス。
+- An SVG file path.
 
   ```twig
   {{ svg('@webroot/icons/lemon.svg') }}
@@ -488,16 +510,16 @@ You can pass the following things into it:
 
   ```twig
   {% set image = entry.myAssetsField.one() %}
-    {% if image and image.extension == 'svg' %}
-      {{ svg(image) }}
-    {% endif %}
+  {% if image and image.extension == 'svg' %}
+    {{ svg(image) }}
+  {% endif %}
   ```
 
 - Raw SVG markup.
 
   ```twig
   {% set image = include('_includes/icons/lemon.svg') %}
-    {{ svg(image) }}
+  {{ svg(image) }}
   ```
 
 By default, if you pass an asset or raw markup into the function, the SVG will be sanitized of potentially malicious scripts using [svg-sanitizer](https://github.com/darylldoyle/svg-sanitizer), and any IDs or class names within the document will be namespaced so they don’t conflict with other IDs or class names in the DOM. You can disable those behaviors using the `sanitize` and `namespace` arguments:
@@ -578,15 +600,15 @@ Returns a URL.
 
 The `url()` function has the following arguments:
 
-* **`siteId`** – URL が指すべきサイト ID。 デフォルトでは、現在のサイトが使用されます。
+* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
 * **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。 デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。 そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
-* **`mustShowScriptName`** – ここに `true` がセットされている場合、「index.php」を含めた URL が返され、コンフィグ設定の <config3:omitScriptNameInUrls> config setting. （ブラウザのアドレスバーに表示されない URL と .htaccess ファイルのリダイレクトとの衝突を避けたいような、Ajax 経由の POST リクエストで使用される URL の場合に有用です。 ）
+* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+* **`mustShowScriptName`** – If this is set to `true`, then the URL returned will include “index.php”, disregarding the <config3:omitScriptNameInUrls> config setting. (This can be useful if the URL will be used by POST requests over Ajax, where the URL will not be shown in the browser’s address bar, and you want to avoid a possible collision with your site’s .htaccess file redirect.)
 
 ::: tip
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
 ```twig
 {{ url('http://my-project.com', 'foo=1', 'https') }}
-{# Outputs: "https://my-project.com?foo=1" #}
+{# Output: "https://my-project.com?foo=1" #}
 ```
 :::
