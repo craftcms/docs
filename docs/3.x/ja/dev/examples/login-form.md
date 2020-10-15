@@ -7,11 +7,11 @@
     {{ csrfInput() }}
     {{ actionInput('users/login') }}
 
-    <h3><label for="loginName">Username or email</label></h3>
+    <label for="loginName">Username or email</label>
     <input id="loginName" type="text" name="loginName"
         value="{{ craft.app.user.rememberedUsername }}">
 
-    <h3><label for="password">Password</label></h3>
+    <label for="password">Password</label>
     <input id="password" type="password" name="password">
 
     <label>
@@ -26,7 +26,7 @@
     {% endif %}
 </form>
 
-<p><a href="{{ url('forgotpassword') }}">Forget your password?</a></p>
+<p><a href="{{ url('forgotpassword') }}">Forgot your password?</a></p>
 ```
 
 `craft.session.returnUrl` には、このログインフォームへリダイレクトした `{% requireLogin %}` タグを含む元の URL がセットされます。
