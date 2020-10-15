@@ -21,6 +21,7 @@ The following [functions](https://twig.symfony.com/doc/2.x/templates.html#functi
 | [csrfInput](#csrfinput)                                                                        | Returns a hidden CSRF token input.                                                                     |
 | [cpUrl](#cpurl)                                                                                | Generates a control panel URL.                                                                         |
 | [cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html)                                 | Cycles on an array of values.                                                                          |
+| [dataUrl](#dataurl)                                                                            | Outputs an asset or file as a base64-encoded data URL.                                                 |
 | [date](https://twig.symfony.com/doc/2.x/functions/date.html)                                   | Creates a date.                                                                                        |
 | [dump](https://twig.symfony.com/doc/2.x/functions/dump.html)                                   | Dumps information about a variable.                                                                    |
 | [endBody](#endbody)                                                                            | Outputs scripts and styles that were registered for the “end body” position.                           |
@@ -36,6 +37,7 @@ The following [functions](https://twig.symfony.com/doc/2.x/templates.html#functi
 | [max](https://twig.symfony.com/doc/2.x/functions/max.html)                                     | Returns the biggest value in an array.                                                                 |
 | [min](https://twig.symfony.com/doc/2.x/functions/min.html)                                     | Returns the lowest value in an array.                                                                  |
 | [parent](https://twig.symfony.com/doc/2.x/functions/parent.html)                               | Returns the parent block’s output.                                                                     |
+| [parseEnv](#parseenv)                                                                          | Checks for an environment variable and/or an alias (`@aliasName`) and returns the referenced value.    |
 | [plugin](#plugin)                                                                              | Returns a plugin instance by its handle.                                                               |
 | [random](https://twig.symfony.com/doc/2.x/functions/random.html)                               | Returns a random value.                                                                                |
 | [range](https://twig.symfony.com/doc/2.x/functions/range.html)                                 | Returns a list containing an arithmetic progression of integers.                                       |
@@ -250,6 +252,25 @@ You can optionally set additional attributes on the tag by passing an `options` 
 }) }}
 ```
 
+## `dataUrl`
+
+Outputs an asset or file as a base64-encoded [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). You can pass it an <craft3:craft\elements\Asset> object or a file path (optionally using an [alias](../config/#aliases)).
+
+```twig
+{# Asset object `myLogoAsset` #}
+<img src="{{ dataUrl(myLogoAsset) }}" />
+
+{# File path, optionally using an alias #}
+<img src="{{ dataUrl('@webroot/images/my-logo-asset.svg') }}" />
+
+{# Output: <img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMCIgdmd(...)" /> #}
+```
+
+The `dataUrl()` function has the following arguments:
+
+* **`file`** - The asset or path to a file to be encoded.
+* **`mimeType`** - Optional MIME type. If omitted, the file’s MIME type will be determined automatically.
+
 ## `endBody`
 
 Outputs any scripts and styles that were registered for the “end body” position. It should be placed right before your `</body>` tag.
@@ -322,10 +343,6 @@ Executes a GraphQL query against the full schema.
 {% endfor %}
 ```
 
-## `parseEnv`
-
-Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
-
 ## `head`
 
 Outputs any scripts and styles that were registered for the “head” position. It should be placed right before your `</head>` tag.
@@ -389,6 +406,10 @@ Returns the lowest value in an array.
 
 This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) function.
 
+## `parseEnv`
+
+Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
+
 ## `plugin`
 
 Returns a plugin instance by its handle, or `null` if no plugin is installed and enabled with that handle.
@@ -440,7 +461,7 @@ You can optionally have the number be zero-padded to a certain length.
 
 ```twig
 {{ now|date('Y') ~ '-' ~ seq('orderNumber:' ~ now|date('Y'), 5) }}
-{# outputs: 2018-00001 #}
+{# Output: 2018-00001 #}
 ```
 
 To view the current number in the sequence without incrementing it, set the `next` argument to `false`.
@@ -599,6 +620,6 @@ The `url()` function has the following arguments:
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
 ```twig
 {{ url('http://my-project.com', 'foo=1', 'https') }}
-{# Outputs: "https://my-project.com?foo=1" #}
+{# Output: "https://my-project.com?foo=1" #}
 ```
 :::
