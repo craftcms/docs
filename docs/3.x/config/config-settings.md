@@ -651,7 +651,8 @@ Defined by
 
 
 
-The default language the control panel should use for users who haven’t set a preferred language yet.
+The default language the control panel should use for users who haven’t set a preferred language yet,
+as well as for console requests.
 
 
 
