@@ -36,6 +36,7 @@
 | [input](#input)                                                                                | Outputs an HTML input.                                                                                 |
 | [max](https://twig.symfony.com/doc/2.x/functions/max.html)                                     | Returns the biggest value in an array.                                                                 |
 | [min](https://twig.symfony.com/doc/2.x/functions/min.html)                                     | Returns the lowest value in an array.                                                                  |
+| [ol](#ol)                                                                                      | Outputs an array of items as an ordered list.                                                          |
 | [parent](https://twig.symfony.com/doc/2.x/functions/parent.html)                               | Returns the parent block’s output.                                                                     |
 | [parseEnv](#parseenv)                                                                          | Checks for an environment variable and/or an alias (`@aliasName`) and returns the referenced value.    |
 | [plugin](#plugin)                                                                              | Returns a plugin instance by its handle.                                                               |
@@ -50,6 +51,7 @@
 | [source](https://twig.symfony.com/doc/2.x/functions/source.html)                               | Returns the content of a template without rendering it.                                                |
 | [tag](#tag)                                                                                    | Outputs an HTML tag.                                                                                   |
 | [template_from_string](https://twig.symfony.com/doc/2.x/functions/template_from_string.html) | Loads a template from a string.                                                                        |
+| [ul](#ul)                                                                                      | Outputs an array of items as an unordered list.                                                        |
 | [url](#url)                                                                                    | Generates a URL.                                                                                       |
 
 ## `actionInput( actionPath )`
@@ -395,6 +397,34 @@ Returns the lowest value in an array.
 
 This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) function.
 
+## `ol`
+
+Outputs an array of items as an ordered list.
+
+```twig
+{% set titles = craft.entries()
+    .section('news')
+    .select('title')
+    .column() %}
+{{ ol(titles) }}
+{# Output:
+<ol>
+    <li>Shocking Foo</li>
+    <li>You Won’t Believe This Bar</li>
+    <li>Ten Baz You Can’t Live Without</li>
+</ol>
+#}
+```
+
+### Arguments
+
+The `ol()` function has the following arguments:
+
+* **`items`** – An array of items to be wrapped in `<li>`s. These will be HTML-encoded by default.
+* **`params`** – An attributes argument where each key+value will be set as attributes on the `<ol>`, with the exception of two special options:
+    * **`encode: false`** – Prevents the list items from being HTML-encoded.
+    * **`itemOptions: {...}`** – Tag attributes to be applied to each of the `<li>`s.
+
 ## `parseEnv`
 
 Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
@@ -587,6 +617,34 @@ If an attribute is set to `true`, it will be added without a value.
 ```
 
 Any attribute set to `null` or `false` will be omitted.
+
+## `ul`
+
+Outputs an array of items as an unordered list.
+
+```twig
+{% set titles = craft.entries()
+    .section('news')
+    .select('title')
+    .column() %}
+{{ ul(titles) }}
+{# Output:
+<ul>
+    <li>Shocking Foo</li>
+    <li>You Won’t Believe This Bar</li>
+    <li>Ten Baz You Can’t Live Without</li>
+</ul>
+#}
+```
+
+### Arguments
+
+The `ul()` function has the following arguments:
+
+* **`items`** – An array of items to be wrapped in `<li>`s. These will be HTML-encoded by default.
+* **`params`** – An attributes argument where each key+value will be set as attributes on the `<ul>`, with the exception of two special options:
+    * **`encode: false`** – Prevents the list items from being HTML-encoded.
+    * **`itemOptions: {...}`** – Tag attributes to be applied to each of the `<li>`s.
 
 ## `url`
 
