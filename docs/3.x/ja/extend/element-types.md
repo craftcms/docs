@@ -566,55 +566,6 @@ You can give your [control panel section](cp-section.md) an index page for your 
 {% set elementType = 'ns\\prefix\\elements\\Product' %}
 ```
 
-### Index Page Actions
-
-You can define which [actions](element-action-types.md) your element type supports on its index page by adding a protected static [defineActions()](craft3:craft\base\Element::defineActions()) method on your element class:
-
-```php
-protected static function defineActions(string $source = null): array
-{
-    return [
-        FooAction::class,
-        BarAction::class,
-    ];
-}
-```
-
-### Restore Action
-
-All element types are [soft-deletable](soft-deletes.md) out of the box, however it’s up to each element type to decide whether they should be restorable.
-
-To make an element restorable, just add the <craft3:craft\elements\actions\Restore> action to the array returned by your static [defineActions()](craft3:craft\base\Element::defineActions()) method. Craft will automatically hide it during normal index views, and show it when someone selects the “Trashed” status option.
-
-### Index Page Exporters
-
-You can define which [exporter types](element-exporter-types.md) your element type supports on its index page by adding a protected static [defineExporters()](craft3:craft\base\Element::defineExporters()) method on your element class:
-
-```php
-protected static function defineExporters(string $source): array
-{
-    $exporters = parent::defineExporters($source);
-    $exporters[] = MyExporter::class;
-    return $exporters;
-}
-```
-
-### Sort Options
-
-You can define the sort options for your element indexes by adding a protected static [defineSortOptions()](craft3:craft\base\Element::defineSortOptions()) method to your element class:
-
-```php
-protected static function defineSortOptions(): array
-{
-    return [
-        'title' => \Craft::t('app', 'Title'),
-        'price' => \Craft::t('plugin-handle', 'Price'),
-    ];
-}
-```
-
-When a sort option is selected on an index, its key will be passed to the `$orderBy` property of your [element query](#element-query-class) class (e.g. `['price' => SORT_ASC]`).
-
 ### Table Attributes
 
 You can customize which columns should be available to your element indexes’ Table views by adding a protected [defineTableAttributes()](craft3:craft\base\Element::defineTableAttributes()) method to your element class:
@@ -659,6 +610,55 @@ protected function tableAttributeHtml(string $attribute): string
     return parent::tableAttributeHtml($attribute);
 }
 ```
+
+### Sort Options
+
+You can define the sort options for your element indexes by adding a protected static [defineSortOptions()](craft3:craft\base\Element::defineSortOptions()) method to your element class:
+
+```php
+protected static function defineSortOptions(): array
+{
+    return [
+        'title' => \Craft::t('app', 'Title'),
+        'price' => \Craft::t('plugin-handle', 'Price'),
+    ];
+}
+```
+
+When a sort option is selected on an index, its key will be passed to the `$orderBy` property of your [element query](#element-query-class) class (e.g. `['price' => SORT_ASC]`).
+
+### Index Page Exporters
+
+You can define which [exporter types](element-exporter-types.md) your element type supports on its index page by adding a protected static [defineExporters()](craft3:craft\base\Element::defineExporters()) method on your element class:
+
+```php
+protected static function defineExporters(string $source): array
+{
+    $exporters = parent::defineExporters($source);
+    $exporters[] = MyExporter::class;
+    return $exporters;
+}
+```
+
+### Index Page Actions
+
+You can define which [actions](element-action-types.md) your element type supports on its index page by adding a protected static [defineActions()](craft3:craft\base\Element::defineActions()) method on your element class:
+
+```php
+protected static function defineActions(string $source = null): array
+{
+    return [
+        FooAction::class,
+        BarAction::class,
+    ];
+}
+```
+
+### Restore Action
+
+All element types are [soft-deletable](soft-deletes.md) out of the box, however it’s up to each element type to decide whether they should be restorable.
+
+To make an element restorable, just add the <craft3:craft\elements\actions\Restore> action to the array returned by your static [defineActions()](craft3:craft\base\Element::defineActions()) method. Craft will automatically hide it during normal index views, and show it when someone selects the “Trashed” status option.
 
 ### Thumb View
 
