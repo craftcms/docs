@@ -1,7 +1,9 @@
 <template>
   <svg
+    role="img"
     :aria-hidden="label ? false : true"
     :aria-label="label"
+    focusable="false"
     :width="width"
     :height="height"
     viewBox="0 0 512 512"
@@ -18,7 +20,8 @@ export default {
   props: {
     label: {
       type: String,
-      required: false
+      required: false,
+      default: 'Yes',
     },
     width: {
       type: Number,

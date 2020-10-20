@@ -2,9 +2,20 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-10-20
+### Added
+- Documented controller actions.
+- Documented new `ul()` and `ol()` Twig functions.
+- Added the `verb` style for Badge components.
+- Improved Badge component adding `role` and `focusable` attributes and a default label.
+
+### Removed
+- Moved templating example pages to the Knowledge Base.
+
 ## 2020-10-13
 ### Added
 - Added Commerce 3 Console Commands page with new `commerce/reset-data` command.
+- Documented using `craft\services\ProjectConfig::$writeYamlAutomatically` to disable writing project config YAML files automatically.
 
 ## 2020-10-12
 ### Added
