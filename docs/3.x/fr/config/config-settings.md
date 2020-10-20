@@ -2812,6 +2812,42 @@ You might also want to set <config3:invalidUserTokenPath> in case a user clicks 
 
 
 
+### `setPasswordRequestPath`
+
+Allowed types
+:
+
+`mixed`
+
+Default value
+:
+
+`null`
+
+Defined by
+:
+
+[GeneralConfig::$setPasswordRequestPath](craft3:craft\config\GeneralConfig::$setPasswordRequestPath)
+
+Since
+:
+
+3.5.14
+
+
+
+The URI to the page where users can request to change their password.
+
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+If this is set, Craft will redirect [.well-known/change-password requests](https://w3c.github.io/webappsec-change-password-url/) to this URI.
+
+::: tip
+You will also need to set the <config:setPasswordPath> config setting, which determines the URI and template path for your Set Password form, which is where the user will actually reset their password, once they’ve clicked the link in the Password Reset email.
+:::
+
+
+
 ### `setPasswordSuccessPath`
 
 Allowed types
