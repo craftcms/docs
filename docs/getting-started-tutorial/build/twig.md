@@ -38,7 +38,7 @@ A template file is plain text you can work with in your code editor.
 
 Each time we add a template, that means we’ll create a new text file in the templates folder, ending in `.twig` or `.html`. The file extension doesn’t matter in our filesystem, but you’ll notice we _didn’t_ include one configuring Craft CMS earlier.
 
-When you provide Craft CMS with a value of `blog/_entry`, for example, it will automatically look for `template/blog/_entry.twig` and `template/blog/_entry.html`.
+When you provide Craft CMS with a value of `blog/_entry`, for example, it will automatically look for `templates/blog/_entry.twig` and `templates/blog/_entry.html`.
 
 ::: tip
 There’s no “correct” file extension for templates, but `.twig` will be better for automatic syntax highlighting in editors like VS Code.

@@ -36,7 +36,7 @@
 
 <style lang="postcss">
 .link-panel-wrapper {
-  @apply block w-1/2 mx-2 relative;
+  @apply block relative py-1;
 }
 
 .link-panel {
@@ -77,9 +77,16 @@
 
 @screen sm {
   .link-panel-wrapper {
-    @apply w-1/3;
+    @apply w-1/2 mx-2 py-0;
   }
 }
+
+@screen md {
+  .link-panel-wrapper {
+    @apply w-1/3 mx-2 py-0;
+  }
+}
+
 </style>
 
 <script>
