@@ -50,6 +50,15 @@ export default {
     background-color: #e7c000;
   }
 
+  &.verb {
+    @apply uppercase bg-transparent tracking-widest leading-none h-auto font-mono;
+    font-size: smaller;
+    border-width: 1px;
+    border-color: var(--border-color);
+    color: var(--sidebar-link-color);
+    padding: 4px calc(5px - 0.1em) 4px 5px;
+  }
+
   &.edition {
     @apply uppercase bg-transparent text-xs tracking-widest leading-none h-auto;
     border-width: 1px;
