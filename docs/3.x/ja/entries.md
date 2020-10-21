@@ -92,6 +92,10 @@ The above template could also be expressed with this syntax:
 
 With the above Entry URI Format, a top-level entry’s URI might end up as `docs/templating`, whereas a nested entry’s URI might end up as `docs/templating/tags`.
 
+::: tip
+You can designate any one entry as a site’s homepage using a special `__home__` URI.
+:::
+
 ### Preview Targets
 
 If you’re using Craft Pro, your section can have one or more **preview targets**, which are URLs of pages that your entries will show up on, making it possible for authors to preview entries as they are writing them in the control panel.
@@ -125,7 +129,7 @@ If your site’s front end lives outside of Craft, for example as a Vue or React
 You can pass the token via either a query string parameter named after your <config3:tokenParam> config setting, or an `X-Craft-Token` header.
 
 ::: tip
-This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor entries can be.
+For Live Preview, you should also consider [enabling iFrame Resizer](config3:useIframeResizer) so that Craft can maintain the page scroll position between page loads.
 :::
 
 ## Entry Types
@@ -409,7 +413,7 @@ $entries = \craft\elements\Entry::find()
 
 
 ::: tip
-This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant entries can be.
+This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor entries can be.
 :::
 
 
@@ -740,7 +744,7 @@ $entries = \craft\elements\Entry::find()
 
 
 ::: tip
-This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
+This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant entries can be.
 :::
 
 
@@ -992,7 +996,8 @@ $entry = \craft\elements\Entry::find()
 
 
 
-config setting lets you override iFrame Resizer’s options or disable it altogether.
+::: tip
+This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
 :::
 
 
@@ -1176,7 +1181,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `orderBy`
 
-Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`.)
+Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
 
 
 
