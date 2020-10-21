@@ -705,6 +705,17 @@ Rebuilds the project config.
 
 Alias for [`apply`](#project-config-apply).
 
+#### `project-config/touch`
+
+Updates the `dateModified` value in `config/project/project.yaml`.
+
+If a Git conflict is detected on the `dateModified` value, a conflict resolution will also be attempted.
+
+**Parameters**
+
+`timestamp`
+:   The updated `dateModified` value. If `null`, the current time will be used. (optional int, defaults to `null`)
+
 ## `queue`
 
 Manages the queue.
