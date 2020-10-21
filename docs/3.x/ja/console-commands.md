@@ -697,6 +697,11 @@ Applies project config file changes.
 
 Prints a diff of the pending project config YAML changes.
 
+**Options**
+
+`--invert`
+:   Treats the loaded project config as the source of truth, rather than the YAML files.\ boolean, 0 or 1 (defaults to 0)
+
 #### `project-config/rebuild`
 
 Rebuilds the project config.
@@ -715,6 +720,10 @@ If a Git conflict is detected on the `dateModified` value, a conflict resolution
 
 `timestamp`
 :   The updated `dateModified` value. If `null`, the current time will be used. (optional int, defaults to `null`)
+
+#### `project-config/write`
+
+Writes out the currently-loaded project config as YAML files to the `config/project/` folder, discarding any pending YAML changes.
 
 ## `queue`
 
