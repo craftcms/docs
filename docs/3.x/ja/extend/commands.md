@@ -1,6 +1,6 @@
 # Console Commands
 
-Plugins and modules can add additional [console commands][yii] to Craft, which will be available via the `craft` executable in the terminal.
+Plugins and modules can add additional [console commands](../console-commands.md) to Craft, which will be available via the `craft` executable in the terminal.
 
 Console commands are implemented very similarly to [controllers](controllers.md), except that they should live within a `console/controllers/` folder within your plugin or module’s base source folder, and they should extend <craft3:craft\console\Controller> (rather than <craft3:craft\web\Controller>).
 
@@ -81,7 +81,5 @@ Event::on(ResaveController::class,
     }
 );
 ```
-
-[yii]: https://www.yiiframework.com/doc/guide/2.0/en/tutorial-console#create-command
 
 [yii]: https://www.yiiframework.com/doc/guide/2.0/en/tutorial-console#create-command
