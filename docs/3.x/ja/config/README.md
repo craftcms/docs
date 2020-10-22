@@ -154,7 +154,7 @@ Make sure that your `config/app.php` file is setting a unique `id` for your appl
 
 #### Database Cache Example
 
-If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a CLI command for convenience:
+If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a console command for convenience:
 
 ```bash
 php craft setup/db-cache-table
