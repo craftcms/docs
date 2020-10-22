@@ -1106,6 +1106,47 @@ Generates a new security key and saves it in the `.env` file.
 
 Called from the `post-create-project-cmd` Composer hook.
 
+## `shell`
+
+::: tip
+This command requires the [`yiisoft/yii2-shell`](https://github.com/yiisoft/yii2-shell) package, which you may need to add to your project:
+
+```
+composer require --dev yiisoft/yii2-shell
+```
+:::
+
+#### `shell/index` <badge>default</badge>
+
+Runs an interactive shell.
+
+```
+$ php craft shell
+Psy Shell v0.10.4 (PHP 7.4.3 — cli) by Justin Hileman
+>>> help
+  help       Show a list of commands. Type `help [foo]` for information about [foo].      Alias
+  ls         List local, instance or class variables, methods and constants.              Alias
+  dump       Dump an object or primitive.
+  doc        Read the documentation for an object, class, constant, method or property.   Alias
+  show       Show the code for an object, class, constant, method or property.
+  wtf        Show the backtrace of the most recent exception.                             Alias
+  whereami   Show where you are in the code.
+  throw-up   Throw an exception or error out of the Psy Shell.
+  timeit     Profiles with a timer.
+  trace      Show the current call stack.
+  buffer     Show (or clear) the contents of the code input buffer.                       Alias
+  clear      Clear the Psy Shell screen.
+  edit       Open an external editor. Afterwards, get produced code in input buffer.
+  sudo       Evaluate PHP code, bypassing visibility restrictions.
+  history    Show the Psy Shell history.                                                  Alias
+  exit       End the current session and return to caller.                                Alias
+```
+
+**Options**
+
+`--include`
+:   Include file(s) before starting tinker shell.\ array
+
 ## `tests`
 
 Provides resources for testing Craft’s services and your Craft project.
