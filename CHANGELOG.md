@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-10-22
+### Changed
+- Improved the Control Panel Template page in the Craft 3 docs.
+
 ## 2020-10-20
 ### Added
 - Documented controller actions.
