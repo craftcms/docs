@@ -1,8 +1,11 @@
+- - -
+keywords: cli
+- - -
 # Console Commands
 
-While most of your interaction with Craft happens in a browser, a number of important tools are available via console commands that are run in a terminal.
+While most of your interaction with Craft happens in a browser, a number of important tools are available via command line interface (CLI) actions that are run in a terminal.
 
-This can be useful for a variety of reasons, including automating tasks with `cron`, privately triggering actions via SSH or as part of a [deployment process](https://craftcms.com/knowledge-base/deployment-best-practices), or running resource-intensive tasks that might be constrained by the limits of your web server.
+This can be useful for automating tasks with `cron`, running actions in a [deployment process](https://craftcms.com/knowledge-base/deployment-best-practices), working with Craft via SSH, and running resource-intensive tasks that might otherwise be constrained by the limits of your web server.
 
 The Craft console application (`craft`) lives in the root of your project and requires PHP to run.
 
@@ -38,7 +41,11 @@ To see the help of each command, enter:
 
 You can also run `php craft help <command-name>` to learn more about a command and whatever parameters and options it may accept.
 
-While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default CLI commands:
+::: tip
+See the [Console Commands](extend/commands.md) page in the _Extending Craft_ section to learn about adding your own console commands.
+:::
+
+While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default console commands:
 
 ## `backup`
 
