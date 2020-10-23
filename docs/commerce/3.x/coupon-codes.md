@@ -34,7 +34,7 @@ Example:
        placeholder="{{ "Coupon Code"|t }}">
 
     <button type="submit">Update Cart</button>
-<form>
+</form>
 ```
 
 Only one coupon code can exist on the cart at a time. To see the value of the current cart’s coupon code, use `{{ cart.couponCode }}`.
