@@ -413,7 +413,7 @@ $product->fieldLayoutId = $productType->fieldLayoutId;
 \Craft::$app->elements->saveElement($product);
 ```
 
-If the `$fieldLayoutId`  property is set, <craft3:craft\services\Elements::saveElement()> will store it in the `elements.fieldLayoutId` column in the database, and your elements will be re-populated with the values when they are fetched down the road.
+If the `$fieldLayoutId` property is set, <craft3:craft\services\Elements::saveElement()> will store it in the `elements.fieldLayoutId` column in the database, and your elements will be re-populated with the values when they are fetched down the road.
 
 Alternatively, you can override the `getFieldLayout()` method, and fetch/return the field layout yourself. This might be preferable if your element type only has a single field layout (like user accounts).
 
@@ -425,6 +425,37 @@ public function getFieldLayout()
 ```
 
 See [Edit Page](#edit-page) to learn how to create an edit page for your elements, based on their field layout.
+
+#### Saving Custom Field Values
+
+When saving values on a custom field, always use the [`setFieldValue()`](craft3:craft\base\ElementInterface::setFieldValue()) or [`setFieldValues()`](craft3:craft\base\ElementInterface::setFieldValues()) methods rather than directly accessing the field handle as a property on the element object. This ensures the value is normalized and marked as dirty for [delta saves](field-types.md#supporting-delta-saves).
+
+In this example, we’re setting and saving custom field values for an [Entry](craft3:craft\elements\Entry) element:
+
+::: code
+```php Single Value
+// incorrect
+$entry->myCustomField = 'foo';
+
+// correct
+$entry->setFieldValue('myCustomField', 'foo');
+
+\Craft::$app->elements->saveElement($entry);
+```
+```php Multiple Values
+// incorrect
+$entry->myCustomField = 'foo';
+$entry->myOtherCustomField = 'bar';
+
+// correct
+$entry->setFieldValues([
+    'myCustomField' => 'foo',
+    'myOtherCustomField' => 'bar',
+]);
+
+\Craft::$app->elements->saveElement($entry);
+```
+:::
 
 #### Validating Required Custom Fields
 
@@ -802,7 +833,7 @@ The Edit Category page offers a relatively straightforward example of how it cou
   - [actionShareCategory()](craft3:craft\controllers\CategoriesController::actionShareCategory()) – Share Category リクエストを操作し、`categories/view-shared-category` のトークンを作成し、ユーザーをそこにリダイレクトします
   - [actionViewSharedCategory()](craft3:craft\controllers\CategoriesController::actionViewSharedCategory()) – Share Category トークンのカテゴリのフロントエンドページをレンダリングします
 
-#### カテゴリの編集ページテンプレート： [categories/_edit.html](https://github.com/craftcms/cms/blob/develop/src/templates/categories/_edit.html)
+#### Edit Page Template
 
 You can generate a tab menu and tab contents based on your element’s field layout by calling <craft3:craft\models\FieldLayout::createForm()>, either from your controller action or the edit page template.
 
