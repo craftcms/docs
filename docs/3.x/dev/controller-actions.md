@@ -2,8 +2,8 @@
 
 The following [controller actions](https://www.yiiframework.com/doc/guide/2.0/en/structure-controllers) are available for front end forms:
 
-Controller | Description
----------- | -----------
+Action | Description
+------ | -----------
 <badge vertical="baseline" type="verb">POST</badge> [entries/save-entry](#post-entries-save-entry) | Saves an entry.
 <badge vertical="baseline" type="verb">POST</badge> [users/login](#post-users-login) | Logs a user in.
 <badge vertical="baseline" type="verb">POST</badge> [users/save-user](#post-users-save-user) | Saves a user account.

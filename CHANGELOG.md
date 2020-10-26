@@ -2,12 +2,19 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-10-22
+### Changed
+- Improved the Control Panel Template page in the Craft 3 docs.
+
 ## 2020-10-20
 ### Added
 - Documented controller actions.
 - Documented new `ul()` and `ol()` Twig functions.
 - Added the `verb` style for Badge components.
 - Improved Badge component adding `role` and `focusable` attributes and a default label.
+- Documented new `project-config/touch` console command.
+- Documented `project-config/write` console command.
+- Documented `--invert` option for `project-config/diff` console command.
 
 ### Removed
 - Moved templating example pages to the Knowledge Base.

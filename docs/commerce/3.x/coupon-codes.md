@@ -23,7 +23,7 @@ Example:
 ```twig
 <form method="post">
     {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+    {{ actionInput('commerce/cart/update-cart') }}
     {{ hiddenInput('cartUpdatedNotice', 'Added coupon code.') }}
     {{ redirectInput('shop/cart') }}
 
