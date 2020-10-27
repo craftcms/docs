@@ -56,6 +56,10 @@ When you [deploy your changes to other environments](https://craftcms.com/knowle
 
 Either way, Craft will compare the files in the local `config/project/` folder with its already-loaded project config, and pull in whatever changes it finds.
 
+::: tip
+When [installing Craft](installation.md), any existing configuration in your `config/project/` directory will be applied automatically as long as its Craft and plugin versions match those being installed.
+:::
+
 ## Caveats
 
 There are a few things you should keep in mind when working with the project config:
