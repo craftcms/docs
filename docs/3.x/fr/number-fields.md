@@ -21,14 +21,14 @@ When [querying for elements](element-queries.md) that have a Number field, you c
 
 Possible values include:
 
-| Value                         | Fetches elements…                   |
-| ----------------------------- | ----------------------------------- |
-| `100`                         | with a value of 100.                |
-| `'>= 100'`                 | with a value of at least 100.       |
-| `['>= 100', '<= 1000']` | with a value between 100 and 1,000. |
+| Value                                | Fetches elements…                   |
+| ------------------------------------ | ----------------------------------- |
+| `100`                                | with a value of 100.                |
+| `'>= 100'`                        | with a value of at least 100.       |
+| `['and', '>= 100', '<= 1000']` | with a value between 100 and 1,000. |
 
 ```twig
-{# Fetch entries with a Numbber field set to at least 100 #}
+{# Fetch entries with a Number field set to at least 100 #}
 {% set entries = craft.entries()
     .myFieldHandle('>= 100')
     .all() %}
