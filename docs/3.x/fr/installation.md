@@ -41,6 +41,8 @@ Once Craft’s files are in place, your project directory should have a director
 my-project.test/
 ├── config/
 │   └── ...
+├── modules/
+│   └── ...
 ├── storage/
 │   └── ...
 ├── templates/
@@ -51,7 +53,9 @@ my-project.test/
 │   └── ...
 ├── .env
 ├── .env.example
+├── .gitignore
 ├── composer.json
+├── composer.lock
 └── craft
 ```
 
