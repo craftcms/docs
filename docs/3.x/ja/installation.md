@@ -108,7 +108,7 @@ You can generate and assign the key [manually](#set-the-key-manually), or have C
 
 ### キーを手動で設定
 
-はじめに、なるべく [1Password](https://1password.com) のようなパスワードジェネレーターを使って、暗号化された安全なキーを生成してください。 （長さに制限はありません。 ）
+First generate a cryptographically secure key, preferably using a password generator like [1Password](https://1password.com/password-generator/). （長さに制限はありません。 ）
 
 ダブルクォートの内側にセキュリティキーをペーストし、ファイルを保存します。
 
