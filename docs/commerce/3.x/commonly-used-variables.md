@@ -30,63 +30,6 @@ See [Variant Queries](dev/element-queries/variant-queries.md).
 
 See [craft.commerce.carts.cart](craft-commerce-carts-cart.md).
 
-## craft.commerce.countries.allEnabledCountries
-
-Returns an array of <commerce3:craft\commerce\models\Country> objects.
-
-```twig
-<select>
-{% for country in craft.commerce.countries.allEnabledCountries %}
-    <option value="{{ country.id }}">{{ country.name }}</option>
-{% endfor %}
-</select>
-```
-
-## craft.commerce.countries.allEnabledCountriesAsList
-
-Returns an array of all enabled countries for use in a dropdown menu.
-
-Data returned as `[32:'Australia', 72:'USA']`
-
-```twig
-<select>
-{% for id, countryName in craft.commerce.countries.allEnabledCountriesAsList %}
-    <option value="{{ id }}">{{ countryName }}</option>
-{% endfor %}
-</select>
-```
-
-## craft.commerce.states.allEnabledStates
-
-Returns an array of <commerce3:craft\commerce\models\State> objects.
-
-```twig
-<select>
-{% for state in craft.commerce.states.allEnabledStates %}
-    <option value="{{ state.id }}">{{ state.name }}</option>
-{% endfor %}
-</select>
-```
-
-## craft.commerce.states.allEnabledStatesAsListGroupedByCountryId
-
-Returns an array of <commerce3:craft\commerce\models\State> object arrays, indexed by country IDs.
-
-Data returned as `[72:[3:'California', 4:'Washington'],32:[7:'New South Wales']]`
-
-```twig
-<select>
-{% for countryId, states in craft.commerce.states.allEnabledStatesAsListGroupedByCountryId %}
-    {% set country = craft.commerce.countries.getCountryById(countryId) %}
-    <optgroup label="{{ country.name }}">
-    {% for stateId, stateName in states %}
-        <option value="{{ stateId }}">{{ stateName }}</option>
-    {% endfor %}
-  </optgroup>
-{% endfor %}
-</select>
-```
-
 ## cart.availableShippingMethodOptions
 
 Returns the shipping methods available for the current cart. Some shipping methods may not be included, as only those whose rules apply to the current cart will be returned.
