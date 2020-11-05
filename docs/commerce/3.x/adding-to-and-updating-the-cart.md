@@ -47,7 +47,7 @@ If your product’s type has multiple variants you could loop over them and allo
 ```
 
 ::: warning
-In the Lite edition of Craft Commerce only single line item can exist in the cart. Whenever a customer adds something to the cart, it replaces whatever item was in the cart. If multiple items are added to the cart in a single request, only the last item gets added to the cart.
+In the Lite edition of Craft Commerce only a single line item can exist in the cart. Whenever a customer adds something to the cart, it replaces whatever item was in the cart. If multiple items are added to the cart in a single request, only the last item gets added to the cart.
 :::
 
 ::: warning

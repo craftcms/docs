@@ -1,6 +1,6 @@
 # Console Commands
 
-Plugins and modules can add additional [console commands][yii]
+Plugins and modules can add additional [console commands](../console-commands.md)
 to Craft, which will be available via the `craft` executable in the terminal.
 
 Console commands are implemented very similarly to [controllers](controllers.md), except that they should live within

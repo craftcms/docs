@@ -22,10 +22,10 @@ Example:
 
 ```twig
 <form method="post">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    <input type="hidden" name="cartUpdatedNotice" value="Added coupon code.">
-    {{ redirectInput('shop/cart') }}
     {{ csrfInput() }}
+    {{ actionInput('commerce/cart/update-cart') }}
+    {{ hiddenInput('cartUpdatedNotice', 'Added coupon code.') }}
+    {{ redirectInput('shop/cart') }}
 
     <input type="text"
        name="couponCode"
@@ -33,8 +33,8 @@ Example:
        value="{{ cart.couponCode }}"
        placeholder="{{ "Coupon Code"|t }}">
 
-    <input type="submit" value="Update Cart"/>
-<form>
+    <button type="submit">Update Cart</button>
+</form>
 ```
 
 Only one coupon code can exist on the cart at a time. To see the value of the current cart’s coupon code, use `{{ cart.couponCode }}`.

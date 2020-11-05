@@ -1134,6 +1134,7 @@ This is the interface implemented by all assets.
 | `height`| `Int` | The height in pixels or null if it's not an image.
 | `width`| `Int` | The width in pixels or null if it's not an image.
 | `img`| `String` | An `<img>` tag based on this asset.
+| `srcset`| `String` | Returns a `srcset` attribute value based on the given widths or x-descriptors.
 | `url`| `String` | The full URL of the asset. This field accepts the same fields as the `transform` directive.
 | `mimeType`| `String` | The file’s MIME type, if it can be determined.
 | `path`| `String` | The asset's path in the volume.

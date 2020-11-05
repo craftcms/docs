@@ -176,6 +176,7 @@ module.exports = {
             "image-transforms",
             "element-queries",
             "dev/eager-loading-elements",
+            "dev/controller-actions",
             "graphql",
             "routing"
           ]
@@ -192,22 +193,6 @@ module.exports = {
             "dev/tests"
           ]
         },
-        {
-          title: "Templating Examples",
-          collapsable: false,
-          children: [
-            "dev/examples/integrating-disqus",
-            "dev/examples/rss-feed",
-            "dev/examples/atom-feed",
-            "dev/examples/entry-form",
-            "dev/examples/search-form",
-            "dev/examples/login-form",
-            "dev/examples/user-profile-form",
-            "dev/examples/user-registration-form",
-            "dev/examples/forgot-password-form",
-            "dev/examples/set-password-form"
-          ]
-        }
       ]
     },
     "2.x": {
