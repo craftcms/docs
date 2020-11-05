@@ -26,7 +26,7 @@ If you need to login a user from the front-end of your site, you can do so with 
     {% endif %}
 </form>
 
-<p><a href="{{ url('forgotpassword') }}">Forgot your password?</a></p>
+<p><a href="{{ resetPasswordUrl }}">Forgot your password?</a></p>
 ```
 
 `craft.app.user.returnUrl` is set to the original URL that included the `{% requireLogin %}` tag that initiated the redirect to this login form.
