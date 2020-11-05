@@ -39,7 +39,9 @@ You can change the status of multiple orders at the same time on the Order Index
 ### In code
 
 ```php
-$order = Plugin::getInstance()->getOrders()->getOrderById(ID);
+$order = \craft\commerce\Plugin::getInstance()
+    ->getOrders()
+    ->getOrderById(ID);
 $order->orderStatusId = $orderStatus->id; // new status ID
 $order->message = $message; // new message
 $result = Craft::$app->getElements()->saveElement($order);
