@@ -14,6 +14,7 @@ Variable | Description
 [Global set variables](#global-set-variables) | Variables for each of the global sets.
 [loginUrl](#loginurl) | The URL to the front-end Login page.
 [logoutUrl](#logouturl) | The URL to the front-end Logout page.
+[resetPasswordUrl](#resetpasswordurl) | The URL to the front-end Reset Password page.
 [now](#now) | The current date/time.
 [POS_BEGIN](#pos-begin) | The [craft\web\View::POS_BEGIN](craft3:craft\web\View#constants) constant.
 [POS_END](#pos-end) | The [craft\web\View::POS_END](craft3:craft\web\View#constants) constant.
@@ -108,6 +109,15 @@ The URL Craft uses to log users out, based on the <config3:logoutPath> config se
     <a href="{{ logoutUrl }}">Logout</a>
 {% endif %}
 ```
+
+## `resetPasswordUrl`
+
+The URL to your site’s reset password page, based on the <config3:setPasswordRequestPath> config setting.
+
+```twig
+<a href="{{ resetPasswordUrl }}">Forgot your password?</a>
+```
+
 
 ## `now`
 
