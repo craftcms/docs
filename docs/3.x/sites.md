@@ -152,7 +152,7 @@ This guide will walk you through all of the steps that are typically involved in
 
 ### Step 1: Defining Your Sites and Languages
 
-The first step to creating localized site is to decide the languages you need to support. After that, create a new Site in Craft for each supported language using the [guide on configuring a multi-site setup in Craft](sites.md).
+The first step to creating localized site is to decide the languages you need to support. After that, create a new Site in Craft for each supported language.
 
 ### Step 2: Update Your Sections
 
