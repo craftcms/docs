@@ -42,12 +42,13 @@ Craft のリレーションを操作する前に、それがテンプレート�
 「ドリンク」エントリを出力している以下の例のように、すでにテンプレート内でソースレメントを保持している場合、他のフィールドの値にアクセスするのと同じ方法、すなわちハンドルによって、特定のフィールドのターゲットエレメントにアクセスできます。
 
 ```twig
-{% if drink.ingredients|length %}
+{% set ingredients = drink.ingredients.all() %}
+{% if ingredients|length %}
 
     <h3>Ingredients</h3>
 
     <ul>
-        {% for ingredient in drink.ingredients %}
+        {% for ingredient in ingredients %}
             <li>{{ ingredient.title }}</li>
         {% endfor %}
     </ul>
@@ -58,7 +59,7 @@ Craft のリレーションを操作する前に、それがテンプレート�
 ソースの関連フィールドのハンドル（`ingredients`）を呼び出すと、そのフィールドのターゲットエレメントをフィールドに定義された順序で出力することができる Element Criteria Model が返ります。
 
 ```twig
-{% for ingredient in drink.ingredients.section('ingredients') %}
+{% for ingredient in drink.ingredients.section('ingredients').all() %}
     <li>{{ ingredient.title }}</li>
 {% endfor %}
 ```
