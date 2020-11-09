@@ -12,6 +12,10 @@ Sales are ordered in the control panel, and the system always runs through each 
 
 When creating a sale, you can set a number of conditions to be evaluated when determining if the sale should be applied to the purchasable. All conditions must match to have the sale applied. Leaving a condition empty ignores that condition.
 
+::: tip
+Only _promotable_ purchasables may have discounts and sales applied. This means the **Promotable** switch must be enabled on the variant’s product in the control panel, which is the default for any new product.
+:::
+
 ### Start date
 
 When the sale can start to be applied to matching products.
