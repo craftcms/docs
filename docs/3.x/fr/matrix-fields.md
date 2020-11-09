@@ -112,7 +112,7 @@ If you only want to know the total number of blocks, call [count()](craft3:craft
 <p>Total blocks: <strong>{{ total }}</strong></p>
 ```
 
-If you just need to check if are blocks exist (but don’t need to fetch them), you can call [exists()](craft3:craft\db\Query::exists()):
+If you just need to check if blocks exist (but don’t need to fetch them), you can call [exists()](craft3:craft\db\Query::exists()):
 
 ```twig
 {% if entry.myFieldHandle.exists() %}
