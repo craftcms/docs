@@ -42,12 +42,13 @@ Calling the source’s relational field handle (`ingredients`) returns an [entry
 If we want to output the ingredients list for a drink recipe, we'd use the following:
 
 ```twig
-{% if drink.ingredients|length %}
+{% set ingredients = drink.ingredients.all() %}
+{% if ingredients|length %}
 
     <h3>Ingredients</h3>
 
     <ul>
-        {% for ingredient in drink.ingredients %}
+        {% for ingredient in ingredients %}
             <li>{{ ingredient.title }}</li>
         {% endfor %}
     </ul>
@@ -58,7 +59,7 @@ If we want to output the ingredients list for a drink recipe, we'd use the follo
 You can also add any additional parameters supported by the element type:
 
 ```twig
-{% for ingredient in drink.ingredients.section('ingredients') %}
+{% for ingredient in drink.ingredients.section('ingredients').all() %}
     <li>{{ ingredient.title }}</li>
 {% endfor %}
 ```

@@ -80,6 +80,10 @@ Limit the discount to selected user groups the customer must belong to when chec
 
 Require one or more specific product variants for the discount to apply.
 
+::: tip
+Only _promotable_ purchasables may have discounts and sales applied. This means the **Promotable** switch must be enabled on the variant’s product in the control panel, which is the default for any new product.
+:::
+
 ### Categories
 
 Limit the discount to one or more categories the purchasables/products must relate to.
