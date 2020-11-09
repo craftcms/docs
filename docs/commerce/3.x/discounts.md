@@ -81,7 +81,7 @@ Limit the discount to selected user groups the customer must belong to when chec
 Require one or more specific product variants for the discount to apply.
 
 ::: tip
-Only _promotable_ product variants may have discounts and sales applied. This means the **Promotable** switch must enabled in the control panel and the [`getIsPromotable()`](commerce3:craft\commerce\base\PurchasableInterface::getIsPromotable()) method returns `true`, which is the default for any new product variant.
+Only _promotable_ purchasables may have discounts and sales applied. This means the **Promotable** switch must be enabled on the variant’s product in the control panel, which is the default for any new product.
 :::
 
 ### Categories
