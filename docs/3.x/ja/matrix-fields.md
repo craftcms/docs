@@ -119,7 +119,7 @@ If you only want the first block, call [one()](craft3:craft\db\Query::one()) ins
 {% for block in clone(entry.myFieldHandle).limit(5) %}
 ```
 
-If you just need to check if are blocks exist (but don’t need to fetch them), you can call [exists()](craft3:craft\db\Query::exists()):
+If you just need to check if blocks exist (but don’t need to fetch them), you can call [exists()](craft3:craft\db\Query::exists()):
 
 ```twig
 {{ entry.myFieldHandle|length }}
