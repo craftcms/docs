@@ -29,6 +29,10 @@ The discount functionality comes with a variety of conditions allowing you to sp
 
 Conditions are all optional and can be used in any combination.
 
+::: tip
+Only _promotable_ purchasables may have discounts and sales applied. This means the **Promotable** switch must be enabled on the variant’s product in the control panel, which is the default for any new product.
+:::
+
 ### Dates
 
 Restrict the discount to a specific time period defined by start and end date fields.
