@@ -4,6 +4,8 @@ A transaction is one distinct interaction between Commerce and a payment gateway
 
 The typical checkout flow will involve multiple transactions, with the exact steps depending on your configuration, the payment gateway you’re using, and whether the customer’s payment method is approved.
 
+The sum of an order’s transactions determines total paid, total price, and outstanding balance amounts—and those totals determine the order’s payment status.
+
 In Craft Commerce, each of these is represented by a [transaction](commerce3:craft\commerce\models\Transaction) model. A transaction can only have one [type](#transaction-types) and [status](#transaction-statuses), and it may have a relationship to a parent transaction.
 
 In the Craft control panel, you’ll find transactions listed in a **Transactions** tab in any order’s detail page.
@@ -24,7 +26,10 @@ A capture transaction will only ever be the child of a prior authorize transacti
 
 A capture can only have one of two statuses: `success` or `failed`.
 
-- TODO: note capture in non-credit-card contexts
+::: tip
+The authorize-capture pattern can be used outside credit card contexts.\
+The [manual payment gateway](payment-gateways.md#manual-gateway), for example, lets you accept an order with an authorize transaction and manually choose “capture” to indicate payment has been made.
+:::
 
 ### `purchase`
 
@@ -36,7 +41,7 @@ A purchase transaction can have any one of the available [transaction statuses](
 
 A refund transaction is used to credit funds back to the customer, and it can only be the child of a successful `capture` or `purchase` transaction.
 
-TODO: list available statuses
+A refund can only have one of two statuses: `success` or `failed`.
 
 ## Transaction Statuses
 
@@ -66,4 +71,6 @@ A `success` status indicates that any one of the [transaction types](#transactio
 
 A `failed` status indicates that any one of the [transaction types](#transaction-types) was failed.
 
-TODO: where do I find the failure reason?
+::: tip
+Commerce’s [RequestResponseInterface](commerce3:craft\commerce\base\RequestResponseInterface) stores the HTTP response code and message from the payment gateway, which may include a reason or reference code for the failed transaction.
+:::
