@@ -370,7 +370,7 @@ By default Craft will run `mysqldump` or `pg_dump`, provided that those librarie
 
 There are several tokens you can use that Craft will swap out at runtime:
 
-- `{path}` - the target backup file path
+- `{file}` - the target backup file path
 - `{port}` - the current database port
 - `{server}` - the current database host name
 - `{user}` - the user to connect to the database
