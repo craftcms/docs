@@ -370,7 +370,7 @@ When set to `null` (default), Craft will run `mysqldump` or `pg_dump`, provided 
 
 You may provide your own command optionally using several tokens Craft will swap out at runtime:
 
-- `{path}` - バックアップファイルのターゲットパス
+- `{file}` - the target backup file path
 - `{port}` - the current database port
 - `{server}` - the current database host name
 - `{user}` - the user to connect to the database
