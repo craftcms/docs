@@ -33,7 +33,7 @@ module.exports = {
         {
           title: "More",
           collapsable: false,
-          children: ["template-hooks", "tax-engines", "shipping-engines"]
+          children: ["template-hooks", "tax-engines"]
         }
       ],
       "/": [
