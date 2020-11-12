@@ -72,12 +72,11 @@ module.exports = {
             "donations",
             "payment-gateways",
             "payment-currencies"
-            // "custom-order-statuses",
-            // "order-status-emails",
           ],
           toggleChildren: [
             "addresses",
             "countries-states",
+            "custom-order-statuses",
             "line-item-statuses",
             "emails",
             "pdfs"
