@@ -1,6 +1,6 @@
 # PDFs
 
-Commerce includes the option to create any number of order PDFs that can be downloaded from the control panel or included in [status emails](#order-status-emails.md).
+Commerce includes the option to create any number of order PDFs that can be downloaded from the control panel or included in [status emails](#emails.md).
 
 You can manage these PDFs in the control panel visiting **Commerce** → **System Settings** → **PDFs**.
 
@@ -32,7 +32,7 @@ Visit **Commerce** → **Orders**, choose an order, and then choose **Download P
 
 You can automatically attach a copy of a PDF in order emails.
 
-Create a new [order email](order-status-emails.md) or select an existing one. You’ll see your new PDF(s) available in the **PDF Attachment** field. Select whichever PDF you’d like, choose **Save**, and that PDF will be included along with the email when it’s sent.
+Create a new [order status email](emails.md) or select an existing one. You’ll see your new PDF(s) available in the **PDF Attachment** field. Select whichever PDF you’d like, choose **Save**, and that PDF will be included along with the email when it’s sent.
 
 
 ## Creating PDF Templates

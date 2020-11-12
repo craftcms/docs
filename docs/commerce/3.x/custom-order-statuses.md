@@ -59,7 +59,7 @@ If you’d like to delete an order status, first select all orders having that s
 
 In addition to using order statuses to manage your orders, you can choose emails that will be sent when an order moves into that status.
 
-See [Order Status Emails](order-status-emails.md).
+See [Emails](emails.md).
 
 ## Line Item Statuses
 

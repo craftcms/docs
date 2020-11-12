@@ -491,7 +491,7 @@ This will set temporarily the order’s calculation mode to *Recalculate All* an
 
 ### Order Status Emails
 
-If [status emails](order-status-emails.md) are set up for a newly-updated order status, messages will be sent when the updated order is saved.
+If [status emails](emails.md) are set up for a newly-updated order status, messages will be sent when the updated order is saved.
 
 You can manually re-send an order status email at any time. Navigate to an order’s edit page, then select the desired email from the Send Email menu at the top of the page.
 
