@@ -1,47 +1,45 @@
 # Products Fields
 
-Commerce Products fields allow you to relate products to a parent element.
+Commerce Products fields allow you to relate [products](products-variants.md#products) to other elements.
 
 ## Settings
 
-<img src="./assets/products-field-settings.png" width="422" alt="Products field settings.">
+Commerce Products fields have the following settings:
 
-Products fields have the following settings:
-
-- **Sources** are the product types you want to relate entries from. (Default is “All”.)
-- **Limit** is the maximum number of products that can be related with the field at once. (Default is no limit.)
-- **Selection Label** is the label to be shown on the field’s selection button. (Default is “Add a product”.)
+- **Sources** – the product types you want to relate entries from. (Default is “All”.)
+- **Limit** – the maximum number of products that can be related with the field at once. (Default is no limit.)
+- **Selection Label** – the label to be shown on the field’s selection button. (Default is “Add a product”.)
 
 ## The Field
 
-Products fields list all of the currently selected products, with a button to select new ones:
+Commerce Products fields list all of the currently selected products, with a button to select new ones:
 
 <img src="./assets/product-field-example.png" width="297" alt="Products field">
 
-Choosing “Add an entry” will bring up a modal window where you can find and select additional entries:
+Choosing “Add a product” will open a modal window where you can find and select additional products:
 
 <img src="./assets/product-field-modal.png" width="600" alt="Product selection modal">
 
 ## Templating
 
-If you have an element with a Products field in your template, you can access its selected products with the field handle:
+If you have an element with a products field in your template, you can access its selected products with the field handle:
 
 ```twig
-{% set products = entry.productsFieldHandle %}
+{% set products = entry.myFieldHandle %}
 ```
 
-That will give you an [element query](https://craftcms.com/docs/3.x/element-queries.html) prepped to output all of the selected products for the given field.
+That will give you an [element query](/3.x/element-queries.md) prepped to output all the selected products for the given field.
 
 ::: tip
-See [Relations](https://craftcms.com/docs/relations) for more info on the `relatedTo` param.
+See [Relations](/3.x/relations.md) for more info on the `relatedTo` param.
 :::
 
 ## Examples
 
-To check if your Products field has any selected products, you can use the `length` filter:
+To check if your Commerce Products field has any selected products, you can use the `length` filter:
 
 ```twig
-{% if entry.productsFieldHandle|length %}
+{% if entry.myFieldHandle|length %}
     {# ... #}
 {% endif %}
 ```
@@ -49,15 +47,15 @@ To check if your Products field has any selected products, you can use the `leng
 Loop through all the selected products using `all()`:
 
 ```twig
-{% for product in entry.productsFieldHandle.all() %}
+{% for product in entry.myFieldHandle.all() %}
     {# ... #}
 {% endfor %}
 ```
 
-Rather than typing `entry.productsFieldHandle` every time, you can call it once and set it to another variable:
+Rather than typing `entry.myFieldHandle` every time, you can call it once and set it to another variable:
 
 ```twig
-{% set products = entry.productsFieldHandle.all() %}
+{% set products = entry.myFieldHandle.all() %}
 
 {% if products|length %}
 
@@ -69,16 +67,16 @@ Rather than typing `entry.productsFieldHandle` every time, you can call it once 
 {% endif %}
 ```
 
-You can add parameters to the element query as well:
+You can also add parameters to the element query:
 
 ```twig
-{% set clothingProducts = entry.productsFieldHandle.type('clothing') %}
+{% set clothingProducts = entry.myFieldHandle.type('clothing') %}
 ```
 
-If your Products field is only meant to have a single product selected, remember that calling your Products field will still give you the same element query, not the selected product. To get the first (and only) product selected, use `one()`:
+If your products field is only meant to have a single product selected, remember that calling your products field will still give you the same element query, not the selected product. To get the first (and only) product selected, use `one()`:
 
 ```twig
-{% set product = entry.productsFieldHandle.one() %}
+{% set product = entry.myFieldHandle.one() %}
 {% if product %}
     {# ... #}
 {% endif %}
