@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "flexsearch": "^0.6.32",
-    "html-to-text": "^6.0.0",
+    "html-to-text": "^5.1.1",
     "typemate": "^0.7.1"
   }
 }
