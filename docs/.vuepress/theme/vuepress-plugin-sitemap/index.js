@@ -34,7 +34,7 @@ module.exports = (options, context) => {
         )
       }
 
-      log('Generating sitemap...')
+      //log('Generating sitemap...')
 
       const { pages, locales, base } = context.getSiteData
         ? context.getSiteData()
@@ -125,7 +125,7 @@ module.exports = (options, context) => {
             ...page
           })
         } else {
-          console.log(`excluded ${url}`);
+          //console.log(`excluded ${url}`);
         }
       })
 
@@ -139,11 +139,11 @@ module.exports = (options, context) => {
         }
       })
 
-      log(`found ${sitemap.urls.length} locations`)
+      //log(`found ${sitemap.urls.length} locations`)
       const sitemapXML = path.resolve(context.outDir || options.dest, outFile)
 
       fs.writeFileSync(sitemapXML, sitemap.toString())
-      log(`${sitemap.urls.length} locations have been written.`)
+      //log(`${sitemap.urls.length} locations have been written.`)
     }
   }
 }
