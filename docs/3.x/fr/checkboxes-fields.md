@@ -71,9 +71,9 @@ To see if a particular option is checked, use [contains()](craft3:craft\fields\d
 {% if entry.myFieldHandle.contains('foo') %}
 ```
 
-### Saving Checkboxes Fields in Entry Forms
+### Saving Checkboxes Fields
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Checkboxes field, you can use this template as a starting point:
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Checkboxes field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
