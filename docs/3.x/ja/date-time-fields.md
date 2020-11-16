@@ -65,9 +65,9 @@ Craft and Twig provide several Twig filters for manipulating dates, which you ca
 - [rss](dev/filters.md#rss)
 - [date_modify](https://twig.symfony.com/doc/2.x/filters/date_modify.html)
 
-### Saving Date Fields in Entry Forms
+### Saving Date Fields
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Date field, you can create a `date` or `datetime-local` input.
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Date field, you can create a `date` or `datetime-local` input.
 
 If you just want the user to be able to select a date, use a `date` input:
 
