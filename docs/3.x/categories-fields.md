@@ -148,6 +148,53 @@ You can set [parameters](categories.md#parameters) on the category query as well
 It’s always a good idea to clone the category query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
 :::
 
+### Saving Categories Fields
+
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Categories field, you will need to submit your field value as a list of category IDs.
+
+For example, you could create a list of checkboxes for each of the possible relations:
+
+```twig
+{# Include a hidden input first so Craft knows to update the existing value
+   if no checkboxes are checked. #}
+{{ hiddenInput('fields[myFieldHandle]', '') }}
+
+{# Get all of the possible category options #}
+{% set possibleCategories = craft.categories()
+    .group('food')
+    .all() %}
+
+{# Get the currently related category IDs #}
+{% set relatedCategoryIds = entry is defined
+    ? entry.myFieldHandle.ids()
+    : [] %}
+
+<ul>
+    {% nav possibleCategory in possibleCategories %}
+        <li>
+            <label>
+                {{ input(
+                    'checkbox',
+                    'fields[myFieldHandle][]',
+                    possibleCategory.id,
+                    { checked: possibleCategory.id in relatedCategoryIds }
+                ) }}
+                {{ possibleCategory.title }}
+            </label>
+            {% ifchildren %}
+                <ul>
+                    {% children %}
+                </ul>
+            {% endifchildren %}
+        </li>
+    {% endfor %}
+</ul>
+```
+
+::: tip
+Note that it’s not possible to customize the order that categories will be related in, and if a nested category is related, so will each of its ancestors.
+:::
+
 ## See Also
 
 * [Category Queries](categories.md#querying-categories)
