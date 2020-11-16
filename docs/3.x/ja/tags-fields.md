@@ -112,6 +112,47 @@
 It’s always a good idea to clone the tag query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
 :::
 
+### Saving Tags Fields
+
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Tags field, you will need to submit your field value as a list of tag IDs, in the order you want them to be related.
+
+For example, you could create a list of checkboxes for each of the possible relations:
+
+```twig
+{# Include a hidden input first so Craft knows to update the existing value
+   if no checkboxes are checked. #}
+{{ hiddenInput('fields[myFieldHandle]', '') }}
+
+{# Get all of the possible tag options #}
+{% set possibleTags = craft.entries()
+    .group('blogEntryTags')
+    .orderBy('title ASC')
+    .all() %}
+
+{# Get the currently related tag IDs #}
+{% set relatedTagIds = entry is defined
+    ? entry.myFieldHandle.ids()
+    : [] %}
+
+<ul>
+    {% for possibleTag in possibleTags %}
+        <li>
+            <label>
+                {{ input(
+                    'checkbox',
+                    'fields[myFieldHandle][]',
+                    possibleTag.id,
+                    { checked: possibleTag.id in relatedTagIds }
+                ) }}
+                {{ possibleTag.title }}
+            </label>
+        </li>
+    {% endfor %}
+</ul>
+```
+
+You could then make the checkbox list sortable, so users have control over the order of related tags.
+
 ## 関連項目
 
 * [タグクエリ](tags.md#querying-tags)
