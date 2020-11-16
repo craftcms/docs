@@ -103,6 +103,47 @@
 It’s always a good idea to clone the user query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
 :::
 
+### Saving Users Fields
+
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Users field, you will need to submit your field value as a list of user IDs, in the order you want them to be related.
+
+For example, you could create a list of checkboxes for each of the possible relations:
+
+```twig
+{# Include a hidden input first so Craft knows to update the existing value
+   if no checkboxes are checked. #}
+{{ hiddenInput('fields[myFieldHandle]', '') }}
+
+{# Get all of the possible user options #}
+{% set possibleUsers = craft.entries()
+    .group('authors')
+    .orderBy('username ASC')
+    .all() %}
+
+{# Get the currently related user IDs #}
+{% set relatedUserIds = entry is defined
+    ? entry.myFieldHandle.ids()
+    : [] %}
+
+<ul>
+    {% for possibleUser in possibleUsers %}
+        <li>
+            <label>
+                {{ input(
+                    'checkbox',
+                    'fields[myFieldHandle][]',
+                    possibleUser.id,
+                    { checked: possibleUser.id in relatedUserIds }
+                ) }}
+                {{ possibleUser.friendlyName }}
+            </label>
+        </li>
+    {% endfor %}
+</ul>
+```
+
+You could then make the checkbox list sortable, so users have control over the order of related entries.
+
 ## 関連項目
 
 * [ユーザークエリ](users.md#querying-users)
