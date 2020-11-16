@@ -68,9 +68,9 @@
 {% endfor %}
 ```
 
-### 投稿フォームでセレクトボックスフィールドを保存
+### Saving Dropdown Fields
 
-セレクトボックスフィールドを含める必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、出発点としてこのテンプレートを使用してください。
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Dropdown field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
