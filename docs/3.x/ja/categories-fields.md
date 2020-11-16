@@ -81,7 +81,7 @@
 テンプレート内でカテゴリフィールドのエレメントを取得する場合、カテゴリフィールドのハンドルを利用して、関連付けられたカテゴリにアクセスできます。
 
 ```twig
-{% set relatedCategories = entry.myFieldHandle %}
+{% set query = entry.myFieldHandle %}
 ```
 
 これは、所定のフィールドで関連付けられたすべてのカテゴリを出力するよう準備された[カテゴリクエリ](categories.md#querying-categories)を提供します。
@@ -139,10 +139,61 @@
 カテゴリクエリで[パラメータ](categories.md#parameters)をセットすることもできます。 例えば、“leaves”（子を持たないカテゴリ）だけを取得するには、[leaves](categories.md#leaves) パラメータをセットします。
 
 ```twig
-{% set relatedCategories = entry.myFieldHandle
+{% set relatedCategories = clone(entry.myFieldHandle)
     .leaves()
     .all() %}
 ```
+
+::: tip
+It’s always a good idea to clone the category query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
+:::
+
+### Saving Categories Fields
+
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Categories field, you will need to submit your field value as a list of category IDs.
+
+For example, you could create a list of checkboxes for each of the possible relations:
+
+```twig
+{# Include a hidden input first so Craft knows to update the existing value
+   if no checkboxes are checked. #}
+{{ hiddenInput('fields[myFieldHandle]', '') }}
+
+{# Get all of the possible category options #}
+{% set possibleCategories = craft.categories()
+    .group('food')
+    .all() %}
+
+{# Get the currently related category IDs #}
+{% set relatedCategoryIds = entry is defined
+    ? entry.myFieldHandle.ids()
+    : [] %}
+
+<ul>
+    {% nav possibleCategory in possibleCategories %}
+        <li>
+            <label>
+                {{ input(
+                    'checkbox',
+                    'fields[myFieldHandle][]',
+                    possibleCategory.id,
+                    { checked: possibleCategory.id in relatedCategoryIds }
+                ) }}
+                {{ possibleCategory.title }}
+            </label>
+            {% ifchildren %}
+                <ul>
+                    {% children %}
+                </ul>
+            {% endifchildren %}
+        </li>
+    {% endfor %}
+</ul>
+```
+
+::: tip
+Note that it’s not possible to customize the order that categories will be related in, and if a nested category is related, so will each of its ancestors.
+:::
 
 ## 関連項目
 
