@@ -68,9 +68,9 @@ To loop through all of the available options, iterate over the [options](craft3:
 {% endfor %}
 ```
 
-### Saving Radio Buttons Fields in Entry Forms
+### Saving Radio Buttons Fields
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Radio Buttons field, you can use this template as a starting point:
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Radio Buttons field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}

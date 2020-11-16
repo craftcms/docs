@@ -132,9 +132,9 @@ You can set [parameters](matrix-blocks.md#parameters) on the Matrix block query 
 It’s always a good idea to clone the Matrix query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
 :::
 
-### Saving Matrix Fields in Entry Forms
+### Saving Matrix Fields
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Matrix field, you will need to submit your field value in this format:
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Matrix field, you will need to submit your field value in this format:
 
 ```
 - sortOrder
