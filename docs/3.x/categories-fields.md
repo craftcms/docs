@@ -81,7 +81,7 @@ Possible values include:
 If you have an element with a Categories field in your template, you can access its related categories using your Categories field’s handle:
 
 ```twig
-{% set relatedCategories = entry.myFieldHandle %}
+{% set query = entry.myFieldHandle %}
 ```
 
 That will give you a [category query](categories.md#querying-categories), prepped to output all of the related categories for the given field.
@@ -139,10 +139,14 @@ If you just need to check if there are any related categories (but don’t need 
 You can set [parameters](categories.md#parameters) on the category query as well. For example, to only fetch the “leaves” (categories without any children), set the [leaves](categories.md#leaves) param:
 
 ```twig
-{% set relatedCategories = entry.myFieldHandle
+{% set relatedCategories = clone(entry.myFieldHandle)
     .leaves()
     .all() %}
 ```
+
+::: tip
+It’s always a good idea to clone the category query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
+:::
 
 ## See Also
 
