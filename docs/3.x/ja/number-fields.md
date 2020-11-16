@@ -56,9 +56,9 @@
 {{ entry.myFieldHandle|number(decimals=0) }}
 ```
 
-### 投稿フォームで数字フィールドを保存
+### Saving Number Fields
 
-数字フィールドを含む[投稿フォーム](dev/examples/entry-form.md)が必要な場合、出発点としてこのテンプレートを使用してください。
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Number field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
