@@ -42,9 +42,9 @@ If you have an element with a Lightswitch field in your template, you can access
 If the element doesn’t have an explicit Lightswitch field value yet, the field’s default value will be returned.
 :::
 
-### Saving Lightswitch Fields in Entry Forms
+### Saving Lightswitch Fields
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Lightswitch field, you can use this template as a starting point:
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Lightswitch field, you can use this template as a starting point:
 
 ```twig
 {{ hiddenInput('fields[myFieldHandle]', '') }}
