@@ -1,8 +1,4 @@
-# Shipping Methods
-
-::: warning
-Shipping methods are only available in the [Pro edition](editions.md) of Craft Commerce.
-:::
+# Shipping Methods <badge type="edition" vertical="middle" title="Shipping methods are only available in Commerce Pro">Pro</badge>
 
 Several options are available for adding shipping costs to the cart:
 
