@@ -15,6 +15,8 @@ Craft Commerce provides several ways of adding shipping costs to the cart:
 Before writing your own shipping adjuster or shipping method (option 2 or 3), make sure you’re comfortable [creating a plugin or module for Craft CMS](https://craftcms.com/docs/3.x/extend/).
 :::
 
+Since the best code is code you don’t have to write, it’s best to see if the included shipping system can be used to address the shipping needs of your store. Adding or modifying adjusters means introducing a minimal amount of custom PHP, while adding your own shipping method offers the greatest flexibility when the first two options are too limited. The most common reason for introducing a custom shipping method is to provide an integration with an external API for getting rates.
+
 ## Creating a Shipping Adjuster
 
 A shipping adjuster is a specific kind of adjuster whose `type` is set to `shipping`.
