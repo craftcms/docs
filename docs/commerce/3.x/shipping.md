@@ -1,49 +1,46 @@
 # Shipping
 
-The shipping system in Craft Commerce faciliates adding shipping costs to the cart.
+Craft Commerce includes a shipping system for adding shipping costs to a cart.
 
 ::: warning
-Shipping features differ depending on your [edition](editions.md) of Craft Commerce.
+[Shipping features differ](#edition-differences) depending on your edition of Craft Commerce.
 :::
 
-In the Lite edition of Craft Commerce only two fixed shipping costs can be configured:
+You can add any number of [shipping methods](#shipping-methods) to your store, where each one’s purpose is to supply relevant *shipping options* for an order at checkout.
 
-1. A single fixed per-order shipping cost
-2. A per-item fixed shipping cost
+The shipping method determines relevant options with its [shipping rules](#shipping-rules) and the store’s [shipping categories](#shipping-categories) and [shipping zones](#shipping-zones) configured in the control panel.
 
-These shipping cost settings can be updated in Commerce → Settings → General, and show up on every order made when running the Lite edition of Craft Commerce. You can set these to zero if no shipping costs need to be added to the order.
+A store manager can see and manage these shipping details via **Commerce** → **Shipping** in the control panel.
 
-In the Pro edition of Commerce, complex shipping rules including categories, zones and rules are available. The core components of the shipping system are:
-
-- Shipping categories
-- Shipping zones
-- Shipping methods and rules
-
-Shipping methods and rules are at the core of the shipping engine in the Pro edition of Craft Commerce. The shipping rules use shipping categories, shipping zones, and additional order conditions to determine which shipping methods are available to the cart for customer selection.
+Let’s look at each of these factors, starting with the broader shipping categories and zones.
 
 ## Shipping Categories
 
-Shipping categories are a way to identify different types of products to the shipping system.
+Shipping categories are used to classify products according to how they’re shipped. At least one shipping category is required, but you can use any number of them.
 
-When defining a product type, you can see the shipping categories products of that type can belong to. When setting up individual products, an author can choose which of the available shipping categories that product belongs to.
+In the control panel, you’ll see the relationship between products and shipping categories in several places:
 
-When setting up a shipping category, you can select which product types are available to it.
+1. When creating or editing a shipping category from **Commerce** → **Shipping** → **Shipping Categories**, an **Available to Product Types** field lets store managers select the product types the category should be available to.
+2. When creating or editing a [product type](products-variants.md#product-types), you’ll have a read-only view of the shipping categories available to it in the **Tax & Shipping** tab.
+3. When editing an individual product, the default shipping category will be selected in a dropdown along with any other categories available for that product type.
 
-While setting up shipping rules, you have the ability to include those shipping categories into the rule’s conditions and costs.
+While setting up [shipping rules](#shipping-rules), the available shipping categories can factor into the rule’s conditions and costs.
 
-For example, you might set up a shipping rule that’s unavailable if the cart contains a product in a specific shipping category. You might have another shipping rule that returns special prices for different categories of products in the cart.
+TODO: improve this example with actual configuration or move it to a section with examples since these things are all related
+
+For example, you might set up a shipping rule that’s unavailable when the cart has a product in a specific shipping category. You might have another shipping rule that returns special prices for different categories of products in the cart.
 
 ## Shipping Zones
 
-Shipping zones are areas you ship to. Shipping zones can be made up of one or more countries, and (optionally) further specify one or more states within those countries. They can also provide a zip code condition formula.
+Shipping zones are geographical areas your store ships to. Shipping zones can be made up of one or more countries, and (optionally) specify one or more states within those countries. They can also provide a zip code condition formula.
 
 For example, you might make one zone for the USA and Canada, and another zone for the international countries you ship to.
 
-These zones can then be used within the shipping rules as conditions to match on the customer’s shipping address.
-
-Tax Zones are either country-based, matching the shipping address to the list of countries in the zone, or state-based, matching the shipping address to the list of states in the zone. In addition to country and state matching, an address can match a zip code condition formula.
+Like shipping categories, these tax zones can factor into [shipping rule](#shipping-rules) conditions and costs. Shipping zones can be used for conditions that apply to the customer’s shipping address.
 
 ### Zip code condition formula
+
+In addition to country and state matching, an address can match a zip code condition formula.
 
 A zip code condition formula is an expression written in [Twig’s expression syntax](https://twig.symfony.com/doc/2.x/templates.html#expressions) that returns `true` or `false`.
 
@@ -63,7 +60,7 @@ zipCode in ['NG102', 'ZZ200', 'CC101']
 
 Shipping methods are the choices available to the customer during checkout. For example, a shipping method might be called “Pickup”, “FedEx”, “USPS”, or “Express”.
 
-You can name these shipping methods anything that makes sense to the customer. They don’t need to be shipping company names, but usually indicate the delivery method. For example, you could have two shipping methods, one called “FedEx Standard” and “FedEx Overnight”.
+You can name these shipping methods anything that makes sense to the customer. They don’t need to be shipping company names, but usually indicate the delivery method. For example, you could have two shipping methods: one called “FedEx Standard” and “FedEx Overnight”.
 
 Shipping methods contain a collection of shipping rules, which are conditions for determining when the shipping method should be available.
 
@@ -152,3 +149,28 @@ The default amount based on a percentage of item’s cost.
 #### Category Rate Overrides
 
 You can further customize the Per Item, Weight, and Percentage rates in each category.
+
+## Configuration Examples
+
+TODO: write
+
+## Edition Differences
+
+In the Lite edition of Craft Commerce only two fixed shipping costs can be configured:
+
+1. A single fixed per-order shipping cost
+2. A per-item fixed shipping cost
+
+These shipping cost settings can be updated in Commerce → Settings → General, and show up on every order made when running the Lite edition of Craft Commerce. You can set these to zero if no shipping costs need to be added to the order.
+
+In the Pro edition of Commerce, complex shipping rules including categories, zones and rules are available. The core components of the shipping system are:
+
+- Shipping categories
+- Shipping zones
+- Shipping methods and rules
+
+Shipping methods and rules are at the core of the shipping engine in the Pro edition of Craft Commerce. The shipping rules use shipping categories, shipping zones, and additional order conditions to determine which shipping methods are available to the cart for customer selection.
+
+::: tip
+See the [Shipping Methods](extend/shipping-methods.md) page in the _Extending Commerce_ section to learn how to write your own custom shipping method.
+:::
