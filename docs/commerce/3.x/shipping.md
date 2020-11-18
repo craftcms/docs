@@ -26,9 +26,7 @@ In the control panel, you’ll see the relationship between products and shippin
 
 While setting up [shipping rules](#shipping-rules), the available shipping categories can factor into the rule’s conditions and costs.
 
-TODO: improve this example with actual configuration or move it to a section with examples since these things are all related
-
-For example, you might set up a shipping rule that’s unavailable when the cart has a product in a specific shipping category. You might have another shipping rule that returns special prices for different categories of products in the cart.
+For example, you might set up a shipping rule that’s unavailable when the cart has a product in a specific shipping category. You might have another shipping rule that returns special shipping prices for different categories of products in the cart.
 
 ## Shipping Zones
 
@@ -152,7 +150,15 @@ You can further customize the Per Item, Weight, and Percentage rates in each cat
 
 ## Configuration Examples
 
-TODO: write
+There are lots of ways you might combine the included shipping rules depending on what matters most for your store.
+
+For example, some stores may sell relatively uniform items that ship to a number of specific **areas**. In this case, the shipping configuration will depend heavily on zones and rules that ensure the right shipping methods are available for each target zone.
+
+Another type of store may have broad **variation in product types**, from a pack of stickers to a refrigerator that may require a radically different type of shipping. This store’s shipping configuration will likely emphasize shipping prices per product type.
+
+Yet another store may place more importance on providing a **broad range of delivery methods**, meaning its shipping configuration will rely heavily on categories and rules across a significant number of shipping methods.
+
+It’s best to identify whatever aspect of the store’s shipping is most complex or specific, and plan around that concern with whatever features need to support it.
 
 ## Edition Differences
 
@@ -161,7 +167,7 @@ In the Lite edition of Craft Commerce only two fixed shipping costs can be confi
 1. A single fixed per-order shipping cost
 2. A per-item fixed shipping cost
 
-These shipping cost settings can be updated in Commerce → Settings → General, and show up on every order made when running the Lite edition of Craft Commerce. You can set these to zero if no shipping costs need to be added to the order.
+These shipping cost settings can be updated in **Commerce** → **Settings** → **General**, and show up on every order made when running the Lite edition of Craft Commerce. You can set these to zero if no shipping costs need to be added to the order.
 
 In the Pro edition of Commerce, complex shipping rules including categories, zones and rules are available. The core components of the shipping system are:
 
