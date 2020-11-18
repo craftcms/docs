@@ -1365,9 +1365,9 @@ Whether Craft should convert any non-ASCII characters in uploaded file names to 
 
 ### `defaultImageQuality`
 
-**Accepts**: A numeric value between 0 and 100, 0 being the lowest quality and smallest file size, and 100 being the highest quality and largest file size
+**Accepts**: A numeric value between 1 and 100, 1 being the lowest quality and smallest file size, and 100 being the highest quality and largest file size
 
-**Default**: `75`
+**Default**: `82`
 
 **Since**: Craft 1.1
 
