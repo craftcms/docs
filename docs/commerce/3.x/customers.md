@@ -4,6 +4,8 @@ With Craft Commerce, a _Customer_ is a model representing a person who may place
 
 That person could’ve placed an order as a guest or be a registered user with an associated Craft [user account](https://craftcms.com/docs/3.x/users.html) for logging in and making orders with saved information.
 
+Customers can be found in the control panel by navigating to **Commerce** → **Customers**.
+
 Every Craft user has a customer record by default, even if that user has never created an order.
 
 ::: tip
@@ -16,7 +18,6 @@ If a customer checks out as a guest, a new customer record will be created. If a
 
 If a customer is logged in, any order will naturally be associated with that user the moment the cart is created and on through completion.
 
-Customers can be found in the control panel by navigating to Commerce → Customers.
 
 ## Customer List
 
