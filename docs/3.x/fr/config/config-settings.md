@@ -2646,7 +2646,7 @@ Since
 
 
 
-The [SameSite](https://www.owasp.org/index.php/SameSite) value that should be set on Craft cookies, if any.
+The [SameSite](https://owasp.org/www-community/SameSite) value that should be set on Craft cookies, if any.
 
 This can be set to `'Lax'`, `'Strict'`, or `null`.
 
