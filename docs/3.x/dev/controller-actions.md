@@ -36,6 +36,7 @@ Param | Description
 `entryId` | Fallback if `sourceId` isn’t passed, for backwards compatibility.
 `entryVariable` | The hashed name of the variable that should reference the entry, if a validation error occurs. (Defaults to `entry`.)
 `expiryDate` | The expiry date for the entry. (Defaults to the current expiry date, or `null`.)
+`failMessage` | The hashed flash notice that should be displayed, if the entry is not saved successfully. (Only used for `text/html` requests.)
 `fieldsLocation` | The name of the param that holds the custom field values. (Defaults to `fields`.)
 `fields` | An array of new custom field values, indexed by field handles. (The param name can be customized via `fieldsLocation`.) Only fields that are included in this array will be updated.
 `parentId` | The ID of the parent entry, if it belongs to a structure section.
@@ -45,6 +46,7 @@ Param | Description
 `siteId` | The ID of the site to save the entry in.
 `slug` | The entry slug. (Defaults to the current slug, or an auto-generated slug.)
 `sourceId` | The ID of the entry to save, if updating an existing entry.
+`successMessage` | The hashed flash notice that should be displayed, if the entry is saved successfully. (Only used for `text/html` requests.)
 `title` | The entry title. (Defaults to the current entry title.)
 `typeId` | The entry type ID to save the entry as. (Defaults to the current entry type.)
 
@@ -73,6 +75,7 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
+`failMessage` | The hashed flash notice that should be displayed, if the user is not logged in successfully. (Only used for `text/html` requests.)
 `loginName` | The username or email of the user to login.
 `password` | The user’s password.
 `rememberMe` | Whether to keep the user logged-in for an extended period of time per the <config3:rememberedUserSessionDuration> config setting (`1`/`0`).
@@ -107,13 +110,16 @@ Param | Description
 `admin` | Whether the user should be saved as an admin (`1`/`0`). Only checked if the logged-in user is an admin.
 `currentPassword` | The user’s current password, which is required if `email` or `newPassword` are sent.
 `email` | The user’s email address. (Only checked if registering a new user, updating the logged-in user, or the logged-in user is allowed to administrate users.)
+`failMessage` | The hashed flash notice that should be displayed, if the user account is not saved successfully. (Only used for `text/html` requests.)
 `firstName` | The user’s first name.
 `lastName` | The user’s last name.
 `newPassword` | The user’s new password, if updating the logged-in user’s account. (If registering a new user, send `password`.)
 `passwordResetRequired` | Whether the user must reset their password before logging in again (`1`/`0`). Only checked if the logged-in user is an admin.
 `password` | The user’s password, if registering a new user. (If updating an existing user, send `newPassword`.)
 `photo` | An uploaded user photo.
+`redirect` | The hashed URL to redirect the browser to, if the user account is saved successfully. (The requested URI will typically be used by default.)
 `sendVerificationEmail` | Whether a verification email should be sent before accepting the new `email` (`1`/`0`). (Only checked if email verification is enabled, and the logged-in user is allowed to opt out of sending it.)
+`successMessage` | The hashed flash notice that should be displayed, if the user account is saved successfully. (Only used for `text/html` requests.)
 `userId` | The ID of the user to save, if updating an existing user.
 `userVariable` | The hashed name of the variable that should reference the user, if a validation error occurs. (Defaults to `user`.)
 `username` | The user’s username. (Only checked if the <config3:useEmailAsUsername> config setting is disabled.)
@@ -144,6 +150,7 @@ The following params can be sent with the request:
 Param | Description
 ----- | -----------
 `loginName` | The username or email of the user to send a password reset email for.
+`successMessage` | The hashed flash notice that should be displayed, if the email is sent successfully. (Only used for `text/html` requests.)
 `userId` | The ID of the user to send a password reset email for. (Only checked if the logged-in user has permission to edit other users.)
 
 ### Output
@@ -170,6 +177,7 @@ The following params can be sent with the request:
 Param | Description
 ----- | -----------
 `code` | The user’s verification code.
+`failMessage` | The hashed flash notice that should be displayed, if the password is not set successfully. (Only used for `text/html` requests.)
 `id` | The user’s UUID.
 `newPassword` | The user’s new password.
 

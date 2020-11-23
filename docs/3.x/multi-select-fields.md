@@ -71,9 +71,9 @@ To see if a particular option is selected, use [contains()](craft3:craft\fields\
 {% if entry.myFieldHandle.contains('foo') %}
 ```
 
-### Saving Multi-select Fields in Entry Forms
+### Saving Multi-select Fields
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Multi-select field, you can use this template as a starting point:
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Multi-select field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}

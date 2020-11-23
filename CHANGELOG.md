@@ -2,6 +2,14 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-11-16
+### Added
+- Added element form examples to the Categories, Tags, and Users field pages in the Craft 3 docs.
+
+## 2020-11-13
+### Changed
+- Documented some missing parameters on the Craft 3 Controller Actions page.
+
 ## 2020-10-22
 ### Changed
 - Improved the Control Panel Template page in the Craft 3 docs.

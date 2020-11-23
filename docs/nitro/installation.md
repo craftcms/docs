@@ -4,7 +4,7 @@
 
 ### macOS and Linux
 
-1. Install [Multipass](https://multipass.run) (requires 1.4.0+).
+1. Install [Multipass](https://multipass.run) (requires 1.5.0+).
 2. Run this terminal command:
 
     ```bash
@@ -19,7 +19,7 @@
 Windows doesn’t currently have an automated install script, so installation and updating must be done manually.
 :::
 
-1. Install [Multipass](https://multipass.run) (requires 1.4.0+).
+1. Install [Multipass](https://multipass.run) (requires 1.5.0+).
 2. Download `nitro_windows_x86_64.zip` from the latest [release](https://github.com/craftcms/nitro/releases)
 3. Create a `Nitro` folder in your home folder, if it does not exist. i.e. `C:\Users\<username>\Nitro`
 4. Extract the zip file and copy `nitro.exe` into the `Nitro` folder you just created in your home folder.

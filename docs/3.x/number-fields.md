@@ -56,9 +56,9 @@ If the number will always be an integer, pass `decimals=0` to format the number 
 {{ entry.myFieldHandle|number(decimals=0) }}
 ```
 
-### Saving Number Fields in Entry Forms
+### Saving Number Fields
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Number field, you can use this template as a starting point:
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Number field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}

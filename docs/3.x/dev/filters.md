@@ -806,7 +806,7 @@ Appends one or more items onto the end of an array, and returns the new array.
 
 ```twig
 {% set array1 = ['foo'] %}
-{% set array2 = array|push('bar', 'baz') %}
+{% set array2 = array1|push('bar', 'baz') %}
 {# Result: ['foo', 'bar', 'baz'] #}
 ```
 
@@ -983,7 +983,7 @@ Prepends one or more items to the beginning of an array, and returns the new arr
 
 ```twig
 {% set array1 = ['foo'] %}
-{% set array2 = array|unshift('bar', 'baz') %}
+{% set array2 = array1|unshift('bar', 'baz') %}
 {# Result: ['bar', 'baz', 'foo'] #}
 ```
 

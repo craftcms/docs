@@ -74,9 +74,9 @@ If it’s set, you can output a formatted time based on its value using the [tim
 {% endif %}
 ```
 
-### Saving Time Fields in Entry Forms
+### Saving Time Fields
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Time field, you can create a `time` input.
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Time field, you can create a `time` input.
 
 ```twig
 {% set currentValue = entry is defined and entry.myFieldHandle
