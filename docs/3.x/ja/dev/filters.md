@@ -763,9 +763,9 @@ That will configure HTML Purifier based on the settings defined by `config/htmlp
 Appends one or more items onto the end of an array, and returns the new array.
 
 ```twig
-{% set arr1 = {foo: "Foo", bar: "Bar"} %}
-{% set arr2 = arr1|values %}
-{# arr2 = ["Foo", "Bar"] #}
+{% set array1 = ['foo'] %}
+{% set array2 = array1|push('bar', 'baz') %}
+{# Result: ['foo', 'bar', 'baz'] #}
 ```
 
 ## `replace`
@@ -941,7 +941,7 @@ Prepends one or more items to the beginning of an array, and returns the new arr
 
 ```twig
 {% set array1 = ['foo'] %}
-{% set array2 = array|unshift('bar', 'baz') %}
+{% set array2 = array1|unshift('bar', 'baz') %}
 {# Result: ['bar', 'baz', 'foo'] #}
 ```
 
