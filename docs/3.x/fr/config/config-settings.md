@@ -370,7 +370,7 @@ When set to `null` (default), Craft will run `mysqldump` or `pg_dump`, provided 
 
 You may provide your own command optionally using several tokens Craft will swap out at runtime:
 
-- `{file}` - the target backup file path
+- `{path}` - the target backup file path
 - `{port}` - the current database port
 - `{server}` - the current database host name
 - `{user}` - the user to connect to the database
@@ -821,7 +821,7 @@ Defined by
 
 
 
-The quality level Craft will use when saving JPG and PNG files. Ranges from 0 (worst quality, smallest file) to 100 (best quality, biggest file).
+The quality level Craft will use when saving JPG and PNG files. Ranges from 1 (worst quality, smallest file) to 100 (best quality, biggest file).
 
 
 
@@ -2646,7 +2646,7 @@ Since
 
 
 
-The [SameSite](https://owasp.org/www-community/SameSite) value that should be set on Craft cookies, if any.
+The [SameSite](https://www.owasp.org/index.php/SameSite) value that should be set on Craft cookies, if any.
 
 This can be set to `'Lax'`, `'Strict'`, or `null`.
 
