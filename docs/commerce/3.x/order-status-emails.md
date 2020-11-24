@@ -140,7 +140,7 @@ It’s a good idea to always test your status email templates before relying on 
 Once you’ve configured a template, the quickest way to test it is by navigating to **Commerce** → **System Settings** → **Emails** and choosing **Preview** next to the relevant email. This will open a new tab/window to display the template rendered using a random completed order.
 
 ::: tip
-You can add `&orderNumber=ORDER_NUMBER` to the preview URL to use a specific number. Replace `ORDER_NUMBER` with the order number you’d like to preview.
+You can preview a specific order by adding `&orderNumber=ORDER_NUMBER` to the preview URL, replacing `ORDER_NUMBER` with the actual order number you’d like to use.
 :::
 
 If your template is rendering successfully but messages are failing to send, you’ll want to check these things in order:
