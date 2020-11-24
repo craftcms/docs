@@ -283,8 +283,8 @@ This query is used to query for assets.
 | `slug`              | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`               | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`            | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`         | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`      | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`         | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`      | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`               | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`        | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`         | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -331,8 +331,8 @@ This query is used to return the number of assets.
 | `slug`              | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`               | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`            | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`         | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`      | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`         | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`      | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`               | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`        | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`         | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -379,8 +379,8 @@ This query is used to query for a single asset.
 | `slug`              | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`               | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`            | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`         | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`      | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`         | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`      | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`               | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`        | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`         | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -427,8 +427,8 @@ This query is used to query for entries.
 | `slug`             | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`              | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`           | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`        | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`     | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`        | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`     | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`              | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`       | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`        | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -488,8 +488,8 @@ This query is used to return the number of entries.
 | `slug`             | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`              | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`           | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`        | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`     | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`        | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`     | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`              | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`       | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`        | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -549,8 +549,8 @@ This query is used to query for a single entry.
 | `slug`             | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`              | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`           | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`        | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`     | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`        | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`     | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`              | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`       | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`        | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -610,8 +610,8 @@ This query is used to query for global sets.
 | `slug`            | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`             | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`          | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`       | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`    | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`       | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`    | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`             | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`      | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`       | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -647,8 +647,8 @@ This query is used to query for a single global set.
 | `slug`            | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`             | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`          | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`       | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`    | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`       | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`    | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`             | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`      | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`       | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -684,8 +684,8 @@ This query is used to query for users.
 | `slug`            | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`             | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`          | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`       | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`    | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`       | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`    | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`             | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`      | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`       | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -727,8 +727,8 @@ This query is used to return the number of users.
 | `slug`            | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`             | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`          | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`       | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`    | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`       | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`    | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`             | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`      | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`       | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -770,8 +770,8 @@ This query is used to query for a single user.
 | `slug`            | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`             | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`          | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`       | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`    | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`       | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`    | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`             | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`      | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`       | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -813,8 +813,8 @@ This query is used to query for tags.
 | `slug`            | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`             | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`          | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`       | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`    | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`       | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`    | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`             | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`      | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`       | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -851,8 +851,8 @@ This query is used to return the number of tags.
 | `slug`            | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`             | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`          | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`       | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`    | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`       | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`    | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`             | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`      | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`       | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -889,8 +889,8 @@ This query is used to query for a single tag.
 | `slug`            | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`             | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`          | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`       | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`    | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`       | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`    | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`             | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`      | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`       | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -927,8 +927,8 @@ This query is used to query for categories.
 | `slug`             | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`              | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`           | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`        | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`     | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`        | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`     | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`              | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`       | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`        | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -979,8 +979,8 @@ This query is used to return the number of categories.
 | `slug`             | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`              | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`           | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`        | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`     | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`        | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`     | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`              | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`       | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`        | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
@@ -1031,8 +1031,8 @@ This query is used to query for a single category.
 | `slug`             | `[String]`        | Narrows the query results based on the elements’ slugs.                                                                                                    |
 | `uri`              | `[String]`        | Narrows the query results based on the elements’ URIs.                                                                                                     |
 | `search`           | `String`          | Narrows the query results to only elements that match a search query.                                                                                      |
-| `relatedTo`        | `[Int]`           | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
-| `relatedToAll`     | `[Int]`           | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
+| `relatedTo`        | `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.          |
+| `relatedToAll`     | `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. |
 | `ref`              | `[String]`        | Narrows the query results based on a reference string.                                                                                                     |
 | `fixedOrder`       | `Boolean`         | Causes the query results to be returned in the order specified by the `id` argument.                                                                       |
 | `inReverse`        | `Boolean`         | Causes the query results to be returned in reverse order.                                                                                                  |
