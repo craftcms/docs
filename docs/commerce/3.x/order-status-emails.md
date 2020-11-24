@@ -133,3 +133,18 @@ Select the email by name in the _Status Emails_ field. You can select as many em
 ![](./assets/order-status-email-selection.png)
 
 Once you choose “Save” the designated emails will be sent when an order is assigned to that status.
+
+## Troubleshooting
+
+In addition to making sure that your queue is running, emails may fail to send for a number of reasons:
+
+1. Settings that accept Twig markup (Recipient, Reply-To, CC, BCC, and template paths) can fail to parse or render;
+2. Template paths either fail to parse (see above), or don't resolve to a valid template;
+3. HTML or plain-text templates fail to render (either due to syntax issues, undeclared variables, or missing information);
+4. When including them, PDFs may fail to render for the same reasons as the body of the email (invalid template paths, or issues with the actual templates);
+
+When an email fails to send in response to a status change, the job will be marked as failed, and include an appropriate message. Those same messages will be displayed when using the _Send Email_ feature of the Order edit page in the Craft control panel.
+
+::: tip
+If a plugin suppresses an email (by listening to `craft\commerce\services\Emails::EVENT_BEFORE_SEND_MAIL` and assigning `$event->isValid` to `false`), queue jobs will complete normally.
+:::
