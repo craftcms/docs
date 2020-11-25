@@ -2,6 +2,11 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-11-25
+### Changed
+- Changed typographic widow handling approach to improve HMR and scroll issues.
+- Updated VuePress to 1.5.3.
+
 ## 2020-11-16
 ### Added
 - Added element form examples to the Categories, Tags, and Users field pages in the Craft 3 docs.

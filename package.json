@@ -6,9 +6,9 @@
     "@storybook/addon-knobs": "^5.3.19",
     "@storybook/addons": "^5.3.19",
     "@storybook/vue": "^5.3.19",
-    "@vuepress/core": "^1.5.2",
-    "@vuepress/plugin-active-header-links": "^1.5.2",
-    "@vuepress/plugin-google-analytics": "^1.5.2",
+    "@vuepress/core": "^1.5.3",
+    "@vuepress/plugin-active-header-links": "^1.5.3",
+    "@vuepress/plugin-google-analytics": "^1.5.3",
     "autoprefixer": "^9.8.4",
     "babel-loader": "^8.1.0",
     "babel-preset-vue": "^2.0.2",
@@ -27,7 +27,7 @@
     "vue-loader": "^15.9.3",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.11",
-    "vuepress": "^1.5.2",
+    "vuepress": "^1.5.3",
     "vuepress-plugin-container": "^2.1.4",
     "vuepress-plugin-medium-zoom": "^1.1.8",
     "vuepress-plugin-sitemap": "docs/.vuepress/theme/vuepress-plugin-sitemap",
@@ -44,7 +44,6 @@
   },
   "dependencies": {
     "flexsearch": "^0.6.32",
-    "html-to-text": "^6.0.0",
-    "typemate": "^0.7.1"
+    "html-to-text": "^6.0.0"
   }
 }
