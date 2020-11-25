@@ -241,9 +241,31 @@ function customHeadingSlots(tokens) {
   }
 }
 
+function dewidowText(tokens, idx, options, env, renderer) {
+  // inner text content
+  let content = tokens[idx].content;
+  // only consider strings likely to occupy more than one line
+  const minContentLength = 80;
+  // avoid joining really long words
+  const maxWordLength = 50;
+
+  if (content.length > minContentLength) {
+    const words = content.split(' ');
+    const len = words.length;
+    if (len > 1 && words[len - 2].length + words[len - 1].length < maxWordLength) {
+      words[len - 2] += '&nbsp;' + words[len - 1];
+      var lastWord = words.pop().replace(/.*((?:<\/\w+>)*)$/, '$1');
+      content = words.join(' ') + lastWord;
+    }
+  }
+
+  return content;
+}
+
 module.exports = md => {
   // Custom <code> renders
   md.renderer.rules.code_inline = renderInlineCode;
+  md.renderer.rules.text = dewidowText;
 
   // override parse()
   const parse = md.parse;

@@ -85,6 +85,7 @@ module.exports = {
       json: "JSON",
       xml: "XML",
       treeview: "Folder",
+      graphql: "GraphQL",
       csv: "CSV"
     },
     feedback: {
