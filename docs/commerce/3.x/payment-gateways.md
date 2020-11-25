@@ -1,6 +1,6 @@
 # Payment Gateways
 
-With Craft Commerce, payments gateways are provided by Craft CMS plugins.
+Craft Commerce payments gateways are provided by Craft CMS plugins.
 
 To create a payment gateway you must install the appropriate plugin, navigate to Commerce → Settings → Gateways, and set up the appropriate gateway. For more detailed instructions, see each plugin’s `README.md` file.
 
