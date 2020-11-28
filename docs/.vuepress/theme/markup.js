@@ -241,15 +241,29 @@ function customHeadingSlots(tokens) {
   }
 }
 
+/**
+ * Adds a non-breaking space between the last two words of text to avoid
+ * typographic widows/orphans.
+ * @param {*} tokens 
+ * @param {*} idx 
+ * @param {*} options 
+ * @param {*} env 
+ * @param {*} renderer 
+ */
 function dewidowText(tokens, idx, options, env, renderer) {
   // inner text content
   let content = tokens[idx].content;
+  // characters that indicate the end of a sentence
+  const endSentenceChars = ['.', ':', '!', '…', '?'];
+  // last character of content
+  const lastChar = content.slice(-1);
   // only consider strings likely to occupy more than one line
-  const minContentLength = 80;
+  const minContentLength = 60;
   // avoid joining really long words
   const maxWordLength = 50;
 
-  if (content.length > minContentLength) {
+  // make sure we’ve got text at the end of a sentence
+  if (endSentenceChars.includes(lastChar) && content.length > minContentLength) {
     const words = content.split(' ');
     const len = words.length;
     if (len > 1 && words[len - 2].length + words[len - 1].length < maxWordLength) {

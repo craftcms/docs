@@ -170,7 +170,7 @@ public function saveProductType($productType)
 
     // Fire a 'beforeSaveProductType' event?
     if ($this->hasEventHandlers('beforeSaveProductType')) {
-        $this->trigger('beforeSaveProductType', new ProducTypeEvent([
+        $this->trigger('beforeSaveProductType', new ProductTypeEvent([
             'productType' => $productType,
             'isNew' => $isNew,
         ]));
@@ -201,7 +201,7 @@ public function deleteProductType($productType)
 {
     // Fire a 'beforeDeleteProductType' event?
     if ($this->hasEventHandlers('beforeDeleteProductType')) {
-        $this->trigger('beforeDeleteProductType', new ProducTypeEvent([
+        $this->trigger('beforeDeleteProductType', new ProductTypeEvent([
             'productType' => $productType,
         ]));
     }
