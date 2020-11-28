@@ -35,6 +35,10 @@ There are a few things you should keep in mind when working with the project con
 'secret' => '$SECRET_ACCESS_KEY',
 ```
 
+::: tip
+プラグインがプロジェクトコンフィグに追加情報を保存できます。 どのようにするかを知るには、[プロジェクトコンフィグのサポート](extend/project-config.md)を参照してください。
+:::
+
 ### 機密情報は `project.yaml` に保存できます
 
 次に、config イベントリスナーで参照している `handleChangedProductType()`、および、`handleDeletedProductType()` メソッドを追加してください。
@@ -159,7 +163,7 @@ public function saveProductType($productType)
 
     // Fire a 'beforeSaveProductType' event?
     if ($this->hasEventHandlers('beforeSaveProductType')) {
-        $this->trigger('beforeSaveProductType', new ProducTypeEvent([
+        $this->trigger('beforeSaveProductType', new ProductTypeEvent([
             'productType' => $productType,
             'isNew' => $isNew,
         ]));
@@ -190,7 +194,7 @@ public function deleteProductType($productType)
 {
     // Fire a 'beforeDeleteProductType' event?
     if ($this->hasEventHandlers('beforeDeleteProductType')) {
-        $this->trigger('beforeDeleteProductType', new ProducTypeEvent([
+        $this->trigger('beforeDeleteProductType', new ProductTypeEvent([
             'productType' => $productType,
         ]));
     }
@@ -217,11 +221,24 @@ One way to keep project config in sync is to version control `project.yaml` and 
 
 To avoid this, always check your plugin’s schema version _in `project.yaml`_ before making project config changes. (You do that by passing `true` as the second argument when calling [ProjectConfig::get()](craft3:craft\services\ProjectConfig::get()).)
 
-## プロジェクトコンフィグデータの再構築
-
 ```php
 ::: warning
 Craft 3.5 added changes to project config, see <a href="https://craftcms.com/knowledge-base/upgrading-to-craft-3-5#project-config-workflow">craftcms.com/knowledge-base/upgrading-to-craft-3-5</a>.
 
 :::
+```
+
+## プロジェクトコンフィグデータの再構築
+
+This will treat all project config values as added or updated, resulting in a longer sync process and potentially overriding any expected changes that might have been favored in the database.
+
+```php
+use craft\events\RebuildConfigEvent;
+use craft\services\ProjectConfig;
+use yii\base\Event;
+
+Event::on(ProjectConfig::class, ProjectConfig::EVENT_REBUILD, function(RebuildConfigEvent $e) {
+    // Add plugin's project config data...
+   $e->config['myPlugin']['key'] = $value;
+});
 ```
