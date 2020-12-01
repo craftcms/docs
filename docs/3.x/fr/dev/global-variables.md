@@ -2,36 +2,37 @@
 
 The following [global variables](https://twig.symfony.com/doc/2.x/templates.html#global-variables) are available to Twig templates in Craft:
 
-| Variable                                      | Description                                                                    |
-| --------------------------------------------- | ------------------------------------------------------------------------------ |
-| `_self`                                       | The current template name.                                                     |
-| `_context`                                    | The currently-defined variables.                                               |
-| `_charset`                                    | The current charset.                                                           |
-| [craft](#craft)                               | A <craft3:craft\web\twig\variables\CraftVariable> object.                  |
-| [currentSite](#currentsite)                   | The requested site.                                                            |
-| [currentUser](#currentuser)                   | The currently logged-in user.                                                  |
-| [devMode](#devmode)                           | Whether Dev Mode is enabled.                                                   |
-| [Global set variables](#global-set-variables) | Variables for each of the global sets.                                         |
-| [loginUrl](#loginurl)                         | The URL to the front-end Login page.                                           |
-| [logoutUrl](#logouturl)                       | The URL to the front-end Logout page.                                          |
-| [now](#now)                                   | The current date/time.                                                         |
-| [POS_BEGIN](#pos-begin)                       | The [craft\web\View::POS_BEGIN](craft3:craft\web\View#constants) constant. |
-| [POS_END](#pos-end)                           | The [craft\web\View::POS_END](craft3:craft\web\View#constants) constant.   |
-| [POS_HEAD](#pos-head)                         | The [craft\web\View::POS_HEAD](craft3:craft\web\View#constants) constant.  |
-| [POS_LOAD](#pos-load)                         | The [craft\web\View::POS_LOAD](craft3:craft\web\View#constants) constant.  |
-| [POS_READY](#pos-ready)                       | The [craft\web\View::POS_READY](craft3:craft\web\View#constants) constant. |
-| [siteName](#sitename)                         | The name of the current site.                                                  |
-| [siteUrl](#siteurl)                           | The base URL of the current site.                                              |
-| [SORT_ASC](#sort-asc)                         | The `SORT_ASC` PHP constant.                                                   |
-| [SORT_DESC](#sort-desc)                       | The `SORT_DESC` PHP constant.                                                  |
-| [SORT_FLAG_CASE](#sort-flag-case)           | The `SORT_FLAG_CASE` PHP constant.                                             |
-| [SORT_LOCALE_STRING](#sort-locale-string)   | The `SORT_LOCALE_STRING` PHP constant.                                         |
-| [SORT_NATURAL](#sort-natural)                 | The `SORT_NATURAL` PHP constant.                                               |
-| [SORT_NUMERIC](#sort-numeric)                 | The `SORT_NUMERIC` PHP constant.                                               |
-| [SORT_REGULAR](#sort-regular)                 | The `SORT_REGULAR` PHP constant.                                               |
-| [SORT_STRING](#sort-string)                   | The `SORT_STRING` PHP constant.T                                               |
-| [systemName](#systemname)                     | The system name.                                                               |
-| [view](#view)                                 | The app’s `view` component.                                                    |
+| Variable                                      | Description                                                                                 |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `_self`                                       | The current template name.                                                                  |
+| `_context`                                    | The currently-defined variables.                                                            |
+| `_charset`                                    | The current charset.                                                                        |
+| [craft](#craft)                               | A <craft3:craft\web\twig\variables\CraftVariable> object.                               |
+| [currentSite](#currentsite)                   | The requested site.                                                                         |
+| [currentUser](#currentuser)                   | The currently logged-in user.                                                               |
+| [devMode](#devmode)                           | Whether Dev Mode is enabled.                                                                |
+| [Global set variables](#global-set-variables) | Variables for each of the global sets.                                                      |
+| [loginUrl](#loginurl)                         | The URL to the front-end Login page.                                                        |
+| [logoutUrl](#logouturl)                       | The URL to the front-end Logout page.                                                       |
+| [now](#now)                                   | The current date/time.                                                                      |
+| [POS_BEGIN](#pos-begin)                       | The [craft\web\View::POS_BEGIN](craft3:craft\web\View#constants) constant.              |
+| [POS_END](#pos-end)                           | The [craft\web\View::POS_END](craft3:craft\web\View#constants) constant.                |
+| [POS_HEAD](#pos-head)                         | The [craft\web\View::POS_HEAD](craft3:craft\web\View#constants) constant.               |
+| [POS_LOAD](#pos-load)                         | The [craft\web\View::POS_LOAD](craft3:craft\web\View#constants) constant.               |
+| [POS_READY](#pos-ready)                       | The [craft\web\View::POS_READY](craft3:craft\web\View#constants) constant.              |
+| [setPasswordUrl](#setpasswordurl)             | The URL to [`setPasswordRequestPath`](config3:setPasswordRequestPath) for the current site. |
+| [siteName](#sitename)                         | The name of the current site.                                                               |
+| [siteUrl](#siteurl)                           | The base URL of the current site.                                                           |
+| [SORT_ASC](#sort-asc)                         | The `SORT_ASC` PHP constant.                                                                |
+| [SORT_DESC](#sort-desc)                       | The `SORT_DESC` PHP constant.                                                               |
+| [SORT_FLAG_CASE](#sort-flag-case)           | The `SORT_FLAG_CASE` PHP constant.                                                          |
+| [SORT_LOCALE_STRING](#sort-locale-string)   | The `SORT_LOCALE_STRING` PHP constant.                                                      |
+| [SORT_NATURAL](#sort-natural)                 | The `SORT_NATURAL` PHP constant.                                                            |
+| [SORT_NUMERIC](#sort-numeric)                 | The `SORT_NUMERIC` PHP constant.                                                            |
+| [SORT_REGULAR](#sort-regular)                 | The `SORT_REGULAR` PHP constant.                                                            |
+| [SORT_STRING](#sort-string)                   | The `SORT_STRING` PHP constant.T                                                            |
+| [systemName](#systemname)                     | The system name.                                                                            |
+| [view](#view)                                 | The app’s `view` component.                                                                 |
 
 ## `craft`
 
@@ -137,9 +138,19 @@ Twig-facing copy of the [craft\web\View::POS_LOAD](craft3:craft\web\View#constan
 
 Twig-facing copy of the [craft\web\View::POS_READY](craft3:craft\web\View#constants) constant.
 
+## `setPasswordUrl`
+
+The URL to [`setPasswordRequestPath`](config3:setPasswordRequestPath) if it’s set. (This wraps the path in [`siteUrl`](#siteurl).)
+
+```twig
+{% if setPasswordUrl %}
+    <a href="{{ setPasswordUrl }}">Reset password</a>
+{% endif %}
+```
+
 ## `siteName`
 
-The name of your site, as defined in Settings → Sites.
+The name of your site, as defined in **Settings** → **Sites**.
 
 ```twig
 <h1>{{ siteName }}</h1>
