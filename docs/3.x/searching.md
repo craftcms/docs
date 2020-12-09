@@ -139,7 +139,7 @@ Each element type makes basic details, called _searchable attributes_, available
 
 You can also configure any custom field to make its content available for search by enabling **Use this field’s values as search keywords**:
 
-![Search Bar](./images/searchable-checkbox.png)
+![Searchable Checkbox](./images/searchable-checkbox.png)
 
 Once enabled, the next time an element is saved that field’s content will be stored as plain-text keywords in Craft’s `searchindex` table and available for search.
 
@@ -149,7 +149,7 @@ For relational field types like Assets fields, Matrix fields, etc., the top-leve
 
 ## Rebuilding Your Search Indexes
 
-Craft does its best to keep its search indexes as up-to-date as possible, but there are a couple things that might render portions of them inaccurate. If you suspect that your search indexes are out of date, you can have Craft rebuild them by bulk-resaving your entries with the [`resave/entries`](console-commands.md#resave) command and including the `--update-search-index` flag:
+Craft does its best to keep its search indexes as up-to-date as possible, but there are a couple things that might render portions of them inaccurate. If you suspect your search indexes are out of date, you can have Craft rebuild them by bulk-resaving your entries with the [`resave/entries`](console-commands.md#resave) command and including the `--update-search-index` flag:
 
 ```bash
 php craft resave/entries --update-search-index
