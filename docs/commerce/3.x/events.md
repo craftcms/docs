@@ -513,6 +513,26 @@ Event::on(
 );
 ```
 
+### `modifyCartInfo`
+
+The event that’s triggered when a cart is returned as an array for AJAX cart update requests.
+
+```php
+use craft\commerce\controllers\BaseFrontEndController;
+use craft\commerce\events\ModifyCartInfoEvent;
+use yii\base\Event;
+
+Event::on(
+    BaseFrontEndController::class,
+    BaseFrontEndController::EVENT_MODIFY_CART_INFO,
+    function(ModifyCartInfoEvent $e) {
+        $cartArray = $e->cartInfo;
+        $cartArray['anotherOne'] = 'Howdy';
+        $e->cartInfo = $cartArray;
+    }
+);
+```
+
 ## Discount Events
 
 ### `afterDiscountAdjustmentsCreated`
