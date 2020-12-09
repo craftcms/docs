@@ -133,7 +133,7 @@ When you do this, each of the elements returned will have a `searchScore` attrib
 See our [Search Form](https://craftcms.com/knowledge-base/search-form) article for a complete example of listing dynamic search results.
 :::
 
-## Configuring Search
+## Configuring Custom Fields for Search
 
 Each element type makes basic details, called _searchable attributes_, available as search keywords. It’s common to search for entries by title, for example, or for users matching a name or email address. (We just looked at these in the [Searching for Specific Element Attributes](#searching-for-specific-element-attributes) table.)
 
@@ -147,7 +147,7 @@ Once enabled, the next time an element is saved that field’s content will be s
 For relational field types like Assets fields, Matrix fields, etc., the top-level **Use this field’s values as search keywords** setting determines whether any sub-fields or child elements will factor into results for the parent.
 :::
 
-## Rebuilding your Search Indexes
+## Rebuilding Your Search Indexes
 
 Craft does its best to keep its search indexes as up-to-date as possible, but there are a couple things that might render portions of them inaccurate. If you suspect that your search indexes are out of date, you can have Craft rebuild them by bulk-resaving your entries with the [`resave/entries`](console-commands.md#resave) command and including the `--update-search-index` flag:
 
