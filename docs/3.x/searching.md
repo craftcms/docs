@@ -15,17 +15,17 @@ You can search for elements from your own code, too:
     .search('foo')
     .all() %}
 ```
-```php
-$results = \craft\elements\Entry::find()
-    ->search('foo')
-    ->all();
-```
 ```graphql
 {
 	entries(search: "foo") {
 		title
     }
 }
+```
+```php
+$results = \craft\elements\Entry::find()
+    ->search('foo')
+    ->all();
 ```
 :::
 
@@ -112,18 +112,18 @@ You can also set the `orderBy` parameter to `'score'` if you want results ordere
     .orderBy('score')
     .all() %}
 ```
-```php
-$results = \craft\elements\Entry::find()
-    ->search('foo')
-    ->orderBy('score')
-    ->all();
-```
 ```graphql
 {
 	entries(search: "foo", orderBy: "score") {
 		title
     }
 }
+```
+```php
+$results = \craft\elements\Entry::find()
+    ->search('foo')
+    ->orderBy('score')
+    ->all();
 ```
 :::
 
