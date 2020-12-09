@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-12-09
+### Added
+- Documented Commerce `modifyCartInfo` event.
+
 ## 2020-11-25
 ### Changed
 - Changed typographic widow handling approach to improve HMR and scroll issues.
