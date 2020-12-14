@@ -17,23 +17,33 @@
 
 * **デフォルトの変数** – フィールドの新しいインスタンスを作成したときにセットされる行および列のデフォルト値を定義します。
 
-
 ## フィールド
 
 テーブルフィールドでは、フィールド設定で定義されたテーブルが表示されます。 並び替えや削除、新しい行の追加、値の変更ができます。
 
-## テンプレート記法
+## Development
 
 テンプレート内でテーブルフィールドを呼び出すと、行の配列を返します。 それぞれの行は、その行の列ごとの値を保持するサブ配列です。
 
+::: code
 ```twig
-{% if entry.whiskeyTableHandle|length %}
+{% if entry.myFieldHandle|length %}
     <h3>Whiskeys</h3>
-
     <ul>
-        {% for row in entry.whiskeyTableHandle %}
+        {% for row in entry.myFieldHandle %}
             <li>{{ row.whiskey }} - {{ row.description }} - {{ row.proof }}</li>
         {% endfor %}
     </ul>
 {% endif %}
 ```
+```php
+if (count($entry->myFieldHandle)) {
+    // Whiskeys:
+    foreach ($entry->myFieldHandle as $row) {
+        // $row->whiskey
+        // $row->description
+        // $row->proof
+    }
+}
+```
+:::
