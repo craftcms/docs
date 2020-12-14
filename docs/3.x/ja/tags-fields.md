@@ -23,7 +23,7 @@
 
 ## フィールド
 
-タグフィールドには、現在関連付けられているすべてのタグのリストと、新しいタグを追加するための入力欄があります。
+Tags fields list all the currently-related tags with a text input to add new ones.
 
 テキスト入力欄に入力すると、タグフィールドはそのタググループに属する既存のタグを（ソースの設定ごとに）検索し、入力欄の下のメニューにタグのサジェストを表示します。 完全に一致するものが見つからない場合、メニューの最初のオプションから入力した値を名前にもつ新しいタグを作成できます。
 
@@ -35,7 +35,7 @@
 
 関連付けられたタグをダブルクリックすると、タグのタイトルやカスタムフィールドを編集できる HUD を表示します。
 
-## テンプレート記法
+## Development
 
 ### タグフィールドによるエレメントの照会
 
@@ -53,25 +53,39 @@
 | an [Tag](craft3:craft\elements\Tag) object               | that are related to the tag.                          |
 | an [TagQuery](craft3:craft\elements\db\TagQuery) object | that are related to any of the resulting tags.        |
 
+::: code
 ```twig
 {# Fetch entries with a related tag #}
 {% set entries = craft.entries()
     .myFieldHandle(':notempty:')
     .all() %}
 ```
+```php
+// Fetch entries with a related tag
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle(':notempty:')
+    ->all();
+```
+:::
 
 ### タグフィールドデータの操作
 
-テンプレート内でタグフィールドのエレメントを取得する場合、タグフィールドのハンドルを利用して、関連付けられたタグにアクセスできます。
+If you have an element with a Tags field in your template, you can access its related tags using your Tags field’s handle:
 
+::: code
 ```twig
 {% set query = entry.myFieldHandle %}
 ```
+```php
+$query = $entry->myFieldHandle;
+```
+:::
 
-これは、所定のフィールドで関連付けられたすべてのタグを出力するよう準備された[タグクエリ](tags.md#querying-tags)を提供します。
+That will give you a [tag query](tags.md#querying-tags), prepped to output all the related tags for the given field.
 
-関連付けられたすべてのタグをループするには、[all()](craft3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
+To loop through all the related tags, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 
+::: code
 ```twig
 {% set relatedTags = entry.myFieldHandle.all() %}
 {% if relatedTags|length %}
@@ -82,31 +96,65 @@
     </ul>
 {% endif %}
 ```
+```php
+$relatedTags = $entry->myFieldHandle->all();
+if (count($relatedTags)) {
+    foreach ($relatedTags as $rel) {
+        // \craft\helpers\UrlHelper::url('tags/' . $rel->slug)
+        // $rel->title
+    }
+}
+{% endif %}
+```
+:::
 
-関連付けられた最初のタグだけが欲しい場合、代わりに [one()](craft3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
+If you only want the first related tag, call [one()](craft3:craft\db\Query::one()) and make sure it returned something:
 
+::: code
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ url('tags/'~rel.slug) }}">{{ rel.title }}</a></p>
 {% endif %}
 ```
+```php
+$rel = $entry->myFieldHandle->one();
+if ($rel) {
+    // \craft\helpers\UrlHelper::url('tags' . $rel->slug)
+    // $rel->title
+}
+```
+:::
 
-（取得する必要はなく）いずれかの関連付けられたタグがあるかを確認したい場合、[exists()](craft3:craft\db\Query::exists()) を呼び出すことができます。
+If you need to check for any related tags without fetching them, you can call [exists()](craft3:craft\db\Query::exists()):
 
+::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
     <p>There are related tags!</p>
 {% endif %}
 ```
+```php
+if ($entry->myFieldHandle->exists()) {
+    // There are related tags!
+}
+```
+:::
 
-タグクエリで[パラメータ](tags.md#parameters)をセットすることもできます。
+You can set [parameters](tags.md#parameters) on the tag query as well.
 
+::: code
 ```twig
 {% set relatedTags = clone(entry.myFieldHandle)
     .group('blogEntryTags')
     .all() %}
 ```
+```php
+$relatedTags = (clone $entry->myFieldHandle)
+    ->group('blogEntryTags')
+    ->all();
+```
+:::
 
 ::: tip
 It’s always a good idea to clone the tag query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
