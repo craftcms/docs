@@ -8,7 +8,7 @@
 
 * **チェックボックスのオプション** – フィールドで利用可能なチェックボックスを定義します。 オプションの値とラベルを別々に設定したり、デフォルトでチェックしておくものを選択できます。
 
-## テンプレート記法
+## Development
 
 ### チェックボックスフィールドによるエレメントの照会
 
@@ -23,34 +23,56 @@
 | `['foo', 'bar']`        | with `foo` or `bar` options selected.  |
 | `['and', 'foo', 'bar']` | with `foo` and `bar` options selected. |
 
+::: code
 ```twig
 {# Fetch entries with the 'foo' option checked #}
 {% set entries = craft.entries()
     .myFieldHandle('foo')
     .all() %}
 ```
+```php
+// Fetch entries with the 'foo' option checked
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle('foo')
+    ->all();
+```
+:::
 
 ### チェックボックスフィールドデータの操作
 
-テンプレート内でチェックボックスフィールドのエレメントを取得する場合、チェックボックスフィールドのハンドルを利用して、そのデータにアクセスできます。
+If you have an element with a Checkboxes field in your template, you can access its data using your Checkboxes field’s handle:
 
+::: code
 ```twig
 {% set value = entry.myFieldHandle %}
 ```
+```php
+$value = $entry->myFieldHandle %}
+```
+:::
 
-それは、フィールドデータを含む <craft3:craft\fields\data\MultiOptionsFieldData> オブジェクトを提供します。
+That will give you a <craft3:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
 
-選択されたオプションすべてをループするには、フィールド値を反復してください。
+To loop through all checked options, iterate over the field value:
 
+::: code
 ```twig
 {% for option in entry.myFieldHandle %}
     Label: {{ option.label }}
     Value: {{ option }} or {{ option.value }}
 {% endfor %}
 ```
+```php
+foreach ($entry->myFieldHandle as $option) {
+    // label: $option->label
+    // value: $option or $option->value
+}
+```
+:::
 
-利用可能なオプションすべてをループするには、[options](craft3:craft\fields\data\MultiOptionsFieldData::getOptions()) プロパティを反復してください。
+To loop through all available options, iterate over the [options](craft3:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
 
+::: code
 ```twig
 {% for option in entry.myFieldHandle.options %}
     Label:   {{ option.label }}
@@ -58,18 +80,36 @@
     Checked: {{ option.selected ? 'Yes' : 'No' }}
 {% endfor %}
 ```
+```php
+foreach ($entry->myFieldHandle->options as $option) {
+    // label:   $option->label
+    // value:   $option or $option->value
+    // checked: $option->selected ? 'Yes' : 'No'
+}
+```
+:::
 
-いずれかのチェックボックスが選択されているかを確認するには、[length](https://twig.symfony.com/doc/2.x/filters/length.html) フィルタを使用してください。
+To see if any options are checked, use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter or [count](https://www.php.net/manual/en/function.count.php) method:
 
+::: code
 ```twig
 {% if entry.myFieldHandle|length %}
 ```
+```php
+if (count($entry->myFieldHandle)) {
+```
+:::
 
-特定のオプションが選択されているかを確認するには、[contains()](craft3:craft\fields\data\MultiOptionsFieldData::contains()) を使用してください。
+To see if a particular option is checked, use [contains()](craft3:craft\fields\data\MultiOptionsFieldData::contains())
 
+::: code
 ```twig
 {% if entry.myFieldHandle.contains('foo') %}
 ```
+```php
+if ($entry->myFieldHandle->contains('foo')) {
+```
+:::
 
 ### Saving Checkboxes Fields
 
