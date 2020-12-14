@@ -41,17 +41,17 @@
 
 ## フィールド
 
-カテゴリフィールドには、現在関連付けられているすべてのカテゴリのリストと、新しいカテゴリを追加するためのボタンがあります。
+Categories fields list all the currently-related categories with a button to select new ones.
 
-「カテゴリーを追加」ボタンをクリックすると、すでに追加されているカテゴリの検索や選択ができるモーダルウィンドウが表示されます。 このモーダルから新しいカテゴリを作るには、「新しいカテゴリー」ボタンをクリックします。
+Choosing **Add a category** will bring up a modal window where you can find and select additional categories. You can create new categories from this modal as well, by choosing **New category**.
 
-ネストされたカテゴリを選択すると、そのカテゴリに至るすべての先祖カテゴリも自動的に関連付けられます。 同様に、メインフィールドの入力からカテゴリを削除すると、そのすべての子孫カテゴリも削除されます。
+When you select a nested category, all the ancestors leading up to that category will also automatically be related. 同様に、メインフィールドの入力からカテゴリを削除すると、そのすべての子孫カテゴリも削除されます。
 
 ### インラインのカテゴリ編集
 
 関連付けられたカテゴリをダブルクリックすると、カテゴリのタイトルやカスタムフィールドを編集できる HUD を表示します。
 
-## テンプレート記法
+## Development
 
 ### カテゴリフィールドによるエレメントの照会
 
@@ -69,25 +69,39 @@
 | an [Category](craft3:craft\elements\Category) object               | that are related to the category.                           |
 | an [CategoryQuery](craft3:craft\elements\db\CategoryQuery) object | that are related to any of the resulting categories.        |
 
+::: code
 ```twig
 {# Fetch entries with a related category #}
 {% set entries = craft.entries()
     .myFieldHandle(':notempty:')
     .all() %}
 ```
+```php
+// Fetch entries with a related category
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle(':notempty:')
+    ->all();
+```
+:::
 
 ### カテゴリフィールドデータの操作
 
-テンプレート内でカテゴリフィールドのエレメントを取得する場合、カテゴリフィールドのハンドルを利用して、関連付けられたカテゴリにアクセスできます。
+If you have an element with a Categories field in your template, you can access its related categories using your Categories field’s handle:
 
+::: code
 ```twig
 {% set query = entry.myFieldHandle %}
 ```
+```php
+$query = $entry->myFieldHandle; 
+```
+:::
 
-これは、所定のフィールドで関連付けられたすべてのカテゴリを出力するよう準備された[カテゴリクエリ](categories.md#querying-categories)を提供します。
+That will give you a [category query](categories.md#querying-categories), prepped to output all the related categories for the given field.
 
-関連付けられたすべてのカテゴリをループするには、[all()](craft3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
+To loop through all the related categories as a flat list, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 
+::: code
 ```twig
 {% set relatedCategories = entry.myFieldHandle.all() %}
 {% if relatedCategories|length %}
@@ -98,11 +112,20 @@
     </ul>
 {% endif %}
 ```
+```php
+$relatedCategories = $entry->myFieldHandle->all();
+if (count($relatedCategories)) {
+    foreach ($relatedCategories as $rel) {
+        // do something with $rel->url and $rel->title
+    }
+}
+```
+:::
 
-または、[nav](dev/tags.md#nav) タグで階層リストとして表示することもできます。
+Or you can show them as a hierarchical list with the [nav](dev/tags.md#nav) tag:
 
 ```twig
-{% set relatedCategories = entry.<FieldHandle.all() %}
+{% set relatedCategories = entry.myFieldHandle.all() %}
 {% if relatedCategories|length %}
     <ul>
         {% nav rel in relatedCategories %}
@@ -119,30 +142,53 @@
 {% endif %}
 ```
 
-関連付けられた最初のカテゴリだけが欲しい場合、代わりに [one()](craft3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
+If you only want the first related category, call [one()](craft3:craft\db\Query::one()) instead and make sure it returned something:
 
+::: code
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
 {% endif %}
 ```
+```php
+$rel = $entry->myFieldHandle->one();
+if ($rel) {
+    // do something with $rel->url and $rel->title
+}
+```
+:::
 
-（取得する必要はなく）いずれかの関連付けられたカテゴリがあるかを確認したい場合、[exists()](craft3:craft\db\Query::exists()) を呼び出すことができます。
+If you need to check for related categories without fetching them, you can call [exists()](craft3:craft\db\Query::exists()):
 
+::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
     <p>There are related categories!</p>
 {% endif %}
 ```
+```php
+if ($entry->myFieldHandle->exists()) {
+    // do something with related categories
+}
+```
+:::
 
-カテゴリクエリで[パラメータ](categories.md#parameters)をセットすることもできます。 例えば、“leaves”（子を持たないカテゴリ）だけを取得するには、[leaves](categories.md#leaves) パラメータをセットします。
+You can set [parameters](categories.md#parameters) on the category query as well. For example, to only fetch the “leaves” (categories without any children), set the [leaves](categories.md#leaves) param:
 
+::: code
 ```twig
 {% set relatedCategories = clone(entry.myFieldHandle)
     .leaves()
     .all() %}
 ```
+```php
+$myField = clone $entry->myFieldHandle;
+$relatedAssets = $myField
+    ->leaves()
+    ->all();
+```
+:::
 
 ::: tip
 It’s always a good idea to clone the category query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
