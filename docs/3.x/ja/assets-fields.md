@@ -24,7 +24,7 @@
 
 ### マルチサイト設定
 
-マルチサイトがインストールされている場合、次の設定も有効になります。 （「高度」のトグルボタンで表示されます）
+On multi-site installs, the following settings will also be available (under **Advanced**):
 
 - **特定のサイトから アセット を関連付けますか?** – 特定のサイトのアセットとの関連付けのみを許可するかどうか。
 
@@ -36,7 +36,7 @@
 
 ### 動的なサブフォルダパス
 
-「ロケーションをアップロードする」と「既定のアップロードロケーション」設定に定義されるサブフォルダには、オプションで Twig タグ（例：`news/{{ slug }}`）を含めることができます。
+Subfolder paths defined by the **Upload Location** and **Default Upload Location** settings can optionally contain Twig tags (e.g. `news/{{ slug }}`).
 
 ソースエレメント（アセットフィールドを持つエレメント）でサポートされているすべてのプロパティは、ここで使用できます。
 
@@ -52,9 +52,9 @@ So if your Matrix field is attached to an entry, and you want to output the entr
 
 ## フィールド
 
-「アセットを追加」ボタンをクリックすると、新しいアセットのアップロードはもちろん、すでに追加されているアセットの検索や選択ができるモーダルウィンドウが表示されます。
+Assets fields list all the currently-related assets, with a button to select new ones.
 
-関連付けられたアセットをダブルクリックすると、アセットのタイトルやカスタムフィールドを編集したり、（画像の場合）イメージエディタを起動できる HUD を表示します。
+Choosing **Add an asset** will bring up a modal window where you can find and select additional assets, as well as upload new ones.
 
 ::: tip
 You can also upload assets by dragging files directly onto the assets field or modal window.
@@ -65,10 +65,10 @@ You can also upload assets by dragging files directly onto the assets field or m
 アセットフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、アセットフィールドのデータに基づいた結果をフィルタできます。
 
 ::: tip
-アセットで使用するカスタムフィールドは、「設定 > アセット > [ボリューム名] > フィールドレイアウト」から選択できます。
+You can choose which custom fields should be available for your assets from **Settings** → **Assets** → **[Volume Name]** → **Field Layout**.
 :::
 
-## テンプレート記法
+## Development
 
 ### アセットフィールドによるエレメントの照会
 
@@ -86,25 +86,39 @@ You can also upload assets by dragging files directly onto the assets field or m
 | an [Asset](craft3:craft\elements\Asset) object               | that are related to the asset.                          |
 | an [AssetQuery](craft3:craft\elements\db\AssetQuery) object | that are related to any of the resulting assets.        |
 
+::: code
 ```twig
 {# Fetch entries with a related asset #}
 {% set entries = craft.entries()
     .myFieldHandle(':notempty:')
     .all() %}
 ```
+```php
+// Fetch entries with a related asset
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle(':notempty:')
+    ->all();
+```
+:::
 
 ### アセットフィールドデータの操作
 
-関連付けられたすべてのアセットをループするには、[all()](craft3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
+If you have an element with an Assets field in your template, you can access its related assets using your Assets field’s handle:
 
+::: code
 ```twig
 {% set query = entry.myFieldHandle %}
 ```
+```php
+$query = $entry->myFieldHandle;
+```
+:::
 
-関連付けられた最初のアセットだけが欲しい場合、代わりに [one()](craft3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
+That will give you an [asset query](assets.md#querying-assets), prepped to output all the related assets for the given field.
 
-（取得する必要はなく）いずれかの関連付けられたアセットがあるかを確認したい場合、[exists()](craft3:craft\db\Query::exists()) を呼び出すことができます。
+To loop through all the related assets, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 
+::: code
 ```twig
 {% set relatedAssets = entry.myFieldHandle.all() %}
 {% if relatedAssets|length %}
@@ -115,35 +129,67 @@ You can also upload assets by dragging files directly onto the assets field or m
     </ul>
 {% endif %}
 ```
+```php
+$relatedAssets = $entry->myFieldHandle->all();
 
-::: warning
-When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have “Assets in this volume have public URLs” enabled and a “Base URL” setting. Otherwise, the result will always be empty.
+if (count($relatedAssets)) {
+    foreach ($relatedAssets as $rel) {
+        // do something with $rel->url and $rel->filename
+    }
+}
+```
 :::
 
-フロントエンドの[投稿フォーム](dev/examples/entry-form.md)から、アセットフィールドへのファイルアップロードをユーザーに許可するには、2つの調整が必要です。
+::: warning
+When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have **Assets in this volume have public URLs** enabled and a **Base URL** setting. Otherwise, the result will always be empty.
+:::
 
+If you only want the first related asset, call [one()](craft3:craft\db\Query::one()) instead and make sure it returned something:
+
+::: code
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ rel.url }}">{{ rel.filename }}</a></p>
 {% endif %}
 ```
+```php
+$rel = $entry->myFieldHandle->one();
+if ($rel) {
+    // do something with $rel->url and $rel->filename
+}
+```
+:::
 
-まず、`<form>` タグに `enctype="multipart/form-data"` 属性があることを確認して、ファイルをアップロードできるようにします。
+If you need to check for related assets without fetching them, you can call [exists()](craft3:craft\db\Query::exists()):
 
+::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
     <p>There are related assets!</p>
 {% endif %}
 ```
+```php
+if ($entry->myFieldHandle->exists()) {
+    // do something with related assets
+}
+```
+:::
 
-アセットクエリで[パラメータ](assets.md#parameters)をセットすることもできます。 例えば、画像だけが返されることを保証するために、[kind](assets.md#kind) パラメータをセットできます。
+You can set [parameters](assets.md#parameters) on the asset query as well. For example, to ensure that only images are returned, you can set the [kind](assets.md#kind) param:
 
+::: code
 ```twig
 {% set relatedAssets = clone(entry.myFieldHandle)
     .kind('image')
     .all() %}
 ```
+```php
+$relatedAssets = (clone $entry->myFieldHandle)
+    ->kind('image')
+    ->all();
+```
+:::
 
 ::: tip
 It’s always a good idea to clone the asset query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
@@ -151,7 +197,7 @@ It’s always a good idea to clone the asset query using the [clone()](./dev/fun
 
 ### Saving Assets Fields
 
-If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain an Assets field, you will need to submit your field value as a list of asset IDs, in the order you want them to be related.
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain an Assets field, you will need to submit your field value as a list of asset IDs in the order you want them to be related.
 
 For example, you could create a list of checkboxes for each of the possible relations:
 
@@ -199,7 +245,9 @@ You could then make the checkbox list sortable, so users have control over the o
 Assets fields can handle new file uploads as well:
 
 ```twig
-<input type="file" name="fields[myFieldHandle]">
+{{ input('file', 'fields[myFieldHandle][]', options={
+  multiple: true,
+}) }}
 ```
 
 ::: tip
@@ -209,7 +257,11 @@ Don’t forget to set `enctype="multipart/form-data"` on your `<form>` tag so yo
 Alternatively, you can submit Base64-encoded file data, which the Assets field will decode and treat as an uploaded file. To do that, you have to specify both the data and the filename like this:
 
 ```twig
-<input type="file" name="fields[<FieldHanlde>][]" multiple>
+{{ hiddenInput(
+    'fields[myFieldHandle][data][]',
+    'data:image/jpeg;base64,my-base64-data'
+) }}
+{{ hiddenInput('fields[myFieldHandle][filename][]', 'myFile.ext') }}
 ```
 
 ## 関連項目
