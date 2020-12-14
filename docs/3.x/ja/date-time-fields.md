@@ -8,7 +8,7 @@ Date fields let you choose whether you want to show only the date, or the date a
 
 You can also pick minimum and maximum dates that should be allowed, and if you’re showing the time, you can choose what the minute increment should be.
 
-## テンプレート記法
+## Development
 
 ### Querying Elements with Date Fields
 
@@ -25,15 +25,26 @@ Possible values include:
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | 2018-04-01 から 2018-05-01 の間に選択された日付を持つもの。       |
 | `['or', '< 2018-04-04', '> 2018-05-01']`   | 2018-04-01 より前、または、2018-05-01 より後に選択された日付を持つもの。 |
 
+::: code
 ```twig
-{# Fetch entries with with a selected date in the next month #}
+{# Fetch entries with a selected date in the next month #}
 {% set start = now|atom %}
 {% set end = now|date_modify('+1 month')|atom %}
 
 {% set entries = craft.entries()
-    .myFieldHandle('and', ">= #{start}", "< #{end}")
+    .myFieldHandle(['and', ">= #{start}", "< #{end}"])
     .all() %}
 ```
+```php
+// Fetch entries with a selected date in the next month
+$start = (new \DateTime())->format(\DateTime::ATOM);
+$end = (new \DateTime('+1 month'))->format(\DateTime::ATOM);
+
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle(['and', ">= ${start}", "< ${end}"])
+    ->all();
+```
+:::
 
 ::: tip
 The [atom](dev/filters.md#atom) filter converts a date to an ISO-8601 timestamp.
@@ -43,17 +54,32 @@ The [atom](dev/filters.md#atom) filter converts a date to an ISO-8601 timestamp.
 
 If you have an element with a Date field in your template, you can access its value by its handle:
 
+::: code
 ```twig
 {% set value = entry.myFieldHandle %}
 ```
+```php
+$value = $entry->myFieldHandle;
+```
+:::
 
 That will give you a [DateTime](http://php.net/manual/en/class.datetime.php) object that represents the selected date, or `null` if no date was selected.
 
+::: code
 ```twig
 {% if entry.myFieldHandle %}
     Selected date: {{ entry.myFieldHandle|datetime('short') }}
 {% endif %}
 ```
+```php
+if ($entry->myFieldHandle) {    
+    $selectedDate = \Craft::$app->getFormatter()->asDatetime(
+        $entry->myFieldHandle, 
+        'short'
+    );
+}
+```
+:::
 
 Craft and Twig provide several Twig filters for manipulating dates, which you can use depending on your needs:
 
@@ -98,7 +124,12 @@ The [HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) polyfill can 
 By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you can post dates in a different timezone by changing the input name to `fields[myFieldHandle][datetime]` and adding a hidden input named `fields[myFieldHandle][timezone]`, set to a [valid PHP timezone](http://php.net/manual/en/timezones.php):
 
 ```twig
-{% set pt = 'America/Los_Angeles' %}
+{# Use the timezone selected under Settings → General Settings → Time Zone #}
+{% set tz = craft.app.getTimezone() %}
+
+{# Or set a specific timezone #}
+{% set tz = 'America/Los_Angeles' %}
+
 {% set currentValue = entry is defined and entry.myFieldHandle
     ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone=tz)
     : '' %}
@@ -135,8 +166,8 @@ The time input can either be set to the `HH:MM` format (24-hour), or the current
 To find out what your current locale’s date and time formats are, add this to your template:
 
 ```twig
-日付のフォーマット： <code>{{ craft.app.locale.getDateFormat('short', 'php') }}</code><br>
-時刻のフォーマット： <code>{{ craft.app.locale.getTimeFormat('short', 'php') }}</code>
+Date format: <code>{{ craft.app.locale.getDateFormat('short', 'php') }}</code><br>
+Time format: <code>{{ craft.app.locale.getTimeFormat('short', 'php') }}</code>
 ```
 
 Then refer to PHP’s [date()](http://php.net/manual/en/function.date.php) function docs to see what each of the format letters mean.
