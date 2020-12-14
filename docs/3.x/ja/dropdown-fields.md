@@ -8,7 +8,7 @@
 
 * **セレクトボックスのオプション** – フィールドで利用可能なオプションを定義します。 オプションの値とラベルを別々に設定したり、デフォルトで選択状態にしておくものを選択できます。
 
-## テンプレート記法
+## Development
 
 ### セレクトボックスフィールドによるエレメントの照会
 
@@ -23,42 +23,55 @@
 | `['foo', 'bar']`        | `foo` または `bar` オプションのいずれかが選択されている。  |
 | `['not', 'foo', 'bar']` | `foo` または `bar` オプションのいずれかが選択されていない。 |
 
+::: code
 ```twig
 {# Fetch entries with the 'foo' option selected #}
 {% set entries = craft.entries()
     .myFieldHandle('foo')
     .all() %}
 ```
+```php
+// Fetch entries with the 'foo' option selected
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle('foo')
+    ->all();
+```
+:::
 
 ### セレクトボックスフィールドデータの操作
 
-テンプレート内でセレクトボックスフィールドのエレメントを取得する場合、セレクトボックスフィールドのハンドルを利用して、そのデータにアクセスできます。
+If you have an element with a Dropdown field in your template, you can access its data using your Dropdown field’s handle:
 
+::: code
 ```twig
 {% set value = entry.myFieldHandle %}
 ```
+```php
+$value = $entry->myFieldHandle;
+```
+:::
 
-それは、フィールドデータを含む <craft3:craft\fields\data\SingleOptionFieldData> オブジェクトを提供します。
+That will give you a <craft3:craft\fields\data\SingleOptionFieldData> object that contains the field data.
 
-選択されたオプションを表示するには、それを文字列として出力するか、[value](craft3:craft\fields\data\SingleOptionFieldData::$value) プロパティを出力してください。
+To show the selected option, output it as a string, or output the [value](craft3:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ```twig
 {{ entry.myFieldHandle }} or {{ entry.myFieldHandle.value }}
 ```
 
-任意のオプションが選択されているかを確認するには、[value](craft3:craft\fields\data\SingleOptionFieldData::$value) プロパティを使用してください。
+To see if an option is selected, use the [value](craft3:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ```twig
 {% if entry.myFieldHandle.value %}
 ```
 
-選択されたオプションのラベルを表示するには、[label](craft3:craft\fields\data\SingleOptionFieldData::$label) プロパティを出力してください。
+To show the selected option’s label, output the [label](craft3:craft\fields\data\SingleOptionFieldData::$label) property:
 
 ```twig
 {{ entry.myFieldHandle.label }}
 ```
 
-利用可能なオプションすべてをループするには、[options](craft3:craft\fields\data\SingleOptionFieldData::getOptions()) プロパティを反復してください。
+To loop through all of the available options, iterate over the [options](craft3:craft\fields\data\SingleOptionFieldData::getOptions()) property:
 
 ```twig
 {% for option in entry.myFieldHandle.options %}
