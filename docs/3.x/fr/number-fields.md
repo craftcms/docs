@@ -13,7 +13,7 @@ Number fields have the following settings:
 * **Prefix** – Text that should be displayed before the input.
 * **Suffix** – Text that should be displayed after the input.
 
-## Templating
+## Development
 
 ### Querying Elements with Number Fields
 
@@ -27,34 +27,58 @@ Possible values include:
 | `'>= 100'`                        | with a value of at least 100.       |
 | `['and', '>= 100', '<= 1000']` | with a value between 100 and 1,000. |
 
+::: code
 ```twig
 {# Fetch entries with a Number field set to at least 100 #}
 {% set entries = craft.entries()
     .myFieldHandle('>= 100')
     .all() %}
 ```
+```php
+// Fetch entries with a Number field set to at least 100
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle('>= 100')
+    ->all();
+```
+:::
 
 ### Working with Number Field Data
 
 If you have an element with a Number field in your template, you can access its data using your Number field’s handle:
 
+::: code
 ```twig
 {% set value = entry.myFieldHandle %}
 ```
+```php
+$value = $entry->myFieldHandle;
+```
+:::
 
 That will give you the number value for the field, or `null` if there is no value.
 
 To format the number with proper thousands separators (e.g. `,`), use the [number](./dev/filters.md#number) filter:
 
+::: code
 ```twig
 {{ entry.myFieldHandle|number }}
 ```
+```php
+\Craft::$app->getFormatter()->asDecimal($entry->myFieldHandle);
+```
+:::
 
 If the number will always be an integer, pass `decimals=0` to format the number without any decimals.
 
+::: code
 ```twig
 {{ entry.myFieldHandle|number(decimals=0) }}
 ```
+```php
+\Craft::$app->getFormatter()->asDecimal($entry->myFieldHandle, 0);
+```
+:::
+
 
 ### Saving Number Fields
 
