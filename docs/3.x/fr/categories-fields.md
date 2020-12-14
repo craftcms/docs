@@ -41,17 +41,17 @@ On multi-site installs, the following settings will also be available (under “
 
 ## The Field
 
-Categories fields list all of the currently-related categories, with a button to select new ones.
+Categories fields list all the currently-related categories with a button to select new ones.
 
-Clicking the “Add a category” button will bring up a modal window where you can find and select additional categories. You can create new categories from this modal as well, by clicking the “New category” button.
+Choosing **Add a category** will bring up a modal window where you can find and select additional categories. You can create new categories from this modal as well, by choosing **New category**.
 
-When you select a nested category, all of the ancestors leading up to that category will also automatically be related. Likewise, when you remove a category from within the main field input, any of its descendants will also be removed.
+When you select a nested category, all the ancestors leading up to that category will also automatically be related. Likewise, when you remove a category from within the main field input, any of its descendants will also be removed.
 
 ### Inline Category Editing
 
 When you double-click on a related category, a HUD will appear where you can edit the category’s title and custom fields.
 
-## Templating
+## Development
 
 ### Querying Elements with Categories Fields
 
@@ -69,25 +69,39 @@ Possible values include:
 | an [Category](craft3:craft\elements\Category) object               | that are related to the category.                           |
 | an [CategoryQuery](craft3:craft\elements\db\CategoryQuery) object | that are related to any of the resulting categories.        |
 
+::: code
 ```twig
 {# Fetch entries with a related category #}
 {% set entries = craft.entries()
     .myFieldHandle(':notempty:')
     .all() %}
 ```
+```php
+// Fetch entries with a related category
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle(':notempty:')
+    ->all();
+```
+:::
 
 ### Working with Categories Field Data
 
 If you have an element with a Categories field in your template, you can access its related categories using your Categories field’s handle:
 
+::: code
 ```twig
 {% set query = entry.myFieldHandle %}
 ```
+```php
+$query = $entry->myFieldHandle; 
+```
+:::
 
-That will give you a [category query](categories.md#querying-categories), prepped to output all of the related categories for the given field.
+That will give you a [category query](categories.md#querying-categories), prepped to output all the related categories for the given field.
 
-To loop through all of the related categories as a flat list, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
+To loop through all the related categories as a flat list, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 
+::: code
 ```twig
 {% set relatedCategories = entry.myFieldHandle.all() %}
 {% if relatedCategories|length %}
@@ -98,6 +112,15 @@ To loop through all of the related categories as a flat list, call [all()](craft
     </ul>
 {% endif %}
 ```
+```php
+$relatedCategories = $entry->myFieldHandle->all();
+if (count($relatedCategories)) {
+    foreach ($relatedCategories as $rel) {
+        // do something with $rel->url and $rel->title
+    }
+}
+```
+:::
 
 Or you can show them as a hierarchical list with the [nav](dev/tags.md#nav) tag:
 
@@ -119,30 +142,53 @@ Or you can show them as a hierarchical list with the [nav](dev/tags.md#nav) tag:
 {% endif %}
 ```
 
-If you only want the first related category, call [one()](craft3:craft\db\Query::one()) instead, and then make sure it returned something:
+If you only want the first related category, call [one()](craft3:craft\db\Query::one()) instead and make sure it returned something:
 
+::: code
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
 {% endif %}
 ```
+```php
+$rel = $entry->myFieldHandle->one();
+if ($rel) {
+    // do something with $rel->url and $rel->title
+}
+```
+:::
 
-If you just need to check if there are any related categories (but don’t need to fetch them), you can call [exists()](craft3:craft\db\Query::exists()):
+If you need to check for related categories without fetching them, you can call [exists()](craft3:craft\db\Query::exists()):
 
+::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
     <p>There are related categories!</p>
 {% endif %}
 ```
+```php
+if ($entry->myFieldHandle->exists()) {
+    // do something with related categories
+}
+```
+:::
 
 You can set [parameters](categories.md#parameters) on the category query as well. For example, to only fetch the “leaves” (categories without any children), set the [leaves](categories.md#leaves) param:
 
+::: code
 ```twig
 {% set relatedCategories = clone(entry.myFieldHandle)
     .leaves()
     .all() %}
 ```
+```php
+$myField = clone $entry->myFieldHandle;
+$relatedAssets = $myField
+    ->leaves()
+    ->all();
+```
+:::
 
 ::: tip
 It’s always a good idea to clone the category query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
