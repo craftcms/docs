@@ -26,7 +26,7 @@
 
 関連付けられたユーザーをダブルクリックすると、ユーザーのカスタムフィールドを編集できる HUD を表示します。
 
-## テンプレート記法
+## Development
 
 ### ユーザーフィールドによるエレメントの照会
 
@@ -44,25 +44,39 @@
 | an [User](craft3:craft\elements\User) object               | that are related to the user.                          |
 | an [UserQuery](craft3:craft\elements\db\UserQuery) object | that are related to any of the resulting users.        |
 
+::: code
 ```twig
 {# Fetch entries with a related user #}
 {% set entries = craft.entries()
     .myFieldHandle(':notempty:')
     .all() %}
 ```
+```php
+// Fetch entries with a related user
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle(':notempty:')
+    ->all();
+```
+:::
 
 ### ユーザーフィールドデータの操作
 
-テンプレート内でユーザーフィールドのエレメントを取得する場合、ユーザーフィールドのハンドルを利用して、関連付けられたユーザーにアクセスできます。
+If you have an element with a Users field in your template, you can access its related users using your Users field’s handle:
 
+::: code
 ```twig
 {% set query = entry.myFieldHandle %}
 ```
+```php
+$query = $entry->myFieldHandle;
+```
+:::
 
-これは、所定のフィールドで関連付けられたすべてのユーザーを出力するよう準備された[ユーザークエリ](users.md#querying-users)を提供します。
+That will give you a [user query](users.md#querying-users), prepped to output all the related users for the given field.
 
-関連付けられたすべてのユーザーをループするには、[all()](craft3:craft\db\Query::all()) を呼び出して、結果をループ処理します。
+To loop through all the related users, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 
+::: code
 ```twig
 {% set relatedUsers = entry.myFieldHandle.all() %}
 {% if relatedUsers|length %}
@@ -73,31 +87,64 @@
     </ul>
 {% endif %}
 ```
+```php
+$relatedUsers = $entry->myFieldHandle->all();
+if (count($relatedUsers)) {
+    foreach ($relatedUsers as $rel) {
+        // \craft\helpers\UrlHelper::url('profiles/' . $rel->username)
+        // $rel->name
+    }
+}
+```
+:::
 
-関連付けられた最初のユーザーだけが欲しい場合、代わりに [one()](craft3:craft\db\Query::one()) を呼び出して、何かが返されていることを確認します。
+If you only want the first related user, call [one()](craft3:craft\db\Query::one()) and make sure it returned something:
 
+::: code
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ url('profiles/'~rel.username) }}">{{ rel.name }}</a></p>
 {% endif %}
 ```
+```php
+$rel = $entry->myFieldHandle->one();
+if ($rel) {
+    // \craft\helpers\UrlHelper::url('profiles/' . $rel->username)
+    // $rel->name
+}
+```
+:::
 
-（取得する必要はなく）いずれかの関連付けられたユーザーがあるかを確認したい場合、[exists()](craft3:craft\db\Query::exists()) を呼び出すことができます。
+If you need to check for related users without fetching them you can call [exists()](craft3:craft\db\Query::exists()):
 
+::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
     <p>There are related users!</p>
 {% endif %}
 ```
+```php
+if ($entry->myFieldHandle->exists()) {
+    // There are related users!
+}
+```
+:::
 
-ユーザークエリで[パラメータ](users.md#parameters)をセットすることもできます。 例えば、`authors` グループに含まれるユーザーだけを取得するには、[groupId](users.md#groupid) パラメータをセットします。
+You can set [parameters](users.md#parameters) on the user query as well. For example, to only fetch users in the `authors` group, set the [groupId](users.md#groupid) param:
 
+::: code
 ```twig
 {% set relatedUsers = clone(entry.myFieldHandle)
     .group('authors')
     .all() %}
 ```
+```php
+$relatedUsers = (clone $entry->myFieldHandle)
+    ->group('authors')
+    ->all();
+```
+:::
 
 ::: tip
 It’s always a good idea to clone the user query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
