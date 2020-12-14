@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-12-14
+### Changed
+- Removed a tip about overriding the `mutex` component config for Windows hosts, as it’s no longer needed in Craft 3.5 and later. ([craftcms/cms#7242](https://github.com/craftcms/cms/issues/7242))
+
 ## 2020-12-09
 ### Added
 - Documented Commerce `modifyCartInfo` event.
