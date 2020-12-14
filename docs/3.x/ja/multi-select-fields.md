@@ -1,6 +1,6 @@
 # マルチセレクトボックスフィールド
 
-マルチセレクトボックスフィールドは、複数選択形式の入力を提供します。
+Multi-select fields give you an input where multiple items may be selected.
 
 ## 設定
 
@@ -8,7 +8,7 @@
 
 * **マルチセレクトボックスのオプション** – フィールドで利用可能なオプションを定義します。 オプションの値とラベルを別々に設定したり、デフォルトで選択状態にしておくものを選択できます。
 
-## テンプレート記法
+## Development
 
 ### マルチセレクトボックスフィールドによるエレメントの照会
 
@@ -23,34 +23,56 @@
 | `['foo', 'bar']`        | with `foo` or `bar` options selected.  |
 | `['and', 'foo', 'bar']` | with `foo` and `bar` options selected. |
 
+::: code
 ```twig
 {# Fetch entries with the 'foo' option selected #}
 {% set entries = craft.entries()
     .myFieldHandle('foo')
     .all() %}
 ```
+```php
+// Fetch entries with the 'foo' option selected
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle('foo')
+    ->all();
+```
+:::
 
 ### マルチセレクトボックスフィールドデータの操作
 
-テンプレート内でマルチセレクトボックスフィールドのエレメントを取得する場合、マルチセレクトボックスフィールドのハンドルを利用して、そのデータにアクセスできます。
+If you have an element with a Multi-select field in your template, you can access its data using your Multi-select field’s handle:
 
+::: code
 ```twig
 {% set value = entry.myFieldHandle %}
 ```
+```php
+$value = $entry->myFieldHandle;
+```
+:::
 
-それは、フィールドデータを含む <craft3:craft\fields\data\MultiOptionsFieldData> オブジェクトを提供します。
+That will give you a <craft3:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
 
-選択されたオプションすべてをループするには、フィールド値を反復してください。
+To loop through all the selected options, iterate over the field value:
 
+::: code
 ```twig
 {% for option in entry.myFieldHandle %}
     Label: {{ option.label }}
     Value: {{ option }} or {{ option.value }}
 {% endfor %}
 ```
+```php
+foreach ($entry->myFieldHandle as $option) {
+    // Label: $option->label
+    // Value: $option or $option->value
+}
+```
+:::
 
-利用可能なオプションすべてをループするには、[options](craft3:craft\fields\data\MultiOptionsFieldData::getOptions()) プロパティを反復してください。
+To loop through all the available options, iterate over the [options](craft3:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
 
+::: code
 ```twig
 {% for option in entry.myFieldHandle.options %}
     Label:    {{ option.label }}
@@ -58,18 +80,36 @@
     Selected: {{ option.selected ? 'Yes' : 'No' }}
 {% endfor %}
 ```
+```php
+foreach ($entry->myFieldHandle->options as $option) {
+    // Label:    $option->label
+    // Value:    $option or $option->value
+    // Selected: $option->selected ? 'Yes' : 'No'
+}
+```
+:::
 
-いずれかのオプションが選択されているかを確認するには、[length](https://twig.symfony.com/doc/2.x/filters/length.html) フィルタを使用してください。
+To see if any options are selected, use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter:
 
+::: code
 ```twig
 {% if entry.myFieldHandle|length %}
 ```
+```php
+if (count($entry->myFieldHandle)) {
+```
+:::
 
-特定のオプションが選択されているかを確認するには、[contains()](craft3:craft\fields\data\MultiOptionsFieldData::contains()) を使用してください。
+To see if a particular option is selected, use [contains()](craft3:craft\fields\data\MultiOptionsFieldData::contains())
 
+::: code
 ```twig
 {% if entry.myFieldHandle.contains('foo') %}
 ```
+```php
+if ($entry->myFieldHandle->contains('foo') {
+```
+:::
 
 ### Saving Multi-select Fields
 
@@ -80,7 +120,7 @@ If you have an element form, such as an [entry form](https://craftcms.com/knowle
 
 {# Include a hidden input first so Craft knows to update the
    existing value, if no options are selected. #}
-{{ hiddenInput('fields[myFieldHandle]' , '') }}
+{{ hiddenInput('fields[myFieldHandle]', '') }}
 
 <select multiple name="fields[myFieldHandle][]">
     {% for option in field.options %}
