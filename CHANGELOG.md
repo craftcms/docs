@@ -2,6 +2,20 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-12-14
+### Added
+- Added PHP examples to Field Types pages.
+
+### Changed
+- Removed a tip about overriding the `mutex` component config for Windows hosts, as it’s no longer needed in Craft 3.5 and later. ([craftcms/cms#7242](https://github.com/craftcms/cms/issues/7242))
+
+## 2020-12-09
+### Added
+- Documented Commerce `modifyCartInfo` event.
+
+### Changed
+- Improved Searching page with more detailed overview and examples.
+
 ## 2020-11-25
 ### Changed
 - Changed typographic widow handling approach to improve HMR and scroll issues.
