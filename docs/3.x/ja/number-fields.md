@@ -13,7 +13,7 @@
 * **Prefix** – 入力欄の前に表示するテキスト
 * **Suffix** – 入力欄の後に表示するテキスト
 
-## テンプレート記法
+## Development
 
 ### 数字フィールドによるエレメントの照会
 
@@ -27,34 +27,58 @@
 | `'>= 100'`                        | 少なくとも、値が 100。       |
 | `['and', '>= 100', '<= 1000']` | 値が 100 から 1,000 の間。 |
 
+::: code
 ```twig
 {# Fetch entries with a Number field set to at least 100 #}
 {% set entries = craft.entries()
     .myFieldHandle('>= 100')
     .all() %}
 ```
+```php
+// Fetch entries with a Number field set to at least 100
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle('>= 100')
+    ->all();
+```
+:::
 
 ### 数字フィールドデータの操作
 
-テンプレート内で数字フィールドのエレメントを取得する場合、数字フィールドのハンドルを利用して、そのデータにアクセスできます。
+If you have an element with a Number field in your template, you can access its data using your Number field’s handle:
 
+::: code
 ```twig
 {% set value = entry.myFieldHandle %}
 ```
+```php
+$value = $entry->myFieldHandle;
+```
+:::
 
-それは、フィールドの数値を提供します。 値がない場合、`null` になります。
+That will give you the number value for the field, or `null` if there is no value.
 
-適切な千単位の区切り文字（例：`,`）でフォーマットするには、[number](./dev/filters.md#number) フィルタを使用してください。
+To format the number with proper thousands separators (e.g. `,`), use the [number](./dev/filters.md#number) filter:
 
+::: code
 ```twig
 {{ entry.myFieldHandle|number }}
 ```
+```php
+\Craft::$app->getFormatter()->asDecimal($entry->myFieldHandle);
+```
+:::
 
-数字を常に整数とする場合、小数点なしで数字をフォーマットするために `decimals=0` を渡してください。
+If the number will always be an integer, pass `decimals=0` to format the number without any decimals.
 
+::: code
 ```twig
 {{ entry.myFieldHandle|number(decimals=0) }}
 ```
+```php
+\Craft::$app->getFormatter()->asDecimal($entry->myFieldHandle, 0);
+```
+:::
+
 
 ### Saving Number Fields
 
