@@ -1422,6 +1422,10 @@ To save an entry, use the entry type-specific mutation which will have the name 
 
 The `id`, `uid` and `authorId` arguments do no exist for single entries. This is because single entries have no authors and are identified already by the exact mutation. In a similar fashion, there are additional arguments available for structured entries. For more information, refer to [mutating structure data](#mutating-structure-data)
 
+#### Editing Existing Entries
+
+You can modify existing entries by passing the populated `id` argument to your mutation.
+
 #### Saving a Draft
 
 To save a draft for an entry, use the entry type-specific mutation which will have the name in the form of `save_<sectionHandle>_<entryTypeHandle>_Draft`:
