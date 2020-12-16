@@ -159,7 +159,7 @@ For example, with this URL rule:
 'blog/archive/<year:\d{4}>' => 'controller/action/foo',
 ```
 
-You controller method would be:
+Your controller method would be:
 
 ```php
 public function actionFoo(int $year = null)
