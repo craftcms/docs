@@ -148,3 +148,22 @@ If you access `http://my-project.test/blog/archive/2018`, your `blog/_archive.tw
 ```twig
 <h1>Blog Entries from {{ year }}</h1>
 ```
+
+### Accessing Named Parameters in your Controllers
+
+To access named parameters in your contollers, you will need to add the parameter(s) to your controller's action definition.
+
+For example, with this URL rule:
+
+```php
+'blog/archive/<year:\d{4}>' => 'controller/action/foo',
+```
+
+Your controller method would be:
+
+```php
+public function actionFoo(int $year = null)
+{  
+    // ...
+}
+```
