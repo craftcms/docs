@@ -31,10 +31,13 @@ More topics are covered in separate pages:
 
 ### Fetching a Cart
 
-In your templates, you can get the current user’s cart with [craft.commerce.carts.cart](craft-commerce-carts-cart.md).
+In your templates, you can get the current user’s cart like this:
 
 ```twig
 {% set cart = craft.commerce.carts.cart %}
+
+{# same thing: #}
+{% set cart = craft.commerce.getCarts().getCart() %}
 ```
 
 You could also fetch the cart via AJAX. This jQuery example could be added to a Twig template, and outputs the cart data to the browser’s development console:
@@ -58,6 +61,8 @@ $.ajax({
 Either of the examples above will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
 
 To see what cart information you can use in your templates, take a look at the [Order](commerce3:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/develop/example-templates/shop/cart/index.twig).
+
+Once a cart’s completed and turned into an order, calling `craft.commerce.carts.cart` again will return a new cart.
 
 ### Adding Items to a Cart
 
