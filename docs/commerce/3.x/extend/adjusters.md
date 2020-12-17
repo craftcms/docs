@@ -4,7 +4,7 @@ Adjuster classes return models that modify pricing when an order is [recalculate
 
 ## Writing an Adjuster
 
-Each class implements the [Adjuster Interface](commerce3:craft\commerce\base\AdjusterInterface) with an `adjust()` method for evaluating the order and returning zero or more [OrderAdjustment](craft\commerce\models\OrderAdjustment) models. Each of those models may be applied to the order or one of its line items.
+Each class implements the [Adjuster Interface](commerce3:craft\commerce\base\AdjusterInterface) with an `adjust()` method for evaluating the order and returning zero or more [OrderAdjustment](commerce3:craft\commerce\models\OrderAdjustment) models. Each of those models may be applied to the order or one of its line items.
 
 ::: tip Do you need a custom adjuster?
 The built in adjusters each include integration points that could reduce the amount of custom code you need to write. Look at the existing [Discount](commerce3:craft\commerce\adjusters\Discount), [Shipping](commerce3:craft\commerce\adjusters\Shipping), and [Tax](commerce3:craft\commerce\adjusters\Tax) adjusters before you write your own from scratch.
@@ -84,7 +84,7 @@ Event::on(
 
 The adjuster interface consists of a single method: `adjust(Order $order)`.
 
-Each [OrderAdjustment](craft\commerce\models\OrderAdjustment) model returned by that `adjust` method—if it returns any at all—will have adjustment details and should include contextual information that explains why the adjuster returned it:
+Each [OrderAdjustment](commerce3:craft\commerce\models\OrderAdjustment) model returned by that `adjust` method—if it returns any at all—will have adjustment details and should include contextual information that explains why the adjuster returned it:
 
 - **$type** should be `shipping`, `discount`, or `tax` to reflect the kind of adjustment.
 - **$amount** is the value (positive or negative) used to modify the order or line item. (Negative amounts reduce the price of the order.)
