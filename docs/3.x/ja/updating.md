@@ -2,11 +2,11 @@
 
 ## コントロールパネルからのアップデート
 
-アップデートが可能になると、Craft のアップデート権限を持つユーザーは CP のサイドバーにあるナビゲーション項目「ユーティリティ」の横にバッジを確認できるようになります。 「ユーティリティ」をクリックし、その後「アップデート」を選択します。 デフォルトでインストールされているコントロールパネルのダッシュボードにあるアップデートウィジェットを利用することもできます。
+When an update is available, users with the permission to update Craft will see a badge in the control panel next to “Utilities” in the main navigation. Choose “Utilities”, then “Updates”. (You can also get to this view directly from the “Updates” widget that’s installed by default in the control panel dashboard.)
 
-このセクションには、Craft CMS のアップデートとプラグインのアップデートの両方を表示します。 それぞれのアップデートは、それ自身の「アップデート」ボタンを持っています。 クリックすると、 Craft の自動更新プロセスが開始されます。
+This section displays updates for Craft CMS plugins, each with its own “Update” button. Choosing any of those will initiate Craft’s self-updating process.
 
-アップデートページの左上にある「すべてを更新」ボタンを使用して、（アップデート可能な Craft とプラグイン）すべてのアップデートを実行できます。
+You can choose “Update All” at the top left to initiate all available Craft and/or plugin updates at once.
 
 ::: tip
 Craft’s [changelog](https://github.com/craftcms/cms/blob/master/CHANGELOG.md) will warn you of any critical changes at the top of the release notes. While there aren’t usually any warnings, it’s always a good idea to check before updating.
@@ -14,7 +14,7 @@ Craft’s [changelog](https://github.com/craftcms/cms/blob/master/CHANGELOG.md) 
 
 ## ターミナルからのアップデート
 
-利用可能なアップデートを確認するには、ターミナルで Craft プロジェクトに移動し、次のコマンドを実行してください。
+The [`update` console command](console-commands.md#update) can be used to update Craft and plugins.
 
 一度にすべてをアップデートするには、次のコマンドを実行します。
 
