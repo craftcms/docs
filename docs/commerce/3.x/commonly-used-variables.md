@@ -10,26 +10,6 @@ To get the Craft Commerce [general settings model](commerce3:craft\commerce\mode
 {% set settings = craft.commerce.settings %}
 ```
 
-## craft.orders()
-
-See [Order Queries](dev/element-queries/order-queries.md).
-
-## craft.products()
-
-See [Product Queries](dev/element-queries/product-queries.md).
-
-## craft.subscriptions()
-
-See [Order Queries](dev/element-queries/subscription-queries.md).
-
-## craft.variants()
-
-See [Variant Queries](dev/element-queries/variant-queries.md).
-
-## craft.commerce.carts.cart
-
-See [craft.commerce.carts.cart](craft-commerce-carts-cart.md).
-
 ## cart.availableShippingMethodOptions
 
 Returns the shipping methods available for the current cart. Some shipping methods may not be included, as only those whose rules apply to the current cart will be returned.
