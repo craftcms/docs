@@ -28,7 +28,7 @@ More topics are covered in separate pages:
 
 - [Addresses](addresses.md)
 - [Updating Custom Fields in a Cart](update-cart-custom-fields.md)
-- [Getting a Cart’s Shipping Method Options](shipping.md#getting-a-cart-s-shipping-method-options)
+- [cart.availableShippingMethodOptions](shipping.md#cart-availableshippingmethodoptions)
 
 ### Fetching a Cart
 

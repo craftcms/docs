@@ -70,3 +70,15 @@ You can create a new line item status by navigating to **Commerce** → **System
 When creating a line item status you can optionally designate that status to be applied by default with the **New line items get this status by default** checkbox. When checked, the status is applied by default when an order is completed.
 
 If no line item status is designated as the default, line items have a `null` or “None” status.
+
+## Templating
+
+### craft.commerce.orderStatuses.allOrderStatuses
+
+Returns an array of <commerce3:craft\commerce\models\OrderStatus> objects representing all the order statuses in the system.
+
+```twig
+{% for status in craft.commerce.orderStatuses.allOrderStatuses %}
+    {{ status.handle }} - {{ status.name }}
+{% endfor %}
+```

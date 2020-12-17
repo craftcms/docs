@@ -84,3 +84,31 @@ Support for this feature depends on the gateway used and its settings.
 
 All [first-party provided gateways](#first-party-gateway-plugins) support partial refunds as of Commerce 2.0.
 
+## Templating
+
+### craft.commerce.gateways.allFrontEndGateways
+
+Returns all payment gateways available to the customer.
+
+```twig
+{% if not craft.commerce.gateways.allFrontEndGateways|length %}
+    <p>No payment methods available.</p>
+{% endif %}
+
+{% if craft.commerce.gateways.allFrontEndGateways|length %}
+<form method="post">
+    {{ csrfInput() }}
+    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+    {{ hiddenInput('redirect', 'commerce/checkout/payment') }}
+
+    <label for="gatewayId">Payment Method</label>
+    <select id="gatewayId" name="gatewayId" >
+        {% for id,name in craft.commerce.gateways.allFrontEndGateways %}
+            <option value="{{ id }}"{% if id == cart.gatewayId %} selected{% endif %}>
+                {{- name -}}
+            </option>
+        {% endfor %}
+    </select>
+</form>
+{% endif %}
+```

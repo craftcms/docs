@@ -86,6 +86,20 @@ This works just like Craft’s [entry](https://craftcms.com/docs/3.x/entries.htm
 When a site visitor hits the URL of a product, the `product` variable is automatically available to your templates, just like the `entry` variable for Craft’s entries.
 :::
 
+
+
+### Templating
+
+#### craft.commerce.productTypes.allProductTypes
+
+Returns an array of all product types set up in the system.
+
+```twig
+{% for type in craft.commerce.productTypes.allProductTypes %}
+    {{ type.handle }} - {{ type.name }}
+{% endfor %}
+```
+
 ## Querying Products
 
 You can fetch products using product queries.
@@ -1310,7 +1324,7 @@ Fetching the equivalent with GraphQL could look like this:
 }
 ```
 
-## Varient Query Parameters
+## Variant Query Parameters
 
 Variant queries support the following parameters:
 

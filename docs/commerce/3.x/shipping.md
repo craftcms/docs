@@ -148,25 +148,6 @@ The default amount based on a percentage of item’s cost.
 
 You can further customize the Per Item, Weight, and Percentage rates in each category.
 
-## Getting a Cart’s Shipping Method Options
-
-You can use `cart.availableShippingMethodOptions` to return the shipping method options available for the current cart. Some shipping methods may not be included, as only those whose rules apply to the current cart will be returned.
-
-```twig
-{% for handle, method in cart.availableShippingMethodOptions %}
-    {% set isCurrentSelection = handle == cart.shippingMethodHandle %}
-    {% set formattedPrice = method.priceForOrder(cart)|currency(cart.currency) %}
-    <label>
-        <input type="radio"
-            name="shippingMethodHandle"
-            value="{{ handle }}"
-            {{ isCurrentSelection ? ' checked' : '' }}
-        />
-        <strong>{{ method.name }}</strong> {{ formattedPrice }}
-    </label>
-{% endfor %}
-```
-
 ## Configuration Examples
 
 There are lots of ways you might combine the included shipping rules depending on what matters most for your store.
@@ -199,3 +180,24 @@ Shipping methods and rules are at the core of the shipping engine in the Pro edi
 ::: tip
 See the [Shipping Methods](extend/shipping-methods.md) page in the _Extending Commerce_ section to learn how to write your own custom shipping method.
 :::
+
+## Templating
+
+### cart.availableShippingMethodOptions
+
+Returns the shipping method options available for the current cart. Some shipping methods may not be included, as only those whose rules apply to the current cart will be returned.
+
+```twig
+{% for handle, method in cart.availableShippingMethodOptions %}
+    {% set isCurrentSelection = handle == cart.shippingMethodHandle %}
+    {% set formattedPrice = method.priceForOrder(cart)|currency(cart.currency) %}
+    <label>
+        <input type="radio"
+            name="shippingMethodHandle"
+            value="{{ handle }}"
+            {{ isCurrentSelection ? ' checked' : '' }}
+        />
+        <strong>{{ method.name }}</strong> {{ formattedPrice }}
+    </label>
+{% endfor %}
+```

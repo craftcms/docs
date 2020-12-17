@@ -64,3 +64,15 @@ Commerce will calculate tax based on the best matching zone for the order. It’
 Let’s say you need to charge 5% tax for all items that ship to New York and 6% only on clothing items that ship to Pennsylvania. This will means you need to set up two zones: one for the state of New York, and another for the state of Pennsylvania.
 
 Here’s another hypothetical scenario. You would like to charge 10% tax on all electronic items and 5% tax on everything else. This tax should apply to all countries in the European Union (EU). In this case you would construct just a single zone consisting of all the countries in the EU. Even though you need to charge two different rates for a product, you don’t necessarily need to have two zones.
+
+## Templating
+
+### craft.commerce.taxCategories.allTaxCategories
+
+Returns an array of all tax categories set up in the system.
+
+```twig
+{% for taxCategory in craft.commerce.taxCategories.allTaxCategories %}
+    {{ taxCategory.id }} - {{ taxCategory.name }}
+{% endfor %}
+```

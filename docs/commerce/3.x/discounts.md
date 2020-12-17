@@ -10,12 +10,11 @@ To create a new discount, navigate to **Commerce** → **Promotions** → **Disc
 
 Discounts are processed and applied in the order they are sorted in the control panel.
 
-Inside each discount is a checkbox labelled “Stop processing further discounts after this discount matches”. If this option is ticked and the discount matches the order, no further discounts will be applied to the cart.
+Inside each discount is a checkbox labelled **Stop processing further discounts after this discount matches**. If this option is ticked and the discount matches the order, no further discounts will be applied to the cart.
 
 ## Coupon Discounts
 
-Discounts can have a coupon requirement as an optional condition. The coupon condition can be
-found on the “Coupon” tab.
+Discounts can have a coupon requirement as an optional condition, which you can manage on the **Coupon** tab.
 
 If no coupon is entered for the cart and the discount has a coupon code, the discount will not apply.
 
@@ -206,3 +205,27 @@ Matching items are those items used to match this discount’s conditions, like 
 #### Don’t apply any subsequent discounts to an order if this discount is applied
 
 When this setting is on and the discount applies, discounts further down in the discounts list will not be applied. This makes it possible to prevent cumulative discounts from being applied.
+
+## Templating
+
+### craft.commerce.discounts.allActiveDiscounts
+
+Returns an array of all enabled discounts set up in the system active for the current date and time.
+
+```twig
+{% for discount in craft.commerce.discounts.allActiveDiscounts %}
+    {{ discount.name }} - {{ discount.description }}
+{% endfor %}
+```
+
+### craft.commerce.discounts.getDiscountByCode(code)
+
+Returns a discount that matches the code supplied.
+
+```twig
+{% set discount = craft.commerce.discount.getDiscountByCode('HALFOFF') %}
+{% if discount %}
+    {{ discount.name }} - {{ discount.description }}
+{% endif %}
+```
+
