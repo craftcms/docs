@@ -67,7 +67,7 @@ Once a cart’s completed and turned into an order, calling `craft.commerce.cart
 
 ### Adding Items to a Cart
 
-You can add purchasables (like [a variant](variant.md)) to the cart by submitting post requests to the `commerce/cart/update-cart` action. Items can be added one at a time or in an array.
+You can add purchasables (like [a variant](products-variants.md#variants)) to the cart by submitting post requests to the `commerce/cart/update-cart` action. Items can be added one at a time or in an array.
 
 #### Adding a Single Item
 
