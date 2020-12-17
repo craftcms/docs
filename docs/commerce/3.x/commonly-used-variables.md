@@ -2,14 +2,6 @@
 
 The following are common methods you will want to call in your front end templates:
 
-## craft.commerce.settings
-
-To get the Craft Commerce [general settings model](commerce3:craft\commerce\models\Settings):
-
-```twig
-{% set settings = craft.commerce.settings %}
-```
-
 ## craft.commerce.gateways.allFrontEndGateways
 
 Returns all payment gateways available to the customer.

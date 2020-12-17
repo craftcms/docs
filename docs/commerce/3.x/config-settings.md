@@ -29,6 +29,12 @@ return [
 ];
 ```
 
+You can access the Commerce [general settings model](commerce3:craft\commerce\models\Settings) in your templates:
+
+```twig
+{% set settings = craft.commerce.settings %}
+```
+
 Here’s the full list of Commerce config settings:
 
 <!-- BEGIN SETTINGS -->
