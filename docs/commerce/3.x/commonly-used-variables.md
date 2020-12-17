@@ -10,20 +10,6 @@ To get the Craft Commerce [general settings model](commerce3:craft\commerce\mode
 {% set settings = craft.commerce.settings %}
 ```
 
-## cart.availableShippingMethodOptions
-
-Returns the shipping methods available for the current cart. Some shipping methods may not be included, as only those whose rules apply to the current cart will be returned.
-
-```twig
-{% for handle, method in cart.availableShippingMethodOptions %}
-    <label>
-        <input type="radio" name="shippingMethodHandle" value="{{ handle }}"
-               {% if handle == cart.shippingMethodHandle %}checked{% endif %} />
-        <strong>{{ method.name }}</strong> {{ method.priceForOrder(cart)|currency(cart.currency) }}
-    </label>
-{% endfor %}
-```
-
 ## craft.commerce.gateways.allFrontEndGateways
 
 Returns all payment gateways available to the customer.
