@@ -95,7 +95,7 @@ We’ve got valid order and payment information and Commerce will now use [Payme
 
 Payment type support needs to be defined by the gateway’s [`supportsAuthorize()`](commerce3:craft\commerce\base\GatewayInterface::supportsAuthorize()) and [`supportsPurchase()`](commerce3:craft\commerce\base\GatewayInterface::supportsPurchase()) methods.
 
-The gateway’s [`paymentType`](craft\commerce\base\Gateway::$paymentType) setting, which can be available to the store manager in the control panel, is what determines which supported type should be used at checkout. (You can use [`getPaymentTypeOptions()`](craft\commerce\base\Gateway::getPaymentTypeOptions()) to customize the key+value select menu items to be displayed in the control panel.)
+The gateway’s [`paymentType`](commerce3:craft\commerce\base\Gateway::$paymentType) setting, which can be available to the store manager in the control panel, is what determines which supported type should be used at checkout. (You can use [`getPaymentTypeOptions()`](commerce3:craft\commerce\base\Gateway::getPaymentTypeOptions()) to customize the key+value select menu items to be displayed in the control panel.)
 
 In the authorize-capture flow, `authorize()` will be called and a store manager will need to explicitly capture payment in the control panel separately—which calls your gateway’s `capture()` method.
 
