@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2020-12-17
+### Changed
+- Heavily refactored Commerce 3.x docs to improve organization, flow, and coverage gaps. 🎉
+
 ## 2020-12-14
 ### Added
 - Added PHP examples to Field Types pages.
