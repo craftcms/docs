@@ -1,8 +1,8 @@
 # Payment Gateways
 
-With Craft Commerce, payments gateways are provided by Craft CMS plugins.
+Craft Commerce payments gateways are provided by Craft CMS plugins.
 
-To create a payment gateway you must install the appropriate plugin, navigate to Commerce → Settings → Gateways, and set up the appropriate gateway. For more detailed instructions, see each plugin’s `README.md` file.
+To create a payment gateway you must install the appropriate plugin and navigate to **Commerce** → **Settings** → **Gateways** and configure the appropriate gateway. For more detailed instructions, see each plugin’s `README.md` file.
 
 Payment gateways generally fit in one of two categories:
 
@@ -30,8 +30,8 @@ After installation, Craft Commerce will install some demo products and a basic c
 
 This dummy gateway driver is only for testing with placeholder credit card numbers. A valid card number ending in an even digit will get a successful response. If the last digit is an odd number, the driver will return a generic failure response:
 
-`4242424242424242` <span style="color:green"> ✓ Success</span>\
-`4444333322221111` <span style="color:red"> ✗ Failure</span>
+`4242424242424242` <span class="text-green"> ✓ Success</span>\
+`4444333322221111` <span class="text-red"> ✗ Failure</span>
 
 ## Manual Gateway
 
@@ -46,6 +46,8 @@ Before using a plugin-provided gateway, consult the plugin’s readme for specif
 ## Adding additional gateways
 
 Additional payment gateways can be added to Commerce with relatively little work. The [first-party gateway plugins](#first-party-gateway-plugins), with the exception of Stripe, use the [Omnipay payment library](https://github.com/craftcms/commerce-omnipay) and can be used as point of reference when creating your own.
+
+See the _Extending Commerce_ section’s [Payment Gateway Types](extend/payment-gateway-types.md) page to learn about building your own gateway plugin or module.
 
 ## Storing config outside of the database
 
@@ -81,3 +83,32 @@ Support for this feature depends on the gateway used and its settings.
 ## Partial refunds
 
 All [first-party provided gateways](#first-party-gateway-plugins) support partial refunds as of Commerce 2.0.
+
+## Templating
+
+### craft.commerce.gateways.allFrontEndGateways
+
+Returns all payment gateways available to the customer.
+
+```twig
+{% if not craft.commerce.gateways.allFrontEndGateways|length %}
+    <p>No payment methods available.</p>
+{% endif %}
+
+{% if craft.commerce.gateways.allFrontEndGateways|length %}
+<form method="post">
+    {{ csrfInput() }}
+    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+    {{ hiddenInput('redirect', 'commerce/checkout/payment') }}
+
+    <label for="gatewayId">Payment Method</label>
+    <select id="gatewayId" name="gatewayId" >
+        {% for id,name in craft.commerce.gateways.allFrontEndGateways %}
+            <option value="{{ id }}"{% if id == cart.gatewayId %} selected{% endif %}>
+                {{- name -}}
+            </option>
+        {% endfor %}
+    </select>
+</form>
+{% endif %}
+```

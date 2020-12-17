@@ -9,7 +9,7 @@ Another email could be “Admin Order Notification”, also attached to the defa
 ## Settings
 
 Before setting up emails for Craft Commerce, ensure that your Craft CMS installation is [properly configured for email delivery](https://craftcms.com/guides/why-doesnt-craft-send-emails#setting-up-email).
-You can set up your email gateway by navigating to Settings → Email in the control panel.
+You can set up your email gateway in the control panel by navigating to **Settings** → **Email**.
 
 ::: tip
 Commerce emails are sent in Craft queue jobs, so sending may be delayed depending on how your queue is configured to run. See the [runQueueAutomatically](https://craftcms.com/docs/3.x/config/config-settings.html#runqueueautomatically) config setting and notes.
@@ -140,7 +140,7 @@ It’s a good idea to always test your status email templates before relying on 
 Once you’ve configured a template, the quickest way to test it is by navigating to **Commerce** → **System Settings** → **Emails** and choosing **Preview** next to the relevant email. This will open a new tab/window to display the template rendered using a random completed order.
 
 ::: tip
-You can add `&orderNumber=ORDER_NUMBER` to the preview URL to use a specific number. Replace `ORDER_NUMBER` with the order number you’d like to preview.
+You can preview a specific order by adding `&orderNumber=ORDER_NUMBER` to the preview URL, replacing `ORDER_NUMBER` with the actual order number you’d like to use.
 :::
 
 If your template is rendering successfully but messages are failing to send, you’ll want to check these things in order:
@@ -159,7 +159,7 @@ Some email settings support dynamic Twig values, where parsing errors can cause 
 3. **Make sure the HTML and Plain Text template paths exist and parse properly.**\
 Syntax issues, undeclared variables, or missing information may prevent templates from rendering.
 4. **Make sure included PDFs render properly.**\
-If you’re including a PDF, it could have its own rendering issues that cause sending to fail. Be sure to preview the relevant PDF separately and ensure it’s working as expected.
+If you’re including a [PDF](pdfs.md), it could have its own rendering issues that cause sending to fail. Be sure to preview the relevant PDF separately and ensure it’s working as expected.
 
 When an email fails to send in response to a status change, its queue job will be marked as failed and include an appropriate message. Once you fix the cause of the sending failure, you can retry sending the email from the queue via **Utilities** → **Queue Manager**.
 

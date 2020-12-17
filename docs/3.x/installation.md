@@ -60,7 +60,7 @@ my-project.test/
 ```
 
 ::: tip
-The `web/` folder represents your site’s webroot, and it can be renamed to whatever you want (`www/`, `public/`, `public_html/`, etc.).
+The `web/` folder represents your site’s web root, and it can be renamed to whatever you want (`www/`, `public/`, `public_html/`, etc.).
 :::
 
 You can learn about what all these folders and files are for and how to customize them from the [Directory Structure](directory-structure.md) page.
@@ -135,7 +135,7 @@ If you’re given a choice, we recommend the following database settings in most
 
 ## Step 5: Set up the Web Server
 
-Create a new web server to host your Craft project. Its document root (or “webroot”) should point to your `web/` directory (or whatever you’ve renamed it to).
+Create a new web server to host your Craft project. Its document root (or “web root”) should point to your `web/` directory (or whatever you’ve renamed it to).
 
 If you’re not using [MAMP](https://mamp.info) or another localhosting tool, you will probably need to update your `hosts` file, so your computer knows to route requests to your chosen host name to the local computer.
 

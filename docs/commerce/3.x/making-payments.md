@@ -9,10 +9,10 @@ For this example, we’re assuming the payment gateway is set on the cart and th
 ```twig
 {# @var cart craft\commerce\elements\Order #}
 <form method="post">
-    <input type="hidden" name="action" value="commerce/payments/pay"/>
-    <input type="hidden" name="redirect" value="/commerce/customer/order?number={number}"/>
-    <input type="hidden" name="cancelUrl" value="{{ '/commerce/checkout/payment'|hash }}"/>
     {{ csrfInput() }}
+    {{ hiddenInput('action', 'commerce/payments/pay') }}
+    {{ hiddenInput('redirect', '/commerce/customer/order?number={number}') }}
+    {{ hiddenInput('cancelUrl', '/commerce/checkout/payment'|hash) }}
 
     {{ cart.gateway.getPaymentFormHtml({})|raw }}
 
@@ -27,10 +27,10 @@ The example below assumes the availability of a `paymentForm` variable, as discu
 ```twig
 {% import "_includes/forms" as forms %}
 <form method="post">
-    <input type="hidden" name="action" value="commerce/payments/pay"/>
-    <input type="hidden" name="redirect" value="/commerce/customer/order?number={number}"/>
-    <input type="hidden" name="cancelUrl" value="{{ '/commerce/checkout/payment'|hash }}"/>
     {{ csrfInput() }}
+    {{ hiddenInput('action', 'commerce/payments/pay') }}
+    {{ hiddenInput('redirect', '/commerce/customer/order?number={number}') }}
+    {{ hiddenInput('cancelUrl', '/commerce/checkout/payment'|hash) }}
 
     {# first and last name #}
     <fieldset>
@@ -120,15 +120,15 @@ Below is a simplified example of the fields required to make a payment using Twi
 {% set cancelUrl = craft.app.request.getUrl()|hash %}
 
 <form method="post">
-    <input type="hidden" name="action" value="commerce/payments/pay"/>
+    {{ hiddenInput('action', 'commerce/payments/pay') }}
     {{ redirectInput('/shop/customer/order?number='~cart.number~'&success=true') }}
-    <input type="hidden" name="cancelUrl" value="{{ cancelUrl }}"/>
-    <input type="hidden" name="email" value="{{ email }}"/>
-    <input type="hidden" name="orderNumber" value="{{ cart.number }}">
+    {{ hiddenInput('cancelUrl', cancelUrl) }}
+    {{ hiddenInput('email', email) }}
+    {{ hiddenInput('orderNumber', cart.number) }}
 
     {{ cart.gateway.getPaymentFormHtml({})|raw }}
 
-    <input type="submit" value="submit">
+    <button type="submit">Submit</button>
 </form>
 ```
 
@@ -136,7 +136,7 @@ If you would like to pay with a different gateway than the one that is already s
 
 ```twig
 {# ... #}
-<input type="hidden" name="gatewayId" value="1">
+{{ hiddenInput('gatewayId', 1) }}
 {# ... #}
 ```
 
