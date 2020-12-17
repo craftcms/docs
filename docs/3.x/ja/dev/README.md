@@ -44,7 +44,7 @@ Craft は、`recipes/_entry.twig` のように、名前の接頭辞にアンダ�
 
 `recipes/entry` にあるテンプレートを利用した、`http://mysite.com/recipes/gin-tonic` でアクセスできるレシピのエントリがある場合、誰でも `http://mysite.com/recipes/entry` で直接テンプレートにアクセスできてしまいます。
 
-この例では、エントリ URL の一部としてのみ利用されるため、テンプレートへダイレクトにアクセスする理由がありません。 そこで、Craft が不可視ファイルだとみなすようファイル名を `_entry.twig` に変更し、セクションの設定をアップデートします。
+この例では、エントリ URL の一部としてのみ利用されるため、テンプレートへダイレクトにアクセスする理由がありません。 We change its filename to `_entry.twig` so it is considered hidden by Craft and update the settings in our Section.
 
 これで `http://mysite.com/recipes/entry` にアクセスすると、Craft がテンプレートのレンダリングを試みる代わりに、404 エラーを返します。
 
