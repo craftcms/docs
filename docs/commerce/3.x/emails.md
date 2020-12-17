@@ -12,7 +12,7 @@ Another email could be “Admin Order Notification”, also attached to the defa
 ## Settings
 
 Before setting up emails for Craft Commerce, ensure that your Craft CMS installation is [properly configured for email delivery](https://craftcms.com/guides/why-doesnt-craft-send-emails#setting-up-email).
-You can set up your email gateway by navigating to Settings → Email in the control panel.
+You can set up your email gateway in the control panel by navigating to **Settings** → **Email**.
 
 ::: tip
 Commerce emails are sent in Craft queue jobs, so sending may be delayed depending on how your queue is configured to run. See the [runQueueAutomatically](https://craftcms.com/docs/3.x/config/config-settings.html#runqueueautomatically) config setting and notes.

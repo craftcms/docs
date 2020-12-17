@@ -2,7 +2,7 @@
 
 Commerce manages shipping and billing addresses using [Address](commerce3:craft\commerce\models\Address) models that are relevant to [Orders](orders-carts.md) and [Customers](customers.md).
 
-In the control panel, you’ll find addresses within the context of Orders and Customers. A Store Location may also be entered at Commerce → Store Settings → Store Location.
+In the control panel, you’ll find addresses within the context of Orders and Customers. A Store Location may also be entered at **Commerce** → **Store Settings** → **Store Location**.
 
 ## Managing Addresses
 

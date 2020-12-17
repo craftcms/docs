@@ -4,7 +4,7 @@ Subscriptions are handled by gateways. A payment gateway must handle subscriptio
 
 Because not all gateways support subscriptions via API, Commerce does not allow creating new subscription plans on the gateway. Support for this must be added by a plugin.
 
-Once you’ve added a payment gateway that supports subscriptions, you can then navigate to Commerce → Settings → Subscription Plans to set up subscription plans.
+Once you’ve added a payment gateway that supports subscriptions, you can then navigate to **Commerce** → **Settings** → **Subscription Plans** to set up subscription plans.
 
 ## Subscription support across gateways
 

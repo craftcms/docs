@@ -8,7 +8,7 @@ Discounts are only available in the [Pro edition](editions.md) of Craft Commerce
 
 With Craft Commerce, coupon codes are set up as a condition within a discount promotion.
 
-To create a new discount promotion, navigate to Commerce → Promotions → Discounts in the control panel. To see the coupon condition, select to the “Coupon” tab.
+To create a new discount promotion, navigate to **Commerce** → **Promotions** → **Discounts** in the control panel. To see the coupon condition, select to the “Coupon” tab.
 
 An empty coupon field on the discount means no coupon is needed for the discount to work. Adding a coupon requires that a coupon is submitted to the cart. This makes the discount available to match the order but still needs to match all other discount conditions.
 

@@ -1,6 +1,6 @@
 # Orders & Carts
 
-Variants are added to a _cart_ that can be completed to become an _order_. Carts and orders are both listed in the control panel under Commerce → Orders.
+Variants are added to a _cart_ that can be completed to become an _order_. Carts and orders are both listed in the control panel under **Commerce** → **Orders**.
 
 When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce3:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false`.
 
@@ -378,14 +378,14 @@ Commerce::getInstance()->getCarts()->forgetCart();
 
 ## Orders
 
-Orders are [Element Types](/3.x/extend/element-types.md) and can have custom fields associated with them. You can browse orders in the control panel by navigating to Commerce → Orders.
+Orders are [Element Types](/3.x/extend/element-types.md) and can have custom fields associated with them. You can browse orders in the control panel by navigating to **Commerce** → **Orders**.
 
 When a cart becomes an order, the following things happen:
 
 1. The `dateOrdered` order attribute is set to the current date.
 2. The `isCompleted` order attribute is set to `true`.
 3. The default [order status](custom-order-statuses.md) is set on the order and any emails for this status are sent.
-4. The order reference number is generated for the order, based on the “Order Reference Number Format” setting. (In the control panel: Commerce → Settings → System Settings → General Settings.)
+4. The order reference number is generated for the order, based on the “Order Reference Number Format” setting. (In the control panel: **Commerce** → **Settings** → **System Settings** → **General Settings**.)
 
 Instead of being recalculated on each change like a cart, the order will only be recalculated if you [manually trigger recalculation](#recalculating-orders).
 
@@ -409,7 +409,7 @@ The short order number is the first seven characters of the order number. This i
 
 #### Order Reference Number
 
-The order reference number is generated on cart completion according to the “Order Reference Number Format” in Commerce → Settings → System Settings → General Settings.
+The order reference number is generated on cart completion according to the **Order Reference Number Format** in **Commerce** → **Settings** → **System Settings** → **General Settings**.
 
 This number is usually best used as the customer-facing identifier of the order, but shouldn’t be used in URLs.
 
@@ -454,7 +454,7 @@ In this example we’ve used the year as the sequence name so we automatically g
 
 An order is usually created on the front end as a customer [adds items](adding-to-and-updating-the-cart.md) to and completes a [cart](cart.md). With Commerce Pro, An order may also be created in the control panel.
 
-To create a new order, navigate to Commerce → Orders, and choose “New Order”. This will create a new order that behaves like a cart. As [purchasables](purchasables.md) are added and removed from the order, it will automatically recalculate its sales and adjustments.
+To create a new order, navigate to **Commerce** → **Orders**, and choose **New Order**. This will create a new order that behaves like a cart. As [purchasables](purchasables.md) are added and removed from the order, it will automatically recalculate its sales and adjustments.
 
 ::: warning
 You must be using [Commerce Pro](editions.md) and have “Edit Orders” permission to create orders from the control panel.
@@ -464,11 +464,11 @@ To complete the order, choose “Mark as completed”.
 
 ### Editing Orders
 
-Orders can be edited in the control panel by visiting the order edit page and choosing “Edit”. You’ll enter edit mode where you can change values within the order.
+Orders can be edited in the control panel by visiting the order edit page and choosing **Edit**. You’ll enter edit mode where you can change values within the order.
 
-While editing the order, it will refresh subtotals and totals and display any errors. It will _not_ automatically recalculate the order based on system rules like shipping, taxes, or promotions. Choose “Recalculate order” to have it fully recalculate including those system rules.
+While editing the order, it will refresh subtotals and totals and display any errors. It will _not_ automatically recalculate the order based on system rules like shipping, taxes, or promotions. Choose **Recalculate order** to have it fully recalculate including those system rules.
 
-Once you’re happy with your changes, choose “Update Order” to save it to the database.
+Once you’re happy with your changes, choose **Update Order** to save it to the database.
 
 ### Recalculating Orders
 
