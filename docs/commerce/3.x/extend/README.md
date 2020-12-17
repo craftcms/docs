@@ -7,5 +7,5 @@ You can customize Craft Commerce beyond configuration by introducing your own co
     - Registering custom [adjusters](adjusters.md) to modify pricing.
     - Registering custom [shipping methods](shipping-methods.md).
     - Registering additional [purchasables](purchasable-types.md).
-    - Customizing or replacing the [tax engine](tax-engine.md).
+    - Customizing or replacing the [tax engine](tax-engines.md).
 - Writing custom plugins that add support for additional [payment gateways](payment-gateway-types.md).
