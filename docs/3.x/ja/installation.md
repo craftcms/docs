@@ -59,8 +59,8 @@ my-project.test/
 └── craft
 ```
 
-::: warning
-HEY IIS FANS Make sure your site’s AppPool account has write permissions to these folders/files as well.
+::: tip
+The `web/` folder represents your site’s web root, and it can be renamed to whatever you want (`www/`, `public/`, `public_html/`, etc.).
 :::
 
 ::: tip
@@ -139,7 +139,7 @@ php craft setup/security-key
 
 ## ステップ 5：ウェブサーバーのセットアップ
 
-Craft プロジェクトをホストするための新しいウェブサーバーを用意してください。 ドキュメントルートは `web/` ディレクトリ（または、リネームしたディレクトリ）を指すようにします。
+Craft プロジェクトをホストするための新しいウェブサーバーを用意してください。 Its document root (or “web root”) should point to your `web/` directory (or whatever you’ve renamed it to).
 
 [MAMP](https://mamp.info) や他のローカルホスティングツールを使用していない場合、`hosts` ファイルを更新して、選択したホスト名にローカルコンピュータへ要求をルーティングする必要があるかもしれません。
 
