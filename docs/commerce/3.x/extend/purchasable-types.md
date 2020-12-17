@@ -1,6 +1,6 @@
 # Purchasable Types
 
-Purchasables should be extended to add useful attributes like Commerce’s included [product variant](products.md#variants) and [donation](donations.md) purchasables. [Plugins and modules](https://craftcms.com/docs/3.x/extend/) can provide their own purchasables.
+Purchasables should be extended to add useful attributes like Commerce’s included [product variant](../products-variants.md#variants) and [donation](../donations.md) purchasables. [Plugins and modules](https://craftcms.com/docs/3.x/extend/) can provide their own purchasables.
 
 ## Custom Purchasables
 
