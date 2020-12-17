@@ -16,7 +16,7 @@ The rest of this page covers discount and shipping adjusters even though there i
 
 ## Registering a New Adjuster
 
-You can register your adjuster class by including it in the `types` array attribute of the [`registerOrderAdjusters`](eventds.md#registerorderadjusters) or [`registerDiscountAdjusters`](eventds.md#registerdiscountadjusters) event model.
+You can register your adjuster class by including it in the `types` array attribute of the [`registerOrderAdjusters`](events.md#registerorderadjusters) or [`registerDiscountAdjusters`](events.md#registerdiscountadjusters) event model.
 
 ::: code
 ```php Order Adjuster
