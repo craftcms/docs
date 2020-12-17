@@ -166,7 +166,7 @@ Craft will allow you to update this field's content in each entry on a per-langu
 
 ### Step 4: Update Your Templates
 
-If you have any templates that you only want to serve from a specific site, you can create a new sub-folder in your templates folder, named after your site's handle, and place the templates in there.
+If you have any templates that you only want to serve from a specific site, you can create a new subfolder in your templates folder, named after your site's handle, and place the templates in there.
 
 For example, if you wanted to give your German site its own homepage template, you might set your templates folder up like this:
 
