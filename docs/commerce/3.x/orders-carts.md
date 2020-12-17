@@ -16,18 +16,18 @@ Craft will automatically to purge (delete) abandoned carts after 90 days, and yo
 
 On the front end, cart interactions happen via the `commerce/cart/update-cart` form action.
 
-Here’s what we’ll cover in the following sections:
+Here’s what we’ll cover in the sections that follow:
 
-- [Fetching a Cart]()
-- [Adding Items to a Cart]()
-- [Working with Line Items]()
-- [Loading a Cart]()
-- [Forgetting a Cart]()
+- [Fetching a Cart](#fetching-a-cart)
+- [Adding Items to a Cart](#adding-items-to-a-cart)
+- [Working with Line Items](#working-with-line-items)
+- [Loading a Cart](#loading-a-cart)
+- [Forgetting a Cart](#forgetting-a-cart)
 
 More topics are covered in separate pages:
 
-- [Addresses]()
-- [Updating Custom Fields in a Cart]()
+- [Addresses](addresses.md)
+- [Updating Custom Fields in a Cart](update-cart-custom-fields.md)
 
 ### Fetching a Cart
 
