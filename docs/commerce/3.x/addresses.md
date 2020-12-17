@@ -473,11 +473,11 @@ In any of the above examples that post to the `commerce/customer-addresses/save`
 
 ```twig
 {% if address %}
-  {# Get all validation errors for the address #}
-  {% set errors = address.getErrors() %}
+    {# Get all validation errors for the address #}
+    {% set errors = address.getErrors() %}
 
-  {# Get the `firstName` error for the address #}
-  {% set firstNameErrors = address.getErrors('firstName') %}
+    {# Get the `firstName` error for the address #}
+    {% set firstNameErrors = address.getErrors('firstName') %}
 {% endif %}
 ```
 
