@@ -61,7 +61,7 @@ The action’s output depends on whether the entry saved successfully and the re
 Success | Output
 ------- | ------
 <check-mark/> | Redirect response per the hashed `redirect` param.
-<x-mark/> | None; the request will be routed per the URI. An `entry` variable will be passed to the resulting template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getError()](yii2:yii\base\Model::getError()), etc.
+<x-mark/> | None; the request will be routed per the URI. An `entry` variable will be passed to the resulting template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getFirstError()](yii2:yii\base\Model::getFirstError()), etc.
 
 </span>
 
@@ -165,7 +165,7 @@ The output depends on whether the user save action was successful and the reques
 Success | Output
 ------- | ------
 <check-mark/> | Redirect response per the hashed `redirect` param, or the <config3:activateAccountSuccessPath> config setting if email verification is not required.
-<x-mark/> | None; the request will be routed per the URI. A `user` variable will be passed to the resulting template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getError()](yii2:yii\base\Model::getError()), etc.
+<x-mark/> | None; the request will be routed per the URI. A `user` variable will be passed to the resulting template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getFirstError()](yii2:yii\base\Model::getFirstError()), etc.
 
 </span>
 
