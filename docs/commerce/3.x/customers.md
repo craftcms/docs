@@ -28,21 +28,7 @@ Choose any customer’s email address to see more information.
 
 ## Customer
 
-The customer view will show you important information about the customer. The information contained on this page is the same data that is shown on the [customer info tab](#user-customer-info-tab).
-
-### Addresses
-
-The addresses for a customer can be reached via the customer view. Select any address to edit it.
-
-#### Address Lines
-
-The [address model](commerce3:craft\commerce\models\Address) has a read-only `addressLines` parameter. This is an array that is returned containing the lines of the address.
-
-This parameter is designed to allow consistency when displaying a customer's address both in the front end and in the control panel.
-
-Address lines are used, for example, on the Edit Order page in the control panel. There are examples for [displaying an address](https://github.com/craftcms/commerce/blob/develop/example-templates/shop/_includes/addresses/address.twig) in the [example templates](example-templates.md).
-
-You can use the [defineAddressLines event](events.md#defineaddresslines) to customize the array.
+The customer view will show you important information about the customer. The details on this page are the same as those on the [customer info tab](#user-customer-info-tab).
 
 ## User Customer Info Tab
 
@@ -51,7 +37,7 @@ A “Customer Info” tab will be available on each user account page in the con
 - **Orders**: list of previous orders for the customer.
 - **Active Carts**: list of the customer’s active carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
 - **Inactive Carts**: list of the customer’s inactive carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
-- **Addresses**: list of the customer’s addresses, which can be edited and deleted.
+- **Addresses**: list of the customer’s [addresses](addresses.md), which can be edited and deleted.
 - **Subscriptions**: list of the customer's subscriptions.
 
 This tab is shown by default, but it can be toggled with the [showCustomerInfoTab](config-settings.md#showcustomerinfotab) setting.
