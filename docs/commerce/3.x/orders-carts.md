@@ -2,7 +2,7 @@
 
 Variants are added to a _cart_ that can be completed to become an _order_. Carts and orders are both listed in the control panel under **Commerce** → **Orders**.
 
-When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce3:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false`.
+When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce3:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false` and its `dateCompleted` is `null`.
 
 ## Carts
 
