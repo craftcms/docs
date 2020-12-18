@@ -49,9 +49,9 @@ You can use the [defineAddressLines event](events.md#defineaddresslines) to cust
 A “Customer Info” tab will be available on each user account page in the control panel containing the following information:
 
 - **Orders**: list of previous orders for the customer.
-- **Active Carts**: list of the customer’s active carts based on the [activeCartDuration](configuration.md#activecartduration) setting.
-- **Inactive Carts**: list of the customer’s inactive carts based on the [activeCartDuration](configuration.md#activecartduration) setting.
+- **Active Carts**: list of the customer’s active carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
+- **Inactive Carts**: list of the customer’s inactive carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
 - **Addresses**: list of the customer’s addresses, which can be edited and deleted.
 - **Subscriptions**: list of the customer's subscriptions.
 
-This tab is shown by default, but it can be toggled with the [showCustomerInfoTab](configuration.md#showcustomerinfotab) setting.
+This tab is shown by default, but it can be toggled with the [showCustomerInfoTab](config-settings.md#showcustomerinfotab) setting.
