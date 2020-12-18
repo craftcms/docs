@@ -201,7 +201,7 @@ Commerce does not validate the `options` and `note` parameters. If you’d like 
 
 The note and options will be visible on the order’s detail page in the control panel:
 
-<img src="./assets/lineitem-options-review.png" width="509" alt="Line Item Option Review.">
+![Line Item Option Review](./assets/lineitem-options-review.png)
 
 #### Updating Line Items
 
