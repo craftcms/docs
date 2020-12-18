@@ -1238,13 +1238,19 @@ Each variant may also have any number of custom fields to allow other distinguis
 
 Commerce does not automatically create every possible unique variant for you—that’s up to the store manager.
 
-TODO: screenshot single-variant UI + multi-variant UI
-
 ### Default Variant
 
 Every product has a default variant. Whenever a product is created, a default variant will be created as well.
 
 If a product type has multiple variants enabled, the author can choose which one should be used by default. Products that do not have multiple variants still have a default variant, but the author can’t add additional variants.
+
+For a single-variant product, variant details are shown in a unified view with custom product fields:
+
+![Single-Variant Product](./assets/single-variant.png)
+
+When a product supports multiple variants, the default variant will be identified in a **Variants** field where more variants can be added:
+
+![Multi-Variant Product](./assets/multi-variant.png)
 
 ### Variant Stock
 
