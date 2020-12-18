@@ -256,7 +256,7 @@ The `note` parameter is not part of a line item’s uniqueness; it will always b
 
 ### Loading a Cart
 
-An existing cart can be loaded by its cart number into the current customer’s session. This can be accomplished in two ways using the `commerce/cart/load-cart` endpoint: via [form submission](#using-a-form) or [navigating to a URL](#using-a-url).
+An existing cart can be loaded by its cart number into the current customer’s session. This can be accomplished in two ways using the `commerce/cart/load-cart` endpoint: via [form submission](#loading-a-cart-with-a-form) or [navigating to a URL](#loading-a-cart-with-a-url).
 
 Each method will store any errors in the session’s error flash data (`craft.app.session.getFlash('error')`), and the cart being loaded can be active or inactive.
 
