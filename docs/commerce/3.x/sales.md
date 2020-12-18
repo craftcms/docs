@@ -1,6 +1,6 @@
 # Sales
 
-Sales allow a store owner to set up conditions for dynamic, promotional product discounts.
+Sales allow a store manager to set up conditions for dynamic, promotional product discounts.
 
 A sale is different from a [discount](discounts.md) because it’s applied _before_ an item is added to the cart. A discount needs a cart; it’s applied when an item’s in the cart or to the cart as a whole (like a coupon code).
 
