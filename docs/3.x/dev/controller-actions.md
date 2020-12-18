@@ -52,14 +52,29 @@ Param | Description
 
 ### Output
 
-The output of the action depends on whether the entry save was successful, and whether an `Accept: application/json` header was sent with the request.
+The action’s output depends on whether the entry saved successfully and the request included an `Accept: application/json` header.
 
-Success | JSON | Output
-------- | ---- | ------
-<check-mark/> | <check-mark/> | JSON response with `success`, `id`, `title`, `slug`, `authorUsername`, `dateCreated`, `dateUpdated`, and `postDate` keys.
-<check-mark/> | No | Redirect response per the hashed `redirect` param.
-No | <check-mark/> | JSON response with an `errors` key set to the result of [getErrors()](yii2:yii\base\Model::getErrors()).
-No | No | None; the request will be routed per the URI. An `entry` variable will be passed to the resulting template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getError()](yii2:yii\base\Model::getError()), etc.
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | Redirect response per the hashed `redirect` param.
+<x-mark/> | None; the request will be routed per the URI. An `entry` variable will be passed to the resulting template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getError()](yii2:yii\base\Model::getError()), etc.
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | JSON response with `success`, `id`, `title`, `slug`, `authorUsername`, `dateCreated`, `dateUpdated`, and `postDate` keys.
+<x-mark/> | JSON response with an `errors` key set to the result of [getErrors()](yii2:yii\base\Model::getErrors()).
+
+</span>
 
 ## <badge vertical="baseline" type="verb">POST</badge> `users/login`
 
@@ -82,14 +97,29 @@ Param | Description
 
 ### Output
 
-The output of the action depends on whether the login was successful, and whether an `Accept: application/json` header was sent with the request.
+The output of the action depends on whether the login was successful and the request included an `Accept: application/json` header.
 
-Success | JSON | Output
-------- | ---- | ------
-<check-mark/> | <check-mark/> | JSON response with `success` and `returnUrl` keys.
-<check-mark/> | No | Redirect response per the hashed `redirect` param, or the user session’s return URL.
-No | <check-mark/> | JSON response with `errorCode` and `error` keys.
-No | No | None; the request will be routed per the URI. `loginName`, `rememberMe`, `errorCode`, and `errorMessage` variables will be passed to the resulting template.
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | Redirect response per the hashed `redirect` param, or the user session’s return URL.
+<x-mark/> | None; the request will be routed per the URI. `loginName`, `rememberMe`, `errorCode`, and `errorMessage` variables will be passed to the resulting template.
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | JSON response with `success` and `returnUrl` keys.
+<x-mark/> | JSON response with `errorCode` and `error` keys.
+
+</span>
 
 ## <badge vertical="baseline" type="verb">POST</badge> `users/save-user`
 
@@ -126,14 +156,29 @@ Param | Description
 
 ### Output
 
-The output of the action depends on whether the user save was successful, and whether an `Accept: application/json` header was sent with the request.
+The output depends on whether the user save action was successful and the request included an `Accept: application/json` header.
 
-Success | JSON | Output
-------- | ---- | ------
-<check-mark/> | <check-mark/> | JSON response with `success` and `id` keys.
-<check-mark/> | No | Redirect response per the hashed `redirect` param, or the <config3:activateAccountSuccessPath> config setting if email verification is not required.
-No | <check-mark/> | JSON response with an `errors` key.
-No | No | None; the request will be routed per the URI. A `user` variable will be passed to the resulting template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getError()](yii2:yii\base\Model::getError()), etc.
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | Redirect response per the hashed `redirect` param, or the <config3:activateAccountSuccessPath> config setting if email verification is not required.
+<x-mark/> | None; the request will be routed per the URI. A `user` variable will be passed to the resulting template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getError()](yii2:yii\base\Model::getError()), etc.
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | JSON response with `success` and `id` keys.
+<x-mark/> | JSON response with an `errors` key.
+
+</span>
 
 ## <badge vertical="baseline" type="verb">POST</badge> `users/send-password-reset-email`
 
@@ -155,14 +200,29 @@ Param | Description
 
 ### Output
 
-The output of the action depends on whether the reset password email was sent successfully, and whether an `Accept: application/json` header was sent with the request.
+The output of the action depends on whether the reset password email was sent successfully, and whether the request included an `Accept: application/json` header.
 
-Success | JSON | Output
-------- | ---- | ------
-<check-mark/> | <check-mark/> | JSON response with a `success` key.
-<check-mark/> | No | Redirect response per the hashed `redirect` param.
-No | <check-mark/> | JSON response with an `error` key.
-No | No | None; the request will be routed per the URI. `errors` and `loginName` variables will be passed to the resulting template.
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | Redirect response per the hashed `redirect` param.
+<x-mark/> | None; the request will be routed per the URI. `errors` and `loginName` variables will be passed to the resulting template.
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | JSON response with a `success` key.
+<x-mark/> | JSON response with an `error` key.
+
+</span>
 
 ## <badge vertical="baseline" type="verb">POST</badge> `users/set-password`
 
@@ -183,11 +243,26 @@ Param | Description
 
 ### Output
 
-The output of the action depends on whether the password was updated successfully, and whether an `Accept: application/json` header was sent with the request.
+The output of the action depends on whether the password was updated successfully and the request included an `Accept: application/json` header.
 
-Success | JSON | Output
-------- | ---- | ------
-<check-mark/> | <check-mark/> | JSON response with `success` and (possibly) `csrfTokenValue` keys.
-<check-mark/> | No | Redirect response depending on the <config3:autoLoginAfterAccountActivation> and <config3:setPasswordSuccessPath> config settings, and whether the user has access to the control panel.
-No | <check-mark/> | JSON response with an `error` key.
-No | No | None; the request will be routed per the URI. `errors` , `code`, `id`, and `newUser` variables will be passed to the resulting template.
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | Redirect response depending on the <config3:autoLoginAfterAccountActivation> and <config3:setPasswordSuccessPath> config settings, and whether the user has access to the control panel.
+<x-mark/> | None; the request will be routed per the URI. `errors` , `code`, `id`, and `newUser` variables will be passed to the resulting template.
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | JSON response with `success` and (possibly) `csrfTokenValue` keys.
+<x-mark/> | JSON response with an `error` key.
+
+</span>
