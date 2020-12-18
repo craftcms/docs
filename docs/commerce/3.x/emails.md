@@ -9,6 +9,8 @@ For example, you might create an email called “Customer Order Confirmation” 
 
 Another email could be “Admin Order Notification”, also attached to the default order status. Instead of being sent to the customer, however, it could go to the store owner’s email address and include stock or packing information.
 
+The store manager can also send any email manually from an order’s edit page, whether that’s to re-send an email tied to a status change or to send an email that’s unrelated to any specific status at all.
+
 ## Settings
 
 Before setting up emails for Craft Commerce, ensure that your Craft CMS installation is [properly configured for email delivery](https://craftcms.com/guides/why-doesnt-craft-send-emails#setting-up-email).
