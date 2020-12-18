@@ -2,9 +2,7 @@
 
 With Craft Commerce, a _Customer_ is a model representing a person who may place an order.
 
-That person could’ve placed an order as a guest or be a registered user with an associated Craft [user account](https://craftcms.com/docs/3.x/users.html) for logging in and making orders with saved information.
-
-Customers can be found in the control panel by navigating to **Commerce** → **Customers**.
+That person could have placed an order as a guest, or as a registered user with an associated Craft [user account](https://craftcms.com/docs/3.x/users.html) for logging in and making orders with saved information.
 
 Every Craft user has a customer record by default, even if that user has never created an order.
 
@@ -18,8 +16,9 @@ If a customer checks out as a guest, a new customer record will be created. If a
 
 If a customer is logged in, any order will naturally be associated with that user the moment the cart is created and on through completion.
 
-
 ## Customer List
+
+Customers can be found in the control panel by navigating to **Commerce** → **Customers**.
 
 The customer list is a paginated data set of all customers in the system linked to a user or having completed orders. The customer list can be searched by name, email, address, and order reference/number.
 
@@ -47,14 +46,12 @@ You can use the [defineAddressLines event](events.md#defineaddresslines) to cust
 
 ## User Customer Info Tab
 
-A “Customer Info” tab will be available on every user’s account page in the control panel.
-
-This tab contains the following information:
+A “Customer Info” tab will be available on each user account page in the control panel containing the following information:
 
 - **Orders**: list of previous orders for the customer.
-- **Active Carts**: list of the customer’s active carts based on the [Commerce::\$activeCartDuration](configuration.md#activecartduration) setting.
-- **Inactive Carts**: list of the customer’s inactive carts based on the [Commerce::\$activeCartDuration](configuration.md#activecartduration) setting.
+- **Active Carts**: list of the customer’s active carts based on the [activeCartDuration](configuration.md#activecartduration) setting.
+- **Inactive Carts**: list of the customer’s inactive carts based on the [activeCartDuration](configuration.md#activecartduration) setting.
 - **Addresses**: list of the customer’s addresses, which can be edited and deleted.
 - **Subscriptions**: list of the customer's subscriptions.
 
-The visibility of this tab can be controlled with the [Commerce::\$showCustomerInfoTab](configuration.md#showcustomerinfotab) setting. The tab is shown by default.
+This tab is shown by default, but it can be toggled with the [showCustomerInfoTab](configuration.md#showcustomerinfotab) setting.
