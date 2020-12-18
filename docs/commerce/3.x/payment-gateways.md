@@ -39,17 +39,17 @@ The manual payment gateway is a special gateway that does not communicate with a
 
 You should use the manual payment gateway to accept checks or bank deposits: it simply authorizes all payments allowing the order to proceed. Once the payment is received, the payment can be manually marked as captured in the control panel.
 
-## Other gateway specifics
+## Other Gateway Specifics
 
 Before using a plugin-provided gateway, consult the plugin’s readme for specifics pertaining to the gateway.
 
-## Adding additional gateways
+## Adding Gateways
 
 Additional payment gateways can be added to Commerce with relatively little work. The [first-party gateway plugins](#first-party-gateway-plugins), with the exception of Stripe, use the [Omnipay payment library](https://github.com/craftcms/commerce-omnipay) and can be used as point of reference when creating your own.
 
 See the _Extending Commerce_ section’s [Payment Gateway Types](extend/payment-gateway-types.md) page to learn about building your own gateway plugin or module.
 
-## Storing config outside of the database
+## Storing Config Outside of the Database
 
 If you do not wish to store your payment gateway config information in the database (which could include secret API keys), you can override the values of a payment method’s setting via the `commerce-gateways.php` config file. Use the payment gateway’s handle as the key to the config for that payment method.
 
@@ -65,7 +65,7 @@ return [
 ];
 ```
 
-## Payment sources
+## Payment Sources
 
 Craft Commerce supports storing payment sources for select gateways. Storing a payment source allows for a more streamlined shopping experience for your customers.
 
@@ -75,12 +75,12 @@ The following [first-party provided gateways](#first-party-gateway-plugins) supp
 - PayPal REST
 - eWAY Rapid
 
-## 3D Secure payments
+## 3D Secure Payments
 
 3D Secure payments add another authentication step for payments. If a payment has been completed using 3D Secure authentication, the liability for fraudulent charges is shifted from the merchant to the card issuer.
 Support for this feature depends on the gateway used and its settings.
 
-## Partial refunds
+## Partial Refunds
 
 All [first-party provided gateways](#first-party-gateway-plugins) support partial refunds as of Commerce 2.0.
 
