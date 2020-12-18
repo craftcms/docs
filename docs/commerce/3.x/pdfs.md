@@ -34,7 +34,6 @@ You can automatically attach a copy of a PDF in order emails.
 
 Create a new [order status email](emails.md) or select an existing one. You’ll see your new PDF(s) available in the **PDF Attachment** field. Select whichever PDF you’d like, choose **Save**, and that PDF will be included along with the email when it’s sent.
 
-
 ## Creating PDF Templates
 
 It might be easiest to start by modifying the [`shop/special/receipt`](https://github.com/craftcms/commerce/blob/develop/example-templates/shop/special/receipt.twig) example template, previewing it in a browser for convenience until things are mostly as you’d like them.
