@@ -2,6 +2,10 @@
 
 Commerce represents taxes for an order with tax categories and tax rates.
 
+::: warning
+Tax features differ depending on your [edition](editions.md) of Craft Commerce.
+:::
+
 Products within Commerce can be linked to tax categories, which are then used to influence the taxation rate for products when they’re purchased. A default tax category can be set for the entire system, applying automatically to any product that isn’t assigned to a specific tax category.
 
 A tax category may have many tax rates. Each tax rate indicates the rate at which products in its tax category will be taxed. Each tax rate matches all tax zones by default, but can optionally specify a specific tax zone.
@@ -60,3 +64,15 @@ Commerce will calculate tax based on the best matching zone for the order. It’
 Let’s say you need to charge 5% tax for all items that ship to New York and 6% only on clothing items that ship to Pennsylvania. This will means you need to set up two zones: one for the state of New York, and another for the state of Pennsylvania.
 
 Here’s another hypothetical scenario. You would like to charge 10% tax on all electronic items and 5% tax on everything else. This tax should apply to all countries in the European Union (EU). In this case you would construct just a single zone consisting of all the countries in the EU. Even though you need to charge two different rates for a product, you don’t necessarily need to have two zones.
+
+## Templating
+
+### craft.commerce.taxCategories.allTaxCategories
+
+Returns an array of all tax categories set up in the system.
+
+```twig
+{% for taxCategory in craft.commerce.taxCategories.allTaxCategories %}
+    {{ taxCategory.id }} - {{ taxCategory.name }}
+{% endfor %}
+```

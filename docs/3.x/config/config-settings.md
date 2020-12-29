@@ -332,7 +332,7 @@ for the system user running the web server.
 
 You may provide your own command optionally using several tokens Craft will swap out at runtime:
 
-- `{file}` - the target backup file path
+- `{path}` - the target backup file path
 - `{port}` - the current database port
 - `{server}` - the current database host name
 - `{user}` - the user to connect to the database
@@ -743,7 +743,7 @@ Defined by
 
 
 
-The quality level Craft will use when saving JPG and PNG files. Ranges from 0 (worst quality, smallest file) to
+The quality level Craft will use when saving JPG and PNG files. Ranges from 1 (worst quality, smallest file) to
 100 (best quality, biggest file).
 
 
@@ -2388,7 +2388,7 @@ Since
 
 
 
-The [SameSite](https://owasp.org/www-community/SameSite) value that should be set on Craft cookies, if any.
+The [SameSite](https://www.owasp.org/index.php/SameSite) value that should be set on Craft cookies, if any.
 
 This can be set to `'Lax'`, `'Strict'`, or `null`.
 
@@ -2564,8 +2564,8 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 If this is set, Craft will redirect [.well-known/change-password requests](https://w3c.github.io/webappsec-change-password-url/) to this URI.
 
 ::: tip
-You will also need to set the <config:setPasswordPath> config setting, which determines the URI and template path for your Set Password form,
-which is where the user will actually reset their password, once they’ve clicked the link in the Password Reset email.
+You’ll also need to set [setPasswordPath](config3:setPasswordPath), which determines the URI and template path for the Set Password form
+where the user resets their password after following the link in the Password Reset email.
 :::
 
 

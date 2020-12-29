@@ -72,9 +72,9 @@ function renderLink(h, to, text, active, level) {
     },
   };
 
-  if (level > 2) {
+  if (level > 1) {
     component.style = {
-      "padding-left": level + "rem",
+      "padding-left": (level * 0.375) + "rem",
     };
   }
 
@@ -87,6 +87,8 @@ function renderChildren(h, children, path, route, maxDepth, depth = 1) {
     "ul",
     { class: "sidebar-sub-headers" },
     children.map((c) => {
+      // don’t render children beyond maxDepth
+      if (c.level && ((c.level - 1) > maxDepth)) return;
       const active = isActive(route, path + "#" + c.slug);
       return h("li", { class: "sidebar-sub-header" }, [
         renderLink(h, path + "#" + c.slug, c.title, active, c.level - 1),
@@ -116,7 +118,6 @@ function renderExternal(h, to, text) {
 
 <style lang="postcss">
 .sidebar-sub-headers {
-  @apply pl-2;
   font-size: 0.95em;
 }
 

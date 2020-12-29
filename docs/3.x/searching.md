@@ -1,12 +1,41 @@
 # Searching
 
-You can search for elements anywhere you see this bar:
+Craft CMS includes a system-wide search service used for finding elements via keyword search.\
+This powers the search experience throughout the Craft control panel, and you can use it to add search functionality to your site’s front end.
 
-![Search Bar](./images/searching-search-bar.png)
+Control panel users can search for elements anywhere this bar is available:
 
-## Supported syntaxes
+![Search Bar](./images/search-bar.svg)
 
-Craft supports the following search syntax:
+You can search for elements from your own code, too:
+
+::: code
+```twig
+{% set results = craft.entries()
+    .search('foo')
+    .all() %}
+```
+```graphql
+{
+	entries(search: "foo") {
+		title
+    }
+}
+```
+```php
+$results = \craft\elements\Entry::find()
+    ->search('foo')
+    ->all();
+```
+:::
+
+::: tip
+The [`defaultSearchTermOptions`](config3:defaultSearchTermOptions) config setting lets you adjust default search behavior.
+:::
+
+## Supported Syntaxes
+
+Craft supports the following syntax wherever you happen to search from:
 
 Searching for… | will find elements…
 -|-
@@ -31,49 +60,29 @@ Searching for… | will find elements…
 `body:*` | where the `body` field contains any value.
 `-body:*` | where the `body` field is empty.
 
-## Searching for specific element attributes
+## Searching for Specific Element Attributes
 
 Assets, categories, entries, users, and tags each support their own set of additional attributes to search against:
 
-* **Assets**
-
-  * filename
-  * extension
-  * kind
-
-* **Categories**
-
-  * title
-  * slug
-
-* **Entries**
-
-  * title
-  * slug
-
-* **Users**
-
-  * username
-  * firstName
-  * lastName
-  * fullName (firstName + lastName)
-  * email
-
-* **Tags**
-
-  * title
-
+Element | Additional Search Attributes
+-|-
+Assets | `filename`<br>`extension`<br>`kind`
+Categories | `title`<br>`slug`
+Entries | `title`<br>`slug`
+Users | `username`<br>`firstName`<br>`lastName`<br>`fullName` (firstName + lastName)<br>`email` 
+Tags | `title`
 
 ::: warning
-Searching is a great way to quickly query content broadly across elements, but if you’re querying field attributes the most precise way is through that field type’s [query parameter](element-queries.md#executing-element-queries).
+Searching is a great way to quickly query content broadly across elements, but the most precise way to query field attributes is through that field type’s [query parameter](element-queries.md#executing-element-queries).
 :::
 
-## Templating
+## Development
 
-`craft.assets()`, `craft.entries()`, `craft.tags()`, and `craft.users()` support a `search` parameter that you can use to filter their elements by a given search query.
+`craft.assets()`, `craft.entries()`, `craft.tags()`, and `craft.users()` support a `search` parameter you can use to filter their elements by a given search query.
 
+::: code
 ```twig
-{# Get the user's search query from the 'q' query-string param #}
+{# Get the user’s search query from the 'q' query string param #}
 {% set searchQuery = craft.app.request.getParam('q') %}
 
 {# Fetch entries that match the search query #}
@@ -81,27 +90,66 @@ Searching is a great way to quickly query content broadly across elements, but i
     .search(searchQuery)
     .all() %}
 ```
+```php
+// Get the user’s search query from the 'q' query string param
+$searchQuery = Craft::$app->getRequest()->getParam('q');
 
-### Ordering results by score
+// Fetch entries that match the search query
+$results = \craft\elements\Entry::find()
+    ->search($searchQuery)
+    ->all();
+```
+:::
+
+### Ordering Results by Score
 
 You can also set the `orderBy` parameter to `'score'` if you want results ordered by best-match to worst-match:
 
+::: code
 ```twig
 {% set results = craft.entries()
-    .search(searchQuery)
+    .search('foo')
     .orderBy('score')
     .all() %}
 ```
+```graphql
+{
+	entries(search: "foo", orderBy: "score") {
+		title
+    }
+}
+```
+```php
+$results = \craft\elements\Entry::find()
+    ->search('foo')
+    ->orderBy('score')
+    ->all();
+```
+:::
 
 When you do this, each of the elements returned will have a `searchScore` attribute set, which reveals what their search score was.
 
 ::: tip
-See our [Search Form](dev/examples/search-form.md) tutorial for a complete example of listing dynamic search results.
+See our [Search Form](https://craftcms.com/knowledge-base/search-form) article for a complete example of listing dynamic search results.
 :::
 
-## Rebuilding your Search Indexes
+## Configuring Custom Fields for Search
 
-Craft does its best to keep its search indexes as up-to-date as possible, but there are a couple things that might render portions of them inaccurate. If you suspect that your search indexes don’t have the latest and greatest data, you can have Craft rebuild them by bulk-resaving your entries with the `resave/entries` command:
+Each element type makes basic details, called _searchable attributes_, available as search keywords. It’s common to search for entries by title, for example, or for users matching a name or email address. (We just looked at these in the [Searching for Specific Element Attributes](#searching-for-specific-element-attributes) table.)
+
+You can also configure any custom field to make its content available for search by enabling **Use this field’s values as search keywords**:
+
+![Searchable Checkbox](./images/searchable-checkbox.png)
+
+Once enabled, the next time an element is saved that field’s content will be stored as plain-text keywords in Craft’s `searchindex` table and available for search.
+
+::: tip
+For relational field types like Assets fields, Matrix fields, etc., the top-level **Use this field’s values as search keywords** setting determines whether any sub-fields or child elements will factor into results for the parent.
+:::
+
+## Rebuilding Your Search Indexes
+
+Craft does its best to keep its search indexes as up-to-date as possible, but there are a couple things that might render portions of them inaccurate. If you suspect your search indexes are out of date, you can have Craft rebuild them by bulk-resaving your entries with the [`resave/entries`](console-commands.md#resave) command and including the `--update-search-index` flag:
 
 ```bash
 php craft resave/entries --update-search-index

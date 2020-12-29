@@ -9,17 +9,17 @@ Another email could be “Admin Order Notification”, also attached to the defa
 ## Settings
 
 Before setting up emails for Craft Commerce, ensure that your Craft CMS installation is [properly configured for email delivery](https://craftcms.com/guides/why-doesnt-craft-send-emails#setting-up-email).
-You can set up your email gateway by navigating to Settings → Email in the control panel.
+You can set up your email gateway in the control panel by navigating to **Settings** → **Email**.
 
 ::: tip
 Commerce emails are sent in Craft queue jobs, so sending may be delayed depending on how your queue is configured to run. See the [runQueueAutomatically](https://craftcms.com/docs/3.x/config/config-settings.html#runqueueautomatically) config setting and notes.
 :::
 
-By default, Commerce will send messages using Craft’s “System Email Address” and “Sender Name” found in Settings → Email Settings in the control panel. If you’d like to override this and provide your own from name/address, navigate to _Commerce_ → _System Settings_ → _General Settings_ and enter your own “Status Email Address” and “From Name”.
+By default, Commerce will send messages using Craft’s “System Email Address” and “Sender Name” found in Settings → Email Settings in the control panel. If you’d like to override this and provide your own from name/address, navigate to **Commerce** → **System Settings** → **General Settings** and enter your own “Status Email Address” and “From Name”.
 
 ## Creating an Email
 
-To create a new email, navigate to _Commerce_ → _System Settings_ → _Emails_, and click “New Email”:
+To create a new email, navigate to **Commerce** → **System Settings** → **Emails**, and choose **New Email**:
 
 <img src="./assets/new-email-settings.png" width="645" alt="New Email Settings.">
 
@@ -123,13 +123,46 @@ This works the same way as the “HTML Email Template Path”.
 
 Choose a PDF that will be attached to this email.
 
-
 ## Selecting an Email
 
-To use the email you’ve created, visit _Commerce_ → _System Settings_ → _Order Status_ and choose the Order Status that should send this email when it updates.
+To use the email you’ve created, visit **Commerce** → **System Settings** → **Order Status** and choose the Order Status that should send this email when it updates.
 
-Select the email by name in the _Status Emails_ field. You can select as many emails as you’d like for any given Order Status.
+Select the email by name in the **Status Emails** field. You can select as many emails as you’d like for any given Order Status.
 
 ![](./assets/order-status-email-selection.png)
 
-Once you choose “Save” the designated emails will be sent when an order is assigned to that status.
+Once you choose **Save**, the designated emails will be sent when an order is assigned that status.
+
+## Troubleshooting
+
+It’s a good idea to always test your status email templates before relying on them in production.
+
+Once you’ve configured a template, the quickest way to test it is by navigating to **Commerce** → **System Settings** → **Emails** and choosing **Preview** next to the relevant email. This will open a new tab/window to display the template rendered using a random completed order.
+
+::: tip
+You can preview a specific order by adding `&orderNumber=ORDER_NUMBER` to the preview URL, replacing `ORDER_NUMBER` with the actual order number you’d like to use.
+:::
+
+If your template is rendering successfully but messages are failing to send, you’ll want to check these things in order:
+
+1. **Make sure Craft’s queue is running.**\
+If the [`runQueueAutomatically`](config3:runQueueAutomatically) setting is `true` you may want to establish a more reliable queue worker.
+2. **Make sure any dynamic settings are parsed properly.**\
+Some email settings support dynamic Twig values, where parsing errors can cause sending to fail: 
+    - Email Subject
+    - Reply To
+    - Recipient
+    - BCC’d Recipient
+    - CC’d Recipient
+    - HTML Email Template Path
+    - Plain Text Email Template Path
+3. **Make sure the HTML and Plain Text template paths exist and parse properly.**\
+Syntax issues, undeclared variables, or missing information may prevent templates from rendering.
+4. **Make sure included PDFs render properly.**\
+If you’re including a [PDF](pdfs.md), it could have its own rendering issues that cause sending to fail. Be sure to preview the relevant PDF separately and ensure it’s working as expected.
+
+When an email fails to send in response to a status change, its queue job will be marked as failed and include an appropriate message. Once you fix the cause of the sending failure, you can retry sending the email from the queue via **Utilities** → **Queue Manager**.
+
+::: tip
+If a plugin suppresses an email (by listening to `craft\commerce\services\Emails::EVENT_BEFORE_SEND_MAIL` and assigning `$event->isValid` to `false`), queue jobs will complete normally.
+:::
