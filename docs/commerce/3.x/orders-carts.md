@@ -96,7 +96,7 @@ If the product has multiple variants, you could provide a dropdown menu to allow
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
     {{ redirectInput('shop/cart') }}
-    {{ hiddenInput('cartUpdatedNotice', 'Added ' ~ product.title ~ ' to the cart.') }}
+    {{ hiddenInput('successMessage', 'Added ' ~ product.title ~ ' to the cart.') }}
     {{ hiddenInput('qty', 1) }}
 
     <select name="purchasableId">
@@ -110,7 +110,7 @@ If the product has multiple variants, you could provide a dropdown menu to allow
 
 We’re sneaking three new things in here as well:
 
-1. The `cartUpdatedNotice` parameter can be used to customize the default “Cart updated.” flash message.
+1. The `successMessage` parameter can be used to customize the default “Cart updated.” flash message.
 2. The `qty` parameter can be used to specify a quantity, which defaults to `1` if not supplied.
 3. Craft’s [`redirectInput`](/3.x/dev/functions.md#redirectinput) tag can be used to take the user to a specific URL after the cart is updated successfully. **If any part of the cart update action fails, the user will not be redirected.**
 
@@ -124,7 +124,7 @@ You can add multiple purchasables to the cart in a single request using a `purch
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
     {{ redirectInput('shop/cart') }}
-    {{ hiddenInput('cartUpdatedNotice', 'Products added to the cart.') }}
+    {{ hiddenInput('successMessage', 'Products added to the cart.') }}
     {% for variant in product.variants %}
         {{ hiddenInput('purchasables[' ~ loop.index ~ '][id]', variant.id) }}
         {{ hiddenInput('purchasables[' ~ loop.index ~ '][qty]', 1) }}

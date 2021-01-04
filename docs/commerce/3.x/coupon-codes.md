@@ -24,7 +24,7 @@ Example:
 <form method="post">
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
-    {{ hiddenInput('cartUpdatedNotice', 'Added coupon code.') }}
+    {{ hiddenInput('successMessage', 'Added coupon code.') }}
     {{ redirectInput('shop/cart') }}
 
     <input type="text"
