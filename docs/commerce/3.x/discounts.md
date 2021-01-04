@@ -4,7 +4,7 @@ Discounts are deductions that can be applied either to line items or the order a
 
 Discounts are only calculated _while_ items are in the cart. [Sales](sales.md) are pricing rules that apply to products _before_ they’re added to the cart.
 
-To create a new discount, navigate to **Commerce** → **Promotions** → **Discounts** in the control panel.
+You’ll need _Manage discounts_ permission to work with discounts in the control panel via **Commerce** → **Promotions** → **Discounts**.
 
 ## Discount Sort Order
 
