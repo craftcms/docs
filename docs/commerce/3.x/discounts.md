@@ -2,7 +2,7 @@
 
 Discounts are deductions that can be applied either to line items or the order as a whole.
 
-Discounts are only calculated _while_ items are in the cart. [Sales](sales.md) are pricing rules that apply to products _before_ they’re added to the cart.
+Discounts are only calculated while items are in the cart. [Sales](sales.md) are pricing rules that apply to products _before_ they’re added to the cart.
 
 You’ll need _Manage discounts_ permission to work with discounts in the control panel via **Commerce** → **Promotions** → **Discounts**.
 
@@ -42,12 +42,24 @@ The field accepts the [Twig’s expression syntax](https://twig.symfony.com/doc/
 If the expression is calculated as `true` then the discount matches the order. If not, the condition disqualifies the order from the discount. A blank condition is the same as
 a `true` expression.
 
+The condition formula can use an `order` variable, which for safety is available as an array and not the order element. This prevents a store manager from accidentally calling methods like `order.markAsComplete()`.
+
+::: tip
+The condition formula’s `order` array is generated with:
+
+```php
+$order->toArray(
+    [], ['lineItems.snapshot', 'shippingAddress', 'billingAddress']
+);
+```
+:::
+
 Inside the condition formula you have access to the `order` variable. This is a data only representation of the order.
-The `variable` contains the same data that would be exported when clicking the export button on the order index page.
+The variable contains the same data you’d see exported from the order index page.
 
 Here are some examples of an discount’s condition formula:
 
-Example 1:
+**Example 1:**
 
 ```twig
 '@myclient.com' in order.email
@@ -57,7 +69,7 @@ The above would be a `true` statement if the order’s email contains the string
 
 This would be a way of giving this discount to anyone from that company.
 
-Example 2:
+**Example 2:**
 
 ```twig
 order.shippingAddressId and order.shippingAddress.zipCode[0:2] == '70'
