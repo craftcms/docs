@@ -1,6 +1,6 @@
 # プラグインのエディション
 
-プラグインストアは、まもなくマルチエディションプラグインの**限定的な**サポートを追加するでしょう。 それは Craft の2つのエディション（Solo、および、Pro）と同様に機能します。
+The Plugin Store supports multi-edition plugins, which work similarly to Craft’s two editions (Solo and Pro).
 
 - マルチエディションをサポートするプラグインは、依然として単一のコンポーザーパッケージで構成されます。
 - プラグインのアクティブなエディションは、[プロジェクトコンフィグ](../project-config.md)に記録されます。
