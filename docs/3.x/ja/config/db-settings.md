@@ -53,19 +53,13 @@ Here’s the full list of database connection settings that Craft supports:
 ### `attributes`
 
 Allowed types :
-:
-
-[array](http://php.net/language.types.array)
+:   [array](http://php.net/language.types.array)
 
 Default value :
-:
-
-`[]`
+:   `[]`
 
 Defined by :
-:
-
-[DbConfig::$attributes](craft3:craft\config\DbConfig::$attributes)
+:   [DbConfig::$attributes](craft3:craft\config\DbConfig::$attributes)
 
 
 
@@ -86,19 +80,13 @@ For example, when using the [MySQL PDO driver](http://php.net/manual/en/ref.pdo-
 ### `charset`
 
 Allowed types :
-:
-
-[string](http://php.net/language.types.string)
+:   [string](http://php.net/language.types.string)
 
 Default value :
-:
-
-`'utf8'`
+:   `'utf8'`
 
 定義元 :
-:
-
-[DbConfig::$charset](craft3:craft\config\DbConfig::$charset)
+:   [DbConfig::$charset](craft3:craft\config\DbConfig::$charset)
 
 
 
@@ -106,68 +94,16 @@ The charset to use when creating tables.
 
 
 
-### `database`
-
-Allowed types :
-:
-
-[string](http://php.net/language.types.string)
-
-デフォルト値 :
-:
-
-`null`
-
-定義元 : :
-:
-
-[DbConfig::$database](craft3:craft\config\DbConfig::$database)
-
-
-
-The name of the database to select.
-
-
-
-### `driver`
-
-許可される型 :
-:
-
-[string](http://php.net/language.types.string)
-
-デフォルト値 : :
-:
-
-`null`
-
-定義元 : :
-:
-
-[DbConfig::$driver](craft3:craft\config\DbConfig::$driver)
-
-
-
-The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
-
-
-
 ### `dsn`
 
-許可される型 :
-:
+Allowed types :
+:   [string](http://php.net/language.types.string)
 
-[string](http://php.net/language.types.string)
-
-デフォルト値 : :
-:
-
-`null`
+デフォルト値 :
+:   `null`
 
 定義元 : :
-:
-
-[DbConfig::$dsn](craft3:craft\config\DbConfig::$dsn)
+:   [DbConfig::$dsn](craft3:craft\config\DbConfig::$dsn)
 
 
 
@@ -182,20 +118,14 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 ### `password`
 
-許可される型 : :
-:
-
-[string](http://php.net/language.types.string)
+許可される型 :
+:   [string](http://php.net/language.types.string)
 
 デフォルト値 : :
-:
-
-`''`
+:   `''`
 
 定義元 : :
-:
-
-[DbConfig::$password](craft3:craft\config\DbConfig::$password)
+:   [DbConfig::$password](craft3:craft\config\DbConfig::$password)
 
 
 
@@ -203,45 +133,16 @@ The database password to connect with.
 
 
 
-### `port`
-
-許可される型 : :
-:
-
-[integer](http://php.net/language.types.integer)
-
-デフォルト値 : :
-:
-
-`null`
-
-定義元 : :
-:
-
-[DbConfig::$port](craft3:craft\config\DbConfig::$port)
-
-
-
-The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
-
-
-
 ### `schema`
 
-許可される型 : :
-:
-
-[string](http://php.net/language.types.string)
+許可される型 :
+:   [string](http://php.net/language.types.string)
 
 デフォルト値 : :
-:
-
-`'public'`
+:   `'public'`
 
 定義元 : :
-:
-
-[DbConfig::$schema](craft3:craft\config\DbConfig::$schema)
+:   [DbConfig::$schema](craft3:craft\config\DbConfig::$schema)
 
 
 
@@ -249,45 +150,16 @@ The schema that Postgres is configured to use by default (PostgreSQL only).
 
 
 
-### `server`
-
-許可される型 : :
-:
-
-[string](http://php.net/language.types.string)
-
-デフォルト値 : :
-:
-
-`null`
-
-定義元 : :
-:
-
-[DbConfig::$server](craft3:craft\config\DbConfig::$server)
-
-
-
-The database server name or IP address. Usually `localhost` or `127.0.0.1`.
-
-
-
 ### `tablePrefix`
 
 許可される型 : :
-:
-
-[string](http://php.net/language.types.string)
+:   [string](http://php.net/language.types.string)
 
 デフォルト値 : :
-:
-
-`''`
+:   `''`
 
 定義元 : :
-:
-
-[DbConfig::$tablePrefix](craft3:craft\config\DbConfig::$tablePrefix)
+:   [DbConfig::$tablePrefix](craft3:craft\config\DbConfig::$tablePrefix)
 
 
 
@@ -295,45 +167,33 @@ If you’re sharing Craft installs in a single database (MySQL) or a single data
 
 
 
-### `unixSocket`
+### `user`
 
 許可される型 : :
-:
-
-[string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](http://php.net/language.types.string)
 
 デフォルト値 : :
-:
-
-`null`
+:   `'root'`
 
 定義元 : :
-:
-
-[DbConfig::$unixSocket](craft3:craft\config\DbConfig::$unixSocket)
+:   [DbConfig::$user](craft3:craft\config\DbConfig::$user)
 
 
 
-MySQL only. If this is set, the CLI connection string (used for yiic) will connect to the Unix socket instead of the server and port. If this is specified, then `server` and `port` settings are ignored.
+The database username to connect with.
 
 
 
 ### `url`
 
 許可される型 : :
-:
-
-[string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
 デフォルト値 : :
-:
-
-`null`
+:   `null`
 
 定義元 : :
-:
-
-[DbConfig::$url](craft3:craft\config\DbConfig::$url)
+:   [DbConfig::$url](craft3:craft\config\DbConfig::$url)
 
 
 
@@ -343,26 +203,88 @@ If this is set, the values for [driver](https://docs.craftcms.com/api/v3/craft-c
 
 
 
-### `user`
+### `driver`
 
 許可される型 : :
-:
-
-[string](http://php.net/language.types.string)
+:   [string](http://php.net/language.types.string)
 
 デフォルト値 : :
-:
-
-`'root'`
+:   `null`
 
 定義元 : :
-:
-
-[DbConfig::$user](craft3:craft\config\DbConfig::$user)
+:   [DbConfig::$driver](craft3:craft\config\DbConfig::$driver)
 
 
 
-The database username to connect with.
+The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
+
+
+
+### `server`
+
+許可される型 : :
+:   [string](http://php.net/language.types.string)
+
+デフォルト値 : :
+:   `null`
+
+定義元 : :
+:   [DbConfig::$server](craft3:craft\config\DbConfig::$server)
+
+
+
+The database server name or IP address. Usually `localhost` or `127.0.0.1`.
+
+
+
+### `port`
+
+許可される型 : :
+:   [integer](http://php.net/language.types.integer)
+
+デフォルト値 : :
+:   `null`
+
+定義元 : :
+:   [DbConfig::$port](craft3:craft\config\DbConfig::$port)
+
+
+
+The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
+
+
+
+### `unixSocket`
+
+許可される型 : :
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+
+デフォルト値 : :
+:   `null`
+
+定義元 : :
+:   [DbConfig::$unixSocket](craft3:craft\config\DbConfig::$unixSocket)
+
+
+
+MySQL only. If this is set, the CLI connection string (used for yiic) will connect to the Unix socket instead of the server and port. If this is specified, then `server` and `port` settings are ignored.
+
+
+
+### `database`
+
+許可される型 : :
+:   [string](http://php.net/language.types.string)
+
+デフォルト値 : :
+:   `null`
+
+定義元 : :
+:   [DbConfig::$database](craft3:craft\config\DbConfig::$database)
+
+
+
+The name of the database to select.
 
 
 
