@@ -202,7 +202,7 @@ nitro context [<options>]
 $ nitro context
 Craft Nitro 2.0.0
 
-Configuration:	 /Users/me/.nitro/nitro.yml
+Configuration:	 /Users/me/.nitro/nitro.yaml
 
 Sites:
   hostname:	 mycraftsite.test
@@ -302,6 +302,30 @@ For uncompressed files, the command will detect and automatically select the dat
 
 ```
 TODO finish when command implemented
+```
+
+## `db remove`
+
+Removes a database in the selected database engine.
+
+```
+nitro db remove [<options>]
+```
+
+#### Example
+
+```
+$ nitro db remove
+Which database engine?
+  1. mysql-8.0-3306.nitro
+  2. postgres-13-5432.nitro
+Enter your selection: 1
+Which datbase should we remove?
+  1. nitro
+  2. support
+Enter your selection: 2
+  … removing support ✓
+Database removed 💪
 ```
 
 ## `db ssh`
@@ -413,7 +437,7 @@ After adding that line, restart your terminal or run `source ~/.bash_profile` fo
 Alternatively, you can open the configuration file using your operating system’s default text editor for `.yaml` files by running this command:
 
 ```
-open ~/.nitro/nitro.yml
+open ~/.nitro/nitro.yaml
 ```
 
 ## `enable`
@@ -591,6 +615,34 @@ nitro queue [<options>]
 ```
 $ nitro queue
 Listening for queue jobs…
+```
+
+## `remove`
+
+Removes a site.
+
+```
+nitro remove [<options>]
+```
+
+#### Example
+
+```
+$ nitro remove
+Apply changes now [Y/n]? y
+Checking network…
+  ✓ network ready
+Checking proxy…
+  ✓ proxy ready
+Checking databases…
+  … checking mysql-8.0-3306.nitro ✓
+  … checking postgres-13-5432.nitro ✓
+Checking services…
+  … checking mailhog service ✓
+Checking sites…
+  … checking mysite.test ✓
+Checking proxy…
+  … updating proxy ✓
 ```
 
 ## `restart`
