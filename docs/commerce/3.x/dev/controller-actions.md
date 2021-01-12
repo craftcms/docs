@@ -4,28 +4,36 @@ The following [controller actions](https://www.yiiframework.com/doc/guide/2.0/en
 
 Action | Description
 ------ | -----------
-<badge vertical="baseline" type="verb">POST</badge> [cart/get-cart](#post-cart-get-cart) | x
-<badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | x
-<badge vertical="baseline" type="verb">POST</badge> [cart/load-cart](#get-post-cart-load-cart) | x
-<badge vertical="baseline" type="verb">POST</badge> [customer-addresses/save](#post-customer-addresses-save) | x
-<badge vertical="baseline" type="verb">POST</badge> [customer-addresses/delete](#post-customer-addresses-delete) | x
-<badge vertical="baseline" type="verb">POST</badge> [customer-addresses/get-addresses](#post-customer-addresses-get-addresses) | x
-<badge vertical="baseline" type="verb">POST</badge> [customer-orders/get-orders](#post-customer-orders-get-orders) | x
-<badge vertical="baseline" type="verb">POST</badge> [downloads/pdf](#post-downloads-pdf) | x
-<badge vertical="baseline" type="verb">POST</badge> [payment-sources/add](#post-payment-sources-add) | x
-<badge vertical="baseline" type="verb">POST</badge> [payment-sources/delete](#post-payment-sources-delete) | x
-<badge vertical="baseline" type="verb">POST</badge> [payments/pay](#post-payments-pay) | x
-<badge vertical="baseline" type="verb">POST</badge> [payments/complete-payment](#post-payments-complete-payment) | x
+<badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> [cart/get-cart](#get-post-cart-get-cart) | Returns the current cart as JSON.
+<badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | Updates the cart by adding purchasables, updating line items, or updating various cart attributes.
+<badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> [cart/load-cart](#get-post-cart-load-cart) | Loads a given cart into the current session.
+<badge vertical="baseline" type="verb">POST</badge> [customer-addresses/save](#post-customer-addresses-save) | Creates or updates a customer’s address.
+<badge vertical="baseline" type="verb">POST</badge> [customer-addresses/delete](#post-customer-addresses-delete) | Deletes a customer’s address.
+<badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> [customer-addresses/get-addresses](#get-post-customer-addresses-get-addresses) | Returns a customer’s addresses as JSON.
+<badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> [customer-orders/get-orders](#get-post-customer-orders-get-orders) | Returns a customer’s orders as JSON.
+<badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> [downloads/pdf](#get-post-downloads-pdf) | Returns an order PDF as a file.
+<badge vertical="baseline" type="verb">POST</badge> [payment-sources/add](#post-payment-sources-add) | Creates a new payment source.
+<badge vertical="baseline" type="verb">POST</badge> [payment-sources/delete](#post-payment-sources-delete) | Deletes a payment source.
+<badge vertical="baseline" type="verb">POST</badge> [payments/pay](#post-payments-pay) | Makes a payment on an order.
+<badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> [payments/complete-payment](#get-post-payments-complete-payment) | Processes customer’s return from an off-site payment.
 
 ::: tip
 To invoke a controller action, send a `POST` request to Craft, with an `action` param set to the desired action path, either in the request body or query string.
 :::
 
-## `cart/get-cart`
+## <badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> `cart/get-cart`
 
-JSON only
+Returns the [current cart](../orders-carts.md#fetching-a-cart) as JSON. A new cart will be generated in the session if one doesn’t already exist.
+
+The request must include `Accept: application/json` in its headers.
+
+### Output
+
+JSON object with the current cart on the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting.
 
 ## <badge vertical="baseline" type="verb">POST</badge> `cart/update-cart`
+
+Updates the cart by [adding purchasables](../orders-carts.md#adding-items-to-a-cart), [updating line items](../orders-carts.md#working-with-line-items), or updating various cart attributes.
 
 ### Supported Params
 
@@ -33,100 +41,358 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`fields` |
-`purchasableId` |
-`note` |
-`options` |
-`qty` |
-`purchasables` |
-`purchasables.{$key}.id` |
-`purchasables.{$key}.note` |
-`purchasables.{$key}.options` |
-`purchasables.{$key}.qty` |
-`lineItems` |
-`lineItems.{$key}.qty` |
-`lineItems.{$key}.note` |
-`lineItems.{$key}.options` |
-`lineItems.{$key}.remove` |
-`email` |
-`registerUserOnOrderComplete` |
-`paymentCurrency` |
-`couponCode` |
-`gatewayId` |
-`paymentSourceId` |
-`shippingMethodHandle` |
+`fields` | Optional array of custom fields to be submitted to the cart.
+`purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options`, and `qty` parameters.
+`purchasables` | Array of one or more purchasables to be [added to the cart](../orders-carts.md#adding-a-multiple-items). Each must include an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs.
+`lineItems` | Array of one or more of the cart’s line items to update. Each must have an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs. An item may include a `remove` key with a value of `1` or a `qty` of `0` to be removed from the cart.
+`email` | Email address to be associated with the cart.
+`registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
+`paymentCurrency` | ISO code of a configured [payment currency](../payment-currencies.md) to be used for the cart.
+`couponCode` | Coupon code for a [discount](../discounts.md) that should be applied to the cart.
+`gatewayId` | The payment gateway ID to be used when the cart is completed.
+`paymentSourceId` | The ID for a payment source that should be used when the cart is completed.
+`shippingMethodHandle` | The handle of a shipping method to be set for the cart.
+`successMessage` | The hashed flash notice that should be displayed if the cart is updated successfully. (Only used for `text/html` requests.)
+`failMessage` | The hashed flash notice that should be displayed if the cart failed to update. (Only used for `text/html` requests.)
+
+### Output
+
+The output of the action depends on whether the cart was updated successfully and the request included an `Accept: application/json` header.
+
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | Redirect response per the hashed `redirect` param, or the user session’s return URL. Success message will be set on the flash `notice` key.
+<x-mark/> | None; the request will be routed per the URI. Failure message will be set on the flash `error` key.
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | JSON object with the following keys: `success`, `message`, and the cart in the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting.
+<x-mark/> | JSON object with the following keys: `error`, `errors`, `success`, `message`, and the cart in the key defined by the [`cartVariable`](../config-settings.md#cartvariable) setting.
+
+</span>
 
 ## <badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> `cart/load-cart`
+
+Loads a given cart into the current session.
+
+### Supported Params
+
+The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
 `number` | Required cart number to be loaded.
 `redirect` | The hashed URL the browser should redirect to. (Automatically set to `loadCartRedirectUrl` if a GET request that doesn’t expect JSON.)
 
+### Output
+
+The output of the action depends on whether the cart was loaded successfully and the request included an `Accept: application/json` header.
+
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | 
+<x-mark/> | 
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | 
+<x-mark/> | 
+
+</span>
+
 ## <badge vertical="baseline" type="verb">POST</badge> `customer-addresses/save`
+
+Creates or updates a customer’s address. Refreshes the cart if it’s using the provided address.
+
+### Supported Params
+
+The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`address.id` | Required address ID to be edited, which must be editable by the current customer.
-`address.{$attr}` | 
-`makePrimaryBillingAddress` | 
-`makePrimaryShippingAddress` | 
-`fields` | 
+`address.id` | Required address ID to be edited, which must belong to the current customer.
+`address.{$attr}` | Address object with any of the key/value pairs in the system’s [address lines](../addresses.md#address-lines).
+`makePrimaryBillingAddress` | Whether to save as the primary billing address.
+`makePrimaryShippingAddress` | Whether to save as the primary shipping address.
+`fields` | Custom fields to be saved on the cart if it’s using the provided address.
+
+### Output
+
+The output of the action depends on whether the address was saved successfully and the request included an `Accept: application/json` header.
+
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> |
+<x-mark/> |
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> |
+<x-mark/> |
+
+</span>
 
 ## <badge vertical="baseline" type="verb">POST</badge> `customer-addresses/delete`
 
+Deletes a customer’s address.
+
+### Supported Params
+
+The following params can be sent with the request:
+
 Param | Description
 ----- | -----------
-`id` |
+`id` | ID of the address to be removed, which must belong to the customer.
+
+### Output
+
+The output of the action depends on whether the cart was removed successfully and the request included an `Accept: application/json` header.
+
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> |
+<x-mark/> |
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> |
+<x-mark/> |
+
+</span>
 
 ## `customer-addresses/get-addresses`
 
-JSON only
+Returns a customer’s addresses as JSON.
+
+The request must include `Accept: application/json` in its headers.
+
+### Output
 
 ## `customer-orders/get-orders`
 
-JSON only
+Returns a customer’s orders as JSON.
+
+The request must include `Accept: application/json` in its headers.
+
+### Output
 
 ## `downloads/pdf`
+
+Returns an order PDF as a file.
+
+### Supported Params
+
+The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
 `number` | Required order number.
-`pdfHandle` |
+`pdfHandle` | Handle of the [PDF](../pdfs.md) to be rendered.
 `option` |
+
+### Output
 
 ## <badge vertical="baseline" type="verb">POST</badge> `payment-sources/add`
 
+Creates a new payment source.
+
+### Supported Params
+
+The following params can be sent with the request:
+
 Param | Description
 ----- | -----------
-`gatewayId` |
-`description` |
-`*` |
+`gatewayId` | ID of the new payment source’s gateway, which must support payment sources.
+`description` | Description for the payment source.
+`*` | All body parameters will be provided directly to the gateway’s payment form model.
+
+### Output
+
+The output of the action depends on whether the payment source was successfully and the request included an `Accept: application/json` header.
+
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> |
+<x-mark/> |
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> |
+<x-mark/> |
+
+</span>
 
 ## <badge vertical="baseline" type="verb">POST</badge>  `payment-sources/delete`
 
+Deletes a payment source.
+
+### Supported Params
+
+The following params can be sent with the request:
+
 Param | Description
 ----- | -----------
-`id` |
+`id` | ID of the saved payment source to delete. (Must belong to the customer, otherwise the user deleting must have `commerce-manageOrders` permission.)
 `redirect` | The hashed URL the browser should redirect to.
+
+### Output
+
+The output of the action depends on whether the payment source was removed successfully and the request included an `Accept: application/json` header.
+
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> |
+<x-mark/> |
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> |
+<x-mark/> |
+
+</span>
 
 ## <badge vertical="baseline" type="verb">POST</badge> `payments/pay`
 
-Param | Description
------ | -----------
-`orderNumber` |
-`email` |
-`registerUserOnOrderComplete` |
-`paymentCurrency` |
-`gatewayId` |
-`paymentSourceId` |
-`savePaymentSource` |
-`redirect` |
-`cancelUrl` |
-`*` |
+Makes a payment on an order.
 
-## `payments/complete-payment`
+### Supported Params
+
+The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`commerceTransactionHash` |
+`orderNumber` | The required order number payment should be applied to.
+`email` | Email address of the person responsible for payment, which must match the email address on the order.
+`registerUserOnOrderComplete` | Whether the customer should have an account created on order completion.
+`paymentCurrency` | ISO code of a configured [payment currency](../payment-currencies.md) to be used for the payment.
+`gatewayId` | The payment gateway ID to be used for payment.
+`paymentSourceId` | The ID for a payment source that should be used for payment.
+`savePaymentSource` | Whether to save card information as a payment source. (Gateway must support payment sources.)
+`redirect` | Return URL for successful payment.
+`cancelUrl` | URL user should end up on if they choose to cancel payment.
+`*` | All body parameters will be provided directly to the gateway’s payment form model.
+
+### Output
+
+The output of the action depends on whether payment was applied successfully and the request included an `Accept: application/json` header.
+
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> |
+<x-mark/> |
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> |
+<x-mark/> |
+
+</span>
+
+## <badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> `payments/complete-payment`
+
+Processes customer’s return from an off-site payment.
+
+### Supported Params
+
+The following params can be sent with the request:
+
+Param | Description
+----- | -----------
+`commerceTransactionHash` | Required transaction hash used to verify the [off-site payment](../extend/payment-gateway-types.md#off-site-payment) being completed. 
+
+### Output
+
+The output of the action depends on whether the payment completed successfully and the request included an `Accept: application/json` header.
+
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> |
+<x-mark/> |
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> |
+<x-mark/> |
+
+</span>
+
