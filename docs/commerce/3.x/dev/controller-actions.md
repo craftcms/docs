@@ -77,7 +77,7 @@ Success | Output
 Success | Output
 ------- | ------
 <check-mark/> | JSON object with the following keys: `success`, `message`, and the cart in the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting.
-<x-mark/> | JSON object with the following keys: `error`, `errors`, `success`, `message`, and the cart in the key defined by the [`cartVariable`](../config-settings.md#cartvariable) setting.
+<x-mark/> | JSON object with the following keys: `error`, `errors`, `success`, `message`, and the cart in the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting.
 
 </span>
 
@@ -92,7 +92,7 @@ The following params can be sent with the request:
 Param | Description
 ----- | -----------
 `number` | Required cart number to be loaded.
-`redirect` | The hashed URL the browser should redirect to. (Automatically set to `loadCartRedirectUrl` if a GET request that doesn’t expect JSON.)
+`redirect` | The hashed URL the browser should redirect to. (Automatically set to [loadCartRedirectUrl](../config-settings.md#loadcartredirecturl) if a GET request that doesn’t expect JSON.)
 
 ### Output
 
@@ -104,8 +104,8 @@ The output of the action depends on whether the cart was loaded successfully and
 
 Success | Output
 ------- | ------
-<check-mark/> | 
-<x-mark/> | 
+<check-mark/> | Redirect response per the hashed `redirect` param, or to the original POST URI if there wasn’t a `redirect` param. Success message will be set on the flash `notice` key.
+<x-mark/> | GET requests will be redirected per the [loadCartRedirectUrl](../config-settings.md#loadcartredirecturl) config setting, and POST requests routed per the URI. A failure message will be set on the flash `error` key.
 
 </span>
 
@@ -115,8 +115,8 @@ Success | Output
 
 Success | Output
 ------- | ------
-<check-mark/> | 
-<x-mark/> | 
+<check-mark/> | JSON object: `{ "success": true }`.
+<x-mark/> | JSON object with an error message in its `error` key.
 
 </span>
 
@@ -146,8 +146,8 @@ The output of the action depends on whether the address was saved successfully a
 
 Success | Output
 ------- | ------
-<check-mark/> |
-<x-mark/> |
+<check-mark/> | Redirect response to the POST URI. Success message will be set on the flash `notice` key.
+<x-mark/> | Routed per the POST URI with an `address` variable. A failure message will be set on the flash `error` key.
 
 </span>
 
@@ -157,8 +157,8 @@ Success | Output
 
 Success | Output
 ------- | ------
-<check-mark/> |
-<x-mark/> |
+<check-mark/> | JSON object with a `success` key with a value of `true`, and the address model on its `address` key.
+<x-mark/> | JSON object with an error message in its `error` key. If there are validation errors, those will be listed in an array on the `errors` key.
 
 </span>
 
@@ -184,8 +184,8 @@ The output of the action depends on whether the cart was removed successfully an
 
 Success | Output
 ------- | ------
-<check-mark/> |
-<x-mark/> |
+<check-mark/> | Redirect response to the POST URI. Success message will be set on the flash `notice` key.
+<x-mark/> | Routed per the POST URI. A failure message will be set on the flash `error` key.
 
 </span>
 
@@ -195,8 +195,8 @@ Success | Output
 
 Success | Output
 ------- | ------
-<check-mark/> |
-<x-mark/> |
+<check-mark/> | JSON object: `{ "success": true }`.
+<x-mark/> | JSON object with an error message in its `error` key.
 
 </span>
 
@@ -208,6 +208,8 @@ The request must include `Accept: application/json` in its headers.
 
 ### Output
 
+Returns a JSON object with a `success` key and `true` value, and an `addresses` key with an array of the customer’s addresses.
+
 ## `customer-orders/get-orders`
 
 Returns a customer’s orders as JSON.
@@ -215,6 +217,8 @@ Returns a customer’s orders as JSON.
 The request must include `Accept: application/json` in its headers.
 
 ### Output
+
+Returns a JSON object with a `success` key and `true` value, and an `orders` key with an array of the customer’s orders.
 
 ## `downloads/pdf`
 
@@ -228,9 +232,11 @@ Param | Description
 ----- | -----------
 `number` | Required order number.
 `pdfHandle` | Handle of the [PDF](../pdfs.md) to be rendered.
-`option` |
+`option` | Optional string value that’s passed to the PDF template.
 
 ### Output
+
+File response with the rendered PDF and an `application/pdf` MIME type.
 
 ## <badge vertical="baseline" type="verb">POST</badge> `payment-sources/add`
 
