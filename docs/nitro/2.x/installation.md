@@ -4,7 +4,7 @@
 
 ### macOS and Linux
 
-1. Install [Multipass](https://multipass.run) (requires 1.5.0+).
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) (requires 3.0.0+).
 2. Run this terminal command:
 
     ```bash
@@ -13,6 +13,7 @@
 
 3. Follow the prompts to create your machine.
 
+// TODO Update WINDOWS
 ### Windows 10 Pro (with Hyper-V enabled)
 
 ::: tip
@@ -36,12 +37,6 @@ To completely remove Nitro, first [destroy](commands.md#destroy) your machine:
 nitro destroy
 ```
 
-::: tip
-If you have multiple machines, you can destroy them all using the `multipass delete` command:
-
-```bash
-multipass delete --all -p
-```
 :::
 
 Then remove your `nitro` command:
@@ -55,7 +50,7 @@ rm -rf $HOME/Nitro
 ```
 :::
 
-You can optionally remove your machine configs as well:
+You can optionally remove your Nitro config as well:
 
 ::: code
 ```bash macOS and Linux
@@ -65,9 +60,3 @@ rm -rf ~/.nitro
 rm -rf $HOME/.nitro
 ```
 :::
-
-If you wish to uninstall Multipass, uninstall instructions can be found on your platform’s installation guide:
-
-- [macOS](https://multipass.run/docs/installing-on-macos)
-- [Windows](https://multipass.run/docs/installing-on-windows)
-- [Linux](https://multipass.run/docs/installing-on-linux)

@@ -1,6 +1,6 @@
 # About Craft Nitro
 
-Nitro is a speedy local development environment tuned for [Craft CMS](https://craftcms.com/), powered by [Multipass](https://multipass.run/).
+Nitro is a speedy local development environment tuned for [Craft CMS](https://craftcms.com/), powered by [Docker](https://www.docker.com/).
 
 ## What’s Included
 

@@ -2,7 +2,7 @@
 
 ## `add`
 
-Adds a new site to the machine.
+Adds a new site.
 
 ```
 nitro add [<options>]
@@ -10,37 +10,61 @@ nitro add [<options>]
 
 #### Options
 
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-`--hostname`
-: The hostname to use for accessing the site. If not passed, the command will prompt for it.
-
-`--webroot`
-: The relative path to the site’s web root. If not passed, the command will prompt for it.
-
-`--skip-hosts`
-: Skips updating the `hosts` file.
+: You can pass an optional path as the only argument for creating a site outside of the current directory.
 
 #### Example
 
 ```
+$ nitro add /path/to/project
+
+OR
+
 $ cd /path/to/project
 $ nitro add
-Enter the hostname [plugins-dev] example.test
-Enter the webroot [web]
-Added plugins-dev to config file.
-Apply changes from config? [yes]
-Mounting /path/to/project to nitro-dev
-Adding site example.test to nitro-dev
-Applied changes from /Users/oli/.nitro/nitro-dev.yaml
-Editing your hosts file
-Password: ******
+
+nitro add
+Adding site…
+Enter the hostname [mysite.test]:
+  ✓ setting hostname to mysite.test
+  ✓ adding site ~/dev/support/mysite.test
+Enter the webroot for the site [web]:
+  ✓ using webroot web
+Choose a PHP version:
+  1. 8.0
+  2. 7.4
+  3. 7.3
+  4. 7.2
+  5. 7.1
+  6. 7.0
+Enter your selection: 2
+  ✓ setting PHP version 7.4
+  … saving file ✓
+Site added 🌍
+Apply changes now [Y/n]? y
+Checking network…
+  ✓ network ready
+Checking proxy…
+  ✓ proxy ready
+Checking databases…
+  … checking mysql-8.0-3306.nitro ✓
+  … checking postgres-13-5432.nitro ✓
+Checking mounts…
+  … checking ~/dev/craftcms/cms-3 ✓
+Checking services…
+  … checking mailhog service ✓
+Checking sites…
+  … checking mysite.test ✓
+Checking proxy…
+  … updating proxy ✓
+Modifying hosts file (you might be prompted for your password)
+Adding sites to hosts file…
+  … modifying hosts file ✓
+Nitro is up and running 😃
 ```
 
 ## `apply`
 
-Ensures the machine exists and applies any config changes to it.
+Ensures all resources exist and applies any config changes to them.
 
 ```
 nitro apply [<options>]
@@ -48,27 +72,120 @@ nitro apply [<options>]
 
 #### Options
 
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
 
 `--skip-hosts`
-: Skips updating the `hosts` file.
+: Skips updating the `hosts` file. Yyou can also set the environment variable "NITRO_EDIT_HOSTS" to "false" for this to apply globally.
 
 #### Example
 
 ```
 $ nitro apply
-There are 2 mounted directories and 1 new mount(s) in the config file.
-Applied changes from nitro.yaml.
+nitro apply
+Checking network…
+  ✓ network ready
+Checking proxy…
+  ✓ proxy ready
+Checking databases…
+  … checking mysql-8.0-3306.nitro ✓
+  … checking postgres-13-5432.nitro ✓
+Checking mounts…
+  … checking ~/dev/craftcms/cms-3 ✓
+Checking services…
+  … checking mailhog service ✓
+Checking sites…
+  … checking mysite.test ✓
+Checking proxy…
+  … updating proxy ✓
+Nitro is up and running 😃
+```
+
+## `clean`
+
+Removes any unused containers.
+
+```
+nitro clean [<options>]
+```
+
+#### Example
+
+```
+$ nitro clean
+Cleaning up…
+  … gathering details ✓
+Nothing to remove 😅
 ```
 
 ## `completion`
 
-Generates shell completion for Nitro commands.
+Enables shell completion.
+
+```
+nitro completion [<options>]
+```
+
+#### Example
+
+```
+To load completions:
+
+Bash:
+
+$ source <(nitro completion bash)
+
+# To load completions for each session, execute once:
+Linux:
+  $ nitro completion bash > /etc/bash_completion.d/nitro
+MacOS:
+  $ nitro completion bash > /usr/local/etc/bash_completion.d/nitro
+
+Zsh:
+
+# If shell completion is not already enabled in your environment you will need
+# to enable it.  You can execute the following once:
+
+$ echo "autoload -U compinit; compinit" >> ~/.zshrc
+
+# To load completions for each session, execute once:
+$ nitro completion zsh > "${fpath[1]}/_nitro"
+
+# You will need to start a new shell for this setup to take effect.
+```
+
+## `composer`
+
+Runs Composer commands.
+
+```
+nitro composer [<options>]
+```
+
+#### Options
+
+`--version`
+: Which version of Composer to use. Defaults to 2.
+
+
+#### Example
+
+```
+$ nitro composer update
+
+nitro composer update
+Loading composer repositories with package information
+Updating dependencies
+Nothing to modify in lock file
+Installing dependencies from lock file (including require-dev)
+Nothing to install, update or remove
+Generating optimized autoload files
+45 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+composer update completed 🤘
+```
 
 ## `context`
 
-Shows the machine’s configuration.
+Shows environment information.
 
 ```
 nitro context [<options>]
@@ -76,130 +193,102 @@ nitro context [<options>]
 
 #### Options
 
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
+`--yaml`
+: Shows the config file as YAML
 
 #### Example
 
 ```
 $ nitro context
-Machine: nitro-dev
-------
-php: "7.4"
-mounts:
-- source: ~/sites/demo-site
-  dest: /home/ubuntu/sites/demo-site
-databases:
-- engine: mysql
-  version: "5.7"
-  port: "3306"
-- engine: postgres
-  version: "12"
-  port: "5432"
-sites:
-- hostname: demo-site
-  webroot: /home/ubuntu/sites/demo-site/web
-------
+Craft Nitro 2.0.0
+
+Configuration:	 /Users/me/.nitro/nitro.yml
+
+Sites:
+  hostname:	 mycraftsite.test
+  php:	 7.4
+  webroot:	 web
+  path:	 ~/dev/support/mycraftsite.test
+  ---
+Databases:
+  engine:	 mysql 8.0 	hostname: mysql-8.0-3306.nitro
+  username:	 nitro 	password: nitro
+  port:	 3306
+  ---
+  engine:	 postgres 13 	hostname: postgres-13-5432.nitro
+  username:	 nitro 	password: nitro
+  port:	 5432
+  ---
 ```
 
-## `create`
+## `craft`
 
-Sets up a new Craft installation without requiring PHP or Composer to be installed locally.
+Runs Craft console commands.
 
-You’ll be prompted for a project name and hostname, and Nitro will...
-
-- Create a new directory with the supplied project name.
-- Download Craft CMS.
-- Establish a project `.env` with environment, app ID, security key, and primary site URL settings.
-- Update its configuration to include the new site.
-- Apply the configuration changes to the relevant machine.
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
+```
+nitro craft [<options>]
+```
 
 #### Example
 
 ```
-$ nitro create
-What is the name of the project? example
-Enter the hostname [example] example.test
-Downloading Craft CMS...
-Creating project folder example...
-Added example.test to config file
-Apply changes from config? [yes]
-Mounting ~/sites/example to nitro-dev
-Adding site example.test to nitro-dev
-Applied changes from /Users/oli/.nitro/nitro-dev.yaml
-```
+$ nitro craft migrate/all
+Yii Migration Tool (based on Yii v2.0.38)
 
-::: tip
-[Add your database settings](usage.md#connecting-to-the-database) to `.env` before running the installer.
-:::
+Migrated up successfully.
+```
 
 ## `db add`
 
-Creates a new database on a database engine in a machine.
+Adds a new database in the selected database engine.
 
 ```
 nitro db add [<options>]
 ```
 
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-
 #### Example
 
 ```
 $ nitro db add
-  1 - postgres_11_5432
-  2 - mysql_5.7_3306
-Select database engine [1] 2
-Enter the name of the database: mynewproject
-Added database "mynewproject" to "mysql_5.7_3306".
+Select the database engine:
+  1. postgres-13-5432.nitro
+  2. mysql-8.0-3306.nitro
+Enter your selection: 2
+Enter the new database name: mydatabase
+  … creating database mydatabase ✓
+Database added 💪
 ```
 
 ## `db backup`
 
-Backs up one or all databases from a database engine in a machine.
+Backs up a database from the selected database engine.
 
 ```
 nitro db backup [<options>]
 ```
 
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-
 #### Example
 
 ```
 $ nitro db backup
-  1 - postgres_11_5432
-  2 - mysql_5.7_3306
-Select database engine [1]
-  1 - all-dbs
-  2 - postgres
-  3 - nitro
-  4 - project-one
-Select database to backup? [1]
-Created backup "all-dbs-200519_100730.sql", downloading...
-Backup completed and stored in "/Users/oli/.nitro/backups/nitro-dev/postgres_11_5432/all-dbs-200519_100730.sql"
+Getting ready to backup…
+Which database engine?
+  1. postgres-13-5432.nitro
+  2. mysql-8.0-3306.nitro
+Enter your selection: 2
+Which database should we backup?
+  1. nitro
+  2. support
+  3. test
+Enter your selection: 2
+Preparing backup…
+  … creating backup support-2021-01-06-162231.sql ✓
+Backup saved in /Users/me/.nitro/backups/mysql-8.0-3306.nitro 💾
 ```
 
 ## `db import`
 
-Imports a database dump into a machine’s database engine. You’ll be prompted with a list of running database engines
-(MySQL and PostgreSQL) and the database name that should receive the import.
-
-The SQL file to be imported may be plain text, or compressed with zip or gzip.
+Imports a database dump the selected database engine and name. The SQL file to be imported may be plain text, or compressed with zip/gzip.
 
 ```
 nitro db import <file> [<options>]
@@ -209,126 +298,34 @@ nitro db import <file> [<options>]
 For uncompressed files, the command will detect and automatically select the database engine.
 :::
 
-#### Options
+#### Example
 
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
+```
+TODO finish when command implemented
+```
+
+## `db ssh`
+
+Allows you to SSH into a database container.
+
+```
+nitro db ssh [<options>]
+```
 
 #### Example
 
 ```
-$ nitro db import mybackup.sql
-  1 - mysql_5.7_3306
-  2 - postgres_11_5432
-Select database engine [1]
-Enter the database name to create for the import: new-project
-Uploading "mybackup.sql" into "nitro-dev" (large files may take a while)...
-Successfully import the database backup into new-project
-```
-
-## `db remove`
-
-Removes a database from a database engine in a machine, but not from the config file.
-
-```
-nitro db remove [<options>]
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-
-#### Example
-
-```
-$ nitro db remove
-  1 - postgres_11_5432
-  2 - mysql_5.7_3306
-Select database engine: [1]
-  1 - nitro
-  2 - project-one
-
-Are you sure you want to permanently remove the database nitro? [no]
-Removed database nitro
-```
-
-## `db restart`
-
-Restarts a database engine in a machine.
-
-```
-nitro db restart [<options>]
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-
-#### Example
-
-```
-$ nitro db restart
-  1 - postgres_11_5432
-  2 - mysql_5.7_3306
-Select database engine to restart: [1]
-Restarted database engine postgres_11_5432
-```
-
-## `db start`
-
-Starts a stopped database engine in a machine.
-
-```
-nitro db start [<options>]
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-
-#### Example
-
-```
-$ nitro db start
-  1 - postgres_11_5432
-  2 - mysql_5.7_3306
-Select database engine to start: [1]
-Started database engine postgres_11_5432
-```
-
-## `db stop`
-
-Stops a database engine in a machine.
-
-```
-nitro db stop [<options>]
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-
-#### Example
-
-```
-$ nitro db stop
-  1 - postgres_11_5432
-  2 - mysql_5.7_3306
-Select database engine to stop: [1]
-Stopped database engine postgres_11_5432
+$ nitro db ssh
+Select a database to connect to:
+  1. postgres-13-5432.nitro
+  2. mysql-8.0-3306.nitro
+Enter your selection: 2
+root@5e98a85aef29:/#
 ```
 
 ## `destroy`
 
-Destroys a machine.
+Destroys all resources (networks, containers, and volumes).
 
 ```
 nitro destroy [<options>]
@@ -336,28 +333,67 @@ nitro destroy [<options>]
 
 #### Options
 
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
 `--clean`
-: Remove the configuration file after destroying the machine. Defaults to `false`.
+: Remove the configuration file after destroying the resources. Defaults to `false`.
 
-`--skip-hosts`
-: Skips updating the `hosts` file.
+#### Example
 
+```
+$ nitro destroy
+Are you sure (this will remove all containers, volumes, and networks) [Y/n] y
+Removing Containers…
+  … removing mysite.test ✓
+  … removing mailhog.service.nitro ✓
+  … creating backup postgres-2021-01-06-202905.sql ✓
+  … creating backup nitro-2021-01-06-202905.sql ✓
+Backups saved in /Users/me/.nitro/postgres-13-5432.nitro 💾
+  … removing postgres-13-5432.nitro ✓
+Backups saved in /Users/me/.nitro/mysql-8.0-3306.nitro 💾
+  … removing mysql-8.0-3306.nitro ✓
+  … removing nitro-proxy ✓
+Removing Volumes…
+  … removing mysql-8.0-3306.nitro ✓
+  … removing postgres-13-5432.nitro ✓
+  … removing nitro ✓
+Removing Networks…
+  … removing nitro-network ✓
+Nitro destroyed ✨
+```
+
+## `disable`
+
+Disables a Nitro service.
+
+```
+nitro disable [<options>]
+```
+
+#### Example
+
+```
+ # disable services
+  nitro disable <service-name>
+
+  # disable mailhog
+  nitro disable mailhog
+
+  # disable blackfire
+  nitro disable blackfire
+
+  # disable minio
+  nitro disable minio
+
+  # disable dynamodb
+  nitro disable dynamodb
+```
 
 ## `edit`
 
-Opens your machine configuration file in your default editor for quickly making changes.
+Opens your Nitro configuration file in your default editor for quickly making changes.
 
 ```
 nitro edit [<options>]
 ```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
 
 #### Example
 
@@ -377,171 +413,136 @@ After adding that line, restart your terminal or run `source ~/.bash_profile` fo
 Alternatively, you can open the configuration file using your operating system’s default text editor for `.yaml` files by running this command:
 
 ```
-open ~/.nitro/nitro-dev.yaml
+open ~/.nitro/nitro.yml
 ```
 
-(Replace `nitro-dev` with the appropriate machine name if it’s not that.)
-:::
+## `enable`
 
-## `info`
-
-Shows machine details like its IP address and PHP version.
+Enables a Nitro service.
 
 ```
-nitro info [<options>]
+nitro enable [<options>]
 ```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
 
 #### Example
 
 ```
-$ nitro info
-Nitro installed, ready for something incredible at 192.168.64.21.
+ # enable services
+  nitro enable <service-name>
 
-Add a project with "nitro add <directory>".
+  # enable mailhog
+  nitro enable mailhog
 
-Server Information
--------------------------
-IP address: 192.168.64.21
-PHP version: 7.4
+  # enable blackfire
+  nitro enable blackfire
 
-Need help setting up Xdebug?
-https://github.com/craftcms/nitro/blob/master/XDEBUG.md
+  # enable minio
+  nitro enable minio
 
-Need help using Nitro?
-https://github.com/craftcms/nitro/blob/master/README.md
+  # enable dynamodb
+  nitro enable dynamodb
+```
+
+## `help`
+
+Display information about available console commands.
+
+```
+nitro help [<options>]
+```
+
+#### Example
+
+```
+$ nitro help add
+nitro help add
+Add a site
+
+Usage:
+  nitro add [flags]
+
+Examples:
+  # add the current project as a site
+  nitro add
+
+  # add a directory as the site
+  nitro add my-project
+
+Flags:
+  -h, --help   help for add
+```
+
+## `hosts`
+
+Modifies your hosts file.
+
+```
+nitro hosts [<options>]
+```
+
+#### Options
+
+`--hostnames strings`
+: A comma-seperated list of hostnames to add.
+
+`--preview`
+: Preview the changes to the host file without applying them.
+
+`--remove`
+: A comma-seperated list of hostnames to remove.
+
+#### Example
+
+```
+$ sudo nitro hosts --hostnames test1.nitro,test2.nitro
+Password:
+Adding sites to hosts file…
+  … modifying hosts file ✓
 ```
 
 ## `init`
 
-Initializes a machine.
+Initializes the Nitro environment.
 
 ```
 nitro init [<options>]
 ```
 
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-`--php-version`
-: The PHP version to use. If omitted, the command will prompt for it.
-
-`--cpus`
-: The max number of CPUs the machine can use. If omitted, Nitro will try to determine the best number based on the host computer.
-
-`--memory`
-: The max amount of system RAM the machine can use. If omitted, the command will prompt for it.
-
-`--disk`
-: The max amount of disk space the machine can use. If omitted, the command will prompt for it.
-
-
-If the machine already exists, it will be reconfigured.
-
-## `install composer`
-
-Installs composer inside a virtual machine.
-
-```
-nitro install composer
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
+If the environment already exists, it will be reconfigured.
 
 #### Example
 
 ```
-$ nitro install composer
-Composer is now installed on "nitro-dev".
-```
-
-## `install mysql`
-
-Adds a new MySQL database engine.
-
-```
-nitro install mysql
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-
-#### Example
-
-```
-$ nitro install mysql
-Enter the MySQL version to install: 5.6
-Enter the MySQL port number: 3306
-Adding MySQL version "5.6" on port "3306"
-Apply changes from config now? [yes]
-```
-
-## `install postgres`
-
-Adds a new PostgreSQL database engine.
-
-```
-nitro install postgres
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-
-#### Example
-
-```
-$ nitro install postgres
-Enter the PostgreSQL version to install: 11
-Enter the MySQL port number: 5432
-Adding MySQL version "11" on port "5432"
-Apply changes from config now? [yes]
-```
-
-## `keys`
-
-Imports SSH keys into a virtual machine for use with Composer, git, etc.
-
-```
-nitro keys [<options>]
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-
-#### Example
-
-```
-$ nitro keys
-  1 - id_rsa
-  2 - personal_rsa
-Select the key to add to "nitro-dev"? [1]
-Transferred the key "id_rsa" into "nitro-dev".
+$ nitro init
+Checking Nitro…
+  … creating network ✓
+  … creating volume ✓
+  … pulling image ✓
+  … creating proxy ✓
+Checking network…
+  ✓ network ready
+Checking proxy…
+  ✓ proxy ready
+Checking databases…
+  … checking mysql-8.0-3306.nitro ✓
+  … checking postgres-13-5432.nitro ✓
+Checking services…
+  … checking mailhog service ✓
+Checking sites…
+  … checking mysite.test ✓
+Checking proxy…
+  … updating proxy ✓
+  … getting certificate for Nitro… ✓
+Installing certificate (you might be prompted for your password)
+Password:
+  … cleaning up ✓
+Nitro certificates are now trusted 🔒
+Nitro is ready! 🚀
 ```
 
 ## `logs`
 
-Displays the machine’s logs. This command will prompt you for a type of logs to view, including e.g. `nginx`,
-`database`, or `docker` (for a specific container).
+Displays all of your container logs.
 
 ```
 nitro logs [<options>]
@@ -549,201 +550,73 @@ nitro logs [<options>]
 
 #### Options
 
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
+`--follow`
+: Follow log output (defaults to true).
 
-## `nginx restart`
+`--since`
+: Show logs since timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes).
 
-Restarts nginx on a machine.
+`--timestamps`
+: Displays the timestamps in the logs.
 
-```
-nitro nginx restart [<options>]
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-## `nginx start`
-
-Starts nginx on the machine.
+#### Example
 
 ```
-nitro nginx start [<options>]
+$ nitro logs
+2021-01-07 22:46:26,644 INFO supervisord started with pid 1
+2021-01-07 22:46:27,648 INFO spawned: 'nginx' with pid 8
+2021-01-07 22:46:27,650 INFO spawned: 'php-fpm' with pid 9
+nginx: [alert] could not open error log file: open() "/var/lib/nginx/logs/error.log" failed (13: Permission denied)
+[07-Jan-2021 22:46:27] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[07-Jan-2021 22:46:27] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[07-Jan-2021 22:46:27] NOTICE: [pool www] 'group' directive is ignored when FPM is not running as root
+[07-Jan-2021 22:46:27] NOTICE: [pool www] 'group' directive is ignored when FPM is not running as root
+[07-Jan-2021 22:46:27] NOTICE: fpm is running, pid 9
+[07-Jan-2021 22:46:27] NOTICE: ready to handle connections
+2021-01-07 22:46:28,687 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-01-07 22:46:28,687 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
 ```
 
-#### Options
 
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
+## `queue`
 
-## `nginx stop`
-
-Stops nginx on the machine.
-
-```shell script
-nitro nginx stop [<options>]
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-## `php iniget`
-
-Outputs PHP ini setting values.
+Runs a Craft queue worker.
 
 ```
-nitro php iniget [<options>] <setting>
+nitro queue [<options>]
 ```
 
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-`--silent`
-: Hides any output when the command is run.
-
-## `php iniset`
-
-Changes PHP ini settings from the command line. This command will prompt for the setting to change, including e.g. `display_errors`, `max_execution_time`, `max_input_vars`, `max_input_time`, `max_file_upload`, `memory_limit`, `upload_max_filesize`.
+#### Example
 
 ```
-nitro php iniset [<options>] <setting> <value>
+$ nitro queue
+Listening for queue jobs…
 ```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-## `php restart`
-
-Restarts PHP-FPM on the machine.
-
-```
-nitro php restart [<options>]
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-`--php-version`
-: The PHP version to restart. If omitted, the machine’s default PHP version is used.
-
-## `php start`
-
-Starts PHP-FPM on the machine.
-
-```
-nitro php start [<options>]
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-`--php-version`
-: The PHP version to start. If omitted, the machine’s default PHP version is used.
-
-## `php stop`
-
-Stops PHP-FPM on the machine.
-
-```shell script
-nitro php stop [<options>]
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-`--php-version`
-: The PHP version to stop. If omitted, the machine’s default PHP version is used.
-
-## `redis`
-
-Starts a Redis shell.
-
-```
-nitro redis [<options>]
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-## `refresh`
-
-Updates the Nitro CLI’s internal API. (This should be run after a self-update.)
-
-## `remove`
-
-Removes a site from the machine.
-
-```
-nitro remove [<options>]
-```
-
-You’ll be prompted to select the site that should be removed. If the site has a corresponding
-[mount](usage.md#adding-mounts) at `/home/ubuntu/sites/<hostname>`, the mount will be removed as well.
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-
-## `rename`
-
-Renames a site in a configuration file, prompting for which site should be renamed.
-
-```
-nitro rename [<options>]
-```
-
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
 
 ## `restart`
 
-Restarts a machine.
+Restarts all containers.
 
 ```
 nitro restart [<options>]
 ```
 
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-
-## `self-update`
-
-Updates the Nitro CLI.
+#### Example
 
 ```
-nitro self-update
+$ nitro restart
+Restarting Nitro…
+  … restarting mysite.test ✓
+  … restarting mailhog.service.nitro ✓
+  … restarting postgres-13-5432.nitro ✓
+  … restarting mysql-8.0-3306.nitro ✓
+  … restarting nitro-proxy ✓
+Nitro restarted 🎉
 ```
-
-::: warning
-This command does not work on Windows. You will need to perform a [manual installation](installation.md).
-:::
 
 ## `ssh`
 
-Tunnels into the machine over SSH as the default `ubuntu` user.
+Allows you to SSH into a container.
 
 ```
 nitro ssh [<options>]
@@ -751,111 +624,208 @@ nitro ssh [<options>]
 
 #### Options
 
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
+`--root`
+: SSH into a container as the root user.
 
-::: warning
-If you’re using Git Bash in Windows, you’ll need to use `winpty nitro ssh` to get an interactive prompt.
-:::
+#### Example
+
+```
+$ nitro ssh
+/app $
+
+nitro ssh --root
+using root… system changes are ephemeral…
+/app #
+```
 
 ## `start`
 
-Starts the machine.
+Starts all containers.
 
 ```
 nitro start [<options>]
 ```
 
-#### Options
+#### Example
 
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
+```
+$ nitro start
+Starting Nitro…
+  ✓ mysite.test ready
+  ✓ mailhog.service.nitro ready
+  ✓ postgres-13-5432.nitro ready
+  ✓ mysql-8.0-3306.nitro ready
+  ✓ nitro-proxy ready
+Nitro started 👍
+```
 
 ## `stop`
 
-Stops the machine.
+Stops all containers.
 
 ```
 nitro stop [<options>]
 ```
 
-#### Options
-
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-## `support`
-
-Quickly create a GitHub issue with helpful details for getting support.
+#### Example
 
 ```
-nitro support [<options>]
+$ nitro stop
+Stopping Nitro…
+  … stopping mysite.test ✓
+  … stopping mailhog.service.nitro ✓
+  … stopping postgres-13-5432.nitro ✓
+  … stopping mysql-8.0-3306.nitro ✓
+  … stopping nitro-proxy ✓
+Nitro shutdown 😴
 ```
 
-#### Options
+## `trust`
 
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
+Trust SSL certificates for a site.
+
+```
+nitro trust [<options>]
+```
+
+#### Example
+
+```
+$ nitro trust
+  … getting certificate for Nitro… ✓
+Installing certificate (you might be prompted for your password)
+Password:
+  … cleaning up ✓
+Nitro certificates are now trusted 🔒
+```
 
 ## `update`
 
-Performs machine system updates (e.g. `sudo apt get update && sudo apt upgrade -y`).
+Updates Nitro's containers.
 
 ```
 nitro update [<options>]
 ```
 
-#### Options
 
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
+#### Example
 
+```
+$ nitro update
+Updating nitro…
+  … updating nitro-proxy:2.0.0-alpha ✓
+  … updating nginx:7.4-dev ✓
+  … updating nginx:7.3-dev ✓
+  … updating nginx:7.2-dev ✓
+  … updating nginx:7.1-dev ✓
+Images updated 👍, applying changes…
+Checking network…
+  ✓ network ready
+Checking proxy…
+  ✓ proxy ready
+Checking databases…
+  … checking mysql-8.0-3306.nitro ✓
+  … checking postgres-13-5432.nitro ✓
+Checking services…
+  … checking mailhog service ✓
+Checking sites…
+  … checking mysite.test ✓
+Checking proxy…
+  … updating proxy ✓
+```
+
+## `validate`
+
+Validates Nitro's configuration.
+
+```
+nitro validate [<options>]
+```
+
+
+#### Example
+
+```
+$ nitro validate
+Validating…
+  … validating databases ✓
+  … validating sites ✓
+```
 
 ## `version`
 
-Checks the current version of Nitro against the releases and shows any updated versions.
+Shows Nitro version information.
 
 ```
-nitro version
+nitro version [<options>]
 ```
 
-## `xdebug off` / `xoff`
 
-Disables Xdebug on a machine.
+#### Example
+
+```
+$ nitro version
+View the changelog at https://github.com/craftcms/nitro/blob/2.0.0-alpha/CHANGELOG.md
+
+Nitro CLI: 	 2.0.0-alpha
+Nitro gRPC:
+Docker API: 	 1.41 (1.12 min)
+Docker CLI: 	 1.41
+
+The Nitro CLI and gRPC versions do not match
+You might need to run `nitro update`
+```
+
+## `xoff`
+
+Disables Xdebug for a site.
 
 ```
 nitro xoff [<options>]
 ```
 
-#### Options
+#### Example
 
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
+```
+$ nitro xoff
+Checking network…
+  ✓ network ready
+Checking proxy…
+  ✓ proxy ready
+Checking databases…
+  … checking mysql-8.0-3306.nitro ✓
+  … checking postgres-13-5432.nitro ✓
+Checking services…
+  … checking mailhog service ✓
+Checking sites…
+  … checking mysite.test - updating… ✓
+Checking proxy…
+  … updating proxy ✓
+```
 
-`--php-version`
-: The PHP version for which Xdebug should be disabled. If omitted, the machine’s default PHP version is used.
+## `xon`
 
-`--silent`
-: Hides any output when the command is run.
+Enables Xdebug for a site.
 
-## `xdebug on` / `xon`
-
-Enables Xdebug, which is installed and disabled by default on each machine.
-
-```shell script
+```
 nitro xon [<options>]
 ```
 
-#### Options
+#### Example
 
-`-m`, `--machine`
-: The name of the machine to use. Defaults to `nitro-dev`.
-
-`--php-version`
-: The PHP version for which Xdebug should be enabled. If omitted, the machine’s default PHP version is used.
-
-`--silent`
-: Hides any output when the command is run.
-
-Ensures Xdebug is installed for PHP and enables it.
+```
+$ nitro xon
+Checking network…
+  ✓ network ready
+Checking proxy…
+  ✓ proxy ready
+Checking databases…
+  … checking mysql-8.0-3306.nitro ✓
+  … checking postgres-13-5432.nitro ✓
+Checking services…
+  … checking mailhog service ✓
+Checking sites…
+  … checking mysite.test - updating… ✓
+Checking proxy…
+  … updating proxy ✓
+```
