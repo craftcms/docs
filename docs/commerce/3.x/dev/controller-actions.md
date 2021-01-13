@@ -262,8 +262,8 @@ The output of the action depends on whether the payment source was successfully 
 
 Success | Output
 ------- | ------
-<check-mark/> |
-<x-mark/> |
+<check-mark/> | Redirect response to the POST URI.
+<x-mark/> | Routed per the POST URI. A failure message will be set on the flash `error` key.
 
 </span>
 
@@ -273,12 +273,12 @@ Success | Output
 
 Success | Output
 ------- | ------
-<check-mark/> |
-<x-mark/> |
+<check-mark/> | JSON object with a `success` key with a value of `true`, with the payment source on its `paymentSource` key.
+<x-mark/> | JSON object with an error message in its `error` key. Errors may be listed in an array on the `paymentFormErrors` key.
 
 </span>
 
-## <badge vertical="baseline" type="verb">POST</badge>  `payment-sources/delete`
+## <badge vertical="baseline" type="verb">POST</badge> `payment-sources/delete`
 
 Deletes a payment source.
 
@@ -301,8 +301,8 @@ The output of the action depends on whether the payment source was removed succe
 
 Success | Output
 ------- | ------
-<check-mark/> |
-<x-mark/> |
+<check-mark/> | Redirect response to the POST URI. Success message will be set on the flash `notice` key.
+<x-mark/> | Routed per the POST URI. A failure message will be set on the flash `error` key.
 
 </span>
 
@@ -312,8 +312,8 @@ Success | Output
 
 Success | Output
 ------- | ------
-<check-mark/> |
-<x-mark/> |
+<check-mark/> | JSON object with a `success` key with a value of `true`.
+<x-mark/> | JSON object with an error message in its `error` key.
 
 </span>
 
@@ -327,8 +327,8 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`orderNumber` | The required order number payment should be applied to.
-`email` | Email address of the person responsible for payment, which must match the email address on the order.
+`orderNumber` | The order number payment should be applied to. When ommitted, payment is applied to the current cart.
+`email` | Email address of the person responsible for payment, which must match the email address on the order. Required if the order being paid is not the active cart.
 `registerUserOnOrderComplete` | Whether the customer should have an account created on order completion.
 `paymentCurrency` | ISO code of a configured [payment currency](../payment-currencies.md) to be used for the payment.
 `gatewayId` | The payment gateway ID to be used for payment.
@@ -348,8 +348,8 @@ The output of the action depends on whether payment was applied successfully and
 
 Success | Output
 ------- | ------
-<check-mark/> |
-<x-mark/> |
+<check-mark/> | Redirect response per the order’s `returnUrl` if set, or to the POST URI. Success message will be set on the flash `notice` key.
+<x-mark/> | Routed per the POST URI. A failure message will be set on the flash `error` key, and the payment form model and cart will be populated in a `paymentForm` variable and a variable named per the [cartVariable](../config-settings.md#cartvariable) config setting. There may also be a `paymentFormErrors` variable with an array of error messages.
 
 </span>
 
@@ -359,8 +359,8 @@ Success | Output
 
 Success | Output
 ------- | ------
-<check-mark/> |
-<x-mark/> |
+<check-mark/> | JSON object with a `success` key with a value of `true`, the cart on the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting, the redirect value (if applicable) on the `redirect` key, and (if applicable) the `transactionId` and `transactionHash` of the related transaction.
+<x-mark/> | JSON object with an error on its `error` key, and the current cart on the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting. Any payment errors will be listed in an array on the `paymentFormErrors` key.
 
 </span>
 
@@ -386,8 +386,8 @@ The output of the action depends on whether the payment completed successfully a
 
 Success | Output
 ------- | ------
-<check-mark/> |
-<x-mark/> |
+<check-mark/> | Redirect response to the order’s `returnUrl`.
+<x-mark/> | Redirect response to the order’s `cancelUrl`, with a payment error set on the flash `notice` key.
 
 </span>
 
@@ -397,8 +397,8 @@ Success | Output
 
 Success | Output
 ------- | ------
-<check-mark/> |
-<x-mark/> |
+<check-mark/> | JSON response with the order’s `returnUrl` set on a `url` key.
+<x-mark/> | JSON response with the order’s `cancelUrl` set on a `url` key.
 
 </span>
 
