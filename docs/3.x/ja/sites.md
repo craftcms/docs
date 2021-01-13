@@ -14,7 +14,7 @@ Craft のマルチサイト機能は、同じパブリッシングチームを�
 
 Craft のインストールは、1つのデフォルトサイトからはじまります。 サイト名はインストール時に定義され、ハンドルは `default` となります。
 
-それぞれのサイトは、次の属性を持っています。
+You add additional sites using the Sites settings in **Settings** → **Sites**.
 
 サイトグループでは、言語や種類などの共通点によってサイトをひとまとめに整理できます。
 
@@ -86,7 +86,8 @@ Multiple sites can share the same host name, such as `https://craftcms.com/` and
 :::
 
 ::: warning
-サイトのベース URL を定義する場合、`@web` エイリアスを使用しないでください。 それは [cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) の脆弱性をもたらすことができ、リクエストされたサイトを Craft が確実に判断することができなくなります。
+Careful using the `@web` alias to define your sites’ Base URLs.  
+You should explicitly override the alias to avoid introducing a [cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) vulnerability, and to make sure Craft can reliably determine which site is being requested. See [Aliases](config/#aliases) for an example.
 :::
 
 ## すべての有効サイトにエントリを広げる
@@ -105,13 +106,13 @@ If you would like the section's content to be separate then disable this option 
 
 新しいサイト向けに、テンプレートディレクトリとテンプレートを作成します。
 
-1. 「設定 > サイト」に移動し、「新しいサイト」ボタンをクリックします。
-2. ドロップダウンメニューからサイトが所属するグループを選択します。 グループの選択により、サイトの機能に影響することはありません。
+1. Go to **Settings** → **Sites** and choose **New Site**.
+2. Use the dropdown menu to choose the group your site should belong to. The group selection won’t have any impact on your site’s functionality.
 3. 名前を付けてください。 Craft はコントロールパネルのサイト名を利用し、`{{ siteName }}` を使ってテンプレート内に表示することもできます。
-4. サイト名をベースにして、Craft はサイトのハンドルを生成します。 あなたが望むなら、ハンドルを編集できます。 テンプレート内でこのサイトを参照するために、サイトハンドルを利用します。
+4. サイト名をベースにして、Craft はサイトのハンドルを生成します。 You can edit the Handle if you’d like. テンプレート内でこのサイトを参照するために、サイトハンドルを利用します。
 5. サイトの言語を選択してください。 （言語の使い方の詳細は、上記を参照してください）
-6. このサイトをプライマリサイトにする場合は、「これはプライマリサイトですか？ 」をオンにします。 to enable it.
-7. 「このサイトには独自の基本 URL があります」のチェックボックスをオンにし、ベース URL を入力します。 この例では `https://beta.craftcms.com` になります。
+6. If this site should be the Primary Site, toggle **Is Primary Site?** to enable it.
+7. Check the box for **This site has its own base URL** and put in the Base URL. For our example it’ll be `https://beta.craftcms.com`.
 8. 新しいサイトを保存します。
 
 ### ステップ 2：テンプレートディレクトリの作成
@@ -156,13 +157,13 @@ The first step to creating localized site is to decide the languages you need to
 
 ### Step 2: Update Your Sections
 
-After creating a new site for a language, enable the new site in each Section. In Settings → Sections, go into each section settings you want included in the localized site and enable the site in the Site Settings. Fill out the Entry URI Format (for Channel and Structure sections) or URI (for Single sections) to reflect how you want the URIs structured for that site.
+After creating a new site for a language, enable the new site in each Section. In **Settings** → **Sections**, go into each section settings you want included in the localized site and enable the site in the Site Settings. Fill out the Entry URI Format (for Channel and Structure sections) or URI (for Single sections) to reflect how you want the URIs structured for that site.
 
 ### Step 3: Define Your Translatable Fields
 
-In Settings → Fields, choose the fields you want to have translatable. Under Translation Method, choose "Translate for each language."
+In **Settings** → **Fields**, choose the fields you want to have translatable. Under **Translation Method**, choose **Translate for each language**.
 
-Craft will allow you to update this field's content in each entry on a per-language basis.
+Craft will allow you to update this field’s content in each entry on a per-language basis.
 
 ### Step 4: Update Your Templates
 
