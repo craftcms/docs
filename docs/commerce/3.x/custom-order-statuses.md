@@ -12,7 +12,7 @@ The only differences between an order and a cart is:
 
 When a customer completes their order, the `dateOrdered` is set to the current time and date and it gets a custom order status. The custom order status set depends on which order status you’ve established as the default.
 
-Custom order statuses can be managed from Commerce → System Settings → Order Statuses in the control panel. There you can choose the default order status for new orders.
+Custom order statuses can be managed from **Commerce** → **System Settings** →** Order Statuses** in the control panel. There you can choose the default order status for new orders.
 
 ## Functionality
 
@@ -39,7 +39,9 @@ You can change the status of multiple orders at the same time on the Order Index
 ### In code
 
 ```php
-$order = Plugin::getInstance()->getOrders()->getOrderById(ID);
+$order = \craft\commerce\Plugin::getInstance()
+    ->getOrders()
+    ->getOrderById(ID);
 $order->orderStatusId = $orderStatus->id; // new status ID
 $order->message = $message; // new message
 $result = Craft::$app->getElements()->saveElement($order);
@@ -57,14 +59,26 @@ If you’d like to delete an order status, first select all orders having that s
 
 In addition to using order statuses to manage your orders, you can choose emails that will be sent when an order moves into that status.
 
-See [Order Status Emails](order-status-emails.md).
+See [Emails](emails.md).
 
 ## Line Item Statuses
 
 Line item statuses are similar to order statuses except they’re for *internal* management of an order and do not trigger emails.
 
-You can create a new line item status by navigating to Commerce → System Settings → Line Item Statuses and choosing “New line item status”.
+You can create a new line item status by navigating to **Commerce** → **System Settings** → **Line Item Statuses** and choosing **New line item status**.
 
-When creating a line item status you can optionally designate that status to be applied by default using the “New line items get this status by default” checkbox. When checked, the status is applied by default when an order is completed.
+When creating a line item status you can optionally designate that status to be applied by default with the **New line items get this status by default** checkbox. When checked, the status is applied by default when an order is completed.
 
 If no line item status is designated as the default, line items have a `null` or “None” status.
+
+## Templating
+
+### craft.commerce.orderStatuses.allOrderStatuses
+
+Returns an array of <commerce3:craft\commerce\models\OrderStatus> objects representing all the order statuses in the system.
+
+```twig
+{% for status in craft.commerce.orderStatuses.allOrderStatuses %}
+    {{ status.handle }} - {{ status.name }}
+{% endfor %}
+```

@@ -590,7 +590,7 @@ The `pageInfo` variable (or whatever you’ve called it) provides the following 
 * **`pageInfo.getPrevUrls( [dist] )`** – Returns an array of URLs to the previous pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
 * **`pageInfo.getNextUrls( [dist] )`** – Returns an array of URLs to the next pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
 * **`pageInfo.getRangeUrls( start, end )`** – Returns an array of URLs to pages in a given range of page numbers, with keys set to the page numbers.
-
+* **`pageInfo.getDynamicRangeUrls( max )`** – Returns an array of URLs to pages in a dynamic range of page numbers that surround (and include) the current page, with keys set to the page numbers.
 
 ### Navigation examples
 

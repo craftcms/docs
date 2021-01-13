@@ -2,13 +2,19 @@
 
 With Craft Commerce, a _Customer_ is a model representing a person who may place an order.
 
-That person could’ve placed an order as a guest or be a registered user with an associated Craft [user account](https://craftcms.com/docs/3.x/users.html) for logging in and making orders with saved information.
+That person could have placed an order as a guest, or as a registered user with an associated Craft [user account](/3.x/users.md) for logging in and placing orders with saved information.
 
-Customers can be found in the control panel by navigating to **Commerce** → **Customers**.
+Every Craft user has a customer record by default, even if that user has never created an order.
+
+::: tip
+The 1:1 user-to-customer relationship is new to Craft Commerce 3. A migration from Commerce 2 will create a new customer record for any existing Craft user that doesn’t already have one.
+:::
 
 ## Customer List
 
-The customer list is a paginated data set of all customers in the system linked to a user or having completed orders. The customer list can be searched by name, email, address, and order reference/number.
+Customers can be found in the control panel by navigating to **Commerce** → **Customers**.
+
+The customer list is a paginated data set of all customers in the system linked to a user or having completed orders. The customer list can be searched by name, email, address, and order reference number.
 
 Customers having user accounts will appear with a link to the respective Craft user in the listing table.
 
@@ -16,35 +22,19 @@ Choose any customer’s email address to see more information.
 
 ## Customer
 
-The customer view will show you important information about the customer. The information contained on this page is the same data that is shown on the [customer info tab](#user-customer-info-tab).
-
-### Addresses
-
-The addresses for a customer can be reached via the customer view. Select any address to edit it.
-
-#### Address Lines
-
-The [address model](commerce3:craft\commerce\models\Address) has a read-only `addressLines` parameter. This is an array that is returned containing the lines of the address.
-
-This parameter is designed to allow consistency when displaying a customer's address both in the front end and in the control panel.
-
-Address lines are used, for example, on the Edit Order page in the control panel. There are examples for [displaying an address](https://github.com/craftcms/commerce/blob/develop/example-templates/shop/_includes/addresses/address.twig) in the [example templates](example-templates.md).
-
-You can use the [defineAddressLines event](events.md#defineaddresslines) to customize the array.
+The customer view will show you important information about the customer. The details on this page are the same as those on the [customer info tab](#user-customer-info-tab).
 
 ## User Customer Info Tab
 
-A “Customer Info” tab will be available on every user’s account page in the control panel.
-
-This tab contains the following information:
+A “Customer Info” tab will be available on each user account page in the control panel containing the following information:
 
 - **Orders**: list of previous orders for the customer.
-- **Active Carts**: list of the customer’s active carts based on the [Commerce::\$activeCartDuration](configuration.md#activecartduration) setting.
-- **Inactive Carts**: list of the customer’s inactive carts based on the [Commerce::\$activeCartDuration](configuration.md#activecartduration) setting.
-- **Addresses**: list of the customer’s addresses, which can be edited and deleted.
+- **Active Carts**: list of the customer’s active carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
+- **Inactive Carts**: list of the customer’s inactive carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
+- **Addresses**: list of the customer’s [addresses](addresses.md), which can be edited and deleted.
 - **Subscriptions**: list of the customer's subscriptions.
 
-The visibility of this tab can be controlled with the [Commerce::\$showCustomerInfoTab](configuration.md#showcustomerinfotab) setting. The tab is shown by default.
+This tab is shown by default but you can control its visibility with the [Commerce::\$showCustomerInfoTab](configuration.md#showcustomerinfotab) setting.
 
 ## Customers and Users
 
@@ -80,11 +70,10 @@ A customer can register for an account before or after checkout using a normal [
 
 You can also offer the option to register a user account during the checkout process by setting the `registerUserOnOrderComplete` order property to `true`. (See the [Update Cart Customer](update-cart-customer.md#registering-a-guest-customer-as-a-user) page for examples.)
 
-If a customer chooses to register an account on order completion, a Craft user account is created and the customer will receive an 
-activation link via email. Commerce requires several conditions to be met before creating the account:
+If a customer chooses to register an account on order completion, a Craft user account is created and the customer is emailed an activation link. Commerce requires several conditions to be met before creating the account:
 
 - The store must be using Commerce Pro.
-- The customer must be a guest and not a logged in user.
+- The customer must be a guest and not a logged-in user.
 - The order cannot already be associated with a user account.
 - There cannot already be a user account with the email address used on the order.
 - The order must have an email address—which likely would have been caught earlier in the checkout process.

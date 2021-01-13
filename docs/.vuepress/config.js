@@ -80,10 +80,12 @@ module.exports = {
     codeLanguages: {
       twig: "Twig",
       php: "PHP",
+      graphql: "GraphQL",
       js: "JavaScript",
       json: "JSON",
       xml: "XML",
       treeview: "Folder",
+      graphql: "GraphQL",
       csv: "CSV"
     },
     feedback: {

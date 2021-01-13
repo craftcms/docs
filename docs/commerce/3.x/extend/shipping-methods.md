@@ -1,23 +1,21 @@
-# Shipping Methods
+# Shipping Methods <badge type="edition" vertical="middle" title="Custom shipping methods are only available in Commerce Pro">Pro</badge>
 
-::: warning
-Shipping methods are only available in the [Pro edition](editions.md) of Craft Commerce.
-:::
+Craft Commerce provides several ways of adding shipping costs to the cart:
 
-Several options are available for adding shipping costs to the cart:
-
-1. **Use the [included shipping method and shipping rules engine](shipping.md).**\
+1. **Using the [included shipping method and shipping rules engine](../shipping.md).**\
    Define your rules and prices based on individual product details and the cart as a whole. Costs may come from the overall order, weight, cost percentage, and per-item attributes. This engine is fairly powerful and can meet the needs of most small businesses with simple to moderately complex shipping needs.
 
-2. **Write an order adjuster class.**\
+2. **Writing an order [adjuster](adjusters.md) class.**\
    If you need to add dynamic shipping costs to the cart _without_ providing options to your customer, an order adjuster class offers flexibility beyond the native shipping engine UI.
 
-3. **Write a plugin or module that provides its own shipping method.**\
-   You can still utilize the shipping engine in option 1, but add functionality that presents more than one option to the customer, utilizes an external API, or uses your own custom pricing logic.
+3. **Writing a plugin or module that provides its own shipping method.**\
+   You can still utilize the shipping engine in option 1 while adding functionality that presents more than one option to the customer, utilizes an external API, or uses your own custom pricing logic.
 
 ::: tip
 Before writing your own shipping adjuster or shipping method (option 2 or 3), make sure you’re comfortable [creating a plugin or module for Craft CMS](https://craftcms.com/docs/3.x/extend/).
 :::
+
+Since the best code is code you don’t have to write, it’s best to see if the included shipping system can be used to address the shipping needs of your store. Adding or modifying adjusters means introducing a minimal amount of custom PHP, while adding your own shipping method offers the greatest flexibility when the first two options are too limited. The most common reason for introducing a custom shipping method is to provide an integration with an external API for getting rates.
 
 ## Creating a Shipping Adjuster
 
@@ -27,7 +25,7 @@ To learn more about adjusters and how you can create your own, see [Adjusters](a
 
 ## Creating a Shipping Method
 
-Use a plugin or module to register your shipping method. The shipping method provides a name and one or more rules to determine whether it can be used for an order.
+Shipping methods must be classes that meet the [shipping method interface](commerce3:craft\commerce\base\ShippingMethodInterface), generally providing a name, rules for applying the method to an order, and the logic that evaluates those rules to decide whether the shipping method should return _shipping method options_ for the customer based on an order.
 
 ### Shipping Method Interface
 
@@ -117,7 +115,7 @@ Returns a human-friendly description of the rates applied by this rule.
 
 Once you’ve created your shipping method class and its associated shipping rules classes, you need make sure Commerce can use it.
 
-Do this by using your plugin’s `init()` method to register an instance of your shipping method. Subscribe to the `EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS` event and add your shipping method to the event object’s `shippingMethods` array:
+Do this by using your plugin’s `init()` method to register an instance of your shipping method. Subscribe to the [`registerAvailableShippingMethods`](events.md#registeravailableshippingmethods) event and add your shipping method to the event object’s `shippingMethods` array:
 
 ```php
 use craft\commerce\events\RegisterAvailableShippingMethodsEvent;

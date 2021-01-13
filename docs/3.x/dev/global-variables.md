@@ -20,6 +20,7 @@ Variable | Description
 [POS_HEAD](#pos-head) | The [craft\web\View::POS_HEAD](craft3:craft\web\View#constants) constant.
 [POS_LOAD](#pos-load) | The [craft\web\View::POS_LOAD](craft3:craft\web\View#constants) constant.
 [POS_READY](#pos-ready) | The [craft\web\View::POS_READY](craft3:craft\web\View#constants) constant.
+[setPasswordUrl](#setpasswordurl) | The URL to [`setPasswordRequestPath`](config3:setPasswordRequestPath) for the current site.
 [siteName](#sitename) | The name of the current site.
 [siteUrl](#siteurl) | The base URL of the current site.
 [SORT_ASC](#sort-asc) | The `SORT_ASC` PHP constant.
@@ -137,9 +138,19 @@ Twig-facing copy of the [craft\web\View::POS_LOAD](craft3:craft\web\View#constan
 
 Twig-facing copy of the [craft\web\View::POS_READY](craft3:craft\web\View#constants) constant.
 
+## `setPasswordUrl`
+
+The URL to [`setPasswordRequestPath`](config3:setPasswordRequestPath) if it’s set. (This wraps the path in [`siteUrl`](#siteurl).)
+
+```twig
+{% if setPasswordUrl %}
+    <a href="{{ setPasswordUrl }}">Reset password</a>
+{% endif %}
+```
+
 ## `siteName`
 
-The name of your site, as defined in Settings → Sites.
+The name of your site, as defined in **Settings** → **Sites**.
 
 ```twig
 <h1>{{ siteName }}</h1>

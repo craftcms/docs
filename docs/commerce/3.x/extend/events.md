@@ -1,6 +1,6 @@
 # Events
 
-Craft Commerce provides a multitude of events for extending its functionality. Modules and plugins can register event listeners, typically in their `init()` methods, to modify Commerce’s behavior.
+Craft Commerce provides a multitude of events for extending its functionality. Modules and plugins can [register event listeners](https://craftcms.com/knowledge-base/custom-module-events), typically in their `init()` methods, to modify Commerce’s behavior.
 
 ## Variant Events
 
@@ -509,6 +509,26 @@ Event::on(
 
         // Choose a more appropriate order status than the control panel default
         // ...
+    }
+);
+```
+
+### `modifyCartInfo`
+
+The event that’s triggered when a cart is returned as an array for AJAX cart update requests.
+
+```php
+use craft\commerce\controllers\BaseFrontEndController;
+use craft\commerce\events\ModifyCartInfoEvent;
+use yii\base\Event;
+
+Event::on(
+    BaseFrontEndController::class,
+    BaseFrontEndController::EVENT_MODIFY_CART_INFO,
+    function(ModifyCartInfoEvent $e) {
+        $cartArray = $e->cartInfo;
+        $cartArray['anotherOne'] = 'Howdy';
+        $e->cartInfo = $cartArray;
     }
 );
 ```
@@ -1700,6 +1720,7 @@ Event handlers can customize PDF rendering by modifying several properties on th
 | `template`  | optional Twig template path (string) to be used for rendering                                                             |
 | `variables` | populated with the variables availble to the template used for rendering                                                  |
 | `option`    | optional string for the template that can be used to show different details based on context (example: `receipt`, `ajax`) |
+| `pdf`       | `null` by default, can optionally be used to supply your own PDF string rather than the one Commerce would generate |
 
 ```php
 use craft\commerce\events\PdfEvent;
@@ -1711,15 +1732,20 @@ Event::on(
     Pdf::EVENT_BEFORE_RENDER_PDF,
     function(PdfEvent $event) {
         // Modify `$event->order`, `$event->option`, `$event->template`,
-        // and `$event->variables` to customize what gets rendered into a PDF
+        // and `$event->variables` to customize what gets rendered into a PDF;
+        // or render your own PDF and set its string on `$event->pdf`
         // ...
     }
 );
 ```
 
+::: warning
+If you provide your own PDF string, Commerce will skip its own rendering and [`afterRenderPdf`](#afterrenderpdf) will not be triggered.
+:::
+
 ### `afterRenderPdf`
 
-The event that is triggered after an order’s PDF has been rendered.
+The event that is triggered after an order’s PDF has been rendered by Commerce.
 
 Event handlers can override Commerce’s PDF generation by setting the `pdf` property on the event to a custom-rendered PDF string. The event properties will be the same as those from `beforeRenderPdf`, but `pdf` will contain a rendered PDF string and is the only one for which setting a value will make any difference for the resulting PDF output.
 

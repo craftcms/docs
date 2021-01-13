@@ -2,39 +2,39 @@
 
 Instead of requiring content editors to upload images at a certain size, Craft lets you define “image transforms” for automatically manipulating images on demand. Transforms are _non-destructive_, meaning they have no effect on the original uploaded image.
 
-Transforms can be defined both in the control panel and directly from templates or GraphQL queries.
+Transforms can be defined in the control panel and directly from your templates or GraphQL queries.
 
 ## Defining Transforms from the Control Panel
 
-You can define transforms from the control panel by navigating to Settings → Assets → Image Transforms and clicking the “New Transform” button.
+You can define transforms from the control panel by navigating to **Settings** → **Assets** → **Image Transforms** and choosing **New Transform**.
 
 Each transform has the following settings:
 
-* **Name** – the transform’s user-facing name
-* **Handle** – the transform’s template-facing handle
-* **Mode** – the transform mode
-* **Width** – the transform’s resulting width
-* **Height** – the transform’s resulting height
-* **Quality** - the transform’s resulting image quality (0 to 100)
-* **Image Format** – the transform’s resulting image format
+- **Name** – the transform’s user-facing name
+- **Handle** – the transform’s template-facing handle
+- **Mode** – the transform mode
+- **Width** – the transform’s resulting width
+- **Height** – the transform’s resulting height
+- **Quality** - the transform’s resulting image quality (0 to 100)
+- **Image Format** – the transform’s resulting image format
 
 **Mode** can be set to the following values:
 
-* **Crop** – Crops the image to the specified width and height, scaling the image up if necessary. (This is the default mode.)
-* **Fit**  – Scales the image so that it is as big as possible with all dimensions fitting within the specified width and height.
-* **Stretch** – Stretches the image to the specified width and height.
+- **Crop** – Crops the image to the specified width and height, scaling the image up if necessary. (This is the default mode.)
+- **Fit** – Scales the image so that it is as big as possible with all dimensions fitting within the specified width and height.
+- **Stretch** – Stretches the image to the specified width and height.
 
-If **Mode** is set to “Crop”, an additional “Default Focal Point” setting will appear, where you can define which area of the image Craft should center the crop on, for images without a [focal point](assets.md#focal-points) set. Its options include:
+If **Mode** is set to “Crop”, an additional “Default Focal Point” setting will appear, where you can define which area of the image Craft should center the crop on, for images without a designated [focal point](assets.md#focal-points). Its options include:
 
-* Top-Left
-* Top-Center
-* Top-Right
-* Center-Left
-* Center-Center
-* Center-Right
-* Bottom-Left
-* Bottom-Center
-* Bottom-Right
+- Top-Left
+- Top-Center
+- Top-Right
+- Center-Left
+- Center-Center
+- Center-Right
+- Bottom-Left
+- Bottom-Center
+- Bottom-Right
 
 If you leave either **Width** or **Height** blank, that dimension will be set to whatever maintains the image’s aspect ratio. So for example, if you have an image that is 600 by 400 pixels, and you set a transform’s Width to 60, but leave Height blank, the resulting height will be 40.
 
@@ -42,11 +42,12 @@ If you leave **Quality** blank, Craft will use the quality set by your <config3:
 
 **Image Format** can be set to the following values:
 
-* jpg
-* png
-* gif
+- jpg
+- png
+- gif
+- webp
 
-If you leave **Image Format** blank, Craft will use the original image’s format if it’s web-safe (.jpg, .png, or .gif); otherwise it will try to figure out the best-suited image format for the job. If it can’t determine that (probably because ImageMagik isn’t installed), it will just go with .jpg.
+If you leave **Image Format** blank, Craft will use the original image’s format if it’s [web-safe](craft3:craft\helpers\Image::webSafeFormats()); otherwise it will try to figure out the best-suited image format for the job. If it can’t determine that (probably because ImageMagick isn’t installed), it will just go with .jpg.
 
 ### Applying CP-defined Transforms to Images
 
@@ -90,11 +91,11 @@ Note how in that example there are no quotes around “`thumb`”, like there we
 
 All of the same settings available to CP-defined transforms are also available to template-defined transforms.
 
-* The `mode` property can be set to either `'crop'`, `'fit'`, or `'stretch'`.
-* If `mode` is set to `'crop'`, you can pass a `position` property, set to either `'top-left'`, `'top-center'`, `'top-right'`, `'center-left'`, `'center-center'`, `'center-right'`, `'bottom-left'`, `'bottom-center'`, or `'bottom-right'`.
-* `width` and `height` can be set to integers or omitted.
-* `quality` can be set to a number between 0 and 100, or omitted.
-* `format` can be set to `'jpg'`, `'gif'`, `'png'`, or omitted.
+- The `mode` property can be set to either `'crop'`, `'fit'`, or `'stretch'`.
+- If `mode` is set to `'crop'`, you can pass a `position` property, set to either `'top-left'`, `'top-center'`, `'top-right'`, `'center-left'`, `'center-center'`, `'center-right'`, `'bottom-left'`, `'bottom-center'`, or `'bottom-right'`.
+- `width` and `height` can be set to integers or omitted.
+- `quality` can be set to a number between 0 and 100, or omitted.
+- `format` can be set to `'jpg'`, `'gif'`, `'png'`, `'webp'`, or omitted.
 
 ### Overriding Named Transforms
 

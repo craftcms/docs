@@ -88,7 +88,7 @@ You can choose whatever URL format you want here. If you’d prefer that each lo
 
 Each of your localized Site URLs should point to folders on your server with their own index.php and .htaccess files (copied from the `public/` folder in Craft’s zip).
 
-Here are some examples of what that might look like. Note that your actual webroot will not necessarily be called `public_html` – contact your web host if you are unsure what it is.
+Here are some examples of what that might look like. Note that your actual web root will not necessarily be called `public_html` – contact your web host if you are unsure what it is.
 
 * **Example 1**: `en/` and `de/` subfolders on the same domain:
 
