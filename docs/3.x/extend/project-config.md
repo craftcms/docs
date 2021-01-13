@@ -231,7 +231,7 @@ To avoid this, always check your plugin’s schema version _in the YAML file_ be
 ```php
 public function safeUp()
 {
-    // Don't make the same config changes twice
+    // Don’t make the same config changes twice
     $schemaVersion = Craft::$app->projectConfig
         ->get('plugins.<plugin-handle>.schemaVersion', true);
 
@@ -250,8 +250,12 @@ use craft\events\RebuildConfigEvent;
 use craft\services\ProjectConfig;
 use yii\base\Event;
 
-Event::on(ProjectConfig::class, ProjectConfig::EVENT_REBUILD, function(RebuildConfigEvent $e) {
-    // Add plugin's project config data...
-   $e->config['myPlugin']['key'] = $value;
-});
+Event::on(
+    ProjectConfig::class,
+    ProjectConfig::EVENT_REBUILD,
+    function(RebuildConfigEvent $e) {
+        // Add plugin’s project config data...
+        $e->config['myPlugin']['key'] = $value;
+    }
+);
 ```
