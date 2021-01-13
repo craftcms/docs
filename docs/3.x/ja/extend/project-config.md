@@ -222,8 +222,14 @@ One way to keep project config in sync is to version control `project.yaml` and 
 To avoid this, always check your plugin’s schema version _in `project.yaml`_ before making project config changes. (You do that by passing `true` as the second argument when calling [ProjectConfig::get()](craft3:craft\services\ProjectConfig::get()).)
 
 ```php
-::: warning
-Craft 3.5 added changes to project config, see <a href="https://craftcms.com/knowledge-base/upgrading-to-craft-3-5#project-config-workflow">craftcms.com/knowledge-base/upgrading-to-craft-3-5</a>.
+public function safeUp()
+{
+    // Don’t make the same config changes twice
+    $schemaVersion = Craft::$app->projectConfig
+        ->get('plugins.<plugin-handle>.schemaVersion', true);
+
+    if (version_compare($schemaVersion, '<NewSchemaVersion>', '<')) {
+        // Make the config changes here...
 
 :::
 ```
@@ -237,8 +243,12 @@ use craft\events\RebuildConfigEvent;
 use craft\services\ProjectConfig;
 use yii\base\Event;
 
-Event::on(ProjectConfig::class, ProjectConfig::EVENT_REBUILD, function(RebuildConfigEvent $e) {
-    // Add plugin's project config data...
-   $e->config['myPlugin']['key'] = $value;
-});
+Event::on(
+    ProjectConfig::class,
+    ProjectConfig::EVENT_REBUILD,
+    function(RebuildConfigEvent $e) {
+        // Add plugin’s project config data...
+        $e->config['myPlugin']['key'] = $value;
+    }
+);
 ```
