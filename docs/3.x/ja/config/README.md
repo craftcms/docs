@@ -68,7 +68,7 @@ Craft のいくつかの設定やファンクションでは、基本ファイ�
 | `@web`               | リクエストのために読み込まれた `index.php` ファイルを含むフォルダの URL                                                                |
 | `@webroot`           | リクエストのために読み込まれた `index.php` ファイルを含むフォルダのパス                                                                  |
 
-コンフィグ設定 <config3:aliases> config setting if needed. It’s recommended to override the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+コンフィグ設定 <config3:aliases> config setting if needed. We recommend overriding the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
 
 ```php
 'aliases' => [
