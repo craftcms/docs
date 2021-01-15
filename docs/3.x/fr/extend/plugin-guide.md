@@ -40,7 +40,6 @@ Create a `composer.json` file at the root of your plugin directory, and use this
 {
   "name": "package/name",
   "description": "Your plugin’s package description",
-  "version": "1.0.0",
   "type": "craft-plugin",
   "keywords": ["some", "keywords", "here"],
   "license": "MIT",
@@ -85,10 +84,6 @@ Replace:
 - `MIT` with `proprietary` if you plan to use [Craft License](https://craftcms.github.io/license/) (see [Choose a License](plugin-store.md#choose-a-license) on the “Publishing to the Plugin Store” page).
 
 If you’d prefer to release your plugin with the [Craft license](https://craftcms.github.io/license/) rather than [MIT](https://opensource.org/licenses/MIT), change the `license` value to `"proprietary"`.
-
-::: tip
-While not strictly required by Composer, we recommend you explicitly set the `version` in your `composer.json` because it makes a couple things easier on you when developing the plugin. Don’t forget to keep it updated though!
-:::
 
 In addition to `name` and `handle` (which are both required), there are a few other things you can include in that `extra` object:
 
