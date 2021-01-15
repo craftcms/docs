@@ -7,7 +7,6 @@
     "@storybook/addons": "^5.3.19",
     "@storybook/vue": "^5.3.19",
     "@vuepress/core": "^1.5.3",
-    "@vuepress/plugin-active-header-links": "^1.5.3",
     "@vuepress/plugin-google-analytics": "^1.5.3",
     "autoprefixer": "^9.8.4",
     "babel-loader": "^8.1.0",
