@@ -562,7 +562,7 @@ If this isn’t defined, Craft will treat the request as a control panel request
 
 ### `CRAFT_ENVIRONMENT`
 
-The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays. (`$_SERVER['SERVER_NAME']` will be used by default.)
+The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays. (The [craftcms/craft](https://github.com/craftcms/craft) starter project sets this to the value of an `ENVIRONMENT` environment variable, or falls back to `production` if it’s not defined.)
 
 ```php
 // Set the environment from the ENVIRONMENT env var, or default to 'production'
