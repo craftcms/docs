@@ -40,7 +40,6 @@
 {
   "name": "package/name",
   "description": "Your plugin’s package description",
-  "version": "1.0.0",
   "type": "craft-plugin",
   "keywords": ["some", "keywords", "here"],
   "license": "MIT",
@@ -65,9 +64,8 @@
     }
   },
   "extra": {
-    "handle": "plugin-handle",
     "name": "Plugin Name",
-    "documentationUrl": "https://github.com/developer/repo/blob/master/README.md"
+    "handle": "my-plugin-handle"
   }
 }
 ```
@@ -87,10 +85,6 @@
 
 [MIT](https://opensource.org/licenses/MIT) よりむしろ [Craft license](https://craftcms.github.io/license/) でプラグインをリリースしたい場合、`license` 値を `"proprietary"` に変更してください。
 
-::: tip
-Composer が厳密に要求しているわけではありませんが、プラグインを開発する際にいくつかのことが簡単に行えるよう `composer.json` へ明示的に`version` を設定することをお勧めします。 そして、アップデートし続けることを忘れないでください！
-:::
-
 In addition to `name` and `handle` (which are both required), there are a few other things you can include in that `extra` object:
 
 - `class` – [プラグインクラス](#the-plugin-class)名。 設定されていない場合、インストーラーはそれぞれの `autoload` パスのルートで `Plugin.php` ファイルを探します。
@@ -100,16 +94,15 @@ In addition to `name` and `handle` (which are both required), there are a few ot
 - `developerEmail` – サポートのメールアドレス。 設定されていない場合、`support.email` プロパティが使用されます。
 - `documentationUrl` – プラグインのドキュメントの URL。 設定されていない場合、`support.docs` プロパティが使用されます。
 
-&lt;?php namespace ns\prefix; class Plugin extends \craft\base\Plugin
-{ public function init()
-    { parent::init(); // Custom initialization code goes here...
+::: warning
+If you’re updating a Craft 2 plugin, make sure to remove the `composer/installers` dependency if it has one.
 :::
 
 ## プラグインクラス
 
-`src/Plugin.php` ファイルは、システム向けのプラグインのエントリポイントです。 すべてのリクエスト開始時に、インスタンスが作られます。 `init()` メソッドはイベントリスナーやそれ自体の初期化を必要とする他のステップを登録するのに最適な場所です。
+The `src/Plugin.php` file is your plugin’s entry point for the system. It will get instantiated at the beginning of every request. Its `init()` method is the best place to register event listeners, and any other steps it needs to take to initialize itself.
 
-このテンプレートを `Plugin.php` ファイルの出発点として使用してください。
+Use this template as a starting point for your `Plugin.php` file:
 
 ```php
 <?php
@@ -128,13 +121,13 @@ class Plugin extends \craft\base\Plugin
 
 ## Craft プロジェクトへのプラグインの読み込み
 
-Craft にプラグインを表示するには、Craft プロジェクトの Composer 依存としてインストールする必要があります。 そのためには複数の方法があります。
+To get Craft to see your plugin, you will need to install it as a Composer dependency of your Craft project. There are multiple ways to do that:
 
 ### Path Repository
 
 During development, the easiest way to work on your plugin is with a [path repository][path], which will tell Composer to symlink your plugin into the `vendor/` folder right alongside other dependencies.
 
-開発中にプラグインを動作させる最も簡単な方法は、他の依存関係と同様に `vendor/` フォルダへシンボリックリンクするよう Composer に伝える [path repository](https://getcomposer.org/doc/05-repositories.md#path) を利用することです。
+To set it up, open your Craft project’s `composer.json` file and make the following changes:
 
 - [minimum-stability](https://getcomposer.org/doc/04-schema.md#minimum-stability) を `"dev"` に設定します。
 - [prefer-stable](https://getcomposer.org/doc/04-schema.md#prefer-stable) を `true` に設定します。
@@ -154,10 +147,10 @@ During development, the easiest way to work on your plugin is with a [path repos
 ```
 
 ::: tip
-`url` 値にプラグインのソースディレクトリを絶対パスまたは相対パスで設定します。 （サンプルの `../my-plugin` は、プロジェクトフォルダーと並んでプラグインのフォルダが存在することを前提としています。 :::
+Set the `url` value to the absolute or relative path to your plugin’s source directory. (The `../my-plugin` example value assumes that the plugin lives in a folder alongside the project’s folder.)
 :::
 
-ターミナル上で Craft プロジェクトへ移動し、Composer にプラグインの追加を伝えてください。 （`composer.json` ファイルでプラグインに付けたパッケージ名と同じものを使用してください。
+In your terminal, go to your Craft project and tell Composer to require your plugin. (Use the same package name you gave your plugin in its `composer.json` file.)
 
 ```bash
 # go to the project directory
@@ -167,14 +160,14 @@ cd /path/to/my-project.test
 composer require package/name
 ```
 
-Composer のインストールログは、シンボリックリンク経由でパッケージがインストールされたことを表示するでしょう。
+Composer’s installation log should indicate that the package was installed via a symlink:
 
 ```
   - Installing package/name (X.Y.Z): Symlinking from ../my-plugin
 ```
 
 ::: warning
-`path` Composer リポジトリの難点の1つは、`composer update` を実行した際に Composer が `path` ベースの依存関係を無視することです。 そのため、プラグインの依存要件やプラグインの情報のような `composer.json` の内容に変更を加える際は、それらの変化が効力を発揮するようプロジェクト内のプラグインを完全に削除してから再要求する必要があります。
+One caveat of `path` Composer repositories is that Composer may ignore `path`-based dependencies when you run `composer update`. So any time you change anything in `composer.json`, such as your plugin’s dependency requirements or its plugin information, you might need to completely remove and re-require your plugin in your project for those changes to take effect.
 
 ```bash
 # go to the project directory
@@ -191,7 +184,7 @@ composer require package/name
 
 ### Packagist
 
-プラグインを一般公開する準備ができたら、新しい Composer パッケージを [Packagist](https://packagist.org/) に登録してください。 そうすれば、Composer の `require` コマンドにパッケージ名を渡すだけで、他のパッケージと同様にインストールできます。
+If you’re ready to publicly release your plugin, register it as a new Composer package on [Packagist](https://packagist.org/). Then you can install it like any other package, by just passing its package name to Composer’s `require` command.
 
 ```bash
 # go to the project directory
@@ -203,12 +196,12 @@ composer require package/name
 
 ## プラグインアイコン
 
-プラグインは「設定 > プラグイン」ページに表示されるアイコンを提供できます。
+Plugins can provide an icon, which will be visible on the Settings → Plugins page.
 
-![The Settings → Plugins page in Craft’s Control Panel.](../images/plugin-index.png)
+![The Settings → Plugins page in Craft’s control panel.](../images/plugin-index.png)
 
-プラグインアイコンは、プラグインのソースディレクトリ（例：`src/`）のルートに `icon.svg` として保存された、正方形の SVG ファイルでなければいけません。
+Plugin icons must be square SVG files, saved as `icon.svg` at the root of your plugin’s source directory (e.g `src/`).
 
-プラグインが [コントロールパネルのセクション](cp-section.md) を持つ場合は、プラグインのソースディレクトリのルートに `icon-mask.svg` ファイルを保存することによって、グローバルナビゲーション項目にカスタムアイコンを付けることもできます。 このアイコンにはストロークを含めることができず、常に（アルファ透明度に関して）ソリッドカラーで表示されることに注意してください。
+If your plugin has a [control panel section](cp-section.md), you can also give its global nav item a custom icon by saving an `icon-mask.svg` file in the root of your plugin’s source directory. Note that this icon cannot contain strokes, and will always be displayed in a solid color (respecting alpha transparency).
 
 [path]: https://getcomposer.org/doc/05-repositories.md#path
