@@ -674,6 +674,12 @@ The `url()` function has the following arguments:
 - **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
 - **`mustShowScriptName`** – If this is set to `true`, then the URL returned will include “index.php”, disregarding the <config3:omitScriptNameInUrls> config setting. (This can be useful if the URL will be used by POST requests over Ajax, where the URL will not be shown in the browser’s address bar, and you want to avoid a possible collision with your site’s .htaccess file redirect.)
 
+Using the `url()` function has advantages over hard-coding URLs in your templates:
+
+- Generated URLs will encourage consistency by respecting settings like [addTrailingSlashesToUrls](config3:addTrailingSlashesToUrls).
+- Your site will be more portable, making it easier to do something like move to a new domain or subdomain.
+- If the page has a `token` URL parameter, that token will automatically get appended to generated URLs to maintain preview context navigating around the site.
+
 ::: tip
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
 ```twig
