@@ -4,24 +4,24 @@ The following [controller actions](https://www.yiiframework.com/doc/guide/2.0/en
 
 Action | Description
 ------ | -----------
-<badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> [cart/get-cart](#get-post-cart-get-cart) | Returns the current cart as JSON.
+<badge vertical="baseline" type="verb">GET</badge> [cart/get-cart](#get-cart-get-cart) | Returns the current cart as JSON.
 <badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | Updates the cart by adding purchasables, updating line items, or updating various cart attributes.
-<badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> [cart/load-cart](#get-post-cart-load-cart) | Loads a given cart into the current session.
+<badge vertical="baseline" type="verb">GET</badge> [cart/load-cart](#get-cart-load-cart) | Loads a given cart into the current session.
 <badge vertical="baseline" type="verb">POST</badge> [customer-addresses/save](#post-customer-addresses-save) | Creates or updates a customer’s address.
 <badge vertical="baseline" type="verb">POST</badge> [customer-addresses/delete](#post-customer-addresses-delete) | Deletes a customer’s address.
-<badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> [customer-addresses/get-addresses](#get-post-customer-addresses-get-addresses) | Returns a customer’s addresses as JSON.
-<badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> [customer-orders/get-orders](#get-post-customer-orders-get-orders) | Returns a customer’s orders as JSON.
-<badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> [downloads/pdf](#get-post-downloads-pdf) | Returns an order PDF as a file.
+<badge vertical="baseline" type="verb">GET</badge> [customer-addresses/get-addresses](#get-customer-addresses-get-addresses) | Returns a customer’s addresses as JSON.
+<badge vertical="baseline" type="verb">GET</badge> [customer-orders/get-orders](#get-customer-orders-get-orders) | Returns a customer’s orders as JSON.
+<badge vertical="baseline" type="verb">GET</badge> [downloads/pdf](#get-downloads-pdf) | Returns an order PDF as a file.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/add](#post-payment-sources-add) | Creates a new payment source.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/delete](#post-payment-sources-delete) | Deletes a payment source.
 <badge vertical="baseline" type="verb">POST</badge> [payments/pay](#post-payments-pay) | Makes a payment on an order.
-<badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> [payments/complete-payment](#get-post-payments-complete-payment) | Processes customer’s return from an off-site payment.
+<badge vertical="baseline" type="verb">GET</badge> [payments/complete-payment](#get-payments-complete-payment) | Processes customer’s return from an off-site payment.
 
 ::: tip
 To invoke a controller action, send a `POST` request to Craft, with an `action` param set to the desired action path, either in the request body or query string.
 :::
 
-## <badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> `cart/get-cart`
+## <badge vertical="baseline" type="verb">GET</badge> `cart/get-cart`
 
 Returns the [current cart](../orders-carts.md#fetching-a-cart) as JSON. A new cart will be generated in the session if one doesn’t already exist.
 
@@ -81,7 +81,7 @@ Success | Output
 
 </span>
 
-## <badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> `cart/load-cart`
+## <badge vertical="baseline" type="verb">GET</badge> `cart/load-cart`
 
 Loads a given cart into the current session.
 
@@ -200,7 +200,7 @@ Success | Output
 
 </span>
 
-## `customer-addresses/get-addresses`
+## <badge vertical="baseline" type="verb">GET</badge> `customer-addresses/get-addresses`
 
 Returns a customer’s addresses as JSON.
 
@@ -210,7 +210,7 @@ The request must include `Accept: application/json` in its headers.
 
 Returns a JSON object with a `success` key and `true` value, and an `addresses` key with an array of the customer’s addresses.
 
-## `customer-orders/get-orders`
+## <badge vertical="baseline" type="verb">GET</badge> `customer-orders/get-orders`
 
 Returns a customer’s orders as JSON.
 
@@ -220,7 +220,7 @@ The request must include `Accept: application/json` in its headers.
 
 Returns a JSON object with a `success` key and `true` value, and an `orders` key with an array of the customer’s orders.
 
-## `downloads/pdf`
+## <badge vertical="baseline" type="verb">GET</badge> `downloads/pdf`
 
 Returns an order PDF as a file.
 
@@ -364,7 +364,7 @@ Success | Output
 
 </span>
 
-## <badge vertical="baseline" type="verb">GET</badge> <badge vertical="baseline" type="verb">POST</badge> `payments/complete-payment`
+## <badge vertical="baseline" type="verb">GET</badge> `payments/complete-payment`
 
 Processes customer’s return from an off-site payment.
 
