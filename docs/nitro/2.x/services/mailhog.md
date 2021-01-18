@@ -28,6 +28,8 @@ Removing mailhog is as simple as enabling the service. Simply run `nitro disable
 
 By default, Mailhog uses port 1025 for SMTP and 8025 for the Web UI. These ports may collide with another service on your machine so Nitro includes an easy way to overide the ports.
 
+> Change these ports only affects the ports on the _host_ machine (aka 127.0.0.1:port) and does not change the internal port used to connect to Mailhog from a Craft installation/container.
+
 You can set the following environment variables in your terminal shell to override the defaults.
 
 > Make sure the Mailhog service is not enabled before overriding the variables.
