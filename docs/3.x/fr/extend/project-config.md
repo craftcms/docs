@@ -241,6 +241,10 @@ public function safeUp()
 }
 ```
 
+::: warning
+Craft never forces Project Config changes to be applied. Code defensively and make sure your plugin works normally _without_ relying on project config YAML changes.
+:::
+
 ## Rebuilding Project Config Data
 
 If your plugin is storing data in both the project config and elsewhere in the database, you should listen to <craft3:craft\services\ProjectConfig::EVENT_REBUILD> (added in Craft 3.1.20) to aid Craft in rebuilding the project config based on database-stored data, when the `php craft project-config/rebuild` command is run.
