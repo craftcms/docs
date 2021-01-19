@@ -125,7 +125,7 @@ This will treat all project config values as added or updated, resulting in a lo
 
 ## Manual YAML File Generation
 
-You can configure Craft to stop writing out the project config YAML files to `config/project/` when they are missing or when changes are made, by adding the following to your `config/app.php` file:
+If you want control over _when_ the project config YAML files are updated, or you want to opt out of saving them altogether, you can configure Craft to stop writing the YAML files automatically as changes are made. To do that, add the following to your `config/app.php` file:
 
 ```php
 return [
@@ -141,9 +141,7 @@ return [
 ];
 ```
 
-If you don’t intend to use Project Config, you _should_ disable `writeYamlAutomatically` to avoid pushing project config changes into production that could impact migrations.
-
-You will still be able to manually trigger YAML file generation from the Project Config utility, or by running the following terminal command:
+You can manually trigger YAML file generation from the Project Config utility, or by running the following terminal command:
 
 ```bash
 php craft project-config/write
