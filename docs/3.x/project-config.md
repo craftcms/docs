@@ -141,6 +141,8 @@ return [
 ];
 ```
 
+If you don’t intend to use Project Config, you _should_ disable `writeYamlAutomatically` to avoid pushing project config changes into production that could impact migrations.
+
 You will still be able to manually trigger YAML file generation from the Project Config utility, or by running the following terminal command:
 
 ```bash
