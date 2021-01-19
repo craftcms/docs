@@ -164,7 +164,7 @@ Allowed types
 :   `mixed`
 
 Default value
-:   `86400`
+:   `86400` (1 day)
 
 Defined by
 :   [GeneralConfig::$cacheDuration](craft3:craft\config\GeneralConfig::$cacheDuration)
@@ -341,7 +341,7 @@ Allowed types
 :   [integer](http://php.net/language.types.integer)
 
 Default value
-:   `1`
+:   `1` (Monday)
 
 Defined by
 :   [GeneralConfig::$defaultWeekStartDay](craft3:craft\config\GeneralConfig::$defaultWeekStartDay)
@@ -1669,7 +1669,7 @@ Allowed types
 :   `mixed`
 
 Default value
-:   `31536000`
+:   `31536000` (1 year)
 
 Defined by
 :   [GeneralConfig::$rememberUsernameDuration](craft3:craft\config\GeneralConfig::$rememberUsernameDuration)
@@ -1690,7 +1690,7 @@ Allowed types
 :   `mixed`
 
 Default value
-:   `1209600`
+:   `1209600` (14 days)
 
 Defined by
 :   [GeneralConfig::$rememberedUserSessionDuration](craft3:craft\config\GeneralConfig::$rememberedUserSessionDuration)
@@ -1745,7 +1745,7 @@ Allowed types
 :   `mixed`
 
 Default value
-:   `3600`
+:   `3600` (1 hour)
 
 Defined by
 :   [GeneralConfig::$userSessionDuration](craft3:craft\config\GeneralConfig::$userSessionDuration)
@@ -1793,7 +1793,7 @@ Allowed types
 :   `mixed`
 
 Default value
-:   `300`
+:   `300` (5 minutes)
 
 Defined by
 :   [GeneralConfig::$cooldownDuration](craft3:craft\config\GeneralConfig::$cooldownDuration)
@@ -1831,7 +1831,7 @@ Allowed types
 :   `mixed`
 
 Default value
-:   `86400`
+:   `86400` (1 day)
 
 Defined by
 :   [GeneralConfig::$defaultTokenDuration](craft3:craft\config\GeneralConfig::$defaultTokenDuration)
@@ -1906,7 +1906,7 @@ Allowed types
 :   `mixed`
 
 Default value
-:   `300`
+:   `300` (5 minutes)
 
 Defined by
 :   [GeneralConfig::$elevatedSessionDuration](craft3:craft\config\GeneralConfig::$elevatedSessionDuration)
@@ -1944,7 +1944,7 @@ Allowed types
 :   `mixed`
 
 Default value
-:   `3600`
+:   `3600` (5 minutes)
 
 Defined by
 :   [GeneralConfig::$invalidLoginWindowDuration](craft3:craft\config\GeneralConfig::$invalidLoginWindowDuration)
@@ -2139,7 +2139,7 @@ Allowed types
 :   `mixed`
 
 Default value
-:   `86400`
+:   `86400` (1 day)
 
 Defined by
 :   [GeneralConfig::$verificationCodeDuration](craft3:craft\config\GeneralConfig::$verificationCodeDuration)
@@ -2160,7 +2160,7 @@ Allowed types
 :   [string](http://php.net/language.types.string)[]
 
 Default value
-:   `['7z', 'aiff', 'asf', 'avi', 'bmp', 'csv', 'doc', 'docx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'htm', 'html', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'm2t', 'mid', 'mov', 'mp3', 'mp4', 'm4a', 'm4v', 'mpc', 'mpeg', 'mpg', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rtf', 'sdc', 'sitd', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tgz', 'tif', 'tiff', 'txt', 'vob', 'vsd', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'zip']`
+:   `['7z', 'aiff', 'asf', 'avi', 'bmp', 'csv', 'doc', 'docx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'htm', 'html', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'm2t', 'm4a', 'm4v', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rtf', 'sdc', 'sitd', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tgz', 'tif', 'tiff', 'txt', 'vob', 'vsd', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'zip']`
 
 Defined by
 :   [GeneralConfig::$allowedFileExtensions](craft3:craft\config\GeneralConfig::$allowedFileExtensions)
@@ -2253,7 +2253,7 @@ Allowed types
 :   [integer](http://php.net/language.types.integer), [string](http://php.net/language.types.string)
 
 Default value
-:   `16777216`
+:   `16777216` (16MB)
 
 Defined by
 :   [GeneralConfig::$maxUploadFileSize](craft3:craft\config\GeneralConfig::$maxUploadFileSize)
@@ -2635,7 +2635,7 @@ Allowed types
 :   `mixed`
 
 Default value
-:   `7776000`
+:   `7776000` (90 days)
 
 Defined by
 :   [GeneralConfig::$purgeStaleUserSessionDuration](craft3:craft\config\GeneralConfig::$purgeStaleUserSessionDuration)
@@ -2659,7 +2659,7 @@ Allowed types
 :   `mixed`
 
 Default value
-:   `2592000`
+:   `2592000` (30 days)
 
 Defined by
 :   [GeneralConfig::$purgeUnsavedDraftsDuration](craft3:craft\config\GeneralConfig::$purgeUnsavedDraftsDuration)
@@ -2683,7 +2683,7 @@ Allowed types
 :   `mixed`
 
 Default value
-:   `2592000`
+:   `2592000` (30 days)
 
 Defined by
 :   [GeneralConfig::$softDeleteDuration](craft3:craft\config\GeneralConfig::$softDeleteDuration)
