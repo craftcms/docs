@@ -99,7 +99,7 @@ If your plugin’s name should be translatable, wrap it in `Craft::t()` (see [In
 
 Returns the plugin’s releases JSON feed URL.
 
- If the plugin wants to have its updates included in the Updates page, it should provide a JSON feed in the following format:
+If the plugin wants to have its updates included in the Updates page, it should provide a JSON feed in the following format:
 
 ```javascript
 [

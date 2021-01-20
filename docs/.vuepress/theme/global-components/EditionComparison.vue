@@ -33,12 +33,13 @@
 </template>
 
 <script>
+import Badge from "./Badge";
 import CheckMark from "./CheckMark";
 import InfoHud from "./InfoHud";
 import { Fragment } from "vue-fragment";
 
 export default {
-  components: { Fragment, CheckMark, InfoHud },
+  components: { Fragment, CheckMark, InfoHud, Badge },
   data() {
     return {
       features: [
