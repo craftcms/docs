@@ -1,4 +1,3 @@
-import Vue from "vue";
 import EditionComparison from "../global-components/EditionComparison";
 import ContentContainer from "./ContentContainer";
 
