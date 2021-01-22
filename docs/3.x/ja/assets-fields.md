@@ -50,6 +50,14 @@ If you want to include the entry’s ID or UID in a dynamic subfolder path, use 
 So if your Matrix field is attached to an entry, and you want to output the entry ID in your dynamic subfolder path, use `owner.id` rather than `id`.
 :::
 
+::: warning
+If the rendered subfolder path ends up blank, or contains a leading or trailing forward slash (e.g. `foo/`) or an empty segment (e.g. `foo//bar`), Craft will interpret that as a sign that a variable in the subfolder template couldn’t be resolved successfully, and the path will be considered invalid. If you are intentionally outputting a blank segment, output `:ignore:`. For example, if you want to output the first selected category, or nothing if there isn’t one, do this:
+
+```twig
+{{ categoriesFieldHandle.one().slug ?? ':ignore:' }}
+```
+:::
+
 ## フィールド
 
 Assets fields list all the currently-related assets, with a button to select new ones.
@@ -62,7 +70,7 @@ You can also upload assets by dragging files directly onto the assets field or m
 
 ### インラインのアセット編集
 
-アセットフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、アセットフィールドのデータに基づいた結果をフィルタできます。
+When you double-click on a related asset, a HUD will appear where you can edit the asset’s title and custom fields, and launch the Image Editor (if it’s an image).
 
 ::: tip
 You can choose which custom fields should be available for your assets from **Settings** → **Assets** → **[Volume Name]** → **Field Layout**.
@@ -72,9 +80,9 @@ You can choose which custom fields should be available for your assets from **Se
 
 ### アセットフィールドによるエレメントの照会
 
-テンプレート内でアセットフィールドのエレメントを取得する場合、アセットフィールドのハンドルを利用して関連付けられたアセットにアクセスできます。
+When [querying for elements](element-queries.md) that have an Assets field, you can filter the results based on the Assets field data using a query param named after your field’s handle.
 
-これは、所定のフィールドで関連付けられたすべてのアセットを出力するよう準備された[アセットクエリ](assets.md#querying-assets)を提供します。
+Possible values include:
 
 | 値                                                              | 取得するエレメント                                               |
 | -------------------------------------------------------------- | ------------------------------------------------------- |
