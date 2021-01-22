@@ -2,6 +2,9 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-01-22
+- Added a warning about outputting empty segments in Assets fields’ dynamic subfolder templates.
+
 ## 2021-01-13
 ### Changed
 - Improved description of the customer-user relationship on the Customers page.
