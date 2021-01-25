@@ -18,3 +18,7 @@ Nitro installs the following on every machine:
 
 - macOS, Linux, or Windows 10 Pro with Hyper-V enabled
 - [Multipass](https://multipass.run/) 1.5.0+
+
+::: warning
+Nitro does not yet support M1 Macs.
+:::
