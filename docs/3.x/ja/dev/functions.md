@@ -182,7 +182,7 @@ It can also be used instead of the [`merge`](https://twig.symfony.com/doc/2.x/fi
 {% do configure(myObject, { one: 'Overridden', two: 'New' }) %}
 ```
 
-It could technically even be used to set a model or element’s attributes, even though that’s not a great idea:
+It could technically even be used to set a model or element’s attributes, even though that’s not a great idea since templates generally present content rather than modify it:
 
 ```twig
 {% do configure(entry, { title: 'New Title' }) %}
