@@ -34,6 +34,7 @@ Tag | Description
 [requirePermission](#requirepermission) | Requires that a user is logged-in with a given permission.
 [set](https://twig.symfony.com/doc/2.x/tags/set.html) | Sets a variable.
 [switch](#switch) | Switch the template output based on a give value.
+[tag](#tag) | Renders an HTML tag on the page.
 [use](https://twig.symfony.com/doc/2.x/tags/use.html) | Inherits from another template horizontally.
 [verbatim](https://twig.symfony.com/doc/2.x/tags/verbatim.html) | Disables parsing of nested Twig code.
 [with](https://twig.symfony.com/doc/2.x/tags/with.html) | Creates a nested template scope.
@@ -797,4 +798,54 @@ If you’re using the `{% switch %}` tag inside of a `{% for %}` loop, you won�
 
     {% endswitch %}
 {% endfor %}
+```
+
+## `tag`
+
+The `{% tag %}` tag can be used to render an HTML element in a template.
+
+Not to be confused with the [tag](functions.md#tag) Twig _function_, the `{% tag %}` tag could be more convenient with frequent use or complex nested markup. `{% tag %}` tags may also be nested.
+
+```twig
+{% tag 'div' with {
+    class: 'foo',
+} %}
+    {% tag 'p' -%}
+        Tim’s tags have tags in them.
+    {%- endtag %}
+{% endtag %}
+```
+
+Output:
+
+```html
+<div class="foo">
+    <p>Tim’s tags have tags in them.</p>
+</div>
+```
+
+### Parameters
+
+The `{% tag %}` tag has the following parameters:
+
+#### Name
+
+The first thing you must pass to the `{% tag %}` tag is the name of the node that should be rendered.
+
+#### `with`
+
+Next, you can optionally type “` with `” followed by an object with attributes for the node.
+
+These will be rendered using <yii2:yii\helpers\BaseHtml::renderTagAttributes()> just like the [tag](functions.md#tag) function, except for the `html` and `text` keys because inner content will go between `{% tag %}` and `{% endtag %}` instead.
+
+If an attribute is set to `true`, it will be added without a value:
+
+```twig
+{% tag 'textarea' with {
+    name: 'message',
+    required: true
+} -%}
+    Please foo some bar.
+{%- endtag %}
+{# Output: <textarea name="message" required>Please foo some bar.</textarea> #}
 ```
