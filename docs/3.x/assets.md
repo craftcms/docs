@@ -70,7 +70,7 @@ You can delete a subfolder (and all assets within it) by right-clicking on the s
 
 ## Updating Asset Indexes
 
-If any files are ever added, modified, or deleted outside of Craft (such as over FTP), you will need to tell Craft to update its indexes for the volume. You can do that from Utilities → Asset Indexes.
+If any files are ever added, modified, or deleted outside of Craft (such as over FTP), you’ll need to tell Craft to update its indexes for the volume. You can do that from **Utilities** → **Asset Indexes**.
 
 You will have the option to cache remote images. If you don’t have any remote volumes (Amazon S3, etc.), you can safely ignore it. Enabling the setting will cause the indexing process to take longer to complete, but it will improve the speed of [image transform](image-transforms.md) generation.
 
