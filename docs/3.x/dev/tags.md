@@ -804,24 +804,29 @@ If you’re using the `{% switch %}` tag inside of a `{% for %}` loop, you won�
 
 The `{% tag %}` tag can be used to render an HTML element in a template.
 
-Not to be confused with the [tag](functions.md#tag) Twig _function_, the `{% tag %}` tag could be more convenient with frequent use or complex nested markup. `{% tag %}` tags may also be nested.
+It’s similar to the [tag](functions.md#tag) _function_, however the `{% tag %}` tag is better suited for cases where the tag contents need to be dynamic.
 
+```twig
+{% tag 'p' with {
+    class: 'welcome',
+} %}
+    Hello, {{ currentUser.friendlyName }}
+{% endtag %}
+{# Output: <p class="welcome">Hello, Tim</p> #}
+```
+
+`{% tag %}` tags can also be nested:
 ```twig
 {% tag 'div' with {
     class: 'foo',
 } %}
-    {% tag 'p' -%}
-        Tim’s tags have tags in them.
+    {% tag 'p' with {
+        class: 'welcome',
+    } -%}
+        Hello, {{ currentUser.friendlyName }}
     {%- endtag %}
 {% endtag %}
-```
-
-Output:
-
-```html
-<div class="foo">
-    <p>Tim’s tags have tags in them.</p>
-</div>
+{# Output: <div class="foo"><p class="welcome">Hello, Tim</p></div> #}
 ```
 
 ### Parameters
