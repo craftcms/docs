@@ -7,31 +7,17 @@ export default {
   decorators: [withKnobs]
 };
 
-const exampleItems = [
-  {
-    label: "Read Time",
-    value: "5 minutes"
-  },
-  {
-    label: "Skill Level",
-    value: "Advanced"
-  },
-  {
-    label: "Edition",
-    value: "Craft Pro"
-  }
-];
-
 export const Default = () => ({
   components: { Badge, ContentContainer },
   props: {
     text: { default: text("Text", "beta") },
+    title: { default: text("Title", "This is an optional element title") },
     type: {
       default: select("Type", ["tip", "warning", "error"], "tip")
     },
     vertical: { default: select("Vertical", ["top", "middle"], "top") }
   },
   template: `<ContentContainer :vertical-center="true">
-    <h1>Drone Shipments API <Badge :text="text" :type="type" :vertical="vertical" /></h1>
+    <h1>Drone Shipments API <Badge :text="text" :type="type" :vertical="vertical" :title="title" /></h1>
   </ContentContainer>`
 });

@@ -4,7 +4,7 @@ Time fields provide a time picker input.
 
 ## Settings
 
-You can customize the minute increment, and you can optionally choose minimum and maximum times that should be allowed.
+You can customize the minute increment and optionally choose minimum and maximum times that should be allowed.
 
 ## Converting from a Date Field
 
@@ -12,27 +12,28 @@ If you have an existing [Date](date-time-fields.md) field that you wish to conve
 
 For example, if your system timezone is set to `UTC-7 (PDT)`, and you have a Date field value whose time is set to 10:00 AM, its actual value in the database will be `17:00` (5:00 PM), because that’s what 10:00 AM PDT is in UTC.
 
-First go to Settings → General and check your system timezone. If it’s set to `UTC`, you have nothing to worry about. Go ahead and convert your field type.
+First visit **Settings** → **General** and check your system timezone. If it’s set to `UTC`, you have nothing to worry about. Go ahead and convert your field type.
 
-Otherwise, take note of the timezone offset, and then execute one of the following SQL queries, depending on the database engine you’re using:
+Otherwise, take note of the timezone offset, then execute one of the following SQL queries, depending on the database engine you’re using:
 
-```sql
-# MySQL:
+::: code
+```sql MySQL
 UPDATE `content`
 SET `field_myFieldHandle` = CONVERT_TZ(`field_myFieldHandle`, '+00:00', '-07:00')
 WHERE `field_myFieldHandle` IS NOT NULL
-
-# PostgreSQL:
+```
+```sql PostgreSQL
 UPDATE "content"
 SET "field_myFieldHandle" = "field_myFieldHandle" at time zone 'UTC' at time zone '-07:00'
 WHERE "field_myFieldHandle" IS NOT NULL
 ```
+:::
 
 (Replace `myFieldHandle` with your Date field handle, and `-07:00` with your system timezone offset. You may also need to change the table name and/or column name prefix as well, depending on the field’s context and your tablePrefix DB connection setting.)
 
 Once you’ve updated your existing field values, go ahead and convert your field type.
 
-## Templating
+## Development
 
 ### Querying Elements with Time Fields
 
@@ -49,34 +50,57 @@ Possible values include:
 | `['and', '>= 10:00', '< 17:00']` | that have a time selected between 10:00 AM and 5:00 PM.
 | `['or', '< 10:00', '> 17:00']` | that have a time selected before 10:00 AM or after 5:00 PM.
 
+::: code
 ```twig
 {# Fetch entries with with a selected time before 10:00 AM #}
 {% set entries = craft.entries()
     .myFieldHandle('< 10:00')
     .all() %}
 ```
+```php
+// Fetch entries with with a selected time before 10:00 AM
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle('< 10:00')
+    ->all();
+```
+:::
 
 ### Working with Time Field Data
 
 If you have an element with a Time field in your template, you can access its value by its handle:
 
+::: code
 ```twig
 {% set value = entry.myFieldHandle %}
 ```
+```php
+$value = $entry->myFieldHandle;
+```
+:::
 
 That will give you a [DateTime](http://php.net/manual/en/class.datetime.php) object that represents the selected time (with the date implicitly set to today), or `null` if no time was selected.
 
 If it’s set, you can output a formatted time based on its value using the [time](dev/filters.md#time) filter.
 
+::: code
 ```twig
 {% if entry.myFieldHandle %}
     Selected time: {{ entry.myFieldHandle|time('short') }}
 {% endif %}
 ```
+```php
+if ($entry->myFieldHandle) {
+    $selectedTime = \Craft::$app->getFormatter()->asTime(
+        $entry->myFieldHandle, 
+        'short'
+    );
+}
+```
+:::
 
-### Saving Time Fields in Entry Forms
+### Saving Time Fields
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Time field, you can create a `time` input.
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Time field, you can create a `time` input.
 
 ```twig
 {% set currentValue = entry is defined and entry.myFieldHandle

@@ -6,7 +6,7 @@ Nitro is a speedy local development environment tuned for [Craft CMS](https://cr
 
 Nitro installs the following on every machine:
 
-- PHP 7.4 (+ option to use 7.3 or 7.2)
+- PHP 7.4 (+ option to use 8.0, 7.3 or 7.2)
 - MySQL
 - PostgreSQL
 - Redis
@@ -17,4 +17,8 @@ Nitro installs the following on every machine:
 ## System Requirements
 
 - macOS, Linux, or Windows 10 Pro with Hyper-V enabled
-- [Multipass](https://multipass.run/) 1.4.0+
+- [Multipass](https://multipass.run/) 1.5.0+
+
+::: warning
+Nitro does not yet support M1 Macs.
+:::

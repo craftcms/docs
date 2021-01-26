@@ -241,9 +241,45 @@ function customHeadingSlots(tokens) {
   }
 }
 
+/**
+ * Adds a non-breaking space between the last two words of text to avoid
+ * typographic widows/orphans.
+ * @param {*} tokens 
+ * @param {*} idx 
+ * @param {*} options 
+ * @param {*} env 
+ * @param {*} renderer 
+ */
+function dewidowText(tokens, idx, options, env, renderer) {
+  // inner text content
+  let content = tokens[idx].content;
+  // characters that indicate the end of a sentence
+  const endSentenceChars = ['.', ':', '!', '…', '?'];
+  // last character of content
+  const lastChar = content.slice(-1);
+  // only consider strings likely to occupy more than one line
+  const minContentLength = 60;
+  // avoid joining really long words
+  const maxWordLength = 50;
+
+  // make sure we’ve got text at the end of a sentence
+  if (endSentenceChars.includes(lastChar) && content.length > minContentLength) {
+    const words = content.split(' ');
+    const len = words.length;
+    if (len > 1 && words[len - 2].length + words[len - 1].length < maxWordLength) {
+      words[len - 2] += '&nbsp;' + words[len - 1];
+      var lastWord = words.pop().replace(/.*((?:<\/\w+>)*)$/, '$1');
+      content = words.join(' ') + lastWord;
+    }
+  }
+
+  return content;
+}
+
 module.exports = md => {
   // Custom <code> renders
   md.renderer.rules.code_inline = renderInlineCode;
+  md.renderer.rules.text = dewidowText;
 
   // override parse()
   const parse = md.parse;

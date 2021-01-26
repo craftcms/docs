@@ -2,6 +2,41 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-01-13
+### Changed
+- Improved description of the customer-user relationship on the Customers page.
+
+## 2020-12-17
+### Changed
+- Heavily refactored Commerce 3.x docs to improve organization, flow, and coverage gaps. 🎉
+
+## 2020-12-14
+### Added
+- Added PHP examples to Field Types pages.
+
+### Changed
+- Removed a tip about overriding the `mutex` component config for Windows hosts, as it’s no longer needed in Craft 3.5 and later. ([craftcms/cms#7242](https://github.com/craftcms/cms/issues/7242))
+
+## 2020-12-09
+### Added
+- Documented Commerce `modifyCartInfo` event.
+
+### Changed
+- Improved Searching page with more detailed overview and examples.
+
+## 2020-11-25
+### Changed
+- Changed typographic widow handling approach to improve HMR and scroll issues.
+- Updated VuePress to 1.5.3.
+
+## 2020-11-16
+### Added
+- Added element form examples to the Categories, Tags, and Users field pages in the Craft 3 docs.
+
+## 2020-11-13
+### Changed
+- Documented some missing parameters on the Craft 3 Controller Actions page.
+
 ## 2020-10-22
 ### Changed
 - Improved the Control Panel Template page in the Craft 3 docs.
@@ -31,6 +66,7 @@ Theme and significant content changes will be documented in this file.
 ## 2020-10-02
 ### Fixed
 - Fixed an issue that may have led to incorrect search result headings when a heading match was preceded by the search keyword in body content.
+- Updated `SidebarLink` to honor its `maxDepth` setting.
 
 ## 2020-10-01
 ### Added

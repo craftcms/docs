@@ -17,23 +17,33 @@ Table fields have the following settings:
 
 * **Default Values** – Define the default row and column values for new instances of the field.
 
-
 ## The Field
 
 Table fields will show the table as configured based on the field settings. You can reorder, delete, and add new rows, and modify their values.
 
-## Templating
+## Development
 
 Calling a Table field in your templates will return an array of the rows. Each row is a sub-array which holds each of the columns’ values for that row.
 
+::: code
 ```twig
-{% if entry.whiskeyTableHandle|length %}
+{% if entry.myFieldHandle|length %}
     <h3>Whiskeys</h3>
-
     <ul>
-        {% for row in entry.whiskeyTableHandle %}
+        {% for row in entry.myFieldHandle %}
             <li>{{ row.whiskey }} - {{ row.description }} - {{ row.proof }}</li>
         {% endfor %}
     </ul>
 {% endif %}
 ```
+```php
+if (count($entry->myFieldHandle)) {
+    // Whiskeys:
+    foreach ($entry->myFieldHandle as $row) {
+        // $row->whiskey
+        // $row->description
+        // $row->proof
+    }
+}
+```
+:::

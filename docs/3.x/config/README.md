@@ -68,7 +68,7 @@ The following aliases are available out of the box:
 | `@web` | The URL to the folder that contains the `index.php` file that was loaded for the request
 | `@webroot` | The path to the folder that contains the `index.php` file that was loaded for the request
 
-You can override these default aliases with the <config3:aliases> config setting if needed. It’s recommended to override the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+You can override these default aliases with the <config3:aliases> config setting if needed. We recommend overriding the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
 
 ```php
 'aliases' => [
@@ -76,7 +76,7 @@ You can override these default aliases with the <config3:aliases> config setting
 ];
 ```
 
-If your webroot is something besides `web/`, `public/`, `public_html/`, or `html/`, or it’s not located alongside your `craft` executable, you will also need to override the `@webroot` alias, so it can be defined properly for console commands.
+If your web root is something besides `web/`, `public/`, `public_html/`, or `html/`, or it’s not located alongside your `craft` executable, you will also need to override the `@webroot` alias, so it can be defined properly for console commands.
 
 ```php
 'aliases' => [
@@ -562,7 +562,7 @@ If this isn’t defined, Craft will treat the request as a control panel request
 
 ### `CRAFT_ENVIRONMENT`
 
-The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays. (`$_SERVER['SERVER_NAME']` will be used by default.)
+The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays. (The [craftcms/craft](https://github.com/craftcms/craft) starter project sets this to the value of an `ENVIRONMENT` environment variable, or falls back to `production` if it’s not defined.)
 
 ```php
 // Set the environment from the ENVIRONMENT env var, or default to 'production'

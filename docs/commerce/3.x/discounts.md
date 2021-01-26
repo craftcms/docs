@@ -1,25 +1,20 @@
-# Discounts
-
-::: warning
-Discounts are only available in the [Pro edition](editions.md) of Craft Commerce.
-:::
+# Discounts <badge type="edition" vertical="middle" title="Discounts are only available in Commerce Pro">Pro</badge>
 
 Discounts are deductions that can be applied either to line items or the order as a whole.
 
-Discounts are only calculated _while_ items are in the cart. [Sales](sales.md) are pricing rules that apply to products _before_ they’re added to the cart.
+Discounts are only calculated while items are in the cart. [Sales](sales.md) are pricing rules that apply to products _before_ they’re added to the cart.
 
-To create a new discount, navigate to Commerce → Promotions → Discounts in the control panel.
+You’ll need _Manage discounts_ permission to work with discounts in the control panel via **Commerce** → **Promotions** → **Discounts**.
 
 ## Discount Sort Order
 
 Discounts are processed and applied in the order they are sorted in the control panel.
 
-Inside each discount is a checkbox labelled “Stop processing further discounts after this discount matches”. If this option is ticked and the discount matches the order, no further discounts will be applied to the cart.
+Inside each discount is a checkbox labelled **Stop processing further discounts after this discount matches**. If this option is ticked and the discount matches the order, no further discounts will be applied to the cart.
 
 ## Coupon Discounts
 
-Discounts can have a coupon requirement as an optional condition. The coupon condition can be
-found on the “Coupon” tab.
+Discounts can have a coupon requirement as an optional condition, which you can manage on the **Coupon** tab.
 
 If no coupon is entered for the cart and the discount has a coupon code, the discount will not apply.
 
@@ -47,12 +42,24 @@ The field accepts the [Twig’s expression syntax](https://twig.symfony.com/doc/
 If the expression is calculated as `true` then the discount matches the order. If not, the condition disqualifies the order from the discount. A blank condition is the same as
 a `true` expression.
 
+The condition formula can use an `order` variable, which for safety is available as an array and not the order element. This prevents a store manager from accidentally calling methods like `order.markAsComplete()`.
+
+::: tip
+The condition formula’s `order` array is generated with:
+
+```php
+$order->toArray(
+    [], ['lineItems.snapshot', 'shippingAddress', 'billingAddress']
+);
+```
+:::
+
 Inside the condition formula you have access to the `order` variable. This is a data only representation of the order.
-The `variable` contains the same data that would be exported when clicking the export button on the order index page.
+The variable contains the same data you’d see exported from the order index page.
 
 Here are some examples of an discount’s condition formula:
 
-Example 1:
+**Example 1:**
 
 ```twig
 '@myclient.com' in order.email
@@ -62,7 +69,7 @@ The above would be a `true` statement if the order’s email contains the string
 
 This would be a way of giving this discount to anyone from that company.
 
-Example 2:
+**Example 2:**
 
 ```twig
 order.shippingAddressId and order.shippingAddress.zipCode[0:2] == '70'
@@ -210,3 +217,26 @@ Matching items are those items used to match this discount’s conditions, like 
 #### Don’t apply any subsequent discounts to an order if this discount is applied
 
 When this setting is on and the discount applies, discounts further down in the discounts list will not be applied. This makes it possible to prevent cumulative discounts from being applied.
+
+## Templating
+
+### craft.commerce.discounts.allActiveDiscounts
+
+Returns an array of all enabled discounts set up in the system active for the current date and time.
+
+```twig
+{% for discount in craft.commerce.discounts.allActiveDiscounts %}
+    {{ discount.name }} - {{ discount.description }}
+{% endfor %}
+```
+
+### craft.commerce.discounts.getDiscountByCode(code)
+
+Returns a [Discount](commerce3:craft\commerce\models\Discount) model that matches the supplied code.
+
+```twig
+{% set discount = craft.commerce.discount.getDiscountByCode('HALFOFF') %}
+{% if discount %}
+    {{ discount.name }} - {{ discount.description }}
+{% endif %}
+```

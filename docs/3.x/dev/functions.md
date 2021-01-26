@@ -78,9 +78,9 @@ Returns a controller action URL, automatically accounting for relative vs. absol
 
 The `actionUrl()` function has the following arguments:
 
-* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+- **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+- **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
+- **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
 
 ## `alias`
 
@@ -193,7 +193,7 @@ It can also be used instead of the [`merge`](https://twig.symfony.com/doc/2.x/fi
 {% do configure(myObject, { one: 'Overridden', two: 'New' }) %}
 ```
 
-It could technically even be used to set a model or element’s attributes, even though that’s not a great idea:
+It could technically even be used to set a model or element’s attributes, even though that’s not a great idea since templates generally present content rather than modify it:
 
 ```twig
 {% do configure(entry, { title: 'New Title' }) %}
@@ -234,9 +234,9 @@ Returns a control panel URL, automatically accounting for relative vs. absolute 
 
 The `cpUrl()` function has the following arguments:
 
-* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+- **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+- **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
+- **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
 
 ## `csrfInput`
 
@@ -270,8 +270,8 @@ Outputs an asset or file as a base64-encoded [data URL](https://developer.mozill
 
 The `dataUrl()` function has the following arguments:
 
-* **`file`** - The asset or path to a file to be encoded.
-* **`mimeType`** - Optional MIME type. If omitted, the file’s MIME type will be determined automatically.
+- **`file`** - The asset or path to a file to be encoded.
+- **`mimeType`** - Optional MIME type. If omitted, the file’s MIME type will be determined automatically.
 
 ## `endBody`
 
@@ -431,10 +431,10 @@ Outputs an array of items as an ordered list.
 
 The `ol()` function has the following arguments:
 
-* **`items`** – An array of items to be wrapped in `<li>`s. These will be HTML-encoded by default.
-* **`params`** – An attributes argument where each key+value will be set as attributes on the `<ol>`, with the exception of two special options:
-    * **`encode: false`** – Prevents the list items from being HTML-encoded.
-    * **`itemOptions: {...}`** – Tag attributes to be applied to each of the `<li>`s.
+- **`items`** – An array of items to be wrapped in `<li>`s. These will be HTML-encoded by default.
+- **`params`** – An attributes argument where each key+value will be set as attributes on the `<ol>`, with the exception of two special options:
+    - **`encode: false`** – Prevents the list items from being HTML-encoded.
+    - **`itemOptions: {...}`** – Tag attributes to be applied to each of the `<li>`s.
 
 ## `parseEnv`
 
@@ -530,10 +530,10 @@ Similar to [url()](#url-path-params-scheme-mustshowscriptname), except _only_ fo
 
 The `siteUrl()` function has the following arguments:
 
-* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
-* **`siteId`** – The ID of the site that the URL should point to. By default the current site will be used.
+- **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+- **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
+- **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+- **`siteId`** – The ID of the site that the URL should point to. By default the current site will be used.
 
 ## `svg`
 
@@ -652,10 +652,10 @@ Outputs an array of items as an unordered list.
 
 The `ul()` function has the following arguments:
 
-* **`items`** – An array of items to be wrapped in `<li>`s. These will be HTML-encoded by default.
-* **`params`** – An attributes argument where each key+value will be set as attributes on the `<ul>`, with the exception of two special options:
-    * **`encode: false`** – Prevents the list items from being HTML-encoded.
-    * **`itemOptions: {...}`** – Tag attributes to be applied to each of the `<li>`s.
+- **`items`** – An array of items to be wrapped in `<li>`s. These will be HTML-encoded by default.
+- **`params`** – An attributes argument where each key+value will be set as attributes on the `<ul>`, with the exception of two special options:
+    - **`encode: false`** – Prevents the list items from being HTML-encoded.
+    - **`itemOptions: {...}`** – Tag attributes to be applied to each of the `<li>`s.
 
 ## `url`
 
@@ -669,10 +669,16 @@ Returns a URL.
 
 The `url()` function has the following arguments:
 
-* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
-* **`mustShowScriptName`** – If this is set to `true`, then the URL returned will include “index.php”, disregarding the <config3:omitScriptNameInUrls> config setting. (This can be useful if the URL will be used by POST requests over Ajax, where the URL will not be shown in the browser’s address bar, and you want to avoid a possible collision with your site’s .htaccess file redirect.)
+- **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+- **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
+- **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+- **`mustShowScriptName`** – If this is set to `true`, then the URL returned will include “index.php”, disregarding the <config3:omitScriptNameInUrls> config setting. (This can be useful if the URL will be used by POST requests over Ajax, where the URL will not be shown in the browser’s address bar, and you want to avoid a possible collision with your site’s .htaccess file redirect.)
+
+Using the `url()` function has advantages over hard-coding URLs in your templates:
+
+- Generated URLs will encourage consistency by respecting settings like [addTrailingSlashesToUrls](config3:addTrailingSlashesToUrls).
+- Your site will be more portable, making it easier to do something like move to a new domain or subdomain.
+- If the page has a `token` URL parameter, that token will automatically get appended to generated URLs to maintain preview context navigating around the site.
 
 ::: tip
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:

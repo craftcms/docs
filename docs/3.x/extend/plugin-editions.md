@@ -1,6 +1,6 @@
 # Plugin Editions
 
-The Plugin Store will soon add **limited** support for multi-edition plugins, which will work similarly to Craft’s two editions (Solo and Pro).
+The Plugin Store supports multi-edition plugins, which work similarly to Craft’s two editions (Solo and Pro).
 
 - Plugins that support multiple editions are still comprised of a single Composer package.
 - Plugins’ active edition is recorded in the [project config](../project-config.md).

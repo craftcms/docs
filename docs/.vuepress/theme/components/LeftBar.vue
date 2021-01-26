@@ -8,7 +8,7 @@
       <slot name="top" />
 
       <div id="mid" class="relative">
-        <div class="nav-wrap relative w-64 overflow-x-hidden h-full">
+        <div class="nav-wrap relative w-64 overflow-hidden h-full">
           <transition name="slide-left">
             <div class="set-index" v-if="!this.$activeSet">
               <DocSetPanel @selectVersion="handleVersionSelect" />
