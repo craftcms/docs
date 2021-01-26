@@ -289,7 +289,7 @@ You specify the actual header that should be set by typing it as a string after 
 This tag gives plugins and modules an opportunity to hook into the template, to either return additional HTML or make changes to the available template variables.
 
 ```twig
-{## Give plugins a chance to make changes here #}
+{# Give plugins a chance to make changes here #}
 {% hook 'my-custom-hook-name' %}
 ```
 
