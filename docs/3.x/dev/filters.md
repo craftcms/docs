@@ -1052,7 +1052,9 @@ Returns an array without the specified element(s).
 
 ## `withoutKey`
 
-Returns an array without the specified key.
+Returns an array without one or more specified keys.
+
+The key can be a single key as a string:
 
 ```twig
 {% set array = {
@@ -1061,4 +1063,17 @@ Returns an array without the specified key.
     baz: 'baz'
 } %}
 {% set filtered = array|withoutKey('baz') %}
+{# Result: { 'foo': 'foo', 'bar: 'bar' } #}
+```
+
+You can also pass multiple keys in an array:
+
+```twig
+{% set array = {
+    foo: 'foo',
+    bar: 'bar',
+    baz: 'baz'
+} %}
+{% set filtered = array|withoutKey(['bar', 'baz']) %}
+{# Result: { 'foo': 'foo' } #}
 ```
