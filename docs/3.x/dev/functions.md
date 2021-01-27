@@ -29,7 +29,6 @@ Function | Description
 [floor](#floor) | Rounds a number down.
 [getenv](#getenv) | Returns the value of an environment variable.
 [gql](#gql) | Executes a GraphQL query against the full schema.
-[parseEnv](#parseenv) | Parses a string as an environment variable or alias.
 [head](#head) | Outputs scripts and styles that were registered for the “head” position.
 [hiddenInput](#hiddeninput) | Outputs a hidden input.
 [include](https://twig.symfony.com/doc/2.x/functions/include.html) | Returns the rendered content of a template.
@@ -38,7 +37,7 @@ Function | Description
 [min](https://twig.symfony.com/doc/2.x/functions/min.html) | Returns the lowest value in an array.
 [ol](#ol) | Outputs an array of items as an ordered list.
 [parent](https://twig.symfony.com/doc/2.x/functions/parent.html) | Returns the parent block’s output.
-[parseEnv](#parseenv) | Checks for an environment variable and/or an alias (`@aliasName`) and returns the referenced value.
+[parseEnv](#parseenv) | Parses a string as an environment variable or alias.
 [plugin](#plugin) | Returns a plugin instance by its handle.
 [random](https://twig.symfony.com/doc/2.x/functions/random.html) | Returns a random value.
 [range](https://twig.symfony.com/doc/2.x/functions/range.html) | Returns a list containing an arithmetic progression of integers.
