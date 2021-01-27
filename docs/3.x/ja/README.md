@@ -14,7 +14,7 @@ Craft は、ウェブ上でさらなる独自のデジタル体験を創造す�
 
 ## 技術仕様
 
-Craft は [Yii 2](https://www.yiiframework.com/) をベースとするセルフホスティング型の PHP 7 アプリケーションです。 コンテンツストレージとして MySQL および PostgreSQL に接続できます。 テンプレートエンジンに [Twig](https://twig.symfony.com) を備えています。
+Craft is a self-hosted PHP application, built on [Yii 2](https://www.yiiframework.com/). コンテンツストレージとして MySQL および PostgreSQL に接続できます。 テンプレートエンジンに [Twig](https://twig.symfony.com) を備えています。
 
 ## Diving In
 
