@@ -7,7 +7,7 @@
 はじめる前に、次のことを確認してください。
 
 - あなたは[Craft 3 の変更点](changes-in-craft-3.md)を確認しました。
-- あなたのサーバーは Craft 3 の[最小要件](requirements.md)（Craft 3 には PHP 7 以降が必要で、PHP 割当メモリが少なくとも 256 MB 必要です）を満たしています。
+- your server meets Craft 3’s [minimum requirements](requirements.md) (Craft 3 requires PHP 7.2.5+ and at least 256 MB of memory allocated to PHP)
 - あなたのサイトは、少なくとも **Craft 2.6.2788** が実行されています。
 - プラグインはすべて最新の状態で、それらが Craft 3 向けにアップデートされていることを確かめました。 （Craft 2 コントロールパネルのアップデートページから、プラグインの Craft 3 互換ステータスのレポートを見ることができます。 ）
 - なんらかの問題が起こった場合に備えて、**データベースをバックアップ**してあります。
