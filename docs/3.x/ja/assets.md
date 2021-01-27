@@ -70,7 +70,7 @@ Amazon S3 のようなリモートストレージサービスにアセットを�
 
 ## アセットインデックスのアップデート
 
-（FTP などの）Craft 外で追加、編集、または、削除されたファイルがある場合、Craft にそのボリュームのインデックスをアップデートするよう伝える必要があります。 「ユーティリティ > アセットインデックス」から実行できます。
+If any files are ever added, modified, or deleted outside of Craft (such as over FTP), you’ll need to tell Craft to update its indexes for the volume. You can do that from **Utilities** → **Asset Indexes**.
 
 リモート画像をキャッシュするオプションがあります。 （Amazon S3 など）リモートボリュームがない場合は、無視して問題ありません。 設定を有効にすると、インデックス処理が完了するまでの時間が長くなりますが、[画像の変形](image-transforms.md)の生成スピードが向上します。
 
