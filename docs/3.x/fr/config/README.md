@@ -571,7 +571,7 @@ define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
 
 ### `CRAFT_EPHEMERAL`
 
-When defined as `true`, Craft will skip file system permission checks and operations that are not available in an environment with ephemeral or read-only storage.
+When set to `true`, Craft will skip file system permission checks and operations that are not available in an environment with ephemeral or read-only storage.
 
 ### `CRAFT_LICENSE_KEY`
 
@@ -606,6 +606,10 @@ The path to the [storage/](../directory-structure.md#storage) folder. (It is ass
 ::: tip
 Make sure you set this to a valid folder path, otherwise it will be ignored.
 :::
+
+### `CRAFT_STREAM_LOG`
+
+When set to `true`, Craft will additionally send log output to `stderr` and `stdout`.
 
 ### `CRAFT_TEMPLATES_PATH`
 
