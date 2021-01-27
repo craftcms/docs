@@ -91,47 +91,32 @@ Static methods should generally not start with `get`.
 
 ## 型宣言
 
-### 引数の型
-
-可能な限り、すべてのファンクションの引数に PHP 7.0 でサポートされる[引数の型宣言](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration)を使用してください。 唯一の例外は、次の通りです。
+Use [type declarations](https://www.php.net/manual/en/language.types.declarations.php) whenever possible. 唯一の例外は、次の通りです。
 
 - [マジックメソッド](http://php.net/manual/en/language.oop5.magic.php)（例：`__toString()`）
-- 複数の `null` 以外の値型を受け入れる引数
+- Arguments/return statements that could be multiple non-`null` value types
 - 親メソッドで型宣言を持たない、親クラスのメソッドを上書きするメソッド
 - インターフェースで必要なメソッドで、インターフェースメソッドに型宣言がないもの
 
-If an argument accepts two types and one of them is `null`, the argument should have a type declaration for the non-`null` type, and a default value of `null`.
+If an argument accepts two types and one of them is `null`, a `?` can be placed before the non-`null` type:
 
 ```php
-public function foo(string $bar = null)
+public function foo(?string $bar): void
 ```
-
-::: tip
-`null` を受け入れる引数の次に必須の引数がある場合も、これを実行します。 これは、PHP で `null` を許可しながら引数型を強制する唯一の方法です。
-:::
-
-### 戻り値の型
-
-可能な限り、すべてのメソッドに PHP 7.0 でサポートされる[戻り値の型宣言](http://php.net/manual/en/functions.returning-values.php#functions.returning-values.type-declaration)を使用してください。 唯一の例外は、次の通りです。
-
-- [マジックメソッド](http://php.net/manual/en/language.oop5.magic.php)（例：`__toString()`）
-- 複数の戻り値の型を持つメソッド
-- 親メソッドで戻り値の型を持たない、親クラスのメソッドを上書きするメソッド
-- インターフェースで必要なメソッドで、インターフェースメソッドに戻り値の型がないもの
 
 ## Docblock
 
-- サブクラスメソッドを上書きしたり、インターフェースメソッドを実装したり、docblock へ追加するものがないメソッドは、docblock に `@inheritdoc` だけを持つべきです。
-- 適切な大文字、文法、および、句読点を持つ完全な文章を docblock の説明に使用してください。
-- `@param` および `@return` タグには、大文字や句読点を使用**しないでください**。
-- 型定義では、`boolean` と `integer` の代わりに `bool` と `int` を使用してください。
-- 意味をなすとき、配列の型宣言で配列メンバのクラス名を指定してください（`array` よりむしろ `ElementInterface[]`）。
-- 現在のクラスのインスタンスを返す連鎖可能なファンクションでは、戻り値の型宣言として `static` を使用するべきです。
-- 何も返さないファンクションは、`@return void` を持つべきです。
+- Methods that override subclass methods or implement an interface method, and don’t have anything relevant to add to the docblock, should only have `@inheritdoc` in the docblock.
+- Use full sentences with proper capitalization, grammar, and punctuation in docblock descriptions.
+- `@param` and `@return` tags should **not** have proper capitalization or punctuation.
+- Use `bool` and `int` instead of `boolean` and `integer` in type declarations.
+- Specify array members’ class names in array type declarations when it makes sense (`ElementInterface[]` rather than `array`).
+- Chainable functions that return an instance of the current class should use `static` as the return type declaration.
+- Functions that don’t ever return anything should have `@return void`.
 
-### インターフェース 対  実装クラス
+### Interfaces vs. Implementation Classes
 
-インラインの `@var` タグは、インターフェースではなく実装クラスを参照します。
+`@param` , `@return` , `@var` , `@method` and `@property` tags on public service methods should reference Interfaces (when applicable), not their implementation class:
 
 ```php
 // Bad:
@@ -146,7 +131,7 @@ public function foo(string $bar = null)
  */
 ```
 
-`パブリックサービスメソッド上の @param`、`@return`、`@var`、`@method` および `@property` タグは、（該当する場合）実装クラスではなくインターフェースを参照します。
+Inline `@var` tags should reference implementation classes, not their interfaces:
 
 ```php
 // Bad:
@@ -159,9 +144,9 @@ public function foo(string $bar = null)
 
 ## 制御フロー
 
-### Happy Path
+### Happy Paths
 
-[Happy Path](https://en.wikipedia.org/wiki/Happy_path) を使用してください。 すべて期待通りにできた場合、一般的にはメソッドの実行が最後に行き着くところまで処理されるべきです。
+Use [them](https://en.wikipedia.org/wiki/Happy_path). In general the execution of a method should only make it all the way to the end if everything went as expected.
 
 ```php
 // Bad:
@@ -183,9 +168,9 @@ if (!$condition) {
 return true;
 ```
 
-### `if`… `return`… `else`
+### `if`…`return`…`else`
 
-このようにしないでください。 それは意味がなく、一見すると紛らわしいです。
+Don’t do this. There’s no point, and can be misleading at first glance.
 
 ```php
 // Bad:
@@ -205,9 +190,9 @@ return $bar;
 
 ## コントローラー
 
-### 戻り値の型
+### Return Types
 
-JSON を返すオプションを持つコントローラーアクションでは、Ajax リクエストの場合ではなく、リクエストが明示的に JSON レスポンスを受け入れる場合に、JSON を返す必要があります。
+Controller actions that should complete the request must return either a string (HTML) or a Response object.
 
 ```php
 // Bad:
@@ -219,9 +204,9 @@ return $this->asJson($obj);
 return $this->renderTemplate($template, $variables);
 ```
 
-### JSON アクション
+### JSON Actions
 
-JSON *だけを* 返すコントローラーアクションでは、リクエストで JSON を受け入れる必要があります。
+Controller actions that have the option of returning JSON should do so if the request explicitly accepts a JSON response; not if it’s an Ajax request.
 
 ```php
 // Bad:
@@ -235,7 +220,7 @@ if (\Craft::$app->getRequest()->getAcceptsJson()) {
 }
 ```
 
-リクエストを完了するコントローラーアクションでは、文字列（HTML）、または、Response オブジェクトのいずれかを返す必要があります。
+Controller actions that *only* return JSON should require that the request accepts JSON.
 
 ```php
 $this->requireAcceptsJson();
@@ -243,25 +228,25 @@ $this->requireAcceptsJson();
 
 ## 例外
 
-- ユーザーエラーの結果として、例外が起こる可能性がある場合、<yii2:yii\base\UserException> クラス（または、サブクラス）を使用してください。
-- の場合のみ、<craft3:Craft::t()> で例外メッセージを翻訳してください。
+- If an exception is likely to occur as a result of user error, use the <yii2:yii\base\UserException> class (or a subclass)
+- Only translate exception messages with <craft3:Craft::t()> if it’s a <yii2:yii\base\UserException>.
 
 ## データベースクエリ
 
-- テーブル名は常に `{{%` と `}}`（例：`{{%entries}}`）で囲み、適切に引用されテーブル接頭辞が挿入されるようにします。
-- 単一のカラムを参照する場合でも、`'col1, col2'` の代わりに `select()` および `groupBy()` で `['col1', 'col2']` 構文を使用してください。
-- `'{{%tablename}}'` の代わりに、`from()` で `['{{%tablename}}']` 構文を使用してください。
-- `'col1, col2 desc'` の代わりに、`orderBy()` で `['col1' => SORT_ASC, 'col2' => SORT_DESC]` 構文を使用してください。
+- Always wrap a table name with `{{%` and `}}` (e.g. `{{%entries}}`) so it’s properly quoted and the table prefix gets inserted.
+- Use the `['col1', 'col2']` syntax with `select()` and `groupBy()` instead of `'col1, col2'` even if you’re only referencing a single column.
+- Use the `['{{%tablename}}']` syntax with `from()` instead of `'{{%tablename}}'`.
+- Use the `['col1' => SORT_ASC, 'col2' => SORT_DESC]` syntax with `orderBy()` instead of `'col1, col2 desc'`.
 
-### 条件
-- テーブル / カラム名や値を自動的に引用するように、可能な限り Yii の[宣言条件構文](yii2:yii\db\QueryInterface::where())を使用してください。
-- 一貫性のために、次のものを使用してください。
-  - `['in', 'col', $values]` の代わりに `['col' => $values]`
-  - `['=', 'col', $value]` の代わりに `['col' => $value]`
-  - `['like', 'col', '%value%', false]` の代わりに `['like', 'col', 'value']` *（`%` は `value` が片側にのみ必要な場合を除きます。 ）*
-- `NULL` を検索する場合、`['col' => null]` 構文を使用してください。
-- `NOT NULL` を検索する場合、`['not', ['col' => null]]` 構文を使用してください。
-- 宣言条件構文が使用できない場合（例えば、しばしば join を使うようなケースのように、条件が値ではなく他のテーブル / カラム名を参照するなど）、100%安全かどうか自信がないすべてのカラム名と値を確実に引用符で囲み、クエリパラメータとして追加する必要があります。
+### Conditions
+- Always use Yii’s [declarative condition syntax](yii2:yii\db\QueryInterface::where()) when possible, as it will automatically quote table/column names and values for you.
+- For consistency, use:
+  - `['col' => $values]`  instead of `['in', 'col', $values]`
+  - `['col' => $value]`  instead of `['=', 'col', $value]`
+  - `['like', 'col', 'value']`  instead of `['like', 'col', '%value%', false]` *(unless the `%` is only needed on one side of `value`)*
+- If searching for `NULL`, use the `['col' => null]` syntax.
+- If searching for `NOT NULL`, use the `['not', ['col' => null]]` syntax.
+- If you cannot use the declarative condition syntax (e.g. the condition is referencing another table/column name rather than a value, as is often the case with joins), make sure you’ve quoted all column names, and any values that you aren’t 100% confident are safe should be added as query params.
 
 ```php
 // Bad:
@@ -275,7 +260,7 @@ $query->innerJoin('{{%bar}} bar', '[[bar.fooId]] = [[foo.id]]');
 
 ## Getter と Setter
 
-パフォーマンスを少し向上させデバッグを容易にするために、一般的にはマジックプロパティを通すよりむしろ、Getter および Setter メソッドを直接呼び出し続けるべきです。
+Getter and setter methods should have a corresponding `@property` tag in the class’s docblock, so IDEs like PhpStorm can be aware of the magic properties.
 
 ```php
 /**
@@ -295,7 +280,7 @@ class Entry
 }
 ```
 
-App コンポーネントには、App コンポーネントの Getter メソッドである [get()](yii2:yii\di\ServiceLocator::get()) を直接呼び出す、独自の Getter ファンクションが必要です。
+For a slight performance improvement and easier debugging, you should generally stick with calling the getter and setter methods directly rather than going through their magic properties.
 
 ```php
 // Bad:
@@ -307,9 +292,9 @@ $oldAuthor = $entry->getAuthor();
 $entry->setAuthor($newAuthor);
 ```
 
-### App コンポーネントの Getter
+### App Component Getters
 
-そして、それらをマジックプロパティの代わりに使用する必要があります。
+App components should have their own getter functions, which call the app component getter method [get()](yii2:yii\di\ServiceLocator::get()) directly:
 
 ```php
 /**
@@ -321,7 +306,7 @@ public function getEntries()
 }
 ```
 
-同じメソッド内で同じ App コンポーネントを複数回参照する場合、ローカル参照をそこに保存します。
+And you should use those instead of their magic properties:
 
 ```php
 // Bad:
