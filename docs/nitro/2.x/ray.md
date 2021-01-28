@@ -35,7 +35,7 @@ You can use Ray directly in your Twig templates or Plugin. To use Ray in Twig, o
 ```
 
 ::: tip
-For a full site of available methods in Twig, visit the [Ray docs for Craft CMS](https://spatie.be/docs/ray/v1/usage/craft-cms).
+For a full site of available methods in Twig, visit the [Ray documentation for Craft CMS](https://spatie.be/docs/ray/v1/usage/craft-cms).
 :::
 
 The Ray desktop app will now have a new debug event!
