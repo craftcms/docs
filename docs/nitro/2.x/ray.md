@@ -28,9 +28,7 @@ Visit the control panel -> plugins and enable the Ray.
 
 ## Usage
 
-You can use Ray directly in your Twig templates.
-
-Open your template of choice and enter:
+You can use Ray directly in your Twig templates or Plugin. To use Ray in Twig, open your template of choice and enter the following:
 
 ```twig
 {{ ray("Hello Ray!") }}
@@ -40,7 +38,11 @@ Open your template of choice and enter:
 For a full site of available methods in Twig, visit the [Ray docs for Craft CMS](https://spatie.be/docs/ray/v1/usage/craft-cms).
 :::
 
-Ray can also be used directly in plugin and module development.
+The Ray desktop app will now have a new debug event!
+
+![Ray App](./images/ray-gui.png)
+
+To use Ray for plugin or module development, enter the following in your plugin:
 
 ```php
 <?php
