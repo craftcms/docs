@@ -1,4 +1,4 @@
-# Create Sites with Nitro
+# Creating sites
 
 Nitro includes the [`create`](commands.md#create) command to quickly scaffold new sites. The `create` command defaults to the equivalent of `composer create-project craftcms/craft my-project`.
 

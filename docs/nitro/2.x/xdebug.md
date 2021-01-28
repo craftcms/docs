@@ -2,7 +2,9 @@
 
 Once you’ve setup Nitro using [`nitro init`](commands.md#init) and added your first site with [`nitro add`](commands.md#add), you can run [`nitro xon`](commands.md#xon) to enable [Xdebug](https://xdebug.org/) and set it up for automatic connections from your machine.
 
+::: tip
 You can use [`nitro xoff`](commands.md#xoff) to disable Xdebug.
+:::
 
 ## Configuring PhpStorm
 
