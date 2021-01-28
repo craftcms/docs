@@ -4,7 +4,7 @@ Nitro includes the [`create`](commands.md#create) command to quickly scaffold ne
 
 To create a new site with nitro, run the following:
 
-```
+```bash
 $ nitro create tutorial
 Downloading https://github.com/craftcms/craft/archive/HEAD.zip ...
   … setting up project ✓
@@ -53,4 +53,4 @@ There is a lot happening here, but `nitro create` performs the following steps:
 8. The last step is to install composer dependencies. This does not rely on you having composer installed on your host machine and will instead use [`nitro composer`](commands.md#composer).
 9. For the last step, Nitro will prompt you to run [`nitro apply`](commands.md#apply) to update the proxy and your hosts file for the new site.
 
-The new project will be available at `https://tutorial.nitro` and is ready for installation!
+The new site will be available at [https://tutorial.nitro](https://tutorial.nitro) and is now ready for installation!
