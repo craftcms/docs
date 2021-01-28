@@ -852,7 +852,7 @@ nitro share
 
 #### Example
 
-```
+```bash
 $ nitro share
 /app $
 

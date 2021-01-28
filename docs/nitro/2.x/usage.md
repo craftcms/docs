@@ -58,7 +58,7 @@ Nitro is up and running 😃
 
 If you manage all of your projects within a single dev folder, you can mount that entire folder once within Nitro, and point your sites’ web roots to the appropriate directroy and webroot within it.
 
-To do that, open your `~/.nitro/nitro.yaml` file in a text editor (or run the [`edit`](commands.md#edit) command), and add a new mount for the folder that contains all of your projects, plus list out all of your sites you wish to add to Nitro within that folder:
+To do that, open your `~/.nitro/nitro.yaml` file in a text editor (or run the [`edit`](commands.md#edit) command), and add a multiple sites with the same `path` as your `~/dev` folder. The webroot for each site should be the `folder-name/web` to route HTTP requests properly:
 
 ```yaml
 sites:
@@ -123,48 +123,6 @@ Nitro creates its initial `nitro` database for you. You can add as many database
 ```bash
 $ nitro db add
 ```
-
-## Adding Mounts
-
-Nitro can mount various system directories into your Nitro machine. You can either mount each of your projects’
-root directories into Nitro individually (as you’d get when [adding a site with `nitro
-add`](#add-a-site-with-nitro-add)), or you can mount your entire development folder, or some combination of the two.
-
-To add a new mount, follow these steps:
-
-1. Open your `~/.nitro/nitro.yaml` file in a text editor, and add the new mount:
-
-   ```yaml
-   mounts:
-     - source: /Users/oli/dev
-       dest: /home/ubuntu/sites
-   ```
-
-2. Run `nitro apply` to apply the `nitro.yaml` change to the machine.
-
-Once that’s done, you should be able to tunnel into your machine using the [`ssh`](#ssh) command, and see the
-newly-mounted directory in there.
-
-## Running Multiple Machines
-
-You can have Nitro manage more than just your primary machine (`nitro-dev`) if you want. For example, you could
-create a machine for a specific dev project.
-
-To create a new machine, run the following command:
-
-```bash
-$ nitro init -m my-machine
-```
-
-Replace `my-machine` with the name you want to give your new machine. Machine names can only include letters,
-numbers, underscores, and hyphens.
-
-This command will run through the same prompts you saw when creating your primary machine after you first installed
-Nitro. Once it’s done, you’ll have a new Multipass machine, as well as a new configuration file for it at
-`~/.nitro/my-machine.yaml`.
-
-All of Nitro’s [commands](commands.md) accept an `-m` option, which you can use to specify which machine the command
-should be run against. (`nitro-dev` will always be used by default.)
 
 ## Adding Multiple Database Engines
 
