@@ -2,7 +2,7 @@
 
 Nitro ships with PHP settings that are configured for local development. However, if you need to change a PHP setting for a site, Nitro provides a conveinant command [`nitro iniset`](commands.md#iniset) to walk you through the change.
 
-```
+```bash
 $ nitro iniset
 Select a site:
   1. craft-support.nitro
@@ -27,7 +27,7 @@ Apply changes now [Y/n]
 
 The PHP ini setting will now be stored on your `nitro.yaml` file underneath the sites PHP `version` setting:
 
-```
+```yaml
 // removed for brevity
 sites:
     - hostname: craft-support.nitro
@@ -46,8 +46,6 @@ sites:
 ::: tip
 Nitro will do its best to validate your input (e.g. you can't set the `max_execution_time` to "tomorrow")
 :::
-
-
 
 ## Available Settings
 

@@ -4,7 +4,7 @@ The Docker images Nitro use the [`craftcms/nginx:<php-version>-dev`](https://git
 
 To enable an extension for a site, run the following command:
 
-```
+```bash
 $ nitro extensions
 Select a site:
   1. craft-support.nitro
@@ -25,7 +25,7 @@ Apply changes now [Y/n] #
 
 The additonal PHP extension will now be stored on your `nitro.yaml` file underneath the sites PHP `version` setting:
 
-```
+```yaml
 // removed for brevity
 sites:
     - hostname: craft-support.nitro
