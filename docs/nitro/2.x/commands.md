@@ -160,11 +160,6 @@ Runs Composer commands.
 nitro composer [<options>]
 ```
 
-#### Options
-
-`--version`
-: Which version of Composer to use. Defaults to 2.
-
 
 #### Example
 
@@ -185,7 +180,7 @@ composer update completed 🤘
 
 ## `context`
 
-Shows environment information.
+Shows configuration information.
 
 ```
 nitro context [<options>]
@@ -301,7 +296,12 @@ For uncompressed files, the command will detect and automatically select the dat
 #### Example
 
 ```
-TODO finish when command implemented
+$ nitro db import my-website_200814_141806_rltgcxpmz0_v3.4.20.sql
+  … detecting backup type ✓
+Detected postgres backup
+Preparing import…
+  … uploading backup my-website_200814_141806_rltgcxpmz0_v3.4.20.sql ✓
+Import successful 💪
 ```
 
 ## `db remove`
@@ -819,8 +819,8 @@ nitro version [<options>]
 $ nitro version
 View the changelog at https://github.com/craftcms/nitro/blob/2.0.0-alpha/CHANGELOG.md
 
-Nitro CLI: 	 2.0.0-alpha
-Nitro gRPC:
+Nitro CLI: 	   2.0.0
+Nitro gRPC:    2.0.0-alpha
 Docker API: 	 1.41 (1.12 min)
 Docker CLI: 	 1.41
 
