@@ -22,7 +22,22 @@ module.exports = {
         {
           title: "Using Nitro",
           collapsable: false,
-          children: ["usage", "commands", "blackfire", "xdebug", "mailhog", "advanced"]
+          children: ["usage", "commands", "create", "composer", "share"]
+        },
+        {
+          title: "Services",
+          collapsable: false,
+          children: ["services/dynamodb", "services/mailhog", "services/minio", "services/redis"]
+        },
+         {
+           title: "Debugging",
+           collapsable: false,
+           children: ["xdebug", "ray"]
+         },
+        {
+          title: "Advanced Settings",
+          collapsable: false,
+          children: ["php-settings", "extensions"]
         },
       ]
     },

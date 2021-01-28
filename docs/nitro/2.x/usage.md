@@ -1,4 +1,4 @@
-# Project Setup
+# First Time Setup
 
 ## Adding Sites
 

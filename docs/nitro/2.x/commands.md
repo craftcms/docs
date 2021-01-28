@@ -425,6 +425,7 @@ nitro edit
 
 ::: tip
 If you’re running macOS or Linux, you can set an `EDITOR` environment variable in `~/.bash_profile` (or `~/.zshrc` for ZSH) to your preferred text editor of choice.
+:::
 
 ```
 export EDITOR="/Applications/Sublime Text.app/Contents/MacOS/Sublime Text"

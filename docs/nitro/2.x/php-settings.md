@@ -1,4 +1,4 @@
-# Changing PHP Settings for a site
+# Changing PHP Settings
 
 Nitro ships with PHP settings that are configured for local development. However, if you need to change a PHP setting for a site, Nitro provides a conveinant command [`nitro iniset`](commands.md#iniset) to walk you through the change.
 

@@ -1,4 +1,4 @@
-# Adding Additional PHP Extensions for a site
+# Adding Additional PHP Extensions
 
 The Docker images Nitro use the [`craftcms/nginx:<php-version>-dev`](https://github.com/craftcms/docker). These images are preconfigured with the PHP extensions required for Craft CMS and Commerce. However, there are times you may need to install additional extensions for a site.
 

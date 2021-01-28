@@ -1,4 +1,4 @@
-# Installing Composer Dependencies with Nitro
+# Installing Composer Dependencies
 
 Version 2 of Nitro is container based which makes installing dependencies a breeze. Nitro includes `nitro composer` command that enables you to run any composer command without having composer installed on your host machine.
 

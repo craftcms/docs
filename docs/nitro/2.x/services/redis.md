@@ -1,4 +1,4 @@
-# Adding the Redis Service
+# Redis (Caching and Queue)
 
 Nitro comes with an easy way to setup and configure Redis for local testing.
 
@@ -14,11 +14,12 @@ Nitro will then prompt you to `apply` the changes. After the changes have been a
 
 To use Redis in your Craft project you can configure your compontent to use the following settings:
 
-Hostname: `redis.service.nitro`
+**Hostname**: `redis.service.nitro`
+**Port**: `6379`
 
-Port: `6379`
-
-> Note: The port 6379 will always be the port to use when in a sites container, even if you override the default port using an environment variable.
+::: tip
+The port 6379 will always be the port to use when in a sites container, even if you override the default port using an environment variable.
+:::
 
 ## Disabling Redis
 
@@ -26,12 +27,14 @@ Removing Redis is as simple as enabling the service. Simply run `nitro disable r
 
 ## Overiding Redis Default Ports
 
-By default, Redis uses port 6379 but this port may collide with another service on your machine so Nitro includes an easy way to overide the ports.
+::: warning
+Make sure the Redis service is not enabled before overriding the variables.
+:::
 
-> Change these ports only affects the ports on the _host_ machine (aka 127.0.0.1:port) and does not change the internal port used to connect to Redis from a Craft installation/container.
-
-You can set the following environment variables in your terminal shell to override the defaults.
-
-> Make sure the Redis service is not enabled before overriding the variables.
+By default, Redis uses port 6379 but this port may collide with another service on your machine so Nitro includes an easy way to overide the ports. You can set the following environment variables in your terminal shell to override the defaults.
 
 `NITRO_REDIS_HTTP_PORT`
+
+::: tip
+Changing these ports only affects the ports on the _host_ machine (aka 127.0.0.1:port) and does not change the internal port used to connect to Redis from a Craft installation/container.
+:::
