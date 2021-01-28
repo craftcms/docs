@@ -83,8 +83,6 @@
 - `Plugin Name` をプラグイン名にします。
 - [Craft License](https://craftcms.github.io/license/) を使用する計画の場合、`MIT` を `proprietary` にします（「プラグインストアでの配布」ページの[ライセンスの選択](plugin-store.md#choose-a-license)を参照してください）。
 
-[MIT](https://opensource.org/licenses/MIT) よりむしろ [Craft license](https://craftcms.github.io/license/) でプラグインをリリースしたい場合、`license` 値を `"proprietary"` に変更してください。
-
 In addition to `name` and `handle` (which are both required), there are a few other things you can include in that `extra` object:
 
 - `class` – [プラグインクラス](#the-plugin-class)名。 設定されていない場合、インストーラーはそれぞれの `autoload` パスのルートで `Plugin.php` ファイルを探します。
