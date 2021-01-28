@@ -32,14 +32,46 @@ You can use Ray directly in your Twig templates.
 
 Open your template of choice and enter:
 
-```
+```twig
 {{ ray("Hello Ray!") }}
 ```
 
 ::: tip
-Ray can also be used directly in plugin development. See the [Yii2 documentation](https://spatie.be/docs/ray/v1/usage/yii2) for usage examples.
+For a full site of available methods in Twig, visit the [Ray docs for Craft CMS](https://spatie.be/docs/ray/v1/usage/craft-cms).
 :::
 
+Ray can also be used directly in plugin and module development.
+
+```php
+<?php
+
+namespace modules;
+
+use Craft;
+
+class Module extends \yii\base\Module
+{
+    public function init()
+    {
+        Craft::setAlias('@modules', __DIR__);
+
+        if (Craft::$app->getRequest()->getIsConsoleRequest()) {
+            $this->controllerNamespace = 'modules\\console\\controllers';
+        } else {
+            $this->controllerNamespace = 'modules\\controllers';
+        }
+
+        ray('Hello Ray!');
+
+        ray()->showEvents();
+
+        parent::init();
+
+        // Custom initialization code goes here...
+    }
+}
+```
+
 ::: tip
-For a full site of available methods in Twig, visit the [Ray docs for Craft CMS](https://spatie.be/docs/ray/v1/usage/craft-cms).
+For a complete list of available methods, see the [Yii2 documentation](https://spatie.be/docs/ray/v1/usage/yii2) for more detailed usage examples.
 :::

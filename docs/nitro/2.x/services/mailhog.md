@@ -8,7 +8,7 @@ To enable Mailhog in Nitro, run the following command:
 
 `nitro enable mailhog`
 
-Nitro will then prompt you to `apply` the changes. After the changes have been applied the Mailhog web UI will be available at [https://mailhog.service.nitro](https://mailhog.service.nitro).
+Nitro will then prompt you to `nitro apply` the changes. After the changes have been applied the Mailhog web UI will be available at [https://mailhog.service.nitro](https://mailhog.service.nitro).
 
 ### Using Mailhog
 
@@ -22,6 +22,8 @@ From the Craft control panel, visit Settings → Email and enter the following:
 - Use Authentication: Unchecked (default)
 - Encryption Method: `None` (default)
 - Timeout: `10` (default)
+
+![Mailhog UI](../images/mailhog-ui.png)
 
 ::: tip
 Note: The SMTP port 1025 will always be the port to use even if you override the default SMTP port using an environment variable.
