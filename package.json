@@ -30,6 +30,7 @@
     "vuepress-plugin-container": "^2.1.4",
     "vuepress-plugin-medium-zoom": "^1.1.8",
     "vuepress-plugin-sitemap": "docs/.vuepress/theme/vuepress-plugin-sitemap",
+    "vue-server-renderer": "^2.6.12",
     "vuex": "^3.4.0"
   },
   "scripts": {
