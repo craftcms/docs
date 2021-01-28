@@ -12,11 +12,16 @@ Nitro will then prompt you to `apply` the changes. After the changes have been a
 
 ### Using Mailhog
 
-To use Mailhog in your Craft project, go to your control panel email settings and switch to SMTP. Enter the following information into the settings fields:
+MailHog’s ready to be used once it’s running, but it doesn’t change any of your mail settings by default. You can tell Craft or any app to send mail using MailHog’s SMTP settings.
 
-Hostname: `mailhog.service.nitro`
+From the Craft control panel, visit Settings → Email and enter the following:
 
-Port: `1025`
+- Transport Type: `SMTP`
+- Host Name: `mailhog.service.nitro`
+- Port: `1025`
+- Use Authentication: Unchecked (default)
+- Encryption Method: `None` (default)
+- Timeout: `10` (default)
 
 > Note: The SMTP port 1025 will always be the port to use even if you override the default SMTP port using an environment variable.
 

@@ -4,7 +4,6 @@
 
 To add a site to Nitro, three things need to happen:
 
-- Your project files need to be [mounted](#adding-mounts) into the Nitro machine.
 - The web server within your Nitro machine needs to be configured to serve your site.
 - Your system’s `hosts` file needs to be updated to associate your site’s hostname with Nitro.
 
@@ -16,42 +15,69 @@ the [`add`](#add) command:
 ```bash
 $ cd /path/to/project
 $ nitro add
-Enter the hostname [plugins-dev] example.test
-Enter the webroot [web]
-Added plugins-dev to config file.
-Apply changes from config? [yes]
-Mounting /path/to/project to nitro-dev
-Adding site example.test to nitro-dev
-Applied changes from /Users/oli/.nitro/nitro-dev.yaml
-Editing your hosts file
-Password: ******
+Adding site…
+Enter the hostname [mysite.test]:
+  ✓ setting hostname to mysite.test
+  ✓ adding site ~/dev/support/mysite.test
+Enter the webroot for the site [web]:
+  ✓ using webroot web
+Choose a PHP version:
+  1. 8.0
+  2. 7.4
+  3. 7.3
+  4. 7.2
+  5. 7.1
+  6. 7.0
+Enter your selection: 2
+  ✓ setting PHP version 7.4
+  … saving file ✓
+Site added 🌍
+Apply changes now [Y/n]? y
+Checking network…
+  ✓ network ready
+Checking proxy…
+  ✓ proxy ready
+Checking databases…
+  … checking mysql-8.0-3306.nitro ✓
+  … checking postgres-13-5432.nitro ✓
+Checking mounts…
+  … checking ~/dev/craftcms/cms-3 ✓
+Checking services…
+  … checking mailhog service ✓
+Checking sites…
+  … checking mysite.test ✓
+Checking proxy…
+  … updating proxy ✓
+Modifying hosts file (you might be prompted for your password)
+Adding sites to hosts file…
+  … modifying hosts file ✓
+Nitro is up and running 😃
 ```
-
-::: tip
-Multipass requires Full Disk Access on macOS. If you’re seeing mount “not readable” issues, ensure `multipassd` is checked under System Preferences → Security & Privacy → Privacy → Full Disk Access.
-:::
 
 ### Mounting your entire dev folder at once
 
-If you manage all of your projects within a single dev folder, you can mount that entire folder once within Nitro, and point your sites’ web roots to the appropriate folders within it.
+If you manage all of your projects within a single dev folder, you can mount that entire folder once within Nitro, and point your sites’ web roots to the appropriate directroy and webroot within it.
 
-To do that, open your `~/.nitro/nitro-dev.yaml` file in a text editor (or run the [`edit`](commands.md#edit) command), and add a new mount for the folder that contains all of your projects, plus list out all of your sites you wish to add to Nitro within that folder:
+To do that, open your `~/.nitro/nitro.yaml` file in a text editor (or run the [`edit`](commands.md#edit) command), and add a new mount for the folder that contains all of your projects, plus list out all of your sites you wish to add to Nitro within that folder:
 
 ```yaml
-mounts:
- - source: ~/dev
-   dest: /home/ubuntu/sites
 sites:
  - hostname: example1.test
-   webroot: /home/ubuntu/sites/example1.test/web
+   path: ~/dev
+   webroot: example1.test/web
+   version: "7.4"
+   xdebug: false
  - hostname: example2.test
-   webroot: /home/ubuntu/sites/example2.test/web
+   path: ~/dev
+   webroot: example2.test/web
+   version: "7.4"
+   xdebug: false
 ```
 
 Then run `nitro apply` to apply your `nitro.yaml` changes to the machine.
 
 ::: tip
-To avoid permission issues, we recommend you always mount folders into `/home/ubuntu/*` within the machine.
+If you have a large amount of files in the `~/dev` folder, it may be more performant to mount site individually using `nitro add`.
 :::
 
 ::: warning
