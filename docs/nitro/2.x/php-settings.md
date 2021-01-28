@@ -25,6 +25,30 @@ What should the max execution time be [5000]? 7000
 Apply changes now [Y/n]
 ```
 
+The PHP ini setting will now be stored on your `nitro.yaml` file underneath the sites PHP `version` setting:
+
+```
+// removed for brevity
+sites:
+    - hostname: craft-support.nitro
+      aliases:
+        - support.nitro
+      path: ~/dev/support
+      version: "7.3"
+      php:
+        max_execution_time: 7000
+      extensions:
+        - calendar
+      webroot: craft-support/web
+      xdebug: true
+```
+
+::: tip
+Nitro will do its best to validate your input (e.g. you can't set the `max_execution_time` to "tomorrow")
+:::
+
+
+
 ## Available Settings
 
 The following options are available for modification.

@@ -23,6 +23,22 @@ Enter your selection: 1
 Apply changes now [Y/n] #
 ```
 
+The additonal PHP extension will now be stored on your `nitro.yaml` file underneath the sites PHP `version` setting:
+
+```
+// removed for brevity
+sites:
+    - hostname: craft-support.nitro
+      aliases:
+        - support.nitro
+      path: ~/dev/support
+      version: "7.3"
+      extensions:
+        - calendar
+      webroot: craft-support/web
+      xdebug: true
+```
+
 ## Supported Extensions
 
 The following extensions are available for installation:
