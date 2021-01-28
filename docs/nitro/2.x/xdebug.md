@@ -1,8 +1,8 @@
 # Using Xdebug & PhpStorm
 
-Once you’ve created a machine, you can run [`nitro xdebug on`](commands.md#xdebug-on-xon) to enable [Xdebug](https://xdebug.org/) and set it up for automatic connections from your host machine.
+Once you’ve setup Nitro using [`nitro init`](commands.md#init) and added your first site with [`nitro add`](commands.md#add), you can run [`nitro xon`](commands.md#xon) to enable [Xdebug](https://xdebug.org/) and set it up for automatic connections from your machine.
 
-You can use `nitro xdebug off` to disable Xdebug without having to restart the machine.
+You can use [`nitro xoff`](commands.md#xoff) to disable Xdebug.
 
 ## Configuring PhpStorm
 
@@ -11,7 +11,7 @@ First, you’ll need to configure PhpStorm to listen for requests from the brows
 1. Create a new server in PhpStorm using your machine’s domain name. (“Preferences” → “Languages & Frameworks” → “PHP” → “Servers”.)\
 ![PhpStorm Server Settings](./images/phpstorm-server.png)
 
-2. Enable “Use path mappings” and set your existing project root to the absolute path on the server. The absolute path will look like `/home/ubuntu/sites/my-site`, where `my-site` reflects your actual project’s folder name in the Nitro machine. (Use `nitro context` if you need to check the path, and keep in mind this is the project root and not necessarily the web root.)
+2. Enable “Use path mappings” and set your existing project root to the absolute path on the server. The absolute path inside of the container will look like `/app`. (Use `nitro context` if you need to check the path, and keep in mind this is the project root and not necessarily the web root.)
 
 3. Choose “Run” → “Edit Configurations...” and create a new “PHP Remote Debug” configuration, selecting the server you just created. Check “Filter debug connection by IDE key” and enter `PHPSTORM`.\
 ![PhpStorm Remote Debug Settings](./images/phpstorm-remote-debug.png)

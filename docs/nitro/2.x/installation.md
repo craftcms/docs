@@ -14,7 +14,7 @@
 3. Follow the prompts to create your machine.
 
 // TODO Update WINDOWS
-### Windows 10 Pro (with Hyper-V enabled)
+### Windows 10
 
 ::: tip
 Windows doesn’t currently have an automated install script, so installation and updating must be done manually.

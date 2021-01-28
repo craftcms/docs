@@ -84,20 +84,6 @@ If you have a large amount of files in the `~/dev` folder, it may be more perfor
 If your projects contain any symlinks, such as `path` Composer repositories, those symlinks **must** be relative (`../`), not absolute (`/` or `~/`).
 :::
 
-### Using Nitro with ngrok
-
-If you’re using [ngrok](https://ngrok.com/) to create a public tunnel to a Nitro site, you can use the `-host-header` option like this:
-
-```
-$ ngrok http -host-header=example1.test example1.test:80
-```
-
-With a paid ngrok plan you may also set a custom hostname:
-
-```
-$ ngrok http -hostname=my-hostname.ngrok.io -host-header=example1.test example1.test:80
-```
-
 ## Connecting to the Database
 
 To connect to the machine from a Craft install, set the following environment variables in your `.env` file:
