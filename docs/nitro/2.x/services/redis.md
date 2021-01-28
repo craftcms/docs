@@ -10,7 +10,7 @@ To enable Redis in Nitro, run the following command:
 
 Nitro will then prompt you to `apply` the changes. After the changes have been applied Redis will be available at [https://redis.service.nitro](https://redis.service.nitro).
 
-### Using Redis
+## Using Redis
 
 To use Redis in your Craft project you can configure your compontent to use the following settings:
 

@@ -18,7 +18,7 @@ __Password__: `nitropassword`
 
 ![Minio UI](../images/minio-ui.png)
 
-### Using Minio
+## Using Minio
 
 To use Minio in your Craft project you can configure your compontent to use the following settings:
 

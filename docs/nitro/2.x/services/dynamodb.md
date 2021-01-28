@@ -10,7 +10,7 @@ To enable DynamoDB in Nitro, run the following command:
 
 Nitro will then prompt you to `apply` the changes. After the changes have been applied DynamoDB will be available at [https://dynamodb.service.nitro](https://dynamodb.service.nitro).
 
-### Using DynamoDB
+## Using DynamoDB
 
 To use DynamoDB in your Craft project you can configure your compontent to use the following settings:
 
