@@ -10,13 +10,19 @@ To enable Minio in Nitro, run the following command:
 
 Nitro will then prompt you to `apply` the changes. After the changes have been applied the Mino web UI will be available at [https://minio.service.nitro](https://minio.service.nitro).
 
+The default username and password to access the Minio UI are:
+
+__Username__: `nitro`
+
+__Password__: `nitropassword`
+
 ### Using Minio
 
 To use Minio in your Craft project you can configure your compontent to use the following settings:
 
-Hostname: `minio.service.nitro`
+__Hostname__: `minio.service.nitro`
 
-Port: `9000`
+__Port__: `9000`
 
 > Note: The port 9000 will always be the port to use when in a sites container, even if you override the default port using an environment variable.
 
