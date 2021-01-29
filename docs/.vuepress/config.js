@@ -15,27 +15,9 @@ module.exports = {
         }
       }
     ],
-    [
-      "vuepress-plugin-container",
-      {
-        type: "tip",
-        defaultTitle: ""
-      }
-    ],
-    [
-      "vuepress-plugin-container",
-      {
-        type: "warning",
-        defaultTitle: ""
-      }
-    ],
-    [
-      "vuepress-plugin-container",
-      {
-        type: "danger",
-        defaultTitle: ""
-      }
-    ],
+    ["vuepress-plugin-container", { type: "tip", defaultTitle: "" }],
+    ["vuepress-plugin-container", { type: "warning", defaultTitle: "" }],
+    ["vuepress-plugin-container", { type: "danger", defaultTitle: "" }],
     [
       "vuepress-plugin-container",
       {
@@ -61,8 +43,7 @@ module.exports = {
     docsRepo: "craftcms/docs",
     docsDir: "docs",
     docsBranch: "main",
-    searchPlaceholder:
-      "Search Craft, Commerce, and Nitro docs (Press “/” to focus)",
+    searchPlaceholder: "Search Craft, Commerce, and Nitro docs (Press “/” to focus)",
     editLinks: true,
     nextLinks: true,
     prevLinks: true,
