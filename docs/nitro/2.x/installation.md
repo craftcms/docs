@@ -38,8 +38,6 @@ To completely remove Nitro, first [destroy](commands.md#destroy) your machine:
 nitro destroy
 ```
 
-:::
-
 Then remove your `nitro` command:
 
 ::: code
