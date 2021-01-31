@@ -2,7 +2,7 @@
 
 ## Adding Sites
 
-To add a site to Nitro, three things need to happen:
+Nitro needs a few things in order to set up a site:
 
 - The web server within your Nitro machine needs to be configured to serve your site.
 - Your system’s `hosts` file needs to be updated to associate your site’s hostname with Nitro.
