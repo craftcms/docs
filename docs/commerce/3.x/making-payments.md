@@ -116,7 +116,7 @@ Below is a simplified example of the fields required to make a payment using Twi
 ```twig
 {% set number = '00000000000000099999999999999999' %}
 {% set email = 'example@email-address.com' %}
-{% set cart = craft.orders.number(number).one() ?? null %}
+{% set cart = craft.orders().number(number).one() ?? null %}
 {% set cancelUrl = craft.app.request.getUrl()|hash %}
 
 <form method="post">

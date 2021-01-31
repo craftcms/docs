@@ -183,7 +183,7 @@ The Customer field on Craft’s [`currentUser`](/3.x/dev/global-variables.md#cur
 
 ::: code
 ```twig
-// gets the customer active in the current session
+{# gets the customer active in the current session #}
 {% set customer = craft.commerce.customers.customer %}
 ```
 

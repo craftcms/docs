@@ -29,7 +29,9 @@ The name of the product type as displayed in the control panel.
 The handle is what you’ll use to reference the product type in code. In Twig, for example, to get your product types with a handle of `clothes` you would use:
 
 ```twig
-{% set clothes = craft.products.type('clothes').all() %}
+{% set clothes = craft.products()
+    .type('clothes')
+    .all() %}
 ```
 
 #### Title Field Label

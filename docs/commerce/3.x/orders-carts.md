@@ -96,7 +96,7 @@ If the product has multiple variants, you could provide a dropdown menu to allow
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
     {{ redirectInput('shop/cart') }}
-    {{ hiddenInput('successMessage', 'Added ' ~ product.title ~ ' to the cart.') }}
+    {{ hiddenInput('successMessage', 'Added ' ~ product.title ~ ' to cart.'|hash) }}
     {{ hiddenInput('qty', 1) }}
 
     <select name="purchasableId">
@@ -124,7 +124,7 @@ You can add multiple purchasables to the cart in a single request using a `purch
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
     {{ redirectInput('shop/cart') }}
-    {{ hiddenInput('successMessage', 'Products added to the cart.') }}
+    {{ hiddenInput('successMessage', 'Products added to the cart.'|hash) }}
     {% for variant in product.variants %}
         {{ hiddenInput('purchasables[' ~ loop.index ~ '][id]', variant.id) }}
         {{ hiddenInput('purchasables[' ~ loop.index ~ '][qty]', 1) }}
