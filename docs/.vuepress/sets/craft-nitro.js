@@ -25,6 +25,11 @@ module.exports = {
           children: ["usage", "commands", "create", "composer", "share"]
         },
         {
+          title: "Databases",
+          collapsable: false,
+          children: ["databases", "multiple-databases", "backups", "importing"]
+        },
+        {
           title: "Services",
           collapsable: false,
           children: ["services/dynamodb", "services/mailhog", "services/minio", "services/redis"]
@@ -37,7 +42,7 @@ module.exports = {
         {
           title: "Advanced Settings",
           collapsable: false,
-          children: ["php-settings", "extensions"]
+          children: ["php-settings", "extensions", "plugin-development"]
         },
       ]
     },
