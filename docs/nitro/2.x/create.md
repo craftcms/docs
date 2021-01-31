@@ -38,7 +38,7 @@ No lock file found. Updating dependencies instead of installing from lock file. 
 Loading composer repositories with package information
 Updating dependencies
 Lock file operations: 87 installs, 0 updates, 0 removals
-// removed for brevity
+# removed for brevity
 ```
 
 There is a lot happening here, but `nitro create` performs the following steps:
