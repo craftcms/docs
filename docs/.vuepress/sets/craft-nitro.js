@@ -42,7 +42,7 @@ module.exports = {
         {
           title: "Advanced Settings",
           collapsable: false,
-          children: ["php-settings", "extensions", "plugin-development"]
+          children: [["php-settings", "PHP Settings"], ["extensions", "PHP Extensions"], ["plugin-development", "Plugin Development"]]
         },
       ]
     },
