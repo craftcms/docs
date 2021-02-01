@@ -1,4 +1,4 @@
-# Minio (S3 Testing)
+# Minio
 
 Nitro comes with an easy way to setup and configure Minio (a S3 compatible server) for local testing. To enable Minio, run the following command:
 

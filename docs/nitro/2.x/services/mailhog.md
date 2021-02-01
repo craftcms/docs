@@ -1,6 +1,6 @@
-# MailHog (Email Testing)
+# MailHog
 
-Nitro comes with an easy way to setup and configure MailHog for local email testing. To enable MailHog, run the following command:
+Nitro comes with an easy way to set up and configure MailHog for local email testing. To enable MailHog, run the following command:
 
 ## Enabling MailHog
 

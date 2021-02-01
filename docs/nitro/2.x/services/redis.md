@@ -1,4 +1,4 @@
-# Redis (Caching and Queue)
+# Redis
 
 Nitro comes with an easy way to setup and configure Redis for local testing.
 

@@ -1,16 +1,17 @@
-# First Time Setup
+# Project Setup
 
-## Adding Sites
+Setting up sites and working with databasese after you’ve [installed](installation.md) Nitro.
+
+## Setting Up Sites
 
 Nitro needs a few things in order to set up a site:
 
 - The web server within your Nitro machine needs to be configured to serve your site.
 - Your system’s `hosts` file needs to be updated to associate your site’s hostname with Nitro.
 
-### Add a site with `nitro add`
+### Adding a Site with `nitro add`
 
-If your project files are completely contained within a single folder, then you can quickly accomplish these using
-the [`add`](#add) command:
+You can navigate to an existing project folder and add a site for it using the [`add`](commands.md#add) command:
 
 ```bash
 $ cd /path/to/project
@@ -54,30 +55,116 @@ Adding sites to hosts file…
 Nitro is up and running 😃
 ```
 
-### Mounting your entire dev folder at once
+### Creating a New Site with `nitro create`
 
-If you manage all of your projects within a single dev folder, you can mount that entire folder once within Nitro, and point your sites’ web roots to the appropriate directroy and webroot within it.
+The [`add`](commands.md#add) command establishes a site from an existing project, but you can use [`create`](commands.md#create) to initialize a brand new project *and* create a site for it.
 
-To do that, open your `~/.nitro/nitro.yaml` file in a text editor (or run the [`edit`](commands.md#edit) command), and add a multiple sites with the same `path` as your `~/dev` folder. The webroot for each site should be the `folder-name/web` to route HTTP requests properly:
+By default it sets up a Craft CMS project just like you’d get running `composer create-project craftcms/craft my-project` to get a fresh [Craft installation](/3.x/installation.md).
 
-```yaml
+Below we’ll install Craft in a new `tutorial/` directory with `tutorial.nitro` as its hostname:
+
+```bash
+$ nitro create tutorial
+Downloading https://github.com/craftcms/craft/archive/HEAD.zip ...
+  … setting up project ✓
+New site downloaded 🤓
+Enter the hostname [tutorial.nitro]:
+  ✓ setting hostname to tutorial.nitro
+  ✓ adding site ~/dev/tutorial
+Enter the webroot for the site [web]:
+  ✓ using webroot web
+Choose a PHP version:
+  1. 8.0
+  2. 7.4
+  3. 7.3
+  4. 7.2
+  5. 7.1
+  6. 7.0
+Enter your selection: 1
+  ✓ setting PHP version 8.0
+Add a database for the site [Y/n]
+Select the database engine:
+  1. mysql-8.0-3306.database.nitro
+  2. postgres-13-5432.database.nitro
+Enter your selection: 2
+Enter the new database name: tutorial
+  … creating database tutorial ✓
+Database added 💪
+Should we update the env file? [Y/n] y
+.env updated!
+  … checking /Users/oli/dev/tutorial/composer.json ✓
+No lock file found. Updating dependencies instead of installing from lock file. Use composer update over composer install if you do not have a lock file.
+Loading composer repositories with package information
+Updating dependencies
+Lock file operations: 87 installs, 0 updates, 0 removals
+# removed for brevity
+```
+
+`nitro create` performs the following steps:
+
+1. Creates a project using the latest [`craftcms/craft`](https://github.com/craftcms/craft) boilerplate from GitHub.
+2. Creates the `tutorial` directory and copies the `craftcms/craft` contents into it.
+3. Prompts for the new Nitro site’s hostname.
+4. Prompts for the site’s PHP version.
+5. Copies `.env.example` to `.env`.
+6. Prompts for database creation. If you choose to create a database, you’ll be prompted for its name and Nitro will offer to update the `.env` database settings automatically.
+7. Installs Composer dependencies using [`nitro composer`](commands.md#composer).
+9. Prompts you to run [`nitro apply`](commands.md#apply) in order to update Nitro’s settings and your hosts file.
+
+::: tip
+You can pass your own repository to `nitro create` and use that as the scaffold:
+
+```sh
+nitro create https://github.com/craftcms/demo my-project
+```
+:::
+
+### Mounting Your Entire Development Folder
+
+If you manage all your projects within a single dev folder, you can mount that folder once within Nitro and point each site’s web root to the relevant sub-directory within it.
+
+Open your `~/.nitro/nitro.yaml` file in a text editor (or run the [`edit`](commands.md#edit) command), and add sites that each point their `path` setting to your dev folder.
+
+Pretend you use a `dev` directory that lives in your home folder, with each project in a subdirectory:
+
+```treeview
+~/dev/
+├── happy-lager/
+│   ├── ...
+│   └── web/
+├── spoke-and-chain/
+│   ├── ...
+│   └── web/
+└── starter-blog/
+    ├── ...
+    └── web/
+```
+
+You can point to the dev folder for every site’s `path`, with a specific `webroot` for each one:
+
+```yaml{3,4,8,9,13,14}
 sites:
- - hostname: example1.test
+ - hostname: happylager.nitro
    path: ~/dev
-   webroot: example1.test/web
+   webroot: happy-lager/web
    version: "7.4"
    xdebug: false
- - hostname: example2.test
+ - hostname: spokeandchain.nitro
    path: ~/dev
-   webroot: example2.test/web
+   webroot: spoke-and-chain/web
+   version: "7.4"
+   xdebug: false
+ - hostname: starterblog.nitro
+   path: ~/dev
+   webroot: starter-blog/web
    version: "7.4"
    xdebug: false
 ```
 
-Then run `nitro apply` to apply your `nitro.yaml` changes to the machine.
+Run `nitro apply` to apply your `nitro.yaml` changes.
 
 ::: tip
-If you have a large amount of files in the `~/dev` folder, it may be more performant to mount site individually using `nitro add`.
+If you have a large number of files in the development folder, it may be more performant to mount sites individually using `nitro add`.
 :::
 
 ::: warning
@@ -95,9 +182,9 @@ DB_PASSWORD="nitro"
 DB_DATABASE="nitro"
 ```
 
-To connect to the database from your host operating system, you’ll first need to get the IP address of your Nitro machine. You can find that by running the [info](#info) command.
+To connect to the database from your host operating system, you’ll first need to get the IP address of your Nitro machine. You can the IPv4 address by running the [`info`](commands.md#info) command:
 
-```
+```{4}
 $ nitro info
 Name:           nitro-dev
 State:          Running
@@ -111,8 +198,8 @@ Memory usage:   526.4M out of 3.9G
 
 Then from your SQL client of choice, create a new database connection with the following settings:
 
-- **Host**: _The `IPv4` value from `nitro info`_
-- **Port**: _The port you configured your database with (3306 for MySQL or 5432 for PostgreSQL by default)._
+- **Host**: IPv4 value from [`nitro info`](commands.md#info).
+- **Port**: Database port. (3306 for MySQL or 5432 for PostgreSQL by default).
 - **Username**: `nitro`
 - **Password**: `nitro`
 
@@ -146,4 +233,4 @@ databases:
 Each database engine needs its own unique port.
 :::
 
-Run `nitro apply` to apply your `nitro.yaml` changes to the machine.
+Run `nitro apply` to apply your `nitro.yaml` changes.

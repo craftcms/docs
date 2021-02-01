@@ -1,4 +1,4 @@
-# DynamoDB (NoSQL)
+# DynamoDB
 
 Nitro comes with an easy way to setup and configure DynamoDB for local testing.
 

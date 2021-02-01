@@ -22,22 +22,22 @@ module.exports = {
         {
           title: "Using Nitro",
           collapsable: false,
-          children: ["usage", "commands", "create", "composer", "share"]
+          children: ["usage", "commands", "composer", "share"]
         },
         {
           title: "Databases",
           collapsable: false,
-          children: ["databases", "multiple-databases", "backups", "importing"]
+          children: [["databases", "Connecting a GUI"], "multiple-databases", ["backups", "Backing Up"], ["importing", "Importing"]]
         },
         {
           title: "Services",
           collapsable: false,
-          children: ["services/dynamodb", "services/mailhog", "services/minio", "services/redis"]
+          children: ["services/redis", "services/mailhog", "services/dynamodb", "services/minio"]
         },
          {
            title: "Debugging",
            collapsable: false,
-           children: ["xdebug", "ray"]
+           children: [["xdebug", "Xdebug"], ["ray", "Ray"]]
          },
         {
           title: "Advanced Settings",
