@@ -2,13 +2,13 @@
 
 Nitro provides a handy way to backup a database using the [`db backup`](commands.md#db-backup).
 
-To backup an existing database, run the following command:
+To backup an existing database, run the `db backup` command:
 
 ```bash
 $ nitro db backup
 ```
 
-If you have more than one database engine you will be prompted to select an engine, otherwise it will default to the first engine.
+If you have [more than one database engines](multiple-databases.md) you’ll be prompted to select one:
 
 ```bash
 Getting ready to backup…
@@ -18,11 +18,7 @@ Which database engine?
 Enter your selection: 2
 ```
 
-::: tip
-Nitro supports [multiple database](multiple-databases.md) versions of the same type and/or version to run at the same time.
-:::
-
-Nitro will now look at all of the available databases and prompt you to select which database to backup:
+Nitro will now look at all the available databases and prompt you to select one to back up:
 
 ```bash
 Which database should we backup?
@@ -32,7 +28,7 @@ Which database should we backup?
 Enter your selection: 3
 ```
 
-Nitro will perform a backup of the database and save it to your host machines `~/.nitro/backups` directory:
+Nitro will back up the database and save it to your host machine’s `~/.nitro/backups` directory:
 
 ```bash
 Preparing backup…

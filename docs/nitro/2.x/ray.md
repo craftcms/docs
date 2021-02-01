@@ -16,12 +16,12 @@ If you only want to use Ray in development, run `nitro composer require spatie/c
 
 ## Configuring
 
-Visit the control panel -> plugins and enable the Ray.
+In the control panel, visit **Settings** → **Plugins**, choose **Ray** and switch on the **Enable** setting.
 
-**Host:** `host.docker.internal`
+Enter the following:
 
-**Remote Path:** `/app`
-
+**Host:** `host.docker.internal`\
+**Remote Path:** `/app`\
 **Local Path:** `/path/to/your/local/project`
 
 ![Ray Plugin Settings](./images/ray-plugin-config.png)

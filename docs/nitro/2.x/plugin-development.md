@@ -1,6 +1,6 @@
 # Setting up Nitro for Plugin Development
 
-Nitro supports running multiple sites with their own PHP versions, settings and xdebug making plugin development a breeze. There are many ways to setup Nitro for plugin development but here are just a few.
+Nitro supports running multiple sites with their own PHP versions, settings and Xdebug making plugin development a breeze. There are many ways to setup Nitro for plugin development but here are just a few.
 
 ## Local Composer Repository
 
