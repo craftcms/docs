@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-02-01
+### Added
+- Added content to Craft’s URL Fields page.
+
 ## 2021-01-27
 ### Changed
 - Updated areas of the Craft 3 docs for the new PHP 7.2.5+ requirement.
