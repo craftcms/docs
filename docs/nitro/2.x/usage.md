@@ -182,23 +182,44 @@ DB_PASSWORD="nitro"
 DB_DATABASE="nitro"
 ```
 
-To connect to the database from your host operating system, you’ll first need to get the IP address of your Nitro machine. You can the IPv4 address by running the [`info`](commands.md#info) command:
+Use the [`context`](commands.md#context) command to get the database hostname:
 
-```{4}
-$ nitro info
-Name:           nitro-dev
-State:          Running
-IPv4:           192.168.64.2
-Release:        Ubuntu 20.04 LTS
-Image hash:     2f6bc5e7d9ac (Ubuntu 20.04 LTS)
-Load:           0.71 0.74 0.60
-Disk usage:     2.7G out of 38.6G
-Memory usage:   526.4M out of 3.9G
+```{23}
+$ nitro context
+Craft Nitro 2.0.0-alpha
+
+Configuration:   /Users/oli/.nitro/nitro.yaml
+
+Sites:
+  hostname:  happylager.nitro
+  php:   7.4
+  webroot:   happy-lager/web
+  path:  ~/dev
+  ---
+  hostname:  spokeandchain.nitro
+  php:   7.4
+  webroot:   spoke-and-chain/web
+  path:  ~/dev
+  ---
+  hostname:  starterblog.nitro
+  php:   7.4
+  webroot:   starter-blog/web
+  path:  ~/dev
+  ---
+Databases:
+  engine:    mysql 5.7  hostname: mysql-5.7-3306.database.nitro
+  username:  nitro  password: nitro
+  port:  3306
+  ---
+  engine:    postgres 12    hostname: postgres-12-5432.database.nitro
+  username:  nitro  password: nitro
+  port:  5432
+  ---
 ```
 
 Then from your SQL client of choice, create a new database connection with the following settings:
 
-- **Host**: IPv4 value from [`nitro info`](commands.md#info).
+- **Host**: hostname from [`nitro context`](commands.md#context).
 - **Port**: Database port. (3306 for MySQL or 5432 for PostgreSQL by default).
 - **Username**: `nitro`
 - **Password**: `nitro`
