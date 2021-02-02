@@ -82,7 +82,7 @@ Searching is a great way to quickly query content broadly across elements, but t
 ::: code
 ```twig
 {# Get the user’s search query from the 'q' query string param #}
-{% set searchQuery = craft.app.request.getParam('q') %}
+{% set searchQuery = craft.app.request.getQueryParam('q') %}
 
 {# Fetch entries that match the search query #}
 {% set results = craft.entries()
