@@ -69,7 +69,7 @@ Nitro is up and running 😃
 Add an alias domain to a site.
 
 ```
-nitro alias [<options>]
+nitro alias
 ```
 
 #### Example
