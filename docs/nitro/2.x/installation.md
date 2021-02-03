@@ -14,7 +14,7 @@ macOS users can optionally install Nitro [using Brew](#macos-via-brew).
 2. Visit Nitro’s [GitHub Releases](https://github.com/craftcms/nitro/releases) page and download the archive for your system.
 3. Extract the release archive and make the Nitro binary executable with `chmod +x ./nitro`.
 4. Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
-5. In your terminal, run `nitro`, choose **Cancel** for the security prompt, and visit **System Preferences** → **Security and Privacy** → **General** to choose **Allow Anyway** next to the warning about `nitro` being blocked. (Alternatively, you can strip the automatic quarantine flag using `xattr -dr com.apple.quarantine nitro`.)
+5. In your terminal, run `nitro`, choose **Cancel** for the security prompt, and visit **System Preferences** → **Security and Privacy** → **General** to choose **Allow Anyway** next to the warning about `nitro` being blocked. (Alternatively, you can strip the automatic quarantine flag using `xattr -dr com.apple.quarantine /usr/local/bin/nitro`.)
 5. Run `nitro init` and follow the prompts to create your machine.
 
 ### Windows 10
