@@ -12,13 +12,13 @@ Nitro will then prompt you to `apply` the changes. After the changes have been a
 
 ## Using Redis
 
-To use Redis in your Craft project you can configure your compontent to use the following settings:
+To use Redis in your Craft project you can configure your component to use the following settings:
 
-**Hostname**: `redis.service.nitro`
+**Hostname**: `redis.service.nitro`\
 **Port**: `6379`
 
 ::: tip
-The port 6379 will always be the port to use when in a sites container, even if you override the default port using an environment variable.
+The port 6379 will always be the port to use when in a *sites container*, even if you override the default port using an environment variable.
 :::
 
 ## Disabling Redis
