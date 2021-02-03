@@ -16,7 +16,7 @@ Nitro installs the following:
 - Redis
 - [Xdebug](https://xdebug.org/)
 - [MailHog](https://github.com/mailhog/MailHog) email testing
-- [Minio](https://min.io/) object storage
+- [MinIO](https://min.io/) object storage
 - [DynamoDB](https://aws.amazon.com/dynamodb/) NoSQL database service
 
 ## System Requirements
