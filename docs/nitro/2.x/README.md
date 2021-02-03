@@ -15,7 +15,6 @@ Nitro installs the following:
 - PostgreSQL
 - Redis
 - [Xdebug](https://xdebug.org/)
-- [Blackfire](https://blackfire.io/) performance profiling
 - [MailHog](https://github.com/mailhog/MailHog) email testing
 - [Minio](https://min.io/) object storage
 - [DynamoDB](https://aws.amazon.com/dynamodb/) NoSQL database service

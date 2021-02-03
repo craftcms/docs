@@ -5,10 +5,10 @@
 ### macOS and Linux
 
 ::: tip
-macOS users can optionally install Nitro using [Brew](#installing-nitro-with-brew)
+macOS users can optionally install Nitro [using Brew](#macos-via-brew).
 :::
 
-1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) (requires 3.0.0+).
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
 2. Run this terminal command:
 
     ```bash
@@ -19,11 +19,13 @@ macOS users can optionally install Nitro using [Brew](#installing-nitro-with-bre
 
 ### Windows 10
 
-Nitro v2 beta currently doesn't support Windows, but we're working on it and will have support and guidance before v2 launches.
+::: danger
+Nitro v2 beta currently doesn’t support Windows, but we’re working on it and will have support and guidance before v2 launches.
+:::
 
-## Installing Nitro with Brew
+### macOS via Brew
 
-Nitro v2 is also available using [Brew.sh](https://brew.sh). To install Nitro with brew, run the following:
+You can install Nitro with the [Homebrew](https://brew.sh) package manager:
 
 ```bash
 brew tap craftcms/nitro

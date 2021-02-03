@@ -424,9 +424,6 @@ nitro disable [<options>]
   # disable mailhog
   nitro disable mailhog
 
-  # disable blackfire
-  nitro disable blackfire
-
   # disable minio
   nitro disable minio
 
@@ -480,9 +477,6 @@ nitro enable [<options>]
 
   # enable mailhog
   nitro enable mailhog
-
-  # enable blackfire
-  nitro enable blackfire
 
   # enable minio
   nitro enable minio
