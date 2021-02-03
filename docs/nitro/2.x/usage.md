@@ -1,12 +1,13 @@
 # Project Setup
 
-Setting up sites and working with databasese after you’ve [installed](installation.md) Nitro.
+Setting up sites and working with databases after you’ve [installed](installation.md) Nitro.
 
 ## Setting Up Sites
 
 Nitro needs a few things in order to set up a site:
 
-- The web server within your Nitro machine needs to be configured to serve your site.
+- A container needs to be added to serve your site.
+- The container has to mount a local folder with your sites code.
 - Your system’s `hosts` file needs to be updated to associate your site’s hostname with Nitro.
 
 ### Adding a Site with `nitro add`
