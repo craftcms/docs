@@ -838,34 +838,6 @@ Restarting Nitro…
 Nitro restarted 🎉
 ```
 
-## `self-update`
-
-Update nitro CLI to the latest version.
-
-```
-nitro self-update
-```
-
-#### Example
-
-```
-$ nitro self-update
-Checking for updates
-  … found version 2.1.0 updating ✓
-Updating to Nitro 2.1.0!
-
-$ nitro version
-View the changelog at https://github.com/craftcms/nitro/blob/2.1.0/CHANGELOG.md
-
-Nitro CLI:       2.1.0
-Nitro gRPC:      2.0.0
-Docker API:      1.41 (1.12 min)
-Docker CLI:      1.41
-
-The Nitro CLI and gRPC versions do not match
-You might need to run `nitro update`
-```
-
 ## `share`
 
 Allows you to SSH into a container.
