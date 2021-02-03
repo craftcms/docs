@@ -10,15 +10,19 @@ nitro add [<options>]
 
 #### Options
 
-: You can pass an optional path as the only argument for creating a site outside of the current directory.
+You can pass an optional path as the only argument for creating a site outside of the current directory.
 
 #### Example
 
+Specifying a full path:
+
 ```
 $ nitro add /path/to/project
+```
 
-OR
+Navigating to a project directory and adding it:
 
+```
 $ cd /path/to/project
 $ nitro add
 Adding site…
