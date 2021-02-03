@@ -8,7 +8,7 @@ Email fields have the following settings:
 
 * **Placeholder Text** – The field’s placeholder text, to be displayed if the field has no value yet
 
-## Templating
+## Development
 
 Calling an Email field in your templates will return the value that was entered in the field.
 
