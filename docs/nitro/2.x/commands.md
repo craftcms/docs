@@ -71,6 +71,7 @@ nitro alias [<options>]
 #### Example
 
 ```
+$ nitro alias
  Select a site:
   1. plugins-dev.nitro
   2. tutorial.nitro
