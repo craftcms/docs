@@ -1,6 +1,6 @@
 # Setting up Nitro for Plugin Development
 
-Nitro supports running multiple sites with their own PHP versions, settings and Xdebug making plugin development a breeze. There are many ways to setup Nitro for plugin development but here are just a few.
+Nitro supports running multiple sites with their own PHP versions, settings and Xdebug making plugin development easy. There are many ways to setup Nitro for plugin development but here are just a few.
 
 ## Local Composer Repository
 
@@ -35,10 +35,15 @@ Edit your `composer.json` to add a `repositories` setting:
   ]
 ```
 
-Update composer using the [`composer`](commands.md#composer) command:
+To add your local plugin, you need to require it in your project. In your sites root directory, require your plugin with the [`composer`](commands.md#composer) command:
 
 ```bash
-$ nitro composer install
+$ nitro composer require craftcms/commerce
 ```
 
-You can now install your plugin and make changes that will be tracked with Git!
+In the output, you will see your plugin referenced using a symlink during the installation.
+
+    - Installing craftcms/commerce (3.2.14.1): Symlinking from ./plugins/commerce
+
+
+In the control panel, visit **Settings** → **Plugins**, choose **Commerce** and switch on the **Enable** setting. You can now develop your plugins locally and keep changes tracked with Git!
