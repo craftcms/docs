@@ -29,7 +29,7 @@ You can install Nitro with the [Homebrew](https://brew.sh) package manager:
 
 ```bash
 brew tap craftcms/nitro
-brew install craftcms/nitro
+brew install nitro
 ```
 
 ## Uninstalling Nitro
