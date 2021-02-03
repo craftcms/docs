@@ -1,7 +1,7 @@
 # Upgrading from Nitro 1
 
 ::: warning
-If you're on Windows, don't. Nitro 2 is currently in beta and we're working on Windows support.
+If you’re on Windows, don’t. Nitro 2 is currently in beta and we’re working on Windows support.
 :::
 
 Nitro 2 is built on [Docker](https://www.docker.com/products/docker-desktop) instead of Multipass and nearly everything has changed under the hood.
