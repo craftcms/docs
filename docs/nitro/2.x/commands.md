@@ -260,6 +260,28 @@ Yii Migration Tool (based on Yii v2.0.38)
 Migrated up successfully.
 ```
 
+## `create`
+
+Initializes and adds a new site. Pass the name of the directory that should be created with a fresh install of the [Craft Composer project](https://github.com/craftcms/craft), or a reference to your own repository followed by the directory name.
+
+```
+nitro create [<options>]
+```
+
+#### Example
+
+
+```bash
+# new default Craft site in `my-project/` directory
+nitro create my-project
+
+# new site from repository in `my-project/` directory
+nitro create https://github.com/craftcms/demo my-project
+
+# same as above using GitHub repository shorthand
+nitro create craftcms/demo my-project
+```
+
 ## `db add`
 
 Adds a new database in the selected database engine.
