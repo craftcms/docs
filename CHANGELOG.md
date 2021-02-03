@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-02-03
+### Changed
+- Listed a few handy MigrationHelper methods in the Migrations docs.
+
 ## 2021-02-01
 ### Added
 - Added content to Craft’s URL Fields page.

@@ -62,6 +62,12 @@ $this->db->createCommand()
 $this->insert('{{%mytablename}}', $rows);
 ```
 
+<craft3:craft\helpers\MigrationHelper> provides several helpful methods as well:
+
+- [dropForeignKeyIfExists()](craft3:craft\helpers\MigrationHelper::dropForeignKeyIfExists()) removes a foreign key if it exists, without needing to know its exact name.
+- [dropIndexIfExists()](craft3:craft\helpers\MigrationHelper::dropIndexIfExists()) removes an index if it exists, without needing to know its exact name.
+- [dropTable()](craft3:craft\helpers\MigrationHelper::dropTable()) drops a table, along with any foreign keys that reference it (some of which your plugin might not even be aware of).
+
 ::: warning
 The <yii2:yii\db\Migration::insert()>, [batchInsert()](<craft3:craft\db\Migration::batchInsert()>), and [update()](<yii2:yii\db\Migration::update()>) migration methods will automatically insert/update data in the `dateCreated`, `dateUpdated`, `uid` table columns in addition to whatever you specified in the `$columns` argument. If the table you’re working with does’t have those columns, make sure you pass `false` to the `$includeAuditColumns` argument so you don’t get a SQL error.
 :::
