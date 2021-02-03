@@ -60,6 +60,30 @@ Adding sites to hosts file…
 Nitro is up and running 😃
 ```
 
+## `alias`
+
+Add an alias domain to a site.
+
+```
+nitro alias [<options>]
+```
+
+#### Example
+
+```
+ Select a site:
+  1. plugins-dev.nitro
+  2. tutorial.nitro
+Enter your selection: 1
+The following aliases are set for plugins-dev.nitro
+   plugins.dev
+Enter the alias domain for the site (use commas to enter multiple): plugins.nitro,playground.nitro
+Adding aliases:
+   plugins.nitro
+   playground.nitro
+Apply changes now [Y/n] y
+```
+
 ## `apply`
 
 Ensures all resources exist and applies any config changes to them.
