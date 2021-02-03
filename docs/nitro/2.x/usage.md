@@ -172,6 +172,28 @@ If you have a large number of files in the development folder, it may be more pe
 If your projects contain any symlinks, such as `path` Composer repositories, those symlinks **must** be relative (`../`), not absolute (`/` or `~/`).
 :::
 
+## Adding Site Aliases
+
+If you need a given site to have more than one domain name associated with it, as you might with a [multi-site Craft install](/3.x/sites.md) for example, you can add any number of domain aliases with the [`alias`](commands.md#alias) command.
+
+
+If we wanted the project at `spokeandchain.nitro` to also be available at `en.spokeandchain.nitro` and `fr.spokeandchain.nitro`, for example, we would add those domains as aliases like this:
+
+```
+$ nitro alias
+ Select a site:
+  1. happylager.nitro
+  2. spokeandchain.nitro
+  3. starterblog.nitro
+Enter your selection: 2
+No existing aliases are set for spokeandchain.nitro
+Enter the alias domain for the site (use commas to enter multiple): en.spokeandchain.nitro,fr.spokeandchain.nitro
+Adding aliases:
+   en.spokeandchain.nitro
+   fr.spokeandchain.nitro
+Apply changes now [Y/n] y
+```
+
 ## Connecting to the Database
 
 To connect to the machine from a Craft install, set the following environment variables in your `.env` file:
