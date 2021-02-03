@@ -16,7 +16,7 @@ To upgrade, you’ll need to do the following:
 
 1. Back up databases from the Nitro virtual machine by running `nitro db backup`.
 2. Run `nitro context` and note your Nitro machine’s IP address.
-3. Once your backups have finished, destroy your Nitro machine with `nitro destroy --skip-backups`.
+3. Once your backups have finished, destroy your Nitro machine with `nitro destroy --skip-backup`.
 4. Edit your hosts file (`/etc/hosts`) and remove any lines pointing Nitro sites or the IP address from step 1 (e.g. `192.168.7.64 nitro.test`).
 5. Optionally uninstall Multipass. (Instructions on the [macOS Installation page](https://multipass.run/docs/installing-on-macos).)
 
