@@ -49,6 +49,10 @@ Now you’re ready to start propagating changes in your `config/project/` folder
 
 As you make changes in a development environment, you will notice the contents of your `config/project/` folder are updated to reflect those changes. Commit those files to your Git repository just like your templates, front-end resources, and other project files.
 
+::: warning
+Don’t make manual changes to your YAML files unless you’re positive you know what you are doing. Manual edits are prone to miss changes in other parts of the project config that should be made simultaneously.
+:::
+
 When you [deploy your changes to other environments](https://craftcms.com/knowledge-base/deployment-best-practices), you can then _apply_ the project config changes in one of two ways:
 
 1. From the “Project Config” utility in the control panel.
