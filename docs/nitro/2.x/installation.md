@@ -41,24 +41,24 @@ To completely remove Nitro, first [destroy](commands.md#destroy) your machine:
 nitro destroy
 ```
 
+### macOS and Linux
+
 Then remove your `nitro` command:
 
-::: code
-```bash macOS and Linux
+```bash
 sudo rm /usr/local/bin/nitro
 ```
-```bash Windows
-rm -rf $HOME/Nitro
-```
-:::
 
 You can optionally remove your Nitro config as well:
 
-::: code
 ```bash macOS and Linux
 rm -rf ~/.nitro
 ```
-```bash Windows
-rm -rf $HOME/.nitro
+
+### macOS via Brew
+
+If you installed Nitro with `brew`:
+
+```bash
+brew uninstall nitro
 ```
-:::
