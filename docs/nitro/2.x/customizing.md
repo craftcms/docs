@@ -2,6 +2,10 @@
 
 Nitro exposes a variety of ports and settings for you to customize using environment variables.
 
+::: tip Looking to adjust resources?
+Nitro uses whatever CPU, memory, and disk settings you’ve set for Docker. Use the **Resources** section of Docker Desktop to adjust as needed—Nitro will automatically use your new settings after Docker restarts.
+:::
+
 ## How to Customize Nitro’s Defaults
 
 Let’s say you’re running another local development environment and the [`portcheck`](commands.md#portcheck) command confirms port 80 (http) is already in use:
@@ -44,14 +48,17 @@ echo 'export NITRO_HTTP_PORT=8080' >> ~/.zshrc
 
 ## Nitro Environment Variables
 
-| Environment Variable      | Used By                                           | Default     |
-| ------------------------- | ------------------------------------------------- | ----------- |
-| `NITRO_HTTP_PORT`         | http URLs                                         | `80`        |
-| `NITRO_HTTPS_PORT`        | https URLs                                        | `443`       |
-| `NITRO_API_PORT`          | gRPC                                              | `5000`      |
-| `NITRO_DEFAULT_TLD`       | TLD for auto-suggested site hostnames             | `nitro`     |
-| `NITRO_MAILHOG_SMTP_PORT` | MailHog SMTP                                      | `1025`      |
-| `NITRO_MAILHOG_HTTP_PORT` | MailHog web interface                             | `8025`      |
-| `NITRO_MINIO_HTTP_PORT`   | MinIO web interface                               | `9000`      |
-| `NITRO_REDIS_HTTP_PORT`   | Redis server port                                 | `6379`      |
-| `NITRO_EDIT_HOSTS`        | Attempt to edit hosts file when applying changes? | `true`      |
+The table below details every environment variable you can use to customize Nitro, what it’s used for, whatever its default value is, and which container—if any—you’ll need to reinitialize for your customization to take effect.
+
+| Environment Variable      | Used By                                           | Default     | Container                |
+| ------------------------- | ------------------------------------------------- | ----------- | ------------------------ |
+| `NITRO_HTTP_PORT`         | http URLs                                         | `80`        | `nitro-proxy`            |
+| `NITRO_HTTPS_PORT`        | https URLs                                        | `443`       | `nitro-proxy`            |
+| `NITRO_API_PORT`          | gRPC                                              | `5000`      | `nitro-proxy`            |
+| `NITRO_DEFAULT_TLD`       | TLD for auto-suggested site hostnames             | `nitro`     | n/a                      |
+| `NITRO_EDIT_HOSTS`        | Attempt to edit hosts file when applying changes? | `true`      | n/a                      |
+| `NITRO_MAILHOG_SMTP_PORT` | MailHog SMTP                                      | `1025`      | `mailhog.service.nitro`  |
+| `NITRO_MAILHOG_HTTP_PORT` | MailHog web interface                             | `8025`      | `mailhog.service.nitro`  |
+| `NITRO_DYNAMODB_PORT`     | DynamoDB server port                              | `8000`      | `dynamodb.service.nitro` |
+| `NITRO_MINIO_HTTP_PORT`   | MinIO web interface and API                       | `9000`      | `minio.service.nitro`    |
+| `NITRO_REDIS_PORT`        | Redis server port                                 | `6379`      | `redis.service.nitro`    |
