@@ -14,6 +14,28 @@ module.exports = {
   primarySet: true,
   sidebar: {
     "3.x": {
+      "/extend/": [
+        {
+          title: "Extending Commerce",
+          collapsable: false,
+          children: [["", "Introduction"], "events"]
+        },
+        {
+          title: "System Components",
+          collapsable: false,
+          children: [
+            "payment-gateway-types",
+            "purchasable-types",
+            "adjusters",
+            "shipping-methods"
+          ]
+        },
+        {
+          title: "More",
+          collapsable: false,
+          children: ["template-hooks", "tax-engines"]
+        }
+      ],
       "/": [
         {
           title: "Introduction",
@@ -21,88 +43,107 @@ module.exports = {
           children: ["", "editions"]
         },
         {
-          title: "Installing Craft Commerce",
+          title: "Installing & Updating",
           collapsable: false,
-          children: ["requirements", "installation", "upgrading"]
+          children: ["requirements", "installation", "updating", "upgrading"]
         },
         {
           title: "Configuration",
           collapsable: false,
-          children: ["configuration", "project-config"]
+          children: ["configuration", "config-settings"]
         },
         {
-          title: "Core Concepts",
+          title: "System Overview",
+          collapsable: false,
+          children: ["core-concepts", "store-management", "purchasables"]
+        },
+        {
+          title: "Common Objects",
           collapsable: false,
           children: [
-            "cart",
-            "orders",
-            "products",
-            "product-types",
-            "donations",
+            "products-variants",
+            "orders-carts",
             "customers",
             "sales",
             "discounts",
-            "tax",
             "shipping",
+            "tax",
+            "subscriptions",
+            "donations",
+            "payment-gateways",
+            "payment-currencies"
+          ],
+          toggleChildren: [
+            "addresses",
+            "countries-states",
             "custom-order-statuses",
-            "order-status-emails",
-            "payment-currencies",
-            "subscriptions"
+            "line-item-statuses",
+            "emails",
+            "pdfs"
           ]
         },
         {
-          title: "Payment Gateways",
+          title: "Front End Development",
           collapsable: false,
-          children: ["payment-gateways", "gateway-config"]
+          children: ["example-templates"]
         },
         {
-          title: "Getting Elements",
+          title: "Twig Templating",
           collapsable: false,
-          children: [
-            "dev/element-queries/order-queries",
-            "dev/element-queries/product-queries",
-            "dev/element-queries/variant-queries",
-            "dev/element-queries/subscription-queries",
-            "craft-commerce-carts-cart"
-          ]
+          children: ["twig-filters"]
         },
         {
-          title: "Developers",
+          title: "Field Types",
           collapsable: false,
-          children: [
-            "events",
-            "extensibility",
-            "purchasables",
-            "adjusters",
-            "shipping-methods",
-            "console-commands",
-          ]
-        },
-        {
-          title: "Template Guides",
-          collapsable: false,
-          children: [
-            "example-templates",
-            "commonly-used-variables",
-            "adding-to-and-updating-the-cart",
-            "estimate-cart-addresses",
-            "update-cart-addresses",
-            "update-cart-customer",
-            "update-cart-custom-fields",
-            "coupon-codes",
-            "customer-address-management",
-            "twig-filters",
-            "loading-a-cart",
-            "making-payments",
-            "saving-payment-sources",
-            "subscription-templates"
-          ]
-        },
-        {
-          title: "Fields",
-          collapsable: false,
-          children: ["products-fields"]
+          children: ["products-fields", "variants-fields"]
         }
+        // {
+        //   title: "Payment Gateways",
+        //   collapsable: false,
+        //   children: ["gateway-config"]
+        // },
+        // {
+        //   title: "Getting Elements",
+        //   collapsable: false,
+        //   children: [
+        //     "dev/element-queries/order-queries",
+        //     "dev/element-queries/product-queries",
+        //     "dev/element-queries/variant-queries",
+        //     "dev/element-queries/subscription-queries",
+        //     "craft-commerce-carts-cart"
+        //   ]
+        // },
+        // {
+        //   title: "Developers",
+        //   collapsable: false,
+        //   children: [
+        //     "extensibility",
+        //   ]
+        // },
+        // {
+        //   title: "Template Guides",
+        //   collapsable: false,
+        //   children: [
+        //     "example-templates",
+        //     "commonly-used-variables",
+        //     "adding-to-and-updating-the-cart",
+        //     "estimate-cart-addresses",
+        //     "update-cart-addresses",
+        //     "update-cart-customer",
+        //     "update-cart-custom-fields",
+        //     "coupon-codes",
+        //     "customer-address-management",
+        //     "loading-a-cart",
+        //     "making-payments",
+        //     "saving-payment-sources",
+        //     "subscription-templates"
+        //   ]
+        // },
+        // {
+        //   title: "Fields",
+        //   collapsable: false,
+        //   children: ["products-fields"]
+        // }
       ]
     },
     "2.x": {
@@ -295,12 +336,29 @@ module.exports = {
   },
   sidebarExtra: {
     "3.x": {
-      "/": [
+      "/extend/": [
         {
           title: "Class Reference",
           icon: "/docs/icons/craft-api.svg",
           link: "https://docs.craftcms.com/commerce/api/v3/"
         },
+        {
+          title: "Back to Commerce Docs",
+          icon: "/docs/icons/icon-back.svg",
+          link: "/commerce/3.x/"
+        }
+      ],
+      "/": [
+        {
+          title: "Extending Commerce",
+          icon: "/docs/icons/icon-book.svg",
+          link: "/commerce/3.x/extend/"
+        },
+        {
+          title: "Class Reference",
+          icon: "/docs/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/commerce/api/v3/"
+        }
       ]
     },
     "2.x": {

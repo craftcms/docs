@@ -15,6 +15,7 @@ module.exports = {
         blue: "#4a7cf6",
         red: "#da5a47",
         cinder: "#131119",
+        green: "#27AB83",
         "light-slate": "#718096"
       },
       width: {

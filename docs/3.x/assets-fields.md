@@ -24,7 +24,7 @@ Assets fields have the following settings:
 
 ### Multi-Site Settings
 
-On multi-site installs, the following settings will also be available (under “Advanced”):
+On multi-site installs, the following settings will also be available (under **Advanced**):
 
 - **Relate assets from a specific site?** – Whether to only allow relations to assets from a specific site.
 
@@ -36,7 +36,7 @@ On multi-site installs, the following settings will also be available (under “
 
 ### Dynamic Subfolder Paths
 
-Subfolder paths defined by the “Upload Location” and “Default Upload Location” settings can optionally contain Twig tags (e.g. `news/{{ slug }}`).
+Subfolder paths defined by the **Upload Location** and **Default Upload Location** settings can optionally contain Twig tags (e.g. `news/{{ slug }}`).
 
 Any properties supported by the source element (the element that has the Assets field) can be used here.
 
@@ -50,11 +50,19 @@ If you are creating the Assets field within a [Matrix field](matrix-fields.md), 
 So if your Matrix field is attached to an entry, and you want to output the entry ID in your dynamic subfolder path, use `owner.id` rather than `id`.
 :::
 
+::: warning
+If the rendered subfolder path ends up blank, or contains a leading or trailing forward slash (e.g. `foo/`) or an empty segment (e.g. `foo//bar`), Craft will interpret that as a sign that a variable in the subfolder template couldn’t be resolved successfully, and the path will be considered invalid. If you are intentionally outputting a blank segment, output `:ignore:`. For example, if you want to output the first selected category, or nothing if there isn’t one, do this:
+
+```twig
+{{ categoriesFieldHandle.one().slug ?? ':ignore:' }}
+```
+:::
+
 ## The Field
 
-Assets fields list all of the currently-related assets, with a button to select new ones.
+Assets fields list all the currently-related assets, with a button to select new ones.
 
-Clicking the “Add an asset” button will bring up a modal window where you can find and select additional assets, as well as upload new ones.
+Choosing **Add an asset** will bring up a modal window where you can find and select additional assets, as well as upload new ones.
 
 ::: tip
 You can also upload assets by dragging files directly onto the assets field or modal window.
@@ -65,10 +73,10 @@ You can also upload assets by dragging files directly onto the assets field or m
 When you double-click on a related asset, a HUD will appear where you can edit the asset’s title and custom fields, and launch the Image Editor (if it’s an image).
 
 ::: tip
-You can choose which custom fields should be available for your assets from Settings → Assets → [Volume Name] → Field Layout.
+You can choose which custom fields should be available for your assets from **Settings** → **Assets** → **[Volume Name]** → **Field Layout**.
 :::
 
-## Templating
+## Development
 
 ### Querying Elements with Assets Fields
 
@@ -86,25 +94,39 @@ Possible values include:
 | an [Asset](craft3:craft\elements\Asset) object | that are related to the asset.
 | an [AssetQuery](craft3:craft\elements\db\AssetQuery) object | that are related to any of the resulting assets.
 
+::: code
 ```twig
 {# Fetch entries with a related asset #}
 {% set entries = craft.entries()
     .myFieldHandle(':notempty:')
     .all() %}
 ```
+```php
+// Fetch entries with a related asset
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle(':notempty:')
+    ->all();
+```
+:::
 
 ### Working with Assets Field Data
 
 If you have an element with an Assets field in your template, you can access its related assets using your Assets field’s handle:
 
+::: code
 ```twig
 {% set query = entry.myFieldHandle %}
 ```
+```php
+$query = $entry->myFieldHandle;
+```
+:::
 
-That will give you an [asset query](assets.md#querying-assets), prepped to output all of the related assets for the given field.
+That will give you an [asset query](assets.md#querying-assets), prepped to output all the related assets for the given field.
 
-To loop through all of the related assets, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
+To loop through all the related assets, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 
+::: code
 ```twig
 {% set relatedAssets = entry.myFieldHandle.all() %}
 {% if relatedAssets|length %}
@@ -115,43 +137,75 @@ To loop through all of the related assets, call [all()](craft3:craft\db\Query::a
     </ul>
 {% endif %}
 ```
+```php
+$relatedAssets = $entry->myFieldHandle->all();
 
-::: warning
-When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have “Assets in this volume have public URLs” enabled and a “Base URL” setting. Otherwise, the result will always be empty.
+if (count($relatedAssets)) {
+    foreach ($relatedAssets as $rel) {
+        // do something with $rel->url and $rel->filename
+    }
+}
+```
 :::
 
-If you only want the first related asset, call [one()](craft3:craft\db\Query::one()) instead, and then make sure it returned something:
+::: warning
+When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have **Assets in this volume have public URLs** enabled and a **Base URL** setting. Otherwise, the result will always be empty.
+:::
 
+If you only want the first related asset, call [one()](craft3:craft\db\Query::one()) instead and make sure it returned something:
+
+::: code
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ rel.url }}">{{ rel.filename }}</a></p>
 {% endif %}
 ```
+```php
+$rel = $entry->myFieldHandle->one();
+if ($rel) {
+    // do something with $rel->url and $rel->filename
+}
+```
+:::
 
-If you just need to check if there are any related assets (but don’t need to fetch them), you can call [exists()](craft3:craft\db\Query::exists()):
+If you need to check for related assets without fetching them, you can call [exists()](craft3:craft\db\Query::exists()):
 
+::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
     <p>There are related assets!</p>
 {% endif %}
 ```
+```php
+if ($entry->myFieldHandle->exists()) {
+    // do something with related assets
+}
+```
+:::
 
 You can set [parameters](assets.md#parameters) on the asset query as well. For example, to ensure that only images are returned, you can set the [kind](assets.md#kind) param:
 
+::: code
 ```twig
 {% set relatedAssets = clone(entry.myFieldHandle)
     .kind('image')
     .all() %}
 ```
+```php
+$relatedAssets = (clone $entry->myFieldHandle)
+    ->kind('image')
+    ->all();
+```
+:::
 
 ::: tip
 It’s always a good idea to clone the asset query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
 :::
 
-### Saving Assets Fields in Entry Forms
+### Saving Assets Fields
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain an Assets field, you will need to submit your field value as a list of asset IDs, in the order you want them to be related.
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain an Assets field, you will need to submit your field value as a list of asset IDs in the order you want them to be related.
 
 For example, you could create a list of checkboxes for each of the possible relations:
 

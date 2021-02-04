@@ -8,7 +8,7 @@ Date fields let you choose whether you want to show only the date, or the date a
 
 You can also pick minimum and maximum dates that should be allowed, and if you’re showing the time, you can choose what the minute increment should be.
 
-## Templating
+## Development
 
 ### Querying Elements with Date Fields
 
@@ -25,8 +25,9 @@ Possible values include:
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that have a date selected between 2018-04-01 and 2018-05-01.
 | `['or', '< 2018-04-04', '> 2018-05-01']` | that have a date selected before 2018-04-01 or after 2018-05-01.
 
+::: code
 ```twig
-{# Fetch entries with with a selected date in the next month #}
+{# Fetch entries with a selected date in the next month #}
 {% set start = now|atom %}
 {% set end = now|date_modify('+1 month')|atom %}
 
@@ -34,6 +35,16 @@ Possible values include:
     .myFieldHandle(['and', ">= #{start}", "< #{end}"])
     .all() %}
 ```
+```php
+// Fetch entries with a selected date in the next month
+$start = (new \DateTime())->format(\DateTime::ATOM);
+$end = (new \DateTime('+1 month'))->format(\DateTime::ATOM);
+
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle(['and', ">= ${start}", "< ${end}"])
+    ->all();
+```
+:::
 
 ::: tip
 The [atom](dev/filters.md#atom) filter converts a date to an ISO-8601 timestamp.
@@ -43,17 +54,32 @@ The [atom](dev/filters.md#atom) filter converts a date to an ISO-8601 timestamp.
 
 If you have an element with a Date field in your template, you can access its value by its handle:
 
+::: code
 ```twig
 {% set value = entry.myFieldHandle %}
 ```
+```php
+$value = $entry->myFieldHandle;
+```
+:::
 
 That will give you a [DateTime](http://php.net/manual/en/class.datetime.php) object that represents the selected date, or `null` if no date was selected.
 
+::: code
 ```twig
 {% if entry.myFieldHandle %}
     Selected date: {{ entry.myFieldHandle|datetime('short') }}
 {% endif %}
 ```
+```php
+if ($entry->myFieldHandle) {    
+    $selectedDate = \Craft::$app->getFormatter()->asDatetime(
+        $entry->myFieldHandle, 
+        'short'
+    );
+}
+```
+:::
 
 Craft and Twig provide several Twig filters for manipulating dates, which you can use depending on your needs:
 
@@ -65,9 +91,9 @@ Craft and Twig provide several Twig filters for manipulating dates, which you ca
 - [rss](dev/filters.md#rss)
 - [date_modify](https://twig.symfony.com/doc/2.x/filters/date_modify.html)
 
-### Saving Date Fields in Entry Forms
+### Saving Date Fields
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Date field, you can create a `date` or `datetime-local` input.
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Date field, you can create a `date` or `datetime-local` input.
 
 If you just want the user to be able to select a date, use a `date` input:
 

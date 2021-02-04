@@ -47,7 +47,6 @@ export default ({ Vue, options, router, siteData }) => {
         return siteTitle;
       },
       $siteTitle() {
-        //return this.$localeConfig.title || this.$site.title || ''
         return this.$themeConfig.title || this.$site.title || "";
       },
       $activeSet() {

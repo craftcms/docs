@@ -9,7 +9,7 @@ You can use the [Craft Server Check](https://github.com/craftcms/server-check) s
 
 ## Minimum System Specs
 
-- PHP 7.0+
+- PHP 7.2.5+
 - MySQL 5.5+ with InnoDB, MariaDB 5.5+, or PostgreSQL 9.5+
 - 256MB+ memory allocated to PHP
 - 200MB+ free disk space
@@ -28,7 +28,7 @@ You can use the [Craft Server Check](https://github.com/craftcms/server-check) s
 </column>
 </columns>
 
-<b>*</b> The most recent stable PHP version is usually best for performance and [long-term support](https://www.php.net/supported-versions.php).
+<b>*</b> Craft supports PHP 8, but it may not be fully supported by all plugins yet.
 
 ## Required PHP Extensions
 

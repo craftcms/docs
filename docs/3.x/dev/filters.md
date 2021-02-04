@@ -259,6 +259,13 @@ You can pass `stripZeros=true` to remove any fraction digits if the value to be 
 {# Output: $1,000,000 #}
 ```
 
+If the passed-in value isn’t a valid number it will be returned verbatim:
+
+```twig
+{{ 'oh hai'|currency('USD') }}
+{# Output: oh hai #}
+```
+
 ## `date`
 
 Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) object.
@@ -407,6 +414,13 @@ Formats a number of bytes into something nicer.
 {# Output: 1944685 #}
 {{ asset.size|filesize }}
 {# Output: 1.945 MB #}
+```
+
+If the passed-in value isn’t a valid number it will be returned verbatim:
+
+```twig
+{{ 'oh hai'|filesize }}
+{# Output: oh hai #}
 ```
 
 ## `filter`
@@ -736,6 +750,13 @@ You can optionally pass `false` to it if you want group symbols to be omitted (e
 {# Output: 1000000 #}
 ```
 
+If the passed-in value isn’t a valid number it will be returned verbatim:
+
+```twig
+{{ 'oh hai'|number }}
+{# Output: oh hai #}
+```
+
 ## `parseRefs`
 
 Parses a string for [reference tags](../reference-tags.md).
@@ -760,6 +781,18 @@ Returns a string formatted in “PascalCase” (AKA “UpperCamelCase”).
 ## `percentage`
 
 Formats a percentage according to the user’s preferred language.
+
+```twig
+{{ 0.85|percentage }}
+{# Output: 85% #}
+```
+
+If the passed-in value isn’t a valid number it will be returned verbatim:
+
+```twig
+{{ 'oh hai'|percentage }}
+{# Output: oh hai #}
+```
 
 ## `prepend`
 
@@ -806,7 +839,7 @@ Appends one or more items onto the end of an array, and returns the new array.
 
 ```twig
 {% set array1 = ['foo'] %}
-{% set array2 = array|push('bar', 'baz') %}
+{% set array2 = array1|push('bar', 'baz') %}
 {# Result: ['foo', 'bar', 'baz'] #}
 ```
 
@@ -983,7 +1016,7 @@ Prepends one or more items to the beginning of an array, and returns the new arr
 
 ```twig
 {% set array1 = ['foo'] %}
-{% set array2 = array|unshift('bar', 'baz') %}
+{% set array2 = array1|unshift('bar', 'baz') %}
 {# Result: ['bar', 'baz', 'foo'] #}
 ```
 
@@ -1019,7 +1052,9 @@ Returns an array without the specified element(s).
 
 ## `withoutKey`
 
-Returns an array without the specified key.
+Returns an array without one or more specified keys.
+
+The key can be a single key as a string:
 
 ```twig
 {% set array = {
@@ -1028,4 +1063,17 @@ Returns an array without the specified key.
     baz: 'baz'
 } %}
 {% set filtered = array|withoutKey('baz') %}
+{# Result: { 'foo': 'foo', 'bar: 'bar' } #}
+```
+
+You can also pass multiple keys in an array:
+
+```twig
+{% set array = {
+    foo: 'foo',
+    bar: 'bar',
+    baz: 'baz'
+} %}
+{% set filtered = array|withoutKey(['bar', 'baz']) %}
+{# Result: { 'foo': 'foo' } #}
 ```

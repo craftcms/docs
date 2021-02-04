@@ -2,7 +2,7 @@
 
 Donations can be added to the cart using the [donation purchasable](commerce3:craft\commerce\elements\Donation). This is a separate element type from products and variants, and unlike a product the donation element does not belong to a “product type”.
 
-There is a single donation element installed when you install Craft Commerce. The donation element settings are found in the control panel under Commerce → Store Settings → Donations.
+There is a single donation element installed when you install Craft Commerce. The donation element settings are found in the control panel under **Commerce** → **Store Settings** → **Donations**.
 
 In those settings, the donation purchasable’s SKU can be changed and donations can be turned off entirely.
 
@@ -19,16 +19,16 @@ The form to add the donation to the cart would look like this:
 {% set donation = craft.commerce.donation %}
 {% if donation and donation.isAvailable %}
     <form method="post">
-        <input type="hidden" name="action" value="commerce/cart/update-cart">
-        {{ redirectInput('shop/cart') }}
         {{ csrfInput() }}
-        <input type="hidden" name="purchasableId" value="{{ donation.id }}">
+        {{ actionInput('commerce/cart/update-cart') }}
+        {{ redirectInput('shop/cart') }}
+        {{ hiddenInput('purchasableId', donation.id) }}
         <input type="text"
             name="options[donationAmount]"
             value=""
             placeholder="Donation"
         >
-        <input type="submit" value="Donate Now" />
+        <button type="submit">Donate Now</button>
     </form>
 {% endif %}
 ```

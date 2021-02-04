@@ -68,7 +68,7 @@ The following aliases are available out of the box:
 | `@web` | The URL to the folder that contains the `index.php` file that was loaded for the request
 | `@webroot` | The path to the folder that contains the `index.php` file that was loaded for the request
 
-You can override these default aliases with the <config3:aliases> config setting if needed. It’s recommended to override the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+You can override these default aliases with the <config3:aliases> config setting if needed. We recommend overriding the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
 
 ```php
 'aliases' => [
@@ -76,7 +76,7 @@ You can override these default aliases with the <config3:aliases> config setting
 ];
 ```
 
-If your webroot is something besides `web/`, `public/`, `public_html/`, or `html/`, or it’s not located alongside your `craft` executable, you will also need to override the `@webroot` alias, so it can be defined properly for console commands.
+If your web root is something besides `web/`, `public/`, `public_html/`, or `html/`, or it’s not located alongside your `craft` executable, you will also need to override the `@webroot` alias, so it can be defined properly for console commands.
 
 ```php
 'aliases' => [
@@ -562,7 +562,7 @@ If this isn’t defined, Craft will treat the request as a control panel request
 
 ### `CRAFT_ENVIRONMENT`
 
-The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays. (`$_SERVER['SERVER_NAME']` will be used by default.)
+The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays. (The [craftcms/craft](https://github.com/craftcms/craft) starter project sets this to the value of an `ENVIRONMENT` environment variable, or falls back to `production` if it’s not defined.)
 
 ```php
 // Set the environment from the ENVIRONMENT env var, or default to 'production'
@@ -571,7 +571,7 @@ define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
 
 ### `CRAFT_EPHEMERAL`
 
-When defined as `true`, Craft will skip file system permission checks and operations that are not available in an environment with ephemeral or read-only storage.
+When set to `true`, Craft will skip file system permission checks and operations that are not available in an environment with ephemeral or read-only storage.
 
 ### `CRAFT_LICENSE_KEY`
 
@@ -606,6 +606,10 @@ The path to the [storage/](../directory-structure.md#storage) folder. (It is ass
 ::: tip
 Make sure you set this to a valid folder path, otherwise it will be ignored.
 :::
+
+### `CRAFT_STREAM_LOG`
+
+When set to `true`, Craft will additionally send log output to `stderr` and `stdout`.
 
 ### `CRAFT_TEMPLATES_PATH`
 

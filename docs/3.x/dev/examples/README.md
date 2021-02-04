@@ -2,13 +2,12 @@
 
 Some common usage examples in Craft:
 
-- [Integrating Disqus](integrating-disqus.md)
-- [RSS Feed](rss-feed.md)
-- [Atom Feed](atom-feed.md)
-- [Entry Form](entry-form.md)
-- [Search Form](search-form.md)
-- [Login Form](login-form.md)
-- [User Profile Form](user-profile-form.md)
-- [User Registration Form](user-registration-form.md)
-- [Forgot Password Form](forgot-password-form.md)
-- [Set Password Form](set-password-form.md)
+- [Integrating Disqus](https://craftcms.com/knowledge-base/integrating-disqus)
+- [RSS Feed and Atom Feed](https://craftcms.com/knowledge-base/rss-and-atom-feeds)
+- [Entry Form](https://craftcms.com/knowledge-base/entry-form)
+- [Search Form](https://craftcms.com/knowledge-base/search-form)
+- [Login Form](https://craftcms.com/knowledge-base/front-end-user-accounts#login-form)
+- [User Profile Form](https://craftcms.com/knowledge-base/front-end-user-accounts)
+- [User Registration Form](https://craftcms.com/knowledge-base/front-end-user-accounts#registration-form)
+- [Forgot Password Form](https://craftcms.com/knowledge-base/front-end-user-accounts#reset-password-forms)
+- [Set Password Form](https://craftcms.com/knowledge-base/front-end-user-accounts#reset-password-forms)

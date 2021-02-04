@@ -140,15 +140,17 @@ Twig-facing copy of the [craft\web\View::POS_READY](craft3:craft\web\View#consta
 
 ## `setPasswordUrl`
 
-The URL to the front-end [Reset Password](https://craftcms.com/knowledge-base/front-end-user-accounts#reset-password-forms) page.
+The URL to [`setPasswordRequestPath`](config3:setPasswordRequestPath) if it’s set. (This wraps the path in [`siteUrl`](#siteurl).)
 
-::: tip
-This will only be set to a URL if the <config3:setPasswordRequestPath> config setting is set. 
-:::
+```twig
+{% if setPasswordUrl %}
+    <a href="{{ setPasswordUrl }}">Reset password</a>
+{% endif %}
+```
 
 ## `siteName`
 
-The name of your site, as defined in Settings → Sites.
+The name of your site, as defined in **Settings** → **Sites**.
 
 ```twig
 <h1>{{ siteName }}</h1>

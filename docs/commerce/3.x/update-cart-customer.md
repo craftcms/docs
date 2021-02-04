@@ -16,9 +16,9 @@ Example:
 
 ```twig
 <form method="post">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    {{ redirectInput('shop/cart') }}
     {{ csrfInput() }}
+    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+    {{ redirectInput('shop/cart') }}
 
     <input type="text"
         name="email"
@@ -27,7 +27,7 @@ Example:
         placeholder="{{ "your@email.com"|t }}"
     >
 
-    <input type="submit" value="Update Cart Email"/>
+    <button type="submit">Update Cart Email</button>
 <form>
 ```
 
@@ -59,9 +59,9 @@ order completion. This can again be done with the same `commerce/cart/update-car
 
 ```twig
 <form method="post">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    {{ redirectInput('shop/cart') }}
     {{ csrfInput() }}
+    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+    {{ redirectInput('shop/cart') }}
 
     <label for="registerUserOnOrderComplete">
         <input type="checkbox"
@@ -70,14 +70,14 @@ order completion. This can again be done with the same `commerce/cart/update-car
             value="1"
         /> Register me for a user account
     </label>
-    <input type="submit" value="Update Cart"/>
+    <button type="submit">Update Cart</button>
 <form>
 ```
 
 Alternatively, as seen in the [example templates](example-templates.md), you can set this flag on the `commerce/payments/pay` form action:
 
 ```twig
-<input type="hidden" name="action" value="commerce/payments/pay">
+{{ hiddenInput('action', commerce/payments/pay') }}
 {# ... payment form ... #}
 <label for="registerUserOnOrderComplete">
     <input type="checkbox"

@@ -4,13 +4,6 @@ module.exports = {
   plugins: [
     ["@vuepress/google-analytics", { ga: "UA-39036834-9" }],
     [
-      "@vuepress/active-header-links",
-      {
-        sidebarLinkSelector: ".right-bar .sidebar-link",
-        headerAnchorSelector: ".header-anchor"
-      }
-    ],
-    [
       "vuepress-plugin-medium-zoom",
       {
         selector: ".theme-default-content img:not(.no-zoom)",
@@ -22,27 +15,9 @@ module.exports = {
         }
       }
     ],
-    [
-      "vuepress-plugin-container",
-      {
-        type: "tip",
-        defaultTitle: ""
-      }
-    ],
-    [
-      "vuepress-plugin-container",
-      {
-        type: "warning",
-        defaultTitle: ""
-      }
-    ],
-    [
-      "vuepress-plugin-container",
-      {
-        type: "danger",
-        defaultTitle: ""
-      }
-    ],
+    ["vuepress-plugin-container", { type: "tip", defaultTitle: "" }],
+    ["vuepress-plugin-container", { type: "warning", defaultTitle: "" }],
+    ["vuepress-plugin-container", { type: "danger", defaultTitle: "" }],
     [
       "vuepress-plugin-container",
       {
@@ -68,8 +43,7 @@ module.exports = {
     docsRepo: "craftcms/docs",
     docsDir: "docs",
     docsBranch: "main",
-    searchPlaceholder:
-      "Search Craft, Commerce, and Nitro docs (Press “/” to focus)",
+    searchPlaceholder: "Search Craft, Commerce, and Nitro docs (Press “/” to focus)",
     editLinks: true,
     nextLinks: true,
     prevLinks: true,
@@ -80,10 +54,12 @@ module.exports = {
     codeLanguages: {
       twig: "Twig",
       php: "PHP",
+      graphql: "GraphQL",
       js: "JavaScript",
       json: "JSON",
       xml: "XML",
       treeview: "Folder",
+      graphql: "GraphQL",
       csv: "CSV"
     },
     feedback: {
