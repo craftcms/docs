@@ -54,5 +54,4 @@ echo 'export NITRO_HTTP_PORT=8080' >> ~/.zshrc
 | `NITRO_MAILHOG_HTTP_PORT` | MailHog web interface                             | `8025`      |
 | `NITRO_MINIO_HTTP_PORT`   | MinIO web interface                               | `9000`      |
 | `NITRO_REDIS_HTTP_PORT`   | Redis server port                                 | `6379`      |
-| `NITRO_DEFAULT_MACHINE`   | Default Nitro machine name                        | `nitro-dev` |
 | `NITRO_EDIT_HOSTS`        | Attempt to edit hosts file when applying changes? | `true`      |
