@@ -242,36 +242,6 @@ For example, you can give the control panel a custom favicon (etc.) like this:
 ```
 
 
-
-### `customAsciiCharMappings`
-
-Allowed types
-:   [array](http://php.net/language.types.array)
-
-Default value
-:   `[]`
-
-Defined by
-:   [GeneralConfig::$customAsciiCharMappings](craft3:craft\config\GeneralConfig::$customAsciiCharMappings)
-
-Deprecated
-:   in 3.0.10. Any corrections to ASCII char mappings should be submitted to [Stringy](https://github.com/voku/Stringy).
-
-
-
-Any custom ASCII character mappings.
-
-This array is merged into the default one in StringHelper::asciiCharMap(). The key is the ASCII character to be used for the replacement
-and the value is an array of non-ASCII characters that the key maps to.
-
-
-
-```php
-'customAsciiCharMappings' => [
-    'c' => ['ç', 'ć', 'č', 'ĉ', 'ċ'],
-],
-```
-
 ### `defaultCpLanguage`
 
 Allowed types
@@ -906,29 +876,6 @@ Whether an `X-Powered-By: Craft CMS` header should be sent, helping services lik
 
 
 
-### `siteName`
-
-Allowed types
-:   [string](http://php.net/language.types.string), [string](http://php.net/language.types.string)[]
-
-Default value
-:   `null`
-
-Defined by
-:   [GeneralConfig::$siteName](craft3:craft\config\GeneralConfig::$siteName)
-
-Deprecated
-:   in 3.6.0. Set your sites’ Name settings on a per-environment basis using environment variables instead.
-See [Environmental Configuration](https://craftcms.com/docs/3.x/config/#environmental-configuration) for more info.
-
-
-
-The site name(s). If set, it will take precedence over the Name settings in Settings → Sites → [Site Name].
-
-This can be set to a string, which will override the primary site’s name only, or an array with site handles used as the keys.
-
-
-
 ### `slugWordSeparator`
 
 Allowed types
@@ -943,28 +890,6 @@ Defined by
 
 
 The character(s) that should be used to separate words in slugs.
-
-
-
-### `suppressTemplateErrors`
-
-Allowed types
-:   [boolean](http://php.net/language.types.boolean)
-
-Default value
-:   `false`
-
-Defined by
-:   [GeneralConfig::$suppressTemplateErrors](craft3:craft\config\GeneralConfig::$suppressTemplateErrors)
-
-Deprecated
-:   in 3.3.0
-
-
-
-Whether Twig runtime errors should be suppressed.
-
-If it is set to `true`, the errors will still be logged to Craft’s log files.
 
 
 
@@ -1658,38 +1583,6 @@ Since
 
 
 The query string parameter name that site tokens should be set to.
-
-
-
-### `siteUrl`
-
-Allowed types
-:   [string](http://php.net/language.types.string), [string](http://php.net/language.types.string)[]
-
-Default value
-:   `null`
-
-Defined by
-:   [GeneralConfig::$siteUrl](craft3:craft\config\GeneralConfig::$siteUrl)
-
-Deprecated
-:   in 3.6.0. Set your sites’ Base URL settings on a per-environment basis using aliases or environment variables instead.
-See [Environmental Configuration](https://craftcms.com/docs/3.x/config/#environmental-configuration) for more info.
-
-
-
-The base URL to the site(s). If set, it will take precedence over the Base URL settings in Settings → Sites → [Site Name].
-
-This can be set to a string, which will override the primary site’s base URL only, or an array with site handles used as the keys.
-
-The URL(s) must begin with either `http://`, `https://`, `//` (protocol-relative), or an [alias](config3:aliases).
-
-```php
-'siteUrl' => [
-    'siteA' => 'https://site-a.com/',
-    'siteB' => 'https://site-b.com/',
-],
-```
 
 
 
@@ -2660,7 +2553,7 @@ Since
 
 Whether SVG thumbnails should be rasterized.
 
-Note this will only work if ImageMagick is installed, and <config:imageDriver> is set to either `auto` or `imagick`.
+Note this will only work if ImageMagick is installed, and <config3:imageDriver> is set to either `auto` or `imagick`.
 
 
 
@@ -2963,29 +2856,6 @@ The amount of time to wait before Craft purges stale user sessions from the sess
 Set to `0` to disable this feature.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
-
-
-
-### `purgeUnsavedDraftsDuration`
-
-Allowed types
-:   `mixed`
-
-Default value
-:   `0`
-
-Defined by
-:   [GeneralConfig::$purgeUnsavedDraftsDuration](craft3:craft\config\GeneralConfig::$purgeUnsavedDraftsDuration)
-
-Since
-:   3.2.0
-
-Deprecated
-:   in 3.6.0
-
-
-
-The amount of time to wait before Craft purges drafts of new elements that were never formally saved.
 
 
 
