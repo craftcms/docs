@@ -38,6 +38,31 @@ Here’s the full list of config settings that Craft supports:
 
 ## System
 
+### `accessibilityDefaults`
+
+Allowed types
+:   [array](http://php.net/language.types.array)
+
+Default value
+:   `['useShapes' => false, 'underlineLinks' => false]`
+
+Defined by
+:   [GeneralConfig::$accessibilityDefaults](craft3:craft\config\GeneralConfig::$accessibilityDefaults)
+
+Since
+:   3.6.4
+
+
+
+The default user accessibility preferences that should be applied to users that haven’t saved their preferences yet.
+
+The array can contain the following keys:
+
+- `useShapes` – Whether shapes should be used to represent statuses
+- `underlineLinks` – Whether links should be underlined
+
+
+
 ### `allowAdminChanges`
 
 Allowed types
@@ -215,7 +240,6 @@ For example, you can give the control panel a custom favicon (etc.) like this:
     ['link', ['rel' => 'mask-icon', 'href' => '/icons/mask-icon.svg', 'color' => '#663399']],
 ],
 ```
-
 
 
 ### `defaultCpLanguage`
@@ -515,6 +539,30 @@ List of extra locale IDs that the application should support, and users should b
 
 Only use this setting if your server has the Intl PHP extension, or if you’ve saved the corresponding
 [locale data](https://github.com/craftcms/locales) into your `config/locales/` folder.
+
+
+
+### `handleCasing`
+
+Allowed types
+:   
+
+Default value
+:   `self::CAMEL_CASE`
+
+Defined by
+:   [GeneralConfig::$handleCasing](craft3:craft\config\GeneralConfig::$handleCasing)
+
+Since
+:   3.6.0
+
+
+
+This can be set to one of the following:
+
+- `camel` – for camelCase
+- `pascal` – for PascalCase (aka UpperCamelCase)
+- `snake` – for snake_case
 
 
 
@@ -825,25 +873,6 @@ Defined by
 
 Whether an `X-Powered-By: Craft CMS` header should be sent, helping services like [BuiltWith](https://builtwith.com/) and
 [Wappalyzer](https://www.wappalyzer.com/) identify that the site is running on Craft.
-
-
-
-### `siteName`
-
-Allowed types
-:   [string](http://php.net/language.types.string), [string](http://php.net/language.types.string)[]
-
-Default value
-:   `null`
-
-Defined by
-:   [GeneralConfig::$siteName](craft3:craft\config\GeneralConfig::$siteName)
-
-
-
-The site name(s). If set, it will take precedence over the Name settings in Settings → Sites → [Site Name].
-
-This can be set to a string, which will override the primary site’s name only, or an array with site handles used as the keys.
 
 
 
@@ -1557,34 +1586,6 @@ The query string parameter name that site tokens should be set to.
 
 
 
-### `siteUrl`
-
-Allowed types
-:   [string](http://php.net/language.types.string), [string](http://php.net/language.types.string)[]
-
-Default value
-:   `null`
-
-Defined by
-:   [GeneralConfig::$siteUrl](craft3:craft\config\GeneralConfig::$siteUrl)
-
-
-
-The base URL to the site(s). If set, it will take precedence over the Base URL settings in Settings → Sites → [Site Name].
-
-This can be set to a string, which will override the primary site’s base URL only, or an array with site handles used as the keys.
-
-The URL(s) must begin with either `http://`, `https://`, `//` (protocol-relative), or an [alias](config3:aliases).
-
-```php
-'siteUrl' => [
-    'siteA' => 'https://site-a.com/',
-    'siteB' => 'https://site-b.com/',
-],
-```
-
-
-
 ### `tokenParam`
 
 Allowed types
@@ -1635,7 +1636,7 @@ Defined by
 
 
 Determines what protocol/schema Craft will use when generating tokenized URLs. If set to `'auto'`, Craft will check the
-<config3:siteUrl> and the protocol of the current request and if either of them are https will use `https` in the tokenized URL. If not,
+current site’s base URL and the protocol of the current request and if either of them are https will use `https` in the tokenized URL. If not,
 will use `http`.
 
 If set to `false`, Craft will always use `http`. If set to `true`, then, Craft will always use `https`.
@@ -2043,6 +2044,26 @@ log in but allow for username/email enumeration based on the response.
 
 
 
+### `sanitizeCpImageUploads`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `true`
+
+Defined by
+:   [GeneralConfig::$sanitizeCpImageUploads](craft3:craft\config\GeneralConfig::$sanitizeCpImageUploads)
+
+Since
+:   3.6.0
+
+
+
+Whether images uploaded via the control panel should be sanitized.
+
+
+
 ### `sanitizeSvgUploads`
 
 Allowed types
@@ -2211,7 +2232,7 @@ Allowed types
 :   [string](http://php.net/language.types.string)[]
 
 Default value
-:   `['7z', 'aiff', 'asf', 'avi', 'bmp', 'csv', 'doc', 'docx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'htm', 'html', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'm2t', 'm4a', 'm4v', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rtf', 'sdc', 'sitd', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tgz', 'tif', 'tiff', 'txt', 'vob', 'vsd', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'zip']`
+:   `['7z', 'aiff', 'asc', 'asf', 'avi', 'bmp', 'cap', 'cin', 'csv', 'dfxp', 'doc', 'docx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'itt', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'lrc', 'm2t', 'm4a', 'm4v', 'mcc', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'mpsub', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rt', 'rtf', 'sami', 'sbv', 'scc', 'sdc', 'sitd', 'smi', 'srt', 'stl', 'sub', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tds', 'tgz', 'tif', 'tiff', 'ttml', 'txt', 'vob', 'vsd', 'vtt', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'xml', 'zip']`
 
 Defined by
 :   [GeneralConfig::$allowedFileExtensions](craft3:craft\config\GeneralConfig::$allowedFileExtensions)
@@ -2514,6 +2535,28 @@ an incorrect gamma value, which causes the images to become very dark. This will
 
 
 
+### `rasterizeSvgThumbs`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [GeneralConfig::$rasterizeSvgThumbs](craft3:craft\config\GeneralConfig::$rasterizeSvgThumbs)
+
+Since
+:   3.6.0
+
+
+
+Whether SVG thumbnails should be rasterized.
+
+Note this will only work if ImageMagick is installed, and <config3:imageDriver> is set to either `auto` or `imagick`.
+
+
+
 ### `rotateImagesOnUploadByExifData`
 
 Allowed types
@@ -2598,6 +2641,46 @@ If this is set to `false`, then the `Access-Control-Allow-Origin` response heade
 
 
 
+### `disableGraphqlTransformDirective`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [GeneralConfig::$disableGraphqlTransformDirective](craft3:craft\config\GeneralConfig::$disableGraphqlTransformDirective)
+
+Since
+:   4.0.0
+
+
+
+Whether the `transform` directive should be disabled for the GraphQL API.
+
+
+
+### `enableGraphqlIntrospection`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `true`
+
+Defined by
+:   [GeneralConfig::$enableGraphqlIntrospection](craft3:craft\config\GeneralConfig::$enableGraphqlIntrospection)
+
+Since
+:   4.0.0
+
+
+
+Whether GraphQL introspection queries are allowed. Defaults to `true` and is always allowed in the CP.
+
+
+
 ### `enableGql`
 
 Allowed types
@@ -2663,6 +2746,66 @@ Prefix to use for all type names returned by GraphQL.
 
 
 
+### `maxGraphqlComplexity`
+
+Allowed types
+:   [integer](http://php.net/language.types.integer)
+
+Default value
+:   `0`
+
+Defined by
+:   [GeneralConfig::$maxGraphqlComplexity](craft3:craft\config\GeneralConfig::$maxGraphqlComplexity)
+
+Since
+:   4.0.0
+
+
+
+The maximum allowed complexity a GraphQL query is allowed to have. Set to `0` to allow any complexity.
+
+
+
+### `maxGraphqlDepth`
+
+Allowed types
+:   [integer](http://php.net/language.types.integer)
+
+Default value
+:   `0`
+
+Defined by
+:   [GeneralConfig::$maxGraphqlDepth](craft3:craft\config\GeneralConfig::$maxGraphqlDepth)
+
+Since
+:   4.0.0
+
+
+
+The maximum allowed depth a GraphQL query is allowed to reach. Set to `0` to allow any depth.
+
+
+
+### `maxGraphqlResults`
+
+Allowed types
+:   [integer](http://php.net/language.types.integer)
+
+Default value
+:   `0`
+
+Defined by
+:   [GeneralConfig::$maxGraphqlResults](craft3:craft\config\GeneralConfig::$maxGraphqlResults)
+
+Since
+:   4.0.0
+
+
+
+The maximum allowed results for a single GraphQL query. Set to `0` to disable any limits.
+
+
+
 ## Garbage Collection
 
 ### `purgePendingUsersDuration`
@@ -2671,7 +2814,7 @@ Allowed types
 :   `mixed`
 
 Default value
-:   `null`
+:   `0`
 
 Defined by
 :   [GeneralConfig::$purgePendingUsersDuration](craft3:craft\config\GeneralConfig::$purgePendingUsersDuration)
@@ -2709,30 +2852,6 @@ Since
 
 
 The amount of time to wait before Craft purges stale user sessions from the sessions table in the database.
-
-Set to `0` to disable this feature.
-
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
-
-
-
-### `purgeUnsavedDraftsDuration`
-
-Allowed types
-:   `mixed`
-
-Default value
-:   `2592000` (30 days)
-
-Defined by
-:   [GeneralConfig::$purgeUnsavedDraftsDuration](craft3:craft\config\GeneralConfig::$purgeUnsavedDraftsDuration)
-
-Since
-:   3.2.0
-
-
-
-The amount of time to wait before Craft purges drafts of new elements that were never formally saved.
 
 Set to `0` to disable this feature.
 
