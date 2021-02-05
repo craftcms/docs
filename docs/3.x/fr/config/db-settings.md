@@ -92,6 +92,49 @@ Defined by
 
 The charset to use when creating tables.
 
+::: tip
+You can change the character set and collation across all existing database tables using this terminal command:
+
+```bash
+> php craft db/convert-charset
+```
+:::
+
+
+
+### `collation`
+
+Allowed types
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+
+Default value
+:   `null`
+
+Defined by
+:   [DbConfig::$collation](craft3:craft\config\DbConfig::$collation)
+
+Since
+:   3.6.4
+
+
+
+The collation to use when creating tables.
+
+This is only used by MySQL. If null, the [charset’s](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#charset) default collation will be used.
+
+| Charset   | Default collation    |
+| --------- | -------------------- |
+| `utf8`    | `utf8_general_ci`    |
+| `utf8mb4` | `utf8mb4_0900_ai_ci` |
+
+::: tip
+You can change the character set and collation across all existing database tables using this terminal command:
+
+```bash
+> php craft db/convert-charset
+```
+:::
+
 
 
 ### `dsn`
