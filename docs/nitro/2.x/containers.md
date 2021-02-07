@@ -1,6 +1,6 @@
 # Adding Custom Containers
 
-Nitro does its best to give you 80 percent of what you need for local development. However, some Craft projects have to interact with non-common tools such as MongoDB, Elasticsearch, and etc. Installing and managing these tools can be a cumbersome and often error prone process. However, Nitro has built in support to make setting up these tools really simple with the [`containers`](commands.md#containers) command.
+Nitro does its best to give you 80 percent of what you need for local development. However, some Craft projects have to interact with non-common tools such as MongoDB, Elasticsearch, and etc. Installing and managing these tools can be a cumbersome and often error prone process. However, Nitro has built in support to make setting up these tools really simple with the [`container`](commands.md#container) command.
 
 ::: tip
 Nitro exposes common tools such as [Minio](services/minio.md) and [Mailhog](services/mailhog.md) as services with the [`enable`](commands.md#enable) command.
@@ -8,10 +8,10 @@ Nitro exposes common tools such as [Minio](services/minio.md) and [Mailhog](serv
 
 ## Adding a Custom Container
 
-Imagine we are working on a project that needs to interact with data stored in Elasticsearch. We can use the `containers add` command to add the container, ports, and volumes to our Nitro configuration file. The `containers add` command provides easy prompts to walk you through setup.
+Imagine we are working on a project that needs to interact with data stored in Elasticsearch. We can use the `container configure` command to add the container, ports, and volumes to our Nitro configuration file. The `container add` command provides easy prompts to walk you through setup.
 
 ```bash
-$ nitro containers add
+$ nitro container configure
 What image are you trying to add? elasticsearch
 Which image should we use?
   1. elasticsearch
@@ -41,7 +41,7 @@ New container "elasticsearch.containers.nitro" added!
 Apply changes now [Y/n]? n
 ```
 
-`nitro containers add` performs the following steps:
+`nitro container configure` performs the following steps:
 
 1. Prompts for an image name and searches the Docker Hub Registry for matching images.
 2. Prompts for the Docker tag to pull (in our example we wanted version `7.10.1` of Elasticsearch).
