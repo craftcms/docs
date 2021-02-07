@@ -5,7 +5,7 @@ Nitro’s [`npm`](commands.md#npm) command lets you to run any npm command witho
 ```bash
 $ cd ~/dev/my-craft-project
 $ nitro npm install
-  … checking /Users/jasonmccallister/dev/docs/package.json ✓
+  … checking /Users/oli/dev/docs/package.json ✓
   … pulling docker.io/library/node:14-alpine ✓
 Running npm install
 
@@ -15,4 +15,12 @@ Running npm install
 found 0 vulnerabilities
 
 npm install complete 🤘
+```
+
+## Specifying a Node Version
+
+The `npm` command allows to to specify any version of node based on the Docker Image tags. To use a different version of npm, run the following:
+
+```bash
+$ nitro npm --node-version=12 install
 ```

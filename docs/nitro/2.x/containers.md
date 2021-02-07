@@ -31,8 +31,8 @@ Expose port `9200` on the host machine [Y/n]? y
 Expose port `9300` on the host machine [Y/n]? y
 Should we proxy one of the ports to expose a web based UI [Y/n]?
 Which port should we use for the UI?
-  1. 9200:9200
-  2. 9300:9300
+  1. 9200
+  2. 9300
 Enter your selection: 1
 What is the name of the container [elasticsearch]?
 Create a file to store environment variables [Y/n]?
