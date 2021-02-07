@@ -22,7 +22,7 @@ module.exports = {
         {
           title: "Using Nitro",
           collapsable: false,
-          children: ["usage", "commands", "composer", "share"]
+          children: ["usage", "commands", "composer", "node", "share"]
         },
         {
           title: "Databases",
@@ -42,7 +42,7 @@ module.exports = {
         {
           title: "Advanced Settings",
           collapsable: false,
-          children: [["php-settings", "PHP Settings"], ["extensions", "PHP Extensions"], ["plugin-development", "Plugin Development"], "customizing"]
+          children: [["php-settings", "PHP Settings"], ["extensions", "PHP Extensions"], ["plugin-development", "Plugin Development"], ["containers", "Custom Containers"], "customizing"]
         },
       ]
     },
