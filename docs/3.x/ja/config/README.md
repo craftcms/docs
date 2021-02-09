@@ -106,13 +106,12 @@ ASSETS_BASE_URL=http://my-project.com/assets
 ASSETS_BASE_PATH=/path/to/web/assets
 ```
 
-::: tip
-[alias()](../dev/functions.html#alias-string) ファンクションに渡すことによって、テンプレート内でエイリアスをパースできます。
+Then you can pull them into the alias definitions using [App::env()](craft3:craft\helpers\App::env()):
 
 ```php
 'aliases' => [
-    '@assetBaseUrl' => getenv('ASSETS_BASE_URL'),
-    '@assetBasePath' => getenv('ASSETS_BASE_PATH'),
+    '@assetBaseUrl' => craft\helpers\App::env('ASSETS_BASE_URL'),
+    '@assetBasePath' => craft\helpers\App::env('ASSETS_BASE_PATH'),
 ],
 ```
 
@@ -179,6 +178,9 @@ If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather th
 
 ```php
 <?php
+
+use craft\helpers\App;
+
 return [
     'components' => [
         'cache' => [
@@ -195,13 +197,16 @@ return [
 
 ```php
 <?php
+
+use craft\helpers\App;
+
 return [
     'components' => [
         'cache' => [
             'class' => yii\caching\MemCache::class,
             'useMemcached' => true,
-            'username' => getenv('MEMCACHED_USERNAME'),
-            'password' => getenv('MEMCACHED_PASSWORD'),
+            'username' => App::env('MEMCACHED_USERNAME'),
+            'password' => App::env('MEMCACHED_PASSWORD'),
             'defaultDuration' => 86400,
             'servers' => [
                 [
@@ -226,13 +231,16 @@ To use Redis cache storage, you will first need to install the [yii2-redis](http
 
 ```php
 <?php
+
+use craft\helpers\App;
+
 return [
     'components' => [
         'redis' => [
             'class' => yii\redis\Connection::class,
             'hostname' => 'localhost',
             'port' => 6379,
-            'password' => getenv('REDIS_PASSWORD'),
+            'password' => App::env('REDIS_PASSWORD'),
         ],
         'cache' => [
             'class' => yii\redis\Cache::class,
@@ -249,20 +257,23 @@ If you need to configure the database connection beyond what’s possible with C
 
 ```php
 <?php
+
+use craft\helpers\App;
+
 return [
     'components' => [
         'db' => function() {
             // Get the default component config
-            $config = craft\helpers\App::dbConfig();
+            $config = App::dbConfig();
 
             // Use read/write query splitting
             // (requires Craft 3.4.25 or later)
 
             // Define the default config for replica DB connections
             $config['replicaConfig'] = [
-                'username' => getenv('DB_REPLICA_USER'),
-                'password' => getenv('DB_REPLICA_PASSWORD'),
-                'tablePrefix' => getenv('DB_TABLE_PREFIX'),
+                'username' => App::env('DB_REPLICA_USER'),
+                'password' => App::env('DB_REPLICA_PASSWORD'),
+                'tablePrefix' => App::env('DB_TABLE_PREFIX'),
                 'attributes' => [
                     // Use a smaller connection timeout
                     PDO::ATTR_TIMEOUT => 10,
@@ -272,10 +283,10 @@ return [
 
             // Define the replica DB connections
             $config['replicas'] = [
-                ['dsn' => getenv('DB_REPLICA_DSN_1')],
-                ['dsn' => getenv('DB_REPLICA_DSN_2')],
-                ['dsn' => getenv('DB_REPLICA_DSN_3')],
-                ['dsn' => getenv('DB_REPLICA_DSN_4')],
+                ['dsn' => App::env('DB_REPLICA_DSN_1')],
+                ['dsn' => App::env('DB_REPLICA_DSN_2')],
+                ['dsn' => App::env('DB_REPLICA_DSN_3')],
+                ['dsn' => App::env('DB_REPLICA_DSN_4')],
             ];
 
             // Instantiate and return it
@@ -293,17 +304,20 @@ In a load-balanced environment, you may want to override the default `session` c
 
 ```php
 <?php
+
+use craft\helpers\App;
+
 return [
     'components' => [
         'redis' => [
             'class' => yii\redis\Connection::class,
             'hostname' => 'localhost',
             'port' => 6379,
-            'password' => getenv('REDIS_PASSWORD'),
+            'password' => App::env('REDIS_PASSWORD'),
         ],
         'session' => function() {
             // Get the default component config
-            $config = craft\helpers\App::sessionConfig();
+            $config = App::sessionConfig();
 
             // Override the class to use Redis' session class
             $config['class'] = yii\redis\Session::class;
@@ -461,7 +475,7 @@ Then create a `@rootUrl` alias that references it:
 ```php
 // -- config/general.php --
 'aliases' => [
-    '@rootUrl' => getenv('ROOT_URL'),
+    '@rootUrl' => craft\helpers\App::env('ROOT_URL'),
 ],
 ```
 
@@ -469,7 +483,7 @@ Then you could go into your User Photos volume’s settings (for example) and se
 
 ### Config Files
 
-You can set your [general config settings](config-settings.md), [database connection settings](db-settings.md), and other PHP config files to environment variables using PHP’s [getenv()](http://php.net/manual/en/function.getenv.php) function:
+You can set your [general config settings](config-settings.md), [database connection settings](db-settings.md), and other PHP config files to environment variables using Craft’s [App::env()](craft3:craft\helpers\App::env()) function:
 
 ```bash
 # -- .env --
@@ -478,7 +492,7 @@ CP_TRIGGER="secret-word"
 
 ```php
 // -- config/general.php --
-'cpTrigger' => getenv('CP_TRIGGER') ?: 'admin',
+'cpTrigger' => craft\helpers\App::env('CP_TRIGGER') ?: 'admin',
 ```
 
 #### Multi-Environment Configs
@@ -516,7 +530,7 @@ ENVIRONMENT="dev"
 
 ```php
 // -- web/index.php --
-define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
+define('CRAFT_ENVIRONMENT', craft\helpers\App::env('ENVIRONMENT') ?: 'production');
 ```
 
 ## PHP Constants
@@ -568,7 +582,7 @@ The environment name that [multi-environment configs](../config/README.md#multi-
 
 ```php
 // Set the environment from the ENVIRONMENT env var, or default to 'production'
-define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
+define('CRAFT_ENVIRONMENT', craft\helpers\App::env('ENVIRONMENT') ?: 'production');
 ```
 
 ### `CRAFT_EPHEMERAL`
