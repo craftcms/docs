@@ -18,31 +18,36 @@ You add additional sites using the Sites settings in **Settings** → **Sites**.
 
 サイトグループでは、言語や種類などの共通点によってサイトをひとまとめに整理できます。
 
-* グループ
-* 名前
-* ハンドル
-* 言語
-* これはプライマリサイトですか？
-* ベース URL
+- グループ
+- 名前
+- ハンドル
+- 言語
+- これはプライマリサイトですか？
+- ベース URL
 
 
 ### サイトグループ
 
 Craft は（デフォルトサイトの名前を付けた）最初のサイトグループを作成し、そのグループにデフォルトサイトを割り当てます。
 
-フィールドグループに似ていて、サイトグループは整理するためだけにあります。
+Craft creates the first Site Group for you, named after the default site, and assigns the default site to that group.
 
 現在のサイトグループの情報には、次のようにアクセスできます。
 
-サイトの言語を選択すると、日付、時間、および、数字の書式と、翻訳の静的メッセージで使用するための言語を Craft に伝えます。
+You can access the current site’s group information using `currentSite.group`:
 
 ```twig
-Site ID:            {{ currentSite.id }}
-Site Handle:        {{ currentSite.handle }}
-Site Name:          {{ currentSite.name }}
-Site Language:      {{ currentSite.language }}
-Is Primary Site?:   {{ currentSite.primary }}
-Base URL:           {{ currentSite.baseUrl }}
+{# @var currentSite craft\models\Site #}
+Site ID:          {{ currentSite.id }}
+Site Handle:      {{ currentSite.handle }}
+Site Name:        {{ currentSite.name }}
+Site Language:    {{ currentSite.language }}
+Is Primary Site?: {{ currentSite.primary }}
+Base URL:         {{ currentSite.baseUrl }}
+
+{# @var siteGroup craft\models\SiteGroup #}
+{% set siteGroup = currentSite.group %}
+Site Group Name:  {{ siteGroup.name }}
 ```
 
 
