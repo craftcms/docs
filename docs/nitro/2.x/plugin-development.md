@@ -45,5 +45,16 @@ In the output, you will see your plugin referenced using a symlink during the in
 
     - Installing craftcms/commerce (3.2.14.1): Symlinking from ./plugins/commerce
 
-
 In the control panel, visit **Settings** → **Plugins**, choose **Commerce** and switch on the **Enable** setting. You can now develop your plugins locally and keep changes tracked with Git!
+
+## Running Codeception and PHPUnit with PHPStorm
+
+PHPStorm allows you to use a remote interpreter to execute Codeception or PHPUnit tests. To run codeceptions tests with Nitro, perform the following actions:
+
+1. Configure the remote interpreter in PHPStorm using Docker.
+2. Select the image and version to use (e.g. `craftcms/nginx:7.4-dev`).
+3. Add the configuration for running tests.
+
+::: tip
+These tests will run inside a container that is not attached to the default `nitro-network`. This means the databases are not reachable by the usual hostname (e.g. `mysql-8.0-3306.database.internal`). Instead, you must use `host.docker.internal` and database port (e.g. `3306`) in your `.env` file to reach the database.
+:::

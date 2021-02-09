@@ -14,3 +14,11 @@ Generating optimized autoload files
 Use the `composer fund` command to find out more!
 composer install completed 🤘
 ```
+
+## Specifying a Composer Version
+
+The `composer` command allows to to specify any version of composer based on the Docker Image tags. To use a different version of composer, run the following:
+
+```bash
+$ nitro composer --composer-version=1 install
+```
