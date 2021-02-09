@@ -862,7 +862,7 @@ Nitro restarted 🎉
 
 ## `share`
 
-Allows you to SSH into a container.
+Allows you to share a local site.
 
 ```
 nitro share
