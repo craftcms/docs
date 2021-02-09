@@ -165,6 +165,8 @@ Some email settings support dynamic Twig values, where parsing errors can cause 
 Syntax issues, undeclared variables, or missing information may prevent templates from rendering.
 4. **Make sure included PDFs render properly.**\
 If you’re including a PDF, it could have its own rendering issues that cause sending to fail. Be sure to preview the relevant PDF separately and ensure it’s working as expected.
+5. **Avoid cart and session references.**\
+Emails are sent by queue processes that don’t have access to sessions or carts that depend on them. References to `craft.commerce.carts.cart` or `craft.commerce.customers.customer`, for example, will result in session-related errors.
 
 When an email fails to send in response to a status change, its queue job will be marked as failed and include an appropriate message. Once you fix the cause of the sending failure, you can retry sending the email from the queue via **Utilities** → **Queue Manager**.
 
