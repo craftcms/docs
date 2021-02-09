@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-02-09
+### Fixed
+- Prevented a useless link to “newer” docs when the default doc set version is not also the latest.
+
 ## 2021-02-03
 ### Changed
 - Listed a few handy MigrationHelper methods in the Migrations docs.
