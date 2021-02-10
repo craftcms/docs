@@ -34,7 +34,7 @@ The following params can be sent with the request:
 Param | Description
 ----- | -----------
 `orderNumber` | Optional order number for a specific, existing cart.
-`forceSave` | Optionally set to `true` in order to force saving the cart.
+`forceSave` | Optionally set to `true` to force saving the cart.
 
 ### Output
 
@@ -51,7 +51,7 @@ The following params can be sent with the request:
 Param | Description
 ----- | -----------
 `orderNumber` | Optional order number for specific, existing cart.
-`forceSave` | Optionally set to `true` in order to force saving the cart.
+`forceSave` | Optionally set to `true` to force saving the cart.
 `fields[]` | Optional array of custom fields to be submitted to the cart.
 `purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options[]`, and `qty` parameters.
 `purchasables[]` | Array of one or more purchasables to be [added to the cart](../orders-carts.md#adding-a-multiple-items). Each must include an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs.
