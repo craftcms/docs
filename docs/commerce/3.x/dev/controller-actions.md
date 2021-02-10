@@ -34,7 +34,7 @@ The following params can be sent with the request:
 Param | Description
 ----- | -----------
 `orderNumber` | Optional order number for a specific, existing cart.
-`forceSave` | Pass optional `true` value to force saving the cart.
+`forceSave` | Optionally set to `true` in order to force saving the cart.
 
 ### Output
 
@@ -51,7 +51,7 @@ The following params can be sent with the request:
 Param | Description
 ----- | -----------
 `orderNumber` | Optional order number for specific, existing cart.
-`forceSave` | Pass optional `true` value to force saving the cart.
+`forceSave` | Optionally set to `true` in order to force saving the cart.
 `fields[]` | Optional array of custom fields to be submitted to the cart.
 `purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options[]`, and `qty` parameters.
 `purchasables[]` | Array of one or more purchasables to be [added to the cart](../orders-carts.md#adding-a-multiple-items). Each must include an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs.
@@ -63,6 +63,15 @@ Param | Description
 `gatewayId` | The payment gateway ID to be used when the cart is completed.
 `paymentSourceId` | The ID for a payment source that should be used when the cart is completed.
 `shippingMethodHandle` | The handle of a shipping method to be set for the cart.
+`shippingAddress[]` | Array of shipping address lines. (See [Addresses](../addresses.md#address-lines)).
+`shippingAddressId` | ID of an existing address to use as the shipping address.
+`estimatedShippingAddress[]` | Array of estimated shipping address lines. (See [Addresses](../addresses.md#address-lines)).
+`shippingAddressSameAsBilling` | Set to `true` to use billing address for shipping address and ignore `shippingAddress` and `shippingAddressId`.
+`billingAddress[]` | Array of billing address lines. (See [Addresses](../addresses.md#address-lines)).
+`billingAddressId` | ID of an existing address to use as the billing address.
+`estimatedBillingAddressSameAsShipping` | Set to `true` to use shipping address for estimated billing address.
+`billingAddressSameAsShipping` | Set to `true` to use shipping address for billing address. (Will ignore billing address ID and fields.)
+`estimatedBillingAddress[]` | Array of estimated billing address lines. (See [Addresses](../addresses.md#address-lines)).
 `successMessage` | The hashed flash notice that should be displayed if the cart is updated successfully. (Only used for `text/html` requests.)
 `failMessage` | The hashed flash notice that should be displayed if the cart failed to update. (Only used for `text/html` requests.)
 
