@@ -29,6 +29,8 @@ The request must include `Accept: application/json` in its headers.
 
 ### Supported Params
 
+The following params can be sent with the request:
+
 Param | Description
 ----- | -----------
 `orderNumber` | Optional order number for a specific, existing cart.
@@ -45,9 +47,6 @@ Updates the cart by [adding purchasables](../orders-carts.md#adding-items-to-a-c
 ### Supported Params
 
 The following params can be sent with the request:
-
-
-### Supported Params
 
 Param | Description
 ----- | -----------
