@@ -8,10 +8,10 @@ Nitro exposes common tools such as [Minio](services/minio.md) and [Mailhog](serv
 
 ## Adding a Custom Container
 
-Imagine we are working on a project that needs to interact with data stored in Elasticsearch. We can use the `container configure` command to add the container, ports, and volumes to our Nitro configuration file. The `container add` command provides easy prompts to walk you through setup.
+Imagine we are working on a project that needs to interact with data stored in Elasticsearch. We can use the `container new` command to add the container, ports, and volumes to our Nitro configuration file. The `container new` command provides easy prompts to walk you through setup.
 
 ```bash
-$ nitro container configure
+$ nitro container new
 What image are you trying to add? elasticsearch
 Which image should we use?
   1. elasticsearch
