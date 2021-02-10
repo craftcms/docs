@@ -22,5 +22,5 @@ npm install complete 🤘
 The `npm` command allows to to specify any version of node based on the Docker Image tags. To use a different version of npm, run the following:
 
 ```bash
-$ nitro npm --node-version=12 install
+$ nitro npm --version=12 install
 ```
