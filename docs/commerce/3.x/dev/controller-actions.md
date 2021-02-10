@@ -31,9 +31,8 @@ The request must include `Accept: application/json` in its headers.
 
 Param | Description
 ----- | -----------
-`orderNumber` | Optional order number for an existing cart.
-`forceSave` | Pass optional `true` value to force saving the cart when it’s requested.
-
+`orderNumber` | Optional order number for a specific, existing cart.
+`forceSave` | Pass optional `true` value to force saving the cart.
 
 ### Output
 
@@ -47,12 +46,17 @@ Updates the cart by [adding purchasables](../orders-carts.md#adding-items-to-a-c
 
 The following params can be sent with the request:
 
+
+### Supported Params
+
 Param | Description
 ----- | -----------
-`fields` | Optional array of custom fields to be submitted to the cart.
-`purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options`, and `qty` parameters.
-`purchasables` | Array of one or more purchasables to be [added to the cart](../orders-carts.md#adding-a-multiple-items). Each must include an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs.
-`lineItems` | Array of one or more of the cart’s line items to update. Each must have an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs. An item may include a `remove` key with a value of `1` or a `qty` of `0` to be removed from the cart.
+`orderNumber` | Optional order number for specific, existing cart.
+`forceSave` | Pass optional `true` value to force saving the cart.
+`fields[]` | Optional array of custom fields to be submitted to the cart.
+`purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options[]`, and `qty` parameters.
+`purchasables[]` | Array of one or more purchasables to be [added to the cart](../orders-carts.md#adding-a-multiple-items). Each must include an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs.
+`lineItems[]` | Array of one or more of the cart’s line items to update. Each must have an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs. An item may include a `remove` key with a value of `1` or a `qty` of `0` to be removed from the cart.
 `email` | Email address to be associated with the cart.
 `registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
 `paymentCurrency` | ISO code of a configured [payment currency](../payment-currencies.md) to be used for the cart.
@@ -142,7 +146,7 @@ Param | Description
 `address.{$attr}` | Address object with any of the key/value pairs in the system’s [address lines](../addresses.md#address-lines).
 `makePrimaryBillingAddress` | Whether to save as the primary billing address.
 `makePrimaryShippingAddress` | Whether to save as the primary shipping address.
-`fields` | Custom fields to be saved on the cart if it’s using the provided address.
+`fields[]` | Custom fields to be saved on the cart if it’s using the provided address.
 
 ### Output
 
