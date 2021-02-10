@@ -46,19 +46,52 @@
 `craft.app` 経由でアクセスすることは、先進的であると考えられます。 他の Twig 特有の変数やファンクションよりもセキュリティの上で意味があります。 :::
 :::
 
+#### Common Services
+
+Some of the services commonly used in templates:
+
+- `craft.app.request` – [Request](craft3:craft\web\Request) object with information about the current HTTP request
+- `craft.app.session` – [Session](craft3:craft\web\Session) object useful for getting and setting flash messages
+- `craft.app.user` – [User](craft3:craft\web\User) object representing the logged-in human (when applicable)
+- `craft.app.config.general` – [GeneralConfig](craft3:craft\config\GeneralConfig) object of [General Config Settings](../config/config-settings.md)
+- `craft.app.fields` – [Fields](craft3:craft\services\Fields) service for accessing custom field details
+- `craft.app.sections` – [Sections](craft3:craft\services\Sections) service for working with sections and entry types
+- `craft.app.sites` – [Sites](craft3:craft\services\Sites) service for getting [site](../sites.md) details
+
+Examples:
+
 ```twig
+{# get the value of an `email` query parameter or post field #}
+{% set address = craft.app.request.getParam('email') %}
+
+{# get the value of the `notice` flash message #}
+{% set message = craft.app.session.getFlash('notice') %}
+
+{# get the current user’s email address #}
+{% set email = craft.app.user.email %}
+
+{# is `devMode` enabled? #}
+{% set isDevMode = craft.app.config.general.devMode %}
+
+{# get a custom field by its `body` handle #}
 {% set field = craft.app.fields.getFieldByHandle('body') %}
+
+{# get all the sections for the current site #}
+{% set sections = craft.app.sections.getAllSections() %}
+
+{# get all the sites for the current Craft installation #}
+{% set sites = craft.app.sites.allSites() %}
 ```
 
 ## `currentSite`
 
-オブジェクトで表される、リクエストされたサイト。
+The requested site, represented by a <craft3:craft\models\Site> object.
 
 ```twig
 {{ currentSite.name }}
 ```
 
-現在のサイトと同じグループのすべてのサイトは、`currentSite.group.sites` 経由でアクセスすることができます。
+You can access all of the sites in the same group as the current site via `currentSite.group.sites`:
 
 ```twig
 <nav>
@@ -72,7 +105,7 @@
 
 ## `currentUser`
 
-オブジェクトで表される、現在ログインしているユーザー。 誰もログインしていない場合は、`null`。
+The currently-logged-in user, represented by a <craft3:craft\elements\User> object, or `null` if no one is logged in.
 
 ```twig
 {% if currentUser %}
@@ -82,7 +115,7 @@
 
 ## `devMode`
 
-コンフィグ設定 <config3:devMode> が現在有効になっているかどうか。
+Whether the <config3:devMode> config setting is currently enabled.
 
 ```twig
 {% if devMode %}
@@ -92,7 +125,7 @@
 
 ## `loginUrl`
 
-The URL to your site’s login page, based on the <config3:loginPath> コンフィグ設定に基づく、サイトのログインページの URL。
+The URL to your site’s login page, based on the <config3:loginPath> config setting.
 
 ```twig
 {% if not currentUser %}
@@ -102,7 +135,7 @@ The URL to your site’s login page, based on the <config3:loginPath> コンフ�
 
 ## `logoutUrl`
 
-The URL Craft uses to log users out, based on the <config3:logoutPath> config setting. ここに遷移した後、Craft はユーザーをホームページへ自動的にリダイレクトします。 「ログアウト _ページ_ 」といったものはありません。
+The URL Craft uses to log users out, based on the <config3:logoutPath> config setting. Note that Craft will automatically redirect users to your homepage after going here; there’s no such thing as a “logout _page_”.
 
 ```twig
 {% if currentUser %}
@@ -112,7 +145,7 @@ The URL Craft uses to log users out, based on the <config3:logoutPath> config se
 
 ## `now`
 
-現在の日付と時刻がセットされた [DateTime](http://php.net/manual/en/class.datetime.php) オブジェクト。
+A [DateTime](http://php.net/manual/en/class.datetime.php) object set to the current date and time.
 
 ```twig
 Today is {{ now|date('M j, Y') }}.
@@ -120,23 +153,23 @@ Today is {{ now|date('M j, Y') }}.
 
 ## `POS_BEGIN`
 
-定数 [craft\web\View::POS_BEGIN](craft3:craft\web\View#constants) の Twig 対応のコピー。
+Twig-facing copy of the [craft\web\View::POS_BEGIN](craft3:craft\web\View#constants) constant.
 
 ## `POS_END`
 
-定数 [craft\web\View::POS_END](craft3:craft\web\View#constants) の Twig 対応のコピー。
+Twig-facing copy of the [craft\web\View::POS_END](craft3:craft\web\View#constants) constant.
 
 ## `POS_HEAD`
 
-定数 [craft\web\View::POS_HEAD](craft3:craft\web\View#constants) の Twig 対応のコピー。
+Twig-facing copy of the [craft\web\View::POS_HEAD](craft3:craft\web\View#constants) constant.
 
 ## `POS_LOAD`
 
-定数 [craft\web\View::POS_LOAD](craft3:craft\web\View#constants) の Twig 対応のコピー。
+Twig-facing copy of the [craft\web\View::POS_LOAD](craft3:craft\web\View#constants) constant.
 
 ## `POS_READY`
 
-定数 [craft\web\View::POS_READY](craft3:craft\web\View#constants) の Twig 対応のコピー。
+Twig-facing copy of the [craft\web\View::POS_READY](craft3:craft\web\View#constants) constant.
 
 ## `setPasswordUrl`
 
