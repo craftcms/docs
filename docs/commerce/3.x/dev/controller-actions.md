@@ -184,7 +184,11 @@ Success | Output
 
 ## <badge vertical="baseline" type="verb">POST</badge> `customer-addresses/delete`
 
-Deletes a customer’s address.
+Deletes one of the current customer’s addresses.
+
+::: tip
+If the deleted address is used in the cart, that relationship will automatically be removed.
+:::
 
 ### Supported Params
 
@@ -222,7 +226,7 @@ Success | Output
 
 ## <badge vertical="baseline" type="verb">GET</badge> `customer-addresses/get-addresses`
 
-Returns a customer’s addresses as JSON.
+Returns the current customer’s addresses as JSON.
 
 The request must include `Accept: application/json` in its headers.
 
@@ -232,7 +236,7 @@ Returns a JSON object with a `success` key and `true` value, and an `addresses` 
 
 ## <badge vertical="baseline" type="verb">GET</badge> `customer-orders/get-orders`
 
-Returns a customer’s orders as JSON.
+Returns the current customer’s orders as JSON.
 
 The request must include `Accept: application/json` in its headers.
 
