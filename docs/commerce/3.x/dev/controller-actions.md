@@ -27,6 +27,14 @@ Returns the [current cart](../orders-carts.md#fetching-a-cart) as JSON. A new ca
 
 The request must include `Accept: application/json` in its headers.
 
+### Supported Params
+
+Param | Description
+----- | -----------
+`orderNumber` | Optional order number for an existing cart.
+`forceSave` | Pass optional `true` value to force saving the cart when it’s requested.
+
+
 ### Output
 
 JSON object with the current cart on the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting.
