@@ -50,6 +50,14 @@ If you are creating the Assets field within a [Matrix field](matrix-fields.md), 
 So if your Matrix field is attached to an entry, and you want to output the entry ID in your dynamic subfolder path, use `owner.id` rather than `id`.
 :::
 
+::: warning
+If the rendered subfolder path ends up blank, or contains a leading or trailing forward slash (e.g. `foo/`) or an empty segment (e.g. `foo//bar`), Craft will interpret that as a sign that a variable in the subfolder template couldn’t be resolved successfully, and the path will be considered invalid. If you are intentionally outputting a blank segment, output `:ignore:`. For example, if you want to output the first selected category, or nothing if there isn’t one, do this:
+
+```twig
+{{ categoriesFieldHandle.one().slug ?? ':ignore:' }}
+```
+:::
+
 ## The Field
 
 Assets fields list all the currently-related assets, with a button to select new ones.

@@ -162,7 +162,7 @@ This example creates a form for collecting the customer’s name and country, wh
 <form method="post">
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
-    {{ hiddenInput('successMessage', 'Updated shipping address.') }}
+    {{ hiddenInput('successMessage', 'Updated shipping address.'|hash) }}
 
     {# You can send a blank string here or omit this form parameter #}
     {{ hiddenInput('shippingAddressId', '') }}
@@ -195,7 +195,7 @@ If your customers have saved multiple addresses, you can display radio buttons a
 <form method="post">
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
-    {{ hiddenInput('successMessage', 'Updated addresses.') }}
+    {{ hiddenInput('successMessage', 'Updated addresses.'|hash) }}
 
     {# Display saved addresses as options if we have them #}
     {% if customerAddresses | length %}
@@ -266,7 +266,7 @@ This example starts a form that could be used to update the shipping address att
 <form method="post">
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
-    {{ hiddenInput('successMessage', 'Updated addresses.') }}
+    {{ hiddenInput('successMessage', 'Updated addresses.'|hash) }}
 
     {{ hiddenInput('shippingAddress[id]', address.id) }}
     <input type="text" name="shippingAddress[firstName]" value="{{ address.firstName }}">
