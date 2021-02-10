@@ -134,8 +134,7 @@ Your template can also define the following variables, to customize the form beh
 
 | Variable                     | Description                                                                                                                                                             |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `formActions`                | An array of Save menu actions.                                                                                                                                          |
-| `formActions`                | An array of available actions for the form (see below).                                                                                                                 |
+| `formActions`                | An array of available Save menu actions for the form (see below).                                                                                                       |
 | `mainFormAttributes`         | A hash of HTML attributes that should be added to the `<form>` tag.                                                                                               |
 | `retainScrollOnSaveShortcut` | Whether the page’s scroll position should be retained on the subsequent page load when the <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>S</kbd> keyboard shortcut is used. |
 | `saveShortcutRedirect`       | The URL that the page should be redirected to when the <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>S</kbd> keyboard shortcut is used.                                     |
