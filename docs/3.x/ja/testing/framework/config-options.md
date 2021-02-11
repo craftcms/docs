@@ -40,7 +40,7 @@ The `plugins` parameter accepts an Array of objects with the following parameter
 - class (Required): [The main plugin class](../../extend/plugin-guide.md#the-plugin-class)
 - handle (Required): The plugin handle
 
-Plugins will be installed before any tests are run.
+Plugins that will be installed before any tests are run. If you are supplying [Project Config](#projectconfig) data for tests, then there is no need to list any plugins here that Project Config will already install.
 
 ### `dbSetup`
 
