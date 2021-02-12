@@ -33,7 +33,7 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`orderNumber` | Optional order number for a specific, existing cart.
+`number` | Optional order number for a specific, existing cart.
 `forceSave` | Optionally set to `true` to force saving the cart.
 
 ### Output
@@ -50,7 +50,7 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`orderNumber` | Optional order number for specific, existing cart.
+`number` | Optional order number for specific, existing cart.
 `forceSave` | Optionally set to `true` to force saving the cart.
 `fields[]` | Optional array of custom fields to be submitted to the cart.
 `purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options[]`, and `qty` parameters.
@@ -351,7 +351,7 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`orderNumber` | The order number payment should be applied to. When ommitted, payment is applied to the current cart.
+`number` | The order number payment should be applied to. When ommitted, payment is applied to the current cart.
 `email` | Email address of the person responsible for payment, which must match the email address on the order. Required if the order being paid is not the active cart.
 `registerUserOnOrderComplete` | Whether the customer should have an account created on order completion.
 `paymentCurrency` | ISO code of a configured [payment currency](../payment-currencies.md) to be used for the payment.
