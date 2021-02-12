@@ -17,6 +17,7 @@
           <transition name="slide-right">
             <div class="set-nav" v-if="this.$activeSet">
               <DocSetPanel @selectVersion="handleVersionSelect" />
+              <loading-bars v-if="loading" class="ml-4 mt-1" />
               <transition :name="getTransitionClass(1)">
                 <SidebarLinks
                   v-if="currentSidebarDepth === 1"
@@ -45,7 +46,7 @@
       <slot name="bottom" />
 
       <transition name="slide-up">
-        <div v-if="hasBottomLinks" id="bottom" class="left-bar-bottom">
+        <div v-if="hasBottomLinks && ! loading" id="bottom" class="left-bar-bottom">
           <div class="language">
             <select
               name="locale"
@@ -197,6 +198,7 @@
 <script>
 import DocSetPanel from "./DocSetPanel.vue";
 import SidebarLinks from "./SidebarLinks.vue";
+import LoadingBars from "./LoadingBars.vue";
 import {
   resolveSidebarConfig,
   getRelativeActiveBaseFromConfig,
@@ -206,11 +208,12 @@ import {
 
 export default {
   props: ["items", "extraItems", "set", "language"],
-  components: { DocSetPanel, SidebarLinks },
+  components: { DocSetPanel, SidebarLinks, LoadingBars },
   data() {
     return {
       currentSidebarDepth: null,
       previousSidebarDepth: null,
+      loading: true
     };
   },
   computed: {
@@ -243,6 +246,7 @@ export default {
   },
   mounted() {
     this.currentSidebarDepth = this.getSidebarNavigationDepth();
+    this.loading = false;
   },
   methods: {
     handleLanguageSelect(event) {
