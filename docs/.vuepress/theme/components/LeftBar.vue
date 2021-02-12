@@ -114,12 +114,6 @@
   }
 }
 
-@screen xxl {
-  .left-bar-links.has-bottom {
-    height: calc(100vh - 180px - 6.5rem);
-  }
-}
-
 .language {
   @apply relative pl-2 pr-4 py-2;
 
