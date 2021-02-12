@@ -88,16 +88,18 @@ All [first-party provided gateways](#first-party-gateway-plugins) support partia
 
 ## Templating
 
-### craft.commerce.gateways.allFrontEndGateways
+### craft.commerce.gateways.getAllCustomerEnabledGateways
 
 Returns all payment gateways available to the customer.
 
 ```twig
-{% if not craft.commerce.gateways.allFrontEndGateways|length %}
+{% set gateways = craft.commerce.gateways.getAllCustomerEnabledGateways %}
+
+{% if not gateways|length %}
     <p>No payment methods available.</p>
 {% endif %}
 
-{% if craft.commerce.gateways.allFrontEndGateways|length %}
+{% if gateways|length %}
 <form method="post">
     {{ csrfInput() }}
     {{ hiddenInput('action', 'commerce/cart/update-cart') }}
@@ -105,7 +107,7 @@ Returns all payment gateways available to the customer.
 
     <label for="gatewayId">Payment Method</label>
     <select id="gatewayId" name="gatewayId" >
-        {% for id,name in craft.commerce.gateways.allFrontEndGateways %}
+        {% for id,name in gateways %}
             <option value="{{ id }}"{% if id == cart.gatewayId %} selected{% endif %}>
                 {{- name -}}
             </option>
