@@ -1,7 +1,7 @@
 # About Craft Nitro
 
 ::: warning
-Nitro 2 is currently in beta and currently doesn’t support Windows. See [1.x](../1.x/) for the latest stable version.
+Nitro 2 is currently in beta. See [1.x](../1.x/) for the latest stable version.
 :::
 
 Nitro is a speedy Docker-based local development environment tuned for [Craft CMS](https://craftcms.com/).
@@ -21,5 +21,5 @@ Nitro installs the following:
 
 ## System Requirements
 
-- macOS, Linux
+- macOS, Linux, Windows 10 with WSL2
 - [Docker](https://www.docker.com/)
