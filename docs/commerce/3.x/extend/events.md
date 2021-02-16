@@ -238,13 +238,13 @@ The event that is triggered before a new line item has been added to the order.
 ```php
 use craft\commerce\elements\Order;
 use craft\commerce\models\LineItem;
-use craft\commerce\events\LineItemEvent;
+use craft\commerce\events\AddLineItemEvent;
 use yii\base\Event;
 
 Event::on(
     Order::class,
     Order::EVENT_BEFORE_ADD_LINE_ITEM,
-    function(LineItemEvent $event) {
+    function(AddLineItemEvent $event) {
         // @var LineItem $lineItem
         $lineItem = $event->lineItem;
         // @var bool $isNew
