@@ -19,29 +19,28 @@ macOS users can optionally install Nitro [using Brew](#macos-via-brew).
 
 ### macOS via Brew
 
-You can install Nitro with the [Homebrew](https://brew.sh) package manager:
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
+2. Install Nitro with the [Homebrew](https://brew.sh) package manager:
+    ```bash
+    brew tap craftcms/nitro
+    brew install nitro
+    nitro init
+    ```
 
-```bash
-brew tap craftcms/nitro
-brew install nitro
-nitro init
-```
+### Windows
 
-### Windows 10
+Nitro 2 runs on Windows 10 Home or Pro and requires build 19042 or higher with WSL2.
 
-Nitro 2 will run on Windows 10 Home or Pro edition, but it requires build 19042 or higher and WSL2.
-
-1. [Install WSL](https://www.windowscentral.com/how-install-wsl2-windows-10).
-2. [Install WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package) update.
-3. Set default WSL to version 2 using `wsl --set-default-version 2`.
-4. Install a WSL2 compatible distro from the Microsoft Store. We recommend [Ubuntu 20](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6).
-5. In Docker Desktop, go to **Settings** → **General** and make sure `Use the WSL 2 based engine` is checked.
-6. In Docker Desktop, go to **Settings** → **Resources** → **WSL Integration** and make sure WSL is enabled for the disto you installed in step 4.
-7. Open the WSL2 terminal. If you installed Ubuntu, for example, it will be listed as `Ubuntu` in the Start Menu.
-8. Verify Docker is running inside the distro by running `docker ps`.
-9. Read [Developing using Nitro and WSL2](windows.md).
-
-
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
+2. [Install WSL2](https://www.windowscentral.com/how-install-wsl2-windows-10).
+3. Install the [WSL2 Linux kernel update package](https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package).
+4. Set default WSL to version 2 using `wsl --set-default-version 2`.
+5. Install a WSL2 compatible distro from the Microsoft Store. We recommend [Ubuntu 20](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6).
+6. In Docker Desktop, go to **Settings** → **General** and make sure `Use the WSL 2 based engine` is checked.
+7. In Docker Desktop, go to **Settings** → **Resources** → **WSL Integration** and make sure WSL is enabled for the disto you installed in step 5.
+8. Open the WSL2 terminal. If you installed Ubuntu, for example, it will be listed as `Ubuntu` in the Start Menu.
+9. Verify Docker is running inside the distro by running `docker ps`.
+10. Read [Developing using Nitro and WSL2](windows.md).
 
 ## Uninstalling Nitro
 
@@ -72,3 +71,5 @@ If you installed Nitro with `brew`:
 ```bash
 brew uninstall nitro
 ```
+
+### Windows
