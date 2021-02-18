@@ -8,7 +8,7 @@ Nitro 2 is built on [Docker](https://www.docker.com/products/docker-desktop) ins
 
 To upgrade, you’ll need to do the following:
 
-1. Back up your databases and Uninstall Nitro 1.
+1. Back up your databases and [Uninstall Nitro 1](https://craftcms.com/docs/nitro/1.x/installation.html#uninstalling-nitro).
 2. Install Nitro 2.
 3. Re-add each site and import its related database.
 
