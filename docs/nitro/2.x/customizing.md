@@ -3,7 +3,7 @@
 Nitro exposes a variety of ports and settings for you to customize using environment variables.
 
 ::: tip
-**Looking to adjust resources?**
+**Looking to adjust resources?**\
 Nitro uses whatever CPU, memory, and disk settings you’ve set for Docker. You can adjust these in Docker Desktop’s Resources panel and Nitro will automatically use them after Docker restarts.
 :::
 
