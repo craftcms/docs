@@ -10,17 +10,24 @@ You’ll need to install prereleases manually by downloading the appropriate Nit
 macOS users can optionally install Nitro [using Brew](#macos-via-brew).
 :::
 
-1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
-2. Visit Nitro’s [GitHub Releases](https://github.com/craftcms/nitro/releases) page and download the archive for your system.
-3. Extract the release archive and make the Nitro binary executable with `chmod +x ./nitro`.
-4. Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
-5. In your terminal, run `nitro`, choose **Cancel** for the security prompt, and visit **System Preferences** → **Security and Privacy** → **General** to choose **Allow Anyway** next to the warning about `nitro` being blocked. (Alternatively, you can strip the automatic quarantine flag using `xattr -dr com.apple.quarantine /usr/local/bin/nitro`.)
-5. Run `nitro init` and follow the prompts to create your machine.
+- Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
+- Open a terminal and run `bash <(curl -sLS http://installer.getnitro.sh)`.
+
+If you run into any issues with the shell script installer, you can manually install Nitro via:
+
+- Visit Nitro’s [GitHub Releases](https://github.com/craftcms/nitro/releases) page and download the archive for your system.
+- Extract the release archive and make the `nitro` executable with `chmod +x ./nitro`.
+- Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
+
+Once the `nitro` executable is in place:
+
+- In your terminal, run `nitro`, choose **Cancel** for the security prompt, and visit **System Preferences** → **Security and Privacy** → **General** to choose **Allow Anyway** next to the warning about `nitro` being blocked. (Alternatively, you can strip the automatic quarantine flag using `xattr -dr com.apple.quarantine /usr/local/bin/nitro`.)
+- Run `nitro init` and follow the prompts to create your machine.
 
 ### macOS via Brew
 
-1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
-2. Install Nitro with the [Homebrew](https://brew.sh) package manager:
+- Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
+- Install Nitro with the [Homebrew](https://brew.sh) package manager:
     ```bash
     brew tap craftcms/nitro
     brew install nitro
@@ -31,16 +38,24 @@ macOS users can optionally install Nitro [using Brew](#macos-via-brew).
 
 Nitro 2 runs on Windows 10 Home or Pro and requires build 19042 or higher with WSL2.
 
-1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
-2. [Install WSL2](https://www.windowscentral.com/how-install-wsl2-windows-10).
-3. Install the [WSL2 Linux kernel update package](https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package).
-4. Set default WSL to version 2 using `wsl --set-default-version 2`.
-5. Install a WSL2 compatible distro from the Microsoft Store. We recommend [Ubuntu 20](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6).
-6. In Docker Desktop, go to **Settings** → **General** and make sure `Use the WSL 2 based engine` is checked.
-7. In Docker Desktop, go to **Settings** → **Resources** → **WSL Integration** and make sure WSL is enabled for the disto you installed in step 5.
-8. Open the WSL2 terminal. If you installed Ubuntu, for example, it will be listed as `Ubuntu` in the Start Menu.
-9. Verify Docker is running inside the distro by running `docker ps`.
-10. Read [Developing using Nitro and WSL2](windows.md).
+- Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
+- [Install WSL2](https://www.windowscentral.com/how-install-wsl2-windows-10).
+- Install the [WSL2 Linux kernel update package](https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package).
+- Set default WSL to version 2 using `wsl --set-default-version 2`.
+- Install a WSL2 compatible distro from the Microsoft Store. We recommend [Ubuntu 20](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6).
+- In Docker Desktop, go to **Settings** → **General** and make sure `Use the WSL 2 based engine` is checked.
+- In Docker Desktop, go to **Settings** → **Resources** → **WSL Integration** and make sure WSL is enabled for the disto you installed in step 5.
+- Open the WSL2 terminal. If you installed Ubuntu, for example, it will be listed as `Ubuntu` in the Start Menu.
+- Verify Docker is running inside the distro by running `docker ps`.
+- Run `bash <(curl -sLS http://installer.getnitro.sh)` from the terminal.
+
+If you run into any issues with the shell script installer, you can manually install Nitro via:
+
+- Visit Nitro’s [GitHub Releases](https://github.com/craftcms/nitro/releases) page and download the archive for your system.
+- Extract the release archive and make the `nitro` executable with `chmod +x ./nitro`.
+- Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
+
+- Read [Developing using Nitro and WSL2](windows.md).
 
 ## Uninstalling Nitro
 
@@ -60,7 +75,7 @@ sudo rm /usr/local/bin/nitro
 
 You can optionally remove your Nitro config as well:
 
-```bash macOS and Linux
+```bash macOS
 rm -rf ~/.nitro
 ```
 
@@ -73,3 +88,5 @@ brew uninstall nitro
 ```
 
 ### Windows
+
+Follow the uninstallation instructions for Linux inside your WSL2 box.
