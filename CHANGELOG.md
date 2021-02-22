@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-02-22
+### Added
+- Added animation to indicate sidebar items are being loaded.
+
 ## 2021-02-12
 ### Changed
 - `xxl` breakpoint now increases `font-size` instead of `zoom`.
