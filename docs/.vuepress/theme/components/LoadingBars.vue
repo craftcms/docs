@@ -1,6 +1,6 @@
 <template>
   <div class="loading-bars">
-    <div class="bar darker animated"></div>
+    <div class="bar heavier animated"></div>
     <div class="bar animated w-24"></div>
     <div class="bar animated"></div>
     <div class="bar animated"></div>
@@ -12,11 +12,11 @@
 <style lang="postcss">
 .loading-bars {
   .bar {
-    @apply block mb-4;
+    @apply block mb-4 overflow-hidden;
     background: #e2e8f0;
     height: 13px;
 
-    &.darker {
+    &.heavier {
       background: #bac0ca;
     }
 
@@ -27,7 +27,7 @@
         content: "";
         @apply absolute z-10 block w-full opacity-75;
         height: 13px;
-        background: linear-gradient(-90deg, var(--bg-color), transparent);
+        background: linear-gradient(-90deg, var(--sidebar-bg-color), transparent);
         background-width: 26px;
         animation-name: slide-left-right;
         animation-duration: 3s;
@@ -46,6 +46,24 @@
     &:nth-child(5)::before { animation-delay: 0.5s; }
     &:nth-child(6) { width: 100px; }
     &:nth-child(6)::before { animation-delay: 0.6s; }
+  }
+}
+
+.theme-dark {
+  .loading-bars {
+    .bar {
+      background: var(--sidebar-link-color);
+      @apply opacity-25;
+
+      &.heavier {
+        background: var(--heading-color);
+      }
+
+      &::before {
+        @apply opacity-25;
+        background: linear-gradient(-90deg, #171d28, transparent);
+      }
+    }
   }
 }
 
