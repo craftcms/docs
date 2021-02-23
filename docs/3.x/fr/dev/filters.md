@@ -1035,7 +1035,7 @@ Runs an array through <craft3:craft\helpers\ArrayHelper::where()>.
 
 ```twig
 {% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}
-{{ array|filterByValue(v => v == 'bar') }}
+{{ array|where(v => v == 'bar') }}
 {# Result: { 'foo': 'bar', 'bat': 'bar' } #}
 ```
 
