@@ -29,7 +29,6 @@ Edit your `composer.json` to add a `repositories` setting:
 "repositories": [
     {
       "type": "path",
-      "symlink": false,
       "url": "./plugins/commerce"
     }
   ]
