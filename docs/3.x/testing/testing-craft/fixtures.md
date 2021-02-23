@@ -236,7 +236,7 @@ return [
                             'fieldType' => SomeField::class, // Required
                         ]
                     ],
-                    // Even matrix fields are supported in the following config:
+                    // Even Matrix fields are supported in the following config:
                     [
                         'layout-link' => [
                             'required' => false
