@@ -1,28 +1,30 @@
 # Using Fixtures
 
-Fixtures are used to setup data in a test suite that is predictable and the same for each test run (so assertions can be conducted based on this data).
+Fixtures establish data that’s predictable in each test run for making assertions.
 
-They can be defined in the `fixturesMethod` [defined](../framework/config-options.md) in the `codeception.yml` file. In the [Yii2 docs](https://www.yiiframework.com/doc/guide/2.0/en/test-fixtures#defining-a-fixture) you can read about fixture classes and fixture data as well as how these can be setup/used for testing.
+They can be defined in the `fixturesMethod` [defined](../framework/config-options.md) in the `codeception.yml` file. You can read more in the [Yii2 docs](https://www.yiiframework.com/doc/guide/2.0/en/test-fixtures#defining-a-fixture) about fixture classes and data and how these can be used for testing.
 
 To setup fixtures Create a folder called `fixtures` in your `tests` folder. In this folder we will put our fixture classes and fixture data.
 
 ## Craft-Specific Data
 
-For traditional database rows regular fixtures will suffice. However Craft introduces several concepts of its own, these come attached to some complicated linked data structures that are very difficult to manage with regular fixtures.
+Regular fixtures will suffice for traditional database rows. Because Craft utilizes complex linked data structures, it introduces some of its own fixtures for an improved testing experience.
 
 ### Element Fixtures
 
-Element types are one of Craft’s main selling points for developers. They yield a lot of power. That power is courtesy of a complicated data structure and set of APIs. A by-product of this is that some heavy lifting is required if element types are to be defined in a single fixture and data file. For this reason support is provided out of the box for setting up various element types.
-
-Provide your own custom element type? You can extend `craft\test\fixtures\elements\ElementFixture` to provide developers using your module/plugin support for their testing code - or just provide yourself support for testing your own module/plugin.
+Craft’s powerful element types are a key selling point for developers, but their under-the-hood complexity can be a challenge for testing. For this reason, Craft’s test suite provides support for setting up various element types.
 
 ::: tip
-Craft’s element fixtures are based on the excellent team over at [robuust](https://robuust.digital/) and their `craft-fixtures` [plugin](https://github.com/robuust/craft-fixtures).
+Craft’s element fixtures are based on the [robuust](https://robuust.digital/) team’s [Fixtures plugin](https://github.com/robuust/craft-fixtures).
 :::
+
+#### Working with your own custom element type?
+
+You can extend [craft\test\fixtures\elements\ElementFixture](craft3:craft\test\fixtures\elements\ElementFixture) for your own testing and to offer other developers the ability to use your element type as a fixture testing their code.
 
 ### Asset Fixtures
 
-If you want to add fixtures for Assets, extend `craft\test\fixtures\elements\AssetFixture`.
+You can add Asset fixtures by extending [craft\test\fixtures\elements\AssetFixture](craft3:craft\test\fixtures\elements\AssetFixture).
 
 The fixture data file could look like this:
 
@@ -39,21 +41,22 @@ return [
 ];
 ```
 
-`product.jpg` (and any of your other testing assets) should live in the `tests/_craft/assets` folder.
+`product.jpg` should live alongside other testing assets in `tests/_craft/assets`.
 
-This will upload and link `product.jpg` as an asset.
+This will upload and link `product.jpg` as an Asset.
 
 `AssetFixture` will define `$this->volumeIds` and `$this->folderIds` with their handles as key.
 
 The primary keys are: `volumeId`, `folderId`, `filename` and `title`.
 
 ::: warning
-The `AssetFixture` class will automatically copy your assets into the `tests/_craft/storage/runtime/temp` folder. Please ensure that the `tempFilePath` points to a filename this directory.
+The `AssetFixture` class will automatically copy your assets into the `tests/_craft/storage/runtime/temp` folder. Please ensure the `tempFilePath` points to a filename this directory.
 :::
 
 ### Category Fixtures
 
-Extend `craft\test\fixtures\elements\CategoryFixture` to add categories.
+You can add Category fixtures by extending [craft\test\fixtures\elements\CategoryFixture](craft3:craft\test\fixtures\elements\CategoryFixture).
+
 
 The fixture data file could look like this:
 
@@ -74,7 +77,7 @@ The primary keys are: `siteId`, `groupId` and `title`.
 
 ### Entry Fixtures
 
-Extend `craft\test\fixtures\elements\EntryFixture` to add entries.
+You can add Entry fixtures by extending [craft\test\fixtures\elements\EntryFixture](craft3:craft\test\fixtures\elements\EntryFixture).
 
 The fixture data file could look like this:
 
@@ -96,7 +99,7 @@ The primary keys are: `siteId`, `sectionId`, `typeId` and `title`.
 
 ### Global Set Fixture
 
-Extend `craft\test\fixtures\elements\GlobalSetFixture` to add Global Sets.
+You can add Global Set fixtures by extending [craft\test\fixtures\elements\GlobalSetFixture](craft3:craft\test\fixtures\elements\GlobalSetFixture).
 
 The fixture data file could look like this:
 
@@ -113,12 +116,12 @@ return [
 The primary keys are: `handle`.
 
 ::: tip
-Global sets do not get their own database row by default. If you need the Global Sets to have their own database row you can set `$useActiveRecord` to `true`.
+By default, a Global Set doesn’t get its own database row. If you need it to, you can set `$useActiveRecord` to `true`.
 :::
 
 ### Tag Fixtures
 
-Extend `craft\test\fixtures\elements\TagFixture` to add tags.
+You can add Tag fixtures by extending [craft\test\fixtures\elements\TagFixture](craft3:craft\test\fixtures\elements\TagFixture).
 
 The fixture data file could look like this:
 
@@ -139,7 +142,7 @@ The primary keys are: `siteId`, `groupId` and `title`.
 
 ### User Fixtures
 
-Extend `craft\test\fixtures\elements\UserFixture` to add users.
+You can add User fixtures by extending [craft\test\fixtures\elements\UserFixture](craft3:craft\test\fixtures\elements\UserFixture).
 
 The fixture data file could look like this:
 
@@ -160,9 +163,9 @@ The primary keys are: `siteId`, `username` and `email`.
 
 If you pass a `fieldLayoutType` into any class that extends the base `ElementFixture` class, Craft will automatically try to find the associated field layout and link it to the new Element you’re creating.
 
-If you want to set custom field values you can simply include those into your fixture data file (the examples as shown above).
+If you want to set custom field values you can simply include those into your fixture data file, prefixing the custom field handle with `field:`.
 
-Here’s an example of a fixture data file that is creating an entry with a title and some custom fields:
+Here’s an example of a fixture data file that creates an entry with a title and custom fields:
 
 ```php
 <?php
@@ -174,27 +177,22 @@ return [
         'typeId' => '1000',
         'title' => 'Theories of matrix',
 
-        // Set a  field layout
+        // Set a field layout
         'fieldLayoutType' => 'field_layout_with_matrix_and_normal_fields',
 
-        // Set field values
-        'aPlainTextFieldHandle' => 'value of text field',
-        'anotherPlainTextFieldHandle' => 'another valu',
+        // Set custom field values
+        'field:myPlainTextFieldHandle' => 'value of text field',
+        'field:myOtherPlainTextFieldHandle' => 'another value',
 
-        // If your field layout defines matrix fields - you can set those too!
-        'matrixFirst' => [
+        // Set custom Matrix field values
+        'field:matrixFirst' => [
             'new1' => [
-                'type' => 'aBlock',
-                'fields' => [
-                    'firstSubfield' => 'Some text'
-
-                ],
+                'type' => 'myBlockType',
+                'fields:mySubfield' => 'Some text'
             ],
             'new2' => [
-                'type' => 'aBlock',
-                'fields' => [
-                    'firstSubfield' => 'Some text'
-                ],
+                'type' => 'myBlockType',
+                'fields:mySubfield' => 'Some text'
             ],
         ],
     ]
@@ -204,28 +202,29 @@ return [
 
 ### Field Layout Fixtures
 
-Another Craft specific concept is field layouts. Field layouts consist of:
+Field Layouts are another Craft-specific concept. They consist of:
 
-- The layouts themselves
+- the layouts themselves
 - Tabs
 - Fields
 
-All of which are linked together, and would be very difficult to manage in a test environment with ordinary fixtures. For this reason, Craft provides a special `craft\test\fixtures\FieldLayoutFixture` class that provides all the required support to setup field layouts, the tabs and the underlying fields, including creating the fields in the `{{%content}}` table.
+These are linked to one another and would be difficult to manage in a test environment with ordinary fixtures. Craft provides a special [FieldLayoutFixture](craft3:craft\test\fixtures\FieldLayoutFixture) class that provides all the required support for field layouts along with their tabs and the underlying fields—this includes creating the fields in the `{{%content}}` table.
 
-All you have to do is create an ordinary fixture class and extend `craft\test\fixtures\FieldLayoutFixture`.
+To use this, first create an ordinary fixture class extending [craft\test\fixtures\FieldLayoutFixture](craft3:craft\test\fixtures\FieldLayoutFixture).
 
-Then add the `public $dataFile = 'path/to/datafile/` property that points to a datafile containing at least the following keys (including the nested position).
+Then, add the `public $dataFile = 'path/to/datafile/` property that points to a datafile containing at least the following keys (including the nested position).
 
 ```php
 <?php
 use craft\fields\Matrix;
+use craft\fields\PlainText;
 
 return [
     [
         'type' => 'craft\test\Craft', // Required - can be set to whatever you want.
         'tabs' => [ // Required - Value can be set to an empty array[]
             [
-                'name' => 'Tab 1', // Required
+                'name' => 'My First Tab', // Required
                 'fields' => [ // Required - Value can be set to an empty array[]
                     [
                         'layout-link' => [ // Required
@@ -233,28 +232,28 @@ return [
                         ],
                         'field' => [
                             'name' => 'Test field', // Required
-                            'handle' => 'testField2', // Required
-                            'fieldType' => SomeField::class, // Required
+                            'handle' => 'myTestField', // Required
+                            'fieldType' => PlainText::class, // Required
                         ]
                     ],
-                    // Even matrix fields are supported in the following config:
+                    // Matrix fields are supported in the following config:
                     [
                         'layout-link' => [
                             'required' => false
                         ],
                         'field' => [
-                            'name' => 'Matrix 1',
-                            'handle' => 'matrixFirst',
+                            'name' => 'Matrix Field',
+                            'handle' => 'myMatrixField',
                             'fieldType' => Matrix::class,
                             'blockTypes' => [
                                 'new1' => [
-                                    'name' => "A Block",
-                                    'handle' => "aBlock",
+                                    'name' => 'A Block',
+                                    'handle' => 'myMatrixBlock',
                                     'fields' => [
                                         'new1' => [
-                                            'type' => SomeField::class,
+                                            'type' => PlainText::class,
                                             'name' => 'First Subfield',
-                                            'handle' => 'firstSubfield',
+                                            'handle' => 'myBlockField',
                                             'instructions' => '',
                                             'required' => false,
                                             'typesettings' => [
@@ -264,13 +263,13 @@ return [
                                     ]
                                 ],
                                 'new2' => [
-                                    'name' => "Another Block",
-                                    'handle' => "another Block",
+                                    'name' => 'Another Block',
+                                    'handle' => 'myOtherMatrixBlock',
                                     'fields' => [
                                         'new1' => [
-                                            'type' => SomeField::class,
+                                            'type' => PlainText::class,
                                             'name' => 'Another Subfield',
-                                            'handle' => 'anotherSubfield',
+                                            'handle' => 'myOtherBlockField',
                                             'instructions' => '',
                                             'required' => false,
                                             'typesettings' => [
