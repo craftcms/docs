@@ -218,13 +218,14 @@ Then, add the `public $dataFile = 'path/to/datafile/` property that points to a 
 ```php
 <?php
 use craft\fields\Matrix;
+use craft\fields\PlainText;
 
 return [
     [
         'type' => 'craft\test\Craft', // Required - can be set to whatever you want.
         'tabs' => [ // Required - Value can be set to an empty array[]
             [
-                'name' => 'Tab 1', // Required
+                'name' => 'My First Tab', // Required
                 'fields' => [ // Required - Value can be set to an empty array[]
                     [
                         'layout-link' => [ // Required
@@ -232,28 +233,28 @@ return [
                         ],
                         'field' => [
                             'name' => 'Test field', // Required
-                            'handle' => 'testField2', // Required
-                            'fieldType' => SomeField::class, // Required
+                            'handle' => 'myTestField', // Required
+                            'fieldType' => PlainText::class, // Required
                         ]
                     ],
-                    // Even Matrix fields are supported in the following config:
+                    // Matrix fields are supported in the following config:
                     [
                         'layout-link' => [
                             'required' => false
                         ],
                         'field' => [
-                            'name' => 'Matrix 1',
-                            'handle' => 'matrixFirst',
+                            'name' => 'Matrix Field',
+                            'handle' => 'myMatrixField',
                             'fieldType' => Matrix::class,
                             'blockTypes' => [
                                 'new1' => [
-                                    'name' => "A Block",
-                                    'handle' => "aBlock",
+                                    'name' => 'A Block',
+                                    'handle' => 'myMatrixBlock',
                                     'fields' => [
                                         'new1' => [
-                                            'type' => SomeField::class,
+                                            'type' => PlainText::class,
                                             'name' => 'First Subfield',
-                                            'handle' => 'firstSubfield',
+                                            'handle' => 'myBlockField',
                                             'instructions' => '',
                                             'required' => false,
                                             'typesettings' => [
@@ -263,13 +264,13 @@ return [
                                     ]
                                 ],
                                 'new2' => [
-                                    'name' => "Another Block",
-                                    'handle' => "another Block",
+                                    'name' => 'Another Block',
+                                    'handle' => 'myOtherMatrixBlock',
                                     'fields' => [
                                         'new1' => [
-                                            'type' => SomeField::class,
+                                            'type' => PlainText::class,
                                             'name' => 'Another Subfield',
-                                            'handle' => 'anotherSubfield',
+                                            'handle' => 'myOtherBlockField',
                                             'instructions' => '',
                                             'required' => false,
                                             'typesettings' => [
