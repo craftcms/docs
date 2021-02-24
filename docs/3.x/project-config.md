@@ -1,3 +1,7 @@
+---
+related:
+    Deployment Best Practices: https://craftcms.com/knowledge-base/deployment-best-practices
+---
 # Project Config
 
 Craft keeps track of each project’s configuration in a central store called **project config**.

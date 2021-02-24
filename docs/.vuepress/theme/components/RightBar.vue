@@ -10,6 +10,7 @@
         :items="headingItems"
         fixed-heading="On this Page"
       />
+      <a v-if="$page.frontmatter.related" href="#further-reading" class="further-reading">Further Reading</a>
     </div>
   </div>
 </template>
@@ -38,7 +39,7 @@ export default {
       type: Number,
       default: 0,
     },
-  },
+  }
 };
 </script>
 
@@ -86,6 +87,18 @@ export default {
     @apply absolute;
     top: 0.125rem;
     right: 1.325rem;
+  }
+
+  .further-reading {
+    @apply w-full block -mt-3;
+    color: var(--sidebar-link-color);
+    opacity: 0.6;
+
+    &::before {
+      @apply inline-block rounded bg-blue w-2 h-2 mr-2 relative;
+      content: "";
+      top: -1px;
+    }
   }
 }
 

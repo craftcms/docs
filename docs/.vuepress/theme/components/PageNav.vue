@@ -1,5 +1,11 @@
 <template>
   <div>
+    <div v-if="$page.frontmatter.related" class="content-wrapper">
+      <h3 id="further-reading" class="text-lg font-bold">Further Reading</h3>
+      <ul>
+        <li v-for="link, title in $page.frontmatter.related"><a :href="link">{{ title }}</a></li>
+      </ul>
+    </div>
     <div v-if="prev || next" class="page-nav content-wrapper">
       <p class="inner border-t mt-0 pt-4 overflow-auto">
         <span v-if="prev" class="prev">
@@ -16,9 +22,7 @@
           </a>
 
           <RouterLink v-else class="prev" :to="prev.path">
-            {{
-            prev.title || prev.path
-            }}
+            {{ prev.title || prev.path }}
           </RouterLink>
         </span>
 
@@ -34,9 +38,7 @@
           </a>
 
           <RouterLink v-else :to="next.path">
-            {{
-            next.title || next.path
-            }}
+            {{ next.title || next.path }}
           </RouterLink>
           <span class="paging-arrow inline-block">→</span>
         </span>
@@ -62,14 +64,11 @@
 import { resolvePage, resolveHeaders } from "../util";
 import isString from "lodash/isString";
 import isNil from "lodash/isNil";
-import SidebarLinks from "./SidebarLinks";
 
 export default {
   name: "PageNav",
 
   props: ["sidebarItems"],
-
-  components: { SidebarLinks },
 
   computed: {
     headingItems() {

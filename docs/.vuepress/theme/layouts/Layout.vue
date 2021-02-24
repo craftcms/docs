@@ -42,7 +42,11 @@
         </template>
       </Page>
     </div>
-    <RightBar :heading-items="headingItems" :is-dark="isDark" @toggle-color-mode="toggleColorMode" />
+    <RightBar
+      :heading-items="headingItems"
+      :is-dark="isDark"
+      @toggle-color-mode="toggleColorMode"
+    />
   </div>
 </template>
 
