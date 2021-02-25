@@ -1,6 +1,6 @@
 # Queue Jobs
 
-Craft uses a queue for processing background tasks like updating indexes, propagating entries, and sending emails. You can write simple queue job classes to register your asynchronous queue tasks.
+Craft uses a queue for processing background tasks like updating indexes, propagating entries, and pruning revisions. You can write simple queue job classes to register your asynchronous queue tasks.
 
 This feature relies on [Yii’s queue system](https://www.yiiframework.com/extension/yiisoft/yii2-queue/doc/guide/2.0/en/usage), to which Craft adds a [BaseJob](craft3:craft\queue\BaseJob) class for some perks:
 
@@ -11,13 +11,13 @@ This feature relies on [Yii’s queue system](https://www.yiiframework.com/exten
 
 An ideal queue job is something slow that the a user shouldn’t have to wait on while using a site’s front end or the control panel. Multi-step processes and actions that connect with third-party APIs can be ideal candidates for queueing.
 
-Critical tasks, however, should not necessarily be entrusted to the queue. A default Craft install will have [runQueueAutomatically](config3:runQueueAutomatically) enabled and be reliant on a control panel browser session to trigger the queue. This could result in queue processing delays for infrequently-accessed sites.
+Critical tasks, however, should not necessarily be entrusted to the queue. A default Craft install will have <config3:runQueueAutomatically> enabled and be reliant on a control panel browser session to trigger the queue. This could result in queue processing delays for infrequently-accessed sites.
 
 Similarly, failed queue jobs may pause the queue and require admin intervention. Both are worth considering as you’re contemplating whether or not to utilize a queue job for your plugin or custom module.
 
 ## Writing a Job
 
-You can add your own queue job by first writing a class that extends [craft\queue\BaseJob](craft3:craft\queue\BaseJob) and implements `execute()`.
+You can add your own queue job by first writing a class that extends <craft3:craft\queue\BaseJob> and implements `execute()`.
 
 This example class sends an email:
 
