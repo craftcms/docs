@@ -72,10 +72,12 @@ export default {
         return;
       }
 
-      const isCurrentVersion =
+      const isDefaultVersion =
         this.$activeSet.defaultVersion === this.$activeVersion;
+      const isNewestVersion =
+        this.$activeVersion === this.$activeSet.versions[0][0];
 
-      if (isCurrentVersion) {
+      if (isDefaultVersion || isNewestVersion) {
         // only make suggestions for past versions
         return;
       }

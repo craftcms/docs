@@ -95,16 +95,4 @@ export default {
     width: calc(50% - 384px);
   }
 }
-
-@screen xxl {
-  .right-bar {
-    .sidebar-links {
-      max-height: calc(100vh - 12.5rem);
-      .sidebar-links {
-        @apply pb-0;
-        max-height: none;
-      }
-    }
-  }
-}
 </style>

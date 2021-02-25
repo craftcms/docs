@@ -63,6 +63,12 @@ Either of the examples above will generate a new cart in the session if none exi
 
 To see what cart information you can use in your templates, take a look at the [Order](commerce3:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/develop/example-templates/shop/cart/index.twig).
 
+<toggle-tip title="Example Order">
+
+<<< @/docs/commerce/3.x/example-objects/order.php
+
+</toggle-tip>
+
 Once a cart’s completed and turned into an order, calling `craft.commerce.carts.cart` again will return a new cart.
 
 ### Adding Items to a Cart

@@ -1,3 +1,6 @@
+---
+keywords: cli
+---
 # Console Commands
 
 Commerce adds console commands that can be run in your terminal.

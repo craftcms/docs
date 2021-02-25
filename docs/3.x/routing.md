@@ -151,7 +151,7 @@ If you access `http://my-project.test/blog/archive/2018`, your `blog/_archive.tw
 
 ### Accessing Named Parameters in your Controllers
 
-To access named parameters in your contollers, you will need to add the parameter(s) to your controller's action definition.
+To access named parameters in your controllers, you will need to add the parameter(s) to your controller's action definition.
 
 For example, with this URL rule:
 

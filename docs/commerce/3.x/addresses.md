@@ -30,12 +30,12 @@ $storeAddress = craft\commerce\Plugin::getInstance()
 
 If you flattened `storeAddress` into an array, this is what it might look like:
 
-::: details Example Address
-
-Note `countryId` and `stateId` are relational fields. (See [Countries & States](countries-states.md)).
+<toggle-tip title="Example Address">
 
 <<< @/docs/commerce/3.x/example-objects/storeAddress.php
-:::
+
+</toggle-tip>
+
 
 Several [Events](extend/events.md) may also be used, when [extending Commerce](extend/), to provide custom functionality as addresses are changed in the system:
 

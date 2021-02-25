@@ -8,7 +8,8 @@ Every purchasable is destined to become a line item, which happens when the purc
 
 When a line item is populated from a purchasable, a JSON shapshot is saved on that line item. The snapshot provides a permanent reference to whatever the purchasable looked like in that moment, regardless of how products or variations change over time. In other words, the details in the snapshot will persist regardless of any store changes during or after the checkout process.
 
-::: details Example Snapshot
+<toggle-tip title="Example Snapshot">
+
 ```json
 {
   "productId": "29",
@@ -110,7 +111,8 @@ When a line item is populated from a purchasable, a JSON shapshot is saved on th
   "sales": []
 }
 ```
-:::
+
+</toggle-tip>
 
 This can be particularly helpful, for example, if you’re displaying a completed order’s line items in templates and `getPurchasable()` returns `null`. This would happen if the purchasable was deleted, in which case details could be used from the snapshot instead. (This only applies to completed orders, because if a purchasable is deleted _during checkout_ the related line item would be removed from the customer’s cart.)
 

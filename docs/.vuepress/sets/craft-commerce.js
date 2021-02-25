@@ -79,7 +79,8 @@ module.exports = {
             "custom-order-statuses",
             "line-item-statuses",
             "emails",
-            "pdfs"
+            "pdfs",
+            "console-commands"
           ]
         },
         {

@@ -243,6 +243,65 @@ Databases:
   ---
 ```
 
+## `container new`
+
+Create a new custom container.
+
+```
+nitro container new
+```
+
+#### Example
+
+```
+$ nitro container new
+What image are you trying to add? elasticsearch
+Which image should we use?
+  1. elasticsearch
+  2. bitnami/elasticsearch
+  3. bitnami/elasticsearch-exporter
+  4. elastichq/elasticsearch-hq
+  5. justwatch/elasticsearch_exporter
+  6. taskrabbit/elasticsearch-dump
+  7. lmenezes/elasticsearch-kopf
+  8. blacktop/elasticsearch
+  9. barnybug/elasticsearch
+  10. elastic/elasticsearch
+Enter your selection: 1
+What tag should we use [latest]? 7.10.1
+  … downloading docker.io/library/elasticsearch:7.10.1 ✓
+Expose port `9200` on the host machine [Y/n]? y
+Expose port `9300` on the host machine [Y/n]? y
+Should we proxy one of the ports to expose a web based UI [Y/n]?
+Which port should we use for the UI?
+  1. 9200
+  2. 9300
+Enter your selection: 1
+What is the name of the container [elasticsearch]?
+Create a file to store environment variables [Y/n]?
+Created environment variables file at "/Users/oli/.nitro/.elasticsearch"...
+New container "elasticsearch.containers.nitro" added!
+Apply changes now [Y/n]?
+```
+
+## `container ssh`
+
+SSH into a custom container.
+
+```
+nitro container ssh
+```
+
+#### Example
+
+```
+Select a container to connect to:
+  1. elasticsearch.containers.nitro
+  2. rabbitmq.containers.nitro
+Enter your selection: 2
+root@5e98a85aef29:/#
+```
+
 ## `craft`
 
 Runs Craft console commands.
@@ -862,7 +921,7 @@ Nitro restarted 🎉
 
 ## `share`
 
-Allows you to SSH into a container.
+Allows you to share a local site.
 
 ```
 nitro share
