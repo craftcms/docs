@@ -22,7 +22,7 @@ module.exports = {
         {
           title: "Using Nitro",
           collapsable: false,
-          children: ["usage", "commands", "composer", "node", "share"]
+          children: ["usage", "commands", "composer", "node", "share", ["windows", "Nitro on Windows"]]
         },
         {
           title: "Databases",
