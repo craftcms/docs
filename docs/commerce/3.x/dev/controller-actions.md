@@ -72,6 +72,7 @@ Param | Description
 `estimatedBillingAddressSameAsShipping` | Set to `true` to use shipping address for estimated billing address.
 `billingAddressSameAsShipping` | Set to `true` to use shipping address for billing address. (Will ignore billing address ID and fields.)
 `estimatedBillingAddress[]` | Array of estimated billing address lines. (See [Addresses](../addresses.md#address-lines)).
+`clearNotices` or `clearNotices[]` | Field without a value to clear all cart notices, or an array of attributes whose notices should be cleared.
 `successMessage` | The hashed flash notice that should be displayed if the cart is updated successfully. (Only used for `text/html` requests.)
 `failMessage` | The hashed flash notice that should be displayed if the cart failed to update. (Only used for `text/html` requests.)
 
