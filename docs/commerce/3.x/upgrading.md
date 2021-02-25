@@ -195,9 +195,8 @@ $customer = \craft\commerce\Plugin::getInstance()
 ```
 :::
 
-
 ## Customer Info Field
 
-The customer info field has been removed. If you have created any of these fields they will need to be removed from the user field layouts.
+The Customer Info field type has been removed. If you previously added a Customer Info field to any field layouts, you’ll need to remove them manually.
 
-To get customer information to show on the Edit User page in the CMS make sure you have the `showCustomerInfoTab` setting set to `true` in your `commerce.php` config.
+By default, customer information is displayed in a tab for each user in the control panel. You can control whether this tab is shown using the Commerce [showCustomerInfoTab](config-settings.md#showcustomerinfotab) setting.
