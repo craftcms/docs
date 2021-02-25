@@ -34,7 +34,7 @@ Restrict the discount to a specific time period defined by start and end date fi
 
 ### Discount Condition Formula
 
-The discount condition formula lets you use a simple twig condition syntax to add a matching rule to the discount.
+The discount condition formula lets you use a simple Twig condition syntax to add a matching rule to the discount.
 If the field is left blank, then the condition will match the order being matched to the discount (the other conditions will still apply).
 
 The field accepts the [Twig’s expression syntax](https://twig.symfony.com/doc/2.x/templates.html#expressions), which is an expression that returns `true` or `false`.
