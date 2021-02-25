@@ -86,7 +86,7 @@ module.exports = {
         {
           title: "Front End Development",
           collapsable: false,
-          children: ["example-templates"]
+          children: ["example-templates", "dev/controller-actions"]
         },
         {
           title: "Twig Templating",
