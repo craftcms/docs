@@ -501,6 +501,109 @@ You can manually recalculate an order by choosing “Recalculate order” at the
 
 This will set temporarily the order’s calculation mode to *Recalculate All* and trigger recalculation. You can then apply the resulting changes to the order by choosing “Update Order”, or discard them by choosing “Cancel”.
 
+### Order Notices
+
+Whenever an order is updated—whether it’s the customer saving a cart or a store manager recalculating from the control panel—notices are added that describe what changed. These could include the following:
+
+- A previously-valid coupon or shipping method was removed from the order.
+- A line item’s purchasable was no longer available so that line item was removed from the cart.
+- A line item’s sale price changed for some reason, like the sale no longer applied for example.
+
+In each case, the notice explains why the change was made in human-friendly terms that can be exposed to the customer. 
+
+#### Accessing Order Notices
+
+Notices are stored on the order and accessed just like validation errors:
+
+::: code
+```twig
+{# @var order craft\commerce\elements\Order #}
+
+{# returns a multi-dimensional array of notices by attribute key #}
+{% set notices = order.getNotices() %}
+
+{# returns an array of notices for the `couponCode` attribute only #}
+{% set couponCodeNotices = order.getNotices('couponCode') %}
+
+{# returns the first notice only for the `couponCode` attribute #}
+{% set firstCouponCodeNotice = order.getFirstNotice('couponCode') %}
+
+{# returns first notice messages for each attribute in a one-dimensional array #}
+{% set noticesSummary = order.getNoticeSummary() %}
+
+{# pass `true` to get *every* message for each attribute instead of only the first #}
+{% set noticesSummary = order.getNoticeSummary(true) %}
+```
+```php
+// @var craft\commerce\elements\Order $order
+
+// returns a multi-dimensional array of notices by attribute key
+$notices = $order->getNotices();
+
+// returns an array of notices for the `couponCode` attribute only
+$couponCodeNotices = $order->getNotices('couponCode');
+
+// returns the first notice only for the `couponCode` attribute
+$firstCouponCodeNotice = $order->getFirstNotice('couponCode');
+
+// returns first notice messages for each attribute in a one-dimensional array
+$noticesSummary = $order->getNoticeSummary();
+
+// pass `true` to get *every* message for each attribute instead of only the first
+$noticesSummary = $order->getNoticeSummary(true);
+```
+:::
+
+#### Clearing Order Notices
+
+Notices remain on an order until they’re cleared. You can clear notices by posting to the cart update form action or calling the `clearNotices()` method on the order model.
+
+This example clears all the notices on the `couponCode` attribute:
+
+::: code
+```twig{5}
+<form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/update-cart') }}
+    {{ hiddenInput('successMessage', 'Coupon notice dismissed'|hash) }}
+    {{ hiddenInput('clearNotices[]', 'couponCode') }}
+    <button type="submit">Dismiss</button>
+</form>
+```
+```php{7}
+use craft\commerce\Plugin as Commerce;
+
+// Get the current cart
+$cart = Commerce::getInstance()->getCarts()->getCart();
+
+// Clear notices on the `couponCode` attribute
+$cart->clearNotices('couponCode');
+```
+:::
+
+This example posts `clearNotices` as a field with no value to clear all notices on the cart:
+
+::: code
+```twig{5}
+<form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/update-cart') }}
+    {{ hiddenInput('successMessage', 'All notices dismissed'|hash) }}
+    {{ hiddenInput('clearNotices') }}
+    <button type="submit">Dismiss</button>
+</form>
+```
+```php{7}
+use craft\commerce\Plugin as Commerce;
+
+// Get the current cart
+$cart = Commerce::getInstance()->getCarts()->getCart();
+
+// Clear notices on *all* attributes
+$cart->clearNotices();
+```
+:::
+
 ### Order Status Emails
 
 If [status emails](emails.md) are set up for a newly-updated order status, messages will be sent when the updated order is saved.
