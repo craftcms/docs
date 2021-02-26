@@ -18,7 +18,7 @@ Volumes’ base URLs can be set to an environment variable, or begin with an ali
 
 Out of the box, you can create one type of volume, “Local”. Local volumes represent a directory on the local web server.
 
-Local volumes have one setting, **File System Path**. Use this setting to define the path to the volume’s root directory on the server.
+Local volumes have one setting: **File System Path**. Use this setting to define the path to the volume’s root directory on the server.
 
 ::: tip
 Local volumes’ file system path can be set to an environment variable, or begin with an alias. See [Environmental Configuration](config/#environmental-configuration) to learn more about that.
