@@ -114,7 +114,7 @@ Once you’ve created your job, you can add it to the queue:
 ```php
 use mynamespace\queue\jobs\MyJob;
 
-\Craft::$app->queue->push(new MyJob());
+\craft\helpers\Queue::push(new MyJob());
 ```
 
 You can do this wherever it makes sense—most likely in a controller action or service.
@@ -126,7 +126,7 @@ You can specify priority when pushing a job by passing an integer in a second ar
 ```php
 use mynamespace\queue\jobs\MyJob;
 
-\Craft::$app->queue->push(new MyJob(), 10);
+\craft\helpers\Queue::push(new MyJob(), 10);
 ```
 
 The default priority is `1024`, and jobs with a lower priority are executed first.
