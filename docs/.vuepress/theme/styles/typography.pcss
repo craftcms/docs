@@ -33,19 +33,27 @@
   }
 
   h2 {
-    @apply text-2xl pb-1 border-b;
+    @apply text-2.5xl mt-12 pb-1 border-b;
     border-color: var(--border-color);
 
     code {
-      @apply text-lg;
+      @apply text-2xl font-sans;
+      color: var(--heading-color);
+    }
+
+    .badge.verb {
+      @apply text-base font-bold relative;
+      padding: 0.5rem 0.6rem;
+      bottom: 0.175rem;
     }
   }
 
   h3 {
-    @apply text-xl;
+    @apply text-xl mt-10;
 
     code {
-      @apply text-lg;
+      @apply text-lg font-bold;
+      color: var(--heading-color);
     }
   }
 
@@ -58,6 +66,8 @@
   }
 
   h5 {
+    @apply text-base;
+    
     code {
       @apply font-bold;
     }
