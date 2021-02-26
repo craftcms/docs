@@ -85,7 +85,7 @@ public function execute($queue): void
         $this->setProgress(
             $queue,
             $i / $totalUsers,
-            \Craft::t('app', '{step} of {total}', [
+            \Craft::t('app', '{step, number} of {total, number}', [
                 'step' => $i + 1,
                 'total' => $totalUsers,
             ])
