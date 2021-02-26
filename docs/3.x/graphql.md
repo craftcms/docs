@@ -1422,7 +1422,9 @@ To save an entry, use the entry type-specific mutation which will have the name 
 
 The `id`, `uid` and `authorId` arguments do no exist for single entries. This is because single entries have no authors and are identified already by the exact mutation. In a similar fashion, there are additional arguments available for structured entries. For more information, refer to [mutating structure data](#mutating-structure-data).
 
-Note that if you are using Craft as a headless backend where users are unlikely to visit the control panel regularly, you may want to [tweak the default queueing driver](https://craftcms.com/docs/3.x/graphql.html#mutations), so that search indexes remain up-to-date.
+::: tip
+After saving an entry, Craft runs queue jobs for updating revisions and search indexes. If you’re using Craft headlessly or infrequently accessing the control panel, consider disabling <config3:runQueueAutomatically> and [establishing an always-running daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms) to keep revisions and search indexes up to date.
+:::
 
 #### Editing Existing Entries
 
