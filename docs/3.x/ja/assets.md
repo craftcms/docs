@@ -6,7 +6,7 @@
 
 すべてのアセットは「ボリューム」にあります。 ボリュームは、ストレージコンテナです。 ウェブサーバーのディレクトリ、または、Amazon S3 のようなリモートストレージサービスをボリュームにできます。
 
-「設定 > アセット」から、プロジェクトのボリュームを管理できます。
+You can manage your project’s volumes from **Settings** → **Assets**.
 
 すべてのボリュームは、その中に含まれるアセットがパプリック URL を持つかどうか、持つ場合に**ベース URL** をどうするかを選択できます。
 
@@ -18,7 +18,7 @@
 
 デフォルトで、ボリュームの1つのタイプ「ローカル」を作成できます。 ローカルボリュームは、ローカルウェブサーバー上のディレクトリを表します。
 
-ローカルボリュームは、**ファイルシステムのパス**という1つの設定があります。 この設定を使用して、サーバー上のボリュームのルートディレクトリからのパスを定義します。
+Local volumes have one setting: **File System Path**. この設定を使用して、サーバー上のボリュームのルートディレクトリからのパスを定義します。
 
 ::: tip
 ボリュームのファイルシステムのパスは環境変数をセットしたり、エイリアスではじめることができます。 詳細については、[環境設定](config/environments.md)を参照してください。
@@ -144,6 +144,13 @@ We can display a list of thumbnails for images in a “Photos” volume by doing
 ::: warning
 When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have “Assets in this volume have public URLs” enabled and a “Base URL” setting. Otherwise, the result will always be empty.
 :::
+
+You can cache-bust URLs using Craft’s [`url()` function](dev/functions.md#url) to append a query parameter with the last-modified timestamp:
+
+```twig
+<img src="{{ url(image.getUrl('thumb'), {v: image.dateModified.timestamp}) }}">
+{# <img src="https://mysite.foo/images/_thumb/bar.jpg?v=1614374621"> #}
+```
 
 ### Parameters
 
