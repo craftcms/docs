@@ -107,7 +107,7 @@ public function execute($queue): void
 }
 ```
 
-## Adding your Job to the Queue
+## Adding Your Job to the Queue
 
 Once you’ve created your job, you can add it to the queue:
 
