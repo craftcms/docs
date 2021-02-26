@@ -6,7 +6,7 @@ You can manage your project’s media and document files (“assets”) in Craft
 
 All of your assets live in “volumes”. Volumes are storage containers. A volume can be a directory on the web server, or a remote storage service like Amazon S3.
 
-You can manage your project’s volumes from Settings → Assets.
+You can manage your project’s volumes from **Settings** → **Assets**.
 
 All volumes let you choose whether the assets within them should have public URLs, and if so, what their **base URL** should be.
 
