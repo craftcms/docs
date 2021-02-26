@@ -21,6 +21,31 @@ First, you’ll need to configure PhpStorm to listen for requests from the brows
 4. Choose **Run** → **Start Listening for PHP Debug Connections**.\
 ![PhpStorm Remote Debug Settings](./images/start-listening.png)
 
+## Configuring VS Code
+
+1. Install the [PHP Debug extension](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug)
+
+2. Create a Launch Configuration specifying port 9003, path mappings, and your site’s hostname:
+
+```js{5-9}
+{
+    "name": "Listen for XDebug",
+    "type": "php",
+    "request": "launch",
+    "port": 9003,
+    "pathMappings": {
+        "/app": "${workspaceRoot}"
+    },
+    "hostname": "tutorial.nitro",
+    "xdebugSettings": {
+        "max_data": 65535,
+        "show_hidden": 1,
+        "max_children": 100,
+        "max_depth": 5
+    }
+}
+```
+
 ## Debugging Web Requests
 
 1. Install the Xdebug helper in your favorite browser.
