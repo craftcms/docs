@@ -6,7 +6,7 @@ You can manage your project’s media and document files (“assets”) in Craft
 
 All of your assets live in “volumes”. Volumes are storage containers. A volume can be a directory on the web server, or a remote storage service like Amazon S3.
 
-You can manage your project’s volumes from Settings → Assets.
+You can manage your project’s volumes from **Settings** → **Assets**.
 
 All volumes let you choose whether the assets within them should have public URLs, and if so, what their **base URL** should be.
 
@@ -18,7 +18,7 @@ Volumes’ base URLs can be set to an environment variable, or begin with an ali
 
 Out of the box, you can create one type of volume, “Local”. Local volumes represent a directory on the local web server.
 
-Local volumes have one setting, **File System Path**. Use this setting to define the path to the volume’s root directory on the server.
+Local volumes have one setting: **File System Path**. Use this setting to define the path to the volume’s root directory on the server.
 
 ::: tip
 Local volumes’ file system path can be set to an environment variable, or begin with an alias. See [Environmental Configuration](config/#environmental-configuration) to learn more about that.
@@ -144,6 +144,13 @@ We can display a list of thumbnails for images in a “Photos” volume by doing
 ::: warning
 When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have “Assets in this volume have public URLs” enabled and a “Base URL” setting. Otherwise, the result will always be empty.
 :::
+
+You can cache-bust URLs using Craft’s [`url()` function](dev/functions.md#url) to append a query parameter with the last-modified timestamp:
+
+```twig
+<img src="{{ url(image.getUrl('thumb'), {v: image.dateModified.timestamp}) }}">
+{# <img src="https://mysite.foo/images/_thumb/bar.jpg?v=1614374621"> #}
+```
 
 ### Parameters
 
