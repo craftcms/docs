@@ -25,16 +25,16 @@ First, you’ll need to configure PhpStorm to listen for requests from the brows
 
 1. Install the [PHP Debug extension](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug)
 
-2. Create a Launch Configuration.
+2. Create a Launch Configuration specifying port 9003, path mappings, and your site’s hostname:
 
-```javascript
+```js{5-9}
 {
     "name": "Listen for XDebug",
     "type": "php",
     "request": "launch",
     "port": 9003,
     "pathMappings": {
-        "/app/web": "${workspaceFolder}"
+        "/app": "${workspaceRoot}"
     },
     "hostname": "tutorial.nitro",
     "xdebugSettings": {
@@ -45,10 +45,6 @@ First, you’ll need to configure PhpStorm to listen for requests from the brows
     }
 }
 ```
-
-::: tip
-Don't forget to change the `hostname` to your sites hostname (e.g. `tutorial.nitro`).
-:::
 
 ## Debugging Web Requests
 
