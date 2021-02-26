@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-02-25
+### Added
+- Added a Queue Jobs page to the Extending Craft section.
+
 ## 2021-02-22
 ### Added
 - Added animation to indicate sidebar items are being loaded.
