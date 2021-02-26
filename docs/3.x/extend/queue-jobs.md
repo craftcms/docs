@@ -107,9 +107,9 @@ public function execute($queue): void
 }
 ```
 
-## Registering
+## Adding your Job to the Queue
 
-You’ll need to register it using the queue service:
+Once you’ve created your job, you can add it to the queue:
 
 ```php
 use mynamespace\queue\jobs\MyJob;
@@ -118,8 +118,6 @@ use mynamespace\queue\jobs\MyJob;
 ```
 
 You can do this wherever it makes sense—most likely in a controller action or service.
-
-Unlike registering lots of other things in Craft, it’s _not_ a great idea to do this in your plugin or module’s `init()` method because that could add the job to the queue on every request.
 
 ### Specifying Priority
 
