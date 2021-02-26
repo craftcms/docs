@@ -131,6 +131,4 @@ use mynamespace\queue\jobs\MyJob;
 
 The default priority is `1024`, and jobs with a lower priority are executed first.
 
-::: warning
-Not all drivers support job priorities.
-:::
+Not all queue drivers support setting a priority; `Queue::push()` will attempt to set it and fall back to pushing without a priority if the driver throws a `NotSupportedException`.
