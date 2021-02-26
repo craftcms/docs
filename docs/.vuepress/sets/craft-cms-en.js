@@ -65,6 +65,7 @@ module.exports = {
             "extending-twig",
             "template-hooks",
             "soft-deletes",
+            "queue-jobs",
             "environmental-settings",
             "extending-system-components"
           ]
