@@ -327,6 +327,24 @@ Initializes and adds a new site. Pass the name of the directory that should be c
 nitro create [<options>]
 ```
 
+::: tip
+You can create your own Composer package to jumpstart any PHP project!\
+Nitro uses Composer’s [create-project](https://getcomposer.org/doc/03-cli.md#create-project) to check out a repository and run `composer install`. That project’s `composer.json` file can optionally include `post-create-project-cmd` scripts for any setup steps just like the Craft Composer project:
+
+```javascript
+// ...
+"scripts": {
+  "post-create-project-cmd": [
+    "@php -r \"copy('.env.example', '.env');\"",
+    "@composer dump-autoload -o",
+  ]
+}
+// ...
+```
+
+Read the [create-project](https://getcomposer.org/doc/03-cli.md#create-project) documentation for more.
+:::
+
 #### Example
 
 
