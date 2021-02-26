@@ -56,8 +56,10 @@ First, you’ll need to configure PhpStorm to listen for requests from the brows
 - [Safari](https://github.com/benmatselby/xdebug-toggler)
 - [Opera](https://addons.opera.com/addons/extensions/details/xdebug-launcher/)
 
-2. In the browser helper’s options, choose **PhpStorm** and save.\
+2. In the browser helper’s options, choose your IDE key and save.\
 ![Xdebug Browser Helper Chrome](./images/xdebug-chrome-settings.png)
+    - For PhpStorm, select the **PhpStorm** option.
+    - For VS Code, select **Other** and enter `VSCODE`.
 
 3. Choose **Debug** on your browser’s Xdebug helper.\
 ![PhpStorm Remote Debug Settings](./images/xdebug-chrome.png)
