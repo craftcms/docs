@@ -11,7 +11,7 @@ Nitro is a speedy Docker-based local development environment tuned for [Craft CM
 Nitro installs the following:
 
 - PHP 8.0 (option to use 7.4, 7.3, 7.2, 7.1, or 7.0)
-- MySQL
+- MySQL & MariaDB
 - PostgreSQL
 - Redis
 - [Xdebug](https://xdebug.org/)
