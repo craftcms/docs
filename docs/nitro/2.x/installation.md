@@ -57,7 +57,15 @@ Read [Developing using Nitro and WSL2](windows.md).
 - In Docker Desktop, go to **Settings** → **Resources** → **WSL Integration** and make sure WSL is enabled for the distro you installed.
 - Open the WSL2 terminal. If you installed Ubuntu, for example, it will be listed as “Ubuntu” in the Start Menu.
 - Verify Docker is running inside the distro by running `docker ps`.
-- Follow the [manual installation](#manual-installation) steps and use the `nitro_linux_x86_64.tar.gz` release inside the WSL2 terminal
+- From the terminal, run `bash <(curl -sLS http://installer.getnitro.sh)`.
+
+If you run into issues with the shell script installer, you can manually install Nitro:
+
+#### Manual Installation
+
+- Visit Nitro’s [GitHub Releases](https://github.com/craftcms/nitro/releases) page and use the `nitro_linux_x86_64.tar.gz` inside your WSL2 instance.
+- Extract the release archive and make the `nitro` executable with `chmod +x ./nitro`.
+- Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
 
 ## Uninstalling Nitro
 
