@@ -26,7 +26,7 @@ nitro self-update --dev
 If you installed Nitro via Homebrew, you’ll use that to fetch the latest version of the Nitro CLI and then use the updated CLI’s `update` command to bring Nitro’s Docker containers up to their latest versions:
 
 ```sh
-brew update nitro
+brew upgrade nitro
 nitro update
 ```
 
