@@ -67,8 +67,10 @@ cd ~/projects/tutorial
 
 - hostname: `tutorial.test`
 - webroot: `web`
-- apply changes: `yes`
-- password (for mapping `tutorial.test`): [your operating system password]
+- PHP version: `8.0`
+- database: `y`
+- update env file: `y`
+- apply changes: `y`
 
 The whole process will look something like this when you’re finished:
 
@@ -90,10 +92,6 @@ Choose a PHP version:
 Enter your selection: 1
   ✓ setting PHP version 8.0
 Add a database for the site [Y/n]
-Select the database engine:
-  1. mysql-5.7-3306.database.nitro
-  2. postgres-12-5432.database.nitro
-Enter your selection: 1
 Enter the new database name: tutorial
   … creating database tutorial ✓
 Database added 💪
@@ -105,8 +103,7 @@ Checking network…
 Checking proxy…
   ✓ proxy ready
 Checking databases…
-  … checking mysql-5.7-3306.database.nitro ✓
-  … checking postgres-12-5432.database.nitro ✓
+  … checking mysql-8.0-3306.database.nitro ✓
 Checking services…
   … checking dynamodb service ✓
   … checking mailhog service ✓
