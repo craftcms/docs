@@ -23,7 +23,11 @@ If you run into issues with the shell script installer, you can manually install
 
 Once the `nitro` executable is in place:
 
-- In your terminal, run `nitro`, choose **Cancel** for the security prompt, and visit **System Preferences** → **Security and Privacy** → **General** to choose **Allow Anyway** next to the warning about `nitro` being blocked. (Alternatively, you can strip the automatic quarantine flag using `xattr -dr com.apple.quarantine /usr/local/bin/nitro`.)
+- In your terminal, run `nitro`, choose **Cancel** for the security prompt, and visit **System Preferences** → **Security and Privacy** → **General** to choose **Allow Anyway** next to the warning about `nitro` being blocked.
+    - Alternatively, you can strip the automatic quarantine flag:
+    ```sh
+    xattr -dr com.apple.quarantine /usr/local/bin/nitro
+    ```
 - Run `nitro init` and follow the prompts to create your machine.
 
 ### macOS via Brew
