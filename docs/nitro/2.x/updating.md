@@ -4,7 +4,7 @@ Nitro is a CLI that orchestrates Docker containers, so you’ll want to update t
 
 The easiest way to do that depends on how you installed Nitro for your OS.
 
-## masOS and Linux Self-Update
+## macOS, Linux, and Windows Self-Update
 
 If you installed Nitro manually or with the `installer.getnitro.sh` script, use Nitro’s `self-update` command to update the CLI in place. Then use the updated CLI’s `update` command to bring Nitro’s Docker containers up to their latest versions:
 
