@@ -87,8 +87,8 @@ Choose a PHP version:
   4. 7.2
   5. 7.1
   6. 7.0
-Enter your selection: 2
-  ✓ setting PHP version 7.4
+Enter your selection: 1
+  ✓ setting PHP version 8.0
 Add a database for the site [Y/n]
 Select the database engine:
   1. mysql-5.7-3306.database.nitro
