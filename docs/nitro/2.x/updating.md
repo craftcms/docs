@@ -36,9 +36,9 @@ Running the `version` command will output Nitro and Docker versions in use, and 
 
 ```bash
 ❯ nitro version
-View the changelog at https://github.com/craftcms/nitro/blob/2.0.0-beta.7/CHANGELOG.md
-Nitro CLI: 	 2.0.0-beta.7
-Nitro gRPC:
+View the changelog at https://github.com/craftcms/nitro/blob/2.0.0/CHANGELOG.md
+Nitro CLI: 	 2.0.0
+Nitro gRPC: 	 2.0.0-beta.7
 Docker API: 	 1.41 (1.12 min)
 Docker CLI: 	 1.41
 The Nitro CLI and gRPC versions do not match
