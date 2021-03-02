@@ -35,7 +35,7 @@ nitro update
 Running the `version` command will output Nitro and Docker versions in use, and suggest running `nitro update` if anything appears out of sync:
 
 ```bash
-❯ nitro version
+$ nitro version
 View the changelog at https://github.com/craftcms/nitro/blob/2.0.0/CHANGELOG.md
 Nitro CLI: 	 2.0.0
 Nitro gRPC: 	 2.0.0
