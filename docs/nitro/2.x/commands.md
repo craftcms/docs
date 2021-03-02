@@ -126,6 +126,37 @@ Checking proxy…
 Nitro is up and running 😃
 ```
 
+## `blackfire`
+
+Enables and disables Blackfire for a site. Prompts for server ID and server token if they’ve not yet been saved as global settings in Nitro’s config.
+
+```
+nitro blackfire on
+```
+
+```
+nitro blackfire off
+```
+
+## `bridge`
+
+Temporarily shares a Nitro site on a local network. Prompts you to select an existing IP address and site for sharing. See [Sharing Sites Locally](local-sharing.md).
+
+```
+$ nitro bridge
+Which IP address should we use for the bridge?
+  1. 192.168.0.103
+  2. 192.168.0.110
+Enter your selection: 1
+Select a site:
+  1. starterblog.nitro
+  2. craftcms.nitro
+  3. craftcom.nitro
+  4. europa.nitro
+Enter your selection: 1
+bridge server listening on http://192.168.0.103:8000
+```
+
 ## `clean`
 
 Removes any unused containers.
