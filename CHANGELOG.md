@@ -2,6 +2,15 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-03-03
+### Added
+- Documented the `is boolean` Twig test.
+- Documented the ability to use `.user.ini` to customize Nitro PHP settings.
+
+## 2021-03-02
+### Changed
+- Updated default Nitro doc set with the release of Nitro 2.
+
 ## 2021-02-25
 ### Added
 - Added a Queue Jobs page to the Extending Craft section.
