@@ -32,8 +32,13 @@ Once the `nitro` executable is in place:
 
 ### macOS via Brew
 
-- Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
-- Install Nitro with the [Homebrew](https://brew.sh) package manager:
+Using the [Homebrew](https://brew.sh) package manager:
+
+- Install Docker Desktop:
+    ```bash
+    brew install docker --cask
+    ```
+- Install Nitro: 
     ```bash
     brew tap craftcms/nitro
     brew install nitro
