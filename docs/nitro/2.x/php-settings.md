@@ -1,6 +1,10 @@
 # Changing PHP Settings
 
-Nitro ships with PHP settings that are configured for local development. However, if you need to change a PHP setting for a site, Nitro provides a convenient command [`nitro iniset`](commands.md#iniset) to walk you through the change.
+Nitro ships with PHP settings configured for local development and provides a [`nitro iniset`](commands.md#iniset) command to customize them.
+
+Running the `iniset` command prompts you to choose a site for the custom setting and then the setting you’d like to specify.
+
+In this example, we’re increasing `max_execution_time` for `craft-support.nitro`:
 
 ```bash
 $ nitro iniset
@@ -25,10 +29,10 @@ What should the max execution time be [5000]? 7000
 Apply changes now [Y/n]
 ```
 
-The PHP ini setting will now be stored on your `nitro.yaml` file underneath the sites PHP `version` setting:
+The PHP setting is stored in your `nitro.yaml` file:
 
-```yaml
-// removed for brevity
+```yaml{8-9}
+# ...
 sites:
     - hostname: craft-support.nitro
       aliases:
@@ -44,20 +48,40 @@ sites:
 ```
 
 ::: tip
-Nitro will do its best to validate your input (e.g. you can't set the `max_execution_time` to "tomorrow")
+Nitro attempts to validate your input; you can’t set `max_execution_time` to “tomorrow”.
 :::
 
 ## Available Settings
 
 The following options are available for modification.
 
-1. display_errors
-2. max_execution_time
-3. max_input_vars
-4. max_input_time
-5. max_file_upload
-6. memory_limit
-7. opcache_enable
-8. opcache_revalidate_freq
-9. post_max_size
-10. upload_max_file_size
+- `1` display_errors
+- `2` max_execution_time
+- `3` max_input_vars
+- `4` max_input_time
+- `5` max_file_upload
+- `6` memory_limit
+- `7` opcache_enable
+- `8` opcache_revalidate_freq
+- `9` post_max_size
+- `10` upload_max_file_size
+
+## Manually Overriding PHP Settings
+
+While the `iniset` command takes care of applying changes for you, you can alternatively add a `.user.ini` in your web root to override individual PHP settings.
+
+If our web root is `web/` and we want to increase `max_execution_time` using a static file, we’d create `web/.user.ini` with the following contents:
+
+```ini
+max_execution_time = 7000
+```
+
+To apply the change, we’ll need to delete the site’s web container and run `nitro apply` to have Nitro rebuild it.
+
+::: warning
+Any values you provide in your `.user.ini` file will override changes with `nitro iniset` and any environment variables.
+:::
+
+::: danger
+Heroku and other hosting providers may allow your `.user.ini` file to override settings, so be careful not to make accidental changes in another environment!
+:::
