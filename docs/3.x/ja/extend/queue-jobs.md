@@ -45,7 +45,7 @@ class MyJob extends \craft\queue\BaseJob
             \Craft::$app->getMailer()->send($message);
         } catch (\Throwable $e) {
             // Don’t let an exception block the queue
-            echo 'Something went wrong: ' . $e->getMessage();
+            \Craft::warning("Something went wrong: {$e->getMessage()}", __METHOD__);
         }
     }
 
@@ -101,7 +101,7 @@ public function execute($queue): void
             \Craft::$app->getMailer()->send($message);
         } catch (\Throwable $e) {
             // Don’t let an exception block the queue
-            echo 'Something went wrong: ' . $e->getMessage();
+            \Craft::warning("Something went wrong: {$e->getMessage()}", __METHOD__);
         }
     }
 }
