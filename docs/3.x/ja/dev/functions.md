@@ -382,6 +382,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 {{ input('email', 'email-input', '', {
     id: 'custom-input'
 }) }}
+{# Output: <input type="email" id="custom-input" name="email-input" value=""> #}
 ```
 
 ## `max`
