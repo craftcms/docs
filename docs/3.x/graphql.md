@@ -1391,40 +1391,186 @@ Matrix input types generally have the following structure:
 
 An actual block input type will contain fields for all the possible block types for this field, however, the first non-empty block will be considered in the order that the block types are defined on the field.
 
-Let’s look at an example.
+As an example, let’s pretend we have a Matrix field with a handle `ingredients`.
 
-Say you have a Matrix field with a handle `documentationField`. The field has two block types: `screenshot` and `paragraph`. These are all the input types generated for this Matrix field:
+The field has three block types: `spirit`, `mixer`, and `garnish`. Each block type has one or two fields:
+
+```
+ingredients
+├── spirit
+│   ├── spiritName (Plain Text)
+│   └── ounces (Number)
+├── mixer
+│   ├── mixerName (Plain Text)
+│   └── ounces (Number)
+└── garnish
+    └── garnishName (Plain Text)
+```
+
+These are all the GraphQL input types Craft generates for this Matrix field:
 
 | Type Name | Type Description |
 | - | -
-| `documentationField_MatrixInput` | The input type for the Matrix field. As discussed above, it will contain two fields: `sortOrder` and `blocks`.
-| `documentationField_MatrixBlockContainerInput` | The input type that represents the block. In this case it will contain two fields: `screenshot` and `paragraph`.
-| `documentationField_screenshot_MatrixBlockInput` | The input type for the `screenshot` block. It will contain all the fields defined for that block type.
-| `documentationField_paragraph_MatrixBlockInput` | In a similar fashion, this is the input type for the `paragraph` block.
+| `ingredients_MatrixInput` | Input type for the Matrix field, containing `sortOrder` and `blocks`.
+| `ingredients_MatrixBlockContainerInput` | Input type that represents the block, in this case containing `spirit`, `mixer`, and `garnish`.
+| `ingredients_spirit_MatrixBlockInput` | Input type for the `spirit` block, containing `spiritName` and `ounces`.
+| `ingredients_mixer_MatrixBlockInput` | Input type for the `mixer` block, containing `mixerName` and `ounces`.
+| `ingredients_garnish_MatrixBlockInput` | Input type for the `garnish` block, containing `garnishName`.
 
-The table above would be represented in [GraphQL Schema Definition Language (SDL)](https://www.prisma.io/blog/graphql-sdl-schema-definition-language-6755bcb9ce51) like this:
+Those input types would look like this in [GraphQL Schema Definition Language (SDL)](https://www.prisma.io/blog/graphql-sdl-schema-definition-language-6755bcb9ce51):
 
 ```graphql
-input docunentationField_MatrixInput {
+input ingredients_MatrixInput {
   sortOrder: [QueryArgument]!
-  blocks: [documentationField_MatrixBlockContainerInput]
+  blocks: [ingredients_MatrixBlockContainerInput]
 }
 
-input documentationField_MatrixBlockContainerInput {
-  screenshot: documentationField_screenshot_MatrixBlockInput
-  paragraph: documentationField_paragraph_MatrixBlockInput
+input ingredients_MatrixBlockContainerInput {
+  spirit: ingredients_spirit_MatrixBlockInput
+  mixer: ingredients_mixer_MatrixBlockInput
+  garnish: ingredients_garnish_MatrixBlockInput
 }
 
-input documentationField_screenshot_MatrixBlockInput {
-  # List of content fields defined for this block type
+input ingredients_spirit_MatrixBlockInput {
+  # ... common Matrix Block fields ...
+  spiritName: String
+  ounces: Number
 }
 
-input documentationField_paragraph_MatrixBlockInput {
-  # List of content fields defined for this block type
+input ingredients_mixer_MatrixBlockInput {
+  # ... common Matrix Block fields ...
+  mixerName: String
+  ounces: Number
+}
+
+input ingredients_garnish_MatrixBlockInput {
+  # ... common Matrix Block fields ...
+  garnishName: String
 }
 ```
 
-To submit two blocks, the `blocks` would contain a list of two input objects of the `documentationField_MatrixBlockContainerInput` input type. What field on those objects would contain data would determine the final block type. If more than one of the block types are defined, only the block type that is listed first will be considered.
+A mutation saving a new entry with multiple Matrix blocks might look like this:
+
+::: code
+```graphql GraphQL
+mutation saveEntry(
+  $title: String,
+  $slug: String,
+  $authorId: ID,
+  $ingredients: [ingredients_MatrixBlockContainerInput],
+  $sortOrder: [QueryArgument]
+) {
+  save_cocktails_cocktails_Entry(
+    title: $title,
+    slug: $slug,
+    authorId: $authorId,
+    ingredients: { blocks: $ingredients, sortOrder: $sortOrder }
+  ) {
+    title
+    slug
+    authorId
+    dateCreated @formatDateTime (format: "Y-m-d")
+    ingredients {
+      __typename
+        ...on MatrixBlockInterface {
+          id
+        }
+        ... on ingredients_spirit_BlockType {
+          spiritName
+          ounces
+        }
+        ... on ingredients_mixer_BlockType {
+          mixerName
+          ounces
+        }
+        ... on ingredients_garnish_BlockType {
+          garnishName
+        }
+     }
+  }
+}
+
+# query variables:
+{
+  "title": "Gin and Tonic",
+  "slug": "gin-tonic",
+  "authorId": 1,
+  "sortOrder": ["new1", "new2", "new3", "new4"],
+  "ingredients": [
+    {
+      "spirit": {
+        "id": "new1",
+        "spiritName": "Gin",
+        "ounces": 1.5
+      }
+    },
+    {
+      "mixer": {
+        "id": "new2",
+        "mixerName": "Tonic",
+        "ounces": 3.0
+      }
+    },
+    {
+      "mixer": {
+        "id": "new3",
+        "mixerName": "Fresh Lime Juice",
+        "ounces": 0.25
+      }
+    },
+    {
+      "garnish": {
+        "id": "new4",
+        "garnishName": "Lime Wedge or Twist"
+      }
+    }
+  ]
+}
+```
+```json JSON Response
+{
+  "data": {
+    "save_cocktails_cocktails_Entry": {
+      "title": "Gin and Tonic",
+      "slug": "gin-tonic",
+      "authorId": 1,
+      "dateCreated": "2021-03-04",
+      "ingredients": [
+        {
+          "__typename": "ingredients_spirit_BlockType",
+          "id": "9",
+          "spiritName": "Gin",
+          "ounces": 1.5
+        },
+        {
+          "__typename": "ingredients_mixer_BlockType",
+          "id": "10",
+          "mixerName": "Tonic",
+          "ounces": 3
+        },
+        {
+          "__typename": "ingredients_mixer_BlockType",
+          "id": "11",
+          "mixerName": "Fresh Lime Juice",
+          "ounces": 0.25
+        },
+        {
+          "__typename": "ingredients_garnish_BlockType",
+          "id": "12",
+          "garnishName": "Lime Wedge or Twist"
+        }
+      ]
+    }
+  }
+}
+```
+:::
+
+What field on those objects would contain data would determine the final block type.
+
+::: warning
+If more than one of the block types are defined, only the block type that is listed first will be considered.
+:::
 
 ### Uploading Files via Mutations
 
