@@ -1501,14 +1501,14 @@ mutation saveEntry(
       "spirit": {
         "id": "new1",
         "spiritName": "Gin",
-        "ounces": 1.5
+        "ounces": 2
       }
     },
     {
       "mixer": {
         "id": "new2",
         "mixerName": "Tonic",
-        "ounces": 3.0
+        "ounces": 4
       }
     },
     {
@@ -1540,13 +1540,13 @@ mutation saveEntry(
           "__typename": "ingredients_spirit_BlockType",
           "id": "9",
           "spiritName": "Gin",
-          "ounces": 1.5
+          "ounces": 2
         },
         {
           "__typename": "ingredients_mixer_BlockType",
           "id": "10",
           "mixerName": "Tonic",
-          "ounces": 3
+          "ounces": 4
         },
         {
           "__typename": "ingredients_mixer_BlockType",
