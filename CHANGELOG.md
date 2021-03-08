@@ -2,6 +2,13 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-03-08
+### Added
+- Documented recommended Docker settings for Nitro.
+
+### Fixed
+- Fixed a bug that prevented search keyboard shortcut from working on some cases.
+
 ## 2021-03-03
 ### Added
 - Documented the `is boolean` Twig test.
