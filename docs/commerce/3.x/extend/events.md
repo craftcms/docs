@@ -429,7 +429,8 @@ The event that is triggered for registration of additional adjusters.
 
 ```php
 use craft\events\RegisterComponentTypesEvent;
-use craft\commerce\services\OrderAdjustments;
+use craft\commerce\
+\OrderAdjustments;
 use yii\base\Event;
 
 Event::on(
@@ -1724,12 +1725,12 @@ Event handlers can customize PDF rendering by modifying several properties on th
 
 ```php
 use craft\commerce\events\PdfEvent;
-use craft\commerce\services\Pdf;
+use craft\commerce\services\Pdfs;
 use yii\base\Event;
 
 Event::on(
-    Pdf::class,
-    Pdf::EVENT_BEFORE_RENDER_PDF,
+    Pdfs::class,
+    Pdfs::EVENT_BEFORE_RENDER_PDF,
     function(PdfEvent $event) {
         // Modify `$event->order`, `$event->option`, `$event->template`,
         // and `$event->variables` to customize what gets rendered into a PDF;
@@ -1751,12 +1752,12 @@ Event handlers can override Commerce’s PDF generation by setting the `pdf` pro
 
 ```php
 use craft\commerce\events\PdfEvent;
-use craft\commerce\services\Pdf;
+use craft\commerce\services\Pdfs;
 use yii\base\Event;
 
 Event::on(
-    Pdf::class,
-    Pdf::EVENT_AFTER_RENDER_PDF,
+    Pdfs::class,
+    Pdfs::EVENT_AFTER_RENDER_PDF,
     function(PdfEvent $event) {
         // Add a watermark to the PDF or forward it to the accounting department
         // ...
