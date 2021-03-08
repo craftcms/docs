@@ -429,8 +429,7 @@ The event that is triggered for registration of additional adjusters.
 
 ```php
 use craft\events\RegisterComponentTypesEvent;
-use craft\commerce\
-\OrderAdjustments;
+use craft\commerce\OrderAdjustments;
 use yii\base\Event;
 
 Event::on(
