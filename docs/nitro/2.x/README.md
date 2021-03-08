@@ -19,3 +19,12 @@ Nitro installs the following:
 
 - macOS, Linux, Windows 10 with WSL2
 - [Docker](https://www.docker.com/)
+
+### Recommended System Specs
+
+For a smooth development experience, we recommend a minimum of 8GB system RAM and 2.5GB disk space, assuming you use a few PHP versions and have 5-10 running projects.
+
+Your machine needs to meet Docker’s minimum [macOS](https://docs.docker.com/docker-for-mac/install/#system-requirements) or [Windows](https://docs.docker.com/docker-for-windows/install/#system-requirements) system requirements. \
+Nitro utilizes whatever resources you allocate to Docker, downloading the images it needs to support your projects.
+
+While optimal settings depend on your machine specs, we generally recommend allocating at least 1/3 of your cores and 1/4 of your memory for Docker.
