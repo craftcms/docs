@@ -53,15 +53,23 @@ Nitro 2 runs on Windows 10 Home or Pro and requires build 19042 or higher with W
 Read [Developing using Nitro and WSL2](windows.md).
 :::
 
-1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher, making sure **Install required Windows components for WSL 2** is checked.
 2. [Install WSL2](https://www.windowscentral.com/how-install-wsl2-windows-10).
 3. Install the [WSL2 Linux kernel update package](https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package).
-4. Set default WSL to version 2 using `wsl --set-default-version 2`.
+4. In Windows PowerShell, set the default WSL to version 2 using `wsl --set-default-version 2`.
 5. Install a WSL2 compatible distro from the Microsoft Store. We recommend [Ubuntu 20](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6).
 6. In Docker Desktop, go to **Settings** → **General** and make sure **Use the WSL 2 based engine** is checked.
 7. In Docker Desktop, go to **Settings** → **Resources** → **WSL Integration** and make sure WSL is enabled for the distro you installed.
+    ::: tip
+    If your distro isn’t listed after choosing **Refresh** or restarting Docker Desktop, make sure it’s installed and upgraded to WSL v2. If running `wsl -l -v` lists your distro with a `1` next to it, upgrade with `wsl --set-version [distro name] 2`.
+    :::
 8. Open the WSL2 terminal. If you installed Ubuntu, for example, it will be listed as “Ubuntu” in the Start Menu.
-9. Verify Docker is running inside the distro by running `docker ps`.
+9. Verify Docker is running inside the distro by running `docker ps`. If Docker is not running you’ll get an error message, otherwise you should see a table for containers even though there aren’t any running yet:
+    ```bash
+    oli@ubuntu:~$ docker ps
+    CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+    oli@ubuntu:~$
+    ```
 10. From the terminal, run `bash <(curl -sLS http://installer.getnitro.sh)`.
 
 If you run into issues with the shell script installer, you can manually install Nitro:
