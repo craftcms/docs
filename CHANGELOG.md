@@ -2,6 +2,14 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-03-09
+### Added
+- Documented Nitro `php` command.
+- Documented Craft `|httpdate` Twig filter.
+
+### Changed
+- Improved notes for working with Nitro and WSL2.
+
 ## 2021-03-08
 ### Added
 - Documented recommended Docker settings for Nitro.
