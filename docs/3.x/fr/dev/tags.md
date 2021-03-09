@@ -273,11 +273,14 @@ This tag will set a new HTTP header on the response.
 
 {% header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp) %}
 {% header "Pragma: cache" %}
-{% header "Expires: " ~ expiry|httpdate %}
+{% header "Expires: " ~ expiry|date('D, d M Y H:i:s', 'GMT') ~ " GMT" %}
 ```
 
 ::: tip
-Use [`|httpdate`](filters.md#httpdate) rather than [`|date`](filters.md#date) for HTTP responses.
+Headers which contain dates must be formatted according to [RFC 7234](https://tools.ietf.org/html/rfc7231#section-7.1.1.2). You can use the [httpdate](filters.md#httpdate) filter (added in Craft 3.6.10) to do this:
+```twig
+{% header "Expires: #{myDate|httpdate}" %}
+```
 :::
 
 ### Parameters
