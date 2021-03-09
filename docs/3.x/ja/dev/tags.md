@@ -301,11 +301,14 @@ Narrows the query results based on the tag groups the tags belong to, per the gr
 
 {% header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp) %}
 {% header "Pragma: cache" %}
-{% header "Expires: " ~ expiry|httpdate %}
+{% header "Expires: " ~ expiry|date('D, d M Y H:i:s', 'GMT') ~ " GMT" %}
 ```
 
 ::: tip
-Use [`|httpdate`](filters.md#httpdate) rather than [`|date`](filters.md#date) for HTTP responses.
+Headers which contain dates must be formatted according to [RFC 7234](https://tools.ietf.org/html/rfc7231#section-7.1.1.2). You can use the [httpdate](filters.md#httpdate) filter (added in Craft 3.6.10) to do this:
+```twig
+{% header "Expires: #{myDate|httpdate}" %}
+```
 :::
 
 ### Parameters
@@ -332,20 +335,17 @@ See [Template Hooks](../extend/template-hooks.md) for details on plugins and mod
 The `{% html %}` tag can be used to register arbitrary HTML code on the page.
 
 ```twig
-{# Fetch tags in the group with an ID of 1 #}
-{% set tags = craft.tags()
-    .groupId(1)
-    .all() %}
+{% html %}
+    <p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>
+{% endhtml %}
 ```
 
 ::: tip
 The tag calls <craft3:craft\web\View::registerHtml()> under the hood, which can also be accessed via the global `view` variable.
 
 ```twig
-// Fetch tags in the group with an ID of 1
-$tags = \craft\elements\Tag::find()
-    ->groupId(1)
-    ->all();
+{% set para = '<p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>' %}
+{% do view.registerHtml(para) %}
 ```
 :::
 
@@ -364,10 +364,7 @@ You can specify where the HTML code should be injected into the page using one o
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that were created between 2018-04-01 and 2018-05-01. |
 
 ```twig
-{# Fetch the tag by its ID #}
-{% set tag = craft.tags()
-    .id(1)
-    .one() %}
+{% html at head %}
 ```
 
 By default, `at endBody` will be used.
@@ -377,10 +374,17 @@ By default, `at endBody` will be used.
 The `{% js %}` tag can be used to register a JavaScript file, or a JavaScript code block.
 
 ```twig
-// Fetch the tag by its ID
-$tag = \craft\elements\Tag::find()
-    ->id(1)
-    ->one();
+{# Register a JS file #}
+{% js "/assets/js/script.js" %}
+
+{# Register a JS code block #}
+{% js %}
+    _gaq.push([
+        "_trackEvent",
+        "Search",
+        "{{ searchTerm|e('js') }}"
+    ]);
+{% endjs %}
 ```
 
 ::: tip
@@ -404,10 +408,7 @@ You can specify where the `<script>` tag should be added to the page using one o
 | `on ready`                                       | At the end of the page’s `<body>`, within `jQuery(document).ready()` |
 
 ```twig
-{# Fetch tags in reverse #}
-{% set tags = craft.tags()
-    .inReverse()
-    .all() %}
+{% js at head %}
 ```
 
 By default, `at endBody` will be used.
@@ -421,10 +422,9 @@ Setting the position to `on load` or `on ready` will cause Craft to load its int
 Any HTML attributes that should be included on the `<script>` tag.
 
 ```twig
-// Fetch tags in reverse
-$tags = \craft\elements\Tag::find()
-    ->inReverse()
-    ->all();
+{% js "/assets/js/script.js" with {
+    defer: true
+} %}
 ```
 
 Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
@@ -440,19 +440,23 @@ The `{% namespace %}` tag can be used to namespace input names and other HTML at
 For example, this:
 
 ```twig
-{# Fetch up to 10 tags  #}
-{% set tags = craft.tags()
-    .limit(10)
-    .all() %}
+{% namespace 'foo' %}
+<style>
+  .text { font-size: larger; }
+  #title { font-weight: bold; }
+</style>
+<input class="text" id="title" name="title" type="text">
+{% endnamespace %}
 ```
 
 would become this:
 
 ```html
-// Fetch up to 10 tags
-$tags = \craft\elements\Tag::find()
-    ->limit(10)
-    ->all();
+<style>
+  .text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="text" id="foo-title" name="foo[title]" type="text">
 ```
 
 Notice how the `#title` CSS selector became `#foo-title`, the `id` attribute changed from `title` to `foo-title`, and the `name` attribute changed from `title` to `foo[title]`.
@@ -460,19 +464,17 @@ Notice how the `#title` CSS selector became `#foo-title`, the `id` attribute cha
 If you want class names to get namespaced as well, add the `withClasses` flag. That will affect both class CSS selectors and `class` attributes:
 
 ```twig
-{# Fetch all tags except for the first 3 #}
-{% set tags = craft.tags()
-    .offset(3)
-    .all() %}
+{% namespace 'foo' withClasses %}
 ```
 
 That would result in:
 
 ```html{2,5}
-// Fetch all tags except for the first 3
-$tags = \craft\elements\Tag::find()
-    ->offset(3)
-    ->all();
+<style>
+  .foo-text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="foo-text" id="foo-title" name="foo[title]" type="text">
 ```
 
 ::: tip
@@ -484,10 +486,20 @@ This tag works identically to the [namespace](filters.md#namespace) filter, exce
 This tag helps create a hierarchical navigation menu for entries in a [Structure section](../entries.md#section-types) or a [Category Group](../categories.md).
 
 ```twig
-{# Fetch all tags in order of date created #}
-{% set tags = craft.tags()
-    .orderBy('dateCreated asc')
-    .all() %}
+{% set entries = craft.entries.section('pages').all() %}
+
+<ul id="nav">
+    {% nav entry in entries %}
+        <li>
+            <a href="{{ entry.url }}">{{ entry.title }}</a>
+            {% ifchildren %}
+                <ul>
+                    {% children %}
+                </ul>
+            {% endifchildren %}
+        </li>
+    {% endnav %}
+</ul>
 ```
 
 ::: tip
@@ -525,10 +537,21 @@ Don’t add any special logic between your `{% ifchildren %}` and `{% endifchild
 This tag makes it easy to paginate query results across multiple pages.
 
 ```twig
-// Fetch all tags in order of date created
-$tags = \craft\elements\Tag::find()
-    ->orderBy('dateCreated asc')
-    ->all();
+{% set query = craft.entries()
+    .section('blog')
+    .limit(10) %}
+
+{% paginate query as pageInfo, pageEntries %}
+
+{% for entry in pageEntries %}
+    <article>
+        <h1>{{ entry.title }}</h1>
+        {{ entry.body }}
+    </article>
+{% endfor %}
+
+{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
+{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
 ```
 
 Paginated URLs will be identical to the first page’s URL, except that “/p_X_” will be appended to the end (where _X_ is the page number), e.g. `http://my-project.test/news/p2`.
@@ -576,12 +599,14 @@ The `{% paginate %}` tag won’t actually output the current page’s results fo
 Following your `{% paginate %}` tag, you will need to loop through this page’s results using a [for](https://twig.symfony.com/doc/tags/for.html) tag.
 
 ```twig
-{# Fetch unique tags from Site A, or Site B if they don’t exist in Site A #}
-{% set tags = craft.tags()
-    .site('*')
-    .unique()
-    .preferSites(['a', 'b'])
-    .all() %}
+{% paginate craft.entries.section('blog').limit(10) as pageEntries %}
+
+{% for entry in pageEntries %}
+    <article>
+        <h1>{{ entry.title }}</h1>
+        {{ entry.body }}
+    </article>
+{% endfor %}
 ```
 
 ### The `pageInfo` variable
@@ -612,12 +637,14 @@ The [pageInfo](#the-pageInfo-variable) variable gives you lots of options for bu
 If you just want simple Previous Page and Next Page links to appear, you can do this:
 
 ```twig
-// Fetch unique tags from Site A, or Site B if they don’t exist in Site A
-$tags = \craft\elements\Tag::find()
-    ->site('*')
-    ->unique()
-    ->preferSites(['a', 'b'])
-    ->all();
+{% set query = craft.entries()
+    .section('blog')
+    .limit(10) %}
+
+{% paginate query as pageInfo, pageEntries %}
+
+{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
+{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
 ```
 
 Note that we’re wrapping those links in conditionals because there won’t always be a previous or next page.
@@ -627,10 +654,16 @@ Note that we’re wrapping those links in conditionals because there won’t alw
 You can add First Page and Last Page links into the mix, you can do that too:
 
 ```twig
-{# Fetch all tags that are related to myCategory #}
-{% set tags = craft.tags()
-    .relatedTo(myCategory)
-    .all() %}
+{% set query = craft.entries()
+    .section('blog')
+    .limit(10) %}
+
+{% paginate query as pageInfo, pageEntries %}
+
+<a href="{{ pageInfo.firstUrl }}">First Page</a>
+{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
+{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
+<a href="{{ pageInfo.lastUrl }}">Last Page</a>
 ```
 
 There’s no reason to wrap those links in conditionals since there will always be a first and last page.
@@ -640,10 +673,27 @@ There’s no reason to wrap those links in conditionals since there will always 
 If you want to create a list of nearby pages, perhaps surrounding the current page number, you can do that too!
 
 ```twig
-// Fetch all tags that are related to $myCategory
-$tags = \craft\elements\Tag::find()
-    ->relatedTo($myCategory)
-    ->all();
+{% set query = craft.entries()
+    .section('blog')
+    .limit(10) %}
+
+{% paginate query as pageInfo, pageEntries %}
+
+<a href="{{ pageInfo.firstUrl }}">First Page</a>
+{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
+
+{% for page, url in pageInfo.getPrevUrls(5) %}
+    <a href="{{ url }}">{{ page }}</a>
+{% endfor %}
+
+<span class="current">{{ pageInfo.currentPage }}</span>
+
+{% for page, url in pageInfo.getNextUrls(5) %}
+    <a href="{{ url }}">{{ page }}</a>
+{% endfor %}
+
+{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
+<a href="{{ pageInfo.lastUrl }}">Last Page</a>
 ```
 
 In this example we’re only showing up to five page links in either direction of the current page. If you’d prefer to show more or less, just change the numbers that are passed into `getPrevUrls()` and `getNextUrls()`. You can also choose to not pass any number in at all, in which case *all* previous/next page URLs will be returned.
@@ -653,13 +703,9 @@ In this example we’re only showing up to five page links in either direction o
 This tag will redirect the browser to a different URL.
 
 ```twig
-{# Get the search query from the 'q' query string param #}
-{% set searchQuery = craft.app.request.getQueryParam('q') %}
-
-{# Fetch all tags that match the search query #}
-{% set tags = craft.tags()
-    .search(searchQuery)
-    .all() %}
+{% if not user or not user.isInGroup('members') %}
+    {% redirect "pricing" %}
+{% endif %}
 ```
 
 ### Parameters
@@ -677,13 +723,7 @@ By default, redirects will have `302` status codes, which tells the browser that
 You can customize which status code accompanies your redirect response by typing it right after the URL. For example, the following code would return a `301` redirect (permanent):
 
 ```twig
-// Get the search query from the 'q' query string param
-$searchQuery = \Craft::$app->request->getQueryParam('q');
-
-// Fetch all tags that match the search query
-$tags = \craft\elements\Tag::find()
-    ->search($searchQuery)
-    ->all();
+{% redirect "pricing" 301 %}
 ```
 
 #### Flash Messages
@@ -701,10 +741,7 @@ You can optionally set flash messages that will show up for the user on the next
 This tag will ensure that the user is **not** logged in. If they’re already logged in, they’ll be redirected to the page specified by your <config3:postLoginRedirect> config setting.
 
 ```twig
-// Fetch tags from the Foo site
-$tags = \craft\elements\Tag::find()
-    ->site('foo')
-    ->all();
+{% requireGuest %}
 ```
 
 You can place this tag anywhere in your template, including within a conditional. If/when Twig gets to it, the guest enforcement will take place.
@@ -714,10 +751,7 @@ You can place this tag anywhere in your template, including within a conditional
 This tag will ensure that the user is logged in. If they aren’t, they’ll be redirected to a Login page and returned to the original page after successfully logging in.
 
 ```twig
-{# Fetch tags from the site with an ID of 1 #}
-{% set tags = craft.tags()
-    .siteId(1)
-    .all() %}
+{% requireLogin %}
 ```
 
 You can place this tag anywhere in your template, including within a conditional. If/when Twig gets to it, the login enforcement will take place.
