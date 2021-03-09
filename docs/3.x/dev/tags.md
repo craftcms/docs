@@ -273,8 +273,12 @@ This tag will set a new HTTP header on the response.
 
 {% header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp) %}
 {% header "Pragma: cache" %}
-{% header "Expires: " ~ expiry|date('D, d M Y H:i:s', 'GMT') ~ " GMT" %}
+{% header "Expires: " ~ expiry|httpdate %}
 ```
+
+::: tip
+Use [`|httpdate`](filters.md#httpdate) rather than [`|date`](filters.md#date) for HTTP responses.
+:::
 
 ### Parameters
 
