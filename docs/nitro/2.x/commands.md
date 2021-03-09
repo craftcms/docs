@@ -886,6 +886,30 @@ audited 2158 packages in 14.312s
 npm install complete 🤘
 ```
 
+## `php`
+
+Execute a PHP command in a site’s container.
+
+```
+nitro php -i
+```
+
+#### Example
+
+```
+$ nitro php -v
+Select a site:
+  1. tutorial.nitro
+  2. plugins-dev.nitro
+Enter your selection: 2
+PHP 8.0.2 (cli) (built: Feb 18 2021 00:32:13) ( NTS )
+Copyright (c) The PHP Group
+Zend Engine v4.0.2, Copyright (c) Zend Technologies
+    with Zend OPcache v8.0.2, Copyright (c), by Zend Technologies
+    with Xdebug v3.0.3, Copyright (c) 2002-2021, by Derick Rethans
+    with blackfire v1.51.0~linux-x64-non_zts80, https://blackfire.io, by Blackfire
+```
+
 ## `portcheck`
 
 Check if a port is available on your machine.
