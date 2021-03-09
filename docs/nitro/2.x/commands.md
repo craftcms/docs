@@ -184,31 +184,42 @@ nitro completion [<options>]
 
 #### Example
 
+Enable Nitro shell completion for your current session only in Bash:
+
 ```
-To load completions:
-
-Bash:
-
 $ source <(nitro completion bash)
-
-# To load completions for each session, execute once:
-Linux:
-  $ nitro completion bash > /etc/bash_completion.d/nitro
-MacOS:
-  $ nitro completion bash > /usr/local/etc/bash_completion.d/nitro
-
-Zsh:
-
-# If shell completion is not already enabled in your environment you will need
-# to enable it. You can execute the following once:
-
-$ echo "autoload -U compinit; compinit" >> ~/.zshrc
-
-# To load completions for each session, execute once:
-$ nitro completion zsh > "${fpath[1]}/_nitro"
-
-# You will need to start a new shell for this setup to take effect.
 ```
+
+Enable Nitro shell completion for your current session only in Zsh:
+
+```
+$ source <(nitro completion zsh)
+```
+
+Enable Nitro shell completion for every Bash session (only run this once!):
+
+::: code
+```sh Linux
+$ nitro completion bash > /etc/bash_completion.d/nitro
+```
+```sh macOS
+$ nitro completion bash > /usr/local/etc/bash_completion.d/nitro
+```
+:::
+
+To enable Nitro shell completion for every Zsh session, you’ll first need to make sure shell completion is enabled for your environment or enable it by running this once:
+
+```sh
+$ echo "autoload -U compinit; compinit" >> ~/.zshrc
+```
+
+With shell completion enabled, you can enable Nitro shell completion for every Zsh session by executing the following once:
+
+```sh
+$ nitro completion zsh > "${fpath[1]}/_nitro"
+```
+
+You’ll need to start a new shell or `source ~/.zshrc` for this setup to take effect.
 
 ## `composer`
 
