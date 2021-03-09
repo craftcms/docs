@@ -888,7 +888,7 @@ npm install complete 🤘
 
 ## `php`
 
-Execute PHP commands in a sites container.
+Execute a PHP command in a site’s container.
 
 ```
 nitro php -i
