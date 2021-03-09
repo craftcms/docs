@@ -301,12 +301,16 @@ Narrows the query results based on the tag groups the tags belong to, per the gr
 
 {% header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp) %}
 {% header "Pragma: cache" %}
-{% header "Expires: " ~ expiry|date('D, d M Y H:i:s', 'GMT') ~ " GMT" %}
+{% header "Expires: " ~ expiry|httpdate %}
 ```
+
+::: tip
+Use [`|httpdate`](filters.md#httpdate) rather than [`|date`](filters.md#date) for HTTP responses.
+:::
 
 ### Parameters
 
-Possible values include:
+The `{% header %}` tag supports the following parameter:
 
 #### Header
 
@@ -321,11 +325,11 @@ This tag gives plugins and modules an opportunity to hook into the template, to 
 {% hook 'my-custom-hook-name' %}
 ```
 
-Narrows the query results based on the tags’ IDs.
+See [Template Hooks](../extend/template-hooks.md) for details on plugins and modules can work with `{% hook %}` tags.
 
 ## `siteId`
 
-Possible values include:
+The `{% html %}` tag can be used to register arbitrary HTML code on the page.
 
 ```twig
 {# Fetch tags in the group with an ID of 1 #}
@@ -334,7 +338,8 @@ Possible values include:
     .all() %}
 ```
 
-::: code
+::: tip
+The tag calls <craft3:craft\web\View::registerHtml()> under the hood, which can also be accessed via the global `view` variable.
 
 ```twig
 // Fetch tags in the group with an ID of 1
@@ -350,7 +355,7 @@ The `{% html %}` tag supports the following parameters:
 
 #### Position
 
-Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+You can specify where the HTML code should be injected into the page using one of these position keywords:
 
 | Value                                            | Description                                          |
 | ------------------------------------------------ | ---------------------------------------------------- |
@@ -365,11 +370,11 @@ Causes the query to return matching tags as they are stored in the database, ign
     .one() %}
 ```
 
-Causes the query results to be returned in reverse order.
+By default, `at endBody` will be used.
 
 ## `id`
 
-::: code
+The `{% js %}` tag can be used to register a JavaScript file, or a JavaScript code block.
 
 ```twig
 // Fetch the tag by its ID
@@ -378,17 +383,17 @@ $tag = \craft\elements\Tag::find()
     ->one();
 ```
 
-::: warning
-Setting the position to `on load` or `on ready` will cause Craft to load its internal copy of jQuery onto the page (even if the template is already including its own copy), so you should probably avoid using them in front-end templates.
+::: tip
+To register a JavaScript file, the URL must end in `.js`.
 :::
 
 ### Parameters
 
-Determines the number of tags that should be returned.
+The `{% js %}` tag supports the following parameters:
 
 #### Position
 
-::: code
+You can specify where the `<script>` tag should be added to the page using one of these position keywords:
 
 | Value                                            | Description                                                                |
 | ------------------------------------------------ | -------------------------------------------------------------------------- |
@@ -408,12 +413,12 @@ Determines the number of tags that should be returned.
 By default, `at endBody` will be used.
 
 ::: warning
-The `{% nav %}` tag requires elements to be queried in a specific (hierarchical) order, so make sure you don’t override the `order` criteria parameter in conjunction with this tag.
+Setting the position to `on load` or `on ready` will cause Craft to load its internal copy of jQuery onto the page (even if the template is already including its own copy), so you should probably avoid using them in front-end templates.
 :::
 
 #### `with`
 
-::: code
+Any HTML attributes that should be included on the `<script>` tag.
 
 ```twig
 // Fetch tags in reverse
@@ -424,13 +429,13 @@ $tags = \craft\elements\Tag::find()
 
 Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
 
-::: tip
-If you only specify one variable name here, the `pageInfo` variable will be called `paginate` by default for backwards compatibility.
+::: warning
+The `with` parameter is only available when you specify a JavaScript file; it won’t have any effect with a JavaScript code block.
 :::
 
 ## `namespace`
 
-::: code
+The `{% namespace %}` tag can be used to namespace input names and other HTML attributes, as well as CSS selectors.
 
 For example, this:
 
@@ -441,7 +446,7 @@ For example, this:
     .all() %}
 ```
 
-If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+would become this:
 
 ```html
 // Fetch up to 10 tags
@@ -450,7 +455,7 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 
-For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C, and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned for Site B.
+Notice how the `#title` CSS selector became `#foo-title`, the `id` attribute changed from `title` to `foo-title`, and the `name` attribute changed from `title` to `foo[title]`.
 
 If you want class names to get namespaced as well, add the `withClasses` flag. That will affect both class CSS selectors and `class` attributes:
 
@@ -461,7 +466,7 @@ If you want class names to get namespaced as well, add the `withClasses` flag. T
     .all() %}
 ```
 
-::: code
+That would result in:
 
 ```html{2,5}
 // Fetch all tags except for the first 3
@@ -476,7 +481,7 @@ This tag works identically to the [namespace](filters.md#namespace) filter, exce
 
 ## `nav`
 
-Narrows the query results to only tags that are related to certain other elements.
+This tag helps create a hierarchical navigation menu for entries in a [Structure section](../entries.md#section-types) or a [Category Group](../categories.md).
 
 ```twig
 {# Fetch all tags in order of date created #}
