@@ -486,14 +486,7 @@ if ($foo !== false) {
 
 Converts a date to the HTTP format, used by [RFC 7231](https://tools.ietf.org/html/rfc7231#section-7.1.1.1)-compliant HTTP headers like `Expires`.
 
-Useful alternative to [`|date`](#date), where locale-specific formatting can be problematic in HTTP responses. Example for a site whose language is `de` (German):
-
 ```twig
-{# 🚫 `|date` is subject to locale-specific formatting #}
-{% header "Expires: " ~ expiry|date('D, d M Y H:i:s') ~ " GMT" %}
-{# Output: Expires: Do., 08 Apr. 2021 13:00:00 GMT #}
-
-{# 👍 `|httpdate` will always be formatted for HTTP responses #}
 {% header "Expires: " ~ expiry|httpdate %}
 {# Output: Expires: Thu, 08 Apr 2021 13:00:00 GMT #}
 ```
