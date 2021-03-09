@@ -213,7 +213,7 @@ To enable Nitro shell completion for every Zsh session, you’ll first need to m
 $ echo "autoload -U compinit; compinit" >> ~/.zshrc
 ```
 
-With shell completion enabled, you can enable Nitro shell completion for every Zsh session by executing the following once:
+With Zsh shell completion enabled, you can enable Nitro shell completion for every session by executing the following once:
 
 ```sh
 $ nitro completion zsh > "${fpath[1]}/_nitro"
