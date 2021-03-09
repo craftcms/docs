@@ -200,7 +200,7 @@ MacOS:
 Zsh:
 
 # If shell completion is not already enabled in your environment you will need
-# to enable it.  You can execute the following once:
+# to enable it. You can execute the following once:
 
 $ echo "autoload -U compinit; compinit" >> ~/.zshrc
 
@@ -326,6 +326,7 @@ nitro container ssh
 #### Example
 
 ```
+$ nitro container ssh
 Select a container to connect to:
   1. elasticsearch.containers.nitro
   2. rabbitmq.containers.nitro
@@ -381,13 +382,13 @@ Read the [create-project](https://getcomposer.org/doc/03-cli.md#create-project) 
 
 ```bash
 # new default Craft site in `my-project/` directory
-nitro create my-project
+$ nitro create my-project
 
 # new site from repository in `my-project/` directory
-nitro create https://github.com/craftcms/demo my-project
+$ nitro create https://github.com/craftcms/demo my-project
 
 # same as above using GitHub repository shorthand
-nitro create craftcms/demo my-project
+$ nitro create craftcms/demo my-project
 ```
 
 ## `db add`
@@ -552,17 +553,14 @@ nitro disable [<options>]
 #### Example
 
 ```
- # disable services
-  nitro disable <service-name>
+# disable mailhog
+$ nitro disable mailhog
 
-  # disable mailhog
-  nitro disable mailhog
+# disable minio
+$ nitro disable minio
 
-  # disable minio
-  nitro disable minio
-
-  # disable dynamodb
-  nitro disable dynamodb
+# disable dynamodb
+$ nitro disable dynamodb
 ```
 
 ## `edit`
@@ -576,7 +574,7 @@ nitro edit [<options>]
 #### Example
 
 ```
-nitro edit
+$ nitro edit
 ```
 
 ::: tip
@@ -606,17 +604,14 @@ nitro enable [<options>]
 #### Example
 
 ```
- # enable services
-  nitro enable <service-name>
+# enable mailhog
+$ nitro enable mailhog
 
-  # enable mailhog
-  nitro enable mailhog
+# enable minio
+$ nitro enable minio
 
-  # enable minio
-  nitro enable minio
-
-  # enable dynamodb
-  nitro enable dynamodb
+# enable dynamodb
+$ nitro enable dynamodb
 ```
 
 ## `extensions`
