@@ -284,6 +284,11 @@ The `{% header %}` tag supports the following parameter:
 
 You specify the actual header that should be set by typing it as a string after the word `header`. This parameter is required.
 
+::: tip
+Response header fields need to follow the specification used by the Internet Message Format. If your site uses locales, you might need to add `en` as a third parameter.  
+`{% header "Expires: " ~ expiry|date('D, d M Y H:i:s', 'GMT', 'en') ~ " GMT" %}`
+:::
+
 ## `hook`
 
 This tag gives plugins and modules an opportunity to hook into the template, to either return additional HTML or make changes to the available template variables.
