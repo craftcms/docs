@@ -19,7 +19,8 @@ If you run into issues with the shell script installer, you can manually install
 
 1. Visit Nitro’s [GitHub Releases](https://github.com/craftcms/nitro/releases) page and download the archive for your system.
 2. Extract the release archive and make the `nitro` executable with `chmod +x ./nitro`.
-3. Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
+3. If `/usr/local/bin` does not exist for you, create it with `sudo mkdir -p -m 775 /usr/local/bin && sudo chown $USER: /usr/local/bin`.
+4. Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
 
 Once the `nitro` executable is in place:
 
@@ -78,7 +79,8 @@ If you run into issues with the shell script installer, you can manually install
 
 1. Visit Nitro’s [GitHub Releases](https://github.com/craftcms/nitro/releases) page and use the `nitro_linux_x86_64.tar.gz` inside your WSL2 instance.
 2. Extract the release archive and make the `nitro` executable with `chmod +x ./nitro`.
-3. Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
+3. If `/usr/local/bin` does not exist for you, create it with `sudo mkdir -p -m 775 /usr/local/bin && sudo chown $USER: /usr/local/bin`.
+4. Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
 
 ## Uninstalling Nitro
 
