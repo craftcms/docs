@@ -4,9 +4,9 @@ Nitro requires WSL2 for Windows, which runs the Linux distribution of your choic
 
 ## Mind Your Terminal
 
-We highly recommend using [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701), Microsoft’s relatively new, free app that provides easy access to the various Windows shells. 
+We highly recommend using [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701), Microsoft’s relatively new, free app that provides easy access to the various Windows shells.
 
-It opens PowerShell by default, which you’ll need for Nitro setup and Windows commands, and the Ubuntu shell you’ll want to use working with Nitro day-to-day. You’d otherwise need to run “PowerShell” or “Ubuntu” separately from the start menu.
+It opens PowerShell by default, which you’ll need for some Windows commands, and the Ubuntu shell you’ll want for installing and using Nitro. You’d otherwise need to run “PowerShell” or “Ubuntu” separately from the start menu.
 
 ![](./images/windows-terminal-shell-selection.png)
 

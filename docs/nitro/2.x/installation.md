@@ -71,7 +71,7 @@ Read [Developing using Nitro and WSL2](windows.md).
     CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
     oli@ubuntu:~$
     ```
-10. From the terminal, run `bash <(curl -sLS http://installer.getnitro.sh)`.
+10. From the WSL terminal, run `bash <(curl -sLS http://installer.getnitro.sh)`.
 
 If you run into issues with the shell script installer, you can manually install Nitro:
 
