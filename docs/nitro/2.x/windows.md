@@ -1,6 +1,6 @@
 # Development with Nitro and WSL2
 
-Nitro requires WSL2 for Windows, which runs the Linux distribution of your choice inside your normal Windows operating system. Nitro uses Docker in this environment to manage containers, and this comes with some limitations and performance tips you’ll want to be aware of.
+Nitro requires WSL2 for Windows, which runs the Linux distribution of your choice inside your normal Windows operating system. Nitro uses Docker in this environment to manage containers, which comes with some limitations and performance tips you’ll want to be aware of.
 
 ## Mind Your Terminal
 
