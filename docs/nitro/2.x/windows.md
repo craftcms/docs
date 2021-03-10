@@ -1,14 +1,14 @@
 # Development with Nitro and WSL2
 
-Nitro requires WSL2 for Windows, which runs the Linux distribution of your choice inside your normal Windows operating system. Nitro uses Docker in this environment to manage containers, which comes with some limitations and performance tips you’ll want to be aware of.
+Nitro requires WSL2 for Windows, which runs the Linux distribution of your choice inside your normal Windows operating system. Nitro uses Docker in this environment to manage containers, which comes with limitations and performance considerations.
 
 ## Mind Your Terminal
 
-We highly recommend using [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701), Microsoft’s relatively new, free app that provides easy access to the various Windows shells.
+We recommend using [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701), Microsoft’s new(ish), free app that provides easy access to the various Windows shells.
 
-It opens PowerShell by default, which you’ll need for first installing WSL2, and the Ubuntu shell you’ll want for installing and using Nitro. You’d otherwise need to run “PowerShell” or “Ubuntu” separately from the start menu.
+Windows Terminal opens PowerShell by default, which you’ll need for first installing WSL2, and the Ubuntu shell you’ll want for installing and using Nitro. You’d otherwise need to run “PowerShell” or “Ubuntu” separately from the Start menu.
 
-![](./images/windows-terminal-shell-selection.png)
+![Dropdown menu for convenient shell selection in Windows Terminal](./images/windows-terminal-shell-selection.png)
 
 ## Filesystem Performance is Best Inside WSL2
 
@@ -47,3 +47,24 @@ chmod -R 777 ./web
 The first time you add a Craft site, you’ll need to manually run a command on the Windows host machine to import a certificate file so SSL will work. You can follow the terminal output for exact instructions.
 
 Nitro cannot edit the Windows hosts file at `C:\Windows\system32\drivers\etc\hosts` and will provide you with copy+paste instructions when it needs the file updated.
+
+## Limit WSL2 Memory Usage
+
+WSL2 has been known to consume a lot of memory, most noticeably on machines with more limited RAM.
+
+If you find WSL2 consuming more of your system memory than you’d like, you can manually specify limits by adding a `.wslconfig` to your user directory.
+
+If we wanted to limit WSL2 to 6GB memory, for example, we would create a `C:\Users\Oli\.wslconfig` file with the following contents:
+
+```
+[wsl2]
+memory=6GB
+swap=0
+```
+
+Then run `wsl --shutdown` and restart Docker to apply the change. This will put a hard limit on RAM usage and prevent any swap file from being created.
+
+### Related
+
+- [github.com/microsoft/WSL/issues/4166](https://github.com/microsoft/WSL/issues/4166)
+- [docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945)
