@@ -210,7 +210,7 @@ $ nitro completion bash > /usr/local/etc/bash_completion.d/nitro
 To enable Nitro shell completion for every Zsh session, you’ll first need to make sure shell completion is enabled for your environment or enable it by running this once:
 
 ```sh
-$ echo "autoload -U compinit; compinit" >> ~/.zshrc
+$ echo "autoload -Uz compinit; compinit" >> ~/.zshrc
 ```
 
 With Zsh shell completion enabled, you can enable Nitro shell completion for every session by executing the following once:
