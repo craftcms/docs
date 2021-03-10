@@ -210,6 +210,7 @@ $ nitro completion bash > /usr/local/etc/bash_completion.d/nitro
 To enable Nitro shell completion for every Zsh session, you’ll first need to make sure shell completion is enabled for your environment or enable it by running this once:
 
 ```sh
+$ mkdir -p "${fpath[1]}"
 $ echo "autoload -Uz compinit; compinit" >> ~/.zshrc
 ```
 
