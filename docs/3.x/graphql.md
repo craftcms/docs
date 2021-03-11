@@ -1572,9 +1572,9 @@ What field on those objects would contain data would determine the final block t
 If more than one of the block types are defined, only the block type that is listed first will be considered.
 :::
 
-### Uploading Files via Mutations
+### Saving Files via Mutations
 
-You can pass a file upload as a URL to be downloaded to the server, or as Base64-encoded data.
+You can provide files for Assets as either Base64-encoded data, or a URL that Craft will download.
 
 Either way you’ll use the `FileInput` GraphQL input type, which has the following fields:
 
