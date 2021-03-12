@@ -23,28 +23,32 @@ First, you’ll need to configure PhpStorm to listen for requests from the brows
 
 ## Configuring VS Code
 
-1. Install the [PHP Debug extension](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug)
-
-2. Create a Launch Configuration specifying port 9003, path mappings, and your site’s hostname:
-
-```js{5-9}
-{
-    "name": "Listen for XDebug",
-    "type": "php",
-    "request": "launch",
-    "port": 9003,
-    "pathMappings": {
-        "/app": "${workspaceRoot}"
-    },
-    "hostname": "tutorial.nitro",
-    "xdebugSettings": {
-        "max_data": 65535,
-        "show_hidden": 1,
-        "max_children": 100,
-        "max_depth": 5
+1. Install the [PHP Debug extension](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug).
+2. Create a [Launch Configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) specifying port 9003, path mappings, and your site’s hostname:
+    ```js{5-9}
+    {
+        "name": "Listen for Nitro XDebug",
+        "type": "php",
+        "request": "launch",
+        "port": 9003,
+        "pathMappings": {
+            "/app": "${workspaceRoot}"
+        },
+        "hostname": "tutorial.nitro",
+        "xdebugSettings": {
+            "max_data": 65535,
+            "show_hidden": 1,
+            "max_children": 100,
+            "max_depth": 5
+        }
     }
-}
-```
+    ```
+
+::: tip
+If you’re new to debugging with VS Code, it stores project debug settings in your project root at `.vscode/launch.json`. Selecting **Run and Debug** in the sidebar will prompt you to create the file if one doesn’t already exist. (You can keep the default configurations or replace them the one above.)
+
+![Creating an initial launch.json file](./images/vs-code-launch-config.png)
+:::
 
 ## Debugging Web Requests
 
