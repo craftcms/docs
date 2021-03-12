@@ -32,7 +32,7 @@ First, you’ll need to configure PhpStorm to listen for requests from the brows
         "request": "launch",
         "port": 9003,
         "pathMappings": {
-            "/app": "${workspaceRoot}"
+            "/app": "${workspaceFolder}"
         },
         "hostname": "tutorial.nitro",
         "xdebugSettings": {
@@ -48,6 +48,50 @@ First, you’ll need to configure PhpStorm to listen for requests from the brows
 If you’re new to debugging with VS Code, it stores project debug settings in your project root at `.vscode/launch.json`. Selecting **Run and Debug** in the sidebar will prompt you to create the file if one doesn’t already exist. (You can keep the default configurations or replace them the one above.)
 
 ![Creating an initial launch.json file](./images/vs-code-launch-config.png)
+:::
+
+### Customizing Path Mappings
+
+Path mappings tell VS Code where to locate your project’s PHP files inside the Nitro container. The example above assumes your project looks like Craft’s default [directory structure](/3.x/installation.md#directory-structure), with everything at the root level. You can confirm this by running `nitro ssh` and seeing your `web` directory at `/app/web/`:
+
+```
+~/dev/tutorial
+$ nitro ssh
+connecting to tutorial.nitro
+/app $ ls
+README.md          craft              package-lock.json  templates
+composer.json      migrations         package.json       vendor
+composer.lock      modules            src                web
+config             node_modules       storage
+/app $
+```
+
+If your project layout is different, you may need to adjust the `pathMappings` in order to have `/app` point to the Craft project folder.
+
+If your project layout used a top-level `craft` directory:
+
+```treeview
+tutorial/
+├── craft/
+│   ├── ...
+│   ├── .env
+│   ├── composer.json
+│   └── web/
+├── gatsby/
+│   └── ...
+└── README.md
+```
+
+You would edit your launch configuration to include the subfolder:
+
+```js
+"pathMappings": {
+    "/app": "${workspaceFolder}/craft"
+}
+```
+
+::: tip
+The `${workspaceFolder}` variable refers to the path of the folder opened in VS Code. You can hardcode the path or use a number of [predefined variables](https://code.visualstudio.com/docs/editor/variables-reference#_predefined-variables) instead.
 :::
 
 ## Debugging Web Requests
