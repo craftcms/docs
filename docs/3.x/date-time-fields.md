@@ -24,7 +24,6 @@ Possible values include:
 | `'< 2018-05-01'` | that have a date selected before 2018-05-01
 | `['and', '>= 2018-04-01', '< 2018-05-01']` | that have a date selected between 2018-04-01 and 2018-05-01.
 | `['or', '< 2018-04-01', '> 2018-05-01']` | that have a date selected before 2018-04-01 or after 2018-05-01.
-| `['or', ':empty:', '< 2018-04-01']` | that have no a date selected, or a date before 2018-04-01.
 
 ::: code
 ```twig
