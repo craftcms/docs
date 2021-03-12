@@ -11,15 +11,15 @@ You can use [`nitro xoff`](commands.md#xoff) to disable Xdebug.
 First, you’ll need to configure PhpStorm to listen for requests from the browser or console.
 
 1. Create a new server in PhpStorm using your machine’s domain name. (**Preferences** → **Languages & Frameworks** → **PHP** → **Servers**.)\
-![PhpStorm Server Settings](./images/phpstorm-server.png)
+![PhpStorm Server Settings](./images/php-storm-xdebug-servers.png)
 
 2. Enable **Use path mappings** and set your existing project root to the absolute path on the server. The absolute path inside of the container will look like `/app`. (Use `nitro context` if you need to check the path, and keep in mind this is the project root and not necessarily the web root.)
 
 3. Choose **Run** → **Edit Configurations...** and create a new **PHP Remote Debug** configuration, selecting the server you just created. Check **Filter debug connection by IDE key** and enter `PHPSTORM`.\
-![PhpStorm Remote Debug Settings](./images/phpstorm-remote-debug.png)
+![PhpStorm Remote Debug Settings](./images/php-storm-xdebug-run-config.png)
 
-4. Choose **Run** → **Start Listening for PHP Debug Connections**.\
-![PhpStorm Remote Debug Settings](./images/start-listening.png)
+4. Choose **Run** → **Start Listening for PHP Debug Connections** or choose the equivalent UI icon.\
+![PhpStorm Start Listening button](./images/start-listening.png =400x)
 
 ## Configuring VS Code
 
