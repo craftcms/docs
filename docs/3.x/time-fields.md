@@ -49,6 +49,7 @@ Possible values include:
 | `'< 10:00'` | that have a time selected before 10:00 AM.
 | `['and', '>= 10:00', '< 17:00']` | that have a time selected between 10:00 AM and 5:00 PM.
 | `['or', '< 10:00', '> 17:00']` | that have a time selected before 10:00 AM or after 5:00 PM.
+| `['or', ':empty:', '< 10:00']` | without a selected time, or before 10:00 AM.
 
 ::: code
 ```twig
