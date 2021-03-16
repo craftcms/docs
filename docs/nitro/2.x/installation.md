@@ -42,6 +42,9 @@ Using the [Homebrew](https://brew.sh) package manager:
 2. Install Nitro:
     ```bash
     brew install craftcms/nitro/nitro
+    ```
+3. Initialize Nitro
+    ```bash
     nitro init
     ```
 
