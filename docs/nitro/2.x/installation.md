@@ -1,14 +1,20 @@
 # Installation
 
 ## Installing Nitro
-
-### macOS and Linux
+### macOS
 
 You’ll need to install prereleases manually by downloading the appropriate Nitro binary and telling your system to use it.
 
-::: tip
-macOS users can optionally install Nitro [using Brew](#macos-via-brew).
-:::
+1. Install Docker Desktop
+    - Intel computers: use [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
+    - Apple M1 computers: use [Docker Apple M1 Tech Preview](https://docs.docker.com/docker-for-mac/apple-m1/).
+2. Install Nitro
+    - either [use Brew](#macos-via-brew)
+    - or open a terminal and run `bash <(curl -sLS http://installer.getnitro.sh)`.
+
+### Linux
+
+You’ll need to install prereleases manually by downloading the appropriate Nitro binary and telling your system to use it.
 
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
 2. Open a terminal and run `bash <(curl -sLS http://installer.getnitro.sh)`.
@@ -37,6 +43,8 @@ Using the [Homebrew](https://brew.sh) package manager:
 
 1. Install Docker Desktop:
     ```bash
+    # This download does not support Apple M1 computers
+    # See above for M1 Docker instructions
     brew install docker --cask
     ```
 2. Install Nitro:
