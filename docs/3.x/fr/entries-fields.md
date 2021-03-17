@@ -40,15 +40,16 @@ When [querying for elements](element-queries.md) that have an Entries field, you
 
 Possible values include:
 
-| Value                                                          | Fetches elements…                                        |
-| -------------------------------------------------------------- | -------------------------------------------------------- |
-| `':empty:'`                                                    | that don’t have any related entries.                     |
-| `':notempty:'`                                                 | that have at least one related entry.                    |
-| `100`                                                          | that are related to the entry with an ID of 100.         |
-| `[100, 200]`                                                   | that are related to an entry with an ID of 100 or 200.   |
-| `['and', 100, 200]`                                            | that are related to the entries with IDs of 100 and 200. |
-| an [Entry](craft3:craft\elements\Entry) object               | that are related to the entry.                           |
-| an [EntryQuery](craft3:craft\elements\db\EntryQuery) object | that are related to any of the resulting entries.        |
+| Value                                                          | Fetches elements…                                                         |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `':empty:'`                                                    | that don’t have any related entries.                                      |
+| `':notempty:'`                                                 | that have at least one related entry.                                     |
+| `100`                                                          | that are related to the entry with an ID of 100.                          |
+| `[100, 200]`                                                   | that are related to an entry with an ID of 100 or 200.                    |
+| `[':empty:', 100, 200]`                                        | with no related entries, or related to an entry with an ID of 100 or 200. |
+| `['and', 100, 200]`                                            | that are related to the entries with IDs of 100 and 200.                  |
+| an [Entry](craft3:craft\elements\Entry) object               | that are related to the entry.                                            |
+| an [EntryQuery](craft3:craft\elements\db\EntryQuery) object | that are related to any of the resulting entries.                         |
 
 ::: code
 ```twig
