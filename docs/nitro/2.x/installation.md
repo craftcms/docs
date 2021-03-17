@@ -1,6 +1,7 @@
 # Installation
 
 ## Installing Nitro
+
 ### macOS
 
 You’ll need to install prereleases manually by downloading the appropriate Nitro binary and telling your system to use it.
@@ -45,12 +46,14 @@ Using the [Homebrew](https://brew.sh) package manager:
     ```bash
     # This download does not support Apple M1 computers
     # See above for M1 Docker instructions
-    brew install docker --cask
+    brew install homebrew/cask/docker
     ```
 2. Install Nitro:
     ```bash
-    brew tap craftcms/nitro
-    brew install nitro
+    brew install craftcms/nitro/nitro
+    ```
+3. Initialize Nitro
+    ```bash
     nitro init
     ```
 
