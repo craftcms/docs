@@ -43,15 +43,16 @@ Tags fields list all the currently-related tags with a text input to add new one
 
 利用可能な値には、次のものが含まれます。
 
-| 値                                                          | 取得するエレメント                                             |
-| ---------------------------------------------------------- | ----------------------------------------------------- |
-| `':empty:'`                                                | 関連付けられたタグを持たない。                                       |
-| `':notempty:'`                                             | 少なくとも1つの関連付けられたタグを持つ。                                 |
-| `100`                                                      | that are related to the tag with an ID of 100.        |
-| `[100, 200]`                                               | that are related to a tag with an ID of 100 or 200.   |
-| `['and', 100, 200]`                                        | that are related to the tags with IDs of 100 and 200. |
-| an [Tag](craft3:craft\elements\Tag) object               | that are related to the tag.                          |
-| an [TagQuery](craft3:craft\elements\db\TagQuery) object | that are related to any of the resulting tags.        |
+| 値                                                          | 取得するエレメント                                                           |
+| ---------------------------------------------------------- | ------------------------------------------------------------------- |
+| `':empty:'`                                                | 関連付けられたタグを持たない。                                                     |
+| `':notempty:'`                                             | 少なくとも1つの関連付けられたタグを持つ。                                               |
+| `100`                                                      | that are related to the tag with an ID of 100.                      |
+| `[100, 200]`                                               | that are related to a tag with an ID of 100 or 200.                 |
+| `[':empty:', 100, 200]`                                    | with no related tags, or related to a tag with an ID of 100 or 200. |
+| `['and', 100, 200]`                                        | that are related to the tags with IDs of 100 and 200.               |
+| an [Tag](craft3:craft\elements\Tag) object               | that are related to the tag.                                        |
+| an [TagQuery](craft3:craft\elements\db\TagQuery) object | that are related to any of the resulting tags.                      |
 
 ::: code
 ```twig
