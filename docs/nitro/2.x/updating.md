@@ -13,6 +13,14 @@ nitro self-update
 nitro update
 ```
 
+::: warning
+**Windows users** need to use `sudo` for the self-update command:
+```sh
+sudo nitro self-update
+nitro update
+```
+:::
+
 ::: tip
 `self-update` finds the latest stable version of Nitro, but takes a `--dev` argument to include pre-releases:
 
