@@ -3,9 +3,9 @@
   "devDependencies": {
     "@babel/core": "^7.10.3",
     "@fullhuman/postcss-purgecss": "^2.3.0",
-    "@storybook/addon-knobs": "^6.1.14",
-    "@storybook/addons": "^6.1.14",
-    "@storybook/vue": "^6.1.14",
+    "@storybook/addon-knobs": "^6.1.20",
+    "@storybook/addons": "^6.1.20",
+    "@storybook/vue": "^6.1.20",
     "@vuepress/core": "^1.5.3",
     "@vuepress/plugin-google-analytics": "^1.5.3",
     "autoprefixer": "^9.8.4",
@@ -24,13 +24,13 @@
     "vue": "^2.6.12",
     "vue-fragment": "^1.5.1",
     "vue-loader": "^15.9.3",
+    "vue-server-renderer": "^2.6.12",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.12",
     "vuepress": "^1.5.3",
     "vuepress-plugin-container": "^2.1.4",
     "vuepress-plugin-medium-zoom": "^1.1.8",
     "vuepress-plugin-sitemap": "docs/.vuepress/theme/vuepress-plugin-sitemap",
-    "vue-server-renderer": "^2.6.12",
     "vuex": "^3.4.0"
   },
   "scripts": {

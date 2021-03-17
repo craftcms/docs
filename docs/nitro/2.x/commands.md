@@ -126,6 +126,37 @@ Checking proxy…
 Nitro is up and running 😃
 ```
 
+## `blackfire`
+
+Enables and disables Blackfire for a site. Prompts for server ID and server token if they’ve not yet been saved as global settings in Nitro’s config.
+
+```
+nitro blackfire on
+```
+
+```
+nitro blackfire off
+```
+
+## `bridge`
+
+Temporarily shares a Nitro site on a local network. Prompts you to select an existing IP address and site for sharing. See [Sharing Sites Locally](local-sharing.md).
+
+```
+$ nitro bridge
+Which IP address should we use for the bridge?
+  1. 192.168.0.103
+  2. 192.168.0.110
+Enter your selection: 1
+Select a site:
+  1. starterblog.nitro
+  2. craftcms.nitro
+  3. craftcom.nitro
+  4. europa.nitro
+Enter your selection: 1
+bridge server listening on http://192.168.0.103:8000
+```
+
 ## `clean`
 
 Removes any unused containers.
@@ -169,7 +200,7 @@ MacOS:
 Zsh:
 
 # If shell completion is not already enabled in your environment you will need
-# to enable it.  You can execute the following once:
+# to enable it. You can execute the following once:
 
 $ echo "autoload -U compinit; compinit" >> ~/.zshrc
 
@@ -295,6 +326,7 @@ nitro container ssh
 #### Example
 
 ```
+$ nitro container ssh
 Select a container to connect to:
   1. elasticsearch.containers.nitro
   2. rabbitmq.containers.nitro
@@ -327,18 +359,36 @@ Initializes and adds a new site. Pass the name of the directory that should be c
 nitro create [<options>]
 ```
 
+::: tip
+You can create your own Composer package to jumpstart any PHP project!\
+Nitro uses Composer’s [create-project](https://getcomposer.org/doc/03-cli.md#create-project) to check out a repository and run `composer install`. That project’s `composer.json` file can optionally include `post-create-project-cmd` scripts for any setup steps just like the Craft Composer project:
+
+```javascript
+// ...
+"scripts": {
+  "post-create-project-cmd": [
+    "@php -r \"copy('.env.example', '.env');\"",
+    "@composer dump-autoload -o",
+  ]
+}
+// ...
+```
+
+Read the [create-project](https://getcomposer.org/doc/03-cli.md#create-project) documentation for more.
+:::
+
 #### Example
 
 
 ```bash
 # new default Craft site in `my-project/` directory
-nitro create my-project
+$ nitro create my-project
 
 # new site from repository in `my-project/` directory
-nitro create https://github.com/craftcms/demo my-project
+$ nitro create https://github.com/craftcms/demo my-project
 
 # same as above using GitHub repository shorthand
-nitro create craftcms/demo my-project
+$ nitro create craftcms/demo my-project
 ```
 
 ## `db add`
@@ -503,17 +553,14 @@ nitro disable [<options>]
 #### Example
 
 ```
- # disable services
-  nitro disable <service-name>
+# disable mailhog
+$ nitro disable mailhog
 
-  # disable mailhog
-  nitro disable mailhog
+# disable minio
+$ nitro disable minio
 
-  # disable minio
-  nitro disable minio
-
-  # disable dynamodb
-  nitro disable dynamodb
+# disable dynamodb
+$ nitro disable dynamodb
 ```
 
 ## `edit`
@@ -527,7 +574,7 @@ nitro edit [<options>]
 #### Example
 
 ```
-nitro edit
+$ nitro edit
 ```
 
 ::: tip
@@ -557,17 +604,14 @@ nitro enable [<options>]
 #### Example
 
 ```
- # enable services
-  nitro enable <service-name>
+# enable mailhog
+$ nitro enable mailhog
 
-  # enable mailhog
-  nitro enable mailhog
+# enable minio
+$ nitro enable minio
 
-  # enable minio
-  nitro enable minio
-
-  # enable dynamodb
-  nitro enable dynamodb
+# enable dynamodb
+$ nitro enable dynamodb
 ```
 
 ## `extensions`
@@ -835,6 +879,30 @@ audited 2158 packages in 14.312s
 101 packages are looking for funding
   run `npm fund` for details
 npm install complete 🤘
+```
+
+## `php`
+
+Execute a PHP command in a site’s container.
+
+```
+nitro php -i
+```
+
+#### Example
+
+```
+$ nitro php -v
+Select a site:
+  1. tutorial.nitro
+  2. plugins-dev.nitro
+Enter your selection: 2
+PHP 8.0.2 (cli) (built: Feb 18 2021 00:32:13) ( NTS )
+Copyright (c) The PHP Group
+Zend Engine v4.0.2, Copyright (c) Zend Technologies
+    with Zend OPcache v8.0.2, Copyright (c), by Zend Technologies
+    with Xdebug v3.0.3, Copyright (c) 2002-2021, by Derick Rethans
+    with blackfire v1.51.0~linux-x64-non_zts80, https://blackfire.io, by Blackfire
 ```
 
 ## `portcheck`

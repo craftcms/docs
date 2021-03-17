@@ -41,9 +41,11 @@ In your templates, you can get the current user’s cart like this:
 {% set cart = craft.commerce.getCarts().getCart() %}
 ```
 
-You could also fetch the cart via AJAX. This jQuery example could be added to a Twig template, and outputs the cart data to the browser’s development console:
+You could also fetch the cart via AJAX. This example could be added to a Twig template, and outputs the cart data to the browser’s development console:
 
-```twig
+::: code
+```twig jQuery
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $.ajax({
     url: '',
@@ -51,13 +53,27 @@ $.ajax({
         '{{ craft.config.csrfTokenName|e('js') }}': '{{ craft.request.csrfToken|e('js') }}',
         'action': 'commerce/cart/get-cart'
     },
-    success: function(data) {
-        console.log(data);
+    success: function(response) {
+        console.log(response);
     },
     dataType: 'json'
 });
 </script>
 ```
+```twig Axios
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+axios.get('', {
+    params: {
+        '{{ craft.config.csrfTokenName|e('js') }}': '{{ craft.request.csrfToken|e('js') }}',
+        action: 'commerce/cart/get-cart'
+    }
+}).then((response) => {
+    console.log(response.data);
+});
+</script>
+```
+:::
 
 Either of the examples above will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
 

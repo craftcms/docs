@@ -8,7 +8,7 @@ module.exports = {
     ["2.x", { label: "2.x" }],
     ["1.x", { label: "1.x" }]
   ],
-  defaultVersion: "1.x",
+  defaultVersion: "2.x",
   searchPlaceholder: "Search the Nitro docs (Press “/” to focus)",
   primarySet: true,
   sidebar: {
@@ -22,7 +22,7 @@ module.exports = {
         {
           title: "Using Nitro",
           collapsable: false,
-          children: ["usage", "commands", "composer", "node", "share"]
+          children: ["usage", "commands", "composer", "node", "share", ["windows", "Nitro on Windows"]]
         },
         {
           title: "Databases",
@@ -42,7 +42,7 @@ module.exports = {
         {
           title: "Advanced Settings",
           collapsable: false,
-          children: [["php-settings", "PHP Settings"], ["extensions", "PHP Extensions"], ["plugin-development", "Plugin Development"], ["containers", "Custom Containers"], "customizing"]
+          children: [["php-settings", "PHP Settings"], ["extensions", "PHP Extensions"], ["plugin-development", "Plugin Development"], ["local-sharing", "Sharing Sites Locally"], ["containers", "Custom Containers"], "customizing"]
         },
       ]
     },
