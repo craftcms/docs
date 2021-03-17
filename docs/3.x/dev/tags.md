@@ -745,7 +745,7 @@ See the [Users](../users.md#permissions) page for a list of available permission
 
 ## `script`
 
-Similar to the [`{% js %}`](#js) tag, but with full control over the tag attributes.
+Similar to the [`{% js %}`](#js) tag, but with full control over the resulting `<script>` tag’s attributes.
 
 ```twig
 {% script with {type: 'module'} %}
