@@ -37,12 +37,14 @@ Using the [Homebrew](https://brew.sh) package manager:
 
 1. Install Docker Desktop:
     ```bash
-    brew install docker --cask
+    brew install homebrew/cask/docker
     ```
 2. Install Nitro:
     ```bash
-    brew tap craftcms/nitro
-    brew install nitro
+    brew install craftcms/nitro/nitro
+    ```
+3. Initialize Nitro
+    ```bash
     nitro init
     ```
 
