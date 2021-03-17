@@ -59,15 +59,16 @@ When [querying for elements](element-queries.md) that have a Categories field, y
 
 Possible values include:
 
-| Value                                                                | Fetches elements…                                           |
-| -------------------------------------------------------------------- | ----------------------------------------------------------- |
-| `':empty:'`                                                          | that don’t have any related categories.                     |
-| `':notempty:'`                                                       | that have at least one related category.                    |
-| `100`                                                                | that are related to the category with an ID of 100.         |
-| `[100, 200]`                                                         | that are related to a category with an ID of 100 or 200.    |
-| `['and', 100, 200]`                                                  | that are related to the categories with IDs of 100 and 200. |
-| an [Category](craft3:craft\elements\Category) object               | that are related to the category.                           |
-| an [CategoryQuery](craft3:craft\elements\db\CategoryQuery) object | that are related to any of the resulting categories.        |
+| Value                                                                | Fetches elements…                                                                  |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `':empty:'`                                                          | that don’t have any related categories.                                            |
+| `':notempty:'`                                                       | that have at least one related category.                                           |
+| `100`                                                                | that are related to the category with an ID of 100.                                |
+| `[100, 200]`                                                         | that are related to a category with an ID of 100 or 200.                           |
+| `[':empty:', 100, 200]`                                              | with no related categories, or are related to a category with an ID of 100 or 200. |
+| `['and', 100, 200]`                                                  | that are related to the categories with IDs of 100 and 200.                        |
+| an [Category](craft3:craft\elements\Category) object               | that are related to the category.                                                  |
+| an [CategoryQuery](craft3:craft\elements\db\CategoryQuery) object | that are related to any of the resulting categories.                               |
 
 ::: code
 ```twig
