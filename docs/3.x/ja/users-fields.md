@@ -34,15 +34,16 @@
 
 利用可能な値には、次のものが含まれます。
 
-| 値                                                            | 取得するエレメント                                              |
-| ------------------------------------------------------------ | ------------------------------------------------------ |
-| `':empty:'`                                                  | 関連付けられたユーザーを持たない。                                      |
-| `':notempty:'`                                               | 少なくとも1つの関連付けられたユーザーを持つ。                                |
-| `100`                                                        | that are related to the user with an ID of 100.        |
-| `[100, 200]`                                                 | that are related to a user with an ID of 100 or 200.   |
-| `['and', 100, 200]`                                          | that are related to the users with IDs of 100 and 200. |
-| an [User](craft3:craft\elements\User) object               | that are related to the user.                          |
-| an [UserQuery](craft3:craft\elements\db\UserQuery) object | that are related to any of the resulting users.        |
+| 値                                                            | 取得するエレメント                                                             |
+| ------------------------------------------------------------ | --------------------------------------------------------------------- |
+| `':empty:'`                                                  | 関連付けられたユーザーを持たない。                                                     |
+| `':notempty:'`                                               | 少なくとも1つの関連付けられたユーザーを持つ。                                               |
+| `100`                                                        | that are related to the user with an ID of 100.                       |
+| `[100, 200]`                                                 | that are related to a user with an ID of 100 or 200.                  |
+| `[':empty:', 100, 200]`                                      | without related users, or related to a user with an ID of 100 or 200. |
+| `['and', 100, 200]`                                          | that are related to the users with IDs of 100 and 200.                |
+| an [User](craft3:craft\elements\User) object               | that are related to the user.                                         |
+| an [UserQuery](craft3:craft\elements\db\UserQuery) object | that are related to any of the resulting users.                       |
 
 ::: code
 ```twig
