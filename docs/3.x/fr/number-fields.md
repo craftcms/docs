@@ -9,9 +9,10 @@ Number fields have the following settings:
 * **Default Value** – The default value that should be applied for new elements.
 * **Min Value** – The lowest number that may be entered in the field
 * **Max Value** – The highest number that may be entered in the field.
-* **Decimal Points** – The maximum number of decimal points that may be entered in the field
-* **Prefix** – Text that should be displayed before the input.
-* **Suffix** – Text that should be displayed after the input.
+* **Decimal Points** – The maximum number of decimal points that may be entered in the field.
+* **Size** – The field’s input width in characters. (Default omits [size](https://www.w3schools.com/tags/att_input_size.asp) attribute.)
+* **Prefix Text** – Text that should be displayed before the input.
+* **Suffix Text** – Text that should be displayed after the input.
 
 ## Development
 
