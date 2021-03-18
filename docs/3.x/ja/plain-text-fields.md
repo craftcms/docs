@@ -6,9 +6,9 @@
 
 プレーンテキストフィールドの設定は、次の通りです。
 
-* **プレースホルダーのテキスト** – フィールドが値を持たない場合に表示されるプレースホルダーのテキスト
-* **文字数制限** – フィールドに含めることができる文字数の上限
-* **改行を許可** – フィールド内で改行を許可するかどうか
+* **Placeholder Text** – The field’s placeholder text, to be displayed if the field has no value yet.
+* **Max Length** – The maximum number of characters the field can contain.
+* **Allow line breaks** – Whether or not to allow line breaks in this field.
 
 ## フィールド
 
