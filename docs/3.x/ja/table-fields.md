@@ -6,16 +6,16 @@
 
 テーブルフィールドの設定は、次の通りです。
 
-* **テーブルの欄** – テーブルフィールドで利用可能な列を定義します。
+- **テーブルの欄** – テーブルフィールドで利用可能な列を定義します。
 
-  それぞれの列には、次のプロパティがあります。
+    それぞれの列には、次のプロパティがあります。
 
-  * *列の見出し* – テーブルのヘッダに表示する名前
-  * *ハンドル* – テンプレートから、この列を参照する方法
-  * *幅* – ピクセルまたはパーセントで指定された、この列の幅
-  * *タイプ* – 列に許可されるコンテンツのタイプ。 一行テキスト、複数行のテキスト、数字、チェックボックス、日付、時間、LightSwitch、色から選択します。
+    - **Column Heading** – The name that will appear in the head of the table.
+    - **Handle** – How you’ll refer to this column from your templates.
+    - **Width** – The width for this column specified in either pixels or a percentage.
+    - **Type** – The type of content allowed in the column. 一行テキスト、複数行のテキスト、数字、チェックボックス、日付、時間、LightSwitch、色から選択します。
 
-* **デフォルトの変数** – フィールドの新しいインスタンスを作成したときにセットされる行および列のデフォルト値を定義します。
+- **デフォルトの変数** – フィールドの新しいインスタンスを作成したときにセットされる行および列のデフォルト値を定義します。
 
 ## フィールド
 
