@@ -74,50 +74,87 @@
 <style lang="postcss">
 .vote {
   @apply block relative;
-}
 
-h4 {
-  @apply mx-0 my-0 py-0 select-none leading-none;
-  -webkit-font-smoothing: antialiased;
-}
+  h4 {
+    @apply mx-0 my-0 py-0 select-none leading-none;
+    -webkit-font-smoothing: antialiased;
+  }
 
-.vote-buttons {
-  @apply mt-3 select-none;
-}
+  .vote-buttons {
+    @apply mt-3 select-none;
+  }
 
-.pane {
-  @apply block;
-  transition: top 0.75s cubic-bezier(0.86, 0, 0.07, 1),
-    opacity 0.5s cubic-bezier(0.86, 0, 0.07, 1);
-  top: 0;
-
-  &.options {
+  .pane {
+    @apply block;
+    transition: top 0.75s cubic-bezier(0.86, 0, 0.07, 1),
+      opacity 0.5s cubic-bezier(0.86, 0, 0.07, 1);
     top: 0;
 
-    svg {
-      @apply block relative;
+    &.options {
+      top: 0;
+
+      svg {
+        @apply block relative;
+      }
+    }
+
+    &.thanks {
+      @apply opacity-0;
+      top: 5rem;
     }
   }
 
-  &.thanks {
-    @apply opacity-0;
-    top: 5rem;
-  }
-}
+  &.voted {
+    .option {
+      @apply text-slate opacity-25 border-slate pointer-events-none;
 
-.voted {
+      &.chosen {
+        @apply opacity-100;
+      }
+    }
+  }
+
   .option {
-    @apply text-slate opacity-25 border-slate pointer-events-none;
+    @apply relative inline-block overflow-hidden px-5 py-2;
+    @apply bg-transparent rounded;
+    @apply cursor-pointer;
+    @apply fill-current text-center mr-3;
+    @apply border text-blue;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    border-color: var(--border-color);
 
-    &.chosen {
-      @apply opacity-100;
+    &::before {
+      @apply absolute z-0 top-0 left-0 bottom-0;
+      content: " ";
+      background: transparent;
+      transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    &:focus {
+      @apply outline-none;
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+
+    &:hover {
+      @apply border-blue;
+      svg {
+        @apply opacity-100;
+      }
+    }
+
+    svg {
+      @apply opacity-75;
+      transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
     }
   }
 }
 
-.right-footer-icon {
-  @apply inline-block relative mr-1 text-light-slate opacity-25;
-  top: 2px;
+.more-feedback {
+  @apply relative;
+  top: -1px;
 }
 
 .footer-links {
@@ -125,6 +162,11 @@ h4 {
 
   a:hover .right-footer-icon {
     @apply opacity-100;
+  }
+
+  .right-footer-icon {
+    @apply inline-block relative mr-1 text-light-slate opacity-25;
+    top: 2px;
   }
 
   .switch-wrapper {
@@ -140,48 +182,6 @@ h4 {
   .page-edit {
     @apply py-0 overflow-auto mt-6;
   }
-}
-
-.option {
-  @apply relative inline-block overflow-hidden px-5 py-2;
-  @apply bg-transparent rounded;
-  @apply cursor-pointer;
-  @apply fill-current text-center mr-3;
-  @apply border text-blue;
-  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-  border-color: var(--border-color);
-
-  &::before {
-    @apply absolute z-0 top-0 left-0 bottom-0;
-    content: " ";
-    background: transparent;
-    transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-  }
-
-  &:focus {
-    @apply outline-none;
-  }
-
-  &:active {
-    transform: scale(0.97);
-  }
-
-  &:hover {
-    @apply border-blue;
-    svg {
-      @apply opacity-100;
-    }
-  }
-
-  svg {
-    @apply opacity-75;
-    transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-  }
-}
-
-.more-feedback {
-  @apply relative;
-  top: -1px;
 }
 </style>
 
