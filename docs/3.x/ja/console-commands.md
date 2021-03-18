@@ -56,14 +56,22 @@ While the complete list of available commands will include those from any plugin
 
 Creates a new database backup.
 
-**Options**
+Example:
 
-`--path`
+```sh
+php craft backup/db ./my-backups/
+```
+
+**Parameters**
+
+`path`
 :   The path the database backup should be created at. Can be any of the following:
     - A full file path
     - A folder path (backup will be saved in there with a dynamically-generated name)
     - A filename (backup will be saved in the working directory with the given name)
     - Blank (backup will be saved to the `config/backups/` folder with a dynamically-generated name)
+
+**Options**
 
 `--zip`
 :   Whether the backup should be saved as a zip file.\ boolean, 0 or 1 (defaults to 0)
