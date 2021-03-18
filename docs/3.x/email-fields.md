@@ -6,7 +6,7 @@ Email fields give you a normal text input that requires a valid email address.
 
 Email fields have the following settings:
 
-* **Placeholder Text** – The field’s placeholder text, to be displayed if the field has no value yet
+* **Placeholder Text** – The field’s placeholder text, to be displayed if the field has no value yet.
 
 ## Development
 
