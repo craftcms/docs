@@ -9,9 +9,10 @@
 * **初期値** – 新しいエレメントに適用するデフォルト値
 * **最小値** – フィールドに入力できる最小の数字
 * **最大値** – フィールドに入力できる最大の数字
-* **小数点** – フィールドに入力できる小数点以下の最大の桁数
-* **Prefix** – 入力欄の前に表示するテキスト
-* **Suffix** – 入力欄の後に表示するテキスト
+* **Decimal Points** – The maximum number of decimal points that may be entered in the field.
+* **Size** – The field’s input width in characters. (Default omits [size](https://www.w3schools.com/tags/att_input_size.asp) attribute.)
+* **Prefix Text** – Text that should be displayed before the input.
+* **Suffix Text** – Text that should be displayed after the input.
 
 ## Development
 
