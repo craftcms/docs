@@ -1007,6 +1007,29 @@ Restarting Nitro…
 Nitro restarted 🎉
 ```
 
+## `self-update`
+
+Updates Nitro to the latest version.
+
+```
+nitro self-update
+```
+
+You’ll typically want to follow this with the [`nitro update`](#update) in order to update Nitro’s Docker containers to their latest versions.
+
+::: tip
+If you installed Nitro via package manager, you should use that instead. See [Updating](updating.md).
+:::
+
+#### Example
+
+```
+$ nitro self-update
+Checking for updates
+  … found version 2.0.6 updating ✓
+Updating to Nitro 2.0.6!
+```
+
 ## `share`
 
 Allows you to share a local site.
