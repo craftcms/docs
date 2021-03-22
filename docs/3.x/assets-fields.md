@@ -259,6 +259,28 @@ Assets fields can handle new file uploads as well:
 }) }}
 ```
 
+To preserve existing relations of assets (append uploaded files):
+
+```twig
+{# Get the currently related asset IDs #}
+{% set relatedAssetIds = entry is defined
+  ? entry.myFieldHandle.ids()
+  : [] %}
+
+{# Create hidden inputs with related asset IDs as value #}
+{% for asset in relatedAssetIds %}
+  {{ input(
+      'hidden',
+      'fields[myFieldHandle][]',
+      asset.id
+  ) }}
+{% endfor %}
+
+{{ input('file', 'fields[myFieldHandle][]', options={
+  multiple: true,
+}) }}
+```
+
 ::: tip
 Don’t forget to set `enctype="multipart/form-data"` on your `<form>` tag so your browser knows to submit the form as a multipart request.
 :::
