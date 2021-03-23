@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-03-23
+### Added
+- Documented the new `{% script %}` Twig tag.
+
 ## 2021-03-09
 ### Added
 - Documented Nitro `php` command.
