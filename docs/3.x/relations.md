@@ -68,16 +68,28 @@ You can also add any additional parameters supported by the element type:
 
 Assets, Categories, Entries, Users, and Tags each support a `relatedTo` parameter, enabling all kinds of crazy things.
 
-You can pass one of these things to it:
+You can pass one of these to it:
 
 - A single **element object**: <craft3:craft\elements\Asset>, <craft3:craft\elements\Category>, <craft3:craft\elements\Entry>, <craft3:craft\elements\User>, or <craft3:craft\elements\Tag>
 - A single **element ID**
 - A [**hash**](dev/twig-primer.md#hashes) with properties we’ll get into below: `element`, `sourceElement` or `targetElement` optionally with `field` and/or `sourceSite`
 - An [**array**](dev/twig-primer.md#arrays) containing any mixture of the above options, which can start with `and` for relations on all elements rather than _any_ elements (default behavior is `or`, which you can omit or pass explicitly)
 
+::: warning
+You cannot chain multiple `relatedTo` parameters on the same element query; any subsequent `relatedTo` criteria will overwrite whatever was previously set.
+:::
+
+### The `andRelatedTo` Parameter
+
+You can use the `andRelatedTo` parameter after `relatedTo` to further specify criteria that will be joined with an `and`. It accepts the same arguments, and you can use multiple `andRelatedTo` parameters as long as they follow a single `relatedTo` parameter.
+
+::: warning
+You can’t combine multiple `relatedTo` criteria with `or` *and* `and` conditions.
+:::
+
 #### Simple Relationships
 
-A simpler query might pass a single element object or ID, like a `drinks` entry or entry ID represented here by `drink`:
+A simple query might pass `relatedTo` a single element object or ID, like a `drinks` entry or entry ID represented here by `drink`:
 
 ```twig
 {% set relatedDrinks = craft.entries()
@@ -87,7 +99,7 @@ A simpler query might pass a single element object or ID, like a `drinks` entry 
 {# result: drinks entries with *any* relationship to `drink` (source or target) #}
 ```
 
-Passing an array of elements returns results relating to any one of the supplied items:
+Passing an array of elements returns results relating to any one of the supplied items, meaning one *or* the other by default:
 
 ```twig
 {% set relatedDrinks = craft.entries()
@@ -107,9 +119,36 @@ Passing `and` at the beginning of an array returns results relating to *all* of 
 {# result: drinks entries with any relationship to `gin` and `lime` #}
 ```
 
+You can further nest criteria as well:
+
+```twig
+{% set relatedDrinks = craft.entries()
+    .section('drinks')
+    .relatedTo([
+        'and',
+        [ 'or', gin, lime ],
+        [ 'or', rum, grenadine ],
+    ])
+    .all() %}
+{# result: drinks entries with any relationship to `gin` or `lime` *and*
+   `rum` or `grenadine` #}
+```
+
+You could achieve the same result as the example above using the `andRelatedTo` parameter:
+
+```twig
+{% set relatedDrinks = craft.entries()
+    .section('drinks')
+    .relatedTo([ 'or', gin, lime ])
+    .andRelatedTo([ 'or', rum, grenadine ])
+    .all() %}
+{# result: drinks entries with any relationship to `gin` or `lime` *and*
+   `rum` or `grenadine` #}
+```
+
 #### Advanced Relationships
 
-You can query more specifically by passing `relatedTo` a [hash](dev/twig-primer.md#hashes) that contains the following properties:
+You can query more specifically by passing `relatedTo`/`andRelatedTo` a [hash](dev/twig-primer.md#hashes) that contains the following properties:
 
 | Property | Accepts | Description |
 | -------- | -------- | ----------- | -- |
