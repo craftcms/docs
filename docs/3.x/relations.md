@@ -199,7 +199,7 @@ Or you might want to pass an element query to find other users’ favorite drink
 
 ```twig
 {% set otherUsers = craft.users()
-    .not(currentUser)
+    .id('not '~currentUser.id)
     .all() %}
 
 {% set recommendedCocktails = craft.entries()
