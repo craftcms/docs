@@ -963,8 +963,12 @@ Listening for queue jobs…
 Removes a site.
 
 ```
-nitro remove [<options>]
+nitro remove
 ```
+
+::: tip
+The `remove` command does not delete databases. If you’d like to remove a site’s database(s), see [`db remove`](#db-remove).
+:::
 
 #### Example
 
