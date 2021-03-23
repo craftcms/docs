@@ -273,6 +273,25 @@ Alternatively, you can submit Base64-encoded file data, which the Assets field w
 {{ hiddenInput('fields[myFieldHandle][filename][]', 'myFile.ext') }}
 ```
 
+However you upload new assets, you may want to maintain any that already exist on the field and append new ones to the set instead of replacing it.
+
+You can do this by passing each of the related asset IDs in the field data array, like we are here with hidden form inputs:
+
+```twig{1-8}
+{# Provide each existing asset ID in the array of field data #}
+{% for relatedAssetId in entry.myFieldHandle.ids() %}
+  {{ input(
+      'hidden',
+      'fields[myFieldHandle][]',
+      relatedAssetId
+  ) }}
+{% endfor %}
+
+{{ input('file', 'fields[myFieldHandle][]', options={
+  multiple: true,
+}) }}
+```
+
 ## 関連項目
 
 * [アセットクエリ](assets.md#querying-assets)
