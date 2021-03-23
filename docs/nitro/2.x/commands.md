@@ -182,33 +182,53 @@ Enables shell completion.
 nitro completion [<options>]
 ```
 
-#### Example
+#### Zsh Example
+
+Enable Nitro shell completion for your current session:
 
 ```
-To load completions:
+$ source <(nitro completion zsh)
+```
 
-Bash:
+To enable Nitro shell completion for every Zsh session, you’ll first need to make sure shell completion is enabled for your environment. You can enable it by running this once:
 
-$ source <(nitro completion bash)
+```sh
+$ echo "autoload -Uz compinit; compinit" >> ~/.zshrc
+```
 
-# To load completions for each session, execute once:
-Linux:
-  $ nitro completion bash > /etc/bash_completion.d/nitro
-MacOS:
-  $ nitro completion bash > /usr/local/etc/bash_completion.d/nitro
+::: tip
+The `autoload -Uz compinit; compinit` line should only appear once in your `~/.zshrc` file. You can safely remove any duplicates.
+:::
 
-Zsh:
+With Zsh shell completion enabled, you can enable completion for Nitro in every session by executing the following once:
 
-# If shell completion is not already enabled in your environment you will need
-# to enable it. You can execute the following once:
-
-$ echo "autoload -U compinit; compinit" >> ~/.zshrc
-
-# To load completions for each session, execute once:
+```sh
+$ mkdir -p "${fpath[1]}"
 $ nitro completion zsh > "${fpath[1]}/_nitro"
-
-# You will need to start a new shell for this setup to take effect.
 ```
+
+Start a new shell or `source ~/.zshrc` for this setup to take effect.
+
+#### Bash Example
+
+Enable Nitro shell completion for your current session:
+
+```
+$ source <(nitro completion bash)
+```
+
+Enable Nitro shell completion for every Bash session (only run this once!):
+
+::: code
+```sh Linux
+$ nitro completion bash > /etc/bash_completion.d/nitro
+```
+```sh macOS
+$ nitro completion bash > /usr/local/etc/bash_completion.d/nitro
+```
+:::
+
+Start a new shell for this setup to take effect.
 
 ## `composer`
 
@@ -441,7 +461,7 @@ Backup saved in /Users/me/.nitro/backups/mysql-8.0-3306.nitro 💾
 
 ## `db import`
 
-Imports a database dump the selected database engine and name. The SQL file to be imported may be plain text, or compressed with zip/gzip.
+Imports a database dump into the selected database engine and name. The SQL file to be imported may be plain text, or compressed with zip/gzip.
 
 ```
 nitro db import <file> [<options>]
@@ -943,8 +963,12 @@ Listening for queue jobs…
 Removes a site.
 
 ```
-nitro remove [<options>]
+nitro remove
 ```
+
+::: tip
+The `remove` command does not delete databases. If you’d like to remove a site’s database(s), see [`db remove`](#db-remove).
+:::
 
 #### Example
 
@@ -985,6 +1009,29 @@ Restarting Nitro…
   … restarting mysql-8.0-3306.nitro ✓
   … restarting nitro-proxy ✓
 Nitro restarted 🎉
+```
+
+## `self-update`
+
+Updates Nitro to the latest version.
+
+```
+nitro self-update
+```
+
+You’ll typically want to follow this with the [`nitro update`](#update) in order to update Nitro’s Docker containers to their latest versions.
+
+::: tip
+If you installed Nitro via package manager, you should use that instead. See [Updating](updating.md).
+:::
+
+#### Example
+
+```
+$ nitro self-update
+Checking for updates
+  … found version 2.0.6 updating ✓
+Updating to Nitro 2.0.6!
 ```
 
 ## `share`

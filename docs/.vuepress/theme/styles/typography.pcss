@@ -46,8 +46,12 @@
     @apply text-xl mt-10;
 
     code {
-      @apply text-lg font-bold;
-      color: var(--heading-color);
+      @apply text-lg font-bold bg-transparent px-0;
+    }
+
+    .badge {
+      @apply relative;
+      top: -2px;
     }
   }
 
@@ -55,7 +59,8 @@
     @apply text-lg;
 
     code {
-      @apply text-base font-bold;
+      @apply text-base font-bold bg-transparent px-0;
+      color: var(--heading-color);
     }
   }
 
@@ -133,12 +138,16 @@
       width: 9rem;
 
       code {
-        @apply font-semibold;
+        @apply font-semibold bg-transparent px-0;
       }
     }
 
     dd {
       width: calc(100% - 9rem);
+
+      code {
+        @apply bg-transparent px-0;
+      }
     }
 
     code {
