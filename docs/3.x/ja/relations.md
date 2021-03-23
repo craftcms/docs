@@ -68,22 +68,34 @@ Craft のリレーションを操作する前に、それがテンプレート�
 
 ドリンクレシピの原材料リストを出力したい場合、次のようにします。
 
-エレメントタイプでサポートされている追加パラメータを付加することもできます。
+You can pass one of these to it:
 
 - ドリンクレシピエントリ：ソース  <craft3:craft\elements\Tag>
 - 原材料：ターゲット
 - A [**hash**](dev/twig-primer.md#hashes) with properties we’ll get into below: `element`, `sourceElement` or `targetElement` optionally with `field` and/or `sourceSite`
 - An [**array**](dev/twig-primer.md#arrays) containing any mixture of the above options, which can start with `and` for relations on all elements rather than _any_ elements (default behavior is `or`, which you can omit or pass explicitly)
 
+::: warning
+You cannot chain multiple `relatedTo` parameters on the same element query; any subsequent `relatedTo` criteria will overwrite whatever was previously set.
+:::
+
+### The `andRelatedTo` Parameter
+
+You can use the `andRelatedTo` parameter to further specify criteria that will be joined with an `and`. It accepts the same arguments, and you can use multiple `andRelatedTo` parameters.
+
+::: warning
+You can’t combine multiple `relatedTo` criteria with `or` *and* `and` conditions.
+:::
+
 #### 行列を経由する
 
-アセット、カテゴリ、エントリ、ユーザー、および、タグは、それぞれ `relatedTo` パラメータをサポートし、あらゆる種類のとんでもないことを可能にします。
+A simple query might pass `relatedTo` a single element object or ID, like a `drinks` entry or entry ID represented here by `drink`:
 
 ```twig
 {% set relatedDrinks = craft.entries.section('drinks').relatedTo(drink).all() %}
 ```
 
-最も単純な書式としては、次のいずれかを渡すことができます。
+Passing an array of elements returns results relating to any one of the supplied items, meaning one *or* the other by default:
 
 ```twig
 {% set ingredients = craft.entries.section('ingredients').relatedTo({
@@ -92,7 +104,7 @@ Craft のリレーションを操作する前に、それがテンプレート�
 }) %}
 ```
 
-それによって、ソースかターゲットかに関わらず、Craft は与えられたエレメントに関連するすべてのエレメントを返します。
+Passing `and` at the beginning of an array returns results relating to *all* of the supplied items:
 
 ```twig
 {% set ingredients = craft.entries.section('ingredients').relatedTo({
@@ -101,9 +113,36 @@ Craft のリレーションを操作する前に、それがテンプレート�
 }) %}
 ```
 
+You can further nest criteria as well:
+
+```twig
+{% set relatedDrinks = craft.entries()
+    .section('drinks')
+    .relatedTo([
+        'and',
+        [ 'or', gin, lime ],
+        [ 'or', rum, grenadine ],
+    ])
+    .all() %}
+{# result: drinks entries with any relationship to `gin` or `lime` *and*
+   `rum` or `grenadine` #}
+```
+
+You could achieve the same result as the example above using the `andRelatedTo` parameter:
+
+```twig
+{% set relatedDrinks = craft.entries()
+    .section('drinks')
+    .relatedTo([ 'or', gin, lime ])
+    .andRelatedTo([ 'or', rum, grenadine ])
+    .all() %}
+{# result: drinks entries with any relationship to `gin` or `lime` *and*
+   `rum` or `grenadine` #}
+```
+
 #### 複数のリレーションの判定基準を渡す
 
-もう少し具体的であることを望むなら、`relatedTo` は次のプロパティを含むオブジェクトも受け入れます。
+You can query more specifically by passing `relatedTo`/`andRelatedTo` a [hash](dev/twig-primer.md#hashes) that contains the following properties:
 
 | Property                                       | Accepts                                                             | Description                                                       |
 | ---------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------- |
@@ -118,21 +157,27 @@ Only use `sourceSite` if you’ve designated your relational field to be transla
 This is the equivalent of calling `drink.ingredients.all()`:
 
 ```twig
-{% set ingredients = craft.entries.section('ingredients').relatedTo({
-    sourceElement: drink,
-    field: 'ingredientsMatrix.relatedIngredient'
-}).all() %}
+{% set ingredients = craft.entries()
+    .section('ingredients')
+    .relatedTo({
+        sourceElement: drink,
+        field: 'ingredients'
+    })
+    .all() %}
+{# result: ingredients entries related from `drink`’s custom `ingredients` field #}
 ```
 
 This doesn’t limit to a specific field, but it limits relations to the current site only:
 
 ```twig
-{% set espresso = craft.entries.section('ingredients').slug('espresso').first() %}
-
-{% set cocktails = craft.entries.section('drinks').relatedTo(['and',
-    { sourceElement: currentUser, field: 'favoriteDrinks' },
-    { targetElement: espresso, field: 'ingredients' }
-]).all() %}
+{% set ingredients = craft.entries()
+    .section('ingredients')
+    .relatedTo({
+        sourceElement: drink,
+        sourceSite: craft.app.sites.currentSite.id
+    })
+    .all() %}
+{# result: ingredients entries related from `drink`, limited to the current site #}
 ```
 
 This finds other drinks that uses the current one’s primary ingredient:
@@ -150,7 +195,7 @@ This finds other drinks that uses the current one’s primary ingredient:
 
 #### Going Through Matrix
 
-[行列](matrix-fields.md)フィールド内のソースエレメントに関連するエレメントを見つけたい場合、行列フィールドのハンドルを `field` パラメータに渡します。 複数の関連フィールドを持つ行列フィールドにある特定のフィールドだけをターゲットにしたい場合、ドット表記を利用してブロックタイプのフィールドハンドルを指定できます。
+If you want to find elements related to a source element through a [Matrix](matrix-fields.md) field, pass the Matrix field’s handle to the `field` parameter. If that Matrix field has more than one relational field and you want to target a specific one, you can specify the block type field’s handle using a dot notation:
 
 ```twig
 {% set ingredients = craft.entries()
@@ -164,7 +209,7 @@ This finds other drinks that uses the current one’s primary ingredient:
 
 #### Passing Multiple Relation Criteria
 
-複数のタイプのリレーションを組み合わせる必要がある場合があります。 例えば、エスプレッソを含む現在のユーザーのお気に入りの飲み物をすべて出力するには、次のようになります。
+There might be times when you need to factor multiple types of relations into the mix. For example, outputting all of the current user’s favorite drinks that include espresso:
 
 ```twig
 {% set espresso = craft.entries()
