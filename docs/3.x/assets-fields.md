@@ -273,7 +273,9 @@ Alternatively, you can submit Base64-encoded file data, which the Assets field w
 {{ hiddenInput('fields[myFieldHandle][filename][]', 'myFile.ext') }}
 ```
 
-To preserve existing relations of assets (append uploaded files):
+However you upload new assets, you may want to maintain any that already exist on the field and append new ones to the set instead of replacing it.
+
+You can do this by passing each of the related asset IDs in the field data array, like we are here with hidden form inputs:
 
 ```twig
 {# Get the currently related asset IDs #}
