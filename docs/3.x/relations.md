@@ -81,7 +81,7 @@ You cannot chain multiple `relatedTo` parameters on the same element query; any 
 
 ### The `andRelatedTo` Parameter
 
-You can use the `andRelatedTo` parameter after `relatedTo` to further specify criteria that will be joined with an `and`. It accepts the same arguments, and you can use multiple `andRelatedTo` parameters as long as they follow a single `relatedTo` parameter.
+You can use the `andRelatedTo` parameter to further specify criteria that will be joined with an `and`. It accepts the same arguments, and you can use multiple `andRelatedTo` parameters.
 
 ::: warning
 You can’t combine multiple `relatedTo` criteria with `or` *and* `and` conditions.
