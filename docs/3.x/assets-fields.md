@@ -277,18 +277,13 @@ However you upload new assets, you may want to maintain any that already exist o
 
 You can do this by passing each of the related asset IDs in the field data array, like we are here with hidden form inputs:
 
-```twig
-{# Get the currently related asset IDs #}
-{% set relatedAssetIds = entry is defined
-  ? entry.myFieldHandle.ids()
-  : [] %}
-
-{# Create hidden inputs with related asset IDs as value #}
-{% for asset in relatedAssetIds %}
+```twig{1-8}
+{# Provide each existing asset ID in the array of field data #}
+{% for relatedAssetId in entry.myFieldHandle.ids() %}
   {{ input(
       'hidden',
       'fields[myFieldHandle][]',
-      asset.id
+      relatedAssetId
   ) }}
 {% endfor %}
 
