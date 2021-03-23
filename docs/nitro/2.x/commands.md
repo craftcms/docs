@@ -461,7 +461,7 @@ Backup saved in /Users/me/.nitro/backups/mysql-8.0-3306.nitro 💾
 
 ## `db import`
 
-Imports a database dump the selected database engine and name. The SQL file to be imported may be plain text, or compressed with zip/gzip.
+Imports a database dump into the selected database engine and name. The SQL file to be imported may be plain text, or compressed with zip/gzip.
 
 ```
 nitro db import <file> [<options>]
