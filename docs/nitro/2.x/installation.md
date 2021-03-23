@@ -1,52 +1,63 @@
 # Installation
 
-## Installing Nitro
+## Installing Nitro for macOS
 
-### macOS and Linux
-
-You’ll need to install prereleases manually by downloading the appropriate Nitro binary and telling your system to use it.
-
-::: tip
-macOS users can optionally install Nitro [using Brew](#macos-via-brew).
+::: warning
+**If you’re on an M1 Mac**, you must use the [Docker Desktop Apple M1 Tech Preview](https://docs.docker.com/docker-for-mac/apple-m1/) regardless of how you choose to install Nitro.
 :::
+
+1. Install Docker Desktop [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
+2. Install Nitro by opening a terminal and running
+    ````sh
+    bash <(curl -sLS http://installer.getnitro.sh)
+    ````
+
+### macOS via Brew
+
+You can alternatively install Nitro using the [Homebrew](https://brew.sh) package manager if you have it installed.
+
+1. Install Docker Desktop:
+    ```sh
+    brew install homebrew/cask/docker
+    ```
+2. Install Nitro:
+    ```sh
+    brew install craftcms/nitro/nitro
+    ```
+3. Run `nitro init` and follow the prompts to initialize the Nitro environment.
+
+### macOS Manual Installation
+
+If you run into issues with either install method, you can manually install Nitro instead by adding the appropriate binary to your system:
+
+1. Install Docker Desktop [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
+2. Visit Nitro’s [GitHub Releases](https://github.com/craftcms/nitro/releases) page and download the archive for your system.
+3. Extract the release archive and make `nitro` executable with `chmod +x ./nitro`.
+4. Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
+    ::: tip
+    If the `/usr/local/bin/` directory doesn’t exist, create it with\
+    `sudo mkdir -p -m 775 /usr/local/bin && sudo chown $USER: /usr/local/bin`.
+    :::
+5. Allow Nitro to be trusted by opening your terminal and either
+    - Running `nitro`, choosing **Cancel** for the security prompt, and visiting **System Preferences** → **Security and Privacy** → **General** to choose **Allow Anyway** next to the warning about `nitro` being blocked.
+    - Running the following to strip the quarantine flag macOS adds automatically:\
+    `xattr -dr com.apple.quarantine /usr/local/bin/nitro`
+6. Run `nitro init` and follow the prompts to initialize the Nitro environment.
+
+## Installing Nitro for Linux
 
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
 2. Open a terminal and run `bash <(curl -sLS http://installer.getnitro.sh)`.
 
-#### Manual Installation
+### Linux Manual Installation
 
-If you run into issues with the shell script installer, you can manually install Nitro:
-
-1. Visit Nitro’s [GitHub Releases](https://github.com/craftcms/nitro/releases) page and download the archive for your system.
+1. Visit Nitro’s [GitHub Releases](https://github.com/craftcms/nitro/releases) page and use the `nitro_linux_x86_64.tar.gz` inside your WSL2 instance.
 2. Extract the release archive and make the `nitro` executable with `chmod +x ./nitro`.
 3. If `/usr/local/bin` does not exist for you, create it with `sudo mkdir -p -m 775 /usr/local/bin && sudo chown $USER: /usr/local/bin`.
 4. Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
+5. Run `nitro init` and follow the prompts to initialize the Nitro environment.
 
-Once the `nitro` executable is in place:
-
-4. In your terminal, run `nitro`, choose **Cancel** for the security prompt, and visit **System Preferences** → **Security and Privacy** → **General** to choose **Allow Anyway** next to the warning about `nitro` being blocked.
-    - Alternatively, you can strip the automatic quarantine flag:
-    ```sh
-    xattr -dr com.apple.quarantine /usr/local/bin/nitro
-    ```
-5. Run `nitro init` and follow the prompts to create your machine.
-
-### macOS via Brew
-
-Using the [Homebrew](https://brew.sh) package manager:
-
-1. Install Docker Desktop:
-    ```bash
-    brew install docker --cask
-    ```
-2. Install Nitro:
-    ```bash
-    brew tap craftcms/nitro
-    brew install nitro
-    nitro init
-    ```
-
-### Windows
+## Installing Nitro for Windows
 
 Nitro 2 runs on Windows 10 Home or Pro and requires build 19042 or higher with WSL2.
 
@@ -73,18 +84,20 @@ Read [Developing using Nitro and WSL2](windows.md).
     ```
 10. From the WSL terminal, run `bash <(curl -sLS http://installer.getnitro.sh)`.
 
-If you run into issues with the shell script installer, you can manually install Nitro:
 
-#### Manual Installation
+### Windows Manual Installation
+
+If you run into issues with the shell script installer, you can manually install Nitro:
 
 1. Visit Nitro’s [GitHub Releases](https://github.com/craftcms/nitro/releases) page and use the `nitro_linux_x86_64.tar.gz` inside your WSL2 instance.
 2. Extract the release archive and make the `nitro` executable with `chmod +x ./nitro`.
 3. If `/usr/local/bin` does not exist for you, create it with `sudo mkdir -p -m 775 /usr/local/bin && sudo chown $USER: /usr/local/bin`.
 4. Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
+5. Run `nitro init` and follow the prompts to initialize the Nitro environment.
 
 ## Uninstalling Nitro
 
-To completely remove Nitro, first [destroy](commands.md#destroy) your machine:
+To completely remove Nitro, first [destroy](commands.md#destroy) its Docker networks, containers, and volumes:
 
 ```bash
 nitro destroy
