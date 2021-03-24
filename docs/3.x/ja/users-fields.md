@@ -163,7 +163,7 @@ For example, you could create a list of checkboxes for each of the possible rela
 {{ hiddenInput('fields[myFieldHandle]', '') }}
 
 {# Get all of the possible user options #}
-{% set possibleUsers = craft.entries()
+{% set possibleUsers = craft.users()
     .group('authors')
     .orderBy('username ASC')
     .all() %}
