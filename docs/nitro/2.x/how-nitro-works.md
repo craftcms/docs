@@ -26,7 +26,7 @@ Nitro is built to utilize resources efficiently, with small container sizes, sha
 
 ### CLI & Docker
 
-The Nitro CLI is [a Go app](https://github.com/craftcms/nitro) that’s compiled into a binary for your OS. When you run `nitro` commands, you’re using Nitro’s API to manage Docker containers for local development.
+The Nitro CLI is [a Go app](https://github.com/craftcms/nitro) that’s compiled into a binary for your OS. When you run `nitro` commands, Nitro acts like a concierge to manage Docker containers for local development.
 
 ### Hosts & Networking
 
