@@ -1,17 +1,19 @@
 # Debugging with Ray
 
-[Ray](https://myray.app/) is a Desktop PHP debugging tool that makes it easy to debug your PHP application.
+[Ray](https://myray.app/) is a desktop PHP debugging tool that makes it easy to debug Craft or any PHP application.
 
 ## Installation
 
-Ray is PHP framework agnostic, however there is a [helpful plugin](https://plugins.craftcms.com/craft-ray) to make configuring Craft and Ray super easy!
+Ray’s first-party [Craft plugin](https://plugins.craftcms.com/craft-ray) makes configuration quick and easy. From your terminal, require and install it:
 
-Install the plugin using the [`nitro composer`](commands.md#composer) command:
-
-`nitro composer require spatie/craft-ray`
+```
+nitro composer require spatie/craft-ray
+nitro craft plugin/install craft-ray
+```
 
 ::: tip
-If you only want to use Ray in development, run `nitro composer require spatie/craft-ray --dev`
+If you only want to use Ray in development, run \
+`nitro composer require spatie/craft-ray --dev`
 :::
 
 ## Configuring
@@ -24,7 +26,9 @@ Enter the following:
 **Remote Path:** `/app`\
 **Local Path:** `/path/to/your/local/project`
 
-![Ray Plugin Settings](./images/ray-plugin-config.png)
+<BrowserShot url="https://tutorial.nitro/admin/settings/plugins/craft-ray" :link="false" caption="Ray plugin settings">
+<img src="./images/ray-plugin-settings.png" alt="Screenshot of Ray plugin settings in the Craft control panel" />
+</BrowserShot>
 
 ## Usage
 
