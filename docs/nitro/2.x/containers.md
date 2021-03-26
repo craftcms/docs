@@ -36,7 +36,7 @@ Which port should we use for the UI?
 Enter your selection: 1
 What is the name of the container [elasticsearch]?
 Create a file to store environment variables [Y/n]?
-Created environment variables file at "/Users/jasonmccallister/.nitro/.elasticsearch"...
+Created environment variables file at "/Users/oli/.nitro/.elasticsearch"...
 New container "elasticsearch.containers.nitro" added!
 Apply changes now [Y/n]? n
 ```
