@@ -76,7 +76,7 @@ If our web root is `web/` and we want to increase `max_execution_time` using a s
 max_execution_time = 7000
 ```
 
-To apply the change, we’ll need to delete the site’s web container and run `nitro apply` to have Nitro rebuild it.
+To apply the change, restart the container from Docker Desktop or run `nitro restart`.
 
 ::: warning
 Any values you provide in your `.user.ini` file will override changes with `nitro iniset` and any environment variables.

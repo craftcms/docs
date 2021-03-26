@@ -69,7 +69,7 @@ MY_CUSTOM_ENV=somevariable
 If the value contains whitespace, wrap it in quotes (`"`).
 :::
 
-To apply these changes, run `nitro apply` and your new environment variables will be appended to the containers environment.
+To apply these changes, delete the container from Docker Desktop and run `nitro apply`. Your new environment variables will be appended to the container’s environment as it’s rebuilt.
 
 ::: tip
 Defining an environment variable in the local file will override the default environment variables an image defines.
