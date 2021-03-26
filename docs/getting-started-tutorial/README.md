@@ -20,7 +20,7 @@ We’ll build an example blog since that’s a common use for a CMS, but the tut
 
 ## What We’re Going to Do
 
-We’re going to get Craft CMS running in a local environment, create a blog from scratch, and look at a few ways you might launch the site publicly. All you’ll need is yourself, your computer, and a healthy sense of adventure.
+We’re going to get Craft CMS running in a local environment and create a simple blog from scratch. All you’ll need is yourself, your computer, and a healthy sense of adventure.
 
 
 ### Table of Contents
