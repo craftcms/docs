@@ -12,11 +12,11 @@ We’ll be installing Craft with an application called [Composer](https://getcom
 
 ![](../images/tutorial-os-terminal.png)
 
-- On MacOS, the default console is [Terminal.app](https://support.apple.com/guide/terminal/welcome/mac).
+- On macOS, the default console is [Terminal.app](https://support.apple.com/guide/terminal/welcome/mac).
 - On Windows, the default console is called [Command Prompt](https://www.lifewire.com/command-prompt-2625840).
 - On Ubuntu Linux, the default console is called [Terminal](https://ubuntu.com/tutorials/command-line-for-beginners).
 
-There are other applications you can use like [Hyper](https://hyper.is/) (cross-platform) and [iTerm2](https://www.iterm2.com/) (Mac), but your system’s terminal will work just fine!
+There are other apps like [Hyper](https://hyper.is/) (cross-platform) and [iTerm2](https://www.iterm2.com/) (Mac), but your system’s terminal will work fine!
 
 ### Run a command
 
@@ -43,7 +43,7 @@ Try it! Copy and paste `echo "hello world"` into your terminal and hit <kbd>retu
 
 We’ll eventually want to run commands alongside your site’s code, so you’ll need to know how to get there.
 
-Every time you use the console, your commands will be executed from a specific folder on your system even when they’re not doing anything to files in that folder. This folder is called the _working directory_. You can change the working directory, much like you would using a file browser, using terminal commands.
+Every time you use the console, your commands will be executed from a specific directory on your system even when they’re not doing anything to files. This context is called the _working directory_. You can change the working directory, much like you would using a file browser, using terminal commands.
 
 To output the current working directory:
 
@@ -53,10 +53,10 @@ To output the current working directory:
 This will print the current path you’re working in.
 
 ::: tip
-The `pwd` command stands for “print working directory”, and `cd` stands for “current directory”. Commands like this are shortened so they’re quicker to type.
+The `pwd` command stands for “print working directory”, and `cd` stands for “change directory”. Commands like this are shortened so they’re quicker to type.
 :::
 
-To list the files in the current directory:
+To list files in the current directory:
 
 - Run `ls` on Mac or Linux.
 - Run `dir` on Windows.
