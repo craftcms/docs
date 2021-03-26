@@ -54,12 +54,12 @@ Apply changes now [Y/n]? n
 Nitro will search the Docker Hub registry and find images that match the name you provided. After
 
 ::: tip
-Nitro will use the `portcheck` command to verify the port is available or find the next available
+Nitro will use the `portcheck` command to verify the port is available or find the next available.
 :::
 
 ## Customizing Environment Variables for the Container
 
-Most Docker Images ship with sane defaults. However, there are times where you need to provide additional environment variables to configure the container. If you entered yes to the `Create a file to store environment variables` prompt, you will have a file created at `~/.nitro/.<containername>`. To add an environment variable to your container, open the file and add a new line:
+Most Docker images ship with sane defaults, but you may still need to useenvironment variables to configure the container. If you entered yes to the `Create a file to store environment variables` prompt, you will have a file created at `~/.nitro/.<containername>`. To add an environment variable to your container, open the file and add a new line:
 
 ```env
 MY_CUSTOM_ENV=somevariable
