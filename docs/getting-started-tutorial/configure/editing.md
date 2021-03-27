@@ -7,7 +7,7 @@ Now that we’ve set up sections and fields, we can focus on editing content.
 Navigate to “Entries” and create a new blog entry. Fill in each field.
 
 <BrowserShot url="http://tutorial.test/admin/entries/blog/9?draftId=7&fresh=1" :link="false" caption="A complete new blog post ready to be saved.">
-<img src="../images/tutorial-new-entry.png" alt="Screenshot of blog post entry with fields filled in" />
+<img src="../images/new-entry.png" alt="Screenshot of blog post entry with fields filled in" />
 </BrowserShot>
 
 ## Check out some editing features
@@ -18,13 +18,13 @@ While adding content should be intuitive, there are a few things you might want 
 
 Craft saves your work as you go, but you always decide when to _publish_. Edits on an already-published entry automatically start a new draft, and you can always see the save status and even leave notes in the versions menu. This menu will also let you see previous drafts and versions, which can be handy:
 
-![](../images/tutorial-draft-autosave.png =500x)
+![](../images/draft-autosave.png =500x)
 
 ### Double-click a related asset or category to edit it in place.
 
 Here, the default Title has been cleaned up so it’s more presentable:
 
-![](../images/tutorial-edit-asset.png =400x)
+![](../images/edit-asset.png =400x)
 
 When you do this, you’re editing that asset or category so any changes will carry over if you re-use it somewhere else. (Navigate to “Assets” and observe the update there as well, for example.)
 
@@ -32,13 +32,13 @@ When you do this, you’re editing that asset or category so any changes will ca
 
 You can grab the handles next to Matrix blocks to re-order them, and each block also has a menu just to the left of that handle you can use to collapse, disable or delete the block. You can also use this as a convenient place to insert new blocks:
 
-![](../images/tutorial-matrix-menu.png =800x)
+![](../images/matrix-menu.png =800x)
 
 ### You can fine-tune details for how and when your post is displayed.
 
 Craft will set a slug for you by default, and it’ll be used in the post URL once published. You can set the Post Date to a future date/time to have it appear then, and optionally add an Expiry Date to have it disappear later. You can always flip _Enabled_ off and know the post will be hidden publicly, regardless of other settings.
 
-![](../images/tutorial-post-meta.png =450x)
+![](../images/post-meta.png =450x)
 
 ### You can share drafts privately.
 
@@ -57,7 +57,7 @@ Go ahead and fill in some content!
 Once you’ve saved an entry, you can use the globe icon from the Entries listing to jump to its public URL. The result foreshadows what’s next:
 
 <BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="The front end is missing.">
-<img src="../images/tutorial-404.png" alt="Screenshot of public post URL 404" />
+<img src="../images/404.png" alt="Screenshot of public post URL 404" />
 </BrowserShot>
 
 This is not an acceptable way to display a blog post. Let’s continue to the next section and build a front end!

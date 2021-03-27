@@ -72,12 +72,12 @@ Create `templates/blog/_entry.twig` and add the following to it:
 
 The first line _extends_ the layout template, meaning it will use that as a starting point and let us further customize or override whatever we need to. We’re now providing our own content, within the `content` block, to appear on the page.
 
-![](../images/tutorial-extend.png =550x)
+![](../images/extend.png =550x)
 
 Now that the blog section’s template is ready, you can visit the URL for a published post:
 
 <BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="">
-<img src="../images/tutorial-entry-static.png" alt="Screenshot of empty page with generic title" />
+<img src="../images/entry-static.png" alt="Screenshot of empty page with generic title" />
 </BrowserShot>
 
 ::: tip
@@ -99,7 +99,7 @@ That’s clearly not the title we should display on every page. For any detail p
 Now it’s looking better!
 
 <BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="">
-<img src="../images/tutorial-entry-dynamic.png" alt="Screenshot of detail page with dynamic title and entry date" />
+<img src="../images/entry-dynamic.png" alt="Screenshot of detail page with dynamic title and entry date" />
 </BrowserShot>
 
 Notice how we’re using the [`|date` Twig filter](/3.x/dev/filters.md#date) to specify formats for the `entry.postDate` value. This is a typical example of using a filter to modify something in Twig; a value you want to modify or transform is followed by a pipe (`|`), the name of the filter, and sometimes settings specific to that filter. You can see all Craft’s available [filters](/3.x/dev/filters.md) to get a better idea of what you can do with them.
@@ -131,7 +131,7 @@ For each asset, we output a `img` HTML tag using `{{ image.url }}` to get the we
 We should now see the image after refreshing the page:
 
 <BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="">
-<img src="../images/tutorial-entry-with-image.png" alt="Screenshot of detail page with dynamic image added" />
+<img src="../images/entry-with-image.png" alt="Screenshot of detail page with dynamic image added" />
 </BrowserShot>
 
 ## Transform an asset
@@ -166,7 +166,7 @@ We’ll use Twig to create an object called `featureImage` with the settings we 
 You can now refresh the front end and see your transformed asset:
 
 <BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="Automatically-resized image, cropped at 900×600px.">
-<img src="../images/tutorial-image-resized.png" alt="Screenshot of detail page with auto-sized image" />
+<img src="../images/image-resized.png" alt="Screenshot of detail page with auto-sized image" />
 </BrowserShot>
 
 ## Display Matrix content
@@ -218,7 +218,7 @@ Matrix content is stored in whatever blocks we’ve defined. To display that con
 The Matrix content will now be included on the page:
 
 <BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="Detail page with post content added." :max-height="600">
-<img src="../images/tutorial-matrix-content.png" alt="Screenshot of detail page with post content" />
+<img src="../images/matrix-content.png" alt="Screenshot of detail page with post content" />
 </BrowserShot>
 
 ## Use an include
@@ -469,7 +469,7 @@ The image transform is similar to what we did earlier, except we used `.one()` i
 Here’s what the result looks like:
 
 <BrowserShot url="http://tutorial.test/blog/" :link="false" caption="">
-<img src="../images/tutorial-listing.png" alt="Screenshot of listing page" />
+<img src="../images/listing.png" alt="Screenshot of listing page" />
 </BrowserShot>
 
 In this template we’ve chosen to display a square thumbnail of the “Feature Image” along with the post title. Some of these images may crop weirdly into squares, but we can use focal points to have some control over how they’re cropped!
@@ -481,12 +481,12 @@ Transformed images will automatically be cropped from the center, but a content 
 3. Choose the “Focal Point” tool, dragging the focal point bullseye icon to an important area of the image.
 4. Choose “Save”.
 
-![Setting a focal point on an asset](../images/tutorial-focal-point.png)
+![Setting a focal point on an asset](../images/focal-point.png)
 
 Back on the front end, refresh the listing page and you’ll see the re-cropped thumbnail:
 
 <BrowserShot url="http://tutorial.test/blog/" :link="false" caption="Listing page with adjusted thumbnail focal point.">
-<img src="../images/tutorial-listing-with-custom-focal-point.png" alt="Screenshot of listing page where post thumbnail is cropped toward focal point of image" />
+<img src="../images/listing-with-custom-focal-point.png" alt="Screenshot of listing page where post thumbnail is cropped toward focal point of image" />
 </BrowserShot>
 
 ## Create a category listing
@@ -517,7 +517,7 @@ In the same way that entry detail pages came automatically loaded with an `entry
 Our post category listings, which you can navigate to by choosing any of a blog post’s tags, should be working now:
 
 <BrowserShot url="http://tutorial.test/blog/category/ramblings" :link="false" caption="Listing page for posts in the `Ramblings` category.">
-<img src="../images/tutorial-listing-category.png" alt="Screenshot of listing page limited by category" />
+<img src="../images/listing-category.png" alt="Screenshot of listing page limited by category" />
 </BrowserShot>
 
 ## Add navigation
@@ -570,7 +570,7 @@ Now let’s include that in `templates/_layout.twig`:
 ```
 
 <BrowserShot url="http://tutorial.test/blog" :link="false" caption="Blog listing with navigation." :max-height="600">
-<img src="../images/tutorial-navigation.png" alt="Screenshot of blog listing with new top navigation" />
+<img src="../images/navigation.png" alt="Screenshot of blog listing with new top navigation" />
 </BrowserShot>
 
 ## Add a template for a single
@@ -603,5 +603,5 @@ Create `template/_singles/about.twig` and add the following to it:
 We’re using some CSS utility classes to create a two-column layout here, but otherwise you’ll recognize all the pieces from previous examples!
 
 <BrowserShot url="http://tutorial.test/about" :link="false" caption="The About page.">
-<img src="../images/tutorial-single.png" alt="Screenshot of two-colum About page" />
+<img src="../images/single.png" alt="Screenshot of two-colum About page" />
 </BrowserShot>

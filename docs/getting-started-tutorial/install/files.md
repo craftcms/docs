@@ -36,8 +36,8 @@ Choose a new path on your computer where you’d like to install Craft CMS. It c
 
 We’ll tell Composer where to add these new files using an _absolute_ or _relative_ path:
 
-- The full _absolute_ path is long and specific, like `/Users/oli/projects/tutorial` or `C:\Users\oli\projects\tutorial`.
-- To use a _relative_ path, you first need to use the `cd` command and change your working directory to the existing parent folder. The relative path you provide will be within this working directory. If you’ve navigated to `/Users/oli/projects`, for example, you can simply pass Composer the value of `tutorial` to have that folder created.
+- The full _absolute_ path is long and specific, like `/Users/oli/dev/tutorial` or `C:\Users\oli\dev\tutorial`.
+- To use a _relative_ path, you first need to use the `cd` command and change your working directory to the existing parent folder. The relative path you provide will be within this working directory. If you’ve navigated to `/Users/oli/dev`, for example, you can simply pass Composer the value of `tutorial` to have that folder created.
 
 Whichever option you choose, run the following command and substitute your desired path for `<Path>`:
 
@@ -45,9 +45,9 @@ Whichever option you choose, run the following command and substitute your desir
 composer create-project craftcms/craft <Path>
 ```
 
-Composer will take a few minutes to download Craft CMS and all its dependencies, set up your project folders, and add a security key:
+Composer will take a few minutes to download Craft CMS with its dependencies, set up your project folders, and add a security key:
 
-![](../images/tutorial-composer-create-project.gif)
+![](../images/composer-create-project.gif)
 
 Now we have all the files we need to actually install and start using Craft.
 
@@ -57,9 +57,9 @@ Let’s open the new folder in a code editor and take a look.
 
 If you’re on a Mac, drag the folder you’ve just created onto the Visual Studio Code icon.
 
-If you’re on Windows or Linux, open VS Code and choose “File”, “Open Folder...”, and select the folder with your new Craft CMS files.
+If you’re on Windows or Linux, open VS Code and choose **File**, **Open Folder...**, and select the folder with your new Craft CMS files.
 
-![](../images/tutorial-vs-code.png)
+![](../images/vs-code.png)
 
 Before we complete the setup, let’s take a look at the files Composer just created:
 
@@ -79,21 +79,21 @@ craft/
 └── craft
 ```
 
-It’s important to maintain this folder structure. You can add files and folders to it, but if you want to rename any of these files we’re starting with you may need to change some settings.
+It’s important to maintain this folder structure. You can add stuff to it, but if you want to rename anything here you may need to change some settings.
 
 Let’s take a look at each top-level item:
 
-- **`config/`** contains a handful of configuration files, and your `license.key` file once setup’s finished.
-- **`modules/`** is ready for custom PHP you could write just for your site. (We’ll be ignoring that.)
-- **`storage/`** is where Craft keeps its own temporary files while it’s running.
-- **`templates/`** is where we’ll write code for dynamically displaying content. (Unless you’d like to use Craft headlessly, but we’ll come back to that.)
+- **`config/`** contains `.php` and `.yaml` configuration files, and `license.key` after installation.
+- **`modules/`** is for custom PHP you might want to add for your site. (We’ll be ignoring that.)
+- **`storage/`** is where Craft keeps its temporary files.
+- **`templates/`** is where we’ll write template code to dynamically display content. (Unless you’d like to use Craft headlessly, but we’ll come back to that.)
 - **`vendor/`** is where Composer stores all the project packages we covered earlier.
-- **`web/`** is called the document root, and it’s where your web server will need to be configured to send its requests. We’ll also put website pieces like images, CSS, and JavaScript in this folder.
+- **`web/`** is the document root covered [earlier](../environment/stack.md), where your web server needs to send its requests. We’ll also put website pieces like images, CSS, and JavaScript in this folder.
 - **`.env`** is a special file with constants we’ll fill in so Craft knows how to connect to its database.
 - **`.env.example`** is an example of `.env`’s format for others to use setting up _their_ environments.
 - **`.gitignore`** is another special file for telling Git, if it’s used, not to care about certain files.
-- **`composer.json`** is the file Composer uses to know what packages it should install.
-- **`composer.lock`** is Composer’s own detailed record of what it has actually installed.
+- **`composer.json`** is the file Composer uses to know what packages it *should* install.
+- **`composer.lock`** is Composer’s own detailed record of what’s *actually* installed.
 - **`craft`** is Craft’s command line executable.
 
 It’s okay if you’ve never used Git or if any of these pieces isn’t clear; we’ll be using them shortly!

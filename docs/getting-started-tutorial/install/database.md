@@ -43,7 +43,7 @@ php craft setup/db
 This will prompt you for the settings to fill in. For each step, type your response and press return. Once you’ve finished adding settings, Craft will immediately test them. If it’s successful, it will update the `.env` file for you.
 
 ::: tip
-If you’re using Nitro, run `nitro info` in your terminal and grab the IP address in “Server Information”. Enter that for the database server during setup or by editing the `DB_SERVER` environment variable.
+If you’re using Nitro, run `nitro context` in your terminal and grab the hostname from the “Databases” section. You’ll need that for your `DB_SERVER` environment variable.
 :::
 
 Your settings may look different, but a successful setup will look like this:
@@ -73,7 +73,7 @@ SECURITY_KEY="••••••••••••••••••••••
 DB_DRIVER="mysql"
 
 # The database server name or IP address
-DB_SERVER="127.0.0.1"
+DB_SERVER="mysql-8.0-3306.database.nitro"
 
 # The port to connect to the database with
 DB_PORT="3306"

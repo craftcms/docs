@@ -2,13 +2,13 @@
 
 The word “stack” refers to the web software that’s needed to work with Craft CMS, which is detailed in [Craft’s minimum requirements](/3.x/requirements.md).
 
-Like your workstation, a web server can run different operating systems and apps. Web servers, however, use an OS and software specifically for running websites where common bundles of web software are referred to as “stacks”. (You’ve probably heard of a “full stack developer”, which means someone has experience with each of the software components in a particular stack.)
+Like your workstation, a web server can run different operating systems and apps. Web servers, however, use an OS and software specifically for running websites. Common bundles of web software are referred to as “stacks.” (You’ve probably heard of a “full stack developer”, which means someone having experience with each of the software components of a particular stack.)
 
-Craft can run on a number of different stacks, but the main ingredients are...
+Craft can run on a few different stacks, but the main ingredients are...
 
-- **PHP**: the programming language in which Craft is written.
-- **A database**: the place where content and most information is stored, sort of like a collection of Excel files used by code that can work with lots of data quickly. Commonly MySQL or PostgreSQL.
-- **A web server**: the software that listens for requests made by your web browser, hands them off to a web application (like Craft), and gives a response back to the browser. Commonly Apache or nginx.
+- **PHP** – programming language in which Craft is written.
+- **A database** – place where content is stored, sort of like a collection of Excel files used by code that can work with lots of data quickly. Commonly MySQL or PostgreSQL.
+- **A web server** – software that listens for requests made by your web browser, hands them off to a web application (like Craft), and gives a response back to the browser. Commonly Apache or nginx.
 
 The best way to get working quickly is to use a pre-packaged web stack that runs on your operating system. We’ll walk through setup using [Craft Nitro](/nitro/2.x/), a tool for managing your local development environment on macOS, Windows, and Linux.
 
@@ -27,11 +27,11 @@ Nitro uses [Docker](https://www.docker.com/) to efficiently set up and manage we
 
 ## Step 1: Install Docker Desktop
 
-Visit <https://www.docker.com/products/docker-desktop>, choose the installer for your operating system, and run it. Make sure you run Docker Desktop after you’ve installed it.
+Visit <https://www.docker.com/products/docker-desktop>, choose the installer for your operating system, and run it. Make sure you start Docker Desktop after you’ve installed it.
 
 ## Step 2: Install and Initialize Nitro
 
-Run the following terminal command:
+There are a few ways to [install Nitro](/nitro/2.x/installation.md), but one of the quickest is to run this terminal command:
 
 ```sh
 bash <(curl -sLS http://installer.getnitro.sh)
@@ -45,27 +45,27 @@ Once complete, you’ll have a configuration file stored at `~/.nitro/nitro.yaml
 
 ## Step 3: Add a Site
 
-When we install Craft CMS, or any PHP application, the project files will rely on a _web root_ for files that need to be publicly available on the internet. This is often named `public/`, `public_html/`, or in Craft’s case `web/`.
+When we install Craft CMS (or any PHP web app) the project will rely on a _web root_ for files that need to be publicly available on the internet. This is a directory often named `public/`, `public_html/`, or in Craft’s case `web/`.
 
-In this step, we’ll create a site with a special local domain name—`tutorial.test`—and map it to our project’s web root.
+In this step, we’ll create a site with a special local domain name—`tutorial.nitro`—and map it to our project’s web root.
 
 If you’ve not installed Craft CMS yet, that’s okay. You can either point to the directory to be created, or come back to this step after installation.
 
-At this point, it’ll be a good idea to create a folder on your disk you’ll use for setting up projects if you don’t already have one. We’ll assume here that you use `~/projects/`, which is the same as `/Users/oli/projects` on a Mac. Each project should live in a subfolder. In this case we’ll install Craft CMS in a project folder called `tutorial`. The full path on macOS will look like `/Users/oli/projects/tutorial`, and on Windows it would look like `C:\Users\oli\projects\tutorial`.
+At this point, it’ll be a good idea to create a folder on your disk you’ll use for setting up projects if you don’t already have one. We’ll assume here that you use `~/dev/`, which is the same as `/Users/oli/dev` on a Mac. Each project should live in a subfolder. In this case we’ll install Craft CMS in a project folder called `tutorial`. The full path on macOS will look like `/Users/oli/dev/tutorial`, and on Windows it would look like `C:\Users\oli\dev\tutorial`.
 
 ::: warning
-The home folder path alias `~/` can only be used on macOS and Linux. With Windows, you must supply the full path instead, like `C:\Users\oli\projects\tutorial`.
+The home folder path alias `~/` can only be used on macOS and Linux. With Windows, you must supply the full path instead, like `C:\Users\oli\dev\tutorial`.
 :::
 
 1. Once you’ve created a project folder, navigate to it in your terminal:
 
 ```sh
-cd ~/projects/tutorial
+cd ~/dev/tutorial
 ```
 
 2. Run `nitro add` and follow the prompts.
 
-- hostname: `tutorial.test`
+- hostname: `tutorial.nitro`
 - webroot: `web`
 - PHP version: `8.0`
 - database: `y`
@@ -77,8 +77,8 @@ The whole process will look something like this when you’re finished:
 ```
 $ nitro add
 Adding site…
-Enter the hostname [tutorial.nitro]: tutorial.test
-  ✓ setting hostname to tutorial.test
+Enter the hostname [tutorial.nitro]: tutorial.nitro
+  ✓ setting hostname to tutorial.nitro
   ✓ adding site ~/projects/tutorial
 Enter the webroot for the site [web]:
   ✓ using webroot web
@@ -109,7 +109,7 @@ Checking services…
   … checking mailhog service ✓
   … checking redis service ✓
 Checking sites…
-  … checking tutorial.test ✓
+  … checking tutorial.nitro ✓
 Checking proxy…
   … updating proxy ✓
 Updating hosts file (you might be prompted for your password)
@@ -120,23 +120,23 @@ Adding sites to hosts file…
 $
 ```
 
-You should now be able to visit `http://tutorial.test` in your browser and get a 404 error message. That’s exactly what we want, because next we’ll add the files that actually make the site go!
+You should now be able to visit `https://tutorial.nitro` in your browser and get a 404 error message. That’s exactly what we want, because next we’ll add the files that actually make the site go!
 
-<BrowserShot url="http://tutorial.test" :link="false">
-<img src="../images/tutorial-nitro-404.png" alt="Screenshot of 404 error from the web server" />
+<BrowserShot url="https://tutorial.nitro" :link="false">
+<img src="../images/nitro-404.png" alt="Screenshot of 404 error from the web server" />
 </BrowserShot>
 
 ## Other local environments
 
 You can also choose one of the following guides to set up a development environment on your OS.
 
-### MacOS, Windows, and Linux
+### macOS, Windows, and Linux
 
 - [Homestead](https://craftcms.com/knowledge-base/craft-laravel-homestead)
 - [DDEV](https://ddev.readthedocs.io/en/stable/)
 - [Lando](https://lando.dev/)
 
-### MacOS
+### macOS
 
 - [Laravel Valet](https://laravel.com/docs/7.x/valet)
 - [VirtualHostX](https://clickontyler.com/virtualhostx/)

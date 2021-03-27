@@ -20,7 +20,7 @@ First upgrade your Craft Solo edition to Craft Pro:
 2. In the “Pro” panel, choose “Try for free”.
 
 <BrowserShot url="http://tutorial.test/admin/plugin-store/upgrade-craft" :link="false" caption="Upgrading from Solo to Pro.">
-<img src="../images/tutorial-upgrade-pro.png" alt="Screenshot of plugin store upgrading to Craft Pro trial" />
+<img src="../images/upgrade-pro.png" alt="Screenshot of plugin store upgrading to Craft Pro trial" />
 </BrowserShot>
 
 Your edition will be upgraded and you’ll see a new GraphQL item in the navigation menu. Choose that.
@@ -28,7 +28,7 @@ Your edition will be upgraded and you’ll see a new GraphQL item in the navigat
 This is the GraphiQL explorer for browsing API documentation and running queries directly in the browser:
 
 <BrowserShot url="http://tutorial.test/admin/graphql" :link="false" caption="The GraphiQL explorer.">
-<img src="../images/tutorial-graphql.png" alt="Screenshot of GraphiQL" />
+<img src="../images/graphql.png" alt="Screenshot of GraphiQL" />
 </BrowserShot>
 
 ::: tip
@@ -46,7 +46,7 @@ Try running a test GraphQL query:
 You’ll see `pong` in the response signaling that everything’s ready to go:
 
 <BrowserShot url="http://tutorial.test/admin/graphql?query=%7B%20ping%20%7D%0A" :link="false" caption="It’s working!">
-<img src="../images/tutorial-graphql-ping.png" alt="Screenshot of GraphiQL with simple query and response" />
+<img src="../images/graphql-ping.png" alt="Screenshot of GraphiQL with simple query and response" />
 </BrowserShot>
 
 By default, the Craft CMS GraphiQL interface will use the full schema, or available set of information, without any restrictions. In other words, it has access to all content through the GraphQL API.

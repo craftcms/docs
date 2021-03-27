@@ -10,7 +10,7 @@ We’ll be installing Craft with an application called [Composer](https://getcom
 
 ### Find your OS terminal
 
-![](../images/tutorial-os-terminal.png)
+![](../images/os-terminal.png)
 
 - On macOS, the default console is [Terminal.app](https://support.apple.com/guide/terminal/welcome/mac).
 - On Windows, the default console is called [Command Prompt](https://www.lifewire.com/command-prompt-2625840).

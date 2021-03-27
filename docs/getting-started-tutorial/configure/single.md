@@ -31,7 +31,7 @@ Now we can create the about page single:
 5. Save this section.
 
 <BrowserShot url="http://tutorial.test/admin/settings/sections/new" :link="false" caption="Settings for the new about single.">
-<img src="../images/tutorial-about-single.png" alt="Screenshot of new single fields" />
+<img src="../images/about-single.png" alt="Screenshot of new single fields" />
 </BrowserShot>
 
 Follow the same process as the blog section to add fields to the about single:
@@ -41,7 +41,7 @@ Follow the same process as the blog section to add fields to the about single:
 3. Save the entry type.
 
 <BrowserShot url="http://tutorial.test/admin/settings/sections/2/entrytypes/2" :link="false" caption="The new about single’s field layout configuration.">
-<img src="../images/tutorial-about-field-layout.png" alt="Screenshot of about field type configuration" />
+<img src="../images/about-field-layout.png" alt="Screenshot of about field type configuration" />
 </BrowserShot>
 
 ::: tip

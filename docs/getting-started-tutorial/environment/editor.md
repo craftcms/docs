@@ -13,10 +13,10 @@ While you could get away with using TextEdit.app, Notepad, or Text Editor, it’
 
 An excellent, popular code editor is [Visual Studio Code](https://code.visualstudio.com/), which is available for free on MacOS, Windows, and Linux.
 
-![](../images/tutorial-vs-code-highlighting.png)
+![](../images/vs-code-highlighting.png)
 
 Some PHP developers prefer [PhpStorm](https://www.jetbrains.com/phpstorm/), a more complex and specialized commercial Integrated Development Environment (IDE) specifically geared toward PHP development.
 
-![](../images/tutorial-phpstorm-highlighting.png)
+![](../images/phpstorm-highlighting.png)
 
 There are plenty of other options you could use, just know the rest of our steps and screenshots in this tutorial will assume you’re using VS Code.
