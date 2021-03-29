@@ -875,6 +875,44 @@ nginx: [alert] could not open error log file: open() "/var/lib/nginx/logs/error.
 2021-01-07 22:46:28,687 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
 ```
 
+## `ls`
+
+Display your running containers.
+
+```
+nitro ls [<options>]
+```
+
+#### Options
+
+`--custom`
+: Show custom containers.
+
+`--databases`
+: Show databases.
+
+`--proxy`
+: Show proxy container.
+
+`--services`
+: Show services.
+
+`--sites`
+: Show sites.
+
+#### Example
+
+```
+$ nitro ls
+Hostname                                  Type              Status
+mailhog.service.nitro                     site              running
+mysql-8.0-3308.database.nitro             database          running
+nitro-proxy                               proxy             running
+postgres-13-5432.database.nitro           database          running
+redis.service.nitro                       site              running
+tutorial.nitro                            site              running
+```
+
 ## `npm`
 
 Run npm commands using the current directory in a container.
