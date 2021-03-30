@@ -5,7 +5,7 @@
 Adds a new site.
 
 ```
-nitro add
+nitro add <?path>
 ```
 
 **Parameters**
