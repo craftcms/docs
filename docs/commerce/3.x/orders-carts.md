@@ -298,6 +298,8 @@ A quick way for a store manager to grab the URL is by navigating in the control 
 
 ![Copy load cart URL context menu option](./assets/copy-load-cart-url.png)
 
+You can also do this directly from an order edit page by choosing the gear icon and then **Copy load cart URL**.
+
 To do this programmatically, you’ll need to create an absolute URL for the endpoint and include a reference to the desired cart number.
 
 This example sets `loadCartUrl` to an absolute URL the customer can access to load their cart. Again we’re assuming a `cart` object already exists for the cart that should be loaded:
