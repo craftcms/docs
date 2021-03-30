@@ -278,7 +278,9 @@ The `note` parameter is not part of a line item’s uniqueness; it will always b
 
 ### Loading a Cart
 
-An existing cart can be loaded by its cart number into the current customer’s session. This can be accomplished in two ways using the `commerce/cart/load-cart` endpoint: via [form submission](#loading-a-cart-with-a-form) or [navigating to a URL](#loading-a-cart-with-a-url).
+Commerce provides a `commerce/cart/load-cart` endpoint for loading an existing cart into the current customer’s session.
+
+You can have the user interact with the endpoint by either [navigating to a URL](#loading-a-cart-with-a-url) or by [submitting a form](#loading-a-cart-with-a-form). Either way, the cart number is required.
 
 Each method will store any errors in the session’s error flash data (`craft.app.session.getFlash('error')`), and the cart being loaded can be active or inactive.
 
@@ -288,31 +290,19 @@ If the desired cart belongs to a user, that user must be logged in to load it in
 
 The [`loadCartRedirectUrl`](config-settings.md#loadCartRedirectUrl) setting determines where the customer will be sent by default after the cart’s loaded.
 
-#### Loading a Cart with a Form
-
-Send a get or post action request with a `number` parameter referencing the cart you’d like to load. When posting the form data, you can include a specific redirect location like you can with any other Craft post data.
-
-This is a simplified version of [`shop/cart/load.twig`](https://github.com/craftcms/commerce/tree/master/example-templates/shop/cart/load.twig) in the example templates, where a `cart` variable has already been set to the cart that should be loaded:
-
-```twig
-<form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/cart/load-cart') }}
-    {{ redirectInput('/shop/cart') }}
-
-    <input type="text" name="number" value="{{ cart.number }}">
-    <button type="submit">Submit</button>
-</form>
-```
-
 #### Loading a Cart with a URL
 
-You can also load a cart simply navigating to the `commerce/cart/load-cart` endpoint, as long as the `number` parameter is included in the URL.
+Have the customer navigate to the `commerce/cart/load-cart` endpoint, including the `number` parameter in the URL.
+
+A quick way for a store manager to grab the URL is by navigating in the control panel to **Commerce** → **Orders**, selecting one item from **Active Carts** or **Inactive Carts**, and choosing **Copy load cart URL** from the context menu:
+
+![Copy load cart URL context menu option](./assets/copy-load-cart-url.png)
+
+To do this programmatically, you’ll need to create an absolute URL for the endpoint and include a reference to the desired cart number.
 
 This example sets `loadCartUrl` to an absolute URL the customer can access to load their cart. Again we’re assuming a `cart` object already exists for the cart that should be loaded:
 
 ::: code
-
 ```twig
 {% set loadCartUrl = actionUrl(
     'commerce/cart/load-cart',
@@ -326,12 +316,28 @@ $loadCartUrl = craft\helpers\UrlHelper::actionUrl(
     ['number' => $cart->number]
 );
 ```
-
 :::
 
 ::: tip
 This URL can be presented to the user however you’d like. It’s particularly useful in an email that allows the customer to retrieve an abandoned cart.
 :::
+
+#### Loading a Cart with a Form
+
+Send a GET or POST action request with a `number` parameter referencing the cart you’d like to load. When posting the form data, you can include a specific redirect location like you can with any other Craft post data.
+
+This is a simplified version of [`shop/cart/load.twig`](https://github.com/craftcms/commerce/tree/master/example-templates/shop/cart/load.twig) in the example templates, where a `cart` variable has already been set to the cart that should be loaded:
+
+```twig
+<form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/load-cart') }}
+    {{ redirectInput('/shop/cart') }}
+
+    <input type="text" name="number" value="{{ cart.number }}">
+    <button type="submit">Submit</button>
+</form>
+```
 
 #### Restoring Previous Cart Contents
 
