@@ -6,7 +6,7 @@ home: true
 
 # Documentation
 
-This landing page splits off into documentation for [Craft CMS](/3.x/), [Craft Commerce](/commerce/3.x/), [Craft Nitro](/nitro/), and the [Intro to Craft CMS tutorial](/getting-started-tutorial/). Each section introduces core concepts and serves as a general reference.
+This landing page splits off into documentation for [Craft CMS](/3.x/), [Craft Commerce](/commerce/3.x/), [Craft Nitro](/nitro/2.x/), and the [Intro to Craft CMS tutorial](/getting-started-tutorial/). Each section introduces core concepts and serves as a general reference.
 
 Topical guides and support articles are available in the [Knowledge Base](https://craftcms.com/knowledge-base).
 
