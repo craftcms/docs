@@ -533,7 +533,7 @@ Defined by
 URL for a user to resolve billing issues with their subscription.
 
 ::: tip
-The example templates include [a template for this page](https://github.com/craftcms/commerce/tree/master/example-templates/shop/plans/update-billing-details.twig).
+The example templates include [a template for this page](https://github.com/craftcms/commerce/tree/main/example-templates/build/shop/plans/update-billing-details.twig).
 :::
 
 

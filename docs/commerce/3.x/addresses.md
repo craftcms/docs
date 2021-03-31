@@ -71,7 +71,7 @@ The address model has a read-only `addressLines` parameter that returns a key-va
 
 This parameter is designed to allow consistency when displaying a customer’s address on the front end and in the control panel.
 
-Address lines are used, for example, on the [order edit](orders.md#editing-orders) page in the control panel. There are examples for [displaying an address](https://github.com/craftcms/commerce/blob/develop/example-templates/shop/_includes/addresses/address.twig) in the [example templates](example-templates.md).
+Address lines are used, for example, on the [order edit](orders.md#editing-orders) page in the control panel. There are examples for [displaying an address](https://github.com/craftcms/commerce/blob/main/example-templates/build/shop/_private/address/address.twig) in the [example templates](example-templates.md).
 
 You can customize this array using the [defineAddressLines](extend/events.md#defineaddresslines) event.
 
@@ -482,4 +482,4 @@ In any of the above examples that post to the `commerce/customer-addresses/save`
 {% endif %}
 ```
 
-For a complete template example that outputs individual field validation errors, see [shop/_includes/addresses/form.twig](https://github.com/craftcms/commerce/tree/master/example-templates/shop/_includes/addresses/form.twig) in the [example templates](example-templates.md).
+For a complete template example that outputs individual field validation errors, see [shop/_includes/addresses/form.twig](https://github.com/craftcms/commerce/tree/main/example-templates/build/shop/_private/address/form.twig) in the [example templates](example-templates.md).

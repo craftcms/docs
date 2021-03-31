@@ -109,7 +109,7 @@ The example below assumes the availability of a `paymentForm` variable, as discu
 
 It is possible to make a payment on cart or completed order that has an outstanding balance.
 
-The [shop/checkout/pay-static.twig](https://github.com/craftcms/commerce/tree/master/example-templates/shop/checkout/pay-static.twig) template file in the [example templates](example-templates.md) gives a full example on how this is achievable in the front end.
+The [shop/checkout/pay-static.twig](https://github.com/craftcms/commerce/tree/main/example-templates/build/shop/checkout/pay-static.twig) template file in the [example templates](example-templates.md) gives a full example on how this is achievable in the front end.
 
 Below is a simplified example of the fields required to make a payment using Twig. The following code makes the assumption that the gateway has already been set.
 
