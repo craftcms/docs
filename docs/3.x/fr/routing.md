@@ -163,7 +163,7 @@ public function actionFoo(int $year = null)
 
 ## Error Templates
 
-You can provide your own error templates for Craft to use returning errors.
+You can provide your own error templates for Craft to use when returning errors.
 
 When Craft encounters an error for a front end request, it will take your <config3:errorTemplatePrefix> into account and check the root of your `templates/` directory, in order, for the following:
 
