@@ -2,6 +2,14 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-04-01
+## Added
+- Documented error templates. (Not a prank.)
+
+## 2021-03-25
+## Added
+- Added Nitro design goals and architectural overview.
+
 ## 2021-03-23
 ### Added
 - Documented the new `{% script %}` Twig tag.

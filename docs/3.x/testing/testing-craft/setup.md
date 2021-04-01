@@ -70,7 +70,7 @@ modules:
 ```
 
 ::: tip
-These variables are explained [here](../framework/config-options.md)
+These variables are explained [here](../framework/config-options.md).
 :::
 
 ### .env
