@@ -5,14 +5,15 @@
 Adds a new site.
 
 ```
-nitro add [<options>]
+nitro add <?path>
 ```
 
-#### Options
+**Parameters**
 
-You can pass an optional path as the only argument for creating a site outside of the current directory.
+`path`
+: Optional target path for a site outside the current directory.
 
-#### Example
+**Example**
 
 Specifying a full path:
 
@@ -72,7 +73,7 @@ Add an alias domain to a site.
 nitro alias
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro alias
@@ -94,16 +95,15 @@ Apply changes now [Y/n] y
 Ensures all resources exist and applies any config changes to them.
 
 ```
-nitro apply [<options>]
+nitro apply
 ```
 
-#### Options
-
+**Options**
 
 `--skip-hosts`
 : Skips updating the `hosts` file. Yyou can also set the environment variable "NITRO_EDIT_HOSTS" to "false" for this to apply globally.
 
-#### Example
+**Example**
 
 ```
 $ nitro apply
@@ -130,9 +130,17 @@ Nitro is up and running 😃
 
 Enables and disables Blackfire for a site. Prompts for server ID and server token if they’ve not yet been saved as global settings in Nitro’s config.
 
+### `blackfire on`
+
+Enables Blackfire for a site.
+
 ```
 nitro blackfire on
 ```
+
+### `blackfire off`
+
+Disables Blackfire for a site.
 
 ```
 nitro blackfire off
@@ -162,10 +170,10 @@ bridge server listening on http://192.168.0.103:8000
 Removes any unused containers.
 
 ```
-nitro clean [<options>]
+nitro clean
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro clean
@@ -176,13 +184,18 @@ Nothing to remove 😅
 
 ## `completion`
 
-Enables shell completion.
+Enables shell completion. You must pass either `bash` or `zsh` as an argument. (See examples.)
 
 ```
-nitro completion [<options>]
+nitro completion <shell>
 ```
 
-#### Zsh Example
+**Parameters**
+
+`shell`
+: Required: `bash` for Bash shell or `zsh` for Zsh shell.
+
+**Zsh Example**
 
 Enable Nitro shell completion for your current session:
 
@@ -209,7 +222,7 @@ $ nitro completion zsh > "${fpath[1]}/_nitro"
 
 Start a new shell or `source ~/.zshrc` for this setup to take effect.
 
-#### Bash Example
+**Bash Example**
 
 Enable Nitro shell completion for your current session:
 
@@ -235,11 +248,15 @@ Start a new shell for this setup to take effect.
 Runs Composer commands.
 
 ```
-nitro composer [<options>]
+nitro composer <command>
 ```
 
+**Parameters**
 
-#### Example
+`command`
+: Composer command to execute.
+
+**Example**
 
 ```
 $ nitro composer update
@@ -261,15 +278,15 @@ composer update completed 🤘
 Shows configuration information.
 
 ```
-nitro context [<options>]
+nitro context
 ```
 
-#### Options
+**Options**
 
 `--yaml`
-: Shows the config file as YAML
+: Shows the config file as YAML.
 
-#### Example
+**Example**
 
 ```
 $ nitro context
@@ -302,7 +319,7 @@ Create a new custom container.
 nitro container new
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro container new
@@ -343,7 +360,7 @@ SSH into a custom container.
 nitro container ssh
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro container ssh
@@ -356,13 +373,18 @@ root@5e98a85aef29:/#
 
 ## `craft`
 
-Runs Craft console commands.
+Runs a Craft console command.
 
 ```
-nitro craft [<options>]
+nitro craft <command>
 ```
 
-#### Example
+**Parameters**
+
+`command`
+: Craft command to execute.
+
+**Example**
 
 ```
 $ nitro craft migrate/all
@@ -376,8 +398,16 @@ Migrated up successfully.
 Initializes and adds a new site. Pass the name of the directory that should be created with a fresh install of the [Craft Composer project](https://github.com/craftcms/craft), or a reference to your own repository followed by the directory name.
 
 ```
-nitro create [<options>]
+nitro create <?project> <path>
 ```
+
+**Parameters**
+
+`project`
+: Optional GitHub shorthand or repository URL for a Composer starter project. Defaults to [craftcms/craft](https://github.com/craftcms/craft).
+
+`path`
+: Required directory to be created.
 
 ::: tip
 You can create your own Composer package to jumpstart any PHP project!\
@@ -397,8 +427,7 @@ Nitro uses Composer’s [create-project](https://getcomposer.org/doc/03-cli.md#c
 Read the [create-project](https://getcomposer.org/doc/03-cli.md#create-project) documentation for more.
 :::
 
-#### Example
-
+**Example**
 
 ```bash
 # new default Craft site in `my-project/` directory
@@ -416,10 +445,10 @@ $ nitro create craftcms/demo my-project
 Adds a new database in the selected database engine.
 
 ```
-nitro db add [<options>]
+nitro db add
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro db add
@@ -437,10 +466,10 @@ Database added 💪
 Backs up a database from the selected database engine.
 
 ```
-nitro db backup [<options>]
+nitro db backup
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro db backup
@@ -464,14 +493,20 @@ Backup saved in /Users/me/.nitro/backups/mysql-8.0-3306.nitro 💾
 Imports a database dump into the selected database engine and name. The SQL file to be imported may be plain text, or compressed with zip/gzip.
 
 ```
-nitro db import <file> [<options>]
+nitro db import <file>
 ```
+
+**Parameters**
+
+`file`
+: Dump file to be imported. Can be a filename only, or a relative or absolute file path.
+
 
 ::: tip
 For uncompressed files, the command will detect and automatically select the database engine.
 :::
 
-#### Example
+**Example**
 
 ```
 $ nitro db import my-website_200814_141806_rltgcxpmz0_v3.4.20.sql
@@ -487,10 +522,10 @@ Import successful 💪
 Removes a database in the selected database engine.
 
 ```
-nitro db remove [<options>]
+nitro db remove
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro db remove
@@ -511,10 +546,10 @@ Database removed 💪
 Allows you to SSH into a database container.
 
 ```
-nitro db ssh [<options>]
+nitro db ssh
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro db ssh
@@ -530,15 +565,15 @@ root@5e98a85aef29:/#
 Destroys all resources (networks, containers, and volumes).
 
 ```
-nitro destroy [<options>]
+nitro destroy
 ```
 
-#### Options
+**Options**
 
 `--clean`
 : Remove the configuration file after destroying the resources. Defaults to `false`.
 
-#### Example
+**Example**
 
 ```
 $ nitro destroy
@@ -567,10 +602,15 @@ Nitro destroyed ✨
 Disables a Nitro service.
 
 ```
-nitro disable [<options>]
+nitro disable <service>
 ```
 
-#### Example
+**Parameters**
+
+`service`
+: Name of the service to be disabled.
+
+**Example**
 
 ```
 # disable mailhog
@@ -588,10 +628,10 @@ $ nitro disable dynamodb
 Opens your Nitro configuration file in your default editor for quickly making changes.
 
 ```
-nitro edit [<options>]
+nitro edit
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro edit
@@ -618,10 +658,15 @@ open ~/.nitro/nitro.yaml
 Enables a Nitro service.
 
 ```
-nitro enable [<options>]
+nitro enable <service>
 ```
 
-#### Example
+**Parameters**
+
+`service`
+: Name of the service to be enabled.
+
+**Example**
 
 ```
 # enable mailhog
@@ -642,7 +687,7 @@ Add additional PHP extensions for a site.
 nitro extensions
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro extensions
@@ -693,10 +738,10 @@ Apply changes now [Y/n] n
 Display information about available console commands.
 
 ```
-nitro help [<options>]
+nitro help
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro help add
@@ -722,12 +767,12 @@ Flags:
 Modifies your hosts file.
 
 ```
-nitro hosts [<options>]
+nitro hosts
 ```
 
-#### Options
+**Options**
 
-`--hostnames strings`
+`--hostnames [strings]`
 : A comma-seperated list of hostnames to add.
 
 `--preview`
@@ -736,7 +781,7 @@ nitro hosts [<options>]
 `--remove`
 : A comma-seperated list of hostnames to remove.
 
-#### Example
+**Example**
 
 ```
 $ sudo nitro hosts --hostnames test1.nitro,test2.nitro
@@ -753,7 +798,7 @@ Change PHP settings for a site.
 nitro iniset
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro iniset
@@ -803,12 +848,12 @@ Checking proxy…
 Initializes the Nitro environment.
 
 ```
-nitro init [<options>]
+nitro init
 ```
 
 If the environment already exists, it will be reconfigured.
 
-#### Example
+**Example**
 
 ```
 $ nitro init
@@ -843,10 +888,10 @@ Nitro is ready! 🚀
 Displays all of your container logs.
 
 ```
-nitro logs [<options>]
+nitro logs
 ```
 
-#### Options
+**Options**
 
 `--follow`
 : Follow log output (defaults to true).
@@ -857,7 +902,7 @@ nitro logs [<options>]
 `--timestamps`
 : Displays the timestamps in the logs.
 
-#### Example
+**Example**
 
 ```
 $ nitro logs
@@ -880,10 +925,15 @@ nginx: [alert] could not open error log file: open() "/var/lib/nginx/logs/error.
 Run npm commands using the current directory in a container.
 
 ```
-nitro npm
+nitro npm <command>
 ```
 
-#### Example
+**Parameters**
+
+`command`
+: The npm command to be executed.
+
+**Example**
 
 ```
 $ nitro npm install
@@ -906,10 +956,15 @@ npm install complete 🤘
 Execute a PHP command in a site’s container.
 
 ```
-nitro php -i
+nitro php <command>
 ```
 
-#### Example
+**Parameters**
+
+`command`
+: The PHP command to be executed.
+
+**Example**
 
 ```
 $ nitro php -v
@@ -933,7 +988,12 @@ Check if a port is available on your machine.
 nitro portcheck <port>
 ```
 
-#### Example
+**Parameters**
+
+`port`
+: The port number to check.
+
+**Example**
 
 ```
 $ nitro portcheck 8080
@@ -948,10 +1008,10 @@ Port 3306 is already in use...
 Runs a Craft queue worker.
 
 ```
-nitro queue [<options>]
+nitro queue
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro queue
@@ -970,7 +1030,7 @@ nitro remove
 The `remove` command does not delete databases. If you’d like to remove a site’s database(s), see [`db remove`](#db-remove).
 :::
 
-#### Example
+**Example**
 
 ```
 $ nitro remove
@@ -995,10 +1055,10 @@ Checking proxy…
 Restarts all containers.
 
 ```
-nitro restart [<options>]
+nitro restart
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro restart
@@ -1025,7 +1085,7 @@ You’ll typically want to follow this with the [`nitro update`](#update) in ord
 If you installed Nitro via package manager, you should use that instead. See [Updating](updating.md).
 :::
 
-#### Example
+**Example**
 
 ```
 $ nitro self-update
@@ -1042,7 +1102,7 @@ Allows you to share a local site.
 nitro share
 ```
 
-#### Example
+**Example**
 
 ```bash
 $ nitro share
@@ -1061,15 +1121,15 @@ Enter your selection: 1
 Allows you to SSH into a container.
 
 ```
-nitro ssh [<options>]
+nitro ssh
 ```
 
-#### Options
+**Options**
 
 `--root`
 : SSH into a container as the root user.
 
-#### Example
+**Example**
 
 ```
 $ nitro ssh
@@ -1085,10 +1145,10 @@ using root… system changes are ephemeral…
 Starts all containers.
 
 ```
-nitro start [<options>]
+nitro start
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro start
@@ -1109,7 +1169,7 @@ Stops all containers.
 nitro stop [<options>]
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro stop
@@ -1127,10 +1187,10 @@ Nitro shutdown 😴
 Trust SSL certificates for a site.
 
 ```
-nitro trust [<options>]
+nitro trust
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro trust
@@ -1146,11 +1206,11 @@ Nitro certificates are now trusted 🔒
 Updates Nitro's containers.
 
 ```
-nitro update [<options>]
+nitro update
 ```
 
 
-#### Example
+**Example**
 
 ```
 $ nitro update
@@ -1181,11 +1241,10 @@ Checking proxy…
 Validates Nitro's configuration.
 
 ```
-nitro validate [<options>]
+nitro validate
 ```
 
-
-#### Example
+**Example**
 
 ```
 $ nitro validate
@@ -1199,11 +1258,10 @@ Validating…
 Shows Nitro version information.
 
 ```
-nitro version [<options>]
+nitro version
 ```
 
-
-#### Example
+**Example**
 
 ```
 $ nitro version
@@ -1223,10 +1281,10 @@ You might need to run `nitro update`
 Disables Xdebug for a site.
 
 ```
-nitro xoff [<options>]
+nitro xoff
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro xoff
@@ -1250,10 +1308,10 @@ Checking proxy…
 Enables Xdebug for a site.
 
 ```
-nitro xon [<options>]
+nitro xon
 ```
 
-#### Example
+**Example**
 
 ```
 $ nitro xon
