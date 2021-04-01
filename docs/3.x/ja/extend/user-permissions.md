@@ -1,6 +1,6 @@
 # ユーザー権限
 
-モジュールとプラグインは、[EVENT_REGISTER_PERMISSIONS](craft3:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) イベントを使用して新しいユーザー権限をシステムに登録できます。
+Modules and plugins can register new [user permissions](../user-management.md#permissions) to the system using the [EVENT_REGISTER_PERMISSIONS](craft3:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) event:
 
 ```php
 use craft\events\RegisterUserPermissionsEvent;
