@@ -527,17 +527,26 @@ This will set temporarily the order’s calculation mode to *Recalculate All* an
 
 ### Order Notices
 
-Whenever an order is updated—whether it’s the customer saving a cart or a store manager recalculating from the control panel—notices are added that describe what changed. These could include the following:
+Notices are added to an order whenever it changes, whether it’s the customer saving the cart or a store manager recalculating from the control panel. Each notice is an [OrderNotice](https://github.com/craftcms/commerce/blob/main/src/models/OrderNotice.php) model describing what changed and could include the following:
 
 - A previously-valid coupon or shipping method was removed from the order.
 - A line item’s purchasable was no longer available so that line item was removed from the cart.
 - A line item’s sale price changed for some reason, like the sale no longer applied for example.
 
-In each case, the notice explains why the change was made in human-friendly terms that can be exposed to the customer. 
+The notice includes a human-friendly terms that can be exposed to the customer, and references to the order and attribute it’s describing.
 
 #### Accessing Order Notices
 
-Notices are stored on the order and accessed just like validation errors:
+Notices are stored on the order and accessed with `getNotices()` and `getFirstNotice()` methods.
+
+Each can take optional `type` and `attribute` parameters to limit results to a certain order attribute or kind of notice.
+
+A notice’s `type` will be one of the following:
+
+- `lineItemSalePriceChanged`
+- `lineItemRemoved`
+- `shippingMethodChanged`
+- `invalidCouponRemoved`
 
 ::: code
 ```twig
@@ -546,17 +555,14 @@ Notices are stored on the order and accessed just like validation errors:
 {# returns a multi-dimensional array of notices by attribute key #}
 {% set notices = order.getNotices() %}
 
-{# returns an array of notices for the `couponCode` attribute only #}
-{% set couponCodeNotices = order.getNotices('couponCode') %}
+{# returns an array of notice models for the `couponCode` attribute only #}
+{% set couponCodeNotices = order.getNotices(null, 'couponCode') %}
 
 {# returns the first notice only for the `couponCode` attribute #}
-{% set firstCouponCodeNotice = order.getFirstNotice('couponCode') %}
+{% set firstCouponCodeNotice = order.getFirstNotice(null, 'couponCode') %}
 
-{# returns first notice messages for each attribute in a one-dimensional array #}
-{% set noticesSummary = order.getNoticeSummary() %}
-
-{# pass `true` to get *every* message for each attribute instead of only the first #}
-{% set noticesSummary = order.getNoticeSummary(true) %}
+{# returns an array of notice models for changed line item prices #}
+{% set priceChangeNotices = order.getNotices('lineItemSalePriceChanged') %}
 ```
 ```php
 // @var craft\commerce\elements\Order $order
@@ -564,48 +570,30 @@ Notices are stored on the order and accessed just like validation errors:
 // returns a multi-dimensional array of notices by attribute key
 $notices = $order->getNotices();
 
-// returns an array of notices for the `couponCode` attribute only
-$couponCodeNotices = $order->getNotices('couponCode');
+// returns an array of notice models for the `couponCode` attribute only
+$couponCodeNotices = $order->getNotices(null, 'couponCode');
 
 // returns the first notice only for the `couponCode` attribute
-$firstCouponCodeNotice = $order->getFirstNotice('couponCode');
+$firstCouponCodeNotice = $order->getFirstNotice(null, 'couponCode');
 
-// returns first notice messages for each attribute in a one-dimensional array
-$noticesSummary = $order->getNoticeSummary();
-
-// pass `true` to get *every* message for each attribute instead of only the first
-$noticesSummary = $order->getNoticeSummary(true);
+// returns an array of notice models for changed line item prices
+$priceChangeNotices = $order->getNotices('lineItemSalePriceChanged');
 ```
 :::
+
+Each notice can be output as a string in a template:
+
+```twig
+{% set notice = order.getFirstNotice('salePrice') %}
+<p>{{ notice }}</p>
+{# result: <p>The price of x has changed</p> #}
+```
 
 #### Clearing Order Notices
 
-Notices remain on an order until they’re cleared. You can clear notices by posting to the cart update form action or calling the `clearNotices()` method on the order model.
+Notices remain on an order until they’re cleared. You can clear all notices by posting to the cart update form action, or call the order’s `clearNotices()` method to clear specific notices or all of them at once.
 
-This example clears all the notices on the `couponCode` attribute:
-
-::: code
-```twig{5}
-<form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/cart/update-cart') }}
-    {{ hiddenInput('successMessage', 'Coupon notice dismissed'|hash) }}
-    {{ hiddenInput('clearNotices[]', 'couponCode') }}
-    <button type="submit">Dismiss</button>
-</form>
-```
-```php{7}
-use craft\commerce\Plugin as Commerce;
-
-// Get the current cart
-$cart = Commerce::getInstance()->getCarts()->getCart();
-
-// Clear notices on the `couponCode` attribute
-$cart->clearNotices('couponCode');
-```
-:::
-
-This example posts `clearNotices` as a field with no value to clear all notices on the cart:
+This example clears all the notices on the cart:
 
 ::: code
 ```twig{5}
@@ -623,8 +611,26 @@ use craft\commerce\Plugin as Commerce;
 // Get the current cart
 $cart = Commerce::getInstance()->getCarts()->getCart();
 
-// Clear notices on *all* attributes
+// Clear all notices
 $cart->clearNotices();
+```
+:::
+
+This only clears `couponCode` notices on the cart:
+
+::: code
+```twig
+{# Clear notices on the `couponCode` attribute #}
+{% do cart.clearNotices(null, 'couponCode') %}
+```
+```php{7}
+use craft\commerce\Plugin as Commerce;
+
+// Get the current cart
+$cart = Commerce::getInstance()->getCarts()->getCart();
+
+// Clear notices on the `couponCode` attribute
+$cart->clearNotices(null, 'couponCode');
 ```
 :::
 
