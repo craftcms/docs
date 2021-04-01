@@ -7,7 +7,7 @@ preheading: Tutorial
 This tutorial will guide you through installing Craft CMS and creating a demo blog. While it assumes you’re technically-inclined, you don’t need web development experience to follow along. You can also skip any parts you’re already familiar with.
 
 ::: tip
-If at any point you get stuck, consider [joining us on Discord](https://craftcms.com/discord) where friendly people can help out.
+If you get stuck, [join us on Discord](https://craftcms.com/discord) where friendly people might be able help out.
 :::
 
 ## Why Craft CMS?
