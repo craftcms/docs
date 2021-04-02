@@ -538,25 +538,43 @@ Imports a database dump into the selected database engine and name. The SQL file
 nitro db import <file>
 ```
 
+::: tip
+For uncompressed files, the command will detect and automatically select the database engine.
+:::
+
 **Parameters**
 
 `file`
 : Dump file to be imported. Can be a filename only, or a relative or absolute file path.
 
+**Options**
 
-::: tip
-For uncompressed files, the command will detect and automatically select the database engine.
-:::
+`--name`
+: Name of the database to receive the import. (Skips prompt.)
 
 **Example**
 
+Import an SQL dump:
+
 ```
-$ nitro db import my-website_200814_141806_rltgcxpmz0_v3.4.20.sql
+$ nitro db import dump.sql
+  … detecting backup type ✓
+Detected postgres backup
+Enter the database name: tutorial
+Preparing import…
+  … uploading backup dump.sql ✓
+Imported database "tutorial", took 4.23 seconds 💪...
+```
+
+Import an SQL dump specifying a `--name` option to skip the interactive prompt:
+
+```
+$ nitro db import dump.sql --name tutorial
   … detecting backup type ✓
 Detected postgres backup
 Preparing import…
-  … uploading backup my-website_200814_141806_rltgcxpmz0_v3.4.20.sql ✓
-Import successful 💪
+  … uploading backup dump.sql ✓
+Imported database "tutorial", took 4.23 seconds 💪...
 ```
 
 ## `db remove`
