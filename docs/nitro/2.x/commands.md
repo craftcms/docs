@@ -863,8 +863,9 @@ Which PHP setting would you like to change for craft-support.nitro?
   6. memory_limit
   7. opcache_enable
   8. opcache_revalidate_freq
-  9. post_max_size
-  10. upload_max_file_size
+  9. opcache_validate_timestamps
+  10. post_max_size
+  11. upload_max_file_size
 Enter your selection: 3
 What should the max input vars be [5000]? 6000
 Apply changes now [Y/n] y
