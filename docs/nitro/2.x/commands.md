@@ -393,6 +393,26 @@ Enter your selection: 2
 root@5e98a85aef29:/#
 ```
 
+## `container remove`
+
+Removes a custom container, prompting you to select the container if you’ve added more than one using the [`container new`](#container-new) command.
+
+```
+nitro container remove
+```
+
+**Example**
+
+```
+$ nitro container remove
+Select the custom container to remove:
+  1. bitnami
+  2. tutum
+Enter your selection: 2
+Apply changes now [Y/n]? Y
+# ...
+```
+
 ## `craft`
 
 Runs a Craft console command.
