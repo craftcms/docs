@@ -1390,8 +1390,13 @@ You might need to run `nitro update`
 Disables Xdebug for a site.
 
 ```
-nitro xoff
+nitro xoff <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 **Example**
 
@@ -1417,8 +1422,13 @@ Checking proxy…
 Enables Xdebug for a site.
 
 ```
-nitro xon
+nitro xon <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 **Example**
 
