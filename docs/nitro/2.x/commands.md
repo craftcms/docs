@@ -135,20 +135,42 @@ Enables and disables Blackfire for a site. Prompts for server ID and server toke
 Enables Blackfire for a site.
 
 ```
-nitro blackfire on
+nitro blackfire on <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
+
 
 ### `blackfire off`
 
 Disables Blackfire for a site.
 
 ```
-nitro blackfire off
+nitro blackfire off <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 ## `bridge`
 
 Temporarily shares a Nitro site on a local network. Prompts you to select an existing IP address and site for sharing. See [Sharing Sites Locally](local-sharing.md).
+
+```
+nitro bridge <?site>
+```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
+
+**Example**
 
 ```
 $ nitro bridge
@@ -795,14 +817,19 @@ Adding sites to hosts file…
 Change PHP settings for a site.
 
 ```
-nitro iniset
+nitro iniset <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 **Example**
 
 ```
 $ nitro iniset
-Select a site: 
+Select a site:
   1. craft-support.nitro
   2. another-site.nitro
   3. plugins-dev.nitro
@@ -1093,8 +1120,13 @@ Checking proxy…
 Restarts all containers.
 
 ```
-nitro restart
+nitro restart <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory. (Will only restart that site container.)
 
 **Example**
 
@@ -1137,8 +1169,13 @@ Updating to Nitro 2.0.6!
 Allows you to share a local site.
 
 ```
-nitro share
+nitro share <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 **Example**
 
@@ -1159,8 +1196,13 @@ Enter your selection: 1
 Allows you to SSH into a container.
 
 ```
-nitro ssh
+nitro ssh <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 **Options**
 
@@ -1183,8 +1225,13 @@ using root… system changes are ephemeral…
 Starts all containers.
 
 ```
-nitro start
+nitro start <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory. (Will only start the specified site container rather than all of them.)
 
 **Example**
 
@@ -1204,8 +1251,13 @@ Nitro started 👍
 Stops all containers.
 
 ```
-nitro stop [<options>]
+nitro stop <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory. (Will only stop the specified site container rather than all of them.)
 
 **Example**
 
@@ -1246,7 +1298,6 @@ Updates Nitro's containers.
 ```
 nitro update
 ```
-
 
 **Example**
 
@@ -1303,10 +1354,10 @@ nitro version
 
 ```
 $ nitro version
-View the changelog at https://github.com/craftcms/nitro/blob/2.0.0-alpha/CHANGELOG.md
+View the changelog at https://github.com/craftcms/nitro/blob/2.0.7/CHANGELOG.md
 
-Nitro CLI: 	   2.0.0
-Nitro gRPC:    2.0.0-alpha
+Nitro CLI: 	   2.0.7
+Nitro gRPC:    2.0.7
 Docker API: 	 1.41 (1.12 min)
 Docker CLI: 	 1.41
 
