@@ -563,7 +563,7 @@ Detected postgres backup
 Enter the database name: tutorial
 Preparing import…
   … uploading backup dump.sql ✓
-Imported database "tutorial", took 4.23 seconds 💪...
+Imported database "tutorial" in 4.23 seconds 💪
 ```
 
 Import an SQL dump specifying a `--name` option to skip the interactive prompt:
@@ -574,7 +574,7 @@ $ nitro db import dump.sql --name tutorial
 Detected postgres backup
 Preparing import…
   … uploading backup dump.sql ✓
-Imported database "tutorial", took 4.23 seconds 💪...
+Imported database "tutorial" in 4.23 seconds 💪
 ```
 
 ## `db remove`
