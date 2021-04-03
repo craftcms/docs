@@ -1320,7 +1320,7 @@ nitro trust
 ```
 
 ::: tip
-Linux users may need to manually configure each web browser to [trust Nitro’s certificate](linux.md#trusting-nitros-certificate-in-firefox-and-edge).
+Linux users may need to manually configure each web browser to [trust Nitro’s certificate](linux.md#trusting-nitros-certificate-in-browsers).
 :::
 
 **Example**
