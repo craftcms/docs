@@ -1323,7 +1323,7 @@ nitro trust
 
 ```
 $ nitro trust
-  … getting certificate for Nitro… ✓
+  … getting Nitro’s root site certificate ✓
 Installing certificate (you might be prompted for your password)
 Password:
   … cleaning up ✓
