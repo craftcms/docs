@@ -4,6 +4,7 @@ The following [controller actions](https://www.yiiframework.com/doc/guide/2.0/en
 
 Action | Description
 ------ | -----------
+<badge vertical="baseline" type="verb">POST</badge> [cart/complete](#post-cart-complete) | Completes an order without payment.
 <badge vertical="baseline" type="verb">GET</badge> [cart/get-cart](#get-cart-get-cart) | Returns the current cart as JSON.
 <badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | Updates the cart by adding purchasables, updating line items, or updating various cart attributes.
 <badge vertical="baseline" type="verb">GET</badge> [cart/load-cart](#get-cart-load-cart) | Loads a given cart into the current session.
@@ -20,6 +21,58 @@ Action | Description
 ::: tip
 To invoke a controller action, send a `POST` request to Craft, with an `action` param set to the desired action path, either in the request body or query string.
 :::
+
+## <badge vertical="baseline" type="verb">POST</badge> `cart/complete`
+
+An alternative to checking out with the `payments/pay` action, this allows the customer to commit to buy the cart and complete the order without a payment transaction. The <commerce3:allowCheckoutWithoutPayment> setting must be enabled or an HTTP exception will be thrown.
+
+The cart must have an email address and honor the following settings:
+
+- [allowEmptyCartOnCheckout](config-settings.md#allowemptycartoncheckout)
+- [requireShippingMethodSelectionAtCheckout](config-settings.md#requireshippingmethodselectionatcheckout)
+- [requireBillingAddressAtCheckout](config-settings.md#requirebillingaddressatcheckout)
+- [requireShippingAddressAtCheckout](config-settings.md#requireshippingaddressatcheckout)
+
+See the [Making Payments](../making-payments.md#checkout-without-payment) page for more on using this action.
+
+### Supported Params
+
+The following params can be sent with the request:
+
+Param | Description
+----- | -----------
+`number` | Optional order number for a specific, existing cart.
+`forceSave` | Optionally set to `true` to force saving the cart.
+`registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
+`redirect` | The hashed URL the browser should redirect to. (Automatically set to [loadCartRedirectUrl](../config-settings.md#loadcartredirecturl) if a GET request that doesn’t expect JSON.)
+`successMessage` | The hashed flash notice that should be displayed if the cart is updated successfully. (Only used for `text/html` requests.)
+`failMessage` | The hashed flash notice that should be displayed if the cart failed to update. (Only used for `text/html` requests.)
+
+### Output
+
+The output of the action depends on whether the cart was completed successfully and the request included an `Accept: application/json` header.
+
+#### Standard Request
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | Redirect response per the hashed `redirect` param, or the user session’s return URL. Success message will be set on the flash `notice` key.
+<x-mark/> | None; the request will be routed per the URI. Failure message will be set on the flash `error` key.
+
+</span>
+
+#### With JSON Request Header
+
+<span class="croker-table">
+
+Success | Output
+------- | ------
+<check-mark/> | JSON object with the following keys: `success`, `message`, and the cart in the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting.
+<x-mark/> | JSON object with the following keys: `error`, `errors`, `success`, `message`, and the cart in the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting.
+
+</span>
 
 ## <badge vertical="baseline" type="verb">GET</badge> `cart/get-cart`
 
@@ -72,7 +125,8 @@ Param | Description
 `estimatedBillingAddressSameAsShipping` | Set to `true` to use shipping address for estimated billing address.
 `billingAddressSameAsShipping` | Set to `true` to use shipping address for billing address. (Will ignore billing address ID and fields.)
 `estimatedBillingAddress[]` | Array of estimated billing address lines. (See [Addresses](../addresses.md#address-lines)).
-`clearNotices` or `clearNotices[]` | Field without a value to clear all cart notices, or an array of attributes whose notices should be cleared.
+`clearNotices` | When passed, clears all cart notices.
+`redirect` | The hashed URL the browser should redirect to. (Automatically set to [loadCartRedirectUrl](../config-settings.md#loadcartredirecturl) if a GET request that doesn’t expect JSON.)
 `successMessage` | The hashed flash notice that should be displayed if the cart is updated successfully. (Only used for `text/html` requests.)
 `failMessage` | The hashed flash notice that should be displayed if the cart failed to update. (Only used for `text/html` requests.)
 
@@ -356,6 +410,7 @@ Param | Description
 `email` | Email address of the person responsible for payment, which must match the email address on the order. Required if the order being paid is not the active cart.
 `registerUserOnOrderComplete` | Whether the customer should have an account created on order completion.
 `paymentCurrency` | ISO code of a configured [payment currency](../payment-currencies.md) to be used for the payment.
+`paymentAmount` | Hashed payment amount, expressed in the cart’s `paymentCurrency`, available only if [partial payments](../making-payments.md#checkout-with-partial-payment) are allowed.
 `gatewayId` | The payment gateway ID to be used for payment.
 `paymentSourceId` | The ID for a payment source that should be used for payment.
 `savePaymentSource` | Whether to save card information as a payment source. (Gateway must support payment sources.)
