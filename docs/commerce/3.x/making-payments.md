@@ -10,8 +10,8 @@ For this example, we’re assuming the payment gateway is set on the cart and th
 {# @var cart craft\commerce\elements\Order #}
 <form method="post">
     {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/payments/pay') }}
-    {{ hiddenInput('redirect', '/commerce/customer/order?number={number}') }}
+    {{ actionInput('commerce/payments/pay') }}
+    {{ redirectInput('/commerce/customer/order?number={number}') }}
     {{ hiddenInput('cancelUrl', '/commerce/checkout/payment'|hash) }}
 
     {{ cart.gateway.getPaymentFormHtml({})|raw }}
@@ -28,8 +28,8 @@ The example below assumes the availability of a `paymentForm` variable, as discu
 {% import "_includes/forms" as forms %}
 <form method="post">
     {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/payments/pay') }}
-    {{ hiddenInput('redirect', '/commerce/customer/order?number={number}') }}
+    {{ actionInput('commerce/payments/pay') }}
+    {{ redirectInput('/commerce/customer/order?number={number}') }}
     {{ hiddenInput('cancelUrl', '/commerce/checkout/payment'|hash) }}
 
     {# first and last name #}
