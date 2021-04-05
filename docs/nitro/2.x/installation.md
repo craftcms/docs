@@ -46,12 +46,21 @@ If you run into issues with either install method, you can manually install Nitr
 
 ## Installing Nitro for Linux
 
-1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
+1. Install Docker Engine for your distro.
+    - [Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+    - [Fedora](https://docs.docker.com/engine/install/fedora/)
+    - [Debian](https://docs.docker.com/engine/install/debian/)
+    - [CentOS](https://docs.docker.com/engine/install/centos/)
+    - [binaries](https://docs.docker.com/engine/install/binaries/)
 2. Open a terminal and run `bash <(curl -sLS http://installer.getnitro.sh)`.
+
+::: tip
+Make sure you follow instructions to add your user to the `docker` group so you don’t need to run Docker using `sudo`.
+:::
 
 ### Linux Manual Installation
 
-1. Visit Nitro’s [GitHub Releases](https://github.com/craftcms/nitro/releases) page and use the `nitro_linux_x86_64.tar.gz` inside your WSL2 instance.
+1. Visit Nitro’s [GitHub Releases](https://github.com/craftcms/nitro/releases) page and use the `nitro_linux_x86_64.tar.gz` bundle.
 2. Extract the release archive and make the `nitro` executable with `chmod +x ./nitro`.
 3. If `/usr/local/bin` does not exist for you, create it with `sudo mkdir -p -m 775 /usr/local/bin && sudo chown $USER: /usr/local/bin`.
 4. Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
