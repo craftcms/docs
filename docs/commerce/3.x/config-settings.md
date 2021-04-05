@@ -181,6 +181,25 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](craft3:craft\helpers\Confi
 
 
 
+### `allowCheckoutWithoutPayment`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [Settings::$allowCheckoutWithoutPayment](commerce3:craft\commerce\models\Settings::$allowCheckoutWithoutPayment)
+
+Since
+:   3.3
+
+
+
+Whether carts are can be marked as completed without a payment.
+
+
 ### `autoSetNewCartAddresses`
 
 Allowed types
@@ -581,6 +600,25 @@ This setting strictly toggles input validation and has no impact on tax configur
 
 
 ## Payments
+
+### `allowPartialPaymentOnCheckout`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [Settings::$allowPartialPaymentOnCheckout](commerce3:craft\commerce\models\Settings::$allowPartialPaymentOnCheckout)
+
+
+
+Whether partial payment can be made from the front end. Gateway must also allow them.
+
+The default `false` does not allow partial payments on the front end.
+
+
 
 ### `gatewayPostRedirectTemplate`
 
