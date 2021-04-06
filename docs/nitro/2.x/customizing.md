@@ -59,6 +59,8 @@ The table below details every environment variable you can use to customize Nitr
 | `NITRO_DEFAULT_TLD`       | TLD for auto-suggested site hostnames             | `nitro`     | n/a                      |
 | `NITRO_EDIT_HOSTS`        | Attempt to edit hosts file when applying changes? | `true`      | n/a                      |
 | `NITRO_MAILHOG_SMTP_PORT` | MailHog SMTP                                      | `1025`      | `mailhog.service.nitro`  |
+| `NITRO_NODE_PORT`         | node port                                         | `3000`      | `nitro-proxy`            |
+| `NITRO_NODE_ALT_PORT`     | Alternate node port                               | `3001`      | `nitro-proxy`            |
 | `NITRO_MAILHOG_HTTP_PORT` | MailHog web interface                             | `8025`      | `mailhog.service.nitro`  |
 | `NITRO_DYNAMODB_PORT`     | DynamoDB server port                              | `8000`      | `dynamodb.service.nitro` |
 | `NITRO_MINIO_PORT`        | MinIO web interface and API                       | `9000`      | `minio.service.nitro`    |
