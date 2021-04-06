@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-04-06
+## Changed
+- Updated Nitro 2.x documentation for version 2.0.7.
+
 ## 2021-04-01
 ## Added
 - Documented error templates. (Not a prank.)
