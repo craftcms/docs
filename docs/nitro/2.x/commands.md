@@ -135,20 +135,42 @@ Enables and disables Blackfire for a site. Prompts for server ID and server toke
 Enables Blackfire for a site.
 
 ```
-nitro blackfire on
+nitro blackfire on <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
+
 
 ### `blackfire off`
 
 Disables Blackfire for a site.
 
 ```
-nitro blackfire off
+nitro blackfire off <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 ## `bridge`
 
 Temporarily shares a Nitro site on a local network. Prompts you to select an existing IP address and site for sharing. See [Sharing Sites Locally](local-sharing.md).
+
+```
+nitro bridge <?site>
+```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
+
+**Example**
 
 ```
 $ nitro bridge
@@ -371,6 +393,26 @@ Enter your selection: 2
 root@5e98a85aef29:/#
 ```
 
+## `container remove`
+
+Removes a custom container, prompting you to select the container if you’ve added more than one using the [`container new`](#container-new) command.
+
+```
+nitro container remove
+```
+
+**Example**
+
+```
+$ nitro container remove
+Select the custom container to remove:
+  1. bitnami
+  2. tutum
+Enter your selection: 2
+Apply changes now [Y/n]? Y
+# ...
+```
+
 ## `craft`
 
 Runs a Craft console command.
@@ -496,25 +538,43 @@ Imports a database dump into the selected database engine and name. The SQL file
 nitro db import <file>
 ```
 
+::: tip
+For uncompressed files, the command will detect and automatically select the database engine.
+:::
+
 **Parameters**
 
 `file`
 : Dump file to be imported. Can be a filename only, or a relative or absolute file path.
 
+**Options**
 
-::: tip
-For uncompressed files, the command will detect and automatically select the database engine.
-:::
+`--name`
+: Name of the database to receive the import. (Skips prompt.)
 
 **Example**
 
+Import an SQL dump:
+
 ```
-$ nitro db import my-website_200814_141806_rltgcxpmz0_v3.4.20.sql
+$ nitro db import dump.sql
+  … detecting backup type ✓
+Detected postgres backup
+Enter the database name: tutorial
+Preparing import…
+  … uploading backup dump.sql ✓
+Imported database "tutorial" in 4.23 seconds 💪
+```
+
+Import an SQL dump specifying a `--name` option to skip the interactive prompt:
+
+```
+$ nitro db import dump.sql --name tutorial
   … detecting backup type ✓
 Detected postgres backup
 Preparing import…
-  … uploading backup my-website_200814_141806_rltgcxpmz0_v3.4.20.sql ✓
-Import successful 💪
+  … uploading backup dump.sql ✓
+Imported database "tutorial" in 4.23 seconds 💪
 ```
 
 ## `db remove`
@@ -795,14 +855,19 @@ Adding sites to hosts file…
 Change PHP settings for a site.
 
 ```
-nitro iniset
+nitro iniset <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 **Example**
 
 ```
 $ nitro iniset
-Select a site: 
+Select a site:
   1. craft-support.nitro
   2. another-site.nitro
   3. plugins-dev.nitro
@@ -816,8 +881,9 @@ Which PHP setting would you like to change for craft-support.nitro?
   6. memory_limit
   7. opcache_enable
   8. opcache_revalidate_freq
-  9. post_max_size
-  10. upload_max_file_size
+  9. opcache_validate_timestamps
+  10. post_max_size
+  11. upload_max_file_size
 Enter your selection: 3
 What should the max input vars be [5000]? 6000
 Apply changes now [Y/n] y
@@ -918,6 +984,44 @@ nginx: [alert] could not open error log file: open() "/var/lib/nginx/logs/error.
 [07-Jan-2021 22:46:27] NOTICE: ready to handle connections
 2021-01-07 22:46:28,687 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
 2021-01-07 22:46:28,687 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+```
+
+## `ls`
+
+Display your running containers.
+
+```
+nitro ls [<options>]
+```
+
+#### Options
+
+`--custom`
+: Show custom containers.
+
+`--databases`
+: Show databases.
+
+`--proxy`
+: Show proxy container.
+
+`--services`
+: Show services.
+
+`--sites`
+: Show sites.
+
+#### Example
+
+```
+$ nitro ls
+Hostname                                  Type              Status
+mailhog.service.nitro                     site              running
+mysql-8.0-3308.database.nitro             database          running
+nitro-proxy                               proxy             running
+postgres-13-5432.database.nitro           database          running
+redis.service.nitro                       site              running
+tutorial.nitro                            site              running
 ```
 
 ## `npm`
@@ -1023,12 +1127,17 @@ Listening for queue jobs…
 Removes a site.
 
 ```
-nitro remove
+nitro remove <?site>
 ```
 
 ::: tip
 The `remove` command does not delete databases. If you’d like to remove a site’s database(s), see [`db remove`](#db-remove).
 :::
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 **Example**
 
@@ -1055,8 +1164,13 @@ Checking proxy…
 Restarts all containers.
 
 ```
-nitro restart
+nitro restart <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory. (Will only restart that site container.)
 
 **Example**
 
@@ -1099,8 +1213,13 @@ Updating to Nitro 2.0.6!
 Allows you to share a local site.
 
 ```
-nitro share
+nitro share <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 **Example**
 
@@ -1121,8 +1240,13 @@ Enter your selection: 1
 Allows you to SSH into a container.
 
 ```
-nitro ssh
+nitro ssh <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 **Options**
 
@@ -1145,8 +1269,13 @@ using root… system changes are ephemeral…
 Starts all containers.
 
 ```
-nitro start
+nitro start <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory. (Will only start the specified site container rather than all of them.)
 
 **Example**
 
@@ -1166,8 +1295,13 @@ Nitro started 👍
 Stops all containers.
 
 ```
-nitro stop [<options>]
+nitro stop <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory. (Will only stop the specified site container rather than all of them.)
 
 **Example**
 
@@ -1190,11 +1324,15 @@ Trust SSL certificates for a site.
 nitro trust
 ```
 
+::: tip
+Linux users may need to manually configure each web browser to [trust Nitro’s certificate](linux.md#trusting-nitros-certificate-in-browsers).
+:::
+
 **Example**
 
 ```
 $ nitro trust
-  … getting certificate for Nitro… ✓
+  … getting Nitro’s root site certificate ✓
 Installing certificate (you might be prompted for your password)
 Password:
   … cleaning up ✓
@@ -1208,7 +1346,6 @@ Updates Nitro's containers.
 ```
 nitro update
 ```
-
 
 **Example**
 
@@ -1265,10 +1402,10 @@ nitro version
 
 ```
 $ nitro version
-View the changelog at https://github.com/craftcms/nitro/blob/2.0.0-alpha/CHANGELOG.md
+View the changelog at https://github.com/craftcms/nitro/blob/2.0.7/CHANGELOG.md
 
-Nitro CLI: 	   2.0.0
-Nitro gRPC:    2.0.0-alpha
+Nitro CLI: 	   2.0.7
+Nitro gRPC:    2.0.7
 Docker API: 	 1.41 (1.12 min)
 Docker CLI: 	 1.41
 
@@ -1281,8 +1418,13 @@ You might need to run `nitro update`
 Disables Xdebug for a site.
 
 ```
-nitro xoff
+nitro xoff <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 **Example**
 
@@ -1308,8 +1450,13 @@ Checking proxy…
 Enables Xdebug for a site.
 
 ```
-nitro xon
+nitro xon <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 **Example**
 

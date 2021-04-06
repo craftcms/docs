@@ -63,8 +63,9 @@ The following options are available for modification.
 - `6` memory_limit
 - `7` opcache_enable
 - `8` opcache_revalidate_freq
-- `9` post_max_size
-- `10` upload_max_file_size
+- `9` opcache_validate_timestamps
+- `10` post_max_size
+- `11` upload_max_file_size
 
 ## Manually Overriding PHP Settings
 
