@@ -294,11 +294,11 @@ The [`loadCartRedirectUrl`](config-settings.md#loadCartRedirectUrl) setting dete
 
 Have the customer navigate to the `commerce/cart/load-cart` endpoint, including the `number` parameter in the URL.
 
-A quick way for a store manager to grab the URL is by navigating in the control panel to **Commerce** → **Orders**, selecting one item from **Active Carts** or **Inactive Carts**, and choosing **Copy load cart URL** from the context menu:
+A quick way for a store manager to grab the URL is by navigating in the control panel to **Commerce** → **Orders**, selecting one item from **Active Carts** or **Inactive Carts**, and choosing **Share cart…** from the context menu:
 
-![Copy load cart URL context menu option](./assets/copy-load-cart-url.png)
+![Share cart context menu option](./assets/share-cart.png)
 
-You can also do this directly from an order edit page by choosing the gear icon and then **Copy load cart URL**.
+You can also do this from an order edit page by choosing the gear icon and then **Share cart…**.
 
 To do this programmatically, you’ll need to create an absolute URL for the endpoint and include a reference to the desired cart number.
 
