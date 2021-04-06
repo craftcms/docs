@@ -507,7 +507,7 @@ Transformed images will automatically be cropped from the center, but a content 
 
 1. In the control panel, navigate to the image either using the **Assets** menu item or **Entries** and choosing the relevant blog post.
 2. Double-click the asset and choose **Edit** from the top-right corner of the preview modal to launch the image editor.
-3. Choose **Focal Point** and drag the focal point reticle to an important area of the image.
+3. Choose **Focal Point** and drag the focal point target to an important area of the image.
 4. Choose **Save**.
 
 ![Setting a focal point on an asset](../images/focal-point.png)
