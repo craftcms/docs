@@ -55,7 +55,7 @@ If you run into issues with either install method, you can manually install Nitr
 2. Open a terminal and run `bash <(curl -sLS http://installer.getnitro.sh)`.
 
 ::: tip
-Make sure you follow instructions to add your user to the `docker` group so you don’t need to run Docker using `sudo`.
+Make sure you [follow instructions](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) to add your user to the `docker` group so you don’t need to run Docker using `sudo`.
 :::
 
 ### Linux Manual Installation
