@@ -6,17 +6,17 @@ Action | Description
 ------ | -----------
 <badge vertical="baseline" type="verb">POST</badge> [cart/complete](#post-cart-complete) | Completes an order without payment.
 <badge vertical="baseline" type="verb">GET</badge> [cart/get-cart](#get-cart-get-cart) | Returns the current cart as JSON.
-<badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | Updates the cart by adding purchasables, updating line items, or updating various cart attributes.
 <badge vertical="baseline" type="verb">GET</badge> [cart/load-cart](#get-cart-load-cart) | Loads a given cart into the current session.
-<badge vertical="baseline" type="verb">POST</badge> [customer-addresses/save](#post-customer-addresses-save) | Creates or updates a customer’s address.
+<badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | Updates the cart by adding purchasables, updating line items, or updating various cart attributes.
 <badge vertical="baseline" type="verb">POST</badge> [customer-addresses/delete](#post-customer-addresses-delete) | Deletes a customer’s address.
 <badge vertical="baseline" type="verb">GET</badge> [customer-addresses/get-addresses](#get-customer-addresses-get-addresses) | Returns a customer’s addresses as JSON.
 <badge vertical="baseline" type="verb">GET</badge> [customer-orders/get-orders](#get-customer-orders-get-orders) | Returns a customer’s orders as JSON.
+<badge vertical="baseline" type="verb">POST</badge> [customer-addresses/save](#post-customer-addresses-save) | Creates or updates a customer’s address.
 <badge vertical="baseline" type="verb">GET</badge> [downloads/pdf](#get-downloads-pdf) | Returns an order PDF as a file.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/add](#post-payment-sources-add) | Creates a new payment source.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/delete](#post-payment-sources-delete) | Deletes a payment source.
-<badge vertical="baseline" type="verb">POST</badge> [payments/pay](#post-payments-pay) | Makes a payment on an order.
 <badge vertical="baseline" type="verb">GET</badge> [payments/complete-payment](#get-payments-complete-payment) | Processes customer’s return from an off-site payment.
+<badge vertical="baseline" type="verb">POST</badge> [payments/pay](#post-payments-pay) | Makes a payment on an order.
 
 ::: tip
 To invoke a controller action, send a `POST` request to Craft, with an `action` param set to the desired action path, either in the request body or query string.
@@ -41,12 +41,12 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`number` | Optional order number for a specific, existing cart.
-`forceSave` | Optionally set to `true` to force saving the cart.
-`registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
-`redirect` | The hashed URL the browser should redirect to. (Automatically set to [loadCartRedirectUrl](../config-settings.md#loadcartredirecturl) if a GET request that doesn’t expect JSON.)
-`successMessage` | The hashed flash notice that should be displayed if the cart is updated successfully. (Only used for `text/html` requests.)
 `failMessage` | The hashed flash notice that should be displayed if the cart failed to update. (Only used for `text/html` requests.)
+`forceSave` | Optionally set to `true` to force saving the cart.
+`number` | Optional order number for a specific, existing cart.
+`redirect` | The hashed URL the browser should redirect to. (Automatically set to [loadCartRedirectUrl](../config-settings.md#loadcartredirecturl) if a GET request that doesn’t expect JSON.)
+`registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
+`successMessage` | The hashed flash notice that should be displayed if the cart is updated successfully. (Only used for `text/html` requests.)
 
 ### Output
 
@@ -103,32 +103,32 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`number` | Optional order number for specific, existing cart.
-`forceSave` | Optionally set to `true` to force saving the cart.
-`fields[]` | Optional array of custom fields to be submitted to the cart.
-`purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options[]`, and `qty` parameters.
-`purchasables[]` | Array of one or more purchasables to be [added to the cart](../orders-carts.md#adding-a-multiple-items). Each must include an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs.
-`lineItems[]` | Array of one or more of the cart’s line items to update. Each must have an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs. An item may include a `remove` key with a value of `1` or a `qty` of `0` to be removed from the cart.
-`email` | Email address to be associated with the cart.
-`registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
-`paymentCurrency` | ISO code of a configured [payment currency](../payment-currencies.md) to be used for the cart.
-`couponCode` | Coupon code for a [discount](../discounts.md) that should be applied to the cart.
-`gatewayId` | The payment gateway ID to be used when the cart is completed.
-`paymentSourceId` | The ID for a payment source that should be used when the cart is completed.
-`shippingMethodHandle` | The handle of a shipping method to be set for the cart.
-`shippingAddress[]` | Array of shipping address lines. (See [Addresses](../addresses.md#address-lines)).
-`shippingAddressId` | ID of an existing address to use as the shipping address.
-`estimatedShippingAddress[]` | Array of estimated shipping address lines. (See [Addresses](../addresses.md#address-lines)).
-`shippingAddressSameAsBilling` | Set to `true` to use billing address for shipping address and ignore `shippingAddress` and `shippingAddressId`.
 `billingAddress[]` | Array of billing address lines. (See [Addresses](../addresses.md#address-lines)).
 `billingAddressId` | ID of an existing address to use as the billing address.
-`estimatedBillingAddressSameAsShipping` | Set to `true` to use shipping address for estimated billing address.
 `billingAddressSameAsShipping` | Set to `true` to use shipping address for billing address. (Will ignore billing address ID and fields.)
-`estimatedBillingAddress[]` | Array of estimated billing address lines. (See [Addresses](../addresses.md#address-lines)).
 `clearNotices` | When passed, clears all cart notices.
-`redirect` | The hashed URL the browser should redirect to. (Automatically set to [loadCartRedirectUrl](../config-settings.md#loadcartredirecturl) if a GET request that doesn’t expect JSON.)
-`successMessage` | The hashed flash notice that should be displayed if the cart is updated successfully. (Only used for `text/html` requests.)
+`couponCode` | Coupon code for a [discount](../discounts.md) that should be applied to the cart.
+`email` | Email address to be associated with the cart.
+`estimatedBillingAddress[]` | Array of estimated billing address lines. (See [Addresses](../addresses.md#address-lines)).
+`estimatedBillingAddressSameAsShipping` | Set to `true` to use shipping address for estimated billing address.
+`estimatedShippingAddress[]` | Array of estimated shipping address lines. (See [Addresses](../addresses.md#address-lines)).
 `failMessage` | The hashed flash notice that should be displayed if the cart failed to update. (Only used for `text/html` requests.)
+`fields[]` | Optional array of custom fields to be submitted to the cart.
+`forceSave` | Optionally set to `true` to force saving the cart.
+`gatewayId` | The payment gateway ID to be used when the cart is completed.
+`lineItems[]` | Array of one or more of the cart’s line items to update. Each must have an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs. An item may include a `remove` key with a value of `1` or a `qty` of `0` to be removed from the cart.
+`number` | Optional order number for specific, existing cart.
+`paymentCurrency` | ISO code of a configured [payment currency](../payment-currencies.md) to be used for the cart.
+`paymentSourceId` | The ID for a payment source that should be used when the cart is completed.
+`purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options[]`, and `qty` parameters.
+`purchasables[]` | Array of one or more purchasables to be [added to the cart](../orders-carts.md#adding-a-multiple-items). Each must include an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs.
+`redirect` | The hashed URL the browser should redirect to. (Automatically set to [loadCartRedirectUrl](../config-settings.md#loadcartredirecturl) if a GET request that doesn’t expect JSON.)
+`registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
+`shippingAddress[]` | Array of shipping address lines. (See [Addresses](../addresses.md#address-lines)).
+`shippingAddressId` | ID of an existing address to use as the shipping address.
+`shippingAddressSameAsBilling` | Set to `true` to use billing address for shipping address and ignore `shippingAddress` and `shippingAddressId`.
+`shippingMethodHandle` | The handle of a shipping method to be set for the cart.
+`successMessage` | The hashed flash notice that should be displayed if the cart is updated successfully. (Only used for `text/html` requests.)
 
 ### Output
 
@@ -205,11 +205,11 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`address.id` | Required address ID to be edited, which must belong to the current customer.
 `address.{$attr}` | Address object with any of the key/value pairs in the system’s [address lines](../addresses.md#address-lines).
+`address.id` | Required address ID to be edited, which must belong to the current customer.
+`fields[]` | Custom fields to be saved on the cart if it’s using the provided address.
 `makePrimaryBillingAddress` | Whether to save as the primary billing address.
 `makePrimaryShippingAddress` | Whether to save as the primary shipping address.
-`fields[]` | Custom fields to be saved on the cart if it’s using the provided address.
 
 ### Output
 
@@ -310,8 +310,8 @@ The following params can be sent with the request:
 Param | Description
 ----- | -----------
 `number` | Required order number.
-`pdfHandle` | Handle of the [PDF](../pdfs.md) to be rendered.
 `option` | Optional string value that’s passed to the PDF template.
+`pdfHandle` | Handle of the [PDF](../pdfs.md) to be rendered.
 
 ### Output
 
@@ -327,9 +327,9 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`gatewayId` | ID of the new payment source’s gateway, which must support payment sources.
-`description` | Description for the payment source.
 `*` | All body parameters will be provided directly to the gateway’s payment form model.
+`description` | Description for the payment source.
+`gatewayId` | ID of the new payment source’s gateway, which must support payment sources.
 
 ### Output
 
@@ -406,17 +406,17 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`number` | The order number payment should be applied to. When ommitted, payment is applied to the current cart.
-`email` | Email address of the person responsible for payment, which must match the email address on the order. Required if the order being paid is not the active cart.
-`registerUserOnOrderComplete` | Whether the customer should have an account created on order completion.
-`paymentCurrency` | ISO code of a configured [payment currency](../payment-currencies.md) to be used for the payment.
-`paymentAmount` | Hashed payment amount, expressed in the cart’s `paymentCurrency`, available only if [partial payments](../making-payments.md#checkout-with-partial-payment) are allowed.
-`gatewayId` | The payment gateway ID to be used for payment.
-`paymentSourceId` | The ID for a payment source that should be used for payment.
-`savePaymentSource` | Whether to save card information as a payment source. (Gateway must support payment sources.)
-`redirect` | Return URL for successful payment.
-`cancelUrl` | URL user should end up on if they choose to cancel payment.
 `*` | All body parameters will be provided directly to the gateway’s payment form model.
+`cancelUrl` | URL user should end up on if they choose to cancel payment.
+`email` | Email address of the person responsible for payment, which must match the email address on the order. Required if the order being paid is not the active cart.
+`gatewayId` | The payment gateway ID to be used for payment.
+`number` | The order number payment should be applied to. When ommitted, payment is applied to the current cart.
+`paymentAmount` | Hashed payment amount, expressed in the cart’s `paymentCurrency`, available only if [partial payments](../making-payments.md#checkout-with-partial-payment) are allowed.
+`paymentCurrency` | ISO code of a configured [payment currency](../payment-currencies.md) to be used for the payment.
+`paymentSourceId` | The ID for a payment source that should be used for payment.
+`redirect` | Return URL for successful payment.
+`registerUserOnOrderComplete` | Whether the customer should have an account created on order completion.
+`savePaymentSource` | Whether to save card information as a payment source. (Gateway must support payment sources.)
 
 ### Output
 
