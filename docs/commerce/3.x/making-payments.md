@@ -252,7 +252,7 @@ To make a partial payment in the Craft control panel:
 5. Choose **Pay** to process the payment.
 
 ::: tip
-To more quickly identify partially-paid orders, a store manager may want to add the **Paid Status** column in the Orders table.
+To more quickly identify partially-paid orders, a store manager may want to add the **Paid Status** column on the order index page.
 
 ![Orders table Paid Status column](./assets/paid-status-column.png)
 :::
