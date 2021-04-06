@@ -1,6 +1,8 @@
 # Fetch content with GraphQL
 
-You can also use Craft CMS headlessly, meaning your web server provides the authoring experience but relies on outside code to provide the front end for visitors. In this case you won’t work with Twig templates, but using an API like the GraphQL API that ships with Craft CMS Pro.
+You can also use Craft CMS headlessly, meaning your web server provides the authoring experience but relies on outside code to provide the front end for visitors. You won’t display content with server-side Twig templates, but use an API to fetch the content and present it in a separate, de-coupled front end.
+
+The Pro edition of Craft CMS includes a GraphQL API for working with Craft content. If you’ve already modeled content and used it in Twig templates, the GraphQL API should feel familiar.
 
 ::: warning
 Building a front end this way requires more development experience than we’ve covered in this tutorial. We’ll only touch on GraphQL basics and recommend more resources.
@@ -16,18 +18,18 @@ The Craft CMS GraphQL API requires Craft Pro. You can start a Pro trial locally 
 
 First upgrade your Craft Solo edition to Craft Pro:
 
-1. From the control panel, choose the “Solo” badge in the bottom left corner.
-2. In the “Pro” panel, choose “Try for free”.
+1. From the control panel, choose the **Solo** badge at the bottom of the screen.
+2. In the <badge type="edition" vertical="middle">Pro</badge> panel, choose **Try for free**.
 
 <BrowserShot url="http://tutorial.test/admin/plugin-store/upgrade-craft" :link="false" caption="Upgrading from Solo to Pro.">
 <img src="../images/upgrade-pro.png" alt="Screenshot of plugin store upgrading to Craft Pro trial" />
 </BrowserShot>
 
-Your edition will be upgraded and you’ll see a new GraphQL item in the navigation menu. Choose that.
+Once you edition is upgraded and you’ll see a GraphQL item in the navigation menu. Choose that.
 
 This is the GraphiQL explorer for browsing API documentation and running queries directly in the browser:
 
-<BrowserShot url="http://tutorial.test/admin/graphql" :link="false" caption="The GraphiQL explorer.">
+<BrowserShot url="https://tutorial.nitro/admin/graphql" :link="false" caption="The GraphiQL explorer.">
 <img src="../images/graphql.png" alt="Screenshot of GraphiQL" />
 </BrowserShot>
 
@@ -38,20 +40,18 @@ This is the GraphiQL explorer for browsing API documentation and running queries
 Try running a test GraphQL query:
 
 ```graphql
-{
-  ping
-}
+{ ping }
 ```
 
 You’ll see `pong` in the response signaling that everything’s ready to go:
 
-<BrowserShot url="http://tutorial.test/admin/graphql?query=%7B%20ping%20%7D%0A" :link="false" caption="It’s working!">
+<BrowserShot url="https://tutorial.nitro/admin/graphql?query=%7B%20ping%20%7D%0A" :link="false" caption="It’s working!">
 <img src="../images/graphql-ping.png" alt="Screenshot of GraphiQL with simple query and response" />
 </BrowserShot>
 
 By default, the Craft CMS GraphiQL interface will use the full schema, or available set of information, without any restrictions. In other words, it has access to all content through the GraphQL API.
 
-To use GraphQL externally, you’ll need to do two things:
+To use GraphQL *externally*, you’ll need to do two things:
 
 1. [Establish a GraphQL API endpoint](/3.x/graphql.md#create-your-api-endpoint) for querying externally.
 2. Either create your own private schema with a secret access token, or edit the public schema to enable querying content without an access token. (By default, the public schema leaves all content disabled.) See [Define Your Schemas](/3.x/graphql.md#getting-started) in the GraphQL documentation.
