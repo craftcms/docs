@@ -22,8 +22,10 @@ This is Yii version 2.0.36.
 
 The following commands are available:
 
-- backup                                    Allows you to create a new database backup.
-    backup/db (default)                     Creates a new database backup.
+- db                                    Performs database operations.
+    db/backup                           Creates a new database backup.
+    db/convert-charset                  Converts tables’ character sets and collations. (MySQL only)
+    db/restore                          Restores a database backup.
 
 - cache                                     Allows you to flush cache.
     cache/flush                             Flushes given cache components.
@@ -33,9 +35,6 @@ The following commands are available:
     cache/index (default)                   Lists the caches that can be flushed.
 
 ...
-
-utils/repair/section-structure          Repairs structure data for a section
-
 
 To see the help of each command, enter:
 
@@ -50,16 +49,16 @@ See the [Console Commands](extend/commands.md) page in the _Extending Craft_ sec
 
 While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default console commands:
 
-## `backup`
+## `db`
 
-#### `backup/db` <badge>default</badge>
+#### `db/backup`
 
 Creates a new database backup.
 
 Example:
 
 ```sh
-php craft backup/db ./my-backups/
+php craft db/backup ./my-backups/
 ```
 
 **Parameters**
