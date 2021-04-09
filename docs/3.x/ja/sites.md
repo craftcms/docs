@@ -144,8 +144,8 @@ Create the template directories and templates for your new site.
 
 If you have any local asset volumes, you will need to make sure those assets are available from each of your sites.
 
-* 「ファイルシステムのパス」設定は、相対的（`uploads/images/`）であるべきです
-* URL の設定は、 相対的（`/images`）であるべきです
+- 「ファイルシステムのパス」設定は、相対的（`uploads/images/`）であるべきです
+- URL の設定は、 相対的（`/images`）であるべきです
 
 ### ステップ 7：ウェブサーバーと DNS の設定
 
