@@ -1293,6 +1293,8 @@ The URI Craft should use for user login on the front end.
 
 This can be set to `false` to disable front-end login.
 
+Note that this config setting is ignored when <config3:headlessMode> is enabled.
+
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
@@ -1313,6 +1315,8 @@ Defined by
 The URI Craft should use for user logout on the front end.
 
 This can be set to `false` to disable front-end logout.
+
+Note that this config setting is ignored when <config3:headlessMode> is enabled.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -1471,6 +1475,8 @@ Defined by
 
 The URI Craft should use for Set Password forms on the front end.
 
+Note that this config setting is ignored when <config3:headlessMode> is enabled, as password reset links will point to the control panel.
+
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: tip
@@ -1618,6 +1624,8 @@ Since
 
 
 The URI Craft should use for email verification links on the front end.
+
+Note that this config setting is ignored when <config3:headlessMode> is enabled, as verification links will point to the control panel.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
