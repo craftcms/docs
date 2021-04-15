@@ -1,6 +1,6 @@
 # General Configuration
 
-In addition to the settings available in Commerce → Settings, the config items below can be placed into a `commerce.php` file in your `craft/config/` folder:
+In addition to the settings available in **Commerce** → **Settings**, the config items below can be placed into a `commerce.php` file in your `craft/config/` folder:
 
 ## `autoSetNewCartAddresses`
 

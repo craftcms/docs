@@ -2,7 +2,7 @@
 
 Coupon codes are set up as a condition within a discount promotion.
 
-To create a new discount, go to Commerce → Promotions → Discounts in the Control Panel.
+To create a new discount, go to **Commerce** → **Promotions** → **Discounts** in the control panel.
 To see the coupon condition, go to the “Coupon” tab.
 
 Discounts are only available in the Pro edition of Craft Commerce.
