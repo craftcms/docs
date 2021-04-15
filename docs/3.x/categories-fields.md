@@ -67,8 +67,8 @@ Possible values include:
 | `[100, 200]` | that are related to a category with an ID of 100 or 200.
 | `[':empty:', 100, 200]` | with no related categories, or are related to a category with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the categories with IDs of 100 and 200.
-| an [Category](craft3:craft\elements\Category) object | that are related to the category.
-| an [CategoryQuery](craft3:craft\elements\db\CategoryQuery) object | that are related to any of the resulting categories.
+| a [Category](craft3:craft\elements\Category) object | that are related to the category.
+| a [CategoryQuery](craft3:craft\elements\db\CategoryQuery) object | that are related to any of the resulting categories.
 
 ::: code
 ```twig
