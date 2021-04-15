@@ -247,6 +247,10 @@ Then from your SQL client of choice, create a new database connection with the f
 - **Username**: `nitro`
 - **Password**: `nitro`
 
+::: tip
+Your `.env` file may need different connection settings than your host machine. Use the engine’s default port in your `.env` file, and any custom port on your host machine. See [How Nitro Works](how-nitro-works.md#databases) for more.
+:::
+
 ## Adding a Database
 
 Nitro creates its initial `nitro` database for you. You can add as many databases as you’d like running the following command, which will prompt for your desired database engine and name:
