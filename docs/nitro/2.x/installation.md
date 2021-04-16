@@ -2,10 +2,6 @@
 
 ## Installing Nitro for macOS
 
-::: warning
-**If you’re on an M1 Mac**, you must use the [Docker Desktop Apple M1 Tech Preview](https://docs.docker.com/docker-for-mac/apple-m1/) regardless of how you choose to install Nitro.
-:::
-
 1. Install Docker Desktop [Docker Desktop](https://www.docker.com/products/docker-desktop) 3.0.0 or higher.
 2. Install Nitro by opening a terminal and running
     ````sh

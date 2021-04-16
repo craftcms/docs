@@ -144,8 +144,8 @@ Using new or existing entries, test that the Section, Field, and Translation Met
 
 If you have any local asset volumes, you will need to make sure those assets are available from each of your sites.
 
-* The File System Path settings should be relative (`uploads/images/`).
-* The URL settings should be relative (`/images`)
+- The File System Path settings should be relative (`uploads/images/`).
+- The URL settings should be relative (`/images`)
 
 ### Step 7: Configure Your Web Server and DNS
 

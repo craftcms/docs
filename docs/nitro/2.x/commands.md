@@ -459,7 +459,7 @@ Nitro uses Composer’s [create-project](https://getcomposer.org/doc/03-cli.md#c
 // ...
 "scripts": {
   "post-create-project-cmd": [
-    "@php -r \"copy('.env.example', '.env');\"",
+    "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
     "@composer dump-autoload -o",
   ]
 }
