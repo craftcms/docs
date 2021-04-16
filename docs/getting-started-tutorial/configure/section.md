@@ -166,10 +166,6 @@ It’s time to *use* our custom fields by creating a blog section Field Layout:
 7. Enter `Headline` for **Title Field Label**.
 8. Save the field layout.
 
-::: tip
-You can also drag an entire field group from the available sets into your entry type’s field layout.
-:::
-
 <BrowserShot url="https://tutorial.nitro/admin/settings/sections/1/entrytypes/1" :link="false" caption="Completed blog entry type field layout.">
 <img src="../images/blog-field-layout.png" alt="Screenshot of complete blog field layout" />
 </BrowserShot>
