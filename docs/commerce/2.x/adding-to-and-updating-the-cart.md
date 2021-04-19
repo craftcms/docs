@@ -176,7 +176,7 @@ Example:
 ```
 
 ```twig
-<input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title}} to the cart.">
+<input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
 ```
 
 ## Cart Merging

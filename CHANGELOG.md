@@ -2,9 +2,169 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-04-06
+## Changed
+- Updated Nitro 2.x documentation for version 2.0.7.
+
+## 2021-04-01
+## Added
+- Documented error templates. (Not a prank.)
+
+## 2021-03-25
+## Added
+- Added Nitro design goals and architectural overview.
+
+## 2021-03-23
+### Added
+- Documented the new `{% script %}` Twig tag.
+- Documented the new `andRelatedTo` element query parameter.
+
+## 2021-03-09
+### Added
+- Documented Nitro `php` command.
+- Documented Craft `|httpdate` Twig filter.
+
+### Changed
+- Improved notes for working with Nitro and WSL2.
+
+## 2021-03-08
+### Added
+- Documented recommended Docker settings for Nitro.
+
+### Fixed
+- Fixed a bug that prevented search keyboard shortcut from working on some cases.
+
+## 2021-03-03
+### Added
+- Documented the `is boolean` Twig test.
+- Documented the ability to use `.user.ini` to customize Nitro PHP settings.
+
+## 2021-03-02
+### Changed
+- Updated default Nitro doc set with the release of Nitro 2.
+
+## 2021-02-25
+### Added
+- Added a Queue Jobs page to the Extending Craft section.
+
+## 2021-02-22
+### Added
+- Added animation to indicate sidebar items are being loaded.
+
+## 2021-02-12
+### Changed
+- `xxl` breakpoint now increases `font-size` instead of `zoom`.
+
+## 2021-02-09
+### Fixed
+- Prevented a useless link to “newer” docs when the default doc set version is not also the latest.
+
+## 2021-02-03
+### Changed
+- Listed a few handy MigrationHelper methods in the Migrations docs.
+
+## 2021-02-01
+### Added
+- Added content to Craft’s URL Fields page.
+
+## 2021-01-27
+### Changed
+- Updated areas of the Craft 3 docs for the new PHP 7.2.5+ requirement.
+
+## 2021-01-26
+### Added
+- Documented the new `{% tag %}` Twig tag.
+
+### Changed
+- Updated `currency`, `filesize`, `number`, `percentage`, `timestamp`, and `withoutKey` Twig filter descriptions to reflect updated behavior in Craft 3.6.
+
+## 2021-01-22
+- Added a warning about outputting empty segments in Assets fields’ dynamic subfolder templates.
+
+## 2021-01-20
+### Changed
+- Upgraded Storybook to latest version.
+
+### Fixed
+- Got Storybook fonts working again.
+
+## 2021-01-15
+### Fixed
+- Fixed heading anchor shift that could occur with headings not in sidebar navigation. ([#134](https://github.com/craftcms/docs/issues/134))
+
+## 2021-01-14
+### Fixed
+- Fixed potential main navigation double scrollbars. ([#132](https://github.com/craftcms/docs/issues/132))
+
+## 2021-01-13
+### Changed
+- Improved description of the customer-user relationship on the Customers page.
+
+## 2021-01-04
+### Fixed
+- Updated Commerce 3 examples using `cartUpdatedNotice` to `successMessage` instead.
+
+## 2020-12-17
+### Changed
+- Heavily refactored Commerce 3.x docs to improve organization, flow, and coverage gaps. 🎉
+
+## 2020-12-14
+### Added
+- Added PHP examples to Field Types pages.
+
+### Changed
+- Removed a tip about overriding the `mutex` component config for Windows hosts, as it’s no longer needed in Craft 3.5 and later. ([craftcms/cms#7242](https://github.com/craftcms/cms/issues/7242))
+
+## 2020-12-09
+### Added
+- Documented Commerce `modifyCartInfo` event.
+
+### Changed
+- Improved Searching page with more detailed overview and examples.
+
+## 2020-11-25
+### Changed
+- Changed typographic widow handling approach to improve HMR and scroll issues.
+- Updated VuePress to 1.5.3.
+
+## 2020-11-16
+### Added
+- Added element form examples to the Categories, Tags, and Users field pages in the Craft 3 docs.
+
+## 2020-11-13
+### Changed
+- Documented some missing parameters on the Craft 3 Controller Actions page.
+
+## 2020-10-22
+### Changed
+- Improved the Control Panel Template page in the Craft 3 docs.
+
+## 2020-10-20
+### Added
+- Documented controller actions.
+- Documented new `ul()` and `ol()` Twig functions.
+- Added the `verb` style for Badge components.
+- Improved Badge component adding `role` and `focusable` attributes and a default label.
+- Documented new `project-config/touch` console command.
+- Documented `project-config/write` console command.
+- Documented `--invert` option for `project-config/diff` console command.
+
+### Removed
+- Moved templating example pages to the Knowledge Base.
+
+## 2020-10-13
+### Added
+- Added Commerce 3 Console Commands page with new `commerce/reset-data` command.
+- Documented using `craft\services\ProjectConfig::$writeYamlAutomatically` to disable writing project config YAML files automatically.
+
+## 2020-10-12
+### Added
+- Documented new `nitro create` command and `--silent` flag for `xon`, `xoff`, and `php iniset` commands.
+
 ## 2020-10-02
 ### Fixed
 - Fixed an issue that may have led to incorrect search result headings when a heading match was preceded by the search keyword in body content.
+- Updated `SidebarLink` to honor its `maxDepth` setting.
 
 ## 2020-10-01
 ### Added

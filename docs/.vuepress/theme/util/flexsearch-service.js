@@ -494,14 +494,24 @@ function getContentStr(page, match) {
   return result;
 }
 
+/**
+ * Returns the initial page content after the title.
+ * @param {*} page
+ */
 function getBeginningContent(page) {
   const lines = page.contentLowercase.split("\n");
-  const firstLine = lines.length > 0 ? lines[0] : "";
+  const lowerFirstLine = (lines.length > 0 ? lines[0] : "").trim();
+  const lowerPageTitle = page.title.toLowerCase()
+  // the first line is the title, or the title with an edition badge
+  const firstLineIsTitle = lowerFirstLine === lowerPageTitle ||
+    lowerFirstLine === `${lowerPageTitle} pro` ||
+    lowerFirstLine === `${lowerPageTitle} lite` ||
+    lowerFirstLine === `${lowerPageTitle} solo`
 
-  if (firstLine.trim() === page.title.toLowerCase()) {
+  if (firstLineIsTitle) {
     // first line *is* title; start at second line
     return getContentStr(page, {
-      charIndex: firstLine.length + 2,
+      charIndex: lowerFirstLine.length + 2,
       termLength: 0
     });
   }

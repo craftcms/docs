@@ -21,9 +21,9 @@ This example creates a form for each available plan, posting the selection to th
 
 {% for plan in plans %}
     <form method="post">
-        <input type="hidden" name="action" value="commerce/subscriptions/subscribe">
-        <input type="hidden" name="planUid" value="{{ plan.uid|hash }}">
         {{ csrfInput() }}
+        {{ hiddenInput('action', 'commerce/subscriptions/subscribe') }}
+        {{ hiddenInput('planUid', plan.uid|hash) }}
 
         <h4>{{ plan.name }}</h4>
 
@@ -35,7 +35,7 @@ This example creates a form for each available plan, posting the selection to th
             )
         %}
 
-        {# if we don’t have a saved payment soruce, collect details for the gateway #}
+        {# If we don’t have a saved payment soruce, collect details for the gateway #}
         {% if not paymentSources|length %}
             <div class="paymentForm">
                 {{ plan.getGateway().getPaymentFormHtml({})|raw }}
@@ -59,10 +59,10 @@ To cancel a subscription you can use the following template. It assumes the `sub
 
 ```twig
 <form method="post">
-    <input type="hidden" name="action" value="commerce/subscriptions/cancel">
-    <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}" />
-    {{ redirectInput('shop/services') }}
     {{ csrfInput() }}
+    {{ hiddenInput('action', 'commerce/subscriptions/cancel') }}
+    {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
+    {{ redirectInput('shop/services') }}
 
     {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml()|raw }}
 
@@ -80,10 +80,10 @@ To switch a subscription plan you can use the following template. It assumes tha
 {% for plan in subscription.alternativePlans %}
     <strong>Switch to {{ plan.name }}</strong>
     <form method="post">
-        <input type="hidden" name="action" value="commerce/subscriptions/switch">
-        <input type="hidden" name="planUid" value="{{ plan.uid|hash }}">
-        <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}">
         {{ csrfInput() }}
+        {{ hiddenInput('action', 'commerce/subscriptions/switch') }}
+        {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
+        {{ hiddenInput('planUid', plan.uid|hash) }}
 
         {{ plan.getGateway().getSwitchPlansFormHtml(subscription.plan, plan)|raw }}
 
@@ -102,9 +102,9 @@ To reactivate a subscription plan you can use the following template. It assumes
 ```twig
 {% if subscription.canReactivate() %}
     <form method="post">
-        <input type="hidden" name="action" value="commerce/subscriptions/reactivate">
-        <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}">
         {{ csrfInput() }}
+        {{ hiddenInput('action', 'commerce/subscriptions/reactivate') }}
+        {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
 
         <button type="submit" class="button link">Reactivate</button>
     </form>

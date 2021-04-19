@@ -46,7 +46,7 @@ Each type of element has its own function for creating element queries, and they
 - [User Queries](users.md#querying-users)
 
 ::: tip
-Most custom fields support element query parameters as well, named after the field handles.
+Most custom fields support element query parameters as well, named after the field handles. See each field type’s documentation for examples.
 :::
 
 ## Executing Element Queries

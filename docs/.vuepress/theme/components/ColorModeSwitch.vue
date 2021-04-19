@@ -58,15 +58,6 @@
     }
   }
 }
-
-@screen xxl {
-  .dark-mode-toggle {
-    height: 21px;
-    .knob {
-      top: 1px;
-    }
-  }
-}
 </style>
 
 <script>

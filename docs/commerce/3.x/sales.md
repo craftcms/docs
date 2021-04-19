@@ -1,6 +1,6 @@
 # Sales
 
-Sales allow a store owner to set up conditions for dynamic, promotional product discounts.
+Sales allow a store manager with _Manage promotions_ permission to set up conditions for dynamic, promotional product discounts.
 
 A sale is different from a [discount](discounts.md) because it’s applied _before_ an item is added to the cart. A discount needs a cart; it’s applied when an item’s in the cart or to the cart as a whole (like a coupon code).
 
@@ -11,6 +11,10 @@ Sales are ordered in the control panel, and the system always runs through each 
 ## Conditions
 
 When creating a sale, you can set a number of conditions to be evaluated when determining if the sale should be applied to the purchasable. All conditions must match to have the sale applied. Leaving a condition empty ignores that condition.
+
+::: tip
+Only _promotable_ purchasables may have discounts and sales applied. This means the **Promotable** switch must be enabled on the variant’s product in the control panel, which is the default for any new product.
+:::
 
 ### Start date
 
@@ -106,3 +110,15 @@ This setting is related to the purchasable being affected.
 After this sale matches the order, do not apply any other sales, based on the order of sales in the control panel.
 
 This is a sale-level option, not a purchasable-level option like the above `Ignore previous matching sales if this sale matches.`
+
+## Templating
+
+### craft.commerce.sales.allSales
+
+Returns an array of all sales set up in the system, each represented as a [Sale](commerce3:craft\commerce\models\Sale) model.
+
+```twig
+{% for sale in craft.commerce.sales.allSales %}
+    {{ sale.name }} - {{ sale.description }}
+{% endfor %}
+```

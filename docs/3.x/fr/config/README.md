@@ -76,7 +76,7 @@ You can override these default aliases with the <config3:aliases> config setting
 ];
 ```
 
-If your webroot is something besides `web/`, `public/`, `public_html/`, or `html/`, or it’s not located alongside your `craft` executable, you will also need to override the `@webroot` alias, so it can be defined properly for console commands.
+If your web root is something besides `web/`, `public/`, `public_html/`, or `html/`, or it’s not located alongside your `craft` executable, you will also need to override the `@webroot` alias, so it can be defined properly for console commands.
 
 ```php
 'aliases' => [
@@ -146,7 +146,7 @@ By default, Craft will store data caches in the `storage/runtime/cache/` folder.
 
 #### Database Cache Example
 
-If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a CLI command for convenience:
+If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a console command for convenience:
 
 ```bash
 php craft setup/db-cache-table

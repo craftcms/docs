@@ -6,7 +6,7 @@ This can be used as a drop-in replacement for [Craft’s `|currency` filter](htt
 
 | Parameter    | Type   | Default | Required | Description                                                                                                                                      |
 | ------------ | ------ | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `currency`   | string |         | yes      | Valid, three-character ISO payment currency set up in Commerce → Store Settings → Payment Currencies.                                            |
+| `currency`   | string |         | yes      | Valid, three-character ISO payment currency set up in **Commerce** → **Store Settings** → **Payment Currencies**.                                            |
 | `convert`    | bool   | `false` | no       | Should the amount passed to this filter be converted to `currency`’s exchange rate?                                                              |
 | `format`     | bool   | `true`  | no       | Should the amount passed to this filter be formatted according to `currency`? (Typically adds currency symbol and thousands+decimal separators.) |
 | `stripZeros` | bool   | `false` | no       | Should trailing zeros (`.00`) be stripped from a formatted number?                                                                               |
@@ -22,24 +22,24 @@ This can be used as a drop-in replacement for [Craft’s `|currency` filter](htt
 
 {{ 10|commerceCurrency(baseCurrency) }} {# Output: $10.00 #}
 
-{{ order.totalPrice|commerceCurrency(
+{{ order.outstandingBalance|commerceCurrency(
     paymentCurrency,
     convert=true
 ) }} {# Output: A$13.00 #}
 
-{{ order.totalPrice|commerceCurrency(
+{{ order.outstandingBalance|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=false
 ) }} {# Output: 13 #}
 
-{{ order.totalPrice|commerceCurrency(
+{{ order.outstandingBalance|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=true
 ) }} {# Output: A$13.00 #}
 
-{{ order.totalPrice|commerceCurrency(
+{{ order.outstandingBalance|commerceCurrency(
     paymentCurrency,
     convert=true,
     format=true,
@@ -51,7 +51,7 @@ You might want to show the order’s price in all available payment currencies:
 
 ```twig
 {% for currency in craft.commerce.paymentCurrencies %}
-    Total in {{ currency.iso|upper }}: {{ cart.totalPrice|commerceCurrency(
+    Total in {{ currency.iso|upper }}: {{ cart.outstandingBalance|commerceCurrency(
         currency,
         convert=true
     ) }}<br>

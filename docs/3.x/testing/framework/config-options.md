@@ -44,13 +44,13 @@ The `plugins` parameter accepts an Array of objects with the following parameter
 - **class** (required): [The main plugin class](../../extend/plugin-guide.md#the-plugin-class).
 - **handle** (required): The plugin handle.
 
-Plugins will be installed before any tests are run.
+Plugins that will be installed before any tests are run. If you are supplying [Project Config](#projectconfig) data for tests, then there is no need to list any plugins here that Project Config will already install.
 
-### `setupDb`
+### `dbSetup`
 
 Accepts: Object
 
-The `setupDb` parameter controls how the database is setup before tests. It accepts an object with the following parameters.
+The `dbSetup` parameter controls how the database is setup before tests. It accepts an object with the following parameters.
 
 - **clean**: Whether all tables should be deleted before any tests.
 - **setupCraft**: Whether the `Install.php` migration should be run before any tests.

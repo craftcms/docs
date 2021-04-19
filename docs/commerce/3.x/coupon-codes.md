@@ -8,7 +8,7 @@ Discounts are only available in the [Pro edition](editions.md) of Craft Commerce
 
 With Craft Commerce, coupon codes are set up as a condition within a discount promotion.
 
-To create a new discount promotion, navigate to Commerce → Promotions → Discounts in the control panel. To see the coupon condition, select to the “Coupon” tab.
+To create a new discount promotion, navigate to **Commerce** → **Promotions** → **Discounts** in the control panel. To see the coupon condition, select to the “Coupon” tab.
 
 An empty coupon field on the discount means no coupon is needed for the discount to work. Adding a coupon requires that a coupon is submitted to the cart. This makes the discount available to match the order but still needs to match all other discount conditions.
 
@@ -22,10 +22,10 @@ Example:
 
 ```twig
 <form method="post">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    <input type="hidden" name="cartUpdatedNotice" value="Added coupon code.">
-    {{ redirectInput('shop/cart') }}
     {{ csrfInput() }}
+    {{ actionInput('commerce/cart/update-cart') }}
+    {{ hiddenInput('successMessage', 'Added coupon code.'|hash) }}
+    {{ redirectInput('shop/cart') }}
 
     <input type="text"
        name="couponCode"
@@ -33,8 +33,8 @@ Example:
        value="{{ cart.couponCode }}"
        placeholder="{{ "Coupon Code"|t }}">
 
-    <input type="submit" value="Update Cart"/>
-<form>
+    <button type="submit">Update Cart</button>
+</form>
 ```
 
 Only one coupon code can exist on the cart at a time. To see the value of the current cart’s coupon code, use `{{ cart.couponCode }}`.

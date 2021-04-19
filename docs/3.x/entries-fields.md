@@ -32,7 +32,7 @@ Clicking the “Add an entry” button will bring up a modal window where you ca
 
 When you double-click on a related entry, a HUD will appear where you can edit the entry’s title and custom fields.
 
-## Templating
+## Development
 
 ### Querying Elements with Entries Fields
 
@@ -46,10 +46,12 @@ Possible values include:
 | `':notempty:'` | that have at least one related entry.
 | `100` | that are related to the entry with an ID of 100.
 | `[100, 200]` | that are related to an entry with an ID of 100 or 200.
+| `[':empty:', 100, 200]` | with no related entries, or related to an entry with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the entries with IDs of 100 and 200.
 | an [Entry](craft3:craft\elements\Entry) object | that are related to the entry.
 | an [EntryQuery](craft3:craft\elements\db\EntryQuery) object | that are related to any of the resulting entries.
 
+::: code
 ```twig
 {# Fetch artwork entries that are related to `artist` #}
 {% set works = craft.entries()
@@ -57,19 +59,33 @@ Possible values include:
     .myFieldHandle(artist)
     .all() %}
 ```
+```php
+// Fetch artwork entries that are related to `$artist`
+$works = \craft\elements\Entry::find()
+    ->section('artwork')
+    ->myFieldHandle($artist)
+    ->all();
+```
+:::
 
 ### Working with Entries Field Data
 
 If you have an element with an Entries field in your template, you can access its related entries using your Entries field’s handle:
 
+::: code
 ```twig
 {% set query = entry.myFieldHandle %}
 ```
+```php
+$query = $entry->myFieldHandle;
+```
+:::
 
 That will give you an [entry query](entries.md#querying-entries), prepped to output all of the related entries for the given field.
 
-To loop through all of the related entries, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
+To loop through all the related entries, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
 
+::: code
 ```twig
 {% set relatedEntries = entry.myFieldHandle.all() %}
 {% if relatedEntries|length %}
@@ -80,39 +96,70 @@ To loop through all of the related entries, call [all()](craft3:craft\db\Query::
     </ul>
 {% endif %}
 ```
+```php
+$relatedEntries = $entry->myFieldHandle->all();
+if (count($relatedEntries)) {
+    foreach ($relatedEntries as $rel) {
+        // $rel->url, $rel->title
+    }
+}
+```
+:::
 
 If you only want the first related entry, call [one()](craft3:craft\db\Query::one()) instead, and then make sure it returned something:
 
+::: code
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
     <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
 {% endif %}
 ```
+```php
+$rel = $entry->myFieldHandle->one();
+if ($rel) {
+    // $rel->url, $rel->title
+}
+```
+:::
 
-If you just need to check if there are any related entries (but don’t need to fetch them), you can call [exists()](craft3:craft\db\Query::exists()):
+If you’d like to check for related entries without fetching them, you can call [exists()](craft3:craft\db\Query::exists()):
 
+::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
     <p>There are related entries!</p>
 {% endif %}
 ```
+```php
+if ($entry->myFieldHandle->exists()) {
+    // There are related entries!
+}
+```
+:::
 
 You can set [parameters](entries.md#parameters) on the entry query as well. For example, to only fetch entries in the `news` section, set the [section](entries.md#section) param:
 
+::: code
 ```twig
 {% set relatedEntries = clone(entry.myFieldHandle)
     .section('news')
     .all() %}
 ```
+```php
+$relatedEntries = (clone $entry->myFieldHandle)
+    ->section('news')
+    ->all();
+```
+:::
 
 ::: tip
 It’s always a good idea to clone the entry query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
 :::
 
-### Saving Entries Fields in Entry Forms
+### Saving Entries Fields
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain an Entries field, you will need to submit your field value as a list of entry IDs, in the order you want them to be related.
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain an Entries field, you will need to submit your field value as a list of entry IDs, in the order you want them to be related.
 
 For example, you could create a list of checkboxes for each of the possible relations:
 

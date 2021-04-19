@@ -38,7 +38,7 @@ To see the help of each command, enter:
 
 You can also run `php craft help <command-name>` to learn more about a command and whatever parameters and options it may accept.
 
-While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default CLI commands:
+While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default console commands:
 
 ## `backup`
 

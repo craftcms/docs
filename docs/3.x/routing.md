@@ -9,7 +9,7 @@ Here is how Craft handles each request:
 
 0. **Should Craft handle this request in the first place?**
 
-   It’s important to keep in mind that Craft doesn’t actually get involved for *every* request that touches your server – only requests that go to your `index.php` file.
+   It’s important to keep in mind that Craft doesn’t get involved for *every* request that touches your server, but only requests that go to your `index.php` file.
 
    The `.htaccess` file that [comes with Craft](https://github.com/craftcms/craft/blob/master/web/.htaccess) will redirect all requests that don’t match a directory or file on your web server over to `index.php` behind the scenes. But if you point your browser directly at a file that *does* exist (such as an image, CSS, or JavaScript file), your web server will serve that file directly without loading Craft.
 
@@ -43,12 +43,8 @@ Here is how Craft handles each request:
 
 5. **404**
 
-   If none of the above checks are successful, Craft will throw a [NotFoundHttpException](yii2:yii\web\NotFoundHttpException). If [Dev Mode](config3:devMode) is enabled, an error report for the exception will be shown. Otherwise, a 404 error will be returned.
-
-   ::: tip
-   You can customize your site’s 404 page by placing a `404.twig` template at the root of your `templates/` directory. You can test this page even if [Dev Mode](config3:devMode) is enabled by going to `http://my-project.test/404`.
-   :::
-
+   If none of the above checks are successful, Craft will throw a [NotFoundHttpException](yii2:yii\web\NotFoundHttpException). \
+   If [Dev Mode](config3:devMode) is enabled, an error report for the exception will be shown. Otherwise, a 404 error will be returned using either your [custom error template](#error-templates) or Craft’s own default.
 
 ## Dynamic Routes
 
@@ -60,16 +56,14 @@ A good example of this is a yearly archive page, where you want the year to be o
 
 ### Creating Routes
 
-To create a new Route, go to Settings → Routes and click the “New Route” button. A modal window will appear where you can define the route settings.
+To create a new Route, go to **Settings** → **Routes** and choose **New Route**. A modal window will appear where you can define the route settings:
 
-The modal has the following settings:
-
-* What should the URI look like?
-* Which template should get loaded?
+- What should the URI look like?
+- Which template should get loaded?
 
 The first setting can contain “tokens”, which represent a range of possible matches, rather than a specific string. (The `year` token, for example, represents four consecutive digits.) When you click on a token, Craft inserts it into the URI setting wherever the cursor is.
 
-If you want to match URIs that look like `blog/archive/2018`, you type `blog/archive/` into the URI field, and then click on the `year` token.
+If you want to match URIs that look like `blog/archive/2018`, type `blog/archive/` into the URI field and choose the `year` token.
 
 ::: tip
 Route URIs should **not** begin with a slash (`/`).
@@ -77,7 +71,7 @@ Route URIs should **not** begin with a slash (`/`).
 
 After defining your URI pattern and entering a template path, click the “Save” button. The modal will close, revealing your new route on the page.
 
-When you point your browser to `http://my-project.test/blog/archive/2018`, it will match your new route, and Craft will load the specified template.
+When you point your browser to `https://my-project.nitro/blog/archive/2018`, it will match your new route, and Craft will load the specified template.
 
 The value of the `year` token will also be available to the template as a variable called `year`.
 
@@ -86,15 +80,15 @@ The value of the `year` token will also be available to the template as a variab
 
 The following tokens are available to the URI setting:
 
-* `*` – Any string of characters, except for a forward slash (/)
-* `day` – Day of a month (1-31 or 01-31)
-* `month` – Numeric representation of a month (1-12 or 01-12)
-* `number` – Any positive integer
-* `page` – Any positive integer
-* `uid` – A v4 compatible UUID (universally unique ID)
-* `slug` – Any string of characters, except for a forward slash (/)
-* `tag` – Any string of characters, except for a forward slash (/)
-* `year` – Four consecutive digits
+- `*` – Any string of characters, except for a forward slash (/)
+- `day` – Day of a month (1-31 or 01-31)
+- `month` – Numeric representation of a month (1-12 or 01-12)
+- `number` – Any positive integer
+- `page` – Any positive integer
+- `uid` – A v4 compatible UUID (universally unique ID)
+- `slug` – Any string of characters, except for a forward slash (/)
+- `tag` – Any string of characters, except for a forward slash (/)
+- `year` – Four consecutive digits
 
 
 ## Advanced Routing with URL Rules
@@ -143,8 +137,49 @@ For example, with this URL rule:
 'blog/archive/<year:\d{4}>' => ['template' => 'blog/_archive'],
 ```
 
-If you access `http://my-project.test/blog/archive/2018`, your `blog/_archive.twig` template will get loaded a `year` variable set to `2018`.
+If you access `https://my-project.nitro/blog/archive/2018`, your `blog/_archive.twig` template will get loaded a `year` variable set to `2018`.
 
 ```twig
 <h1>Blog Entries from {{ year }}</h1>
 ```
+
+### Accessing Named Parameters in your Controllers
+
+To access named parameters in your controllers, you will need to add the parameter(s) to your controller's action definition.
+
+For example, with this URL rule:
+
+```php
+'blog/archive/<year:\d{4}>' => 'controller/action/foo',
+```
+
+Your controller method would be:
+
+```php
+public function actionFoo(int $year = null)
+{
+    // ...
+}
+```
+
+## Error Templates
+
+You can provide your own error templates for Craft to use when returning errors.
+
+When Craft encounters an error for a front end request, it will take your <config3:errorTemplatePrefix> into account and check the root of your `templates/` directory, in order, for the following:
+
+1. A template matching the error’s status code, like `404.twig`.
+2. For a 503 error, a template named `offline.twig`.
+3. A template named `error.twig`.
+
+When Craft finds a matching error template, it will use that and provide it with a few extra Twig variables:
+
+- `message` – error message
+- `code` – exception code
+- `file` – file that threw the exception
+- `line` – line in which the exception occurred
+- `statusCode` – error’s HTTP status code
+
+::: tip
+You can test these pages even if [Dev Mode](config3:devMode) is enabled by going to `https://my-project.nitro/404`, substituting `404` for the name of the template you’re testing.
+:::

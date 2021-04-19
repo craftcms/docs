@@ -74,7 +74,13 @@
 }
 
 .top-bar {
-  @apply block h-12 w-full content-center relative px-10 pt-2 max-w-screen-md;
+  @apply block h-12 w-full content-center relative px-6 pt-2 max-w-screen-md;
+}
+
+@screen md {
+  .top-bar {
+    @apply px-10;
+  }
 }
 
 .sidebar-mask {
@@ -106,7 +112,14 @@
 
 .theme-default-content:not(.custom),
 .content-wrapper {
-  @apply py-8 px-10 max-w-screen-md;
+  @apply py-8 px-6 max-w-screen-md;
+}
+
+@screen md {
+  .theme-default-content:not(.custom),
+  .content-wrapper {
+    @apply px-10;
+  }
 }
 
 @screen lg {
@@ -131,8 +144,6 @@
 import "../styles/index.pcss";
 import "prismjs/themes/prism-solarizedlight.css";
 import "prismjs/plugins/treeview/prism-treeview.css";
-
-import TypeMate from "typemate";
 
 import Page from "../components/Page";
 import LeftBar from "../components/LeftBar";
@@ -253,8 +264,6 @@ export default {
     this.$router.afterEach(() => {
       this.isSidebarOpen = false;
     });
-
-    this.dewidow();
 
     // temporary means of scrolling to URL hash on load
     // https://github.com/vuejs/vuepress/issues/2428
@@ -434,19 +443,6 @@ export default {
       setTimeout(() => {
         this.isSidebarTransitioning = false;
       }, 1500);
-    },
-
-    dewidow() {
-      let typemate = new TypeMate(document.getElementById("content"));
-      typemate.apply();
-    },
-  },
-
-  watch: {
-    $route() {
-      this.$nextTick(() => {
-        this.dewidow();
-      });
     },
   },
 };

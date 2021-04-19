@@ -34,7 +34,7 @@ Singles are used for one-off pages that have unique content requirements, such a
 * an About Us page
 * a Contact Us page
 
-Unlike the other section types, Singles only have one entry associated with them, and they don’t have an editable Author, Slug, Post Date, or Expiration Date.
+Unlike the other section types, Singles only have one entry associated with them, and they don’t have an editable Author, Post Date, or Expiration Date.
 
 #### Channels
 
@@ -91,6 +91,10 @@ The above template could also be expressed with this syntax:
 ```
 
 With the above Entry URI Format, a top-level entry’s URI might end up as `docs/templating`, whereas a nested entry’s URI might end up as `docs/templating/tags`.
+
+::: tip
+You can designate any one entry as a site’s homepage using a special `__home__` URI.
+:::
 
 ### Preview Targets
 

@@ -21,7 +21,7 @@ It offers two benefits:
 - GraphQL schemas, and the access settings for the public schema
 - Matrix block types
 - Plugin editions and settings
-- Routes defined in Settings → Routes
+- Routes defined in **Settings** → **Routes**
 - Sections and entry types
 - Sites and site groups
 - System name, time zone, and status (live/offline)
@@ -38,7 +38,7 @@ Before you start propagating project config changes across your environments, ma
 
 1. Pick a primary environment that has the most up-to-date data. (If your project is already live, this should be your production environment.)
 2. Ensure your primary environment is running the latest version of Craft.
-3. Go to Utilities → Project Config on that environment, and click the “Rebuild” button to ensure that its project config is up to date with settings stored throughout the database.
+3. Go to **Utilities** → **Project Config** on that environment, and click the “Rebuild” button to ensure that its project config is up to date with settings stored throughout the database.
 4. Back up the database on the primary environment.
 5. For all other environments, restore the database backup created in the previous step, delete the contents of the `config/project/` folder, and then load the site in your browser to ensure it works. (Craft will regenerate the YAML files in `config/project/` the first time the control panel is accessed.)
 6. Disable the <config3:allowAdminChanges> config setting on all non-development environments, to avoid [losing changes unexpectedly](#production-changes-may-be-forgotten) going forward.
@@ -49,12 +49,20 @@ Now you’re ready to start propagating changes in your `config/project/` folder
 
 As you make changes in a development environment, you will notice the contents of your `config/project/` folder are updated to reflect those changes. Commit those files to your Git repository just like your templates, front-end resources, and other project files.
 
+::: warning
+Don’t make manual changes to your YAML files unless you’re positive you know what you are doing. Manual edits are prone to miss changes in other parts of the project config that should be made simultaneously.
+:::
+
 When you [deploy your changes to other environments](https://craftcms.com/knowledge-base/deployment-best-practices), you can then _apply_ the project config changes in one of two ways:
 
 1. From the “Project Config” utility in the control panel.
 2. By running the `php craft project-config/apply` terminal command.
 
 Either way, Craft will compare the files in the local `config/project/` folder with its already-loaded project config, and pull in whatever changes it finds.
+
+::: tip
+When [installing Craft](installation.md), any existing configuration in your `config/project/` directory will be applied automatically as long as its Craft and plugin versions match those being installed.
+:::
 
 ## Caveats
 
@@ -119,19 +127,26 @@ php craft project-config/apply --force
 
 This will treat all project config values as added or updated, resulting in a longer sync process and potentially overriding any expected changes that might have been favored in the database.
 
-## Opting Out
+## Manual YAML File Generation
 
-You can opt out of sharing your project config files with other environments by adding the following line to the `.gitignore` file at the root of your project:
+If you want control over _when_ the project config YAML files are updated, or you want to opt out of saving them altogether, you can configure Craft to stop writing the YAML files automatically as changes are made. To do that, add the following to your `config/app.php` file:
 
+```php
+return [
+    // ...
+    'components' => [
+        // ...
+        'projectConfig' => function() {
+            $config = craft\helpers\App::projectConfigConfig();
+            $config['writeYamlAutomatically'] = false;
+            return Craft::createObject($config);
+        },
+    ]
+];
 ```
-/config/project
-```
 
-Then run the following terminal commands to delete all existing `config/project/` files from your repository:
+You can manually trigger YAML file generation from the Project Config utility, or by running the following terminal command:
 
 ```bash
-git rm -r --cached config/project/\*
-git commit -a -m 'Remove project config files'
+php craft project-config/write
 ```
-
-Craft will continue recording changes to YAML files within the `config/project/` folder, but they will no longer get committed to your project’s Git repository or shared with other environments.

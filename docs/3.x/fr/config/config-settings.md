@@ -370,7 +370,7 @@ By default Craft will run `mysqldump` or `pg_dump`, provided that those librarie
 
 There are several tokens you can use that Craft will swap out at runtime:
 
-- `{path}` - the target backup file path
+- `{file}` - the target backup file path
 - `{port}` - the current database port
 - `{server}` - the current database host name
 - `{user}` - the user to connect to the database
@@ -637,13 +637,13 @@ Defined by
 
 The URI segment Craft should look for when determining if the current request should route to the control panel rather than the front-end website.
 
-This can be set to `null` if you have a dedicated host name for the control panel (e.g. `cms.example.com`), or you are running Craft in [Headless Mode](config3:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own webroot directory on your server, with an `index.php` file that defines the `CRAFT_CP` PHP constant.
+This can be set to `null` if you have a dedicated host name for the control panel (e.g. `cms.example.com`), or you are running Craft in [Headless Mode](config3:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own web root directory on your server, with an `index.php` file that defines the `CRAFT_CP` PHP constant.
 
 ```php
 define('CRAFT_CP', true);
 ```
 
-Alternatively, you can set the <config3:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your control panel due to URI conflicts with actual folders/files in your main webroot. (For example, if you have an `assets/` folder, that would conflict with the `/assets` page in the control panel.)
+Alternatively, you can set the <config3:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your control panel due to URI conflicts with actual folders/files in your main web root. (For example, if you have an `assets/` folder, that would conflict with the `/assets` page in the control panel.)
 
 
 

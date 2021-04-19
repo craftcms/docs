@@ -83,7 +83,7 @@ Now create a Category Group we can use for blog post categories:
 You’ll probably want a rich text editor (WYSISYG) for editing the main text of your blog posts. For this, we’ll install the first-party Redactor plugin. You can do this through the control panel or from the terminal. Let’s be adventurous and use console commands:
 
 1. From your terminal, run `composer require craftcms/redactor`. Composer will download the plugin and add it to your project.
-2. Now run `php craft install/plugin redactor`.
+2. Now run `php craft plugin/install redactor`.
 
 That’s it! The Redactor plugin is installed and ready to use in our site.
 
@@ -106,7 +106,7 @@ Next, let’s create the individual fields for our blog posts:
 6. Create a Matrix field named “Post Content”.\
    Choose “New Field” once more, enter “Post Content” for its name, and choose “Matrix” from the “Field Type” dropdown menu. We’ll use the Configuration setting to define two Block Types that can be added and reordered to build the post content.
    1. First add a text block an author can use to enter rich text.\
-      Choose “+ New block type” and enter “Text” for its name. In the Field Settings section, enter the name “Text” again and select “Rich Text” from the “Field Type” dropdown menu. Since every post should have at least some text, make sure “This field is required” is checked.
+      Choose “+ New block type” and enter “Text” for its name. In the Field Settings section, enter the name “Text” again and select “Redactor” from the “Field Type” dropdown menu. Since every post should have at least some text, make sure “This field is required” is checked.
    2. Add one more block for images.\
       Choose “+ New block type” again and enter “Image” for its name. Enter “Image” again for the “Name” under Field Settings. Mark this field required as well and select “Assets” from the “Field Type” dropdown menu. Restrict uploads to the “Blog” volume, enable “Restrict allowed file types?” and make sure “Image” is checked.
    3. Save the field.

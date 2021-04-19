@@ -1,6 +1,6 @@
 # User Permissions
 
-Modules and plugins can register new user permissions to the system using the [EVENT_REGISTER_PERMISSIONS](craft3:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) event:
+Modules and plugins can register new [user permissions](../user-management.md#permissions) to the system using the [EVENT_REGISTER_PERMISSIONS](craft3:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) event:
 
 ```php
 use craft\events\RegisterUserPermissionsEvent;
@@ -37,6 +37,10 @@ Permissions can also have nested permissions by adding a `nested` key to the per
     ],
 ];
 ```
+
+::: tip
+Nesting is meant for UI only; if you wanted to reference `nestedPermissionName` in the example above you would use exactly that key.
+:::
 
 ## Requiring Permissions
 

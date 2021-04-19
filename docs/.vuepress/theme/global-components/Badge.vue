@@ -4,13 +4,14 @@ export default {
   props: {
     type: {
       type: String,
-      default: "tip"
+      default: "tip",
     },
+    title: String,
     text: String,
     vertical: {
       type: String,
-      default: "top"
-    }
+      default: "top",
+    },
   },
   render(h, { props, slots }) {
     return h(
@@ -18,12 +19,15 @@ export default {
       {
         class: ["badge", props.type],
         style: {
-          verticalAlign: props.vertical
-        }
+          verticalAlign: props.vertical,
+        },
+        attrs: {
+          title: props.title,
+        },
       },
       props.text || slots().default
     );
-  }
+  },
 };
 </script>
 
@@ -50,12 +54,21 @@ export default {
     background-color: #e7c000;
   }
 
+  &.verb {
+    @apply uppercase bg-transparent tracking-widest leading-none h-auto font-mono;
+    font-size: smaller;
+    border-width: 1px;
+    border-color: var(--border-color);
+    color: var(--sidebar-link-color);
+    padding: 4px calc(5px - 0.1em) 4px 5px;
+  }
+
   &.edition {
-    @apply uppercase bg-transparent text-xs tracking-widest leading-none h-auto;
+    @apply uppercase bg-transparent text-xs tracking-widest leading-none h-auto text-center font-medium;
     border-width: 1px;
     border-color: var(--text-color);
     color: var(--text-color);
-    padding: 1px 3px;
+    padding: 1px 0.175rem 1px 0.25rem;
   }
 
   & + & {

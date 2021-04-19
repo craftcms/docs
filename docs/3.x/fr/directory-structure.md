@@ -57,7 +57,7 @@ You can customize the name and location of this folder by changing the [CRAFT_VE
 
 ### `web/`
 
-This directory represents your server’s webroot. The public `index.php` file lives here and this is where any of the local site images, CSS, and JS that is statically served should live.
+This directory represents your server’s web root. The public `index.php` file lives here and this is where any of the local site images, CSS, and JS that is statically served should live.
 
 ::: tip
 You can customize the name and location of this folder. If you move it so it’s no longer living alongside the other Craft folders, make sure to update the [CRAFT_BASE_PATH](config/README.md#craft-vendor-path) PHP constant in `<Webroot>/index.php`.

@@ -32,6 +32,7 @@ Filter | Description
 [format](https://twig.symfony.com/doc/2.x/filters/format.html) | Formats a string by replacing placeholders.
 [group](#group) | Groups items in an array.
 [hash](#hash) | Prefixes a string with a keyed-hash message authentication code (HMAC).
+[httpdate](#httpdate) | Converts a date to the HTTP format.
 [id](#id) | Normalizes an element ID into only alphanumeric characters, underscores, and dashes.
 [indexOf](#indexof) | Returns the index of a given value within an array, or the position of a passed-in string within another string.
 [index](#index) | Indexes the items in an array.
@@ -69,6 +70,7 @@ Filter | Description
 [round](https://twig.symfony.com/doc/2.x/filters/round.html) | Rounds a number.
 [rss](#rss) | Converts a date to RSS date format.
 [slice](https://twig.symfony.com/doc/2.x/filters/slice.html) | Extracts a slice of a string or array.
+[slug](https://twig.symfony.com/doc/2.x/filters/slug.html) | Transforms a given string into another string that only includes safe ASCII characters.
 [snake](#snake) | Formats a string into “snake_case”.
 [sort](https://twig.symfony.com/doc/2.x/filters/sort.html) | Sorts an array.
 [spaceless](https://twig.symfony.com/doc/2.x/filters/spaceless.html) | Removes whitespace between HTML tags.
@@ -259,6 +261,13 @@ You can pass `stripZeros=true` to remove any fraction digits if the value to be 
 {# Output: $1,000,000 #}
 ```
 
+If the passed-in value isn’t a valid number it will be returned verbatim:
+
+```twig
+{{ 'oh hai'|currency('USD') }}
+{# Output: oh hai #}
+```
+
 ## `date`
 
 Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) object.
@@ -409,6 +418,13 @@ Formats a number of bytes into something nicer.
 {# Output: 1.945 MB #}
 ```
 
+If the passed-in value isn’t a valid number it will be returned verbatim:
+
+```twig
+{{ 'oh hai'|filesize }}
+{# Output: oh hai #}
+```
+
 ## `filter`
 
 Filters elements of an array.
@@ -465,6 +481,22 @@ $foo = Craft::$app->security->validateData($foo);
 if ($foo !== false) {
     // data is valid
 }
+```
+
+## `httpdate`
+
+Converts a date to the HTTP format, used by [RFC 7231](https://tools.ietf.org/html/rfc7231#section-7.1.1.1)-compliant HTTP headers like `Expires`.
+
+```twig
+{% header "Expires: " ~ expiry|httpdate %}
+{# Output: Expires: Thu, 08 Apr 2021 13:00:00 GMT #}
+```
+
+You can use the `timezone` param to specify the date’s timezone for conversion to GMT:
+
+```twig
+{% header "Expires: " ~ expiry|httpdate('CET') %}
+{# Output: Expires: Thu, 08 Apr 2021 21:00:00 GMT #}
 ```
 
 ## `id`
@@ -736,6 +768,13 @@ You can optionally pass `false` to it if you want group symbols to be omitted (e
 {# Output: 1000000 #}
 ```
 
+If the passed-in value isn’t a valid number it will be returned verbatim:
+
+```twig
+{{ 'oh hai'|number }}
+{# Output: oh hai #}
+```
+
 ## `parseRefs`
 
 Parses a string for [reference tags](../reference-tags.md).
@@ -760,6 +799,18 @@ Returns a string formatted in “PascalCase” (AKA “UpperCamelCase”).
 ## `percentage`
 
 Formats a percentage according to the user’s preferred language.
+
+```twig
+{{ 0.85|percentage }}
+{# Output: 85% #}
+```
+
+If the passed-in value isn’t a valid number it will be returned verbatim:
+
+```twig
+{{ 'oh hai'|percentage }}
+{# Output: oh hai #}
+```
 
 ## `prepend`
 
@@ -806,7 +857,7 @@ Appends one or more items onto the end of an array, and returns the new array.
 
 ```twig
 {% set array1 = ['foo'] %}
-{% set array2 = array|push('bar', 'baz') %}
+{% set array2 = array1|push('bar', 'baz') %}
 {# Result: ['foo', 'bar', 'baz'] #}
 ```
 
@@ -983,7 +1034,7 @@ Prepends one or more items to the beginning of an array, and returns the new arr
 
 ```twig
 {% set array1 = ['foo'] %}
-{% set array2 = array|unshift('bar', 'baz') %}
+{% set array2 = array1|unshift('bar', 'baz') %}
 {# Result: ['bar', 'baz', 'foo'] #}
 ```
 
@@ -1003,7 +1054,7 @@ Runs an array through <craft3:craft\helpers\ArrayHelper::where()>.
 
 ```twig
 {% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}
-{{ array|filterByValue(v => v == 'bar') }}
+{{ array|where(v => v == 'bar') }}
 {# Result: { 'foo': 'bar', 'bat': 'bar' } #}
 ```
 
@@ -1019,7 +1070,9 @@ Returns an array without the specified element(s).
 
 ## `withoutKey`
 
-Returns an array without the specified key.
+Returns an array without one or more specified keys.
+
+The key can be a single key as a string:
 
 ```twig
 {% set array = {
@@ -1028,4 +1081,17 @@ Returns an array without the specified key.
     baz: 'baz'
 } %}
 {% set filtered = array|withoutKey('baz') %}
+{# Result: { 'foo': 'foo', 'bar: 'bar' } #}
+```
+
+You can also pass multiple keys in an array:
+
+```twig
+{% set array = {
+    foo: 'foo',
+    bar: 'bar',
+    baz: 'baz'
+} %}
+{% set filtered = array|withoutKey(['bar', 'baz']) %}
+{# Result: { 'foo': 'foo' } #}
 ```

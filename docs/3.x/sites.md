@@ -14,35 +14,40 @@ The multi-site feature in Craft is for sites with the same publishing team. You 
 
 Every Craft installation starts with one default site. The site name is what you defined at time of installation, and the handle is `default`.
 
-You add additional sites using the Sites settings in Settings → Sites.
+You add additional sites using the Sites settings in **Settings** → **Sites**.
 
 Each site has the following attributes:
 
-* Group
-* Name
-* Handle
-* Language
-* Is Primary Site?
-* Base URL
+- Group
+- Name
+- Handle
+- Language
+- Is Primary Site?
+- Base URL
 
 
 ### Site Groups
 
 Site Groups allow you to organize your sites together by commonality, like language or site type.
 
-Craft creates the first Site Group for you – named after the default site – and assigns the default site to that group.
+Craft creates the first Site Group for you, named after the default site, and assigns the default site to that group.
 
 Similar to Field Groups, Site Groups are for organization only.
 
-You can access the current site's group information using:
+You can access the current site’s group information using `currentSite.group`:
 
 ```twig
-Site ID:            {{ currentSite.id }}
-Site Handle:        {{ currentSite.handle }}
-Site Name:          {{ currentSite.name }}
-Site Language:      {{ currentSite.language }}
-Is Primary Site?:   {{ currentSite.primary }}
-Base URL:           {{ currentSite.baseUrl }}
+{# @var currentSite craft\models\Site #}
+Site ID:          {{ currentSite.id }}
+Site Handle:      {{ currentSite.handle }}
+Site Name:        {{ currentSite.name }}
+Site Language:    {{ currentSite.language }}
+Is Primary Site?: {{ currentSite.primary }}
+Base URL:         {{ currentSite.baseUrl }}
+
+{# @var siteGroup craft\models\SiteGroup #}
+{% set siteGroup = currentSite.group %}
+Site Group Name:  {{ siteGroup.name }}
 ```
 
 
@@ -86,7 +91,8 @@ If you have multiple sites using different root domains like `https://site-a.com
 :::
 
 ::: warning
-Don’t ever use the `@web` alias when defining your sites’ Base URLs. It could introduce a [cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) vulnerability, and Craft won’t be able to reliably determine which site is being requested.
+Careful using the `@web` alias to define your sites’ Base URLs.  
+You should explicitly override the alias to avoid introducing a [cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) vulnerability, and to make sure Craft can reliably determine which site is being requested. See [Aliases](config/#aliases) for an example.
 :::
 
 ## Propagating Entries Across All Enabled Sites
@@ -105,13 +111,13 @@ In this short guide we'll walk through the steps of setting up a new site in Cra
 
 The first step is to create the new site in the Settings of your Craft installation.
 
-1. Go to Settings → Sites and click the New Site button.
-2. Choose the group your site should belong to using the drop-down. The group selection won't have any impact on your site's functionality.
+1. Go to **Settings** → **Sites** and choose **New Site**.
+2. Use the dropdown menu to choose the group your site should belong to. The group selection won’t have any impact on your site’s functionality.
 3. Give your site a name. Craft uses the site name in the control panel, and you can also display it in your templates using `{{ siteName }}`.
-4. Based on the Site name, Craft will generate a Site Handle. You can edit the Handle if you'd like. You will use the Site Handle to refer to this site in the templates.
+4. Based on the Site name, Craft will generate a Site Handle. You can edit the Handle if you’d like. You will use the Site Handle to refer to this site in the templates.
 5. Choose the language for this site (see above for more information on how you can use languages).
-6. If this site should be the Primary Site, toggle the Is Primary Site? to enable it.
-7. Check the box for "This site has its own base URL" and then put in the Base URL. For our example it'll be `https://beta.craftcms.com`.
+6. If this site should be the Primary Site, toggle **Is Primary Site?** to enable it.
+7. Check the box for **This site has its own base URL** and put in the Base URL. For our example it’ll be `https://beta.craftcms.com`.
 8. Save the new site.
 
 ### Step 2: Create Template Directories
@@ -138,8 +144,8 @@ Using new or existing entries, test that the Section, Field, and Translation Met
 
 If you have any local asset volumes, you will need to make sure those assets are available from each of your sites.
 
-* The File System Path settings should be relative (`uploads/images/`).
-* The URL settings should be relative (`/images`)
+- The File System Path settings should be relative (`uploads/images/`).
+- The URL settings should be relative (`/images`)
 
 ### Step 7: Configure Your Web Server and DNS
 
@@ -152,21 +158,21 @@ This guide will walk you through all of the steps that are typically involved in
 
 ### Step 1: Defining Your Sites and Languages
 
-The first step to creating localized site is to decide the languages you need to support. After that, create a new Site in Craft for each supported language using the [guide on configuring a multi-site setup in Craft](sites.md).
+The first step to creating localized site is to decide the languages you need to support. After that, create a new Site in Craft for each supported language.
 
 ### Step 2: Update Your Sections
 
-After creating a new site for a language, enable the new site in each Section. In Settings → Sections, go into each section settings you want included in the localized site and enable the site in the Site Settings. Fill out the Entry URI Format (for Channel and Structure sections) or URI (for Single sections) to reflect how you want the URIs structured for that site.
+After creating a new site for a language, enable the new site in each Section. In **Settings** → **Sections**, go into each section settings you want included in the localized site and enable the site in the Site Settings. Fill out the Entry URI Format (for Channel and Structure sections) or URI (for Single sections) to reflect how you want the URIs structured for that site.
 
 ### Step 3: Define Your Translatable Fields
 
-In Settings → Fields, choose the fields you want to have translatable. Under Translation Method, choose "Translate for each language."
+In **Settings** → **Fields**, choose the fields you want to have translatable. Under **Translation Method**, choose **Translate for each language**.
 
-Craft will allow you to update this field's content in each entry on a per-language basis.
+Craft will allow you to update this field’s content in each entry on a per-language basis.
 
 ### Step 4: Update Your Templates
 
-If you have any templates that you only want to serve from a specific site, you can create a new sub-folder in your templates folder, named after your site's handle, and place the templates in there.
+If you have any templates that you only want to serve from a specific site, you can create a new subfolder in your templates folder, named after your site's handle, and place the templates in there.
 
 For example, if you wanted to give your German site its own homepage template, you might set your templates folder up like this:
 
