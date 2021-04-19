@@ -8,7 +8,7 @@ module.exports = {
     ["2.x", { label: "2.x" }],
     ["1.x", { label: "1.x" }]
   ],
-  defaultVersion: "1.x",
+  defaultVersion: "2.x",
   searchPlaceholder: "Search the Nitro docs (Press “/” to focus)",
   primarySet: true,
   sidebar: {
@@ -17,7 +17,7 @@ module.exports = {
         {
           title: "Introduction",
           collapsable: false,
-          children: ["", "installation", "updating", "upgrade"]
+          children: ["", "installation", "updating", "upgrade", "how-nitro-works"]
         },
         {
           title: "Using Nitro",

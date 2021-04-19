@@ -274,27 +274,21 @@ This query is used to query for assets.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -322,27 +316,21 @@ This query is used to return the number of assets.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -370,27 +358,21 @@ This query is used to query for a single asset.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -418,27 +400,21 @@ This query is used to query for entries.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -479,27 +455,21 @@ This query is used to return the number of entries.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -540,27 +510,21 @@ This query is used to query for a single entry.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -601,27 +565,21 @@ This query is used to query for global sets.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -638,27 +596,21 @@ This query is used to query for a single global set.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -675,27 +627,21 @@ This query is used to query for users.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -718,27 +664,21 @@ This query is used to return the number of users.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -761,27 +701,21 @@ This query is used to query for a single user.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -804,27 +738,21 @@ This query is used to query for tags.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -842,27 +770,21 @@ This query is used to return the number of tags.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -880,27 +802,21 @@ This query is used to query for a single tag.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -918,27 +834,21 @@ This query is used to query for categories.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -970,27 +880,21 @@ This query is used to return the number of categories.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -1022,27 +926,21 @@ This query is used to query for a single category.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unsaved drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
-| `siteId`| `String` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
-| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to *any* of the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
 | `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
@@ -1149,8 +1047,8 @@ This is the interface implemented by all assets.
 | `mimeType`| `String` | The file’s MIME type, if it can be determined.
 | `path`| `String` | The asset's path in the volume.
 | `dateModified`| `DateTime` | The date the asset file was last modified.
-| `prev`| `AssetInterface` | Returns the previous element relative to this one, from a given set of criteria. CAUTION: Applying arguments to this field severely degrades the performance of the query.
-| `next`| `AssetInterface` | Returns the next element relative to this one, from a given set of criteria. CAUTION: Applying arguments to this field severely degrades the performance of the query.
+| `prev`| `AssetInterface` | Returns the previous element relative to this one, from a given set of criteria.
+| `next`| `AssetInterface` | Returns the next element relative to this one, from a given set of criteria.
 
 
 ### The `EntryInterface` interface
@@ -1182,7 +1080,8 @@ This is the interface implemented by all entries.
 | `sourceId`| `Int` | Returns the element’s ID, or if it’s a draft/revision, its source element’s ID.
 | `sourceUid`| `String` | Returns the element’s UUID, or if it’s a draft/revision, its source element’s UUID.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `isUnsavedDraft`| `Boolean` | Returns whether this is a draft.
+| `isUnpublishedDraft`| `Boolean` | Returns whether this is an unpublished draft.
+| `isUnsavedDraft`| `Boolean` | Returns whether this is an unpublished draft. **This field is deprecated.** `isUnpublishedDraft` should be used instead.
 | `draftName`| `String` | The name of the draft.
 | `draftNotes`| `String` | The notes for the draft.
 | `sectionId`| `Int` | The ID of the section that contains the entry.
@@ -1195,8 +1094,8 @@ This is the interface implemented by all entries.
 | `parent`| `EntryInterface` | The entry’s parent, if the section is a structure.
 | `url`| `String` | The element’s full URL
 | `localized`| `[EntryInterface]` | The same element in other locales.
-| `prev`| `EntryInterface` | Returns the previous element relative to this one, from a given set of criteria. CAUTION: Applying arguments to this field severely degrades the performance of the query.
-| `next`| `EntryInterface` | Returns the next element relative to this one, from a given set of criteria. CAUTION: Applying arguments to this field severely degrades the performance of the query.
+| `prev`| `EntryInterface` | Returns the previous element relative to this one, from a given set of criteria.
+| `next`| `EntryInterface` | Returns the next element relative to this one, from a given set of criteria.
 
 
 ### The `GlobalSetInterface` interface
@@ -1267,7 +1166,6 @@ This is the interface implemented by all users.
 | `status`| `String` | The element's status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
-| `photo`| `AssetInterface` | The user's photo.
 | `friendlyName`| `String` | The user's first name or username.
 | `fullName`| `String` | The user's full name.
 | `name`| `String` | The user's full name or username.
@@ -1309,8 +1207,8 @@ This is the interface implemented by all categories.
 | `parent`| `CategoryInterface` | The category’s parent.
 | `url`| `String` | The element’s full URL
 | `localized`| `[CategoryInterface]` | The same element in other locales.
-| `prev`| `CategoryInterface` | Returns the previous element relative to this one, from a given set of criteria. CAUTION: Applying arguments to this field severely degrades the performance of the query.
-| `next`| `CategoryInterface` | Returns the next element relative to this one, from a given set of criteria. CAUTION: Applying arguments to this field severely degrades the performance of the query.
+| `prev`| `CategoryInterface` | Returns the previous element relative to this one, from a given set of criteria.
+| `next`| `CategoryInterface` | Returns the next element relative to this one, from a given set of criteria.
 
 
 ### The `TagInterface` interface

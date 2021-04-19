@@ -40,6 +40,7 @@ Possible values include:
 | `':notempty:'` | that have at least one related user.
 | `100` | that are related to the user with an ID of 100.
 | `[100, 200]` | that are related to a user with an ID of 100 or 200.
+| `[':empty:', 100, 200]` | without related users, or related to a user with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the users with IDs of 100 and 200.
 | an [User](craft3:craft\elements\User) object | that are related to the user.
 | an [UserQuery](craft3:craft\elements\db\UserQuery) object | that are related to any of the resulting users.
@@ -162,7 +163,7 @@ For example, you could create a list of checkboxes for each of the possible rela
 {{ hiddenInput('fields[myFieldHandle]', '') }}
 
 {# Get all of the possible user options #}
-{% set possibleUsers = craft.entries()
+{% set possibleUsers = craft.users()
     .group('authors')
     .orderBy('username ASC')
     .all() %}

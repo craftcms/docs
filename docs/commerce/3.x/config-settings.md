@@ -175,7 +175,7 @@ Since
 
 
 
-How long a cart should go without being updated before it’s considered inactive. (Defaults to one day.)
+How long a cart should go without being updated before it’s considered inactive. (Defaults to one hour.)
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](craft3:craft\helpers\ConfigHelper::durationInSeconds()) for a list of supported value types.
 

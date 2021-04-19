@@ -2,6 +2,47 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-04-06
+## Changed
+- Updated Nitro 2.x documentation for version 2.0.7.
+
+## 2021-04-01
+## Added
+- Documented error templates. (Not a prank.)
+
+## 2021-03-25
+## Added
+- Added Nitro design goals and architectural overview.
+
+## 2021-03-23
+### Added
+- Documented the new `{% script %}` Twig tag.
+- Documented the new `andRelatedTo` element query parameter.
+
+## 2021-03-09
+### Added
+- Documented Nitro `php` command.
+- Documented Craft `|httpdate` Twig filter.
+
+### Changed
+- Improved notes for working with Nitro and WSL2.
+
+## 2021-03-08
+### Added
+- Documented recommended Docker settings for Nitro.
+
+### Fixed
+- Fixed a bug that prevented search keyboard shortcut from working on some cases.
+
+## 2021-03-03
+### Added
+- Documented the `is boolean` Twig test.
+- Documented the ability to use `.user.ini` to customize Nitro PHP settings.
+
+## 2021-03-02
+### Changed
+- Updated default Nitro doc set with the release of Nitro 2.
+
 ## 2021-02-25
 ### Added
 - Added a Queue Jobs page to the Extending Craft section.

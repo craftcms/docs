@@ -20,5 +20,5 @@ Nitro installs the following on every machine:
 - [Multipass](https://multipass.run/) 1.5.0+
 
 ::: warning
-Nitro does not yet support M1 Macs.
+Nitro 1 does not support M1 Macs.
 :::

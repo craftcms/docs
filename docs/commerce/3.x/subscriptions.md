@@ -6,11 +6,11 @@ Because not all gateways support subscriptions via API, Commerce does not allow 
 
 Once you’ve added a payment gateway that supports subscriptions, you can then navigate to **Commerce** → **Settings** → **Subscription Plans** to set up subscription plans.
 
-## Subscription support across gateways
+## Subscription Support Across Gateways
 
 Currently, only the [Commerce Stripe gateway](https://plugins.craftcms.com/commerce-stripe) supports subscriptions. If you need subscriptions for another gateway that supports them, a plugin first must be created that implements that gateway.
 
-## Subscription statuses
+## Subscription Statuses
 
 Commerce has the following subscription statuses:
 
@@ -25,15 +25,15 @@ In case more than one subscription status could be applied, the order of precede
 
 You create a subscription by subscribing a user to a subscription plan. As you are subscribing a user, it is possible to pass parameters for the subscription. All subscription gateways must support a `trialDays` parameter at minimum.
 
-## Changing a subscription’s plan
+## Changing a Subscription’s Plan
 
 Depending on the gateway, it might be possible to switch subscription plans. Please consult the gateway plugin’s documentation to see if it supports changing a subscription plan.
 
-## Canceling a subscription
+## Canceling a Subscription
 
 Depending on the gateway, canceling subscriptions supports different options. Please consult the gateway plugin’s documentation to see if it supports canceling a subscription.
 
-## Deleting subscriptions or plans
+## Deleting Subscriptions or Plans
 
 ### Gateways
 

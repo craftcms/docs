@@ -15,10 +15,27 @@ Use the `composer fund` command to find out more!
 composer install completed 🤘
 ```
 
-## Specifying a Composer Version
+## Using Composer 1
 
-The `composer` command allows to to specify any version of composer based on the Docker Image tags. To use a different version of composer, run the following:
+Each Nitro site comes with Composer 2 installed by default. If you need to use Composer 1, you can SSH into the site and update it manually:
 
-```bash
-$ nitro composer --composer-version=1 install
-```
+1. Navigate to your project:
+    ```sh
+    $ cd ~/dev/my-craft-project
+    ```
+2. SSH into your site’s container with all-powerful `root` user permissions:
+    ```sh
+    $ nitro ssh --root
+    ```
+3. Update Composer to version 1:
+    ```sh
+    $ composer self-update --1
+    ```
+4. Optionally exit your site’s container and return to your host machine:
+    ```sh
+    $ exit
+    ```
+
+::: warning
+Because site containers are ephemeral, you’ll need to do this again any time you rebuild its Docker container!
+:::

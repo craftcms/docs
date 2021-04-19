@@ -32,6 +32,7 @@ Filter | Description
 [format](https://twig.symfony.com/doc/2.x/filters/format.html) | Formats a string by replacing placeholders.
 [group](#group) | Groups items in an array.
 [hash](#hash) | Prefixes a string with a keyed-hash message authentication code (HMAC).
+[httpdate](#httpdate) | Converts a date to the HTTP format.
 [id](#id) | Normalizes an element ID into only alphanumeric characters, underscores, and dashes.
 [indexOf](#indexof) | Returns the index of a given value within an array, or the position of a passed-in string within another string.
 [index](#index) | Indexes the items in an array.
@@ -69,6 +70,7 @@ Filter | Description
 [round](https://twig.symfony.com/doc/2.x/filters/round.html) | Rounds a number.
 [rss](#rss) | Converts a date to RSS date format.
 [slice](https://twig.symfony.com/doc/2.x/filters/slice.html) | Extracts a slice of a string or array.
+[slug](https://twig.symfony.com/doc/2.x/filters/slug.html) | Transforms a given string into another string that only includes safe ASCII characters.
 [snake](#snake) | Formats a string into “snake_case”.
 [sort](https://twig.symfony.com/doc/2.x/filters/sort.html) | Sorts an array.
 [spaceless](https://twig.symfony.com/doc/2.x/filters/spaceless.html) | Removes whitespace between HTML tags.
@@ -479,6 +481,22 @@ $foo = Craft::$app->security->validateData($foo);
 if ($foo !== false) {
     // data is valid
 }
+```
+
+## `httpdate`
+
+Converts a date to the HTTP format, used by [RFC 7231](https://tools.ietf.org/html/rfc7231#section-7.1.1.1)-compliant HTTP headers like `Expires`.
+
+```twig
+{% header "Expires: " ~ expiry|httpdate %}
+{# Output: Expires: Thu, 08 Apr 2021 13:00:00 GMT #}
+```
+
+You can use the `timezone` param to specify the date’s timezone for conversion to GMT:
+
+```twig
+{% header "Expires: " ~ expiry|httpdate('CET') %}
+{# Output: Expires: Thu, 08 Apr 2021 21:00:00 GMT #}
 ```
 
 ## `id`

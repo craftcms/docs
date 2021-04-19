@@ -179,8 +179,9 @@ export default {
       return "/";
     },
     onHotkey(event) {
+      // take us to the search input if it doesn’t have focus
       if (
-        event.srcElement === document.body &&
+        event.srcElement !== this.$refs.input &&
         this.hotkeys.includes(event.key)
       ) {
         this.$refs.input.focus();

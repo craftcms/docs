@@ -12,7 +12,7 @@
   height: 38px;
   width: 37px;
   top: 10px;
-  left: 2rem;
+  left: 1rem;
 
   &:focus {
     @apply outline-none;
@@ -33,6 +33,12 @@
 
   span + span + span {
     top: 24px;
+  }
+}
+
+@screen md {
+  .nav-hamburger {
+    left: 2rem;
   }
 }
 
