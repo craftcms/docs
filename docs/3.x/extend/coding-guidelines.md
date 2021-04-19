@@ -91,33 +91,18 @@ Static methods should generally not start with `get`.
 
 ## Type Declarations
 
-### Argument Types
-
-Use PHP 7.0-supported [argument type declarations](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration) for all function arguments whenever possible. The only exceptions should be:
+Use [type declarations](https://www.php.net/manual/en/language.types.declarations.php) whenever possible. The only exceptions should be:
 
 - [Magic methods](http://php.net/manual/en/language.oop5.magic.php) (e.g. `__toString()`)
-- Arguments that accept multiple non-`null` value types
+- Arguments/return statements that could be multiple non-`null` value types
 - Methods that override a parent class’s method, where the parent method doesn’t have type declarations
 - Methods that are required by an interface, and the interface method doesn’t have type declarations
 
-If an argument accepts two types and one of them is `null`, the argument should have a type declaration for the non-`null` type, and a default value of `null`.
+If an argument accepts two types and one of them is `null`, a `?` can be placed before the non-`null` type:
 
 ```php
-public function foo(string $bar = null)
+public function foo(?string $bar): void
 ```
-
-::: tip
-Do this even if there are required arguments following the argument that accepts `null`. This is the only way to enforce an argument type while also allowing `null` in PHP.
-:::
-
-### Return Types
-
-Use PHP 7.0-supported [return type declarations](http://php.net/manual/en/functions.returning-values.php#functions.returning-values.type-declaration) for all methods whenever possible. The only exceptions should be:
-
-- [Magic methods](http://php.net/manual/en/language.oop5.magic.php) (e.g. `__toString()`)
-- Methods with multiple return types
-- Methods that override a parent class’s method, where the parent method doesn’t have a return type
-- Methods that are required by an interface, and the interface method doesn’t have a return type
 
 ## Docblocks
 

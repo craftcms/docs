@@ -46,4 +46,7 @@ npm run storybook
 
 ## Writing Tips
 
+Most stock VuePress markdown extensions are supported here. See the [Markdown Extensions](https://v1.vuepress.vuejs.org/guide/markdown.html) page to learn more about linking, frontmatter, and highlighting lines in code samples.
+
 - Keep code block line lengths up to 85 characters long to avoid horizontal scrollbars.
+- Avoid placing highlighted code blocks `::: details` toggles because the performance is terrible in WebKit. Use our height-limited `<toggle-tip>` component instead.

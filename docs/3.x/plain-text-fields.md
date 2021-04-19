@@ -6,9 +6,9 @@ Plain Text fields give you either a normal text input or a multi-line textarea, 
 
 Plain Text fields have the following settings:
 
-* **Placeholder Text** – The field’s placeholder text, to be displayed if the field has no value yet
-* **Max Length** – The maximum number of characters the field can contain
-* **Allow line breaks** – Whether or not to allow line breaks in this field
+* **Placeholder Text** – The field’s placeholder text, to be displayed if the field has no value yet.
+* **Max Length** – The maximum number of characters the field can contain.
+* **Allow line breaks** – Whether or not to allow line breaks in this field.
 
 ## The Field
 

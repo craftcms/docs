@@ -74,7 +74,13 @@
 }
 
 .top-bar {
-  @apply block h-12 w-full content-center relative px-10 pt-2 max-w-screen-md;
+  @apply block h-12 w-full content-center relative px-6 pt-2 max-w-screen-md;
+}
+
+@screen md {
+  .top-bar {
+    @apply px-10;
+  }
 }
 
 .sidebar-mask {
@@ -106,7 +112,14 @@
 
 .theme-default-content:not(.custom),
 .content-wrapper {
-  @apply py-8 px-10 max-w-screen-md;
+  @apply py-8 px-6 max-w-screen-md;
+}
+
+@screen md {
+  .theme-default-content:not(.custom),
+  .content-wrapper {
+    @apply px-10;
+  }
 }
 
 @screen lg {

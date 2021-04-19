@@ -41,9 +41,11 @@ In your templates, you can get the current user’s cart like this:
 {% set cart = craft.commerce.getCarts().getCart() %}
 ```
 
-You could also fetch the cart via AJAX. This jQuery example could be added to a Twig template, and outputs the cart data to the browser’s development console:
+You could also fetch the cart via AJAX. This example could be added to a Twig template, and outputs the cart data to the browser’s development console:
 
-```twig
+::: code
+```twig jQuery
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $.ajax({
     url: '',
@@ -51,17 +53,37 @@ $.ajax({
         '{{ craft.config.csrfTokenName|e('js') }}': '{{ craft.request.csrfToken|e('js') }}',
         'action': 'commerce/cart/get-cart'
     },
-    success: function(data) {
-        console.log(data);
+    success: function(response) {
+        console.log(response);
     },
     dataType: 'json'
 });
 </script>
 ```
+```twig Axios
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+axios.get('', {
+    params: {
+        '{{ craft.config.csrfTokenName|e('js') }}': '{{ craft.request.csrfToken|e('js') }}',
+        action: 'commerce/cart/get-cart'
+    }
+}).then((response) => {
+    console.log(response.data);
+});
+</script>
+```
+:::
 
 Either of the examples above will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
 
 To see what cart information you can use in your templates, take a look at the [Order](commerce3:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/develop/example-templates/shop/cart/index.twig).
+
+<toggle-tip title="Example Order">
+
+<<< @/docs/commerce/3.x/example-objects/order.php
+
+</toggle-tip>
 
 Once a cart’s completed and turned into an order, calling `craft.commerce.carts.cart` again will return a new cart.
 
@@ -96,7 +118,7 @@ If the product has multiple variants, you could provide a dropdown menu to allow
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
     {{ redirectInput('shop/cart') }}
-    {{ hiddenInput('successMessage', 'Added ' ~ product.title ~ ' to the cart.') }}
+    {{ hiddenInput('successMessage', 'Added ' ~ product.title ~ ' to cart.'|hash) }}
     {{ hiddenInput('qty', 1) }}
 
     <select name="purchasableId">
@@ -124,7 +146,7 @@ You can add multiple purchasables to the cart in a single request using a `purch
     {{ csrfInput() }}
     {{ actionInput('commerce/cart/update-cart') }}
     {{ redirectInput('shop/cart') }}
-    {{ hiddenInput('successMessage', 'Products added to the cart.') }}
+    {{ hiddenInput('successMessage', 'Products added to the cart.'|hash) }}
     {% for variant in product.variants %}
         {{ hiddenInput('purchasables[' ~ loop.index ~ '][id]', variant.id) }}
         {{ hiddenInput('purchasables[' ~ loop.index ~ '][qty]', 1) }}

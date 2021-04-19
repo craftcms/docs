@@ -33,7 +33,9 @@ Tag | Description
 [requireLogin](#requirelogin) | Requires that a user is logged-in.
 [requirePermission](#requirepermission) | Requires that a user is logged-in with a given permission.
 [set](https://twig.symfony.com/doc/2.x/tags/set.html) | Sets a variable.
+[script](#script) | Renders an HTML script tag on the page.
 [switch](#switch) | Switch the template output based on a give value.
+[tag](#tag) | Renders an HTML tag on the page.
 [use](https://twig.symfony.com/doc/2.x/tags/use.html) | Inherits from another template horizontally.
 [verbatim](https://twig.symfony.com/doc/2.x/tags/verbatim.html) | Disables parsing of nested Twig code.
 [with](https://twig.symfony.com/doc/2.x/tags/with.html) | Creates a nested template scope.
@@ -131,7 +133,7 @@ You can only use [for](#for) **_or_** [until](#until) in a single `{% cache %}` 
 Only activates the `{% cache %}` tag if a certain condition is met.
 
 ```twig
-{## Only cache if this is a mobile browser #}
+{# Only cache if this is a mobile browser #}
 {% cache if craft.app.request.isMobileBrowser() %}
 ```
 
@@ -140,7 +142,7 @@ Only activates the `{% cache %}` tag if a certain condition is met.
 Prevents the `{% cache %}` tag from activating if a certain condition is met.
 
 ```twig
-{## Don't cache if someone is logged in #}
+{# Don’t cache if someone is logged in #}
 {% cache unless currentUser %}
 ```
 
@@ -166,18 +168,18 @@ You should use `{% cache %}` tags any time you’ve got a template that’s caus
 
 Here are some examples of when to use them:
 
-* A big list of entries
-* A Matrix field loop, where some of the blocks have relational fields on them, adding their own additional database queries to the page
-* Whenever you’re pulling in data from another site
+- A big list of entries
+- A Matrix field loop, where some of the blocks have relational fields on them, adding their own additional database queries to the page
+- Whenever you’re pulling in data from another site
 
 There are also some cases where it’s _not_ a good idea to use them:
 
-* Don’t use them to cache static text; that will be more expensive than simply outputting the text.
-* You can’t use them outside of top-level `{% block %}` tags within a template that extends another.
-* The `{% cache %}` tag will only cache HTML, so using tags like [{% css %}](#css) and [{% js %}](#js) inside of it doesn’t make sense because they don’t actually output HTML therefore their output won’t be cached.
+- Don’t use them to cache static text; that will be more expensive than simply outputting the text.
+- You can’t use them outside of top-level `{% block %}` tags within a template that extends another.
+- The `{% cache %}` tag will only cache HTML, so using tags like [{% css %}](#css) and [{% js %}](#js) inside of it doesn’t make sense because they don’t actually output HTML therefore their output won’t be cached.
 
     ```twig
-    {## Bad: #}
+    {# Bad: #}
 
     {% extends "_layout" %}
     {% cache %}
@@ -186,7 +188,7 @@ There are also some cases where it’s _not_ a good idea to use them:
         {% endblock %}
     {% endcache %}
 
-    {## Good: #}
+    {# Good: #}
 
     {% extends "_layout" %}
     {% block "content" %}
@@ -267,13 +269,20 @@ You can optionally set the HTTP status code that should be included with the res
 This tag will set a new HTTP header on the response.
 
 ```twig
-{## Tell the browser to cache this page for 30 days #}
+{# Tell the browser to cache this page for 30 days #}
 {% set expiry = now|date_modify('+30 days') %}
 
 {% header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp) %}
 {% header "Pragma: cache" %}
 {% header "Expires: " ~ expiry|date('D, d M Y H:i:s', 'GMT') ~ " GMT" %}
 ```
+
+::: tip
+Headers which contain dates must be formatted according to [RFC 7234](https://tools.ietf.org/html/rfc7231#section-7.1.1.2). You can use the [httpdate](filters.md#httpdate) filter (added in Craft 3.6.10) to do this:
+```twig
+{% header "Expires: #{myDate|httpdate}" %}
+```
+:::
 
 ### Parameters
 
@@ -288,7 +297,7 @@ You specify the actual header that should be set by typing it as a string after 
 This tag gives plugins and modules an opportunity to hook into the template, to either return additional HTML or make changes to the available template variables.
 
 ```twig
-{## Give plugins a chance to make changes here #}
+{# Give plugins a chance to make changes here #}
 {% hook 'my-custom-hook-name' %}
 ```
 
@@ -544,13 +553,13 @@ This parameter needs to be an actual query object, not an array of pre-fetched r
 
 Next up you need to type “`as`”, followed by one or two variable names:
 
-* `as pageInfo, pageEntries`
-* `as pageEntries`
+- `as pageInfo, pageEntries`
+- `as pageEntries`
 
 Here’s what they get set to:
 
-* `pageInfo` gets set to a <craft3:craft\web\twig\variables\Paginate> object, which provides info about the current page, and some helper methods for creating links to other pages. (See [below](#the-pageInfo-variable) for more info.)
-* `pageEntries` gets set to an array of the results (e.g. the elements) that belong to the current page.
+- `pageInfo` gets set to a <craft3:craft\web\twig\variables\Paginate> object, which provides info about the current page, and some helper methods for creating links to other pages. (See [below](#the-pageInfo-variable) for more info.)
+- `pageEntries` gets set to an array of the results (e.g. the elements) that belong to the current page.
 
 ::: tip
 If you only specify one variable name here, the `pageInfo` variable will be called `paginate` by default for backwards compatibility.
@@ -577,20 +586,20 @@ Following your `{% paginate %}` tag, you will need to loop through this page’s
 
 The `pageInfo` variable (or whatever you’ve called it) provides the following properties and methods:
 
-* **`pageInfo.first`** – The offset of the first result on the current page.
-* **`pageInfo.last`** – The offset of the last result on the current page.
-* **`pageInfo.total`** – The total number of results across all pages
-* **`pageInfo.currentPage`** – The current page number.
-* **`pageInfo.totalPages`** – The total number of pages.
-* **`pageInfo.prevUrl`** – The URL to the previous page, or `null` if you’re on the first page.
-* **`pageInfo.nextUrl`** – The URL to the next page, or `null` if you’re on the last page.
-* **`pageInfo.firstUrl`** – The URL to the first page.
-* **`pageInfo.lastUrl`** – The URL to the last page.
-* **`pageInfo.getPageUrl( page )`** – Returns the URL to a given page number, or `null` if the page doesn’t exist.
-* **`pageInfo.getPrevUrls( [dist] )`** – Returns an array of URLs to the previous pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
-* **`pageInfo.getNextUrls( [dist] )`** – Returns an array of URLs to the next pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
-* **`pageInfo.getRangeUrls( start, end )`** – Returns an array of URLs to pages in a given range of page numbers, with keys set to the page numbers.
-* **`pageInfo.getDynamicRangeUrls( max )`** – Returns an array of URLs to pages in a dynamic range of page numbers that surround (and include) the current page, with keys set to the page numbers.
+- **`pageInfo.first`** – The offset of the first result on the current page.
+- **`pageInfo.last`** – The offset of the last result on the current page.
+- **`pageInfo.total`** – The total number of results across all pages
+- **`pageInfo.currentPage`** – The current page number.
+- **`pageInfo.totalPages`** – The total number of pages.
+- **`pageInfo.prevUrl`** – The URL to the previous page, or `null` if you’re on the first page.
+- **`pageInfo.nextUrl`** – The URL to the next page, or `null` if you’re on the last page.
+- **`pageInfo.firstUrl`** – The URL to the first page.
+- **`pageInfo.lastUrl`** – The URL to the last page.
+- **`pageInfo.getPageUrl( page )`** – Returns the URL to a given page number, or `null` if the page doesn’t exist.
+- **`pageInfo.getPrevUrls( [dist] )`** – Returns an array of URLs to the previous pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
+- **`pageInfo.getNextUrls( [dist] )`** – Returns an array of URLs to the next pages, with keys set to the page numbers. The URLs are returned in ascending order. You can optionally pass in the maximum distance away from the current page the function should go.
+- **`pageInfo.getRangeUrls( start, end )`** – Returns an array of URLs to pages in a given range of page numbers, with keys set to the page numbers.
+- **`pageInfo.getDynamicRangeUrls( max )`** – Returns an array of URLs to pages in a dynamic range of page numbers that surround (and include) the current page, with keys set to the page numbers.
 
 ### Navigation examples
 
@@ -734,6 +743,16 @@ The user can have the permission either directly or through one of their user gr
 
 See the [Users](../users.md#permissions) page for a list of available permissions.
 
+## `script`
+
+Similar to the [`{% js %}`](#js) tag, but with full control over the resulting `<script>` tag’s attributes.
+
+```twig
+{% script with {type: 'module'} %}
+// some JavaScript
+{% endscript %}
+```
+
 ## `switch`
 
 “Switch statements” offer a clean way to compare a variable against multiple possible values, instead of using several repetitive `{% if %}` conditionals.
@@ -797,4 +816,59 @@ If you’re using the `{% switch %}` tag inside of a `{% for %}` loop, you won�
 
     {% endswitch %}
 {% endfor %}
+```
+
+## `tag`
+
+The `{% tag %}` tag can be used to render an HTML element in a template.
+
+It’s similar to the [tag](functions.md#tag) _function_, however the `{% tag %}` tag is better suited for cases where the tag contents need to be dynamic.
+
+```twig
+{% tag 'p' with {
+    class: 'welcome',
+} %}
+    Hello, {{ currentUser.friendlyName }}
+{% endtag %}
+{# Output: <p class="welcome">Hello, Tim</p> #}
+```
+
+`{% tag %}` tags can also be nested:
+```twig
+{% tag 'div' with {
+    class: 'foo',
+} %}
+    {% tag 'p' with {
+        class: 'welcome',
+    } -%}
+        Hello, {{ currentUser.friendlyName }}
+    {%- endtag %}
+{% endtag %}
+{# Output: <div class="foo"><p class="welcome">Hello, Tim</p></div> #}
+```
+
+### Parameters
+
+The `{% tag %}` tag has the following parameters:
+
+#### Name
+
+The first thing you must pass to the `{% tag %}` tag is the name of the node that should be rendered.
+
+#### `with`
+
+Next, you can optionally type “` with `” followed by an object with attributes for the node.
+
+These will be rendered using <yii2:yii\helpers\BaseHtml::renderTagAttributes()> just like the [tag](functions.md#tag) function, except for the `html` and `text` keys because inner content will go between `{% tag %}` and `{% endtag %}` instead.
+
+If an attribute is set to `true`, it will be added without a value:
+
+```twig
+{% tag 'textarea' with {
+    name: 'message',
+    required: true
+} -%}
+    Please foo some bar.
+{%- endtag %}
+{# Output: <textarea name="message" required>Please foo some bar.</textarea> #}
 ```

@@ -8,6 +8,9 @@ module.exports = {
       fontFamily: {
         sans: ["GT Eesti", "Futura Std", "Futura", "Helvetica", "sans-serif"]
       },
+      fontSize: {
+        '2.5xl': '1.5625rem',
+      },
       colors: {
         slate: "#2d3748",
         soft: "#f1f5fd",

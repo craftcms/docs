@@ -65,6 +65,7 @@ module.exports = {
             "extending-twig",
             "template-hooks",
             "soft-deletes",
+            "queue-jobs",
             "environmental-settings",
             "extending-system-components"
           ]
@@ -156,6 +157,7 @@ module.exports = {
             "color-fields",
             "date-time-fields",
             "dropdown-fields",
+            "email-fields",
             "entries-fields",
             "lightswitch-fields",
             "matrix-fields",
@@ -166,6 +168,7 @@ module.exports = {
             "table-fields",
             "tags-fields",
             "time-fields",
+            "url-fields",
             "users-fields"
           ]
         },

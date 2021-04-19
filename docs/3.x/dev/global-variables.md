@@ -20,7 +20,7 @@ Variable | Description
 [POS_HEAD](#pos-head) | The [craft\web\View::POS_HEAD](craft3:craft\web\View#constants) constant.
 [POS_LOAD](#pos-load) | The [craft\web\View::POS_LOAD](craft3:craft\web\View#constants) constant.
 [POS_READY](#pos-ready) | The [craft\web\View::POS_READY](craft3:craft\web\View#constants) constant.
-[setPasswordUrl](#setpasswordurl) | The URL to [`setPasswordRequestPath`](config3:setPasswordRequestPath) for the current site.
+[setPasswordUrl](#setpasswordurl) | The URL to the front-end [Reset Password](https://craftcms.com/knowledge-base/front-end-user-accounts#reset-password-forms) page.
 [siteName](#sitename) | The name of the current site.
 [siteUrl](#siteurl) | The base URL of the current site.
 [SORT_ASC](#sort-asc) | The `SORT_ASC` PHP constant.
@@ -46,8 +46,41 @@ A reference to the main <craft3:craft\web\Application> instance (the thing you g
 Accessing things via `craft.app` is considered advanced. There are more security implications than other Twig-specific variables and functions, and your templates will be more susceptible to breaking changes during major Craft version bumps.
 :::
 
+#### Common Services
+
+Some of the services commonly used in templates:
+
+- `craft.app.request` – [Request](craft3:craft\web\Request) object with information about the current HTTP request
+- `craft.app.session` – [Session](craft3:craft\web\Session) object useful for getting and setting flash messages
+- `craft.app.user` – [User](craft3:craft\web\User) object representing the logged-in human (when applicable)
+- `craft.app.config.general` – [GeneralConfig](craft3:craft\config\GeneralConfig) object of [General Config Settings](../config/config-settings.md)
+- `craft.app.fields` – [Fields](craft3:craft\services\Fields) service for accessing custom field details
+- `craft.app.sections` – [Sections](craft3:craft\services\Sections) service for working with sections and entry types
+- `craft.app.sites` – [Sites](craft3:craft\services\Sites) service for getting [site](../sites.md) details
+
+Examples:
+
 ```twig
+{# get the value of an `email` query parameter or post field #}
+{% set address = craft.app.request.getParam('email') %}
+
+{# get the value of the `notice` flash message #}
+{% set message = craft.app.session.getFlash('notice') %}
+
+{# get the current user’s email address #}
+{% set email = craft.app.user.email %}
+
+{# is `devMode` enabled? #}
+{% set isDevMode = craft.app.config.general.devMode %}
+
+{# get a custom field by its `body` handle #}
 {% set field = craft.app.fields.getFieldByHandle('body') %}
+
+{# get all the sections for the current site #}
+{% set sections = craft.app.sections.getAllSections() %}
+
+{# get all the sites for the current Craft installation #}
+{% set sites = craft.app.sites.allSites() %}
 ```
 
 ## `currentSite`

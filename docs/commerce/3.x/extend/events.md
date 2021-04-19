@@ -238,13 +238,13 @@ The event that is triggered before a new line item has been added to the order.
 ```php
 use craft\commerce\elements\Order;
 use craft\commerce\models\LineItem;
-use craft\commerce\events\LineItemEvent;
+use craft\commerce\events\AddLineItemEvent;
 use yii\base\Event;
 
 Event::on(
     Order::class,
     Order::EVENT_BEFORE_ADD_LINE_ITEM,
-    function(LineItemEvent $event) {
+    function(AddLineItemEvent $event) {
         // @var LineItem $lineItem
         $lineItem = $event->lineItem;
         // @var bool $isNew
@@ -1724,12 +1724,12 @@ Event handlers can customize PDF rendering by modifying several properties on th
 
 ```php
 use craft\commerce\events\PdfEvent;
-use craft\commerce\services\Pdf;
+use craft\commerce\services\Pdfs;
 use yii\base\Event;
 
 Event::on(
-    Pdf::class,
-    Pdf::EVENT_BEFORE_RENDER_PDF,
+    Pdfs::class,
+    Pdfs::EVENT_BEFORE_RENDER_PDF,
     function(PdfEvent $event) {
         // Modify `$event->order`, `$event->option`, `$event->template`,
         // and `$event->variables` to customize what gets rendered into a PDF;
@@ -1751,12 +1751,12 @@ Event handlers can override Commerce’s PDF generation by setting the `pdf` pro
 
 ```php
 use craft\commerce\events\PdfEvent;
-use craft\commerce\services\Pdf;
+use craft\commerce\services\Pdfs;
 use yii\base\Event;
 
 Event::on(
-    Pdf::class,
-    Pdf::EVENT_AFTER_RENDER_PDF,
+    Pdfs::class,
+    Pdfs::EVENT_AFTER_RENDER_PDF,
     function(PdfEvent $event) {
         // Add a watermark to the PDF or forward it to the accounting department
         // ...

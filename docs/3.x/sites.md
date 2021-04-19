@@ -18,31 +18,36 @@ You add additional sites using the Sites settings in **Settings** → **Sites**.
 
 Each site has the following attributes:
 
-* Group
-* Name
-* Handle
-* Language
-* Is Primary Site?
-* Base URL
+- Group
+- Name
+- Handle
+- Language
+- Is Primary Site?
+- Base URL
 
 
 ### Site Groups
 
 Site Groups allow you to organize your sites together by commonality, like language or site type.
 
-Craft creates the first Site Group for you – named after the default site – and assigns the default site to that group.
+Craft creates the first Site Group for you, named after the default site, and assigns the default site to that group.
 
 Similar to Field Groups, Site Groups are for organization only.
 
-You can access the current site's group information using:
+You can access the current site’s group information using `currentSite.group`:
 
 ```twig
-Site ID:            {{ currentSite.id }}
-Site Handle:        {{ currentSite.handle }}
-Site Name:          {{ currentSite.name }}
-Site Language:      {{ currentSite.language }}
-Is Primary Site?:   {{ currentSite.primary }}
-Base URL:           {{ currentSite.baseUrl }}
+{# @var currentSite craft\models\Site #}
+Site ID:          {{ currentSite.id }}
+Site Handle:      {{ currentSite.handle }}
+Site Name:        {{ currentSite.name }}
+Site Language:    {{ currentSite.language }}
+Is Primary Site?: {{ currentSite.primary }}
+Base URL:         {{ currentSite.baseUrl }}
+
+{# @var siteGroup craft\models\SiteGroup #}
+{% set siteGroup = currentSite.group %}
+Site Group Name:  {{ siteGroup.name }}
 ```
 
 
@@ -139,8 +144,8 @@ Using new or existing entries, test that the Section, Field, and Translation Met
 
 If you have any local asset volumes, you will need to make sure those assets are available from each of your sites.
 
-* The File System Path settings should be relative (`uploads/images/`).
-* The URL settings should be relative (`/images`)
+- The File System Path settings should be relative (`uploads/images/`).
+- The URL settings should be relative (`/images`)
 
 ### Step 7: Configure Your Web Server and DNS
 
