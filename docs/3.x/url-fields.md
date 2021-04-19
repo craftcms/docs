@@ -8,11 +8,11 @@ While the field doesn’t apply strict validation to what’s entered, it will n
 
 URL fields have the following settings:
 
-- **Allowed URL Types** – The type of URL to be entered, which defaults to “Web page” and displays a dropdown menu if more than one type is selected
-    - **Web Page** - When selected, the entered value is passed to [UrlHelper::isFullUrl()](craft3:craft\helpers\UrlHelper::isFullUrl()) and prepended with `http://` if the result is `false`
-    - **Telephone** - When selected, ensures the value is prepended with `tel:`
-    - **Email** - When selected, ensures the value is prepended with `mailto:`
-- **Max Length** – The maximum number of characters the field can contain, which defaults to `255`
+- **Allowed URL Types** – The type of URL to be entered, which defaults to “Web page” and displays a dropdown menu if more than one type is selected.
+    - **Web Page** - When selected, the entered value is passed to [UrlHelper::isFullUrl()](craft3:craft\helpers\UrlHelper::isFullUrl()) and prepended with `http://` if the result is `false`.
+    - **Telephone** - When selected, ensures the value is prepended with `tel:`.
+    - **Email** - When selected, ensures the value is prepended with `mailto:`.
+- **Max Length** – The maximum number of characters the field can contain. (Defaults to `255`.)
 
 ## The Field
 

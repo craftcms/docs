@@ -33,7 +33,7 @@ Example:
        placeholder="{{ "Coupon Code"|t }}">
 
     <input type="submit" value="Update Cart"/>
-<form>
+</form>
 ```
 
 Only one coupon code can exist on the cart at a time. The current coupon code

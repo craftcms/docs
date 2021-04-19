@@ -90,6 +90,7 @@ Possible values include:
 | `':notempty:'` | that have at least one related asset.
 | `100` | that are related to the asset with an ID of 100.
 | `[100, 200]` | that are related to an asset with an ID of 100 or 200.
+| `[':empty:', 100, 200]` | with no related assets, or are related to an asset with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the assets with IDs of 100 and 200.
 | an [Asset](craft3:craft\elements\Asset) object | that are related to the asset.
 | an [AssetQuery](craft3:craft\elements\db\AssetQuery) object | that are related to any of the resulting assets.
@@ -270,6 +271,25 @@ Alternatively, you can submit Base64-encoded file data, which the Assets field w
     'data:image/jpeg;base64,my-base64-data'
 ) }}
 {{ hiddenInput('fields[myFieldHandle][filename][]', 'myFile.ext') }}
+```
+
+However you upload new assets, you may want to maintain any that already exist on the field and append new ones to the set instead of replacing it.
+
+You can do this by passing each of the related asset IDs in the field data array, like we are here with hidden form inputs:
+
+```twig{1-8}
+{# Provide each existing asset ID in the array of field data #}
+{% for relatedAssetId in entry.myFieldHandle.ids() %}
+  {{ input(
+      'hidden',
+      'fields[myFieldHandle][]',
+      relatedAssetId
+  ) }}
+{% endfor %}
+
+{{ input('file', 'fields[myFieldHandle][]', options={
+  multiple: true,
+}) }}
 ```
 
 ## See Also
