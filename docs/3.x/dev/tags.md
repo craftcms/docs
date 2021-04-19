@@ -33,6 +33,7 @@ Tag | Description
 [requireLogin](#requirelogin) | Requires that a user is logged-in.
 [requirePermission](#requirepermission) | Requires that a user is logged-in with a given permission.
 [set](https://twig.symfony.com/doc/2.x/tags/set.html) | Sets a variable.
+[script](#script) | Renders an HTML script tag on the page.
 [switch](#switch) | Switch the template output based on a give value.
 [tag](#tag) | Renders an HTML tag on the page.
 [use](https://twig.symfony.com/doc/2.x/tags/use.html) | Inherits from another template horizontally.
@@ -275,6 +276,13 @@ This tag will set a new HTTP header on the response.
 {% header "Pragma: cache" %}
 {% header "Expires: " ~ expiry|date('D, d M Y H:i:s', 'GMT') ~ " GMT" %}
 ```
+
+::: tip
+Headers which contain dates must be formatted according to [RFC 7234](https://tools.ietf.org/html/rfc7231#section-7.1.1.2). You can use the [httpdate](filters.md#httpdate) filter (added in Craft 3.6.10) to do this:
+```twig
+{% header "Expires: #{myDate|httpdate}" %}
+```
+:::
 
 ### Parameters
 
@@ -734,6 +742,16 @@ This tag will ensure that the current user is logged in with an account that has
 The user can have the permission either directly or through one of their user groups. If they don’t have it, a 403 (Forbidden) error will be served.
 
 See the [Users](../users.md#permissions) page for a list of available permissions.
+
+## `script`
+
+Similar to the [`{% js %}`](#js) tag, but with full control over the resulting `<script>` tag’s attributes.
+
+```twig
+{% script with {type: 'module'} %}
+// some JavaScript
+{% endscript %}
+```
 
 ## `switch`
 

@@ -22,8 +22,10 @@ This is Yii version 2.0.36.
 
 The following commands are available:
 
-- backup                                    Allows you to create a new database backup.
-    backup/db (default)                     Creates a new database backup.
+- db                                    Performs database operations.
+    db/backup                           Creates a new database backup.
+    db/convert-charset                  Converts tables’ character sets and collations. (MySQL only)
+    db/restore                          Restores a database backup.
 
 - cache                                     Allows you to flush cache.
     cache/flush                             Flushes given cache components.
@@ -47,20 +49,28 @@ See the [Console Commands](extend/commands.md) page in the _Extending Craft_ sec
 
 While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default console commands:
 
-## `backup`
+## `db`
 
-#### `backup/db` <badge>default</badge>
+#### `db/backup`
 
 Creates a new database backup.
 
-**Options**
+Example:
 
-`--path`
+```sh
+php craft db/backup ./my-backups/
+```
+
+**Parameters**
+
+`path`
 : The path the database backup should be created at. Can be any of the following:
     - A full file path
     - A folder path (backup will be saved in there with a dynamically-generated name)
     - A filename (backup will be saved in the working directory with the given name)
     - Blank (backup will be saved to the `config/backups/` folder with a dynamically-generated name)
+
+**Options**
 
 `--zip`
 : Whether the backup should be saved as a zip file.\
@@ -1269,7 +1279,7 @@ Ensures all element UIDs are unique.
 
 ## `utils/prune-revisions`
 
-#### `utils/utils/prune-revisions/index` <badge>default</badge>
+#### `utils/prune-revisions/index` <badge>default</badge>
 
 Prunes excess element revisions.
 

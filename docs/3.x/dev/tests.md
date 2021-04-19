@@ -4,6 +4,7 @@ The following [tests](https://twig.symfony.com/doc/2.x/templates.html#test-opera
 
 Test | Description
 ---- | -----------
+[boolean](#boolean) | Whether a variable is the same as a PHP constant value.
 [constant](https://twig.symfony.com/doc/2.x/tests/constant.html) | Whether a variable is the same as a PHP constant value.
 [defined](https://twig.symfony.com/doc/2.x/tests/defined.html) | Whether a variable is defined.
 [divisible by](https://twig.symfony.com/doc/2.x/tests/divisibleby.html) | Whether a number is divisible by another number.
@@ -15,6 +16,16 @@ Test | Description
 [null](https://twig.symfony.com/doc/2.x/tests/null.html) | Whether a variable is `null`.
 [odd](https://twig.symfony.com/doc/2.x/tests/odd.html) | Whether a number is odd.
 [same as](https://twig.symfony.com/doc/2.x/tests/sameas.html) | Whether a variable is the same as another.
+
+## `boolean`
+
+Returns whether an object is a boolean via PHP’s [`is_bool()`](https://www.php.net/manual/en/function.is-bool.php) method.
+
+```twig
+{% if myVar is boolean %}
+    {{ myVar ? 'true' : 'false' }}
+{% endif %}
+```
 
 ## `instance of`
 
