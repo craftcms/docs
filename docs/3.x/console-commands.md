@@ -1279,7 +1279,7 @@ Ensures all element UIDs are unique.
 
 ## `utils/prune-revisions`
 
-#### `utils/utils/prune-revisions/index` <badge>default</badge>
+#### `utils/prune-revisions/index` <badge>default</badge>
 
 Prunes excess element revisions.
 
