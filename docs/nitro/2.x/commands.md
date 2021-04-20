@@ -30,8 +30,8 @@ Adding site…
 Enter the hostname [mysite.test]:
   ✓ setting hostname to mysite.test
   ✓ adding site ~/dev/support/mysite.test
-Enter the webroot for the site [web]:
-  ✓ using webroot web
+Enter the web root for the site [web]:
+  ✓ using web root web
 Choose a PHP version:
   1. 8.0
   2. 7.4
