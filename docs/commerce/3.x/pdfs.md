@@ -15,7 +15,7 @@ You’ll need to enter a few details:
 - **Name** is whatever you’d like to call the PDF in the control panel.
 - **Handle** is a reference to be used in templates.
 - **Description** is an optional note for explaining the template’s layout or purpose.
-- **PDF Template Path** should point to the Twig template that should be used for rendering the PDF file. (Add the [`shop/special/receipt`](https://github.com/craftcms/commerce/blob/develop/example-templates/shop/special/receipt.twig) example template here if you’d like to see one in action.)
+- **PDF Template Path** should point to the Twig template that should be used for rendering the PDF file. (Add the [receipt example template](https://github.com/craftcms/commerce/blob/main/example-templates/build/shop/_private/receipt/index.twig) here if you’d like to see one in action.)
 - **Order PDF Filename Format** determines what the generated filename should look like. It can include tags for outputting order properties such as `{number}` or `{myOrderCustomField}`. (A `.pdf` extension will automatically be appended so you don’t need to add it here.)
 - **Enabled?** can be used to quickly toggle the PDF and control whether it’s available and sent in emails configured to use it.
 - **Default Order PDF** will appear only when you’re editing an additional or non-default PDF. Select this checkbox to make the current template the new default when you save it.
@@ -36,7 +36,7 @@ Create a new [order status email](emails.md) or select an existing one. You’ll
 
 ## Creating PDF Templates
 
-It might be easiest to start by modifying the [`shop/special/receipt`](https://github.com/craftcms/commerce/blob/develop/example-templates/shop/special/receipt.twig) example template, previewing it in a browser for convenience until things are mostly as you’d like them.
+It might be easiest to start by modifying the [example receipt template](https://github.com/craftcms/commerce/blob/main/example-templates/build/shop/_private/receipt/index.twig), previewing it in a browser for convenience until things are mostly as you’d like them.
 
 Avoid extending your regular site layouts for PDF templates, since your site most likely includes references to scripts and styles that may cause issues with PDF conversion.
 

@@ -1,6 +1,6 @@
 # Display Cart Items
 
-At some point you’ll want to show a visitor their cart contents. There’s a more complex code sample in [the example templates](https://github.com/craftcms/commerce/tree/master/example-templates/shop/cart/index.twig), but the basics are to get the cart, see whether it has any items, then loop through them to display each one’s `salePrice` and the cart `subtotal`.
+At some point you’ll want to show a visitor their cart contents. There’s a more complex code sample in [the example templates](https://github.com/craftcms/commerce/tree/main/example-templates/build/shop/cart/index.twig), but the basics are to get the cart, see whether it has any items, then loop through them to display each one’s `salePrice` and the cart `subtotal`.
 
 
 ```twig

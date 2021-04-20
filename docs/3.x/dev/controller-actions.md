@@ -38,7 +38,7 @@ Param | Description
 `expiryDate` | The expiry date for the entry. (Defaults to the current expiry date, or `null`.)
 `failMessage` | The hashed flash notice that should be displayed, if the entry is not saved successfully. (Only used for `text/html` requests.)
 `fieldsLocation` | The name of the param that holds the custom field values. (Defaults to `fields`.)
-`fields` | An array of new custom field values, indexed by field handles. (The param name can be customized via `fieldsLocation`.) Only fields that are included in this array will be updated.
+`fields[]` | An array of new custom field values, indexed by field handles. (The param name can be customized via `fieldsLocation`.) Only fields that are included in this array will be updated.
 `parentId` | The ID of the parent entry, if it belongs to a structure section.
 `postDate` | The post date for the entry. (Defaults to the current post date, or the current time.)
 `redirect` | The hashed URL to redirect the browser to, if the entry is saved successfully. (The requested URI will be used by default.)
