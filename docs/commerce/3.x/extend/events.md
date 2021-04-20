@@ -683,7 +683,7 @@ use yii\base\Event;
 Event::on(
     Discounts::class,
     Discounts::EVENT_DISCOUNT_MATCHES_ORDER,
-    function(MatchLineOrder $event) {
+    function(MatchOrderEvent $event) {
         // @var Order $order
         $order = $event->order;
         // @var Discount $discount
