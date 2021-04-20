@@ -10,7 +10,7 @@ This is because Craft isn’t installed and doesn’t have anything to show to n
 
 But you’re not a normal visitor, you’re an admin.
 
-Visit `https://tutorial.nitro/admin` instead. You should have a red **Install Craft** button:
+Visit `https://tutorial.nitro/admin` instead. You should have an **Install Craft** button:
 
 <BrowserShot url="https://tutorial.test/admin/install" :link="false">
 <img src="../images/install.png" alt="Screenshot of the first install step" />
