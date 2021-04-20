@@ -6,8 +6,6 @@ Every operating system comes with a text-based command line interface (CLI) for 
 If you’ve time traveled from the past, your operating system may _only_ have a command line interface. Our GUIs are going to blow your mind.
 :::
 
-We’ll be installing Craft with an application called [Composer](https://getcomposer.org/) that’s only available from the command line—but don’t worry, it’s worth it!
-
 ### Find your OS terminal
 
 ![](../images/os-terminal.png)
