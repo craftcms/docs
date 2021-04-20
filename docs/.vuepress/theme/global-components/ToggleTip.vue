@@ -1,7 +1,7 @@
 <template>
     <div class="toggle-tip" :class="{ open: isOpen, expands: enableExpand, collapses: enableCollapse }">
         <label v-if="title" class="title">{{ title }}</label>
-        <div class="wrapper" style="{ 'max-height': isOpen ? 'none' : height + 'px' }">
+        <div class="wrapper" :style="{ 'max-height': isOpen ? 'none' : height + 'px' }">
             <slot></slot>
         </div>
         <div v-if="(! isOpen && enableExpand) || (isOpen && enableCollapse)" class="expander" @click="toggle()">
@@ -22,7 +22,6 @@
         @apply overflow-y-auto z-0 rounded-t;
         border: 1px solid var(--custom-block-border-color);
         border-bottom: 0;
-        max-height: 300px;
 
         div[class*="language-"] {
             margin-top: -0.5rem;
@@ -67,7 +66,7 @@ export default {
         },
         height: {
             type: Number,
-            default: 400,
+            default: 300,
             required: false
         },
         expandTerm: {
