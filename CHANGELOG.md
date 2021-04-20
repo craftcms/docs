@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-04-20
+## Changed
+- Updated the tutorial to use Nitro 2.
+
 ## 2021-04-06
 ## Changed
 - Updated Nitro 2.x documentation for version 2.0.7.
