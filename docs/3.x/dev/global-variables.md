@@ -20,7 +20,7 @@ Variable | Description
 [POS_HEAD](#pos-head) | The [craft\web\View::POS_HEAD](craft3:craft\web\View#constants) constant.
 [POS_LOAD](#pos-load) | The [craft\web\View::POS_LOAD](craft3:craft\web\View#constants) constant.
 [POS_READY](#pos-ready) | The [craft\web\View::POS_READY](craft3:craft\web\View#constants) constant.
-[setPasswordUrl](#setpasswordurl) | The URL to [`setPasswordRequestPath`](config3:setPasswordRequestPath) for the current site.
+[setPasswordUrl](#setpasswordurl) | The URL to the front-end [Reset Password](https://craftcms.com/knowledge-base/front-end-user-accounts#reset-password-forms) page.
 [siteName](#sitename) | The name of the current site.
 [siteUrl](#siteurl) | The base URL of the current site.
 [SORT_ASC](#sort-asc) | The `SORT_ASC` PHP constant.

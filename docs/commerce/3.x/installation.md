@@ -6,7 +6,7 @@ Before installing Craft Commerce, make sure your web server meets Commerce’s [
 
 ## Plugin Store
 
-Log into the control panel, navigate to “Plugin Store”, then search for “Commerce”. Choose “Craft Commerce”, and from there you can choose “Add to Cart” or “Try” for either edition.
+Log into the control panel, navigate to **Plugin Store** and search for “Commerce”. Choose **Craft Commerce**, and from there you can choose **Add to Cart** or **Try** for either edition.
 
 ## Composer
 
@@ -17,10 +17,6 @@ composer require craftcms/commerce
 php craft plugin/install commerce
 ```
 
-## Example Templates
-
-You may also want to copy the included [example templates](example-templates.md) into your project as a starting point, especially if you’re new to Commerce:
-
-```bash
-cp -r vendor/craftcms/commerce/example-templates templates/commerce-examples
-```
+::: tip
+You may also want to copy the included [example templates](example-templates.md) into your project as a starting point, especially if you’re new to Commerce.
+:::

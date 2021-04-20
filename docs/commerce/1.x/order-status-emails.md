@@ -10,15 +10,15 @@ Another email could be set up called “Order Notification for Admin” which co
 
 Before setting up emails for Craft Commerce. Ensure that your Craft CMS installation has email configured correctly.
 
-You can set up your email gateway by going to Settings → Email in the Control Panel.
+You can set up your email gateway by going to **Settings** → **Email** in the control panel.
 
-If you want to have a different From Email and From Name for your Commerce store emails, which overrides the Craft CMS email defaults, go to Commerce → Settings → General Settings and enter in your store from name and email address.
+If you want to have a different From Email and From Name for your Commerce store emails, which overrides the Craft CMS email defaults, go to **Commerce** → **Settings** → **General Settings** and enter your store from name and email address.
 
 <img src="./assets/new-email-settings.png" width="645" alt="New Email Settings.">
 
 ## Creating an Email
 
-To create a new email, go to Commerce → Settings → Emails, and click “New Email”.
+To create a new email, go to **Commerce** → **Settings** → **Emails**, and click “New Email”.
 
 Emails have the following configuration settings:
 
