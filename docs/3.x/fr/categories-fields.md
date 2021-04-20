@@ -234,7 +234,7 @@ For example, you could create a list of checkboxes for each of the possible rela
                 </ul>
             {% endifchildren %}
         </li>
-    {% endfor %}
+    {% endnav %}
 </ul>
 ```
 
