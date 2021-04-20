@@ -135,7 +135,7 @@ The `nitro create` command lets us breeze through setup steps we’d otherwise n
 3. Installs Composer dependencies so Craft has everything it needs to run.
 4. Edits a special `.env` file that tells Craft what settings to use for the local environment.
 
-Broadly, we’re setting up the files and database for a new web app, with a custom local domain name to access it in a browser.
+Broadly, we’re setting up the files and database for a new web app, with a custom local domain name to access it in a web browser.
 
 When we install Craft CMS (or any PHP web app) the project will rely on a _web root_ for files that need to be publicly available on the internet. This is a directory often named `public/`, `public_html/`, or in Craft’s case `web/`.
 
