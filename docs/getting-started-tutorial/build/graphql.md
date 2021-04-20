@@ -21,7 +21,7 @@ First upgrade your Craft Solo edition to Craft Pro:
 1. From the control panel, choose the **Solo** badge at the bottom of the screen.
 2. In the <badge type="edition" vertical="middle">Pro</badge> panel, choose **Try for free**.
 
-<BrowserShot url="http://tutorial.test/admin/plugin-store/upgrade-craft" :link="false" caption="Upgrading from Solo to Pro.">
+<BrowserShot url="https://tutorial.nitro/admin/plugin-store/upgrade-craft" :link="false" caption="Upgrading from Solo to Pro.">
 <img src="../images/upgrade-pro.png" alt="Screenshot of plugin store upgrading to Craft Pro trial" />
 </BrowserShot>
 
@@ -167,12 +167,12 @@ The response should be something like this:
       "title": "My first post",
       "postDate": "20 Mar 2020",
       "postDateAlt": "2020-03-20",
-      "url": "http://tutorial.test/blog/my-first-post",
+      "url": "https://tutorial.nitro/blog/my-first-post",
       "featureImage": [
         {
           "title": "Craft Image from Unsplash",
-          "url": "http://tutorial.test/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
-          "sized": "http://tutorial.test/assets/blog/_900x600_crop_center-center_90_none/tim-gouw-rXBwosfgG-c-unsplash.jpg"
+          "url": "https://tutorial.nitro/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
+          "sized": "https://tutorial.nitro/assets/blog/_900x600_crop_center-center_90_none/tim-gouw-rXBwosfgG-c-unsplash.jpg"
         }
       ],
       "postContent": [
@@ -185,7 +185,7 @@ The response should be something like this:
           "image": [
             {
               "title": "Little Drinks",
-              "url": "http://tutorial.test/assets/blog/rosie-kerr-Z0iBELYV8uk-unsplash.jpg"
+              "url": "https://tutorial.nitro/assets/blog/rosie-kerr-Z0iBELYV8uk-unsplash.jpg"
             }
           ]
         },
@@ -197,7 +197,7 @@ The response should be something like this:
       "postCategories": [
         {
           "title": "Ramblings",
-          "uri": "http://tutorial.test/blog/category/ramblings"
+          "uri": "https://tutorial.nitro/blog/category/ramblings"
         }
       ]
     },
@@ -239,12 +239,12 @@ Result:
     "entries": [
       {
         "title": "My first post",
-        "url": "http://tutorial.test/blog/my-first-post",
+        "url": "https://tutorial.nitro/blog/my-first-post",
         "featureImage": [
           {
             "title": "Craft Image from Unsplash",
-            "url": "http://tutorial.test/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
-            "sized": "http://tutorial.test/assets/blog/_300x300_crop_center-center_none/tim-gouw-rXBwosfgG-c-unsplash.jpg",
+            "url": "https://tutorial.nitro/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
+            "sized": "https://tutorial.nitro/assets/blog/_300x300_crop_center-center_none/tim-gouw-rXBwosfgG-c-unsplash.jpg",
             "focalPoint": [0.2059, 0.6287]
           }
         ]
@@ -354,7 +354,7 @@ Result:
       "aboutImage": [
         {
           "title": "Floating in Space",
-          "url": "http://tutorial.test/assets/general/nasa-Yj1M5riCKk4-unsplash.jpg"
+          "url": "https://tutorial.nitro/assets/general/nasa-Yj1M5riCKk4-unsplash.jpg"
         }
       ],
       "postContent": [
