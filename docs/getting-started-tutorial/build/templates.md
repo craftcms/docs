@@ -18,10 +18,9 @@ Copy this into the `templates/_layout.twig` file you created:
 <!DOCTYPE html>
 <html lang="{{ craft.app.language }}">
   <head>
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta charset="utf-8"/>
     <title>{{ siteName }}</title>
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="/styles.css" rel="stylesheet">
   </head>
   <body class="ltr">
