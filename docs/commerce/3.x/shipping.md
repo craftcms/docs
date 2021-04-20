@@ -80,29 +80,21 @@ The matching of the shipping rules to the cart is based on the following rules c
 
 Each shipping rule can have a single zone. This condition is met if the order’s shipping address falls within this zone.
 
-### Minimum Order Quantity
+### Order Condition Formula
 
-This condition is met if the order has at least a certain number of items.
+An optional condition for specifying criteria to be met in order for the shipping method to be available for selection.
 
-### Maximum Order Quantity
+### Order Total Quanity
 
-This condition is met if the order quantity does not exceed a certain number of items.
+This condition is met if the order has at least and/or at most a certain number of items.
 
-### Minimum Order Total Price
+### Order Total Value
 
-This condition is met if the total order price is at least a certain amount.
+This condition is met if the total order price is at least and/or at most a certain amount.
 
-### Maximum Order Total Price
+### Order Total Weight
 
-This condition is met if the total order price is no more than a certain amount.
-
-### Minimum Order Total Weight
-
-This condition is met if the total order weight is at least a certain amount.
-
-### Maximum Order Total Weight
-
-This condition is met if the total order weight is no more than a certain amount.
+This condition is met if the total order weight is at least and/or at most a certain amount.
 
 ### Shipping Categories
 

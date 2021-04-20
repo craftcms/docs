@@ -1481,6 +1481,29 @@ Event::on(
 );
 ```
 
+### `beforePurgeAddresses`
+
+The event that is triggered before purgeable addresses are deleted.
+
+```php
+use craft\commerce\events\PurgeAddressesEvent;
+use craft\commerce\services\Addresses;
+use yii\base\Event;
+
+Event::on(
+    Addresses::class,
+    Addresses::EVENT_BEFORE_PURGE_ADDRESSES,
+    function(PurgeAddressesEvent $event) {
+        // @var Query $addressQuery
+        $addressQuery = $event->addressQuery;
+
+        // Add an `$addressQuery->andWhere(..)` to change the addresses that will be purged query
+        // $event->addressQuery = $addressQuery
+    }
+}
+);
+```
+
 ### `afterSaveAddress`
 
 The event that is triggered after an address is saved.

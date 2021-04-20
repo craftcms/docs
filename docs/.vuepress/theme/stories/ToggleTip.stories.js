@@ -75,7 +75,7 @@ export const Default = () => ({
       default: text("Title", "This is a title"),
     },
     height: {
-      default: number("Max Height", 400),
+      default: number("Max Height", 300),
     },
     expandTerm: {
       default: text("Expand Term", "expand")

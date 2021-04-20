@@ -21,6 +21,6 @@ The `templates/` folder contains example templates that demonstrate how to creat
 
 ## Install the plugin
 
-With your files uploaded, log into your Craft site’s Control Panel (located at `http://example.com/admin`), and navigate to Settings → Plugins. Click the “Install” button next to “Commerce” and wait a few seconds. When the page reloads, Commerce will be fully installed!
+With your files uploaded, log into your Craft site’s Control Panel (located at `http://example.com/admin`), and navigate to **Settings** → **Plugins**. Choose **Install** next to “Commerce” and wait a few seconds. When the page reloads, Commerce will be fully installed!
 
-You will find some example products located in Commerce → Products, and if you’ve uploaded the example templates, you’ll be able to view them right away on the front end.
+You will find some example products located in **Commerce** → **Products**, and if you’ve uploaded the example templates, you’ll be able to view them right away on the front end.

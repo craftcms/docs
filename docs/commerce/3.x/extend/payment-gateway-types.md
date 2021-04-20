@@ -82,6 +82,10 @@ The site’s front end should prompt the customer to correct any validation erro
 
 With the order and payment gateway details good to go, Commerce saves a new pending transaction for the order with the amount owing. This transaction is saved with a hash we’ll come back to later.
 
+::: tip
+As of Commerce 3.3, the payment amount can be a partial payment against the order. A gateway can return `false` for `supportsPartialPayments()` to disallow partial payments—which are otherwise allowed by default.
+:::
+
 Next, Commerce initiates the configured payment method.
 
 ### Initiating a Payment
