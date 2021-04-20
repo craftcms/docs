@@ -372,7 +372,7 @@ By default, `at endBody` will be used.
 
 ## `id`
 
-The `{% js %}` tag can be used to register a JavaScript file, or a JavaScript code block.
+The `{% js %}` tag can be used to register a JavaScript file or a JavaScript code block.
 
 ```twig
 {# Register a JS file #}
@@ -390,6 +390,12 @@ The `{% js %}` tag can be used to register a JavaScript file, or a JavaScript co
 
 ::: tip
 To register a JavaScript file, the URL must end in `.js`.
+
+To provide a *dynamic* filename reference, use [`view.registerJsFile()`](craft3:craft\web\View::registerJsFile()) instead:
+```twig
+{% set myJsFile = "/assets/js/script.js" %}
+{% do view.registerJsFile(myJsFile) %}
+```
 :::
 
 ### Parameters
