@@ -97,7 +97,7 @@ You should explicitly override the alias to avoid introducing a [cache poisoning
 
 ## すべての有効サイトにエントリを広げる
 
-それぞれのチャンネルセクションの設定には、すべてのサイトにエントリを広げるためのオプションがあります。 これはデフォルトで有効になっていて、シングルやストラクチャーセクションでは、必ず有効な状態となります。
+それぞれのチャンネルセクションの設定には、すべてのサイトにエントリを広げるためのオプションがあります。 This is enabled by default, and is the only option for Single sections.
 
 セクションのコンテンツをサイトごとに分離したい場合、そのセクションにあるこのオプションを無効にします。
 
