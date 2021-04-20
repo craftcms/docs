@@ -363,7 +363,7 @@ The `{% js %}` tag can be used to register a JavaScript file or a JavaScript cod
 ::: tip
 To register a JavaScript file, the URL must end in `.js`.
 
-If you’d like to provide a dynamic reference to a filename, you can use [`view.registerJsFile()`](craft3:craft\web\View::registerJsFile()) instead:
+To provide a *dynamic* filename reference, use [`view.registerJsFile()`](craft3:craft\web\View::registerJsFile()) instead:
 ```twig
 {% set myJsFile = "/assets/js/script.js" %}
 {% do view.registerJsFile(myJsFile) %}
