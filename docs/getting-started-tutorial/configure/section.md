@@ -108,7 +108,7 @@ Next, let’s create the individual fields for our blog posts. With Craft, we ex
 2. Choose **+ New group** to create a new field group with the name “Blog Post Fields”. Save the group.
 3. Create a Plain Text “Summary” field. Choose **New Field** and enter the following:
    - **Name**: `Summary`
-   - **Instructions**: `Enter a brief, one or two sentence post summary.` (This helps the content editor know what to do!)
+   - **Default Instructions**: `Enter a brief, one or two sentence post summary.` (This helps the content editor know what to do!)
    - **Allow line breaks**: on/enabled
    - **Initial Rows**: `1`
    
@@ -117,7 +117,7 @@ Next, let’s create the individual fields for our blog posts. With Craft, we ex
    - **Name**: `Feature Image`
    - **Field Type**: Assets
    - **Restrict uploads to a single folder?**: checked
-   - **Asset Location**: Blog
+   - **Default Asset Location**: Blog
    - **Restrict allowed file types?**: checked
       - Select **Image** to ensure content editors can only select files that are images
    - **Limit**: `1`

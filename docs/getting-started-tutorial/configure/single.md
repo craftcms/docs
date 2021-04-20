@@ -28,7 +28,7 @@ Now let’s create a new Assets field for the about page image, telling it to li
 3. Create a field called “About Image” entering the following:
     - **Field Type**: Assets
     - **Restrict uploads to a single folder?**: checked/enabled
-        - **Asset Location**: General
+        - **Default Asset Location**: General
     - **Restrict allowed file types?**: checked/enabled
         - Select **Image** to ensure content editors can only select files that are images
 4. Save the field.
@@ -40,7 +40,7 @@ Now we can create the about page single:
 1. Navigate to **Settings** → **Sections** and choose **+ New section**.
 2. Enter “About” for the section name.
 3. To make this new section a single, select “Single” from the **Section Type** dropdown menu. Notice that the Site Settings change to take a single URI rather than an Entry URI Format that would be required for a Section.
-4. Enter `about` for “URI”, and `_singles/about` for “Template”.
+4. Enter `about` for **URI**, and `_singles/about` for **Template**.
 5. Save this section.
 
 <BrowserShot url="https://tutorial.nitro/admin/settings/sections/new" :link="false" caption="Settings for the new about single.">
