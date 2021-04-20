@@ -4,7 +4,7 @@ Craft Commerce can be used with over 20+ payment gateways out of the box, throug
 
 All included gateways should work as expected, but logistically we are unable to test them all. See our [testing matrix](https://craftcommerce.com/support/which-payment-gateways-do-you-support) for more information.
 
-To create a new payment method, go to Commerce → Settings → Payment Methods in the Control Panel. Each payment method’s gateway requires different settings, which you will need to obtain from your gateway provider.
+To create a new payment method, go to **Commerce** → **Settings** → **Payment Methods** in the control panel. Each payment method’s gateway requires different settings, which you will need to obtain from your gateway provider.
 
 Payment gateways can be one of two categories:
 
@@ -87,7 +87,7 @@ If you’re going to use the PayPal Express payment gateway you are required to 
 
 Choose any different token name other than `token`, for example you could put `craftToken`. Otherwise redirects from PayPal will fail.
 
-PayPal Express Checkout requires an API Username, Password, and Signature. These are different from your PayPal account details. You can obtain your API details by logging in to your PayPal account, and going to Profile → My Selling Tools → API Access → Request/View API Credentials → Request API Signature.
+PayPal Express Checkout requires an API Username, Password, and Signature. These are different from your PayPal account details. You can obtain your API details by logging in to your PayPal account, and going to **Profile** → **My Selling Tools** → **API Access** → **Request/View API Credentials** → **Request API Signature**.
 
 ::: warning
 PayPal have increased their TLS requirements, which affects MAMP 3 and some macOS users. If you are affected, you will see an error relating to SSL when attempting to pay with PayPal. Upgrading to MAMP 4 should fix the issue. Read more here: <https://github.com/paypal/TLS-update#php>

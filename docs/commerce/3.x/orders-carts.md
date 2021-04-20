@@ -77,7 +77,7 @@ axios.get('', {
 
 Either of the examples above will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
 
-To see what cart information you can use in your templates, take a look at the [Order](commerce3:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/develop/example-templates/shop/cart/index.twig).
+To see what cart information you can use in your templates, take a look at the [Order](commerce3:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/main/example-templates/build/shop/cart/index.twig).
 
 <toggle-tip title="Example Order">
 
@@ -261,7 +261,7 @@ You can remove a line item by including a `remove` parameter in the request. Thi
 ```
 
 ::: tip
-The [example templates](example-templates.md) include a [detailed cart template](https://github.com/craftcms/commerce/blob/master/example-templates/shop/cart/index.twig) for adding and updating items in a full checkout flow.
+The [example templates](example-templates.md) include a [detailed cart template](https://github.com/craftcms/commerce/blob/main/example-templates/build/shop/cart/index.twig) for adding and updating items in a full checkout flow.
 :::
 
 #### Options Uniqueness
@@ -278,7 +278,9 @@ The `note` parameter is not part of a line item’s uniqueness; it will always b
 
 ### Loading a Cart
 
-An existing cart can be loaded by its cart number into the current customer’s session. This can be accomplished in two ways using the `commerce/cart/load-cart` endpoint: via [form submission](#loading-a-cart-with-a-form) or [navigating to a URL](#loading-a-cart-with-a-url).
+Commerce provides a `commerce/cart/load-cart` endpoint for loading an existing cart into the current customer’s session.
+
+You can have the user interact with the endpoint by either [navigating to a URL](#loading-a-cart-with-a-url) or by [submitting a form](#loading-a-cart-with-a-form). Either way, the cart number is required.
 
 Each method will store any errors in the session’s error flash data (`craft.app.session.getFlash('error')`), and the cart being loaded can be active or inactive.
 
@@ -288,31 +290,21 @@ If the desired cart belongs to a user, that user must be logged in to load it in
 
 The [`loadCartRedirectUrl`](config-settings.md#loadCartRedirectUrl) setting determines where the customer will be sent by default after the cart’s loaded.
 
-#### Loading a Cart with a Form
-
-Send a get or post action request with a `number` parameter referencing the cart you’d like to load. When posting the form data, you can include a specific redirect location like you can with any other Craft post data.
-
-This is a simplified version of [`shop/cart/load.twig`](https://github.com/craftcms/commerce/tree/master/example-templates/shop/cart/load.twig) in the example templates, where a `cart` variable has already been set to the cart that should be loaded:
-
-```twig
-<form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/cart/load-cart') }}
-    {{ redirectInput('/shop/cart') }}
-
-    <input type="text" name="number" value="{{ cart.number }}">
-    <button type="submit">Submit</button>
-</form>
-```
-
 #### Loading a Cart with a URL
 
-You can also load a cart simply navigating to the `commerce/cart/load-cart` endpoint, as long as the `number` parameter is included in the URL.
+Have the customer navigate to the `commerce/cart/load-cart` endpoint, including the `number` parameter in the URL.
+
+A quick way for a store manager to grab the URL is by navigating in the control panel to **Commerce** → **Orders**, selecting one item from **Active Carts** or **Inactive Carts**, and choosing **Share cart…** from the context menu:
+
+![Share cart context menu option](./assets/share-cart.png)
+
+You can also do this from an order edit page by choosing the gear icon and then **Share cart…**.
+
+To do this programmatically, you’ll need to create an absolute URL for the endpoint and include a reference to the desired cart number.
 
 This example sets `loadCartUrl` to an absolute URL the customer can access to load their cart. Again we’re assuming a `cart` object already exists for the cart that should be loaded:
 
 ::: code
-
 ```twig
 {% set loadCartUrl = actionUrl(
     'commerce/cart/load-cart',
@@ -326,12 +318,28 @@ $loadCartUrl = craft\helpers\UrlHelper::actionUrl(
     ['number' => $cart->number]
 );
 ```
-
 :::
 
 ::: tip
 This URL can be presented to the user however you’d like. It’s particularly useful in an email that allows the customer to retrieve an abandoned cart.
 :::
+
+#### Loading a Cart with a Form
+
+Send a GET or POST action request with a `number` parameter referencing the cart you’d like to load. When posting the form data, you can include a specific redirect location like you can with any other Craft post data.
+
+This is a simplified version of [`shop/cart/load.twig`](https://github.com/craftcms/commerce/tree/main/example-templates/build/shop/cart/load.twig) in the example templates, where a `cart` variable has already been set to the cart that should be loaded:
+
+```twig
+<form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/load-cart') }}
+    {{ redirectInput('/shop/cart') }}
+
+    <input type="text" name="number" value="{{ cart.number }}">
+    <button type="submit">Submit</button>
+</form>
+```
 
 #### Restoring Previous Cart Contents
 
@@ -516,6 +524,115 @@ You can manually recalculate an order by choosing “Recalculate order” at the
 ![](./assets/recalculate-order.png)
 
 This will set temporarily the order’s calculation mode to *Recalculate All* and trigger recalculation. You can then apply the resulting changes to the order by choosing “Update Order”, or discard them by choosing “Cancel”.
+
+### Order Notices
+
+Notices are added to an order whenever it changes, whether it’s the customer saving the cart or a store manager recalculating from the control panel. Each notice is an [OrderNotice](https://github.com/craftcms/commerce/blob/main/src/models/OrderNotice.php) model describing what changed and could include the following:
+
+- A previously-valid coupon or shipping method was removed from the order.
+- A line item’s purchasable was no longer available so that line item was removed from the cart.
+- A line item’s sale price changed for some reason, like the sale no longer applied for example.
+
+The notice includes a human-friendly terms that can be exposed to the customer, and references to the order and attribute it’s describing.
+
+#### Accessing Order Notices
+
+Notices are stored on the order and accessed with `getNotices()` and `getFirstNotice()` methods.
+
+Each can take optional `type` and `attribute` parameters to limit results to a certain order attribute or kind of notice.
+
+A notice’s `type` will be one of the following:
+
+- `lineItemSalePriceChanged`
+- `lineItemRemoved`
+- `shippingMethodChanged`
+- `invalidCouponRemoved`
+
+::: code
+```twig
+{# @var order craft\commerce\elements\Order #}
+
+{# returns a multi-dimensional array of notices by attribute key #}
+{% set notices = order.getNotices() %}
+
+{# returns an array of notice models for the `couponCode` attribute only #}
+{% set couponCodeNotices = order.getNotices(null, 'couponCode') %}
+
+{# returns the first notice only for the `couponCode` attribute #}
+{% set firstCouponCodeNotice = order.getFirstNotice(null, 'couponCode') %}
+
+{# returns an array of notice models for changed line item prices #}
+{% set priceChangeNotices = order.getNotices('lineItemSalePriceChanged') %}
+```
+```php
+// @var craft\commerce\elements\Order $order
+
+// returns a multi-dimensional array of notices by attribute key
+$notices = $order->getNotices();
+
+// returns an array of notice models for the `couponCode` attribute only
+$couponCodeNotices = $order->getNotices(null, 'couponCode');
+
+// returns the first notice only for the `couponCode` attribute
+$firstCouponCodeNotice = $order->getFirstNotice(null, 'couponCode');
+
+// returns an array of notice models for changed line item prices
+$priceChangeNotices = $order->getNotices('lineItemSalePriceChanged');
+```
+:::
+
+Each notice can be output as a string in a template:
+
+```twig
+{% set notice = order.getFirstNotice('salePrice') %}
+<p>{{ notice }}</p>
+{# result: <p>The price of x has changed</p> #}
+```
+
+#### Clearing Order Notices
+
+Notices remain on an order until they’re cleared. You can clear all notices by posting to the cart update form action, or call the order’s `clearNotices()` method to clear specific notices or all of them at once.
+
+This example clears all the notices on the cart:
+
+::: code
+```twig{5}
+<form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/update-cart') }}
+    {{ hiddenInput('successMessage', 'All notices dismissed'|hash) }}
+    {{ hiddenInput('clearNotices') }}
+    <button type="submit">Dismiss</button>
+</form>
+```
+```php{7}
+use craft\commerce\Plugin as Commerce;
+
+// Get the current cart
+$cart = Commerce::getInstance()->getCarts()->getCart();
+
+// Clear all notices
+$cart->clearNotices();
+```
+:::
+
+This only clears `couponCode` notices on the cart:
+
+::: code
+```twig
+{# Clear notices on the `couponCode` attribute #}
+{% do cart.clearNotices(null, 'couponCode') %}
+```
+```php{7}
+use craft\commerce\Plugin as Commerce;
+
+// Get the current cart
+$cart = Commerce::getInstance()->getCarts()->getCart();
+
+// Clear notices on the `couponCode` attribute
+$cart->clearNotices(null, 'couponCode');
+```
+:::
 
 ### Order Status Emails
 
