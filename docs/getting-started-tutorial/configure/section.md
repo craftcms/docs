@@ -90,6 +90,10 @@ Let’s be adventurous and use console commands:
 1. From your terminal, run `nitro composer require craftcms/redactor`. Composer will download the plugin and add it to your project.
 2. Now run `nitro craft plugin/install redactor`.
 
+::: tip
+You can install Craft and Craft plugins from the browser like we did earlier **or** using terminal commands like we did here. 😎
+:::
+
 That’s it! The Redactor plugin is installed and ready to use in our site.
 
 <BrowserShot url="https://tutorial.nitro/admin/settings/plugins" :link="false" caption="Redactor now appears in the list of installed plugins, where it can be disabled or uninstalled.">
