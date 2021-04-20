@@ -11,7 +11,7 @@ While you could get away with using TextEdit.app, Notepad, or Text Editor, it’
 - handle invisible characters like spaces and returns carefully, which can cause annoying problems across operating systems
 - usually include convenient features and plugins for, as you might expect, working with code
 
-An excellent, popular code editor is [Visual Studio Code](https://code.visualstudio.com/), which is available for free on MacOS, Windows, and Linux.
+An excellent, popular code editor is [Visual Studio Code](https://code.visualstudio.com/), which is available for free on macOS, Windows, and Linux.
 
 ![](../images/vs-code-highlighting.png)
 
