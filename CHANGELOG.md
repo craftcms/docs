@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-04-23
+## Changed
+- Improved GraphQL introduction and examples.
+
 ## 2021-04-20
 ## Changed
 - Updated the tutorial to use Nitro 2.
