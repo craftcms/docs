@@ -101,7 +101,7 @@ nitro apply
 **Options**
 
 `--skip-hosts`
-: Skips updating the `hosts` file. Yyou can also set the environment variable "NITRO_EDIT_HOSTS" to "false" for this to apply globally.
+: Skips updating the `hosts` file. You can also set the environment variable "NITRO_EDIT_HOSTS" to "false" for this to apply globally.
 
 **Example**
 

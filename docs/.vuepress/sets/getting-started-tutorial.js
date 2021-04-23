@@ -27,8 +27,6 @@ module.exports = {
         collapsable: true,
         children: [
           "install/files",
-          "install/database",
-          "install/server",
           "install/setup"
         ]
       },
