@@ -8,8 +8,8 @@ The global `craft` template variable is an instance of <craft3:craft\web\twig\va
 
 The `CraftVariable` instance can be extended by plugins with [behaviors](https://www.yiiframework.com/doc/guide/2.0/en/concept-behaviors) and [services](https://www.yiiframework.com/doc/guide/2.0/en/concept-service-locator). Choosing the right approach depends on what you’re trying to add to it.
 
-- Use a **behavior** to add custom properties or methods directly onto the `craft` variable (e.g. `craft.foo()`).
 - Use a **service** to add a sub-object to the `craft` variable, which can be accessed with a custom property name, called the service’s “ID”. (e.g. `craft.foo.*`).
+- Use a **behavior** to add custom properties or methods directly onto the `craft` variable (e.g. `craft.foo()`).
 
 You can attach your behavior or service to the `CraftVariable` instance by registering an [EVENT_INIT](craft3:craft\web\twig\variables\CraftVariable::EVENT_INIT) event handler from your plugin’s `init()` method:
 
