@@ -96,6 +96,14 @@ With the above Entry URI Format, a top-level entry’s URI might end up as `docs
 You can designate any one entry as a site’s homepage using a special `__home__` URI.
 :::
 
+::: tip
+You can use an attribute from a query in the entry's URI. Use double curly braces (e.g. `{{craft.entries.section('mySingle').one().slug}}/news`).
+:::
+
+::: tip
+You can use aliases in the entry's URI. Use the `alias()` function in double curly braces (e.g. `{{alias(@rootUrl)}}/news`, `{{alias(@mySectionUri)}}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
+:::
+
 ### Preview Targets
 
 If you’re using Craft Pro, your section can have one or more **preview targets**, which are URLs of pages that your entries will show up on, making it possible for authors to preview entries as they are writing them in the control panel.
