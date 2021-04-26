@@ -145,6 +145,13 @@ We can display a list of thumbnails for images in a “Photos” volume by doing
 When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have “Assets in this volume have public URLs” enabled and a “Base URL” setting. Otherwise, the result will always be empty.
 :::
 
+You can cache-bust URLs using Craft’s [`url()` function](dev/functions.md#url) to append a query parameter with the last-modified timestamp:
+
+```twig
+<img src="{{ url(image.getUrl('thumb'), {v: image.dateModified.timestamp}) }}">
+{# <img src="https://mysite.foo/images/_thumb/bar.jpg?v=1614374621"> #}
+```
+
 ### Parameters
 
 Asset queries support the following parameters:
@@ -1199,7 +1206,7 @@ This can improve performance when displaying several image transforms at once, i
 
 Transforms can be specified as their handle or an object that contains `width` and/or `height` properties.
 
-You can include `srcset`-style sizes (e.g. `100w` or `2x`) following a normal transform definition, for example:
+When a `srcset`-style size is encountered, the preceding normal transform definition will be used as a reference when determining the resulting transform dimensions.
 
 ::: code
 
