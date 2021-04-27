@@ -2,15 +2,24 @@
 keywords: headless
 ---
 
-# GraphQL API
+# GraphQL API <badge type="edition" vertical="middle" title="GraphQL is only available in Craft Pro">Pro</badge>
 
-Craft Pro は、コンテンツのための自動生成された[GraphQL](https://graphql.org) API を提供します。これをクエリして、シングルページアプリケーション（SPA）や静的サイトジェネレーターなど、別のアプリケーションに取り込むことができます。
+Craft Pro provides a [GraphQL](https://graphql.org) API you can use to work with your content in separate applications like single-page apps (SPAs) and static site generators.
 
-## クエリとレスポンスの実例
+## Getting Started
 
-### クエリのペイロード
+Make sure you’re running Craft Pro 3.3 or later and [the `enableGql` setting](config3:enableGql) is not set to `false`.
 
-```graphql
+Because GraphQL is self-documenting, you can jump right into Craft’s included [GraphiQL IDE](#using-the-graphiql-ide) from the control panel and interactively build and execute queries. Querying from the control panel gives you full access to data that’s available, unlike queries from the outside that require [and endpoint and appropriate permissions](#setting-up-your-api-endpoint).
+
+## Examples
+
+### Query
+
+Here’s what a [query](#query-reference) for two news entries might look like, complete with a formatted `dateCreated` and custom-transformed `featureImage`:
+
+::: code
+```graphql GraphQL
 {
   entries (section: "news", limit: 2, orderBy: "dateCreated DESC") {
     dateCreated @formatDateTime (format: "Y-m-d")
@@ -27,10 +36,7 @@ Craft Pro は、コンテンツのための自動生成された[GraphQL](https:
   }
 }
 ```
-
-### クエリとレスポンスの実例
-
-```json
+```json JSON Response
 {
   "data": {
     "entries": [
@@ -63,16 +69,50 @@ Craft Pro は、コンテンツのための自動生成された[GraphQL](https:
   }
 }
 ```
+:::
 
-## はじめよう
+### Mutation
 
-はじめに、Craft Pro 3.3 以降を稼働し、さらに、[`enableGql` 設定](config3:enableGql) が `false` にセットされていないことを確認してください。
+Here’s a [mutation](#mutations), where we’re using the GraphQL API to save a new entry:
 
-### API エンドポイントの作成
+::: code
+```graphql GraphQL
+mutation saveEntry($title: String, $slug: String) {
+  save_news_article_Entry(title: $title, slug: $slug) {
+    title
+    slug
+    dateCreated @formatDateTime (format: "Y-m-d")
+  }
+}
 
-プロジェクトに GraphQL API を追加するための最初のステップは、パブリックエンドポイントを設定することです。
+# query variables:
+{
+  "title": "Craft 3.5 Supports GraphQL Mutations",
+  "slug": "craft-graphql-mutations"
+}
+```
+```json JSON Response
+{
+  "data": {
+    "save_news_article_Entry": {
+      "title": "Craft 3.5 Supports GraphQL Mutations",
+      "slug": "craft-graphql-mutations",
+      "dateCreated": "2020-04-18"
+    }
+  }
+}
+```
+:::
 
-そのためには、`config/routes.php` から `graphql/api` コントローラーアクションを指す [URL ルール](routing.md#advanced-routing-with-url-rules)を作成します。例えば、次の URL ルールは `/api` リクエストを GraphQL API にルーティングします。
+## Setting Up Your API Endpoint
+
+By default, none of your content is available outside of Craft via GraphQL. In order to send GraphQL queries to Craft, we need to establish an endpoint for receiving them and an appropriate set of permissions with a token.
+
+### Create a GraphQL Route
+
+You’ll need to establish a route that provides a public endpoint for the GraphQL API.
+
+Create a [URL rule](routing.md#advanced-routing-with-url-rules) from `config/routes.php` that points to the `graphql/api` controller action. For example, the following URL rule would cause `/api` requests to route to the GraphQL API:
 
 ```php
 return [
@@ -81,85 +121,95 @@ return [
 ];
 ```
 
-エンドポイントが正しく設定されていることを確認するには、`{ping}` クエリを送信してみてください。
+::: tip
+Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using the <config3:allowedGraphqlOrigins> setting.
+:::
+
+Pretending your endpoint is `http://my-project.test/api`, you can verify that it’s configured correctly by sending a `{ping}` query to it:
 
 ```bash
 curl -H "Content-Type: application/graphql" -d '{ping}' http://my-project.test/api
 ```
 
-（`http://my-project.test/api` を実際のエンドポイントの URL に置き換えてください。）
-
-次の JSON レスポンスが返される場合、GraphQL API は稼働しています！
+If you get a `pong` in your response, your GraphQL API is up and running!
 
 ```json
 {"data":{"ping":"pong"}}
 ```
 
-### スキーマの定義
-
-GraphQL API エンドポイントを作成したら、そこからどのコンテンツを利用可能にするかを Craft に伝える必要があります。（デフォルトでは利用可能なコンテンツはありません。） そのために、**スキーマ**を定義します。
-
-Craft は2つのタイプのスキーマがあります。
-
-- **公開スキーマ**は、利用可能な公開コンテンツを定義します。
-- それぞれに独自のシークレット**アクセストークン**を持つ、複数のプライベートスキーマを定義することもできます。
-
-スキーマは、コントロールパネルの「GraphQL > スキーマ」から管理できます。スキーマごとのスコープを定義することに加えて、有効期限日を指定したり、無効にしたりすることもできます。
-
 ::: tip
-GraphQL API リクエストを実行すると、指定されたトークン（があれば、それ）に基づいて、スキーマが自動的に決定されます。その方法を知るには、[こちら](#querying-a-private-schema)を参照してください。
+The `ping` test works for any endpoint; content queries depend on your schema setup.
 :::
 
-## API リクエストの送信
+### Define Your Schemas
 
-### GraphiQL IDE を利用
+Once you’ve created a GraphQL API endpoint, you need to tell Craft which content should be available from it. You do that by defining a **Schema**.
 
-GraphQL API の探索を開始する最も簡単な方法は、組み込みの [GraphiQL](https://github.com/graphql/graphiql) IDE を使うことです。これは、コントロールパネルの「GraphQL > GraphiQL」から利用できます。
+Craft has two types of schemas:
 
-![組み込みの GraphiQL IDE](./images/graphiql.png)
+1. A single **Public Schema** that defines which content should be available publicly.
+2. Any number of private schemas you create, each having its own secret **Access Token**.
 
-### 別の IDE を利用
+Any GraphQL API request without a token will use the Public Schema. Craft with otherwise use a valid token to determine the relevant schema.
 
-別の GraphQL IDE も利用できます。
+You can manage your schemas in the control panel at **GraphQL** → **Schemas**. In addition to defining the scope of each schema, you can also give them expiration dates, regenerate their tokens, and disable them.
+
+## Sending API Requests
+
+### Using the GraphiQL IDE
+
+The easiest way to start exploring your GraphQL API is with the built-in [GraphiQL](https://github.com/graphql/graphiql) IDE, which is available in the control panel from **GraphQL** → **Explore**.
+
+![The built-in GraphiQL IDE](./images/graphiql.png)
+
+::: tip
+The included GraphiQL IDE preselects a special “Full Schema” option for optimal exploration. You can change the applied schema from its dropdown menu.
+
+![GraphiQL’s Full Schema default](./images/graphiql-full-schema.png)
+:::
+
+### Using Another IDE
+
+Additional GraphQL IDEs are available as well:
 
 * [Insomnia](https://insomnia.rest/)
 * [GraphQL Playground](https://github.com/prisma/graphql-playground)
 * [GraphQL Playground online](https://www.graphqlbin.com/v2/new)
 
 ::: tip
-はじめて API を探索する場合、利用可能なスキーマ全体について IDE が情報を得られるように、[Dev Mode](config3:devMode) が有効になっているか確認してください。
+When you’re initially exploring the API, make sure <config3:devMode> is enabled so the IDE can be informed about the entire schema available to it.
 :::
 
-### リクエストを手動で送信
+### Sending Requests Manually
 
-GraphQL API は3つの方法で照会できます。
+The GraphQL API can be queried in three ways:
 
-- `GET` リクエストを利用し、GraphQL クエリを `query` パラメータで定義します。
-   ```bash
-   curl \
-     --data-urlencode "query={ping}" \
-     http://craft32.test/api
-   # or
-   curl http://craft32.test/api?query=%7Bping%7D
-   ```
-- `application/json` コンテンツタイプの `POST` リクエストを利用し、GraphQL クエリを `query` キーで定義します。
-   ```bash
-   curl \
-     -H "Content-Type: application/json" \
-     -d '{"query":"{ping}"}' \
-     http://my-project.test/api
-   ```
-- `application/graphql` コンテンツタイプの `POST` リクエストを利用し、GraphQL クエリを生のリクエストボディで定義します。
-   ```bash
-   curl \
-     -H "Content-Type: application/graphql" \
-     -d '{ping}' \
-     http://my-project.test/api
-   ```
+1. **A `GET` request** with the GraphQL query defined by a `query` parameter:
+  ```bash
+  curl \
+    --data-urlencode "query={ping}" \
+    http://craft32.test/api
+  # or
+  curl http://craft32.test/api?query=%7Bping%7D
+  ```
+2. **A `POST` request with an `application/json` content type** and the GraphQL query defined by a `query` key:
+  ```bash
+  curl \
+    -H "Content-Type: application/json" \
+    -d '{"query":"{ping}"}' \
+    http://my-project.test/api
+  ```
+3. **A `POST` request with an `application/graphql` content type** and the GraphQL query defined by the raw request body:
+  ```bash
+  curl \
+    -H "Content-Type: application/graphql" \
+    -d '{ping}' \
+    http://my-project.test/api
+  ```
 
-#### 変数の指定
+#### Specifying Variables
 
-クエリと一緒に [variables](https://graphql.org/learn/queries/#variables) を指定する必要がある場合、`application/json` コンテンツタイプの `POST` リクエストとしてリクエスト送信し、`query` と一緒に JSON 本体に `variables` キーを含めなければいけません。
+If you need to specify any [variables](https://graphql.org/learn/queries/#variables) along with your query, then you must send request as a `POST` request with an `application/json` content type, and include a `variables` key in the JSON body alongside `query`.
 
 ```bash
 curl \
@@ -171,9 +221,9 @@ curl \
   http://my-project.test/api
 ```
 
-#### プライベートスキーマの照会
+#### Querying a Private Schema
 
-デフォルトでは、公開スキーマが使用されます。別の[スキーマ](#define-your-schemas)に対してクエリを実行するには、`Authorization` ヘッダーを利用してアクセストークンを渡します。
+The Public Schema is used by default. To query against a different [schema](#define-your-schemas), pass its Access Token using an `Authorization` header.
 
 ```bash
 curl \
@@ -183,1308 +233,1411 @@ curl \
   http://my-project.test/api
 ```
 
-## キャッシング
+::: warning
+If you’re unable to query a private schema because of a “missing authorization header”, make sure Craft received it from the web server with a quick post to a test template:
 
-すべてのクエリ結果はキャッシュされるため、繰り返されたクエリはより早く結果を得られます。GraphQL の結果のキャッシュは、キャッシュを無効化に関する高度なルールセットを持ちません。サイトのコンテンツ、または、構造を変更すると、すべてのキャッシュが無効になります。
+```twig
+{{ craft.app.getRequest().getHeaders().has('authorization') ?
+    'auth token present ✓' : 
+    'auth token missing!' }}
+```
 
-Craft は GraphQL の結果のキャッシュをデフォルトで有効にしていますが、コンフィグ設定 [enableGraphQlCaching](https://docs.craftcms.com/api/v3/craft-config-generalconfig.html#enablegraphqlcaching) で無効にできます。
+Apache strips `Authorization` headers by default, which can be fixed by enabling [CGIPassAuth](https://httpd.apache.org/docs/2.4/en/mod/core.html#cgipassauth) or adding the following to your `.htaccess` file:
 
-## インターフェースの実装
+```
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+```
+:::
 
-それぞれ特定のインターフェース実装のために、定義されたタイプが存在します。例えば、「ニュース」セクションに「アーティクル」と「エディトリアル」入力タイプを持つ場合、（トークンが利用を許可していれば）`EntryInterface` インターフェースタイプに加え、2つの追加タイプが GraphQL スキーマで定義されます。 それが `news_article_Entry` および `news_editorial_Entry` タイプです。
+## Caching
 
-## クエリのリファレンス
+Query results are cached to speed up subsequent queries. The GraphQL result cache is very simple, so if the site’s content or structure changes, the entire cache is invalidated.
+
+Craft’s GraphQL result caching is enabled by default and you can disable it with the <config3:enableGraphQlCaching> setting.
+
+## Interface Implementation
+
+A defined type exists for each specific interface implementation. For example, if a “News” section has “Article” and “Editorial” entry types, in addition to the `EntryInterface` interface type, two additional types would be defined the GraphQL schema, if the token used allows it: `news_article_Entry` and `news_editorial_Entry` types.
+
+## Query Reference
 
 ::: tip
-実際の API 機能は、スキーマが許可するものに依存します。
+The actual API features will depend on what your schema allows.
 :::
 
 <!-- BEGIN QUERIES -->
 
-### `assets` クエリ
-このクエリはアセットの照会で利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `volumeId`| `[QueryArgument]` | ボリュームの ID ごとに、アセットが属するボリュームに基づいて、クエリの結果を絞り込みます。
-| `volume`| `[String]` | ボリュームのハンドルごとに、アセットが属するボリュームに基づいて、クエリの結果を絞り込みます。
-| `folderId`| `[QueryArgument]` | フォルダの ID ごとに、アセットが属するフォルダに基づいて、クエリの結果を絞り込みます。
-| `filename`| `[String]` | アセットのファイル名に基づいて、クエリの結果を絞り込みます。
-| `kind`| `[String]` | アセットのファイルの種類に基づいて、クエリの結果を絞り込みます。
-| `height`| `[String]` | アセットの画像の高さに基づいて、クエリの結果を絞り込みます。
-| `width`| `[String]` | アセットの画像の幅に基づいて、クエリの結果を絞り込みます。
-| `size`| `[String]` | アセットのファイルサイズ（バイト単位）に基づいて、クエリの結果を絞り込みます。
-| `dateModified`| `String` | アセットファイルの最終更新日に基づいて、クエリの結果を絞り込みます。
-| `includeSubfolders`| `Boolean` | `folderId` で指定されたフォルダのすべてのサブフォルダにあるアセットを含むよう、クエリの結果を拡張します。
-| `withTransforms`| `[String]` | プリロードするトランスフォームハンドルのリスト。
-| `uploader`| `QueryArgument` | ユーザーの ID ごとに、アセットをアップロードしたユーザーに基づいて、クエリの結果を絞り込みます。
+### The `assets` query
+This query is used to query for assets.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `volumeId`            | `[QueryArgument]`         | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.                                                                                                                                                       |
+| `volume`              | `[String]`                | Narrows the query results based on the volumes the assets belong to, per the volumes’ handles.                                                                                                                                                   |
+| `folderId`            | `[QueryArgument]`         | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.                                                                                                                                                       |
+| `filename`            | `[String]`                | Narrows the query results based on the assets’ filenames.                                                                                                                                                                                        |
+| `kind`                | `[String]`                | Narrows the query results based on the assets’ file kinds.                                                                                                                                                                                       |
+| `height`              | `[String]`                | Narrows the query results based on the assets’ image heights.                                                                                                                                                                                    |
+| `width`               | `[String]`                | Narrows the query results based on the assets’ image widths.                                                                                                                                                                                     |
+| `size`                | `[String]`                | Narrows the query results based on the assets’ file sizes (in bytes).                                                                                                                                                                            |
+| `dateModified`        | `String`                  | Narrows the query results based on the assets’ files’ last-modified dates.                                                                                                                                                                       |
+| `includeSubfolders`   | `Boolean`                 | Broadens the query results to include assets from any of the subfolders of the folder specified by `folderId`.                                                                                                                                   |
+| `withTransforms`      | `[String]`                | A list of transform handles to preload.                                                                                                                                                                                                          |
+| `uploader`            | `QueryArgument`           | Narrows the query results based on the user the assets were uploaded by, per the user’s ID.                                                                                                                                                      |
 
-### `assetCount` クエリ
-このクエリはアセットの数を返すために利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `volumeId`| `[QueryArgument]` | ボリュームの ID ごとに、アセットが属するボリュームに基づいて、クエリの結果を絞り込みます。
-| `volume`| `[String]` | ボリュームのハンドルごとに、アセットが属するボリュームに基づいて、クエリの結果を絞り込みます。
-| `folderId`| `[QueryArgument]` | フォルダの ID ごとに、アセットが属するフォルダに基づいて、クエリの結果を絞り込みます。
-| `filename`| `[String]` | アセットのファイル名に基づいて、クエリの結果を絞り込みます。
-| `kind`| `[String]` | アセットのファイルの種類に基づいて、クエリの結果を絞り込みます。
-| `height`| `[String]` | アセットの画像の高さに基づいて、クエリの結果を絞り込みます。
-| `width`| `[String]` | アセットの画像の幅に基づいて、クエリの結果を絞り込みます。
-| `size`| `[String]` | アセットのファイルサイズ（バイト単位）に基づいて、クエリの結果を絞り込みます。
-| `dateModified`| `String` | アセットファイルの最終更新日に基づいて、クエリの結果を絞り込みます。
-| `includeSubfolders`| `Boolean` | `folderId` で指定されたフォルダのすべてのサブフォルダにあるアセットを含むよう、クエリの結果を拡張します。
-| `withTransforms`| `[String]` | プリロードするトランスフォームハンドルのリスト。
-| `uploader`| `QueryArgument` | ユーザーの ID ごとに、アセットをアップロードしたユーザーに基づいて、クエリの結果を絞り込みます。
+### The `assetCount` query
+This query is used to return the number of assets.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `volumeId`            | `[QueryArgument]`         | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.                                                                                                                                                       |
+| `volume`              | `[String]`                | Narrows the query results based on the volumes the assets belong to, per the volumes’ handles.                                                                                                                                                   |
+| `folderId`            | `[QueryArgument]`         | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.                                                                                                                                                       |
+| `filename`            | `[String]`                | Narrows the query results based on the assets’ filenames.                                                                                                                                                                                        |
+| `kind`                | `[String]`                | Narrows the query results based on the assets’ file kinds.                                                                                                                                                                                       |
+| `height`              | `[String]`                | Narrows the query results based on the assets’ image heights.                                                                                                                                                                                    |
+| `width`               | `[String]`                | Narrows the query results based on the assets’ image widths.                                                                                                                                                                                     |
+| `size`                | `[String]`                | Narrows the query results based on the assets’ file sizes (in bytes).                                                                                                                                                                            |
+| `dateModified`        | `String`                  | Narrows the query results based on the assets’ files’ last-modified dates.                                                                                                                                                                       |
+| `includeSubfolders`   | `Boolean`                 | Broadens the query results to include assets from any of the subfolders of the folder specified by `folderId`.                                                                                                                                   |
+| `withTransforms`      | `[String]`                | A list of transform handles to preload.                                                                                                                                                                                                          |
+| `uploader`            | `QueryArgument`           | Narrows the query results based on the user the assets were uploaded by, per the user’s ID.                                                                                                                                                      |
 
-### `asset` クエリ
-このクエリは単一アセットの照会で利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `volumeId`| `[QueryArgument]` | ボリュームの ID ごとに、アセットが属するボリュームに基づいて、クエリの結果を絞り込みます。
-| `volume`| `[String]` | ボリュームのハンドルごとに、アセットが属するボリュームに基づいて、クエリの結果を絞り込みます。
-| `folderId`| `[QueryArgument]` | フォルダの ID ごとに、アセットが属するフォルダに基づいて、クエリの結果を絞り込みます。
-| `filename`| `[String]` | アセットのファイル名に基づいて、クエリの結果を絞り込みます。
-| `kind`| `[String]` | アセットのファイルの種類に基づいて、クエリの結果を絞り込みます。
-| `height`| `[String]` | アセットの画像の高さに基づいて、クエリの結果を絞り込みます。
-| `width`| `[String]` | アセットの画像の幅に基づいて、クエリの結果を絞り込みます。
-| `size`| `[String]` | アセットのファイルサイズ（バイト単位）に基づいて、クエリの結果を絞り込みます。
-| `dateModified`| `String` | アセットファイルの最終更新日に基づいて、クエリの結果を絞り込みます。
-| `includeSubfolders`| `Boolean` | `folderId` で指定されたフォルダのすべてのサブフォルダにあるアセットを含むよう、クエリの結果を拡張します。
-| `withTransforms`| `[String]` | プリロードするトランスフォームハンドルのリスト。
-| `uploader`| `QueryArgument` | ユーザーの ID ごとに、アセットをアップロードしたユーザーに基づいて、クエリの結果を絞り込みます。
+### The `asset` query
+This query is used to query for a single asset.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `volumeId`            | `[QueryArgument]`         | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.                                                                                                                                                       |
+| `volume`              | `[String]`                | Narrows the query results based on the volumes the assets belong to, per the volumes’ handles.                                                                                                                                                   |
+| `folderId`            | `[QueryArgument]`         | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.                                                                                                                                                       |
+| `filename`            | `[String]`                | Narrows the query results based on the assets’ filenames.                                                                                                                                                                                        |
+| `kind`                | `[String]`                | Narrows the query results based on the assets’ file kinds.                                                                                                                                                                                       |
+| `height`              | `[String]`                | Narrows the query results based on the assets’ image heights.                                                                                                                                                                                    |
+| `width`               | `[String]`                | Narrows the query results based on the assets’ image widths.                                                                                                                                                                                     |
+| `size`                | `[String]`                | Narrows the query results based on the assets’ file sizes (in bytes).                                                                                                                                                                            |
+| `dateModified`        | `String`                  | Narrows the query results based on the assets’ files’ last-modified dates.                                                                                                                                                                       |
+| `includeSubfolders`   | `Boolean`                 | Broadens the query results to include assets from any of the subfolders of the folder specified by `folderId`.                                                                                                                                   |
+| `withTransforms`      | `[String]`                | A list of transform handles to preload.                                                                                                                                                                                                          |
+| `uploader`            | `QueryArgument`           | Narrows the query results based on the user the assets were uploaded by, per the user’s ID.                                                                                                                                                      |
 
-### `entries` クエリ
-このクエリはエントリの照会で利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `withStructure`| `Boolean` | クエリがストラクチャーデータを結合するかどうかを明示的に決定します。
-| `structureId`| `Int` | クエリに結合されるストラクチャーデータを決定します。
-| `level`| `Int` | ストラクチャー内のエレメントのレベルに基づいて、クエリの結果を絞り込みます。
-| `hasDescendants`| `Boolean` | エレメントが子孫を持つかどうかに基づいて、クエリの結果を絞り込みます。
-| `ancestorOf`| `Int` | 指定した他のエレメントの先祖であるエレメントだけに、クエリの結果を絞り込みます。
-| `ancestorDist`| `Int` | `ancestorOf` で指定されたエレメントから特定の距離だけ離れているエレメントのみに、クエリの結果を絞り込みます。
-| `descendantOf`| `Int` | 指定した他のエレメントの子孫であるエレメントだけに、クエリの結果を絞り込みます。
-| `descendantDist`| `Int` | `descendantOf`で指定されたエレメントから特定の距離だけ離れているエレメントのみに、クエリの結果を絞り込みます。
-| `leaves`| `Boolean` | エレメントが「leaves」（子孫のないエントリ）であるかどうかに基づいて、クエリの結果を絞り込みます。
-| `nextSiblingOf`| `Int` | 指定したエレメントの直後にあるエレメントだけに、クエリの結果を絞り込みます。
-| `prevSiblingOf`| `Int` | 指定したエレメントの直前にあるエレメントだけに、クエリの結果を絞り込みます。
-| `positionedAfter`| `Int` | 指定したエレメントの後に位置するエレメントだけに、クエリの結果を絞り込みます。
-| `positionedBefore`| `Int` | 指定したエレメントの前に位置するエレメントだけに、クエリの結果を絞り込みます。
-| `editable`| `Boolean` | ユーザーが編集権限を持つエレメントだけを返すかどうか。
-| `section`| `[String]` | エントリが属するセクションハンドルに基づいて、クエリの結果を絞り込みます。
-| `sectionId`| `[QueryArgument]` | セクションの ID ごとに、エントリが属するセクションに基づいて、クエリの結果を絞り込みます。
-| `type`| `[String]` | エントリの入力タイプのハンドルに基づいて、クエリの結果を絞り込みます。
-| `typeId`| `[QueryArgument]` | タイプの ID ごとに、エントリの入力タイプに基づいて、クエリの結果を絞り込みます。
-| `authorId`| `[QueryArgument]` | エントリの投稿者に基づいて、クエリの結果を絞り込みます。
-| `authorGroup`| `[String]` | エントリの投稿者が属するユーザーグループに基づいて、クエリの結果を絞り込みます。
-| `authorGroupId`| `[QueryArgument]` | グループの ID ごとに、エントリの投稿者が属するユーザーグループに基づいて、クエリの結果を絞り込みます。
-| `postDate`| `[String]` | エントリの投稿日に基づいて、クエリの結果を絞り込みます。
-| `before`| `String` | 特定の日付より前に投稿されたエントリだけに、クエリの結果を絞り込みます。
-| `after`| `String` | 特定の日付以降に投稿されたエントリだけに、クエリの結果を絞り込みます。
-| `expiryDate`| `[String]` | エントリの有効期限日に基づいて、クエリの結果を絞り込みます。
+### The `entries` query
+This query is used to query for entries.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `withStructure`       | `Boolean`                 | Explicitly determines whether the query should join in the structure data.                                                                                                                                                                       |
+| `structureId`         | `Int`                     | Determines which structure data should be joined into the query.                                                                                                                                                                                 |
+| `level`               | `Int`                     | Narrows the query results based on the elements’ level within the structure.                                                                                                                                                                     |
+| `hasDescendants`      | `Boolean`                 | Narrows the query results based on whether the elements have any descendants.                                                                                                                                                                    |
+| `ancestorOf`          | `Int`                     | Narrows the query results to only elements that are ancestors of another element.                                                                                                                                                                |
+| `ancestorDist`        | `Int`                     | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.                                                                                                                    |
+| `descendantOf`        | `Int`                     | Narrows the query results to only elements that are descendants of another element.                                                                                                                                                              |
+| `descendantDist`      | `Int`                     | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.                                                                                                                  |
+| `leaves`              | `Boolean`                 | Narrows the query results based on whether the elements are “leaves” (element with no descendants).                                                                                                                                              |
+| `nextSiblingOf`       | `Int`                     | Narrows the query results to only the entry that comes immediately after another element.                                                                                                                                                        |
+| `prevSiblingOf`       | `Int`                     | Narrows the query results to only the entry that comes immediately before another element.                                                                                                                                                       |
+| `positionedAfter`     | `Int`                     | Narrows the query results to only entries that are positioned after another element.                                                                                                                                                             |
+| `positionedBefore`    | `Int`                     | Narrows the query results to only entries that are positioned before another element.                                                                                                                                                            |
+| `editable`            | `Boolean`                 | Whether to only return entries that the user has permission to edit.                                                                                                                                                                             |
+| `section`             | `[String]`                | Narrows the query results based on the section handles the entries belong to.                                                                                                                                                                    |
+| `sectionId`           | `[QueryArgument]`         | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.                                                                                                                                                    |
+| `type`                | `[String]`                | Narrows the query results based on the entries’ entry type handles.                                                                                                                                                                              |
+| `typeId`              | `[QueryArgument]`         | Narrows the query results based on the entries’ entry types, per the types’ IDs.                                                                                                                                                                 |
+| `authorId`            | `[QueryArgument]`         | Narrows the query results based on the entries’ authors.                                                                                                                                                                                         |
+| `authorGroup`         | `[String]`                | Narrows the query results based on the user group the entries’ authors belong to.                                                                                                                                                                |
+| `authorGroupId`       | `[QueryArgument]`         | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.                                                                                                                                           |
+| `postDate`            | `[String]`                | Narrows the query results based on the entries’ post dates.                                                                                                                                                                                      |
+| `before`              | `String`                  | Narrows the query results to only entries that were posted before a certain date.                                                                                                                                                                |
+| `after`               | `String`                  | Narrows the query results to only entries that were posted on or after a certain date.                                                                                                                                                           |
+| `expiryDate`          | `[String]`                | Narrows the query results based on the entries’ expiry dates.                                                                                                                                                                                    |
 
-### `entryCount` クエリ
-このクエリはエントリの数を返すために利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `withStructure`| `Boolean` | クエリがストラクチャーデータを結合するかどうかを明示的に決定します。
-| `structureId`| `Int` | クエリに結合されるストラクチャーデータを決定します。
-| `level`| `Int` | ストラクチャー内のエレメントのレベルに基づいて、クエリの結果を絞り込みます。
-| `hasDescendants`| `Boolean` | エレメントが子孫を持つかどうかに基づいて、クエリの結果を絞り込みます。
-| `ancestorOf`| `Int` | 指定した他のエレメントの先祖であるエレメントだけに、クエリの結果を絞り込みます。
-| `ancestorDist`| `Int` | `ancestorOf` で指定されたエレメントから特定の距離だけ離れているエレメントのみに、クエリの結果を絞り込みます。
-| `descendantOf`| `Int` | 指定した他のエレメントの子孫であるエレメントだけに、クエリの結果を絞り込みます。
-| `descendantDist`| `Int` | `descendantOf`で指定されたエレメントから特定の距離だけ離れているエレメントのみに、クエリの結果を絞り込みます。
-| `leaves`| `Boolean` | エレメントが「leaves」（子孫のないエントリ）であるかどうかに基づいて、クエリの結果を絞り込みます。
-| `nextSiblingOf`| `Int` | 指定したエレメントの直後にあるエレメントだけに、クエリの結果を絞り込みます。
-| `prevSiblingOf`| `Int` | 指定したエレメントの直前にあるエレメントだけに、クエリの結果を絞り込みます。
-| `positionedAfter`| `Int` | 指定したエレメントの後に位置するエレメントだけに、クエリの結果を絞り込みます。
-| `positionedBefore`| `Int` | 指定したエレメントの前に位置するエレメントだけに、クエリの結果を絞り込みます。
-| `editable`| `Boolean` | ユーザーが編集権限を持つエレメントだけを返すかどうか。
-| `section`| `[String]` | エントリが属するセクションハンドルに基づいて、クエリの結果を絞り込みます。
-| `sectionId`| `[QueryArgument]` | セクションの ID ごとに、エントリが属するセクションに基づいて、クエリの結果を絞り込みます。
-| `type`| `[String]` | エントリの入力タイプのハンドルに基づいて、クエリの結果を絞り込みます。
-| `typeId`| `[QueryArgument]` | タイプの ID ごとに、エントリの入力タイプに基づいて、クエリの結果を絞り込みます。
-| `authorId`| `[QueryArgument]` | エントリの投稿者に基づいて、クエリの結果を絞り込みます。
-| `authorGroup`| `[String]` | エントリの投稿者が属するユーザーグループに基づいて、クエリの結果を絞り込みます。
-| `authorGroupId`| `[QueryArgument]` | グループの ID ごとに、エントリの投稿者が属するユーザーグループに基づいて、クエリの結果を絞り込みます。
-| `postDate`| `[String]` | エントリの投稿日に基づいて、クエリの結果を絞り込みます。
-| `before`| `String` | 特定の日付より前に投稿されたエントリだけに、クエリの結果を絞り込みます。
-| `after`| `String` | 特定の日付以降に投稿されたエントリだけに、クエリの結果を絞り込みます。
-| `expiryDate`| `[String]` | エントリの有効期限日に基づいて、クエリの結果を絞り込みます。
+### The `entryCount` query
+This query is used to return the number of entries.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `withStructure`       | `Boolean`                 | Explicitly determines whether the query should join in the structure data.                                                                                                                                                                       |
+| `structureId`         | `Int`                     | Determines which structure data should be joined into the query.                                                                                                                                                                                 |
+| `level`               | `Int`                     | Narrows the query results based on the elements’ level within the structure.                                                                                                                                                                     |
+| `hasDescendants`      | `Boolean`                 | Narrows the query results based on whether the elements have any descendants.                                                                                                                                                                    |
+| `ancestorOf`          | `Int`                     | Narrows the query results to only elements that are ancestors of another element.                                                                                                                                                                |
+| `ancestorDist`        | `Int`                     | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.                                                                                                                    |
+| `descendantOf`        | `Int`                     | Narrows the query results to only elements that are descendants of another element.                                                                                                                                                              |
+| `descendantDist`      | `Int`                     | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.                                                                                                                  |
+| `leaves`              | `Boolean`                 | Narrows the query results based on whether the elements are “leaves” (element with no descendants).                                                                                                                                              |
+| `nextSiblingOf`       | `Int`                     | Narrows the query results to only the entry that comes immediately after another element.                                                                                                                                                        |
+| `prevSiblingOf`       | `Int`                     | Narrows the query results to only the entry that comes immediately before another element.                                                                                                                                                       |
+| `positionedAfter`     | `Int`                     | Narrows the query results to only entries that are positioned after another element.                                                                                                                                                             |
+| `positionedBefore`    | `Int`                     | Narrows the query results to only entries that are positioned before another element.                                                                                                                                                            |
+| `editable`            | `Boolean`                 | Whether to only return entries that the user has permission to edit.                                                                                                                                                                             |
+| `section`             | `[String]`                | Narrows the query results based on the section handles the entries belong to.                                                                                                                                                                    |
+| `sectionId`           | `[QueryArgument]`         | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.                                                                                                                                                    |
+| `type`                | `[String]`                | Narrows the query results based on the entries’ entry type handles.                                                                                                                                                                              |
+| `typeId`              | `[QueryArgument]`         | Narrows the query results based on the entries’ entry types, per the types’ IDs.                                                                                                                                                                 |
+| `authorId`            | `[QueryArgument]`         | Narrows the query results based on the entries’ authors.                                                                                                                                                                                         |
+| `authorGroup`         | `[String]`                | Narrows the query results based on the user group the entries’ authors belong to.                                                                                                                                                                |
+| `authorGroupId`       | `[QueryArgument]`         | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.                                                                                                                                           |
+| `postDate`            | `[String]`                | Narrows the query results based on the entries’ post dates.                                                                                                                                                                                      |
+| `before`              | `String`                  | Narrows the query results to only entries that were posted before a certain date.                                                                                                                                                                |
+| `after`               | `String`                  | Narrows the query results to only entries that were posted on or after a certain date.                                                                                                                                                           |
+| `expiryDate`          | `[String]`                | Narrows the query results based on the entries’ expiry dates.                                                                                                                                                                                    |
 
-### `entry` クエリ
-このクエリは単一エントリの照会で利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `withStructure`| `Boolean` | クエリがストラクチャーデータを結合するかどうかを明示的に決定します。
-| `structureId`| `Int` | クエリに結合されるストラクチャーデータを決定します。
-| `level`| `Int` | ストラクチャー内のエレメントのレベルに基づいて、クエリの結果を絞り込みます。
-| `hasDescendants`| `Boolean` | エレメントが子孫を持つかどうかに基づいて、クエリの結果を絞り込みます。
-| `ancestorOf`| `Int` | 指定した他のエレメントの先祖であるエレメントだけに、クエリの結果を絞り込みます。
-| `ancestorDist`| `Int` | `ancestorOf` で指定されたエレメントから特定の距離だけ離れているエレメントのみに、クエリの結果を絞り込みます。
-| `descendantOf`| `Int` | 指定した他のエレメントの子孫であるエレメントだけに、クエリの結果を絞り込みます。
-| `descendantDist`| `Int` | `descendantOf`で指定されたエレメントから特定の距離だけ離れているエレメントのみに、クエリの結果を絞り込みます。
-| `leaves`| `Boolean` | エレメントが「leaves」（子孫のないエントリ）であるかどうかに基づいて、クエリの結果を絞り込みます。
-| `nextSiblingOf`| `Int` | 指定したエレメントの直後にあるエレメントだけに、クエリの結果を絞り込みます。
-| `prevSiblingOf`| `Int` | 指定したエレメントの直前にあるエレメントだけに、クエリの結果を絞り込みます。
-| `positionedAfter`| `Int` | 指定したエレメントの後に位置するエレメントだけに、クエリの結果を絞り込みます。
-| `positionedBefore`| `Int` | 指定したエレメントの前に位置するエレメントだけに、クエリの結果を絞り込みます。
-| `editable`| `Boolean` | ユーザーが編集権限を持つエレメントだけを返すかどうか。
-| `section`| `[String]` | エントリが属するセクションハンドルに基づいて、クエリの結果を絞り込みます。
-| `sectionId`| `[QueryArgument]` | セクションの ID ごとに、エントリが属するセクションに基づいて、クエリの結果を絞り込みます。
-| `type`| `[String]` | エントリの入力タイプのハンドルに基づいて、クエリの結果を絞り込みます。
-| `typeId`| `[QueryArgument]` | タイプの ID ごとに、エントリの入力タイプに基づいて、クエリの結果を絞り込みます。
-| `authorId`| `[QueryArgument]` | エントリの投稿者に基づいて、クエリの結果を絞り込みます。
-| `authorGroup`| `[String]` | エントリの投稿者が属するユーザーグループに基づいて、クエリの結果を絞り込みます。
-| `authorGroupId`| `[QueryArgument]` | グループの ID ごとに、エントリの投稿者が属するユーザーグループに基づいて、クエリの結果を絞り込みます。
-| `postDate`| `[String]` | エントリの投稿日に基づいて、クエリの結果を絞り込みます。
-| `before`| `String` | 特定の日付より前に投稿されたエントリだけに、クエリの結果を絞り込みます。
-| `after`| `String` | 特定の日付以降に投稿されたエントリだけに、クエリの結果を絞り込みます。
-| `expiryDate`| `[String]` | エントリの有効期限日に基づいて、クエリの結果を絞り込みます。
+### The `entry` query
+This query is used to query for a single entry.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `withStructure`       | `Boolean`                 | Explicitly determines whether the query should join in the structure data.                                                                                                                                                                       |
+| `structureId`         | `Int`                     | Determines which structure data should be joined into the query.                                                                                                                                                                                 |
+| `level`               | `Int`                     | Narrows the query results based on the elements’ level within the structure.                                                                                                                                                                     |
+| `hasDescendants`      | `Boolean`                 | Narrows the query results based on whether the elements have any descendants.                                                                                                                                                                    |
+| `ancestorOf`          | `Int`                     | Narrows the query results to only elements that are ancestors of another element.                                                                                                                                                                |
+| `ancestorDist`        | `Int`                     | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.                                                                                                                    |
+| `descendantOf`        | `Int`                     | Narrows the query results to only elements that are descendants of another element.                                                                                                                                                              |
+| `descendantDist`      | `Int`                     | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.                                                                                                                  |
+| `leaves`              | `Boolean`                 | Narrows the query results based on whether the elements are “leaves” (element with no descendants).                                                                                                                                              |
+| `nextSiblingOf`       | `Int`                     | Narrows the query results to only the entry that comes immediately after another element.                                                                                                                                                        |
+| `prevSiblingOf`       | `Int`                     | Narrows the query results to only the entry that comes immediately before another element.                                                                                                                                                       |
+| `positionedAfter`     | `Int`                     | Narrows the query results to only entries that are positioned after another element.                                                                                                                                                             |
+| `positionedBefore`    | `Int`                     | Narrows the query results to only entries that are positioned before another element.                                                                                                                                                            |
+| `editable`            | `Boolean`                 | Whether to only return entries that the user has permission to edit.                                                                                                                                                                             |
+| `section`             | `[String]`                | Narrows the query results based on the section handles the entries belong to.                                                                                                                                                                    |
+| `sectionId`           | `[QueryArgument]`         | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.                                                                                                                                                    |
+| `type`                | `[String]`                | Narrows the query results based on the entries’ entry type handles.                                                                                                                                                                              |
+| `typeId`              | `[QueryArgument]`         | Narrows the query results based on the entries’ entry types, per the types’ IDs.                                                                                                                                                                 |
+| `authorId`            | `[QueryArgument]`         | Narrows the query results based on the entries’ authors.                                                                                                                                                                                         |
+| `authorGroup`         | `[String]`                | Narrows the query results based on the user group the entries’ authors belong to.                                                                                                                                                                |
+| `authorGroupId`       | `[QueryArgument]`         | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.                                                                                                                                           |
+| `postDate`            | `[String]`                | Narrows the query results based on the entries’ post dates.                                                                                                                                                                                      |
+| `before`              | `String`                  | Narrows the query results to only entries that were posted before a certain date.                                                                                                                                                                |
+| `after`               | `String`                  | Narrows the query results to only entries that were posted on or after a certain date.                                                                                                                                                           |
+| `expiryDate`          | `[String]`                | Narrows the query results based on the entries’ expiry dates.                                                                                                                                                                                    |
 
-### `globalSets` クエリ
-このクエリはグローバル設定の照会で利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `handle`| `[String]` | グローバル設定のハンドルに基づいて、クエリの結果を絞り込みます。
+### The `globalSets` query
+This query is used to query for global sets.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `handle`              | `[String]`                | Narrows the query results based on the global sets’ handles.                                                                                                                                                                                     |
 
-### `globalSet` クエリ
-このクエリは単一グローバル設定の照会で利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `handle`| `[String]` | グローバル設定のハンドルに基づいて、クエリの結果を絞り込みます。
+### The `globalSet` query
+This query is used to query for a single global set.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `handle`              | `[String]`                | Narrows the query results based on the global sets’ handles.                                                                                                                                                                                     |
 
-### `users` クエリ
-このクエリはユーザーの照会で利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `email`| `[String]` | ユーザーのメールアドレスに基づいて、クエリの結果を絞り込みます。
-| `username`| `[String]` | ユーザーのユーザー名に基づいて、クエリの結果を絞り込みます。
-| `firstName`| `[String]` | ユーザーのファーストネーム（名）に基づいて、クエリの結果を絞り込みます。
-| `lastName`| `[String]` | ユーザーのラストネーム（姓）に基づいて、クエリの結果を絞り込みます。
-| `hasPhoto`| `Boolean` | ユーザー写真を持っている（または、持っていない）ユーザーだけに、クエリの結果を絞り込みます。
-| `groupId`| `[QueryArgument]` | グループ ID ごとに、ユーザーが属するユーザーグループに基づいて、クエリの結果を絞り込みます。
-| `group`| `[QueryArgument]` | ユーザーが属するユーザーグループに基づいて、クエリの結果を絞り込みます。
+### The `users` query
+This query is used to query for users.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `email`               | `[String]`                | Narrows the query results based on the users’ email addresses.                                                                                                                                                                                   |
+| `username`            | `[String]`                | Narrows the query results based on the users’ usernames.                                                                                                                                                                                         |
+| `firstName`           | `[String]`                | Narrows the query results based on the users’ first names.                                                                                                                                                                                       |
+| `lastName`            | `[String]`                | Narrows the query results based on the users’ last names.                                                                                                                                                                                        |
+| `hasPhoto`            | `Boolean`                 | Narrows the query results to only users that have (or don’t have) a user photo.                                                                                                                                                                  |
+| `groupId`             | `[QueryArgument]`         | Narrows the query results based on the user group the users belong to, per the groups’ IDs.                                                                                                                                                      |
+| `group`               | `[QueryArgument]`         | Narrows the query results based on the user group the users belong to.                                                                                                                                                                           |
 
-### `userCount` クエリ
-このクエリはユーザーの数を返すために利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `email`| `[String]` | ユーザーのメールアドレスに基づいて、クエリの結果を絞り込みます。
-| `username`| `[String]` | ユーザーのユーザー名に基づいて、クエリの結果を絞り込みます。
-| `firstName`| `[String]` | ユーザーのファーストネーム（名）に基づいて、クエリの結果を絞り込みます。
-| `lastName`| `[String]` | ユーザーのラストネーム（姓）に基づいて、クエリの結果を絞り込みます。
-| `hasPhoto`| `Boolean` | ユーザー写真を持っている（または、持っていない）ユーザーだけに、クエリの結果を絞り込みます。
-| `groupId`| `[QueryArgument]` | グループ ID ごとに、ユーザーが属するユーザーグループに基づいて、クエリの結果を絞り込みます。
-| `group`| `[QueryArgument]` | ユーザーが属するユーザーグループに基づいて、クエリの結果を絞り込みます。
+### The `userCount` query
+This query is used to return the number of users.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `email`               | `[String]`                | Narrows the query results based on the users’ email addresses.                                                                                                                                                                                   |
+| `username`            | `[String]`                | Narrows the query results based on the users’ usernames.                                                                                                                                                                                         |
+| `firstName`           | `[String]`                | Narrows the query results based on the users’ first names.                                                                                                                                                                                       |
+| `lastName`            | `[String]`                | Narrows the query results based on the users’ last names.                                                                                                                                                                                        |
+| `hasPhoto`            | `Boolean`                 | Narrows the query results to only users that have (or don’t have) a user photo.                                                                                                                                                                  |
+| `groupId`             | `[QueryArgument]`         | Narrows the query results based on the user group the users belong to, per the groups’ IDs.                                                                                                                                                      |
+| `group`               | `[QueryArgument]`         | Narrows the query results based on the user group the users belong to.                                                                                                                                                                           |
 
-### `user` クエリ
-このクエリは単一ユーザーの照会で利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `email`| `[String]` | ユーザーのメールアドレスに基づいて、クエリの結果を絞り込みます。
-| `username`| `[String]` | ユーザーのユーザー名に基づいて、クエリの結果を絞り込みます。
-| `firstName`| `[String]` | ユーザーのファーストネーム（名）に基づいて、クエリの結果を絞り込みます。
-| `lastName`| `[String]` | ユーザーのラストネーム（姓）に基づいて、クエリの結果を絞り込みます。
-| `hasPhoto`| `Boolean` | ユーザー写真を持っている（または、持っていない）ユーザーだけに、クエリの結果を絞り込みます。
-| `groupId`| `[QueryArgument]` | グループ ID ごとに、ユーザーが属するユーザーグループに基づいて、クエリの結果を絞り込みます。
-| `group`| `[QueryArgument]` | ユーザーが属するユーザーグループに基づいて、クエリの結果を絞り込みます。
+### The `user` query
+This query is used to query for a single user.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `email`               | `[String]`                | Narrows the query results based on the users’ email addresses.                                                                                                                                                                                   |
+| `username`            | `[String]`                | Narrows the query results based on the users’ usernames.                                                                                                                                                                                         |
+| `firstName`           | `[String]`                | Narrows the query results based on the users’ first names.                                                                                                                                                                                       |
+| `lastName`            | `[String]`                | Narrows the query results based on the users’ last names.                                                                                                                                                                                        |
+| `hasPhoto`            | `Boolean`                 | Narrows the query results to only users that have (or don’t have) a user photo.                                                                                                                                                                  |
+| `groupId`             | `[QueryArgument]`         | Narrows the query results based on the user group the users belong to, per the groups’ IDs.                                                                                                                                                      |
+| `group`               | `[QueryArgument]`         | Narrows the query results based on the user group the users belong to.                                                                                                                                                                           |
 
-### `tags` クエリ
-このクエリはタグの照会で利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `group`| `[String]` | グループのハンドルごとに、タグが属するタググループに基づいて、クエリの結果を絞り込みます。
-| `groupId`| `[QueryArgument]` | グループの ID ごとに、タグが属するタググループに基づいて、クエリの結果を絞り込みます。
+### The `tags` query
+This query is used to query for tags.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `group`               | `[String]`                | Narrows the query results based on the tag groups the tags belong to per the group’s handles.                                                                                                                                                    |
+| `groupId`             | `[QueryArgument]`         | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.                                                                                                                                                       |
 
-### `tagCount` クエリ
-このクエリはタグの数を返すために利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `group`| `[String]` | グループのハンドルごとに、タグが属するタググループに基づいて、クエリの結果を絞り込みます。
-| `groupId`| `[QueryArgument]` | グループの ID ごとに、タグが属するタググループに基づいて、クエリの結果を絞り込みます。
+### The `tagCount` query
+This query is used to return the number of tags.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `group`               | `[String]`                | Narrows the query results based on the tag groups the tags belong to per the group’s handles.                                                                                                                                                    |
+| `groupId`             | `[QueryArgument]`         | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.                                                                                                                                                       |
 
-### `tag` クエリ
-このクエリは単一タグの照会で利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `group`| `[String]` | グループのハンドルごとに、タグが属するタググループに基づいて、クエリの結果を絞り込みます。
-| `groupId`| `[QueryArgument]` | グループの ID ごとに、タグが属するタググループに基づいて、クエリの結果を絞り込みます。
+### The `tag` query
+This query is used to query for a single tag.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `group`               | `[String]`                | Narrows the query results based on the tag groups the tags belong to per the group’s handles.                                                                                                                                                    |
+| `groupId`             | `[QueryArgument]`         | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.                                                                                                                                                       |
 
-### `categories` クエリ
-このクエリはカテゴリの照会で利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `withStructure`| `Boolean` | クエリがストラクチャーデータを結合するかどうかを明示的に決定します。
-| `structureId`| `Int` | クエリに結合されるストラクチャーデータを決定します。
-| `level`| `Int` | ストラクチャー内のエレメントのレベルに基づいて、クエリの結果を絞り込みます。
-| `hasDescendants`| `Boolean` | エレメントが子孫を持つかどうかに基づいて、クエリの結果を絞り込みます。
-| `ancestorOf`| `Int` | 指定した他のエレメントの先祖であるエレメントだけに、クエリの結果を絞り込みます。
-| `ancestorDist`| `Int` | `ancestorOf` で指定されたエレメントから特定の距離だけ離れているエレメントのみに、クエリの結果を絞り込みます。
-| `descendantOf`| `Int` | 指定した他のエレメントの子孫であるエレメントだけに、クエリの結果を絞り込みます。
-| `descendantDist`| `Int` | `descendantOf`で指定されたエレメントから特定の距離だけ離れているエレメントのみに、クエリの結果を絞り込みます。
-| `leaves`| `Boolean` | エレメントが「leaves」（子孫のないエントリ）であるかどうかに基づいて、クエリの結果を絞り込みます。
-| `nextSiblingOf`| `Int` | 指定したエレメントの直後にあるエレメントだけに、クエリの結果を絞り込みます。
-| `prevSiblingOf`| `Int` | 指定したエレメントの直前にあるエレメントだけに、クエリの結果を絞り込みます。
-| `positionedAfter`| `Int` | 指定したエレメントの後に位置するエレメントだけに、クエリの結果を絞り込みます。
-| `positionedBefore`| `Int` | 指定したエレメントの前に位置するエレメントだけに、クエリの結果を絞り込みます。
-| `editable`| `Boolean` | ユーザーが編集権限を持つカテゴリだけを返すかどうか。
-| `group`| `[String]` | グループのハンドルごとに、カテゴリが属するカテゴリグループに基づいて、クエリの結果を絞り込みます。
-| `groupId`| `[QueryArgument]` | グループの ID ごとに、カテゴリが属するカテゴリグループに基づいて、クエリの結果を絞り込みます。
+### The `categories` query
+This query is used to query for categories.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `withStructure`       | `Boolean`                 | Explicitly determines whether the query should join in the structure data.                                                                                                                                                                       |
+| `structureId`         | `Int`                     | Determines which structure data should be joined into the query.                                                                                                                                                                                 |
+| `level`               | `Int`                     | Narrows the query results based on the elements’ level within the structure.                                                                                                                                                                     |
+| `hasDescendants`      | `Boolean`                 | Narrows the query results based on whether the elements have any descendants.                                                                                                                                                                    |
+| `ancestorOf`          | `Int`                     | Narrows the query results to only elements that are ancestors of another element.                                                                                                                                                                |
+| `ancestorDist`        | `Int`                     | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.                                                                                                                    |
+| `descendantOf`        | `Int`                     | Narrows the query results to only elements that are descendants of another element.                                                                                                                                                              |
+| `descendantDist`      | `Int`                     | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.                                                                                                                  |
+| `leaves`              | `Boolean`                 | Narrows the query results based on whether the elements are “leaves” (element with no descendants).                                                                                                                                              |
+| `nextSiblingOf`       | `Int`                     | Narrows the query results to only the entry that comes immediately after another element.                                                                                                                                                        |
+| `prevSiblingOf`       | `Int`                     | Narrows the query results to only the entry that comes immediately before another element.                                                                                                                                                       |
+| `positionedAfter`     | `Int`                     | Narrows the query results to only entries that are positioned after another element.                                                                                                                                                             |
+| `positionedBefore`    | `Int`                     | Narrows the query results to only entries that are positioned before another element.                                                                                                                                                            |
+| `editable`            | `Boolean`                 | Whether to only return categories that the user has permission to edit.                                                                                                                                                                          |
+| `group`               | `[String]`                | Narrows the query results based on the category groups the categories belong to per the group’s handles.                                                                                                                                         |
+| `groupId`             | `[QueryArgument]`         | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.                                                                                                                                            |
 
-### `categoryCount` クエリ
-このクエリはカテゴリの数を返すために利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `withStructure`| `Boolean` | クエリがストラクチャーデータを結合するかどうかを明示的に決定します。
-| `structureId`| `Int` | クエリに結合されるストラクチャーデータを決定します。
-| `level`| `Int` | ストラクチャー内のエレメントのレベルに基づいて、クエリの結果を絞り込みます。
-| `hasDescendants`| `Boolean` | エレメントが子孫を持つかどうかに基づいて、クエリの結果を絞り込みます。
-| `ancestorOf`| `Int` | 指定した他のエレメントの先祖であるエレメントだけに、クエリの結果を絞り込みます。
-| `ancestorDist`| `Int` | `ancestorOf` で指定されたエレメントから特定の距離だけ離れているエレメントのみに、クエリの結果を絞り込みます。
-| `descendantOf`| `Int` | 指定した他のエレメントの子孫であるエレメントだけに、クエリの結果を絞り込みます。
-| `descendantDist`| `Int` | `descendantOf`で指定されたエレメントから特定の距離だけ離れているエレメントのみに、クエリの結果を絞り込みます。
-| `leaves`| `Boolean` | エレメントが「leaves」（子孫のないエントリ）であるかどうかに基づいて、クエリの結果を絞り込みます。
-| `nextSiblingOf`| `Int` | 指定したエレメントの直後にあるエレメントだけに、クエリの結果を絞り込みます。
-| `prevSiblingOf`| `Int` | 指定したエレメントの直前にあるエレメントだけに、クエリの結果を絞り込みます。
-| `positionedAfter`| `Int` | 指定したエレメントの後に位置するエレメントだけに、クエリの結果を絞り込みます。
-| `positionedBefore`| `Int` | 指定したエレメントの前に位置するエレメントだけに、クエリの結果を絞り込みます。
-| `editable`| `Boolean` | ユーザーが編集権限を持つカテゴリだけを返すかどうか。
-| `group`| `[String]` | グループのハンドルごとに、カテゴリが属するカテゴリグループに基づいて、クエリの結果を絞り込みます。
-| `groupId`| `[QueryArgument]` | グループの ID ごとに、カテゴリが属するカテゴリグループに基づいて、クエリの結果を絞り込みます。
+### The `categoryCount` query
+This query is used to return the number of categories.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `withStructure`       | `Boolean`                 | Explicitly determines whether the query should join in the structure data.                                                                                                                                                                       |
+| `structureId`         | `Int`                     | Determines which structure data should be joined into the query.                                                                                                                                                                                 |
+| `level`               | `Int`                     | Narrows the query results based on the elements’ level within the structure.                                                                                                                                                                     |
+| `hasDescendants`      | `Boolean`                 | Narrows the query results based on whether the elements have any descendants.                                                                                                                                                                    |
+| `ancestorOf`          | `Int`                     | Narrows the query results to only elements that are ancestors of another element.                                                                                                                                                                |
+| `ancestorDist`        | `Int`                     | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.                                                                                                                    |
+| `descendantOf`        | `Int`                     | Narrows the query results to only elements that are descendants of another element.                                                                                                                                                              |
+| `descendantDist`      | `Int`                     | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.                                                                                                                  |
+| `leaves`              | `Boolean`                 | Narrows the query results based on whether the elements are “leaves” (element with no descendants).                                                                                                                                              |
+| `nextSiblingOf`       | `Int`                     | Narrows the query results to only the entry that comes immediately after another element.                                                                                                                                                        |
+| `prevSiblingOf`       | `Int`                     | Narrows the query results to only the entry that comes immediately before another element.                                                                                                                                                       |
+| `positionedAfter`     | `Int`                     | Narrows the query results to only entries that are positioned after another element.                                                                                                                                                             |
+| `positionedBefore`    | `Int`                     | Narrows the query results to only entries that are positioned before another element.                                                                                                                                                            |
+| `editable`            | `Boolean`                 | Whether to only return categories that the user has permission to edit.                                                                                                                                                                          |
+| `group`               | `[String]`                | Narrows the query results based on the category groups the categories belong to per the group’s handles.                                                                                                                                         |
+| `groupId`             | `[QueryArgument]`         | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.                                                                                                                                            |
 
-### `category` クエリ
-このクエリは単一カテゴリの照会で利用されます。
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `[QueryArgument]` | エレメントの ID に基づいて、クエリの結果を絞り込みます。
-| `uid`| `[String]` | エレメントの UID に基づいて、クエリの結果を絞り込みます。
-| `drafts`| `Boolean` | 下書きのエレメントが返されるかどうか。
-| `draftOf`| `QueryArgument` | 下書きが返されるソースエレメントの ID。保存されていない下書きを取得するには `false` をセットします。
-| `draftId`| `Int` | 返す下書きの ID（`drafts` テーブルから）
-| `draftCreator`| `Int` | 下書きの投稿者 ID
-| `revisions`| `Boolean` | リビジョンのエレメントが返されるかどうか。
-| `revisionOf`| `QueryArgument` | リビジョンが返されるソースエレメントの ID
-| `revisionId`| `Int` | 返すリビジョンの ID（`revisions` テーブルから）
-| `revisionCreator`| `Int` | リビジョンの投稿者 ID
-| `status`| `[String]` | エレメントのステータスに基づいて、クエリの結果を絞り込みます。
-| `archived`| `Boolean` | アーカイブされたエレメントだけに、クエリの結果を絞り込みます。
-| `trashed`| `Boolean` | ソフトデリートされたエレメントだけに、クエリの結果を絞り込みます。
-| `site`| `[String]` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `siteId`| `String` | エレメントを照会するサイトを決定します。デフォルトは現在の（リクエストされた）サイトです。
-| `unique`| `Boolean` | クエリによってユニークな ID のエレメントだけが返されるかを決定します。
-| `enabledForSite`| `Boolean` | 引数 `site` ごとに、照会されているサイトでエレメントが有効になっているかどうかに基づいて、クエリの結果を絞り込みます。
-| `title`| `[String]` | エレメントのタイトルに基づいて、クエリの結果を絞り込みます。
-| `slug`| `[String]` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `uri`| `[String]` | エレメントの URI に基づいて、クエリの結果を絞り込みます。
-| `search`| `String` | 検索結果にマッチするエレメントだけに、クエリの結果を絞り込みます。
-| `relatedTo`| `[Int]` | 指定されたエレメント ID の *いずれか* に関連する要素に、クエリの結果を絞り込みます。`relatedToAll` も利用されている場合、この引数は無視されます。
-| `relatedToAll`| `[Int]` | 指定されたエレメント ID の *すべて* に関連する要素に、クエリの結果を絞り込みます。この引数を使用すると、`relatedTo` の引数は無視されます。
-| `ref`| `[String]` | 参照文字列に基づいて、クエリの結果を絞り込みます。
-| `fixedOrder`| `Boolean` | クエリの結果を引数 `id` で指定された順序で返します。
-| `inReverse`| `Boolean` | クエリの結果を逆順で返します。
-| `dateCreated`| `[String]` | エレメントの作成日に基づいて、クエリの結果を絞り込みます。
-| `dateUpdated`| `[String]` | エレメントの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
-| `offset`| `Int` | ページ分割された結果のオフセットを設定します。
-| `limit`| `Int` | ページ分割された結果のリミットを設定します。
-| `orderBy`| `String` | 返されるエレメントを並び替えるフィールドを設定します。
-| `withStructure`| `Boolean` | クエリがストラクチャーデータを結合するかどうかを明示的に決定します。
-| `structureId`| `Int` | クエリに結合されるストラクチャーデータを決定します。
-| `level`| `Int` | ストラクチャー内のエレメントのレベルに基づいて、クエリの結果を絞り込みます。
-| `hasDescendants`| `Boolean` | エレメントが子孫を持つかどうかに基づいて、クエリの結果を絞り込みます。
-| `ancestorOf`| `Int` | 指定した他のエレメントの先祖であるエレメントだけに、クエリの結果を絞り込みます。
-| `ancestorDist`| `Int` | `ancestorOf` で指定されたエレメントから特定の距離だけ離れているエレメントのみに、クエリの結果を絞り込みます。
-| `descendantOf`| `Int` | 指定した他のエレメントの子孫であるエレメントだけに、クエリの結果を絞り込みます。
-| `descendantDist`| `Int` | `descendantOf`で指定されたエレメントから特定の距離だけ離れているエレメントのみに、クエリの結果を絞り込みます。
-| `leaves`| `Boolean` | エレメントが「leaves」（子孫のないエントリ）であるかどうかに基づいて、クエリの結果を絞り込みます。
-| `nextSiblingOf`| `Int` | 指定したエレメントの直後にあるエレメントだけに、クエリの結果を絞り込みます。
-| `prevSiblingOf`| `Int` | 指定したエレメントの直前にあるエレメントだけに、クエリの結果を絞り込みます。
-| `positionedAfter`| `Int` | 指定したエレメントの後に位置するエレメントだけに、クエリの結果を絞り込みます。
-| `positionedBefore`| `Int` | 指定したエレメントの前に位置するエレメントだけに、クエリの結果を絞り込みます。
-| `editable`| `Boolean` | ユーザーが編集権限を持つカテゴリだけを返すかどうか。
-| `group`| `[String]` | グループのハンドルごとに、カテゴリが属するカテゴリグループに基づいて、クエリの結果を絞り込みます。
-| `groupId`| `[QueryArgument]` | グループの ID ごとに、カテゴリが属するカテゴリグループに基づいて、クエリの結果を絞り込みます。
+### The `category` query
+This query is used to query for a single category.
+| Argument              | Type                      | Description                                                                                                                                                                                                                                      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                  | `[QueryArgument]`         | Narrows the query results based on the elements’ IDs.                                                                                                                                                                                            |
+| `uid`                 | `[String]`                | Narrows the query results based on the elements’ UIDs.                                                                                                                                                                                           |
+| `site`                | `[String]`                | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `siteId`              | `[QueryArgument]`         | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.                                                                                                                                            |
+| `unique`              | `Boolean`                 | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                |
+| `enabledForSite`      | `Boolean`                 | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.                                                                                                               |
+| `title`               | `[String]`                | Narrows the query results based on the elements’ titles.                                                                                                                                                                                         |
+| `slug`                | `[String]`                | Narrows the query results based on the elements’ slugs.                                                                                                                                                                                          |
+| `uri`                 | `[String]`                | Narrows the query results based on the elements’ URIs.                                                                                                                                                                                           |
+| `search`              | `String`                  | Narrows the query results to only elements that match a search query.                                                                                                                                                                            |
+| `relatedTo`           | `[QueryArgument]`         | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.                                                                                                         |
+| `relatedToAssets`     | `[AssetCriteriaInput]`    | Narrows the query results to elements that relate to an asset list defined with this argument.                                                                                                                                                   |
+| `relatedToEntries`    | `[EntryCriteriaInput]`    | Narrows the query results to elements that relate to an entry list defined with this argument.                                                                                                                                                   |
+| `relatedToUsers`      | `[UserCriteriaInput]`     | Narrows the query results to elements that relate to a use list defined with this argument.                                                                                                                                                      |
+| `relatedToCategories` | `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.                                                                                                                                                 |
+| `relatedToTags`       | `[TagCriteriaInput]`      | Narrows the query results to elements that relate to a tag list defined with this argument.                                                                                                                                                      |
+| `relatedToAll`        | `[QueryArgument]`         | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead. |
+| `ref`                 | `[String]`                | Narrows the query results based on a reference string.                                                                                                                                                                                           |
+| `fixedOrder`          | `Boolean`                 | Causes the query results to be returned in the order specified by the `id` argument.                                                                                                                                                             |
+| `inReverse`           | `Boolean`                 | Causes the query results to be returned in reverse order.                                                                                                                                                                                        |
+| `dateCreated`         | `[String]`                | Narrows the query results based on the elements’ creation dates.                                                                                                                                                                                 |
+| `dateUpdated`         | `[String]`                | Narrows the query results based on the elements’ last-updated dates.                                                                                                                                                                             |
+| `offset`              | `Int`                     | Sets the offset for paginated results.                                                                                                                                                                                                           |
+| `limit`               | `Int`                     | Sets the limit for paginated results.                                                                                                                                                                                                            |
+| `orderBy`             | `String`                  | Sets the field the returned elements should be ordered by                                                                                                                                                                                        |
+| `withStructure`       | `Boolean`                 | Explicitly determines whether the query should join in the structure data.                                                                                                                                                                       |
+| `structureId`         | `Int`                     | Determines which structure data should be joined into the query.                                                                                                                                                                                 |
+| `level`               | `Int`                     | Narrows the query results based on the elements’ level within the structure.                                                                                                                                                                     |
+| `hasDescendants`      | `Boolean`                 | Narrows the query results based on whether the elements have any descendants.                                                                                                                                                                    |
+| `ancestorOf`          | `Int`                     | Narrows the query results to only elements that are ancestors of another element.                                                                                                                                                                |
+| `ancestorDist`        | `Int`                     | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.                                                                                                                    |
+| `descendantOf`        | `Int`                     | Narrows the query results to only elements that are descendants of another element.                                                                                                                                                              |
+| `descendantDist`      | `Int`                     | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.                                                                                                                  |
+| `leaves`              | `Boolean`                 | Narrows the query results based on whether the elements are “leaves” (element with no descendants).                                                                                                                                              |
+| `nextSiblingOf`       | `Int`                     | Narrows the query results to only the entry that comes immediately after another element.                                                                                                                                                        |
+| `prevSiblingOf`       | `Int`                     | Narrows the query results to only the entry that comes immediately before another element.                                                                                                                                                       |
+| `positionedAfter`     | `Int`                     | Narrows the query results to only entries that are positioned after another element.                                                                                                                                                             |
+| `positionedBefore`    | `Int`                     | Narrows the query results to only entries that are positioned before another element.                                                                                                                                                            |
+| `editable`            | `Boolean`                 | Whether to only return categories that the user has permission to edit.                                                                                                                                                                          |
+| `group`               | `[String]`                | Narrows the query results based on the category groups the categories belong to per the group’s handles.                                                                                                                                         |
+| `groupId`             | `[QueryArgument]`         | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.                                                                                                                                            |
 
 <!-- END QUERIES -->
 
-## 利用可能なディレクティブのリスト
-ディレクティブは権限によって規制されておらず、返されるデータがどのように表示されるかに影響します。
+## List of available directives
+Directives are not regulated by permissions and they affect how the returned data is displayed.
 
 <!-- BEGIN DIRECTIVES -->
 
-### `formatDateTime` ディレクティブ
-このディレクティブは、日付を任意の書式にフォーマットできます。すべてのフィールドに適用できますが、DateTime フィールドに適用した場合のみ変更します。
-| 引数 | タイプ | 説明
-| - | - | -
-| `format`| `String` | 利用する書式を指定します。`short`、`medium`、`long`、`full`、[ICU date フォーマット](http://userguide.icu-project.org/formatparse/datetime)、または、[PHP date フォーマット](https://www.php.net/manual/en/function.date.php)を指定できます。デフォルトは [Atom date time フォーマット](https://www.php.net/manual/en/class.datetimeinterface.php#datetime.constants.atom])です。
-| `timezone`| `String` | タイムゾーンのフルネーム。デフォルトは UTC です。（例：America/New_York）
-| `locale`| `String` | 日付をフォーマットする際に利用するロケール。（例：en-US）
+### The `formatDateTime` directive
+This directive allows for formatting any date to the desired format. It can be applied to all fields, but changes anything only when applied to a DateTime field.
+| Argument   | Type     | Description                                                                                                                                                                                                                                                                                                                                                            |
+| ---------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `format`   | `String` | This specifies the format to use. This can be `short`, `medium`, `long`, `full`, an [ICU date format](http://userguide.icu-project.org/formatparse/datetime), or a [PHP date format](https://www.php.net/manual/en/function.date.php). It defaults to the [Atom date time format](https://www.php.net/manual/en/class.datetimeinterface.php#datetime.constants.atom]). |
+| `timezone` | `String` | The full name of the timezone, defaults to UTC. (E.g., America/New_York)                                                                                                                                                                                                                                                                                               |
+| `locale`   | `String` | The locale to use when formatting the date. (E.g., en-US)                                                                                                                                                                                                                                                                                                              |
 
 
-### `transform` ディレクティブ
-このディレクティブは、[画像変換](/docs/3.x/ja/image-transforms.html)の URL を返すために利用されます。Craft で変換するために利用するのと同じ引数を受け入れ、引数 `immediately` を追加します。
-| 引数 | タイプ | 説明
-| - | - | -
-| `handle`| `String` | 利用する名前付けされた画像変換のハンドル。
-| `transform`| `String` | 利用する名前付けされた画像変換のハンドル。
-| `width`| `Int` | 生成された変換の幅。
-| `height`| `Int` | 生成された変換の高さ。
-| `mode`| `String` | 生成された変換に利用するモード。
-| `position`| `String` | 焦点が指定されていない場合、切り抜きに利用する位置。
-| `interlace`| `String` | 変換に利用するインタレースモード。
-| `quality`| `Int` | 変換の品質。
-| `format`| `String` | 変換の画像フォーマット。
-| `immediately`| `Boolean` | 変換をすぐに生成するか、生成された URL を利用して画像がリクエストされた時だけ生成するかどうか。
+### The `transform` directive
+This directive is used to return a URL for an [asset transform](https://craftcms.com/docs/3.x/image-transforms.html). It accepts the same arguments you would use for a transform in Craft and adds the `immediately` argument.
+| Argument      | Type      | Description                                                                                                      |
+| ------------- | --------- | ---------------------------------------------------------------------------------------------------------------- |
+| `handle`      | `String`  | The handle of the named transform to use.                                                                        |
+| `transform`   | `String`  | The handle of the named transform to use.                                                                        |
+| `width`       | `Int`     | Width for the generated transform                                                                                |
+| `height`      | `Int`     | Height for the generated transform                                                                               |
+| `mode`        | `String`  | The mode to use for the generated transform.                                                                     |
+| `position`    | `String`  | The position to use when cropping, if no focal point specified.                                                  |
+| `interlace`   | `String`  | The interlace mode to use for the transform                                                                      |
+| `quality`     | `Int`     | The quality of the transform                                                                                     |
+| `format`      | `String`  | The format to use for the transform                                                                              |
+| `immediately` | `Boolean` | Whether the transform should be generated immediately or only when the image is requested used the generated URL |
 
 
-### `markdown` ディレクティブ
-渡されたフィールド値を Markdown として解析します。
-| 引数 | タイプ | 説明
-| - | - | -
-| `flavor`| `String` | 入力内容が解釈されるべき、Markdown の「flavor」。yii\helpers\Markdown::process() と同じ引数を受け入れます。
-| `inlineOnly`| `Boolean` | `<p>` タグを除き、インライン要素だけを解析するかどうか。
+### The `markdown` directive
+Parses the passed field value as Markdown.
+| Argument     | Type      | Description                                                                                                                     |
+| ------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `flavor`     | `String`  | The “flavor” of Markdown the input should be interpreted with. Accepts the same arguments as yii\helpers\Markdown::process(). |
+| `inlineOnly` | `Boolean` | Whether to only parse inline elements, omitting any `<p>` tags.                                                           |
 
 <!-- END DIRECTIVES -->
 
-## 定義済みインターフェース
-Craft は、異なる GraphQL タイプによって実装される、いくつかのインターフェースを定義しています。
+## Pre-defined interfaces
+Craft defines several interfaces to be implemented by the different GraphQL types.
 
 <!-- BEGIN INTERFACES -->
 
-### `AssetInterface` インターフェース
-これは、すべてのアセットで実装されたインターフェースです。
-| フィールド | タイプ | 説明
-| - | - | -
-| `id`| `ID` | エンティティの ID。
-| `uid`| `String` | エンティティの UID。
-| `_count`| `Int` | フィールドに関連付けられたエレメントの数を返します。
-| `title`| `String` | エレメントのタイトル。
-| `slug`| `String` | エレメントのスラグ。
-| `uri`| `String` | エレメントの URI。
-| `enabled`| `Boolean` | エレメントが有効かどうか。
-| `archived`| `Boolean` | エレメントがアーカイブされているかどうか。
-| `siteId`| `Int` | エレメントが関連付けられているサイトの ID。
-| `language`| `String` | エレメントが関連付けられているサイトの言語。
-| `searchScore`| `String` | エレメントの照会で `search` パラメータが利用された場合のエレメントの検索スコア。
-| `trashed`| `Boolean` | エレメントがソフトデリートされているかどうか。
-| `status`| `String` | エレメントのステータス。
-| `dateCreated`| `DateTime` | エレメントが作成された日付。
-| `dateUpdated`| `DateTime` | エレメントが最後にアップデートされた日付。
-| `volumeId`| `Int` | アセットが属するボリュームの ID。
-| `folderId`| `Int` | アセットが属するフォルダの ID。
-| `filename`| `String` | アセットファイルのファイル名。
-| `extension`| `String` | アセットファイルのファイル拡張子。
-| `hasFocalPoint`| `Boolean` | アセットにユーザー定義の焦点がセットされているかどうか。
-| `focalPoint`| `[Float]` | `x` と `y` キーを持つ配列で表される焦点。画像でない場合は null。
-| `kind`| `String` | ファイルの種類。
-| `size`| `String` | バイト単位のファイルサイズ。
-| `height`| `Int` | ピクセル単位の高さ。画像でない場合は null。
-| `width`| `Int` | ピクセル単位の幅。画像でない場合は null。
-| `img`| `String` | このアセットに基づく `<img>` タグ。
-| `url`| `String` | アセットのフル URL。このフィールドは、`transform` ディレクティブと同じフィールドを受け入れます。
-| `mimeType`| `String` | 判別できる場合、ファイルの MIME タイプ。
-| `path`| `String` | ボリューム内のアセットのパス。
-| `dateModified`| `DateTime` | アセットファイルが最後に更新された日付。
-| `prev`| `AssetInterface` | 指定された基準から、これに関連する前のエレメントを返します。注意：このフィールドに引数を適用すると、クエリのパフォーマンスが大幅に低下します。
-| `next`| `AssetInterface` | 指定された基準から、これに関連する次のエレメントを返します。注意：このフィールドに引数を適用すると、クエリのパフォーマンスが大幅に低下します。
+### The `AssetInterface` interface
+This is the interface implemented by all assets.
+| Field           | Type             | Description                                                                                   |
+| --------------- | ---------------- | --------------------------------------------------------------------------------------------- |
+| `id`            | `ID`             | The id of the entity                                                                          |
+| `uid`           | `String`         | The uid of the entity                                                                         |
+| `_count`        | `Int`            | Return a number of related elements for a field.                                              |
+| `title`         | `String`         | The element’s title.                                                                          |
+| `slug`          | `String`         | The element’s slug.                                                                           |
+| `uri`           | `String`         | The element’s URI.                                                                            |
+| `enabled`       | `Boolean`        | Whether the element is enabled or not.                                                        |
+| `archived`      | `Boolean`        | Whether the element is archived or not.                                                       |
+| `siteId`        | `Int`            | The ID of the site the element is associated with.                                            |
+| `language`      | `String`         | The language of the site element is associated with.                                          |
+| `searchScore`   | `String`         | The element’s search score, if the `search` parameter was used when querying for the element. |
+| `trashed`       | `Boolean`        | Whether the element has been soft-deleted or not.                                             |
+| `status`        | `String`         | The element's status.                                                                         |
+| `dateCreated`   | `DateTime`       | The date the element was created.                                                             |
+| `dateUpdated`   | `DateTime`       | The date the element was last updated.                                                        |
+| `volumeId`      | `Int`            | The ID of the volume that the asset belongs to.                                               |
+| `folderId`      | `Int`            | The ID of the folder that the asset belongs to.                                               |
+| `filename`      | `String`         | The filename of the asset file.                                                               |
+| `extension`     | `String`         | The file extension for the asset file.                                                        |
+| `hasFocalPoint` | `Boolean`        | Whether a user-defined focal point is set on the asset.                                       |
+| `focalPoint`    | `[Float]`        | The focal point represented as an array with `x` and `y` keys, or null if it's not an image.  |
+| `kind`          | `String`         | The file kind.                                                                                |
+| `size`          | `String`         | The file size in bytes.                                                                       |
+| `height`        | `Int`            | The height in pixels or null if it's not an image.                                            |
+| `width`         | `Int`            | The width in pixels or null if it's not an image.                                             |
+| `img`           | `String`         | An `<img>` tag based on this asset.                                                     |
+| `srcset`        | `String`         | Returns a `srcset` attribute value based on the given widths or x-descriptors.                |
+| `url`           | `String`         | The full URL of the asset. This field accepts the same fields as the `transform` directive.   |
+| `mimeType`      | `String`         | The file’s MIME type, if it can be determined.                                                |
+| `path`          | `String`         | The asset's path in the volume.                                                               |
+| `dateModified`  | `DateTime`       | The date the asset file was last modified.                                                    |
+| `prev`          | `AssetInterface` | Returns the previous element relative to this one, from a given set of criteria.              |
+| `next`          | `AssetInterface` | Returns the next element relative to this one, from a given set of criteria.                  |
 
 
-### `EntryInterface` インターフェース
-これは、すべてのエントリで実装されたインターフェースです。
-| フィールド | タイプ | 説明
-| - | - | -
-| `id`| `ID` | エンティティの ID。
-| `uid`| `String` | エンティティの UID。
-| `_count`| `Int` | フィールドに関連付けられたエレメントの数を返します。
-| `title`| `String` | エレメントのタイトル。
-| `slug`| `String` | エレメントのスラグ。
-| `uri`| `String` | エレメントの URI。
-| `enabled`| `Boolean` | エレメントが有効かどうか。
-| `archived`| `Boolean` | エレメントがアーカイブされているかどうか。
-| `siteId`| `Int` | エレメントが関連付けられているサイトの ID。
-| `language`| `String` | エレメントが関連付けられているサイトの言語。
-| `searchScore`| `String` | エレメントの照会で `search` パラメータが利用された場合のエレメントの検索スコア。
-| `trashed`| `Boolean` | エレメントがソフトデリートされているかどうか。
-| `status`| `String` | エレメントのステータス。
-| `dateCreated`| `DateTime` | エレメントが作成された日付。
-| `dateUpdated`| `DateTime` | エレメントが最後にアップデートされた日付。
-| `lft`| `Int` | ストラクチャー内でのエレメントの左の位置。
-| `rgt`| `Int` | ストラクチャー内でのエレメントの右の位置。
-| `level`| `Int` | ストラクチャー内でのエレメントのレベル。
-| `root`| `Int` | エレメントのストラクチャーのルート ID。
-| `structureId`| `Int` | エレメントのストラクチャー ID。
-| `isDraft`| `Boolean` | 下書きかどうかを返します。
-| `isRevision`| `Boolean` | リビジョンかどうかを返します。
-| `sourceId`| `Int` | エレメントの ID、または、下書き/リビジョンの場合、ソースエレメントの ID を返します。
-| `sourceUid`| `String` | エレメントの UUID、または、下書き/リビジョンの場合、ソースエレメントの UUID を返します。
-| `draftId`| `Int` | 返される下書きの ID（`drafts` テーブルから）。
-| `isUnsavedDraft`| `Boolean` | 下書きかどうかを返します。
-| `draftName`| `String` | 下書きの名前。
-| `draftNotes`| `String` | 下書きのメモ。
-| `sectionId`| `Int` | エントリを含むセクションの ID。
-| `sectionHandle`| `String` | エントリを含むセクションのハンドル。
-| `typeId`| `Int` | エントリを含む入力タイプの ID。
-| `typeHandle`| `String` | エントリを含む入力タイプのハンドル。
-| `postDate`| `DateTime` | エントリの投稿日。
-| `expiryDate`| `DateTime` | エントリの有効期限日。
-| `children`| `[EntryInterface]` | セクションがストラクチャーの場合、エントリの子。`entries` クエリと同じ引数を受け入れます。
-| `parent`| `EntryInterface` | セクションがストラクチャーの場合、エントリの親。
-| `url`| `String` | エレメントのフル URL。
-| `localized`| `[EntryInterface]` | 他のロケールの同じエレメント。
-| `prev`| `EntryInterface` | 指定された基準から、これに関連する前のエレメントを返します。注意：このフィールドに引数を適用すると、クエリのパフォーマンスが大幅に低下します。
-| `next`| `EntryInterface` | 指定された基準から、これに関連する次のエレメントを返します。注意：このフィールドに引数を適用すると、クエリのパフォーマンスが大幅に低下します。
+### The `EntryInterface` interface
+This is the interface implemented by all entries.
+| Field                | Type               | Description                                                                                                              |
+| -------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `id`                 | `ID`               | The id of the entity                                                                                                     |
+| `uid`                | `String`           | The uid of the entity                                                                                                    |
+| `_count`             | `Int`              | Return a number of related elements for a field.                                                                         |
+| `title`              | `String`           | The element’s title.                                                                                                     |
+| `slug`               | `String`           | The element’s slug.                                                                                                      |
+| `uri`                | `String`           | The element’s URI.                                                                                                       |
+| `enabled`            | `Boolean`          | Whether the element is enabled or not.                                                                                   |
+| `archived`           | `Boolean`          | Whether the element is archived or not.                                                                                  |
+| `siteId`             | `Int`              | The ID of the site the element is associated with.                                                                       |
+| `language`           | `String`           | The language of the site element is associated with.                                                                     |
+| `searchScore`        | `String`           | The element’s search score, if the `search` parameter was used when querying for the element.                            |
+| `trashed`            | `Boolean`          | Whether the element has been soft-deleted or not.                                                                        |
+| `status`             | `String`           | The element's status.                                                                                                    |
+| `dateCreated`        | `DateTime`         | The date the element was created.                                                                                        |
+| `dateUpdated`        | `DateTime`         | The date the element was last updated.                                                                                   |
+| `lft`                | `Int`              | The element’s left position within its structure.                                                                        |
+| `rgt`                | `Int`              | The element’s right position within its structure.                                                                       |
+| `level`              | `Int`              | The element’s level within its structure                                                                                 |
+| `root`               | `Int`              | The element’s structure’s root ID                                                                                        |
+| `structureId`        | `Int`              | The element’s structure ID.                                                                                              |
+| `isDraft`            | `Boolean`          | Returns whether this is a draft.                                                                                         |
+| `isRevision`         | `Boolean`          | Returns whether this is a revision.                                                                                      |
+| `sourceId`           | `Int`              | Returns the element’s ID, or if it’s a draft/revision, its source element’s ID.                                          |
+| `sourceUid`          | `String`           | Returns the element’s UUID, or if it’s a draft/revision, its source element’s UUID.                                      |
+| `draftId`            | `Int`              | The ID of the draft to return (from the `drafts` table)                                                                  |
+| `isUnpublishedDraft` | `Boolean`          | Returns whether this is an unpublished draft.                                                                            |
+| `isUnsavedDraft`     | `Boolean`          | Returns whether this is an unpublished draft. **This field is deprecated.** `isUnpublishedDraft` should be used instead. |
+| `draftName`          | `String`           | The name of the draft.                                                                                                   |
+| `draftNotes`         | `String`           | The notes for the draft.                                                                                                 |
+| `sectionId`          | `Int`              | The ID of the section that contains the entry.                                                                           |
+| `sectionHandle`      | `String`           | The handle of the section that contains the entry.                                                                       |
+| `typeId`             | `Int`              | The ID of the entry type that contains the entry.                                                                        |
+| `typeHandle`         | `String`           | The handle of the entry type that contains the entry.                                                                    |
+| `postDate`           | `DateTime`         | The entry's post date.                                                                                                   |
+| `expiryDate`         | `DateTime`         | The expiry date of the entry.                                                                                            |
+| `children`           | `[EntryInterface]` | The entry’s children, if the section is a structure. Accepts the same arguments as the `entries` query.                  |
+| `parent`             | `EntryInterface`   | The entry’s parent, if the section is a structure.                                                                       |
+| `url`                | `String`           | The element’s full URL                                                                                                   |
+| `localized`          | `[EntryInterface]` | The same element in other locales.                                                                                       |
+| `prev`               | `EntryInterface`   | Returns the previous element relative to this one, from a given set of criteria.                                         |
+| `next`               | `EntryInterface`   | Returns the next element relative to this one, from a given set of criteria.                                             |
 
 
-### `GlobalSetInterface` インターフェース
-これは、すべてのグローバル設定で実装されたインターフェースです。
-| フィールド | タイプ | 説明
-| - | - | -
-| `id`| `ID` | エンティティの ID。
-| `uid`| `String` | エンティティの UID。
-| `_count`| `Int` | フィールドに関連付けられたエレメントの数を返します。
-| `title`| `String` | エレメントのタイトル。
-| `slug`| `String` | エレメントのスラグ。
-| `uri`| `String` | エレメントの URI。
-| `enabled`| `Boolean` | エレメントが有効かどうか。
-| `archived`| `Boolean` | エレメントがアーカイブされているかどうか。
-| `siteId`| `Int` | エレメントが関連付けられているサイトの ID。
-| `language`| `String` | エレメントが関連付けられているサイトの言語。
-| `searchScore`| `String` | エレメントの照会で `search` パラメータが利用された場合のエレメントの検索スコア。
-| `trashed`| `Boolean` | エレメントがソフトデリートされているかどうか。
-| `status`| `String` | エレメントのステータス。
-| `dateCreated`| `DateTime` | エレメントが作成された日付。
-| `dateUpdated`| `DateTime` | エレメントが最後にアップデートされた日付。
-| `name`| `String` | グローバル設定の名前。
-| `handle`| `String` | グローバル設定のハンドル。
+### The `GlobalSetInterface` interface
+This is the interface implemented by all global sets.
+| Field         | Type       | Description                                                                                   |
+| ------------- | ---------- | --------------------------------------------------------------------------------------------- |
+| `id`          | `ID`       | The id of the entity                                                                          |
+| `uid`         | `String`   | The uid of the entity                                                                         |
+| `_count`      | `Int`      | Return a number of related elements for a field.                                              |
+| `title`       | `String`   | The element’s title.                                                                          |
+| `slug`        | `String`   | The element’s slug.                                                                           |
+| `uri`         | `String`   | The element’s URI.                                                                            |
+| `enabled`     | `Boolean`  | Whether the element is enabled or not.                                                        |
+| `archived`    | `Boolean`  | Whether the element is archived or not.                                                       |
+| `siteId`      | `Int`      | The ID of the site the element is associated with.                                            |
+| `language`    | `String`   | The language of the site element is associated with.                                          |
+| `searchScore` | `String`   | The element’s search score, if the `search` parameter was used when querying for the element. |
+| `trashed`     | `Boolean`  | Whether the element has been soft-deleted or not.                                             |
+| `status`      | `String`   | The element's status.                                                                         |
+| `dateCreated` | `DateTime` | The date the element was created.                                                             |
+| `dateUpdated` | `DateTime` | The date the element was last updated.                                                        |
+| `name`        | `String`   | The name of the global set.                                                                   |
+| `handle`      | `String`   | The handle of the global set.                                                                 |
 
 
-### `MatrixBlockInterface` インターフェース
-これは、すべての行列ブロックで実装されたインターフェースです。
-| フィールド | タイプ | 説明
-| - | - | -
-| `id`| `ID` | エンティティの ID。
-| `uid`| `String` | エンティティの UID。
-| `_count`| `Int` | フィールドに関連付けられたエレメントの数を返します。
-| `title`| `String` | エレメントのタイトル。
-| `slug`| `String` | エレメントのスラグ。
-| `uri`| `String` | エレメントの URI。
-| `enabled`| `Boolean` | エレメントが有効かどうか。
-| `archived`| `Boolean` | エレメントがアーカイブされているかどうか。
-| `siteId`| `Int` | エレメントが関連付けられているサイトの ID。
-| `language`| `String` | エレメントが関連付けられているサイトの言語。
-| `searchScore`| `String` | エレメントの照会で `search` パラメータが利用された場合のエレメントの検索スコア。
-| `trashed`| `Boolean` | エレメントがソフトデリートされているかどうか。
-| `status`| `String` | エレメントのステータス。
-| `dateCreated`| `DateTime` | エレメントが作成された日付。
-| `dateUpdated`| `DateTime` | エレメントが最後にアップデートされた日付。
-| `fieldId`| `Int` | 行列ブロックを所有するフィールドの ID。
-| `ownerId`| `Int` | 行列ブロックを所有するエレメントの ID。
-| `typeId`| `Int` | 行列ブロックタイプの ID。
-| `typeHandle`| `String` | 行列ブロックタイプのハンドル。
-| `sortOrder`| `Int` | 所有するエレメントフィールド内での行列ブロックのソート順。
+### The `MatrixBlockInterface` interface
+This is the interface implemented by all matrix blocks.
+| Field         | Type       | Description                                                                                   |
+| ------------- | ---------- | --------------------------------------------------------------------------------------------- |
+| `id`          | `ID`       | The id of the entity                                                                          |
+| `uid`         | `String`   | The uid of the entity                                                                         |
+| `_count`      | `Int`      | Return a number of related elements for a field.                                              |
+| `title`       | `String`   | The element’s title.                                                                          |
+| `slug`        | `String`   | The element’s slug.                                                                           |
+| `uri`         | `String`   | The element’s URI.                                                                            |
+| `enabled`     | `Boolean`  | Whether the element is enabled or not.                                                        |
+| `archived`    | `Boolean`  | Whether the element is archived or not.                                                       |
+| `siteId`      | `Int`      | The ID of the site the element is associated with.                                            |
+| `language`    | `String`   | The language of the site element is associated with.                                          |
+| `searchScore` | `String`   | The element’s search score, if the `search` parameter was used when querying for the element. |
+| `trashed`     | `Boolean`  | Whether the element has been soft-deleted or not.                                             |
+| `status`      | `String`   | The element's status.                                                                         |
+| `dateCreated` | `DateTime` | The date the element was created.                                                             |
+| `dateUpdated` | `DateTime` | The date the element was last updated.                                                        |
+| `fieldId`     | `Int`      | The ID of the field that owns the matrix block.                                               |
+| `ownerId`     | `Int`      | The ID of the element that owns the matrix block.                                             |
+| `typeId`      | `Int`      | The ID of the matrix block's type.                                                            |
+| `typeHandle`  | `String`   | The handle of the matrix block's type.                                                        |
+| `sortOrder`   | `Int`      | The sort order of the matrix block within the owner element field.                            |
 
 
-### `UserInterface` インターフェース
-これは、すべてのユーザーで実装されたインターフェースです。
-| フィールド | タイプ | 説明
-| - | - | -
-| `id`| `ID` | エンティティの ID。
-| `uid`| `String` | エンティティの UID。
-| `_count`| `Int` | フィールドに関連付けられたエレメントの数を返します。
-| `title`| `String` | エレメントのタイトル。
-| `slug`| `String` | エレメントのスラグ。
-| `uri`| `String` | エレメントの URI。
-| `enabled`| `Boolean` | エレメントが有効かどうか。
-| `archived`| `Boolean` | エレメントがアーカイブされているかどうか。
-| `siteId`| `Int` | エレメントが関連付けられているサイトの ID。
-| `language`| `String` | エレメントが関連付けられているサイトの言語。
-| `searchScore`| `String` | エレメントの照会で `search` パラメータが利用された場合のエレメントの検索スコア。
-| `trashed`| `Boolean` | エレメントがソフトデリートされているかどうか。
-| `status`| `String` | エレメントのステータス。
-| `dateCreated`| `DateTime` | エレメントが作成された日付。
-| `dateUpdated`| `DateTime` | エレメントが最後にアップデートされた日付。
-| `photo`| `AssetInterface` | ユーザーのフォト。
-| `friendlyName`| `String` | ユーザーのファーストネーム、または、ユーザー名。
-| `fullName`| `String` | ユーザーのフルネーム。
-| `name`| `String` | ユーザーのフルネーム、または、ユーザー名。
-| `preferences`| `String` | ユーザーの設定。
-| `preferredLanguage`| `String` | ユーザーの優先する言語。
-| `username`| `String` | ユーザー名。
-| `firstName`| `String` | ユーザーのファーストネーム。
-| `lastName`| `String` | ユーザーのラストネーム。
-| `email`| `String` | ユーザーのメールアドレス。
+### The `UserInterface` interface
+This is the interface implemented by all users.
+| Field               | Type       | Description                                                                                   |
+| ------------------- | ---------- | --------------------------------------------------------------------------------------------- |
+| `id`                | `ID`       | The id of the entity                                                                          |
+| `uid`               | `String`   | The uid of the entity                                                                         |
+| `_count`            | `Int`      | Return a number of related elements for a field.                                              |
+| `title`             | `String`   | The element’s title.                                                                          |
+| `slug`              | `String`   | The element’s slug.                                                                           |
+| `uri`               | `String`   | The element’s URI.                                                                            |
+| `enabled`           | `Boolean`  | Whether the element is enabled or not.                                                        |
+| `archived`          | `Boolean`  | Whether the element is archived or not.                                                       |
+| `siteId`            | `Int`      | The ID of the site the element is associated with.                                            |
+| `language`          | `String`   | The language of the site element is associated with.                                          |
+| `searchScore`       | `String`   | The element’s search score, if the `search` parameter was used when querying for the element. |
+| `trashed`           | `Boolean`  | Whether the element has been soft-deleted or not.                                             |
+| `status`            | `String`   | The element's status.                                                                         |
+| `dateCreated`       | `DateTime` | The date the element was created.                                                             |
+| `dateUpdated`       | `DateTime` | The date the element was last updated.                                                        |
+| `friendlyName`      | `String`   | The user's first name or username.                                                            |
+| `fullName`          | `String`   | The user's full name.                                                                         |
+| `name`              | `String`   | The user's full name or username.                                                             |
+| `preferences`       | `String`   | The user’s preferences.                                                                       |
+| `preferredLanguage` | `String`   | The user’s preferred language.                                                                |
+| `username`          | `String`   | The username.                                                                                 |
+| `firstName`         | `String`   | The user's first name.                                                                        |
+| `lastName`          | `String`   | The user's last name.                                                                         |
+| `email`             | `String`   | The user's email.                                                                             |
 
 
-### `CategoryInterface` インターフェース
-これは、すべてのカテゴリで実装されたインターフェースです。
-| フィールド | タイプ | 説明
-| - | - | -
-| `id`| `ID` | エンティティの ID。
-| `uid`| `String` | エンティティの UID。
-| `_count`| `Int` | フィールドに関連付けられたエレメントの数を返します。
-| `title`| `String` | エレメントのタイトル。
-| `slug`| `String` | エレメントのスラグ。
-| `uri`| `String` | エレメントの URI。
-| `enabled`| `Boolean` | エレメントが有効かどうか。
-| `archived`| `Boolean` | エレメントがアーカイブされているかどうか。
-| `siteId`| `Int` | エレメントが関連付けられているサイトの ID。
-| `language`| `String` | エレメントが関連付けられているサイトの言語。
-| `searchScore`| `String` | エレメントの照会で `search` パラメータが利用された場合のエレメントの検索スコア。
-| `trashed`| `Boolean` | エレメントがソフトデリートされているかどうか。
-| `status`| `String` | エレメントのステータス。
-| `dateCreated`| `DateTime` | エレメントが作成された日付。
-| `dateUpdated`| `DateTime` | エレメントが最後にアップデートされた日付。
-| `lft`| `Int` | ストラクチャー内でのエレメントの左の位置。
-| `rgt`| `Int` | ストラクチャー内でのエレメントの右の位置。
-| `level`| `Int` | ストラクチャー内でのエレメントのレベル。
-| `root`| `Int` | エレメントのストラクチャーのルート ID。
-| `structureId`| `Int` | エレメントのストラクチャー ID。
-| `groupId`| `Int` | カテゴリを含むグループの ID。
-| `groupHandle`| `String` | カテゴリを含むグループのハンドル。
-| `children`| `[CategoryInterface]` | カテゴリの子。
-| `parent`| `CategoryInterface` | カテゴリの親。
-| `url`| `String` | エレメントのフル URL。
-| `localized`| `[CategoryInterface]` | 他のロケールの同じエレメント。
-| `prev`| `CategoryInterface` | 指定された基準から、これに関連する前のエレメントを返します。注意：このフィールドに引数を適用すると、クエリのパフォーマンスが大幅に低下します。
-| `next`| `CategoryInterface` | 指定された基準から、これに関連する次のエレメントを返します。注意：このフィールドに引数を適用すると、クエリのパフォーマンスが大幅に低下します。
+### The `CategoryInterface` interface
+This is the interface implemented by all categories.
+| Field         | Type                  | Description                                                                                   |
+| ------------- | --------------------- | --------------------------------------------------------------------------------------------- |
+| `id`          | `ID`                  | The id of the entity                                                                          |
+| `uid`         | `String`              | The uid of the entity                                                                         |
+| `_count`      | `Int`                 | Return a number of related elements for a field.                                              |
+| `title`       | `String`              | The element’s title.                                                                          |
+| `slug`        | `String`              | The element’s slug.                                                                           |
+| `uri`         | `String`              | The element’s URI.                                                                            |
+| `enabled`     | `Boolean`             | Whether the element is enabled or not.                                                        |
+| `archived`    | `Boolean`             | Whether the element is archived or not.                                                       |
+| `siteId`      | `Int`                 | The ID of the site the element is associated with.                                            |
+| `language`    | `String`              | The language of the site element is associated with.                                          |
+| `searchScore` | `String`              | The element’s search score, if the `search` parameter was used when querying for the element. |
+| `trashed`     | `Boolean`             | Whether the element has been soft-deleted or not.                                             |
+| `status`      | `String`              | The element's status.                                                                         |
+| `dateCreated` | `DateTime`            | The date the element was created.                                                             |
+| `dateUpdated` | `DateTime`            | The date the element was last updated.                                                        |
+| `lft`         | `Int`                 | The element’s left position within its structure.                                             |
+| `rgt`         | `Int`                 | The element’s right position within its structure.                                            |
+| `level`       | `Int`                 | The element’s level within its structure                                                      |
+| `root`        | `Int`                 | The element’s structure’s root ID                                                             |
+| `structureId` | `Int`                 | The element’s structure ID.                                                                   |
+| `groupId`     | `Int`                 | The ID of the group that contains the category.                                               |
+| `groupHandle` | `String`              | The handle of the group that contains the category.                                           |
+| `children`    | `[CategoryInterface]` | The category’s children.                                                                      |
+| `parent`      | `CategoryInterface`   | The category’s parent.                                                                        |
+| `url`         | `String`              | The element’s full URL                                                                        |
+| `localized`   | `[CategoryInterface]` | The same element in other locales.                                                            |
+| `prev`        | `CategoryInterface`   | Returns the previous element relative to this one, from a given set of criteria.              |
+| `next`        | `CategoryInterface`   | Returns the next element relative to this one, from a given set of criteria.                  |
 
 
-### `TagInterface` インターフェース
-これは、すべてのタグで実装されたインターフェースです。
-| フィールド | タイプ | 説明
-| - | - | -
-| `id`| `ID` | エンティティの ID。
-| `uid`| `String` | エンティティの UID。
-| `_count`| `Int` | フィールドに関連付けられたエレメントの数を返します。
-| `title`| `String` | エレメントのタイトル。
-| `slug`| `String` | エレメントのスラグ。
-| `uri`| `String` | エレメントの URI。
-| `enabled`| `Boolean` | エレメントが有効かどうか。
-| `archived`| `Boolean` | エレメントがアーカイブされているかどうか。
-| `siteId`| `Int` | エレメントが関連付けられているサイトの ID。
-| `language`| `String` | エレメントが関連付けられているサイトの言語。
-| `searchScore`| `String` | エレメントの照会で `search` パラメータが利用された場合のエレメントの検索スコア。
-| `trashed`| `Boolean` | エレメントがソフトデリートされているかどうか。
-| `status`| `String` | エレメントのステータス。
-| `dateCreated`| `DateTime` | エレメントが作成された日付。
-| `dateUpdated`| `DateTime` | エレメントが最後にアップデートされた日付。
-| `groupId`| `Int` | タグを含むグループの ID。
-| `groupHandle`| `String` | タグを含むグループのハンドル。
+### The `TagInterface` interface
+This is the interface implemented by all tags.
+| Field         | Type       | Description                                                                                   |
+| ------------- | ---------- | --------------------------------------------------------------------------------------------- |
+| `id`          | `ID`       | The id of the entity                                                                          |
+| `uid`         | `String`   | The uid of the entity                                                                         |
+| `_count`      | `Int`      | Return a number of related elements for a field.                                              |
+| `title`       | `String`   | The element’s title.                                                                          |
+| `slug`        | `String`   | The element’s slug.                                                                           |
+| `uri`         | `String`   | The element’s URI.                                                                            |
+| `enabled`     | `Boolean`  | Whether the element is enabled or not.                                                        |
+| `archived`    | `Boolean`  | Whether the element is archived or not.                                                       |
+| `siteId`      | `Int`      | The ID of the site the element is associated with.                                            |
+| `language`    | `String`   | The language of the site element is associated with.                                          |
+| `searchScore` | `String`   | The element’s search score, if the `search` parameter was used when querying for the element. |
+| `trashed`     | `Boolean`  | Whether the element has been soft-deleted or not.                                             |
+| `status`      | `String`   | The element's status.                                                                         |
+| `dateCreated` | `DateTime` | The date the element was created.                                                             |
+| `dateUpdated` | `DateTime` | The date the element was last updated.                                                        |
+| `groupId`     | `Int`      | The ID of the group that contains the tag.                                                    |
+| `groupHandle` | `String`   | The handle of the group that contains the tag.                                                |
 
 <!-- END INTERFACES -->
 
-## ミューテーション
+## Mutations
 
-::: tip
-実際の API 機能は、スキーマが許可するものに依存します。
+GraphQL mutations provide a way to modify data. The actual mutations will vary depending on the schema and what it allows. There are common mutations per GraphQL object type and additional type-specific mutations.
+
+Mutations take the data as arguments. In this example, we’re using the type-specific `save_news_article_Entry` to save a new entry. We’re providing a title and slug and formatting the `dateCreated` that’s populated automatically when the entry is saved:
+
+::: code
+```graphql GraphQL
+mutation saveEntry($title: String, $slug: String) {
+  save_news_article_Entry(title: $title, slug: $slug) {
+    title
+    slug
+    dateCreated @formatDateTime (format: "Y-m-d")
+  }
+}
+
+# query variables:
+{
+  "title": "Craft 3.5 Supports GraphQL Mutations",
+  "slug": "craft-graphql-mutations"
+}
+```
+```json JSON Response
+{
+  "data": {
+    "save_news_article_Entry": {
+      "title": "Craft 3.5 Supports GraphQL Mutations",
+      "slug": "craft-graphql-mutations",
+      "dateCreated": "2020-04-18"
+    }
+  }
+}
+```
 :::
 
-GraphQL のミューテーションは、データを変更する方法を提供します。実際のミューテーションは、スキーマによって異なります。GraphQL オブジェクトタイプごとに、一般的なミューテーションとタイプ固有のミューテーションがあります。
+While mutations are mostly straightforward, there are a few important cases to consider.
 
-ミューテーションはデータを引数として受け取り、ほとんどの場合は単純ですが、頭に入れておくべきポイントがいくつかあります。
+### Matrix Fields in Mutations
 
-### ミューテーションの行列フィールド
+GraphQL’s limited input types can be challenging with complex [Matrix fields](matrix-fields.md).
 
-GraphQL の制限により、入力タイプはあまり柔軟ではなく、行列フィールドはとても複雑です。そのため、ドキュメント内で独自のセクションを与えられています。慣れていない場合、はじめに[投稿フォーム内で行列フィールドのデータをどのように保存するか](matrix-fields.md#saving-matrix-fields-in-entry-forms)を読むことをお勧めします。
+::: tip
+We recommend reading [how to save matrix field data in entry forms](matrix-fields.md#saving-matrix-fields-in-entry-forms) first if you’ve not saved Matrix field form data.
+:::
 
-一般的に、行列入力タイプは同じ構造を持っています。
+Matrix input types generally have the following structure:
 
-| フィールド | 説明
-| - | -
-| `sortOrder`| ミューテーション後に行列フィールドを必要な順序で維持するための、すべてのブロック ID のリスト。これには、すべての新しいブロックも含みます。
-| `blocks` | すべての実際のブロックのリスト。変更されないブロックを含める必要はありませんが、それらを削除したくない場合、`sortOrder` フィールドで表す必要があります。
+| Field       | Description                                                                                                                                                 |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sortOrder` | A list of all the block IDs, including any new blocks, in the order you’d like to persist after the mutation.                                               |
+| `blocks`    | A list of all the actual blocks. You can omit any blocks that aren’t modified, but they must be represented on the `sortOrder` field or they’ll be deleted. |
 
-実際のブロック入力タイプは、このフィールドで可能なすべてのブロックタイプのフィールドを含みますが、最初の空ではないブロックは、ブロックタイプがフィールドで定義されている順序に考慮されます。
+An actual block input type will contain fields for all the possible block types for this field, however, the first non-empty block will be considered in the order that the block types are defined on the field.
 
-実例を見てみましょう。
+As an example, let’s pretend we have a Matrix field with a handle `ingredients`.
 
-ハンドル `documentationField` の行列フィールドがあるとします。そのフィールドは、`screenshot` と `paragraph` の2つのブロックタイプがあります。この行列フィールドのために生成されたすべての入力タイプのリストは、次の通りです。
+The field has three block types: `spirit`, `mixer`, and `garnish`. Each block type has one or two fields:
 
-| タイプ名 | タイプの説明 |
-| - | -
-| `documentationField_MatrixInput` | これは行列フィールドの入力タイプです。前述のように、`sortOrder` と `blocks` の2つのフィールドが含まれます。
-| `documentationField_MatrixBlockContainerInput` | これはブロックを表す入力タイプです。この場合、`screenshot` と `paragraph` の2つのフィールドが含まれます。
-| `documentationField_screenshot_MatrixBlockInput` | これは `screenshot` ブロックの入力タイプです。ブロックタイプに定義されたすべてのフィールドが含まれます。
-| `documentationField_paragraph_MatrixBlockInput` | 同様に、これは `paragraph` ブロックの入力タイプです。
+```
+ingredients
+├── spirit
+│   ├── spiritName (Plain Text)
+│   └── ounces (Number)
+├── mixer
+│   ├── mixerName (Plain Text)
+│   └── ounces (Number)
+└── garnish
+    └── garnishName (Plain Text)
+```
 
-GraphQL SDL では、次のようになります。
+These are all the GraphQL input types Craft generates for this Matrix field:
+
+| Type Name                               | Type Description                                                                                |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `ingredients_MatrixInput`               | Input type for the Matrix field, containing `sortOrder` and `blocks`.                           |
+| `ingredients_MatrixBlockContainerInput` | Input type that represents the block, in this case containing `spirit`, `mixer`, and `garnish`. |
+| `ingredients_spirit_MatrixBlockInput`   | Input type for the `spirit` block, containing `spiritName` and `ounces`.                        |
+| `ingredients_mixer_MatrixBlockInput`    | Input type for the `mixer` block, containing `mixerName` and `ounces`.                          |
+| `ingredients_garnish_MatrixBlockInput`  | Input type for the `garnish` block, containing `garnishName`.                                   |
+
+Those input types would look like this in [GraphQL Schema Definition Language (SDL)](https://www.prisma.io/blog/graphql-sdl-schema-definition-language-6755bcb9ce51):
 
 ```graphql
-input docunentationField_MatrixInput {
+input ingredients_MatrixInput {
   sortOrder: [QueryArgument]!
-  blocks: [documentationField_MatrixBlockContainerInput]
+  blocks: [ingredients_MatrixBlockContainerInput]
 }
 
-input documentationField_MatrixBlockContainerInput {
-  screenshot: documentationField_screenshot_MatrixBlockInput
-  paragraph: documentationField_paragraph_MatrixBlockInput
+input ingredients_MatrixBlockContainerInput {
+  spirit: ingredients_spirit_MatrixBlockInput
+  mixer: ingredients_mixer_MatrixBlockInput
+  garnish: ingredients_garnish_MatrixBlockInput
 }
 
-input documentationField_screenshot_MatrixBlockInput {
-  # List of content fields defined for this block type
+input ingredients_spirit_MatrixBlockInput {
+  # ... common Matrix Block fields ...
+  spiritName: String
+  ounces: Number
 }
 
-input documentationField_paragraph_MatrixBlockInput {
-  # List of content fields defined for this block type
+input ingredients_mixer_MatrixBlockInput {
+  # ... common Matrix Block fields ...
+  mixerName: String
+  ounces: Number
+}
+
+input ingredients_garnish_MatrixBlockInput {
+  # ... common Matrix Block fields ...
+  garnishName: String
 }
 ```
 
-2つのブロックを送信すると、`blocks` には `documentationField_MatrixBlockContainerInput` 入力タイプの2つの入力オブジェクトのリストが含まれます。これらのオブジェクトのどのフィールドにデータが含まれるかによって、最終的なブロックタイプが決まります。複数のブロックタイプが定義されている場合、最初にリストされているブロックタイプだけが考慮されます。
+A mutation saving a new entry with multiple Matrix blocks might look like this:
 
-### ミューテーション経由のファイルのアップロード
+::: code
+```graphql GraphQL
+mutation saveEntry(
+  $title: String,
+  $slug: String,
+  $authorId: ID,
+  $ingredients: [ingredients_MatrixBlockContainerInput],
+  $sortOrder: [QueryArgument]
+) {
+  save_cocktails_cocktails_Entry(
+    title: $title,
+    slug: $slug,
+    authorId: $authorId,
+    ingredients: { blocks: $ingredients, sortOrder: $sortOrder }
+  ) {
+    title
+    slug
+    authorId
+    dateCreated @formatDateTime (format: "Y-m-d")
+    ingredients {
+      __typename
+        ...on MatrixBlockInterface {
+          id
+        }
+        ... on ingredients_spirit_BlockType {
+          spiritName
+          ounces
+        }
+        ... on ingredients_mixer_BlockType {
+          mixerName
+          ounces
+        }
+        ... on ingredients_garnish_BlockType {
+          garnishName
+        }
+     }
+  }
+}
 
-現在、ファイルのアップロードには2つの方法があります。サーバーにダウンロードされるファイルの URL を渡すか、Base64 でエンコードされたファイルデータを渡す方法です。いずれにしても、ファイルをアップロードするには、`FileInput` GraphQL 入力タイプを利用しなければなりません。次のフィールドがあります。
+# query variables:
+{
+  "title": "Gin and Tonic",
+  "slug": "gin-tonic",
+  "authorId": 1,
+  "sortOrder": ["new1", "new2", "new3", "new4"],
+  "ingredients": [
+    {
+      "spirit": {
+        "id": "new1",
+        "spiritName": "Gin",
+        "ounces": 2
+      }
+    },
+    {
+      "mixer": {
+        "id": "new2",
+        "mixerName": "Tonic",
+        "ounces": 4
+      }
+    },
+    {
+      "mixer": {
+        "id": "new3",
+        "mixerName": "Fresh Lime Juice",
+        "ounces": 0.25
+      }
+    },
+    {
+      "garnish": {
+        "id": "new4",
+        "garnishName": "Lime Wedge or Twist"
+      }
+    }
+  ]
+}
+```
+```json JSON Response
+{
+  "data": {
+    "save_cocktails_cocktails_Entry": {
+      "title": "Gin and Tonic",
+      "slug": "gin-tonic",
+      "authorId": 1,
+      "dateCreated": "2021-03-04",
+      "ingredients": [
+        {
+          "__typename": "ingredients_spirit_BlockType",
+          "id": "9",
+          "spiritName": "Gin",
+          "ounces": 2
+        },
+        {
+          "__typename": "ingredients_mixer_BlockType",
+          "id": "10",
+          "mixerName": "Tonic",
+          "ounces": 4
+        },
+        {
+          "__typename": "ingredients_mixer_BlockType",
+          "id": "11",
+          "mixerName": "Fresh Lime Juice",
+          "ounces": 0.25
+        },
+        {
+          "__typename": "ingredients_garnish_BlockType",
+          "id": "12",
+          "garnishName": "Lime Wedge or Twist"
+        }
+      ]
+    }
+  }
+}
+```
+:::
 
-| フィールド | 説明
-| - | -
-| `fileData` | Base64 形式のファイルの内容。指定した場合、URL よりも優先されます。
-| `filename` | ファイルに利用するファイル名。指定がない場合、Craft は自身でファイル名を見つけます。
-| `url` | 利用するファイルの URL。
+What field on those objects would contain data would determine the final block type.
 
-### エントリのミューテート
+::: warning
+If more than one of the block types are defined, only the block type that is listed first will be considered.
+:::
 
-#### エントリの保存
+### Saving Files via Mutations
 
-エントリを保存するには、`save_<sectionHandle>_<entryTypeHandle>_Entry` 形式の名前を持つ、エントリタイプ固有のミューテーションを利用します。
+You can provide files for Assets as either Base64-encoded data, or a URL that Craft will download.
+
+Either way you’ll use the `FileInput` GraphQL input type, which has the following fields:
+
+| Field      | Description                                                                    |
+| ---------- | ------------------------------------------------------------------------------ |
+| `url`      | URL of a file to be downloaded.                                                |
+| `fileData` | File contents in Base64 format. If provided, takes precedence over `url`.      |
+| `filename` | Filename to use for the saved Asset. If omitted, Craft will create a filename. |
+
+### Mutating Entries
+
+#### Saving an Entry
+
+To save an [entry](entries.md), use the entry type-specific mutation which will have the name in the form of `save_<sectionHandle>_<entryTypeHandle>_Entry`:
 
 <!-- BEGIN ENTRY MUTATION ARGS -->
 
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `ID` | エレメントの ID をセットします。
-| `uid`| `String` | エレメントの UID をセットします。
-| `title`| `String` | エレメントのタイトル。
-| `enabled`| `Boolean` | エレメントを有効にするかどうか。
-| `authorId`| `ID` | このエントリを作成したユーザーの ID。
-| `postDate`| `DateTime` | エントリがいつ投稿されるべきか。
-| `expiryDate`| `DateTime` | エントリをいつ有効期限切れにするか。
-| `slug`| `String` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `siteId`| `Int` | エレメントを保存するサイトを決定します。デフォルトはプライマリサイトです。
-| `...`|  | フィールドレイアウトに応じた、より多くの引数。
+| Argument     | Type       | Description                                                                             |
+| ------------ | ---------- | --------------------------------------------------------------------------------------- |
+| `id`         | `ID`       | Set the element’s ID.                                                                   |
+| `uid`        | `String`   | Set the element’s UID.                                                                  |
+| `title`      | `String`   | The title of the element.                                                               |
+| `enabled`    | `Boolean`  | Whether the element should be enabled.                                                  |
+| `authorId`   | `ID`       | The ID of the user that created this entry.                                             |
+| `postDate`   | `DateTime` | When should the entry be posted.                                                        |
+| `expiryDate` | `DateTime` | When should the entry expire.                                                           |
+| `slug`       | `String`   | Narrows the query results based on the elements’ slugs.                                 |
+| `siteId`     | `Int`      | Determines which site(s) the elements should be saved to. Defaults to the primary site. |
+| `...`        |            | More arguments depending on the field layout for the type                               |
 
 <!-- END ENTRY MUTATION ARGS -->
 
-引数 `id`、`uid`、および、`authorId` は、シングルのエントリには存在しません。シングルのエントリは投稿者を持たず、正確なミューテーションによって既に識別されているからです。同様に、ストラクチャーエントリで利用可能な追加の引数があります。詳細については、[構造データのミューテート](#mutating-structure-data)を参照してください。
+The `id`, `uid` and `authorId` arguments do no exist for single entries. This is because single entries have no authors and are identified already by the exact mutation. In a similar fashion, there are additional arguments available for structured entries. For more information, refer to [mutating structure data](#mutating-structure-data).
 
-#### 下書きの保存
+::: tip
+After saving an entry, Craft runs queue jobs for updating revisions and search indexes. If you’re using Craft headlessly or infrequently accessing the control panel, consider disabling <config3:runQueueAutomatically> and [establishing an always-running daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms) to keep revisions and search indexes up to date.
+:::
 
-エントリの下書きを保存するには、`save_<sectionHandle>_<entryTypeHandle>_Draft` 形式の名前を持つ、エントリタイプ固有のミューテーションを利用します。
+#### Editing Existing Entries
+
+You can modify existing entries by passing the populated `id` argument to your mutation.
+
+#### Saving a Draft
+
+To save a draft for an entry, use the entry type-specific mutation which will have the name in the form of `save_<sectionHandle>_<entryTypeHandle>_Draft`:
 
 <!-- BEGIN DRAFT MUTATION ARGS -->
 
-| 引数 | タイプ | 説明
-| - | - | -
-| `title`| `String` | エレメントのタイトル。
-| `enabled`| `Boolean` |  エレメントを有効にするかどうか。
-| `authorId`| `ID` | このエントリを作成したユーザーの ID。
-| `postDate`| `DateTime` | エントリがいつ投稿されるべきか。
-| `expiryDate`| `DateTime` | エントリをいつ有効期限切れにするか。
-| `slug`| `String` | エレメントのスラグに基づいて、クエリの結果を絞り込みます。
-| `siteId`| `Int` | エレメントを保存するサイトを決定します。デフォルトはプライマリサイトです。
-| `draftId`| `ID!` | 下書きの ID。
-| `draftName`| `String` | 下書きの名前。
-| `draftNotes`| `String` | 下書きのメモ。
-| `...`|  | フィールドレイアウトに応じた、より多くの引数。
+| Argument     | Type       | Description                                                                             |
+| ------------ | ---------- | --------------------------------------------------------------------------------------- |
+| `title`      | `String`   | The title of the element.                                                               |
+| `enabled`    | `Boolean`  | Whether the element should be enabled.                                                  |
+| `authorId`   | `ID`       | The ID of the user that created this entry.                                             |
+| `postDate`   | `DateTime` | When should the entry be posted.                                                        |
+| `expiryDate` | `DateTime` | When should the entry expire.                                                           |
+| `slug`       | `String`   | Narrows the query results based on the elements’ slugs.                                 |
+| `siteId`     | `Int`      | Determines which site(s) the elements should be saved to. Defaults to the primary site. |
+| `draftId`    | `ID!`      | The ID of the draft.                                                                    |
+| `draftName`  | `String`   | The name of the draft.                                                                  |
+| `draftNotes` | `String`   | Notes for the draft.                                                                    |
+| `...`        |            | More arguments depending on the field layout for the type                               |
 
 <!-- END DRAFT MUTATION ARGS -->
 
-#### 下書きの作成・公開
+#### Creating or Publishing a Draft
 
-下書きを作成するには、`createDraft` ミューテーションを利用します。これは下書きを作成するエントリの `id` を引数として必要とし、結果として下書きの ID を返します。
+You can use the `createDraft` mutation to save a new draft. It requires the `id` of the draft’s parent entry and returns the ID of the newly-saved draft.
 
-下書きを公開するには、`publishDraft` ミューテーションを利用します。これは公開する下書きの `id` を引数として必要とし、結果としてそれが属するエントリの ID を返します。
+You can publishing a draft using the `publishDraft` mutation, which requires the `id` of the draft to be published and returns the ID of the updated parent entry.
 
-#### エントリの削除
+#### Deleting an Entry
 
-エントリを削除するには、`deleteEntry` ミューテーションを利用します。これは削除されるエントリの `id` が必要です。結果として操作が成功したかどうかを示すブーリアン値を返します。
+You can delete an entry using the `deleteEntry` mutation, which requires the `id` of the entry to be deleted. It returns a boolean value indicating whether the operation was successful.
 
-### アセットのミューテート
+### Mutating Assets
 
-#### アセットの保存
+#### Saving an Asset
 
-アセットを作成または更新するには、`save_<volumeHandle>_Asset` 形式の名前を持つ、ボリューム固有のミューテーションを利用します。
+To create or update an [asset](assets.md), use the volume-specific mutation which will have a name in the form of `save_<volumeHandle>_Asset`:
 
 <!-- BEGIN ASSET MUTATION ARGS -->
 
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `ID` | エレメントの ID をセットします。
-| `uid`| `String` | エレメントの UID をセットします。
-| `title`| `String` | エレメントのタイトル。
-| `enabled`| `Boolean` | エレメントを有効にするかどうか。
-| `_file`| `FileInput` | このアセットに利用するファイル。
-| `newFolderId`| `ID` | このアセットの新しいフォルダの ID。
-| `...`|  | フィールドレイアウトに応じた、より多くの引数。
+| Argument      | Type        | Description                                               |
+| ------------- | ----------- | --------------------------------------------------------- |
+| `id`          | `ID`        | Set the element’s ID.                                     |
+| `uid`         | `String`    | Set the element’s UID.                                    |
+| `title`       | `String`    | The title of the element.                                 |
+| `enabled`     | `Boolean`   | Whether the element should be enabled.                    |
+| `_file`       | `FileInput` | The file to use for this asset                            |
+| `newFolderId` | `ID`        | ID of the new folder for this asset                       |
+| `...`         |             | More arguments depending on the field layout for the type |
 
 <!-- END ASSET MUTATION ARGS -->
 
-#### アセットの削除
+#### Deleting an Asset
 
-アセットを削除するには、`deleteAsset` ミューテーションを利用します。これは削除されるアセットの `id` が必要です。結果として操作が成功したかどうかを示すブーリアン値を返します。
+You can delete an asset using the `deleteAsset` mutation, which requires the `id` of the asset to be deleted. It returns a boolean value indicating whether the operation was successful.
 
-### タグのミューテート
+### Mutating Tags
 
-#### タグの保存
+#### Saving a Tag
 
-タグを作成または更新するには、`save_<tagGroupHandle>_Tag` 形式の名前を持つ、タググループ固有のミューテーションを利用します。
+To create or update a [tag](tags.md), use the tag group-specific mutation which will have a name in the form of `save_<tagGroupHandle>_Tag`:
 
 <!-- BEGIN TAG MUTATION ARGS -->
 
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `ID` | エレメントの ID をセットします。
-| `uid`| `String` | エレメントの UID をセットします。
-| `title`| `String` | エレメントのタイトル。
-| `enabled`| `Boolean` | エレメントを有効にするかどうか。
-| `...`|  | フィールドレイアウトに応じた、より多くの引数。
+| Argument  | Type      | Description                                               |
+| --------- | --------- | --------------------------------------------------------- |
+| `id`      | `ID`      | Set the element’s ID.                                     |
+| `uid`     | `String`  | Set the element’s UID.                                    |
+| `title`   | `String`  | The title of the element.                                 |
+| `enabled` | `Boolean` | Whether the element should be enabled.                    |
+| `...`     |           | More arguments depending on the field layout for the type |
 
 <!-- END TAG MUTATION ARGS -->
 
-#### タグの削除
+#### Deleting a Tag
 
-タグを削除するには、`deleteTag` ミューテーションを利用します。これは削除されるタグの `id` が必要です。結果として操作が成功したかどうかを示すブーリアン値を返します。
+To delete a tag, use the `deleteTag` mutation which requires the `id` of the tag to be deleted. It returns a boolean value indicating whether the operation was successful.
 
-### カテゴリのミューテート
+### Mutating Categories
 
-#### カテゴリの保存
+#### Saving a Category
 
-カテゴリを作成または更新するには`save_<categoryGroupHandle>_Tag` 形式の名前を持つ、カテゴリグループ固有のミューテーションを利用します。
+To create or update a [category](categories.md), use the category group-specific mutation which will have a name in the form of `save_<categoryGroupHandle>_Tag`.
 
 <!-- BEGIN CATEGORY MUTATION ARGS -->
 
-| 引数 | タイプ | 説明
-| - | - | -
-| `id`| `ID` | エレメントの ID をセットします。
-| `uid`| `String` | エレメントの UID をセットします。
-| `title`| `String` | エレメントのタイトル。
-| `enabled`| `Boolean` | エレメントを有効にするかどうか。
-| `...`|  | フィールドレイアウトに応じた、より多くの引数。
+| Argument  | Type      | Description                                               |
+| --------- | --------- | --------------------------------------------------------- |
+| `id`      | `ID`      | Set the element’s ID.                                     |
+| `uid`     | `String`  | Set the element’s UID.                                    |
+| `title`   | `String`  | The title of the element.                                 |
+| `enabled` | `Boolean` | Whether the element should be enabled.                    |
+| `...`     |           | More arguments depending on the field layout for the type |
 
 <!-- END CATEGORY MUTATION ARGS -->
 
-#### カテゴリの削除
+#### Deleting a Category
 
-カテゴリを削除するには、`deleteCategory` ミューテーションを利用します。これは削除されるカテゴリの `id` が必要です。結果として操作が成功したかどうかを示すブーリアン値を返します。
+To delete a category, use the `deleteCategory` mutation which requires the `id` of the category to be deleted. It returns a boolean value indicating whether the operation was successful.
 
-### 構造データのミューテート
+### Mutating Structure Data
 
-ストラクチャーセクションに属するエントリやカテゴリは、構造の一部です。構造内のそれらの場所を操作するには、適切なミューテーションを利用してエレメントを保存し、次の引数を利用します。
+Structure section entries and categories exist with explicit order and nesting relationships. To manipulate their place in the structure, save the elements using the appropriate mutations and use the following arguments:
 
 <!-- BEGIN STRUCTURE MUTATION ARGS -->
 
-| 引数 | タイプ | 説明
-| - | - | -
-| `prependTo`| `ID` | 先頭に追加するエレメントの ID。
-| `appendTo`| `ID` | 最後に追加するエレメントの ID。
-| `prependToRoot`| `Boolean` | この要素をルートの先頭に追加するかどうか。
-| `appendToRoot`| `Boolean` | この要素をルートの最後に追加するかどうか。
-| `insertBefore`| `ID` | このエレメントが前に挿入される、エレメントの ID。
-| `insertAfter`| `ID` | このエレメントが後に挿入される、エレメントの ID。
+| Argument        | Type      | Description                                                   |
+| --------------- | --------- | ------------------------------------------------------------- |
+| `prependTo`     | `ID`      | The ID of the element to prepend to.                          |
+| `appendTo`      | `ID`      | The ID of the element to append to.                           |
+| `prependToRoot` | `Boolean` | Whether to prepend this element to the root.                  |
+| `appendToRoot`  | `Boolean` | Whether to append this element to the root.                   |
+| `insertBefore`  | `ID`      | The ID of the element this element should be inserted before. |
+| `insertAfter`   | `ID`      | The ID of the element this element should be inserted after.  |
 
 <!-- END STRUCTURE MUTATION ARGS -->
 
-### グローバル設定のミューテート
+### Mutating Global Sets
 
-グローバル設定を更新するには、`save_<globalSetHandle>_GlobalSet` 形式の名前を持つ、適切なミューテーションを利用します。
+To update a global set use the appropriate mutations which will have the name in the form of `save_<globalSetHandle>_GlobalSet`.
 
-利用可能な引数は、グローバル設定のカスタムフィールドだけです。
+The only available arguments are custom fields on the global set.
 
-### ユーザーのミューテート
+### Mutating Users
 
-Craft ネイティブの GraphQL API では、現在のところユーザーをミューテートできません。
+It’s currently not possible to mutate users with Craft’s GraphQL API.
