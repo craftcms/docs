@@ -1,56 +1,61 @@
----
-keywords: multi multisite multilingual translation
----
-
-# サイトとローカライゼーション
-
+- - -
 Craft 3では、1つインストールするだけで複数のウェブサイトをホストできます。
+- - -
+
+# サイト
 
 ドメインが異なったり、異なるテンプレートセットを使用したり、エントリコンテンツの異なるバージョンを持っている、1つ以上のサイトを定義できます。
 
-Craft のマルチサイト機能は、同じパブリッシングチームを持つサイトに向いています。サイトに含めたいセクションだけを有効化できる能力により、エントリレベルでマルチサイトのコンテンツを管理します。
+You can define one or more sites at different domains, using a different set of templates, and different versions of entry content.
+
+Craft のマルチサイト機能は、同じパブリッシングチームを持つサイトに向いています。 サイトに含めたいセクションだけを有効化できる能力により、エントリレベルでマルチサイトのコンテンツを管理します。
 
 ## サイトの作成
 
-Craft のインストールは、1つのデフォルトサイトからはじまります。サイト名はインストール時に定義され、ハンドルは `default` となります。
+Craft のインストールは、1つのデフォルトサイトからはじまります。 サイト名はインストール時に定義され、ハンドルは `default` となります。
 
-サイトを追加するには、「設定 > サイト」を使用します。
+You add additional sites using the Sites settings in **Settings** → **Sites**.
 
-それぞれのサイトは、次の属性を持っています。
+サイトグループでは、言語や種類などの共通点によってサイトをひとまとめに整理できます。
 
-* グループ
-* 名前
-* ハンドル
-* 言語
-* これはプライマリサイトですか？
-* ベース URL
+- グループ
+- 名前
+- ハンドル
+- 言語
+- これはプライマリサイトですか？
+- ベース URL
 
 
 ### サイトグループ
 
-サイトグループでは、言語や種類などの共通点によってサイトをひとまとめに整理できます。
-
 Craft は（デフォルトサイトの名前を付けた）最初のサイトグループを作成し、そのグループにデフォルトサイトを割り当てます。
 
-フィールドグループに似ていて、サイトグループは整理するためだけにあります。
+Craft creates the first Site Group for you, named after the default site, and assigns the default site to that group.
 
 現在のサイトグループの情報には、次のようにアクセスできます。
 
+You can access the current site’s group information using `currentSite.group`:
+
 ```twig
-Site ID:            {{ currentSite.id }}
-Site Handle:        {{ currentSite.handle }}
-Site Name:          {{ currentSite.name }}
-Site Language:      {{ currentSite.language }}
-Is Primary Site?:   {{ currentSite.primary }}
-Base URL:           {{ currentSite.baseUrl }}
+{# @var currentSite craft\models\Site #}
+Site ID:          {{ currentSite.id }}
+Site Handle:      {{ currentSite.handle }}
+Site Name:        {{ currentSite.name }}
+Site Language:    {{ currentSite.language }}
+Is Primary Site?: {{ currentSite.primary }}
+Base URL:         {{ currentSite.baseUrl }}
+
+{# @var siteGroup craft\models\SiteGroup #}
+{% set siteGroup = currentSite.group %}
+Site Group Name:  {{ siteGroup.name }}
 ```
 
 
 ### 言語
 
-サイトの言語を選択すると、日付、時間、および、数字の書式と、翻訳の静的メッセージで使用するための言語を Craft に伝えます。
+Choosing the language for the site tells Craft the language to use when formatting dates, times, and numbers, and translating static messages.
 
-テンプレート内では、`craft.app.language` 経由で言語設定にアクセスすることもできます。これを条件文で使えます。
+テンプレート内では、`craft.app.language` 経由で言語設定にアクセスすることもできます。 これを条件文で使えます。
 
 ```twig
 {% if craft.app.language == 'de' %}
@@ -58,117 +63,118 @@ Base URL:           {{ currentSite.baseUrl }}
 {% endif %}
 ```
 
-あるいは、言語ごとの固有なテンプレートを自動的に含む方法もあります。
+この例では、読み込まれるテンプレート名は `_share/footer-de` になります。
 
 ```twig
 {% include '_share/footer-' ~ craft.app.language %}
 ```
 
-この例では、読み込まれるテンプレート名は `_share/footer-de` になります。
+where your template name would be, for example, `_share/footer-de`.
 
 
 ### プライマリサイト
 
-Craft はデフォルトサイトをプライマリサイトとしてセットします。すなわち、どのサイトをロードするか決定できない場合に Craft がフロントエンドのデフォルトとしてロードします。1つしかサイトがない場合、プライマリサイトを無効にできません。
+Craft はデフォルトサイトをプライマリサイトとしてセットします。 すなわち、どのサイトをロードするか決定できない場合に Craft がフロントエンドのデフォルトとしてロードします。 1つしかサイトがない場合、プライマリサイトを無効にできません。
 
-追加のサイトを作成すると、プライマリサイトを変更できます。Craft は現在のプライマリサイトを自動的に切り替えます。
+追加のサイトを作成すると、プライマリサイトを変更できます。 Craft は現在のプライマリサイトを自動的に切り替えます。
 
 ### サイト URL
 
-すべてのサイトはベース URL を持っていて、Craft がエントリや他のサイトコンテンツの動的なリンクを生成する際に出発点として使用します。
-
 マルチサイトは `https://craftcms.com/` や `https://craftcms.com/de/` のように同じホスト名を共有したり、`https://craftcms.com/` や `https://de.craftcms.com/` のように異なるホスト名を持つこともできます。
 
-異なるホスト名でサイトを作成したい場合、それに対するトラフィックを処理するようサーバーを設定しなければなりません。ホスト名は現在のサイトと同じウェブルート（`web/`）を指すことも、独自の別のウェブルートにすることもできます。後者の場合、`.htaccess`、および、`index.php` ファイルを新しいウェブルートへ確実にコピーしてください。
+Multiple sites can share the same host name, such as `https://craftcms.com/` and `https://craftcms.com/de/`, or they can have different host names, such as `https://craftcms.com/` and `https://de.craftcms.com/`.
+
+異なるホスト名でサイトを作成したい場合、それに対するトラフィックを処理するようサーバーを設定しなければなりません。 ホスト名は現在のサイトと同じウェブルート（`web/`）を指すことも、独自の別のウェブルートにすることもできます。 後者の場合、`.htaccess`、および、`index.php` ファイルを新しいウェブルートへ確実にコピーしてください。
 
 ::: tip
-`https://site-a.com` や `https://site-b.com` のような異なるルートドメインを使用するマルチサイトを持つ場合、Craft の [license enforcements works](https://craftcms.com/support/license-enforcement) の仕組みによって、_すべて_ のサイトのためにアクセスする Craft コントロールパネルのドメインをその中の1つから選択できます。
+`https://site-a.com` と `https://site-b.com` のような異なるルートドメインを使用するマルチサイトを持つ場合、Craft の [license enforcements works](https://craftcms.com/support/license-enforcement) の仕組みによって、_すべて_ のサイトのためにアクセスする Craft コントロールパネルのドメインをその中の1つから選択することができます。
 :::
 
 ::: warning
-サイトのベース URL を定義する場合、`@web` エイリアスを使用しないでください。それは[キャッシュポイズニング](https://www.owasp.org/index.php/Cache_Poisoning)の脆弱性をもたらすことができ、リクエストされたサイトを Craft が確実に判断することができなくなります。
+Careful using the `@web` alias to define your sites’ Base URLs.  
+You should explicitly override the alias to avoid introducing a [cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) vulnerability, and to make sure Craft can reliably determine which site is being requested. See [Aliases](config/#aliases) for an example.
 :::
 
 ## すべての有効サイトにエントリを広げる
 
-それぞれのチャンネルセクションの設定には、すべてのサイトにエントリを広げるためのオプションがあります。これはデフォルトで有効になっていて、シングルやストラクチャーセクションでは、必ず有効な状態となります。
-
-有効にすると、Craft は送信されたコンテンツを利用して、そのセクションで有効になっているそれぞれのサイトに新しいエントリを作成します。
+それぞれのチャンネルセクションの設定には、すべてのサイトにエントリを広げるためのオプションがあります。 This is enabled by default, and is the only option for Single sections.
 
 セクションのコンテンツをサイトごとに分離したい場合、そのセクションにあるこのオプションを無効にします。
 
-## 新しいサイトの設定
+If you would like the section's content to be separate then disable this option for that section.
 
-これは、Craft で新しいサイトをセットアップするステップを段階的に説明するショートガイドです。このガイドは、すでに Craft がインストールされていて、デフォルトのセットアップや設定が済んでいることを前提としています。
+## ガイド：新しいサイトの設定
+
+これは、Craft で新しいサイトをセットアップするステップを段階的に説明するショートガイドです。 このガイドは、すでに Craft がインストールされていて、デフォルトのセットアップや設定が済んでいることを前提としています。
 
 ### ステップ 1：設定でサイトを作成
 
-最初のステップは、インストール済みの Craft の設定で新しいサイトを作成することです。
+新しいサイト向けに、テンプレートディレクトリとテンプレートを作成します。
 
-1. 「設定 > サイト」に移動し、「新しいサイト」ボタンをクリックします。
-2. ドロップダウンメニューからサイトが所属するグループを選択します。グループの選択により、サイトの機能に影響することはありません。
-3. 名前を付けてください。Craft はコントロールパネルのサイト名を利用し、`{{ siteName }}` を使ってテンプレート内に表示することもできます。
-4. サイト名をベースにして、Craft はサイトのハンドルを生成します。あなたが望むなら、ハンドルを編集できます。テンプレート内でこのサイトを参照するために、サイトハンドルを利用します。
-5. サイトの言語を選択してください。（言語の使い方の詳細は、上記を参照してください）
-6. このサイトをプライマリサイトにする場合は、「これはプライマリサイトですか？」をオンにします。これで、有効になります。
-7. 「このサイトには独自の基本 URL があります」のチェックボックスをオンにし、ベース URL を入力します。この例では `https://beta.craftcms.com` になります。
+1. Go to **Settings** → **Sites** and choose **New Site**.
+2. Use the dropdown menu to choose the group your site should belong to. The group selection won’t have any impact on your site’s functionality.
+3. 名前を付けてください。 Craft はコントロールパネルのサイト名を利用し、`{{ siteName }}` を使ってテンプレート内に表示することもできます。
+4. サイト名をベースにして、Craft はサイトのハンドルを生成します。 You can edit the Handle if you’d like. テンプレート内でこのサイトを参照するために、サイトハンドルを利用します。
+5. サイトの言語を選択してください。 （言語の使い方の詳細は、上記を参照してください）
+6. If this site should be the Primary Site, toggle **Is Primary Site?** to enable it.
+7. Check the box for **This site has its own base URL** and put in the Base URL. For our example it’ll be `https://beta.craftcms.com`.
 8. 新しいサイトを保存します。
 
 ### ステップ 2：テンプレートディレクトリの作成
 
-新しいサイト向けに、テンプレートディレクトリとテンプレートを作成します。
+Create the template directories and templates for your new site.
 
-サイトハンドルを名前に付けたテンプレートディレクトリ（例： `templates/default` と `templates/beta`）を持たせることをオススメします。それぞれのサイトのテンプレートディレクトリに、サイト固有のテンプレートを保管します。
+サイトハンドルを名前に付けたテンプレートディレクトリ（例： `templates/default` と `templates/beta`）を持たせることをオススメします。 それぞれのサイトのテンプレートディレクトリに、サイト固有のテンプレートを保管します。
 
-### ステップ 3：セクションのアップデート
+### ステップ 3：サイトのセクションとフィールドのアップデート
 
 1. 新しいサイトで有効にしたいセクションに移動し、「サイト設定」テーブルを利用してサイトを有効にします。
-2. 各セクションの新しいサイト向けに、エントリ URI 形式、テンプレート、および、デフォルトのステータスを定義します。
-3. すべての有効サイトにエントリを広げるかどうかを選択します。チェックを入れると、そのセクションのエントリはセクションが有効になっているすべてサイトで保存されます。チェックされていない場合、エントリは作成元のサイトのみに保存されます。
+2. 各セクションの新しいサイト向けに、エントリー URI 形式、テンプレート、および、デフォルトのステータスを定義します。
+3. すべての有効サイトにエントリを広げるかどうかを選択します。 チェックした場合、Craft はシステム内のすべてのサイトに新しいエントリを作成します。 このオプションがチェックされていない場合、Craft は現在選択されているサイトのみに新しエントリを保存します。
 
 ### ステップ 4：フィールドの翻訳方法の定義
 
-デフォルトでは、カスタムフィールドはすべてのサイトで同じ値を保存するように設定されています。サイトごとにユニークな値を持つフィールドの場合、[翻訳方法](fields.md#translation-methods)設定を編集する必要があります。
+デフォルトでは、カスタムフィールドはサイト単位で値を保存します。 本文フィールドがある場合、それぞれのサイトはそのフィールドのコンテンツだけを保存できます。
 
 ### ステップ 5：設定のテスト
 
-新規または既存のエントリを利用し、セクション、フィールド、および、翻訳方法の設定が期待通りに機能しているかテストします。
+翻訳方法をセットするには、翻訳したいそれぞれのフィールドに移動し、翻訳方法で適切なオプションを選択します。
 
 ### ステップ 6：アセットボリューム設定の確認
 
-ローカルのアセットボリュームがある場合、それらのアセットがそれぞれのサイトから利用可能であることを確認する必要があります。
+If you have any local asset volumes, you will need to make sure those assets are available from each of your sites.
 
-* 「ファイルシステムのパス」設定は、相対的（`uploads/images/`）であるべきです
-* URL の設定は、 相対的（`/images`）であるべきです
+- 「ファイルシステムのパス」設定は、相対的（`uploads/images/`）であるべきです
+- URL の設定は、 相対的（`/images`）であるべきです
 
 ### ステップ 7：ウェブサーバーと DNS の設定
 
-1. ドメイン（例： `beta.craftcms.com`）が `web` ディレクトリを参照するよう、ウェブサーバーを設定します。Craft はブラウザがどのサイトを要求しているかを自動的に検出します。
+1. ドメイン（例： `beta.craftcms.com`）が `web` ディレクトリを参照するよう、ウェブサーバーを設定します。 Craft はブラウザがどのサイトを要求しているかを自動的に検出します。
 2. ドメインがウェブサーバーを指すよう、DNS レコードをアップデートします。
 
-## ローカライズされたサイトの設定
+## Setting Up a Localized Site
 
-これは、Craft のマルチサイト機能と翻訳サポートを利用して、一般的に必要となるすべてのステップを段階的に説明するガイドです。
+This guide will walk you through all of the steps that are typically involved in setting up a localized site using Craft’s multi-site feature and translation support.
 
-### ステップ 1：サイトと言語の定義
+### Step 1: Defining Your Sites and Languages
 
-ローカライズされたサイトを作成する最初のステップは、サポートが必要な言語を決定することです。その後、[Craft のマルチサイトをセットアップする際のガイド](sites.md)を利用して、サポートされる言語ごとの新しいサイトを Craft で作成します。
+The first step to creating localized site is to decide the languages you need to support. After that, create a new Site in Craft for each supported language.
 
-### ステップ 2：セクションのアップデート
+### Step 2: Update Your Sections
 
-言語向けに新しいサイトを作成したら、それぞれのセクションで新しいサイトを有効にします。「設定 > セクション」で、ローカライズしたいサイトを含むセクションの設定に移動し、サイト設定でサイトを有効にします。そのサイトをどのような URL 構造にしたいかを反映するため、（チャンネルとストラクチャーセクション向けに）エントリ URI 形式、または（シングルセクション向けに）URI を記入します。
+After creating a new site for a language, enable the new site in each Section. In **Settings** → **Sections**, go into each section settings you want included in the localized site and enable the site in the Site Settings. Fill out the Entry URI Format (for Channel and Structure sections) or URI (for Single sections) to reflect how you want the URIs structured for that site.
 
-### ステップ 3：翻訳可能なフィールドの定義
+### Step 3: Define Your Translatable Fields
 
-「設定 > フィールド」で、翻訳可能にするフィールドを選択します。翻訳方法で「各言語に対して翻訳する」を選択します。
+In **Settings** → **Fields**, choose the fields you want to have translatable. Under **Translation Method**, choose **Translate for each language**.
 
-Craft は、それぞれのエントリにあるこのフィールドのコンテンツを言語単位で更新することを許可します。
+Craft will allow you to update this field’s content in each entry on a per-language basis.
 
-### ステップ 4：テンプレートのアップデート
+### Step 4: Update Your Templates
 
-特定のサイトからだけ配信したいテンプレートがある場合、テンプレートフォルダに新しいサブフォルダを作成し、サイトのハンドルをフォルダ名にして、その中に手テンプレートを配置します。
+If you have any templates that you only want to serve from a specific site, you can create a new subfolder in your templates folder, named after your site's handle, and place the templates in there.
 
-例えば、ドイツ語のサイトのホームページを独自のテンプレートにする場合、テンプレートフォルダを次のように設定します。
+For example, if you wanted to give your German site its own homepage template, you might set your templates folder up like this:
 
 ```treeview
 templates/
@@ -177,7 +183,7 @@ templates/
     └── index.twig (German homepage template)
 ```
 
-`craft.app.language` を利用して、言語に依存するテンプレートの特定パーツを切り替えます。
+Use `craft.app.language` to toggle specific parts of your templates, depending on the language:
 
 ```twig
 {% if craft.app.language == 'de' %}
@@ -185,34 +191,34 @@ templates/
 {% endif %}
 ```
 
-テンプレート全体の文字列に Craft の[静的翻訳](#static-message-translations)サポートを利用することもできます。
+You can also take advantage of Craft’s [static translation](#static-message-translations) support for strings throughout your templates.
 
 ```twig
 {{ "Welcome!"|t }}
 ```
 
-### ステップ 5：投稿者にサイトへのアクセス権を付与
+### Step 5: Give your authors access to the sites
 
-インストールされた Craft にサイトを追加すると、Craft はユーザーがコンテンツの編集を試みるたびに、サイトのパーミッションをチェックしはじめます。デフォルトでは、ユーザーやグループはどのサイトにもアクセスできないため、それらを割り当てる必要があります。
+As soon as you add an additional site to your Craft installation, Craft will start checking for site permissions whenever users try to edit content. By default, no users or groups have access to any site, so you need to assign them.
 
-ユーザーグループやユーザーアカウントを編集するとき、すべてのサイトのリストに新しいサイトの「権利」セクションが表示されます。権限を与えたいものを割り当ててください。
+When you edit a user group or a user account, you will find a new Sites permissions section, which lists all of your sites. Assign them where appropriate.
 
 
-## 静的メッセージの翻訳
+## Static Message Translations
 
-ほとんどのウェブサイトやアプリには、テンプレートや PHP ファイルにハードコードされたいくつかの UI メッセージを持ちます。CMS のコンテンツによって動的に定義されていないため、それらは「静的メッセージ」と呼ばれます。
+Most websites and apps will have some UI messages that are hard-coded into the templates or PHP files. These are called “static messages”, because they aren’t being dynamically defined by content in the CMS.
 
-多言語のサイトやアプリを構築している場合、CMS 主導のコンテンツのようにそれらのメッセージも翻訳可能にする必要があるでしょう。
+If you’re building a multilingual site or app, then these messages will need to be translatable just like your CMS-driven content.
 
-そのため、Craft は Yii の[メッセージ翻訳](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n#message-translation)機能を採用し、 特別な翻訳カテゴリを事前に定義しています。
+To do that, Craft employs Yii’s [Message Translations](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n#message-translation) feature, and pre-defines special translation categories:
 
-- `site` はプロジェクトに属するメッセージに使用されます。
-- `app` はコントロールパネルのメッセージに使用されます。
-- それぞれのプラグインは、プラグインのハンドルに基づいて独自のカテゴリも取得します。
+- `site` is used for messages that belong to the project.
+- `app` is used for Craft control panel messages.
+- Each plugin gets its own category as well, based on the plugin’s handle.
 
-### メッセージの準備
+### Prep Your Messages
 
-最初のステップは、すべての静的メッセージをトランスレータを通して実行することです。テンプレートを操作している場合、[translate](dev/filters.md#translate-or-t) フィルタ（`|t`）を使用します。PHP コードを操作している場合、[Craft::t()](yii2:yii\BaseYii::t()) を使用します。
+The first step is to run all of your static messages through the translator. If you’re working on a template, use the [translate](dev/filters.md#translate-or-t) filter (`|t`). If you’re working in PHP code, use [Craft::t()](yii2:yii\BaseYii::t()).
 
 ::: code
 ```twig
@@ -231,13 +237,13 @@ echo Craft::t('site', 'Contact us');
 ```
 :::
 
-### 翻訳の提供
+### Provide the Translations
 
-翻訳のためのメッセージを準備したら、実際の翻訳を提供する必要があります。
+Once you’ve prepped a message for translations, you need to supply the actual translation.
 
-そのために、プロジェクトのベースディレクトリに `translations/` と呼ばれる新しいフォルダを作成し、その中に対象言語の ID を名前とした新しいフォルダを作成します。その中に、メッセージを作成したい翻訳カテゴリの名前をつけたファイルを作成します（プロジェクトメッセージのための `site.php`、Craft のコントロールパネルのメッセージを上書きするための `app.php`、または、プラグインのメッセージを上書きするための `<plugin-handle>.php`）。
+To do that, create a new folder in your project’s base directory called `translations/`, and within that, create a new folder named after the target language’s ID. Within that, create a file named after the translation category you want to create massages for (`site.php` for project messages, `app.php` to overwrite Craft's control panel messages, or `<plugin-handle>.php` to overwrite a plugin’s messages).
 
-例えば、プロジェクトのメッセージをドイツ語に翻訳する場合、プロジェクトのディレクトリ構造は次のようになります。
+For example, if you want to translate your project’s messages into German, this is what your project’s directory structure should look like:
 
 ```treeview
 my-project.test/
@@ -248,7 +254,7 @@ my-project.test/
         └── site.php
 ```
 
-次に、テキストエディタで `site.php` を開き、ソースメッセージを翻訳メッセージにマップする配列を返すようにします。
+Now open `site.php` in a text editor, and have it return an array that maps the source messages to their translated messages.
 
 ```php
 <?php
@@ -258,11 +264,11 @@ return [
 ];
 ```
 
-これで、ドイツ語サイトのメッセージ翻訳を処理する際、「Contact us」が「Kontaktiere uns」に置換されます。
+Now, when Craft is processing the message translation for a German site, “Contact us” will be replaced with  “Kontaktiere uns”.
 
-#### メッセージパラメータ
+#### Message Parameters
 
-静的メッセージは[プレースホルダ値](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n#message-parameters)を持つことができます。例えば、
+Static messages can have [placeholder values](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n#message-parameters). For example:
 
 ```php
 <?php
@@ -272,7 +278,7 @@ return [
 ];
 ```
 
-メッセージの翻訳時にプレースホルダ値を動的な値に置き換えるため、[translate](dev/filters.md#translate-or-t) フィルタや [Craft::t()](yii2:yii\BaseYii::t()) を呼び出す際、引数 `params` を渡します。
+To replace the placeholder values with dynamic values when translating the message, pass the `params` argument when using the [translate](dev/filters.md#translate-or-t) filter or calling [Craft::t()](yii2:yii\BaseYii::t()):
 
 ::: code
 ```twig
