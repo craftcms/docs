@@ -181,7 +181,7 @@ There are also some cases where it’s _not_ a good idea to use them:
     ```twig
     {# Bad: #}
 
-    {% extends "_layout" %}
+    {% extends "_layout.twig" %}
     {% cache %}
         {% block "content" %}
             ...
@@ -190,7 +190,7 @@ There are also some cases where it’s _not_ a good idea to use them:
 
     {# Good: #}
 
-    {% extends "_layout" %}
+    {% extends "_layout.twig" %}
     {% block "content" %}
         {% cache %}
             ...

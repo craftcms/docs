@@ -66,10 +66,10 @@ In your templates, you can also access the language setting via `craft.app.langu
 Or as a way to automatically include the proper template for each language:
 
 ```twig
-{% include '_share/footer-' ~ craft.app.language %}
+{% include '_share/footer-' ~ craft.app.language ~ '.twig' %}
 ```
 
-where your template name would be, for example, `_share/footer-de`.
+where your template name would be, for example, `_share/footer-de.twig`.
 
 
 ### Primary Site
