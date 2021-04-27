@@ -21,6 +21,7 @@ The following [functions](https://twig.symfony.com/doc/2.x/templates.html#functi
 | [csrfInput](#csrfinput)                                                                        | Returns a hidden CSRF token input.                                                                     |
 | [cpUrl](#cpurl)                                                                                | Generates a control panel URL.                                                                         |
 | [cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html)                                 | Cycles on an array of values.                                                                          |
+| [dataUrl](#dataurl)                                                                            | Outputs an asset or file as a base64-encoded data URL.                                                 |
 | [date](https://twig.symfony.com/doc/2.x/functions/date.html)                                   | Creates a date.                                                                                        |
 | [dump](https://twig.symfony.com/doc/2.x/functions/dump.html)                                   | Dumps information about a variable.                                                                    |
 | [endBody](#endbody)                                                                            | Outputs scripts and styles that were registered for the “end body” position.                           |
@@ -28,14 +29,15 @@ The following [functions](https://twig.symfony.com/doc/2.x/templates.html#functi
 | [floor](#floor)                                                                                | Rounds a number down.                                                                                  |
 | [getenv](#getenv)                                                                              | Returns the value of an environment variable.                                                          |
 | [gql](#gql)                                                                                    | Executes a GraphQL query against the full schema.                                                      |
-| [parseEnv](#parseenv)                                                                          | Parses a string as an environment variable or alias.                                                   |
 | [head](#head)                                                                                  | Outputs scripts and styles that were registered for the “head” position.                               |
 | [hiddenInput](#hiddeninput)                                                                    | Outputs a hidden input.                                                                                |
 | [include](https://twig.symfony.com/doc/2.x/functions/include.html)                             | Returns the rendered content of a template.                                                            |
 | [input](#input)                                                                                | Outputs an HTML input.                                                                                 |
 | [max](https://twig.symfony.com/doc/2.x/functions/max.html)                                     | Returns the biggest value in an array.                                                                 |
 | [min](https://twig.symfony.com/doc/2.x/functions/min.html)                                     | Returns the lowest value in an array.                                                                  |
+| [ol](#ol)                                                                                      | Outputs an array of items as an ordered list.                                                          |
 | [parent](https://twig.symfony.com/doc/2.x/functions/parent.html)                               | Returns the parent block’s output.                                                                     |
+| [parseEnv](#parseenv)                                                                          | Parses a string as an environment variable or alias.                                                   |
 | [plugin](#plugin)                                                                              | Returns a plugin instance by its handle.                                                               |
 | [random](https://twig.symfony.com/doc/2.x/functions/random.html)                               | Returns a random value.                                                                                |
 | [range](https://twig.symfony.com/doc/2.x/functions/range.html)                                 | Returns a list containing an arithmetic progression of integers.                                       |
@@ -48,6 +50,7 @@ The following [functions](https://twig.symfony.com/doc/2.x/templates.html#functi
 | [source](https://twig.symfony.com/doc/2.x/functions/source.html)                               | Returns the content of a template without rendering it.                                                |
 | [tag](#tag)                                                                                    | Outputs an HTML tag.                                                                                   |
 | [template_from_string](https://twig.symfony.com/doc/2.x/functions/template_from_string.html) | Loads a template from a string.                                                                        |
+| [ul](#ul)                                                                                      | Outputs an array of items as an unordered list.                                                        |
 | [url](#url)                                                                                    | Generates a URL.                                                                                       |
 
 ## `actionInput`
@@ -74,9 +77,9 @@ Returns a controller action URL, automatically accounting for relative vs. absol
 
 The `actionUrl()` function has the following arguments:
 
-* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+- **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+- **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
+- **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
 
 ## `alias`
 
@@ -230,9 +233,9 @@ Returns a control panel URL, automatically accounting for relative vs. absolute 
 
 The `cpUrl()` function has the following arguments:
 
-* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+- **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+- **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
+- **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
 
 ## `csrfInput`
 
@@ -249,6 +252,25 @@ You can optionally set additional attributes on the tag by passing an `options` 
     id: 'csrf-input'
 }) }}
 ```
+
+## `dataUrl`
+
+Outputs an asset or file as a base64-encoded [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). You can pass it an <craft3:craft\elements\Asset> object or a file path (optionally using an [alias](../config/#aliases)).
+
+```twig
+{# Asset object `myLogoAsset` #}
+<img src="{{ dataUrl(myLogoAsset) }}" />
+
+{# File path, optionally using an alias #}
+<img src="{{ dataUrl('@webroot/images/my-logo-asset.svg') }}" />
+
+{# Output: <img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMCIgdmd(...)" /> #}
+```
+
+The `dataUrl()` function has the following arguments:
+
+- **`file`** - The asset or path to a file to be encoded.
+- **`mimeType`** - Optional MIME type. If omitted, the file’s MIME type will be determined automatically.
 
 ## `endBody`
 
@@ -322,10 +344,6 @@ Executes a GraphQL query against the full schema.
 {% endfor %}
 ```
 
-## `parseEnv`
-
-Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
-
 ## `head`
 
 Outputs any scripts and styles that were registered for the “head” position. It should be placed right before your `</head>` tag.
@@ -388,6 +406,38 @@ This works identically to Twig’s core [`max`](https://twig.symfony.com/doc/2.x
 Returns the lowest value in an array.
 
 This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) function.
+
+## `ol`
+
+Outputs an array of items as an ordered list.
+
+```twig
+{% set titles = craft.entries()
+    .section('news')
+    .select('title')
+    .column() %}
+{{ ol(titles) }}
+{# Output:
+<ol>
+    <li>Shocking Foo</li>
+    <li>You Won’t Believe This Bar</li>
+    <li>Ten Baz You Can’t Live Without</li>
+</ol>
+#}
+```
+
+### Arguments
+
+The `ol()` function has the following arguments:
+
+- **`siteId`** – The ID of the site that the URL should point to. By default the current site will be used.
+- **`params`** – An attributes argument where each key+value will be set as attributes on the `<ol>`, with the exception of two special options:
+    - **`encode: false`** – Prevents the list items from being HTML-encoded.
+    - **`itemOptions: {...}`** – Tag attributes to be applied to each of the `<li>`s.
+
+## `parseEnv`
+
+Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
 
 ## `plugin`
 
@@ -479,10 +529,10 @@ Similar to [url()](#url-path-params-scheme-mustshowscriptname), except _only_ fo
 
 The `siteUrl()` function has the following arguments:
 
-* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
-* **`siteId`** – The ID of the site that the URL should point to. By default the current site will be used.
+- **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+- **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
+- **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+- **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
 
 ## `svg`
 
@@ -552,6 +602,10 @@ If `text` is included in the attributes argument, its value will be HTML-encoded
 
 If `html` is included in the attributes argument (and `text` isn’t), its value will be set as the inner HTML of the tag (without getting HTML-encoded).
 
+::: warning
+Be sure you trust any input you provide via `html` since it could be an XSS (cross-site scripting) attack vector. It’s safer to use `text` wherever possible.
+:::
+
 ```twig
 {{ tag('div', {
     html: 'Hello<br>world'
@@ -574,6 +628,34 @@ If an attribute is set to `true`, it will be added without a value.
 
 Any attribute set to `null` or `false` will be omitted.
 
+## `ul`
+
+Outputs an array of items as an unordered list.
+
+```twig
+{% set titles = craft.entries()
+    .section('news')
+    .select('title')
+    .column() %}
+{{ ul(titles) }}
+{# Output:
+<ul>
+    <li>Shocking Foo</li>
+    <li>You Won’t Believe This Bar</li>
+    <li>Ten Baz You Can’t Live Without</li>
+</ul>
+#}
+```
+
+### Arguments
+
+The `ul()` function has the following arguments:
+
+- **`items`** – An array of items to be wrapped in `<li>`s. These will be HTML-encoded by default.
+- **`params`** – An attributes argument where each key+value will be set as attributes on the `<ul>`, with the exception of two special options:
+    - **`encode: false`** – Prevents the list items from being HTML-encoded.
+    - **`itemOptions: {...}`** – Tag attributes to be applied to each of the `<li>`s.
+
 ## `url`
 
 Returns a URL.
@@ -586,10 +668,16 @@ Returns a URL.
 
 The `url()` function has the following arguments:
 
-* **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-* **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-* **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
-* **`mustShowScriptName`** – If this is set to `true`, then the URL returned will include “index.php”, disregarding the <config3:omitScriptNameInUrls> config setting. (This can be useful if the URL will be used by POST requests over Ajax, where the URL will not be shown in the browser’s address bar, and you want to avoid a possible collision with your site’s .htaccess file redirect.)
+- **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+- **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
+- **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+- **`mustShowScriptName`** – If this is set to `true`, then the URL returned will include “index.php”, disregarding the <config3:omitScriptNameInUrls> config setting. (This can be useful if the URL will be used by POST requests over Ajax, where the URL will not be shown in the browser’s address bar, and you want to avoid a possible collision with your site’s .htaccess file redirect.)
+
+Using the `url()` function has advantages over hard-coding URLs in your templates:
+
+- Generated URLs will encourage consistency by respecting settings like [addTrailingSlashesToUrls](config3:addTrailingSlashesToUrls).
+- Your site will be more portable, making it easier to do something like move to a new domain or subdomain.
+- If the page has a `token` URL parameter, that token will automatically get appended to generated URLs to maintain preview context navigating around the site.
 
 ::: tip
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
