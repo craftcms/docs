@@ -85,12 +85,6 @@
 - `Plugin Name` をプラグイン名にします。
 - [Craft License](https://craftcms.github.io/license/) を使用する計画の場合、`MIT` を `proprietary` にします（「プラグインストアでの配布」ページの[ライセンスの選択](plugin-store.md#choose-a-license)を参照してください）。
 
-[MIT](https://opensource.org/licenses/MIT) よりむしろ [Craft license](https://craftcms.github.io/license/) でプラグインをリリースしたい場合、`license` 値を `"proprietary"` に変更してください。
-
-::: tip
-Composer が厳密に要求しているわけではありませんが、プラグインを開発する際にいくつかのことが簡単に行えるよう `composer.json` へ明示的に`version` を設定することをお勧めします。 そして、アップデートし続けることを忘れないでください！
-:::
-
 In addition to `name` and `handle` (which are both required), there are a few other things you can include in that `extra` object:
 
 - `class` – [プラグインクラス](#the-plugin-class)名。 設定されていない場合、インストーラーはそれぞれの `autoload` パスのルートで `Plugin.php` ファイルを探します。
@@ -100,16 +94,15 @@ In addition to `name` and `handle` (which are both required), there are a few ot
 - `developerEmail` – サポートのメールアドレス。 設定されていない場合、`support.email` プロパティが使用されます。
 - `documentationUrl` – プラグインのドキュメントの URL。 設定されていない場合、`support.docs` プロパティが使用されます。
 
-&lt;?php namespace ns\prefix; class Plugin extends \craft\base\Plugin
-{ public function init()
-    { parent::init(); // Custom initialization code goes here...
+::: warning
+If you’re updating a Craft 2 plugin, make sure to remove the `composer/installers` dependency if it has one.
 :::
 
 ## プラグインクラス
 
 `src/Plugin.php` ファイルは、システム向けのプラグインのエントリポイントです。 すべてのリクエスト開始時に、インスタンスが作られます。 `init()` メソッドはイベントリスナーやそれ自体の初期化を必要とする他のステップを登録するのに最適な場所です。
 
-このテンプレートを `Plugin.php` ファイルの出発点として使用してください。
+Use this template as a starting point for your `Plugin.php` file:
 
 ```php
 <?php
@@ -132,9 +125,9 @@ Craft にプラグインを表示するには、Craft プロジェクトの Comp
 
 ### Path Repository
 
-During development, the easiest way to work on your plugin is with a [path repository][path], which will tell Composer to symlink your plugin into the `vendor/` folder right alongside other dependencies.
+このテンプレートを `Plugin.php` ファイルの出発点として使用してください。
 
-開発中にプラグインを動作させる最も簡単な方法は、他の依存関係と同様に `vendor/` フォルダへシンボリックリンクするよう Composer に伝える [path repository](https://getcomposer.org/doc/05-repositories.md#path) を利用することです。
+To set it up, open your Craft project’s `composer.json` file and make the following changes:
 
 - [minimum-stability](https://getcomposer.org/doc/04-schema.md#minimum-stability) を `"dev"` に設定します。
 - [prefer-stable](https://getcomposer.org/doc/04-schema.md#prefer-stable) を `true` に設定します。
@@ -154,7 +147,7 @@ During development, the easiest way to work on your plugin is with a [path repos
 ```
 
 ::: tip
-`url` 値にプラグインのソースディレクトリを絶対パスまたは相対パスで設定します。 （サンプルの `../my-plugin` は、プロジェクトフォルダーと並んでプラグインのフォルダが存在することを前提としています。 :::
+`url` 値にプラグインのソースディレクトリを絶対パスまたは相対パスで設定します。 （サンプルの `../my-plugin` は、プロジェクトフォルダーと並んでプラグインのフォルダが存在することを前提としています。
 :::
 
 ターミナル上で Craft プロジェクトへ移動し、Composer にプラグインの追加を伝えてください。 （`composer.json` ファイルでプラグインに付けたパッケージ名と同じものを使用してください。
@@ -203,12 +196,10 @@ composer require package/name
 
 ## プラグインアイコン
 
+The Settings → Plugins page in Craft’s Control Panel.
+
+![The Settings → Plugins page in Craft’s control panel.](../images/plugin-index.png)
+
 プラグインは「設定 > プラグイン」ページに表示されるアイコンを提供できます。
 
-![The Settings → Plugins page in Craft’s Control Panel.](../images/plugin-index.png)
-
-プラグインアイコンは、プラグインのソースディレクトリ（例：`src/`）のルートに `icon.svg` として保存された、正方形の SVG ファイルでなければいけません。
-
 プラグインが [コントロールパネルのセクション](cp-section.md) を持つ場合は、プラグインのソースディレクトリのルートに `icon-mask.svg` ファイルを保存することによって、グローバルナビゲーション項目にカスタムアイコンを付けることもできます。 このアイコンにはストロークを含めることができず、常に（アルファ透明度に関して）ソリッドカラーで表示されることに注意してください。
-
-[path]: https://getcomposer.org/doc/05-repositories.md#path
