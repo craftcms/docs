@@ -1,6 +1,6 @@
 # Adding Custom Containers
 
-Nitro does its best to give you 80 percent of what you need for local development. However, some Craft projects have to interact with non-common tools such as MongoDB, Elasticsearch, and etc. Installing and managing these tools can be a cumbersome and often error prone process. However, Nitro has built in support to make setting up these tools really simple with the [`container`](commands.md#container) command.
+Nitro does its best to give you 80 percent of what you need for local development. However, some Craft projects have to interact with non-common tools such as MongoDB, Elasticsearch, and etc. Installing and managing these tools can be a cumbersome and often error prone process. However, Nitro has built in support to make setting up these tools really simple with the `container` commands.
 
 ::: tip
 Nitro exposes common tools such as [Minio](services/minio.md) and [Mailhog](services/mailhog.md) as services with the [`enable`](commands.md#enable) command.
@@ -41,17 +41,16 @@ New container "elasticsearch.containers.nitro" added!
 Apply changes now [Y/n]? n
 ```
 
-`nitro container configure` performs the following steps:
+`nitro container new` performs the following steps:
 
 1. Prompts for an image name and searches the Docker Hub Registry for matching images.
 2. Prompts for the Docker tag to pull (in our example we wanted version `7.10.1` of Elasticsearch).
 3. Downloads the image from the Docker Hub Registry.
-4. Examines the image pulled and looks for exposed ports and volumes.
-5. Asks if you would like to expose each port it found from the images config *.
-6. Prompt to create a Docker Volume for each volume in the images config.
-7. Ask the user if we should create a file to store environment variables (stored at `~/.nitro/.<containername>`).
+4. Examines the image and looks for exposed ports and volumes.
+5. Asks if you’d like to expose each port it found from the image’s config.
+6. Asks if you’d like to create a Docker Volume for each volume in the image’s config.
+7. Asks if you’d like create a file to store environment variables (stored at `~/.nitro/.<containername>`).
 9. Prompts you to run [`nitro apply`](commands.md#apply) in order to update Nitro’s settings and your hosts file.
-Nitro will search the Docker Hub registry and find images that match the name you provided. After
 
 ::: tip
 Nitro will use the `portcheck` command to verify the port is available or find the next available.
@@ -59,7 +58,7 @@ Nitro will use the `portcheck` command to verify the port is available or find t
 
 ## Customizing Environment Variables for the Container
 
-Most Docker images ship with sane defaults, but you may still need to useenvironment variables to configure the container. If you entered yes to the `Create a file to store environment variables` prompt, you will have a file created at `~/.nitro/.<containername>`. To add an environment variable to your container, open the file and add a new line:
+Most Docker images ship with sane defaults, but you may still need to use environment variables to configure the container. If you entered yes to the **Create a file to store environment variables** prompt, you will have a file created at `~/.nitro/.<containername>`. To add an environment variable to your container, open the file and add a new line:
 
 ```env
 MY_CUSTOM_ENV=somevariable
