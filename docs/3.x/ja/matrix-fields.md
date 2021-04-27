@@ -7,56 +7,71 @@
 行列フィールドの設定は、次の通りです。
 
 - **構成** – ここでは、行列フィールドでどのようなブロックタイプが利用可能か、それらのブロックタイプがどのようなサブフィールドを持つ必要があるかを設定します。
-- **最大ブロック数** – フィールドに作成できるブロック数の上限。（デフォルトは無制限です）
+- **Min Blocks** – The minimum number of blocks that can be created within the field. (Default is no limit.)
+- **Max Blocks** – The maximum number of blocks that can be created within the field. (Default is no limit.)
 
 ## フィールド
 
-新しいエントリでは、行列フィールドにはボタンのグループが表示されます。フィールド設定で作成したブロックタイプごとに1つのボタンが表示されます。
+新しいエントリでは、行列フィールドにはボタンのグループが表示されます。 フィールド設定で作成したブロックタイプごとに1つのボタンが表示されます。
 
-それらのボタンの1つをクリックすると、新しいブロックが作成されます。ブロックタイプの名前はブロックのタイトルバーに表示され、それぞれのブロックタイプのフィールドにはブロックの本体が存在しているでしょう。
+それらのボタンの1つをクリックすると、新しいブロックが作成されます。 ブロックタイプの名前はブロックのタイトルバーに表示され、それぞれのブロックタイプのフィールドにはブロックの本体が存在しているでしょう。
 
-あなたは好きなだけ（または、最大ブロック数の設定で許可されている範囲内で）、行列フィールドへブロックを追加できます。
+You can add as many blocks to your Matrix field as you’d like—or at least as many as the field’s Min Blocks and Max Blocks settings allow.
 
 各ブロックは設定メニューを持ち、そのブロックに対して追加でできることを開示します。
 
-複数のブロックが選択されている場合、選択されたすべてのブロックに対して「折りたたむ / 展開する」「無効 / 有効」および「削除」オプションが適用されます。
+If multiple blocks are selected, the Collapse/Expand, Disable/Enable, and Delete options will apply to each of those selected.
 
-メニューオプションの「折りたたむ」 をクリックするか、ブロックのタイトルバーをダブルクリックすることで、行列ブロックを折りたたむことができます。ブロックが折りたたまれている場合、タイトルバーはコンテンツのプレビューを表示するため、それがどんなブロックかを識別できます。
+You can collapse Matrix blocks by choosing the **Collapse** menu option or by double-clicking on a block’s title bar. When a block is collapsed, its title bar will show a preview of its content so you can still identify which block it is.
 
-ブロックは、そのブロックのタイトルバーの最後にある「移動」アイコンをドラックして並び替えることもできます。複数のブロックが選択されている場合、選択されたすべてのブロックが一緒に移動します。
+ブロックは、そのブロックのタイトルバーの最後にある「移動」アイコンをドラックして並び替えることもできます。 If multiple blocks are selected, all the selected blocks will be going along for the ride.
 
-## テンプレート記法
+## Development
 
 ### 行列フィールドによるエレメントの照会
 
-行列フィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを利用して、行列フィールドのデータに基づいた結果をフィルタできます。
+行列フィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、行列フィールドのデータに基づいた結果をフィルタできます。
 
 利用可能な値には、次のものが含まれます。
 
-| 値 | 取得するエレメント |
-| -------------- | ------------------------------------ |
-| `':empty:'` | 行列ブロックを持たない。 |
+| 値              | 取得するエレメント          |
+| -------------- | ------------------ |
+| `':empty:'`    | 行列ブロックを持たない。       |
 | `':notempty:'` | 少なくとも1つの行列ブロックを持つ。 |
 
+::: code
 ```twig
 {# Fetch entries with a Matrix block #}
 {% set entries = craft.entries()
     .myFieldHandle(':notempty:')
     .all() %}
 ```
+```php
+// Fetch entries with a Matrix block
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle(':notempty:')
+    ->all();
+```
+:::
 
 ### 行列フィールドデータの操作
 
-テンプレート内で行列フィールドのエレメントを取得する場合、行列フィールドのハンドルを利用して、そのブロックにアクセスできます。
+If you have an element with a Matrix field in your template, you can access its blocks using your Matrix field’s handle:
 
+::: code
 ```twig
 {% set query = entry.myFieldHandle %}
 ```
+```php
+$query = $entry->myFieldHandle;
+```
+:::
 
-これは、所定のフィールドで利用可能なすべてのブロックを出力するよう準備された[行列ブロッククエリ](matrix-blocks.md#querying-matrix-blocks)を提供します。
+That will give you a [Matrix block query](matrix-blocks.md#querying-matrix-blocks), prepped to output all the enabled blocks for the given field.
 
-関連付けられたすべてのブロックをループするには、[all()](<craft3:craft\db\Query::all()>) を呼び出して、結果をループ処理します。
+To loop through all the blocks, call [all()](craft3:craft\db\Query::all()) and loop over the results:
 
+::: code
 ```twig
 {% set blocks = entry.myFieldHandle.all() %}
 {% if blocks|length %}
@@ -67,10 +82,19 @@
     </ul>
 {% endif %}
 ```
+```php
+$blocks = $entry->myFieldHandle->all();
+if (count($blocks)) {
+    foreach ($blocks as $block) {
+        // ...
+    }
+}
+```
+:::
 
-for ループ内に記述されたすべてのコードは、 フィールドに含まれるそれぞれの行列ブロックに対して繰り返されます。定義済みの変数 `block` にセットされる現在のブロックは、<craft3:craft\elements\MatrixBlock> モデルになります。
+All the code you put within the for-loop will be repeated for each Matrix block in the field. The current block will get set to that `block` variable we’ve defined, and it will be a <craft3:craft\elements\MatrixBlock> model.
 
-次に、4つのブロックタイプ（見出し、テキスト、画像、および、引用）を持つ行列フィールドのテンプレートの実例を示します。`block.type`（<craft3:craft\elements\MatrixBlock::getType()>）をチェックすることによって、現在のブロックタイプのハンドルを確認できます。
+Here’s an example of what the template might look like for a Matrix field with four block types (Heading, Text, Image, and Quote). We can determine the current block type’s handle by checking `block.type` (<craft3:craft\elements\MatrixBlock::getType()>).
 
 ```twig
 {% for block in entry.myFieldHandle.all() %}
@@ -81,7 +105,11 @@ for ループ内に記述されたすべてのコードは、 フィールドに
     {% elseif block.type == "image" %}
         {% set image = block.image.one() %}
         {% if image %}
-            <img src="{{ image.getUrl('thumb') }}" width="{{ image.getWidth('thumb') }}" height="{{ image.getHeight('thumb') }}" alt="{{ image.title }}">
+            <img src="{{ image.getUrl('thumb') }}" 
+                width="{{ image.getWidth('thumb') }}" 
+                height="{{ image.getHeight('thumb') }}" 
+                alt="{{ image.title }}"
+            >
         {% endif %}
     {% elseif block.type == "quote" %}
         <blockquote>
@@ -93,48 +121,76 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 ```
 
 ::: tip
-このコードは [switch](dev/tags.md#switch) タグを利用して、簡略化できます。
+This code can be simplified using the [switch](dev/tags.md#switch) tag.
 :::
 
-最初のブロックだけが欲しい場合、`all()` の代わりに [one()](<craft3:craft\db\Query::one()>) を呼び出して、何かが返されていることを確認します。
+If you only want the first block, call [one()](craft3:craft\db\Query::one()) instead of `all()`, and make sure it returned something:
 
+::: code
 ```twig
 {% set block = entry.myFieldHandle.one() %}
 {% if block %}
     <!-- ... -->
 {% endif %}
 ```
+```php
+$block = $entry->myFieldHandle->one();
+if ($block) {
+    // ...
+}
+```
+:::
 
-ブロックの総数だけを知りたい場合、[count()](<craft3:craft\db\Query::count()>) を呼び出します。
+If you only want to know the total number of blocks, call [count()](craft3:craft\db\Query::count()).
 
+::: code
 ```twig
 {% set total = entry.myFieldHandle.count() %}
 <p>Total blocks: <strong>{{ total }}</strong></p>
 ```
+```php
+$total = $entry->myFieldHandle->count();
+// Total blocks: $total
+```
+:::
 
-（取得する必要はなく）ブロックがあるかを確認したい場合、[exists()](<craft3:craft\db\Query::exists()>) を呼び出すことができます。
+If you just need to check if blocks exist (but don’t need to fetch them), you can call [exists()](craft3:craft\db\Query::exists()):
 
+::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
     <p>There are blocks!</p>
 {% endif %}
 ```
+```php
+if ($entry->myFieldHandle->exists()) {
+    // There are blocks!
+}
+```
+:::
 
-行列ブロッククエリで[パラメータ](matrix-blocks.md#parameters)をセットすることもできます。例えば、`text` タイプのブロックだけを取得するには、[type](matrix-blocks.md#type) パラメータをセットしてください。
+You can set [parameters](matrix-blocks.md#parameters) on the Matrix block query as well. For example, to only fetch blocks of type `text`, set the [type](matrix-blocks.md#type) param:
 
+::: code
 ```twig
 {% set blocks = clone(entry.myFieldHandle)
     .type('text')
     .all() %}
 ```
-
-::: tip
-パラメータを調整する前に [clone()](./dev/functions.md#clone) ファンクションを利用して行列クエリのクローンを作成するのは、とても良いアイデアです。それによって、テンプレートの後半でパラメータが予期しない結果をもたらすことはありません。
+```php
+$blocks = (clone $entry->myFieldHandle)
+    ->type('text')
+    ->all();
+```
 :::
 
-### 投稿フォームで行列フィールドを保存
+::: tip
+It’s always a good idea to clone the Matrix query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
+:::
 
-行列フィールドを含む必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、次のフォーマットでフィールド値を送信する必要があります。
+### Saving Matrix Fields
+
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Matrix field, you will need to submit your field value in this format:
 
 ```
 - sortOrder
@@ -150,9 +206,9 @@ for ループ内に記述されたすべてのコードは、 フィールドに
       - ...
 ```
 
-`sortOrder` は（新しいブロック ID を含む）維持したいすべてのブロック ID の配列を保存したい順序で送信する必要があります。
+`sortOrder` should be submitted as an array of all the block IDs you wish to persist (as well as any new block IDs), in the order they should be saved.
 
-すべての既存ブロックを現在と同じ順序で維持したい場合、このテンプレートを利用して `sortOrder` 配列を定義します。
+If you want all existing blocks to persist in the same order they are currently in, then use this template to define your `sortOrder` array:
 
 ```twig
 {% if entry is defined %}
@@ -162,9 +218,9 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 {% endif %}
 ```
 
-すべてのブロックデータは、ID でインデックス付けされた `blocks` 内にネストする必要があります。それぞれのブロックは `type` と  `fields` 配列内にネストされたカスタムフィールドデータを送信しなければなりません。
+All of your block data should be nested under `blocks`, indexed by their IDs. Each block must submit its `type` and custom field data nested under a `fields` array.
 
-ここでは、2つのブロックタイプ（`text` と `image`）を持つ行列フィールドで、既存ブロックのフォーム項目を出力する方法を示します。
+Here’s how you can output form fields for existing blocks, for a Matrix field with two block types (`text` and `image`):
 
 ```twig
 {% if entry is defined %}
@@ -194,22 +250,22 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 ```
 
 ::: tip
-既存ブロック向けのフォーム項目の出力は、完全なオプションです。`sortOrder` 配列にブロック ID がリストされている限り、フォームデータから欠落していてもそれらは維持されます。
+Outputting form fields for existing blocks is completely optional. As long as the block IDs are listed in the `sortOrder` array, they will persist even if they are missing from the form data.
 :::
 
-「新しいブロック」フォームを表示するには、まず接頭辞 `new:` の一時的な ID を考えます。例えば、`new:1`、`new:2` などです。
+To show a “New Block” form, first come up with a temporary ID for the block, prefixed with `new:`. For example, `new:1`, `new:2`, etc.
 
-`sortOrder` 配列に一時的な ID を追加し、ブロックのフォーム入力欄を出力する際に使用します。
+Append the temporary ID to the `sortOrder` array, and use it when outputting the block’s form inputs.
 
-新しいブロック項目をフォームに追加するために、フィールドへ JavaScript によるコンポーネントを含める必要があるかもしれません。新しいブロックは `new:X` という「ID」で、`X` はフィールド上のすべての新しいブロックでユニークな数字でなければなりません。
+You’ll probably want to include a JavaScript-powered component to the field that appends new block inputs to the form. New blocks should have an “ID” of `new:X`, where `X` is any number that is unique among all new blocks for the field.
 
-例えば、フォームに追加された最初の新しいブロックは `new:1` という「ID」を持つことができるため、その 入力項目 `type` の name は次のようになります。
+For example, the first new block that is added to the form could have an “ID” of `new:1`, so its `type` input name would end up looking like this:
 
 ```html
 <input type="hidden" name="fields[myFieldHandle][new:1][type]" value="text" />
 ```
 
-次に、入力を加えたい追加ブロックのフォーム入力欄を定義します。
+Then define the form inputs for any additional blocks that should be appended to the input.
 
 ```twig
 {{ hiddenInput('fields[myFieldHandle][sortOrder][]', 'new:1') }}
@@ -223,6 +279,6 @@ for ループ内に記述されたすべてのコードは、 フィールドに
 
 ## 関連項目
 
-- [行列ブロッククエリ](matrix-blocks.md#querying-matrix-blocks)
+- [エレメントクエリ](matrix-blocks.md#querying-matrix-blocks)
 - [Element Queries](element-queries.md)
 - <craft3:craft\elements\MatrixBlock>
