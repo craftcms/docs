@@ -12,13 +12,15 @@ For traditional database rows regular fixtures will suffice. However Craft intro
 
 ### Element Fixtures
 
-Element types are one of Craft’s main selling points for developers. They yield a lot of power. That power is courtesy of a complicated data structure and set of APIs. A by-product of this is that some heavy lifting is required if element types are to be defined in a single fixture and data file. For this reason support is provided out of the box for setting up various element types.
-
-Provide your own custom element type? You can extend `craft\test\fixtures\elements\ElementFixture` to provide developers using your module/plugin support for their testing code - or just provide yourself support for testing your own module/plugin.
+Element types are one of Craft’s main selling points for developers. For this reason support is provided out of the box for setting up various element types.
 
 ::: tip
 Craft’s element fixtures are based on the excellent team over at [robuust](https://robuust.digital/) and their `craft-fixtures` [plugin](https://github.com/robuust/craft-fixtures).
 :::
+
+#### Provide your own custom element type?
+
+You can extend [craft\test\fixtures\elements\ElementFixture](craft3:craft\test\fixtures\elements\ElementFixture) for your own testing and to offer other developers the ability to use your element type as a fixture testing their code.
 
 ### Asset Fixtures
 
@@ -54,6 +56,7 @@ The `AssetFixture` class will automatically copy your assets into the `tests/_cr
 ### Category Fixtures
 
 Extend `craft\test\fixtures\elements\CategoryFixture` to add categories.
+
 
 The fixture data file could look like this:
 
@@ -166,58 +169,6 @@ Here’s an example of a fixture data file that is creating an entry with a titl
 
 ```php
 <?php
-return [
-    [
-        // Standard `craft\elements\Entry` fields.
-        'authorId' => '1',
-        'sectionId' => '1000',
-        'typeId' => '1000',
-        'title' => 'Theories of matrix',
-
-        // Set a  field layout
-        'fieldLayoutType' => 'field_layout_with_matrix_and_normal_fields',
-
-        // Set field values
-        'aPlainTextFieldHandle' => 'value of text field',
-        'anotherPlainTextFieldHandle' => 'another valu',
-
-        // If your field layout defines matrix fields - you can set those too!
-        'matrixFirst' => [
-            'new1' => [
-                'type' => 'aBlock',
-                'fields' => [
-                    'firstSubfield' => 'Some text'
-
-                ],
-            ],
-            'new2' => [
-                'type' => 'aBlock',
-                'fields' => [
-                    'firstSubfield' => 'Some text'
-                ],
-            ],
-        ],
-    ]
-];
-
-```
-
-### Field Layout Fixtures
-
-Another Craft specific concept is field layouts. Field layouts consist of:
-
-- The layouts themselves
-- Tabs
-- Fields
-
-All of which are linked together, and would be very difficult to manage in a test environment with ordinary fixtures. For this reason, Craft provides a special `craft\test\fixtures\FieldLayoutFixture` class that provides all the required support to setup field layouts, the tabs and the underlying fields, including creating the fields in the `{{%content}}` table.
-
-All you have to do is create an ordinary fixture class and extend `craft\test\fixtures\FieldLayoutFixture`.
-
-Then add the `public $dataFile = 'path/to/datafile/` property that points to a datafile containing at least the following keys (including the nested position).
-
-```php
-<?php
 use craft\fields\Matrix;
 
 return [
@@ -285,6 +236,60 @@ return [
                 ]
             ]
         ]
+    ]
+];
+
+```
+
+### Field Layout Fixtures
+
+Another Craft specific concept is field layouts. Field layouts consist of:
+
+- The layouts themselves
+- Tabs
+- Fields
+
+All of which are linked together, and would be very difficult to manage in a test environment with ordinary fixtures. For this reason, Craft provides a special `craft\test\fixtures\FieldLayoutFixture` class that provides all the required support to setup field layouts, the tabs and the underlying fields, including creating the fields in the `{{%content}}` table.
+
+All you have to do is create an ordinary fixture class and extend `craft\test\fixtures\FieldLayoutFixture`.
+
+Then add the `public $dataFile = 'path/to/datafile/` property that points to a datafile containing at least the following keys (including the nested position).
+
+```php
+<?php
+use craft\fields\Matrix;
+use craft\fields\PlainText;
+
+return [
+    [
+        'type' => 'craft\test\Craft', // Required - can be set to whatever you want.
+        'authorId' => '1',
+        'sectionId' => '1000',
+        'typeId' => '1000',
+        'title' => 'Theories of matrix',
+
+        // Set a  field layout
+        'fieldLayoutType' => 'field_layout_with_matrix_and_normal_fields',
+
+        // Set field values
+        'aPlainTextFieldHandle' => 'value of text field',
+        'anotherPlainTextFieldHandle' => 'another valu',
+
+        // If your field layout defines matrix fields - you can set those too! 'matrixFirst' => [
+            'new1' => [
+                'type' => 'aBlock',
+                'fields' => [
+                    'firstSubfield' => 'Some text'
+
+                ],
+            ],
+            'new2' => [
+                'type' => 'aBlock',
+                'fields' => [
+                    'firstSubfield' => 'Some text'
+                ],
+            ],
+        ],
     ]
 ];
 ```
