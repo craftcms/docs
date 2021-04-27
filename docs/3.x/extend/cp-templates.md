@@ -15,7 +15,7 @@ To add a new full page to the control panel, create a template that extends the 
 At a minimum, your template should set a `title` variable and define a `content` block:
 
 ```twig
-{% extends "_layouts/cp" %}
+{% extends "_layouts/cp.twig" %}
 {% set title = "Page Title"|t('plugin-handle') %}
 
 {% block content %}

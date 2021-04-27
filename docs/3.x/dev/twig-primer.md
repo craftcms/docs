@@ -509,7 +509,7 @@ This template is pretty worthless on its own, but it provides a framework for ne
 With that template in place, you can now create a `hello-world.twig` template in your `templates/` folder, which **extends** your `_html5.twig` template:
 
 ```twig
-{% extends "_html5" %}
+{% extends "_html5.twig" %}
 
 {% set docTitle = 'Hello World' %}
 
@@ -556,7 +556,7 @@ For example, create a template called `_tip.twig` in your `templates/` folder, w
 Now you can include that from another template, passing in the `tipText` value:
 
 ```twig
-{% include '_tip' with {
+{% include '_tip.twig' with {
   tipText: 'I’m a helpful tip!'
 } %}
 ```
@@ -577,7 +577,7 @@ Embeds are similar to [includes](#includes), with a superpower: they can overrid
 The template will continue to work with [include](https://twig.symfony.com/doc/2.x/tags/include.html) tags like before, but now other templates have the option of using an [embed](https://twig.symfony.com/doc/2.x/tags/embed.html) tag instead, and overwriting the entire `content` block:
 
 ```twig
-{% embed '_tip' %}
+{% embed '_tip.twig' %}
   {% block content %}
     <p>I’m a helpful tip!</p>
   {% endblock %}
