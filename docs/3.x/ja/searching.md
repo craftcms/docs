@@ -1,110 +1,157 @@
 # 検索
 
-このバーが表示されている場所ならどこでも、エレメントを検索できます。
+Craft CMS includes a system-wide search service used for finding elements via keyword search.\ This powers the search experience throughout the Craft control panel, and you can use it to add search functionality to your site’s front end.
 
-![検索バー](./images/searching-search-bar.png)
+Control panel users can search for elements anywhere this bar is available:
 
-## サポートする構文
+![Search Bar](./images/search-bar.svg)
 
-Craft は次の検索構文をサポートしています。
+You can search for elements from your own code, too:
 
-この検索によって | こちらのエレメントが見つかるでしょう
--|-
-`salty` | 「salty」という単語を含んでいる。
-`salty dog` | 「salty」と「dog」の両方を含んでいる。
-`salty OR dog` | 「salty」または「dog」のいずれか（または、両方）を含んでいる。
-`salty -dog` | 「salty」を含むが「dog」を含んでいない。
-`"salty dog"` | 正確なフレーズとして「salty dog」を含んでいる。
-`*ty` | 「ty」で終わる単語を含んでいる。
-`*alt*` | 「alt」を含む単語を含んでいる。
-`body:salty` | `body` フィールドに「salty」を含む。
-`body:salty body:dog` | `body` フィールドに「salty」と「dog」の両方を含む。
-`body:salty OR body:dog` | `body` フィールドに「salty」または「dog」のいずれかを含む。
-`body:salty -body:dog` | `body` フィールドに「salty」を含むが「dog」を含まない。
-`body:"salty dog"` | `body` フィールドに正確なフレーズとして「salty dog」を含む。
-`body:*ty` | `body` フィールドに「ty」で終わる単語を含む。
-`body:*alt*` | `body` フィールドに「alt」を含む単語を含む。
-`body::salty` | `body` フィールドに「salty」がセットされ、それ以外のものがない。
-`body::"salty dog"` | `body` フィールドに「salty dog」がセットされ、それ以外のものがない。
-`body::salty*` | `body` フィールドが「salty」ではじまる。
-`body::*dog` | `body` フィールドが「dog」で終わる。
-`body:*` | `body` フィールドになんらかの値を含む。
-`-body:*` | `body` フィールドが空である。
-
-## 特定エレメントの属性を検索する
-
-アセット、カテゴリ、エントリ、ユーザー、および、タグは、それぞれ独自の属性を追加して検索できます。
-
-* **アセット**
-
-   * filename
-   * extension
-   * kind
-
-* **カテゴリ**
-
-   * title
-   * slug
-
-* **エントリ**
-
-   * title
-   * slug
-
-* **ユーザー**
-
-   * ユーザー名
-   * firstName
-   * lastName
-   * fullName (firstName + lastName)
-   * メール
-
-* **タグ**
-
-   * title
-
-
-::: warning
-検索はエレメント全体に渡ってコンテンツを素早く照会するための優れた方法ですが、フィールド属性を照会する場合、そのフィールドタイプの[クエリパラメータ](element-queries.md#executing-element-queries)を使用するのが最も正確な方法です。
+::: code
+```twig
+{% set results = craft.entries()
+    .search('foo')
+    .all() %}
+```
+```graphql
+{
+    entries(search: "foo") {
+        title
+    }
+}
+```
+```php
+$results = \craft\elements\Entry::find()
+    ->search('foo')
+    ->all();
+```
 :::
 
-## テンプレート記法
+::: tip
+The [`defaultSearchTermOptions`](config3:defaultSearchTermOptions) config setting lets you adjust default search behavior.
+:::
 
-`craft.assets()`、`craft.entries()`、`craft.tags()`、および、`craft.users()` は、検索クエリを指定したエレメントの絞り込みに利用できる `search` パラメータをサポートしています。
+## Supported Syntaxes
 
+Craft supports the following syntax wherever you happen to search from:
+
+| この検索によって                 | こちらのエレメントが見つかるでしょう                         |
+| ------------------------ | ------------------------------------------ |
+| `salty`                  | 「salty」という単語を含んでいる                         |
+| `salty dog`              | 「salty」と「dog」の両方を含んでいる。                    |
+| `salty OR dog`           | 「salty」または「dog」のいずれか（または、両方）を含んでいる。        |
+| `salty -dog`             | 「salty」を含むが「dog」を含んでいない。                   |
+| `"salty dog"`            | 正確なフレーズとして「salty dog」を含んでいる。               |
+| `*ty`                    | 「ty」で終わる単語を含んでいる。                          |
+| `*alt*`                  | 「alt」を含む単語を含んでいる。                          |
+| `body:salty`             | `body` フィールドに「salty」を含む。                   |
+| `body:salty body:dog`    | `body` フィールドに「salty」と「dog」の両方を含む。          |
+| `body:salty OR body:dog` | `body` フィールドに「salty」または「dog」のいずれかを含む。      |
+| `body:salty -body:dog`   | `body` フィールドに「salty」を含むが「dog」を含まない。        |
+| `body:"salty dog"`       | `body` フィールドに正確なフレーズとして「salty dog」を含む。     |
+| `body:*ty`               | `body` フィールドに「ty」で終わる単語を含む。                |
+| `body:*alt*`             | `body` フィールドに「alt」を含む単語を含む。                |
+| `body::salty`            | `body` フィールドに「salty」がセットされ、それ以外のものがない。     |
+| `body::"salty dog"`      | `body` フィールドに「salty dog」がセットされ、それ以外のものがない。 |
+| `body::salty*`           | `body` フィールドが「salty」ではじまる。                 |
+| `body::*dog`             | `body` フィールドが「dog」で終わる。                    |
+| `body:*`                 | `body` フィールドになんらかの値を含む。                    |
+| `-body:*`                | `body` フィールドが空である。                         |
+
+## Searching for Specific Element Attributes
+
+Assets, categories, entries, users, and tags each support their own set of additional attributes to search against:
+
+| Element    | Additional Search Attributes                                                                                    |
+| ---------- | --------------------------------------------------------------------------------------------------------------- |
+| Assets     | `filename`<br>`extension`<br>`kind`                                                                 |
+| Categories | `title`<br>`slug`                                                                                         |
+| Entries    | `title`<br>`slug`                                                                                         |
+| Users      | `username`<br>`firstName`<br>`lastName`<br>`fullName` (firstName + lastName)<br>`email` |
+| Tags       | `title`                                                                                                         |
+
+::: warning
+Searching is a great way to quickly query content broadly across elements, but the most precise way to query field attributes is through that field type’s [query parameter](element-queries.md#executing-element-queries).
+:::
+
+## Development
+
+`craft.assets()`, `craft.entries()`, `craft.tags()`, and `craft.users()` support a `search` parameter you can use to filter their elements by a given search query.
+
+::: code
 ```twig
-{# Get the user's search query from the 'q' query-string param #}
-{% set searchQuery = craft.app.request.getParam('q') %}
+{# Get the user’s search query from the 'q' query string param #}
+{% set searchQuery = craft.app.request.getQueryParam('q') %}
 
 {# Fetch entries that match the search query #}
 {% set results = craft.entries()
     .search(searchQuery)
     .all() %}
 ```
+```php
+// Get the user’s search query from the 'q' query string param
+$searchQuery = Craft::$app->getRequest()->getParam('q');
 
-### スコアによる検索結果の順位付け
+// Fetch entries that match the search query
+$results = \craft\elements\Entry::find()
+    ->search($searchQuery)
+    ->all();
+```
+:::
 
-検索結果をベストマッチからワーストマッチの順に並び替えたい場合、`orderBy` パラメータに `'score'` をセットすることもできます。
+### Ordering Results by Score
 
+You can also set the `orderBy` parameter to `'score'` if you want results ordered by best-match to worst-match:
+
+::: code
 ```twig
 {% set results = craft.entries()
-    .search(searchQuery)
+    .search('foo')
     .orderBy('score')
     .all() %}
 ```
-
-この場合、返されるすべてのエレメントに `searchScore` 属性がセットされ、それぞれの検索スコアを知ることができます。
-
-::: tip
-動的な検索結果をリスト化する完全な例については、[検索フォーム](dev/examples/search-form.md)チュートリアルを参照してください。
+```graphql
+{
+    entries(search: "foo", orderBy: "score") {
+        title
+    }
+}
+```
+```php
+$results = \craft\elements\Entry::find()
+    ->search('foo')
+    ->orderBy('score')
+    ->all();
+```
 :::
 
-## 検索インデックスの再構築
+When you do this, each of the elements returned will have a `searchScore` attribute set, which reveals what their search score was.
 
-Craft は検索インデックスを可能な限り最新に保つよう、最善を尽くしています。しかし、その一部を不正確にするかもしれない可能性がいくつかあります。検索インデックスが最新かつ最高データでないと疑われる場合、コマンド `resave/entries` でエントリを一括再保存することで Craft に再構築させることができます。
+::: tip
+See our [Search Form](https://craftcms.com/knowledge-base/search-form) article for a complete example of listing dynamic search results.
+:::
+
+## Configuring Custom Fields for Search
+
+Each element type makes basic details, called _searchable attributes_, available as search keywords. It’s common to search for entries by title, for example, or for users matching a name or email address. (We just looked at these in the [Searching for Specific Element Attributes](#searching-for-specific-element-attributes) table.)
+
+You can also configure any custom field to make its content available for search by enabling **Use this field’s values as search keywords**:
+
+![Searchable Checkbox](./images/searchable-checkbox.png)
+
+Once enabled, the next time an element is saved that field’s content will be stored as plain-text keywords in Craft’s `searchindex` table and available for search.
+
+::: tip
+For relational field types like Assets fields, Matrix fields, etc., the top-level **Use this field’s values as search keywords** setting determines whether any sub-fields or child elements will factor into results for the parent.
+:::
+
+## Rebuilding Your Search Indexes
+
+Craft does its best to keep its search indexes as up-to-date as possible, but there are a couple things that might render portions of them inaccurate. If you suspect your search indexes are out of date, you can have Craft rebuild them by bulk-resaving your entries with the [`resave/entries`](console-commands.md#resave) command and including the `--update-search-index` flag:
 
 ```bash
 php craft resave/entries --update-search-index
 ```
 
-`--section` や `--type` オプションを利用して、再保存されるべきエントリを指定できます。サポートされるオプションのリストは、`resave/entries --help` を参照してください。
+You can specify which entries should be resaved with the `--section` and `--type` options, among others. Run `resave/entries --help` to see a full list of supported options.
