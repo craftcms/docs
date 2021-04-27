@@ -1,56 +1,78 @@
 # マルチセレクトボックスフィールド
 
-マルチセレクトボックスフィールドは、複数選択形式の入力を提供します。
+Multi-select fields give you an input where multiple items may be selected.
 
 ## 設定
 
 マルチセレクトボックスフィールドの設定は、次の通りです。
 
-* **マルチセレクトボックスのオプション** – フィールドで利用可能なオプションを定義します。オプションの値とラベルを別々に設定したり、デフォルトで選択状態にしておくものを選択できます。
+* **マルチセレクトボックスのオプション** – フィールドで利用可能なオプションを定義します。 オプションの値とラベルを別々に設定したり、デフォルトで選択状態にしておくものを選択できます。
 
-## テンプレート記法
+## Development
 
 ### マルチセレクトボックスフィールドによるエレメントの照会
 
-マルチセレクトボックスフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを利用して、マルチセレクトボックスフィールドのデータに基づいた結果をフィルタできます。
+マルチセレクトボックスフィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、マルチセレクトボックスフィールドのデータに基づいた結果をフィルタできます。
 
 利用可能な値には、次のものが含まれます。
 
-| 値 | 取得するエレメント
-| - | -
-| `'foo'` | `foo`  オプションが選択されている。
-| `'not foo'` | `foo` オプションが選択さていない。
-| `['foo', 'bar']` | `foo` または `bar` オプションのいずれかが選択されている。
-| `['and', 'foo', 'bar']` | `foo` と `bar` オプションが選択されている。
+| 値                       | 取得するエレメント                              |
+| ----------------------- | -------------------------------------- |
+| `'foo'`                 | `foo` オプションが選択されている。                   |
+| `'not foo'`             | `foo` オプションが選択されていない。                  |
+| `['foo', 'bar']`        | with `foo` or `bar` options selected.  |
+| `['and', 'foo', 'bar']` | with `foo` and `bar` options selected. |
 
+::: code
 ```twig
 {# Fetch entries with the 'foo' option selected #}
 {% set entries = craft.entries()
     .myFieldHandle('foo')
     .all() %}
 ```
+```php
+// Fetch entries with the 'foo' option selected
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle('foo')
+    ->all();
+```
+:::
 
 ### マルチセレクトボックスフィールドデータの操作
 
-テンプレート内でマルチセレクトボックスフィールドのエレメントを取得する場合、マルチセレクトボックスフィールドのハンドルを利用して、そのデータにアクセスできます。
+If you have an element with a Multi-select field in your template, you can access its data using your Multi-select field’s handle:
 
+::: code
 ```twig
 {% set value = entry.myFieldHandle %}
 ```
+```php
+$value = $entry->myFieldHandle;
+```
+:::
 
-それは、フィールドデータを含む <craft3:craft\fields\data\MultiOptionsFieldData> オブジェクトを提供します。
+That will give you a <craft3:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
 
-選択されたオプションすべてをループするには、フィールド値を反復してください。
+To loop through all the selected options, iterate over the field value:
 
+::: code
 ```twig
 {% for option in entry.myFieldHandle %}
     Label: {{ option.label }}
     Value: {{ option }} or {{ option.value }}
 {% endfor %}
 ```
+```php
+foreach ($entry->myFieldHandle as $option) {
+    // Label: $option->label
+    // Value: $option or $option->value
+}
+```
+:::
 
-利用可能なオプションすべてをループするには、[options](craft3:craft\fields\data\MultiOptionsFieldData::getOptions()) プロパティを反復してください。
+To loop through all the available options, iterate over the [options](craft3:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
 
+::: code
 ```twig
 {% for option in entry.myFieldHandle.options %}
     Label:    {{ option.label }}
@@ -58,22 +80,40 @@
     Selected: {{ option.selected ? 'Yes' : 'No' }}
 {% endfor %}
 ```
+```php
+foreach ($entry->myFieldHandle->options as $option) {
+    // Label:    $option->label
+    // Value:    $option or $option->value
+    // Selected: $option->selected ? 'Yes' : 'No'
+}
+```
+:::
 
-いずれかのオプションが選択されているかを確認するには、[length](https://twig.symfony.com/doc/2.x/filters/length.html) フィルタを利用してください。
+To see if any options are selected, use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter:
 
+::: code
 ```twig
 {% if entry.myFieldHandle|length %}
 ```
+```php
+if (count($entry->myFieldHandle)) {
+```
+:::
 
-特定のオプションが選択されているかを確認するには、[contains()](craft3:craft\fields\data\MultiOptionsFieldData::contains()) を利用してください。
+To see if a particular option is selected, use [contains()](craft3:craft\fields\data\MultiOptionsFieldData::contains())
 
+::: code
 ```twig
 {% if entry.myFieldHandle.contains('foo') %}
 ```
+```php
+if ($entry->myFieldHandle->contains('foo') {
+```
+:::
 
-### 投稿フォームでマルチセレクトボックスフィールドを保存
+### Saving Multi-select Fields
 
-マルチセレクトボックスフィールドを含める必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、出発点としてこのテンプレートを利用してください。
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Multi-select field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
