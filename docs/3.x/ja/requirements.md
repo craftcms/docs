@@ -1,52 +1,63 @@
-# 要件
+# サーバー要件
 
 ::: tip
 [Craft Server Check](https://github.com/craftcms/server-check) スクリプトを使うことで、サーバーが Craft の要件を満たしているかどうかを素早く確認できます。
 :::
 
-Craft は次の項目が必要です。
+<columns>
+<column>
 
-* PHP 7.0 以降
-* with InnoDB の MySQL 5.5 以降、MariaDB 5.5 以降、または、PostgreSQL 9.5 以降
-* 少なくとも 256MB の PHP 割当メモリ
-* 少なくとも 200MB の空きディスク容量
+## Minimum System Specs
+
+- PHP 7.2.5+
+- MySQL 5.5+ with InnoDB, MariaDB 5.5+, or PostgreSQL 9.5+
+- 256MB+ memory allocated to PHP
+- 200MB+ free disk space
+
+</column>
+<column>
+
+## Recommended System Specs
+
+- PHP 7.4*
+- MySQL 5.7+ with InnoDB, MariaDB 10.5+, or PostgreSQL 10+
+- 512MB+ of memory allocated to PHP
+- 200MB+ of free disk space
+- [Composer 1.3+](installation.md#downloading-with-composer) if installing Craft via Composer
+
+</column>
+</columns>
+
+<b>*</b> Craft supports PHP 8, but it may not be fully supported by all plugins yet.
 
 ## 必要な PHP エクステンション
 
-Craft は次の PHP エクステンションが必要です。
-
 * [ctype](https://secure.php.net/manual/en/book.ctype.php)
 * [cURL](http://php.net/manual/en/book.curl.php)
-* [GD](http://php.net/manual/en/book.image.php) または [ImageMagick](http://php.net/manual/en/book.imagick.php)。ImageMagick が好ましいです。
+* [GD](http://php.net/manual/en/book.image.php) or [ImageMagick](http://php.net/manual/en/book.imagick.php)
 * [iconv](http://php.net/manual/en/book.iconv.php)
 * [JSON](http://php.net/manual/en/book.json.php)
 * [Multibyte String](http://php.net/manual/en/book.mbstring.php)
 * [OpenSSL](http://php.net/manual/en/book.openssl.php)
 * [PCRE](http://php.net/manual/en/book.pcre.php)
-* [PDO MySQL Driver](http://php.net/manual/en/ref.pdo-mysql.php) または [PDO PostgreSQL Driver](http://php.net/manual/en/ref.pdo-pgsql.php)
+* [PDO MySQL Driver](http://php.net/manual/en/ref.pdo-mysql.php) or [PDO PostgreSQL Driver](http://php.net/manual/en/ref.pdo-pgsql.php)
 * [PDO](http://php.net/manual/en/book.pdo.php)
 * [Reflection](http://php.net/manual/en/class.reflectionextension.php)
 * [SPL](http://php.net/manual/en/book.spl.php)
 * [Zip](http://php.net/manual/en/book.zip.php)
 * [DOM](http://php.net/manual/en/book.dom.php)
 
-## オプションの PHP エクステンション
+We recommend ImageMagick for expanded image handling options and the [Intl](http://php.net/manual/en/book.intl.php) extension for rich internationalization support.
 
-* [Intl](http://php.net/manual/en/book.intl.php) – よりリッチな国際化のサポートを追加します。
-
-## オプションの PHP メソッドと設定
+## Optional PHP Methods and Configurations
 
 一部の共用ホスティング環境では、Craft の機能に影響を与える PHP メソッドや設定が無効になっています。
 
-- プラグインのアップデートやプラグインストアからインストールするために、[allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen) を有効にする必要があります。
-- プラグインストアの利用やメールの送信ができるよう [proc_*](http://php.net/manual/en/ref.exec.php) メソッドを有効にする必要があります。
-- [デフォルトのウェブベースのキューランナー](config3:runQueueAutomatically)が動作するために、[ignore_user_abort](https://www.php.net/manual/en/function.ignore-user-abort.php) を有効にする必要があります。
+- [allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen) must be enabled for updating and installing plugins from the Plugin Store.
+- [proc_*](http://php.net/manual/en/ref.exec.php) methods must be enabled in order to utilize the Plugin Store and send emails.
+- [ignore_user_abort](https://www.php.net/manual/en/function.ignore-user-abort.php) must be enabled for the [default, web-based queue runner](config3:runQueueAutomatically) to operate.
 
-## 追加オプション
-
-* [Composer 1.30+](installation.md#downloading-with-composer) - Composer で Craft をインストールする場合
-
-## 必要なデータベースユーザー特権
+## Required Database User Privileges
 
 Craft のデータベースに接続するユーザーには、次の特権がなければなりません。
 
@@ -73,9 +84,9 @@ Craft のデータベースに接続するユーザーには、次の特権が�
 * `REFERENCES`
 * `CONNECT`
 
-## コントロールパネルのブラウザ要件
+## Control Panel Browser Requirements
 
-Craft のコントロールパネルは、[JavaScript モジュールをサポートする](https://caniuse.com/#feat=es6-module-dynamic-import)ブラウザが必要です。
+Craft のコントロールパネルは、モダンブラウザが必要です。
 
 #### Windows と macOS
 
@@ -87,8 +98,8 @@ Craft のコントロールパネルは、[JavaScript モジュールをサポ�
 #### モバイル
 
 - iOS: Safari 11+
-- Android: Chrome 81+ または Firefox 68+
+- Android: Chrome 81+ or Firefox 68+
 
 ::: tip
-Craft のコントロールパネルのブラウザ要件は、実際のウェブサイトとは関係がありません。もしあなたがつらい仕事を苦にせず、IE 6 で完璧に表示されるサイトを望むのであれば、あたなの望む通りにできます。
+Craft の CP のブラウザ要件は、実際のウェブサイトとは関係がありません。 もしあなたがつらい仕事を苦にせず、IE 6 で完璧に表示されるサイトを望むのであれば、あたなの望む通りにできます。
 :::
