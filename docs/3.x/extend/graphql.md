@@ -14,7 +14,6 @@ Important questions to consider:
 (Are there nested objects or multiple types? Will you need to support eager loading?)
 2. What sort of arguments, if any, do you need to make available for narrowing your result set?
 3. Should this data be available in the public schema, or will you need to add and honor schema permissions?
-4. Is your data read-only or should it be writable via mutations?
 
 ::: tip
 If you’re not already familiar with GraphQL terminology and the [webonyx/graphql-php](https://github.com/webonyx/graphql-php) library Craft uses, take care to keep Craft and GraphQL terminology separate; there are overlapping terms that can be confusing. It helps to pay careful attention to namespacing when looking at code examples.
@@ -36,6 +35,10 @@ A Query class provides one or more query names, each describing a GraphQL type i
 
 TODO: include example
 
+### Arguments
+
+
+
 ### Types
 
 Not to be confused with entry types, GraphQL types are the all-important and specific descriptions of the kinds of data the API represents. Every single type must exhaustively describe what it contains—including any nested types—and every type in the GraphQL schema must be unique.
@@ -46,6 +49,20 @@ Craft’s <craft3:craft\gql\GqlEntityRegistry> keeps track of types that are reg
 
 TODO: include example
 
+### Interfaces
+
+
+### Generators
+
+Craft includes the concept of type generators that are crucial for dynamically generating the complex types necessary for entry types, Matrix fields, and other content structures with the ability to have many specific contexts that each need a unique type definition.
+
+
+### Directives
+
+Directives return types that can be used to transform result data in specified locations relative to the GraphQL query.
+
+Craft’s included directives apply exclusively to requested fields, though they may be applied in mutations and numerous parts of the type system.
+
 ### Mutations
 
 A Mutation class defines named mutations that should be available, including consideration for permissions, each one including arguments, a type, and a mutation resolver responsible for modifying data using Craft’s APIs.
@@ -54,29 +71,21 @@ input objects
 
 TODO: include example
 
-### Directives
+### Advanced Components
 
-Directives return types that can be used to transform result data in specified locations relative to the GraphQL query.
-
-Craft’s included directives apply exclusively to requested fields, though they may be applied in mutations and numerous parts of the type system.
-
-### Generators
-
-Craft includes the concept of type generators that are crucial for dynamically generating the complex types necessary for entry types, Matrix fields, and other content structures with the ability to have many specific contexts that each need a unique type definition.
-
-### Schema Components
+#### Schema Components
 
 Schema components define the permissions available to a Craft user building a schema. Once a schema is established, its permission set determines the scope available for a given token.
 
-### Argument Handlers
+#### Eager Loading
 
-### Eager Loading
+#### Argument Handlers
 
-### Complexity Values
+#### Complexity Values
 
-GraphQL complexity values are numeric scores assigned to fields that indicate how much processing power will be needed to return a result. These are factored into how a query is cached and executed, and it’s important to designate appropriate complexity values where complex, multi-relational queries or CPU-heavy tasks like image transformation are involved.
+GraphQL complexity values are numeric scores assigned to fields that indicate how much processing power will be needed to return a result.
 
-### Validation Rules
+#### Validation Rules
 
 ## Registering Components
 
