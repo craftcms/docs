@@ -22,7 +22,7 @@ To see available updates, go to your Craft project in your terminal and run this
 php craft update
 ```
 
-![An example interaction with the <code>update</code> command.](./images/cli-update-info.png)
+![An example interaction with the ](./images/cli-update-info.png)
 
 To update everything all at once, run this command:
 
@@ -36,7 +36,7 @@ To update a specific thing, replace `all` with its handle (either `craft` to upd
 php craft update element-api
 ```
 
-![An example interaction with the <code>update <handle></code> command.](./images/cli-update-plugin.png)
+![update <handle></code> command."](./images/cli-update-plugin.png)
 
 You can also pass multiple handles in at once:
 
