@@ -23,20 +23,33 @@ Possible values include:
 | `['foo', 'bar']`        | with either a `foo` or `bar` option selected.    |
 | `['not', 'foo', 'bar']` | without either a `foo` or `bar` option selected. |
 
+::: code
 ```twig
 {# Fetch entries with the 'foo' option selected #}
 {% set entries = craft.entries()
     .myFieldHandle('foo')
     .all() %}
 ```
+```php
+// Fetch entries with the 'foo' option selected
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle('foo')
+    ->all();
+```
+:::
 
 ### Working with Dropdown Field Data
 
 If you have an element with a Dropdown field in your template, you can access its data using your Dropdown field’s handle:
 
+::: code
 ```twig
 {% set value = entry.myFieldHandle %}
 ```
+```php
+$value = $entry->myFieldHandle;
+```
+:::
 
 That will give you a <craft3:craft\fields\data\SingleOptionFieldData> object that contains the field data.
 
