@@ -92,6 +92,10 @@ The above template could also be expressed with this syntax:
 
 With the above Entry URI Format, a top-level entry’s URI might end up as `docs/templating`, whereas a nested entry’s URI might end up as `docs/templating/tags`.
 
+::: tip
+If you want to include the entry’s ID or UID in a preview target URL, use `{sourceId}` or `{sourceUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the draft’s.
+:::
+
 ### Preview Targets
 
 If you’re using Craft Pro, your section can have one or more **preview targets**, which are URLs of pages that your entries will show up on, making it possible for authors to preview entries as they are writing them in the control panel.
@@ -105,7 +109,7 @@ Create additional preview targets for any other areas the entry might show up, s
 ![A section’s Preview Targets setting.](./images/preview-targets.png)
 
 ::: tip
-If you want to include the entry’s ID or UID in a preview target URL, use `{sourceId}` or `{sourceUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the draft’s.
+This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor entries can be.
 :::
 
 ::: tip
@@ -409,7 +413,7 @@ $entries = \craft\elements\Entry::find()
 
 
 ::: tip
-This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor entries can be.
+This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant entries can be.
 :::
 
 
@@ -740,7 +744,7 @@ $entries = \craft\elements\Entry::find()
 
 
 ::: tip
-This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant entries can be.
+This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
 :::
 
 
