@@ -22,6 +22,8 @@ The cleanup option ensures that fixtures are removed after a test. This cleans a
 
 In the [setup](../testing-craft/setup.md) section you set up a `_craft` folder which contains various directories for testing. One of these directories is the `storage` directory. While tests are running, Craft will create a lot of temporary files and logs in this folder. Use a [.gitignore](https://git-scm.com/docs/gitignore) file to keep these files out of your version control system (i.e. Git). The same policy should apply to the `tests/_output/` directory Codeception creates for tests.
 
+If you are using Craft 3.5 or later, or are using [the `projectConfig` config option](../framework/config-options.md#config-options) in Codeception, you’ll likely want to ignore the `tests/_craft/config/project/*` as well.
+
 ## Namespacing
 
 Craft namespaces it's tests under one separate root namespace and then expands per test subject. I.E. Unit tests are namespaced under `crafttests\unit` while functional tests are namespaced under `crafttests\functional`. It is advised to apply this same convention to your tests. If you are testing a module or plugin you may want to provide support resources for testing, it is advised to namespace these using `my\plugin\namespace\test`. This is exactly how Craft does it as well. See the [element fixtures](../testing-craft/fixtures.md) as an example.
