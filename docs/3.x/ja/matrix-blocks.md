@@ -1,12 +1,12 @@
-# 行列ブロック
+# Matrix Blocks
 
-だんだんと不安定になる WYSIWYG フィールドで管理されたコンテンツやマークアップの毛玉を扱ったことがあるなら、行列ブロックを好きになるでしょう。
+If you’ve ever worked with a hairball of content and markup managed in an increasingly-fragile WYSIWYG field, you’re probably going to like Matrix blocks.
 
-行列ブロックは、編集者がコンテンツの作成や再配置に使用できるフィールドのグループです。編集者にとってバランスが取れたカスタマイズ可能なコンテンツと開発者が使用したい適切にモデル化されたコンテンツを柔軟にサポートする上で、欠かすことができません。
+Matrix blocks are groupings of fields an editor can use to build and rearrange content. They can be critical in supporting flexible, customizable content for an editor that’s balanced with the kind of discrete, well-modeled content a developer wants to work with.
 
-## 行列ブロックの照会
+## Querying Matrix Blocks
 
-**行列ブロッククエリ**を利用して、テンプレートや PHP コード内で行列ブロックを取得できます。
+You can fetch Matrix blocks in your templates or PHP code using **Matrix block queries**.
 
 ::: code
 ```twig
@@ -19,20 +19,20 @@ $myMatrixBlockQuery = \craft\elements\MatrixBlock::find();
 ```
 :::
 
-行列ブロッククエリを作成すると、結果を絞り込むための[パラメータ](#parameters)をセットできます。さらに、`.all()` を呼び出して[実行](element-queries.md#executing-element-queries)できます。[MatrixBlock](craft3:craft\elements\MatrixBlock) オブジェクトの配列が返されます。
+Once you’ve created a Matrix block query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [MatrixBlock](craft3:craft\elements\MatrixBlock) objects will be returned.
 
 ::: tip
-エレメントクエリがどのように機能するかについては、[エレメントクエリ](element-queries.md)を参照してください。
+See [Element Queries](element-queries.md) to learn about how element queries work.
 :::
 
-### 実例
+### Example
 
-次の操作を行うことで、エレメントのすべての行列ブロックのコンテンツを表示できます。
+We can display content from all the Matrix blocks of an element by doing the following:
 
-1. `craft.matrixBlocks()` で行列ブロッククエリを作成します。
-2. [owner](#owner)、[fieldId](#fieldid)、および、[type](#type) パラメータをセットします。
-3. `.all()` で行列ブロックを取得します。
-4. [for](https://twig.symfony.com/doc/2.x/tags/for.html) タグを利用して行列ブロックをループ処理し、コンテンツを出力します。
+1. Create a Matrix block query with `craft.matrixBlocks()`.
+2. Set the [owner](#owner), [fieldId](#fieldid), and [type](#type) parameters on it.
+3. Fetch the Matrix blocks with `.all()`.
+4. Loop through the Matrix blocks using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag to output the contents.
 
 ```twig
 {# Create a Matrix block query with the 'owner', 'fieldId', and 'type' parameters #}
@@ -51,79 +51,79 @@ $myMatrixBlockQuery = \craft\elements\MatrixBlock::find();
 ```
 
 ::: warning
-返される行列ブロックにカスタムフィールドのコンテンツが代入されるよう、[fieldId](#fieldid) または [id](#id) パラメータを設定する必要があります。
+In order for the returned Matrix block(s) to be populated with their custom field content, you will need to either set the [fieldId](#fieldid) or [id](#id) parameter.
 :::
 
-### パラメータ
+### Parameters
 
-行列ブロッククエリは、次のパラメータをサポートしています。
+Matrix block queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
-| パラメータ | 説明 |
-| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [allowOwnerDrafts](#allowownerdrafts) | 行列ブロックのオーナーが下書きかどうかに基づいて、クエリの結果を絞り込みます。 |
-| [allowOwnerRevisions](#allowownerrevisions) | 行列ブロックのオーナーがリビジョンかどうかに基づいて、クエリの結果を絞り込みます。 |
-| [anyStatus](#anystatus) | ステータスに基づくエレメントのフィルタを削除します。 |
-| [asArray](#asarray) | [MatrixBlock](craft3:craft\elements\MatrixBlock) オブジェクトではなく、データの配列として、マッチした行列ブロックをクエリが返します。 |
-| [clearCachedResult](#clearcachedresult) | キャッシュされた結果をクリアします。 |
-| [dateCreated](#datecreated) | 行列ブロックの作成日に基づいて、クエリの結果を絞り込みます。 |
-| [dateUpdated](#dateupdated) | 行列ブロックの最終アップデート日に基づいて、クエリの結果を絞り込みます。 |
-| [field](#field) | 行列ブロックが属するフィールドに基づいて、クエリの結果を絞り込みます。 |
-| [fieldId](#fieldid) | フィールドの ID ごとに、行列ブロックが属するフィールドに基づいて、クエリの結果を絞り込みます。 |
-| [fixedOrder](#fixedorder) | クエリの結果を [id](#id) で指定された順序で返します。 |
-| [id](#id) | 行列ブロックの ID に基づいて、クエリの結果を絞り込みます。 |
-| [ignorePlaceholders](#ignoreplaceholders) | [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement) によってセットされたマッチするプレースホルダーエレメントを無視して、データベースに保存されたマッチする行列ブロックをクエリが返します。 |
-| [inReverse](#inreverse) | クエリの結果を逆順で返します。 |
-| [limit](#limit) | 返される行列ブロックの数を決定します。 |
-| [offset](#offset) | 結果からスキップされる行列ブロックの数を決定します。 |
-| [orderBy](#orderby) | 返される行列ブロックの順序を決定します。（空の場合、デフォルトは `sortOrder ASC`） |
-| [owner](#owner) | 指定されたエレメントに基づいて、[ownerId](#ownerid) および [siteId](#siteid) パラメータをセットします。 |
-| [ownerId](#ownerid) | オーナーの ID ごとに、行列ブロックのオーナーエレメントに基づいて、クエリの結果を絞り込みます。 |
-| [preferSites](#prefersites) | [unique](#unique) がセットされている場合、マルチサイトでエレメント照会する際に選択されるべきサイトを決定します |
-| [relatedTo](#relatedto) | 特定の他のエレメントと関連付けられた行列ブロックだけに、クエリの結果を絞り込みます。 |
-| [search](#search) | 検索クエリにマッチする行列ブロックだけに、クエリの結果を絞り込みます。 |
-| [site](#site) | 行列ブロックを照会するサイトを決定します。 |
-| [siteId](#siteid) | サイトの ID ごとに、行列ブロックを照会するサイトを決定します。 |
-| [status](#status) | 行列ブロックのステータスに基づいて、クエリの結果を絞り込みます。 |
-| [trashed](#trashed) | ソフトデリートされた行列ブロックだけに、クエリの結果を絞り込みます。 |
-| [type](#type) | 行列ブロックのブロックタイプに基づいて、クエリの結果を絞り込みます。 |
-| [typeId](#typeid) | タイプの ID ごとに、行列ブロックのブロックタイプに基づいて、クエリの結果を絞り込みます。 |
-| [uid](#uid) | 行列ブロックの UID に基づいて、クエリの結果を絞り込みます。 |
-| [unique](#unique) | クエリによってユニークな ID のエレメントだけが返されるかを決定します。 |
-| [with](#with) | 関連付けられたエレメントを eager-loaded した状態で、マッチした行列ブロックをクエリが返します。 |
+| Param                                       | Description                                                                                                                                                                                                                                                                                     |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the Matrix blocks’ owners are drafts.                                                                                                                                                                                                                |
+| [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the Matrix blocks’ owners are revisions.                                                                                                                                                                                                             |
+| [anyStatus](#anystatus)                     | Removes element filters based on their statuses.                                                                                                                                                                                                                                                |
+| [asArray](#asarray)                         | Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft3:craft\elements\MatrixBlock) objects.                                                                                                                                                    |
+| [clearCachedResult](#clearcachedresult)     | Clears the cached result.                                                                                                                                                                                                                                                                       |
+| [dateCreated](#datecreated)                 | Narrows the query results based on the Matrix blocks’ creation dates.                                                                                                                                                                                                                           |
+| [dateUpdated](#dateupdated)                 | Narrows the query results based on the Matrix blocks’ last-updated dates.                                                                                                                                                                                                                       |
+| [field](#field)                             | Narrows the query results based on the field the Matrix blocks belong to.                                                                                                                                                                                                                       |
+| [fieldId](#fieldid)                         | Narrows the query results based on the field the Matrix blocks belong to, per the fields’ IDs.                                                                                                                                                                                                  |
+| [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).                                                                                                                                                                                                                    |
+| [id](#id)                                   | Narrows the query results based on the Matrix blocks’ IDs.                                                                                                                                                                                                                                      |
+| [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching Matrix blocks as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement). |
+| [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.                                                                                                                                                                                                                                       |
+| [limit](#limit)                             | Determines the number of Matrix blocks that should be returned.                                                                                                                                                                                                                                 |
+| [offset](#offset)                           | Determines how many Matrix blocks should be skipped in the results.                                                                                                                                                                                                                             |
+| [orderBy](#orderby)                         | Determines the order that the Matrix blocks should be returned in. (If empty, defaults to `sortOrder ASC`.)                                                                                                                                                                                     |
+| [owner](#owner)                             | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.                                                                                                                                                                                                         |
+| [ownerId](#ownerid)                         | Narrows the query results based on the owner element of the Matrix blocks, per the owners’ IDs.                                                                                                                                                                                                 |
+| [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.                                                                                                                                                                                   |
+| [relatedTo](#relatedto)                     | Narrows the query results to only Matrix blocks that are related to certain other elements.                                                                                                                                                                                                     |
+| [search](#search)                           | Narrows the query results to only Matrix blocks that match a search query.                                                                                                                                                                                                                      |
+| [site](#site)                               | Determines which site(s) the Matrix blocks should be queried in.                                                                                                                                                                                                                                |
+| [siteId](#siteid)                           | Determines which site(s) the Matrix blocks should be queried in, per the site’s ID.                                                                                                                                                                                                             |
+| [status](#status)                           | Narrows the query results based on the Matrix blocks’ statuses.                                                                                                                                                                                                                                 |
+| [trashed](#trashed)                         | Narrows the query results to only Matrix blocks that have been soft-deleted.                                                                                                                                                                                                                    |
+| [type](#type)                               | Narrows the query results based on the Matrix blocks’ block types.                                                                                                                                                                                                                              |
+| [typeId](#typeid)                           | Narrows the query results based on the Matrix blocks’ block types, per the types’ IDs.                                                                                                                                                                                                          |
+| [uid](#uid)                                 | Narrows the query results based on the Matrix blocks’ UIDs.                                                                                                                                                                                                                                     |
+| [unique](#unique)                           | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                                                               |
+| [with](#with)                               | Causes the query to return matching Matrix blocks eager-loaded with related elements.                                                                                                                                                                                                           |
 
 #### `allowOwnerDrafts`
 
-行列ブロックのオーナーが下書きかどうかに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on whether the Matrix blocks’ owners are drafts.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得する行列ブロック
-| - | -
-| `true` | 下書きに属すことができる。
-| `false` | 下書きに属すことができない。
+| Value   | Fetches Matrix blocks…          |
+| ------- | ------------------------------- |
+| `true`  | which can belong to a draft.    |
+| `false` | which cannot belong to a draft. |
 
 
 
 
 #### `allowOwnerRevisions`
 
-行列ブロックのオーナーがリビジョンかどうかに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on whether the Matrix blocks’ owners are revisions.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得する行列ブロック
-| - | -
-| `true` | リビジョンに属すことができる。
-| `false` | リビジョンに属すことができない。
+| Value   | Fetches Matrix blocks…             |
+| ------- | ---------------------------------- |
+| `true`  | which can belong to a revision.    |
+| `false` | which cannot belong to a revision. |
 
 
 
 
 #### `anyStatus`
 
-ステータスに基づくエレメントのフィルタを削除します。
+Removes element filters based on their statuses.
 
 
 
@@ -148,7 +148,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `asArray`
 
-[MatrixBlock](craft3:craft\elements\MatrixBlock) オブジェクトではなく、データの配列として、マッチした行列ブロックをクエリが返します。
+Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft3:craft\elements\MatrixBlock) objects.
 
 
 
@@ -173,7 +173,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `clearCachedResult`
 
-キャッシュされた結果をクリアします。
+Clears the cached result.
 
 
 
@@ -182,17 +182,17 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `dateCreated`
 
-行列ブロックの作成日に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the Matrix blocks’ creation dates.
 
 
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得する行列ブロック
-| - | -
-| `'>= 2018-04-01'` | 2018-04-01 以降に作成されたもの。
-| `'< 2018-05-01'` | 2018-05-01 より前に作成されたもの。
-| `['and', '>= 2018-04-04', '< 2018-05-01']` | 2018-04-01 から 2018-05-01 の間に作成されたもの。
+| Value                                            | Fetches Matrix blocks…                               |
+| ------------------------------------------------ | ---------------------------------------------------- |
+| `'>= 2018-04-01'`                             | that were created on or after 2018-04-01.            |
+| `'< 2018-05-01'`                              | that were created before 2018-05-01                  |
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were created between 2018-04-01 and 2018-05-01. |
 
 
 
@@ -221,17 +221,17 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `dateUpdated`
 
-行列ブロックの最終アップデート日に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the Matrix blocks’ last-updated dates.
 
 
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得する行列ブロック
-| - | -
-| `'>= 2018-04-01'` | 2018-04-01 以降にアップデートされたもの。
-| `'< 2018-05-01'` | 2018-05-01 より前にアップデートされたもの。
-| `['and', '>= 2018-04-04', '< 2018-05-01']` | 2018-04-01 から 2018-05-01 の間にアップデートされたもの。
+| Value                                            | Fetches Matrix blocks…                               |
+| ------------------------------------------------ | ---------------------------------------------------- |
+| `'>= 2018-04-01'`                             | that were updated on or after 2018-04-01.            |
+| `'< 2018-05-01'`                              | that were updated before 2018-05-01                  |
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were updated between 2018-04-01 and 2018-05-01. |
 
 
 
@@ -258,17 +258,17 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `field`
 
-行列ブロックが属するフィールドに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the field the Matrix blocks belong to.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得する行列ブロック
-| - | -
-| `'foo'` | ハンドルが `foo` のフィールド内。
-| `'not foo'` | ハンドルが `foo` のフィールド内ではない。
-| `['foo', 'bar']` | ハンドルが `foo` または `bar` のフィールド内。
-| `['not', 'foo', 'bar']` | ハンドルが `foo` または `bar` のフィールド内ではない。
-| [craft\fields\Matrix](craft3:craft\fields\Matrix) オブジェクト | オブジェクトで表されるフィールド内。
+| Value                                                          | Fetches Matrix blocks…                          |
+| -------------------------------------------------------------- | ----------------------------------------------- |
+| `'foo'`                                                        | in a field with a handle of `foo`.              |
+| `'not foo'`                                                    | not in a field with a handle of `foo`.          |
+| `['foo', 'bar']`                                               | in a field with a handle of `foo` or `bar`.     |
+| `['not', 'foo', 'bar']`                                        | not in a field with a handle of `foo` or `bar`. |
+| a [craft\fields\Matrix](craft3:craft\fields\Matrix) object | in a field represented by the object.           |
 
 
 
@@ -291,16 +291,16 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `fieldId`
 
-フィールドの ID ごとに、行列ブロックが属するフィールドに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the field the Matrix blocks belong to, per the fields’ IDs.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得する行列ブロック
-| - | -
-| `1` | ID が 1 のフィールド内。
-| `'not 1'` | ID が 1 のフィールド内ではない。
-| `[1, 2]` | ID が 1 または 2 のフィールド内。
-| `['not', 1, 2]` | ID が 1 または 2 のフィールド内ではない。
+| Value           | Fetches Matrix blocks…               |
+| --------------- | ------------------------------------ |
+| `1`             | in a field with an ID of 1.          |
+| `'not 1'`       | not in a field with an ID of 1.      |
+| `[1, 2]`        | in a field with an ID of 1 or 2.     |
+| `['not', 1, 2]` | not in a field with an ID of 1 or 2. |
 
 
 
@@ -323,7 +323,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `fixedOrder`
 
-クエリの結果を [id](#id) で指定された順序で返します。
+Causes the query results to be returned in the order specified by [id](#id).
 
 
 
@@ -350,18 +350,18 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `id`
 
-行列ブロックの ID に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the Matrix blocks’ IDs.
 
 
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得する行列ブロック
-| - | -
-| `1` | ID が 1。
-| `'not 1'` | ID が 1ではない。
-| `[1, 2]` | ID が 1 または 2。
-| `['not', 1, 2]` | ID が 1 または 2 ではない。
+| Value           | Fetches Matrix blocks…    |
+| --------------- | ------------------------- |
+| `1`             | with an ID of 1.          |
+| `'not 1'`       | not with an ID of 1.      |
+| `[1, 2]`        | with an ID of 1 or 2.     |
+| `['not', 1, 2]` | not with an ID of 1 or 2. |
 
 
 
@@ -384,13 +384,13 @@ $MatrixBlock = \craft\elements\MatrixBlock::find()
 
 
 ::: tip
-特定の順序で結果を返したい場合、[fixedOrder](#fixedorder) と組み合わせることができます。
+This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
 :::
 
 
 #### `ignorePlaceholders`
 
-[craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement) によってセットされたマッチするプレースホルダーエレメントを無視して、データベースに保存されたマッチする行列ブロックをクエリが返します。
+Causes the query to return matching Matrix blocks as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 
 
 
@@ -403,7 +403,7 @@ $MatrixBlock = \craft\elements\MatrixBlock::find()
 
 #### `inReverse`
 
-クエリの結果を逆順で返します。
+Causes the query results to be returned in reverse order.
 
 
 
@@ -428,7 +428,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `limit`
 
-返される行列ブロックの数を決定します。
+Determines the number of Matrix blocks that should be returned.
 
 
 
@@ -451,7 +451,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `offset`
 
-結果からスキップされる行列ブロックの数を決定します。
+Determines how many Matrix blocks should be skipped in the results.
 
 
 
@@ -474,7 +474,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `orderBy`
 
-返される行列ブロックの順序を決定します。（空の場合、デフォルトは `sortOrder ASC`）
+Determines the order that the Matrix blocks should be returned in. (If empty, defaults to `sortOrder ASC`.)
 
 
 
@@ -497,7 +497,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `owner`
 
-指定されたエレメントに基づいて、[ownerId](#ownerid) および [siteId](#siteid) パラメータをセットします。
+Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
 
 
 
@@ -520,16 +520,16 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `ownerId`
 
-オーナーの ID ごとに、行列ブロックのオーナーエレメントに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the owner element of the Matrix blocks, per the owners’ IDs.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得する行列ブロック
-| - | -
-| `1` | ID が 1 のエレメントによって作成されたもの。
-| `'not 1'` | ID が 1 のエレメントによって作成されたものではない。
-| `[1, 2]` | ID が 1 または 2 のエレメントによって作成されたもの。
-| `['not', 1, 2]` | ID が 1 または 2 のエレメントによって作成されたものではない。
+| Value           | Fetches Matrix blocks…                           |
+| --------------- | ------------------------------------------------ |
+| `1`             | created for an element with an ID of 1.          |
+| `'not 1'`       | not created for an element with an ID of 1.      |
+| `[1, 2]`        | created for an element with an ID of 1 or 2.     |
+| `['not', 1, 2]` | not created for an element with an ID of 1 or 2. |
 
 
 
@@ -552,13 +552,13 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `preferSites`
 
-[unique](#unique) がセットされている場合、マルチサイトでエレメント照会する際に選択されるべきサイトを決定します
+If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 
 
 
-例えば、エレメント “Foo” がサイト A とサイト B に存在し、エレメント “Bar” がサイト B とサイト C に存在し、ここに `['c', 'b', 'a']` がセットされている場合、Foo will はサイト C に対して返され、Bar はサイト B に対して返されます。
+For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C, and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned for Site B.
 
-これがセットされていない場合、現在のサイトが優先されます。
+If this isn’t set, then preference goes to the current site.
 
 
 
@@ -585,11 +585,11 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `relatedTo`
 
-特定の他のエレメントと関連付けられた行列ブロックだけに、クエリの結果を絞り込みます。
+Narrows the query results to only Matrix blocks that are related to certain other elements.
 
 
 
-このパラメーターがどのように機能するかの詳細については、[リレーション](relations.md)を参照してください。
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -612,11 +612,11 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `search`
 
-検索クエリにマッチする行列ブロックだけに、クエリの結果を絞り込みます。
+Narrows the query results to only Matrix blocks that match a search query.
 
 
 
-このパラメーターがどのように機能するかの詳細については、[検索](searching.md)を参照してください。
+See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -645,24 +645,24 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `site`
 
-行列ブロックを照会するサイトを決定します。
+Determines which site(s) the Matrix blocks should be queried in.
 
 
 
-デフォルトでは、現在のサイトが使用されます。
+The current site will be used by default.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得される行列ブロック
-| - | -
-| `'foo'` | ハンドルが `foo` のサイトから。
-| `['foo', 'bar']` | ハンドルが `foo` または `bar` のサイトから。
-| `['not', 'foo', 'bar']` | ハンドルが `foo` または `bar` のサイトではない。
-| [craft\models\Site](craft3:craft\models\Site) オブジェクト | オブジェクトで表されるサイトから。
-| `'*'` | すべてのサイトから。
+| Value                                                      | Fetches Matrix blocks…                         |
+| ---------------------------------------------------------- | ---------------------------------------------- |
+| `'foo'`                                                    | from the site with a handle of `foo`.          |
+| `['foo', 'bar']`                                           | from a site with a handle of `foo` or `bar`.   |
+| `['not', 'foo', 'bar']`                                    | not in a site with a handle of `foo` or `bar`. |
+| a [craft\models\Site](craft3:craft\models\Site) object | from the site represented by the object.       |
+| `'*'`                                                      | from any site.                                 |
 
 ::: tip
-複数のサイトを指定した場合、複数のサイトに属するエレメントは複数回返されます。単一のエレメントだけを返したい場合、これと併せて [unique](#unique) を利用してください。
+If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you only want unique elements to be returned, use [unique](#unique) in conjunction with this.
 :::
 
 
@@ -686,20 +686,20 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `siteId`
 
-サイトの ID ごとに、行列ブロックを照会するサイトを決定します。
+Determines which site(s) the Matrix blocks should be queried in, per the site’s ID.
 
 
 
-デフォルトでは、現在のサイトが使用されます。
+The current site will be used by default.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得する行列ブロック
-| - | -
-| `1` | ID が `1` のサイトから。
-| `[1, 2]` | ID が `1` または `2` のサイトから。
-| `['not', 1, 2]` | ID が `1` または `2` のサイトではない。
-| `'*'` | すべてのサイトから。
+| Value           | Fetches Matrix blocks…                  |
+| --------------- | --------------------------------------- |
+| `1`             | from the site with an ID of `1`.        |
+| `[1, 2]`        | from a site with an ID of `1` or `2`.   |
+| `['not', 1, 2]` | not in a site with an ID of `1` or `2`. |
+| `'*'`           | from any site.                          |
 
 
 
@@ -722,16 +722,16 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `status`
 
-行列ブロックのステータスに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the Matrix blocks’ statuses.
 
 
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得する行列ブロック
-| - | -
-| `'enabled'`  _（デフォルト）_ | 有効なもの。
-| `'disabled'` | 無効なもの。
+| Value                    | Fetches Matrix blocks… |
+| ------------------------ | ---------------------- |
+| `'enabled'`  _(default)_ | that are enabled.      |
+| `'disabled'`             | that are disabled.     |
 
 
 
@@ -754,7 +754,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `trashed`
 
-ソフトデリートされた行列ブロックだけに、クエリの結果を絞り込みます。
+Narrows the query results to only Matrix blocks that have been soft-deleted.
 
 
 
@@ -779,17 +779,17 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `type`
 
-行列ブロックのブロックタイプに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the Matrix blocks’ block types.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得する行列ブロック
-| - | -
-| `'foo'` | ハンドルが `foo` のタイプ。
-| `'not foo'` | ハンドルが `foo` のタイプではない。
-| `['foo', 'bar']` | ハンドルが `foo` または `bar` のタイプ。
-| `['not', 'foo', 'bar']` | ハンドルが `foo` または `bar` のタイプではない。
-| [MatrixBlockType](craft3:craft\models\MatrixBlockType) オブジェクト | オブジェクトで表されるタイプ。
+| Value                                                              | Fetches Matrix blocks…                         |
+| ------------------------------------------------------------------ | ---------------------------------------------- |
+| `'foo'`                                                            | of a type with a handle of `foo`.              |
+| `'not foo'`                                                        | not of a type with a handle of `foo`.          |
+| `['foo', 'bar']`                                                   | of a type with a handle of `foo` or `bar`.     |
+| `['not', 'foo', 'bar']`                                            | not of a type with a handle of `foo` or `bar`. |
+| an [MatrixBlockType](craft3:craft\models\MatrixBlockType) object | of a type represented by the object.           |
 
 
 
@@ -812,16 +812,16 @@ $MatrixBlocks = $myEntry->myMatrixField
 
 #### `typeId`
 
-タイプの ID ごとに、行列ブロックのブロックタイプに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the Matrix blocks’ block types, per the types’ IDs.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値 | 取得する行列ブロック
-| - | -
-| `1` | ID が 1 のタイプ。
-| `'not 1'` | ID が 1 のタイプではない。
-| `[1, 2]` | ID が 1 または 2 のタイプ。
-| `['not', 1, 2]` | ID が 1 または 2 のタイプではない。
+| Value           | Fetches Matrix blocks…              |
+| --------------- | ----------------------------------- |
+| `1`             | of a type with an ID of 1.          |
+| `'not 1'`       | not of a type with an ID of 1.      |
+| `[1, 2]`        | of a type with an ID of 1 or 2.     |
+| `['not', 1, 2]` | not of a type with an ID of 1 or 2. |
 
 
 
@@ -844,7 +844,7 @@ $MatrixBlocks = $myEntry->myMatrixField
 
 #### `uid`
 
-行列ブロックの UID に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the Matrix blocks’ UIDs.
 
 
 
@@ -869,11 +869,11 @@ $MatrixBlock = \craft\elements\MatrixBlock::find()
 
 #### `unique`
 
-クエリによってユニークな ID のエレメントだけが返されるかを決定します。
+Determines whether only elements with unique IDs should be returned by the query.
 
 
 
-一度に複数のサイトからエレメントを照会する際、「重複する」結果を望まない場合に使用します。
+This should be used when querying elements from multiple sites at the same time, if “duplicate” results is not desired.
 
 
 
@@ -898,11 +898,11 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `with`
 
-関連付けられたエレメントを eager-loaded した状態で、マッチした行列ブロックをクエリが返します。
+Causes the query to return matching Matrix blocks eager-loaded with related elements.
 
 
 
-このパラメーターがどのように機能するかの詳細については、[エレメントの Eager-Loading](dev/eager-loading-elements.md) を参照してください。
+See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 
