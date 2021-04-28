@@ -1917,3 +1917,27 @@ Event::on(
     }
 );
 ```
+
+### `purchasableAvailable`
+
+The event that’s triggered when determining whether a purchasable should be available for a given current user and cart.
+
+```php
+use craft\commerce\events\PurchasableAvailableEvent;
+use craft\commerce\services\Purchasables;
+use yii\base\Event;
+Event::on(
+    Purchasables::class,
+    Purchasables::EVENT_PURCHASABLE_AVAILABLE,
+    function(PurchasableAvailableEvent $event) {
+        if($order && $user = $order->getUser()){
+            // Prevent users in group ID 1 from having the purchasable in their cart
+            $event->isAvailable = $event->isAvailable && !$user->isInGroup(1);
+        }
+    }
+);
+```
+
+::: tip
+If the purchasable becomes unavailable after being added to the cart, an [order notice](../orders-carts.md#order-notices) will be added to the order informing the customer.
+:::
