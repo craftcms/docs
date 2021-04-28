@@ -157,6 +157,10 @@ You can add multiple purchasables to the cart in a single request using a `purch
 
 A unique index key is required to group the purchasable `id` with its `qty`, and in this example we’re using `{{ loop.index }}` as a convenient way to provide it.
 
+::: tip
+You can use the [`purchasableAvailable`](extend/events.md#purchasableavailable) event to control whether a line item should be available to the current user and cart.
+:::
+
 ::: warning
 Commerce Lite is limited to a single line in the cart.\
 If a customer adds a new item, it replaces whatever was already in the cart.\
