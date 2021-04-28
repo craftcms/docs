@@ -15,7 +15,7 @@ An adjustment model should have a `type` of `shipping`, `discount`, or `tax`. (A
 The rest of this page covers discount and shipping adjusters even though there is also a `tax` adjuster type. Only one tax adjuster is allowed, but tax adjustments are deeply customizable via [tax engines](tax-engines.md).
 
 ::: warning
-Adjuster models previously included a `custom` type that’s deprecated. This `custom` type will be removed in Commerce 4.
+Adjuster models previously allowed setting the `type` property to any string. This been deprecated and only the type values above will be allowed in Commerce 4.
 :::
 
 ## Registering a New Adjuster
