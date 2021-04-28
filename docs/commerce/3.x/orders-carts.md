@@ -136,7 +136,7 @@ We’re sneaking three new things in here as well:
 2. The `qty` parameter can be used to specify a quantity, which defaults to `1` if not supplied.
 3. Craft’s [`redirectInput`](/3.x/dev/functions.md#redirectinput) tag can be used to take the user to a specific URL after the cart is updated successfully. **If any part of the cart update action fails, the user will not be redirected.**
 
-#### Adding a Multiple Items
+#### Adding Multiple Items
 
 You can add multiple purchasables to the cart in a single request using a `purchasables` array instead of a single `purchasableId`. This form adds all a product’s variants to the cart at once:
 
