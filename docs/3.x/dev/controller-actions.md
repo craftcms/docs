@@ -24,6 +24,10 @@ This can be used to save a new or existing entry, determined by the `sourceId` p
 See the [Entry Form](https://craftcms.com/knowledge-base/entry-form) guide for an example of working with this action.
 :::
 
+::: warning
+Note that _all_ custom fields can updated by users. For this reason, you should not assume that custom fields are protected from modification simply because they are not included in the form. 
+:::
+
 ### Supported Params
 
 The following params can be sent with the request:
@@ -129,6 +133,10 @@ This can be used to register a new user or update an existing one, determined by
 
 ::: tip
 See the [Front-End User Accounts](https://craftcms.com/knowledge-base/front-end-user-accounts#registration-form) guide for an example of working with this action.
+:::
+
+::: warning
+Note that _all_ custom fields can updated by users. For this reason, you should not assume that custom fields are protected from modification simply because they are not included in the form. 
 :::
 
 ### Supported Params
