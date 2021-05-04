@@ -1477,9 +1477,9 @@ RewriteRule (.+) index.php [QSA,L]
 
 
 
-Craft がフロントエンドのパスワードの設定フォームに使用する URI。
+The URI or URL that Craft should use for Set Password forms on the front end.
 
-Note that this config setting is ignored when <config3:headlessMode> is enabled, as password reset links will point to the control panel.
+Note that this config setting is ignored when <config3:headlessMode> is enabled, unless it’s set to an absolute URL.
 
 サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
 
@@ -1627,9 +1627,9 @@ Craft が URL を生成する際、`PATH_INFO` を利用してパスを指定す
 
 
 
-The URI Craft should use for email verification links on the front end.
+The URI or URL that Craft should use for email verification links on the front end.
 
-Note that this config setting is ignored when <config3:headlessMode> is enabled, as verification links will point to the control panel.
+Note that this config setting is ignored when <config3:headlessMode> is enabled, unless it’s set to an absolute URL.
 
 サポートされる値の種類は、[craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-sizeinbytes) のリストを参照してください。
 
