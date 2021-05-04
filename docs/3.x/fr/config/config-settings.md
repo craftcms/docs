@@ -1472,9 +1472,9 @@ Defined by :
 
 
 
-The URI Craft should use for Set Password forms on the front-end.
+The URI or URL that Craft should use for Set Password forms on the front end.
 
-Note that this config setting is ignored when <config3:headlessMode> is enabled, as password reset links will point to the control panel.
+Note that this config setting is ignored when <config3:headlessMode> is enabled, unless it’s set to an absolute URL.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -1622,9 +1622,9 @@ Since :
 
 
 
-The URI Craft should use for email verification links on the front end.
+The URI or URL that Craft should use for email verification links on the front end.
 
-Note that this config setting is ignored when <config3:headlessMode> is enabled, as verification links will point to the control panel.
+Note that this config setting is ignored when <config3:headlessMode> is enabled, unless it’s set to an absolute URL.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
