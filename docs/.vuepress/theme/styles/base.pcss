@@ -28,6 +28,16 @@ html {
   }
 }
 
+/**
+ * Uncomfortable hack to disbable smooth scroll in Firefox.
+ * https://github.com/craftcms/docs/issues/209
+ */
+@supports (-moz-appearance: none) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   @apply font-sans font-normal;
   color: var(--text-color);
