@@ -1,6 +1,6 @@
-# Adding Custom Containers
+# Custom Containers
 
-Nitro does its best to give you 80 percent of what you need for local development. However, some Craft projects have to interact with non-common tools such as MongoDB, Elasticsearch, and etc. Installing and managing these tools can be a cumbersome and often error prone process. However, Nitro has built in support to make setting up these tools really simple with the `container` commands.
+Nitro does its best to give you 80 percent of what you need for local development. However, some Craft projects have to interact with non-common tools such as MongoDB, Elasticsearch, and etc. Installing and managing these tools can be cumbersome and error-prone process, but Nitro supports `container` commands that leverage Docker for easier setup.
 
 ::: tip
 Nitro exposes common tools such as [Minio](services/minio.md) and [Mailhog](services/mailhog.md) as services with the [`enable`](commands.md#enable) command.
@@ -8,7 +8,7 @@ Nitro exposes common tools such as [Minio](services/minio.md) and [Mailhog](serv
 
 ## Adding a Custom Container
 
-Imagine we are working on a project that needs to interact with data stored in Elasticsearch. We can use the `container new` command to add the container, ports, and volumes to our Nitro configuration file. The `container new` command provides easy prompts to walk you through setup.
+Imagine we’re working on a project that needs to interact with data stored in Elasticsearch. We can use the [`container new`](commands.md#container-new) command to add the container, ports, and volumes to our Nitro configuration file. The `container new` command provides prompts to walk you through setup.
 
 ```bash
 $ nitro container new
@@ -72,4 +72,12 @@ To apply these changes, delete the container from Docker Desktop and run `nitro 
 
 ::: tip
 Defining an environment variable in the local file will override the default environment variables an image defines.
+:::
+
+## Removing a Custom Container
+
+Use the [`container remove`](commands.md#container-remove) command to destroy a custom container. This will remove it from Nitro’s configuration, delete the running container, and delete the accompanying environment variable file if it was created.
+
+::: tip
+Running `nitro container remove` will only prompt for container selection if you’ve added more than one custom container.
 :::
