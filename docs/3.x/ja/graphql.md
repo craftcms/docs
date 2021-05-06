@@ -10,7 +10,7 @@ Craft Pro は、コンテンツのための自動生成された[GraphQL](https:
 
 はじめに、Craft Pro 3.3 以降を稼働し、さらに、[`enableGql` 設定](config3:enableGql) が `false` にセットされていないことを確認してください。
 
-GraphQL API の探索を開始する最も簡単な方法は、組み込みの [GraphiQL](https://github.com/graphql/graphiql) IDE を使うことです。 これは、コントロールパネルの「GraphQL > GraphiQL」から利用できます。 Querying from the control panel gives you full access to data that’s available, unlike queries from the outside that require [and endpoint and appropriate permissions](#setting-up-your-api-endpoint).
+GraphQL API の探索を開始する最も簡単な方法は、組み込みの [GraphiQL](https://github.com/graphql/graphiql) IDE を使うことです。 これは、コントロールパネルの「GraphQL > GraphiQL」から利用できます。 Querying from the control panel gives you full access to data that’s available, unlike queries from the outside that require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
 
 ## はじめよう
 
