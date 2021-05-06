@@ -1,72 +1,82 @@
 # プラグイン
 
-::: tip
-プラグイン _開発_ のためのドキュメントをお探しの場合は、[Craft の拡張](extend/README.md) セクションをチェックしてください。
-:::
+Plugins extend Craft’s core functionality. They can introduce new Dashboard widgets, field types, control panel sections, Twig templating features, workflow actions, and more.
 
-プラグインは Craft のコア機能を拡張します。 新しいダッシュボードウィジェット、フィールドタイプ、コントロールパネルセクション、Twig テンプレート機能、ワークフローアクションなどを導入することができます。
+::: tip
+If you’re looking for documentation on plugin _development_, check out [Extending Craft](extend/README.md).
+:::
 
 ## プラグインストア
 
-Craft のコントロールパネルはプラグインストアを特徴とし、数百の無料プラグインと商用プラグインをブラウズしたり、ワンクリックでインストールしたり、料金を支払うことができます。
+Craft’s control panel features a Plugin Store where you can browse through hundreds of free and commercial plugins, install them with a single click, and purchase licenses.
 
-プラグインストアにアクセスするためには、Craft のコントロールパネルのナビゲーションにある「プラグインストア」をクリックします。 そこから、様々なプラグインカテゴリや選別されたリストをブラウズして、新しいプラグインを発見することができます。
+::: tip
+If you’ve disallowed admin changes in production, you will only be able to install plugins from the control panel in your local development environment.
+:::
+
+To access the Plugin Store from the control panel, choose **Plugin Store** from the main navigation. From there you can browse through the various plugin categories and curated lists to discover new plugins.
 
 ![The Craft Plugin Store](./images/plugin-store.png)
 
-プラグインをクリックすると、長い説明文やスクリーンショットを含むプラグインに関する詳細をモーダルウィンドウで開きます。
+Choose any plugin to learn more about its features, pricing, documentation, version history, and see screenshots of it in action.
 
-![プラグインストア内のプラグインのモーダルウィンドウ](./images/plugin-store-plugin.png)
+![Plugin Store plugin detail page](./images/plugin-store-plugin.png)
 
 ## 無料プラグインのインストール
 
-無料プラグインは、「インストール」ボタンをクリックしてインストールできます。 インストールと併せて Craft のステータスを更新する、プラグインのインストールページが表示されます。
+Free plugins can be installed by choosing **Install** from the plugin’s detail page. You’ll be taken to the plugin installer page, which will keep you updated with Craft’s status as it works through the installation.
 
 ## 商用プラグインの試用
 
-Craft が開発ドメイン上で実行されている場合、「試用」ボタンをクリックして商用プラグインを試用版としてインストールできます。 インストールと併せて Craft のステータスを更新する、プラグインのインストールページが表示されます。
+If Craft is running on a development domain or in a local development environment, you can try out any commercial plugin for as long as you’d like by choosing the **Try** button from its detail page. You’ll be taken to the plugin installer page, which will keep you updated with Craft’s status as it works through the installation.
 
 ## 商用プラグインの購入
 
-商用プラグインを試して購入する準備ができている場合は、 プラグインストアに戻り、ヘッダーにあるカートアイコンをクリックしてください。 カートモーダルの「有効なトライアル」セクションに、プラグインの一覧を確認できます。 「カートに追加」ボタンをクリックして、カートにプラグインを追加し、チェックアウトを続行します。
+If you’ve tried a commercial plugin and are ready to purchase a license, return to the Plugin Store and choose the cart icon in the header area. The plugin should be listed in the cart’s **Active Trials** section. Choose **Add to cart** to add the plugin to your cart and proceed with checkout.
 
-チェックアウトのプロセスが完了すると、インストールしたプラグインは自動的にライセンスを取得します。
+Once you’ve completed the checkout process, your plugin installation will automatically become licensed.
+
+::: tip
+If you purchase a plugin license separately from a Craft install or need to update a license key, visit **Settings** → **Plugins** in the relevant site’s control panel. From that listing, you can enter a new key or environment variable placeholder for any commercial plugin.
+
+![Changing a plugin license key](./images/changing-plugin-license-key.gif)
+:::
 
 ## プラグインライセンスの管理
 
-[Craft ID](https://id.craftcms.com/) アカウントの「Licenses → Plugins」から、すべてのプラグインライセンスを管理することができます。
+You can manage all your plugin licenses from your [Craft ID](https://id.craftcms.com/) account, under **Licenses** → **Plugins**
 
-まだ Craft ID アカウントをお持ちでない場合は、[id.craftcms.com/register](https://id.craftcms.com/register) にアクセスしてアカウントを作成することができます。
+If you don’t have a Craft ID account yet, you can create one by going to [id.craftcms.com/register](https://id.craftcms.com/register).
 
-Craft ID アカウントと同じメールアドレスで購入されたすべてのプラグインライセンスは、自動的にアカウントへ追加されます。
+Any plugin licenses purchased with the same email address as your Craft ID account will automatically be added to your account.
 
-プラグインライセンスが表示されない場合は、「Licenses → Claim License」に移動します。 ライセンスキーを手動で入力するか、購入に利用したメールアドレスを知っている場合は “Claim licenses by email address” セクションにそれを入力することができます。 メールアドレスの所有者であることを確認後、 メールアドレスに関連付けられている未使用のライセンスがアカウントに追加されます。
+If you have a plugin license that isn’t showing up, visit **Licenses** → **Claim License**. You can enter its license key manually, or if you know the email address that was used for purchase, you can enter it in the **Claim licenses by email address** section. After verifying ownership of the email address, any unclaimed licenses associated with that email address will be added to your account.
 
 ### Safeguarding Plugin License Keys
 
-By default your plugin license key will be stored in the database and `project.yaml`. You may, however, move that license key to a custom PHP constant and set the key using the `$VARIABLE_NAME` syntax.
+By default your plugin license key will be stored in the database and the [project config](project-config.md). You may, however, move that license key to a custom PHP constant and set the key using the `$VARIABLE_NAME` syntax.
 
-プラグインストアの商用ライセンスは、Craft のライセンスモデルに従わなければなりません。
+If you were to create a `MY_PLUGIN_KEY` environment variable, for example, you could then use `$MY_PLUGIN_KEY` in place of the key itself anywhere the plugin license key is required.
 
 ## プラグインライセンスの譲渡
 
-プラグインライセンスを他の Craft ID アカウントに譲渡するには、あなたの Craft ID アカウントにログインし、「Licenses → Plugins」で表示されるライセンスを選択し、 “Release License” ボタンをクリックしてアカウントから解放します。 それによって、他の人が Craft ID アカウントの「Licenses → Claim License」ページから自分自身のライセンスを要求できるようになります。
+To transfer a plugin license to someone else’s Craft ID account, log into your Craft ID account, choose the license under **Licenses** → **Plugins**, and choose the **Release License** to release it from your account. Another person will then be able to claim the license for themself from the **Licenses** → **Claim License** page of their Craft ID account.
 
 ## 商用プラグインのライセンス
 
-これらのルールは、カスタマーに対しプラグインのライセンスを安全かつ予測可能にするとともに、プラグインベンダーにとって持続可能なビジネスモデルを提供することにも役立ちます。
+Commercial plugins in the Plugin Store must follow Craft’s licensing model:
 
 - 開発環境で自由に試すことができますが、本番環境での利用には支払いを必要とします。
 - 商用ライセンスは Craft へのインストールごとに1回限り支払う料金で、購入後1年間はアップデートにアクセスできます。
 - 追加のアップデートは、年ごとのアップデート料金で入手することができます。
 - 質問不要で、ライセンスは購入から30日以内に全額返金することができます。
 
-さらに、プラグインストア内のすべてのプラグインは [MIT ライセンス](https://opensource.org/licenses/MIT) または [Craft ライセンス](https://craftcms.github.io/license/) のいずれかを使用する必要があります。 （一般的に、無料プラグインは MIT ライセンス、商用プラグインは Craft ライセンスを使用します。 ）
+Additionally, all plugins in the Plugin Store must use either the [MIT License](https://opensource.org/licenses/MIT) or the [Craft License](https://craftcms.github.io/license/). (Generally, free plugins will use the MIT License, and commercial plugins will use the Craft license.)
 
-プラグインベンダーが商用プラグインライセンスとして妥当なレベルのサポートを提供していないと感じる場合は、<support@craftcms.com> にメールを送ってください。
+Together, these rules make plugin licensing safe and predictable for customers, while also helping provide a sustainable business model for plugin vendors.
 
 ## 商用プラグインのサポート
 
-わたしたちは、プラグインベンダーに特定のサポート要件を課すものではありません。 サポートポリシーについて知るためには、ベンダーに確認する必要があります。 そして、何が期待できるかを知ってください。
+We don’t impose any specific support requirements on plugin vendors. You will need to check with them to learn about their support policies, so you know what to expect.
 
-If you feel that a plugin vendor isn’t providing a reasonable level of support for a commercial plugin license, please send and email to <support@craftcms.com> about it.
+If you feel that a plugin vendor isn’t providing a reasonable level of support for a commercial plugin license, please let us know by emailing <support@craftcms.com> and letting us know about the situation.
