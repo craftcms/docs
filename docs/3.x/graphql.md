@@ -10,7 +10,7 @@ Craft Pro provides a [GraphQL](https://graphql.org) API you can use to work with
 
 Make sure you’re running Craft Pro 3.3 or later and [the `enableGql` setting](config3:enableGql) is not set to `false`.
 
-Because GraphQL is self-documenting, you can jump right into Craft’s included [GraphiQL IDE](#using-the-graphiql-ide) from the control panel and interactively build and execute queries. Querying from the control panel gives you full access to data that’s available, unlike queries from the outside that require [and endpoint and appropriate permissions](#setting-up-your-api-endpoint).
+Because GraphQL is self-documenting, you can jump right into Craft’s included [GraphiQL IDE](#using-the-graphiql-ide) from the control panel and interactively build and execute queries. Querying from the control panel gives you full access to data that’s available, unlike queries from the outside that require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
 
 ## Examples
 
