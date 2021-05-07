@@ -87,23 +87,22 @@ This example provides a `widgets` query that returns an array of custom [interfa
 ```php
 namespace mynamespace\gql\queries;
 
-use craft\gql\base\Query;
 use GraphQL\Type\Definition\Type;
 use mynamespace\helpers\Gql as GqlHelper;
 use mynamespace\gql\interfaces\elements\Widget as WidgetInterface;
 use mynamespace\gql\arguments\elements\Widget as WidgetArguments;
 use mynamespace\gql\resolvers\elements\Widget as WidgetResolver;
 
-class Widget extends Query
+class Widget extends craft\gql\base\Query
 {
     public static function getQueries($checkToken = true): array
     {
-        // make sure the current token’s schema allows querying widgets
+        // Make sure the current token’s schema allows querying widgets
         if ($checkToken && !GqlHelper::canQueryWidgets()) {
             return [];
         }
 
-        // provide one or more query definitions
+        // Provide one or more query definitions
         return [
             'widgets' => [
                 'type' => Type::listOf(WidgetInterface::getType()),
@@ -168,10 +167,9 @@ Our pretend Widget element could provide its own `approved` argument for narrowi
 ```php
 namespace mynamespace\gql\arguments\elements;
 
-use craft\gql\base\ElementArguments;
 use GraphQL\Type\Definition\Type;
 
-class Widget extends ElementArguments
+class Widget extends craft\gql\base\ElementArguments
 {
     public static function getArguments(): array
     {
@@ -193,36 +191,188 @@ This example extends <craft3:craft\gql\base\ElementArguments> in order to take a
 
 ## Types
 
-Not to be confused with entry types, GraphQL types are the all-important and specific descriptions of the kinds of data the API represents. Every single type must exhaustively describe what it contains—including any nested types—and every type in the GraphQL schema must be unique.
+Not to be confused with Craft’s entry types, GraphQL types are the vital and specific descriptions of whatever kinds of data the API can return.
 
-TODO: include example
+::: tip
+GraphQL is a type system, and if you’re not already familiar we recommend reading about its [schema and types](https://graphql.org/learn/schema/) for context.
+:::
 
-Every available part of Craft’s content model, and every kind of data your custom plugin or module needs to make available via GraphQL, needs to be translated into an explicitly-named GraphQL type.
+Each type must exhaustively describe what it contains—including any nested types—and every type in the GraphQL schema must be unique.
 
-Craft’s <craft3:craft\gql\GqlEntityRegistry> keeps track of types that are registered, and you’ll use it to fetch, modify, and set these GraphQL types.
+Everything has a `__typename`:
+
+::: code
+
+```graphql GraphQL Query
+{
+  __typename
+  entry {
+    __typename
+  }
+  user {
+    __typename
+  }
+  widget {
+    __typename
+  }
+}
+```
+
+```json JSON Response
+{
+  "data": {
+    "__typename": "Query",
+    "entry": {
+      "__typename": "blog_blog_Entry"
+    },
+    "user": {
+      "__typename": "User"
+    }
+    "widget": {
+      "__typename": "Widget"
+    }
+  }
+}
+```
+
+:::
+
+Every available part of Craft’s content model, and every kind of data your custom plugin or module needs to expose via GraphQL, needs to be translated into an explicitly-named GraphQL type.
+
+Craft’s <craft3:craft\gql\GqlEntityRegistry> keeps track of these GraphQL types, and you’ll use it to add, fetch, and modify them.
+
+When adding fields to a given type, you should run them through <craft3:craft\gql\TypeManager::prepareFieldDefinitions()>. This makes it possible for others to programmatically [modify type fields](#modifying-type-fields) you’re introducing.
+
+### Example Type Class
+
+This example extends Craft’s element GraphQL [interface](#interfaces) to define a single GraphQL type for our custom Widget element, adding a single `approved` field: 
+
+```php
+namespace mynamespace\gql\interfaces\elements;
+
+use GraphQL\Type\Definition\Type;
+use GraphQL\Type\Definition\InterfaceType;
+use craft\gql\GqlEntityRegistry;
+
+class Widget extends craft\gql\interfaces\Element
+{
+    public static function getName(): string
+    {
+        return 'WidgetInterface';
+    }
+
+    public static function getType($fields = null): Type
+    {
+        // Return the type if it’s already been created
+        if ($type = GqlEntityRegistry::getEntity(self::getName())) {
+            return $type;
+        }
+
+        // Otherwise create the type via the entity registry, which handles prefixing
+        return GqlEntityRegistry::createEntity(self::getName(), new InterfaceType([
+            'name' => static::getName(),
+            'fields' => self::class . '::getFieldDefinitions',
+            'description' => 'This is the interface implemented by all widgets.',
+            'resolveType' => self::class . '::resolveElementTypeName',
+        ]));
+    }
+
+    public static function getFieldDefinitions(): array
+    {
+        // Add our custom widget’s field to common ones for all elements
+        return TypeManager::prepareFieldDefinitions(array_merge(
+            parent::getFieldDefinitions(),
+            [
+                'approved' => [
+                    'name' => 'approved',
+                    'type' => Type::boolean(),
+                    'description' => 'User account ID of the partner listing’s owner.'
+                ],
+            ]
+        ), self::getName());
+    }
+}
+```
+
+While there are many types you could implement, you’ll most likely work with interfaces that describe data models and input types for any mutations.
 
 ### Registering Types
+
+The Gql service includes a `registerGqlTypes` event you can use to register your own types. Here we’re registering the `WidgetInterface` class. While you’re not limited to adding interfaces, any class must have a `getType()` method that returns a valid GraphQL type definition.
 
 ```php
 use craft\events\RegisterGqlTypesEvent;
 use craft\services\Gql;
 use yii\base\Event;
-use MyGqlElementInterface;
+use mynamespace\gql\interfaces\elements\Widget as WidgetInterface;
 
 Event::on(
     Gql::class,
     Gql::EVENT_REGISTER_GQL_TYPES,
     function(RegisterGqlTypesEvent $event) {
-        $event->types[] = MyGqlElementInterface::class;
+        $event->types[] = WidgetInterface::class;
     }
 );
 ```
 
+### Modifying Type Fields
+
+Craft’s <craft3:craft\gql\TypeManager> includes a `defineGqlTypeFields` event you can use to add, remove or modify fields on a given GraphQL type.
+
+```php
+use craft\events\DefineGqlTypeFields;
+use craft\gql\TypeManager;
+use yii\base\Event;
+
+Event::on(
+    TypeManager::class,
+    TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS,
+    function(DefineGqlTypeFields $e) {
+        // Remove all ids to enforce use of uids
+        unset ($event->fields['id']);
+
+        // Add author email to all entries
+        if ($event->typeName == 'EntryInterface') {
+            $event->fields['authorEmail'] = [
+                'name' => 'authorEmail',
+                'type' => Type::string(),
+                'resolve' => function($source, $arguments, $context, $resolveInfo) {
+                    // Illustrative only; a query for each entry would perform poorly
+                    return $source->getAuthor()->email;
+                }
+            ];
+        }
+    }
+);
+
+```
+
 ## Interfaces
+
+Just like PHP interfaces, GraphQL interfaces are abstract types that describe the fields a type must implement.
+
+![Screenshot of EntryInterface in GraphiQL’s documentation sidebar](../images/graphiql-entry-interface.png)
+
+## Resolvers
+
+A resolver is responsible for taking a GraphQL field and returning the expected result from Craft.
 
 ## Generators
 
-Craft includes the concept of type generators that are crucial for dynamically generating the complex types necessary for entry types, Matrix fields, and other content structures with the ability to have many specific contexts that each need a unique type definition.
+Craft introduces the concept of type generators that are crucial for dynamically generating the complex types necessary for entry types, Matrix fields, and other content structures that can have many specific contexts where each needs a unique GraphQL type definition.
+
+In the [example interface](#example-type-class) above, we kept things simple by adding only one GraphQL type to the schema. In other words, our widget only comes in one flavor. If the data you’re representing only appears in one form, that may work great!
+
+It’s common in Craft, however, for elements to have multiple types: entries have sections and entry types, assets have volumes, categories have groups, and so on. The developer can create however many of these “flavors” they’d like, and yet we still need each one to be accounted for in the GraphQL schema. This is exactly the situation generators help with.
+
+Like the name implies, a generator can dynamically create types based on whatever contexts are needed. The generator needs to know about the unique scopes in which an element may appear for each unique flavor or context:
+
+- An Asset’s context is its volume: `volumes.[UID]`
+- A category’s context is its category group: `categorygroups.[UID]`
+- An entry’s context is its entry type, and it has an additional section context: \
+`sections.[section UID]`, `entrytypes.[UID]`
+
+### Example Generator Class
 
 ## Directives
 
@@ -337,6 +487,8 @@ Event::on(
 ## Examples
 
 ### GraphQL for Elements
+
+extend craft\gql\types\elements\Element, which is an extension of ObjectType
 
 See Craftnet Partners.
 
