@@ -23,6 +23,13 @@ If you’re not already familiar with GraphQL terminology and the [webonyx/graph
 
 The rest of this page will cover each of the main things you may need to work with. If you’d like some concrete examples, have a look at Craft’s own pieces in the [`src/gql/` directory](https://github.com/craftcms/cms/tree/main/src/gql).
 
+### Limitations
+
+If you’re planning advanced or elaborate GraphQL features, please be aware of the following limitations with Craft’s GraphQL implementation:
+
+- GraphQL subscriptions aren’t currently supported.
+- Advanced query builder functions [are not exposed for GraphQL](https://github.com/craftcms/cms/issues/7842).
+
 ## The Gql Service
 
 The <craft3:craft\services\Gql> class offers methods mostly for managing schemas and tokens and executing queries, so you won’t need to do much with it if you’re primarily exposing data to GraphQL. The Gql class does, however, define and trigger the events you’ll use to register any components you’d like to add to the system. (We’ll get to those in a moment.)
@@ -245,7 +252,7 @@ When adding fields to a given type, you should run them through <craft3:craft\gq
 
 ### Example Type Class
 
-This example extends Craft’s element GraphQL [interface](#interfaces) to define a single GraphQL type for our custom Widget element, adding a single `approved` field: 
+This example extends Craft’s element GraphQL [interface](#interfaces) to define a single GraphQL type for our custom Widget element, adding a custom `approved` field:
 
 ```php
 namespace mynamespace\gql\interfaces\elements;
@@ -294,11 +301,13 @@ class Widget extends craft\gql\interfaces\Element
 }
 ```
 
-While there are many types you could implement, you’ll most likely work with interfaces that describe data models and input types for any mutations.
+While there are many GraphQL types you could implement, you’ll most likely work with interfaces that describe data models and input types for any [mutations](#mutations).
 
 ### Registering Types
 
-The Gql service includes a `registerGqlTypes` event you can use to register your own types. Here we’re registering the `WidgetInterface` class. While you’re not limited to adding interfaces, any class must have a `getType()` method that returns a valid GraphQL type definition.
+The Gql service includes a `registerGqlTypes` event you can use to register your own types.
+
+Here we’re registering the `Widget` interface we just looked at above. While you’re not limited to adding interfaces, any class you add must have a `getType()` method that returns a valid GraphQL type definition.
 
 ```php
 use craft\events\RegisterGqlTypesEvent;
@@ -337,14 +346,13 @@ Event::on(
                 'name' => 'authorEmail',
                 'type' => Type::string(),
                 'resolve' => function($source, $arguments, $context, $resolveInfo) {
-                    // Illustrative only; a query for each entry would perform poorly
+                    // Illustrative only; a query per entry would perform poorly
                     return $source->getAuthor()->email;
                 }
             ];
         }
     }
 );
-
 ```
 
 ## Interfaces
@@ -353,32 +361,122 @@ Just like PHP interfaces, GraphQL interfaces are abstract types that describe th
 
 ![Screenshot of EntryInterface in GraphiQL’s documentation sidebar](../images/graphiql-entry-interface.png)
 
+You don’t have to use interfaces, but they’re a nice way of formalizing the fields exposed by your type. Craft provides GraphQL interfaces for each included element type you may want to take advantage of:
+
+- <craft3:craft\gql\interfaces\Element>
+- <craft3:craft\gql\interfaces\Structure>
+- <craft3:craft\gql\interfaces\elements\Asset>
+- <craft3:craft\gql\interfaces\elements\Category>
+- <craft3:craft\gql\interfaces\elements\Entry>
+- <craft3:craft\gql\interfaces\elements\GlobalSet>
+- <craft3:craft\gql\interfaces\elements\MatrixBlock>
+- <craft3:craft\gql\interfaces\elements\Tag>
+- <craft3:craft\gql\interfaces\elements\User>
+
 ## Resolvers
 
-A resolver is responsible for taking a GraphQL field and returning the expected result from Craft.
+A resolver is responsible for mapping a GraphQL API field to its Craft API equivalent.
+
+You won’t see or interact with a resolver querying the GraphQL API because the resolver works behind the scenes to connect the query or mutation to the value it’s supposed to return.
+
+### Example Resolver Class
+
+This example resolver extends the base [ElementResolver](craft3:craft\gql\base\ElementResolver) and implements a single [prepareQuery()](craft3:craft\gql\base\ElementResolver::prepareQuery()) method whose job is to return an element query:
+
+```php
+namespace mynamespace\gql\resolvers\elements;
+
+use mynamespace\elements\Widget as WidgetElement;
+use mynamespace\helpers\Gql as GqlHelper;
+
+class Widget extends craft\gql\base\ElementResolver
+{
+    public static function prepareQuery($source, array $arguments, $fieldName = null)
+    {
+        if ($source === null) {
+            // If this is the beginning of a resolver chain, start fresh
+            $query = WidgetElement::find();
+        } else {
+            // If not, get the prepared element query
+            $query = $source->$fieldName;
+        }
+
+        // Return the query if it’s preloaded
+        if (is_array($query)) {
+            return $query;
+        }
+
+        foreach ($arguments as $key => $value) {
+            if (method_exists($query, $key)) {
+                $query->$key($value);
+            } elseif (property_exists($query, $key)) {
+                $query->$key = $value;
+            } else {
+                // Catch custom field queries
+                $query->$key($value);
+            }
+        }
+
+        // Don’t return anything that’s not allowed
+        if (!GqlHelper::canQueryWidgets()) {
+            return [];
+        }
+
+        return $query;
+    }
+}
+```
+
+If this wasn’t a custom element type, we’d need a class to extend <craft3:craft\gql\base\Resolver> instead, implementing a [resolve()](craft3:craft\gql\base\Resolver::resolve()) method to return the field’s value rather than translating it into an element query.
 
 ## Generators
 
-Craft introduces the concept of type generators that are crucial for dynamically generating the complex types necessary for entry types, Matrix fields, and other content structures that can have many specific contexts where each needs a unique GraphQL type definition.
+Craft introduces its own concept of generators to help create the GraphQL types necessary for entry types, Matrix fields, and other content structures that can be configured with many contexts and custom fields where each needs a unique GraphQL type definition.
 
 In the [example interface](#example-type-class) above, we kept things simple by adding only one GraphQL type to the schema. In other words, our widget only comes in one flavor. If the data you’re representing only appears in one form, that may work great!
 
-It’s common in Craft, however, for elements to have multiple types: entries have sections and entry types, assets have volumes, categories have groups, and so on. The developer can create however many of these “flavors” they’d like, and yet we still need each one to be accounted for in the GraphQL schema. This is exactly the situation generators help with.
+It’s common in Craft, however, for elements to have multiple types; entries have sections and entry types, assets have volumes, categories have groups, and so on. The developer can create however many of these “flavors” they’d like, and yet we still need each one to be accounted for in the GraphQL schema. This is exactly the situation generators help with.
 
-Like the name implies, a generator can dynamically create types based on whatever contexts are needed. The generator needs to know about the unique scopes in which an element may appear for each unique flavor or context:
+Like the name implies, a generator can dynamically create types based on whatever contexts are needed. The generator needs to know about the unique scopes in which an element may appear for each unique flavor or context.
+
+For example:
 
 - An Asset’s context is its volume: `volumes.[UID]`
 - A category’s context is its category group: `categorygroups.[UID]`
 - An entry’s context is its entry type, and it has an additional section context: \
 `sections.[section UID]`, `entrytypes.[UID]`
 
+If you’ll benefit from using a generator, you will need to write a class that extends <craft3:craft\gql\base\Generator> and implements <craft3:craft\gql\base\GeneratorInterface> and <craft3:craft\gql\base\SingleGeneratorInterface>.
+
+Generator provides a `getContentFields()` method that gets custom fields for a given context, while the interfaces require `generateTypes()` and `generateType()` respectively—responsible for registering types based on the provided context.
+
 ### Example Generator Class
+
+```php
+```
 
 ## Directives
 
 Directives return types that can be used to transform result data in specified locations relative to the GraphQL query.
 
+The [`formatDateTime` directive](../graphql.md#the-formatdatetime-directive), for example, can be used to return any date in a specific format:
+
+```graphql{3}
+{
+  widgets {
+    dateCreated @formatDateTime (format: "Y-m-d")
+  }
+}
+```
+
 Craft’s included directives apply exclusively to requested fields, though they may be applied in mutations and numerous parts of the type system.
+
+### Example Directive Class
+
+TODO: add
+
+```php
+```
 
 ### Registering Directives
 
@@ -403,7 +501,12 @@ A Mutation class defines named mutations that should be available, including con
 
 input objects
 
-TODO: include example
+### Example Mutation Class
+
+TODO: add
+
+```php
+```
 
 ### Registering Mutations
 
@@ -433,9 +536,23 @@ Event::on(
 
 ### Schema Components
 
-Schema components define the permissions available to a Craft user building a schema. Once a schema is established, its permission set determines the scope available for a given token.
+Schema components define the distinct parts that can be enabled in Craft’s GraphQL schemas:
+
+![Schema components in the Craft control panel](../images/control-panel-schema-components.png)
+
+A schema’s configuration of these components directly determines how it’s built. How you label, organize, and enforce them is entirely up to you.
+
+Each component’s key may include an applicable action scope in `:action` format. So the `widget` component having a `read` action would be `widget:read`.
+
+The default action is `read`, and the available actions are:
+
+- `read`
+- `edit`
+- `save`
 
 #### Registering Schema Components
+
+The Gql service provides a `registerGqlSchemaComponents` event you can use to append your own schema components to the event object’s `queries` and/or `mutations` arrays:
 
 ```php
 use craft\events\RegisterGqlSchemaComponentsEvent;
@@ -447,23 +564,43 @@ Event::on(
     Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS,
     function(RegisterGqlSchemaComponentsEvent $event) {
         $event->queries = array_merge($event->queries, [
+            // “Widgets” group
             'Widgets' => [
-                'myCustomElement:read' => ['label' => 'View Widgets']
+                // widget component with read action, labelled “View Widgets” in UI
+                'widget:read' => ['label' => 'View Widgets']
             ],
         ]);
+
+        // Same format applies for $event->mutations
     }
 );
 ```
 
+::: warning
+If your GraphQL implementation doesn’t add and honor permissions, it will be available by default to the public schema. Once you register schema components and check for them in your code, they’ll only be available for each schema in which they’re explicitly enabled.
+:::
+
 ### Eager Loading
 
+TODO: add
+
 ### Argument Handlers
+
+Argument handlers are another concept specific to Craft CMS. These are like the inverse of directives, used for pre-processing an argument’s value before a query is executed.
 
 ### Complexity Values
 
 GraphQL complexity values are numeric scores assigned to fields that indicate how much processing power will be needed to return a result.
 
+The combined values are limited by Craft’s <craft3:maxGraphqlComplexity> setting. If a query or mutation’s complexity exceeds that limit, it will not be executed. Assigning appropriate complexity values ensures that a Craft site developer may manage that threshold for a safe, optimal use of compute resources.
+
+TODO: how to set
+
 ### Validation Rules
+
+GraphQL queries are validated against the schema, and in some cases you may want to adjust the GraphQL validation rules that are applied.
+
+Craft, for example, removes validation rules when <config3:devMode> is enabled so faulty queries can be investigated in a development environment. (Those same faults may cause problems in production.)
 
 #### Registering Validation Rules
 
@@ -478,7 +615,7 @@ Event::on(
     Gql::class,
     Gql::::EVENT_DEFINE_GQL_VALIDATION_RULES,
     function (DefineGqlValidationRulesEvent $event) {
-        // Permanently disable introspection.
+        // Permanently disable introspection
         $event->validationRules[DisableIntrospection::class] = new DisableIntrospection();
     }
 );
@@ -488,7 +625,13 @@ Event::on(
 
 ### GraphQL for Elements
 
+TODO: add
+
 extend craft\gql\types\elements\Element, which is an extension of ObjectType
+
+- gqlTypeNameByContext
+- gqlScopesByContext
+- gqlMutationNameByContext
 
 See Craftnet Partners.
 
