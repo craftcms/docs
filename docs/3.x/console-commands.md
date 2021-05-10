@@ -720,6 +720,12 @@ Uninstalls a plugin.
 `handle`
 : The plugin handle. (required)
 
+**Options**
+
+`--force`
+: Whether the plugin uninstallation should be forced.\
+boolean, 0 or 1 (defaults to 0)
+
 ## `project-config`
 
 Manages the Project Config.
