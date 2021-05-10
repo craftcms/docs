@@ -10,17 +10,17 @@
 
 エントリを作成する前に、それらを含めるためのセクションを作成しなければなりません。 それぞれのセクションには、次のことを定義できます。
 
-* セクション内のエントリが URL を持つかどうか
-* エントリの URL をどのように表示するか
-* エントリの URL がリクエストされたとき、どのテンプレートを読み込むか
-* セクション内でどのような入力タイプが利用可能か、それらの入力タイプはどのようなフィールドを持つ必要があるか
+- セクション内のエントリが URL を持つかどうか
+- エントリの URL をどのように表示するか
+- エントリの URL がリクエストされたとき、どのテンプレートを読み込むか
+- セクション内でどのような入力タイプが利用可能か、それらの入力タイプはどのようなフィールドを持つ必要があるか
 
 Craft のマルチサイト機能を利用しているなら、次のこともセクションで定義できます。
 
-* セクション内のどのサイトのエントリをターゲットにするか
-* 新しいエントリ向けに、どのサイトをデフォルトで有効にするか
+- Which sites’ entries in the section should target
+- 新しいエントリ向けに、どのサイトをデフォルトで有効にするか
 
-新しいセクションを作るには、「設定 > セクション」に移動し、「新規セクション」ボタンをクリックします。
+To create a new section, go to **Settings** → **Sections** and choose **New Section**.
 
 ### セクションタイプ
 
@@ -30,9 +30,9 @@ Craft のマルチサイト機能を利用しているなら、次のことも�
 
 シングルは、次のようなユニークなコンテンツを持つ1回限りのページで利用します。
 
-* ホームページ
-* 会社概要ページ
-* お問い合わせページ
+- ホームページ
+- 会社概要ページ
+- お問い合わせページ
 
 他のセクションタイプと異なり、シングルは1つのエントリしか関連付けられておらず、編集可能な投稿者、スラグ、投稿日、または有効期限日がありません。
 
@@ -40,17 +40,17 @@ Craft のマルチサイト機能を利用しているなら、次のことも�
 
 チャンネルは、次のような類似するコンテンツのストリームに利用します。
 
-* ブログ
-* ニュースのセクション
-* レシピ
+- ブログ
+- ニュースのセクション
+- レシピ
 
 #### ストラクチャー
 
 ストラクチャーは、複数の類似するエントリを蓄積し、かつ、特定の順序で並び替える必要がある場合に適しています。 それらは階層構造を持つこともできます。 例として次のものを含みます。
 
-* ドキュメント
-* サービスの順序が重要なサービスのセクション
-* 会社の組織図
+- ドキュメント
+- サービスの順序が重要なサービスのセクション
+- 会社の組織図
 
 ### エントリ URI 形式
 
@@ -128,7 +128,7 @@ You can use environment variables and aliases in the preview target URL. These d
 Preview target URLs can include an attribute on the result of a query. Here double curly braces must be used (e.g. `{{ craft.entries.section('mySingle').one().url }}`).
 :::
 
-When an author is editing an entry from a section with custom preview targets, the “Share” button will be replaced with a menu that lists the “Primary entry page” (if the section has an Entry URI Format), plus the names of each preview target.
+When an author is editing an entry from a section with custom preview targets, the **Share** button will be replaced with a menu that lists the **Primary entry page** (if the section has an Entry URI Format), plus the names of each preview target.
 
 !\[An entry’s Share menu with 3 custom preview targets.\](./images/share-with-targets.png =294x)
 
@@ -136,7 +136,7 @@ The targets will also be available within Live Preview.
 
 #### 切り離されたフロントエンドのプレビュー
 
-If your site’s front end lives outside of Craft, for example as a Vue or React app, you can still support previewing drafts and revisions with Live Preview or “Share” buttons. To do that, your front end must check for the existence of a `token` query string parameter (or whatever your <config3:tokenParam> config setting is set to). If it’s in the URL, then you will need to pass that same token in the Craft API request that loads the page content. This token will cause the API request to respond with the correct content based on what’s actually being previewed.
+If your site’s front end lives outside of Craft, for example as a Vue or React app, you can still support previewing drafts and revisions with Live Preview or **Share** buttons. To do that, your front end must check for the existence of a `token` query string parameter (or whatever your <config3:tokenParam> config setting is set to). If it’s in the URL, then you will need to pass that same token in the Craft API request that loads the page content. This token will cause the API request to respond with the correct content based on what’s actually being previewed.
 
 You can pass the token via either a query string parameter named after your <config3:tokenParam> config setting, or an `X-Craft-Token` header.
 
@@ -148,27 +148,27 @@ For Live Preview, you should also consider [enabling iFrame Resizer](config3:use
 
 Both Channel and Structure sections let you define multiple types of entries using Entry Types.
 
-You can manage your sections’ Entry Types by clicking the “Edit Entry Types” link beside the section’s name in Settings → Sections. That’ll take you to the section’s entry type index. Clicking on an entry type’s name takes you to its settings page:
+You can manage your sections’ Entry Types by choosing **Edit Entry Types** link beside the section’s name in **Settings** → **Sections**. That’ll take you to the section’s entry type index. Choosing on an entry type’s name takes you to its settings page:
 
 ![Entry Type Edit Settings](./images/sections-and-entries-entry-types.png)
 
 Entry types have the following settings:
 
-* **名前** – 入力タイプの名前
-* **ハンドル** – 入力タイプのテンプレートに対応するハンドル
-* **タイトルのフィールドを見る。 ** – この入力タイプのエントリでタイトルフィールドを表示するかどうか
-* **タイトルフィールドラベル** – 「タイトル」フィールドのラベルをどうするか
+- **名前** – 入力タイプの名前
+- **ハンドル** – 入力タイプのテンプレートに対応するハンドル
+- **タイトルのフィールドを見る。 ** – この入力タイプのエントリでタイトルフィールドを表示するかどうか
+- **Title Field Label** – What the Title field label should be.
 
 ### 動的なエントリタイトル
 
-If you want your entries to have auto-generated titles rather than requiring authors to enter them, you can uncheck the “Show the Title field?” checkbox. When you do, a new “Title Format” setting will appear, where you can define what the auto-generated titles should look like.
+If you want your entries to have auto-generated titles rather than requiring authors to enter them, you can uncheck the **Show the Title field?** checkbox. When you do, a new **Title Format** setting will appear, where you can define what the auto-generated titles should look like.
 
 The Title Format is a full-blown Twig template, and it will get parsed whenever your entries are saved.
 
 The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](craft3:craft\elements\Entry#public-properties) in two ways:
 
-* `{{ object.property }}` _（標準の Twig 構文）_
-* `{property}` _（ショートカット構文）_
+- `{{ object.property }}` _（標準の Twig 構文）_
+- `{property}` _（ショートカット構文）_
 
 _Note that the shortcut syntax only has one set of curly braces_.
 
@@ -196,23 +196,23 @@ Conditionals are also fair game. There’s no shortcut syntax for those, so if y
 
 ## エントリの編集
 
-If you have at least one section, there will be an “Entries” tab in the primary CP nav. Clicking on it will take you to the entry index. From there you can navigate to the entry you wish to edit, or create a new one.
+If you have at least one section, there will be an **Entries** tab in the primary control panel navigation. Clicking on it will take you to the entry index. From there you can navigate to the entry you wish to edit, or create a new one.
 
 You can perform the following actions from the Edit Entry page:
 
-* （選択候補が2つ以上ある場合）入力タイプの選択
-* エントリのタイトルの編集
-* エントリのスラグの編集
-* エントリのカスタムフィールドコンテンツの編集
-* エントリーの投稿者の選択（Pro エディションのみ）
-* （ストラクチャーセクションに含まれる場合）エントリの親の選択
-* エントリの投稿日の選択
-* エントリの有効期限の選択（オプション）
-* エントリを有効にするかどうかの選択
-* エントリの変更を保存
-* エントリの新しい下書きの保存
-* 下書きの公開
-* エントリの過去のバージョンの閲覧
+- （選択候補が2つ以上ある場合）入力タイプの選択
+- エントリのタイトルの編集
+- エントリのスラグの編集
+- エントリのカスタムフィールドコンテンツの編集
+- エントリーの投稿者の選択（Pro エディションのみ）
+- （ストラクチャーセクションに含まれる場合）エントリの親の選択
+- エントリの投稿日の選択
+- エントリの有効期限の選択（オプション）
+- エントリを有効にするかどうかの選択
+- エントリの変更を保存
+- エントリの新しい下書きの保存
+- 下書きの公開
+- エントリの過去のバージョンの閲覧
 
 If you leave the Post Date blank, Craft will automatically set it the first time an entry is saved as enabled.
 
