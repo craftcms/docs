@@ -81,6 +81,17 @@ By default, Craft makes an `actions/` route available for appending any valid ac
 curl -X POST https://my-project.test/actions/plugin-handle/controller/action
 ```
 
+#### Default Route Format
+
+Default plugin and module action routes follow the same pattern: \
+**Action Trigger** + **Plugin/Module Handle** + **Controller Name** + **Action Method**
+
+Each URL segment follows [Yii’s conventions](https://www.yiiframework.com/doc/guide/2.0/en/structure-controllers) and is lower-kebab-cased:
+
+- Handle `my-plugin` (from [composer.json](plugin-guide.md#composer-json)) or `my-module` (from [config/app.php](module-guide.md#update-the-application-config))
+- Controller `SuperWidgetController` becomes `super-widget`
+- Action `SuperWidgetController::actionReticulateWidget()` becomes `reticulate-widget`
+
 ## Handling Requests
 
 A controller action’s primary job is to handle an incoming web request, and determine the response. There are a few ways
