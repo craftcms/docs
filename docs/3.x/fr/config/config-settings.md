@@ -725,6 +725,28 @@ The highest number Craft will tack onto a slug in order to make it unique before
 
 
 
+
+### `permissionsPolicyHeader`
+
+Allowed types :
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+
+Default value :
+:   `'interest-cohort=()'`
+
+Defined by :
+:   [GeneralConfig::$pathParam](craft3:craft\config\GeneralConfig::$permissionsPolicyHeader)
+
+
+The `Permissions-Policy` header that should be sent for web responses.
+
+The default value prevents FLoC tracking due to security & privacy concerns:
+- <https://www.theverge.com/2021/4/16/22387492/google-floc-ad-tech-privacy-browsers-brave-vivaldi-edge-mozilla-chrome-safari>
+- <https://www.bleepingcomputer.com/news/security/wordpress-may-automatically-disable-google-floc-on-websites/>
+
+This can be set to `null` to prevent the header from being sent.
+
+
 ### `phpMaxMemoryLimit`
 
 Allowed types :
@@ -738,7 +760,7 @@ Defined by :
 
 
 
-The maximum amount of memory Craft will try to reserve during memory intensive operations such as zipping, unzipping and updating. Defaults to an empty string, which means it will use as much memory as it possibly can.
+The maximum amount of memory Craft will try to reserve during memory-intensive operations such as zipping, unzipping and updating. Defaults to an empty string, which means it will use as much memory as it can.
 
 See <http://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> for a list of acceptable values.
 
@@ -757,7 +779,7 @@ Defined by :
 
 
 
-The template path segment prefix that should be used to identify "private" templates (templates that aren't directly accessible via a matching URL).
+The template path segment prefix that should be used to identify “private” templates, which are templates that are not directly accessible via a matching URL.
 
 Set to an empty value to disable public template routing.
 
@@ -774,7 +796,7 @@ Default value :
 Defined by :
 :   [GeneralConfig::$previewIframeResizerOptions](craft3:craft\config\GeneralConfig::$previewIframeResizerOptions)
 
-Since :
+Since
 :   3.5.0
 
 
@@ -827,7 +849,7 @@ Default value :
 Defined by :
 :   [GeneralConfig::$sameSiteCookieValue](craft3:craft\config\GeneralConfig::$sameSiteCookieValue)
 
-Since :
+Since
 :   3.1.33
 
 
@@ -836,7 +858,8 @@ The [SameSite](https://web.dev/samesite-cookies-explained) value that should be 
 
 This can be set to `'Lax'`, `'Strict'`, or `null`. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite)
 
-setting as well, which is set to `p` by default, and if your server is running Apache, you will need to update the redirect code in your `.htaccess` file to match your new `pathParam` value.
+::: tip
+This setting requires PHP 7.3 or later.
 :::
 
 
@@ -888,9 +911,9 @@ Defined by :
 
 
 
-Configures Craft to send all system emails to a single email address, or an array of email addresses for testing purposes.
+Configures Craft to send all system emails to either a single email address or an array of email addresses for testing purposes.
 
-By default the recipient name(s) will be “Test Recipient”, but you can customize that by setting the value with the format `['email@address.com' => 'Name']`.
+By default, the recipient name(s) will be “Test Recipient”, but you can customize that by setting the value with the format `['email@address.com' => 'Name']`.
 
 
 
@@ -926,7 +949,7 @@ Defined by :
 
 
 
-Whether translated messages should be wrapped in special characters, to help find any strings that are not being run through `Craft::t()` or the `|translate` filter.
+Whether translated messages should be wrapped in special characters to help find any strings that are not being run through `Craft::t()` or the `|translate` filter.
 
 
 
@@ -964,7 +987,7 @@ Default value :
 Defined by :
 :   [GeneralConfig::$useIframeResizer](craft3:craft\config\GeneralConfig::$useIframeResizer)
 
-Since :
+Since
 :   3.5.5
 
 
@@ -1000,7 +1023,7 @@ Whether to grab an exclusive lock on a file when writing to it by using the `LOC
 
 Some file systems, such as NFS, do not support exclusive file locking.
 
-If not set to `true` or `false`, Craft will automatically try to detect if the underlying file system supports exclusive file locking and cache the results.
+If not set to `true` or `false`, Craft will try to detect if the underlying file system supports exclusive file locking and cache the results.
 
 
 
@@ -1026,7 +1049,7 @@ Any custom Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-a
 ### `backupCommand`
 
 Allowed types :
-:   [string](http://php.net/language.types.string), [string](http://php.net/language.types.string)[]
+:   [string](http://php.net/language.types.string), [false](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
 
 Default value :
 :   `null`
@@ -1038,7 +1061,7 @@ Defined by :
 
 The shell command that Craft should execute to create a database backup.
 
-By default Craft will run `mysqldump` or `pg_dump`, provided that those libraries are in the `$PATH` variable for the user the web server  is running as.
+When set to `null` (default), Craft will run `mysqldump` or `pg_dump`, provided that those libraries are in the `$PATH` variable for the system user running the web server.
 
 You may provide your own command optionally using several tokens Craft will swap out at runtime:
 
@@ -1117,9 +1140,9 @@ Defined by :
 
 
 
-The shell command that Craft should execute to restore a database backup.
+The shell command Craft should execute to restore a database backup.
 
-By default Craft will run `mysql` or `psql`, provided that those libraries are in the `$PATH` variable for the user the web server  is running as.
+By default Craft will run `mysql` or `psql`, provided those libraries are in the `$PATH` variable for the user the web server is running as.
 
 There are several tokens you can use that Craft will swap out at runtime:
 
@@ -1219,12 +1242,12 @@ Defined by :
 
 
 
-The base URL that Craft should use when generating control panel URLs.
+The base URL Craft should use when generating control panel URLs.
 
 It will be determined automatically if left blank.
 
 ::: tip
-You can run `php craft utils/ascii-filenames` in your terminal to apply ASCII filenames to all existing assets.
+The base control panel URL should **not** include the [control panel trigger word](config3:cpTrigger) (e.g. `/admin`).
 :::
 
 
@@ -1244,13 +1267,13 @@ Defined by :
 
 The URI segment Craft should look for when determining if the current request should route to the control panel rather than the front-end website.
 
-This can be set to `null` if you have a dedicated host name for the control panel (e.g. `cms.example.com`), or you are running Craft in [Headless Mode](config3:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own web root directory on your server, with an `index.php` file that defines the `CRAFT_CP` PHP constant.
+This can be set to `null` if you have a dedicated host name for the control panel (e.g. `cms.example.com`), or you are running Craft in [Headless Mode](config3:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own webroot directory on your server, with an `index.php` file that defines the `CRAFT_CP` PHP constant.
 
 ```php
 define('CRAFT_CP', true);
 ```
 
-Alternatively, you can set the <config3:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your control panel due to URI conflicts with actual folders/files in your main web root.
+Alternatively, you can set the <config3:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your control panel due to URI conflicts with actual folders/files in your main webroot.
 
 (For example, if you have an `assets/` folder, that would conflict with the `/assets` page in the control panel.)
 
@@ -1288,7 +1311,7 @@ Defined by :
 
 
 
-The URI Craft should use for user login on the front-end.
+The URI Craft should use for user login on the front end.
 
 This can be set to `false` to disable front-end login.
 
@@ -1311,7 +1334,7 @@ Defined by :
 
 
 
-The URI Craft should use for user logout on the front-end.
+The URI Craft should use for user logout on the front end.
 
 This can be set to `false` to disable front-end logout.
 
@@ -1334,7 +1357,7 @@ Defined by :
 
 
 
-The URL(s) must begin with either `http://`, `https://`, `//` (protocol-relative), or an [alias](config3:aliases).
+Whether generated URLs should omit `index.php` (e.g. `http://domain.com/path` instead of `http://domain.com/index.php/path`)
 
 This can only be possible if your server is configured to redirect would-be 404's to `index.php`, for example, with the redirect found in the `.htaccess` file that came with Craft:
 
@@ -1370,9 +1393,8 @@ The string preceding a number which Craft will look for when determining if the 
 | `?page`       | `/news?page=5` |
 
 ::: tip
-If you want to set this to `?p` (e.g. `/news?p=5`), you will need to change your <config3:pathParam> ::: tip The base control panel URL should **not** include the [control panel trigger word](config3:cpTrigger) (e.g. `/admin`).
+If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change your <config3:pathParam> setting which defaults to `p`. If your server is running Apache, you’ll need to update the redirect code in your `.htaccess` file to match your new `pathParam` value.
 :::
-
 
 
 ### `pathParam`
@@ -1388,15 +1410,13 @@ Defined by :
 
 
 
-The query string param that Craft will check when determining the request's path.
+The query string param that Craft will check when determining the request’s path.
 
 This can be set to `null` if your web server is capable of directing traffic to `index.php` without a query string param. If you’re using Apache, that means you’ll need to change the `RewriteRule` line in your `.htaccess` file to:
 
 ```
 RewriteRule (.+) index.php [QSA,L]
 ```
-
-
 
 ### `postCpLoginRedirect`
 
@@ -1411,9 +1431,9 @@ Defined by :
 
 
 
-The path that users should be redirected to after logging in from the control panel.
+The path users should be redirected to after logging into the control panel.
 
-This setting will also come into effect if a user visits the control panel’s Login page (`/admin/login`) or the control panel’s root URL (/admin) when they are already logged in.
+This setting will also come into effect if a user visits the control panel’s login page (`/admin/login`) or the control panel’s root URL (`/admin`) when they are already logged in.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -1432,9 +1452,9 @@ Defined by :
 
 
 
-The path that users should be redirected to after logging in from the front-end site.
+The path users should be redirected to after logging in from the front-end site.
 
-This setting will also come into effect if the user visits the Login page (as specified by the loginPath config setting) when they are already logged in. <config3:loginPath> config setting) when they are already logged in.
+This setting will also come into effect if the user visits the login page (as specified by the <config3:loginPath> config setting) when they are already logged in.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -1493,14 +1513,14 @@ Default value :
 :   `null`
 
 Defined by :
-:   [craft3:craft\config\GeneralConfig::$siteUrl](craft3:craft\config\GeneralConfig::$setPasswordRequestPath)
+:   [GeneralConfig::$setPasswordRequestPath](craft3:craft\config\GeneralConfig::$setPasswordRequestPath)
 
-Since :
+Since
 :   3.5.14
 
 
 
-The URI Craft should redirect users to after setting their password from the front-end.
+The URI to the page where users can request to change their password.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -1525,7 +1545,7 @@ Defined by :
 
 
 
-The URI Craft should use for email verification links on the front-end.
+The URI Craft should redirect users to after setting their password from the front end.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -1542,7 +1562,7 @@ Default value :
 Defined by :
 :   [GeneralConfig::$siteToken](craft3:craft\config\GeneralConfig::$siteToken)
 
-Since :
+Since
 :   3.5.0
 
 
@@ -1583,7 +1603,7 @@ Defined by :
 
 Whether Craft should specify the path using `PATH_INFO` or as a query string parameter when generating URLs.
 
-Note that this setting only takes effect if <config3:omitScriptNameInUrls> is set to false.
+Note that this setting only takes effect if <config3:omitScriptNameInUrls> is set to `false`.
 
 
 
@@ -1600,9 +1620,9 @@ Defined by :
 
 
 
-Determines what protocol/schema Craft will use when generating tokenized URLs. If set to `'auto'`, Craft will check the siteUrl and the protocol of the current request and if either of them are https will use `https` in the tokenized URL. If not, will use `http`.
+Determines what protocol/schema Craft will use when generating tokenized URLs. If set to `'auto'`, Craft will check the current site’s base URL and the protocol of the current request and if either of them are https will use `https` in the tokenized URL. If not, will use `http`.
 
-If set to `false`, the Craft will always use `http`. If set to `true`, then, Craft will always use `https`.
+If set to `false`, Craft will always use `http`. If set to `true`, then, Craft will always use `https`.
 
 
 
@@ -1641,7 +1661,7 @@ Default value :
 Defined by :
 :   [GeneralConfig::$verifyEmailSuccessPath](craft3:craft\config\GeneralConfig::$verifyEmailSuccessPath)
 
-Since :
+Since
 :   3.1.20
 
 
@@ -1865,9 +1885,9 @@ Defined by :
 
 
 
-By default, Craft will require a 'password' field to be submitted on front-end, public user registrations. Setting this to `true` will no longer require it on the initial registration form.
+By default, Craft will require a ‘password’ field to be submitted on front-end, public user registrations. Setting this to `true` will no longer require it on the initial registration form.
 
-If you have email verification enabled, new users will set their password once they've clicked on the verification link in the email. If you don't, the only way they can set their password is to go through your "forgot password" workflow.
+If you have email verification enabled, new users will set their password once they’ve clicked on the verification link in the email. If you don’t, the only way they can set their password is to go through your “forgot password” workflow.
 
 
 
@@ -1882,7 +1902,7 @@ Default value :
 Defined by :
 :   [GeneralConfig::$enableBasicHttpAuth](craft3:craft\config\GeneralConfig::$enableBasicHttpAuth)
 
-Since :
+Since
 :   3.5.0
 
 
@@ -1995,9 +2015,9 @@ Defined by :
 
 
 
-If set `true`, you will always get a successful response even if there was an error making it difficult to enumerate users.
+When `true`, Craft will always return a successful response in the “forgot password” flow, making it difficult to enumerate users.
 
-When set to `false` and you go through the "forgot password" workflow on the control panel login page, for example, you get distinct messages saying if the username/email didn't exist or the email was successfully sent and to check your email for further instructions. This can allow for username/email enumeration based on the response.
+When set to `false` and you go through the “forgot password” flow from the control panel login page, you’ll get distinct messages indicating whether the username/email exists and whether an email was sent with further instructions. This can be helpful for the user attempting to log in but allow for username/email enumeration based on the response.
 
 
 
@@ -2012,7 +2032,7 @@ Default value :
 Defined by :
 :   [GeneralConfig::$sanitizeCpImageUploads](craft3:craft\config\GeneralConfig::$sanitizeCpImageUploads)
 
-Since :
+Since
 :   3.6.0
 
 
@@ -2034,7 +2054,7 @@ Defined by :
 
 
 
-Whether Craft should sanitize uploaded SVG files and strip out potential malicious looking content.
+Whether Craft should sanitize uploaded SVG files and strip out potential malicious-looking content.
 
 This should definitely be enabled if you are accepting SVG uploads from untrusted sources.
 
@@ -2055,7 +2075,7 @@ Defined by :
 
 A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](craft3:craft\services\Security).
 
-This value should be the same across all environments. Note that if this key ever changes, any data that was encrypted with it will be inaccessible.
+This value should be the same across all environments. If this key ever changes, any data that was encrypted with it will be inaccessible.
 
 
 
@@ -2112,7 +2132,7 @@ Default value :
 Defined by :
 :   [GeneralConfig::$storeUserIps](craft3:craft\config\GeneralConfig::$storeUserIps)
 
-Since :
+Since
 :   3.1.0
 
 
@@ -2155,9 +2175,9 @@ Defined by :
 
 
 
-Whether Craft will set the "secure" flag when saving cookies when using `Craft::cookieConfig() to create a cookie`.
+Whether Craft will set the “secure” flag when saving cookies when using `Craft::cookieConfig()` to create a cookie.
 
-Valid values are `true`, `false`, and `'auto'`. Defaults to `'auto'`, which will set the secure flag if the page you're currently accessing is over `https://`. `true` will always set the flag, regardless of protocol and `false` will never automatically set the flag.
+Valid values are `true`, `false`, and `'auto'`. Defaults to `'auto'`, which will set the secure flag if the page you’re currently accessing is over `https://`. `true` will always set the flag, regardless of protocol and `false` will never automatically set the flag.
 
 
 
@@ -2188,7 +2208,7 @@ Allowed types :
 :   [string](http://php.net/language.types.string)[]
 
 Default value :
-:   `['7z', 'aiff', 'asf', 'avi', 'bmp', 'csv', 'doc', 'docx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'htm', 'html', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'm2t', 'mid', 'mov', 'mp3', 'mp4', 'm4a', 'm4v', 'mpc', 'mpeg', 'mpg', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rtf', 'sdc', 'sitd', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tgz', 'tif', 'tiff', 'txt', 'vob', 'vsd', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'zip']`
+:   `['7z', 'aiff', 'asc', 'asf', 'avi', 'bmp', 'cap', 'cin', 'csv', 'dfxp', 'doc', 'docx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'itt', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'lrc', 'm2t', 'm4a', 'm4v', 'mcc', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'mpsub', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rt', 'rtf', 'sami', 'sbv', 'scc', 'sdc', 'sitd', 'smi', 'srt', 'stl', 'sub', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tds', 'tgz', 'tif', 'tiff', 'ttml', 'txt', 'vob', 'vsd', 'vtt', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'xml', 'zip']`
 
 Defined by :
 :   [GeneralConfig::$allowedFileExtensions](craft3:craft\config\GeneralConfig::$allowedFileExtensions)
@@ -2231,7 +2251,7 @@ Default value :
 Defined by :
 :   [GeneralConfig::$extraFileKinds](craft3:craft\config\GeneralConfig::$extraFileKinds)
 
-Since :
+Since
 :   3.0.37
 
 
@@ -2307,7 +2327,7 @@ Default value :
 Defined by :
 :   [GeneralConfig::$brokenImagePath](craft3:craft\config\GeneralConfig::$brokenImagePath)
 
-Since :
+Since
 :   3.5.0
 
 
@@ -2331,7 +2351,7 @@ Defined by :
 
 
 
-The quality level Craft will use when saving JPG and PNG files. Ranges from 0 (worst quality, smallest file) to 100 (best quality, biggest file).
+The quality level Craft will use when saving JPG and PNG files. Ranges from 1 (worst quality, smallest file) to 100 (best quality, biggest file).
 
 
 
@@ -2348,7 +2368,7 @@ Defined by :
 
 
 
-Whether images transforms should be generated before page load.
+Whether image transforms should be generated before page load.
 
 
 
@@ -2365,7 +2385,7 @@ Defined by :
 
 
 
-The image driver Craft should use to cleanse and transform images. By default Craft will auto-detect if ImageMagick is installed and fallback to GD if not. You can explicitly set either `'imagick'` or `'gd'` here to override that behavior.
+The image driver Craft should use to cleanse and transform images. By default Craft will use ImageMagick if it’s installed and otherwise fall back to GD. You can explicitly set either `'imagick'` or `'gd'` here to override that behavior.
 
 
 
@@ -2382,7 +2402,7 @@ Defined by :
 
 
 
-An array containing the selectable image aspect ratios for image editor. The array must be in the format of `label` => `ratio`, where ratio must be a float or a string. For string values, only values of "none" and "original" are allowed.
+An array containing the selectable image aspect ratios for the image editor. The array must be in the format of `label` => `ratio`, where ratio must be a float or a string. For string values, only values of “none” and “original” are allowed.
 
 
 
@@ -2431,14 +2451,14 @@ Default value :
 Defined by :
 :   [GeneralConfig::$preserveCmykColorspace](craft3:craft\config\GeneralConfig::$preserveCmykColorspace)
 
-Since :
+Since
 :   3.0.8
 
 
 
 Whether CMYK should be preserved as the colorspace when manipulating images.
 
-Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions it can cause color distortion in the image. This will only have effect if ImageMagick is in use.
+Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions it can cause image color distortion. This will only have an effect if ImageMagick is in use.
 
 
 
@@ -2491,9 +2511,9 @@ Default value :
 :   `false`
 
 Defined by :
-:   [craft3:craft\config\GeneralConfig::$purgeUnsavedDraftsDuration](craft3:craft\config\GeneralConfig::$rasterizeSvgThumbs)
+:   [GeneralConfig::$rasterizeSvgThumbs](craft3:craft\config\GeneralConfig::$rasterizeSvgThumbs)
 
-Since :
+Since
 :   3.6.0
 
 
@@ -2543,7 +2563,7 @@ Whether GIF files should be cleansed/transformed.
 
 ### `upscaleImages`
 
-Allowed types :
+Allowed types
 :   [boolean](http://php.net/language.types.boolean)
 
 Default value :
@@ -2552,7 +2572,7 @@ Default value :
 Defined by :
 :   [GeneralConfig::$upscaleImages](craft3:craft\config\GeneralConfig::$upscaleImages)
 
-Since :
+Since
 :   3.4.0
 
 
@@ -2571,7 +2591,7 @@ Allowed types
 Default value :
 :   `null`
 
-Defined by :
+Defined by
 :   [GeneralConfig::$allowedGraphqlOrigins](craft3:craft\config\GeneralConfig::$allowedGraphqlOrigins)
 
 Since
@@ -2612,7 +2632,7 @@ Whether the `transform` directive should be disabled for the GraphQL API.
 Allowed types
 :   [boolean](http://php.net/language.types.boolean)
 
-Default value :
+Default value
 :   `true`
 
 Defined by
@@ -2696,7 +2716,7 @@ Allowed types
 :   [integer](http://php.net/language.types.integer)
 
 Default value
-:   `1`
+:   `0`
 
 Defined by
 :   [GeneralConfig::$maxGraphqlComplexity](craft3:craft\config\GeneralConfig::$maxGraphqlComplexity)
@@ -2767,7 +2787,7 @@ Defined by
 
 The amount of time to wait before Craft purges pending users from the system that have not activated.
 
-Note that any content assigned to a pending user will be deleted as well when the given time interval passes.
+Any content assigned to a pending user will be deleted as well when the given time interval passes.
 
 Set to `0` to disable this feature.
 
