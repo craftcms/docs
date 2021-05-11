@@ -2828,6 +2828,26 @@ Set to `0` to disable this feature.
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
+### `purgeUnsavedDraftsDuration`
+
+Allowed types
+:   `mixed`
+
+Default value
+:   `2592000` (30 days)
+
+Defined by
+:   [GeneralConfig::$purgeUnsavedDraftsDuration](craft3:craft\config\GeneralConfig::$purgeUnsavedDraftsDuration)
+
+Since
+:   3.2.0
+
+The amount of time to wait before Craft purges unpublished drafts that were never updated with content.
+
+Set to `0` to disable this feature.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
 
 ### `softDeleteDuration`
 
