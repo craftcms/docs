@@ -693,6 +693,11 @@ Uninstalls a plugin.
 `handle`
 :   The plugin handle. (required)
 
+**Options**
+
+`--force`
+:   Whether the plugin uninstallation should be forced.\ boolean, 0 or 1 (defaults to 0)
+
 ## `project-config`
 
 Manages the Project Config.
@@ -712,7 +717,7 @@ Prints a diff of the pending project config YAML changes.
 
 **Options**
 
-`--path`
+`--invert`
 :   Treats the loaded project config as the source of truth, rather than the YAML files.\ boolean, 0 or 1 (defaults to 0)
 
 #### `project-config/rebuild`
@@ -1154,7 +1159,7 @@ Psy Shell v0.10.4 (PHP 7.4.3 — cli) by Justin Hileman
 **Options**
 
 `--include`
-:   Backup the database before updating.\ boolean, 0 or 1
+:   Include file(s) before starting tinker shell.\ array
 
 ## `tests`
 
@@ -1197,7 +1202,7 @@ Updates Craft and/or plugins.
 **Options**
 
 `--backup`
-:   Whether to only do a dry run of the repair process.\ boolean, 0 or 1 (defaults to 0)
+:   Backup the database before updating.\ boolean, 0 or 1
 
 `--force`, `-f`
 :   Force the update if `allowUpdates` is disabled.\ boolean, 0 or 1 (defaults to 0)
