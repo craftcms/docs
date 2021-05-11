@@ -2,7 +2,7 @@
 
 Theme and significant content changes will be documented in this file.
 
-## Unreleased
+## 2021-05-11
 ## Added
 - Documented `permissionsPolicyHeader` config setting.
 - Document new `--force` flag on the `plugin/uninstall` command.
