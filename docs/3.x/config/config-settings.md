@@ -734,6 +734,28 @@ The highest number Craft will tack onto a slug in order to make it unique before
 
 
 
+
+### `permissionsPolicyHeader`
+
+Allowed types
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+
+Default value
+:   `'interest-cohort=()'`
+
+Defined by
+:   [GeneralConfig::$pathParam](craft3:craft\config\GeneralConfig::$permissionsPolicyHeader)
+
+
+The `Permissions-Policy` header that should be sent for web responses.
+
+The default value prevents FLoC tracking due to security & privacy concerns:
+- <https://www.theverge.com/2021/4/16/22387492/google-floc-ad-tech-privacy-browsers-brave-vivaldi-edge-mozilla-chrome-safari>
+- <https://www.bleepingcomputer.com/news/security/wordpress-may-automatically-disable-google-floc-on-websites/>
+
+This can be set to `null` to prevent the header from being sent.
+
+
 ### `phpMaxMemoryLimit`
 
 Allowed types
@@ -1409,7 +1431,6 @@ If your server is running Apache, you’ll need to update the redirect code in y
 :::
 
 
-
 ### `pathParam`
 
 Allowed types
@@ -1431,8 +1452,6 @@ If you’re using Apache, that means you’ll need to change the `RewriteRule` l
 ```
 RewriteRule (.+) index.php [QSA,L]
 ```
-
-
 
 ### `postCpLoginRedirect`
 

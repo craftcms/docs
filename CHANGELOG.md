@@ -2,6 +2,11 @@
 
 Theme and significant content changes will be documented in this file.
 
+## Unreleased
+## Added
+- Documented `permissionsPolicyHeader` config setting.
+- Document new `--force` flag on the `plugin/uninstall` command.
+
 ## 2021-05-10
 ## Added
 - Documented controller action default route format.
