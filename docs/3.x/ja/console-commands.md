@@ -694,15 +694,20 @@ The system is now online.
 `handle`
 :   The plugin handle. (required)
 
+**Options**
+
+`--force`
+:   Whether the plugin uninstallation should be forced.\ boolean, 0 or 1 (defaults to 0)
+
 ## `project-config`
 
-[`apply`](#project-config-apply) のエイリアスです。
+Manages the Project Config.
 
 #### `project-config/apply`
 
-キューを管理します。
+Applies project config file changes.
 
-**オプション**
+**Options**
 
 `--force`
 :   Whether every entry change should be force-applied.\ boolean, 0 or 1 (defaults to 0)
@@ -711,18 +716,18 @@ The system is now online.
 
 Prints a diff of the pending project config YAML changes.
 
-**オプション**
+**Options**
 
-`--path`
+`--invert`
 :   Treats the loaded project config as the source of truth, rather than the YAML files.\ boolean, 0 or 1 (defaults to 0)
 
 #### `project-config/rebuild`
 
-キューのステータスに関する情報です。
+Rebuilds the project config.
 
 #### `project-config/sync`
 
-新しく追加されたキュージョブを待ち受けて、それを実行します。
+Alias for [`apply`](#project-config-apply).
 
 #### `プロジェクトコンフィグを管理します。`
 
@@ -745,9 +750,9 @@ Manages the queue.
 
 #### `queue/exec`
 
-失敗したジョブをキューに再度追加します。
+Executes a job.
 
-**パラメータ**
+**Parameters**
 
 `id`
 :   Of a message. (required string)
@@ -761,7 +766,7 @@ Manages the queue.
 `pid`
 :   Of a worker. (required int)
 
-**オプション**
+**Options**
 
 `--verbose`, `-v`
 :   Verbose mode of a job execute. If enabled, execute result of each job will be printed.\ boolean, 0 or 1 (defaults to 0)
@@ -772,14 +777,14 @@ Info about queue status.
 
 #### `queue/listen`
 
-エレメントを一括保存できます。
+Listens for newly-added queue jobs and runs them.
 
 **Parameters**
 
 `delay`
 :   Number of seconds for waiting new job. (Defaults to 3.)
 
-**オプション**
+**Options**
 
 `--isolate`
 :   isolate mode. It executes a job in a child process.\ boolean, 0 or 1 (defaults to 1)
@@ -792,14 +797,14 @@ Info about queue status.
 
 #### `queue/release`
 
-カテゴリを再保存します。
+Releases job(s) from the queue.
 
-**オプション**
+**Parameters**
 
 `job`
 :   The job ID to release. Pass `all` to release all jobs. (required)
 
-**実例**
+**Example**
 
 ```
 php craft queue/release all
@@ -816,9 +821,9 @@ Re-adds failed job(s) to the queue.
 
 #### `queue/run`
 
-キュー内のすべてのジョブを実行します。
+Runs all jobs in the queue.
 
-**オプション**
+**Options**
 
 `--isolate`
 :   isolate mode. It executes a job in a child process.\ boolean, 0 or 1 (defaults to 1)
@@ -835,9 +840,9 @@ Allows you to bulk-save elements.
 
 #### `resave/assets`
 
-ユーザーを再保存します。
+Re-saves assets.
 
-**オプション**
+**Options**
 
 `--element-id`
 :   The ID(s) of the elements to resave.
@@ -868,9 +873,9 @@ Allows you to bulk-save elements.
 
 #### `resave/categories`
 
-バックアップからデータベースを復元します。
+Re-saves categories.
 
-**パラメータ**
+**Options**
 
 `--element-id`
 :   The ID(s) of the elements to resave.
@@ -901,9 +906,9 @@ Allows you to bulk-save elements.
 
 #### `resave/entries`
 
-PHP の組み込みウェブサーバーを実行します。
+Re-saves entries.
 
-**オプション**
+**Options**
 
 `--element-id`
 :   The ID(s) of the elements to resave.
@@ -937,9 +942,9 @@ PHP の組み込みウェブサーバーを実行します。
 
 #### `resave/matrix-blocks`
 
-新しいアプリケーション ID を生成し、それを `.env` ファイルに保存します。
+Re-saves Matrix blocks.
 
-**オプション**
+**Options**
 
 `--element-id`
 :   The ID(s) of the elements to resave.
@@ -973,9 +978,9 @@ PHP の組み込みウェブサーバーを実行します。
 
 #### `resave/tags`
 
-DB キャッシュを保存するデータベーステーブルを作成します。
+Re-saves tags.
 
-**オプション**
+**Options**
 
 `--element-id`
 :   The ID(s) of the elements to resave.
@@ -1006,9 +1011,9 @@ DB キャッシュを保存するデータベーステーブルを作成しま�
 
 #### `resave/users`
 
-エントリを再保存します。
+Re-saves users.
 
-**オプション**
+**Options**
 
 `--element-id`
 :   The ID(s) of the elements to resave.
@@ -1041,7 +1046,7 @@ DB キャッシュを保存するデータベーステーブルを作成しま�
 
 #### `restore/db` <badge>default</badge>
 
-PHP セッション情報を保存するデータベーステーブルを作成します。
+Restores a database from backup.
 
 **Parameters**
 
@@ -1052,29 +1057,29 @@ PHP セッション情報を保存するデータベーステーブルを作成�
 
 #### `serve/index` <badge>default</badge>
 
-Composer フック `post-create-project-cmd` から呼び出されます。
+Runs the PHP built-in web server.
 
 ## `setup`
 
-Craft のサービスや Craft プロジェクトをテストするためのリソースを提供します。
+Craft CMS setup installer.
 
 #### `setup/app-id`
 
-現在のプロジェクトのテストスイートを設定します。
+Generates a new application ID and saves it in the `.env` file.
 
 #### `setup/db`
 
-[`setup/db-creds`](#setup-db-creds) のエイリアスです。
+Alias for [`setup/db-creds`](#setup-db-creds).
 
 #### `setup/db-cache-table`
 
-指定された接続コンポーネントの DB スキーマキャッシュをクリアします。
+Creates a database table for storing DB caches.
 
 #### `setup/db-creds`
 
-Craft とプラグインをアップデートします。
+Stores new DB connection settings to the `.env` file.
 
-**オプション**
+**Options**
 
 `--database`
 :   The name of the database to select.
@@ -1086,7 +1091,7 @@ Craft とプラグインをアップデートします。
 :   The database password to connect with.
 
 `--port`
-:   The database server port. デフォルトは、MySQL 向けの 3306、および、PostgreSQL 向けの 5432。
+:   The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
 
 `--schema`
 :   The database schema to use (PostgreSQL only).
@@ -1102,15 +1107,15 @@ Craft とプラグインをアップデートします。
 
 #### `setup/index` <badge>default</badge>
 
-利用可能なアップデートに関する情報を表示します。
+Sets up all the things.
 
 #### `setup/php-session-table`
 
-Craft、および / または、プラグインをアップデートします。
+Creates a database table for storing PHP session information.
 
 #### `setup/security-key`
 
-新しいセキュリティキーを生成し、それを `.env` ファイルに保存します。
+Generates a new security key and saves it in the `.env` file.
 
 #### `setup/welcome`
 
@@ -1118,7 +1123,8 @@ Called from the `post-create-project-cmd` Composer hook.
 
 ## `shell`
 
-すべての非 ASCII なアセットファイル名を ASCII に変換します。
+::: tip
+This command requires the [`yiisoft/yii2-shell`](https://github.com/yiisoft/yii2-shell) package, which you may need to add to your project:
 
 ```
 composer require --dev yiisoft/yii2-shell
@@ -1127,7 +1133,7 @@ composer require --dev yiisoft/yii2-shell
 
 #### `utils/utils/prune-revisions/index` <badge>default</badge>
 
-余分なエレメントのリビジョンを削除します。
+Runs an interactive shell.
 
 ```
 $ php craft shell
@@ -1151,50 +1157,50 @@ Psy Shell v0.10.4 (PHP 7.4.3 — cli) by Justin Hileman
   exit       End the current session and return to caller.                                Alias
 ```
 
-**オプション**
+**Options**
 
 `--include`
 :   Include file(s) before starting tinker shell.\ array
 
 ## `tests`
 
-データを修復します。
+Provides resources for testing Craft’s services and your Craft project.
 
 #### `tests/setup`
 
-カテゴリグループの構造データを修復します。
+Sets up a test suite for the current project.
 
-**パラメータ**
+**Parameters**
 
 `dst`
 :   The folder that the test suite should be generated in.\ Defaults to the current working directory.
 
 #### `tests/test`
 
-このメソッドは利用しないでください。 実際には何も実行しません。
+Don’t use this method; it won’t actually execute anything.
 
 ## `update`
 
-プロジェクトコンフィグのダブルパックされた連想配列を修復します。
+Updates Craft and plugins.
 
 #### `update/composer-install`
 
-現在の composer.json と composer.lock に基づいて、依存関係をインストールします。
+Installs dependencies based on the current composer.json & composer.lock.
 
 #### `update/info`
 
-セクションの構造データを修復します。
+Displays info about available updates.
 
 #### `update/update` <badge>default</badge>
 
 Updates Craft and/or plugins.
 
-**オプション**
+**Parameters**
 
 `handle`
 :   The update handle (`all`, `craft`, or a plugin handle). You can pass multiple handles separated by spaces, and you can update to a specific version using the syntax `<handle>:<version>`.
 
-**オプション**
+**Options**
 
 `--backup`
 :   Backup the database before updating.\ boolean, 0 or 1
@@ -1223,7 +1229,7 @@ Ensures all element UIDs are unique.
 
 Prunes excess element revisions.
 
-**オプション**
+**Options**
 
 `--max-revisions`
 :   The maximum number of revisions an element can have.
@@ -1241,7 +1247,7 @@ Repairs structure data for a category group.
 `handle`
 :   The category group handle. (required)
 
-**オプション**
+**Options**
 
 `--dry-run`
 :   Whether to only do a dry run of the repair process.\ boolean, 0 or 1 (defaults to 0)
@@ -1250,7 +1256,7 @@ Repairs structure data for a category group.
 
 Repairs double-packed associative arrays in the project config.
 
-**オプション**
+**Options**
 
 `--dry-run`
 :   Whether to only do a dry run of the repair process.\ boolean, 0 or 1 (defaults to 0)
@@ -1264,7 +1270,7 @@ Repairs structure data for a section.
 `handle`
 :   The section handle. (required)
 
-**オプション**
+**Options**
 
 `--dry-run`
 :   Whether to only do a dry run of the repair process.\ boolean, 0 or 1 (defaults to 0)
@@ -1273,7 +1279,7 @@ Repairs structure data for a section.
 
 #### `utils/update-usernames/index` <badge>default</badge>
 
-すべてのユーザーのユーザー名を更新して、メールアドレスと一致するようにします。
+Updates all users’ usernames to ensure they match their email address.
 
 **Example**
 
