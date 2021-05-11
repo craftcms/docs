@@ -6,6 +6,10 @@ Theme and significant content changes will be documented in this file.
 ## Added
 - Documented `permissionsPolicyHeader` config setting.
 
+## 2021-05-10
+## Added
+- Documented controller action default route format.
+
 ## 2021-04-23
 ## Changed
 - Improved GraphQL introduction and examples.
