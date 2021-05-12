@@ -68,11 +68,69 @@ Assets, categories, entries, users, and tags each support their own set of addit
 | Assets     | `filename`<br>`extension`<br>`kind`                                                                 |
 | Categories | `title`<br>`slug`                                                                                         |
 | Entries    | `title`<br>`slug`                                                                                         |
-| Users      | `username`<br>`firstName`<br>`lastName`<br>`fullName` (firstName + lastName)<br>`email` |
+| Users      | `username`<br>`firstname`<br>`lastname`<br>`fullname` (firstname + lastname)<br>`email` |
 | Tags       | `title`                                                                                                         |
 
 ::: warning
 Searching is a great way to quickly query content broadly across elements, but the most precise way to query field attributes is through that field type’s [query parameter](element-queries.md#executing-element-queries).
+:::
+
+### Element-Specific Attribute Search Examples
+
+If you wanted to search only for Assets that are images, it would look like this in the control panel:
+
+![Searching for image assets in the control panel](./images/search-assets-by-kind.png)
+
+The same search from your code:
+
+::: code
+```twig
+{% set images = craft.assets()
+    .search('kind:image')
+    .all() %}
+```
+
+```graphql
+{
+    images: assets(search: "kind:image") {
+        title
+    }
+}
+```
+
+```php
+$images = \craft\elements\Asset::find()
+    ->search('kind:image')
+    ->all();
+```
+:::
+
+If you were to search for Users with email addresses ending in `@craftcms.com`, it would look like this in the control panel:
+
+![Searching for users by email in the control panel](./images/search-users-by-email.png)
+
+The same search from your code:
+
+::: code
+```twig
+{% set users = craft.users()
+    .search('email:@craftcms.com')
+    .all() %}
+```
+
+```graphql
+{
+    users(search: "email:@craftcms.com") {
+        title
+    }
+}
+```
+
+```php
+$images = \craft\elements\User::find()
+    ->search('email:@craftcms.com')
+    ->all();
+```
 :::
 
 ## Development
