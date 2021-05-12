@@ -76,7 +76,7 @@ Tags | `title`
 Searching is a great way to quickly query content broadly across elements, but the most precise way to query field attributes is through that field type’s [query parameter](element-queries.md#executing-element-queries).
 :::
 
-### Examples
+### Element-Specific Attribute Search Examples
 
 If you wanted to search only for Assets that are images, it would look like this in the control panel:
 
