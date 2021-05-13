@@ -37,14 +37,14 @@ you would have to mock this method. For this, you can use `mockMethods`.
 Mocking your `Externals` service would look something like this:
 
 ```php
-$this->tester->mockMethods([
+$this->tester->mockMethods(
     Mailchimp::getInstance(),
     Externals::class,
     [
         'getUsersFromMailchimp' => [['user1'], ['user2']],
     ],
     []
-]);
+);
 ```
 
 What the above would do is ensure that if
