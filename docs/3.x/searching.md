@@ -17,8 +17,8 @@ You can search for elements from your own code, too:
 ```
 ```graphql
 {
-	entries(search: "foo") {
-		title
+    entries(search: "foo") {
+        title
     }
 }
 ```
