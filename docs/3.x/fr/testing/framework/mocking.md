@@ -19,17 +19,17 @@ An array of methods where the `key` is the method name and the `value` is the re
 
 Let's say you have a module/plugin called `Mailchimp` that facilitates an integration between Craft and Mailchimp. For this integration you may need to create a method called `getUsersFromMailchimp` that makes a GET request to Mailchimp. Now in your test, you don't want to *actually* make a GET request to the Mailchimp servers. Let's say all requests to the Mailchimp servers are done via a [service](../../extend/services.md) called `Externals`
 
-Now seeing as you don't want to make call the Mailchimp servers in a test environment you would have to mock this method. For this, you can use `mockMethods`. Mocking your `Externals` service would look something like this:
+Now seeing as you don't want to make call the Mailchimp servers in a test environment you would have to mock this method. For this, you can use `mockMethods`. Mocking your `Externals` service with an `externals` component handle would look something like this:
 
 ```php
-$this->tester->mockMethods([
+$this->tester->mockMethods(
     Mailchimp::getInstance(),
-    Externals::class,
+    'externals'
     [
         'getUsersFromMailchimp' => [['user1'], ['user2']],
     ],
     []
-]);
+);
 ```
 
 What the above would do is ensure that if `Mailchimp::getInstance()->externals->getUsersFromMailchimp()` is called in your tests the value `[['user1'], ['user2']]` will always be returned. No querying to the Mailchimp servers will be done. This ensures predictable tests that are more performant.
