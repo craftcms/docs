@@ -7,32 +7,32 @@ Theme and significant content changes will be documented in this file.
 - Updated `allowedFileExtensions` config setting to include default `dotm` and `dotx` file extensions.
 
 ## 2021-05-11
-## Added
+### Added
 - Documented `permissionsPolicyHeader` config setting.
 - Document new `--force` flag on the `plugin/uninstall` command.
 
 ## 2021-05-10
-## Added
+### Added
 - Documented controller action default route format.
 
 ## 2021-04-23
-## Changed
+### Changed
 - Improved GraphQL introduction and examples.
 
 ## 2021-04-20
-## Changed
+### Changed
 - Updated the tutorial to use Nitro 2.
 
 ## 2021-04-06
-## Changed
+### Changed
 - Updated Nitro 2.x documentation for version 2.0.7.
 
 ## 2021-04-01
-## Added
+### Added
 - Documented error templates. (Not a prank.)
 
 ## 2021-03-25
-## Added
+### Added
 - Added Nitro design goals and architectural overview.
 
 ## 2021-03-23

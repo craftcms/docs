@@ -34,17 +34,18 @@ called `Externals`
 
 Now seeing as you don't want to make call the Mailchimp servers in a test environment
 you would have to mock this method. For this, you can use `mockMethods`.
-Mocking your `Externals` service would look something like this:
+Mocking your `Externals` service with an `externals` component handle would look 
+something like this:
 
 ```php
-$this->tester->mockMethods([
+$this->tester->mockMethods(
     Mailchimp::getInstance(),
-    Externals::class,
+    'externals'
     [
         'getUsersFromMailchimp' => [['user1'], ['user2']],
     ],
     []
-]);
+);
 ```
 
 What the above would do is ensure that if

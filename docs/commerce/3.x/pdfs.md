@@ -73,6 +73,14 @@ It’s best to keep whatever you can in the template itself. Styles, for example
 
 The `@font-face` declaration is supported, but you’ll want to ensure the font itself is rendered properly. (Dompdf attempts to cache font files from remote URLs and can use local fonts in a special folder which requires more setup.)
 
+::: tip
+If you’re seeing missing or incorrect characters (i.e. `�` or `□`) where you didn’t expect them, make sure your template specifies the correct content type and charset:
+
+```html
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+```
+:::
+
 The [`pdfAllowRemoteImages`](config-settings.md#pdfallowremoteimages) setting is `false` by default, so any images in your templates must be provided with [data URLs](/3.x/dev/functions.md#dataurl):
 
 ```twig
