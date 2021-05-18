@@ -67,7 +67,7 @@ Nitro is up and running 😃
 
 ## `alias`
 
-Add an alias domain to a site.
+Add one or more alias domains for a site.
 
 ```
 nitro alias
