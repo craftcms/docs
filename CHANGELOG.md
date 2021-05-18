@@ -5,6 +5,8 @@ Theme and significant content changes will be documented in this file.
 ## Unreleased
 ### Added
 - Documented Commerce `purchasableShippable` event.
+### Changed
+- Updated `allowedFileExtensions` config setting to include default `dotm` and `dotx` file extensions.
 
 ## 2021-05-11
 ### Added
