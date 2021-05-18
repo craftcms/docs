@@ -1,46 +1,56 @@
 # Plugins
 
-::: tip
-If you’re looking for plugin _development_ documentation, check out the [Extending Craft](extend/README.md) section.
-:::
-
 Plugins extend Craft’s core functionality. They can introduce new Dashboard widgets, field types, control panel sections, Twig templating features, workflow actions, and more.
+
+::: tip
+If you’re looking for documentation on plugin _development_, check out [Extending Craft](extend/README.md).
+:::
 
 ## The Plugin Store
 
-Craft’s control panel features a Plugin Store, where you can browse through hundreds of free and commercial plugins, install them with a single click, and pay for them.
+Craft’s control panel features a Plugin Store where you can browse through hundreds of free and commercial plugins, install them with a single click, and purchase licenses.
 
-To access the Plugin Store, click on the “Plugin Store” item in Craft’s control panel navigation. From there you can browse through the various plugin categories and curated lists to discover new plugins.
+::: tip
+If you’ve disallowed admin changes in production, you will only be able to install plugins from the control panel in your local development environment.
+:::
+
+To access the Plugin Store from the control panel, choose **Plugin Store** from the main navigation. From there you can browse through the various plugin categories and curated lists to discover new plugins.
 
 ![The Craft Plugin Store](./images/plugin-store.png)
 
-When you click on a plugin, a modal window will open with details about the plugin, including a long description and screenshots.
+Choose any plugin to learn more about its features, pricing, documentation, version history, and see screenshots of it in action.
 
-![A plugin’s modal window within the Plugin Store](./images/plugin-store-plugin.png)
+![Plugin Store plugin detail page](./images/plugin-store-plugin.png)
 
 ## Installing Free Plugins
 
-Free plugins can be installed by clicking the “Install” button. You’ll then be taken to the plugin installer page, which will keep you updated with Craft’s status as it works through the installation.
+Free plugins can be installed by choosing **Install** from the plugin’s detail page. You’ll be taken to the plugin installer page, which will keep you updated with Craft’s status as it works through the installation.
 
 ## Trialing Commercial Plugins
 
-Commercial plugins can be installed as a trial by clicking the “Try” button, if Craft is running on a development domain. You’ll then be taken to the plugin installer page, which will keep you updated with Craft’s status as it works through the installation.
+If Craft is running on a development domain or in a local development environment, you can try out any commercial plugin for as long as you’d like by choosing the **Try** button from its detail page. You’ll be taken to the plugin installer page, which will keep you updated with Craft’s status as it works through the installation.
 
 ## Buying Commercial Plugins
 
-If you have tried a commercial plugin and are ready to buy it, return to the Plugin Store and click on the Cart icon in the header area. You should see your plugin listed in the “Active Trials” section of the Cart modal. Click the “Add to cart” button  to add the plugin to your cart, and then proceed with checkout.
+If you’ve tried a commercial plugin and are ready to purchase a license, return to the Plugin Store and choose the cart icon in the header area. The plugin should be listed in the cart’s **Active Trials** section. Choose **Add to cart** to add the plugin to your cart and proceed with checkout.
 
 Once you’ve completed the checkout process, your plugin installation will automatically become licensed.
 
+::: tip
+If you purchase a plugin license separately from a Craft install or need to update a license key, visit **Settings** → **Plugins** in the relevant site’s control panel. From that listing, you can enter a new key or environment variable placeholder for any commercial plugin.
+
+![Changing a plugin license key](./images/changing-plugin-license-key.gif)
+:::
+
 ## Managing Plugin Licenses
 
-You can manage all of your plugin licenses from your [Craft ID](https://id.craftcms.com/) account, under Licenses → Plugins
+You can manage all your plugin licenses from your [Craft ID](https://id.craftcms.com/) account, under **Licenses** → **Plugins**
 
 If you don’t have a Craft ID account yet, you can create one by going to [id.craftcms.com/register](https://id.craftcms.com/register).
 
-Any plugin licenses that were purchased with the same email address as your Craft ID account will automatically be added to your account.
+Any plugin licenses purchased with the same email address as your Craft ID account will automatically be added to your account.
 
-If you have a plugin license that isn’t showing up, go to Licenses → Claim License. You can enter its license key manually, or if you know the email address that was used for purchase, you can enter it in the “Claim licenses by email address” section. After verifying that you own the email address, any unclaimed licenses associated with that email address will be added to your account.
+If you have a plugin license that isn’t showing up, visit **Licenses** → **Claim License**. You can enter its license key manually, or if you know the email address that was used for purchase, you can enter it in the **Claim licenses by email address** section. After verifying ownership of the email address, any unclaimed licenses associated with that email address will be added to your account.
 
 ### Safeguarding Plugin License Keys
 
@@ -50,7 +60,7 @@ If you were to create a `MY_PLUGIN_KEY` environment variable, for example, you c
 
 ## Transferring Plugin Licenses
 
-To transfer a plugin license to someone else’s Craft ID account, log into your Craft ID account, and click on the license under Licenses → Plugins, and then click the “Release License” button to release it from your account. Then the other person will be able to claim the license for themselves from the Licenses → Claim License page of their Craft ID account.
+To transfer a plugin license to someone else’s Craft ID account, log into your Craft ID account, choose the license under **Licenses** → **Plugins**, and choose the **Release License** to release it from your account. Another person will then be able to claim the license for themself from the **Licenses** → **Claim License** page of their Craft ID account.
 
 ## Commercial Plugin Licensing
 
@@ -69,4 +79,4 @@ Together, these rules make plugin licensing safe and predictable for customers, 
 
 We don’t impose any specific support requirements on plugin vendors. You will need to check with them to learn about their support policies, so you know what to expect.
 
-If you feel that a plugin vendor isn’t providing a reasonable level of support for a commercial plugin license, please send and email to <support@craftcms.com> about it.
+If you feel that a plugin vendor isn’t providing a reasonable level of support for a commercial plugin license, please let us know by emailing <support@craftcms.com> and letting us know about the situation.
