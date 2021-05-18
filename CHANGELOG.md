@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## Unreleased
+### Added
+- Documented `nitro db destroy` command.
+
 ## 2021-05-11
 ### Added
 - Documented `permissionsPolicyHeader` config setting.
