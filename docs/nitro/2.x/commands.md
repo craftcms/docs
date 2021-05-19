@@ -30,8 +30,8 @@ Adding site…
 Enter the hostname [mysite.test]:
   ✓ setting hostname to mysite.test
   ✓ adding site ~/dev/support/mysite.test
-Enter the webroot for the site [web]:
-  ✓ using webroot web
+Enter the web root for the site [web]:
+  ✓ using web root web
 Choose a PHP version:
   1. 8.0
   2. 7.4
@@ -67,7 +67,7 @@ Nitro is up and running 😃
 
 ## `alias`
 
-Add an alias domain to a site.
+Add one or more alias domains for a site.
 
 ```
 nitro alias
@@ -360,16 +360,16 @@ Which image should we use?
 Enter your selection: 1
 What tag should we use [latest]? 7.10.1
   … downloading docker.io/library/elasticsearch:7.10.1 ✓
-Expose port `9200` on the host machine [Y/n]? y
-Expose port `9300` on the host machine [Y/n]? y
-Should we proxy one of the ports to expose a web based UI [Y/n]?
+Expose port `9200` on host [Y/n]?
+Expose port `9300` on host [Y/n]?
+Does the image contain a web-based UI [Y/n]?
 Which port should we use for the UI?
   1. 9200
   2. 9300
 Enter your selection: 1
 What is the name of the container [elasticsearch]?
-Create a file to store environment variables [Y/n]?
-Created environment variables file at "/Users/oli/.nitro/.elasticsearch"...
+Create a file to add environment variables [Y/n]?
+Created environment variables file at "/Users/oli/.nitro/.elasticsearch".
 New container "elasticsearch.containers.nitro" added!
 Apply changes now [Y/n]?
 ```
@@ -528,6 +528,26 @@ Enter your selection: 2
 Preparing backup…
   … creating backup support-2021-01-06-162231.sql ✓
 Backup saved in /Users/me/.nitro/backups/mysql-8.0-3306.nitro 💾
+```
+
+## `db destroy`
+
+Destroys a database engine.
+
+```
+nitro db destroy
+```
+
+**Example**
+
+```
+$ nitro db destroy
+Select database to destroy:
+  1. mysql-8.0-3306.database.nitro
+  2. mariadb-latest-3307.database.nitro
+Enter your selection: 2
+Removing mariadb-latest-3307.database.nitro
+Apply changes now [Y/n]?
 ```
 
 ## `db import`
