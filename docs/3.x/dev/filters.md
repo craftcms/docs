@@ -628,7 +628,7 @@ This filter supports two arguments:
 
 Merges an array with another one.
 
-This has the same behavior as [Twig’s merge filter](https://twig.symfony.com/doc/2.x/filters/merge.html), using PHP’s [array_merge()](https://www.php.net/manual/en/function.array-merge.php) under the hood:
+This has the same behavior as [Twig’s merge filter](https://twig.symfony.com/doc/2.x/filters/merge.html), which uses PHP’s [array_merge()](https://www.php.net/manual/en/function.array-merge.php) under the hood:
 
 ```twig
 {% set values = [1, 2] %}
