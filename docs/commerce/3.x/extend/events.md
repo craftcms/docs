@@ -1930,7 +1930,7 @@ Event::on(
     Purchasables::class,
     Purchasables::EVENT_PURCHASABLE_AVAILABLE,
     function(PurchasableAvailableEvent $event) {
-        if($order && $user = $order->getUser()){
+        if ($order && $user = $order->getUser()){
             // Prevent users in group ID 1 from having the purchasable in their cart
             $event->isAvailable = $event->isAvailable && !$user->isInGroup(1);
         }
@@ -1941,3 +1941,26 @@ Event::on(
 ::: tip
 If the purchasable becomes unavailable after being added to the cart, an [order notice](../orders-carts.md#order-notices) will be added to the order informing the customer.
 :::
+
+### `purchasableShippable`
+
+The event that is triggered when determining whether a purchasable may be shipped.
+
+This example prevents the purchasable from being shippable in a specific user group’s orders:
+
+```php
+use craft\commerce\events\PurchasableShippableEvent;
+use craft\commerce\services\Purchasables;
+use yii\base\Event;
+
+Event::on(
+    Purchasables::class,
+    Purchasables::EVENT_PURCHASABLE_SHIPPABLE,
+    function(PurchasableShippableEvent $event) {
+        if ($order && $user = $order->getUser()){
+            // Prevent users in group ID 1 from being able to ship this purchasable
+            $event->isShippable = $event->is && !$user->isInGroup(1);
+        }
+    }
+);
+```
