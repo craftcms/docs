@@ -2,9 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
-## Unreleased
+## 2021-05-19
 ### Added
 - Documented `nitro db destroy` command.
+- Documented `nitro alias` site argument.
 
 ## 2021-05-18
 ### Added

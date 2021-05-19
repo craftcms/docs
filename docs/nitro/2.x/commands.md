@@ -70,8 +70,13 @@ Nitro is up and running 😃
 Add one or more alias domains for a site.
 
 ```
-nitro alias
+nitro alias <?site>
 ```
+
+**Parameters**
+
+`site`
+: Optional hostname for an existing site, to be used instead of site prompt or current directory.
 
 **Example**
 
