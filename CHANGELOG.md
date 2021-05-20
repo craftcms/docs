@@ -6,6 +6,7 @@ Theme and significant content changes will be documented in this file.
 ### Added
 - Documented `nitro db destroy` command.
 - Documented `nitro alias` site argument.
+- Documented `|merge` filter with its `recursive` argument.
 
 ## 2021-05-18
 ### Added
