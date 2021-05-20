@@ -49,7 +49,7 @@
 | [lower](https://twig.symfony.com/doc/2.x/filters/lower.html)                       | 文字列を小文字にします。                                                                            |
 | [map](https://twig.symfony.com/doc/2.x/filters/map.html)                           | 配列内のアイテムにアローファンクションを適用します。                                                              |
 | [markdown](#markdown-or-md)                                                        | 文字列を Markdown として処理します。                                                                 |
-| [merge](https://twig.symfony.com/doc/2.x/filters/merge.html)                       | 配列を別の配列とマージします。                                                                         |
+| [merge](#merge)                                                                    | Merges an array with another one.                                                       |
 | [multisort](#multisort)                                                            | サブ配列内の1つ以上のキーで配列をソートします。                                                                |
 | [namespace](#namespace)                                                            | CSS セレクタだけでなく、入力項目の name や HTML 属性に名前空間を割り当てます。                                         |
 | [namespaceInputId](#namespaceinputid)                                              | エレメント ID に名前空間を割り当てます。                                                                  |
@@ -605,9 +605,85 @@ the [Apple Extended Keyboard II] [1].
 - `flavor` は、`'original'`（デフォルト値）、`'gfm'`（GitHub-Flavored Markdown）、`'gfm-comment'`（改行が`<br>`に変換された GFM）、 または、`'extra'`（Markdown Extra）にできます。
 - `inlineOnly` は、`<p>` タグを除き、インライン要素だけを解析するかどうかを決定します。 （デフォルトは `false`）
 
+## `merge`
+
+Merges an array with another one.
+
+This has the same behavior as [Twig’s merge filter](https://twig.symfony.com/doc/2.x/filters/merge.html) which uses PHP’s [array_merge()](https://www.php.net/manual/en/function.array-merge.php) under the hood:
+
+```twig
+{% set values = [1, 2] %}
+{% set values = values|merge(['Lucille', 'Buster']) %}
+{# Result: [1, 2, 'Lucille', 'Buster'] #}
+```
+
+It also works on hashes, where merging occurs on the keys. A key that doesn’t already exist is added, and a key that does already exist only has its value overridden:
+
+```twig
+{% set items = { 'Buster': 'Bluth', 'Lindsay': 'Bluth' } %}
+{% set items = items|merge({ 'Tobias': 'Fünke', 'Lindsay': 'Fünke' }) %}
+{# Result: { 'Buster': 'Bluth', 'Tobias': 'Fünke', 'Lindsay': 'Fünke' } #}
+```
+
+::: tip
+If you want to make sure specific values are defined by default in an array, like `'Lindsay': 'Bluth'` below, reverse the elements in the call:
+
+```twig
+{% set items = { 'Buster': 'Bluth', 'Lindsay': 'Bluth' } %}
+{% set items = { 'Tobias': 'Fünke', 'Lindsay': 'Fünke' }|merge(items) %}
+{# Result: { 'Tobias': 'Fünke', 'Lindsay': 'Bluth', 'Buster': 'Bluth' } #}
+```
+:::
+
+You can also provide an optional `recursive` argument that will use [ArrayHelper::merge()](craft3:craft\helpers\ArrayHelper::merge()) to merge nested arrays or hashes.
+
+Without `recursive`:
+
+```twig
+{% set items = {
+    'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
+    'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
+} %}
+{% set items = items|merge({
+    'rebellion': { 'Endor': 'Solo/Organa' },
+    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+}) %}
+{# Result: {
+    'rebellion': { 'Endor': 'Solo/Organa' },
+    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+} #}
+```
+
+With `recursive`:
+
+```twig{8}
+{% set items = {
+    'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
+    'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
+} %}
+{% set items = items|merge({
+    'rebellion': { 'Endor': 'Solo/Organa' },
+    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+}, true) %}
+{# Result: {
+    'rebellion': {
+        'Bespin': 'Calrissian',
+        'Hoth': 'Organa',
+        'Crait': 'Organa',
+        'Endor': 'Solo/Organa'
+    },
+    'empire': {
+        'Coruscant': 'Palpatine',
+        'Endor': 'Palpatine',
+        'Bespin': 'Vader',
+        'Hoth': 'Veers'
+    }
+} #}
+```
+
 ## `multisort`
 
-キーと値のペアで配列をフィルタします。
+Sorts an array by one or more properties or keys within an array’s values.
 
 To sort by a single property or key, pass its name as a string:
 
@@ -615,33 +691,33 @@ To sort by a single property or key, pass its name as a string:
 {% set entries = entries|multisort('title') %}
 ```
 
-複数のプロパティまたはキーでソートするには、それらを配列で渡します。 例えば、これははじめに投稿日、次にタイトルでエントリをソートします。
+To sort by multiple properties or keys, pass them in as an array. For example, this will sort entries by their post date first, and then by their title:
 
 ```twig
 {% set entries = entries|multisort(['postDate', 'title']) %}
 ```
 
-複数のプロパティやキーでソートする際、`direction` および `sortFlag` パラメータも配列としてセットしなければなりません。
+An arrow function can be passed instead, if the values that should be sorted by don’t exist as a property or key on the array elements.
 
 ```twig
 {% set entries = entries|multisort(e => e.author.fullName) %}
 ```
 
-デフォルトでは、値は昇順でソートされます。 `direction` パラメータを利用して、降順に切り替えることができます。
+The values will be sorted in ascending order by default. You can switch to descending order with the `direction` param:
 
 ```twig
 {% set entries = entries|multisort('title', direction=SORT_DESC) %}
 ```
 
-`sortFlag` パラメータを利用して、並び替えの振る舞いをカスタマイズすることもできます。 例えば、アイテムを数値でソートするには、`SORT_NUMERIC` を利用します。
+You can also customize which sorting behavior is used, with the `sortFlag` param. For example, to sort items numerically, use `SORT_NUMERIC`:
 
 ```twig
 {% set entries = entries|multisort('id', sortFlag=SORT_NUMERIC) %}
 ```
 
-次のようになるでしょう。
+See PHP’s [sort()](https://www.php.net/manual/en/function.sort.php) documentation for the available sort flags.
 
-CSS セレクタの `#title` が `#foo-title`、`id` 属性が `title` から `foo-title`、さらに、`name` 属性が `title` から `foo[title]` へ変わったことに注目してください。
+When sorting by multiple properties or keys, you must set the `direction` and `sortFlag` params to arrays as well.
 
 ```twig
 {% set entries = entries|multisort([
@@ -652,9 +728,9 @@ CSS セレクタの `#title` が `#foo-title`、`id` 属性が `title` から `f
 
 ## `namespace`
 
-`|namespace` フィルタは、CSS セレクタだけでなく、入力項目の name や HTML 属性の名前空間を割り当てるために利用されます。
+The `|namespace` filter can be used to namespace input names and other HTML attributes, as well as CSS selectors.
 
-次のような結果になるでしょう。
+For example, this:
 
 ```twig
 {% set html %}
@@ -667,7 +743,7 @@ CSS セレクタの `#title` が `#foo-title`、`id` 属性が `title` から `f
 {{ html|namespace('foo') }}
 ```
 
-エレメント ID に名前空間を割り当てます。
+would become this:
 
 ```html
 <style>
@@ -677,17 +753,15 @@ CSS セレクタの `#title` が `#foo-title`、`id` 属性が `title` から `f
 <input class="text" id="foo-title" name="foo[title]" type="text">
 ```
 
-例えば、これは
+Notice how the `#title` CSS selector became `#foo-title`, the `id` attribute changed from `title` to `foo-title`, and the `name` attribute changed from `title` to `foo[title]`.
 
-クラス名にも名前空間を割り当てたい場合、`withClasses=true` を渡してください。 クラス CSS セレクタと `class` 属性の両方に影響します。
+If you want class names to get namespaced as well, pass `withClasses=true`. That will affect both class CSS selectors and `class` attributes:
 
 ```twig
 {{ html|namespace('foo', withClasses=true) }}
 ```
 
-::: tip
-これが [namespace](tags.md#namespace) タグ内で利用されている場合、タグによって適用される名前空間がデフォルトで利用されます。
-:::
+That would result in:
 
 ```html{2,5}
 <style>
@@ -699,35 +773,35 @@ CSS セレクタの `#title` が `#foo-title`、`id` 属性が `title` から `f
 
 ## `namespaceInputId`
 
-入力項目の name に名前空間を割り当てます。
+Namepaces an element ID.
 
-例えば、これは
+For example, this:
 
 ```twig
 {{ 'bar'|namespaceInputId('foo') }}
 ```
 
-次のように出力するでしょう。
+would output:
 
 ```html
 foo-bar
 ```
 
 ::: tip
-これが [namespace](tags.md#namespace) タグ内で利用されている場合、タグによって適用される名前空間がデフォルトで利用されます。 :::
+If this is used within a [namespace](tags.md#namespace) tag, the namespace applied by the tag will be used by default.
 :::
 
 ## `namespaceInputName`
 
-ユーザーが優先する言語に応じて、数値をフォーマットします。
+Namepaces an input name.
 
-グループシンボル（例えば、英語のコンマ）を省略したい場合は、オプションで `false` を渡すことができます。
+For example, this:
 
 ```twig
 {{ 'bar'|namespaceInputName('foo') }}
 ```
 
-[リファレンスタグ](../reference-tags.md)の文字列を解析します。
+would output:
 
 ```html
 foo[bar]
@@ -739,9 +813,9 @@ If this is used within a [namespace](tags.md#namespace) tag, the namespace appli
 
 ## `number`
 
-ユーザーが優先する言語に応じて、パーセンテージをフォーマットします。
+Formats a number according to the user’s preferred language.
 
-別の要素の先頭に HTML を追加します。
+You can optionally pass `false` to it if you want group symbols to be omitted (e.g. commas in English).
 
 ```twig
 {{ 1000000|number }}
@@ -751,7 +825,7 @@ If this is used within a [namespace](tags.md#namespace) tag, the namespace appli
 {# Output: 1000000 #}
 ```
 
-同じタイプの要素がまだ存在しないときのみ新しい要素を追加したい場合、第二引数に `'keep'` を渡します。
+If the passed-in value isn’t a valid number it will be returned verbatim:
 
 ```twig
 {{ 'oh hai'|number }}
@@ -760,7 +834,7 @@ If this is used within a [namespace](tags.md#namespace) tag, the namespace appli
 
 ## `parseRefs`
 
-同じタイプの既に存在する要素を置き換えたい場合、第二引数に `'replace'` を渡します。
+Parses a string for [reference tags](../reference-tags.md).
 
 ```twig
 {% set content %}
@@ -772,7 +846,7 @@ If this is used within a [namespace](tags.md#namespace) tag, the namespace appli
 
 ## `pascal`
 
-与えられたテキストに HTML Purifier を実行します。
+Returns a string formatted in “PascalCase” (AKA “UpperCamelCase”).
 
 ```twig
 {{ 'foo bar'|pascal }}
@@ -781,15 +855,14 @@ If this is used within a [namespace](tags.md#namespace) tag, the namespace appli
 
 ## `percentage`
 
-カスタムの HTML Purifier 設定ファイルを指定することもできます。
+Formats a percentage according to the user’s preferred language.
 
 ```twig
-{% set array1 = ['foo'] %}
-{% set array2 = array|push('bar', 'baz') %}
-{# Result: ['foo', 'bar', 'baz'] #}
+{{ 0.85|percentage }}
+{# Output: 85% #}
 ```
 
-`config/htmlpurifier/user_bio.json` によって定義された設定に基づいて、HTML Purifier を設定します。
+If the passed-in value isn’t a valid number it will be returned verbatim:
 
 ```twig
 {{ 'oh hai'|percentage }}
@@ -798,21 +871,21 @@ If this is used within a [namespace](tags.md#namespace) tag, the namespace appli
 
 ## `prepend`
 
-1つ以上のアイテムを配列の最後に追加し、新しい配列を返します。
+Prepends HTML to the beginning of another element.
 
 ```twig
 {{ '<div><p>Ipsum</p></div>'|prepend('<p>Lorem</p>') }}
 {# Output: <div><p>Lorem</p><p>Ipsum</p></div> #}
 ```
 
-文字列の一部を他のものに置き換えます。
+If you only want to append a new element if one of the same type doesn’t already exist, pass `'keep'` as a second argument.
 
 ```twig
 {{ '<div><p>Ipsum</p></div>'|prepend('<p>Lorem</p>', 'keep') }}
 {# Output: <div><p>Ipsum</p></div> #}
 ```
 
-マッピング配列が渡された場合、Twig コアの [`replace`](https://twig.symfony.com/doc/2.x/filters/replace.html) フィルタと同様に機能します。
+If you want to replace an existing element of the same type, pass `'replace'` as a second argument.
 
 ```twig
 {{ '<div><p>Ipsum</p></div>'|prepend('<p>Lorem</p>', 'replace') }}
@@ -821,35 +894,35 @@ If this is used within a [namespace](tags.md#namespace) tag, the namespace appli
 
 ## `purify`
 
-または、一度に1つのものを置き換えることができます。
+Runs the given text through HTML Purifier.
 
 ```twig
 {{ user.bio|purify }}
 ```
 
-置換文字列の値の最初と最後にスラッシュを付けてマッチするものを検索することで、正規表現も利用できます。
+You can specify a custom HTML Purifier config file as well:
 
 ```twig
 {{ user.bio|purify('user_bio') }}
 ```
 
-RSS フィードに必要な形式（`D, d M Y H:i:s O`）で日付を出力します。
+That will configure HTML Purifier based on the settings defined by `config/htmlpurifier/user_bio.json`.
 
 ## `push`
 
-「snake_case」でフォーマットされた文字列を返します。
+Appends one or more items onto the end of an array, and returns the new array.
 
 ```twig
 {% set array1 = ['foo'] %}
-{% set array2 = array|unshift('bar', 'baz') %}
-{# Result: ['bar', 'baz', 'foo'] #}
+{% set array2 = array1|push('bar', 'baz') %}
+{# Result: ['foo', 'bar', 'baz'] #}
 ```
 
 ## `replace`
 
-タイムスタンプ、または、[DateTime](http://php.net/manual/en/class.datetime.php) オブジェクトのフォーマットされた時刻を出力します。
+Replaces parts of a string with other things.
 
-Craft はロケール固有の時刻のフォーマットを出力するいくつかの特別なフォーマットキーワードを提供します。
+When a mapping array is passed, this works identically to Twig’s core [`replace`](https://twig.symfony.com/doc/2.x/filters/replace.html) filter:
 
 ```twig
 {% set str = 'Hello, FIRST LAST' %}
@@ -860,7 +933,7 @@ Craft はロケール固有の時刻のフォーマットを出力するいく�
 }) }}
 ```
 
-利用可能な `format` 値は、次の通りです。
+Or you can replace one thing at a time:
 
 ```twig
 {% set str = 'Hello, NAME' %}
@@ -876,7 +949,7 @@ You can also use a regular expression to search for matches by starting and endi
 
 ## `rss`
 
-`timezone` パラメータを利用して、出力する時刻のタイムゾーンをカスタマイズできます。
+Outputs a date in the format required for RSS feeds (`D, d M Y H:i:s O`).
 
 ```twig
 {{ entry.postDate|rss }}
@@ -884,7 +957,7 @@ You can also use a regular expression to search for matches by starting and endi
 
 ## `snake`
 
-経由で、人が読めるタイムスタンプとして日付をフォーマットします。
+Returns a string formatted in “snake_case”.
 
 ```twig
 {{ 'foo bar'|snake }}
@@ -893,23 +966,21 @@ You can also use a regular expression to search for matches by starting and endi
 
 ## `time`
 
-[Craft::t()](yii2:yii\BaseYii::t()) でメッセージを翻訳します。
+Outputs the time of day for a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) object.
 
 ```twig
 {{ entry.postDate|time }}
 {# Output: 10:00:00 AM #}
 ```
 
-カテゴリの指定がない場合、デフォルトで `site` になります。
+Craft provides some special format keywords that will output locale-specific time formats:
 
 ```twig
 {{ entry.postDate|time('short') }}
 {# Output: 10:00 AM #}
 ```
 
-::: tip
-これがどのように機能するかの詳細については、[静的メッセージの翻訳](../sites.md#static-message-translations)を参照してください。
-:::
+Possible `format` values are:
 
 | フォーマット             | 実例             |
 | ------------------ | -------------- |
@@ -917,14 +988,14 @@ You can also use a regular expression to search for matches by starting and endi
 | `medium` _（デフォルト）_ | 5:00:00 PM     |
 | `long`             | 5:00:00 PM PDT |
 
-デフォルトでは、現在のアプリケーションのロケールが利用されます。 別のロケールで日付と時刻をフォーマットしたい場合、引数 `locale` を利用します。
+The current application locale will be used by default. If you want to format the date and time for a different locale, use the `locale` argument:
 
 ```twig
 {{ entry.postDate|time('short', locale='en-GB') }}
 {# Output: 17:00 #}
 ```
 
-配列に [array_unique()](http://php.net/manual/en/function.array-unique.php) を実行します。
+You can customize the timezone the time is output in, using the `timezone` param:
 
 ```twig
 {{ entry.postDate|time('short', timezone='UTC') }}
@@ -933,7 +1004,7 @@ You can also use a regular expression to search for matches by starting and endi
 
 ## `timestamp`
 
-1つ以上のアイテムを配列の先頭に追加し、新しい配列を返します。
+Formats a date as a human-readable timestamp, via <craft3:craft\i18n\Formatter::asTimestamp()>.
 
 ```twig
 {{ now|timestamp }}
@@ -942,13 +1013,13 @@ You can also use a regular expression to search for matches by starting and endi
 
 ## `translate` or `t`
 
-指定された配列のすべての値の配列を返しますが、カスタムキーは除かれます。
+Translates a message with [Craft::t()](yii2:yii\BaseYii::t()).
 
 ```twig
 {{ 'Hello world'|t('myCategory') }}
 ```
 
-配列に <craft3:craft\helpers\ArrayHelper::where()> を実行します。
+If no category is specified, it will default to `site`.
 
 ```twig
 {{ 'Hello world'|t }}
@@ -997,7 +1068,7 @@ If you’d prefer to have the entire word removed, set the `splitSingleWord` arg
 
 ## `ucfirst`
 
-文字列の最初の文字を大文字にします。
+Capitalizes the first character of a string.
 
 ```twig
 {{ 'foobar'|ucfirst }}
@@ -1006,7 +1077,7 @@ If you’d prefer to have the entire word removed, set the `splitSingleWord` arg
 
 ## `unique`
 
-利用可能なソートフラグについては、PHP の [sort()](https://www.php.net/manual/en/function.sort.php) ドキュメントを参照してください。
+Runs an array through [array_unique()](http://php.net/manual/en/function.array-unique.php).
 
 ```twig
 {% set array = ['Larry', 'Darryl', 'Darryl'] %}
@@ -1016,17 +1087,17 @@ If you’d prefer to have the entire word removed, set the `splitSingleWord` arg
 
 ## `unshift`
 
-1つ以上のアイテムを配列の先頭に追加します。
+Prepends one or more items to the beginning of an array, and returns the new array.
 
 ```twig
-{% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}
-{{ array|filterByValue(v => v == 'bar') }}
-{# Result: { 'foo': 'bar', 'bat': 'bar' } #}
+{% set array1 = ['foo'] %}
+{% set array2 = array1|unshift('bar', 'baz') %}
+{# Result: ['bar', 'baz', 'foo'] #}
 ```
 
 ## `values`
 
-キーをリセットして、配列内のすべての値を返します。
+Returns an array of all the values in a given array, but without any custom keys.
 
 ```twig
 {% set arr1 = {foo: 'Foo', bar: 'Bar'} %}
@@ -1039,17 +1110,14 @@ If you’d prefer to have the entire word removed, set the `splitSingleWord` arg
 Runs an array through <craft3:craft\helpers\ArrayHelper::where()>.
 
 ```twig
-{% set array = {
-    foo: 'foo',
-    bar: 'bar',
-    baz: 'baz'
-} %}
-{% set filtered = array|withoutKey('baz') %}
+{% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}
+{{ array|where(v => v == 'bar') }}
+{# Result: { 'foo': 'bar', 'bat': 'bar' } #}
 ```
 
 ## `without`
 
-指定されたエレメントを除いた配列を返します。
+Returns an array without the specified element(s).
 
 ```twig
 {% set entries = craft.entries.section('articles').limit(3).find %}
@@ -1059,7 +1127,7 @@ Runs an array through <craft3:craft\helpers\ArrayHelper::where()>.
 
 ## `withoutKey`
 
-指定されたキーを除いた配列を返します。
+Returns an array without one or more specified keys.
 
 The key can be a single key as a string:
 
