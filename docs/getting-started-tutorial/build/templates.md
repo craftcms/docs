@@ -572,7 +572,7 @@ Create `templates/_includes/nav.twig` and add the following to it:
 
 Now let’s include that in `templates/_layout.twig`:
 
-```twig{11}
+```twig{10}
 <!DOCTYPE html>
 <html lang="{{ craft.app.language }}">
   <head>
