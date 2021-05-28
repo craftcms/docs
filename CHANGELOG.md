@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-05-28
+### Changed
+- Updated VuePress along with a bunch of project dependencies.
+
 ## 2021-05-19
 ### Added
 - Documented `nitro db destroy` command.
