@@ -429,7 +429,7 @@ This query is used to query for entries.
 | `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
 | `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its id.
 | `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id
 | `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
 | `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
 | `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its id.
@@ -484,7 +484,7 @@ This query is used to return the number of entries.
 | `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
 | `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its id.
 | `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id
 | `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
 | `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
 | `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its id.
@@ -539,7 +539,7 @@ This query is used to query for a single entry.
 | `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
 | `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its id.
 | `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id
 | `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
 | `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
 | `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its id.
@@ -863,7 +863,7 @@ This query is used to query for categories.
 | `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
 | `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its id.
 | `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id
 | `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
 | `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
 | `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its id.
@@ -909,7 +909,7 @@ This query is used to return the number of categories.
 | `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
 | `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its id.
 | `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id
 | `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
 | `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
 | `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its id.
@@ -955,7 +955,7 @@ This query is used to query for a single category.
 | `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
 | `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its id.
 | `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id
 | `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
 | `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
 | `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its id.
