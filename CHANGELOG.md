@@ -2,6 +2,11 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-06-01
+### Added
+- Documented Commerce `productCount` and `variantCount` GraphQL queries.
+- Added a note about MySQL/MariaDB timezone support with link to [Knowledge Base article](https://craftcms.com/knowledge-base/populating-mysql-mariadb-timezone-tables).
+
 ## 2021-05-28
 ### Changed
 - Updated VuePress along with a bunch of project dependencies.
