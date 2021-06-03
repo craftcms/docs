@@ -138,7 +138,7 @@ ASSETS_BASE_PATH=/path/to/web/assets
 You can customize Craft’s application configuration from `config/app.php`, such as overriding component configs, or adding new modules and components.
 
 ::: tip
-Craft のデフォルト設定は [src/config/app.php](https://github.com/craftcms/cms/blob/master/src/config/app.php)、[app.web.php](https://github.com/craftcms/cms/blob/master/src/config/app.web.php)、および、[app.console.php](https://github.com/craftcms/cms/blob/master/src/config/app.console.php) によって定義されています。 既存のアプリケーションコンポーネントを上書きする必要がある場合、これらのファイルを参照してください。 :::
+Craft’s default configuration is defined by [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php), and [app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php). 既存のアプリケーションコンポーネントを上書きする必要がある場合、これらのファイルを参照してください。 :::
 :::
 
 ### Cache コンポーネント
