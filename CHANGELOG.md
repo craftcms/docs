@@ -2,6 +2,8 @@
 
 Theme and significant content changes will be documented in this file.
 
+## Unreleased
+
 ## 2021-06-01
 ### Added
 - Documented Commerce `productCount` and `variantCount` GraphQL queries.
