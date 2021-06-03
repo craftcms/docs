@@ -204,7 +204,7 @@ You can also configure any custom field to make its content available for search
 Once enabled, the next time an element is saved that field’s content will be stored as plain-text keywords in Craft’s `searchindex` table and available for search.
 
 ::: tip
-For relational field types like Assets fields, Matrix fields, etc., the top-level **Use this field’s values as search keywords** setting determines whether any sub-fields or child elements will factor into results for the parent.
+For Matrix fields, the top-level **Use this field’s values as search keywords** setting determines whether any sub-fields will factor into results for the parent. For relational fields like Assets, Categories, and Entries, the setting determines whether related titles should factor into search results.
 :::
 
 ## Rebuilding Your Search Indexes
