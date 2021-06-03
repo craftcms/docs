@@ -9,7 +9,7 @@ This section displays updates for Craft CMS plugins, each with its own “Update
 You can choose “Update All” at the top left to initiate all available Craft and/or plugin updates at once.
 
 ::: tip
-Craft’s [changelog](https://github.com/craftcms/cms/blob/master/CHANGELOG.md) will warn you of any critical changes at the top of the release notes. While there aren’t usually any warnings, it’s always a good idea to check before updating.
+Craft’s [changelog](https://github.com/craftcms/cms/blob/main/CHANGELOG.md) will warn you of any critical changes at the top of the release notes. While there aren’t usually any warnings, it’s always a good idea to check before updating.
 :::
 
 ## ターミナルからのアップデート
