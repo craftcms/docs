@@ -40,7 +40,7 @@ The Minio service [https://minio.service.nitro](https://minio.service.nitro) wil
 
 ## Overiding Minio Default Ports
 
-By default, Mailhog uses port 9000 the Web UI. This port may collide with another service on your machine so Nitro includes an easy way to overide the ports. You can set the following environment variables in your terminal shell to override the defaults:
+By default, Minio uses port 9000 the Web UI. This port may collide with another service on your machine so Nitro includes an easy way to overide the ports. You can set the following environment variables in your terminal shell to override the defaults:
 
 `NITRO_MINIO_HTTP_PORT`
 
