@@ -71,6 +71,18 @@ The permissions Craft comes with are:
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Replace files uploaded by other users | `replacePeerFilesInVolume:[SectionUID]`     |
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Remove files uploaded by other users  | `deletePeerFilesInVolume:[SectionUID]`      |
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Edit images uploaded by other users   | `editPeerImagesInVolume:[SectionUID]`       |
+| Utilities                                                        |                                             |
+| ↳&nbsp; Updates                                                  | `utility:updates`                           |
+| ↳&nbsp; System Report                                            | `utility:system-report`                     |
+| ↳&nbsp; PHP Info                                                 | `utility:php-info`                          |
+| ↳&nbsp; System Messages                                          | `utility:system-messages`                   |
+| ↳&nbsp; Asset Indexes                                            | `utility:asset-indexes`                     |
+| ↳&nbsp; Queue Manager                                            | `utility:queue-manager`                     |
+| ↳&nbsp; Clear Caches                                             | `utility:clear-caches`                      |
+| ↳&nbsp; Deprecation Warnings                                     | `utility:deprecation-errors`                |
+| ↳&nbsp; Database Backup                                          | `utility:db-backup`                         |
+| ↳&nbsp; Find and Replace                                         | `utility:find-replace`                      |
+| ↳&nbsp; Migrations                                               | `utility:migrations`                        |
 
 ::: tip
 See the _Extending Craft_ [User Permissions](extend/user-permissions.md) page to learn how to register custom permissions for your module or plugin.
