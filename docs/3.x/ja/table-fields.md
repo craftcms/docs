@@ -40,9 +40,9 @@
 if (count($entry->myFieldHandle)) {
     // Whiskeys:
     foreach ($entry->myFieldHandle as $row) {
-        // $row->whiskey
-        // $row->description
-        // $row->proof
+        // $row['whiskey']
+        // $row['description']
+        // $row['proof']
     }
 }
 ```
