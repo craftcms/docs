@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-06-09
+### Fixed
+- Fixed treeview styling.
+
 ## 2021-06-01
 ### Added
 - Documented Commerce `productCount` and `variantCount` GraphQL queries.
