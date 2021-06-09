@@ -141,12 +141,12 @@ php craft setup/security-key
 
 Craft プロジェクトをホストするための新しいウェブサーバーを用意してください。 Its document root (or “web root”) should point to your `web/` directory (or whatever you’ve renamed it to).
 
-[MAMP](https://mamp.info) や他のローカルホスティングツールを使用していない場合、`hosts` ファイルを更新して、選択したホスト名にローカルコンピュータへ要求をルーティングする必要があるかもしれません。
+If you’re not using [Nitro](/nitro/2.x/) or another local hosting tool, you will probably need to update your `hosts` file, so your computer knows to route requests to your chosen host name to the local computer.
 
 - **macOS/Linux/Unix**: `/etc/hosts`
 - **Windows**: `\Windows\System32\drivers\etc\hosts`
 
-ブラウザで `http://<Hostname>/index.php?p=admin/install`（ウェブサーバーのホスト名で `<Hostname>` を置き換える）にアクセスすることで、すべて正しく設定できたかどうかをテストできます。 Craft のセットアップウィザードが表示された場合、そのホスト名は Craft のインストールのために適切に処理されています。
+You can test whether you set everything up correctly by pointing your web browser to `https://<Hostname>/index.php?p=admin/install` (substituting `<Hostname>` with your web server’s host name). Craft のセットアップウィザードが表示された場合、そのホスト名は Craft のインストールのために適切に処理されています。
 
 ::: tip
 We recommend using the `.test` TLD for local development, and specifically not `.local` on macOS since [conflicts with Bonjour can lead to performance issues](https://help.rm.com/technicalarticle.asp?cref=tec3015691).
