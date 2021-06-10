@@ -230,38 +230,22 @@ To use Redis cache storage, you will first need to install the [yii2-redis](http
 
 ```php
 <?php
+
+use craft\helpers\App;
+
 return [
     'components' => [
-        'db' => function() {
-            // Get the default component config
-            $config = craft\helpers\App::dbConfig();
-
-            // Use read/write query splitting
-            // (requires Craft 3.4.25 or later)
-
-            // Define the default config for replica DB connections
-            $config['replicaConfig'] = [
-                'username' => getenv('DB_REPLICA_USER'),
-                'password' => getenv('DB_REPLICA_PASSWORD'),
-                'tablePrefix' => getenv('DB_TABLE_PREFIX'),
-                'attributes' => [
-                    // Use a smaller connection timeout
-                    PDO::ATTR_TIMEOUT => 10,
-                ],
-                'charset' => 'utf8',
-            ];
-
-            // Define the replica DB connections
-            $config['replicas'] = [
-                ['dsn' => getenv('DB_REPLICA_DSN_1')],
-                ['dsn' => getenv('DB_REPLICA_DSN_2')],
-                ['dsn' => getenv('DB_REPLICA_DSN_3')],
-                ['dsn' => getenv('DB_REPLICA_DSN_4')],
-            ];
-
-            // Instantiate and return it
-            return Craft::createObject($config);
-        },
+        'redis' => [
+            'class' => yii\redis\Connection::class,
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'password' => App::env('REDIS_PASSWORD') ?: null,
+        ],
+        'cache' => [
+            'class' => yii\redis\Cache::class,
+            'defaultDuration' => 86400,
+            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
+        ],
     ],
 ];
 ```
@@ -302,13 +286,27 @@ In a load-balanced environment, you may want to override the default `session` c
 
 ```php
 <?php
+
+use craft\helpers\App;
+
 return [
     'components' => [
-        'cache' => [
-            'class' => yii\caching\ApcCache::class,
-            'useApcu' => true,
-            'keyPrefix' => 'a_unique_key',
+        'redis' => [
+            'class' => yii\redis\Connection::class,
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'password' => App::env('REDIS_PASSWORD') ?: null,
         ],
+        'session' => function() {
+            // Get the default component config
+            $config = App::sessionConfig();
+
+            // Override the class to use Redis' session class
+            $config['class'] = yii\redis\Session::class;
+
+            // Instantiate and return it
+            return Craft::createObject($config);
+        },
     ],
 ];
 ```
