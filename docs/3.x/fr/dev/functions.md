@@ -26,6 +26,7 @@ The following [functions](https://twig.symfony.com/doc/2.x/templates.html#functi
 | [dump](https://twig.symfony.com/doc/2.x/functions/dump.html)                                   | Dumps information about a variable.                                                                    |
 | [endBody](#endbody)                                                                            | Outputs scripts and styles that were registered for the “end body” position.                           |
 | [expression](#expression)                                                                      | Creates a database expression object.                                                                  |
+| [failMessageInput](#failmessageinput)                                                          | Outputs a hidden `failMessage` input.                                                                  |
 | [floor](#floor)                                                                                | Rounds a number down.                                                                                  |
 | [getenv](#getenv)                                                                              | Returns the value of an environment variable.                                                          |
 | [gql](#gql)                                                                                    | Executes a GraphQL query against the full schema.                                                      |
@@ -46,6 +47,7 @@ The following [functions](https://twig.symfony.com/doc/2.x/templates.html#functi
 | [seq](#seq)                                                                                    | Outputs the next or current number in a sequence.                                                      |
 | [shuffle](#shuffle)                                                                            | Randomizes the order of the items in an array.                                                         |
 | [siteUrl](#siteurl)                                                                            | Generates a front-end URL.                                                                             |
+| [successMessageInput](#successmessageinput)                                                    | Outputs a hidden `successMessage` input.                                                               |
 | [svg](#svg)                                                                                    | Outputs an SVG document.                                                                               |
 | [source](https://twig.symfony.com/doc/2.x/functions/source.html)                               | Returns the content of a template without rendering it.                                                |
 | [tag](#tag)                                                                                    | Outputs an HTML tag.                                                                                   |
@@ -295,6 +297,22 @@ Creates and returns a new <yii2:yii\db\Expression> object, for use in database q
     .all() %}
 ```
 
+## `failMessageInput`
+
+Shortcut for typing `<input type="hidden" name="failMessage" value="{{ 'Custom fail message'|hash }}">`.
+
+```twig
+{{ failMessageInput('Custom fail message') }}
+```
+
+You can optionally set additional attributes on the tag by passing an `options` argument.
+
+```twig
+{{ failMessageInput('Custom fail message', {
+    id: 'fail-message-input'
+}) }}
+```
+
 ## `floor`
 
 Rounds a number down.
@@ -393,6 +411,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 {{ input('email', 'email-input', '', {
     id: 'custom-input'
 }) }}
+{# Output: <input type="email" id="custom-input" name="email-input" value=""> #}
 ```
 
 ## `max`
@@ -490,7 +509,7 @@ You can optionally have the number be zero-padded to a certain length.
 
 ```twig
 {{ now|date('Y') ~ '-' ~ seq('orderNumber:' ~ now|date('Y'), 5) }}
-{# outputs: 2018-00001 #}
+{# Output: 2018-00001 #}
 ```
 
 To view the current number in the sequence without incrementing it, set the `next` argument to `false`.
@@ -533,6 +552,22 @@ The `siteUrl()` function has the following arguments:
 - **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
 - **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
 - **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+
+## `successMessageInput`
+
+Shortcut for typing `<input type="hidden" name="successMessage" value="{{ 'Custom success message'|hash }}">`.
+
+```twig
+{{ successMessageInput('Custom success message') }}
+```
+
+You can optionally set additional attributes on the tag by passing an `options` argument.
+
+```twig
+{{ successMessageInput('Custom success message', {
+    id: 'success-message-input'
+}) }}
+```
 
 ## `svg`
 
@@ -683,6 +718,6 @@ Using the `url()` function has advantages over hard-coding URLs in your template
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
 ```twig
 {{ url('http://my-project.com', 'foo=1', 'https') }}
-{# Outputs: "https://my-project.com?foo=1" #}
+{# Output: "https://my-project.com?foo=1" #}
 ```
 :::
