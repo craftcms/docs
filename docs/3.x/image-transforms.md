@@ -6,7 +6,7 @@ Transforms can be defined in the control panel and directly from your templates 
 
 ## Defining Transforms from the Control Panel
 
-You can define transforms from the control panel by navigating to **Settings** → **Assets** → **Image Transforms** and press **New Transform**.
+You can define named transforms from the control panel by navigating to **Settings** → **Assets** → **Image Transforms** and press **New Transform**.
 
 Each transform has the following settings:
 
@@ -49,9 +49,9 @@ If you leave **Quality** blank, Craft will use the quality set by your <config3:
 
 If you leave **Image Format** blank, Craft will use the original image’s format if it’s [web-safe](craft3:craft\helpers\Image::webSafeFormats()). Otherwise Craft will try to figure out the best-suited image format for the job. If it can’t determine that (probably because ImageMagick isn’t installed), it will go with .jpg.
 
-### Applying CP-defined Transforms to Images
+### Applying Named Transforms to Images
 
-To output an image with a transform applied, pass your transform handle into your asset’s [getUrl()](craft3:craft\elements\Asset::getUrl()), [getWidth()](craft3:craft\elements\Asset::getWidth()), and [getHeight()](craft3:craft\elements\Asset::getHeight()) functions:
+To output an image with your named transform applied, pass its handle into your asset’s [getUrl()](craft3:craft\elements\Asset::getUrl()), [getWidth()](craft3:craft\elements\Asset::getWidth()), and [getHeight()](craft3:craft\elements\Asset::getHeight()) functions:
 
 ```twig
 <img src="{{ asset.getUrl('thumb') }}"
@@ -72,7 +72,7 @@ You can also apply the transform on the asset so any relevant properties are aut
 
 ### Overriding Named Transforms
 
-Pass a [hash](dev/twig-primer.md#hashes) with a `transform` key instead, and additional properties can be used to override those of the named transform:
+Pass a [hash](dev/twig-primer.md#hashes) with your handle in a `transform` key instead, and additional properties can be used to override those of the named transform:
 
 ```twig{2-3}
 {% do asset.setTransform({
@@ -137,7 +137,7 @@ It would look similar using `setTransform()` like we did in the previous section
 
 ### Possible Values
 
-All of the same settings available to CP-defined transforms are also available to template-defined transforms.
+All the same settings available to named transforms are available to template-defined transforms.
 
 - The `mode` property can be set to either `'crop'`, `'fit'`, or `'stretch'`.
 - If `mode` is set to `'crop'`, you can pass a `position` property, set to either `'top-left'`, `'top-center'`, `'top-right'`, `'center-left'`, `'center-center'`, `'center-right'`, `'bottom-left'`, `'bottom-center'`, or `'bottom-right'`.
