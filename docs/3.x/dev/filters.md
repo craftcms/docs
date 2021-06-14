@@ -65,6 +65,7 @@ Filter | Description
 [push](#push) | Appends one or more items onto the end of an array.
 [raw](https://twig.symfony.com/doc/2.x/filters/raw.html) | Marks as value as safe for the current escaping strategy.
 [reduce](https://twig.symfony.com/doc/2.x/filters/reduce.html) | Iteratively reduces a sequence or mapping to a single value.
+[removeClass](#removeclass) | Removes a class (or classes) from the given HTML tag.
 [replace](#replace) | Replaces parts of a string with other things.
 [reverse](https://twig.symfony.com/doc/2.x/filters/reverse.html) | Reverses a string or array.
 [round](https://twig.symfony.com/doc/2.x/filters/round.html) | Rounds a number.
@@ -935,6 +936,22 @@ Appends one or more items onto the end of an array, and returns the new array.
 {% set array1 = ['foo'] %}
 {% set array2 = array1|push('bar', 'baz') %}
 {# Result: ['foo', 'bar', 'baz'] #}
+```
+
+## `removeClass`
+
+Removes a class (or classes) from the given HTML tag.
+
+```twig
+{% set markup = '<p class="apple orange banana">A classy bit of text.</p>' %}
+{{ markup|removeClass('orange') }}
+{# Result: <p class="apple banana">A classy bit of text.</p> #}
+```
+
+```twig
+{% set markup = '<p class="apple orange banana">A classy bit of text.</p>' %}
+{{ markup|removeClass(['orange', 'banana']) }}
+{# Result: <p class="apple">A classy bit of text.</p> #}
 ```
 
 ## `replace`

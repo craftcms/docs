@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## Unreleased
+### Added
+- Documented `|removeClass` Twig filter.
+
 ## 2021-06-11
 ### Changed
 - Documented the `failMessageInput()` and `successMessageInput()` Twig functions added in Craft 3.6.6.
