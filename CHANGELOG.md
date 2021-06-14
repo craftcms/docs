@@ -7,6 +7,11 @@ Theme and significant content changes will be documented in this file.
 - Documented `|removeClass` Twig filter added in Craft 3.7.0.
 - Documented `revAssetUrls` and `setGraphqlDatesToSystemTimeZone` config settings added in Craft 3.7.0.
 - Documented `date()` Twig function added in Craft 3.7.0.
+
+### Changed
+- Revised Date field settings to include new “Show Time Zone” setting added in Craft 3.7.0.
+
+### Removed
 - Removed `flash` file kind that was retired in Craft 3.7.0.
 
 ## 2021-06-11
