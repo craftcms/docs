@@ -5,7 +5,7 @@ Theme and significant content changes will be documented in this file.
 ## Unreleased
 ### Added
 - Documented `|removeClass` Twig filter added in Craft 3.7.0.
-- Documented `revAssetUrls` config setting added in Craft 3.7.0.
+- Documented `revAssetUrls` and `setGraphqlDatesToSystemTimeZone` config settings added in Craft 3.7.0.
 
 ## 2021-06-11
 ### Changed

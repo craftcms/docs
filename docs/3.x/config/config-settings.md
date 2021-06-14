@@ -2925,6 +2925,27 @@ Set to `0` to disable this feature.
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
+
+### `setGraphqlDatesToSystemTimeZone`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [GeneralConfig::$setGraphqlDatesToSystemTimeZone](craft3:craft\config\GeneralConfig::$setGraphqlDatesToSystemTimeZone)
+
+Since
+:   3.7.0
+
+
+
+Whether dates returned by the GraphQL API should be set to the system time zone by default, rather than UTC.
+
+
+
 ### `softDeleteDuration`
 
 Allowed types
