@@ -613,7 +613,6 @@ Supported file kinds:
 - `audio`
 - `compressed`
 - `excel`
-- `flash`
 - `html`
 - `illustrator`
 - `image`
