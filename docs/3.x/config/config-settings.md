@@ -2365,6 +2365,27 @@ See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3
 
 
 
+
+### `revAssetUrls`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [GeneralConfig::$revAssetUrls](craft3:craft\config\GeneralConfig::$revAssetUrls)
+
+Since:
+:   3.7.0
+
+
+
+Whether asset URLs should be revved so browsers don’t load cached versions when they’re modified.
+
+
+
 ## Image Handling
 
 ### `brokenImagePath`
