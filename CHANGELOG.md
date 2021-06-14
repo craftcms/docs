@@ -11,6 +11,7 @@ Theme and significant content changes will be documented in this file.
 ### Changed
 - Revised Date field settings to include new “Show Time Zone” setting added in Craft 3.7.0.
 - Revised `{% cache %}` tag documentation to reflect that Craft 3.7.0 captures `{% js %}`, `{% script %}` and `{% css %}` code and styles.
+- Revised Image Transforms page to demonstrate Craft 3.7.0’s support for overrides in via `asset.setTransform()` in addition to `asset.getUrl()`.
 
 ### Removed
 - Removed `flash` file kind that was retired in Craft 3.7.0.
