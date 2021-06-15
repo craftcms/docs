@@ -2069,6 +2069,30 @@ log in but allow for username/email enumeration based on the response.
 
 
 
+
+
+### `previewTokenDuration`
+
+Allowed types
+:   `mixed`
+
+Default value
+:   `86400` (1 day)
+
+Defined by
+:   [GeneralConfig::$previewTokenDuration](craft3:craft\config\GeneralConfig::$previewTokenDuration)
+
+Since
+:   3.7.0
+
+The amount of time content preview tokens can be used before expiring.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+
+
+
+
 ### `sanitizeCpImageUploads`
 
 Allowed types
