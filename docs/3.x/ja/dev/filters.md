@@ -577,11 +577,13 @@ That’s a reference to [shish kebabs](https://en.wikipedia.org/wiki/Kebab#Shish
 
 ## `literal`
 
-単一のプロパティまたはキーでソートするには、その名前を文字列で渡します。
+Runs a string through <craft3:craft\helpers\Db::escapeParam()> to escape commas and asterisks so they’re are not treated as special characters in query params.
 
 ```twig
-{{ 'SELECT id, * FROM table'|literal }}
-{# Output: SELECT id\, \* FROM table #}
+{% set titleParam = craft.app.request.getQueryParam('title') %}
+{% set entry = craft.entries()
+  .title(titleParam|literal)
+  .one() %}
 ```
 
 ## `markdown` or `md`
