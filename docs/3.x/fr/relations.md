@@ -74,9 +74,21 @@ You can pass one of these things to it:
 - A [**hash**](dev/twig-primer.md#hashes) with properties we’ll get into below: `element`, `sourceElement` or `targetElement` optionally with `field` and/or `sourceSite`
 - An [**array**](dev/twig-primer.md#arrays) containing any mixture of the above options, which can start with `and` for relations on all elements rather than _any_ elements (default behavior is `or`, which you can omit or pass explicitly)
 
+::: warning
+Only use `sourceSite` if you’ve designated your relational field to be translatable.
+:::
+
+### The `andRelatedTo` Parameter
+
+You can use the `andRelatedTo` parameter to further specify criteria that will be joined with an `and`. It accepts the same arguments, and you can use multiple `andRelatedTo` parameters.
+
+::: warning
+You can’t combine multiple `relatedTo` criteria with `or` *and* `and` conditions.
+:::
+
 #### Simple Relationships
 
-A simpler query might pass a single element object or ID, like a `drinks` entry or entry ID represented here by `drink`:
+You can query more specifically by passing `relatedTo` a [hash](dev/twig-primer.md#hashes) that contains the following properties:
 
 ```twig
 {% set relatedDrinks = craft.entries()
@@ -106,9 +118,39 @@ Passing `and` at the beginning of an array returns results relating to *all* of 
 {# result: drinks entries with any relationship to `gin` and `lime` #}
 ```
 
+You can further nest criteria as well:
+
+```twig
+{% set otherUsers = craft.users()
+    .not(currentUser)
+    .all() %}
+
+{% set recommendedCocktails = craft.entries()
+    .section('drinks')
+    .relatedTo([
+        'and',
+        { sourceElement: otherUsers, field: 'favoriteDrinks' },
+        { targetElement: drink.ingredients.one(), field: 'ingredients' }
+    ])
+    .all() %}
+{# result: other users’ favorite drinks that use `drink`’s first ingredient #}
+```
+
+You could achieve the same result as the example above using the `andRelatedTo` parameter:
+
+```twig
+{% set relatedDrinks = craft.entries()
+    .section('drinks')
+    .relatedTo([ 'or', gin, lime ])
+    .andRelatedTo([ 'or', rum, grenadine ])
+    .all() %}
+{# result: drinks entries with any relationship to `gin` or `lime` *and*
+   `rum` or `grenadine` #}
+```
+
 #### Advanced Relationships
 
-You can query more specifically by passing `relatedTo` a [hash](dev/twig-primer.md#hashes) that contains the following properties:
+You can query more specifically by passing `relatedTo`/`andRelatedTo` a [hash](dev/twig-primer.md#hashes) that contains the following properties:
 
 | Property                                       | Accepts                                                                                  | Description                                                                                                                                                                                  |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -198,7 +240,7 @@ Or you might want to pass an element query to find other users’ favorite drink
 
 ```twig
 {% set otherUsers = craft.users()
-    .not(currentUser)
+    .id('not '~currentUser.id)
     .all() %}
 
 {% set recommendedCocktails = craft.entries()
