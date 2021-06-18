@@ -10,41 +10,64 @@ Lightswitch フィールドを持つ[エレメントを照会](element-queries.m
 
 利用可能な値には、次のものが含まれます。
 
-| 値 | 取得するエレメント
-| - | -
-| `true` or `':notempty:'` | Lightswitch 値が有効になっている。
-| `false` or `':empty:'` | Lightswitch 値が無効になっている。
-
-```twig
-{# Fetch entries with the Lightswitch field enabled #}
-{% set entries = craft.entries()
-    .myFieldHandle(true)
-    .all() %}
-```
+| 値                        | 取得するエレメント               |
+| ------------------------ | ----------------------- |
+| `true` or `':notempty:'` | Lightswitch 値が有効になっている。 |
+| `false` or `':empty:'`   | Lightswitch 値が無効になっている。 |
 
 ::: tip
 明示的な Lightswitch 値の設定を持たないエレメントは、フィールドの設定にしたがって、デフォルトのフィールド値を持つかのように扱われます。
 :::
-
-### Lightswitch フィールドデータの操作
-
-テンプレート内で Lightswitch フィールドのエレメントを取得する場合、Lightswitch フィールドのハンドルを利用して、そのデータにアクセスできます。
-
 ```twig
+{% if entry.lightswitchFieldHandle %}
+    <p>I'm on!</p>
+{% else %}
+    <p>I'm off.</p>
+{% endif %}
+```
+```php
 {% if entry.myFieldHandle %}
     <p>I'm on!</p>
 {% else %}
     <p>I'm off.</p>
 {% endif %}
 ```
+:::
 
 ::: tip
-そのエレメントが明示的な Lightswitch フィールド値の設定を持たない場合、フィールドのデフォルト値が返されます。
+Any elements that don’t have an explicit Lightswitch value set will be treated as if they have the default field value, per the field settings.
+:::
+
+### Lightswitch フィールドデータの操作
+
+Lightswitch フィールドを含める必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、出発点としてこのテンプレートを利用してください。
+
+::: code
+```twig
+{% if entry.myFieldHandle %}
+    <p>I’m on!</p>
+{% else %}
+    <p>I’m off.</p>
+{% endif %}
+```
+```php
+if ($entry->myFieldHandle) {
+    // I’m on!
+} else {
+    // I’m off.
+}
+```
+:::
+
+::: tip
+If the element doesn’t have an explicit Lightswitch field value yet, the field’s default value will be returned.
 :::
 
 ### 投稿フォームで Lightswitch フィールドを保存
 
-Lightswitch フィールドを含める必要がある[投稿フォーム](dev/examples/entry-form.md)がある場合、出発点としてこのテンプレートを利用してください。
+::: tip
+そのエレメントが明示的な Lightswitch フィールド値の設定を持たない場合、フィールドのデフォルト値が返されます。
+:::
 
 ```twig
 {{ hiddenInput('fields[myFieldHandle]', '') }}
