@@ -49,12 +49,20 @@ Now you’re ready to start propagating changes in your `config/project/` folder
 
 As you make changes in a development environment, you will notice the contents of your `config/project/` folder are updated to reflect those changes. Commit those files to your Git repository just like your templates, front-end resources, and other project files.
 
+::: warning
+Don’t make manual changes to your YAML files unless you’re positive you know what you are doing. Manual edits are prone to miss changes in other parts of the project config that should be made simultaneously.
+:::
+
 When you [deploy your changes to other environments](https://craftcms.com/knowledge-base/deployment-best-practices), you can then _apply_ the project config changes in one of two ways:
 
 1. From the “Project Config” utility in the control panel.
 2. By running the `php craft project-config/apply` terminal command.
 
 Either way, Craft will compare the files in the local `config/project/` folder with its already-loaded project config, and pull in whatever changes it finds.
+
+::: tip
+It’s a good idea to always run `composer install` before `php craft project-config/apply`.
+:::
 
 ## Caveats
 
@@ -121,17 +129,25 @@ This will treat all project config values as added or updated, resulting in a lo
 
 ## Opting Out
 
-You can opt out of sharing your project config files with other environments by adding the following line to the `.gitignore` file at the root of your project:
+If you want control over _when_ the project config YAML files are updated, or you want to opt out of saving them altogether, you can configure Craft to stop writing the YAML files automatically as changes are made. To do that, add the following to your `config/app.php` file:
 
-```
-/config/project
+```php
+return [
+    // ...
+    'components' => [
+        // ...
+        'projectConfig' => function() {
+            $config = craft\helpers\App::projectConfigConfig();
+            $config['writeYamlAutomatically'] = false;
+            return Craft::createObject($config);
+        },
+    ]
+];
 ```
 
-Then run the following terminal commands to delete all existing `config/project/` files from your repository:
+You can manually trigger YAML file generation from the Project Config utility, or by running the following terminal command:
 
 ```bash
 git rm -r --cached config/project/\*
 git commit -a -m 'Remove project config files'
 ```
-
-Craft will continue recording changes to YAML files within the `config/project/` folder, but they will no longer get committed to your project’s Git repository or shared with other environments.
