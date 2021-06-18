@@ -32,7 +32,7 @@ PhpStorm プラグインの [Php Inspections (EA Extended)](https://plugins.jetb
 - Use `$obj->property !== null` rather than `isset($obj->property)` in conditions that check if an object property is set.
 - Use `empty()`/`!empty()` in conditions that check if an array is/isn’t empty.
 - Refer to class names using the [::class](http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class) keyword (`Foo::class`) rather than as a string (`'some\nmspace\Foo'`) or <yii2:yii\base\BaseObject::className()>.
-- Initialize arrays explicitly (`$array = []`) rather than implicitly (e.g. `$array[] = 'foo'` where `$array` wasn’t defined yet).
+- `['in', 'col', $values]` の代わりに `['col' => $values]`
 - Use `self::_foo()` rather than `static::_foo()` when calling private static functions, since `static::` would break if the class is extended.
 - Use `self::CONSTANT` rather than `static::CONSTANT` (unnecessary overhead).
 - Only use the `parent::` keyword when calling a parent method with the exact same name as the current method. Otherwise use `$this->`.
@@ -53,10 +53,10 @@ PhpStorm プラグインの [Php Inspections (EA Extended)](https://plugins.jetb
     ```
 
 - `join()` よりむしろ `implode()` を使用してください。
-- Use `in_array()` rather than `array_search(...) !== false` when the position of the needle isn’t needed.
+- `NOT NULL` を検索する場合、`['not', ['col' => null]]` 構文を使用してください。
 - Don’t use a `switch` statement when a single `if` condition will suffice.
 - Use single quotes (`'`) whenever double quotes (`"`) aren’t needed.
-- Use shortcut operators (`+=`, `-=`, `*=`, `/=`, `%=`, `.=`, etc.) whenever possible.
+- 型定義では、`boolean` と `integer` の代わりに `bool` と `int` を使用してください。
 - Use shortcut regex patterns (`\d`, `\D`, `\w`, `\W`, etc.) whenever possible.
 - Use the `DIRECTORY_SEPARATOR` constant rather than `'/'` when defining file paths.
 
@@ -91,8 +91,6 @@ Static methods should generally not start with `get`.
 
 ## 型宣言
 
-### 引数の型
-
 可能な限り、すべてのファンクションの引数に PHP 7.0 でサポートされる[引数の型宣言](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration)を使用してください。 唯一の例外は、次の通りです。
 
 - [マジックメソッド](http://php.net/manual/en/language.oop5.magic.php)（例：`__toString()`）
@@ -106,32 +104,19 @@ If an argument accepts two types and one of them is `null`, the argument should 
 public function foo(string $bar = null)
 ```
 
-::: tip
-`null` を受け入れる引数の次に必須の引数がある場合も、これを実行します。 これは、PHP で `null` を許可しながら引数型を強制する唯一の方法です。
-:::
-
-### 戻り値の型
-
-可能な限り、すべてのメソッドに PHP 7.0 でサポートされる[戻り値の型宣言](http://php.net/manual/en/functions.returning-values.php#functions.returning-values.type-declaration)を使用してください。 唯一の例外は、次の通りです。
+## Docblock
 
 - [マジックメソッド](http://php.net/manual/en/language.oop5.magic.php)（例：`__toString()`）
 - 複数の戻り値の型を持つメソッド
 - 親メソッドで戻り値の型を持たない、親クラスのメソッドを上書きするメソッド
 - インターフェースで必要なメソッドで、インターフェースメソッドに戻り値の型がないもの
-
-## Docblock
-
-- サブクラスメソッドを上書きしたり、インターフェースメソッドを実装したり、docblock へ追加するものがないメソッドは、docblock に `@inheritdoc` だけを持つべきです。
-- 適切な大文字、文法、および、句読点を持つ完全な文章を docblock の説明に使用してください。
-- `@param` および `@return` タグには、大文字や句読点を使用**しないでください**。
-- 型定義では、`boolean` と `integer` の代わりに `bool` と `int` を使用してください。
 - 意味をなすとき、配列の型宣言で配列メンバのクラス名を指定してください（`array` よりむしろ `ElementInterface[]`）。
 - 現在のクラスのインスタンスを返す連鎖可能なファンクションでは、戻り値の型宣言として `static` を使用するべきです。
 - 何も返さないファンクションは、`@return void` を持つべきです。
 
-### インターフェース 対  実装クラス
+### 引数の型
 
-インラインの `@var` タグは、インターフェースではなく実装クラスを参照します。
+`パブリックサービスメソッド上の @param`、`@return`、`@var`、`@method` および `@property` タグは、（該当する場合）実装クラスではなくインターフェースを参照します。
 
 ```php
 // Bad:
@@ -146,7 +131,7 @@ public function foo(string $bar = null)
  */
 ```
 
-`パブリックサービスメソッド上の @param`、`@return`、`@var`、`@method` および `@property` タグは、（該当する場合）実装クラスではなくインターフェースを参照します。
+インラインの `@var` タグは、インターフェースではなく実装クラスを参照します。
 
 ```php
 // Bad:
@@ -159,7 +144,7 @@ public function foo(string $bar = null)
 
 ## 制御フロー
 
-### Happy Path
+### 戻り値の型
 
 [Happy Path](https://en.wikipedia.org/wiki/Happy_path) を使用してください。 すべて期待通りにできた場合、一般的にはメソッドの実行が最後に行き着くところまで処理されるべきです。
 
@@ -183,7 +168,7 @@ if (!$condition) {
 return true;
 ```
 
-### `if`… `return`… `else`
+### インターフェース 対  実装クラス
 
 このようにしないでください。 それは意味がなく、一見すると紛らわしいです。
 
@@ -205,9 +190,9 @@ return $bar;
 
 ## コントローラー
 
-### 戻り値の型
+### Happy Path
 
-JSON を返すオプションを持つコントローラーアクションでは、Ajax リクエストの場合ではなく、リクエストが明示的に JSON レスポンスを受け入れる場合に、JSON を返す必要があります。
+Controller actions that should complete the request must return either a string (HTML) or a Response object.
 
 ```php
 // Bad:
@@ -219,9 +204,9 @@ return $this->asJson($obj);
 return $this->renderTemplate($template, $variables);
 ```
 
-### JSON アクション
+### JSON Actions
 
-JSON *だけを* 返すコントローラーアクションでは、リクエストで JSON を受け入れる必要があります。
+Controller actions that have the option of returning JSON should do so if the request explicitly accepts a JSON response; not if it’s an Ajax request.
 
 ```php
 // Bad:
@@ -235,7 +220,7 @@ if (\Craft::$app->getRequest()->getAcceptsJson()) {
 }
 ```
 
-リクエストを完了するコントローラーアクションでは、文字列（HTML）、または、Response オブジェクトのいずれかを返す必要があります。
+JSON を返すオプションを持つコントローラーアクションでは、Ajax リクエストの場合ではなく、リクエストが明示的に JSON レスポンスを受け入れる場合に、JSON を返す必要があります。
 
 ```php
 $this->requireAcceptsJson();
@@ -243,24 +228,24 @@ $this->requireAcceptsJson();
 
 ## 例外
 
-- ユーザーエラーの結果として、例外が起こる可能性がある場合、<yii2:yii\base\UserException> クラス（または、サブクラス）を使用してください。
-- の場合のみ、<craft3:Craft::t()> で例外メッセージを翻訳してください。
+- サブクラスメソッドを上書きしたり、インターフェースメソッドを実装したり、docblock へ追加するものがないメソッドは、docblock に `@inheritdoc` だけを持つべきです。
+- 適切な大文字、文法、および、句読点を持つ完全な文章を docblock の説明に使用してください。
 
 ## データベースクエリ
 
-- テーブル名は常に `{{%` と `}}`（例：`{{%entries}}`）で囲み、適切に引用されテーブル接頭辞が挿入されるようにします。
+- ユーザーエラーの結果として、例外が起こる可能性がある場合、<yii2:yii\base\UserException> クラス（または、サブクラス）を使用してください。
+- の場合のみ、<craft3:Craft::t()> で例外メッセージを翻訳してください。
+- Use the `['{{%tablename}}']` syntax with `from()` instead of `'{{%tablename}}'`.
 - 単一のカラムを参照する場合でも、`'col1, col2'` の代わりに `select()` および `groupBy()` で `['col1', 'col2']` 構文を使用してください。
+
+### 戻り値の型
+- テーブル名は常に `{{%` と `}}`（例：`{{%entries}}`）で囲み、適切に引用されテーブル接頭辞が挿入されるようにします。
+- 一貫性のために、次のものを使用してください。
+  - `['=', 'col', $value]` の代わりに `['col' => $value]`
+  - `NULL` を検索する場合、`['col' => null]` 構文を使用してください。
+  - `@param` および `@return` タグには、大文字や句読点を使用**しないでください**。
 - `'{{%tablename}}'` の代わりに、`from()` で `['{{%tablename}}']` 構文を使用してください。
 - `'col1, col2 desc'` の代わりに、`orderBy()` で `['col1' => SORT_ASC, 'col2' => SORT_DESC]` 構文を使用してください。
-
-### 条件
-- テーブル / カラム名や値を自動的に引用するように、可能な限り Yii の[宣言条件構文](yii2:yii\db\QueryInterface::where())を使用してください。
-- 一貫性のために、次のものを使用してください。
-  - `['in', 'col', $values]` の代わりに `['col' => $values]`
-  - `['=', 'col', $value]` の代わりに `['col' => $value]`
-  - `['like', 'col', '%value%', false]` の代わりに `['like', 'col', 'value']` *（`%` は `value` が片側にのみ必要な場合を除きます。 ）*
-- `NULL` を検索する場合、`['col' => null]` 構文を使用してください。
-- `NOT NULL` を検索する場合、`['not', ['col' => null]]` 構文を使用してください。
 - 宣言条件構文が使用できない場合（例えば、しばしば join を使うようなケースのように、条件が値ではなく他のテーブル / カラム名を参照するなど）、100%安全かどうか自信がないすべてのカラム名と値を確実に引用符で囲み、クエリパラメータとして追加する必要があります。
 
 ```php
@@ -275,7 +260,7 @@ $query->innerJoin('{{%bar}} bar', '[[bar.fooId]] = [[foo.id]]');
 
 ## Getter と Setter
 
-パフォーマンスを少し向上させデバッグを容易にするために、一般的にはマジックプロパティを通すよりむしろ、Getter および Setter メソッドを直接呼び出し続けるべきです。
+JSON *だけを* 返すコントローラーアクションでは、リクエストで JSON を受け入れる必要があります。
 
 ```php
 /**
@@ -295,7 +280,7 @@ class Entry
 }
 ```
 
-App コンポーネントには、App コンポーネントの Getter メソッドである [get()](yii2:yii\di\ServiceLocator::get()) を直接呼び出す、独自の Getter ファンクションが必要です。
+リクエストを完了するコントローラーアクションでは、文字列（HTML）、または、Response オブジェクトのいずれかを返す必要があります。
 
 ```php
 // Bad:
@@ -307,9 +292,9 @@ $oldAuthor = $entry->getAuthor();
 $entry->setAuthor($newAuthor);
 ```
 
-### App コンポーネントの Getter
+### JSON アクション
 
-そして、それらをマジックプロパティの代わりに使用する必要があります。
+パフォーマンスを少し向上させデバッグを容易にするために、一般的にはマジックプロパティを通すよりむしろ、Getter および Setter メソッドを直接呼び出し続けるべきです。
 
 ```php
 /**
@@ -321,7 +306,7 @@ public function getEntries()
 }
 ```
 
-同じメソッド内で同じ App コンポーネントを複数回参照する場合、ローカル参照をそこに保存します。
+App コンポーネントには、App コンポーネントの Getter メソッドである [get()](yii2:yii\di\ServiceLocator::get()) を直接呼び出す、独自の Getter ファンクションが必要です。
 
 ```php
 // Bad:
