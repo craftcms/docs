@@ -38,9 +38,13 @@ public function init()
 ];
 ```
 
+::: tip
+Nesting is meant for UI only; if you wanted to reference `nestedPermissionName` in the example above you would use exactly that key.
+:::
+
 ## 権限の要求
 
-コントローラーは、[requirePermission()](craft3:craft\web\Controller::requirePermission()) を呼び出すことで、ログインしているユーザー権限を持っていることを要求できます。
+ユーザーがその権限を持たない場合、403 エラーが返されます。
 
 ```php
 public function actionStayUpLate()
@@ -50,9 +54,9 @@ public function actionStayUpLate()
 }
 ```
 
-ユーザーがその権限を持たない場合、403 エラーが返されます。
-
 テンプレートでは、[requirePermission](../dev/tags.md#requirepermission) タグでユーザー権限を持っていることを保証することもできます。
+
+を呼び出すことで、ログインしているユーザーが権限を持っているかを確認できます。
 
 ```twig
 {% requirePermission 'stayUpLate' %}
@@ -60,7 +64,7 @@ public function actionStayUpLate()
 
 ## 権限の確認
 
-を呼び出すことで、ログインしているユーザーが権限を持っているかを確認できます。
+を呼び出すことで、指定されたユーザーが権限を持っているかを確認することもできます。
 
 ```php
 // See if they have the `stayUpLate` permission
@@ -69,7 +73,7 @@ if (Craft::$app->user->checkPermission('stayUpLate')) {
 }
 ```
 
-を呼び出すことで、指定されたユーザーが権限を持っているかを確認することもできます。
+コントローラーは、[requirePermission()](craft3:craft\web\Controller::requirePermission()) を呼び出すことで、ログインしているユーザー権限を持っていることを要求できます。
 
 ```php
 /** @var \craft\elements\User $user */
