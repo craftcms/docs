@@ -1,8 +1,11 @@
+- - -
+While most of your interaction with Craft happens in a browser, a number of important tools are available via console commands that are run in a terminal.
+- - -
 # Console Commands
 
-While most of your interaction with Craft happens in a browser, a number of important tools are available via console commands that are run in a terminal.
-
 This can be useful for a variety of reasons, including automating tasks with `cron`, privately triggering actions via SSH or as part of a [deployment process](https://craftcms.com/knowledge-base/deployment-best-practices), or running resource-intensive tasks that might be constrained by the limits of your web server.
+
+This can be useful for automating tasks with `cron`, running actions in a [deployment process](https://craftcms.com/knowledge-base/deployment-best-practices), working with Craft via SSH, and running resource-intensive tasks that might otherwise be constrained by the limits of your web server.
 
 The Craft console application (`craft`) lives in the root of your project and requires PHP to run.
 
@@ -21,6 +24,8 @@ The following commands are available:
 
 - backup                                    Allows you to create a new database backup.
     backup/db (default)                     Creates a new database backup.
+    db/convert-charset                  Converts tables’ character sets and collations. (MySQL only)
+    db/restore                          Restores a database backup.
 
 - cache                                     Allows you to flush cache.
     cache/flush                             Flushes given cache components.
@@ -38,22 +43,33 @@ To see the help of each command, enter:
 
 You can also run `php craft help <command-name>` to learn more about a command and whatever parameters and options it may accept.
 
+setting takes precedence over the `system.live` project config value, so if `config/general.php` sets `isSystemLive` to `true` or `false` these `on`/`off` commands to error out.
+:::
+
 While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default console commands:
 
 ## `backup`
 
-#### `backup/db` <badge>default</badge>
+#### `backup/db`
 
 Creates a new database backup.
 
-**Options**
+Example:
 
-`--path`
+```sh
+php craft db/backup ./my-backups/
+```
+
+**Parameters**
+
+`path`
 :   The path the database backup should be created at. Can be any of the following:
     - A full file path
     - A folder path (backup will be saved in there with a dynamically-generated name)
     - A filename (backup will be saved in the working directory with the given name)
     - Blank (backup will be saved to the `config/backups/` folder with a dynamically-generated name)
+
+**Options**
 
 `--zip`
 :   Whether the backup should be saved as a zip file.\ boolean, 0 or 1 (defaults to 0)
@@ -677,6 +693,11 @@ Uninstalls a plugin.
 `handle`
 :   The plugin handle. (required)
 
+**Options**
+
+`--force`
+:   Whether every entry change should be force-applied.\ boolean, 0 or 1 (defaults to 0)
+
 ## `project-config`
 
 Manages the Project Config.
@@ -688,11 +709,16 @@ Applies project config file changes.
 **Options**
 
 `--force`
-:   Whether every entry change should be force-applied.\ boolean, 0 or 1 (defaults to 0)
+:   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
 
 #### `project-config/diff`
 
 Prints a diff of the pending project config YAML changes.
+
+**Options**
+
+`--path`
+:   Treats the loaded project config as the source of truth, rather than the YAML files.\ boolean, 0 or 1 (defaults to 0)
 
 #### `project-config/rebuild`
 
@@ -701,6 +727,21 @@ Rebuilds the project config.
 #### `project-config/sync`
 
 Alias for [`apply`](#project-config-apply).
+
+#### `project-config/touch`
+
+Updates the `dateModified` value in `config/project/project.yaml`.
+
+If a Git conflict is detected on the `dateModified` value, a conflict resolution will also be attempted.
+
+**Parameters**
+
+`timestamp`
+:   The updated `dateModified` value. If `null`, the current time will be used. (optional int, defaults to `null`)
+
+#### `project-config/write`
+
+Writes out the currently-loaded project config as YAML files to the `config/project/` folder, discarding any pending YAML changes.
 
 ## `queue`
 
@@ -986,7 +1027,7 @@ Re-saves users.
 :   The number of elements to skip.
 
 `--propagate`
-:   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
+:   Whether to update the search indexes for the resaved elements.\ boolean, 0 or 1 (defaults to 0)
 
 `--site`
 :   The site handle to save elements from.
@@ -998,7 +1039,7 @@ Re-saves users.
 :   The UUID(s) of the elements to resave.
 
 `--update-search-index`
-:   Whether to update the search indexes for the resaved elements.\ boolean, 0 or 1 (defaults to 0)
+:   Force the update if `allowUpdates` is disabled.\ boolean, 0 or 1 (defaults to 0)
 
 ## `restore`
 
@@ -1079,6 +1120,47 @@ Generates a new security key and saves it in the `.env` file.
 
 Called from the `post-create-project-cmd` Composer hook.
 
+## `shell`
+
+::: tip
+This command requires the [`yiisoft/yii2-shell`](https://github.com/yiisoft/yii2-shell) package, which you may need to add to your project:
+
+```
+composer require --dev yiisoft/yii2-shell
+```
+:::
+
+#### `utils/utils/prune-revisions/index` <badge>default</badge>
+
+Runs an interactive shell.
+
+```
+$ php craft shell
+Psy Shell v0.10.4 (PHP 7.4.3 — cli) by Justin Hileman
+>>> help
+  help       Show a list of commands. Type `help [foo]` for information about [foo].      Alias
+  ls         List local, instance or class variables, methods and constants.              Alias
+  dump       Dump an object or primitive.
+  doc        Read the documentation for an object, class, constant, method or property.   Alias
+  show       Show the code for an object, class, constant, method or property.
+  wtf        Show the backtrace of the most recent exception.                             Alias
+  whereami   Show where you are in the code.
+  throw-up   Throw an exception or error out of the Psy Shell.
+  timeit     Profiles with a timer.
+  trace      Show the current call stack.
+  buffer     Show (or clear) the contents of the code input buffer.                       Alias
+  clear      Clear the Psy Shell screen.
+  edit       Open an external editor. Afterwards, get produced code in input buffer.
+  sudo       Evaluate PHP code, bypassing visibility restrictions.
+  history    Show the Psy Shell history.                                                  Alias
+  exit       End the current session and return to caller.                                Alias
+```
+
+**Options**
+
+`--include`
+:   Include file(s) before starting tinker shell.\ array
+
 ## `tests`
 
 Provides resources for testing Craft’s services and your Craft project.
@@ -1120,10 +1202,10 @@ Updates Craft and/or plugins.
 **Options**
 
 `--backup`
-:   Backup the database before updating.\ boolean, 0 or 1
+:   Whether to only do a dry run of the repair process.\ boolean, 0 or 1 (defaults to 0)
 
 `--force`, `-f`
-:   Force the update if `allowUpdates` is disabled.\ boolean, 0 or 1 (defaults to 0)
+:   Backup the database before updating.\ boolean, 0 or 1
 
 `--migrate`
 :   Run new database migrations after completing the update.\ boolean, 0 or 1 (defaults to 1)
@@ -1142,7 +1224,7 @@ Ensures all element UIDs are unique.
 
 ## `utils/prune-revisions`
 
-#### `utils/utils/prune-revisions/index` <badge>default</badge>
+#### `utils/prune-revisions/index` <badge>default</badge>
 
 Prunes excess element revisions.
 

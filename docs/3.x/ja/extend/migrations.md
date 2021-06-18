@@ -62,8 +62,14 @@ $this->db->createCommand()
 $this->insert('{{%tablename}}', $rows);
 ```
 
+<craft3:craft\helpers\MigrationHelper> provides several helpful methods as well:
+
+- [dropForeignKeyIfExists()](craft3:craft\helpers\MigrationHelper::dropForeignKeyIfExists()) removes a foreign key if it exists, without needing to know its exact name.
+- [dropIndexIfExists()](craft3:craft\helpers\MigrationHelper::dropIndexIfExists()) removes an index if it exists, without needing to know its exact name.
+- [dropTable()](craft3:craft\helpers\MigrationHelper::dropTable()) drops a table, along with any foreign keys that reference it (some of which your plugin might not even be aware of).
+
 ::: warning
-<yii2:yii\db\Migration::insert()>、[batchInsert()](craft3:craft\db\Migration::batchInsert())、および、[update()](yii2:yii\db\Migration::update()) マイグレーションメソッドは、引数 `$columns` で指定したものに加えて `dateCreated`、 `dateUpdated`、`uid` テーブルのカラムにあるデータを自動的に挿入 / アップデートします。 操作しているテーブルにこれらのカラムがない場合、引数 `$includeAuditColumns` に `false` を渡して、SQL エラーにならないようにしてください。
+<yii2:yii\db\Migration::insert()>、[batchInsert()](craft3:craft\db\Migration::batchInsert())、および、[update()](yii2:yii\db\Migration::update()) マイグレーションメソッドは、引数 `$columns` で指定したものに加えて `dateCreated`、 `dateUpdated`、`uid` テーブルのカラムにあるデータを自動的に挿入 / アップデートします。 操作しているテーブルにこれらのカラムがない場合、引数 `$includeAuditColumns` に `false` を渡して、SQL エラーにならないようにしてください。 :::
 :::
 
 ::: tip
@@ -105,13 +111,13 @@ php craft migrate/up
 
 :::
 
-または、すべてのマイグレーショントラックを通じて Craft にすべての新しいマイグレーションを適用することもできます。
+Craft はコントロールパネルのリクエストで新しい[スキーマバージョン](craft3:craft\base\PluginTrait::$schemaVersion)を持つプラグインの新しいプラグインのマイグレーションをチェックし、コンテンツのマイグレーションはコントロールパネルの「ユーティリティ > マイグレーション」から適用できます。
 
 ```bash
 php craft migrate/all
 ```
 
-Craft はコントロールパネルのリクエストで新しい[スキーマバージョン](craft3:craft\base\PluginTrait::$schemaVersion)を持つプラグインの新しいプラグインのマイグレーションをチェックし、コンテンツのマイグレーションはコントロールパネルの「ユーティリティ > マイグレーション」から適用できます。
+Craft will also check for new plugin migrations on control panel requests, for any plugins that have a new [schema version](craft3:craft\base\PluginTrait::$schemaVersion), and content migrations can be applied from the Control Panel by going to Utilities → Migrations.
 
 ## プラグインのインストールマイグレーション
 
@@ -137,18 +143,18 @@ class Install extends Migration
 }
 ```
 
-マイグレーション名「`install`」を渡すと、`migrate/create` コマンドでプラグインにインストールマイグレーションを与えることができます。
+::: tip
+コントロールパネルから Craft がマイグレーションを元に戻す方法がないため、通常 `safeDown()` メソッドは無視できます。
+:::
 
 ```bash
 php craft migrate/create install --plugin=my-plugin-handle
 ```
 
-::: tip
-コントロールパネルから Craft がマイグレーションを元に戻す方法がないため、通常 `safeDown()` メソッドは無視できます。
-:::
+マイグレーション名「`install`」を渡すと、`migrate/create` コマンドでプラグインにインストールマイグレーションを与えることができます。
 
 ::: tip
-`plugins` データベーステーブルの行を管理するのはプラグインの責任 *ではありません*。 Craft がそれをケアします。
+`plugins` データベーステーブルの行を管理するのはプラグインの責任 *ではありません*。 Craft がそれをケアします。 :::
 :::
 
 ### デフォルトのプロジェクトコンフィグデータの設定

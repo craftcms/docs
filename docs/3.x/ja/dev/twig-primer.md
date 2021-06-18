@@ -1,53 +1,55 @@
-# テンプレート入門
-
+- - -
 [Twig](http://twig.sensiolabs.org/) は高速で強力なテンプレートシステムで、一般的に Craft、Drupal、および、（[Timber](https://www.upstatement.com/timber/) プラグイン経由の）WordPress などのコンテンツ管理システムのフロントエンドビューを強化するために利用されています。
+- - -
+# Twig 入門書
 
 どのように機能するかを見てみましょう。
 
-## Twig コードの種類
+Let’s take a look at how it works.
 
-Twig テンプレートは、Twig コードが散りばめられた HTML ファイルです。Twig がテンプレートを読み込むとき、最初に Twig コードから生の HTML コードを分離することを行います。生の HTML コードは干渉されることなくブラウザに出力されます。
+## 3種類の Twig タグ
 
-すべての Twig コードは、周囲の HTML と区別するための基本的なパターンに従います。その外縁には左右の波括弧（`{` と `}`）があり、Twig コードのどんな _種類_ かを示す別の文字と対になっています。これらの文字セットは「デリミタ」と呼ばれます。
+Twig テンプレートは、Twig コードが散りばめられた HTML ファイルです。 Twig がテンプレートを読み込むとき、最初に Twig コードから生の HTML コードを分離することを行います。 生の HTML コードは干渉されることなくブラウザに出力されます。
+
+すべての Twig コードは、周囲の HTML と区別するための基本的なパターンに従います。 その外縁には左右の波括弧（`{` と `}`）があり、Twig コードのどんな _種類_ かを示す別の文字と対になっています。 これらの文字セットは「デリミタ」と呼ばれます。
 
 Twig で注意しなければいけないデリミタは、3種類あります。
 
-- `{#` – [コメント](#comments)
-- `{%` – [タグ](#tags)
-- `{{` – [プリント文](#print-statements)
+- ロジックタグ
+- 出力タグ
+- コメントタグ
 
-### コメント
+### ロジックタグ
 
-Twig コメントは `{#` と `#}` デリミタで囲まれます。これらを利用して、コードの中に自分のための小さなメモを残すことができます。
+Twig コメントは `{#` と `#}` デリミタで囲まれます。 これらを利用して、コードの中に自分のための小さなメモを残すことができます。
 
-ブラウザでレンダリングされたテキストとして表示されないという点で、HTML コメントに似ています。違いは、そもそも HTML ソースにもならないということです。
+ブラウザでレンダリングされたテキストとして表示されないという点で、HTML コメントに似ています。 違いは、そもそも HTML ソースにもならないということです。
 
 ```twig
 <!-- This will be visible in the HTML source -->
 {# This won’t! #}
 ```
 
-### タグ
-
-Twig タグは `{%` と `%}` デリミタで囲まれていて、条件文やループ、変数の定義、テンプレートのインクルードなど、テンプレートの _ロジック_ を定義するために使用されます。
+### 出力タグ
 
 `{%` and `%}` デリミタ内の構文はタグごとに異なりますが、常に同じもの、つまりタグ名ではじまります。
 
-最も単純な形式では、タグ名だけを必要とします。例えば、Craft の [requireLogin](tags.md#requirelogin) タグを見てみましょう。
+The syntax within the `{%` and `%}` delimiters varies from tag to tag, but they will always start with the same thing: the name of the tag.
+
+最も単純な形式では、タグ名だけを必要とします。 例えば、Craft の [requireLogin](tags.md#requirelogin) タグを見てみましょう。
 
 ```twig
-{# A user must be logged in to visit this page #}
-{% requireLogin %}
+<p>The current time is {{ now|date("g:i a") }}.</p>
 ```
 
-他のタグは、パラメータを受け取ることができます。Craft の [exit](tags.md#exit) タグの場合、レスポンスでブラウザに送信されるべき HTTP ステータスコードをオプションでセットできます。
+他のタグは、パラメータを受け取ることができます。 Craft の [exit](tags.md#exit) タグの場合、レスポンスでブラウザに送信されるべき HTTP ステータスコードをオプションでセットできます。
 
 ```twig
-{# This is not the page you are looking for #}
-{% exit 404 %}
+{% set entry = craft.entries.section( {{ sectionId }} ).one() %}
+{% set entry = craft.entries.section( {% if filterBySection %} sectionId {% endif %} ) %}
 ```
 
-JavaScript コードをページに登録する [js](tags.md#js) タグのように、いくつかのタグはペアで使用するためのものです。
+いくつかのタグは、開始タグと終了タグの _間に_ ネストされたタグを持つことができます。
 
 ```twig
 {% js %}
@@ -55,66 +57,55 @@ JavaScript コードをページに登録する [js](tags.md#js) タグのよう
 {% endjs %}
 ```
 
-いくつかのタグは、開始タグと終了タグの _間に_ ネストされたタグを持つことができます。
-
-```twig
-{% if currentUser %}
-  <a href="/logout">Logout</a>
-{% else %}
-  <a href="/login">Login</a>
-{% endif %}
-```
-
 Craft テンプレートで利用可能なタグのリストは、[タグ](tags.md)ページを参照してください。
 
-### プリント文
+```twig
+{# Loop through the recipes #}
+```
 
-追加の HTML コードを動的に出力するには、プリント文を使用します。それらは `{{` と `}}` デリミタで囲まれ、Twig が[文字列](#strings)として扱えるものであれば、その中にほぼ何でも記述できます。
+Craft テンプレートで利用可能なファンクションのリストは、[ファンクション](functions.md)ページを参照してください。
+
+### コメントタグ
+
+追加の HTML コードを動的に出力するには、プリント文を使用します。 それらは `{{` と `}}` デリミタで囲まれ、Twig が[文字列](#strings)として扱えるものであれば、その中にほぼ何でも記述できます。
 
 ```twig
-<p>Hi, {{ currentUser.name }}</p>
+{% set style = 'stirred' %}
+
+{{ style }}
 ```
 
 ::: tip
-プリント文（または、他の Twig コード）を他のプリント文の中に配置しないでください。文字列を他の式と組み合わせる方法について知るには、[文字列の組み合わせ](#combining-strings)を参照してください。
+プリント文（または、他の Twig コード）を他のプリント文の中に配置しないでください。 文字列を他の式と組み合わせる方法について知るには、[文字列の組み合わせ](#combining-strings)を参照してください。 :::
 :::
 
 #### 自動エスケープ
 
-ほとんどの場合、プリント文はコンテンツを実際に出力する前に自動的に HTML エンコード します（**自動エスケープ**と呼ばれます）。これは、クロスサイトスクリプティング（XSS）の脆弱性から保護するのに役立ちます。
-
-例えば、検索クエリが `q` クエリ文字列パラメータで定義されている検索結果ページがあるとします。そして、検索結果がない場合、クエリを含むメッセージをユーザーに出力したいとします。
-
-```twig{16}
-{% set query = craft.app.request.getQueryParam('q') %}
-
-{% set entries = craft.entries()
-  .section('blog')
-  .search(query)
-  .all() %}
-
-{% if entries %}
-  <h3>Search Results</h3>
-  <ul>
-    {% for entry in entries %}
-      <li>{{ entry.getLink() }}</li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>Sorry, no results for <strong>{{ query }}</strong> were found.</p>
-{% endif %}
-```
+ほとんどの場合、プリント文はコンテンツを実際に出力する前に自動的に HTML エンコード します（**自動エスケープ**と呼ばれます）。 これは、クロスサイトスクリプティング（XSS）の脆弱性から保護するのに役立ちます。
 
 自動エスケープではない場合、`<script>alert('Uh-oh')</script>` を検索すると次のような HTML になります。
 
-```html
-<p>Sorry, no results for <strong><script>alert('Uh-oh')</script></strong>.</p>
+```twig{16}
+{{ siteName|upper }}
 ```
 
-これにより、元の Twig テンプレートに含まれない場合でも、JavaScript が実行される原因となります。しかし、自動エスケープのお陰で、実際には次のような HTML になります。
+If it weren’t for auto-escaping, a search for `<script>alert('Uh-oh')</script>` would result in this HTML:
 
 ```html
-<p>Sorry, no results for <strong>&lt;script&gt;alert('Uh-oh')&lt;/script&gt;</strong>.</p>
+{{ now|date("M d, Y") }}
+```
+
+これにより、元の Twig テンプレートに含まれない場合でも、JavaScript が実行される原因となります。 しかし、自動エスケープのお陰で、実際には次のような HTML になります。
+
+```html
+<h3>Watch me count to ten!</h3>
+<ul>
+    {% for num in range(1, 10) %}
+        <li class="{{ cycle(['odd', 'even'], loop.index0) }}">
+            {{ num }}
+        </li>
+    {% endfor %}
+</ul>
 ```
 
 最初に自動エスケープせずに、プリント文がコンテンツを直接出力するケースは2つあります。
@@ -124,16 +115,16 @@ Craft テンプレートで利用可能なタグのリストは、[タグ](tags.
 
 #### 手動エスケープ
 
-信頼されたコンテンツと信頼されてないコンテンツの両方を一緒に扱う必要がある場合があります。例えば、ユーザーが提供したコンテンツを Markdown として出力したいものの、ユーザーが悪意のあるものを入れていないことを最初に確認したいとします。
+信頼されたコンテンツと信頼されてないコンテンツの両方を一緒に扱う必要がある場合があります。 例えば、ユーザーが提供したコンテンツを Markdown として出力したいものの、ユーザーが悪意のあるものを入れていないことを最初に確認したいとします。
 
-それを行うには、[markdown](filters.md#markdown-or-md) フィルタに渡す前に [escape](https://twig.symfony.com/doc/2.x/filters/escape.html) フィルタを利用して、ユーザーが提供したコンテンツないの _すべての_ HTML を明示的にエンコードします。
+あるいは、_いくつかの_ HTML を許可したい場合、それが使い慣れているなら、[HTML Purifier](http://htmlpurifier.org/) を使ってコンテンツをサニタイズする [purify](#purify) フィルターを利用できます。
 
 ```twig
 {# Escape any HTML in the Body field, then format as Markdown #}
 {{ entry.body|escape|markdown }}
 ```
 
-あるいは、_いくつかの_ HTML を許可したい場合、それが使い慣れているなら、[HTML Purifier](http://htmlpurifier.org/) を使ってコンテンツをサニタイズする [purify](#purify) フィルターを利用できます。
+それを行うには、[markdown](filters.md#markdown-or-md) フィルタに渡す前に [escape](https://twig.symfony.com/doc/2.x/filters/escape.html) フィルタを利用して、ユーザーが提供したコンテンツないの _すべての_ HTML を明示的にエンコードします。
 
 ```twig
 {# Purify the content in the Body field, then format as Markdown #}
@@ -142,9 +133,9 @@ Craft テンプレートで利用可能なタグのリストは、[タグ](tags.
 
 ## 変数
 
-Twig はテンプレート内でカスタム**変数**の設定をサポートしています。これによって、後でテンプレートから参照される [値](#types-of-values) を保存できます。
-
 [set](https://twig.symfony.com/doc/2.x/tags/set.html) タグを利用して変数を定義できます。
+
+[for](https://twig.symfony.com/doc/2.x/tags/for.html) タグを利用して、配列をループできます。
 
 ```twig
 {% set title = "About Us" %}
@@ -161,22 +152,22 @@ Twig はテンプレート内でカスタム**変数**の設定をサポート�
 </html>
 ```
 
-Craft は、ユーザー自身が定義する変数に加えて、いくつかの定義済み変数を提供しています。Craft テンプレートで利用可能なグローバル変数のリストは、[グローバル変数](global-variables.md)ページを参照してください。
+Craft は、ユーザー自身が定義する変数に加えて、いくつかの定義済み変数を提供しています。 Craft テンプレートで利用可能なグローバル変数のリストは、[グローバル変数](global-variables.md)ページを参照してください。
 
-## ファンクション
+## フィルタ
 
-Twig テンプレートには様々なことを行うことができるいくつかのファンクションが用意されています。例えば、Craft は不可視項目の HTML を生成するために利用できる [hiddenInput](functions.md#hiddeninput) ファンクションを提供しています。
+Twig テンプレートには様々なことを行うことができるいくつかのファンクションが用意されています。 例えば、Craft は不可視項目の HTML を生成するために利用できる [hiddenInput](functions.md#hiddeninput) ファンクションを提供しています。
 
 ```twig
 {{ hiddenInput('entryId', 100) }}
 {# Output: <input type="hidden" name="entryId" value="100"> #}
 ```
 
-Craft テンプレートで利用可能なファンクションのリストは、[ファンクション](functions.md)ページを参照してください。
+Craft テンプレートで利用可能なフィルタのリストは、[フィルタ](filters.md)ページを参照してください。
 
-## フィルタ
+## ファンクション
 
-フィルタはファンクションに似ていますが、パイプ構文（`|`）を利用し、常に何らかの値を操作するためのものです。例えば、Craft は [Markdown](https://daringfireball.net/projects/markdown/) 形式のテキストを HTML に変換する [markdown](filters.md#markdown-or-md) フィルタを提供しています。
+フィルタはファンクションに似ていますが、パイプ構文（`|`）を利用し、常に何らかの値を操作するためのものです。 例えば、Craft は [Markdown](https://daringfireball.net/projects/markdown/) 形式のテキストを HTML に変換する [markdown](filters.md#markdown-or-md) フィルタを提供しています。
 
 ```twig
 {% set text = "I **really** love Tom Petty." %}
@@ -184,7 +175,7 @@ Craft テンプレートで利用可能なファンクションのリストは�
 {# Output: <p>I <strong>really</strong> love Tom Petty.</p> #}
 ```
 
-フィルタを連鎖できます。後続のフィルタは、先行するフィルタの結果を出発点として利用します。
+フィルタを連鎖できます。 後続のフィルタは、先行するフィルタの結果を出発点として利用します。
 
 ```twig
 {% set text = "I **really** love Tom Petty." %}
@@ -192,7 +183,7 @@ Craft テンプレートで利用可能なファンクションのリストは�
 {# Output: I REALLY LOVE TOM PETTY.</p> #}
 ```
 
-フィルタは直前の値だけに適用されることに注意してください。フィルタを式の結果に適用したい場合、最初に式を括弧で囲まなければなりません。
+フィルタは直前の値だけに適用されることに注意してください。 フィルタを式の結果に適用したい場合、最初に式を括弧で囲まなければなりません。
 
 ```twig
 {{ 100.3 + 50.3|round }}
@@ -202,11 +193,11 @@ Craft テンプレートで利用可能なファンクションのリストは�
 {# Output: 151 #}
 ```
 
-Craft テンプレートで利用可能なフィルタのリストは、[フィルタ](filters.md)ページを参照してください。
+Refer to the [Filters](filters.md) page for a full list of filters available to your Craft templates.
 
-## テスト
+## 続きを読む
 
-テストは、`true` または `false` だけを返すファンクションのようなもので、値の性質について何かを明らかにすることを目的としています。例えば、[defined](https://twig.symfony.com/doc/2.x/tests/defined.html) テストは、変数やハッシュ / オブジェクトのプロパティが定義されているかどうかに依存して、`true` または `false` を返します。
+テストは、`true` または `false` だけを返すファンクションのようなもので、値の性質について何かを明らかにすることを目的としています。 例えば、[defined](https://twig.symfony.com/doc/2.x/tests/defined.html) テストは、変数やハッシュ / オブジェクトのプロパティが定義されているかどうかに依存して、`true` または `false` を返します。
 
 ```twig
 {% if specs.weight is defined %}
@@ -215,7 +206,7 @@ Craft テンプレートで利用可能なフィルタのリストは、[フィ�
 {% endif %}
 ```
 
-テストが `false` を返すかどうかを調べる場合、`is not` 構文を利用します。
+Craft テンプレートで利用可能なテストのリストは、[テスト](tests.md)ページを参照してください。
 
 ```twig
 {% if entry is not defined %}
@@ -223,30 +214,30 @@ Craft テンプレートで利用可能なフィルタのリストは、[フィ�
 {% endif %}
 ```
 
-Craft テンプレートで利用可能なテストのリストは、[テスト](tests.md)ページを参照してください。
+Twig で扱う値は、6種類あります。
 
 ## 値の種類
 
-Twig で扱う値は、6種類あります。
+それぞれについて、詳しく見ていきましょう。
 
 - [文字列](#strings)
 - [数字](#numbers)
 - [ブーリアン](#booleans)
 - [配列](#arrays)
 - [ハッシュ](#hashes)
-- [アローファンクション](#arrow-functions)
+- [functions.md](#arrow-functions)
 
-それぞれについて、詳しく見ていきましょう。
+Let’s take a look at each of them in detail.
 
 ### 文字列
 
-テキスト値は**文字列**と呼ばれます。文字列を識別するために、いくつかのテキストをダブル、または、シングルクォーテーションで囲みます（ただし、カーリー / スマートクォートを _除きます_）。
+テキスト値は**文字列**と呼ばれます。 文字列を識別するために、いくつかのテキストをダブル、または、シングルクォーテーションで囲みます（ただし、カーリー / スマートクォートを _除きます_）。
 
 ```twig
 {% set greeting = "Hello there" %}
 ```
 
-一度文字列をはじめると、Twig はマッチする別の引用符に出会うまで解析を続けます。つまり、同じタイプの引用符でない限り、文字列の中に他の引用符を安全に追加できます。
+一度文字列をはじめると、Twig はマッチする別の引用符に出会うまで解析を続けます。 つまり、同じタイプの引用符でない限り、文字列の中に他の引用符を安全に追加できます。
 
 ```twig
 {% set heading = 'Try the new 7" folding tablet' %}
@@ -261,7 +252,9 @@ Twig で扱う値は、6種類あります。
 
 #### 文字列の結合
 
-Twig は文字列を結合する2つの方法を提供します。**チルダ**（`~`）演算子を利用して文字列を連結するか、**文字列補完**を利用して他の文字列の途中に文字列を挿入できます。
+::: tip
+文字列補完は、ダブルクォートで囲まれた文字列でのみ機能します。
+:::
 
 ```twig
 {# Concatenation #}
@@ -272,18 +265,18 @@ Twig は文字列を結合する2つの方法を提供します。**チルダ**�
 ```
 
 ::: tip
-文字列補完は、ダブルクォートで囲まれた文字列でのみ機能します。
+String interpolation only works in double-quoted strings.
 :::
 
 ### 数字
 
-数字は特別なデリミタなしで、逐語的に書くことができます。
+数字はプリント文で出力したり、文字列と結合できます。
 
 ```twig
 {% set answer = 42 %}
 ```
 
-数字はプリント文で出力したり、文字列と結合できます。
+Numbers can be output in a print statement, or combined with a string.
 
 ```twig
 <p>The answer is {{ answer }}</p>
@@ -291,19 +284,19 @@ Twig は文字列を結合する2つの方法を提供します。**チルダ**�
 
 ### ブーリアン
 
-ブーリアン値は `true` または `false` のどちらかです。これらは Twig の予約後のため、ブーリアン値を作成したい場合、それを入力するだけです。
+ブーリアン値は `true` または `false` のどちらかです。 これらは Twig の予約後のため、ブーリアン値を作成したい場合、それを入力するだけです。
 
 ```twig
 {% set havingABud = true %}
 ```
 
-ブーリアンは、式に応じてテンプレートの一部をオンまたはオフに切り替えるような[条件文](#conditionals)の中で最もよく利用されます。
-
 プリント文でブーリアン値を出力したり、別の文字列と結合すると、値は `'1'` または `'0'` のどちらかに変換されます。
+
+If you were to output a boolean value in a print statement, or combine it with another string, the value will be converted to either `'1'` or `'0'`.
 
 ### 配列
 
-配列は、ネストされた値の順序付きリストです。配列は左右の角括弧（`[` および `]`）で区切られ、値はカンマで区切られます。
+配列は、ネストされた値の順序付きリストです。 配列は左右の角括弧（`[` および `]`）で区切られ、値はカンマで区切られます。
 
 ```twig
 {% set todoList = [
@@ -313,7 +306,7 @@ Twig は文字列を結合する2つの方法を提供します。**チルダ**�
 ] %}
 ```
 
-[for](https://twig.symfony.com/doc/2.x/tags/for.html) タグを利用して、配列をループできます。
+テンプレートは以前と同様に [include](https://twig.symfony.com/doc/2.x/tags/include.html) タグで動作しますが、他のテンプレートでは代わりに [embed](https://twig.symfony.com/doc/2.x/tags/embed.html) タグを利用して `content` ブロック全体を上書きするオプションがあります。
 
 ```twig
 <ol class="todo">
@@ -323,7 +316,7 @@ Twig は文字列を結合する2つの方法を提供します。**チルダ**�
 </ol>
 ```
 
-配列をプリント文で直接出力したり、他の文字列と結合したりできないことに注意してください。配列の値をカンマ区切りで素早く出力したい場合、[join](https://twig.symfony.com/doc/2.x/filters/join.html) フィルタを利用できます。
+配列をプリント文で直接出力したり、他の文字列と結合したりできないことに注意してください。 配列の値をカンマ区切りで素早く出力したい場合、[join](https://twig.symfony.com/doc/2.x/filters/join.html) フィルタを利用できます。
 
 ```twig
 {{ todoList|join(', ') }}
@@ -333,7 +326,7 @@ Twig は文字列を結合する2つの方法を提供します。**チルダ**�
 
 ハッシュは[配列](#arrays)に似ていますが、値はカスタム**キー**によってインデックスが付けられます。
 
-ハッシュを定義するには、左右の波括弧（`{` および `}`）をデリミタとして利用します。ハッシュのキーと値のペアを配列のようにカンマで区切り、個々のキーと値をコロンで区切ります。
+ハッシュを定義するには、左右の波括弧（`{` および `}`）をデリミタとして利用します。 ハッシュのキーと値のペアを配列のようにカンマで区切り、個々のキーと値をコロンで区切ります。
 
 ```twig
 {% set specs = {
@@ -344,7 +337,7 @@ Twig は文字列を結合する2つの方法を提供します。**チルダ**�
 } %}
 ```
 
-動的キーでハッシュを作成する必要がある場合、キーを括弧で囲みます。
+配列と同様に、[for](https://twig.symfony.com/doc/2.x/tags/for.html) タグを利用してハッシュ内のすべての値をループできます。
 
 ```twig{5}
 {% set myKey = 'weight' %}
@@ -355,7 +348,7 @@ Twig は文字列を結合する2つの方法を提供します。**チルダ**�
 } %}
 ```
 
-配列と同様に、[for](https://twig.symfony.com/doc/2.x/tags/for.html) タグを利用してハッシュ内のすべての値をループできます。
+ドットや配列構文を利用して、キーを指定してハッシュ値に直接アクセスすることもできます。
 
 ```twig
 <dl class="specs">
@@ -366,7 +359,7 @@ Twig は文字列を結合する2つの方法を提供します。**チルダ**�
 </dl>
 ```
 
-ドットや配列構文を利用して、キーを指定してハッシュ値に直接アクセスすることもできます。
+You can also access hash values directly by their keys, using either dot or array syntax:
 
 ```twig
 <dl class="specs">
@@ -378,9 +371,9 @@ Twig は文字列を結合する2つの方法を提供します。**チルダ**�
 </dl>
 ```
 
-### アローファンクション
+### Twig に付随するファンクション
 
-いくつかの[ファンクション](#functions)と[フィルタ](#filters)では、引数に**アローファンクション**を渡すことができます。アローファンクションは、テンプレート内で直接定義するコンパクトなファンクションで、単一の値を返します。
+いくつかの[ファンクション](#functions)と[フィルタ](#filters)では、引数に**アローファンクション**を渡すことができます。 アローファンクションは、テンプレート内で直接定義するコンパクトなファンクションで、単一の値を返します。
 
 例えば、Craft の [group](filters.md#group) フィルタは、渡されたアローファンクションの結果に基づいて、配列内のすべてのアイテムをグループ化します。
 
@@ -406,7 +399,7 @@ Twig は文字列を結合する2つの方法を提供します。**チルダ**�
 
 ## ループ
 
-[配列](#arrays)や[ハッシュ](#hashes)内の複数のアイテムをループさせなければならないことがよくあります。そのために、[for](https://twig.symfony.com/doc/2.x/tags/for.html) タグを利用します。
+[配列](#arrays)や[ハッシュ](#hashes)内の複数のアイテムをループさせなければならないことがよくあります。 そのために、[for](https://twig.symfony.com/doc/2.x/tags/for.html) タグを利用します。
 
 ```twig{8-10}
 {% set todoList = [
@@ -424,7 +417,7 @@ Twig は文字列を結合する2つの方法を提供します。**チルダ**�
 
 ## 条件文
 
-テンプレートには [if](https://twig.symfony.com/doc/2.x/tags/if.html) タグではじまる**条件文**を含めることができます。これは、`true` または `false` のいずれかで評価される式を含み、その式の結果に応じてテンプレートの一部を表示します。
+条件が `false` のときにテンプレートの別の部分を表示したい場合、ネストされた `{% else %}` タグを含めることができます。
 
 ```twig
 {% if currentUser %}
@@ -432,7 +425,7 @@ Twig は文字列を結合する2つの方法を提供します。**チルダ**�
 {% endif %}
 ```
 
-条件が `false` のときにテンプレートの別の部分を表示したい場合、ネストされた `{% else %}` タグを含めることができます。
+ネストされた `{% elseif %}` タグ（`{% else %}` タグがある場合は、その前）を含めることで、元の条件が `false` の場合に追加のフォールバック条件を作成することもできます。
 
 ```twig
 {% if currentUser %}
@@ -442,42 +435,43 @@ Twig は文字列を結合する2つの方法を提供します。**チルダ**�
 {% endif %}
 ```
 
-ネストされた `{% elseif %}` タグ（`{% else %}` タグがある場合は、その前）を含めることで、元の条件が `false` の場合に追加のフォールバック条件を作成することもできます。
+::: tip
+何かの値に応じてテンプレートの異なる部分を切り替えたい場合、複数の `{% if %}` と `{% elseif %}` タグで何度も同じ値を比較するよりもシンプルな構文を [switch](tags.md#switch) タグが提供します。
+:::
 
 ```twig
-{% set hour = now|date('G') %}
+<p>Is it quitting time?</p>
 
-{% if hour < 12 %}
-  <p>Good morning, {{ currentUser.friendlyName }}</p>
-{% elseif hour < 17 %}
-  <p>Good afternoon, {{ currentUser.friendlyName }}</p>
+{% set hour = now|date("G") %}
+{% if hour >= 16 and hour < 18 %}
+    <p>Yes!</p>
 {% else %}
-  <p>Good evening, {{ currentUser.friendlyName }}</p>
+    <p>Nope.</p>
 {% endif %}
 ```
 
 ::: tip
-何かの値に応じてテンプレートの異なる部分を切り替えたい場合、複数の `{% if %}` と `{% elseif %}` タグで何度も同じ値を比較するよりもシンプルな構文を [switch](tags.md#switch) タグが提供します。
+If you want to switch between different parts of your template depending on the value of something, [switch](tags.md#switch) tags provide a simpler syntax than multiple `{% if %}` and `{% elseif %}` tags each comparing the same value over and over again.
 :::
 
 
 
 ## DRY テンプレート
 
-何かをコーディングするときは、常にコードを「DRY」（Don’t Repeat Yourself）に保ち、 同じ一般的なロジックや HTML を複数箇所に書いたり、保守したりしないようにするのは良い習慣です。これは Twig にも当てはまります。ウェブサイトの各ページには同じヘッダーとフッターがあり、ページの大部分は共有された再利用可能なコンポーネントで構成されているはずです。
+何かをコーディングするときは、常にコードを「DRY」（Don’t Repeat Yourself）に保ち、 同じ一般的なロジックや HTML を複数箇所に書いたり、保守したりしないようにするのは良い習慣です。 これは Twig にも当てはまります。 ウェブサイトの各ページには同じヘッダーとフッターがあり、ページの大部分は共有された再利用可能なコンポーネントで構成されているはずです。
 
 Twig はテンプレートを DRY に保つための4つの方法を提供します。
 
-- [テンプレートの継承](#template-inheritance)
-- [インクルード](#includes)
+- [Twig に付随するフィルタ](#template-inheritance)
+- [Craft の独自フィルタ](#includes)
 - [エンベッド](#embeds)
 - [マクロ](#macros)
 
 ### テンプレートの継承
 
-Twig テンプレートは他のテンプレートを**拡張**して、親よりも詳細を入力できます。サブテンプレートが親から HTML の基本セットを _受け継ぐ_ ため、このコンセプトは**テンプレートの継承**と呼ばれます。
+Twig テンプレートは他のテンプレートを**拡張**して、親よりも詳細を入力できます。 サブテンプレートが親から HTML の基本セットを _受け継ぐ_ ため、このコンセプトは**テンプレートの継承**と呼ばれます。
 
-例えば、`templates/` フォルダに `_html5.twig` テンプレートを作成できます。これは、ウェブサイトの _すべての_ ページで持つべき基本 HTML の雛形を定義します。
+このテンプレート自体にあまり価値はありませんが、ネストされたテンプレートを活用するためのフレームワークを提供します。
 
 ```twig
 <!DOCTYPE html>
@@ -497,13 +491,13 @@ Twig テンプレートは他のテンプレートを**拡張**して、親よ�
 </html>
 ```
 
-このテンプレート自体にあまり価値はありませんが、ネストされたテンプレートを活用するためのフレームワークを提供します。
+これで、`templates/` フォルダに `_html5.twig` テンプレートを**拡張する** `hello-world.twig` テンプレートを作成できます。
 
 - ネストされたテンプレートに `<head>` および `<body>` 要素のコンテンツを上書きするための方法を与える、`head` および `body` **ブロック**を定義します。
-- ネストされたテンプレートで、変数 `docTitle` を定義できます。これは `<title>` の値になり、定義されていない場合、デフォルトでサイト名になります。
-- `bodyAttributes` ハッシュを定義することで、ネストされたテンプレートで `<body>` 要素にカスタム属性をセットできるようになります。（このハッシュを HTML 属性のリストに変換するため、[attr](functions.md#attr) ファンクションを利用しています。)
+- ネストされたテンプレートで、変数 `docTitle` を定義できます。 これは `<title>` の値になり、定義されていない場合、デフォルトでサイト名になります。
+- `bodyAttributes` ハッシュを定義することで、ネストされたテンプレートで `<body>` 要素にカスタム属性をセットできるようになります。 （このハッシュを HTML 属性のリストに変換するため、[attr](functions.md#attr) ファンクションを利用しています。
 
-これで、`templates/` フォルダに `_html5.twig` テンプレートを**拡張する** `hello-world.twig` テンプレートを作成できます。
+このテンプレートは、いくつかのことを行っています。
 
 ```twig
 {% extends "_html5" %}
@@ -524,24 +518,24 @@ Twig テンプレートは他のテンプレートを**拡張**して、親よ�
 {% endblock %}
 ```
 
-このテンプレートは、いくつかのことを行っています。
+This template is doing a few things:
 
 - `_html5.twig` テンプレートを**拡張する**ものであると宣言しています。
-- 親テンプレートに渡される、変数 `docTitle` および `bodyAttributes` を設定しています。
-- 親テンプレートの `head` および `body` ブロックを上書きしています。
-- プリント文 `{{ parent() }}` を経由して、親テンプレートの `head` ブロックのコンテンツを上書きするブロック内に取り込んでいます。
+- [Twig Templates in Craft](https://mijingo.com/products/screencasts/twig-templates-in-craft/) は、Craft の Twig を快適に使えるようになることを目的とした、Mijingo によるビデオコースです。
+- [Straight up Craft](https://straightupcraft.com/twig-templating) は、Craft での Twig の使い方に関する素晴らしい記事があります。
+- [Twig for Designers](https://github.com/brandonkelly/TwigForDesigners) は進行中の eBook で、非開発者が Twig をどのように使えるか説明することを目的としています。
 
-テンプレートが別のテンプレートを拡張する場合、ブラウザに直接出力される HTML コードを持たないことに注意してください。HTML コードの _すべて_ は、テンプレートブロック内で定義されなければなりません。
+テンプレートが別のテンプレートを拡張する場合、ブラウザに直接出力される HTML コードを持たないことに注意してください。 HTML コードの _すべて_ は、テンプレートブロック内で定義されなければなりません。
 
 ::: tip
-テンプレートは再起的に拡張できます。`hello-world.twig` を拡張し、`body` ブロックに HTML を追加する別のテンプレートを作成してみてください。
+テンプレートは再起的に拡張できます。 `hello-world.twig` を拡張し、`body` ブロックに HTML を追加する別のテンプレートを作成してみてください。 :::
 :::
 
 ### インクルード
 
-独立したコンポーネントの HTML のみを出力する「部分的な」テンプレートを作成し、[include](https://twig.symfony.com/doc/2.x/tags/include.html) タグを利用して他のテンプレートに含めることができます。
-
 例えば、`templates/` フォルダに `_tip.twig` というテンプレートを次のように作成します。
+
+これで、`tipText` 値を渡して別のテンプレートからインクルードできます。
 
 ```twig
 <div class="tip">
@@ -550,7 +544,7 @@ Twig テンプレートは他のテンプレートを**拡張**して、親よ�
 </div>
 ```
 
-これで、`tipText` 値を渡して別のテンプレートからインクルードできます。
+Now you can include that from another template, passing in the `tipText` value:
 
 ```twig
 {% include '_tip' with {
@@ -560,7 +554,7 @@ Twig テンプレートは他のテンプレートを**拡張**して、親よ�
 
 ### エンベッド
 
-エンベッドは[インクルード](#includes)に似ていて、さらに強大な力を持っています。インクルードしたテンプレート内のテンプレートブロックを上書きできます。例として、コンテンツをよりカスタマイズしやすくしてみましょう。`<p>` タグをブロックで囲むことで、それが可能になります。
+エンベッドは[インクルード](#includes)に似ていて、さらに強大な力を持っています。 インクルードしたテンプレート内のテンプレートブロックを上書きできます。 例として、コンテンツをよりカスタマイズしやすくしてみましょう。 `<p>` タグをブロックで囲むことで、それが可能になります。
 
 ```twig
 <div class="tip">
@@ -571,7 +565,7 @@ Twig テンプレートは他のテンプレートを**拡張**して、親よ�
 </div>
 ```
 
-テンプレートは以前と同様に [include](https://twig.symfony.com/doc/2.x/tags/include.html) タグで動作しますが、他のテンプレートでは代わりに [embed](https://twig.symfony.com/doc/2.x/tags/embed.html) タグを利用して `content` ブロック全体を上書きするオプションがあります。
+独立したコンポーネントの HTML のみを出力する「部分的な」テンプレートを作成し、[include](https://twig.symfony.com/doc/2.x/tags/include.html) タグを利用して他のテンプレートに含めることができます。
 
 ```twig
 {% embed '_tip' %}
@@ -583,9 +577,9 @@ Twig テンプレートは他のテンプレートを**拡張**して、親よ�
 
 ### マクロ
 
-テンプレートでは、HTML を出力する再利用可能なファンクションである**マクロ**を定義できます。これらはテンプレートが似たような HTML を複数回出力する必要がある場合に特に便利ですが、他のテンプレートでは必要としないため、[include](#includes) を利用する価値はありません。
+テンプレートでは、HTML を出力する再利用可能なファンクションである**マクロ**を定義できます。 これらはテンプレートが似たような HTML を複数回出力する必要がある場合に特に便利ですが、他のテンプレートでは必要としないため、[include](#includes) を利用する価値はありません。
 
-例えば、サイトのレイアウトテンプレート内でグローバルナビゲーションのアイテムごとに同じ HTML と Twig コードを繰り返しているとしましょう。
+[macro](https://twig.symfony.com/doc/2.x/tags/macro.html) タグに `<li>` の HTMLをプルしておき、代わりにナビのアイテムごとに呼び出すことができます。
 
 ```twig
 <nav class="global-nav">
@@ -597,7 +591,9 @@ Twig テンプレートは他のテンプレートを**拡張**して、親よ�
 </nav>
 ```
 
-[macro](https://twig.symfony.com/doc/2.x/tags/macro.html) タグに `<li>` の HTMLをプルしておき、代わりにナビのアイテムごとに呼び出すことができます。
+::: tip
+[import](https://twig.symfony.com/doc/2.x/tags/import.html) タグを利用して、他のテンプレートからマクロをインポートできます。
+:::
 
 ```twig
 {% macro navItem(label, path) %}
@@ -614,12 +610,12 @@ Twig テンプレートは他のテンプレートを**拡張**して、親よ�
 ```
 
 ::: tip
-[import](https://twig.symfony.com/doc/2.x/tags/import.html) タグを利用して、他のテンプレートからマクロをインポートできます。
+You can import macros from other templates using an [import](https://twig.symfony.com/doc/2.x/tags/import.html) tag.
 :::
 
 ## 追加リソース
 
 Twig の詳細については、これらのリソースをチェックしてください。
 
-- [Twig for Template Designers](https://twig.symfony.com/doc/2.x/templates.html) – Twig の公式テンプレートドキュメント
+- [Twig for Template Designers](https://twig.symfony.com/doc/templates.html) は、すべての Twig の機能を詳細なドキュメントです。
 - [Twig Templates in Craft](https://craftquest.io/courses/twig-templates-in-craft) – Craft の Twig テンプレート手法を紹介する、CraftQuest の全12回のビデオコース

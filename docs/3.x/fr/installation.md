@@ -41,6 +41,8 @@ Once Craft’s files are in place, your project directory should have a director
 my-project.test/
 ├── config/
 │   └── ...
+├── modules/
+│   └── ...
 ├── storage/
 │   └── ...
 ├── templates/
@@ -84,8 +86,8 @@ The exact permissions you should be setting depends on the relationship between 
 - If they’re in the same group, then use `774`.
 - If you’re not sure and like to live life on the edge, use `777`.
 
-::: warning
-HEY IIS FANS Make sure your site’s AppPool account has write permissions to these folders/files as well.
+::: warning HEY
+IIS FANS Make sure your site’s AppPool account has write permissions to these folders/files as well.
 :::
 
 ## Step 3: Set a Security Key

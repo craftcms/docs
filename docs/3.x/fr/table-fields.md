@@ -6,17 +6,16 @@ Table fields give you a customizable table, where you can create multiple rows o
 
 Table fields have the following settings:
 
-* **Table Columns** – Define the columns that will be available to your Table field.
+- **Table Columns** – Define the columns that will be available to your Table field.
 
-  Each column has the following properties:
+    Each column has the following properties:
 
-  * *Column Heading* – The name that will appear in the head of the table
-  * *Handle* – How you’ll refer to this column from your templates
-  * *Width* – The width for this column specified in either pixels or a percentage
-  * *Type* – The type of content allowed in the column. Choose from Single-line text, Multi-line text, Number, Checkbox, Date, Time, Lightswitch, and Color.
+    - *Column Heading* – The name that will appear in the head of the table
+    - *Handle* – How you’ll refer to this column from your templates
+    - *Width* – The width for this column specified in either pixels or a percentage
+    - *Type* – The type of content allowed in the column. Choose from Single-line text, Multi-line text, Number, Checkbox, Date, Time, Lightswitch, and Color.
 
-* **Default Values** – Define the default row and column values for new instances of the field.
-
+- **Default Values** – Define the default row and column values for new instances of the field.
 
 ## The Field
 
@@ -26,6 +25,7 @@ Table fields will show the table as configured based on the field settings. You 
 
 Calling a Table field in your templates will return an array of the rows. Each row is a sub-array which holds each of the columns’ values for that row.
 
+::: code
 ```twig
 {% if entry.whiskeyTableHandle|length %}
     <h3>Whiskeys</h3>
@@ -37,3 +37,14 @@ Calling a Table field in your templates will return an array of the rows. Each r
     </ul>
 {% endif %}
 ```
+```php
+if (count($entry->myFieldHandle)) {
+    // Whiskeys:
+    foreach ($entry->myFieldHandle as $row) {
+        // $row['whiskey']
+        // $row['description']
+        // $row['proof']
+    }
+}
+```
+:::

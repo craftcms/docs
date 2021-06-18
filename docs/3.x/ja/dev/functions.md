@@ -1,61 +1,67 @@
 # ファンクション
 
-Craft の Twig テンプレートで利用可能な[ファンクション](https://twig.symfony.com/doc/2.x/templates.html#functions)は、以下の通りです。
+[Twig に付随する](https://twig.symfony.com/doc/functions/index.html)テンプレートファンクションに加えて、Craft がいくつか独自のものを提供します。
 
-| ファンクション | 説明 |
--------- | -----------
-| [actionInput](#actioninput) | 不可視項目の `action` を出力します。 |
-| [actionUrl](#actionurl) | コントローラーのアクション URL を生成します。 |
-| [alias](#alias) | 文字列をエイリアスとして解析します。 |
-| [attr](#attr) | HTML 属性を生成します。 |
-| [attribute](https://twig.symfony.com/doc/2.x/functions/attribute.html) | 変数の動的属性にアクセスします。 |
-| [beginBody](#beginbody) | 「begin body」に登録されたスクリプトやスタイルを出力します。 |
-| [block](https://twig.symfony.com/doc/2.x/functions/block.html) | ブロックの出力をプリントします。 |
-| [ceil](#ceil) | 整数値に切り上げます。 |
-| [className](#classname) | 指定されたオブジェクトの完全修飾クラス名を返します。 |
-| [clone](#clone) | オブジェクトを複製します。 |
-| [combine](#combine) | 2つの配列を1つに結合します。 |
-| [configure](#configure) | 渡されたオブジェクトに属性をセットします。 |
-| [constant](https://twig.symfony.com/doc/2.x/functions/constant.html) | 指定された文字列の定数値を返します。 |
-| [create](#create) | 新しいオブジェクトを作成します。 |
-| [csrfInput](#csrfinput) | 不可視項目の CSRF トークンを返します。 |
-| [cpUrl](#cpurl) | コントロールパネルの URL を生成します。 |
-| [cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html) | 値の配列を循環します。 |
-| [date](https://twig.symfony.com/doc/2.x/functions/date.html) | 日付を作成します。 |
-| [dump](https://twig.symfony.com/doc/2.x/functions/dump.html) | 変数に関する情報をダンプします。 |
-| [endBody](#endbody) | 「end body」に登録されたスクリプトやスタイルを出力します。 |
-| [expression](#expression) | データベース式オブジェクトを作成します。 |
-| [floor](#floor) | 整数値に切り捨てます。 |
-| [getenv](#getenv) | 環境変数の値を返します。 |
-| [gql](#gql) | スキーマ全体に対して、GraphQL クエリを実行します。 |
-| [parseEnv](#parseenv) | 文字列を環境変数、または、エイリアスとして解析します。 |
-| [head](#head) | 「head」に登録されたスクリプトやスタイルを出力します。 |
-| [hiddenInput](#hiddeninput) | 不可視項目を出力します。 |
-| [include](https://twig.symfony.com/doc/2.x/functions/include.html) | レンダリングされたテンプレートのコンテンツを返します。 |
-| [input](#input) | HTML input タグを出力します。 |
-| [max](https://twig.symfony.com/doc/2.x/functions/max.html) | 配列内の最大値を返します。 |
-| [min](https://twig.symfony.com/doc/2.x/functions/min.html) | 配列内の最小値を返します。 |
-| [parent](https://twig.symfony.com/doc/2.x/functions/parent.html) | 親ブロックの出力を返します。 |
-| [plugin](#plugin) | ハンドルに従ってプラグインのインスタンスを返します。 |
-| [random](https://twig.symfony.com/doc/2.x/functions/random.html) | ランダムな値を返します。 |
-| [range](https://twig.symfony.com/doc/2.x/functions/range.html) | 整数の等差数列を含むリストを返します。 |
-| [raw](#raw) | 出力時に HTML エンコードされないよう、指定された文字列を`Twig\Markup` オブジェクトで囲みます。 |
-| [redirectInput](#redirectinput) | 不可視項目の `redirect` を出力します。 |
-| [seq](#seq) | シーケンスの次、または、現在の番号を出力します。 |
-| [shuffle](#shuffle) | 配列内のアイテムの順番をランダム化します。 |
-| [siteUrl](#siteurl) | フロントエンドの URL を生成します。 |
-| [svg](#svg) | SVG 文書を出力します。 |
-| [source](https://twig.symfony.com/doc/2.x/functions/source.html) | レンダリングせずに、テンプレートのコンテンツを返します。 |
-| [tag](#tag) | HTML タグを出力します。 |
-| [template_from_string](https://twig.symfony.com/doc/2.x/functions/template_from_string.html) | 文字列からテンプレートを読み込みます。 |
-| [url](#url) | URL を生成します。 |
+| Function                                                                                       | ファンクション                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| [actionInput](#actioninput)                                                                    | 不可視項目の `action` を出力します。                                    |
+| [actionUrl](#actionurl)                                                                        | コントローラーのアクション URL を生成します。                                  |
+| [alias](#alias)                                                                                | 文字列をエイリアスとして解析します。                                         |
+| [attr](#attr)                                                                                  | HTML 属性を生成します。                                             |
+| [attribute](https://twig.symfony.com/doc/2.x/functions/attribute.html)                         | 変数の動的属性にアクセスします。                                           |
+| [beginBody](#beginbody)                                                                        | 「begin body」に登録されたスクリプトやスタイルを出力します。                        |
+| [block](https://twig.symfony.com/doc/2.x/functions/block.html)                                 | ブロックの出力をプリントします。                                           |
+| [ceil](#ceil)                                                                                  | Rounds a number up.                                        |
+| [className](#classname)                                                                        | 指定されたオブジェクトの完全修飾クラス名を返します。                                 |
+| [clone](#clone)                                                                                | オブジェクトを複製します。                                              |
+| [combine](#combine)                                                                            | 2つの配列を1つに結合します。                                            |
+| [configure](#configure)                                                                        | 渡されたオブジェクトに属性をセットします。                                      |
+| [constant](https://twig.symfony.com/doc/2.x/functions/constant.html)                           | 指定された文字列の定数値を返します。                                         |
+| [create](#create)                                                                              | 新しいオブジェクトを作成します。                                           |
+| [csrfInput](#csrfinput)                                                                        | 不可視項目の CSRF トークンを返します。                                     |
+| [cpUrl](#cpurl)                                                                                | コントロールパネルの URL を生成します。                                     |
+| [cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html)                                 | 値の配列を循環します。                                                |
+| [dataUrl](#dataurl)                                                                            | Outputs an asset or file as a base64-encoded data URL.     |
+| [date](https://twig.symfony.com/doc/2.x/functions/date.html)                                   | 日付を作成します。                                                  |
+| [dump](https://twig.symfony.com/doc/2.x/functions/dump.html)                                   | 変数に関する情報をダンプします。                                           |
+| [endBody](#endbody)                                                                            | 「end body」に登録されたスクリプトやスタイルを出力します。                          |
+| [expression](#expression)                                                                      | データベース式オブジェクトを作成します。                                       |
+| [failMessageInput](#failmessageinput)                                                          | Outputs a hidden `failMessage` input.                      |
+| [floor](#floor)                                                                                | 整数値に切り上げます。                                                |
+| [getenv](#getenv)                                                                              | 環境変数の値を返します。                                               |
+| [gql](#gql)                                                                                    | スキーマ全体に対して、GraphQL クエリを実行します。                              |
+| [head](#head)                                                                                  | 「head」に登録されたスクリプトやスタイルを出力します。                              |
+| [hiddenInput](#hiddeninput)                                                                    | 不可視項目を出力します。                                               |
+| [include](https://twig.symfony.com/doc/2.x/functions/include.html)                             | レンダリングされたテンプレートのコンテンツを返します。                                |
+| [input](#input)                                                                                | HTML input タグを出力します。                                       |
+| [max](https://twig.symfony.com/doc/2.x/functions/max.html)                                     | 配列内の最大値を返します。                                              |
+| [min](https://twig.symfony.com/doc/2.x/functions/min.html)                                     | 配列内の最小値を返します。                                              |
+| [ol](#ol)                                                                                      | 配列内のアイテムの順番をランダム化します。                                      |
+| [parent](https://twig.symfony.com/doc/2.x/functions/parent.html)                               | 親ブロックの出力を返します。                                             |
+| [parseEnv](#parseenv)                                                                          | 文字列を環境変数、または、エイリアスとして解析します。                                |
+| [plugin](#plugin)                                                                              | ハンドルに従ってプラグインのインスタンスを返します。                                 |
+| [random](https://twig.symfony.com/doc/2.x/functions/random.html)                               | ランダムな値を返します。                                               |
+| [range](https://twig.symfony.com/doc/2.x/functions/range.html)                                 | 整数の等差数列を含むリストを返します。                                        |
+| [raw](#raw)                                                                                    | 出力時に HTML エンコードされないよう、指定された文字列を`Twig\Markup` オブジェクトで囲みます。 |
+| [redirectInput](#redirectinput)                                                                | 不可視項目の `redirect` を出力します。                                  |
+| [seq](#seq)                                                                                    | シーケンスの次、または、現在の番号を出力します。                                   |
+| [shuffle](#shuffle)                                                                            | Randomizes the order of the items in an array.             |
+| [siteUrl](#siteurl)                                                                            | フロントエンドの URL を生成します。                                       |
+| [successMessageInput](#successmessageinput)                                                    | Outputs a hidden `successMessage` input.                   |
+| [svg](#svg)                                                                                    | SVG 文書を出力します。                                              |
+| [source](https://twig.symfony.com/doc/2.x/functions/source.html)                               | レンダリングせずに、テンプレートのコンテンツを返します。                               |
+| [tag](#tag)                                                                                    | HTML タグを出力します。                                             |
+| [template_from_string](https://twig.symfony.com/doc/2.x/functions/template_from_string.html) | 文字列からテンプレートを読み込みます。                                        |
+| [ul](#ul)                                                                                      | Outputs an array of items as an unordered list.            |
+| [url](#url)                                                                                    | URL を生成します。                                                |
 
-## `actionInput`
+## `actionInput( actionPath )`
 
-特定のコントローラーアクションのための POST リクエストをルーティングするために利用する不可視項目を出力するためのショートカット。これは、テンプレート内に直接 `<input type="hidden" name="action" value="controller/action/route">` を書き込むのと実質的に同じです。
+特定のコントローラーやアクションのための POST リクエストをルーティングするために使用される不可視項目を出力するためのショートカット。 これは、テンプレート内に直接 `<input type="hidden" name="action" value="controller/action-name">` を書き込むのと実質的に同じです。
 
 ```twig
-{{ actionInput('users/save-user') }}
+<form method="POST">
+    {{ actionInput('users/save-user') }}<!-- ...
 ```
 
 オプションで、引数 `options` を渡すことにより、タグに追加の属性をセットできます。
@@ -66,53 +72,37 @@ Craft の Twig テンプレートで利用可能な[ファンクション](https
 }) }}
 ```
 
-## `actionUrl`
+## `alias( string )`
 
 相対形式と絶対形式、および、アクティブな <config3:actionTrigger> 設定を自動的に考慮し、コントローラーアクションの URL を返します。
 
 ### 引数
 
-`actionUrl()` ファンクションは、次の引数を持っています。
+整数値に切り上げます。
 
-* **`path`** – 結果となる URL がサイトで指すべきパス。それは、ベースサイト URL に追加されます。
-* **`params`** –  URL に追加するクエリ文字列パラメータ。これは文字列（例：`'foo=1&bar=2'`）または、[ハッシュ](twig-primer.md#hashes)（例：`{foo:'1', bar:'2'}`）が利用可能です。
-* **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
+- **`path`** – 結果となる URL がサイトで指すべきパス。 それは、ベースサイト URL に追加されます。
+- **`params`** – URL に追加するクエリ文字列パラメータ。 これは文字列（例：`'foo=1&bar=2'`）またはオブジェクト（例：`{foo:'1', bar:'2'}`）が利用可能です。
+- **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。 デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。 そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
 
-## `alias`
+## `beginBody()`
 
-その文字列が[エイリアス](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)ではじまるかをチェックする [Craft::getAlias()](yii2:yii\BaseYii::getAlias()) に、文字列を渡します。（詳細については、[コンフィギュレーション](../config/README.md#aliases)を参照してください。）
+その文字列が[エイリアス](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases)ではじまるかをチェックする [Craft::getAlias()](yii2:yii\BaseYii::getAlias()) に、文字列を渡します。 （詳細については、[コンフィギュレーション](../config/README.md#aliases)を参照してください。 ）
 
 ```twig
 <img src="{{ alias('@assetBaseUrl/images/logo.png') }}">
 ```
 
-## `attr`
+## `ceil( num )`
 
-<yii2:yii\helpers\BaseHtml::renderTagAttributes()> を利用して、指定された[ハッシュ](twig-primer.md#hashes)に基づく HTML 属性のリストを生成します。
+指定されたオブジェクトのクローンを作成します。
 
 ```twig
-{% set myAttributes = {
-    class: ['one', 'two'],
-    disabled: true,
-    readonly: false,
-    data: {
-        baz: 'Escape this "',
-        qux: {
-            some: ['data', '"quoted"']
-        }
-    },
-    style: {
-        'background-color': 'red',
-        'font-size': '20px'
-    },
-} %}
-
-<div {{ attr(myAttributes) }}></div>
+{{ ceil(42.1) }} → 43
 ```
 
-## `beginBody`
+## `className( object )`
 
-「begin body」に登録されたスクリプトやスタイルを出力します。`<body>` タグの直後に配置する必要があります。
+「begin body」に登録されたスクリプトやスタイルを出力します。 `<body>` タグの直後に配置する必要があります。
 
 ```twig
 <body>
@@ -123,53 +113,57 @@ Craft の Twig テンプレートで利用可能な[ファンクション](https
 </body>
 ```
 
-## `block`
+## `clone( object )`
 
 ブロックの出力をプリントします。
 
 Twig コアの [`block`](https://twig.symfony.com/doc/2.x/functions/block.html) ファンクションと同様に機能します。
 
-## `ceil`
+## `create( type )`
 
 整数値に切り上げます。
 
 ```twig
-{{ ceil(42.1) }}
-{# Output: 43 #}
+{# Pass in a class name #}
+{% set cookie = create('yii\\web\\Cookie') %}
+
+{# Or a full object configuration array #}
+{% set cookie = create({
+    class: 'yii\\web\\cookie',
+    name: 'foo',
+    value: 'bar'
+}) %}
 ```
 
-## `className`
+## `csrfInput()`
 
-指定されたオブジェクトの完全修飾クラス名を返します。
+整数値に切り捨てます。
 
 ```twig
 {% set class = className(entry) %}
 {# Result: 'craft\\elements\\Entry' #}
 ```
 
-## `clone`
+## `endBody()`
 
-指定されたオブジェクトのクローンを作成します。
+環境変数の値を返します。
 
 ```twig
 {% set query = craft.entries.section('news') %}
 {% set articles = clone(query).type('articles') %}
 ```
 
-## `combine`
+## `expression( expression, params, config )`
 
-2つの配列を1つに結合し、最初の配列をキー、2番目の配列を値に定義するために利用します。
+文字列が環境変数（`$VARIABLE_NAME`）、および / または、エイリアス（`@aliasName`）を参照しているかどうかを確認し、参照されている値を返します。
 
 ```twig
-{% set arr1 = ['a', 'b', 'c'] %}
-{% set arr2 = ['foo', 'bar', 'baz'] %}
-{% set arr3 = combine(arr1, arr2) %}
-{# arr3 will now be `{a: 'foo', b: 'bar', c: 'baz'}` #}
+{{ floor(42.9) }} → 42
 ```
 
-## `configure`
+## `floor( num )`
 
-[`Yii::configure()`](yii2:yii\BaseYii::configure()) から継承された `Craft::configure()` メソッドの振る舞いを渡します。オブジェクトに属性を適用するという点で [`create`](#create) に似ていますが、新しいインスタンスを作成する代わりに、既存のオブジェクトを受け入れて変更します。
+[`Yii::configure()`](yii2:yii\BaseYii::configure()) から継承された `Craft::configure()` メソッドの振る舞いを渡します。 オブジェクトに属性を適用するという点で [`create`](#create) に似ていますが、新しいインスタンスを作成する代わりに、既存のオブジェクトを受け入れて変更します。
 
 ```twig
 {# Modify an `EntryQuery` object set up by a relational field: #}
@@ -204,7 +198,7 @@ Twig コアの [`constant`](https://twig.symfony.com/doc/2.x/functions/constant.
 
 ## `create`
 
-与えられたクラス名やオブジェクト設定に基づいて新しいオブジェクトインスタンスを作成します。サポートされる引数の詳細については、<yii2:Yii::createObject()> を参照してください。
+与えられたクラス名やオブジェクト設定に基づいて新しいオブジェクトインスタンスを作成します。 サポートされる引数の詳細については、<yii2:Yii::createObject()> を参照してください。
 
 ```twig
 {# Pass in a class name #}
@@ -228,15 +222,15 @@ Twig コアの [`constant`](https://twig.symfony.com/doc/2.x/functions/constant.
 
 ### 引数
 
-`cpUrl()` ファンクションは、次の引数を持っています。
+`siteUrl()` ファンクションは、次の引数を持っています。
 
-* **`path`** – 結果となる URL がサイトで指すべきパス。それは、ベースサイト URL に追加されます。
-* **`params`** –  URL に追加するクエリ文字列パラメータ。これは文字列（例：`'foo=1&bar=2'`）または、[ハッシュ](twig-primer.md#hashes)（例：`{foo:'1', bar:'2'}`）が利用可能です。
-* **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
+- **`path`** – 結果となる URL がサイトで指すべきパス。 それは、ベースサイト URL に追加されます。
+- **`params`** – URL に追加するクエリ文字列パラメータ。 これは文字列（例：`'foo=1&bar=2'`）またはオブジェクト（例：`{foo:'1', bar:'2'}`）が利用可能です。
+- **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。 デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。 そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
 
 ## `csrfInput`
 
-不可視項目の CSRF トークンを返します。CSRF 保護が有効になっているすべてのサイトでは、POST 経由で送信するそれぞれのフォームにこれを含めなければなりません。
+不可視の CSRF トークン入力欄を返します。 CSRF 保護が有効になっているすべてのサイトでは、POST 経由で送信するそれぞれのフォームにこれを含めなければなりません。
 
 ```twig
 {{ csrfInput() }}
@@ -250,9 +244,28 @@ Twig コアの [`constant`](https://twig.symfony.com/doc/2.x/functions/constant.
 }) }}
 ```
 
+## `dataUrl`
+
+Outputs an asset or file as a base64-encoded [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). You can pass it an <craft3:craft\elements\Asset> object or a file path (optionally using an [alias](../config/#aliases)).
+
+```twig
+{# Asset object `myLogoAsset` #}
+<img src="{{ dataUrl(myLogoAsset) }}" />
+
+{# File path, optionally using an alias #}
+<img src="{{ dataUrl('@webroot/images/my-logo-asset.svg') }}" />
+
+{# Output: <img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMCIgdmd(...)" /> #}
+```
+
+データベースクエリで使用するための新しい <yii2:yii\db\Expression> オブジェクトを作成して返します。
+
+- **`mustShowScriptName`** – ここに `true` がセットされている場合、「index.php」を含めた URL が返され、コンフィグ設定
+- **`mimeType`** - Optional MIME type. If omitted, the file’s MIME type will be determined automatically.
+
 ## `endBody`
 
-「end body」に登録されたスクリプトやスタイルを出力します。`</body>` タグの直前に配置する必要があります。
+「end body」に登録されたスクリプトやスタイルを出力します。 `</body>` タグの直前に配置する必要があります。
 
 ```twig
 <body>
@@ -265,7 +278,7 @@ Twig コアの [`constant`](https://twig.symfony.com/doc/2.x/functions/constant.
 
 ## `expression`
 
-データベースクエリで使用するための新しい <yii2:yii\db\Expression> オブジェクトを作成して返します。
+環境変数の値を返します。
 
 ```twig
 {% set entries = craft.entries()
@@ -273,9 +286,27 @@ Twig コアの [`constant`](https://twig.symfony.com/doc/2.x/functions/constant.
     .all() %}
 ```
 
+## `failMessageInput`
+
+スキーマ全体に対して、GraphQL クエリを実行します。
+
+```twig
+{{ input('email', 'email-input', '', {
+    id: 'custom-input'
+}) }}
+```
+
+文字列が環境変数（`$VARIABLE_NAME`）、および / または、エイリアス（`@aliasName`）を参照しているかどうかを確認し、参照されている値を返します。
+
+```twig
+{{ failMessageInput('Custom fail message', {
+    id: 'fail-message-input'
+}) }}
+```
+
 ## `floor`
 
-整数値に切り捨てます。
+Rounds a number down.
 
 ```twig
 {{ floor(42.9) }}
@@ -284,7 +315,7 @@ Twig コアの [`constant`](https://twig.symfony.com/doc/2.x/functions/constant.
 
 ## `getenv`
 
-環境変数の値を返します。
+HTML input タグを出力します。
 
 ```twig
 {{ getenv('MAPS_API_KEY') }}
@@ -292,7 +323,7 @@ Twig コアの [`constant`](https://twig.symfony.com/doc/2.x/functions/constant.
 
 ## `gql`
 
-スキーマ全体に対して、GraphQL クエリを実行します。
+オプションで、引数 `options` を渡すことにより、タグに追加の属性をセットできます。
 
 ```twig
 {% set result = gql('{
@@ -318,17 +349,13 @@ Twig コアの [`constant`](https://twig.symfony.com/doc/2.x/functions/constant.
     <img class="thumb" src="{{ image.url }}" alt="{{ image.altText }}">
 
     {{ entry.shortDescription|markdown }}
-    <p><a href="{{ entry.url }}">Continue reading…</a></p>
+    <p><a href="{{ entry.url }}">Continue reading… </a></p>
 {% endfor %}
 ```
 
-## `parseEnv`
-
-文字列が環境変数（`$VARIABLE_NAME`）、および / または、エイリアス（`@aliasName`）を参照しているかどうかを確認し、参照されている値を返します。
-
 ## `head`
 
-「head」に登録されたスクリプトやスタイルを出力します。`</head>` タグの直前に配置する必要があります。
+「head」に登録されたスクリプトやスタイルを出力します。 `</head>` タグの直前に配置する必要があります。
 
 ```twig
 <head>
@@ -339,14 +366,14 @@ Twig コアの [`constant`](https://twig.symfony.com/doc/2.x/functions/constant.
 
 ## `hiddenInput`
 
-HTML input タグを出力します。
+Twig コアの [`include`](https://twig.symfony.com/doc/2.x/functions/include.html) ファンクションと同様に機能します。
 
 ```twig
 {{ hiddenInput('entryId', entry.id) }}
 {# Output: <input type="hidden" name="entryId" value="100"> #}
 ```
 
-オプションで、引数 `options` を渡すことにより、タグに追加の属性をセットできます。
+HTML input タグを出力します。
 
 ```twig
 {{ hiddenInput('entryId', entry.id, {
@@ -356,42 +383,75 @@ HTML input タグを出力します。
 
 ## `include`
 
-レンダリングされたテンプレートのコンテンツを返します。
+オプションで、引数 `options` を渡すことにより、タグに追加の属性をセットできます。
 
-Twig コアの [`include`](https://twig.symfony.com/doc/2.x/functions/include.html) ファンクションと同様に機能します。
+配列内の最大値を返します。
 
 ## `input`
 
-HTML input タグを出力します。
+Twig コアの [`max`](https://twig.symfony.com/doc/2.x/functions/max.html) ファンクションと同様に機能します。
 
 ```twig
 {{ input('email', 'email-input', '') }}
 {# Output: <input type="email" name="email-input" value=""> #}
 ```
 
-オプションで、引数 `options` を渡すことにより、タグに追加の属性をセットできます。
+配列内の最小値を返します。
 
 ```twig
 {{ input('email', 'email-input', '', {
     id: 'custom-input'
 }) }}
+{# Output: <input type="email" id="custom-input" name="email-input" value=""> #}
 ```
 
 ## `max`
 
-配列内の最大値を返します。
+Twig コアの [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) ファンクションと同様に機能します。
 
-Twig コアの [`max`](https://twig.symfony.com/doc/2.x/functions/max.html) ファンクションと同様に機能します。
+This works identically to Twig’s core [`max`](https://twig.symfony.com/doc/2.x/functions/max.html) function.
 
 ## `min`
 
-配列内の最小値を返します。
+出力時に HTML エンコードされないよう、指定された文字列を`Twig\Markup` オブジェクトで囲みます。
 
-Twig コアの [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) ファンクションと同様に機能します。
+This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) function.
+
+## `ol`
+
+`<input type="hidden" name="redirect" value="{{ url|hash }}">` を入力するためのショートカットです。
+
+```twig
+{% set titles = craft.entries()
+    .section('news')
+    .select('title')
+    .column() %}
+{{ ol(titles) }}
+{# Output:
+<ol>
+    <li>Shocking Foo</li>
+    <li>You Won’t Believe This Bar</li>
+    <li>Ten Baz You Can’t Live Without</li>
+</ol>
+#}
+```
+
+### 引数
+
+オプションで、引数 `options` を渡すことにより、タグに追加の属性をセットできます。
+
+- **`siteId`** – URL が指すべきサイト ID。 デフォルトでは、現在のサイトが使用されます。
+- **`params`** – An attributes argument where each key+value will be set as attributes on the `<ol>`, with the exception of two special options:
+    - **`encode: false`** – Prevents the list items from being HTML-encoded.
+    - **`itemOptions: {...}`** – Tag attributes to be applied to each of the `<li>`s.
+
+## `parseEnv`
+
+`name` で定義されたシーケンスの次または現在の番号を出力します。
 
 ## `plugin`
 
-ハンドルに従ってプラグインインスタンスを返します。そのハンドルでインストールされ有効化されているプラグインがない場合、`null` を返します。
+ファンクションが呼び出されるたびに、与えられたシーケンスは自動的にインクリメントされます。
 
 ```twig
 {{ plugin('commerce').version }}
@@ -399,7 +459,7 @@ Twig コアの [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) フ�
 
 ## `raw`
 
-出力時に HTML エンコードされないよう、指定された文字列を`Twig\Markup` オブジェクトで囲みます。
+オプションで特定の長さにゼロ詰めした数値にできます。
 
 ```twig
 {% set html = raw('<p>Don’t encode me.</p>') %}
@@ -407,18 +467,18 @@ Twig コアの [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) フ�
 ```
 
 ::: tip
-これは、変数が他のテンプレート/マクロに渡された場合でも Twig が HTML をエスケープしないことを覚えている点を除き、[raw](https://twig.symfony.com/doc/2.x/filters/raw.html) フィルタと同様に機能します。一方、`|raw` フィルタは出力タグ内で直接利用した場合にのみ効果があります。
+これは、変数が他のテンプレート/マクロに渡された場合でも Twig が HTML をエスケープしないことを覚えている点を除き、[raw](https://twig.symfony.com/doc/2.x/filters/raw.html) フィルタと同様に機能します。
 :::
 
 ## `redirectInput`
 
-`<input type="hidden" name="redirect" value="{{ url|hash }}">` を入力するためのショートカットです。
+配列内のエレメントの順序をランダム化します。
 
 ```twig
 {{ redirectInput(url) }}
 ```
 
-オプションで、引数 `options` を渡すことにより、タグに追加の属性をセットできます。
+サイト上のページへの URL を作成するため _だけ_ という点を除けば、[url()](#url-path-params-scheme-mustshowscriptname) と似ています。
 
 ```twig
 {{ redirectInput(url, {
@@ -428,15 +488,15 @@ Twig コアの [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) フ�
 
 ## `seq`
 
-`name` で定義されたシーケンスの次または現在の番号を出力します。
+`siteUrl()` ファンクションは、次の引数を持っています。
 
 ```twig
 <p>This entry has been read {{ seq('hits:' ~ entry.id) }} times.</p>
 ```
 
-ファンクションが呼び出されるたびに、与えられたシーケンスは自動的にインクリメントされます。
+SVG 文書を出力します。
 
-オプションで特定の長さにゼロ詰めした数値にできます。
+次のものを渡すことができます。
 
 ```twig
 {{ now|date('Y') ~ '-' ~ seq('orderNumber:' ~ now|date('Y'), 5) }}
@@ -452,7 +512,7 @@ Twig コアの [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) フ�
 
 ## `shuffle`
 
-配列内のエレメントの順序をランダム化します。
+[attr](filters.md#attr) フィルタを利用して、ルートの `<svg>` ノードに追加する独自の class 名を指定することもできます。
 
 ```twig
 {% set promos = craft.entries.section('promos').all() %}
@@ -469,7 +529,7 @@ Twig コアの [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) フ�
 
 ## `siteUrl`
 
-サイト上のページへの URL を作成するため _だけ_ という点を除けば、[url()](#url-path-params-scheme-mustshowscriptname) と似ています。
+レンダリングせずに、テンプレートのコンテンツを返します。
 
 ```twig
 <a href="{{ siteUrl('company/contact') }}">Contact Us</a>
@@ -477,48 +537,64 @@ Twig コアの [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) フ�
 
 ### 引数
 
-`siteUrl()` ファンクションは、次の引数を持っています。
+Twig コアの [`source`](https://twig.symfony.com/doc/2.x/functions/source.html) ファンクションと同様に機能します。
 
-* **`path`** – 結果となる URL がサイトで指すべきパス。それは、ベースサイト URL に追加されます。
-* **`params`** –  URL に追加するクエリ文字列パラメータ。これは文字列（例：`'foo=1&bar=2'`）または、[ハッシュ](twig-primer.md#hashes)（例：`{foo:'1', bar:'2'}`）が利用可能です。
-* **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
-* **`siteId`** – URL が指すべきサイト ID。デフォルトでは、現在のサイトが使用されます。
+- **`path`** – 結果となる URL がサイトで指すべきパス。 それは、ベースサイト URL に追加されます。
+- **`params`** –  URL に追加するクエリ文字列パラメータ。 これは文字列（例：`'foo=1&bar=2'`）または、[ハッシュ](twig-primer.md#hashes)（例：`{foo:'1', bar:'2'}`）が利用可能です。
+- **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。 デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。 そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
+- **`path`** – 結果となる URL がサイトで指すべきパス。 それは、ベースサイト URL に追加されます。
+
+## `successMessageInput`
+
+完全な HTML タグをレンダリングします。
+
+```twig
+{{ successMessageInput('Custom success message') }}
+```
+
+属性引数に `text` が含まれる場合、その値は HTML エンコードされ、タグのテキストコンテンツとしてセットされます。
+
+```twig
+{{ successMessageInput('Custom success message', {
+    id: 'success-message-input'
+}) }}
+```
 
 ## `svg`
 
-SVG 文書を出力します。
+属性引数に `html` が含まれている（かつ、`text` が含まれていない）場合、その値はタグのインナー HTML としてセットされます（HTML エンコードされません）。
 
-次のものを渡すことができます。
+第二引数に渡される他のすべてのキーは、<yii2:yii\helpers\BaseHtml::renderTagAttributes()> を利用してタグの属性としてセットされます。
 
 - SVG ファイルのパス。
 
-   ```twig
-   {{ svg('@webroot/icons/lemon.svg') }}
-   ```
+  ```twig
+  {{ svg('@webroot/icons/lemon.svg') }}
+  ```
 
 - [アセットフィールド](../assets-fields.md)から引っ張られたような、<craft3:craft\elements\Asset> オブジェクト。
 
-   ```twig
-   {% set image = entry.myAssetsField.one() %}
+  ```twig
+  {% set image = entry.myAssetsField.one() %}
    {% if image and image.extension == 'svg' %}
      {{ svg(image) }}
    {% endif %}
-   ```
+  ```
 
 - 生の SVG マークアップ。
 
-   ```twig
-   {% set image = include('_includes/icons/lemon.svg') %}
+  ```twig
+  {% set image = include('_includes/icons/lemon.svg') %}
    {{ svg(image) }}
-   ```
+  ```
 
-ファンクションにアセットまたは生のマークアップを渡した場合、デフォルトでは SVG は [svg-sanitizer](https://github.com/darylldoyle/svg-sanitizer) を利用して潜在的に悪意のあるスクリプトをサニタイズし、ドキュメント内の ID や class 名が DOM の他の ID や class 名と衝突しないよう名前空間を付加します。引数 `sanitize`、および、`namespace` を利用して、これらの動作を無効にできます。
+ファンクションにアセットまたは生のマークアップを渡した場合、デフォルトでは SVG は [svg-sanitizer](https://github.com/darylldoyle/svg-sanitizer) を利用して潜在的に悪意のあるスクリプトをサニタイズし、ドキュメント内の ID や class 名が DOM の他の ID や class 名と衝突しないよう名前空間を付加します。 引数 `sanitize`、および、`namespace` を利用して、これらの動作を無効にできます。
 
 ```twig
 {{ svg(image, sanitize=false, namespace=false) }}
 ```
 
-[attr](filters.md#attr) フィルタを利用して、ルートの `<svg>` ノードに追加する独自の class 名を指定することもできます。
+`null` または `false` をセットされた属性は、省略されます。
 
 ```twig
 {{ svg('@webroot/icons/lemon.svg')|attr({ class: 'lemon-icon' }) }}
@@ -526,13 +602,14 @@ SVG 文書を出力します。
 
 ## `source`
 
-レンダリングせずに、テンプレートのコンテンツを返します。
+URL を返します。
 
-Twig コアの [`source`](https://twig.symfony.com/doc/2.x/functions/source.html) ファンクションと同様に機能します。
+`url()` ファンクションは、次の引数を持っています。
 
 ## `tag`
 
-完全な HTML タグをレンダリングします。
+::: tip
+クエリ文字列パラメータを追加、および / または、絶対 URL にスキームを適用するために、`url()` ファンクションを使用することができます。
 
 ```twig
 {{ tag('div', {
@@ -541,7 +618,7 @@ Twig コアの [`source`](https://twig.symfony.com/doc/2.x/functions/source.html
 {# Output: <div class="foo"></div> #}
 ```
 
-属性引数に `text` が含まれる場合、その値は HTML エンコードされ、タグのテキストコンテンツとしてセットされます。
+属性が `true` にセットされている場合、値なしで追加されます。
 
 ```twig
 {{ tag('div', {
@@ -550,7 +627,11 @@ Twig コアの [`source`](https://twig.symfony.com/doc/2.x/functions/source.html
 {# Output: <div>Hello</div> #}
 ```
 
-属性引数に `html` が含まれている（かつ、`text` が含まれていない）場合、その値はタグのインナー HTML としてセットされます（HTML エンコードされません）。
+If `html` is included in the attributes argument (and `text` isn’t), its value will be set as the inner HTML of the tag (without getting HTML-encoded).
+
+::: warning
+Be sure you trust any input you provide via `html` since it could be an XSS (cross-site scripting) attack vector. It’s safer to use `text` wherever possible.
+:::
 
 ```twig
 {{ tag('div', {
@@ -559,9 +640,9 @@ Twig コアの [`source`](https://twig.symfony.com/doc/2.x/functions/source.html
 {# Output: <div>Hello<br>world</div> #}
 ```
 
-第二引数に渡される他のすべてのキーは、<yii2:yii\helpers\BaseHtml::renderTagAttributes()> を利用してタグの属性としてセットされます。
+All other keys passed to the second argument will be set as attributes on the tag, using <yii2:yii\helpers\BaseHtml::renderTagAttributes()>.
 
-属性が `true` にセットされている場合、値なしで追加されます。
+If an attribute is set to `true`, it will be added without a value.
 
 ```twig
 {{ tag('input', {
@@ -572,27 +653,61 @@ Twig コアの [`source`](https://twig.symfony.com/doc/2.x/functions/source.html
 {# Output: <input id="foo" name="bar" required> #}
 ```
 
-`null` または `false` をセットされた属性は、省略されます。
+Any attribute set to `null` or `false` will be omitted.
+
+## `ul`
+
+Outputs an array of items as an unordered list.
+
+```twig
+{% set titles = craft.entries()
+    .section('news')
+    .select('title')
+    .column() %}
+{{ ul(titles) }}
+{# Output:
+<ul>
+    <li>Shocking Foo</li>
+    <li>You Won’t Believe This Bar</li>
+    <li>Ten Baz You Can’t Live Without</li>
+</ul>
+#}
+```
+
+### Arguments
+
+The `ul()` function has the following arguments:
+
+- **`items`** – An array of items to be wrapped in `<li>`s. These will be HTML-encoded by default.
+- **`params`** – An attributes argument where each key+value will be set as attributes on the `<ul>`, with the exception of two special options:
+    - **`encode: false`** – Prevents the list items from being HTML-encoded.
+    - **`itemOptions: {...}`** – Tag attributes to be applied to each of the `<li>`s.
 
 ## `url`
 
-URL を返します。
+Returns a URL.
 
 ```twig
 <a href="{{ url('company/contact') }}">Contact Us</a>
 ```
 
-### 引数
+### Arguments
 
-`url()` ファンクションは、次の引数を持っています。
+The `url()` function has the following arguments:
 
-* **`path`** – 結果となる URL がサイトで指すべきパス。それは、ベースサイト URL に追加されます。
-* **`params`** –  URL に追加するクエリ文字列パラメータ。これは文字列（例：`'foo=1&bar=2'`）または、[ハッシュ](twig-primer.md#hashes)（例：`{foo:'1', bar:'2'}`）が利用可能です。
-* **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
-* **`mustShowScriptName`** – ここに `true` がセットされている場合、「index.php」を含めた URL が返され、コンフィグ設定 <config3:omitScriptNameInUrls> は無視されます。（ブラウザのアドレスバーに表示されない URL と .htaccess ファイルのリダイレクトとの衝突を避けたいような、Ajax 経由の POST リクエストで使用される URL の場合に有用です。）
+- **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
+- **`params`** –  URL に追加するクエリ文字列パラメータ。 これは文字列（例：`'foo=1&bar=2'`）または、[ハッシュ](twig-primer.md#hashes)（例：`{foo:'1', bar:'2'}`）が利用可能です。
+- **`scheme`** – URL が使用するスキーム（`'http'` または `'https'`）。 デフォルト値は、現在のリクエストが SSL 経由で配信されているかどうかに依存します。 そうでなければ、サイト URL のスキームが使用され、SSL 経由なら `https` が使用されます。
+- **`mustShowScriptName`** – If this is set to `true`, then the URL returned will include “index.php”, disregarding the <config3:omitScriptNameInUrls> config setting. （ブラウザのアドレスバーに表示されない URL と .htaccess ファイルのリダイレクトとの衝突を避けたいような、Ajax 経由の POST リクエストで使用される URL の場合に有用です。 ）
+
+Using the `url()` function has advantages over hard-coding URLs in your templates:
+
+- Generated URLs will encourage consistency by respecting settings like [addTrailingSlashesToUrls](config3:addTrailingSlashesToUrls).
+- Your site will be more portable, making it easier to do something like move to a new domain or subdomain.
+- If the page has a `token` URL parameter, that token will automatically get appended to generated URLs to maintain preview context navigating around the site.
 
 ::: tip
-クエリ文字列パラメータを追加、および / または、絶対 URL にスキームを適用するために、`url()` ファンクションを使用することができます。
+You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
 ```twig
 {{ url('http://my-project.com', 'foo=1', 'https') }}
 {# Outputs: "https://my-project.com?foo=1" #}

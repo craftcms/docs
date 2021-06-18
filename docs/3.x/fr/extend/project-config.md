@@ -169,6 +169,20 @@ public function saveProductType($productType)
     }
 
     // Fire a 'beforeSaveProductType' event?
+    ]);
+
+    // Now set the ID on the product type in case the
+    // caller needs to know it
+    if ($isNew) {
+        $productType->id = Db::idByUid('{{%producttypes}}', $productType->uid);
+    }
+
+    return true;
+}
+
+public function deleteProductType($productType)
+{
+    // Fire a 'beforeDeleteProductType' event?
     if ($this->hasEventHandlers('beforeSaveProductType')) {
         $this->trigger('beforeSaveProductType', new ProducTypeEvent([
             'productType' => $productType,
@@ -186,20 +200,6 @@ public function saveProductType($productType)
     Craft::$app->projectConfig->set($path, [
         'name' => $productType->name,
         // ...
-    ]);
-
-    // Now set the ID on the product type in case the
-    // caller needs to know it
-    if ($isNew) {
-        $productType->id = Db::idByUid('{{%producttypes}}', $productType->uid);
-    }
-
-    return true;
-}
-
-public function deleteProductType($productType)
-{
-    // Fire a 'beforeDeleteProductType' event?
     if ($this->hasEventHandlers('beforeDeleteProductType')) {
         $this->trigger('beforeDeleteProductType', new ProducTypeEvent([
             'productType' => $productType,
@@ -241,6 +241,10 @@ public function safeUp()
 }
 ```
 
+::: warning
+Craft never forces Project Config changes to be applied. Code defensively and make sure your plugin works normally _without_ relying on project config YAML changes.
+:::
+
 ## Rebuilding Project Config Data
 
 If your plugin is storing data in both the project config and elsewhere in the database, you should listen to <craft3:craft\services\ProjectConfig::EVENT_REBUILD> (added in Craft 3.1.20) to aid Craft in rebuilding the project config based on database-stored data, when the `php craft project-config/rebuild` command is run.
@@ -252,6 +256,6 @@ use yii\base\Event;
 
 Event::on(ProjectConfig::class, ProjectConfig::EVENT_REBUILD, function(RebuildConfigEvent $e) {
     // Add plugin's project config data...
-   $e->config['myPlugin']['key'] = $value;
+        $e->config['myPlugin']['key'] = $value;
 });
 ```

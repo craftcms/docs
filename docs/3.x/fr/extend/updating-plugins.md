@@ -85,7 +85,9 @@ Here’s how it works:
 - A base implementation of the component type is provided by an abstract base class (e.g. <craft3:craft\base\Field>).
 - The base class is extended by the various component classes (e.g. <craft3:craft\fields\PlainText>).
 
-
+::: warning
+There is no direct Craft 3 equivalent for this hook, which allowed plugins to completely change the table attributes for an element type right before the element index view was rendered. The closest thing in Craft 3 is the <craft3:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> event, which can be used to change the available table attributes for an element type when an admin is customizing the element index sources.
+:::
 
 ## Translations
 
@@ -963,7 +965,7 @@ use yii\base\Event;
 
 Event::on(View::class, View::EVENT_END_BODY, function(Event $event) {
     // $html = ...
-    echo $html;
+        echo $html;
 });
 ```
 :::

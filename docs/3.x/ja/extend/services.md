@@ -87,6 +87,8 @@ An example flow for a saveRecipe() method.
 ```php
 public function saveRecipe(Recipe $recipe, $runValidation = true)
 {
+    $isNewRecipe = !$recipe->id;
+
     // Fire a 'beforeSaveRecipe' event
     $this->trigger(self::EVENT_BEFORE_SAVE_RECIPE, new RecipeEvent([
         'recipe' => $recipe,
@@ -97,8 +99,6 @@ public function saveRecipe(Recipe $recipe, $runValidation = true)
         \Craft::info('Recipe not saved due to validation error.', __METHOD__);
         return false;
     }
-
-    $isNewRecipe = !$recipe->id;
 
     // ... Save the recipe here ...
 
@@ -125,6 +125,8 @@ public function saveIngredient(IngredientInterface $ingredient, $runValidation =
 {
     /** @var Ingredient $ingredient */
 
+    $isNewIngredient = !$ingredient->id;
+
     // Fire a 'beforeSaveIngredient' event
     $this->trigger(self::EVENT_BEFORE_SAVE_INGREDIENT, new IngredientEvent([
         'ingredient' => $ingredient,
@@ -139,8 +141,6 @@ public function saveIngredient(IngredientInterface $ingredient, $runValidation =
         \Craft::info('Ingredient not saved due to validation error.', __METHOD__);
         return false;
     }
-
-    $isNewIngredient = !$ingredient->id;
 
     $transaction = \Craft::$app->getDb()->beginTransaction();
     try {

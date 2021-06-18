@@ -7,6 +7,7 @@ Matrix fields allow you to create multiple blocks of content within a single fie
 Matrix fields have the following settings:
 
 - **Configuration** – This is where you configure which block types should be available to your Matrix field, and which sub-fields each of those block types should have.
+- **Min Blocks** – The minimum number of blocks that can be created within the field. (Default is no limit.)
 - **Max Blocks** – The maximum number of blocks that can be created within the field. (Default is no limit.)
 
 ## The Field
@@ -38,41 +39,30 @@ Possible values include:
 | `':empty:'`    | that don’t have any Matrix blocks.   |
 | `':notempty:'` | that have at least one Matrix block. |
 
+::: code
 ```twig
 {# Fetch entries with a Matrix block #}
 {% set entries = craft.entries()
     .myFieldHandle(':notempty:')
     .all() %}
 ```
+```php
+// Fetch entries with a Matrix block
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle(':notempty:')
+    ->all();
+```
+:::
 
 ### Working with Matrix Field Data
 
 If you have an element with a Matrix field in your template, you can access its blocks using your Matrix field’s handle:
 
+::: code
 ```twig
 {% set query = entry.myFieldHandle %}
 ```
-
-That will give you a [Matrix block query](matrix-blocks.md#querying-matrix-blocks), prepped to output all of the enabled blocks for the given field.
-
-To loop through all of the blocks, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
-
-```twig
-{% set blocks = entry.myFieldHandle.all() %}
-{% if blocks|length %}
-    <ul>
-        {% for block in blocks %}
-            <!-- ... -->
-        {% endfor %}
-    </ul>
-{% endif %}
-```
-
-All of the code you put within the for-loop will be repeated for each Matrix block in the field. The current block will get set to that `block` variable we’ve defined, and it will be a <craft3:craft\elements\MatrixBlock> model.
-
-Here’s an example of what the template might look like for a Matrix field with four block types (Heading, Text, Image, and Quote). We can determine the current block type’s handle by checking `block.type` (<craft3:craft\elements\MatrixBlock::getType()>).
-
-```twig
+```php
 {% for block in entry.myFieldHandle.all() %}
     {% if block.type == "heading" %}
         <h3>{{ block.heading }}</h3>
@@ -91,42 +81,121 @@ Here’s an example of what the template might look like for a Matrix field with
     {% endif %}
 {% endfor %}
 ```
+:::
+
+To loop through all of the blocks, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
+
+If you only want the first block, call [one()](craft3:craft\db\Query::one()) instead of `all()`, and then make sure it returned something:
+
+::: code
+```twig
+{% set blocks = entry.myFieldHandle.all() %}
+{% if blocks|length %}
+    <ul>
+        {% for block in blocks %}
+            <!-- ... -->
+        {% endfor %}
+    </ul>
+{% endif %}
+```
+```php
+{% set block = entry.myFieldHandle.one() %}
+{% if block %}<!-- ...
+    -->{% endif %}
+```
+:::
+
+All of the code you put within the for-loop will be repeated for each Matrix block in the field. The current block will get set to that `block` variable we’ve defined, and it will be a <craft3:craft\elements\MatrixBlock> model.
+
+Here’s an example of what the template might look like for a Matrix field with four block types (Heading, Text, Image, and Quote). We can determine the current block type’s handle by checking `block.type` (<craft3:craft\elements\MatrixBlock::getType()>).
+
+```twig
+{% for block in entry.myFieldHandle.all() %}
+    {% if block.type == "heading" %}
+        <h3>{{ block.heading }}</h3>
+    {% elseif block.type == "text" %}
+        {{ block.text|markdown }}
+    {% elseif block.type == "image" %}
+        {% set image = block.image.one() %}
+        {% if image %}
+            <img src="{{ image.getUrl('thumb') }}" 
+                width="{{ image.getWidth('thumb') }}" 
+                height="{{ image.getHeight('thumb') }}" 
+                alt="{{ image.title }}"
+            >
+        {% endif %}
+    {% elseif block.type == "quote" %}
+        <blockquote>
+            <p>{{ block.quote }}</p>
+            <cite>– {{ block.cite }}</cite>
+        </blockquote>
+    {% endif %}
+{% endfor %}
+```
 
 ::: tip
 This code can be simplified using the [switch](dev/tags.md#switch) tag.
 :::
 
-If you only want the first block, call [one()](craft3:craft\db\Query::one()) instead of `all()`, and then make sure it returned something:
+If you only want the first block, call [one()](craft3:craft\db\Query::one()) instead of `all()`, and make sure it returned something:
 
+::: code
 ```twig
 {% set block = entry.myFieldHandle.one() %}
-{% if block %}
-    <!-- ... -->
-{% endif %}
+{% if block %}<!-- ... -->{% endif %}
 ```
+```php
+{% set blocks = entry.myFieldHandle.all() %}
+{% if blocks|length %}
+    <ul>
+        {% for block in blocks %}
+            <!-- ...
+}
+```
+:::
 
 If you only want to know the total number of blocks, call [count()](craft3:craft\db\Query::count()).
 
+::: code
 ```twig
 {% set total = entry.myFieldHandle.count() %}
 <p>Total blocks: <strong>{{ total }}</strong></p>
 ```
+```php
+$total = $entry->myFieldHandle->count();
+// Total blocks: $total
+```
+:::
 
-If you just need to check if are blocks exist (but don’t need to fetch them), you can call [exists()](craft3:craft\db\Query::exists()):
+If you just need to check if blocks exist (but don’t need to fetch them), you can call [exists()](craft3:craft\db\Query::exists()):
 
+::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
     <p>There are blocks!</p>
 {% endif %}
 ```
+```php
+if ($entry->myFieldHandle->exists()) {
+    // There are blocks!
+}
+```
+:::
 
 You can set [parameters](matrix-blocks.md#parameters) on the Matrix block query as well. For example, to only fetch blocks of type `text`, set the [type](matrix-blocks.md#type) param:
 
+::: code
 ```twig
 {% set blocks = clone(entry.myFieldHandle)
     .type('text')
     .all() %}
 ```
+```php
+$blocks = (clone $entry->myFieldHandle)
+    ->type('text')
+    ->all();
+```
+:::
 
 ::: tip
 It’s always a good idea to clone the Matrix query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.

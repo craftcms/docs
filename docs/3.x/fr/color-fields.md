@@ -6,6 +6,7 @@ Color fields give you a hexadecimal color input with a preview of the current co
 
 Calling a Color field in your templates will return a <craft3:craft\fields\data\ColorData> object, or `null` if no color was selected.
 
+::: code
 ```twig
 {% if entry.linkColor %}
     <style type="text/css">
@@ -15,3 +16,9 @@ Calling a Color field in your templates will return a <craft3:craft\fields\data\
     </style>
 {% endif %}
 ```
+```php
+if ($entry->myFieldHandle) {
+    // $entry->myFieldHandle->getHex()
+}
+```
+:::

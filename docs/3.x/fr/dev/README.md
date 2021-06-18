@@ -6,8 +6,8 @@ Templates are files that live within your `templates/` folder. The structure of 
 
 Craft uses [Twig](https://twig.symfony.com/) to parse your templates. Twig is elegant, powerful, and blazing fast. If you’re new to Twig, be sure to read the [Twig Primer](twig-primer.md) to familiarize yourself with its syntax.
 
-::: tip
-PHP code isn’t allowed in your templates, but Craft provides various ways to [extend Twig](../extend/extending-twig.md) to suit your needs.
+::: tip PHP
+code isn’t allowed in your templates, but Craft provides various ways to [extend Twig](../extend/extending-twig.md) to suit your needs.
 :::
 
 ## Template Paths

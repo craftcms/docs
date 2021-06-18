@@ -58,7 +58,7 @@ if (Plugin::getInstance()->is(Plugin::EDITION_PRO) {
 
 `$operator` is how you wish to compare that edition with the installed edition. By default it is set to `=`, which tests for version equality.
 
-The following operators are also supported:
+The following operators are also supported: Operator | Tests if the active edition is ____ the given edition
 Operator | Tests if the active edition is ____ the given edition
 - | - `<` or `lt` | …less than… `<=` or `le` | …less than or equal to… `>` or `gt` | …greater than… `>=` or `ge` | …greater than or equal to… `==` or `eq` | …equal to… (same as default behavior) `!=`, `<>`, or `ne` | …not equal to…
 

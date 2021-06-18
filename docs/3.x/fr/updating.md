@@ -8,8 +8,7 @@ This section displays both Craft CMS updates and plugin updates. Each update has
 
 You can run all of the updates (Craft, all plugin updates available) using the Update All button at the top left of the Updates page.
 
-::: tip
-Craft’s [changelog](https://github.com/craftcms/cms/blob/main/CHANGELOG.md) will warn you of any critical changes at the top of the release notes. While there aren’t usually any warnings, it’s always a good idea to check before updating.
+While there aren’t usually any warnings, it’s always a good idea to check before updating. ::: tip Craft’s [changelog](https://github.com/craftcms/cms/blob/main/CHANGELOG.md) will warn you of any critical changes at the top of the release notes.
 :::
 
 ## Updating from the Terminal
@@ -22,7 +21,7 @@ To see available updates, go to your Craft project in your terminal and run this
 php craft update
 ```
 
-![An example interaction with the <code>update</code> command.](./images/cli-update-info.png)
+![An example interaction with the ](./images/cli-update-info.png)
 
 To update everything all at once, run this command:
 
@@ -36,7 +35,7 @@ To update a specific thing, replace `all` with its handle (either `craft` to upd
 php craft update element-api
 ```
 
-![An example interaction with the <code>update <handle></code> command.](./images/cli-update-plugin.png)
+![update <handle></code> command."](./images/cli-update-plugin.png)
 
 You can also pass multiple handles in at once:
 

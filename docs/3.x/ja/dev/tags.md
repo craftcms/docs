@@ -1,143 +1,162 @@
 # タグ
 
-Craft の Twig テンプレートで利用可能な[タグ](https://twig.symfony.com/doc/2.x/templates.html#control-structure)は、以下の通りです。
+タグを利用して、[エントリ](sections-and-entries.md)、[ユーザー](users.md)、および、[アセット](assets.md)の分類を作成できます。
 
-| タグ | 説明 |
---- | -----------
-| [apply](https://twig.symfony.com/doc/2.x/tags/apply.html) | ネストされたテンプレートコードに Twig フィルタを適用します。 |
-| [autoescape](https://twig.symfony.com/doc/2.x/tags/autoescape.html) | ネストされたテンプレートコードのエスケープ方針をコントロールします。 |
-| [block](https://twig.symfony.com/doc/2.x/tags/block.html) | テンプレートブロックを定義します。 |
-| [cache](#cache) | テンプレートの一部をキャッシュします。 |
-| [css](#css) | ページに `<style>` タグを登録します。 |
-| [dd](#dd) | ダンプして停止します。 |
-| [deprecated](https://twig.symfony.com/doc/2.x/tags/deprecated.html) | PHP の非推奨エラーをトリガーします。 |
-| [do](https://twig.symfony.com/doc/2.x/tags/do.html) | 実行します。 |
-| [embed](https://twig.symfony.com/doc/2.x/tags/embed.html) | 別のテンプレートをエンベッドします。 |
-| [exit](#exit) | リクエストを終了します。 |
-| [extends](https://twig.symfony.com/doc/2.x/tags/extends.html) | 別のテンプレートを拡張します。 |
-| [for](https://twig.symfony.com/doc/2.x/tags/for.html) | 配列をループします。 |
-| [from](https://twig.symfony.com/doc/2.x/tags/from.html) | テンプレートからマクロをインポートします。 |
-| [header](#header) | レスポンスに HTML ヘッダーをセットします。 |
-| [hook](#hook) | テンプレートフックを呼び出します。 |
-| [html](#html) | ページに任意の HTML コードを登録します。 |
-| [if](https://twig.symfony.com/doc/2.x/tags/if.html) | ネストされたテンプレートコードを条件付きで実行します。 |
-| [import](https://twig.symfony.com/doc/2.x/tags/import.html) | テンプレートからマクロをインポートします。 |
-| [include](https://twig.symfony.com/doc/2.x/tags/include.html) | 別のテンプレートをインクルードします。 |
-| [js](#js) | ページに `<script>` タグを登録します。 |
-| [macro](https://twig.symfony.com/doc/2.x/tags/macro.html) | マクロを定義します。 |
-| [namespace](#namespace) | CSS セレクタだけでなく、入力項目の name や HTML 属性に名前空間を割り当てます。 |
-| [nav](#nav) | 階層的なナビゲーションメニューを作成します。 |
-| [paginate](#paginate) | エレメントクエリをページ分割します。 |
-| [redirect](#redirect) | ブラウザをリダイレクトします。 |
-| [requireGuest](#requireguest) | ユーザーがログインしていない必要があります。 |
-| [requireLogin](#requirelogin) | ユーザーがログインしている必要があります。 |
-| [requirePermission](#requirepermission) | 特定の権限を持つユーザーがログインしている必要があります。 |
-| [set](https://twig.symfony.com/doc/2.x/tags/set.html) | 変数をセットします。 |
-| [switch](#switch) | 指定された値に基づいて、テンプレートの出力を切り替えます。 |
-| [use](https://twig.symfony.com/doc/2.x/tags/use.html) | 別のテンプレートを水平方向に継承します。 |
-| [verbatim](https://twig.symfony.com/doc/2.x/tags/verbatim.html) | ネストされた Twig コードの解析を無効にします。 |
-| [with](https://twig.symfony.com/doc/2.x/tags/with.html) | ネストされたテンプレートのスコープを作成します。 |
+| Param                                                                 | タグ                                                                                                                                                                                                                                                                                     |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [anyStatus](https://twig.symfony.com/doc/2.x/tags/apply.html)         | Removes element filters based on their statuses.                                                                                                                                                                                                                                       |
+| [asArray](https://twig.symfony.com/doc/2.x/tags/autoescape.html)      | Causes the query to return matching tags as arrays of data, rather than [Tag](craft3:craft\elements\Tag) objects.                                                                                                                                                                    |
+| [clearCachedResult](https://twig.symfony.com/doc/2.x/tags/block.html) | Clears the cached result.                                                                                                                                                                                                                                                              |
+| [dateCreated](#cache)                                                 | Narrows the query results based on the tags’ creation dates.                                                                                                                                                                                                                           |
+| [dateUpdated](#css)                                                   | Narrows the query results based on the tags’ last-updated dates.                                                                                                                                                                                                                       |
+| [fixedOrder](#dd)                                                     | Causes the query results to be returned in the order specified by [id](#id).                                                                                                                                                                                                           |
+| [group](https://twig.symfony.com/doc/2.x/tags/deprecated.html)        | Narrows the query results based on the tag groups the tags belong to.                                                                                                                                                                                                                  |
+| [groupId](https://twig.symfony.com/doc/2.x/tags/do.html)              | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.                                                                                                                                                                                             |
+| [id](https://twig.symfony.com/doc/2.x/tags/embed.html)                | Narrows the query results based on the tags’ IDs.                                                                                                                                                                                                                                      |
+| [ignorePlaceholders](#exit)                                           | Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement). |
+| [inReverse](https://twig.symfony.com/doc/2.x/tags/extends.html)       | Causes the query results to be returned in reverse order.                                                                                                                                                                                                                              |
+| [limit](https://twig.symfony.com/doc/2.x/tags/for.html)               | Determines the number of tags that should be returned.                                                                                                                                                                                                                                 |
+| [offset](https://twig.symfony.com/doc/2.x/tags/from.html)             | Determines how many tags should be skipped in the results.                                                                                                                                                                                                                             |
+| [orderBy](#header)                                                    | レスポンスに HTML ヘッダーをセットします。                                                                                                                                                                                                                                                               |
+| [preferSites](#hook)                                                  | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.                                                                                                                                                                          |
+| [relatedTo](#html)                                                    | Narrows the query results to only tags that are related to certain other elements.                                                                                                                                                                                                     |
+| [search](https://twig.symfony.com/doc/2.x/tags/if.html)               | Narrows the query results to only tags that match a search query.                                                                                                                                                                                                                      |
+| [site](https://twig.symfony.com/doc/2.x/tags/import.html)             | Determines which site(s) the tags should be queried in.                                                                                                                                                                                                                                |
+| [siteId](https://twig.symfony.com/doc/2.x/tags/include.html)          | Determines which site(s) the tags should be queried in, per the site’s ID.                                                                                                                                                                                                             |
+| [title](#js)                                                          | Narrows the query results based on the tags’ titles.                                                                                                                                                                                                                                   |
+| [trashed](https://twig.symfony.com/doc/2.x/tags/macro.html)           | Narrows the query results to only tags that have been soft-deleted.                                                                                                                                                                                                                    |
+| [uid](#namespace)                                                     | Narrows the query results based on the tags’ UIDs.                                                                                                                                                                                                                                     |
+| [unique](#nav)                                                        | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                                                      |
+| [uri](#paginate)                                                      | Narrows the query results based on the tags’ URIs.                                                                                                                                                                                                                                     |
+| [inReverse](#redirect)                                                | Causes the query to return matching tags eager-loaded with related elements.                                                                                                                                                                                                           |
+| [requireGuest](#requireguest)                                         | ユーザーがログインしていない必要があります。                                                                                                                                                                                                                                                                 |
+| [requireLogin](#requirelogin)                                         | ユーザーがログインしている必要があります。                                                                                                                                                                                                                                                                  |
+| [requirePermission](#requirepermission)                               | 特定の権限を持つユーザーがログインしている必要があります。                                                                                                                                                                                                                                                          |
+| [group](https://twig.symfony.com/doc/2.x/tags/set.html)               | 変数をセットします。                                                                                                                                                                                                                                                                             |
+| [script](#script)                                                     | Renders an HTML script tag on the page.                                                                                                                                                                                                                                                |
+| [switch](#switch)                                                     | 指定された値に基づいて、テンプレートの出力を切り替えます。                                                                                                                                                                                                                                                          |
+| [tag](#tag)                                                           | `{% paginate %}` タグに続けて [for](https://twig.symfony.com/doc/tags/for.html) タグを利用し、このページの結果をループする必要があります。                                                                                                                                                                                |
+| [use](https://twig.symfony.com/doc/2.x/tags/use.html)                 | 別のテンプレートを水平方向に継承します。                                                                                                                                                                                                                                                                   |
+| [verbatim](https://twig.symfony.com/doc/2.x/tags/verbatim.html)       | ネストされた Twig コードの解析を無効にします。                                                                                                                                                                                                                                                             |
+| [with](https://twig.symfony.com/doc/2.x/tags/with.html)               | ネストされたテンプレートのスコープを作成します。                                                                                                                                                                                                                                                               |
 
-## `cache`
+## `search`
 
-このタグはテンプレートの一部をキャッシュします。実行する作業が減るため、後からのリクエストのパフォーマンスを向上させます。
+タグを作成する前に、それらを含めるためのタググループを作成しなければなりません。
 
 ```twig
-{% cache %}
-    {% for block in entry.myMatrixField.all() %}
-        <p>{{ block.text }}</p>
-    {% endfor %}
-{% endcache %}
+{# Create a new tag query #}
+{% set myTagQuery = craft.tags() %}
 ```
 
-キャッシュタグはロジックではなく出力をキャッシュするためのものなので、`{{ csrfInput() }}`、フォーム項目、または、動的な出力が期待されるテンプレートの部品をキャッシュすることは避けてください。
+新しいタググループを作るには、「設定 > タグ」に移動し、「新しいタググループ」ボタンをクリックします。
 
-警告：異常なページの読み込み時間で苦しむ場合、最適なホスティング環境を経験していないかもしれません。`{% cache %}` を試す前に、専門家に相談してください。`{% cache %}` は高速なデータベース接続、効率的なテンプレート、または適度なクエリ数に代わるものではありません。可能性のある副作用には、古くなったコンテンツ、過度に時間のかかるバックグラウンドタスク、動かなくなったタスク、および、稀に消滅があります。`{% cache %}` が適切かどうかをホスティングプロバイダに問い合わせてください。
+警告：異常なページの読み込み時間で苦しむ場合、最適なホスティング環境を経験していないかもしれません。 `{% cache %}` を試す前に、専門家に相談してください。 `{% cache %}` は高速なデータベース接続、効率的なテンプレート、または適度なクエリ数に代わるものではありません。 可能性のある副作用には、古くなったコンテンツ、過度に時間のかかるバックグラウンドタスク、動かなくなったタスク、および、稀に消滅があります。 `{% cache %}` が適切かどうかをホスティングプロバイダに問い合わせてください。
 
-デフォルトでは、キャッシュされた出力はクエリ文字列に関係なく URL によって保持されます。
+どこか（エントリなど）にタグを割り当てるには、[タグフィールド](tags-fields.md)を作成し、フィールドレイアウトで追加しなければなりません。
 
 慎重に配置された `{% cache %}` タグは、パフォーマンスを大幅に向上させることができますが、キャッシュタグのパラメーターをどのように利用すればその挙動を微調整できるかを知ることが重要です。
 
 ### パラメータ
 
-`{% cache %}` タグは、次のパラメータをサポートしています。
+You can fetch tags in your templates or PHP code using **tag queries**.
 
-#### `globally`
+#### `anyStatus`
 
-URL ごとではなく、（現在のサイトロケールのための）グローバルな出力をキャッシュします。
+::: code
 
 ```twig
-{% cache globally %}
+// Create a new tag query
+$myTagQuery = \craft\elements\Tag::find();
 ```
 
-#### `using key`
+#### `asArray`
 
-キャッシュが使用するキーの名前を指定します。キーを変更すると、タグのコンテンツは再レンダリングされます。これを指定しない場合、Twig がテンプレートを再解析するたびにランダムなキーが生成されます。
+キャッシュが使用するキーの名前を指定します。 キーを変更すると、タグのコンテンツは再レンダリングされます。 これを指定しない場合、Twig がテンプレートを再解析するたびにランダムなキーが生成されます。
 
 ```twig
-{% cache using key "page-header" %}
+{# Create a tag query with the 'group' parameter #}
+{% set myTagQuery = craft.tags()
+    .group('blogTags') %}
+
+{# Fetch the tags #}
+{% set tags = myTagQuery.all() %}
+
+{# Display the tag list #}
+<ul>
+    {% for tag in tags %}
+        <li><a href="{{ url('blog/tags/'~tag.id) }}">{{ tag.title }}</a></li>
+    {% endfor %}
+</ul>
 ```
 
 ::: warning
-カスタムキーを利用している `{% cache %}` 内のテンプレートコードを変更する場合、既存のテンプレートキャッシュは自動的にパージされません。タグに新しいキーを割り当てるか、「ユーティリティ > キャッシュ」ツールの「データキャッシュ」を選択して、既存のテンプレートキャッシュを手動でクリアする必要があります。
+カスタムキーを利用している `{% cache %}` 内のテンプレートコードを変更する場合、既存のテンプレートキャッシュは自動的にパージされません。 タグに新しいキーを割り当てるか、「ユーティリティ > キャッシュ」ツールの「データキャッシュ」を選択して、既存のテンプレートキャッシュを手動でクリアする必要があります。 :::
 :::
 
-動的キーを指定し、[globally](#globally) と組み合わせることで、テンプレートキャッシュをより細かくコントールできます。例えば、デフォルトでは無視されるクエリ文字列 *と* URL に基づいてキャッシュすることができます。
+動的キーを指定し、[globally](#globally) と組み合わせることで、テンプレートキャッシュをより細かくコントールできます。 例えば、デフォルトでは無視されるクエリ文字列 *と* URL に基づいてキャッシュすることができます。
 
 ```twig
-{% set request = craft.app.request %}
-{% set uriWithQueryString = request.fullUri ~ request.queryStringWithoutPath %}
-{% cache globally using key uriWithQueryString %}
+{# Fetch all tags, regardless of status #}
+{% set tags = craft.tags()
+    .anyStatus()
+    .all() %}
 ```
 
-#### `for`
+#### `clearCachedResult`
 
-キャッシュが有効期限になるまでの時間。
+We can display a list of the tags in a “Blog Tags” tag group by doing the following:
 
 ```twig
-{% cache for 3 weeks %}
+// Fetch all tags, regardless of status
+$tags = \craft\elements\Tag::find()
+    ->anyStatus()
+    ->all();
 ```
 
-許可される継続時間の単位は、次の通りです。
+Tag queries support the following parameters:
 
-- `sec`(`s`)
-- `second`(`s`)
-- `min`(`s`)
-- `minute`(`s`)
-- `hour`(`s`)
-- `day`(`s`)
-- `fortnight`(`s`)
-- `forthnight`(`s`)
-- `month`(`s`)
-- `year`(`s`)
-- `week`(`s`)
+- with a URI of `foo`.
+- from a site with an ID of `1` or `2`.
+- ::: code
+- from the site with a handle of `foo`.
+- with a title of `Foo`.
+- Fetch the tags with `.all()`.
+- ::: code
+- ::: code
+- ::: code
+- ::: code
+- from a site with a handle of `foo` or `bar`.
 
 ヒント：このパラメータが省略される場合、コンフィグ設定 <config3:cacheDuration> がデフォルトの継続時間を定義するために使用されます。
 
-#### `until`
+#### `dateCreated`
 
-キャッシュの有効期限を [DateTime](http://php.net/manual/en/class.datetime.php) オブジェクトで定義します。
+::: code
 
 ```twig
-{% cache until entry.eventDate %}
+{# Fetch tags as arrays #}
+{% set tags = craft.tags()
+    .asArray()
+    .all() %}
 ```
 
 ::: tip
-単一の `{% cache %}` タグで利用できるのは、[for](#for) **_または_** [until](#until) のいずれかのみです。
+This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
 :::
 
-#### `if`
+#### `dateUpdated`
 
-ある条件が満足される場合のみ、 `{% cache %}` タグを作動させます。
+Causes the query to return matching tags as arrays of data, rather than [Tag](craft3:craft\elements\Tag) objects.
 
 ```twig
 {## Only cache if this is a mobile browser #}
 {% cache if craft.app.request.isMobileBrowser() %}
 ```
 
-#### `unless`
+#### `fixedOrder`
 
-ある条件が満たされる場合、`{% cache %}` タグが作動しないようにします。
+::: code
 
 ```twig
 {## Don't cache if someone is logged in #}
@@ -145,45 +164,46 @@ URL ごとではなく、（現在のサイトロケールのための）グロ�
 ```
 
 ::: tip
-単一の `{% cache %}` タグで利用できるのは、[if](#if) **_または_** [unless](#unless) のいずれかのみです。
+See [Element Queries](element-queries.md) to learn about how element queries work.
 :::
 
 ### キャッシュのクリア
 
-タグ内のエレメント（エントリ、アセットなど）が保存または削除されると、テンプレートキャッシュは自動的にクリアされます。
+Clears the cached result.
 
-タグ内にエレメント _クエリ_（例：`craft.entries`）を持ち、クエリの1つによって返される新しいエレメントを作成する場合、Craft はそれを判断してキャッシュをクリアすることもできます。
+Narrows the query results based on the tags’ creation dates.
 
-ユーティリティページから「キャッシュをクリア」ツールを利用、または、コンソールコマンド `invalidate-tags/template` を利用して、テンプレートキャッシュを手動でクリアすることもできます。
+Possible values include:
 
 ```bash
-php craft invalidate-tags/template
+// Fetch tags created last month
+$start = (new \DateTime('first day of last month'))->format(\DateTime::ATOM);
+$end = (new \DateTime('first day of this month'))->format(\DateTime::ATOM);
+
+$tags = \craft\elements\Tag::find()
+    ->dateCreated(['and', ">= {$start}", "< {$end}"])
+    ->all();
 ```
 
 ### どんなときに `{% cache %}` タグを使うのか
 
-沢山のデータベースクエリを引き起こすテンプレートがある場合、または Twig の計算上非常にコストがかかる処理を行っているときは、`{% cache %}` タグを使うべきです。
+::: code
 
 それらを使用する場合のいくつかの例です。
 
-* エントリの大きなリスト
-* いくつかのブロックが関連フィールドを持ち、独自のデータベースクエリをページに追加している行列フィールドのループ
-* 他のサイトからデータを取得しているときはいつでも
+- エントリの大きなリスト
+- いくつかのブロックが関連フィールドを持ち、独自のデータベースクエリをページに追加している行列フィールドのループ
+- 他のサイトからデータを取得しているときはいつでも
 
-それらを使用するのがよいアイデア _ではない_ 場合のいくつかの例です。
+Narrows the query results based on the tags’ last-updated dates.
 
-* 静的なテキストにキャッシュを使用しないでください。シンプルにテキストを出力するよりも、コストが高くなります。
-* 他を拡張するテンプレート内で、トップレベルの `{% block %}` タグの外側で使用することはできません。
-* `{% cache %}` タグは HTML のみキャッシュします。そのため、キャッシュ対象となる実際の HTML を出力しない [{% css %}](#css) や [{% js %}](#js) のようなタグの内部で使うことは、意味をなしません。
+- 静的なテキストにキャッシュを使用しないでください。 シンプルにテキストを出力するよりも、コストが高くなります。
+- 他を拡張するテンプレート内で、トップレベルの `{% block %}` タグの外側で使用することはできません。
+- ::: tip 単一の `{% cache %}` タグで利用できるのは、[for](#for) **_または_** [until](#until) のいずれかのみです。
+:::
 
-   ```twig
-   {## Bad: #}
-
-   {% extends "_layout" %}
-   {% cache %}
-       {% block "content" %}
-           ...
-       {% endblock %}
+    ```twig
+    {% endblock %}
    {% endcache %}
 
    {## Good: #}
@@ -192,79 +212,90 @@ php craft invalidate-tags/template
    {% block "content" %}
        {% cache %}
            ...
-       {% endcache %}
+        {% endcache %}
    {% endblock %}
-   ```
+        {## Bad: #}
+
+   {% extends "_layout" %}
+   {% cache %}
+       {% block "content" %}
+           ...
+    ```
 
 
-ヒント：`{% cache %}` タグは、その中にまだ生成されていない[画像変換](../image-transforms.md) URL が含まれるかどうかを検出します。それが含まれる場合、次のリクエストまでテンプレートのキャッシュを保留するため、一時的な画像 URL はキャッシュされません。
+ヒント：`{% cache %}` タグは、その中にまだ生成されていない[画像変換](../image-transforms.md) URL が含まれるかどうかを検出します。 それが含まれる場合、次のリクエストまでテンプレートのキャッシュを保留するため、一時的な画像 URL はキャッシュされません。
 
-## `css`
+## `site`
 
-`{% css %}` タグは、CSS ファイルや CSS コードブロックを登録するために利用できます。
+::: code
 
 ```twig
-{# Register a CSS file #}
-{% css "/assets/css/style.css" %}
+{# Fetch tags updated in the last week #}
+{% set lastWeek = date('1 week ago')|atom %}
 
-{# Register a CSS code block #}
-{% css %}
-    .content {
-        color: {{ entry.textColor }};
-    }
-{% endcss %}
+{% set tags = craft.tags()
+    .dateUpdated(">= #{lastWeek}")
+    .all() %}
 ```
 
-::: tip
-CSS ファイルを登録するには、URL の末尾が `.css` でなければなりません。
+::: warning
+Only a single `{% paginate %}` tag should be used per request.
 :::
 
 ### パラメータ
 
-`{% css %}` タグは、次のパラメータをサポートしています。
+Causes the query results to be returned in the order specified by [id](#id).
 
 #### `with`
 
-`<style>` タグに含まれるべき、HTML 属性。
+::: code
 
 ```twig
-{% css with {type: 'text/css'} %}
+// Fetch tags updated in the last week
+$lastWeek = (new \DateTime('1 week ago'))->format(\DateTime::ATOM);
+
+$tags = \craft\elements\Tag::find()
+    ->dateUpdated(">= {$lastWeek}")
+    ->all();
 ```
 
 属性は <yii2:yii\helpers\BaseHtml::renderTagAttributes()> によってレンダリングされます。
 
-## `dd`
+## `uid`
 
-このタグはブラウザに変数をダンプしてから、リクエストを終了します。（`dd` は「Dump-and-Die」の略です。）
+このタグはブラウザに変数をダンプしてから、リクエストを終了します。 （`dd` は「Dump-and-Die」の略です。
 
 ```twig
-{% set entry = craft.entries.id(entryId).one() %}
-{% dd entry %}
+{# Fetch tags in a specific order #}
+{% set tags = craft.tags()
+    .id([1, 2, 3, 4, 5])
+    .fixedOrder()
+    .all() %}
 ```
 
-## `exit`
+## `offset`
 
-このタグは残りのテンプレートの実行を防ぎ、リクエストを終了します。
+Possible values include:
 
 ```twig
-{% set entry = craft.entries.id(entryId).one() %}
-
-{% if not entry %}
-    {% exit 404 %}
-{% endif %}
+// Fetch tags in a specific order
+$tags = \craft\elements\Tag::find()
+    ->id([1, 2, 3, 4, 5])
+    ->fixedOrder()
+    ->all();
 ```
 
 ### パラメータ
 
-`{% exit %}` タグは、次のパラメータをサポートしています。
+::: code
 
 #### ステータス
 
-レスポンスに含まれるべき HTTP ステータスコードをオプションでセットできます。その場合、Craft はレンダリングするための適切なエラーテンプレートを探します。例えば、`{% exit 404 %}` は Craft に `404.twig` テンプレートを返します。テンプレートが存在しない場合、Craft はそのステータスコードに対応する独自のテンプレートをフォールバックします。
+レスポンスに含まれるべき HTTP ステータスコードをオプションでセットできます。 その場合、Craft はレンダリングするための適切なエラーテンプレートを探します。 例えば、`{% exit 404 %}` は Craft に `404.twig` テンプレートを返します。 If the template doesn’t exist. テンプレートが存在しない場合、Craft はそのステータスコードに対応する独自のテンプレートをフォールバックします。
 
-## `header`
+## `title`
 
-このタグは、レスポンス上に新しい HTTP ヘッダーをセットします。
+Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 
 ```twig
 {## Tell the browser to cache this page for 30 days #}
@@ -275,28 +306,37 @@ CSS ファイルを登録するには、URL の末尾が `.css` でなければ�
 {% header "Expires: " ~ expiry|date('D, d M Y H:i:s', 'GMT') ~ " GMT" %}
 ```
 
-### パラメータ
-
-`{% header %}` タグは、次のパラメータをサポートしています。
-
-#### ヘッダー
-
-`header` の後に文字列として記述することによって、実際のヘッダーを明示します。このパラメータは必須です。
-
-## `hook`
-
-このタグは、テンプレート内でプラグインやモジュールに追加の HTML を返すか、利用可能なテンプレート変数を変更する機会を与えます。
-
+::: tip
+Headers which contain dates must be formatted according to [RFC 7234](https://tools.ietf.org/html/rfc7231#section-7.1.1.2). You can use the [httpdate](filters.md#httpdate) filter (added in Craft 3.6.10) to do this:
 ```twig
 {## Give plugins a chance to make changes here #}
 {% hook 'my-custom-hook-name' %}
 ```
+:::
 
-プラグインやモジュールが `{% hook %}` タグで作動できる詳細については、[テンプレートフック](../extend/template-hooks.md)を参照してください。
+### パラメータ
 
-## `html`
+このタグは、テンプレート内でプラグインやモジュールに追加の HTML を返すか、利用可能なテンプレート変数を変更する機会を与えます。
+
+#### ヘッダー
+
+`header` の後に文字列として記述することによって、実際のヘッダーを明示します。 このパラメータは必須です。
+
+## `trashed`
 
 `{% html %}` タグは、ページに任意の HTML コードを登録するために利用できます。
+
+```twig
+{# Give plugins a chance to make changes here #}
+{% hook 'my-custom-hook-name' %}
+```
+
+::: tip
+タグを <craft3:craft\web\View::registerHtml()> の中で呼び出し、グローバルな変数 `view` 経由でアクセスすることもできます。
+
+## `siteId`
+
+`{% paginate %}` タグは、次のパラメータを持っています。
 
 ```twig
 {% html %}
@@ -304,8 +344,7 @@ CSS ファイルを登録するには、URL の末尾が `.css` でなければ�
 {% endhtml %}
 ```
 
-::: tip
-タグを <craft3:craft\web\View::registerHtml()> の中で呼び出し、グローバルな変数 `view` 経由でアクセスすることもできます。
+`{% html %}` タグは、次のパラメータをサポートしています。
 
 ```twig
 {% set para = '<p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>' %}
@@ -315,27 +354,29 @@ CSS ファイルを登録するには、URL の末尾が `.css` でなければ�
 
 ### パラメータ
 
-`{% html %}` タグは、次のパラメータをサポートしています。
+デフォルトでは、`at endBody` が利用されます。
 
 #### 位置
 
-いずれかの位置キーワードを利用して、HTML コードがページに挿入されるべき場所を指定できます。
+`{% js %}` タグは JavaScript ファイルや JavaScript コードブロックを登録するために利用できます。
 
-| キーワード | 説明 |
-| ------- | -----------
-| `at head` | ページの `<head>` 内 |
-| `at beginBody` | ページの `<body>` の先頭 |
-| `at endBody` | ページの `<body>` の最後 |
+| Value                                            | 説明                                                   |
+| ------------------------------------------------ | ---------------------------------------------------- |
+| `'>= 2018-04-01'`                             | that were created on or after 2018-04-01.            |
+| `'< 2018-05-01'`                              | that were created before 2018-05-01                  |
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were created between 2018-04-01 and 2018-05-01. |
 
 ```twig
 {% html at head %}
 ```
 
-デフォルトでは、`at endBody` が利用されます。
+::: tip
+JavaScript ファイルを登録するには、URL の末尾が `.js` でなければなりません。
+:::
 
-## `js`
+## `id`
 
-`{% js %}` タグは JavaScript ファイルや JavaScript コードブロックを登録するために利用できます。
+`{% js %}` タグは、次のパラメータをサポートしています。
 
 ```twig
 {# Register a JS file #}
@@ -351,39 +392,44 @@ CSS ファイルを登録するには、URL の末尾が `.css` でなければ�
 {% endjs %}
 ```
 
-::: tip
-JavaScript ファイルを登録するには、URL の末尾が `.js` でなければなりません。
+次の位置キーワードのいずれかを使用して、ページの `<script>` を追加する場所を指定できます。
+
+デフォルトでは、`at endBody` が利用されます。
+```twig
+{% set myJsFile = "/assets/js/script.js" %}
+{% do view.registerJsFile(myJsFile) %}
+```
 :::
 
 ### パラメータ
 
-`{% js %}` タグは、次のパラメータをサポートしています。
+`<script>` タグに含まれるべき、HTML 属性。
 
 #### 位置
 
-次の位置キーワードのいずれかを使用して、ページの `<script>` を追加する場所を指定できます。
+属性は <yii2:yii\helpers\BaseHtml::renderTagAttributes()> によってレンダリングされます。
 
-| キーワード | 説明 |
-| ------- | -----------
-| `at head` | ページの `<head>` 内 |
-| `at beginBody` | ページの `<body>` の先頭 |
-| `at endBody` | ページの `<body>` の最後 |
-| `on load` | ページの `<body>` の最後、`jQuery(window).load()` の中で |
-| `on ready` | ページの `<body>` の最後、`jQuery(document).ready()` の中で |
+| Value                                            | 説明                                                     |
+| ------------------------------------------------ | ------------------------------------------------------ |
+| `'>= 2018-04-01'`                             | that were updated on or after 2018-04-01.              |
+| `'< 2018-05-01'`                              | that were updated before 2018-05-01                    |
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were updated between 2018-04-01 and 2018-05-01.   |
+| `on load`                                        | ページの `<body>` の最後、`jQuery(window).load()` の中で    |
+| `on ready`                                       | ページの `<body>` の最後、`jQuery(document).ready()` の中で |
 
 ```twig
 {% js at head %}
 ```
 
-デフォルトでは、`at endBody` が利用されます。
+By default, `at endBody` will be used.
 
 ::: warning
-位置を `on load` または `on ready` にセットすると、（テンプレートがすでに独自のコピーを含めている場合でも）Craft はページに jQuery の内部コピーを読み込みます。そのため、フロントエンドのテンプレートで利用するのは避けてください。
+位置を `on load` または `on ready` にセットすると、（テンプレートがすでに独自のコピーを含めている場合でも）Craft はページに jQuery の内部コピーを読み込みます。 そのため、フロントエンドのテンプレートで利用するのは避けてください。 :::
 :::
 
 #### `with`
 
-`<script>` タグに含まれるべき、HTML 属性。
+例えば、これは
 
 ```twig
 {% js "/assets/js/script.js" with {
@@ -391,17 +437,17 @@ JavaScript ファイルを登録するには、URL の末尾が `.js` でなけ�
 } %}
 ```
 
-属性は <yii2:yii\helpers\BaseHtml::renderTagAttributes()> によってレンダリングされます。
+次のようになるでしょう。
 
 ::: warning
-`with` パラメータは、JavaScript ファイルを指定したい場合のみ有効です。JavaScript コードブロックでは効果がありません。
+`with` パラメータは、JavaScript ファイルを指定したい場合のみ有効です。 JavaScript コードブロックでは効果がありません。 :::
 :::
 
 ## `namespace`
 
 `{% namespace %}` タグは、CSS セレクタだけでなく、入力項目の name や HTML 属性の名前空間を割り当てるために利用されます。
 
-例えば、これは
+次のような結果になるでしょう。
 
 ```twig
 {% namespace 'foo' %}
@@ -413,7 +459,9 @@ JavaScript ファイルを登録するには、URL の末尾が `.js` でなけ�
 {% endnamespace %}
 ```
 
-次のようになるでしょう。
+::: tip
+このタグは、最初に <craft3:craft\web\View::setNamespace()> を呼び出すことを除いて [namespace](filters.md#namespace) フィルタと同様に機能するため、その中で実行される PHP コードは、ネストされた ID がどうなるのかを知ることができます。
+:::
 
 ```html
 <style>
@@ -423,15 +471,15 @@ JavaScript ファイルを登録するには、URL の末尾が `.js` でなけ�
 <input class="text" id="foo-title" name="foo[title]" type="text">
 ```
 
-CSS セレクタの `#title` が `#foo-title`、`id` 属性が `title` から `foo-title`、さらに、`name` 属性が `title` から `foo[title]` へ変わったことに注目してください。
+このタグは、[ストラクチャーセクション](../entries.md#section-types)や[カテゴリグループ](../categories.md)のエントリの階層的なナビゲーションメニューを作成するのに役立ちます。
 
-クラス名にも名前空間を割り当てたい場合、`withClasses` を追加してください。クラス CSS セレクタと `class` 属性の両方に影響します。
+クラス名にも名前空間を割り当てたい場合、`withClasses` を追加してください。 クラス CSS セレクタと `class` 属性の両方に影響します。
 
 ```twig
 {% namespace 'foo' withClasses %}
 ```
 
-次のような結果になるでしょう。
+That would result in:
 
 ```html{2,5}
 <style>
@@ -442,13 +490,12 @@ CSS セレクタの `#title` が `#foo-title`、`id` 属性が `title` から `f
 ```
 
 ::: tip
-このタグは、最初に <craft3:craft\web\View::setNamespace()> を呼び出すことを除いて [namespace](filters.md#namespace) フィルタと同様に機能するため、その中で実行される PHP コードは、ネストされた ID がどうなるのかを知ることができます。
+This tag works identically to the [namespace](filters.md#namespace) filter, except that it will call <craft3:craft\web\View::setNamespace()> at the beginning, so any PHP code executed within it can be aware of what the nested IDs will become.
 :::
 
 ## `nav`
 
-このタグは、[ストラクチャーセクション](../entries.md#section-types)や[カテゴリグループ](../categories.md)のエントリの階層的なナビゲーションメニューを作成するのに役立ちます。
-
+This tag helps create a hierarchical navigation menu for entries in a [Structure section](../entries.md#section-types) or a [Category Group](../categories.md).
 
 ```twig
 {% set entries = craft.entries.section('pages').all() %}
@@ -467,33 +514,39 @@ CSS セレクタの `#title` が `#foo-title`、`id` 属性が `title` から `f
 </ul>
 ```
 
+::: tip
+`{% nav %}` タグは、エレメントを階層的に表示したい、かつ、DOM で階層構造を表現したいとき _だけ_ 利用するべきです。 エレメントを直線的にループしたい場合、代わりに Twig の [for](https://twig.symfony.com/doc/tags/for.html) タグを利用してください。 :::
+:::
+
 ### パラメータ
 
-`{% nav %}` タグは、次のパラメータを持っています。
+エレメントが実際に子を持っているときだけ、子を取り囲む追加 HTML を表示したい場合、`{% children %}` タグを `{% ifchildren %}` と `{% endifchildren %}` タグで囲みます。
 
 #### アイテム名
 
-「`{% nav`」に続く最初のものは、例えば `item`、`entry`、または、`category` のような、ループ内のそれぞれのアイテムを表すために利用する変数名です。この変数名を利用して、ループ内のアイテムを参照します。
+「`{% nav`」に続く最初のものは、例えば `item`、`entry`、または、`category` のような、ループ内のそれぞれのアイテムを表すために利用する変数名です。 この変数名を利用して、ループ内のアイテムを参照します。
 
-#### `in`
+#### `orderBy`
 
-次に「`in`」という単語の記述が必要で、その後にタグがループ処理するエントリの配列が続きます。これは、エレメントの配列、または、[エレメントクエリ](../element-queries.md)にできます。
+次に「`in`」という単語の記述が必要で、その後にタグがループ処理するエントリの配列が続きます。 これは、エレメントの配列、または、[エレメントクエリ](../element-queries.md)にできます。
 
 ::: warning
-`{% nav %}` タグは特定の（階層的な）順序でエレメントを照会する必要があります。そのため、このタグと関連して `order` 基準パラメータを上書きしないよう確認してください。
+`{% nav %}` タグは特定の（階層的な）順序でエレメントを照会する必要があります。 そのため、このタグと関連して `order` 基準パラメータを上書きしないよう確認してください。 :::
 :::
 
 ### 子エレメントの表示
 
-ループ内の現在のエレメントの子を表示するには、`{% children %}` タグを利用します。Craft がこのタグを取得すると、エレメントの子をループし、`{% nav %}` と `{% endnav %}` タグの間に定義された同じテンプレートをその子に適用します。
+`{% nav %}` タグは、次のパラメータを持っています。
 
-エレメントが実際に子を持っているときだけ、子を取り囲む追加 HTML を表示したい場合、`{% children %}` タグを `{% ifchildren %}` と `{% endifchildren %}` タグで囲みます。
-
-::: tip
-`{% nav %}` タグは、エレメントを階層的に表示したい、かつ、DOM で階層構造を表現したいとき _だけ_ 利用するべきです。エレメントを直線的にループしたい場合、代わりに Twig の [for](https://twig.symfony.com/doc/tags/for.html) タグを利用してください。
+::: warning
+リクエストごとに、単一の `{% paginate %}` タグだけを利用しなければなりません。
 :::
 
-## `paginate`
+::: warning
+Don’t add any special logic between your `{% ifchildren %}` and `{% endifchildren %}` tags. These are special tags that are used to identify the raw HTML that should be output surrounding nested nav items. They don’t get parsed in the order you’d expect.
+:::
+
+## `preferSites`
 
 このタグは、複数ページにわたるクエリ結果を簡単にページ割りできます。
 
@@ -515,49 +568,51 @@ CSS セレクタの `#title` が `#foo-title`、`id` 属性が `title` から `f
 {% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
 ```
 
-ページ付けされた URL は最初のページ URL と同一になりますが、最後に「/p_X_」（_X_ はページ番号）が追加されます。例：`http://my-project.test/news/p2`。
+ページ付けされた URL は最初のページ URL と同一になりますが、最後に「/p_X_」（_X_ はページ番号）が追加されます。 例：`http://my-project.test/news/p2`。
 
 ::: tip
-URL の実際のページ番号の前にあるものをカスタマイズするために、コンフィグ設定 <config3:pageTrigger> を利用できます。例えば、`'page/'`  をセットすると、ページ付けされた URL は `http://my-project.test/news/page/2` のようになります。
+You can use the <config3:pageTrigger> ::: tip URL の実際のページ番号の前にあるものをカスタマイズするために、コンフィグ設定 例えば、`'page/'`  をセットすると、ページ付けされた URL は `http://my-project.test/news/page/2` のようになります。 :::
 :::
 
 ::: warning
-リクエストごとに、単一の `{% paginate %}` タグだけを利用しなければなりません。
+Only a single `{% paginate %}` tag should be used per request.
 :::
 
 ### パラメータ
-
-`{% paginate %}` タグは、次のパラメータを持っています。
-
-#### クエリ
-
-`{% paginate %}` タグに渡す最初のものは、ページ割りしたいすべての結果を定義する（[エレメントクエリ](../element-queries.md)のような）クエリオブジェクトです。`limit` パラメータを使用して、ページごとに表示する結果の数を定義します（デフォルトは 100）。
-
-::: warning
-このパラメータは実際のクエリオブジェクトである必要があります。プリフェッチされた結果の配列ではありません。そのため、それを渡す前のクエリで `all()` をコールしないでください。
-:::
-
-#### `as`
-
-次に「`as`」の記述が必要で、その後に1つまたは2つの変数名が続きます。
-
-* `as pageInfo, pageEntries`
-* `as pageEntries`
-
-ここで設定されることは、次の通りです。
-
-* `pageInfo` には、現在のページに関する情報や他のページへのリンクを作成するためのいくつかのヘルパーメソッドを提供する <craft3:craft\web\twig\variables\Paginate> オブジェクトがセットされます。（詳細は[こちら](#the-pageInfo-variable)を参照してください。）
-* `pageEntries` には、現在のページに属する結果（例：エレメント）の配列がセットされます。
 
 ::: tip
 ここに変数名を1つだけ指定した場合、後方互換性のために変数 `pageInfo` はデフォルトで `paginate` と呼ばれます。
 :::
 
+#### Querying Tags
+
+`{% paginate %}` タグに渡す最初のものは、ページ割りしたいすべての結果を定義する（[エレメントクエリ](../element-queries.md)のような）クエリオブジェクトです。 `limit` パラメータを使用して、ページごとに表示する結果の数を定義します（デフォルトは 100）。
+
+::: warning
+このパラメータは実際のクエリオブジェクトである必要があります。 プリフェッチされた結果の配列ではありません。 そのため、それを渡す前のクエリで `all()` をコールしないでください。 :::
+:::
+
+#### `relatedTo`
+
+変数 `pageInfo`（または、あなたが命名した変数）は次のプロパティやメソッドを提供します。
+
+- `as pageInfo, pageEntries`
+- `as pageEntries`
+
+ここで設定されることは、次の通りです。
+
+- `pageInfo` には、現在のページに関する情報や他のページへのリンクを作成するためのいくつかのヘルパーメソッドを提供する <craft3:craft\web\twig\variables\Paginate> オブジェクトがセットされます。 （詳細は[こちら](#the-pageInfo-variable)を参照してください。 ）
+- `pageEntries` には、現在のページに属する結果（例：エレメント）の配列がセットされます。
+
+::: tip
+If you only specify one variable name here, the `pageInfo` variable will be called `paginate` by default for backwards compatibility.
+:::
+
 ### 結果の表示
 
-`{% paginate %}` タグは、現在のページの結果を実際に出力するわけではありません。（`as` パラメータで定義された変数によって参照される）現在のページにあるべき結果の配列を提供するだけです。
+`{% paginate %}` タグは、現在のページの結果を実際に出力するわけではありません。 （`as` パラメータで定義された変数によって参照される）現在のページにあるべき結果の配列を提供するだけです。
 
-`{% paginate %}` タグに続けて [for](https://twig.symfony.com/doc/tags/for.html) タグを利用し、このページの結果をループする必要があります。
+最初のページと最後のページのリンクをミックスすることもできます。
 
 ```twig
 {% paginate craft.entries.section('blog').limit(10) as pageEntries %}
@@ -572,26 +627,26 @@ URL の実際のページ番号の前にあるものをカスタマイズする�
 
 ### `pageInfo` 変数
 
-変数 `pageInfo`（または、あなたが命名した変数）は次のプロパティやメソッドを提供します。
+最初と最後のページは常に存在するため、条件文でこれらをラップする理由はありません。
 
-* **`pageInfo.first`** – 現在のページの最初の結果のオフセット。
-* **`pageInfo.last`** – 現在のページの最後のエレメントのオフセット。
-* **`pageInfo.total`** – すべてのページの結果の合計数。
-* **`pageInfo.currentPage`** – 現在のページ番号。
-* **`pageInfo.totalPages`** – すべてのページ数。
-* **`pageInfo.prevUrl`** – 前のページの URL、または、最初のページにいる場合は `null`。
-* **`pageInfo.nextUrl`** – 次のページの URL、または、最後のページにいる場合は `null`。
-* **`pageInfo.firstUrl`** – 最初のページの URL。
-* **`pageInfo.lastUrl`** – 最後のページの URL。
-* **`pageInfo.getPageUrl( page )`** – 指定されたページ番号の URL、または、ページが存在しない場合は `null` を返します。
-* **`pageInfo.getPrevUrls( [dist] )`** – キーにページ番号がセットされた、前のページの URL の配列を返します。URL は昇順で返されます。現在のページから到達可能な最大距離をオプションとして渡すことができます。
-* **`pageInfo.getNextUrls( [dist] )`** – キーにページ番号がセットされた、次のページの URL の配列を返します。URL は昇順で返されます。現在のページから到達可能な最大距離をオプションとして渡すことができます。
-* **`pageInfo.getRangeUrls( start, end )`** – キーにページ番号がセットされた、指定したページ番号の範囲のページ URL の配列を返します。
+- **`pageInfo.first`** – 現在のページの最初の結果のオフセット。
+- **`pageInfo.last`** – 現在のページの最後のエレメントのオフセット。
+- **`pageInfo.total`** – すべてのページの結果の合計数。
+- **`pageInfo.currentPage`** – 現在のページ番号。
+- **`pageInfo.totalPages`** – すべてのページ数。
+- **`pageInfo.prevUrl`** – 前のページの URL、または、最初のページにいる場合は `null`。
+- **`pageInfo.nextUrl`** – 次のページの URL、または、最後のページにいる場合は `null`。
+- **`pageInfo.firstUrl`** – 最初のページの URL。
+- **`pageInfo.lastUrl`** – 最後のページの URL。
+- **`pageInfo.getPageUrl( page )`** – 指定されたページ番号の URL、または、ページが存在しない場合は `null` を返します。
+- **`pageInfo.getPrevUrls( [dist] )`** – キーにページ番号がセットされた、前のページの URL の配列を返します。 URL は昇順で返されます。 現在のページから到達可能な最大距離をオプションとして渡すことができます。
+- **`pageInfo.getNextUrls( [dist] )`** – キーにページ番号がセットされた、次のページの URL の配列を返します。 URL は昇順で返されます。 現在のページから到達可能な最大距離をオプションとして渡すことができます。
+- **`pageInfo.getRangeUrls( start, end )`** – キーにページ番号がセットされた、指定したページ番号の範囲のページ URL の配列を返します。
+- **`pageInfo.getDynamicRangeUrls( max )`** – Returns an array of URLs to pages in a dynamic range of page numbers that surround (and include) the current page, with keys set to the page numbers.
 
+### Example
 
-### ナビゲーションの実例
-
-変数 [pageInfo](#the-pageInfo-variable) は、あなたに合ったページナビゲーションを作るための沢山のオプションを提供します。ここにいつくかの一般的な例があります。
+変数 [pageInfo](#the-pageInfo-variable) は、あなたに合ったページナビゲーションを作るための沢山のオプションを提供します。 ここにいつくかの一般的な例があります。
 
 #### 前 / 次のページリンク
 
@@ -608,11 +663,11 @@ URL の実際のページ番号の前にあるものをカスタマイズする�
 {% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
 ```
 
-前、または、次のページが常に存在するとは限らないため、これらのリンクを条件文でラップしていることに注意してください。
+このタグは、ブラウザを別の URL にリダイレクトします。
 
 #### 最初 / 最後のページリンク
 
-最初のページと最後のページのリンクをミックスすることもできます。
+`{% redirect %}` タグは、次のパラメータを持っています。
 
 ```twig
 {% set query = craft.entries()
@@ -627,11 +682,11 @@ URL の実際のページ番号の前にあるものをカスタマイズする�
 <a href="{{ pageInfo.lastUrl }}">Last Page</a>
 ```
 
-最初と最後のページは常に存在するため、条件文でこれらをラップする理由はありません。
+前、または、次のページが常に存在するとは限らないため、これらのリンクを条件文でラップしていることに注意してください。
 
 #### 近くのページリンク
 
-おそらく現在のページ番号周辺の、近くのページのリストを作りたい場合、同様にできます。
+デフォルトでは、 リダイレクトはステータスコード `302` を持っていて、リクエストされた URL がリダイレクトされた URL に _一時的に_ 移動されたことをブラウザに伝えます。
 
 ```twig
 {% set query = craft.entries()
@@ -657,11 +712,11 @@ URL の実際のページ番号の前にあるものをカスタマイズする�
 <a href="{{ pageInfo.lastUrl }}">Last Page</a>
 ```
 
-この例では、現在のページからいずれかの方向に5ページのリンクを表示しているだけです。多かれ少なかれ表示することを望むなら、`getPrevUrls()` と `getNextUrls()` に渡す数値を変更してください。いずれの数値も渡さないよう選択することもできます。その場合、 *すべての* 前 / 次のページ URL が返されます。
+この例では、現在のページからいずれかの方向に5ページのリンクを表示しているだけです。 多かれ少なかれ表示することを望むなら、`getPrevUrls()` と `getNextUrls()` に渡す数値を変更してください。 いずれの数値も渡さないよう選択することもできます。 その場合、 *すべての* 前 / 次のページ URL が返されます。
 
 ## `redirect`
 
-このタグは、ブラウザを別の URL にリダイレクトします。
+`with notice`、および / または、`with error` パラメータを利用して、次のリクエスト時にユーザーへ表示するフラッシュメッセージをオプションでセットできます。
 
 ```twig
 {% if not user or not user.isInGroup('members') %}
@@ -671,17 +726,17 @@ URL の実際のページ番号の前にあるものをカスタマイズする�
 
 ### パラメータ
 
-`{% redirect %}` タグは、次のパラメータを持っています。
+`{% header %}` タグは、次のパラメータをサポートしています。
 
 #### URL
 
-「`{% redirect`」と入力したすぐ後に、ブラウザがリダイレクトする場所をタグに伝える必要があります。完全な URL を与えることも、パスだけ指定することもできます。
+「`{% redirect`」と入力したすぐ後に、ブラウザがリダイレクトする場所をタグに伝える必要があります。 完全な URL を与えることも、パスだけ指定することもできます。
 
 #### ステータスコード
 
-デフォルトでは、 リダイレクトはステータスコード `302` を持っていて、リクエストされた URL がリダイレクトされた URL に _一時的に_ 移動されたことをブラウザに伝えます。
+By default, redirects will have `302` status codes, which tells the browser that the requested URL has only been moved to the redirected URL _temporarily_.
 
-リダイレクトのレスポンスに伴うステータスコードは、URL の直後に入力することでカスタマイズできます。例えば、次のコードは `301` リダイレクト（永続的）を返します。
+リダイレクトのレスポンスに伴うステータスコードは、URL の直後に入力することでカスタマイズできます。 例えば、次のコードは `301` リダイレクト（永続的）を返します。
 
 ```twig
 {% redirect "pricing" 301 %}
@@ -689,7 +744,7 @@ URL の実際のページ番号の前にあるものをカスタマイズする�
 
 #### フラッシュメッセージ
 
-`with notice`、および / または、`with error` パラメータを利用して、次のリクエスト時にユーザーへ表示するフラッシュメッセージをオプションでセットできます。
+You can optionally set flash messages that will show up for the user on the next request using the `with notice` and/or `with error` params:
 
 ```twig
 {% if not currentUser.isInGroup('members') %}
@@ -699,25 +754,25 @@ URL の実際のページ番号の前にあるものをカスタマイズする�
 
 ## `requireGuest`
 
-このタグは、ユーザーがログイン **していない** ことを保証します既にログインしている場合、コンフィグ設定 <config3:postLoginRedirect> で指定されたページにリダイレクトされます。
+このタグは、ユーザーがログインしていることを保証します。 そうでない場合、ログインページにリダイレクトし、ログインに成功した後で元のページに戻ります。 <config3:postLoginRedirect> config setting.
 
 ```twig
 {% requireGuest %}
 ```
 
-条件文の中を含め、テンプレートのどこにでもこのタグを記述できます。Twig がそれに到達すると、ゲストが強制されます。
+条件文の中を含め、テンプレートのどこにでもこのタグを記述できます。 Twig がそれに到達すると、ゲストが強制されます。
 
 ## `requireLogin`
 
-このタグは、ユーザーがログインしていることを保証します。そうでない場合、ログインページにリダイレクトし、ログインに成功した後で元のページに戻ります。
+This tag will ensure that the user is logged in. If they aren’t, they’ll be redirected to a Login page and returned to the original page after successfully logging in.
 
 ```twig
 {% requireLogin %}
 ```
 
-条件文の中を含め、テンプレートのどこにでもこのタグを記述できます。Twig がそれに到達すると、ログインが強制されます。
+条件文の中を含め、テンプレートのどこにでもこのタグを記述できます。 Twig がそれに到達すると、ログインが強制されます。
 
-ログインページの場所は、コンフィグ設定 <config3:loginPath> に基づきます。<config3:loginPath> を設定しない場合、デフォルトで `login` になります。カスタムテンプレートで `/login` ルートを処理していない場合、`404` エラーが返されます。コントロールパネルのログインフォームを使用するには、`admin/login` または `[your cpTrigger]/login` をセットしてください。
+ログインページの場所は、コンフィグ設定 <config3:loginPath> config setting. If you do not set <config3:loginPath>を設定しない場合、デフォルトで `login` になります。 カスタムテンプレートで `/login` ルートを処理していない場合、`404` エラーが返されます。 コントロールパネルのログインフォームを使用するには、`admin/login` または `[your cpTrigger]/login` をセットしてください。
 
 ## `requirePermission`
 
@@ -727,9 +782,19 @@ URL の実際のページ番号の前にあるものをカスタマイズする�
 {% requirePermission 'stayUpLate' %}
 ```
 
-ユーザーは、直接またはユーザーグループの1つを通して権限を持つことができます。もし権限を持っていないなら、403（Forbidden）エラーが提供されます。
+ユーザーは、直接またはユーザーグループの1つを通して権限を持つことができます。 もし権限を持っていないなら、403（Forbidden）エラーが提供されます。
 
 利用可能な権限のリストは、[ユーザー](../users.md#permissions)ページを参照してください。
+
+## `script`
+
+Similar to the [`{% js %}`](#js) tag, but with full control over the resulting `<script>` tag’s attributes.
+
+```twig
+{% script with {type: 'module'} %}
+// some JavaScript
+{% endscript %}
+```
 
 ## `switch`
 
@@ -763,7 +828,7 @@ URL の実際のページ番号の前にあるものをカスタマイズする�
 ```
 
 ::: tip
-他の言語の `switch` 文とは異なり、マッチする `case` ブロックは自動的に終了します。`break` ステートメントについて、心配する必要はありません。
+他の言語の `switch` 文とは異なり、マッチする `case` ブロックは自動的に終了します。 `break` ステートメントについて、心配する必要はありません。 :::
 :::
 
 ### 単一の `{% case %}` タグで複数の値をチェックする
@@ -780,7 +845,7 @@ URL の実際のページ番号の前にあるものをカスタマイズする�
 
 ### 親の `loop` 変数へのアクセス
 
-`{% for %}`  ループ内で `{% switch %}` タグを使う場合、`{% switch %}` タグの内側で Twig の [ループ変数](https://twig.symfony.com/doc/tags/for.html#the-loop-variable) に直接アクセスすることはできません。代わりに、次のようにアクセスできます。
+`{% for %}`  ループ内で `{% switch %}` タグを使う場合、`{% switch %}` タグの内側で Twig の [ループ変数](https://twig.symfony.com/doc/tags/for.html#the-loop-variable) に直接アクセスすることはできません。  代わりに、次のようにアクセスできます。
 
 ```twig
 {% for matrixBlock in entry.matrixField.all() %}
@@ -794,4 +859,61 @@ URL の実際のページ番号の前にあるものをカスタマイズする�
 
     {% endswitch %}
 {% endfor %}
+```
+
+## `tag`
+
+プラグインやモジュールが `{% hook %}` タグで作動できる詳細については、[テンプレートフック](../extend/template-hooks.md)を参照してください。
+
+::: tip
+単一の `{% cache %}` タグで利用できるのは、[if](#if) **_または_** [unless](#unless) のいずれかのみです。
+:::
+
+```twig
+{% tag 'p' with {
+    class: 'welcome',
+} %}
+    Hello, {{ currentUser.friendlyName }}
+{% endtag %}
+{# Output: <p class="welcome">Hello, Tim</p> #}
+```
+
+`{% tag %}` tags can also be nested:
+```twig
+{% tag 'div' with {
+    class: 'foo',
+} %}
+    {% tag 'p' with {
+        class: 'welcome',
+    } -%}
+        Hello, {{ currentUser.friendlyName }}
+    {%- endtag %}
+{% endtag %}
+{# Output: <div class="foo"><p class="welcome">Hello, Tim</p></div> #}
+```
+
+### Parameters
+
+The `{% tag %}` tag has the following parameters:
+
+#### Name
+
+The first thing you must pass to the `{% tag %}` tag is the name of the node that should be rendered.
+
+#### `with`
+
+Next, you can optionally type “`with`” followed by an object with attributes for the node.
+
+These will be rendered using <yii2:yii\helpers\BaseHtml::renderTagAttributes()> just like the [tag](functions.md#tag) function, except for the `html` and `text` keys because inner content will go between `{% tag %}` and `{% endtag %}` instead.
+
+If an attribute is set to `true`, it will be added without a value:
+
+```twig
+{% tag 'textarea' with {
+    name: 'message',
+    required: true
+} -%}
+    Please foo some bar.
+{%- endtag %}
+{# Output: <textarea name="message" required>Please foo some bar.</textarea> #}
 ```

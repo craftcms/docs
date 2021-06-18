@@ -133,6 +133,9 @@ Check your code for any database queries that involve your component’s table. 
       ->from(['{{%mytablename}}'])
       ->where(['dateDeleted' => null])
       ->all();
+      ->from(['{{%mytablename}}'])
+      ->where(['dateDeleted' => null])
+      ->all();
   ```
 
 - When deleting rows from your table using your Active Record class, call its new `softDelete()` method rather than [delete()](yii2:yii\db\ActiveRecord::delete()).

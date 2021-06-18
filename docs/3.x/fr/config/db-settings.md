@@ -1,3 +1,6 @@
+- - -
+sidebarLevel: 3
+- - -
 # Database Connection Settings
 
 Craft supports several database connection settings that give you control over how Craft connects to the database.
@@ -49,26 +52,20 @@ Here’s the full list of database connection settings that Craft supports:
 
 ### `attributes`
 
-Allowed types
-:
+Allowed types :
+:   [array](http://php.net/language.types.array)
 
-[array](http://php.net/language.types.array)
+Default value :
+:   `[]`
 
-Default value
-:
-
-`[]`
-
-Defined by
-:
-
-[DbConfig::$attributes](craft3:craft\config\DbConfig::$attributes)
+Defined by :
+:   [DbConfig::$attributes](craft3:craft\config\DbConfig::$attributes)
 
 
 
 An array of key => value pairs of PDO attributes to pass into the PDO constructor.
 
-For example, when using the MySQL PDO driver (http://php.net/manual/en/ref.pdo-mysql.php), if you wanted to enable a SSL database connection (assuming SSL is enabled in MySQL (https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html) and `'user'` can connect via SSL, you'd set these:
+Default value :
 
 ```php
 [
@@ -82,89 +79,72 @@ For example, when using the MySQL PDO driver (http://php.net/manual/en/ref.pdo-m
 
 ### `charset`
 
-Allowed types
-:
+Allowed types :
+:   [string](http://php.net/language.types.string)
 
-[string](http://php.net/language.types.string)
+Default value :
+:   `'utf8'`
 
-Default value
-:
-
-`'utf8'`
-
-Defined by
-:
-
-[DbConfig::$charset](craft3:craft\config\DbConfig::$charset)
+Defined by :
+:   [DbConfig::$charset](craft3:craft\config\DbConfig::$charset)
 
 
 
 The charset to use when creating tables.
 
+Defined by :
 
-
-### `database`
-
-Allowed types
-:
-
-[string](http://php.net/language.types.string)
-
-Default value
-:
-
-`null`
-
-Defined by
-:
-
-[DbConfig::$database](craft3:craft\config\DbConfig::$database)
+```bash
+> php craft db/convert-charset
+```
+:::
 
 
 
-The name of the database to select.
+### `collation`
+
+Allowed types :
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+
+Default value :
+:   `null`
+
+Defined by :
+:   [DbConfig::$collation](craft3:craft\config\DbConfig::$collation)
+
+Since
+:   3.6.4
 
 
 
-### `driver`
+The collation to use when creating tables.
 
-Allowed types
-:
+This is only used by MySQL. If null, the [charset’s](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#charset) default collation will be used.
 
-[string](http://php.net/language.types.string)
+| Charset   | Default collation    |
+| --------- | -------------------- |
+| `utf8`    | `utf8_general_ci`    |
+| `utf8mb4` | `utf8mb4_0900_ai_ci` |
 
-Default value
-:
+Allowed types :
 
-`null`
-
-Defined by
-:
-
-[DbConfig::$driver](craft3:craft\config\DbConfig::$driver)
-
-
-
-The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
+```bash
+> php craft db/convert-charset
+```
+:::
 
 
 
 ### `dsn`
 
-Allowed types
-:
+Allowed types :
+:   [string](http://php.net/language.types.string)
 
-[string](http://php.net/language.types.string)
+Default value :
+:   `null`
 
-Default value
-:
-
-`null`
-
-Defined by
-:
-
-[DbConfig::$dsn](craft3:craft\config\DbConfig::$dsn)
+Defined by :
+:   [DbConfig::$dsn](craft3:craft\config\DbConfig::$dsn)
 
 
 
@@ -179,20 +159,14 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 ### `password`
 
-Allowed types
-:
+Allowed types :
+:   [string](http://php.net/language.types.string)
 
-[string](http://php.net/language.types.string)
+Default value :
+:   `''`
 
-Default value
-:
-
-`''`
-
-Defined by
-:
-
-[DbConfig::$password](craft3:craft\config\DbConfig::$password)
+Defined by :
+:   [DbConfig::$password](craft3:craft\config\DbConfig::$password)
 
 
 
@@ -200,45 +174,16 @@ The database password to connect with.
 
 
 
-### `port`
-
-Allowed types
-:
-
-[integer](http://php.net/language.types.integer)
-
-Default value
-:
-
-`null`
-
-Defined by
-:
-
-[DbConfig::$port](craft3:craft\config\DbConfig::$port)
-
-
-
-The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
-
-
-
 ### `schema`
 
-Allowed types
-:
+Allowed types :
+:   [string](http://php.net/language.types.string)
 
-[string](http://php.net/language.types.string)
+Default value :
+:   `'public'`
 
-Default value
-:
-
-`'public'`
-
-Defined by
-:
-
-[DbConfig::$schema](craft3:craft\config\DbConfig::$schema)
+Defined by :
+:   [DbConfig::$schema](craft3:craft\config\DbConfig::$schema)
 
 
 
@@ -246,45 +191,16 @@ The schema that Postgres is configured to use by default (PostgreSQL only).
 
 
 
-### `server`
-
-Allowed types
-:
-
-[string](http://php.net/language.types.string)
-
-Default value
-:
-
-`null`
-
-Defined by
-:
-
-[DbConfig::$server](craft3:craft\config\DbConfig::$server)
-
-
-
-The database server name or IP address. Usually `localhost` or `127.0.0.1`.
-
-
-
 ### `tablePrefix`
 
-Allowed types
-:
+Allowed types :
+:   [string](http://php.net/language.types.string)
 
-[string](http://php.net/language.types.string)
+Default value :
+:   `''`
 
-Default value
-:
-
-`''`
-
-Defined by
-:
-
-[DbConfig::$tablePrefix](craft3:craft\config\DbConfig::$tablePrefix)
+Defined by :
+:   [DbConfig::$tablePrefix](craft3:craft\config\DbConfig::$tablePrefix)
 
 
 
@@ -292,45 +208,33 @@ If you're sharing Craft installs in a single database (MySQL) or a single databa
 
 
 
-### `unixSocket`
+### `user`
 
-Allowed types
-:
+Allowed types :
+:   [string](http://php.net/language.types.string)
 
-[string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+Default value :
+:   `'root'`
 
-Default value
-:
-
-`null`
-
-Defined by
-:
-
-[DbConfig::$unixSocket](craft3:craft\config\DbConfig::$unixSocket)
+Defined by :
+:   [DbConfig::$user](craft3:craft\config\DbConfig::$user)
 
 
 
-MySQL only. If this is set, then the CLI connection string (used for yiic) will connect to the Unix socket, instead of the server and port. If this is specified, then 'server' and 'port' settings are ignored.
+The database username to connect with.
 
 
 
 ### `url`
 
-Allowed types
-:
+Allowed types :
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
-[string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+Default value :
+:   `null`
 
-Default value
-:
-
-`null`
-
-Defined by
-:
-
-[DbConfig::$url](craft3:craft\config\DbConfig::$url)
+Defined by :
+:   [DbConfig::$url](craft3:craft\config\DbConfig::$url)
 
 
 
@@ -340,26 +244,88 @@ If this is set, the values for [driver](https://docs.craftcms.com/api/v3/craft-c
 
 
 
-### `user`
+### `driver`
+
+Allowed types :
+:   [string](http://php.net/language.types.string)
+
+Default value :
+:   `null`
+
+Defined by :
+:   [DbConfig::$driver](craft3:craft\config\DbConfig::$driver)
+
+
+
+The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
+
+
+
+### `server`
+
+Allowed types :
+:   [string](http://php.net/language.types.string)
+
+Default value :
+:   `null`
+
+Defined by :
+:   [DbConfig::$server](craft3:craft\config\DbConfig::$server)
+
+
+
+The database server name or IP address. Usually `localhost` or `127.0.0.1`.
+
+
+
+### `port`
+
+Allowed types :
+:   [integer](http://php.net/language.types.integer)
+
+Default value :
+:   `null`
+
+Defined by :
+:   [DbConfig::$port](craft3:craft\config\DbConfig::$port)
+
+
+
+The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
+
+
+
+### `unixSocket`
 
 Allowed types
-:
-
-[string](http://php.net/language.types.string)
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
 
 Default value
-:
-
-`'root'`
+:   `null`
 
 Defined by
-:
-
-[DbConfig::$user](craft3:craft\config\DbConfig::$user)
+:   [DbConfig::$unixSocket](craft3:craft\config\DbConfig::$unixSocket)
 
 
 
-The database username to connect with.
+MySQL only. If this is set, then the CLI connection string (used for yiic) will connect to the Unix socket, instead of the server and port. If this is specified, then 'server' and 'port' settings are ignored.
+
+
+
+### `database`
+
+Allowed types
+:   [string](http://php.net/language.types.string)
+
+Default value
+:   `null`
+
+Defined by
+:   [DbConfig::$database](craft3:craft\config\DbConfig::$database)
+
+
+
+The name of the database to select.
 
 
 

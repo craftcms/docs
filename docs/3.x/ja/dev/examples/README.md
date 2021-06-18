@@ -1,14 +1,13 @@
 # テンプレートの実例
 
-Craft の一般的な利用例です。
+Craft の一般的な使用例です。
 
-- [Disqus の統合](integrating-disqus.md)
-- [RSS フィード](rss-feed.md)
-- [Atom フィード](atom-feed.md)
-- [エントリの投稿フォーム](entry-form.md)
-- [検索フォーム](search-form.md)
-- [ログインフォーム](login-form.md)
-- [ユーザープロフィールの編集フォーム](user-profile-form.md)
-- [ユーザー登録フォーム](user-registration-form.md)
-- [パスワードを忘れた際のフォーム](forgot-password-form.md)
-- [パスワードの設定フォーム](set-password-form.md)
+- [Disqus の統合](https://craftcms.com/knowledge-base/integrating-disqus)
+- [RSS フィード](https://craftcms.com/knowledge-base/rss-and-atom-feeds)
+- [Atom フィード](https://craftcms.com/knowledge-base/entry-form)
+- [エントリの投稿フォーム](https://craftcms.com/knowledge-base/search-form)
+- [検索フォーム](https://craftcms.com/knowledge-base/front-end-user-accounts#login-form)
+- [ログインフォーム](https://craftcms.com/knowledge-base/front-end-user-accounts)
+- [ユーザープロフィールの編集フォーム](https://craftcms.com/knowledge-base/front-end-user-accounts#registration-form)
+- [ユーザー登録フォーム](https://craftcms.com/knowledge-base/front-end-user-accounts#reset-password-forms)
+- [パスワードを忘れた際のフォーム](https://craftcms.com/knowledge-base/front-end-user-accounts#reset-password-forms)

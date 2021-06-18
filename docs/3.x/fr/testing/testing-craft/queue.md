@@ -16,8 +16,8 @@ $this->tester->runQueue(MyJob::class, [
 - The first argument is the class of your Job.
 - The second argument is any arguments that must be passed into your job.
 
-::: tip
-Underneath Craft simply runs your job via `Craft::$app->getQueue()`. All methods and actions your job should perform on i.e. the database will thus be performed normally.
+::: warning
+`assertPushedToQueue` only supports the default Craft queue component (`craft\queue\Queue`). Ensure that you are not setting a custom Queue component that does not extend the Craft class or no assertions will be made.
 :::
 
 ## Checking Queue Data

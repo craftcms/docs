@@ -85,11 +85,13 @@ Craft 3 では、コンポーネントタイプはモデルにとってあまり
 - コンポーネントタイプのベース実装は、抽象的な基本クラスによって提供されます（例：<craft3:craft\base\Field>）。
 - 基本クラスは、様々なコンポーネントクラスによって拡張されます（例：<craft3:craft\fields\PlainText>）。
 
-
+::: tip
+Rather than defining the full message heading/subject/body right within the <craft3:Craft::t()> call, you can pass placeholder strings (e.g. `'email_heading'`) and define the actual string in your plugin’s [translation file](../sites.md#static-message-translations).
+:::
 
 ## 翻訳
 
-<craft3:Craft::t()> は、次の翻訳カテゴリのいずれかがセットされる `$category` 引数を必要とします。
+<craft3:Craft::t()> フロントエンドの翻訳メッセージに加えて、`site` カテゴリはコントロールパネルの管理者が定義したラベルのために使用されます。
 
 - Yii の翻訳メッセージのための `yii`
 - Craft の翻訳メッセージのための `app`
@@ -100,7 +102,7 @@ Craft 3 では、コンポーネントタイプはモデルにとってあまり
 \Craft::t('app', 'Entries')
 ```
 
-フロントエンドの翻訳メッセージに加えて、`site` カテゴリはコントロールパネルの管理者が定義したラベルのために使用されます。
+は、次の翻訳カテゴリのいずれかがセットされる `$category` 引数を必要とします。
 
 ```php
 \Craft::t('app', 'Post a new {section} entry', [
@@ -119,11 +121,11 @@ Craft 3 では、コンポーネントタイプはモデルにとってあまり
 
 ### テーブル名
 
-Craft は、もはやデータベーステーブル接頭辞をテーブル名へ自動的に付加しないため、Yii の `{{%tablename}}` 構文でテーブル名を書く必要があります。
+SELECT クエリは、<craft3:craft\db\Query> クラスで定義されています。
 
 ### SELECT クエリ
 
-SELECT クエリは、<craft3:craft\db\Query> クラスで定義されています。
+操作クエリは、Craft 2 の [`DbCommand`](https://docs.craftcms.com/api/v2/craft-dbcommand.html) クラスと同様に（ `Craft::$app->db->createCommand()` 経由でアクセスされる）<craft3:craft\db\Command> のヘルパーメソッドから構築できます。
 
 ```php
 use craft\db\Query;
@@ -137,9 +139,9 @@ $results = (new Query())
 
 ### 操作クエリ
 
-操作クエリは、Craft 2 の [`DbCommand`](https://docs.craftcms.com/api/v2/craft-dbcommand.html) クラスと同様に（ `Craft::$app->db->createCommand()` 経由でアクセスされる）<craft3:craft\db\Command> のヘルパーメソッドから構築できます。
+Operational queries can be built from the helper methods on <craft3:craft\db\Command> (accessed via `Craft::$app->db->createCommand()`), much like the [`DbCommand`](https://docs.craftcms.com/api/v2/craft-dbcommand.html) class in Craft 2.
 
-1つの顕著な違いは、ヘルパーメソッドはもはや自動的にクエリを実行しません。 そのため、`execute()` の呼び出しを連鎖させる必要があります。
+`ElementCriteriaModel` は、Craft 3 で[エレメントクエリ](../element-queries.md)に置き換えられました。
 
 ```php
 $result = \Craft::$app->db->createCommand()
@@ -149,7 +151,7 @@ $result = \Craft::$app->db->createCommand()
 
 ## エレメントクエリ
 
-`ElementCriteriaModel` は、Craft 3 で[エレメントクエリ](../element-queries.md)に置き換えられました。
+`ElementCriteriaModel` has been replaced with [Element Queries](../element-queries.md) in Craft 3:
 
 ```php
 // Old:
@@ -187,27 +189,27 @@ $tablePrefix = Craft::$app->config->db->tablePrefix;
 
 ## Events
 
-Craft 2 / Yii 1 のイベントハンドルを登録する伝統的な方法は、次の通りです。
+これは、コンポーネント上にイベントリスナーを直接登録します。
 
 ```php
 $component->onEventName = $callback;
 ```
 
-これは、コンポーネント上にイベントリスナーを直接登録します。
-
 Craft 3 / Yii 2 では、代わりに <yii2:yii\base\Component::on()> を使用します。
+
+Craft 2 は、サービス上にイベントハンドルを登録するために使用できる `craft()->on()` メソッドも提供していました。
 
 ```php
 $component->on('eventName', $callback);
 ```
 
-Craft 2 は、サービス上にイベントハンドルを登録するために使用できる `craft()->on()` メソッドも提供していました。
+Craft 2 / Yii 1 のイベントハンドルを登録する伝統的な方法は、次の通りです。
 
 ```php
 craft()->on('elements.beforeSaveElement', $callback);
 ```
 
-Craft 3 には直接匹敵するものがありません。 しかし、一般的に Craft 2 で `craft()->on()` を使用していたイベントハンドラは、Craft 3 で[クラスレベルのイベントハンドラ](https://www.yiiframework.com/doc/guide/2.0/en/concept-events#class-level-event-handlers)を使用する必要があります。
+サービスに加えて、まだ初期化されていないコンポーネントやそれらへの参照を追跡することが簡単ではないクラスレベルのイベントハンドラを使用できます。
 
 ```php
 use craft\services\Elements;
@@ -216,9 +218,9 @@ use yii\base\Event;
 Event::on(Elements::class, Elements::EVENT_BEFORE_SAVE_ELEMENT, $callback);
 ```
 
-サービスに加えて、まだ初期化されていないコンポーネントやそれらへの参照を追跡することが簡単ではないクラスレベルのイベントハンドラを使用できます。
-
 例えば、行列フィールドが保存されるたびに通知させたい場合、次のようにします。
+
+For example, if you want to be notified every time a Matrix field is saved, you could do this:
 
 ```php
 use craft\events\ModelEvent;
@@ -281,7 +283,7 @@ public function addTwigExtension()
 
 #### `addTwigExtension`
 
-次のフックのセットは、すべてのエレメントタイプで共有されている単一のイベントに結合されました。
+::: code
 ```php Craft 2
 // Old:
 public function addUserAdministrationOptions(UserModel $user)
@@ -400,13 +402,13 @@ Event::on(SystemMessages::class, SystemMessages::EVENT_REGISTER_MESSAGES, functi
 });
 ```
 
-::: warning
-NOTE リソースリクエストのコンセプトが Craft 3 で削除されたため、プラグインにリソースリクエストの処理を許可するこのフックには、直接 Craft 3 で匹敵するものがありません。 Craft 3 でプラグインがどのようにリソースを提供できるかを知るには[アセットバンドル](asset-bundles.md)を参照してください。
+::: warning NOTE
+リソースリクエストのコンセプトが Craft 3 で削除されたため、プラグインにリソースリクエストの処理を許可するこのフックには、直接 Craft 3 で匹敵するものがありません。 Craft 3 でプラグインがどのようにリソースを提供できるかを知るには[アセットバンドル](asset-bundles.md)を参照してください。 :::
 :::
 
 #### `modifyCpNav`
 
-テンプレートサービスは View コンポーネントに置き換えられました。
+::: code
 ```php Craft 2
 // Old:
 public function registerUserPermissions()
@@ -454,7 +456,7 @@ Event::on(Cp::class, Cp::EVENT_REGISTER_ALERTS, function(RegisterCpAlertsEvent $
 
 #### `registerCachePaths`
 
-フロンドエンドリクエストでプラグインが提供するテンプレートをレンダリングしたい場合、View コンポーネントを CP のテンプレートモードに設定する必要があります。
+::: code
 ```php Craft 2
 // Old:
 public function modifyAssetFilename($filename)
@@ -559,7 +561,7 @@ Rather than defining the full message heading/subject/body right within the <cra
 
 #### `registerUserPermissions`
 
-次のコントロールパネル[テンプレートフック](template-hooks.md)はリネームされました。
+::: code
 ```php Craft 2
 // Old:
 public function addEntryActions($source)
@@ -598,7 +600,7 @@ Event::on(Entry::class, Element::EVENT_REGISTER_SORT_OPTIONS, function(RegisterE
 
 #### `getCpAlerts`
 
-ページのどこかに任意の HTML を含めたい場合、View コンポーネントで `beginBody` または `endBody` イベントを使用してください。
+::: code
 ```php Craft 2
 // Old:
 public function modifyEntrySources(&$sources, $context)
@@ -666,7 +668,7 @@ Event::on(Entry::class, Element::EVENT_REGISTER_TABLE_ATTRIBUTES, function(Regis
 
 #### `modifyAssetFilename`
 
-プラグインがカスタムタスクタイプを提供する場合、それらをジョブに変換する必要があります。
+::: code
 ```php Craft 2
 // Old:
 public function getEntryTableAttributeHtml(EntryModel $entry, $attribute)
@@ -762,7 +764,7 @@ $html = \Craft::$app->view->renderTemplate('plugin-handle/path/to/template');
 
 #### `getElementRoute`
 
-`<old-handle>` と `<oldhandle>` を以前のプラグインハンドル（`kebab-case` と `onewordalllowercase`）に、`<new-handle>` を新しいプラグインハンドルに置き換えてください。
+::: code
 ```php Craft 2
 {# Old: #}
 {% set extraPageHeaderHtml %}
@@ -809,13 +811,13 @@ $html = \Craft::$app->view->renderTemplate('plugin-handle/path/to/template');
 
 ### エレメントフック
 
-プラグインがカスタムエレメントタイプ、フォールドタイプ、または、ウィジェットタイプを提供する場合、新しいクラス名とマッチする適切なテーブルの `type` カラムをアップデートする必要があります。
-
 プラグインが Craft 2 の `locales` テーブルにカスタム外部キーを作成していた場合、Craft 3 のアップグレードでは、`locales` テーブルがもはや存在しないため、代わりに`sites` テーブルの外部キーを付けた新しいカラムが自動的に追加されます。
+
+データは問題なく動作するはずですが、古いカラムを削除し、Craft によって新しく作成されたものをリネームすることを望むでしょう。
 
 #### `addEntryActions`, `addCategoryActions`, `addAssetActions`, & `addUserActions`
 
-データは問題なく動作するはずですが、古いカラムを削除し、Craft によって新しく作成されたものをリネームすることを望むでしょう。
+::: code
 ```php Craft 2
 public function addEntryActions($source)
 {
@@ -983,8 +985,8 @@ public function getTableAttributesForSource($elementType, $sourceKey)
 }
 ```
 
-::: warning
-NOTE エレメントインデックスがレンダリングされる前に、プラグインがエレメントタイプのテーブル属性を完全に変更することを許可するこのフックには、直接 Craft 3 で匹敵するものがありません。 Craft 3 で最も近いのは、管理者がエレメントインデックスのソースをカスタマイズする際に、エレメントタイプの利用可能なテーブル属性を変更するために使用できる <craft3:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> イベントです。
+::: warning NOTE
+エレメントインデックスがレンダリングされる前に、プラグインがエレメントタイプのテーブル属性を完全に変更することを許可するこのフックには、直接 Craft 3 で匹敵するものがありません。 Craft 3 で最も近いのは、管理者がエレメントインデックスのソースをカスタマイズする際に、エレメントタイプの利用可能なテーブル属性を変更するために使用できる <craft3:craft\base\Element::EVENT_REGISTER_TABLE_ATTRIBUTES> イベントです。 :::
 :::
 
 ## テンプレート変数
@@ -1142,7 +1144,7 @@ use yii\base\Event;
 
 Event::on(View::class, View::EVENT_END_BODY, function(Event $event) {
     // $html = ...
-    echo $html;
+        echo $html;
 });
 ```
 :::

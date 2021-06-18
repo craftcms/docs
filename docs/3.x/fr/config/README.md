@@ -144,6 +144,12 @@ Craft’s default configuration is defined by [src/config/app.php](https://githu
 
 By default, Craft will store data caches in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) by overriding the `cache` application component from `config/app.php`.
 
+::: tip
+Make sure that your `config/app.php` file is setting a unique `id` for your application, like [new Craft projects are doing](https://github.com/craftcms/craft/blob/master/config/app.php#L23). If not, add that missing line, and run the following command to add a unique `APP_ID` environment variable to your `.env` file:
+
+    php craft setup/app-id
+:::
+
 #### Database Cache Example
 
 If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a console command for convenience:
@@ -174,22 +180,6 @@ If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather th
 return [
     'components' => [
         'cache' => [
-            'class' => yii\caching\ApcCache::class,
-            'useApcu' => true,
-            'keyPrefix' => 'a_unique_key',
-        ],
-    ],
-];
-```
-
-
-#### Memcached Example
-
-```php
-<?php
-return [
-    'components' => [
-        'cache' => [
             'class' => yii\caching\MemCache::class,
             'useMemcached' => true,
             'username' => getenv('MEMCACHED_USERNAME'),
@@ -212,9 +202,8 @@ return [
 ];
 ```
 
-#### Redis Example
 
-To use Redis cache storage, you will first need to install the [yii2-redis](https://github.com/yiisoft/yii2-redis) library. Then configure Craft’s `cache` component to use it:
+#### Memcached Example
 
 ```php
 <?php
@@ -235,9 +224,9 @@ return [
 ];
 ```
 
-### Database Component
+#### Redis Example
 
-If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component:
+To use Redis cache storage, you will first need to install the [yii2-redis](https://github.com/yiisoft/yii2-redis) library. Then configure Craft’s `cache` component to use it:
 
 ```php
 <?php
@@ -277,11 +266,9 @@ return [
 ];
 ```
 
-### Session Component
+### Database Component
 
-In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location.
-
-#### Redis Example
+If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component:
 
 ```php
 <?php
@@ -303,6 +290,25 @@ return [
             // Instantiate and return it
             return Craft::createObject($config);
         },
+    ],
+];
+```
+
+### Session Component
+
+In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location.
+
+#### Redis Example
+
+```php
+<?php
+return [
+    'components' => [
+        'cache' => [
+            'class' => yii\caching\ApcCache::class,
+            'useApcu' => true,
+            'keyPrefix' => 'a_unique_key',
+        ],
     ],
 ];
 ```
@@ -600,6 +606,10 @@ The path to the [storage/](../directory-structure.md#storage) folder. (It is ass
 ::: tip
 Make sure you set this to a valid folder path, otherwise it will be ignored.
 :::
+
+### `CRAFT_STREAM_LOG`
+
+When set to `true`, Craft will additionally send log output to `stderr` and `stdout`.
 
 ### `CRAFT_TEMPLATES_PATH`
 

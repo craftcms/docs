@@ -18,12 +18,12 @@ You add additional sites using the Sites settings in Settings → Sites.
 
 Each site has the following attributes:
 
-* Group
-* Name
-* Handle
-* Language
-* Is Primary Site?
-* Base URL
+- Group
+- Name
+- Handle
+- Language
+- Is Primary Site?
+- Base URL
 
 
 ### Site Groups
@@ -138,8 +138,8 @@ Using new or existing entries, test that the Section, Field, and Translation Met
 
 If you have any local asset volumes, you will need to make sure those assets are available from each of your sites.
 
-* The File System Path settings should be relative (`uploads/images/`).
-* The URL settings should be relative (`/images`)
+- The File System Path settings should be relative (`uploads/images/`).
+- The URL settings should be relative (`/images`)
 
 ### Step 7: Configure Your Web Server and DNS
 
@@ -156,7 +156,7 @@ The first step to creating localized site is to decide the languages you need to
 
 ### Step 2: Update Your Sections
 
-After creating a new site for a language, enable the new site in each Section. In Settings → Sections, go into each section settings you want included in the localized site and enable the site in the Site Settings. Fill out the Entry URI Format (for Channel and Structure sections) or URI (for Single sections) to reflect how you want the URIs structured for that site.
+After creating a new site for a language, enable the new site in each Section. Fill out the Entry URI Format (for Channel and Structure sections) or URI (for Single sections) to reflect how you want the URIs structured for that site. In Settings → Sections, go into each section settings you want included in the localized site and enable the site in the Site Settings.
 
 ### Step 3: Define Your Translatable Fields
 

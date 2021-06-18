@@ -1,6 +1,9 @@
+- - -
+Craft calls all member accounts of the system “users”.
+- - -
 # User Management
 
-Craft calls all member accounts of the system “users”.
+Craft calls all member accounts of the system “[Users](users.md)”.
 
 The first user account is created during [installation](installation.md). If you stick with the Solo edition, this is the only account you will be able to create. If you need more you can upgrade to the Pro edition, which offers additional user accounts.
 
@@ -8,9 +11,9 @@ The first user account is created during [installation](installation.md). If you
 
 Admin accounts are special accounts that can do absolutely everything within Craft, including some things that there aren’t even explicit permissions for:
 
-* Everything within the Settings section
-* Make other users Admins (Craft Pro only)
-* Administrate other Admins (Craft Pro only)
+- Everything within the Settings section
+- Make other users Admins (Craft Pro only) <badge type="edition" vertical="middle" title="Administrate other Admins (Craft Pro only)">Pro</badge>
+- Administrate other Admins <badge type="edition" vertical="middle" title="Craft Pro only">Pro</badge>
 
 The user account you create during installation is an admin by default.
 
@@ -68,6 +71,40 @@ The permissions Craft comes with are:
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Replace files uploaded by other users | `replacePeerFilesInVolume:[SectionUID]`     |
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Remove files uploaded by other users  | `deletePeerFilesInVolume:[SectionUID]`      |
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Edit images uploaded by other users   | `editPeerImagesInVolume:[SectionUID]`       |
+| Utilities                                                        |                                             |
+| ↳&nbsp; Updates                                                  | `utility:updates`                           |
+| ↳&nbsp; System Report                                            | `utility:system-report`                     |
+| ↳&nbsp; PHP Info                                                 | `utility:php-info`                          |
+| ↳&nbsp; System Messages                                          | `utility:system-messages`                   |
+| ↳&nbsp; Asset Indexes                                            | `utility:asset-indexes`                     |
+| ↳&nbsp; Queue Manager                                            | `utility:queue-manager`                     |
+| ↳&nbsp; Clear Caches                                             | `utility:clear-caches`                      |
+| ↳&nbsp; Deprecation Warnings                                     | `utility:deprecation-errors`                |
+| ↳&nbsp; Database Backup                                          | `utility:db-backup`                         |
+| ↳&nbsp; Find and Replace                                         | `utility:find-replace`                      |
+| ↳&nbsp; Migrations                                               | `utility:migrations`                        |
+
+::: tip
+See the _Extending Craft_ [User Permissions](extend/user-permissions.md) page to learn how to register custom permissions for your module or plugin.
+:::
+
+### Checking Permissions
+
+Once you set up your site to allow public user registration, the last step is to create a [user registration form](dev/examples/user-registration-form.md) on your site’s front end.
+
+```twig
+{% if currentUser.can('accessCp') %}
+    <a href="{{ cpUrl() }}">Visit the Control Panel</a>
+{% endif %}
+```
+
+### Requiring Permissions
+
+You can also require the logged-in user to have a specific permission to access an entire template:
+
+```twig
+{% requirePermission 'accessCp' %}
+```
 
 ## Public Registration
 
@@ -75,4 +112,4 @@ Craft Pro has the option of allowing public user registration, which is disabled
 
 To enable public registration, go to Settings → Users → Settings, and check the “Allow public registration?” setting. With that checked, you will also have the ability to choose a default user group to which Craft will assign the publicly-registered users.
 
-Once you set up your site to allow public user registration, the last step is to create a [user registration form](dev/examples/user-registration-form.md) on your site’s front end.
+Once you set up your site to allow public user registration, the last step is to create a [user registration form](https://craftcms.com/knowledge-base/front-end-user-accounts#registration-form) on your site’s front end.
