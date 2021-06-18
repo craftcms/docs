@@ -32,6 +32,7 @@ The following [filters](https://twig.symfony.com/doc/2.x/templates.html#filters)
 | [format](https://twig.symfony.com/doc/2.x/filters/format.html)                     | Formats a string by replacing placeholders.                                                                      |
 | [group](#group)                                                                    | Groups items in an array.                                                                                        |
 | [hash](#hash)                                                                      | Prefixes a string with a keyed-hash message authentication code (HMAC).                                          |
+| [httpdate](#httpdate)                                                              | Converts a date to the HTTP format.                                                                              |
 | [id](#id)                                                                          | Normalizes an element ID into only alphanumeric characters, underscores, and dashes.                             |
 | [indexOf](#indexof)                                                                | Returns the index of a given value within an array, or the position of a passed-in string within another string. |
 | [index](#index)                                                                    | Indexes the items in an array.                                                                                   |
@@ -48,7 +49,7 @@ The following [filters](https://twig.symfony.com/doc/2.x/templates.html#filters)
 | [lower](https://twig.symfony.com/doc/2.x/filters/lower.html)                       | Lowercases a string.                                                                                             |
 | [map](https://twig.symfony.com/doc/2.x/filters/map.html)                           | Applies an arrow function to the items in an array.                                                              |
 | [markdown](#markdown-or-md)                                                        | Processes a string as Markdown.                                                                                  |
-| [merge](https://twig.symfony.com/doc/2.x/filters/merge.html)                       | Merges an array with another array                                                                               |
+| [merge](#merge)                                                                    | Merges an array with another array                                                                               |
 | [multisort](#multisort)                                                            | Sorts an array by one or more keys within its sub-arrays.                                                        |
 | [namespace](#namespace)                                                            | Namespaces input names and other HTML attributes, as well as CSS selectors.                                      |
 | [namespaceInputId](#namespaceinputid)                                              | Namespaces an element ID.                                                                                        |
@@ -69,6 +70,7 @@ The following [filters](https://twig.symfony.com/doc/2.x/templates.html#filters)
 | [round](https://twig.symfony.com/doc/2.x/filters/round.html)                       | Rounds a number.                                                                                                 |
 | [rss](#rss)                                                                        | Converts a date to RSS date format.                                                                              |
 | [slice](https://twig.symfony.com/doc/2.x/filters/slice.html)                       | Extracts a slice of a string or array.                                                                           |
+| [slug](https://twig.symfony.com/doc/2.x/filters/slug.html)                         | Transforms a given string into another string that only includes safe ASCII characters.                          |
 | [snake](#snake)                                                                    | Formats a string into “snake_case”.                                                                              |
 | [sort](https://twig.symfony.com/doc/2.x/filters/sort.html)                         | Sorts an array.                                                                                                  |
 | [spaceless](https://twig.symfony.com/doc/2.x/filters/spaceless.html)               | Removes whitespace between HTML tags.                                                                            |
@@ -78,6 +80,7 @@ The following [filters](https://twig.symfony.com/doc/2.x/templates.html#filters)
 | [timestamp](#timestamp)                                                            | Formats a human-readable timestamp.                                                                              |
 | [title](https://twig.symfony.com/doc/2.x/filters/title.html)                       | Formats a string into “Title Case”.                                                                              |
 | [translate](#translate-or-t)                                                       | Translates a message.                                                                                            |
+| [truncate](#truncate)                                                              | Truncates a string to a given length, while ensuring that it does not split words.                               |
 | [trim](https://twig.symfony.com/doc/2.x/filters/trim.html)                         | Strips whitespace from the beginning and end of a string.                                                        |
 | [ucfirst](#ucfirst)                                                                | Capitalizes the first character of a string.                                                                     |
 | [unique](#unique)                                                                  | Removes duplicate values from an array.                                                                          |
@@ -258,6 +261,13 @@ You can pass `stripZeros=true` to remove any fraction digits if the value to be 
 {# Output: $1,000,000 #}
 ```
 
+If the passed-in value isn’t a valid number it will be returned verbatim:
+
+```twig
+{{ 'oh hai'|currency('USD') }}
+{# Output: oh hai #}
+```
+
 ## `date`
 
 Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) object.
@@ -407,6 +417,13 @@ Formats a number of bytes into something nicer.
 {# Output: 1.945 MB #}
 ```
 
+If the passed-in value isn’t a valid number it will be returned verbatim:
+
+```twig
+{{ 'oh hai'|filesize }}
+{# Output: oh hai #}
+```
+
 ## `filter`
 
 Filters elements of an array.
@@ -463,6 +480,22 @@ $foo = Craft::$app->security->validateData($foo);
 if ($foo !== false) {
     // data is valid
 }
+```
+
+## `httpdate`
+
+Converts a date to the HTTP format, used by [RFC 7231](https://tools.ietf.org/html/rfc7231#section-7.1.1.1)-compliant HTTP headers like `Expires`.
+
+```twig
+{% header "Expires: " ~ expiry|httpdate %}
+{# Output: Expires: Thu, 08 Apr 2021 13:00:00 GMT #}
+```
+
+You can use the `timezone` param to specify the date’s timezone for conversion to GMT:
+
+```twig
+{% header "Expires: " ~ expiry|httpdate('CET') %}
+{# Output: Expires: Thu, 08 Apr 2021 21:00:00 GMT #}
 ```
 
 ## `id`
@@ -565,8 +598,10 @@ Lowercases the first character of a string.
 Runs a string through <craft3:craft\helpers\Db::escapeParam()>.
 
 ```twig
-{{ 'SELECT id, * FROM table'|literal }}
-{# Output: SELECT id\, \* FROM table #}
+{% set titleParam = craft.app.request.getQueryParam('title') %}
+{% set entry = craft.entries()
+  .title(titleParam|literal)
+  .one() %}
 ```
 
 ## `markdown` or `md`
@@ -589,6 +624,82 @@ the [Apple Extended Keyboard II] [1].
 This filter supports two arguments:
 - `flavor` can be `'original'` (default value), `'gfm'`(GitHub-Flavored Markdown), `'gfm-comment'` (GFM with newlines converted to `<br>`s), or `'extra'` (Markdown Extra)
 - `inlineOnly` determines whether to only parse inline elements, omitting any `<p>` tags (defaults to `false`)
+
+## `merge`
+
+Merges an array with another one.
+
+https://twig.symfony.com/doc/2.x/filters/merge.html
+
+```twig
+{% set array1 = ['foo'] %}
+{% set array2 = array|unshift('bar', 'baz') %}
+{# Result: ['bar', 'baz', 'foo'] #}
+```
+
+It also works on hashes, where merging occurs on the keys. A key that doesn’t already exist is added, and a key that does already exist only has its value overridden:
+
+```twig
+{% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}
+{{ array|filterByValue(v => v == 'bar') }}
+{# Result: { 'foo': 'bar', 'bat': 'bar' } #}
+```
+
+::: tip
+If you want to make sure specific values are defined by default in an array, like `'Lindsay': 'Bluth'` below, reverse the elements in the call:
+
+```twig
+{% set array1 = ['foo'] %}
+{% set array2 = array|push('bar', 'baz') %}
+{# Result: ['foo', 'bar', 'baz'] #}
+```
+:::
+
+You can also provide an optional `recursive` argument that will use [ArrayHelper::merge()](craft3:craft\helpers\ArrayHelper::merge()) to merge nested arrays or hashes.
+
+Without `recursive`:
+
+```twig
+{% set items = {
+    'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
+    'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
+} %}
+{% set items = items|merge({
+    'rebellion': { 'Endor': 'Solo/Organa' },
+    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+}) %}
+{# Result: {
+    'rebellion': { 'Endor': 'Solo/Organa' },
+    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+} #}
+```
+
+With `recursive`:
+
+```twig{8}
+{% set items = {
+    'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
+    'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
+} %}
+{% set items = items|merge({
+    'rebellion': { 'Endor': 'Solo/Organa' },
+    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+}, true) %}
+{# Result: {
+    'rebellion': {
+        'Bespin': 'Calrissian',
+        'Hoth': 'Organa',
+        'Crait': 'Organa',
+        'Endor': 'Solo/Organa'
+    },
+    'empire': {
+        'Coruscant': 'Palpatine',
+        'Endor': 'Palpatine',
+        'Bespin': 'Vader',
+        'Hoth': 'Veers'
+    }
+} #}
+```
 
 ## `multisort`
 
@@ -734,6 +845,13 @@ You can optionally pass `false` to it if you want group symbols to be omitted (e
 {# Output: 1000000 #}
 ```
 
+If the passed-in value isn’t a valid number it will be returned verbatim:
+
+```twig
+{{ 'oh hai'|number }}
+{# Output: oh hai #}
+```
+
 ## `parseRefs`
 
 Parses a string for [reference tags](../reference-tags.md).
@@ -758,6 +876,18 @@ Returns a string formatted in “PascalCase” (AKA “UpperCamelCase”).
 ## `percentage`
 
 Formats a percentage according to the user’s preferred language.
+
+```twig
+{{ 0.85|percentage }}
+{# Output: 85% #}
+```
+
+If the passed-in value isn’t a valid number it will be returned verbatim:
+
+```twig
+{{ 'oh hai'|percentage }}
+{# Output: oh hai #}
+```
 
 ## `prepend`
 
@@ -803,9 +933,12 @@ That will configure HTML Purifier based on the settings defined by `config/htmlp
 Appends one or more items onto the end of an array, and returns the new array.
 
 ```twig
-{% set array1 = ['foo'] %}
-{% set array2 = array|push('bar', 'baz') %}
-{# Result: ['foo', 'bar', 'baz'] #}
+{% set array = {
+    foo: 'foo',
+    bar: 'bar',
+    baz: 'baz'
+} %}
+{% set filtered = array|withoutKey('baz') %}
 ```
 
 ## `replace`
@@ -919,6 +1052,43 @@ If no category is specified, it will default to `site`.
 See [Static Message Translations](../sites.md#static-message-translations) for a full explanation on how this works.
 :::
 
+## `truncate`
+
+::: tip
+The `truncate` filter was added in Craft 3.5.10.
+:::
+
+Truncates a string to a given length, while ensuring that it does not split words.
+
+```twig
+{{ 'Hello world'|truncate(10) }}
+{# Output: Hello… #}
+```
+
+An ellipsis (`…`) will be appended to the string if it needs to be truncated, by default. You can customize what gets appended by passing a second argument. (Note that a longer appended string could result in more of the original string getting truncated.)
+
+```twig
+{{ 'Hello world'|truncate(10, '...') }}
+{# Output: Hello... #}
+
+{{ 'Hello world'|truncate(10, '') }}
+{# Output: Hello #}
+```
+
+If the truncated string cuts down to less than a single word, that first word will be split by default.
+
+```twig
+{{ 'Hello world'|truncate(2) }}
+{# Output: H… #}
+```
+
+If you’d prefer to have the entire word removed, set the `splitSingleWord` argument to `false`.
+
+```twig
+{{ 'Hello world'|truncate(2, splitSingleWord=false) }}
+{# Output: … #}
+```
+
 ## `ucfirst`
 
 Capitalizes the first character of a string.
@@ -944,7 +1114,7 @@ Prepends one or more items to the beginning of an array, and returns the new arr
 
 ```twig
 {% set array1 = ['foo'] %}
-{% set array2 = array|unshift('bar', 'baz') %}
+{% set array2 = array1|unshift('bar', 'baz') %}
 {# Result: ['bar', 'baz', 'foo'] #}
 ```
 
@@ -964,7 +1134,7 @@ Runs an array through <craft3:craft\helpers\ArrayHelper::where()>.
 
 ```twig
 {% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}
-{{ array|filterByValue(v => v == 'bar') }}
+{{ array|where(v => v == 'bar') }}
 {# Result: { 'foo': 'bar', 'bat': 'bar' } #}
 ```
 
@@ -980,7 +1150,9 @@ Returns an array without the specified element(s).
 
 ## `withoutKey`
 
-Returns an array without the specified key.
+Returns an array without one or more specified keys.
+
+The key can be a single key as a string:
 
 ```twig
 {% set array = {
@@ -989,4 +1161,17 @@ Returns an array without the specified key.
     baz: 'baz'
 } %}
 {% set filtered = array|withoutKey('baz') %}
+{# Result: { 'foo': 'foo', 'bar: 'bar' } #}
+```
+
+You can also pass multiple keys in an array:
+
+```twig
+{% set array = {
+    foo: 'foo',
+    bar: 'bar',
+    baz: 'baz'
+} %}
+{% set filtered = array|withoutKey(['bar', 'baz']) %}
+{# Result: { 'foo': 'foo' } #}
 ```
