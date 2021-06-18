@@ -162,6 +162,20 @@ public function saveProductType($productType)
     }
 
     // Fire a 'beforeSaveProductType' event?
+    ]);
+
+    // Now set the ID on the product type in case the
+    // caller needs to know it
+    if ($isNew) {
+        $productType->id = Db::idByUid('{{%producttypes}}', $productType->uid);
+    }
+
+    return true;
+}
+
+public function deleteProductType($productType)
+{
+    // Fire a 'beforeDeleteProductType' event?
     if ($this->hasEventHandlers('beforeSaveProductType')) {
         $this->trigger('beforeSaveProductType', new ProducTypeEvent([
             'productType' => $productType,
@@ -179,20 +193,6 @@ public function saveProductType($productType)
     Craft::$app->projectConfig->set($path, [
         'name' => $productType->name,
         // ...
-    ]);
-
-    // Now set the ID on the product type in case the
-    // caller needs to know it
-    if ($isNew) {
-        $productType->id = Db::idByUid('{{%producttypes}}', $productType->uid);
-    }
-
-    return true;
-}
-
-public function deleteProductType($productType)
-{
-    // Fire a 'beforeDeleteProductType' event?
     if ($this->hasEventHandlers('beforeDeleteProductType')) {
         $this->trigger('beforeDeleteProductType', new ProducTypeEvent([
             'productType' => $productType,
@@ -222,15 +222,25 @@ One way to keep project config in sync is to version control `project.yaml` and 
 To avoid this, always check your plugin’s schema version _in `project.yaml`_ before making project config changes. (You do that by passing `true` as the second argument when calling [ProjectConfig::get()](craft3:craft\services\ProjectConfig::get()).)
 
 ```php
-::: warning
-Craft 3.5 added changes to project config, see <a href="https://craftcms.com/knowledge-base/upgrading-to-craft-3-5#project-config-workflow">craftcms.com/knowledge-base/upgrading-to-craft-3-5</a>.
+public function safeUp()
+{
+    // Don’t make the same config changes twice
+    $schemaVersion = Craft::$app->projectConfig
+        ->get('plugins.<plugin-handle>.schemaVersion', true);
+
+    if (version_compare($schemaVersion, '<NewSchemaVersion>', '<')) {
+        // Make the config changes here...
 
 :::
 ```
 
+::: warning
+Craft never forces Project Config changes to be applied. Code defensively and make sure your plugin works normally _without_ relying on project config YAML changes.
+:::
+
 ## プロジェクトコンフィグデータの再構築
 
-This will treat all project config values as added or updated, resulting in a longer sync process and potentially overriding any expected changes that might have been favored in the database.
+If your plugin is storing data in both the project config and elsewhere in the database, you should listen to <craft3:craft\services\ProjectConfig::EVENT_REBUILD> (added in Craft 3.1.20) to aid Craft in rebuilding the project config based on database-stored data, when the `php craft project-config/rebuild` command is run.
 
 ```php
 use craft\events\RebuildConfigEvent;
@@ -239,6 +249,6 @@ use yii\base\Event;
 
 Event::on(ProjectConfig::class, ProjectConfig::EVENT_REBUILD, function(RebuildConfigEvent $e) {
     // Add plugin's project config data...
-   $e->config['myPlugin']['key'] = $value;
+        $e->config['myPlugin']['key'] = $value;
 });
 ```
