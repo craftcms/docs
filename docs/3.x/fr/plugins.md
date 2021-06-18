@@ -1,20 +1,24 @@
 # Plugins
 
+Plugins extend Craft’s core functionality. They can introduce new Dashboard widgets, field types, control panel sections, Twig templating features, workflow actions, and more.
+
 ::: tip
 If you’re looking for plugin _development_ documentation, check out the [Extending Craft](extend/README.md) section.
 :::
-
-Plugins extend Craft’s core functionality. They can introduce new Dashboard widgets, field types, control panel sections, Twig templating features, workflow actions, and more.
 
 ## The Plugin Store
 
 Craft’s control panel features a Plugin Store, where you can browse through hundreds of free and commercial plugins, install them with a single click, and pay for them.
 
+::: tip
+If you’ve disallowed admin changes in production, you will only be able to install plugins from the control panel in your local development environment.
+:::
+
 To access the Plugin Store, click on the “Plugin Store” item in Craft’s control panel navigation. From there you can browse through the various plugin categories and curated lists to discover new plugins.
 
 ![The Craft Plugin Store](./images/plugin-store.png)
 
-When you click on a plugin, a modal window will open with details about the plugin, including a long description and screenshots.
+Choose any plugin to learn more about its features, pricing, documentation, version history, and see screenshots of it in action.
 
 ![A plugin’s modal window within the Plugin Store](./images/plugin-store-plugin.png)
 
@@ -32,13 +36,19 @@ If you have tried a commercial plugin and are ready to buy it, return to the Plu
 
 Once you’ve completed the checkout process, your plugin installation will automatically become licensed.
 
+::: tip
+If you purchase a plugin license separately from a Craft install or need to update a license key, visit **Settings** → **Plugins** in the relevant site’s control panel. From that listing, you can enter a new key or environment variable placeholder for any commercial plugin.
+
+![Changing a plugin license key](./images/changing-plugin-license-key.gif)
+:::
+
 ## Managing Plugin Licenses
 
 You can manage all of your plugin licenses from your [Craft ID](https://id.craftcms.com/) account, under Licenses → Plugins
 
 If you don’t have a Craft ID account yet, you can create one by going to [id.craftcms.com/register](https://id.craftcms.com/register).
 
-Any plugin licenses that were purchased with the same email address as your Craft ID account will automatically be added to your account.
+Any plugin licenses purchased with the same email address as your Craft ID account will automatically be added to your account.
 
 If you have a plugin license that isn’t showing up, go to Licenses → Claim License. You can enter its license key manually, or if you know the email address that was used for purchase, you can enter it in the “Claim licenses by email address” section. After verifying that you own the email address, any unclaimed licenses associated with that email address will be added to your account.
 
