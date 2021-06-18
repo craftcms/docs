@@ -10,15 +10,15 @@ Typically each entry will have a stake in its own primary URL on your site, thou
 
 Before you can create entries, you must create Sections to contain them. In each Section you can define the following:
 
-* Whether entries in the section have URLs
-* What the entries’ URLs should look like
-* Which template should get loaded if an entry’s URL is requested
-* What types of entries should be available in the section, and which fields each of those entry types should have
+- Whether entries in the section have URLs
+- What the entries’ URLs should look like
+- Which template should get loaded if an entry’s URL is requested
+- What types of entries should be available in the section, and which fields each of those entry types should have
 
 If you're using Craft with multiple sites then you can also define in your Section:
 
-* Which sites' entries in the section should target
-* Which sites are enabled by default for new entries
+- Which sites' entries in the section should target
+- Which sites are enabled by default for new entries
 
 To create a new section, go to Settings → Sections and click the “New Section” button.
 
@@ -30,9 +30,9 @@ Not all sections are created equal. Craft has three different types of sections:
 
 Singles are used for one-off pages that have unique content requirements, such as:
 
-* the homepage
-* an About Us page
-* a Contact Us page
+- the homepage
+- an About Us page
+- a Contact Us page
 
 Unlike the other section types, Singles only have one entry associated with them, and they don’t have an editable Author, Slug, Post Date, or Expiration Date.
 
@@ -40,17 +40,17 @@ Unlike the other section types, Singles only have one entry associated with them
 
 Channels are used for streams of similar content, such as:
 
-* a Blog
-* a News section
-* recipes
+- a Blog
+- a News section
+- recipes
 
 #### Structures
 
 Structures are good for times when you need to store multiple similar entries, and sort them into a specific order. They can also be hierarchical. Examples include:
 
-* Documentation
-* a Services section, where the order of services matters
-* a company organization chart
+- Documentation
+- a Services section, where the order of services matters
+- a company organization chart
 
 ### Entry URI Formats
 
@@ -93,11 +93,15 @@ The above template could also be expressed with this syntax:
 With the above Entry URI Format, a top-level entry’s URI might end up as `docs/templating`, whereas a nested entry’s URI might end up as `docs/templating/tags`.
 
 ::: tip
-You can use an attribute from a query in the entry's URI. Use double curly braces (e.g. `{{craft.entries.section('mySingle').one().slug}}/news`).
+If you want to include the entry’s ID or UID in a preview target URL, use `{sourceId}` or `{sourceUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the draft’s.
 :::
 
 ::: tip
-You can use aliases in the entry's URI. Use the `alias()` function in double curly braces (e.g. `{{alias(@rootUrl)}}/news`, `{{alias(@mySectionUri)}}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
+If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you only want unique elements to be returned, use [unique](#unique) in conjunction with this.
+:::
+
+::: tip
+You can use an attribute from a query in the entry's URI. Use double curly braces (e.g. `{{craft.entries.section('mySingle').one().slug}}/news`).
 :::
 
 ### Preview Targets
@@ -113,18 +117,18 @@ Create additional preview targets for any other areas the entry might show up, s
 ![A section’s Preview Targets setting.](./images/preview-targets.png)
 
 ::: tip
-If you want to include the entry’s ID or UID in a preview target URL, use `{sourceId}` or `{sourceUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the draft’s.
-:::
-
-::: tip
-You can use environment variables and aliases in the preview target URL. These do not get wrapped in curly braces (e.g. `$NEWS_INDEX`, `@rootUrl/news`, `@rootUrl/news/{slug}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
+This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor entries can be.
 :::
 
 ::: tip
 Preview target URLs can include an attribute on the result of a query. Here double curly braces must be used (e.g. `{{ craft.entries.section('mySingle').one().url }}`).
 :::
 
-When an author is editing an entry from a section with custom preview targets, the “Share” button will be replaced with a menu that lists the “Primary entry page” (if the section has an Entry URI Format), plus the names of each preview target.
+::: tip
+Preview target URLs can include an attribute on the result of a query. Use the `alias()` function in double curly braces (e.g. `{{alias(@rootUrl)}}/news`, `{{alias(@mySectionUri)}}`).
+:::
+
+!\[An entry’s Share menu with 3 custom preview targets.\](./images/share-with-targets.png =294x)
 
 !\[An entry’s Share menu with 3 custom preview targets.\](./images/share-with-targets.png =294x)
 
@@ -144,16 +148,16 @@ For Live Preview, you should also consider [enabling iFrame Resizer](config3:use
 
 Both Channel and Structure sections let you define multiple types of entries using Entry Types.
 
-You can manage your sections’ Entry Types by clicking the “Edit Entry Types” link beside the section’s name in Settings → Sections. That’ll take you to the section’s entry type index. Clicking on an entry type’s name takes you to its settings page:
+That’ll take you to the section’s entry type index. You can manage your sections’ Entry Types by clicking the “Edit Entry Types” link beside the section’s name in Settings → Sections. Clicking on an entry type’s name takes you to its settings page:
 
 ![Entry Type Edit Settings](./images/sections-and-entries-entry-types.png)
 
 Entry types have the following settings:
 
-* **Name** – The entry type’s name
-* **Handle** – The entry type’s template-facing handle
-* **Show the Title field?** – Whether a Title field is displayed for entries of this type
-* **Title Field Label** – What the “Title” field label should be.
+- **Name** – The entry type’s name
+- **Handle** – The entry type’s template-facing handle
+- **Show the Title field?** – Whether a Title field is displayed for entries of this type
+- **Title Field Label** – What the “Title” field label should be.
 
 ### Dynamic Entry Titles
 
@@ -163,8 +167,8 @@ The Title Format is a full-blown Twig template, and it will get parsed whenever 
 
 The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](craft3:craft\elements\Entry#public-properties) in two ways:
 
-* `{{ object.property }}` _(normal Twig syntax)_
-* `{property}` _(shortcut syntax)_
+- `{{ object.property }}` _(normal Twig syntax)_
+- `{property}` _(shortcut syntax)_
 
 _Note that the shortcut syntax only has one set of curly braces_.
 
@@ -196,19 +200,19 @@ If you have at least one section, there will be an “Entries” tab in the prim
 
 You can perform the following actions from the Edit Entry page:
 
-* Choose the entry type (if there’s at least two to choose from)
-* Edit the entry’s title
-* Edit the entry’s slug
-* Edit the entry’s custom field content
-* Choose the entry’s author (Pro edition only)
-* Choose the entry’s parent (if it’s within a Structure section)
-* Choose the entry’s Post Date
-* Choose the entry’s Expiration Date (optional)
-* Choose whether the entry is enabled or not
-* Save changes to the entry
-* Save a new draft of the entry
-* Publish a draft
-* View past versions of the entry
+- Choose the entry type (if there’s at least two to choose from)
+- Edit the entry’s title
+- Edit the entry’s slug
+- Edit the entry’s custom field content
+- Choose the entry’s author (Pro edition only)
+- Choose the entry’s parent (if it’s within a Structure section)
+- Choose the entry’s Post Date
+- Choose the entry’s Expiration Date (optional)
+- Choose whether the entry is enabled or not
+- Save changes to the entry
+- Save a new draft of the entry
+- Publish a draft
+- View past versions of the entry
 
 If you leave the Post Date blank, Craft will automatically set it the first time an entry is saved as enabled.
 
@@ -421,7 +425,7 @@ $entries = \craft\elements\Entry::find()
 
 
 ::: tip
-This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor entries can be.
+This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant entries can be.
 :::
 
 
@@ -752,7 +756,7 @@ $entries = \craft\elements\Entry::find()
 
 
 ::: tip
-This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant entries can be.
+This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
 :::
 
 
