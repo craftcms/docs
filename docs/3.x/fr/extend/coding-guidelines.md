@@ -91,8 +91,6 @@ Static methods should generally not start with `get`.
 
 ## Type Declarations
 
-### Argument Types
-
 Use PHP 7.0-supported [argument type declarations](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration) for all function arguments whenever possible. The only exceptions should be:
 
 - [Magic methods](http://php.net/manual/en/language.oop5.magic.php) (e.g. `__toString()`)
@@ -106,19 +104,6 @@ If an argument accepts two types and one of them is `null`, the argument should 
 public function foo(string $bar = null)
 ```
 
-::: tip
-Do this even if there are required arguments following the argument that accepts `null`. This is the only way to enforce an argument type while also allowing `null` in PHP.
-:::
-
-### Return Types
-
-Use PHP 7.0-supported [return type declarations](http://php.net/manual/en/functions.returning-values.php#functions.returning-values.type-declaration) for all methods whenever possible. The only exceptions should be:
-
-- [Magic methods](http://php.net/manual/en/language.oop5.magic.php) (e.g. `__toString()`)
-- Methods with multiple return types
-- Methods that override a parent class’s method, where the parent method doesn’t have a return type
-- Methods that are required by an interface, and the interface method doesn’t have a return type
-
 ## Docblocks
 
 - Methods that override subclass methods or implement an interface method, and don’t have anything relevant to add to the docblock, should only have `@inheritdoc` in the docblock.
@@ -129,7 +114,7 @@ Use PHP 7.0-supported [return type declarations](http://php.net/manual/en/functi
 - Chainable functions that return an instance of the current class should use `static` as the return type declaration.
 - Functions that don’t ever return anything should have `@return void`.
 
-### Interfaces vs. Implementation Classes
+### Argument Types
 
 `@param` , `@return` , `@var` , `@method` and `@property` tags on public service methods should reference Interfaces (when applicable), not their implementation class:
 
