@@ -597,11 +597,13 @@ Lowercases the first character of a string.
 
 ## `literal`
 
-Runs a string through <craft3:craft\helpers\Db::escapeParam()>.
+Runs a string through <craft3:craft\helpers\Db::escapeParam()> to escape commas and asterisks so they’re are not treated as special characters in query params.
 
 ```twig
-{{ 'SELECT id, * FROM table'|literal }}
-{# Output: SELECT id\, \* FROM table #}
+{% set titleParam = craft.app.request.getQueryParam('title') %}
+{% set entry = craft.entries()
+  .title(titleParam|literal)
+  .one() %}
 ```
 
 ## `markdown` or `md`
