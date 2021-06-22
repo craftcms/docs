@@ -1315,6 +1315,10 @@ Deletes a user.
 : Whether to delete the user’s content if no inheritor is specified.\
 boolean, 0 or 1 (defaults to 0)
 
+`--hard`
+: Whether the user should be hard-deleted immediately, instead of soft-deleted.\
+boolean, 0 or 1 (defaults to 0)
+
 `--inheritor`
 : The email or username of the user to inherit content when deleting a user.
 
