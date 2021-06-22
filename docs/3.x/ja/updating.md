@@ -9,7 +9,7 @@ This section displays updates for Craft CMS plugins, each with its own **Update*
 You can choose **Update All** at the top left to initiate all available Craft and/or plugin updates at once.
 
 ::: tip
-Craft の[更新履歴](https://github.com/craftcms/cms/blob/main/CHANGELOG.md)は、リリースノートの一番上に重要な変更点を警告しています。 大抵は警告がありませんが、アップデートする前にチェックすると良いでしょう。 :::
+Craft の[更新履歴](https://github.com/craftcms/cms/blob/main/CHANGELOG.md)は、リリースノートの一番上に重要な変更点を警告しています。 While there aren’t usually any warnings, it’s always a good idea to check the changelog and [any upgrade guides](#upgrade-guides) before updating.
 :::
 
 ## ターミナルからのアップデート
@@ -47,7 +47,16 @@ php craft update element-api commerce
 デフォルトでは、Craft は利用可能な最新バージョンにアップデートします。 特定バージョンにアップデートするには、ハンドルに `:<version>` を追加します。
 
 ```bash
-php craft update element-api:2.5.4
+php craft update element-api:2.7.0
 ```
 
 Craft は `composer install` コマンドのように動作する `update/composer-install` コマンドも提供しますが、Composer をインストールする必要はありません。
+
+## Upgrade Guides
+
+Sometimes there are significant changes to be aware of, so it’s worth checking the upgrade guide for each version or edition along your upgrade path.
+
+- [Upgrading to Craft 3.7](https://craftcms.com/knowledge-base/upgrading-to-craft-3-7)
+- [Upgrading to Craft 3.6](https://craftcms.com/knowledge-base/upgrading-to-craft-3-6)
+- [Upgrading to Craft 3.5](https://craftcms.com/knowledge-base/upgrading-to-craft-3-5)
+- [Upgrading to Craft Pro](https://craftcms.com/knowledge-base/upgrading-to-craft-pro)
