@@ -589,6 +589,7 @@ You can also choose one of the following guides to set up a development environm
 - [Homestead](https://craftcms.com/knowledge-base/craft-laravel-homestead)
 - [DDEV](https://ddev.readthedocs.io/en/stable/)
 - [Lando](https://lando.dev/)
+- [Docker Compose](https://github.com/craftcms/docker#running-locally-with-docker-compose)
 
 ### macOS
 

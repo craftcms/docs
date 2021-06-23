@@ -239,7 +239,7 @@ return [
             'class' => yii\redis\Connection::class,
             'hostname' => 'localhost',
             'port' => 6379,
-            'password' => App::env('REDIS_PASSWORD'),
+            'password' => App::env('REDIS_PASSWORD') ?: null,
         ],
         'cache' => [
             'class' => yii\redis\Cache::class,
@@ -312,7 +312,7 @@ return [
             'class' => yii\redis\Connection::class,
             'hostname' => 'localhost',
             'port' => 6379,
-            'password' => App::env('REDIS_PASSWORD'),
+            'password' => App::env('REDIS_PASSWORD') ?: null,
         ],
         'session' => function() {
             // Get the default component config

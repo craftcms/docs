@@ -296,7 +296,7 @@ This query is used to query for assets.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `volumeId`| `[QueryArgument]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
 | `volume`| `[String]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ handles.
 | `folderId`| `[QueryArgument]` | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
@@ -338,7 +338,7 @@ This query is used to return the number of assets.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `volumeId`| `[QueryArgument]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
 | `volume`| `[String]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ handles.
 | `folderId`| `[QueryArgument]` | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
@@ -380,7 +380,7 @@ This query is used to query for a single asset.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `volumeId`| `[QueryArgument]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
 | `volume`| `[String]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ handles.
 | `folderId`| `[QueryArgument]` | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
@@ -422,20 +422,20 @@ This query is used to query for entries.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
 | `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
-| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its id.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its ID.
 | `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its ID.
 | `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
 | `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its id.
-| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its id.
-| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its id.
-| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its id.
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its ID.
 | `editable`| `Boolean` | Whether to only return entries that the user has permission to edit.
 | `section`| `[String]` | Narrows the query results based on the section handles the entries belong to.
 | `sectionId`| `[QueryArgument]` | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
@@ -477,20 +477,20 @@ This query is used to return the number of entries.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
 | `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
-| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its id.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its ID.
 | `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its ID.
 | `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
 | `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its id.
-| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its id.
-| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its id.
-| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its id.
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its ID.
 | `editable`| `Boolean` | Whether to only return entries that the user has permission to edit.
 | `section`| `[String]` | Narrows the query results based on the section handles the entries belong to.
 | `sectionId`| `[QueryArgument]` | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
@@ -532,20 +532,20 @@ This query is used to query for a single entry.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
 | `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
-| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its id.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its ID.
 | `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its ID.
 | `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
 | `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its id.
-| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its id.
-| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its id.
-| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its id.
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its ID.
 | `editable`| `Boolean` | Whether to only return entries that the user has permission to edit.
 | `section`| `[String]` | Narrows the query results based on the section handles the entries belong to.
 | `sectionId`| `[QueryArgument]` | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
@@ -587,7 +587,7 @@ This query is used to query for global sets.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `handle`| `[String]` | Narrows the query results based on the global sets’ handles.
 
 ### The `globalSet` query
@@ -618,7 +618,7 @@ This query is used to query for a single global set.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `handle`| `[String]` | Narrows the query results based on the global sets’ handles.
 
 ### The `users` query
@@ -649,7 +649,7 @@ This query is used to query for users.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `email`| `[String]` | Narrows the query results based on the users’ email addresses.
 | `username`| `[String]` | Narrows the query results based on the users’ usernames.
 | `firstName`| `[String]` | Narrows the query results based on the users’ first names.
@@ -686,7 +686,7 @@ This query is used to return the number of users.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `email`| `[String]` | Narrows the query results based on the users’ email addresses.
 | `username`| `[String]` | Narrows the query results based on the users’ usernames.
 | `firstName`| `[String]` | Narrows the query results based on the users’ first names.
@@ -723,7 +723,7 @@ This query is used to query for a single user.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `email`| `[String]` | Narrows the query results based on the users’ email addresses.
 | `username`| `[String]` | Narrows the query results based on the users’ usernames.
 | `firstName`| `[String]` | Narrows the query results based on the users’ first names.
@@ -760,7 +760,7 @@ This query is used to query for tags.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `group`| `[String]` | Narrows the query results based on the tag groups the tags belong to per the group’s handles.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 
@@ -792,7 +792,7 @@ This query is used to return the number of tags.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `group`| `[String]` | Narrows the query results based on the tag groups the tags belong to per the group’s handles.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 
@@ -824,7 +824,7 @@ This query is used to query for a single tag.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `group`| `[String]` | Narrows the query results based on the tag groups the tags belong to per the group’s handles.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 
@@ -856,20 +856,20 @@ This query is used to query for categories.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
 | `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
-| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its id.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its ID.
 | `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its ID.
 | `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
 | `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its id.
-| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its id.
-| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its id.
-| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its id.
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its ID.
 | `editable`| `Boolean` | Whether to only return categories that the user has permission to edit.
 | `group`| `[String]` | Narrows the query results based on the category groups the categories belong to per the group’s handles.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
@@ -902,20 +902,20 @@ This query is used to return the number of categories.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
 | `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
-| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its id.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its ID.
 | `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its ID.
 | `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
 | `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its id.
-| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its id.
-| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its id.
-| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its id.
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its ID.
 | `editable`| `Boolean` | Whether to only return categories that the user has permission to edit.
 | `group`| `[String]` | Narrows the query results based on the category groups the categories belong to per the group’s handles.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
@@ -948,20 +948,20 @@ This query is used to query for a single category.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
-| `orderBy`| `String` | Sets the field the returned elements should be ordered by
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
 | `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
-| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its id.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its ID.
 | `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its id
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its ID.
 | `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
 | `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its id.
-| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its id.
-| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its id.
-| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its id.
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its ID.
 | `editable`| `Boolean` | Whether to only return categories that the user has permission to edit.
 | `group`| `[String]` | Narrows the query results based on the category groups the categories belong to per the group’s handles.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
