@@ -234,7 +234,7 @@ Everything has a `__typename`:
     },
     "user": {
       "__typename": "User"
-    }
+    },
     "widget": {
       "__typename": "Widget"
     }
