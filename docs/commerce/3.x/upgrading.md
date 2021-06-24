@@ -79,7 +79,7 @@ Use the table below to update each breaking change in your Twig templates.
 
 | Old                                       | New                                                                 |
 | ----------------------------------------- | ------------------------------------------------------------------- |
-| `variant.purchasableId`                    | `variant.id`                                                        |
+| `variant.purchasableId`                   | `variant.id`                                                        |
 | `craft.commerce.carts.cart(true, true)`   | `craft.commerce.carts.cart(true)`                                   |
 | `craft.commerce.carts.cart(false, true)`  | `craft.commerce.carts.cart(false)`                                  |
 | `craft.commerce.availableShippingMethods` | `cart.availableShippingMethodOptions`                               |
