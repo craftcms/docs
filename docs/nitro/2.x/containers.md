@@ -10,7 +10,7 @@ Nitro exposes common tools such as [Minio](services/minio.md) and [Mailhog](serv
 
 Imagine we’re working on a project that needs to interact with data stored in Elasticsearch. We can use the [`container new`](commands.md#container-new) command to add the container, ports, and volumes to our Nitro configuration file. The `container new` command provides prompts to walk you through setup.
 
-```bash
+```
 $ nitro container new
 What image are you trying to add? elasticsearch
 Which image should we use?
@@ -27,16 +27,16 @@ Which image should we use?
 Enter your selection: 1
 What tag should we use [latest]? 7.10.1
   … downloading docker.io/library/elasticsearch:7.10.1 ✓
-Expose port `9200` on the host machine [Y/n]? y
-Expose port `9300` on the host machine [Y/n]? y
+Expose port `9200` on host [Y/n]?
+Expose port `9300` on host [Y/n]?
 Should we proxy one of the ports to expose a web based UI [Y/n]?
 Which port should we use for the UI?
   1. 9200
   2. 9300
 Enter your selection: 1
 What is the name of the container [elasticsearch]?
-Create a file to store environment variables [Y/n]?
-Created environment variables file at "/Users/oli/.nitro/.elasticsearch"...
+Create a file to add environment variables [Y/n]?
+Created environment variables file at "/Users/oli/.nitro/.elasticsearch".
 New container "elasticsearch.containers.nitro" added!
 Apply changes now [Y/n]? n
 ```

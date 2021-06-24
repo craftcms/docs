@@ -24,14 +24,14 @@ To invoke a controller action, send a `POST` request to Craft, with an `action` 
 
 ## <badge vertical="baseline" type="verb">POST</badge> `cart/complete`
 
-An alternative to checking out with the `payments/pay` action, this allows the customer to commit to buy the cart and complete the order without a payment transaction. The <commerce3:allowCheckoutWithoutPayment> setting must be enabled or an HTTP exception will be thrown.
+An alternative to checking out with the `payments/pay` action, this allows the customer to commit to buy the cart and complete the order without a payment transaction. The [allowCheckoutWithoutPayment](../config-settings.md#allowcheckoutwithoutpayment) setting must be enabled or an HTTP exception will be thrown.
 
 The cart must have an email address and honor the following settings:
 
-- [allowEmptyCartOnCheckout](config-settings.md#allowemptycartoncheckout)
-- [requireShippingMethodSelectionAtCheckout](config-settings.md#requireshippingmethodselectionatcheckout)
-- [requireBillingAddressAtCheckout](config-settings.md#requirebillingaddressatcheckout)
-- [requireShippingAddressAtCheckout](config-settings.md#requireshippingaddressatcheckout)
+- [allowEmptyCartOnCheckout](../config-settings.md#allowemptycartoncheckout)
+- [requireShippingMethodSelectionAtCheckout](../config-settings.md#requireshippingmethodselectionatcheckout)
+- [requireBillingAddressAtCheckout](../config-settings.md#requirebillingaddressatcheckout)
+- [requireShippingAddressAtCheckout](../config-settings.md#requireshippingaddressatcheckout)
 
 See the [Making Payments](../making-payments.md#checkout-without-payment) page for more on using this action.
 

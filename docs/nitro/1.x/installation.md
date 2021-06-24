@@ -8,7 +8,7 @@
 2. Run this terminal command:
 
     ```bash
-    bash <(curl -sLS http://installer.getnitro.sh)
+    bash <(curl -sLS https://raw.githubusercontent.com/craftcms/nitro/v1/install.sh)
     ```
 
 3. Follow the prompts to create your machine.

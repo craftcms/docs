@@ -57,18 +57,13 @@ If everything goes well, the process should look similar to this:
 
 ```
 $ bash <(curl -sLS http://installer.getnitro.sh)
-Downloading package https://github.com/craftcms/nitro/releases/download/2.0.7/nitro_darwin_x86_64.tar.gz to /Users/oli/temp_nitro_extract/nitro_darwin_x86_64.tar.gz
-
-x CHANGELOG.md
-x LICENSE.md
-x README.md
-x nitro
+Downloading package https://github.com/craftcms/nitro/releases/download/2.0.8/nitro_darwin_x86_64.tar.gz to /Users/oli/temp_nitro_extract/nitro_darwin_x86_64.tar.gz
 
 Download complete.
 
 Running with sufficient permissions to attempt to move nitro to /usr/local/bin
 
-Nitro 2.0.7 has been installed to /usr/local/bin
+Nitro 2.0.8 has been installed to /usr/local/bin
 
 Setting up Nitro…
 Would you like to use MySQL [Y/n]?
@@ -153,7 +148,7 @@ When we install Craft CMS (or any PHP web app) the project will rely on a _web r
 2. Run `nitro create tutorial`.
 3. Choose the following for the prompts:
     - hostname: <kbd>return</kbd> (tutorial.nitro)
-    - webroot: <kbd>return</kbd> (web)
+    - web root: <kbd>return</kbd> (web)
     - PHP version: <kbd>1</kbd> (8.0)
     - add a database? <kbd>return</kbd> (Y)
     - database: <kbd>1</kbd> (mysql-8.0-3306.database.nitro)
@@ -175,8 +170,8 @@ New site downloaded 🤓
 Enter the hostname [tutorial.nitro]:
   ✓ setting hostname to tutorial.nitro
   ✓ adding site ~/tutorial
-Enter the webroot for the site [web]:
-  ✓ using webroot web
+Enter the web root for the site [web]:
+  ✓ using web root web
 Choose a PHP version:
   1. 8.0
   2. 7.4
@@ -594,6 +589,7 @@ You can also choose one of the following guides to set up a development environm
 - [Homestead](https://craftcms.com/knowledge-base/craft-laravel-homestead)
 - [DDEV](https://ddev.readthedocs.io/en/stable/)
 - [Lando](https://lando.dev/)
+- [Docker Compose](https://github.com/craftcms/docker#running-locally-with-docker-compose)
 
 ### macOS
 

@@ -2,24 +2,67 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-06-11
+### Changed
+- Documented the `failMessageInput()` and `successMessageInput()` Twig functions added in Craft 3.6.6.
+
+## 2021-06-09
+### Fixed
+- Fixed treeview styling.
+
+## 2021-06-01
+### Added
+- Documented Commerce `productCount` and `variantCount` GraphQL queries.
+- Added a note about MySQL/MariaDB timezone support with link to [Knowledge Base article](https://craftcms.com/knowledge-base/populating-mysql-mariadb-timezone-tables).
+
+## 2021-05-28
+### Changed
+- Updated VuePress along with a bunch of project dependencies.
+
+## 2021-05-19
+### Added
+- Documented `nitro db destroy` command.
+- Documented `nitro alias` site argument.
+- Documented `|merge` filter with its `recursive` argument.
+
+## 2021-05-18
+### Added
+- Documented Commerce `purchasableShippable` event.
+
+### Changed
+- Updated `allowedFileExtensions` config setting to include default `dotm` and `dotx` file extensions.
+
+## 2021-05-11
+### Added
+- Documented `permissionsPolicyHeader` config setting.
+- Document new `--force` flag on the `plugin/uninstall` command.
+
+## 2021-05-10
+### Added
+- Documented controller action default route format.
+
+## 2021-04-28
+### Added
+- Documented Commerce `purchasableAvailable` event.
+
 ## 2021-04-23
-## Changed
+### Changed
 - Improved GraphQL introduction and examples.
 
 ## 2021-04-20
-## Changed
+### Changed
 - Updated the tutorial to use Nitro 2.
 
 ## 2021-04-06
-## Changed
+### Changed
 - Updated Nitro 2.x documentation for version 2.0.7.
 
 ## 2021-04-01
-## Added
+### Added
 - Documented error templates. (Not a prank.)
 
 ## 2021-03-25
-## Added
+### Added
 - Added Nitro design goals and architectural overview.
 
 ## 2021-03-23
