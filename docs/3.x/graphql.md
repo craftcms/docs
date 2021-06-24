@@ -71,6 +71,24 @@ Here’s what a [query](#query-reference) for two news entries might look like, 
 ```
 :::
 
+#### Relations
+
+You can use relational arguments like `relatedToAssets` and `relatedToEntries` to limit results based on relationships to other elements. Their respective types (referenced below) look like `[*CriteriaInput]`, where `*` will be the name of the target element, and you can pass an array of one or more objects each having the same arguments you’d use in an [element query](element-queries.md).
+
+We could use the `relatedToCategories` argument, for example, to narrow our previous example’s news articles to those related to an “Announcements” category:
+
+```graphql{2}
+{
+  entries (section: "news", relatedToCategories: [{slug: "announcements"}]) {
+    title
+  }
+}
+```
+
+::: tip
+See [Relations](relations.md) for more on Craft’s relational field types.
+:::
+
 ### Mutation
 
 Here’s a [mutation](#mutations), where we’re using the GraphQL API to save a new entry:
