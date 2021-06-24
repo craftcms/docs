@@ -39,10 +39,10 @@ If you’ve already got a hold of the source element in your template, like in t
 
 Calling the source’s relational field handle (`ingredients`) returns an [entry query](entries.md#querying-entries) that can output the field’s target elements, in the field-defined order.
 
-If we want to output the ingredients list for a drink recipe, we'd use the following:
+If we want to output the ingredients list for a drink recipe, we’d use the following:
 
 ```twig
-{% set ingredients = drink.ingredients.all() %}
+{% set ingredients = entry.ingredients.all() %}
 {% if ingredients|length %}
 
     <h3>Ingredients</h3>
@@ -59,7 +59,7 @@ If we want to output the ingredients list for a drink recipe, we'd use the follo
 You can also add any additional parameters supported by the element type:
 
 ```twig
-{% for ingredient in drink.ingredients.section('ingredients').all() %}
+{% for ingredient in entry.ingredients.section('ingredients').all() %}
     <li>{{ ingredient.title }}</li>
 {% endfor %}
 ```
