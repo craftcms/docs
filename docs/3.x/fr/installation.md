@@ -16,7 +16,7 @@ To create a new Craft project, run this command (substituting `my/project/path` 
 composer create-project craftcms/craft my/project/path
 ```
 
-Composer will take a couple minutes to load everything. Once it’s done you will be shown a success message:
+Composer will take a few minutes to load everything. Once it’s done you’ll see a success message:
 
 ![The success message shown after loading Craft with Composer](./images/installation-command-line.png)
 
@@ -61,7 +61,7 @@ my-project.test/
 The `web/` folder represents your site’s web root, and it can be renamed to whatever you want (`www/`, `public/`, `public_html/`, etc.).
 :::
 
-You can learn about what all these folders and files are for and how to customize them from the [Directory Structure](directory-structure.md) page.
+See the [Directory Structure](directory-structure.md) page to learn what these folders and files are for and how you can customize them.
 
 ## Step 2: Set the File Permissions
 
@@ -80,14 +80,14 @@ For Craft to run properly, PHP needs to be able to write to the following places
 - `vendor/*`
 - `web/cpresources/*`
 
-The exact permissions you should be setting depends on the relationship between the system user that PHP is running as, and who owns the actual folders/files.
+The exact permissions you should be setting depends on the relationship between the system user that runs PHP and whoever owns the folders and files.
 
-- If they are the same user, use `744`.
-- If they’re in the same group, then use `774`.
-- If you’re not sure and like to live life on the edge, use `777`.
+- If they’re the same user, use `744`.
+- If they’re in the same group, use `774`.
+- If you’re not sure and enjoy life on the edge, use `777`.
 
 ::: warning HEY
-IIS FANS Make sure your site’s AppPool account has write permissions to these folders/files as well.
+IIS FANS Make sure your site’s AppPool account has write permissions to these folders and files.
 :::
 
 ## Step 3: Set a Security Key
@@ -135,7 +135,7 @@ If you’re given a choice, we recommend the following database settings in most
 
 Create a new web server to host your Craft project. Its document root (or “web root”) should point to your `web/` directory (or whatever you’ve renamed it to).
 
-If you’re not using [MAMP](https://mamp.info) or another localhosting tool, you will probably need to update your `hosts` file, so your computer knows to route requests to your chosen host name to the local computer.
+If you’re not using [Nitro](/nitro/2.x/) or another local hosting tool, you’ll probably need to update your `hosts` file so your computer knows to route your chosen host name’s requests locally.
 
 - **macOS/Linux/Unix**: `/etc/hosts`
 - **Windows**: `\Windows\System32\drivers\etc\hosts`
@@ -148,7 +148,11 @@ We recommend using the `.test` TLD for local development, and specifically not `
 
 ## Step 6: Run the Setup Wizard
 
-Finally, it’s time to run Craft’s Setup Wizard. You can either run that from your [terminal](#terminal-setup) or your [web browser](#web-browser-setup).
+Finally, it’s time to run Craft’s Setup Wizard from either your [terminal](#terminal-setup) or your [web browser](#web-browser-setup).
+
+::: tip
+If you used `composer create-project` earlier and chose to continue setup there, you can head straight to `https://mysite.test/admin`.
+:::
 
 ### Terminal Setup
 
@@ -162,36 +166,52 @@ The command will ask you a few questions to learn how to connect to your databas
 
 ### Web Browser Setup
 
-In your web browser, go to `http://<Hostname>/index.php?p=admin/install` (substituting `<Hostname>` with your web server’s host name). If you’ve done everything right so far, you should be greeted by Craft’s Setup Wizard.
+In your web browser, go to `https://mysite.test/index.php?p=admin/install` (substituting `mysite.test` with your web server’s host name). If you’ve done everything right so far, you should be greeted by Craft’s Setup Wizard:
 
-![Craft Installation Screen](./images/installation-step-0.png)
+<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<img src="./images/installation-step-0.png" alt="Craft Installation Screen">
+</BrowserShot>
 
-The first step of the installer is to accept the [license agreement](https://craftcms.com/license). Scroll down through the agreement (reading it all, of course) and click the “Got it” button to accept.
+The first step of the installer is to accept the [license agreement](https://craftcms.com/license). Scroll down through the agreement (reading it all, of course) and press **Got it** to accept:
 
-![Craft Installation License Agreement](./images/installation-step-1.png)
+<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<img src="./images/installation-step-1.png" alt="Craft Installation License Agreement">
+</BrowserShot>
 
-The second step is to enter your database connection information.
+The second step is to enter your database connection information:
 
 ::: tip
 If the Setup Wizard skips this step, it’s because Craft is already able to connect to your database.
 :::
 
-![Craft Installation Database Connection Information](./images/installation-step-2.png)
+<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<img src="./images/installation-step-2.png" alt="Craft Installation Database Connection Information">
+</BrowserShot>
 
-The third step of the installer is to create an admin account. Don’t be one of _those people_ and be sure to pick a strong password.
+The third step is to create an admin account. Don’t be one of _those people_—be sure to pick a strong password:
 
-![Craft Installation Create User Account](./images/installation-step-3.png)
+<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<img src="./images/installation-step-3.png" alt="Craft Installation Create User Account">
+</BrowserShot>
 
-The final step is to define your System Name, Base URL, and Language.
+The final step is to define your System Name, Base URL, and Language:
 
-![Craft Installation System Settings](./images/installation-step-4.png)
+<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<img src="./images/installation-step-4.png" alt="Craft Installation System Settings">
+</BrowserShot>
 
-Click “Finish up” to complete the setup process. A few seconds later, you should have a working Craft install!
+Press **Finish up** to complete the setup process. A few seconds later, you should have a working Craft install!
 
-If it was successful, Craft will redirect your browser to the control panel.
+If it was successful, Craft will redirect your browser to the control panel:
 
-![Craft Installation Complete](./images/installation-step-5.png)
+<BrowserShot url="https://mysite.test/admin/dashboard" :link="false">
+<img src="./images/installation-step-5.png" alt="Craft Installation Complete">
+</BrowserShot>
 
-Congratulations, you’ve just installed Craft!
+Congratulations, you’ve installed Craft!
 
 Now build something incredible.
+
+## Troubleshooting
+
+See the [Troubleshooting a Failed Craft Installation](https://craftcms.com/knowledge-base/troubleshooting-failed-installation) Knowledge Base article if something went wrong along the way.
