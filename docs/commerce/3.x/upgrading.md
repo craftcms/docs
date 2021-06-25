@@ -79,6 +79,7 @@ Use the table below to update each breaking change in your Twig templates.
 
 | Old                                       | New                                                                 |
 | ----------------------------------------- | ------------------------------------------------------------------- |
+| `variant.purchasableId`                   | `variant.id`                                                        |
 | `craft.commerce.carts.cart(true, true)`   | `craft.commerce.carts.cart(true)`                                   |
 | `craft.commerce.carts.cart(false, true)`  | `craft.commerce.carts.cart(false)`                                  |
 | `craft.commerce.availableShippingMethods` | `cart.availableShippingMethodOptions`                               |
@@ -89,7 +90,7 @@ Use the table below to update each breaking change in your Twig templates.
 | `craft.commerce.primaryPaymentCurrency`   | `craft.commerce.paymentCurrencies.primaryPaymentCurrency`           |
 | `craft.commerce.statesArray`              | `craft.commerce.states.allStatesAsList`                             |
 | `craft.commerce.states.allStatesAsList`   | `craft.commerce.states.getAllEnabledStatesAsListGroupedByCountryId` |
-| `currentUser.customerFieldHandle`         | `craft.commerce.customers.customer` |
+| `currentUser.customerFieldHandle`         | `craft.commerce.customers.customer`                                 |
 
 ## Form Action Changes
 
