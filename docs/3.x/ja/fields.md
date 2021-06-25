@@ -12,13 +12,15 @@ Fields are defined globally from **Settings** → **Fields**. それらは、便
 - 説明
 - **フィールドタイプ** – フィールドの種類
 
-![フィールドの設定画面](./images/fields-field-settings.png)
+<BrowserShot url="https://mysite.test/admin/settings/fields/new" :link="false" :max-height="500">
+<img src="./images/fields-field-settings.png">
+</BrowserShot>
 
 ## 翻訳可能なフィールド
 
-Craft で多言語サイトを運用している場合、フィールドを翻訳可能にするオプションがあります。
+Choosing a field type determines what the field’s input UI is going to look like, what type of data it can store, and how you’ll be able to interact with that data from your templates.
 
-Craft は5つの異なる「翻訳メソッド」を提供します。
+Craft comes with the following built-in field types:
 
 - [アセット](assets-fields.md)
 - [カテゴリ](categories-fields.md)
@@ -26,7 +28,7 @@ Craft は5つの異なる「翻訳メソッド」を提供します。
 - [色](color-fields.md)
 - [日/時](date-time-fields.md)
 - [セレクトボックス](dropdown-fields.md)
-- メール
+- [Email](email-fields.md)
 - [エントリ](entries-fields.md)
 - [Lightswitch](lightswitch-fields.md)
 - [行列](matrix-fields.md)
@@ -37,14 +39,14 @@ Craft は5つの異なる「翻訳メソッド」を提供します。
 - [テーブル](table-fields.md)
 - [タグ](tags-fields.md)
 - [Time](time-fields.md)
-- URL
+- [URL](url-fields.md)
 - [ユーザー](users-fields.md)
 
 ## フィールドタイプ
 
-フィールドが「翻訳不可」とマークされている場合、その値はすべてのサイトに渡って常にコピーされます。
+If you’re running a multi-site Craft installation, most of your fields will have a “Translation Method” setting (depending on their type).
 
-フィールドは次の翻訳方法を持つことができます。
+Fields can have the following translation method:
 
 - **翻訳不可** – フィールドはすべてのサイトに渡って同じ値を持ちます。
 - **各サイトに対して翻訳** – フィールドはサイトごとに異なる値を持つことができます。
@@ -52,15 +54,15 @@ Craft は5つの異なる「翻訳メソッド」を提供します。
 - **各言語に対して翻訳** – フィールドはサイトに関連付けられた固有の言語ごとに異なる値を持つことができます。
 - **Custom… ** – The field can have different values based on a custom differentiator.
 
-If you choose “Custom… ”, a “Translation Key Format” setting will appear below, where you can define a template that will help Craft which sites to copy the field value over to. フィールドのカスタム「翻訳キー」フォーマットを定義することができ、フィールド値は同じキーを生成するすべてのサイトにコピーされます。
+If you choose “Custom…”, a “Translation Key Format” setting will appear below, where you can define a template that will help Craft which sites to copy the field value over to. When a new field value is saved, Craft will render this template for all sites, and the field value will be copied to all sites where the translation key matches the original site’s.
 
-Craft は次の組み込みのフィールドタイプがあります。
+For example, if a field’s translation key format were `{site.handle[0:2]}`, then new field values would be copied over to any other sites where the first two characters of the site handle matches the first to characters of the original site’s handle.
 
 ## フィールドレイアウト
 
-作成されたフィールドは「フィールドレイアウト」にそれらを加えることによって、編集フォームに表示できます。
+Once you’ve created your fields, you can display them in your edit forms by adding them to “field layouts”.
 
-関連するコンテンツを持つ Craft 内のすべての場所で、フィールドを選択するためのフィールドレイアウトを提供します。
+Everything in Craft that has content associated with it will provide a field layout for selecting fields:
 
 - [エントリ](entries.md)は、「設定 > セクション > エントリタイプを編集 > [入力タイプ名] > フィールドレイアウト」の入力タイプで定義されたフィールドレイアウトを使用します。
 - [グローバル設定](globals.md)は、「設定 > グローバル > [グローバル設定の名前]」で定義されたそれぞれのフィールドレイアウトを使用します。
@@ -69,13 +71,13 @@ Craft は次の組み込みのフィールドタイプがあります。
 - [タグ](tags.md)は、「設定 > タグ > [タググループ名] > フィールドレイアウト」のタググループごとに定義されたフィールドレイアウトを使用します。
 - [ユーザー](users.md)は、「設定 > ユーザー > フィールド」で定義された単一のフィールドレイアウトを共有します。
 
-フィールドレイアウトを編集すると、一番上に「コンテンツ」タブが、下段にフィールドグループごとに分類されたすべてのサイトのフィールドのリストが表示されます。 フィールドの選択は下のエリアから上にドラッグするだけの簡単な操作で、すでに配置されたフィールドの前後の好きな場所に配置できます。 選択されたフィールドをドラッグして、順序を入れ替えることもできます。
+When editing a field layout, you will find a “Content” tab at the top, and a list of all of your site’s fields, grouped into their field groups, at the bottom. Selecting a field is as simple as dragging it from the bottom area to the top, positioning it wherever you want alongside the other selected fields. You can also drag selected fields around to change their order.
 
-フィールドが選択されると、歯車アイコンが横に表示されます。 クリックすると2つのオプションを含むコンテキストメニューを表示します。
+Once a field is selected, a gear icon will appear beside it. Clicking on it will reveal a context menu with two options:
 
 - 必須にする
 - 削除
 
-「必須にする」をクリックすると、フィールド名の横にアスタリスク（`*`）が追加され、必須項目になったことを示します。 それ以降、歯車アイコンをクリックすると、期待通り「必須にしない」オプションを表示します。
+Clicking “Make required” will add an asterisk (`*`) beside the field’s name, indicating that it’s now required. Subsequent gear icon clicks will reveal a new “Make not required” option which does as you’d expect.
 
-入力タイプのフィールドレイアウトには別の機能があり、フィールドを含むコンテンツタブを定義できます。 必要数のコンテンツタブを作成し、類似するフィールドをまとめて分類するために利用します。 各コンテンツタブには歯車アイコンが表示され、リネームや削除ができます。
+Field layouts for entry types have another feature: they let you define the content tabs that contain the fields. You can create as many content tabs as you want, and use them to organize similar fields together. Each content tab will get its own gear icon allowing you to rename or delete it.
