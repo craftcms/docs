@@ -16,7 +16,7 @@ Composer 1.3.0 以降を稼働させるべきです。 起動しているター�
 composer create-project craftcms/craft <Path>
 ```
 
-Composer がすべてをロードするのに、数分かかるでしょう。 完了すると、成功メッセージが表示されます。
+Composer will take a few minutes to load everything. Once it’s done you’ll see a success message:
 
 ![Composer で Craft をロード後に表示される成功メッセージ](./images/installation-command-line.png)
 
@@ -61,9 +61,7 @@ my-project.test/
 `web/` フォルダはウェブルートを表し、あなたが望むものにリネームできます（`www/`、 `public/`、`public_html/`など）。 :::
 :::
 
-::: tip
-Craft のダウンロードに Composer を利用した場合、おそらく安全にこのステップをスキップできます。
-:::
+See the [Directory Structure](directory-structure.md) page to learn what these folders and files are for and how you can customize them.
 
 ## ステップ 2：ファイルパーミッションの設定
 
@@ -82,16 +80,14 @@ Craft のダウンロードに Composer を利用した場合、おそらく安�
 - `vendor/*`
 - `web/cpresources/*`
 
-::: warning IS
-ファンへ サイトの AppPool アカウントがこれらのフォルダやファイルに書き込み権限を持っていることを確認してください。
-:::
+The exact permissions you should be setting depends on the relationship between the system user that runs PHP and whoever owns the folders and files.
 
-- 同じユーザーであれば、`744` を利用します。
-- 同じグループであれば、`774` を利用します。
-- 確信が持てず、緊張感がある生活を好むなら、`777` を利用します。
+- If they’re the same user, use `744`.
+- If they’re in the same group, use `774`.
+- If you’re not sure and enjoy life on the edge, use `777`.
 
-::: tip
-If the Setup Wizard skips this step, it’s because Craft is already able to connect to your database.
+::: warning HEY
+IIS FANS Make sure your site’s AppPool account has write permissions to these folders and files.
 :::
 
 ## ステップ 3：セキュリティキーの設定
@@ -139,7 +135,7 @@ php craft setup/security-key
 
 Craft プロジェクトをホストするための新しいウェブサーバーを用意してください。 ドキュメントルートは `web/` ディレクトリ（または、リネームしたディレクトリ）を指すようにします。
 
-[MAMP](https://mamp.info) や他のローカルホスティングツールを利用していない場合、`hosts` ファイルを更新して、選択したホスト名にローカルコンピュータへ要求をルーティングする必要があるかもしれません。
+If you’re not using [Nitro](/nitro/2.x/) or another local hosting tool, you’ll probably need to update your `hosts` file so your computer knows to route your chosen host name’s requests locally.
 
 - **macOS/Linux/Unix**: `/etc/hosts`
 - **Windows**: `\Windows\System32\drivers\etc\hosts`
@@ -152,50 +148,70 @@ Craft プロジェクトをホストするための新しいウェブサーバ�
 
 ## ステップ 6：セットアップウィザードの実行
 
-ついに、Craft のセットアップウィザードを実行するときがきました。 [ターミナル](#terminal-setup) または [ウェブブラウザ](#web-browser-setup) から実行できます。
+Finally, it’s time to run Craft’s Setup Wizard from either your [terminal](#terminal-setup) or your [web browser](#web-browser-setup).
+
+::: tip
+If you used `composer create-project` earlier and chose to continue setup there, you can head straight to `https://mysite.test/admin`.
+:::
 
 ### ターミナルによるセットアップ
 
-ターミナル上でプロジェクトのルートディレクトリに移動し、次のコマンドを実行してセットアップウィザードを開始します。
+In your terminal, go to your project’s root directory and run the following command to kick off the Setup Wizard:
 
 ```bash
 php craft setup
 ```
 
-このコマンドは、データベースへの接続方法を学んだ上で Craft のインストーラーを開始するために、いくつかの質問をします。 それが終われば、ウェブブラウザから新しい Craft サイトにアクセスできるはずです。
+The command will ask you a few questions to learn how to connect to your database, and then kick off Craft’s installer. Once it’s done, you should be able to access your new Craft site from your web browser.
 
 ### ウェブブラウザによるセットアップ
 
-ウェブブラウザで `http://<Hostname>/index.php?p=admin/install`（ウェブサーバーのホスト名で `<Hostname>` を置き換える）に移動します。 ここまでのステップがうまくいっていれば、Craft のセットアップウィザードが迎えてくれるでしょう。
+In your web browser, go to `https://mysite.test/index.php?p=admin/install` (substituting `mysite.test` with your web server’s host name). If you’ve done everything right so far, you should be greeted by Craft’s Setup Wizard:
 
-![Craft のインストール画面](./images/installation-step-0.png)
+<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<img src="./images/installation-step-0.png" alt="Craft Installation Screen">
+</BrowserShot>
 
-インストーラーの最初のステップは、[ライセンス契約](https://craftcms.com/license)への同意です。 （もちろん、すべて目を通した上で）契約をスクロールダウンし、「Got it（了解）」ボタンをクリックして了承してください。
+インストーラーの最初のステップは、[ライセンス契約](https://craftcms.com/license)への同意です。 Scroll down through the agreement (reading it all, of course) and press **Got it** to accept:
 
-![Craft インストール画面（ライセンス契約の確認）](./images/installation-step-1.png)
+<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<img src="./images/installation-step-1.png" alt="Craft Installation License Agreement">
+</BrowserShot>
 
-2つ目のステップは、データベース接続情報の入力です。
+The second step is to enter your database connection information:
 
 ::: tip
-Craft がすでにデータベースに接続可能な状態であれば、このステップはスキップされます。
+If the Setup Wizard skips this step, it’s because Craft is already able to connect to your database.
 :::
 
-![Craft インストール画面（データベース接続情報）](./images/installation-step-2.png)
+<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<img src="./images/installation-step-2.png" alt="Craft Installation Database Connection Information">
+</BrowserShot>
 
-インストーラーの3つ目のステップは、管理者アカウントの作成です。 _特別な_ アカウントとして、強力なパスワードを選んでください。
+The third step is to create an admin account. Don’t be one of _those people_—be sure to pick a strong password:
 
-![Craft インストール画面（ユーザーアカウントの作成）](./images/installation-step-3.png)
+<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<img src="./images/installation-step-3.png" alt="Craft Installation Create User Account">
+</BrowserShot>
 
-最後のステップは、システム名、ベース URL、および、言語の設定です。
+The final step is to define your System Name, Base URL, and Language:
 
-![Craft インストール画面（システム設定）](./images/installation-step-4.png)
+<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<img src="./images/installation-step-4.png" alt="Craft Installation System Settings">
+</BrowserShot>
 
-「Finish up（完了）」 ボタンをクリックしてセットアッププロセスを完了します。 数秒後、Craft のインストールが実行されるでしょう。
+Press **Finish up** to complete the setup process. A few seconds later, you should have a working Craft install!
 
-If it was successful, Craft will redirect your browser to the Control Panel.
+If it was successful, Craft will redirect your browser to the control panel:
 
-![Craft インストール画面（完了）](./images/installation-step-5.png)
+<BrowserShot url="https://mysite.test/admin/dashboard" :link="false">
+<img src="./images/installation-step-5.png" alt="Craft Installation Complete">
+</BrowserShot>
 
-インストールが成功したら、Craft はブラウザをコントロールパネルにリダイレクトします。
+Congratulations, you’ve installed Craft!
 
-さぁ、素晴らしいものを築きあげましょう。
+Now build something incredible.
+
+## Troubleshooting
+
+See the [Troubleshooting a Failed Craft Installation](https://craftcms.com/knowledge-base/troubleshooting-failed-installation) Knowledge Base article if something went wrong along the way.
