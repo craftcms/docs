@@ -846,22 +846,3 @@ Event::on(
     }
 );
 ```
-
-## Examples
-
-### GraphQL for Elements
-
-TODO: add
-
-extend craft\gql\types\elements\Element, which is an extension of ObjectType
-
-- gqlTypeNameByContext
-- gqlScopesByContext
-- gqlMutationNameByContext
-
-See Craftnet Partners.
-
-### GraphQL for Field Types
-
-TODO: include example
-
