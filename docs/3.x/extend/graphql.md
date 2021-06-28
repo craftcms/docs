@@ -1,6 +1,6 @@
 # Extending GraphQL
 
-Developers can use Craft’s [GraphQL implementation](../graphql.md) to provide their own GraphQL data and permissions for custom plugins and modules.
+Developers can use Craft’s [GraphQL implementation](../graphql.md) to provide their own GraphQL data and access level for custom plugins and modules.
 
 If you’ve created a custom element or field type, chances are you’ll want to make its data available via the GraphQL API.
 
