@@ -50,7 +50,7 @@ public function init()
 
     Event::on(Gc::class, Gc::EVENT_RUN, function() {
         Craft::$app->gc->hardDelete('{{%mytablename}}');
-    }
+    });
 }
 ```
 
