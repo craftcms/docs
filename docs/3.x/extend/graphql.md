@@ -46,10 +46,14 @@ src/gql/
 ├── interfaces/
 │   └── elements/
 │       └── Widget.php
+├── mutations/
+│   └── Widget.php
 ├── queries/
 │   └── Widget.php
 ├── resolvers/
 │   └── elements/
+│       └── Widget.php
+│   └── mutations/
 │       └── Widget.php
 └── types/
     ├── elements/
@@ -650,7 +654,7 @@ The [`formatDateTime` directive](../graphql.md#the-formatdatetime-directive), fo
 
 Craft’s included directives apply exclusively to requested fields, though they may be applied in mutations and numerous parts of the type system.
 
-A directive needs to provide a name, description, and the relevant query location(s) it can be applied. It can optionally take arguments.
+A directive needs to provide a name, description, and the relevant query location(s) it can be applied. It can optionally take [arguments](#arguments).
 
 ### Example Directive Class
 
@@ -717,40 +721,179 @@ Event::on(
 
 ## Mutations
 
-A Mutation class defines named mutations that should be available, including consideration for permissions, each one including arguments, a type, and a mutation resolver responsible for modifying data using Craft’s APIs.
+A Mutation class defines named mutations that should be available, including consideration for scope access. Each mutation can have its own [arguments](#arguments) and type, and it will need a mutation resolver for modifying data using Craft’s APIs.
 
-input objects
+Our example could provide a `saveWidget` mutation for saving a new widget:
 
-- <craft3:craft\base\Element::gqlMutationNameByContext()>
+::: code
+```graphql{2} GraphQL Query
+mutation NewWidget($title: String) {
+  createWidget(title: $title) {
+    id
+    title
+  }
+}
 
+# query variables:
+# {
+#  "title": "My Glorious Mutated Widget",
+# }
+```
+```json JSON Response
+{
+  "data": {
+    "createWidget": {
+        "id": "123",
+        "title": "My Glorious Mutated Widget"
+    }
+}
+```
+:::
+
+::: tip
+Like the name-getting methods mentioned above, Craft’s base elements include a <craft3:craft\base\Element::gqlMutationNameByContext()> method for providing context-sensitive type names.
+:::
+
+### Input Types
+
+In addition to simple generic scalar values like strings and integers, you’ll probably want to accept more specific and/or complex data.
+
+Craft includes several scalar input types like [DateTime](craft3:craft\gql\types\DateTime), [Number](craft3:craft\gql\types\Number), and [TableRow](craft3:craft\gql\types\TableRow).
+
+Craft also includes more complex, relational input objects:
+
+- [Asset](craft3:craft\gql\types\input\criteria\Asset)
+- [Category](craft3:craft\gql\types\input\criteria\Category)
+- [Entry](craft3:craft\gql\types\input\criteria\Entry)
+- [Tag](craft3:craft\gql\types\input\criteria\Tag)
+- [User](craft3:craft\gql\types\input\criteria\User)
+- [File](craft3:craft\gql\types\input\File)
+- [Matrix](craft3:craft\gql\types\input\Matrix)
+
+You can use any of these in your type definitions, i.e. `DateTime::getType()` or `Asset::getType()`.
 
 ### Example Mutation Class
 
-TODO: add
+Similar to the [queries](#queries) example, this class implements `getMutations()` to return a list of available mutations. The mutation definition has a name, description, type, arguments, and a resolver:
 
 ```php
+namespace mynamespace\gql\mutations;
+
+use mynamespace\helpers\Gql as GqlHelper;
+use mynamespace\gql\interfaces\Widget;
+use mynamespace\gql\resolvers\mutations\Widget as WidgetMutationResolver;
+use craft\gql\base\Mutation;
+use GraphQL\Type\Definition\Type;
+
+class Widget extends Mutation
+{
+    public static function getMutations(): array
+    {
+        // Make sure we should be able to mutate widgets
+        if (!GqlHelper::canMutateWidgets()) {
+            return [];
+        }
+
+        $mutations = [];
+
+        // Create an instance of our mutation resolver
+        $resolver = Craft::createObject(WidgetMutationResolver::class);
+
+        if (GqlHelper::canSchema('widget', 'edit')) {
+            // Create a new widget
+            $mutations['createWidget'] = [
+                'name' => 'createWidget',
+                'args' => [
+                    'title' => Type::nonNull(Type::string())
+                ],
+                'resolve' => [$resolver, 'saveWidget'],
+                'description' => 'Saves a new widget.',
+                'type' => Widget::getType(),
+            ];
+        }
+
+        if (GqlHelper::canSchema('widget', 'save')) {
+            // Save an existing widget
+            // ...
+        }
+
+        if (GqlHelper::canSchema('widget', 'delete')) {
+            // Delete a widget
+            // ...
+        }
+
+        return $mutations;
+    }
+}
+```
+
+### Example Mutation Resolver
+
+We saw earlier how a [resolver](#resolvers) translates the GraphQL request to data Craft can return. We’ll need a separate resolver that can translate the GraphQL mutation into data Craft saves.
+
+```php
+namespace mynamespace\gql\resolvers\mutations;
+
+use mynamespace\elements\Widget as WidgetElement;
+use craft\gql\base\ElementMutationResolver;
+use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Error\UserError;
+use Craft;
+
+class Widget extends ElementMutationResolver
+{
+    protected $immutableAttributes = ['id', 'uid'];
+
+    public function saveWidget($source, array $arguments, $context, ResolveInfo $resolveInfo)
+    {
+        $this->requireSchemaAction('widget', 'edit');
+
+        $elementService = Craft::$app->getElements();
+        $widget = $elementService->createElement(WidgetElement::class);
+        // Have Craft populate the element’s content
+        $widget = $this->populateElementWithData($widget, $arguments);
+        // Always set our custom approved field to false for mutations
+        $widget->approved = false;
+        // Save the new element
+        $widget = $this->saveElement($widget);
+
+        if ($widget->hasErrors()) {
+            $validationErrors = [];
+
+            foreach ($widget->getFirstErrors() as $attribute => $errorMessage) {
+                $validationErrors[] = $errorMessage;
+            }
+            
+            // Throw a UserError with validation messages if we can’t save
+            throw new UserError(implode("\n", $validationErrors));
+        }
+
+        // Return the newly-saved element
+        return $elementService->getElementById($comment->id, CommentElement::class);
+    }
+}
 ```
 
 ### Registering Mutations
 
+You can register your mutation by including its definitions to the `mutations` array on the [registerGqlMutations](craft3:craft\services\Gql::EVENT_REGISTER_GQL_MUTATIONS) event object:
+
+
 ```php
+use mynamespace\gql\resolvers\mutations\Widget as WidgetMutations;
 use craft\events\RegisterGqlMutationsEvent;
 use craft\services\Gql;
 use GraphQL\Type\Definition\Type;
 use yii\base\Event;
-use MyGqlElementInterface;
-use MyGqlArguments;
 
 Event::on(
     Gql::class,
     Gql::EVENT_REGISTER_GQL_MUTATIONS,
     function(RegisterGqlMutationsEvent $event) {
-        $event->mutations[] = [
-            'myCustomElementData' => [
-                'type' => Type::listOf(MyGqlElementInterface::getType()),
-                'args' => MyGqlArguments::getArguments(),
-            ]
-        ];
+        $event->mutations[] = array_merge(
+            $event->mutations,
+            WidgetMutations::getMutations(),
+        );
     }
 );
 ```
