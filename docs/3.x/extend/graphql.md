@@ -494,9 +494,19 @@ For example:
 - An entry’s context is its entry type, and it has an additional section context: \
 `sections.[section UID]`, `entrytypes.[UID]`
 
+You can use your custom element’s <craft3:craft\base\Element::gqlScopesByContext()> method to declare its context-specific scopes. That’s exactly where Craft’s elements are defining those contexts in the list above:
+
+- <craft3:craft\elements\Asset::gqlScopesByContext()>
+- <craft3:craft\elements\Category::gqlScopesByContext()>
+- <craft3:craft\elements\Entry::gqlScopesByContext()>
+- <craft3:craft\elements\GlobalSet::gqlScopesByContext()>
+- <craft3:craft\elements\MatrixBlock::gqlScopesByContext()>
+- <craft3:craft\elements\Tag::gqlScopesByContext()>
+- <craft3:craft\elements\User::gqlScopesByContext()>
+
 If you’ll benefit from using a generator, you will need to write a class that extends <craft3:craft\gql\base\Generator> and implements <craft3:craft\gql\base\GeneratorInterface> and <craft3:craft\gql\base\SingleGeneratorInterface>.
 
-Generator provides a `getContentFields()` method that gets custom fields for a given context, while the interfaces require `generateTypes()` and `generateType()` respectively—responsible for registering types based on the provided context.
+The base Generator provides a `getContentFields()` method that gets custom fields for a given context, while the interfaces require `generateTypes()` and `generateType()` respectively—responsible for registering types based on the provided context.
 
 ### Example Generator Classes
 
@@ -908,6 +918,10 @@ Schema components define the distinct parts that can be enabled in Craft’s Gra
 
 A schema’s configuration of these components directly determines how it’s built. How you label, organize, and enforce them is entirely up to you.
 
+::: warning
+If your GraphQL implementation doesn’t add and honor permissions, it will be available by default to the public schema. Once you register schema components and check for them in your code, they’ll only be available for each schema in which they’re explicitly enabled.
+:::
+
 Each component’s key may include an applicable action scope in `:action` format. So the `widget` component having a `read` action would be `widget:read`.
 
 The default action is `read`, and the available actions are:
@@ -916,8 +930,9 @@ The default action is `read`, and the available actions are:
 - `edit`
 - `save`
 
-- <craft3:craft\base\Element::gqlScopesByContext()>
-
+::: danger
+You must honor whatever components you register; this is not done by default!
+:::
 
 #### Registering Schema Components
 
@@ -945,9 +960,37 @@ Event::on(
 );
 ```
 
-::: warning
-If your GraphQL implementation doesn’t add and honor permissions, it will be available by default to the public schema. Once you register schema components and check for them in your code, they’ll only be available for each schema in which they’re explicitly enabled.
-:::
+If you’d like to further specify individual types, you can append each relevant UID in the key:
+
+```php
+use mynamespace\Plugin;
+use craft\events\RegisterGqlSchemaComponentsEvent;
+use craft\services\Gql;
+use yii\base\Event;
+
+Event::on(
+    Gql::class,
+    Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS,
+    function(RegisterGqlSchemaComponentsEvent $event) {
+        $widgetTypes = Plugin::getInstance()->getAllWidgetTypes();
+
+        if (!empty($widgetTypes)) {
+            $queryComponents = [];
+
+            foreach ($widgetTypes as $widgetType) {
+                $queryComponents['widget.' . $widgetType->uid . ':read'] = [
+                    'label' => 'View Widgets – ' . $widgetType->name
+                ];
+            }
+        }
+
+        $event->queries = array_merge($event->queries, [
+            // “Widgets” group
+            'Widgets' => $queryComponents,
+        ]);
+    }
+);
+```
 
 ### Eager Loading
 
