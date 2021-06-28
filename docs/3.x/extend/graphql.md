@@ -6,19 +6,21 @@ If you’ve created a custom element or field type, chances are you’ll want to
 
 ## Overview
 
-Unlike Craft’s element queries that are built on the fly, the GraphQL schema needs to define every possible query and data type up front.
+Unlike Craft’s element queries that are built on the fly, a GraphQL schema needs to define every possible query and data type up front.
 
-The fundamental difference between Craft and GraphQL APIs, combined with Craft’s flexible content modeling, means the greatest challenge for your custom implementation is likely to be planning rather than the mechanics of making it happen.
+This fundamental difference between Craft and GraphQL APIs, combined with Craft’s flexible content modeling, means _mapping out_ your custom implementation will probably take more effort than writing the code to make it happen.
 
 Important questions to consider:
 
 1. What kinds of data do you need to expose, and how complex is each?\
 (Are there nested objects or multiple types? Will you need to support eager loading?)
 2. What sort of arguments, if any, do you need to make available for narrowing your result set?
-3. Should this data be available in the public schema, or will you need to add and honor schema permissions?
+3. Should this data be available in the public schema, or will you need to add and honor schema “permissions”?
+
+Craft relies on the [webonyx/graphql-php](https://github.com/webonyx/graphql-php) library and we’ll assume you’ve familiarized yourself with [GraphQL basics](https://graphql.org/learn/). It’s worth taking a look at each if you haven’t already.
 
 ::: tip
-If you’re not already familiar with GraphQL terminology and the [webonyx/graphql-php](https://github.com/webonyx/graphql-php) library Craft uses, take care to keep Craft and GraphQL terminology separate; there are overlapping terms that can be confusing. It helps to pay careful attention to namespacing when looking at code examples.
+Be mindful of Craft vs. GraphQL terminology, because there are overlapping terms that can be confusing. It helps to pay careful attention to namespacing when looking at code examples.
 :::
 
 The rest of this page will cover each of the main things you may need to work with. If you’d like some concrete examples, have a look at Craft’s own pieces in the [`src/gql/` directory](https://github.com/craftcms/cms/tree/main/src/gql).
@@ -30,13 +32,39 @@ If you’re planning advanced or elaborate GraphQL features, please be aware of 
 - GraphQL subscriptions aren’t currently supported.
 - Advanced query builder functions [are not exposed for GraphQL](https://github.com/craftcms/cms/issues/7842).
 
+## Folder Structure
+
+Here’s a high-level look at the folder structure we’ll explore in our example adding a “Widget” element. You can structure things however you want, we’re just following [Craft’s organization](https://github.com/craftcms/cms/tree/main/src/gql):
+
+```treeview
+src/gql/
+├── arguments/
+│   └── elements/
+│       └── Widget.php
+├── interfaces/
+│   └── elements/
+│       └── Widget.php
+├── queries/
+│   └── Widget.php
+├── resolvers/
+│   └── elements/
+│       └── Widget.php
+└── types/
+    ├── elements/
+    │    └── Widget.php
+    ├── generators/
+    │   └── WidgetType.php
+    └── input/
+        └── Widget.php
+```
+
 ## The Gql Service
 
 The <craft3:craft\services\Gql> class offers methods mostly for managing schemas and tokens and executing queries, so you won’t need to do much with it if you’re primarily exposing data to GraphQL. The Gql class does, however, define and trigger the events you’ll use to register any components you’d like to add to the system. (We’ll get to those in a moment.)
 
 ### Modifying Queries Before or After Execution
 
-The Gql service also includes events you can use to modfiy [queries](#queries) before and after they’re executed.
+The Gql service includes events you can use to modfiy [queries](#queries) before and after they’re executed.
 
 #### beforeExecuteGqlQuery
 
@@ -73,7 +101,9 @@ Event::on(
 
 ## Queries
 
-Queries are the top-level starting points someone will use fetching information from the GraphQL API. Craft includes query definitions for `entries` and `entry`, for example, and Craft Commerce adds its own custom queries for `products` and `product`.
+Queries are the top-level starting points someone will use fetching data from the GraphQL API. Craft includes query definitions for `entries` and `entry`, for example, and Craft Commerce adds its own custom queries for `products` and `product`.
+
+Imagine we’ve added a custom element type for “Widgets”.
 
 A simple query to list `widgets` titles might look like this:
 
@@ -155,7 +185,7 @@ Event::on(
 
 ## Arguments
 
-A query can support any number of arguments someone can use to filter results.
+A [query](#queries) can support any number of arguments someone can use to filter results.
 
 Any Craft element can be filtered by `id`, `slug`, or its `enabledForSite` property, for example.
 
@@ -198,10 +228,10 @@ This example extends <craft3:craft\gql\base\ElementArguments> in order to take a
 
 ## Types
 
-Not to be confused with Craft’s entry types, GraphQL types are the vital and specific descriptions of whatever kinds of data the API can return.
+Not to be confused with Craft’s entry types, GraphQL types are the vital and specific descriptions of whatever the API can return.
 
 ::: tip
-GraphQL is a type system, and if you’re not already familiar we recommend reading about its [schema and types](https://graphql.org/learn/schema/) for context.
+GraphQL is a _type system_, and if you’re not already familiar we recommend reading about its [schema and types](https://graphql.org/learn/schema/) for context.
 :::
 
 Each type must exhaustively describe what it contains—including any nested types—and every type in the GraphQL schema must be unique.
@@ -250,9 +280,17 @@ Craft’s <craft3:craft\gql\GqlEntityRegistry> keeps track of these GraphQL type
 
 When adding fields to a given type, you should run them through <craft3:craft\gql\TypeManager::prepareFieldDefinitions()>. This makes it possible for others to programmatically [modify type fields](#modifying-type-fields) you’re introducing.
 
+Pay special attention to the [GraphQL\Type\Definition\Type](https://github.com/webonyx/graphql-php/blob/master/src/Type/Definition/Type.php) class, which you’ll probably want to use for returning scalar types.
+
+::: tip
+For consistency, use the `ID` type—and not `Int`—when you’re returning IDs.
+:::
+
 ### Example Type Class
 
-This example extends Craft’s element GraphQL [interface](#interfaces) to define a single GraphQL type for our custom Widget element, adding a custom `approved` field:
+This example extends Craft’s element GraphQL [interface](#interfaces).
+
+It does this in order to define a single GraphQL type for our custom Widget element that adds a custom `approved` field:
 
 ```php
 namespace mynamespace\gql\interfaces\elements;
@@ -301,11 +339,11 @@ class Widget extends craft\gql\interfaces\Element
 }
 ```
 
-While there are many GraphQL types you could implement, you’ll most likely work with interfaces that describe data models and input types for any [mutations](#mutations).
+While there are many GraphQL types you could implement, your custom objects will most likely want to provide interfaces that describe data models and input types for any [mutations](#mutations).
 
 ### Registering Types
 
-The Gql service includes a `registerGqlTypes` event you can use to register your own types.
+The Gql service includes a `registerGqlTypes` event you can use to register your types.
 
 Here we’re registering the `Widget` interface we just looked at above. While you’re not limited to adding interfaces, any class you add must have a `getType()` method that returns a valid GraphQL type definition.
 
@@ -326,7 +364,9 @@ Event::on(
 
 ### Modifying Type Fields
 
-Craft’s <craft3:craft\gql\TypeManager> includes a `defineGqlTypeFields` event you can use to add, remove or modify fields on a given GraphQL type.
+Craft’s <craft3:craft\gql\TypeManager> includes a `defineGqlTypeFields` event you can use to add, remove or modify fields on any GraphQL type.
+
+Below we’re removing IDs throughout the schema in favor of UIDs, and adding an `authorEmail` field to the entry interface:
 
 ```php
 use craft\events\DefineGqlTypeFields;
@@ -338,7 +378,7 @@ Event::on(
     TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS,
     function(DefineGqlTypeFields $e) {
         // Remove all ids to enforce use of uids
-        unset ($event->fields['id']);
+        unset($event->fields['id']);
 
         // Add author email to all entries
         if ($event->typeName == 'EntryInterface') {
@@ -361,7 +401,7 @@ Just like PHP interfaces, GraphQL interfaces are abstract types that describe th
 
 ![Screenshot of EntryInterface in GraphiQL’s documentation sidebar](../images/graphiql-entry-interface.png)
 
-You don’t have to use interfaces, but they’re a nice way of formalizing the fields exposed by your type. Craft provides GraphQL interfaces for each included element type you may want to take advantage of:
+You don’t have to use interfaces, but they’re a nice way of formalizing the fields exposed by your type. Craft provides GraphQL interfaces for each included element type:
 
 - <craft3:craft\gql\interfaces\Element>
 - <craft3:craft\gql\interfaces\Structure>
