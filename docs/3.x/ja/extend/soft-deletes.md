@@ -49,8 +49,8 @@ public function init()
     paren::init();
 
     Event::on(Gc::class, Gc::EVENT_RUN, function() {
-        Craft::$app->gc->hardDelete('{{%tablename}}');
-    }
+        Craft::$app->gc->hardDelete('{{%mytablename}}');
+    });
 }
 ```
 
