@@ -41,6 +41,8 @@ src/gql/
 ├── arguments/
 │   └── elements/
 │       └── Widget.php
+├── directives/
+│   └── BarTheFoo.php
 ├── interfaces/
 │   └── elements/
 │       └── Widget.php
@@ -648,14 +650,55 @@ The [`formatDateTime` directive](../graphql.md#the-formatdatetime-directive), fo
 
 Craft’s included directives apply exclusively to requested fields, though they may be applied in mutations and numerous parts of the type system.
 
+A directive needs to provide a name, description, and the relevant query location(s) it can be applied. It can optionally take arguments.
+
 ### Example Directive Class
 
-TODO: add
+This simple example returns the field value, replacing any instances of `foo` with `bar`.
 
 ```php
+namespace mynamespace\gql\directives;
+
+use craft\gql\base\Directive;
+use craft\gql\GqlEntityRegistry;
+use GraphQL\Type\Definition\Directive as GqlDirective;
+
+class BarTheFoo extends Directive
+{
+
+    public static function create(): GqlDirective
+    {
+        if ($type = GqlEntityRegistry::getEntity(self::name())) {
+            return $type;
+        }
+
+        $type = GqlEntityRegistry::createEntity(static::name(), new self([
+            'name' => static::name(),
+            'locations' => [
+                DirectiveLocation::FIELD,
+            ],
+            'description' => 'Replace `foo` with `bar`.',
+            'args' => [],
+        ]));
+
+        return $type;
+    }
+
+    public static function name(): string
+    {
+        return 'fooTheBar';
+    }
+
+    public static function apply($source, $value, array $arguments, ResolveInfo $resolveInfo)
+    {
+        return str_replace('foo', 'bar', (string)$value);
+    }
+}
 ```
 
 ### Registering Directives
+
+You can register your directive by appending its class name to the `directives` array on the [registerGqlDirectives](craft3:craft\services\Gql::EVENT_REGISTER_GQL_DIRECTIVES) event object:
 
 ```php
 use craft\events\RegisterGqlDirectivesEvent;
