@@ -471,13 +471,15 @@ If this wasn’t a custom element type, we’d need a class to extend <craft3:cr
 
 ## Generators
 
-Craft introduces its own concept of generators to help create the GraphQL types necessary for entry types, Matrix fields, and other content structures that can be configured with many contexts and custom fields where each needs a unique GraphQL type definition.
+Craft introduces the concept of generators to bridge the gap between a complex content model and a GraphQL schema that needs to detail every potential type of content.
 
-In the [example interface](#example-type-class) above, we kept things simple by adding only one GraphQL type to the schema. In other words, our widget only comes in one flavor. If the data you’re representing only appears in one form, that may work great!
+In the [example interface](#example-type-class) above, we kept things simple by adding only one GraphQL type to the schema. In other words, our widget only comes in one “flavor.” If the data you’re representing only appears in one form, that may work great!
 
-It’s common in Craft, however, for elements to have multiple types; entries have sections and entry types, assets have volumes, categories have groups, and so on. The developer can create however many of these “flavors” they’d like, and yet we still need each one to be accounted for in the GraphQL schema. This is exactly the situation generators help with.
+It’s common in Craft, however, for elements to have multiple types: entries have sections and entry types, assets have volumes, categories have groups, and so on. The site developer can create however many of these flavors they’d like, and yet we still need each one to be accounted for in the GraphQL schema. This is exactly the situation generators help with.
 
-Like the name implies, a generator can dynamically create types based on whatever contexts are needed. The generator needs to know about the unique scopes in which an element may appear for each unique flavor or context.
+![Diagram of single- vs. multi-type element](../images/gql-type-generator.png =550x550)
+
+Like the name implies, a generator can dynamically create GraphQL types based on whatever _contexts_ are needed. The generator needs to know about the unique scopes in which an element may appear for each unique flavor or context.
 
 For example:
 
@@ -490,10 +492,145 @@ If you’ll benefit from using a generator, you will need to write a class that 
 
 Generator provides a `getContentFields()` method that gets custom fields for a given context, while the interfaces require `generateTypes()` and `generateType()` respectively—responsible for registering types based on the provided context.
 
-### Example Generator Class
+### Example Generator Classes
+
+Our single-flavor widget wouldn’t actually need to generate multiple types since it only has one context. It wouldn’t need a generator class, so just for illustration a single-type generator could look like this:
 
 ```php
+namespace mynamespace\gql\types\generators;
+
+use mynamespace\elements\Widget as WidgetElement;
+use mynamespace\gql\types\elements\Widget as WidgetType;
+use mynamespace\gql\interfaces\elements\Widget as WidgetInterface;
+use craft\gql\base\GeneratorInterface;
+use craft\gql\GqlEntityRegistry;
+use craft\gql\TypeManager;
+
+class WidgetType implements GeneratorInterface
+{
+    public static function generateTypes($context = null): array
+    {
+        // Widgets have no context
+        $type = static::generateType($context);
+        return [$type->name => $type];
+    }
+
+    public static function generateType($context): ObjectType
+    {
+        $pluginType = new WidgetElement();
+        $typeName = $pluginType->getGqlTypeName();
+        $widgetFields = TypeManager::prepareFieldDefinitions(
+            WidgetInterface::getFieldDefinitions(),
+            $typeName
+        );
+
+        // Return the type if it exists, otherwise create and return it
+        return GqlEntityRegistry::getEntity($typeName) ?:
+            GqlEntityRegistry::createEntity(
+                $typeName,
+                new WidgetType([
+                    'name' => $typeName,
+                    'fields' => function() use ($widgetFields) {
+                        return $widgetFields;
+                    },
+                ])
+            );
+    }
+}
 ```
+
+::: tip
+We’re assuming `mynamespace\elements\Widget` was an existing [element class](element-types.md#element-class).
+:::
+
+Now let’s spice things up and pretend our widgets come in multiple flavors, each one having custom field layouts—similar to Craft’s entry types.
+
+We can think of each “flavor” as a context that widget might appear in, and use the generator to dynamically create a type for each context.
+
+This example pretends a `getAllWidgetTypes()` method can give us back the context we need to account for, then loops through them to generate an array of GraphQL types. The `generateTypes()` method does the work of determining which types we need, handing each one off to `generateType()` in order to get a context-specific GraphQL type definition:
+
+```php
+namespace mynamespace\gql\types\generators;
+
+use mynamespace\Plugin;
+use mynamespace\elements\Widget as WidgetElement;
+use mynamespace\gql\types\elements\Widget as WidgetType;
+use mynamespace\gql\interfaces\elements\Widget as WidgetInterface;
+use mynamespace\helpers\Gql as MyGqlHelper;
+use craft\gql\base\GeneratorInterface;
+use craft\gql\GqlEntityRegistry;
+use craft\gql\TypeManager;
+
+class WidgetType implements GeneratorInterface
+{
+    public static function generateTypes($context = null): array
+    {
+        // Fetch all our pretend widget types to be used as contexts
+        $widgetTypes = Plugin::getInstance()->getAllWidgetTypes();
+        $gqlTypes = [];
+
+        foreach ($widgetTypes as $widgetType) {
+            // Get relevant scopes that may limit schema access
+            $requiredContexts = WidgetElement::gqlScopesByContext($widgetType);
+
+            // Ignore this widget variation if the schema doesn’t include it
+            if (!MyGqlHelper::isSchemaAwareOf($requiredContexts)) {
+                continue;
+            }
+
+            // Generate a GQL type for this widget type
+            $type = static::generateType($widgetType);
+            $gqlTypes[$type->name] = $type;
+        }
+
+        return $gqlTypes;
+    }
+
+    public static function generateType($context): ObjectType
+    {
+        // Get the intended GQL type name as determined by the element type
+        $typeName = WidgetElement::gqlTypeNameByContext($widgetType);
+
+        // Get element’s user-defined content fields and
+        $contentFieldGqlTypes = self::getContentFields($context);
+
+        // Merge in GQL types for the widget element’s own custom fields
+        $widgetFields = TypeManager::prepareFieldDefinitions(
+            array_merge(
+                WidgetInterface::getFieldDefinitions(),
+                $contentFieldGqlTypes
+            ),
+            $typeName
+        );
+
+        // Return the type if it exists, otherwise create and return it
+        return GqlEntityRegistry::getEntity($typeName) ?:
+            GqlEntityRegistry::createEntity(
+                $typeName,
+                new WidgetType([
+                    'name' => $typeName,
+                    'fields' => function() use ($widgetFields) {
+                        return $widgetFields;
+                    },
+                ])
+            );
+    }
+}
+```
+
+The term “context” here is deliberately vague because you’re the one that decides what that should be.
+
+Since Craft elements and field types are relevant to the GraphQL API, their base classes include methods for describing their type names:
+
+- <craft3:craft\base\Element::getGqlTypeName()>
+- <craft3:craft\base\Element::gqlTypeNameByContext()>
+- <craft3:craft\base\Field::getContentGqlType()>
+
+These include sensible defaults since Craft can make some assumptions about how elements and fields will be used.
+
+::: tip
+A field can also use <craft3:craft\base\Field::includeInGqlSchema()>—`true` by default—to determine whether it should appear in a given schema.
+:::
 
 ## Directives
 
@@ -540,6 +677,9 @@ Event::on(
 A Mutation class defines named mutations that should be available, including consideration for permissions, each one including arguments, a type, and a mutation resolver responsible for modifying data using Craft’s APIs.
 
 input objects
+
+- <craft3:craft\base\Element::gqlMutationNameByContext()>
+
 
 ### Example Mutation Class
 
@@ -589,6 +729,9 @@ The default action is `read`, and the available actions are:
 - `read`
 - `edit`
 - `save`
+
+- <craft3:craft\base\Element::gqlScopesByContext()>
+
 
 #### Registering Schema Components
 
