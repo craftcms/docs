@@ -972,6 +972,7 @@ Event::on(
     Gql::class,
     Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS,
     function(RegisterGqlSchemaComponentsEvent $event) {
+        // Assume an array of objects each having `uid` and `name` properties
         $widgetTypes = Plugin::getInstance()->getAllWidgetTypes();
 
         if (!empty($widgetTypes)) {
