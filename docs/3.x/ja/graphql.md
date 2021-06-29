@@ -1615,7 +1615,7 @@ To delete a tag, use the `deleteTag` mutation which requires the `id` of the tag
 
 #### Saving a Category
 
-To create or update a [category](categories.md), use the category group-specific mutation which will have a name in the form of `save_<categoryGroupHandle>_Tag`.
+To create or update a [category](categories.md), use the category group-specific mutation which will have a name in the form of `save_<categoryGroupHandle>_Category`.
 
 <!-- BEGIN CATEGORY MUTATION ARGS -->
 
