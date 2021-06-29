@@ -245,7 +245,6 @@ Each type must exhaustively describe what it contains—including any nested typ
 Everything has a `__typename`:
 
 ::: code
-
 ```graphql GraphQL Query
 {
   __typename
@@ -260,7 +259,6 @@ Everything has a `__typename`:
   }
 }
 ```
-
 ```json JSON Response
 {
   "data": {
@@ -277,7 +275,6 @@ Everything has a `__typename`:
   }
 }
 ```
-
 :::
 
 Every available part of Craft’s content model, and every kind of data your custom plugin or module needs to expose via GraphQL, needs to be translated into an explicitly-named GraphQL type.
@@ -286,11 +283,28 @@ Craft’s <craft3:craft\gql\GqlEntityRegistry> keeps track of these GraphQL type
 
 When adding fields to a given type, you should run them through <craft3:craft\gql\TypeManager::prepareFieldDefinitions()>. This makes it possible for others to programmatically [modify type fields](#modifying-type-fields) you’re introducing.
 
-Pay special attention to the [GraphQL\Type\Definition\Type](https://github.com/webonyx/graphql-php/blob/master/src/Type/Definition/Type.php) class, which you’ll probably want to use for returning scalar types.
+### Scalar Types
+
+Pay special attention to the [GraphQL\Type\Definition\Type](https://github.com/webonyx/graphql-php/blob/master/src/Type/Definition/Type.php) class, which you’ll probably want to use for returning scalar types:
+
+- `GraphQL\Type\Definition\Type::id()` is used to represent the GraphQL’s `ID` type.
+- `GraphQL\Type\Definition\Type::string()` is used to represent the GraphQL’s `String` type.
+- `GraphQL\Type\Definition\Type::boolean()` is used to represent the GraphQL’s `Boolean` type.
+- `GraphQL\Type\Definition\Type::int()` is used to represent the GraphQL’s `Int` type.
+- `GraphQL\Type\Definition\Type::float()` is used to represent the GraphQL’s `Float` type.
+- `craft\gql\types\QueryArgument::getType()` is used to specify an integer *or* a string.
+- `craft\gql\types\DateTime::getType()` is used to specify a point in time.
+- `craft\gql\types\Number::getType()` is used to specify a number than can be either an integer or a float. It can also be `null`.
 
 ::: tip
 For consistency, use the `ID` type—and not `Int`—when you’re returning IDs.
 :::
+
+### Utility Types
+
+You can specify a non-null value by wrapping it with the `\GraphQL\Type\Definition\Type::nonNull()` method.
+
+To specify a list of types, you must wrap the type with the `\GraphQL\Type\Definition\Type::listOf()` method.
 
 ### Example Type Class
 
