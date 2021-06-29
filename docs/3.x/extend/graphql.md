@@ -944,13 +944,15 @@ The default action is `read`, and the available actions are:
 - `edit`
 - `save`
 
+If you provide explicit schema components, you a `:read` action is required.
+
 ::: danger
 You must honor whatever components you register; this is not done by default!
 :::
 
 #### Registering Schema Components
 
-The Gql service provides a `registerGqlSchemaComponents` event you can use to append your own schema components to the event object’s `queries` and/or `mutations` arrays:
+The Gql service provides a [registerGqlSchemaComponents](craft3:craft\services\Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS) event you can use to append your own schema components to the event object’s `queries` and/or `mutations` arrays:
 
 ```php
 use craft\events\RegisterGqlSchemaComponentsEvent;
