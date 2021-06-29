@@ -775,7 +775,7 @@ mutation NewWidget($title: String) {
 :::
 
 ::: tip
-Like the name-getting methods mentioned above, Craft’s base elements include a <craft3:craft\base\Element::gqlMutationNameByContext()> method for providing context-sensitive type names.
+Like the name-getting methods mentioned earlier, Craft’s base elements include a <craft3:craft\base\Element::gqlMutationNameByContext()> method for providing context-sensitive type names.
 :::
 
 ### Input Types
