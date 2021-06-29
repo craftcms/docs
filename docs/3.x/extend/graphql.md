@@ -729,16 +729,16 @@ class BarTheFoo extends Directive
 You can register your directive by appending its class name to the `directives` array on the [registerGqlDirectives](craft3:craft\services\Gql::EVENT_REGISTER_GQL_DIRECTIVES) event object:
 
 ```php
+use mynamespace\gql\directives\BarTheFoo;
 use craft\events\RegisterGqlDirectivesEvent;
 use craft\services\Gql;
 use yii\base\Event;
-use MyGqlDirective;
 
 Event::on(
     Gql::class,
     Gql::EVENT_REGISTER_GQL_DIRECTIVES,
     function(RegisterGqlDirectivesEvent $event) {
-        $event->directives[] = MyGqlDirective::class;
+        $event->directives[] = BarTheFoo::class;
     }
 );
 ```
