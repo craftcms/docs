@@ -930,10 +930,12 @@ Schema components define the distinct parts that can be enabled in Craft’s Gra
 
 ![Schema components in the Craft control panel](../images/control-panel-schema-components.png)
 
-A schema’s configuration of these components directly determines how it’s built. How you label, organize, and enforce them is entirely up to you.
+While these look like GraphQL permissions, the configuration of these components directly determines how a schema is built—not simply whether something has access to a part of the schema.
+
+How you label, organize, and enforce your schema components is entirely up to you.
 
 ::: warning
-If your GraphQL implementation doesn’t add and honor permissions, it will be available by default to the public schema. Once you register schema components and check for them in your code, they’ll only be available for each schema in which they’re explicitly enabled.
+If your GraphQL implementation doesn’t add and honor these settings, your types will be available by default to the public schema. Once you register schema components and check for them in your code, they’ll only be available for each schema in which they’re explicitly enabled.
 :::
 
 Each component’s key may include an applicable action scope in `:action` format. So the `widget` component having a `read` action would be `widget:read`.
