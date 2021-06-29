@@ -678,7 +678,7 @@ The [`formatDateTime` directive](../graphql.md#the-formatdatetime-directive), fo
 
 Craft’s included directives apply exclusively to requested fields, though they may be applied in mutations and numerous parts of the type system.
 
-A directive needs to provide a name, description, and the relevant query location(s) it can be applied. It can optionally take [arguments](#arguments).
+A directive needs to provide a name, description, and the relevant query location(s) it can be applied. It can optionally specify [arguments](#arguments).
 
 ### Example Directive Class
 
