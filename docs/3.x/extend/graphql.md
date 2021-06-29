@@ -577,7 +577,7 @@ Now let’s spice things up and pretend our widgets come in multiple flavors, ea
 
 We can think of each “flavor” as a context that widget might appear in, and use the generator to dynamically create a type for each context.
 
-This example pretends a `getAllWidgetTypes()` method can give us back the context we need to account for, then loops through them to generate an array of GraphQL types. The `generateTypes()` method does the work of determining which types we need, handing each one off to `generateType()` in order to get a context-specific GraphQL type definition:
+This example pretends a `getAllWidgetTypes()` method can give us back all the contexts we need to handle, then loops through them to generate an array of GraphQL types. The `generateTypes()` method does the work of determining which types we need, handing each one off to `generateType()` in order to get a context-specific GraphQL type definition:
 
 ```php
 namespace mynamespace\gql\types\generators;
