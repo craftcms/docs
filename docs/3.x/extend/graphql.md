@@ -650,7 +650,7 @@ class WidgetType implements GeneratorInterface
 
 The term “context” here is deliberately vague because you’re the one that decides what that should be.
 
-Since Craft elements and field types are relevant to the GraphQL API, their base classes include methods for describing their type names:
+Since Craft elements and field types are integral to the GraphQL API, their base classes include methods for describing their type names:
 
 - <craft3:craft\base\Element::getGqlTypeName()>
 - <craft3:craft\base\Element::gqlTypeNameByContext()>
