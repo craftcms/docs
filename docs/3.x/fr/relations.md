@@ -2,11 +2,11 @@
 
 Craft has a powerful engine for relating elements to one another with five relational field types:
 
-* [Assets Fields](assets-fields.md)
-* [Categories Fields](categories-fields.md)
-* [Entries Fields](entries-fields.md)
-* [Tags Fields](tags-fields.md)
-* [Users Fields](users-fields.md)
+- [Assets Fields](assets-fields.md)
+- [Categories Fields](categories-fields.md)
+- [Entries Fields](entries-fields.md)
+- [Tags Fields](tags-fields.md)
+- [Users Fields](users-fields.md)
 
 Just like the other field types, you can add these to your [section](entries.md#sections), [user](users.md), [asset](assets.md), [category group](categories.md), [tag group](tags.md), and [global sets](globals.md)’ field layouts.
 
