@@ -2,11 +2,11 @@
 
 Craft は、エレメントを互いに関連付けるための強力なエンジンを持っています。 関連フィールドタイプを利用して、それらの関連性を作成します。
 
-* [アセットフィールド](assets-fields.md)
-* [カテゴリフィールド](categories-fields.md)
-* [エントリフィールド](entries-fields.md)
-* [タグフィールド](tags-fields.md)
-* [ユーザーフィールド](users-fields.md)
+- [アセットフィールド](assets-fields.md)
+- [カテゴリフィールド](categories-fields.md)
+- [エントリフィールド](entries-fields.md)
+- [タグフィールド](tags-fields.md)
+- [ユーザーフィールド](users-fields.md)
 
 Craft は次の5つの関連フィールドタイプがあります。
 
