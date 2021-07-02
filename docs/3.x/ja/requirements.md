@@ -21,20 +21,20 @@ with InnoDB の MySQL 5.5 以降、MariaDB 5.5 以降、または、PostgreSQL 9
 
 ## 必要な PHP エクステンション
 
-* [ctype](https://secure.php.net/manual/en/book.ctype.php)
-* [cURL](http://php.net/manual/en/book.curl.php)
-* 少なくとも 256MB の PHP 割当メモリ
-* [iconv](http://php.net/manual/en/book.iconv.php)
-* [JSON](http://php.net/manual/en/book.json.php)
-* [Multibyte String](http://php.net/manual/en/book.mbstring.php)
-* [OpenSSL](http://php.net/manual/en/book.openssl.php)
-* [PCRE](http://php.net/manual/en/book.pcre.php)
-* [PDO MySQL Driver](http://php.net/manual/en/ref.pdo-mysql.php) または [PDO PostgreSQL Driver](http://php.net/manual/en/ref.pdo-pgsql.php)
-* [PDO](http://php.net/manual/en/book.pdo.php)
-* [Reflection](http://php.net/manual/en/class.reflectionextension.php)
-* [SPL](http://php.net/manual/en/book.spl.php)
-* [Zip](http://php.net/manual/en/book.zip.php)
-* [DOM](http://php.net/manual/en/book.dom.php)
+- [ctype](https://secure.php.net/manual/en/book.ctype.php)
+- [cURL](http://php.net/manual/en/book.curl.php)
+- 少なくとも 256MB の PHP 割当メモリ
+- [iconv](http://php.net/manual/en/book.iconv.php)
+- [JSON](http://php.net/manual/en/book.json.php)
+- [Multibyte String](http://php.net/manual/en/book.mbstring.php)
+- [OpenSSL](http://php.net/manual/en/book.openssl.php)
+- [PCRE](http://php.net/manual/en/book.pcre.php)
+- [PDO MySQL Driver](http://php.net/manual/en/ref.pdo-mysql.php) または [PDO PostgreSQL Driver](http://php.net/manual/en/ref.pdo-pgsql.php)
+- [PDO](http://php.net/manual/en/book.pdo.php)
+- [Reflection](http://php.net/manual/en/class.reflectionextension.php)
+- [SPL](http://php.net/manual/en/book.spl.php)
+- [Zip](http://php.net/manual/en/book.zip.php)
+- [DOM](http://php.net/manual/en/book.dom.php)
 
 Craft は次の PHP エクステンションが必要です。
 
@@ -52,26 +52,26 @@ Craft のデータベースに接続するユーザーには、次の特権が�
 
 #### MySQL/MariaDB
 
-* `SELECT`
-* `INSERT`
-* `DELETE`
-* `UPDATE`
-* `CREATE`
-* `ALTER`
-* `INDEX`
-* `DROP`
-* `REFERENCES`
-* `LOCK TABLES`
+- `SELECT`
+- `INSERT`
+- `DELETE`
+- `UPDATE`
+- `CREATE`
+- `ALTER`
+- `INDEX`
+- `DROP`
+- `REFERENCES`
+- `LOCK TABLES`
 
 #### PostgreSQL
 
-* `SELECT`
-* `INSERT`
-* `UPDATE`
-* `CREATE`
-* `DELETE`
-* `REFERENCES`
-* `CONNECT`
+- `SELECT`
+- `INSERT`
+- `UPDATE`
+- `CREATE`
+- `DELETE`
+- `REFERENCES`
+- `CONNECT`
 
 ## 追加オプション
 
