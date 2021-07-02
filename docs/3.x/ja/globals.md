@@ -4,9 +4,9 @@
 
 Craft はグローバル設定内でグローバルを整理します。 それぞれのグローバル設定は、存在するすべてのフィールドや新しいフィールドを利用する独自の[フィールドレイアウト](fields.md#field-layouts)を持ちます。
 
-グローバル設定を作るには、「設定 > グローバル」に移動します。
+To create a Global Set, go to **Settings** → **Globals**.
 
-少なくとも1つのグローバル設定があれば、Craft はコントロールパネルのメインナビゲーションに「グローバル」項目を追加します。 これをクリックすると、サイドバーにすべてのグローバル設定のリスト、メインコンテンツエリアに選択されたグローバル設定に関連するすべてのフィールドが表示されたページに移動します。
+If you have at least one Global Set, Craft will add a new “Globals” item to the main control panel navigation. Clicking this will take you to a page that lists all your Global Sets in a sidebar, as well as all of the fields associated with the selected Global Set in the main content area.
 
 ::: tip
 [エントリ](sections-and-entries.md#entries)とは異なり、特定の URL と関連付けられていないグローバル設定では、ライブプレビュー機能がありません。
