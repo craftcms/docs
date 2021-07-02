@@ -135,15 +135,19 @@ php craft setup/security-key
 
 Craft プロジェクトをホストするための新しいウェブサーバーを用意してください。 ドキュメントルートは `web/` ディレクトリ（または、リネームしたディレクトリ）を指すようにします。
 
+::: tip
+See [Moving Craft’s Files Below the Webroot](https://craftcms.com/knowledge-base/moving-craft-files) if your hosting setup does not allow Craft’s files to exist outside the webroot.
+:::
+
 If you’re not using [Nitro](/nitro/2.x/) or another local hosting tool, you’ll probably need to update your `hosts` file so your computer knows to route your chosen host name’s requests locally.
 
 - **macOS/Linux/Unix**: `/etc/hosts`
 - **Windows**: `\Windows\System32\drivers\etc\hosts`
 
-ブラウザで `http://<Hostname>/index.php?p=admin/install`（ウェブサーバーのホスト名で `<Hostname>` を置き換える）にアクセスすることで、すべて正しく設定できたかどうかをテストできます。 Craft のセットアップウィザードが表示された場合、そのホスト名は Craft のインストールのために適切に処理されています。
+You can test whether you set everything up correctly by pointing your web browser to `https://<Hostname>/index.php?p=admin/install` (substituting `<Hostname>` with your web server’s host name). If Craft’s Setup Wizard is shown, the host name is correctly resolving to your Craft installation.
 
 ::: tip
-ローカル開発では `.test` TLD を使用することを推奨します。 [Bonjour との衝突はパフォーマンスの問題に繋がる可能性があるため](https://help.rm.com/technicalarticle.asp?cref=tec3015691)、特に macOS では `.local` を使用しないでください。 :::
+We recommend using the `.test` TLD for local development, and specifically not `.local` on macOS since [conflicts with Bonjour can lead to performance issues](https://help.rm.com/technicalarticle.asp?cref=tec3015691).
 :::
 
 ## ステップ 6：セットアップウィザードの実行
@@ -172,7 +176,7 @@ In your web browser, go to `https://mysite.test/index.php?p=admin/install` (subs
 <img src="./images/installation-step-0.png" alt="Craft Installation Screen">
 </BrowserShot>
 
-インストーラーの最初のステップは、[ライセンス契約](https://craftcms.com/license)への同意です。 Scroll down through the agreement (reading it all, of course) and press **Got it** to accept:
+The first step of the installer is to accept the [license agreement](https://craftcms.com/license). Scroll down through the agreement (reading it all, of course) and press **Got it** to accept:
 
 <BrowserShot url="https://mysite.test/admin/install" :link="false">
 <img src="./images/installation-step-1.png" alt="Craft Installation License Agreement">
