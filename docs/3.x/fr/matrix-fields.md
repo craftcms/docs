@@ -100,8 +100,10 @@ If you only want the first block, call [one()](craft3:craft\db\Query::one()) ins
 ```
 ```php
 {% set block = entry.myFieldHandle.one() %}
-{% if block %}<!-- ...
-    -->{% endif %}
+{% if block %}
+    <!-- ...
+    -->
+{% endif %}
 ```
 :::
 
@@ -142,7 +144,9 @@ If you only want the first block, call [one()](craft3:craft\db\Query::one()) ins
 ::: code
 ```twig
 {% set block = entry.myFieldHandle.one() %}
-{% if block %}<!-- ... -->{% endif %}
+{% if block %}
+    <!-- ... -->
+{% endif %}
 ```
 ```php
 {% set blocks = entry.myFieldHandle.all() %}
