@@ -6,12 +6,12 @@ You can create taxonomies for your [entries](entries.md), [users](users.md), and
 
 Before you can create categories, you must create Category Groups to contain them. Each Category Group lets you define the following:
 
-* Category Group name
-* Category Group handle (how you'll refer to the Category Group in your templates)
-* Maximum number of levels you can nest categories in the group
-* The format of the category URI
-* Which template should load if a category’s URL is accessed
-* Which [fields](fields.md) categories in the group should have
+- Category Group name
+- Category Group handle (how you'll refer to the Category Group in your templates)
+- Maximum number of levels you can nest categories in the group
+- The format of the category URI
+- Which template should load if a category’s URL is accessed
+- Which [fields](fields.md) categories in the group should have
 
 To create a new category group, go to Settings → Categories and click the “New Category Group” button.
 
@@ -35,9 +35,9 @@ Double-clicking on a category will bring up a modal that lets you edit its name,
 
 When you create a category, you have the following options:
 
-* Fill out the category fields (if you didn't define any then the only field available will be Title)
-* Edit the slug (it's automatically populated based on the title).
-* Choose a Parent category. The new category will have a hierarchical relationship with its parent. This is helpful for creating taxonomies with multiple levels. You also have the option of creating a new category while assigning the Parent.
+- Fill out the category fields (if you didn't define any then the only field available will be Title)
+- Edit the slug (it's automatically populated based on the title).
+- Choose a Parent category. The new category will have a hierarchical relationship with its parent. This is helpful for creating taxonomies with multiple levels. You also have the option of creating a new category while assigning the Parent.
 
 ::: tip
 You can only nest categories up to the level specified in the Max Level field Category Group settings. If no level is specified then the nesting level is unlimited.
@@ -101,6 +101,15 @@ We can display a navigation for all the categories in a category group called �
     {% endnav %}
 </ul>
 ```
+
+::: tip
+To maintain the exact order you see in the control panel, add `orderBy('lft asc')` to your query:
+```twig
+{% set myCategoryQuery = craft.categories()
+    .group('topics')
+    .orderBy('lft asc') %}
+```
+:::
 
 ### Parameters
 
