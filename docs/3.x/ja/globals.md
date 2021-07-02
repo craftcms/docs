@@ -455,14 +455,14 @@ $globalSets = \craft\elements\GlobalSet::find()
 ```twig
 {# Fetch all global sets in order of date created #}
 {% set globalSets = craft.globalSets()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all global sets in order of date created
 $globalSets = \craft\elements\GlobalSet::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::
