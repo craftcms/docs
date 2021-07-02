@@ -712,14 +712,14 @@ $assets = \craft\elements\Asset::find()
 ```twig
 {# Fetch all assets in order of date created #}
 {% set assets = craft.assets()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all assets in order of date created
 $assets = \craft\elements\Asset::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::
