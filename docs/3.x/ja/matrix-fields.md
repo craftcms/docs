@@ -102,8 +102,10 @@ $entries = \craft\elements\Entry::find()
 ```
 ```php
 {% set block = entry.myFieldHandle.one() %}
-{% if block %}<!-- ...
-    -->{% endif %}
+{% if block %}
+    <!-- ...
+    -->
+{% endif %}
 ```
 :::
 
@@ -144,7 +146,9 @@ This code can be simplified using the [switch](dev/tags.md#switch) tag.
 すべての既存ブロックを現在と同じ順序で維持したい場合、このテンプレートを利用して `sortOrder` 配列を定義します。
 ```twig
 {% set block = entry.myFieldHandle.one() %}
-{% if block %}<!-- ... -->{% endif %}
+{% if block %}
+    <!-- ... -->
+{% endif %}
 ```
 ```php
 {% set blocks = entry.myFieldHandle.all() %}
