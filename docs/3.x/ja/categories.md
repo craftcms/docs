@@ -103,11 +103,11 @@ $myCategoryQuery = \craft\elements\Category::find();
 ```
 
 ::: tip
-To maintain the exact order you see in the control panel, add `orderBy('lft asc')` to your query:
+To maintain the exact order you see in the control panel, add `orderBy('lft ASC')` to your query:
 ```twig
 {% set myCategoryQuery = craft.categories()
     .group('topics')
-    .orderBy('lft asc') %}
+    .orderBy('lft ASC') %}
 ```
 :::
 
@@ -771,14 +771,14 @@ Determines the order that the categories should be returned in. (If empty, defau
 ```twig
 {# Fetch all categories in order of date created #}
 {% set categories = craft.categories()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all categories in order of date created
 $categories = \craft\elements\Category::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::
