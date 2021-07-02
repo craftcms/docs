@@ -102,6 +102,15 @@ We can display a navigation for all the categories in a category group called â€
 </ul>
 ```
 
+::: tip
+To maintain the exact order you see in the control panel, add `orderBy('lft asc')` to your query:
+```twig
+{% set myCategoryQuery = craft.categories()
+    .group('topics')
+    .orderBy('lft asc') %}
+```
+:::
+
 ### Parameters
 
 Category queries support the following parameters:
