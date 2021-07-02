@@ -1207,14 +1207,14 @@ $entries = \craft\elements\Entry::find()
 ```twig
 {# Fetch all entries in order of date created #}
 {% set entries = craft.entries()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all entries in order of date created
 $entries = \craft\elements\Entry::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::
