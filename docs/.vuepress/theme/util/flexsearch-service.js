@@ -1,9 +1,9 @@
 import Flexsearch from "flexsearch";
+import { Document } from "flexsearch";
 // Use when flexSearch v0.7.0 will be available
 // import cyrillicCharset from 'flexsearch/dist/lang/cyrillic/default.min.js'
 // import cjkCharset from 'flexsearch/dist/lang/cjk/default.min.js'
 import _ from "lodash";
-import FlexSearch from "flexsearch";
 
 const defaultLang = "en-US";
 
@@ -16,37 +16,26 @@ const cjkRegex = /[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3]|[\u4E00-\u9FCC\u34
 
 export default {
   buildIndex(pages) {
+
     const indexSettings = {
-      async: true,
-      doc: {
-        id: "key",
-        // fields we want to index
-        field: ["title", "keywords", "headersStr", "content"]
-        // fields to be stored (acts as explicit allow list; `page` object otherwise stored)
-        // store: [
-        //   "key",
-        //   "title",
-        //   "headers",
-        //   "headersStr",
-        //   "content",
-        //   "contentLowercase",
-        //   "path",
-        //   "lang",
-        //   "docSetHandle",
-        //   "docSetTitle",
-        //   "isPrimary",
-        //   "version"
-        // ]
+      optimize: true,
+      minlength: 3,
+      document: {
+        id: "path",
+        index: ["title", "keywords", "headersStr", "content"]
       }
     };
 
-    const globalIndex = new Flexsearch(indexSettings);
-    globalIndex.add(
-      pages.filter(page => {
-        // default language, primary set, and primary version (designated or versionless set)
-        return page.lang === defaultLang && page.isPrimary;
-      })
-    );
+    let pagesToAdd = pages.filter(page => {
+      // default language, primary set, and primary version (designated or versionless set)
+      return page.lang === defaultLang && page.isPrimary;
+    });
+
+    const globalIndex = new Document(indexSettings);
+
+    pagesToAdd.forEach(page => {
+      globalIndex.add(page)
+    });
 
     indexes["global"] = globalIndex;
 
@@ -90,7 +79,7 @@ export default {
             const language = languages[k];
             let currentIndexSettings = indexSettings;
 
-            const setIndex = new FlexSearch(currentIndexSettings);
+            const setIndex = new Document(currentIndexSettings);
             const setKey = `${docSet}|${version}|${language}`;
             const setPages = pages.filter(page => {
               return (
@@ -101,31 +90,42 @@ export default {
             });
 
             //console.log(setKey, setPages);
-            setIndex.add(setPages);
+            setPages.forEach(page => {
+              setIndex.add(page)
+            });
+
             indexes[setKey] = setIndex;
 
             const cyrillicSetPages = setPages.filter(p => p.charsets.cyrillic);
             const cjkSetPages = setPages.filter(p => p.charsets.cjk);
 
             if (cyrillicSetPages.length) {
-              const setCyrillicIndex = new Flexsearch({
+              const setCyrillicIndex = new Document({
                 ...indexSettings,
                 encode: false,
                 split: /\s+/,
                 tokenize: "forward"
               });
-              setCyrillicIndex.add(cyrillicPages);
+
+              cyrillicPages.forEach(page => {
+                setCyrillicIndex.add(page)
+              });
+
               cyrillicIndexes[setKey] = setCyrillicIndex;
             }
             if (cjkSetPages.length) {
-              const setCjkIndex = new Flexsearch({
+              const setCjkIndex = new Document({
                 ...indexSettings,
                 encode: false,
                 tokenize: function(str) {
                   return str.replace(/[\x00-\x7F]/g, "").split("");
                 }
               });
-              setCjkIndex.add(cjkSetPages);
+
+              cjkSetPages.forEach(page => {
+                setCjkIndex.add(page)
+              });
+
               cjkIndexes[setKey] = setCjkIndex;
             }
           }
@@ -137,7 +137,7 @@ export default {
 
           let currentIndexSettings = indexSettings;
 
-          const setIndex = new FlexSearch(currentIndexSettings);
+          const setIndex = new Document(currentIndexSettings);
           const setKey = `${docSet}|${language}`;
           const setPages = pages.filter(page => {
             return page.docSetHandle === docSet && page.lang === language;
@@ -162,55 +162,61 @@ export default {
     );
     const cjkIndex = resolveSearchIndex(docSet, version, language, cjkIndexes);
 
-    const searchParams = [
-      {
+    const searchOptions = {
+      index: [{
         field: "keywords",
-        query: queryString,
         boost: 8,
         suggest: false,
-        bool: "or",
       },
       {
         field: "title",
-        query: queryString,
         boost: 10,
         suggest: false,
-        bool: "or",
       },
       {
         field: "headersStr",
-        query: queryString,
         boost: 7,
         suggest: false,
-        bool: "or",
       },
       {
         field: "content",
-        query: queryString,
         boost: 0,
         suggest: false,
-        bool: "or",
-      }
-    ];
-    const searchResult1 = await index.search(searchParams, limit);
+      }]
+    };
+
+    const searchResult1 = await index.search(queryString, limit, searchOptions);
     const searchResult2 = cyrillicIndex
-      ? await cyrillicIndex.search(searchParams, limit)
+      ? await cyrillicIndex.search(queryString, limit, searchOptions)
       : [];
     const searchResult3 = cjkIndex
-      ? await cjkIndex.search(searchParams, limit)
+      ? await cjkIndex.search(queryString, limit, searchOptions)
       : [];
-    const searchResult = _.uniqBy(
+    const combinedResults = _.uniqBy(
       [...searchResult1, ...searchResult2, ...searchResult3],
       "path"
     );
 
-    const result = searchResult.map(page => ({
-      ...page,
-      parentPageTitle: getParentPageTitle(page),
-      ...getAdditionalInfo(page, queryString, queryTerms)
-    }));
+    let searchResult = [];
 
-    const resultBySet = _.groupBy(result, "docSetTitle");
+    combinedResults.forEach(resultSet => {
+      resultSet.result.forEach(path => {
+        let page = getPageFromPath(path)
+        if (page) {
+          searchResult.push({
+            docSetTitle: page.docSetTitle,
+            match: resultSet.field,
+            page: page,
+            parentPageTitle: getParentPageTitle(page),
+            ...getAdditionalInfo(page, queryString, queryTerms)
+          });
+        }
+      });
+    });
+
+    const resultBySet = _.groupBy(searchResult, "docSetTitle");
+
+    //console.log(resultBySet);
 
     return _.values(resultBySet)
       .map(arr =>
@@ -441,4 +447,12 @@ function getBeginningContent(page) {
   }
 
   return getContentStr(page, { charIndex: 0, termLength: 0 });
+}
+
+function getPageFromPath(path) {
+  if (path in pagesByPath) {
+    return pagesByPath[path];
+  }
+
+  return null;
 }

@@ -38,7 +38,7 @@
           @mousedown="go(i)"
           @mouseenter="focus(i)"
         >
-          <a :href="s.path + s.slug" @click.prevent>
+          <a :href="s.page.path + s.slug" @click.prevent>
             <!-- <div
             v-if="s.parentPageTitle"
             class="parent-page-title"
@@ -49,8 +49,8 @@
                 class="page-title"
                 v-html="
                   s.match == 'title'
-                    ? highlight(s.title || s.path)
-                    : s.title || s.path
+                    ? highlight(s.page.title || s.page.path)
+                    : s.page.title || s.page.path
                 "
               ></div>
               <div class="suggestion-content">
@@ -217,7 +217,7 @@ export default {
       if (!this.showSuggestions) {
         return;
       }
-      this.$router.push(this.suggestions[i].path + this.suggestions[i].slug);
+      this.$router.push(this.suggestions[i].page.path + this.suggestions[i].slug);
       this.query = "";
       this.$refs.input.blur();
       this.focusIndex = 0;
