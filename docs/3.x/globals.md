@@ -4,9 +4,9 @@ Globals store content that is available globally throughout your templates. They
 
 Craft organizes Globals into Global Sets. Each Global Set has its own [field layout](fields.md#field-layouts) using any of the existing fields or new fields.
 
-To create a Global Set, go to Settings → Globals.
+To create a Global Set, go to **Settings** → **Globals**.
 
-If you have at least one Global Set, Craft will add a new “Globals” item added to the control panel primary navigation. Clicking on this will take you to a page that lists all of your Global Sets in a sidebar, as well as all of the fields associated with the selected Global Set in the main content area.
+If you have at least one Global Set, Craft will add a new “Globals” item to the main control panel navigation. Clicking this will take you to a page that lists all your Global Sets in a sidebar, as well as all of the fields associated with the selected Global Set in the main content area.
 
 ::: tip
 Unlike [entries](entries.md#entries), Global Sets don’t have the Live Preview feature, since they aren’t associated with any one particular URL.
@@ -456,14 +456,14 @@ Determines the order that the global sets should be returned in. (If empty, defa
 ```twig
 {# Fetch all global sets in order of date created #}
 {% set globalSets = craft.globalSets()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all global sets in order of date created
 $globalSets = \craft\elements\GlobalSet::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::
