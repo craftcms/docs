@@ -1395,14 +1395,14 @@ Determines the order that the orders should be returned in. (If empty, defaults 
 ```twig
 {# Fetch all orders in order of date created #}
 {% set orders = craft.orders()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all orders in order of date created
 $orders = \craft\commerce\elements\Order::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::

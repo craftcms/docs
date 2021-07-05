@@ -705,14 +705,14 @@ Determines the order that the assets should be returned in. (If empty, defaults 
 ```twig
 {# Fetch all assets in order of date created #}
 {% set assets = craft.assets()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all assets in order of date created
 $assets = \craft\elements\Asset::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::
