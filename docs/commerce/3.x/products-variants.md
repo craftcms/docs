@@ -676,14 +676,14 @@ Determines the order that the products should be returned in. (If empty, default
 ```twig
 {# Fetch all products in order of date created #}
 {% set products = craft.products()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all products in order of date created
 $products = \craft\commerce\elements\Product::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::
@@ -1851,14 +1851,14 @@ Determines the order that the variants should be returned in. (If empty, default
 ```twig
 {# Fetch all variants in order of date created #}
 {% set variants = craft.variants()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all variants in order of date created
 $variants = \craft\commerce\elements\Variant::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::
