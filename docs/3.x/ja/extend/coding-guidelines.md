@@ -251,7 +251,7 @@ $this->requireAcceptsJson();
 - テーブル名は常に `{{%` と `}}`（例：`{{%entries}}`）で囲み、適切に引用されテーブル接頭辞が挿入されるようにします。
 - 単一のカラムを参照する場合でも、`'col1, col2'` の代わりに `select()` および `groupBy()` で `['col1', 'col2']` 構文を使用してください。
 - `'{{%tablename}}'` の代わりに、`from()` で `['{{%tablename}}']` 構文を使用してください。
-- `'col1, col2 desc'` の代わりに、`orderBy()` で `['col1' => SORT_ASC, 'col2' => SORT_DESC]` 構文を使用してください。
+- `'col1, col2 DESC'` の代わりに、`orderBy()` で `['col1' => SORT_ASC, 'col2' => SORT_DESC]` 構文を使用してください。
 
 ### 条件
 - テーブル / カラム名や値を自動的に引用するように、可能な限り Yii の[宣言条件構文](yii2:yii\db\QueryInterface::where())を使用してください。
