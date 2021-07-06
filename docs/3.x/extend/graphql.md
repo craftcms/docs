@@ -1049,7 +1049,7 @@ $event->fieldList['widgets'] = [Widgets::class, 'canBeAliased' => false];
 ```
 
 ::: tip
-Craft uses makes use of an additional `canBeAliased` option, `true` by default and set to `false` in some specific situations—but you shouldn’t ever need to use that.
+Craft makes use of an additional `canBeAliased` option internally, `true` by default and set to `false` in some specific situations—but you shouldn’t ever need to use that.
 :::
 The key should be the field type’s handle, and the value can be...
 
