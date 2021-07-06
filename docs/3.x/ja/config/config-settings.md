@@ -2623,7 +2623,7 @@ If this is set to `false`, then the `Access-Control-Allow-Origin` response heade
 :   [GeneralConfig::$disableGraphqlTransformDirective](craft3:craft\config\GeneralConfig::$disableGraphqlTransformDirective)
 
 それ以降
-:   4.0.0
+:   3.6.0
 
 
 
@@ -2643,7 +2643,7 @@ Default value
 :   [GeneralConfig::$enableGraphqlIntrospection](craft3:craft\config\GeneralConfig::$enableGraphqlIntrospection)
 
 それ以降
-:   4.0.0
+:   3.6.0
 
 
 
@@ -2726,7 +2726,7 @@ Defined by
 :   [GeneralConfig::$maxGraphqlComplexity](craft3:craft\config\GeneralConfig::$maxGraphqlComplexity)
 
 それ以降
-:   4.0.0
+:   3.6.0
 
 
 
@@ -2746,7 +2746,7 @@ Defined by
 :   [GeneralConfig::$maxGraphqlDepth](craft3:craft\config\GeneralConfig::$maxGraphqlDepth)
 
 それ以降
-:   4.0.0
+:   3.6.0
 
 
 
@@ -2766,7 +2766,7 @@ Defined by
 :   [GeneralConfig::$maxGraphqlResults](craft3:craft\config\GeneralConfig::$maxGraphqlResults)
 
 Since
-:   4.0.0
+:   3.6.0
 
 
 
