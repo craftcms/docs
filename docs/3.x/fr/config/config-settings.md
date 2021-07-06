@@ -2618,7 +2618,7 @@ Since :
 :   [GeneralConfig::$disableGraphqlTransformDirective](craft3:craft\config\GeneralConfig::$disableGraphqlTransformDirective)
 
 Since :
-:   4.0.0
+:   3.6.0
 
 
 
@@ -2638,7 +2638,7 @@ Since :
 :   [GeneralConfig::$enableGraphqlIntrospection](craft3:craft\config\GeneralConfig::$enableGraphqlIntrospection)
 
 Since :
-:   4.0.0
+:   3.6.0
 
 
 
@@ -2721,7 +2721,7 @@ Since :
 :   [GeneralConfig::$maxGraphqlComplexity](craft3:craft\config\GeneralConfig::$maxGraphqlComplexity)
 
 Since :
-:   4.0.0
+:   3.6.0
 
 
 
@@ -2741,7 +2741,7 @@ Since :
 :   [GeneralConfig::$maxGraphqlDepth](craft3:craft\config\GeneralConfig::$maxGraphqlDepth)
 
 Since
-:   4.0.0
+:   3.6.0
 
 
 
@@ -2761,7 +2761,7 @@ Defined by
 :   [GeneralConfig::$maxGraphqlResults](craft3:craft\config\GeneralConfig::$maxGraphqlResults)
 
 Since
-:   4.0.0
+:   3.6.0
 
 
 
