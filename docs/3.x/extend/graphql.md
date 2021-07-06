@@ -1013,11 +1013,49 @@ Event::on(
 
 ### Eager Loading
 
-TODO: add
+If you’re adding relational fields that would benefit from eager loading, you’ll want to register those by adding them to the `fieldList` array on the [registerGqlEagerLoadableFields](craft3:craft\gql\ElementQueryConditionBuilder::EVENT_REGISTER_GQL_EAGERLOADABLE_FIELDS) event object.
+
+If we had added a custom field with the handle `widgets`, we’d register it like this:
+
+```php
+use mynamespace\fields\Widgets;
+use craft\gql\ElementQueryConditionBuilder;
+use craft\events\RegisterGqlEagerLoadableFields;
+use yii\base\Event;
+
+Event::on(
+    ElementQueryConditionBuilder::class,
+    ElementQueryConditionBuilder::EVENT_REGISTER_GQL_EAGERLOADABLE_FIELDS,
+    function(RegisterGqlEagerLoadableFields $event) {
+        $event->fieldList['widgets'] = [Widgets::class];
+    }
+);
+```
+
+Any classes you provide determine the context for that field to be eager-loadable. You may otherwise pass `*` which, if present, allows that field to be used and eager loaded anywhere at all:
+
+```php
+// ...
+$event->fieldList['widgets'] = ['*'];
+// ...
+```
+
+You can use the `canBeAliased` key to do something:
+
+```php
+// ...
+$event->fieldList['widgets'] = [Widgets::class, 'canBeAliased' => false];
+// ...
+```
+
+::: tip
+Craft uses makes use of an additional `canBeAliased` option, `true` by default and set to `false` in some specific situations—but you shouldn’t ever need to use that.
+:::
+The key should be the field type’s handle, and the value can be...
 
 ### Argument Handlers
 
-Argument handlers are another concept specific to Craft CMS. These are like the inverse of directives, used for pre-processing an argument’s value before a query is executed.
+Argument handlers are another Craft-specific concept. These are like the inverse of directives, used for pre-processing an argument’s value before a query is executed.
 
 ### Complexity Values
 
@@ -1025,7 +1063,40 @@ GraphQL complexity values are numeric scores assigned to fields that indicate ho
 
 The combined values are limited by Craft’s <craft3:maxGraphqlComplexity> setting. If a query or mutation’s complexity exceeds that limit, it will not be executed. Assigning appropriate complexity values ensures that a Craft site developer may manage that threshold for a safe, optimal use of compute resources.
 
-TODO: how to set
+If you provide a field definition that involves relations or processor-intensive operations, you should specify a complexity score.
+
+The <craft3:craft\services\Gql> service has the following complexity constants:
+
+| Constant                          | Value | Description |
+| --------------------------------- | --- | -----------
+| `GRAPHQL_COMPLEXITY_SIMPLE_FIELD` | 1   | Complexity value for accessing a simple field.
+| `GRAPHQL_COMPLEXITY_QUERY`        | 10  | Complexity value for accessing a field that will trigger a single query for the request.
+| `GRAPHQL_COMPLEXITY_EAGER_LOAD`   | 25  | Complexity value for accessing a field that will add an instance of eager-loading for the request.
+| `GRAPHQL_COMPLEXITY_CPU_HEAVY`    | 200 | Complexity value for accessing a field that will likely trigger a CPU heavy operation.
+| `GRAPHQL_COMPLEXITY_NPLUS1`       | 500 | Complexity value for accessing a field that will trigger a query for every parent returned.
+
+The <craft3:craft\services\Gql> service also provides static methods to help calculate complexity values:
+
+- <craft3:craft\services\Gql::eagerLoadComplexity()>
+- <craft3:craft\services\Gql::singleQueryComplexity()>
+- <craft3:craft\services\Gql::relatedArgumentComplexity()>
+- <craft3:craft\services\Gql::nPlus1Complexity()>
+
+Any field definition has the option of providing a `'complexity'` value in its array:
+
+```php{7-9}
+// ...
+'children' => [
+    'name' => 'children',
+    'args' => WidgetArguments::getArguments(),
+    'type' => Type::listOf(WidgetInterface::getType()),
+    'description' => 'Widget’s children. Accepts same arguments as `widgets` query.',
+    'complexity' => Gql::relatedArgumentComplexity(
+        GqlService::GRAPHQL_COMPLEXITY_EAGER_LOAD
+    ),
+],
+// ...
+```
 
 ### Validation Rules
 
