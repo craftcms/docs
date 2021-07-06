@@ -1062,15 +1062,42 @@ Craft makes use of an additional `canBeAliased` option internally, `true` by def
 
 Argument handlers are another Craft-specific concept. These are like the inverse of directives, used for pre-processing an argument’s value before a query is executed.
 
+#### Example Argument Handler Class
+
+This example class extends [RelationArgumentHandler](craft3:craft\gql\base\RelationArgumentHandler) to translate a `relatedToWidgets` argument into a query argument for our Widget IDs:
+
 ```php
+namespace mynamespace\gql\argumenthandlers;
+
+use mynamespace\elements\Widget;
+use craft\gql\base\RelationArgumentHandler;
+
+class RelatedWidgets extends RelationArgumentHandler
+{
+    protected $argumentName = 'relatedToWidgets';
+
+    protected function handleArgument($argumentValue)
+    {
+        $argumentValue = parent::handleArgument($argumentValue);
+        return $this->getIds(Widget::class, $argumentValue);
+    }
+}
+```
+
+#### Registering Argument Handlers
+
+Add a listener for [defineGqlArgumentHandlers](craft3:craft3:craft\gql\ArgumentManager::EVENT_DEFINE_GQL_ARGUMENT_HANDLERS) and append any argument handler class names:
+
+```php
+use mynamespace\gql\argumenthandlers\RelatedWidgets;
 use craft\gql\ArgumentManager;
 use craft\events\RegisterGqlArgumentHandlersEvent;
 
 Event::on(
     ArgumentManager::class,
     ArgumentManager::EVENT_DEFINE_GQL_ARGUMENT_HANDLERS,
-    function(RegisterGqlArgumentHandlersEvent $event) use ($handler) {
-        $event->handlers['initial'] = $handler;
+    function(RegisterGqlArgumentHandlersEvent $event) {
+        $event->handlers[] = RelatedWidgets::class;
     }
 });
 ```
