@@ -1015,6 +1015,10 @@ Event::on(
 
 If you’re adding relational fields that would benefit from eager loading, you’ll want to register those by adding them to the `fieldList` array on the [registerGqlEagerLoadableFields](craft3:craft\gql\ElementQueryConditionBuilder::EVENT_REGISTER_GQL_EAGERLOADABLE_FIELDS) event object.
 
+::: tip
+Any fields you add using Craft’s stock GraphQL types do _not_ need to be registered for eager loading.
+:::
+
 If we had added a custom field with the handle `widgets`, we’d register it like this:
 
 ```php
@@ -1031,6 +1035,8 @@ Event::on(
     }
 );
 ```
+
+The key should be the field name, and the value can be one or more classes that define it.
 
 Any classes you provide determine the context for that field to be eager-loadable. You may otherwise pass `*` which, if present, allows that field to be used and eager loaded anywhere at all:
 
@@ -1051,11 +1057,23 @@ $event->fieldList['widgets'] = [Widgets::class, 'canBeAliased' => false];
 ::: tip
 Craft makes use of an additional `canBeAliased` option internally, `true` by default and set to `false` in some specific situations—but you shouldn’t ever need to use that.
 :::
-The key should be the field type’s handle, and the value can be...
 
 ### Argument Handlers
 
 Argument handlers are another Craft-specific concept. These are like the inverse of directives, used for pre-processing an argument’s value before a query is executed.
+
+```php
+use craft\gql\ArgumentManager;
+use craft\events\RegisterGqlArgumentHandlersEvent;
+
+Event::on(
+    ArgumentManager::class,
+    ArgumentManager::EVENT_DEFINE_GQL_ARGUMENT_HANDLERS,
+    function(RegisterGqlArgumentHandlersEvent $event) use ($handler) {
+        $event->handlers['initial'] = $handler;
+    }
+});
+```
 
 ### Complexity Values
 
