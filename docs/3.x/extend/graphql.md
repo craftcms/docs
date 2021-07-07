@@ -297,7 +297,7 @@ Pay special attention to the [GraphQL\Type\Definition\Type](https://github.com/w
 - `craft\gql\types\Number::getType()` is used to specify a number than can be either an integer or a float. It can also be `null`.
 
 ::: tip
-For consistency, use the `ID` type—and not `Int`—when you’re returning IDs.
+For consistency, use the `ID` type—not `Int`—when you’re returning IDs. The `ID` type serializes to a string rather than an integer.
 :::
 
 ### Utility Types
