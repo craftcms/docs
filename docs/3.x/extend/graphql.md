@@ -125,7 +125,7 @@ A <craft3:craft\gql\base\Query> class provides one or more query names, each des
 
 ### Example Query Class
 
-This example provides a `widgets` query that returns an array of custom [interfaces](#interfaces), optionally filtered by custom [arguments](#arguments). The [resolver](#resolver) describes how to provide data for each interface.
+This example provides a `widgets` query that returns an array of custom [interfaces](#interfaces), optionally filtered by custom [arguments](#arguments). The [resolver](#resolvers) describes how to provide data for each interface.
 
 ```php
 namespace mynamespace\gql\queries;
