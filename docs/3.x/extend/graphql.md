@@ -1050,14 +1050,6 @@ $event->fieldList['widgets'] = ['*'];
 // ...
 ```
 
-You can use the `canBeAliased` key to do something:
-
-```php
-// ...
-$event->fieldList['widgets'] = [Widgets::class, 'canBeAliased' => false];
-// ...
-```
-
 ::: tip
 Craft makes use of an additional `canBeAliased` option internally, `true` by default and set to `false` in some specific situations—but you shouldn’t ever need to use that.
 :::
