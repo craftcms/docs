@@ -87,6 +87,8 @@ class Module extends \yii\base\Module
 {
     public function init()
     {
+        parent::init();
+        
         // Define a custom alias named after the namespace
         Craft::setAlias('@bar', __DIR__);
 
@@ -96,8 +98,6 @@ class Module extends \yii\base\Module
         } else {
             $this->controllerNamespace = 'bar\\controllers';
         }
-
-        parent::init();
 
         // Custom initialization code goes here...
     }
