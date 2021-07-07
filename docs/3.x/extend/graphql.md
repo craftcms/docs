@@ -668,6 +668,8 @@ A field can also use <craft3:craft\base\Field::includeInGqlSchema()>—`true` by
 
 Directives return types that can be used to transform result data in specified locations relative to the GraphQL query.
 
+They’re invoked after Craft has returned everything to satisfy the query, so they can only manipulate results—not influence what’s returned in the first place.
+
 The [`formatDateTime` directive](../graphql.md#the-formatdatetime-directive), for example, can be used to return any date in a specific format:
 
 ```graphql{3}
