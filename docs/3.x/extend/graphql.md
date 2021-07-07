@@ -292,7 +292,7 @@ Pay special attention to the [GraphQL\Type\Definition\Type](https://github.com/w
 - `GraphQL\Type\Definition\Type::boolean()` is used to represent the GraphQL’s `Boolean` type.
 - `GraphQL\Type\Definition\Type::int()` is used to represent the GraphQL’s `Int` type.
 - `GraphQL\Type\Definition\Type::float()` is used to represent the GraphQL’s `Float` type.
-- `craft\gql\types\QueryArgument::getType()` is used to specify an integer *or* a string.
+- `craft\gql\types\QueryArgument::getType()` is used to specify an integer, string, or boolean value. (It’s a catch-all for query methods that accept a variety of types like `2`, `['not', 2]`, `'handle'`, `false`, etc.)
 - `craft\gql\types\DateTime::getType()` is used to specify a point in time.
 - `craft\gql\types\Number::getType()` is used to specify a number than can be either an integer or a float. It can also be `null`.
 
