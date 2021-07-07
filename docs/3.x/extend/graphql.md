@@ -306,6 +306,24 @@ You can specify a non-null value by wrapping it with the `\GraphQL\Type\Definiti
 
 To specify a list of types, you must wrap the type with the `\GraphQL\Type\Definition\Type::listOf()` method.
 
+### Input Types
+
+In addition to simple generic scalar values like strings and integers, you’ll probably want to describe more specific, complex data.
+
+Craft includes several scalar input types like [DateTime](craft3:craft\gql\types\DateTime), [Number](craft3:craft\gql\types\Number), and [TableRow](craft3:craft\gql\types\TableRow).
+
+Craft also includes more complex, relational input objects:
+
+- [Asset](craft3:craft\gql\types\input\criteria\Asset)
+- [Category](craft3:craft\gql\types\input\criteria\Category)
+- [Entry](craft3:craft\gql\types\input\criteria\Entry)
+- [Tag](craft3:craft\gql\types\input\criteria\Tag)
+- [User](craft3:craft\gql\types\input\criteria\User)
+- [File](craft3:craft\gql\types\input\File)
+- [Matrix](craft3:craft\gql\types\input\Matrix)
+
+You can use any of these in your type definitions, i.e. `DateTime::getType()` or `Asset::getType()`.
+
 ### Example Type Class
 
 This example extends Craft’s element GraphQL [interface](#interfaces).
@@ -781,24 +799,6 @@ mutation NewWidget($title: String) {
 ::: tip
 Like the name-getting methods mentioned earlier, Craft’s base elements include a <craft3:craft\base\Element::gqlMutationNameByContext()> method for providing context-sensitive type names.
 :::
-
-### Input Types
-
-In addition to simple generic scalar values like strings and integers, you’ll probably want to accept more specific and/or complex data.
-
-Craft includes several scalar input types like [DateTime](craft3:craft\gql\types\DateTime), [Number](craft3:craft\gql\types\Number), and [TableRow](craft3:craft\gql\types\TableRow).
-
-Craft also includes more complex, relational input objects:
-
-- [Asset](craft3:craft\gql\types\input\criteria\Asset)
-- [Category](craft3:craft\gql\types\input\criteria\Category)
-- [Entry](craft3:craft\gql\types\input\criteria\Entry)
-- [Tag](craft3:craft\gql\types\input\criteria\Tag)
-- [User](craft3:craft\gql\types\input\criteria\User)
-- [File](craft3:craft\gql\types\input\File)
-- [Matrix](craft3:craft\gql\types\input\Matrix)
-
-You can use any of these in your type definitions, i.e. `DateTime::getType()` or `Asset::getType()`.
 
 ### Example Mutation Class
 
