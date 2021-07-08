@@ -57,6 +57,35 @@ $entries = \craft\elements\Entry::find()
 The [atom](dev/filters.md#atom) filter converts a date to an ISO-8601 timestamp.
 :::
 
+Craft 3.7 added support for using `now` in date comparison strings:
+
+::: code
+```twig
+{# Fetch entries with a selected date in the past #}
+{% set pastEntries = craft.entries()
+    .myFieldHandle('< now')
+    .all() %}
+{# Fetch entries with a selected date now onward #}
+{% set futureEntries = craft.entries()
+    .myFieldHandle('>= now')
+    .all() %}
+```
+```php
+// Fetch entries with a selected date in the past
+$pastEntries = \craft\elements\Entry::find()
+    ->myFieldHandle('< now')
+    ->all();
+// Fetch entries with a selected date now onward
+$futureEntries = \craft\elements\Entry::find()
+    ->myFieldHandle('>= now')
+    ->all();
+```
+:::
+
+::: tip
+Don’t forget to consider or disable [template caching](tags.md#cache) for requests that use `now` comparisons! You can pass a `x-craft-gql-cache: no-cache` header for GraphQL requests or set a relatively low [cache duration](config3:cacheDuration).
+:::
+
 ### Working with Date Field Data
 
 If you have an element with a Date field in your template, you can access its value by its handle:
@@ -79,9 +108,9 @@ That will give you a [DateTime](http://php.net/manual/en/class.datetime.php) obj
 {% endif %}
 ```
 ```php
-if ($entry->myFieldHandle) {    
+if ($entry->myFieldHandle) {
     $selectedDate = \Craft::$app->getFormatter()->asDatetime(
-        $entry->myFieldHandle, 
+        $entry->myFieldHandle,
         'short'
     );
 }
