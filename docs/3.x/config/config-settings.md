@@ -868,9 +868,9 @@ Since
 
 
 
-The [SameSite](https://web.dev/samesite-cookies-explained) value that should be set on Craft cookies, if any.
+The [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) value that should be set on Craft cookies, if any.
 
-This can be set to `'Lax'`, `'Strict'`, or `null`. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite)
+This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
 
 ::: tip
 This setting requires PHP 7.3 or later.
@@ -2723,7 +2723,7 @@ Defined by
 :   [GeneralConfig::$disableGraphqlTransformDirective](craft3:craft\config\GeneralConfig::$disableGraphqlTransformDirective)
 
 Since
-:   4.0.0
+:   3.6.0
 
 
 
@@ -2743,7 +2743,7 @@ Defined by
 :   [GeneralConfig::$enableGraphqlIntrospection](craft3:craft\config\GeneralConfig::$enableGraphqlIntrospection)
 
 Since
-:   4.0.0
+:   3.6.0
 
 
 
@@ -2828,7 +2828,7 @@ Defined by
 :   [GeneralConfig::$maxGraphqlComplexity](craft3:craft\config\GeneralConfig::$maxGraphqlComplexity)
 
 Since
-:   4.0.0
+:   3.6.0
 
 
 
@@ -2848,7 +2848,7 @@ Defined by
 :   [GeneralConfig::$maxGraphqlDepth](craft3:craft\config\GeneralConfig::$maxGraphqlDepth)
 
 Since
-:   4.0.0
+:   3.6.0
 
 
 
@@ -2868,7 +2868,7 @@ Defined by
 :   [GeneralConfig::$maxGraphqlResults](craft3:craft\config\GeneralConfig::$maxGraphqlResults)
 
 Since
-:   4.0.0
+:   3.6.0
 
 
 
