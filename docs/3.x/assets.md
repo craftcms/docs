@@ -145,7 +145,7 @@ We can display a list of thumbnails for images in a “Photos” volume by doing
 When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have “Assets in this volume have public URLs” enabled and a “Base URL” setting. Otherwise, the result will always be empty.
 :::
 
-You can cache-bust URLs using Craft’s [`url()` function](dev/functions.md#url) to append a query parameter with the last-modified timestamp:
+You can cache-bust asset URLs automatically by enabling the [revAssetUrls](config3:revAssetUrls) config setting, or handle them individually by appending a query parameter with the last-modified timestamp:
 
 ```twig
 <img src="{{ url(image.getUrl('thumb'), {v: image.dateModified.timestamp}) }}">
