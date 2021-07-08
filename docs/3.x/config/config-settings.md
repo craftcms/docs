@@ -599,6 +599,28 @@ panel is located on a different domain than your front end.
 
 
 
+### `httpProxy`
+
+Allowed types
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+
+Default value
+:   `null`
+
+Defined by
+:   [GeneralConfig::$phpMaxMemoryLimit](craft3:craft\config\GeneralConfig::$httpProxy)
+
+Since
+:   3.7.0
+
+
+
+The proxy server that should be used for outgoing HTTP requests.
+
+This can be set to a URL (`http://localhost`) or a URL plus a port (`http://localhost:8125`).
+
+
+
 ### `indexTemplateFilenames`
 
 Allowed types
