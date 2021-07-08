@@ -50,7 +50,7 @@ Here is how Craft handles each request:
 
 In some cases you want a URL to load a template, but you don’t want the URI to match the template path.
 
-A good example of this is a yearly archive page, where you want the year to be one of the segments in the URL (e.g. `blog/archive/2018`). It would be silly to create a new template for every year. Instead, you should set up a new **route**.
+A good example of this is a yearly archive page, where you want the year to be one of the segments in the URL (e.g. `blog/archive/2018`). It would be silly to create a new template for every year. Instead, you should set up a new _route_.
 
 ![Creating a New Route](./images/routing-creating-new-route.png)
 
@@ -66,10 +66,10 @@ The first setting can contain “tokens”, which represent a range of possible 
 If you want to match URIs that look like `blog/archive/2018`, type `blog/archive/` into the URI field and choose the `year` token.
 
 ::: tip
-Route URIs should **not** begin with a slash (`/`).
+Route URIs should _not_ begin with a slash (`/`).
 :::
 
-After defining your URI pattern and entering a template path, click the “Save” button. The modal will close, revealing your new route on the page.
+After defining your URI pattern and entering a template path, press **Save**. The modal will close, revealing your new route on the page.
 
 When you point your browser to `https://my-project.nitro/blog/archive/2018`, it will match your new route, and Craft will load the specified template.
 
@@ -80,14 +80,14 @@ The value of the `year` token will also be available to the template as a variab
 
 The following tokens are available to the URI setting:
 
-- `*` – Any string of characters, except for a forward slash (/)
-- `day` – Day of a month (1-31 or 01-31)
+- `*` – Any string of characters, except for a forward slash (`/`)
+- `day` – Day of a month (`1`-`31` or `01`-`31`)
 - `month` – Numeric representation of a month (1-12 or 01-12)
 - `number` – Any positive integer
 - `page` – Any positive integer
 - `uid` – A v4 compatible UUID (universally unique ID)
-- `slug` – Any string of characters, except for a forward slash (/)
-- `tag` – Any string of characters, except for a forward slash (/)
+- `slug` – Any string of characters, except for a forward slash (`/`)
+- `tag` – Any string of characters, except for a forward slash (`/`)
 - `year` – Four consecutive digits
 
 
