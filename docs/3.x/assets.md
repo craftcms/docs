@@ -38,7 +38,7 @@ If you would prefer to store your assets on a remote storage service like Amazon
 
 ## Asset Custom Fields
 
-Each of your volumes has a field layout, where you can set the [fields](fields.md) that will be available to assets within that volume. You can edit a volume’s field layout by clicking on the Field Layout tab when editing the volume.
+Each of your volumes has a field layout, where you can set the [fields](fields.md) that will be available to assets within that volume. You can edit a volume’s field layout by clicking the **Field Layout** tab when editing the volume.
 
 Any fields you select here will be visible in the asset editor HUD that opens up when you double-click on an asset (either on the [Assets page](#assets-page) or from [Assets fields](assets-fields.md).
 
