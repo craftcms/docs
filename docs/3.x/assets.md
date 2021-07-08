@@ -44,7 +44,7 @@ Any fields you select here will be visible in the asset editor HUD that opens up
 
 ## Assets Page
 
-When you create your first volume, an “Assets” item will be added to the main control panel navigation. Clicking on it will take you to the Assets page, which shows a list of all of your volumes in the left sidebar, and the selected volume’s files in the main content area.
+When you create your first volume, an **Assets** item will be added to the main control panel navigation. Clicking on it will take you to the Assets page, which shows a list of all of your volumes in the left sidebar, and the selected volume’s files in the main content area.
 
 From this page, you can do the following:
 
@@ -58,15 +58,15 @@ From this page, you can do the following:
 
 ### Managing Subfolders
 
-You can create a subfolder in one of your volumes by right-clicking on the volume in the left sidebar, and then choosing “New subfolder”.
+You can create a subfolder in one of your volumes by right-clicking the volume in the left sidebar, and choosing **New subfolder**.
 
 Once you’ve created a subfolder, you can start dragging files into it.
 
-You can create a nested subfolder within a subfolder by right-clicking on the subfolder in the left sidebar, and then choosing “New subfolder”.
+You can create a nested subfolder within a subfolder by right-clicking the subfolder in the left sidebar, and again choosing **New subfolder**.
 
-You can rename a subfolder by right-clicking on the subfolder in the left sidebar, and then choosing “Rename folder”.
+You can rename a subfolder by right-clicking on the subfolder in the left sidebar and choosing **Rename folder**.
 
-You can delete a subfolder (and all assets within it) by right-clicking on the subfolder in the left sidebar, and then choosing “Delete folder”.
+You can delete a subfolder (and all assets within it) by right-clicking on the subfolder in the left sidebar and choosing **Delete folder**.
 
 ## Updating Asset Indexes
 
@@ -82,7 +82,7 @@ Craft provides a way to perform a variety of image transformations to your asset
 
 Craft provides a built-in Image Editor for making changes to your images. You can crop, straighten, rotate, and flip your images, as well as choose a focal point on them.
 
-To launch the Image Editor, double-click on an image (either on the Assets page or from an [Assets field](assets-fields.md)) and click on the “Edit” button in the top-right of the image preview area in the HUD. Alternatively, you can select an asset on the [Assets page](#assets-page) and then choose “Edit image” from the task menu (gear icon).
+To launch the Image Editor, double-click an image (either on the Assets page or from an [Assets field](assets-fields.md)) and press **Edit** in the top-right of the image preview area in the HUD. Alternatively, you can select an asset on the [Assets page](#assets-page) and choose **Edit image** from the task menu (gear icon).
 
 ### Focal Points
 
