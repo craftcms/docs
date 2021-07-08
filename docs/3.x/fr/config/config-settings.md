@@ -854,9 +854,9 @@ Since
 
 
 
-The [SameSite](https://www.owasp.org/index.php/SameSite) value that should be set on Craft cookies, if any.
+The [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) value that should be set on Craft cookies, if any.
 
-This can be set to `'Lax'`, `'Strict'`, or `null`. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite)
+This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
 
 setting as well, which is set to `p` by default, and if your server is running Apache, you will need to update the redirect code in your `.htaccess` file to match your new `pathParam` value.
 :::
