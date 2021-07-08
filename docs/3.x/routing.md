@@ -143,6 +143,19 @@ If you access `https://my-project.nitro/blog/archive/2018`, your `blog/_archive.
 <h1>Blog Entries from {{ year }}</h1>
 ```
 
+::: tip
+If you define a wildcard token (`*`) in the control panel, it will automatically be available as a named parameter called `any`.
+
+![Screenshot of Create a new route control panel form with wildcard token](./images/route-with-wildcard-token.png =400x300)
+
+The template for `my-project.nitro/foo/some-slug` could then use `{{ any }}`:
+
+```twig
+It seems you’re looking for `{{ any }}`.
+{# output: It seems you’re looking for `some-slug`. #}
+```
+:::
+
 ### Accessing Named Parameters in your Controllers
 
 To access named parameters in your controllers, you will need to add the parameter(s) to your controller's action definition.
