@@ -49,7 +49,7 @@ Craft はリクエストを次のように処理します。
 
 テンプレートを読み込むための URL が必要なものの、URI とテンプレートパスをマッチさせたくない場合があります。
 
-年を URL のセグメントの1つ（例：`blog/archive/2018`）にする年別アーカイブページが、よい例です。 毎年新しいテンプレートを作成するのは、賢明とは言えません。 代わりに、新しい**ルート**を設定しましょう。
+年を URL のセグメントの1つ（例：`blog/archive/2018`）にする年別アーカイブページが、よい例です。 毎年新しいテンプレートを作成するのは、賢明とは言えません。 Instead, you should set up a new _route_.
 
 ![新しいルートの作成画面](./images/routing-creating-new-route.png)
 
@@ -65,10 +65,10 @@ Craft はリクエストを次のように処理します。
 `blog/archive/2018` のような URI とマッチさせたい場合、URI フィールドに `blog/archive/` と入力し、`year` トークンをクリックします。
 
 ::: tip
-ルート URI はスラッシュ（`/`）ではじめるべき**ではありません** 。 :::
+Route URIs should _not_ begin with a slash (`/`).
 :::
 
-URI パターンを定義しテンプレートパスを入力したら、「保存」ボタンをクリックします。 モーダルが閉じ、ページに新しいルートが表示されるでしょう。
+After defining your URI pattern and entering a template path, press **Save**. モーダルが閉じ、ページに新しいルートが表示されるでしょう。
 
 When you point your browser to `https://my-project.nitro/blog/archive/2018`, it will match your new route, and Craft will load the specified template.
 
@@ -79,14 +79,14 @@ When you point your browser to `https://my-project.nitro/blog/archive/2018`, it 
 
 `year` トークンの値は、変数 `year` としてテンプレートで利用可能です。
 
-- `*` – スラッシュ（/）を除く、任意の文字列
-- `day` – 月の特定の日（1-31 または 01-31）
+- `*` – Any string of characters, except for a forward slash (`/`)
+- `day` – Day of a month (`1`-`31` or `01`-`31`)
 - `month` – 月の数値表現（1-12 または 01-12）
 - `number` – 任意の正の整数
 - `page` – 任意の正の整数
 - `uid` – バージョン4 互換の UUID（普遍的にユニークな ID）
-- `slug` – スラッシュ（/）を除く、任意の文字列
-- `tag` – スラッシュ（/）を除く、任意の文字列
+- `slug` – Any string of characters, except for a forward slash (`/`)
+- `tag` – Any string of characters, except for a forward slash (`/`)
 - `year` – 4桁の連続する数字
 
 
@@ -142,9 +142,22 @@ Craft は[名前付けされたパラメータ](https://www.yiiframework.com/doc
 <h1>Blog Entries from {{ year }}</h1>
 ```
 
+::: tip
+If you define a wildcard token (`*`) in the control panel, it will automatically be available as a named parameter called `any`.
+
+!\[Screenshot of Create a new route control panel form with wildcard token\](./images/route-with-wildcard-token.png =400x300)
+
+The template for `my-project.nitro/foo/some-slug` could then use `{{ any }}`:
+
+```twig
+It seems you’re looking for `{{ any }}`.
+{# output: It seems you’re looking for `some-slug`. #}
+```
+:::
+
 ### Accessing Named Parameters in your Controllers
 
-`http://my-project.test/blog/archive/2018` にアクセスすると、`blog/_archive.twig` テンプレートは、変数 `year` に `2018` をセットした状態で読み込まれます。
+To access named parameters in your controllers, you will need to add the parameter(s) to your controller's action definition.
 
 For example, with this URL rule:
 
@@ -179,5 +192,6 @@ When Craft finds a matching error template, it will use that and provide it with
 - `line` – line in which the exception occurred
 - `statusCode` – error’s HTTP status code
 
-`http://my-project.test/404` にアクセスすることで、[Dev Mode](config3:devMode) が有効になっている場合でも、このページをテストできます。 :::
+::: tip
+You can test these pages even if [Dev Mode](config3:devMode) is enabled by going to `https://my-project.nitro/404`, substituting `404` for the name of the template you’re testing.
 :::
