@@ -868,9 +868,9 @@ Since
 
 
 
-The [SameSite](https://web.dev/samesite-cookies-explained) value that should be set on Craft cookies, if any.
+The [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) value that should be set on Craft cookies, if any.
 
-This can be set to `'Lax'`, `'Strict'`, or `null`. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite)
+This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
 
 ::: tip
 This setting requires PHP 7.3 or later.
