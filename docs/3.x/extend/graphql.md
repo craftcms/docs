@@ -800,6 +800,14 @@ mutation NewWidget($title: String) {
 Like the name-getting methods mentioned earlier, Craft’s base elements include a <craft3:craft\base\Element::gqlMutationNameByContext()> method for providing context-sensitive type names.
 :::
 
+### Input Type Value Normalizers
+
+Craft supports an additional `'normalizeValue'` option for [input object types](#input-types) that can be used to prep validated mutation data before it’s passed on to be saved by the [resolver](#resolvers).
+
+This can be useful, for example, if you want to accept GraphQL arguments in one form (like strings) that Craft will expect in another (like IDs).
+
+If you provide a `'normalizeValue'` key in your type definition, the value must be a method that receives the field value, does whatever it needs with that value, and returns it.
+
 ### Example Mutation Class
 
 Similar to the [queries](#queries) example, this class implements `getMutations()` to return a list of available mutations. The mutation definition has a name, description, type, arguments, and a resolver:
