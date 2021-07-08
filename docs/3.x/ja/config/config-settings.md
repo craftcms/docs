@@ -859,9 +859,9 @@ Set to an empty value to disable public template routing.
 
 
 
-Craft の Cookie にセットされるべき [SameSite](https://www.owasp.org/index.php/SameSite) 値。
+The [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) value that should be set on Craft cookies, if any.
 
-This can be set to `'Lax'`, `'Strict'`, or `null`. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite)
+This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
 
 ::: tip
 この設定には PHP 7.3 以降が必要です。 :::
