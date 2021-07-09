@@ -1738,3 +1738,7 @@ The only available arguments are custom fields on the global set.
 ### Mutating Users
 
 It’s currently not possible to mutate users with Craft’s GraphQL API.
+
+### Further Reading
+
+If you’re looking to add GraphQL support in your own plugin or module, see [Extending GraphQL](extend/graphql.md).
