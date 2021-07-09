@@ -194,9 +194,12 @@ composer require package/name
 
 ## Plugin Icons
 
-Plugins can provide an icon, which will be visible on the Settings → Plugins page.
+Plugins can provide an icon, which will be visible on the **Settings** → **Plugins** page.
 
-![The Settings → Plugins page in Craft’s control panel.](../images/plugin-index.png)
+<BrowserShot url="https://mysite.test/admin/settings/plugins" :link="false" caption="The Settings → Plugins page in Craft’s control panel.">
+<img src="../images/plugin-index.png" alt="Screenshot of control panel Settings → Plugins">
+</BrowserShot>
+
 
 Plugin icons must be square SVG files, saved as `icon.svg` at the root of your plugin’s source directory (e.g `src/`).
 
