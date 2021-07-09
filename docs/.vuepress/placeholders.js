@@ -12,4 +12,5 @@ module.exports = {
   "myNamedTransform": { title: "Replace with the named transform you created in the control panel." },
   "myAssetsField": { title: "Replace with your Assets field handle." },
   "myEntriesField": { title: "Replace with your Entries field handle." },
+  "mysite.test": { title: "Replace with your site’s hostname." },
 };

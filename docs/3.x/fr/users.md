@@ -650,14 +650,14 @@ Determines the order that the users should be returned in. (If empty, defaults t
 ```twig
 {# Fetch all users in order of date created #}
 {% set users = craft.users()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all users in order of date created
 $users = \craft\elements\User::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::

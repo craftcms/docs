@@ -32,20 +32,20 @@ You can use the [Craft Server Check](https://github.com/craftcms/server-check) s
 
 ## Required PHP Extensions
 
-* [ctype](https://secure.php.net/manual/en/book.ctype.php)
-* [cURL](http://php.net/manual/en/book.curl.php)
-* [GD](http://php.net/manual/en/book.image.php) or [ImageMagick](http://php.net/manual/en/book.imagick.php)
-* [iconv](http://php.net/manual/en/book.iconv.php)
-* [JSON](http://php.net/manual/en/book.json.php)
-* [Multibyte String](http://php.net/manual/en/book.mbstring.php)
-* [OpenSSL](http://php.net/manual/en/book.openssl.php)
-* [PCRE](http://php.net/manual/en/book.pcre.php)
-* [PDO MySQL Driver](http://php.net/manual/en/ref.pdo-mysql.php) or [PDO PostgreSQL Driver](http://php.net/manual/en/ref.pdo-pgsql.php)
-* [PDO](http://php.net/manual/en/book.pdo.php)
-* [Reflection](http://php.net/manual/en/class.reflectionextension.php)
-* [SPL](http://php.net/manual/en/book.spl.php)
-* [Zip](http://php.net/manual/en/book.zip.php)
-* [DOM](http://php.net/manual/en/book.dom.php)
+- [ctype](https://secure.php.net/manual/en/book.ctype.php)
+- [cURL](http://php.net/manual/en/book.curl.php)
+- [GD](http://php.net/manual/en/book.image.php) or [ImageMagick](http://php.net/manual/en/book.imagick.php)
+- [iconv](http://php.net/manual/en/book.iconv.php)
+- [JSON](http://php.net/manual/en/book.json.php)
+- [Multibyte String](http://php.net/manual/en/book.mbstring.php)
+- [OpenSSL](http://php.net/manual/en/book.openssl.php)
+- [PCRE](http://php.net/manual/en/book.pcre.php)
+- [PDO MySQL Driver](http://php.net/manual/en/ref.pdo-mysql.php) or [PDO PostgreSQL Driver](http://php.net/manual/en/ref.pdo-pgsql.php)
+- [PDO](http://php.net/manual/en/book.pdo.php)
+- [Reflection](http://php.net/manual/en/class.reflectionextension.php)
+- [SPL](http://php.net/manual/en/book.spl.php)
+- [Zip](http://php.net/manual/en/book.zip.php)
+- [DOM](http://php.net/manual/en/book.dom.php)
 
 We recommend ImageMagick for expanded image handling options and the [Intl](http://php.net/manual/en/book.intl.php) extension for rich internationalization support.
 
@@ -63,26 +63,26 @@ The database user you tell Craft to connect with must have the following privile
 
 #### MySQL/MariaDB
 
-* `SELECT`
-* `INSERT`
-* `DELETE`
-* `UPDATE`
-* `CREATE`
-* `ALTER`
-* `INDEX`
-* `DROP`
-* `REFERENCES`
-* `LOCK TABLES`
+- `SELECT`
+- `INSERT`
+- `DELETE`
+- `UPDATE`
+- `CREATE`
+- `ALTER`
+- `INDEX`
+- `DROP`
+- `REFERENCES`
+- `LOCK TABLES`
 
 #### PostgreSQL
 
-* `SELECT`
-* `INSERT`
-* `UPDATE`
-* `CREATE`
-* `DELETE`
-* `REFERENCES`
-* `CONNECT`
+- `SELECT`
+- `INSERT`
+- `UPDATE`
+- `CREATE`
+- `DELETE`
+- `REFERENCES`
+- `CONNECT`
 
 ## Control Panel Browser Requirements
 

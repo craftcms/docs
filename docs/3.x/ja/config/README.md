@@ -137,7 +137,7 @@ ASSETS_BASE_PATH=/path/to/webroot/assets
 `config/app.web.php` および `config/app.console.php` から、ウェブリクエストやコンソールリクエストだけに対して Craft のアプリケーション設定をカスタマイズすることもできます。
 
 ::: tip
-Craft のデフォルト設定は [src/config/app.php](https://github.com/craftcms/cms/blob/master/src/config/app.php)、[app.web.php](https://github.com/craftcms/cms/blob/master/src/config/app.web.php)、および、[app.console.php](https://github.com/craftcms/cms/blob/master/src/config/app.console.php) によって定義されています。既存のアプリケーションコンポーネントを上書きする必要がある場合、これらのファイルを参照してください。
+Craft のデフォルト設定は [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php)、[app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php)、および、[app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php) によって定義されています。既存のアプリケーションコンポーネントを上書きする必要がある場合、これらのファイルを参照してください。
 :::
 
 ### Cache コンポーネント

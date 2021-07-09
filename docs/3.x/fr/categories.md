@@ -762,14 +762,14 @@ Determines the order that the categories should be returned in. (If empty, defau
 ```twig
 {# Fetch all categories in order of date created #}
 {% set categories = craft.categories()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all categories in order of date created
 $categories = \craft\elements\Category::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::

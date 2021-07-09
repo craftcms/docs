@@ -49,7 +49,7 @@ Filter | Description
 [lower](https://twig.symfony.com/doc/2.x/filters/lower.html) | Lowercases a string.
 [map](https://twig.symfony.com/doc/2.x/filters/map.html) | Applies an arrow function to the items in an array.
 [markdown](#markdown-or-md) | Processes a string as Markdown.
-[merge](https://twig.symfony.com/doc/2.x/filters/merge.html) | Merges an array with another array
+[merge](#merge) | Merges an array with another one.
 [multisort](#multisort) | Sorts an array by one or more keys within its sub-arrays.
 [namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
 [namespaceInputId](#namespaceinputid) | Namespaces an element ID.
@@ -596,11 +596,13 @@ Lowercases the first character of a string.
 
 ## `literal`
 
-Runs a string through <craft3:craft\helpers\Db::escapeParam()>.
+Runs a string through <craft3:craft\helpers\Db::escapeParam()> to escape commas and asterisks so they’re are not treated as special characters in query params.
 
 ```twig
-{{ 'SELECT id, * FROM table'|literal }}
-{# Output: SELECT id\, \* FROM table #}
+{% set titleParam = craft.app.request.getQueryParam('title') %}
+{% set entry = craft.entries()
+  .title(titleParam|literal)
+  .one() %}
 ```
 
 ## `markdown` or `md`
@@ -623,6 +625,82 @@ the [Apple Extended Keyboard II] [1].
 This filter supports two arguments:
 - `flavor` can be `'original'` (default value), `'gfm'`(GitHub-Flavored Markdown), `'gfm-comment'` (GFM with newlines converted to `<br>`s), or `'extra'` (Markdown Extra)
 - `inlineOnly` determines whether to only parse inline elements, omitting any `<p>` tags (defaults to `false`)
+
+## `merge`
+
+Merges an array with another one.
+
+This has the same behavior as [Twig’s merge filter](https://twig.symfony.com/doc/2.x/filters/merge.html) which uses PHP’s [array_merge()](https://www.php.net/manual/en/function.array-merge.php) under the hood:
+
+```twig
+{% set values = [1, 2] %}
+{% set values = values|merge(['Lucille', 'Buster']) %}
+{# Result: [1, 2, 'Lucille', 'Buster'] #}
+```
+
+It also works on hashes, where merging occurs on the keys. A key that doesn’t already exist is added, and a key that does already exist only has its value overridden:
+
+```twig
+{% set items = { 'Buster': 'Bluth', 'Lindsay': 'Bluth' } %}
+{% set items = items|merge({ 'Tobias': 'Fünke', 'Lindsay': 'Fünke' }) %}
+{# Result: { 'Buster': 'Bluth', 'Tobias': 'Fünke', 'Lindsay': 'Fünke' } #}
+```
+
+::: tip
+If you want to make sure specific values are defined by default in an array, like `'Lindsay': 'Bluth'` below, reverse the elements in the call:
+
+```twig
+{% set items = { 'Buster': 'Bluth', 'Lindsay': 'Bluth' } %}
+{% set items = { 'Tobias': 'Fünke', 'Lindsay': 'Fünke' }|merge(items) %}
+{# Result: { 'Tobias': 'Fünke', 'Lindsay': 'Bluth', 'Buster': 'Bluth' } #}
+```
+:::
+
+You can also provide an optional `recursive` argument that will use [ArrayHelper::merge()](craft3:craft\helpers\ArrayHelper::merge()) to merge nested arrays or hashes.
+
+Without `recursive`:
+
+```twig
+{% set items = {
+    'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
+    'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
+} %}
+{% set items = items|merge({
+    'rebellion': { 'Endor': 'Solo/Organa' },
+    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+}) %}
+{# Result: {
+    'rebellion': { 'Endor': 'Solo/Organa' },
+    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+} #}
+```
+
+With `recursive`:
+
+```twig{8}
+{% set items = {
+    'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
+    'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
+} %}
+{% set items = items|merge({
+    'rebellion': { 'Endor': 'Solo/Organa' },
+    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+}, true) %}
+{# Result: {
+    'rebellion': {
+        'Bespin': 'Calrissian',
+        'Hoth': 'Organa',
+        'Crait': 'Organa',
+        'Endor': 'Solo/Organa'
+    },
+    'empire': {
+        'Coruscant': 'Palpatine',
+        'Endor': 'Palpatine',
+        'Bespin': 'Vader',
+        'Hoth': 'Veers'
+    }
+} #}
+```
 
 ## `multisort`
 

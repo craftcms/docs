@@ -15,7 +15,7 @@ Here’s what a typical element query might look like:
 {# Create an entry query and set some parameters on it #}
 {% set entryQuery = craft.entries()
     .section('news')
-    .orderBy('postDate desc')
+    .orderBy('postDate DESC')
     .limit(10) %}
 
 {# Execute the query and get the results #}
@@ -27,7 +27,7 @@ use craft\elements\Entry;
 // Create an entry query and set some parameters on it
 $entryQuery = Entry::find()
     ->section('news')
-    ->orderBy('postDate desc')
+    ->orderBy('postDate DESC')
     ->limit(10);
 
 // Execute the query and get the results

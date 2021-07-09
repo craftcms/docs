@@ -2,14 +2,14 @@
 
 ## Updating from the Control Panel
 
-When an update is available, users with the permission to update Craft will see a badge in the control panel next to “Utilities” in the main navigation. Choose “Utilities”, then “Updates”. (You can also get to this view directly from the “Updates” widget that’s installed by default in the control panel dashboard.)
+When an update is available, users with the permission to update Craft will see a badge in the control panel next to **Utilities** in the main navigation. Click **Utilities**, then **Updates**. (You can also get to this view directly from the **Updates** widget that’s installed by default in the control panel dashboard.)
 
-This section displays updates for Craft CMS plugins, each with its own “Update” button. Choosing any of those will initiate Craft’s self-updating process.
+This section displays updates for Craft CMS plugins, each with its own **Update** button. Choosing any of those will initiate Craft’s self-updating process.
 
-You can choose “Update All” at the top left to initiate all available Craft and/or plugin updates at once.
+You can choose **Update All** at the top left to initiate all available Craft and/or plugin updates at once.
 
 ::: tip
-Craft’s [changelog](https://github.com/craftcms/cms/blob/master/CHANGELOG.md) will warn you of any critical changes at the top of the release notes. While there aren’t usually any warnings, it’s always a good idea to check before updating.
+Craft’s [changelog](https://github.com/craftcms/cms/blob/main/CHANGELOG.md) will warn you of any critical changes at the top of the release notes. While there aren’t usually any warnings, it’s always a good idea to check the changelog and [any upgrade guides](#upgrade-guides) before updating.
 :::
 
 ## Updating from the Terminal
@@ -47,7 +47,16 @@ php craft update element-api commerce
 By default, Craft will update you to the latest available version. To update to a specific version, append `:<version>` to the handle:
 
 ```bash
-php craft update element-api:2.5.4
+php craft update element-api:2.7.0
 ```
 
 Craft also provides an `update/composer-install` command, which behaves like the `composer install` command, but doesn’t require you to have Composer installed.
+
+## Upgrade Guides
+
+Sometimes there are significant changes to be aware of, so it’s worth checking the upgrade guide for each version or edition along your upgrade path.
+
+- [Upgrading to Craft 3.7](https://craftcms.com/knowledge-base/upgrading-to-craft-3-7)
+- [Upgrading to Craft 3.6](https://craftcms.com/knowledge-base/upgrading-to-craft-3-6)
+- [Upgrading to Craft 3.5](https://craftcms.com/knowledge-base/upgrading-to-craft-3-5)
+- [Upgrading to Craft Pro](https://craftcms.com/knowledge-base/upgrading-to-craft-pro)

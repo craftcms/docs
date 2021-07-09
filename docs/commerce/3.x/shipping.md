@@ -82,9 +82,9 @@ Each shipping rule can have a single zone. This condition is met if the order’
 
 ### Order Condition Formula
 
-An optional condition for specifying criteria to be met in order for the shipping method to be available for selection.
+An optional condition for specifying criteria to be met for the shipping method to be available for selection. This formula may include any attributes on the order, including any custom fields. (For safety, you cannot call any order or custom field methods in the condition formula.)
 
-### Order Total Quanity
+### Order Total Quantity
 
 This condition is met if the order has at least and/or at most a certain number of items.
 
