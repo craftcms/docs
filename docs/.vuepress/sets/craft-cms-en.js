@@ -34,7 +34,8 @@ module.exports = {
           collapsable: false,
           children: [
             "cp-section",
-            "cp-templates"
+            "cp-templates",
+            "cp-edit-pages"
           ]
         },
         {

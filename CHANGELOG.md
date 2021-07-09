@@ -4,6 +4,11 @@ Theme and significant content changes will be documented in this file.
 
 ## Unreleased
 
+## 2021-07-09
+### Added
+- Added the “Control Panel Edit Pages” page to the Extending Craft docs
+- Added the “Form Inputs” section to the “Control Panel Templates” page.
+
 ## 2021-06-11
 ### Changed
 - Documented the `failMessageInput()` and `successMessageInput()` Twig functions added in Craft 3.6.6.
