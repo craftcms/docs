@@ -59,6 +59,8 @@ If you choose “Custom…”, a “Translation Key Format” setting will appea
 
 For example, if a field’s translation key format were `{site.handle[0:2]}`, then new field values would be copied over to any other sites where the first two characters of the site handle matches the first to characters of the original site’s handle.
 
+The translation key format can also return an empty string (`''`) to disable translation. In other words, the custom key can determine how **or if** the field can be translated. A key format of `{section.handle == 'blog' ? site.handle : ''}`, for example, would display its field as translatable per site from _only_ the `blog` section—otherwise it would not be available for translation in any other context.
+
 ## Field Layouts
 
 Once you’ve created your fields, you can display them in your edit forms by adding them to “field layouts”.
