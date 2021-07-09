@@ -231,6 +231,26 @@ The database username to connect with.
 
 
 
+### `useUnbufferedConnections`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [DbConfig::$useUnbufferedConnections](craft3:craft\config\DbConfig::$useUnbufferedConnections)
+
+Since
+:   3.7.0
+
+Whether batched queries should be executed on a separate, unbuffered database connection.
+
+This setting only applies to MySQL. It can be enabled when working with high volume content, to prevent PHP from running out of memory when querying too much data at once. (See <https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder#batch-query-mysql> for an explanation of MySQL’s batch query limitations.)
+
+
+
 ### `url`
 
 Allowed types
