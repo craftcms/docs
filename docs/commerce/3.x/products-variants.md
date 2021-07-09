@@ -127,7 +127,32 @@ $myProductQuery = \craft\commerce\elements\Product::find();
 ```
 :::
 
-Once you’ve created a product query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://craftcms.com/docs/3.x/element-queries.html#executing-element-queries) by calling `.all()`. An array of [Product](commerce3:craft\commerce\elements\Product) objects will be returned.
+Once you’ve created a product query, you can set [parameters](#product-query-parameters) on it to narrow down the results, and then [execute it](https://craftcms.com/docs/3.x/element-queries.html#executing-element-queries) by calling `.all()`. An array of [Product](commerce3:craft\commerce\elements\Product) objects will be returned.
+
+You can also fetch only the number of items a query might return, which is better for performance when you don’t need the variant data.
+
+::: code
+```twig
+{# Count all enabled products #}
+{% set myProductCount = craft.products()
+    .status('enabled')
+    .count() %}
+```
+```php
+use craft\commerce\elements\Product;
+
+// Count all enabled products
+$myProductCount = Product::find()
+    ->status(Product::STATUS_ENABLED)
+    ->count();
+```
+```graphql
+# Count all enabled products
+{
+  productCount(status: "enabled")
+}
+```
+:::
 
 ::: tip
 See [Element Queries](https://craftcms.com/docs/3.x/element-queries.html) in the Craft docs to learn about how element queries work.
@@ -651,14 +676,14 @@ Determines the order that the products should be returned in. (If empty, default
 ```twig
 {# Fetch all products in order of date created #}
 {% set products = craft.products()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all products in order of date created
 $products = \craft\commerce\elements\Product::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::
@@ -1285,7 +1310,32 @@ $myVariantQuery = \craft\commerce\elements\Variant::find();
 ```
 :::
 
-Once you’ve created a variant query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://craftcms.com/docs/3.x/element-queries.html#executing-element-queries) by calling `.all()`. An array of [Variant](commerce3:craft\commerce\elements\Variant) objects will be returned.
+Once you’ve created a variant query, you can set [parameters](#variant-query-parameters) on it to narrow down the results, and then [execute it](https://craftcms.com/docs/3.x/element-queries.html#executing-element-queries) by calling `.all()`. An array of [Variant](commerce3:craft\commerce\elements\Variant) objects will be returned.
+
+You can also fetch only the number of items a query might return, which is better for performance when you don’t need the variant data.
+
+::: code
+```twig
+{# Count all enabled variants #}
+{% set myVariantCount = craft.variants()
+    .status('enabled')
+    .count() %}
+```
+```php
+use craft\commerce\elements\Variant;
+
+// Count all enabled variants
+$myVariantCount = Variant::find()
+    ->status(Variant::STATUS_ENABLED)
+    ->count();
+```
+```graphql
+# Count all enabled variants
+{
+  variantCount(status: "enabled")
+}
+```
+:::
 
 ::: tip
 See [Element Queries](https://craftcms.com/docs/3.x/element-queries.html) in the Craft docs to learn about how element queries work.
@@ -1801,14 +1851,14 @@ Determines the order that the variants should be returned in. (If empty, default
 ```twig
 {# Fetch all variants in order of date created #}
 {% set variants = craft.variants()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all variants in order of date created
 $variants = \craft\commerce\elements\Variant::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::

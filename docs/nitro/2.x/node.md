@@ -38,7 +38,7 @@ Nitro provides ports 3000 and 3001 for each site by default. (You can change the
 
 Configuring the server usually means you’ll need to provide the site with a base URL for the node server, and instructing the node server itself to utilize a specific hostname and port.
 
-A webpack configuration using hot module reloading, for example, would need to use port 3000:
+A webpack configuration using hot module reloading, for example, would need to use port 3000 and `0.0.0.0` instead of `localhost`:
 
 ```js
 {
@@ -46,11 +46,14 @@ A webpack configuration using hot module reloading, for example, would need to u
   devServer: {
     // ...
     port: 3000,
+    host: '0.0.0.0',
     // ...
   },
   // ...
 }
 ```
+
+Binding the port to `0.0.0.0` means it will be available on all interfaces, meaning both inside and outside the web container.
 
 ::: tip
 Depending on your front end build setup, you may also need to provide your site with a base URL for the node server. In this case, it would mean changing `http://localhost:8080` to `http://starterblog.nitro:3000`.

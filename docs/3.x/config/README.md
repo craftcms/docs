@@ -18,7 +18,7 @@ Craft supports several [database connection settings](db-settings.md). You can o
 
 ## Guzzle Config
 
-Craft uses [Guzzle 6](http://docs.guzzlephp.org/en/latest/) whenever creating HTTP requests, such as:
+Craft uses [Guzzle](http://docs.guzzlephp.org/en/latest/) whenever creating HTTP requests, such as:
 
 - when checking for Craft updates
 - when sending in a support request from the Craft Support widget
@@ -34,7 +34,7 @@ return [
     'headers' => ['Foo' => 'Bar'],
     'query'   => ['testing' => '123'],
     'auth'    => ['username', 'password'],
-    'proxy'   => 'tcp://localhost:80',
+    'proxy'   => 'https://myproxy:1234',
 ];
 ```
 
@@ -137,7 +137,7 @@ You can customize Craft’s entire [Yii application configuration](https://www.y
 You can also customize Craft’s application configuration for only web requests or console requests from `config/app.web.php` and `config/app.console.php`.
 
 ::: tip
-Craft’s default configuration is defined by [src/config/app.php](https://github.com/craftcms/cms/blob/master/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/master/src/config/app.web.php), and [app.console.php](https://github.com/craftcms/cms/blob/master/src/config/app.console.php). Refer to these files when you need to override existing application components.
+Craft’s default configuration is defined by [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php), and [app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php). Refer to these files when you need to override existing application components.
 :::
 
 ### Cache Component
@@ -239,7 +239,7 @@ return [
             'class' => yii\redis\Connection::class,
             'hostname' => 'localhost',
             'port' => 6379,
-            'password' => App::env('REDIS_PASSWORD'),
+            'password' => App::env('REDIS_PASSWORD') ?: null,
         ],
         'cache' => [
             'class' => yii\redis\Cache::class,
@@ -312,7 +312,7 @@ return [
             'class' => yii\redis\Connection::class,
             'hostname' => 'localhost',
             'port' => 6379,
-            'password' => App::env('REDIS_PASSWORD'),
+            'password' => App::env('REDIS_PASSWORD') ?: null,
         ],
         'session' => function() {
             // Get the default component config

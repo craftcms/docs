@@ -24,6 +24,10 @@ This can be used to save a new or existing entry, determined by the `sourceId` p
 See the [Entry Form](https://craftcms.com/knowledge-base/entry-form) guide for an example of working with this action.
 :::
 
+::: warning
+Note that _all_ custom fields can updated by users. For this reason, you should not assume that custom fields are protected from modification simply because they are not included in the form. 
+:::
+
 ### Supported Params
 
 The following params can be sent with the request:
@@ -37,7 +41,7 @@ Param | Description
 `entryVariable` | The hashed name of the variable that should reference the entry, if a validation error occurs. (Defaults to `entry`.)
 `expiryDate` | The expiry date for the entry. (Defaults to the current expiry date, or `null`.)
 `failMessage` | The hashed flash notice that should be displayed, if the entry is not saved successfully. (Only used for `text/html` requests.)
-`fieldsLocation` | The name of the param that holds the custom field values. (Defaults to `fields`.)
+`fieldsLocation` | The name of the param that holds any custom field values. (Defaults to `fields`.)
 `fields[]` | An array of new custom field values, indexed by field handles. (The param name can be customized via `fieldsLocation`.) Only fields that are included in this array will be updated.
 `parentId` | The ID of the parent entry, if it belongs to a structure section.
 `postDate` | The post date for the entry. (Defaults to the current post date, or the current time.)
@@ -131,6 +135,10 @@ This can be used to register a new user or update an existing one, determined by
 See the [Front-End User Accounts](https://craftcms.com/knowledge-base/front-end-user-accounts#registration-form) guide for an example of working with this action.
 :::
 
+::: warning
+Note that _all_ custom fields can updated by users. For this reason, you should not assume that custom fields are protected from modification simply because they are not included in the form. 
+:::
+
 ### Supported Params
 
 The following params can be sent with the request:
@@ -141,6 +149,8 @@ Param | Description
 `currentPassword` | The user’s current password, which is required if `email` or `newPassword` are sent.
 `email` | The user’s email address. (Only checked if registering a new user, updating the logged-in user, or the logged-in user is allowed to administrate users.)
 `failMessage` | The hashed flash notice that should be displayed, if the user account is not saved successfully. (Only used for `text/html` requests.)
+`fieldsLocation` | The name of the param that holds any custom field values. (Defaults to `fields`.)
+`fields[]` | An array of new custom field values, indexed by field handles. (The param name can be customized via `fieldsLocation`.) Only fields that are included in this array will be updated.
 `firstName` | The user’s first name.
 `lastName` | The user’s last name.
 `newPassword` | The user’s new password, if updating the logged-in user’s account. (If registering a new user, send `password`.)

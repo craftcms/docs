@@ -14,11 +14,19 @@ The exact permissions you choose for “Store Managers” will depend on the nee
 
 ## Permissions
 
-The following permissions are available for users or user groups to have for Commerce:
+The following Commerce permissions are available for Craft users and user groups.
+
+![Commerce user permissions](./assets/user-permissions.png)
 
 ### Access Craft Commerce
 
-Whether the user is able to access the Commerce section of the control panel. (Unlike the others, you’ll find it under Craft’s “Access the control panel” permission.)
+Whether the user is able to access the Commerce section of the control panel.
+
+::: tip
+Unlike the others, you’ll find it under Craft’s **Access the control panel** permission:
+
+![](./assets/general-permissions.png =375x375)
+:::
 
 ### Manage products
 
@@ -71,4 +79,4 @@ Whether the user can create, edit, and delete tax zones and tax categories.
 
 ### Manage store settings
 
-Whether the user may change settings in Commerce’s “Store Settings” area.
+Whether the user may change settings in Commerce’s **Store Settings** area, including the store [location address](addresses.md), payment currencies, and settings related to shipping, tax, and subscriptions.

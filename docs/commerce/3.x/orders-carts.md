@@ -136,7 +136,7 @@ We’re sneaking three new things in here as well:
 2. The `qty` parameter can be used to specify a quantity, which defaults to `1` if not supplied.
 3. Craft’s [`redirectInput`](/3.x/dev/functions.md#redirectinput) tag can be used to take the user to a specific URL after the cart is updated successfully. **If any part of the cart update action fails, the user will not be redirected.**
 
-#### Adding a Multiple Items
+#### Adding Multiple Items
 
 You can add multiple purchasables to the cart in a single request using a `purchasables` array instead of a single `purchasableId`. This form adds all a product’s variants to the cart at once:
 
@@ -156,6 +156,10 @@ You can add multiple purchasables to the cart in a single request using a `purch
 ```
 
 A unique index key is required to group the purchasable `id` with its `qty`, and in this example we’re using `{{ loop.index }}` as a convenient way to provide it.
+
+::: tip
+You can use the [`purchasableAvailable`](extend/events.md#purchasableavailable) event to control whether a line item should be available to the current user and cart.
+:::
 
 ::: warning
 Commerce Lite is limited to a single line in the cart.\
@@ -1391,14 +1395,14 @@ Determines the order that the orders should be returned in. (If empty, defaults 
 ```twig
 {# Fetch all orders in order of date created #}
 {% set orders = craft.orders()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all orders in order of date created
 $orders = \craft\commerce\elements\Order::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::

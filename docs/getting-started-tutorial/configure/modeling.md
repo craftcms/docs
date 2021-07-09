@@ -107,6 +107,6 @@ Here’s how we’ll use Craft CMS to cover each one:
 
 We’ll create an upload location and a category group to support these fields, and we’ll use Matrix because it lets us customize block types for content that facilitate a clean editing experience that can evolve with future content needs.
 
-Keep in mind that you can build content however you’d like; these are just the simple requirements for the tutorial and how we’re using the CMS to support them.
+Keep in mind that you can build content however you’d like; these are just the simple requirements for the tutorial and how we’re about to use the CMS to support them.
 
 Next we’ll set these things up in the control panel.
