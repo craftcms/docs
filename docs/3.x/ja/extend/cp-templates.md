@@ -27,16 +27,16 @@
 
 The following variables are supported by the `_layouts/cp.html` template:
 
-| Variable         | Description                                                                                                            |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `title`          | `pageTitle` – ページタイトルの出力にしようされます。                                                                                      |
-| `bodyClass`      | An array of class names that should be added to the `<body>` tag.                                                |
-| `fullPageForm`   | Whether the entire page should be wrapped in one big `<form>` element (see [Full Page Forms](#full-page-forms)). |
-| `crumbs`         | An array of breadcrumbs (see [Adding Breadcrumbs](#adding-breadcrumbs)).                                               |
-| `tabs`           | An array of tabs (see [Adding Tabs](#adding-tabs)).                                                                    |
-| `selectedTab`    | The ID of the selected tab.                                                                                            |
-| `showHeader`     | `header` – ページタイトルや他のヘッダー要素を含むページヘッダーの出力に使用されます。                                                                       |
-| `mainAttributes` | A hash of HTML attributes that should be added to the `<main>` tag.                                              |
+| Variable         | Description                                                                                                  |
+| ---------------- | ------------------------------------------------------------------------------------------------------------ |
+| `title`          | `pageTitle` – ページタイトルの出力にしようされます。                                                                            |
+| `bodyClass`      | An array of class names that should be added to the `<body>` tag.                                      |
+| `fullPageForm`   | Whether the entire page should be wrapped in one big `<form>` element (see [Form Pages](#form-pages)). |
+| `crumbs`         | An array of breadcrumbs (see [Adding Breadcrumbs](#adding-breadcrumbs)).                                     |
+| `tabs`           | An array of tabs (see [Adding Tabs](#adding-tabs)).                                                          |
+| `selectedTab`    | The ID of the selected tab.                                                                                  |
+| `showHeader`     | `header` – ページタイトルや他のヘッダー要素を含むページヘッダーの出力に使用されます。                                                             |
+| `mainAttributes` | A hash of HTML attributes that should be added to the `<main>` tag.                                    |
 
 ### Available Blocks
 
@@ -113,9 +113,9 @@ The first tab will be selected by default. You can force a different tab to be s
 {% set selectedTab = 'settings' %}
 ```
 
-### Full Page Forms
+### Form Pages
 
-Set the `fullPageForm` variable to `true` if your page’s purpose in to present one single form:
+If the purpose of your template is to present a form to the user, start by setting the `fullPageForm` variable to `true` at the top:
 
 ```twig
 {% set fullPageForm = true %}
@@ -134,11 +134,45 @@ Your template can also define the following variables, to customize the form beh
 
 | Variable                     | Description                                                                                                                                                             |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `formActions`                | An array of available Save menu actions for the form (see below).                                                                                                       |
+| `formActions`                | An array of available Save menu actions for the form (see [Alternate Form Actions](#alternate-form-actions)).                                                           |
 | `mainFormAttributes`         | A hash of HTML attributes that should be added to the `<form>` tag.                                                                                               |
 | `retainScrollOnSaveShortcut` | Whether the page’s scroll position should be retained on the subsequent page load when the <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>S</kbd> keyboard shortcut is used. |
 | `saveShortcutRedirect`       | The URL that the page should be redirected to when the <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>S</kbd> keyboard shortcut is used.                                     |
 | `saveShortcut`               | Whether the page should support a <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>S</kbd> keyboard shortcut (`true` by default).                                              |
+
+#### Form Inputs
+
+Craft’s [_includes/forms.html](https://github.com/craftcms/cms/blob/develop/src/templates/_includes/forms.html) template defines several macros that can be used to display your form elements.
+
+Most input types have two macros: one for outputting _just_ the input; and another for outputting the input as a “field”, complete with a label, author instructions, etc.
+
+For example, if you just want to output a date input, but nothing else, you could use the `date` macro:
+
+```twig
+{% import '_includes/forms' as forms %}
+
+{{ forms.date({
+  id: 'start-date',
+  name: 'startDate',
+  value: event.startDate,
+}) }}
+```
+
+However if you want to wrap the input with a label, author instructions, a “Required” indicator, and any validation errors, you could use the `dateField` macro instead:
+
+```twig
+{% import '_includes/forms' as forms %}
+
+{{ forms.dateField({
+  label: 'Start Date'|t('plugin-handle'),
+  instructions: 'The start date of the event.'|t('plugin-handle'),
+  id: 'start-date',
+  name: 'startDate',
+  value: event.startDate,
+  required: true,
+  errors: event.getErrors('startDate'),
+}) }}
+```
 
 #### Alternate Form Actions
 
