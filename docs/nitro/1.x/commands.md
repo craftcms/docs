@@ -28,7 +28,7 @@ nitro add [<options>]
 $ cd /path/to/project
 $ nitro add
 Enter the hostname [plugins-dev] example.test
-Enter the webroot [web]
+Enter the web root [web]
 Added plugins-dev to config file.
 Apply changes from config? [yes]
 Mounting /path/to/project to nitro-dev

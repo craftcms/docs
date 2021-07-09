@@ -7,7 +7,7 @@ preheading: Tutorial
 This tutorial will guide you through installing Craft CMS and creating a demo blog. While it assumes you’re technically-inclined, you don’t need web development experience to follow along. You can also skip any parts you’re already familiar with.
 
 ::: tip
-If at any point you get stuck, consider [joining us on Discord](https://craftcms.com/discord) where friendly people can help out.
+If you get stuck, [join us on Discord](https://craftcms.com/discord) where friendly people might be able help out.
 :::
 
 ## Why Craft CMS?
@@ -20,7 +20,7 @@ We’ll build an example blog since that’s a common use for a CMS, but the tut
 
 ## What We’re Going to Do
 
-We’re going to get Craft CMS running in a local environment, create a blog from scratch, and look at a few ways you might launch the site publicly. All you’ll need is yourself, your computer, and a healthy sense of adventure.
+We’re going to get Craft CMS running in a local environment and create a simple blog from scratch. All you’ll need is yourself, your computer, and a healthy sense of adventure.
 
 
 ### Table of Contents
@@ -31,9 +31,6 @@ We’re going to get Craft CMS running in a local environment, create a blog fro
     - [Choose a code editor](environment/editor.md)
     - [Set up a development stack](environment/stack.md)
 1. [**Install Craft CMS**](install/files.md)
-    - [Install Craft CMS with Composer](install/files.md)
-    - [Connect the database](install/database.md)
-    - [Set the web root](install/server.md)
     - [Finish setup](install/setup.md)
 2. [**Build Your Content**](configure/)
     - [Building Your Content](configure/)

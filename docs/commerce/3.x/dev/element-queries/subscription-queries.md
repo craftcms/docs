@@ -661,14 +661,14 @@ Determines the order that the subscriptions should be returned in. (If empty, de
 ```twig
 {# Fetch all subscriptions in order of date created #}
 {% set subscriptions = craft.subscriptions()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all subscriptions in order of date created
 $subscriptions = \craft\commerce\elements\Subscription::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::

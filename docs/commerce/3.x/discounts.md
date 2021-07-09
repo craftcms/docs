@@ -77,7 +77,21 @@ order.shippingAddressId and order.shippingAddress.zipCode[0:2] == '70'
 
 The above would be a `true` statement if the order has a shipping address and the shipping address `zipCode` starts with `70`.
 
-This would be a way of giving this discount to anyone shipping to that zip code.
+This would be a way of giving this discount to anyone shipping to that postal code.
+
+**Example 3:**
+
+```twig
+order.myCustomLicenseField and order.myCustomLicenseField == 'Supporter'
+```
+
+The above would be a `true` statement if the order has a custom `myCustomLicenseField` field with a value of `Supporter`.
+
+This would be a way of giving this discount to anyone that’s chosen a specific product license, and you could similarly use it to offer discounts that depend on custom field data.
+
+::: tip
+For safety, only a serialized representation of order attributes is available; you can’t call custom field methods from a condition formula.
+:::
 
 ### User Groups
 

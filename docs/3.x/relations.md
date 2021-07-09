@@ -2,11 +2,11 @@
 
 Craft has a powerful engine for relating elements to one another with five relational field types:
 
-* [Assets Fields](assets-fields.md)
-* [Categories Fields](categories-fields.md)
-* [Entries Fields](entries-fields.md)
-* [Tags Fields](tags-fields.md)
-* [Users Fields](users-fields.md)
+- [Assets Fields](assets-fields.md)
+- [Categories Fields](categories-fields.md)
+- [Entries Fields](entries-fields.md)
+- [Tags Fields](tags-fields.md)
+- [Users Fields](users-fields.md)
 
 Just like the other field types, you can add these to your [section](entries.md#sections), [user](users.md), [asset](assets.md), [category group](categories.md), [tag group](tags.md), and [global sets](globals.md)’ field layouts.
 
@@ -39,10 +39,10 @@ If you’ve already got a hold of the source element in your template, like in t
 
 Calling the source’s relational field handle (`ingredients`) returns an [entry query](entries.md#querying-entries) that can output the field’s target elements, in the field-defined order.
 
-If we want to output the ingredients list for a drink recipe, we'd use the following:
+If we want to output the ingredients list for a drink recipe, we’d use the following:
 
 ```twig
-{% set ingredients = drink.ingredients.all() %}
+{% set ingredients = entry.ingredients.all() %}
 {% if ingredients|length %}
 
     <h3>Ingredients</h3>
@@ -59,7 +59,7 @@ If we want to output the ingredients list for a drink recipe, we'd use the follo
 You can also add any additional parameters supported by the element type:
 
 ```twig
-{% for ingredient in drink.ingredients.section('ingredients').all() %}
+{% for ingredient in entry.ingredients.section('ingredients').all() %}
     <li>{{ ingredient.title }}</li>
 {% endfor %}
 ```

@@ -483,14 +483,14 @@ Determines the order that the Matrix blocks should be returned in. (If empty, de
 ```twig
 {# Fetch all Matrix blocks in order of date created #}
 {% set MatrixBlocks = craft.matrixBlocks()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all Matrix blocks in order of date created
 $MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::

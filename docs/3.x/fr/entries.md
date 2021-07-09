@@ -92,13 +92,21 @@ The above template could also be expressed with this syntax:
 
 With the above Entry URI Format, a top-level entry’s URI might end up as `docs/templating`, whereas a nested entry’s URI might end up as `docs/templating/tags`.
 
+::: tip
+You can use an attribute from a query in the entry's URI. Use double curly braces (e.g. `{{craft.entries.section('mySingle').one().slug}}/news`).
+:::
+
+::: tip
+You can use aliases in the entry's URI. Use the `alias()` function in double curly braces (e.g. `{{alias(@rootUrl)}}/news`, `{{alias(@mySectionUri)}}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
+:::
+
 ### Preview Targets
 
 If you’re using Craft Pro, your section can have one or more **preview targets**, which are URLs of pages that your entries will show up on, making it possible for authors to preview entries as they are writing them in the control panel.
 
 Like entry URI formats, these preview target URLs are mini Twig templates that can contain entry properties and other dynamic values.
 
-If entries in your section have their own URLs, then you can create a preview target for the entry’s primary URL using the URL template, `{url}`.
+Use single curly braces to render attributes on the entry. For example if entries in your section have their own URLs, then you can create a preview target for the entry’s primary URL using the URL template, `{url}`.
 
 Create additional preview targets for any other areas the entry might show up, such as `news`, or `archive/{postDate|date('Y')}`. If the entries show up on the homepage, you can create a preview target with a blank URL.
 
@@ -109,7 +117,11 @@ If you want to include the entry’s ID or UID in a preview target URL, use `{so
 :::
 
 ::: tip
-You can also set the URI to a environment variable (e.g. `$NEWS_INDEX`, or a URL that begins with an alias (e.g. `@rootUrl/news` or `@rootUrl/news/{slug}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
+You can use environment variables and aliases in the preview target URL. These do not get wrapped in curly braces (e.g. `$NEWS_INDEX`, `@rootUrl/news`, `@rootUrl/news/{slug}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
+:::
+
+::: tip
+Preview target URLs can include an attribute on the result of a query. Here double curly braces must be used (e.g. `{{ craft.entries.section('mySingle').one().url }}`).
 :::
 
 When an author is editing an entry from a section with custom preview targets, the “Share” button will be replaced with a menu that lists the “Primary entry page” (if the section has an Entry URI Format), plus the names of each preview target.
@@ -1185,14 +1197,14 @@ Determines the order that the entries should be returned in. (If empty, defaults
 ```twig
 {# Fetch all entries in order of date created #}
 {% set entries = craft.entries()
-    .orderBy('dateCreated asc')
+    .orderBy('dateCreated ASC')
     .all() %}
 ```
 
 ```php
 // Fetch all entries in order of date created
 $entries = \craft\elements\Entry::find()
-    ->orderBy('dateCreated asc')
+    ->orderBy('dateCreated ASC')
     ->all();
 ```
 :::
