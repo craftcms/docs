@@ -1,4 +1,4 @@
-# コントロールパネルのセクション
+# Control Panel Sections
 
 モジュールとプラグインは、[EVENT_REGISTER_CP_NAV_ITEMS](craft3:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) イベントを使用して新しいセクションをコントロールパネルに追加できます。
 
