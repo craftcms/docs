@@ -88,8 +88,8 @@ This automatic suffix behavior was introduced in Craft 3.7 and only impacts exis
 
 If you’d rather have your custom field type manage its own content in the database, you can return `false` for hasContentColumn()—just know that you’ll have to manually account for several things you otherwise get for free when Craft manages its content fields in the database:
 
-1. Automatic creation and deletion of database columns.
-2. Any core migrations or improvements that impact the content table.
-3. Automatic support for [sites and localization](../sites.md).
-4. Automatic inclusion of content fields in element queries and GraphQL.
+- Automatic creation, duplication, retrieval, and deletion of field content in the database.
+- Any core migrations or improvements that impact the `content` table.
+- Automatic support for [sites and localization](../sites.md).
+- Automatic inclusion of content fields in element queries and GraphQL.
 
