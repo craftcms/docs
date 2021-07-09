@@ -507,7 +507,7 @@ class Widget extends craft\gql\base\ElementResolver
 
 If this wasn’t a custom element type, we’d need a class to extend <craft3:craft\gql\base\Resolver> instead, implementing a [resolve()](craft3:craft\gql\base\Resolver::resolve()) method to return the field’s value rather than translating it into an element query.
 
-The handling of `$source` here is important, because `prepareQuery()` may be called at different points in the request flow depending on exactly where `WidgetField` is accessed. `$source` will only have a `null` value if `WidgetField` is accessed at the top level of the query, and once populated `$fieldName` will either contain an array of relation IDs (if eager loading) or an array of already-fetched Widget objects.
+The handling of `$source` here is important, because `prepareQuery()` may be called at different points in the request flow depending on exactly where `WidgetField` is accessed. `$source` will only have a `null` value if `WidgetField` is accessed at the top level of the query, and once populated `$fieldName` will either contain an array of `Widget` objects (if eager loading) or a prepped element query for returning `Widget` objects from the database.
 
 ## Generators
 
