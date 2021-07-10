@@ -7,7 +7,8 @@ Theme and significant content changes will be documented in this file.
 - Documented `cp.commerce.discounts.*` and `cp.commerce.sales.*` template hooks added in Commerce 3.4.
 
 ### Changed
-- Updated Commerce requirements for 3.4.0.
+- Updated requirements for Commerce 3.4.0.
+- Updated Discounts page to reflect Users condition options added in Commerce 3.4.0.
 
 ## 2021-07-09
 ### Added
