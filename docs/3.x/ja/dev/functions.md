@@ -22,7 +22,7 @@
 | [cpUrl](#cpurl)                                                                                | コントロールパネルの URL を生成します。                                     |
 | [cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html)                                 | 値の配列を循環します。                                                |
 | [dataUrl](#dataurl)                                                                            | Outputs an asset or file as a base64-encoded data URL.     |
-| [date](https://twig.symfony.com/doc/2.x/functions/date.html)                                   | 日付を作成します。                                                  |
+| [date](#date)                                                                                  | 日付を作成します。                                                  |
 | [dump](https://twig.symfony.com/doc/2.x/functions/dump.html)                                   | 変数に関する情報をダンプします。                                           |
 | [endBody](#endbody)                                                                            | 「end body」に登録されたスクリプトやスタイルを出力します。                          |
 | [expression](#expression)                                                                      | データベース式オブジェクトを作成します。                                       |
@@ -263,9 +263,43 @@ Outputs an asset or file as a base64-encoded [data URL](https://developer.mozill
 - **`mustShowScriptName`** – ここに `true` がセットされている場合、「index.php」を含めた URL が返され、コンフィグ設定
 - **`mimeType`** - Optional MIME type. If omitted, the file’s MIME type will be determined automatically.
 
+## `date`
+
+Converts an argument to a date to allow comparison, like [Twig’s `date()` function](https://twig.symfony.com/doc/2.x/functions/date.html).
+
+The argument can be one of PHP’s supported [date and time formats](https://www.php.net/manual/en/datetime.formats.php), or additionally a `date`/`time` array.
+
+```twig
+{% if date(asset.dateModified) < date('-2days') %}
+    {# asset is not new #}
+{% endif %}
+```
+
+A `null` or empty argument defaults to the current date:
+
+```twig
+{% if date() > date('2021/06/01') %}
+    {# today is past June 1, 2021 #}
+{% endif %}
+```
+
+Craft additionally supports passing a `date`/`time` array:
+
+```twig
+{% set myDate = {
+    date: '2021-01-15',
+    timezone: 'America/Los_Angeles',
+    time: '10:57',
+} %}
+
+{% if now > date(myDate) %}
+    {# today is past January 15, 2021 #}
+{% endif %}
+```
+
 ## `endBody`
 
-「end body」に登録されたスクリプトやスタイルを出力します。 `</body>` タグの直前に配置する必要があります。
+Outputs any scripts and styles that were registered for the “end body” position. It should be placed right before your `</body>` tag.
 
 ```twig
 <body>
@@ -278,7 +312,7 @@ Outputs an asset or file as a base64-encoded [data URL](https://developer.mozill
 
 ## `expression`
 
-環境変数の値を返します。
+Creates and returns a new <yii2:yii\db\Expression> object, for use in database queries.
 
 ```twig
 {% set entries = craft.entries()
@@ -288,15 +322,13 @@ Outputs an asset or file as a base64-encoded [data URL](https://developer.mozill
 
 ## `failMessageInput`
 
-スキーマ全体に対して、GraphQL クエリを実行します。
+Shortcut for typing `<input type="hidden" name="failMessage" value="{{ 'Custom fail message'|hash }}">`.
 
 ```twig
-{{ input('email', 'email-input', '', {
-    id: 'custom-input'
-}) }}
+{{ failMessageInput('Custom fail message') }}
 ```
 
-文字列が環境変数（`$VARIABLE_NAME`）、および / または、エイリアス（`@aliasName`）を参照しているかどうかを確認し、参照されている値を返します。
+You can optionally set additional attributes on the tag by passing an `options` argument.
 
 ```twig
 {{ failMessageInput('Custom fail message', {
@@ -315,7 +347,7 @@ Rounds a number down.
 
 ## `getenv`
 
-HTML input タグを出力します。
+Returns the value of an environment variable.
 
 ```twig
 {{ getenv('MAPS_API_KEY') }}
@@ -323,7 +355,7 @@ HTML input タグを出力します。
 
 ## `gql`
 
-オプションで、引数 `options` を渡すことにより、タグに追加の属性をセットできます。
+Executes a GraphQL query against the full schema.
 
 ```twig
 {% set result = gql('{
@@ -349,13 +381,13 @@ HTML input タグを出力します。
     <img class="thumb" src="{{ image.url }}" alt="{{ image.altText }}">
 
     {{ entry.shortDescription|markdown }}
-    <p><a href="{{ entry.url }}">Continue reading… </a></p>
+    <p><a href="{{ entry.url }}">Continue reading…</a></p>
 {% endfor %}
 ```
 
 ## `head`
 
-「head」に登録されたスクリプトやスタイルを出力します。 `</head>` タグの直前に配置する必要があります。
+Outputs any scripts and styles that were registered for the “head” position. It should be placed right before your `</head>` tag.
 
 ```twig
 <head>
@@ -366,14 +398,14 @@ HTML input タグを出力します。
 
 ## `hiddenInput`
 
-Twig コアの [`include`](https://twig.symfony.com/doc/2.x/functions/include.html) ファンクションと同様に機能します。
+Twig コアの [`max`](https://twig.symfony.com/doc/2.x/functions/max.html) ファンクションと同様に機能します。
 
 ```twig
 {{ hiddenInput('entryId', entry.id) }}
 {# Output: <input type="hidden" name="entryId" value="100"> #}
 ```
 
-HTML input タグを出力します。
+配列内の最小値を返します。
 
 ```twig
 {{ hiddenInput('entryId', entry.id, {
@@ -383,20 +415,20 @@ HTML input タグを出力します。
 
 ## `include`
 
-オプションで、引数 `options` を渡すことにより、タグに追加の属性をセットできます。
+Returns the rendered content of a template.
 
-配列内の最大値を返します。
+This works identically to Twig’s core [`include`](https://twig.symfony.com/doc/2.x/functions/include.html) function.
 
 ## `input`
 
-Twig コアの [`max`](https://twig.symfony.com/doc/2.x/functions/max.html) ファンクションと同様に機能します。
+Generates an HTML input tag.
 
 ```twig
 {{ input('email', 'email-input', '') }}
 {# Output: <input type="email" name="email-input" value=""> #}
 ```
 
-配列内の最小値を返します。
+You can optionally set additional attributes on the tag by passing an `options` argument.
 
 ```twig
 {{ input('email', 'email-input', '', {
@@ -407,19 +439,19 @@ Twig コアの [`max`](https://twig.symfony.com/doc/2.x/functions/max.html) フ�
 
 ## `max`
 
-Twig コアの [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) ファンクションと同様に機能します。
+Returns the biggest value in an array.
 
 This works identically to Twig’s core [`max`](https://twig.symfony.com/doc/2.x/functions/max.html) function.
 
 ## `min`
 
-出力時に HTML エンコードされないよう、指定された文字列を`Twig\Markup` オブジェクトで囲みます。
+Returns the lowest value in an array.
 
 This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) function.
 
 ## `ol`
 
-`<input type="hidden" name="redirect" value="{{ url|hash }}">` を入力するためのショートカットです。
+Outputs an array of items as an ordered list.
 
 ```twig
 {% set titles = craft.entries()
@@ -438,7 +470,7 @@ This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x
 
 ### 引数
 
-オプションで、引数 `options` を渡すことにより、タグに追加の属性をセットできます。
+The `ol()` function has the following arguments:
 
 - **`siteId`** – URL が指すべきサイト ID。 デフォルトでは、現在のサイトが使用されます。
 - **`params`** – An attributes argument where each key+value will be set as attributes on the `<ol>`, with the exception of two special options:
@@ -447,11 +479,11 @@ This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x
 
 ## `parseEnv`
 
-`name` で定義されたシーケンスの次または現在の番号を出力します。
+Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
 
 ## `plugin`
 
-ファンクションが呼び出されるたびに、与えられたシーケンスは自動的にインクリメントされます。
+Returns a plugin instance by its handle, or `null` if no plugin is installed and enabled with that handle.
 
 ```twig
 {{ plugin('commerce').version }}
@@ -459,7 +491,7 @@ This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x
 
 ## `raw`
 
-オプションで特定の長さにゼロ詰めした数値にできます。
+Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML-encoded when output.
 
 ```twig
 {% set html = raw('<p>Don’t encode me.</p>') %}
@@ -467,18 +499,18 @@ This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x
 ```
 
 ::: tip
-これは、変数が他のテンプレート/マクロに渡された場合でも Twig が HTML をエスケープしないことを覚えている点を除き、[raw](https://twig.symfony.com/doc/2.x/filters/raw.html) フィルタと同様に機能します。
+This works similarly to the [raw](https://twig.symfony.com/doc/2.x/filters/raw.html) filter, except that Twig will remember not to escape the HTML even if the variable is passed to another template/macro, whereas `|raw` filters only have an effect if used directly in an output tag.
 :::
 
 ## `redirectInput`
 
-配列内のエレメントの順序をランダム化します。
+Shortcut for typing `<input type="hidden" name="redirect" value="{{ url|hash }}">`.
 
 ```twig
 {{ redirectInput(url) }}
 ```
 
-サイト上のページへの URL を作成するため _だけ_ という点を除けば、[url()](#url-path-params-scheme-mustshowscriptname) と似ています。
+You can optionally set additional attributes on the tag by passing an `options` argument.
 
 ```twig
 {{ redirectInput(url, {
@@ -488,22 +520,22 @@ This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x
 
 ## `seq`
 
-`siteUrl()` ファンクションは、次の引数を持っています。
+Outputs the next or current number in a sequence, defined by `name`:
 
 ```twig
 <p>This entry has been read {{ seq('hits:' ~ entry.id) }} times.</p>
 ```
 
-SVG 文書を出力します。
+Each time the function is called, the given sequence will be automatically incremented.
 
-次のものを渡すことができます。
+You can optionally have the number be zero-padded to a certain length.
 
 ```twig
 {{ now|date('Y') ~ '-' ~ seq('orderNumber:' ~ now|date('Y'), 5) }}
-{# outputs: 2018-00001 #}
+{# Output: 2018-00001 #}
 ```
 
-インクリメントせずにシーケンスの現在の数字を表示するには、引数 `next` に `false` をセットします。
+To view the current number in the sequence without incrementing it, set the `next` argument to `false`.
 
 ```twig
 <h5><a href="{{ entry.url }}">{{ entry.title }}</a></h5>
@@ -512,7 +544,7 @@ SVG 文書を出力します。
 
 ## `shuffle`
 
-[attr](filters.md#attr) フィルタを利用して、ルートの `<svg>` ノードに追加する独自の class 名を指定することもできます。
+Randomizes the order of the elements within an array.
 
 ```twig
 {% set promos = craft.entries.section('promos').all() %}
@@ -529,7 +561,7 @@ SVG 文書を出力します。
 
 ## `siteUrl`
 
-レンダリングせずに、テンプレートのコンテンツを返します。
+Similar to [url()](#url-path-params-scheme-mustshowscriptname), except _only_ for creating URLs to pages on your site.
 
 ```twig
 <a href="{{ siteUrl('company/contact') }}">Contact Us</a>
@@ -537,7 +569,7 @@ SVG 文書を出力します。
 
 ### 引数
 
-Twig コアの [`source`](https://twig.symfony.com/doc/2.x/functions/source.html) ファンクションと同様に機能します。
+The `siteUrl()` function has the following arguments:
 
 - **`path`** – 結果となる URL がサイトで指すべきパス。 それは、ベースサイト URL に追加されます。
 - **`params`** –  URL に追加するクエリ文字列パラメータ。 これは文字列（例：`'foo=1&bar=2'`）または、[ハッシュ](twig-primer.md#hashes)（例：`{foo:'1', bar:'2'}`）が利用可能です。
@@ -546,13 +578,13 @@ Twig コアの [`source`](https://twig.symfony.com/doc/2.x/functions/source.html
 
 ## `successMessageInput`
 
-完全な HTML タグをレンダリングします。
+Shortcut for typing `<input type="hidden" name="successMessage" value="{{ 'Custom success message'|hash }}">`.
 
 ```twig
 {{ successMessageInput('Custom success message') }}
 ```
 
-属性引数に `text` が含まれる場合、その値は HTML エンコードされ、タグのテキストコンテンツとしてセットされます。
+You can optionally set additional attributes on the tag by passing an `options` argument.
 
 ```twig
 {{ successMessageInput('Custom success message', {
@@ -562,9 +594,9 @@ Twig コアの [`source`](https://twig.symfony.com/doc/2.x/functions/source.html
 
 ## `svg`
 
-属性引数に `html` が含まれている（かつ、`text` が含まれていない）場合、その値はタグのインナー HTML としてセットされます（HTML エンコードされません）。
+Outputs an SVG document.
 
-第二引数に渡される他のすべてのキーは、<yii2:yii\helpers\BaseHtml::renderTagAttributes()> を利用してタグの属性としてセットされます。
+You can pass the following things into it:
 
 - SVG ファイルのパス。
 
@@ -588,13 +620,13 @@ Twig コアの [`source`](https://twig.symfony.com/doc/2.x/functions/source.html
    {{ svg(image) }}
   ```
 
-ファンクションにアセットまたは生のマークアップを渡した場合、デフォルトでは SVG は [svg-sanitizer](https://github.com/darylldoyle/svg-sanitizer) を利用して潜在的に悪意のあるスクリプトをサニタイズし、ドキュメント内の ID や class 名が DOM の他の ID や class 名と衝突しないよう名前空間を付加します。 引数 `sanitize`、および、`namespace` を利用して、これらの動作を無効にできます。
+By default, if you pass an asset or raw markup into the function, the SVG will be sanitized of potentially malicious scripts using [svg-sanitizer](https://github.com/darylldoyle/svg-sanitizer), and any IDs or class names within the document will be namespaced so they don’t conflict with other IDs or class names in the DOM. You can disable those behaviors using the `sanitize` and `namespace` arguments:
 
 ```twig
 {{ svg(image, sanitize=false, namespace=false) }}
 ```
 
-`null` または `false` をセットされた属性は、省略されます。
+You can also specify a custom class name that should be added to the root `<svg>` node using the [attr](filters.md#attr) filter:
 
 ```twig
 {{ svg('@webroot/icons/lemon.svg')|attr({ class: 'lemon-icon' }) }}
@@ -602,14 +634,13 @@ Twig コアの [`source`](https://twig.symfony.com/doc/2.x/functions/source.html
 
 ## `source`
 
-URL を返します。
+Returns the content of a template without rendering it.
 
-`url()` ファンクションは、次の引数を持っています。
+This works identically to Twig’s core [`source`](https://twig.symfony.com/doc/2.x/functions/source.html) function.
 
 ## `tag`
 
-::: tip
-クエリ文字列パラメータを追加、および / または、絶対 URL にスキームを適用するために、`url()` ファンクションを使用することができます。
+Renders a complete HTML tag.
 
 ```twig
 {{ tag('div', {
@@ -618,7 +649,7 @@ URL を返します。
 {# Output: <div class="foo"></div> #}
 ```
 
-属性が `true` にセットされている場合、値なしで追加されます。
+If `text` is included in the attributes argument, its value will be HTML-encoded and set as the text contents of the tag.
 
 ```twig
 {{ tag('div', {
@@ -710,6 +741,6 @@ Using the `url()` function has advantages over hard-coding URLs in your template
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
 ```twig
 {{ url('http://my-project.com', 'foo=1', 'https') }}
-{# Outputs: "https://my-project.com?foo=1" #}
+{# Output: "https://my-project.com?foo=1" #}
 ```
 :::
