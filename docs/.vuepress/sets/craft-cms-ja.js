@@ -60,7 +60,6 @@ module.exports = {
             "commands",
             "template-roots",
             "extending-twig",
-            "graphql",
             "template-hooks",
             "soft-deletes",
             "environmental-settings",
