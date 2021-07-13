@@ -2,11 +2,17 @@
 
 Date fields give you a date picker, and optionally a time picker as well.
 
+You can also pick minimum and maximum dates that should be allowed, and if you’re showing the time, you can choose what the minute increment should be.
+
 ## Settings
 
-Date/Time fields let you choose whether you want to show the date, the time, or both.
+Date fields have the following settings:
 
-When [querying for elements](element-queries.md) that have a Date/Time field, you can filter the results based on the Date/Time field data using a query param named after your field’s handle.
+- **Show date** or **Show date and time**\ If **Show date and time** is selected, the following settings will be visible:
+    - **Minute Increment** – number of minutes that timepicker suggestions should be incremented by. (Authors can manually enter a specific time.)
+    - **Show Time Zone** – whether authors should be able to choose the time zone, rather than the system’s.
+- **Min Date** – the earliest date that should be allowed.
+- **Max Date** – the latest date that should be allowed.
 
 ## Templating
 
@@ -50,9 +56,38 @@ $entries = \craft\elements\Entry::find()
 The [atom](dev/filters.md#atom) filter converts a date to an ISO-8601 timestamp.
 :::
 
+Craft 3.7 added support for using `now` in date comparison strings:
+
+::: code
+```twig
+{# Fetch entries with a selected date in the past #}
+{% set pastEntries = craft.entries()
+    .myFieldHandle('< now')
+    .all() %}
+{# Fetch entries with a selected date now onward #}
+{% set futureEntries = craft.entries()
+    .myFieldHandle('>= now')
+    .all() %}
+```
+```php
+// Fetch entries with a selected date in the past
+$pastEntries = \craft\elements\Entry::find()
+    ->myFieldHandle('< now')
+    ->all();
+// Fetch entries with a selected date now onward
+$futureEntries = \craft\elements\Entry::find()
+    ->myFieldHandle('>= now')
+    ->all();
+```
+:::
+
+::: tip
+Don’t forget to consider or disable [template caching](tags.md#cache) for requests that use `now` comparisons! You can pass a `x-craft-gql-cache: no-cache` header for GraphQL requests or set a relatively low [cache duration](config3:cacheDuration).
+:::
+
 ### Working with Date/Time Field Data
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Date/Time field, you can create a `date` or `datetime-local` input.
+If you have an element with a Date field in your template, you can access its value by its handle:
 
 ::: code
 ```twig
@@ -72,9 +107,9 @@ That will give you a [DateTime](http://php.net/manual/en/class.datetime.php) obj
 {% endif %}
 ```
 ```php
-if ($entry->myFieldHandle) {    
+if ($entry->myFieldHandle) {
     $selectedDate = \Craft::$app->getFormatter()->asDatetime(
-        $entry->myFieldHandle, 
+        $entry->myFieldHandle,
         'short'
     );
 }
@@ -131,7 +166,7 @@ By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you c
 {% set tz = 'America/Los_Angeles' %}
 
 {% set currentValue = entry is defined and entry.myFieldHandle
-    ? entry.myFieldHandle|date('Y-m-d\\TH:i', tz)
+    ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone=tz)
     : '' %}
 
 <input type="datetime-local" name="fields[myFieldHandle][datetime]" value="{{ currentValue }}">
@@ -148,8 +183,8 @@ Or you can let users decide which timezone the date should be posted in:
 <input type="datetime-local" name="fields[myFieldHandle][datetime]" value="{{ currentValue }}">
 
 <select name="fields[myFieldHandle][timezone]">
+    <option value="UTC" selected>UTC</option>
     <option value="America/Los_Angeles">Pacific Time</option>
-    <option value="UTC">UTC</option>
     <!-- ... -->
 </select>
 ```
