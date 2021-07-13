@@ -2,11 +2,17 @@
 
 日付フィールドは date picker を提供します。 同様に、オプションで time picker を提供します。
 
+You can also pick minimum and maximum dates that should be allowed, and if you’re showing the time, you can choose what the minute increment should be.
+
 ## 設定
 
-日/時フィールドは、日付、時刻、もしくはその両方にするか、お好みで選択できます。
+Date fields have the following settings:
 
-日/時フィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを利用して、日/時フィールドのデータに基づいた結果をフィルタできます。
+- **Show date** or **Show date and time**\ If **Show date and time** is selected, the following settings will be visible:
+    - **Minute Increment** – number of minutes that timepicker suggestions should be incremented by. (Authors can manually enter a specific time.)
+    - **Show Time Zone** – whether authors should be able to choose the time zone, rather than the system’s.
+- **Min Date** – the earliest date that should be allowed.
+- **Max Date** – the latest date that should be allowed.
 
 ## テンプレート記法
 
@@ -52,11 +58,40 @@ $entries = \craft\elements\Entry::find()
 The [atom](dev/filters.md#atom) filter converts a date to an ISO-8601 timestamp.
 :::
 
-### 日/時フィールドデータの操作
-
-日/時フィールドを含める必要がある[entry form](dev/examples/entry-form.md)がある場合、入力項目 `date` または `datetime-local` を作成できます。
+Craft 3.7 added support for using `now` in date comparison strings:
 
 ユーザーに日付だけを選択させたい場合、入力項目 `date` を使用します。
+```twig
+{# Fetch entries with a selected date in the past #}
+{% set pastEntries = craft.entries()
+    .myFieldHandle('< now')
+    .all() %}
+{# Fetch entries with a selected date now onward #}
+{% set futureEntries = craft.entries()
+    .myFieldHandle('>= now')
+    .all() %}
+```
+```php
+// Fetch entries with a selected date in the past
+$pastEntries = \craft\elements\Entry::find()
+    ->myFieldHandle('< now')
+    ->all();
+// Fetch entries with a selected date now onward
+$futureEntries = \craft\elements\Entry::find()
+    ->myFieldHandle('>= now')
+    ->all();
+```
+:::
+
+::: tip
+Don’t forget to consider or disable [template caching](tags.md#cache) for requests that use `now` comparisons! You can pass a `x-craft-gql-cache: no-cache` header for GraphQL requests or set a relatively low [cache duration](config3:cacheDuration).
+:::
+
+### 日/時フィールドデータの操作
+
+If you have an element with a Date field in your template, you can access its value by its handle:
+
+::: code
 ```twig
 {% set value = entry.myFieldHandle %}
 ```
@@ -65,9 +100,7 @@ $value = $entry->myFieldHandle;
 ```
 :::
 
-::: tip
-より良いブラウザサポートを[待っている間](https://caniuse.com/#feat=input-datetime) に入力項目 `date` と `datetime-local` を導入するため、[HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) ポリフィルを利用できます。
-:::
+That will give you a [DateTime](http://php.net/manual/en/class.datetime.php) object that represents the selected date, or `null` if no date was selected.
 
 ::: code
 ```twig
@@ -76,16 +109,16 @@ $value = $entry->myFieldHandle;
 {% endif %}
 ```
 ```php
-if ($entry->myFieldHandle) {    
+if ($entry->myFieldHandle) {
     $selectedDate = \Craft::$app->getFormatter()->asDatetime(
-        $entry->myFieldHandle, 
+        $entry->myFieldHandle,
         'short'
     );
 }
 ```
 :::
 
-日付と時刻を別々の HTML 入力欄として投稿したい場合、それらの name を `fields[myFieldHandle][date]`、および、`fields[myFieldHandle][time]` にします。
+Craft and Twig provide several Twig filters for manipulating dates, which you can use depending on your needs:
 
 - [date](dev/filters.md#date)
 - [time](dev/filters.md#time)
@@ -97,9 +130,9 @@ if ($entry->myFieldHandle) {
 
 ### 投稿フォームで日/時フィールドを保存
 
-日付入力欄は `YYYY-MM-DD` フォーマット、または、現在のロケールの短縮日付フォーマットのいずれかをセットできます。
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Date field, you can create a `date` or `datetime-local` input.
 
-時刻入力欄は `HH:MM` フォーマット（24時間表記）、または、現在のロケールの短縮時刻フォーマットのいずれかをセットできます。
+If you just want the user to be able to select a date, use a `date` input:
 
 ```twig
 {% set currentValue = entry is defined and entry.myFieldHandle
@@ -109,8 +142,7 @@ if ($entry->myFieldHandle) {
 <input type="date" name="fields[myFieldHandle]" value="{{ currentValue }}">
 ```
 
-::: tip
-現在のロケールの日付と時刻のフォーマットを調べるには、テンプレートに次のコードを追加してください。
+If you want the user to be able to select a time as well, use a `datetime-local` input:
 
 ```twig
 {% set currentValue = entry is defined and entry.myFieldHandle
@@ -126,7 +158,7 @@ The [HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) polyfill can 
 
 #### タイムゾーンのカスタマイズ
 
-デフォルトでは、Craft は日付が UTC で投稿されていると想定します。 Craft 3.1.6 から、入力欄の name を `fields[myFieldHandle][datetime]`、不可視項目の name を `fields[myFieldHandle][timezone]` とし、[有効な PHP タイムゾーン](http://php.net/manual/en/timezones.php)をセットすることによって、異なるタイムゾーンの日付を投稿できます。
+By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you can post dates in a different timezone by changing the input name to `fields[myFieldHandle][datetime]` and adding a hidden input named `fields[myFieldHandle][timezone]`, set to a [valid PHP timezone](http://php.net/manual/en/timezones.php):
 
 ```twig
 {# Use the timezone selected under Settings → General Settings → Time Zone #}
@@ -136,7 +168,7 @@ The [HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) polyfill can 
 {% set tz = 'America/Los_Angeles' %}
 
 {% set currentValue = entry is defined and entry.myFieldHandle
-    ? entry.myFieldHandle|date('Y-m-d\\TH:i', tz)
+    ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone=tz)
     : '' %}
 
 <input type="datetime-local" name="fields[myFieldHandle][datetime]" value="{{ currentValue }}">
@@ -153,8 +185,8 @@ Or you can let users decide which timezone the date should be posted in:
 <input type="datetime-local" name="fields[myFieldHandle][datetime]" value="{{ currentValue }}">
 
 <select name="fields[myFieldHandle][timezone]">
+    <option value="UTC" selected>UTC</option>
     <option value="America/Los_Angeles">Pacific Time</option>
-    <option value="UTC">UTC</option>
     <!-- ... -->
 </select>
 ```
@@ -175,5 +207,5 @@ Date format: <code>{{ craft.app.locale.getDateFormat('short', 'php') }}</code><b
 Time format: <code>{{ craft.app.locale.getTimeFormat('short', 'php') }}</code>
 ```
 
-次に、PHP の [date()](http://php.net/manual/en/function.date.php) ファンクションのドキュメントを参照し、各フォーマットの文字の意味を確認してください。 :::
+Then refer to PHP’s [date()](http://php.net/manual/en/function.date.php) function docs to see what each of the format letters mean.
 :::
