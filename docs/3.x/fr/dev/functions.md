@@ -22,7 +22,7 @@ The following [functions](https://twig.symfony.com/doc/2.x/templates.html#functi
 | [cpUrl](#cpurl)                                                                                | Generates a control panel URL.                                                                         |
 | [cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html)                                 | Cycles on an array of values.                                                                          |
 | [dataUrl](#dataurl)                                                                            | Outputs an asset or file as a base64-encoded data URL.                                                 |
-| [date](https://twig.symfony.com/doc/2.x/functions/date.html)                                   | Creates a date.                                                                                        |
+| [date](#date)                                                                                  | Creates a date.                                                                                        |
 | [dump](https://twig.symfony.com/doc/2.x/functions/dump.html)                                   | Dumps information about a variable.                                                                    |
 | [endBody](#endbody)                                                                            | Outputs scripts and styles that were registered for the “end body” position.                           |
 | [expression](#expression)                                                                      | Creates a database expression object.                                                                  |
@@ -274,6 +274,40 @@ The `dataUrl()` function has the following arguments:
 - **`file`** - The asset or path to a file to be encoded.
 - **`mimeType`** - Optional MIME type. If omitted, the file’s MIME type will be determined automatically.
 
+## `date`
+
+Converts an argument to a date to allow comparison, like [Twig’s `date()` function](https://twig.symfony.com/doc/2.x/functions/date.html).
+
+The argument can be one of PHP’s supported [date and time formats](https://www.php.net/manual/en/datetime.formats.php), or additionally a `date`/`time` array.
+
+```twig
+{% if date(asset.dateModified) < date('-2days') %}
+    {# asset is not new #}
+{% endif %}
+```
+
+A `null` or empty argument defaults to the current date:
+
+```twig
+{% if date() > date('2021/06/01') %}
+    {# today is past June 1, 2021 #}
+{% endif %}
+```
+
+Craft additionally supports passing a `date`/`time` array:
+
+```twig
+{% set myDate = {
+    date: '2021-01-15',
+    timezone: 'America/Los_Angeles',
+    time: '10:57',
+} %}
+
+{% if now > date(myDate) %}
+    {# today is past January 15, 2021 #}
+{% endif %}
+```
+
 ## `endBody`
 
 Outputs any scripts and styles that were registered for the “end body” position. It should be placed right before your `</body>` tag.
@@ -302,9 +336,7 @@ Creates and returns a new <yii2:yii\db\Expression> object, for use in database q
 Shortcut for typing `<input type="hidden" name="failMessage" value="{{ 'Custom fail message'|hash }}">`.
 
 ```twig
-{{ input('email', 'email-input', '', {
-    id: 'custom-input'
-}) }}
+{{ failMessageInput('Custom fail message') }}
 ```
 
 You can optionally set additional attributes on the tag by passing an `options` argument.
@@ -511,7 +543,7 @@ You can optionally have the number be zero-padded to a certain length.
 
 ```twig
 {{ now|date('Y') ~ '-' ~ seq('orderNumber:' ~ now|date('Y'), 5) }}
-{# outputs: 2018-00001 #}
+{# Output: 2018-00001 #}
 ```
 
 To view the current number in the sequence without incrementing it, set the `next` argument to `false`.
@@ -720,6 +752,6 @@ Using the `url()` function has advantages over hard-coding URLs in your template
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
 ```twig
 {{ url('http://my-project.com', 'foo=1', 'https') }}
-{# Outputs: "https://my-project.com?foo=1" #}
+{# Output: "https://my-project.com?foo=1" #}
 ```
 :::
