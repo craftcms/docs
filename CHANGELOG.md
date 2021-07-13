@@ -4,11 +4,25 @@ Theme and significant content changes will be documented in this file.
 
 ## Unreleased
 ### Added
+- Documented `|removeClass` Twig filter added in Craft 3.7.0.
 - Documented `cp.commerce.discounts.*` and `cp.commerce.sales.*` template hooks added in Commerce 3.4.
+- Documented `httpProxy`, `previewTokenDuration`, `revAssetUrls`, and `setGraphqlDatesToSystemTimeZone` config settings added in Craft 3.7.0.
+- Documented `useUnbufferedConnections` database config setting added in Craft 3.7.0.
+- Documented `date()` Twig function added in Craft 3.7.0.
+- Documented `users/create` and `users/delete` commands added in Craft 3.7.0.
+- Documented Date field `now` comparison support added in Craft 3.7.0.
+- Added _Extending GraphQL_ section detailing Craft’s GraphQL components for custom plugin/module developers.
+- Documented custom field empty-string translation key behavior new to Craft 3.7.0.
 
 ### Changed
+- Revised Date field settings to include new “Show Time Zone” setting added in Craft 3.7.0.
 - Updated requirements for Commerce 3.4.0.
+- Revised `{% cache %}` tag documentation to reflect that Craft 3.7.0 captures `{% js %}`, `{% script %}` and `{% css %}` code and styles.
+- Revised Image Transforms page to demonstrate Craft 3.7.0’s support for overrides in via `asset.setTransform()` in addition to `asset.getUrl()`.
 - Updated Discounts page to reflect Users condition options added in Commerce 3.4.0.
+
+### Removed
+- Removed `flash` file kind that was retired in Craft 3.7.0.
 
 ## 2021-07-09
 ### Added

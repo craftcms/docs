@@ -599,6 +599,28 @@ panel is located on a different domain than your front end.
 
 
 
+### `httpProxy`
+
+Allowed types
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+
+Default value
+:   `null`
+
+Defined by
+:   [GeneralConfig::$phpMaxMemoryLimit](craft3:craft\config\GeneralConfig::$httpProxy)
+
+Since
+:   3.7.0
+
+
+
+The proxy server that should be used for outgoing HTTP requests.
+
+This can be set to a URL (`http://localhost`) or a URL plus a port (`http://localhost:8125`).
+
+
+
 ### `indexTemplateFilenames`
 
 Allowed types
@@ -2069,6 +2091,30 @@ log in but allow for username/email enumeration based on the response.
 
 
 
+
+
+### `previewTokenDuration`
+
+Allowed types
+:   `mixed`
+
+Default value
+:   `86400` (1 day)
+
+Defined by
+:   [GeneralConfig::$previewTokenDuration](craft3:craft\config\GeneralConfig::$previewTokenDuration)
+
+Since
+:   3.7.0
+
+The amount of time content preview tokens can be used before expiring.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+
+
+
+
 ### `sanitizeCpImageUploads`
 
 Allowed types
@@ -2362,6 +2408,27 @@ Defined by
 The maximum upload file size allowed.
 
 See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-sizeinbytes) for a list of supported value types.
+
+
+
+
+### `revAssetUrls`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [GeneralConfig::$revAssetUrls](craft3:craft\config\GeneralConfig::$revAssetUrls)
+
+Since:
+:   3.7.0
+
+
+
+Whether asset URLs should be revved so browsers don’t load cached versions when they’re modified.
 
 
 
@@ -2902,6 +2969,27 @@ The amount of time to wait before Craft purges unpublished drafts that were neve
 Set to `0` to disable this feature.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+
+
+### `setGraphqlDatesToSystemTimeZone`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [GeneralConfig::$setGraphqlDatesToSystemTimeZone](craft3:craft\config\GeneralConfig::$setGraphqlDatesToSystemTimeZone)
+
+Since
+:   3.7.0
+
+
+
+Whether dates returned by the GraphQL API should be set to the system time zone by default, rather than UTC.
+
 
 
 ### `softDeleteDuration`
