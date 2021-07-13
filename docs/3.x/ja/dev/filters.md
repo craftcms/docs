@@ -65,32 +65,33 @@
 | [push](#push)                                                                      | 1つ以上のアイテムを配列の最後に追加します。                                                                  |
 | [raw](https://twig.symfony.com/doc/2.x/filters/raw.html)                           | 現在のエスケープ方針にとって安全な値であると評価します。                                                            |
 | [reduce](https://twig.symfony.com/doc/2.x/filters/reduce.html)                     | シーケンスやマッピングを反復的に単一の値に減らします。                                                             |
-| [replace](#replace)                                                                | 文字列をデリミタで分割します。                                                                         |
-| [reverse](https://twig.symfony.com/doc/2.x/filters/reverse.html)                   | 文字列や配列を反転します。                                                                           |
-| [round](https://twig.symfony.com/doc/2.x/filters/round.html)                       | 数値を丸めます。                                                                                |
+| [removeClass](#removeclass)                                                        | Removes a class (or classes) from the given HTML tag.                                   |
+| [replace](#replace)                                                                | Replaces parts of a string with other things.                                           |
+| [reverse](https://twig.symfony.com/doc/2.x/filters/reverse.html)                   | Reverses a string or array.                                                             |
+| [round](https://twig.symfony.com/doc/2.x/filters/round.html)                       | Rounds a number.                                                                        |
 | [rss](#rss)                                                                        | Converts a date to RSS date format.                                                     |
-| [slice](https://twig.symfony.com/doc/2.x/filters/slice.html)                       | 文字列や配列のスライスを抽出します。                                                                      |
+| [slice](https://twig.symfony.com/doc/2.x/filters/slice.html)                       | Extracts a slice of a string or array.                                                  |
 | [slug](https://twig.symfony.com/doc/2.x/filters/slug.html)                         | Transforms a given string into another string that only includes safe ASCII characters. |
-| [snake](#snake)                                                                    | 文字列を snake_case にフォーマットします。                                                             |
-| [sort](https://twig.symfony.com/doc/2.x/filters/sort.html)                         | 配列をソートします。                                                                              |
-| [spaceless](https://twig.symfony.com/doc/2.x/filters/spaceless.html)               | HTML タグ間の空白を削除します。                                                                      |
-| [split](https://twig.symfony.com/doc/2.x/filters/split.html)                       | 文字列を大文字にします。                                                                            |
-| [striptags](https://twig.symfony.com/doc/2.x/filters/striptags.html)               | 文字列から SGML/XML タグを取り除きます。                                                               |
-| [time](#time)                                                                      | 時刻をフォーマットします。                                                                           |
-| [timestamp](#timestamp)                                                            | 人が読めるタイムスタンプをフォーマットします。                                                                 |
-| [title](https://twig.symfony.com/doc/2.x/filters/title.html)                       | 文字列を Title Case にフォーマットします。                                                             |
-| [translate](#translate-or-t)                                                       | メッセージを翻訳します。                                                                            |
+| [snake](#snake)                                                                    | Formats a string into “snake_case”.                                                     |
+| [sort](https://twig.symfony.com/doc/2.x/filters/sort.html)                         | Sorts an array.                                                                         |
+| [spaceless](https://twig.symfony.com/doc/2.x/filters/spaceless.html)               | Removes whitespace between HTML tags.                                                   |
+| [split](https://twig.symfony.com/doc/2.x/filters/split.html)                       | Splits a string by a delimiter.                                                         |
+| [striptags](https://twig.symfony.com/doc/2.x/filters/striptags.html)               | Strips SGML/XML tags from a string.                                                     |
+| [time](#time)                                                                      | Formats a time.                                                                         |
+| [timestamp](#timestamp)                                                            | Formats a human-readable timestamp.                                                     |
+| [title](https://twig.symfony.com/doc/2.x/filters/title.html)                       | Formats a string into “Title Case”.                                                     |
+| [translate](#translate-or-t)                                                       | Translates a message.                                                                   |
 | [truncate](#truncate)                                                              | Truncates a string to a given length, while ensuring that it does not split words.      |
-| [trim](https://twig.symfony.com/doc/2.x/filters/trim.html)                         | 文字列の最初と最後から空白を取り除きます。                                                                   |
-| [ucfirst](#ucfirst)                                                                | 文字列の最初の文字を大文字にします。                                                                      |
-| [unique](#unique)                                                                  | 配列から重複する値を取り除きます。                                                                       |
-| [unshift](#unshift)                                                                | 1つ以上のアイテムを配列の先頭に追加します。                                                                  |
-| [upper](https://twig.symfony.com/doc/2.x/filters/upper.html)                       | 「PascalCase」（別名「UpperCamelCase」）でフォーマットされた文字列を返します。                                     |
-| [url_encode](https://twig.symfony.com/doc/2.x/filters/url_encode.html)             | 文字列を URL セグメント、または、クエリ文字列の配列としてパーセントエンコードします。                                           |
-| [values](#values)                                                                  | キーをリセットして、配列内のすべての値を返します。                                                               |
-| [where](#where)                                                                    | キーと値のペアで配列をフィルタします。                                                                     |
-| [withoutKey](#withoutkey)                                                          | 指定されたキーを除いた配列を返します。                                                                     |
-| [without](#without)                                                                | 指定されたエレメントを除いた配列を返します。                                                                  |
+| [trim](https://twig.symfony.com/doc/2.x/filters/trim.html)                         | Strips whitespace from the beginning and end of a string.                               |
+| [ucfirst](#ucfirst)                                                                | Capitalizes the first character of a string.                                            |
+| [unique](#unique)                                                                  | Removes duplicate values from an array.                                                 |
+| [unshift](#unshift)                                                                | Prepends one or more items to the beginning of an array.                                |
+| [upper](https://twig.symfony.com/doc/2.x/filters/upper.html)                       | Formats a string into “UPPER CASE”.                                                     |
+| [url_encode](https://twig.symfony.com/doc/2.x/filters/url_encode.html)             | Percent-encodes a string as a URL segment or an array as a query string.                |
+| [values](#values)                                                                  | Returns all the values in an array, resetting its keys.                                 |
+| [where](#where)                                                                    | Filters an array by key/value pairs.                                                    |
+| [withoutKey](#withoutkey)                                                          | Returns an array without the specified key.                                             |
+| [without](#without)                                                                | Returns an array without the specified element(s).                                      |
 
 ## `append`
 
@@ -924,13 +925,27 @@ Craft はロケール固有の時刻のフォーマットを出力するいく�
 {% set filtered = array|withoutKey('baz') %}
 ```
 
+## `removeClass`
+
+Removes a class (or classes) from the given HTML tag.
+
+```twig
+{% set markup = '<p class="apple orange banana">A classy bit of text.</p>' %}
+{{ markup|removeClass('orange') }}
+{# Result: <p class="apple banana">A classy bit of text.</p> #}
+```
+
+```twig
+{% set markup = '<p class="apple orange banana">A classy bit of text.</p>' %}
+{{ markup|removeClass(['orange', 'banana']) }}
+{# Result: <p class="apple">A classy bit of text.</p> #}
+```
+
 ## `replace`
 
-::: tip
-これがどのように機能するかの詳細については、[静的メッセージの翻訳](../sites.md#static-message-translations)を参照してください。
-:::
+Replaces parts of a string with other things.
 
-文字列の最初の文字を大文字にします。
+When a mapping array is passed, this works identically to Twig’s core [`replace`](https://twig.symfony.com/doc/2.x/filters/replace.html) filter:
 
 ```twig
 {% set str = 'Hello, FIRST LAST' %}
@@ -941,7 +956,7 @@ Craft はロケール固有の時刻のフォーマットを出力するいく�
 }) }}
 ```
 
-配列に [array_unique()](http://php.net/manual/en/function.array-unique.php) を実行します。
+Or you can replace one thing at a time:
 
 ```twig
 {% set str = 'Hello, NAME' %}
@@ -949,7 +964,7 @@ Craft はロケール固有の時刻のフォーマットを出力するいく�
 {{ str|replace('NAME', currentUser.name) }}
 ```
 
-1つ以上のアイテムを配列の先頭に追加し、新しい配列を返します。
+You can also use a regular expression to search for matches by starting and ending the replacement string’s value with forward slashes:
 
 ```twig
 {{ tag.title|lower|replace('/[^\\w]+/', '-') }}
@@ -957,7 +972,7 @@ Craft はロケール固有の時刻のフォーマットを出力するいく�
 
 ## `rss`
 
-指定された配列のすべての値の配列を返しますが、カスタムキーは除かれます。
+Outputs a date in the format required for RSS feeds (`D, d M Y H:i:s O`).
 
 ```twig
 {{ entry.postDate|rss }}
@@ -965,7 +980,7 @@ Craft はロケール固有の時刻のフォーマットを出力するいく�
 
 ## `snake`
 
-配列に <craft3:craft\helpers\ArrayHelper::where()> を実行します。
+Returns a string formatted in “snake_case”.
 
 ```twig
 {{ 'foo bar'|snake }}
@@ -974,14 +989,14 @@ Craft はロケール固有の時刻のフォーマットを出力するいく�
 
 ## `time`
 
-指定されたエレメントを除いた配列を返します。
+Outputs the time of day for a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) object.
 
 ```twig
 {{ entry.postDate|time }}
 {# Output: 10:00:00 AM #}
 ```
 
-指定されたキーを除いた配列を返します。
+Craft provides some special format keywords that will output locale-specific time formats:
 
 ```twig
 {{ entry.postDate|time('short') }}
@@ -996,14 +1011,14 @@ Possible `format` values are:
 | `medium` _（デフォルト）_ | 5:00:00 PM     |
 | `long`             | 5:00:00 PM PDT |
 
-デフォルトでは、現在のアプリケーションのロケールが利用されます。 別のロケールで日付と時刻をフォーマットしたい場合、引数 `locale` を利用します。
+The current application locale will be used by default. If you want to format the date and time for a different locale, use the `locale` argument:
 
 ```twig
 {{ entry.postDate|time('short', locale='en-GB') }}
 {# Output: 17:00 #}
 ```
 
-`timezone` パラメータを利用して、出力する時刻のタイムゾーンをカスタマイズできます。
+You can customize the timezone the time is output in, using the `timezone` param:
 
 ```twig
 {{ entry.postDate|time('short', timezone='UTC') }}
@@ -1012,7 +1027,7 @@ Possible `format` values are:
 
 ## `timestamp`
 
-タイムスタンプ、または、[DateTime](http://php.net/manual/en/class.datetime.php) オブジェクトを時刻を含めてフォーマットします。
+Formats a date as a human-readable timestamp, via <craft3:craft\i18n\Formatter::asTimestamp()>.
 
 ```twig
 {{ now|timestamp }}
@@ -1085,7 +1100,7 @@ Capitalizes the first character of a string.
 
 ## `unique`
 
-利用可能なソートフラグについては、PHP の [sort()](https://www.php.net/manual/en/function.sort.php) ドキュメントを参照してください。
+Runs an array through [array_unique()](http://php.net/manual/en/function.array-unique.php).
 
 ```twig
 {% set array = ['Larry', 'Darryl', 'Darryl'] %}
@@ -1095,7 +1110,7 @@ Capitalizes the first character of a string.
 
 ## `unshift`
 
-1つ以上のアイテムを配列の最後に追加し、新しい配列を返します。
+Prepends one or more items to the beginning of an array, and returns the new array.
 
 ```twig
 {% set array1 = ['foo'] %}
