@@ -24,9 +24,11 @@ Once you’ve saved an enabled template, you’ll immediately be able to use it 
 
 ## Downloading a PDF
 
-Once at least one PDF is enabled, you can download it from any order detail page in the control panel.
+Once at least one PDF is enabled, you can download it from the control panel’s order listing or any order detail page.
 
-Visit **Commerce** → **Orders**, choose an order, and then choose **Download PDF** from the top right corner of the page. If multiple PDFs are available, the single download button will download the default PDF and include a dropdown menu for selecting whichever PDF you would like.
+Visit **Commerce** → **Orders**. Check one or more orders in the list and press **Download PDF…** at the top of the page. Choose your desired PDF format and whether you’d prefer a ZIP file containing your document(s) or a single, collated PDF.
+
+You can also click any order and choose **Download PDF** from the top right corner of its detail page. If multiple PDFs are available, the main button will download the default PDF and include a dropdown menu for selecting whichever PDF format you’d like.
 
 ## Including a PDF in an Order Email
 

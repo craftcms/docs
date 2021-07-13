@@ -93,9 +93,14 @@ This would be a way of giving this discount to anyone that’s chosen a specific
 For safety, only a serialized representation of order attributes is available; you can’t call custom field methods from a condition formula.
 :::
 
-### User Groups
+### Users
 
-Limit the discount to selected user groups the customer must belong to when checking out.
+Limit the discount to selected user groups the customer must belong to when checking out. There are four options, where all but the first require that you specify one or more applicable groups:
+
+- **All users**: discount applies to all users regardless of group membership.
+- **Users in all of these groups:**: discount applies to customers belonging to each of the specified groups.
+- **Users in any of these groups:**: discount applies to customers belonging to any one of the specified groups.
+- **Users in none of these groups:**: discount applies to customers not belonging to any of the specified groups.
 
 ### Product Variant
 

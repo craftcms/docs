@@ -172,6 +172,8 @@ If you’re including a [PDF](pdfs.md), it could have its own rendering issues t
 5. **Avoid cart and session references.**\
 Emails are sent by queue processes that don’t have access to sessions or carts that depend on them. References to `craft.commerce.carts.cart` or `craft.commerce.customers.customer`, for example, will result in session-related errors.
 
+Commerce adds email jobs to the queue with [high priority](https://craftcms.com/docs/3.x/extend/queue-jobs.html#specifying-priority) for drivers that support it. This helps ensure outgoing messages don’t get stuck behind slow, long-running tasks.
+
 When an email fails to send in response to a status change, its queue job will be marked as failed and include an appropriate message. Once you fix the cause of the sending failure, you can retry sending the email from the queue via **Utilities** → **Queue Manager**.
 
 ::: tip
