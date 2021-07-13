@@ -54,11 +54,17 @@ This tag will cache a portion of your template, which can improve performance fo
 
 Since the cache tag is for caching output and not logic, avoid caching `{{ csrfInput() }}`, form fields, or parts of templates where dynamic output is expected.
 
-Warning: If you’re suffering from abnormal page load times, you may be experiencing a suboptimal hosting environment. Please consult a specialist before trying `{% cache %}`. `{% cache %}` is not a substitute for fast database connections, efficient templates, or moderate query counts. Possible side effects include stale content, excessively long-running background tasks, stuck tasks, and in rare cases, death. Ask your hosting provider if `{% cache %}` is right for you.
-
 By default, cached output will be kept by URL without regard for the query string.
 
 While carefully-placed `{% cache %}` tags can offer significant boosts to performance, it’s important to know how the cache tag’s parameters can be used to fine-tune its behavior.
+
+::: tip
+The `{% cache %}` tag captures code and styles registered with `{% js %}`, \ `{% script %}` and `{% css %}` tags.
+:::
+
+<small>
+Warning: If you’re suffering from abnormal page load times, you may be experiencing a suboptimal hosting environment. Please consult a specialist before trying <b>{% cache %}</b>. <b>{% cache %}</b> is not a substitute for fast database connections, efficient templates, or moderate query counts. Possible side effects include stale content, excessively long-running background tasks, stuck tasks, and in rare cases, death. Ask your hosting provider if <b>{% cache %}</b> is right for you.
+</small>
 
 ### Parameters
 
@@ -81,7 +87,7 @@ Specifies the name of the key the cache should use. When the key changes, the ta
 ```
 
 ::: warning
-If you change the template code within a `{% cache %}` that uses a custom key, any existing template caches will not automatically be purged. You will either need to assign the tag a new key, or clear your existing template caches manually selecting “Data Caches” in the Utilities → Clear Caches tool.
+If you change template code within a `{% cache %}` that uses a custom key, existing template caches will not automatically be purged. Either assign the tag a new key, or clear your existing template caches manually by navigating to **Utilities** → **Caches** and clearing **Data caches**.
 :::
 
 You can provide a dynamic key and combine it with [globally](#globally) for more control over template caching. For example, you could cache based on the URL *with* the query string that’s ignored by default:
@@ -150,7 +156,7 @@ Prevents the `{% cache %}` tag from activating if a certain condition is met.
 You can only use [if](#if) **_or_** [unless](#unless) in a single `{% cache %}` tag.
 :::
 
-### Cache clearing
+### Cache Clearing
 
 Your template caches will automatically clear when any elements (entries, assets, etc.) within the tags are saved or deleted.
 
@@ -162,7 +168,7 @@ You can also manually clear your template caches from the Utilities page, using 
 php craft invalidate-tags/template
 ```
 
-### When to use `{% cache %}` tags
+### When to Use `{% cache %}` Tags
 
 You should use `{% cache %}` tags any time you’ve got a template that’s causing a lot of database queries, or you’re doing something very computationally expensive with Twig.
 
@@ -176,30 +182,10 @@ There are also some cases where it’s _not_ a good idea to use them:
 
 - Don’t use them to cache static text; that will be more expensive than simply outputting the text.
 - You can’t use them outside of top-level `{% block %}` tags within a template that extends another.
-- The `{% cache %}` tag will only cache HTML, so using tags like [{% css %}](#css) and [{% js %}](#js) inside of it doesn’t make sense because they don’t actually output HTML therefore their output won’t be cached.
 
-    ```twig
-    {% endblock %}
-    {% endcache %}
-
-    {## Good: #}
-
-    {% extends "_layout" %}
-    {% block "content" %}
-        {% cache %}
-            ...
-        {% endcache %}
-    {% endblock %}
-        {## Bad: #}
-
-    {% extends "_layout" %}
-    {% cache %}
-        {% block "content" %}
-            ...
-    ```
-
-
-Tip: The `{% cache %}` tag will detect if there are any ungenerated [image transform](../image-transforms.md) URLs within it. If there are, it will hold off on caching the template until the next request, so those temporary image URLs won’t get cached.
+::: tip
+The `{% cache %}` tag detects ungenerated [image transform](../image-transforms.md) URLs within it. When it finds any, it holds off caching the template until the next request so those temporary image URLs aren’t cached.
+:::
 
 ## `css`
 
