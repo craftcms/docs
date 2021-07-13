@@ -295,6 +295,7 @@ This query is used to query for assets.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -315,6 +316,7 @@ This query is used to query for assets.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `volumeId`| `[QueryArgument]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
 | `volume`| `[String]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ handles.
 | `folderId`| `[QueryArgument]` | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
@@ -337,6 +339,7 @@ This query is used to return the number of assets.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -357,6 +360,7 @@ This query is used to return the number of assets.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `volumeId`| `[QueryArgument]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
 | `volume`| `[String]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ handles.
 | `folderId`| `[QueryArgument]` | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
@@ -379,6 +383,7 @@ This query is used to query for a single asset.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -399,6 +404,7 @@ This query is used to query for a single asset.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `volumeId`| `[QueryArgument]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
 | `volume`| `[String]` | Narrows the query results based on the volumes the assets belong to, per the volumes’ handles.
 | `folderId`| `[QueryArgument]` | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
@@ -421,6 +427,7 @@ This query is used to query for entries.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -441,6 +448,7 @@ This query is used to query for entries.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
@@ -476,6 +484,7 @@ This query is used to return the number of entries.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -496,6 +505,7 @@ This query is used to return the number of entries.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
@@ -531,6 +541,7 @@ This query is used to query for a single entry.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -551,6 +562,7 @@ This query is used to query for a single entry.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
@@ -586,6 +598,7 @@ This query is used to query for global sets.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -606,6 +619,7 @@ This query is used to query for global sets.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `handle`| `[String]` | Narrows the query results based on the global sets’ handles.
 
 ### The `globalSet` query
@@ -617,6 +631,7 @@ This query is used to query for a single global set.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -637,6 +652,7 @@ This query is used to query for a single global set.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `handle`| `[String]` | Narrows the query results based on the global sets’ handles.
 
 ### The `users` query
@@ -648,6 +664,7 @@ This query is used to query for users.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -668,6 +685,7 @@ This query is used to query for users.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `email`| `[String]` | Narrows the query results based on the users’ email addresses.
 | `username`| `[String]` | Narrows the query results based on the users’ usernames.
 | `firstName`| `[String]` | Narrows the query results based on the users’ first names.
@@ -685,6 +703,7 @@ This query is used to return the number of users.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -705,6 +724,7 @@ This query is used to return the number of users.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `email`| `[String]` | Narrows the query results based on the users’ email addresses.
 | `username`| `[String]` | Narrows the query results based on the users’ usernames.
 | `firstName`| `[String]` | Narrows the query results based on the users’ first names.
@@ -722,6 +742,7 @@ This query is used to query for a single user.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -742,6 +763,7 @@ This query is used to query for a single user.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `email`| `[String]` | Narrows the query results based on the users’ email addresses.
 | `username`| `[String]` | Narrows the query results based on the users’ usernames.
 | `firstName`| `[String]` | Narrows the query results based on the users’ first names.
@@ -759,6 +781,7 @@ This query is used to query for tags.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -779,6 +802,7 @@ This query is used to query for tags.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `group`| `[String]` | Narrows the query results based on the tag groups the tags belong to per the group’s handles.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 
@@ -791,6 +815,7 @@ This query is used to return the number of tags.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -811,6 +836,7 @@ This query is used to return the number of tags.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `group`| `[String]` | Narrows the query results based on the tag groups the tags belong to per the group’s handles.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 
@@ -823,6 +849,7 @@ This query is used to query for a single tag.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -843,6 +870,7 @@ This query is used to query for a single tag.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `group`| `[String]` | Narrows the query results based on the tag groups the tags belong to per the group’s handles.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 
@@ -855,6 +883,7 @@ This query is used to query for categories.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -875,6 +904,7 @@ This query is used to query for categories.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
@@ -901,6 +931,7 @@ This query is used to return the number of categories.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -921,6 +952,7 @@ This query is used to return the number of categories.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
@@ -947,6 +979,7 @@ This query is used to query for a single category.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
 | `enabledForSite`| `Boolean` | Narrows the query results based on whether the elements are enabled in the site they’re being queried in, per the `site` argument.
 | `title`| `[String]` | Narrows the query results based on the elements’ titles.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
@@ -967,6 +1000,7 @@ This query is used to query for a single category.
 | `offset`| `Int` | Sets the offset for paginated results.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
@@ -996,7 +1030,7 @@ This directive allows for formatting any date to the desired format. It can be a
 | Argument | Type | Description
 | - | - | -
 | `format`| `String` | This specifies the format to use. This can be `short`, `medium`, `long`, `full`, an [ICU date format](http://userguide.icu-project.org/formatparse/datetime), or a [PHP date format](https://www.php.net/manual/en/function.date.php). It defaults to the [Atom date time format](https://www.php.net/manual/en/class.datetimeinterface.php#datetime.constants.atom]).
-| `timezone`| `String` | The full name of the timezone, defaults to UTC. (E.g., America/New_York)
+| `timezone`| `String` | The full name of the timezone (e.g., America/New_York). Defaults to UTC
 | `locale`| `String` | The locale to use when formatting the date. (E.g., en-US)
 
 
@@ -1043,6 +1077,7 @@ This is the interface implemented by all assets.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
@@ -1082,6 +1117,7 @@ This is the interface implemented by all entries.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
@@ -1109,7 +1145,9 @@ This is the interface implemented by all entries.
 | `postDate`| `DateTime` | The entry's post date.
 | `expiryDate`| `DateTime` | The expiry date of the entry.
 | `children`| `[EntryInterface]` | The entry’s children, if the section is a structure. Accepts the same arguments as the `entries` query.
+| `descendants`| `[EntryInterface]` | The entry’s descendants, if the section is a structure. Accepts the same arguments as the `entries` query.
 | `parent`| `EntryInterface` | The entry’s parent, if the section is a structure.
+| `ancestors`| `[EntryInterface]` | The entry’s ancestors, if the section is a structure. Accepts the same arguments as the `entries` query.
 | `url`| `String` | The element’s full URL
 | `localized`| `[EntryInterface]` | The same element in other locales.
 | `prev`| `EntryInterface` | Returns the previous element relative to this one, from a given set of criteria.
@@ -1129,6 +1167,7 @@ This is the interface implemented by all global sets.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
@@ -1152,6 +1191,7 @@ This is the interface implemented by all matrix blocks.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
@@ -1178,6 +1218,7 @@ This is the interface implemented by all users.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
@@ -1208,6 +1249,7 @@ This is the interface implemented by all categories.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
@@ -1242,6 +1284,7 @@ This is the interface implemented by all tags.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
 | `siteId`| `Int` | The ID of the site the element is associated with.
+| `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
