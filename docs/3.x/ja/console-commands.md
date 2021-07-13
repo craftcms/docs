@@ -1210,6 +1210,52 @@ Updates Craft and/or plugins.
 `--migrate`
 :   Run new database migrations after completing the update.\ boolean, 0 or 1 (defaults to 1)
 
+## `users`
+
+#### `users/create`
+
+Creates a user.
+
+**Options**
+
+`--admin`
+:   Whether the user should be an admin.\ boolean, 0 or 1
+
+`--email`
+:   The user’s email.
+
+`--group-ids`
+:   The group IDs to assign the user to the created user to.\ int[]
+
+`--groups`
+:   The group handles to assign the created user to.\ string[]
+
+`--password`
+:   The user’s new password.
+
+`--username`
+:   The user’s username.
+
+#### `users/delete`
+
+Deletes a user.
+
+**Parameters**
+
+`usernameOrEmail`
+:   The user’s username or email address.
+
+**Options**
+
+`--delete-content`
+:   Whether to delete the user’s content if no inheritor is specified.\ boolean, 0 or 1 (defaults to 0)
+
+`--hard`
+:   Whether the user should be hard-deleted immediately, instead of soft-deleted.\ boolean, 0 or 1 (defaults to 0)
+
+`--inheritor`
+:   The email or username of the user to inherit content when deleting a user.
+
 ## `utils/ascii-filenames`
 
 #### `utils/ascii-filenames/index` <badge>default</badge>
@@ -1228,14 +1274,14 @@ Ensures all element UIDs are unique.
 
 Prunes excess element revisions.
 
-**オプション**
+**Options**
 
 `--max-revisions`
 :   The maximum number of revisions an element can have.
 
 ## `utils/repair`
 
-データを修復します。
+Repairs data.
 
 #### `utils/repair/category-group-structure`
 
@@ -1255,7 +1301,7 @@ Repairs structure data for a category group.
 
 Repairs double-packed associative arrays in the project config.
 
-**オプション**
+**Options**
 
 `--dry-run`
 :   Whether to only do a dry run of the repair process.\ boolean, 0 or 1 (defaults to 0)
@@ -1269,7 +1315,7 @@ Repairs structure data for a section.
 `handle`
 :   The section handle. (required)
 
-**オプション**
+**Options**
 
 `--dry-run`
 :   Whether to only do a dry run of the repair process.\ boolean, 0 or 1 (defaults to 0)
@@ -1278,7 +1324,7 @@ Repairs structure data for a section.
 
 #### `utils/update-usernames/index` <badge>default</badge>
 
-すべてのユーザーのユーザー名を更新して、メールアドレスと一致するようにします。
+Updates all users’ usernames to ensure they match their email address.
 
 **Example**
 
