@@ -599,6 +599,28 @@ Default value : :
 
 
 
+### `httpProxy`
+
+許可される型
+:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+
+デフォルト値
+:   `null`
+
+定義元
+:   [GeneralConfig::$phpMaxMemoryLimit](craft3:craft\config\GeneralConfig::$httpProxy)
+
+Since
+:   3.7.0
+
+
+
+The proxy server that should be used for outgoing HTTP requests.
+
+This can be set to a URL (`http://localhost`) or a URL plus a port (`http://localhost:8125`).
+
+
+
 ### `indexTemplateFilenames`
 
 許可される型
@@ -612,7 +634,7 @@ Default value : :
 
 
 
-フロントエンドでテンプレートパスとファイルの照合をする際に、Craft がディレクトリ内で探すディレクトリの「インデックス」テンプレートに相当するテンプレートファイル名。
+The template filenames Craft will look for within a directory to represent the directory’s “index” template when matching a template path to a file on the front end.
 
 
 
@@ -629,11 +651,11 @@ Default value : :
 
 
 
-プロキシが実際のクライアント IP を保管するヘッダーのリスト。
+List of headers where proxies store the real client IP.
 
-詳細については、[yii\web\Request::$ipHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$ipHeaders-detail) を参照してください。
+See [yii\web\Request::$ipHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$ipHeaders-detail) for more details.
 
-設定されていない場合、デフォルトで [craft\web\Request::$ipHeaders](https://docs.craftcms.com/api/v3/craft-web-request.html#ipheaders) 値が使用されます。
+If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.com/api/v3/craft-web-request.html#ipheaders) value will be used.
 
 
 
@@ -650,7 +672,7 @@ Default value : :
 
 
 
-サイトが現在稼働しているかどうか。 `true` または `false` をセットしている場合、「設定 > 一般」のシステムのステータス設定よりも優先されます。
+Whether the site is currently live. If set to `true` or `false`, it will take precedence over the System Status setting in Settings → General.
 
 
 
@@ -667,10 +689,10 @@ Default value : :
 
 
 
-自動生成されたスラグの ASCII 以外の文字を ASCII に変換するかどうか（例： ñ → n）。
+Whether non-ASCII characters in auto-generated slugs should be converted to ASCII (i.e. ñ → n).
 
 ::: tip
-これは JavaScript によって自動生成されるスラグのみ影響します。 手動で入力した場合、ASCII 以外の文字をスラグに使用できます。 :::
+This only affects the JavaScript auto-generated slugs. Non-ASCII characters can still be used in slugs if entered manually.
 :::
 
 
@@ -688,7 +710,7 @@ Default value : :
 
 
 
-一番古いバックアップの削除を開始する前に、Craft が保持するべきバックアップの数。 `false` がセットされている場合、Craft はバックアップを削除しません。 If set to `false`, Craft will not delete any backups.
+The number of backups Craft should make before it starts deleting the oldest backups. If set to `false`, Craft will not delete any backups.
 
 
 
@@ -703,14 +725,14 @@ Default value : :
 定義元
 :   [GeneralConfig::$maxRevisions](craft3:craft\config\GeneralConfig::$maxRevisions)
 
-それ以降
+Since
 :   3.2.0
 
 
 
-それぞれのエレメントのために保存するリビジョンの最大数。
+The maximum number of revisions that should be stored for each element.
 
-リビジョンを無制限に保存したい場合、`0` をセットしてください。
+Set to `0` if you want to store an unlimited number of revisions.
 
 
 
@@ -727,7 +749,7 @@ Default value : :
 
 
 
-諦めてエラーにする前に、Craft がそれをユニークにするためにスラグへ追加する最高の数。
+The highest number Craft will tack onto a slug in order to make it unique before giving up and throwing an error.
 
 
 
@@ -750,7 +772,7 @@ The default value prevents FLoC tracking due to security & privacy concerns:
 - <https://www.theverge.com/2021/4/16/22387492/google-floc-ad-tech-privacy-browsers-brave-vivaldi-edge-mozilla-chrome-safari>
 - <https://www.bleepingcomputer.com/news/security/wordpress-may-automatically-disable-google-floc-on-websites/>
 
-この機能を無効化するには、`0` をセットしてください。
+This can be set to `null` to prevent the header from being sent.
 
 
 ### `phpMaxMemoryLimit`
@@ -766,9 +788,9 @@ The default value prevents FLoC tracking due to security & privacy concerns:
 
 
 
-Craft が圧縮、展開、アップデートなどのメモリ集約型の操作中に確保しようと試みるメモリの最大量。 デフォルトは空の文字列で、可能な限り多くのメモリを使用することを意味しています。
+The maximum amount of memory Craft will try to reserve during memory-intensive operations such as zipping, unzipping and updating. Defaults to an empty string, which means it will use as much memory as it can.
 
-受け入れられる値については、<http://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> のリストを参照してください。
+See <http://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> for a list of acceptable values.
 
 
 
@@ -785,7 +807,7 @@ Craft が圧縮、展開、アップデートなどのメモリ集約型の操�
 
 
 
-「プライベート」テンプレート（マッチする URL から直接アクセスできないテンプレート）を識別するために使用するテンプレートパスのセグメントの接頭辞。
+The template path segment prefix that should be used to identify “private” templates, which are templates that are not directly accessible via a matching URL.
 
 Set to an empty value to disable public template routing.
 
@@ -802,12 +824,12 @@ Set to an empty value to disable public template routing.
 定義元
 :   [GeneralConfig::$previewIframeResizerOptions](craft3:craft\config\GeneralConfig::$previewIframeResizerOptions)
 
-それ以降
+Since
 :   3.5.0
 
 
 
-プレビューの iframe で使用される、カスタムの[iFrame Resizer オプション](http://davidjbradshaw.github.io/iframe-resizer/#options)。
+Custom [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#options) that should be used for preview iframes.
 
 ```php
 'previewIframeResizerOptions' => [
@@ -830,15 +852,16 @@ Set to an empty value to disable public template routing.
 
 
 
-誰かがコントロールパネルを訪れたときに、Craft が保留中のキュージョブを自動的に実行するかどうか。
+Whether Craft should run pending queue jobs automatically when someone visits the control panel.
 
-無効にした場合、代わりのキューワーカーを [常に稼働しているデーモンとして](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/worker.md)、または、 毎分ごとに `queue/run` コマンドを実行する cron ジョブとして、別途セットアップ *しなければなりません* 。
+If disabled, an alternate queue worker *must* be set up separately, either as an [always-running daemon](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/worker.md), or a cron job that runs the `queue/run` command every minute:
 
 ```cron
 * * * * * /path/to/project/craft queue/run
 ```
 
-をセットすることもできますが、メインのウェブルートにある実際のフォルダやファイルと URI が競合してしまい、コントロールパネルの一部にアクセスできなくなる危険性があります。 （例えば、`assets/` フォルダがある場合、コントロールパネルの `/assets` ページと競合します。
+::: tip
+This setting should be disabled for servers running Win32, or with Apache’s mod_deflate/mod_gzip installed, where PHP’s [flush()](http://php.net/manual/en/function.flush.php) method won’t work.
 :::
 
 
@@ -854,7 +877,7 @@ Set to an empty value to disable public template routing.
 定義元
 :   [GeneralConfig::$sameSiteCookieValue](craft3:craft\config\GeneralConfig::$sameSiteCookieValue)
 
-それ以降
+Since
 :   3.1.33
 
 
@@ -864,7 +887,7 @@ The [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Coo
 This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
 
 ::: tip
-この設定には PHP 7.3 以降が必要です。 :::
+This setting requires PHP 7.3 or later.
 :::
 
 
@@ -882,7 +905,7 @@ This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
 
 
 
-`X-Powered-By: Craft CMS` ヘッダーを送信するかどうか。 [BuiltWith](https://builtwith.com/) や [Wappalyzer](https://www.wappalyzer.com/) のようなサービスで、サイトが Craft で動作していると判別するのを手伝います。
+Whether an `X-Powered-By: Craft CMS` header should be sent, helping services like [BuiltWith](https://builtwith.com/) and [Wappalyzer](https://www.wappalyzer.com/) identify that the site is running on Craft.
 
 
 
@@ -899,7 +922,7 @@ This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
 
 
 
-スラグの単語を区切るために使用する文字。
+The character(s) that should be used to separate words in slugs.
 
 
 
@@ -916,9 +939,9 @@ This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
 
 
 
-すべてのシステムメールをテスト目的の単一のメールアドレス、または、メールアドレスの配列へ送信するよう、Craft を設定します。
+Configures Craft to send all system emails to either a single email address or an array of email addresses for testing purposes.
 
-デフォルトでは受信者名は「テスト受信者」になりますが、`['email@address.com' => 'Name']` の形式で値をカスタマイズできます。
+By default, the recipient name(s) will be “Test Recipient”, but you can customize that by setting the value with the format `['email@address.com' => 'Name']`.
 
 
 
@@ -935,9 +958,9 @@ This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
 
 
 
-サイトのタイムゾーン。 セットされている場合、「設定 > 一般」で設定されたタイムゾーンよりも優先されます。
+The timezone of the site. If set, it will take precedence over the Timezone setting in Settings → General.
 
-これは、PHP の [supported timezones](http://php.net/manual/en/timezones.php) の1つをセットできます。
+This can be set to one of PHP’s [supported timezones](http://php.net/manual/en/timezones.php).
 
 
 
@@ -954,7 +977,7 @@ This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
 
 
 
-`Craft::t()` または `|translate` フィルタを実行されていない文字列を見つけるために、翻訳されたメッセージを特殊文字で囲むかどうか。
+Whether translated messages should be wrapped in special characters to help find any strings that are not being run through `Craft::t()` or the `|translate` filter.
 
 
 
@@ -971,9 +994,9 @@ This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
 
 
 
-ユーザー自身がユーザー名をセットするのではなく、Craft がユーザー名をメールアドレスに合わせるかどうか。
+Whether Craft should set users’ usernames to their email addresses, rather than let them set their username separately.
 
-ユーザーアカウントが既に存在している状態でこの設定を有効にする場合、次のターミナルコマンドを実行して、既存のユーザー名を更新します。
+If you enable this setting after user accounts already exist, run this terminal command to update existing usernames:
 
 ```bash
 php craft utils/update-usernames
@@ -992,20 +1015,21 @@ php craft utils/update-usernames
 定義元
 :   [GeneralConfig::$useIframeResizer](craft3:craft\config\GeneralConfig::$useIframeResizer)
 
-それ以降
+Since
 :   3.5.5
 
 
 
-[iFrame Resizer オプション](http://davidjbradshaw.github.io/iframe-resizer/#options) をライブプレビューに使用するかどうか。
+Whether [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#options) should be used for Live Preview.
 
-iFrame Resizer を使用すると、Craft がクロスオリジンのウェブページ向けにページのロード間でプレビューのスクロール位置を保持できるようになります。
+Using iFrame Resizer makes it possible for Craft to retain the preview’s scroll position between page loads, for cross-origin web pages.
 
-iframe の高さを内部ウェブページの高さに一致するよう設定することで動作し、iframe ドキュメント自体ではなく iframe のコンテナをスクロールさせます。 しかし、プレビューされたビューポートの高さが iframe の表示部分よりも高くなってしまうため、予期せぬ CSS 問題を引き起こす可能性があります。
+It works by setting the height of the iframe to match the height of the inner web page, and the iframe’s container will be scrolled rather than the iframe document itself. This can lead to some unexpected CSS issues, however, because the previewed viewport height will be taller than the visible portion of the iframe.
 
-[分離されたフロントエンド](/docs/3.x/ja/entries.html#previewing-decoupled-front-ends) の場合、期待する動作になるよう [iframeResizer.contentWindow.min.js](https://raw.github.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js) をページに含める必要があります。 リクエスト URL に `x-craft-live-preview` クエリ文字列パラメータが含まれているかを確認することで、ライブプレビューのリクエストだけそれを含めるようにできます。
+If you have a [decoupled front-end](https://craftcms.com/docs/3.x/entries.html#previewing-decoupled-front-ends), you will need to include [iframeResizer.contentWindow.min.js](https://raw.github.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js) on your page as well for this to work. You can conditionally include it for only Live Preview requests by checking if the requested URL contains a `x-craft-live-preview` query string parameter.
 
-で iFrame Resizer の振る舞いをカスタマイズできます。 ::: <config3:previewIframeResizerOptions> config setting.
+::: tip
+You can customize the behavior of iFrame Resizer via the <config3:previewIframeResizerOptions> config setting.
 :::
 
 
@@ -1023,11 +1047,11 @@ iframe の高さを内部ウェブページの高さに一致するよう設定�
 
 
 
-`LOCK_EX` フラグを利用して、書き込む際にファイルを排他ロックするかどうか。
+Whether to grab an exclusive lock on a file when writing to it by using the `LOCK_EX` flag.
 
-NFS のような一部のファイルシステムでは、排他的なファイルロックをサポートしていません。
+Some file systems, such as NFS, do not support exclusive file locking.
 
-`true` または `false` をセットしていない場合、Craft は自動的に基礎となるファイルシステムが排他的なファイルロックをサポートしているかを検出し、結果をキャッシュします。
+If not set to `true` or `false`, Craft will try to detect if the underlying file system supports exclusive file locking and cache the results.
 
 
 
@@ -1053,7 +1077,7 @@ Any custom Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-a
 ### `backupCommand`
 
 許可される型
-:   [string](http://php.net/language.types.string), [string](http://php.net/language.types.string)[]
+:   [string](http://php.net/language.types.string), [false](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
 
 デフォルト値
 :   `null`
@@ -1063,11 +1087,11 @@ Any custom Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-a
 
 
 
-データベースのバックアップを復元するために Craft が実行するシェルコマンド。
+The shell command that Craft should execute to create a database backup.
 
-ウェブサーバーを実行しているユーザーの `$PATH` 変数にライブラリが含まれている場合、デフォルトで Craft は `mysqldump` または `pg_dump` を実行します。
+When set to `null` (default), Craft will run `mysqldump` or `pg_dump`, provided that those libraries are in the `$PATH` variable for the system user running the web server.
 
-ランタイムで Craft がスワップアウトするために利用できるいくつかのトークンがあります。
+You may provide your own command optionally using several tokens Craft will swap out at runtime:
 
 - `{path}` - バックアップファイルのパス
 - `{port}` - 現在のデータベースポート
@@ -1076,7 +1100,7 @@ Any custom Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-a
 - `{database}` - 現在のデータベース名
 - `{schema}` - （もしある場合）現在のデータベーススキーマ
 
-データベースの復元を完全に無効化するために、`false` をセットすることもできます。
+This can also be set to `false` to disable database backups completely.
 
 
 
@@ -1093,7 +1117,7 @@ Any custom Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-a
 
 
 
-Craft によって生成される Cookie が作成されるべきドメイン。 空白の場合、使用するドメイン（ほとんどの場合、現在のもの）の決定はブラウザに任されます。 すべてのサブドメインで機能する Cookie を望むなら、例えば、ここに `'.domain.com'` をセットします。
+The domain that cookies generated by Craft should be created for. If blank, it will be left up to the browser to determine which domain to use (almost always the current). If you want the cookies to work for all subdomains, for example, you could set this to `'.domain.com'`.
 
 
 
@@ -1110,7 +1134,7 @@ Craft によって生成される Cookie が作成されるべきドメイン。
 
 
 
-公開されたコントロールパネルのリソースを保管するルートディレクトリのパス。
+The path to the root directory that should store published control panel resources.
 
 
 
@@ -1127,7 +1151,7 @@ Craft によって生成される Cookie が作成されるべきドメイン。
 
 
 
-公開されたコントロールパネルのリソースを保管するルートディレクトリの URL。
+The URL to the root directory that should store published control panel resources.
 
 
 
@@ -1146,7 +1170,7 @@ Craft によって生成される Cookie が作成されるべきドメイン。
 
 The shell command Craft should execute to restore a database backup.
 
-ウェブサーバーを実行しているユーザーの `$PATH` 変数にライブラリが含まれている場合、デフォルトで Craft は `mysql` または `psql` を実行します。
+By default Craft will run `mysql` or `psql`, provided those libraries are in the `$PATH` variable for the user the web server is running as.
 
 There are several tokens you can use that Craft will swap out at runtime:
 
@@ -1157,7 +1181,7 @@ There are several tokens you can use that Craft will swap out at runtime:
 - `{schema}` - （もしある場合）現在のデータベーススキーマ
 - `{schema}` - the current database schema (if any)
 
-この機能を完全に無効化するには、`0` をセットしてください。
+This can also be set to `false` to disable database restores completely.
 
 
 
@@ -1193,9 +1217,9 @@ The URI segment Craft should look for when determining if the current request sh
 
 
 
-コントロールパネルにアクセスできないユーザーが、新しいメールアドレスを確認したときにリダイレクトする URI。
+The URI that users without access to the control panel should be redirected to after activating their account.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1212,7 +1236,7 @@ The URI segment Craft should look for when determining if the current request sh
 
 
 
-生成された URL が `index.php` を省略するかどうか（例：`http://domain.com/index.php/path` の代わりに `http://domain.com/path`）。
+Whether auto-generated URLs should have trailing slashes.
 
 
 
@@ -1271,13 +1295,13 @@ The base control panel URL should **not** include the [control panel trigger wor
 
 The URI segment Craft should look for when determining if the current request should route to the control panel rather than the front-end website.
 
-コントロールパネル専用のホスト名（例：`cms.example.com`）を持っていたり、Craft を[ヘッドレスモード](config3:headlessMode)で稼働している場合、`null` をセットできます。 その場合、サーバーのウェブルートディレクトリにある PHP 定数 `CRAFT_CP` を定義した `index.php` ファイルからコントロールパネルが配信されていることを確認する必要があります。
+This can be set to `null` if you have a dedicated host name for the control panel (e.g. `cms.example.com`), or you are running Craft in [Headless Mode](config3:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own webroot directory on your server, with an `index.php` file that defines the `CRAFT_CP` PHP constant.
 
 ```php
 define('CRAFT_CP', true);
 ```
 
-をセットすることもできます。 ::: <config3:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your control panel due to URI conflicts with actual folders/files in your main webroot.
+Alternatively, you can set the <config3:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your control panel due to URI conflicts with actual folders/files in your main webroot.
 
 (For example, if you have an `assets/` folder, that would conflict with the `/assets` page in the control panel.)
 
@@ -1296,9 +1320,9 @@ define('CRAFT_CP', true);
 
 
 
-ユーザートークンの検証が失敗した際に、Craft がリダイレクトする URI。 トークンは、ユーザーアカウントのパスワードの設定やリセットで利用されます。 フロントエンドサイトのリクエストのみに影響することに注意してください。
+The URI Craft should redirect to when user token validation fails. A token is used on things like setting and resetting user account passwords. Note that this only affects front-end site requests.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1315,13 +1339,13 @@ define('CRAFT_CP', true);
 
 
 
-Craft がフロントエンドのユーザーログインに使用する URI。
+The URI Craft should use for user login on the front end.
 
-フロントエンドのログインを無効にする場合、`false` をセットします。
+This can be set to `false` to disable front-end login.
 
-この設定は、 <config3:headlessMode> is enabled.
+Note that this config setting is ignored when <config3:headlessMode> is enabled.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1338,13 +1362,13 @@ Craft がフロントエンドのユーザーログインに使用する URI。
 
 
 
-Craft がフロントエンドのユーザーログアウトに使用する URI。
+The URI Craft should use for user logout on the front end.
 
-フロントエンドのログアウトを無効にする場合、`false` をセットします。
+This can be set to `false` to disable front-end logout.
 
 Note that this config setting is ignored when <config3:headlessMode> is enabled.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1361,9 +1385,9 @@ Note that this config setting is ignored when <config3:headlessMode> is enabled.
 
 
 
-URL は `http://`、`https://`、`//`（プロトコル相対）、または、[エイリアス](config3:aliases)のいずれかではじまる必要があります。
+Whether generated URLs should omit `index.php` (e.g. `http://domain.com/path` instead of `http://domain.com/index.php/path`)
 
-これは、例えば Craft に付属している  `.htaccess` にリダイレクトが見つかるなど、404 を `index.php` にリダイレクトするようサーバーが設定されている場合のみ可能です。
+This can only be possible if your server is configured to redirect would-be 404's to `index.php`, for example, with the redirect found in the `.htaccess` file that came with Craft:
 
 ```
 RewriteEngine On
@@ -1387,7 +1411,7 @@ RewriteRule (.+) /index.php?p= [QSA,L]
 
 
 
-現在のリクエストがページ分割されたリストに含まれる特定ページのものかどうかを決定する際に、Craft が探す数値の前にある文字列。
+The string preceding a number which Craft will look for when determining if the current request is for a particular page in a paginated list of pages.
 
 | サンプル値   | サンプル URI       |
 | ------- | -------------- |
@@ -1397,7 +1421,7 @@ RewriteRule (.+) /index.php?p= [QSA,L]
 | `?page` | `/news?page=5` |
 
 ::: tip
-これを `?p`（例：`/news?p=5`）にセットしたい場合、デフォルトで `p` がセットされている <config3:pathParam> setting which defaults to `p`. さらにサーバーが Apache で稼働している場合、新しい `pathParam` 値とマッチするよう `.htaccess` ファイル内のリダイレクトコードをアップデートする必要があります。 :::
+If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change your <config3:pathParam> setting which defaults to `p`. If your server is running Apache, you’ll need to update the redirect code in your `.htaccess` file to match your new `pathParam` value.
 :::
 
 
@@ -1414,9 +1438,9 @@ RewriteRule (.+) /index.php?p= [QSA,L]
 
 
 
-リクエストのパスを決定する際に、Craft がチェックするクエリ文字列のパラメータ。
+The query string param that Craft will check when determining the request’s path.
 
-ウェブサーバーがクエリ文字列のパラメータなしで `index.php` にトラフィックを誘導できる場合、`null` をセットできます。 Apache を利用している場合、`.htaccess` の `RewriteRule` 行を次のように変更する必要があります。
+This can be set to `null` if your web server is capable of directing traffic to `index.php` without a query string param. If you’re using Apache, that means you’ll need to change the `RewriteRule` line in your `.htaccess` file to:
 
 ```
 RewriteRule (.+) index.php [QSA,L]
@@ -1435,11 +1459,11 @@ RewriteRule (.+) index.php [QSA,L]
 
 
 
-コントロールパネルからログインした後にユーザーをリダイレクトするパス。
+The path users should be redirected to after logging into the control panel.
 
-すでにログインしているユーザーがコントロールパネルのログインページ（`/admin/login`）または、コントロールパネルのルート URL（/admin）にアクセスした場合も、この設定が効力を発揮します。
+This setting will also come into effect if a user visits the control panel’s login page (`/admin/login`) or the control panel’s root URL (`/admin`) when they are already logged in.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1456,9 +1480,9 @@ RewriteRule (.+) index.php [QSA,L]
 
 
 
-フロントエンドサイトからログインした後にユーザーをリダイレクトするパス。
+The path users should be redirected to after logging in from the front-end site.
 
-すでにログインしているユーザーがログインページ（コンフィグ設定 loginPath に明示されているとおり）にアクセスした場合も、効力を発揮します。 <config3:loginPath> config setting) when they are already logged in.
+This setting will also come into effect if the user visits the login page (as specified by the <config3:loginPath> config setting) when they are already logged in.
 
 サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
 
@@ -1477,9 +1501,9 @@ RewriteRule (.+) index.php [QSA,L]
 
 
 
-フロントエンドサイトからログアウトした後にユーザーをリダイレクトするパス。
+The path that users should be redirected to after logging out from the front-end site.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1496,14 +1520,14 @@ RewriteRule (.+) index.php [QSA,L]
 
 
 
-Craft がフロントエンドのパスワードの設定フォームに使用する URI。
+The URI or URL that Craft should use for Set Password forms on the front end.
 
 Note that this config setting is ignored when <config3:headlessMode> is enabled, unless it’s set to an absolute URL.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: tip
-コンフィグ設定 <config3:invalidUserTokenPath> ::: tip ユーザーが期限切れのパスワードリセットリンクをクリックした場合に備えて、
+You might also want to set <config3:invalidUserTokenPath> in case a user clicks on an expired password reset link.
 :::
 
 
@@ -1519,16 +1543,16 @@ Note that this config setting is ignored when <config3:headlessMode> is enabled,
 定義元
 :   [GeneralConfig::$setPasswordRequestPath](craft3:craft\config\GeneralConfig::$setPasswordRequestPath)
 
-それ以降
+Since
 :   3.5.14
 
 
 
 The URI to the page where users can request to change their password.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
-Craft がフロントエンドからパスワードを設定したユーザーをリダイレクトさせる URI。
+If this is set, Craft will redirect [.well-known/change-password requests](https://w3c.github.io/webappsec-change-password-url/) to this URI.
 
 ::: tip
 You’ll also need to set [setPasswordPath](config3:setPasswordPath), which determines the URI and template path for the Set Password form where the user resets their password after following the link in the Password Reset email.
@@ -1549,9 +1573,9 @@ You’ll also need to set [setPasswordPath](config3:setPasswordPath), which dete
 
 
 
-Craft がフロントエンドのメールアドレスの確認リンクに使用する URI。
+The URI Craft should redirect users to after setting their password from the front end.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1566,12 +1590,12 @@ Craft がフロントエンドのメールアドレスの確認リンクに使�
 定義元
 :   [GeneralConfig::$siteToken](craft3:craft\config\GeneralConfig::$siteToken)
 
-それ以降
+Since
 :   3.5.0
 
 
 
-サイトのトークンがセットされるクエリ文字列パラメータ名。
+The query string parameter name that site tokens should be set to.
 
 
 
@@ -1588,7 +1612,7 @@ Craft がフロントエンドのメールアドレスの確認リンクに使�
 
 
 
-Craft のトークンがセットされるクエリ文字列パラメータ名。
+The query string parameter name that Craft tokens should be set to.
 
 
 
@@ -1605,9 +1629,9 @@ Craft のトークンがセットされるクエリ文字列パラメータ名�
 
 
 
-Craft が URL を生成する際、`PATH_INFO` を利用してパスを指定するか、クエリ文字列パラメータとして指定するかどうか。
+Whether Craft should specify the path using `PATH_INFO` or as a query string parameter when generating URLs.
 
-が false にセットされている場合のみ影響することに注意してください。 <config3:omitScriptNameInUrls> `true` をセットすると、画像ファイルのサイズが大きくなります。
+Note that this setting only takes effect if <config3:omitScriptNameInUrls> is set to `false`.
 
 
 
@@ -1624,9 +1648,9 @@ Craft が URL を生成する際、`PATH_INFO` を利用してパスを指定す
 
 
 
-トークン化された URL を生成する際に、Craft が使用するプロトコル / スキーマを決定します。 `'auto'` をセットすると、Craft は現在のリクエストの siteUrl とプロトコルをチェックし、いずれかが https であればトークン化された URL で `https` を使用します。 そうでなければ、`http` を使用します。
+Determines what protocol/schema Craft will use when generating tokenized URLs. If set to `'auto'`, Craft will check the current site’s base URL and the protocol of the current request and if either of them are https will use `https` in the tokenized URL. If not, will use `http`.
 
-`false` をセットすると、Craft は常に `http` を使用します。 そして、`true` をセットすると、Craft は常に `https` を使用します。
+If set to `false`, Craft will always use `http`. If set to `true`, then, Craft will always use `https`.
 
 
 
@@ -1650,7 +1674,7 @@ The URI or URL that Craft should use for email verification links on the front e
 
 Note that this config setting is ignored when <config3:headlessMode> is enabled, unless it’s set to an absolute URL.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-sizeinbytes) のリストを参照してください。
+サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
 
 
 
@@ -1665,14 +1689,14 @@ Note that this config setting is ignored when <config3:headlessMode> is enabled,
 定義元
 :   [GeneralConfig::$verifyEmailSuccessPath](craft3:craft\config\GeneralConfig::$verifyEmailSuccessPath)
 
-それ以降
+Since
 :   3.1.20
 
 
 
 The URI that users without access to the control panel should be redirected to after verifying a new email address.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1691,7 +1715,7 @@ The URI that users without access to the control panel should be redirected to a
 
 
 
-PHP セッション Cookie の名前。
+The name of the PHP session cookie.
 
 
 
@@ -1708,11 +1732,11 @@ PHP セッション Cookie の名前。
 
 
 
-コントロールパネルのログインページへ自動挿入するために、Craft がユーザー名を記憶しておく時間。
+The amount of time Craft will remember a username and pre-populate it on the control panel’s Login page.
 
-この機能を無効化するには、`0` をセットしてください。
+Set to `0` to disable this feature altogether.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -1729,11 +1753,11 @@ PHP セッション Cookie の名前。
 
 
 
-ログインページで「ログイン状態を維持する」がチェックされている場合、ユーザーがログインしたままになる時間。
+The amount of time a user stays logged if “Remember Me” is checked on the login page.
 
-この機能を無効化するには、`0` をセットしてください。
+Set to `0` to disable the “Remember Me” feature altogether.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -1750,7 +1774,7 @@ PHP セッション Cookie の名前。
 
 
 
-Cookie からユーザーセッションを復元する際に、一致するユーザーエージェントの文字列を Craft が必要とするかどうか。
+Whether Craft should require a matching user agent string when restoring a user session from a cookie.
 
 
 
@@ -1767,7 +1791,7 @@ Cookie からユーザーセッションを復元する際に、一致するユ�
 
 
 
-新しいユーザーセッションを作成する際に、ユーザーエージェントの文字列と IP アドレスの存在を Craft が必要とするかどうか。
+Whether Craft should require the existence of a user agent string and IP address when creating a new user session.
 
 
 
@@ -1784,11 +1808,11 @@ Cookie からユーザーセッションを復元する際に、一致するユ�
 
 
 
-ユーザーがアクティブではないためにログアウトするまでの時間。
+The amount of time before a user will get logged out due to inactivity.
 
-事前に決定した時間ではなく、ユーザーがブラウザを開いている間はログインしたままにしておきたい場合は、`0` をセットします。
+Set to `0` if you want users to stay logged in as long as their browser is open rather than a predetermined amount of time.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -1807,9 +1831,9 @@ Cookie からユーザーセッションを復元する際に、一致するユ�
 
 
 
-コスト値が高いと、パスワードハッシュの生成とそれに対する検証に時間がかかります。
+The higher the cost value, the longer it takes to generate a password hash and to verify against it.
 
-そのため、より高いコストはブルートフォース攻撃を遅くさせます。
+Therefore, higher cost slows down a brute-force attack.
 
 For best protection against brute force attacks, set it to the highest value that is tolerable on production servers.
 
@@ -1834,9 +1858,9 @@ For example, if the hash takes 1 second to compute when the value is 14 then the
 
 The amount of time a user must wait before re-attempting to log in after their account is locked due to too many failed login attempts.
 
-「ログイン状態を維持する」機能を完全に無効化するには、`0` をセットしてください。
+Set to `0` to keep the account locked indefinitely, requiring an admin to manually unlock the account.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -1853,7 +1877,7 @@ The amount of time a user must wait before re-attempting to log in after their a
 
 
 
-が `true` にセットされている場合、CSRF の検証に使用される CSRF トークン名。 <config3:enableCsrfProtection> `'Lax'`、`'Strict'`、または、`null` をセットできます。
+The name of CSRF token used for CSRF validation if <config3:enableCsrfProtection> is set to `true`.
 
 
 
@@ -1870,9 +1894,9 @@ The amount of time a user must wait before re-attempting to log in after their a
 
 
 
-トークンが期限切れになる前に使用できるデフォルトの時間。
+The default amount of time tokens can be used before expiring.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -1889,9 +1913,9 @@ The amount of time a user must wait before re-attempting to log in after their a
 
 
 
-デフォルトでは、フロントエンドの一般ユーザー登録で「パスワード」フィールドを送信する必要があります。 `true` をセットすると、最初の登録フォームでパスワードを必要としなくなります。
+By default, Craft will require a ‘password’ field to be submitted on front-end, public user registrations. Setting this to `true` will no longer require it on the initial registration form.
 
-メールアドレスの確認が有効になっている場合、新しいユーザーは通知メールに記載されたリンクをクリックしてパスワードを設定できます。 そうでなければ、「パスワードを忘れた」際のワークフローを経由することがパスワードをセットできる唯一の方法となります。
+If you have email verification enabled, new users will set their password once they’ve clicked on the verification link in the email. If you don’t, the only way they can set their password is to go through your “forgot password” workflow.
 
 
 
@@ -1911,7 +1935,7 @@ Since
 
 
 
-フロントエンドのウェブリクエストが基本的な HTTP 認証をサポートするかどうか。
+Whether front-end web requests should support basic HTTP authentication.
 
 
 
@@ -1928,7 +1952,7 @@ Since
 
 
 
-Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtection> が有効な場合、CSRF トークンを保持するために Cookie を使用するかどうか。 false の場合、CSRF トークンはコンフィグ設定 `csrfTokenName` 配下のセッション内に保管されます。 セッションの CSRF トークンを保存することでセキュリティが向上している間は、CSRF トークンを必要とされるすべてのページでセッションを開始する必要があるため、サイトのパフォーマンスは低下する可能性がある点に注意してください。
+Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtection> is enabled. If false, the CSRF token will be stored in session under the `csrfTokenName` config setting name. Note that while storing CSRF tokens in session increases security, it requires starting a session for every page that a CSRF token is needed, which may degrade site performance.
 
 
 
@@ -1945,11 +1969,11 @@ Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtecti
 
 
 
-機密性の高い操作（例：ユーザーのグループや権限の割り当てなど）に必要な、ユーザーの昇格されたセッションの時間。
+The amount of time a user’s elevated session will last, which is required for some sensitive actions (e.g. user group/permission assignment).
 
-昇格されたセッションのサポートを無効化するには、`0` をセットしてください。
+Set to `0` to disable elevated session support.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -1966,7 +1990,7 @@ Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtecti
 
 
 
-Craft 経由で送信されるすべてのフォームで、不可視項目による CSRF 保護を有効にするかどうか。
+Whether to enable CSRF protection via hidden form inputs for all forms submitted via Craft.
 
 
 
@@ -1983,9 +2007,9 @@ Craft 経由で送信されるすべてのフォームで、不可視項目に�
 
 
 
-Craft がアカウントをロックするかを決定するために、ユーザーの無効なログイン試行を追跡する時間。
+The amount of time to track invalid login attempts for a user, for determining if Craft should lock an account.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -2002,7 +2026,7 @@ Craft がアカウントをロックするかを決定するために、ユー�
 
 
 
-ロックされる前のアカウントが指定期間内で Craft に許可される、無効なログイン試行の回数。
+The number of invalid login attempts Craft will allow within the specified duration before the account gets locked.
 
 
 
@@ -2019,9 +2043,33 @@ Craft がアカウントをロックするかを決定するために、ユー�
 
 
 
-`true` をセットすると、ユーザーを列挙するのが難しいエラーである場合も、常に正常なレスポンスを受け取るでしょう。
+When `true`, Craft will always return a successful response in the “forgot password” flow, making it difficult to enumerate users.
 
-`false` がセットされ、コントロールパネルのログインページの「パスワードを忘れた」ワークフローを通過すると、ユーザー名 / メールアドレスが存在しないのか、または、次の手順のためのメール送信が成功し確認されたのかを示す別個のメッセージが表示されます。 This can be helpful for the user attempting to log in but allow for username/email enumeration based on the response.
+When set to `false` and you go through the “forgot password” flow from the control panel login page, you’ll get distinct messages indicating whether the username/email exists and whether an email was sent with further instructions. This can be helpful for the user attempting to log in but allow for username/email enumeration based on the response.
+
+
+
+
+
+### `previewTokenDuration`
+
+許可される型
+:   `mixed`
+
+デフォルト値
+:   `86400` (1 day)
+
+定義元
+:   [GeneralConfig::$previewTokenDuration](craft3:craft\config\GeneralConfig::$previewTokenDuration)
+
+Since
+:   3.7.0
+
+The amount of time content preview tokens can be used before expiring.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+
 
 
 
@@ -2058,9 +2106,9 @@ Whether images uploaded via the control panel should be sanitized.
 
 
 
-Craft がアップロードされた SVG ファイルをサニタイズし、潜在的な悪意のあるコンテンツを取り除くべきかどうか。
+Whether Craft should sanitize uploaded SVG files and strip out potential malicious-looking content.
 
-信頼できないソースから SVG アップロードを許可する場合は、これを確実に有効にするべきです。
+This should definitely be enabled if you are accepting SVG uploads from untrusted sources.
 
 
 
@@ -2077,9 +2125,9 @@ Craft がアップロードされた SVG ファイルをサニタイズし、潜
 
 
 
-[craft\services\Security](craft3:craft\services\Security) のデータのハッシングや暗号化に使われる、非公開でランダムな暗号的に安全な鍵。
+A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](craft3:craft\services\Security).
 
-この値は、すべての環境で同じであるべきです。 この鍵を変更した場合、暗号化されたいかなるデータにもアクセスできなくなることに注意してください。
+This value should be the same across all environments. If this key ever changes, any data that was encrypted with it will be inaccessible.
 
 
 
@@ -2096,11 +2144,11 @@ Craft がアップロードされた SVG ファイルをサニタイズし、潜
 
 
 
-デフォルトで、信頼できるホスト設定の適用を受けるヘッダーのリスト。
+Lists of headers that are, by default, subject to the trusted host configuration.
 
-詳細については、[yii\web\Request::$secureHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureHeaders-detail) を参照してください。
+See [yii\web\Request::$secureHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureHeaders-detail) for more details.
 
-設定されていない場合、デフォルトで [yii\web\Request::$secureHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureHeaders-detail) 値が使用されます。
+If not set, the default [yii\web\Request::$secureHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureHeaders-detail) value will be used.
 
 
 
@@ -2117,11 +2165,11 @@ Craft がアップロードされた SVG ファイルをサニタイズし、潜
 
 
 
-HTTPS 経由で接続されるかどうかを決定するための確認を行うヘッダーのリスト。
+List of headers to check for determining whether the connection is made via HTTPS.
 
-詳細については、[yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) を参照してください。
+See [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) for more details.
 
-設定されていない場合、デフォルトで [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) 値が使用されます。
+If not set, the default [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) value will be used.
 
 
 
@@ -2141,7 +2189,7 @@ Since
 
 
 
-ユーザーの IP アドレスがシステムによって保存 / 記録されるべきかどうか。
+Whether user IP addresses should be stored/logged by the system.
 
 
 
@@ -2158,11 +2206,11 @@ Since
 
 
 
-信頼されるセキュリティ関連のヘッダーの設定。
+The configuration for trusted security-related headers.
 
-詳細については、[yii\web\Request::$trustedHosts](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$trustedHosts-detail) を参照してください。
+See [yii\web\Request::$trustedHosts](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$trustedHosts-detail) for more details.
 
-デフォルトでは、すべてのホストが信頼されます。
+By default, all hosts are trusted.
 
 
 
@@ -2179,9 +2227,9 @@ Since
 
 
 
-`Cookie を作成するために Craft::cookieConfig()` を使用した際、Craft が保存する Cookie に "secure" フラグをセットするかどうか。
+Whether Craft will set the “secure” flag when saving cookies when using `Craft::cookieConfig()` to create a cookie.
 
-有効な値は `true`、`false`、および、`'auto'` です。 デフォルトは `'auto'` で、現在のアクセスが `https://` 越しの場合に、secure フラグがセットされます。 `true` はプロトコルに関係なく常にフラグをセットし、`false` は自動的にフラグをセットすることはありません。
+Valid values are `true`, `false`, and `'auto'`. Defaults to `'auto'`, which will set the secure flag if the page you’re currently accessing is over `https://`. `true` will always set the flag, regardless of protocol and `false` will never automatically set the flag.
 
 
 
@@ -2198,9 +2246,9 @@ Since
 
 
 
-期限切れになる前に、ユーザー確認コードを使用できる時間。
+The amount of time a user verification code can be used before expiring.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -2212,7 +2260,7 @@ Since
 :   [string](http://php.net/language.types.string)[]
 
 デフォルト値
-:   `['7z', 'aiff', 'asf', 'avi', 'bmp', 'csv', 'doc', 'docx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'htm', 'html', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'm2t', 'mid', 'mov', 'mp3', 'mp4', 'm4a', 'm4v', 'mpc', 'mpeg', 'mpg', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rtf', 'sdc', 'sitd', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tgz', 'tif', 'tiff', 'txt', 'vob', 'vsd', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'zip']`
+:   `['7z', 'aiff', 'asc', 'asf', 'avi', 'bmp', 'cap', 'cin', 'csv', 'dfxp', 'doc', 'docx', 'dotm', 'dotx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'itt', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'lrc', 'm2t', 'm4a', 'm4v', 'mcc', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'mpsub', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rt', 'rtf', 'sami', 'sbv', 'scc', 'sdc', 'sitd', 'smi', 'srt', 'stl', 'sub', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tds', 'tgz', 'tif', 'tiff', 'ttml', 'txt', 'vob', 'vsd', 'vtt', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'xml', 'zip']`
 
 定義元
 :   [GeneralConfig::$allowedFileExtensions](craft3:craft\config\GeneralConfig::$allowedFileExtensions)
@@ -2260,7 +2308,7 @@ Since
 
 
 
-Craft がサポートすべき追加のファイル種類のリスト。 この配列は `\craft\helpers\Assets::_buildFileKinds()` 内で定義されたものとマージされます。
+List of additional file kinds Craft should support. This array will get merged with the one defined in `\craft\helpers\Assets::_buildFileKinds()`.
 
 ```php
 'extraFileKinds' => [
@@ -2277,7 +2325,7 @@ Craft がサポートすべき追加のファイル種類のリスト。 この�
 ```
 
 ::: tip
-ここにリストされたファイル拡張子が、即座にアップロードを許可されるわけではありません。 でそれらをリストする必要もあります。 ::: <config3:extraAllowedFileExtensions> config setting.
+File extensions listed here won’t immediately be allowed to be uploaded. You will also need to list them with the <config3:extraAllowedFileExtensions> config setting.
 :::
 
 
@@ -2295,7 +2343,7 @@ Craft がサポートすべき追加のファイル種類のリスト。 この�
 
 
 
-アセットをアップロードする際に、単語を区切るために使用する文字列。 `false` の場合、空白だけが残ります。
+The string to use to separate words when uploading Assets. If set to `false`, spaces will be left alone.
 
 
 
@@ -2312,9 +2360,30 @@ Craft がサポートすべき追加のファイル種類のリスト。 この�
 
 
 
-許可される最大のアップロードファイルサイズ。
+The maximum upload file size allowed.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
+See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-sizeinbytes) for a list of supported value types.
+
+
+
+
+### `revAssetUrls`
+
+許可される型
+:   [boolean](http://php.net/language.types.boolean)
+
+デフォルト値
+:   `false`
+
+定義元
+:   [GeneralConfig::$revAssetUrls](craft3:craft\config\GeneralConfig::$revAssetUrls)
+
+Since:
+:   3.7.0
+
+
+
+Whether asset URLs should be revved so browsers don’t load cached versions when they’re modified.
 
 
 
@@ -2355,7 +2424,7 @@ This can be set to an aliased path such as `@webroot/assets/404.svg`.
 
 
 
-JPG と PNG ファイルを保存する際に、Craft が使用する品質レベル。 0（最低品質、最小ファイルサイズ）から100（最高品質、最大ファイルサイズ）までの範囲。
+The quality level Craft will use when saving JPG and PNG files. Ranges from 1 (worst quality, smallest file) to 100 (best quality, biggest file).
 
 
 
@@ -2372,7 +2441,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 
 
 
-ページの読み込み前に画像変換によるサムネイルの生成をするかどうか。
+Whether image transforms should be generated before page load.
 
 
 
@@ -2389,7 +2458,7 @@ JPG と PNG ファイルを保存する際に、Craft が使用する品質レ�
 
 
 
-Craft が画像の削除や変形で使用するイメージドライバ。 デフォルトでは、Craft はインストールされている ImageMagick を自動検出し、そうでない場合は GD をフォールバックします。 明示的に `'imagick'` または `'gd'` をセットして、その振る舞いを上書きできます。
+The image driver Craft should use to cleanse and transform images. By default Craft will use ImageMagick if it’s installed and otherwise fall back to GD. You can explicitly set either `'imagick'` or `'gd'` here to override that behavior.
 
 
 
@@ -2406,7 +2475,7 @@ Craft が画像の削除や変形で使用するイメージドライバ。 デ�
 
 
 
-イメージエディタで選択可能な画像のアスペクト比を含む配列。 The array must be in the format of `label` => `ratio`, where ratio must be a float or a string. For string values, only values of “none” and “original” are allowed.
+An array containing the selectable image aspect ratios for the image editor. The array must be in the format of `label` => `ratio`, where ratio must be a float or a string. For string values, only values of “none” and “original” are allowed.
 
 
 
@@ -2423,7 +2492,7 @@ Craft が画像の削除や変形で使用するイメージドライバ。 デ�
 
 
 
-変換で使用する外部ソースから画像をキャッシュする際に使用する最大の寸法サイズ。 キャッシュを無効化するには、`0` をセットしてください。
+The maximum dimension size to use when caching images from external sources to use in transforms. Set to `0` to never cache them.
 
 
 
@@ -2440,7 +2509,7 @@ Craft が画像の削除や変形で使用するイメージドライバ。 デ�
 
 
 
-Craft が画質を著しく低下させることなく、画像のファイルサイズを減らす最適化をするかどうか。 （ImageMagick を利用している場合のみ、サポートされます。 (Only supported when ImageMagick is used.)
+Whether Craft should optimize images for reduced file sizes without noticeably reducing image quality. (Only supported when ImageMagick is used.)
 
 
 
@@ -2460,9 +2529,9 @@ Since
 
 
 
-画像を操作するとき、CMYK を色空間として保存するかどうか。
+Whether CMYK should be preserved as the colorspace when manipulating images.
 
-Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions it can cause image color distortion. これは ImageMagick を利用している場合のみ、影響があります。
+Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions it can cause image color distortion. This will only have an effect if ImageMagick is in use.
 
 
 
@@ -2479,11 +2548,11 @@ Setting this to `true` will prevent Craft from transforming CMYK images to sRGB,
 
 
 
-画像の操作やアップロードをするとき、EXIF データを保存するかどうか。
+Whether the EXIF data should be preserved when manipulating and uploading images.
 
-`false` をセットすると画像サイズが少し小さくなります。
+Setting this to `true` will result in larger image file sizes.
 
-これは ImageMagick を利用している場合のみ、影響があります。
+This will only have effect if ImageMagick is in use.
 
 
 
@@ -2500,9 +2569,9 @@ Setting this to `true` will prevent Craft from transforming CMYK images to sRGB,
 
 
 
-画像を操作するとき、埋め込まれたイメージカラープロファイル（ICC）を保存するかどうか。
+Whether the embedded Image Color Profile (ICC) should be preserved when manipulating images.
 
-Setting this to `false` will reduce the image size a little bit, but on some ImageMagick versions can cause images to be saved with an incorrect gamma value, which causes the images to become very dark. これは ImageMagick を利用している場合のみ、影響があります。
+Setting this to `false` will reduce the image size a little bit, but on some ImageMagick versions can cause images to be saved with an incorrect gamma value, which causes the images to become very dark. This will only have effect if ImageMagick is in use.
 
 
 
@@ -2517,7 +2586,7 @@ Setting this to `false` will reduce the image size a little bit, but on some Ima
 定義元
 :   [GeneralConfig::$rasterizeSvgThumbs](craft3:craft\config\GeneralConfig::$rasterizeSvgThumbs)
 
-Since
+それ以降
 :   3.6.0
 
 
@@ -2541,7 +2610,7 @@ Note this will only work if ImageMagick is installed, and <config3:imageDriver> 
 
 
 
-アップロード時の EXIF データに従って、Craft が画像を回転するかどうか。
+Whether Craft should rotate images according to their EXIF data on upload.
 
 
 
@@ -2561,7 +2630,7 @@ Note this will only work if ImageMagick is installed, and <config3:imageDriver> 
 
 
 
-GIF ファイルを綺麗にしたり、変形したりするかどうか。
+Whether GIF files should be cleansed/transformed.
 
 
 
@@ -2570,7 +2639,7 @@ GIF ファイルを綺麗にしたり、変形したりするかどうか。
 許可される型
 :   [boolean](http://php.net/language.types.boolean)
 
-デフォルト値
+Default value
 :   `true`
 
 定義元
@@ -2581,7 +2650,7 @@ GIF ファイルを綺麗にしたり、変形したりするかどうか。
 
 
 
-指定された変形サイズが元画像よりも大きい場合、画像をアップスケールするかどうか。
+Whether images should be upscaled if the provided transform size is larger than the image.
 
 
 
@@ -2589,13 +2658,13 @@ GIF ファイルを綺麗にしたり、変形したりするかどうか。
 
 ### `allowedGraphqlOrigins`
 
-許可される型
+Allowed types
 :   [string](http://php.net/language.types.string)[], [false](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
 
-デフォルト値
+Default value
 :   `null`
 
-定義元
+Defined by
 :   [GeneralConfig::$allowedGraphqlOrigins](craft3:craft\config\GeneralConfig::$allowedGraphqlOrigins)
 
 それ以降
@@ -2603,7 +2672,7 @@ GIF ファイルを綺麗にしたり、変形したりするかどうか。
 
 
 
-GraphQL API は Craft Pro でのみ利用可能です。
+The Ajax origins that should be allowed to access the GraphQL API, if enabled.
 
 If this is set to an array, then `graphql/api` requests will only include the current request’s [origin](https://www.yiiframework.com/doc/api/2.0/yii-web-request#getOrigin()-detail) in the `Access-Control-Allow-Origin` response header if it’s listed here.
 
@@ -2613,16 +2682,16 @@ If this is set to `false`, then the `Access-Control-Allow-Origin` response heade
 
 ### `disableGraphqlTransformDirective`
 
-許可される型
+Allowed types
 :   [boolean](http://php.net/language.types.boolean)
 
-デフォルト値
+Default value
 :   `false`
 
-定義元
+Defined by
 :   [GeneralConfig::$disableGraphqlTransformDirective](craft3:craft\config\GeneralConfig::$disableGraphqlTransformDirective)
 
-それ以降
+Since
 :   3.6.0
 
 
@@ -2633,16 +2702,16 @@ Whether the `transform` directive should be disabled for the GraphQL API.
 
 ### `enableGraphqlIntrospection`
 
-許可される型
+Allowed types
 :   [boolean](http://php.net/language.types.boolean)
 
 Default value
 :   `true`
 
-定義元
+Defined by
 :   [GeneralConfig::$enableGraphqlIntrospection](craft3:craft\config\GeneralConfig::$enableGraphqlIntrospection)
 
-それ以降
+Since
 :   3.6.0
 
 
@@ -2669,7 +2738,7 @@ Defined by
 
 Whether the GraphQL API should be enabled.
 
-Craft が GraphQL クエリをキャッシュするかどうか。
+Note that the GraphQL API is only available for Craft Pro.
 
 
 
@@ -2684,16 +2753,16 @@ Default value
 Defined by
 :   [GeneralConfig::$enableGraphQlCaching](craft3:craft\config\GeneralConfig::$enableGraphQlCaching)
 
-Since
+それ以降
 :   3.3.12
 
 
 
 Whether Craft should cache GraphQL queries.
 
-`true` をセットすると、Craft はアクセストークンごとに GraphQL クエリの結果をキャッシュします。 そのキャッシュは、エレメントが保存されたとき、サイト構造が更新されたとき、または、GraphQL スキーマが保存されたときはいつでも、自動的に無効になります。
+If set to `true`, Craft will cache the results for unique GraphQL queries per access token. The cache is automatically invalidated any time an element is saved, the site structure is updated, or a GraphQL schema is saved.
 
-[craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v3/craft-services-gql.html#event-before-execute-gql-query) イベントを利用してプラグインが独自のキャッシュ処理を提供し、`result` プロパティをセットしている場合、この設定は効果がありません。
+This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v3/craft-services-gql.html#event-before-execute-gql-query) event to provide its own caching logic and setting the `result` property.
 
 
 
@@ -2710,7 +2779,7 @@ Defined by
 
 
 
-GraphQL が返す、すべての型名に使用する接頭辞。
+Prefix to use for all type names returned by GraphQL.
 
 
 
@@ -2720,12 +2789,12 @@ Allowed types
 :   [integer](http://php.net/language.types.integer)
 
 Default value
-:   `1`
+:   `0`
 
 Defined by
 :   [GeneralConfig::$maxGraphqlComplexity](craft3:craft\config\GeneralConfig::$maxGraphqlComplexity)
 
-それ以降
+Since
 :   3.6.0
 
 
@@ -2789,13 +2858,13 @@ Defined by
 
 
 
-有効化されていない保留中のユーザーを Craft がシステムからパージするまでに待機する時間。
+The amount of time to wait before Craft purges pending users from the system that have not activated.
 
-与えられた時間が経過すると、保留中のユーザーに割り当てられたコンテンツもすべて削除される点に注意してください。
+Any content assigned to a pending user will be deleted as well when the given time interval passes.
 
 Set to `0` to disable this feature.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: tip
 Users will only be purged when [garbage collection](https://craftcms.com/docs/3.x/gc.html) is run.
@@ -2814,16 +2883,16 @@ Default value
 Defined by
 :   [GeneralConfig::$purgeStaleUserSessionDuration](craft3:craft\config\GeneralConfig::$purgeStaleUserSessionDuration)
 
-それ以降
+Since
 :   3.3.0
 
 
 
-データベースの sessions テーブルから Craft が古いユーザーセッションをパージするまでに待機する時間。
+The amount of time to wait before Craft purges stale user sessions from the sessions table in the database.
 
 Set to `0` to disable this feature.
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 ### `purgeUnsavedDraftsDuration`
@@ -2840,11 +2909,32 @@ Defined by
 Since
 :   3.2.0
 
-正式に保存されなかった新しいエレメントの下書きを Craft がパージするまでに待機する時間。
+The amount of time to wait before Craft purges unpublished drafts that were never updated with content.
 
 Set to `0` to disable this feature.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+
+
+### `setGraphqlDatesToSystemTimeZone`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [GeneralConfig::$setGraphqlDatesToSystemTimeZone](craft3:craft\config\GeneralConfig::$setGraphqlDatesToSystemTimeZone)
+
+Since
+:   3.7.0
+
+
+
+Whether dates returned by the GraphQL API should be set to the system time zone by default, rather than UTC.
+
 
 
 ### `softDeleteDuration`
@@ -2863,9 +2953,9 @@ Since
 
 
 
-ソフトデリートされたアイテムが、ガベージコレクションによって完全に削除されるまでの時間。
+The amount of time before a soft-deleted item will be up for hard-deletion by garbage collection.
 
-ソフトデリートされたアイテムを削除したくない場合、`0` をセットしてください。
+Set to `0` if you don’t ever want to delete soft-deleted items.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
