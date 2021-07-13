@@ -22,7 +22,7 @@ Function | Description
 [cpUrl](#cpurl) | Generates a control panel URL.
 [cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html) | Cycles on an array of values.
 [dataUrl](#dataurl) | Outputs an asset or file as a base64-encoded data URL.
-[date](https://twig.symfony.com/doc/2.x/functions/date.html) | Creates a date.
+[date](#date) | Creates a date.
 [dump](https://twig.symfony.com/doc/2.x/functions/dump.html) | Dumps information about a variable.
 [endBody](#endbody) | Outputs scripts and styles that were registered for the “end body” position.
 [expression](#expression) | Creates a database expression object.
@@ -273,6 +273,40 @@ The `dataUrl()` function has the following arguments:
 
 - **`file`** - The asset or path to a file to be encoded.
 - **`mimeType`** - Optional MIME type. If omitted, the file’s MIME type will be determined automatically.
+
+## `date`
+
+Converts an argument to a date to allow comparison, like [Twig’s `date()` function](https://twig.symfony.com/doc/2.x/functions/date.html).
+
+The argument can be one of PHP’s supported [date and time formats](https://www.php.net/manual/en/datetime.formats.php), or additionally a `date`/`time` array.
+
+```twig
+{% if date(asset.dateModified) < date('-2days') %}
+    {# asset is not new #}
+{% endif %}
+```
+
+A `null` or empty argument defaults to the current date:
+
+```twig
+{% if date() > date('2021/06/01') %}
+    {# today is past June 1, 2021 #}
+{% endif %}
+```
+
+Craft additionally supports passing a `date`/`time` array:
+
+```twig
+{% set myDate = {
+    date: '2021-01-15',
+    timezone: 'America/Los_Angeles',
+    time: '10:57',
+} %}
+
+{% if now > date(myDate) %}
+    {# today is past January 15, 2021 #}
+{% endif %}
+```
 
 ## `endBody`
 

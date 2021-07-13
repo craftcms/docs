@@ -2,11 +2,18 @@
 
 Date fields give you a date picker, and optionally a time picker as well.
 
+You can also pick minimum and maximum dates that should be allowed, and if you’re showing the time, you can choose what the minute increment should be.
+
 ## Settings
 
-Date fields let you choose whether you want to show only the date, or the date and time.
+Date fields have the following settings:
 
-You can also pick minimum and maximum dates that should be allowed, and if you’re showing the time, you can choose what the minute increment should be.
+- **Show date** or **Show date and time**\
+    If **Show date and time** is selected, the following settings will be visible:
+    - **Minute Increment** – number of minutes that timepicker suggestions should be incremented by. (Authors can manually enter a specific time.)
+    - **Show Time Zone** – whether authors should be able to choose the time zone, rather than the system’s.
+- **Min Date** – the earliest date that should be allowed.
+- **Max Date** – the latest date that should be allowed.
 
 ## Development
 
@@ -50,6 +57,35 @@ $entries = \craft\elements\Entry::find()
 The [atom](dev/filters.md#atom) filter converts a date to an ISO-8601 timestamp.
 :::
 
+Craft 3.7 added support for using `now` in date comparison strings:
+
+::: code
+```twig
+{# Fetch entries with a selected date in the past #}
+{% set pastEntries = craft.entries()
+    .myFieldHandle('< now')
+    .all() %}
+{# Fetch entries with a selected date now onward #}
+{% set futureEntries = craft.entries()
+    .myFieldHandle('>= now')
+    .all() %}
+```
+```php
+// Fetch entries with a selected date in the past
+$pastEntries = \craft\elements\Entry::find()
+    ->myFieldHandle('< now')
+    ->all();
+// Fetch entries with a selected date now onward
+$futureEntries = \craft\elements\Entry::find()
+    ->myFieldHandle('>= now')
+    ->all();
+```
+:::
+
+::: tip
+Don’t forget to consider or disable [template caching](tags.md#cache) for requests that use `now` comparisons! You can pass a `x-craft-gql-cache: no-cache` header for GraphQL requests or set a relatively low [cache duration](config3:cacheDuration).
+:::
+
 ### Working with Date Field Data
 
 If you have an element with a Date field in your template, you can access its value by its handle:
@@ -72,9 +108,9 @@ That will give you a [DateTime](http://php.net/manual/en/class.datetime.php) obj
 {% endif %}
 ```
 ```php
-if ($entry->myFieldHandle) {    
+if ($entry->myFieldHandle) {
     $selectedDate = \Craft::$app->getFormatter()->asDatetime(
-        $entry->myFieldHandle, 
+        $entry->myFieldHandle,
         'short'
     );
 }
