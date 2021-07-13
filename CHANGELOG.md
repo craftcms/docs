@@ -2,7 +2,7 @@
 
 Theme and significant content changes will be documented in this file.
 
-## Unreleased
+## 2021-07-13
 ### Added
 - Documented `|removeClass` Twig filter added in Craft 3.7.0.
 - Documented `cp.commerce.discounts.*` and `cp.commerce.sales.*` template hooks added in Commerce 3.4.
