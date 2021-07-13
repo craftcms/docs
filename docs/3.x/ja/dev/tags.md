@@ -51,11 +51,17 @@
 
 新しいタググループを作るには、「設定 > タグ」に移動し、「新しいタググループ」ボタンをクリックします。
 
-警告：異常なページの読み込み時間で苦しむ場合、最適なホスティング環境を経験していないかもしれません。 `{% cache %}` を試す前に、専門家に相談してください。 `{% cache %}` は高速なデータベース接続、効率的なテンプレート、または適度なクエリ数に代わるものではありません。 可能性のある副作用には、古くなったコンテンツ、過度に時間のかかるバックグラウンドタスク、動かなくなったタスク、および、稀に消滅があります。 `{% cache %}` が適切かどうかをホスティングプロバイダに問い合わせてください。
+By default, cached output will be kept by URL without regard for the query string.
 
-どこか（エントリなど）にタグを割り当てるには、[タグフィールド](tags-fields.md)を作成し、フィールドレイアウトで追加しなければなりません。
+While carefully-placed `{% cache %}` tags can offer significant boosts to performance, it’s important to know how the cache tag’s parameters can be used to fine-tune its behavior.
 
-慎重に配置された `{% cache %}` タグは、パフォーマンスを大幅に向上させることができますが、キャッシュタグのパラメーターをどのように利用すればその挙動を微調整できるかを知ることが重要です。
+::: tip
+The `{% cache %}` tag captures code and styles registered with `{% js %}`, \ `{% script %}` and `{% css %}` tags.
+:::
+
+<small>
+Warning: If you’re suffering from abnormal page load times, you may be experiencing a suboptimal hosting environment. Please consult a specialist before trying <b>{% cache %}</b>. <b>{% cache %}</b> is not a substitute for fast database connections, efficient templates, or moderate query counts. Possible side effects include stale content, excessively long-running background tasks, stuck tasks, and in rare cases, death. Ask your hosting provider if <b>{% cache %}</b> is right for you.
+</small>
 
 ### パラメータ
 
@@ -91,7 +97,7 @@ $myTagQuery = \craft\elements\Tag::find();
 ```
 
 ::: warning
-カスタムキーを利用している `{% cache %}` 内のテンプレートコードを変更する場合、既存のテンプレートキャッシュは自動的にパージされません。 タグに新しいキーを割り当てるか、「ユーティリティ > キャッシュ」ツールの「データキャッシュ」を選択して、既存のテンプレートキャッシュを手動でクリアする必要があります。 :::
+If you change template code within a `{% cache %}` that uses a custom key, existing template caches will not automatically be purged. Either assign the tag a new key, or clear your existing template caches manually by navigating to **Utilities** → **Caches** and clearing **Data caches**.
 :::
 
 動的キーを指定し、[globally](#globally) と組み合わせることで、テンプレートキャッシュをより細かくコントールできます。 例えば、デフォルトでは無視されるクエリ文字列 *と* URL に基づいてキャッシュすることができます。
@@ -167,7 +173,7 @@ Causes the query to return matching tags as arrays of data, rather than [Tag](cr
 See [Element Queries](element-queries.md) to learn about how element queries work.
 :::
 
-### キャッシュのクリア
+### Cache Clearing
 
 Clears the cached result.
 
@@ -185,7 +191,7 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 
-### どんなときに `{% cache %}` タグを使うのか
+### When to Use `{% cache %}` Tags
 
 ::: code
 
@@ -199,31 +205,10 @@ Narrows the query results based on the tags’ last-updated dates.
 
 - 静的なテキストにキャッシュを使用しないでください。 シンプルにテキストを出力するよりも、コストが高くなります。
 - 他を拡張するテンプレート内で、トップレベルの `{% block %}` タグの外側で使用することはできません。
-- ::: tip 単一の `{% cache %}` タグで利用できるのは、[for](#for) **_または_** [until](#until) のいずれかのみです。
+
+::: tip
+The `{% cache %}` tag detects ungenerated [image transform](../image-transforms.md) URLs within it. When it finds any, it holds off caching the template until the next request so those temporary image URLs aren’t cached.
 :::
-
-    ```twig
-    {% endblock %}
-   {% endcache %}
-
-   {## Good: #}
-
-   {% extends "_layout" %}
-   {% block "content" %}
-       {% cache %}
-           ...
-        {% endcache %}
-   {% endblock %}
-        {## Bad: #}
-
-   {% extends "_layout" %}
-   {% cache %}
-       {% block "content" %}
-           ...
-    ```
-
-
-ヒント：`{% cache %}` タグは、その中にまだ生成されていない[画像変換](../image-transforms.md) URL が含まれるかどうかを検出します。 それが含まれる場合、次のリクエストまでテンプレートのキャッシュを保留するため、一時的な画像 URL はキャッシュされません。
 
 ## `site`
 
