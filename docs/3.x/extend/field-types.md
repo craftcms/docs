@@ -58,7 +58,7 @@ public function afterElementSave(ElementInterface $element, bool $isNew)
 
 By default, a field type’s [hasContentColumn()](craft3:craft\base\Field::hasContentColumn()) method returns `true`, meaning Craft will create one or more fields for it in the database’s `content` table.
 
-The field type’s [getContentColumnType()](craft\base\Field::getContentColumnType()) method can return either a single column type, or a key-value array of multiple handles and [types](yii2:yii\db\Schema#constants).
+The field type’s [getContentColumnType()](craft3:craft\base\Field::getContentColumnType()) method can return either a single column type, or a key-value array of multiple handles and [types](yii2:yii\db\Schema#constants).
 
 ::: code
 ```php Single Column
