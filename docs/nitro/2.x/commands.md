@@ -602,6 +602,28 @@ Preparing import…
 Imported database "tutorial" in 4.23 seconds 💪
 ```
 
+## `db new`
+
+Adds a new database engine.
+
+```
+nitro db new
+```
+
+**Example**
+
+```
+$ nitro db new
+Which database engine should we use
+  1. mariadb
+  2. mysql
+  3. postgres
+Enter your selection: 3
+Which version should we use? 13
+Which port should we use for postgres [5432]?
+Apply changes now [Y/n]?
+```
+
 ## `db remove`
 
 Removes a database in the selected database engine.
