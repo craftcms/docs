@@ -2686,6 +2686,26 @@ Whether GIF files should be cleansed/transformed.
 
 
 
+### `transformSvgs`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `true`
+
+Defined by
+:   [GeneralConfig::$transformSvgs](craft3:craft\config\GeneralConfig::$transformSvgs)
+
+Since
+:   3.7.1
+
+
+
+Whether SVG files should be transformed.
+
+
+
 ### `upscaleImages`
 
 Allowed types
