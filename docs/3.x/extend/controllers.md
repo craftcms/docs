@@ -107,8 +107,12 @@ use craft\web\View;
 
 public function actionFoo(): Response
 {
-    // Render and return the plugin's 'foo.twig' template
-    return $this->renderTemplate('plugin-handle/foo.twig', $variables, View::TEMPLATE_MODE_CP);
+    // Render and return the plugin’s `foo.twig` template
+    return $this->renderTemplate(
+        'plugin-handle/foo.twig',
+        $variables,
+        View::TEMPLATE_MODE_CP
+    );
 }
 ```
 
