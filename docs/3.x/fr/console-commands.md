@@ -48,6 +48,8 @@ setting takes precedence over the `system.live` project config value, so if `con
 
 While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default console commands:
 
+<!-- BEGIN COMMANDS -->
+
 ## `backup`
 
 #### `backup/db`
@@ -1332,3 +1334,5 @@ Updates all users’ usernames to ensure they match their email address.
 $ php craft utils/update-usernames
 10 usernames updated.
 ```
+
+<!-- END COMMANDS -->
