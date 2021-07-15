@@ -49,6 +49,8 @@ See the [Console Commands](extend/commands.md) page in the _Extending Craft_ sec
 
 利用可能なコマンドのリストには、プロジェクトに追加されたプラグインやカスタムモジュールのものも含まれます。
 
+<!-- BEGIN COMMANDS -->
+
 ## `backup`
 
 #### `backup/db`
@@ -1332,3 +1334,5 @@ Updates all users’ usernames to ensure they match their email address.
 $ php craft utils/update-usernames
 10 usernames updated.
 ```
+
+<!-- END COMMANDS -->
