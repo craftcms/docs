@@ -2628,6 +2628,26 @@ Whether GIF files should be cleansed/transformed.
 
 
 
+### `transformSvgs`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `true`
+
+Since :
+:   [GeneralConfig::$transformSvgs](craft3:craft\config\GeneralConfig::$transformSvgs)
+
+Since :
+:   3.7.1
+
+
+
+Whether SVG files should be transformed.
+
+
+
 ### `upscaleImages`
 
 Allowed types
@@ -2661,7 +2681,7 @@ Default value
 Since :
 :   [GeneralConfig::$allowedGraphqlOrigins](craft3:craft\config\GeneralConfig::$allowedGraphqlOrigins)
 
-Since :
+Since
 :   3.5.0
 
 
@@ -2705,7 +2725,7 @@ Default value
 Since :
 :   [GeneralConfig::$enableGraphqlIntrospection](craft3:craft\config\GeneralConfig::$enableGraphqlIntrospection)
 
-Since
+Since :
 :   3.6.0
 
 
@@ -2725,7 +2745,7 @@ Default value
 Since :
 :   [GeneralConfig::$enableGql](craft3:craft\config\GeneralConfig::$enableGql)
 
-Since :
+Since
 :   3.3.1
 
 
@@ -2744,7 +2764,7 @@ Allowed types
 Default value
 :   `true`
 
-Since :
+Defined by
 :   [GeneralConfig::$enableGraphQlCaching](craft3:craft\config\GeneralConfig::$enableGraphQlCaching)
 
 Since
