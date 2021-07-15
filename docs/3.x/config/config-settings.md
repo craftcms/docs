@@ -44,7 +44,7 @@ Allowed types
 :   [array](http://php.net/language.types.array)
 
 Default value
-:   `['useShapes' => false, 'underlineLinks' => false]`
+:   `['alwaysShowFocusRings' => false, 'useShapes' => false, 'underlineLinks' => false]`
 
 Defined by
 :   [GeneralConfig::$accessibilityDefaults](craft3:craft\config\GeneralConfig::$accessibilityDefaults)
@@ -58,6 +58,7 @@ The default user accessibility preferences that should be applied to users that 
 
 The array can contain the following keys:
 
+- `alwaysShowFocusRings` - Whether focus rings should always be shown when an element has focus
 - `useShapes` – Whether shapes should be used to represent statuses
 - `underlineLinks` – Whether links should be underlined
 
