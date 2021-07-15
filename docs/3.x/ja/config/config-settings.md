@@ -610,7 +610,7 @@ When this is enabled, the following changes will take place:
 :   `null`
 
 定義元
-:   [GeneralConfig::$phpMaxMemoryLimit](craft3:craft\config\GeneralConfig::$httpProxy)
+:   [GeneralConfig::$httpProxy](craft3:craft\config\GeneralConfig::$httpProxy)
 
 Since
 :   3.7.0
