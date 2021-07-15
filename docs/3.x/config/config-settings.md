@@ -437,6 +437,11 @@ This can also be set to `'*'` to disable **all** plugins.
 ],
 ```
 
+::: warning
+This should not be set on a per-environment basis, as it could result in plugin schema version mismatches
+between environments, which will prevent project config changes from getting applied.
+:::
+
 
 
 ### `disallowRobots`
