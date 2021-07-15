@@ -439,6 +439,10 @@ Craft がデータ、RSS フィード、および、テンプレートキャッ�
 ],
 ```
 
+::: warning
+This should not be set on a per-environment basis, as it could result in plugin schema version mismatches between environments, which will prevent project config changes from getting applied.
+:::
+
 
 
 ### `disallowRobots`
@@ -478,7 +482,7 @@ Default value : :
 
 
 
-アップロードされたファイル名に含まれる ASCII 以外の文字を ASCII に変換するかどうか（例： `ñ` → `n`）。
+Whether to enable Craft’s template `{% cache %}` tag on a global basis.
 
 
 
@@ -495,11 +499,9 @@ Default value : :
 
 
 
-::: tip
-ターミナルで `php craft utils/ascii-filenames` を実行することによって、既存のすべてのアセットに ASCII ファイル名を適用できます。
-:::
+The prefix that should be prepended to HTTP error status codes when determining the path to look for an error’s template.
 
-あまりに多くのログイン試行の失敗によりアカウントがロックされた後、ユーザーが再試行するために待たなければならない時間。
+If set to `'_'` your site’s 404 template would live at `templates/_404.html`, for example.
 
 
 
@@ -516,7 +518,7 @@ Default value : :
 
 
 
-にマージされるファイル拡張子のリスト。 <config3:allowedFileExtensions> コンフィグ設定
+List of file extensions that will be merged into the <config3:allowedFileExtensions> config setting.
 
 
 
@@ -536,9 +538,9 @@ Default value : :
 
 
 
-サポートされる値の種類は、[craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) のリストを参照してください。
+List of extra locale IDs that the application should support, and users should be able to select as their Preferred Language.
 
-コントロールパネルページの `<head>` に含めるべき追加の HTML タグのリスト。
+Only use this setting if your server has the Intl PHP extension, or if you’ve saved the corresponding [locale data](https://github.com/craftcms/locales) into your `config/locales/` folder.
 
 
 
@@ -558,7 +560,7 @@ Default value : :
 
 
 
-それぞれのタグは、タグ名とその属性を配列として指定できます。
+This can be set to one of the following:
 
 - セクションやカテゴリグループのテンプレート設定は非表示になります。
 - テンプレートルート管理は非表示になります。
@@ -582,9 +584,9 @@ Default value : :
 
 
 
-例えば、コントロールパネルに次のようなカスタムファビコン（など）を加えることができます。
+Whether the system should run in Headless Mode, which optimizes the system and control panel for headless CMS implementations.
 
-現在のリクエストをフロントエンドのウェブサイトではなくコントロールパネルにルーティングするかどうかを決定するとき、Craft が探す URI セグメント。
+When this is enabled, the following changes will take place:
 
 - Template settings for sections and category groups will be hidden.
 - 公開テンプレートのルーティングを無効化するには、空の値をセットしてください。
