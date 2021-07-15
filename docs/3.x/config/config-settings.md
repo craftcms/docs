@@ -2309,7 +2309,7 @@ Allowed types
 :   [string](http://php.net/language.types.string)[]
 
 Default value
-:   `['7z', 'aiff', 'asc', 'asf', 'avi', 'bmp', 'cap', 'cin', 'csv', 'dfxp', 'doc', 'docx', 'dotm', 'dotx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'itt', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'lrc', 'm2t', 'm4a', 'm4v', 'mcc', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'mpsub', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rt', 'rtf', 'sami', 'sbv', 'scc', 'sdc', 'sitd', 'smi', 'srt', 'stl', 'sub', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tds', 'tgz', 'tif', 'tiff', 'ttml', 'txt', 'vob', 'vsd', 'vtt', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'xml', 'zip']`
+:   `['7z', 'aiff', 'asc', 'asf', 'avi', 'bmp', 'cap', 'cin', 'csv', 'dfxp', 'doc', 'docx', 'dotm', 'dotx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'itt', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'lrc', 'm2t', 'm4a', 'm4v', 'mcc', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'mpsub', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rt', 'rtf', 'sami', 'sbv', 'scc', 'sdc', 'sitd', 'smi', 'srt', 'stl', 'sub', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tds', 'tgz', 'tif', 'tiff', 'ttml', 'txt', 'vob', 'vsd', 'vtt', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'zip']`
 
 Defined by
 :   [GeneralConfig::$allowedFileExtensions](craft3:craft\config\GeneralConfig::$allowedFileExtensions)
