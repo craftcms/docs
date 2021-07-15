@@ -49,6 +49,8 @@ See the [Console Commands](extend/commands.md) page in the _Extending Craft_ sec
 
 While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default console commands:
 
+<!-- BEGIN COMMANDS -->
+
 ## `db`
 
 #### `db/backup`
@@ -1401,3 +1403,5 @@ Updates all users’ usernames to ensure they match their email address.
 $ php craft utils/update-usernames
 10 usernames updated.
 ```
+
+<!-- END COMMANDS -->
