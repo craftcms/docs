@@ -2634,7 +2634,7 @@ Whether GIF files should be cleansed/transformed.
 
 
 
-### `upscaleImages`
+### `transformSvgs`
 
 許可される型
 :   [boolean](http://php.net/language.types.boolean)
@@ -2643,6 +2643,26 @@ Default value
 :   `true`
 
 定義元
+:   [GeneralConfig::$transformSvgs](craft3:craft\config\GeneralConfig::$transformSvgs)
+
+それ以降
+:   3.7.1
+
+
+
+Whether SVG files should be transformed.
+
+
+
+### `upscaleImages`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `true`
+
+Defined by
 :   [GeneralConfig::$upscaleImages](craft3:craft\config\GeneralConfig::$upscaleImages)
 
 それ以降
@@ -2667,7 +2687,7 @@ Default value
 Defined by
 :   [GeneralConfig::$allowedGraphqlOrigins](craft3:craft\config\GeneralConfig::$allowedGraphqlOrigins)
 
-それ以降
+Since
 :   3.5.0
 
 
@@ -2711,7 +2731,7 @@ Default value
 Defined by
 :   [GeneralConfig::$enableGraphqlIntrospection](craft3:craft\config\GeneralConfig::$enableGraphqlIntrospection)
 
-Since
+それ以降
 :   3.6.0
 
 
@@ -2753,7 +2773,7 @@ Default value
 Defined by
 :   [GeneralConfig::$enableGraphQlCaching](craft3:craft\config\GeneralConfig::$enableGraphQlCaching)
 
-それ以降
+Since
 :   3.3.12
 
 
@@ -2794,7 +2814,7 @@ Default value
 Defined by
 :   [GeneralConfig::$maxGraphqlComplexity](craft3:craft\config\GeneralConfig::$maxGraphqlComplexity)
 
-Since
+それ以降
 :   3.6.0
 
 
@@ -2814,7 +2834,7 @@ Default value
 Defined by
 :   [GeneralConfig::$maxGraphqlDepth](craft3:craft\config\GeneralConfig::$maxGraphqlDepth)
 
-それ以降
+Since
 :   3.6.0
 
 
