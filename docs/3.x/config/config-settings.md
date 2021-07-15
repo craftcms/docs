@@ -613,7 +613,7 @@ Default value
 :   `null`
 
 Defined by
-:   [GeneralConfig::$phpMaxMemoryLimit](craft3:craft\config\GeneralConfig::$httpProxy)
+:   [GeneralConfig::$httpProxy](craft3:craft\config\GeneralConfig::$httpProxy)
 
 Since
 :   3.7.0
