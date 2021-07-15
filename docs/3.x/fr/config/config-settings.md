@@ -435,6 +435,10 @@ Defined by :
 ],
 ```
 
+::: warning
+This should not be set on a per-environment basis, as it could result in plugin schema version mismatches between environments, which will prevent project config changes from getting applied.
+:::
+
 
 
 ### `disallowRobots`
@@ -453,10 +457,10 @@ Since :
 
 
 
-Whether an `X-Powered-By: Craft CMS` header should be sent, helping services like [BuiltWith](https://builtwith.com/) and [Wappalyzer](https://www.wappalyzer.com/) identify that the site is running on Craft.
+Whether front end requests should respond with `X-Robots-Tag: none` HTTP headers, indicating that pages should not be indexed, and links on the page should not be followed, by web crawlers.
 
 ::: tip
-This setting requires PHP 7.3 or later.
+This should be set to `true` for development and staging environments.
 :::
 
 
@@ -474,7 +478,7 @@ Defined by :
 
 
 
-Whether to enable Craft's template `{% cache %}` tag on a global basis.
+Whether to enable Craft’s template `{% cache %}` tag on a global basis.
 
 
 
@@ -493,7 +497,7 @@ Defined by :
 
 The prefix that should be prepended to HTTP error status codes when determining the path to look for an error’s template.
 
-If this is disabled, the Settings and Plugin Store sections will be hidden, the Craft edition and Craft/plugin versions will be locked, and the project config will become read-only.
+If set to `'_'` your site’s 404 template would live at `templates/_404.html`, for example.
 
 
 
@@ -532,7 +536,7 @@ Since :
 
 List of extra locale IDs that the application should support, and users should be able to select as their Preferred Language.
 
-Allowed types :
+Only use this setting if your server has the Intl PHP extension, or if you’ve saved the corresponding [locale data](https://github.com/craftcms/locales) into your `config/locales/` folder.
 
 
 
