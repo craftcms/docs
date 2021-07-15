@@ -1159,6 +1159,8 @@ This is the interface implemented by all assets.
 | `status`| `String` | The element's status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
+| `uploaderId`| `Int` | The ID of the user who first added this asset (if known).
+| `uploader`| `UserInterface` | The user who first added this asset (if known).
 | `volumeId`| `Int` | The ID of the volume that the asset belongs to.
 | `folderId`| `Int` | The ID of the folder that the asset belongs to.
 | `filename`| `String` | The filename of the asset file.
@@ -1213,6 +1215,13 @@ This is the interface implemented by all entries.
 | `isUnsavedDraft`| `Boolean` | Returns whether this is an unpublished draft. **This field is deprecated.** `isUnpublishedDraft` should be used instead.
 | `draftName`| `String` | The name of the draft.
 | `draftNotes`| `String` | The notes for the draft.
+| `authorId`| `Int` | The ID of the author of this entry.
+| `author`| `UserInterface` | The entry's author.
+| `draftCreator`| `UserInterface` | The creator of a given draft.
+| `drafts`| `[EntryInterface]` | The drafts for the entry.
+| `revisionCreator`| `UserInterface` | The creator of a given revision.
+| `currentRevision`| `EntryInterface` | The current revision for the entry.
+| `revisions`| `[EntryInterface]` | The revisions for the entry.
 | `sectionId`| `Int` | The ID of the section that contains the entry.
 | `sectionHandle`| `String` | The handle of the section that contains the entry.
 | `typeId`| `Int` | The ID of the entry type that contains the entry.
