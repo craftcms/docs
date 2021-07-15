@@ -44,7 +44,7 @@ Allowed types :
 :   [array](http://php.net/language.types.array)
 
 Default value :
-:   `['useShapes' => false, 'underlineLinks' => false]`
+:   `['alwaysShowFocusRings' => false, 'useShapes' => false, 'underlineLinks' => false]`
 
 Defined by :
 :   [GeneralConfig::$siteUrl](craft3:craft\config\GeneralConfig::$accessibilityDefaults)
@@ -53,13 +53,13 @@ Defined by :
 :   3600
 
 
-
 現在のリクエストをコントローラーアクションにルーティングするかどうかを決定するとき、Craft が探す URI セグメント。
 
 コントロールパネルにアクセスできないユーザーが、アカウントをアクティベートしたときにリダイレクトする URI。
 
-- `{file}` - バックアップファイルのターゲットパス
-- `{port}` - 現在のデータベースポート
+- `alwaysShowFocusRings` - Whether focus rings should always be shown when an element has focus
+- `useShapes` – Whether shapes should be used to represent statuses
+- `underlineLinks` – Whether links should be underlined
 
 
 
@@ -76,7 +76,6 @@ Defined by :
 
 それ以降
 :   3.1.0
-
 
 
 サポートされる値の種類は、[craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) のリストを参照してください。
@@ -101,7 +100,6 @@ Default value :
 
 Defined by :
 :   [GeneralConfig::$allowUpdates](craft3:craft\config\GeneralConfig::$allowUpdates)
-
 
 
 これを無効にすると、設定およびプラグインストアのセクションは非表示になり、Craft 本体のエディションとプラグインのバージョンがロックされ、プロジェクトコンフィグは読み取り専用になります。
@@ -141,7 +139,6 @@ Defined by :
 :   [GeneralConfig::$autoLoginAfterAccountActivation](craft3:craft\config\GeneralConfig::$autoLoginAfterAccountActivation)
 
 
-
 ユーザーによる類似した名前のタグの作成を許可するかどうか。
 
 
@@ -159,7 +156,6 @@ Defined by :
 
 それ以降
 :   3.5.6
-
 
 
 コントロールパネルでのシステムとプラグインのアップデート、および、プラグインストアからのプラグインのインストールを Craft が許可するかどうか。
@@ -180,7 +176,6 @@ Defined by :
 :   [GeneralConfig::$backupOnUpdate](craft3:craft\config\GeneralConfig::$backupOnUpdate)
 
 
-
 スラグに大文字を使うことを許可するかどうか。
 
 
@@ -195,7 +190,6 @@ Default value :
 
 Defined by :
 :   [GeneralConfig::$cacheDuration](craft3:craft\config\GeneralConfig::$cacheDuration)
-
 
 
 ユーザーがファイルをアップロードする際に、Craft が許可するファイル拡張子。
@@ -219,7 +213,6 @@ Defined by :
 
 それ以降
 :   3.5.0
-
 
 
 ここに `false` がセットされている場合、`Access-Control-Allow-Origin` レスポンスヘッダは決して送信されません。
@@ -254,7 +247,6 @@ Defined by :
 :   [GeneralConfig::$defaultCpLanguage](craft3:craft\config\GeneralConfig::$defaultCpLanguage)
 
 
-
 この設定に関わらず、ライブプレビューを開いている間は下書きが自動保存 *されます*。
 
 
@@ -272,7 +264,6 @@ Defined by :
 
 それ以降
 :   3.5.0
-
 
 
 データベースのバックアップを作成するために Craft が実行するシェルコマンド。
@@ -293,7 +284,6 @@ Defined by :
 :   [GeneralConfig::$defaultDirMode](craft3:craft\config\GeneralConfig::$defaultDirMode)
 
 
-
 ランタイムで Craft がスワップアウトするために利用できるいくつかのトークンがあります。
 
 データベースのバックアップを完全に無効化するために、`false` をセットすることもできます。
@@ -312,7 +302,6 @@ Defined by :
 :   [GeneralConfig::$defaultFileMode](craft3:craft\config\GeneralConfig::$defaultFileMode)
 
 
-
 新しいシステムアップデートを適用する前に、Craft がデータベースのバックアップを作成するかどうか。
 
 コントロールパネルの URL を生成する際に、Craft が使用するベース URL。
@@ -329,7 +318,6 @@ Default value :
 
 Defined by :
 :   [GeneralConfig::$defaultSearchTermOptions](craft3:craft\config\GeneralConfig::$defaultSearchTermOptions)
-
 
 
 空白の場合、自動的に決定されます。
@@ -358,7 +346,6 @@ Defined by :
 :   [GeneralConfig::$defaultTemplateExtensions](craft3:craft\config\GeneralConfig::$defaultTemplateExtensions)
 
 
-
 フロントエンドでテンプレートパスとファイルの照合をする際に、Craft が探すテンプレートファイルの拡張子。
 
 
@@ -373,7 +360,6 @@ Default value :
 
 Defined by :
 :   [GeneralConfig::$defaultWeekStartDay](craft3:craft\config\GeneralConfig::$defaultWeekStartDay)
-
 
 
 ブルートフォース攻撃に対するベストな保護のために、production サーバーで許容される最高の値をセットしてください。
@@ -402,7 +388,6 @@ Defined by :
 :   [GeneralConfig::$devMode](craft3:craft\config\GeneralConfig::$devMode)
 
 
-
 404 ステータスコードの画像リクエストへ応答する際に送信する、画像ファイルのサーバーパス。
 
 
@@ -420,7 +405,6 @@ Defined by :
 
 それ以降
 :   3.1.9
-
 
 
 `@webroot/assets/404.svg` のようなエイリアスパスをセットできます。
@@ -460,7 +444,6 @@ Defined by : :
 :   3.5.10
 
 
-
 Whether front end requests should respond with `X-Robots-Tag: none` HTTP headers, indicating that pages should not be indexed, and links on the page should not be followed, by web crawlers.
 
 ::: tip
@@ -481,7 +464,6 @@ Default value : :
 :   [GeneralConfig::$enableTemplateCaching](craft3:craft\config\GeneralConfig::$enableTemplateCaching)
 
 
-
 Whether to enable Craft’s template `{% cache %}` tag on a global basis.
 
 
@@ -496,7 +478,6 @@ Whether to enable Craft’s template `{% cache %}` tag on a global basis.
 
 定義元 :
 :   [GeneralConfig::$errorTemplatePrefix](craft3:craft\config\GeneralConfig::$errorTemplatePrefix)
-
 
 
 The prefix that should be prepended to HTTP error status codes when determining the path to look for an error’s template.
@@ -515,7 +496,6 @@ If set to `'_'` your site’s 404 template would live at `templates/_404.html`, 
 
 定義元 :
 :   [GeneralConfig::$extraAllowedFileExtensions](craft3:craft\config\GeneralConfig::$extraAllowedFileExtensions)
-
 
 
 List of file extensions that will be merged into the <config3:allowedFileExtensions> config setting.
@@ -559,7 +539,6 @@ Only use this setting if your server has the Intl PHP extension, or if you’ve 
 :   3.6.0
 
 
-
 This can be set to one of the following:
 
 - セクションやカテゴリグループのテンプレート設定は非表示になります。
@@ -581,7 +560,6 @@ This can be set to one of the following:
 
 それ以降
 :   3.3.0
-
 
 
 Whether the system should run in Headless Mode, which optimizes the system and control panel for headless CMS implementations.
@@ -616,7 +594,6 @@ Since
 :   3.7.0
 
 
-
 The proxy server that should be used for outgoing HTTP requests.
 
 This can be set to a URL (`http://localhost`) or a URL plus a port (`http://localhost:8125`).
@@ -633,7 +610,6 @@ This can be set to a URL (`http://localhost`) or a URL plus a port (`http://loca
 
 定義元
 :   [GeneralConfig::$indexTemplateFilenames](craft3:craft\config\GeneralConfig::$indexTemplateFilenames)
-
 
 
 The template filenames Craft will look for within a directory to represent the directory’s “index” template when matching a template path to a file on the front end.
@@ -673,7 +649,6 @@ If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.co
 :   [GeneralConfig::$isSystemLive](craft3:craft\config\GeneralConfig::$isSystemLive)
 
 
-
 Whether the site is currently live. If set to `true` or `false`, it will take precedence over the System Status setting in Settings → General.
 
 
@@ -688,7 +663,6 @@ Whether the site is currently live. If set to `true` or `false`, it will take pr
 
 定義元
 :   [GeneralConfig::$limitAutoSlugsToAscii](craft3:craft\config\GeneralConfig::$limitAutoSlugsToAscii)
-
 
 
 Whether non-ASCII characters in auto-generated slugs should be converted to ASCII (i.e. ñ → n).
@@ -711,7 +685,6 @@ This only affects the JavaScript auto-generated slugs. Non-ASCII characters can 
 :   [GeneralConfig::$maxBackups](craft3:craft\config\GeneralConfig::$maxBackups)
 
 
-
 The number of backups Craft should make before it starts deleting the oldest backups. If set to `false`, Craft will not delete any backups.
 
 
@@ -731,7 +704,6 @@ Since
 :   3.2.0
 
 
-
 The maximum number of revisions that should be stored for each element.
 
 Set to `0` if you want to store an unlimited number of revisions.
@@ -748,7 +720,6 @@ Set to `0` if you want to store an unlimited number of revisions.
 
 定義元
 :   [GeneralConfig::$maxSlugIncrement](craft3:craft\config\GeneralConfig::$maxSlugIncrement)
-
 
 
 The highest number Craft will tack onto a slug in order to make it unique before giving up and throwing an error.
@@ -789,29 +760,9 @@ This can be set to `null` to prevent the header from being sent.
 :   [GeneralConfig::$phpMaxMemoryLimit](craft3:craft\config\GeneralConfig::$phpMaxMemoryLimit)
 
 
-
 The maximum amount of memory Craft will try to reserve during memory-intensive operations such as zipping, unzipping and updating. Defaults to an empty string, which means it will use as much memory as it can.
 
 See <http://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> for a list of acceptable values.
-
-
-
-### `privateTemplateTrigger`
-
-許可される型
-:   [string](http://php.net/language.types.string)
-
-デフォルト値
-:   `'_'`
-
-定義元
-:   [GeneralConfig::$privateTemplateTrigger](craft3:craft\config\GeneralConfig::$privateTemplateTrigger)
-
-
-
-The template path segment prefix that should be used to identify “private” templates, which are templates that are not directly accessible via a matching URL.
-
-Set to an empty value to disable public template routing.
 
 
 
@@ -830,7 +781,6 @@ Since
 :   3.5.0
 
 
-
 Custom [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#options) that should be used for preview iframes.
 
 ```php
@@ -838,6 +788,24 @@ Custom [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#
     'autoResize' => false,
 ],
 ```
+
+
+
+### `privateTemplateTrigger`
+
+許可される型
+:   [string](http://php.net/language.types.string)
+
+デフォルト値
+:   `'_'`
+
+定義元
+:   [GeneralConfig::$privateTemplateTrigger](craft3:craft\config\GeneralConfig::$privateTemplateTrigger)
+
+
+The template path segment prefix that should be used to identify “private” templates, which are templates that are not directly accessible via a matching URL.
+
+Set to an empty value to disable public template routing.
 
 
 
@@ -851,7 +819,6 @@ Custom [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#
 
 定義元
 :   [GeneralConfig::$runQueueAutomatically](craft3:craft\config\GeneralConfig::$runQueueAutomatically)
-
 
 
 Whether Craft should run pending queue jobs automatically when someone visits the control panel.
@@ -883,7 +850,6 @@ Since
 :   3.1.33
 
 
-
 The [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) value that should be set on Craft cookies, if any.
 
 This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
@@ -906,7 +872,6 @@ This setting requires PHP 7.3 or later.
 :   [GeneralConfig::$sendPoweredByHeader](craft3:craft\config\GeneralConfig::$sendPoweredByHeader)
 
 
-
 Whether an `X-Powered-By: Craft CMS` header should be sent, helping services like [BuiltWith](https://builtwith.com/) and [Wappalyzer](https://www.wappalyzer.com/) identify that the site is running on Craft.
 
 
@@ -923,7 +888,6 @@ Whether an `X-Powered-By: Craft CMS` header should be sent, helping services lik
 :   [GeneralConfig::$slugWordSeparator](craft3:craft\config\GeneralConfig::$slugWordSeparator)
 
 
-
 The character(s) that should be used to separate words in slugs.
 
 
@@ -938,7 +902,6 @@ The character(s) that should be used to separate words in slugs.
 
 定義元
 :   [GeneralConfig::$testToEmailAddress](craft3:craft\config\GeneralConfig::$testToEmailAddress)
-
 
 
 Configures Craft to send all system emails to either a single email address or an array of email addresses for testing purposes.
@@ -959,7 +922,6 @@ By default, the recipient name(s) will be “Test Recipient”, but you can cust
 :   [GeneralConfig::$timezone](craft3:craft\config\GeneralConfig::$timezone)
 
 
-
 The timezone of the site. If set, it will take precedence over the Timezone setting in Settings → General.
 
 This can be set to one of PHP’s [supported timezones](http://php.net/manual/en/timezones.php).
@@ -978,7 +940,6 @@ This can be set to one of PHP’s [supported timezones](http://php.net/manual/en
 :   [GeneralConfig::$translationDebugOutput](craft3:craft\config\GeneralConfig::$translationDebugOutput)
 
 
-
 Whether translated messages should be wrapped in special characters to help find any strings that are not being run through `Craft::t()` or the `|translate` filter.
 
 
@@ -993,7 +954,6 @@ Whether translated messages should be wrapped in special characters to help find
 
 定義元
 :   [GeneralConfig::$useEmailAsUsername](craft3:craft\config\GeneralConfig::$useEmailAsUsername)
-
 
 
 Whether Craft should set users’ usernames to their email addresses, rather than let them set their username separately.
@@ -1019,7 +979,6 @@ php craft utils/update-usernames
 
 Since
 :   3.5.5
-
 
 
 Whether [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#options) should be used for Live Preview.
@@ -1048,7 +1007,6 @@ You can customize the behavior of iFrame Resizer via the <config3:previewIframeR
 :   [GeneralConfig::$useFileLocks](craft3:craft\config\GeneralConfig::$useFileLocks)
 
 
-
 Whether to grab an exclusive lock on a file when writing to it by using the `LOCK_EX` flag.
 
 Some file systems, such as NFS, do not support exclusive file locking.
@@ -1071,7 +1029,6 @@ If not set to `true` or `false`, Craft will try to detect if the underlying file
 :   [GeneralConfig::$aliases](craft3:craft\config\GeneralConfig::$aliases)
 
 
-
 Any custom Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) that should be defined for every request.
 
 
@@ -1086,7 +1043,6 @@ Any custom Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-a
 
 定義元
 :   [GeneralConfig::$backupCommand](craft3:craft\config\GeneralConfig::$backupCommand)
-
 
 
 The shell command that Craft should execute to create a database backup.
@@ -1135,7 +1091,6 @@ The domain that cookies generated by Craft should be created for. If blank, it w
 :   [GeneralConfig::$resourceBasePath](craft3:craft\config\GeneralConfig::$resourceBasePath)
 
 
-
 The path to the root directory that should store published control panel resources.
 
 
@@ -1152,7 +1107,6 @@ The path to the root directory that should store published control panel resourc
 :   [GeneralConfig::$resourceBaseUrl](craft3:craft\config\GeneralConfig::$resourceBaseUrl)
 
 
-
 The URL to the root directory that should store published control panel resources.
 
 
@@ -1167,7 +1121,6 @@ The URL to the root directory that should store published control panel resource
 
 定義元
 :   [GeneralConfig::$restoreCommand](craft3:craft\config\GeneralConfig::$restoreCommand)
-
 
 
 The shell command Craft should execute to restore a database backup.
@@ -1199,7 +1152,6 @@ This can also be set to `false` to disable database restores completely.
 
 定義元
 :   [GeneralConfig::$actionTrigger](craft3:craft\config\GeneralConfig::$actionTrigger)
-
 
 
 The URI segment Craft should look for when determining if the current request should be routed to a controller action.
@@ -1254,7 +1206,6 @@ Whether auto-generated URLs should have trailing slashes.
 :   [GeneralConfig::$allowUppercaseInSlug](craft3:craft\config\GeneralConfig::$allowUppercaseInSlug)
 
 
-
 Whether uppercase letters should be allowed in slugs.
 
 
@@ -1269,7 +1220,6 @@ Whether uppercase letters should be allowed in slugs.
 
 定義元
 :   [GeneralConfig::$baseCpUrl](craft3:craft\config\GeneralConfig::$baseCpUrl)
-
 
 
 The base URL Craft should use when generating control panel URLs.
@@ -1292,7 +1242,6 @@ The base control panel URL should **not** include the [control panel trigger wor
 
 定義元
 :   [GeneralConfig::$cpTrigger](craft3:craft\config\GeneralConfig::$cpTrigger)
-
 
 
 The URI segment Craft should look for when determining if the current request should route to the control panel rather than the front-end website.
@@ -1321,7 +1270,6 @@ Alternatively, you can set the <config3:baseCpUrl> config setting, but then you 
 :   [GeneralConfig::$invalidUserTokenPath](craft3:craft\config\GeneralConfig::$invalidUserTokenPath)
 
 
-
 The URI Craft should redirect to when user token validation fails. A token is used on things like setting and resetting user account passwords. Note that this only affects front-end site requests.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
@@ -1338,7 +1286,6 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 
 定義元
 :   [GeneralConfig::$loginPath](craft3:craft\config\GeneralConfig::$loginPath)
-
 
 
 The URI Craft should use for user login on the front end.
@@ -1363,7 +1310,6 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 :   [GeneralConfig::$logoutPath](craft3:craft\config\GeneralConfig::$logoutPath)
 
 
-
 The URI Craft should use for user logout on the front end.
 
 This can be set to `false` to disable front-end logout.
@@ -1384,7 +1330,6 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 
 定義元
 :   [GeneralConfig::$omitScriptNameInUrls](craft3:craft\config\GeneralConfig::$omitScriptNameInUrls)
-
 
 
 Whether generated URLs should omit `index.php` (e.g. `http://domain.com/path` instead of `http://domain.com/index.php/path`)
@@ -1410,7 +1355,6 @@ RewriteRule (.+) /index.php?p= [QSA,L]
 
 定義元
 :   [GeneralConfig::$pageTrigger](craft3:craft\config\GeneralConfig::$pageTrigger)
-
 
 
 The string preceding a number which Craft will look for when determining if the current request is for a particular page in a paginated list of pages.
@@ -1439,7 +1383,6 @@ If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change
 :   [GeneralConfig::$pathParam](craft3:craft\config\GeneralConfig::$pathParam)
 
 
-
 The query string param that Craft will check when determining the request’s path.
 
 This can be set to `null` if your web server is capable of directing traffic to `index.php` without a query string param. If you’re using Apache, that means you’ll need to change the `RewriteRule` line in your `.htaccess` file to:
@@ -1458,7 +1401,6 @@ RewriteRule (.+) index.php [QSA,L]
 
 定義元
 :   [GeneralConfig::$postCpLoginRedirect](craft3:craft\config\GeneralConfig::$postCpLoginRedirect)
-
 
 
 The path users should be redirected to after logging into the control panel.
@@ -1481,7 +1423,6 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 :   [GeneralConfig::$postLoginRedirect](craft3:craft\config\GeneralConfig::$postLoginRedirect)
 
 
-
 The path users should be redirected to after logging in from the front-end site.
 
 This setting will also come into effect if the user visits the login page (as specified by the <config3:loginPath> config setting) when they are already logged in.
@@ -1502,7 +1443,6 @@ This setting will also come into effect if the user visits the login page (as sp
 :   [GeneralConfig::$postLogoutRedirect](craft3:craft\config\GeneralConfig::$postLogoutRedirect)
 
 
-
 The path that users should be redirected to after logging out from the front-end site.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
@@ -1519,7 +1459,6 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 
 定義元
 :   [GeneralConfig::$setPasswordPath](craft3:craft\config\GeneralConfig::$setPasswordPath)
-
 
 
 The URI or URL that Craft should use for Set Password forms on the front end.
@@ -1549,7 +1488,6 @@ Since
 :   3.5.14
 
 
-
 The URI to the page where users can request to change their password.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
@@ -1574,7 +1512,6 @@ You’ll also need to set [setPasswordPath](config3:setPasswordPath), which dete
 :   [GeneralConfig::$setPasswordSuccessPath](craft3:craft\config\GeneralConfig::$setPasswordSuccessPath)
 
 
-
 The URI Craft should redirect users to after setting their password from the front end.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
@@ -1596,7 +1533,6 @@ Since
 :   3.5.0
 
 
-
 The query string parameter name that site tokens should be set to.
 
 
@@ -1611,7 +1547,6 @@ The query string parameter name that site tokens should be set to.
 
 定義元
 :   [GeneralConfig::$tokenParam](craft3:craft\config\GeneralConfig::$tokenParam)
-
 
 
 The query string parameter name that Craft tokens should be set to.
@@ -1630,7 +1565,6 @@ The query string parameter name that Craft tokens should be set to.
 :   [GeneralConfig::$usePathInfo](craft3:craft\config\GeneralConfig::$usePathInfo)
 
 
-
 Whether Craft should specify the path using `PATH_INFO` or as a query string parameter when generating URLs.
 
 Note that this setting only takes effect if <config3:omitScriptNameInUrls> is set to `false`.
@@ -1647,7 +1581,6 @@ Note that this setting only takes effect if <config3:omitScriptNameInUrls> is se
 
 定義元
 :   [GeneralConfig::$useSslOnTokenizedUrls](craft3:craft\config\GeneralConfig::$useSslOnTokenizedUrls)
-
 
 
 Determines what protocol/schema Craft will use when generating tokenized URLs. If set to `'auto'`, Craft will check the current site’s base URL and the protocol of the current request and if either of them are https will use `https` in the tokenized URL. If not, will use `http`.
@@ -1669,7 +1602,6 @@ If set to `false`, Craft will always use `http`. If set to `true`, then, Craft w
 
 それ以降
 :   3.4.0
-
 
 
 The URI or URL that Craft should use for email verification links on the front end.
@@ -1695,7 +1627,6 @@ Since
 :   3.1.20
 
 
-
 The URI that users without access to the control panel should be redirected to after verifying a new email address.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
@@ -1716,7 +1647,6 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 :   [GeneralConfig::$phpSessionName](craft3:craft\config\GeneralConfig::$phpSessionName)
 
 
-
 The name of the PHP session cookie.
 
 
@@ -1731,7 +1661,6 @@ The name of the PHP session cookie.
 
 定義元
 :   [GeneralConfig::$rememberUsernameDuration](craft3:craft\config\GeneralConfig::$rememberUsernameDuration)
-
 
 
 The amount of time Craft will remember a username and pre-populate it on the control panel’s Login page.
@@ -1775,7 +1704,6 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 :   [GeneralConfig::$requireMatchingUserAgentForSession](craft3:craft\config\GeneralConfig::$requireMatchingUserAgentForSession)
 
 
-
 Whether Craft should require a matching user agent string when restoring a user session from a cookie.
 
 
@@ -1792,7 +1720,6 @@ Whether Craft should require a matching user agent string when restoring a user 
 :   [GeneralConfig::$requireUserAgentAndIpForSession](craft3:craft\config\GeneralConfig::$requireUserAgentAndIpForSession)
 
 
-
 Whether Craft should require the existence of a user agent string and IP address when creating a new user session.
 
 
@@ -1807,7 +1734,6 @@ Whether Craft should require the existence of a user agent string and IP address
 
 定義元
 :   [GeneralConfig::$userSessionDuration](craft3:craft\config\GeneralConfig::$userSessionDuration)
-
 
 
 The amount of time before a user will get logged out due to inactivity.
@@ -1857,7 +1783,6 @@ For example, if the hash takes 1 second to compute when the value is 14 then the
 :   [GeneralConfig::$cooldownDuration](craft3:craft\config\GeneralConfig::$cooldownDuration)
 
 
-
 The amount of time a user must wait before re-attempting to log in after their account is locked due to too many failed login attempts.
 
 Set to `0` to keep the account locked indefinitely, requiring an admin to manually unlock the account.
@@ -1878,7 +1803,6 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 :   [GeneralConfig::$csrfTokenName](craft3:craft\config\GeneralConfig::$csrfTokenName)
 
 
-
 The name of CSRF token used for CSRF validation if <config3:enableCsrfProtection> is set to `true`.
 
 
@@ -1893,7 +1817,6 @@ The name of CSRF token used for CSRF validation if <config3:enableCsrfProtection
 
 定義元
 :   [GeneralConfig::$defaultTokenDuration](craft3:craft\config\GeneralConfig::$defaultTokenDuration)
-
 
 
 The default amount of time tokens can be used before expiring.
@@ -1912,7 +1835,6 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 定義元
 :   [GeneralConfig::$deferPublicRegistrationPassword](craft3:craft\config\GeneralConfig::$deferPublicRegistrationPassword)
-
 
 
 By default, Craft will require a ‘password’ field to be submitted on front-end, public user registrations. Setting this to `true` will no longer require it on the initial registration form.
@@ -1936,7 +1858,6 @@ Since
 :   3.5.0
 
 
-
 Whether front-end web requests should support basic HTTP authentication.
 
 
@@ -1953,7 +1874,6 @@ Whether front-end web requests should support basic HTTP authentication.
 :   [GeneralConfig::$enableCsrfCookie](craft3:craft\config\GeneralConfig::$enableCsrfCookie)
 
 
-
 Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtection> is enabled. If false, the CSRF token will be stored in session under the `csrfTokenName` config setting name. Note that while storing CSRF tokens in session increases security, it requires starting a session for every page that a CSRF token is needed, which may degrade site performance.
 
 
@@ -1968,7 +1888,6 @@ Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtecti
 
 定義元
 :   [GeneralConfig::$elevatedSessionDuration](craft3:craft\config\GeneralConfig::$elevatedSessionDuration)
-
 
 
 The amount of time a user’s elevated session will last, which is required for some sensitive actions (e.g. user group/permission assignment).
@@ -2008,7 +1927,6 @@ Whether to enable CSRF protection via hidden form inputs for all forms submitted
 :   [GeneralConfig::$invalidLoginWindowDuration](craft3:craft\config\GeneralConfig::$invalidLoginWindowDuration)
 
 
-
 The amount of time to track invalid login attempts for a user, for determining if Craft should lock an account.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
@@ -2044,12 +1962,9 @@ The number of invalid login attempts Craft will allow within the specified durat
 :   [GeneralConfig::$preventUserEnumeration](craft3:craft\config\GeneralConfig::$preventUserEnumeration)
 
 
-
 When `true`, Craft will always return a successful response in the “forgot password” flow, making it difficult to enumerate users.
 
 When set to `false` and you go through the “forgot password” flow from the control panel login page, you’ll get distinct messages indicating whether the username/email exists and whether an email was sent with further instructions. This can be helpful for the user attempting to log in but allow for username/email enumeration based on the response.
-
-
 
 
 
@@ -2067,11 +1982,10 @@ When set to `false` and you go through the “forgot password” flow from the c
 Since
 :   3.7.0
 
+
 The amount of time content preview tokens can be used before expiring.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
-
-
 
 
 
@@ -2090,7 +2004,6 @@ Since
 :   3.6.0
 
 
-
 Whether images uploaded via the control panel should be sanitized.
 
 
@@ -2105,7 +2018,6 @@ Whether images uploaded via the control panel should be sanitized.
 
 定義元
 :   [GeneralConfig::$sanitizeSvgUploads](craft3:craft\config\GeneralConfig::$sanitizeSvgUploads)
-
 
 
 Whether Craft should sanitize uploaded SVG files and strip out potential malicious-looking content.
@@ -2126,7 +2038,6 @@ This should definitely be enabled if you are accepting SVG uploads from untruste
 :   [GeneralConfig::$securityKey](craft3:craft\config\GeneralConfig::$securityKey)
 
 
-
 A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](craft3:craft\services\Security).
 
 This value should be the same across all environments. If this key ever changes, any data that was encrypted with it will be inaccessible.
@@ -2143,7 +2054,6 @@ This value should be the same across all environments. If this key ever changes,
 
 定義元
 :   [GeneralConfig::$secureHeaders](craft3:craft\config\GeneralConfig::$secureHeaders)
-
 
 
 Lists of headers that are, by default, subject to the trusted host configuration.
@@ -2164,7 +2074,6 @@ If not set, the default [yii\web\Request::$secureHeaders](https://www.yiiframewo
 
 定義元
 :   [GeneralConfig::$secureProtocolHeaders](craft3:craft\config\GeneralConfig::$secureProtocolHeaders)
-
 
 
 List of headers to check for determining whether the connection is made via HTTPS.
@@ -2190,7 +2099,6 @@ Since
 :   3.1.0
 
 
-
 Whether user IP addresses should be stored/logged by the system.
 
 
@@ -2205,7 +2113,6 @@ Whether user IP addresses should be stored/logged by the system.
 
 定義元
 :   [GeneralConfig::$trustedHosts](craft3:craft\config\GeneralConfig::$trustedHosts)
-
 
 
 The configuration for trusted security-related headers.
@@ -2228,7 +2135,6 @@ By default, all hosts are trusted.
 :   [GeneralConfig::$useSecureCookies](craft3:craft\config\GeneralConfig::$useSecureCookies)
 
 
-
 Whether Craft will set the “secure” flag when saving cookies when using `Craft::cookieConfig()` to create a cookie.
 
 Valid values are `true`, `false`, and `'auto'`. Defaults to `'auto'`, which will set the secure flag if the page you’re currently accessing is over `https://`. `true` will always set the flag, regardless of protocol and `false` will never automatically set the flag.
@@ -2247,7 +2153,6 @@ Valid values are `true`, `false`, and `'auto'`. Defaults to `'auto'`, which will
 :   [GeneralConfig::$verificationCodeDuration](craft3:craft\config\GeneralConfig::$verificationCodeDuration)
 
 
-
 The amount of time a user verification code can be used before expiring.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
@@ -2262,7 +2167,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 :   [string](http://php.net/language.types.string)[]
 
 デフォルト値
-:   `['7z', 'aiff', 'asc', 'asf', 'avi', 'bmp', 'cap', 'cin', 'csv', 'dfxp', 'doc', 'docx', 'dotm', 'dotx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'itt', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'lrc', 'm2t', 'm4a', 'm4v', 'mcc', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'mpsub', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rt', 'rtf', 'sami', 'sbv', 'scc', 'sdc', 'sitd', 'smi', 'srt', 'stl', 'sub', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tds', 'tgz', 'tif', 'tiff', 'ttml', 'txt', 'vob', 'vsd', 'vtt', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'xml', 'zip']`
+:   `['7z', 'aiff', 'asc', 'asf', 'avi', 'bmp', 'cap', 'cin', 'csv', 'dfxp', 'doc', 'docx', 'dotm', 'dotx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'itt', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'lrc', 'm2t', 'm4a', 'm4v', 'mcc', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'mpsub', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rt', 'rtf', 'sami', 'sbv', 'scc', 'sdc', 'sitd', 'smi', 'srt', 'stl', 'sub', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tds', 'tgz', 'tif', 'tiff', 'ttml', 'txt', 'vob', 'vsd', 'vtt', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'zip']`
 
 定義元
 :   [GeneralConfig::$allowedFileExtensions](craft3:craft\config\GeneralConfig::$allowedFileExtensions)
@@ -2283,7 +2188,6 @@ The file extensions Craft should allow when a user is uploading files.
 
 定義元
 :   [GeneralConfig::$convertFilenamesToAscii](craft3:craft\config\GeneralConfig::$convertFilenamesToAscii)
-
 
 
 Whether uploaded filenames with non-ASCII characters should be converted to ASCII (i.e. `ñ` → `n`).
@@ -2307,7 +2211,6 @@ You can run `php craft utils/ascii-filenames` in your terminal to apply ASCII fi
 
 Since
 :   3.0.37
-
 
 
 List of additional file kinds Craft should support. This array will get merged with the one defined in `\craft\helpers\Assets::_buildFileKinds()`.
@@ -2344,7 +2247,6 @@ File extensions listed here won’t immediately be allowed to be uploaded. You w
 :   [GeneralConfig::$filenameWordSeparator](craft3:craft\config\GeneralConfig::$filenameWordSeparator)
 
 
-
 The string to use to separate words when uploading Assets. If set to `false`, spaces will be left alone.
 
 
@@ -2359,7 +2261,6 @@ The string to use to separate words when uploading Assets. If set to `false`, sp
 
 定義元
 :   [GeneralConfig::$maxUploadFileSize](craft3:craft\config\GeneralConfig::$maxUploadFileSize)
-
 
 
 The maximum upload file size allowed.
@@ -2380,9 +2281,8 @@ See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3
 定義元
 :   [GeneralConfig::$revAssetUrls](craft3:craft\config\GeneralConfig::$revAssetUrls)
 
-Since:
+Since
 :   3.7.0
-
 
 
 Whether asset URLs should be revved so browsers don’t load cached versions when they’re modified.
@@ -2406,7 +2306,6 @@ Since
 :   3.5.0
 
 
-
 The server path to an image file that should be sent when responding to an image request with a 404 status code.
 
 This can be set to an aliased path such as `@webroot/assets/404.svg`.
@@ -2425,7 +2324,6 @@ This can be set to an aliased path such as `@webroot/assets/404.svg`.
 :   [GeneralConfig::$defaultImageQuality](craft3:craft\config\GeneralConfig::$defaultImageQuality)
 
 
-
 The quality level Craft will use when saving JPG and PNG files. Ranges from 1 (worst quality, smallest file) to 100 (best quality, biggest file).
 
 
@@ -2440,7 +2338,6 @@ The quality level Craft will use when saving JPG and PNG files. Ranges from 1 (w
 
 定義元
 :   [GeneralConfig::$generateTransformsBeforePageLoad](craft3:craft\config\GeneralConfig::$generateTransformsBeforePageLoad)
-
 
 
 Whether image transforms should be generated before page load.
@@ -2459,7 +2356,6 @@ Whether image transforms should be generated before page load.
 :   [GeneralConfig::$imageDriver](craft3:craft\config\GeneralConfig::$imageDriver)
 
 
-
 The image driver Craft should use to cleanse and transform images. By default Craft will use ImageMagick if it’s installed and otherwise fall back to GD. You can explicitly set either `'imagick'` or `'gd'` here to override that behavior.
 
 
@@ -2474,7 +2370,6 @@ The image driver Craft should use to cleanse and transform images. By default Cr
 
 定義元
 :   [GeneralConfig::$imageEditorRatios](craft3:craft\config\GeneralConfig::$imageEditorRatios)
-
 
 
 An array containing the selectable image aspect ratios for the image editor. The array must be in the format of `label` => `ratio`, where ratio must be a float or a string. For string values, only values of “none” and “original” are allowed.
@@ -2493,7 +2388,6 @@ An array containing the selectable image aspect ratios for the image editor. The
 :   [GeneralConfig::$maxCachedCloudImageSize](craft3:craft\config\GeneralConfig::$maxCachedCloudImageSize)
 
 
-
 The maximum dimension size to use when caching images from external sources to use in transforms. Set to `0` to never cache them.
 
 
@@ -2508,7 +2402,6 @@ The maximum dimension size to use when caching images from external sources to u
 
 定義元
 :   [GeneralConfig::$optimizeImageFilesize](craft3:craft\config\GeneralConfig::$optimizeImageFilesize)
-
 
 
 Whether Craft should optimize images for reduced file sizes without noticeably reducing image quality. (Only supported when ImageMagick is used.)
@@ -2530,7 +2423,6 @@ Since
 :   3.0.8
 
 
-
 Whether CMYK should be preserved as the colorspace when manipulating images.
 
 Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions it can cause image color distortion. This will only have an effect if ImageMagick is in use.
@@ -2547,7 +2439,6 @@ Setting this to `true` will prevent Craft from transforming CMYK images to sRGB,
 
 定義元
 :   [GeneralConfig::$preserveExifData](craft3:craft\config\GeneralConfig::$preserveExifData)
-
 
 
 Whether the EXIF data should be preserved when manipulating and uploading images.
@@ -2568,7 +2459,6 @@ This will only have effect if ImageMagick is in use.
 
 定義元
 :   [GeneralConfig::$preserveImageColorProfiles](craft3:craft\config\GeneralConfig::$preserveImageColorProfiles)
-
 
 
 Whether the embedded Image Color Profile (ICC) should be preserved when manipulating images.
@@ -2592,7 +2482,6 @@ Setting this to `false` will reduce the image size a little bit, but on some Ima
 :   3.6.0
 
 
-
 Whether SVG thumbnails should be rasterized.
 
 Note this will only work if ImageMagick is installed, and <config3:imageDriver> is set to either `auto` or `imagick`.
@@ -2609,7 +2498,6 @@ Note this will only work if ImageMagick is installed, and <config3:imageDriver> 
 
 定義元
 :   [GeneralConfig::$rotateImagesOnUploadByExifData](craft3:craft\config\GeneralConfig::$rotateImagesOnUploadByExifData)
-
 
 
 Whether Craft should rotate images according to their EXIF data on upload.
@@ -2631,7 +2519,6 @@ Whether Craft should rotate images according to their EXIF data on upload.
 :   3.0.7
 
 
-
 Whether GIF files should be cleansed/transformed.
 
 
@@ -2649,7 +2536,6 @@ Default value
 
 それ以降
 :   3.7.1
-
 
 
 Whether SVG files should be transformed.
@@ -2671,7 +2557,6 @@ Defined by
 :   3.4.0
 
 
-
 Whether images should be upscaled if the provided transform size is larger than the image.
 
 
@@ -2691,7 +2576,6 @@ Defined by
 
 Since
 :   3.5.0
-
 
 
 The Ajax origins that should be allowed to access the GraphQL API, if enabled.
@@ -2717,7 +2601,6 @@ Since
 :   3.6.0
 
 
-
 Whether the `transform` directive should be disabled for the GraphQL API.
 
 
@@ -2735,7 +2618,6 @@ Defined by
 
 それ以降
 :   3.6.0
-
 
 
 Whether GraphQL introspection queries are allowed. Defaults to `true` and is always allowed in the CP.
@@ -2757,7 +2639,6 @@ Defined by
 :   3.3.1
 
 
-
 Whether the GraphQL API should be enabled.
 
 Note that the GraphQL API is only available for Craft Pro.
@@ -2773,11 +2654,10 @@ Default value
 :   `true`
 
 Defined by
-:   [GeneralConfig::$enableGraphQlCaching](craft3:craft\config\GeneralConfig::$enableGraphQlCaching)
+:   [GeneralConfig::$enableGraphqlCaching](craft3:craft\config\GeneralConfig::$enableGraphqlCaching)
 
 Since
 :   3.3.12
-
 
 
 Whether Craft should cache GraphQL queries.
@@ -2798,7 +2678,6 @@ Default value
 
 Defined by
 :   [GeneralConfig::$gqlTypePrefix](craft3:craft\config\GeneralConfig::$gqlTypePrefix)
-
 
 
 Prefix to use for all type names returned by GraphQL.
@@ -2840,7 +2719,6 @@ Since
 :   3.6.0
 
 
-
 The maximum allowed depth a GraphQL query is allowed to reach. Set to `0` to allow any depth.
 
 
@@ -2860,8 +2738,45 @@ Since
 :   3.6.0
 
 
-
 The maximum allowed results for a single GraphQL query. Set to `0` to disable any limits.
+
+
+
+### `prefixGqlRootTypes`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `true`
+
+Defined by
+:   [GeneralConfig::$prefixGqlRootTypes](craft3:craft\config\GeneralConfig::$prefixGqlRootTypes)
+
+Since
+:   3.6.6
+
+
+Whether the <config3:gqlTypePrefix> config setting should have an impact on `query`, `mutation`, and `subscription` types.
+
+
+
+### `setGraphqlDatesToSystemTimeZone`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [GeneralConfig::$setGraphqlDatesToSystemTimeZone](craft3:craft\config\GeneralConfig::$setGraphqlDatesToSystemTimeZone)
+
+Since
+:   3.7.0
+
+
+Whether dates returned by the GraphQL API should be set to the system time zone by default, rather than UTC.
 
 
 
@@ -2877,7 +2792,6 @@ Default value
 
 Defined by
 :   [GeneralConfig::$purgePendingUsersDuration](craft3:craft\config\GeneralConfig::$purgePendingUsersDuration)
-
 
 
 The amount of time to wait before Craft purges pending users from the system that have not activated.
@@ -2909,7 +2823,6 @@ Since
 :   3.3.0
 
 
-
 The amount of time to wait before Craft purges stale user sessions from the sessions table in the database.
 
 Set to `0` to disable this feature.
@@ -2931,32 +2844,12 @@ Defined by
 Since
 :   3.2.0
 
+
 The amount of time to wait before Craft purges unpublished drafts that were never updated with content.
 
 Set to `0` to disable this feature.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
-
-
-
-### `setGraphqlDatesToSystemTimeZone`
-
-Allowed types
-:   [boolean](http://php.net/language.types.boolean)
-
-Default value
-:   `false`
-
-Defined by
-:   [GeneralConfig::$setGraphqlDatesToSystemTimeZone](craft3:craft\config\GeneralConfig::$setGraphqlDatesToSystemTimeZone)
-
-Since
-:   3.7.0
-
-
-
-Whether dates returned by the GraphQL API should be set to the system time zone by default, rather than UTC.
-
 
 
 ### `softDeleteDuration`
@@ -2972,7 +2865,6 @@ Defined by
 
 Since
 :   3.1.0
-
 
 
 The amount of time before a soft-deleted item will be up for hard-deletion by garbage collection.
