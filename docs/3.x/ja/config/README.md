@@ -25,7 +25,7 @@ Craft uses [Guzzle](http://docs.guzzlephp.org/en/latest/) whenever creating HTTP
 - クリックするだけの、何百という無料、および、商用[プラグイン](https://plugins.craftcms.com/)を備える組み込みのプラグインストア。
 - [モジュールおよびプラグイン開発](extend/README.md)のための、強靭なフレームワーク。
 
-`config/` フォルダに `guzzle.php` ファイルを作成することによって、これらのリクエストを送信する際に Guzzle が使用するコンフィグ設定をカスタマイズできます。 そのファイルは、設定を上書きした配列を返さなければなりません。
+`config/` フォルダに `guzzle.php` ファイルを作成することによって、これらのリクエストを送信する際に Guzzle が使用するコンフィグ設定をカスタマイズできます。 The file does not support Craft’s [multi-environment configuration](#environmental-configuration) and should return an array, with your config overrides.
 
 ```php
 <?php
