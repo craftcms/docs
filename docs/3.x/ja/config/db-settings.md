@@ -5,7 +5,7 @@ Craft は、Craft がどのようにデータベースへ接続するかを制�
 
 Craft supports several database connection settings that give you control over how Craft connects to the database.
 
-例えば、新しい Craft 3 プロジェクト内の `.env` ファイルでは、次の環境変数を定義する必要があります。
+Ultimately, database connection settings must be set from  `config/db.php`, but we recommend you initially set them as environment variables (such as in your `.env` file), and then pull the environment variable value into `config/db.php` using [getenv()](https://php.net/manual/en/function.getenv.php).
 
 `DB_` ではじまる変数はデータベース接続設定で、`config/db.php` の中から次のように取得します。
 
@@ -53,7 +53,7 @@ PDO コンストラクタに渡す PDO 属性の key => value ペアの配列。
 ### `attributes`
 
 Allowed types :
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value :
 :   `[]`
@@ -65,7 +65,7 @@ Defined by :
 
 例えば、MySQL PDO ドライバ（http://php.net/manual/en/ref.pdo-mysql.php）を使用する場合、（MySQL で SSL が利用できると仮定する https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html）SSL データベース接続で `'user'` が SSL 経由で接続できる場合、次のように設定します。
 
-テーブルを作成する際に使用する文字セット。
+For example, when using the [MySQL PDO driver](https://php.net/manual/en/ref.pdo-mysql.php), if you wanted to enable a SSL database connection (assuming [SSL is enabled in MySQL](https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html) and `'user'` can connect via SSL, you’d set these:
 
 ```php
 [
@@ -80,7 +80,7 @@ Defined by :
 ### `charset`
 
 Allowed types :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value :
 :   `'utf8'`
@@ -105,7 +105,7 @@ You can change the character set and collation across all existing database tabl
 ### `collation`
 
 Allowed types :
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 デフォルト値 :
 :   `null`
@@ -140,7 +140,7 @@ You can change the character set and collation across all existing database tabl
 ### `dsn`
 
 許可される型 :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値 : :
 :   `null`
@@ -162,7 +162,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 ### `password`
 
 許可される型 :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値 : :
 :   `''`
@@ -179,7 +179,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 ### `schema`
 
 許可される型 : :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値 : :
 :   `'public'`
@@ -196,7 +196,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 ### `tablePrefix`
 
 許可される型 : :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値 : :
 :   `''`
@@ -213,7 +213,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 ### `user`
 
 許可される型 : :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値 : :
 :   `'root'`
@@ -227,10 +227,30 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 
 
+### `useUnbufferedConnections`
+
+許可される型 : :
+:   [boolean](https://php.net/language.types.boolean)
+
+デフォルト値 : :
+:   `false`
+
+定義元 : :
+:   [DbConfig::$useUnbufferedConnections](craft3:craft\config\DbConfig::$useUnbufferedConnections)
+
+Since
+:   3.7.0
+
+Whether batched queries should be executed on a separate, unbuffered database connection.
+
+This setting only applies to MySQL. It can be enabled when working with high volume content, to prevent PHP from running out of memory when querying too much data at once. (See <https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder#batch-query-mysql> for an explanation of MySQL’s batch query limitations.)
+
+
+
 ### `url`
 
 許可される型 : :
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 デフォルト値 : :
 :   `null`
@@ -242,14 +262,14 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 The database connection URL, if one was provided by your hosting environment.
 
-これがセットされている場合、[driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver)、[user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user)、[database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database)、[server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server)、 [port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port)、および、[database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database) の値は、そこから抽出されます。
+If this is set, the values for [driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver), [user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user), [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database), [server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server), [port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port), and [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database) will be extracted from it.
 
 
 
 ### `driver`
 
 許可される型 : :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値 : :
 :   `null`
@@ -259,14 +279,14 @@ The database connection URL, if one was provided by your hosting environment.
 
 
 
-使用するデータベースのドライバ。 MySQL 向けの 'mysql'、または、PostgreSQL 向けの 'pgsql'。
+The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
 
 
 
 ### `server`
 
 許可される型 : :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値 : :
 :   `null`
@@ -276,14 +296,14 @@ The database connection URL, if one was provided by your hosting environment.
 
 
 
-データベースのサーバー名、または、IP アドレス。 Usually `localhost` or `127.0.0.1`.
+The database server name or IP address. Usually `localhost` or `127.0.0.1`.
 
 
 
 ### `port`
 
 許可される型 : :
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 デフォルト値 : :
 :   `null`
@@ -293,31 +313,31 @@ The database connection URL, if one was provided by your hosting environment.
 
 
 
-データベースサーバーのポート。 デフォルトは、MySQL 向けの 3306、および、PostgreSQL 向けの 5432。
+The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
 
 
 
 ### `unixSocket`
 
-許可される型 : :
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+Allowed types
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
-デフォルト値 : :
+Default value
 :   `null`
 
-定義元 : :
+Defined by
 :   [DbConfig::$unixSocket](craft3:craft\config\DbConfig::$unixSocket)
 
 
 
-MySQL のみ。 セットされている場合、（yiic で使用される）CLI 接続文字列は、 サーバーやポートの代わりに Unix ソケットに接続します。 これを指定すると、'server' と 'port' 設定が無視されます。
+MySQL only. If this is set, the CLI connection string (used for yiic) will connect to the Unix socket instead of the server and port. If this is specified, then `server` and `port` settings are ignored.
 
 
 
 ### `database`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `null`
