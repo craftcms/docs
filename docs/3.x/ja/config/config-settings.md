@@ -41,7 +41,7 @@ Craft がサポートするコンフィグ設定の完全なリストは、次�
 ### `デフォルト値`
 
 Allowed types :
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value :
 :   `['alwaysShowFocusRings' => false, 'useShapes' => false, 'underlineLinks' => false]`
@@ -66,7 +66,7 @@ Defined by :
 ### `allowAdminChanges`
 
 Allowed types :
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value :
 :   `true`
@@ -93,7 +93,7 @@ Don’t disable this setting until **all** environments have been updated to Cra
 ### `allowUpdates`
 
 Allowed types :
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value :
 :   `true`
@@ -111,14 +111,13 @@ Defined by :
 ### `allowSimilarTags`
 
 Allowed types :
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value :
 :   `false`
 
 Defined by :
 :   [GeneralConfig::$allowSimilarTags](craft3:craft\config\GeneralConfig::$allowSimilarTags)
-
 
 
 ::: warning
@@ -130,7 +129,7 @@ Defined by :
 ### `autoLoginAfterAccountActivation`
 
 Allowed types :
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value :
 :   `false`
@@ -146,7 +145,7 @@ Defined by :
 ### `autosaveDrafts`
 
 Allowed types :
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value :
 :   `true`
@@ -167,7 +166,7 @@ Note that drafts *will* be autosaved while Live Preview is open, regardless of t
 ### `backupOnUpdate`
 
 Allowed types :
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value :
 :   `true`
@@ -203,7 +202,7 @@ Defined by :
 ### `cpHeadTags`
 
 Allowed types :
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value :
 :   `[]`
@@ -235,10 +234,11 @@ Defined by :
 ```
 
 
+
 ### `defaultCpLanguage`
 
 Allowed types :
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value :
 :   `null`
@@ -247,14 +247,14 @@ Defined by :
 :   [GeneralConfig::$defaultCpLanguage](craft3:craft\config\GeneralConfig::$defaultCpLanguage)
 
 
-この設定に関わらず、ライブプレビューを開いている間は下書きが自動保存 *されます*。
+The default language the control panel should use for users who haven’t set a preferred language yet.
 
 
 
 ### `defaultCpLocale`
 
 Allowed types :
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value :
 :   `null`
@@ -293,7 +293,7 @@ Defined by :
 ### `defaultFileMode`
 
 Allowed types :
-:   [integer](http://php.net/language.types.integer), [null](http://php.net/language.types.null)
+:   [integer](https://php.net/language.types.integer), [null](https://php.net/language.types.null)
 
 Default value :
 :   `null`
@@ -311,7 +311,7 @@ Defined by :
 ### `defaultSearchTermOptions`
 
 Allowed types :
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value :
 :   `[]`
@@ -337,7 +337,7 @@ Defined by :
 ### `defaultTemplateExtensions`
 
 Allowed types :
-:   [string](http://php.net/language.types.string)[]
+:   [string](https://php.net/language.types.string)[]
 
 Default value :
 :   `['html', 'twig']`
@@ -353,7 +353,7 @@ Defined by :
 ### `defaultWeekStartDay`
 
 Allowed types :
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value :
 :   `1` (Monday)
@@ -379,7 +379,7 @@ Defined by :
 ### `devMode`
 
 Allowed types :
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value :
 :   `false`
@@ -395,7 +395,7 @@ Defined by :
 ### `disabledPlugins`
 
 許可される型 :
-:   [string](http://php.net/language.types.string), [string](http://php.net/language.types.string)[]
+:   [string](https://php.net/language.types.string)[], [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value :
 :   `null`
@@ -432,7 +432,7 @@ This should not be set on a per-environment basis, as it could result in plugin 
 ### `disallowRobots`
 
 許可される型 :
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value :
 :   `false`
@@ -455,7 +455,7 @@ This should be set to `true` for development and staging environments.
 ### `enableTemplateCaching`
 
 許可される型 :
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value : :
 :   `true`
@@ -471,7 +471,7 @@ Whether to enable Craft’s template `{% cache %}` tag on a global basis.
 ### `errorTemplatePrefix`
 
 許可される型 :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値 :
 :   `''`
@@ -489,7 +489,7 @@ If set to `'_'` your site’s 404 template would live at `templates/_404.html`, 
 ### `extraAllowedFileExtensions`
 
 許可される型 : :
-:   [string](http://php.net/language.types.string)[], [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string)[], [null](https://php.net/language.types.null)
 
 デフォルト値 :
 :   `null`
@@ -505,7 +505,7 @@ List of file extensions that will be merged into the <config3:allowedFileExtensi
 ### `extraAppLocales`
 
 許可される型 : :
-:   [string](http://php.net/language.types.string)[], [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string)[], [null](https://php.net/language.types.null)
 
 デフォルト値 :
 :   `null`
@@ -517,7 +517,6 @@ List of file extensions that will be merged into the <config3:allowedFileExtensi
 :   3.0.24
 
 
-
 List of extra locale IDs that the application should support, and users should be able to select as their Preferred Language.
 
 Only use this setting if your server has the Intl PHP extension, or if you’ve saved the corresponding [locale data](https://github.com/craftcms/locales) into your `config/locales/` folder.
@@ -527,7 +526,7 @@ Only use this setting if your server has the Intl PHP extension, or if you’ve 
 ### `handleCasing`
 
 許可される型
-:   
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `self::CAMEL_CASE`
@@ -538,6 +537,8 @@ Only use this setting if your server has the Intl PHP extension, or if you’ve 
 それ以降
 :   3.6.0
 
+
+The casing to use for autogenerated component handles.
 
 This can be set to one of the following:
 
@@ -550,7 +551,7 @@ This can be set to one of the following:
 ### `headlessMode`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -582,7 +583,7 @@ When this is enabled, the following changes will take place:
 ### `httpProxy`
 
 許可される型
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `null`
@@ -603,7 +604,7 @@ This can be set to a URL (`http://localhost`) or a URL plus a port (`http://loca
 ### `indexTemplateFilenames`
 
 許可される型
-:   [string](http://php.net/language.types.string)[]
+:   [string](https://php.net/language.types.string)[]
 
 デフォルト値
 :   `['index']`
@@ -619,14 +620,13 @@ The template filenames Craft will look for within a directory to represent the d
 ### `ipHeaders`
 
 許可される型
-:   [string](http://php.net/language.types.string)[], [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string)[], [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `null`
 
 定義元
 :   [GeneralConfig::$ipHeaders](craft3:craft\config\GeneralConfig::$ipHeaders)
-
 
 
 List of headers where proxies store the real client IP.
@@ -640,7 +640,7 @@ If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.co
 ### `isSystemLive`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
+:   [boolean](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `null`
@@ -656,7 +656,7 @@ Whether the site is currently live. If set to `true` or `false`, it will take pr
 ### `limitAutoSlugsToAscii`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -676,7 +676,7 @@ This only affects the JavaScript auto-generated slugs. Non-ASCII characters can 
 ### `maxBackups`
 
 許可される型
-:   [integer](http://php.net/language.types.integer), [false](http://php.net/language.types.boolean)
+:   [integer](https://php.net/language.types.integer), [false](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `20`
@@ -692,7 +692,7 @@ The number of backups Craft should make before it starts deleting the oldest bac
 ### `maxRevisions`
 
 許可される型
-:   [integer](http://php.net/language.types.integer), [null](http://php.net/language.types.null)
+:   [integer](https://php.net/language.types.integer), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `50`
@@ -713,7 +713,7 @@ Set to `0` if you want to store an unlimited number of revisions.
 ### `maxSlugIncrement`
 
 許可される型
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 デフォルト値
 :   `100`
@@ -726,17 +726,19 @@ The highest number Craft will tack onto a slug in order to make it unique before
 
 
 
-
 ### `permissionsPolicyHeader`
 
 許可される型
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `'interest-cohort=()'`
 
 定義元
-:   [GeneralConfig::$pathParam](craft3:craft\config\GeneralConfig::$permissionsPolicyHeader)
+:   [GeneralConfig::$permissionsPolicyHeader](craft3:craft\config\GeneralConfig::$permissionsPolicyHeader)
+
+Since
+:   3.6.14
 
 
 The `Permissions-Policy` header that should be sent for web responses.
@@ -748,10 +750,11 @@ The default value prevents FLoC tracking due to security & privacy concerns:
 This can be set to `null` to prevent the header from being sent.
 
 
+
 ### `phpMaxMemoryLimit`
 
 許可される型
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `null`
@@ -762,14 +765,14 @@ This can be set to `null` to prevent the header from being sent.
 
 The maximum amount of memory Craft will try to reserve during memory-intensive operations such as zipping, unzipping and updating. Defaults to an empty string, which means it will use as much memory as it can.
 
-See <http://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> for a list of acceptable values.
+See <https://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> for a list of acceptable values.
 
 
 
 ### `previewIframeResizerOptions`
 
 許可される型
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 デフォルト値
 :   `[]`
@@ -794,7 +797,7 @@ Custom [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#
 ### `privateTemplateTrigger`
 
 許可される型
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `'_'`
@@ -812,7 +815,7 @@ Set to an empty value to disable public template routing.
 ### `runQueueAutomatically`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `true`
@@ -830,7 +833,7 @@ If disabled, an alternate queue worker *must* be set up separately, either as an
 ```
 
 ::: tip
-This setting should be disabled for servers running Win32, or with Apache’s mod_deflate/mod_gzip installed, where PHP’s [flush()](http://php.net/manual/en/function.flush.php) method won’t work.
+This setting should be disabled for servers running Win32, or with Apache’s mod_deflate/mod_gzip installed, where PHP’s [flush()](https://php.net/manual/en/function.flush.php) method won’t work.
 :::
 
 
@@ -838,7 +841,7 @@ This setting should be disabled for servers running Win32, or with Apache’s mo
 ### `sameSiteCookieValue`
 
 許可される型
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `null`
@@ -863,7 +866,7 @@ This setting requires PHP 7.3 or later.
 ### `sendPoweredByHeader`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `true`
@@ -879,7 +882,7 @@ Whether an `X-Powered-By: Craft CMS` header should be sent, helping services lik
 ### `slugWordSeparator`
 
 許可される型
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `'-'`
@@ -895,7 +898,7 @@ The character(s) that should be used to separate words in slugs.
 ### `testToEmailAddress`
 
 許可される型
-:   [string](http://php.net/language.types.string), [array](http://php.net/language.types.array), [false](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [array](https://php.net/language.types.array), [false](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `null`
@@ -913,7 +916,7 @@ By default, the recipient name(s) will be “Test Recipient”, but you can cust
 ### `timezone`
 
 許可される型
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `null`
@@ -924,14 +927,14 @@ By default, the recipient name(s) will be “Test Recipient”, but you can cust
 
 The timezone of the site. If set, it will take precedence over the Timezone setting in Settings → General.
 
-This can be set to one of PHP’s [supported timezones](http://php.net/manual/en/timezones.php).
+This can be set to one of PHP’s [supported timezones](https://php.net/manual/en/timezones.php).
 
 
 
 ### `translationDebugOutput`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -947,7 +950,7 @@ Whether translated messages should be wrapped in special characters to help find
 ### `useEmailAsUsername`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -969,7 +972,7 @@ php craft utils/update-usernames
 ### `useIframeResizer`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -998,7 +1001,7 @@ You can customize the behavior of iFrame Resizer via the <config3:previewIframeR
 ### `useFileLocks`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
+:   [boolean](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `null`
@@ -1020,7 +1023,7 @@ If not set to `true` or `false`, Craft will try to detect if the underlying file
 ### `aliases`
 
 許可される型
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 デフォルト値
 :   `[]`
@@ -1036,7 +1039,7 @@ Any custom Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-a
 ### `backupCommand`
 
 許可される型
-:   [string](http://php.net/language.types.string), [false](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [false](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `null`
@@ -1065,14 +1068,13 @@ This can also be set to `false` to disable database backups completely.
 ### `defaultCookieDomain`
 
 許可される型
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `''`
 
 定義元
 :   [GeneralConfig::$defaultCookieDomain](craft3:craft\config\GeneralConfig::$defaultCookieDomain)
-
 
 
 The domain that cookies generated by Craft should be created for. If blank, it will be left up to the browser to determine which domain to use (almost always the current). If you want the cookies to work for all subdomains, for example, you could set this to `'.domain.com'`.
@@ -1082,7 +1084,7 @@ The domain that cookies generated by Craft should be created for. If blank, it w
 ### `resourceBasePath`
 
 許可される型
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `'@webroot/cpresources'`
@@ -1098,7 +1100,7 @@ The path to the root directory that should store published control panel resourc
 ### `resourceBaseUrl`
 
 許可される型
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `'@web/cpresources'`
@@ -1114,7 +1116,7 @@ The URL to the root directory that should store published control panel resource
 ### `restoreCommand`
 
 許可される型
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `null`
@@ -1145,7 +1147,7 @@ This can also be set to `false` to disable database restores completely.
 ### `actionTrigger`
 
 許可される型
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `'actions'`
@@ -1170,7 +1172,6 @@ The URI segment Craft should look for when determining if the current request sh
 :   [GeneralConfig::$activateAccountSuccessPath](craft3:craft\config\GeneralConfig::$activateAccountSuccessPath)
 
 
-
 The URI that users without access to the control panel should be redirected to after activating their account.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
@@ -1180,14 +1181,13 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 ### `addTrailingSlashesToUrls`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
 
 定義元
 :   [GeneralConfig::$addTrailingSlashesToUrls](craft3:craft\config\GeneralConfig::$addTrailingSlashesToUrls)
-
 
 
 Whether auto-generated URLs should have trailing slashes.
@@ -1197,7 +1197,7 @@ Whether auto-generated URLs should have trailing slashes.
 ### `allowUppercaseInSlug`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -1213,7 +1213,7 @@ Whether uppercase letters should be allowed in slugs.
 ### `baseCpUrl`
 
 許可される型
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `null`
@@ -1235,7 +1235,7 @@ The base control panel URL should **not** include the [control panel trigger wor
 ### `cpTrigger`
 
 許可される型
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `'admin'`
@@ -1323,7 +1323,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 ### `omitScriptNameInUrls`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -1348,7 +1348,7 @@ RewriteRule (.+) /index.php?p= [QSA,L]
 ### `pageTrigger`
 
 許可される型
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `'p'`
@@ -1371,10 +1371,11 @@ If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change
 :::
 
 
+
 ### `pathParam`
 
 許可される型
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `'p'`
@@ -1390,6 +1391,8 @@ This can be set to `null` if your web server is capable of directing traffic to 
 ```
 RewriteRule (.+) index.php [QSA,L]
 ```
+
+
 
 ### `postCpLoginRedirect`
 
@@ -1521,7 +1524,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 ### `siteToken`
 
 許可される型
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `'siteToken'`
@@ -1540,7 +1543,7 @@ The query string parameter name that site tokens should be set to.
 ### `tokenParam`
 
 許可される型
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `'token'`
@@ -1556,7 +1559,7 @@ The query string parameter name that Craft tokens should be set to.
 ### `usePathInfo`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -1574,7 +1577,7 @@ Note that this setting only takes effect if <config3:omitScriptNameInUrls> is se
 ### `useSslOnTokenizedUrls`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean), [string](http://php.net/language.types.string)
+:   [boolean](https://php.net/language.types.boolean), [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `'auto'`
@@ -1638,7 +1641,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 ### `phpSessionName`
 
 許可される型
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `'CraftSessionId'`
@@ -1683,7 +1686,6 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 :   [GeneralConfig::$rememberedUserSessionDuration](craft3:craft\config\GeneralConfig::$rememberedUserSessionDuration)
 
 
-
 The amount of time a user stays logged if “Remember Me” is checked on the login page.
 
 Set to `0` to disable the “Remember Me” feature altogether.
@@ -1695,7 +1697,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `requireMatchingUserAgentForSession`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `true`
@@ -1711,7 +1713,7 @@ Whether Craft should require a matching user agent string when restoring a user 
 ### `requireUserAgentAndIpForSession`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `true`
@@ -1749,14 +1751,13 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `blowfishHashCost`
 
 許可される型
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 デフォルト値
 :   `13`
 
 定義元
 :   [GeneralConfig::$blowfishHashCost](craft3:craft\config\GeneralConfig::$blowfishHashCost)
-
 
 
 The higher the cost value, the longer it takes to generate a password hash and to verify against it.
@@ -1794,7 +1795,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `csrfTokenName`
 
 許可される型
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `'CRAFT_CSRF_TOKEN'`
@@ -1828,7 +1829,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `deferPublicRegistrationPassword`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -1846,7 +1847,7 @@ If you have email verification enabled, new users will set their password once t
 ### `enableBasicHttpAuth`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -1865,7 +1866,7 @@ Whether front-end web requests should support basic HTTP authentication.
 ### `enableCsrfCookie`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `true`
@@ -1901,14 +1902,13 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `enableCsrfProtection`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `true`
 
 定義元
 :   [GeneralConfig::$enableCsrfProtection](craft3:craft\config\GeneralConfig::$enableCsrfProtection)
-
 
 
 Whether to enable CSRF protection via hidden form inputs for all forms submitted via Craft.
@@ -1936,14 +1936,13 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `maxInvalidLogins`
 
 許可される型
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 デフォルト値
 :   `5`
 
 定義元
 :   [GeneralConfig::$maxInvalidLogins](craft3:craft\config\GeneralConfig::$maxInvalidLogins)
-
 
 
 The number of invalid login attempts Craft will allow within the specified duration before the account gets locked.
@@ -1953,7 +1952,7 @@ The number of invalid login attempts Craft will allow within the specified durat
 ### `preventUserEnumeration`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -1992,7 +1991,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `sanitizeCpImageUploads`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `true`
@@ -2011,7 +2010,7 @@ Whether images uploaded via the control panel should be sanitized.
 ### `sanitizeSvgUploads`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `true`
@@ -2029,7 +2028,7 @@ This should definitely be enabled if you are accepting SVG uploads from untruste
 ### `securityKey`
 
 許可される型
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `null`
@@ -2047,7 +2046,7 @@ This value should be the same across all environments. If this key ever changes,
 ### `secureHeaders`
 
 許可される型
-:   [array](http://php.net/language.types.array), [null](http://php.net/language.types.null)
+:   [array](https://php.net/language.types.array), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `null`
@@ -2067,7 +2066,7 @@ If not set, the default [yii\web\Request::$secureHeaders](https://www.yiiframewo
 ### `secureProtocolHeaders`
 
 許可される型
-:   [array](http://php.net/language.types.array), [null](http://php.net/language.types.null)
+:   [array](https://php.net/language.types.array), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `null`
@@ -2087,7 +2086,7 @@ If not set, the default [yii\web\Request::$secureProtocolHeaders](https://www.yi
 ### `storeUserIps`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -2106,7 +2105,7 @@ Whether user IP addresses should be stored/logged by the system.
 ### `trustedHosts`
 
 許可される型
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 デフォルト値
 :   `['any']`
@@ -2126,7 +2125,7 @@ By default, all hosts are trusted.
 ### `useSecureCookies`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean), [string](http://php.net/language.types.string)
+:   [boolean](https://php.net/language.types.boolean), [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `'auto'`
@@ -2164,14 +2163,13 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `allowedFileExtensions`
 
 許可される型
-:   [string](http://php.net/language.types.string)[]
+:   [string](https://php.net/language.types.string)[]
 
 デフォルト値
 :   `['7z', 'aiff', 'asc', 'asf', 'avi', 'bmp', 'cap', 'cin', 'csv', 'dfxp', 'doc', 'docx', 'dotm', 'dotx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'itt', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'lrc', 'm2t', 'm4a', 'm4v', 'mcc', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'mpsub', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rt', 'rtf', 'sami', 'sbv', 'scc', 'sdc', 'sitd', 'smi', 'srt', 'stl', 'sub', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tds', 'tgz', 'tif', 'tiff', 'ttml', 'txt', 'vob', 'vsd', 'vtt', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'zip']`
 
 定義元
 :   [GeneralConfig::$allowedFileExtensions](craft3:craft\config\GeneralConfig::$allowedFileExtensions)
-
 
 
 The file extensions Craft should allow when a user is uploading files.
@@ -2181,7 +2179,7 @@ The file extensions Craft should allow when a user is uploading files.
 ### `convertFilenamesToAscii`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -2201,7 +2199,7 @@ You can run `php craft utils/ascii-filenames` in your terminal to apply ASCII fi
 ### `extraFileKinds`
 
 許可される型
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 デフォルト値
 :   `[]`
@@ -2238,7 +2236,7 @@ File extensions listed here won’t immediately be allowed to be uploaded. You w
 ### `filenameWordSeparator`
 
 許可される型
-:   [string](http://php.net/language.types.string), [boolean](http://php.net/language.types.boolean)
+:   [string](https://php.net/language.types.string), [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `'-'`
@@ -2254,7 +2252,7 @@ The string to use to separate words when uploading Assets. If set to `false`, sp
 ### `maxUploadFileSize`
 
 許可される型
-:   [integer](http://php.net/language.types.integer), [string](http://php.net/language.types.string)
+:   [integer](https://php.net/language.types.integer), [string](https://php.net/language.types.string)
 
 デフォルト値
 :   `16777216` (16MB)
@@ -2269,11 +2267,10 @@ See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3
 
 
 
-
 ### `revAssetUrls`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -2294,7 +2291,7 @@ Whether asset URLs should be revved so browsers don’t load cached versions whe
 ### `brokenImagePath`
 
 許可される型
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 デフォルト値
 :   `null`
@@ -2315,7 +2312,7 @@ This can be set to an aliased path such as `@webroot/assets/404.svg`.
 ### `defaultImageQuality`
 
 許可される型
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 デフォルト値
 :   `82`
@@ -2331,7 +2328,7 @@ The quality level Craft will use when saving JPG and PNG files. Ranges from 1 (w
 ### `generateTransformsBeforePageLoad`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -2363,7 +2360,7 @@ The image driver Craft should use to cleanse and transform images. By default Cr
 ### `imageEditorRatios`
 
 許可される型
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 デフォルト値
 :   `['Unconstrained' => 'none', 'Original' => 'original', 'Square' => 1, '16:9' => 1.78, '10:8' => 1.25, '7:5' => 1.4, '4:3' => 1.33, '5:3' => 1.67, '3:2' => 1.5]`
@@ -2379,7 +2376,7 @@ An array containing the selectable image aspect ratios for the image editor. The
 ### `maxCachedCloudImageSize`
 
 許可される型
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 デフォルト値
 :   `2000`
@@ -2395,7 +2392,7 @@ The maximum dimension size to use when caching images from external sources to u
 ### `optimizeImageFilesize`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `true`
@@ -2411,7 +2408,7 @@ Whether Craft should optimize images for reduced file sizes without noticeably r
 ### `preserveCmykColorspace`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -2432,7 +2429,7 @@ Setting this to `true` will prevent Craft from transforming CMYK images to sRGB,
 ### `preserveExifData`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -2452,7 +2449,7 @@ This will only have effect if ImageMagick is in use.
 ### `preserveImageColorProfiles`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `true`
@@ -2470,7 +2467,7 @@ Setting this to `false` will reduce the image size a little bit, but on some Ima
 ### `rasterizeSvgThumbs`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `false`
@@ -2491,7 +2488,7 @@ Note this will only work if ImageMagick is installed, and <config3:imageDriver> 
 ### `rotateImagesOnUploadByExifData`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `true`
@@ -2507,7 +2504,7 @@ Whether Craft should rotate images according to their EXIF data on upload.
 ### `transformGifs`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 デフォルト値
 :   `true`
@@ -2526,7 +2523,7 @@ Whether GIF files should be cleansed/transformed.
 ### `transformSvgs`
 
 許可される型
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2545,7 +2542,7 @@ Whether SVG files should be transformed.
 ### `upscaleImages`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2566,7 +2563,7 @@ Whether images should be upscaled if the provided transform size is larger than 
 ### `allowedGraphqlOrigins`
 
 Allowed types
-:   [string](http://php.net/language.types.string)[], [false](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string)[], [false](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -2589,7 +2586,7 @@ If this is set to `false`, then the `Access-Control-Allow-Origin` response heade
 ### `disableGraphqlTransformDirective`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -2608,7 +2605,7 @@ Whether the `transform` directive should be disabled for the GraphQL API.
 ### `enableGraphqlIntrospection`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2627,7 +2624,7 @@ Whether GraphQL introspection queries are allowed. Defaults to `true` and is alw
 ### `enableGql`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2645,10 +2642,10 @@ Note that the GraphQL API is only available for Craft Pro.
 
 
 
-### `enableGraphQlCaching`
+### `enableGraphqlCaching`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2671,7 +2668,7 @@ This setting will have no effect if a plugin is using the [craft\services\Gql::E
 ### `gqlTypePrefix`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `''`
@@ -2687,7 +2684,7 @@ Prefix to use for all type names returned by GraphQL.
 ### `maxGraphqlComplexity`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value
 :   `0`
@@ -2699,7 +2696,6 @@ Defined by
 :   3.6.0
 
 
-
 The maximum allowed complexity a GraphQL query is allowed to have. Set to `0` to allow any complexity.
 
 
@@ -2707,7 +2703,7 @@ The maximum allowed complexity a GraphQL query is allowed to have. Set to `0` to
 ### `maxGraphqlDepth`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value
 :   `0`
@@ -2726,7 +2722,7 @@ The maximum allowed depth a GraphQL query is allowed to reach. Set to `0` to all
 ### `maxGraphqlResults`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value
 :   `0`
@@ -2745,7 +2741,7 @@ The maximum allowed results for a single GraphQL query. Set to `0` to disable an
 ### `prefixGqlRootTypes`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2764,7 +2760,7 @@ Whether the <config3:gqlTypePrefix> config setting should have an impact on `que
 ### `setGraphqlDatesToSystemTimeZone`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
