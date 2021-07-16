@@ -5,7 +5,7 @@ sidebarLevel: 3
 
 Craft supports several database connection settings that give you control over how Craft connects to the database.
 
-Ultimately, database connection settings must be set from  `config/db.php`, but we recommend you initially set them as environment variables (such as in your `.env` file), and then pull the environment variable value into `config/db.php` using [getenv()](http://php.net/manual/en/function.getenv.php).
+Ultimately, database connection settings must be set from  `config/db.php`, but we recommend you initially set them as environment variables (such as in your `.env` file), and then pull the environment variable value into `config/db.php` using [getenv()](https://php.net/manual/en/function.getenv.php).
 
 For example, in a new Craft 3 project, your `.env` file should define these environment variables:
 
@@ -53,7 +53,7 @@ Here’s the full list of database connection settings that Craft supports:
 ### `attributes`
 
 Allowed types :
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value :
 :   `[]`
@@ -65,7 +65,7 @@ Defined by :
 
 An array of key => value pairs of PDO attributes to pass into the PDO constructor.
 
-Default value :
+For example, when using the [MySQL PDO driver](https://php.net/manual/en/ref.pdo-mysql.php), if you wanted to enable a SSL database connection (assuming [SSL is enabled in MySQL](https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html) and `'user'` can connect via SSL, you’d set these:
 
 ```php
 [
@@ -80,7 +80,7 @@ Default value :
 ### `charset`
 
 Allowed types :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value :
 :   `'utf8'`
@@ -104,7 +104,7 @@ Defined by :
 ### `collation`
 
 Allowed types :
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value :
 :   `null`
@@ -138,7 +138,7 @@ Allowed types :
 ### `dsn`
 
 Allowed types :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value :
 :   `null`
@@ -160,7 +160,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 ### `password`
 
 Allowed types :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value :
 :   `''`
@@ -177,7 +177,7 @@ The database password to connect with.
 ### `schema`
 
 Allowed types :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value :
 :   `'public'`
@@ -194,7 +194,7 @@ The schema that Postgres is configured to use by default (PostgreSQL only).
 ### `tablePrefix`
 
 Allowed types :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value :
 :   `''`
@@ -211,7 +211,7 @@ If you're sharing Craft installs in a single database (MySQL) or a single databa
 ### `user`
 
 Allowed types :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value :
 :   `'root'`
@@ -225,10 +225,30 @@ The database username to connect with.
 
 
 
+### `useUnbufferedConnections`
+
+Allowed types :
+:   [boolean](https://php.net/language.types.boolean)
+
+Default value :
+:   `false`
+
+Defined by :
+:   [DbConfig::$useUnbufferedConnections](craft3:craft\config\DbConfig::$useUnbufferedConnections)
+
+Since
+:   3.7.0
+
+Whether batched queries should be executed on a separate, unbuffered database connection.
+
+This setting only applies to MySQL. It can be enabled when working with high volume content, to prevent PHP from running out of memory when querying too much data at once. (See <https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder#batch-query-mysql> for an explanation of MySQL’s batch query limitations.)
+
+
+
 ### `url`
 
 Allowed types :
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value :
 :   `null`
@@ -247,7 +267,7 @@ If this is set, the values for [driver](https://docs.craftcms.com/api/v3/craft-c
 ### `driver`
 
 Allowed types :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value :
 :   `null`
@@ -264,7 +284,7 @@ The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
 ### `server`
 
 Allowed types :
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value :
 :   `null`
@@ -280,13 +300,13 @@ The database server name or IP address. Usually `localhost` or `127.0.0.1`.
 
 ### `port`
 
-Allowed types :
-:   [integer](http://php.net/language.types.integer)
+Allowed types
+:   [integer](https://php.net/language.types.integer)
 
-Default value :
+Default value
 :   `null`
 
-Defined by :
+Defined by
 :   [DbConfig::$port](craft3:craft\config\DbConfig::$port)
 
 
@@ -298,7 +318,7 @@ The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
 ### `unixSocket`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -308,14 +328,14 @@ Defined by
 
 
 
-MySQL only. If this is set, then the CLI connection string (used for yiic) will connect to the Unix socket, instead of the server and port. If this is specified, then 'server' and 'port' settings are ignored.
+MySQL only. If this is set, the CLI connection string (used for yiic) will connect to the Unix socket instead of the server and port. If this is specified, then `server` and `port` settings are ignored.
 
 
 
 ### `database`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `null`
