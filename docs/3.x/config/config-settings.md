@@ -741,7 +741,7 @@ Default value
 :   `'interest-cohort=()'`
 
 Defined by
-:   [GeneralConfig::$pathParam](craft3:craft\config\GeneralConfig::$permissionsPolicyHeader)
+:   [GeneralConfig::$permissionsPolicyHeader](craft3:craft\config\GeneralConfig::$permissionsPolicyHeader)
 
 Since
 :   3.6.14
