@@ -2087,6 +2087,25 @@ This value should be the same across all environments. If this key ever changes,
 
 
 
+### `sendContentLengthHeader`
+
+Allowed types
+:   [boolean](https://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [GeneralConfig::$sendContentLengthHeader](craft3:craft\config\GeneralConfig::$sendContentLengthHeader)
+
+Since
+:   3.7.3
+
+
+Whether a `Content-Length` header should be sent with responses.
+
+
+
 ### `secureHeaders`
 
 Allowed types

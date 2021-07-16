@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## Unreleased
+### Added
+- Documented `sendContentLengthHeader` config setting added in Craft 3.7.3.
+
 ## 2021-07-14
 ### Added
 - Documented `transformSvgs` config setting added in Craft 3.7.1.
