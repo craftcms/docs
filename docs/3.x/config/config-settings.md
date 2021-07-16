@@ -245,8 +245,7 @@ Defined by
 :   [GeneralConfig::$defaultCpLanguage](craft3:craft\config\GeneralConfig::$defaultCpLanguage)
 
 
-The default language the control panel should use for users who haven’t set a preferred language yet,
-as well as for console requests.
+The default language the control panel should use for users who haven’t set a preferred language yet.
 
 
 
