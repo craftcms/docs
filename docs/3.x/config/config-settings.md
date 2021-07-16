@@ -517,7 +517,6 @@ Since
 :   3.0.24
 
 
-
 List of extra locale IDs that the application should support, and users should be able to select as their Preferred Language.
 
 Only use this setting if your server has the Intl PHP extension, or if you’ve saved the corresponding
@@ -634,7 +633,6 @@ Defined by
 :   [GeneralConfig::$ipHeaders](craft3:craft\config\GeneralConfig::$ipHeaders)
 
 
-
 List of headers where proxies store the real client IP.
 
 See [yii\web\Request::$ipHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$ipHeaders-detail) for more details.
@@ -734,7 +732,6 @@ The highest number Craft will tack onto a slug in order to make it unique before
 
 
 
-
 ### `permissionsPolicyHeader`
 
 Allowed types
@@ -745,6 +742,9 @@ Default value
 
 Defined by
 :   [GeneralConfig::$pathParam](craft3:craft\config\GeneralConfig::$permissionsPolicyHeader)
+
+Since
+:   3.6.14
 
 
 The `Permissions-Policy` header that should be sent for web responses.
