@@ -41,7 +41,7 @@ Here’s the full list of config settings that Craft supports:
 ### `accessibilityDefaults`
 
 Allowed types
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value
 :   `['alwaysShowFocusRings' => false, 'useShapes' => false, 'underlineLinks' => false]`
@@ -66,7 +66,7 @@ The array can contain the following keys:
 ### `allowAdminChanges`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -93,7 +93,7 @@ Don’t disable this setting until **all** environments have been updated to Cra
 ### `allowUpdates`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -111,7 +111,7 @@ This setting will automatically be disabled if <config3:allowAdminChanges> is di
 ### `allowSimilarTags`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -127,7 +127,7 @@ Whether users should be allowed to create similarly-named tags.
 ### `autoLoginAfterAccountActivation`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -143,7 +143,7 @@ Whether users should automatically be logged in after activating their account o
 ### `autosaveDrafts`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -164,7 +164,7 @@ Note that drafts *will* be autosaved while Live Preview is open, regardless of t
 ### `backupOnUpdate`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -200,7 +200,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `cpHeadTags`
 
 Allowed types
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value
 :   `[]`
@@ -236,7 +236,7 @@ For example, you can give the control panel a custom favicon (etc.) like this:
 ### `defaultCpLanguage`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -252,7 +252,7 @@ The default language the control panel should use for users who haven’t set a 
 ### `defaultCpLocale`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -292,7 +292,7 @@ If set to `null`, the permission will be determined by the current environment.
 ### `defaultFileMode`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer), [null](http://php.net/language.types.null)
+:   [integer](https://php.net/language.types.integer), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -310,7 +310,7 @@ If set to `null`, the permission will be determined by the current environment.
 ### `defaultSearchTermOptions`
 
 Allowed types
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value
 :   `[]`
@@ -334,7 +334,7 @@ Options include:
 ### `defaultTemplateExtensions`
 
 Allowed types
-:   [string](http://php.net/language.types.string)[]
+:   [string](https://php.net/language.types.string)[]
 
 Default value
 :   `['html', 'twig']`
@@ -350,7 +350,7 @@ The template file extensions Craft will look for when matching a template path t
 ### `defaultWeekStartDay`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value
 :   `1` (Monday)
@@ -376,7 +376,7 @@ This should be set to one of the following integers:
 ### `devMode`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -392,7 +392,7 @@ Whether the system should run in [Dev Mode](https://craftcms.com/support/dev-mod
 ### `disabledPlugins`
 
 Allowed types
-:   [string](http://php.net/language.types.string)[], [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string)[], [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -430,7 +430,7 @@ between environments, which will prevent project config changes from getting app
 ### `disallowRobots`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -454,7 +454,7 @@ This should be set to `true` for development and staging environments.
 ### `enableTemplateCaching`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -470,7 +470,7 @@ Whether to enable Craft’s template `{% cache %}` tag on a global basis.
 ### `errorTemplatePrefix`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `''`
@@ -488,7 +488,7 @@ If set to `'_'` your site’s 404 template would live at `templates/_404.html`, 
 ### `extraAllowedFileExtensions`
 
 Allowed types
-:   [string](http://php.net/language.types.string)[], [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string)[], [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -504,7 +504,7 @@ List of file extensions that will be merged into the <config3:allowedFileExtensi
 ### `extraAppLocales`
 
 Allowed types
-:   [string](http://php.net/language.types.string)[], [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string)[], [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -526,7 +526,7 @@ Only use this setting if your server has the Intl PHP extension, or if you’ve 
 ### `handleCasing`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `self::CAMEL_CASE`
@@ -551,7 +551,7 @@ This can be set to one of the following:
 ### `headlessMode`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -585,7 +585,7 @@ panel is located on a different domain than your front end.
 ### `httpProxy`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -606,7 +606,7 @@ This can be set to a URL (`http://localhost`) or a URL plus a port (`http://loca
 ### `indexTemplateFilenames`
 
 Allowed types
-:   [string](http://php.net/language.types.string)[]
+:   [string](https://php.net/language.types.string)[]
 
 Default value
 :   `['index']`
@@ -623,7 +623,7 @@ matching a template path to a file on the front end.
 ### `ipHeaders`
 
 Allowed types
-:   [string](http://php.net/language.types.string)[], [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string)[], [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -643,7 +643,7 @@ If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.co
 ### `isSystemLive`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
+:   [boolean](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -660,7 +660,7 @@ in Settings → General.
 ### `limitAutoSlugsToAscii`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -680,7 +680,7 @@ This only affects the JavaScript auto-generated slugs. Non-ASCII characters can 
 ### `maxBackups`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer), [false](http://php.net/language.types.boolean)
+:   [integer](https://php.net/language.types.integer), [false](https://php.net/language.types.boolean)
 
 Default value
 :   `20`
@@ -697,7 +697,7 @@ not delete any backups.
 ### `maxRevisions`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer), [null](http://php.net/language.types.null)
+:   [integer](https://php.net/language.types.integer), [null](https://php.net/language.types.null)
 
 Default value
 :   `50`
@@ -718,7 +718,7 @@ Set to `0` if you want to store an unlimited number of revisions.
 ### `maxSlugIncrement`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value
 :   `100`
@@ -734,7 +734,7 @@ The highest number Craft will tack onto a slug in order to make it unique before
 ### `permissionsPolicyHeader`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `'interest-cohort=()'`
@@ -759,7 +759,7 @@ This can be set to `null` to prevent the header from being sent.
 ### `phpMaxMemoryLimit`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -771,14 +771,14 @@ Defined by
 The maximum amount of memory Craft will try to reserve during memory-intensive operations such as zipping,
 unzipping and updating. Defaults to an empty string, which means it will use as much memory as it can.
 
-See <http://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> for a list of acceptable values.
+See <https://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> for a list of acceptable values.
 
 
 
 ### `previewIframeResizerOptions`
 
 Allowed types
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value
 :   `[]`
@@ -803,7 +803,7 @@ Custom [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#
 ### `privateTemplateTrigger`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `'_'`
@@ -822,7 +822,7 @@ Set to an empty value to disable public template routing.
 ### `runQueueAutomatically`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -843,7 +843,7 @@ If disabled, an alternate queue worker *must* be set up separately, either as an
 
 ::: tip
 This setting should be disabled for servers running Win32, or with Apache’s mod_deflate/mod_gzip installed,
-where PHP’s [flush()](http://php.net/manual/en/function.flush.php) method won’t work.
+where PHP’s [flush()](https://php.net/manual/en/function.flush.php) method won’t work.
 :::
 
 
@@ -851,7 +851,7 @@ where PHP’s [flush()](http://php.net/manual/en/function.flush.php) method won�
 ### `sameSiteCookieValue`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `null`
@@ -876,7 +876,7 @@ This setting requires PHP 7.3 or later.
 ### `sendPoweredByHeader`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -893,7 +893,7 @@ Whether an `X-Powered-By: Craft CMS` header should be sent, helping services lik
 ### `slugWordSeparator`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `'-'`
@@ -909,7 +909,7 @@ The character(s) that should be used to separate words in slugs.
 ### `testToEmailAddress`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [array](http://php.net/language.types.array), [false](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [array](https://php.net/language.types.array), [false](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -929,7 +929,7 @@ By default, the recipient name(s) will be “Test Recipient”, but you can cust
 ### `timezone`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -940,14 +940,14 @@ Defined by
 
 The timezone of the site. If set, it will take precedence over the Timezone setting in Settings → General.
 
-This can be set to one of PHP’s [supported timezones](http://php.net/manual/en/timezones.php).
+This can be set to one of PHP’s [supported timezones](https://php.net/manual/en/timezones.php).
 
 
 
 ### `translationDebugOutput`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -964,7 +964,7 @@ Whether translated messages should be wrapped in special characters to help find
 ### `useEmailAsUsername`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -986,7 +986,7 @@ php craft utils/update-usernames
 ### `useIframeResizer`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -1020,7 +1020,7 @@ You can customize the behavior of iFrame Resizer via the <config3:previewIframeR
 ### `useFileLocks`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
+:   [boolean](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -1042,7 +1042,7 @@ If not set to `true` or `false`, Craft will try to detect if the underlying file
 ### `aliases`
 
 Allowed types
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value
 :   `[]`
@@ -1058,7 +1058,7 @@ Any custom Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-a
 ### `backupCommand`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [false](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [false](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -1088,7 +1088,7 @@ This can also be set to `false` to disable database backups completely.
 ### `defaultCookieDomain`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `''`
@@ -1106,7 +1106,7 @@ set this to `'.domain.com'`.
 ### `resourceBasePath`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `'@webroot/cpresources'`
@@ -1122,7 +1122,7 @@ The path to the root directory that should store published control panel resourc
 ### `resourceBaseUrl`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `'@web/cpresources'`
@@ -1138,7 +1138,7 @@ The URL to the root directory that should store published control panel resource
 ### `restoreCommand`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -1169,7 +1169,7 @@ This can also be set to `false` to disable database restores completely.
 ### `actionTrigger`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `'actions'`
@@ -1203,7 +1203,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 ### `addTrailingSlashesToUrls`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -1219,7 +1219,7 @@ Whether auto-generated URLs should have trailing slashes.
 ### `allowUppercaseInSlug`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -1235,7 +1235,7 @@ Whether uppercase letters should be allowed in slugs.
 ### `baseCpUrl`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -1257,7 +1257,7 @@ The base control panel URL should **not** include the [control panel trigger wor
 ### `cpTrigger`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `'admin'`
@@ -1350,7 +1350,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 ### `omitScriptNameInUrls`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -1376,7 +1376,7 @@ RewriteRule (.+) /index.php?p= [QSA,L]
 ### `pageTrigger`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `'p'`
@@ -1405,7 +1405,7 @@ If your server is running Apache, you’ll need to update the redirect code in y
 ### `pathParam`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `'p'`
@@ -1558,7 +1558,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 ### `siteToken`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `'siteToken'`
@@ -1577,7 +1577,7 @@ The query string parameter name that site tokens should be set to.
 ### `tokenParam`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `'token'`
@@ -1593,7 +1593,7 @@ The query string parameter name that Craft tokens should be set to.
 ### `usePathInfo`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -1611,7 +1611,7 @@ Note that this setting only takes effect if <config3:omitScriptNameInUrls> is se
 ### `useSslOnTokenizedUrls`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean), [string](http://php.net/language.types.string)
+:   [boolean](https://php.net/language.types.boolean), [string](https://php.net/language.types.string)
 
 Default value
 :   `'auto'`
@@ -1677,7 +1677,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 ### `phpSessionName`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `'CraftSessionId'`
@@ -1733,7 +1733,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `requireMatchingUserAgentForSession`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -1749,7 +1749,7 @@ Whether Craft should require a matching user agent string when restoring a user 
 ### `requireUserAgentAndIpForSession`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -1787,7 +1787,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `blowfishHashCost`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value
 :   `13`
@@ -1833,7 +1833,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `csrfTokenName`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `'CRAFT_CSRF_TOKEN'`
@@ -1867,7 +1867,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `deferPublicRegistrationPassword`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -1887,7 +1887,7 @@ If you don’t, the only way they can set their password is to go through your �
 ### `enableBasicHttpAuth`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -1906,7 +1906,7 @@ Whether front-end web requests should support basic HTTP authentication.
 ### `enableCsrfCookie`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -1944,7 +1944,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `enableCsrfProtection`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -1978,7 +1978,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `maxInvalidLogins`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value
 :   `5`
@@ -1994,7 +1994,7 @@ The number of invalid login attempts Craft will allow within the specified durat
 ### `preventUserEnumeration`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -2035,7 +2035,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `sanitizeCpImageUploads`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2054,7 +2054,7 @@ Whether images uploaded via the control panel should be sanitized.
 ### `sanitizeSvgUploads`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2072,7 +2072,7 @@ This should definitely be enabled if you are accepting SVG uploads from untruste
 ### `securityKey`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `null`
@@ -2090,7 +2090,7 @@ This value should be the same across all environments. If this key ever changes,
 ### `secureHeaders`
 
 Allowed types
-:   [array](http://php.net/language.types.array), [null](http://php.net/language.types.null)
+:   [array](https://php.net/language.types.array), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -2110,7 +2110,7 @@ If not set, the default [yii\web\Request::$secureHeaders](https://www.yiiframewo
 ### `secureProtocolHeaders`
 
 Allowed types
-:   [array](http://php.net/language.types.array), [null](http://php.net/language.types.null)
+:   [array](https://php.net/language.types.array), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -2130,7 +2130,7 @@ If not set, the default [yii\web\Request::$secureProtocolHeaders](https://www.yi
 ### `storeUserIps`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -2149,7 +2149,7 @@ Whether user IP addresses should be stored/logged by the system.
 ### `trustedHosts`
 
 Allowed types
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value
 :   `['any']`
@@ -2169,7 +2169,7 @@ By default, all hosts are trusted.
 ### `useSecureCookies`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean), [string](http://php.net/language.types.string)
+:   [boolean](https://php.net/language.types.boolean), [string](https://php.net/language.types.string)
 
 Default value
 :   `'auto'`
@@ -2208,7 +2208,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ### `allowedFileExtensions`
 
 Allowed types
-:   [string](http://php.net/language.types.string)[]
+:   [string](https://php.net/language.types.string)[]
 
 Default value
 :   `['7z', 'aiff', 'asc', 'asf', 'avi', 'bmp', 'cap', 'cin', 'csv', 'dfxp', 'doc', 'docx', 'dotm', 'dotx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'itt', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'lrc', 'm2t', 'm4a', 'm4v', 'mcc', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'mpsub', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rt', 'rtf', 'sami', 'sbv', 'scc', 'sdc', 'sitd', 'smi', 'srt', 'stl', 'sub', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tds', 'tgz', 'tif', 'tiff', 'ttml', 'txt', 'vob', 'vsd', 'vtt', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'zip']`
@@ -2224,7 +2224,7 @@ The file extensions Craft should allow when a user is uploading files.
 ### `convertFilenamesToAscii`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -2244,7 +2244,7 @@ You can run `php craft utils/ascii-filenames` in your terminal to apply ASCII fi
 ### `extraFileKinds`
 
 Allowed types
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value
 :   `[]`
@@ -2283,7 +2283,7 @@ the <config3:extraAllowedFileExtensions> config setting.
 ### `filenameWordSeparator`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [boolean](http://php.net/language.types.boolean)
+:   [string](https://php.net/language.types.string), [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `'-'`
@@ -2299,7 +2299,7 @@ The string to use to separate words when uploading Assets. If set to `false`, sp
 ### `maxUploadFileSize`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer), [string](http://php.net/language.types.string)
+:   [integer](https://php.net/language.types.integer), [string](https://php.net/language.types.string)
 
 Default value
 :   `16777216` (16MB)
@@ -2317,7 +2317,7 @@ See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3
 ### `revAssetUrls`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -2338,7 +2338,7 @@ Whether asset URLs should be revved so browsers don’t load cached versions whe
 ### `brokenImagePath`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -2360,7 +2360,7 @@ This can be set to an aliased path such as `@webroot/assets/404.svg`.
 ### `defaultImageQuality`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value
 :   `82`
@@ -2377,7 +2377,7 @@ The quality level Craft will use when saving JPG and PNG files. Ranges from 1 (w
 ### `generateTransformsBeforePageLoad`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -2410,7 +2410,7 @@ and otherwise fall back to GD. You can explicitly set either `'imagick'` or `'gd
 ### `imageEditorRatios`
 
 Allowed types
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value
 :   `['Unconstrained' => 'none', 'Original' => 'original', 'Square' => 1, '16:9' => 1.78, '10:8' => 1.25, '7:5' => 1.4, '4:3' => 1.33, '5:3' => 1.67, '3:2' => 1.5]`
@@ -2427,7 +2427,7 @@ of `label` => `ratio`, where ratio must be a float or a string. For string value
 ### `maxCachedCloudImageSize`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value
 :   `2000`
@@ -2443,7 +2443,7 @@ The maximum dimension size to use when caching images from external sources to u
 ### `optimizeImageFilesize`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2460,7 +2460,7 @@ ImageMagick is used.)
 ### `preserveCmykColorspace`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -2482,7 +2482,7 @@ image color distortion. This will only have an effect if ImageMagick is in use.
 ### `preserveExifData`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -2502,7 +2502,7 @@ This will only have effect if ImageMagick is in use.
 ### `preserveImageColorProfiles`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2521,7 +2521,7 @@ an incorrect gamma value, which causes the images to become very dark. This will
 ### `rasterizeSvgThumbs`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -2542,7 +2542,7 @@ Note this will only work if ImageMagick is installed, and <config3:imageDriver> 
 ### `rotateImagesOnUploadByExifData`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2558,7 +2558,7 @@ Whether Craft should rotate images according to their EXIF data on upload.
 ### `transformGifs`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2577,7 +2577,7 @@ Whether GIF files should be cleansed/transformed.
 ### `transformSvgs`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2596,7 +2596,7 @@ Whether SVG files should be transformed.
 ### `upscaleImages`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2617,7 +2617,7 @@ Whether images should be upscaled if the provided transform size is larger than 
 ### `allowedGraphqlOrigins`
 
 Allowed types
-:   [string](http://php.net/language.types.string)[], [false](http://php.net/language.types.boolean), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string)[], [false](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -2641,7 +2641,7 @@ If this is set to `false`, then the `Access-Control-Allow-Origin` response heade
 ### `disableGraphqlTransformDirective`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -2660,7 +2660,7 @@ Whether the `transform` directive should be disabled for the GraphQL API.
 ### `enableGraphqlIntrospection`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2679,7 +2679,7 @@ Whether GraphQL introspection queries are allowed. Defaults to `true` and is alw
 ### `enableGql`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2700,7 +2700,7 @@ Note that the GraphQL API is only available for Craft Pro.
 ### `enableGraphqlCaching`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2725,7 +2725,7 @@ caching logic and setting the `result` property.
 ### `gqlTypePrefix`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `''`
@@ -2741,7 +2741,7 @@ Prefix to use for all type names returned by GraphQL.
 ### `maxGraphqlComplexity`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value
 :   `0`
@@ -2760,7 +2760,7 @@ The maximum allowed complexity a GraphQL query is allowed to have. Set to `0` to
 ### `maxGraphqlDepth`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value
 :   `0`
@@ -2779,7 +2779,7 @@ The maximum allowed depth a GraphQL query is allowed to reach. Set to `0` to all
 ### `maxGraphqlResults`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value
 :   `0`
@@ -2798,7 +2798,7 @@ The maximum allowed results for a single GraphQL query. Set to `0` to disable an
 ### `prefixGqlRootTypes`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
@@ -2817,7 +2817,7 @@ Whether the <config3:gqlTypePrefix> config setting should have an impact on `que
 ### `setGraphqlDatesToSystemTimeZone`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`

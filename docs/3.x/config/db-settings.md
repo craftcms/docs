@@ -5,7 +5,7 @@ sidebarLevel: 3
 
 Craft supports several database connection settings that give you control over how Craft connects to the database.
 
-Ultimately, database connection settings must be set from  `config/db.php`, but we recommend you initially set them as environment variables (such as in your `.env` file), and then pull the environment variable value into `config/db.php` using [getenv()](http://php.net/manual/en/function.getenv.php).
+Ultimately, database connection settings must be set from  `config/db.php`, but we recommend you initially set them as environment variables (such as in your `.env` file), and then pull the environment variable value into `config/db.php` using [getenv()](https://php.net/manual/en/function.getenv.php).
 
 For example, in a new Craft 3 project, your `.env` file should define these environment variables:
 
@@ -53,7 +53,7 @@ Here’s the full list of database connection settings that Craft supports:
 ### `attributes`
 
 Allowed types
-:   [array](http://php.net/language.types.array)
+:   [array](https://php.net/language.types.array)
 
 Default value
 :   `[]`
@@ -65,7 +65,7 @@ Defined by
 
 An array of key => value pairs of PDO attributes to pass into the PDO constructor.
 
-For example, when using the [MySQL PDO driver](http://php.net/manual/en/ref.pdo-mysql.php), if you wanted to enable a SSL database connection
+For example, when using the [MySQL PDO driver](https://php.net/manual/en/ref.pdo-mysql.php), if you wanted to enable a SSL database connection
 (assuming [SSL is enabled in MySQL](https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html) and `'user'` can connect via SSL,
 you’d set these:
 
@@ -82,7 +82,7 @@ you’d set these:
 ### `charset`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `'utf8'`
@@ -107,7 +107,7 @@ You can change the character set and collation across all existing database tabl
 ### `collation`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -142,7 +142,7 @@ You can change the character set and collation across all existing database tabl
 ### `dsn`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `null`
@@ -165,7 +165,7 @@ For example, `mysql:host=127.0.0.1;port=3306;dbname=acme_corp`.
 ### `password`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `''`
@@ -182,7 +182,7 @@ The database password to connect with.
 ### `schema`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `'public'`
@@ -199,7 +199,7 @@ The schema that Postgres is configured to use by default (PostgreSQL only).
 ### `tablePrefix`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `''`
@@ -217,7 +217,7 @@ you can set a table prefix here to avoid per-install table naming conflicts. Thi
 ### `user`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `'root'`
@@ -234,7 +234,7 @@ The database username to connect with.
 ### `useUnbufferedConnections`
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `false`
@@ -254,7 +254,7 @@ This setting only applies to MySQL. It can be enabled when working with high vol
 ### `url`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -273,7 +273,7 @@ If this is set, the values for [driver](https://docs.craftcms.com/api/v3/craft-c
 ### `driver`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `null`
@@ -290,7 +290,7 @@ The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
 ### `server`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `null`
@@ -307,7 +307,7 @@ The database server name or IP address. Usually `localhost` or `127.0.0.1`.
 ### `port`
 
 Allowed types
-:   [integer](http://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer)
 
 Default value
 :   `null`
@@ -324,7 +324,7 @@ The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
 ### `unixSocket`
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
@@ -342,7 +342,7 @@ the server and port. If this is specified, then `server` and `port` settings are
 ### `database`
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:   [string](https://php.net/language.types.string)
 
 Default value
 :   `null`
