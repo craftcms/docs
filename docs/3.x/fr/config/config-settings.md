@@ -82,11 +82,27 @@ Whether admins should be allowed to make administrative changes to the system.
 
 When this is disabled, the Settings and Plugin Store sections will be hidden, the Craft edition and Craft/plugin versions will be locked, and the project config will become read-only.
 
-Defined by :
+It’s best to disable this in production environments with a deployment workflow that runs `composer install` and [propagates project config updates](../project-config.md#propagating-changes) on deploy.
 
 ::: warning
 Don’t disable this setting until **all** environments have been updated to Craft 3.1.0 or later.
 :::
+
+
+
+### `allowSimilarTags`
+
+Allowed types :
+:   [boolean](https://php.net/language.types.boolean)
+
+Default value :
+:   `false`
+
+Defined by :
+:   [GeneralConfig::$allowSimilarTags](craft3:craft\config\GeneralConfig::$allowSimilarTags)
+
+
+Whether users should be allowed to create similarly-named tags.
 
 
 
@@ -105,22 +121,6 @@ Defined by :
 Whether Craft should allow system and plugin updates in the control panel, and plugin installation from the Plugin Store.
 
 This setting will automatically be disabled if <config3:allowAdminChanges> is disabled.
-
-
-
-### `allowSimilarTags`
-
-Allowed types :
-:   [boolean](https://php.net/language.types.boolean)
-
-Default value :
-:   `false`
-
-Defined by :
-:   [GeneralConfig::$allowSimilarTags](craft3:craft\config\GeneralConfig::$allowSimilarTags)
-
-
-Whether users should be allowed to create similarly-named tags.
 
 
 
@@ -525,7 +525,7 @@ Allowed types :
 :   [string](https://php.net/language.types.string)
 
 Default value :
-:   `self::CAMEL_CASE`
+:   `'camel'`
 
 Defined by :
 :   [craft3:craft\config\GeneralConfig::$siteUrl](craft3:craft\config\GeneralConfig::$handleCasing)
@@ -859,6 +859,25 @@ This setting requires PHP 7.3 or later.
 
 
 
+### `sendContentLengthHeader`
+
+Allowed types :
+:   [boolean](https://php.net/language.types.boolean)
+
+Default value :
+:   `false`
+
+Defined by :
+:   [GeneralConfig::$sendContentLengthHeader](craft3:craft\config\GeneralConfig::$sendContentLengthHeader)
+
+Since
+:   3.7.3
+
+
+Whether a `Content-Length` header should be sent with responses.
+
+
+
 ### `sendPoweredByHeader`
 
 Allowed types :
@@ -965,6 +984,26 @@ php craft utils/update-usernames
 
 
 
+### `useFileLocks`
+
+Allowed types :
+:   [boolean](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
+
+Default value :
+:   `null`
+
+Defined by :
+:   [GeneralConfig::$useFileLocks](craft3:craft\config\GeneralConfig::$useFileLocks)
+
+
+Whether to grab an exclusive lock on a file when writing to it by using the `LOCK_EX` flag.
+
+Some file systems, such as NFS, do not support exclusive file locking.
+
+If not set to `true` or `false`, Craft will try to detect if the underlying file system supports exclusive file locking and cache the results.
+
+
+
 ### `useIframeResizer`
 
 Allowed types :
@@ -991,26 +1030,6 @@ If you have a [decoupled front-end](https://craftcms.com/docs/3.x/entries.html#p
 ::: tip
 You can customize the behavior of iFrame Resizer via the <config3:previewIframeResizerOptions> config setting.
 :::
-
-
-
-### `useFileLocks`
-
-Allowed types :
-:   [boolean](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
-
-Default value :
-:   `null`
-
-Defined by :
-:   [GeneralConfig::$useFileLocks](craft3:craft\config\GeneralConfig::$useFileLocks)
-
-
-Whether to grab an exclusive lock on a file when writing to it by using the `LOCK_EX` flag.
-
-Some file systems, such as NFS, do not support exclusive file locking.
-
-If not set to `true` or `false`, Craft will try to detect if the underlying file system supports exclusive file locking and cache the results.
 
 
 
@@ -1834,9 +1853,29 @@ Defined by :
 :   [GeneralConfig::$deferPublicRegistrationPassword](craft3:craft\config\GeneralConfig::$deferPublicRegistrationPassword)
 
 
-By default, Craft will require a ‘password’ field to be submitted on front-end, public user registrations. Setting this to `true` will no longer require it on the initial registration form.
+By default, Craft requires a front-end “password” field for public user registrations. Setting this to `true` removes that requirement for the initial registration form.
 
-If you have email verification enabled, new users will set their password once they’ve clicked on the verification link in the email. If you don’t, the only way they can set their password is to go through your “forgot password” workflow.
+If you have email verification enabled, new users will set their password once they’ve followed the verification link in the email. If you don’t, the only way they can set their password is to go through your “forgot password” workflow.
+
+
+
+### `elevatedSessionDuration`
+
+Allowed types :
+:   `mixed`
+
+Default value :
+:   `300` (5 minutes)
+
+Defined by :
+:   [GeneralConfig::$elevatedSessionDuration](craft3:craft\config\GeneralConfig::$elevatedSessionDuration)
+
+
+The amount of time a user’s elevated session will last, which is required for some sensitive actions (e.g. user group/permission assignment).
+
+Set to `0` to disable elevated session support.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -1872,26 +1911,6 @@ Defined by :
 
 
 Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtection> is enabled. If false, the CSRF token will be stored in session under the `csrfTokenName` config setting name. Note that while storing CSRF tokens in session increases security, it requires starting a session for every page that a CSRF token is needed, which may degrade site performance.
-
-
-
-### `elevatedSessionDuration`
-
-Allowed types :
-:   `mixed`
-
-Default value :
-:   `300` (5 minutes)
-
-Defined by :
-:   [GeneralConfig::$elevatedSessionDuration](craft3:craft\config\GeneralConfig::$elevatedSessionDuration)
-
-
-The amount of time a user’s elevated session will last, which is required for some sensitive actions (e.g. user group/permission assignment).
-
-Set to `0` to disable elevated session support.
-
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -2021,43 +2040,6 @@ This should definitely be enabled if you are accepting SVG uploads from untruste
 
 
 
-### `securityKey`
-
-Allowed types :
-:   [string](https://php.net/language.types.string)
-
-Default value :
-:   `null`
-
-Defined by :
-:   [GeneralConfig::$securityKey](craft3:craft\config\GeneralConfig::$securityKey)
-
-
-A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](craft3:craft\services\Security).
-
-This value should be the same across all environments. If this key ever changes, any data that was encrypted with it will be inaccessible.
-
-
-
-### `sendContentLengthHeader`
-
-Allowed types :
-:   [boolean](https://php.net/language.types.boolean)
-
-Default value :
-:   `false`
-
-Defined by :
-:   [GeneralConfig::$sendContentLengthHeader](craft3:craft\config\GeneralConfig::$sendContentLengthHeader)
-
-Since
-:   3.7.3
-
-
-Whether a `Content-Length` header should be sent with responses.
-
-
-
 ### `secureHeaders`
 
 Allowed types :
@@ -2095,6 +2077,24 @@ List of headers to check for determining whether the connection is made via HTTP
 See [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) for more details.
 
 If not set, the default [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) value will be used.
+
+
+
+### `securityKey`
+
+Allowed types :
+:   [string](https://php.net/language.types.string)
+
+Default value :
+:   `null`
+
+Defined by :
+:   [GeneralConfig::$securityKey](craft3:craft\config\GeneralConfig::$securityKey)
+
+
+A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](https://docs.craftcms.com/api/v3/craft-services-security.html).
+
+This value should be the same across all environments. If this key ever changes, any data that was encrypted with it will be inaccessible.
 
 
 
@@ -2362,7 +2362,7 @@ Allowed types :
 :   `mixed`
 
 Default value :
-:   `self::IMAGE_DRIVER_AUTO`
+:   `'auto'`
 
 Defined by :
 :   [GeneralConfig::$imageDriver](craft3:craft\config\GeneralConfig::$imageDriver)
@@ -2617,25 +2617,6 @@ Whether the `transform` directive should be disabled for the GraphQL API.
 
 
 
-### `enableGraphqlIntrospection`
-
-Allowed types
-:   [boolean](https://php.net/language.types.boolean)
-
-Default value
-:   `true`
-
-Since :
-:   [GeneralConfig::$enableGraphqlIntrospection](craft3:craft\config\GeneralConfig::$enableGraphqlIntrospection)
-
-Since
-:   3.6.0
-
-
-Whether GraphQL introspection queries are allowed. Defaults to `true` and is always allowed in the CP.
-
-
-
 ### `enableGql`
 
 Allowed types
@@ -2644,7 +2625,7 @@ Allowed types
 Default value
 :   `true`
 
-Defined by
+Since :
 :   [GeneralConfig::$enableGql](craft3:craft\config\GeneralConfig::$enableGql)
 
 Since
@@ -2677,6 +2658,25 @@ Whether Craft should cache GraphQL queries.
 If set to `true`, Craft will cache the results for unique GraphQL queries per access token. The cache is automatically invalidated any time an element is saved, the site structure is updated, or a GraphQL schema is saved.
 
 This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v3/craft-services-gql.html#event-before-execute-gql-query) event to provide its own caching logic and setting the `result` property.
+
+
+
+### `enableGraphqlIntrospection`
+
+Allowed types
+:   [boolean](https://php.net/language.types.boolean)
+
+Default value
+:   `true`
+
+Defined by
+:   [GeneralConfig::$enableGraphqlIntrospection](craft3:craft\config\GeneralConfig::$enableGraphqlIntrospection)
+
+Since
+:   3.6.0
+
+
+Whether GraphQL introspection queries are allowed. Defaults to `true` and is always allowed in the CP.
 
 
 
@@ -2841,6 +2841,7 @@ Set to `0` to disable this feature.
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
+
 ### `purgeUnsavedDraftsDuration`
 
 Allowed types
@@ -2863,6 +2864,7 @@ Set to `0` to disable this feature.
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
+
 ### `softDeleteDuration`
 
 Allowed types
@@ -2883,8 +2885,5 @@ The amount of time before a soft-deleted item will be up for hard-deletion by ga
 Set to `0` if you don’t ever want to delete soft-deleted items.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
-
-
-
 
 <!-- END SETTINGS -->
