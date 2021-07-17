@@ -2039,6 +2039,25 @@ This value should be the same across all environments. If this key ever changes,
 
 
 
+### `sendContentLengthHeader`
+
+Allowed types :
+:   [boolean](https://php.net/language.types.boolean)
+
+Default value :
+:   `false`
+
+Defined by :
+:   [GeneralConfig::$sendContentLengthHeader](craft3:craft\config\GeneralConfig::$sendContentLengthHeader)
+
+Since
+:   3.7.3
+
+
+Whether a `Content-Length` header should be sent with responses.
+
+
+
 ### `secureHeaders`
 
 Allowed types :
@@ -2444,7 +2463,7 @@ This will only have effect if ImageMagick is in use.
 
 ### `preserveImageColorProfiles`
 
-Allowed types :
+Allowed types
 :   [boolean](https://php.net/language.types.boolean)
 
 Default value :
@@ -2468,10 +2487,10 @@ Allowed types
 Default value :
 :   `false`
 
-Defined by :
+Since :
 :   [GeneralConfig::$rasterizeSvgThumbs](craft3:craft\config\GeneralConfig::$rasterizeSvgThumbs)
 
-Since :
+Since
 :   3.6.0
 
 
@@ -2502,7 +2521,7 @@ Whether Craft should rotate images according to their EXIF data on upload.
 Allowed types
 :   [boolean](https://php.net/language.types.boolean)
 
-Default value :
+Default value
 :   `true`
 
 Since :
@@ -2546,7 +2565,7 @@ Default value
 Since :
 :   [GeneralConfig::$upscaleImages](craft3:craft\config\GeneralConfig::$upscaleImages)
 
-Since :
+Since
 :   3.4.0
 
 
@@ -2590,7 +2609,7 @@ Default value
 Since :
 :   [GeneralConfig::$disableGraphqlTransformDirective](craft3:craft\config\GeneralConfig::$disableGraphqlTransformDirective)
 
-Since
+Since :
 :   3.6.0
 
 
@@ -2609,7 +2628,7 @@ Default value
 Since :
 :   [GeneralConfig::$enableGraphqlIntrospection](craft3:craft\config\GeneralConfig::$enableGraphqlIntrospection)
 
-Since :
+Since
 :   3.6.0
 
 
@@ -2625,7 +2644,7 @@ Allowed types
 Default value
 :   `true`
 
-Since :
+Defined by
 :   [GeneralConfig::$enableGql](craft3:craft\config\GeneralConfig::$enableGql)
 
 Since
