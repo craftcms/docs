@@ -2043,6 +2043,25 @@ This value should be the same across all environments. If this key ever changes,
 
 
 
+### `sendContentLengthHeader`
+
+許可される型
+:   [boolean](https://php.net/language.types.boolean)
+
+デフォルト値
+:   `false`
+
+定義元
+:   [GeneralConfig::$sendContentLengthHeader](craft3:craft\config\GeneralConfig::$sendContentLengthHeader)
+
+Since
+:   3.7.3
+
+
+Whether a `Content-Length` header should be sent with responses.
+
+
+
 ### `secureHeaders`
 
 許可される型
@@ -2475,7 +2494,7 @@ Setting this to `false` will reduce the image size a little bit, but on some Ima
 定義元
 :   [GeneralConfig::$rasterizeSvgThumbs](craft3:craft\config\GeneralConfig::$rasterizeSvgThumbs)
 
-それ以降
+Since
 :   3.6.0
 
 
@@ -2506,7 +2525,7 @@ Whether Craft should rotate images according to their EXIF data on upload.
 許可される型
 :   [boolean](https://php.net/language.types.boolean)
 
-デフォルト値
+Default value
 :   `true`
 
 定義元
@@ -2522,13 +2541,13 @@ Whether GIF files should be cleansed/transformed.
 
 ### `transformSvgs`
 
-許可される型
+Allowed types
 :   [boolean](https://php.net/language.types.boolean)
 
 Default value
 :   `true`
 
-定義元
+Defined by
 :   [GeneralConfig::$transformSvgs](craft3:craft\config\GeneralConfig::$transformSvgs)
 
 それ以降
@@ -2550,7 +2569,7 @@ Default value
 Defined by
 :   [GeneralConfig::$upscaleImages](craft3:craft\config\GeneralConfig::$upscaleImages)
 
-それ以降
+Since
 :   3.4.0
 
 
@@ -2594,7 +2613,7 @@ Default value
 Defined by
 :   [GeneralConfig::$disableGraphqlTransformDirective](craft3:craft\config\GeneralConfig::$disableGraphqlTransformDirective)
 
-Since
+それ以降
 :   3.6.0
 
 
@@ -2632,7 +2651,7 @@ Default value
 Defined by
 :   [GeneralConfig::$enableGql](craft3:craft\config\GeneralConfig::$enableGql)
 
-それ以降
+Since
 :   3.3.1
 
 
@@ -2692,7 +2711,7 @@ Default value
 Defined by
 :   [GeneralConfig::$maxGraphqlComplexity](craft3:craft\config\GeneralConfig::$maxGraphqlComplexity)
 
-それ以降
+Since
 :   3.6.0
 
 
