@@ -132,3 +132,115 @@ use mynamespace\queue\jobs\MyJob;
 The default priority is `1024`, and jobs with a lower priority are executed first.
 
 Not all queue drivers support setting a priority; `Queue::push()` will attempt to set it and fall back to pushing without a priority if the driver throws a `NotSupportedException`.
+
+<table spaces-before="0">
+  <tr>
+    <th>
+      Queue Driver
+    </th>
+    
+    <th>
+      Supports Priority
+    </th>
+  </tr>
+  
+  <tr>
+    <td>
+      <a href="https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/amqp/Queue.php">amqp</a>
+    </td>
+    
+    <td>
+      <x-mark />
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      <a href="https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/amqp_interop/Queue.php">amqp_interop</a>
+    </td>
+    
+    <td>
+      <check-mark />
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      <a href="https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/beanstalk/Queue.php">beanstalk</a>
+    </td>
+    
+    <td>
+      <check-mark />
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      <a href="https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/db/Queue.php">db</a>
+    </td>
+    
+    <td>
+      <check-mark />
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      <a href="https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/file/Queue.php">file</a>
+    </td>
+    
+    <td>
+      <x-mark />
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      <a href="https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/gearman/Queue.php">gearman</a>
+    </td>
+    
+    <td>
+      <check-mark />
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      <a href="https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/redis/Queue.php">redis</a>
+    </td>
+    
+    <td>
+      <x-mark />
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      <a href="https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/sqs/Queue.php">sqs</a>
+    </td>
+    
+    <td>
+      <x-mark />
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      <a href="https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/stomp/Queue.php">stomp</a>
+    </td>
+    
+    <td>
+      <x-mark />
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      <a href="https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/sync/Queue.php">sync</a>
+    </td>
+    
+    <td>
+      <x-mark />
+    </td>
+  </tr>
+</table>
