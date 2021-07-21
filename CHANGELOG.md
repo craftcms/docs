@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-07-21
+### Added
+- Documented queue driver priority support.
+
 ## 2021-07-16
 ### Added
 - Documented `sendContentLengthHeader` config setting added in Craft 3.7.3.
