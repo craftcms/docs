@@ -132,3 +132,16 @@ use mynamespace\queue\jobs\MyJob;
 The default priority is `1024`, and jobs with a lower priority are executed first.
 
 Not all queue drivers support setting a priority; `Queue::push()` will attempt to set it and fall back to pushing without a priority if the driver throws a `NotSupportedException`.
+
+| Queue Driver                 | Supports Priority
+| ---------------------------- | -----------------
+| [amqp](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/amqp/Queue.php)         | <x-mark />
+| [amqp_interop](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/amqp_interop/Queue.php) | <check-mark />
+| [beanstalk](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/beanstalk/Queue.php) | <check-mark />
+| [db](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/db/Queue.php) | <check-mark />
+| [file](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/file/Queue.php) | <x-mark />
+| [gearman](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/gearman/Queue.php) | <check-mark />
+| [redis](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/redis/Queue.php) | <x-mark />
+| [sqs](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/sqs/Queue.php) | <x-mark />
+| [stomp](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/stomp/Queue.php) | <x-mark />
+| [sync](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/sync/Queue.php) | <x-mark />
