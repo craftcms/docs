@@ -12,7 +12,7 @@ The only differences between an order and a cart is:
 
 When a customer completes their order, the `dateOrdered` is set to the current time and date and it gets a custom order status. The custom order status set depends on which order status you’ve established as the default.
 
-Custom order statuses can be managed from **Commerce** → **System Settings** →** Order Statuses** in the control panel. There you can choose the default order status for new orders.
+Custom order statuses can be managed from **Commerce** → **System Settings** → **Order Statuses** in the control panel. There you can choose the default order status for new orders.
 
 ## Functionality
 
