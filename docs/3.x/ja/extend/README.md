@@ -1,6 +1,6 @@
 # Craft の拡張
 
-Craft は、特徴や機能をカスタマイズするための完全なツールキットを提供しています。 Craft のほとんどすべての局面を拡張したり、フックしたり、完全に置き換えることができます。 PHP を知っているなら、あなたが望むものを構築することができます。
+Craft provides a complete toolkit for customizing its features and functionality; almost every aspect of Craft can be extended, hooked into, or completely replaced. PHP を知っているなら、あなたが望むものを構築することができます。
 
 ## モジュール 対 プラグイン
 
@@ -8,7 +8,7 @@ Craft は、特徴や機能をカスタマイズするための完全なツー�
 
 Yii のドキュメントに[記載されているように](https://www.yiiframework.com/doc/guide/2.0/en/structure-modules)、**モジュール**は _「モデル、ビュー、コントローラー、および、その他のサポートコンポーネントでできている、独立したソフトウェアユニット」_ です。 言い換えれば、モジュールはコアのシステムコードを変更することなく、様々な方法でシステムを拡張します。
 
-モジュールは新しい[ダッシュボードウィジェットタイプ](widget-types.md)を提供するような単一の目的を満たすためにシンプルか、 Eコマースアプリケーションのような完全に新しいコンセプトをシステムに導入するために複雑であり得ます。
+Modules can be simple, serving a single purpose like providing a new [Dashboard widget type](widget-types.md), or they can be complex, introducing entirely new concepts to the system, like an ecommerce application.
 
 **プラグイン**は、Craft 特有のコンセプトであるため、Yii のドキュメントにはそれに関する言及がありません。 それらはモジュールでできるすべてのこと（技術的には、プラグインも実際はモジュール _です_ 。 ）が可能で、一般に配布されるためのより良いことが含まれています。
 
