@@ -133,6 +133,4 @@ Event::on(
 
 ## Fetching a Cart’s Shipping Method
 
-When looking to get a cart’s selected shipping method, use [`shippingMethodHandle`](commerce3:craft\commerce\elements\Order::shippingMethodHandle). This will return the handle of the chosen shipping method or `null` if none has been selected.
-
-It’s important to note that calling [`getShippingMethod()`](commerce3:craft\commerce\elements\Order::getShippingMethod()) will set the least expensive option for the order if one hasn’t yet been selected. This can lead to some confusion if you’re expecting it to represent an explicit choice from the user.
+When looking to get a cart’s selected shipping method, use [`shippingMethodHandle`](commerce3:craft\commerce\elements\Order::shippingMethodHandle) and [`shippingMethodName`](commerce3:craft\commerce\elements\Order::shippingMethodName). These return the handle and name of the chosen shipping method, or `null` if none has been selected.
