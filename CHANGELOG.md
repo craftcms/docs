@@ -3,6 +3,9 @@
 Theme and significant content changes will be documented in this file.
 
 ## 2021-07-26
+### Added
+- Documented Commerce order and line item totals.
+
 ### Fixed
 - Fixed vertical code highlight alignment.
 
