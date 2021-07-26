@@ -283,6 +283,14 @@ Each line item’s uniqueness is determined behind the scenes by an `optionsSign
 The `note` parameter is not part of a line item’s uniqueness; it will always be updated on a matching line item.
 :::
 
+#### Line Item Totals
+
+Each line item includes several totals:
+
+- **lineItem.subtotal** is the sum of the line item’s `qty` and `salePrice`.
+- **lineItem.adjustmentsTotal** is the sum of each of the line item’s adjustment `amount` values.
+- **lineItem.total** is the sum of the line item’s `subtotal` and `adjustmentsTotal`.
+
 ### Loading a Cart
 
 Commerce provides a `commerce/cart/load-cart` endpoint for loading an existing cart into the current customer’s session.
@@ -499,13 +507,13 @@ In this example we’ve used the year as the sequence name so we automatically g
 
 An order is usually created on the front end as a customer [adds items](adding-to-and-updating-the-cart.md) to and completes a [cart](cart.md). With Commerce Pro, An order may also be created in the control panel.
 
-To create a new order, navigate to **Commerce** → **Orders**, and choose **New Order**. This will create a new order that behaves like a cart. As [purchasables](purchasables.md) are added and removed from the order, it will automatically recalculate its sales and adjustments.
+To create a new order, navigate to **Commerce** → **Orders**, and choose **New Order**. This will create a new order that behaves like a cart. As [purchasables](purchasables.md) are added and removed from the order, it will automatically recalculate its [sales](sales.md) and adjustments.
 
 ::: warning
 You must be using [Commerce Pro](editions.md) and have “Edit Orders” permission to create orders from the control panel.
 :::
 
-To complete the order, choose “Mark as completed”.
+To complete the order, press **Mark as completed**.
 
 ### Editing Orders
 
@@ -514,6 +522,20 @@ Orders can be edited in the control panel by visiting the order edit page and ch
 While editing the order, it will refresh subtotals and totals and display any errors. It will _not_ automatically recalculate the order based on system rules like shipping, taxes, or promotions. Choose **Recalculate order** to have it fully recalculate including those system rules.
 
 Once you’re happy with your changes, choose **Update Order** to save it to the database.
+
+### Order Totals
+
+Every order includes a few important totals:
+
+- **order.itemSubtotal** is the sum of the order’s [line item `subtotal` amounts](#line-item-totals).
+- **order.itemTotal** is the sum of the order’s [line item `total` amounts](#line-item-totals).
+- **order.adjustmentSubtotal** is the sum of the order’s adjustments.
+- **order.total** is the sum of the order’s `itemSubtotal` and `adjustmentsTotal`.
+- **order.totalPrice** is the total order price with a minimum enforced by the [minimumTotalPriceStrategy](config-settings.html#minimumtotalpricestrategy) setting.
+
+::: warning
+You’ll also find an `order.adjustmentsSubtotal` which is identical to `order.adjustmentsTotal`. It will be removed in Commerce 4.
+:::
 
 ### Recalculating Orders
 
