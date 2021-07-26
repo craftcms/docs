@@ -1,3 +1,6 @@
+---
+sidebarDepth: 2
+---
 # Products & Variants
 
 A _product_ is an [element](/3.x/elements.md) that describes what’s for sale. A _variant_ is the [purchasable](purchasables.md) the customer ultimately orders.
