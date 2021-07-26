@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-07-26
+### Fixed
+- Fixed vertical code highlight alignment.
+
 ## 2021-07-21
 ### Added
 - Documented queue driver priority support.
