@@ -437,7 +437,6 @@ This query is used to query for entries.
 | `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unpublished drafts.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
 | `draftCreator`| `Int` | The drafts’ creator ID
-| `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
 | `revisions`| `Boolean` | Whether revision elements should be returned.
 | `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
 | `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
@@ -506,7 +505,6 @@ This query is used to return the number of entries.
 | `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unpublished drafts.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
 | `draftCreator`| `Int` | The drafts’ creator ID
-| `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
 | `revisions`| `Boolean` | Whether revision elements should be returned.
 | `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
 | `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
@@ -575,7 +573,6 @@ This query is used to query for a single entry.
 | `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unpublished drafts.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
 | `draftCreator`| `Int` | The drafts’ creator ID
-| `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
 | `revisions`| `Boolean` | Whether revision elements should be returned.
 | `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
 | `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
