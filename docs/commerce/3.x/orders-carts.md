@@ -40,7 +40,7 @@ In your templates, you can get the current user’s cart like this:
 ```twig
 {% set cart = craft.commerce.carts.cart %}
 
-{# same thing: #}
+{# Same thing: #}
 {% set cart = craft.commerce.getCarts().getCart() %}
 ```
 
