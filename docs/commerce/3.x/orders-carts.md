@@ -672,7 +672,7 @@ The notices will be cleared from the cart object in memory. If you’d like the 
 {# Save the cart #}
 {% do craft.app.elements.saveElement(cart) %}
 ```
-```php{7}
+```php
 // Save the cart
 Craft::$app->getElements()->saveElement($cart);
 ```
