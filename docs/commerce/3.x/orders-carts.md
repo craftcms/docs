@@ -665,6 +665,19 @@ $cart->clearNotices(null, 'couponCode');
 ```
 :::
 
+The notices will be cleared from the cart object in memory. If you’d like the cleared notices to persist, you’ll need to save the cart:
+
+::: code
+```twig
+{# Save the cart #}
+{% do craft.app.elements.saveElement(cart) %}
+```
+```php{7}
+// Save the cart
+Craft::$app->getElements()->saveElement($cart);
+```
+:::
+
 ### Order Status Emails
 
 If [status emails](emails.md) are set up for a newly-updated order status, messages will be sent when the updated order is saved.
