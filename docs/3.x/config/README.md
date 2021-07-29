@@ -25,7 +25,7 @@ Craft uses [Guzzle](http://docs.guzzlephp.org/en/latest/) whenever creating HTTP
 - when loading RSS feeds from the Feeds widget
 - when working with assets on remote volumes, like Amazon S3
 
-You can customize the config settings Guzzle uses when sending these requests by creating a `guzzle.php` file in your `config/` folder. The file should return an array, with your config overrides.
+You can customize the config settings Guzzle uses when sending these requests by creating a `guzzle.php` file in your `config/` folder. The file does not support Craft’s [multi-environment configuration](#environmental-configuration) and should return an array, with your config overrides.
 
 ```php
 <?php

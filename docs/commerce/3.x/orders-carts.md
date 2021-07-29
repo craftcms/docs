@@ -1,3 +1,6 @@
+---
+sidebarDepth: 2
+---
 # Orders & Carts
 
 Variants are added to a _cart_ that can be completed to become an _order_. Carts and orders are both listed in the control panel under **Commerce** → **Orders**.
@@ -37,7 +40,7 @@ In your templates, you can get the current user’s cart like this:
 ```twig
 {% set cart = craft.commerce.carts.cart %}
 
-{# same thing: #}
+{# Same thing: #}
 {% set cart = craft.commerce.getCarts().getCart() %}
 ```
 
@@ -48,15 +51,15 @@ You could also fetch the cart via AJAX. This example could be added to a Twig te
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $.ajax({
-    url: '',
-    data: {
-        '{{ craft.config.csrfTokenName|e('js') }}': '{{ craft.request.csrfToken|e('js') }}',
-        'action': 'commerce/cart/get-cart'
-    },
-    success: function(response) {
-        console.log(response);
-    },
-    dataType: 'json'
+  url: '',
+  data: {
+    '{{ craft.config.csrfTokenName|e('js') }}': '{{ craft.request.csrfToken|e('js') }}',
+    'action': 'commerce/cart/get-cart'
+  },
+  success: function(response) {
+    console.log(response);
+  },
+  dataType: 'json'
 });
 </script>
 ```
@@ -64,12 +67,12 @@ $.ajax({
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script>
 axios.get('', {
-    params: {
-        '{{ craft.config.csrfTokenName|e('js') }}': '{{ craft.request.csrfToken|e('js') }}',
-        action: 'commerce/cart/get-cart'
-    }
+  params: {
+    '{{ craft.config.csrfTokenName|e('js') }}': '{{ craft.request.csrfToken|e('js') }}',
+    action: 'commerce/cart/get-cart'
+  }
 }).then((response) => {
-    console.log(response.data);
+  console.log(response.data);
 });
 </script>
 ```
@@ -102,10 +105,10 @@ This gets a product and creates a form that will add its default variant to the 
 {% set variant = product.defaultVariant %}
 
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/cart/update-cart') }}
-    {{ hiddenInput('purchasableId', variant.id) }}
-    <button type="submit">Add to Cart</button>
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+  {{ hiddenInput('purchasableId', variant.id) }}
+  <button type="submit">Add to Cart</button>
 </form>
 ```
 
@@ -115,18 +118,18 @@ If the product has multiple variants, you could provide a dropdown menu to allow
 {% set product = craft.products().one() %}
 
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/cart/update-cart') }}
-    {{ redirectInput('shop/cart') }}
-    {{ hiddenInput('successMessage', 'Added ' ~ product.title ~ ' to cart.'|hash) }}
-    {{ hiddenInput('qty', 1) }}
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+  {{ redirectInput('shop/cart') }}
+  {{ hiddenInput('successMessage', 'Added ' ~ product.title ~ ' to cart.'|hash) }}
+  {{ hiddenInput('qty', 1) }}
 
-    <select name="purchasableId">
-        {% for variant in product.variants %}
-            <option value="{{ variant.id }}">{{ variant.sku }}</option>
-        {% endfor %}
-    </select>
-    <button type="submit">Add to Cart</button>
+  <select name="purchasableId">
+    {% for variant in product.variants %}
+      <option value="{{ variant.id }}">{{ variant.sku }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Add to Cart</button>
 </form>
 ```
 
@@ -143,15 +146,15 @@ You can add multiple purchasables to the cart in a single request using a `purch
 ```twig{7-10}
 {% set product = craft.products().one() %}
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/cart/update-cart') }}
-    {{ redirectInput('shop/cart') }}
-    {{ hiddenInput('successMessage', 'Products added to the cart.'|hash) }}
-    {% for variant in product.variants %}
-        {{ hiddenInput('purchasables[' ~ loop.index ~ '][id]', variant.id) }}
-        {{ hiddenInput('purchasables[' ~ loop.index ~ '][qty]', 1) }}
-    {% endfor %}
-    <button type="submit">Add all variants to cart</button>
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+  {{ redirectInput('shop/cart') }}
+  {{ hiddenInput('successMessage', 'Products added to the cart.'|hash) }}
+  {% for variant in product.variants %}
+     {{ hiddenInput('purchasables[' ~ loop.index ~ '][id]', variant.id) }}
+     {{ hiddenInput('purchasables[' ~ loop.index ~ '][qty]', 1) }}
+  {% endfor %}
+  <button type="submit">Add all variants to cart</button>
 </form>
 ```
 
@@ -182,41 +185,41 @@ In this example, we’re providing the customer with an option to include a note
 {% set product = craft.products().one() %}
 {% set variant = product.defaultVariant %}
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/cart/update-cart') }}
-    {{ hiddenInput('qty', 1) }}
-    <input type="text" name="note" value="">
-    <select name="options[engraving]">
-        <option value="happy-birthday">Happy Birthday</option>
-        <option value="good-riddance">Good Riddance</option>
-    </select>
-    <select name="options[giftwrap]">
-        <option value="yes">Yes Please</option>
-        <option value="no">No Thanks</option>
-    </select>
-    {{ hiddenInput('purchasableId', variant.id) }}
-    <button type="submit">Add to Cart</button>
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+  {{ hiddenInput('qty', 1) }}
+  <input type="text" name="note" value="">
+  <select name="options[engraving]">
+    <option value="happy-birthday">Happy Birthday</option>
+    <option value="good-riddance">Good Riddance</option>
+  </select>
+  <select name="options[giftwrap]">
+    <option value="yes">Yes Please</option>
+    <option value="no">No Thanks</option>
+  </select>
+  {{ hiddenInput('purchasableId', variant.id) }}
+  <button type="submit">Add to Cart</button>
 </form>
 ```
 ```twig Multiple Items
 {% set product = craft.products().one() %}
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/cart/update-cart') }}
-    {% for variant in product.variants %}
-        {{ hiddenInput('purchasables[' ~ loop.index ~ '][id]', variant.id) }}
-        {{ hiddenInput('purchasables[' ~ loop.index ~ '][qty]', 1) }}
-        <input type="text" name="purchasables[{{ loop.index }}][note]" value="">
-        <select name="purchasables[{{ loop.index }}][options][engraving]">
-            <option value="happy-birthday">Happy Birthday</option>
-            <option value="good-riddance">Good Riddance</option>
-        </select>
-        <select name="purchasables[{{ loop.index }}][options][giftwrap]">
-            <option value="yes">Yes Please</option>
-            <option value="no">No Thanks</option>
-        </select>
-    {% endfor %}
-    <button type="submit">Add to Cart</button>
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+  {% for variant in product.variants %}
+    {{ hiddenInput('purchasables[' ~ loop.index ~ '][id]', variant.id) }}
+    {{ hiddenInput('purchasables[' ~ loop.index ~ '][qty]', 1) }}
+    <input type="text" name="purchasables[{{ loop.index }}][note]" value="">
+    <select name="purchasables[{{ loop.index }}][options][engraving]">
+      <option value="happy-birthday">Happy Birthday</option>
+      <option value="good-riddance">Good Riddance</option>
+    </select>
+    <select name="purchasables[{{ loop.index }}][options][giftwrap]">
+      <option value="yes">Yes Please</option>
+      <option value="no">No Thanks</option>
+    </select>
+  {% endfor %}
+  <button type="submit">Add to Cart</button>
 </form>
 ```
 :::
@@ -238,13 +241,13 @@ You can directly modify any line item’s `qty`, `note`, and `options` using tha
 ```twig{6,7}
 {% set cart = craft.commerce.carts.cart %}
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/cart/update-cart') }}
-    {% for item in cart.lineItems %}
-        <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}">
-        <input type="text" name="lineItems[{{ item.id }}][note]" placeholder="My Note" value="{{ item.note }}">
-    {% endfor %}
-    <button type="submit">Update Line Item</button>
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+  {% for item in cart.lineItems %}
+    <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}">
+    <input type="text" name="lineItems[{{ item.id }}][note]" placeholder="My Note" value="{{ item.note }}">
+  {% endfor %}
+  <button type="submit">Update Line Item</button>
 </form>
 ```
 
@@ -253,14 +256,14 @@ You can remove a line item by including a `remove` parameter in the request. Thi
 ```twig{8}
 {% set cart = craft.commerce.carts.cart %}
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/cart/update-cart') }}
-    {% for item in cart.lineItems %}
-        <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}">
-        <input type="text" name="lineItems[{{ item.id }}][note]" placeholder="My Note" value="{{ item.note }}">
-        <input type="checkbox" name="lineItems[{{ item.id }}][remove]" value="1"> Remove item<br>
-    {% endfor %}
-    <button type="submit">Update Line Item</button>
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+  {% for item in cart.lineItems %}
+    <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}">
+    <input type="text" name="lineItems[{{ item.id }}][note]" placeholder="My Note" value="{{ item.note }}">
+    <input type="checkbox" name="lineItems[{{ item.id }}][remove]" value="1"> Remove item<br>
+  {% endfor %}
+  <button type="submit">Update Line Item</button>
 </form>
 ```
 
@@ -279,6 +282,14 @@ Each line item’s uniqueness is determined behind the scenes by an `optionsSign
 ::: tip
 The `note` parameter is not part of a line item’s uniqueness; it will always be updated on a matching line item.
 :::
+
+#### Line Item Totals
+
+Each line item includes several totals:
+
+- **lineItem.subtotal** is the sum of the line item’s `qty` and `salePrice`.
+- **lineItem.adjustmentsTotal** is the sum of each of the line item’s adjustment `amount` values.
+- **lineItem.total** is the sum of the line item’s `subtotal` and `adjustmentsTotal`.
 
 ### Loading a Cart
 
@@ -311,8 +322,8 @@ This example sets `loadCartUrl` to an absolute URL the customer can access to lo
 ::: code
 ```twig
 {% set loadCartUrl = actionUrl(
-    'commerce/cart/load-cart',
-    { number: cart.number }
+  'commerce/cart/load-cart',
+  { number: cart.number }
 ) %}
 ```
 
@@ -336,12 +347,12 @@ This is a simplified version of [`shop/cart/load.twig`](https://github.com/craft
 
 ```twig
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/cart/load-cart') }}
-    {{ redirectInput('/shop/cart') }}
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/load-cart') }}
+  {{ redirectInput('/shop/cart') }}
 
-    <input type="text" name="number" value="{{ cart.number }}">
-    <button type="submit">Submit</button>
+  <input type="text" name="number" value="{{ cart.number }}">
+  <button type="submit">Submit</button>
 </form>
 ```
 
@@ -354,20 +365,20 @@ You can allow a customer to see carts from previous logged-in sessions:
 ::: code
 ```twig
 {% if currentUser %}
-    {% set currentCart = craft.commerce.carts.cart %}
-    {% if currentCart.id %}
-        {# return all incomplete carts *except* the one from this session #}
-        {% set oldCarts = craft.orders()
-            .isCompleted(false)
-            .id('not '~currentCart.id)
-            .user(currentUser)
-            .all() %}
-    {% else %}
-        {% set oldCarts = craft.orders()
-            .isCompleted(false)
-            .user(currentUser)
-            .all() %}
-    {% endif %}
+  {% set currentCart = craft.commerce.carts.cart %}
+  {% if currentCart.id %}
+    {# Return all incomplete carts *except* the one from this session #}
+    {% set oldCarts = craft.orders()
+      .isCompleted(false)
+      .id('not '~currentCart.id)
+      .user(currentUser)
+      .all() %}
+  {% else %}
+    {% set oldCarts = craft.orders()
+      .isCompleted(false)
+      .user(currentUser)
+      .all() %}
+  {% endif %}
 {% endif %}
 ```
 ```php
@@ -428,6 +439,8 @@ When a cart becomes an order, the following things happen:
 4. The order reference number is generated for the order, based on the “Order Reference Number Format” setting. (In the control panel: **Commerce** → **Settings** → **System Settings** → **General Settings**.)
 
 Instead of being recalculated on each change like a cart, the order will only be recalculated if you [manually trigger recalculation](#recalculating-orders).
+
+Adjustments for discounts, shipping, and tax may be applied when an order is recalcuated. Each adjustment is related to its order, and can optionally relate to a specific line item.
 
 If you’d like to jump straight to displaying order information in your templates, take a look at the the <commerce3:craft\commerce\elements\Order> class reference for a complete list of available properties.
 
@@ -494,13 +507,13 @@ In this example we’ve used the year as the sequence name so we automatically g
 
 An order is usually created on the front end as a customer [adds items](adding-to-and-updating-the-cart.md) to and completes a [cart](cart.md). With Commerce Pro, An order may also be created in the control panel.
 
-To create a new order, navigate to **Commerce** → **Orders**, and choose **New Order**. This will create a new order that behaves like a cart. As [purchasables](purchasables.md) are added and removed from the order, it will automatically recalculate its sales and adjustments.
+To create a new order, navigate to **Commerce** → **Orders**, and choose **New Order**. This will create a new order that behaves like a cart. As [purchasables](purchasables.md) are added and removed from the order, it will automatically recalculate its [sales](sales.md) and adjustments.
 
 ::: warning
 You must be using [Commerce Pro](editions.md) and have “Edit Orders” permission to create orders from the control panel.
 :::
 
-To complete the order, choose “Mark as completed”.
+To complete the order, press **Mark as completed**.
 
 ### Editing Orders
 
@@ -509,6 +522,20 @@ Orders can be edited in the control panel by visiting the order edit page and ch
 While editing the order, it will refresh subtotals and totals and display any errors. It will _not_ automatically recalculate the order based on system rules like shipping, taxes, or promotions. Choose **Recalculate order** to have it fully recalculate including those system rules.
 
 Once you’re happy with your changes, choose **Update Order** to save it to the database.
+
+### Order Totals
+
+Every order includes a few important totals:
+
+- **order.itemSubtotal** is the sum of the order’s [line item `subtotal` amounts](#line-item-totals).
+- **order.itemTotal** is the sum of the order’s [line item `total` amounts](#line-item-totals).
+- **order.adjustmentSubtotal** is the sum of the order’s adjustments.
+- **order.total** is the sum of the order’s `itemSubtotal` and `adjustmentsTotal`.
+- **order.totalPrice** is the total order price with a minimum enforced by the [minimumTotalPriceStrategy](config-settings.html#minimumtotalpricestrategy) setting.
+
+::: warning
+You’ll also find an `order.adjustmentsSubtotal` which is identical to `order.adjustmentsTotal`. It will be removed in Commerce 4.
+:::
 
 ### Recalculating Orders
 
@@ -556,31 +583,31 @@ A notice’s `type` will be one of the following:
 ```twig
 {# @var order craft\commerce\elements\Order #}
 
-{# returns a multi-dimensional array of notices by attribute key #}
+{# Get a multi-dimensional array of notices by attribute key #}
 {% set notices = order.getNotices() %}
 
-{# returns an array of notice models for the `couponCode` attribute only #}
+{# Get an array of notice models for the `couponCode` attribute only #}
 {% set couponCodeNotices = order.getNotices(null, 'couponCode') %}
 
-{# returns the first notice only for the `couponCode` attribute #}
+{# Get the first notice only for the `couponCode` attribute #}
 {% set firstCouponCodeNotice = order.getFirstNotice(null, 'couponCode') %}
 
-{# returns an array of notice models for changed line item prices #}
+{# Get an array of notice models for changed line item prices #}
 {% set priceChangeNotices = order.getNotices('lineItemSalePriceChanged') %}
 ```
 ```php
 // @var craft\commerce\elements\Order $order
 
-// returns a multi-dimensional array of notices by attribute key
+// Get a multi-dimensional array of notices by attribute key
 $notices = $order->getNotices();
 
-// returns an array of notice models for the `couponCode` attribute only
+// Get an array of notice models for the `couponCode` attribute only
 $couponCodeNotices = $order->getNotices(null, 'couponCode');
 
-// returns the first notice only for the `couponCode` attribute
+// Get the first notice only for the `couponCode` attribute
 $firstCouponCodeNotice = $order->getFirstNotice(null, 'couponCode');
 
-// returns an array of notice models for changed line item prices
+// Get an array of notice models for changed line item prices
 $priceChangeNotices = $order->getNotices('lineItemSalePriceChanged');
 ```
 :::
@@ -602,11 +629,11 @@ This example clears all the notices on the cart:
 ::: code
 ```twig{5}
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/cart/update-cart') }}
-    {{ hiddenInput('successMessage', 'All notices dismissed'|hash) }}
-    {{ hiddenInput('clearNotices') }}
-    <button type="submit">Dismiss</button>
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+  {{ hiddenInput('successMessage', 'All notices dismissed'|hash) }}
+  {{ hiddenInput('clearNotices') }}
+  <button type="submit">Dismiss</button>
 </form>
 ```
 ```php{7}
@@ -635,6 +662,19 @@ $cart = Commerce::getInstance()->getCarts()->getCart();
 
 // Clear notices on the `couponCode` attribute
 $cart->clearNotices(null, 'couponCode');
+```
+:::
+
+The notices will be cleared from the cart object in memory. If you’d like the cleared notices to persist, you’ll need to save the cart:
+
+::: code
+```twig
+{# Save the cart #}
+{% do craft.app.elements.saveElement(cart) %}
+```
+```php
+// Save the cart
+Craft::$app->getElements()->saveElement($cart);
 ```
 :::
 
@@ -680,14 +720,14 @@ We can display an order with a given order number by doing the following:
 
 {# Create an order query with the 'number' parameter #}
 {% set myOrderQuery = craft.orders()
-    .number(orderNumber) %}
+  .number(orderNumber) %}
 
 {# Fetch the order #}
 {% set order = myOrderQuery.one() %}
 
 {# Make sure it exists #}
 {% if not order %}
-    {% exit 404 %}
+  {% exit 404 %}
 {% endif %}
 
 {# Display the order #}

@@ -49,6 +49,8 @@ See the [Console Commands](extend/commands.md) page in the _Extending Craft_ sec
 
 While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default console commands:
 
+<!-- BEGIN COMMANDS -->
+
 ## `db`
 
 #### `db/backup`
@@ -1271,6 +1273,57 @@ boolean, 0 or 1 (defaults to 0)
 : Run new database migrations after completing the update.\
 boolean, 0 or 1 (defaults to 1)
 
+## `users`
+
+#### `users/create`
+
+Creates a user.
+
+**Options**
+
+`--admin`
+: Whether the user should be an admin.\
+boolean, 0 or 1
+
+`--email`
+: The user’s email.
+
+`--group-ids`
+: The group IDs to assign the user to the created user to.\
+int[]
+
+`--groups`
+: The group handles to assign the created user to.\
+string[]
+
+`--password`
+: The user’s new password.
+
+`--username`
+: The user’s username.
+
+#### `users/delete`
+
+Deletes a user.
+
+**Parameters**
+
+`usernameOrEmail`
+: The user’s username or email address.
+
+**Options**
+
+`--delete-content`
+: Whether to delete the user’s content if no inheritor is specified.\
+boolean, 0 or 1 (defaults to 0)
+
+`--hard`
+: Whether the user should be hard-deleted immediately, instead of soft-deleted.\
+boolean, 0 or 1 (defaults to 0)
+
+`--inheritor`
+: The email or username of the user to inherit content when deleting a user.
+
 ## `utils/ascii-filenames`
 
 #### `utils/ascii-filenames/index` <badge>default</badge>
@@ -1350,3 +1403,5 @@ Updates all users’ usernames to ensure they match their email address.
 $ php craft utils/update-usernames
 10 usernames updated.
 ```
+
+<!-- END COMMANDS -->

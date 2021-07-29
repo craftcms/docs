@@ -827,7 +827,7 @@ public function getEditorHtml(): string
 
 ### Edit Page
 
-If you want to give your element type a full-sized edit page, it’s up to you to set all of that up – the templates, the routes, and the controller actions.
+If you want to give your element type a full-sized [edit page](./cp-edit-pages.md), it’s up to you to set all of that up – the templates, the routes, and the controller actions.
 
 The Edit Category page offers a relatively straightforward example of how it could be done.
 

@@ -34,7 +34,8 @@ module.exports = {
           collapsable: false,
           children: [
             "cp-section",
-            "cp-templates"
+            "cp-templates",
+            "cp-edit-pages"
           ]
         },
         {
@@ -63,6 +64,7 @@ module.exports = {
             "commands",
             "template-roots",
             "extending-twig",
+            "graphql",
             "template-hooks",
             "soft-deletes",
             "queue-jobs",

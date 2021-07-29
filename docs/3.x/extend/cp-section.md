@@ -1,4 +1,4 @@
-# Control Panel Section
+# Control Panel Sections
 
 Modules and plugins can add new sections to the control panel using the [EVENT_REGISTER_CP_NAV_ITEMS](craft3:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) event:
 

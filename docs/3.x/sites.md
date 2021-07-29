@@ -111,7 +111,7 @@ In this short guide we'll walk through the steps of setting up a new site in Cra
 
 The first step is to create the new site in the Settings of your Craft installation.
 
-1. Go to **Settings** → **Sites** and choose **New Site**.
+1. Go to **Settings** → **Sites** and press **New Site**.
 2. Use the dropdown menu to choose the group your site should belong to. The group selection won’t have any impact on your site’s functionality.
 3. Give your site a name. Craft uses the site name in the control panel, and you can also display it in your templates using `{{ siteName }}`.
 4. Based on the Site name, Craft will generate a Site Handle. You can edit the Handle if you’d like. You will use the Site Handle to refer to this site in the templates.
