@@ -434,7 +434,7 @@ This query is used to query for entries.
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
 | `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unpublished drafts.
+| `draftOf`| `QueryArgument` | Narrows the query results to only drafts of a given element.  Set to `false` to fetch unpublished drafts.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
 | `draftCreator`| `Int` | The drafts’ creator ID
 | `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
@@ -503,7 +503,7 @@ This query is used to return the number of entries.
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
 | `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unpublished drafts.
+| `draftOf`| `QueryArgument` | Narrows the query results to only drafts of a given element.  Set to `false` to fetch unpublished drafts.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
 | `draftCreator`| `Int` | The drafts’ creator ID
 | `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
@@ -572,7 +572,7 @@ This query is used to query for a single entry.
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
 | `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | The source element ID that drafts should be returned for. Set to `false` to fetch unpublished drafts.
+| `draftOf`| `QueryArgument` | Narrows the query results to only drafts of a given element.  Set to `false` to fetch unpublished drafts.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
 | `draftCreator`| `Int` | The drafts’ creator ID
 | `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
@@ -1211,6 +1211,7 @@ This is the interface implemented by all entries.
 | `structureId`| `Int` | The element’s structure ID.
 | `isDraft`| `Boolean` | Returns whether this is a draft.
 | `isRevision`| `Boolean` | Returns whether this is a revision.
+| `canonicalId`| `Int` | Returns the element’s canonical ID. If it’s a draft/revision, the source element’s ID will be returned.
 | `sourceId`| `Int` | Returns the element’s ID, or if it’s a draft/revision, its source element’s ID.
 | `sourceUid`| `String` | Returns the element’s UUID, or if it’s a draft/revision, its source element’s UUID.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
