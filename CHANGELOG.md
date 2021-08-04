@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-08-04
+### Added
+- Added the warning about running `project-config/write` to the Project Config page.
+
 ## 2021-07-26
 ### Added
 - Documented Commerce order and line item totals.

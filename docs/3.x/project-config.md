@@ -150,3 +150,7 @@ You can manually trigger YAML file generation from the Project Config utility, o
 ```bash
 php craft project-config/write
 ```
+
+::: warning
+If you have YAML files generated, be sure to run the `project-config/write` command before updating Craft and/or plugins. Otherwise the out-of-date YAML files could conflict with project config changes performed by the update migrations.
+:::
