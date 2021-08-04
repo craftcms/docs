@@ -46,7 +46,7 @@ In the output, you will see your plugin referenced using a symlink during the in
 
 In the control panel, visit **Settings** → **Plugins**, choose **Commerce** and switch on the **Enable** setting. You can now develop your plugins locally and keep changes tracked with Git!
 
-## Running Codeception and PHPUnit with PHPStorm
+## Running Codeception and PHPUnit with PhpStorm
 
 PHPStorm allows you to use a remote interpreter to execute Codeception or PHPUnit tests. To run codeceptions tests with Nitro, perform the following actions:
 
