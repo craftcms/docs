@@ -32,7 +32,7 @@ Site Groups allow you to organize your sites together by commonality, like langu
 
 Craft creates the first Site Group for you, named after the default site, and assigns the default site to that group.
 
-Similar to Field Groups, Site Groups are for organization only.
+In addition to organization, Site Groups can be used in a section’s Propagation Method. By selecting **Save entries to other sites in the same group**, Craft will only propagate that section’s new entries to sites in the same group.
 
 You can access the current site’s group information using `currentSite.group`:
 
