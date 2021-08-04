@@ -277,7 +277,7 @@ return [
 ::: code
 ```twig
 <a href="/contact">{{ 'Welcome back, {name}'|t(params = {
-    name: currentUser.friendlyName,
+  name: currentUser.friendlyName,
 }) }}</a>
 ```
 ```php
