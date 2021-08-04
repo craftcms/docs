@@ -1,5 +1,5 @@
 # Mocking
-Most of the mocking support Craft provides is inherited through [Codeception](https://codeception.com/docs/reference/Mock) and [PHP Unit](https://phpunit.de/manual/6.5/en/test-doubles.html). Their documentation provides all the basic information you need to get started.
+Most of the mocking support Craft provides is inherited through [Codeception](https://codeception.com/docs/reference/Mock) and [PHPUnit](https://phpunit.de/manual/6.5/en/test-doubles.html). Their documentation provides all the basic information you need to get started.
 
 Additionally Craft provides some minor additional support to help mock your dependencies and improve your tests.
 
