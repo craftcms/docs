@@ -32,7 +32,7 @@ Craft は（デフォルトサイトの名前を付けた）最初のサイト�
 
 Craft は（デフォルトサイトの名前を付けた）最初のサイトグループを作成し、そのグループにデフォルトサイトを割り当てます。
 
-現在のサイトグループの情報には、次のようにアクセスできます。
+In addition to organization, Site Groups can be used in a section’s Propagation Method. By selecting **Save entries to other sites in the same group**, Craft will only propagate that section’s new entries to sites in the same group.
 
 現在のサイトグループの情報には、次のようにアクセスできます。
 
@@ -105,7 +105,7 @@ Craft はデフォルトサイトをプライマリサイトとしてセット�
 
 新しいサイト向けに、テンプレートディレクトリとテンプレートを作成します。
 
-1. 「設定 > サイト」に移動し、「新しいサイト」ボタンをクリックします。
+1. Go to **Settings** → **Sites** and press **New Site**.
 2. ドロップダウンメニューからサイトが所属するグループを選択します。 グループの選択により、サイトの機能に影響することはありません。
 3. 名前を付けてください。 Craft はコントロールパネルのサイト名を利用し、`{{ siteName }}` を使ってテンプレート内に表示することもできます。
 4. サイト名をベースにして、Craft はサイトのハンドルを生成します。 あなたが望むなら、ハンドルを編集できます。 テンプレート内でこのサイトを参照するために、サイトハンドルを利用します。
