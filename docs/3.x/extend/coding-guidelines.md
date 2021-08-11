@@ -17,6 +17,10 @@ Do your best to follow these guidelines when writing code for Craft and Craft pl
 Craft’s PhpStorm settings repository includes a code style scheme and inspection profile: <https://github.com/craftcms/phpstorm-settings>
 :::
 
+::: tip
+The Craft Autocomplete package provides Twig template autocompletion in PhpStorm for Craft and plugin/module variables and element types: <https://github.com/nystudio107/craft-autocomplete>
+:::
+
 ## Best Practices
 
 - Declare method argument types whenever possible.
