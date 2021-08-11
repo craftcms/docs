@@ -13,16 +13,16 @@ Merchant-hosted gateways collect the customer’s credit card details directly o
 
 ## First-Party Gateway Plugins
 
-| Plugin                                                                                      | Gateways                                | Remarks                                                            | 3D Secure Support   |
-| ------------------------------------------------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------ | ------------------- |
-| [`craftcms/commerce-stripe`](https://github.com/craftcms/commerce-stripe)                   | Stripe                                  | Uses Stripe SDK; only first-party gateway to support subscriptions | Yes                 |
-| [`craftcms/commerce-paypal`](https://github.com/craftcms/commerce-paypal)                   | PayPal Pro; PayPal REST; PayPal Express | PayPal REST supports storing payment information                   | Only PayPal Express |
-| [`craftcms/commerce-paypal-checkout`](https://github.com/craftcms/commerce-paypal-checkout) | PayPal Checkout                         |                                                                    |                     |
-| [`craftcms/commerce-sagepay`](https://github.com/craftcms/commerce-sagepay)                 | SagePay Direct; SagePay Server          |                                                                    | Yes                 |
-| [`craftcms/commerce-multisafepay`](https://github.com/craftcms/commerce-multisafepay)       | MultiSafePay REST                       | Does not support authorize charges                                 | Yes                 |
-| [`craftcms/commerce-worldpay`](https://github.com/craftcms/commerce-worldpay)               | Worldpay JSON                           |                                                                    | No                  |
-| [`craftcms/commerce-eway`](https://github.com/craftcms/commerce-eway)                       | eWAY Rapid                              | Supports storing payment information                               | Yes                 |
-| [`craftcms/commerce-mollie`](https://github.com/craftcms/commerce-mollie)                   | Mollie                                  | Does not support authorize charges                                 | Yes                 |
+| Plugin                                                                   | Gateways                                | Remarks                                                            | 3D Secure Support   |
+| ------------------------------------------------------------------------ | --------------------------------------- | ------------------------------------------------------------------ | ------------------- |
+| [Stripe](https://plugins.craftcms.com/commerce-stripe)                   | Stripe                                  | Uses Stripe SDK; only first-party gateway to support subscriptions | Yes                 |
+| [PayPal Checkout](https://plugins.craftcms.com/commerce-paypal-checkout) | PayPal Checkout                         |                                                                    | Yes                 |
+| [Sage Pay](https://plugins.craftcms.com/commerce-sagepay)                | SagePay Direct; SagePay Server          |                                                                    | Yes                 |
+| [MultiSafepay](https://plugins.craftcms.com/commerce-multisafepay)       | MultiSafePay REST                       | Does not support authorize charges                                 | Yes                 |
+| [Worldpay](https://plugins.craftcms.com/commerce-worldpay)               | Worldpay JSON                           |                                                                    | No                  |
+| [eWay](https://plugins.craftcms.com/commerce-eway)                       | eWAY Rapid                              | Supports storing payment information                               | Yes                 |
+| [Mollie](https://plugins.craftcms.com/commerce-mollie)                   | Mollie                                  | Does not support authorize charges                                 | Yes                 |
+| [PayPal](https://plugins.craftcms.com/commerce-paypal) _deprecated_      | PayPal Pro; PayPal REST; PayPal Express | PayPal REST supports storing payment information                   | Only PayPal Express |
 
 ## Dummy Gateway
 
