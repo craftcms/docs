@@ -17,6 +17,10 @@ Craft や Craft プラグイン向けのコードを書くときには、この�
 PhpStorm プラグインの [Php Inspections (EA Extended)](https://plugins.jetbrains.com/idea/plugin/7622-php-inspections-ea-extended-) は、これらのベストプラクティスの問題を見つけて修正するのに役立ちます。
 :::
 
+::: tip
+The Craft Autocomplete package provides Twig template autocompletion in PhpStorm for Craft and plugin/module variables and element types: <https://github.com/nystudio107/craft-autocomplete>
+:::
+
 ## ベストプラクティス
 
 - 可能な限り、メソッド引数の型を宣言してください。
@@ -73,13 +77,13 @@ The [Php Inspections (EA Extended)](https://plugins.jetbrains.com/idea/plugin/76
 
 ## メソッド名
 
-（省略できるかどうかに関わらず）**1つ、または、複数の引数を受け入れる** Getter メソッドは、「正しいと思う」場合のみ `get` ではじめます。
+Getter methods (methods whose primary responsibility is to return something, rather than do something) that **don’t accept any arguments** should begin with `get` , and there should be a corresponding `@property` tag in the class’s docblock to document the corresponding magic getter property.
 
 - `getAuthor()`
 - `getIsSystemOn()`
 - `getHasFreshContent()`
 
-静的メソッドは、一般的に `get` ではじめるべきではありません。
+Getter methods that **accept one or more arguments** (regardless of whether they can be omitted) should only begin with `get` if it “sounds right”.
 
 - `getError($attribute)`
 - `hasErrors($attribute = null)`
@@ -91,14 +95,14 @@ Static methods should generally not start with `get`.
 
 ## 型宣言
 
-可能な限り、すべてのファンクションの引数に PHP 7.0 でサポートされる[引数の型宣言](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration)を使用してください。 唯一の例外は、次の通りです。
+Use [type declarations](https://www.php.net/manual/en/language.types.declarations.php) whenever possible. The only exceptions should be:
 
 - [マジックメソッド](http://php.net/manual/en/language.oop5.magic.php)（例：`__toString()`）
 - 複数の `null` 以外の値型を受け入れる引数
 - 親メソッドで型宣言を持たない、親クラスのメソッドを上書きするメソッド
 - インターフェースで必要なメソッドで、インターフェースメソッドに型宣言がないもの
 
-If an argument accepts two types and one of them is `null`, the argument should have a type declaration for the non-`null` type, and a default value of `null`.
+If an argument accepts two types and one of them is `null`, a `?` can be placed before the non-`null` type:
 
 ```php
 public function foo(string $bar = null)
@@ -116,7 +120,7 @@ public function foo(string $bar = null)
 
 ### 引数の型
 
-`パブリックサービスメソッド上の @param`、`@return`、`@var`、`@method` および `@property` タグは、（該当する場合）実装クラスではなくインターフェースを参照します。
+`@param` , `@return` , `@var` , `@method` and `@property` tags on public service methods should reference Interfaces (when applicable), not their implementation class:
 
 ```php
 // Bad:
@@ -131,7 +135,7 @@ public function foo(string $bar = null)
  */
 ```
 
-インラインの `@var` タグは、インターフェースではなく実装クラスを参照します。
+Inline `@var` tags should reference implementation classes, not their interfaces:
 
 ```php
 // Bad:
@@ -146,7 +150,7 @@ public function foo(string $bar = null)
 
 ### 戻り値の型
 
-[Happy Path](https://en.wikipedia.org/wiki/Happy_path) を使用してください。 すべて期待通りにできた場合、一般的にはメソッドの実行が最後に行き着くところまで処理されるべきです。
+Use [them](https://en.wikipedia.org/wiki/Happy_path). In general the execution of a method should only make it all the way to the end if everything went as expected.
 
 ```php
 // Bad:
@@ -170,7 +174,7 @@ return true;
 
 ### インターフェース 対  実装クラス
 
-このようにしないでください。 それは意味がなく、一見すると紛らわしいです。
+Don’t do this. There’s no point, and can be misleading at first glance.
 
 ```php
 // Bad:
@@ -220,7 +224,7 @@ if (\Craft::$app->getRequest()->getAcceptsJson()) {
 }
 ```
 
-JSON を返すオプションを持つコントローラーアクションでは、Ajax リクエストの場合ではなく、リクエストが明示的に JSON レスポンスを受け入れる場合に、JSON を返す必要があります。
+Controller actions that *only* return JSON should require that the request accepts JSON.
 
 ```php
 $this->requireAcceptsJson();
@@ -260,7 +264,7 @@ $query->innerJoin('{{%bar}} bar', '[[bar.fooId]] = [[foo.id]]');
 
 ## Getter と Setter
 
-JSON *だけを* 返すコントローラーアクションでは、リクエストで JSON を受け入れる必要があります。
+Getter and setter methods should have a corresponding `@property` tag in the class’s docblock, so IDEs like PhpStorm can be aware of the magic properties.
 
 ```php
 /**
@@ -280,7 +284,7 @@ class Entry
 }
 ```
 
-リクエストを完了するコントローラーアクションでは、文字列（HTML）、または、Response オブジェクトのいずれかを返す必要があります。
+For a slight performance improvement and easier debugging, you should generally stick with calling the getter and setter methods directly rather than going through their magic properties.
 
 ```php
 // Bad:
@@ -294,7 +298,7 @@ $entry->setAuthor($newAuthor);
 
 ### JSON アクション
 
-パフォーマンスを少し向上させデバッグを容易にするために、一般的にはマジックプロパティを通すよりむしろ、Getter および Setter メソッドを直接呼び出し続けるべきです。
+App components should have their own getter functions, which call the app component getter method [get()](yii2:yii\di\ServiceLocator::get()) directly:
 
 ```php
 /**
@@ -306,7 +310,7 @@ public function getEntries()
 }
 ```
 
-App コンポーネントには、App コンポーネントの Getter メソッドである [get()](yii2:yii\di\ServiceLocator::get()) を直接呼び出す、独自の Getter ファンクションが必要です。
+And you should use those instead of their magic properties:
 
 ```php
 // Bad:
