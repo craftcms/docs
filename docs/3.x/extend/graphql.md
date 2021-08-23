@@ -905,7 +905,7 @@ class Widget extends ElementMutationResolver
         }
 
         // Return the newly-saved element
-        return $elementService->getElementById($comment->id, CommentElement::class);
+        return $elementService->getElementById($widget->id, WidgetElement::class);
     }
 }
 ```
@@ -926,7 +926,7 @@ Event::on(
     Gql::class,
     Gql::EVENT_REGISTER_GQL_MUTATIONS,
     function(RegisterGqlMutationsEvent $event) {
-        $event->mutations[] = array_merge(
+        $event->mutations = array_merge(
             $event->mutations,
             WidgetMutations::getMutations(),
         );
