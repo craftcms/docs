@@ -2,6 +2,11 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-08-24
+### Added
+- Documented `utils/prune-provisional-drafts` added in Craft 3.7.9.
+- Documented `--dry-run` flag for `utils/prune-revisions` command added in Craft 3.7.9.
+
 ## 2021-08-04
 ### Added
 - Added the warning about running `project-config/write` to the Project Config page.

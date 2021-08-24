@@ -1336,9 +1336,25 @@ Converts all non-ASCII asset filenames to ASCII.
 
 Ensures all element UIDs are unique.
 
+## `utils/prune-provisional-drafts`
+
+Prunes provisional drafts for elements that have more than one per user.
+
+#### `utils/prune-provisional-drafts/index` <badge vertical="center">default</badge>
+
+Prunes provisional drafts for elements that have more than one per user.
+
+**Options**
+
+`--dry-run`
+: Whether this is a dry run.
+
+
 ## `utils/prune-revisions`
 
-#### `utils/prune-revisions/index` <badge>default</badge>
+Prunes excess element revisions.
+
+#### `utils/prune-revisions/index` <badge vertical="center">default</badge>
 
 Prunes excess element revisions.
 
@@ -1346,6 +1362,9 @@ Prunes excess element revisions.
 
 `--max-revisions`
 : The maximum number of revisions an element can have.
+
+`--dry-run`
+: Whether this is a dry run.
 
 ## `utils/repair`
 
