@@ -1270,16 +1270,35 @@ Converts all non-ASCII asset filenames to ASCII.
 
 Ensures all element UIDs are unique.
 
-## `utils/prune-revisions`
+## `utils/prune-provisional-drafts`
 
-#### `utils/prune-revisions/index` <badge>default</badge>
+Prunes provisional drafts for elements that have more than one per user.
 
-Prunes excess element revisions.
+#### `utils/prune-provisional-drafts/index` <badge vertical="center">default</badge>
+
+Prunes provisional drafts for elements that have more than one per user.
 
 **Options**
 
+`--dry-run`
+:   Whether this is a dry run.
+
+
+## `utils/prune-revisions`
+
+Prunes excess element revisions.
+
+#### `utils/prune-revisions/index` <badge vertical="center">default</badge>
+
+Prunes excess element revisions.
+
+**オプション**
+
 `--max-revisions`
 :   The maximum number of revisions an element can have.
+
+`--dry-run`
+:   Whether this is a dry run.
 
 ## `utils/repair`
 
@@ -1294,7 +1313,7 @@ Repairs structure data for a category group.
 `handle`
 :   The category group handle. (required)
 
-**オプション**
+**Options**
 
 `--dry-run`
 :   Whether to only do a dry run of the repair process.\ boolean, 0 or 1 (defaults to 0)
