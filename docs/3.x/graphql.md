@@ -1211,7 +1211,8 @@ This is the interface implemented by all entries.
 | `structureId`| `Int` | The element’s structure ID.
 | `isDraft`| `Boolean` | Returns whether this is a draft.
 | `isRevision`| `Boolean` | Returns whether this is a revision.
-| `canonicalId`| `Int` | Returns the element’s canonical ID. If it’s a draft/revision, the source element’s ID will be returned.
+| `canonicalId`| `Int` | Returns the element’s canonical ID.
+| `canonicalUid`| `Int` | Returns the element’s canonical UUID.
 | `sourceId`| `Int` | Returns the element’s ID, or if it’s a draft/revision, its source element’s ID.
 | `sourceUid`| `String` | Returns the element’s UUID, or if it’s a draft/revision, its source element’s UUID.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)

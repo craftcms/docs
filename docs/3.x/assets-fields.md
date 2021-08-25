@@ -41,7 +41,7 @@ Subfolder paths defined by the **Upload Location** and **Default Upload Location
 Any properties supported by the source element (the element that has the Assets field) can be used here.
 
 ::: tip
-If you want to include the entry’s ID or UID in a dynamic subfolder path, use `{sourceId}` or `{sourceUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the revision / draft’s.
+If you want to include the entry’s ID or UID in a dynamic subfolder path, use `{canonicalId}` or `{canonicalUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the revision / draft’s.
 :::
 
 ::: tip

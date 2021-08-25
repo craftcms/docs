@@ -117,7 +117,7 @@ Create additional preview targets for any other areas the entry might show up, s
 ![A section’s Preview Targets setting.](./images/preview-targets.png)
 
 ::: tip
-If you want to include the entry’s ID or UID in a preview target URL, use `{sourceId}` or `{sourceUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the draft’s.
+If you want to include the entry’s ID or UID in a preview target URL, use `{canonicalId}` or `{canonicalUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the draft’s.
 :::
 
 ::: tip
