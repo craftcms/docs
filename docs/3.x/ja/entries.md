@@ -117,7 +117,7 @@ Use single curly braces to render attributes on the entry. For example if entrie
 ![セクションのプレビューターゲット設定画面](./images/preview-targets.png)
 
 ::: tip
-プレビューターゲット URL にエントリの ID や UID を含めたい場合、`{id}` や `{uid}` ではなく `{sourceId}` や `{sourceUid}` を利用してください。
+If you want to include the entry’s ID or UID in a preview target URL, use `{canonicalId}` or `{canonicalUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the draft’s.
 :::
 
 ::: tip
