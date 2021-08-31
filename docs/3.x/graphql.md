@@ -1211,10 +1211,6 @@ This is the interface implemented by all entries.
 | `structureId`| `Int` | The element’s structure ID.
 | `isDraft`| `Boolean` | Returns whether this is a draft.
 | `isRevision`| `Boolean` | Returns whether this is a revision.
-| `canonicalId`| `Int` | Returns the element’s canonical ID.
-| `canonicalUid`| `Int` | Returns the element’s canonical UUID.
-| `sourceId`| `Int` | Returns the element’s ID, or if it’s a draft/revision, its source element’s ID.
-| `sourceUid`| `String` | Returns the element’s UUID, or if it’s a draft/revision, its source element’s UUID.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
 | `isUnpublishedDraft`| `Boolean` | Returns whether this is an unpublished draft.
 | `isUnsavedDraft`| `Boolean` | Returns whether this is an unpublished draft. **This field is deprecated.** `isUnpublishedDraft` should be used instead.
@@ -1227,6 +1223,10 @@ This is the interface implemented by all entries.
 | `revisionCreator`| `UserInterface` | The creator of a given revision.
 | `currentRevision`| `EntryInterface` | The current revision for the entry.
 | `revisions`| `[EntryInterface]` | The revisions for the entry.
+| `canonicalId`| `Int` | Returns the entry’s canonical ID.
+| `canonicalUid`| `String` | Returns the entry’s canonical UUID.
+| `sourceId`| `Int` | Returns the entry’s canonical ID.
+| `sourceUid`| `String` | Returns the entry’s canonical UUID.
 | `sectionId`| `Int` | The ID of the section that contains the entry.
 | `sectionHandle`| `String` | The handle of the section that contains the entry.
 | `typeId`| `Int` | The ID of the entry type that contains the entry.
