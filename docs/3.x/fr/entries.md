@@ -117,7 +117,7 @@ Create additional preview targets for any other areas the entry might show up, s
 ![A section’s Preview Targets setting.](./images/preview-targets.png)
 
 ::: tip
-This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor entries can be.
+If you want to include the entry’s ID or UID in a preview target URL, use `{canonicalId}` or `{canonicalUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the draft’s.
 :::
 
 ::: tip
