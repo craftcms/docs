@@ -135,7 +135,7 @@ use mynamespace\gql\interfaces\elements\Widget as WidgetInterface;
 use mynamespace\gql\arguments\elements\Widget as WidgetArguments;
 use mynamespace\gql\resolvers\elements\Widget as WidgetResolver;
 
-class Widget extends craft\gql\base\Query
+class Widget extends \craft\gql\base\Query
 {
     public static function getQueries($checkToken = true): array
     {
@@ -183,7 +183,7 @@ Event::on(
     Gql::class,
     Gql::EVENT_REGISTER_GQL_QUERIES,
     function(RegisterGqlQueriesEvent $event) {
-        $event->queries[] = Widget::class;
+        $event->queries["queryName"] = Widget::getQueries();
     }
 );
 ```
@@ -222,7 +222,7 @@ class Widget extends craft\gql\base\ElementArguments
                 'type' => Type::boolean(),
                 'description' => 'Narrows query results based on approved status.'
             ],
-        );
+        ]);
     }
 }
 ```
@@ -336,7 +336,7 @@ use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\InterfaceType;
 use craft\gql\GqlEntityRegistry;
 
-class Widget extends craft\gql\interfaces\Element
+class Widget extends \craft\gql\interfaces\Element
 {
     public static function getName(): string
     {
@@ -466,7 +466,7 @@ namespace mynamespace\gql\resolvers\elements;
 use mynamespace\elements\Widget as WidgetElement;
 use mynamespace\helpers\Gql as GqlHelper;
 
-class Widget extends craft\gql\base\ElementResolver
+class Widget extends \craft\gql\base\ElementResolver
 {
     public static function prepareQuery($source, array $arguments, $fieldName = null)
     {
@@ -1099,7 +1099,7 @@ Event::on(
     ArgumentManager::class,
     ArgumentManager::EVENT_DEFINE_GQL_ARGUMENT_HANDLERS,
     function(RegisterGqlArgumentHandlersEvent $event) {
-        $event->handlers[] = RelatedWidgets::class;
+        $event->handlers["argumentName"] = RelatedWidgets::class;
     }
 });
 ```
