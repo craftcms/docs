@@ -18,18 +18,18 @@ The form to add the donation to the cart would look like this:
 ```twig
 {% set donation = craft.commerce.donation %}
 {% if donation and donation.isAvailable %}
-    <form method="post">
-        {{ csrfInput() }}
-        {{ actionInput('commerce/cart/update-cart') }}
-        {{ redirectInput('shop/cart') }}
-        {{ hiddenInput('purchasableId', donation.id) }}
-        <input type="text"
-            name="options[donationAmount]"
-            value=""
-            placeholder="Donation"
-        >
-        <button type="submit">Donate Now</button>
-    </form>
+  <form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/update-cart') }}
+    {{ redirectInput('shop/cart') }}
+    {{ hiddenInput('purchasableId', donation.id) }}
+    <input type="text"
+      name="options[donationAmount]"
+      value=""
+      placeholder="Donation"
+    >
+    <button type="submit">Donate Now</button>
+  </form>
 {% endif %}
 ```
 

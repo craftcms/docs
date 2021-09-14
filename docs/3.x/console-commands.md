@@ -1238,6 +1238,19 @@ Defaults to the current working directory.
 
 Don’t use this method; it won’t actually execute anything.
 
+## `up`
+
+Runs pending migrations and applies pending project config changes.
+
+### `up/index` <badge vertical="center">default</badge>
+
+Runs pending migrations and applies pending project config changes.
+
+**Options**
+
+`--force`
+: Whether to perform the action even if a mutex lock could not be acquired.
+
 ## `update`
 
 Updates Craft and plugins.
