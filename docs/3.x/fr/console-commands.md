@@ -1180,6 +1180,19 @@ Sets up a test suite for the current project.
 
 Don’t use this method; it won’t actually execute anything.
 
+## `up`
+
+Runs pending migrations and applies pending project config changes.
+
+### `up/index` <badge vertical="center">default</badge>
+
+Runs pending migrations and applies pending project config changes.
+
+**Options**
+
+`--force`
+:   Whether to perform the action even if a mutex lock could not be acquired.
+
 ## `update`
 
 Updates Craft and plugins.
@@ -1204,10 +1217,10 @@ Updates Craft and/or plugins.
 **Options**
 
 `--backup`
-:   Whether to only do a dry run of the repair process.\ boolean, 0 or 1 (defaults to 0)
+:   Backup the database before updating.\ boolean, 0 or 1
 
 `--force`, `-f`
-:   Backup the database before updating.\ boolean, 0 or 1
+:   Force the update if `allowUpdates` is disabled.\ boolean, 0 or 1 (defaults to 0)
 
 `--migrate`
 :   Run new database migrations after completing the update.\ boolean, 0 or 1 (defaults to 1)
