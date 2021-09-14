@@ -1180,17 +1180,30 @@ Sets up a test suite for the current project.
 
 プロジェクトコンフィグのダブルパックされた連想配列を修復します。
 
+## `up`
+
+Runs pending migrations and applies pending project config changes.
+
+### `up/index` <badge vertical="center">default</badge>
+
+Runs pending migrations and applies pending project config changes.
+
+**Options**
+
+`--force`
+:   Whether to perform the action even if a mutex lock could not be acquired.
+
 ## `update`
 
 Updates Craft and plugins.
 
 #### `update/composer-install`
 
-セクションの構造データを修復します。
+Installs dependencies based on the current composer.json & composer.lock.
 
 #### `update/info`
 
-利用可能なアップデートに関する情報を表示します。
+Displays info about available updates.
 
 #### `update/update` <badge>default</badge>
 
@@ -1201,7 +1214,7 @@ Updates Craft and/or plugins.
 `handle`
 :   The update handle (`all`, `craft`, or a plugin handle). You can pass multiple handles separated by spaces, and you can update to a specific version using the syntax `<handle>:<version>`.
 
-**実例**
+**Options**
 
 `--backup`
 :   Backup the database before updating.\ boolean, 0 or 1
@@ -1278,7 +1291,7 @@ Prunes provisional drafts for elements that have more than one per user.
 
 Prunes provisional drafts for elements that have more than one per user.
 
-**Options**
+**オプション**
 
 `--dry-run`
 :   Whether this is a dry run.
@@ -1292,7 +1305,7 @@ Prunes excess element revisions.
 
 Prunes excess element revisions.
 
-**オプション**
+**Options**
 
 `--max-revisions`
 :   The maximum number of revisions an element can have.
