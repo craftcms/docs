@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-09-14
+### Added
+- Documented `up` command added in Craft 3.7.13.
+
 ## 2021-08-31
 ### Changed
 - Updated `{sourceId}` and `{sourceUid}` references to `{canonicalId}` and `{canonicalUid}`. 
