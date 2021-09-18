@@ -172,10 +172,10 @@ Amazon S3、Rackspace Cloud Files、および、Google Cloud Storage のサポ�
 
 いくつかの PHP 定数は Craft 3 で非推奨となり、Craft 4 で動作しなくなります
 
-| 旧 PHP 定数         | 代わりにすべきこと                                                                           |
-| ---------------- | ----------------------------------------------------------------------------------- |
-| `CRAFT_LOCALE`   | [CRAFT_SITE](config/README.md#craft-site) 定数<sup>1</sup> を利用してください                  |
-| `CRAFT_SITE_URL` | コンフィグ設定 <config3:siteUrl> 、または、[環境変数](config/#environmental-configuration)を利用してください |
+| 旧 PHP 定数         | 代わりにすべきこと                                                          |
+| ---------------- | ------------------------------------------------------------------ |
+| `CRAFT_LOCALE`   | [CRAFT_SITE](config/README.md#craft-site) 定数<sup>1</sup> を利用してください |
+| `CRAFT_SITE_URL` | Use [environment variables](config/#environmental-configuration)   |
 
 *<sup>1</sup> Craft 3 ではそれぞれのサイト / ロケールごとに独自の `index.php` ファイルを用意することが必須ではなくなりました。 そのため、不要になったすべてのサイト / ロケールのウェブルート、および、サブフォルダーを削除することもできます。 詳細については、[ローカライゼーションガイド](sites.md)を参照してください。*
 
