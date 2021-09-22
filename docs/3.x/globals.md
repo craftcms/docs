@@ -82,8 +82,8 @@ We can load a global set from the primary site and display its content by doing 
 ```twig
 {# Create a global set query with the 'handle' and 'siteId' parameters #}
 {% set myGlobalSetQuery = craft.globalSets()
-    .handle('footerCopy')
-    .siteId(1) %}
+  .handle('footerCopy')
+  .siteId(1) %}
 
 {# Fetch the global set #}
 {% set globalSet = myGlobalSetQuery.one() %}

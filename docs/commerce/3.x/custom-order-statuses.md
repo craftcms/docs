@@ -79,6 +79,6 @@ Returns an array of <commerce3:craft\commerce\models\OrderStatus> objects repres
 
 ```twig
 {% for status in craft.commerce.orderStatuses.allOrderStatuses %}
-    {{ status.handle }} - {{ status.name }}
+  {{ status.handle }} - {{ status.name }}
 {% endfor %}
 ```

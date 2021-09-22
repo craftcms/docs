@@ -22,6 +22,6 @@ Calling a Date field in your templates will return a [DateTime](templating/datet
 
 ```twig
 {% if user.birthday %}
-    {{ user.name }}’s birthday is: {{ user.birthday | date('M j, Y') }}
+  {{ user.name }}’s birthday is: {{ user.birthday | date('M j, Y') }}
 {% endif %}
 ```

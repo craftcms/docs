@@ -73,6 +73,6 @@ Returns an array of all tax categories set up in the system.
 
 ```twig
 {% for taxCategory in craft.commerce.taxCategories.allTaxCategories %}
-    {{ taxCategory.id }} - {{ taxCategory.name }}
+  {{ taxCategory.id }} - {{ taxCategory.name }}
 {% endfor %}
 ```

@@ -4,26 +4,26 @@ If you need to login a user from the front-end of your site, you can do so with 
 
 ```twig
 <form method="post" accept-charset="UTF-8">
-    {{ getCsrfInput() }}
-    <input type="hidden" name="action" value="users/login">
+  {{ getCsrfInput() }}
+  <input type="hidden" name="action" value="users/login">
 
-    <h3><label for="loginName">Username or email</label></h3>
-    <input id="loginName" type="text" name="loginName"
-        value="{{ craft.session.rememberedUsername }}">
+  <h3><label for="loginName">Username or email</label></h3>
+  <input id="loginName" type="text" name="loginName"
+    value="{{ craft.session.rememberedUsername }}">
 
-    <h3><label for="password">Password</label></h3>
-    <input id="password" type="password" name="password">
+  <h3><label for="password">Password</label></h3>
+  <input id="password" type="password" name="password">
 
-    <label>
-        <input type="checkbox" name="rememberMe" value="1">
-        Remember me
-    </label>
+  <label>
+    <input type="checkbox" name="rememberMe" value="1">
+    Remember me
+  </label>
 
-    <input type="submit" value="Login">
+  <input type="submit" value="Login">
 
-    {% if errorMessage is defined %}
-        <p>{{ errorMessage }}</p>
-    {% endif %}
+  {% if errorMessage is defined %}
+    <p>{{ errorMessage }}</p>
+  {% endif %}
 </form>
 
 <p><a href="{{ url('forgotpassword') }}">Forget your password?</a></p>

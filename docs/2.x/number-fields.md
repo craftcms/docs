@@ -24,9 +24,9 @@ Calling a Number field in your templates will return the number that was entered
 
 ```twig
 {% if user.birthyear %}
-    <p>{{ user.name }} was born in {{ user.birthyear }}.</p>
+  <p>{{ user.name }} was born in {{ user.birthyear }}.</p>
 
-    {% set age = now.year - user.birthyear %}
-    <p>That makes them {{ age }} years old!</p>
+  {% set age = now.year - user.birthyear %}
+  <p>That makes them {{ age }} years old!</p>
 {% endif %}
 ```

@@ -8,12 +8,12 @@ You are able to update the custom fields on a cart by posting data to the `updat
 
 ```twig
 <form method="post">
-    {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
-    {{ redirectInput('shop/cart') }}
+  {{ csrfInput() }}
+  {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+  {{ redirectInput('shop/cart') }}
 
-    <input type="text" name="fields[myFieldHandle]" value="">
+  <input type="text" name="fields[myFieldHandle]" value="">
 
-    <button type="submit">Update Cart</button>
+  <button type="submit">Update Cart</button>
 </form>
 ```

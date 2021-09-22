@@ -34,9 +34,9 @@ That will give you an ElementCriteriaModel object, prepped to output all of the 
 
 ```twig
 {% set products = craft.commerce.products({
-    relatedTo: { sourceElement: entry, field: 'productsFieldHandle' },
-    order:     'sortOrder',
-    limit:     null
+  relatedTo: { sourceElement: entry, field: 'productsFieldHandle' },
+  order:     'sortOrder',
+  limit:     null
 }) %}
 ```
 
@@ -48,7 +48,7 @@ To check if your Products field has any selected products, you can use the lengt
 
 ```twig
 {% if entry.productsFieldHandle | length %}
-    ...
+  ...
 {% endif %}
 ```
 
@@ -56,7 +56,7 @@ To loop through the selected products, you can treat the field like an array:
 
 ```twig
 {% for product in entry.productsFieldHandle %}
-    ...
+  ...
 {% endfor %}
 ```
 
@@ -66,12 +66,10 @@ Rather than typing “entry.productsFieldHandle” every time, you can call it o
 {% set products = entry.productsFieldHandle %}
 
 {% if products | length %}
-
-    <h3>Some great products</h3>
-    {% for product in products %}
-        ...
-    {% endfor %}
-
+  <h3>Some great products</h3>
+  {% for product in products %}
+    ...
+  {% endfor %}
 {% endif %}
 ```
 
@@ -87,6 +85,6 @@ If your Products field is only meant to have a single product selected, remember
 {% set product = entry.productsFieldHandle.first() %}
 
 {% if product %}
-    ...
+  ...
 {% endif %}
 ```

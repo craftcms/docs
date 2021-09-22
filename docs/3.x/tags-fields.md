@@ -58,8 +58,8 @@ Possible values include:
 ```twig
 {# Fetch entries with a related tag #}
 {% set entries = craft.entries()
-    .myFieldHandle(':notempty:')
-    .all() %}
+  .myFieldHandle(':notempty:')
+  .all() %}
 ```
 ```php
 // Fetch entries with a related tag
@@ -90,11 +90,11 @@ To loop through all the related tags, call [all()](craft3:craft\db\Query::all())
 ```twig
 {% set relatedTags = entry.myFieldHandle.all() %}
 {% if relatedTags|length %}
-    <ul>
-        {% for rel in relatedTags %}
-            <li><a href="{{ url('tags/'~rel.slug) }}">{{ rel.title }}</a></li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for rel in relatedTags %}
+      <li><a href="{{ url('tags/'~rel.slug) }}">{{ rel.title }}</a></li>
+    {% endfor %}
+  </ul>
 {% endif %}
 ```
 ```php
@@ -115,7 +115,7 @@ If you only want the first related tag, call [one()](craft3:craft\db\Query::one(
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
-    <p><a href="{{ url('tags/'~rel.slug) }}">{{ rel.title }}</a></p>
+  <p><a href="{{ url('tags/'~rel.slug) }}">{{ rel.title }}</a></p>
 {% endif %}
 ```
 ```php
@@ -132,7 +132,7 @@ If you need to check for any related tags without fetching them, you can call [e
 ::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
-    <p>There are related tags!</p>
+  <p>There are related tags!</p>
 {% endif %}
 ```
 ```php
@@ -147,8 +147,8 @@ You can set [parameters](tags.md#parameters) on the tag query as well.
 ::: code
 ```twig
 {% set relatedTags = clone(entry.myFieldHandle)
-    .group('blogEntryTags')
-    .all() %}
+  .group('blogEntryTags')
+  .all() %}
 ```
 ```php
 $relatedTags = (clone $entry->myFieldHandle)
@@ -174,29 +174,29 @@ For example, you could create a list of checkboxes for each of the possible rela
 
 {# Get all of the possible tag options #}
 {% set possibleTags = craft.entries()
-    .group('blogEntryTags')
-    .orderBy('title ASC')
-    .all() %}
+  .group('blogEntryTags')
+  .orderBy('title ASC')
+  .all() %}
 
 {# Get the currently related tag IDs #}
 {% set relatedTagIds = entry is defined
-    ? entry.myFieldHandle.ids()
-    : [] %}
+  ? entry.myFieldHandle.ids()
+  : [] %}
 
 <ul>
-    {% for possibleTag in possibleTags %}
-        <li>
-            <label>
-                {{ input(
-                    'checkbox',
-                    'fields[myFieldHandle][]',
-                    possibleTag.id,
-                    { checked: possibleTag.id in relatedTagIds }
-                ) }}
-                {{ possibleTag.title }}
-            </label>
-        </li>
-    {% endfor %}
+  {% for possibleTag in possibleTags %}
+    <li>
+      <label>
+        {{ input(
+          'checkbox',
+          'fields[myFieldHandle][]',
+          possibleTag.id,
+          { checked: possibleTag.id in relatedTagIds }
+        ) }}
+        {{ possibleTag.title }}
+      </label>
+    </li>
+  {% endfor %}
 </ul>
 ```
 
@@ -204,6 +204,6 @@ You could then make the checkbox list sortable, so users have control over the o
 
 ## See Also
 
-* [Tag Queries](tags.md#querying-tags)
-* <craft3:craft\elements\Tag>
-* [Relations](relations.md)
+- [Tag Queries](tags.md#querying-tags)
+- <craft3:craft\elements\Tag>
+- [Relations](relations.md)

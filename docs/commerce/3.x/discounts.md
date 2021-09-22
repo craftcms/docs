@@ -245,7 +245,7 @@ Returns an array of all enabled discounts set up in the system active for the cu
 
 ```twig
 {% for discount in craft.commerce.discounts.allActiveDiscounts %}
-    {{ discount.name }} - {{ discount.description }}
+  {{ discount.name }} - {{ discount.description }}
 {% endfor %}
 ```
 
@@ -256,6 +256,6 @@ Returns a [Discount](commerce3:craft\commerce\models\Discount) model that matche
 ```twig
 {% set discount = craft.commerce.discounts.getDiscountByCode('HALFOFF') %}
 {% if discount %}
-    {{ discount.name }} - {{ discount.description }}
+  {{ discount.name }} - {{ discount.description }}
 {% endif %}
 ```

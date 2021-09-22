@@ -68,11 +68,11 @@ To guide users when entering your setting’s value in the control panel, give y
 {% import "_includes/forms" as forms %}
 
 {{ forms.autosuggestField({
-    label: "Secret Key"|t('plugin-handle'),
-    id: 'secret-key',
-    name: 'secretKey',
-    value: myModel.secretKey,
-    suggestEnvVars: true
+  label: "Secret Key"|t('plugin-handle'),
+  id: 'secret-key',
+  name: 'secretKey',
+  value: myModel.secretKey,
+  suggestEnvVars: true
 }) }}
 ```
 
@@ -82,8 +82,8 @@ If your setting is for a URL or file system path, you should also set `suggestAl
 
 ```twig{4}
 {{ forms.autosuggestField({
-    // ...
-    suggestEnvVars: true,
-    suggestAliases: true
+  // ...
+  suggestEnvVars: true,
+  suggestAliases: true
 }) }}
 ```

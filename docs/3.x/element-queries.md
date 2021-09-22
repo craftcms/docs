@@ -14,9 +14,9 @@ Here’s what a typical element query might look like:
 ```twig
 {# Create an entry query and set some parameters on it #}
 {% set entryQuery = craft.entries()
-    .section('news')
-    .orderBy('postDate DESC')
-    .limit(10) %}
+  .section('news')
+  .orderBy('postDate DESC')
+  .limit(10) %}
 
 {# Execute the query and get the results #}
 {% set entries = entryQuery.all() %}
@@ -60,9 +60,9 @@ Most of the time, you just want to get the elements that you’re querying for. 
 ::: code
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .limit(10)
-    .all() %}
+  .section('news')
+  .limit(10)
+  .all() %}
 ```
 ```php
 use craft\elements\Entry;
@@ -81,9 +81,9 @@ If you only need a single element, call `one()` instead of `all()`. It will eith
 ::: code
 ```twig
 {% set entry = craft.entries()
-    .section('news')
-    .slug('hello-world')
-    .one() %}
+  .section('news')
+  .slug('hello-world')
+  .one() %}
 ```
 ```php
 use craft\elements\Entry;
@@ -102,9 +102,9 @@ If you just need to check if any elements exist that match the element query, yo
 ::: code
 ```twig
 {% set exists = craft.entries()
-    .section('news')
-    .slug('hello-world')
-    .exists() %}
+  .section('news')
+  .slug('hello-world')
+  .exists() %}
 ```
 ```php
 use craft\elements\Entry;
@@ -123,8 +123,8 @@ If you want to know how many elements match your element query, you can call `co
 ::: code
 ```twig
 {% set count = craft.entries()
-    .section('news')
-    .count() %}
+  .section('news')
+  .count() %}
 ```
 ```php
 use craft\elements\Entry;
@@ -146,8 +146,8 @@ If you just want a list of matching element IDs, you can call `ids()`.
 ::: code
 ```twig
 {% set entryIds = craft.entries()
-    .section('news')
-    .ids() %}
+  .section('news')
+  .ids() %}
 ```
 ```php
 use craft\elements\Entry;

@@ -187,9 +187,9 @@ Sets the default transform that should be used by [getWidth()](#getwidth), [getH
 
 ```twig
 {% set transform = {
-    mode: 'crop',
-    width: 100,
-    height: 100
+  mode: 'crop',
+  width: 100,
+  height: 100
 } %}
 
 {% do image.setTransform(transform) %}

@@ -181,15 +181,15 @@ Returns the shipping method options available for the current cart. Some shippin
 
 ```twig
 {% for handle, method in cart.availableShippingMethodOptions %}
-    {% set isCurrentSelection = handle == cart.shippingMethodHandle %}
-    {% set formattedPrice = method.priceForOrder(cart)|currency(cart.currency) %}
-    <label>
-        <input type="radio"
-            name="shippingMethodHandle"
-            value="{{ handle }}"
-            {{ isCurrentSelection ? ' checked' : '' }}
-        />
-        <strong>{{ method.name }}</strong> {{ formattedPrice }}
-    </label>
+  {% set isCurrentSelection = handle == cart.shippingMethodHandle %}
+  {% set formattedPrice = method.priceForOrder(cart)|currency(cart.currency) %}
+  <label>
+    <input type="radio"
+      name="shippingMethodHandle"
+      value="{{ handle }}"
+      {{ isCurrentSelection ? ' checked' : '' }}
+    />
+    <strong>{{ method.name }}</strong> {{ formattedPrice }}
+  </label>
 {% endfor %}
 ```

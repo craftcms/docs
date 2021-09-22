@@ -16,14 +16,14 @@ If you don’t manually change a Color field’s color, it will be saved as `#00
 
 ```twig
 {% block head %}
-    {{ parent() }}
+  {{ parent() }}
 
-    {% if entry.linkColor and entry.linkColor != '#000000' %}
-        <style type="text/css">
-            .content a {
-                color: {{ entry.linkColor }};
-            }
-        </style>
-    {% endif %}
+  {% if entry.linkColor and entry.linkColor != '#000000' %}
+    <style type="text/css">
+      .content a {
+        color: {{ entry.linkColor }};
+      }
+    </style>
+  {% endif %}
 {% endblock %}
 ```

@@ -82,16 +82,16 @@ You can specify the search query in two different ways:
 
 {# Pass the search query directly into the search param: #}
 {% set results = craft.entries({
-    search: query
+  search: query
 }) %}
 
 {# Or pass it along with some custom search term options: #}
 {% set results = craft.entries({
-    search: {
-        query: query,
-        subLeft: true,
-        subRight: true
-    }
+  search: {
+    query: query,
+    subLeft: true,
+    subRight: true
+  }
 }) %}
 ```
 
@@ -103,8 +103,8 @@ You can also set the ‘order’ parameter to `'score'` if you want results orde
 
 ```twig
 {% set results = craft.entries({
-    search: query,
-    order: 'score'
+  search: query,
+  order: 'score'
 }) %}
 ```
 

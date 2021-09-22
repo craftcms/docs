@@ -32,8 +32,8 @@ Possible values include:
 ```twig
 {# Fetch entries with a Number field set to at least 100 #}
 {% set entries = craft.entries()
-    .myFieldHandle('>= 100')
-    .all() %}
+  .myFieldHandle('>= 100')
+  .all() %}
 ```
 ```php
 // Fetch entries with a Number field set to at least 100
@@ -89,12 +89,13 @@ If you have an element form, such as an [entry form](https://craftcms.com/knowle
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
 
 {% set value = entry is defined
-    ? entry.myFieldHandle
-    : field.defaultValue %}
+  ? entry.myFieldHandle
+  : field.defaultValue %}
 
 <input type="number"
-    name="fields[myFieldHandle]"
-    min="{{ field.min }}"
-    max="{{ field.max }}"
-    value="{{ value }}">
+  name="fields[myFieldHandle]"
+  min="{{ field.min }}"
+  max="{{ field.max }}"
+  value="{{ value }}"
+>
 ```

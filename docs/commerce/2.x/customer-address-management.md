@@ -32,7 +32,7 @@ See <commerce2:craft\commerce\models\Address> to learn about the fields availabl
 <form method="post">
   <input type="hidden" name="action" value="commerce/customer-addresses/save">
   {{ redirectInput('commerce/customer/addresses') }}
-	{{ csrfInput() }}
+  {{ csrfInput() }}
   <input type="text" name="address[firstName]" value="{{ address is defined ? address.firstName : '' }}">
   <input type="text" name="address[lastName]" value="{{ address is defined ? address.lastName : '' }}">
   ...
@@ -48,7 +48,7 @@ Including an `address[id]` param with a valid address ID that belongs to the cur
 <form method="POST">
   <input type="hidden" name="action" value="commerce/customer-addresses/delete">
   {{ redirectInput('commerce/customer/addresses') }}
-	{{ csrfInput() }}
+  {{ csrfInput() }}
   <input type="hidden" name="id" value="{{ address.id }}"/>
   <input type="submit" value="delete"/>
 </form>

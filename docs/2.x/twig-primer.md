@@ -13,9 +13,9 @@ Their syntax always begins with “`{%`” and ends with “`%}`”. What happen
 
 {% set hour = now|date("G") %}
 {% if hour >= 16 and hour < 18 %}
-    <p>Yes!</p>
+  <p>Yes!</p>
 {% else %}
-    <p>Nope.</p>
+  <p>Nope.</p>
 {% endif %}
 ```
 
@@ -94,11 +94,11 @@ Twig and Craft provide several functions that can be used within your template t
 ```twig
 <h3>Watch me count to ten!</h3>
 <ul>
-    {% for num in range(1, 10) %}
-        <li class="{{ cycle(['odd', 'even'], loop.index0) }}">
-            {{ num }}
-        </li>
-    {% endfor %}
+  {% for num in range(1, 10) %}
+    <li class="{{ cycle(['odd', 'even'], loop.index0) }}">
+      {{ num }}
+    </li>
+  {% endfor %}
 </ul>
 ```
 

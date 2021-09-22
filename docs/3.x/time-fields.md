@@ -54,8 +54,8 @@ Possible values include:
 ```twig
 {# Fetch entries with with a selected time before 10:00 AM #}
 {% set entries = craft.entries()
-    .myFieldHandle('< 10:00')
-    .all() %}
+  .myFieldHandle('< 10:00')
+  .all() %}
 ```
 ```php
 // Fetch entries with with a selected time before 10:00 AM
@@ -85,7 +85,7 @@ If it’s set, you can output a formatted time based on its value using the [tim
 ::: code
 ```twig
 {% if entry.myFieldHandle %}
-    Selected time: {{ entry.myFieldHandle|time('short') }}
+  Selected time: {{ entry.myFieldHandle|time('short') }}
 {% endif %}
 ```
 ```php
@@ -104,8 +104,8 @@ If you have an element form, such as an [entry form](https://craftcms.com/knowle
 
 ```twig
 {% set currentValue = entry is defined and entry.myFieldHandle
-    ? entry.myFieldHandle|date('H:i')
-    : '' %}
+  ? entry.myFieldHandle|date('H:i')
+  : '' %}
 
 <input type="time" name="fields[myFieldHandle]" value="{{ currentValue }}">
 ```
@@ -119,8 +119,8 @@ By default, Craft will assume the date is posted in the system timezone. You can
 {% set tz = 'America/Los_Angeles' %}
 
 {% set currentValue = entry is defined and entry.myFieldHandle
-    ? entry.myFieldHandle|date('H:i', timezone=tz)
-    : '' %}
+  ? entry.myFieldHandle|date('H:i', timezone=tz)
+  : '' %}
 
 <input type="time" name="fields[myFieldHandle][time]" value="{{ currentValue }}">
 {{ hiddenInput('fields[myFieldHandle][timezone]', tz) }}
@@ -130,14 +130,14 @@ Or you can let users decide which timezone the date should be posted in:
 
 ```twig
 {% set currentValue = entry is defined and entry.myFieldHandle
-    ? entry.myFieldHandle|date('H:i', timezone='UTC')
-    : '' %}
+  ? entry.myFieldHandle|date('H:i', timezone='UTC')
+  : '' %}
 
 <input type="time" name="fields[myFieldHandle][time]" value="{{ currentValue }}">
 
 <select name="fields[myFieldHandle][timezone]">
-    <option value="UTC" selected>UTC</option>
-    <option value="America/Los_Angeles">Pacific Time</option>
-    <!-- ... -->
+  <option value="UTC" selected>UTC</option>
+  <option value="America/Los_Angeles">Pacific Time</option>
+  <!-- ... -->
 </select>
 ```

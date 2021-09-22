@@ -67,7 +67,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ actionInput('users/save-user', {
-    id: 'action-input'
+  id: 'action-input'
 }) }}
 ```
 
@@ -97,19 +97,19 @@ Generates a list of HTML attributes based on the given [hash](twig-primer.md#has
 
 ```twig
 {% set myAttributes = {
-    class: ['one', 'two'],
-    disabled: true,
-    readonly: false,
-    data: {
-        baz: 'Escape this "',
-        qux: {
-            some: ['data', '"quoted"']
-        }
-    },
-    style: {
-        'background-color': 'red',
-        'font-size': '20px'
-    },
+  class: ['one', 'two'],
+  disabled: true,
+  readonly: false,
+  data: {
+    baz: 'Escape this "',
+    qux: {
+      some: ['data', '"quoted"']
+    }
+  },
+  style: {
+    'background-color': 'red',
+    'font-size': '20px'
+  },
 } %}
 
 <div {{ attr(myAttributes) }}></div>
@@ -121,10 +121,10 @@ Outputs any scripts and styles that were registered for the “begin body” pos
 
 ```twig
 <body>
-    {{ beginBody() }}
+  {{ beginBody() }}
 
-    <h1>{{ page.name }}</h1>
-    {{ page.body }}
+  <h1>{{ page.name }}</h1>
+  {{ page.body }}
 </body>
 ```
 
@@ -179,7 +179,7 @@ Passes through the behavior of the `Craft::configure()` method inherited from [`
 ```twig
 {# Modify an `EntryQuery` object set up by a relational field: #}
 {% set myRelatedEntries = configure(entry.myEntriesField, {
-    section: 'blog'
+  section: 'blog'
 }).all() %}
 ```
 
@@ -217,9 +217,9 @@ Creates a new object instance based on a given class name or object configuratio
 
 {# Or a full object configuration hash #}
 {% set cookie = create({
-    class: 'yii\\web\\cookie',
-    name: 'foo',
-    value: 'bar'
+  class: 'yii\\web\\cookie',
+  name: 'foo',
+  value: 'bar'
 }) %}
 ```
 
@@ -251,7 +251,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ csrfInput({
-    id: 'csrf-input'
+  id: 'csrf-input'
 }) }}
 ```
 
@@ -282,7 +282,7 @@ The argument can be one of PHP’s supported [date and time formats](https://www
 
 ```twig
 {% if date(asset.dateModified) < date('-2days') %}
-    {# asset is not new #}
+  {# asset is not new #}
 {% endif %}
 ```
 
@@ -290,7 +290,7 @@ A `null` or empty argument defaults to the current date:
 
 ```twig
 {% if date() > date('2021/06/01') %}
-    {# today is past June 1, 2021 #}
+  {# today is past June 1, 2021 #}
 {% endif %}
 ```
 
@@ -298,13 +298,13 @@ Craft additionally supports passing a `date`/`time` array:
 
 ```twig
 {% set myDate = {
-    date: '2021-01-15',
-    timezone: 'America/Los_Angeles',
-    time: '10:57',
+  date: '2021-01-15',
+  timezone: 'America/Los_Angeles',
+  time: '10:57',
 } %}
 
 {% if now > date(myDate) %}
-    {# today is past January 15, 2021 #}
+  {# today is past January 15, 2021 #}
 {% endif %}
 ```
 
@@ -314,10 +314,10 @@ Outputs any scripts and styles that were registered for the “end body” posit
 
 ```twig
 <body>
-    <h1>{{ page.name }}</h1>
-    {{ page.body }}
+  <h1>{{ page.name }}</h1>
+  {{ page.body }}
 
-    {{ endBody() }}
+  {{ endBody() }}
 </body>
 ```
 
@@ -327,8 +327,8 @@ Creates and returns a new <yii2:yii\db\Expression> object, for use in database q
 
 ```twig
 {% set entries = craft.entries()
-    .andWhere(expression('[[authorId]] = :authorId', {authorId: currentUser.id}))
-    .all() %}
+  .andWhere(expression('[[authorId]] = :authorId', {authorId: currentUser.id}))
+  .all() %}
 ```
 
 ## `failMessageInput`
@@ -343,7 +343,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ failMessageInput('Custom fail message', {
-    id: 'fail-message-input'
+  id: 'fail-message-input'
 }) }}
 ```
 
@@ -385,14 +385,14 @@ Executes a GraphQL query against the full schema.
 }') %}
 
 {% for entry in result.data %}
-    <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
-    <p class="timestamp">{{ entry.postDate }}</p>
+  <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+  <p class="timestamp">{{ entry.postDate }}</p>
 
-    {% set image = entry.featuredImage[0] %}
-    <img class="thumb" src="{{ image.url }}" alt="{{ image.altText }}">
+  {% set image = entry.featuredImage[0] %}
+  <img class="thumb" src="{{ image.url }}" alt="{{ image.altText }}">
 
-    {{ entry.shortDescription|markdown }}
-    <p><a href="{{ entry.url }}">Continue reading…</a></p>
+  {{ entry.shortDescription|markdown }}
+  <p><a href="{{ entry.url }}">Continue reading…</a></p>
 {% endfor %}
 ```
 
@@ -402,8 +402,8 @@ Outputs any scripts and styles that were registered for the “head” position.
 
 ```twig
 <head>
-    <title>{{ siteName }}</title>
-    {{ head() }}
+  <title>{{ siteName }}</title>
+  {{ head() }}
 </head>
 ```
 
@@ -420,7 +420,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ hiddenInput('entryId', entry.id, {
-    id: 'entry-id-input'
+  id: 'entry-id-input'
 }) }}
 ```
 
@@ -443,7 +443,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ input('email', 'email-input', '', {
-    id: 'custom-input'
+  id: 'custom-input'
 }) }}
 {# Output: <input type="email" id="custom-input" name="email-input" value=""> #}
 ```
@@ -466,15 +466,15 @@ Outputs an array of items as an ordered list.
 
 ```twig
 {% set titles = craft.entries()
-    .section('news')
-    .select('title')
-    .column() %}
+  .section('news')
+  .select('title')
+  .column() %}
 {{ ol(titles) }}
 {# Output:
 <ol>
-    <li>Shocking Foo</li>
-    <li>You Won’t Believe This Bar</li>
-    <li>Ten Baz You Can’t Live Without</li>
+  <li>Shocking Foo</li>
+  <li>You Won’t Believe This Bar</li>
+  <li>Ten Baz You Can’t Live Without</li>
 </ol>
 #}
 ```
@@ -525,7 +525,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ redirectInput(url, {
-    id: 'redirect-input'
+  id: 'redirect-input'
 }) }}
 ```
 
@@ -562,11 +562,11 @@ Randomizes the order of the elements within an array.
 {% set shuffledPromos = shuffle(promos) %}
 
 {% for promo in shuffledPromos %}
-    <div class="promo {{ promo.slug }}">
-        <h3>{{ promo.title }}</h3>
-        <p>{{ promo.description }}</p>
-        <a class="cta" href="{{ promo.ctaUrl }}">{{ promo.ctaLabel }}</a>
-    </div>
+  <div class="promo {{ promo.slug }}">
+    <h3>{{ promo.title }}</h3>
+    <p>{{ promo.description }}</p>
+    <a class="cta" href="{{ promo.ctaUrl }}">{{ promo.ctaLabel }}</a>
+  </div>
 {% endfor %}
 ```
 
@@ -599,7 +599,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ successMessageInput('Custom success message', {
-    id: 'success-message-input'
+  id: 'success-message-input'
 }) }}
 ```
 
@@ -655,7 +655,7 @@ Renders a complete HTML tag.
 
 ```twig
 {{ tag('div', {
-    class: 'foo'
+  class: 'foo'
 }) }}
 {# Output: <div class="foo"></div> #}
 ```
@@ -664,7 +664,7 @@ If `text` is included in the attributes argument, its value will be HTML-encoded
 
 ```twig
 {{ tag('div', {
-    text: 'Hello'
+  text: 'Hello'
 }) }}
 {# Output: <div>Hello</div> #}
 ```
@@ -677,7 +677,7 @@ Be sure you trust any input you provide via `html` since it could be an XSS (cro
 
 ```twig
 {{ tag('div', {
-    html: 'Hello<br>world'
+  html: 'Hello<br>world'
 }) }}
 {# Output: <div>Hello<br>world</div> #}
 ```
@@ -688,9 +688,9 @@ If an attribute is set to `true`, it will be added without a value.
 
 ```twig
 {{ tag('input', {
-    id: "foo",
-    name: "bar",
-    required: true
+  id: "foo",
+  name: "bar",
+  required: true
 }) }}
 {# Output: <input id="foo" name="bar" required> #}
 ```
@@ -703,15 +703,15 @@ Outputs an array of items as an unordered list.
 
 ```twig
 {% set titles = craft.entries()
-    .section('news')
-    .select('title')
-    .column() %}
+  .section('news')
+  .select('title')
+  .column() %}
 {{ ul(titles) }}
 {# Output:
 <ul>
-    <li>Shocking Foo</li>
-    <li>You Won’t Believe This Bar</li>
-    <li>Ten Baz You Can’t Live Without</li>
+  <li>Shocking Foo</li>
+  <li>You Won’t Believe This Bar</li>
+  <li>Ten Baz You Can’t Live Without</li>
 </ul>
 #}
 ```

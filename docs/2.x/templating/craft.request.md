@@ -20,9 +20,9 @@ Whether the current request is a Live Preview request.
 
 ```twig
 {% if not craft.request.isLivePreview %}
-    <script type="text/javascript">
-        // Google Analytics tracking code
-    </script>
+  <script type="text/javascript">
+    // Google Analytics tracking code
+  </script>
 {% endif %}
 ```
 

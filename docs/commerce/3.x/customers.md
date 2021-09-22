@@ -86,9 +86,9 @@ The Commerce [example templates](https://github.com/craftcms/commerce/blob/main/
 {# Get a user account using the same email address as the cart #}
 {% set user = craft.users.email(cart.email).one() %}
 {% if not user %}
-    <label for="registerUserOnOrderComplete">
-        <input type="checkbox" name="registerUserOnOrderComplete" value="1" />
-        {{ "Register me for a user account"|t }}
-    </label>
+  <label for="registerUserOnOrderComplete">
+    <input type="checkbox" name="registerUserOnOrderComplete" value="1" />
+    {{ "Register me for a user account"|t }}
+  </label>
 {% endif %}
 ```

@@ -100,18 +100,18 @@ And here’s what that `cocktailRecipes/_addIngredientsTrigger` template looks l
 ```twig
 <div class="btn menubtn" role="button">{{ "Add Ingredient"|t }}</div>
 <div class="menu">
-    <ul>
-        {% for ingredient in ingredients %}
-            <li>
-                <a class="formsubmit"
-                    data-param="ingredient"
-                    data-value="{{ ingredient.id }}"
-                >
-                    {{- ingredient.name -}}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for ingredient in ingredients %}
+      <li>
+        <a class="formsubmit"
+            data-param="ingredient"
+            data-value="{{ ingredient.id }}"
+        >
+          {{- ingredient.name -}}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
 </div>
 ```
 

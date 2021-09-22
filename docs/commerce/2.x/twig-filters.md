@@ -38,7 +38,7 @@ You might want to show the order’s price in all available payment currencies:
 
 ```twig
 {% for currency in craft.commerce.paymentCurrencies %}
-    Total in {{ currency.iso|upper }}: {{ cart.totalPrice|commerceCurrency(cart.paymentCurrency,convert=true) }} <br>
+  Total in {{ currency.iso|upper }}: {{ cart.totalPrice|commerceCurrency(cart.paymentCurrency,convert=true) }} <br>
 {% endfor %}
 </select>
 ```

@@ -24,10 +24,10 @@ Calling a URL field in your templates will return the value that was entered in 
 
 ```twig
 {% if entry.myFieldHandle %}
-    <h3>Link</h3>
-    {{ tag('a', {
-        text: 'Learn More',
-        href: entry.myFieldHandle
-    }) }}
+  <h3>Link</h3>
+  {{ tag('a', {
+    text: 'Learn More',
+    href: entry.myFieldHandle
+  }) }}
 {% endif %}
 ```

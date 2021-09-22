@@ -33,8 +33,8 @@ The handle is what you’ll use to reference the product type in code. In Twig, 
 
 ```twig
 {% set clothes = craft.products()
-    .type('clothes')
-    .all() %}
+  .type('clothes')
+  .all() %}
 ```
 
 #### Title Field Label
@@ -101,7 +101,7 @@ Returns an array of all product types set up in the system.
 
 ```twig
 {% for type in craft.commerce.productTypes.allProductTypes %}
-    {{ type.handle }} - {{ type.name }}
+  {{ type.handle }} - {{ type.name }}
 {% endfor %}
 ```
 
@@ -138,8 +138,8 @@ You can also fetch only the number of items a query might return, which is bette
 ```twig
 {# Count all enabled products #}
 {% set myProductCount = craft.products()
-    .status('enabled')
-    .count() %}
+  .status('enabled')
+  .count() %}
 ```
 ```php
 use craft\commerce\elements\Product;
@@ -173,17 +173,17 @@ We can use Twig to display the ten most recent Clothing products:
 ```twig
 {# Create a product query with the 'type' and 'limit' parameters #}
 {% set myProductQuery = craft.products()
-    .type('clothing')
-    .limit(10) %}
+  .type('clothing')
+  .limit(10) %}
 
 {# Fetch the products #}
 {% set products = myProductQuery.all() %}
 
 {# Display the products #}
 {% for product in products %}
-    <h2><a href="{{ product.url }}">{{ product.title }}</a></h2>
-    {{ product.summary }}
-    <a href="{{ product.url }}">Learn more</a>
+  <h2><a href="{{ product.url }}">{{ product.title }}</a></h2>
+  {{ product.summary }}
+  <a href="{{ product.url }}">Learn more</a>
 {% endfor %}
 ```
 

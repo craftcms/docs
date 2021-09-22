@@ -8,9 +8,9 @@ Products fields allow you to relate products to a parent element.
 
 Products fields have the following settings:
 
-* *Sources* – The product types you want to relate entries from. (Default is “All”.)
-* *Limit* – The maximum number of products that can be related with the field at once. (Default is no limit.)
-* *Selection Label* – The label that should be used on the field’s selection button. (Default is “Add a product”.)
+- *Sources* – The product types you want to relate entries from. (Default is “All”.)
+- *Limit* – The maximum number of products that can be related with the field at once. (Default is no limit.)
+- *Selection Label* – The label that should be used on the field’s selection button. (Default is “Add a product”.)
 
 ## The Field
 
@@ -40,7 +40,7 @@ To check if your Products field has any selected products, you can use the lengt
 
 ```twig
 {% if entry.productsFieldHandle | length %}
-    ...
+  ...
 {% endif %}
 ```
 
@@ -48,7 +48,7 @@ To loop through the selected products, you can treat the field like an array:
 
 ```twig
 {% for product in entry.productsFieldHandle %}
-    ...
+  ...
 {% endfor %}
 ```
 
@@ -58,12 +58,10 @@ Rather than typing “entry.productsFieldHandle” every time, you can call it o
 {% set products = entry.productsFieldHandle %}
 
 {% if products | length %}
-
-    <h3>Some great products</h3>
-    {% for product in products %}
-        ...
-    {% endfor %}
-
+  <h3>Some great products</h3>
+  {% for product in products %}
+    ...
+  {% endfor %}
 {% endif %}
 ```
 
@@ -78,6 +76,6 @@ If your Products field is only meant to have a single product selected, remember
 ```twig
 {% set product = entry.productsFieldHandle.one() %}
 {% if product %}
-    ...
+  ...
 {% endif %}
 ```

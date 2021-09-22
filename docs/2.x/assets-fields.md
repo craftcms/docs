@@ -72,9 +72,9 @@ That will give you an [ElementCriteriaModel](templating/elementcriteriamodel.md)
 
 ```twig
 {% set assets = craft.assets({
-    relatedTo: { sourceElement: entry, field: "assetsFieldHandle" },
-    order:     "sortOrder",
-    limit:     null
+  relatedTo: { sourceElement: entry, field: "assetsFieldHandle" },
+  order:     "sortOrder",
+  limit:     null
 }) %}
 ```
 
@@ -86,9 +86,9 @@ To check if your Assets field has any selected assets, you can use the `length` 
 
 ```twig
 {% if entry.assetsFieldHandle | length %}
-    {% for asset in entry.assetsFieldHandle %}
-        {{ asset.url }}
-    {% endfor %}
+  {% for asset in entry.assetsFieldHandle %}
+    {{ asset.url }}
+  {% endfor %}
 {% endif %}
 ```
 
@@ -96,7 +96,7 @@ To loop through the selected assets, you can treat the field like an array:
 
 ```twig
 {% for asset in entry.assetsFieldHandle %}
-    {{ asset.url }}
+  {{ asset.url }}
 {% endfor %}
 ```
 
@@ -107,10 +107,10 @@ Rather than typing “`entry.assetsFieldHandle`” every time, you can call it o
 
 {% if assets | length %}
 
-    <h3>Some great assets</h3>
-    {% for asset in assets %}
-        {{ asset.url }}
-    {% endfor %}
+  <h3>Some great assets</h3>
+  {% for asset in assets %}
+    {{ asset.url }}
+  {% endfor %}
 
 {% endif %}
 ```
@@ -127,7 +127,7 @@ If your Assets field is only meant to have a single asset selected, remember tha
 {% set asset = entry.myAssetsField.first() %}
 
 {% if asset %}
-    {{ asset.url }}
+  {{ asset.url }}
 {% endif %}
 ```
 

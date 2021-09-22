@@ -94,7 +94,7 @@ You can check whether the logged-in user has a specific permission by using its 
 
 ```twig
 {% if currentUser.can('accessCp') %}
-    <a href="{{ cpUrl() }}">Visit the Control Panel</a>
+  <a href="{{ cpUrl() }}">Visit the Control Panel</a>
 {% endif %}
 ```
 

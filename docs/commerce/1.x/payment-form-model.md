@@ -62,12 +62,12 @@ Below is an example of a payment form using the payment form model.
 {{ getCsrfInput() }}
 
 {% set formValues = {
-firstName: paymentForm is defined ? paymentForm.firstName : (cart.billingAddress ? cart.billingAddress.firstName : ''),
-lastName: paymentForm is defined ? paymentForm.lastName : (cart.billingAddress ? cart.billingAddress.lastName : ''),
-number: paymentForm is defined ? paymentForm.number : '',
-cvv: paymentForm is defined ? paymentForm.cvv : '',
-month: paymentForm is defined ? paymentForm.month : 1,
-year: paymentForm is defined ? paymentForm.year : currentYear,
+  firstName: paymentForm is defined ? paymentForm.firstName : (cart.billingAddress ? cart.billingAddress.firstName : ''),
+  lastName: paymentForm is defined ? paymentForm.lastName : (cart.billingAddress ? cart.billingAddress.lastName : ''),
+  number: paymentForm is defined ? paymentForm.number : '',
+  cvv: paymentForm is defined ? paymentForm.cvv : '',
+  month: paymentForm is defined ? paymentForm.month : 1,
+  year: paymentForm is defined ? paymentForm.year : currentYear,
 } %}
 
 <input type="text" name="firstName" value="{{ formValues.firstName }}">
@@ -80,16 +80,16 @@ year: paymentForm is defined ? paymentForm.year : currentYear,
 {% if paymentForm is defined %}{{ paymentForm.getError('number') }}{% endif %}
 
 <select name="month">
- {% for month in 1..12 %}
-  <option value="{{ month }}" {% if formValues.month == month %}selected{% endif %}>{{ month }}</option>
- {% endfor %}
+  {% for month in 1..12 %}
+    <option value="{{ month }}" {% if formValues.month == month %}selected{% endif %}>{{ month }}</option>
+  {% endfor %}
 </select>
 {% if paymentForm is defined %}{{ paymentForm.getError('month') }}{% endif %}
 
 <select class="required form-control" name="year">
-{% for year in currentYear-1..(currentYear + 12) %}
-<option value="{{ year }}"{% if formValues.year == year %}selected{% endif %}>{{ year }}</option>
-{% endfor %}
+  {% for year in currentYear-1..(currentYear + 12) %}
+    <option value="{{ year }}"{% if formValues.year == year %}selected{% endif %}>{{ year }}</option>
+  {% endfor %}
 </select>
 {% if paymentForm is defined %}{{ paymentForm.getError('year') }}{% endif %}
 

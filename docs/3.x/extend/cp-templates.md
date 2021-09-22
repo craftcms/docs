@@ -19,7 +19,7 @@ At a minimum, your template should set a `title` variable and define a `content`
 {% set title = "Page Title"|t('plugin-handle') %}
 
 {% block content %}
-    <p>Page content goes here</p>
+  <p>Page content goes here</p>
 {% endblock %}
 ```
 

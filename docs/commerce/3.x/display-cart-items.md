@@ -9,31 +9,31 @@ At some point you’ll want to show a visitor their cart contents. There’s a m
 <h1>Here’s what’s in your cart</h1>
 
 {% if cart.lineItems|length == 0 %}
-    <p>There aren’t any items in your cart.</p>
+  <p>There aren’t any items in your cart.</p>
 {% else %}
-    <table>
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Qty</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in cart.lineItems %}
-                <tr>
-                    <td>{{ item.description }} <small>({{ item.sku }})</small></td>
-                    <td>{{ item.qty }}</td>
-                    <td>{{ item.salePriceAsCurrency }}</td>
-                </tr>
-            {% endfor %}
-            <tr>
-                <td colspan="3">
-                    Cart Total: {{ cart.totalPriceAsCurrency }}
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart.lineItems %}
+        <tr>
+          <td>{{ item.description }} <small>({{ item.sku }})</small></td>
+          <td>{{ item.qty }}</td>
+          <td>{{ item.salePriceAsCurrency }}</td>
+        </tr>
+      {% endfor %}
+      <tr>
+        <td colspan="3">
+          Cart Total: {{ cart.totalPriceAsCurrency }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 {% endif %}
 
 ```

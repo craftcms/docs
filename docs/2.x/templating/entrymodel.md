@@ -245,15 +245,15 @@ Returns whether the entry is an ancestor of another entry.
 
 ```twig
 {% nav page in craft.entries.section('pages') %}
-    {% set expanded = entry is defined and page.isAncestorOf(entry) %}
-    <li{% if expanded %} class="expanded"{% endif %}>
-        {{ page.getLink() }}
-        {% ifchildren %}
-            <ul>
-                {% children %}
-            </ul>
-        {% endifchildren %}
-    </li>
+  {% set expanded = entry is defined and page.isAncestorOf(entry) %}
+  <li{% if expanded %} class="expanded"{% endif %}>
+    {{ page.getLink() }}
+    {% ifchildren %}
+      <ul>
+        {% children %}
+      </ul>
+    {% endifchildren %}
+  </li>
 {% endnav %}
 ```
 
@@ -285,18 +285,18 @@ Here’s an example of `getNext()` and `getPrev()` in action:
 
 ```twig
 {% set params = {
-    section: 'cocktails',
-    order:   'title'
+  section: 'cocktails',
+  order:   'title'
 } %}
 
 {% set prevCocktail = entry.getPrev(params) %}
 {% set nextCocktail = entry.getNext(params) %}
 
 {% if prevCocktail %}
-    <p>Previous: <a href="{{ prevCocktail.url }}">{{ prevCocktail.title }}</a></p>
+  <p>Previous: <a href="{{ prevCocktail.url }}">{{ prevCocktail.title }}</a></p>
 {% endif %}
 
 {% if nextCocktail %}
-    <p>Next: <a href="{{ nextCocktail.url }}">{{ nextCocktail.title }}</a></p>
+  <p>Next: <a href="{{ nextCocktail.url }}">{{ nextCocktail.title }}</a></p>
 {% endif %}
 ```

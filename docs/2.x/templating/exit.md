@@ -6,7 +6,7 @@ This tag will prevent the rest of the template from executing, and end the reque
 {% set entry = craft.entries.id(entryId).first() %}
 
 {% if not entry %}
-    {% exit 404 %}
+  {% exit 404 %}
 {% endif %}
 ```
 

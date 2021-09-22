@@ -23,7 +23,7 @@ Returns whether an object is a boolean via PHP’s [`is_bool()`](https://www.php
 
 ```twig
 {% if myVar is boolean %}
-    {{ myVar ? 'true' : 'false' }}
+  {{ myVar ? 'true' : 'false' }}
 {% endif %}
 ```
 
@@ -33,7 +33,7 @@ Returns whether an object is an instance of another object or class.
 
 ```twig
 {% if element is instance of('craft\\elements\\Entry') %}
-    <h1>{{ entry.title }}</h1>
+  <h1>{{ entry.title }}</h1>
 {% endif %}
 ```
 
@@ -43,6 +43,6 @@ Returns whether a given object is an instance of <craft3:craft\base\MissingCompo
 
 ```twig
 {% if field is missing %}
-    <p>😱</p>
+  <p>😱</p>
 {% endif %}
 ```

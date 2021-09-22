@@ -61,9 +61,9 @@ The gateway must be set up in the control panel in order to reference its handle
 
 ```php
 return [
-  'myStripeGateway' => [
-    'apiKey' => getenv('STRIPE_API_KEY'),
-  ],
+    'myStripeGateway' => [
+        'apiKey' => getenv('STRIPE_API_KEY'),
+    ],
 ];
 ```
 
@@ -96,23 +96,23 @@ Returns all payment gateways available to the customer.
 {% set gateways = craft.commerce.gateways.getAllCustomerEnabledGateways %}
 
 {% if not gateways|length %}
-    <p>No payment methods available.</p>
+<p>No payment methods available.</p>
 {% endif %}
 
 {% if gateways|length %}
 <form method="post">
-    {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
-    {{ hiddenInput('redirect', 'commerce/checkout/payment') }}
+  {{ csrfInput() }}
+  {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+  {{ hiddenInput('redirect', 'commerce/checkout/payment') }}
 
-    <label for="gatewayId">Payment Method</label>
-    <select id="gatewayId" name="gatewayId" >
-        {% for id,name in gateways %}
-            <option value="{{ id }}"{% if id == cart.gatewayId %} selected{% endif %}>
-                {{- name -}}
-            </option>
-        {% endfor %}
-    </select>
+  <label for="gatewayId">Payment Method</label>
+  <select name="gatewayId" id="gatewayId">
+    {% for id,name in gateways %}
+      <option value="{{ id }}"{% if id == cart.gatewayId %} selected{% endif %}>
+        {{- name -}}
+      </option>
+    {% endfor %}
+  </select>
 </form>
 {% endif %}
 ```

@@ -16,18 +16,18 @@ Example:
 
 ```twig
 <form method="post">
-    {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
-    {{ redirectInput('shop/cart') }}
+  {{ csrfInput() }}
+  {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+  {{ redirectInput('shop/cart') }}
 
-    <input type="text"
-        name="email"
-        class="{% if cart.getFirstError('email') %}has-error{% endif %}"
-        value="{{ cart.email }}"
-        placeholder="{{ "your@email.com"|t }}"
-    >
+  <input type="text"
+    name="email"
+    class="{% if cart.getFirstError('email') %}has-error{% endif %}"
+    value="{{ cart.email }}"
+    placeholder="{{ "your@email.com"|t }}"
+  >
 
-    <button type="submit">Update Cart Email</button>
+  <button type="submit">Update Cart Email</button>
 <form>
 ```
 
@@ -43,7 +43,7 @@ When guiding users through the checkout, it’s a good idea to collect the email
 
 ```twig
 {% if craft.users.email(cart.email).one() %}
-    You are already a user, please log in.
+  You are already a user, please log in.
 {% endif %}
 ```
 
@@ -59,18 +59,18 @@ order completion. This can again be done with the same `commerce/cart/update-car
 
 ```twig
 <form method="post">
-    {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
-    {{ redirectInput('shop/cart') }}
+  {{ csrfInput() }}
+  {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+  {{ redirectInput('shop/cart') }}
 
-    <label for="registerUserOnOrderComplete">
-        <input type="checkbox"
-            id="registerUserOnOrderComplete"
-            name="registerUserOnOrderComplete"
-            value="1"
-        /> Register me for a user account
-    </label>
-    <button type="submit">Update Cart</button>
+  <label for="registerUserOnOrderComplete">
+    <input type="checkbox"
+      id="registerUserOnOrderComplete"
+      name="registerUserOnOrderComplete"
+      value="1"
+    /> Register me for a user account
+  </label>
+  <button type="submit">Update Cart</button>
 <form>
 ```
 
@@ -80,11 +80,11 @@ Alternatively, as seen in the [example templates](example-templates.md), you can
 {{ hiddenInput('action', commerce/payments/pay') }}
 {# ... payment form ... #}
 <label for="registerUserOnOrderComplete">
-    <input type="checkbox"
-        id="registerUserOnOrderComplete"
-        name="registerUserOnOrderComplete"
-        value="1"
-    /> Register me for a user account
+  <input type="checkbox"
+    id="registerUserOnOrderComplete"
+    name="registerUserOnOrderComplete"
+    value="1"
+  /> Register me for a user account
 </label>
 ```
 

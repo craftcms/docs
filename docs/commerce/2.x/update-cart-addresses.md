@@ -6,7 +6,7 @@ You can see if the cart has a billing and shipping address has been set with:
 
 ```twig
 {% if cart.shippingAddress %}
-    {{ cart.shippingAddress.firstName }} ...etc
+  {{ cart.shippingAddress.firstName }} ... etc
 {% endif %}
 ```
 and
@@ -32,11 +32,11 @@ The example below shows how you can add the first address owned by the customer 
 {% set address = craft.commerce.customer.addresses|first %}
 
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    <input type="hidden" name="redirect" value="commerce/cart">
-    <input type="hidden" name="shippingAddressId" value="{{ address.id }}">
-    <input type="hidden" name="billingAddressSameAsShipping" value="1">
-    <input type="submit" value="Submit">
+  <input type="hidden" name="action" value="commerce/cart/update-cart">
+  <input type="hidden" name="redirect" value="commerce/cart">
+  <input type="hidden" name="shippingAddressId" value="{{ address.id }}">
+  <input type="hidden" name="billingAddressSameAsShipping" value="1">
+  <input type="submit" value="Submit">
 </form>
 ```
 
@@ -64,19 +64,19 @@ This will only work if the `shippingAddressId` is not supplied or sent as an emp
 
 ```twig
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    {{ redirectInput('commerce/cart') }}
-    <input type="hidden" name="cartUpdatedNotice" value="Updated Shipping Address.">
-    <input type="hidden" name="shippingAddressId" value="">
-    <input type="text" name="shippingAddress[firstName]" value="">
-    <input type="text" name="shippingAddress[lastName]" value="">
-    <select name="shippingAddress[countryId]">
+  <input type="hidden" name="action" value="commerce/cart/update-cart">
+  {{ redirectInput('commerce/cart') }}
+  <input type="hidden" name="cartUpdatedNotice" value="Updated Shipping Address.">
+  <input type="hidden" name="shippingAddressId" value="">
+  <input type="text" name="shippingAddress[firstName]" value="">
+  <input type="text" name="shippingAddress[lastName]" value="">
+  <select name="shippingAddress[countryId]">
     {% for id, name in craft.commerce.countriesList %}
       <option value="{{ id }}">{{ name }}</option>
     {% endfor %}
-        </select>
-      <input type="hidden" name="sameAddress" value="1">
-    <input type="submit" value="Add to cart">
+  </select>
+  <input type="hidden" name="sameAddress" value="1">
+  <input type="submit" value="Add to cart">
 </form>
 ```
 
@@ -88,49 +88,49 @@ If your customers have added multiple addresses, you can use radio buttons to se
 {% set cart = craft.commerce.carts.cart %}
 
 <form class="form" method="post">
-    {{ csrfInput() }}
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    <input type="hidden" name="cartUpdatedNotice" value="Updated addresses.">
+  {{ csrfInput() }}
+  <input type="hidden" name="action" value="commerce/cart/update-cart">
+  <input type="hidden" name="cartUpdatedNotice" value="Updated addresses.">
 
-    {% set customerAddresses = craft.commerce.customer.addresses %}
+  {% set customerAddresses = craft.commerce.customer.addresses %}
 
-    {# Check if we have saved addresses: #}
-    {% if customerAddresses | length %}
-        <div class="shipping-address">
-            {% for address in customerAddresses %}
-                <label>
-                    <input type="radio" name="shippingAddressId" value="{{ address.id }}" {{- cart.shippingAddressId ? ' checked' : null }}>
-                    {# Identifying address information, up to you! #}
-                </label>
-            {% endfor %}
-        </div>
+  {# Check if we have saved addresses: #}
+  {% if customerAddresses | length %}
+    <div class="shipping-address">
+      {% for address in customerAddresses %}
+        <label>
+          <input type="radio" name="shippingAddressId" value="{{ address.id }}" {{- cart.shippingAddressId ? ' checked' : null }}>
+          {# Identifying address information, up to you! #}
+        </label>
+      {% endfor %}
+    </div>
 
-        <div class="billing-address">
-            {% for address in customerAddresses %}
-                <label>
-                    <input type="radio" name="billingAddressId" value="{{ address.id }}" {{- cart.billingAddressId ? ' checked' : null }}>
-                    {# Identifying address information, up to you! #}
-                </label>
-            {% endfor %}
-        </div>
-    {% else %}
-        {# If no existing addresses were found, provide forms to add new ones: #}
-        <div class="new-billing-address">
-            <label>
-                First Name
-                <input type="text" name="billingAddress[firstName]">
-            </label>
-            {# ...remainder of address fields... #}
-        </div>
+    <div class="billing-address">
+      {% for address in customerAddresses %}
+        <label>
+          <input type="radio" name="billingAddressId" value="{{ address.id }}" {{- cart.billingAddressId ? ' checked' : null }}>
+          {# Identifying address information, up to you! #}
+        </label>
+      {% endfor %}
+    </div>
+  {% else %}
+    {# If no existing addresses were found, provide forms to add new ones: #}
+    <div class="new-billing-address">
+      <label>
+        First Name
+        <input type="text" name="billingAddress[firstName]">
+      </label>
+        {# ...remainder of address fields... #}
+    </div>
 
-        <div class="new-shipping-address">
-            <label>
-                First Name
-                <input type="text" name="shippingAddress[firstName]">
-            </label>
-            {# ...remainder of address fields... #}
-        </div>
-    {% endif %}
+    <div class="new-shipping-address">
+      <label>
+        First Name
+        <input type="text" name="shippingAddress[firstName]">
+      </label>
+      {# ...remainder of address fields... #}
+    </div>
+  {% endif %}
 </form>
 ```
 

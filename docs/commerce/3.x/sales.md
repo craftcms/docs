@@ -119,6 +119,6 @@ Returns an array of all sales set up in the system, each represented as a [Sale]
 
 ```twig
 {% for sale in craft.commerce.sales.allSales %}
-    {{ sale.name }} - {{ sale.description }}
+  {{ sale.name }} - {{ sale.description }}
 {% endfor %}
 ```
