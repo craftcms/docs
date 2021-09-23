@@ -255,9 +255,9 @@ curl \
 If you’re unable to query a private schema because of a “missing authorization header”, make sure Craft received it from the web server with a quick post to a test template:
 
 ```twig
-{{ craft.app.getRequest().getHeaders().has('authorization') ?
-    'auth token present ✓' : 
-    'auth token missing!' }}
+{{ craft.app.getRequest().getHeaders().has('authorization')
+  ? 'auth token present ✓' :
+  : 'auth token missing!' }}
 ```
 
 Apache strips `Authorization` headers by default, which can be fixed by enabling [CGIPassAuth](https://httpd.apache.org/docs/2.4/en/mod/core.html#cgipassauth) or adding the following to your `.htaccess` file:
