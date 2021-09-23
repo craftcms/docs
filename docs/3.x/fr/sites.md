@@ -54,7 +54,7 @@ In your templates, you can also access the language setting via `craft.app.langu
 
 ```twig
 {% if craft.app.language == 'de' %}
-    <p>Guten Tag!</p>
+  <p>Guten Tag!</p>
 {% endif %}
 ```
 
@@ -181,7 +181,7 @@ Use `craft.app.language` to toggle specific parts of your templates, depending o
 
 ```twig
 {% if craft.app.language == 'de' %}
-    <p>I like bread and beer.</p>
+  <p>I like bread and beer.</p>
 {% endif %}
 ```
 
