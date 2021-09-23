@@ -94,7 +94,7 @@ See the _Extending Craft_ [User Permissions](extend/user-permissions.md) page to
 
 ```twig
 {% if currentUser.can('accessCp') %}
-    <a href="{{ cpUrl() }}">Visit the Control Panel</a>
+  <a href="{{ cpUrl() }}">Visit the Control Panel</a>
 {% endif %}
 ```
 
