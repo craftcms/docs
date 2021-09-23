@@ -35,13 +35,13 @@ Date fields have the following settings:
 
 テンプレート内で日/時フィールドのエレメントを取得する場合、日/時フィールドのハンドルを利用して、そのデータにアクセスできます。
 ```twig
-{# Fetch entries with with a selected date in the next month #}
+{# Fetch entries with a selected date in the next month #}
 {% set start = now|atom %}
 {% set end = now|date_modify('+1 month')|atom %}
 
 {% set entries = craft.entries()
-    .myFieldHandle(['and', ">= #{start}", "< #{end}"])
-    .all() %}
+  .myFieldHandle(['and', ">= #{start}", "< #{end}"])
+  .all() %}
 ```
 ```php
 // Fetch entries with a selected date in the next month
@@ -64,12 +64,12 @@ Craft 3.7 added support for using `now` in date comparison strings:
 ```twig
 {# Fetch entries with a selected date in the past #}
 {% set pastEntries = craft.entries()
-    .myFieldHandle('< now')
-    .all() %}
+  .myFieldHandle('< now')
+  .all() %}
 {# Fetch entries with a selected date now onward #}
 {% set futureEntries = craft.entries()
-    .myFieldHandle('>= now')
-    .all() %}
+  .myFieldHandle('>= now')
+  .all() %}
 ```
 ```php
 // Fetch entries with a selected date in the past
@@ -105,7 +105,7 @@ That will give you a [DateTime](http://php.net/manual/en/class.datetime.php) obj
 ::: code
 ```twig
 {% if entry.myFieldHandle %}
-    Selected date: {{ entry.myFieldHandle|datetime('short') }}
+  Selected date: {{ entry.myFieldHandle|datetime('short') }}
 {% endif %}
 ```
 ```php
@@ -136,8 +136,8 @@ If you just want the user to be able to select a date, use a `date` input:
 
 ```twig
 {% set currentValue = entry is defined and entry.myFieldHandle
-    ? entry.myFieldHandle|date('Y-m-d', timezone='UTC')
-    : '' %}
+  ? entry.myFieldHandle|date('Y-m-d', timezone='UTC')
+  : '' %}
 
 <input type="date" name="fields[myFieldHandle]" value="{{ currentValue }}">
 ```
@@ -146,8 +146,8 @@ If you want the user to be able to select a time as well, use a `datetime-local`
 
 ```twig
 {% set currentValue = entry is defined and entry.myFieldHandle
-    ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone='UTC')
-    : '' %}
+  ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone='UTC')
+  : '' %}
 
 <input type="datetime-local" name="fields[myFieldHandle]" value="{{ currentValue }}">
 ```
@@ -168,8 +168,8 @@ By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you c
 {% set tz = 'America/Los_Angeles' %}
 
 {% set currentValue = entry is defined and entry.myFieldHandle
-    ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone=tz)
-    : '' %}
+  ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone=tz)
+  : '' %}
 
 <input type="datetime-local" name="fields[myFieldHandle][datetime]" value="{{ currentValue }}">
 {{ hiddenInput('fields[myFieldHandle][timezone]', tz) }}
@@ -179,15 +179,15 @@ Or you can let users decide which timezone the date should be posted in:
 
 ```twig
 {% set currentValue = entry is defined and entry.myFieldHandle
-    ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone='UTC')
-    : '' %}
+  ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone='UTC')
+  : '' %}
 
 <input type="datetime-local" name="fields[myFieldHandle][datetime]" value="{{ currentValue }}">
 
 <select name="fields[myFieldHandle][timezone]">
-    <option value="UTC" selected>UTC</option>
-    <option value="America/Los_Angeles">Pacific Time</option>
-    <!-- ... -->
+  <option value="UTC" selected>UTC</option>
+  <option value="America/Los_Angeles">Pacific Time</option>
+  <!-- ... -->
 </select>
 ```
 
