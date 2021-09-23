@@ -8,12 +8,12 @@ Calling a Color field in your templates will return a <craft3:craft\fields\data\
 
 ::: code
 ```twig
-{% if entry.linkColor %}
-    <style type="text/css">
-        .content a {
-            color: {{ entry.linkColor.getHex() }};
-        }
-    </style>
+{% if entry.myFieldHandle %}
+  <style type="text/css">
+    .content a {
+      color: {{ entry.myFieldHandle.getHex() }};
+    }
+  </style>
 {% endif %}
 ```
 ```php
