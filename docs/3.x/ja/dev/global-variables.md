@@ -95,11 +95,11 @@ You can access all of the sites in the same group as the current site via `curre
 
 ```twig
 <nav>
-    <ul>
-        {% for site in currentSite.group.sites %}
-            <li><a href="{{ alias(site.baseUrl) }}">{{ site.name }}</a></li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for site in currentSite.group.sites %}
+      <li><a href="{{ alias(site.baseUrl) }}">{{ site.name }}</a></li>
+    {% endfor %}
+  </ul>
 </nav>
 ```
 
@@ -109,7 +109,7 @@ You can access all of the sites in the same group as the current site via `curre
 
 ```twig
 {% if currentUser %}
-    Welcome, {{ currentUser.friendlyName }}!
+  Welcome, {{ currentUser.friendlyName }}!
 {% endif %}
 ```
 
@@ -119,7 +119,7 @@ Whether the <config3:devMode> が現在有効になっているかどうか。
 
 ```twig
 {% if devMode %}
-    Craft is running in dev mode.
+  Craft is running in dev mode.
 {% endif %}
 ```
 
@@ -129,7 +129,7 @@ Whether the <config3:devMode> が現在有効になっているかどうか。
 
 ```twig
 {% if not currentUser %}
-    <a href="{{ loginUrl }}">Login</a>
+  <a href="{{ loginUrl }}">Login</a>
 {% endif %}
 ```
 
@@ -139,7 +139,7 @@ Whether the <config3:devMode> が現在有効になっているかどうか。
 
 ```twig
 {% if currentUser %}
-    <a href="{{ logoutUrl }}">Logout</a>
+  <a href="{{ logoutUrl }}">Logout</a>
 {% endif %}
 ```
 
@@ -177,7 +177,7 @@ The URL to [`setPasswordRequestPath`](config3:setPasswordRequestPath) if it’s 
 
 ```twig
 {% if setPasswordUrl %}
-    <a href="{{ setPasswordUrl }}">Reset password</a>
+  <a href="{{ setPasswordUrl }}">Reset password</a>
 {% endif %}
 ```
 
