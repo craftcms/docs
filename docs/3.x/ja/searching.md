@@ -12,19 +12,16 @@ Control panel users can search for elements anywhere this bar is available:
 検索はエレメント全体に渡ってコンテンツを素早く照会するための優れた方法ですが、フィールド属性を照会する場合、そのフィールドタイプの[クエリパラメータ](element-queries.md#executing-element-queries)を使用するのが最も正確な方法です。
 :::
 ```twig
-{# Get the user's search query from the 'q' query-string param #}
-{% set searchQuery = craft.app.request.getParam('q') %}
-
-{# Fetch entries that match the search query #}
 {% set results = craft.entries()
-    .search(searchQuery)
-    .all() %}
+  .search('foo')
+  .all() %}
 ```
 ```graphql
-{% set results = craft.entries()
-    .search(searchQuery)
-    .orderBy('score')
-    .all() %}
+{
+  entries(search: "foo") {
+    title
+  }
+}
 ```
 ```php
 $results = \craft\elements\Entry::find()
@@ -93,15 +90,15 @@ The same search from your code:
 ::: code
 ```twig
 {% set images = craft.assets()
-    .search('kind:image')
-    .all() %}
+  .search('kind:image')
+  .all() %}
 ```
 
 ```graphql
 {
-    images: assets(search: "kind:image") {
-        title
-    }
+  images: assets(search: "kind:image") {
+    title
+  }
 }
 ```
 
@@ -121,15 +118,15 @@ The same search from your code:
 ::: code
 ```twig
 {% set users = craft.users()
-    .search('email:@craftcms.com')
-    .all() %}
+  .search('email:@craftcms.com')
+  .all() %}
 ```
 
 ```graphql
 {
-    users(search: "email:@craftcms.com") {
-        title
-    }
+  users(search: "email:@craftcms.com") {
+    title
+  }
 }
 ```
 
@@ -151,8 +148,8 @@ $images = \craft\elements\User::find()
 
 {# Fetch entries that match the search query #}
 {% set results = craft.entries()
-    .search(searchQuery)
-    .all() %}
+  .search(searchQuery)
+  .all() %}
 ```
 ```php
 // Get the user’s search query from the 'q' query string param
@@ -172,15 +169,15 @@ $results = \craft\elements\Entry::find()
 ::: code
 ```twig
 {% set results = craft.entries()
-    .search('foo')
-    .orderBy('score')
-    .all() %}
+  .search('foo')
+  .orderBy('score')
+  .all() %}
 ```
 ```graphql
 {
-    entries(search: "foo", orderBy: "score") {
-        title
-    }
+  entries(search: "foo", orderBy: "score") {
+    title
+  }
 }
 ```
 ```php
