@@ -18,8 +18,11 @@ $this->createTale('{{%tablename}}', [
 ]);
 
 // Existing table migration
-$this->addColumn('{{%tablename}}', 'dateDeleted',
-    $this->dateTime()->null()->after('dateUpdated'));
+$this->addColumn(
+    '{{%mytablename}}',
+    'dateDeleted',
+    $this->dateTime()->null()->after('dateUpdated')
+);
 ```
 
 ソフトデリート可能なコンポーネントデータを含むテーブルは、（主キー以外に）固有の制約を適用するべきではありません。 もしそうしているなら、それらを削除する必要があります。
@@ -46,11 +49,15 @@ use yii\base\Event;
 
 public function init()
 {
-    paren::init();
+    parent::init();
 
-    Event::on(Gc::class, Gc::EVENT_RUN, function() {
-        Craft::$app->gc->hardDelete('{{%mytablename}}');
-    });
+    Event::on(
+        Gc::class,
+        Gc::EVENT_RUN,
+        function() {
+            Craft::$app->gc->hardDelete('{{%mytablename}}');
+        }
+    );
 }
 ```
 
@@ -158,20 +165,20 @@ public static function find()
 
 ガベージコレクションによってまだ完全に削除されていない、ソフトデリートされた行を復元するには2つの方法があります。
 
-- Active Record クラスで `restore()` メソッドを呼び出す。
+1. With your Active Record class, by calling its `restore()` method.
 
   ```php
   $record = MyRecord::findTrashed()
-    ->where(['id' => $id])
-    ->one();
+      ->where(['id' => $id])
+      ->one();
 
-   $record->restore();
+  $record->restore();
   ```
 
-- クエリコマンドで <craft3:craft\db\Command::restore()> を呼び出す。
+2. With a query command, by calling <craft3:craft\db\Command::restore()>.
 
   ```php
   \Craft::$app->db->createCommand()
-    ->restore('{{%tablename}}', ['id' => $id])
-    ->execute();
+      ->restore('{{%mytablename}}', ['id' => $id])
+      ->execute();
   ```
