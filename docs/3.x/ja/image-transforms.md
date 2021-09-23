@@ -76,8 +76,8 @@ Pass a [hash](dev/twig-primer.md#hashes) with your handle in a `transform` key i
 
 ```twig{2-3}
 {% do asset.setTransform({
-    transform: 'thumb',
-    quality: 1
+  transform: 'thumb',
+  quality: 1
 }) %}
 <img src="{{ asset.url }}"
      width="{{ asset.width }}"
@@ -91,8 +91,8 @@ You can override settings like this with the `getUrl()` method, too:
 
 ```twig
 <source type="image/webp" srcset="{{ asset.getUrl({
-    transform: 'thumb',
-    format: 'webp',
+  transform: 'thumb',
+  format: 'webp',
 }) }}">
 ```
 
@@ -106,11 +106,11 @@ First, you create a hash that defines the transform’s parameters:
 
 ```twig
 {% set thumb = {
-    mode: 'crop',
-    width: 100,
-    height: 100,
-    quality: 75,
-    position: 'top-center'
+  mode: 'crop',
+  width: 100,
+  height: 100,
+  quality: 75,
+  position: 'top-center'
 } %}
 ```
 
@@ -154,11 +154,11 @@ One way you could achieve this is by combining the [`tag` template function](dev
 ```twig
 {% do asset.setTransform({ width: 300, height: 300 }) %}
 {{ tag('img', {
-    src: asset.url,
-    width: asset.width,
-    height: asset.height,
-    srcset: asset.getSrcset(['1.5x', '2x', '3x']),
-    alt: asset.title,
+  src: asset.url,
+  width: asset.width,
+  height: asset.height,
+  srcset: asset.getSrcset(['1.5x', '2x', '3x']),
+  alt: asset.title,
 }) }}
 ```
 
