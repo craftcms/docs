@@ -1069,13 +1069,13 @@ If your plugin has any templates that extend Craft’s `_layouts/cp.html` contro
 ::: code
 ```twig Craft 2
 {% set extraPageHeaderHtml %}
-    <a href="{{ url('recipes/new') }}" class="btn submit">{{ 'New recipe'|t('app') }}</a>
+  <a href="{{ url('recipes/new') }}" class="btn submit">{{ 'New recipe'|t('app') }}</a>
 {% endset %}
 ```
 
 ```twig Craft 3
 {% block actionButton %}
-    <a href="{{ url('recipes/new') }}" class="btn submit">{{ 'New recipe'|t('app') }}</a>
+  <a href="{{ url('recipes/new') }}" class="btn submit">{{ 'New recipe'|t('app') }}</a>
 {% endblock %}
 ```
 :::
@@ -1089,24 +1089,32 @@ If you had a template that overrode the `main` block, and defined a full-page gr
 ::: code
 ```twig Craft 2
 {% block main %}
-    <div class="grid first" data-max-cols="3">
-        <div class="item" data-position="left" data-colspan="2">
-            <div id="recipe-fields" class="pane"><!-- Primary Content --></div>
-        </div>
-        <div class="item" data-position="right">
-            <div class="pane meta"><!-- Secondary Content --></div>
-        </div>
+  <div class="grid first" data-max-cols="3">
+    <div class="item" data-position="left" data-colspan="2">
+      <div id="recipe-fields" class="pane">
+        <!-- Primary Content -->
+      </div>
     </div>
+    <div class="item" data-position="right">
+      <div class="pane meta">
+        <!-- Secondary Content -->
+      </div>
+    </div>
+  </div>
 {% endblock %}
 ```
 
 ```twig Craft 3
 {% block content %}
-    <div id="recipe-fields"><!-- Primary Content --></div>
+  <div id="recipe-fields">
+    <!-- Primary Content -->
+  </div>
 {% endblock %}
 
 {% block details %}
-    <div class="meta"><!-- Secondary Content --></div>
+  <div class="meta">
+    <!-- Secondary Content -->
+  </div>
 {% endblock %}
 ```
 :::
