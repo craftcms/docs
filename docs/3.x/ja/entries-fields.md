@@ -53,10 +53,11 @@
 
 テンプレート内でエントリフィールドのエレメントを取得する場合、エントリフィールドのハンドルを利用して、関連付けられたエントリにアクセスできます。
 ```twig
-{# Fetch entries with a related entry #}
-{% set entries = craft.entries()
-    .myFieldHandle(':notempty:')
-    .all() %}
+{# Fetch artwork entries that are related to `artist` #}
+{% set works = craft.entries()
+  .section('artwork')
+  .myFieldHandle(artist)
+  .all() %}
 ```
 ```php
 // Fetch artwork entries that are related to `$artist`
@@ -88,11 +89,11 @@ To loop through all the related entries, call [all()](craft3:craft\db\Query::all
 ```twig
 {% set relatedEntries = entry.myFieldHandle.all() %}
 {% if relatedEntries|length %}
-    <ul>
-        {% for rel in relatedEntries %}
-            <li><a href="{{ rel.url }}">{{ rel.title }}</a></li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for rel in relatedEntries %}
+      <li><a href="{{ rel.url }}">{{ rel.title }}</a></li>
+    {% endfor %}
+  </ul>
 {% endif %}
 ```
 ```php
@@ -111,7 +112,7 @@ if (count($relatedEntries)) {
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
-    <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
+  <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
 {% endif %}
 ```
 ```php
@@ -127,7 +128,7 @@ If you’d like to check for related entries without fetching them, you can call
 ::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
-    <p>There are related entries!</p>
+  <p>There are related entries!</p>
 {% endif %}
 ```
 ```php
@@ -142,8 +143,8 @@ if ($entry->myFieldHandle->exists()) {
 ::: code
 ```twig
 {% set relatedEntries = clone(entry.myFieldHandle)
-    .section('news')
-    .all() %}
+  .section('news')
+  .all() %}
 ```
 ```php
 $relatedEntries = (clone $entry->myFieldHandle)
@@ -169,29 +170,29 @@ For example, you could create a list of checkboxes for each of the possible rela
 
 {# Get all of the possible entry options #}
 {% set possibleEntries = craft.entries()
-    .section('galleries')
-    .orderBy('title ASC')
-    .all() %}
+  .section('galleries')
+  .orderBy('title ASC')
+  .all() %}
 
 {# Get the currently related entry IDs #}
 {% set relatedEntryIds = entry is defined
-    ? entry.myFieldHandle.ids()
-    : [] %}
+  ? entry.myFieldHandle.ids()
+  : [] %}
 
 <ul>
-    {% for possibleEntry in possibleEntries %}
-        <li>
-            <label>
-                {{ input(
-                    'checkbox',
-                    'fields[myFieldHandle][]',
-                    possibleEntry.id,
-                    { checked: possibleEntry.id in relatedEntryIds }
-                ) }}
-                {{ possibleEntry.title }}
-            </label>
-        </li>
-    {% endfor %}
+  {% for possibleEntry in possibleEntries %}
+    <li>
+      <label>
+        {{ input(
+          'checkbox',
+          'fields[myFieldHandle][]',
+          possibleEntry.id,
+          { checked: possibleEntry.id in relatedEntryIds }
+        ) }}
+        {{ possibleEntry.title }}
+      </label>
+    </li>
+  {% endfor %}
 </ul>
 ```
 
@@ -199,6 +200,6 @@ You could then make the checkbox list sortable, so users have control over the o
 
 ## 関連項目
 
-* [エントリクエリ](entries.md#querying-entries)
-* <craft3:craft\elements\Entry>
-* [リレーション](relations.md)
+- [エントリクエリ](entries.md#querying-entries)
+- <craft3:craft\elements\Entry>
+- [リレーション](relations.md)
