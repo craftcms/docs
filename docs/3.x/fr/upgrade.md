@@ -239,7 +239,7 @@ Twig 1 let you call `block()` even for blocks that didn’t exist:
 
 ```twig
 {% if block('foo') is not empty %}
-    {{ block('foo') }}
+  {{ block('foo') }}
 {% endif %}
 ```
 
@@ -247,7 +247,7 @@ Twig 2 will throw an error unless it’s a `defined` test:
 
 ```twig
 {% if block('foo') is defined %}
-    {{ block('foo') }}
+  {{ block('foo') }}
 {% endif %}
 ```
 
@@ -488,11 +488,11 @@ If you want to set a param value to an array, you now **must** type out the arra
 ```twig
 Old:
 {% set query = craft.entries()
-    .relatedTo('and', 1, 2, 3) %}
+  .relatedTo('and', 1, 2, 3) %}
 
 New:
 {% set query = craft.entries()
-    .relatedTo(['and', 1, 2, 3]) %}
+  .relatedTo(['and', 1, 2, 3]) %}
 ```
 
 #### Cloning Element Queries
@@ -572,8 +572,8 @@ Alternatively, if you already needed to fetch the actual query results, and you 
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .all() %}
+  .section('news')
+  .all() %}
 {% set total = entries|length %}
 ```
 
@@ -588,9 +588,9 @@ In most cases you can replace calls to `.last()` with `.inReverse().one()` and g
    it to `postDate ASC`, returning the oldest News entry: #}
 
 {% set oldest = craft.entries()
-    .section('news')
-    .inReverse()
-    .one() %}
+  .section('news')
+  .inReverse()
+  .one() %}
 ```
 
 There are two cases where `inReverse()` won’t work as expected, though:
@@ -602,7 +602,7 @@ In those cases, you can just replace the `.last()` call with what it’s already
 
 ```twig
 {% set query = craft.entries()
-    .section('news') %}
+  .section('news') %}
 {% set total = query.count() %}
 {% set last = query.nth(total - 1) %}
 ```
