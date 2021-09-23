@@ -54,7 +54,7 @@ Base URL:           {{ currentSite.baseUrl }}
 
 ```twig
 {% if craft.app.language == 'de' %}
-    <p>Guten Tag!</p>
+  <p>Guten Tag!</p>
 {% endif %}
 ```
 
@@ -181,7 +181,7 @@ templates/
 
 ```twig
 {% if craft.app.language == 'de' %}
-    <p>I like bread and beer.</p>
+  <p>I like bread and beer.</p>
 {% endif %}
 ```
 
