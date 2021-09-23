@@ -14,7 +14,7 @@ Calling an Email field in your templates will return the value that was entered 
 
 ```twig
 {% if user.email %}
-    <h3>Email</h3>
-    <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+  <h3>Email</h3>
+  <a href="mailto:{{ user.email }}">{{ user.email }}</a>
 {% endif %}
 ```
