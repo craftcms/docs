@@ -44,15 +44,13 @@ If we want to output the ingredients list for a drink recipe, we’d use the fol
 ```twig
 {% set ingredients = entry.ingredients.all() %}
 {% if ingredients|length %}
+  <h3>Ingredients</h3>
 
-    <h3>Ingredients</h3>
-
-    <ul>
-        {% for ingredient in ingredients %}
-            <li>{{ ingredient.title }}</li>
-        {% endfor %}
-    </ul>
-
+  <ul>
+      {% for ingredient in ingredients %}
+          <li>{{ ingredient.title }}</li>
+      {% endfor %}
+  </ul>
 {% endif %}
 ```
 
@@ -60,7 +58,7 @@ If we want to output the ingredients list for a drink recipe, we’d use the fol
 
 ```twig
 {% for ingredient in entry.ingredients.section('ingredients').all() %}
-    <li>{{ ingredient.title }}</li>
+  <li>{{ ingredient.title }}</li>
 {% endfor %}
 ```
 
@@ -92,7 +90,11 @@ You can’t combine multiple `relatedTo` criteria with `or` *and* `and` conditio
 次のプロパティを含む[ハッシュ](dev/twig-primer.md#hashes)を `relatedTo` に渡すことで、より具体的なクエリを実行できます。
 
 ```twig
-{% set relatedDrinks = craft.entries.section('drinks').relatedTo(drink).all() %}
+{% set relatedDrinks = craft.entries()
+  .section('drinks')
+  .relatedTo(drink)
+  .all() %}
+{# result: drinks entries with *any* relationship to `drink` (source or target) #}
 ```
 
 ::: warning
@@ -100,47 +102,46 @@ You can’t combine multiple `relatedTo` criteria with `or` *and* `and` conditio
 :::
 
 ```twig
-{% set ingredients = craft.entries.section('ingredients').relatedTo({
-    sourceElement: drink,
-    field: 'ingredients'
-}) %}
+{% set relatedDrinks = craft.entries()
+  .section('drinks')
+  .relatedTo([ gin, lime ])
+  .all() %}
+{# result: drinks entries with any relationship to `gin` or `lime` #}
 ```
 
 これは `drink.ingredients.all()` の呼び出しと同等です。
 
 ```twig
-{% set ingredients = craft.entries.section('ingredients').relatedTo({
-    sourceElement: drink,
-    sourceLocale: craft.app.language
-}) %}
+{% set relatedDrinks = craft.entries()
+  .section('drinks')
+  .relatedTo([ 'and', gin, lime ])
+  .all() %}
+{# result: drinks entries with any relationship to `gin` and `lime` #}
 ```
 
 これは特定のフィールドを制限しませんが、現在のサイトとのリレーションに制限しています。
 
 ```twig
-{% set otherUsers = craft.users()
-    .not(currentUser)
-    .all() %}
-
-{% set recommendedCocktails = craft.entries()
-    .section('drinks')
-    .relatedTo([
-        'and',
-        { sourceElement: otherUsers, field: 'favoriteDrinks' },
-        { targetElement: drink.ingredients.one(), field: 'ingredients' }
-    ])
-    .all() %}
-{# result: other users’ favorite drinks that use `drink`’s first ingredient #}
+{% set relatedDrinks = craft.entries()
+  .section('drinks')
+  .relatedTo([
+    'and',
+    [ 'or', gin, lime ],
+    [ 'or', rum, grenadine ],
+  ])
+  .all() %}
+{# result: drinks entries with any relationship to `gin` or `lime` *and*
+   `rum` or `grenadine` #}
 ```
 
 これは現在の原材料を主成分とするドリンクを探します。
 
 ```twig
 {% set relatedDrinks = craft.entries()
-    .section('drinks')
-    .relatedTo([ 'or', gin, lime ])
-    .andRelatedTo([ 'or', rum, grenadine ])
-    .all() %}
+  .section('drinks')
+  .relatedTo([ 'or', gin, lime ])
+  .andRelatedTo([ 'or', rum, grenadine ])
+  .all() %}
 {# result: drinks entries with any relationship to `gin` or `lime` *and*
    `rum` or `grenadine` #}
 ```
@@ -163,12 +164,12 @@ Only use `sourceSite` if you’ve designated your relational field to be transla
 
 ```twig
 {% set ingredients = craft.entries()
-    .section('ingredients')
-    .relatedTo({
-        sourceElement: drink,
-        field: 'ingredients'
-    })
-    .all() %}
+  .section('ingredients')
+  .relatedTo({
+    sourceElement: drink,
+    field: 'ingredients'
+  })
+  .all() %}
 {# result: ingredients entries related from `drink`’s custom `ingredients` field #}
 ```
 
@@ -176,12 +177,12 @@ This doesn’t limit to a specific field, but it limits relations to the current
 
 ```twig
 {% set ingredients = craft.entries()
-    .section('ingredients')
-    .relatedTo({
-        sourceElement: drink,
-        sourceSite: craft.app.sites.currentSite.id
-    })
-    .all() %}
+  .section('ingredients')
+  .relatedTo({
+    sourceElement: drink,
+    sourceSite: craft.app.sites.currentSite.id
+  })
+  .all() %}
 {# result: ingredients entries related from `drink`, limited to the current site #}
 ```
 
@@ -189,12 +190,12 @@ This finds other drinks that uses the current one’s primary ingredient:
 
 ```twig
 {% set moreDrinks = craft.entries()
-    .section('drinks')
-    .relatedTo({
-        targetElement: drink.ingredients.one(),
-        field: 'ingredients'
-    })
-    .all() %}
+  .section('drinks')
+  .relatedTo({
+    targetElement: drink.ingredients.one(),
+    field: 'ingredients'
+  })
+  .all() %}
 {# result: other drinks using `drink`’s first ingredient #}
 ```
 
@@ -218,18 +219,18 @@ This finds other drinks that uses the current one’s primary ingredient:
 
 ```twig
 {% set espresso = craft.entries()
-    .section('ingredients')
-    .slug('espresso')
-    .one() %}
+  .section('ingredients')
+  .slug('espresso')
+  .one() %}
 
 {% set cocktails = craft.entries()
-    .section('drinks')
-    .relatedTo([
-        'and',
-        { sourceElement: currentUser, field: 'favoriteDrinks' },
-        { targetElement: espresso, field: 'ingredients' }
-    ])
-    .all() %}
+  .section('drinks')
+  .relatedTo([
+    'and',
+    { sourceElement: currentUser, field: 'favoriteDrinks' },
+    { targetElement: espresso, field: 'ingredients' }
+  ])
+  .all() %}
 {# result: current user’s favorite espresso drinks #}
 ```
 
@@ -237,16 +238,16 @@ Or you might want to pass an element query to find other users’ favorite drink
 
 ```twig
 {% set otherUsers = craft.users()
-    .id('not '~currentUser.id)
-    .all() %}
+  .id('not '~currentUser.id)
+  .all() %}
 
 {% set recommendedCocktails = craft.entries()
-    .section('drinks')
-    .relatedTo([
-        'and',
-        { sourceElement: otherUsers, field: 'favoriteDrinks' },
-        { targetElement: drink.ingredients.one(), field: 'ingredients' }
-    ])
-    .all() %}
+  .section('drinks')
+  .relatedTo([
+    'and',
+    { sourceElement: otherUsers, field: 'favoriteDrinks' },
+    { targetElement: drink.ingredients.one(), field: 'ingredients' }
+  ])
+  .all() %}
 {# result: other users’ favorite drinks that use `drink`’s first ingredient #}
 ```
