@@ -14,9 +14,9 @@
 ```twig
 {# Create an entry query and set some parameters on it #}
 {% set entryQuery = craft.entries()
-    .section('news')
-    .orderBy('postDate DESC')
-    .limit(10) %}
+  .section('news')
+  .orderBy('postDate DESC')
+  .limit(10) %}
 
 {# Execute the query and get the results #}
 {% set entries = entryQuery.all() %}
@@ -60,9 +60,9 @@ $entries = $entryQuery->all();
 ::: code
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .limit(10)
-    .all() %}
+  .section('news')
+  .limit(10)
+  .all() %}
 ```
 ```php
 use craft\elements\Entry;
@@ -81,9 +81,9 @@ $entries = Entry::find()
 ::: code
 ```twig
 {% set entry = craft.entries()
-    .section('news')
-    .slug('hello-world')
-    .one() %}
+  .section('news')
+  .slug('hello-world')
+  .one() %}
 ```
 ```php
 use craft\elements\Entry;
@@ -102,9 +102,9 @@ $entry = Entry::find()
 ::: code
 ```twig
 {% set exists = craft.entries()
-    .section('news')
-    .slug('hello-world')
-    .exists() %}
+  .section('news')
+  .slug('hello-world')
+  .exists() %}
 ```
 ```php
 use craft\elements\Entry;
@@ -123,8 +123,8 @@ $exists = Entry::find()
 ::: code
 ```twig
 {% set count = craft.entries()
-    .section('news')
-    .count() %}
+  .section('news')
+  .count() %}
 ```
 ```php
 use craft\elements\Entry;
@@ -146,8 +146,8 @@ $count = Entry::find()
 ::: code
 ```twig
 {% set entryIds = craft.entries()
-    .section('news')
-    .ids() %}
+  .section('news')
+  .ids() %}
 ```
 ```php
 use craft\elements\Entry;
