@@ -333,9 +333,9 @@ If you want your element type to support custom fields, you will also need to cr
 {% import '_includes/forms' as forms %}
 
 {{ forms.fieldLayoutDesignerField({
-    fieldLayout: craft.app.fields.getLayoutByType(
-        'ns\\prefix\\elements\\MyElementType'
-    ),
+  fieldLayout: craft.app.fields.getLayoutByType(
+    'ns\\prefix\\elements\\MyElementType'
+  ),
 }) }}
 ```
 
