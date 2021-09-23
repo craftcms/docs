@@ -82,8 +82,8 @@ $myGlobalSetQuery = \craft\elements\GlobalSet::find();
 ```twig
 {# Create a global set query with the 'handle' and 'siteId' parameters #}
 {% set myGlobalSetQuery = craft.globalSets()
-    .handle('footerCopy')
-    .siteId(1) %}
+  .handle('footerCopy')
+  .siteId(1) %}
 
 {# Fetch the global set #}
 {% set globalSet = myGlobalSetQuery.one() %}
