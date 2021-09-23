@@ -19,7 +19,7 @@ The following blocks can also be defined, to customize other aspects of the page
 {% set title = "Page Title"|t('plugin-handle') %}
 
 {% block content %}
-    <p>Page content goes here</p>
+  <p>Page content goes here</p>
 {% endblock %}
 ```
 
