@@ -94,7 +94,7 @@ Once you set up your site to allow public user registration, the last step is to
 
 ```twig
 {% if currentUser.can('accessCp') %}
-    <a href="{{ cpUrl() }}">Visit the Control Panel</a>
+  <a href="{{ cpUrl() }}">Visit the Control Panel</a>
 {% endif %}
 ```
 
