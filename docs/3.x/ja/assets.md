@@ -127,17 +127,17 @@ $myAssetQuery = \craft\elements\Asset::find();
 ```twig
 {# Create an asset query with the 'volume' and 'kind' parameters #}
 {% set myAssetQuery = craft.assets()
-    .volume('photos')
-    .kind('image') %}
+  .volume('photos')
+  .kind('image') %}
 
 {# Fetch the assets #}
 {% set images = myAssetQuery.all() %}
 
 {# Display the thumbnail list #}
 <ul>
-    {% for image in images %}
-        <li><img src="{{ image.getUrl('thumb') }}" alt="{{ image.title }}"></li>
-    {% endfor %}
+  {% for image in images %}
+    <li><img src="{{ image.getUrl('thumb') }}" alt="{{ image.title }}"></li>
+  {% endfor %}
 </ul>
 ```
 
