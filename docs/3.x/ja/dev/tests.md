@@ -23,7 +23,7 @@
 
 ```twig
 {% if myVar is boolean %}
-    {{ myVar ? 'true' : 'false' }}
+  {{ myVar ? 'true' : 'false' }}
 {% endif %}
 ```
 
@@ -33,7 +33,7 @@ Returns whether an object is an instance of another object or class.
 
 ```twig
 {% if element is instance of('craft\\elements\\Entry') %}
-    <h1>{{ entry.title }}</h1>
+  <h1>{{ entry.title }}</h1>
 {% endif %}
 ```
 
@@ -43,6 +43,6 @@ Returns whether an object is an instance of another object or class.
 
 ```twig
 {% if field is missing %}
-    <p>😱</p>
+  <p>😱</p>
 {% endif %}
 ```
