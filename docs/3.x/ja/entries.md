@@ -251,19 +251,19 @@ We can display the 10 most recent entries in a “Blog” section by doing the f
 ```twig
 {# Create an entry query with the 'section' and 'limit' parameters #}
 {% set myEntryQuery = craft.entries()
-    .section('blog')
-    .limit(10) %}
+  .section('blog')
+  .limit(10) %}
 
 {# Fetch the entries #}
 {% set entries = myEntryQuery.all() %}
 
 {# Display the entries #}
 {% for entry in entries %}
-    <article>
-        <h1><a href="{{ entry.url }}">{{ entry.title }}</a></h1>
-        {{ entry.summary }}
-        <a href="{{ entry.url }}">Continue reading</a>
-    </article>
+  <article>
+    <h1><a href="{{ entry.url }}">{{ entry.title }}</a></h1>
+    {{ entry.summary }}
+    <a href="{{ entry.url }}">Continue reading</a>
+  </article>
 {% endfor %}
 ```
 
