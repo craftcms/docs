@@ -147,7 +147,7 @@ Modifies an HTML tag’s attributes, using the same attribute definitions suppor
 ```twig
 {% set tag = '<div>' %}
 {{ tag|attr({
-    class: 'foo'
+  class: 'foo'
 }) }}
 {# Output: <div class="foo"> #}
 ```
@@ -156,15 +156,15 @@ Only the first tag will be modified, and any HTML comments or doctype declaratio
 
 ```twig
 {% set svg %}
-    <?xml version="1.0" encoding="utf-8"?>
-    <svg>...</svg>
+  <?xml version="1.0" encoding="utf-8"?>
+  <svg>...</svg>
 {% endset %}
 {{ svg|attr({
-    class: 'icon'
+  class: 'icon'
 }) }}
 {# Output:
-   <?xml version="1.0" encoding="utf-8"?>
-   <svg class="icon">...</svg> #}
+  <?xml version="1.0" encoding="utf-8"?>
+  <svg class="icon">...</svg> #}
 ```
 
 Attributes can be removed by setting them to `false`.
@@ -182,8 +182,8 @@ Attributes can be removed by setting them to `false`.
 ```twig
 {% set tag = '<div class="foo" style="color: black;">' %}
 {{ tag|attr({
-    class: 'bar',
-    style: {background: 'red'}
+  class: 'bar',
+  style: {background: 'red'}
 }) }}
 {# Output: <div class="foo bar" style="color: black; background: red;"> #}
 ```
@@ -193,7 +193,7 @@ All other attributes will replace the existing attribute values.
 ```twig
 {% set tag = '<input type="text">' %}
 {{ tag|attr({
-    type: 'email'
+  type: 'email'
 }) }}
 {# Output: <input type="email"> #}
 ```
@@ -237,12 +237,12 @@ Returns whether the passed-in array contains any nested arrays/objects with a pa
 
 ```twig
 {% set works = craft.entries()
-    .section('artwork')
-    .all() %}
+  .section('artwork')
+  .all() %}
 
 {# See if any of the artwork has a mature rating #}
 {% if works|contains('rating', 'm') %}
-    <p class="mature">Some of this artwork is meant for mature viewers.</p>
+  <p class="mature">Some of this artwork is meant for mature viewers.</p>
 {% endif %}
 ```
 
@@ -454,13 +454,13 @@ Groups items in an array by a the results of an arrow function.
 {% set allEntriesByYear = allEntries|group(e => e.postDate|date('Y')) %}
 
 {% for year, entriesInYear in allEntriesByYear %}
-    <h2>{{ year }}</h2>
+  <h2>{{ year }}</h2>
 
-    <ul>
-        {% for entry in entriesInYear %}
-            <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for entry in entriesInYear %}
+      <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+    {% endfor %}
+  </ul>
 {% endfor %}
 ```
 
@@ -526,7 +526,7 @@ Returns the index of a passed-in value within an array, or the position of a pas
 
 {% set position = 'team'|indexOf('i') %}
 {% if position != -1 %}
-    <p>There <em>is</em> an “i” in “team”! It’s at position {{ position + 1 }}.</p>
+  <p>There <em>is</em> an “i” in “team”! It’s at position {{ position + 1 }}.</p>
 {% endif %}
 ```
 
@@ -536,25 +536,25 @@ Returns an array containing only the values that are also in a passed-in array.
 
 ```twig
 {% set ownedIngredients = [
-    'vodka',
-    'gin',
-    'triple sec',
-    'tonic',
-    'grapefruit juice'
+  'vodka',
+  'gin',
+  'triple sec',
+  'tonic',
+  'grapefruit juice'
 ] %}
 
 {% set longIslandIcedTeaIngredients = [
-    'vodka',
-    'tequila',
-    'rum',
-    'gin',
-    'triple sec',
-    'sweet and sour mix',
-    'Coke'
+  'vodka',
+  'tequila',
+  'rum',
+  'gin',
+  'triple sec',
+  'sweet and sour mix',
+  'Coke'
 ] %}
 
 {% set ownedLongIslandIcedTeaIngredients =
-    ownedIngredients|intersect(longIslandIcedTeaIngredients)
+  ownedIngredients|intersect(longIslandIcedTeaIngredients)
 %}
 ```
 
@@ -662,16 +662,16 @@ Without `recursive`:
 
 ```twig
 {% set items = {
-    'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
-    'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
+  'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
+  'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
 } %}
 {% set items = items|merge({
-    'rebellion': { 'Endor': 'Solo/Organa' },
-    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+  'rebellion': { 'Endor': 'Solo/Organa' },
+  'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
 }) %}
 {# Result: {
-    'rebellion': { 'Endor': 'Solo/Organa' },
-    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+  'rebellion': { 'Endor': 'Solo/Organa' },
+  'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
 } #}
 ```
 
@@ -679,26 +679,26 @@ With `recursive`:
 
 ```twig{8}
 {% set items = {
-    'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
-    'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
+  'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
+  'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
 } %}
 {% set items = items|merge({
-    'rebellion': { 'Endor': 'Solo/Organa' },
-    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+  'rebellion': { 'Endor': 'Solo/Organa' },
+  'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
 }, true) %}
 {# Result: {
-    'rebellion': {
-        'Bespin': 'Calrissian',
-        'Hoth': 'Organa',
-        'Crait': 'Organa',
-        'Endor': 'Solo/Organa'
-    },
-    'empire': {
-        'Coruscant': 'Palpatine',
-        'Endor': 'Palpatine',
-        'Bespin': 'Vader',
-        'Hoth': 'Veers'
-    }
+  'rebellion': {
+    'Bespin': 'Calrissian',
+    'Hoth': 'Organa',
+    'Crait': 'Organa',
+    'Endor': 'Solo/Organa'
+  },
+  'empire': {
+    'Coruscant': 'Palpatine',
+    'Endor': 'Palpatine',
+    'Bespin': 'Vader',
+    'Hoth': 'Veers'
+  }
 } #}
 ```
 
@@ -742,8 +742,8 @@ When sorting by multiple properties or keys, you must set the `direction` and `s
 
 ```twig
 {% set entries = entries|multisort([
-    'postDate',
-    'title',
+  'postDate',
+  'title',
 ], sortFlag=[SORT_NATURAL, SORT_FLAG_CASE]) %}
 ```
 
@@ -859,7 +859,7 @@ Parses a string for [reference tags](../reference-tags.md).
 
 ```twig
 {% set content %}
-    {entry:blog/hello-world:link} was my first blog post. Pretty geeky, huh?
+  {entry:blog/hello-world:link} was my first blog post. Pretty geeky, huh?
 {% endset %}
 
 {{ content|parseRefs|raw }}
@@ -968,8 +968,8 @@ When a mapping array is passed, this works identically to Twig’s core [`replac
 {% set str = 'Hello, FIRST LAST' %}
 
 {{ str|replace({
-    FIRST: currentUser.firstName,
-    LAST:  currentUser.lastName
+  FIRST: currentUser.firstName,
+  LAST:  currentUser.lastName
 }) }}
 ```
 
@@ -1173,9 +1173,9 @@ The key can be a single key as a string:
 
 ```twig
 {% set array = {
-    foo: 'foo',
-    bar: 'bar',
-    baz: 'baz'
+  foo: 'foo',
+  bar: 'bar',
+  baz: 'baz'
 } %}
 {% set filtered = array|withoutKey('baz') %}
 {# Result: { 'foo': 'foo', 'bar: 'bar' } #}
@@ -1185,9 +1185,9 @@ You can also pass multiple keys in an array:
 
 ```twig
 {% set array = {
-    foo: 'foo',
-    bar: 'bar',
-    baz: 'baz'
+  foo: 'foo',
+  bar: 'bar',
+  baz: 'baz'
 } %}
 {% set filtered = array|withoutKey(['bar', 'baz']) %}
 {# Result: { 'foo': 'foo' } #}
