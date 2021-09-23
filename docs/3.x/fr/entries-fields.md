@@ -55,9 +55,9 @@ Possible values include:
 ```twig
 {# Fetch artwork entries that are related to `artist` #}
 {% set works = craft.entries()
-    .section('artwork')
-    .myFieldHandle(artist)
-    .all() %}
+  .section('artwork')
+  .myFieldHandle(artist)
+  .all() %}
 ```
 ```php
 // Fetch artwork entries that are related to `$artist`
@@ -89,11 +89,11 @@ If you have an [entry form](dev/examples/entry-form.md) that needs to contain an
 ```twig
 {% set relatedEntries = entry.myFieldHandle.all() %}
 {% if relatedEntries|length %}
-    <ul>
-        {% for rel in relatedEntries %}
-            <li><a href="{{ rel.url }}">{{ rel.title }}</a></li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for rel in relatedEntries %}
+      <li><a href="{{ rel.url }}">{{ rel.title }}</a></li>
+    {% endfor %}
+  </ul>
 {% endif %}
 ```
 ```php
@@ -112,7 +112,7 @@ If you only want the first related entry, call [one()](craft3:craft\db\Query::on
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
-    <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
+  <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
 {% endif %}
 ```
 ```php
@@ -128,7 +128,7 @@ If you’d like to check for related entries without fetching them, you can call
 ::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
-    <p>There are related entries!</p>
+  <p>There are related entries!</p>
 {% endif %}
 ```
 ```php
@@ -143,8 +143,8 @@ You can set [parameters](entries.md#parameters) on the entry query as well. For 
 ::: code
 ```twig
 {% set relatedEntries = clone(entry.myFieldHandle)
-    .section('news')
-    .all() %}
+  .section('news')
+  .all() %}
 ```
 ```php
 $relatedEntries = (clone $entry->myFieldHandle)
@@ -170,29 +170,29 @@ For example, you could create a list of checkboxes for each of the possible rela
 
 {# Get all of the possible entry options #}
 {% set possibleEntries = craft.entries()
-    .section('galleries')
-    .orderBy('title ASC')
-    .all() %}
+  .section('galleries')
+  .orderBy('title ASC')
+  .all() %}
 
 {# Get the currently related entry IDs #}
 {% set relatedEntryIds = entry is defined
-    ? entry.myFieldHandle.ids()
-    : [] %}
+  ? entry.myFieldHandle.ids()
+  : [] %}
 
 <ul>
-    {% for possibleEntry in possibleEntries %}
-        <li>
-            <label>
-                {{ input(
-                    'checkbox',
-                    'fields[myFieldHandle][]',
-                    possibleEntry.id,
-                    { checked: possibleEntry.id in relatedEntryIds }
-                ) }}
-                {{ possibleEntry.title }}
-            </label>
-        </li>
-    {% endfor %}
+  {% for possibleEntry in possibleEntries %}
+    <li>
+      <label>
+        {{ input(
+          'checkbox',
+          'fields[myFieldHandle][]',
+          possibleEntry.id,
+          { checked: possibleEntry.id in relatedEntryIds }
+        ) }}
+        {{ possibleEntry.title }}
+      </label>
+    </li>
+  {% endfor %}
 </ul>
 ```
 
@@ -200,6 +200,6 @@ You could then make the checkbox list sortable, so users have control over the o
 
 ## See Also
 
-* [Entry Queries](entries.md#querying-entries)
-* <craft3:craft\elements\Entry>
-* [Relations](relations.md)
+- [Entry Queries](entries.md#querying-entries)
+- <craft3:craft\elements\Entry>
+- [Relations](relations.md)
