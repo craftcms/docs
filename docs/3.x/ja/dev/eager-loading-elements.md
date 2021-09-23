@@ -6,15 +6,15 @@
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .all() %}
+  .section('news')
+  .all() %}
 
 {% for entry in entries %}
-    {# Get the related asset, if there is one #}
-    {% set image = entry.assetsField.one() %}
-    {% if image %}
-        <img src="{{ image.url }}" alt="{{ image.title }}">
-    {% endif %}
+  {# Get the related asset, if there is one #}
+  {% set image = entry.assetsField.one() %}
+  {% if image %}
+    <img src="{{ image.url }}" alt="{{ image.title }}">
+  {% endif %}
 {% endfor %}
 ```
 
@@ -28,16 +28,16 @@
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .with(['assetsField'])
-    .all() %}
+  .section('news')
+  .with(['assetsField'])
+  .all() %}
 
 {% for entry in entries %}
-    {# Get the eager-loaded asset, if there is one #}
-    {% set image = entry.assetsField[0] ?? null %}
-    {% if image %}
-        <img src="{{ image.url }}" alt="{{ image.title }}">
-    {% endif %}
+  {# Get the eager-loaded asset, if there is one #}
+  {% set image = entry.assetsField[0] ?? null %}
+  {% if image %}
+    <img src="{{ image.url }}" alt="{{ image.title }}">
+  {% endif %}
 {% endfor %}
 ```
 
@@ -68,24 +68,24 @@ eager-loaded エレメントへのアクセスは、lazy-loaded エレメント�
 
 ```twig
 {% set entries = craft.entries
-    .section('news')
-    .with([
-        'assetsField',
-        'matrixField'
-    ])
-    .all() %}
+  .section('news')
+  .with([
+    'assetsField',
+    'matrixField'
+  ])
+  .all() %}
 
 {% for entry in entries %}
-    {# Get the eager-loaded asset, if there is one #}
-    {% set image = entry.assetsField[0] ?? null %}
-    {% if image %}
-        <img src="{{ image.url }}" alt="{{ image.title }}">
-    {% endif %}
+  {# Get the eager-loaded asset, if there is one #}
+  {% set image = entry.assetsField[0] ?? null %}
+  {% if image %}
+    <img src="{{ image.url }}" alt="{{ image.title }}">
+  {% endif %}
 
-    {# Loop through any eager-loaded Matrix blocks #}
-    {% for block in entry.matrixField %}
-        {{ block.textField }}
-    {% endfor %}
+  {# Loop through any eager-loaded Matrix blocks #}
+  {% for block in entry.matrixField %}
+    {{ block.textField }}
+  {% endfor %}
 {% endfor %}
 ```
 
@@ -97,21 +97,21 @@ eager-loaded エレメントへのアクセスは、lazy-loaded エレメント�
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .with([
-        'entriesField.assetsField'
-    ])
-    .all() %}
+  .section('news')
+  .with([
+    'entriesField.assetsField'
+  ])
+  .all() %}
 
 {% for entry in entries %}
-    {# Loop through any eager-loaded sub-entries #}
-    {% for relatedEntry in entry.entriesField %}
-        {# Get the eager-loaded asset, if there is one #}
-        {% set image = relatedEntry.assetsField[0] ?? null %}
-        {% if image %}
-            <img src="{{ image.url }}" alt="{{ image.title }}">
-        {% endif %}
-    {% endfor %}
+  {# Loop through any eager-loaded sub-entries #}
+  {% for relatedEntry in entry.entriesField %}
+    {# Get the eager-loaded asset, if there is one #}
+    {% set image = relatedEntry.assetsField[0] ?? null %}
+    {% if image %}
+      <img src="{{ image.url }}" alt="{{ image.title }}">
+    {% endif %}
+  {% endfor %}
 {% endfor %}
 ```
 
@@ -121,23 +121,23 @@ eager-loaded エレメントへのアクセスは、lazy-loaded エレメント�
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .with([
-        ['assetsField', { kind: 'image' }]
-    ])
-    .all() %}
+  .section('news')
+  .with([
+    ['assetsField', { kind: 'image' }]
+  ])
+  .all() %}
 ```
 
 エレメントのネストされたセットで eager-loading する場合、eager-loading パスの任意のレベルでパラメータを適用することができます。
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .with([
-        ['entriesField', { authorId: 5 }],
-        ['entriesField.assetsField', { kind: 'image' }]
-    ])
-    .all() %}
+  .section('news')
+  .with([
+    ['entriesField', { authorId: 5 }],
+    ['entriesField.assetsField', { kind: 'image' }]
+  ])
+  .all() %}
 ```
 
 ### 行列ブロックに関連するエレメントの Eager-Loading
@@ -146,8 +146,8 @@ eager-loaded エレメントへのアクセスは、lazy-loaded エレメント�
 
 ```twig
 {% set blocks = entry.matrixField
-    .with(['blockType:assetsField'])
-    .all() %}
+  .with(['blockType:assetsField'])
+  .all() %}
 ```
 
 この理由は、異なるブロックタイプである限り、行列フィールドでは同じハンドルを共有する複数のサブフィールドをそれぞれに持つことができるためです。 eager-loading キーの一部にブロックタイプのハンドルを必要とすることで、行列が正しいエレメントを eager-loading していると確信できます。
@@ -156,9 +156,9 @@ eager-loaded エレメントへのアクセスは、lazy-loaded エレメント�
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .with(['matrixField.blockType:assetsField'])
-    .all() %}
+  .section('news')
+  .with(['matrixField.blockType:assetsField'])
+  .all() %}
 ```
 
 ## イメージ変換インデックスの Eager-Loading
@@ -169,11 +169,11 @@ eager-loaded エレメントへのアクセスは、lazy-loaded エレメント�
 
 ```twig
 {% set assets = entry.assetsField
-    .withTransforms([
-        'heroImage',
-        { width: 100, height: 100 }
-    ])
-    .all() %}
+  .withTransforms([
+    'heroImage',
+    { width: 100, height: 100 }
+  ])
+  .all() %}
 ```
 
 eager-load したいそれぞれのトランスフォームの定義は、文字列（「設定 > アセット > 画像の変形」で定義されたトランスフォームのハンドル)、 または、トランスフォームプロパティを定義したオブジェクトのいずれかです。
@@ -184,10 +184,10 @@ eager-load したいそれぞれのトランスフォームの定義は、文字
 
 ```twig
 {% set entries = craft.entries()
-    .with([
-        ['assetsField', {
-            withTransforms: ['heroImage']
-        }]
-    ])
-    .all() %}
+  .with([
+    ['assetsField', {
+      withTransforms: ['heroImage']
+    }]
+  ])
+  .all() %}
 ```
