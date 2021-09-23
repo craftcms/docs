@@ -19,7 +19,7 @@
 {% set title = "Page Title"|t('plugin-handle') %}
 
 {% block content %}
-    <p>Page content goes here</p>
+  <p>Page content goes here</p>
 {% endblock %}
 ```
 
