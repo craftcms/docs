@@ -49,8 +49,8 @@ Possible values include:
 ```twig
 {# Fetch entries with a related user #}
 {% set entries = craft.entries()
-    .myFieldHandle(':notempty:')
-    .all() %}
+  .myFieldHandle(':notempty:')
+  .all() %}
 ```
 ```php
 // Fetch entries with a related user
@@ -81,11 +81,11 @@ To loop through all the related users, call [all()](craft3:craft\db\Query::all()
 ```twig
 {% set relatedUsers = entry.myFieldHandle.all() %}
 {% if relatedUsers|length %}
-    <ul>
-        {% for rel in relatedUsers %}
-            <li><a href="{{ url('profiles/'~rel.username) }}">{{ rel.name }}</a></li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for rel in relatedUsers %}
+      <li><a href="{{ url('profiles/'~rel.username) }}">{{ rel.name }}</a></li>
+    {% endfor %}
+  </ul>
 {% endif %}
 ```
 ```php
@@ -105,7 +105,7 @@ If you only want the first related user, call [one()](craft3:craft\db\Query::one
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
-    <p><a href="{{ url('profiles/'~rel.username) }}">{{ rel.name }}</a></p>
+  <p><a href="{{ url('profiles/'~rel.username) }}">{{ rel.name }}</a></p>
 {% endif %}
 ```
 ```php
@@ -122,7 +122,7 @@ If you need to check for related users without fetching them you can call [exist
 ::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
-    <p>There are related users!</p>
+  <p>There are related users!</p>
 {% endif %}
 ```
 ```php
@@ -164,29 +164,29 @@ For example, you could create a list of checkboxes for each of the possible rela
 
 {# Get all of the possible user options #}
 {% set possibleUsers = craft.users()
-    .group('authors')
-    .orderBy('username ASC')
-    .all() %}
+  .group('authors')
+  .orderBy('username ASC')
+  .all() %}
 
 {# Get the currently related user IDs #}
 {% set relatedUserIds = entry is defined
-    ? entry.myFieldHandle.ids()
-    : [] %}
+  ? entry.myFieldHandle.ids()
+  : [] %}
 
 <ul>
-    {% for possibleUser in possibleUsers %}
-        <li>
-            <label>
-                {{ input(
-                    'checkbox',
-                    'fields[myFieldHandle][]',
-                    possibleUser.id,
-                    { checked: possibleUser.id in relatedUserIds }
-                ) }}
-                {{ possibleUser.friendlyName }}
-            </label>
-        </li>
-    {% endfor %}
+  {% for possibleUser in possibleUsers %}
+    <li>
+      <label>
+        {{ input(
+          'checkbox',
+          'fields[myFieldHandle][]',
+          possibleUser.id,
+          { checked: possibleUser.id in relatedUserIds }
+        ) }}
+        {{ possibleUser.friendlyName }}
+      </label>
+    </li>
+  {% endfor %}
 </ul>
 ```
 
@@ -194,6 +194,6 @@ You could then make the checkbox list sortable, so users have control over the o
 
 ## See Also
 
-* [User Queries](users.md#querying-users)
-* <craft3:craft\elements\User>
-* [Relations](relations.md)
+- [User Queries](users.md#querying-users)
+- <craft3:craft\elements\User>
+- [Relations](relations.md)
