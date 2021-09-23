@@ -37,16 +37,16 @@ $myMatrixBlockQuery = \craft\elements\MatrixBlock::find();
 ```twig
 {# Create a Matrix block query with the 'owner', 'fieldId', and 'type' parameters #}
 {% set myMatrixBlockQuery = craft.matrixBlocks()
-    .owner(myEntry)
-    .fieldId(10)
-    .type('text') %}
+  .owner(myEntry)
+  .fieldId(10)
+  .type('text') %}
 
 {# Fetch the Matrix blocks #}
 {% set matrixBlocks = myMatrixBlockQuery.all() %}
 
 {# Display their contents #}
 {% for block in matrixBlocks %}
-    <p>{{ block.text }}</p>
+  <p>{{ block.text }}</p>
 {% endfor %}
 ```
 
