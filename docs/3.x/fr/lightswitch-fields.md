@@ -19,8 +19,8 @@ Possible values include:
 ```twig
 {# Fetch entries with the Lightswitch field enabled #}
 {% set entries = craft.entries()
-    .myFieldHandle(true)
-    .all() %}
+  .myFieldHandle(true)
+  .all() %}
 ```
 ```php
 {% if entry.myFieldHandle %}
@@ -42,9 +42,9 @@ If you have an element with a Lightswitch field in your template, you can access
 ::: code
 ```twig
 {% if entry.myFieldHandle %}
-    <p>I’m on!</p>
+  <p>I’m on!</p>
 {% else %}
-    <p>I’m off.</p>
+  <p>I’m off.</p>
 {% endif %}
 ```
 ```php
