@@ -27,8 +27,8 @@
 ```twig
 {# Fetch entries with the 'foo' option selected #}
 {% set entries = craft.entries()
-    .myFieldHandle('foo')
-    .all() %}
+  .myFieldHandle('foo')
+  .all() %}
 ```
 ```php
 // Fetch entries with the 'foo' option selected
@@ -91,9 +91,9 @@ To loop through all the available options, iterate over the [options](craft3:cra
 ::: code
 ```twig
 {% for option in entry.myFieldHandle.options %}
-    Label:    {{ option.label }}
-    Value:    {{ option }} or {{ option.value }}
-    Selected: {{ option.selected ? 'Yes' : 'No' }}
+  Label:    {{ option.label }}
+  Value:    {{ option }} or {{ option.value }}
+  Selected: {{ option.selected ? 'Yes' : 'No' }}
 {% endfor %}
 ```
 ```php
@@ -113,19 +113,19 @@ If you have an element form, such as an [entry form](https://craftcms.com/knowle
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
 
 <ul>
-    {% for option in field.options %}
+  {% for option in field.options %}
+    {% set selected = entry is defined
+      ? entry.myFieldHandle.value == option.value
+      : option.default %}
 
-        {% set selected = entry is defined
-            ? entry.myFieldHandle.value == option.value
-            : option.default %}
-
-        <li><label>
-            <input type="radio"
-                name="fields[myFieldHandle]"
-                value="{{ option.value }}"
-                {% if selected %}checked{% endif %}>
-            {{ option.label }}
-        </label></li>
-    {% endfor %}
+    <li><label>
+      <input type="radio"
+        name="fields[myFieldHandle]"
+        value="{{ option.value }}"
+        {% if selected %} checked{% endif %}
+      >
+      {{ option.label }}
+    </label></li>
+  {% endfor %}
 </ul>
 ```
