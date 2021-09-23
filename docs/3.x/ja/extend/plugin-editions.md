@@ -45,7 +45,9 @@ if (Plugin::getInstance()->is(Plugin::EDITION_PRO) {
 ```
 
 ```twig
-<code>config/project.yaml</code> の <code>plugins.<plugin-handle>.edition</code> プロパティを変更することにより、アクティブなエディションを切り替えることができます。
+{% if plugin('plugin-handle').is('pro') %}
+  {# Pro edition-only code goes here... #}
+{% endif %}
 ```
 
 :::
