@@ -144,13 +144,26 @@
 利用可能な `textOptions` は、[こちらのリスト](yii2:yii\i18n\Formatter::$numberFormatterTextOptions) を参照してください。
 
 ```twig
-{{ entry.postDate|date('short', locale='en-GB') }} → 26/9/2018
+{% set tag = '<div>' %}
+{{ tag|attr({
+  class: 'foo'
+}) }}
+{# Output: <div class="foo"> #}
 ```
 
 タイムスタンプ、または、[DateTime](http://php.net/manual/en/class.datetime.php) オブジェクトのフォーマットされた日付を出力します。
 
 ```twig
-{{ entry.postDate|date('Y-m-d') }} → 2018-09-26
+{% set svg %}
+  <?xml version="1.0" encoding="utf-8"?>
+  <svg>...</svg>
+{% endset %}
+{{ svg|attr({
+  class: 'icon'
+}) }}
+{# Output:
+  <?xml version="1.0" encoding="utf-8"?>
+  <svg class="icon">...</svg> #}
 ```
 
 `format` パラメータに値を渡すことで、詳細がどの程度提供されるかをカスタマイズできます。
@@ -162,13 +175,22 @@
 利用可能な `format` 値は、次の通りです。
 
 ```twig
-{{ entry.postDate|datetime }} → Sep 26, 2018, 5:00:00 PM
+{% set tag = '<div class="foo" style="color: black;">' %}
+{{ tag|attr({
+  class: 'bar',
+  style: {background: 'red'}
+}) }}
+{# Output: <div class="foo bar" style="color: black; background: red;"> #}
 ```
 
 他のすべての属性は、既存の属性値を置き換えます。
 
 ```twig
-{{ entry.postDate|datetime('short') }} → 9/26/2018, 5:00 PM
+{% set tag = '<input type="text">' %}
+{{ tag|attr({
+  type: 'email'
+}) }}
+{# Output: <input type="email"> #}
 ```
 
 PHP の `date()` ファンクションでサポートされるものと同じ [フォーマットオプション](http://php.net/manual/en/function.date.php) を使用して、カスタムの日付フォーマットを渡すこともできます。
@@ -206,18 +228,14 @@ PHP の `date()` ファンクションでサポートされるものと同じ [�
 特定のキー/属性が指定された値を持つ、ネストされた配列/オブジェクトを渡された配列に含むかどうかを返します。
 
 ```twig
-{% set allEntries = craft.entries.section('blog').all() %}
-{% set allEntriesByYear = allEntries|group('postDate|date("Y")') %}
+{% set works = craft.entries()
+  .section('artwork')
+  .all() %}
 
-{% for year, entriesInYear in allEntriesByYear %}
-    <h2>{{ year }}</h2>
-
-    <ul>
-        {% for entry in entriesInYear %}
-            <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
-        {% endfor %}
-    </ul>
-{% endfor %}
+{# See if any of the artwork has a mature rating #}
+{% if works|contains('rating', 'm') %}
+  <p class="mature">Some of this artwork is meant for mature viewers.</p>
+{% endif %}
 ```
 
 ## `currency`
@@ -434,13 +452,13 @@ PHP スクリプトは、[Security::validateData()](yii2:yii\base\Security::vali
 {% set allEntriesByYear = allEntries|group(e => e.postDate|date('Y')) %}
 
 {% for year, entriesInYear in allEntriesByYear %}
-    <h2>{{ year }}</h2>
+  <h2>{{ year }}</h2>
 
-    <ul>
-        {% for entry in entriesInYear %}
-            <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for entry in entriesInYear %}
+      <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+    {% endfor %}
+  </ul>
 {% endfor %}
 ```
 
@@ -506,7 +524,7 @@ Converts a date to the HTTP format, used by [RFC 7231](https://tools.ietf.org/ht
 
 {% set position = 'team'|indexOf('i') %}
 {% if position != -1 %}
-    <p>There <em>is</em> an “i” in “team”! It’s at position {{ position + 1 }}.</p>
+  <p>There <em>is</em> an “i” in “team”! It’s at position {{ position + 1 }}.</p>
 {% endif %}
 ```
 
@@ -516,25 +534,25 @@ Converts a date to the HTTP format, used by [RFC 7231](https://tools.ietf.org/ht
 
 ```twig
 {% set ownedIngredients = [
-    'vodka',
-    'gin',
-    'triple sec',
-    'tonic',
-    'grapefruit juice'
+  'vodka',
+  'gin',
+  'triple sec',
+  'tonic',
+  'grapefruit juice'
 ] %}
 
 {% set longIslandIcedTeaIngredients = [
-    'vodka',
-    'tequila',
-    'rum',
-    'gin',
-    'triple sec',
-    'sweet and sour mix',
-    'Coke'
+  'vodka',
+  'tequila',
+  'rum',
+  'gin',
+  'triple sec',
+  'sweet and sour mix',
+  'Coke'
 ] %}
 
 {% set ownedLongIslandIcedTeaIngredients =
-    ownedIngredients|intersect(longIslandIcedTeaIngredients)
+  ownedIngredients|intersect(longIslandIcedTeaIngredients)
 %}
 ```
 
@@ -643,16 +661,16 @@ It also works on hashes, where merging occurs on the keys. A key that doesn’t 
 
 ```twig
 {% set items = {
-    'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
-    'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
+  'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
+  'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
 } %}
 {% set items = items|merge({
-    'rebellion': { 'Endor': 'Solo/Organa' },
-    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+  'rebellion': { 'Endor': 'Solo/Organa' },
+  'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
 }) %}
 {# Result: {
-    'rebellion': { 'Endor': 'Solo/Organa' },
-    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+  'rebellion': { 'Endor': 'Solo/Organa' },
+  'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
 } #}
 ```
 
@@ -660,26 +678,26 @@ CSS セレクタの `#title` が `#foo-title`、`id` 属性が `title` から `f
 
 ```twig{8}
 {% set items = {
-    'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
-    'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
+  'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
+  'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
 } %}
 {% set items = items|merge({
-    'rebellion': { 'Endor': 'Solo/Organa' },
-    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+  'rebellion': { 'Endor': 'Solo/Organa' },
+  'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
 }, true) %}
 {# Result: {
-    'rebellion': {
-        'Bespin': 'Calrissian',
-        'Hoth': 'Organa',
-        'Crait': 'Organa',
-        'Endor': 'Solo/Organa'
-    },
-    'empire': {
-        'Coruscant': 'Palpatine',
-        'Endor': 'Palpatine',
-        'Bespin': 'Vader',
-        'Hoth': 'Veers'
-    }
+  'rebellion': {
+    'Bespin': 'Calrissian',
+    'Hoth': 'Organa',
+    'Crait': 'Organa',
+    'Endor': 'Solo/Organa'
+  },
+  'empire': {
+    'Coruscant': 'Palpatine',
+    'Endor': 'Palpatine',
+    'Bespin': 'Vader',
+    'Hoth': 'Veers'
+  }
 } #}
 ```
 
@@ -723,8 +741,8 @@ Sorts an array by one or more properties or keys within an array’s values.
 
 ```twig
 {% set entries = entries|multisort([
-    'postDate',
-    'title',
+  'postDate',
+  'title',
 ], sortFlag=[SORT_NATURAL, SORT_FLAG_CASE]) %}
 ```
 
@@ -842,7 +860,7 @@ If this is used within a [namespace](tags.md#namespace) tag, the namespace appli
 
 ```twig
 {% set content %}
-    {entry:blog/hello-world:link} was my first blog post. Pretty geeky, huh?
+  {entry:blog/hello-world:link} was my first blog post. Pretty geeky, huh?
 {% endset %}
 
 {{ content|parseRefs|raw }}
@@ -951,8 +969,8 @@ When a mapping array is passed, this works identically to Twig’s core [`replac
 {% set str = 'Hello, FIRST LAST' %}
 
 {{ str|replace({
-    FIRST: currentUser.firstName,
-    LAST:  currentUser.lastName
+  FIRST: currentUser.firstName,
+  LAST:  currentUser.lastName
 }) }}
 ```
 
@@ -1156,9 +1174,9 @@ The key can be a single key as a string:
 
 ```twig
 {% set array = {
-    foo: 'foo',
-    bar: 'bar',
-    baz: 'baz'
+  foo: 'foo',
+  bar: 'bar',
+  baz: 'baz'
 } %}
 {% set filtered = array|withoutKey('baz') %}
 {# Result: { 'foo': 'foo', 'bar: 'bar' } #}
@@ -1168,9 +1186,9 @@ You can also pass multiple keys in an array:
 
 ```twig
 {% set array = {
-    foo: 'foo',
-    bar: 'bar',
-    baz: 'baz'
+  foo: 'foo',
+  bar: 'bar',
+  baz: 'baz'
 } %}
 {% set filtered = array|withoutKey(['bar', 'baz']) %}
 {# Result: { 'foo': 'foo' } #}
