@@ -106,7 +106,7 @@ Now every Commerce product has the new methods available to use in templates or 
 ::: code
 ```twig
 {% if product.isFinanceable() %}
-    <p>{{ product.title }} available from just {{ product.financePriceFrom | commerceCurrency('USD') }} per month!</p>
+  <p>{{ product.title }} available from just {{ product.financePriceFrom | commerceCurrency('USD') }} per month!</p>
 {% endif %}
 ```
 
