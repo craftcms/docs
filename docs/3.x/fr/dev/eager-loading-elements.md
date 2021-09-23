@@ -6,15 +6,15 @@ For example, here’s a template that loops through a list of entries, and displ
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .all() %}
+  .section('news')
+  .all() %}
 
 {% for entry in entries %}
-    {# Get the related asset, if there is one #}
-    {% set image = entry.assetsField.one() %}
-    {% if image %}
-        <img src="{{ image.url }}" alt="{{ image.title }}">
-    {% endif %}
+  {# Get the related asset, if there is one #}
+  {% set image = entry.assetsField.one() %}
+  {% if image %}
+    <img src="{{ image.url }}" alt="{{ image.title }}">
+  {% endif %}
 {% endfor %}
 ```
 
@@ -28,16 +28,16 @@ Here’s how to apply the `with` param to our example:
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .with(['assetsField'])
-    .all() %}
+  .section('news')
+  .with(['assetsField'])
+  .all() %}
 
 {% for entry in entries %}
-    {# Get the eager-loaded asset, if there is one #}
-    {% set image = entry.assetsField[0] ?? null %}
-    {% if image %}
-        <img src="{{ image.url }}" alt="{{ image.title }}">
-    {% endif %}
+  {# Get the eager-loaded asset, if there is one #}
+  {% set image = entry.assetsField[0] ?? null %}
+  {% if image %}
+    <img src="{{ image.url }}" alt="{{ image.title }}">
+  {% endif %}
 {% endfor %}
 ```
 
@@ -68,24 +68,24 @@ If you have multiple sets of elements you wish to eager-load off of the top list
 
 ```twig
 {% set entries = craft.entries
-    .section('news')
-    .with([
-        'assetsField',
-        'matrixField'
-    ])
-    .all() %}
+  .section('news')
+  .with([
+    'assetsField',
+    'matrixField'
+  ])
+  .all() %}
 
 {% for entry in entries %}
-    {# Get the eager-loaded asset, if there is one #}
-    {% set image = entry.assetsField[0] ?? null %}
-    {% if image %}
-        <img src="{{ image.url }}" alt="{{ image.title }}">
-    {% endif %}
+  {# Get the eager-loaded asset, if there is one #}
+  {% set image = entry.assetsField[0] ?? null %}
+  {% if image %}
+    <img src="{{ image.url }}" alt="{{ image.title }}">
+  {% endif %}
 
-    {# Loop through any eager-loaded Matrix blocks #}
-    {% for block in entry.matrixField %}
-        {{ block.textField }}
-    {% endfor %}
+  {# Loop through any eager-loaded Matrix blocks #}
+  {% for block in entry.matrixField %}
+    {{ block.textField }}
+  {% endfor %}
 {% endfor %}
 ```
 
@@ -97,21 +97,21 @@ It’s also possible to load _nested_ sets of elements, using this syntax:
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .with([
-        'entriesField.assetsField'
-    ])
-    .all() %}
+  .section('news')
+  .with([
+    'entriesField.assetsField'
+  ])
+  .all() %}
 
 {% for entry in entries %}
-    {# Loop through any eager-loaded sub-entries #}
-    {% for relatedEntry in entry.entriesField %}
-        {# Get the eager-loaded asset, if there is one #}
-        {% set image = relatedEntry.assetsField[0] ?? null %}
-        {% if image %}
-            <img src="{{ image.url }}" alt="{{ image.title }}">
-        {% endif %}
-    {% endfor %}
+  {# Loop through any eager-loaded sub-entries #}
+  {% for relatedEntry in entry.entriesField %}
+    {# Get the eager-loaded asset, if there is one #}
+    {% set image = relatedEntry.assetsField[0] ?? null %}
+    {% if image %}
+      <img src="{{ image.url }}" alt="{{ image.title }}">
+    {% endif %}
+  {% endfor %}
 {% endfor %}
 ```
 
@@ -121,23 +121,23 @@ You can define custom criteria parameters that will get applied as elements are 
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .with([
-        ['assetsField', { kind: 'image' }]
-    ])
-    .all() %}
+  .section('news')
+  .with([
+    ['assetsField', { kind: 'image' }]
+  ])
+  .all() %}
 ```
 
 When eager-loading nested sets of elements, you can apply parameters at any level of the eager-loading path.
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .with([
-        ['entriesField', { authorId: 5 }],
-        ['entriesField.assetsField', { kind: 'image' }]
-    ])
-    .all() %}
+  .section('news')
+  .with([
+    ['entriesField', { authorId: 5 }],
+    ['entriesField.assetsField', { kind: 'image' }]
+  ])
+  .all() %}
 ```
 
 ### Eager-Loading Elements Related to Matrix Blocks
@@ -146,8 +146,8 @@ The syntax for eager-loading relations from Matrix blocks is a little different 
 
 ```twig
 {% set blocks = entry.matrixField
-    .with(['blockType:assetsField'])
-    .all() %}
+  .with(['blockType:assetsField'])
+  .all() %}
 ```
 
 The reason for this is that Matrix fields can have multiple sub-fields that each share the same handle, as long as they’re in different block types. By requiring the block type handle as part of the eager-loading key, Matrix can be confident that it is eager-loading the right set of elements.
@@ -156,9 +156,9 @@ This applies if the Matrix blocks themselves are being eager-loaded, too.
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .with(['matrixField.blockType:assetsField'])
-    .all() %}
+  .section('news')
+  .with(['matrixField.blockType:assetsField'])
+  .all() %}
 ```
 
 ## Eager-Loading Image Transform Indexes
@@ -169,11 +169,11 @@ This problem can be solved with the `withTransforms` asset criteria parameter:
 
 ```twig
 {% set assets = entry.assetsField
-    .withTransforms([
-        'heroImage',
-        { width: 100, height: 100 }
-    ])
-    .all() %}
+  .withTransforms([
+    'heroImage',
+    { width: 100, height: 100 }
+  ])
+  .all() %}
 ```
 
 Note that each transform definition you want to eager-load can either be a string (the handle of a transform defined in Settings → Assets → Image Transforms) or a [hash](twig-primer.md#hashes) that defines the transform properties.
@@ -184,10 +184,10 @@ Image transform indexes can be eager-loaded on assets that are also eager-loaded
 
 ```twig
 {% set entries = craft.entries()
-    .with([
-        ['assetsField', {
-            withTransforms: ['heroImage']
-        }]
-    ])
-    .all() %}
+  .with([
+    ['assetsField', {
+      withTransforms: ['heroImage']
+    }]
+  ])
+  .all() %}
 ```
