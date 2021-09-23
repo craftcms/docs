@@ -45,8 +45,11 @@
 タグを作成する前に、それらを含めるためのタググループを作成しなければなりません。
 
 ```twig
-{# Create a new tag query #}
-{% set myTagQuery = craft.tags() %}
+{% cache %}
+  {% for block in entry.myMatrixField.all() %}
+    <p>{{ block.text }}</p>
+  {% endfor %}
+{% endcache %}
 ```
 
 新しいタググループを作るには、「設定 > タグ」に移動し、「新しいタググループ」ボタンをクリックします。
@@ -215,12 +218,15 @@ The `{% cache %}` tag detects ungenerated [image transform](../image-transforms.
 ::: code
 
 ```twig
-{# Fetch tags updated in the last week #}
-{% set lastWeek = date('1 week ago')|atom %}
+{# Register a CSS file #}
+{% css "/assets/css/style.css" %}
 
-{% set tags = craft.tags()
-    .dateUpdated(">= #{lastWeek}")
-    .all() %}
+{# Register a CSS code block #}
+{% css %}
+  .content {
+    color: {{ entry.textColor }};
+  }
+{% endcss %}
 ```
 
 ::: warning
@@ -263,11 +269,11 @@ $tags = \craft\elements\Tag::find()
 Possible values include:
 
 ```twig
-// Fetch tags in a specific order
-$tags = \craft\elements\Tag::find()
-    ->id([1, 2, 3, 4, 5])
-    ->fixedOrder()
-    ->all();
+{% set entry = craft.entries.id(entryId).one() %}
+
+{% if not entry %}
+  {% exit 404 %}
+{% endif %}
 ```
 
 ### パラメータ
@@ -325,7 +331,7 @@ Headers which contain dates must be formatted according to [RFC 7234](https://to
 
 ```twig
 {% html %}
-    <p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>
+  <p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>
 {% endhtml %}
 ```
 
@@ -369,11 +375,11 @@ JavaScript ファイルを登録するには、URL の末尾が `.js` でなけ�
 
 {# Register a JS code block #}
 {% js %}
-    _gaq.push([
-        "_trackEvent",
-        "Search",
-        "{{ searchTerm|e('js') }}"
-    ]);
+  _gaq.push([
+    "_trackEvent",
+    "Search",
+    "{{ searchTerm|e('js') }}"
+  ]);
 {% endjs %}
 ```
 
@@ -418,7 +424,7 @@ By default, `at endBody` will be used.
 
 ```twig
 {% js "/assets/js/script.js" with {
-    defer: true
+  defer: true
 } %}
 ```
 
@@ -486,16 +492,16 @@ This tag helps create a hierarchical navigation menu for entries in a [Structure
 {% set entries = craft.entries.section('pages').all() %}
 
 <ul id="nav">
-    {% nav entry in entries %}
-        <li>
-            <a href="{{ entry.url }}">{{ entry.title }}</a>
-            {% ifchildren %}
-                <ul>
-                    {% children %}
-                </ul>
-            {% endifchildren %}
-        </li>
-    {% endnav %}
+  {% nav entry in entries %}
+    <li>
+      <a href="{{ entry.url }}">{{ entry.title }}</a>
+      {% ifchildren %}
+        <ul>
+          {% children %}
+        </ul>
+      {% endifchildren %}
+    </li>
+  {% endnav %}
 </ul>
 ```
 
@@ -537,16 +543,16 @@ Don’t add any special logic between your `{% ifchildren %}` and `{% endifchild
 
 ```twig
 {% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
+  .section('blog')
+  .limit(10) %}
 
 {% paginate query as pageInfo, pageEntries %}
 
 {% for entry in pageEntries %}
-    <article>
-        <h1>{{ entry.title }}</h1>
-        {{ entry.body }}
-    </article>
+  <article>
+    <h1>{{ entry.title }}</h1>
+    {{ entry.body }}
+  </article>
 {% endfor %}
 
 {% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
@@ -603,10 +609,10 @@ If you only specify one variable name here, the `pageInfo` variable will be call
 {% paginate craft.entries.section('blog').limit(10) as pageEntries %}
 
 {% for entry in pageEntries %}
-    <article>
-        <h1>{{ entry.title }}</h1>
-        {{ entry.body }}
-    </article>
+  <article>
+    <h1>{{ entry.title }}</h1>
+    {{ entry.body }}
+  </article>
 {% endfor %}
 ```
 
@@ -639,8 +645,8 @@ If you only specify one variable name here, the `pageInfo` variable will be call
 
 ```twig
 {% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
+  .section('blog')
+  .limit(10) %}
 
 {% paginate query as pageInfo, pageEntries %}
 
@@ -656,8 +662,8 @@ If you only specify one variable name here, the `pageInfo` variable will be call
 
 ```twig
 {% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
+  .section('blog')
+  .limit(10) %}
 
 {% paginate query as pageInfo, pageEntries %}
 
@@ -675,8 +681,8 @@ If you only specify one variable name here, the `pageInfo` variable will be call
 
 ```twig
 {% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
+  .section('blog')
+  .limit(10) %}
 
 {% paginate query as pageInfo, pageEntries %}
 
@@ -684,13 +690,13 @@ If you only specify one variable name here, the `pageInfo` variable will be call
 {% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
 
 {% for page, url in pageInfo.getPrevUrls(5) %}
-    <a href="{{ url }}">{{ page }}</a>
+  <a href="{{ url }}">{{ page }}</a>
 {% endfor %}
 
 <span class="current">{{ pageInfo.currentPage }}</span>
 
 {% for page, url in pageInfo.getNextUrls(5) %}
-    <a href="{{ url }}">{{ page }}</a>
+  <a href="{{ url }}">{{ page }}</a>
 {% endfor %}
 
 {% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
@@ -705,7 +711,7 @@ If you only specify one variable name here, the `pageInfo` variable will be call
 
 ```twig
 {% if not user or not user.isInGroup('members') %}
-    {% redirect "pricing" %}
+  {% redirect "pricing" %}
 {% endif %}
 ```
 
@@ -733,7 +739,7 @@ You can optionally set flash messages that will show up for the user on the next
 
 ```twig
 {% if not currentUser.isInGroup('members') %}
-    {% redirect "pricing" 301 with notice "You have to be a member to access that!" %}
+  {% redirect "pricing" 301 with notice "You have to be a member to access that!" %}
 {% endif %}
 ```
 
@@ -789,12 +795,12 @@ Similar to the [`{% js %}`](#js) tag, but with full control over the resulting `
 
 ```twig
 {% if matrixBlock.type == "text" %}
-    {{ matrixBlock.textField|markdown }}
+  {{ matrixBlock.textField|markdown }}
 {% elseif matrixBlock.type == "image" %}
-    {{ matrixBlock.image[0].getImg() }}
+  {{ matrixBlock.image[0].getImg() }}
 {% else %}
-    <p>A font walks into a bar.</p>
-    <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
+  <p>A font walks into a bar.</p>
+  <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
 {% endif %}
 ```
 
@@ -802,13 +808,13 @@ Similar to the [`{% js %}`](#js) tag, but with full control over the resulting `
 
 ```twig
 {% switch matrixBlock.type %}
-    {% case "text" %}
-        {{ matrixBlock.textField|markdown }}
-    {% case "image" %}
-        {{ matrixBlock.image[0].getImg() }}
-    {% default %}
-        <p>A font walks into a bar.</p>
-        <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
+  {% case "text" %}
+    {{ matrixBlock.textField|markdown }}
+  {% case "image" %}
+    {{ matrixBlock.image[0].getImg() }}
+  {% default %}
+    <p>A font walks into a bar.</p>
+    <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
 {% endswitch %}
 ```
 
@@ -822,10 +828,10 @@ Similar to the [`{% js %}`](#js) tag, but with full control over the resulting `
 
 ```twig
 {% case "h2" or "h3" or "p" %}
-    {# output an <h2>, <h3>, or <p> tag, depending on the block type #}
-    {{ tag(matrixBlock.type, {
-        text: matrixBlock.text
-    }) }}
+  {# output an <h2>, <h3>, or <p> tag, depending on the block type #}
+  {{ tag(matrixBlock.type, {
+      text: matrixBlock.text
+  }) }}
 ```
 
 ### 親の `loop` 変数へのアクセス
@@ -834,15 +840,15 @@ Similar to the [`{% js %}`](#js) tag, but with full control over the resulting `
 
 ```twig
 {% for matrixBlock in entry.matrixField.all() %}
-    {% set loopIndex = loop.index %}
+  {% set loopIndex = loop.index %}
 
-    {% switch matrixBlock.type %}
+  {% switch matrixBlock.type %}
 
-        {% case "text" %}
+    {% case "text" %}
 
-            Loop #{{ loopIndex }}
+        Loop #{{ loopIndex }}
 
-    {% endswitch %}
+  {% endswitch %}
 {% endfor %}
 ```
 
@@ -856,9 +862,9 @@ Similar to the [`{% js %}`](#js) tag, but with full control over the resulting `
 
 ```twig
 {% tag 'p' with {
-    class: 'welcome',
+  class: 'welcome',
 } %}
-    Hello, {{ currentUser.friendlyName }}
+  Hello, {{ currentUser.friendlyName }}
 {% endtag %}
 {# Output: <p class="welcome">Hello, Tim</p> #}
 ```
@@ -866,13 +872,13 @@ Similar to the [`{% js %}`](#js) tag, but with full control over the resulting `
 `{% tag %}` tags can also be nested:
 ```twig
 {% tag 'div' with {
-    class: 'foo',
+  class: 'foo',
 } %}
-    {% tag 'p' with {
-        class: 'welcome',
-    } -%}
-        Hello, {{ currentUser.friendlyName }}
-    {%- endtag %}
+  {% tag 'p' with {
+    class: 'welcome',
+  } -%}
+    Hello, {{ currentUser.friendlyName }}
+  {%- endtag %}
 {% endtag %}
 {# Output: <div class="foo"><p class="welcome">Hello, Tim</p></div> #}
 ```
@@ -895,10 +901,10 @@ If an attribute is set to `true`, it will be added without a value:
 
 ```twig
 {% tag 'textarea' with {
-    name: 'message',
-    required: true
+  name: 'message',
+  required: true
 } -%}
-    Please foo some bar.
+  Please foo some bar.
 {%- endtag %}
 {# Output: <textarea name="message" required>Please foo some bar.</textarea> #}
 ```
