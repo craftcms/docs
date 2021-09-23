@@ -20,9 +20,9 @@
 
 ::: code
 ```twig
-{% if user.bio %}
-    <h3>Bio</h3>
-    {{ user.bio|markdown }}
+{% if entry.myFieldHandle %}
+  <h3>Article</h3>
+  {{ entry.myFieldHandle|markdown }}
 {% endif %}
 ```
 ```php
