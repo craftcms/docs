@@ -6,7 +6,7 @@ Checkboxes fields give you a group of checkboxes.
 
 Checkboxes fields have the following settings:
 
-* **Checkbox Options** – Define the checkboxes that will be available in the field. You even get to set the option values and labels separately, and choose which ones should be checked by default.
+- **Checkbox Options** – Define the checkboxes that will be available in the field. You even get to set the option values and labels separately, and choose which ones should be checked by default.
 
 ## Templating
 
@@ -27,8 +27,8 @@ Possible values include:
 ```twig
 {# Fetch entries with the 'foo' option checked #}
 {% set entries = craft.entries()
-    .myFieldHandle('foo')
-    .all() %}
+  .myFieldHandle('foo')
+  .all() %}
 ```
 ```php
 // Fetch entries with the 'foo' option checked
@@ -58,8 +58,8 @@ If you have an [entry form](dev/examples/entry-form.md) that needs to contain a 
 ::: code
 ```twig
 {% for option in entry.myFieldHandle %}
-    Label: {{ option.label }}
-    Value: {{ option }} or {{ option.value }}
+  Label: {{ option.label }}
+  Value: {{ option }} or {{ option.value }}
 {% endfor %}
 ```
 ```php
@@ -75,9 +75,9 @@ To loop through all the checked options, iterate over the field value:
 ::: code
 ```twig
 {% for option in entry.myFieldHandle.options %}
-    Label:   {{ option.label }}
-    Value:   {{ option }} or {{ option.value }}
-    Checked: {{ option.selected ? 'Yes' : 'No' }}
+  Label:   {{ option.label }}
+  Value:   {{ option }} or {{ option.value }}
+  Checked: {{ option.selected ? 'Yes' : 'No' }}
 {% endfor %}
 ```
 ```php
@@ -123,19 +123,18 @@ If you have an element form, such as an [entry form](https://craftcms.com/knowle
 {{ hiddenInput('fields[myFieldHandle]', '') }}
 
 <ul>
-    {% for option in field.options %}
+  {% for option in field.options %}
+    {% set checked = entry is defined
+      ? entry.myFieldHandle.contains(option.value)
+      : option.default %}
 
-        {% set checked = entry is defined
-            ? entry.myFieldHandle.contains(option.value)
-            : option.default %}
-
-        <li><label>
-            <input type="checkbox"
-                name="fields[myFieldHandle][]"
-                value="{{ option.value }}"
-                {% if checked %}checked{% endif %}>
-            {{ option.label }}
-        </label></li>
-    {% endfor %}
+    <li><label>
+      <input type="checkbox"
+        name="fields[myFieldHandle][]"
+        value="{{ option.value }}"
+        {% if checked %}checked{% endif %}>
+      {{ option.label }}
+    </label></li>
+  {% endfor %}
 </ul>
 ```
