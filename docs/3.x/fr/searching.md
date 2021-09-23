@@ -10,19 +10,16 @@ You can search for elements from your own code, too:
 
 ::: code
 ```twig
-{# Get the user's search query from the 'q' query-string param #}
-{% set searchQuery = craft.app.request.getParam('q') %}
-
-{# Fetch entries that match the search query #}
 {% set results = craft.entries()
-    .search(searchQuery)
-    .all() %}
+  .search('foo')
+  .all() %}
 ```
 ```graphql
-{% set results = craft.entries()
-    .search(searchQuery)
-    .orderBy('score')
-    .all() %}
+{
+  entries(search: "foo") {
+    title
+  }
+}
 ```
 ```php
 $results = \craft\elements\Entry::find()
@@ -89,15 +86,15 @@ The same search from your code:
 ::: code
 ```twig
 {% set images = craft.assets()
-    .search('kind:image')
-    .all() %}
+  .search('kind:image')
+  .all() %}
 ```
 
 ```graphql
 {
-    images: assets(search: "kind:image") {
-        title
-    }
+  images: assets(search: "kind:image") {
+    title
+  }
 }
 ```
 
@@ -117,15 +114,15 @@ The same search from your code:
 ::: code
 ```twig
 {% set users = craft.users()
-    .search('email:@craftcms.com')
-    .all() %}
+  .search('email:@craftcms.com')
+  .all() %}
 ```
 
 ```graphql
 {
-    users(search: "email:@craftcms.com") {
-        title
-    }
+  users(search: "email:@craftcms.com") {
+    title
+  }
 }
 ```
 
@@ -147,8 +144,8 @@ $images = \craft\elements\User::find()
 
 {# Fetch entries that match the search query #}
 {% set results = craft.entries()
-    .search(searchQuery)
-    .all() %}
+  .search(searchQuery)
+  .all() %}
 ```
 ```php
 // Get the user’s search query from the 'q' query string param
@@ -168,15 +165,15 @@ You can also set the `orderBy` parameter to `'score'` if you want results ordere
 ::: code
 ```twig
 {% set results = craft.entries()
-    .search('foo')
-    .orderBy('score')
-    .all() %}
+  .search('foo')
+  .orderBy('score')
+  .all() %}
 ```
 ```graphql
 {
-    entries(search: "foo", orderBy: "score") {
-        title
-    }
+  entries(search: "foo", orderBy: "score") {
+    title
+  }
 }
 ```
 ```php
