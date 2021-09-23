@@ -41,16 +41,16 @@ Craft の権限は次の通りです。
 ```twig
 {# Create a user query with the 'group' parameter #}
 {% set myUserQuery = craft.users()
-    .group('authors') %}
+  .group('authors') %}
 
 {# Fetch the users #}
 {% set users = myUserQuery.all() %}
 
 {# Display the list #}
 <ul>
-    {% for user in users %}
-        <li><a href="{{ url('authors/'~user.username) }}">{{ user.name }}</a></li>
-    {% endfor %}
+  {% for user in users %}
+    <li><a href="{{ url('authors/'~user.username) }}">{{ user.name }}</a></li>
+  {% endfor %}
 </ul>
 ```
 
