@@ -49,16 +49,16 @@ We can display a list of the tags in a “Blog Tags” tag group by doing the fo
 ```twig
 {# Create a tag query with the 'group' parameter #}
 {% set myTagQuery = craft.tags()
-    .group('blogTags') %}
+  .group('blogTags') %}
 
 {# Fetch the tags #}
 {% set tags = myTagQuery.all() %}
 
 {# Display the tag list #}
 <ul>
-    {% for tag in tags %}
-        <li><a href="{{ url('blog/tags/'~tag.id) }}">{{ tag.title }}</a></li>
-    {% endfor %}
+  {% for tag in tags %}
+    <li><a href="{{ url('blog/tags/'~tag.id) }}">{{ tag.title }}</a></li>
+  {% endfor %}
 </ul>
 ```
 
