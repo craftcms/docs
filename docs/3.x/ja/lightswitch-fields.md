@@ -19,11 +19,10 @@ Lightswitch フィールドを持つ[エレメントを照会](element-queries.m
 明示的な Lightswitch 値の設定を持たないエレメントは、フィールドの設定にしたがって、デフォルトのフィールド値を持つかのように扱われます。
 :::
 ```twig
-{% if entry.lightswitchFieldHandle %}
-    <p>I'm on!</p>
-{% else %}
-    <p>I'm off.</p>
-{% endif %}
+{# Fetch entries with the Lightswitch field enabled #}
+{% set entries = craft.entries()
+  .myFieldHandle(true)
+  .all() %}
 ```
 ```php
 {% if entry.myFieldHandle %}
@@ -45,9 +44,9 @@ Lightswitch フィールドを含める必要がある[投稿フォーム](dev/e
 ::: code
 ```twig
 {% if entry.myFieldHandle %}
-    <p>I’m on!</p>
+  <p>I’m on!</p>
 {% else %}
-    <p>I’m off.</p>
+  <p>I’m off.</p>
 {% endif %}
 ```
 ```php
