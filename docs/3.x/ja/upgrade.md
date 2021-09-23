@@ -239,7 +239,7 @@ Twig 1 では、存在しないブロックでさえも `block()` で呼び出�
 
 ```twig
 {% if block('foo') is not empty %}
-    {{ block('foo') }}
+  {{ block('foo') }}
 {% endif %}
 ```
 
@@ -247,7 +247,7 @@ Twig 2 では、`defined` のテストでない限り、エラーを返します
 
 ```twig
 {% if block('foo') is defined %}
-    {{ block('foo') }}
+  {{ block('foo') }}
 {% endif %}
 ```
 
@@ -488,11 +488,11 @@ New:
 ```twig
 Old:
 {% set query = craft.entries()
-    .relatedTo('and', 1, 2, 3) %}
+  .relatedTo('and', 1, 2, 3) %}
 
 New:
 {% set query = craft.entries()
-    .relatedTo(['and', 1, 2, 3]) %}
+  .relatedTo(['and', 1, 2, 3]) %}
 ```
 
 #### エレメントクエリの複製
@@ -572,8 +572,8 @@ New:
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .all() %}
+  .section('news')
+  .all() %}
 {% set total = entries|length %}
 ```
 
@@ -588,9 +588,9 @@ New:
    it to `postDate ASC`, returning the oldest News entry: #}
 
 {% set oldest = craft.entries()
-    .section('news')
-    .inReverse()
-    .one() %}
+  .section('news')
+  .inReverse()
+  .one() %}
 ```
 
 `inReverse()` が期待した通りに動作しないケースが2つあります。
@@ -602,7 +602,7 @@ New:
 
 ```twig
 {% set query = craft.entries()
-    .section('news') %}
+  .section('news') %}
 {% set total = query.count() %}
 {% set last = query.nth(total - 1) %}
 ```
