@@ -82,23 +82,23 @@ $myCategoryQuery = \craft\elements\Category::find();
 ```twig
 {# Create a category query with the 'group' parameter #}
 {% set myCategoryQuery = craft.categories()
-    .group('topics') %}
+  .group('topics') %}
 
 {# Fetch the categories #}
 {% set categories = myCategoryQuery.all() %}
 
 {# Display the navigation #}
 <ul>
-    {% nav category in categories %}
-        <li>
-            <a href="{{ category.url }}">{{ category.title }}</a>
-            {% ifchildren %}
-                <ul>
-                    {% children %}
-                </ul>
-            {% endifchildren %}
-        </li>
-    {% endnav %}
+  {% nav category in categories %}
+    <li>
+      <a href="{{ category.url }}">{{ category.title }}</a>
+      {% ifchildren %}
+        <ul>
+          {% children %}
+        </ul>
+      {% endifchildren %}
+    </li>
+  {% endnav %}
 </ul>
 ```
 
@@ -106,8 +106,8 @@ $myCategoryQuery = \craft\elements\Category::find();
 To maintain the exact order you see in the control panel, add `orderBy('lft ASC')` to your query:
 ```twig
 {% set myCategoryQuery = craft.categories()
-    .group('topics')
-    .orderBy('lft ASC') %}
+  .group('topics')
+  .orderBy('lft ASC') %}
 ```
 :::
 
