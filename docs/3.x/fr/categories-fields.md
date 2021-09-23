@@ -74,8 +74,8 @@ Possible values include:
 ```twig
 {# Fetch entries with a related category #}
 {% set entries = craft.entries()
-    .myFieldHandle(':notempty:')
-    .all() %}
+  .myFieldHandle(':notempty:')
+  .all() %}
 ```
 ```php
 {% set relatedCategories = entry.myFieldHandle %}
@@ -105,11 +105,11 @@ To loop through all of the related categories as a flat list, call [all()](craft
 ```twig
 {% set relatedCategories = entry.myFieldHandle.all() %}
 {% if relatedCategories|length %}
-    <ul>
-        {% for rel in relatedCategories %}
-            <li><a href="{{ rel.url }}">{{ rel.title }}</a></li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for rel in relatedCategories %}
+      <li><a href="{{ rel.url }}">{{ rel.title }}</a></li>
+    {% endfor %}
+  </ul>
 {% endif %}
 ```
 ```php
@@ -127,18 +127,18 @@ Or you can show them as a hierarchical list with the [nav](dev/tags.md#nav) tag:
 ```twig
 {% set relatedCategories = entry.myFieldHandle.all() %}
 {% if relatedCategories|length %}
-    <ul>
-        {% nav rel in relatedCategories %}
-            <li>
-                <a href="{{ rel.url }}">{{ rel.title }}</a>
-                {% ifchildren %}
-                    <ul>
-                        {% children %}
-                    </ul>
-                {% endifchildren %}
-            </li>
-        {% endnav %}
-    </ul>
+  <ul>
+    {% nav rel in relatedCategories %}
+      <li>
+        <a href="{{ rel.url }}">{{ rel.title }}</a>
+        {% ifchildren %}
+          <ul>
+            {% children %}
+          </ul>
+        {% endifchildren %}
+      </li>
+    {% endnav %}
+  </ul>
 {% endif %}
 ```
 
@@ -148,7 +148,7 @@ an [Category](craft3:craft\elements\Category) object
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
-    <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
+  <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
 {% endif %}
 ```
 ```php
@@ -164,7 +164,7 @@ If you need to check for related categories without fetching them, you can call 
 ::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
-    <p>There are related categories!</p>
+  <p>There are related categories!</p>
 {% endif %}
 ```
 ```php
@@ -179,8 +179,8 @@ You can set [parameters](categories.md#parameters) on the category query as well
 ::: code
 ```twig
 {% set relatedCategories = clone(entry.myFieldHandle)
-    .leaves()
-    .all() %}
+  .leaves()
+  .all() %}
 ```
 ```php
 $myField = clone $entry->myFieldHandle;
@@ -207,33 +207,33 @@ For example, you could create a list of checkboxes for each of the possible rela
 
 {# Get all of the possible category options #}
 {% set possibleCategories = craft.categories()
-    .group('food')
-    .all() %}
+  .group('food')
+  .all() %}
 
 {# Get the currently related category IDs #}
 {% set relatedCategoryIds = entry is defined
-    ? entry.myFieldHandle.ids()
-    : [] %}
+  ? entry.myFieldHandle.ids()
+  : [] %}
 
 <ul>
-    {% nav possibleCategory in possibleCategories %}
-        <li>
-            <label>
-                {{ input(
-                    'checkbox',
-                    'fields[myFieldHandle][]',
-                    possibleCategory.id,
-                    { checked: possibleCategory.id in relatedCategoryIds }
-                ) }}
-                {{ possibleCategory.title }}
-            </label>
-            {% ifchildren %}
-                <ul>
-                    {% children %}
-                </ul>
-            {% endifchildren %}
-        </li>
-    {% endnav %}
+  {% nav possibleCategory in possibleCategories %}
+    <li>
+      <label>
+        {{ input(
+          'checkbox',
+          'fields[myFieldHandle][]',
+          possibleCategory.id,
+          { checked: possibleCategory.id in relatedCategoryIds }
+        ) }}
+        {{ possibleCategory.title }}
+      </label>
+      {% ifchildren %}
+        <ul>
+          {% children %}
+        </ul>
+      {% endifchildren %}
+    </li>
+  {% endnav %}
 </ul>
 ```
 
@@ -243,6 +243,6 @@ Note that it’s not possible to customize the order that categories will be rel
 
 ## See Also
 
-* [Category Queries](categories.md#querying-categories)
-* <craft3:craft\elements\Category>
-* [Relations](relations.md)
+- [Category Queries](categories.md#querying-categories)
+- <craft3:craft\elements\Category>
+- [Relations](relations.md)
