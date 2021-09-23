@@ -101,8 +101,8 @@ You can choose which custom fields should be available for your assets from **Se
 ```twig
 {# Fetch entries with a related asset #}
 {% set entries = craft.entries()
-    .myFieldHandle(':notempty:')
-    .all() %}
+  .myFieldHandle(':notempty:')
+  .all() %}
 ```
 ```php
 // Fetch entries with a related asset
@@ -133,11 +133,11 @@ That will give you an [asset query](assets.md#querying-assets), prepped to outpu
 ```twig
 {% set relatedAssets = entry.myFieldHandle.all() %}
 {% if relatedAssets|length %}
-    <ul>
-        {% for rel in relatedAssets %}
-            <li><a href="{{ rel.url }}">{{ rel.filename }}</a></li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for rel in relatedAssets %}
+      <li><a href="{{ rel.url }}">{{ rel.filename }}</a></li>
+    {% endfor %}
+  </ul>
 {% endif %}
 ```
 ```php
@@ -163,7 +163,7 @@ if (count($relatedAssets)) {
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
-    <p><a href="{{ rel.url }}">{{ rel.filename }}</a></p>
+  <p><a href="{{ rel.url }}">{{ rel.filename }}</a></p>
 {% endif %}
 ```
 ```php
@@ -179,7 +179,7 @@ if ($rel) {
 ::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
-    <p>There are related assets!</p>
+  <p>There are related assets!</p>
 {% endif %}
 ```
 ```php
@@ -194,8 +194,8 @@ if ($entry->myFieldHandle->exists()) {
 ::: code
 ```twig
 {% set relatedAssets = clone(entry.myFieldHandle)
-    .kind('image')
-    .all() %}
+  .kind('image')
+  .all() %}
 ```
 ```php
 $relatedAssets = (clone $entry->myFieldHandle)
@@ -221,33 +221,33 @@ For example, you could create a list of checkboxes for each of the possible rela
 
 {# Get all of the possible asset options #}
 {% set possibleAssets = craft.assets()
-    .volume('siteAssets')
-    .kind('image')
-    .orderBy('filename ASC')
-    .withTransforms([{ width: 100, height: 100 }])
-    .all() %}
+  .volume('siteAssets')
+  .kind('image')
+  .orderBy('filename ASC')
+  .withTransforms([{ width: 100, height: 100 }])
+  .all() %}
 
 {# Get the currently related asset IDs #}
 {% set relatedAssetIds = entry is defined
-    ? entry.myFieldHandle.ids()
-    : [] %}
+  ? entry.myFieldHandle.ids()
+  : [] %}
 
 <ul>
-    {% for possibleAsset in possibleAssets %}
-        <li>
-            <label>
-                {{ input(
-                    'checkbox',
-                    'fields[myFieldHandle][]',
-                    possibleAsset.id,
-                    { checked: possibleAsset.id in relatedAssetIds }
-                ) }}
-                {{ tag('img', { src: possibleAsset.url }) }}
-                {{ possibleAsset.getImg({ width: 100, height: 100 }) }}
-                {{ possibleAsset.filename }}
-            </label>
-        </li>
-    {% endfor %}
+  {% for possibleAsset in possibleAssets %}
+    <li>
+      <label>
+        {{ input(
+          'checkbox',
+          'fields[myFieldHandle][]',
+          possibleAsset.id,
+          { checked: possibleAsset.id in relatedAssetIds }
+        ) }}
+        {{ tag('img', { src: possibleAsset.url }) }}
+        {{ possibleAsset.getImg({ width: 100, height: 100 }) }}
+        {{ possibleAsset.filename }}
+      </label>
+    </li>
+  {% endfor %}
 </ul>
 ```
 
@@ -271,8 +271,8 @@ Don’t forget to set `enctype="multipart/form-data"` on your `<form>` tag so yo
 
 ```twig
 {{ hiddenInput(
-    'fields[myFieldHandle][data][]',
-    'data:image/jpeg;base64,my-base64-data'
+  'fields[myFieldHandle][data][]',
+  'data:image/jpeg;base64,my-base64-data'
 ) }}
 {{ hiddenInput('fields[myFieldHandle][filename][]', 'myFile.ext') }}
 ```
@@ -285,9 +285,9 @@ You can do this by passing each of the related asset IDs in the field data array
 {# Provide each existing asset ID in the array of field data #}
 {% for relatedAssetId in entry.myFieldHandle.ids() %}
   {{ input(
-      'hidden',
-      'fields[myFieldHandle][]',
-      relatedAssetId
+    'hidden',
+    'fields[myFieldHandle][]',
+    relatedAssetId
   ) }}
 {% endfor %}
 
@@ -298,6 +298,7 @@ You can do this by passing each of the related asset IDs in the field data array
 
 ## 関連項目
 
-* [アセットクエリ](assets.md#querying-assets)
-* <craft3:craft\elements\Asset>
-* [リレーション](relations.md)
+- [アセットクエリ](assets.md#querying-assets)
+- <craft3:craft\elements\Asset>
+- [リレーション](relations.md)
+-
