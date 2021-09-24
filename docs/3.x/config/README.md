@@ -72,7 +72,7 @@ You can override these default aliases with the <config3:aliases> config setting
 
 ```php
 'aliases' => [
-    '@web' => 'http://my-project.com',
+    '@web' => 'https://my-project.com',
 ];
 ```
 
@@ -80,7 +80,7 @@ If your web root is something besides `web/`, `public/`, `public_html/`, or `htm
 
 ```php
 'aliases' => [
-    '@web' => 'http://my-project.com',
+    '@web' => 'https://my-project.com',
     '@webroot' => dirname(__DIR__) . '/path/to/webroot',
 ];
 ```
@@ -89,7 +89,7 @@ You can define additional custom aliases using the <config3:aliases> config sett
 
 ```php
 'aliases' => [
-    '@web' => 'http://my-project.com',
+    '@web' => 'https://my-project.com',
     '@webroot' => dirname(__DIR__) . '/path/to/webroot',
     '@assetBaseUrl' => '@web/assets',
     '@assetBasePath' => '@webroot/assets',
@@ -101,7 +101,7 @@ With those in place, you could begin your asset volumes’ Base URL and File Sys
 If you’d like, you can set the alias values with environment variables, either from your `.env` file or somewhere in your environment’s configuration:
 
 ```bash
-ASSETS_BASE_URL=http://my-project.com/assets
+ASSETS_BASE_URL=https://my-project.com/assets
 ASSETS_BASE_PATH=/path/to/webroot/assets
 ```
 

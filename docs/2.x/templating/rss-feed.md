@@ -8,7 +8,7 @@ If you save this in a template that ends with a “.rss” file extension, Craft
 
 ```twig
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="https://www.w3.org/2005/Atom">
   <channel>
     <title>{{ siteName }}</title>
     <link>{{ siteUrl }}</link>
