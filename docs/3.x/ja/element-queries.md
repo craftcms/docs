@@ -198,8 +198,12 @@ $entryIds = Entry::find()
 - [min()](yii2:yii\db\Query::min())
 - [max()](yii2:yii\db\Query::max())
 
+:::tip
+If you need to reference a custom field column in any of the above methods, you will need to use its complete column name (e.g. `field_altText_xssyxqvs`).
+:::
+
 ::: tip
-エレメントクエリをカスタマイズする際、[getRawSql()](craft3:craft\db\Query::getRawSql()) を呼び出すことで、クエリによって実行される完全な SQL を取得できます。
+When customizing an element query, you can call [getRawSql()](craft3:craft\db\Query::getRawSql()) to get the full SQL that is going to be executed by the query, so you have a better idea of what to modify.
 
 ```twig
 {{ dump(query.getRawSql()) }}
