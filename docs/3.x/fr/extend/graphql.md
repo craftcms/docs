@@ -183,7 +183,10 @@ Event::on(
     Gql::class,
     Gql::EVENT_REGISTER_GQL_QUERIES,
     function(RegisterGqlQueriesEvent $event) {
-        $event->queries["queryName"] = Widget::getQueries();
+        $event->queries = array_merge(
+            $event->queries,
+            Widget::getQueries()
+        );
     }
 );
 ```
@@ -548,7 +551,7 @@ Our single-flavor widget wouldn’t actually need to generate multiple types sin
 namespace mynamespace\gql\types\generators;
 
 use mynamespace\elements\Widget as WidgetElement;
-use mynamespace\gql\types\elements\Widget as WidgetType;
+use mynamespace\gql\types\elements\Widget;
 use mynamespace\gql\interfaces\elements\Widget as WidgetInterface;
 use craft\gql\base\GeneratorInterface;
 use craft\gql\GqlEntityRegistry;
@@ -576,7 +579,7 @@ class WidgetType implements GeneratorInterface
         return GqlEntityRegistry::getEntity($typeName) ?:
             GqlEntityRegistry::createEntity(
                 $typeName,
-                new WidgetType([
+                new Widget([
                     'name' => $typeName,
                     'fields' => function() use ($widgetFields) {
                         return $widgetFields;
@@ -602,7 +605,7 @@ namespace mynamespace\gql\types\generators;
 
 use mynamespace\Plugin;
 use mynamespace\elements\Widget as WidgetElement;
-use mynamespace\gql\types\elements\Widget as WidgetType;
+use mynamespace\gql\types\elements\Widget;
 use mynamespace\gql\interfaces\elements\Widget as WidgetInterface;
 use mynamespace\helpers\Gql as MyGqlHelper;
 use craft\gql\base\GeneratorInterface;
@@ -637,7 +640,7 @@ class WidgetType implements GeneratorInterface
     public static function generateType($context): ObjectType
     {
         // Get the intended GQL type name as determined by the element type
-        $typeName = WidgetElement::gqlTypeNameByContext($widgetType);
+        $typeName = WidgetElement::gqlTypeNameByContext($context);
 
         // Get element’s user-defined content fields and
         $contentFieldGqlTypes = self::getContentFields($context);
@@ -655,7 +658,7 @@ class WidgetType implements GeneratorInterface
         return GqlEntityRegistry::getEntity($typeName) ?:
             GqlEntityRegistry::createEntity(
                 $typeName,
-                new WidgetType([
+                new Widget([
                     'name' => $typeName,
                     'fields' => function() use ($widgetFields) {
                         return $widgetFields;
