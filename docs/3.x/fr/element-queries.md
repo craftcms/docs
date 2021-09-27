@@ -198,6 +198,10 @@ Element queries are specialized [query builders](https://www.yiiframework.com/do
 - [min()](yii2:yii\db\Query::min())
 - [max()](yii2:yii\db\Query::max())
 
+:::tip
+If you need to reference a custom field column in any of the above methods, you will need to use its complete column name (e.g. `field_altText_xssyxqvs`).
+:::
+
 ::: tip
 When customizing an element query, you can call [getRawSql()](craft3:craft\db\Query::getRawSql()) to get the full SQL that is going to be executed by the query, so you have a better idea of what to modify.
 
