@@ -72,16 +72,15 @@ Craft のいくつかの設定やファンクションでは、基本ファイ�
 
 ```php
 'aliases' => [
-    '@assetBaseUrl' => 'http://my-project.com/assets',
-    '@assetBasePath' => '/path/to/web/assets',
-],
+    '@web' => 'https://my-project.com',
+];
 ```
 
 ウェブルートが `web/`、`public/`、`public_html/`、または、`html/` 以外だったり、Craft の実行ファイルと一緒に配置されていない場合、`@webroot` エイリアスを上書きして、コンソールコマンドに対して適切に定義されるようにする必要があります。
 
 ```php
 'aliases' => [
-    '@web' => 'http://my-project.com',
+    '@web' => 'https://my-project.com',
     '@webroot' => dirname(__DIR__) . '/path/to/webroot',
 ];
 ```
@@ -90,7 +89,7 @@ Craft のいくつかの設定やファンクションでは、基本ファイ�
 
 ```php
 'aliases' => [
-    '@web' => 'http://my-project.com',
+    '@web' => 'https://my-project.com',
     '@webroot' => dirname(__DIR__) . '/path/to/webroot',
     '@assetBaseUrl' => '@web/assets',
     '@assetBasePath' => '@webroot/assets',
@@ -102,8 +101,8 @@ Craft のいくつかの設定やファンクションでは、基本ファイ�
 必要であれば、`.env` ファイルや環境設定のどこかで、環境変数のエイリアス値をセットできます。
 
 ```bash
-ASSETS_BASE_URL=http://my-project.com/assets
-ASSETS_BASE_PATH=/path/to/web/assets
+ASSETS_BASE_URL=https://my-project.com/assets
+ASSETS_BASE_PATH=/path/to/webroot/assets
 ```
 
 [getenv()](http://php.net/manual/en/function.getenv.php) を利用して、エイリアスの定義にセットできます。
