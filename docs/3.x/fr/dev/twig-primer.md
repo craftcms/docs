@@ -484,7 +484,7 @@ For example, you can create an `_html5.twig` template in your `templates/` folde
 
 ```twig
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ currentSite.language }}">
+<html xmlns="https://www.w3.org/1999/xhtml" lang="{{ currentSite.language }}">
 <head>
   {% block head %}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
