@@ -6,6 +6,10 @@ Theme and significant content changes will be documented in this file.
 ### Added
 - Documented Matrix field’s newly-supported values in Craft 3.7.14.
 
+## 2021-09-27
+### Changed
+- Added tip about referencing custom field columns by their full column name.
+
 ## 2021-09-14
 ### Added
 - Documented `up` command added in Craft 3.7.13.
