@@ -34,10 +34,14 @@ When [querying for elements](element-queries.md) that have a Matrix field, you c
 
 Possible values include:
 
-| Value          | Fetches elements…                    |
-| -------------- | ------------------------------------ |
-| `':empty:'`    | that don’t have any Matrix blocks.   |
-| `':notempty:'` | that have at least one Matrix block. |
+| Value                   | Fetches elements…                                                         |
+| ----------------------- | ------------------------------------------------------------------------- |
+| `':empty:'`             | that don’t have any Matrix blocks.                                        |
+| `':notempty:'`          | that have at least one Matrix block.                                      |
+| `100`                   | that have a Matrix block with an ID of 100.                               |
+| `[100, 200]`            | that have Matrix blocks with IDs of 100 or 200.                           |
+| a [MatrixBlock](craft3:craft\elements\MatrixBlock) object | that have the Matrix block.             |
+| an array of [MatrixBlock](craft3:craft\elements\MatrixBlock) objects | that have the Matrix blocks. |
 
 ::: code
 ```twig
@@ -50,6 +54,21 @@ Possible values include:
 // Fetch entries with a Matrix block
 $entries = \craft\elements\Entry::find()
     ->myFieldHandle(':notempty:')
+    ->all();
+```
+:::
+
+::: code
+```twig
+{# Fetch entries with Matrix block ID 100 or 200 #}
+{% set entries = craft.entries()
+  .myFieldHandle([100, 200])
+  .all() %}
+```
+```php
+// Fetch entries with a Matrix block
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle([100, 200])
     ->all();
 ```
 :::
