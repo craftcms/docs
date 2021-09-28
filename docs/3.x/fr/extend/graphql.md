@@ -326,55 +326,30 @@ Craft also includes more complex, relational input objects:
 
 You can use any of these in your type definitions, i.e. `DateTime::getType()` or `Asset::getType()`.
 
-### Example Type Class
+### Example Element Type
 
-This example extends Craft’s element GraphQL [interface](#interfaces).
+::: tip
+“Element Type” in this context refers to the GraphQL type for our custom element, as opposed to Craft’s concept of [Element Types](./element-types.md) that are not GraphQL-specific.
+:::
 
-It does this in order to define a single GraphQL type for our custom Widget element that adds a custom `approved` field:
+A custom element like our Widget would probably best be described by two classes: an [interface](#interfaces) and a type class that implements it.
+
+The type class for the element is simple: it declares its interface—which we’ll get to in a moment—and otherwise leans on <craft3:craft\gql\types\elements\Element::resolve()>, which you could further customize in a more complex situation.
 
 ```php
-namespace mynamespace\gql\interfaces\elements;
+namespace mynamespace\gql\types\elements;
 
-use GraphQL\Type\Definition\Type;
-use GraphQL\Type\Definition\InterfaceType;
-use craft\gql\GqlEntityRegistry;
+use mynamespace\gql\interfaces\elements\Widget as WidgetInterface;
 
-class Widget extends \craft\gql\interfaces\Element
+class Widget extends \craft\gql\types\elements\Element
 {
-    public static function getName(): string
+    public function __construct(array $config)
     {
-        return 'WidgetInterface';
-    }
+        $config['interfaces'] = [
+            WidgetInterface::getType(),
+        ];
 
-    public static function getType($fields = null): Type
-    {
-        // Return the type if it’s already been created
-        if ($type = GqlEntityRegistry::getEntity(self::getName())) {
-            return $type;
-        }
-
-        // Otherwise create the type via the entity registry, which handles prefixing
-        return GqlEntityRegistry::createEntity(self::getName(), new InterfaceType([
-            'name' => static::getName(),
-            'fields' => self::class . '::getFieldDefinitions',
-            'description' => 'This is the interface implemented by all widgets.',
-            'resolveType' => self::class . '::resolveElementTypeName',
-        ]));
-    }
-
-    public static function getFieldDefinitions(): array
-    {
-        // Add our custom widget’s field to common ones for all elements
-        return TypeManager::prepareFieldDefinitions(array_merge(
-            parent::getFieldDefinitions(),
-            [
-                'approved' => [
-                    'name' => 'approved',
-                    'type' => Type::boolean(),
-                    'description' => 'User account ID of the partner listing’s owner.'
-                ],
-            ]
-        ), self::getName());
+        parent::__construct($config);
     }
 }
 ```
@@ -453,6 +428,59 @@ You don’t have to use interfaces, but they’re a nice way of formalizing the 
 - <craft3:craft\gql\interfaces\elements\Tag>
 - <craft3:craft\gql\interfaces\elements\User>
 
+### Example Interface
+
+This example extends Craft’s element GraphQL interface.
+
+It does this in order to define a single GraphQL type for our custom Widget element that adds a custom `approved` field:
+
+```php
+namespace mynamespace\gql\interfaces\elements;
+
+use GraphQL\Type\Definition\Type;
+use GraphQL\Type\Definition\InterfaceType;
+use craft\gql\GqlEntityRegistry;
+
+class Widget extends \craft\gql\interfaces\Element
+{
+    public static function getName(): string
+    {
+        return 'WidgetInterface';
+    }
+
+    public static function getType($fields = null): Type
+    {
+        // Return the type if it’s already been created
+        if ($type = GqlEntityRegistry::getEntity(self::getName())) {
+            return $type;
+        }
+
+        // Otherwise create the type via the entity registry, which handles prefixing
+        return GqlEntityRegistry::createEntity(self::getName(), new InterfaceType([
+            'name' => static::getName(),
+            'fields' => self::class . '::getFieldDefinitions',
+            'description' => 'This is the interface implemented by all widgets.',
+            'resolveType' => self::class . '::resolveElementTypeName',
+        ]));
+    }
+
+    public static function getFieldDefinitions(): array
+    {
+        // Add our custom widget’s field to common ones for all elements
+        return TypeManager::prepareFieldDefinitions(array_merge(
+            parent::getFieldDefinitions(),
+            [
+                'approved' => [
+                    'name' => 'approved',
+                    'type' => Type::boolean(),
+                    'description' => 'Whether the widget is approved.'
+                ],
+            ]
+        ), self::getName());
+    }
+}
+```
+
 ## Resolvers
 
 A resolver is responsible for mapping a GraphQL API field to its Craft API equivalent.
@@ -515,7 +543,7 @@ The handling of `$source` here is important, because `prepareQuery()` may be cal
 
 Craft introduces the concept of generators to bridge the gap between a complex content model and a GraphQL schema that needs to detail every potential type of content.
 
-In the [example interface](#example-type-class) above, we kept things simple by adding only one GraphQL type to the schema. In other words, our widget only comes in one “flavor.” If the data you’re representing only appears in one form, that may work great!
+In the [example interface](#example-interface) above, we kept things simple by adding only one GraphQL type to the schema. In other words, our widget only comes in one “flavor.” If the data you’re representing only appears in one form, that may work great!
 
 It’s common in Craft, however, for elements to have multiple types: entries have sections and entry types, assets have volumes, categories have groups, and so on. The site developer can create however many of these flavors they’d like, and yet we still need each one to be accounted for in the GraphQL schema. This is exactly the situation generators help with.
 
