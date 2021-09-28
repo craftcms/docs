@@ -2,9 +2,12 @@
 
 Theme and significant content changes will be documented in this file.
 
-## Unpublished
+## 2021-09-28
 ### Added
 - Documented Matrix field’s newly-supported values in Craft 3.7.14.
+
+### Fixed
+- Fixed example errors and added missing element type example class in Extending GraphQL.
 
 ## 2021-09-27
 ### Changed
