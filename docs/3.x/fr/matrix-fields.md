@@ -34,10 +34,14 @@ When [querying for elements](element-queries.md) that have a Matrix field, you c
 
 Possible values include:
 
-| Value          | Fetches elements…                    |
-| -------------- | ------------------------------------ |
-| `':empty:'`    | that don’t have any Matrix blocks.   |
-| `':notempty:'` | that have at least one Matrix block. |
+| Value                                                                  | Fetches elements…                               |
+| ---------------------------------------------------------------------- | ----------------------------------------------- |
+| `':empty:'`                                                            | that don’t have any Matrix blocks.              |
+| `':notempty:'`                                                         | that have at least one Matrix block.            |
+| `100`                                                                  | that have a Matrix block with an ID of 100.     |
+| `[100, 200]`                                                           | that have Matrix blocks with IDs of 100 or 200. |
+| a [MatrixBlock](craft3:craft\elements\MatrixBlock) object            | that have the Matrix block.                     |
+| an array of [MatrixBlock](craft3:craft\elements\MatrixBlock) objects | that have the Matrix blocks.                    |
 
 ::: code
 ```twig
@@ -54,6 +58,21 @@ $entries = \craft\elements\Entry::find()
 ```
 :::
 
+::: code
+```twig
+{# Fetch entries with Matrix block ID 100 or 200 #}
+{% set entries = craft.entries()
+  .myFieldHandle([100, 200])
+  .all() %}
+```
+```php
+// Fetch entries with a Matrix block
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle([100, 200])
+    ->all();
+```
+:::
+
 ### Working with Matrix Field Data
 
 If you have an element with a Matrix field in your template, you can access its blocks using your Matrix field’s handle:
@@ -63,29 +82,13 @@ If you have an element with a Matrix field in your template, you can access its 
 {% set query = entry.myFieldHandle %}
 ```
 ```php
-{% for block in entry.myFieldHandle.all() %}
-    {% if block.type == "heading" %}
-        <h3>{{ block.heading }}</h3>
-    {% elseif block.type == "text" %}
-        {{ block.text|markdown }}
-    {% elseif block.type == "image" %}
-        {% set image = block.image.one() %}
-        {% if image %}
-            <img src="{{ image.getUrl('thumb') }}" width="{{ image.getWidth('thumb') }}" height="{{ image.getHeight('thumb') }}" alt="{{ image.title }}">
-        {% endif %}
-    {% elseif block.type == "quote" %}
-        <blockquote>
-            <p>{{ block.quote }}</p>
-            <cite>– {{ block.cite }}</cite>
-        </blockquote>
-    {% endif %}
-{% endfor %}
+$query = $entry->myFieldHandle;
 ```
 :::
 
-To loop through all of the blocks, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
+That will give you a [Matrix block query](matrix-blocks.md#querying-matrix-blocks), prepped to output all the enabled blocks for the given field.
 
-If you only want the first block, call [one()](craft3:craft\db\Query::one()) instead of `all()`, and then make sure it returned something:
+To loop through all the blocks, call [all()](craft3:craft\db\Query::all()) and loop over the results:
 
 ::: code
 ```twig
@@ -99,15 +102,16 @@ If you only want the first block, call [one()](craft3:craft\db\Query::one()) ins
 {% endif %}
 ```
 ```php
-{% set block = entry.myFieldHandle.one() %}
-{% if block %}
-    <!-- ...
-    -->
-{% endif %}
+$blocks = $entry->myFieldHandle->all();
+if (count($blocks)) {
+    foreach ($blocks as $block) {
+        // ...
+    }
+}
 ```
 :::
 
-All of the code you put within the for-loop will be repeated for each Matrix block in the field. The current block will get set to that `block` variable we’ve defined, and it will be a <craft3:craft\elements\MatrixBlock> model.
+All the code you put within the for-loop will be repeated for each Matrix block in the field. The current block will get set to that `block` variable we’ve defined, and it will be a <craft3:craft\elements\MatrixBlock> model.
 
 Here’s an example of what the template might look like for a Matrix field with four block types (Heading, Text, Image, and Quote). We can determine the current block type’s handle by checking `block.type` (<craft3:craft\elements\MatrixBlock::getType()>).
 
@@ -149,11 +153,9 @@ If you only want the first block, call [one()](craft3:craft\db\Query::one()) ins
 {% endif %}
 ```
 ```php
-{% set blocks = entry.myFieldHandle.all() %}
-{% if blocks|length %}
-    <ul>
-        {% for block in blocks %}
-            <!-- ...
+$block = $entry->myFieldHandle->one();
+if ($block) {
+    // ...
 }
 ```
 :::
@@ -207,7 +209,7 @@ It’s always a good idea to clone the Matrix query using the [clone()](./dev/fu
 
 ### Saving Matrix Fields in Entry Forms
 
-If you have an [entry form](dev/examples/entry-form.md) that needs to contain a Matrix field, you will need to submit your field value in this format:
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Matrix field, you will need to submit your field value in this format:
 
 ```
 - sortOrder
@@ -276,7 +278,7 @@ To show a “New Block” form, first come up with a temporary ID for the block,
 
 Append the temporary ID to the `sortOrder` array, and use it when outputting the block’s form inputs.
 
-If you will likely need to include a JavaScript-powered component to the field, which appends new block inputs to the form. New blocks should have an “ID” of `new:X`, where `X` is any number that is unique among all new blocks for the field.
+You’ll probably want to include a JavaScript-powered component to the field that appends new block inputs to the form. New blocks should have an “ID” of `new:X`, where `X` is any number that is unique among all new blocks for the field.
 
 For example, the first new block that is added to the form could have an “ID” of `new:1`, so its `type` input name would end up looking like this:
 
