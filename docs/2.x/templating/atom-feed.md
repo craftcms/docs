@@ -8,7 +8,7 @@ If you save this in a template that ends with a “.atom” file extension, Craf
 
 ```twig
 <?xml version="1.0"?>
-<feed xmlns="https://www.w3.org/2005/Atom">
+<feed xmlns="http://www.w3.org/2005/Atom">
   <title>{{ siteName }}</title>
   <link href="{{ siteUrl }}" />
   <link type="application/atom+xml" rel="self" href="{{ url(craft.request.path) }}" />

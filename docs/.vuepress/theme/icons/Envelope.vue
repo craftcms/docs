@@ -5,7 +5,7 @@
     data-prefix="fas"
     data-icon="envelope"
     role="img"
-    xmlns="https://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"
     class="svg-inline--fa fa-envelope fa-w-16 fa-3x"
     width="12"
