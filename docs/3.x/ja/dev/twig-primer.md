@@ -475,7 +475,7 @@ Twig テンプレートは他のテンプレートを**拡張**して、親よ�
 
 ```twig
 <!DOCTYPE html>
-<html xmlns="https://www.w3.org/1999/xhtml" lang="{{ currentSite.language }}">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ currentSite.language }}">
 <head>
   {% block head %}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
