@@ -429,7 +429,7 @@ You don’t have to use interfaces, but they’re a nice way of formalizing the 
 - <craft3:craft\gql\interfaces\elements\Tag>
 - <craft3:craft\gql\interfaces\elements\User>
 
-### Interface Example
+### Example Interface
 
 This example extends Craft’s element GraphQL interface.
 
@@ -544,7 +544,7 @@ The handling of `$source` here is important, because `prepareQuery()` may be cal
 
 Craft introduces the concept of generators to bridge the gap between a complex content model and a GraphQL schema that needs to detail every potential type of content.
 
-In the [example interface](#interface-example) above, we kept things simple by adding only one GraphQL type to the schema. In other words, our widget only comes in one “flavor.” If the data you’re representing only appears in one form, that may work great!
+In the [example interface](#example-interface) above, we kept things simple by adding only one GraphQL type to the schema. In other words, our widget only comes in one “flavor.” If the data you’re representing only appears in one form, that may work great!
 
 It’s common in Craft, however, for elements to have multiple types: entries have sections and entry types, assets have volumes, categories have groups, and so on. The site developer can create however many of these flavors they’d like, and yet we still need each one to be accounted for in the GraphQL schema. This is exactly the situation generators help with.
 
