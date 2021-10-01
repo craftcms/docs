@@ -5,6 +5,7 @@ Theme and significant content changes will be documented in this file.
 ## Unpublished
 ### Added
 - Documented `autoSetCartShippingMethodOption` setting added in Commerce 3.4.4.
+- Documented `clearLineItems` param added to the `cart/update-cart` controller action in Commerce 3.4.4.
 
 ## 2021-09-28
 ### Added
