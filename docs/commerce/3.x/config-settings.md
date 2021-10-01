@@ -200,6 +200,23 @@ Since
 Whether carts are can be marked as completed without a payment.
 
 
+### `autoSetCartShippingMethodOption`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [Settings::$autoSetCartShippingMethodOption](commerce3:craft\commerce\models\Settings::$autoSetCartShippingMethodOption)
+
+
+
+Whether the first available shipping method option should be set automatically on carts.
+
+
+
 ### `autoSetNewCartAddresses`
 
 Allowed types
