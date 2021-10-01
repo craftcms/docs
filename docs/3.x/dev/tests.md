@@ -122,6 +122,14 @@ Returns whether an object is numeric via PHP’s [`is_numeric()`](https://www.ph
 
 Returns whether an object is a resource via PHP’s [`is_resource()`](https://www.php.net/manual/en/function.is-resource.php) method.
 
+```twig
+{{ asset.getStream() is resource ? 'true' : 'false' }}
+{# result: true #}
+
+{{ siteUrl is resource ? 'true' : 'false' }}
+{# result: false #}
+```
+
 ## `scalar`
 
 Returns whether an object is a scalar via PHP’s [`is_scalar()`](https://www.php.net/manual/en/function.is-scalar.php) method.
