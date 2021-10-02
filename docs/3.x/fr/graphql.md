@@ -270,9 +270,13 @@ RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
 ## Caching
 
-Query results are cached to speed up subsequent queries. The GraphQL result cache is very simple, so if the site’s content or structure changes, the entire cache is invalidated.
+Query results are cached by default to speed up subsequent queries, and you can disable that caching with the <config3:enableGraphQlCaching> setting.
 
-Craft’s GraphQL result caching is enabled by default and you can disable it with the <config3:enableGraphQlCaching> setting.
+The entire GraphQL cache is purged for any schema changes, otherwise Craft only purges caches based on content changes relevant to a given query. The more specific your query, the less likely its cache will be cleared when an entry is saved or deleted. For example:
+
+- If the query includes the `id` argument, its caches will only be cleared when that entry is saved or deleted.
+- If the query includes `type` or `typeId` arguments, its caches will only be cleared when entries of the same type are saved or deleted.
+- If the query includes `section` or `sectionId` arguments, its caches will only be cleared when entries in the same section are saved or deleted.
 
 ## Interface Implementation
 
