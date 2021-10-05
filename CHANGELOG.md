@@ -2,7 +2,7 @@
 
 Theme and significant content changes will be documented in this file.
 
-## Unpublished
+## 2021-10-05
 ### Added
 - Documented new `array`, `callable`, `float`, `integer`, `numeric`, `resource`, `scalar`, and `string` Twig tests added in Craft 3.7.15.
 
