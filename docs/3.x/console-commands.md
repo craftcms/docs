@@ -204,6 +204,10 @@ boolean, 0 or 1 (defaults to 0)
 
 Allows you to manage GraphQL schemas.
 
+#### `graphql/create-token`
+
+Creates a new authorization token for a schema.
+
 #### `graphql/dump-schema`
 
 Dumps a given GraphQL schema to a file.
@@ -212,6 +216,10 @@ Dumps a given GraphQL schema to a file.
 
 `--token`
 : The token to look up to determine the appropriate GraphQL schema.
+
+#### `graphql/list-schemas`
+
+Lists all GraphQL schemas.
 
 #### `graphql/print-schema`
 
@@ -1336,6 +1344,10 @@ boolean, 0 or 1 (defaults to 0)
 
 `--inheritor`
 : The email or username of the user to inherit content when deleting a user.
+
+#### `users/impersonate`
+
+Generate a URL to impersonate a user.
 
 ## `utils/ascii-filenames`
 
