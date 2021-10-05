@@ -201,6 +201,10 @@ Runs garbage collection.
 
 Allows you to manage GraphQL schemas.
 
+#### `graphql/create-token`
+
+Creates a new authorization token for a schema.
+
 #### `graphql/dump-schema`
 
 Dumps a given GraphQL schema to a file.
@@ -209,6 +213,10 @@ Dumps a given GraphQL schema to a file.
 
 `--token`
 :   The token to look up to determine the appropriate GraphQL schema.
+
+#### `graphql/list-schemas`
+
+Lists all GraphQL schemas.
 
 #### `graphql/print-schema`
 
@@ -1132,7 +1140,7 @@ composer require --dev yiisoft/yii2-shell
 ```
 :::
 
-#### `utils/utils/prune-revisions/index` <badge>default</badge>
+#### `shell/index` <badge>default</badge>
 
 Runs an interactive shell.
 
@@ -1270,6 +1278,10 @@ Deletes a user.
 
 `--inheritor`
 :   The email or username of the user to inherit content when deleting a user.
+
+#### `users/impersonate`
+
+Generate a URL to impersonate a user.
 
 ## `utils/ascii-filenames`
 
