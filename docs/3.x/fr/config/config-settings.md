@@ -1936,7 +1936,7 @@ Allowed types :
 :   `mixed`
 
 Default value :
-:   `3600` (5 minutes)
+:   `3600` (1 hour)
 
 Defined by :
 :   [GeneralConfig::$invalidLoginWindowDuration](craft3:craft\config\GeneralConfig::$invalidLoginWindowDuration)
