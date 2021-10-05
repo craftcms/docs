@@ -202,38 +202,46 @@ Unloads the specified fixtures.
 
 GraphQL スキーマを管理できます。
 
+#### `graphql/create-token`
+
+Creates a new authorization token for a schema.
+
 #### `graphql/dump-schema`
 
-コンソールコマンドに関するヘルプ情報を提供します。
+Dumps a given GraphQL schema to a file.
 
-**オプション**
+**Options**
 
 `--token`
 :   The token to look up to determine the appropriate GraphQL schema.
 
+#### `graphql/list-schemas`
+
+Lists all GraphQL schemas.
+
 #### `graphql/print-schema`
 
-指定された GraphQL スキーマを出力します。
+Prints a given GraphQL schema.
 
-**実例**
+**Options**
 
 `--token`
 :   The token to look up to determine the appropriate GraphQL schema.
 
 ## `help`
 
-利用可能なすべてのコントローラーとアクションを機械可読形式でリストします。
+Provides help information about console commands.
 
 #### `help/index` <badge>default</badge>
 
-`action` で利用可能なすべてのオプションを機械可読形式でリストします。
+Displays available commands or the detailed information.
 
-**パラメータ**
+**Parameters**
 
 `command`
 :   The name of the command to show help about.\ If not provided, all available commands will be displayed.
 
-**実例**
+**Example**
 
 ```
 $ php craft help backup/db
@@ -293,7 +301,7 @@ Lists all available controllers and actions in machine-readable format.
 
 #### `help/list-action-options`
 
-ボリューム内のアセットのインデックスを再作成できます。
+List all available options for `action` in machine-readable format.
 
 **パラメータ**
 
@@ -302,9 +310,9 @@ Lists all available controllers and actions in machine-readable format.
 
 #### `help/usage`
 
-`action` の使用法を表示します。
+Displays usage information for `action`.
 
-**パラメータ**
+**Parameters**
 
 `action`
 :   Route to action. (required)
@@ -312,13 +320,13 @@ Lists all available controllers and actions in machine-readable format.
 
 ## `index-assets`
 
-すべてのボリュームに渡って、アセットのインデックスを再作成します。
+Allows you to re-index assets in volumes.
 
 #### `index-assets/all`
 
-指定されたボリュームのハンドルから、アセットのインデックスを再作成します。
+Re-indexes assets across all volumes.
 
-**オプション**
+**Options**
 
 `--cache-remote-images`
 :   Whether remote-stored images should be locally cached in the process.\ boolean, 0 or 1 (defaults to 0)
@@ -331,11 +339,11 @@ Lists all available controllers and actions in machine-readable format.
 
 #### `index-assets/one` <badge>default</badge>
 
-Craft が既にインストールされているかどうかをチェックします。
+Re-indexes assets from the given volume handle.
 
-インストールマイグレーションを実行します。
+It’s possible to provide a volume sub-path to index, e.g. `php craft index-assets/one volume-handle/path/to/folder`.
 
-**オプション**
+**Parameters**
 
 `handle`
 :   The handle of the volume to index. (required)
@@ -343,7 +351,7 @@ Craft が既にインストールされているかどうかをチェックし�
 `startAt`
 :   Integer, defaults to 0.
 
-**オプション**
+**Options**
 
 `--cache-remote-images`
 :   Whether remote-stored images should be locally cached in the process.\ boolean, 0 or 1 (defaults to 0)
@@ -356,17 +364,17 @@ Craft が既にインストールされているかどうかをチェックし�
 
 ## `install`
 
-Craft CMS の CLI インストーラーです。
+Craft CMS CLI installer.
 
 #### `install/check` <badge>default</badge>
 
-キャッシュタグを無効にできます。
+Checks whether Craft is already installed.
 
 #### `install/craft`
 
-すべてのキャッシュタグを無効にします。
+Runs the install migration.
 
-**オプション**
+**Options**
 
 `--email`
 :   The default email address for the first user to create during install.
@@ -388,28 +396,28 @@ Craft CMS の CLI インストーラーです。
 
 #### `install/plugin`
 
-プラグインをインストールします。 （**非推奨**、代わりに [`plugin/install`](#plugin-install) を利用してください。 ）
+Installs a plugin. (**Deprecated**, use [`plugin/install`](#plugin-install) instead.)
 
-**パラメータ**
+**Parameters**
 
 `handle`
 :   Handle of the plugin to be installed. (required)
 
 ## `invalidate-tags`
 
-現在のメーラー設定で、メールの送信をテストします。
+Allows you to invalidate cache tags.
 
 #### `invalidate-tags/all`
 
-すべてのテンプレートキャッシュタグを無効にします。
+Invalidates all cache tags.
 
 #### `invalidate-tags/graphql`
 
-Craft とプラグインのマイグレーションを管理します。
+Invalidates all GraphQL query cache tags.
 
 #### `invalidate-tags/index` <badge>default</badge>
 
-保留中のすべての Craft、プラグイン、および、コンテンツのマイグレーションを実行します。
+Lists the caches that can be cleared.
 
 #### `invalidate-tags/template`
 
@@ -419,9 +427,9 @@ Invalidates all template cache tags.
 
 #### `mailer/test`
 
-新しいマイグレーションを作成します。
+Tests sending an email with the current mailer settings.
 
-**パラメータ**
+**Options**
 
 `--to`
 :   Email address that should receive the test message.
@@ -432,9 +440,9 @@ Manages Craft and plugin migrations.
 
 #### `migrate/all`
 
-古いマイグレーションを戻すことで、アプリケーションをダウングレードします。
+Runs all pending Craft, plugin, and content migrations.
 
-**パラメータ**
+**Options**
 
 `--no-backup`
 :   Skip backing up the database.\ boolean, 0 or 1 (defaults to 0)
@@ -444,14 +452,14 @@ Manages Craft and plugin migrations.
 
 #### `migrate/create`
 
-適用されていない新しいマイグレーションを表示します。
+Creates a new migration.
 
-**パラメータ**
+**Parameters**
 
 `name`
 :   The name of the new migration. This should only contain letters, digits, and underscores. (required)
 
-**オプション**
+**Options**
 
 `--plugin`, `-p`
 :   The handle of the plugin to use during migration operations, or the plugin itself.
@@ -467,14 +475,14 @@ Manages Craft and plugin migrations.
 
 #### `migrate/down`
 
-マイグレーション履歴を表示します。
+Downgrades the application by reverting old migrations.
 
-**パラメータ**
+**Parameters**
 
 `limit`
 :   The number of migrations to be reverted. Defaults to 1, meaning the last applied migration will be reverted. When value is `all`, all migrations will be reverted.
 
-**オプション**
+**パラメータ**
 
 `--plugin`, `-p`
 :   The handle of the plugin to use during migration operations, or the plugin itself.
@@ -487,9 +495,9 @@ Manages Craft and plugin migrations.
 
 #### `migrate/fresh`
 
-すべてのテーブルと関連する制約を削除します。 最初からマイグレーションを開始します。
+Drops all tables and related constraints. Starts the migration from the beginning.
 
-**パラメータ**
+**Options**
 
 `--plugin`, `-p`
 :   The handle of the plugin to use during migration operations, or the plugin itself.
@@ -502,14 +510,14 @@ Manages Craft and plugin migrations.
 
 #### `migrate/history`
 
-マイグレーション履歴を指定したバージョンに変更します。
+Displays the migration history.
 
-**パラメータ**
+**Parameters**
 
 `limit`
 :   The maximum number of migrations to be displayed. (Defaults to 10.)\ If `all`, the whole migration history will be displayed.
 
-**パラメータ**
+**Options**
 
 `--plugin`, `-p`
 :   The handle of the plugin to use during migration operations, or the plugin itself.
@@ -524,12 +532,12 @@ Manages Craft and plugin migrations.
 
 Modifies the migration history to the specified version.
 
-**パラメータ**
+**Parameters**
 
 `version`
 :   The version at which the migration history should be marked. (required)\ This can be either the timestamp or the full name of the migration.\ You may specify the name `m000000_000000_base` to set the migration history to a state where no migration has been applied.
 
-**パラメータ**
+**Options**
 
 `--plugin`, `-p`
 :   The handle of the plugin to use during migration operations, or the plugin itself.
@@ -542,14 +550,14 @@ Modifies the migration history to the specified version.
 
 #### `migrate/new`
 
-新しいマイグレーションを適用して、アプリケーションをアップグレードします。
+Displays the un-applied new migrations.
 
-**パラメータ**
+**Parameters**
 
 `limit`
 :   The maximum number of new migrations to be displayed. (default: 10)\ If `all`, all available new migrations will be displayed.
 
-**パラメータ**
+**Options**
 
 `--plugin`, `-p`
 :   The handle of the plugin to use during migration operations, or the plugin itself.
@@ -562,14 +570,14 @@ Modifies the migration history to the specified version.
 
 #### `migrate/redo`
 
-最後のいくつかのマイグレーションを再適用します。
+Reapplies the last few migrations.
 
-**パラメータ**
+**Parameters**
 
 `limit`
 :   The number of migrations to be redone. Defaults to 1, meaning the last applied migration will be redone. When `all`, all migrations will be redone.
 
-**パラメータ**
+**Options**
 
 `--plugin`, `-p`
 :   The handle of the plugin to use during migration operations, or the plugin itself.
@@ -582,14 +590,14 @@ Modifies the migration history to the specified version.
 
 #### `migrate/to`
 
-指定されたバージョンまでアップグレード、または、ダウングレードします。
+Upgrades or downgrades till the specified version.
 
-**パラメータ**
+**Parameters**
 
 `version`
 :   Either the version name or the certain time value in the past that the application should be migrated to. This can be either the timestamp, the full name of the migration, the UNIX timestamp, or the parseable datetime string. (required)
 
-**オプション**
+**Options**
 
 `--plugin`, `-p`
 :   The handle of the plugin to use during migration operations, or the plugin itself.
@@ -602,14 +610,14 @@ Modifies the migration history to the specified version.
 
 #### `migrate/up` <badge>default</badge>
 
-[Retry Duration](config3:retryDuration) 設定を利用して、*システム全体* の `Retry-After` ヘッダーを構成できます。
+Upgrades the application by applying new migrations.
 
-**パラメータ**
+**Parameters**
 
 `limit`
 :   The number of new migrations to be applied. If 0, it means applying all available new migrations. (Defaults to 0.)
 
-**実例**
+**オプション**
 
 `--plugin`, `-p`
 :   The handle of the plugin to use during migration operations, or the plugin itself.
@@ -622,9 +630,9 @@ Modifies the migration history to the specified version.
 
 ## `off`
 
-設定はプロジェクトコンフィグの `system.live` 値よりも優先されるため、`config/general.php` で `isSystemLive` を `true` または `false` にセットしている場合、これらの`on`/`off` コマンドはエラーになります。 ::: <config3:allowAdminChanges> restrictions—meant for temporary use during the deployment process.
+Disables `system.live` project config value—bypassing any <config3:allowAdminChanges> restrictions—meant for temporary use during the deployment process.
 
-**オプション**
+**Options**
 
 `--retry`
 :   Number of seconds that the `Retry-After` HTTP header should be set to for 503 responses.
@@ -632,12 +640,12 @@ Modifies the migration history to the specified version.
 The [Retry Duration](config3:retryDuration) setting can be used to configure a *system-wide* `Retry-After` header.
 
 ::: warning
-<config3:isSystemLive> setting takes precedence over the `system.live` project config value, so if `config/general.php` sets `isSystemLive` to `true` or `false` these `on`/`off` commands to error out.
+The <config3:isSystemLive> setting takes precedence over the `system.live` project config value, so if `config/general.php` sets `isSystemLive` to `true` or `false` these `on`/`off` commands to error out.
 :::
 
-**実例**
+**Example**
 
-次のコードを実行するとシステムがオフラインになり、再び [on](#on) に切り替えるまで 503 レスポンスを返します。
+Running the following will take the system offline and return 503 responses until it’s switched [on](#on) again:
 
 ```
 $ php craft off --retry=60
@@ -647,9 +655,9 @@ The retry duration is now set to 60.
 
 ## `on`
 
-プラグインを有効にします。
+Turns the system on again.
 
-**パラメータ**
+**Example**
 
 ```
 $ php craft on
@@ -658,11 +666,11 @@ The system is now online.
 
 ## `plugin`
 
-プラグインをインストールします。
+Manage plugins.
 
 #### `plugin/disable`
 
-プラグインを無効にします。
+Disables a plugin.
 
 **パラメータ**
 
@@ -671,45 +679,45 @@ The system is now online.
 
 #### `plugin/enable`
 
-プラグインを管理します。
+Enables a plugin.
 
-**パラメータ**
+**オプション**
 
 `handle`
 :   The plugin handle. (required)
 
 #### `plugin/install`
 
-プロジェクトコンフィグファイルの変更を適用します。
+Installs a plugin.
 
-**オプション**
+**パラメータ**
 
 `handle`
 :   The plugin handle. (required)
 
 #### `plugin/uninstall`
 
-保留中のプロジェクトコンフィグの YAML の変更点との差分を出力します。
+Uninstalls a plugin.
 
-**パラメータ**
+**Parameters**
 
 `handle`
 :   The plugin handle. (required)
 
-**オプション**
+**Options**
 
 `--force`
 :   Whether the plugin uninstallation should be forced.\ boolean, 0 or 1 (defaults to 0)
 
 ## `project-config`
 
-キューを管理します。
+Manages the Project Config.
 
 #### `project-config/apply`
 
-ジョブを実行します。
+Applies project config file changes.
 
-**パラメータ**
+**オプション**
 
 `--force`
 :   Whether every entry change should be force-applied.\ boolean, 0 or 1 (defaults to 0)
@@ -718,43 +726,43 @@ The system is now online.
 
 Prints a diff of the pending project config YAML changes.
 
-**オプション**
+**Options**
 
 `--path`
 :   Treats the loaded project config as the source of truth, rather than the YAML files.\ boolean, 0 or 1 (defaults to 0)
 
 #### `project-config/rebuild`
 
-新しく追加されたキュージョブを待ち受けて、それを実行します。
+Rebuilds the project config.
 
 #### `project-config/sync`
 
-[`apply`](#project-config-apply) のエイリアスです。
+Alias for [`apply`](#project-config-apply).
 
-#### `プロジェクトコンフィグを管理します。`
+#### `project-config/touch`
 
 Updates the `dateModified` value in `config/project/project.yaml`.
 
-キューからジョブを解放します。
+If a Git conflict is detected on the `dateModified` value, a conflict resolution will also be attempted.
 
-**パラメータ**
+**Parameters**
 
 `timestamp`
 :   The updated `dateModified` value. If `null`, the current time will be used. (optional int, defaults to `null`)
 
-#### `プロジェクトコンフィグを再構築します。`
+#### `project-config/write`
 
 Writes out the currently-loaded project config as YAML files to the `config/project/` folder, discarding any pending YAML changes.
 
 ## `queue`
 
-失敗したジョブをキューに再度追加します。
+Manages the queue.
 
 #### `queue/exec`
 
-キュー内のすべてのジョブを実行します。
+Executes a job.
 
-**パラメータ**
+**Parameters**
 
 `id`
 :   Of a message. (required string)
@@ -768,25 +776,25 @@ Writes out the currently-loaded project config as YAML files to the `config/proj
 `pid`
 :   Of a worker. (required int)
 
-**オプション**
+**Options**
 
 `--verbose`, `-v`
 :   Verbose mode of a job execute. If enabled, execute result of each job will be printed.\ boolean, 0 or 1 (defaults to 0)
 
 #### `queue/info` <badge>default</badge>
 
-エレメントを一括保存できます。
+Info about queue status.
 
 #### `queue/listen`
 
-アセットを再保存します。
+Listens for newly-added queue jobs and runs them.
 
-**オプション**
+**Parameters**
 
 `delay`
 :   Number of seconds for waiting new job. (Defaults to 3.)
 
-**オプション**
+**Options**
 
 `--isolate`
 :   isolate mode. It executes a job in a child process.\ boolean, 0 or 1 (defaults to 1)
@@ -806,7 +814,7 @@ Releases job(s) from the queue.
 `job`
 :   The job ID to release. Pass `all` to release all jobs. (required)
 
-**オプション**
+**Example**
 
 ```
 php craft queue/release all
@@ -814,18 +822,18 @@ php craft queue/release all
 
 #### `queue/retry`
 
-行列ブロックを再保存します。
+Re-adds failed job(s) to the queue.
 
-**オプション**
+**Parameters**
 
 `job`
 :   The job ID that should be retried, or pass `all` to retry all failed jobs. (required)
 
 #### `queue/run`
 
-タグを再保存します。
+Runs all jobs in the queue.
 
-**オプション**
+**Options**
 
 `--isolate`
 :   isolate mode. It executes a job in a child process.\ boolean, 0 or 1 (defaults to 1)
@@ -838,11 +846,11 @@ php craft queue/release all
 
 ## `resave`
 
-ユーザーを再保存します。
+Allows you to bulk-save elements.
 
 #### `resave/assets`
 
-エントリを再保存します。
+Re-saves assets.
 
 **オプション**
 
@@ -875,7 +883,7 @@ php craft queue/release all
 
 #### `resave/categories`
 
-カテゴリを再保存します。
+Re-saves categories.
 
 **オプション**
 
@@ -908,7 +916,7 @@ php craft queue/release all
 
 #### `resave/entries`
 
-Craft CMS のセットアップインストーラーです。
+Re-saves entries.
 
 **オプション**
 
@@ -944,7 +952,7 @@ Craft CMS のセットアップインストーラーです。
 
 #### `resave/matrix-blocks`
 
-[`setup/db-creds`](#setup-db-creds) のエイリアスです。
+Re-saves Matrix blocks.
 
 **オプション**
 
@@ -980,7 +988,7 @@ Craft CMS のセットアップインストーラーです。
 
 #### `resave/tags`
 
-新しいデータベース接続設定を `.env` ファイルに保存します。
+Re-saves tags.
 
 **オプション**
 
@@ -1013,9 +1021,9 @@ Craft CMS のセットアップインストーラーです。
 
 #### `resave/users`
 
-すべてのものを設定します。
+Re-saves users.
 
-**オプション**
+**Options**
 
 `--element-id`
 :   The ID(s) of the elements to resave.
@@ -1048,7 +1056,7 @@ Craft CMS のセットアップインストーラーです。
 
 #### `restore/db` <badge>default</badge>
 
-新しいセキュリティキーを生成し、それを `.env` ファイルに保存します。
+Restores a database from backup.
 
 **Parameters**
 
@@ -1059,15 +1067,15 @@ Craft CMS のセットアップインストーラーです。
 
 #### `serve/index` <badge>default</badge>
 
-Craft のサービスや Craft プロジェクトをテストするためのリソースを提供します。
+Runs the PHP built-in web server.
 
 ## `setup`
 
-現在のプロジェクトのテストスイートを設定します。
+Craft CMS setup installer.
 
 #### `setup/app-id`
 
-新しいアプリケーション ID を生成し、それを `.env` ファイルに保存します。
+Generates a new application ID and saves it in the `.env` file.
 
 #### `setup/db`
 
@@ -1075,13 +1083,13 @@ Alias for [`setup/db-creds`](#setup-db-creds).
 
 #### `setup/db-cache-table`
 
-Craft とプラグインをアップデートします。
+Creates a database table for storing DB caches.
 
 #### `setup/db-creds`
 
-現在の composer.json と composer.lock に基づいて、依存関係をインストールします。
+Stores new DB connection settings to the `.env` file.
 
-**オプション**
+**Options**
 
 `--database`
 :   The name of the database to select.
@@ -1109,11 +1117,11 @@ Craft とプラグインをアップデートします。
 
 #### `setup/index` <badge>default</badge>
 
-Craft、および / または、プラグインをアップデートします。
+Sets up all the things.
 
 #### `setup/php-session-table`
 
-PHP セッション情報を保存するデータベーステーブルを作成します。
+Creates a database table for storing PHP session information.
 
 #### `setup/security-key`
 
@@ -1121,18 +1129,19 @@ Generates a new security key and saves it in the `.env` file.
 
 #### `setup/welcome`
 
-すべての非 ASCII なアセットファイル名を ASCII に変換します。
+Called from the `post-create-project-cmd` Composer hook.
 
 ## `shell`
 
-すべてのエレメントの UID がユニークであることを確認します。
+::: tip
+This command requires the [`yiisoft/yii2-shell`](https://github.com/yiisoft/yii2-shell) package, which you may need to add to your project:
 
 ```
 composer require --dev yiisoft/yii2-shell
 ```
 :::
 
-#### `utils/utils/prune-revisions/index` <badge>default</badge>
+#### `shell/index` <badge>default</badge>
 
 Runs an interactive shell.
 
@@ -1158,27 +1167,27 @@ Psy Shell v0.10.4 (PHP 7.4.3 — cli) by Justin Hileman
   exit       End the current session and return to caller.                                Alias
 ```
 
-**オプション**
+**Options**
 
 `--include`
 :   Include file(s) before starting tinker shell.\ array
 
 ## `tests`
 
-カテゴリグループの構造データを修復します。
+Provides resources for testing Craft’s services and your Craft project.
 
 #### `tests/setup`
 
 Sets up a test suite for the current project.
 
-**オプション**
+**Parameters**
 
 `dst`
 :   The folder that the test suite should be generated in.\ Defaults to the current working directory.
 
 #### `tests/test`
 
-プロジェクトコンフィグのダブルパックされた連想配列を修復します。
+Don’t use this method; it won’t actually execute anything.
 
 ## `up`
 
@@ -1271,6 +1280,10 @@ Deletes a user.
 `--inheritor`
 :   The email or username of the user to inherit content when deleting a user.
 
+#### `users/impersonate`
+
+Generate a URL to impersonate a user.
+
 ## `utils/ascii-filenames`
 
 #### `utils/ascii-filenames/index` <badge>default</badge>
@@ -1291,7 +1304,7 @@ Prunes provisional drafts for elements that have more than one per user.
 
 Prunes provisional drafts for elements that have more than one per user.
 
-**オプション**
+**Options**
 
 `--dry-run`
 :   Whether this is a dry run.
