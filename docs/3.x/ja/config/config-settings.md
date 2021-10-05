@@ -1938,7 +1938,7 @@ Whether to enable CSRF protection via hidden form inputs for all forms submitted
 :   `mixed`
 
 デフォルト値
-:   `3600` (5 minutes)
+:   `3600` (1 hour)
 
 定義元
 :   [GeneralConfig::$invalidLoginWindowDuration](craft3:craft\config\GeneralConfig::$invalidLoginWindowDuration)
