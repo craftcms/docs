@@ -7,6 +7,11 @@ Theme and significant content changes will be documented in this file.
 - Documented `autoSetCartShippingMethodOption` setting added in Commerce 3.4.4.
 - Documented `clearLineItems` param added to the `cart/update-cart` controller action in Commerce 3.4.4.
 
+## 2021-10-05
+### Added
+- Documented new `array`, `callable`, `float`, `integer`, `numeric`, `resource`, `scalar`, and `string` Twig tests added in Craft 3.7.15.
+- Documented `graphql/create-token`, `graphql/list-schemas`, and `users/impersonate` commands added in Craft 3.7.15.
+
 ## 2021-09-28
 ### Added
 - Documented Matrix field’s newly-supported values in Craft 3.7.14.
