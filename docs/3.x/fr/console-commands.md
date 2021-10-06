@@ -1283,6 +1283,11 @@ Deletes a user.
 
 Generate a URL to impersonate a user.
 
+**Parameters**
+
+`user`
+:   The ID, username, or email address of the user account.
+
 ## `utils/ascii-filenames`
 
 #### `utils/ascii-filenames/index` <badge>default</badge>
