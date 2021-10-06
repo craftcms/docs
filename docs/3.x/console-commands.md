@@ -1349,6 +1349,11 @@ boolean, 0 or 1 (defaults to 0)
 
 Generate a URL to impersonate a user.
 
+**Parameters**
+
+`user`
+: The ID, username, or email address of the user account.
+
 ## `utils/ascii-filenames`
 
 #### `utils/ascii-filenames/index` <badge>default</badge>
