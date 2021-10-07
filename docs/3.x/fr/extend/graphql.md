@@ -798,7 +798,7 @@ Event::on(
 
 A Mutation class defines named mutations that should be available, including consideration for scope access. Each mutation can have its own [arguments](#arguments) and type, and it will need a mutation resolver for modifying data using Craft’s API.
 
-Our example could provide a `saveWidget` mutation for saving a new widget:
+Our example could provide a `createWidget` mutation for creating a new widget:
 
 ::: code
 ```graphql{2} GraphQL Query
