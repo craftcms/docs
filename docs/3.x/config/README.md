@@ -534,7 +534,11 @@ define('CRAFT_ENVIRONMENT', craft\helpers\App::env('ENVIRONMENT') ?: 'production
 
 ## PHP Constants
 
-Your `web/index.php` file can define certain PHP constants, which Craft’s bootstrap script will check for while loading and configuring Craft.
+Your `web/index.php` and `craft` files can define certain PHP constants Craft’s bootstrap script will check for while loading and configuring Craft.
+
+::: tip
+Constants you set in `web/index.php` will be used for web-based requests, while any you set in your root `craft` file will be used for console requests.
+:::
 
 ### `CRAFT_BASE_PATH`
 
