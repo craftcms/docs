@@ -521,11 +521,15 @@ define('CRAFT_ENVIRONMENT', craft\helpers\App::env('ENVIRONMENT') ?: 'production
 
 ## PHP 定数
 
-`web/index.php` ファイルには、Craft の読み込みと環境設定を行う際に、Craft の起動スクリプトがチェックする PHP 定数を定義できます。
+Your `web/index.php` and `craft` files can define certain PHP constants Craft’s bootstrap script will check for while loading and configuring Craft.
+
+::: tip
+Constants you set in `web/index.php` will be used for web-based requests, while any you set in your root `craft` file will be used for console requests.
+:::
 
 ### `CRAFT_BASE_PATH`
 
-Craft がデフォルトで探す [config/](../directory-structure.md#config)、[templates/](../directory-structure.md#templates)、および、他のディレクトリの**ベースディレクトリ**のパス。 （デフォルトでは、`vendor/` フォルダの親とみなされます。 ）
+The path to the **base directory** that Craft will look for [config/](../directory-structure.md#config), [templates/](../directory-structure.md#templates), and other directories within by default. (It is assumed to be the parent of the `vendor/` folder by default.)
 
 ```php
 // Tell Craft to look for config/, templates/, etc., two levels up from here
@@ -534,7 +538,7 @@ define('CRAFT_BASE_PATH', dirname(__DIR__, 2));
 
 ### `CRAFT_COMPOSER_PATH`
 
-[composer.json](../directory-structure.md#composer-json) ファイルのパス。 （デフォルトでは、ベースディレクトリ内に存在するものとします。
+The path to the [composer.json](../directory-structure.md#composer-json) file. （デフォルトでは、ベースディレクトリ内に存在するものとします。
 
 ```php
 define('CRAFT_COMPOSER_PATH', 'path/to/composer.json');
@@ -542,22 +546,22 @@ define('CRAFT_COMPOSER_PATH', 'path/to/composer.json');
 
 ### `CRAFT_CONFIG_PATH`
 
-[config/](../directory-structure.md#config) フォルダのパス。 （デフォルトでは、ベースディレクトリ内に存在するものとします。
+The path to the [config/](../directory-structure.md#config) folder. （デフォルトでは、ベースディレクトリ内に存在するものとします。
 
 ### `CRAFT_CONTENT_MIGRATIONS_PATH`
 
-コンテンツマイグレーションの保管に使用される [migrations/](../directory-structure.md#migrations) フォルダのパス。 （デフォルトでは、ベースディレクトリ内に存在するものとします。
+The path to the [migrations/](../directory-structure.md#migrations) folder used to store content migrations. (It is assumed to live within the base directory by default.)
 
 ### `CRAFT_CP`
 
-現在のリクエストをコントロールパネルのリクエストとして扱うかどうかを指定します。
+Dictates whether the current request should be treated as a control panel request.
 
 ```php
 // Tell Craft that this is a control panel request
 define('CRAFT_CP', true);
 ```
 
-これが定義されていない場合、Craft は次のいずれかが true であればコントロールパネルのリクエストとして扱います。
+If this isn’t defined, Craft will treat the request as a control panel request if either of these are true:
 
 - The <config3:baseCpUrl> がセット**されている**、かつ、リクエスト URL がこれではじまる（ <config3:cpTrigger> がセットされている場合、それも加えて）。
 - The <config3:baseCpUrl> がセット**されていない**、かつ、リクエスト URI が <config3:cpTrigger> ではじまる。
