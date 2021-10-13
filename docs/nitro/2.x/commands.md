@@ -131,37 +131,6 @@ Checking proxy…
 Nitro is up and running 😃
 ```
 
-## `blackfire`
-
-Enables and disables Blackfire for a site. Prompts for server ID and server token if they’ve not yet been saved as global settings in Nitro’s config.
-
-### `blackfire on`
-
-Enables Blackfire for a site.
-
-```
-nitro blackfire on <?site>
-```
-
-**Parameters**
-
-`site`
-: Optional hostname for an existing site, to be used instead of site prompt or current directory.
-
-
-### `blackfire off`
-
-Disables Blackfire for a site.
-
-```
-nitro blackfire off <?site>
-```
-
-**Parameters**
-
-`site`
-: Optional hostname for an existing site, to be used instead of site prompt or current directory.
-
 ## `bridge`
 
 Temporarily shares a Nitro site on a local network. Prompts you to select an existing IP address and site for sharing. See [Sharing Sites Locally](local-sharing.md).
