@@ -147,6 +147,7 @@ Next, let’s create the individual fields for our blog posts. With Craft, we ex
       - **This field is required**: checked (Every image block should have an image.)
       - **Field Type**: Assets
       - **Restrict uploads to a single folder?**: checked
+      - **Restrict allowed file types?**: checked
          - Select **Image** to ensure content editors can only select files that are images
    
    Save the field.
