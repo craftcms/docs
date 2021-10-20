@@ -2,7 +2,7 @@
 
 Theme and significant content changes will be documented in this file.
 
-## Unpublished
+## 2021-10-19
 ### Added
 - Documented new `countable` and `object` Twig tests added in Craft 3.7.17.
 
