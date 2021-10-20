@@ -2,7 +2,7 @@ name: Deploy Documentation
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
-          cache: 'npm'
+          cache: "npm"
       - run: npm ci
       - run: npm run docs:build --if-present
       - uses: jakejarvis/s3-sync-action@master
@@ -23,5 +23,5 @@ jobs:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: 'us-west-2'
-          SOURCE_DIR: 'docs/.vuepress'
+          AWS_REGION: "us-west-2"
+          SOURCE_DIR: "docs/.vuepress/dist"
