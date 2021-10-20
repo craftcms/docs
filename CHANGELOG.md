@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-10-19
+### Added
+- Documented new `countable` and `object` Twig tests added in Craft 3.7.17.
+
 ## 2021-10-07
 ### Added
 - Documented `autoSetCartShippingMethodOption` setting added in Commerce 3.4.4.
