@@ -8,6 +8,7 @@ The following [tests](https://twig.symfony.com/doc/2.x/templates.html#test-opera
 | [boolean](#boolean)                                                     | Whether a variable is a boolean value.                           |
 | [callable](#callable)                                                   | Whether a variable is callable.                                  |
 | [constant](https://twig.symfony.com/doc/2.x/tests/constant.html)        | Whether a variable is the same as a PHP constant value.          |
+| [countable](#countable)                                                 | Whether a variable is a countable value.                         |
 | [defined](https://twig.symfony.com/doc/2.x/tests/defined.html)          | Whether a variable is defined.                                   |
 | [divisible by](https://twig.symfony.com/doc/2.x/tests/divisibleby.html) | Whether a number is divisible by another number.                 |
 | [empty](https://twig.symfony.com/doc/2.x/tests/empty.html)              | Whether a variable is empty.                                     |
@@ -19,6 +20,7 @@ The following [tests](https://twig.symfony.com/doc/2.x/templates.html#test-opera
 | [missing](#missing)                                                     | Whether an object is missing its expected class.                 |
 | [null](https://twig.symfony.com/doc/2.x/tests/null.html)                | Whether a variable is `null`.                                    |
 | [numeric](#numeric)                                                     | Whether a variable is numeric.                                   |
+| [object](#object)                                                       | Whether a variable is an object.                                 |
 | [odd](https://twig.symfony.com/doc/2.x/tests/odd.html)                  | Whether a number is odd.                                         |
 | [resource](#resource)                                                   | Whether a variable is a resource.                                |
 | [same as](https://twig.symfony.com/doc/2.x/tests/sameas.html)           | Whether a variable is the same as another.                       |
@@ -54,6 +56,25 @@ Returns whether an object is callable via PHP’s [`is_callable()`](https://www.
 ```twig
 {{ [entry, 'getStatus'] is callable ? 'true' : 'false' }}
 {# result: true #}
+```
+
+## `countable`
+
+Returns whether an object is a countable value via PHP’s [`is_countable()`](https://www.php.net/manual/en/function.is-countable.php) method.
+
+::: tip
+`is_countable()` was added in PHP 7.3.0, so for versions less than 7.3 this returns `true` if the object [is an array](#array) or instance of [Countable](https://www.php.net/manual/en/class.countable.php).
+:::
+
+```twig
+{{ craft.entries() is countable ? 'true' : 'false' }}
+{# result: true #}
+
+{{ ['apple', 'orange'] is countable ? 'true' : 'false' }}
+{# result: true #}
+
+{{ 'dracula' is countable ? 'true' : 'false' }}
+{# result: false #}
 ```
 
 ## `float`
@@ -115,6 +136,18 @@ Returns whether an object is numeric via PHP’s [`is_numeric()`](https://www.ph
 {# result: true #}
 
 {{ 'twenty-three' is numeric ? 'true' : 'false' }}
+{# result: false #}
+```
+
+## `object`
+
+Returns whether a given object satisfies PHP’s [`is_object()`](https://www.php.net/manual/en/function.is-object.php) method.
+
+```twig
+{{ entry is object ? 'true' : 'false' }}
+{# result: true #}
+
+{{ entry.url is object ? 'true' : 'false' }}
 {# result: false #}
 ```
 
