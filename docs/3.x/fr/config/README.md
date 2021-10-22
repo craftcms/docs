@@ -581,6 +581,11 @@ When defined as `true`, Craft will skip file system permission checks and operat
 
 Your Craft license key, if for some reason that must be defined by PHP rather than a license key file. (Don’t set this until you have a valid license key.)
 
+```php
+// Tell Craft to get its license key from a `LICENSE_KEY` environment variable
+define('CRAFT_LICENSE_KEY', craft\helpers\App::env('LICENSE_KEY'));
+```
+
 ### `CRAFT_LICENSE_KEY_PATH`
 
 The path that Craft should store its license key file, including its filename. (It will be stored as `license.key` within your [config/](../directory-structure.md#config) folder by default.)
