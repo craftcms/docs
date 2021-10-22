@@ -72,9 +72,19 @@
     }
   }
 
-  p {
+  p,
+  li {
     a[target="_blank"] {
       @apply whitespace-no-wrap;
+
+      span {
+        @apply inline-block;
+
+        .icon.outbound {
+          width: 14px;
+          height: 14px;
+        }
+      }
     }
   }
 
