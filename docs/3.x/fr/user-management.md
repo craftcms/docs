@@ -33,6 +33,10 @@ After you create your groups, you can assign users to groups by going into their
 
 Craft Pro allows you to set permissions on users and groups, such as the ability to access the control panel, edit content within certain sections, etc. You can apply these permissions directly to user accounts as well as to user groups. When you apply permissions to a user group, all users that belong to that group will inherit them.
 
+::: warning
+Make sure you trust users with access to settings that accept Twig code, like the **Settings** section and the **System Messages** utility. It’s possible to do potentially-malicious things in Craft via Twig, which is intented primarily for trusted admins and developers.
+:::
+
 The permissions Craft comes with are:
 
 | Permission                                                       | Handle                                      |
@@ -90,7 +94,7 @@ See the _Extending Craft_ [User Permissions](extend/user-permissions.md) page to
 
 ### Checking Permissions
 
-Once you set up your site to allow public user registration, the last step is to create a [user registration form](dev/examples/user-registration-form.md) on your site’s front end.
+You can check whether the logged-in user has a specific permission by using its handle, replacing any bracketed items in the table above with the desired value (So `accessPlugin-[PluginHandle]` would become `accessPlugin-commerce`).
 
 ```twig
 {% if currentUser.can('accessCp') %}
@@ -110,6 +114,6 @@ You can also require the logged-in user to have a specific permission to access 
 
 Craft Pro has the option of allowing public user registration, which is disabled by default.
 
-To enable public registration, go to Settings → Users → Settings, and check the “Allow public registration?” setting. With that checked, you will also have the ability to choose a default user group to which Craft will assign the publicly-registered users.
+To enable public registration, go to **Settings** → **Users** → **Settings**, and check **Allow public registration**. With that checked, you will also have the ability to choose a default user group to which Craft will assign the publicly-registered users.
 
 Once you set up your site to allow public user registration, the last step is to create a [user registration form](https://craftcms.com/knowledge-base/front-end-user-accounts#registration-form) on your site’s front end.
