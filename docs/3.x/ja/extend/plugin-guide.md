@@ -7,7 +7,8 @@
 - **パッケージ名** – プラグイン向けに Composer パッケージの名前として使用されます。 （詳細については、[documentation](https://getcomposer.org/doc/04-schema.md#name) を参照してください。 ）これが Craft のプラグインだと識別する手助けになるため、2番目のセグメント（`/` の後）に接頭辞 `craft-` を付けることをお勧めします。 例えば `pixelandtonic/craft-recipes` のような形です。
 - **名前空間** – プラグインのクラスが稼働する、ルート名前空間。 （詳細については、[PSR-4](https://www.php-fig.org/psr/psr-4/) オートローディング仕様を参照してください。 ）これは `craft\` ではじめるべき *ではない* ことに注意してください。 あなたやデベロッパーを識別する何かを使用してください。
 - **プラグインハンドル** – Craft のエコシステム内でプラグインを一意に識別する何か。 （プラグインハンドルは、文字ではじまり、小文字の英字、数字、および、ダッシュのみでなければなりません。 `kebab-cased` にすべきです。 ）
-- **プラグイン名** – コントロールパネル内でプラグインを何と呼ぶか。
+- **Plugin name** – What your plugin will be called within the control panel. ::: warning Your plugin name must not begin with “Craft” or an include an [edition](plugin-editions.md)-sounding word like “Lite”, “Plus”, or “Pro”.
+:::
 
 ## 基本ファイル構造の設定
 
@@ -196,10 +197,12 @@ composer require package/name
 
 ## プラグインアイコン
 
-The Settings → Plugins page in Craft’s Control Panel.
+Plugins can provide an icon, which will be visible on the **Settings** → **Plugins** page.
 
-![The Settings → Plugins page in Craft’s control panel.](../images/plugin-index.png)
+<BrowserShot url="https://mysite.test/admin/settings/plugins" :link="false" caption="The Settings → Plugins page in Craft’s control panel.">
+<img src="../images/plugin-index.png" alt="Screenshot of control panel Settings → Plugins">
+</BrowserShot>
 
-プラグインは「設定 > プラグイン」ページに表示されるアイコンを提供できます。
+Plugin icons must be square SVG files, saved as `icon.svg` at the root of your plugin’s source directory (e.g `src/`).
 
-プラグインが [コントロールパネルのセクション](cp-section.md) を持つ場合は、プラグインのソースディレクトリのルートに `icon-mask.svg` ファイルを保存することによって、グローバルナビゲーション項目にカスタムアイコンを付けることもできます。 このアイコンにはストロークを含めることができず、常に（アルファ透明度に関して）ソリッドカラーで表示されることに注意してください。
+If your plugin has a [control panel section](cp-section.md), you can also give its global nav item a custom icon by saving an `icon-mask.svg` file in the root of your plugin’s source directory. Note that this icon cannot contain strokes, and will always be displayed in a solid color (respecting alpha transparency).
