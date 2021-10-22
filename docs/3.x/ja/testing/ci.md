@@ -2,9 +2,9 @@
 
 There are [many](https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software) [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) platforms available to choose from.
 
-Craft uses [Travis](https://travis-ci.com/craftcms/cms) for its public repo, but you're free to use what you're comfortable with and modify things to your workflow.
+Craft uses [Travis](https://app.travis-ci.com/github/craftcms/cms) for its public repo, but you’re free to use what you're comfortable with and modify things to your workflow.
 
-There are [many options](https://docs.travis-ci.com/) for configuring Travis, but let's examine [Craft's `.travis.yml` file](https://github.com/craftcms/cms/blob/3.2/.travis.yml).
+There are [many options](https://docs.travis-ci.com/) for configuring Travis, but let’s examine [Craft’s `.travis.yml` file](https://github.com/craftcms/cms/blob/main/.travis.yml).
 
 ```yaml
 services:
