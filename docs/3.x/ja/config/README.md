@@ -583,6 +583,11 @@ define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
 
 何らかの理由で、ライセンスキーファイルではなく PHP によって定義されなければならい場合の Craft のライセンスキー。 （有効なライセンスキーを取得するまで、これをセットしないでください。 ）
 
+```php
+// Tell Craft to get its license key from a `LICENSE_KEY` environment variable
+define('CRAFT_LICENSE_KEY', craft\helpers\App::env('LICENSE_KEY'));
+```
+
 ### `CRAFT_LICENSE_KEY_PATH`
 
 ファイル名を含めた Craft がライセンスキーファイルを保存するパス。 （デフォルトでは、[config/](../directory-structure.md#config) フォルダ内に `license.key` が保存されます。 ）
