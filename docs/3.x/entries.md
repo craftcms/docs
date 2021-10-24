@@ -220,7 +220,9 @@ If you leave the Post Date blank, Craft will automatically set it the first time
 
 ## Querying Entries
 
-You can fetch entries in your templates or PHP code using **entry queries**.
+The entry corresponding to your current uri will be available in your template as a variable named `entry`.
+
+You can fetch any other entries in your templates or PHP code using **entry queries**.
 
 ::: code
 ```twig
