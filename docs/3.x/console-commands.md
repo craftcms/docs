@@ -27,12 +27,12 @@ The following commands are available:
     db/convert-charset                  Converts tables’ character sets and collations. (MySQL only)
     db/restore                          Restores a database backup.
 
-- cache                                     Allows you to flush cache.
-    cache/flush                             Flushes given cache components.
-    cache/flush-all                         Flushes all caches registered in the system.
-    cache/flush-schema                      Clears DB schema cache for a given connection
-                                            component.
-    cache/index (default)                   Lists the caches that can be flushed.
+- cache                                 Allows you to flush cache.
+    cache/flush                         Flushes given cache components.
+    cache/flush-all                     Flushes all caches registered in the system.
+    cache/flush-schema                  Clears DB schema cache for a given connection
+                                        component.
+    cache/index (default)               Lists the caches that can be flushed.
 
 ...
 
