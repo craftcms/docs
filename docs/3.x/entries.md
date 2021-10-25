@@ -54,7 +54,9 @@ Structures are good for times when you need to store multiple similar entries, a
 
 ### Entry URI Formats
 
-Channel and Structure sections can choose whether their entries should be assigned URLs in the system, by filling in the “Entry URI Format” setting.
+Channel and Structure sections can choose whether their entries should be assigned URLs in the system, by filling in the “Entry URI Format” setting. (Singles have a “URI” setting.)
+
+The template designated for an “Entry URI Format” or “URI” can use a special `entry` variable that’s automatically populated with the relevant section entry.
 
 Entry URI Formats are mini Twig templates, which will be rendered each time an entry in the section is saved. The rendering result will be saved as the entry’s URI in the system.
 
@@ -220,9 +222,7 @@ If you leave the Post Date blank, Craft will automatically set it the first time
 
 ## Querying Entries
 
-The entry corresponding to your current uri will be available in your template as a variable named `entry`.
-
-You can fetch any other entries in your templates or PHP code using **entry queries**.
+While an entry’s configured template will automatically make an `entry` variable available, you can fetch entries throughout your templates or PHP code using **entry queries**.
 
 ::: code
 ```twig
