@@ -54,43 +54,45 @@ Craft のマルチサイト機能を利用しているなら、次のことも�
 
 ### エントリ URI 形式
 
-チャンネルとストラクチャーセクションでは、「エントリ URI 形式」設定を入力することでシステム内のエントリに URL を割り当てるかどうかを選択できます。
+Channel and Structure sections can choose whether their entries should be assigned URLs in the system, by filling in the “Entry URI Format” setting. (Singles have a “URI” setting.)
 
-エントリ URI 形式は、セクション内のエントリが保存されるごとにレンダリングされる小さな Twig テンプレートです。 レンダリング結果は、システムのエントリ URI として保存されます。
+The template designated for an “Entry URI Format” or “URI” can use a special `entry` variable that’s automatically populated with the relevant section entry.
 
-保存されているエントリは、`object` と名付けられた変数としてテンプレートで利用できます。 さらに、各エントリのプロパティやカスタムフィールドの値は、それぞれの変数として利用できます。 そのため、次のようなことが可能です。
+Entry URI Formats are mini Twig templates, which will be rendered each time an entry in the section is saved. The rendering result will be saved as the entry’s URI in the system.
+
+The entry being saved will be available to the template as a variable named `object`, and each of the entry’s properties and custom field values will also be available as their own variables. So something like this is possible:
 
 ```twig
 {{ author.username }}/{{ slug }}
 ```
 
-ショートカット構文は、エントリのプロパティを参照する出力タグでも利用できます。
+A shortcut syntax is also available for output tags that reference a property on the entry:
 
 ```twig
 {author.username}/{slug}
 ```
 
-ストラクチャーセクションでは、子エントリのためのネストされたパスが必要かもしれません。
+Structure sections may want to have nested paths for child entries:
 
 ```twig
 {parent.uri}/{slug}
 ```
 
-上記のエントリ URI 形式では、トップレベルエントリの URI は `templating` で終わるかもしれないのに対して、ネストされているエントリの URI は `templating/tags` で終わるかもしれません。
+With the above Entry URI Format, a top-level entry’s URI might end up as `templating`, whereas a nested entry’s URI might end up as `templating/tags`.
 
-ストラクチャーセクションでは、ネストされたパスの前にセグメントを含めることもできます。
+Structure sections might also want to include a segment before the nested path:
 
 ```twig
 {parent.uri ?? 'docs'}/{slug}
 ```
 
-上記のテンプレートは次の構文で表すこともできます。
+The above template could also be expressed with this syntax:
 
 ```twig
 {% if level == 1 %}docs{% else %}{parent.uri}{% endif %}/{slug}
 ```
 
-上記のエントリ URI 形式では、トップレベルエントリの URI は `docs/templating` で終わるかもしれないのに対して、ネストされているエントリの URI は `docs/templating/tags` で終わるかもしれません。
+With the above Entry URI Format, a top-level entry’s URI might end up as `docs/templating`, whereas a nested entry’s URI might end up as `docs/templating/tags`.
 
 ::: tip
 You can designate any one entry as a site’s homepage using a special `__home__` URI.
@@ -106,22 +108,22 @@ You can use aliases in the entry's URI. Use the `alias()` function in double cur
 
 ### プレビューターゲット
 
-セクション内のエントリが独自の URL を持つ場合、URL テンプレート `{url}` を利用して、エントリのプライマリ URL のプレビューターゲットを作成できます。
+If you’re using Craft Pro, your section can have one or more **preview targets**, which are URLs of pages that your entries will show up on, making it possible for authors to preview entries as they are writing them in the control panel.
 
-エントリ URI 形式と同様、プレビューターゲット URL はエントリのプロパティや他の動的な値を含めることができる小さな Twig テンプレートです。
+Like entry URI formats, these preview target URLs are mini Twig templates that can contain entry properties and other dynamic values.
 
 Use single curly braces to render attributes on the entry. For example if entries in your section have their own URLs, then you can create a preview target for the entry’s primary URL using the URL template, `{url}`.
 
-`news` や `archive/{postDate|date('Y')}` のように、エントリが表示されるかもしれない他のエリアのプレビューターゲットを追加で作成してください。 エントリがホームページに表示されている場合、空の URL でプレビューターゲットを作成できます。
+Create additional preview targets for any other areas the entry might show up, such as `news`, or `archive/{postDate|date('Y')}`. If the entries show up on the homepage, you can create a preview target with a blank URL.
 
-![セクションのプレビューターゲット設定画面](./images/preview-targets.png)
+![A section’s Preview Targets setting.](./images/preview-targets.png)
 
 ::: tip
 If you want to include the entry’s ID or UID in a preview target URL, use `{canonicalId}` or `{canonicalUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the draft’s.
 :::
 
 ::: tip
-You can use environment variables and aliases in the preview target URL. ::: tip URI を環境変数（`$NEWS_INDEX`）やエイリアスではじまる URL（`@rootUrl/news` または `@rootUrl/news/{slug}`）でセットすることもできます。 どのように動作するかを知るには、[環境設定](config/#environmental-configuration)を参照してください。 :::
+You can use environment variables and aliases in the preview target URL. These do not get wrapped in curly braces (e.g. `$NEWS_INDEX`, `@rootUrl/news`, `@rootUrl/news/{slug}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
 :::
 
 ::: tip
@@ -220,7 +222,7 @@ If you leave the Post Date blank, Craft will automatically set it the first time
 
 ## エントリの照会
 
-You can fetch entries in your templates or PHP code using **entry queries**.
+While an entry’s configured template will automatically make an `entry` variable available, you can fetch entries throughout your templates or PHP code using **entry queries**.
 
 ::: code
 ```twig
