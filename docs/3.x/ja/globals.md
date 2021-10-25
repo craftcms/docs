@@ -30,7 +30,7 @@ If you have at least one Global Set, Craft will add a new “Globals” item to 
 
 そのためには、グローバルセットのフィールドを編集し、それぞれの「翻訳方法」設定で「各サイトに対して翻訳」をセットします。
 ```twig
-{% set companyInfo = craft.globals().getSetByHandle('companyInfo') %}
+{% set companyInfo = craft.app.globals().getSetByHandle('companyInfo') %}
 ```
 ```php
 $companyInfo = \Craft::$app->getGlobals()->getSetByHandle('companyInfo');
