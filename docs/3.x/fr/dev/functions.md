@@ -637,6 +637,8 @@ By default, if you pass an asset or raw markup into the function, the SVG will b
 {{ svg(image, sanitize=false, namespace=false) }}
 ```
 
+Images passed via path/alias will _not_ automatically be sanitized and namespaced.
+
 You can also specify a custom class name that should be added to the root `<svg>` node using the [attr](filters.md#attr) filter:
 
 ```twig
