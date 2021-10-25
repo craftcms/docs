@@ -54,7 +54,9 @@ Structures are good for times when you need to store multiple similar entries, a
 
 ### Entry URI Formats
 
-Channel and Structure sections can choose whether their entries should be assigned URLs in the system, by filling in the “Entry URI Format” setting.
+Channel and Structure sections can choose whether their entries should be assigned URLs in the system, by filling in the “Entry URI Format” setting. (Singles have a “URI” setting.)
+
+The template designated for an “Entry URI Format” or “URI” can use a special `entry` variable that’s automatically populated with the relevant section entry.
 
 Entry URI Formats are mini Twig templates, which will be rendered each time an entry in the section is saved. The rendering result will be saved as the entry’s URI in the system.
 
@@ -93,15 +95,15 @@ The above template could also be expressed with this syntax:
 With the above Entry URI Format, a top-level entry’s URI might end up as `docs/templating`, whereas a nested entry’s URI might end up as `docs/templating/tags`.
 
 ::: tip
-If you want to include the entry’s ID or UID in a preview target URL, use `{sourceId}` or `{sourceUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the draft’s.
-:::
-
-::: tip
-If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you only want unique elements to be returned, use [unique](#unique) in conjunction with this.
+You can designate any one entry as a site’s homepage using a special `__home__` URI.
 :::
 
 ::: tip
 You can use an attribute from a query in the entry's URI. Use double curly braces (e.g. `{{craft.entries.section('mySingle').one().slug}}/news`).
+:::
+
+::: tip
+You can use aliases in the entry's URI. Use the `alias()` function in double curly braces (e.g. `{{alias(@rootUrl)}}/news`, `{{alias(@mySectionUri)}}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
 :::
 
 ### Preview Targets
@@ -121,11 +123,11 @@ If you want to include the entry’s ID or UID in a preview target URL, use `{ca
 :::
 
 ::: tip
-Preview target URLs can include an attribute on the result of a query. Here double curly braces must be used (e.g. `{{ craft.entries.section('mySingle').one().url }}`).
+You can use environment variables and aliases in the preview target URL. These do not get wrapped in curly braces (e.g. `$NEWS_INDEX`, `@rootUrl/news`, `@rootUrl/news/{slug}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
 :::
 
 ::: tip
-Preview target URLs can include an attribute on the result of a query. Use the `alias()` function in double curly braces (e.g. `{{alias(@rootUrl)}}/news`, `{{alias(@mySectionUri)}}`).
+Preview target URLs can include an attribute on the result of a query. Here double curly braces must be used (e.g. `{{ craft.entries.section('mySingle').one().url }}`).
 :::
 
 When an author is editing an entry from a section with custom preview targets, the **View** button will be replaced with a menu that lists the **Primary entry page** (if the section has an Entry URI Format), plus the names of each preview target.
@@ -220,7 +222,7 @@ If you leave the Post Date blank, Craft will automatically set it the first time
 
 ## Querying Entries
 
-You can fetch entries in your templates or PHP code using **entry queries**.
+While an entry’s configured template will automatically make an `entry` variable available, you can fetch entries throughout your templates or PHP code using **entry queries**.
 
 ::: code
 ```twig
