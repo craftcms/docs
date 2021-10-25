@@ -78,6 +78,21 @@ php craft db/backup ./my-backups/
 : Whether the backup should be saved as a zip file.\
 boolean, 0 or 1 (defaults to 0)
 
+#### `db/restore`
+
+Restores a database backup.
+
+Example:
+
+```sh
+php craft db/restore ./my-backup.sql
+```
+
+**Parameters**
+
+`path`
+: The full file path to the database backup.
+
 ## `cache`
 
 Allows you to flush caches.
