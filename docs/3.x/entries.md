@@ -169,10 +169,12 @@ The Title Format is a full-blown Twig template, and it will get parsed whenever 
 
 The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](craft3:craft\elements\Entry#public-properties) in two ways:
 
-- `{{ object.property }}` _(normal Twig syntax)_
-- `{property}` _(shortcut syntax)_
+1. normal Twig syntax: `{{ object.property }}`
+2. shortcut Twig syntax: `{property}`
 
-_Note that the shortcut syntax only has one set of curly braces_.
+::: tip
+Shortcut syntax only has one set of curly braces.
+:::
 
 If Craft finds any of these in your Title Format, it will replace the `{` with `{{object.` and the `}` with `}}`, before passing the template off to Twig for parsing.
 
