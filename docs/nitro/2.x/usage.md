@@ -110,7 +110,7 @@ Lock file operations: 87 installs, 0 updates, 0 removals
 5. Copies `.env.example` to `.env`.
 6. Prompts for database creation. If you choose to create a database, you’ll be prompted for its name and Nitro will offer to update the `.env` database settings automatically.
 7. Installs Composer dependencies using [`nitro composer`](commands.md#composer).
-9. Prompts you to run [`nitro apply`](commands.md#apply) in order to update Nitro’s settings and your hosts file.
+8. Prompts you to run [`nitro apply`](commands.md#apply) in order to update Nitro’s settings and your hosts file.
 
 ::: tip
 You can pass your own repository to `nitro create` and use that as the scaffold:
@@ -118,6 +118,10 @@ You can pass your own repository to `nitro create` and use that as the scaffold:
 ```sh
 nitro create https://github.com/craftcms/demo my-project
 ```
+:::
+
+::: tip
+After `nitro create` has finished, don't forget to follow [Step 6: Run the Setup Wizard](https://craftcms.com/docs/3.x/installation.html#step-6-run-the-setup-wizard) from the Craft CMS docs.
 :::
 
 ### Mounting Your Entire Development Folder
