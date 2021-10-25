@@ -30,7 +30,7 @@ In some special situations, like within email templates, Global Sets won’t be 
 
 ::: code
 ```twig
-{% set companyInfo = craft.globals().getSetByHandle('companyInfo') %}
+{% set companyInfo = craft.app.globals().getSetByHandle('companyInfo') %}
 ```
 ```php
 $companyInfo = \Craft::$app->getGlobals()->getSetByHandle('companyInfo');
