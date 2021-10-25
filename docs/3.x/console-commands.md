@@ -27,12 +27,12 @@ The following commands are available:
     db/convert-charset                  Converts tables’ character sets and collations. (MySQL only)
     db/restore                          Restores a database backup.
 
-- cache                                     Allows you to flush cache.
-    cache/flush                             Flushes given cache components.
-    cache/flush-all                         Flushes all caches registered in the system.
-    cache/flush-schema                      Clears DB schema cache for a given connection
-                                            component.
-    cache/index (default)                   Lists the caches that can be flushed.
+- cache                                 Allows you to flush cache.
+    cache/flush                         Flushes given cache components.
+    cache/flush-all                     Flushes all caches registered in the system.
+    cache/flush-schema                  Clears DB schema cache for a given connection
+                                        component.
+    cache/index (default)               Lists the caches that can be flushed.
 
 ...
 
@@ -77,6 +77,39 @@ php craft db/backup ./my-backups/
 `--zip`
 : Whether the backup should be saved as a zip file.\
 boolean, 0 or 1 (defaults to 0)
+
+#### `db/convert-charset`
+
+Converts tables’ character sets and collations. (MySQL only)
+
+Example:
+
+```sh
+php craft db/convert-charset utf8 utf8_unicode_ci
+```
+
+**Parameters**
+
+`charset`
+: The target character set, which honors `DbConfig::$charset` or defaults to `utf8`.
+
+`collation`
+: The target collation, which honors `DbConfig::$collation` or defaults to `utf8_unicode_ci`.
+
+#### `db/restore`
+
+Restores a database backup.
+
+Example:
+
+```sh
+php craft db/restore ./my-backup.sql
+```
+
+**Parameters**
+
+`path`
+: The full file path to the database backup.
 
 ## `cache`
 
