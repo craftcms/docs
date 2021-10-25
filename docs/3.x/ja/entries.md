@@ -99,11 +99,11 @@ You can designate any one entry as a site’s homepage using a special `__home__
 :::
 
 ::: tip
-You can use an attribute from a query in the entry's URI. Use double curly braces (e.g. `{{craft.entries.section('mySingle').one().slug}}/news`).
+You can use an attribute from a query in the entry’s URI. Use double curly braces (e.g. `{{craft.entries.section('mySingle').one().slug}}/news`).
 :::
 
 ::: tip
-You can use aliases in the entry's URI. Use the `alias()` function in double curly braces (e.g. `{{alias(@rootUrl)}}/news`, `{{alias(@mySectionUri)}}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
+You can use aliases in the entry’s URI. Use the `alias()` function in double curly braces (e.g. `{{alias(@rootUrl)}}/news`, `{{alias(@mySectionUri)}}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
 :::
 
 ### プレビューターゲット
@@ -171,10 +171,12 @@ The Title Format is a full-blown Twig template, and it will get parsed whenever 
 
 The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](craft3:craft\elements\Entry#public-properties) in two ways:
 
-- `{{ object.property }}` _（標準の Twig 構文）_
-- `{property}` _（ショートカット構文）_
+1. normal Twig syntax: `{{ object.property }}`
+2. shortcut Twig syntax: `{property}`
 
-_Note that the shortcut syntax only has one set of curly braces_.
+::: tip
+Shortcut syntax only has one set of curly braces.
+:::
 
 If Craft finds any of these in your Title Format, it will replace the `{` with `{{object.` and the `}` with `}}`, before passing the template off to Twig for parsing.
 
@@ -204,19 +206,19 @@ If you have at least one section, there will be an **Entries** tab in the primar
 
 You can perform the following actions from the Edit Entry page:
 
-- （選択候補が2つ以上ある場合）入力タイプの選択
-- エントリのタイトルの編集
-- エントリのスラグの編集
-- エントリのカスタムフィールドコンテンツの編集
-- エントリーの投稿者の選択（Pro エディションのみ）
-- （ストラクチャーセクションに含まれる場合）エントリの親の選択
-- エントリの投稿日の選択
-- エントリの有効期限の選択（オプション）
-- エントリを有効にするかどうかの選択
-- エントリの変更を保存
-- エントリの新しい下書きの保存
-- 下書きの公開
-- エントリの過去のバージョンの閲覧
+- Choose the entry type (if there’s at least two to choose from)
+- Edit the entry’s title
+- Edit the entry’s slug
+- Edit the entry’s custom field content
+- Choose the entry’s author (Pro edition only)
+- Choose the entry’s parent (if it’s within a Structure section)
+- Choose the entry’s Post Date
+- Choose the entry’s Expiration Date (optional)
+- Choose whether the entry is enabled or not
+- Save changes to the entry
+- Save a new draft of the entry
+- Publish a draft
+- View past versions of the entry
 
 If you leave the Post Date blank, Craft will automatically set it the first time an entry is saved as enabled.
 
@@ -245,10 +247,10 @@ See [Element Queries](element-queries.md) to learn about how element queries wor
 
 We can display the 10 most recent entries in a “Blog” section by doing the following:
 
-1. `craft.entries()` でエントリクエリを作成します。
-2. [section](#section) および [limit](#limit) パラメータをセットします。
-3. `.all()` でエントリを取得します。
-4. [for](https://twig.symfony.com/doc/2.x/tags/for.html) タグを利用してエントリをループ処理し、ブログ投稿の HTML を出力します。
+1. Create an entry query with `craft.entries()`.
+2. Set the [section](#section) and [limit](#limit) parameters on it.
+3. Fetch the entries with `.all()`.
+4. Loop through the entries using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag to output the blog post HTML.
 
 ```twig
 {# Create an entry query with the 'section' and 'limit' parameters #}
