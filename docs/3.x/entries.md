@@ -97,11 +97,11 @@ You can designate any one entry as a site’s homepage using a special `__home__
 :::
 
 ::: tip
-You can use an attribute from a query in the entry's URI. Use double curly braces (e.g. `{{craft.entries.section('mySingle').one().slug}}/news`).
+You can use an attribute from a query in the entry’s URI. Use double curly braces (e.g. `{{craft.entries.section('mySingle').one().slug}}/news`).
 :::
 
 ::: tip
-You can use aliases in the entry's URI. Use the `alias()` function in double curly braces (e.g. `{{alias(@rootUrl)}}/news`, `{{alias(@mySectionUri)}}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
+You can use aliases in the entry’s URI. Use the `alias()` function in double curly braces (e.g. `{{alias(@rootUrl)}}/news`, `{{alias(@mySectionUri)}}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
 :::
 
 ### Preview Targets
