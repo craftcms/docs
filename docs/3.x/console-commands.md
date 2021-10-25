@@ -78,6 +78,24 @@ php craft db/backup ./my-backups/
 : Whether the backup should be saved as a zip file.\
 boolean, 0 or 1 (defaults to 0)
 
+#### `db/convert-charset`
+
+Converts tables’ character sets and collations. (MySQL only)
+
+Example:
+
+```sh
+php craft db/convert-charset utf8 utf8_unicode_ci
+```
+
+**Parameters**
+
+`charset`
+: The target character set, which honors `DbConfig::$charset` or defaults to `utf8`.
+
+`collation`
+: The target collation, which honors `DbConfig::$collation` or defaults to `utf8_unicode_ci`.
+
 #### `db/restore`
 
 Restores a database backup.
