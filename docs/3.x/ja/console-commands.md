@@ -27,12 +27,12 @@ The following commands are available:
     db/convert-charset                  Converts tables’ character sets and collations. (MySQL only)
     db/restore                          Restores a database backup.
 
-- cache                                     Allows you to flush cache.
-    cache/flush                             Flushes given cache components.
-    cache/flush-all                         Flushes all caches registered in the system.
-    cache/flush-schema                      Clears DB schema cache for a given connection
-                                            component.
-    cache/index (default)                   Lists the caches that can be flushed.
+- cache                                 Allows you to flush cache.
+    cache/flush                         Flushes given cache components.
+    cache/flush-all                     Flushes all caches registered in the system.
+    cache/flush-schema                  Clears DB schema cache for a given connection
+                                        component.
+    cache/index (default)               Lists the caches that can be flushed.
 
 ...
 
@@ -77,9 +77,42 @@ See the [Console Commands](extend/commands.md) page in the _Extending Craft_ sec
 `--zip`
 :   Whether the backup should be saved as a zip file.\ boolean, 0 or 1 (defaults to 0)
 
+#### `db/convert-charset`
+
+Converts tables’ character sets and collations. (MySQL only)
+
+Example:
+
+```sh
+php craft db/convert-charset utf8 utf8_unicode_ci
+```
+
+**Parameters**
+
+`charset`
+:   The target character set, which honors `DbConfig::$charset` or defaults to `utf8`.
+
+`collation`
+:   The target collation, which honors `DbConfig::$collation` or defaults to `utf8_unicode_ci`.
+
+#### `db/restore`
+
+Restores a database backup.
+
+Example:
+
+```sh
+php craft db/restore ./my-backup.sql
+```
+
+**Parameters**
+
+`path`
+:   The full file path to the database backup.
+
 ## `cache`
 
-アセットキャッシュをクリアします。
+Allows you to flush caches.
 
 #### `cache/flush`
 
@@ -87,18 +120,18 @@ Flushes given cache components.
 
 #### `cache/flush-all`
 
-フラッシュできるキャッシュの一覧を表示します。
+Flushes all caches registered in the system.
 
 #### `cache/flush-schema`
 
-様々な Craft のキャッシュをクリアできます。
+Clears DB schema cache for a given connection component.
 
-**パラメータ**
+**Parameters**
 
 `componentId`
 :   ID of the connection component. (Defaults to `db`.)
 
-**実例**
+**Example**
 
 ```sh
 php craft cache/flush-schema
@@ -107,39 +140,39 @@ php craft cache/flush-schema
 
 #### `cache/index` <badge>default</badge>
 
-アセットインデックスデータをクリアします。
+Lists the caches that can be flushed.
 
 ## `clear-caches`
 
-コンパイル済みのテンプレートをクリアします。
+Allows you to clear various Craft caches.
 
 #### `clear-caches/all`
 
-コントロールパネルのリソースをクリアします。
+Clears all caches.
 
 #### `clear-caches/asset`
 
-データキャッシュをクリアします。
+Clears Asset caches.
 
 #### `clear-caches/asset-indexing-data`
 
-クリアできるキャッシュの一覧を表示します。
+Clears Asset indexing data.
 
 #### `clear-caches/compiled-templates`
 
-一時的なファイルをクリアします。
+Clears compiled templates.
 
 #### `clear-caches/cp-resources`
 
-アセット変換インデックスをクリアします。
+Clears control panel resources.
 
 #### `clear-caches/data`
 
-テストのフィクスチャを管理できます。
+Clears data caches.
 
 #### `clear-caches/index` <badge>default</badge>
 
-指定されたフィクスチャデータをロードします。
+Lists the caches that can be cleared.
 
 #### `clear-caches/temp-files`
 
@@ -151,18 +184,18 @@ Clears the Asset transform index.
 
 ## `fixture`
 
-指定されたフィクスチャをアンロードします。
+Allows you to manage test fixtures.
 
 #### `fixture/load` <badge>default</badge>
 
 Loads the specified fixture data.
 
-**オプション**
+**Parameters**
 
 `fixturesInput`
 :   Array of fixtures to load.
 
-**オプション**
+**Options**
 
 `--global-fixtures`, `-g`
 :   Array of global fixtures that should be applied when loading and unloading. Set to `InitDbFixture` by default, which disables and enables integrity check so your data can be safely loaded.
@@ -174,12 +207,12 @@ Loads the specified fixture data.
 
 Unloads the specified fixtures.
 
-**パラメータ**
+**Parameters**
 
 `fixturesInput`
 :   Array of fixtures to load.
 
-**オプション**
+**Options**
 
 `--global-fixtures`, `-g`
 :   Array of global fixtures that should be applied when loading and unloading. Set to `InitDbFixture` by default, which disables and enables integrity check so your data can be safely loaded.
@@ -191,16 +224,16 @@ Unloads the specified fixtures.
 
 #### `gc/run` <badge>default</badge>
 
-ガベージコレクションを実行します。
+Runs garbage collection.
 
-**オプション**
+**Options**
 
 `--delete-all-trashed`
 :   Whether all soft-deleted items should be deleted, rather than just the ones that were deleted long enough ago to be ready for hard-deletion per the `softDeleteDuration` config setting.\ boolean, 0 or 1 (defaults to 0)
 
 ## `graphql`
 
-GraphQL スキーマを管理できます。
+Allows you to manage GraphQL schemas.
 
 #### `graphql/create-token`
 
@@ -303,7 +336,7 @@ Lists all available controllers and actions in machine-readable format.
 
 List all available options for `action` in machine-readable format.
 
-**パラメータ**
+**Parameters**
 
 `action`
 :   Route to action. (required)
@@ -442,7 +475,7 @@ Manages Craft and plugin migrations.
 
 Runs all pending Craft, plugin, and content migrations.
 
-**Options**
+**パラメータ**
 
 `--no-backup`
 :   Skip backing up the database.\ boolean, 0 or 1 (defaults to 0)
@@ -482,7 +515,7 @@ Downgrades the application by reverting old migrations.
 `limit`
 :   The number of migrations to be reverted. Defaults to 1, meaning the last applied migration will be reverted. When value is `all`, all migrations will be reverted.
 
-**パラメータ**
+**Options**
 
 `--plugin`, `-p`
 :   The handle of the plugin to use during migration operations, or the plugin itself.
@@ -577,7 +610,7 @@ Reapplies the last few migrations.
 `limit`
 :   The number of migrations to be redone. Defaults to 1, meaning the last applied migration will be redone. When `all`, all migrations will be redone.
 
-**Options**
+**オプション**
 
 `--plugin`, `-p`
 :   The handle of the plugin to use during migration operations, or the plugin itself.
@@ -617,7 +650,7 @@ Upgrades the application by applying new migrations.
 `limit`
 :   The number of new migrations to be applied. If 0, it means applying all available new migrations. (Defaults to 0.)
 
-**オプション**
+**Options**
 
 `--plugin`, `-p`
 :   The handle of the plugin to use during migration operations, or the plugin itself.
@@ -672,7 +705,7 @@ Manage plugins.
 
 Disables a plugin.
 
-**パラメータ**
+**Parameters**
 
 `handle`
 :   The plugin handle. (required)
@@ -681,7 +714,7 @@ Disables a plugin.
 
 Enables a plugin.
 
-**オプション**
+**Parameters**
 
 `handle`
 :   The plugin handle. (required)
@@ -690,7 +723,7 @@ Enables a plugin.
 
 Installs a plugin.
 
-**パラメータ**
+**Parameters**
 
 `handle`
 :   The plugin handle. (required)
@@ -717,7 +750,7 @@ Manages the Project Config.
 
 Applies project config file changes.
 
-**オプション**
+**Options**
 
 `--force`
 :   Whether every entry change should be force-applied.\ boolean, 0 or 1 (defaults to 0)
@@ -728,7 +761,7 @@ Prints a diff of the pending project config YAML changes.
 
 **Options**
 
-`--path`
+`--invert`
 :   Treats the loaded project config as the source of truth, rather than the YAML files.\ boolean, 0 or 1 (defaults to 0)
 
 #### `project-config/rebuild`
@@ -918,7 +951,7 @@ Re-saves categories.
 
 Re-saves entries.
 
-**オプション**
+**Options**
 
 `--element-id`
 :   The ID(s) of the elements to resave.
@@ -954,7 +987,7 @@ Re-saves entries.
 
 Re-saves Matrix blocks.
 
-**オプション**
+**Options**
 
 `--element-id`
 :   The ID(s) of the elements to resave.
@@ -990,7 +1023,7 @@ Re-saves Matrix blocks.
 
 Re-saves tags.
 
-**オプション**
+**Options**
 
 `--element-id`
 :   The ID(s) of the elements to resave.
@@ -1101,7 +1134,7 @@ Stores new DB connection settings to the `.env` file.
 :   The database password to connect with.
 
 `--port`
-:   The database server port. デフォルトは、MySQL 向けの 3306、および、PostgreSQL 向けの 5432。
+:   The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
 
 `--schema`
 :   The database schema to use (PostgreSQL only).
