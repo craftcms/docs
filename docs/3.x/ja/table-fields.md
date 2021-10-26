@@ -23,18 +23,17 @@
 
 ## テンプレート記法
 
-テンプレート内でテーブルフィールドを呼び出すと、行の配列を返します。 それぞれの行は、その行の列ごとの値を保持するサブ配列です。
+Calling a Table field in your templates and GraphQL queries will return an array of the rows. それぞれの行は、その行の列ごとの値を保持するサブ配列です。
 
 ::: code
 ```twig
-{% if entry.whiskeyTableHandle|length %}
-    <h3>Whiskeys</h3>
-
-    <ul>
-        {% for row in entry.whiskeyTableHandle %}
-            <li>{{ row.whiskey }} - {{ row.description }} - {{ row.proof }}</li>
-        {% endfor %}
-    </ul>
+{% if entry.myFieldHandle|length %}
+<h3>Whiskeys</h3>
+<ul>
+  {% for row in entry.myFieldHandle %}
+    <li>{{ row.whiskey }} - {{ row.description }} - {{ row.proof }}</li>
+  {% endfor %}
+</ul>
 {% endif %}
 ```
 ```php
@@ -47,4 +46,72 @@ if (count($entry->myFieldHandle)) {
     }
 }
 ```
+```graphql
+{
+  # (...) query for relevant entry
+  myFieldHandle {
+    whiskey
+    description
+    proof
+  }
+}
+```
 :::
+
+::: tip
+In each example above, the custom column handle could also be accessed by a key named `'col*'`, where `*` is the order in which it was saved. Example:
+
+- `whiskey` → `col1`
+- `description` → `col2`
+- `proof` → `col3`
+:::
+
+### Mutating Table Data
+
+You can mutate table data by providing an array of rows, each representing its column’s data with a `'col*'` key:
+
+```graphql
+mutation saveEntry(
+  $title: String,
+  $slug: String,
+  $authorId: ID,
+  $tableRows: [myFieldHandle_TableRowInput],
+) {
+  save_cocktails_cocktails_Entry(
+    title: $title,
+    slug: $slug,
+    authorId: $authorId,
+    myFieldHandle: $tableRows
+  ) {
+    title
+    slug
+    authorId
+    dateCreated @formatDateTime (format: "Y-m-d")
+    myFieldHandle {
+      whiskey
+      description
+      proof
+    }
+  }
+}
+
+# query variables:
+{
+  "title": "Gin and Tonic",
+  "slug": "gin-tonic",
+  "authorId": 1,
+  "myFieldHandle": [
+    {
+      "col1": "High West Double Rye",
+      "col2": "Blend of straight and rye whiskeys.",
+      "col3": 92,
+    },
+    {
+      "col1": "Blanton’s Single Barrel",
+      "col2": "Has been called liquid gold.",
+      "col3": 92,
+    },
+  ]
+}
+
+```
