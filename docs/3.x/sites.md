@@ -80,14 +80,14 @@ You can change the Primary site once you create additional sites. Craft will aut
 
 ### Site URL
 
-Each site has a Base URL, which Craft uses as the starting point when generating dynamic links to entries and other site content.
+Each site has a Base URL Craft uses to generate links to entries and other site content.
 
 Multiple sites can share the same host name, such as `https://craftcms.com/` and `https://craftcms.com/de/`, or they can have different host names, such as `https://craftcms.com/` and `https://de.craftcms.com/`.
 
 If you want to create a site with a different host name, you must configure your server to handle traffic for it. The host name can either point to the same web root as your current site (e.g. `web/`), or you may want to give it its own separate web root. If you do the latter, make sure you copy your `.htaccess` and `index.php` files into the new web root.
 
 ::: tip
-If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](https://craftcms.com/support/license-enforcement), you’ll want to pick one of the domains to access the Craft control panel from for _all_ of the sites.
+If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](https://craftcms.com/support/license-enforcement), you’ll want to pick one of the domains to access the Craft control panel from for _all_ sites.
 :::
 
 ::: warning
