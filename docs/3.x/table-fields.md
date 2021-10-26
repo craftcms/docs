@@ -104,12 +104,12 @@ mutation saveEntry(
     {
       "col1": "High West Double Rye",
       "col2": "Blend of straight and rye whiskeys.",
-      "col3": 92,
+      "col3": 92
     },
     {
       "col1": "Blanton’s Single Barrel",
       "col2": "Has been called liquid gold.",
-      "col3": 92,
+      "col3": 92
     },
   ]
 }
