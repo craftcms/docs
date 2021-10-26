@@ -113,7 +113,7 @@ Lock file operations: 87 installs, 0 updates, 0 removals
 8. Prompts you to run [`nitro apply`](commands.md#apply) in order to update Nitro’s settings and your hosts file.
 
 ::: tip
-If you’re installing Craft, don’t forget to [run the setup wizard](../../3.x/installation.md#step-6-run-the-setup-wizard) after `nitro create` has finished!
+If you’re installing Craft, don’t forget to [run the setup wizard](../../3.x/installation.md#step-6-run-the-setup-wizard) with `nitro craft setup` after `nitro create` has finished!
 :::
 
 ::: tip
