@@ -75,23 +75,28 @@ You can change the Primary site once you create additional sites. Craft will aut
 
 ### Site URL
 
-Each site has a Base URL, which Craft uses as the starting point when generating dynamic links to entries and other site content.
+Each site has a Base URL Craft uses to generate links to entries and other site content.
 
 Multiple sites can share the same host name, such as `https://craftcms.com/` and `https://craftcms.com/de/`, or they can have different host names, such as `https://craftcms.com/` and `https://de.craftcms.com/`.
 
 If you want to create a site with a different host name, you must configure your server to handle traffic for it. The host name can either point to the same web root as your current site (e.g. `web/`), or you may want to give it its own separate web root. If you do the latter, make sure you copy your `.htaccess` and `index.php` files into the new web root.
 
 ::: tip
-If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](https://craftcms.com/support/license-enforcement), you’ll want to pick one of the domains to access the Craft control panel from for _all_ of the sites.
+If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](https://craftcms.com/support/license-enforcement), you’ll want to pick one of the domains to access the Craft control panel from for _all_ sites.
+:::
+
+::: tip
+If your primary site’s Base URL includes a subdirectory (i.e. `https://foo.dev/bar/`), you should set the [baseCpUrl](config3:baseCpUrl) config setting.
 :::
 
 ::: warning
-Don’t ever use the `@web` alias when defining your sites’ Base URLs. It could introduce a [cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) vulnerability, and Craft won’t be able to reliably determine which site is being requested.
+Careful using the `@web` alias to define your sites’ Base URLs.  
+You should explicitly override the alias to avoid introducing a [cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) vulnerability, and to make sure Craft can reliably determine which site is being requested. See [Aliases](config/#aliases) for an example.
 :::
 
 ## Propagating Entries Across All Enabled Sites
 
-In the settings for each Channel Section is an option to propagate entries in that section across all sites. This is enabled by default, and is the only option for Single and Structure sections.
+In the settings for each Channel Section is an option to propagate entries in that section across all sites. This is enabled by default, and is the only option for Single sections.
 
 When enabled, Craft will create the new entry in each site enabled for that section using the submitted content.
 
@@ -152,17 +157,17 @@ This guide will walk you through all of the steps that are typically involved in
 
 ### Step 1: Defining Your Sites and Languages
 
-The first step to creating localized site is to decide the languages you need to support. After that, create a new Site in Craft for each supported language using the [guide on configuring a multi-site setup in Craft](sites.md).
+The first step to creating localized site is to decide the languages you need to support. After that, create a new Site in Craft for each supported language.
 
 ### Step 2: Update Your Sections
 
-After creating a new site for a language, enable the new site in each Section. Fill out the Entry URI Format (for Channel and Structure sections) or URI (for Single sections) to reflect how you want the URIs structured for that site. In Settings → Sections, go into each section settings you want included in the localized site and enable the site in the Site Settings.
+After creating a new site for a language, enable the new site in each Section. In **Settings** → **Sections**, go into each section settings you want included in the localized site and enable the site in the Site Settings. Fill out the Entry URI Format (for Channel and Structure sections) or URI (for Single sections) to reflect how you want the URIs structured for that site.
 
 ### Step 3: Define Your Translatable Fields
 
-In Settings → Fields, choose the fields you want to have translatable. Under Translation Method, choose "Translate for each language."
+In **Settings** → **Fields**, choose the fields you want to have translatable. Under **Translation Method**, choose **Translate for each language**.
 
-Craft will allow you to update this field's content in each entry on a per-language basis.
+Craft will allow you to update this field’s content in each entry on a per-language basis.
 
 ### Step 4: Update Your Templates
 
