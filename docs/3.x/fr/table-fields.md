@@ -23,18 +23,17 @@ Table fields will show the table as configured based on the field settings. You 
 
 ## Templating
 
-Calling a Table field in your templates will return an array of the rows. Each row is a sub-array which holds each of the columns’ values for that row.
+Calling a Table field in your templates and GraphQL queries will return an array of the rows. Each row is a sub-array which holds each of the columns’ values for that row.
 
 ::: code
 ```twig
-{% if entry.whiskeyTableHandle|length %}
-    <h3>Whiskeys</h3>
-
-    <ul>
-        {% for row in entry.whiskeyTableHandle %}
-            <li>{{ row.whiskey }} - {{ row.description }} - {{ row.proof }}</li>
-        {% endfor %}
-    </ul>
+{% if entry.myFieldHandle|length %}
+<h3>Whiskeys</h3>
+<ul>
+  {% for row in entry.myFieldHandle %}
+    <li>{{ row.whiskey }} - {{ row.description }} - {{ row.proof }}</li>
+  {% endfor %}
+</ul>
 {% endif %}
 ```
 ```php
@@ -47,4 +46,72 @@ if (count($entry->myFieldHandle)) {
     }
 }
 ```
+```graphql
+{
+  # (...) query for relevant entry
+  myFieldHandle {
+    whiskey
+    description
+    proof
+  }
+}
+```
 :::
+
+::: tip
+In each example above, the custom column handle could also be accessed by a key named `'col*'`, where `*` is the order in which it was saved. Example:
+
+- `whiskey` → `col1`
+- `description` → `col2`
+- `proof` → `col3`
+:::
+
+### Mutating Table Data
+
+You can mutate table data by providing an array of rows, each representing its column’s data with a `'col*'` key:
+
+```graphql
+mutation saveEntry(
+  $title: String,
+  $slug: String,
+  $authorId: ID,
+  $tableRows: [myFieldHandle_TableRowInput],
+) {
+  save_cocktails_cocktails_Entry(
+    title: $title,
+    slug: $slug,
+    authorId: $authorId,
+    myFieldHandle: $tableRows
+  ) {
+    title
+    slug
+    authorId
+    dateCreated @formatDateTime (format: "Y-m-d")
+    myFieldHandle {
+      whiskey
+      description
+      proof
+    }
+  }
+}
+
+# query variables:
+{
+  "title": "Gin and Tonic",
+  "slug": "gin-tonic",
+  "authorId": 1,
+  "myFieldHandle": [
+    {
+      "col1": "High West Double Rye",
+      "col2": "Blend of straight and rye whiskeys.",
+      "col3": 92,
+    },
+    {
+      "col1": "Blanton’s Single Barrel",
+      "col2": "Has been called liquid gold.",
+      "col3": 92,
+    },
+  ]
+}
+
+```
