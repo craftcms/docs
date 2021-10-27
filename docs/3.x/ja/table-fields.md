@@ -97,10 +97,10 @@ mutation saveEntry(
 
 # query variables:
 {
-  "title": "Gin and Tonic",
-  "slug": "gin-tonic",
+  "title": "Whiskies",
+  "slug": "whiskies",
   "authorId": 1,
-  "myFieldHandle": [
+  "tableRows": [
     {
       "col1": "High West Double Rye",
       "col2": "Blend of straight and rye whiskeys.",
