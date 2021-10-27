@@ -97,8 +97,8 @@ mutation saveEntry(
 
 # query variables:
 {
-  "title": "Gin and Tonic",
-  "slug": "gin-tonic",
+  "title": "Whiskies",
+  "slug": "whiskies",
   "authorId": 1,
   "tableRows": [
     {
