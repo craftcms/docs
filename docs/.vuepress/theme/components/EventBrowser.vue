@@ -1,13 +1,20 @@
 <template>
   <div>
     <div class="search">
-      <div class="w-full shadow rounded p-4">
-        <model-select
-          :options="eventOptions"
-          v-model="currentEvent"
-          placeholder="Select an event..."
+      <div class="w-full shadow rounded">
+        <vue-autosuggest
+          v-model="query"
+          :suggestions="suggestions"
+          :input-props="{
+            placeholder: 'Select an event...',
+            onInputChange: onInputChange,
+            class: 'border rounded py-1 px-2 m-3',
+            style: 'width: calc(100% - 1.5rem);'
+          }"
+          :get-suggestion-value="getSuggestionValue"
+          @selected="onSelected"
         >
-        </model-select>
+        </vue-autosuggest>
       </div>
     </div>
     <div v-if="currentEvent" class="detail">
@@ -142,22 +149,35 @@
   </div>
 </template>
 
-<style></style>
+<style lang="postcss">
+.theme-default-content .autosuggest__results ul {
+  @apply m-0 p-0 overflow-y-scroll;
+  max-height: 300px;
+}
+
+.autosuggest__results .autosuggest__results-item {
+  @apply list-none font-mono text-sm py-1 px-4;
+}
+
+.autosuggest__results .autosuggest__results-item:hover {
+  @apply bg-gray-300;
+}
+</style>
 
 <script>
-import { ModelSelect } from "vue-search-select";
+import { VueAutosuggest } from "vue-autosuggest";
 import EventData from "../../../3.x/event-data/events.json";
 import Prism from "prismjs";
 import "prismjs/components/prism-php";
 import "prismjs/components/prism-markup-templating";
-import "vue-search-select/dist/VueSearchSelect.css";
 
 export default {
   components: {
-    ModelSelect
+    VueAutosuggest
   },
   data() {
     return {
+      query: "",
       eventData: EventData,
       eventOptions: [],
       eventSearchKeyword: "",
@@ -176,8 +196,28 @@ export default {
     this.eventOptions = options;
   },
   methods: {
+    onInputChange(q) {
+      this.query = (q || "").toLowerCase();
+    },
     getClassName(fullClass) {
       return fullClass.split("\\").pop();
+    },
+    onSelected(item) {
+      let itemValue = this.getSuggestionValue(item);
+
+      if (itemValue && itemValue.value) {
+        this.currentEvent = itemValue.value;
+      }
+    },
+    getSuggestionValue(suggestion) {
+      this.eventData.forEach(option => {
+        let optionLabel = option.class + "::" + option.name;
+
+        if (optionLabel === suggestion.item.replace("//", "/")) {
+          this.currentEvent = option.value;
+          return option.value;
+        }
+      });
     }
   },
   watch: {
@@ -192,6 +232,22 @@ export default {
     }
   },
   computed: {
+    suggestions() {
+      return [
+        {
+          data: this.eventData
+            .filter(item => {
+              let itemName = item.class + "::" + item.name;
+              return (
+                itemName.toLowerCase().indexOf(this.query.toLowerCase()) !== -1
+              );
+            })
+            .map(item => {
+              return item.class + "::" + item.name;
+            })
+        }
+      ];
+    },
     exampleCode() {
       let classImports = [
         "yii\\base\\Event",
