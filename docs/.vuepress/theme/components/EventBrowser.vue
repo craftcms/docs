@@ -44,6 +44,7 @@
               <div class="flex">
                 <label
                   class="w-1/3 text-red bg-gray-300 py-2 rounded-l text-center flex items-center justify-center px-1 cursor-pointer"
+                  title="Example should exclude this condition."
                   :for="filterType + '-off'"
                   :class="{
                     'bg-gray-400 shadow-inner':
@@ -81,6 +82,7 @@
                     'bg-gray-400 shadow-inner':
                       filterSelections[filterType] == ''
                   }"
+                  title="Example should not account for this condition."
                 >
                   <input
                     type="radio"
@@ -113,6 +115,7 @@
                     'bg-gray-400 shadow-inner':
                       filterSelections[filterType] == 'on'
                   }"
+                  title="Example should include this condition."
                 >
                   <input
                     type="radio"
@@ -254,7 +257,8 @@ export default {
         this.currentEvent.class,
         this.currentEvent.type
       ];
-      // TODO: add imports added by filter selection
+      // TODO: add imports specified by filter selection
+      // TODO: honor filter `excludes` options for latest selection
       let html = "";
 
       // remove any duplicate imports
