@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="search">
+  <div class="event-browser">
+    <div class="event-search">
       <div class="w-full shadow rounded">
         <vue-autosuggest
           v-model="query"
@@ -18,20 +18,22 @@
       </div>
     </div>
     <div v-if="currentEvent" class="detail">
-      <h2>{{ currentEvent.class }}::{{ currentEvent.name }}</h2>
+      <h2>
+        <code>{{ currentEvent.class }}::{{ currentEvent.name }}</code>
+      </h2>
       <p v-if="currentEvent.desc">{{ currentEvent.desc }}</p>
 
       <div class="example">
         <h3>Example</h3>
 
         <fieldset v-if="filterOptions" class="filters shadow rounded px-4 pb-2">
-          <legend class="text-light-slate bg-white px-2 rounded -mx-2">
+          <legend>
             <b>Filter Options:</b> toggle to update the example below.
           </legend>
           <div
             v-for="(filterData, filterType, index) in filterOptions"
             :key="filterType"
-            class="flex w-full py-2"
+            class="filter-option flex w-full py-2"
             :class="{ 'border-t': index !== 0 }"
           >
             <div class="w-4/5 flex items-center content-center">
@@ -43,12 +45,11 @@
             <div class="w-1/5 text-right">
               <div class="flex">
                 <label
-                  class="w-1/3 text-red bg-gray-300 py-2 rounded-l text-center flex items-center justify-center px-1 cursor-pointer"
+                  class="filter-toggle text-red rounded-l"
                   title="Example should exclude this condition."
                   :for="filterType + '-off'"
                   :class="{
-                    'bg-gray-400 shadow-inner':
-                      filterSelections[filterType] == 'off'
+                    selected: filterSelections[filterType] == 'off'
                   }"
                   @click="selectFilter(filterType, 'off')"
                 >
@@ -77,11 +78,10 @@
                   </svg>
                 </label>
                 <label
-                  class="w-1/3 text-gray-500 py-2 bg-gray-300 text-center border-l-2 border-r-2 border-white flex items-center justify-center cursor-pointer"
+                  class="filter-toggle unset text-gray-500 border-l-2 border-r-2"
                   :for="filterType + '-unset'"
                   :class="{
-                    'bg-gray-400 shadow-inner':
-                      filterSelections[filterType] == ''
+                    selected: filterSelections[filterType] == ''
                   }"
                   title="Example should not account for this condition."
                   @click="selectFilter(filterType, '')"
@@ -111,11 +111,10 @@
                   </svg>
                 </label>
                 <label
-                  class="w-1/3 text-green bg-gray-300 py-2 rounded-r text-center flex items-center justify-center cursor-pointer"
+                  class="filter-toggle text-green rounded-r"
                   :for="filterType + '-on'"
                   :class="{
-                    'bg-gray-400 shadow-inner':
-                      filterSelections[filterType] == 'on'
+                    selected: filterSelections[filterType] == 'on'
                   }"
                   title="Example should include this condition."
                   @click="selectFilter(filterType, 'on')"
@@ -156,6 +155,35 @@
 </template>
 
 <style lang="postcss">
+.event-browser {
+}
+
+.event-browser {
+  legend {
+    @apply text-light-slate px-2 rounded -mx-2;
+    background: var(--tooltip-bg-color);
+  }
+
+  .filter-option {
+    border-color: var(--border-color);
+  }
+
+  .filter-toggle {
+    @apply text-center flex items-center justify-center px-1 cursor-pointer bg-gray-300 py-2 w-1/3;
+
+    &.unset {
+      border-color: var(--bg-color);
+    }
+
+    &.selected {
+      @apply bg-gray-400 shadow-inner;
+    }
+  }
+}
+
+.event-search {
+}
+
 .theme-default-content .autosuggest__results ul {
   @apply m-0 p-0 overflow-y-scroll;
   max-height: 300px;
@@ -229,13 +257,24 @@ export default {
     selectFilter(type, value) {
       const selected = this.currentEvent.filters[type];
 
+      // Add any extra inputs this filter has
       if (selected.imports !== undefined && selected.imports.length) {
         this.extraImports = selected.imports;
       } else {
         this.extraImports = [];
       }
 
+      // Force off any filters this one specifically excludes
       if (selected.excludes !== undefined && selected.excludes.length) {
+        selected.excludes.forEach(excludesFilter => {
+          if (this.filterSelections[excludesFilter] !== undefined) {
+            this.filterSelections[excludesFilter] = "";
+          } else {
+            console.log(
+              `“${excludesFilter}” is not a filter that can be un-set.`
+            );
+          }
+        });
       }
     }
   },
@@ -275,8 +314,7 @@ export default {
         this.currentEvent.class,
         this.currentEvent.type
       ];
-      // TODO: add imports specified by filter selection
-      // TODO: honor filter `excludes` options for latest selection
+
       let html = "";
 
       classImports = classImports
@@ -338,9 +376,11 @@ export default {
 
       return Prism.highlight(html, Prism.languages.php, "php");
     },
+    // Returns all filter options for the chosen event
     filterOptions() {
       return this.currentEvent.filters;
     },
+    // Returns only the active (off or on, but not neutral) filters for the chosen event
     activeFilters() {
       return Object.entries(this.filterSelections).filter(([key, value]) => {
         return value !== "";
