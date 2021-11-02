@@ -50,6 +50,7 @@
                     'bg-gray-400 shadow-inner':
                       filterSelections[filterType] == 'off'
                   }"
+                  @click="selectFilter(filterType, 'off')"
                 >
                   <input
                     type="radio"
@@ -83,6 +84,7 @@
                       filterSelections[filterType] == ''
                   }"
                   title="Example should not account for this condition."
+                  @click="selectFilter(filterType, '')"
                 >
                   <input
                     type="radio"
@@ -116,6 +118,7 @@
                       filterSelections[filterType] == 'on'
                   }"
                   title="Example should include this condition."
+                  @click="selectFilter(filterType, 'on')"
                 >
                   <input
                     type="radio"
@@ -185,7 +188,8 @@ export default {
       eventOptions: [],
       eventSearchKeyword: "",
       currentEvent: "",
-      filterSelections: {}
+      filterSelections: {},
+      extraImports: []
     };
   },
   mounted() {
@@ -221,15 +225,29 @@ export default {
           return option.value;
         }
       });
+    },
+    selectFilter(type, value) {
+      const selected = this.currentEvent.filters[type];
+
+      if (selected.imports !== undefined && selected.imports.length) {
+        this.extraImports = selected.imports;
+      } else {
+        this.extraImports = [];
+      }
+
+      if (selected.excludes !== undefined && selected.excludes.length) {
+      }
     }
   },
   watch: {
     currentEvent(event) {
       let filterSelections = {};
 
-      Object.keys(event.filters).forEach(label => {
-        filterSelections[label] = "";
-      });
+      if (event.filters !== undefined) {
+        Object.keys(event.filters).forEach(label => {
+          filterSelections[label] = "";
+        });
+      }
 
       this.filterSelections = filterSelections;
     }
@@ -262,6 +280,7 @@ export default {
       let html = "";
 
       classImports = classImports
+        .concat(this.extraImports)
         .filter((item, index, inputArray) => {
           // remove any duplicate imports
           return inputArray.indexOf(item) == index;
@@ -318,7 +337,6 @@ export default {
       html += `);`;
 
       return Prism.highlight(html, Prism.languages.php, "php");
-      return html;
     },
     filterOptions() {
       return this.currentEvent.filters;
