@@ -162,7 +162,7 @@
   @apply list-none font-mono text-sm py-1 px-4;
 }
 
-.autosuggest__results .autosuggest__results-item:hover {
+.autosuggest__results .autosuggest__results-item--highlighted {
   @apply bg-gray-300;
 }
 </style>
@@ -261,10 +261,15 @@ export default {
       // TODO: honor filter `excludes` options for latest selection
       let html = "";
 
-      // remove any duplicate imports
-      classImports = classImports.filter((item, index, inputArray) => {
-        return inputArray.indexOf(item) == index;
-      });
+      classImports = classImports
+        .filter((item, index, inputArray) => {
+          // remove any duplicate imports
+          return inputArray.indexOf(item) == index;
+        })
+        .sort((a, b) => {
+          // alphabetize imports
+          return a > b;
+        });
 
       /**
        * Imports
