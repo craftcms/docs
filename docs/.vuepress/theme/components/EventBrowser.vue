@@ -184,9 +184,15 @@
 .event-search {
 }
 
+.theme-default-content .autosuggest__results {
+  @apply absolute z-20 w-full;
+}
+
 .theme-default-content .autosuggest__results ul {
-  @apply m-0 p-0 overflow-y-scroll;
-  max-height: 300px;
+  @apply m-0 p-0 overflow-y-scroll shadow-lg z-30 w-full relative rounded-b;
+  background-color: var(--bg-color);
+  top: -0.25rem;
+  max-height: 400px;
 }
 
 .autosuggest__results .autosuggest__results-item {
