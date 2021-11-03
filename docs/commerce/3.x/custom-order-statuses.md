@@ -73,6 +73,24 @@ If no line item status is designated as the default, line items have a `null` or
 
 ## Templating
 
+### Showing Customers the History of an Order
+
+An Order's <commerce3:craft\commerce\models\StatusHistory> models are available via `order.histories`.  Every status has a `newStatus` property reflecting which status the Order changed _to_, and all but the first record will have an `oldStatus`. The `message` property contains any text from the Order's "notes" field, when the status change took place.
+
+The new and old status properties return <commerce3:craft\commerce\models\OrderStatus> models, which include a `name` and `description`.
+
+```twig
+<ul>
+  {% for history in order.histories %}
+    {% set newStatus = history.newStatus %}
+
+    <li>{{ newStatus.name }} ({{ history.dateCreated | date('short') }}): {{ history.message }}</li>
+
+    {# `newStatus.color` and `newStatus.handle` are also available, if you want to distinguish (visually or functionally) between history records! #}
+  {% endfor %}
+</ul>
+```
+
 ### craft.commerce.orderStatuses.allOrderStatuses
 
 Returns an array of <commerce3:craft\commerce\models\OrderStatus> objects representing all the order statuses in the system.
