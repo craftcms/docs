@@ -120,7 +120,7 @@ Category queries support the following parameters:
 | Param                                     | Description
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [ancestorDist](#ancestordist)             | Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
-| [ancestorOf](#ancestorof)                 | Narrows the query results to only categories that are ancestors of another category.
+| [ancestorOf](#ancestorof)                 | Narrows the query results to only categories that are ancestors of another category in its structure.
 | [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
 | [asArray](#asarray)                       | Causes the query to return matching categories as arrays of data, rather than [Category](craft3:craft\elements\Category) objects.
 | [clearCachedResult](#clearcachedresult)   | Clears the cached result.
@@ -131,23 +131,23 @@ Category queries support the following parameters:
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [group](#group)                           | Narrows the query results based on the category groups the categories belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
-| [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the categories have any descendants.
+| [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the categories have any descendants in their structure.
 | [id](#id)                                 | Narrows the query results based on the categories’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching categories as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [leaves](#leaves)                         | Narrows the query results based on whether the categories are “leaves” (categories with no descendants).
 | [level](#level)                           | Narrows the query results based on the categories’ level within the structure.
 | [limit](#limit)                           | Determines the number of categories that should be returned.
-| [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the category that comes immediately after another category.
+| [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the category that comes immediately after another category in its structure.
 | [offset](#offset)                         | Determines how many categories should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC`, or the order defined by the category group if the [group](#group) or [groupId](#groupid) params are set to a single group.)
-| [positionedAfter](#positionedafter)       | Narrows the query results to only categories that are positioned after another category.
-| [positionedBefore](#positionedbefore)     | Narrows the query results to only categories that are positioned before another category.
+| [positionedAfter](#positionedafter)       | Narrows the query results to only categories that are positioned after another category in its structure.
+| [positionedBefore](#positionedbefore)     | Narrows the query results to only categories that are positioned before another category in its structure.
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the category that comes immediately before another category.
+| [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the category that comes immediately before another category in its structure.
 | [relatedTo](#relatedto)                   | Narrows the query results to only categories that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only categories that match a search query.
-| [siblingOf](#siblingof)                   | Narrows the query results to only categories that are siblings of another category.
+| [siblingOf](#siblingof)                   | Narrows the query results to only categories that are siblings of another category in its structure.
 | [site](#site)                             | Determines which site(s) the categories should be queried in.
 | [siteId](#siteid)                         | Determines which site(s) the categories should be queried in, per the site’s ID.
 | [slug](#slug)                             | Narrows the query results based on the categories’ slugs.
@@ -188,7 +188,7 @@ $categories = \craft\elements\Category::find()
 
 #### `ancestorOf`
 
-Narrows the query results to only categories that are ancestors of another category.
+Narrows the query results to only categories that are ancestors of another category in its structure.
 
 
 
@@ -518,7 +518,7 @@ $categories = \craft\elements\Category::find()
 
 #### `hasDescendants`
 
-Narrows the query results based on whether the categories have any descendants.
+Narrows the query results based on whether the categories have any descendants in their structure.
 
 
 
@@ -709,7 +709,7 @@ $categories = \craft\elements\Category::find()
 
 #### `nextSiblingOf`
 
-Narrows the query results to only the category that comes immediately after another category.
+Narrows the query results to only the category that comes immediately after another category in its structure.
 
 
 
@@ -787,7 +787,7 @@ $categories = \craft\elements\Category::find()
 
 #### `positionedAfter`
 
-Narrows the query results to only categories that are positioned after another category.
+Narrows the query results to only categories that are positioned after another category in its structure.
 
 
 
@@ -819,7 +819,7 @@ $categories = \craft\elements\Category::find()
 
 #### `positionedBefore`
 
-Narrows the query results to only categories that are positioned before another category.
+Narrows the query results to only categories that are positioned before another category in its structure.
 
 
 
@@ -886,7 +886,7 @@ $categories = \craft\elements\Category::find()
 
 #### `prevSiblingOf`
 
-Narrows the query results to only the category that comes immediately before another category.
+Narrows the query results to only the category that comes immediately before another category in its structure.
 
 
 
@@ -978,7 +978,7 @@ $categories = \craft\elements\Category::find()
 
 #### `siblingOf`
 
-Narrows the query results to only categories that are siblings of another category.
+Narrows the query results to only categories that are siblings of another category in its structure.
 
 
 
