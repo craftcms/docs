@@ -281,7 +281,7 @@ Entry queries support the following parameters:
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [after](#after)                           | Narrows the query results to only entries that were posted on or after a certain date.                                                                                                                                                                                                    |
 | [ancestorDist](#ancestordist)             | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [ancestorOf](#ancestorof).                                                                                                                                                   |
-| [ancestorOf](#ancestorof)                 | Narrows the query results to only entries that are ancestors of another entry.                                                                                                                                                                                                            |
+| [ancestorOf](#ancestorof)                 | Narrows the query results to only entries that are ancestors of another entry in its structure.                                                                                                                                                                                           |
 | [anyStatus](#anystatus)                   | Removes element filters based on their statuses.                                                                                                                                                                                                                                          |
 | [asArray](#asarray)                       | Causes the query to return matching entries as arrays of data, rather than [Entry](craft3:craft\elements\Entry) objects.                                                                                                                                                                |
 | [authorGroup](#authorgroup)               | Narrows the query results based on the user group the entries’ authors belong to.                                                                                                                                                                                                         |
@@ -299,21 +299,21 @@ Entry queries support the following parameters:
 | [drafts](#drafts)                         | Narrows the query results to only drafts entries.                                                                                                                                                                                                                                         |
 | [expiryDate](#expirydate)                 | Narrows the query results based on the entries’ expiry dates.                                                                                                                                                                                                                             |
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).                                                                                                                                                                                                              |
-| [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the entries have any descendants.                                                                                                                                                                                                              |
+| [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the entries have any descendants in their structure.                                                                                                                                                                                           |
 | [id](#id)                                 | Narrows the query results based on the entries’ IDs.                                                                                                                                                                                                                                      |
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement). |
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.                                                                                                                                                                                                                                 |
 | [leaves](#leaves)                         | Narrows the query results based on whether the entries are “leaves” (entries with no descendants).                                                                                                                                                                                        |
 | [level](#level)                           | Narrows the query results based on the entries’ level within the structure.                                                                                                                                                                                                               |
 | [limit](#limit)                           | Determines the number of entries that should be returned.                                                                                                                                                                                                                                 |
-| [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the entry that comes immediately after another entry.                                                                                                                                                                                                   |
+| [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the entry that comes immediately after another entry in its structure.                                                                                                                                                                                  |
 | [offset](#offset)                         | Determines how many entries should be skipped in the results.                                                                                                                                                                                                                             |
 | [orderBy](#orderby)                       | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)                                             |
-| [positionedAfter](#positionedafter)       | Narrows the query results to only entries that are positioned after another entry.                                                                                                                                                                                                        |
-| [positionedBefore](#positionedbefore)     | Narrows the query results to only entries that are positioned before another entry.                                                                                                                                                                                                       |
+| [positionedAfter](#positionedafter)       | Narrows the query results to only entries that are positioned after another entry in its structure.                                                                                                                                                                                       |
+| [positionedBefore](#positionedbefore)     | Narrows the query results to only entries that are positioned before another entry in its structure.                                                                                                                                                                                      |
 | [postDate](#postdate)                     | Narrows the query results based on the entries’ post dates.                                                                                                                                                                                                                               |
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.                                                                                                                                                                             |
-| [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the entry that comes immediately before another entry.                                                                                                                                                                                                  |
+| [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the entry that comes immediately before another entry in its structure.                                                                                                                                                                                 |
 | [relatedTo](#relatedto)                   | Narrows the query results to only entries that are related to certain other elements.                                                                                                                                                                                                     |
 | [revisionCreator](#revisioncreator)       | Narrows the query results to only revisions created by a given user.                                                                                                                                                                                                                      |
 | [revisionId](#revisionid)                 | Narrows the query results based on the entries’ revision’s ID (from the `revisions` table).                                                                                                                                                                                               |
@@ -322,7 +322,7 @@ Entry queries support the following parameters:
 | [search](#search)                         | Narrows the query results to only entries that match a search query.                                                                                                                                                                                                                      |
 | [section](#section)                       | Narrows the query results based on the sections the entries belong to.                                                                                                                                                                                                                    |
 | [sectionId](#sectionid)                   | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.                                                                                                                                                                                             |
-| [siblingOf](#siblingof)                   | Narrows the query results to only entries that are siblings of another entry.                                                                                                                                                                                                             |
+| [siblingOf](#siblingof)                   | Narrows the query results to only entries that are siblings of another entry in its structure.                                                                                                                                                                                            |
 | [site](#site)                             | Determines which site(s) the entries should be queried in.                                                                                                                                                                                                                                |
 | [siteId](#siteid)                         | Determines which site(s) the entries should be queried in, per the site’s ID.                                                                                                                                                                                                             |
 | [slug](#slug)                             | Narrows the query results based on the entries’ slugs.                                                                                                                                                                                                                                    |
@@ -399,7 +399,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `ancestorOf`
 
-Narrows the query results to only entries that are ancestors of another entry.
+Narrows the query results to only entries that are ancestors of another entry in its structure.
 
 
 
@@ -954,7 +954,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `hasDescendants`
 
-Narrows the query results based on whether the entries have any descendants.
+Narrows the query results based on whether the entries have any descendants in their structure.
 
 
 
@@ -1144,7 +1144,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `nextSiblingOf`
 
-Narrows the query results to only the entry that comes immediately after another entry.
+Narrows the query results to only the entry that comes immediately after another entry in its structure.
 
 
 
@@ -1222,7 +1222,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `positionedAfter`
 
-Narrows the query results to only entries that are positioned after another entry.
+Narrows the query results to only entries that are positioned after another entry in its structure.
 
 
 
@@ -1254,7 +1254,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `positionedBefore`
 
-Narrows the query results to only entries that are positioned before another entry.
+Narrows the query results to only entries that are positioned before another entry in its structure.
 
 
 
@@ -1356,7 +1356,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `prevSiblingOf`
 
-Narrows the query results to only the entry that comes immediately before another entry.
+Narrows the query results to only the entry that comes immediately before another entry in its structure.
 
 
 
@@ -1635,7 +1635,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `siblingOf`
 
-Narrows the query results to only entries that are siblings of another entry.
+Narrows the query results to only entries that are siblings of another entry in its structure.
 
 
 
