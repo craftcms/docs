@@ -34,7 +34,10 @@
             v-for="(filterData, filterType, index) in filterOptions"
             :key="filterType"
             class="filter-option flex w-full py-2"
-            :class="{ 'border-t': index !== 0 }"
+            :class="{
+              'border-t': index !== 0,
+              disabled: disabledFilters.includes(filterType)
+            }"
           >
             <div class="w-4/5 flex items-center content-center">
               <!-- <span class="block">{{ filterType }}</span> -->
@@ -166,6 +169,10 @@
 
   .filter-option {
     border-color: var(--border-color);
+
+    &.disabled div {
+      @apply opacity-25;
+    }
   }
 
   .filter-toggle {
@@ -223,7 +230,8 @@ export default {
       eventSearchKeyword: "",
       currentEvent: "",
       filterSelections: {},
-      extraImports: []
+      extraImports: [],
+      disabledFilters: []
     };
   },
   mounted() {
@@ -262,26 +270,32 @@ export default {
     },
     selectFilter(type, value) {
       const selected = this.currentEvent.filters[type];
+      let disabled = [];
 
-      // Add any extra inputs this filter has
-      if (selected.imports !== undefined && selected.imports.length) {
-        this.extraImports = selected.imports;
-      } else {
-        this.extraImports = [];
+      if (value !== "") {
+        // Add any extra inputs this filter has
+        if (selected.imports !== undefined && selected.imports.length) {
+          this.extraImports = selected.imports;
+        } else {
+          this.extraImports = [];
+        }
+
+        // Force off any filters this one specifically excludes
+        if (selected.excludes !== undefined && selected.excludes.length) {
+          selected.excludes.forEach(excludesFilter => {
+            if (this.filterSelections[excludesFilter] !== undefined) {
+              this.filterSelections[excludesFilter] = "";
+              disabled.push(excludesFilter);
+            } else {
+              console.log(
+                `“${excludesFilter}” is not a filter that can be un-set.`
+              );
+            }
+          });
+        }
       }
 
-      // Force off any filters this one specifically excludes
-      if (selected.excludes !== undefined && selected.excludes.length) {
-        selected.excludes.forEach(excludesFilter => {
-          if (this.filterSelections[excludesFilter] !== undefined) {
-            this.filterSelections[excludesFilter] = "";
-          } else {
-            console.log(
-              `“${excludesFilter}” is not a filter that can be un-set.`
-            );
-          }
-        });
-      }
+      this.disabledFilters = disabled;
     }
   },
   watch: {
