@@ -120,7 +120,7 @@ Category queries support the following parameters:
 | パラメータ                                     | 説明                                                                                                                                                                                                                 |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [ancestorDist](#ancestordist)             | [ancestorOf](#ancestorof) で指定されたカテゴリから特定の距離だけ離れているカテゴリのみに、クエリの結果を絞り込みます。                                                                                                                                           |
-| [ancestorOf](#ancestorof)                 | 指定したカテゴリの先祖であるカテゴリだけに、クエリの結果を絞り込みます。                                                                                                                                                                               |
+| [ancestorOf](#ancestorof)                 | Narrows the query results to only categories that are ancestors of another category in its structure.                                                                                                              |
 | [anyStatus](#anystatus)                   | ステータスに基づくエレメントのフィルタを削除します。                                                                                                                                                                                         |
 | [asArray](#asarray)                       | [Category](craft3:craft\elements\Category) オブジェクトではなく、データの配列として、マッチしたカテゴリをクエリが返します。                                                                                                                              |
 | [clearCachedResult](#clearcachedresult)   | キャッシュされた結果をクリアします。                                                                                                                                                                                                 |
@@ -131,23 +131,23 @@ Category queries support the following parameters:
 | [fixedOrder](#fixedorder)                 | クエリの結果を [id](#id) で指定された順序で返します。                                                                                                                                                                                   |
 | [group](#group)                           | カテゴリが属するカテゴリグループに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                               |
 | [groupId](#groupid)                       | グループの ID ごとに、カテゴリが属するカテゴリグループに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                  |
-| [hasDescendants](#hasdescendants)         | カテゴリが子孫を持つかどうかに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                 |
+| [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the categories have any descendants in their structure.                                                                                                                 |
 | [id](#id)                                 | カテゴリの ID に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                      |
 | [ignorePlaceholders](#ignoreplaceholders) | [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement) によってセットされたマッチするプレースホルダーエレメントを無視して、データベースに保存されたマッチするカテゴリをクエリが返します。 |
 | [inReverse](#inreverse)                   | クエリの結果を逆順で返します。                                                                                                                                                                                                    |
 | [leaves](#leaves)                         | カテゴリが「leaves」（子孫のないカテゴリ）であるかどうかに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                |
 | [level](#level)                           | ストラクチャー内のカテゴリのレベルに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                              |
 | [limit](#limit)                           | 返されるカテゴリの数を決定します。                                                                                                                                                                                                  |
-| [nextSiblingOf](#nextsiblingof)           | 指定したカテゴリの直後にあるカテゴリだけに、クエリの結果を絞り込みます。                                                                                                                                                                               |
+| [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the category that comes immediately after another category in its structure.                                                                                                     |
 | [offset](#offset)                         | 結果からスキップされるカテゴリの数を決定します。                                                                                                                                                                                           |
 | [orderBy](#orderby)                       | 返されるカテゴリの順序を決定します。 (If empty, defaults to `dateCreated DESC`.)                                                                                                                                                     |
-| [positionedAfter](#positionedafter)       | 指定したカテゴリの後に位置するカテゴリだけに、クエリの結果を絞り込みます。                                                                                                                                                                              |
-| [positionedBefore](#positionedbefore)     | 指定したカテゴリの前に位置するカテゴリだけに、クエリの結果を絞り込みます。                                                                                                                                                                              |
+| [positionedAfter](#positionedafter)       | Narrows the query results to only categories that are positioned after another category in its structure.                                                                                                          |
+| [positionedBefore](#positionedbefore)     | Narrows the query results to only categories that are positioned before another category in its structure.                                                                                                         |
 | [preferSites](#prefersites)               | [unique](#unique) がセットされている場合、マルチサイトでエレメント照会する際に選択されるべきサイトを決定します                                                                                                                                                   |
-| [prevSiblingOf](#prevsiblingof)           | 指定したカテゴリの直前にあるカテゴリだけに、クエリの結果を絞り込みます。                                                                                                                                                                               |
+| [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the category that comes immediately before another category in its structure.                                                                                                    |
 | [relatedTo](#relatedto)                   | 特定の他のエレメントと関連付けられたカテゴリだけに、クエリの結果を絞り込みます。                                                                                                                                                                           |
 | [search](#search)                         | 検索クエリにマッチするカテゴリだけに、クエリの結果を絞り込みます。                                                                                                                                                                                  |
-| [siblingOf](#siblingof)                   | 指定したカテゴリの兄弟であるカテゴリだけに、クエリの結果を絞り込みます。                                                                                                                                                                               |
+| [siblingOf](#siblingof)                   | Narrows the query results to only categories that are siblings of another category in its structure.                                                                                                               |
 | [site](#site)                             | カテゴリを照会するサイトを決定します。                                                                                                                                                                                                |
 | [siteId](#siteid)                         | サイトの ID ごとに、カテゴリを照会するサイトを決定します。                                                                                                                                                                                    |
 | [slug](#slug)                             | カテゴリのスラグに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                       |
@@ -188,7 +188,7 @@ $categories = \craft\elements\Category::find()
 
 #### `ancestorOf`
 
-Narrows the query results to only categories that are ancestors of another category.
+Narrows the query results to only categories that are ancestors of another category in its structure.
 
 
 
@@ -518,7 +518,7 @@ $categories = \craft\elements\Category::find()
 
 #### `hasDescendants`
 
-Narrows the query results based on whether the categories have any descendants.
+Narrows the query results based on whether the categories have any descendants in their structure.
 
 
 
@@ -708,7 +708,7 @@ $categories = \craft\elements\Category::find()
 
 #### `nextSiblingOf`
 
-Narrows the query results to only the category that comes immediately after another category.
+Narrows the query results to only the category that comes immediately after another category in its structure.
 
 
 
@@ -786,7 +786,7 @@ $categories = \craft\elements\Category::find()
 
 #### `positionedAfter`
 
-Narrows the query results to only categories that are positioned after another category.
+Narrows the query results to only categories that are positioned after another category in its structure.
 
 
 
@@ -818,7 +818,7 @@ $categories = \craft\elements\Category::find()
 
 #### `positionedBefore`
 
-Narrows the query results to only categories that are positioned before another category.
+Narrows the query results to only categories that are positioned before another category in its structure.
 
 
 
@@ -883,7 +883,7 @@ $categories = \craft\elements\Category::find()
 
 #### `prevSiblingOf`
 
-Narrows the query results to only the category that comes immediately before another category.
+Narrows the query results to only the category that comes immediately before another category in its structure.
 
 
 
@@ -975,7 +975,7 @@ $categories = \craft\elements\Category::find()
 
 #### `siblingOf`
 
-Narrows the query results to only categories that are siblings of another category.
+Narrows the query results to only categories that are siblings of another category in its structure.
 
 
 
