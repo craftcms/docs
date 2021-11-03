@@ -13,6 +13,7 @@
           }"
           :get-suggestion-value="getSuggestionValue"
           @selected="onSelected"
+          @blur="onBlur"
         >
         </vue-autosuggest>
       </div>
@@ -257,6 +258,11 @@ export default {
       if (itemValue && itemValue.value) {
         this.currentEvent = itemValue.value;
       }
+
+      this.query = "";
+    },
+    onBlur() {
+      this.query = "";
     },
     getSuggestionValue(suggestion) {
       this.eventData.forEach(option => {
