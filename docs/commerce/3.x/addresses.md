@@ -75,7 +75,7 @@ The address model has a read-only `addressLines` parameter that returns a key-va
 
 This parameter is designed to allow consistency when displaying a customer’s address on the front end and in the control panel.
 
-Address lines are used, for example, on the [order edit](orders.md#editing-orders) page in the control panel. There are examples for [displaying an address](https://github.com/craftcms/commerce/blob/main/example-templates/src/shop/_private/address/address.twig) in the [example templates](example-templates.md).
+Address lines are used, for example, on the [order edit](orders.md#editing-orders) page in the control panel. There are examples for [displaying an address](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/_private/address/address.twig) in the [example templates](example-templates.md).
 
 You can customize this array using the [defineAddressLines](extend/events.md#defineaddresslines) event.
 
