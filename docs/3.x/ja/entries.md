@@ -281,7 +281,7 @@ Entry queries support the following parameters:
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [after](#after)                           | 特定の日付以降に投稿されたエントリだけに、クエリの結果を絞り込みます。                                                                                                                                                                                |
 | [ancestorDist](#ancestordist)             | [ancestorOf](#ancestorof) で指定されたエントリから特定の距離だけ離れているエントリのみに、クエリの結果を絞り込みます。                                                                                                                                           |
-| [ancestorOf](#ancestorof)                 | 指定したエントリの先祖であるエントリだけに、クエリの結果を絞り込みます。                                                                                                                                                                               |
+| [ancestorOf](#ancestorof)                 | Narrows the query results to only entries that are ancestors of another entry in its structure.                                                                                                                    |
 | [anyStatus](#anystatus)                   | ステータスに基づくエレメントのフィルタを削除します。                                                                                                                                                                                         |
 | [asArray](#asarray)                       | [Entry](craft3:craft\elements\Entry) オブジェクトではなく、データの配列として、マッチしたエントリをクエリが返します。                                                                                                                                    |
 | [authorGroup](#authorgroup)               | エントリの投稿者が属するユーザーグループに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                           |
@@ -299,21 +299,21 @@ Entry queries support the following parameters:
 | [drafts](#drafts)                         | 下書きのエントリだけに、クエリの結果を絞り込みます。                                                                                                                                                                                         |
 | [expiryDate](#expirydate)                 | エントリの有効期限日に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                     |
 | [fixedOrder](#fixedorder)                 | クエリの結果を [id](#id) で指定された順序で返します。                                                                                                                                                                                   |
-| [hasDescendants](#hasdescendants)         | エントリが子孫を持つかどうかに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                 |
+| [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the entries have any descendants in their structure.                                                                                                                    |
 | [id](#id)                                 | エントリの ID に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                      |
 | [ignorePlaceholders](#ignoreplaceholders) | [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement) によってセットされたマッチするプレースホルダーエレメントを無視して、データベースに保存されたマッチするエントリをクエリが返します。 |
 | [inReverse](#inreverse)                   | クエリの結果を逆順で返します。                                                                                                                                                                                                    |
 | [leaves](#leaves)                         | エントリが「leaves」（子孫のないエントリ）であるかどうかに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                |
 | [level](#level)                           | ストラクチャー内のエントリのレベルに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                              |
 | [limit](#limit)                           | 返されるエントリの数を決定します。                                                                                                                                                                                                  |
-| [nextSiblingOf](#nextsiblingof)           | 指定したエントリの直後にあるエントリだけに、クエリの結果を絞り込みます。                                                                                                                                                                               |
+| [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the entry that comes immediately after another entry in its structure.                                                                                                           |
 | [offset](#offset)                         | 結果からスキップされるエントリの数を決定します。                                                                                                                                                                                           |
 | [orderBy](#orderby)                       | 返されるエントリの順序を決定します。 (If empty, defaults to `postDate DESC`.)                                                                                                                                                        |
-| [positionedAfter](#positionedafter)       | 指定したエントリの後に位置するエントリだけに、クエリの結果を絞り込みます。                                                                                                                                                                              |
-| [positionedBefore](#positionedbefore)     | 指定したエントリの前に位置するエントリだけに、クエリの結果を絞り込みます。                                                                                                                                                                              |
+| [positionedAfter](#positionedafter)       | Narrows the query results to only entries that are positioned after another entry in its structure.                                                                                                                |
+| [positionedBefore](#positionedbefore)     | Narrows the query results to only entries that are positioned before another entry in its structure.                                                                                                               |
 | [postDate](#postdate)                     | エントリの投稿日に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                       |
 | [preferSites](#prefersites)               | [unique](#unique) がセットされている場合、マルチサイトでエレメント照会する際に選択されるべきサイトを決定します                                                                                                                                                   |
-| [prevSiblingOf](#prevsiblingof)           | 指定したエントリの直前にあるエントリだけに、クエリの結果を絞り込みます。                                                                                                                                                                               |
+| [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the entry that comes immediately before another entry in its structure.                                                                                                          |
 | [relatedTo](#relatedto)                   | 特定の他のエレメントと関連付けられたエントリだけに、クエリの結果を絞り込みます。                                                                                                                                                                           |
 | [revisionCreator](#revisioncreator)       | 所定のユーザーに作成されたリビジョンだけに、クエリの結果を絞り込みます。                                                                                                                                                                               |
 | [revisionId](#revisionid)                 | （`revisions` テーブルの）エントリのリビジョン ID に基づいて、クエリの結果を絞り込みます。                                                                                                                                                              |
@@ -322,7 +322,7 @@ Entry queries support the following parameters:
 | [search](#search)                         | 検索クエリにマッチするエントリだけに、クエリの結果を絞り込みます。                                                                                                                                                                                  |
 | [section](#section)                       | エントリが属するセクションに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                  |
 | [sectionId](#sectionid)                   | セクションの ID ごとに、エントリが属するセクションに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                    |
-| [siblingOf](#siblingof)                   | 指定したエントリの兄弟であるエントリだけに、クエリの結果を絞り込みます。                                                                                                                                                                               |
+| [siblingOf](#siblingof)                   | Narrows the query results to only entries that are siblings of another entry in its structure.                                                                                                                     |
 | [site](#site)                             | エントリを照会するサイトを決定します。                                                                                                                                                                                                |
 | [siteId](#siteid)                         | サイトの ID ごとに、エントリを照会するサイトを決定します。                                                                                                                                                                                    |
 | [slug](#slug)                             | エントリのスラグに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                       |
@@ -399,7 +399,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `ancestorOf`
 
-Narrows the query results to only entries that are ancestors of another entry.
+Narrows the query results to only entries that are ancestors of another entry in its structure.
 
 
 
@@ -954,7 +954,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `hasDescendants`
 
-Narrows the query results based on whether the entries have any descendants.
+Narrows the query results based on whether the entries have any descendants in their structure.
 
 
 
@@ -1144,7 +1144,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `nextSiblingOf`
 
-Narrows the query results to only the entry that comes immediately after another entry.
+Narrows the query results to only the entry that comes immediately after another entry in its structure.
 
 
 
@@ -1222,7 +1222,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `positionedAfter`
 
-Narrows the query results to only entries that are positioned after another entry.
+Narrows the query results to only entries that are positioned after another entry in its structure.
 
 
 
@@ -1254,7 +1254,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `positionedBefore`
 
-Narrows the query results to only entries that are positioned before another entry.
+Narrows the query results to only entries that are positioned before another entry in its structure.
 
 
 
@@ -1356,7 +1356,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `prevSiblingOf`
 
-Narrows the query results to only the entry that comes immediately before another entry.
+Narrows the query results to only the entry that comes immediately before another entry in its structure.
 
 
 
@@ -1635,7 +1635,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `siblingOf`
 
-Narrows the query results to only entries that are siblings of another entry.
+Narrows the query results to only entries that are siblings of another entry in its structure.
 
 
 
