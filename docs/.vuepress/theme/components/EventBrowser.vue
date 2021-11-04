@@ -231,8 +231,7 @@ export default {
       eventOptions: [],
       eventSearchKeyword: "",
       currentEvent: "",
-      filterSelections: {},
-      extraImports: []
+      filterSelections: {}
     };
   },
   mounted() {
@@ -388,6 +387,23 @@ export default {
       return Object.entries(this.filterSelections).filter(([key, value]) => {
         return value !== "";
       });
+    },
+    extraImports() {
+      let imports = [];
+
+      // Add excludes from any existing filters that are set
+      this.activeFilters.forEach(([name, value]) => {
+        if (value !== "") {
+          let filter = this.filterOptions[name];
+          if (filter.imports !== undefined && filter.imports.length) {
+            filter.imports.forEach(importClass => {
+              imports.push(importClass);
+            });
+          }
+        }
+      });
+
+      return imports;
     },
     disabledFilters() {
       let disabled = [];
