@@ -394,7 +394,7 @@ export default {
 
       // Add excludes from any existing filters that are set
       this.activeFilters.forEach(([name, value]) => {
-        if (value !== "") {
+        if (value === "on") {
           let filter = this.filterOptions[name];
           if (filter.excludes !== undefined && filter.excludes.length) {
             filter.excludes.forEach(excludesFilter => {
