@@ -22,9 +22,8 @@ As you can see, they are made up three segments:
 
 2.  `<Identifier>` – Either the element’s ID or a custom identifier supported by the element type.
 
-    Entries support the following custom identifiers:
+    Entries support the following custom identifier:
 
-    - `entry-slug`
     - `sectionHandle/entry-slug`
 
     Identifiers can also include the site ID, UUID, or handle that the element should be loaded from, using an `@<Site>` syntax.
