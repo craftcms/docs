@@ -377,6 +377,23 @@ export default {
 
       if (!this.activeFilters.length) {
         html += `        // ...\n`;
+      } else if (this.activeFilters.length === 1) {
+        html += `        if (`;
+
+        const filters = Object.entries(this.activeFilters);
+        const numFilters = filters.length;
+
+        filters.forEach(([key, value], index) => {
+          let label = value[0];
+          let setting = value[1];
+          let filter = this.filterOptions[label];
+          let posNeg = setting === "off" ? "!" : "";
+          html += `${posNeg}${filter.conditionsPhp}`;
+        });
+
+        html += `) {\n`;
+        html += `            // ...\n`;
+        html += `        }\n`;
       } else {
         html += `        if (\n`;
 
