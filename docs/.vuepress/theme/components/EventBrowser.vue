@@ -170,13 +170,18 @@
   .filter-option {
     border-color: var(--border-color);
 
+    div {
+      @apply opacity-100;
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
     &.disabled div {
       @apply opacity-25 pointer-events-none;
     }
   }
 
   .filter-toggle {
-    @apply text-center flex items-center justify-center px-1 cursor-pointer bg-gray-300 py-2 w-1/3;
+    @apply text-center flex items-center justify-center px-1 cursor-pointer bg-gray-300 py-2 w-1/3 select-none;
 
     &.unset {
       border-color: var(--bg-color);
@@ -297,6 +302,25 @@ export default {
         }
       }
 
+      // Add excludes from any existing filters that are on
+      this.activeFilters.forEach(([name, value]) => {
+        if (value === "on") {
+          let filter = this.filterOptions[name];
+          if (filter.excludes !== undefined && filter.excludes.length) {
+            filter.excludes.forEach(excludesFilter => {
+              if (this.filterSelections[excludesFilter] !== undefined) {
+                this.filterSelections[excludesFilter] = "";
+                disabled.push(excludesFilter);
+              } else {
+                console.log(
+                  `“${excludesFilter}” is not a filter that can be un-set.`
+                );
+              }
+            });
+          }
+        }
+      });
+
       this.disabledFilters = disabled;
     }
   },
@@ -372,40 +396,32 @@ export default {
       html += `    function (${typeClassName} $event) {\n`;
 
       if (!this.activeFilters.length) {
+        // Don’t display a condition block
         html += `        // ...\n`;
-      } else if (this.activeFilters.length === 1) {
-        html += `        if (`;
-
-        const filters = Object.entries(this.activeFilters);
-        const numFilters = filters.length;
-
-        filters.forEach(([key, value], index) => {
-          let label = value[0];
-          let setting = value[1];
-          let filter = this.filterOptions[label];
-          let posNeg = setting === "off" ? "!" : "";
-          html += `${posNeg}${filter.conditionsPhp}`;
-        });
-
-        html += `) {\n`;
-        html += `            // ...\n`;
-        html += `        }\n`;
       } else {
-        html += `        if (\n`;
+        let conditions = [];
 
-        const filters = Object.entries(this.activeFilters);
-        const numFilters = filters.length;
-
-        filters.forEach(([key, value], index) => {
-          let label = value[0];
-          let setting = value[1];
-          let filter = this.filterOptions[label];
-          let posNeg = setting === "off" ? "!" : "";
-          html += `            ${posNeg}${filter.conditionsPhp}`;
-          html += index < numFilters - 1 ? ` &&\n` : `\n`;
+        this.activeFilters.forEach(([name, value]) => {
+          let filter = this.filterOptions[name];
+          let posNeg = value === "off" ? "!" : "";
+          conditions.push(`${posNeg}${filter.conditionsPhp}`);
         });
 
-        html += `        ) {\n`;
+        if (conditions.length === 1) {
+          // Single-line condition
+          html += `        if (${conditions[0]}) {\n`;
+        } else {
+          // Multi-line condition
+          html += `        if (\n`;
+
+          conditions.forEach((condition, index) => {
+            html += `            ${condition}`;
+            html += index < conditions.length - 1 ? ` &&\n` : `\n`;
+          });
+
+          html += `        ) {\n`;
+        }
+
         html += `            // ...\n`;
         html += `        }\n`;
       }
