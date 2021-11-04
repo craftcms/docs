@@ -1500,7 +1500,6 @@ Event::on(
         // Add an `$addressQuery->andWhere(..)` to change the addresses that will be purged query
         // $event->addressQuery = $addressQuery
     }
-}
 );
 ```
 
