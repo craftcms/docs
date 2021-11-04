@@ -42,6 +42,7 @@
   "dependencies": {
     "flexsearch": "^0.6.32",
     "html-to-text": "^7.1.1",
+    "marked": "^4.0.0",
     "vue-autosuggest": "^2.2.0"
   }
 }

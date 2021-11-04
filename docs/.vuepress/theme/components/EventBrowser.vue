@@ -19,7 +19,11 @@
       <h2>
         <code>{{ currentEvent.class }}::{{ currentEvent.name }}</code>
       </h2>
-      <p v-if="currentEvent.desc">{{ currentEvent.desc }}</p>
+
+      <div
+        v-if="currentEvent.desc"
+        v-html="renderMarkdown(currentEvent.desc)"
+      ></div>
 
       <div class="example">
         <h3>Example</h3>
@@ -215,6 +219,7 @@
 import { VueAutosuggest } from "vue-autosuggest";
 import EventData from "../../../3.x/event-data/events.json";
 import Prism from "prismjs";
+import { marked } from "marked";
 import "prismjs/components/prism-php";
 import "prismjs/components/prism-markup-templating";
 
@@ -267,6 +272,9 @@ export default {
           return option.value;
         }
       });
+    },
+    renderMarkdown(text) {
+      return marked.parse(text);
     }
   },
   watch: {
