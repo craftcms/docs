@@ -3,16 +3,14 @@
     <div class="event-search">
       <div class="w-full shadow rounded relative">
         <vue-autosuggest
-          v-model="query"
           :suggestions="suggestions"
           :input-props="{
             placeholder: 'Select an event...',
-            onInputChange: onInputChange,
             class: 'border rounded py-1 px-2 m-3',
             style: 'width: calc(100% - 1.5rem);'
           }"
-          :get-suggestion-value="getSuggestionValue"
           @selected="onSelected"
+          @input="onInputChange"
         >
         </vue-autosuggest>
       </div>
@@ -258,7 +256,7 @@ export default {
         this.currentEvent = itemValue.value;
       }
 
-      this.query = "";
+      //this.query = item.item;
     },
     getSuggestionValue(suggestion) {
       this.eventData.forEach(option => {
@@ -290,10 +288,12 @@ export default {
         {
           data: this.eventData
             .filter(item => {
-              let itemName = item.class + "::" + item.name;
-              return (
-                itemName.toLowerCase().indexOf(this.query.toLowerCase()) !== -1
-              );
+              if (this.query === undefined) {
+                return true;
+              }
+
+              let itemName = (item.class + "::" + item.name).toLowerCase();
+              return itemName.indexOf(this.query.toLowerCase()) !== -1;
             })
             .map(item => {
               return item.class + "::" + item.name;
