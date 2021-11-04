@@ -22,12 +22,11 @@
 
 2.  `<Identifier>` – エレメントの ID、または、エレメントタイプによってサポートされているカスタム識別子。
 
-    エントリは次のカスタム識別子をサポートしています。
+    Entries support the following custom identifier:
 
-    - `entry-slug`
     - `sectionHandle/entry-slug`
 
-    `@<Site>` 構文を利用して、エレメントが読み込まれるべきサイト ID、UUID、または、ハンドルを識別子に含めることもできます。
+    Identifiers can also include the site ID, UUID, or handle that the element should be loaded from, using an `@<Site>` syntax.
 
 3.  `<Property>` _（オプション）_ – リファレンスタグが返すべきエレメントのプロパティ。 省略した場合、エレメントの URL が返されます。
 
