@@ -172,7 +172,7 @@
     border-color: var(--border-color);
 
     &.disabled div {
-      @apply opacity-25;
+      @apply opacity-25 pointer-events-none;
     }
   }
 
