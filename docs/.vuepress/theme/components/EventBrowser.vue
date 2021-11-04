@@ -1,7 +1,7 @@
 <template>
   <div class="event-browser">
     <div class="event-search">
-      <div class="w-full shadow rounded">
+      <div class="w-full shadow rounded relative">
         <vue-autosuggest
           v-model="query"
           :suggestions="suggestions"
@@ -54,7 +54,6 @@
                   :class="{
                     selected: filterSelections[filterType] == 'off'
                   }"
-                  @click="selectFilter(filterType, 'off')"
                 >
                   <input
                     type="radio"
@@ -87,7 +86,6 @@
                     selected: filterSelections[filterType] == ''
                   }"
                   title="Example should not account for this condition."
-                  @click="selectFilter(filterType, '')"
                 >
                   <input
                     type="radio"
@@ -120,7 +118,6 @@
                     selected: filterSelections[filterType] == 'on'
                   }"
                   title="Example should include this condition."
-                  @click="selectFilter(filterType, 'on')"
                 >
                   <input
                     type="radio"
@@ -235,8 +232,7 @@ export default {
       eventSearchKeyword: "",
       currentEvent: "",
       filterSelections: {},
-      extraImports: [],
-      disabledFilters: []
+      extraImports: []
     };
   },
   mounted() {
@@ -274,54 +270,6 @@ export default {
           return option.value;
         }
       });
-    },
-    selectFilter(type, value) {
-      const selected = this.currentEvent.filters[type];
-      let disabled = [];
-
-      if (value !== "") {
-        // Add any extra inputs this filter has
-        if (selected.imports !== undefined && selected.imports.length) {
-          this.extraImports = selected.imports;
-        } else {
-          this.extraImports = [];
-        }
-
-        // Force off any filters this one specifically excludes
-        if (selected.excludes !== undefined && selected.excludes.length) {
-          selected.excludes.forEach(excludesFilter => {
-            if (this.filterSelections[excludesFilter] !== undefined) {
-              this.filterSelections[excludesFilter] = "";
-              disabled.push(excludesFilter);
-            } else {
-              console.log(
-                `“${excludesFilter}” is not a filter that can be un-set.`
-              );
-            }
-          });
-        }
-      }
-
-      // Add excludes from any existing filters that are on
-      this.activeFilters.forEach(([name, value]) => {
-        if (value === "on") {
-          let filter = this.filterOptions[name];
-          if (filter.excludes !== undefined && filter.excludes.length) {
-            filter.excludes.forEach(excludesFilter => {
-              if (this.filterSelections[excludesFilter] !== undefined) {
-                this.filterSelections[excludesFilter] = "";
-                disabled.push(excludesFilter);
-              } else {
-                console.log(
-                  `“${excludesFilter}” is not a filter that can be un-set.`
-                );
-              }
-            });
-          }
-        }
-      });
-
-      this.disabledFilters = disabled;
     }
   },
   watch: {
@@ -440,6 +388,30 @@ export default {
       return Object.entries(this.filterSelections).filter(([key, value]) => {
         return value !== "";
       });
+    },
+    disabledFilters() {
+      let disabled = [];
+
+      // Add excludes from any existing filters that are set
+      this.activeFilters.forEach(([name, value]) => {
+        if (value !== "") {
+          let filter = this.filterOptions[name];
+          if (filter.excludes !== undefined && filter.excludes.length) {
+            filter.excludes.forEach(excludesFilter => {
+              if (this.filterSelections[excludesFilter] !== undefined) {
+                this.filterSelections[excludesFilter] = "";
+                disabled.push(excludesFilter);
+              } else {
+                console.log(
+                  `“${excludesFilter}” is not a filter that can be un-set.`
+                );
+              }
+            });
+          }
+        }
+      });
+
+      return disabled;
     }
   }
 };
