@@ -201,7 +201,7 @@ You can use the [`paidInFull`](extend/events.md#paidinfull) event if you need to
 You can allow a customer to pay the outstanding balance on a cart or order using the [`commerce/payments/pay`](./dev/controller-actions.html#post-payments-pay) controller action similarly to taking full payment at checkout, taking care to explicitly provide the order number whose outstanding balance should be paid.
 
 ::: tip
-There’s a full example of this in the [example templates](example-templates.md) at [shop/checkout/pay-static.twig](https://github.com/craftcms/commerce/tree/main/example-templates/build/shop/checkout/pay-static.twig).
+There’s a full example of this in the [example templates](example-templates.md) at [shop/checkout/pay-static.twig](https://github.com/craftcms/commerce/tree/main/example-templates/dist/shop/checkout/pay-static.twig).
 :::
 
 Here we’re pretending the relevant order number is 12345, the customer’s email address is email@address.foo, and the gateway is already set on the order:
