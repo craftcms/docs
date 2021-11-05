@@ -164,7 +164,7 @@
         <div class="code-example relative">
           <button
             @click="copyCode"
-            class="copy-button absolute top-0 right-0 mr-2 mt-2 bg-white rounded p-3 leading-none text-center"
+            class="copy-button absolute top-0 right-0 mr-2 mt-2 bg-white rounded px-3 py-2 leading-none text-center"
           >
             <span
               class="block relative overflow-hidden w-5 h-5 text-center"
