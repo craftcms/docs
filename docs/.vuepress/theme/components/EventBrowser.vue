@@ -1,36 +1,36 @@
 <template>
   <div class="event-browser">
     <div class="event-search">
-      <div class="w-full shadow rounded relative">
+      <div class="w-full shadow rounded relative pt-2 px-4 pb-4">
+        <label
+          for="event-autosuggest"
+          class="block font-bold relative text-light-slate pb-1"
+          >Selected Event</label
+        >
         <vue-autosuggest
           :suggestions="suggestions"
           :input-props="{
             placeholder: 'Select an event...',
-            class: 'border rounded py-1 px-2 m-3',
-            style: 'width: calc(100% - 1.5rem);'
+            class: 'border rounded py-1 px-2 w-full font-mono text-sm',
+            id: 'event-autosuggest'
           }"
           @selected="onSelected"
           @input="onInputChange"
         >
-          <template slot="after-suggestions">
-            <div class="w-full text-center">
-              <div
-                class="rounded px-2 py-1 text-xs bg-white mx-auto inline-block"
-              >
-                {{ numSuggestions.toLocaleString("en") }} item{{
-                  numSuggestions !== 1 ? "s" : ""
-                }}
-              </div>
-            </div>
-          </template>
         </vue-autosuggest>
+        <div class="absolute top-0 right-0">
+          <div
+            class="relative text-xs text-light-slate"
+            style="top: 0.8rem; right: 1rem;"
+          >
+            {{ numSuggestions.toLocaleString("en") }} item{{
+              numSuggestions !== 1 ? "s" : ""
+            }}
+          </div>
+        </div>
       </div>
     </div>
     <div v-if="currentEvent" class="detail">
-      <h2>
-        <code>{{ currentEvent.class }}::{{ currentEvent.name }}</code>
-      </h2>
-
       <div
         v-if="currentEvent.desc"
         v-html="renderMarkdown(currentEvent.desc)"
@@ -210,10 +210,12 @@
         @apply absolute w-4 h-4;
         left: 2px;
         top: 2px;
-        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 100ms linear;
       }
 
       .copy-icon {
+        @apply opacity-100;
         transform: translateY(0);
       }
 
@@ -223,6 +225,7 @@
 
       .copied {
         .copy-icon {
+          @apply opacity-0;
           transform: translateY(-1.25rem);
         }
 
