@@ -80,7 +80,7 @@ If a customer chooses to register an account on order completion, a Craft user a
 
 If any of the above fail, the user account will not be created; errors will be logged but not displayed or returned.
 
-The Commerce [example templates](https://github.com/craftcms/commerce/blob/main/example-templates/build/shop/checkout/payment.twig) display a “Register me for a user account” checkbox at the payment stage—but only if a user account doesn’t already exist for the email address on the cart:
+The Commerce [example templates](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/checkout/payment.twig) display a “Register me for a user account” checkbox at the payment stage—but only if a user account doesn’t already exist for the email address on the cart:
 
 ```twig
 {# Get a user account using the same email address as the cart #}
