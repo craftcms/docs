@@ -161,7 +161,38 @@
           </div>
         </fieldset>
 
-        <pre class="language-php"><code v-html="exampleCode"></code></pre>
+        <div class="code-example relative">
+          <button
+            @click="copyCode"
+            class="copy-button absolute top-0 right-0 mr-2 mt-2 bg-white rounded p-3 leading-none text-center"
+          >
+            <span
+              class="block relative overflow-hidden w-5 h-5 text-center"
+              :class="{ copied: codeCopied }"
+            >
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="far"
+                data-icon="copy"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+                class="copy-icon"
+              >
+                <path
+                  fill="currentColor"
+                  d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"
+                  class=""
+                ></path>
+              </svg>
+              <check-mark class="success-icon" />
+            </span>
+          </button>
+          <pre
+            class="language-php"
+          ><code v-html="highlightCode(exampleCode)"></code></pre>
+        </div>
       </div>
     </div>
   </div>
@@ -169,6 +200,44 @@
 
 <style lang="postcss">
 .event-browser {
+  .code-example {
+    .copy-button {
+      @apply opacity-0;
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+      .copy-icon,
+      .success-icon {
+        @apply absolute w-4 h-4;
+        left: 2px;
+        top: 2px;
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .copy-icon {
+        transform: translateY(0);
+      }
+
+      .success-icon {
+        transform: translateY(1.25rem);
+      }
+
+      .copied {
+        .copy-icon {
+          transform: translateY(-1.25rem);
+        }
+
+        .success-icon {
+          transform: translateY(0);
+        }
+      }
+    }
+
+    &:hover {
+      .copy-button {
+        @apply opacity-100;
+      }
+    }
+  }
 }
 
 .event-browser {
@@ -231,12 +300,15 @@ import { VueAutosuggest } from "vue-autosuggest";
 import EventData from "../../../3.x/event-data/events.json";
 import Prism from "prismjs";
 import { marked } from "marked";
+import copy from "copy-to-clipboard";
 import "prismjs/components/prism-php";
 import "prismjs/components/prism-markup-templating";
+import CheckMark from "../global-components/CheckMark.vue";
 
 export default {
   components: {
-    VueAutosuggest
+    VueAutosuggest,
+    CheckMark
   },
   data() {
     return {
@@ -245,7 +317,8 @@ export default {
       eventOptions: [],
       eventSearchKeyword: "",
       currentEvent: "",
-      filterSelections: {}
+      filterSelections: {},
+      codeCopied: false
     };
   },
   mounted() {
@@ -271,8 +344,6 @@ export default {
       if (itemValue && itemValue.value) {
         this.currentEvent = itemValue.value;
       }
-
-      //this.query = item.item;
     },
     getSuggestionValue(suggestion) {
       this.eventData.forEach(option => {
@@ -286,6 +357,17 @@ export default {
     },
     renderMarkdown(text) {
       return marked.parse(text);
+    },
+    copyCode() {
+      if (copy(this.exampleCode)) {
+        console.log("copied!");
+        this.codeCopied = true;
+      } else {
+        console.log("couldn’t copy :(");
+      }
+    },
+    highlightCode(code) {
+      return Prism.highlight(code, Prism.languages.php, "php");
     }
   },
   watch: {
@@ -330,7 +412,7 @@ export default {
         this.currentEvent.type
       ];
 
-      let html = "";
+      let code = "";
 
       classImports = classImports
         .concat(this.extraImports)
@@ -347,26 +429,26 @@ export default {
        * Imports
        */
       classImports.forEach(classImport => {
-        html += `use ${classImport};\n`;
+        code += `use ${classImport};\n`;
       });
 
-      html += "\n";
+      code += "\n";
 
       /**
        * Listener
        */
-      html += `Event::on(\n`;
+      code += `Event::on(\n`;
 
       let className = this.getClassName(this.currentEvent.class);
       let typeClassName = this.getClassName(this.currentEvent.type);
 
-      html += `    ${className}::class,\n`;
-      html += `    ${className}::${this.currentEvent.name},\n`;
-      html += `    function (${typeClassName} $event) {\n`;
+      code += `    ${className}::class,\n`;
+      code += `    ${className}::${this.currentEvent.name},\n`;
+      code += `    function (${typeClassName} $event) {\n`;
 
       if (!this.activeFilters.length) {
         // Don’t display a condition block
-        html += `        // ...\n`;
+        code += `        // ...\n`;
       } else {
         let conditions = [];
 
@@ -378,27 +460,29 @@ export default {
 
         if (conditions.length === 1) {
           // Single-line condition
-          html += `        if (${conditions[0]}) {\n`;
+          code += `        if (${conditions[0]}) {\n`;
         } else {
           // Multi-line condition
-          html += `        if (\n`;
+          code += `        if (\n`;
 
           conditions.forEach((condition, index) => {
-            html += `            ${condition}`;
-            html += index < conditions.length - 1 ? ` &&\n` : `\n`;
+            code += `            ${condition}`;
+            code += index < conditions.length - 1 ? ` &&\n` : `\n`;
           });
 
-          html += `        ) {\n`;
+          code += `        ) {\n`;
         }
 
-        html += `            // ...\n`;
-        html += `        }\n`;
+        code += `            // ...\n`;
+        code += `        }\n`;
       }
 
-      html += `    }\n`;
-      html += `);`;
+      code += `    }\n`;
+      code += `);`;
 
-      return Prism.highlight(html, Prism.languages.php, "php");
+      this.codeCopied = false;
+
+      return code;
     },
     // Returns all filter options for the chosen event
     filterOptions() {
