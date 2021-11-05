@@ -12,6 +12,17 @@
           @selected="onSelected"
           @input="onInputChange"
         >
+          <template slot="after-suggestions">
+            <div class="w-full text-center">
+              <div
+                class="rounded px-2 py-1 text-xs bg-white mx-auto inline-block"
+              >
+                {{ numSuggestions.toLocaleString("en") }} item{{
+                  numSuggestions !== 1 ? "s" : ""
+                }}
+              </div>
+            </div>
+          </template>
         </vue-autosuggest>
       </div>
     </div>
@@ -308,6 +319,9 @@ export default {
             })
         }
       ];
+    },
+    numSuggestions() {
+      return this.suggestions[0].data.length;
     },
     exampleCode() {
       let classImports = [
