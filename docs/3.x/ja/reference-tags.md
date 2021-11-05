@@ -45,11 +45,10 @@
 有効なリファレンスタグは、次の通りです。
 
 - `{asset:123:filename}` – ID が `123` のアセットのファイル名を（<craft3:craft\elements\Asset::getFilename()> 経由で）返します。
-- `{entry:about-us:intro}` – スラグが `about-us` のエントリのカスタムフィールド `intro` の値を返します。
-- `{entry:blog/whats-on-tap}` – スラグが `whats-on-tap` の `blog` セクションのエントリの URL を返します。
-- `{craft\commerce\Variant:123:price}` – ID が `123` の Commerce Variant オブジェクトの price を返します。
-- `{craft\commerce\Variant:123:price}` – ID が `123` の Commerce Variant オブジェクトの price を返します。
-- `{globalset:aGlobalSet:uid}` – ハンドルが `aGlobalSet` のグローバル設定の UID を返します。
+- `{entry:blog/whats-on-tap}` – returns the URL of an entry in a `blog` section with the slug `whats-on-tap`.
+- `{entry:blog/whats-on-tap@en:intro}` – returns the value of an `intro` custom field on a `blog` section entry with the slug `whats-on-tap`, loaded from the site with the handle `en`.
+- `{craft\commerce\Variant:123:price}` – returns the price of a Commerce Variant object with the id of `123`.
+- `{globalset:aGlobalSet:uid}` – returns the UID of a global set with the handle `aGlobalSet`.
 
 ## リファレンスタグの解析
 
