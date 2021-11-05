@@ -15,5 +15,5 @@ cp -r vendor/craftcms/commerce/example-templates/build/* ./templates
 If your system supports it, you could also symlink these folders into your project’s `templates/` folder so you always have up-to-date examples _while in development_:
 
 ```bash
-ln -s vendor/craftcms/commerce/example-templates/build/shop ./templates/shop
+ln -s vendor/craftcms/commerce/example-templates/dist/shop ./templates/shop
 ```
