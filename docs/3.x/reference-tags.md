@@ -45,9 +45,8 @@ As you can see, they are made up three segments:
 The following are valid reference tags:
 
 - `{asset:123:filename}` – returns the filename of an asset with the ID of `123` (via <craft3:craft\elements\Asset::getFilename()>).
-- `{entry:about-us:intro}` – returns the value of an `intro` custom field on an entry with the slug `about-us`.
-- `{entry:about-us@en:intro}` – returns the value of an `intro` custom field on an entry with the slug `about-us`, loaded from the site with the handle `en`.
 - `{entry:blog/whats-on-tap}` – returns the URL of an entry in a `blog` section with the slug `whats-on-tap`.
+- `{entry:blog/whats-on-tap@en:intro}` – returns the value of an `intro` custom field on a `blog` section entry with the slug `whats-on-tap`, loaded from the site with the handle `en`.
 - `{craft\commerce\Variant:123:price}` – returns the price of a Commerce Variant object with the id of `123`.
 - `{globalset:aGlobalSet:uid}` – returns the UID of a global set with the handle `aGlobalSet`.
 

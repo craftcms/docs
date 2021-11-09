@@ -252,7 +252,9 @@ return [
 
 ### Database Component
 
-If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component:
+If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component.
+
+This example configures read/write splitting by defining read replicas. The writer will be whatever’s configured in `config/db.php`.
 
 ```php
 <?php

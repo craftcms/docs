@@ -42,7 +42,7 @@ The field accepts the [Twig’s expression syntax](https://twig.symfony.com/doc/
 If the expression is calculated as `true` then the discount matches the order. If not, the condition disqualifies the order from the discount. A blank condition is the same as
 a `true` expression.
 
-The condition formula can use an `order` variable, which for safety is available as an array and not the order element. This prevents a store manager from accidentally calling methods like `order.markAsComplete()`.
+The condition formula can use an `order` variable, which for safety is an array and not the order element—it’s the same representation of the order you’d see if you exported it from the order index page. This data-only format prevents a store manager from accidentally calling methods like `order.markAsComplete()`.
 
 ::: tip
 The condition formula’s `order` array is generated with:
@@ -53,9 +53,6 @@ $order->toArray(
 );
 ```
 :::
-
-Inside the condition formula you have access to the `order` variable. This is a data only representation of the order.
-The variable contains the same data you’d see exported from the order index page.
 
 Here are some examples of an discount’s condition formula:
 
