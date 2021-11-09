@@ -268,7 +268,9 @@ return [
 
 ### Database Component
 
-If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component:
+If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component.
+
+This example configures read/write splitting by defining read replicas. The writer will be whatever’s configured in `config/db.php`.
 
 ```php
 <?php
@@ -467,7 +469,7 @@ Then you could go into your User Photos volume’s settings (for example) and se
 
 ### Config Files
 
-You can set your [general config settings](config-settings.md), [database connection settings](db-settings.md), and other PHP config files to environment variables using PHP’s [getenv()](http://php.net/manual/en/function.getenv.php) function:
+You can set your [general config settings](config-settings.md), [database connection settings](db-settings.md), and other PHP config files to environment variables using Craft’s [App::env()](craft3:craft\helpers\App::env()) function:
 
 ```bash
 # -- .env --
