@@ -1,7 +1,9 @@
 <template>
   <div class="event-browser">
     <div class="event-search">
-      <div class="w-full shadow rounded relative pt-2 px-4 pb-4">
+      <div
+        class="event-search-wrapper w-full shadow rounded relative pt-2 px-4 pb-4"
+      >
         <label
           for="event-autosuggest"
           class="block font-bold relative text-light-slate pb-1"
@@ -12,7 +14,7 @@
           :suggestions="filteredOptions"
           :input-props="{
             placeholder: 'Select an event...',
-            class: 'border rounded py-1 px-2 w-full font-mono text-sm',
+            class: 'autosuggest__input',
             id: 'event-autosuggest'
           }"
           @selected="onSelected"
@@ -283,22 +285,63 @@
   @apply absolute z-30 w-full overflow-y-scroll m-0 p-0 shadow-lg rounded-b;
   max-height: 400px;
   background-color: var(--bg-color);
+
+  ul {
+    @apply m-0 p-0;
+  }
+
+  .autosuggest__results-item {
+    @apply list-none font-mono text-sm py-1 px-4;
+  }
+
+  .autosuggest__results-item--highlighted {
+    @apply bg-gray-300;
+  }
 }
 
-.theme-default-content .autosuggest__results ul {
-  @apply m-0 p-0;
-}
-
-.autosuggest__results .autosuggest__results-item {
-  @apply list-none font-mono text-sm py-1 px-4;
+.autosuggest__input {
+  @apply border rounded py-1 px-2 w-full font-mono text-sm;
+  background: var(--bg-color);
+  border-color: var(--border-color);
 }
 
 .autosuggest__input--open {
   @apply rounded-b-none !important;
 }
 
-.autosuggest__results .autosuggest__results-item--highlighted {
-  @apply bg-gray-300;
+.theme-dark {
+  .event-search-wrapper {
+    background: var(--sidebar-bg-color);
+  }
+
+  .btn {
+    background: var(--tooltip-bg-color);
+  }
+
+  .theme-default-content .autosuggest__results {
+    .autosuggest__results-item--highlighted {
+      @apply bg-gray-500;
+    }
+  }
+
+  .event-browser {
+    .filter-toggle {
+      @apply bg-gray-400;
+
+      &.unset {
+      }
+
+      &.selected {
+        @apply bg-gray-700 shadow-inner;
+      }
+    }
+
+    .code-example {
+      .copy-button {
+        @apply bg-gray-800;
+      }
+    }
+  }
 }
 </style>
 
