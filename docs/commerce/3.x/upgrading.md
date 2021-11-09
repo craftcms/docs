@@ -9,16 +9,27 @@ If you’re upgrading from Commerce 1, see the [Changes in Commerce 2](https://c
 Before you begin, make sure that:
 
 1. You’ve reviewed the [changes in Commerce 3](https://github.com/craftcms/commerce/blob/master/CHANGELOG.md#300---2020-01-28)
-2. Your site’s running at least **Craft 3.4** and **the latest version of Commerce 2** (2.2.26)
+2. Your site’s running at least **Craft 3.4** and **the latest version of Commerce 2** (2.2.27)
 3. Your **database is backed up** in case everything goes horribly wrong
 
-Once you’ve completed these steps, you’re ready continue.
+Once you’ve completed these steps, you’re ready continue with the upgrade process.
 
-When upgrading from Commerce 2 to Commerce 3, the following changes may be important depending on how you’ve set up your project.
+## Performing the Upgrade
+
+Like updating any Craft CMS plugin, you’ll want to update Commerce locally and sync any resulting project config changes [into production](https://craftcms.com/knowledge-base/deployment-best-practices).
+
+1. Edit your project’s `composer.json`’s `"require"` section to specify Commerce 3:
+    ```json
+    "craftcms/commerce": "^3.0",
+    ```
+2. In your terminal, run `composer update` to pull the latest project dependencies—including Commerce 3—into your `vendor/` directory.
+3. Run `php craft migrate/up --track=plugin:commerce` to run the migrations that bring Commerce data up to date with the latest version.
+
+Once you’re running the latest version of Craft Commerce, you’ll need to update your templates and any custom code relevant to the topics detailed below.
 
 ## Order Emails
 
-Order notification emails are now sent via a queue job, so running a [queue worker as a daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms) is highly recommended to avoid customer email notification delays.
+Order notification emails are now sent via a queue job, so we highly recommend running a [queue worker as a daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms) to avoid customer email notification delays.
 
 Previously emails would be generated during customer checkout, which could cause the order completion page to take a prolonged time to display (especially with PDF generation involved). This change gives your customers a better checkout experience.
 
