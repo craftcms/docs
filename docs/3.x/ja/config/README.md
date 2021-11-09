@@ -268,7 +268,9 @@ return [
 
 ### Database コンポーネント
 
-Craft の[データベース接続設定](db-settings.md)で可能な範囲を超えるデータベース接続の設定が必要な場合、`db` コンポーネントを上書きすることによって可能になります。
+If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component.
+
+This example configures read/write splitting by defining read replicas. The writer will be whatever’s configured in `config/db.php`.
 
 ```php
 <?php
@@ -296,9 +298,7 @@ return [
 
 ### Session コンポーネント
 
-::: tip
-`session` コンポーネントは、システムが依存するコンポーネントにメソッドを加える <craft3:craft\behaviors\SessionBehavior> ビヘイビアで設定**しなければなりません**。
-:::
+In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location.
 
 #### Redis の実例
 
@@ -317,7 +317,7 @@ return [
 
 #### データベースの実例
 
-はじめに、PHP セッションを保存するデータベーステーブルを作成しなければなりません。 プロジェクトのルートフォルダから `craft setup/php-session-table` コンソールコマンドを実行すればできます。
+First, you must create the database table that will store PHP’s sessions. You can do that by running the `craft setup/php-session-table` console command from your project’s root folder.
 
 ```php
 <?php
@@ -346,7 +346,7 @@ The `session` component **must** be configured with the <craft3:craft\behaviors\
 
 ### Mailer コンポーネント
 
-（メール送信を担っている）`mailer` コンポーネントの設定を上書きするために、`config/app.php` を調整します。
+To override the `mailer` component config (which is responsible for sending emails), do this in `config/app.php`:
 
 ```php
 <?php
@@ -376,12 +376,12 @@ return [
 ```
 
 ::: tip
-`config/app.php` から Mailer コンポーネントに行った変更は、「設定 > メール」からメールの設定をテストする際には反映されません。 :::
+Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing email settings from Settings → Email.
 :::
 
 ### Queue コンポーネント
 
-Craft のジョブキューは [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue) によって動いています。 デフォルトでは、Craft はエクステンションの [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md) をベースとする [custom queue driver](craft3:craft\queue\Queue) を使用しますが、`config/app.php` から Craft の `queue` コンポーネントを上書きすることによって、別のドライバに切り替えることができます。
+Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default Craft will use a [custom queue driver](craft3:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md), but you can switch to a different driver by overriding Craft’s `queue` component from `config/app.php`:
 
 ```php
 <?php
@@ -396,27 +396,27 @@ return [
 ];
 ```
 
-利用可能なドライバは、[Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide) に記載されています。
+Available drivers are listed in the [Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide).
 
 ::: warning
-<craft3:craft\queue\QueueInterface> を実装しているドライバだけがコントロールパネル内に表示されます。 :::
+Only drivers that implement <craft3:craft\queue\QueueInterface> will be visible within the control panel.
 :::
 
 ::: tip
-キュードライバが独自のワーカーを提供している場合、`config/general.php` の <config3:runQueueAutomatically> コンフィグ設定を `false` に設定します。 :::
+If your queue driver supplies its own worker, set the <config3:runQueueAutomatically> config setting to `false` in `config/general.php`.
 :::
 
 ### モジュール
 
-`config/app.php` からカスタム Yii モジュールを登録し bootstrap することもできます。 詳細については、[モジュールの構築方法](../extend/module-guide.md)を参照してください。
+You can register and bootstrap custom Yii modules into the application from `config/app.php` as well. See [How to Build a Module](../extend/module-guide.md) for more info.
 
 ## アプリケーション設定
 
-いくつかの設定は、それぞれの環境ごとに定義する必要があります。 例えば、ローカル環境での開発時はサイトのベース URL を `http://my-project.test`、本番環境では `https://my-project.com` にしたいかもしれません。
+Some settings should be defined on a per-environment basis. For example, when developing locally, you may want your site’s base URL to be `http://my-project.test`, but on production it should be `https://my-project.com`.
 
 ### コントロールパネルの設定
 
-コントロールパネル内のいくつかの設定は、（`.env` ファイルで定義されているような）環境変数にセットできます。
+Some settings in the control panel can be set to environment variables (like the ones defined in your `.env` file):
 
 - 一般
   - **システム名**
@@ -436,27 +436,27 @@ return [
   - **ホスト名**（SMTP）
   - **[Craft Link List](http://craftlinklist.com/)** – 事情通でいてください。
 
-環境変数の名前だけがデータベース、または、プロジェクトコンフィグ内に保存さるため、環境ごとに変更したり機密性の高い情報を含む設定値をセットするのにとても良い方法です。
+To set these settings to an environment variable, type `$` followed by the environment variable’s name.
 
-![ボリュームのベース URL 設定](../images/volume-base-url-setting.jpg)
+![A volume’s Base URL setting](../images/volume-base-url-setting.jpg)
 
-これらの設定を環境変数にセットするには、環境変数の名前を `$` に続けて入力してください。
+Only the environment variable’s name will be stored in your database or project config, so this is a great way to set setting values that may change per-environment, or contain sensitive information.
 
 ::: tip
-プラグインも同様に、それぞれの設定内で環境設定やエイリアスのためのサポートを追加できます。 どのようにするかを知るには、[環境設定](../extend/environmental-settings.md)を参照してください。 :::
+Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](../extend/environmental-settings.md) to learn how.
 :::
 
 #### コントロールパネルの設定内でのエイリアスの利用
 
-次に、それを参照するエイリアス `@rootUrl` を作成します。
+Some of these settings—the ones that store a URL or a file system path—can also be set to [aliases](README.md#aliases), which is helpful if you just want to store a base URL or path in an environment variable, and append additional segments onto it.
 
-これで（例として）ユーザーフォトのボリュームの設定画面に移動し、ベース URL に `@rootUrl/images/user-photos` をセットできます。
+For example, you can define a `ROOT_URL` environment variable that is set to the root URL of your site:
 
 ```bash
 # -- .env --
 ROOT_URL="http://my-project.test"
 ```
-PHP の [getenv()](http://php.net/manual/en/function.getenv.php) ファンクションを利用して、環境変数を[一般設定](config-settings.md)、[データベース接続設定](db-settings.md)、および、他の PHP 設定ファイルにセットできます。
+Then create a `@rootUrl` alias that references it:
 
 ```php
 // -- config/general.php --
@@ -465,7 +465,7 @@ PHP の [getenv()](http://php.net/manual/en/function.getenv.php) ファンクシ
 ],
 ```
 
-Craft の PHP 設定ファイルは、オプションでそれぞれの環境ごとに別々の設定を定義できます。
+Then you could go into your User Photos volume’s settings (for example) and set its Base URL to `@rootUrl/images/user-photos`.
 
 ### コンフィグファイル
 
@@ -483,7 +483,7 @@ CP_TRIGGER="secret-word"
 
 #### マルチ環境設定
 
-Craft 3 プロジェクトは `.env` ファイルに定義された `ENVIRONMENT` 環境変数を利用して [CRAFT_ENVIRONMENT](#craft-environment) 定数を定義します。
+Craft’s PHP config files can optionally define separate config settings for each individual environment.
 
 ```php
 // -- config/general.php --
@@ -505,9 +505,9 @@ return [
 ];
 ```
 
-Craft がマルチ環境のキーとしてそれを取り扱うことを知るために、ここでは `'*'` キーが必須となりますが、他のキーはあなた次第です。 Craft は `web/index.php` ファイルに定義されている PHP 定数  [CRAFT_ENVIRONMENT](#craft-environment) とマッチするキーを探します。 （フォールバックとして、サーバーのホスト名が使用されます。 ）
+The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you. Craft will look for the key(s) that match the [CRAFT_ENVIRONMENT](#craft-environment) PHP constant, which should be defined by your `web/index.php` file. (Your server’s hostname will be used as a fallback.)
 
-// -- web/index.php -- define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
+By default, new Craft 3 projects will define the [CRAFT_ENVIRONMENT](#craft-environment) constant using an environment variable called `ENVIRONMENT`, which is defined in the `.env` file:
 
 ```bash
 # -- .env --
@@ -546,7 +546,7 @@ define('CRAFT_COMPOSER_PATH', 'path/to/composer.json');
 
 ### `CRAFT_CONFIG_PATH`
 
-The path to the [config/](../directory-structure.md#config) folder. （デフォルトでは、ベースディレクトリ内に存在するものとします。
+The path to the [config/](../directory-structure.md#config) folder. (It is assumed to live within the base directory by default.)
 
 ### `CRAFT_CONTENT_MIGRATIONS_PATH`
 
