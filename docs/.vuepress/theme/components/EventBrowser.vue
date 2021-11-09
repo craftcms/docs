@@ -8,14 +8,14 @@
           >Selected Event</label
         >
         <vue-autosuggest
-          :suggestions="suggestions"
+          v-model="searchText"
+          :suggestions="filteredOptions"
           :input-props="{
             placeholder: 'Select an event...',
             class: 'border rounded py-1 px-2 w-full font-mono text-sm',
             id: 'event-autosuggest'
           }"
           @selected="onSelected"
-          @input="onInputChange"
         >
         </vue-autosuggest>
         <div class="absolute top-0 right-0">
@@ -275,22 +275,26 @@
   }
 }
 
-.event-search {
+.theme-default-content .autosuggest__results-container {
+  @apply max-w-full w-full relative;
 }
 
 .theme-default-content .autosuggest__results {
-  @apply absolute z-20 w-full;
+  @apply absolute z-30 w-full overflow-y-scroll m-0 p-0 shadow-lg rounded-b;
+  max-height: 400px;
+  background-color: var(--bg-color);
 }
 
 .theme-default-content .autosuggest__results ul {
-  @apply m-0 p-0 overflow-y-scroll shadow-lg z-30 w-full relative rounded-b;
-  background-color: var(--bg-color);
-  top: -0.25rem;
-  max-height: 400px;
+  @apply m-0 p-0;
 }
 
 .autosuggest__results .autosuggest__results-item {
   @apply list-none font-mono text-sm py-1 px-4;
+}
+
+.autosuggest__input--open {
+  @apply rounded-b-none !important;
 }
 
 .autosuggest__results .autosuggest__results-item--highlighted {
@@ -315,33 +319,23 @@ export default {
   },
   data() {
     return {
-      query: "",
-      eventData: EventData,
-      eventOptions: [],
-      eventSearchKeyword: "",
+      searchText: "",
       currentEvent: "",
+      eventData: EventData,
       filterSelections: {},
       codeCopied: false
     };
   },
-  mounted() {
-    let options = this.eventData;
-
-    options.forEach(option => {
-      option.text = option.class + "::" + option.name;
-      option.value = option;
-    });
-
-    this.eventOptions = options;
-  },
+  mounted() {},
   methods: {
-    onInputChange(q) {
-      this.query = (q || "").toLowerCase();
-    },
     getClassName(fullClass) {
       return fullClass.split("\\").pop();
     },
     onSelected(item) {
+      if (!item) {
+        return;
+      }
+
       let itemValue = this.getSuggestionValue(item);
 
       if (itemValue && itemValue.value) {
@@ -351,10 +345,9 @@ export default {
     getSuggestionValue(suggestion) {
       this.eventData.forEach(option => {
         let optionLabel = option.class + "::" + option.name;
-
-        if (optionLabel === suggestion.item.replace("//", "/")) {
-          this.currentEvent = option.value;
-          return option.value;
+        if (optionLabel === suggestion.item) {
+          this.currentEvent = option;
+          return option;
         }
       });
     },
@@ -363,7 +356,6 @@ export default {
     },
     copyCode() {
       if (copy(this.exampleCode)) {
-        console.log("copied!");
         this.codeCopied = true;
       } else {
         console.log("couldn’t copy :(");
@@ -377,7 +369,7 @@ export default {
     currentEvent(event) {
       let filterSelections = {};
 
-      if (event.filters !== undefined) {
+      if (event !== undefined && event.filters !== undefined) {
         Object.keys(event.filters).forEach(label => {
           filterSelections[label] = "";
         });
@@ -387,26 +379,25 @@ export default {
     }
   },
   computed: {
-    suggestions() {
-      return [
-        {
-          data: this.eventData
-            .filter(item => {
-              if (this.query === undefined) {
-                return true;
-              }
+    filteredOptions() {
+      const filtered = [];
 
-              let itemName = (item.class + "::" + item.name).toLowerCase();
-              return itemName.indexOf(this.query.toLowerCase()) !== -1;
-            })
-            .map(item => {
-              return item.class + "::" + item.name;
-            })
+      this.eventData.forEach(item => {
+        let itemName = item.class + "::" + item.name;
+
+        if (
+          this.searchText === undefined ||
+          this.searchText === "" ||
+          itemName.toLowerCase().indexOf(this.searchText.toLowerCase()) !== -1
+        ) {
+          filtered.push(itemName);
         }
-      ];
+      });
+
+      return [{ data: Object.freeze(filtered) }];
     },
     numSuggestions() {
-      return this.suggestions[0].data.length;
+      return this.filteredOptions[0].data.length;
     },
     exampleCode() {
       let classImports = [
