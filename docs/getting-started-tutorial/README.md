@@ -1,5 +1,6 @@
 ---
 preheading: Tutorial
+description: Craft CMS getting started tutorial.
 ---
 
 # Welcome to Craft CMS!
