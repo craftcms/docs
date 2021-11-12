@@ -320,7 +320,7 @@
 
   .theme-default-content .autosuggest__results {
     .autosuggest__results-item--highlighted {
-      @apply bg-gray-500;
+      @apply bg-gray-700;
     }
   }
 
