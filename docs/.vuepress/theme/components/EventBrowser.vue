@@ -326,7 +326,7 @@
 
   .event-browser {
     .filter-toggle {
-      @apply bg-gray-400;
+      background-color: rgba(255, 255, 255, 0.1);
 
       &.selected {
         @apply bg-gray-700 shadow-inner;
