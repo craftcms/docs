@@ -1,8 +1,12 @@
+- - -
+description: Official documentation for Craft CMS 3.
+- - -
+
 # Craft CMS について
 
-Craft は、ウェブ上でさらなる独自のデジタル体験を創造するための、柔軟でユーザーフレンドリーな CMS です。
+Craft is a flexible, user-friendly CMS for creating custom digital experiences on the web and beyond.
 
-特徴：
+It features:
 
 - コンテンツ制作や管理業務のための、直感的でユーザーフレンドリーなコントロールパネル。
 - コンテンツやその消費方法については想定されていない、コンテンツのモデリングや[フロントエンド開発](dev/README.md)のための真っ新なアプローチです。
@@ -10,18 +14,18 @@ Craft は、ウェブ上でさらなる独自のデジタル体験を創造す�
 - [モジュールおよびプラグイン開発](extend/README.md)のための、強靭なフレームワーク。
 - 活動的、かつ、活気に満ち溢れた[コミュニティ](https://craftcms.com/community)。
 
-[craftcms.com](https://craftcms.com) ですべてを学ぶことができます。
+You can learn all about it at [craftcms.com](https://craftcms.com).
 
 ## 技術仕様
 
-Craft は [Yii 2](https://www.yiiframework.com/) をベースとするセルフホスティング型の PHP 7 アプリケーションです。 コンテンツストレージとして MySQL および PostgreSQL に接続できます。 テンプレートエンジンに [Twig](https://twig.symfony.com) を備えています。
+Craft is a self-hosted PHP application, built on [Yii 2](https://www.yiiframework.com/). It can connect to MySQL and PostgreSQL for content storage. Templating is powered by [Twig](https://twig.symfony.com).
 
 ## ダイビング
 
-Craft CMS を初めて使う方は、[チュートリアル](/getting-started-tutorial/)からはじめると良いでしょう。
+If you’re new to Craft CMS the best place to start is [the tutorial](/getting-started-tutorial/).
 
-Craft のコンテンツモデリングがどのように機能するのか詳しく知るには、[エントリ](entries.md) および [フィールド](fields.md)を読んでください。
+To start getting acquainted with how content modeling works in Craft, read [Entries](entries.md) and [Fields](fields.md).
 
-インストールする前に、[サーバー要件](requirements.md) および [インストールガイド](installation.md)をチェックしてください。
+Before installing, check out the [Server Requirements](requirements.md) and [Installation Instructions](installation.md).
 
-最後に、 サイトまたはアプリケーションのフロントエンドを構築する準備が整ったら[フロントエンド開発](dev/README.md)セクションを読んでください。
+Finally, read the [Front-End Development](dev/README.md) section when you’re ready to start building out the front-end of your site or application.
