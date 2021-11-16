@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-11-16
+### Changed
+- Updated Element Type’s “Saving Custom Field Values” section for Craft 3.7.21.
+
 ## 2021-10-19
 ### Added
 - Documented new `countable` and `object` Twig tests added in Craft 3.7.17.
