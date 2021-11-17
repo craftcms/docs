@@ -392,7 +392,7 @@ use yii\base\Event;
 Event::on(
     TypeManager::class,
     TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS,
-    function(DefineGqlTypeFields $e) {
+    function(DefineGqlTypeFieldsEvent $event) {
         // Remove all ids to enforce use of uids
         unset($event->fields['id']);
 
