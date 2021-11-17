@@ -163,7 +163,7 @@ public static function find()
 
 ## ソフトデリートされた行の復元
 
-ガベージコレクションによってまだ完全に削除されていない、ソフトデリートされた行を復元するには2つの方法があります。
+There are two ways to restore soft-deleted rows not yet hard-deleted by garbage collection:
 
 1. With your Active Record class, by calling its `restore()` method.
 
@@ -182,3 +182,7 @@ public static function find()
       ->restore('{{%mytablename}}', ['id' => $id])
       ->execute();
   ```
+
+::: tip
+See [this Stack Exchange post](https://craftcms.stackexchange.com/questions/38628/how-to-make-custom-element-types-restorable) for supporting custom element restores from the control panel.
+:::
