@@ -837,17 +837,31 @@ If this is used within a [namespace](tags.md#namespace) tag, the namespace appli
 
 文字列の一部を他のものに置き換えます。
 
-マッピング配列が渡された場合、Twig コアの [`replace`](https://twig.symfony.com/doc/2.x/filters/replace.html) フィルタと同様に機能します。
+For example, comma group symbols are added by default in English:
 
 ```twig
 {{ 1000000|number }}
 {# Output: 1,000,000 #}
-
-{{ 1000000|number(false) }}
-{# Output: 1000000 #}
 ```
 
-または、一度に1つのものを置き換えることができます。
+The value is passed to [`Craft::$app->getFormatter()->asDecimal()`](yii2:yii\i18n\Formatter::asDecimal()) and may include three additional arguments:
+
+- **decimals** – number of digits that should appear after the decimal point (defaults to `null`)
+- **options** – key-value array of [number formatter options](https://www.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformatattribute) (ignored if PHP intl extension is not installed)
+- **textOptions** – key-value array of [text formatting options](https://www.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformattextattribute) for the formatter
+
+```twig
+{{ 1000000|number(2) }}
+{# Output: 1,000,000.00 #}
+
+{{ 1000000|number(null, { (constant('NumberFormatter::GROUPING_SIZE')): 4 }) }}
+{# Output: 100,0000 #}
+
+{{ (-5)|number(null, {}, { (constant('NumberFormatter::NEGATIVE_PREFIX')): '☹' }) }}
+{# Output: ☹5 #}
+```
+
+If the passed-in value isn’t a valid number it will be returned verbatim:
 
 ```twig
 {{ 'oh hai'|number }}
@@ -856,7 +870,7 @@ If this is used within a [namespace](tags.md#namespace) tag, the namespace appli
 
 ## `parseRefs`
 
-置換文字列の値の最初と最後にスラッシュを付けてマッチするものを検索することで、正規表現も利用できます。
+Parses a string for [reference tags](../reference-tags.md).
 
 ```twig
 {% set content %}
@@ -868,7 +882,7 @@ If this is used within a [namespace](tags.md#namespace) tag, the namespace appli
 
 ## `pascal`
 
-RSS フィードに必要な形式（`D, d M Y H:i:s O`）で日付を出力します。
+Returns a string formatted in “PascalCase” (AKA “UpperCamelCase”).
 
 ```twig
 {{ 'foo bar'|pascal }}
@@ -877,14 +891,14 @@ RSS フィードに必要な形式（`D, d M Y H:i:s O`）で日付を出力し�
 
 ## `percentage`
 
-「snake_case」でフォーマットされた文字列を返します。
+Formats a percentage according to the user’s preferred language.
 
 ```twig
 {{ 0.85|percentage }}
 {# Output: 85% #}
 ```
 
-タイムスタンプ、または、[DateTime](http://php.net/manual/en/class.datetime.php) オブジェクトのフォーマットされた時刻を出力します。
+If the passed-in value isn’t a valid number it will be returned verbatim:
 
 ```twig
 {{ 'oh hai'|percentage }}
@@ -893,21 +907,21 @@ RSS フィードに必要な形式（`D, d M Y H:i:s O`）で日付を出力し�
 
 ## `prepend`
 
-Craft はロケール固有の時刻のフォーマットを出力するいくつかの特別なフォーマットキーワードを提供します。
+Prepends HTML to the beginning of another element.
 
 ```twig
 {{ '<div><p>Ipsum</p></div>'|prepend('<p>Lorem</p>') }}
 {# Output: <div><p>Lorem</p><p>Ipsum</p></div> #}
 ```
 
-利用可能な `format` 値は、次の通りです。
+If you only want to append a new element if one of the same type doesn’t already exist, pass `'keep'` as a second argument.
 
 ```twig
 {{ '<div><p>Ipsum</p></div>'|prepend('<p>Lorem</p>', 'keep') }}
 {# Output: <div><p>Ipsum</p></div> #}
 ```
 
-同じタイプの既に存在する要素を置き換えたい場合、第二引数に `'replace'` を渡します。
+If you want to replace an existing element of the same type, pass `'replace'` as a second argument.
 
 ```twig
 {{ '<div><p>Ipsum</p></div>'|prepend('<p>Lorem</p>', 'replace') }}
@@ -916,31 +930,28 @@ Craft はロケール固有の時刻のフォーマットを出力するいく�
 
 ## `purify`
 
-`timezone` パラメータを利用して、出力する時刻のタイムゾーンをカスタマイズできます。
+Runs the given text through HTML Purifier.
 
 ```twig
 {{ user.bio|purify }}
 ```
 
-経由で、人が読めるタイムスタンプとして日付をフォーマットします。
+You can specify a custom HTML Purifier config file as well:
 
 ```twig
 {{ user.bio|purify('user_bio') }}
 ```
 
-[Craft::t()](yii2:yii\BaseYii::t()) でメッセージを翻訳します。
+That will configure HTML Purifier based on the settings defined by `config/htmlpurifier/user_bio.json`.
 
 ## `push`
 
-カテゴリの指定がない場合、デフォルトで `site` になります。
+Appends one or more items onto the end of an array, and returns the new array.
 
 ```twig
-{% set array = {
-    foo: 'foo',
-    bar: 'bar',
-    baz: 'baz'
-} %}
-{% set filtered = array|withoutKey('baz') %}
+{% set array1 = ['foo'] %}
+{% set array2 = array1|push('bar', 'baz') %}
+{# Result: ['foo', 'bar', 'baz'] #}
 ```
 
 ## `removeClass`
