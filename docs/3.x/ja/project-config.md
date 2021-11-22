@@ -105,7 +105,7 @@ return [
 ];
 ```
 
-プロジェクトコンフィグを同期する1つの方法は、`config/project/` をバージョン管理して、Craft の変更を適用するためのコンソールコマンドを使用することです。
+That will remove the UI for administrative settings that affect the project config, and also places the project config in a read-only state so there’s no chance its YAML will be altered.
 
 ### 設定データが同期しなくなる可能性があります
 
