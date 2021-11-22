@@ -103,7 +103,7 @@ return [
 ];
 ```
 
-That will remove the UI for most administrative settings that affect the project config, and also places the project config in a read-only state so there’s no chance its YAML will be altered.
+That will remove the UI for administrative settings that affect the project config, and also places the project config in a read-only state so there’s no chance its YAML will be altered.
 
 ### Config Data Could Get Out of Sync
 
