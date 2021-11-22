@@ -836,14 +836,28 @@ If this is used within a [namespace](tags.md#namespace) tag, the namespace appli
 
 Formats a number according to the user’s preferred language.
 
-You can optionally pass `false` to it if you want group symbols to be omitted (e.g. commas in English).
+For example, comma group symbols are added by default in English:
 
 ```twig
 {{ 1000000|number }}
 {# Output: 1,000,000 #}
+```
 
-{{ 1000000|number(false) }}
-{# Output: 1000000 #}
+The value is passed to [`Craft::$app->getFormatter()->asDecimal()`](yii2:yii\i18n\Formatter::asDecimal()) and may include three additional arguments:
+
+- **decimals** – number of digits that should appear after the decimal point (defaults to `null`)
+- **options** – key-value array of [number formatter options](https://www.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformatattribute) (ignored if PHP intl extension is not installed)
+- **textOptions** – key-value array of [text formatting options](https://www.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformattextattribute) for the formatter
+
+```twig
+{{ 1000000|number(2) }}
+{# Output: 1,000,000.00 #}
+
+{{ 1000000|number(null, { (constant('NumberFormatter::GROUPING_SIZE')): 4 }) }}
+{# Output: 100,0000 #}
+
+{{ (-5)|number(null, {}, { (constant('NumberFormatter::NEGATIVE_PREFIX')): '☹' }) }}
+{# Output: ☹5 #}
 ```
 
 If the passed-in value isn’t a valid number it will be returned verbatim:
@@ -934,12 +948,9 @@ That will configure HTML Purifier based on the settings defined by `config/htmlp
 Appends one or more items onto the end of an array, and returns the new array.
 
 ```twig
-{% set array = {
-    foo: 'foo',
-    bar: 'bar',
-    baz: 'baz'
-} %}
-{% set filtered = array|withoutKey('baz') %}
+{% set array1 = ['foo'] %}
+{% set array2 = array1|push('bar', 'baz') %}
+{# Result: ['foo', 'bar', 'baz'] #}
 ```
 
 ## `removeClass`
