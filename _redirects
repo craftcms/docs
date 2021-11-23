@@ -101,7 +101,7 @@
 /docs/guides* https://craftcms.com/docs/2.x/localization-guide.html
 /docs/packages* /pricing
 /docs/apis/feedsservice* https://docs.craftcms.com/api/v2/craft-feedsservice.html
-/docs/classreference/* https://docs.craftcms.com/api/v2/:splat.htm
+/docs/classreference/* https://docs.craftcms.com/api/v2/:splat
 
 # our custom 404 page
 /* /docs/404.html 404
