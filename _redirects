@@ -34,12 +34,12 @@
 /docs/commerce/3.x/project-config.html /docs/commerce/3.x/configuration.html#project-config
 /docs/3.x/dev/examples/integrating-disqus.html https://craftcms.com/knowledge-base/integrating-disqus
 /docs/commerce/3.x/order-status-emails.html /docs/commerce/3.x/emails.html
-/docs/commerce/3.x/order-status-emails.html(.*) /docs/commerce/3.x/emails.html$1
 /docs/commerce/3.x/configuration.html#permissions /docs/commerce/3.x/store-management.html#permissions
 /docs/commerce/3.x/dev/order-queries.html /docs/commerce/3.x/orders-carts.html#querying-orders
 /docs/3.x/testing/testing-craft/getting-started.html /docs/3.x/testing/testing-craft/setup.html
 
 # dynamic ones
+/docs/commerce/3.x/order-status-emails.html* /docs/commerce/3.x/emails.html:splat
 /docs/config-settings* https://craftcms.com/3.x/config-settings.html
 /docs/introduction* https://craftcms.com/docs/3.x/
 /docs/installing* https://craftcms.com/docs/3.x/installation.html
