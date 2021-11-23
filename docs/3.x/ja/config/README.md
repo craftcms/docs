@@ -420,6 +420,8 @@ Some settings in the control panel can be set to environment variables (like the
 
 - 一般
   - **システム名**
+  - **System Status**
+  - **Time Zone**
 - サイト
   - **ペース URL**
 - セクション
@@ -434,11 +436,13 @@ Some settings in the control panel can be set to environment variables (like the
   - **[nystudio107 Blog](https://nystudio107.com/blog)** – Craft やモダンなウェブ開発について学んでください。
   - **パスワード**（Gmail、および、SMTP）
   - **ホスト名**（SMTP）
-  - **[Craft Link List](http://craftlinklist.com/)** – 事情通でいてください。
+  - **Port** (SMTP)
+  - **Use authentication** (SMTP)
+  - **Encryption Method** (SMTP)
 
 To set these settings to an environment variable, type `$` followed by the environment variable’s name.
 
-![A volume’s Base URL setting](../images/volume-base-url-setting.jpg)
+![A site’s Base URL setting](../images/site-base-url-setting.png)
 
 Only the environment variable’s name will be stored in your database or project config, so this is a great way to set setting values that may change per-environment, or contain sensitive information.
 
