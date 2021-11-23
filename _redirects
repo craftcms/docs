@@ -1,6 +1,9 @@
 # These Netlify redirects support moved documents and legacy URLs.
 # https://docs.netlify.com/routing/redirects/redirect-options/
 
+# our custom 404 page
+/* /docs/404.html 404
+
 # the simpler ones
 /docs/commerce/3.x/adding-to-and-updating-the-cart.html /docs/commerce/3.x/orders-carts.html#adding-items-to-a-cart
 /docs/3.x/dev/examples/entry-form.html https://craftcms.com/knowledge-base/entry-form
