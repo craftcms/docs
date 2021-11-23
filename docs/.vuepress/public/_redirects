@@ -37,8 +37,8 @@
 
 /docs/config-settings* https://craftcms.com/3.x/config-settings.html
 /docs/introduction* https://craftcms.com/docs/3.x/
-/docs/installing/ https://craftcms.com/docs/3.x/installation.html
-/docs/templating-overview/ https://craftcms.com/docs/3.x/dev/twig-primer.html
+/docs/installing* https://craftcms.com/docs/3.x/installation.html
+/docs/templating-overview https://craftcms.com/docs/3.x/dev/twig-primer.html
 /docs/sections-and-entries* https://craftcms.com/docs/3.x/sections-and-entries.html
 /docs/multi-environment-configs* https://craftcms.com/docs/3.x/multi-environment-configs.html
 /docs/routing* https://craftcms.com/docs/3.x/routing.html
