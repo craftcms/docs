@@ -172,3 +172,22 @@ public function safeUp()
 ```
 
 That’s because there’s a chance that your plugin is being installed as part of a project config sync, and if its install migration were to make any project config changes of its own, they would overwrite all of the incoming project config YAML changes.
+
+The reverse could be useful if you need to make changes when your plugin is uninstalled:
+
+```php{6-14}
+public function safeUp()
+{
+    // ...
+}
+
+public function safeDown()
+{
+    // ...
+
+    // Don’t make the same config changes twice
+    if (Craft::$app->projectConfig->get('plugins.my-plugin-handle', true) !== null) {
+        // Make the config changes here...
+    }
+}
+```
