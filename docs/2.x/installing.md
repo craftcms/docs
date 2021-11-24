@@ -44,7 +44,7 @@ $craftPath = './craft';
 
 The other files in `public/` are all optional. Here’s what they do:
 
-* `htaccess` – This file configures Apache servers to direct all traffic hitting your site to that `index.php` file, without actually needing to include `index.php` in the URLs. Note that it must be renamed to `.htaccess` (with the dot) for it to actually work. (See “[Removing “index.php” from URLs](https://craftcms.com/support/remove-index.php)” for more info.)
+* `htaccess` – This file configures Apache servers to direct all traffic hitting your site to that `index.php` file, without actually needing to include `index.php` in the URLs. Note that it must be renamed to `.htaccess` (with the dot) for it to actually work. (See “[Removing “index.php” from URLs](https://craftcms.com/knowledge-base/removing-index-php-from-urls)” for more info.)
 * `web.config` – This is our IIS equivelant of the `.htaccess` file, for those of you that are into that sort of thing.
 * `robots.txt` – If you couldn’t upload the `craft/` folder above your web root, you can use this file to prevent Google from indexing it.
 
