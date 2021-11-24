@@ -8,7 +8,7 @@ Here is an outline of what that entails:
 
    It’s important to keep in mind that Craft doesn’t actually get involved for *every* request that touches your server – only requests that go to your `index.php` file.
 
-   The .htaccess file that [comes with Craft](https://craftcms.com/support/remove-index.php) will redirect all would-be 404 requests over to `index.php` behind the scenes, which is why Craft is able to respond to URLs that don’t point to any actual folder/file in your web root. But if you point your browser directly at a file that *does* exist (such as a front-end image URL), Apache is going to serve that file directly. Craft won’t be summoned for that.
+   The .htaccess file that [comes with Craft](https://craftcms.com/knowledge-base/removing-index-php-from-urls) will redirect all would-be 404 requests over to `index.php` behind the scenes, which is why Craft is able to respond to URLs that don’t point to any actual folder/file in your web root. But if you point your browser directly at a file that *does* exist (such as a front-end image URL), Apache is going to serve that file directly. Craft won’t be summoned for that.
 
 1. **Is it a resource request?**
 
