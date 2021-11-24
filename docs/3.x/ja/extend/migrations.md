@@ -174,3 +174,22 @@ public function safeUp()
 ```
 
 なぜなら、プロジェクトコンフィグの同期の一部としてプラグインがインストールされている可能性があるためです。 インストールマイグレーションが独自にプロジェクトコンフィグを変更する場合、`project.yaml` からの新しい変更をすべて上書きしてしまいます。
+
+The reverse could be useful if you need to make changes when your plugin is uninstalled:
+
+```php{6-14}
+public function safeUp()
+{
+    // ...
+}
+
+public function safeDown()
+{
+    // ...
+
+    // Don’t make the same config changes twice
+    if (Craft::$app->projectConfig->get('plugins.my-plugin-handle', true) !== null) {
+        // Make the config changes here...
+    }
+}
+```
