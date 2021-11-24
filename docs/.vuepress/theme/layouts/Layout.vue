@@ -187,6 +187,7 @@ export default {
       version: null,
       suggestedUpdatePath: null,
       isDark: false,
+      browserWidth: window.innerWidth,
       colorModes: {
         light: "theme-light",
         dark: "theme-dark"
@@ -290,8 +291,15 @@ export default {
     }
 
     this.$nextTick(function() {
-      window.addEventListener("resize", () => {
-        this.isSidebarOpen = false;
+      window.addEventListener("resize", (event) => {
+        /**
+         * Mobile Safari throws a lot of window resize events;
+         * make sure the viewport width actually changed.
+         */
+        if (window.innerWidth !== this.browserWidth) {
+          this.browserWidth = window.innerWidth;
+          this.isSidebarOpen = false;
+        }
       });
     });
   },
