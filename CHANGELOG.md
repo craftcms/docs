@@ -2,7 +2,7 @@
 
 Theme and significant content changes will be documented in this file.
 
-## Unpublished
+## 2021-11-26
 ### Changed
 - Updated `plugin/install`, `plugin/uninstall`, `plugin/enable`, and `plugin/disable` console command descriptions for Craft 3.7.23.
 
