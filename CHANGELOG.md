@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## Unpublished
+### Changed
+- Updated `plugin/install`, `plugin/uninstall`, `plugin/enable`, and `plugin/disable` console command descriptions for Craft 3.7.23.
+
 ## 2021-11-16
 ### Changed
 - Updated Element Type’s “Saving Custom Field Values” section for Craft 3.7.21.
