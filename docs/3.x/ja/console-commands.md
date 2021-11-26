@@ -708,7 +708,27 @@ Disables a plugin.
 **Parameters**
 
 `handle`
-:   The plugin handle. (required)
+:   The plugin handle.\ If not provided, you’ll be prompted to choose one from a list of enabled plugins.
+
+**Example**
+
+```
+$ php craft plugin/disable
+
+The following plugins are enabled:
+
+    Handle                 Name
+    ---------------------  ---------------------
+    anchors                Anchors
+    apple-news             Apple News
+    ckeditor               CKEditor
+    commerce               Craft Commerce
+    gatsby-helper          Gatsby Helper
+
+Choose a plugin handle to disable: ckeditor
+*** disabling ckeditor
+*** disabled ckeditor successfully (time: 0.496s)
+```
 
 #### `plugin/enable`
 
@@ -717,7 +737,28 @@ Enables a plugin.
 **Parameters**
 
 `handle`
-:   The plugin handle. (required)
+:   The plugin handle.\ If not provided, you’ll be prompted to choose one from a list of disabled plugins.
+
+**Example**
+
+```
+$ php craft plugin/disable
+
+The following plugins are enabled:
+
+    Handle                 Name
+    ---------------------  ---------------------
+    anchors                Anchors
+    apple-news             Apple News
+    ckeditor               CKEditor
+    commerce               Craft Commerce
+    gatsby-helper          Gatsby Helper
+
+Choose a plugin handle to disable: ckeditor
+*** disabling ckeditor
+*** disabled ckeditor successfully (time: 0.496s)
+```
+
 
 #### `plugin/install`
 
@@ -726,7 +767,27 @@ Installs a plugin.
 **Parameters**
 
 `handle`
-:   The plugin handle. (required)
+:   The plugin handle.\ If not provided, you’ll be prompted to choose one from a list of uninstalled plugins.
+
+**Example**
+
+```
+$ php craft plugin/install
+
+The following uninstalled plugins are present:
+
+    Handle                 Name
+    ---------------------  ---------------------
+    anchors                Anchors
+    apple-news             Apple News
+    ckeditor               CKEditor
+    commerce               Craft Commerce
+    gatsby-helper          Gatsby Helper
+
+Choose a plugin handle to install: ckeditor
+*** installing ckeditor
+*** installed ckeditor successfully (time: 0.496s)
+```
 
 #### `plugin/uninstall`
 
@@ -735,12 +796,32 @@ Uninstalls a plugin.
 **Parameters**
 
 `handle`
-:   The plugin handle. (required)
+:   The plugin handle.\ If not provided, you’ll be prompted to choose one from a list of installed plugins.
 
 **Options**
 
 `--force`
 :   Whether the plugin uninstallation should be forced.\ boolean, 0 or 1 (defaults to 0)
+
+**Example**
+
+```
+$ php craft plugin/uninstall
+
+The following plugins plugins are installed and enabled:
+
+    Handle                 Name
+    ---------------------  ---------------------
+    anchors                Anchors
+    apple-news             Apple News
+    ckeditor               CKEditor
+    commerce               Craft Commerce
+    gatsby-helper          Gatsby Helper
+
+Choose a plugin handle to uninstall: ckeditor
+*** uninstalling ckeditor
+*** uninstalled ckeditor successfully (time: 0.496s)
+```
 
 ## `project-config`
 
@@ -885,7 +966,7 @@ Allows you to bulk-save elements.
 
 Re-saves assets.
 
-**オプション**
+**Options**
 
 `--element-id`
 :   The ID(s) of the elements to resave.
@@ -918,7 +999,7 @@ Re-saves assets.
 
 Re-saves categories.
 
-**オプション**
+**Options**
 
 `--element-id`
 :   The ID(s) of the elements to resave.
