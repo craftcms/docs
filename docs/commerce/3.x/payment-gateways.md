@@ -53,11 +53,15 @@ See the _Extending Commerce_ section’s [Payment Gateway Types](extend/payment-
 
 ## Storing Config Outside of the Database
 
-If you do not wish to store your payment gateway config information in the database (which could include secret API keys), you can override the values of a payment method’s setting via the `commerce-gateways.php` config file. Use the payment gateway’s handle as the key to the config for that payment method.
+We recommend configuring gateways in the Craft control panel, using [environment variables](https://craftcms.com/docs/3.x/config/#environmental-configuration) so sensitive API keys don’t end up in the database or project config.
 
 ::: tip
-The gateway must be set up in the control panel in order to reference its handle in the config file.
+Craft CMS 3.7.22 added UI giving boolean values the option to be set with environment variables. Previously, these could only be overridden in static config files.
 :::
+
+### `commerce-gateways.php`
+
+The now-deprecated `config/commerce-gateways.php` format allows storing any number of gateway setting overrides in a common static file, where each array of settings is indexed by a key that matches a payment gateway handle you’ve first configured in the control panel:
 
 ```php
 return [
@@ -66,6 +70,14 @@ return [
     ],
 ];
 ```
+
+If you’re overriding gateway settings this way, you’ll get a deprecation warning:
+
+> Overriding gateway settings using the `commerce-gateways.php` file has been deprecated. Use the gateway’s config file instead.
+
+Commerce 4 will not have support for this format, so it’s best to remove `config/commerce-gateways.php` and use environment variables like we recommend above. If you must override gateway settings, you can still do that using a standard config file for your gateway plugin (i.e. `config/commerce-stripe.php`)—but be aware that you’ll only be able to provide one set of settings for that gateway.
+
+While it’s possible to leverage [dependency injection](https://www.yiiframework.com/doc/guide/2.0/en/concept-di-container) to support multiple configurations per payment gateway, settings will eventually get captured in the project config and likely lead to more issues or confusion.
 
 ## Payment Sources
 
