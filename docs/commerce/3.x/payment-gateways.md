@@ -2,7 +2,7 @@
 
 Craft Commerce payments gateways are provided by Craft CMS plugins.
 
-To create a payment gateway you must install the appropriate plugin and navigate to **Commerce** → **Settings** → **Gateways** and configure the appropriate gateway. For more detailed instructions, see each plugin’s `README.md` file.
+To create a payment gateway you must install the appropriate plugin, navigate to **Commerce** → **Settings** → **Gateways**, and add configuration for that gateway. For more detailed instructions, see each plugin’s `README.md` file.
 
 Payment gateways generally fit in one of two categories:
 
@@ -53,7 +53,7 @@ See the _Extending Commerce_ section’s [Payment Gateway Types](extend/payment-
 
 ## Storing Config Outside of the Database
 
-We recommend configuring gateways in the Craft control panel, using [environment variables](https://craftcms.com/docs/3.x/config/#environmental-configuration) so environment-specific settings and sensitive API keys don’t end up in the database or project config.
+When you’re configuring gateways in the Craft control panel, we recommend using [environment variables](https://craftcms.com/docs/3.x/config/#environmental-configuration) so environment-specific settings and sensitive API keys don’t end up in the database or project config.
 
 ::: tip
 Craft CMS 3.7.22 added UI giving boolean values the option to be set with environment variables. Previously, these could only be overridden in static config files.
