@@ -37,6 +37,7 @@
 /docs/commerce/3.x/configuration.html#permissions /docs/commerce/3.x/store-management.html#permissions
 /docs/commerce/3.x/dev/order-queries.html /docs/commerce/3.x/orders-carts.html#querying-orders
 /docs/3.x/testing/testing-craft/getting-started.html /docs/3.x/testing/testing-craft/setup.html
+/docs/commerce/3.x/gateway-config.html /docs/commerce/3.x/payment-gateways.html#storing-config-outside-of-the-database
 
 # dynamic ones
 /docs/commerce/3.x/order-status-emails.html* /docs/commerce/3.x/emails.html:splat
