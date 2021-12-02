@@ -158,6 +158,49 @@ $entryIds = Entry::find()
 ```
 :::
 
+## Caching Element Queries
+
+### `cache()`
+
+Craft’s element query results can be cached with the [cache()](yii2:yii\db\Query::cache()) function, which is nearly identical to Yii’s method except that Craft registers an [ElementQueryTagDependency](craft3:craft\cache\ElementQueryTagDependency) by default if no dependency argument is explicitly provided.
+
+::: tip
+This is a layer on top of data caching, and different from the [template {% cache %} tag](/dev/tags.md#cache).
+:::
+
+The function accepts two optional parameters:
+
+- a duration, in seconds, that query results should remain valid in the cache
+  - `0`: never expire
+  - `-1`: query cache should not be used
+  - `true`: `Connection::queryCacheDuration` should be used (defaults to `3600` seconds)
+- an object that implements [\yii\caching\Dependency](yii2:yii\caching\Dependency) that should be used as a custom query cache dependency
+
+::: code
+```twig
+{% set entries = craft.entries()
+  .section('news')
+  .limit(10)
+  .cache()
+  .all() %}
+```
+```php
+use craft\elements\Entry;
+
+$entries = Entry::find()
+    ->section('news')
+    ->limit(10)
+    ->cache()
+    ->all();
+```
+:::
+
+- clearCachedResult()
+- getCachedResult()
+- setCachedResult()
+- getCacheTags()
+
+
 ## Advanced Element Queries
 
 Element queries are specialized [query builders](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder) under the hood, so they support most of the same methods provided by <craft3:craft\db\Query>.
