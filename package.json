@@ -1,7 +1,7 @@
 {
   "private": true,
   "devDependencies": {
-    "@babel/core": "^7.14.3",
+    "@babel/core": "^7.16.0",
     "@vuepress/core": "^1.8.2",
     "@vuepress/plugin-google-analytics": "^1.8.2",
     "autoprefixer": "^9.8.4",
