@@ -38,6 +38,7 @@ Function | Description
 [min](https://twig.symfony.com/doc/2.x/functions/min.html) | Returns the lowest value in an array.
 [ol](#ol) | Outputs an array of items as an ordered list.
 [parent](https://twig.symfony.com/doc/2.x/functions/parent.html) | Returns the parent block’s output.
+[parseBooleanEnv](#parsebooleanenv) | Parses a string as an environment variable or alias having a boolean value.
 [parseEnv](#parseenv) | Parses a string as an environment variable or alias.
 [plugin](#plugin) | Returns a plugin instance by its handle.
 [random](https://twig.symfony.com/doc/2.x/functions/random.html) | Returns a random value.
@@ -488,9 +489,15 @@ The `ol()` function has the following arguments:
     - **`encode: false`** – Prevents the list items from being HTML-encoded.
     - **`itemOptions: {...}`** – Tag attributes to be applied to each of the `<li>`s.
 
+## `parseBooleanEnv`
+
+Checks if a string references an environment variable (`$VARIABLE_NAME`) and returns the referenced boolean value, or `null` if a boolean value can’t be determined.
+
 ## `parseEnv`
 
 Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
+
+If the string references an environment variable with a value of `true` or `false`, a boolean value will be returned.
 
 ## `plugin`
 

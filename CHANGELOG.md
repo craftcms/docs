@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-12-03
+### Added
+- Documented `parseBooleanEnv` Twig function added in Craft 3.7.24.
+
 ## 2021-11-26
 ### Changed
 - Updated `plugin/install`, `plugin/uninstall`, `plugin/enable`, and `plugin/disable` console command descriptions for Craft 3.7.23.
