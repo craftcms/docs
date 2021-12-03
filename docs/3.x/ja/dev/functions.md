@@ -2,58 +2,59 @@
 
 [Twig に付随する](https://twig.symfony.com/doc/functions/index.html)テンプレートファンクションに加えて、Craft がいくつか独自のものを提供します。
 
-| Function                                                                                       | ファンクション                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| [actionInput](#actioninput)                                                                    | 不可視項目の `action` を出力します。                                    |
-| [actionUrl](#actionurl)                                                                        | コントローラーのアクション URL を生成します。                                  |
-| [alias](#alias)                                                                                | 文字列をエイリアスとして解析します。                                         |
-| [attr](#attr)                                                                                  | HTML 属性を生成します。                                             |
-| [attribute](https://twig.symfony.com/doc/2.x/functions/attribute.html)                         | 変数の動的属性にアクセスします。                                           |
-| [beginBody](#beginbody)                                                                        | 「begin body」に登録されたスクリプトやスタイルを出力します。                        |
-| [block](https://twig.symfony.com/doc/2.x/functions/block.html)                                 | ブロックの出力をプリントします。                                           |
-| [ceil](#ceil)                                                                                  | Rounds a number up.                                        |
-| [className](#classname)                                                                        | 指定されたオブジェクトの完全修飾クラス名を返します。                                 |
-| [clone](#clone)                                                                                | オブジェクトを複製します。                                              |
-| [combine](#combine)                                                                            | 2つの配列を1つに結合します。                                            |
-| [configure](#configure)                                                                        | 渡されたオブジェクトに属性をセットします。                                      |
-| [constant](https://twig.symfony.com/doc/2.x/functions/constant.html)                           | 指定された文字列の定数値を返します。                                         |
-| [create](#create)                                                                              | 新しいオブジェクトを作成します。                                           |
-| [csrfInput](#csrfinput)                                                                        | 不可視項目の CSRF トークンを返します。                                     |
-| [cpUrl](#cpurl)                                                                                | コントロールパネルの URL を生成します。                                     |
-| [cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html)                                 | 値の配列を循環します。                                                |
-| [dataUrl](#dataurl)                                                                            | Outputs an asset or file as a base64-encoded data URL.     |
-| [date](#date)                                                                                  | 日付を作成します。                                                  |
-| [dump](https://twig.symfony.com/doc/2.x/functions/dump.html)                                   | 変数に関する情報をダンプします。                                           |
-| [endBody](#endbody)                                                                            | 「end body」に登録されたスクリプトやスタイルを出力します。                          |
-| [expression](#expression)                                                                      | データベース式オブジェクトを作成します。                                       |
-| [failMessageInput](#failmessageinput)                                                          | Outputs a hidden `failMessage` input.                      |
-| [floor](#floor)                                                                                | 整数値に切り上げます。                                                |
-| [getenv](#getenv)                                                                              | 環境変数の値を返します。                                               |
-| [gql](#gql)                                                                                    | スキーマ全体に対して、GraphQL クエリを実行します。                              |
-| [head](#head)                                                                                  | 「head」に登録されたスクリプトやスタイルを出力します。                              |
-| [hiddenInput](#hiddeninput)                                                                    | 不可視項目を出力します。                                               |
-| [include](https://twig.symfony.com/doc/2.x/functions/include.html)                             | レンダリングされたテンプレートのコンテンツを返します。                                |
-| [input](#input)                                                                                | HTML input タグを出力します。                                       |
-| [max](https://twig.symfony.com/doc/2.x/functions/max.html)                                     | 配列内の最大値を返します。                                              |
-| [min](https://twig.symfony.com/doc/2.x/functions/min.html)                                     | 配列内の最小値を返します。                                              |
-| [ol](#ol)                                                                                      | 配列内のアイテムの順番をランダム化します。                                      |
-| [parent](https://twig.symfony.com/doc/2.x/functions/parent.html)                               | 親ブロックの出力を返します。                                             |
-| [parseEnv](#parseenv)                                                                          | 文字列を環境変数、または、エイリアスとして解析します。                                |
-| [plugin](#plugin)                                                                              | ハンドルに従ってプラグインのインスタンスを返します。                                 |
-| [random](https://twig.symfony.com/doc/2.x/functions/random.html)                               | ランダムな値を返します。                                               |
-| [range](https://twig.symfony.com/doc/2.x/functions/range.html)                                 | 整数の等差数列を含むリストを返します。                                        |
-| [raw](#raw)                                                                                    | 出力時に HTML エンコードされないよう、指定された文字列を`Twig\Markup` オブジェクトで囲みます。 |
-| [redirectInput](#redirectinput)                                                                | 不可視項目の `redirect` を出力します。                                  |
-| [seq](#seq)                                                                                    | シーケンスの次、または、現在の番号を出力します。                                   |
-| [shuffle](#shuffle)                                                                            | Randomizes the order of the items in an array.             |
-| [siteUrl](#siteurl)                                                                            | フロントエンドの URL を生成します。                                       |
-| [successMessageInput](#successmessageinput)                                                    | Outputs a hidden `successMessage` input.                   |
-| [svg](#svg)                                                                                    | SVG 文書を出力します。                                              |
-| [source](https://twig.symfony.com/doc/2.x/functions/source.html)                               | レンダリングせずに、テンプレートのコンテンツを返します。                               |
-| [tag](#tag)                                                                                    | HTML タグを出力します。                                             |
-| [template_from_string](https://twig.symfony.com/doc/2.x/functions/template_from_string.html) | 文字列からテンプレートを読み込みます。                                        |
-| [ul](#ul)                                                                                      | Outputs an array of items as an unordered list.            |
-| [url](#url)                                                                                    | URL を生成します。                                                |
+| Function                                                                                       | ファンクション                                                                                                |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| [actionInput](#actioninput)                                                                    | 不可視項目の `action` を出力します。                                                                                |
+| [actionUrl](#actionurl)                                                                        | コントローラーのアクション URL を生成します。                                                                              |
+| [alias](#alias)                                                                                | 文字列をエイリアスとして解析します。                                                                                     |
+| [attr](#attr)                                                                                  | HTML 属性を生成します。                                                                                         |
+| [attribute](https://twig.symfony.com/doc/2.x/functions/attribute.html)                         | 変数の動的属性にアクセスします。                                                                                       |
+| [beginBody](#beginbody)                                                                        | 「begin body」に登録されたスクリプトやスタイルを出力します。                                                                    |
+| [block](https://twig.symfony.com/doc/2.x/functions/block.html)                                 | ブロックの出力をプリントします。                                                                                       |
+| [ceil](#ceil)                                                                                  | Rounds a number up.                                                                                    |
+| [className](#classname)                                                                        | 指定されたオブジェクトの完全修飾クラス名を返します。                                                                             |
+| [clone](#clone)                                                                                | オブジェクトを複製します。                                                                                          |
+| [combine](#combine)                                                                            | 2つの配列を1つに結合します。                                                                                        |
+| [configure](#configure)                                                                        | 渡されたオブジェクトに属性をセットします。                                                                                  |
+| [constant](https://twig.symfony.com/doc/2.x/functions/constant.html)                           | 指定された文字列の定数値を返します。                                                                                     |
+| [create](#create)                                                                              | 新しいオブジェクトを作成します。                                                                                       |
+| [csrfInput](#csrfinput)                                                                        | 不可視項目の CSRF トークンを返します。                                                                                 |
+| [cpUrl](#cpurl)                                                                                | コントロールパネルの URL を生成します。                                                                                 |
+| [cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html)                                 | 値の配列を循環します。                                                                                            |
+| [dataUrl](#dataurl)                                                                            | Outputs an asset or file as a base64-encoded data URL.                                                 |
+| [date](#date)                                                                                  | 日付を作成します。                                                                                              |
+| [dump](https://twig.symfony.com/doc/2.x/functions/dump.html)                                   | 変数に関する情報をダンプします。                                                                                       |
+| [endBody](#endbody)                                                                            | 「end body」に登録されたスクリプトやスタイルを出力します。                                                                      |
+| [expression](#expression)                                                                      | データベース式オブジェクトを作成します。                                                                                   |
+| [failMessageInput](#failmessageinput)                                                          | Outputs a hidden `failMessage` input.                                                                  |
+| [floor](#floor)                                                                                | 整数値に切り上げます。                                                                                            |
+| [getenv](#getenv)                                                                              | 環境変数の値を返します。                                                                                           |
+| [gql](#gql)                                                                                    | スキーマ全体に対して、GraphQL クエリを実行します。                                                                          |
+| [head](#head)                                                                                  | 「head」に登録されたスクリプトやスタイルを出力します。                                                                          |
+| [hiddenInput](#hiddeninput)                                                                    | 不可視項目を出力します。                                                                                           |
+| [include](https://twig.symfony.com/doc/2.x/functions/include.html)                             | レンダリングされたテンプレートのコンテンツを返します。                                                                            |
+| [input](#input)                                                                                | HTML input タグを出力します。                                                                                   |
+| [max](https://twig.symfony.com/doc/2.x/functions/max.html)                                     | 配列内の最大値を返します。                                                                                          |
+| [min](https://twig.symfony.com/doc/2.x/functions/min.html)                                     | 配列内の最小値を返します。                                                                                          |
+| [ol](#ol)                                                                                      | 配列内のアイテムの順番をランダム化します。                                                                                  |
+| [parent](https://twig.symfony.com/doc/2.x/functions/parent.html)                               | 親ブロックの出力を返します。                                                                                         |
+| [parseBooleanEnv](#parsebooleanenv)                                                            | Parses a string as an environment variable or alias having a boolean value.                            |
+| [parseEnv](#parseenv)                                                                          | Parses a string as an environment variable or alias.                                                   |
+| [plugin](#plugin)                                                                              | Returns a plugin instance by its handle.                                                               |
+| [random](https://twig.symfony.com/doc/2.x/functions/random.html)                               | Returns a random value.                                                                                |
+| [range](https://twig.symfony.com/doc/2.x/functions/range.html)                                 | Returns a list containing an arithmetic progression of integers.                                       |
+| [raw](#raw)                                                                                    | Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML-encoded when output. |
+| [redirectInput](#redirectinput)                                                                | Outputs a hidden `redirect` input.                                                                     |
+| [seq](#seq)                                                                                    | Outputs the next or current number in a sequence.                                                      |
+| [shuffle](#shuffle)                                                                            | Randomizes the order of the items in an array.                                                         |
+| [siteUrl](#siteurl)                                                                            | Generates a front-end URL.                                                                             |
+| [successMessageInput](#successmessageinput)                                                    | Outputs a hidden `successMessage` input.                                                               |
+| [svg](#svg)                                                                                    | Outputs an SVG document.                                                                               |
+| [source](https://twig.symfony.com/doc/2.x/functions/source.html)                               | Returns the content of a template without rendering it.                                                |
+| [tag](#tag)                                                                                    | Outputs an HTML tag.                                                                                   |
+| [template_from_string](https://twig.symfony.com/doc/2.x/functions/template_from_string.html) | Loads a template from a string.                                                                        |
+| [ul](#ul)                                                                                      | Outputs an array of items as an unordered list.                                                        |
+| [url](#url)                                                                                    | Generates a URL.                                                                                       |
 
 ## `actionInput( actionPath )`
 
@@ -493,9 +494,15 @@ The `ol()` function has the following arguments:
     - **`encode: false`** – Prevents the list items from being HTML-encoded.
     - **`itemOptions: {...}`** – Tag attributes to be applied to each of the `<li>`s.
 
+## `parseBooleanEnv`
+
+Checks if a string references an environment variable (`$VARIABLE_NAME`) and returns the referenced boolean value, or `null` if a boolean value can’t be determined.
+
 ## `parseEnv`
 
 Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
+
+If the string references an environment variable with a value of `true` or `false`, a boolean value will be returned.
 
 ## `plugin`
 
