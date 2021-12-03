@@ -5,6 +5,7 @@ Theme and significant content changes will be documented in this file.
 ## 2021-12-03
 ### Added
 - Documented `parseBooleanEnv` Twig function added in Craft 3.7.24.
+- Documented element query `cache()` function.
 
 ## 2021-11-26
 ### Changed
