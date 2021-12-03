@@ -158,24 +158,55 @@ $entryIds = Entry::find()
 ```
 :::
 
-## 高度なエレメントクエリ
+## Caching Element Queries
 
-エレメントクエリは、専門的な[クエリビルダー](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder)です。 そのため、<craft3:craft\db\Query> によって提供されるものとほとんど同じメソッドをサポートしています。
+### `cache()`
 
-### 選択
+Craft’s element query results can be cached with the `cache()` function:
+
+::: code
+```twig
+{% set entries = craft.entries()
+  .section('news')
+  .limit(10)
+  .cache()
+  .all() %}
+```
+```php
+use craft\elements\Entry;
+
+$entries = Entry::find()
+    ->section('news')
+    ->limit(10)
+    ->cache()
+    ->all();
+```
+:::
+
+This is a layer on top of data caching that’s different from the [template {% cache %} tag](/dev/tags.md#cache).
+
+::: tip
+Craft registers an [ElementQueryTagDependency](craft3:craft\cache\ElementQueryTagDependency) for you by default, so cache dependencies and invalidation are handled automatically.
+:::
+
+## Advanced Element Queries
+
+Element queries are specialized [query builders](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder) under the hood, so they support most of the same methods provided by <craft3:craft\db\Query>.
+
+### Selections
 
 - [select()](yii2:yii\db\Query::select())
 - [addSelect()](yii2:yii\db\Query::addSelect())
 - [distinct()](yii2:yii\db\Query::distinct())
 - [groupBy()](yii2:yii\db\Query::groupBy())
 
-### 結合
+### Joins
 
 - [innerJoin()](yii2:yii\db\Query::innerJoin())
 - [leftJoin()](yii2:yii\db\Query::leftJoin())
 - [rightJoin()](yii2:yii\db\Query::rightJoin())
 
-### 条件
+### Conditions
 
 - [where()](yii2:yii\db\QueryTrait::where())
 - [andWhere()](yii2:yii\db\QueryTrait::andWhere())
@@ -184,7 +215,7 @@ $entryIds = Entry::find()
 - [andFilterWhere()](yii2:yii\db\QueryTrait::andFilterWhere())
 - [orFilterWhere()](yii2:yii\db\QueryTrait::orFilterWhere())
 
-### クエリの実行
+### Query Execution
 
 - [all()](yii2:yii\db\Query::all())
 - [one()](yii2:yii\db\Query::one())
