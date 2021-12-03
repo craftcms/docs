@@ -107,9 +107,9 @@ Use the table below to update each breaking change in your Twig templates.
 
 | Old                                   | New                         | Docs                                                                        |
 | ------------------------------------- | --------------------------- | --------------------------------------------------------------------------- |
-| `commerce/cart/remove-line-item`      | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
-| `commerce/cart/update-line-item`      | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
-| `commerce/cart/remove-all-line-items` | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
+| `commerce/cart/remove-line-item`      | `commerce/cart/update-cart` | [Updating the Cart](orders-carts.md#carts) |
+| `commerce/cart/update-line-item`      | `commerce/cart/update-cart` | [Updating the Cart](orders-carts.md#carts) |
+| `commerce/cart/remove-all-line-items` | `commerce/cart/update-cart` | [Updating the Cart](orders-carts.md#carts) |
 
 ## Event Changes
 
