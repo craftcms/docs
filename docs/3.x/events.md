@@ -4,6 +4,8 @@ Craft has all kinds of events you can use to customize how things work. See [Usi
 
 ## Event Browser
 
+Select an event for more detail.
+
 <event-browser />
 
 ## Common Event Flows
