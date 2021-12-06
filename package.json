@@ -38,13 +38,17 @@
     "docs:build": "vuepress build docs --dest=docs/.vuepress/dist/docs && npm run docs:sitemap && npm run docs:redirects",
     "docs:sitemap": "vuepress-sitemap -H https://craftcms.com/docs/ -d docs/.vuepress/dist/docs -e /3.x/fr/**",
     "docs:redirects": "cp ./_redirects ./docs/.vuepress/dist/",
-    "test": "node ./node_modules/.bin/jest"
+    "test": "node ./node_modules/.bin/jest",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "dependencies": {
     "copy-to-clipboard": "^3.3.1",
     "flexsearch": "^0.6.32",
     "html-to-text": "^7.1.1",
     "marked": "^4.0.0",
-    "vue-autosuggest": "^2.2.0"
-  }
+    "vue-autosuggest": "^2.2.0",
+    "@snyk/protect": "latest"
+  },
+  "snyk": true
 }
