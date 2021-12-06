@@ -11,7 +11,15 @@ Products are the items available in your store.
 
 A product itself is never sold; what goes into a cart for purchase is actually one of the product’s [variants](#variants). In the Craft control panel, you’ll see Products listed by Product Type.
 
-![](./assets/product-variant.png)
+![Diagram depicting Product with common fields and its relationship to one or more Variants](./assets/product-variant.png)
+
+In the same way that all Craft CMS entries have common fields, Craft Commerce products have some of their own:
+
+- **Title**, **Slug**, **Post Date**, **Expiry Date**, and **Enabled** work just like they do in Craft [entries](../../3.x/entries.md).
+- **Free Shipping**, when enabled, excludes the product and its variants from an order’s shipping cost calculation. (This only impacts per-*item*—and not per-*order*—shipping costs.)
+- **Promotable** determines whether [sales](sales.md) and [discounts](discounts.md) can be applied to the product and its variants.
+- **Available for purchase** determines whether the product and its variants should be available for purchase on the front end.
+- **Tax** and **Shipping** allow you to designate the product’s [tax](tax.md) and [shipping](shipping.md) category respectively.
 
 ## Product Types
 

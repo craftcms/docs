@@ -435,6 +435,8 @@ Some settings in the control panel can be set to environment variables (like the
 
 - General Settings
   - **System Name**
+  - **System Status**
+  - **Time Zone**
 - Sites
   - **Base URL**
 - Sections
@@ -449,11 +451,13 @@ Some settings in the control panel can be set to environment variables (like the
   - **Username** (Gmail and SMTP)
   - **Password** (Gmail and SMTP)
   - **Host Name** (SMTP)
-  - **Port** (Port)
+  - **Port** (SMTP)
+  - **Use authentication** (SMTP)
+  - **Encryption Method** (SMTP)
 
 To set these settings to an environment variable, type `$` followed by the environment variable’s name.
 
-![A volume’s Base URL setting](../images/volume-base-url-setting.jpg)
+![A site’s Base URL setting](../images/site-base-url-setting.png)
 
 Only the environment variable’s name will be stored in your database or project config, so this is a great way to set setting values that may change per-environment, or contain sensitive information.
 

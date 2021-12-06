@@ -158,7 +158,7 @@ Check your code for any database queries that involve your component’s table. 
 
 ## Restoring Soft-Deleted Rows
 
-There are two ways to restore soft-deleted rows that haven’t been hard-deleted by garbage collection yet:
+There are two ways to restore soft-deleted rows not yet hard-deleted by garbage collection:
 
 1. With your Active Record class, by calling its `restore()` method.
 
@@ -177,3 +177,7 @@ There are two ways to restore soft-deleted rows that haven’t been hard-deleted
       ->restore('{{%mytablename}}', ['id' => $id])
       ->execute();
   ```
+
+::: tip
+See [this Stack Exchange post](https://craftcms.stackexchange.com/questions/38628/how-to-make-custom-element-types-restorable) for supporting custom element restores from the control panel.
+:::

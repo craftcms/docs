@@ -1,3 +1,7 @@
+---
+description: Official documentation for Craft Commerce 1.
+---
+
 # About Craft Commerce
 
 Craft Commerce is an ecommerce plugin for Craft CMS.

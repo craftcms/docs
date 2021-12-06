@@ -771,7 +771,7 @@ The maximum number of increments Craft will apply to a slug while searching for 
 
 Whether Craft should omit the script filename currently being used to access Craft (e.g. `index.php`) when generating URLs.
 
-When set to `'auto'`, Craft will do its best to determine whether the server is set up to support [index.php redirects](https://craftcms.com/support/remove-index.php), and cache the test’s results for 24 hours.
+When set to `'auto'`, Craft will do its best to determine whether the server is set up to support [index.php redirects](https://craftcms.com/knowledge-base/removing-index-php-from-urls), and cache the test’s results for 24 hours.
 
 ```php
 'omitScriptNameInUrls' => true,

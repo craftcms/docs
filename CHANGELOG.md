@@ -2,6 +2,19 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-12-03
+### Added
+- Documented `parseBooleanEnv` Twig function added in Craft 3.7.24.
+- Documented element query `cache()` function.
+
+## 2021-11-26
+### Changed
+- Updated `plugin/install`, `plugin/uninstall`, `plugin/enable`, and `plugin/disable` console command descriptions for Craft 3.7.23.
+
+## 2021-11-16
+### Changed
+- Updated Element Type’s “Saving Custom Field Values” section for Craft 3.7.21.
+
 ## 2021-10-19
 ### Added
 - Documented new `countable` and `object` Twig tests added in Craft 3.7.17.
