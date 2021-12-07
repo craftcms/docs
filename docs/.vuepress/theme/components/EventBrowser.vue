@@ -343,11 +343,7 @@
 <script>
 import { VueAutosuggest } from "vue-autosuggest";
 import EventData from "../../../3.x/event-data/events.json";
-import Prism from "prismjs";
-import { marked } from "marked";
 import copy from "copy-to-clipboard";
-import "prismjs/components/prism-php";
-import "prismjs/components/prism-markup-templating";
 import CheckMark from "../global-components/CheckMark.vue";
 
 export default {
@@ -361,8 +357,21 @@ export default {
       currentEvent: "",
       eventData: EventData,
       filterSelections: {},
-      codeCopied: false
+      codeCopied: false,
+      prism: null,
+      marked: null
     };
+  },
+  mounted() {
+    import("prismjs").then(module => {
+      import("prismjs/components/prism-php");
+      import("prismjs/components/prism-markup-templating");
+      this.prism = module;
+    });
+
+    import("marked").then(module => {
+      this.marked = module;
+    });
   },
   methods: {
     getClassName(fullClass) {
@@ -389,7 +398,7 @@ export default {
       });
     },
     renderMarkdown(text) {
-      return marked.parse(text);
+      return this.marked.parse(text);
     },
     copyCode() {
       if (copy(this.exampleCode)) {
@@ -399,7 +408,7 @@ export default {
       }
     },
     highlightCode(code) {
-      return Prism.highlight(code, Prism.languages.php, "php");
+      return this.prism.highlight(code, this.prism.languages.php, "php");
     }
   },
   watch: {

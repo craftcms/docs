@@ -6,9 +6,9 @@ Craft has all kinds of events you can use to customize how things work. See [Usi
 
 Select an event for more detail.
 
-<event-browser />
-
 ## Common Event Flows
+
+<event-browser />
 
 ### Saving Entries
 
@@ -24,4 +24,3 @@ Generally, entries progress through the following order of operations:
 2. Validation that triggers `EVENT_BEFORE_VALIDATE` and `EVENT_AFTER_VALIDATE`.
 3. Saving for the initial site that triggers `EVENT_AFTER_SAVE`.
 4. Propagating non-translatable changes to the entry’s other sites, which repeats steps 1-3 for each site before triggering `EVENT_AFTER_PROPAGATE`.
-
