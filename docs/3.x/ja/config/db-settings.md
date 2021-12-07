@@ -62,6 +62,7 @@ Defined by :
 :   [DbConfig::$attributes](craft3:craft\config\DbConfig::$attributes)
 
 
+
 例えば、MySQL PDO ドライバ（http://php.net/manual/en/ref.pdo-mysql.php）を使用する場合、（MySQL で SSL が利用できると仮定する https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html）SSL データベース接続で `'user'` が SSL 経由で接続できる場合、次のように設定します。
 
 For example, when using the [MySQL PDO driver](https://php.net/manual/en/ref.pdo-mysql.php), if you wanted to enable a SSL database connection (assuming [SSL is enabled in MySQL](https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html) and `'user'` can connect via SSL, you’d set these:
@@ -86,6 +87,7 @@ Default value :
 
 定義元 :
 :   [DbConfig::$charset](craft3:craft\config\DbConfig::$charset)
+
 
 
 選択するデータベースの名前。
@@ -113,6 +115,7 @@ Allowed types :
 
 Since
 :   3.6.4
+
 
 
 DSN はドライバの接頭辞（`mysql:` または `pgsql:`）ではじまり、ドライバ固有のパラメータが続きます。 例えば `mysql:host=127.0.0.1;port=3306;dbname=acme_corp` のような形です。
@@ -146,6 +149,7 @@ You can change the character set and collation across all existing database tabl
 :   [DbConfig::$dsn](craft3:craft\config\DbConfig::$dsn)
 
 
+
 The Data Source Name (“DSN”) that tells Craft how to connect to the database.
 
 DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by driver-specific parameters. For example, `mysql:host=127.0.0.1;port=3306;dbname=acme_corp`.
@@ -167,6 +171,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 :   [DbConfig::$password](craft3:craft\config\DbConfig::$password)
 
 
+
 接続するデータベースのパスワード。
 
 
@@ -181,6 +186,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 定義元 : :
 :   [DbConfig::$schema](craft3:craft\config\DbConfig::$schema)
+
 
 
 ホスティング環境によって提供された場合、データベースの接続 URL。
@@ -199,6 +205,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 :   [DbConfig::$tablePrefix](craft3:craft\config\DbConfig::$tablePrefix)
 
 
+
 共有するCraft のインストールを単一のデータベース（MySQL）、または、単一のデータベースで共有スキーマ（PostgreSQL）を使用する場合、インストールごとにテーブル名の競合を避けるために、テーブル接頭辞をセットできます。 これは5文字以内、かつ、すべて小文字でなければなりません。
 
 
@@ -213,6 +220,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 定義元 : :
 :   [DbConfig::$user](craft3:craft\config\DbConfig::$user)
+
 
 
 接続するデータベースのユーザー名。
@@ -234,6 +242,7 @@ Since
 :   3.7.0
 
 
+
 Whether batched queries should be executed on a separate, unbuffered database connection.
 
 This setting only applies to MySQL. It can be enabled when working with high volume content, to prevent PHP from running out of memory when querying too much data at once. (See <https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder#batch-query-mysql> for an explanation of MySQL’s batch query limitations.)
@@ -250,6 +259,7 @@ This setting only applies to MySQL. It can be enabled when working with high vol
 
 定義元 : :
 :   [DbConfig::$url](craft3:craft\config\DbConfig::$url)
+
 
 
 The database connection URL, if one was provided by your hosting environment.
@@ -270,6 +280,7 @@ If this is set, the values for [driver](https://docs.craftcms.com/api/v3/craft-c
 :   [DbConfig::$driver](craft3:craft\config\DbConfig::$driver)
 
 
+
 The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
 
 
@@ -284,6 +295,7 @@ The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
 
 定義元 : :
 :   [DbConfig::$server](craft3:craft\config\DbConfig::$server)
+
 
 
 The database server name or IP address. Usually `localhost` or `127.0.0.1`.
@@ -302,6 +314,7 @@ The database server name or IP address. Usually `localhost` or `127.0.0.1`.
 :   [DbConfig::$port](craft3:craft\config\DbConfig::$port)
 
 
+
 The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
 
 
@@ -316,6 +329,7 @@ Default value
 
 Defined by
 :   [DbConfig::$unixSocket](craft3:craft\config\DbConfig::$unixSocket)
+
 
 
 MySQL only. If this is set, the CLI connection string (used for yiic) will connect to the Unix socket instead of the server and port. If this is specified, then `server` and `port` settings are ignored.
@@ -334,6 +348,10 @@ Defined by
 :   [DbConfig::$database](craft3:craft\config\DbConfig::$database)
 
 
+
 The name of the database to select.
+
+
+
 
 <!-- END SETTINGS -->
