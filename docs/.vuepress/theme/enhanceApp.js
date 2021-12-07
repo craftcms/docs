@@ -2,7 +2,6 @@ import Vuex from "vuex";
 import CodeToggle from "./components/CodeToggle";
 import PreHeading from "./components/PreHeading";
 import PostHeading from "./components/PostHeading";
-import EventBrowser from "./components/EventBrowser";
 
 import { getDocSetLocaleSettings } from "./util";
 import { setStorage } from "./Storage";
@@ -13,7 +12,6 @@ export default ({ Vue, options, router, siteData }) => {
   Vue.component("code-toggle", CodeToggle);
   Vue.component("pre-heading", PreHeading);
   Vue.component("post-heading", PostHeading);
-  Vue.component("event-browser", EventBrowser);
 
   Vue.use(Vuex);
 

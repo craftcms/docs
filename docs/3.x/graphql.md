@@ -296,9 +296,6 @@ This query is used to query for assets.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -343,9 +340,6 @@ This query is used to return the number of assets.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -390,9 +384,6 @@ This query is used to query for a single asset.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -437,18 +428,6 @@ This query is used to query for entries.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | Narrows the query results to only drafts of a given element.  Set to `false` to fetch unpublished drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -477,16 +456,16 @@ This query is used to query for entries.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
-| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
-| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its ID.
-| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its ID.
-| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
-| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its ID.
-| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its ID.
-| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its ID.
-| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its ID.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants in their structure.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element in its structure, provided by its ID.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element in its structure provided by its ID.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” in their structure (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element in its structure, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element in its structure, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element in its structure, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element in its structure, provided by its ID.
 | `editable`| `Boolean` | Whether to only return entries that the user has permission to edit.
 | `section`| `[String]` | Narrows the query results based on the section handles the entries belong to.
 | `sectionId`| `[QueryArgument]` | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
@@ -506,18 +485,6 @@ This query is used to return the number of entries.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | Narrows the query results to only drafts of a given element.  Set to `false` to fetch unpublished drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -546,16 +513,16 @@ This query is used to return the number of entries.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
-| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
-| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its ID.
-| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its ID.
-| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
-| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its ID.
-| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its ID.
-| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its ID.
-| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its ID.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants in their structure.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element in its structure, provided by its ID.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element in its structure provided by its ID.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” in their structure (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element in its structure, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element in its structure, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element in its structure, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element in its structure, provided by its ID.
 | `editable`| `Boolean` | Whether to only return entries that the user has permission to edit.
 | `section`| `[String]` | Narrows the query results based on the section handles the entries belong to.
 | `sectionId`| `[QueryArgument]` | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
@@ -575,18 +542,6 @@ This query is used to query for a single entry.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `drafts`| `Boolean` | Whether draft elements should be returned.
-| `draftOf`| `QueryArgument` | Narrows the query results to only drafts of a given element.  Set to `false` to fetch unpublished drafts.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
-| `draftCreator`| `Int` | The drafts’ creator ID
-| `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
-| `revisions`| `Boolean` | Whether revision elements should be returned.
-| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
-| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
-| `revisionCreator`| `Int` | The revisions’ creator ID
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -615,16 +570,16 @@ This query is used to query for a single entry.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
-| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
-| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its ID.
-| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its ID.
-| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
-| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its ID.
-| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its ID.
-| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its ID.
-| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its ID.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants in their structure.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element in its structure, provided by its ID.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element in its structure provided by its ID.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” in their structure (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element in its structure, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element in its structure, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element in its structure, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element in its structure, provided by its ID.
 | `editable`| `Boolean` | Whether to only return entries that the user has permission to edit.
 | `section`| `[String]` | Narrows the query results based on the section handles the entries belong to.
 | `sectionId`| `[QueryArgument]` | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
@@ -644,9 +599,6 @@ This query is used to query for global sets.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -680,9 +632,6 @@ This query is used to query for a single global set.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -716,9 +665,6 @@ This query is used to query for users.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -758,9 +704,6 @@ This query is used to return the number of users.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -800,9 +743,6 @@ This query is used to query for a single user.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -842,9 +782,6 @@ This query is used to query for tags.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -879,9 +816,6 @@ This query is used to return the number of tags.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -916,9 +850,6 @@ This query is used to query for a single tag.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -953,9 +884,6 @@ This query is used to query for categories.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -984,16 +912,16 @@ This query is used to query for categories.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
-| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
-| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its ID.
-| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its ID.
-| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
-| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its ID.
-| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its ID.
-| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its ID.
-| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its ID.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants in their structure.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element in its structure, provided by its ID.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element in its structure provided by its ID.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” in their structure (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element in its structure, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element in its structure, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element in its structure, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element in its structure, provided by its ID.
 | `editable`| `Boolean` | Whether to only return categories that the user has permission to edit.
 | `group`| `[String]` | Narrows the query results based on the category groups the categories belong to per the group’s handles.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
@@ -1004,9 +932,6 @@ This query is used to return the number of categories.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -1035,16 +960,16 @@ This query is used to return the number of categories.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
-| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
-| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its ID.
-| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its ID.
-| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
-| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its ID.
-| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its ID.
-| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its ID.
-| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its ID.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants in their structure.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element in its structure, provided by its ID.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element in its structure provided by its ID.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” in their structure (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element in its structure, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element in its structure, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element in its structure, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element in its structure, provided by its ID.
 | `editable`| `Boolean` | Whether to only return categories that the user has permission to edit.
 | `group`| `[String]` | Narrows the query results based on the category groups the categories belong to per the group’s handles.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
@@ -1055,9 +980,6 @@ This query is used to query for a single category.
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
 | `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
-| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
-| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
-| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
 | `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
 | `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
@@ -1086,16 +1008,16 @@ This query is used to query for a single category.
 | `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
 | `structureId`| `Int` | Determines which structure data should be joined into the query.
 | `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
-| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants.
-| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element, provided by its ID.
-| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `ancestorOf`.
-| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element, provided by its ID.
-| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element specified by `descendantOf`.
-| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” (element with no descendants).
-| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element, provided by its ID.
-| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element, provided by its ID.
-| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element, provided by its ID.
-| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element, provided by its ID.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants in their structure.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element in its structure, provided by its ID.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element in its structure provided by its ID.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” in their structure (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element in its structure, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element in its structure, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element in its structure, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element in its structure, provided by its ID.
 | `editable`| `Boolean` | Whether to only return categories that the user has permission to edit.
 | `group`| `[String]` | Narrows the query results based on the category groups the categories belong to per the group’s handles.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
@@ -1166,8 +1088,6 @@ This is the interface implemented by all assets.
 | `status`| `String` | The element's status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
-| `uploaderId`| `Int` | The ID of the user who first added this asset (if known).
-| `uploader`| `UserInterface` | The user who first added this asset (if known).
 | `volumeId`| `Int` | The ID of the volume that the asset belongs to.
 | `folderId`| `Int` | The ID of the folder that the asset belongs to.
 | `filename`| `String` | The filename of the asset file.
@@ -1220,13 +1140,6 @@ This is the interface implemented by all entries.
 | `isUnsavedDraft`| `Boolean` | Returns whether this is an unpublished draft. **This field is deprecated.** `isUnpublishedDraft` should be used instead.
 | `draftName`| `String` | The name of the draft.
 | `draftNotes`| `String` | The notes for the draft.
-| `authorId`| `Int` | The ID of the author of this entry.
-| `author`| `UserInterface` | The entry's author.
-| `draftCreator`| `UserInterface` | The creator of a given draft.
-| `drafts`| `[EntryInterface]` | The drafts for the entry.
-| `revisionCreator`| `UserInterface` | The creator of a given revision.
-| `currentRevision`| `EntryInterface` | The current revision for the entry.
-| `revisions`| `[EntryInterface]` | The revisions for the entry.
 | `canonicalId`| `Int` | Returns the entry’s canonical ID.
 | `canonicalUid`| `String` | Returns the entry’s canonical UUID.
 | `sourceId`| `Int` | Returns the entry’s canonical ID.

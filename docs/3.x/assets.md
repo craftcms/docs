@@ -160,15 +160,19 @@ Asset queries support the following parameters:
 
 | Param                                     | Description
 | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
+| [andRelatedTo](#andrelatedto)             | Narrows the query results to only assets that are related to certain other elements.
 | [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
 | [asArray](#asarray)                       | Causes the query to return matching assets as arrays of data, rather than [Asset](craft3:craft\elements\Asset) objects.
-| [clearCachedResult](#clearcachedresult)   | Clears the cached result.
+| [cache](#cache)                           | Enables query cache for this Query.
+| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 | [dateCreated](#datecreated)               | Narrows the query results based on the assets’ creation dates.
 | [dateModified](#datemodified)             | Narrows the query results based on the assets’ files’ last-modified dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the assets’ last-updated dates.
 | [filename](#filename)                     | Narrows the query results based on the assets’ filenames.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [folderId](#folderid)                     | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
+| [getCacheTags](#getcachetags)             |
 | [height](#height)                         | Narrows the query results based on the assets’ image heights.
 | [id](#id)                                 | Narrows the query results based on the assets’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -179,10 +183,13 @@ Asset queries support the following parameters:
 | [offset](#offset)                         | Determines how many assets should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                   | Narrows the query results to only assets that are related to certain other elements.
+| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#search)                         | Narrows the query results to only assets that match a search query.
 | [site](#site)                             | Determines which site(s) the assets should be queried in.
 | [siteId](#siteid)                         | Determines which site(s) the assets should be queried in, per the site’s ID.
+| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the assets’ IDs in the `elements_sites` table.
 | [size](#size)                             | Narrows the query results based on the assets’ file sizes (in bytes).
 | [title](#title)                           | Narrows the query results based on the assets’ titles.
 | [trashed](#trashed)                       | Narrows the query results to only assets that have been soft-deleted.
@@ -194,6 +201,48 @@ Asset queries support the following parameters:
 | [width](#width)                           | Narrows the query results based on the assets’ image widths.
 | [with](#with)                             | Causes the query to return matching assets eager-loaded with related elements.
 | [withTransforms](#withtransforms)         | Causes the query to return matching assets eager-loaded with image transform indexes.
+
+#### `afterPopulate`
+
+Performs any post-population processing on elements.
+
+
+
+
+
+
+
+
+
+
+#### `andRelatedTo`
+
+Narrows the query results to only assets that are related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all assets that are related to myCategoryA and myCategoryB #}
+{% set assets = craft.assets()
+  .relatedTo(myCategoryA)
+  .andRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all assets that are related to $myCategoryA and $myCategoryB
+$assets = \craft\elements\Asset::find()
+    ->relatedTo($myCategoryA)
+    ->andRelatedTo($myCategoryB)
+    ->all();
+```
+:::
+
 
 #### `anyStatus`
 
@@ -207,8 +256,8 @@ Removes element filters based on their statuses.
 ```twig
 {# Fetch all assets, regardless of status #}
 {% set assets = craft.assets()
-    .anyStatus()
-    .all() %}
+  .anyStatus()
+  .all() %}
 ```
 
 ```php
@@ -232,8 +281,8 @@ Causes the query to return matching assets as arrays of data, rather than [Asset
 ```twig
 {# Fetch assets as arrays #}
 {% set assets = craft.assets()
-    .asArray()
-    .all() %}
+  .asArray()
+  .all() %}
 ```
 
 ```php
@@ -245,9 +294,22 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
+#### `cache`
+
+Enables query cache for this Query.
+
+
+
+
+
+
+
+
+
+
 #### `clearCachedResult`
 
-Clears the cached result.
+Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 
 
 
@@ -277,8 +339,8 @@ Possible values include:
 {% set end = date('first day of this month')|atom %}
 
 {% set assets = craft.assets()
-    .dateCreated(['and', ">= #{start}", "< #{end}"])
-    .all() %}
+  .dateCreated(['and', ">= #{start}", "< #{end}"])
+  .all() %}
 ```
 
 ```php
@@ -313,8 +375,8 @@ Possible values include:
 {% set start = date('30 days ago')|atom %}
 
 {% set assets = craft.assets()
-    .dateModified(">= #{start}")
-    .all() %}
+  .dateModified(">= #{start}")
+  .all() %}
 ```
 
 ```php
@@ -350,8 +412,8 @@ Possible values include:
 {% set lastWeek = date('1 week ago')|atom %}
 
 {% set assets = craft.assets()
-    .dateUpdated(">= #{lastWeek}")
-    .all() %}
+  .dateUpdated(">= #{lastWeek}")
+  .all() %}
 ```
 
 ```php
@@ -387,8 +449,8 @@ Possible values include:
 ```twig
 {# Fetch all the hi-res images #}
 {% set assets = craft.assets()
-    .filename('*@2x*')
-    .all() %}
+  .filename('*@2x*')
+  .all() %}
 ```
 
 ```php
@@ -412,9 +474,9 @@ Causes the query results to be returned in the order specified by [id](#id).
 ```twig
 {# Fetch assets in a specific order #}
 {% set assets = craft.assets()
-    .id([1, 2, 3, 4, 5])
-    .fixedOrder()
-    .all() %}
+  .id([1, 2, 3, 4, 5])
+  .fixedOrder()
+  .all() %}
 ```
 
 ```php
@@ -446,8 +508,8 @@ Possible values include:
 ```twig
 {# Fetch assets in the folder with an ID of 1 #}
 {% set assets = craft.assets()
-    .folderId(1)
-    .all() %}
+  .folderId(1)
+  .all() %}
 ```
 
 ```php
@@ -463,6 +525,15 @@ $assets = \craft\elements\Asset::find()
 ::: tip
 This can be combined with [includeSubfolders](#includesubfolders) if you want to include assets in all the subfolders of a certain folder.
 :::
+#### `getCacheTags`
+
+
+
+
+
+
+
+
 #### `height`
 
 Narrows the query results based on the assets’ image heights.
@@ -481,9 +552,9 @@ Possible values include:
 ```twig
 {# Fetch XL images #}
 {% set assets = craft.assets()
-    .kind('image')
-    .height('>= 1000')
-    .all() %}
+  .kind('image')
+  .height('>= 1000')
+  .all() %}
 ```
 
 ```php
@@ -517,8 +588,8 @@ Possible values include:
 ```twig
 {# Fetch the asset by its ID #}
 {% set asset = craft.assets()
-    .id(1)
-    .one() %}
+  .id(1)
+  .one() %}
 ```
 
 ```php
@@ -562,8 +633,8 @@ Causes the query results to be returned in reverse order.
 ```twig
 {# Fetch assets in reverse #}
 {% set assets = craft.assets()
-    .inReverse()
-    .all() %}
+  .inReverse()
+  .all() %}
 ```
 
 ```php
@@ -585,9 +656,9 @@ Broadens the query results to include assets from any of the subfolders of the f
 ```twig
 {# Fetch assets in the folder with an ID of 1 (including its subfolders) #}
 {% set assets = craft.assets()
-    .folderId(1)
-    .includeSubfolders()
-    .all() %}
+  .folderId(1)
+  .includeSubfolders()
+  .all() %}
 ```
 
 ```php
@@ -613,6 +684,7 @@ Supported file kinds:
 - `audio`
 - `compressed`
 - `excel`
+- `flash`
 - `html`
 - `illustrator`
 - `image`
@@ -643,8 +715,8 @@ Possible values include:
 ```twig
 {# Fetch all the images #}
 {% set assets = craft.assets()
-    .kind('image')
-    .all() %}
+  .kind('image')
+  .all() %}
 ```
 
 ```php
@@ -666,8 +738,8 @@ Determines the number of assets that should be returned.
 ```twig
 {# Fetch up to 10 assets  #}
 {% set assets = craft.assets()
-    .limit(10)
-    .all() %}
+  .limit(10)
+  .all() %}
 ```
 
 ```php
@@ -689,8 +761,8 @@ Determines how many assets should be skipped in the results.
 ```twig
 {# Fetch all assets except for the first 3 #}
 {% set assets = craft.assets()
-    .offset(3)
-    .all() %}
+  .offset(3)
+  .all() %}
 ```
 
 ```php
@@ -712,8 +784,8 @@ Determines the order that the assets should be returned in. (If empty, defaults 
 ```twig
 {# Fetch all assets in order of date created #}
 {% set assets = craft.assets()
-    .orderBy('dateCreated ASC')
-    .all() %}
+  .orderBy('dateCreated ASC')
+  .all() %}
 ```
 
 ```php
@@ -743,10 +815,10 @@ If this isn’t set, then preference goes to the current site.
 ```twig
 {# Fetch unique assets from Site A, or Site B if they don’t exist in Site A #}
 {% set assets = craft.assets()
-    .site('*')
-    .unique()
-    .preferSites(['a', 'b'])
-    .all() %}
+  .site('*')
+  .unique()
+  .preferSites(['a', 'b'])
+  .all() %}
 ```
 
 ```php
@@ -755,6 +827,33 @@ $assets = \craft\elements\Asset::find()
     ->site('*')
     ->unique()
     ->preferSites(['a', 'b'])
+    ->all();
+```
+:::
+
+
+#### `provisionalDrafts`
+
+Narrows the query results to only provisional drafts.
+
+
+
+
+
+::: code
+```twig
+{# Fetch provisional drafts created by the current user #}
+{% set assets = craft.assets()
+  .provisionalDrafts()
+  .draftCreator(currentUser)
+  .all() %}
+```
+
+```php
+// Fetch provisional drafts created by the current user
+$assets = \craft\elements\Asset::find()
+    ->provisionalDrafts()
+    ->draftCreator(Craft::$app->user->identity)
     ->all();
 ```
 :::
@@ -774,14 +873,41 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 ```twig
 {# Fetch all assets that are related to myCategory #}
 {% set assets = craft.assets()
-    .relatedTo(myCategory)
-    .all() %}
+  .relatedTo(myCategory)
+  .all() %}
 ```
 
 ```php
 // Fetch all assets that are related to $myCategory
 $assets = \craft\elements\Asset::find()
     ->relatedTo($myCategory)
+    ->all();
+```
+:::
+
+
+#### `savedDraftsOnly`
+
+Narrows the query results to only unpublished drafts which have been saved after initial creation.
+
+
+
+
+
+::: code
+```twig
+{# Fetch saved, unpublished draft assets #}
+{% set assets = {twig-function}
+  .draftOf(false)
+  .savedDraftsOnly()
+  .all() %}
+```
+
+```php
+// Fetch saved, unpublished draft assets
+$assets = \craft\elements\Asset::find()
+    ->draftOf(false)
+    ->savedDraftsOnly()
     ->all();
 ```
 :::
@@ -804,8 +930,8 @@ See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explana
 
 {# Fetch all assets that match the search query #}
 {% set assets = craft.assets()
-    .search(searchQuery)
-    .all() %}
+  .search(searchQuery)
+  .all() %}
 ```
 
 ```php
@@ -849,8 +975,8 @@ only want unique elements to be returned, use [unique](#unique) in conjunction w
 ```twig
 {# Fetch assets from the Foo site #}
 {% set assets = craft.assets()
-    .site('foo')
-    .all() %}
+  .site('foo')
+  .all() %}
 ```
 
 ```php
@@ -885,8 +1011,8 @@ Possible values include:
 ```twig
 {# Fetch assets from the site with an ID of 1 #}
 {% set assets = craft.assets()
-    .siteId(1)
-    .all() %}
+  .siteId(1)
+  .all() %}
 ```
 
 ```php
@@ -894,6 +1020,40 @@ Possible values include:
 $assets = \craft\elements\Asset::find()
     ->siteId(1)
     ->all();
+```
+:::
+
+
+#### `siteSettingsId`
+
+Narrows the query results based on the assets’ IDs in the `elements_sites` table.
+
+
+
+Possible values include:
+
+| Value | Fetches assets…
+| - | -
+| `1` | with an `elements_sites` ID of 1.
+| `'not 1'` | not with an `elements_sites` ID of 1.
+| `[1, 2]` | with an `elements_sites` ID of 1 or 2.
+| `['not', 1, 2]` | not with an `elements_sites` ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch the asset by its ID in the elements_sites table #}
+{% set asset = craft.assets()
+  .siteSettingsId(1)
+  .one() %}
+```
+
+```php
+// Fetch the asset by its ID in the elements_sites table
+$asset = \craft\elements\Asset::find()
+    ->siteSettingsId(1)
+    ->one();
 ```
 :::
 
@@ -916,8 +1076,8 @@ Possible values include:
 ```twig
 {# Fetch assets that are smaller than 1KB #}
 {% set assets = craft.assets()
-    .size('< 1000')
-    .all() %}
+  .size('< 1000')
+  .all() %}
 ```
 
 ```php
@@ -953,8 +1113,8 @@ Possible values include:
 ```twig
 {# Fetch assets with a title that contains "Foo" #}
 {% set assets = craft.assets()
-    .title('*Foo*')
-    .all() %}
+  .title('*Foo*')
+  .all() %}
 ```
 
 ```php
@@ -978,8 +1138,8 @@ Narrows the query results to only assets that have been soft-deleted.
 ```twig
 {# Fetch trashed assets #}
 {% set assets = craft.assets()
-    .trashed()
-    .all() %}
+  .trashed()
+  .all() %}
 ```
 
 ```php
@@ -1003,8 +1163,8 @@ Narrows the query results based on the assets’ UIDs.
 ```twig
 {# Fetch the asset by its UID #}
 {% set asset = craft.assets()
-    .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
-    .one() %}
+  .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+  .one() %}
 ```
 
 ```php
@@ -1031,9 +1191,9 @@ desired.
 ```twig
 {# Fetch unique assets across all sites #}
 {% set assets = craft.assets()
-    .site('*')
-    .unique()
-    .all() %}
+  .site('*')
+  .unique()
+  .all() %}
 ```
 
 ```php
@@ -1063,8 +1223,8 @@ Possible values include:
 ```twig
 {# Fetch assets uploaded by the user with an ID of 1 #}
 {% set assets = craft.assets()
-    .uploader(1)
-    .all() %}
+  .uploader(1)
+  .all() %}
 ```
 
 ```php
@@ -1096,8 +1256,8 @@ Possible values include:
 ```twig
 {# Fetch assets in the Foo volume #}
 {% set assets = craft.assets()
-    .volume('foo')
-    .all() %}
+  .volume('foo')
+  .all() %}
 ```
 
 ```php
@@ -1129,8 +1289,8 @@ Possible values include:
 ```twig
 {# Fetch assets in the volume with an ID of 1 #}
 {% set assets = craft.assets()
-    .volumeId(1)
-    .all() %}
+  .volumeId(1)
+  .all() %}
 ```
 
 ```php
@@ -1160,9 +1320,9 @@ Possible values include:
 ```twig
 {# Fetch XL images #}
 {% set assets = craft.assets()
-    .kind('image')
-    .width('>= 1000')
-    .all() %}
+  .kind('image')
+  .width('>= 1000')
+  .all() %}
 ```
 
 ```php
@@ -1189,8 +1349,8 @@ See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-ele
 ```twig
 {# Fetch assets eager-loaded with the "Related" field’s relations #}
 {% set assets = craft.assets()
-    .with(['related'])
-    .all() %}
+  .with(['related'])
+  .all() %}
 ```
 
 ```php
@@ -1234,9 +1394,9 @@ reference when determining the resulting transform dimensions.
 ```twig
 {# Fetch assets with the 'thumbnail' and 'hiResThumbnail' transform data preloaded #}
 {% set assets = craft.assets()
-    .kind('image')
-    .withTransforms(['thumbnail', 'hiResThumbnail'])
-    .all() %}
+  .kind('image')
+  .withTransforms(['thumbnail', 'hiResThumbnail'])
+  .all() %}
 ```
 
 ```php
