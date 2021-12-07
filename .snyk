@@ -1,0 +1,18 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.22.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - vuepress-plugin-sitemap > @commitlint/cli > lodash:
+        patched: '2021-12-07T07:57:54.260Z'
+    - vuepress-plugin-sitemap > release-it > lodash:
+        patched: '2021-12-07T07:57:54.260Z'
+    - vuepress-plugin-sitemap > @commitlint/cli > @commitlint/load > lodash:
+        patched: '2021-12-07T07:57:54.260Z'
+    - vuepress-plugin-sitemap > release-it > inquirer > lodash:
+        patched: '2021-12-07T07:57:54.260Z'
+    - vuepress-plugin-sitemap > @commitlint/cli > @commitlint/load > @commitlint/resolve-extends > lodash:
+        patched: '2021-12-07T07:57:54.260Z'
+    - vuepress-plugin-sitemap > @commitlint/cli > @commitlint/lint > @commitlint/rules > @commitlint/ensure > lodash:
+        patched: '2021-12-07T07:57:54.260Z'
