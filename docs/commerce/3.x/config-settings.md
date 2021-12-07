@@ -682,26 +682,6 @@ images and inline styles to reduce HTTP requests.
 If empty (default), each gateway will decide how to handle after-payment redirects.
 
 
-
-### `gatewaySettings`
-
-Allowed types
-:   [array](http://php.net/language.types.array)
-
-Default value
-:   `[]`
-
-Defined by
-:   [Settings::$gatewaySettings](commerce3:craft\commerce\models\Settings::$gatewaySettings)
-
-
-
-Payment gateway settings indexed by each gateway’s handle.
-
-Check each gateway’s documentation for settings that may be stored.
-
-
-
 ### `paymentCurrency`
 
 Allowed types
