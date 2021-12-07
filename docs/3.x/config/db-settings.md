@@ -62,6 +62,7 @@ Defined by
 :   [DbConfig::$attributes](craft3:craft\config\DbConfig::$attributes)
 
 
+
 An array of key => value pairs of PDO attributes to pass into the PDO constructor.
 
 For example, when using the [MySQL PDO driver](https://php.net/manual/en/ref.pdo-mysql.php), if you wanted to enable a SSL database connection
@@ -90,6 +91,7 @@ Defined by
 :   [DbConfig::$charset](craft3:craft\config\DbConfig::$charset)
 
 
+
 The charset to use when creating tables.
 
 ::: tip
@@ -115,6 +117,7 @@ Defined by
 
 Since
 :   3.6.4
+
 
 
 The collation to use when creating tables.
@@ -148,6 +151,7 @@ Defined by
 :   [DbConfig::$dsn](craft3:craft\config\DbConfig::$dsn)
 
 
+
 The Data Source Name (“DSN”) that tells Craft how to connect to the database.
 
 DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by driver-specific parameters.
@@ -170,6 +174,7 @@ Defined by
 :   [DbConfig::$password](craft3:craft\config\DbConfig::$password)
 
 
+
 The database password to connect with.
 
 
@@ -186,6 +191,7 @@ Defined by
 :   [DbConfig::$schema](craft3:craft\config\DbConfig::$schema)
 
 
+
 The schema that Postgres is configured to use by default (PostgreSQL only).
 
 
@@ -200,6 +206,7 @@ Default value
 
 Defined by
 :   [DbConfig::$tablePrefix](craft3:craft\config\DbConfig::$tablePrefix)
+
 
 
 If you’re sharing Craft installs in a single database (MySQL) or a single database and using a shared schema (PostgreSQL),
@@ -219,6 +226,7 @@ Defined by
 :   [DbConfig::$user](craft3:craft\config\DbConfig::$user)
 
 
+
 The database username to connect with.
 
 
@@ -236,6 +244,7 @@ Defined by
 
 Since
 :   3.7.0
+
 
 
 Whether batched queries should be executed on a separate, unbuffered database connection.
@@ -259,6 +268,7 @@ Defined by
 :   [DbConfig::$url](craft3:craft\config\DbConfig::$url)
 
 
+
 The database connection URL, if one was provided by your hosting environment.
 
 If this is set, the values for [driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver), [user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user), [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database), [server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server), [port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port), and [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database) will be extracted from it.
@@ -277,6 +287,7 @@ Defined by
 :   [DbConfig::$driver](craft3:craft\config\DbConfig::$driver)
 
 
+
 The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
 
 
@@ -291,6 +302,7 @@ Default value
 
 Defined by
 :   [DbConfig::$server](craft3:craft\config\DbConfig::$server)
+
 
 
 The database server name or IP address. Usually `localhost` or `127.0.0.1`.
@@ -309,6 +321,7 @@ Defined by
 :   [DbConfig::$port](craft3:craft\config\DbConfig::$port)
 
 
+
 The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
 
 
@@ -323,6 +336,7 @@ Default value
 
 Defined by
 :   [DbConfig::$unixSocket](craft3:craft\config\DbConfig::$unixSocket)
+
 
 
 MySQL only. If this is set, the CLI connection string (used for yiic) will connect to the Unix socket instead of
@@ -342,6 +356,10 @@ Defined by
 :   [DbConfig::$database](craft3:craft\config\DbConfig::$database)
 
 
+
 The name of the database to select.
+
+
+
 
 <!-- END SETTINGS -->
