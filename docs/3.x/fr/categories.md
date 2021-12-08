@@ -119,16 +119,20 @@ Category queries support the following parameters:
 
 | Param                                     | Description                                                                                                                                                                                                                                                                                  |
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.                                                                                                                                                                                                                                         |
 | [ancestorDist](#ancestordist)             | Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).                                                                                                                                                |
 | [ancestorOf](#ancestorof)                 | Narrows the query results to only categories that are ancestors of another category in its structure.                                                                                                                                                                                        |
+| [andRelatedTo](#andrelatedto)             | Narrows the query results to only categories that are related to certain other elements.                                                                                                                                                                                                     |
 | [anyStatus](#anystatus)                   | Removes element filters based on their statuses.                                                                                                                                                                                                                                             |
 | [asArray](#asarray)                       | Causes the query to return matching categories as arrays of data, rather than [Category](craft3:craft\elements\Category) objects.                                                                                                                                                          |
-| [clearCachedResult](#clearcachedresult)   | Clears the cached result.                                                                                                                                                                                                                                                                    |
+| [cache](#cache)                           | Enables query cache for this Query.                                                                                                                                                                                                                                                          |
+| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).                                                                                                                                                                                                        |
 | [dateCreated](#datecreated)               | Narrows the query results based on the categories’ creation dates.                                                                                                                                                                                                                           |
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the categories’ last-updated dates.                                                                                                                                                                                                                       |
 | [descendantDist](#descendantdist)         | Narrows the query results to only categories that are up to a certain distance away from the category specified by [descendantOf](#descendantof).                                                                                                                                            |
-| [descendantOf](#descendantof)             | Narrows the query results to only categories that are descendants of another category.                                                                                                                                                                                                       |
+| [descendantOf](#descendantof)             | Narrows the query results to only categories that are descendants of another category in its structure.                                                                                                                                                                                      |
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).                                                                                                                                                                                                                 |
+| [getCacheTags](#getcachetags)             |                                                                                                                                                                                                                                                                                              |
 | [group](#group)                           | Narrows the query results based on the category groups the categories belong to.                                                                                                                                                                                                             |
 | [groupId](#groupid)                       | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.                                                                                                                                                                                        |
 | [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the categories have any descendants in their structure.                                                                                                                                                                                           |
@@ -145,11 +149,14 @@ Category queries support the following parameters:
 | [positionedBefore](#positionedbefore)     | Narrows the query results to only categories that are positioned before another category in its structure.                                                                                                                                                                                   |
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.                                                                                                                                                                                |
 | [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the category that comes immediately before another category in its structure.                                                                                                                                                                              |
+| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.                                                                                                                                                                                                                                        |
 | [relatedTo](#relatedto)                   | Narrows the query results to only categories that are related to certain other elements.                                                                                                                                                                                                     |
+| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.                                                                                                                                                                                           |
 | [search](#search)                         | Narrows the query results to only categories that match a search query.                                                                                                                                                                                                                      |
 | [siblingOf](#siblingof)                   | Narrows the query results to only categories that are siblings of another category in its structure.                                                                                                                                                                                         |
 | [site](#site)                             | Determines which site(s) the categories should be queried in.                                                                                                                                                                                                                                |
 | [siteId](#siteid)                         | Determines which site(s) the categories should be queried in, per the site’s ID.                                                                                                                                                                                                             |
+| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the categories’ IDs in the `elements_sites` table.                                                                                                                                                                                                        |
 | [slug](#slug)                             | Narrows the query results based on the categories’ slugs.                                                                                                                                                                                                                                    |
 | [status](#status)                         | Narrows the query results based on the categories’ statuses.                                                                                                                                                                                                                                 |
 | [title](#title)                           | Narrows the query results based on the categories’ titles.                                                                                                                                                                                                                                   |
@@ -158,6 +165,19 @@ Category queries support the following parameters:
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                                                            |
 | [uri](#uri)                               | Narrows the query results based on the categories’ URIs.                                                                                                                                                                                                                                     |
 | [with](#with)                             | Causes the query to return matching categories eager-loaded with related elements.                                                                                                                                                                                                           |
+
+#### `afterPopulate`
+
+Performs any post-population processing on elements.
+
+
+
+
+
+
+
+
+
 
 #### `ancestorDist`
 
@@ -171,9 +191,9 @@ Narrows the query results to only categories that are up to a certain distance a
 ```twig
 {# Fetch categories above this one #}
 {% set categories = craft.categories()
-    .ancestorOf(myCategory)
-    .ancestorDist(3)
-    .all() %}
+  .ancestorOf(myCategory)
+  .ancestorDist(3)
+  .all() %}
 ```
 
 ```php
@@ -205,8 +225,8 @@ Possible values include:
 ```twig
 {# Fetch categories above this one #}
 {% set categories = craft.categories()
-    .ancestorOf(myCategory)
-    .all() %}
+  .ancestorOf(myCategory)
+  .all() %}
 ```
 
 ```php
@@ -224,6 +244,35 @@ This can be combined with [ancestorDist](#ancestordist) if you want to limit how
 :::
 
 
+#### `andRelatedTo`
+
+Narrows the query results to only categories that are related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all categories that are related to myCategoryA and myCategoryB #}
+{% set categories = craft.categories()
+  .relatedTo(myCategoryA)
+  .andRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all categories that are related to $myCategoryA and $myCategoryB
+$categories = \craft\elements\Category::find()
+    ->relatedTo($myCategoryA)
+    ->andRelatedTo($myCategoryB)
+    ->all();
+```
+:::
+
+
 #### `anyStatus`
 
 Removes element filters based on their statuses.
@@ -236,8 +285,8 @@ Removes element filters based on their statuses.
 ```twig
 {# Fetch all categories, regardless of status #}
 {% set categories = craft.categories()
-    .anyStatus()
-    .all() %}
+  .anyStatus()
+  .all() %}
 ```
 
 ```php
@@ -261,8 +310,8 @@ Causes the query to return matching categories as arrays of data, rather than [C
 ```twig
 {# Fetch categories as arrays #}
 {% set categories = craft.categories()
-    .asArray()
-    .all() %}
+  .asArray()
+  .all() %}
 ```
 
 ```php
@@ -274,9 +323,22 @@ $categories = \craft\elements\Category::find()
 :::
 
 
+#### `cache`
+
+Enables query cache for this Query.
+
+
+
+
+
+
+
+
+
+
 #### `clearCachedResult`
 
-Clears the cached result.
+Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 
 
 
@@ -306,8 +368,8 @@ Possible values include:
 {% set end = date('first day of this month')|atom %}
 
 {% set categories = craft.categories()
-    .dateCreated(['and', ">= #{start}", "< #{end}"])
-    .all() %}
+  .dateCreated(['and', ">= #{start}", "< #{end}"])
+  .all() %}
 ```
 
 ```php
@@ -344,8 +406,8 @@ Possible values include:
 {% set lastWeek = date('1 week ago')|atom %}
 
 {% set categories = craft.categories()
-    .dateUpdated(">= #{lastWeek}")
-    .all() %}
+  .dateUpdated(">= #{lastWeek}")
+  .all() %}
 ```
 
 ```php
@@ -371,9 +433,9 @@ Narrows the query results to only categories that are up to a certain distance a
 ```twig
 {# Fetch categories below this one #}
 {% set categories = craft.categories()
-    .descendantOf(myCategory)
-    .descendantDist(3)
-    .all() %}
+  .descendantOf(myCategory)
+  .descendantDist(3)
+  .all() %}
 ```
 
 ```php
@@ -388,7 +450,7 @@ $categories = \craft\elements\Category::find()
 
 #### `descendantOf`
 
-Narrows the query results to only categories that are descendants of another category.
+Narrows the query results to only categories that are descendants of another category in its structure.
 
 
 
@@ -405,8 +467,8 @@ Possible values include:
 ```twig
 {# Fetch categories below this one #}
 {% set categories = craft.categories()
-    .descendantOf(myCategory)
-    .all() %}
+  .descendantOf(myCategory)
+  .all() %}
 ```
 
 ```php
@@ -436,9 +498,9 @@ Causes the query results to be returned in the order specified by [id](#id).
 ```twig
 {# Fetch categories in a specific order #}
 {% set categories = craft.categories()
-    .id([1, 2, 3, 4, 5])
-    .fixedOrder()
-    .all() %}
+  .id([1, 2, 3, 4, 5])
+  .fixedOrder()
+  .all() %}
 ```
 
 ```php
@@ -449,6 +511,15 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
+
+
+#### `getCacheTags`
+
+
+
+
+
+
 
 
 #### `group`
@@ -471,8 +542,8 @@ Possible values include:
 ```twig
 {# Fetch categories in the Foo group #}
 {% set categories = craft.categories()
-    .group('foo')
-    .all() %}
+  .group('foo')
+  .all() %}
 ```
 
 ```php
@@ -503,8 +574,8 @@ Possible values include:
 ```twig
 {# Fetch categories in the group with an ID of 1 #}
 {% set categories = craft.categories()
-    .groupId(1)
-    .all() %}
+  .groupId(1)
+  .all() %}
 ```
 
 ```php
@@ -530,8 +601,8 @@ Narrows the query results based on whether the categories have any descendants i
 ```twig
 {# Fetch categories that have descendants #}
 {% set categories = craft.categories()
-    .hasDescendants()
-    .all() %}
+  .hasDescendants()
+  .all() %}
 ```
 
 ```php
@@ -564,8 +635,8 @@ Possible values include:
 ```twig
 {# Fetch the category by its ID #}
 {% set category = craft.categories()
-    .id(1)
-    .one() %}
+  .id(1)
+  .one() %}
 ```
 
 ```php
@@ -608,8 +679,8 @@ Causes the query results to be returned in reverse order.
 ```twig
 {# Fetch categories in reverse #}
 {% set categories = craft.categories()
-    .inReverse()
-    .all() %}
+  .inReverse()
+  .all() %}
 ```
 
 ```php
@@ -635,8 +706,8 @@ Narrows the query results based on whether the categories are “leaves” (cate
 ```twig
 {# Fetch categories that have no descendants #}
 {% set categories = craft.categories()
-    .leaves()
-    .all() %}
+  .leaves()
+  .all() %}
 ```
 
 ```php
@@ -670,8 +741,8 @@ Possible values include:
 ```twig
 {# Fetch categories positioned at level 3 or above #}
 {% set categories = craft.categories()
-    .level('>= 3')
-    .all() %}
+  .level('>= 3')
+  .all() %}
 ```
 
 ```php
@@ -693,8 +764,8 @@ Determines the number of categories that should be returned.
 ```twig
 {# Fetch up to 10 categories  #}
 {% set categories = craft.categories()
-    .limit(10)
-    .all() %}
+  .limit(10)
+  .all() %}
 ```
 
 ```php
@@ -725,8 +796,8 @@ Possible values include:
 ```twig
 {# Fetch the next category #}
 {% set category = craft.categories()
-    .nextSiblingOf(myCategory)
-    .one() %}
+  .nextSiblingOf(myCategory)
+  .one() %}
 ```
 
 ```php
@@ -748,8 +819,8 @@ Determines how many categories should be skipped in the results.
 ```twig
 {# Fetch all categories except for the first 3 #}
 {% set categories = craft.categories()
-    .offset(3)
-    .all() %}
+  .offset(3)
+  .all() %}
 ```
 
 ```php
@@ -771,8 +842,8 @@ Determines the order that the categories should be returned in. (If empty, defau
 ```twig
 {# Fetch all categories in order of date created #}
 {% set categories = craft.categories()
-    .orderBy('dateCreated ASC')
-    .all() %}
+  .orderBy('dateCreated ASC')
+  .all() %}
 ```
 
 ```php
@@ -803,8 +874,8 @@ Possible values include:
 ```twig
 {# Fetch categories after this one #}
 {% set categories = craft.categories()
-    .positionedAfter(myCategory)
-    .all() %}
+  .positionedAfter(myCategory)
+  .all() %}
 ```
 
 ```php
@@ -835,8 +906,8 @@ Possible values include:
 ```twig
 {# Fetch categories before this one #}
 {% set categories = craft.categories()
-    .positionedBefore(myCategory)
-    .all() %}
+  .positionedBefore(myCategory)
+  .all() %}
 ```
 
 ```php
@@ -864,10 +935,10 @@ If this isn’t set, then preference goes to the current site.
 ```twig
 {# Fetch unique categories from Site A, or Site B if they don’t exist in Site A #}
 {% set categories = craft.categories()
-    .site('*')
-    .unique()
-    .preferSites(['a', 'b'])
-    .all() %}
+  .site('*')
+  .unique()
+  .preferSites(['a', 'b'])
+  .all() %}
 ```
 
 ```php
@@ -900,8 +971,8 @@ Possible values include:
 ```twig
 {# Fetch the previous category #}
 {% set category = craft.categories()
-    .prevSiblingOf(myCategory)
-    .one() %}
+  .prevSiblingOf(myCategory)
+  .one() %}
 ```
 
 ```php
@@ -909,6 +980,33 @@ Possible values include:
 $category = \craft\elements\Category::find()
     ->prevSiblingOf($myCategory)
     ->one();
+```
+:::
+
+
+#### `provisionalDrafts`
+
+Narrows the query results to only provisional drafts.
+
+
+
+
+
+::: code
+```twig
+{# Fetch provisional drafts created by the current user #}
+{% set categories = craft.categories()
+  .provisionalDrafts()
+  .draftCreator(currentUser)
+  .all() %}
+```
+
+```php
+// Fetch provisional drafts created by the current user
+$categories = \craft\elements\Category::find()
+    ->provisionalDrafts()
+    ->draftCreator(Craft::$app->user->identity)
+    ->all();
 ```
 :::
 
@@ -927,14 +1025,41 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 ```twig
 {# Fetch all categories that are related to myCategory #}
 {% set categories = craft.categories()
-    .relatedTo(myCategory)
-    .all() %}
+  .relatedTo(myCategory)
+  .all() %}
 ```
 
 ```php
 // Fetch all categories that are related to $myCategory
 $categories = \craft\elements\Category::find()
     ->relatedTo($myCategory)
+    ->all();
+```
+:::
+
+
+#### `savedDraftsOnly`
+
+Narrows the query results to only unpublished drafts which have been saved after initial creation.
+
+
+
+
+
+::: code
+```twig
+{# Fetch saved, unpublished draft categories #}
+{% set categories = {twig-function}
+  .draftOf(false)
+  .savedDraftsOnly()
+  .all() %}
+```
+
+```php
+// Fetch saved, unpublished draft categories
+$categories = \craft\elements\Category::find()
+    ->draftOf(false)
+    ->savedDraftsOnly()
     ->all();
 ```
 :::
@@ -957,8 +1082,8 @@ See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explana
 
 {# Fetch all categories that match the search query #}
 {% set categories = craft.categories()
-    .search(searchQuery)
-    .all() %}
+  .search(searchQuery)
+  .all() %}
 ```
 
 ```php
@@ -992,8 +1117,8 @@ Possible values include:
 ```twig
 {# Fetch categories beside this one #}
 {% set categories = craft.categories()
-    .siblingOf(myCategory)
-    .all() %}
+  .siblingOf(myCategory)
+  .all() %}
 ```
 
 ```php
@@ -1033,8 +1158,8 @@ If multiple sites are specified, elements that belong to multiple sites will be 
 ```twig
 {# Fetch categories from the Foo site #}
 {% set categories = craft.categories()
-    .site('foo')
-    .all() %}
+  .site('foo')
+  .all() %}
 ```
 
 ```php
@@ -1069,8 +1194,8 @@ Possible values include:
 ```twig
 {# Fetch categories from the site with an ID of 1 #}
 {% set categories = craft.categories()
-    .siteId(1)
-    .all() %}
+  .siteId(1)
+  .all() %}
 ```
 
 ```php
@@ -1078,6 +1203,40 @@ Possible values include:
 $categories = \craft\elements\Category::find()
     ->siteId(1)
     ->all();
+```
+:::
+
+
+#### `siteSettingsId`
+
+Narrows the query results based on the categories’ IDs in the `elements_sites` table.
+
+
+
+Possible values include:
+
+| Value           | Fetches categories…                        |
+| --------------- | ------------------------------------------ |
+| `1`             | with an `elements_sites` ID of 1.          |
+| `'not 1'`       | not with an `elements_sites` ID of 1.      |
+| `[1, 2]`        | with an `elements_sites` ID of 1 or 2.     |
+| `['not', 1, 2]` | not with an `elements_sites` ID of 1 or 2. |
+
+
+
+::: code
+```twig
+{# Fetch the category by its ID in the elements_sites table #}
+{% set category = craft.categories()
+  .siteSettingsId(1)
+  .one() %}
+```
+
+```php
+// Fetch the category by its ID in the elements_sites table
+$category = \craft\elements\Category::find()
+    ->siteSettingsId(1)
+    ->one();
 ```
 :::
 
@@ -1109,8 +1268,8 @@ Possible values include:
 
 {# Fetch the category with that slug #}
 {% set category = craft.categories()
-    .slug(requestedSlug|literal)
-    .one() %}
+  .slug(requestedSlug|literal)
+  .one() %}
 ```
 
 ```php
@@ -1144,8 +1303,8 @@ Possible values include:
 ```twig
 {# Fetch disabled categories #}
 {% set categories = craft.categories()
-    .status('disabled')
-    .all() %}
+  .status('disabled')
+  .all() %}
 ```
 
 ```php
@@ -1181,8 +1340,8 @@ Possible values include:
 ```twig
 {# Fetch categories with a title that contains "Foo" #}
 {% set categories = craft.categories()
-    .title('*Foo*')
-    .all() %}
+  .title('*Foo*')
+  .all() %}
 ```
 
 ```php
@@ -1206,8 +1365,8 @@ Narrows the query results to only categories that have been soft-deleted.
 ```twig
 {# Fetch trashed categories #}
 {% set categories = craft.categories()
-    .trashed()
-    .all() %}
+  .trashed()
+  .all() %}
 ```
 
 ```php
@@ -1231,8 +1390,8 @@ Narrows the query results based on the categories’ UIDs.
 ```twig
 {# Fetch the category by its UID #}
 {% set category = craft.categories()
-    .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
-    .one() %}
+  .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+  .one() %}
 ```
 
 ```php
@@ -1258,9 +1417,9 @@ This should be used when querying elements from multiple sites at the same time,
 ```twig
 {# Fetch unique categories across all sites #}
 {% set categories = craft.categories()
-    .site('*')
-    .unique()
-    .all() %}
+  .site('*')
+  .unique()
+  .all() %}
 ```
 
 ```php
@@ -1300,8 +1459,8 @@ Possible values include:
 
 {# Fetch the category with that URI #}
 {% set category = craft.categories()
-    .uri(requestedUri|literal)
-    .one() %}
+  .uri(requestedUri|literal)
+  .one() %}
 ```
 
 ```php
@@ -1330,8 +1489,8 @@ See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-ele
 ```twig
 {# Fetch categories eager-loaded with the "Related" field’s relations #}
 {% set categories = craft.categories()
-    .with(['related'])
-    .all() %}
+  .with(['related'])
+  .all() %}
 ```
 
 ```php
