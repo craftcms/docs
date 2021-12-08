@@ -68,37 +68,86 @@ $myTagQuery = \craft\elements\Tag::find();
 
 <!-- BEGIN PARAMS -->
 
-| パラメータ                                     | 説明                                                                                                                                                                                                               |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [anyStatus](#anystatus)                   | ステータスに基づくエレメントのフィルタを削除します。                                                                                                                                                                                       |
-| [asArray](#asarray)                       | [Tag](craft3:craft\elements\Tag) オブジェクトではなく、データの配列として、マッチしたタグをクエリが返します。                                                                                                                                        |
-| [clearCachedResult](#clearcachedresult)   | キャッシュされた結果をクリアします。                                                                                                                                                                                               |
-| [dateCreated](#datecreated)               | タグの作成日に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                       |
-| [dateUpdated](#dateupdated)               | タグの最終アップデート日に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                 |
-| [fixedOrder](#fixedorder)                 | クエリの結果を [id](#id) で指定された順序で返します。                                                                                                                                                                                 |
-| [group](#group)                           | タグが属するタググループに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                 |
-| [groupId](#groupid)                       | グループの ID ごとに、タグが属するタググループに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                    |
-| [id](#id)                                 | タグの ID に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                      |
-| [ignorePlaceholders](#ignoreplaceholders) | [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement) によってセットされたマッチするプレースホルダーエレメントを無視して、データベースに保存されたマッチするタグをクエリが返します。 |
-| [inReverse](#inreverse)                   | クエリの結果を逆順で返します。                                                                                                                                                                                                  |
-| [limit](#limit)                           | 返されるタグの数を決定します。                                                                                                                                                                                                  |
-| [offset](#offset)                         | 結果からスキップされるタグの数を決定します。                                                                                                                                                                                           |
-| [orderBy](#orderby)                       | 返されるタグの順序を決定します。 （空の場合、デフォルトは `title ASC`）                                                                                                                                                                       |
-| [preferSites](#prefersites)               | [unique](#unique) がセットされている場合、マルチサイトでエレメント照会する際に選択されるべきサイトを決定します                                                                                                                                                 |
-| [relatedTo](#relatedto)                   | 特定の他のエレメントと関連付けられたタグだけに、クエリの結果を絞り込みます。                                                                                                                                                                           |
-| [search](#search)                         | 検索クエリにマッチするタグだけに、クエリの結果を絞り込みます。                                                                                                                                                                                  |
-| [site](#site)                             | タグを照会するサイトを決定します。                                                                                                                                                                                                |
-| [siteId](#siteid)                         | サイトの ID ごとに、タグを照会するサイトを決定します。                                                                                                                                                                                    |
-| [title](#title)                           | タグのタイトルに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                      |
-| [trashed](#trashed)                       | ソフトデリートされたタグだけに、クエリの結果を絞り込みます。                                                                                                                                                                                   |
-| [uid](#uid)                               | タグの UID に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                     |
-| [unique](#unique)                         | クエリによってユニークな ID のエレメントだけが返されるかを決定します。                                                                                                                                                                            |
-| [uri](#uri)                               | タグの URI に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                     |
-| [with](#with)                             | 関連付けられたエレメントを eager-loaded した状態で、マッチしたタグをクエリが返します。                                                                                                                                                               |
+| パラメータ                                     | 説明                                                                                                                                                                                                                                                                                     |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.                                                                                                                                                                                                                                   |
+| [andRelatedTo](#andrelatedto)             | Narrows the query results to only tags that are related to certain other elements.                                                                                                                                                                                                     |
+| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.                                                                                                                                                                                                                                       |
+| [asArray](#asarray)                       | Causes the query to return matching tags as arrays of data, rather than [Tag](craft3:craft\elements\Tag) objects.                                                                                                                                                                    |
+| [cache](#cache)                           | Enables query cache for this Query.                                                                                                                                                                                                                                                    |
+| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).                                                                                                                                                                                                  |
+| [dateCreated](#datecreated)               | Narrows the query results based on the tags’ creation dates.                                                                                                                                                                                                                           |
+| [dateUpdated](#dateupdated)               | Narrows the query results based on the tags’ last-updated dates.                                                                                                                                                                                                                       |
+| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).                                                                                                                                                                                                           |
+| [getCacheTags](#getcachetags)             |                                                                                                                                                                                                                                                                                        |
+| [group](#group)                           | Narrows the query results based on the tag groups the tags belong to.                                                                                                                                                                                                                  |
+| [groupId](#groupid)                       | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.                                                                                                                                                                                             |
+| [id](#id)                                 | Narrows the query results based on the tags’ IDs.                                                                                                                                                                                                                                      |
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement). |
+| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.                                                                                                                                                                                                                              |
+| [limit](#limit)                           | Determines the number of tags that should be returned.                                                                                                                                                                                                                                 |
+| [offset](#offset)                         | Determines how many tags should be skipped in the results.                                                                                                                                                                                                                             |
+| [orderBy](#orderby)                       | Determines the order that the tags should be returned in. (If empty, defaults to `title ASC`.)                                                                                                                                                                                         |
+| [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.                                                                                                                                                                          |
+| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.                                                                                                                                                                                                                                  |
+| [relatedTo](#relatedto)                   | Narrows the query results to only tags that are related to certain other elements.                                                                                                                                                                                                     |
+| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.                                                                                                                                                                                     |
+| [search](#search)                         | Narrows the query results to only tags that match a search query.                                                                                                                                                                                                                      |
+| [site](#site)                             | Determines which site(s) the tags should be queried in.                                                                                                                                                                                                                                |
+| [siteId](#siteid)                         | Determines which site(s) the tags should be queried in, per the site’s ID.                                                                                                                                                                                                             |
+| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the tags’ IDs in the `elements_sites` table.                                                                                                                                                                                                        |
+| [title](#title)                           | Narrows the query results based on the tags’ titles.                                                                                                                                                                                                                                   |
+| [trashed](#trashed)                       | Narrows the query results to only tags that have been soft-deleted.                                                                                                                                                                                                                    |
+| [uid](#uid)                               | Narrows the query results based on the tags’ UIDs.                                                                                                                                                                                                                                     |
+| [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                                                      |
+| [uri](#uri)                               | Narrows the query results based on the tags’ URIs.                                                                                                                                                                                                                                     |
+| [with](#with)                             | Causes the query to return matching tags eager-loaded with related elements.                                                                                                                                                                                                           |
+
+#### `afterPopulate`
+
+Performs any post-population processing on elements.
+
+
+
+
+
+
+
+
+
+
+#### `andRelatedTo`
+
+Narrows the query results to only tags that are related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all tags that are related to myCategoryA and myCategoryB #}
+{% set tags = craft.tags()
+  .relatedTo(myCategoryA)
+  .andRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all tags that are related to $myCategoryA and $myCategoryB
+$tags = \craft\elements\Tag::find()
+    ->relatedTo($myCategoryA)
+    ->andRelatedTo($myCategoryB)
+    ->all();
+```
+:::
+
 
 #### `anyStatus`
 
-ステータスに基づくエレメントのフィルタを削除します。
+Removes element filters based on their statuses.
 
 
 
@@ -108,8 +157,8 @@ $myTagQuery = \craft\elements\Tag::find();
 ```twig
 {# Fetch all tags, regardless of status #}
 {% set tags = craft.tags()
-    .anyStatus()
-    .all() %}
+  .anyStatus()
+  .all() %}
 ```
 
 ```php
@@ -123,7 +172,7 @@ $tags = \craft\elements\Tag::find()
 
 #### `asArray`
 
-[Tag](craft3:craft\elements\Tag) オブジェクトではなく、データの配列として、マッチしたタグをクエリが返します。
+Causes the query to return matching tags as arrays of data, rather than [Tag](craft3:craft\elements\Tag) objects.
 
 
 
@@ -133,8 +182,8 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch tags as arrays #}
 {% set tags = craft.tags()
-    .asArray()
-    .all() %}
+  .asArray()
+  .all() %}
 ```
 
 ```php
@@ -146,9 +195,22 @@ $tags = \craft\elements\Tag::find()
 :::
 
 
+#### `cache`
+
+Enables query cache for this Query.
+
+
+
+
+
+
+
+
+
+
 #### `clearCachedResult`
 
-キャッシュされた結果をクリアします。
+Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 
 
 
@@ -157,11 +219,11 @@ $tags = \craft\elements\Tag::find()
 
 #### `dateCreated`
 
-タグの作成日に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the tags’ creation dates.
 
 
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値                                                | 取得するタグ                               |
 | ------------------------------------------------ | ------------------------------------ |
@@ -178,8 +240,8 @@ $tags = \craft\elements\Tag::find()
 {% set end = date('first day of this month')|atom %}
 
 {% set tags = craft.tags()
-    .dateCreated(['and', ">= #{start}", "< #{end}"])
-    .all() %}
+  .dateCreated(['and', ">= #{start}", "< #{end}"])
+  .all() %}
 ```
 
 ```php
@@ -196,11 +258,11 @@ $tags = \craft\elements\Tag::find()
 
 #### `dateUpdated`
 
-タグの最終アップデート日に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the tags’ last-updated dates.
 
 
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値                                                | 取得するタグ                                   |
 | ------------------------------------------------ | ---------------------------------------- |
@@ -216,8 +278,8 @@ $tags = \craft\elements\Tag::find()
 {% set lastWeek = date('1 week ago')|atom %}
 
 {% set tags = craft.tags()
-    .dateUpdated(">= #{lastWeek}")
-    .all() %}
+  .dateUpdated(">= #{lastWeek}")
+  .all() %}
 ```
 
 ```php
@@ -233,7 +295,7 @@ $tags = \craft\elements\Tag::find()
 
 #### `fixedOrder`
 
-クエリの結果を [id](#id) で指定された順序で返します。
+Causes the query results to be returned in the order specified by [id](#id).
 
 
 
@@ -243,9 +305,9 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch tags in a specific order #}
 {% set tags = craft.tags()
-    .id([1, 2, 3, 4, 5])
-    .fixedOrder()
-    .all() %}
+  .id([1, 2, 3, 4, 5])
+  .fixedOrder()
+  .all() %}
 ```
 
 ```php
@@ -258,11 +320,20 @@ $tags = \craft\elements\Tag::find()
 :::
 
 
+#### `getCacheTags`
+
+
+
+
+
+
+
+
 #### `group`
 
-タグが属するタググループに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the tag groups the tags belong to.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値                                                 | 取得するタグ                            |
 | ------------------------------------------------- | --------------------------------- |
@@ -278,8 +349,8 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch tags in the Foo group #}
 {% set tags = craft.tags()
-    .group('foo')
-    .all() %}
+  .group('foo')
+  .all() %}
 ```
 
 ```php
@@ -293,9 +364,9 @@ $tags = \craft\elements\Tag::find()
 
 #### `groupId`
 
-グループの ID ごとに、タグが属するタググループに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値               | 取得するタグ                   |
 | --------------- | ------------------------ |
@@ -310,8 +381,8 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch tags in the group with an ID of 1 #}
 {% set tags = craft.tags()
-    .groupId(1)
-    .all() %}
+  .groupId(1)
+  .all() %}
 ```
 
 ```php
@@ -325,11 +396,11 @@ $tags = \craft\elements\Tag::find()
 
 #### `id`
 
-タグの ID に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the tags’ IDs.
 
 
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値               | 取得するタグ             |
 | --------------- | ------------------ |
@@ -344,8 +415,8 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch the tag by its ID #}
 {% set tag = craft.tags()
-    .id(1)
-    .one() %}
+  .id(1)
+  .one() %}
 ```
 
 ```php
@@ -359,13 +430,13 @@ $tag = \craft\elements\Tag::find()
 
 
 ::: tip
-特定の順序で結果を返したい場合、[fixedOrder](#fixedorder) と組み合わせることができます。 :::
+This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
 :::
 
 
 #### `ignorePlaceholders`
 
-[craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement) によってセットされたマッチするプレースホルダーエレメントを無視して、データベースに保存されたマッチするタグをクエリが返します。
+Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 
 
 
@@ -378,7 +449,7 @@ $tag = \craft\elements\Tag::find()
 
 #### `inReverse`
 
-クエリの結果を逆順で返します。
+Causes the query results to be returned in reverse order.
 
 
 
@@ -388,8 +459,8 @@ $tag = \craft\elements\Tag::find()
 ```twig
 {# Fetch tags in reverse #}
 {% set tags = craft.tags()
-    .inReverse()
-    .all() %}
+  .inReverse()
+  .all() %}
 ```
 
 ```php
@@ -403,7 +474,7 @@ $tags = \craft\elements\Tag::find()
 
 #### `limit`
 
-返されるタグの数を決定します。
+Determines the number of tags that should be returned.
 
 
 
@@ -411,8 +482,8 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch up to 10 tags  #}
 {% set tags = craft.tags()
-    .limit(10)
-    .all() %}
+  .limit(10)
+  .all() %}
 ```
 
 ```php
@@ -426,7 +497,7 @@ $tags = \craft\elements\Tag::find()
 
 #### `offset`
 
-結果からスキップされるタグの数を決定します。
+Determines how many tags should be skipped in the results.
 
 
 
@@ -434,8 +505,8 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch all tags except for the first 3 #}
 {% set tags = craft.tags()
-    .offset(3)
-    .all() %}
+  .offset(3)
+  .all() %}
 ```
 
 ```php
@@ -449,7 +520,7 @@ $tags = \craft\elements\Tag::find()
 
 #### `orderBy`
 
-返されるタグの順序を決定します。 （空の場合、デフォルトは `title ASC`）
+Determines the order that the tags should be returned in. (If empty, defaults to `title ASC`.)
 
 
 
@@ -457,8 +528,8 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch all tags in order of date created #}
 {% set tags = craft.tags()
-    .orderBy('dateCreated ASC')
-    .all() %}
+  .orderBy('dateCreated ASC')
+  .all() %}
 ```
 
 ```php
@@ -472,13 +543,13 @@ $tags = \craft\elements\Tag::find()
 
 #### `preferSites`
 
-[unique](#unique) がセットされている場合、マルチサイトでエレメント照会する際に選択されるべきサイトを決定します
+If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 
 
 
-例えば、エレメント “Foo” がサイト A とサイト B に存在し、エレメント “Bar” がサイト B とサイト C に存在し、ここに `['c', 'b', 'a']` がセットされている場合、Foo will はサイト C に対して返され、Bar はサイト B に対して返されます。
+For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C, and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned for Site B.
 
-これがセットされていない場合、現在のサイトが優先されます。
+If this isn’t set, then preference goes to the current site.
 
 
 
@@ -486,10 +557,10 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch unique tags from Site A, or Site B if they don’t exist in Site A #}
 {% set tags = craft.tags()
-    .site('*')
-    .unique()
-    .preferSites(['a', 'b'])
-    .all() %}
+  .site('*')
+  .unique()
+  .preferSites(['a', 'b'])
+  .all() %}
 ```
 
 ```php
@@ -503,13 +574,40 @@ $tags = \craft\elements\Tag::find()
 :::
 
 
+#### `provisionalDrafts`
+
+Narrows the query results to only provisional drafts.
+
+
+
+
+
+::: code
+```twig
+{# Fetch provisional drafts created by the current user #}
+{% set tags = craft.tags()
+  .provisionalDrafts()
+  .draftCreator(currentUser)
+  .all() %}
+```
+
+```php
+// Fetch provisional drafts created by the current user
+$tags = \craft\elements\Tag::find()
+    ->provisionalDrafts()
+    ->draftCreator(Craft::$app->user->identity)
+    ->all();
+```
+:::
+
+
 #### `relatedTo`
 
-特定の他のエレメントと関連付けられたタグだけに、クエリの結果を絞り込みます。
+Narrows the query results to only tags that are related to certain other elements.
 
 
 
-このパラメーターがどのように機能するかの詳細については、[リレーション](relations.md)を参照してください。
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -517,8 +615,8 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch all tags that are related to myCategory #}
 {% set tags = craft.tags()
-    .relatedTo(myCategory)
-    .all() %}
+  .relatedTo(myCategory)
+  .all() %}
 ```
 
 ```php
@@ -530,13 +628,40 @@ $tags = \craft\elements\Tag::find()
 :::
 
 
+#### `savedDraftsOnly`
+
+Narrows the query results to only unpublished drafts which have been saved after initial creation.
+
+
+
+
+
+::: code
+```twig
+{# Fetch saved, unpublished draft tags #}
+{% set tags = {twig-function}
+  .draftOf(false)
+  .savedDraftsOnly()
+  .all() %}
+```
+
+```php
+// Fetch saved, unpublished draft tags
+$tags = \craft\elements\Tag::find()
+    ->draftOf(false)
+    ->savedDraftsOnly()
+    ->all();
+```
+:::
+
+
 #### `search`
 
-検索クエリにマッチするタグだけに、クエリの結果を絞り込みます。
+Narrows the query results to only tags that match a search query.
 
 
 
-このパラメーターがどのように機能するかの詳細については、[検索](searching.md)を参照してください。
+See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -547,8 +672,8 @@ $tags = \craft\elements\Tag::find()
 
 {# Fetch all tags that match the search query #}
 {% set tags = craft.tags()
-    .search(searchQuery)
-    .all() %}
+  .search(searchQuery)
+  .all() %}
 ```
 
 ```php
@@ -565,13 +690,13 @@ $tags = \craft\elements\Tag::find()
 
 #### `site`
 
-タグを照会するサイトを決定します。
+Determines which site(s) the tags should be queried in.
 
 
 
-デフォルトでは、現在のサイトが使用されます。
+The current site will be used by default.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値                                                        | 取得するタグ                          |
 | -------------------------------------------------------- | ------------------------------- |
@@ -582,7 +707,7 @@ $tags = \craft\elements\Tag::find()
 | `'*'`                                                    | すべてのサイトから。                      |
 
 ::: tip
-複数のサイトを指定した場合、複数のサイトに属するエレメントは複数回返されます。 単一のエレメントだけを返したい場合、これと併せて [unique](#unique) を利用してください。 :::
+If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you only want unique elements to be returned, use [unique](#unique) in conjunction with this.
 :::
 
 
@@ -591,8 +716,8 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch tags from the Foo site #}
 {% set tags = craft.tags()
-    .site('foo')
-    .all() %}
+  .site('foo')
+  .all() %}
 ```
 
 ```php
@@ -606,13 +731,13 @@ $tags = \craft\elements\Tag::find()
 
 #### `siteId`
 
-サイトの ID ごとに、タグを照会するサイトを決定します。
+Determines which site(s) the tags should be queried in, per the site’s ID.
 
 
 
-デフォルトでは、現在のサイトが使用されます。
+The current site will be used by default.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値               | 取得するタグ                     |
 | --------------- | -------------------------- |
@@ -627,8 +752,8 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch tags from the site with an ID of 1 #}
 {% set tags = craft.tags()
-    .siteId(1)
-    .all() %}
+  .siteId(1)
+  .all() %}
 ```
 
 ```php
@@ -640,23 +765,57 @@ $tags = \craft\elements\Tag::find()
 :::
 
 
+#### `siteSettingsId`
+
+Narrows the query results based on the tags’ IDs in the `elements_sites` table.
+
+
+
+Possible values include:
+
+| 値               | 取得するタグ                                     |
+| --------------- | ------------------------------------------ |
+| `1`             | with an `elements_sites` ID of 1.          |
+| `'not 1'`       | not with an `elements_sites` ID of 1.      |
+| `[1, 2]`        | with an `elements_sites` ID of 1 or 2.     |
+| `['not', 1, 2]` | not with an `elements_sites` ID of 1 or 2. |
+
+
+
+::: code
+```twig
+{# Fetch the tag by its ID in the elements_sites table #}
+{% set tag = craft.tags()
+  .siteSettingsId(1)
+  .one() %}
+```
+
+```php
+// Fetch the tag by its ID in the elements_sites table
+$tag = \craft\elements\Tag::find()
+    ->siteSettingsId(1)
+    ->one();
+```
+:::
+
+
 #### `title`
 
-タグのタイトルに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the tags’ titles.
 
 
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値                           | 取得するタグ                       |
-| --------------------------- | ---------------------------- |
-| `'Foo'`                     | タイトルが `Foo`。                 |
-| `'Foo*'`                    | タイトルが `Foo` ではじまる。           |
-| `'*Foo'`                    | タイトルが `Foo` で終わる。            |
-| `'*Foo*'`                   | タイトルが `Foo` を含む。             |
-| `'not *Foo*'`               | タイトルが `Foo` を含まない。           |
-| `['*Foo*', '*Bar*']`        | タイトルが `Foo` または `Bar` を含む。   |
-| `['not', '*Foo*', '*Bar*']` | タイトルが `Foo` または `Bar` を含まない。 |
+| 値                           | 取得するタグ                                            |
+| --------------------------- | ------------------------------------------------- |
+| `'Foo'`                     | with a title of `Foo`.                            |
+| `'Foo*'`                    | with a title that begins with `Foo`.              |
+| `'*Foo'`                    | with a title that ends with `Foo`.                |
+| `'*Foo*'`                   | with a title that contains `Foo`.                 |
+| `'not *Foo*'`               | with a title that doesn’t contain `Foo`.          |
+| `['*Foo*', '*Bar*']`        | with a title that contains `Foo` or `Bar`.        |
+| `['not', '*Foo*', '*Bar*']` | with a title that doesn’t contain `Foo` or `Bar`. |
 
 
 
@@ -664,8 +823,8 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch tags with a title that contains "Foo" #}
 {% set tags = craft.tags()
-    .title('*Foo*')
-    .all() %}
+  .title('*Foo*')
+  .all() %}
 ```
 
 ```php
@@ -679,7 +838,7 @@ $tags = \craft\elements\Tag::find()
 
 #### `trashed`
 
-ソフトデリートされたタグだけに、クエリの結果を絞り込みます。
+Narrows the query results to only tags that have been soft-deleted.
 
 
 
@@ -689,8 +848,8 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch trashed tags #}
 {% set tags = craft.tags()
-    .trashed()
-    .all() %}
+  .trashed()
+  .all() %}
 ```
 
 ```php
@@ -704,7 +863,7 @@ $tags = \craft\elements\Tag::find()
 
 #### `uid`
 
-タグの UID に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the tags’ UIDs.
 
 
 
@@ -714,8 +873,8 @@ $tags = \craft\elements\Tag::find()
 ```twig
 {# Fetch the tag by its UID #}
 {% set tag = craft.tags()
-    .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
-    .one() %}
+  .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+  .one() %}
 ```
 
 ```php
@@ -729,11 +888,11 @@ $tag = \craft\elements\Tag::find()
 
 #### `unique`
 
-クエリによってユニークな ID のエレメントだけが返されるかを決定します。
+Determines whether only elements with unique IDs should be returned by the query.
 
 
 
-一度に複数のサイトからエレメントを照会する際、「重複する」結果を望まない場合に使用します。
+This should be used when querying elements from multiple sites at the same time, if “duplicate” results is not desired.
 
 
 
@@ -741,9 +900,9 @@ $tag = \craft\elements\Tag::find()
 ```twig
 {# Fetch unique tags across all sites #}
 {% set tags = craft.tags()
-    .site('*')
-    .unique()
-    .all() %}
+  .site('*')
+  .unique()
+  .all() %}
 ```
 
 ```php
@@ -758,21 +917,21 @@ $tags = \craft\elements\Tag::find()
 
 #### `uri`
 
-タグの URI に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the tags’ URIs.
 
 
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値                           | 取得するタグ                       |
-| --------------------------- | ---------------------------- |
-| `'foo'`                     | URI が `foo`。                 |
-| `'foo*'`                    | URI が `foo` ではじまる。           |
-| `'*foo'`                    | URI が `foo` で終わる。            |
-| `'*foo*'`                   | URI が `foo` を含む。             |
-| `'not *foo*'`               | URI が `foo` を含まない。           |
-| `['*foo*', '*bar*']`        | URI が `foo` または `bar` を含む。   |
-| `['not', '*foo*', '*bar*']` | URI が `foo` または `bar` を含まない。 |
+| Value                       | Fetches tags…                                   |
+| --------------------------- | ----------------------------------------------- |
+| `'foo'`                     | with a URI of `foo`.                            |
+| `'foo*'`                    | with a URI that begins with `foo`.              |
+| `'*foo'`                    | with a URI that ends with `foo`.                |
+| `'*foo*'`                   | with a URI that contains `foo`.                 |
+| `'not *foo*'`               | with a URI that doesn’t contain `foo`.          |
+| `['*foo*', '*bar*']`        | with a URI that contains `foo` or `bar`.        |
+| `['not', '*foo*', '*bar*']` | with a URI that doesn’t contain `foo` or `bar`. |
 
 
 
@@ -783,8 +942,8 @@ $tags = \craft\elements\Tag::find()
 
 {# Fetch the tag with that URI #}
 {% set tag = craft.tags()
-    .uri(requestedUri|literal)
-    .one() %}
+  .uri(requestedUri|literal)
+  .one() %}
 ```
 
 ```php
@@ -801,11 +960,11 @@ $tag = \craft\elements\Tag::find()
 
 #### `with`
 
-関連付けられたエレメントを eager-loaded した状態で、マッチしたタグをクエリが返します。
+Causes the query to return matching tags eager-loaded with related elements.
 
 
 
-このパラメーターがどのように機能するかの詳細については、[エレメントの Eager-Loading](dev/eager-loading-elements.md) を参照してください。
+See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -813,8 +972,8 @@ $tag = \craft\elements\Tag::find()
 ```twig
 {# Fetch tags eager-loaded with the "Related" field’s relations #}
 {% set tags = craft.tags()
-    .with(['related'])
-    .all() %}
+  .with(['related'])
+  .all() %}
 ```
 
 ```php
