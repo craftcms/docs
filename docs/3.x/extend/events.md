@@ -6,9 +6,9 @@ Craft has all kinds of events you can use to customize how things work. See [Usi
 
 Select an event for more detail.
 
-## Common Event Flows
-
 <event-browser />
+
+## Common Event Flows
 
 ### Saving Entries
 
