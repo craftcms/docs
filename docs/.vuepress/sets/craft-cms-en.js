@@ -55,6 +55,7 @@ module.exports = {
           title: "More",
           collapsable: false,
           children: [
+            "events",
             "migrations",
             "user-permissions",
             "translation-categories",

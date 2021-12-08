@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-12-08
+### Added
+- Added “Events” page to the Craft CMS docs Extending Craft section.
+
 ## 2021-12-03
 ### Added
 - Documented `parseBooleanEnv` Twig function added in Craft 3.7.24.
@@ -100,7 +104,7 @@ Theme and significant content changes will be documented in this file.
 
 ## 2021-07-09
 ### Added
-- Added the “Control Panel Edit Pages” page to the Extending Craft docs
+- Added the “Control Panel Edit Pages” page to the Extending Craft docs.
 - Added the “Form Inputs” section to the “Control Panel Templates” page.
 
 ## 2021-06-11
