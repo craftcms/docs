@@ -75,7 +75,7 @@ If no line item status is designated as the default, line items have a `null` or
 
 ### Showing Customers the History of an Order
 
-An order’s <commerce3:craft\commerce\models\StatusHistory> models are available via `order.histories`. Every history record has a `newStatus` property that reflects which status the order moved into, and all but the first record will have an `oldStatus`. The `message` property contains any text from the order’s `notes` field that coincided with the change.
+An order’s <commerce3:craft\commerce\models\OrderHistory> models are available via `order.histories`. Every history record has a `newStatus` property that reflects which status the order moved into, and all but the first record will have an `prevStatus`. The `message` property contains any text from the order’s `message` field that coincided with the change.
 
 The new and old status properties return <commerce3:craft\commerce\models\OrderStatus> models, which include a `name` and `description`.
 
