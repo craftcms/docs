@@ -60,37 +60,45 @@ Craft Pro には、一般ユーザーの登録を許可するオプションが�
 
 <!-- BEGIN PARAMS -->
 
-| 権限                                        | ハンドル                                                                                                                                                                                                               |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [権限](#admin)                              | 「管理」権限を持つユーザーだけに、クエリの結果を絞り込みます。                                                                                                                                                                                    |
-| [anyStatus](#anystatus)                   | ステータスに基づくエレメントのフィルタを削除します。                                                                                                                                                                                         |
-| [asArray](#asarray)                       | [User](craft3:craft\elements\User) オブジェクトではなく、データの配列として、マッチしたユーザーをクエリが返します。                                                                                                                                      |
-| [can](#can)                               | グループの作成後は、アカウント設定の「権利」タブをクリックして、ユーザーをグループに割り当てることができます。                                                                                                                                                            |
-| [clearCachedResult](#clearcachedresult)   | キャッシュされた結果をクリアします。                                                                                                                                                                                                 |
-| [dateCreated](#datecreated)               | ユーザーの作成日に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                       |
-| [dateUpdated](#dateupdated)               | ユーザーの最終アップデート日に基づいて、クエリの結果が絞り込まれます。                                                                                                                                                                                |
-| [email](#email)                           | ユーザーのメールアドレスに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                   |
-| [firstName](#firstname)                   | ユーザーのファーストネーム（名）に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                               |
-| [fixedOrder](#fixedorder)                 | クエリの結果を [id](#id) で指定された順序で返します。                                                                                                                                                                                   |
-| [group](#group)                           | ユーザーが属するユーザーグループに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                               |
-| [groupId](#groupid)                       | グループ ID ごとに、ユーザーが属するユーザーグループに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                   |
-| [hasPhoto](#hasphoto)                     | ユーザー写真を持っている（または、持っていない）ユーザーだけに、クエリの結果を絞り込みます。                                                                                                                                                                     |
-| [id](#id)                                 | ユーザーの ID に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                      |
-| [ignorePlaceholders](#ignoreplaceholders) | [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement) によってセットされたマッチするプレースホルダーエレメントを無視して、データベースに保存されたマッチするユーザーをクエリが返します。 |
-| [inReverse](#inreverse)                   | クエリの結果を逆順で返します。                                                                                                                                                                                                    |
-| [lastLoginDate](#lastlogindate)           | ユーサーの最終ログイン日に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                   |
-| [lastName](#lastname)                     | ユーザーのラストネーム（姓）に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                 |
-| [limit](#limit)                           | 返されるユーザーの数を決定します。                                                                                                                                                                                                  |
-| [offset](#offset)                         | 結果からスキップされるユーザーの数を決定します。                                                                                                                                                                                           |
-| [orderBy](#orderby)                       | 返されるユーザーの順序を決定します。 （空の場合、デフォルトは `username ASC`）                                                                                                                                                                    |
-| [preferSites](#prefersites)               | [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) がセットされている場合、マルチサイトでエレメント照会する際に選択されるべきサイトを決定します。                                                                     |
-| [relatedTo](#relatedto)                   | 特定の他のエレメントと関連付けられたユーザーだけに、クエリの結果を絞り込みます。                                                                                                                                                                           |
-| [search](#search)                         | 検索クエリにマッチするユーザーだけに、クエリの結果を絞り込みます。                                                                                                                                                                                  |
-| [status](#status)                         | ユーザーのステータスに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                     |
-| [trashed](#trashed)                       | ソフトデリートされたユーザーだけに、クエリの結果を絞り込みます。                                                                                                                                                                                   |
-| [uid](#uid)                               | ユーザーの UID に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                     |
-| [username](#username)                     | ユーザーのユーザー名に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                     |
-| [with](#with)                             | 関連付けられたエレメントを eager-loaded した状態で、マッチしたユーザーをクエリが返します。                                                                                                                                                               |
+| 権限                                        | ハンドル                                                                                                                                                                                                                                                                                    |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [権限](#admin)                              | 「管理」権限を持つユーザーだけに、クエリの結果を絞り込みます。                                                                                                                                                                                                                                                         |
+| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.                                                                                                                                                                                                                                    |
+| [andRelatedTo](#andrelatedto)             | Narrows the query results to only users that are related to certain other elements.                                                                                                                                                                                                     |
+| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.                                                                                                                                                                                                                                        |
+| [asArray](#asarray)                       | Causes the query to return matching users as arrays of data, rather than [User](craft3:craft\elements\User) objects.                                                                                                                                                                  |
+| [cache](#cache)                           | Enables query cache for this Query.                                                                                                                                                                                                                                                     |
+| [can](#can)                               | Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.                                                                                                                                   |
+| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).                                                                                                                                                                                                   |
+| [dateCreated](#datecreated)               | Narrows the query results based on the users’ creation dates.                                                                                                                                                                                                                           |
+| [dateUpdated](#dateupdated)               | Narrows the query results based on the users’ last-updated dates.                                                                                                                                                                                                                       |
+| [email](#email)                           | Narrows the query results based on the users’ email addresses.                                                                                                                                                                                                                          |
+| [firstName](#firstname)                   | Narrows the query results based on the users’ first names.                                                                                                                                                                                                                              |
+| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).                                                                                                                                                                                                            |
+| [getCacheTags](#getcachetags)             |                                                                                                                                                                                                                                                                                         |
+| [group](#group)                           | Narrows the query results based on the user group the users belong to.                                                                                                                                                                                                                  |
+| [groupId](#groupid)                       | Narrows the query results based on the user group the users belong to, per the groups’ IDs.                                                                                                                                                                                             |
+| [hasPhoto](#hasphoto)                     | Narrows the query results to only users that have (or don’t have) a user photo.                                                                                                                                                                                                         |
+| [id](#id)                                 | Narrows the query results based on the users’ IDs.                                                                                                                                                                                                                                      |
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching users as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement). |
+| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.                                                                                                                                                                                                                               |
+| [lastLoginDate](#lastlogindate)           | Narrows the query results based on the users’ last login dates.                                                                                                                                                                                                                         |
+| [lastName](#lastname)                     | Narrows the query results based on the users’ last names.                                                                                                                                                                                                                               |
+| [limit](#limit)                           | Determines the number of users that should be returned.                                                                                                                                                                                                                                 |
+| [offset](#offset)                         | Determines how many users should be skipped in the results.                                                                                                                                                                                                                             |
+| [orderBy](#orderby)                       | Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)                                                                                                                                                                                      |
+| [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.                                                                                              |
+| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.                                                                                                                                                                                                                                   |
+| [relatedTo](#relatedto)                   | Narrows the query results to only users that are related to certain other elements.                                                                                                                                                                                                     |
+| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.                                                                                                                                                                                      |
+| [search](#search)                         | Narrows the query results to only users that match a search query.                                                                                                                                                                                                                      |
+| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the users’ IDs in the `elements_sites` table.                                                                                                                                                                                                        |
+| [status](#status)                         | Narrows the query results based on the users’ statuses.                                                                                                                                                                                                                                 |
+| [trashed](#trashed)                       | Narrows the query results to only users that have been soft-deleted.                                                                                                                                                                                                                    |
+| [uid](#uid)                               | Narrows the query results based on the users’ UIDs.                                                                                                                                                                                                                                     |
+| [username](#username)                     | Narrows the query results based on the users’ usernames.                                                                                                                                                                                                                                |
+| [with](#with)                             | Causes the query to return matching users eager-loaded with related elements.                                                                                                                                                                                                           |
+| [withGroups](#withgroups)                 | Causes the query to return matching users eager-loaded with their user groups.                                                                                                                                                                                                          |
 
 #### `admin`
 
@@ -102,8 +110,8 @@ Craft Pro には、一般ユーザーの登録を許可するオプションが�
 ```twig
 {# Fetch admins #}
 {% set users = craft.users()
-    .admin()
-    .all() %}
+  .admin()
+  .all() %}
 ```
 
 ```php
@@ -115,9 +123,51 @@ $users = \craft\elements\User::find()
 :::
 
 
+#### `afterPopulate`
+
+Performs any post-population processing on elements.
+
+
+
+
+
+
+
+
+
+
+#### `andRelatedTo`
+
+Narrows the query results to only users that are related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all users that are related to myCategoryA and myCategoryB #}
+{% set users = craft.users()
+  .relatedTo(myCategoryA)
+  .andRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all users that are related to $myCategoryA and $myCategoryB
+$users = \craft\elements\User::find()
+    ->relatedTo($myCategoryA)
+    ->andRelatedTo($myCategoryB)
+    ->all();
+```
+:::
+
+
 #### `anyStatus`
 
-ステータスに基づくエレメントのフィルタを削除します。
+Removes element filters based on their statuses.
 
 
 
@@ -127,8 +177,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch all users, regardless of status #}
 {% set users = craft.users()
-    .anyStatus()
-    .all() %}
+  .anyStatus()
+  .all() %}
 ```
 
 ```php
@@ -142,7 +192,7 @@ $users = \craft\elements\User::find()
 
 #### `asArray`
 
-[User](craft3:craft\elements\User) オブジェクトではなく、データの配列として、マッチしたユーザーをクエリが返します。
+Causes the query to return matching users as arrays of data, rather than [User](craft3:craft\elements\User) objects.
 
 
 
@@ -152,8 +202,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch users as arrays #}
 {% set users = craft.users()
-    .asArray()
-    .all() %}
+  .asArray()
+  .all() %}
 ```
 
 ```php
@@ -165,11 +215,24 @@ $users = \craft\elements\User::find()
 :::
 
 
+#### `cache`
+
+Enables query cache for this Query.
+
+
+
+
+
+
+
+
+
+
 #### `can`
 
-これらの権限はユーザーアカウントと同様にユーザーグループにも直接適用できます。
+Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
 
-Craft によって定義された利用可能なユーザー権限のリストは、[ユーザー管理](user-management.md)を参照してください。
+See [User Management](https://craftcms.com/docs/3.x/user-management.html) for a full list of available user permissions defined by Craft.
 
 
 
@@ -177,8 +240,8 @@ Craft によって定義された利用可能なユーザー権限のリスト�
 ```twig
 {# Fetch users that can access the control panel #}
 {% set users = craft.users()
-    .can('accessCp')
-    .all() %}
+  .can('accessCp')
+  .all() %}
 ```
 
 ```php
@@ -192,7 +255,7 @@ $users = \craft\elements\User::find()
 
 #### `clearCachedResult`
 
-キャッシュされた結果をクリアします。
+Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 
 
 
@@ -201,11 +264,11 @@ $users = \craft\elements\User::find()
 
 #### `dateCreated`
 
-ユーザーの作成日に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the users’ creation dates.
 
 
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値                                                | 取得するユーザー                             |
 | ------------------------------------------------ | ------------------------------------ |
@@ -222,8 +285,8 @@ $users = \craft\elements\User::find()
 {% set end = date('first day of this month')|atom %}
 
 {% set users = craft.users()
-    .dateCreated(['and', ">= #{start}", "< #{end}"])
-    .all() %}
+  .dateCreated(['and', ">= #{start}", "< #{end}"])
+  .all() %}
 ```
 
 ```php
@@ -240,11 +303,11 @@ $users = \craft\elements\User::find()
 
 #### `dateUpdated`
 
-ユーザーの最終アップデート日に基づいて、クエリの結果が絞り込まれます。
+Narrows the query results based on the users’ last-updated dates.
 
 
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値                                                | 取得するユーザー                                 |
 | ------------------------------------------------ | ---------------------------------------- |
@@ -260,8 +323,8 @@ $users = \craft\elements\User::find()
 {% set lastWeek = date('1 week ago')|atom %}
 
 {% set users = craft.users()
-    .dateUpdated(">= #{lastWeek}")
-    .all() %}
+  .dateUpdated(">= #{lastWeek}")
+  .all() %}
 ```
 
 ```php
@@ -277,9 +340,9 @@ $users = \craft\elements\User::find()
 
 #### `email`
 
-ユーザーのメールアドレスに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the users’ email addresses.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値                   | 取得するユーザー                     |
 | ------------------- | ---------------------------- |
@@ -293,8 +356,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch users with a .co.uk domain on their email address #}
 {% set users = craft.users()
-    .email('*.co.uk')
-    .all() %}
+  .email('*.co.uk')
+  .all() %}
 ```
 
 ```php
@@ -308,9 +371,9 @@ $users = \craft\elements\User::find()
 
 #### `firstName`
 
-ユーザーのファーストネーム（名）に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the users’ first names.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値            | 取得するユーザー               |
 | ------------ | ---------------------- |
@@ -323,8 +386,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch all the Jane's #}
 {% set users = craft.users()
-    .firstName('Jane')
-    .all() %}
+  .firstName('Jane')
+  .all() %}
 ```
 
 ```php
@@ -338,7 +401,7 @@ $users = \craft\elements\User::find()
 
 #### `fixedOrder`
 
-クエリの結果を [id](#id) で指定された順序で返します。
+Causes the query results to be returned in the order specified by [id](#id).
 
 
 
@@ -348,9 +411,9 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch users in a specific order #}
 {% set users = craft.users()
-    .id([1, 2, 3, 4, 5])
-    .fixedOrder()
-    .all() %}
+  .id([1, 2, 3, 4, 5])
+  .fixedOrder()
+  .all() %}
 ```
 
 ```php
@@ -363,11 +426,20 @@ $users = \craft\elements\User::find()
 :::
 
 
+#### `getCacheTags`
+
+
+
+
+
+
+
+
 #### `group`
 
-ユーザーが属するユーザーグループに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the user group the users belong to.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値                                                   | 取得するユーザー                          |
 | --------------------------------------------------- | --------------------------------- |
@@ -383,8 +455,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch users in the Foo user group #}
 {% set users = craft.users()
-    .group('foo')
-    .all() %}
+  .group('foo')
+  .all() %}
 ```
 
 ```php
@@ -398,9 +470,9 @@ $users = \craft\elements\User::find()
 
 #### `groupId`
 
-グループ ID ごとに、ユーザーが属するユーザーグループに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値               | 取得するユーザー                 |
 | --------------- | ------------------------ |
@@ -415,8 +487,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch users in a group with an ID of 1 #}
 {% set users = craft.users()
-    .groupId(1)
-    .all() %}
+  .groupId(1)
+  .all() %}
 ```
 
 ```php
@@ -430,7 +502,7 @@ $users = \craft\elements\User::find()
 
 #### `hasPhoto`
 
-ユーザー写真を持っている（または、持っていない）ユーザーだけに、クエリの結果を絞り込みます。
+Narrows the query results to only users that have (or don’t have) a user photo.
 
 
 
@@ -438,8 +510,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch users with photos #}
 {% set users = craft.users()
-    .hasPhoto()
-    .all() %}
+  .hasPhoto()
+  .all() %}
 ```
 
 ```php
@@ -453,11 +525,11 @@ $users = \craft\elements\User::find()
 
 #### `id`
 
-ユーザーの ID に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the users’ IDs.
 
 
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値               | 取得するユーザー           |
 | --------------- | ------------------ |
@@ -472,8 +544,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch the user by its ID #}
 {% set user = craft.users()
-    .id(1)
-    .one() %}
+  .id(1)
+  .one() %}
 ```
 
 ```php
@@ -487,13 +559,13 @@ $user = \craft\elements\User::find()
 
 
 ::: tip
-特定の順序で結果を返したい場合、[fixedOrder](#fixedorder) と組み合わせることができます。 :::
+This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
 :::
 
 
 #### `ignorePlaceholders`
 
-[craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement) によってセットされたマッチするプレースホルダーエレメントを無視して、データベースに保存されたマッチするユーザーをクエリが返します。
+Causes the query to return matching users as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 
 
 
@@ -506,7 +578,7 @@ $user = \craft\elements\User::find()
 
 #### `inReverse`
 
-クエリの結果を逆順で返します。
+Causes the query results to be returned in reverse order.
 
 
 
@@ -516,8 +588,8 @@ $user = \craft\elements\User::find()
 ```twig
 {# Fetch users in reverse #}
 {% set users = craft.users()
-    .inReverse()
-    .all() %}
+  .inReverse()
+  .all() %}
 ```
 
 ```php
@@ -531,9 +603,9 @@ $users = \craft\elements\User::find()
 
 #### `lastLoginDate`
 
-ユーサーの最終ログイン日に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the users’ last login dates.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値                                                | 取得するユーザー                                 |
 | ------------------------------------------------ | ---------------------------------------- |
@@ -549,8 +621,8 @@ $users = \craft\elements\User::find()
 {% set aWeekAgo = date('7 days ago')|atom %}
 
 {% set users = craft.users()
-    .lastLoginDate(">= #{aWeekAgo}")
-    .all() %}
+  .lastLoginDate(">= #{aWeekAgo}")
+  .all() %}
 ```
 
 ```php
@@ -566,9 +638,9 @@ $users = \craft\elements\User::find()
 
 #### `lastName`
 
-ユーザーのラストネーム（姓）に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the users’ last names.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値           | 取得するユーザー            |
 | ----------- | ------------------- |
@@ -581,8 +653,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch all the Doe's #}
 {% set users = craft.users()
-    .lastName('Doe')
-    .all() %}
+  .lastName('Doe')
+  .all() %}
 ```
 
 ```php
@@ -596,7 +668,7 @@ $users = \craft\elements\User::find()
 
 #### `limit`
 
-返されるユーザーの数を決定します。
+Determines the number of users that should be returned.
 
 
 
@@ -604,8 +676,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch up to 10 users  #}
 {% set users = craft.users()
-    .limit(10)
-    .all() %}
+  .limit(10)
+  .all() %}
 ```
 
 ```php
@@ -619,7 +691,7 @@ $users = \craft\elements\User::find()
 
 #### `offset`
 
-結果からスキップされるユーザーの数を決定します。
+Determines how many users should be skipped in the results.
 
 
 
@@ -627,8 +699,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch all users except for the first 3 #}
 {% set users = craft.users()
-    .offset(3)
-    .all() %}
+  .offset(3)
+  .all() %}
 ```
 
 ```php
@@ -642,7 +714,7 @@ $users = \craft\elements\User::find()
 
 #### `orderBy`
 
-返されるユーザーの順序を決定します。 （空の場合、デフォルトは `username ASC`）
+Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
 
 
 
@@ -650,8 +722,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch all users in order of date created #}
 {% set users = craft.users()
-    .orderBy('dateCreated ASC')
-    .all() %}
+  .orderBy('dateCreated ASC')
+  .all() %}
 ```
 
 ```php
@@ -665,13 +737,13 @@ $users = \craft\elements\User::find()
 
 #### `preferSites`
 
-[unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) がセットされている場合、マルチサイトでエレメント照会する際に選択されるべきサイトを決定します。
+If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C, and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned for Site B.
 
-これがセットされていない場合、現在のサイトが優先されます。
+If this isn’t set, then preference goes to the current site.
 
 
 
@@ -679,10 +751,10 @@ For example, if element “Foo” exists in Site A and Site B, and element “Ba
 ```twig
 {# Fetch unique users from Site A, or Site B if they don’t exist in Site A #}
 {% set users = craft.users()
-    .site('*')
-    .unique()
-    .preferSites(['a', 'b'])
-    .all() %}
+  .site('*')
+  .unique()
+  .preferSites(['a', 'b'])
+  .all() %}
 ```
 
 ```php
@@ -696,13 +768,40 @@ $users = \craft\elements\User::find()
 :::
 
 
+#### `provisionalDrafts`
+
+Narrows the query results to only provisional drafts.
+
+
+
+
+
+::: code
+```twig
+{# Fetch provisional drafts created by the current user #}
+{% set users = craft.users()
+  .provisionalDrafts()
+  .draftCreator(currentUser)
+  .all() %}
+```
+
+```php
+// Fetch provisional drafts created by the current user
+$users = \craft\elements\User::find()
+    ->provisionalDrafts()
+    ->draftCreator(Craft::$app->user->identity)
+    ->all();
+```
+:::
+
+
 #### `relatedTo`
 
-特定の他のエレメントと関連付けられたユーザーだけに、クエリの結果を絞り込みます。
+Narrows the query results to only users that are related to certain other elements.
 
 
 
-このパラメーターがどのように機能するかの詳細については、[リレーション](relations.md)を参照してください。
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -710,8 +809,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch all users that are related to myCategory #}
 {% set users = craft.users()
-    .relatedTo(myCategory)
-    .all() %}
+  .relatedTo(myCategory)
+  .all() %}
 ```
 
 ```php
@@ -723,13 +822,40 @@ $users = \craft\elements\User::find()
 :::
 
 
+#### `savedDraftsOnly`
+
+Narrows the query results to only unpublished drafts which have been saved after initial creation.
+
+
+
+
+
+::: code
+```twig
+{# Fetch saved, unpublished draft users #}
+{% set users = {twig-function}
+  .draftOf(false)
+  .savedDraftsOnly()
+  .all() %}
+```
+
+```php
+// Fetch saved, unpublished draft users
+$users = \craft\elements\User::find()
+    ->draftOf(false)
+    ->savedDraftsOnly()
+    ->all();
+```
+:::
+
+
 #### `search`
 
-検索クエリにマッチするユーザーだけに、クエリの結果を絞り込みます。
+Narrows the query results to only users that match a search query.
 
 
 
-このパラメーターがどのように機能するかの詳細については、[検索](searching.md)を参照してください。
+See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -740,8 +866,8 @@ $users = \craft\elements\User::find()
 
 {# Fetch all users that match the search query #}
 {% set users = craft.users()
-    .search(searchQuery)
-    .all() %}
+  .search(searchQuery)
+  .all() %}
 ```
 
 ```php
@@ -756,19 +882,53 @@ $users = \craft\elements\User::find()
 :::
 
 
+#### `siteSettingsId`
+
+Narrows the query results based on the users’ IDs in the `elements_sites` table.
+
+
+
+Possible values include:
+
+| 値               | 取得するユーザー                                   |
+| --------------- | ------------------------------------------ |
+| `1`             | with an `elements_sites` ID of 1.          |
+| `'not 1'`       | not with an `elements_sites` ID of 1.      |
+| `[1, 2]`        | with an `elements_sites` ID of 1 or 2.     |
+| `['not', 1, 2]` | not with an `elements_sites` ID of 1 or 2. |
+
+
+
+::: code
+```twig
+{# Fetch the user by its ID in the elements_sites table #}
+{% set user = craft.users()
+  .siteSettingsId(1)
+  .one() %}
+```
+
+```php
+// Fetch the user by its ID in the elements_sites table
+$user = \craft\elements\User::find()
+    ->siteSettingsId(1)
+    ->one();
+```
+:::
+
+
 #### `status`
 
-ユーザーのステータスに基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the users’ statuses.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値                         | 取得するユーザー                            |
-| ------------------------- | ----------------------------------- |
-| _「アセットソース名」_ を表示する        | 有効なアカウント。                           |
-| `'suspended'`             | 停止されているアカウント。                       |
-| `'pending'`               | アクティベーションが保留されているアカウント。             |
-| `'locked'`                | （それが有効か停止されているかに関わらず）ロックされているアカウント。 |
-| `['active', 'suspended']` | 有効、または、停止されているアカウント。                |
+| 値                         | 取得するユーザー                                                                  |
+| ------------------------- | ------------------------------------------------------------------------- |
+| `'active'` _(default)_    | with active accounts.                                                     |
+| `'suspended'`             | with suspended accounts.                                                  |
+| `'pending'`               | with accounts that are still pending activation.                          |
+| `'locked'`                | with locked accounts (regardless of whether they’re active or suspended). |
+| `['active', 'suspended']` | with active or suspended accounts.                                        |
 
 
 
@@ -776,8 +936,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch active and locked users #}
 {% set users = craft.users()
-    .status(['active', 'locked'])
-    .all() %}
+  .status(['active', 'locked'])
+  .all() %}
 ```
 
 ```php
@@ -791,7 +951,7 @@ $users = \craft\elements\User::find()
 
 #### `trashed`
 
-ソフトデリートされたユーザーだけに、クエリの結果を絞り込みます。
+Narrows the query results to only users that have been soft-deleted.
 
 
 
@@ -801,8 +961,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch trashed users #}
 {% set users = craft.users()
-    .trashed()
-    .all() %}
+  .trashed()
+  .all() %}
 ```
 
 ```php
@@ -816,7 +976,7 @@ $users = \craft\elements\User::find()
 
 #### `uid`
 
-ユーザーの UID に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the users’ UIDs.
 
 
 
@@ -826,8 +986,8 @@ $users = \craft\elements\User::find()
 ```twig
 {# Fetch the user by its UID #}
 {% set user = craft.users()
-    .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
-    .one() %}
+  .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+  .one() %}
 ```
 
 ```php
@@ -841,14 +1001,14 @@ $user = \craft\elements\User::find()
 
 #### `username`
 
-ユーザーのユーザー名に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the users’ usernames.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
-| 値           | 取得するユーザー           |
-| ----------- | ------------------ |
-| `'foo'`     | ユーザー名が `foo`。      |
-| `'not foo'` | ユーザー名が `foo` ではない。 |
+| Value       | Fetches users…                |
+| ----------- | ----------------------------- |
+| `'foo'`     | with a username of `foo`.     |
+| `'not foo'` | not with a username of `foo`. |
 
 
 
@@ -859,8 +1019,8 @@ $user = \craft\elements\User::find()
 
 {# Fetch that user #}
 {% set user = craft.users()
-    .username(requestedUsername|literal)
-    .one() %}
+  .username(requestedUsername|literal)
+  .one() %}
 ```
 
 ```php
@@ -877,11 +1037,11 @@ $user = \craft\elements\User::find()
 
 #### `with`
 
-関連付けられたエレメントを eager-loaded した状態で、マッチしたユーザーをクエリが返します。
+Causes the query to return matching users eager-loaded with related elements.
 
 
 
-このパラメーターがどのように機能するかの詳細については、[エレメントの Eager-Loading](dev/eager-loading-elements.md) を参照してください。
+See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -889,14 +1049,45 @@ $user = \craft\elements\User::find()
 ```twig
 {# Fetch users eager-loaded with the "Related" field’s relations #}
 {% set users = craft.users()
-    .with(['related'])
-    .all() %}
+  .with(['related'])
+  .all() %}
 ```
 
 ```php
 // Fetch users eager-loaded with the "Related" field’s relations
 $users = \craft\elements\User::find()
     ->with(['related'])
+    ->all();
+```
+:::
+
+
+#### `withGroups`
+
+Causes the query to return matching users eager-loaded with their user groups.
+
+Possible values include:
+
+| Value                                            | Fetches users…                                         |
+| ------------------------------------------------ | ------------------------------------------------------ |
+| `'>= 2018-04-01'`                             | that last logged-in on or after 2018-04-01.            |
+| `'< 2018-05-01'`                              | that last logged-in before 2018-05-01                  |
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that last logged-in between 2018-04-01 and 2018-05-01. |
+
+
+
+::: code
+```twig
+{# fetch users with their user groups #}
+{% set users = craft.users()
+  .withGroups()
+  .all() %}
+```
+
+```php
+// fetch users with their user groups
+$users = \craft\elements\User::find()
+    ->withGroups()
     ->all();
 ```
 :::
