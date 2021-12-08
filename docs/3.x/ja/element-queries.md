@@ -183,7 +183,7 @@ $entries = Entry::find()
 ```
 :::
 
-This is a layer on top of data caching that’s different from the [template {% cache %} tag](/dev/tags.md#cache).
+This is a layer on top of data caching that’s different from the [template {% cache %} tag](./dev/tags.md#cache).
 
 ::: tip
 Craft registers an [ElementQueryTagDependency](craft3:craft\cache\ElementQueryTagDependency) for you by default, so cache dependencies and invalidation are handled automatically.
