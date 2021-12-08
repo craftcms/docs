@@ -1139,7 +1139,7 @@ Event::on(
 
 GraphQL complexity values are numeric scores assigned to fields that indicate how much processing power will be needed to return a result.
 
-The combined values are limited by Craft’s <craft3:maxGraphqlComplexity> setting. If a query or mutation’s complexity exceeds that limit, it will not be executed. Assigning appropriate complexity values ensures that a Craft site developer may manage that threshold for a safe, optimal use of compute resources.
+The combined values are limited by Craft’s <config3:maxGraphqlComplexity> setting. If a query or mutation’s complexity exceeds that limit, it will not be executed. Assigning appropriate complexity values ensures that a Craft site developer may manage that threshold for a safe, optimal use of compute resources.
 
 If you provide a field definition that involves relations or processor-intensive operations, you should specify a complexity score.
 
