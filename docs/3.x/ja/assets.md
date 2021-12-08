@@ -158,42 +158,91 @@ You can cache-bust asset URLs automatically by enabling the [revAssetUrls](confi
 
 <!-- BEGIN PARAMS -->
 
-| パラメータ                                     | 説明                                                                                                                                                                                                                 |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [anyStatus](#anystatus)                   | ステータスに基づくエレメントのフィルタを削除します。                                                                                                                                                                                         |
-| [asArray](#asarray)                       | [Asset](craft3:craft\elements\Asset) オブジェクトではなく、データの配列として、マッチしたアセットをクエリが返します。                                                                                                                                    |
-| [clearCachedResult](#clearcachedresult)   | キャッシュされた結果をクリアします。                                                                                                                                                                                                 |
-| [dateCreated](#datecreated)               | アセットの作成日に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                       |
-| [dateModified](#datemodified)             | アセットファイルの最終更新日に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                 |
-| [dateUpdated](#dateupdated)               | アセットの最終アップデート日に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                 |
-| [filename](#filename)                     | アセットのファイル名に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                     |
-| [fixedOrder](#fixedorder)                 | クエリの結果を [id](#id) で指定された順序で返します。                                                                                                                                                                                   |
-| [folderId](#folderid)                     | フォルダの ID ごとに、アセットが属するフォルダに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                      |
-| [height](#height)                         | アセットの画像の高さに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                     |
-| [id](#id)                                 | アセットの ID に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                      |
-| [ignorePlaceholders](#ignoreplaceholders) | [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement) によってセットされたマッチするプレースホルダーエレメントを無視して、データベースに保存されたマッチするアセットをクエリが返します。 |
-| [inReverse](#inreverse)                   | クエリの結果を逆順で返します。                                                                                                                                                                                                    |
-| [includeSubfolders](#includesubfolders)   | [folderId](#folderid) で指定されたフォルダのすべてのサブフォルダにあるアセットを含むよう、クエリの結果を拡張します。                                                                                                                                              |
-| [kind](#kind)                             | アセットのファイルの種類に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                   |
-| [limit](#limit)                           | 返されるアセットの数を決定します。                                                                                                                                                                                                  |
-| [offset](#offset)                         | 結果からスキップされるアセットの数を決定します。                                                                                                                                                                                           |
-| [orderBy](#orderby)                       | 返されるアセットの順序を決定します。 （空の場合、デフォルトは `dateCreated DESC`）                                                                                                                                                                |
-| [preferSites](#prefersites)               | [unique](#unique) がセットされている場合、マルチサイトでエレメント照会する際に選択されるべきサイトを決定します                                                                                                                                                   |
-| [relatedTo](#relatedto)                   | 特定の他のエレメントと関連付けられたアセットだけに、クエリの結果を絞り込みます。                                                                                                                                                                           |
-| [search](#search)                         | 検索クエリにマッチするアセットだけに、クエリの結果を絞り込みます。                                                                                                                                                                                  |
-| [site](#site)                             | アセットを照会するサイトを決定します。                                                                                                                                                                                                |
-| [siteId](#siteid)                         | サイトの ID ごとに、アセットを照会するサイトを決定します。                                                                                                                                                                                    |
-| [size](#size)                             | アセットのファイルサイズ（バイト単位）に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                            |
-| [title](#title)                           | アセットのタイトルに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                      |
-| [trashed](#trashed)                       | ソフトデリートされたアセットだけに、クエリの結果を絞り込みます。                                                                                                                                                                                   |
-| [uid](#uid)                               | アセットの UID に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                     |
-| [unique](#unique)                         | クエリによってユニークな ID のエレメントだけが返されるかを決定します。                                                                                                                                                                              |
-| [uploader](#uploader)                     | ユーザーの ID ごとに、アセットをアップロードしたユーザーに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                 |
-| [volume](#volume)                         | アセットが属するボリュームに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                  |
-| [volumeId](#volumeid)                     | ボリュームの ID ごとに、アセットが属するボリュームに基づいて、クエリの結果を絞り込みます。                                                                                                                                                                    |
-| [width](#width)                           | アセットの画像の幅に基づいて、クエリの結果を絞り込みます。                                                                                                                                                                                      |
-| [with](#with)                             | 関連付けられたエレメントを eager-loaded した状態で、マッチしたアセットをクエリが返します。                                                                                                                                                               |
-| [withTransforms](#withtransforms)         | 画像変換インデックスを eager-loaded した状態で、マッチしたアセットをクエリが返します。                                                                                                                                                                 |
+| パラメータ                                     | 説明                                                                                                                                                                                                                                                                                       |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.                                                                                                                                                                                                                                     |
+| [andRelatedTo](#andrelatedto)             | Narrows the query results to only assets that are related to certain other elements.                                                                                                                                                                                                     |
+| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.                                                                                                                                                                                                                                         |
+| [asArray](#asarray)                       | Causes the query to return matching assets as arrays of data, rather than [Asset](craft3:craft\elements\Asset) objects.                                                                                                                                                                |
+| [cache](#cache)                           | Enables query cache for this Query.                                                                                                                                                                                                                                                      |
+| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).                                                                                                                                                                                                    |
+| [dateCreated](#datecreated)               | Narrows the query results based on the assets’ creation dates.                                                                                                                                                                                                                           |
+| [dateModified](#datemodified)             | Narrows the query results based on the assets’ files’ last-modified dates.                                                                                                                                                                                                               |
+| [dateUpdated](#dateupdated)               | Narrows the query results based on the assets’ last-updated dates.                                                                                                                                                                                                                       |
+| [filename](#filename)                     | Narrows the query results based on the assets’ filenames.                                                                                                                                                                                                                                |
+| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).                                                                                                                                                                                                             |
+| [folderId](#folderid)                     | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.                                                                                                                                                                                               |
+| [getCacheTags](#getcachetags)             |                                                                                                                                                                                                                                                                                          |
+| [height](#height)                         | Narrows the query results based on the assets’ image heights.                                                                                                                                                                                                                            |
+| [id](#id)                                 | Narrows the query results based on the assets’ IDs.                                                                                                                                                                                                                                      |
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement). |
+| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.                                                                                                                                                                                                                                |
+| [includeSubfolders](#includesubfolders)   | Broadens the query results to include assets from any of the subfolders of the folder specified by [folderId](#folderid).                                                                                                                                                                |
+| [kind](#kind)                             | Narrows the query results based on the assets’ file kinds.                                                                                                                                                                                                                               |
+| [limit](#limit)                           | Determines the number of assets that should be returned.                                                                                                                                                                                                                                 |
+| [offset](#offset)                         | Determines how many assets should be skipped in the results.                                                                                                                                                                                                                             |
+| [orderBy](#orderby)                       | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC`.)                                                                                                                                                                                  |
+| [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.                                                                                                                                                                            |
+| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.                                                                                                                                                                                                                                    |
+| [relatedTo](#relatedto)                   | Narrows the query results to only assets that are related to certain other elements.                                                                                                                                                                                                     |
+| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.                                                                                                                                                                                       |
+| [search](#search)                         | Narrows the query results to only assets that match a search query.                                                                                                                                                                                                                      |
+| [site](#site)                             | Determines which site(s) the assets should be queried in.                                                                                                                                                                                                                                |
+| [siteId](#siteid)                         | Determines which site(s) the assets should be queried in, per the site’s ID.                                                                                                                                                                                                             |
+| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the assets’ IDs in the `elements_sites` table.                                                                                                                                                                                                        |
+| [size](#size)                             | Narrows the query results based on the assets’ file sizes (in bytes).                                                                                                                                                                                                                    |
+| [title](#title)                           | Narrows the query results based on the assets’ titles.                                                                                                                                                                                                                                   |
+| [trashed](#trashed)                       | Narrows the query results to only assets that have been soft-deleted.                                                                                                                                                                                                                    |
+| [uid](#uid)                               | Narrows the query results based on the assets’ UIDs.                                                                                                                                                                                                                                     |
+| [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.                                                                                                                                                                                                        |
+| [uploader](#uploader)                     | Narrows the query results based on the user the assets were uploaded by, per the user’s IDs.                                                                                                                                                                                             |
+| [volume](#volume)                         | Narrows the query results based on the volume the assets belong to.                                                                                                                                                                                                                      |
+| [volumeId](#volumeid)                     | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.                                                                                                                                                                                               |
+| [width](#width)                           | Narrows the query results based on the assets’ image widths.                                                                                                                                                                                                                             |
+| [with](#with)                             | Causes the query to return matching assets eager-loaded with related elements.                                                                                                                                                                                                           |
+| [withTransforms](#withtransforms)         | Causes the query to return matching assets eager-loaded with image transform indexes.                                                                                                                                                                                                    |
+
+#### `afterPopulate`
+
+Performs any post-population processing on elements.
+
+
+
+
+
+
+
+
+
+
+#### `andRelatedTo`
+
+Narrows the query results to only assets that are related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all assets that are related to myCategoryA and myCategoryB #}
+{% set assets = craft.assets()
+  .relatedTo(myCategoryA)
+  .andRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all assets that are related to $myCategoryA and $myCategoryB
+$assets = \craft\elements\Asset::find()
+    ->relatedTo($myCategoryA)
+    ->andRelatedTo($myCategoryB)
+    ->all();
+```
+:::
+
 
 #### `anyStatus`
 
@@ -207,8 +256,8 @@ Removes element filters based on their statuses.
 ```twig
 {# Fetch all assets, regardless of status #}
 {% set assets = craft.assets()
-    .anyStatus()
-    .all() %}
+  .anyStatus()
+  .all() %}
 ```
 
 ```php
@@ -222,7 +271,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `asArray`
 
-[Asset](craft3:craft\elements\Asset) オブジェクトではなく、データの配列として、マッチしたアセットをクエリが返します。
+Causes the query to return matching assets as arrays of data, rather than [Asset](craft3:craft\elements\Asset) objects.
 
 
 
@@ -232,8 +281,8 @@ $assets = \craft\elements\Asset::find()
 ```twig
 {# Fetch assets as arrays #}
 {% set assets = craft.assets()
-    .asArray()
-    .all() %}
+  .asArray()
+  .all() %}
 ```
 
 ```php
@@ -245,9 +294,22 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
+#### `cache`
+
+Enables query cache for this Query.
+
+
+
+
+
+
+
+
+
+
 #### `clearCachedResult`
 
-アセットの作成日に基づいて、クエリの結果を絞り込みます。
+Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 
 
 
@@ -256,7 +318,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `dateCreated`
 
-利用可能な値には、次のものが含まれます。
+Narrows the query results based on the assets’ creation dates.
 
 
 
@@ -277,8 +339,8 @@ Possible values include:
 {% set end = date('first day of this month')|atom %}
 
 {% set assets = craft.assets()
-    .dateCreated(['and', ">= #{start}", "< #{end}"])
-    .all() %}
+  .dateCreated(['and', ">= #{start}", "< #{end}"])
+  .all() %}
 ```
 
 ```php
@@ -295,7 +357,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `dateModified`
 
-利用可能な値には、次のものが含まれます。
+Narrows the query results based on the assets’ files’ last-modified dates.
 
 Possible values include:
 
@@ -313,8 +375,8 @@ Possible values include:
 {% set start = date('30 days ago')|atom %}
 
 {% set assets = craft.assets()
-    .dateModified(">= #{start}")
-    .all() %}
+  .dateModified(">= #{start}")
+  .all() %}
 ```
 
 ```php
@@ -330,7 +392,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `dateUpdated`
 
-利用可能な値には、次のものが含まれます。
+Narrows the query results based on the assets’ last-updated dates.
 
 
 
@@ -350,8 +412,8 @@ Possible values include:
 {% set lastWeek = date('1 week ago')|atom %}
 
 {% set assets = craft.assets()
-    .dateUpdated(">= #{lastWeek}")
-    .all() %}
+  .dateUpdated(">= #{lastWeek}")
+  .all() %}
 ```
 
 ```php
@@ -367,7 +429,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `filename`
 
-利用可能な値には、次のものが含まれます。
+Narrows the query results based on the assets’ filenames.
 
 Possible values include:
 
@@ -387,8 +449,8 @@ Possible values include:
 ```twig
 {# Fetch all the hi-res images #}
 {% set assets = craft.assets()
-    .filename('*@2x*')
-    .all() %}
+  .filename('*@2x*')
+  .all() %}
 ```
 
 ```php
@@ -402,7 +464,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `fixedOrder`
 
-クエリの結果を [id](#id) で指定された順序で返します。
+Causes the query results to be returned in the order specified by [id](#id).
 
 
 
@@ -412,9 +474,9 @@ $assets = \craft\elements\Asset::find()
 ```twig
 {# Fetch assets in a specific order #}
 {% set assets = craft.assets()
-    .id([1, 2, 3, 4, 5])
-    .fixedOrder()
-    .all() %}
+  .id([1, 2, 3, 4, 5])
+  .fixedOrder()
+  .all() %}
 ```
 
 ```php
@@ -429,7 +491,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `folderId`
 
-利用可能な値には、次のものが含まれます。
+Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
 
 Possible values include:
 
@@ -446,8 +508,8 @@ Possible values include:
 ```twig
 {# Fetch assets in the folder with an ID of 1 #}
 {% set assets = craft.assets()
-    .folderId(1)
-    .all() %}
+  .folderId(1)
+  .all() %}
 ```
 
 ```php
@@ -461,11 +523,20 @@ $assets = \craft\elements\Asset::find()
 
 
 ::: tip
-特定のフォルダのすべてのサブフォルダのアセットを含めたい場合、[includeSubfolders](#includesubfolders) と組み合わせることができます。 :::
+This can be combined with [includeSubfolders](#includesubfolders) if you want to include assets in all the subfolders of a certain folder.
 :::
+#### `getCacheTags`
+
+
+
+
+
+
+
+
 #### `height`
 
-利用可能な値には、次のものが含まれます。
+Narrows the query results based on the assets’ image heights.
 
 Possible values include:
 
@@ -481,9 +552,9 @@ Possible values include:
 ```twig
 {# Fetch XL images #}
 {% set assets = craft.assets()
-    .kind('image')
-    .height('>= 1000')
-    .all() %}
+  .kind('image')
+  .height('>= 1000')
+  .all() %}
 ```
 
 ```php
@@ -498,7 +569,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `id`
 
-利用可能な値には、次のものが含まれます。
+Narrows the query results based on the assets’ IDs.
 
 
 
@@ -517,8 +588,8 @@ Possible values include:
 ```twig
 {# Fetch the asset by its ID #}
 {% set asset = craft.assets()
-    .id(1)
-    .one() %}
+  .id(1)
+  .one() %}
 ```
 
 ```php
@@ -532,13 +603,13 @@ $asset = \craft\elements\Asset::find()
 
 
 ::: tip
-特定の順序で結果を返したい場合、[fixedOrder](#fixedorder) と組み合わせることができます。 :::
+This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
 :::
 
 
 #### `ignorePlaceholders`
 
-クエリの結果を逆順で返します。
+Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 
 
 
@@ -561,8 +632,8 @@ Causes the query results to be returned in reverse order.
 ```twig
 {# Fetch assets in reverse #}
 {% set assets = craft.assets()
-    .inReverse()
-    .all() %}
+  .inReverse()
+  .all() %}
 ```
 
 ```php
@@ -576,7 +647,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `includeSubfolders`
 
-[folderId](#folderid) で指定されたフォルダのすべてのサブフォルダにあるアセットを含むよう、クエリの結果を拡張します。
+Broadens the query results to include assets from any of the subfolders of the folder specified by [folderId](#folderid).
 
 
 
@@ -584,9 +655,9 @@ $assets = \craft\elements\Asset::find()
 ```twig
 {# Fetch assets in the folder with an ID of 1 (including its subfolders) #}
 {% set assets = craft.assets()
-    .folderId(1)
-    .includeSubfolders()
-    .all() %}
+  .folderId(1)
+  .includeSubfolders()
+  .all() %}
 ```
 
 ```php
@@ -601,17 +672,18 @@ $assets = \craft\elements\Asset::find()
 
 
 ::: warning
-これは [folderId](#folderid) に単一のフォルダ ID がセットされているときだけ、動作します。 :::
+This will only work if [folderId](#folderid) was set to a single folder ID.
 :::
 #### `kind`
 
-サポートされるファイルの種類：
+Narrows the query results based on the assets’ file kinds.
 
-利用可能な値には、次のものが含まれます。
+Supported file kinds:
 - `access`
 - `audio`
 - `compressed`
 - `excel`
+- `flash`
 - `html`
 - `illustrator`
 - `image`
@@ -642,8 +714,8 @@ Possible values include:
 ```twig
 {# Fetch all the images #}
 {% set assets = craft.assets()
-    .kind('image')
-    .all() %}
+  .kind('image')
+  .all() %}
 ```
 
 ```php
@@ -657,7 +729,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `limit`
 
-返されるアセットの数を決定します。
+Determines the number of assets that should be returned.
 
 
 
@@ -665,8 +737,8 @@ $assets = \craft\elements\Asset::find()
 ```twig
 {# Fetch up to 10 assets  #}
 {% set assets = craft.assets()
-    .limit(10)
-    .all() %}
+  .limit(10)
+  .all() %}
 ```
 
 ```php
@@ -680,7 +752,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `offset`
 
-結果からスキップされるアセットの数を決定します。
+Determines how many assets should be skipped in the results.
 
 
 
@@ -688,8 +760,8 @@ $assets = \craft\elements\Asset::find()
 ```twig
 {# Fetch all assets except for the first 3 #}
 {% set assets = craft.assets()
-    .offset(3)
-    .all() %}
+  .offset(3)
+  .all() %}
 ```
 
 ```php
@@ -703,7 +775,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `orderBy`
 
-返されるアセットの順序を決定します。 （空の場合、デフォルトは `dateCreated DESC`）
+Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC`.)
 
 
 
@@ -711,8 +783,8 @@ $assets = \craft\elements\Asset::find()
 ```twig
 {# Fetch all assets in order of date created #}
 {% set assets = craft.assets()
-    .orderBy('dateCreated ASC')
-    .all() %}
+  .orderBy('dateCreated ASC')
+  .all() %}
 ```
 
 ```php
@@ -726,11 +798,11 @@ $assets = \craft\elements\Asset::find()
 
 #### `preferSites`
 
-例えば、エレメント “Foo” がサイト A とサイト B に存在し、エレメント “Bar” がサイト B とサイト C に存在し、ここに `['c', 'b', 'a']` がセットされている場合、Foo will はサイト C に対して返され、Bar はサイト B に対して返されます。
+If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 
 
 
-これがセットされていない場合、現在のサイトが優先されます。
+For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C, and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned for Site B.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -740,10 +812,10 @@ If this isn’t set, then preference goes to the current site.
 ```twig
 {# Fetch unique assets from Site A, or Site B if they don’t exist in Site A #}
 {% set assets = craft.assets()
-    .site('*')
-    .unique()
-    .preferSites(['a', 'b'])
-    .all() %}
+  .site('*')
+  .unique()
+  .preferSites(['a', 'b'])
+  .all() %}
 ```
 
 ```php
@@ -757,9 +829,36 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
+#### `provisionalDrafts`
+
+Narrows the query results to only provisional drafts.
+
+
+
+
+
+::: code
+```twig
+{# Fetch provisional drafts created by the current user #}
+{% set assets = craft.assets()
+  .provisionalDrafts()
+  .draftCreator(currentUser)
+  .all() %}
+```
+
+```php
+// Fetch provisional drafts created by the current user
+$assets = \craft\elements\Asset::find()
+    ->provisionalDrafts()
+    ->draftCreator(Craft::$app->user->identity)
+    ->all();
+```
+:::
+
+
 #### `relatedTo`
 
-このパラメーターがどのように機能するかの詳細については、[リレーション](relations.md)を参照してください。
+Narrows the query results to only assets that are related to certain other elements.
 
 
 
@@ -771,8 +870,8 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 ```twig
 {# Fetch all assets that are related to myCategory #}
 {% set assets = craft.assets()
-    .relatedTo(myCategory)
-    .all() %}
+  .relatedTo(myCategory)
+  .all() %}
 ```
 
 ```php
@@ -784,9 +883,36 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
+#### `savedDraftsOnly`
+
+Narrows the query results to only unpublished drafts which have been saved after initial creation.
+
+
+
+
+
+::: code
+```twig
+{# Fetch saved, unpublished draft assets #}
+{% set assets = {twig-function}
+  .draftOf(false)
+  .savedDraftsOnly()
+  .all() %}
+```
+
+```php
+// Fetch saved, unpublished draft assets
+$assets = \craft\elements\Asset::find()
+    ->draftOf(false)
+    ->savedDraftsOnly()
+    ->all();
+```
+:::
+
+
 #### `search`
 
-このパラメーターがどのように機能するかの詳細については、[検索](searching.md)を参照してください。
+Narrows the query results to only assets that match a search query.
 
 
 
@@ -801,8 +927,8 @@ See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explana
 
 {# Fetch all assets that match the search query #}
 {% set assets = craft.assets()
-    .search(searchQuery)
-    .all() %}
+  .search(searchQuery)
+  .all() %}
 ```
 
 ```php
@@ -819,11 +945,11 @@ $assets = \craft\elements\Asset::find()
 
 #### `site`
 
-デフォルトでは、現在のサイトが使用されます。
+Determines which site(s) the assets should be queried in.
 
 
 
-利用可能な値には、次のものが含まれます。
+The current site will be used by default.
 
 Possible values include:
 
@@ -836,7 +962,7 @@ Possible values include:
 | `'*'`                                                    | すべてのサイトから。                      |
 
 ::: tip
-複数のサイトを指定した場合、複数のサイトに属するエレメントは複数回返されます。 単一のエレメントだけを返したい場合、これと併せて [unique](#unique) を利用してください。 :::
+If multiple sites are specified, elements that belong to multiple sites will be returned multiple times. If you only want unique elements to be returned, use [unique](#unique) in conjunction with this.
 :::
 
 
@@ -845,8 +971,8 @@ Possible values include:
 ```twig
 {# Fetch assets from the Foo site #}
 {% set assets = craft.assets()
-    .site('foo')
-    .all() %}
+  .site('foo')
+  .all() %}
 ```
 
 ```php
@@ -860,11 +986,11 @@ $assets = \craft\elements\Asset::find()
 
 #### `siteId`
 
-デフォルトでは、現在のサイトが使用されます。
+Determines which site(s) the assets should be queried in, per the site’s ID.
 
 
 
-利用可能な値には、次のものが含まれます。
+The current site will be used by default.
 
 Possible values include:
 
@@ -881,8 +1007,8 @@ Possible values include:
 ```twig
 {# Fetch assets from the site with an ID of 1 #}
 {% set assets = craft.assets()
-    .siteId(1)
-    .all() %}
+  .siteId(1)
+  .all() %}
 ```
 
 ```php
@@ -894,17 +1020,51 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
-#### `size`
+#### `siteSettingsId`
 
-利用可能な値には、次のものが含まれます。
+Narrows the query results based on the assets’ IDs in the `elements_sites` table.
+
+
 
 Possible values include:
 
-| 値                                | 取得するアセット                         |
-| -------------------------------- | -------------------------------- |
-| `1000`                           | サイズが 1,000 bytes（1KB）。           |
-| `'< 1000000'`                 | サイズが 1,000,000 bytes（1MB）よりも小さい。 |
-| `['>= 1000', '< 1000000']` | サイズが 1KB から 1MB の間。              |
+| 値               | 取得するアセット                                   |
+| --------------- | ------------------------------------------ |
+| `1`             | with an `elements_sites` ID of 1.          |
+| `'not 1'`       | not with an `elements_sites` ID of 1.      |
+| `[1, 2]`        | with an `elements_sites` ID of 1 or 2.     |
+| `['not', 1, 2]` | not with an `elements_sites` ID of 1 or 2. |
+
+
+
+::: code
+```twig
+{# Fetch the asset by its ID in the elements_sites table #}
+{% set asset = craft.assets()
+  .siteSettingsId(1)
+  .one() %}
+```
+
+```php
+// Fetch the asset by its ID in the elements_sites table
+$asset = \craft\elements\Asset::find()
+    ->siteSettingsId(1)
+    ->one();
+```
+:::
+
+
+#### `size`
+
+Narrows the query results based on the assets’ file sizes (in bytes).
+
+Possible values include:
+
+| 値                                | 取得するアセット                                        |
+| -------------------------------- | ----------------------------------------------- |
+| `1000`                           | with a size of 1,000 bytes (1KB).               |
+| `'< 1000000'`                 | with a size of less than 1,000,000 bytes (1MB). |
+| `['>= 1000', '< 1000000']` | with a size between 1KB and 1MB.                |
 
 
 
@@ -912,8 +1072,8 @@ Possible values include:
 ```twig
 {# Fetch assets that are smaller than 1KB #}
 {% set assets = craft.assets()
-    .size('< 1000')
-    .all() %}
+  .size('< 1000')
+  .all() %}
 ```
 
 ```php
@@ -927,21 +1087,21 @@ $assets = \craft\elements\Asset::find()
 
 #### `title`
 
-利用可能な値には、次のものが含まれます。
+Narrows the query results based on the assets’ titles.
 
 
 
 Possible values include:
 
-| 値                           | 取得するアセット                     |
-| --------------------------- | ---------------------------- |
-| `'Foo'`                     | タイトルが `Foo`。                 |
-| `'Foo*'`                    | タイトルが `Foo` ではじまる。           |
-| `'*Foo'`                    | タイトルが `Foo` で終わる。            |
-| `'*Foo*'`                   | タイトルが `Foo` を含む。             |
-| `'not *Foo*'`               | タイトルが `Foo` を含まない。           |
-| `['*Foo*', '*Bar*']`        | タイトルが `Foo` または `Bar` を含む。   |
-| `['not', '*Foo*', '*Bar*']` | タイトルが `Foo` または `Bar` を含まない。 |
+| 値                           | 取得するアセット                                          |
+| --------------------------- | ------------------------------------------------- |
+| `'Foo'`                     | with a title of `Foo`.                            |
+| `'Foo*'`                    | with a title that begins with `Foo`.              |
+| `'*Foo'`                    | with a title that ends with `Foo`.                |
+| `'*Foo*'`                   | with a title that contains `Foo`.                 |
+| `'not *Foo*'`               | with a title that doesn’t contain `Foo`.          |
+| `['*Foo*', '*Bar*']`        | with a title that contains `Foo` or `Bar`.        |
+| `['not', '*Foo*', '*Bar*']` | with a title that doesn’t contain `Foo` or `Bar`. |
 
 
 
@@ -949,8 +1109,8 @@ Possible values include:
 ```twig
 {# Fetch assets with a title that contains "Foo" #}
 {% set assets = craft.assets()
-    .title('*Foo*')
-    .all() %}
+  .title('*Foo*')
+  .all() %}
 ```
 
 ```php
@@ -964,7 +1124,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `trashed`
 
-ソフトデリートされたアセットだけに、クエリの結果を絞り込みます。
+Narrows the query results to only assets that have been soft-deleted.
 
 
 
@@ -974,8 +1134,8 @@ $assets = \craft\elements\Asset::find()
 ```twig
 {# Fetch trashed assets #}
 {% set assets = craft.assets()
-    .trashed()
-    .all() %}
+  .trashed()
+  .all() %}
 ```
 
 ```php
@@ -989,7 +1149,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `uid`
 
-アセットの UID に基づいて、クエリの結果を絞り込みます。
+Narrows the query results based on the assets’ UIDs.
 
 
 
@@ -999,8 +1159,8 @@ $assets = \craft\elements\Asset::find()
 ```twig
 {# Fetch the asset by its UID #}
 {% set asset = craft.assets()
-    .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
-    .one() %}
+  .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+  .one() %}
 ```
 
 ```php
@@ -1014,7 +1174,7 @@ $asset = \craft\elements\Asset::find()
 
 #### `unique`
 
-一度に複数のサイトからエレメントを照会する際、「重複する」結果を望まない場合に使用します。
+Determines whether only elements with unique IDs should be returned by the query.
 
 
 
@@ -1026,9 +1186,9 @@ This should be used when querying elements from multiple sites at the same time,
 ```twig
 {# Fetch unique assets across all sites #}
 {% set assets = craft.assets()
-    .site('*')
-    .unique()
-    .all() %}
+  .site('*')
+  .unique()
+  .all() %}
 ```
 
 ```php
@@ -1043,14 +1203,14 @@ $assets = \craft\elements\Asset::find()
 
 #### `uploader`
 
-利用可能な値には、次のものが含まれます。
+Narrows the query results based on the user the assets were uploaded by, per the user’s IDs.
 
 Possible values include:
 
-| 値                                                            | 取得するアセット                        |
-| ------------------------------------------------------------ | ------------------------------- |
-| `1`                                                          | ID が 1 のユーザーによってアップロードされたもの。    |
-| [craft\elements\User](craft3:craft\elements\User) オブジェクト | オブジェクトで表されるユーザーによってアップロードされたもの。 |
+| 値                                                              | 取得するアセット                                        |
+| -------------------------------------------------------------- | ----------------------------------------------- |
+| `1`                                                            | uploaded by the user with an ID of 1.           |
+| a [craft\elements\User](craft3:craft\elements\User) object | uploaded by the user represented by the object. |
 
 
 
@@ -1058,8 +1218,8 @@ Possible values include:
 ```twig
 {# Fetch assets uploaded by the user with an ID of 1 #}
 {% set assets = craft.assets()
-    .uploader(1)
-    .all() %}
+  .uploader(1)
+  .all() %}
 ```
 
 ```php
@@ -1073,17 +1233,17 @@ $assets = \craft\elements\Asset::find()
 
 #### `volume`
 
-利用可能な値には、次のものが含まれます。
+Narrows the query results based on the volume the assets belong to.
 
 Possible values include:
 
-| 値                                                    | 取得するアセット                           |
-| ---------------------------------------------------- | ---------------------------------- |
-| `'foo'`                                              | ハンドルが `foo` のボリューム内。               |
-| `'not foo'`                                          | ハンドルが `foo` のボリューム内ではない。           |
-| `['foo', 'bar']`                                     | ハンドルが `foo` または `bar` のボリューム内。     |
-| `['not', 'foo', 'bar']`                              | ハンドルが `foo` または `bar` のボリューム内ではない。 |
-| [volume](craft3:craft\base\VolumeInterface) オブジェクト | オブジェクトで表されるボリューム内。                 |
+| 値                                                      | 取得するアセット                                         |
+| ------------------------------------------------------ | ------------------------------------------------ |
+| `'foo'`                                                | in a volume with a handle of `foo`.              |
+| `'not foo'`                                            | not in a volume with a handle of `foo`.          |
+| `['foo', 'bar']`                                       | in a volume with a handle of `foo` or `bar`.     |
+| `['not', 'foo', 'bar']`                                | not in a volume with a handle of `foo` or `bar`. |
+| a [volume](craft3:craft\base\VolumeInterface) object | in a volume represented by the object.           |
 
 
 
@@ -1091,8 +1251,8 @@ Possible values include:
 ```twig
 {# Fetch assets in the Foo volume #}
 {% set assets = craft.assets()
-    .volume('foo')
-    .all() %}
+  .volume('foo')
+  .all() %}
 ```
 
 ```php
@@ -1106,17 +1266,17 @@ $assets = \craft\elements\Asset::find()
 
 #### `volumeId`
 
-利用可能な値には、次のものが含まれます。
+Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
 
 Possible values include:
 
-| 値               | 取得するアセット                  |
-| --------------- | ------------------------- |
-| `1`             | ID が 1 のボリューム内。           |
-| `'not 1'`       | ID が 1 のボリューム内ではない。       |
-| `[1, 2]`        | ID が 1 または 2 のボリューム内。     |
-| `['not', 1, 2]` | ID が 1 または 2 のボリューム内ではない。 |
-| `':empty:'`     | ボリューム内にまだ何も保管されていない。      |
+| 値               | 取得するアセット                                 |
+| --------------- | ---------------------------------------- |
+| `1`             | in a volume with an ID of 1.             |
+| `'not 1'`       | not in a volume with an ID of 1.         |
+| `[1, 2]`        | in a volume with an ID of 1 or 2.        |
+| `['not', 1, 2]` | not in a volume with an ID of 1 or 2.    |
+| `':empty:'`     | that haven’t been stored in a volume yet |
 
 
 
@@ -1124,8 +1284,8 @@ Possible values include:
 ```twig
 {# Fetch assets in the volume with an ID of 1 #}
 {% set assets = craft.assets()
-    .volumeId(1)
-    .all() %}
+  .volumeId(1)
+  .all() %}
 ```
 
 ```php
@@ -1139,15 +1299,15 @@ $assets = \craft\elements\Asset::find()
 
 #### `width`
 
-利用可能な値には、次のものが含まれます。
+Narrows the query results based on the assets’ image widths.
 
 Possible values include:
 
-| 値                             | 取得するアセット               |
-| ----------------------------- | ---------------------- |
-| `100`                         | 幅 100px。               |
-| `'>= 100'`                 | 少なくとも、幅 100px。         |
-| `['>= 100', '<= 1000']` | 幅 100px から 1,000px の間。 |
+| Value                         | Fetches assets…                     |
+| ----------------------------- | ----------------------------------- |
+| `100`                         | with a width of 100.                |
+| `'>= 100'`                 | with a width of at least 100.       |
+| `['>= 100', '<= 1000']` | with a width between 100 and 1,000. |
 
 
 
@@ -1155,9 +1315,9 @@ Possible values include:
 ```twig
 {# Fetch XL images #}
 {% set assets = craft.assets()
-    .kind('image')
-    .width('>= 1000')
-    .all() %}
+  .kind('image')
+  .width('>= 1000')
+  .all() %}
 ```
 
 ```php
@@ -1172,7 +1332,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `with`
 
-このパラメーターがどのように機能するかの詳細については、[エレメントの Eager-Loading](dev/eager-loading-elements.md) を参照してください。
+Causes the query to return matching assets eager-loaded with related elements.
 
 
 
@@ -1184,8 +1344,8 @@ See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-ele
 ```twig
 {# Fetch assets eager-loaded with the "Related" field’s relations #}
 {% set assets = craft.assets()
-    .with(['related'])
-    .all() %}
+  .with(['related'])
+  .all() %}
 ```
 
 ```php
@@ -1199,13 +1359,13 @@ $assets = \craft\elements\Asset::find()
 
 #### `withTransforms`
 
-トランスフォームがすでに生成されている場合、一度に複数の変換された画像を表示する際のパフォーマンスが向上します。
+Causes the query to return matching assets eager-loaded with image transform indexes.
 
-トランスフォームは、ハンドルや `width`、および / または、`height` プロパティを含むオブジェクトとして指定できます。
+This can improve performance when displaying several image transforms at once, if the transforms have already been generated.
 
 Transforms can be specified as their handle or an object that contains `width` and/or `height` properties.
 
-`srcset` スタイルのサイズに遭遇すると、トランスフォーム寸法の結果を決定する際、先行する通常のトランスフォーム定義が参照として使用されます。
+You can include `srcset`-style sizes (e.g. `100w` or `2x`) following a normal transform definition, for example:
 
 ::: code
 
@@ -1227,9 +1387,9 @@ When a `srcset`-style size is encountered, the preceding normal transform defini
 ```twig
 {# Fetch assets with the 'thumbnail' and 'hiResThumbnail' transform data preloaded #}
 {% set assets = craft.assets()
-    .kind('image')
-    .withTransforms(['thumbnail', 'hiResThumbnail'])
-    .all() %}
+  .kind('image')
+  .withTransforms(['thumbnail', 'hiResThumbnail'])
+  .all() %}
 ```
 
 ```php
