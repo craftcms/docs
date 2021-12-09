@@ -342,7 +342,8 @@
 
 <script>
 import { VueAutosuggest } from "vue-autosuggest";
-import EventData from "../../../3.x/event-data/events.json";
+import CraftEventData from "../../../3.x/event-data/events.json";
+import CommerceEventData from "../../../commerce/3.x/event-data/events.json";
 import copy from "copy-to-clipboard";
 import CheckMark from "../global-components/CheckMark.vue";
 
@@ -351,11 +352,17 @@ export default {
     VueAutosuggest,
     CheckMark
   },
+  props: {
+    source: {
+      type: String,
+      default: "craft"
+    }
+  },
   data() {
     return {
       searchText: "",
       currentEvent: "",
-      eventData: EventData,
+      eventData: this.for === "craft" ? CraftEventData : CommerceEventData,
       filterSelections: {},
       codeCopied: false,
       prism: null,
