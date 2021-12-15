@@ -2,96 +2,95 @@
 
 [Twig に付随する](https://twig.symfony.com/doc/filters/index.html)テンプレートフィルタに加えて、Craft がいくつか独自のものを提供します。
 
-| フォーマット                                                                             | 実例                                                                                      |
-| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| [abs](https://twig.symfony.com/doc/2.x/filters/abs.html)                           | 9/26/2018                                                                               |
-| [append](#append)                                                                  | Sep 26, 2018                                                                            |
-| [ucwords](#ascii)                                                                  | September 26, 2018                                                                      |
-| [atom](#atom)                                                                      | Wednesday, September 26, 2018                                                           |
-| [ucwords](#attr)                                                                   | HTML タグの属性を変更します。                                                                       |
-| [batch](https://twig.symfony.com/doc/2.x/filters/batch.html)                       | Merges an array with another array.                                                     |
-| [camel](#camel)                                                                    | 「camelCase」でフォーマットされた文字列を返します。                                                          |
-| [capitalize](https://twig.symfony.com/doc/2.x/filters/capitalize.html)             | 文字列の最初の文字を大文字にします。                                                                      |
-| [column](#column)                                                                  | 渡された配列内にある値だけを含む配列を返します。                                                                |
-| [contains](#contains)                                                              | 指定されたキーと値のペアを持つネストされたアイテムを配列が含むかどうかを返します。                                               |
-| [convert_encoding](https://twig.symfony.com/doc/2.x/filters/convert_encoding.html) | 文字列をあるエンコーディングから別のエンコーディングに変換します。                                                       |
-| [currency](#currency)                                                              | 数値を通貨としてフォーマットします。                                                                      |
-| [date](#date)                                                                      | 経由で、人が読めるタイムスタンプとして日付をフォーマットします。                                                        |
-| [date_modify](https://twig.symfony.com/doc/2.x/filters/date_modify.html)           | 日付を変更します。                                                                               |
-| [datetime](#datetime)                                                              | 日付と時刻をフォーマットします。                                                                        |
-| [default](https://twig.symfony.com/doc/2.x/filters/default.html)                   | 値、または、空の場合はデフォルト値を返します。                                                                 |
-| [diff](#diff)                                                                      | Reverses an array or string.                                                            |
-| [duration](#duration)                                                              | `DateInterval` オブジェクトを返します。                                                             |
-| [encenc](#encenc)                                                                  | 文字列を暗号化し、base64 エンコードします。                                                               |
-| [escape](https://twig.symfony.com/doc/2.x/filters/escape.html)                     | Extracts a slice of an array or string.                                                 |
-| [explodeClass](#explodeclass)                                                      | `class` 属性値をクラス名の配列に変換します。                                                              |
-| [explodeStyle](#explodestyle)                                                      | `style` 属性値をプロパティ名と値のペアの配列に変換します。                                                       |
-| [filesize](#filesize)                                                              | バイト数を他の何かにフォーマットします。                                                                    |
-| [filter](#filter)                                                                  | 配列に <craft3:craft\helpers\ArrayHelper::filterByValue()> を実行します。                       |
-| [first](https://twig.symfony.com/doc/2.x/filters/first.html)                       | Splits a string by the given delimiter and returns a list of string.                    |
-| [format](https://twig.symfony.com/doc/2.x/filters/format.html)                     | Converts a value to uppercase.                                                          |
-| [group](#group)                                                                    | 共通のプロパティに基づいて、配列の項目をグループ化します。                                                           |
-| [hash](#hash)                                                                      | 不正に変更されるべきではないフォームのデータを安全に渡すために、メッセージ認証コード（HMAC）の鍵付ハッシュを指定された文字列の先頭に追加します。              |
-| [httpdate](#httpdate)                                                              | 日付を RSS データフォーマットに変換します。                                                                |
-| [id](#id)                                                                          | エレメント ID を英数字、アンダースコア、ダッシュのみに正規化します。                                                    |
-| [indexOf](#indexof)                                                                | 配列内の指定された値のインデックス、または、別の文字列内の渡された文字列の位置を返します。                                           |
-| [index](#index)                                                                    | 配列内のアイテムをインデックス化します。                                                                    |
-| [intersect](#intersect)                                                            | 2つの配列の交差するアイテムを返します。                                                                    |
-| [join](https://twig.symfony.com/doc/2.x/filters/join.html)                         | 複数の文字列を1つに連結します。                                                                        |
-| [json_decode](#json_decode)                                                        | 値を JSON デコードします。                                                                        |
-| [json_encode](#json_encode)                                                        | 値を JSON エンコードします。                                                                       |
-| [kebab](#kebab)                                                                    | 文字列を kebab-case にフォーマットします。                                                             |
-| [keys](https://twig.symfony.com/doc/2.x/filters/keys.html)                         | 配列のキーを返します。                                                                             |
-| [last](https://twig.symfony.com/doc/2.x/filters/last.html)                         | 文字列/配列の最後の文字/アイテムを返します。                                                                 |
-| [lcfirst](#lcfirst)                                                                | 文字列の最初の文字を小文字にします。                                                                      |
-| [length](https://twig.symfony.com/doc/2.x/filters/length.html)                     | 文字列や配列の長さを返します。                                                                         |
-| [literal](#literal)                                                                | エレメントクエリのパラメータで利用するための信頼できない文字列をエスケープします。                                               |
-| [lower](https://twig.symfony.com/doc/2.x/filters/lower.html)                       | 文字列を小文字にします。                                                                            |
-| [map](https://twig.symfony.com/doc/2.x/filters/map.html)                           | 配列内のアイテムにアローファンクションを適用します。                                                              |
-| [markdown](#markdown-or-md)                                                        | 文字列を Markdown として処理します。                                                                 |
-| [merge](#merge)                                                                    | 配列を別の配列とマージします。                                                                         |
-| [multisort](#multisort)                                                            | サブ配列内の1つ以上のキーで配列をソートします。                                                                |
-| [namespace](#namespace)                                                            | CSS セレクタだけでなく、入力項目の name や HTML 属性に名前空間を割り当てます。                                         |
-| [namespaceInputId](#namespaceinputid)                                              | エレメント ID に名前空間を割り当てます。                                                                  |
-| [namespaceInputName](#namespaceinputname)                                          | 入力項目の name に名前空間を割り当てます。                                                                |
-| [nl2br](https://twig.symfony.com/doc/2.x/filters/nl2br.html)                       | Replaces newlines with `<br>` tags.                                               |
-| [number](#number)                                                                  | 数値をフォーマットします。                                                                           |
-| [number_format](https://twig.symfony.com/doc/2.x/filters/number_format.html)       | 数値をフォーマットします。                                                                           |
-| [parseRefs](#parserefs)                                                            | 文字列の一部を他のものに置き換えます。                                                                     |
-| [pascal](#pascal)                                                                  | 文字列を PascalCase にフォーマットします。                                                             |
-| [percentage](#percentage)                                                          | パーセンテージをフォーマットします。                                                                      |
-| [prepend](#prepend)                                                                | 別の要素の先頭に HTML を追加します。                                                                   |
-| [purify](#purify)                                                                  | HTML コードに HTML Purifier を実行します。                                                         |
-| [push](#push)                                                                      | 1つ以上のアイテムを配列の最後に追加します。                                                                  |
-| [raw](https://twig.symfony.com/doc/2.x/filters/raw.html)                           | 現在のエスケープ方針にとって安全な値であると評価します。                                                            |
-| [reduce](https://twig.symfony.com/doc/2.x/filters/reduce.html)                     | シーケンスやマッピングを反復的に単一の値に減らします。                                                             |
-| [removeClass](#removeclass)                                                        | Removes a class (or classes) from the given HTML tag.                                   |
-| [replace](#replace)                                                                | Replaces parts of a string with other things.                                           |
-| [reverse](https://twig.symfony.com/doc/2.x/filters/reverse.html)                   | Reverses a string or array.                                                             |
-| [round](https://twig.symfony.com/doc/2.x/filters/round.html)                       | Rounds a number.                                                                        |
-| [rss](#rss)                                                                        | Converts a date to RSS date format.                                                     |
-| [slice](https://twig.symfony.com/doc/2.x/filters/slice.html)                       | Extracts a slice of a string or array.                                                  |
-| [slug](https://twig.symfony.com/doc/2.x/filters/slug.html)                         | Transforms a given string into another string that only includes safe ASCII characters. |
-| [snake](#snake)                                                                    | Formats a string into “snake_case”.                                                     |
-| [sort](https://twig.symfony.com/doc/2.x/filters/sort.html)                         | Sorts an array.                                                                         |
-| [spaceless](https://twig.symfony.com/doc/2.x/filters/spaceless.html)               | Removes whitespace between HTML tags.                                                   |
-| [split](https://twig.symfony.com/doc/2.x/filters/split.html)                       | Splits a string by a delimiter.                                                         |
-| [striptags](https://twig.symfony.com/doc/2.x/filters/striptags.html)               | Strips SGML/XML tags from a string.                                                     |
-| [time](#time)                                                                      | Formats a time.                                                                         |
-| [timestamp](#timestamp)                                                            | Formats a human-readable timestamp.                                                     |
-| [title](https://twig.symfony.com/doc/2.x/filters/title.html)                       | Formats a string into “Title Case”.                                                     |
-| [translate](#translate-or-t)                                                       | Translates a message.                                                                   |
-| [truncate](#truncate)                                                              | Truncates a string to a given length, while ensuring that it does not split words.      |
-| [trim](https://twig.symfony.com/doc/2.x/filters/trim.html)                         | Strips whitespace from the beginning and end of a string.                               |
-| [ucfirst](#ucfirst)                                                                | Capitalizes the first character of a string.                                            |
-| [unique](#unique)                                                                  | Removes duplicate values from an array.                                                 |
-| [unshift](#unshift)                                                                | Prepends one or more items to the beginning of an array.                                |
-| [upper](https://twig.symfony.com/doc/2.x/filters/upper.html)                       | Formats a string into “UPPER CASE”.                                                     |
-| [url_encode](https://twig.symfony.com/doc/2.x/filters/url_encode.html)             | Percent-encodes a string as a URL segment or an array as a query string.                |
-| [values](#values)                                                                  | Returns all the values in an array, resetting its keys.                                 |
-| [where](#where)                                                                    | Filters an array by key/value pairs.                                                    |
-| [withoutKey](#withoutkey)                                                          | Returns an array without the specified key.                                             |
-| [without](#without)                                                                | Returns an array without the specified element(s).                                      |
+| フォーマット                                                                             | 実例                                                                                 |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [abs](https://twig.symfony.com/doc/2.x/filters/abs.html)                           | 9/26/2018                                                                          |
+| [append](#append)                                                                  | Sep 26, 2018                                                                       |
+| [ucwords](#ascii)                                                                  | September 26, 2018                                                                 |
+| [atom](#atom)                                                                      | Wednesday, September 26, 2018                                                      |
+| [ucwords](#attr)                                                                   | HTML タグの属性を変更します。                                                                  |
+| [batch](https://twig.symfony.com/doc/2.x/filters/batch.html)                       | Merges an array with another array.                                                |
+| [camel](#camel)                                                                    | 「camelCase」でフォーマットされた文字列を返します。                                                     |
+| [capitalize](https://twig.symfony.com/doc/2.x/filters/capitalize.html)             | 文字列の最初の文字を大文字にします。                                                                 |
+| [column](#column)                                                                  | 渡された配列内にある値だけを含む配列を返します。                                                           |
+| [contains](#contains)                                                              | 指定されたキーと値のペアを持つネストされたアイテムを配列が含むかどうかを返します。                                          |
+| [convert_encoding](https://twig.symfony.com/doc/2.x/filters/convert_encoding.html) | 文字列をあるエンコーディングから別のエンコーディングに変換します。                                                  |
+| [currency](#currency)                                                              | 数値を通貨としてフォーマットします。                                                                 |
+| [date](#date)                                                                      | 経由で、人が読めるタイムスタンプとして日付をフォーマットします。                                                   |
+| [date_modify](https://twig.symfony.com/doc/2.x/filters/date_modify.html)           | 日付を変更します。                                                                          |
+| [datetime](#datetime)                                                              | 日付と時刻をフォーマットします。                                                                   |
+| [default](https://twig.symfony.com/doc/2.x/filters/default.html)                   | 値、または、空の場合はデフォルト値を返します。                                                            |
+| [diff](#diff)                                                                      | Reverses an array or string.                                                       |
+| [duration](#duration)                                                              | `DateInterval` オブジェクトを返します。                                                        |
+| [encenc](#encenc)                                                                  | 文字列を暗号化し、base64 エンコードします。                                                          |
+| [escape](https://twig.symfony.com/doc/2.x/filters/escape.html)                     | Extracts a slice of an array or string.                                            |
+| [explodeClass](#explodeclass)                                                      | `class` 属性値をクラス名の配列に変換します。                                                         |
+| [explodeStyle](#explodestyle)                                                      | `style` 属性値をプロパティ名と値のペアの配列に変換します。                                                  |
+| [filesize](#filesize)                                                              | バイト数を他の何かにフォーマットします。                                                               |
+| [filter](#filter)                                                                  | 配列に <craft3:craft\helpers\ArrayHelper::filterByValue()> を実行します。                  |
+| [first](https://twig.symfony.com/doc/2.x/filters/first.html)                       | Splits a string by the given delimiter and returns a list of string.               |
+| [format](https://twig.symfony.com/doc/2.x/filters/format.html)                     | Converts a value to uppercase.                                                     |
+| [group](#group)                                                                    | 共通のプロパティに基づいて、配列の項目をグループ化します。                                                      |
+| [hash](#hash)                                                                      | 不正に変更されるべきではないフォームのデータを安全に渡すために、メッセージ認証コード（HMAC）の鍵付ハッシュを指定された文字列の先頭に追加します。         |
+| [httpdate](#httpdate)                                                              | 日付を RSS データフォーマットに変換します。                                                           |
+| [id](#id)                                                                          | エレメント ID を英数字、アンダースコア、ダッシュのみに正規化します。                                               |
+| [indexOf](#indexof)                                                                | 配列内の指定された値のインデックス、または、別の文字列内の渡された文字列の位置を返します。                                      |
+| [index](#index)                                                                    | 配列内のアイテムをインデックス化します。                                                               |
+| [intersect](#intersect)                                                            | 2つの配列の交差するアイテムを返します。                                                               |
+| [join](https://twig.symfony.com/doc/2.x/filters/join.html)                         | 複数の文字列を1つに連結します。                                                                   |
+| [json_decode](#json_decode)                                                        | 値を JSON デコードします。                                                                   |
+| [json_encode](#json_encode)                                                        | 値を JSON エンコードします。                                                                  |
+| [kebab](#kebab)                                                                    | 文字列を kebab-case にフォーマットします。                                                        |
+| [keys](https://twig.symfony.com/doc/2.x/filters/keys.html)                         | 配列のキーを返します。                                                                        |
+| [last](https://twig.symfony.com/doc/2.x/filters/last.html)                         | 文字列/配列の最後の文字/アイテムを返します。                                                            |
+| [lcfirst](#lcfirst)                                                                | 文字列の最初の文字を小文字にします。                                                                 |
+| [length](https://twig.symfony.com/doc/2.x/filters/length.html)                     | 文字列や配列の長さを返します。                                                                    |
+| [literal](#literal)                                                                | エレメントクエリのパラメータで利用するための信頼できない文字列をエスケープします。                                          |
+| [lower](https://twig.symfony.com/doc/2.x/filters/lower.html)                       | 文字列を小文字にします。                                                                       |
+| [map](https://twig.symfony.com/doc/2.x/filters/map.html)                           | 配列内のアイテムにアローファンクションを適用します。                                                         |
+| [markdown](#markdown-or-md)                                                        | 文字列を Markdown として処理します。                                                            |
+| [merge](#merge)                                                                    | 配列を別の配列とマージします。                                                                    |
+| [multisort](#multisort)                                                            | サブ配列内の1つ以上のキーで配列をソートします。                                                           |
+| [namespace](#namespace)                                                            | CSS セレクタだけでなく、入力項目の name や HTML 属性に名前空間を割り当てます。                                    |
+| [namespaceInputId](#namespaceinputid)                                              | エレメント ID に名前空間を割り当てます。                                                             |
+| [namespaceInputName](#namespaceinputname)                                          | 入力項目の name に名前空間を割り当てます。                                                           |
+| [nl2br](https://twig.symfony.com/doc/2.x/filters/nl2br.html)                       | Replaces newlines with `<br>` tags.                                          |
+| [number](#number)                                                                  | 数値をフォーマットします。                                                                      |
+| [number_format](https://twig.symfony.com/doc/2.x/filters/number_format.html)       | 数値をフォーマットします。                                                                      |
+| [parseRefs](#parserefs)                                                            | 文字列の一部を他のものに置き換えます。                                                                |
+| [pascal](#pascal)                                                                  | 文字列を PascalCase にフォーマットします。                                                        |
+| [percentage](#percentage)                                                          | パーセンテージをフォーマットします。                                                                 |
+| [prepend](#prepend)                                                                | 別の要素の先頭に HTML を追加します。                                                              |
+| [purify](#purify)                                                                  | HTML コードに HTML Purifier を実行します。                                                    |
+| [push](#push)                                                                      | 1つ以上のアイテムを配列の最後に追加します。                                                             |
+| [raw](https://twig.symfony.com/doc/2.x/filters/raw.html)                           | 現在のエスケープ方針にとって安全な値であると評価します。                                                       |
+| [reduce](https://twig.symfony.com/doc/2.x/filters/reduce.html)                     | シーケンスやマッピングを反復的に単一の値に減らします。                                                        |
+| [removeClass](#removeclass)                                                        | Removes a class (or classes) from the given HTML tag.                              |
+| [replace](#replace)                                                                | Replaces parts of a string with other things.                                      |
+| [reverse](https://twig.symfony.com/doc/2.x/filters/reverse.html)                   | Reverses a string or array.                                                        |
+| [round](https://twig.symfony.com/doc/2.x/filters/round.html)                       | Rounds a number.                                                                   |
+| [rss](#rss)                                                                        | Converts a date to RSS date format.                                                |
+| [slice](https://twig.symfony.com/doc/2.x/filters/slice.html)                       | Extracts a slice of a string or array.                                             |
+| [snake](#snake)                                                                    | Formats a string into “snake_case”.                                                |
+| [sort](https://twig.symfony.com/doc/2.x/filters/sort.html)                         | Sorts an array.                                                                    |
+| [spaceless](https://twig.symfony.com/doc/2.x/filters/spaceless.html)               | Removes whitespace between HTML tags.                                              |
+| [split](https://twig.symfony.com/doc/2.x/filters/split.html)                       | Splits a string by a delimiter.                                                    |
+| [striptags](https://twig.symfony.com/doc/2.x/filters/striptags.html)               | Strips SGML/XML tags from a string.                                                |
+| [time](#time)                                                                      | Formats a time.                                                                    |
+| [timestamp](#timestamp)                                                            | Formats a human-readable timestamp.                                                |
+| [title](https://twig.symfony.com/doc/2.x/filters/title.html)                       | Formats a string into “Title Case”.                                                |
+| [translate](#translate-or-t)                                                       | Translates a message.                                                              |
+| [truncate](#truncate)                                                              | Truncates a string to a given length, while ensuring that it does not split words. |
+| [trim](https://twig.symfony.com/doc/2.x/filters/trim.html)                         | Strips whitespace from the beginning and end of a string.                          |
+| [ucfirst](#ucfirst)                                                                | Capitalizes the first character of a string.                                       |
+| [unique](#unique)                                                                  | Removes duplicate values from an array.                                            |
+| [unshift](#unshift)                                                                | Prepends one or more items to the beginning of an array.                           |
+| [upper](https://twig.symfony.com/doc/2.x/filters/upper.html)                       | Formats a string into “UPPER CASE”.                                                |
+| [url_encode](https://twig.symfony.com/doc/2.x/filters/url_encode.html)             | Percent-encodes a string as a URL segment or an array as a query string.           |
+| [values](#values)                                                                  | Returns all the values in an array, resetting its keys.                            |
+| [where](#where)                                                                    | Filters an array by key/value pairs.                                               |
+| [withoutKey](#withoutkey)                                                          | Returns an array without the specified key.                                        |
+| [without](#without)                                                                | Returns an array without the specified element(s).                                 |
 
 ## `append`
 
