@@ -82,7 +82,7 @@ Craft はアセットに様々な画像変形を行う手段を提供します�
 
 Craft は画像を変更するための組み込みのイメージエディタを提供します。 画像を切り抜いたり、まっすぐにしたり、回転させたり、反転させたり、さらに焦点を選択することもできます。
 
-To launch the Image Editor, double-click an image (either on the Assets page or from an [Assets field](assets-fields.md)) and press **Edit** in the top-right of the image preview area in the HUD. Alternatively, you can select an asset on the [Assets page](#assets-page) and choose **Edit image** from the task menu (gear icon).
+To launch the Image Editor, double-click an image (either on the Assets page or from an [Assets field](assets-fields.md)) and press **Edit** in the top-right of the image preview area in the HUD. Alternatively, you can select an asset on the [Assets page](#assets-page) and choose **Edit image** from the task menu (<icon kind="settings" />).
 
 ### 焦点
 
