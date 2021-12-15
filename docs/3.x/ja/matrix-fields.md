@@ -12,27 +12,35 @@
 
 ## フィールド
 
-新しいエントリでは、行列フィールドにはボタンのグループが表示されます。 フィールド設定で作成したブロックタイプごとに1つのボタンが表示されます。
+On a fresh entry, Matrix fields will just show a group of buttons – one for each of the Block Types you created in the field’s settings:
 
-それらのボタンの1つをクリックすると、新しいブロックが作成されます。 ブロックタイプの名前はブロックのタイトルバーに表示され、それぞれのブロックタイプのフィールドにはブロックの本体が存在しているでしょう。
+![An empty Matrix field’s block types](./images/matrix-field-blocks.png)
 
-あなたは好きなだけ（または、最大ブロック数の設定で許可されている範囲内で）、行列フィールドへブロックを追加できます。
+When you click on one of those buttons, a new block will be created. The Block Type’s name will be shown in the block’s title bar, and each of the Block Type’s fields will be present within the body of the block:
 
-各ブロックは設定メニューを持ち、そのブロックに対して追加でできることを開示します。
+![A newly-added Quote block](./images/matrix-field-new-block.png)
 
-複数のブロックが選択されている場合、選択されたすべてのブロックに対して「折りたたむ / 展開する」「無効 / 有効」および「削除」オプションが適用されます。
+You can add as many blocks to your Matrix field as you’d like—or at least as many as the field’s Min Blocks and Max Blocks settings allow.
 
-メニューオプションの「折りたたむ」 をクリックするか、ブロックのタイトルバーをダブルクリックすることで、行列ブロックを折りたたむことができます。 ブロックが折りたたまれている場合、タイトルバーはコンテンツのプレビューを表示するため、それがどんなブロックかを識別できます。
+Each block has a settings menu that reveals additional things you can do with the block:
 
-ブロックは、そのブロックのタイトルバーの最後にある「移動」アイコンをドラックして並び替えることもできます。 複数のブロックが選択されている場合、選択されたすべてのブロックが一緒に移動します。
+![A Matrix block’s action menu](./images/matrix-block-action-menu.png)
+
+If multiple blocks are selected, the Collapse/Expand, Disable/Enable, and Delete options will apply to each of those selected.
+
+You can collapse Matrix blocks by choosing the **Collapse** menu option or by double-clicking on a block’s title bar. When a block is collapsed, its title bar will show a preview of its content so you can still identify which block it is.
+
+Blocks can also be reordered by dragging the “Move” icon (<icon kind="move" />) at the end of the block’s title bar. If multiple blocks are selected, all the selected blocks will be going along for the ride.
+
+You can quickly select _all_ blocks by selecting one and pressing <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>A</kbd>, or selecting a range of blocks starting with the first and then <kbd>Shift</kbd>-clicking the last.
 
 ## テンプレート記法
 
 ### 行列フィールドによるエレメントの照会
 
-行列フィールドを持つ[エレメントを照会](element-queries.md)する場合、フィールドのハンドルにちなんで名付けられたクエリパラメータを使用して、行列フィールドのデータに基づいた結果をフィルタできます。
+When [querying for elements](element-queries.md) that have a Matrix field, you can filter the results based on the Matrix field data using a query param named after your field’s handle.
 
-利用可能な値には、次のものが含まれます。
+Possible values include:
 
 | 値                                                                      | 取得するエレメント                                       |
 | ---------------------------------------------------------------------- | ----------------------------------------------- |
@@ -43,7 +51,7 @@
 | a [MatrixBlock](craft3:craft\elements\MatrixBlock) object            | that have the Matrix block.                     |
 | an array of [MatrixBlock](craft3:craft\elements\MatrixBlock) objects | that have the Matrix blocks.                    |
 
-テンプレート内で行列フィールドのエレメントを取得する場合、行列フィールドのハンドルを利用して、そのブロックにアクセスできます。
+::: code
 ```twig
 {# Fetch entries with a Matrix block #}
 {% set entries = craft.entries()
