@@ -2,6 +2,12 @@
 
 Craft Commerce provides a multitude of events for extending its functionality. Modules and plugins can [register event listeners](https://craftcms.com/knowledge-base/custom-module-events), typically in their `init()` methods, to modify Commerce’s behavior.
 
+## Event Code Generator
+
+Select an event for details and a code snippet. See Craft’s [Events](../../../3.x/extend/events.md) page for Craft and Yii events.
+
+<event-browser source="commerce" />
+
 ## Variant Events
 
 ### `beforeCaptureVariantSnapshot`
