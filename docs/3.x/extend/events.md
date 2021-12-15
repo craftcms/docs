@@ -4,7 +4,7 @@ Craft has all kinds of events you can use to customize how things work. See [Usi
 
 ## Event Code Generator
 
-Select an event for more detail and code snippet.
+Select an event for more detail and a code snippet.
 
 <event-browser source="craft" />
 
