@@ -14,7 +14,7 @@ Craft のコントロールパネルはプラグインストアを特徴とし�
 If you’ve disallowed admin changes in production, you will only be able to install plugins from the control panel in your local development environment.
 :::
 
-プラグインストアにアクセスするためには、Craft のコントロールパネルのナビゲーションにある「プラグインストア」をクリックします。 そこから、様々なプラグインカテゴリや選別されたリストをブラウズして、新しいプラグインを発見できます。
+To access the Plugin Store from the control panel, click **Plugin Store** from the main navigation. そこから、様々なプラグインカテゴリや選別されたリストをブラウズして、新しいプラグインを発見できます。
 
 ![Craft のプラグインストア](./images/plugin-store.png)
 
@@ -32,7 +32,7 @@ Craft が開発ドメイン上で実行されている場合、「試用」ボ�
 
 ## 商用プラグインの購入
 
-商用プラグインを試して購入する準備ができている場合は、 プラグインストアに戻り、ヘッダーにあるカートアイコンをクリックしてください。 カートモーダルの「有効なトライアル」セクションに、プラグインの一覧を確認できます。 「カートに追加」ボタンをクリックして、カートにプラグインを追加し、チェックアウトを続行します。
+If you’ve tried a commercial plugin and are ready to purchase a license, return to the Plugin Store and choose the cart icon (<icon kind="cart" />) in the header area. カートモーダルの「有効なトライアル」セクションに、プラグインの一覧を確認できます。 「カートに追加」ボタンをクリックして、カートにプラグインを追加し、チェックアウトを続行します。
 
 [Craft ID](https://id.craftcms.com/) アカウントの「Licenses > Plugins」から、すべてのプラグインライセンスを管理できます。
 
