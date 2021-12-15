@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-12-15
+### Added
+- Added Event Code Generator to the Craft Commerce docs “Events” page.
+
 ## 2021-12-08
 ### Added
 - Added “Events” page to the Craft CMS docs Extending Craft section.
