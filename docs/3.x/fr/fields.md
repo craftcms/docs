@@ -75,7 +75,7 @@ Everything in Craft that has content associated with it will provide a field lay
 
 When editing a field layout, you will find a “Content” tab at the top, and a list of all of your site’s fields, grouped into their field groups, at the bottom. Selecting a field is as simple as dragging it from the bottom area to the top, positioning it wherever you want alongside the other selected fields. You can also drag selected fields around to change their order.
 
-Once a field is selected, a gear icon will appear beside it. Clicking on it will reveal a context menu with two options:
+Once a field is selected, a gear icon (<icon kind="settings" />) will appear beside it. Pressing it will reveal a context menu with two options:
 
 - Make required
 - Remove
