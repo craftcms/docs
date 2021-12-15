@@ -12,19 +12,27 @@ Matrix fields have the following settings:
 
 ## The Field
 
-On a fresh entry, Matrix fields will just show a group of buttons – one for each of the Block Types you created in the field’s settings.
+On a fresh entry, Matrix fields will just show a group of buttons – one for each of the Block Types you created in the field’s settings:
 
-When you click on one of those buttons, a new block will be created. The Block Type’s name will be shown in the block’s title bar, and each of the Block Type’s fields will be present within the body of the block.
+![An empty Matrix field’s block types](./images/matrix-field-blocks.png)
+
+When you click on one of those buttons, a new block will be created. The Block Type’s name will be shown in the block’s title bar, and each of the Block Type’s fields will be present within the body of the block:
+
+![A newly-added Quote block](./images/matrix-field-new-block.png)
 
 You can add as many blocks to your Matrix field as you’d like—or at least as many as the field’s Min Blocks and Max Blocks settings allow.
 
-Each block has a settings menu that reveals additional things you can do with the block.
+Each block has a settings menu that reveals additional things you can do with the block:
+
+![A Matrix block’s action menu](./images/matrix-block-action-menu.png)
 
 If multiple blocks are selected, the Collapse/Expand, Disable/Enable, and Delete options will apply to each of those selected.
 
 You can collapse Matrix blocks by choosing the **Collapse** menu option or by double-clicking on a block’s title bar. When a block is collapsed, its title bar will show a preview of its content so you can still identify which block it is.
 
-Blocks can also be reordered by dragging the “Move” icon at the end of the block’s title bar. If multiple blocks are selected, all the selected blocks will be going along for the ride.
+Blocks can also be reordered by dragging the “Move” icon (<icon kind="move" />) at the end of the block’s title bar. If multiple blocks are selected, all the selected blocks will be going along for the ride.
+
+You can quickly select _all_ blocks by selecting one and pressing <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>A</kbd>, or selecting a range of blocks starting with the first and then <kbd>Shift</kbd>-clicking the last.
 
 ## Development
 
