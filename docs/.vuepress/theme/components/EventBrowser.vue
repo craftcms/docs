@@ -370,6 +370,12 @@ export default {
     };
   },
   mounted() {
+    if (typeof window !== "undefined") {
+      // avoid having Prism initialize itself and automatically re-style existing code blocks
+      window.Prism = window.Prism || {};
+      window.Prism.manual = true;
+    }
+
     import("prismjs").then(module => {
       import("prismjs/components/prism-php");
       import("prismjs/components/prism-markup-templating");
