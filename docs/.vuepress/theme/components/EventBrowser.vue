@@ -362,7 +362,7 @@ export default {
     return {
       searchText: "",
       currentEvent: "",
-      eventData: this.for === "craft" ? CraftEventData : CommerceEventData,
+      eventData: this.source === "craft" ? CraftEventData : CommerceEventData,
       filterSelections: {},
       codeCopied: false,
       prism: null,
