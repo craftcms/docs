@@ -324,8 +324,13 @@
         "desc": "The event that is triggered when registering the available sources for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -366,8 +371,13 @@
         "desc": "The event that is triggered when registering all of the field layouts associated with elements from a given source.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -408,8 +418,13 @@
         "desc": "The event that is triggered when registering the available actions for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -450,8 +465,13 @@
         "desc": "The event that is triggered when registering the available exporters for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -492,8 +512,13 @@
         "desc": "The event that is triggered when registering the searchable attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -534,8 +559,13 @@
         "desc": "The event that is triggered when registering the sort options for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -576,8 +606,13 @@
         "desc": "The event that is triggered when registering the table attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -618,8 +653,13 @@
         "desc": "The event that is triggered when registering the table attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -660,8 +700,13 @@
         "desc": "The event that is triggered when preparing an element query for an element index, for each attribute present in the table.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -702,8 +747,13 @@
         "desc": "The event that is triggered when defining an eager-loading map.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -744,8 +794,13 @@
         "desc": "The event that is triggered when setting eager-loaded elements.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -786,8 +841,13 @@
         "desc": "The event that is triggered when registering the element’s preview targets.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -828,8 +888,13 @@
         "desc": "The event that is triggered when defining the HTML to represent a table attribute.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -870,8 +935,13 @@
         "desc": "The event that is triggered when registering the HTML attributes that should be included in the element’s DOM representation in the control panel.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -912,8 +982,13 @@
         "desc": "The event that is triggered when defining the HTML for the element’s editor slideout sidebar.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -954,8 +1029,13 @@
         "desc": "The event that is triggered when defining the HTML for meta fields within the element’s editor slideout sidebar.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -996,8 +1076,13 @@
         "desc": "The event that is triggered when defining the element’s metadata info.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1038,8 +1123,13 @@
         "desc": "The event that is triggered when determining whether the element should be editable by the current user.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1080,8 +1170,13 @@
         "desc": "The event that is triggered when determining whether the element should be deletable by the current user.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1122,8 +1217,13 @@
         "desc": "The event that is triggered when defining the route that should be used when this element’s URL is requested.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1164,8 +1264,13 @@
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1206,8 +1311,13 @@
         "desc": "The event that is triggered before the element is saved.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1248,8 +1358,13 @@
         "desc": "The event that is triggered after the element is saved.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1290,8 +1405,13 @@
         "desc": "The event that is triggered after the element is fully saved and propagated to other sites.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1332,8 +1452,13 @@
         "desc": "The event that is triggered before the element is deleted.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1374,8 +1499,13 @@
         "desc": "The event that is triggered after the element is deleted.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1416,8 +1546,13 @@
         "desc": "The event that is triggered before the element is restored.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1458,8 +1593,13 @@
         "desc": "The event that is triggered after the element is restored.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1500,8 +1640,13 @@
         "desc": "The event that is triggered before the element is moved in a structure.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1542,8 +1687,13 @@
         "desc": "The event that is triggered after the element is moved in a structure.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1584,8 +1734,13 @@
         "desc": "The event that is triggered after the model's init cycle",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1626,8 +1781,13 @@
         "desc": "The event that is triggered when defining the class behaviors",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1668,8 +1828,13 @@
         "desc": "The event that is triggered when defining the model rules",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1710,8 +1875,13 @@
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1752,8 +1922,13 @@
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1794,8 +1969,13 @@
         "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -1836,8 +2016,13 @@
         "desc": "an event raised at the end of `validate()`",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -2670,8 +2855,13 @@
         "desc": "The event that is triggered when registering the available sources for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -2712,8 +2902,13 @@
         "desc": "The event that is triggered when registering all of the field layouts associated with elements from a given source.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -2754,8 +2949,13 @@
         "desc": "The event that is triggered when registering the available actions for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -2796,8 +2996,13 @@
         "desc": "The event that is triggered when registering the available exporters for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -2838,8 +3043,13 @@
         "desc": "The event that is triggered when registering the searchable attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -2880,8 +3090,13 @@
         "desc": "The event that is triggered when registering the sort options for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -2922,8 +3137,13 @@
         "desc": "The event that is triggered when registering the table attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -2964,8 +3184,13 @@
         "desc": "The event that is triggered when registering the table attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3006,8 +3231,13 @@
         "desc": "The event that is triggered when preparing an element query for an element index, for each attribute present in the table.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3048,8 +3278,13 @@
         "desc": "The event that is triggered when defining an eager-loading map.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3090,8 +3325,13 @@
         "desc": "The event that is triggered when setting eager-loaded elements.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3132,8 +3372,13 @@
         "desc": "The event that is triggered when registering the element’s preview targets.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3174,8 +3419,13 @@
         "desc": "The event that is triggered when defining the HTML to represent a table attribute.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3216,8 +3466,13 @@
         "desc": "The event that is triggered when registering the HTML attributes that should be included in the element’s DOM representation in the control panel.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3258,8 +3513,13 @@
         "desc": "The event that is triggered when defining the HTML for the element’s editor slideout sidebar.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3300,8 +3560,13 @@
         "desc": "The event that is triggered when defining the HTML for meta fields within the element’s editor slideout sidebar.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3342,8 +3607,13 @@
         "desc": "The event that is triggered when defining the element’s metadata info.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3384,8 +3654,13 @@
         "desc": "The event that is triggered when determining whether the element should be editable by the current user.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3426,8 +3701,13 @@
         "desc": "The event that is triggered when determining whether the element should be deletable by the current user.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3468,8 +3748,13 @@
         "desc": "The event that is triggered when defining the route that should be used when this element’s URL is requested.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3510,8 +3795,13 @@
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3552,8 +3842,13 @@
         "desc": "The event that is triggered before the element is saved.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3594,8 +3889,13 @@
         "desc": "The event that is triggered after the element is saved.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3636,8 +3936,13 @@
         "desc": "The event that is triggered after the element is fully saved and propagated to other sites.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3678,8 +3983,13 @@
         "desc": "The event that is triggered before the element is deleted.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3720,8 +4030,13 @@
         "desc": "The event that is triggered after the element is deleted.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3762,8 +4077,13 @@
         "desc": "The event that is triggered before the element is restored.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3804,8 +4124,13 @@
         "desc": "The event that is triggered after the element is restored.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3846,8 +4171,13 @@
         "desc": "The event that is triggered before the element is moved in a structure.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3888,8 +4218,13 @@
         "desc": "The event that is triggered after the element is moved in a structure.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3930,8 +4265,13 @@
         "desc": "The event that is triggered after the model's init cycle",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -3972,8 +4312,13 @@
         "desc": "The event that is triggered when defining the class behaviors",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4014,8 +4359,13 @@
         "desc": "The event that is triggered when defining the model rules",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4056,8 +4406,13 @@
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4098,8 +4453,13 @@
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4140,8 +4500,13 @@
         "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4182,8 +4547,13 @@
         "desc": "an event raised at the end of `validate()`",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4224,8 +4594,13 @@
         "desc": "The event that is triggered before a new line item has been added to the order.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4266,8 +4641,13 @@
         "desc": "The event that is triggered after a line item has been added to an order.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4308,8 +4688,13 @@
         "desc": "The event that is triggered after a line item has been added to an order.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4350,8 +4735,13 @@
         "desc": "The event that is triggered after a line item has been removed from an order.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4392,8 +4782,13 @@
         "desc": "The event that is triggered after a line item has been removed from an order.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4434,8 +4829,13 @@
         "desc": "The event that is triggered before an order is completed.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4476,8 +4876,13 @@
         "desc": "The event that is triggered after an order is completed.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4518,8 +4923,13 @@
         "desc": "The event that is triggered after an order is paid and completed.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4560,8 +4970,13 @@
         "desc": "This event is raised after an order is authorized in full and completed",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4602,8 +5017,13 @@
         "desc": "The event that is triggered when registering the available sources for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4644,8 +5064,13 @@
         "desc": "The event that is triggered when registering all of the field layouts associated with elements from a given source.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4686,8 +5111,13 @@
         "desc": "The event that is triggered when registering the available actions for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4728,8 +5158,13 @@
         "desc": "The event that is triggered when registering the available exporters for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4770,8 +5205,13 @@
         "desc": "The event that is triggered when registering the searchable attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4812,8 +5252,13 @@
         "desc": "The event that is triggered when registering the sort options for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4854,8 +5299,13 @@
         "desc": "The event that is triggered when registering the table attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4896,8 +5346,13 @@
         "desc": "The event that is triggered when registering the table attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4938,8 +5393,13 @@
         "desc": "The event that is triggered when preparing an element query for an element index, for each attribute present in the table.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -4980,8 +5440,13 @@
         "desc": "The event that is triggered when defining an eager-loading map.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5022,8 +5487,13 @@
         "desc": "The event that is triggered when setting eager-loaded elements.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5064,8 +5534,13 @@
         "desc": "The event that is triggered when registering the element’s preview targets.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5106,8 +5581,13 @@
         "desc": "The event that is triggered when defining the HTML to represent a table attribute.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5148,8 +5628,13 @@
         "desc": "The event that is triggered when registering the HTML attributes that should be included in the element’s DOM representation in the control panel.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5190,8 +5675,13 @@
         "desc": "The event that is triggered when defining the HTML for the element’s editor slideout sidebar.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5232,8 +5722,13 @@
         "desc": "The event that is triggered when defining the HTML for meta fields within the element’s editor slideout sidebar.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5274,8 +5769,13 @@
         "desc": "The event that is triggered when defining the element’s metadata info.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5316,8 +5816,13 @@
         "desc": "The event that is triggered when determining whether the element should be editable by the current user.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5358,8 +5863,13 @@
         "desc": "The event that is triggered when determining whether the element should be deletable by the current user.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5400,8 +5910,13 @@
         "desc": "The event that is triggered when defining the route that should be used when this element’s URL is requested.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5442,8 +5957,13 @@
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5484,8 +6004,13 @@
         "desc": "The event that is triggered before the element is saved.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5526,8 +6051,13 @@
         "desc": "The event that is triggered after the element is saved.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5568,8 +6098,13 @@
         "desc": "The event that is triggered after the element is fully saved and propagated to other sites.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5610,8 +6145,13 @@
         "desc": "The event that is triggered before the element is deleted.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5652,8 +6192,13 @@
         "desc": "The event that is triggered after the element is deleted.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5694,8 +6239,13 @@
         "desc": "The event that is triggered before the element is restored.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5736,8 +6286,13 @@
         "desc": "The event that is triggered after the element is restored.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5778,8 +6333,13 @@
         "desc": "The event that is triggered before the element is moved in a structure.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5820,8 +6380,13 @@
         "desc": "The event that is triggered after the element is moved in a structure.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5862,8 +6427,13 @@
         "desc": "The event that is triggered after the model's init cycle",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5904,8 +6474,13 @@
         "desc": "The event that is triggered when defining the class behaviors",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5946,8 +6521,13 @@
         "desc": "The event that is triggered when defining the model rules",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -5988,8 +6568,13 @@
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6030,8 +6615,13 @@
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6072,8 +6662,13 @@
         "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6114,8 +6709,13 @@
         "desc": "an event raised at the end of `validate()`",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6156,8 +6756,13 @@
         "desc": "The event that is triggered when registering the available sources for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6198,8 +6803,13 @@
         "desc": "The event that is triggered when registering all of the field layouts associated with elements from a given source.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6240,8 +6850,13 @@
         "desc": "The event that is triggered when registering the available actions for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6282,8 +6897,13 @@
         "desc": "The event that is triggered when registering the available exporters for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6324,8 +6944,13 @@
         "desc": "The event that is triggered when registering the searchable attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6366,8 +6991,13 @@
         "desc": "The event that is triggered when registering the sort options for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6408,8 +7038,13 @@
         "desc": "The event that is triggered when registering the table attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6450,8 +7085,13 @@
         "desc": "The event that is triggered when registering the table attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6492,8 +7132,13 @@
         "desc": "The event that is triggered when preparing an element query for an element index, for each attribute present in the table.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6534,8 +7179,13 @@
         "desc": "The event that is triggered when defining an eager-loading map.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6576,8 +7226,13 @@
         "desc": "The event that is triggered when setting eager-loaded elements.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6618,8 +7273,13 @@
         "desc": "The event that is triggered when registering the element’s preview targets.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6660,8 +7320,13 @@
         "desc": "The event that is triggered when defining the HTML to represent a table attribute.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6702,8 +7367,13 @@
         "desc": "The event that is triggered when registering the HTML attributes that should be included in the element’s DOM representation in the control panel.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6744,8 +7414,13 @@
         "desc": "The event that is triggered when defining the HTML for the element’s editor slideout sidebar.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6786,8 +7461,13 @@
         "desc": "The event that is triggered when defining the HTML for meta fields within the element’s editor slideout sidebar.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6828,8 +7508,13 @@
         "desc": "The event that is triggered when defining the element’s metadata info.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6870,8 +7555,13 @@
         "desc": "The event that is triggered when determining whether the element should be editable by the current user.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6912,8 +7602,13 @@
         "desc": "The event that is triggered when determining whether the element should be deletable by the current user.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6954,8 +7649,13 @@
         "desc": "The event that is triggered when defining the route that should be used when this element’s URL is requested.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -6996,8 +7696,13 @@
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7038,8 +7743,13 @@
         "desc": "The event that is triggered before the element is saved.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7080,8 +7790,13 @@
         "desc": "The event that is triggered after the element is saved.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7122,8 +7837,13 @@
         "desc": "The event that is triggered after the element is fully saved and propagated to other sites.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7164,8 +7884,13 @@
         "desc": "The event that is triggered before the element is deleted.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7206,8 +7931,13 @@
         "desc": "The event that is triggered after the element is deleted.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7248,8 +7978,13 @@
         "desc": "The event that is triggered before the element is restored.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7290,8 +8025,13 @@
         "desc": "The event that is triggered after the element is restored.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7332,8 +8072,13 @@
         "desc": "The event that is triggered before the element is moved in a structure.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7374,8 +8119,13 @@
         "desc": "The event that is triggered after the element is moved in a structure.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7416,8 +8166,13 @@
         "desc": "The event that is triggered after the model's init cycle",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7458,8 +8213,13 @@
         "desc": "The event that is triggered when defining the class behaviors",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7500,8 +8260,13 @@
         "desc": "The event that is triggered when defining the model rules",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7542,8 +8307,13 @@
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7584,8 +8354,13 @@
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7626,8 +8401,13 @@
         "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7668,8 +8448,13 @@
         "desc": "an event raised at the end of `validate()`",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7710,8 +8495,13 @@
         "desc": "The event that is triggered when registering the available sources for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7752,8 +8542,13 @@
         "desc": "The event that is triggered when registering all of the field layouts associated with elements from a given source.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7794,8 +8589,13 @@
         "desc": "The event that is triggered when registering the available actions for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7836,8 +8636,13 @@
         "desc": "The event that is triggered when registering the available exporters for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7878,8 +8683,13 @@
         "desc": "The event that is triggered when registering the searchable attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7920,8 +8730,13 @@
         "desc": "The event that is triggered when registering the sort options for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -7962,8 +8777,13 @@
         "desc": "The event that is triggered when registering the table attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8004,8 +8824,13 @@
         "desc": "The event that is triggered when registering the table attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8046,8 +8871,13 @@
         "desc": "The event that is triggered when preparing an element query for an element index, for each attribute present in the table.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8088,8 +8918,13 @@
         "desc": "The event that is triggered when defining an eager-loading map.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8130,8 +8965,13 @@
         "desc": "The event that is triggered when setting eager-loaded elements.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8172,8 +9012,13 @@
         "desc": "The event that is triggered when registering the element’s preview targets.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8214,8 +9059,13 @@
         "desc": "The event that is triggered when defining the HTML to represent a table attribute.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8256,8 +9106,13 @@
         "desc": "The event that is triggered when registering the HTML attributes that should be included in the element’s DOM representation in the control panel.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8298,8 +9153,13 @@
         "desc": "The event that is triggered when defining the HTML for the element’s editor slideout sidebar.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8340,8 +9200,13 @@
         "desc": "The event that is triggered when defining the HTML for meta fields within the element’s editor slideout sidebar.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8382,8 +9247,13 @@
         "desc": "The event that is triggered when defining the element’s metadata info.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8424,8 +9294,13 @@
         "desc": "The event that is triggered when determining whether the element should be editable by the current user.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8466,8 +9341,13 @@
         "desc": "The event that is triggered when determining whether the element should be deletable by the current user.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8508,8 +9388,13 @@
         "desc": "The event that is triggered when defining the route that should be used when this element’s URL is requested.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8550,8 +9435,13 @@
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8592,8 +9482,13 @@
         "desc": "The event that is triggered before the element is saved.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8634,8 +9529,13 @@
         "desc": "The event that is triggered after the element is saved.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8676,8 +9576,13 @@
         "desc": "The event that is triggered after the element is fully saved and propagated to other sites.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8718,8 +9623,13 @@
         "desc": "The event that is triggered before the element is deleted.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8760,8 +9670,13 @@
         "desc": "The event that is triggered after the element is deleted.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8802,8 +9717,13 @@
         "desc": "The event that is triggered before the element is restored.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8844,8 +9764,13 @@
         "desc": "The event that is triggered after the element is restored.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8886,8 +9811,13 @@
         "desc": "The event that is triggered before the element is moved in a structure.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8928,8 +9858,13 @@
         "desc": "The event that is triggered after the element is moved in a structure.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -8970,8 +9905,13 @@
         "desc": "The event that is triggered after the model's init cycle",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9012,8 +9952,13 @@
         "desc": "The event that is triggered when defining the class behaviors",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9054,8 +9999,13 @@
         "desc": "The event that is triggered when defining the model rules",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9096,8 +10046,13 @@
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9138,8 +10093,13 @@
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9180,8 +10140,13 @@
         "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9222,8 +10187,13 @@
         "desc": "an event raised at the end of `validate()`",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9264,8 +10234,13 @@
         "desc": "The event that is triggered before a variant’s field data is captured, which makes it possible to customize which fields are included in the snapshot. Custom fields are not included by default.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9306,8 +10281,13 @@
         "desc": "The event that is triggered after a variant’s field data is captured. This makes it possible to customize, extend, or redact the data to be persisted on the variant instance.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9348,8 +10328,13 @@
         "desc": "The event that is triggered before a product’s field data is captured. This makes it possible to customize which fields are included in the snapshot. Custom fields are not included by default.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9390,8 +10375,13 @@
         "desc": "The event that is triggered after a product’s field data is captured, which can be used to customize, extend, or redact the data to be persisted on the product instance.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9432,8 +10422,13 @@
         "desc": "The event that is triggered when registering the available sources for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9474,8 +10469,13 @@
         "desc": "The event that is triggered when registering all of the field layouts associated with elements from a given source.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9516,8 +10516,13 @@
         "desc": "The event that is triggered when registering the available actions for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9558,8 +10563,13 @@
         "desc": "The event that is triggered when registering the available exporters for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9600,8 +10610,13 @@
         "desc": "The event that is triggered when registering the searchable attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9642,8 +10657,13 @@
         "desc": "The event that is triggered when registering the sort options for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9684,8 +10704,13 @@
         "desc": "The event that is triggered when registering the table attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9726,8 +10751,13 @@
         "desc": "The event that is triggered when registering the table attributes for the element type.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9768,8 +10798,13 @@
         "desc": "The event that is triggered when preparing an element query for an element index, for each attribute present in the table.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9810,8 +10845,13 @@
         "desc": "The event that is triggered when defining an eager-loading map.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9852,8 +10892,13 @@
         "desc": "The event that is triggered when setting eager-loaded elements.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9894,8 +10939,13 @@
         "desc": "The event that is triggered when registering the element’s preview targets.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9936,8 +10986,13 @@
         "desc": "The event that is triggered when defining the HTML to represent a table attribute.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -9978,8 +11033,13 @@
         "desc": "The event that is triggered when registering the HTML attributes that should be included in the element’s DOM representation in the control panel.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10020,8 +11080,13 @@
         "desc": "The event that is triggered when defining the HTML for the element’s editor slideout sidebar.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10062,8 +11127,13 @@
         "desc": "The event that is triggered when defining the HTML for meta fields within the element’s editor slideout sidebar.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10104,8 +11174,13 @@
         "desc": "The event that is triggered when defining the element’s metadata info.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10146,8 +11221,13 @@
         "desc": "The event that is triggered when determining whether the element should be editable by the current user.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10188,8 +11268,13 @@
         "desc": "The event that is triggered when determining whether the element should be deletable by the current user.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10230,8 +11315,13 @@
         "desc": "The event that is triggered when defining the route that should be used when this element’s URL is requested.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10272,8 +11362,13 @@
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10314,8 +11409,13 @@
         "desc": "The event that is triggered before the element is saved.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10356,8 +11456,13 @@
         "desc": "The event that is triggered after the element is saved.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10398,8 +11503,13 @@
         "desc": "The event that is triggered after the element is fully saved and propagated to other sites.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10440,8 +11550,13 @@
         "desc": "The event that is triggered before the element is deleted.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10482,8 +11597,13 @@
         "desc": "The event that is triggered after the element is deleted.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10524,8 +11644,13 @@
         "desc": "The event that is triggered before the element is restored.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10566,8 +11691,13 @@
         "desc": "The event that is triggered after the element is restored.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10608,8 +11738,13 @@
         "desc": "The event that is triggered before the element is moved in a structure.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10650,8 +11785,13 @@
         "desc": "The event that is triggered after the element is moved in a structure.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10692,8 +11832,13 @@
         "desc": "The event that is triggered after the model's init cycle",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10734,8 +11879,13 @@
         "desc": "The event that is triggered when defining the class behaviors",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10776,8 +11926,13 @@
         "desc": "The event that is triggered when defining the model rules",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10818,8 +11973,13 @@
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10860,8 +12020,13 @@
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10902,8 +12067,13 @@
         "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation.",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
@@ -10944,8 +12114,13 @@
         "desc": "an event raised at the end of `validate()`",
         "filters": {
             "duplicating": {
-                "label": "Element is being duplicated",
-                "conditionsPhp": "isset($event->sender->duplicateOf)"
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
             },
             "enabled": {
                 "label": "Element is enabled",
