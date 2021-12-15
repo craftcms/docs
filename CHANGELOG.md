@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## Unpublished
+### Added
+- Documented new `getHsl()`, `getHue()`, `getL()`, `getLightness()`, `getS()`, and `getSaturation()` methods for Color field values added in Craft 3.7.26.
+
 ## 2021-12-15
 ### Added
 - Added Event Code Generator to the Craft Commerce docs “Events” page.
