@@ -443,7 +443,7 @@ Defined by
 
 Human-friendly reference number format for orders. Result must be unique.
 
-See [Order Numbers](orders.md#order-numbers).
+See [Order Numbers](orders-carts.md#order-numbers).
 
 
 
