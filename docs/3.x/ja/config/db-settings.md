@@ -191,6 +191,34 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 ホスティング環境によって提供された場合、データベースの接続 URL。
 
+::: tip
+To force Craft to use the specified schema regardless of PostgreSQL’s `search_path` setting, you must enable the [setSchemaOnConnect](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#setschemaonconnect) setting.
+:::
+
+
+
+### `setSchemaOnConnect`
+
+許可される型 : :
+:   [boolean](https://php.net/language.types.boolean)
+
+デフォルト値 : :
+:   `false`
+
+定義元 : :
+:   [DbConfig::$setSchemaOnConnect](craft3:craft\config\DbConfig::$setSchemaOnConnect)
+
+Since
+:   3.7.27
+
+
+
+Whether the [schema](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#schema) should be explicitly used for database queries (PostgreSQL only).
+
+::: warning
+This will cause an extra `SET search_path` SQL query to be executed per database connection. Ideally, PostgreSQL’s `search_path` setting should be configured to prioritize the desired schema.
+:::
+
 
 
 ### `tablePrefix`
@@ -206,7 +234,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 
 
-共有するCraft のインストールを単一のデータベース（MySQL）、または、単一のデータベースで共有スキーマ（PostgreSQL）を使用する場合、インストールごとにテーブル名の競合を避けるために、テーブル接頭辞をセットできます。 これは5文字以内、かつ、すべて小文字でなければなりません。
+If you’re sharing Craft installs in a single database (MySQL) or a single database and using a shared schema (PostgreSQL), you can set a table prefix here to avoid per-install table naming conflicts. This can be no more than 5 characters, and must be all lowercase.
 
 
 
@@ -223,7 +251,7 @@ DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by drive
 
 
 
-接続するデータベースのユーザー名。
+The database username to connect with.
 
 
 
@@ -304,13 +332,13 @@ The database server name or IP address. Usually `localhost` or `127.0.0.1`.
 
 ### `port`
 
-許可される型 : :
+Allowed types
 :   [integer](https://php.net/language.types.integer)
 
-デフォルト値 : :
+Default value
 :   `null`
 
-定義元 : :
+Defined by
 :   [DbConfig::$port](craft3:craft\config\DbConfig::$port)
 
 
