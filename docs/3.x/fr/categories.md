@@ -1292,10 +1292,11 @@ Narrows the query results based on the categories’ statuses.
 
 Possible values include:
 
-| Value                    | Fetches categories… |
-| ------------------------ | ------------------- |
-| `'enabled'`  _(default)_ | that are enabled.   |
-| `'disabled'`             | that are disabled.  |
+| Value                    | Fetches categories…    |
+| ------------------------ | ---------------------- |
+| `'enabled'`  _(default)_ | that are enabled.      |
+| `'disabled'`             | that are disabled.     |
+| `['not', 'disabled']`    | that are not disabled. |
 
 
 
