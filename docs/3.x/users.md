@@ -932,6 +932,7 @@ Possible values include:
 | `'pending'` | with accounts that are still pending activation.
 | `'locked'` | with locked accounts (regardless of whether they’re active or suspended).
 | `['active', 'suspended']` | with active or suspended accounts.
+| `['not', 'active', 'suspended']` | without active or suspended accounts.
 
 
 

@@ -194,6 +194,36 @@ Defined by
 
 The schema that Postgres is configured to use by default (PostgreSQL only).
 
+::: tip
+To force Craft to use the specified schema regardless of PostgreSQL’s `search_path` setting, you must enable
+the [setSchemaOnConnect](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#setschemaonconnect) setting.
+:::
+
+
+
+### `setSchemaOnConnect`
+
+Allowed types
+:   [boolean](https://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [DbConfig::$setSchemaOnConnect](craft3:craft\config\DbConfig::$setSchemaOnConnect)
+
+Since
+:   3.7.27
+
+
+
+Whether the [schema](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#schema) should be explicitly used for database queries (PostgreSQL only).
+
+::: warning
+This will cause an extra `SET search_path` SQL query to be executed per database connection. Ideally,
+PostgreSQL’s `search_path` setting should be configured to prioritize the desired schema.
+:::
+
 
 
 ### `tablePrefix`

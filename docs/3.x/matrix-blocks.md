@@ -895,6 +895,7 @@ Possible values include:
 | - | -
 | `'enabled'`  _(default)_ | that are enabled.
 | `'disabled'` | that are disabled.
+| `['not', 'disabled']` | that are not disabled.
 
 
 
