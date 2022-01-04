@@ -1952,13 +1952,14 @@ Narrows the query results based on the entries’ statuses.
 
 Possible values include:
 
-| Value                 | Fetches entries…                                            |
-| --------------------- | ----------------------------------------------------------- |
-| `'live'` _(default)_  | that are live.                                              |
-| `'pending'`           | that are pending (enabled with a Post Date in the future).  |
-| `'expired'`           | that are expired (enabled with an Expiry Date in the past). |
-| `'disabled'`          | that are disabled.                                          |
-| `['live', 'pending']` | that are live or pending.                                   |
+| Value                        | Fetches entries…                                            |
+| ---------------------------- | ----------------------------------------------------------- |
+| `'live'` _(default)_         | that are live.                                              |
+| `'pending'`                  | that are pending (enabled with a Post Date in the future).  |
+| `'expired'`                  | that are expired (enabled with an Expiry Date in the past). |
+| `'disabled'`                 | that are disabled.                                          |
+| `['live', 'pending']`        | that are live or pending.                                   |
+| `['not', 'live', 'pending']` | that are not live or pending.                               |
 
 
 
