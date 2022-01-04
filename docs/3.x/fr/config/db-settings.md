@@ -189,6 +189,34 @@ Defined by :
 
 The schema that Postgres is configured to use by default (PostgreSQL only).
 
+::: tip
+To force Craft to use the specified schema regardless of PostgreSQL’s `search_path` setting, you must enable the [setSchemaOnConnect](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#setschemaonconnect) setting.
+:::
+
+
+
+### `setSchemaOnConnect`
+
+Allowed types :
+:   [boolean](https://php.net/language.types.boolean)
+
+Default value :
+:   `false`
+
+Defined by :
+:   [DbConfig::$setSchemaOnConnect](craft3:craft\config\DbConfig::$setSchemaOnConnect)
+
+Since
+:   3.7.27
+
+
+
+Whether the [schema](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#schema) should be explicitly used for database queries (PostgreSQL only).
+
+::: warning
+This will cause an extra `SET search_path` SQL query to be executed per database connection. Ideally, PostgreSQL’s `search_path` setting should be configured to prioritize the desired schema.
+:::
+
 
 
 ### `tablePrefix`
@@ -204,7 +232,7 @@ Defined by :
 
 
 
-If you're sharing Craft installs in a single database (MySQL) or a single database and using a shared schema (PostgreSQL), then you can set a table prefix here to avoid table naming conflicts per install. This can be no more than 5 characters, and must be all lowercase.
+If you’re sharing Craft installs in a single database (MySQL) or a single database and using a shared schema (PostgreSQL), you can set a table prefix here to avoid per-install table naming conflicts. This can be no more than 5 characters, and must be all lowercase.
 
 
 
@@ -285,13 +313,13 @@ The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
 
 ### `server`
 
-Allowed types :
+Allowed types
 :   [string](https://php.net/language.types.string)
 
-Default value :
+Default value
 :   `null`
 
-Defined by :
+Defined by
 :   [DbConfig::$server](craft3:craft\config\DbConfig::$server)
 
 
