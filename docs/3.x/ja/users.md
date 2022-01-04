@@ -922,13 +922,14 @@ Narrows the query results based on the users’ statuses.
 
 Possible values include:
 
-| 値                         | 取得するユーザー                                                                  |
-| ------------------------- | ------------------------------------------------------------------------- |
-| `'active'` _(default)_    | with active accounts.                                                     |
-| `'suspended'`             | with suspended accounts.                                                  |
-| `'pending'`               | with accounts that are still pending activation.                          |
-| `'locked'`                | with locked accounts (regardless of whether they’re active or suspended). |
-| `['active', 'suspended']` | with active or suspended accounts.                                        |
+| 値                                | 取得するユーザー                                                                  |
+| -------------------------------- | ------------------------------------------------------------------------- |
+| `'active'` _(default)_           | with active accounts.                                                     |
+| `'suspended'`                    | with suspended accounts.                                                  |
+| `'pending'`                      | with accounts that are still pending activation.                          |
+| `'locked'`                       | with locked accounts (regardless of whether they’re active or suspended). |
+| `['active', 'suspended']`        | with active or suspended accounts.                                        |
+| `['not', 'active', 'suspended']` | without active or suspended accounts.                                     |
 
 
 
