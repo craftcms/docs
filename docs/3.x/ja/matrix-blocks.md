@@ -887,10 +887,11 @@ Narrows the query results based on the Matrix blocks’ statuses.
 
 Possible values include:
 
-| 値                        | 取得する行列ブロック         |
-| ------------------------ | ------------------ |
-| `'enabled'`  _(default)_ | that are enabled.  |
-| `'disabled'`             | that are disabled. |
+| 値                        | 取得する行列ブロック             |
+| ------------------------ | ---------------------- |
+| `'enabled'`  _(default)_ | that are enabled.      |
+| `'disabled'`             | that are disabled.     |
+| `['not', 'disabled']`    | that are not disabled. |
 
 
 
