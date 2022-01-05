@@ -631,7 +631,7 @@ Defined by
 
 
 
-Whether partial payment can be made from the front end. Gateway must also allow them.
+Whether [partial payment](making-payments.md#checkout-with-partial-payment) can be made from the front end when the gateway allows them.
 
 The default `false` does not allow partial payments on the front end.
 
