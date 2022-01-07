@@ -14,7 +14,7 @@ For traditional database rows regular fixtures will suffice. However Craft intro
 
 Element types are one of Craft’s main selling points for developers. They yield a lot of power. That power is courtesy of a complicated data structure and set of APIs. A by-product of this is that some heavy lifting is required if element types are to be defined in a single fixture and data file. For this reason support is provided out of the box for setting up various element types.
 
-Provide your own custom element type? You can extend `craft\test\fixtures\elements\ElementFixture` to provide developers using your module/plugin support for their testing code - or just provide yourself support for testing your own module/plugin.
+Provide your own custom element type? You can extend `craft\test\fixtures\elements\BaseElementFixture` to provide developers using your module/plugin support for their testing code - or just provide yourself support for testing your own module/plugin.
 
 ::: tip
 Craft’s element fixtures are based on the excellent team over at [robuust](https://robuust.digital/) and their `craft-fixtures` [plugin](https://github.com/robuust/craft-fixtures).
