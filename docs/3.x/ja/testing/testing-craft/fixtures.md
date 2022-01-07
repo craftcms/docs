@@ -20,7 +20,7 @@ Craft’s element fixtures are based on the excellent team over at [robuust](htt
 
 #### Provide your own custom element type?
 
-You can extend [craft\test\fixtures\elements\ElementFixture](craft3:craft\test\fixtures\elements\ElementFixture) for your own testing and to offer other developers the ability to use your element type as a fixture testing their code.
+You can extend [craft\test\fixtures\elements\ElementFixture](craft3:craft\test\fixtures\elements\BaseElementFixture) for your own testing and to offer other developers the ability to use your element type as a fixture testing their code.
 
 ### Asset fixtures
 
