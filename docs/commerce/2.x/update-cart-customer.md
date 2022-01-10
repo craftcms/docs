@@ -49,7 +49,7 @@ Once a user logs in, the cart's customer will switch to be the registered userâ€
 ## Registering a guest customer as a user
 
 If the customer is a guest, and they do not have an account, you can always show them a standard [Craft CMS registration
-form](https://craftcms.com/docs/3.x/dev/examples/user-registration-form.html) during checkout.
+form](https://craftcms.com/knowledge-base/front-end-user-accounts#registration-form) during checkout.
 
 If you would like to allow the customer to register on checkout, you can update the order and flag it to register the user on
 order completion. This can be done with the same controller action as updating anything else on the cart.

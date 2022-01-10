@@ -505,7 +505,7 @@ In this example we’ve used the year as the sequence name so we automatically g
 
 ### Creating Orders
 
-An order is usually created on the front end as a customer [adds items](adding-to-and-updating-the-cart.md) to and completes a [cart](cart.md). With Commerce Pro, An order may also be created in the control panel.
+An order is usually created on the front end as a customer [adds items](#adding-items-to-a-cart) to and completes a [cart](#carts). With Commerce Pro, An order may also be created in the control panel.
 
 To create a new order, navigate to **Commerce** → **Orders**, and choose **New Order**. This will create a new order that behaves like a cart. As [purchasables](purchasables.md) are added and removed from the order, it will automatically recalculate its [sales](sales.md) and adjustments.
 

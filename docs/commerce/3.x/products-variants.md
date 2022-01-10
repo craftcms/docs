@@ -1296,7 +1296,7 @@ Variants can have unlimited stock or a specific quantity.
 
 A finite stock amount will automatically be reduced whenever someone completes an order, until the stock amount reaches zero. At that point the variant’s “Available for purchase” setting won’t be changed, but zero-stock variants cannot be added to a cart.
 
-For returns or refunds that aren’t ultimately delivered to the customer, you’ll need to either manually update product stock or use [the `orderStatusChange` event](events.md#orderstatuschange) to automate further stock adjustments.
+For returns or refunds that aren’t ultimately delivered to the customer, you’ll need to either manually update product stock or use [the `orderStatusChange` event](extend/events.md#orderstatuschange) to automate further stock adjustments.
 
 ## Querying Variants
 

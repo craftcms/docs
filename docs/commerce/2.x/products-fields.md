@@ -32,7 +32,7 @@ If you have an element with a Products field in your template, you can access it
 
 That will give you an [element query](https://craftcms.com/docs/3.x/element-queries.html), prepped to output all of the selected products for the given field.
 
-(See [Relations](https://craftcms.com/docs/relations) for more info on the relatedTo param.)
+(See [Relations](https://craftcms.com/docs/3.x/relations.html) for more info on the relatedTo param.)
 
 ## Examples
 
