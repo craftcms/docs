@@ -1,6 +1,6 @@
 # テンプレート入門
 
-[Twig](http://twig.sensiolabs.org/) は高速で強力なテンプレートシステムで、一般的に Craft、Drupal、および、（[Timber](https://www.upstatement.com/timber/) プラグイン経由の）WordPress などのコンテンツ管理システムのフロントエンドビューを強化するために利用されています。
+[Twig](https://twig.symfony.com/) は高速で強力なテンプレートシステムで、一般的に Craft、Drupal、および、（[Timber](https://www.upstatement.com/timber/) プラグイン経由の）WordPress などのコンテンツ管理システムのフロントエンドビューを強化するために利用されています。
 
 どのように機能するかを見てみましょう。
 
