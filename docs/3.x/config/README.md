@@ -72,7 +72,7 @@ You can override these default aliases with the <config3:aliases> config setting
 
 ```php
 'aliases' => [
-    '@web' => 'http://my-project.com',
+    '@web' => 'https://my-project.com',
 ];
 ```
 
@@ -80,7 +80,7 @@ If your web root is something besides `web/`, `public/`, `public_html/`, or `htm
 
 ```php
 'aliases' => [
-    '@web' => 'http://my-project.com',
+    '@web' => 'https://my-project.com',
     '@webroot' => dirname(__DIR__) . '/path/to/webroot',
 ];
 ```
@@ -89,7 +89,7 @@ You can define additional custom aliases using the <config3:aliases> config sett
 
 ```php
 'aliases' => [
-    '@web' => 'http://my-project.com',
+    '@web' => 'https://my-project.com',
     '@webroot' => dirname(__DIR__) . '/path/to/webroot',
     '@assetBaseUrl' => '@web/assets',
     '@assetBasePath' => '@webroot/assets',
@@ -101,7 +101,7 @@ With those in place, you could begin your asset volumes’ Base URL and File Sys
 If you’d like, you can set the alias values with environment variables, either from your `.env` file or somewhere in your environment’s configuration:
 
 ```bash
-ASSETS_BASE_URL=http://my-project.com/assets
+ASSETS_BASE_URL=https://my-project.com/assets
 ASSETS_BASE_PATH=/path/to/webroot/assets
 ```
 
@@ -252,7 +252,9 @@ return [
 
 ### Database Component
 
-If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component:
+If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component.
+
+This example configures read/write splitting by defining read replicas. The writer will be whatever’s configured in `config/db.php`.
 
 ```php
 <?php
@@ -433,6 +435,8 @@ Some settings in the control panel can be set to environment variables (like the
 
 - General Settings
   - **System Name**
+  - **System Status**
+  - **Time Zone**
 - Sites
   - **Base URL**
 - Sections
@@ -447,11 +451,13 @@ Some settings in the control panel can be set to environment variables (like the
   - **Username** (Gmail and SMTP)
   - **Password** (Gmail and SMTP)
   - **Host Name** (SMTP)
-  - **Port** (Port)
+  - **Port** (SMTP)
+  - **Use authentication** (SMTP)
+  - **Encryption Method** (SMTP)
 
 To set these settings to an environment variable, type `$` followed by the environment variable’s name.
 
-![A volume’s Base URL setting](../images/volume-base-url-setting.jpg)
+![A site’s Base URL setting](../images/site-base-url-setting.png)
 
 Only the environment variable’s name will be stored in your database or project config, so this is a great way to set setting values that may change per-environment, or contain sensitive information.
 
@@ -534,7 +540,11 @@ define('CRAFT_ENVIRONMENT', craft\helpers\App::env('ENVIRONMENT') ?: 'production
 
 ## PHP Constants
 
-Your `web/index.php` file can define certain PHP constants, which Craft’s bootstrap script will check for while loading and configuring Craft.
+Your `web/index.php` and `craft` files can define certain PHP constants Craft’s bootstrap script will check for while loading and configuring Craft.
+
+::: tip
+Constants you set in `web/index.php` will be used for web-based requests, while any you set in your root `craft` file will be used for console requests.
+:::
 
 ### `CRAFT_BASE_PATH`
 
@@ -591,6 +601,11 @@ When set to `true`, Craft will skip file system permission checks and operations
 ### `CRAFT_LICENSE_KEY`
 
 Your Craft license key, if for some reason that must be defined by PHP rather than a license key file. (Don’t set this until you have a valid license key.)
+
+```php
+// Tell Craft to get its license key from a `LICENSE_KEY` environment variable
+define('CRAFT_LICENSE_KEY', craft\helpers\App::env('LICENSE_KEY'));
+```
 
 ### `CRAFT_LICENSE_KEY_PATH`
 

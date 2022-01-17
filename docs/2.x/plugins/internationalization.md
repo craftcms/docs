@@ -17,7 +17,7 @@ You can do the same thing within your templates with the `|t` filter:
 
 ```twig
 {{ "Ingredients in a {cocktail}"|t({
-    cocktail: cocktail.name
+  cocktail: cocktail.name
 }) }}
 ```
 

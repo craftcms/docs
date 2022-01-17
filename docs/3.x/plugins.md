@@ -14,7 +14,7 @@ Craft’s control panel features a Plugin Store where you can browse through hun
 If you’ve disallowed admin changes in production, you will only be able to install plugins from the control panel in your local development environment.
 :::
 
-To access the Plugin Store from the control panel, choose **Plugin Store** from the main navigation. From there you can browse through the various plugin categories and curated lists to discover new plugins.
+To access the Plugin Store from the control panel, click **Plugin Store** from the main navigation. From there you can browse through the various plugin categories and curated lists to discover new plugins.
 
 ![The Craft Plugin Store](./images/plugin-store.png)
 
@@ -32,7 +32,7 @@ If Craft is running on a development domain or in a local development environmen
 
 ## Buying Commercial Plugins
 
-If you’ve tried a commercial plugin and are ready to purchase a license, return to the Plugin Store and choose the cart icon in the header area. The plugin should be listed in the cart’s **Active Trials** section. Choose **Add to cart** to add the plugin to your cart and proceed with checkout.
+If you’ve tried a commercial plugin and are ready to purchase a license, return to the Plugin Store and choose the cart icon (<icon kind="cart" />) in the header area. The plugin should be listed in the cart’s **Active Trials** section. Choose **Add to cart** to add the plugin to your cart and proceed with checkout.
 
 Once you’ve completed the checkout process, your plugin installation will automatically become licensed.
 

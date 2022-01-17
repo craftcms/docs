@@ -200,6 +200,23 @@ Since
 Whether carts are can be marked as completed without a payment.
 
 
+### `autoSetCartShippingMethodOption`
+
+Allowed types
+:   [boolean](http://php.net/language.types.boolean)
+
+Default value
+:   `false`
+
+Defined by
+:   [Settings::$autoSetCartShippingMethodOption](commerce3:craft\commerce\models\Settings::$autoSetCartShippingMethodOption)
+
+
+
+Whether the first available shipping method option should be set automatically on carts.
+
+
+
 ### `autoSetNewCartAddresses`
 
 Allowed types
@@ -270,7 +287,7 @@ Since
 
 
 
-Default URL to be loaded after using the [load cart controller action](loading-a-cart.md).
+Default URL to be loaded after using the [load cart controller action](orders-carts.md#loading-a-cart).
 
 If `null` (default), Craft’s default [`siteUrl`](config3:siteUrl) will be used.
 
@@ -426,7 +443,7 @@ Defined by
 
 Human-friendly reference number format for orders. Result must be unique.
 
-See [Order Numbers](orders.md#order-numbers).
+See [Order Numbers](orders-carts.md#order-numbers).
 
 
 
@@ -552,7 +569,7 @@ Defined by
 URL for a user to resolve billing issues with their subscription.
 
 ::: tip
-The example templates include [a template for this page](https://github.com/craftcms/commerce/tree/main/example-templates/build/shop/plans/update-billing-details.twig).
+The example templates include [a template for this page](https://github.com/craftcms/commerce/tree/main/example-templates/dist/shop/plans/update-billing-details.twig).
 :::
 
 
@@ -614,7 +631,7 @@ Defined by
 
 
 
-Whether partial payment can be made from the front end. Gateway must also allow them.
+Whether [partial payment](making-payments.md#checkout-with-partial-payment) can be made from the front end when the gateway allows them.
 
 The default `false` does not allow partial payments on the front end.
 
@@ -642,16 +659,16 @@ the `inputs` variable.
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Redirecting...</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Redirecting...</title>
 </head>
 <body onload="document.forms[0].submit();">
 <form action="{{ actionUrl }}" method="post">
-    <p>Redirecting to payment page...</p>
-    <p>
-        {{ inputs|raw }}
-        <button type="submit">Continue</button>
-    </p>
+  <p>Redirecting to payment page...</p>
+  <p>
+    {{ inputs|raw }}
+    <button type="submit">Continue</button>
+  </p>
 </form>
 </body>
 </html>
@@ -663,26 +680,6 @@ images and inline styles to reduce HTTP requests.
 :::
 
 If empty (default), each gateway will decide how to handle after-payment redirects.
-
-
-
-### `gatewaySettings`
-
-Allowed types
-:   [array](http://php.net/language.types.array)
-
-Default value
-:   `[]`
-
-Defined by
-:   [Settings::$gatewaySettings](commerce3:craft\commerce\models\Settings::$gatewaySettings)
-
-
-
-Payment gateway settings indexed by each gateway’s handle.
-
-Check each gateway’s documentation for settings that may be stored.
-
 
 
 ### `paymentCurrency`

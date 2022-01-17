@@ -72,7 +72,7 @@ The `_layouts/cp` layout expects two variables to be set: `title` and `content`.
 {% set title = "Cocktail Recipes"|t %}
 
 {% set content %}
-    <p>Hello!</p>
+  <p>Hello!</p>
 {% endset %}
 ```
 
@@ -80,8 +80,8 @@ If your plugin’s CP section has its own sub-navigation, you can define that by
 
 ```twig
 {% set tabs = {
-    recent: { label: "Recent"|t, url: url('cocktailrecipes') },
-    new:    { label: "Add a New Recipe"|t, url: url('cocktailrecipes/new') }
+  recent: { label: "Recent"|t, url: url('cocktailrecipes') },
+  new:    { label: "Add a New Recipe"|t, url: url('cocktailrecipes/new') }
 } %}
 ```
 
@@ -95,8 +95,8 @@ You can also add breadcrumbs to your pages by setting the `crumbs` variable:
 
 ```twig
 {% set crumbs = [
-    { label: "Cocktail Recipes"|t, url: url('cocktailrecipes') },
-    { label: recipe.groupName|t, url: url('cocktailrecipes/recipes/'~recipe.groupHandle) }
+  { label: "Cocktail Recipes"|t, url: url('cocktailrecipes') },
+  { label: recipe.groupName|t, url: url('cocktailrecipes/recipes/'~recipe.groupHandle) }
 ] %}
 ```
 

@@ -43,7 +43,7 @@ To output your Matrix blocks in a template, use a [for-loop](https://twig.symfon
 
 ```twig
 {% for block in entry.myMatrixField %}
-    ...
+  ...
 {% endfor %}
 ```
 
@@ -54,29 +54,29 @@ Here’s an example of what the template might look like for a Matrix field with
 ```twig
 {% for block in entry.myMatrixField %}
 
-    {% if block.type == "heading" %}
+  {% if block.type == "heading" %}
 
-        <h3>{{ block.heading }}</h3>
+    <h3>{{ block.heading }}</h3>
 
-    {% elseif block.type == "text" %}
+  {% elseif block.type == "text" %}
 
-        {{ block.text|markdown }}
+    {{ block.text|markdown }}
 
-    {% elseif block.type == "image" %}
+  {% elseif block.type == "image" %}
 
-        {% set image = block.image.first() %}
-        {% if image %}
-            <img src="{{ image.getUrl('thumb') }}" width="{{ image.getWidth('thumb') }}" height="{{ image.getHeight('thumb') }}" alt="{{ image.title }}">
-        {% endif %}
-
-    {% elseif block.type == "quote" %}
-
-        <blockquote>
-            <p>{{ block.quote }}</p>
-            <cite>– {{ block.cite }}</cite>
-        </blockquote>
-
+    {% set image = block.image.first() %}
+    {% if image %}
+      <img src="{{ image.getUrl('thumb') }}" width="{{ image.getWidth('thumb') }}" height="{{ image.getHeight('thumb') }}" alt="{{ image.title }}">
     {% endif %}
+
+  {% elseif block.type == "quote" %}
+
+    <blockquote>
+      <p>{{ block.quote }}</p>
+      <cite>– {{ block.cite }}</cite>
+    </blockquote>
+
+  {% endif %}
 
 {% endfor %}
 ```
@@ -89,7 +89,7 @@ If you just want to output blocks of a certain type, you can do that by appendin
 
 ```twig
 {% for block in entry.myMatrixField.type('text') %}
-    {{ block.text|markdown }}
+  {{ block.text|markdown }}
 {% endfor %}
 ```
 
@@ -97,11 +97,11 @@ You can pass multiple block types if you want:
 
 ```twig
 {% for block in entry.myMatrixField.type('text, heading') %}
-    {% if block.type == "heading" %}
-        <h3>{{ block.heading }}</h3>
-    {% else %}
-        {{ block.text|markdown }}
-    {% endif %}
+  {% if block.type == "heading" %}
+    <h3>{{ block.heading }}</h3>
+  {% else %}
+    {{ block.text|markdown }}
+  {% endif %}
 {% endfor %}
 ```
 

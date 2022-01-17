@@ -27,12 +27,12 @@ The following commands are available:
     db/convert-charset                  Converts tables’ character sets and collations. (MySQL only)
     db/restore                          Restores a database backup.
 
-- cache                                     Allows you to flush cache.
-    cache/flush                             Flushes given cache components.
-    cache/flush-all                         Flushes all caches registered in the system.
-    cache/flush-schema                      Clears DB schema cache for a given connection
-                                            component.
-    cache/index (default)                   Lists the caches that can be flushed.
+- cache                                 Allows you to flush cache.
+    cache/flush                         Flushes given cache components.
+    cache/flush-all                     Flushes all caches registered in the system.
+    cache/flush-schema                  Clears DB schema cache for a given connection
+                                        component.
+    cache/index (default)               Lists the caches that can be flushed.
 
 ...
 
@@ -77,6 +77,39 @@ php craft db/backup ./my-backups/
 `--zip`
 : Whether the backup should be saved as a zip file.\
 boolean, 0 or 1 (defaults to 0)
+
+#### `db/convert-charset`
+
+Converts tables’ character sets and collations. (MySQL only)
+
+Example:
+
+```sh
+php craft db/convert-charset utf8 utf8_unicode_ci
+```
+
+**Parameters**
+
+`charset`
+: The target character set, which honors `DbConfig::$charset` or defaults to `utf8`.
+
+`collation`
+: The target collation, which honors `DbConfig::$collation` or defaults to `utf8_unicode_ci`.
+
+#### `db/restore`
+
+Restores a database backup.
+
+Example:
+
+```sh
+php craft db/restore ./my-backup.sql
+```
+
+**Parameters**
+
+`path`
+: The full file path to the database backup.
 
 ## `cache`
 
@@ -204,6 +237,10 @@ boolean, 0 or 1 (defaults to 0)
 
 Allows you to manage GraphQL schemas.
 
+#### `graphql/create-token`
+
+Creates a new authorization token for a schema.
+
 #### `graphql/dump-schema`
 
 Dumps a given GraphQL schema to a file.
@@ -212,6 +249,10 @@ Dumps a given GraphQL schema to a file.
 
 `--token`
 : The token to look up to determine the appropriate GraphQL schema.
+
+#### `graphql/list-schemas`
+
+Lists all GraphQL schemas.
 
 #### `graphql/print-schema`
 
@@ -693,7 +734,28 @@ Disables a plugin.
 **Parameters**
 
 `handle`
-: The plugin handle. (required)
+: The plugin handle.\
+If not provided, you’ll be prompted to choose one from a list of enabled plugins.
+
+**Example**
+
+```
+$ php craft plugin/disable
+
+The following plugins are enabled:
+
+    Handle                 Name
+    ---------------------  ---------------------
+    anchors                Anchors
+    apple-news             Apple News
+    ckeditor               CKEditor
+    commerce               Craft Commerce
+    gatsby-helper          Gatsby Helper
+
+Choose a plugin handle to disable: ckeditor
+*** disabling ckeditor
+*** disabled ckeditor successfully (time: 0.496s)
+```
 
 #### `plugin/enable`
 
@@ -702,7 +764,29 @@ Enables a plugin.
 **Parameters**
 
 `handle`
-: The plugin handle. (required)
+: The plugin handle.\
+If not provided, you’ll be prompted to choose one from a list of disabled plugins.
+
+**Example**
+
+```
+$ php craft plugin/disable
+
+The following plugins are enabled:
+
+    Handle                 Name
+    ---------------------  ---------------------
+    anchors                Anchors
+    apple-news             Apple News
+    ckeditor               CKEditor
+    commerce               Craft Commerce
+    gatsby-helper          Gatsby Helper
+
+Choose a plugin handle to disable: ckeditor
+*** disabling ckeditor
+*** disabled ckeditor successfully (time: 0.496s)
+```
+
 
 #### `plugin/install`
 
@@ -711,7 +795,28 @@ Installs a plugin.
 **Parameters**
 
 `handle`
-: The plugin handle. (required)
+: The plugin handle.\
+If not provided, you’ll be prompted to choose one from a list of uninstalled plugins.
+
+**Example**
+
+```
+$ php craft plugin/install
+
+The following uninstalled plugins are present:
+
+    Handle                 Name
+    ---------------------  ---------------------
+    anchors                Anchors
+    apple-news             Apple News
+    ckeditor               CKEditor
+    commerce               Craft Commerce
+    gatsby-helper          Gatsby Helper
+
+Choose a plugin handle to install: ckeditor
+*** installing ckeditor
+*** installed ckeditor successfully (time: 0.496s)
+```
 
 #### `plugin/uninstall`
 
@@ -720,13 +825,34 @@ Uninstalls a plugin.
 **Parameters**
 
 `handle`
-: The plugin handle. (required)
+: The plugin handle.\
+If not provided, you’ll be prompted to choose one from a list of installed plugins.
 
 **Options**
 
 `--force`
 : Whether the plugin uninstallation should be forced.\
 boolean, 0 or 1 (defaults to 0)
+
+**Example**
+
+```
+$ php craft plugin/uninstall
+
+The following plugins plugins are installed and enabled:
+
+    Handle                 Name
+    ---------------------  ---------------------
+    anchors                Anchors
+    apple-news             Apple News
+    ckeditor               CKEditor
+    commerce               Craft Commerce
+    gatsby-helper          Gatsby Helper
+
+Choose a plugin handle to uninstall: ckeditor
+*** uninstalling ckeditor
+*** uninstalled ckeditor successfully (time: 0.496s)
+```
 
 ## `project-config`
 
@@ -1238,6 +1364,19 @@ Defaults to the current working directory.
 
 Don’t use this method; it won’t actually execute anything.
 
+## `up`
+
+Runs pending migrations and applies pending project config changes.
+
+### `up/index` <badge vertical="center">default</badge>
+
+Runs pending migrations and applies pending project config changes.
+
+**Options**
+
+`--force`
+: Whether to perform the action even if a mutex lock could not be acquired.
+
 ## `update`
 
 Updates Craft and plugins.
@@ -1324,6 +1463,15 @@ boolean, 0 or 1 (defaults to 0)
 `--inheritor`
 : The email or username of the user to inherit content when deleting a user.
 
+#### `users/impersonate`
+
+Generate a URL to impersonate a user.
+
+**Parameters**
+
+`user`
+: The ID, username, or email address of the user account.
+
 ## `utils/ascii-filenames`
 
 #### `utils/ascii-filenames/index` <badge>default</badge>
@@ -1336,9 +1484,25 @@ Converts all non-ASCII asset filenames to ASCII.
 
 Ensures all element UIDs are unique.
 
+## `utils/prune-provisional-drafts`
+
+Prunes provisional drafts for elements that have more than one per user.
+
+#### `utils/prune-provisional-drafts/index` <badge vertical="center">default</badge>
+
+Prunes provisional drafts for elements that have more than one per user.
+
+**Options**
+
+`--dry-run`
+: Whether this is a dry run.
+
+
 ## `utils/prune-revisions`
 
-#### `utils/prune-revisions/index` <badge>default</badge>
+Prunes excess element revisions.
+
+#### `utils/prune-revisions/index` <badge vertical="center">default</badge>
 
 Prunes excess element revisions.
 
@@ -1346,6 +1510,9 @@ Prunes excess element revisions.
 
 `--max-revisions`
 : The maximum number of revisions an element can have.
+
+`--dry-run`
+: Whether this is a dry run.
 
 ## `utils/repair`
 

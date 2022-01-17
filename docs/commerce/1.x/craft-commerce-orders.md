@@ -9,7 +9,7 @@ It returns an [ElementCriteriaModel](https://craftcms.com/docs/2.x/templating/el
 {% set orders = craft.commerce.orders.find() %}
 
 {% for order in orders %}
-    {{ order.number }} - {{ order.totalPrice}} <br>
+  {{ order.number }} - {{ order.totalPrice}} <br>
 {% endfor %}
 ```
 
@@ -115,17 +115,17 @@ For example:
 
 ```twig
 {% if currentUser %}
-    {% set order = craft.commerce.orders.user(currentUser).hasPurchasables([product.defaultVariant]).first() %}
-    {% if order %}
-        I already own this product:  <a href="shop/order?orderNumber={{ order.number }}">Order #{{ order.shortNumber }}</a>
-    {% endif %}
+  {% set order = craft.commerce.orders.user(currentUser).hasPurchasables([product.defaultVariant]).first() %}
+  {% if order %}
+    I already own this product:  <a href="shop/order?orderNumber={{ order.number }}">Order #{{ order.shortNumber }}</a>
+  {% endif %}
 {% endif %}
 ```
 
 or
 
 ```twig
-{% set  orders = craft.commerce.orders({
+{% set orders = craft.commerce.orders({
   hasPurchasables: [32,34,35]
 }) %}
 ```

@@ -34,14 +34,14 @@ We can display an order with a given order number by doing the following:
 
 {# Create an order query with the 'number' parameter #}
 {% set myOrderQuery = craft.orders()
-    .number(orderNumber) %}
+  .number(orderNumber) %}
 
 {# Fetch the order #}
 {% set order = myOrderQuery.one() %}
 
 {# Make sure it exists #}
 {% if not order %}
-    {% exit 404 %}
+  {% exit 404 %}
 {% endif %}
 
 {# Display the order #}

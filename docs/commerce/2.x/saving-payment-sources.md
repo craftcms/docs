@@ -7,7 +7,10 @@ You can either take any payment form and add a `savePaymentSource` parameter to 
 ```twig
 {% if cart.gateway.supportsPaymentSources() %}
 <div class="checkbox">
-<label><input type="checkbox" name="savePaymentSource" value="1" /> {{ "Save card for future purchases"|t }}</label>
+  <label>
+    <input type="checkbox" name="savePaymentSource" value="1" /> 
+    {{ "Save card for future purchases"|t }}
+  </label>
 </div>
 {% endif %}
 ```

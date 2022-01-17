@@ -80,7 +80,7 @@ axios.get('', {
 
 Either of the examples above will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
 
-To see what cart information you can use in your templates, take a look at the [Order](commerce3:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/main/example-templates/build/shop/cart/index.twig).
+To see what cart information you can use in your templates, take a look at the [Order](commerce3:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig).
 
 <toggle-tip title="Example Order">
 
@@ -268,7 +268,7 @@ You can remove a line item by including a `remove` parameter in the request. Thi
 ```
 
 ::: tip
-The [example templates](example-templates.md) include a [detailed cart template](https://github.com/craftcms/commerce/blob/main/example-templates/build/shop/cart/index.twig) for adding and updating items in a full checkout flow.
+The [example templates](example-templates.md) include a [detailed cart template](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig) for adding and updating items in a full checkout flow.
 :::
 
 #### Options Uniqueness
@@ -343,7 +343,7 @@ This URL can be presented to the user however you’d like. It’s particularly 
 
 Send a GET or POST action request with a `number` parameter referencing the cart you’d like to load. When posting the form data, you can include a specific redirect location like you can with any other Craft post data.
 
-This is a simplified version of [`shop/cart/load.twig`](https://github.com/craftcms/commerce/tree/main/example-templates/build/shop/cart/load.twig) in the example templates, where a `cart` variable has already been set to the cart that should be loaded:
+This is a simplified version of [`shop/cart/load.twig`](https://github.com/craftcms/commerce/tree/main/example-templates/dist/shop/cart/load.twig) in the example templates, where a `cart` variable has already been set to the cart that should be loaded:
 
 ```twig
 <form method="post">
@@ -505,7 +505,7 @@ In this example we’ve used the year as the sequence name so we automatically g
 
 ### Creating Orders
 
-An order is usually created on the front end as a customer [adds items](adding-to-and-updating-the-cart.md) to and completes a [cart](cart.md). With Commerce Pro, An order may also be created in the control panel.
+An order is usually created on the front end as a customer [adds items](#adding-items-to-a-cart) to and completes a [cart](#carts). With Commerce Pro, An order may also be created in the control panel.
 
 To create a new order, navigate to **Commerce** → **Orders**, and choose **New Order**. This will create a new order that behaves like a cart. As [purchasables](purchasables.md) are added and removed from the order, it will automatically recalculate its [sales](sales.md) and adjustments.
 

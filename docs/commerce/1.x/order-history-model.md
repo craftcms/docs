@@ -10,7 +10,6 @@ Current Order Status: {{order.orderStatus.name}} <br>
   Status: '{{ history.newStatus.name ?? ""}}' (previously '{{ history.prevStatus.name ?? ""}}')
   with message: '{{ history.message }}'<br>
 {% endfor %}
-
 ```
 
 ## message

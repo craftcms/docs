@@ -40,7 +40,7 @@ To check if your Commerce Products field has any selected products, you can use 
 
 ```twig
 {% if entry.myFieldHandle|length %}
-    {# ... #}
+  {# ... #}
 {% endif %}
 ```
 
@@ -48,7 +48,7 @@ Loop through all the selected products using `all()`:
 
 ```twig
 {% for product in entry.myFieldHandle.all() %}
-    {# ... #}
+  {# ... #}
 {% endfor %}
 ```
 
@@ -58,12 +58,10 @@ Rather than typing `entry.myFieldHandle` every time, you can call it once and se
 {% set products = entry.myFieldHandle.all() %}
 
 {% if products|length %}
-
-    <h3>Some great products</h3>
-    {% for product in products %}
-        {# ... #}
-    {% endfor %}
-
+  <h3>Some great products</h3>
+  {% for product in products %}
+    {# ... #}
+  {% endfor %}
 {% endif %}
 ```
 
@@ -78,6 +76,6 @@ If your products field is only meant to have a single product selected, remember
 ```twig
 {% set product = entry.myFieldHandle.one() %}
 {% if product %}
-    {# ... #}
+  {# ... #}
 {% endif %}
 ```

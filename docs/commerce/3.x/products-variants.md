@@ -11,7 +11,15 @@ Products are the items available in your store.
 
 A product itself is never sold; what goes into a cart for purchase is actually one of the product’s [variants](#variants). In the Craft control panel, you’ll see Products listed by Product Type.
 
-![](./assets/product-variant.png)
+![Diagram depicting Product with common fields and its relationship to one or more Variants](./assets/product-variant.png)
+
+In the same way that all Craft CMS entries have common fields, Craft Commerce products have some of their own:
+
+- **Title**, **Slug**, **Post Date**, **Expiry Date**, and **Enabled** work just like they do in Craft [entries](../../3.x/entries.md).
+- **Free Shipping**, when enabled, excludes the product and its variants from an order’s shipping cost calculation. (This only impacts per-*item*—and not per-*order*—shipping costs.)
+- **Promotable** determines whether [sales](sales.md) and [discounts](discounts.md) can be applied to the product and its variants.
+- **Available for purchase** determines whether the product and its variants should be available for purchase on the front end.
+- **Tax** and **Shipping** allow you to designate the product’s [tax](tax.md) and [shipping](shipping.md) category respectively.
 
 ## Product Types
 
@@ -33,8 +41,8 @@ The handle is what you’ll use to reference the product type in code. In Twig, 
 
 ```twig
 {% set clothes = craft.products()
-    .type('clothes')
-    .all() %}
+  .type('clothes')
+  .all() %}
 ```
 
 #### Title Field Label
@@ -101,7 +109,7 @@ Returns an array of all product types set up in the system.
 
 ```twig
 {% for type in craft.commerce.productTypes.allProductTypes %}
-    {{ type.handle }} - {{ type.name }}
+  {{ type.handle }} - {{ type.name }}
 {% endfor %}
 ```
 
@@ -138,8 +146,8 @@ You can also fetch only the number of items a query might return, which is bette
 ```twig
 {# Count all enabled products #}
 {% set myProductCount = craft.products()
-    .status('enabled')
-    .count() %}
+  .status('enabled')
+  .count() %}
 ```
 ```php
 use craft\commerce\elements\Product;
@@ -173,17 +181,17 @@ We can use Twig to display the ten most recent Clothing products:
 ```twig
 {# Create a product query with the 'type' and 'limit' parameters #}
 {% set myProductQuery = craft.products()
-    .type('clothing')
-    .limit(10) %}
+  .type('clothing')
+  .limit(10) %}
 
 {# Fetch the products #}
 {% set products = myProductQuery.all() %}
 
 {# Display the products #}
 {% for product in products %}
-    <h2><a href="{{ product.url }}">{{ product.title }}</a></h2>
-    {{ product.summary }}
-    <a href="{{ product.url }}">Learn more</a>
+  <h2><a href="{{ product.url }}">{{ product.title }}</a></h2>
+  {{ product.summary }}
+  <a href="{{ product.url }}">Learn more</a>
 {% endfor %}
 ```
 
@@ -1288,7 +1296,7 @@ Variants can have unlimited stock or a specific quantity.
 
 A finite stock amount will automatically be reduced whenever someone completes an order, until the stock amount reaches zero. At that point the variant’s “Available for purchase” setting won’t be changed, but zero-stock variants cannot be added to a cart.
 
-For returns or refunds that aren’t ultimately delivered to the customer, you’ll need to either manually update product stock or use [the `orderStatusChange` event](events.md#orderstatuschange) to automate further stock adjustments.
+For returns or refunds that aren’t ultimately delivered to the customer, you’ll need to either manually update product stock or use [the `orderStatusChange` event](extend/events.md#orderstatuschange) to automate further stock adjustments.
 
 ## Querying Variants
 

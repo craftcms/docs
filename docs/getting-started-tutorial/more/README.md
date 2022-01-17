@@ -9,7 +9,7 @@ If you’d like to explore further, here are some immediate tasks you might tack
 - Expose blog post author details. (Hint: use [`dd`](/3.x/dev/tags.md#dd) on `entry.author` to see what’s there, or consult the [User element API documentation](craft3:\craft\elements\User).)
 - Customize the homepage (`index.twig`) to match your site.
 - Add more posts and integrate [pagination](/3.x/dev/tags.md#paginate) in your templates.
-- Add an RSS feed using the example [in the documentation](/3.x/dev/examples/rss-feed.md).
+- Add an RSS feed using the example [in the documentation](https://craftcms.com/knowledge-base/rss-and-atom-feeds).
 - Use the [Contact Form plugin](https://plugins.craftcms.com/contact-form) to add a form to your site.
 
 ## Intermediate: go deeper with Craft

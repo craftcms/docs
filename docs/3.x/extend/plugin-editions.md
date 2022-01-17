@@ -46,7 +46,7 @@ if (Plugin::getInstance()->is(Plugin::EDITION_PRO) {
 
 ```twig
 {% if plugin('plugin-handle').is('pro') %}
-    {# Pro edition-only code goes here... #}
+  {# Pro edition-only code goes here... #}
 {% endif %}
 ```
 

@@ -165,7 +165,7 @@ Each template is aware of the current locale via the `craft.locale` variable, wh
 
 ```twig
 {% if craft.locale == 'de' %}
-    <p>Congrats on the big win!</p>
+  <p>Congrats on the big win!</p>
 {% endif %}
 ```
 

@@ -49,16 +49,16 @@ We can display a list of the tags in a “Blog Tags” tag group by doing the fo
 ```twig
 {# Create a tag query with the 'group' parameter #}
 {% set myTagQuery = craft.tags()
-    .group('blogTags') %}
+  .group('blogTags') %}
 
 {# Fetch the tags #}
 {% set tags = myTagQuery.all() %}
 
 {# Display the tag list #}
 <ul>
-    {% for tag in tags %}
-        <li><a href="{{ url('blog/tags/'~tag.id) }}">{{ tag.title }}</a></li>
-    {% endfor %}
+  {% for tag in tags %}
+    <li><a href="{{ url('blog/tags/'~tag.id) }}">{{ tag.title }}</a></li>
+  {% endfor %}
 </ul>
 ```
 
@@ -70,12 +70,16 @@ Tag queries support the following parameters:
 
 | Param                                     | Description
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
+| [andRelatedTo](#andrelatedto)             | Narrows the query results to only tags that are related to certain other elements.
 | [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
 | [asArray](#asarray)                       | Causes the query to return matching tags as arrays of data, rather than [Tag](craft3:craft\elements\Tag) objects.
-| [clearCachedResult](#clearcachedresult)   | Clears the cached result.
+| [cache](#cache)                           | Enables query cache for this Query.
+| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 | [dateCreated](#datecreated)               | Narrows the query results based on the tags’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the tags’ last-updated dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
+| [getCacheTags](#getcachetags)             |
 | [group](#group)                           | Narrows the query results based on the tag groups the tags belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 | [id](#id)                                 | Narrows the query results based on the tags’ IDs.
@@ -85,16 +89,61 @@ Tag queries support the following parameters:
 | [offset](#offset)                         | Determines how many tags should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the tags should be returned in. (If empty, defaults to `title ASC`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                   | Narrows the query results to only tags that are related to certain other elements.
+| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#search)                         | Narrows the query results to only tags that match a search query.
 | [site](#site)                             | Determines which site(s) the tags should be queried in.
 | [siteId](#siteid)                         | Determines which site(s) the tags should be queried in, per the site’s ID.
+| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the tags’ IDs in the `elements_sites` table.
 | [title](#title)                           | Narrows the query results based on the tags’ titles.
 | [trashed](#trashed)                       | Narrows the query results to only tags that have been soft-deleted.
 | [uid](#uid)                               | Narrows the query results based on the tags’ UIDs.
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
 | [uri](#uri)                               | Narrows the query results based on the tags’ URIs.
 | [with](#with)                             | Causes the query to return matching tags eager-loaded with related elements.
+
+#### `afterPopulate`
+
+Performs any post-population processing on elements.
+
+
+
+
+
+
+
+
+
+
+#### `andRelatedTo`
+
+Narrows the query results to only tags that are related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all tags that are related to myCategoryA and myCategoryB #}
+{% set tags = craft.tags()
+  .relatedTo(myCategoryA)
+  .andRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all tags that are related to $myCategoryA and $myCategoryB
+$tags = \craft\elements\Tag::find()
+    ->relatedTo($myCategoryA)
+    ->andRelatedTo($myCategoryB)
+    ->all();
+```
+:::
+
 
 #### `anyStatus`
 
@@ -108,8 +157,8 @@ Removes element filters based on their statuses.
 ```twig
 {# Fetch all tags, regardless of status #}
 {% set tags = craft.tags()
-    .anyStatus()
-    .all() %}
+  .anyStatus()
+  .all() %}
 ```
 
 ```php
@@ -133,8 +182,8 @@ Causes the query to return matching tags as arrays of data, rather than [Tag](cr
 ```twig
 {# Fetch tags as arrays #}
 {% set tags = craft.tags()
-    .asArray()
-    .all() %}
+  .asArray()
+  .all() %}
 ```
 
 ```php
@@ -146,9 +195,22 @@ $tags = \craft\elements\Tag::find()
 :::
 
 
+#### `cache`
+
+Enables query cache for this Query.
+
+
+
+
+
+
+
+
+
+
 #### `clearCachedResult`
 
-Clears the cached result.
+Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 
 
 
@@ -178,8 +240,8 @@ Possible values include:
 {% set end = date('first day of this month')|atom %}
 
 {% set tags = craft.tags()
-    .dateCreated(['and', ">= #{start}", "< #{end}"])
-    .all() %}
+  .dateCreated(['and', ">= #{start}", "< #{end}"])
+  .all() %}
 ```
 
 ```php
@@ -216,8 +278,8 @@ Possible values include:
 {% set lastWeek = date('1 week ago')|atom %}
 
 {% set tags = craft.tags()
-    .dateUpdated(">= #{lastWeek}")
-    .all() %}
+  .dateUpdated(">= #{lastWeek}")
+  .all() %}
 ```
 
 ```php
@@ -243,9 +305,9 @@ Causes the query results to be returned in the order specified by [id](#id).
 ```twig
 {# Fetch tags in a specific order #}
 {% set tags = craft.tags()
-    .id([1, 2, 3, 4, 5])
-    .fixedOrder()
-    .all() %}
+  .id([1, 2, 3, 4, 5])
+  .fixedOrder()
+  .all() %}
 ```
 
 ```php
@@ -256,6 +318,15 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 :::
+
+
+#### `getCacheTags`
+
+
+
+
+
+
 
 
 #### `group`
@@ -278,8 +349,8 @@ Possible values include:
 ```twig
 {# Fetch tags in the Foo group #}
 {% set tags = craft.tags()
-    .group('foo')
-    .all() %}
+  .group('foo')
+  .all() %}
 ```
 
 ```php
@@ -310,8 +381,8 @@ Possible values include:
 ```twig
 {# Fetch tags in the group with an ID of 1 #}
 {% set tags = craft.tags()
-    .groupId(1)
-    .all() %}
+  .groupId(1)
+  .all() %}
 ```
 
 ```php
@@ -344,8 +415,8 @@ Possible values include:
 ```twig
 {# Fetch the tag by its ID #}
 {% set tag = craft.tags()
-    .id(1)
-    .one() %}
+  .id(1)
+  .one() %}
 ```
 
 ```php
@@ -389,8 +460,8 @@ Causes the query results to be returned in reverse order.
 ```twig
 {# Fetch tags in reverse #}
 {% set tags = craft.tags()
-    .inReverse()
-    .all() %}
+  .inReverse()
+  .all() %}
 ```
 
 ```php
@@ -412,8 +483,8 @@ Determines the number of tags that should be returned.
 ```twig
 {# Fetch up to 10 tags  #}
 {% set tags = craft.tags()
-    .limit(10)
-    .all() %}
+  .limit(10)
+  .all() %}
 ```
 
 ```php
@@ -435,8 +506,8 @@ Determines how many tags should be skipped in the results.
 ```twig
 {# Fetch all tags except for the first 3 #}
 {% set tags = craft.tags()
-    .offset(3)
-    .all() %}
+  .offset(3)
+  .all() %}
 ```
 
 ```php
@@ -458,8 +529,8 @@ Determines the order that the tags should be returned in. (If empty, defaults to
 ```twig
 {# Fetch all tags in order of date created #}
 {% set tags = craft.tags()
-    .orderBy('dateCreated ASC')
-    .all() %}
+  .orderBy('dateCreated ASC')
+  .all() %}
 ```
 
 ```php
@@ -489,10 +560,10 @@ If this isn’t set, then preference goes to the current site.
 ```twig
 {# Fetch unique tags from Site A, or Site B if they don’t exist in Site A #}
 {% set tags = craft.tags()
-    .site('*')
-    .unique()
-    .preferSites(['a', 'b'])
-    .all() %}
+  .site('*')
+  .unique()
+  .preferSites(['a', 'b'])
+  .all() %}
 ```
 
 ```php
@@ -501,6 +572,33 @@ $tags = \craft\elements\Tag::find()
     ->site('*')
     ->unique()
     ->preferSites(['a', 'b'])
+    ->all();
+```
+:::
+
+
+#### `provisionalDrafts`
+
+Narrows the query results to only provisional drafts.
+
+
+
+
+
+::: code
+```twig
+{# Fetch provisional drafts created by the current user #}
+{% set tags = craft.tags()
+  .provisionalDrafts()
+  .draftCreator(currentUser)
+  .all() %}
+```
+
+```php
+// Fetch provisional drafts created by the current user
+$tags = \craft\elements\Tag::find()
+    ->provisionalDrafts()
+    ->draftCreator(Craft::$app->user->identity)
     ->all();
 ```
 :::
@@ -520,14 +618,41 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 ```twig
 {# Fetch all tags that are related to myCategory #}
 {% set tags = craft.tags()
-    .relatedTo(myCategory)
-    .all() %}
+  .relatedTo(myCategory)
+  .all() %}
 ```
 
 ```php
 // Fetch all tags that are related to $myCategory
 $tags = \craft\elements\Tag::find()
     ->relatedTo($myCategory)
+    ->all();
+```
+:::
+
+
+#### `savedDraftsOnly`
+
+Narrows the query results to only unpublished drafts which have been saved after initial creation.
+
+
+
+
+
+::: code
+```twig
+{# Fetch saved, unpublished draft tags #}
+{% set tags = {twig-function}
+  .draftOf(false)
+  .savedDraftsOnly()
+  .all() %}
+```
+
+```php
+// Fetch saved, unpublished draft tags
+$tags = \craft\elements\Tag::find()
+    ->draftOf(false)
+    ->savedDraftsOnly()
     ->all();
 ```
 :::
@@ -550,8 +675,8 @@ See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explana
 
 {# Fetch all tags that match the search query #}
 {% set tags = craft.tags()
-    .search(searchQuery)
-    .all() %}
+  .search(searchQuery)
+  .all() %}
 ```
 
 ```php
@@ -595,8 +720,8 @@ only want unique elements to be returned, use [unique](#unique) in conjunction w
 ```twig
 {# Fetch tags from the Foo site #}
 {% set tags = craft.tags()
-    .site('foo')
-    .all() %}
+  .site('foo')
+  .all() %}
 ```
 
 ```php
@@ -631,8 +756,8 @@ Possible values include:
 ```twig
 {# Fetch tags from the site with an ID of 1 #}
 {% set tags = craft.tags()
-    .siteId(1)
-    .all() %}
+  .siteId(1)
+  .all() %}
 ```
 
 ```php
@@ -640,6 +765,40 @@ Possible values include:
 $tags = \craft\elements\Tag::find()
     ->siteId(1)
     ->all();
+```
+:::
+
+
+#### `siteSettingsId`
+
+Narrows the query results based on the tags’ IDs in the `elements_sites` table.
+
+
+
+Possible values include:
+
+| Value | Fetches tags…
+| - | -
+| `1` | with an `elements_sites` ID of 1.
+| `'not 1'` | not with an `elements_sites` ID of 1.
+| `[1, 2]` | with an `elements_sites` ID of 1 or 2.
+| `['not', 1, 2]` | not with an `elements_sites` ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch the tag by its ID in the elements_sites table #}
+{% set tag = craft.tags()
+  .siteSettingsId(1)
+  .one() %}
+```
+
+```php
+// Fetch the tag by its ID in the elements_sites table
+$tag = \craft\elements\Tag::find()
+    ->siteSettingsId(1)
+    ->one();
 ```
 :::
 
@@ -668,8 +827,8 @@ Possible values include:
 ```twig
 {# Fetch tags with a title that contains "Foo" #}
 {% set tags = craft.tags()
-    .title('*Foo*')
-    .all() %}
+  .title('*Foo*')
+  .all() %}
 ```
 
 ```php
@@ -693,8 +852,8 @@ Narrows the query results to only tags that have been soft-deleted.
 ```twig
 {# Fetch trashed tags #}
 {% set tags = craft.tags()
-    .trashed()
-    .all() %}
+  .trashed()
+  .all() %}
 ```
 
 ```php
@@ -718,8 +877,8 @@ Narrows the query results based on the tags’ UIDs.
 ```twig
 {# Fetch the tag by its UID #}
 {% set tag = craft.tags()
-    .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
-    .one() %}
+  .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+  .one() %}
 ```
 
 ```php
@@ -746,9 +905,9 @@ desired.
 ```twig
 {# Fetch unique tags across all sites #}
 {% set tags = craft.tags()
-    .site('*')
-    .unique()
-    .all() %}
+  .site('*')
+  .unique()
+  .all() %}
 ```
 
 ```php
@@ -788,8 +947,8 @@ Possible values include:
 
 {# Fetch the tag with that URI #}
 {% set tag = craft.tags()
-    .uri(requestedUri|literal)
-    .one() %}
+  .uri(requestedUri|literal)
+  .one() %}
 ```
 
 ```php
@@ -818,8 +977,8 @@ See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-ele
 ```twig
 {# Fetch tags eager-loaded with the "Related" field’s relations #}
 {% set tags = craft.tags()
-    .with(['related'])
-    .all() %}
+  .with(['related'])
+  .all() %}
 ```
 
 ```php

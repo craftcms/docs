@@ -4,11 +4,11 @@ You can access your site’s [entries](../sections-and-entries.md) from your tem
 
 ```twig
 {% for entry in craft.entries.section('news').limit(10) %}
-    <article>
-        <h1><a href="{{ entry.url }}">{{ entry.title }}</a></h1>
-        {{ entry.summary }}
-        <a href="{{ entry.url }}">Continue reading</a>
-    </article>
+  <article>
+    <h1><a href="{{ entry.url }}">{{ entry.title }}</a></h1>
+    {{ entry.summary }}
+    <a href="{{ entry.url }}">Continue reading</a>
+  </article>
 {% endfor %}
 ```
 
@@ -22,13 +22,13 @@ Only fetch entries with a Post Date that is on or after the given date.
 
 You can specify dates in the following formats:
 
-* YYYY
-* YYYY-MM
-* YYYY-MM-DD
-* YYYY-MM-DD HH:MM
-* YYYY-MM-DD HH:MM:SS
-* A Unix timestamp
-* A [DateTime](datetime.md) variable
+- YYYY
+- YYYY-MM
+- YYYY-MM-DD
+- YYYY-MM-DD HH:MM
+- YYYY-MM-DD HH:MM:SS
+- A Unix timestamp
+- A [DateTime](datetime.md) variable
 
 ### `ancestorOf`
 
@@ -60,13 +60,13 @@ Only fetch entries with a Post Date that is before the given date.
 
 You can specify dates in the following formats:
 
-* YYYY
-* YYYY-MM
-* YYYY-MM-DD
-* YYYY-MM-DD HH:MM
-* YYYY-MM-DD HH:MM:SS
-* A Unix timestamp
-* A [DateTime](datetime.md) variable
+- YYYY
+- YYYY-MM
+- YYYY-MM-DD
+- YYYY-MM-DD HH:MM
+- YYYY-MM-DD HH:MM:SS
+- A Unix timestamp
+- A [DateTime](datetime.md) variable
 
 ### `level`
 

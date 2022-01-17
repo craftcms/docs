@@ -41,16 +41,16 @@ We can display a list of the users in an “Authors” user group by doing the f
 ```twig
 {# Create a user query with the 'group' parameter #}
 {% set myUserQuery = craft.users()
-    .group('authors') %}
+  .group('authors') %}
 
 {# Fetch the users #}
 {% set users = myUserQuery.all() %}
 
 {# Display the list #}
 <ul>
-    {% for user in users %}
-        <li><a href="{{ url('authors/'~user.username) }}">{{ user.name }}</a></li>
-    {% endfor %}
+  {% for user in users %}
+    <li><a href="{{ url('authors/'~user.username) }}">{{ user.name }}</a></li>
+  {% endfor %}
 </ul>
 ```
 
@@ -63,15 +63,19 @@ User queries support the following parameters:
 | Param                                     | Description
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [admin](#admin)                           | Narrows the query results to only users that have admin accounts.
+| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
+| [andRelatedTo](#andrelatedto)             | Narrows the query results to only users that are related to certain other elements.
 | [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
 | [asArray](#asarray)                       | Causes the query to return matching users as arrays of data, rather than [User](craft3:craft\elements\User) objects.
+| [cache](#cache)                           | Enables query cache for this Query.
 | [can](#can)                               | Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
-| [clearCachedResult](#clearcachedresult)   | Clears the cached result.
+| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 | [dateCreated](#datecreated)               | Narrows the query results based on the users’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the users’ last-updated dates.
 | [email](#email)                           | Narrows the query results based on the users’ email addresses.
 | [firstName](#firstname)                   | Narrows the query results based on the users’ first names.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
+| [getCacheTags](#getcachetags)             |
 | [group](#group)                           | Narrows the query results based on the user group the users belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 | [hasPhoto](#hasphoto)                     | Narrows the query results to only users that have (or don’t have) a user photo.
@@ -84,13 +88,17 @@ User queries support the following parameters:
 | [offset](#offset)                         | Determines how many users should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
 | [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                   | Narrows the query results to only users that are related to certain other elements.
+| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#search)                         | Narrows the query results to only users that match a search query.
+| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the users’ IDs in the `elements_sites` table.
 | [status](#status)                         | Narrows the query results based on the users’ statuses.
 | [trashed](#trashed)                       | Narrows the query results to only users that have been soft-deleted.
 | [uid](#uid)                               | Narrows the query results based on the users’ UIDs.
 | [username](#username)                     | Narrows the query results based on the users’ usernames.
 | [with](#with)                             | Causes the query to return matching users eager-loaded with related elements.
+| [withGroups](#withgroups)                 | Causes the query to return matching users eager-loaded with their user groups.
 
 #### `admin`
 
@@ -102,14 +110,56 @@ Narrows the query results to only users that have admin accounts.
 ```twig
 {# Fetch admins #}
 {% set users = craft.users()
-    .admin()
-    .all() %}
+  .admin()
+  .all() %}
 ```
 
 ```php
 // Fetch admins
 $users = \craft\elements\User::find()
     ->admin()
+    ->all();
+```
+:::
+
+
+#### `afterPopulate`
+
+Performs any post-population processing on elements.
+
+
+
+
+
+
+
+
+
+
+#### `andRelatedTo`
+
+Narrows the query results to only users that are related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all users that are related to myCategoryA and myCategoryB #}
+{% set users = craft.users()
+  .relatedTo(myCategoryA)
+  .andRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all users that are related to $myCategoryA and $myCategoryB
+$users = \craft\elements\User::find()
+    ->relatedTo($myCategoryA)
+    ->andRelatedTo($myCategoryB)
     ->all();
 ```
 :::
@@ -127,8 +177,8 @@ Removes element filters based on their statuses.
 ```twig
 {# Fetch all users, regardless of status #}
 {% set users = craft.users()
-    .anyStatus()
-    .all() %}
+  .anyStatus()
+  .all() %}
 ```
 
 ```php
@@ -152,8 +202,8 @@ Causes the query to return matching users as arrays of data, rather than [User](
 ```twig
 {# Fetch users as arrays #}
 {% set users = craft.users()
-    .asArray()
-    .all() %}
+  .asArray()
+  .all() %}
 ```
 
 ```php
@@ -163,6 +213,19 @@ $users = \craft\elements\User::find()
     ->all();
 ```
 :::
+
+
+#### `cache`
+
+Enables query cache for this Query.
+
+
+
+
+
+
+
+
 
 
 #### `can`
@@ -177,8 +240,8 @@ See [User Management](https://craftcms.com/docs/3.x/user-management.html) for a 
 ```twig
 {# Fetch users that can access the control panel #}
 {% set users = craft.users()
-    .can('accessCp')
-    .all() %}
+  .can('accessCp')
+  .all() %}
 ```
 
 ```php
@@ -192,7 +255,7 @@ $users = \craft\elements\User::find()
 
 #### `clearCachedResult`
 
-Clears the cached result.
+Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 
 
 
@@ -222,8 +285,8 @@ Possible values include:
 {% set end = date('first day of this month')|atom %}
 
 {% set users = craft.users()
-    .dateCreated(['and', ">= #{start}", "< #{end}"])
-    .all() %}
+  .dateCreated(['and', ">= #{start}", "< #{end}"])
+  .all() %}
 ```
 
 ```php
@@ -260,8 +323,8 @@ Possible values include:
 {% set lastWeek = date('1 week ago')|atom %}
 
 {% set users = craft.users()
-    .dateUpdated(">= #{lastWeek}")
-    .all() %}
+  .dateUpdated(">= #{lastWeek}")
+  .all() %}
 ```
 
 ```php
@@ -293,8 +356,8 @@ Possible values include:
 ```twig
 {# Fetch users with a .co.uk domain on their email address #}
 {% set users = craft.users()
-    .email('*.co.uk')
-    .all() %}
+  .email('*.co.uk')
+  .all() %}
 ```
 
 ```php
@@ -323,8 +386,8 @@ Possible values include:
 ```twig
 {# Fetch all the Jane's #}
 {% set users = craft.users()
-    .firstName('Jane')
-    .all() %}
+  .firstName('Jane')
+  .all() %}
 ```
 
 ```php
@@ -348,9 +411,9 @@ Causes the query results to be returned in the order specified by [id](#id).
 ```twig
 {# Fetch users in a specific order #}
 {% set users = craft.users()
-    .id([1, 2, 3, 4, 5])
-    .fixedOrder()
-    .all() %}
+  .id([1, 2, 3, 4, 5])
+  .fixedOrder()
+  .all() %}
 ```
 
 ```php
@@ -361,6 +424,15 @@ $users = \craft\elements\User::find()
     ->all();
 ```
 :::
+
+
+#### `getCacheTags`
+
+
+
+
+
+
 
 
 #### `group`
@@ -383,8 +455,8 @@ Possible values include:
 ```twig
 {# Fetch users in the Foo user group #}
 {% set users = craft.users()
-    .group('foo')
-    .all() %}
+  .group('foo')
+  .all() %}
 ```
 
 ```php
@@ -415,8 +487,8 @@ Possible values include:
 ```twig
 {# Fetch users in a group with an ID of 1 #}
 {% set users = craft.users()
-    .groupId(1)
-    .all() %}
+  .groupId(1)
+  .all() %}
 ```
 
 ```php
@@ -438,8 +510,8 @@ Narrows the query results to only users that have (or don’t have) a user photo
 ```twig
 {# Fetch users with photos #}
 {% set users = craft.users()
-    .hasPhoto()
-    .all() %}
+  .hasPhoto()
+  .all() %}
 ```
 
 ```php
@@ -472,8 +544,8 @@ Possible values include:
 ```twig
 {# Fetch the user by its ID #}
 {% set user = craft.users()
-    .id(1)
-    .one() %}
+  .id(1)
+  .one() %}
 ```
 
 ```php
@@ -517,8 +589,8 @@ Causes the query results to be returned in reverse order.
 ```twig
 {# Fetch users in reverse #}
 {% set users = craft.users()
-    .inReverse()
-    .all() %}
+  .inReverse()
+  .all() %}
 ```
 
 ```php
@@ -550,8 +622,8 @@ Possible values include:
 {% set aWeekAgo = date('7 days ago')|atom %}
 
 {% set users = craft.users()
-    .lastLoginDate(">= #{aWeekAgo}")
-    .all() %}
+  .lastLoginDate(">= #{aWeekAgo}")
+  .all() %}
 ```
 
 ```php
@@ -582,8 +654,8 @@ Possible values include:
 ```twig
 {# Fetch all the Doe's #}
 {% set users = craft.users()
-    .lastName('Doe')
-    .all() %}
+  .lastName('Doe')
+  .all() %}
 ```
 
 ```php
@@ -605,8 +677,8 @@ Determines the number of users that should be returned.
 ```twig
 {# Fetch up to 10 users  #}
 {% set users = craft.users()
-    .limit(10)
-    .all() %}
+  .limit(10)
+  .all() %}
 ```
 
 ```php
@@ -628,8 +700,8 @@ Determines how many users should be skipped in the results.
 ```twig
 {# Fetch all users except for the first 3 #}
 {% set users = craft.users()
-    .offset(3)
-    .all() %}
+  .offset(3)
+  .all() %}
 ```
 
 ```php
@@ -651,8 +723,8 @@ Determines the order that the users should be returned in. (If empty, defaults t
 ```twig
 {# Fetch all users in order of date created #}
 {% set users = craft.users()
-    .orderBy('dateCreated ASC')
-    .all() %}
+  .orderBy('dateCreated ASC')
+  .all() %}
 ```
 
 ```php
@@ -682,10 +754,10 @@ If this isn’t set, then preference goes to the current site.
 ```twig
 {# Fetch unique users from Site A, or Site B if they don’t exist in Site A #}
 {% set users = craft.users()
-    .site('*')
-    .unique()
-    .preferSites(['a', 'b'])
-    .all() %}
+  .site('*')
+  .unique()
+  .preferSites(['a', 'b'])
+  .all() %}
 ```
 
 ```php
@@ -694,6 +766,33 @@ $users = \craft\elements\User::find()
     ->site('*')
     ->unique()
     ->preferSites(['a', 'b'])
+    ->all();
+```
+:::
+
+
+#### `provisionalDrafts`
+
+Narrows the query results to only provisional drafts.
+
+
+
+
+
+::: code
+```twig
+{# Fetch provisional drafts created by the current user #}
+{% set users = craft.users()
+  .provisionalDrafts()
+  .draftCreator(currentUser)
+  .all() %}
+```
+
+```php
+// Fetch provisional drafts created by the current user
+$users = \craft\elements\User::find()
+    ->provisionalDrafts()
+    ->draftCreator(Craft::$app->user->identity)
     ->all();
 ```
 :::
@@ -713,14 +812,41 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 ```twig
 {# Fetch all users that are related to myCategory #}
 {% set users = craft.users()
-    .relatedTo(myCategory)
-    .all() %}
+  .relatedTo(myCategory)
+  .all() %}
 ```
 
 ```php
 // Fetch all users that are related to $myCategory
 $users = \craft\elements\User::find()
     ->relatedTo($myCategory)
+    ->all();
+```
+:::
+
+
+#### `savedDraftsOnly`
+
+Narrows the query results to only unpublished drafts which have been saved after initial creation.
+
+
+
+
+
+::: code
+```twig
+{# Fetch saved, unpublished draft users #}
+{% set users = {twig-function}
+  .draftOf(false)
+  .savedDraftsOnly()
+  .all() %}
+```
+
+```php
+// Fetch saved, unpublished draft users
+$users = \craft\elements\User::find()
+    ->draftOf(false)
+    ->savedDraftsOnly()
     ->all();
 ```
 :::
@@ -743,8 +869,8 @@ See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explana
 
 {# Fetch all users that match the search query #}
 {% set users = craft.users()
-    .search(searchQuery)
-    .all() %}
+  .search(searchQuery)
+  .all() %}
 ```
 
 ```php
@@ -755,6 +881,40 @@ $searchQuery = \Craft::$app->request->getQueryParam('q');
 $users = \craft\elements\User::find()
     ->search($searchQuery)
     ->all();
+```
+:::
+
+
+#### `siteSettingsId`
+
+Narrows the query results based on the users’ IDs in the `elements_sites` table.
+
+
+
+Possible values include:
+
+| Value | Fetches users…
+| - | -
+| `1` | with an `elements_sites` ID of 1.
+| `'not 1'` | not with an `elements_sites` ID of 1.
+| `[1, 2]` | with an `elements_sites` ID of 1 or 2.
+| `['not', 1, 2]` | not with an `elements_sites` ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch the user by its ID in the elements_sites table #}
+{% set user = craft.users()
+  .siteSettingsId(1)
+  .one() %}
+```
+
+```php
+// Fetch the user by its ID in the elements_sites table
+$user = \craft\elements\User::find()
+    ->siteSettingsId(1)
+    ->one();
 ```
 :::
 
@@ -772,6 +932,7 @@ Possible values include:
 | `'pending'` | with accounts that are still pending activation.
 | `'locked'` | with locked accounts (regardless of whether they’re active or suspended).
 | `['active', 'suspended']` | with active or suspended accounts.
+| `['not', 'active', 'suspended']` | without active or suspended accounts.
 
 
 
@@ -779,8 +940,8 @@ Possible values include:
 ```twig
 {# Fetch active and locked users #}
 {% set users = craft.users()
-    .status(['active', 'locked'])
-    .all() %}
+  .status(['active', 'locked'])
+  .all() %}
 ```
 
 ```php
@@ -804,8 +965,8 @@ Narrows the query results to only users that have been soft-deleted.
 ```twig
 {# Fetch trashed users #}
 {% set users = craft.users()
-    .trashed()
-    .all() %}
+  .trashed()
+  .all() %}
 ```
 
 ```php
@@ -829,8 +990,8 @@ Narrows the query results based on the users’ UIDs.
 ```twig
 {# Fetch the user by its UID #}
 {% set user = craft.users()
-    .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
-    .one() %}
+  .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+  .one() %}
 ```
 
 ```php
@@ -862,8 +1023,8 @@ Possible values include:
 
 {# Fetch that user #}
 {% set user = craft.users()
-    .username(requestedUsername|literal)
-    .one() %}
+  .username(requestedUsername|literal)
+  .one() %}
 ```
 
 ```php
@@ -892,14 +1053,45 @@ See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-ele
 ```twig
 {# Fetch users eager-loaded with the "Related" field’s relations #}
 {% set users = craft.users()
-    .with(['related'])
-    .all() %}
+  .with(['related'])
+  .all() %}
 ```
 
 ```php
 // Fetch users eager-loaded with the "Related" field’s relations
 $users = \craft\elements\User::find()
     ->with(['related'])
+    ->all();
+```
+:::
+
+
+#### `withGroups`
+
+Causes the query to return matching users eager-loaded with their user groups.
+
+Possible values include:
+
+| Value | Fetches users…
+| - | -
+| `'>= 2018-04-01'` | that last logged-in on or after 2018-04-01.
+| `'< 2018-05-01'` | that last logged-in before 2018-05-01
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that last logged-in between 2018-04-01 and 2018-05-01.
+
+
+
+::: code
+```twig
+{# fetch users with their user groups #}
+{% set users = craft.users()
+  .withGroups()
+  .all() %}
+```
+
+```php
+// fetch users with their user groups
+$users = \craft\elements\User::find()
+    ->withGroups()
     ->all();
 ```
 :::

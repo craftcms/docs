@@ -39,7 +39,7 @@ You also have the option to show the title input field or have it default to use
 
 ### Products of this type have their own URLs
 
-This works the same way the standard Craft [entry sections](https://craftcms.com/docs/sections-and-entries) work.
+This works the same way the standard Craft [entry sections](../../3.x/entries.md#sections) work.
 
 ::: tip
 When a site visitor hits the URL of a product, the `product` variable is automatically available to your templates, just like the `entry` variable for standard craft entries.

@@ -33,6 +33,10 @@ After you create your groups, you can assign users to groups by going into their
 
 Craft Pro allows you to set permissions on users and groups, such as the ability to access the control panel, edit content within certain sections, etc. You can apply these permissions directly to user accounts as well as to user groups. When you apply permissions to a user group, all users that belong to that group will inherit them.
 
+::: warning
+Make sure you trust users with access to settings that accept Twig code, like the **Settings** section and the **System Messages** utility. It’s possible to do potentially-malicious things in Craft via Twig, which is intented primarily for trusted admins and developers.
+:::
+
 The permissions Craft comes with are:
 
 | Permission | Handle
@@ -94,7 +98,7 @@ You can check whether the logged-in user has a specific permission by using its 
 
 ```twig
 {% if currentUser.can('accessCp') %}
-    <a href="{{ cpUrl() }}">Visit the Control Panel</a>
+  <a href="{{ cpUrl() }}">Visit the Control Panel</a>
 {% endif %}
 ```
 

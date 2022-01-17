@@ -41,9 +41,9 @@ That will give you an [ElementCriteriaModel](templating/elementcriteriamodel.md)
 
 ```twig
 {% set entries = craft.entries({
-    relatedTo: { sourceElement: entry, field: "entriesFieldHandle" },
-    order:     "sortOrder",
-    limit:     null
+  relatedTo: { sourceElement: entry, field: "entriesFieldHandle" },
+  order:     "sortOrder",
+  limit:     null
 }) %}
 ```
 
@@ -55,7 +55,7 @@ To check if your Entries field has any selected entries, you can use the `length
 
 ```twig
 {% if entry.entriesFieldHandle | length %}
-    ...
+  ...
 {% endif %}
 ```
 
@@ -63,7 +63,7 @@ To loop through the selected entries, you can treat the field like an array:
 
 ```twig
 {% for entry in entry.entriesFieldHandle %}
-    ...
+  ...
 {% endfor %}
 ```
 
@@ -74,10 +74,10 @@ Rather than typing “`entry.entriesFieldHandle`” every time, you can call it 
 
 {% if entries | length %}
 
-    <h3>Some great entries</h3>
-    {% for entry in entries %}
-        ...
-    {% endfor %}
+  <h3>Some great entries</h3>
+  {% for entry in entries %}
+    ...
+  {% endfor %}
 
 {% endif %}
 ```
@@ -94,7 +94,7 @@ If your Entries field is only meant to have a single entry selected, remember th
 {% set entry = entry.myEntriesField.first() %}
 
 {% if entry %}
-    ...
+  ...
 {% endif %}
 ```
 

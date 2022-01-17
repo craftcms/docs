@@ -136,7 +136,7 @@ use mynamespace\gql\interfaces\elements\Widget as WidgetInterface;
 use mynamespace\gql\arguments\elements\Widget as WidgetArguments;
 use mynamespace\gql\resolvers\elements\Widget as WidgetResolver;
 
-class Widget extends craft\gql\base\Query
+class Widget extends \craft\gql\base\Query
 {
     public static function getQueries($checkToken = true): array
     {
@@ -184,7 +184,10 @@ Event::on(
     Gql::class,
     Gql::EVENT_REGISTER_GQL_QUERIES,
     function(RegisterGqlQueriesEvent $event) {
-        $event->queries[] = Widget::class;
+        $event->queries = array_merge(
+            $event->queries,
+            Widget::getQueries()
+        );
     }
 );
 ```
@@ -223,7 +226,7 @@ class Widget extends craft\gql\base\ElementArguments
                 'type' => Type::boolean(),
                 'description' => 'Narrows query results based on approved status.'
             ],
-        );
+        ]);
     }
 }
 ```
@@ -324,55 +327,30 @@ Craft also includes more complex, relational input objects:
 
 You can use any of these in your type definitions, i.e. `DateTime::getType()` or `Asset::getType()`.
 
-### Example Type Class
+### Example Element Type
 
-This example extends Craft’s element GraphQL [interface](#interfaces).
+::: tip
+“Element Type” in this context refers to the GraphQL type for our custom element, as opposed to Craft’s concept of [Element Types](./element-types.md) that are not GraphQL-specific.
+:::
 
-It does this in order to define a single GraphQL type for our custom Widget element that adds a custom `approved` field:
+A custom element like our Widget would probably best be described by two classes: an [interface](#interfaces) and a type class that implements it.
+
+The type class for the element is simple: it declares its interface—which we’ll get to in a moment—and otherwise leans on <craft3:craft\gql\types\elements\Element::resolve()>, which you could further customize in a more complex situation.
 
 ```php
-namespace mynamespace\gql\interfaces\elements;
+namespace mynamespace\gql\types\elements;
 
-use GraphQL\Type\Definition\Type;
-use GraphQL\Type\Definition\InterfaceType;
-use craft\gql\GqlEntityRegistry;
+use mynamespace\gql\interfaces\elements\Widget as WidgetInterface;
 
-class Widget extends craft\gql\interfaces\Element
+class Widget extends \craft\gql\types\elements\Element
 {
-    public static function getName(): string
+    public function __construct(array $config)
     {
-        return 'WidgetInterface';
-    }
+        $config['interfaces'] = [
+            WidgetInterface::getType(),
+        ];
 
-    public static function getType($fields = null): Type
-    {
-        // Return the type if it’s already been created
-        if ($type = GqlEntityRegistry::getEntity(self::getName())) {
-            return $type;
-        }
-
-        // Otherwise create the type via the entity registry, which handles prefixing
-        return GqlEntityRegistry::createEntity(self::getName(), new InterfaceType([
-            'name' => static::getName(),
-            'fields' => self::class . '::getFieldDefinitions',
-            'description' => 'This is the interface implemented by all widgets.',
-            'resolveType' => self::class . '::resolveElementTypeName',
-        ]));
-    }
-
-    public static function getFieldDefinitions(): array
-    {
-        // Add our custom widget’s field to common ones for all elements
-        return TypeManager::prepareFieldDefinitions(array_merge(
-            parent::getFieldDefinitions(),
-            [
-                'approved' => [
-                    'name' => 'approved',
-                    'type' => Type::boolean(),
-                    'description' => 'User account ID of the partner listing’s owner.'
-                ],
-            ]
-        ), self::getName());
+        parent::__construct($config);
     }
 }
 ```
@@ -414,7 +392,7 @@ use yii\base\Event;
 Event::on(
     TypeManager::class,
     TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS,
-    function(DefineGqlTypeFields $e) {
+    function(DefineGqlTypeFieldsEvent $event) {
         // Remove all ids to enforce use of uids
         unset($event->fields['id']);
 
@@ -451,6 +429,59 @@ You don’t have to use interfaces, but they’re a nice way of formalizing the 
 - <craft3:craft\gql\interfaces\elements\Tag>
 - <craft3:craft\gql\interfaces\elements\User>
 
+### Example Interface
+
+This example extends Craft’s element GraphQL interface.
+
+It does this in order to define a single GraphQL type for our custom Widget element that adds a custom `approved` field:
+
+```php
+namespace mynamespace\gql\interfaces\elements;
+
+use GraphQL\Type\Definition\Type;
+use GraphQL\Type\Definition\InterfaceType;
+use craft\gql\GqlEntityRegistry;
+
+class Widget extends \craft\gql\interfaces\Element
+{
+    public static function getName(): string
+    {
+        return 'WidgetInterface';
+    }
+
+    public static function getType($fields = null): Type
+    {
+        // Return the type if it’s already been created
+        if ($type = GqlEntityRegistry::getEntity(self::getName())) {
+            return $type;
+        }
+
+        // Otherwise create the type via the entity registry, which handles prefixing
+        return GqlEntityRegistry::createEntity(self::getName(), new InterfaceType([
+            'name' => static::getName(),
+            'fields' => self::class . '::getFieldDefinitions',
+            'description' => 'This is the interface implemented by all widgets.',
+            'resolveType' => self::class . '::resolveElementTypeName',
+        ]));
+    }
+
+    public static function getFieldDefinitions(): array
+    {
+        // Add our custom widget’s field to common ones for all elements
+        return TypeManager::prepareFieldDefinitions(array_merge(
+            parent::getFieldDefinitions(),
+            [
+                'approved' => [
+                    'name' => 'approved',
+                    'type' => Type::boolean(),
+                    'description' => 'Whether the widget is approved.'
+                ],
+            ]
+        ), self::getName());
+    }
+}
+```
+
 ## Resolvers
 
 A resolver is responsible for mapping a GraphQL API field to its Craft API equivalent.
@@ -467,7 +498,7 @@ namespace mynamespace\gql\resolvers\elements;
 use mynamespace\elements\Widget as WidgetElement;
 use mynamespace\helpers\Gql as GqlHelper;
 
-class Widget extends craft\gql\base\ElementResolver
+class Widget extends \craft\gql\base\ElementResolver
 {
     public static function prepareQuery($source, array $arguments, $fieldName = null)
     {
@@ -513,7 +544,7 @@ The handling of `$source` here is important, because `prepareQuery()` may be cal
 
 Craft introduces the concept of generators to bridge the gap between a complex content model and a GraphQL schema that needs to detail every potential type of content.
 
-In the [example interface](#example-type-class) above, we kept things simple by adding only one GraphQL type to the schema. In other words, our widget only comes in one “flavor.” If the data you’re representing only appears in one form, that may work great!
+In the [example interface](#example-interface) above, we kept things simple by adding only one GraphQL type to the schema. In other words, our widget only comes in one “flavor.” If the data you’re representing only appears in one form, that may work great!
 
 It’s common in Craft, however, for elements to have multiple types: entries have sections and entry types, assets have volumes, categories have groups, and so on. The site developer can create however many of these flavors they’d like, and yet we still need each one to be accounted for in the GraphQL schema. This is exactly the situation generators help with.
 
@@ -550,7 +581,7 @@ Our single-flavor widget wouldn’t actually need to generate multiple types sin
 namespace mynamespace\gql\types\generators;
 
 use mynamespace\elements\Widget as WidgetElement;
-use mynamespace\gql\types\elements\Widget as WidgetType;
+use mynamespace\gql\types\elements\Widget;
 use mynamespace\gql\interfaces\elements\Widget as WidgetInterface;
 use craft\gql\base\GeneratorInterface;
 use craft\gql\GqlEntityRegistry;
@@ -578,7 +609,7 @@ class WidgetType implements GeneratorInterface
         return GqlEntityRegistry::getEntity($typeName) ?:
             GqlEntityRegistry::createEntity(
                 $typeName,
-                new WidgetType([
+                new Widget([
                     'name' => $typeName,
                     'fields' => function() use ($widgetFields) {
                         return $widgetFields;
@@ -604,7 +635,7 @@ namespace mynamespace\gql\types\generators;
 
 use mynamespace\Plugin;
 use mynamespace\elements\Widget as WidgetElement;
-use mynamespace\gql\types\elements\Widget as WidgetType;
+use mynamespace\gql\types\elements\Widget;
 use mynamespace\gql\interfaces\elements\Widget as WidgetInterface;
 use mynamespace\helpers\Gql as MyGqlHelper;
 use craft\gql\base\GeneratorInterface;
@@ -639,7 +670,7 @@ class WidgetType implements GeneratorInterface
     public static function generateType($context): ObjectType
     {
         // Get the intended GQL type name as determined by the element type
-        $typeName = WidgetElement::gqlTypeNameByContext($widgetType);
+        $typeName = WidgetElement::gqlTypeNameByContext($context);
 
         // Get element’s user-defined content fields and
         $contentFieldGqlTypes = self::getContentFields($context);
@@ -657,7 +688,7 @@ class WidgetType implements GeneratorInterface
         return GqlEntityRegistry::getEntity($typeName) ?:
             GqlEntityRegistry::createEntity(
                 $typeName,
-                new WidgetType([
+                new Widget([
                     'name' => $typeName,
                     'fields' => function() use ($widgetFields) {
                         return $widgetFields;
@@ -769,7 +800,7 @@ Event::on(
 
 A Mutation class defines named mutations that should be available, including consideration for scope access. Each mutation can have its own [arguments](#arguments) and type, and it will need a mutation resolver for modifying data using Craft’s API.
 
-Our example could provide a `saveWidget` mutation for saving a new widget:
+Our example could provide a `createWidget` mutation for creating a new widget:
 
 ::: code
 ```graphql{2} GraphQL Query
@@ -905,7 +936,7 @@ class Widget extends ElementMutationResolver
         }
 
         // Return the newly-saved element
-        return $elementService->getElementById($comment->id, CommentElement::class);
+        return $elementService->getElementById($widget->id, WidgetElement::class);
     }
 }
 ```
@@ -926,7 +957,7 @@ Event::on(
     Gql::class,
     Gql::EVENT_REGISTER_GQL_MUTATIONS,
     function(RegisterGqlMutationsEvent $event) {
-        $event->mutations[] = array_merge(
+        $event->mutations = array_merge(
             $event->mutations,
             WidgetMutations::getMutations(),
         );
@@ -1101,7 +1132,7 @@ Event::on(
     ArgumentManager::class,
     ArgumentManager::EVENT_DEFINE_GQL_ARGUMENT_HANDLERS,
     function(RegisterGqlArgumentHandlersEvent $event) {
-        $event->handlers[] = RelatedWidgets::class;
+        $event->handlers["argumentName"] = RelatedWidgets::class;
     }
 });
 ```
@@ -1110,7 +1141,7 @@ Event::on(
 
 GraphQL complexity values are numeric scores assigned to fields that indicate how much processing power will be needed to return a result.
 
-The combined values are limited by Craft’s <craft3:maxGraphqlComplexity> setting. If a query or mutation’s complexity exceeds that limit, it will not be executed. Assigning appropriate complexity values ensures that a Craft site developer may manage that threshold for a safe, optimal use of compute resources.
+The combined values are limited by Craft’s <config3:maxGraphqlComplexity> setting. If a query or mutation’s complexity exceeds that limit, it will not be executed. Assigning appropriate complexity values ensures that a Craft site developer may manage that threshold for a safe, optimal use of compute resources.
 
 If you provide a field definition that involves relations or processor-intensive operations, you should specify a complexity score.
 

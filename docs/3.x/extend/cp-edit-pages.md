@@ -33,41 +33,41 @@ The model being edited will be available to the template as a predefined variabl
 {% set fullPageForm = true %}
 
 {% block content %}
-    {# Have the form submit to a my-plugin/events/save controller action #}
-    {{ actionInput('my-plugin/events/save') }}
-    
-    {# Have the save action redirect to /my-plugin/events afterward #}
-    {{ redirectInput('my-plugin/events') }}
+  {# Have the form submit to a my-plugin/events/save controller action #}
+  {{ actionInput('my-plugin/events/save') }}
+  
+  {# Have the save action redirect to /my-plugin/events afterward #}
+  {{ redirectInput('my-plugin/events') }}
 
-    {{ forms.textField({
-      label: 'Event Name'|t('plugin-handle'),
-      instructions: 'The name of the event'|t('plugin-handle'),
-      id: 'name',
-      name: 'name',
-      value: event.name,
-      required: true,
-      errors: event.getErrors('name'),
-    }) }}
-    
-    {{ forms.dateField({
-      label: 'Start Date'|t('plugin-handle'),
-      instructions: 'The start date of the event.'|t('plugin-handle'),
-      id: 'start-date',
-      name: 'startDate',
-      value: event.startDate,
-      required: true,
-      errors: event.getErrors('startDate'),
-    }) }}
-    
-    {{ forms.dateField({
-      label: 'End Date'|t('plugin-handle'),
-      instructions: 'The end date of the event.'|t('plugin-handle'),
-      id: 'end-date',
-      name: 'endDate',
-      value: event.endDate,
-      required: true,
-      errors: event.getErrors('endDate'),
-    }) }}
+  {{ forms.textField({
+    label: 'Event Name'|t('plugin-handle'),
+    instructions: 'The name of the event'|t('plugin-handle'),
+    id: 'name',
+    name: 'name',
+    value: event.name,
+    required: true,
+    errors: event.getErrors('name'),
+  }) }}
+  
+  {{ forms.dateField({
+    label: 'Start Date'|t('plugin-handle'),
+    instructions: 'The start date of the event.'|t('plugin-handle'),
+    id: 'start-date',
+    name: 'startDate',
+    value: event.startDate,
+    required: true,
+    errors: event.getErrors('startDate'),
+  }) }}
+  
+  {{ forms.dateField({
+    label: 'End Date'|t('plugin-handle'),
+    instructions: 'The end date of the event.'|t('plugin-handle'),
+    id: 'end-date',
+    name: 'endDate',
+    value: event.endDate,
+    required: true,
+    errors: event.getErrors('endDate'),
+  }) }}
 {% endblock %}
 ```
 

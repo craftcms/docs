@@ -17,9 +17,9 @@ The following is a table of gateways provided by first-party plugins.
 |----------------------------------|-----------------------------------------|--------------------------------------------------------------------|---------------------|
 | `craftcms/commerce-stripe`       | Stripe                                  | Uses Stripe SDK; only first-party gateway to support subscriptions | Yes                 |
 | `craftcms/commerce-paypal`       | PayPal Pro; PayPal REST; PayPal Express | PayPal REST supports storing payment information                   | Only PayPal Express |
-| `craftcms/commerce-sagepay`      | SagePay Direct; SagePay Server          | SagePay Direct requires setting up webhooks                        | Yes                 |
+| `craftcms/commerce-sagepay`      | SagePay Direct; SagePay Server          |                                                                    | Yes                 |
 | `craftcms/commerce-multisafepay` | MultiSafePay REST                       | Does not support authorize charges                                 | Yes                 |
-| `craftcms/commerce-worldpay`     | Worldpay JSON                           | -                                                                  | No                  |
+| `craftcms/commerce-worldpay`     | Worldpay JSON                           |                                                                    | No                  |
 | `craftcms/commerce-eway`         | eWAY Rapid                              | Supports storing payment information                               | Yes                 |
 | `craftcms/commerce-mollie`       | Mollie                                  | Does not support authorize charges                                 | Yes                 |
 

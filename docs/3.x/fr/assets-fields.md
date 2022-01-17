@@ -89,8 +89,8 @@ Possible values include:
 ```twig
 {# Fetch entries with a related asset #}
 {% set entries = craft.entries()
-    .myFieldHandle(':notempty:')
-    .all() %}
+  .myFieldHandle(':notempty:')
+  .all() %}
 ```
 
 ### Working with Assets Field Data
@@ -108,11 +108,11 @@ To loop through all of the related assets, call [all()](craft3:craft\db\Query::a
 ```twig
 {% set relatedAssets = entry.myFieldHandle.all() %}
 {% if relatedAssets|length %}
-    <ul>
-        {% for rel in relatedAssets %}
-            <li><a href="{{ rel.url }}">{{ rel.filename }}</a></li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for rel in relatedAssets %}
+      <li><a href="{{ rel.url }}">{{ rel.filename }}</a></li>
+    {% endfor %}
+  </ul>
 {% endif %}
 ```
 
@@ -125,7 +125,7 @@ If you only want the first related asset, call [one()](craft3:craft\db\Query::on
 ```twig
 {% set rel = entry.myFieldHandle.one() %}
 {% if rel %}
-    <p><a href="{{ rel.url }}">{{ rel.filename }}</a></p>
+  <p><a href="{{ rel.url }}">{{ rel.filename }}</a></p>
 {% endif %}
 ```
 
@@ -133,7 +133,7 @@ If you just need to check if there are any related assets (but don’t need to f
 
 ```twig
 {% if entry.myFieldHandle.exists() %}
-    <p>There are related assets!</p>
+  <p>There are related assets!</p>
 {% endif %}
 ```
 
@@ -141,8 +141,8 @@ You can set [parameters](assets.md#parameters) on the asset query as well. For e
 
 ```twig
 {% set relatedAssets = clone(entry.myFieldHandle)
-    .kind('image')
-    .all() %}
+  .kind('image')
+  .all() %}
 ```
 
 ::: tip
@@ -162,33 +162,33 @@ For example, you could create a list of checkboxes for each of the possible rela
 
 {# Get all of the possible asset options #}
 {% set possibleAssets = craft.assets()
-    .volume('siteAssets')
-    .kind('image')
-    .orderBy('filename ASC')
-    .withTransforms([{ width: 100, height: 100 }])
-    .all() %}
+  .volume('siteAssets')
+  .kind('image')
+  .orderBy('filename ASC')
+  .withTransforms([{ width: 100, height: 100 }])
+  .all() %}
 
 {# Get the currently related asset IDs #}
 {% set relatedAssetIds = entry is defined
-    ? entry.myFieldHandle.ids()
-    : [] %}
+  ? entry.myFieldHandle.ids()
+  : [] %}
 
 <ul>
-    {% for possibleAsset in possibleAssets %}
-        <li>
-            <label>
-                {{ input(
-                    'checkbox',
-                    'fields[myFieldHandle][]',
-                    possibleAsset.id,
-                    { checked: possibleAsset.id in relatedAssetIds }
-                ) }}
-                {{ tag('img', { src: possibleAsset.url }) }}
-                {{ possibleAsset.getImg({ width: 100, height: 100 }) }}
-                {{ possibleAsset.filename }}
-            </label>
-        </li>
-    {% endfor %}
+  {% for possibleAsset in possibleAssets %}
+    <li>
+      <label>
+        {{ input(
+          'checkbox',
+          'fields[myFieldHandle][]',
+          possibleAsset.id,
+          { checked: possibleAsset.id in relatedAssetIds }
+        ) }}
+        {{ tag('img', { src: possibleAsset.url }) }}
+        {{ possibleAsset.getImg({ width: 100, height: 100 }) }}
+        {{ possibleAsset.filename }}
+      </label>
+    </li>
+  {% endfor %}
 </ul>
 ```
 
@@ -212,14 +212,14 @@ Alternatively, you can submit Base64-encoded file data, which the Assets field w
 
 ```twig
 {{ hiddenInput(
-    'fields[myFieldHandle][data][]',
-    'data:image/jpeg;base64,my-base64-data'
+  'fields[myFieldHandle][data][]',
+  'data:image/jpeg;base64,my-base64-data'
 ) }}
 {{ hiddenInput('fields[myFieldHandle][filename][]', 'myFile.ext') }}
 ```
 
 ## See Also
 
-* [Asset Queries](assets.md#querying-assets)
-* <craft3:craft\elements\Asset>
-* [Relations](relations.md)
+- [Asset Queries](assets.md#querying-assets)
+- <craft3:craft\elements\Asset>
+- [Relations](relations.md)

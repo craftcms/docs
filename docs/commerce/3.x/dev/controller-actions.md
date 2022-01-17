@@ -107,6 +107,7 @@ Param | Description
 `billingAddressId` | ID of an existing address to use as the billing address.
 `billingAddressSameAsShipping` | Set to `true` to use shipping address for billing address. (Will ignore billing address ID and fields.)
 `clearNotices` | When passed, clears all cart notices.
+`clearLineItems` | When passed, empties all line items from cart.
 `couponCode` | Coupon code for a [discount](../discounts.md) that should be applied to the cart.
 `email` | Email address to be associated with the cart.
 `estimatedBillingAddress[]` | Array of estimated billing address lines. (See [Addresses](../addresses.md#address-lines)).

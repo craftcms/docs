@@ -32,7 +32,7 @@ Site Groups allow you to organize your sites together by commonality, like langu
 
 Craft creates the first Site Group for you, named after the default site, and assigns the default site to that group.
 
-Similar to Field Groups, Site Groups are for organization only.
+In addition to organization, Site Groups can be used in a section’s Propagation Method. By selecting **Save entries to other sites in the same group**, Craft will only propagate that section’s new entries to sites in the same group.
 
 You can access the current site’s group information using `currentSite.group`:
 
@@ -59,7 +59,7 @@ In your templates, you can also access the language setting via `craft.app.langu
 
 ```twig
 {% if craft.app.language == 'de' %}
-    <p>Guten Tag!</p>
+  <p>Guten Tag!</p>
 {% endif %}
 ```
 
@@ -80,14 +80,18 @@ You can change the Primary site once you create additional sites. Craft will aut
 
 ### Site URL
 
-Each site has a Base URL, which Craft uses as the starting point when generating dynamic links to entries and other site content.
+Each site has a Base URL Craft uses to generate links to entries and other site content.
 
 Multiple sites can share the same host name, such as `https://craftcms.com/` and `https://craftcms.com/de/`, or they can have different host names, such as `https://craftcms.com/` and `https://de.craftcms.com/`.
 
 If you want to create a site with a different host name, you must configure your server to handle traffic for it. The host name can either point to the same web root as your current site (e.g. `web/`), or you may want to give it its own separate web root. If you do the latter, make sure you copy your `.htaccess` and `index.php` files into the new web root.
 
 ::: tip
-If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](https://craftcms.com/support/license-enforcement), you’ll want to pick one of the domains to access the Craft control panel from for _all_ of the sites.
+If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](https://craftcms.com/support/license-enforcement), you’ll want to pick one of the domains to access the Craft control panel from for _all_ sites.
+:::
+
+::: tip
+If your primary site’s Base URL includes a subdirectory (i.e. `https://foo.dev/bar/`), you should set the [baseCpUrl](config3:baseCpUrl) config setting.
 :::
 
 ::: warning
@@ -187,7 +191,7 @@ Use `craft.app.language` to toggle specific parts of your templates, depending o
 
 ```twig
 {% if craft.app.language == 'de' %}
-    <p>I like bread and beer.</p>
+  <p>I like bread and beer.</p>
 {% endif %}
 ```
 
@@ -283,7 +287,7 @@ To replace the placeholder values with dynamic values when translating the messa
 ::: code
 ```twig
 <a href="/contact">{{ 'Welcome back, {name}'|t(params = {
-    name: currentUser.friendlyName,
+  name: currentUser.friendlyName,
 }) }}</a>
 ```
 ```php

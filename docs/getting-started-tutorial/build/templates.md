@@ -204,10 +204,10 @@ Matrix content is stored in whatever blocks we’ve defined. To display that con
 {% extends "_layout.twig" %}
 
 {% set featureImage = {
-    mode: 'crop',
-    width: 900,
-    height: 600,
-    quality: 90
+  mode: 'crop',
+  width: 900,
+  height: 600,
+  quality: 90
 } %}
 
 {% block content %}
@@ -273,10 +273,10 @@ We can now go back to `templates/blog/_entry.twig` and _include_ that template i
 {% extends "_layout.twig" %}
 
 {% set featureImage = {
-    mode: 'crop',
-    width: 900,
-    height: 600,
-    quality: 90
+  mode: 'crop',
+  width: 900,
+  height: 600,
+  quality: 90
 } %}
 
 {% block content %}
@@ -327,10 +327,10 @@ While we’re building, let’s add some comments so we can remember what we’v
 
 {# create settings for image transform #}
 {% set featureImage = {
-    mode: 'crop',
-    width: 900,
-    height: 600,
-    quality: 90
+  mode: 'crop',
+  width: 900,
+  height: 600,
+  quality: 90
 } %}
 
 {% block content %}
@@ -480,8 +480,8 @@ Now create `templates/_includes/listing.twig`. We’ll use this for listing blog
       {% set image = post.featureImage.one() %}
       <div class="w-1/4">
         <img src="{{ image.getUrl({ width: 300, height: 300}) }}"
-            alt="{{ image.title }}"
-            class="block"
+          alt="{{ image.title }}"
+          class="block"
         />
       </div>
     {% endif %}

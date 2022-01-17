@@ -5,8 +5,8 @@ This tag will queue up a CSS snippet for inclusion on the page, wrapped by a med
 ```twig
 {% set myCss %}
 .content img.hero {
-    background-image: url({{ heroImage.getUrl('hires') }});
-    background-size: 1000px;
+  background-image: url({{ heroImage.getUrl('hires') }});
+  background-size: 1000px;
 }
 {% endset %}
 

@@ -14,9 +14,9 @@ Here’s what a typical element query might look like:
 ```twig
 {# Create an entry query and set some parameters on it #}
 {% set entryQuery = craft.entries()
-    .section('news')
-    .orderBy('postDate DESC')
-    .limit(10) %}
+  .section('news')
+  .orderBy('postDate DESC')
+  .limit(10) %}
 
 {# Execute the query and get the results #}
 {% set entries = entryQuery.all() %}
@@ -60,9 +60,9 @@ Most of the time, you just want to get the elements that you’re querying for. 
 ::: code
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .limit(10)
-    .all() %}
+  .section('news')
+  .limit(10)
+  .all() %}
 ```
 ```php
 use craft\elements\Entry;
@@ -81,9 +81,9 @@ If you only need a single element, call `one()` instead of `all()`. It will eith
 ::: code
 ```twig
 {% set entry = craft.entries()
-    .section('news')
-    .slug('hello-world')
-    .one() %}
+  .section('news')
+  .slug('hello-world')
+  .one() %}
 ```
 ```php
 use craft\elements\Entry;
@@ -102,9 +102,9 @@ If you just need to check if any elements exist that match the element query, yo
 ::: code
 ```twig
 {% set exists = craft.entries()
-    .section('news')
-    .slug('hello-world')
-    .exists() %}
+  .section('news')
+  .slug('hello-world')
+  .exists() %}
 ```
 ```php
 use craft\elements\Entry;
@@ -123,8 +123,8 @@ If you want to know how many elements match your element query, you can call `co
 ::: code
 ```twig
 {% set count = craft.entries()
-    .section('news')
-    .count() %}
+  .section('news')
+  .count() %}
 ```
 ```php
 use craft\elements\Entry;
@@ -146,8 +146,8 @@ If you just want a list of matching element IDs, you can call `ids()`.
 ::: code
 ```twig
 {% set entryIds = craft.entries()
-    .section('news')
-    .ids() %}
+  .section('news')
+  .ids() %}
 ```
 ```php
 use craft\elements\Entry;
@@ -156,6 +156,37 @@ $entryIds = Entry::find()
     ->section('news')
     ->ids();
 ```
+:::
+
+## Caching Element Queries
+
+### `cache()`
+
+Craft’s element query results can be cached with the `cache()` function:
+
+::: code
+```twig
+{% set entries = craft.entries()
+  .section('news')
+  .limit(10)
+  .cache()
+  .all() %}
+```
+```php
+use craft\elements\Entry;
+
+$entries = Entry::find()
+    ->section('news')
+    ->limit(10)
+    ->cache()
+    ->all();
+```
+:::
+
+This is a layer on top of data caching that’s different from the [template {% cache %} tag](./dev/tags.md#cache).
+
+::: tip
+Craft registers an [ElementQueryTagDependency](craft3:craft\cache\ElementQueryTagDependency) for you by default, so cache dependencies and invalidation are handled automatically.
 :::
 
 ## Advanced Element Queries
@@ -197,6 +228,10 @@ Element queries are specialized [query builders](https://www.yiiframework.com/do
 - [average()](yii2:yii\db\Query::average())
 - [min()](yii2:yii\db\Query::min())
 - [max()](yii2:yii\db\Query::max())
+
+:::tip
+If you need to reference a custom field column in any of the above methods, you will need to use its complete column name (e.g. `field_altText_xssyxqvs`).
+:::
 
 ::: tip
 When customizing an element query, you can call [getRawSql()](craft3:craft\db\Query::getRawSql()) to get the full SQL that is going to be executed by the query, so you have a better idea of what to modify.

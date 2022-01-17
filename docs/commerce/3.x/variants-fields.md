@@ -40,7 +40,7 @@ To check if your Commerce Variants field has any selected product variants, you 
 
 ```twig
 {% if entry.myFieldHandle|length %}
-    {# ... #}
+  {# ... #}
 {% endif %}
 ```
 
@@ -48,7 +48,7 @@ Loop through all the selected variants using `all()`:
 
 ```twig
 {% for variant in entry.myFieldHandle.all() %}
-    {# ... #}
+  {# ... #}
 {% endfor %}
 ```
 
@@ -58,20 +58,17 @@ Rather than typing `entry.myFieldHandle` every time, you can call it once and se
 {% set variants = entry.myFieldHandle.all() %}
 
 {% if variants|length %}
-
-    <h3>Consider buying these:</h3>
-
-    <ul>
-        {% for variant in variants %}
-            {% set product = variant.getProduct() %}
-            <li>
-                <a href="{{ product.url }}">
-                    {{ product.title ~ ': ' ~ variant.title }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-
+  <h3>Consider buying these:</h3>
+  <ul>
+    {% for variant in variants %}
+      {% set product = variant.getProduct() %}
+      <li>
+        <a href="{{ product.url }}">
+          {{ product.title ~ ': ' ~ variant.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
 {% endif %}
 ```
 
@@ -86,6 +83,6 @@ If your variants field is only meant to have a single variant selected, remember
 ```twig
 {% set variant = entry.myFieldHandle.one() %}
 {% if variant %}
-    {# ... #}
+  {# ... #}
 {% endif %}
 ```

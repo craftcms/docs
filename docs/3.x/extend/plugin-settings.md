@@ -117,16 +117,16 @@ To give your plugin a settings page, create a `templates/` directory within your
 {% import "_includes/forms" as forms %}
 
 {{ forms.textField({
-    first: true,
-    label: "Foo",
-    name: 'foo',
-    value: settings.foo
+  first: true,
+  label: "Foo",
+  name: 'foo',
+  value: settings.foo
 }) }}
 
 {{ forms.textField({
-    label: "Bar",
-    name: 'bar',
-    value: settings.bar
+  label: "Bar",
+  name: 'bar',
+  value: settings.bar
 }) }}
 ```
 

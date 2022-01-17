@@ -13,7 +13,7 @@ The store manager can also send any email manually from an order’s edit page, 
 
 ## Settings
 
-Before setting up emails for Craft Commerce, ensure that your Craft CMS installation is [properly configured for email delivery](https://craftcms.com/guides/why-doesnt-craft-send-emails#setting-up-email).
+Before setting up emails for Craft Commerce, ensure that your Craft CMS installation is [properly configured for email delivery](https://craftcms.com/knowledge-base/why-doesnt-craft-send-emails#setting-up-email).
 You can set up your email gateway in the control panel by navigating to **Settings** → **Email**.
 
 ::: tip

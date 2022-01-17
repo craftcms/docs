@@ -180,19 +180,21 @@ export default {
     Hamburger
   },
 
-  data() {
-    return {
-      isSidebarOpen: false,
-      isSidebarTransitioning: false,
-      version: null,
-      suggestedUpdatePath: null,
-      isDark: false,
-      colorModes: {
-        light: "theme-light",
-        dark: "theme-dark"
-      }
-    };
-  },
+  data: () => ({
+    isSidebarOpen: false,
+    isSidebarTransitioning: false,
+    version: null,
+    suggestedUpdatePath: null,
+    isDark: false,
+    browserWidth:
+      typeof document !== "undefined"
+        ? document.documentElement.clientWidth
+        : 0,
+    colorModes: {
+      light: "theme-light",
+      dark: "theme-dark"
+    }
+  }),
 
   computed: {
     shouldShowNavbar() {
@@ -289,11 +291,11 @@ export default {
       }
     }
 
-    this.$nextTick(function() {
-      window.addEventListener("resize", () => {
-        this.isSidebarOpen = false;
-      });
-    });
+    window.addEventListener("resize", this.handleWidthChange);
+  },
+
+  unmounted() {
+    window.removeEventListener("resize", this.handleWidthChange);
   },
 
   methods: {
@@ -301,6 +303,21 @@ export default {
       this.temporarilyAnimateBody();
       this.isSidebarOpen = typeof to === "boolean" ? to : !this.isSidebarOpen;
       this.$emit("toggle-sidebar", this.isSidebarOpen);
+    },
+
+    handleWidthChange() {
+      if (typeof document === "undefined") {
+        return;
+      }
+
+      /**
+       * Mobile Safari throws a lot of window resize events;
+       * make sure the viewport width actually changed.
+       */
+      if (document.documentElement.clientWidth !== this.browserWidth) {
+        this.browserWidth = document.documentElement.clientWidth;
+        this.isSidebarOpen = false;
+      }
     },
 
     /**

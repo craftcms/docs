@@ -103,7 +103,7 @@ return [
 ];
 ```
 
-That will remove the UI for most administrative settings that affect the project config, and also places the project config in a read-only state so there’s no chance its YAML will be altered.
+That will remove the UI for administrative settings that affect the project config, and also places the project config in a read-only state so there’s no chance its YAML will be altered.
 
 ### Config Data Could Get Out of Sync
 
@@ -150,3 +150,7 @@ You can manually trigger YAML file generation from the Project Config utility, o
 ```bash
 php craft project-config/write
 ```
+
+::: warning
+If you have YAML files generated, be sure to run the `project-config/write` command before updating Craft and/or plugins. Otherwise the out-of-date YAML files could conflict with project config changes performed by the update migrations.
+:::

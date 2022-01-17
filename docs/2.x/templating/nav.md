@@ -6,16 +6,16 @@ This tag helps create a hierarchical navigation menu for entries in a [Structure
 {% set entries = craft.entries.section('pages') %}
 
 <ul id="nav">
-    {% nav entry in entries %}
-        <li>
-            <a href="{{ entry.url }}">{{ entry.title }}</a>
-            {% ifchildren %}
-                <ul>
-                    {% children %}
-                </ul>
-            {% endifchildren %}
-        </li>
-    {% endnav %}
+  {% nav entry in entries %}
+    <li>
+      <a href="{{ entry.url }}">{{ entry.title }}</a>
+      {% ifchildren %}
+        <ul>
+          {% children %}
+        </ul>
+      {% endifchildren %}
+    </li>
+  {% endnav %}
 </ul>
 ```
 

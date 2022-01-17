@@ -21,18 +21,19 @@ Example:
 
 ```twig
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    <input type="hidden" name="cartUpdatedNotice" value="Added coupon code.">
-    {{ redirectInput('shop/cart') }}
-    {{ csrfInput() }}
+  <input type="hidden" name="action" value="commerce/cart/update-cart">
+  <input type="hidden" name="cartUpdatedNotice" value="Added coupon code.">
+  {{ redirectInput('shop/cart') }}
+  {{ csrfInput() }}
 
-    <input type="text"
-       name="couponCode"
-       class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}"
-       value="{{ cart.couponCode }}"
-       placeholder="{{ "Coupon Code"|t }}">
+  <input type="text"
+         name="couponCode"
+         value="{{ cart.couponCode }}"
+         class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}"
+         placeholder="{{ "Coupon Code"|t }}"
+  >
 
-    <input type="submit" value="Update Cart"/>
+  <input type="submit" value="Update Cart"/>
 </form>
 ```
 
@@ -44,7 +45,7 @@ You can retrieve the discount associated with the coupon code with:
 ```twig
 {% set discount = craft.commerce.discounts.getDiscountByCode(cart.couponCode) %}
 {% if discount %}
-{{ discount.name }} - {{ discount.description }}
+  {{ discount.name }} - {{ discount.description }}
 {% endif %}
 ```
 

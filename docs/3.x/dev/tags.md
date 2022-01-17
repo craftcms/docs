@@ -46,9 +46,9 @@ This tag will cache a portion of your template, which can improve performance fo
 
 ```twig
 {% cache %}
-    {% for block in entry.myMatrixField.all() %}
-        <p>{{ block.text }}</p>
-    {% endfor %}
+  {% for block in entry.myMatrixField.all() %}
+    <p>{{ block.text }}</p>
+  {% endfor %}
 {% endcache %}
 ```
 
@@ -198,9 +198,9 @@ The `{% css %}` tag can be used to register a CSS file or a CSS code block.
 
 {# Register a CSS code block #}
 {% css %}
-    .content {
-        color: {{ entry.textColor }};
-    }
+  .content {
+    color: {{ entry.textColor }};
+  }
 {% endcss %}
 ```
 
@@ -239,7 +239,7 @@ This tag will prevent the rest of the template from executing, and end the reque
 {% set entry = craft.entries.id(entryId).one() %}
 
 {% if not entry %}
-    {% exit 404 %}
+  {% exit 404 %}
 {% endif %}
 ```
 
@@ -296,7 +296,7 @@ The `{% html %}` tag can be used to register arbitrary HTML code on the page.
 
 ```twig
 {% html %}
-    <p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>
+  <p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>
 {% endhtml %}
 ```
 
@@ -339,11 +339,11 @@ The `{% js %}` tag can be used to register a JavaScript file or a JavaScript cod
 
 {# Register a JS code block #}
 {% js %}
-    _gaq.push([
-        "_trackEvent",
-        "Search",
-        "{{ searchTerm|e('js') }}"
-    ]);
+  _gaq.push([
+    "_trackEvent",
+    "Search",
+    "{{ searchTerm|e('js') }}"
+  ]);
 {% endjs %}
 ```
 
@@ -389,7 +389,7 @@ Any HTML attributes that should be included on the `<script>` tag.
 
 ```twig
 {% js "/assets/js/script.js" with {
-    defer: true
+  defer: true
 } %}
 ```
 
@@ -455,16 +455,16 @@ This tag helps create a hierarchical navigation menu for entries in a [Structure
 {% set entries = craft.entries.section('pages').all() %}
 
 <ul id="nav">
-    {% nav entry in entries %}
-        <li>
-            <a href="{{ entry.url }}">{{ entry.title }}</a>
-            {% ifchildren %}
-                <ul>
-                    {% children %}
-                </ul>
-            {% endifchildren %}
-        </li>
-    {% endnav %}
+  {% nav entry in entries %}
+    <li>
+      <a href="{{ entry.url }}">{{ entry.title }}</a>
+      {% ifchildren %}
+        <ul>
+          {% children %}
+        </ul>
+      {% endifchildren %}
+    </li>
+  {% endnav %}
 </ul>
 ```
 
@@ -504,16 +504,16 @@ This tag makes it easy to paginate query results across multiple pages.
 
 ```twig
 {% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
+  .section('blog')
+  .limit(10) %}
 
 {% paginate query as pageInfo, pageEntries %}
 
 {% for entry in pageEntries %}
-    <article>
-        <h1>{{ entry.title }}</h1>
-        {{ entry.body }}
-    </article>
+  <article>
+    <h1>{{ entry.title }}</h1>
+    {{ entry.body }}
+  </article>
 {% endfor %}
 
 {% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
@@ -568,10 +568,10 @@ Following your `{% paginate %}` tag, you will need to loop through this page’s
 {% paginate craft.entries.section('blog').limit(10) as pageEntries %}
 
 {% for entry in pageEntries %}
-    <article>
-        <h1>{{ entry.title }}</h1>
-        {{ entry.body }}
-    </article>
+  <article>
+    <h1>{{ entry.title }}</h1>
+    {{ entry.body }}
+  </article>
 {% endfor %}
 ```
 
@@ -604,8 +604,8 @@ If you just want simple Previous Page and Next Page links to appear, you can do 
 
 ```twig
 {% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
+  .section('blog')
+  .limit(10) %}
 
 {% paginate query as pageInfo, pageEntries %}
 
@@ -621,8 +621,8 @@ You can add First Page and Last Page links into the mix, you can do that too:
 
 ```twig
 {% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
+  .section('blog')
+  .limit(10) %}
 
 {% paginate query as pageInfo, pageEntries %}
 
@@ -640,8 +640,8 @@ If you want to create a list of nearby pages, perhaps surrounding the current pa
 
 ```twig
 {% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
+  .section('blog')
+  .limit(10) %}
 
 {% paginate query as pageInfo, pageEntries %}
 
@@ -649,13 +649,13 @@ If you want to create a list of nearby pages, perhaps surrounding the current pa
 {% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
 
 {% for page, url in pageInfo.getPrevUrls(5) %}
-    <a href="{{ url }}">{{ page }}</a>
+  <a href="{{ url }}">{{ page }}</a>
 {% endfor %}
 
 <span class="current">{{ pageInfo.currentPage }}</span>
 
 {% for page, url in pageInfo.getNextUrls(5) %}
-    <a href="{{ url }}">{{ page }}</a>
+  <a href="{{ url }}">{{ page }}</a>
 {% endfor %}
 
 {% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
@@ -670,7 +670,7 @@ This tag will redirect the browser to a different URL.
 
 ```twig
 {% if not user or not user.isInGroup('members') %}
-    {% redirect "pricing" %}
+  {% redirect "pricing" %}
 {% endif %}
 ```
 
@@ -698,7 +698,7 @@ You can optionally set flash messages that will show up for the user on the next
 
 ```twig
 {% if not currentUser.isInGroup('members') %}
-    {% redirect "pricing" 301 with notice "You have to be a member to access that!" %}
+  {% redirect "pricing" 301 with notice "You have to be a member to access that!" %}
 {% endif %}
 ```
 
@@ -754,12 +754,12 @@ Take this template for example, which is running different template code dependi
 
 ```twig
 {% if matrixBlock.type == "text" %}
-    {{ matrixBlock.textField|markdown }}
+  {{ matrixBlock.textField|markdown }}
 {% elseif matrixBlock.type == "image" %}
-    {{ matrixBlock.image[0].getImg() }}
+  {{ matrixBlock.image[0].getImg() }}
 {% else %}
-    <p>A font walks into a bar.</p>
-    <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
+  <p>A font walks into a bar.</p>
+  <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
 {% endif %}
 ```
 
@@ -767,13 +767,13 @@ Since all of the conditionals are evaluating the same thing – `matrixBlock.typ
 
 ```twig
 {% switch matrixBlock.type %}
-    {% case "text" %}
-        {{ matrixBlock.textField|markdown }}
-    {% case "image" %}
-        {{ matrixBlock.image[0].getImg() }}
-    {% default %}
-        <p>A font walks into a bar.</p>
-        <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
+  {% case "text" %}
+    {{ matrixBlock.textField|markdown }}
+  {% case "image" %}
+    {{ matrixBlock.image[0].getImg() }}
+  {% default %}
+    <p>A font walks into a bar.</p>
+    <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
 {% endswitch %}
 ```
 
@@ -787,10 +787,10 @@ If you want to check for mulitple values from a single `{% case %}` tag, separat
 
 ```twig
 {% case "h2" or "h3" or "p" %}
-    {# output an <h2>, <h3>, or <p> tag, depending on the block type #}
-    {{ tag(matrixBlock.type, {
-        text: matrixBlock.text
-    }) }}
+  {# output an <h2>, <h3>, or <p> tag, depending on the block type #}
+  {{ tag(matrixBlock.type, {
+      text: matrixBlock.text
+  }) }}
 ```
 
 ### Accessing the parent `loop` variable
@@ -799,15 +799,15 @@ If you’re using the `{% switch %}` tag inside of a `{% for %}` loop, you won�
 
 ```twig
 {% for matrixBlock in entry.matrixField.all() %}
-    {% set loopIndex = loop.index %}
+  {% set loopIndex = loop.index %}
 
-    {% switch matrixBlock.type %}
+  {% switch matrixBlock.type %}
 
-        {% case "text" %}
+    {% case "text" %}
 
-            Loop #{{ loopIndex }}
+        Loop #{{ loopIndex }}
 
-    {% endswitch %}
+  {% endswitch %}
 {% endfor %}
 ```
 
@@ -819,9 +819,9 @@ It’s similar to the [tag](functions.md#tag) _function_, however the `{% tag %}
 
 ```twig
 {% tag 'p' with {
-    class: 'welcome',
+  class: 'welcome',
 } %}
-    Hello, {{ currentUser.friendlyName }}
+  Hello, {{ currentUser.friendlyName }}
 {% endtag %}
 {# Output: <p class="welcome">Hello, Tim</p> #}
 ```
@@ -829,13 +829,13 @@ It’s similar to the [tag](functions.md#tag) _function_, however the `{% tag %}
 `{% tag %}` tags can also be nested:
 ```twig
 {% tag 'div' with {
-    class: 'foo',
+  class: 'foo',
 } %}
-    {% tag 'p' with {
-        class: 'welcome',
-    } -%}
-        Hello, {{ currentUser.friendlyName }}
-    {%- endtag %}
+  {% tag 'p' with {
+    class: 'welcome',
+  } -%}
+    Hello, {{ currentUser.friendlyName }}
+  {%- endtag %}
 {% endtag %}
 {# Output: <div class="foo"><p class="welcome">Hello, Tim</p></div> #}
 ```
@@ -858,10 +858,10 @@ If an attribute is set to `true`, it will be added without a value:
 
 ```twig
 {% tag 'textarea' with {
-    name: 'message',
-    required: true
+  name: 'message',
+  required: true
 } -%}
-    Please foo some bar.
+  Please foo some bar.
 {%- endtag %}
 {# Output: <textarea name="message" required>Please foo some bar.</textarea> #}
 ```

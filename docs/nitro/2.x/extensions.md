@@ -18,7 +18,7 @@ Which PHP extension would you like to enable for craft-support.nitro?
   3. calendar
   4. dba
   5. enchant
-  // remove for readability
+  ...
 Enter your selection: 1
 Apply changes now [Y/n] #
 ```

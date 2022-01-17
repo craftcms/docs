@@ -19,8 +19,8 @@ Possible values include:
 ```twig
 {# Fetch entries with the Lightswitch field enabled #}
 {% set entries = craft.entries()
-    .myFieldHandle(true)
-    .all() %}
+  .myFieldHandle(true)
+  .all() %}
 ```
 ```php
 // Fetch entries with the Lightswitch field enabled
@@ -41,9 +41,9 @@ If you have an element with a Lightswitch field in your template, you can access
 ::: code
 ```twig
 {% if entry.myFieldHandle %}
-    <p>I’m on!</p>
+  <p>I’m on!</p>
 {% else %}
-    <p>I’m off.</p>
+  <p>I’m off.</p>
 {% endif %}
 ```
 ```php
@@ -67,9 +67,9 @@ If you have an element form, such as an [entry form](https://craftcms.com/knowle
 {{ hiddenInput('fields[myFieldHandle]', '') }}
 
 {{ tag('input', {
-    type: 'checkbox',
-    name: 'fields[myFieldHandle]',
-    value: '1',
-    checked: (entry.myFieldHandle ?? false) ? true : false,
+  type: 'checkbox',
+  name: 'fields[myFieldHandle]',
+  value: '1',
+  checked: (entry.myFieldHandle ?? false) ? true : false,
 }) }}
 ```

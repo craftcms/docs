@@ -12,19 +12,27 @@ Matrix fields have the following settings:
 
 ## The Field
 
-On a fresh entry, Matrix fields will just show a group of buttons – one for each of the Block Types you created in the field’s settings.
+On a fresh entry, Matrix fields will just show a group of buttons – one for each of the Block Types you created in the field’s settings:
 
-When you click on one of those buttons, a new block will be created. The Block Type’s name will be shown in the block’s title bar, and each of the Block Type’s fields will be present within the body of the block.
+![An empty Matrix field’s block types](./images/matrix-field-blocks.png)
+
+When you click on one of those buttons, a new block will be created. The Block Type’s name will be shown in the block’s title bar, and each of the Block Type’s fields will be present within the body of the block:
+
+![A newly-added Quote block](./images/matrix-field-new-block.png)
 
 You can add as many blocks to your Matrix field as you’d like—or at least as many as the field’s Min Blocks and Max Blocks settings allow.
 
-Each block has a settings menu that reveals additional things you can do with the block.
+Each block has a settings menu that reveals additional things you can do with the block:
+
+![A Matrix block’s action menu](./images/matrix-block-action-menu.png)
 
 If multiple blocks are selected, the Collapse/Expand, Disable/Enable, and Delete options will apply to each of those selected.
 
 You can collapse Matrix blocks by choosing the **Collapse** menu option or by double-clicking on a block’s title bar. When a block is collapsed, its title bar will show a preview of its content so you can still identify which block it is.
 
-Blocks can also be reordered by dragging the “Move” icon at the end of the block’s title bar. If multiple blocks are selected, all the selected blocks will be going along for the ride.
+Blocks can also be reordered by dragging the “Move” icon (<icon kind="move" />) at the end of the block’s title bar. If multiple blocks are selected, all the selected blocks will be going along for the ride.
+
+You can quickly select _all_ blocks by selecting one and pressing <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>A</kbd>, or selecting a range of blocks starting with the first and then <kbd>Shift</kbd>-clicking the last.
 
 ## Development
 
@@ -34,22 +42,41 @@ When [querying for elements](element-queries.md) that have a Matrix field, you c
 
 Possible values include:
 
-| Value          | Fetches elements…                    |
-| -------------- | ------------------------------------ |
-| `':empty:'`    | that don’t have any Matrix blocks.   |
-| `':notempty:'` | that have at least one Matrix block. |
+| Value                   | Fetches elements…                                                         |
+| ----------------------- | ------------------------------------------------------------------------- |
+| `':empty:'`             | that don’t have any Matrix blocks.                                        |
+| `':notempty:'`          | that have at least one Matrix block.                                      |
+| `100`                   | that have a Matrix block with an ID of 100.                               |
+| `[100, 200]`            | that have Matrix blocks with IDs of 100 or 200.                           |
+| a [MatrixBlock](craft3:craft\elements\MatrixBlock) object | that have the Matrix block.             |
+| an array of [MatrixBlock](craft3:craft\elements\MatrixBlock) objects | that have the Matrix blocks. |
 
 ::: code
 ```twig
 {# Fetch entries with a Matrix block #}
 {% set entries = craft.entries()
-    .myFieldHandle(':notempty:')
-    .all() %}
+  .myFieldHandle(':notempty:')
+  .all() %}
 ```
 ```php
 // Fetch entries with a Matrix block
 $entries = \craft\elements\Entry::find()
     ->myFieldHandle(':notempty:')
+    ->all();
+```
+:::
+
+::: code
+```twig
+{# Fetch entries with Matrix block ID 100 or 200 #}
+{% set entries = craft.entries()
+  .myFieldHandle([100, 200])
+  .all() %}
+```
+```php
+// Fetch entries with a Matrix block
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle([100, 200])
     ->all();
 ```
 :::
@@ -75,11 +102,11 @@ To loop through all the blocks, call [all()](<craft3:craft\db\Query::all()>) and
 ```twig
 {% set blocks = entry.myFieldHandle.all() %}
 {% if blocks|length %}
-    <ul>
-        {% for block in blocks %}
-            <!-- ... -->
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for block in blocks %}
+      <!-- ... -->
+    {% endfor %}
+  </ul>
 {% endif %}
 ```
 ```php
@@ -98,25 +125,25 @@ Here’s an example of what the template might look like for a Matrix field with
 
 ```twig
 {% for block in entry.myFieldHandle.all() %}
-    {% if block.type == "heading" %}
-        <h3>{{ block.heading }}</h3>
-    {% elseif block.type == "text" %}
-        {{ block.text|markdown }}
-    {% elseif block.type == "image" %}
-        {% set image = block.image.one() %}
-        {% if image %}
-            <img src="{{ image.getUrl('thumb') }}" 
-                width="{{ image.getWidth('thumb') }}" 
-                height="{{ image.getHeight('thumb') }}" 
-                alt="{{ image.title }}"
-            >
-        {% endif %}
-    {% elseif block.type == "quote" %}
-        <blockquote>
-            <p>{{ block.quote }}</p>
-            <cite>– {{ block.cite }}</cite>
-        </blockquote>
+  {% if block.type == "heading" %}
+    <h3>{{ block.heading }}</h3>
+  {% elseif block.type == "text" %}
+    {{ block.text|markdown }}
+  {% elseif block.type == "image" %}
+    {% set image = block.image.one() %}
+    {% if image %}
+        <img src="{{ image.getUrl('thumb') }}" 
+          width="{{ image.getWidth('thumb') }}" 
+          height="{{ image.getHeight('thumb') }}" 
+          alt="{{ image.title }}"
+        >
     {% endif %}
+  {% elseif block.type == "quote" %}
+    <blockquote>
+      <p>{{ block.quote }}</p>
+      <cite>– {{ block.cite }}</cite>
+    </blockquote>
+  {% endif %}
 {% endfor %}
 ```
 
@@ -130,7 +157,7 @@ If you only want the first block, call [one()](<craft3:craft\db\Query::one()>) i
 ```twig
 {% set block = entry.myFieldHandle.one() %}
 {% if block %}
-    <!-- ... -->
+  <!-- ... -->
 {% endif %}
 ```
 ```php
@@ -159,7 +186,7 @@ If you just need to check if blocks exist (but don’t need to fetch them), you 
 ::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
-    <p>There are blocks!</p>
+  <p>There are blocks!</p>
 {% endif %}
 ```
 ```php
@@ -174,8 +201,8 @@ You can set [parameters](matrix-blocks.md#parameters) on the Matrix block query 
 ::: code
 ```twig
 {% set blocks = clone(entry.myFieldHandle)
-    .type('text')
-    .all() %}
+  .type('text')
+  .all() %}
 ```
 ```php
 $blocks = (clone $entry->myFieldHandle)
@@ -212,9 +239,9 @@ If you want all existing blocks to persist in the same order they are currently 
 
 ```twig
 {% if entry is defined %}
-    {% for blockId in clone(entry.myFieldHandle).anyStatus().ids() %}
-        {{ hiddenInput('fields[myFieldHandle][sortOrder][]', blockId) }}
-    {% endfor %}
+  {% for blockId in clone(entry.myFieldHandle).anyStatus().ids() %}
+    {{ hiddenInput('fields[myFieldHandle][sortOrder][]', blockId) }}
+  {% endfor %}
 {% endif %}
 ```
 
@@ -224,28 +251,30 @@ Here’s how you can output form fields for existing blocks, for a Matrix field 
 
 ```twig
 {% if entry is defined %}
-    {% for block in entry.myFieldHandle.all() %}
-        {# Prefix the block's input names with `fields[myFieldHandle][blocks][<BlockID>]` #}
-        {% namespace "fields[myFieldHandle][blocks][#{block.id}]" %}
-            {{ hiddenInput('type', block.type) }}
-            {% switch block.type %}
-                {% case 'text' %}
-                    <textarea name="fields[<TextFieldHandle>]">{{ block.<TextFieldHandle>|raw }}</textarea>
-                {% case 'image' %}
-                    {% set images = block.<AssetsFieldHandle>.all() %}
-                    {% if images|length %}
-                        <ul>
-                            {% for image in block.<AssetsFieldHandle>.all() %}
-                                <li>
-                                    {{ image.getImg({ width: 100, height: 100 }) }}
-                                    {{ hiddenInput('fields[<AssetsFieldHandle>][]', image.id) }}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-            {% endswitch %}
-        {% endnamespace %}
-    {% endfor %}
+  {% for block in entry.myFieldHandle.all() %}
+    {# Prefix the block's input names with `fields[myFieldHandle][blocks][<BlockID>]` #}
+    {% namespace "fields[myFieldHandle][blocks][#{block.id}]" %}
+      {{ hiddenInput('type', block.type) }}
+      {% switch block.type %}
+        {% case 'text' %}
+          <textarea name="fields[<TextFieldHandle>]">
+            {{- block.<TextFieldHandle>|raw -}}
+          </textarea>
+        {% case 'image' %}
+          {% set images = block.<AssetsFieldHandle>.all() %}
+          {% if images|length %}
+            <ul>
+              {% for image in block.<AssetsFieldHandle>.all() %}
+                <li>
+                  {{ image.getImg({ width: 100, height: 100 }) }}
+                  {{ hiddenInput('fields[<AssetsFieldHandle>][]', image.id) }}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+      {% endswitch %}
+    {% endnamespace %}
+  {% endfor %}
 {% endif %}
 ```
 
@@ -272,8 +301,8 @@ Then define the form inputs for any additional blocks that should be appended to
 
 {# Prefix the block's input names with `fields[myFieldHandle][blocks][new:1]` #}
 {% namespace "fields[myFieldHandle][blocks][new:1]" %}
-    {{ hiddenInput('type', 'text') }}
-    <textarea name="fields[<TextFieldHandle>]"></textarea>
+  {{ hiddenInput('type', 'text') }}
+  <textarea name="fields[<TextFieldHandle>]"></textarea>
 {% endnamespace %}
 ```
 

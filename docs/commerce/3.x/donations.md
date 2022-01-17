@@ -11,25 +11,26 @@ You can get the donation purchasable in a template using `craft.commerce.donatio
 ## Adding the Donation to the Cart
 
 Since the donation purchasable has no default price, a price must be supplied with the donation when adding to the cart.
-This is done through [line item options](adding-to-and-updating-the-cart.md#line-item-options-and-notes) by submitting a `donationAmount` option parameter.
+
+This is done through [line item options](orders-carts.md#line-item-options-and-notes) by submitting a `donationAmount` option parameter.
 
 The form to add the donation to the cart would look like this:
 
 ```twig
 {% set donation = craft.commerce.donation %}
 {% if donation and donation.isAvailable %}
-    <form method="post">
-        {{ csrfInput() }}
-        {{ actionInput('commerce/cart/update-cart') }}
-        {{ redirectInput('shop/cart') }}
-        {{ hiddenInput('purchasableId', donation.id) }}
-        <input type="text"
-            name="options[donationAmount]"
-            value=""
-            placeholder="Donation"
-        >
-        <button type="submit">Donate Now</button>
-    </form>
+  <form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/update-cart') }}
+    {{ redirectInput('shop/cart') }}
+    {{ hiddenInput('purchasableId', donation.id) }}
+    <input type="text"
+      name="options[donationAmount]"
+      value=""
+      placeholder="Donation"
+    >
+    <button type="submit">Donate Now</button>
+  </form>
 {% endif %}
 ```
 

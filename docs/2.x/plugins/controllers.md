@@ -55,12 +55,12 @@ Most of the time, you’ll want to access controller actions via HTML forms over
 
 ```twig
 <form method="post" action="" accept-charset="UTF-8">
-    <input type="hidden" name="action" value="cocktailRecipes/ingredients/saveIngredient">
-    <input type="hidden" name="redirect" value="cocktailRecipes/ingredients">
+  <input type="hidden" name="action" value="cocktailRecipes/ingredients/saveIngredient">
+  <input type="hidden" name="redirect" value="cocktailRecipes/ingredients">
 
-    <!-- ...-->
+  <!-- ...-->
 
-    <input class="btn submit" type="submit" value="{{ 'Submit'|t }}">
+  <input class="btn submit" type="submit" value="{{ 'Submit'|t }}">
 </form>
 ```
 

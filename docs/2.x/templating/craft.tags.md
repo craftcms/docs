@@ -4,7 +4,7 @@ You can access your site’s [tags](../tags.md) from your templates via `craft.t
 
 ```twig
 {% for tag in craft.tags.group('blogTags') %}
-    <li><a href="{{ url('blog/tags/'~tag.id) }}">{{ tag.title }}</a></li>
+  <li><a href="{{ url('blog/tags/'~tag.id) }}">{{ tag.title }}</a></li>
 {% endfor %}
 ```
 

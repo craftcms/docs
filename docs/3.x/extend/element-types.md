@@ -333,9 +333,9 @@ If you want your element type to support custom fields, you will also need to cr
 {% import '_includes/forms' as forms %}
 
 {{ forms.fieldLayoutDesignerField({
-    fieldLayout: craft.app.fields.getLayoutByType(
-        'ns\\prefix\\elements\\MyElementType'
-    ),
+  fieldLayout: craft.app.fields.getLayoutByType(
+    'ns\\prefix\\elements\\MyElementType'
+  ),
 }) }}
 ```
 
@@ -444,26 +444,25 @@ See [Edit Page](#edit-page) to learn how to create an edit page for your element
 
 #### Saving Custom Field Values
 
-When saving values on a custom field, always use the [`setFieldValue()`](craft3:craft\base\ElementInterface::setFieldValue()) or [`setFieldValues()`](craft3:craft\base\ElementInterface::setFieldValues()) methods rather than directly accessing the field handle as a property on the element object. This ensures the value is normalized and marked as dirty for [delta saves](field-types.md#supporting-delta-saves).
-
+When saving values on a custom field, you may use the [`setFieldValue()`](craft3:craft\base\ElementInterface::setFieldValue()) and [`setFieldValues()`](craft3:craft\base\ElementInterface::setFieldValues()) methods or directly access the field handle as a property on the element object.
 In this example, we’re setting and saving custom field values for an [Entry](craft3:craft\elements\Entry) element:
 
 ::: code
 ```php Single Value
-// incorrect
+// field handle
 $entry->myCustomField = 'foo';
 
-// correct
+// method
 $entry->setFieldValue('myCustomField', 'foo');
 
 \Craft::$app->elements->saveElement($entry);
 ```
 ```php Multiple Values
-// incorrect
+// field handle
 $entry->myCustomField = 'foo';
 $entry->myOtherCustomField = 'bar';
 
-// correct
+// method
 $entry->setFieldValues([
     'myCustomField' => 'foo',
     'myOtherCustomField' => 'bar',
@@ -471,6 +470,10 @@ $entry->setFieldValues([
 
 \Craft::$app->elements->saveElement($entry);
 ```
+:::
+
+::: warning
+Prior to Craft 3.7.21, it was only safe to set field values with the `setFieldValue()` and `setFieldValues()` methods to ensure values were normalized and marked as dirty for [delta saves](field-types.md#supporting-delta-saves).
 :::
 
 #### Validating Required Custom Fields

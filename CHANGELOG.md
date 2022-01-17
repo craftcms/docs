@@ -2,6 +2,70 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2021-12-15
+### Added
+- Added Event Code Generator to the Craft Commerce docs “Events” page.
+- Documented new `getHsl()`, `getHue()`, `getL()`, `getLightness()`, `getS()`, and `getSaturation()` methods for Color field values added in Craft 3.7.26.
+
+## 2021-12-08
+### Added
+- Added “Events” page to the Craft CMS docs Extending Craft section.
+
+## 2021-12-03
+### Added
+- Documented `parseBooleanEnv` Twig function added in Craft 3.7.24.
+- Documented element query `cache()` function.
+
+## 2021-11-26
+### Changed
+- Updated `plugin/install`, `plugin/uninstall`, `plugin/enable`, and `plugin/disable` console command descriptions for Craft 3.7.23.
+
+## 2021-11-16
+### Changed
+- Updated Element Type’s “Saving Custom Field Values” section for Craft 3.7.21.
+
+## 2021-10-19
+### Added
+- Documented new `countable` and `object` Twig tests added in Craft 3.7.17.
+
+## 2021-10-07
+### Added
+- Documented `autoSetCartShippingMethodOption` setting added in Commerce 3.4.4.
+- Documented `clearLineItems` param added to the `cart/update-cart` controller action in Commerce 3.4.4.
+
+## 2021-10-05
+### Added
+- Documented new `array`, `callable`, `float`, `integer`, `numeric`, `resource`, `scalar`, and `string` Twig tests added in Craft 3.7.15.
+- Documented `graphql/create-token`, `graphql/list-schemas`, and `users/impersonate` commands added in Craft 3.7.15.
+
+## 2021-09-28
+### Added
+- Documented Matrix field’s newly-supported values in Craft 3.7.14.
+
+### Fixed
+- Fixed example errors and added missing element type example class in Extending GraphQL.
+
+## 2021-09-27
+### Changed
+- Added tip about referencing custom field columns by their full column name.
+
+## 2021-09-14
+### Added
+- Documented `up` command added in Craft 3.7.13.
+
+## 2021-08-31
+### Changed
+- Updated `{sourceId}` and `{sourceUid}` references to `{canonicalId}` and `{canonicalUid}`. 
+
+## 2021-08-24
+### Added
+- Documented `utils/prune-provisional-drafts` added in Craft 3.7.9.
+- Documented `--dry-run` flag for `utils/prune-revisions` command added in Craft 3.7.9.
+
+## 2021-08-04
+### Added
+- Added the warning about running `project-config/write` to the Project Config page.
+
 ## 2021-07-26
 ### Added
 - Documented Commerce order and line item totals.
@@ -45,7 +109,7 @@ Theme and significant content changes will be documented in this file.
 
 ## 2021-07-09
 ### Added
-- Added the “Control Panel Edit Pages” page to the Extending Craft docs
+- Added the “Control Panel Edit Pages” page to the Extending Craft docs.
 - Added the “Form Inputs” section to the “Control Panel Templates” page.
 
 ## 2021-06-11

@@ -34,9 +34,9 @@ Or you can loop through all of the available options rather than just the select
 
 ```twig
 <ul>
-    {% for option in entry.dropdownFieldHandle.options %}
-        <li>{{ option }}</li>
-    {% endfor %}
+  {% for option in entry.dropdownFieldHandle.options %}
+    <li>{{ option }}</li>
+  {% endfor %}
 </ul>
 ```
 

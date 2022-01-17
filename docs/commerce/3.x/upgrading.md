@@ -8,17 +8,28 @@ If you’re upgrading from Commerce 1, see the [Changes in Commerce 2](https://c
 
 Before you begin, make sure that:
 
-1. You’ve reviewed the [changes in Commerce 3](https://github.com/craftcms/commerce/blob/master/CHANGELOG.md#300---2020-01-28)
-2. Your site’s running at least **Craft 3.4** and **the latest version of Commerce 2** (2.2.26)
+1. You’ve reviewed the [changes in Commerce 3](https://github.com/craftcms/commerce/blob/main/CHANGELOG.md#300---2020-01-28)
+2. Your site’s running at least **Craft 3.4** and **the latest version of Commerce 2** (2.2.27)
 3. Your **database is backed up** in case everything goes horribly wrong
 
-Once you’ve completed these steps, you’re ready continue.
+Once you’ve completed these steps, you’re ready continue with the upgrade process.
 
-When upgrading from Commerce 2 to Commerce 3, the following changes may be important depending on how you’ve set up your project.
+## Performing the Upgrade
+
+Like updating any Craft CMS plugin, you’ll want to update Commerce locally and sync any resulting project config changes [into production](https://craftcms.com/knowledge-base/deployment-best-practices).
+
+1. Edit your project’s `composer.json`’s `"require"` section to specify Commerce 3:
+    ```json
+    "craftcms/commerce": "^3.0",
+    ```
+2. In your terminal, run `composer update` to pull the latest project dependencies—including Commerce 3—into your `vendor/` directory.
+3. Run `php craft migrate/up --track=plugin:commerce` to run the migrations that bring Commerce data up to date with the latest version.
+
+Once you’re running the latest version of Craft Commerce, you’ll need to update your templates and any custom code relevant to the topics detailed below.
 
 ## Order Emails
 
-Order notification emails are now sent via a queue job, so running a [queue worker as a daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms) is highly recommended to avoid customer email notification delays.
+Order notification emails are now sent via a queue job, so we highly recommend running a [queue worker as a daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms) to avoid customer email notification delays.
 
 Previously emails would be generated during customer checkout, which could cause the order completion page to take a prolonged time to display (especially with PDF generation involved). This change gives your customers a better checkout experience.
 
@@ -43,7 +54,7 @@ Automatic cart merging has been removed.
 
 The cart is still retrieved from the front end templates using `craft.commerce.carts.cart` in your templates, but the optional `mergeCarts` param has been removed, and it is no longer possible to automicatically merge previous carts of the current user.
 
-We now recommend the customer manually adds items from the [previous carts to their current cart](adding-to-and-updating-the-cart.md#restoring-previous-cart-contents). An example of this is in the example templates.
+We now recommend the customer manually adds items from the [previous carts to their current cart](orders-carts.md#restoring-previous-cart-contents). An example of this is in the example templates.
 
 Merging carts as manual process is better since the customer can decide what to do with any validation issues like maximum quanity rules. The previous merge feature would just fail to merge correctly with no error messages.
 
@@ -96,9 +107,9 @@ Use the table below to update each breaking change in your Twig templates.
 
 | Old                                   | New                         | Docs                                                                        |
 | ------------------------------------- | --------------------------- | --------------------------------------------------------------------------- |
-| `commerce/cart/remove-line-item`      | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
-| `commerce/cart/update-line-item`      | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
-| `commerce/cart/remove-all-line-items` | `commerce/cart/update-cart` | [Updating the Cart](adding-to-and-updating-the-cart.md#updating-line-items) |
+| `commerce/cart/remove-line-item`      | `commerce/cart/update-cart` | [Updating the Cart](orders-carts.md#carts) |
+| `commerce/cart/update-line-item`      | `commerce/cart/update-cart` | [Updating the Cart](orders-carts.md#carts) |
+| `commerce/cart/remove-all-line-items` | `commerce/cart/update-cart` | [Updating the Cart](orders-carts.md#carts) |
 
 ## Event Changes
 
@@ -122,7 +133,7 @@ Commerce 2 used discount categories as the “Source” for discount matches, an
 
 ## Custom Line Item Pricing
 
-If your store customizes line item pricing with the [`populateLineItem` event](events.md#populatelineitem), it’s important to know that the `salePrice` property is handled differently in Commerce 3.
+If your store customizes line item pricing with the [`populateLineItem` event](extend/events.md#populatelineitem), it’s important to know that the `salePrice` property is handled differently in Commerce 3.
 
 Commerce 2 set the line item’s `salePrice` to the sum of `saleAmount` and `price` immediately *after* the `populateLineItem` event. Commerce 3 does not modify `salePrice` after the event is triggered, so any pricing adjustments should explicitly set `salePrice`.
 

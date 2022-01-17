@@ -1,3 +1,7 @@
+---
+description: Official documentation for Craft Commerce 2.
+---
+
 # About Craft Commerce
 
 Craft Commerce is an amazingly powerful and flexible e-commerce platform for [Craft CMS](https://craftcms.com).

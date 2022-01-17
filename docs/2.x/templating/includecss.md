@@ -5,7 +5,7 @@ This tag will queue up a CSS snippet for inclusion on the page.
 ```twig
 {% set myCss %}
 .content {
-    color: {{ entry.textColor }};
+  color: {{ entry.textColor }};
 }
 {% endset %}
 
