@@ -3,7 +3,7 @@
 - - -
 # Twig 入門書
 
-どのように機能するかを見てみましょう。
+[Twig](https://twig.symfony.com/) is a fast and powerful templating system, commonly used to power front-end views in content management systems like Craft, Drupal, and WordPress (via the [Timber](https://www.upstatement.com/timber/) plugin).
 
 Let’s take a look at how it works.
 
