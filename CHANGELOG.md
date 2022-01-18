@@ -2,6 +2,11 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-01-18
+### Changed
+- Updated wording to reflect Craft CMS 3.7.29’s PHP fatal error logging to `stderr`.
+- Updated Craft CMS `resave/*` console command reference for 3.7.29.
+
 ## 2021-12-15
 ### Added
 - Added Event Code Generator to the Craft Commerce docs “Events” page.
