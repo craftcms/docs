@@ -511,6 +511,10 @@ return [
 
 The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you. Craft will look for the key(s) that match the [CRAFT_ENVIRONMENT](#craft-environment) PHP constant, which should be defined by your `web/index.php` file. (Your server’s hostname will be used as a fallback.)
 
+::: tip
+Make sure your key(s) are sufficiently unique! Craft reads your array of config settings from top to bottom, applying config settings wherever the `CRAFT_ENVIRONMENT` value *contains* the key.
+:::
+
 By default, new Craft 3 projects will define the [CRAFT_ENVIRONMENT](#craft-environment) constant using an environment variable called `ENVIRONMENT`, which is defined in the `.env` file:
 
 ```bash
@@ -542,7 +546,7 @@ define('CRAFT_BASE_PATH', dirname(__DIR__, 2));
 
 ### `CRAFT_COMPOSER_PATH`
 
-The path to the [composer.json](../directory-structure.md#composer-json) file. （デフォルトでは、ベースディレクトリ内に存在するものとします。
+The path to the [composer.json](../directory-structure.md#composer-json) file. (It is assumed to live within the base directory by default.)
 
 ```php
 define('CRAFT_COMPOSER_PATH', 'path/to/composer.json');
