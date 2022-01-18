@@ -4,6 +4,203 @@ module.exports = {
   editLinkText: "Edit this page on GitHub",
   searchPlaceholder: "Search the Craft docs (Press “/” to focus)",
   sidebar: {
+    "4.x": {
+      "/extend/": [
+        {
+          title: "Extending Craft",
+          collapsable: false,
+          children: [["", "Introduction"], "coding-guidelines"]
+        },
+        {
+          title: "Module Development",
+          collapsable: false,
+          children: ["module-guide"]
+        },
+        {
+          title: "Plugin Development",
+          collapsable: false,
+          children: [
+            "plugin-guide",
+            "updating-plugins",
+            "plugin-settings",
+            "project-config",
+            "changelogs-and-updates",
+            "plugin-editions",
+            "plugin-store"
+          ]
+        },
+        {
+          title: "Extending the Control Panel",
+          collapsable: false,
+          children: [
+            "cp-section",
+            "cp-templates",
+            "cp-edit-pages"
+          ]
+        },
+        {
+          title: "System Components",
+          collapsable: false,
+          children: [
+            "widget-types",
+            "field-types",
+            "volume-types",
+            "utility-types",
+            "element-types",
+            "element-action-types",
+            "element-exporter-types"
+          ]
+        },
+        {
+          title: "More",
+          collapsable: false,
+          children: [
+            "events",
+            "migrations",
+            "user-permissions",
+            "translation-categories",
+            "asset-bundles",
+            "services",
+            "controllers",
+            "commands",
+            "template-roots",
+            "extending-twig",
+            "graphql",
+            "template-hooks",
+            "soft-deletes",
+            "queue-jobs",
+            "environmental-settings",
+            "extending-system-components"
+          ]
+        }
+      ],
+      "/testing/": [
+        {
+          title: "About testing",
+          collapsable: false,
+          children: [["", "Introduction"], "testing", "codeception", "ci"]
+        },
+        {
+          title: "Testing Craft",
+          collapsable: false,
+          children: [
+            "testing-craft/setup",
+            "testing-craft/testing-tips",
+            "testing-craft/plugins-and-modules",
+            "testing-craft/fixtures",
+            "testing-craft/console",
+            "testing-craft/queue",
+            "testing-craft/events"
+          ]
+        },
+        {
+          title: "Craft testing framework",
+          collapsable: false,
+          children: [
+            "framework/config-options",
+            "framework/mocking",
+            "framework/support-classes",
+            "framework/full-mock",
+            "framework/assertion-helpers"
+          ]
+        }
+      ],
+      "/": [
+        {
+          title: "Introduction",
+          collapsable: false,
+          children: ["", "coc"]
+        },
+        {
+          title: "Installing & Updating",
+          collapsable: false,
+          children: ["requirements", "installation", "updating", "upgrade"]
+        },
+        {
+          title: "Configuration",
+          collapsable: false,
+          children: ["config/", "config/config-settings", "config/db-settings"]
+        },
+        {
+          title: "System Overview",
+          collapsable: false,
+          children: [
+            "directory-structure",
+            "elements",
+            "fields",
+            "relations",
+            "user-management",
+            "sites",
+            "console-commands",
+            "project-config",
+            "plugins"
+          ],
+          toggleChildren: ["searching", "reference-tags", "gc"]
+        },
+        {
+          title: "Element Types",
+          collapsable: false,
+          children: [
+            "entries",
+            "categories",
+            "tags",
+            "assets",
+            "globals",
+            "matrix-blocks",
+            "users"
+          ]
+        },
+        {
+          title: "Field Types",
+          collapsable: false,
+          children: [
+            "assets-fields",
+            "categories-fields",
+            "checkboxes-fields",
+            "color-fields",
+            "date-time-fields",
+            "dropdown-fields",
+            "email-fields",
+            "entries-fields",
+            "lightswitch-fields",
+            "matrix-fields",
+            "multi-select-fields",
+            "number-fields",
+            "plain-text-fields",
+            "radio-buttons-fields",
+            "table-fields",
+            "tags-fields",
+            "time-fields",
+            "url-fields",
+            "users-fields"
+          ]
+        },
+        {
+          title: "Front End Development",
+          collapsable: false,
+          children: [
+            "image-transforms",
+            "element-queries",
+            "dev/eager-loading-elements",
+            "dev/controller-actions",
+            "graphql",
+            "routing"
+          ]
+        },
+        {
+          title: "Twig Templating",
+          collapsable: false,
+          children: [
+            "dev/twig-primer",
+            "dev/global-variables",
+            "dev/filters",
+            "dev/functions",
+            "dev/tags",
+            "dev/tests"
+          ]
+        },
+      ]
+    },
     "3.x": {
       "/extend/": [
         {
