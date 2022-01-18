@@ -970,6 +970,9 @@ Re-saves assets.
 `--element-id`
 :   The ID(s) of the elements to resave.
 
+`--if-empty`
+:   Whether the --set attribute should only be set if it doesn’t have a value.\ boolean, 0 or 1 (defaults to 0)
+
 `--limit`
 :   The number of elements to resave.
 
@@ -979,11 +982,25 @@ Re-saves assets.
 `--propagate`
 :   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
 
+`--queue`
+:   Whether the elements should be resaved via a queue job.\ boolean, 0 or 1 (defaults to 0)
+
+`--set`
+:   An attribute name that should be set for each of the elements. The value will be determined by --to.
+
 `--site`
 :   The site handle to save elements from.
 
 `--status`
 :   The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\ (defaults to `any`)
+
+`--to`
+:   The value that should be set on the --set attribute.\ The following value types are supported:
+  - An attribute name: --to myCustomField
+  - An object template: --to "={myCustomField|lower}"
+  - A raw value: --to "=foo bar"
+  - A PHP arrow function: --to "fn(\$element) => \$element->callSomething()"
+  - An empty value: --to :empty:
 
 `--uid`
 :   The UUID(s) of the elements to resave.
@@ -1006,6 +1023,9 @@ Re-saves categories.
 `--group`
 :   The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
 
+`--if-empty`
+:   Whether the --set attribute should only be set if it doesn’t have a value.\ boolean, 0 or 1 (defaults to 0)
+
 `--limit`
 :   The number of elements to resave.
 
@@ -1015,11 +1035,25 @@ Re-saves categories.
 `--propagate`
 :   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
 
+`--queue`
+:   Whether the elements should be resaved via a queue job.\ boolean, 0 or 1 (defaults to 0)
+
+`--set`
+:   An attribute name that should be set for each of the elements. The value will be determined by --to.
+
 `--site`
 :   The site handle to save elements from.
 
 `--status`
 :   The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\ (defaults to `any`)
+
+`--to`
+:   The value that should be set on the --set attribute.\ The following value types are supported:
+  - An attribute name: --to myCustomField
+  - An object template: --to "={myCustomField|lower}"
+  - A raw value: --to "=foo bar"
+  - A PHP arrow function: --to "fn(\$element) => \$element->callSomething()"
+  - An empty value: --to :empty:
 
 `--uid`
 :   The UUID(s) of the elements to resave.
@@ -1033,8 +1067,14 @@ Re-saves entries.
 
 **Options**
 
+`--drafts`
+:   Whether to resave element drafts.\ boolean, 0 or 1 (defaults to 0)
+
 `--element-id`
 :   The ID(s) of the elements to resave.
+
+`--if-empty`
+:   Whether the --set attribute should only be set if it doesn’t have a value.\ boolean, 0 or 1 (defaults to 0)
 
 `--limit`
 :   The number of elements to resave.
@@ -1045,14 +1085,31 @@ Re-saves entries.
 `--propagate`
 :   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
 
+`--provisional-drafts`
+:   Whether to resave provisional element drafts.\ boolean, 0 or 1 (defaults to 0)
+
+`--queue`
+:   Whether the elements should be resaved via a queue job.\ boolean, 0 or 1 (defaults to 0)
+
 `--section`
 :   The section handle(s) to save entries from. Can be set to multiple comma-separated sections.
+
+`--set`
+:   An attribute name that should be set for each of the elements. The value will be determined by --to.
 
 `--site`
 :   The site handle to save elements from.
 
 `--status`
 :   The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\ (defaults to `any`)
+
+`--to`
+:   The value that should be set on the --set attribute.\ The following value types are supported:
+  - An attribute name: --to myCustomField
+  - An object template: --to "={myCustomField|lower}"
+  - A raw value: --to "=foo bar"
+  - A PHP arrow function: --to "fn(\$element) => \$element->callSomething()"
+  - An empty value: --to :empty:
 
 `--type`
 :   The type handle(s) of the elements to resave.
@@ -1075,6 +1132,9 @@ Re-saves Matrix blocks.
 `--field`
 :   The field handle to save Matrix blocks for.
 
+`--if-empty`
+:   Whether the --set attribute should only be set if it doesn’t have a value.\ boolean, 0 or 1 (defaults to 0)
+
 `--limit`
 :   The number of elements to resave.
 
@@ -1082,13 +1142,27 @@ Re-saves Matrix blocks.
 :   The number of elements to skip.
 
 `--propagate`
-:   Whether to update the search indexes for the resaved elements.\ boolean, 0 or 1 (defaults to 0)
+:   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
+
+`--queue`
+:   Whether the elements should be resaved via a queue job.\ boolean, 0 or 1 (defaults to 0)
+
+`--set`
+:   An attribute name that should be set for each of the elements. The value will be determined by --to.
 
 `--site`
 :   The site handle to save elements from.
 
 `--status`
 :   The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\ (defaults to `any`)
+
+`--to`
+:   The value that should be set on the --set attribute.\ The following value types are supported:
+  - An attribute name: --to myCustomField
+  - An object template: --to "={myCustomField|lower}"
+  - A raw value: --to "=foo bar"
+  - A PHP arrow function: --to "fn(\$element) => \$element->callSomething()"
+  - An empty value: --to :empty:
 
 `--type`
 :   The type handle(s) of the elements to resave.
@@ -1111,6 +1185,9 @@ Re-saves tags.
 `--group`
 :   The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
 
+`--if-empty`
+:   Whether the --set attribute should only be set if it doesn’t have a value.\ boolean, 0 or 1 (defaults to 0)
+
 `--limit`
 :   The number of elements to resave.
 
@@ -1120,11 +1197,25 @@ Re-saves tags.
 `--propagate`
 :   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
 
+`--queue`
+:   Whether the elements should be resaved via a queue job.\ boolean, 0 or 1 (defaults to 0)
+
+`--set`
+:   An attribute name that should be set for each of the elements. The value will be determined by --to.
+
 `--site`
 :   The site handle to save elements from.
 
 `--status`
 :   The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\ (defaults to `any`)
+
+`--to`
+:   The value that should be set on the --set attribute.\ The following value types are supported:
+  - An attribute name: --to myCustomField
+  - An object template: --to "={myCustomField|lower}"
+  - A raw value: --to "=foo bar"
+  - A PHP arrow function: --to "fn(\$element) => \$element->callSomething()"
+  - An empty value: --to :empty:
 
 `--uid`
 :   The UUID(s) of the elements to resave.
@@ -1144,6 +1235,9 @@ Re-saves users.
 `--group`
 :   The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
 
+`--if-empty`
+:   Whether the --set attribute should only be set if it doesn’t have a value.\ boolean, 0 or 1 (defaults to 0)
+
 `--limit`
 :   The number of elements to resave.
 
@@ -1153,11 +1247,25 @@ Re-saves users.
 `--propagate`
 :   Whether to save the elements across all their enabled sites.\ boolean, 0 or 1 (defaults to 1)
 
+`--queue`
+:   Whether the elements should be resaved via a queue job.\ boolean, 0 or 1 (defaults to 0)
+
+`--set`
+:   An attribute name that should be set for each of the elements. The value will be determined by --to.
+
 `--site`
 :   The site handle to save elements from.
 
 `--status`
 :   The status(es) of elements to resave. Can be set to multiple comma-separated statuses.\ (defaults to `any`)
+
+`--to`
+:   The value that should be set on the --set attribute.\ The following value types are supported:
+  - An attribute name: --to myCustomField
+  - An object template: --to "={myCustomField|lower}"
+  - A raw value: --to "=foo bar"
+  - A PHP arrow function: --to "fn(\$element) => \$element->callSomething()"
+  - An empty value: --to :empty:
 
 `--uid`
 :   The UUID(s) of the elements to resave.
