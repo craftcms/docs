@@ -1,7 +1,7 @@
 # サーバー要件
 
 ::: tip
-[Craft Server Check](https://github.com/craftcms/server-check) スクリプトを使うことで、サーバーが Craft の要件を満たしているかどうかを素早く確認できます。
+You can use the [Craft Server Check](https://github.com/craftcms/server-check) script to quickly find out if your server meets Craft’s requirements.
 :::
 
 <columns>
