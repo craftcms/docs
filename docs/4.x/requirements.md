@@ -1,7 +1,7 @@
 # Requirements
 
 ::: tip
-You can use the [Craft Server Check](https://github.com/craftcms/server-check) script to quickly find out if your server meet’s Craft’s requirements.
+You can use the [Craft Server Check](https://github.com/craftcms/server-check) script to quickly find out if your server meets Craft’s requirements.
 :::
 
 <columns>
