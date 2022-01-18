@@ -598,10 +598,10 @@ define('CRAFT_LICENSE_KEY', craft\helpers\App::env('LICENSE_KEY'));
 
 ### `CRAFT_LOG_PHP_ERRORS`
 
-Craft が PHP の [log_errors](http://php.net/manual/en/errorfunc.configuration.php#ini.log-errors) 設定をセットすることを抑制し、`php.ini` 内の設定に任せるよう `false` をセットすることもできます。
+Can be set to `false` to prevent Craft from setting PHP’s [log_errors](https://php.net/manual/en/errorfunc.configuration.php#ini.log-errors) setting and [error_log](https://php.net/manual/en/errorfunc.configuration.php#ini.error-log) settings, leaving it up to whatever’s set in `php.ini`.
 
 ```php
-// Don't send PHP error logs to storage/logs/phperrors.log
+// Don’t send PHP error logs to storage/logs/phperrors.log
 define('CRAFT_LOG_PHP_ERRORS', false);
 ```
 
@@ -624,7 +624,7 @@ define('CRAFT_SITE', 'de');
 
 ### `CRAFT_STREAM_LOG`
 
-When set to `true`, Craft will additionally send log output to `stderr` and `stdout`.
+When set to `true`, Craft will additionally send log output to `stderr` and `stdout`. PHP fatal errors will be sent to `stderr`.
 
 ### `CRAFT_TEMPLATES_PATH`
 
