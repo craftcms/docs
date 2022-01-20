@@ -2,13 +2,13 @@
 
 環境ごとに変更が必要だったり、機密情報を含む可能性があるプラグイン設定は、**環境設定**として実装されるべきです。
 
-環境設定には、環境変数やエイリアスを参照する生の値がセットされ、ランタイムで <craft3:Craft::parseEnv()> によって解析されます。
+環境設定には、環境変数やエイリアスを参照する生の値がセットされ、ランタイムで <craft3:craft\helpers\App::parseEnv()> によって解析されます。
 
 これは、環境変数にセットされる `$secretKey` プロパティと、値の解析を担う `getSecretKey()` メソッドのモデルの例です。
 
 ```php
-use Craft;
 use craft\base\Model;
+use craft\helpers\App;
 
 class MyModel extends Model
 {
@@ -22,7 +22,7 @@ class MyModel extends Model
      */
     public function getSecretKey(): string
     {
-        return Craft::parseEnv($this->secretKey);
+        return App::parseEnv($this->secretKey);
     }
 }
 ```
@@ -32,7 +32,6 @@ class MyModel extends Model
 環境変数が特別なバリデーションルールを必要としない場合、<craft3:craft\behaviors\EnvAttributeParserBehavior> を使用して生の値ではなく、パースした値をバリデータに確認させることもできます。
 
 ```php
-use Craft;
 use craft\base\Model;
 use craft\behaviors\EnvAttributeParserBehavior;
 
