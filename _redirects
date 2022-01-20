@@ -41,7 +41,7 @@
 
 # dynamic ones
 /docs/commerce/3.x/order-status-emails.html* /docs/commerce/3.x/emails.html:splat
-/docs/config-settings* https://craftcms.com/docs/3.x/config-settings.html
+/docs/config-settings* https://craftcms.com/docs/3.x/config/config-settings.html
 /docs/introduction* https://craftcms.com/docs/3.x/
 /docs/installing* https://craftcms.com/docs/3.x/installation.html
 /docs/templating-overview https://craftcms.com/docs/3.x/dev/twig-primer.html
