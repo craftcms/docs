@@ -27,7 +27,7 @@ At a high level, a Craft Commerce gateway may use the following parts:
 - Methods that return `true` or `false` to indicate gateway feature support.
 - An HTML settings view for managing details like API keys from the Craft control panel.
 - A model for collecting and validating payment form details that are sent to the gateway.
-- Vital methods that faciliate payment: `purchase()`, `capture()`, `refund()`, etc.
+- Vital methods that facilitate payment: `purchase()`, `capture()`, `refund()`, etc.
 - Front end responses and redirects that facilitate the customer journey.
 - A publicly-available endpoint that can receive webhook events from the gateway.
 
