@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-01-20
+### Added
+- Noted default mutex behavior with configuration example for Craft 3.7.30.
+
 ## 2022-01-18
 ### Changed
 - Updated wording to reflect Craft CMS 3.7.29’s PHP fatal error logging to `stderr`.
