@@ -42,13 +42,15 @@ chmod -R 777 ./vendor
 chmod -R 777 ./web
 ```
 
+Note that the last four commands, which affect entire directories, have been reported to require elevated permissions to run. You may need to preface them with `sudo [command here]`.
+
 ## Manually Trust Certificates and Edit the Hosts File
 
 The first time you add a Craft site, you’ll need to manually run a command on the Windows host machine to import a certificate file so SSL will work. You can follow the terminal output for exact instructions.
 
 Nitro cannot edit the Windows hosts file at `C:\Windows\system32\drivers\etc\hosts` and will provide you with copy+paste instructions when it needs the file updated.
 
-## Limit WSL2 Memory Usage
+## WSL2 Memory Usage
 
 WSL2 has been known to consume a lot of memory, most noticeably on machines with more limited RAM.
 
@@ -63,6 +65,8 @@ swap=0
 ```
 
 Then run `wsl --shutdown` and restart Docker to apply the change. This will put a hard limit on RAM usage and prevent any swap file from being created.
+
+On the other hand, if your database containers are unexpectedly stopping while active, or if your drives are getting thrashed for minutes on end by the `vmmem.exe` process, you probably don't have enough memory or swap file allocated to WSL2.
 
 ### Related
 
