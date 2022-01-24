@@ -65,8 +65,9 @@ User queries support the following parameters:
 | [admin](#admin)                           | Narrows the query results to only users that have admin accounts.
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only users that are related to certain other elements.
-| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
-| [asArray](#asarray)                       | Causes the query to return matching users as arrays of data, rather than [User](craft3:craft\elements\User) objects.
+| [asArray](#asarray)                       | Causes the query to return matching users as arrays of data, rather than [User](craft4:craft\elements\User) objects.
+| [assetUploaders](#assetuploaders)         | Narrows the query results to only users that have uploaded an asset.
+| [authors](#authors)                       | Narrows the query results to only users that are authors of an entry.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [can](#can)                               | Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
@@ -165,34 +166,9 @@ $users = \craft\elements\User::find()
 :::
 
 
-#### `anyStatus`
-
-Removes element filters based on their statuses.
-
-
-
-
-
-::: code
-```twig
-{# Fetch all users, regardless of status #}
-{% set users = craft.users()
-  .anyStatus()
-  .all() %}
-```
-
-```php
-// Fetch all users, regardless of status
-$users = \craft\elements\User::find()
-    ->anyStatus()
-    ->all();
-```
-:::
-
-
 #### `asArray`
 
-Causes the query to return matching users as arrays of data, rather than [User](craft3:craft\elements\User) objects.
+Causes the query to return matching users as arrays of data, rather than [User](craft4:craft\elements\User) objects.
 
 
 
@@ -210,6 +186,52 @@ Causes the query to return matching users as arrays of data, rather than [User](
 // Fetch users as arrays
 $users = \craft\elements\User::find()
     ->asArray()
+    ->all();
+```
+:::
+
+
+#### `assetUploaders`
+
+Narrows the query results to only users that have uploaded an asset.
+
+
+
+::: code
+```twig
+{# Fetch all users who have uploaded an asset #}
+{% set users = craft.users()
+  .assetUploaders()
+  .all() %}
+```
+
+```php
+// Fetch all users who have uploaded an asset
+$users = \craft\elements\User::find()
+    ->assetUploaders()
+    ->all();
+```
+:::
+
+
+#### `authors`
+
+Narrows the query results to only users that are authors of an entry.
+
+
+
+::: code
+```twig
+{# Fetch authors #}
+{% set users = craft.users()
+  .authors()
+  .all() %}
+```
+
+```php
+// Fetch authors
+$users = \craft\elements\User::find()
+    ->authors()
     ->all();
 ```
 :::
@@ -447,7 +469,7 @@ Possible values include:
 | `'not foo'` | not in a group with a handle of `foo`.
 | `['foo', 'bar']` | in a group with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a group with a handle of `foo` or `bar`.
-| a [UserGroup](craft3:craft\models\UserGroup) object | in a group represented by the object.
+| a [UserGroup](craft4:craft\models\UserGroup) object | in a group represented by the object.
 
 
 

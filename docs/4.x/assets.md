@@ -162,8 +162,7 @@ Asset queries support the following parameters:
 | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only assets that are related to certain other elements.
-| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
-| [asArray](#asarray)                       | Causes the query to return matching assets as arrays of data, rather than [Asset](craft3:craft\elements\Asset) objects.
+| [asArray](#asarray)                       | Causes the query to return matching assets as arrays of data, rather than [Asset](craft4:craft\elements\Asset) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 | [dateCreated](#datecreated)               | Narrows the query results based on the assets’ creation dates.
@@ -173,6 +172,7 @@ Asset queries support the following parameters:
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [folderId](#folderid)                     | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
 | [getCacheTags](#getcachetags)             |
+| [hasAlt](#hasalt)                         | Narrows the query results based on whether the assets have alternative text.
 | [height](#height)                         | Narrows the query results based on the assets’ image heights.
 | [id](#id)                                 | Narrows the query results based on the assets’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -244,34 +244,9 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
-#### `anyStatus`
-
-Removes element filters based on their statuses.
-
-
-
-
-
-::: code
-```twig
-{# Fetch all assets, regardless of status #}
-{% set assets = craft.assets()
-  .anyStatus()
-  .all() %}
-```
-
-```php
-// Fetch all assets, regardless of status
-$assets = \craft\elements\Asset::find()
-    ->anyStatus()
-    ->all();
-```
-:::
-
-
 #### `asArray`
 
-Causes the query to return matching assets as arrays of data, rather than [Asset](craft3:craft\elements\Asset) objects.
+Causes the query to return matching assets as arrays of data, rather than [Asset](craft4:craft\elements\Asset) objects.
 
 
 
@@ -528,6 +503,15 @@ This can be combined with [includeSubfolders](#includesubfolders) if you want to
 #### `getCacheTags`
 
 
+
+
+
+
+
+
+#### `hasAlt`
+
+Narrows the query results based on whether the assets have alternative text.
 
 
 
@@ -961,7 +945,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](craft3:craft\models\Site) object | from the site represented by the object.
+| a [craft\models\Site](craft4:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip
@@ -1215,7 +1199,7 @@ Possible values include:
 | Value | Fetches assets…
 | - | -
 | `1` | uploaded by the user with an ID of 1.
-| a [craft\elements\User](craft3:craft\elements\User) object | uploaded by the user represented by the object.
+| a [craft\elements\User](craft4:craft\elements\User) object | uploaded by the user represented by the object.
 
 
 
@@ -1248,7 +1232,7 @@ Possible values include:
 | `'not foo'` | not in a volume with a handle of `foo`.
 | `['foo', 'bar']` | in a volume with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a volume with a handle of `foo` or `bar`.
-| a [volume](craft3:craft\base\VolumeInterface) object | in a volume represented by the object.
+| a [craft\models\Volume](craft4:craft\models\Volume) object | in a volume represented by the object.
 
 
 

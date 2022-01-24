@@ -66,8 +66,7 @@ Matrix block queries support the following parameters:
 | [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the Matrix blocks’ owners are drafts.
 | [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the Matrix blocks’ owners are revisions.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only Matrix blocks that are related to certain other elements.
-| [anyStatus](#anystatus)                     | Removes element filters based on their statuses.
-| [asArray](#asarray)                         | Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft3:craft\elements\MatrixBlock) objects.
+| [asArray](#asarray)                         | Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft4:craft\elements\MatrixBlock) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 | [dateCreated](#datecreated)                 | Narrows the query results based on the Matrix blocks’ creation dates.
@@ -170,34 +169,9 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 :::
 
 
-#### `anyStatus`
-
-Removes element filters based on their statuses.
-
-
-
-
-
-::: code
-```twig
-{# Fetch all Matrix blocks, regardless of status #}
-{% set MatrixBlocks = craft.matrixBlocks()
-  .anyStatus()
-  .all() %}
-```
-
-```php
-// Fetch all Matrix blocks, regardless of status
-$MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->anyStatus()
-    ->all();
-```
-:::
-
-
 #### `asArray`
 
-Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft3:craft\elements\MatrixBlock) objects.
+Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft4:craft\elements\MatrixBlock) objects.
 
 
 
@@ -330,7 +304,7 @@ Possible values include:
 | `'not foo'` | not in a field with a handle of `foo`.
 | `['foo', 'bar']` | in a field with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a field with a handle of `foo` or `bar`.
-| a [craft\fields\Matrix](craft3:craft\fields\Matrix) object | in a field represented by the object.
+| a [craft\fields\Matrix](craft4:craft\fields\Matrix) object | in a field represented by the object.
 
 
 
@@ -786,7 +760,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](craft3:craft\models\Site) object | from the site represented by the object.
+| a [craft\models\Site](craft4:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip
@@ -953,7 +927,7 @@ Possible values include:
 | `'not foo'` | not of a type with a handle of `foo`.
 | `['foo', 'bar']` | of a type with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not of a type with a handle of `foo` or `bar`.
-| an [MatrixBlockType](craft3:craft\models\MatrixBlockType) object | of a type represented by the object.
+| an [MatrixBlockType](craft4:craft\models\MatrixBlockType) object | of a type represented by the object.
 
 
 

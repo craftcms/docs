@@ -123,8 +123,7 @@ Category queries support the following parameters:
 | [ancestorDist](#ancestordist)             | Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
 | [ancestorOf](#ancestorof)                 | Narrows the query results to only categories that are ancestors of another category in its structure.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only categories that are related to certain other elements.
-| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
-| [asArray](#asarray)                       | Causes the query to return matching categories as arrays of data, rather than [Category](craft3:craft\elements\Category) objects.
+| [asArray](#asarray)                       | Causes the query to return matching categories as arrays of data, rather than [Category](craft4:craft\elements\Category) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 | [dateCreated](#datecreated)               | Narrows the query results based on the categories’ creation dates.
@@ -217,7 +216,7 @@ Possible values include:
 | Value | Fetches categories…
 | - | -
 | `1` | above the category with an ID of 1.
-| a [Category](craft3:craft\elements\Category) object | above the category represented by the object.
+| a [Category](craft4:craft\elements\Category) object | above the category represented by the object.
 
 
 
@@ -273,34 +272,9 @@ $categories = \craft\elements\Category::find()
 :::
 
 
-#### `anyStatus`
-
-Removes element filters based on their statuses.
-
-
-
-
-
-::: code
-```twig
-{# Fetch all categories, regardless of status #}
-{% set categories = craft.categories()
-  .anyStatus()
-  .all() %}
-```
-
-```php
-// Fetch all categories, regardless of status
-$categories = \craft\elements\Category::find()
-    ->anyStatus()
-    ->all();
-```
-:::
-
-
 #### `asArray`
 
-Causes the query to return matching categories as arrays of data, rather than [Category](craft3:craft\elements\Category) objects.
+Causes the query to return matching categories as arrays of data, rather than [Category](craft4:craft\elements\Category) objects.
 
 
 
@@ -459,7 +433,7 @@ Possible values include:
 | Value | Fetches categories…
 | - | -
 | `1` | below the category with an ID of 1.
-| a [Category](craft3:craft\elements\Category) object | below the category represented by the object.
+| a [Category](craft4:craft\elements\Category) object | below the category represented by the object.
 
 
 
@@ -534,7 +508,7 @@ Possible values include:
 | `'not foo'` | not in a group with a handle of `foo`.
 | `['foo', 'bar']` | in a group with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a group with a handle of `foo` or `bar`.
-| a [CategoryGroup](craft3:craft\models\CategoryGroup) object | in a group represented by the object.
+| a [CategoryGroup](craft4:craft\models\CategoryGroup) object | in a group represented by the object.
 
 
 
@@ -789,7 +763,7 @@ Possible values include:
 | Value | Fetches the category…
 | - | -
 | `1` | after the category with an ID of 1.
-| a [Category](craft3:craft\elements\Category) object | after the category represented by the object.
+| a [Category](craft4:craft\elements\Category) object | after the category represented by the object.
 
 
 
@@ -867,7 +841,7 @@ Possible values include:
 | Value | Fetches categories…
 | - | -
 | `1` | after the category with an ID of 1.
-| a [Category](craft3:craft\elements\Category) object | after the category represented by the object.
+| a [Category](craft4:craft\elements\Category) object | after the category represented by the object.
 
 
 
@@ -899,7 +873,7 @@ Possible values include:
 | Value | Fetches categories…
 | - | -
 | `1` | before the category with an ID of 1.
-| a [Category](craft3:craft\elements\Category) object | before the category represented by the object.
+| a [Category](craft4:craft\elements\Category) object | before the category represented by the object.
 
 
 
@@ -966,7 +940,7 @@ Possible values include:
 | Value | Fetches the category…
 | - | -
 | `1` | before the category with an ID of 1.
-| a [Category](craft3:craft\elements\Category) object | before the category represented by the object.
+| a [Category](craft4:craft\elements\Category) object | before the category represented by the object.
 
 
 
@@ -1112,7 +1086,7 @@ Possible values include:
 | Value | Fetches categories…
 | - | -
 | `1` | beside the category with an ID of 1.
-| a [Category](craft3:craft\elements\Category) object | beside the category represented by the object.
+| a [Category](craft4:craft\elements\Category) object | beside the category represented by the object.
 
 
 
@@ -1148,7 +1122,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](craft3:craft\models\Site) object | from the site represented by the object.
+| a [craft\models\Site](craft4:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip

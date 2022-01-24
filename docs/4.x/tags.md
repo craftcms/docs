@@ -72,8 +72,7 @@ Tag queries support the following parameters:
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only tags that are related to certain other elements.
-| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
-| [asArray](#asarray)                       | Causes the query to return matching tags as arrays of data, rather than [Tag](craft3:craft\elements\Tag) objects.
+| [asArray](#asarray)                       | Causes the query to return matching tags as arrays of data, rather than [Tag](craft4:craft\elements\Tag) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 | [dateCreated](#datecreated)               | Narrows the query results based on the tags’ creation dates.
@@ -145,34 +144,9 @@ $tags = \craft\elements\Tag::find()
 :::
 
 
-#### `anyStatus`
-
-Removes element filters based on their statuses.
-
-
-
-
-
-::: code
-```twig
-{# Fetch all tags, regardless of status #}
-{% set tags = craft.tags()
-  .anyStatus()
-  .all() %}
-```
-
-```php
-// Fetch all tags, regardless of status
-$tags = \craft\elements\Tag::find()
-    ->anyStatus()
-    ->all();
-```
-:::
-
-
 #### `asArray`
 
-Causes the query to return matching tags as arrays of data, rather than [Tag](craft3:craft\elements\Tag) objects.
+Causes the query to return matching tags as arrays of data, rather than [Tag](craft4:craft\elements\Tag) objects.
 
 
 
@@ -341,7 +315,7 @@ Possible values include:
 | `'not foo'` | not in a group with a handle of `foo`.
 | `['foo', 'bar']` | in a group with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a group with a handle of `foo` or `bar`.
-| a [TagGroup](craft3:craft\models\TagGroup) object | in a group represented by the object.
+| a [TagGroup](craft4:craft\models\TagGroup) object | in a group represented by the object.
 
 
 
@@ -706,7 +680,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](craft3:craft\models\Site) object | from the site represented by the object.
+| a [craft\models\Site](craft4:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip

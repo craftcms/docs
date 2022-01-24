@@ -284,8 +284,7 @@ Entry queries support the following parameters:
 | [ancestorDist](#ancestordist)             | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [ancestorOf](#ancestorof).
 | [ancestorOf](#ancestorof)                 | Narrows the query results to only entries that are ancestors of another entry in its structure.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only entries that are related to certain other elements.
-| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
-| [asArray](#asarray)                       | Causes the query to return matching entries as arrays of data, rather than [Entry](craft3:craft\elements\Entry) objects.
+| [asArray](#asarray)                       | Causes the query to return matching entries as arrays of data, rather than [Entry](craft4:craft\elements\Entry) objects.
 | [authorGroup](#authorgroup)               | Narrows the query results based on the user group the entries’ authors belong to.
 | [authorGroupId](#authorgroupid)           | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
 | [authorId](#authorid)                     | Narrows the query results based on the entries’ authors.
@@ -428,7 +427,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | above the entry with an ID of 1.
-| a [Entry](craft3:craft\elements\Entry) object | above the entry represented by the object.
+| a [Entry](craft4:craft\elements\Entry) object | above the entry represented by the object.
 
 
 
@@ -484,34 +483,9 @@ $entries = \craft\elements\Entry::find()
 :::
 
 
-#### `anyStatus`
-
-Removes element filters based on their statuses.
-
-
-
-
-
-::: code
-```twig
-{# Fetch all entries, regardless of status #}
-{% set entries = craft.entries()
-  .anyStatus()
-  .all() %}
-```
-
-```php
-// Fetch all entries, regardless of status
-$entries = \craft\elements\Entry::find()
-    ->anyStatus()
-    ->all();
-```
-:::
-
-
 #### `asArray`
 
-Causes the query to return matching entries as arrays of data, rather than [Entry](craft3:craft\elements\Entry) objects.
+Causes the query to return matching entries as arrays of data, rather than [Entry](craft4:craft\elements\Entry) objects.
 
 
 
@@ -546,7 +520,8 @@ Possible values include:
 | `'not foo'` | not with an author in a group with a handle of `foo`.
 | `['foo', 'bar']` | with an author in a group with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not with an author in a group with a handle of `foo` or `bar`.
-| a [UserGroup](craft3:craft\models\UserGroup) object | with an author in a group represented by the object.
+| a [UserGroup](craft4:craft\models\UserGroup) object | with an author in a group represented by the object.
+| an array of [UserGroup](craft4:craft\models\UserGroup) objects | with an author in a group represented by the objects.
 
 
 
@@ -801,7 +776,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | below the entry with an ID of 1.
-| a [Entry](craft3:craft\elements\Entry) object | below the entry represented by the object.
+| a [Entry](craft4:craft\elements\Entry) object | below the entry represented by the object.
 
 
 
@@ -839,7 +814,7 @@ Possible values include:
 | Value | Fetches drafts…
 | - | -
 | `1` | created by the user with an ID of 1.
-| a [craft\elements\User](craft3:craft\elements\User) object | created by the user represented by the object.
+| a [craft\elements\User](craft4:craft\elements\User) object | created by the user represented by the object.
 
 
 
@@ -902,7 +877,7 @@ Possible values include:
 | Value | Fetches drafts…
 | - | -
 | `1` | for the entry with an ID of 1.
-| a [Entry](craft3:craft\elements\Entry) object | for the entry represented by the object.
+| a [Entry](craft4:craft\elements\Entry) object | for the entry represented by the object.
 | `'*'` | for any entry
 | `false` | that aren’t associated with a published entry
 
@@ -1227,7 +1202,7 @@ Possible values include:
 | Value | Fetches the entry…
 | - | -
 | `1` | after the entry with an ID of 1.
-| a [Entry](craft3:craft\elements\Entry) object | after the entry represented by the object.
+| a [Entry](craft4:craft\elements\Entry) object | after the entry represented by the object.
 
 
 
@@ -1305,7 +1280,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | after the entry with an ID of 1.
-| a [Entry](craft3:craft\elements\Entry) object | after the entry represented by the object.
+| a [Entry](craft4:craft\elements\Entry) object | after the entry represented by the object.
 
 
 
@@ -1337,7 +1312,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | before the entry with an ID of 1.
-| a [Entry](craft3:craft\elements\Entry) object | before the entry represented by the object.
+| a [Entry](craft4:craft\elements\Entry) object | before the entry represented by the object.
 
 
 
@@ -1441,7 +1416,7 @@ Possible values include:
 | Value | Fetches the entry…
 | - | -
 | `1` | before the entry with an ID of 1.
-| a [Entry](craft3:craft\elements\Entry) object | before the entry represented by the object.
+| a [Entry](craft4:craft\elements\Entry) object | before the entry represented by the object.
 
 
 
@@ -1527,7 +1502,7 @@ Possible values include:
 | Value | Fetches revisions…
 | - | -
 | `1` | created by the user with an ID of 1.
-| a [craft\elements\User](craft3:craft\elements\User) object | created by the user represented by the object.
+| a [craft\elements\User](craft4:craft\elements\User) object | created by the user represented by the object.
 
 
 
@@ -1590,7 +1565,7 @@ Possible values include:
 | Value | Fetches revisions…
 | - | -
 | `1` | for the entry with an ID of 1.
-| a [Entry](craft3:craft\elements\Entry) object | for the entry represented by the object.
+| a [Entry](craft4:craft\elements\Entry) object | for the entry represented by the object.
 
 
 
@@ -1710,7 +1685,7 @@ Possible values include:
 | `'not foo'` | not in a section with a handle of `foo`.
 | `['foo', 'bar']` | in a section with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a section with a handle of `foo` or `bar`.
-| a [Section](craft3:craft\models\Section) object | in a section represented by the object.
+| a [Section](craft4:craft\models\Section) object | in a section represented by the object.
 
 
 
@@ -1774,7 +1749,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | beside the entry with an ID of 1.
-| a [Entry](craft3:craft\elements\Entry) object | beside the entry represented by the object.
+| a [Entry](craft4:craft\elements\Entry) object | beside the entry represented by the object.
 
 
 
@@ -1810,7 +1785,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](craft3:craft\models\Site) object | from the site represented by the object.
+| a [craft\models\Site](craft4:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip
@@ -2058,7 +2033,7 @@ Possible values include:
 | `'not foo'` | not of a type with a handle of `foo`.
 | `['foo', 'bar']` | of a type with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not of a type with a handle of `foo` or `bar`.
-| an [EntryType](craft3:craft\models\EntryType) object | of a type represented by the object.
+| an [EntryType](craft4:craft\models\EntryType) object | of a type represented by the object.
 
 
 

@@ -59,14 +59,14 @@ Default value
 :   `[]`
 
 Defined by
-:   [DbConfig::$attributes](craft3:craft\config\DbConfig::$attributes)
+:   [DbConfig::$attributes](craft4:craft\config\DbConfig::$attributes)
 
 
 
 An array of key => value pairs of PDO attributes to pass into the PDO constructor.
 
 For example, when using the [MySQL PDO driver](https://php.net/manual/en/ref.pdo-mysql.php), if you wanted to enable a SSL database connection
-(assuming [SSL is enabled in MySQL](https://dev.mysql.com/doc/refman/5.5/en/using-secure-connections.html) and `'user'` can connect via SSL,
+(assuming [SSL is enabled in MySQL](https://dev.mysql.com/doc/mysql-secure-deployment-guide/5.7/en/secure-deployment-secure-connections.html) and `'user'` can connect via SSL,
 you’d set these:
 
 ```php
@@ -88,7 +88,7 @@ Default value
 :   `'utf8'`
 
 Defined by
-:   [DbConfig::$charset](craft3:craft\config\DbConfig::$charset)
+:   [DbConfig::$charset](craft4:craft\config\DbConfig::$charset)
 
 
 
@@ -113,7 +113,7 @@ Default value
 :   `null`
 
 Defined by
-:   [DbConfig::$collation](craft3:craft\config\DbConfig::$collation)
+:   [DbConfig::$collation](craft4:craft\config\DbConfig::$collation)
 
 Since
 :   3.6.4
@@ -142,13 +142,13 @@ You can change the character set and collation across all existing database tabl
 ### `dsn`
 
 Allowed types
-:   [string](https://php.net/language.types.string)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `null`
 
 Defined by
-:   [DbConfig::$dsn](craft3:craft\config\DbConfig::$dsn)
+:   [DbConfig::$dsn](craft4:craft\config\DbConfig::$dsn)
 
 
 
@@ -171,7 +171,7 @@ Default value
 :   `''`
 
 Defined by
-:   [DbConfig::$password](craft3:craft\config\DbConfig::$password)
+:   [DbConfig::$password](craft4:craft\config\DbConfig::$password)
 
 
 
@@ -182,13 +182,13 @@ The database password to connect with.
 ### `schema`
 
 Allowed types
-:   [string](https://php.net/language.types.string)
+:   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :   `'public'`
 
 Defined by
-:   [DbConfig::$schema](craft3:craft\config\DbConfig::$schema)
+:   [DbConfig::$schema](craft4:craft\config\DbConfig::$schema)
 
 
 
@@ -210,7 +210,7 @@ Default value
 :   `false`
 
 Defined by
-:   [DbConfig::$setSchemaOnConnect](craft3:craft\config\DbConfig::$setSchemaOnConnect)
+:   [DbConfig::$setSchemaOnConnect](craft4:craft\config\DbConfig::$setSchemaOnConnect)
 
 Since
 :   3.7.27
@@ -235,7 +235,7 @@ Default value
 :   `''`
 
 Defined by
-:   [DbConfig::$tablePrefix](craft3:craft\config\DbConfig::$tablePrefix)
+:   [DbConfig::$tablePrefix](craft4:craft\config\DbConfig::$tablePrefix)
 
 
 
@@ -253,7 +253,7 @@ Default value
 :   `'root'`
 
 Defined by
-:   [DbConfig::$user](craft3:craft\config\DbConfig::$user)
+:   [DbConfig::$user](craft4:craft\config\DbConfig::$user)
 
 
 
@@ -270,7 +270,7 @@ Default value
 :   `false`
 
 Defined by
-:   [DbConfig::$useUnbufferedConnections](craft3:craft\config\DbConfig::$useUnbufferedConnections)
+:   [DbConfig::$useUnbufferedConnections](craft4:craft\config\DbConfig::$useUnbufferedConnections)
 
 Since
 :   3.7.0
@@ -295,7 +295,7 @@ Default value
 :   `null`
 
 Defined by
-:   [DbConfig::$url](craft3:craft\config\DbConfig::$url)
+:   [DbConfig::$url](craft4:craft\config\DbConfig::$url)
 
 
 
@@ -314,7 +314,7 @@ Default value
 :   `null`
 
 Defined by
-:   [DbConfig::$driver](craft3:craft\config\DbConfig::$driver)
+:   [DbConfig::$driver](craft4:craft\config\DbConfig::$driver)
 
 
 
@@ -331,7 +331,7 @@ Default value
 :   `null`
 
 Defined by
-:   [DbConfig::$server](craft3:craft\config\DbConfig::$server)
+:   [DbConfig::$server](craft4:craft\config\DbConfig::$server)
 
 
 
@@ -342,13 +342,13 @@ The database server name or IP address. Usually `localhost` or `127.0.0.1`.
 ### `port`
 
 Allowed types
-:   [integer](https://php.net/language.types.integer)
+:   [integer](https://php.net/language.types.integer), [string](https://php.net/language.types.string)
 
 Default value
 :   `null`
 
 Defined by
-:   [DbConfig::$port](craft3:craft\config\DbConfig::$port)
+:   [DbConfig::$port](craft4:craft\config\DbConfig::$port)
 
 
 
@@ -365,7 +365,7 @@ Default value
 :   `null`
 
 Defined by
-:   [DbConfig::$unixSocket](craft3:craft\config\DbConfig::$unixSocket)
+:   [DbConfig::$unixSocket](craft4:craft\config\DbConfig::$unixSocket)
 
 
 
@@ -383,7 +383,7 @@ Default value
 :   `null`
 
 Defined by
-:   [DbConfig::$database](craft3:craft\config\DbConfig::$database)
+:   [DbConfig::$database](craft4:craft\config\DbConfig::$database)
 
 
 

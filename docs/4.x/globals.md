@@ -106,8 +106,7 @@ Global set queries support the following parameters:
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only global sets that are related to certain other elements.
-| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
-| [asArray](#asarray)                       | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft3:craft\elements\GlobalSet) objects.
+| [asArray](#asarray)                       | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft4:craft\elements\GlobalSet) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 | [dateCreated](#datecreated)               | Narrows the query results based on the global sets’ creation dates.
@@ -120,7 +119,7 @@ Global set queries support the following parameters:
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [limit](#limit)                           | Determines the number of global sets that should be returned.
 | [offset](#offset)                         | Determines how many global sets should be skipped in the results.
-| [orderBy](#orderby)                       | Determines the order that the global sets should be returned in. (If empty, defaults to `name ASC`.)
+| [orderBy](#orderby)                       | Determines the order that the global sets should be returned in. (If empty, defaults to `sortOrder ASC`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 | [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                   | Narrows the query results to only global sets that are related to certain other elements.
@@ -176,34 +175,9 @@ $globalSets = \craft\elements\GlobalSet::find()
 :::
 
 
-#### `anyStatus`
-
-Removes element filters based on their statuses.
-
-
-
-
-
-::: code
-```twig
-{# Fetch all global sets, regardless of status #}
-{% set globalSets = craft.globalSets()
-  .anyStatus()
-  .all() %}
-```
-
-```php
-// Fetch all global sets, regardless of status
-$globalSets = \craft\elements\GlobalSet::find()
-    ->anyStatus()
-    ->all();
-```
-:::
-
-
 #### `asArray`
 
-Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft3:craft\elements\GlobalSet) objects.
+Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft4:craft\elements\GlobalSet) objects.
 
 
 
@@ -519,7 +493,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `orderBy`
 
-Determines the order that the global sets should be returned in. (If empty, defaults to `name ASC`.)
+Determines the order that the global sets should be returned in. (If empty, defaults to `sortOrder ASC`.)
 
 
 
@@ -704,7 +678,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](craft3:craft\models\Site) object | from the site represented by the object.
+| a [craft\models\Site](craft4:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip
