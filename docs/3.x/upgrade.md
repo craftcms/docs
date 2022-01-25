@@ -19,7 +19,9 @@ Once you’ve completed everything listed above you can continue with the upgrad
 
 ## Performing the Upgrade
 
-The best way to upgrade a Craft 2 site is to approach it like you’re building a new Craft 3 site. So to begin, create a new directory alongside your current project, and follow steps 1-3 in the [installation instructions](installation.md).
+The best way to upgrade a Craft 2 site is to approach it like you’re building a new Craft 3 site.
+
+To begin, create a new directory alongside your current project, and follow steps 1-3 in the [installation instructions](installation.md).
 
 With Craft 3 downloaded and prepped, follow these steps to complete the upgrade:
 
@@ -52,6 +54,10 @@ With Craft 3 downloaded and prepped, follow these steps to complete the upgrade:
 12. If you had any plugins installed, you’ll need to install their Craft 3 counterparts from the “Plugin Store” section in the control panel. (See the plugins’ documentation for any additional upgrade instructions.)
 
 Now that you’ve upgraded your install to use Craft 3, please take some time to review the changes on this page and update your project to follow the changes in Craft 3.
+
+::: warning
+If you need to re-attempt the upgrade process, delete your `config/project/` directory first. You’ll only want to commit what Craft writes there once everything’s ready to roll.
+:::
 
 ### Troubleshooting
 
