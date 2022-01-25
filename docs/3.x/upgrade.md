@@ -10,9 +10,12 @@ Before you begin, make sure that:
 - your server meets Craft 3’s [minimum requirements](requirements.md) (Craft 3 requires PHP 7.2.5+ and at least 256 MB of memory allocated to PHP)
 - your site is running at least **Craft 2.6.2788**
 - your plugins are all up-to-date, and you’ve verified that they’ve been updated for Craft 3 (you can see a report of your plugins’ Craft 3 compatibility status from the Updates page in the Craft 2 control panel)
+- you’ve pulled your latest production database into each environment you’ll be updating
 - your **database is backed up** in case everything goes horribly wrong
 
-Once you've completed everything listed above you can continue with the upgrade process.
+One of Craft 3’s most significant new features is [project config](project-config.md), and we highly recommend taking a moment to better understand what it is and what it will mean for your workflow and [deployment process](https://craftcms.com/knowledge-base/deployment-best-practices). The most important part is to get all your environments using the exact same database, which is why that’s a prerequisite step.
+
+Once you’ve completed everything listed above you can continue with the upgrade process.
 
 ## Performing the Upgrade
 
