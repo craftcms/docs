@@ -13,7 +13,7 @@ As a customer or store manager is building a cart, the goal is to maintain an up
 
 Once a cart is completed, however, it becomes an [order](#orders) that represents choices explicitly finalized by whoever completed the cart. The order’s behavior changes slightly at this point: the customer will no longer be able to make edits, and changes made by a store manager will not automatically trigger [recalculation](#recalculating-orders).
 
-Carts and orders are both listed on the Orders index page in the control panel, where you can further limit your view to _active_ carts updated in the last 24 hours, and _inactive_ carts older than 24 hours and likely to be abandoned. (You can customize that time limit using the [`activeCartDuration`](config-settings.md#activeCartDuration) setting.)
+Carts and orders are both listed on the Orders index page in the control panel, where you can further limit your view to _active_ carts updated in the last hour, and _inactive_ carts older than an hour that are likely to be abandoned. (You can customize that time limit using the [`activeCartDuration`](config-settings.md#activeCartDuration) setting.)
 
 Craft will automatically to purge (delete) abandoned carts after 90 days, and you can customize this behavior with the [`purgeInactiveCarts`](config-settings.md#purgeInactiveCarts) and [`purgeInactiveCartsDuration`](config-settings.md#purgeInactiveCartsDuration) settings.
 
