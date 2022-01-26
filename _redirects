@@ -40,8 +40,6 @@
 /docs/commerce/3.x/gateway-config.html /docs/commerce/3.x/payment-gateways.html#storing-config-outside-of-the-database
 # 2.x plugin index is empty—forward to introduction
 /docs/2.x/plugins /docs/2.x/plugins/introduction.html
-/docs/2.x/plugins/ /docs/2.x/plugins/introduction.html
-/docs/2.x/plugins/index.html /docs/2.x/plugins/introduction.html
 
 # dynamic ones
 /docs/commerce/3.x/order-status-emails.html* /docs/commerce/3.x/emails.html:splat
