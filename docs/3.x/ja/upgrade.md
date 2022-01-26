@@ -10,15 +10,20 @@
 - あなたのサーバーは Craft 3 の[最小要件](requirements.md)（Craft 3 には PHP 7 以降が必要で、PHP 割当メモリが少なくとも 256 MB 必要です）を満たしています
 - あなたのサイトは、少なくとも **Craft 2.6.2788** が実行されています。
 - プラグインはすべて最新の状態で、それらが Craft 3 向けにアップデートされていることを確かめました。 （Craft 2 コントロールパネルのアップデートページから、プラグインの Craft 3 互換ステータスのレポートを見ることができます。 ）
-- なんらかの問題が起こった場合に備えて、**データベースをバックアップ**してあります。
+- you’ve pulled your latest production database into each environment you’ll be updating
+- your **database is backed up** in case everything goes horribly wrong
 
-上記リストをすべて満たしているなら、アップグレードプロセスを続行できます。
+One of Craft 3’s most significant new features is [project config](project-config.md), and we highly recommend taking a moment to better understand what it is and what it will mean for your workflow and [deployment process](https://craftcms.com/knowledge-base/deployment-best-practices). The most important part is to get all your environments using the exact same database, which is why that’s a prerequisite step.
+
+Once you’ve completed everything listed above you can continue with the upgrade process.
 
 ## アップグレードの実行
 
-Craft 2 サイトをアップグレードする最善の方法は、新しい Craft 3 サイトを構築するときと同様のアプローチをとることです。 はじめに、既存のプロジェクトと並行する新しいディレクトリを作成し、[インストールガイド](installation.md)のステップ 1 〜 3 に従ってください。
+The best way to upgrade a Craft 2 site is to approach it like you’re building a new Craft 3 site.
 
-Craft 3 をダウンロードして準備したら、次のステップに従ってアップグレードを完了します。
+To begin, create a new directory alongside your current project, and follow steps 1-3 in the [installation instructions](installation.md).
+
+With Craft 3 downloaded and prepped, follow these steps to complete the upgrade:
 
 1. 古い `craft/config/db.php` から新しいプロジェクトの `.env` ファイルにデータベース接続設定を定義します。
 
@@ -48,27 +53,31 @@ Craft 3 をダウンロードして準備したら、次のステップに従っ
 
 12. プラグインをインストールしている場合、コントロールパネルの「プラグインストア」セクションから Craft 3 対応版をインストールする必要があります。 （追加のアップグレードガイドについては、プラグインのドキュメントを参照してください。 ）
 
-これで Craft 2 プロジェクトから Craft 3 へのアップグレードが完了しました。 [Craft 3 の変更点](changes-in-craft-3.md)を確認する時間を設けてください。
+Now that you’ve upgraded your install to use Craft 3, please take some time to review the changes on this page and update your project to follow the changes in Craft 3.
+
+::: warning
+If you need to re-attempt the upgrade process, delete your `config/project/` directory first. You’ll only want to commit what Craft writes there once everything’s ready to roll.
+:::
 
 ### トラブルシューティング
 
 #### コントロールパネルにアクセスすると Craft のインストーラーが表示されます。
 
-これが起こるのは、`.env` ファイルのデータベース接続情報が実際に必要な情報と完全に一致しないためです。 多くの場合、正しい `DB_TABLE_PREFIX` を設定するのを忘れています。
+If this happens, it’s because your database connection settings in the `.env` file don’t quite match up to what they used to be. Most likely you forgot to set the correct `DB_TABLE_PREFIX`.
 
 #### 「Setting unknown property: craft\config\DbConfig::initSQLs」エラーが表示されます。
 
-Craft 2 の MySQL 5.7 サポートのための修正のみに使用され、もはや必要ではなくなった `initSQLs` データベース設定が Craft 3 で削除されました。 `config/db.php` ファイルを開いて、`'initSQLs'` からはじまる行を削除してください。
+The `initSQLs` database config setting was removed in Craft 3, as it was generally only used to fix MySQL 5.7 support in Craft 2, which isn’t necessary in Craft 3. Just open your `config/db.php` file and delete the line that begins with `'initSQLs'`.
 
 ## トラブルシューティング
 
-「リッチテキスト」フィールドタイプは Craft 3 から削除され、新しい [Redactor](https://github.com/craftcms/redactor) プラグインと [CKEditor](https://github.com/craftcms/ckeditor) プラグインが追加されました。
+The “Rich Text” field type has been removed from Craft 3, in favor of new [Redactor](https://github.com/craftcms/redactor) and [CKEditor](https://github.com/craftcms/ckeditor) plugins.
 
-いくつかのリッチテキストフィールドがすでに存在する場合、Redactor プラグインをインストールした時点で自動的に Redactor フィールドに変換されます。
+If you have any existing Rich Text fields, they will be automatically converted to Redactor fields when you install the Redactor plugin.
 
 ### Redactor 設定
 
-Redactor プラグインをインストールする場合、`config/redactor/` に定義された Redactor 設定が有効な JSON であることを保証する必要があります。 すなわち、
+If you do install the Redactor plugin, you will need to ensure that your Redactor configs in `config/redactor/` are valid JSON. That means:
 
 - コメントは使えません
 - （コンフィグ設定名である）すべてのオブジェクトプロパティは、ダブルクォートで囲まれていなければなりません
@@ -89,17 +98,17 @@ Redactor プラグインをインストールする場合、`config/redactor/` �
 
 ## 位置選択フィールド
 
-「位置選択」フィールドタイプは Craft 3 で削除されました。 位置選択フィールドがある場合、すべてのオプションを保持したままドロップダウンフィールドに変換されます。
+The “Position Select” field type has been removed from Craft 3. If you had any Position Select fields, they will be converted to Dropdown fields, with all the same options.
 
-位置選択フィールドが必要な場合、[Position Fieldtype](https://github.com/Rias500/craft-position-fieldtype) プラグインをインストールしてください。
+If you miss Position Select, you can try installing the [Position Fieldtype](https://github.com/Rias500/craft-position-fieldtype) plugin, which brings it back.
 
 ## Lightswitch フィールド
 
-Lightswitch フィールドの値は、常に `true` または `false` になりました。 明示的な値がセットされていない要素の Lightswitch フィールドにアクセスした場合、代わりにフィールドのデフォルト値が返されます。
+Lightswitch field values are now always `true` or `false`. If you’re accessing a Lightswitch field value for an element that doesn’t have an explicit value set yet, the field’s default value will be returned instead.
 
 ## リモートボリューム
 
-Amazon S3、Rackspace Cloud Files、および、Google Cloud Storage のサポートは、プラグインに移行されました。 それらのサービスを Craft 2 で利用していたアセットボリュームがある場合、新しいプラグインをインストールする必要があります。
+Support for Amazon S3, Rackspace Cloud Files, and Google Cloud Storage have been moved into plugins. If you have any asset volumes that were using those services in Craft 2, you will need to install the new plugins:
 
 - [Amazon S3](https://github.com/craftcms/aws-s3)
 - [Rackspace Cloud Files](https://github.com/craftcms/rackspace)
@@ -109,7 +118,7 @@ Amazon S3、Rackspace Cloud Files、および、Google Cloud Storage のサポ�
 
 ### コンフィグ設定
 
-いくつかの一般設定は Craft 3 でリネームされました。 古い設定名は非推奨となりますが、Craft 4 までは動作し続けます。
+Some general config settings have been renamed in Craft 3. The old setting names have been deprecated, but will continue to work until Craft 4.
 
 | 旧設定                          | 新設定                           |
 | ---------------------------- | ----------------------------- |
@@ -122,15 +131,15 @@ Amazon S3、Rackspace Cloud Files、および、Google Cloud Storage のサポ�
 | `useWriteFileLock`           | `useFileLocks`                |
 | `validationKey`              | `securityKey`<sup>4</sup>     |
 
-*<sup>1</sup> `backupOnUpdate` を `false` にすると、PHP によるバックアップの生成が行われないため、パフォーマンスは大きな要因になりえません。*
+*<sup>1</sup> Performance should no longer be a major factor when setting `backupOnUpdate` to `false`, since backups aren’t generated by PHP anymore.*
 
-*<sup>2</sup> `defaultFileMode` はデフォルトで `null` になりました。 これは、現在の環境によって決定されることを意味します。*
+*<sup>2</sup> `defaultFileMode` is now `null` by default, meaning it will be determined by the current environment.*
 
-*<sup>3</sup> Craft 2 のコンフィグ設定 `environmentVariables` で定義された値をサポートする設定項目は、Craft 3 のシステム環境設定とエイリアスにセットできるようになりました。 （詳細については、[環境設定](config/#environmental-configuration)を参照してください。 ）Craft 3 にアップデートすると、サイト URL やローカルボリュームの設定は新しい `@alias/sub/path` 構文へ自動的に変換されます。
+*<sup>3</sup> Settings that supported values defined by your `environmentVariables` config setting in Craft 2 can now be set to system environment variables and aliases in Craft 3. (See [Environmental Configuration](config/#environmental-configuration) to learn more about those.) Site URL and Local volume settings will automatically be converted to the new `@alias/sub/path` syntax when updating to Craft 3.
 
-*<sup>4</sup> `securityKey` は、もはやオプションではありません。 まだ設定していない場合、（ファイルが存在していれば）`storage/runtime/validation.key` に設定してください。 自動生成された `validation.key` ファイルのバックアップは、Craft 4 で削除されます。*
+*<sup>4</sup> `securityKey` is no longer optional. If you haven’t set it yet, set it to the value in `storage/runtime/validation.key` (if the file exists). The auto-generated `validation.key` file fallback will be removed in Craft 4.*
 
-いくつかの設定は完全に削除されました。
+Some config settings have been removed entirely:
 
 | ファイル          | 設定                                                                                         |
 | ------------- | ------------------------------------------------------------------------------------------ |
@@ -141,13 +150,13 @@ Amazon S3、Rackspace Cloud Files、および、Google Cloud Storage のサポ�
 
 ### `omitScriptNameInUrls` と `usePathInfo`
 
-`omitScriptNameInUrls` 設定は、Craft 2 のデフォルトがそうであったように `'auto'` にすることはもはやできません。 HTTP リクエストを `index.php` にルーティングするようにサーバーを設定した場合、`config/general.php` で明示的に `true` にする必要があることを意味しています。
+The `omitScriptNameInUrls` setting can no longer be set to `'auto'`, as it was by default in Craft 2. Which means you will need to explicitly set it to `true` in `config/general.php` if you’ve configured your server to route HTTP requests to `index.php`.
 
-同様に、`usePathInfo` 設定も `'auto'` にすることはできません。 サーバーが [PATH_INFO](https://craftcms.com/support/enable-path-info) をサポートするよう設定されているならば、ここに `true` をセットできます。 ただし、`omitScriptNameInUrls` を `true` にセットできない場合のみ、必要となります。
+Similarly, the `usePathInfo` setting can no longer be set to `'auto'` either. If your server is configured to support [PATH_INFO](https://craftcms.com/support/enable-path-info), you can set this to `true`. This is only necessary if you can’t set `omitScriptNameInUrls` to `true`, though.
 
 ## URL ルール
 
-`config/routes.php` に [URL ルール](config/README.md#url-rules)を保存しているならば、Yii 2 の [pattern-route 構文](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules)にアップデートする必要があります。
+If you have any [URL rules](config/README.md#url-rules) saved in `config/routes.php`, you will need to update them to Yii 2’s [pattern-route syntax](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules).
 
 - パターンの名前付けされたパラメータは、正規表現のサブパターン（`(?P<ParamName>RegExp)`）ではなく、フォーマット（`<ParamName:RegExp>`）を利用して定義する必要があります。
 - 名前付けされていないパラメータ（例：`([^\/]+)`）は、もはや許可されません。 新しい名前付けされたパラメータ構文（`<ParamName:RegExp>`）に変換しなければなりません。
@@ -170,20 +179,20 @@ Amazon S3、Rackspace Cloud Files、および、Google Cloud Storage のサポ�
 
 ## PHP 定数
 
-いくつかの PHP 定数は Craft 3 で非推奨となり、Craft 4 で動作しなくなります
+Some PHP constants have been deprecated in Craft 3, and will no longer work in Craft 4:
 
 | 旧 PHP 定数         | 代わりにすべきこと                                                          |
 | ---------------- | ------------------------------------------------------------------ |
 | `CRAFT_LOCALE`   | [CRAFT_SITE](config/README.md#craft-site) 定数<sup>1</sup> を利用してください |
 | `CRAFT_SITE_URL` | Use [environment variables](config/#environmental-configuration)   |
 
-*<sup>1</sup> Craft 3 ではそれぞれのサイト / ロケールごとに独自の `index.php` ファイルを用意することが必須ではなくなりました。 そのため、不要になったすべてのサイト / ロケールのウェブルート、および、サブフォルダーを削除することもできます。 詳細については、[ローカライゼーションガイド](sites.md)を参照してください。*
+*<sup>1</sup> Craft 3 doesn’t require each site/locale to have its own `index.php` file anymore, so alternatively you can remove all unnecessary site/locale web roots and subfolders. See the [Localization guide](sites.md) for more info.*
 
 ## 静的な翻訳ファイル
 
-Craft 3 でも[静的メッセージの翻訳](sites.md#static-message-translations)をサポートしていますが、ディレクトリ構造が変わりました。 `translations/` フォルダの中にローケルごとのサブディレクトリを作成し、それぞれに**翻訳カテゴリ**ごとの PHP ファイルを作成する必要があります。
+Craft 3 still supports [static message translations](sites.md#static-message-translations), but the directory structure has changed. Now within your `translations/` folder, you should create subdirectories for each locale, and within them, PHP files for each **translation category**.
 
-受け入れられる翻訳カテゴリは、次の通りです。
+The acceptable translation categories are:
 
 | カテゴリ            | 説明               |
 | --------------- | ---------------- |
@@ -192,7 +201,7 @@ Craft 3 でも[静的メッセージの翻訳](sites.md#static-message-translati
 | `site`          | サイト固有の翻訳メッセージ    |
 | `plugin-handle` | プラグイン向けの翻訳メッセージ  |
 
-Craft 3 の `translations/` フォルダの構成は、次のようになります。
+In Craft 3, your `translations/` folder might look something like this:
 
 ```treeview
 translations/
@@ -203,9 +212,9 @@ translations/
 
 ## ユーザーフォト
 
-ユーザーフォトはアセットとして保存されるようになりました。 Craft 3 にアップグレードすると、Craft は（ `<Username>/` サブフォルダを除く、Craft が事前にすべてのユーザー画像を保管している） `storage/userphotos/` を「User Photos」と呼ばれる新しいアセットボリュームとして自動的に作成します。 しかしながら、このフォルダはウェブルートよりも上位階層にあるため、HTTP リクエストでアクセスできません。 そのため、このボリュームをアクセスできる状態にするまで、ユーサーフォトはフロントエンドで動作しません。
+User photos are stored as assets now. When upgrading to Craft 3, Craft will automatically create a new asset volume called “User Photos” at `storage/userphotos/` (where Craft previously stored all user photos, but without the `<Username>/` subfolders). However this folder is above your web root and inaccessible to HTTP requests, so until you make this volume publicly accessible, user photos will not work on the front end.
 
-次の方法で解決してください。
+Here’s how you can resolve this:
 
 1. `storage/userphotos/` フォルダをウェブルート下層のどこかに移動します。 （例：`web/userphotos/`）
 2. 「設定 > アセット > ボリューム > User Photos」に移動し、新しいフォルダのロケーションに基づいてボリュームを設定します。
@@ -216,11 +225,11 @@ translations/
 
 ## Twig 2
 
-Craft 3 では、テンプレート向けに独自の変更を加えた Twig 2 を利用しています。
+Craft 3 uses Twig 2, which has its own breaking changes for templates:
 
 ### マクロ
 
-Twig 2 では、利用先となる各テンプレートで明示的にマクロをインポートする必要があります。 親テンプレートでインクルードしている場合だけでなく、同じテンプレートファイルで定義されているときでさえも、自動的に利用することはできません。
+Twig 2 requires that you explicitly import macros in each template where you are using them. They are no longer automatically available if a parent template is including them, or even if they were defined in the same template file.
 
 ```twig
 Old:
@@ -235,7 +244,7 @@ New:
 
 ### 未定義のブロック
 
-Twig 1 では、存在しないブロックでさえも `block()` で呼び出すことができます。
+Twig 1 let you call `block()` even for blocks that didn’t exist:
 
 ```twig
 {% if block('foo') is not empty %}
@@ -243,7 +252,7 @@ Twig 1 では、存在しないブロックでさえも `block()` で呼び出�
 {% endif %}
 ```
 
-Twig 2 では、`defined` のテストでない限り、エラーを返します。
+Twig 2 will throw an error unless it’s a `defined` test:
 
 ```twig
 {% if block('foo') is defined %}
@@ -253,9 +262,9 @@ Twig 2 では、`defined` のテストでない限り、エラーを返します
 
 ## テンプレートタグ
 
-[{% paginate %}](dev/tags.md#paginate) タグは `{% endpaginate %}` 終了タグを持たなくなったため、そのインスタンスをすべて削除します。
+The [{% paginate %}](dev/tags.md#paginate) tag no longer has an `{% endpaginate %}` closing tag, so remove any instances of that.
 
-いくつかの Twig テンプレートタグは Craft 3 で非推奨となり、Craft 4 で完全に削除されます。
+Some Twig template tags have been deprecated in Craft 3, and will be completely removed in Craft 4:
 
 | 旧タグ                             | 代わりにすべきこと                                                |
 | ------------------------------- | -------------------------------------------------------- |
@@ -269,7 +278,7 @@ Twig 2 では、`defined` のテストでない限り、エラーを返します
 
 ## テンプレートファンクション
 
-いくつかのテンプレートファンクションは完全に削除されました。
+Some template functions have been removed completely:
 
 | 旧テンプレートファンクション                              | 代わりにすべきこと                                          |
 | ------------------------------------------- | -------------------------------------------------- |
@@ -284,9 +293,9 @@ Twig 2 では、`defined` のテストでない限り、エラーを返します
 | `craft.tasks.haveTasksFailed()`             | *(n/a)*                                            |
 | `craft.tasks.isTaskRunning()`               | `craft.app.queue.getHasReservedJobs()`<sup>1</sup> |
 
-*<sup>1</sup> `queue` コンポーネントが <craft3:craft\queue\QueueInterface> を実装している場合のみ、使用可能です。*
+*<sup>1</sup> Only available if the `queue` component implements <craft3:craft\queue\QueueInterface>.*
 
-いくつかのテンプレートファンクションは Craft 3 で非推奨となり、Craft 4 で完全に削除されます。
+Some template functions have been deprecated in Craft 3, and will be completely removed in Craft 4:
 
 | 旧テンプレートファンクション                                          | 代わりにすべきこと                                                   |
 | ------------------------------------------------------- | ----------------------------------------------------------- |
@@ -404,11 +413,11 @@ Twig 2 では、`defined` のテストでない限り、エラーを返します
 | `craft.session.getFlash()`                              | `craft.app.session.getFlash()`                              |
 | `craft.session.hasFlash()`                              | `craft.app.session.hasFlash()`                              |
 
-*<sup>1</sup> `craft.app.request.isLivePreview` は非推奨となり、新しいプレビューシステムをサポートしないカテゴリ、または、プラグインが提供するエレメントタイプをプレビューする場合のみ `true` を返します。 ライブプレビューリクエストの Craft のテンプレートバグへ対処するためにこれを呼び出していた場合は、今すぐ条件を削除し、ライブプレビューリクエストを他のリクエストタイプと同様に取り扱ってください。*
+*<sup>1</sup> `craft.app.request.isLivePreview` is also deprecated, and only will return `true` when previewing categories or plugin-supplied element types that don’t support the new previewing system. If you were calling this to work around Craft templating bugs in Live Preview requests, you can simply delete the condition now, and treat Live Preview requests the same as any other request type.*
 
 ## 日付フォーマット
 
-Craft によって拡張された DateTime クラスは Craft 3 で削除されました。 ここに、テンプレート内で使用可能だったものと、Craft 3 で同様の働きをするもののリストを掲載します。 （DateTime オブジェクトは、変数 `d` で表されます。 実際には `entry.postDate` や `now` などになる可能性があります。 ）
+Craft’s extended DateTime class has been removed in Craft 3. Here’s a list of things you used to be able to do in your templates, and what the Craft 3 equivalent is. (The DateTime object is represented by the `d` variable. In reality it could be `entry.postDate`, `now`, etc.)
 
 | 旧                                 | 新                                  |
 | --------------------------------- | ---------------------------------- |
@@ -436,7 +445,7 @@ Craft によって拡張された DateTime クラスは Craft 3 で削除され�
 
 ## 通貨フォーマット
 
-`|currency` フィルタは <craft3:craft\i18n\Formatter::asCurrency()> にマップされるようになりました。 それでも同じ働きとなりますが、引数  `stripZeroCents` は `stripZeros` にリネームされ、キーと値の両方が必要となっているため、この引数をセットしている場合はテンプレートを更新する必要があります。
+The `|currency` filter now maps to <craft3:craft\i18n\Formatter::asCurrency()>. It still works the same, but the `stripZeroCents` argument has been renamed to `stripZeros`, and pushed back a couple notches, so you will need to update your templates if you were setting that argument.
 
 ```twig
 Old:
@@ -451,7 +460,7 @@ New:
 
 ### クエリパラメータ
 
-いくつかのエレメントクエリパラメータは削除されました。
+Some element query params have been removed:
 
 | エレメントタイプ | 旧パラメータ           | 代わりにすべきこと                                        |
 | -------- | ---------------- | ------------------------------------------------ |
@@ -465,7 +474,7 @@ New:
 | タグ       | `set`            | `group` パラメータを利用してください                           |
 | タグ       | `orderBy:"name"` | `orderBy` パラメータに `'title'` をセットしてください            |
 
-いくつかのエレメントクエリパラメータは Craft 3 でリネームされました。 古いパラメータは非推奨となりますが、Craft 4 までは動作し続けます。
+Some element query params have been renamed in Craft 3. The old params have been deprecated, but will continue to work until Craft 4.
 
 | エレメントタイプ | 旧パラメータ                   | 新パラメータ                 |
 | -------- | ------------------------ | ---------------------- |
@@ -479,11 +488,11 @@ New:
 
 #### `limit` Param
 
-`limit` パラメータは、100ではなく、デフォルトで `null`（無制限）がセットされるようになりました。
+The `limit` param is now set to `null` (no limit) by default, rather than 100.
 
 #### パラメータを配列にセットする
 
-パラメータ値を配列にセットする場合、配列の大括弧を記述**しなければなりません**。
+If you want to set a param value to an array, you now **must** type out the array brackets.
 
 ```twig
 Old:
@@ -497,13 +506,13 @@ New:
 
 #### エレメントクエリの複製
 
-Craft 2 では、パラメータ設定メソッド（例：`.type('article')`）を呼び出すときは、次のような手順になります。
+In Craft 2, each time you call a parameter-setter method (e.g. `.type('article')`), the method would:
 
 1. `ElementCriteriaModel` オブジェクトを複製する
 2. 複製したオブジェクトのパラメータ値を設定する
 3. 複製したオブジェクトを返す
 
-これによって、後続のクエリに影響を与えることなく、エレメントクエリのバリエーションを実行できるようにしています。 例えば、
+That made it possible to execute variations of an element query, without affecting subsequent queries. For example:
 
 ```twig
 {% set query = craft.entries.section('news') %}
@@ -511,16 +520,16 @@ Craft 2 では、パラメータ設定メソッド（例：`.type('article')`）
 {% set totalEntries = query.total() %}
 ```
 
-この `.type()` は `type` パラメータを `query` の _clone_ に適用しているため、`query.total()` には影響を与えません。 入力タイプに関わらず、News エントリの総数を返します。
+Here `.type()` is applying the `type` parameter to a _clone_ of `query`, so it had no effect on `query.total()`, which will still return the total number of News entries, regardless of their entry types.
 
-しかし、この動作は Craft 3 で変更されました。 今では、パラメータ設定メソッドを呼び出すときは、次のような手順になります。
+This behavior has changed in Craft 3, though. Now any time you call a parameter-setter method, the method will:
 
 1. 現在のエレメントクエリにパラメータ値を設定する
 2. エレメントクエリを返す
 
-つまり、上記のサンプルコードでは `type` パラメータが適用されてしまうため、`totalEntries` には _Article_ エントリの総数がセットされます。
+Which means in the above code example, `totalEntries` will be set to the total _Article_ entries, as the `type` parameter will still be applied.
 
-Craft 2 動作に影響を与えるテンプレートがある場合、[clone()](dev/functions.md#clone-object) ファンクションを用いて修正できます。
+If you have any templates that count on the Craft 2 behavior, you can fix them using the [clone()](dev/functions.md#clone-object) function.
 
 ```twig
 {% set query = craft.entries.section('news') %}
@@ -530,9 +539,9 @@ Craft 2 動作に影響を与えるテンプレートがある場合、[clone()]
 
 ### クエリメソッド
 
-`findElementAtOffset()` エレメントクエリメソッドは Craft 3 で削除されました。 代わりに、`nth()` を利用してください。
+The `findElementAtOffset()` element query method has been removed in Craft 3. Use `nth()` instead.
 
-いくつかのエレメントクエリメソッドは Craft 3 でリネームされました。 古いメソッドは非推奨となりますが、Craft 4 までは動作し続けます。
+Some element query methods have been renamed in Craft 3. The old methods have been deprecated, but will continue to work until Craft 4.
 
 | 旧メソッド           | 新メソッド                                             |
 | --------------- | ------------------------------------------------- |
@@ -544,9 +553,9 @@ Craft 2 動作に影響を与えるテンプレートがある場合、[clone()]
 
 ### クエリを配列として扱う
 
-エレメントクエリを配列のように扱うサポートは Craft 3 で非推奨になり、Craft 4 で完全に削除されます。
+Support for treating element queries as if they’re arrays has been deprecated in Craft 3, and will be completely removed in Craft 4.
 
-エレメントクエリをループする必要があるときは、明示的に `.all()` をコールし、データベースクエリを実行して得られる結果の配列を返す必要があります。
+When you need to loop over an element query, you should start explicitly calling `.all()`, which will execute the database query and return the array of results:
 
 ```twig
 Old:
@@ -558,7 +567,7 @@ New:
 {% for asset in entry.myAssetsField.all() %}...{% endfor %}
 ```
 
-エレメントクエリから結果の総数を取得したいときは、`.count()` メソッドを呼び出す必要があります。
+When you need to get the total number of results from an element query, you should call the `.count()` method:
 
 ```twig
 Old:
@@ -568,7 +577,7 @@ New:
 {% set total = craft.entries.section('news').count() %}
 ```
 
-代替方法として、実際のクエリ結果を事前にフェッチする必要があり、かつ `offset` や `limit` パラメータをセットしていない場合、[length](https://twig.symfony.com/doc/2.x/filters/length.html) フィルタを使うことで、余分なデータベースクエリを必要とせず、結果の配列の合計サイズを確認できます。
+Alternatively, if you already needed to fetch the actual query results, and you didn’t set the `offset` or `limit` params, you can use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter to find the total size of the results array without the need for an extra database query.
 
 ```twig
 {% set entries = craft.entries()
@@ -579,9 +588,9 @@ New:
 
 ### `last()`
 
-`last()` は Craft 3 で非推奨になりました。 なぜなら（`query.nth(query.count() - 1)` に相当する）2つのデータベースクエリを背後で実行する必要があることが明確ではないからです。
+`last()` was deprecated in Craft 3 because it isn’t clear that it needs to run two database queries behind the scenes (the equivalent of `query.nth(query.count() - 1)`).
 
-ほとんどのケースでは、`.last()` の呼び出しを `.inReverse().one()` に置き換えることで、余分なデータベースクエリを必要とせず、同じ結果を得ることができます。 （`inReverse()` は、生成された SQL のすべての `ORDER BY` カラムのソート方向を反転させます。 ）
+In most cases you can replace calls to `.last()` with `.inReverse().one()` and get the same result, without the extra database query. (`inReverse()` will reverse the sort direction of all of the `ORDER BY` columns in the generated SQL.)
 
 ```twig
 {# Channel entries are ordered by `postDate DESC` by default, so this will swap
@@ -593,12 +602,12 @@ New:
   .one() %}
 ```
 
-`inReverse()` が期待した通りに動作しないケースが2つあります。
+There are two cases where `inReverse()` won’t work as expected, though:
 
 - SQL に `ORDER BY` 句が存在しない場合、反転できるものがありません
 - `orderBy` パラメータに <yii2:yii\db\Expression> オブジェクトが含まれている場合
 
-このようなケースでは、`.last()` の呼び出しを内部的な処理で置き換えることができます。
+In those cases, you can just replace the `.last()` call with what it’s already doing internally:
 
 ```twig
 {% set query = craft.entries()
@@ -609,17 +618,17 @@ New:
 
 ## エレメント
 
-タグエレメントは、もはや `name` プロパティを持ちません。 代わりに、`title` を利用してください。
+Tag elements no longer have a `name` property. Use `title` instead.
 
-すべてのエレメントの `locale` プロパティは非推奨となり、Craft 4 で完全に削除されます。 エレメントのサイト ID が判る場合は `siteId`、ハンドルが判る場合は `site.handle`、サイトの言語が判る場合は `site.language` をそれぞれ利用してください。
+All elements’ `locale` properties have been deprecated, and will be completely removed in Craft 4. Use `siteId` if you need to know an element’s site ID, `site.handle` if you need to know its handle, or `site.language` if you need to know its site’s language.
 
 ## モデル
 
-モデルの `getError('attribute')` メソッドは非推奨となり、Craft 4 で完全に削除されます。 代わりに、`getFirstError('attribute')` を利用してください。
+Models’ `getError('attribute')` methods have been deprecated, and will be completely removed in Craft 4. Use `getFirstError('attribute')` instead.
 
 ## ロケール
 
-いくつかのロケールメソッドは Craft 3 で非推奨となり、Craft 4 で完全に削除されます。
+Some locale methods have been deprecated in Craft 3, and will be completely removed in Craft 4:
 
 | 旧メソッド             | 代わりにすべきこと                            |
 | ----------------- | ------------------------------------ |
@@ -629,11 +638,11 @@ New:
 
 ## リクエストパラメータ
 
-コントローラーアクションに送信するフロントエンドの `<form>` や JavaScript は、次の変更を加えてアップデートする必要があります。
+Your front-end `<form>`s and JS scripts that submit to a controller action will need to be updated with the following changes.
 
 ### `action` パラメータ
 
-`action` パラメータは `camelCase` ではなく `kebab-case` に書き換えなければなりません。
+`action` params must be rewritten in `kebab-case` rather than `camelCase`.
 
 ```twig
 Old:
@@ -643,7 +652,7 @@ New:
 <input type="hidden" name="action" value="entries/save-entry">
 ```
 
-いくつかのコントローラーアクションはリネームされました。
+Some controller actions have been renamed:
 
 | 旧コントローラーアクション               | 新コントローラーアクション                     |
 | --------------------------- | --------------------------------- |
@@ -654,7 +663,7 @@ New:
 
 ### `redirect` パラメータ
 
-`redirect` パラメータは、ハッシュ値に変換しなければなりません。
+`redirect` params must be hashed now.
 
 ```twig
 Old:
@@ -664,13 +673,13 @@ New:
 <input type="hidden" name="redirect" value="{{ 'foo/bar'|hash }}">
 ```
 
-`redirectInput()` ファンクションは、ショートカットとして提供されています。
+The `redirectInput()` function is provided as a shortcut.
 
 ```twig
 {{ redirectInput('foo/bar') }}
 ```
 
-いくつかの `redirect` パラメータトークンはリネームされました。
+Some `redirect` param tokens have been renamed:
 
 | コントローラーアクション                    | 旧トークン         | 新トークン  |
 | ------------------------------- | ------------- | ------ |
@@ -684,7 +693,7 @@ New:
 
 ### CSRF トークンパラメータ
 
-CSRF プロテクションは、Craft 3 ではデフォルトで有効になりました。 （コンフィグ設定 `enableCsrfProtection` で）有効化していなかった場合、 コントローラーアクションで送信するフロントエンドのすべての `<form>` と JavaScript に新しい CSRF トークンパラメータを追加するアップデートが必要です。
+CSRF protection is enabled by default in Craft 3. If you didn’t already have it enabled (via the `enableCsrfProtection` config setting), each of your front-end `<form>`s and JS scripts that submit to a controller action will need to be updated with a new CSRF token param.
 
 ```twig
 {% set csrfParam = craft.app.request.csrfParam %}
@@ -692,7 +701,7 @@ CSRF プロテクションは、Craft 3 ではデフォルトで有効になり�
 <input type="hidden" name="{{ csrfParam }}" value="{{ csrfToken }}">
 ```
 
-`csrfInput()` ファンクションは、ショートカットとして提供されています。
+The `csrfInput()` function is provided as a shortcut.
 
 ```twig
 {{ csrfInput() }}
@@ -700,4 +709,4 @@ CSRF プロテクションは、Craft 3 ではデフォルトで有効になり�
 
 ## プラグイン
 
-[Craft 3 向けののプラグインアップデート](extend/updating-plugins.md)を参照してください。
+See [Updating Plugins for Craft 3](extend/updating-plugins.md).
