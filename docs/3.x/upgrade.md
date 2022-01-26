@@ -10,13 +10,18 @@ Before you begin, make sure that:
 - your server meets Craft 3’s [minimum requirements](requirements.md) (Craft 3 requires PHP 7.2.5+ and at least 256 MB of memory allocated to PHP)
 - your site is running at least **Craft 2.6.2788**
 - your plugins are all up-to-date, and you’ve verified that they’ve been updated for Craft 3 (you can see a report of your plugins’ Craft 3 compatibility status from the Updates page in the Craft 2 control panel)
+- you’ve pulled your latest production database into each environment you’ll be updating
 - your **database is backed up** in case everything goes horribly wrong
 
-Once you've completed everything listed above you can continue with the upgrade process.
+One of Craft 3’s most significant new features is [project config](project-config.md), and we highly recommend taking a moment to better understand what it is and what it will mean for your workflow and [deployment process](https://craftcms.com/knowledge-base/deployment-best-practices). The most important part is to get all your environments using the exact same database, which is why that’s a prerequisite step.
+
+Once you’ve completed everything listed above you can continue with the upgrade process.
 
 ## Performing the Upgrade
 
-The best way to upgrade a Craft 2 site is to approach it like you’re building a new Craft 3 site. So to begin, create a new directory alongside your current project, and follow steps 1-3 in the [installation instructions](installation.md).
+The best way to upgrade a Craft 2 site is to approach it like you’re building a new Craft 3 site.
+
+To begin, create a new directory alongside your current project, and follow steps 1-3 in the [installation instructions](installation.md).
 
 With Craft 3 downloaded and prepped, follow these steps to complete the upgrade:
 
@@ -49,6 +54,10 @@ With Craft 3 downloaded and prepped, follow these steps to complete the upgrade:
 12. If you had any plugins installed, you’ll need to install their Craft 3 counterparts from the “Plugin Store” section in the control panel. (See the plugins’ documentation for any additional upgrade instructions.)
 
 Now that you’ve upgraded your install to use Craft 3, please take some time to review the changes on this page and update your project to follow the changes in Craft 3.
+
+::: warning
+If you need to re-attempt the upgrade process, delete your `config/project/` directory first. You’ll only want to commit what Craft writes there once everything’s ready to roll.
+:::
 
 ### Troubleshooting
 
