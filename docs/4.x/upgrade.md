@@ -7,48 +7,32 @@ The first step to upgrading your site to Craft 4 is updating the CMS itself.
 Before you begin, make sure that:
 
 - you’ve reviewed the changes in Craft 4 further down this page
-- your server meets Craft 4’s [minimum requirements](requirements.md) (Craft 4 requires PHP 8.0+ and at least 256 MB of memory allocated to PHP)
-- your site is running at least **Craft 2.6.2788**
-- your plugins are all up-to-date, and you’ve verified that they’ve been updated for Craft 4 (you can see a report of your plugins’ Craft 4 compatibility status from the Updates page in the Craft 3 control panel)
-- your **database is backed up** in case everything goes horribly wrong
+- all your environments meet Craft 4’s [minimum requirements](requirements.md), with [PHP 8.0+ and MySQL 5.7.8+](https://craftcms.com/knowledge-base/preparing-for-craft-4#upgrade-php-and-mySQL)
+- your site is running [the latest **Craft 3.7** release](https://craftcms.com/knowledge-base/preparing-for-craft-4#update-to-the-latest-version-of-craft-3)
+- your plugins are all up-to-date, and you’ve verified that they’ve been updated for Craft 4 (check your plugins’ Craft 4 compatibility status from the **Updates** page in the Craft 3 control panel)
+- you’ve made sure there are no [deprecation warnings](https://craftcms.com/knowledge-base/preparing-for-craft-4#fix-deprecation-warnings) anywhere that need fixing
 
-Once you've completed everything listed above you can continue with the upgrade process.
+::: tip
+Read the full [Preparing for Craft 4](https://craftcms.com/knowledge-base/preparing-for-craft-4) article to get projects ready to roll.
+:::
+
+Once you’ve completed everything listed above you can continue with the upgrade process.
 
 ## Performing the Upgrade
 
-The best way to upgrade a Craft 3 site is to approach it like you’re building a new Craft 4 site. So to begin, create a new directory alongside your current project, and follow steps 1-3 in the [installation instructions](installation.md).
+The best way to upgrade a Craft 3 site is to get everything squeaky-clean and up to date at all at once, then proceed like it’s a normal software update.
 
-With Craft 4 downloaded and prepped, follow these steps to complete the upgrade:
+1. Pull a fresh database backup down from your production environment and import it locally.
+2. If your database has `entrydrafts` and `entryversions` tables, check them for any meaningful data. Craft 3.2 stopped using these tables when drafts and revisions became elements, and the tables will be removed as part of the Craft 4 install process.
+3. Run `php craft project-config/rebuild` and make sure all background tasks have completed.
+4. Create a new database backup just in case things go sideways.
+5. Edit your project’s `composer.json` to require the latest versions of Craft CMS and Craft-4-compatible plugins all at once.
+6. Run `composer update`.
+7. Run `php craft up`.
 
-1. Configure the `.env` file in your new project with your database connection settings from your old `craft/config/db.php` file.
+Now that you’ve upgraded your install to use Craft 4, please take some time to review the changes on this page and update your project.
 
-   ::: tip
-   Don’t forget to set `DB_TABLE_PREFIX="craft"` if that’s what your database tables are prefixed with.
-   :::
-
-2. Copy any settings from your old `craft/config/general.php` file into your new project’s `config/general.php` file.
-
-3. Copy your old `craft/config/license.key` file into your new project’s `config/` folder.
-
-4. Copy your old custom Redactor config files from `craft/config/redactor/` over to your new project’s `config/redactor/` directory.
-
-5. Copy your old custom login page logo and site icon files from `craft/storage/rebrand/` over to your new project’s `storage/rebrand/` directory.
-
-6. Copy your old user photos from `craft/storage/userphotos/` over to your new project’s `storage/userphotos/` directory.
-
-7. Copy your old templates from `craft/templates/` over to your new project’s `templates/` directory.
-
-8. If you had made any changes to your `public/index.php` file, copy them to your new project’s `web/index.php` file.
-
-9. Copy any other files in your old `public/` directory into your new project’s `web/` directory.
-
-10. Update your web server to point to your new project’s `web/` directory.
-
-11. Point your browser to your control panel URL (e.g. `http://my-project.test/admin`). If you see the update prompt, you did everything right! Go ahead and click “Finish up” to update your database.
-
-12. If you had any plugins installed, you’ll need to install their Craft 3 counterparts from the “Plugin Store” section in the control panel. (See the plugins’ documentation for any additional upgrade instructions.)
-
-Now that you’ve upgraded your install to use Craft 4, please take some time to review the changes on this page and update your project to follow the changes in Craft 4.
+Once you’ve verified everything’s looking great, commit your updated `composer.json`, `composer.lock`, and `config/project/` directory and roll those changes out normally into each additional environment.
 
 ### Troubleshooting
 
@@ -56,17 +40,24 @@ Now that you’ve upgraded your install to use Craft 4, please take some time to
 
 ### Config Settings
 
-Some general config settings have been renamed in Craft 4. The old setting names have been deprecated, but will continue to work until Craft 5.
-
-| Old Setting                  | New Setting
-| ---------------------------- | -----------------------------
-| |
-
 Some config settings have been removed entirely:
 
 | File          | Setting
 | ------------- | -----------
-| |
+| `customAsciiCharMappings` |
+| `siteName` |
+| `siteUrl` |
+| `suppressTemplateErrors` |
+| `useCompressedJs` |
+| `useProjectConfigFile` |
+
+::: tip
+You can now set custom config settings from `config/custom.php`, which will be accessible via `Craft::$app->config->{mycustomsetting}`.
+:::
+
+### Volumes
+
+We’ve also removed support for `config/volumes.php`. Volumes can now specify per-environment filesystems.
 
 ## PHP Constants
 
@@ -74,7 +65,8 @@ Some PHP constants have been deprecated in Craft 4, and will no longer work in C
 
 | Old PHP Constant | What to do instead
 | ---------------- | ----------------------------------------
-| |
+| `CRAFT_SITE_URL` | Environment-specific site URLs can be defined via environment variables.
+| `CRAFT_LOCALE` | `CRAFT_SITE`
 
 ## Template Tags
 
@@ -82,7 +74,11 @@ Some Twig template tags have been deprecated in Craft 4, and will be completely 
 
 | Old Tag                         | What to do instead
 | ------------------------------- | ---------------------------------------------
-| |
+| `{% includeCss %}` | `{% css %}`
+| `{% includeCssFile %}` | `{% css %}`
+| `{% includeHiResCss %}` | 
+| `{% includeJs %}` | `{% js %}`
+| `{% includeJsFile %}` | `{% js %}`
 
 ## Template Functions
 
@@ -90,13 +86,54 @@ Some template functions have been removed completely:
 
 | Old Template Function                       | What to do instead
 | ------------------------------------------- | ------------------------------------
-| |
+| `getCsrfInput()` | `csrfInput()`
+| `getFootHtml()` | `endBody()`
+| `getHeadHtml()` | `head()`
+| `round()` | `|round`
+| `atom()` |
+| `cookie()` |
+| `iso8601()` |
+| `rfc822()` |
+| `rfc850()` |
+| `rfc1036()` |
+| `rfc1123()` |
+| `rfc2822()` |
+| `rfc3339()` |
+| `rss()` |
+| `w3c()` |
+| `w3cDate()` |
+| `mySqlDateTime()` |
+| `localeDate()` |
+| `localeTime()` |
+| `year()` |
+| `month()` |
+| `day()` |
+| `nice()` |
+| `uiTimestamp()` |
 
-Some template functions have been deprecated in Craft 4, and will be completely removed in Craft 5:
+## Template Variables
 
-| Old Template Function                                   | What to do instead
-| ------------------------------------------------------- | ---------------------------------------------
-| |
+| Old Template Variable           | What to do instead
+| ------------------------------- | ---------------------------------------------
+| `craft.categoryGroups` |
+| `craft.config` |
+| `craft.deprecator` |
+| `craft.elementIndexes` |
+| `craft.emailMessages` |
+| `craft.feeds` |
+| `craft.fields` |
+| `craft.globals` |
+| `craft.i18n` |
+| `craft.isLocalized` | `craft.app.isMultiSite`
+| `craft.locale` | 
+| `craft.request` | 
+| `craft.sections` | 
+| `craft.session` | 
+| `craft.systemSettings` | 
+| `craft.userGroups` | 
+| `craft.userPermissions` | 
+
+## Collections
 
 ## Element Queries
 
@@ -112,7 +149,7 @@ Some element query params have been renamed in Craft 4. The old params have been
 
 | Element Type | Old Param                | New Param
 | ------------ | ------------------------ | ----------------------------
-| |
+| | `anyStatus` | `status(null)`
 
 ### Query Methods
 
@@ -137,6 +174,18 @@ Some `redirect` param tokens have been renamed:
 | Controller Action               | Old Token     | New Token
 | ------------------------------- | ------------- | ---------
 | |
+
+## GraphQL
+
+| GraphQL Argument |
+| ---------------- |
+| `immediately`    |
+
+## Console Commands
+
+| Old Command | What to do instead
+| ----------- | ------------------
+| `--type` option for `migrate/*` commmands | `--track` or `--plugin` option
 
 ## Plugins
 
