@@ -87,7 +87,7 @@ The [`pdfAllowRemoteImages`](config-settings.md#pdfallowremoteimages) setting is
 
 ```twig
 {# base64-encoded SVG image works when `pdfAllowRemoteImages` is `false` #}
-<img width="75" height="75" src="{{ dataUrl('@webroot/images/store-logo.svg') }}>
+<img width="75" height="75" src="{{ dataUrl('@webroot/images/store-logo.svg') }}" alt="Store logo"/>
 ```
 
 Enabling `pdfAllowRemoteImages` will make it possible to utilize image URLs in your templates, but you’ll likely need to experiment with URLs that work for your environment and Dompdf version.
