@@ -14,19 +14,23 @@ use craft\events\DefineRulesEvent;
 use craft\validators\ArrayValidator;
 use yii\base\Event;
 
-Event::on(Entry::class, Entry::EVENT_DEFINE_RULES, function(DefineRulesEvent $e) {
-    /** @var Entry $entry */
-    $entry = $e->sender;
+Event::on(
+    Entry::class,
+    Entry::EVENT_DEFINE_RULES,
+    function(DefineRulesEvent $event) {
+        /** @var Entry $entry */
+        $entry = $event->sender;
 
-    // Only worry about entries in the News section
-    if ($entry->section->handle !== 'news') {
-        return;
+        // Only worry about entries in the News section
+        if ($entry->section->handle !== 'news') {
+            return;
+        }
+
+        $event->rules[] = ['field:myTagsField', ArrayValidator::class, 'max' => 5, 'on' => Entry::SCENARIO_LIVE];
+        $event->rules[] = ['field:myCheckboxesField', ArrayValidator::class, 'max' => 5, 'on' => Entry::SCENARIO_LIVE];
+        $event->rules[] = ['field:myTableField', ArrayValidator::class, 'max' => 5, 'on' => Entry::SCENARIO_LIVE];
     }
-
-    $e->rules[] = ['field:myTagsField', ArrayValidator::class, 'max' => 5, 'on' => Entry::SCENARIO_LIVE];
-    $e->rules[] = ['field:myCheckboxesField', ArrayValidator::class, 'max' => 5, 'on' => Entry::SCENARIO_LIVE];
-    $e->rules[] = ['field:myTableField', ArrayValidator::class, 'max' => 5, 'on' => Entry::SCENARIO_LIVE];
-});
+);
 ```
 
 ## Behaviors
