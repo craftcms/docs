@@ -80,6 +80,11 @@ Some Twig template tags have been deprecated in Craft 4, and will be completely 
 | `{% includeJs %}` | `{% js %}`
 | `{% includeJsFile %}` | `{% js %}`
 
+[Twig 3](https://github.com/twigphp/Twig/blob/3.x/CHANGELOG) has removed some template tags, too:
+
+| `{% spaceless %}` | `{% apply spaceless %}`
+| `{% filter %}` | `{% apply %}`
+
 ## Template Functions
 
 Some template functions have been removed completely:
@@ -132,6 +137,10 @@ Some template functions have been removed completely:
 | `craft.systemSettings` | 
 | `craft.userGroups` | 
 | `craft.userPermissions` | 
+
+## Template Operators
+
+Twig 3’s operators (`in`, `<`, `>`, `<=`, `>=`, `==`, `!=`) are more strict comparing strings to integers and floats. Make sure this doesn’t have any unintended consequences!
 
 ## Collections
 
