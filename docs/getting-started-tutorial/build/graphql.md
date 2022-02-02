@@ -25,12 +25,12 @@ First upgrade your Craft Solo edition to Craft Pro:
 <img src="../images/upgrade-pro.png" alt="Screenshot of plugin store upgrading to Craft Pro trial" />
 </BrowserShot>
 
-Once you edition is upgraded and you’ll see a GraphQL item in the navigation menu. Choose that.
+Once you edition is upgraded and you’ll see a GraphQL item in the navigation menu. Choose that and click **GraphiQL**.
 
-This is the GraphiQL explorer for browsing API documentation and running queries directly in the browser:
+This new tab is the GraphiQL explorer you can use for browsing API documentation and running queries directly in the browser:
 
-<BrowserShot url="https://tutorial.nitro/admin/graphql" :link="false" caption="The GraphiQL explorer.">
-<img src="../images/graphql.png" alt="Screenshot of GraphiQL" />
+<BrowserShot url="https://tutorial.nitro/admin/graphiql" :link="false" caption="The GraphiQL explorer.">
+<img src="../images/graphiql.png" alt="Screenshot of GraphiQL" />
 </BrowserShot>
 
 ::: tip
@@ -45,8 +45,8 @@ Try running a test GraphQL query:
 
 You’ll see `pong` in the response signaling that everything’s ready to go:
 
-<BrowserShot url="https://tutorial.nitro/admin/graphql?query=%7B%20ping%20%7D%0A" :link="false" caption="It’s working!">
-<img src="../images/graphql-ping.png" alt="Screenshot of GraphiQL with simple query and response" />
+<BrowserShot url="https://tutorial.nitro/admin/graphiql?query=%7B%20ping%20%7D%0A" :link="false" caption="It’s working!">
+<img src="../images/graphiql-ping.png" alt="Screenshot of GraphiQL with simple query and response" />
 </BrowserShot>
 
 By default, the Craft CMS GraphiQL interface will use the full schema, or available set of information, without any restrictions. In other words, it has access to all content through the GraphQL API.
