@@ -45,7 +45,7 @@ Try running a test GraphQL query:
 
 You’ll see `pong` in the response signaling that everything’s ready to go:
 
-<BrowserShot url="https://tutorial.nitro/admin/graphql?query=%7B%20ping%20%7D%0A" :link="false" caption="It’s working!">
+<BrowserShot url="https://tutorial.nitro/admin/graphiql?query=%7B%20ping%20%7D%0A" :link="false" caption="It’s working!">
 <img src="../images/graphiql-ping.png" alt="Screenshot of GraphiQL with simple query and response" />
 </BrowserShot>
 
