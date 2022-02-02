@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-02-02
+### Removed
+- Moved stale + partial Craft 3.x translations to https://github.com/craftcms/docs-translations.
+
 ## 2022-01-20
 ### Added
 - Noted default mutex behavior with configuration example for Craft 3.7.30.
