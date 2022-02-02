@@ -196,6 +196,27 @@ Some `redirect` param tokens have been renamed:
 | ----------- | ------------------
 | `--type` option for `migrate/*` commmands | `--track` or `--plugin` option
 
+## Alternative Text Fields
+
+Craft 4’s Assets have the option of including a native `alt` field for alternative text. You can use this to query assets with or without alternative text, and Craft will use it generating image tags both in the control panel and on the front end.
+
+![Native Alternative Text field in a Field Layout](./images/native-alternative-text-field-layout.png)
+
+If you’re already using your own custom field for this, you can [use Craft’s resave command(s)](https://craftcms.com/knowledge-base/bulk-resaving-elements#resaving-with-specific-field-values) to migrate to the new `alt` field:
+
+1. In the control panel, drag Craft’s `alt` field into each relevant field layout.
+2. From your terminal, use the `resave/assets` command to populate the new `alt` field text from your old field’s content:
+    ```shell
+    php craft resave/assets --set alt --to myAltTextField --if-empty
+    ```
+3. If everything looks good, you can optionally empty the content out of your original field:
+    ```shell
+    php craft resave/entries --set myAltTextField --to :empty:
+    ```
+4. Remove the old field from each relevant field layout.
+
+Don’t forget to update your templates and GraphQL queries!
+
 ## Plugins
 
 See [Updating Plugins for Craft 4](extend/updating-plugins.md).
