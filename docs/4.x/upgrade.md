@@ -65,8 +65,8 @@ Some PHP constants have been deprecated in Craft 4, and will no longer work in C
 
 | Old PHP Constant | What to do instead
 | ---------------- | ----------------------------------------
-| `CRAFT_SITE_URL` | Environment-specific site URLs can be defined via environment variables.
-| `CRAFT_LOCALE` | `CRAFT_SITE`
+| `CRAFT_SITE_URL` | Environment-specific site URLs can be defined [via environment variables](https://craftcms.com/knowledge-base/preparing-for-craft-4#replace-siteName-and-siteUrl-config-settings).
+| `CRAFT_LOCALE`   | `CRAFT_SITE`
 
 ## Template Tags
 
