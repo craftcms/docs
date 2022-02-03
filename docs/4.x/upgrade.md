@@ -72,49 +72,51 @@ Some PHP constants have been deprecated in Craft 4, and will no longer work in C
 
 Some Twig template tags have been deprecated in Craft 4, and will be completely removed in Craft 5:
 
-| Old Tag                         | What to do instead
-| ------------------------------- | ---------------------------------------------
-| `{% includeCss %}` | `{% css %}`
-| `{% includeCssFile %}` | `{% css %}`
+| Old Tag                 | What to do instead
+| ------------------------| ---------------------------------------------
+| `{% includeCss %}`      | `{% css %}`
+| `{% includeCssFile %}`  | `{% css %}`
 | `{% includeHiResCss %}` | 
-| `{% includeJs %}` | `{% js %}`
-| `{% includeJsFile %}` | `{% js %}`
+| `{% includeJs %}`       | `{% js %}`
+| `{% includeJsFile %}`   | `{% js %}`
 
 [Twig 3](https://github.com/twigphp/Twig/blob/3.x/CHANGELOG) has removed some template tags, too:
 
+| Old Tag           | What to do instead
+| ----------------- | ------------------------
 | `{% spaceless %}` | `{% apply spaceless %}`
-| `{% filter %}` | `{% apply %}`
+| `{% filter %}`    | `{% apply %}`
 
 ## Template Functions
 
 Some template functions have been removed completely:
 
-| Old Template Function                       | What to do instead
-| ------------------------------------------- | ------------------------------------
-| `getCsrfInput()` | `csrfInput()`
-| `getFootHtml()` | `endBody()`
-| `getHeadHtml()` | `head()`
-| `round()` | `|round`
-| `atom()` |
-| `cookie()` |
-| `iso8601()` |
-| `rfc822()` |
-| `rfc850()` |
-| `rfc1036()` |
-| `rfc1123()` |
-| `rfc2822()` |
-| `rfc3339()` |
-| `rss()` |
-| `w3c()` |
-| `w3cDate()` |
-| `mySqlDateTime()` |
-| `localeDate()` |
-| `localeTime()` |
-| `year()` |
-| `month()` |
-| `day()` |
-| `nice()` |
-| `uiTimestamp()` |
+| Old Template Function | What to do instead
+| --------------------- | -------------------
+| `getCsrfInput()`      | `csrfInput()`
+| `getFootHtml()`       | `endBody()`
+| `getHeadHtml()`       | `head()`
+| `round()`             | `|round`
+| `atom()`              |
+| `cookie()`            |
+| `iso8601()`           |
+| `rfc822()`            |
+| `rfc850()`            |
+| `rfc1036()`           |
+| `rfc1123()`           |
+| `rfc2822()`           |
+| `rfc3339()`           |
+| `rss()`               |
+| `w3c()`               |
+| `w3cDate()`           |
+| `mySqlDateTime()`     |
+| `localeDate()`        |
+| `localeTime()`        |
+| `year()`              |
+| `month()`             |
+| `day()`               |
+| `nice()`              |
+| `uiTimestamp()`       |
 
 ## Template Variables
 
