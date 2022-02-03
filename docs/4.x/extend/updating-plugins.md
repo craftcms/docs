@@ -12,6 +12,8 @@ The majority of work updating plugins for Craft 4 will be adding type declaratio
 
 Custom volume types will need to be updated, as will anything deprecated in Craft 3 that’s removed in Craft 4.
 
+- Unified element editor: https://github.com/craftcms/cms/pull/10467
+
 ### Plugin Store Considerations
 
 It’s best to update any existing plugin for Craft 4 rather than creating a new one with its own handle. A separate plugin complicates the developer experience, licensing, and migration path.
