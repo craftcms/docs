@@ -772,7 +772,7 @@ Allowed types
 :   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
-:   `'interest-cohort=()'`
+:   `null`
 
 Defined by
 :   [GeneralConfig::$permissionsPolicyHeader](craft4:craft\config\GeneralConfig::$permissionsPolicyHeader)
@@ -783,12 +783,6 @@ Since
 
 
 The `Permissions-Policy` header that should be sent for web responses.
-
-The default value prevents FLoC tracking due to security & privacy concerns:
-- <https://www.theverge.com/2021/4/16/22387492/google-floc-ad-tech-privacy-browsers-brave-vivaldi-edge-mozilla-chrome-safari>
-- <https://www.bleepingcomputer.com/news/security/wordpress-may-automatically-disable-google-floc-on-websites/>
-
-This can be set to `null` to prevent the header from being sent.
 
 
 
