@@ -40,24 +40,24 @@ Once you’ve verified everything’s looking great, commit your updated `compos
 
 ### Config Settings
 
-Some config settings have been removed entirely:
+Some config settings have been removed in Craft 4:
 
-| File          | Setting
-| ------------- | -----------
-| `customAsciiCharMappings` |
-| `siteName` |
-| `siteUrl` |
-| `suppressTemplateErrors` |
-| `useCompressedJs` |
-| `useProjectConfigFile` |
+| File                 | Setting                   | Note
+| -------------------- | ------------------------- | -----------------
+| `config/general.php` | `customAsciiCharMappings` | Deprecated in 3.0.10. Submit corrections to [Stringy](https://github.com/voku/Stringy).
+| `config/general.php` | `siteName`                | Set in the control panel, optionally using environment variables. (See [example](https://craftcms.com/knowledge-base/preparing-for-craft-4#replace-siteName-and-siteUrl-config-settings).)
+| `config/general.php` | `siteUrl`                 | Set in the control panel, optionally using environment variables. (See [example](https://craftcms.com/knowledge-base/preparing-for-craft-4#replace-siteName-and-siteUrl-config-settings).)
+| `config/general.php` | `suppressTemplateErrors`  | 
+| `config/general.php` | `useCompressedJs`         | Craft always serves compressed JavaScript files now.
+| `config/general.php` | `useProjectConfigFile`    | Project config always writes YAML now, but you can [manually control when](https://craftcms.com/docs/4.x/project-config.html#manual-yaml-file-generation).
 
 ::: tip
-You can now set custom config settings from `config/custom.php`, which will be accessible via `Craft::$app->config->{mycustomsetting}`.
+You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your custom config settings will be accessible via `Craft::$app->config->{mycustomsetting}`.
 :::
 
 ### Volumes
 
-We’ve also removed support for `config/volumes.php`. Volumes can now specify per-environment filesystems.
+We’ve removed support for `config/volumes.php`. Volumes can now specify per-environment filesystems.
 
 ## PHP Constants
 
@@ -76,7 +76,7 @@ Some Twig template tags have been deprecated in Craft 4, and will be completely 
 | ------------------------| ---------------------------------------------
 | `{% includeCss %}`      | `{% css %}`
 | `{% includeCssFile %}`  | `{% css %}`
-| `{% includeHiResCss %}` | 
+| `{% includeHiResCss %}` | Add your own media selector to `{% css %}`.
 | `{% includeJs %}`       | `{% js %}`
 | `{% includeJsFile %}`   | `{% js %}`
 
@@ -97,48 +97,48 @@ Some template functions have been removed completely:
 | `getFootHtml()`       | `endBody()`
 | `getHeadHtml()`       | `head()`
 | `round()`             | `|round`
-| `atom()`              |
-| `cookie()`            |
-| `iso8601()`           |
-| `rfc822()`            |
-| `rfc850()`            |
-| `rfc1036()`           |
-| `rfc1123()`           |
-| `rfc2822()`           |
-| `rfc3339()`           |
-| `rss()`               |
-| `w3c()`               |
-| `w3cDate()`           |
-| `mySqlDateTime()`     |
-| `localeDate()`        |
-| `localeTime()`        |
-| `year()`              |
-| `month()`             |
-| `day()`               |
-| `nice()`              |
-| `uiTimestamp()`       |
+| `atom()`              | `|atom`
+| `cookie()`            | `|date(constant('DATE_COOKIE'))`
+| `iso8601()`           | `|date(constant('DATE_ISO8601'))`
+| `rfc822()`            | `|date(constant('DATE_RFC822'))`
+| `rfc850()`            | `|date(constant('DATE_RFC850'))`
+| `rfc1036()`           | `|date(constant('DATE_RFC1036'))`
+| `rfc1123()`           | `|date(constant('DATE_RFC1123'))`
+| `rfc2822()`           | `|date(constant('DATE_RFC7231'))`
+| `rfc3339()`           | `|date(constant('DATE_RFC2822'))`
+| `rss()`               | `|rss`
+| `w3c()`               | `|date(constant('DATE_W3C'))`
+| `w3cDate()`           | `|date('Y-m-d')`
+| `mySqlDateTime()`     | `|date('Y-m-d H:i:s')`
+| `localeDate()`        | `|date('short')`
+| `localeTime()`        | `|time('short')`
+| `year()`              | `|date('Y')`
+| `month()`             | `|date('n')`
+| `day()`               | `|date('j')`
+| `nice()`              | `|dateTime('short')`
+| `uiTimestamp()`       | `|timestamp('short')`
 
 ## Template Variables
 
-| Old Template Variable           | What to do instead
-| ------------------------------- | ---------------------------------------------
-| `craft.categoryGroups` |
-| `craft.config` |
-| `craft.deprecator` |
-| `craft.elementIndexes` |
-| `craft.emailMessages` |
-| `craft.feeds` |
-| `craft.fields` |
-| `craft.globals` |
-| `craft.i18n` |
-| `craft.isLocalized` | `craft.app.isMultiSite`
-| `craft.locale` | 
-| `craft.request` | 
-| `craft.sections` | 
-| `craft.session` | 
-| `craft.systemSettings` | 
-| `craft.userGroups` | 
-| `craft.userPermissions` | 
+| Old Template Variable     | What to do instead
+| ------------------------- | ---------------------------------------------
+| `craft.categoryGroups`    | `craft.app.categories`
+| `craft.config`            | `craft.app.config`
+| `craft.deprecator`        | `craft.app.deprecator`
+| `craft.elementIndexes`    | `craft.app.elementIndexes`
+| `craft.emailMessages`     | `craft.app.systemMessages`
+| `craft.feeds`             | `craft.app.feeds`
+| `craft.fields`            | `craft.app.fields`
+| `craft.globals`           | `craft.app.globals`
+| `craft.i18n`              | `craft.app.i18n`
+| `craft.isLocalized`       | `craft.app.isMultiSite`
+| `craft.locale`            | `craft.app.locale`
+| `craft.request`           | `craft.app.request`
+| `craft.sections`          | `craft.app.sections`
+| `craft.session`           | `craft.app.session`
+| `craft.systemSettings`    | `craft.app.systemSettings`
+| `craft.userGroups`        | `craft.app.userGroups`
+| `craft.userPermissions`   | `craft.app.userPermissions`
 
 ## Template Operators
 
