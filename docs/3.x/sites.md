@@ -270,6 +270,10 @@ return [
 
 Now, when Craft is processing the message translation for a German site, “Contact us” will be replaced with  “Kontaktiere uns”.
 
+::: tip
+Craft uses `|t('site')` when showing your custom field names in the control panel, so you can use `site.php` translations for control panel users, too!
+:::
+
 #### Message Parameters
 
 Static messages can have [placeholder values](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n#message-parameters). For example:
