@@ -5,6 +5,7 @@ Theme and significant content changes will be documented in this file.
 ## 2022-02-08
 ### Added
 - Documented `clear-deprecations`, `plugin/list`, `users/activation-url`, and `users/password-reset-url` commands added in Craft 3.7.31.
+- Documented `users/list-admins` and `users/set-password` commands added in Craft 3.6.0.
 
 ## 2022-02-02
 ### Removed

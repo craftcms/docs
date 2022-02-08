@@ -1620,6 +1620,10 @@ Generate a URL to impersonate a user.
 `user`
 : The ID, username, or email address of the user account.
 
+#### `users/list-admins`
+
+Lists admin users.
+
 #### `users/password-reset-url`
 
 Generate a password reset URL for a user.
@@ -1628,6 +1632,20 @@ Generate a password reset URL for a user.
 
 `user`
 : The ID, username, or email address of the user account. (required string)
+
+#### `users/set-password`
+
+Changes a user’s password.
+
+**Parameters**
+
+`user`
+: The ID, username, or email address of the user account. (required string)
+
+**Options**
+
+`--password`
+: The user’s new password.
 
 ## `utils/ascii-filenames`
 
