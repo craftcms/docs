@@ -492,7 +492,7 @@ Defined by
 
 
 
-Whether to enable Craft’s template `{%% cache %%}` tag on a global basis.
+Whether to enable Craft’s template `{% cache %}` tag on a global basis.
 
 
 
@@ -1450,8 +1450,8 @@ in the `.htaccess` file that came with Craft:
 
 ```
 RewriteEngine On
-RewriteCond %%{REQUEST_FILENAME} !-f
-RewriteCond %%{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule (.+) /index.php?p= [QSA,L]
 ```
 
