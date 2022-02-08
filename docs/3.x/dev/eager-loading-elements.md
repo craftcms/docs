@@ -43,7 +43,7 @@ Here’s how to apply the `with` param to our example:
 
 This template code will only cost 3 queries: one to fetch the entries, one to determine which assets should be eager-loaded, and one to fetch the assets. Then the entries are automatically populated with their respective related assets.
 
-### Accessing Eager-Loaded Elements
+## Accessing Eager-Loaded Elements
 
 Accessing eager-loaded elements works a little differently than accessing lazy-loaded elements.
 
@@ -61,8 +61,7 @@ When the assets _aren’t_ eager-loaded, `entry.assetsField` gives you an [asset
 
 However when the assets _are_ eager-loaded, `entry.assetsField` gets overwritten with an array of the eager-loaded assets. So `one()`, `all()`, and other element query methods are not available. Instead you must stick to the standard array syntaxes. In our example, we’re grabbing the first asset with `entry.assetsField[0]`, and we’re using Twig’s _null-coalescing operator_ (`??`) to define a default value (`null`) in case there is no related asset.
 
-
-### Eager-Loading Multiple Sets of Elements
+## Eager-Loading Multiple Sets of Elements
 
 If you have multiple sets of elements you wish to eager-load off of the top list of elements, just add additional values to your `with` parameter.
 
@@ -89,9 +88,7 @@ If you have multiple sets of elements you wish to eager-load off of the top list
 {% endfor %}
 ```
 
-
-
-### Eager-Loading Nested Sets of Elements
+## Eager-Loading Nested Sets of Elements
 
 It’s also possible to load _nested_ sets of elements, using this syntax:
 
@@ -115,7 +112,7 @@ It’s also possible to load _nested_ sets of elements, using this syntax:
 {% endfor %}
 ```
 
-### Defining Custom Parameters on Eager-Loaded Elements
+## Defining Custom Parameters on Eager-Loaded Elements
 
 You can define custom criteria parameters that will get applied as elements are being eager-loaded, by replacing its key with an array that has two values: the key, and a [hash](twig-primer.md#hashes) that defines the criteria parameters that should be applied.
 
@@ -140,7 +137,7 @@ When eager-loading nested sets of elements, you can apply parameters at any leve
   .all() %}
 ```
 
-### Eager-Loading Elements Related to Matrix Blocks
+## Eager-Loading Elements Related to Matrix Blocks
 
 The syntax for eager-loading relations from Matrix blocks is a little different than other contexts. You need to prefix your relational field’s handle with the block type’s handle:
 
