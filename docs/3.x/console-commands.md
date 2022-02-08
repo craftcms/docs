@@ -183,6 +183,14 @@ Clears temporary files.
 
 Clears the Asset transform index.
 
+## `clear-deprecations`
+
+Clears all deprecation warnings.
+
+### `clear-deprecations/index` <badge>default</badge>
+
+Clears all deprecation warnings.
+
 ## `fixture`
 
 Allows you to manage test fixtures.
@@ -787,7 +795,6 @@ Choose a plugin handle to disable: ckeditor
 *** disabled ckeditor successfully (time: 0.496s)
 ```
 
-
 #### `plugin/install`
 
 Installs a plugin.
@@ -817,6 +824,10 @@ Choose a plugin handle to install: ckeditor
 *** installing ckeditor
 *** installed ckeditor successfully (time: 0.496s)
 ```
+
+#### `plugin/list` <badge>default</badge>
+
+Lists all plugins.
 
 #### `plugin/uninstall`
 
@@ -1542,6 +1553,15 @@ boolean, 0 or 1 (defaults to 1)
 
 ## `users`
 
+#### `users/activation-url`
+
+Generate an activation URL for a pending user.
+
+**Parameters**
+
+`user`
+: The ID, username, or email address of the user account. (required string)
+
 #### `users/create`
 
 Creates a user.
@@ -1599,6 +1619,33 @@ Generate a URL to impersonate a user.
 
 `user`
 : The ID, username, or email address of the user account.
+
+#### `users/list-admins`
+
+Lists admin users.
+
+#### `users/password-reset-url`
+
+Generate a password reset URL for a user.
+
+**Parameters**
+
+`user`
+: The ID, username, or email address of the user account. (required string)
+
+#### `users/set-password`
+
+Changes a user’s password.
+
+**Parameters**
+
+`user`
+: The ID, username, or email address of the user account. (required string)
+
+**Options**
+
+`--password`
+: The user’s new password.
 
 ## `utils/ascii-filenames`
 
