@@ -44,7 +44,11 @@ Allowed types
 :   [array](https://php.net/language.types.array)
 
 Default value
-:   `['alwaysShowFocusRings' => false, 'useShapes' => false, 'underlineLinks' => false]`
+:   `[
+    'alwaysShowFocusRings' => false,
+    'useShapes' => false,
+    'underlineLinks' => false,
+]`
 
 Defined by
 :   [GeneralConfig::$accessibilityDefaults](craft4:craft\config\GeneralConfig::$accessibilityDefaults)
@@ -353,7 +357,10 @@ Allowed types
 :   [string](https://php.net/language.types.string)[]
 
 Default value
-:   `['html', 'twig']`
+:   `[
+    'html',
+    'twig',
+]`
 
 Defined by
 :   [GeneralConfig::$defaultTemplateExtensions](craft4:craft\config\GeneralConfig::$defaultTemplateExtensions)
@@ -485,7 +492,7 @@ Defined by
 
 
 
-Whether to enable Craft’s template `{% cache %}` tag on a global basis.
+Whether to enable Craft’s template `{%% cache %%}` tag on a global basis.
 
 
 
@@ -637,7 +644,9 @@ Allowed types
 :   [string](https://php.net/language.types.string)[]
 
 Default value
-:   `['index']`
+:   `[
+    'index',
+]`
 
 Defined by
 :   [GeneralConfig::$indexTemplateFilenames](craft4:craft\config\GeneralConfig::$indexTemplateFilenames)
@@ -1441,8 +1450,8 @@ in the `.htaccess` file that came with Craft:
 
 ```
 RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %%{REQUEST_FILENAME} !-f
+RewriteCond %%{REQUEST_FILENAME} !-d
 RewriteRule (.+) /index.php?p= [QSA,L]
 ```
 
@@ -2266,7 +2275,9 @@ Allowed types
 :   [array](https://php.net/language.types.array)
 
 Default value
-:   `['any']`
+:   `[
+    'any',
+]`
 
 Defined by
 :   [GeneralConfig::$trustedHosts](craft4:craft\config\GeneralConfig::$trustedHosts)
@@ -2328,7 +2339,102 @@ Allowed types
 :   [string](https://php.net/language.types.string)[], [string](https://php.net/language.types.string)
 
 Default value
-:   `['7z', 'aiff', 'asc', 'asf', 'avi', 'avif', 'bmp', 'cap', 'cin', 'csv', 'dfxp', 'doc', 'docx', 'dotm', 'dotx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'itt', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'lrc', 'm2t', 'm4a', 'm4v', 'mcc', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'mpsub', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rt', 'rtf', 'sami', 'sbv', 'scc', 'sdc', 'sitd', 'smi', 'srt', 'stl', 'sub', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tds', 'tgz', 'tif', 'tiff', 'ttml', 'txt', 'vob', 'vsd', 'vtt', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'zip']`
+:   `[
+    '7z',
+    'aiff',
+    'asc',
+    'asf',
+    'avi',
+    'avif',
+    'bmp',
+    'cap',
+    'cin',
+    'csv',
+    'dfxp',
+    'doc',
+    'docx',
+    'dotm',
+    'dotx',
+    'fla',
+    'flv',
+    'gif',
+    'gz',
+    'gzip',
+    'itt',
+    'jp2',
+    'jpeg',
+    'jpg',
+    'jpx',
+    'js',
+    'json',
+    'lrc',
+    'm2t',
+    'm4a',
+    'm4v',
+    'mcc',
+    'mid',
+    'mov',
+    'mp3',
+    'mp4',
+    'mpc',
+    'mpeg',
+    'mpg',
+    'mpsub',
+    'ods',
+    'odt',
+    'ogg',
+    'ogv',
+    'pdf',
+    'png',
+    'potx',
+    'pps',
+    'ppsm',
+    'ppsx',
+    'ppt',
+    'pptm',
+    'pptx',
+    'ppz',
+    'pxd',
+    'qt',
+    'ram',
+    'rar',
+    'rm',
+    'rmi',
+    'rmvb',
+    'rt',
+    'rtf',
+    'sami',
+    'sbv',
+    'scc',
+    'sdc',
+    'sitd',
+    'smi',
+    'srt',
+    'stl',
+    'sub',
+    'svg',
+    'swf',
+    'sxc',
+    'sxw',
+    'tar',
+    'tds',
+    'tgz',
+    'tif',
+    'tiff',
+    'ttml',
+    'txt',
+    'vob',
+    'vsd',
+    'vtt',
+    'wav',
+    'webm',
+    'webp',
+    'wma',
+    'wmv',
+    'xls',
+    'xlsx',
+    'zip',
+]`
 
 Defined by
 :   [GeneralConfig::$allowedFileExtensions](craft4:craft\config\GeneralConfig::$allowedFileExtensions)
@@ -2540,7 +2646,17 @@ Allowed types
 :   [array](https://php.net/language.types.array)
 
 Default value
-:   `['Unconstrained' => 'none', 'Original' => 'original', 'Square' => 1, '16:9' => 1.78, '10:8' => 1.25, '7:5' => 1.4, '4:3' => 1.33, '5:3' => 1.67, '3:2' => 1.5]`
+:   `[
+    'Unconstrained' => 'none',
+    'Original' => 'original',
+    'Square' => 1,
+    '16:9' => 1.78,
+    '10:8' => 1.25,
+    '7:5' => 1.4,
+    '4:3' => 1.33,
+    '5:3' => 1.67,
+    '3:2' => 1.5,
+]`
 
 Defined by
 :   [GeneralConfig::$imageEditorRatios](craft4:craft\config\GeneralConfig::$imageEditorRatios)
