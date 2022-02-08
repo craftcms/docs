@@ -160,7 +160,7 @@ Some element query params have been renamed in Craft 4. The old params have been
 
 | Element Type | Old Param                | New Param
 | ------------ | ------------------------ | ----------------------------
-| | `anyStatus` | `status(null)`
+| all          | `anyStatus`              | `status(null)`
 
 ### Query Methods
 
