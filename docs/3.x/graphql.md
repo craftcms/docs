@@ -1139,6 +1139,12 @@ Parses the passed field value as Markdown.
 | `flavor`| `String` | The “flavor” of Markdown the input should be interpreted with. Accepts the same arguments as yii\helpers\Markdown::process().
 | `inlineOnly`| `Boolean` | Whether to only parse inline elements, omitting any `<p>` tags.
 
+
+### The `parseRefs` directive
+Parse the element references on the field.
+| Argument | Type | Description
+| - | - | -
+
 <!-- END DIRECTIVES -->
 
 ## Pre-defined interfaces
@@ -1215,7 +1221,8 @@ This is the interface implemented by all entries.
 | `structureId`| `Int` | The element’s structure ID.
 | `isDraft`| `Boolean` | Returns whether this is a draft.
 | `isRevision`| `Boolean` | Returns whether this is a revision.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `revisionId`| `Int` | The revision ID (from the `revisions` table).
+| `draftId`| `Int` | The draft ID (from the `drafts` table).
 | `isUnpublishedDraft`| `Boolean` | Returns whether this is an unpublished draft.
 | `isUnsavedDraft`| `Boolean` | Returns whether this is an unpublished draft. **This field is deprecated.** `isUnpublishedDraft` should be used instead.
 | `draftName`| `String` | The name of the draft.
