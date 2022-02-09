@@ -44,7 +44,11 @@ Allowed types
 :   [array](https://php.net/language.types.array)
 
 Default value
-:   `['alwaysShowFocusRings' => false, 'useShapes' => false, 'underlineLinks' => false]`
+:   `[
+    'alwaysShowFocusRings' => false,
+    'useShapes' => false,
+    'underlineLinks' => false,
+]`
 
 Defined by
 :   [GeneralConfig::$accessibilityDefaults](craft3:craft\config\GeneralConfig::$accessibilityDefaults)
@@ -353,7 +357,10 @@ Allowed types
 :   [string](https://php.net/language.types.string)[]
 
 Default value
-:   `['html', 'twig']`
+:   `[
+    'html',
+    'twig',
+]`
 
 Defined by
 :   [GeneralConfig::$defaultTemplateExtensions](craft3:craft\config\GeneralConfig::$defaultTemplateExtensions)
@@ -637,7 +644,9 @@ Allowed types
 :   [string](https://php.net/language.types.string)[]
 
 Default value
-:   `['index']`
+:   `[
+    'index',
+]`
 
 Defined by
 :   [GeneralConfig::$indexTemplateFilenames](craft3:craft\config\GeneralConfig::$indexTemplateFilenames)
@@ -772,7 +781,7 @@ Allowed types
 :   [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
-:   `'interest-cohort=()'`
+:   `null`
 
 Defined by
 :   [GeneralConfig::$permissionsPolicyHeader](craft3:craft\config\GeneralConfig::$permissionsPolicyHeader)
@@ -783,12 +792,6 @@ Since
 
 
 The `Permissions-Policy` header that should be sent for web responses.
-
-The default value prevents FLoC tracking due to security & privacy concerns:
-- <https://www.theverge.com/2021/4/16/22387492/google-floc-ad-tech-privacy-browsers-brave-vivaldi-edge-mozilla-chrome-safari>
-- <https://www.bleepingcomputer.com/news/security/wordpress-may-automatically-disable-google-floc-on-websites/>
-
-This can be set to `null` to prevent the header from being sent.
 
 
 
@@ -2276,7 +2279,9 @@ Allowed types
 :   [array](https://php.net/language.types.array)
 
 Default value
-:   `['any']`
+:   `[
+    'any',
+]`
 
 Defined by
 :   [GeneralConfig::$trustedHosts](craft3:craft\config\GeneralConfig::$trustedHosts)
@@ -2338,7 +2343,102 @@ Allowed types
 :   [string](https://php.net/language.types.string)[]
 
 Default value
-:   `['7z', 'aiff', 'asc', 'asf', 'avi', 'avif', 'bmp', 'cap', 'cin', 'csv', 'dfxp', 'doc', 'docx', 'dotm', 'dotx', 'fla', 'flv', 'gif', 'gz', 'gzip', 'itt', 'jp2', 'jpeg', 'jpg', 'jpx', 'js', 'json', 'lrc', 'm2t', 'm4a', 'm4v', 'mcc', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'mpsub', 'ods', 'odt', 'ogg', 'ogv', 'pdf', 'png', 'potx', 'pps', 'ppsm', 'ppsx', 'ppt', 'pptm', 'pptx', 'ppz', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rt', 'rtf', 'sami', 'sbv', 'scc', 'sdc', 'sitd', 'smi', 'srt', 'stl', 'sub', 'svg', 'swf', 'sxc', 'sxw', 'tar', 'tds', 'tgz', 'tif', 'tiff', 'ttml', 'txt', 'vob', 'vsd', 'vtt', 'wav', 'webm', 'webp', 'wma', 'wmv', 'xls', 'xlsx', 'zip']`
+:   `[
+    '7z',
+    'aiff',
+    'asc',
+    'asf',
+    'avi',
+    'avif',
+    'bmp',
+    'cap',
+    'cin',
+    'csv',
+    'dfxp',
+    'doc',
+    'docx',
+    'dotm',
+    'dotx',
+    'fla',
+    'flv',
+    'gif',
+    'gz',
+    'gzip',
+    'itt',
+    'jp2',
+    'jpeg',
+    'jpg',
+    'jpx',
+    'js',
+    'json',
+    'lrc',
+    'm2t',
+    'm4a',
+    'm4v',
+    'mcc',
+    'mid',
+    'mov',
+    'mp3',
+    'mp4',
+    'mpc',
+    'mpeg',
+    'mpg',
+    'mpsub',
+    'ods',
+    'odt',
+    'ogg',
+    'ogv',
+    'pdf',
+    'png',
+    'potx',
+    'pps',
+    'ppsm',
+    'ppsx',
+    'ppt',
+    'pptm',
+    'pptx',
+    'ppz',
+    'pxd',
+    'qt',
+    'ram',
+    'rar',
+    'rm',
+    'rmi',
+    'rmvb',
+    'rt',
+    'rtf',
+    'sami',
+    'sbv',
+    'scc',
+    'sdc',
+    'sitd',
+    'smi',
+    'srt',
+    'stl',
+    'sub',
+    'svg',
+    'swf',
+    'sxc',
+    'sxw',
+    'tar',
+    'tds',
+    'tgz',
+    'tif',
+    'tiff',
+    'ttml',
+    'txt',
+    'vob',
+    'vsd',
+    'vtt',
+    'wav',
+    'webm',
+    'webp',
+    'wma',
+    'wmv',
+    'xls',
+    'xlsx',
+    'zip',
+]`
 
 Defined by
 :   [GeneralConfig::$allowedFileExtensions](craft3:craft\config\GeneralConfig::$allowedFileExtensions)
@@ -2550,7 +2650,17 @@ Allowed types
 :   [array](https://php.net/language.types.array)
 
 Default value
-:   `['Unconstrained' => 'none', 'Original' => 'original', 'Square' => 1, '16:9' => 1.78, '10:8' => 1.25, '7:5' => 1.4, '4:3' => 1.33, '5:3' => 1.67, '3:2' => 1.5]`
+:   `[
+    'Unconstrained' => 'none',
+    'Original' => 'original',
+    'Square' => 1,
+    '16:9' => 1.78,
+    '10:8' => 1.25,
+    '7:5' => 1.4,
+    '4:3' => 1.33,
+    '5:3' => 1.67,
+    '3:2' => 1.5,
+]`
 
 Defined by
 :   [GeneralConfig::$imageEditorRatios](craft3:craft\config\GeneralConfig::$imageEditorRatios)
