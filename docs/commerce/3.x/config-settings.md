@@ -46,16 +46,16 @@ Here’s the full list of Commerce config settings:
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `'commerce/orders'`
+:  `'commerce/orders'`
 
 Defined by
-:   [Settings::$defaultView](commerce3:craft\commerce\models\Settings::$defaultView)
+:  [Settings::$defaultView](commerce3:craft\commerce\models\Settings::$defaultView)
 
 Since
-:   2.2
+:  2.2
 
 </div>
 
@@ -69,13 +69,13 @@ Commerce’s default control panel view. (Defaults to order index.)
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `null`
+:  `null`
 
 Defined by
-:   [Settings::$emailSenderAddress](commerce3:craft\commerce\models\Settings::$emailSenderAddress)
+:  [Settings::$emailSenderAddress](commerce3:craft\commerce\models\Settings::$emailSenderAddress)
 
 </div>
 
@@ -90,13 +90,13 @@ If `null` (default), Craft’s [MailSettings::$fromEmail](craft3:craft\models\Ma
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `null`
+:  `null`
 
 Defined by
-:   [Settings::$emailSenderAddressPlaceholder](commerce3:craft\commerce\models\Settings::$emailSenderAddressPlaceholder)
+:  [Settings::$emailSenderAddressPlaceholder](commerce3:craft\commerce\models\Settings::$emailSenderAddressPlaceholder)
 
 </div>
 
@@ -111,13 +111,13 @@ If `null` (default), Craft’s [MailSettings::$fromEmail](craft3:craft\models\Ma
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `null`
+:  `null`
 
 Defined by
-:   [Settings::$emailSenderName](commerce3:craft\commerce\models\Settings::$emailSenderName)
+:  [Settings::$emailSenderName](commerce3:craft\commerce\models\Settings::$emailSenderName)
 
 </div>
 
@@ -132,13 +132,13 @@ If `null` (default), Craft’s [MailSettings::$fromName](craft3:craft\models\Mai
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `null`
+:  `null`
 
 Defined by
-:   [Settings::$emailSenderNamePlaceholder](commerce3:craft\commerce\models\Settings::$emailSenderNamePlaceholder)
+:  [Settings::$emailSenderNamePlaceholder](commerce3:craft\commerce\models\Settings::$emailSenderNamePlaceholder)
 
 </div>
 
@@ -153,16 +153,16 @@ If `null` (default), Craft’s [MailSettings::$fromName](craft3:craft\models\Mai
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `true`
+:  `true`
 
 Defined by
-:   [Settings::$showCustomerInfoTab](commerce3:craft\commerce\models\Settings::$showCustomerInfoTab)
+:  [Settings::$showCustomerInfoTab](commerce3:craft\commerce\models\Settings::$showCustomerInfoTab)
 
 Since
-:   3.0
+:  3.0
 
 </div>
 
@@ -177,16 +177,16 @@ Whether the [customer info tab](customers.md#user-customer-info-tab) should be s
 <div class="compact">
 
 Allowed types
-:   `mixed`
+:  `mixed`
 
 Default value
-:   `3600`
+:  `3600`
 
 Defined by
-:   [Settings::$activeCartDuration](commerce3:craft\commerce\models\Settings::$activeCartDuration)
+:  [Settings::$activeCartDuration](commerce3:craft\commerce\models\Settings::$activeCartDuration)
 
 Since
-:   2.2
+:  2.2
 
 </div>
 
@@ -201,16 +201,16 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](craft3:craft\helpers\Confi
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `false`
+:  `false`
 
 Defined by
-:   [Settings::$allowCheckoutWithoutPayment](commerce3:craft\commerce\models\Settings::$allowCheckoutWithoutPayment)
+:  [Settings::$allowCheckoutWithoutPayment](commerce3:craft\commerce\models\Settings::$allowCheckoutWithoutPayment)
 
 Since
-:   3.3
+:  3.3
 
 </div>
 
@@ -222,13 +222,13 @@ Whether carts are can be marked as completed without a payment.
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `false`
+:  `false`
 
 Defined by
-:   [Settings::$autoSetCartShippingMethodOption](commerce3:craft\commerce\models\Settings::$autoSetCartShippingMethodOption)
+:  [Settings::$autoSetCartShippingMethodOption](commerce3:craft\commerce\models\Settings::$autoSetCartShippingMethodOption)
 
 </div>
 
@@ -241,13 +241,13 @@ Whether the first available shipping method option should be set automatically o
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `true`
+:  `true`
 
 Defined by
-:   [Settings::$autoSetNewCartAddresses](commerce3:craft\commerce\models\Settings::$autoSetNewCartAddresses)
+:  [Settings::$autoSetNewCartAddresses](commerce3:craft\commerce\models\Settings::$autoSetNewCartAddresses)
 
 </div>
 
@@ -260,16 +260,16 @@ Whether the customer’s primary shipping and billing addresses should be set au
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `false`
+:  `false`
 
 Defined by
-:   [Settings::$allowEmptyCartOnCheckout](commerce3:craft\commerce\models\Settings::$allowEmptyCartOnCheckout)
+:  [Settings::$allowEmptyCartOnCheckout](commerce3:craft\commerce\models\Settings::$allowEmptyCartOnCheckout)
 
 Since
-:   2.2
+:  2.2
 
 </div>
 
@@ -282,13 +282,13 @@ Whether carts are allowed to be empty on checkout.
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `'cart'`
+:  `'cart'`
 
 Defined by
-:   [Settings::$cartVariable](commerce3:craft\commerce\models\Settings::$cartVariable)
+:  [Settings::$cartVariable](commerce3:craft\commerce\models\Settings::$cartVariable)
 
 </div>
 
@@ -301,16 +301,16 @@ Key to be used when returning cart information in a response.
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string), [null](http://php.net/language.types.null)
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
-:   `null`
+:  `null`
 
 Defined by
-:   [Settings::$loadCartRedirectUrl](commerce3:craft\commerce\models\Settings::$loadCartRedirectUrl)
+:  [Settings::$loadCartRedirectUrl](commerce3:craft\commerce\models\Settings::$loadCartRedirectUrl)
 
 Since
-:   3.1
+:  3.1
 
 </div>
 
@@ -325,13 +325,13 @@ If `null` (default), Craft’s default [`siteUrl`](config3:siteUrl) will be used
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `true`
+:  `true`
 
 Defined by
-:   [Settings::$purgeInactiveCarts](commerce3:craft\commerce\models\Settings::$purgeInactiveCarts)
+:  [Settings::$purgeInactiveCarts](commerce3:craft\commerce\models\Settings::$purgeInactiveCarts)
 
 </div>
 
@@ -348,13 +348,13 @@ You can control how long a cart should go without being updated before it gets d
 <div class="compact">
 
 Allowed types
-:   `mixed`
+:  `mixed`
 
 Default value
-:   `7776000`
+:  `7776000`
 
 Defined by
-:   [Settings::$purgeInactiveCartsDuration](commerce3:craft\commerce\models\Settings::$purgeInactiveCartsDuration)
+:  [Settings::$purgeInactiveCartsDuration](commerce3:craft\commerce\models\Settings::$purgeInactiveCartsDuration)
 
 </div>
 
@@ -369,16 +369,16 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](craft3:craft\helpers\Confi
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `true`
+:  `true`
 
 Defined by
-:   [Settings::$updateCartSearchIndexes](commerce3:craft\commerce\models\Settings::$updateCartSearchIndexes)
+:  [Settings::$updateCartSearchIndexes](commerce3:craft\commerce\models\Settings::$updateCartSearchIndexes)
 
 Since
-:   3.1.5
+:  3.1.5
 
 </div>
 
@@ -397,16 +397,16 @@ Setting this to `false` will result in fewer index update queue jobs, but you’
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `false`
+:  `false`
 
 Defined by
-:   [Settings::$validateCartCustomFieldsOnSubmission](commerce3:craft\commerce\models\Settings::$validateCartCustomFieldsOnSubmission)
+:  [Settings::$validateCartCustomFieldsOnSubmission](commerce3:craft\commerce\models\Settings::$validateCartCustomFieldsOnSubmission)
 
 Since
-:   3.0.12
+:  3.0.12
 
 </div>
 
@@ -423,13 +423,13 @@ Set to `true` to allow custom content fields to return validation errors when a 
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `'complete'`
+:  `'complete'`
 
 Defined by
-:   [Settings::$freeOrderPaymentStrategy](commerce3:craft\commerce\models\Settings::$freeOrderPaymentStrategy)
+:  [Settings::$freeOrderPaymentStrategy](commerce3:craft\commerce\models\Settings::$freeOrderPaymentStrategy)
 
 </div>
 
@@ -447,13 +447,13 @@ needs to be updated or otherwise adjusted by the payment gateway.
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `'default'`
+:  `'default'`
 
 Defined by
-:   [Settings::$minimumTotalPriceStrategy](commerce3:craft\commerce\models\Settings::$minimumTotalPriceStrategy)
+:  [Settings::$minimumTotalPriceStrategy](commerce3:craft\commerce\models\Settings::$minimumTotalPriceStrategy)
 
 </div>
 
@@ -472,13 +472,13 @@ Options:
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `'{{number[:7]}}'`
+:  `'{{number[:7]}}'`
 
 Defined by
-:   [Settings::$orderReferenceFormat](commerce3:craft\commerce\models\Settings::$orderReferenceFormat)
+:  [Settings::$orderReferenceFormat](commerce3:craft\commerce\models\Settings::$orderReferenceFormat)
 
 </div>
 
@@ -493,13 +493,13 @@ See [Order Numbers](orders-carts.md#order-numbers).
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `'portrait'`
+:  `'portrait'`
 
 Defined by
-:   [Settings::$pdfPaperOrientation](commerce3:craft\commerce\models\Settings::$pdfPaperOrientation)
+:  [Settings::$pdfPaperOrientation](commerce3:craft\commerce\models\Settings::$pdfPaperOrientation)
 
 </div>
 
@@ -514,13 +514,13 @@ Options are `'portrait'` and `'landscape'`.
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `'letter'`
+:  `'letter'`
 
 Defined by
-:   [Settings::$pdfPaperSize](commerce3:craft\commerce\models\Settings::$pdfPaperSize)
+:  [Settings::$pdfPaperSize](commerce3:craft\commerce\models\Settings::$pdfPaperSize)
 
 </div>
 
@@ -535,13 +535,13 @@ The full list of supported paper sizes can be found [in the dompdf library](http
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `false`
+:  `false`
 
 Defined by
-:   [Settings::$pdfAllowRemoteImages](commerce3:craft\commerce\models\Settings::$pdfAllowRemoteImages)
+:  [Settings::$pdfAllowRemoteImages](commerce3:craft\commerce\models\Settings::$pdfAllowRemoteImages)
 
 </div>
 
@@ -554,13 +554,13 @@ Whether to allow non-local images in generated order PDFs.
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `false`
+:  `false`
 
 Defined by
-:   [Settings::$requireShippingAddressAtCheckout](commerce3:craft\commerce\models\Settings::$requireShippingAddressAtCheckout)
+:  [Settings::$requireShippingAddressAtCheckout](commerce3:craft\commerce\models\Settings::$requireShippingAddressAtCheckout)
 
 </div>
 
@@ -573,13 +573,13 @@ Whether a shipping address is required before making payment on an order.
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `false`
+:  `false`
 
 Defined by
-:   [Settings::$requireBillingAddressAtCheckout](commerce3:craft\commerce\models\Settings::$requireBillingAddressAtCheckout)
+:  [Settings::$requireBillingAddressAtCheckout](commerce3:craft\commerce\models\Settings::$requireBillingAddressAtCheckout)
 
 </div>
 
@@ -592,13 +592,13 @@ Whether a billing address is required before making payment on an order.
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `false`
+:  `false`
 
 Defined by
-:   [Settings::$requireShippingMethodSelectionAtCheckout](commerce3:craft\commerce\models\Settings::$requireShippingMethodSelectionAtCheckout)
+:  [Settings::$requireShippingMethodSelectionAtCheckout](commerce3:craft\commerce\models\Settings::$requireShippingMethodSelectionAtCheckout)
 
 </div>
 
@@ -611,13 +611,13 @@ Whether shipping method selection is required before making payment on an order.
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `''`
+:  `''`
 
 Defined by
-:   [Settings::$updateBillingDetailsUrl](commerce3:craft\commerce\models\Settings::$updateBillingDetailsUrl)
+:  [Settings::$updateBillingDetailsUrl](commerce3:craft\commerce\models\Settings::$updateBillingDetailsUrl)
 
 </div>
 
@@ -634,13 +634,13 @@ The example templates include [a template for this page](https://github.com/craf
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `false`
+:  `false`
 
 Defined by
-:   [Settings::$useBillingAddressForTax](commerce3:craft\commerce\models\Settings::$useBillingAddressForTax)
+:  [Settings::$useBillingAddressForTax](commerce3:craft\commerce\models\Settings::$useBillingAddressForTax)
 
 </div>
 
@@ -653,13 +653,13 @@ Whether taxes should be calculated based on the billing address instead of the s
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `false`
+:  `false`
 
 Defined by
-:   [Settings::$validateBusinessTaxIdAsVatId](commerce3:craft\commerce\models\Settings::$validateBusinessTaxIdAsVatId)
+:  [Settings::$validateBusinessTaxIdAsVatId](commerce3:craft\commerce\models\Settings::$validateBusinessTaxIdAsVatId)
 
 </div>
 
@@ -682,13 +682,13 @@ This setting strictly toggles input validation and has no impact on tax configur
 <div class="compact">
 
 Allowed types
-:   [boolean](http://php.net/language.types.boolean)
+:  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:   `false`
+:  `false`
 
 Defined by
-:   [Settings::$allowPartialPaymentOnCheckout](commerce3:craft\commerce\models\Settings::$allowPartialPaymentOnCheckout)
+:  [Settings::$allowPartialPaymentOnCheckout](commerce3:craft\commerce\models\Settings::$allowPartialPaymentOnCheckout)
 
 </div>
 
@@ -703,13 +703,13 @@ The default `false` does not allow partial payments on the front end.
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `''`
+:  `''`
 
 Defined by
-:   [Settings::$gatewayPostRedirectTemplate](commerce3:craft\commerce\models\Settings::$gatewayPostRedirectTemplate)
+:  [Settings::$gatewayPostRedirectTemplate](commerce3:craft\commerce\models\Settings::$gatewayPostRedirectTemplate)
 
 </div>
 
@@ -750,13 +750,13 @@ If empty (default), each gateway will decide how to handle after-payment redirec
 <div class="compact">
 
 Allowed types
-:   [array](http://php.net/language.types.array)
+:  [array](https://php.net/language.types.array)
 
 Default value
-:   `null`
+:  `null`
 
 Defined by
-:   [Settings::$paymentCurrency](commerce3:craft\commerce\models\Settings::$paymentCurrency)
+:  [Settings::$paymentCurrency](commerce3:craft\commerce\models\Settings::$paymentCurrency)
 
 </div>
 
@@ -773,13 +773,13 @@ See [Payment Currencies](payment-currencies.md).
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `'mm'`
+:  `'mm'`
 
 Defined by
-:   [Settings::$dimensionUnits](commerce3:craft\commerce\models\Settings::$dimensionUnits)
+:  [Settings::$dimensionUnits](commerce3:craft\commerce\models\Settings::$dimensionUnits)
 
 </div>
 
@@ -800,13 +800,13 @@ Options:
 <div class="compact">
 
 Allowed types
-:   [string](http://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)
 
 Default value
-:   `'g'`
+:  `'g'`
 
 Defined by
-:   [Settings::$weightUnits](commerce3:craft\commerce\models\Settings::$weightUnits)
+:  [Settings::$weightUnits](commerce3:craft\commerce\models\Settings::$weightUnits)
 
 </div>
 
