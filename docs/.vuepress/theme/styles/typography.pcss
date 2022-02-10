@@ -153,8 +153,17 @@
 
     dd {
       @apply pl-8;
+      
       code {
         @apply bg-transparent px-0;
+      }
+    
+      p:first-child {
+        @apply mt-0;
+      }
+
+      .custom-block p:first-child {
+        @apply mt-4;
       }
     }
 
@@ -182,6 +191,10 @@
 
       code {
         @apply bg-transparent px-0;
+      }
+
+      p:first-child {
+        @apply mt-0;
       }
     }
   }
