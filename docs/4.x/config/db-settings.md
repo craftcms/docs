@@ -342,7 +342,7 @@ Defined by
 
 </div>
 
-The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
+The database driver to use. Either `mysql` for MySQL or `pgsql` for PostgreSQL.
 
 
 
