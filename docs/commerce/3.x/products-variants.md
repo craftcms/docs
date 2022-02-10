@@ -218,25 +218,15 @@ Product queries support the following parameters:
 | Param                                                 | Description
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [after](#product-after)                               | Narrows the query results to only products that were posted on or after a certain date.
-| [afterPopulate](#product-afterpopulate)               | Performs any post-population processing on elements.
-| [andRelatedTo](#product-andrelatedto)                 | Narrows the query results to only products that are related to certain other elements.
 | [anyStatus](#product-anystatus)                       | Removes element filters based on their statuses.
 | [asArray](#product-asarray)                           | Causes the query to return matching products as arrays of data, rather than [Product](commerce3:craft\commerce\elements\Product) objects.
 | [availableForPurchase](#product-availableforpurchase) | Narrows the query results to only products that are available for purchase.
 | [before](#product-before)                             | Narrows the query results to only products that were posted before a certain date.
-| [cache](#product-cache)                               | Enables query cache for this Query.
-| [clearCachedResult](#product-clearcachedresult)       | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+| [clearCachedResult](#product-clearcachedresult)       | Clears the cached result.
 | [dateCreated](#product-datecreated)                   | Narrows the query results based on the products’ creation dates.
 | [dateUpdated](#product-dateupdated)                   | Narrows the query results based on the products’ last-updated dates.
-| [defaultHeight](#product-defaultheight)               | Narrows the query results based on the products’ default variant height domention IDs.
-| [defaultLength](#product-defaultlength)               | Narrows the query results based on the products’ default variant length domention IDs.
-| [defaultPrice](#product-defaultprice)                 | Narrows the query results based on the products’ default variant price.
-| [defaultSku](#product-defaultsku)                     | Narrows the query results based on the default productvariants defaultSku
-| [defaultWeight](#product-defaultweight)               | Narrows the query results based on the products’ default variant weight domention IDs.
-| [defaultWidth](#product-defaultwidth)                 | Narrows the query results based on the products’ default variant width domention IDs.
 | [expiryDate](#product-expirydate)                     | Narrows the query results based on the products’ expiry dates.
 | [fixedOrder](#product-fixedorder)                     | Causes the query results to be returned in the order specified by [id](#product-id).
-| [getCacheTags](#product-getcachetags)                 |
 | [hasVariant](#product-hasvariant)                     | Narrows the query results to only products that have certain variants.
 | [id](#product-id)                                     | Narrows the query results based on the products’ IDs.
 | [ignorePlaceholders](#product-ignoreplaceholders)     | Causes the query to return matching products as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -246,13 +236,10 @@ Product queries support the following parameters:
 | [orderBy](#product-orderby)                           | Determines the order that the products should be returned in. (If empty, defaults to `postDate DESC`.)
 | [postDate](#product-postdate)                         | Narrows the query results based on the products’ post dates.
 | [preferSites](#product-prefersites)                   | If [unique](#product-unique) is set, this determines which site should be selected when querying multi-site elements.
-| [provisionalDrafts](#product-provisionaldrafts)       | Narrows the query results to only provisional drafts.
 | [relatedTo](#product-relatedto)                       | Narrows the query results to only products that are related to certain other elements.
-| [savedDraftsOnly](#product-saveddraftsonly)           | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#product-search)                             | Narrows the query results to only products that match a search query.
 | [site](#product-site)                                 | Determines which site(s) the products should be queried in.
 | [siteId](#product-siteid)                             | Determines which site(s) the products should be queried in, per the site’s ID.
-| [siteSettingsId](#product-sitesettingsid)             | Narrows the query results based on the products’ IDs in the `elements_sites` table.
 | [slug](#product-slug)                                 | Narrows the query results based on the products’ slugs.
 | [status](#product-status)                             | Narrows the query results based on the products’ statuses.
 | [title](#product-title)                               | Narrows the query results based on the products’ titles.
@@ -273,7 +260,7 @@ Possible values include:
 | Value | Fetches products…
 | - | -
 | `'2018-04-01'` | that were posted after 2018-04-01.
-| a [DateTime](https://php.net/class.datetime) object | that were posted after the date represented by the object.
+| a [DateTime](http://php.net/class.datetime) object | that were posted after the date represented by the object.
 
 
 
@@ -283,8 +270,8 @@ Possible values include:
 {% set firstDayOfMonth = date('first day of this month') %}
 
 {% set products = craft.products()
-  .after(firstDayOfMonth)
-  .all() %}
+    .after(firstDayOfMonth)
+    .all() %}
 ```
 
 ```php
@@ -293,48 +280,6 @@ $firstDayOfMonth = new \DateTime('first day of this month');
 
 $products = \craft\commerce\elements\Product::find()
     ->after($firstDayOfMonth)
-    ->all();
-```
-:::
-
-
-<h4 id="product-afterpopulate"><a href="#product-afterpopulate" class="header-anchor">#</a> <code>afterPopulate</code></h4>
-
-Performs any post-population processing on elements.
-
-
-
-
-
-
-
-
-
-
-<h4 id="product-andrelatedto"><a href="#product-andrelatedto" class="header-anchor">#</a> <code>andRelatedTo</code></h4>
-
-Narrows the query results to only products that are related to certain other elements.
-
-
-
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
-
-
-
-::: code
-```twig
-{# Fetch all products that are related to myCategoryA and myCategoryB #}
-{% set products = craft.products()
-  .relatedTo(myCategoryA)
-  .andRelatedTo(myCategoryB)
-  .all() %}
-```
-
-```php
-// Fetch all products that are related to $myCategoryA and $myCategoryB
-$products = \craft\commerce\elements\Product::find()
-    ->relatedTo($myCategoryA)
-    ->andRelatedTo($myCategoryB)
     ->all();
 ```
 :::
@@ -352,8 +297,8 @@ Removes element filters based on their statuses.
 ```twig
 {# Fetch all products, regardless of status #}
 {% set products = craft.products()
-  .anyStatus()
-  .all() %}
+    .anyStatus()
+    .all() %}
 ```
 
 ```php
@@ -377,8 +322,8 @@ Causes the query to return matching products as arrays of data, rather than [Pro
 ```twig
 {# Fetch products as arrays #}
 {% set products = craft.products()
-  .asArray()
-  .all() %}
+    .asArray()
+    .all() %}
 ```
 
 ```php
@@ -400,8 +345,8 @@ Narrows the query results to only products that are available for purchase.
 ```twig
 {# Fetch products that are available for purchase #}
 {% set products = {twig-function}
-  .availableForPurchase()
-  .all() %}
+    .availableForPurchase()
+    .all() %}
 ```
 
 ```php
@@ -422,7 +367,7 @@ Possible values include:
 | Value | Fetches products…
 | - | -
 | `'2018-04-01'` | that were posted before 2018-04-01.
-| a [DateTime](https://php.net/class.datetime) object | that were posted before the date represented by the object.
+| a [DateTime](http://php.net/class.datetime) object | that were posted before the date represented by the object.
 
 
 
@@ -432,8 +377,8 @@ Possible values include:
 {% set firstDayOfMonth = date('first day of this month') %}
 
 {% set products = craft.products()
-  .before(firstDayOfMonth)
-  .all() %}
+    .before(firstDayOfMonth)
+    .all() %}
 ```
 
 ```php
@@ -447,22 +392,9 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-<h4 id="product-cache"><a href="#product-cache" class="header-anchor">#</a> <code>cache</code></h4>
-
-Enables query cache for this Query.
-
-
-
-
-
-
-
-
-
-
 <h4 id="product-clearcachedresult"><a href="#product-clearcachedresult" class="header-anchor">#</a> <code>clearCachedResult</code></h4>
 
-Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+Clears the cached result.
 
 
 
@@ -492,8 +424,8 @@ Possible values include:
 {% set end = date('first day of this month')|atom %}
 
 {% set products = craft.products()
-  .dateCreated(['and', ">= #{start}", "< #{end}"])
-  .all() %}
+    .dateCreated(['and', ">= #{start}", "< #{end}"])
+    .all() %}
 ```
 
 ```php
@@ -530,8 +462,8 @@ Possible values include:
 {% set lastWeek = date('1 week ago')|atom %}
 
 {% set products = craft.products()
-  .dateUpdated(">= #{lastWeek}")
-  .all() %}
+    .dateUpdated(">= #{lastWeek}")
+    .all() %}
 ```
 
 ```php
@@ -540,196 +472,6 @@ $lastWeek = (new \DateTime('1 week ago'))->format(\DateTime::ATOM);
 
 $products = \craft\commerce\elements\Product::find()
     ->dateUpdated(">= {$lastWeek}")
-    ->all();
-```
-:::
-
-
-<h4 id="product-defaultheight"><a href="#product-defaultheight" class="header-anchor">#</a> <code>defaultHeight</code></h4>
-
-Narrows the query results based on the products’ default variant height domention IDs.
-
-Possible values include:
-
-| Value | Fetches products…
-| - | -
-| `1` | of a type with a domention of 1.
-| `'not 1'` | not a domention of 1.
-| `[1, 2]` | of a a domention 1 or 2.
-| `['and', '>= ' ~ 100, '<= ' ~ 2000,] | of a dimention between 100 and 2000
-
-
-
-::: code
-```twig
-{# Fetch products of the product default dimention of 1 #}
-{% set products = craft.products()
-  .defaultHeight(1)
-  .all() %}
-```
-
-```php
-// Fetch products of the  product default dimention of 1
-$products = \craft\commerce\elements\Product::find()
-    ->defaultHeight(1)
-    ->all();
-```
-:::
-
-
-<h4 id="product-defaultlength"><a href="#product-defaultlength" class="header-anchor">#</a> <code>defaultLength</code></h4>
-
-Narrows the query results based on the products’ default variant length domention IDs.
-
-Possible values include:
-
-| Value | Fetches products…
-| - | -
-| `1` | of a type with a domention of 1.
-| `'not 1'` | not a domention of 1.
-| `[1, 2]` | of a a domention 1 or 2.
-| `['and', '>= ' ~ 100, '<= ' ~ 2000] | of a dimention between 100 and 2000
-
-
-
-::: code
-```twig
-{# Fetch products of the product default dimention of 1 #}
-{% set products = craft.products()
-  .defaulLength(1)
-  .all() %}
-```
-
-```php
-// Fetch products of the  product default dimention of 1
-$products = \craft\commerce\elements\Product::find()
-    ->defaulLength(1)
-    ->all();
-```
-:::
-
-
-<h4 id="product-defaultprice"><a href="#product-defaultprice" class="header-anchor">#</a> <code>defaultPrice</code></h4>
-
-Narrows the query results based on the products’ default variant price.
-
-Possible values include:
-
-| Value | Fetches products…
-| - | -
-| `10` | of a price of 10.
-| `['and', '>= ' ~ 100, '<= ' ~ 2000,] | of a default variant price between 100 and 2000
-
-
-
-::: code
-```twig
-{# Fetch products of the product type with an ID of 1 #}
-{% set products = craft.products()
-  .defaultPrice(1)
-  .all() %}
-```
-
-```php
-// Fetch products of the product type with an ID of 1
-$products = \craft\commerce\elements\Product::find()
-    ->defaultPrice(1)
-    ->all();
-```
-:::
-
-
-<h4 id="product-defaultsku"><a href="#product-defaultsku" class="header-anchor">#</a> <code>defaultSku</code></h4>
-
-Narrows the query results based on the default productvariants defaultSku
-
-Possible values include:
-
-| Value | Fetches products…
-| - | -
-| `xxx-001` | of products defaukt SKU of `xxx-001`.
-| `'not xxx-001'` | not a defaukt SKU of `xxx-001`.
-| `['not xxx-001', 'not xxx-002']` | of a default SKU of xxx-001 or xxx-002.
-| `['not', `xxx-001`, `xxx-002`]` | not a product defaukt SKU of `xxx-001` or `xxx-001`.
-
-
-
-::: code
-```twig
-{# Fetch products of the product defaukt SKU of `xxx-001` #}
-{% set products = craft.products()
-  .defaultSku('xxx-001')
-  .all() %}
-```
-
-```php
-// Fetch products  of the product defaukt SKU of `xxx-001`
-$products = \craft\commerce\elements\Product::find()
-    ->defaultSku('xxx-001')
-    ->all();
-```
-:::
-
-
-<h4 id="product-defaultweight"><a href="#product-defaultweight" class="header-anchor">#</a> <code>defaultWeight</code></h4>
-
-Narrows the query results based on the products’ default variant weight domention IDs.
-
-Possible values include:
-
-| Value | Fetches products…
-| - | -
-| `1` | of a type with a domention of 1.
-| `'not 1'` | not a domention of 1.
-| `[1, 2]` | of a a domention 1 or 2.
-| `['and', '>= ' ~ 100, '<= ' ~ 2000] | of a dimention between 100 and 2000
-
-
-
-::: code
-```twig
-{# Fetch products of the product default dimention of 1 #}
-{% set products = craft.products()
-  .defaultWeight(1)
-  .all() %}
-```
-
-```php
-// Fetch products of the  product default dimention of 1
-$products = \craft\commerce\elements\Product::find()
-    ->defaultWeight(1)
-    ->all();
-```
-:::
-
-
-<h4 id="product-defaultwidth"><a href="#product-defaultwidth" class="header-anchor">#</a> <code>defaultWidth</code></h4>
-
-Narrows the query results based on the products’ default variant width domention IDs.
-
-Possible values include:
-
-| Value | Fetches products…
-| - | -
-| `1` | of a type with a domention of 1.
-| `'not 1'` | not a domention of 1.
-| `[1, 2]` | of a a domention 1 or 2.
-| `['and', '>= ' ~ 100, '<= ' ~ 2000] | of a dimention between 100 and 2000
-
-
-
-::: code
-```twig
-{# Fetch products of the product default dimention of 1 #}
-{% set products = craft.products()
-  .defaultWidth(1)
-  .all() %}
-```
-
-```php
-// Fetch products of the  product default dimention of 1
-$products = \craft\commerce\elements\Product::find()
-    ->defaultWidth(1)
     ->all();
 ```
 :::
@@ -755,8 +497,8 @@ Possible values include:
 {% set nextMonth = date('first day of next month')|atom %}
 
 {% set products = craft.products()
-  .expiryDate("< #{nextMonth}")
-  .all() %}
+    .expiryDate("< #{nextMonth}")
+    .all() %}
 ```
 
 ```php
@@ -782,9 +524,9 @@ Causes the query results to be returned in the order specified by [id](#product-
 ```twig
 {# Fetch products in a specific order #}
 {% set products = craft.products()
-  .id([1, 2, 3, 4, 5])
-  .fixedOrder()
-  .all() %}
+    .id([1, 2, 3, 4, 5])
+    .fixedOrder()
+    .all() %}
 ```
 
 ```php
@@ -795,15 +537,6 @@ $products = \craft\commerce\elements\Product::find()
     ->all();
 ```
 :::
-
-
-<h4 id="product-getcachetags"><a href="#product-getcachetags" class="header-anchor">#</a> <code>getCacheTags</code></h4>
-
-
-
-
-
-
 
 
 <h4 id="product-hasvariant"><a href="#product-hasvariant" class="header-anchor">#</a> <code>hasVariant</code></h4>
@@ -840,8 +573,8 @@ Possible values include:
 ```twig
 {# Fetch the product by its ID #}
 {% set product = craft.products()
-  .id(1)
-  .one() %}
+    .id(1)
+    .one() %}
 ```
 
 ```php
@@ -885,8 +618,8 @@ Causes the query results to be returned in reverse order.
 ```twig
 {# Fetch products in reverse #}
 {% set products = craft.products()
-  .inReverse()
-  .all() %}
+    .inReverse()
+    .all() %}
 ```
 
 ```php
@@ -908,8 +641,8 @@ Determines the number of products that should be returned.
 ```twig
 {# Fetch up to 10 products  #}
 {% set products = craft.products()
-  .limit(10)
-  .all() %}
+    .limit(10)
+    .all() %}
 ```
 
 ```php
@@ -931,8 +664,8 @@ Determines how many products should be skipped in the results.
 ```twig
 {# Fetch all products except for the first 3 #}
 {% set products = craft.products()
-  .offset(3)
-  .all() %}
+    .offset(3)
+    .all() %}
 ```
 
 ```php
@@ -954,8 +687,8 @@ Determines the order that the products should be returned in. (If empty, default
 ```twig
 {# Fetch all products in order of date created #}
 {% set products = craft.products()
-  .orderBy('dateCreated ASC')
-  .all() %}
+    .orderBy('dateCreated ASC')
+    .all() %}
 ```
 
 ```php
@@ -988,8 +721,8 @@ Possible values include:
 {% set end = date('first day of this month')|atom %}
 
 {% set products = craft.products()
-  .postDate(['and', ">= #{start}", "< #{end}"])
-  .all() %}
+    .postDate(['and', ">= #{start}", "< #{end}"])
+    .all() %}
 ```
 
 ```php
@@ -1022,10 +755,10 @@ If this isn’t set, then preference goes to the current site.
 ```twig
 {# Fetch unique products from Site A, or Site B if they don’t exist in Site A #}
 {% set products = craft.products()
-  .site('*')
-  .unique()
-  .preferSites(['a', 'b'])
-  .all() %}
+    .site('*')
+    .unique()
+    .preferSites(['a', 'b'])
+    .all() %}
 ```
 
 ```php
@@ -1034,33 +767,6 @@ $products = \craft\commerce\elements\Product::find()
     ->site('*')
     ->unique()
     ->preferSites(['a', 'b'])
-    ->all();
-```
-:::
-
-
-<h4 id="product-provisionaldrafts"><a href="#product-provisionaldrafts" class="header-anchor">#</a> <code>provisionalDrafts</code></h4>
-
-Narrows the query results to only provisional drafts.
-
-
-
-
-
-::: code
-```twig
-{# Fetch provisional drafts created by the current user #}
-{% set products = craft.products()
-  .provisionalDrafts()
-  .draftCreator(currentUser)
-  .all() %}
-```
-
-```php
-// Fetch provisional drafts created by the current user
-$products = \craft\commerce\elements\Product::find()
-    ->provisionalDrafts()
-    ->draftCreator(Craft::$app->user->identity)
     ->all();
 ```
 :::
@@ -1080,41 +786,14 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 ```twig
 {# Fetch all products that are related to myCategory #}
 {% set products = craft.products()
-  .relatedTo(myCategory)
-  .all() %}
+    .relatedTo(myCategory)
+    .all() %}
 ```
 
 ```php
 // Fetch all products that are related to $myCategory
 $products = \craft\commerce\elements\Product::find()
     ->relatedTo($myCategory)
-    ->all();
-```
-:::
-
-
-<h4 id="product-saveddraftsonly"><a href="#product-saveddraftsonly" class="header-anchor">#</a> <code>savedDraftsOnly</code></h4>
-
-Narrows the query results to only unpublished drafts which have been saved after initial creation.
-
-
-
-
-
-::: code
-```twig
-{# Fetch saved, unpublished draft products #}
-{% set products = {twig-function}
-  .draftOf(false)
-  .savedDraftsOnly()
-  .all() %}
-```
-
-```php
-// Fetch saved, unpublished draft products
-$products = \craft\commerce\elements\Product::find()
-    ->draftOf(false)
-    ->savedDraftsOnly()
     ->all();
 ```
 :::
@@ -1137,8 +816,8 @@ See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explana
 
 {# Fetch all products that match the search query #}
 {% set products = craft.products()
-  .search(searchQuery)
-  .all() %}
+    .search(searchQuery)
+    .all() %}
 ```
 
 ```php
@@ -1182,8 +861,8 @@ only want unique elements to be returned, use [unique](#product-unique) in conju
 ```twig
 {# Fetch products from the Foo site #}
 {% set products = craft.products()
-  .site('foo')
-  .all() %}
+    .site('foo')
+    .all() %}
 ```
 
 ```php
@@ -1218,8 +897,8 @@ Possible values include:
 ```twig
 {# Fetch products from the site with an ID of 1 #}
 {% set products = craft.products()
-  .siteId(1)
-  .all() %}
+    .siteId(1)
+    .all() %}
 ```
 
 ```php
@@ -1227,40 +906,6 @@ Possible values include:
 $products = \craft\commerce\elements\Product::find()
     ->siteId(1)
     ->all();
-```
-:::
-
-
-<h4 id="product-sitesettingsid"><a href="#product-sitesettingsid" class="header-anchor">#</a> <code>siteSettingsId</code></h4>
-
-Narrows the query results based on the products’ IDs in the `elements_sites` table.
-
-
-
-Possible values include:
-
-| Value | Fetches products…
-| - | -
-| `1` | with an `elements_sites` ID of 1.
-| `'not 1'` | not with an `elements_sites` ID of 1.
-| `[1, 2]` | with an `elements_sites` ID of 1 or 2.
-| `['not', 1, 2]` | not with an `elements_sites` ID of 1 or 2.
-
-
-
-::: code
-```twig
-{# Fetch the product by its ID in the elements_sites table #}
-{% set product = craft.products()
-  .siteSettingsId(1)
-  .one() %}
-```
-
-```php
-// Fetch the product by its ID in the elements_sites table
-$product = \craft\commerce\elements\Product::find()
-    ->siteSettingsId(1)
-    ->one();
 ```
 :::
 
@@ -1292,8 +937,8 @@ Possible values include:
 
 {# Fetch the product with that slug #}
 {% set product = craft.products()
-  .slug(requestedSlug|literal)
-  .one() %}
+    .slug(requestedSlug|literal)
+    .one() %}
 ```
 
 ```php
@@ -1328,8 +973,8 @@ Possible values include:
 ```twig
 {# Fetch disabled products #}
 {% set products = {twig-function}
-  .status('disabled')
-  .all() %}
+    .status('disabled')
+    .all() %}
 ```
 
 ```php
@@ -1365,8 +1010,8 @@ Possible values include:
 ```twig
 {# Fetch products with a title that contains "Foo" #}
 {% set products = craft.products()
-  .title('*Foo*')
-  .all() %}
+    .title('*Foo*')
+    .all() %}
 ```
 
 ```php
@@ -1390,8 +1035,8 @@ Narrows the query results to only products that have been soft-deleted.
 ```twig
 {# Fetch trashed products #}
 {% set products = craft.products()
-  .trashed()
-  .all() %}
+    .trashed()
+    .all() %}
 ```
 
 ```php
@@ -1423,8 +1068,8 @@ Possible values include:
 ```twig
 {# Fetch products with a Foo product type #}
 {% set products = craft.products()
-  .type('foo')
-  .all() %}
+    .type('foo')
+    .all() %}
 ```
 
 ```php
@@ -1455,8 +1100,8 @@ Possible values include:
 ```twig
 {# Fetch products of the product type with an ID of 1 #}
 {% set products = craft.products()
-  .typeId(1)
-  .all() %}
+    .typeId(1)
+    .all() %}
 ```
 
 ```php
@@ -1480,8 +1125,8 @@ Narrows the query results based on the products’ UIDs.
 ```twig
 {# Fetch the product by its UID #}
 {% set product = craft.products()
-  .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
-  .one() %}
+    .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+    .one() %}
 ```
 
 ```php
@@ -1508,9 +1153,9 @@ desired.
 ```twig
 {# Fetch unique products across all sites #}
 {% set products = craft.products()
-  .site('*')
-  .unique()
-  .all() %}
+    .site('*')
+    .unique()
+    .all() %}
 ```
 
 ```php
@@ -1550,8 +1195,8 @@ Possible values include:
 
 {# Fetch the product with that URI #}
 {% set product = craft.products()
-  .uri(requestedUri|literal)
-  .one() %}
+    .uri(requestedUri|literal)
+    .one() %}
 ```
 
 ```php
@@ -1580,8 +1225,8 @@ See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-ele
 ```twig
 {# Fetch products eager-loaded with the "Related" field’s relations #}
 {% set products = craft.products()
-  .with(['related'])
-  .all() %}
+    .with(['related'])
+    .all() %}
 ```
 
 ```php
@@ -1756,20 +1401,15 @@ Variant queries support the following parameters:
 
 | Param                                             | Description
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#variant-afterpopulate)           | Performs any post-population processing on elements.
-| [andRelatedTo](#variant-andrelatedto)             | Narrows the query results to only variants that are related to certain other elements.
 | [anyStatus](#variant-anystatus)                   | Removes element filters based on their statuses.
 | [asArray](#variant-asarray)                       | Causes the query to return matching variants as arrays of data, rather than [Variant](commerce3:craft\commerce\elements\Variant) objects.
-| [cache](#variant-cache)                           | Enables query cache for this Query.
-| [clearCachedResult](#variant-clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+| [clearCachedResult](#variant-clearcachedresult)   | Clears the cached result.
 | [dateCreated](#variant-datecreated)               | Narrows the query results based on the variants’ creation dates.
 | [dateUpdated](#variant-dateupdated)               | Narrows the query results based on the variants’ last-updated dates.
 | [fixedOrder](#variant-fixedorder)                 | Causes the query results to be returned in the order specified by [id](#variant-id).
-| [getCacheTags](#variant-getcachetags)             |
 | [hasProduct](#variant-hasproduct)                 | Narrows the query results to only variants for certain products.
 | [hasSales](#variant-hassales)                     | Narrows the query results to only variants that are on sale.
 | [hasStock](#variant-hasstock)                     | Narrows the query results to only variants that have stock.
-| [hasUnlimitedStock](#variant-hasunlimitedstock)   | Narrows the query results to only variants that have been set to unlimited stock.
 | [height](#variant-height)                         | Narrows the query results based on the variants’ height dimension.
 | [id](#variant-id)                                 | Narrows the query results based on the variants’ IDs.
 | [ignorePlaceholders](#variant-ignoreplaceholders) | Causes the query to return matching variants as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -1785,13 +1425,10 @@ Variant queries support the following parameters:
 | [price](#variant-price)                           | Narrows the query results based on the variants’ price.
 | [product](#variant-product)                       | Narrows the query results based on the variants’ product.
 | [productId](#variant-productid)                   | Narrows the query results based on the variants’ products’ IDs.
-| [provisionalDrafts](#variant-provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [relatedTo](#variant-relatedto)                   | Narrows the query results to only variants that are related to certain other elements.
-| [savedDraftsOnly](#variant-saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#variant-search)                         | Narrows the query results to only variants that match a search query.
 | [site](#variant-site)                             | Determines which site(s) the variants should be queried in.
 | [siteId](#variant-siteid)                         | Determines which site(s) the variants should be queried in, per the site’s ID.
-| [siteSettingsId](#variant-sitesettingsid)         | Narrows the query results based on the variants’ IDs in the `elements_sites` table.
 | [sku](#variant-sku)                               | Narrows the query results based on the variants’ SKUs.
 | [status](#variant-status)                         | Narrows the query results based on the variants’ statuses.
 | [stock](#variant-stock)                           | Narrows the query results based on the variants’ stock.
@@ -1803,48 +1440,6 @@ Variant queries support the following parameters:
 | [weight](#variant-weight)                         | Narrows the query results based on the variants’ weight dimension.
 | [width](#variant-width)                           | Narrows the query results based on the variants’ width dimension.
 | [with](#variant-with)                             | Causes the query to return matching variants eager-loaded with related elements.
-
-<h4 id="variant-afterpopulate"><a href="#variant-afterpopulate" class="header-anchor">#</a> <code>afterPopulate</code></h4>
-
-Performs any post-population processing on elements.
-
-
-
-
-
-
-
-
-
-
-<h4 id="variant-andrelatedto"><a href="#variant-andrelatedto" class="header-anchor">#</a> <code>andRelatedTo</code></h4>
-
-Narrows the query results to only variants that are related to certain other elements.
-
-
-
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
-
-
-
-::: code
-```twig
-{# Fetch all variants that are related to myCategoryA and myCategoryB #}
-{% set variants = craft.variants()
-  .relatedTo(myCategoryA)
-  .andRelatedTo(myCategoryB)
-  .all() %}
-```
-
-```php
-// Fetch all variants that are related to $myCategoryA and $myCategoryB
-$variants = \craft\commerce\elements\Variant::find()
-    ->relatedTo($myCategoryA)
-    ->andRelatedTo($myCategoryB)
-    ->all();
-```
-:::
-
 
 <h4 id="variant-anystatus"><a href="#variant-anystatus" class="header-anchor">#</a> <code>anyStatus</code></h4>
 
@@ -1858,8 +1453,8 @@ Removes element filters based on their statuses.
 ```twig
 {# Fetch all variants, regardless of status #}
 {% set variants = craft.variants()
-  .anyStatus()
-  .all() %}
+    .anyStatus()
+    .all() %}
 ```
 
 ```php
@@ -1883,8 +1478,8 @@ Causes the query to return matching variants as arrays of data, rather than [Var
 ```twig
 {# Fetch variants as arrays #}
 {% set variants = craft.variants()
-  .asArray()
-  .all() %}
+    .asArray()
+    .all() %}
 ```
 
 ```php
@@ -1896,22 +1491,9 @@ $variants = \craft\commerce\elements\Variant::find()
 :::
 
 
-<h4 id="variant-cache"><a href="#variant-cache" class="header-anchor">#</a> <code>cache</code></h4>
-
-Enables query cache for this Query.
-
-
-
-
-
-
-
-
-
-
 <h4 id="variant-clearcachedresult"><a href="#variant-clearcachedresult" class="header-anchor">#</a> <code>clearCachedResult</code></h4>
 
-Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+Clears the cached result.
 
 
 
@@ -1941,8 +1523,8 @@ Possible values include:
 {% set end = date('first day of this month')|atom %}
 
 {% set variants = craft.variants()
-  .dateCreated(['and', ">= #{start}", "< #{end}"])
-  .all() %}
+    .dateCreated(['and', ">= #{start}", "< #{end}"])
+    .all() %}
 ```
 
 ```php
@@ -1979,8 +1561,8 @@ Possible values include:
 {% set lastWeek = date('1 week ago')|atom %}
 
 {% set variants = craft.variants()
-  .dateUpdated(">= #{lastWeek}")
-  .all() %}
+    .dateUpdated(">= #{lastWeek}")
+    .all() %}
 ```
 
 ```php
@@ -2006,9 +1588,9 @@ Causes the query results to be returned in the order specified by [id](#variant-
 ```twig
 {# Fetch variants in a specific order #}
 {% set variants = craft.variants()
-  .id([1, 2, 3, 4, 5])
-  .fixedOrder()
-  .all() %}
+    .id([1, 2, 3, 4, 5])
+    .fixedOrder()
+    .all() %}
 ```
 
 ```php
@@ -2019,15 +1601,6 @@ $variants = \craft\commerce\elements\Variant::find()
     ->all();
 ```
 :::
-
-
-<h4 id="variant-getcachetags"><a href="#variant-getcachetags" class="header-anchor">#</a> <code>getCacheTags</code></h4>
-
-
-
-
-
-
 
 
 <h4 id="variant-hasproduct"><a href="#variant-hasproduct" class="header-anchor">#</a> <code>hasProduct</code></h4>
@@ -2071,20 +1644,6 @@ Possible values include:
 
 
 
-<h4 id="variant-hasunlimitedstock"><a href="#variant-hasunlimitedstock" class="header-anchor">#</a> <code>hasUnlimitedStock</code></h4>
-
-Narrows the query results to only variants that have been set to unlimited stock.
-
-Possible values include:
-
-| Value | Fetches variants…
-| - | -
-| `true` | with unlimited stock checked.
-| `false` | with unlimited stock not checked.
-
-
-
-
 <h4 id="variant-height"><a href="#variant-height" class="header-anchor">#</a> <code>height</code></h4>
 
 Narrows the query results based on the variants’ height dimension.
@@ -2121,8 +1680,8 @@ Possible values include:
 ```twig
 {# Fetch the variant by its ID #}
 {% set variant = craft.variants()
-  .id(1)
-  .one() %}
+    .id(1)
+    .one() %}
 ```
 
 ```php
@@ -2166,8 +1725,8 @@ Causes the query results to be returned in reverse order.
 ```twig
 {# Fetch variants in reverse #}
 {% set variants = craft.variants()
-  .inReverse()
-  .all() %}
+    .inReverse()
+    .all() %}
 ```
 
 ```php
@@ -2189,8 +1748,8 @@ Narrows the query results to only default variants.
 ```twig
 {# Fetch default variants #}
 {% set variants = {twig-function}
-  .isDefault()
-  .all() %}
+    .isDefault()
+    .all() %}
 ```
 
 ```php
@@ -2227,8 +1786,8 @@ Determines the number of variants that should be returned.
 ```twig
 {# Fetch up to 10 variants  #}
 {% set variants = craft.variants()
-  .limit(10)
-  .all() %}
+    .limit(10)
+    .all() %}
 ```
 
 ```php
@@ -2280,8 +1839,8 @@ Determines how many variants should be skipped in the results.
 ```twig
 {# Fetch all variants except for the first 3 #}
 {% set variants = craft.variants()
-  .offset(3)
-  .all() %}
+    .offset(3)
+    .all() %}
 ```
 
 ```php
@@ -2303,8 +1862,8 @@ Determines the order that the variants should be returned in. (If empty, default
 ```twig
 {# Fetch all variants in order of date created #}
 {% set variants = craft.variants()
-  .orderBy('dateCreated ASC')
-  .all() %}
+    .orderBy('dateCreated ASC')
+    .all() %}
 ```
 
 ```php
@@ -2334,10 +1893,10 @@ If this isn’t set, then preference goes to the current site.
 ```twig
 {# Fetch unique variants from Site A, or Site B if they don’t exist in Site A #}
 {% set variants = craft.variants()
-  .site('*')
-  .unique()
-  .preferSites(['a', 'b'])
-  .all() %}
+    .site('*')
+    .unique()
+    .preferSites(['a', 'b'])
+    .all() %}
 ```
 
 ```php
@@ -2394,33 +1953,6 @@ Possible values include:
 
 
 
-<h4 id="variant-provisionaldrafts"><a href="#variant-provisionaldrafts" class="header-anchor">#</a> <code>provisionalDrafts</code></h4>
-
-Narrows the query results to only provisional drafts.
-
-
-
-
-
-::: code
-```twig
-{# Fetch provisional drafts created by the current user #}
-{% set variants = craft.variants()
-  .provisionalDrafts()
-  .draftCreator(currentUser)
-  .all() %}
-```
-
-```php
-// Fetch provisional drafts created by the current user
-$variants = \craft\commerce\elements\Variant::find()
-    ->provisionalDrafts()
-    ->draftCreator(Craft::$app->user->identity)
-    ->all();
-```
-:::
-
-
 <h4 id="variant-relatedto"><a href="#variant-relatedto" class="header-anchor">#</a> <code>relatedTo</code></h4>
 
 Narrows the query results to only variants that are related to certain other elements.
@@ -2435,41 +1967,14 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 ```twig
 {# Fetch all variants that are related to myCategory #}
 {% set variants = craft.variants()
-  .relatedTo(myCategory)
-  .all() %}
+    .relatedTo(myCategory)
+    .all() %}
 ```
 
 ```php
 // Fetch all variants that are related to $myCategory
 $variants = \craft\commerce\elements\Variant::find()
     ->relatedTo($myCategory)
-    ->all();
-```
-:::
-
-
-<h4 id="variant-saveddraftsonly"><a href="#variant-saveddraftsonly" class="header-anchor">#</a> <code>savedDraftsOnly</code></h4>
-
-Narrows the query results to only unpublished drafts which have been saved after initial creation.
-
-
-
-
-
-::: code
-```twig
-{# Fetch saved, unpublished draft variants #}
-{% set variants = {twig-function}
-  .draftOf(false)
-  .savedDraftsOnly()
-  .all() %}
-```
-
-```php
-// Fetch saved, unpublished draft variants
-$variants = \craft\commerce\elements\Variant::find()
-    ->draftOf(false)
-    ->savedDraftsOnly()
     ->all();
 ```
 :::
@@ -2492,8 +1997,8 @@ See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explana
 
 {# Fetch all variants that match the search query #}
 {% set variants = craft.variants()
-  .search(searchQuery)
-  .all() %}
+    .search(searchQuery)
+    .all() %}
 ```
 
 ```php
@@ -2537,8 +2042,8 @@ only want unique elements to be returned, use [unique](#variant-unique) in conju
 ```twig
 {# Fetch variants from the Foo site #}
 {% set variants = craft.variants()
-  .site('foo')
-  .all() %}
+    .site('foo')
+    .all() %}
 ```
 
 ```php
@@ -2573,8 +2078,8 @@ Possible values include:
 ```twig
 {# Fetch variants from the site with an ID of 1 #}
 {% set variants = craft.variants()
-  .siteId(1)
-  .all() %}
+    .siteId(1)
+    .all() %}
 ```
 
 ```php
@@ -2582,40 +2087,6 @@ Possible values include:
 $variants = \craft\commerce\elements\Variant::find()
     ->siteId(1)
     ->all();
-```
-:::
-
-
-<h4 id="variant-sitesettingsid"><a href="#variant-sitesettingsid" class="header-anchor">#</a> <code>siteSettingsId</code></h4>
-
-Narrows the query results based on the variants’ IDs in the `elements_sites` table.
-
-
-
-Possible values include:
-
-| Value | Fetches variants…
-| - | -
-| `1` | with an `elements_sites` ID of 1.
-| `'not 1'` | not with an `elements_sites` ID of 1.
-| `[1, 2]` | with an `elements_sites` ID of 1 or 2.
-| `['not', 1, 2]` | not with an `elements_sites` ID of 1 or 2.
-
-
-
-::: code
-```twig
-{# Fetch the variant by its ID in the elements_sites table #}
-{% set variant = craft.variants()
-  .siteSettingsId(1)
-  .one() %}
-```
-
-```php
-// Fetch the variant by its ID in the elements_sites table
-$variant = \craft\commerce\elements\Variant::find()
-    ->siteSettingsId(1)
-    ->one();
 ```
 :::
 
@@ -2645,8 +2116,8 @@ Possible values include:
 
 {# Fetch the variant with that slug #}
 {% set variant = craft.variants()
-  .sku(requestedSlug|literal)
-  .one() %}
+    .sku(requestedSlug|literal)
+    .one() %}
 ```
 
 ```php
@@ -2673,7 +2144,6 @@ Possible values include:
 | - | -
 | `'enabled'`  _(default)_ | that are enabled.
 | `'disabled'` | that are disabled.
-| `['not', 'disabled']` | that are not disabled.
 
 
 
@@ -2681,8 +2151,8 @@ Possible values include:
 ```twig
 {# Fetch disabled variants #}
 {% set variants = craft.variants()
-  .status('disabled')
-  .all() %}
+    .status('disabled')
+    .all() %}
 ```
 
 ```php
@@ -2733,8 +2203,8 @@ Possible values include:
 ```twig
 {# Fetch variants with a title that contains "Foo" #}
 {% set variants = craft.variants()
-  .title('*Foo*')
-  .all() %}
+    .title('*Foo*')
+    .all() %}
 ```
 
 ```php
@@ -2758,8 +2228,8 @@ Narrows the query results to only variants that have been soft-deleted.
 ```twig
 {# Fetch trashed variants #}
 {% set variants = craft.variants()
-  .trashed()
-  .all() %}
+    .trashed()
+    .all() %}
 ```
 
 ```php
@@ -2798,8 +2268,8 @@ Narrows the query results based on the variants’ UIDs.
 ```twig
 {# Fetch the variant by its UID #}
 {% set variant = craft.variants()
-  .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
-  .one() %}
+    .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+    .one() %}
 ```
 
 ```php
@@ -2826,9 +2296,9 @@ desired.
 ```twig
 {# Fetch unique variants across all sites #}
 {% set variants = craft.variants()
-  .site('*')
-  .unique()
-  .all() %}
+    .site('*')
+    .unique()
+    .all() %}
 ```
 
 ```php
@@ -2885,8 +2355,8 @@ See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-ele
 ```twig
 {# Fetch variants eager-loaded with the "Related" field’s relations #}
 {% set variants = craft.variants()
-  .with(['related'])
-  .all() %}
+    .with(['related'])
+    .all() %}
 ```
 
 ```php
