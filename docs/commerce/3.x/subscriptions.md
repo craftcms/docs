@@ -102,12 +102,9 @@ Subscription queries support the following parameters:
 
 | Param                                     | Description
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
-| [andRelatedTo](#andrelatedto)             | Narrows the query results to only subscriptions that are related to certain other elements.
-| [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
+| [anyStatus](#anystatus)                   | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
 | [asArray](#asarray)                       | Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce3:craft\commerce\elements\Subscription) objects.
-| [cache](#cache)                           | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+| [clearCachedResult](#clearcachedresult)   | Clears the cached result.
 | [dateCanceled](#datecanceled)             | Narrows the query results based on the subscriptions’ cancellation date.
 | [dateCreated](#datecreated)               | Narrows the query results based on the subscriptions’ creation dates.
 | [dateExpired](#dateexpired)               | Narrows the query results based on the subscriptions’ expiration date.
@@ -115,7 +112,6 @@ Subscription queries support the following parameters:
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the subscriptions’ last-updated dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [gatewayId](#gatewayid)                   | Narrows the query results based on the gateway, per its ID.
-| [getCacheTags](#getcachetags)             |
 | [hasStarted](#hasstarted)                 | Narrows the query results to only subscriptions that have started.
 | [id](#id)                                 | Narrows the query results based on the subscriptions’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -132,12 +128,9 @@ Subscription queries support the following parameters:
 | [plan](#plan)                             | Narrows the query results based on the subscription plan.
 | [planId](#planid)                         | Narrows the query results based on the subscription plans’ IDs.
 | [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
-| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [reference](#reference)                   | Narrows the query results based on the reference.
 | [relatedTo](#relatedto)                   | Narrows the query results to only subscriptions that are related to certain other elements.
-| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#search)                         | Narrows the query results to only subscriptions that match a search query.
-| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the subscriptions’ IDs in the `elements_sites` table.
 | [status](#status)                         | Narrows the query results based on the subscriptions’ statuses.
 | [trashed](#trashed)                       | Narrows the query results to only subscriptions that have been soft-deleted.
 | [trialDays](#trialdays)                   | Narrows the query results based on the number of trial days.
@@ -146,51 +139,9 @@ Subscription queries support the following parameters:
 | [userId](#userid)                         | Narrows the query results based on the subscriptions’ user accounts’ IDs.
 | [with](#with)                             | Causes the query to return matching subscriptions eager-loaded with related elements.
 
-#### `afterPopulate`
+### `anyStatus`
 
-Performs any post-population processing on elements.
-
-
-
-
-
-
-
-
-
-
-#### `andRelatedTo`
-
-Narrows the query results to only subscriptions that are related to certain other elements.
-
-
-
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
-
-
-
-::: code
-```twig
-{# Fetch all subscriptions that are related to myCategoryA and myCategoryB #}
-{% set subscriptions = craft.subscriptions()
-  .relatedTo(myCategoryA)
-  .andRelatedTo(myCategoryB)
-  .all() %}
-```
-
-```php
-// Fetch all subscriptions that are related to $myCategoryA and $myCategoryB
-$subscriptions = \craft\commerce\elements\Subscription::find()
-    ->relatedTo($myCategoryA)
-    ->andRelatedTo($myCategoryB)
-    ->all();
-```
-:::
-
-
-#### `anyStatus`
-
-Removes element filters based on their statuses.
+Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
 
 
 
@@ -200,8 +151,8 @@ Removes element filters based on their statuses.
 ```twig
 {# Fetch all subscriptions, regardless of status #}
 {% set subscriptions = craft.subscriptions()
-  .anyStatus()
-  .all() %}
+    .anyStatus()
+    .all() %}
 ```
 
 ```php
@@ -213,7 +164,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `asArray`
+### `asArray`
 
 Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce3:craft\commerce\elements\Subscription) objects.
 
@@ -225,8 +176,8 @@ Causes the query to return matching subscriptions as arrays of data, rather than
 ```twig
 {# Fetch subscriptions as arrays #}
 {% set subscriptions = craft.subscriptions()
-  .asArray()
-  .all() %}
+    .asArray()
+    .all() %}
 ```
 
 ```php
@@ -238,29 +189,16 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `cache`
+### `clearCachedResult`
 
-Enables query cache for this Query.
-
-
+Clears the cached result.
 
 
 
 
 
 
-
-
-#### `clearCachedResult`
-
-Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
-
-
-
-
-
-
-#### `dateCanceled`
+### `dateCanceled`
 
 Narrows the query results based on the subscriptions’ cancellation date.
 
@@ -280,8 +218,8 @@ Possible values include:
 {% set aWeekAgo = date('7 days ago')|atom %}
 
 {% set subscriptions = craft.subscriptions()
-  .dateCanceled(">= #{aWeekAgo}")
-  .all() %}
+    .dateCanceled(">= #{aWeekAgo}")
+    .all() %}
 ```
 
 ```php
@@ -295,7 +233,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `dateCreated`
+### `dateCreated`
 
 Narrows the query results based on the subscriptions’ creation dates.
 
@@ -318,8 +256,8 @@ Possible values include:
 {% set end = date('first day of this month')|atom %}
 
 {% set subscriptions = craft.subscriptions()
-  .dateCreated(['and', ">= #{start}", "< #{end}"])
-  .all() %}
+    .dateCreated(['and', ">= #{start}", "< #{end}"])
+    .all() %}
 ```
 
 ```php
@@ -334,7 +272,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `dateExpired`
+### `dateExpired`
 
 Narrows the query results based on the subscriptions’ expiration date.
 
@@ -354,8 +292,8 @@ Possible values include:
 {% set aWeekAgo = date('7 days ago')|atom %}
 
 {% set subscriptions = craft.subscriptions()
-  .dateExpired(">= #{aWeekAgo}")
-  .all() %}
+    .dateExpired(">= #{aWeekAgo}")
+    .all() %}
 ```
 
 ```php
@@ -369,7 +307,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `dateSuspended`
+### `dateSuspended`
 
 Narrows the query results based on the subscriptions’ suspension date.
 
@@ -388,8 +326,8 @@ Possible values include:
 {% set aWeekAgo = date('7 days ago')|atom %}
 
 {% set subscriptions = craft.subscriptions()
-  .dateSuspended(">= #{aWeekAgo}")
-  .all() %}
+    .dateSuspended(">= #{aWeekAgo}")
+    .all() %}
 ```
 
 ```php
@@ -403,7 +341,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `dateUpdated`
+### `dateUpdated`
 
 Narrows the query results based on the subscriptions’ last-updated dates.
 
@@ -425,8 +363,8 @@ Possible values include:
 {% set lastWeek = date('1 week ago')|atom %}
 
 {% set subscriptions = craft.subscriptions()
-  .dateUpdated(">= #{lastWeek}")
-  .all() %}
+    .dateUpdated(">= #{lastWeek}")
+    .all() %}
 ```
 
 ```php
@@ -440,7 +378,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `fixedOrder`
+### `fixedOrder`
 
 Causes the query results to be returned in the order specified by [id](#id).
 
@@ -452,9 +390,9 @@ Causes the query results to be returned in the order specified by [id](#id).
 ```twig
 {# Fetch subscriptions in a specific order #}
 {% set subscriptions = craft.subscriptions()
-  .id([1, 2, 3, 4, 5])
-  .fixedOrder()
-  .all() %}
+    .id([1, 2, 3, 4, 5])
+    .fixedOrder()
+    .all() %}
 ```
 
 ```php
@@ -467,7 +405,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `gatewayId`
+### `gatewayId`
 
 Narrows the query results based on the gateway, per its ID.
 
@@ -483,16 +421,7 @@ Possible values include:
 
 
 
-#### `getCacheTags`
-
-
-
-
-
-
-
-
-#### `hasStarted`
+### `hasStarted`
 
 Narrows the query results to only subscriptions that have started.
 
@@ -502,8 +431,8 @@ Narrows the query results to only subscriptions that have started.
 ```twig
 {# Fetch started subscriptions #}
 {% set subscriptions = {twig-function}
-  .hasStarted()
-  .all() %}
+    .hasStarted()
+    .all() %}
 ```
 
 ```php
@@ -515,7 +444,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `id`
+### `id`
 
 Narrows the query results based on the subscriptions’ IDs.
 
@@ -536,8 +465,8 @@ Possible values include:
 ```twig
 {# Fetch the subscription by its ID #}
 {% set subscription = craft.subscriptions()
-  .id(1)
-  .one() %}
+    .id(1)
+    .one() %}
 ```
 
 ```php
@@ -555,7 +484,7 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 :::
 
 
-#### `ignorePlaceholders`
+### `ignorePlaceholders`
 
 Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -569,7 +498,7 @@ elements that were set by [craft\services\Elements::setPlaceholderElement()](htt
 
 
 
-#### `inReverse`
+### `inReverse`
 
 Causes the query results to be returned in reverse order.
 
@@ -581,8 +510,8 @@ Causes the query results to be returned in reverse order.
 ```twig
 {# Fetch subscriptions in reverse #}
 {% set subscriptions = craft.subscriptions()
-  .inReverse()
-  .all() %}
+    .inReverse()
+    .all() %}
 ```
 
 ```php
@@ -594,7 +523,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `isCanceled`
+### `isCanceled`
 
 Narrows the query results to only subscriptions that are canceled.
 
@@ -604,8 +533,8 @@ Narrows the query results to only subscriptions that are canceled.
 ```twig
 {# Fetch canceled subscriptions #}
 {% set subscriptions = {twig-function}
-  .isCanceled()
-  .all() %}
+    .isCanceled()
+    .all() %}
 ```
 
 ```php
@@ -617,7 +546,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `isExpired`
+### `isExpired`
 
 Narrows the query results to only subscriptions that have expired.
 
@@ -627,8 +556,8 @@ Narrows the query results to only subscriptions that have expired.
 ```twig
 {# Fetch expired subscriptions #}
 {% set subscriptions = {twig-function}
-  .isExpired()
-  .all() %}
+    .isExpired()
+    .all() %}
 ```
 
 ```php
@@ -640,7 +569,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `isSuspended`
+### `isSuspended`
 
 Narrows the query results to only subscriptions that are suspended.
 
@@ -650,8 +579,8 @@ Narrows the query results to only subscriptions that are suspended.
 ```twig
 {# Fetch suspended subscriptions #}
 {% set subscriptions = {twig-function}
-  .isSuspended()
-  .all() %}
+    .isSuspended()
+    .all() %}
 ```
 
 ```php
@@ -663,7 +592,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `limit`
+### `limit`
 
 Determines the number of subscriptions that should be returned.
 
@@ -673,8 +602,8 @@ Determines the number of subscriptions that should be returned.
 ```twig
 {# Fetch up to 10 subscriptions  #}
 {% set subscriptions = craft.subscriptions()
-  .limit(10)
-  .all() %}
+    .limit(10)
+    .all() %}
 ```
 
 ```php
@@ -686,7 +615,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `nextPaymentDate`
+### `nextPaymentDate`
 
 Narrows the query results based on the subscriptions’ next payment dates.
 
@@ -706,8 +635,8 @@ Possible values include:
 {% set aWeekFromNow = date('+7 days')|atom %}
 
 {% set subscriptions = craft.subscriptions()
-  .nextPaymentDate("< #{aWeekFromNow}")
-  .all() %}
+    .nextPaymentDate("< #{aWeekFromNow}")
+    .all() %}
 ```
 
 ```php
@@ -721,7 +650,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `offset`
+### `offset`
 
 Determines how many subscriptions should be skipped in the results.
 
@@ -731,8 +660,8 @@ Determines how many subscriptions should be skipped in the results.
 ```twig
 {# Fetch all subscriptions except for the first 3 #}
 {% set subscriptions = craft.subscriptions()
-  .offset(3)
-  .all() %}
+    .offset(3)
+    .all() %}
 ```
 
 ```php
@@ -744,7 +673,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `onTrial`
+### `onTrial`
 
 Narrows the query results to only subscriptions that are on trial.
 
@@ -754,8 +683,8 @@ Narrows the query results to only subscriptions that are on trial.
 ```twig
 {# Fetch trialed subscriptions #}
 {% set subscriptions = {twig-function}
-  .onTrial()
-  .all() %}
+    .onTrial()
+    .all() %}
 ```
 
 ```php
@@ -767,7 +696,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `orderBy`
+### `orderBy`
 
 Determines the order that the subscriptions should be returned in. (If empty, defaults to `dateCreated DESC`.)
 
@@ -777,8 +706,8 @@ Determines the order that the subscriptions should be returned in. (If empty, de
 ```twig
 {# Fetch all subscriptions in order of date created #}
 {% set subscriptions = craft.subscriptions()
-  .orderBy('dateCreated ASC')
-  .all() %}
+    .orderBy('dateCreated ASC')
+    .all() %}
 ```
 
 ```php
@@ -790,7 +719,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `orderId`
+### `orderId`
 
 Narrows the query results based on the order, per its ID.
 
@@ -806,7 +735,7 @@ Possible values include:
 
 
 
-#### `plan`
+### `plan`
 
 Narrows the query results based on the subscription plan.
 
@@ -824,8 +753,8 @@ Possible values include:
 ```twig
 {# Fetch Supporter plan subscriptions #}
 {% set subscriptions = craft.subscriptions()
-  .plan('supporter')
-  .all() %}
+    .plan('supporter')
+    .all() %}
 ```
 
 ```php
@@ -837,7 +766,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `planId`
+### `planId`
 
 Narrows the query results based on the subscription plans’ IDs.
 
@@ -852,7 +781,7 @@ Possible values include:
 
 
 
-#### `preferSites`
+### `preferSites`
 
 If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 
@@ -870,10 +799,10 @@ If this isn’t set, then preference goes to the current site.
 ```twig
 {# Fetch unique subscriptions from Site A, or Site B if they don’t exist in Site A #}
 {% set subscriptions = craft.subscriptions()
-  .site('*')
-  .unique()
-  .preferSites(['a', 'b'])
-  .all() %}
+    .site('*')
+    .unique()
+    .preferSites(['a', 'b'])
+    .all() %}
 ```
 
 ```php
@@ -887,34 +816,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `provisionalDrafts`
-
-Narrows the query results to only provisional drafts.
-
-
-
-
-
-::: code
-```twig
-{# Fetch provisional drafts created by the current user #}
-{% set subscriptions = craft.subscriptions()
-  .provisionalDrafts()
-  .draftCreator(currentUser)
-  .all() %}
-```
-
-```php
-// Fetch provisional drafts created by the current user
-$subscriptions = \craft\commerce\elements\Subscription::find()
-    ->provisionalDrafts()
-    ->draftCreator(Craft::$app->user->identity)
-    ->all();
-```
-:::
-
-
-#### `reference`
+### `reference`
 
 Narrows the query results based on the reference.
 
@@ -923,7 +825,7 @@ Narrows the query results based on the reference.
 
 
 
-#### `relatedTo`
+### `relatedTo`
 
 Narrows the query results to only subscriptions that are related to certain other elements.
 
@@ -937,8 +839,8 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 ```twig
 {# Fetch all subscriptions that are related to myCategory #}
 {% set subscriptions = craft.subscriptions()
-  .relatedTo(myCategory)
-  .all() %}
+    .relatedTo(myCategory)
+    .all() %}
 ```
 
 ```php
@@ -950,34 +852,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `savedDraftsOnly`
-
-Narrows the query results to only unpublished drafts which have been saved after initial creation.
-
-
-
-
-
-::: code
-```twig
-{# Fetch saved, unpublished draft subscriptions #}
-{% set subscriptions = {twig-function}
-  .draftOf(false)
-  .savedDraftsOnly()
-  .all() %}
-```
-
-```php
-// Fetch saved, unpublished draft subscriptions
-$subscriptions = \craft\commerce\elements\Subscription::find()
-    ->draftOf(false)
-    ->savedDraftsOnly()
-    ->all();
-```
-:::
-
-
-#### `search`
+### `search`
 
 Narrows the query results to only subscriptions that match a search query.
 
@@ -994,8 +869,8 @@ See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explana
 
 {# Fetch all subscriptions that match the search query #}
 {% set subscriptions = craft.subscriptions()
-  .search(searchQuery)
-  .all() %}
+    .search(searchQuery)
+    .all() %}
 ```
 
 ```php
@@ -1010,41 +885,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `siteSettingsId`
-
-Narrows the query results based on the subscriptions’ IDs in the `elements_sites` table.
-
-
-
-Possible values include:
-
-| Value | Fetches subscriptions…
-| - | -
-| `1` | with an `elements_sites` ID of 1.
-| `'not 1'` | not with an `elements_sites` ID of 1.
-| `[1, 2]` | with an `elements_sites` ID of 1 or 2.
-| `['not', 1, 2]` | not with an `elements_sites` ID of 1 or 2.
-
-
-
-::: code
-```twig
-{# Fetch the subscription by its ID in the elements_sites table #}
-{% set subscription = craft.subscriptions()
-  .siteSettingsId(1)
-  .one() %}
-```
-
-```php
-// Fetch the subscription by its ID in the elements_sites table
-$subscription = \craft\commerce\elements\Subscription::find()
-    ->siteSettingsId(1)
-    ->one();
-```
-:::
-
-
-#### `status`
+### `status`
 
 Narrows the query results based on the subscriptions’ statuses.
 
@@ -1061,8 +902,8 @@ Possible values include:
 ```twig
 {# Fetch expired subscriptions #}
 {% set subscriptions = {twig-function}
-  .status('expired')
-  .all() %}
+    .status('expired')
+    .all() %}
 ```
 
 ```php
@@ -1074,7 +915,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `trashed`
+### `trashed`
 
 Narrows the query results to only subscriptions that have been soft-deleted.
 
@@ -1086,8 +927,8 @@ Narrows the query results to only subscriptions that have been soft-deleted.
 ```twig
 {# Fetch trashed subscriptions #}
 {% set subscriptions = craft.subscriptions()
-  .trashed()
-  .all() %}
+    .trashed()
+    .all() %}
 ```
 
 ```php
@@ -1099,7 +940,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `trialDays`
+### `trialDays`
 
 Narrows the query results based on the number of trial days.
 
@@ -1108,7 +949,7 @@ Narrows the query results based on the number of trial days.
 
 
 
-#### `uid`
+### `uid`
 
 Narrows the query results based on the subscriptions’ UIDs.
 
@@ -1120,8 +961,8 @@ Narrows the query results based on the subscriptions’ UIDs.
 ```twig
 {# Fetch the subscription by its UID #}
 {% set subscription = craft.subscriptions()
-  .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
-  .one() %}
+    .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+    .one() %}
 ```
 
 ```php
@@ -1133,7 +974,7 @@ $subscription = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `user`
+### `user`
 
 Narrows the query results based on the subscriptions’ user accounts.
 
@@ -1151,8 +992,8 @@ Possible values include:
 ```twig
 {# Fetch the current user's subscriptions #}
 {% set subscriptions = craft.subscriptions()
-  .user(currentUser)
-  .all() %}
+    .user(currentUser)
+    .all() %}
 ```
 
 ```php
@@ -1165,7 +1006,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `userId`
+### `userId`
 
 Narrows the query results based on the subscriptions’ user accounts’ IDs.
 
@@ -1183,8 +1024,8 @@ Possible values include:
 ```twig
 {# Fetch the current user's subscriptions #}
 {% set subscriptions = craft.subscriptions()
-  .userId(currentUser.id)
-  .all() %}
+    .userId(currentUser.id)
+    .all() %}
 ```
 
 ```php
@@ -1197,7 +1038,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `with`
+### `with`
 
 Causes the query to return matching subscriptions eager-loaded with related elements.
 
@@ -1211,8 +1052,8 @@ See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-ele
 ```twig
 {# Fetch subscriptions eager-loaded with the "Related" field’s relations #}
 {% set subscriptions = craft.subscriptions()
-  .with(['related'])
-  .all() %}
+    .with(['related'])
+    .all() %}
 ```
 
 ```php
