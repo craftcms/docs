@@ -1219,7 +1219,8 @@ This is the interface implemented by all entries.
 | `structureId`| `Int` | The element’s structure ID.
 | `isDraft`| `Boolean` | Returns whether this is a draft.
 | `isRevision`| `Boolean` | Returns whether this is a revision.
-| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `revisionId`| `Int` | The revision ID (from the `revisions` table).
+| `draftId`| `Int` | The draft ID (from the `drafts` table).
 | `isUnpublishedDraft`| `Boolean` | Returns whether this is an unpublished draft.
 | `isUnsavedDraft`| `Boolean` | Returns whether this is an unpublished draft. **This field is deprecated.** `isUnpublishedDraft` should be used instead.
 | `draftName`| `String` | The name of the draft.
