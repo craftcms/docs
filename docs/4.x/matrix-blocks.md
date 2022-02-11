@@ -84,9 +84,7 @@ Matrix block queries support the following parameters:
 | [owner](#owner)                             | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
 | [ownerId](#ownerid)                         | Narrows the query results based on the owner element of the Matrix blocks, per the owners’ IDs.
 | [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [provisionalDrafts](#provisionaldrafts)     | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                     | Narrows the query results to only Matrix blocks that are related to certain other elements.
-| [savedDraftsOnly](#saveddraftsonly)         | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#search)                           | Narrows the query results to only Matrix blocks that match a search query.
 | [site](#site)                               | Determines which site(s) the Matrix blocks should be queried in.
 | [siteId](#siteid)                           | Determines which site(s) the Matrix blocks should be queried in, per the site’s ID.
@@ -631,33 +629,6 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 :::
 
 
-#### `provisionalDrafts`
-
-Narrows the query results to only provisional drafts.
-
-
-
-
-
-::: code
-```twig
-{# Fetch provisional drafts created by the current user #}
-{% set MatrixBlocks = craft.matrixBlocks()
-  .provisionalDrafts()
-  .draftCreator(currentUser)
-  .all() %}
-```
-
-```php
-// Fetch provisional drafts created by the current user
-$MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->provisionalDrafts()
-    ->draftCreator(Craft::$app->user->identity)
-    ->all();
-```
-:::
-
-
 #### `relatedTo`
 
 Narrows the query results to only Matrix blocks that are related to certain other elements.
@@ -680,33 +651,6 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 // Fetch all Matrix blocks that are related to $myCategory
 $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->relatedTo($myCategory)
-    ->all();
-```
-:::
-
-
-#### `savedDraftsOnly`
-
-Narrows the query results to only unpublished drafts which have been saved after initial creation.
-
-
-
-
-
-::: code
-```twig
-{# Fetch saved, unpublished draft Matrix blocks #}
-{% set MatrixBlocks = {twig-function}
-  .draftOf(false)
-  .savedDraftsOnly()
-  .all() %}
-```
-
-```php
-// Fetch saved, unpublished draft Matrix blocks
-$MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->draftOf(false)
-    ->savedDraftsOnly()
     ->all();
 ```
 :::

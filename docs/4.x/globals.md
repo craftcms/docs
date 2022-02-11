@@ -121,9 +121,7 @@ Global set queries support the following parameters:
 | [offset](#offset)                         | Determines how many global sets should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the global sets should be returned in. (If empty, defaults to `sortOrder ASC`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                   | Narrows the query results to only global sets that are related to certain other elements.
-| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#search)                         | Narrows the query results to only global sets that match a search query.
 | [site](#site)                             | Determines which site(s) the global sets should be queried in.
 | [siteId](#siteid)                         | Determines which site(s) the global sets should be queried in, per the site’s ID.
@@ -549,33 +547,6 @@ $globalSets = \craft\elements\GlobalSet::find()
 :::
 
 
-#### `provisionalDrafts`
-
-Narrows the query results to only provisional drafts.
-
-
-
-
-
-::: code
-```twig
-{# Fetch provisional drafts created by the current user #}
-{% set globalSets = craft.globalSets()
-  .provisionalDrafts()
-  .draftCreator(currentUser)
-  .all() %}
-```
-
-```php
-// Fetch provisional drafts created by the current user
-$globalSets = \craft\elements\GlobalSet::find()
-    ->provisionalDrafts()
-    ->draftCreator(Craft::$app->user->identity)
-    ->all();
-```
-:::
-
-
 #### `relatedTo`
 
 Narrows the query results to only global sets that are related to certain other elements.
@@ -598,33 +569,6 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 // Fetch all global sets that are related to $myCategory
 $globalSets = \craft\elements\GlobalSet::find()
     ->relatedTo($myCategory)
-    ->all();
-```
-:::
-
-
-#### `savedDraftsOnly`
-
-Narrows the query results to only unpublished drafts which have been saved after initial creation.
-
-
-
-
-
-::: code
-```twig
-{# Fetch saved, unpublished draft global sets #}
-{% set globalSets = {twig-function}
-  .draftOf(false)
-  .savedDraftsOnly()
-  .all() %}
-```
-
-```php
-// Fetch saved, unpublished draft global sets
-$globalSets = \craft\elements\GlobalSet::find()
-    ->draftOf(false)
-    ->savedDraftsOnly()
     ->all();
 ```
 :::
