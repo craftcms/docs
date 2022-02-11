@@ -1139,6 +1139,12 @@ Parses the passed field value as Markdown.
 | `flavor`| `String` | The “flavor” of Markdown the input should be interpreted with. Accepts the same arguments as yii\helpers\Markdown::process().
 | `inlineOnly`| `Boolean` | Whether to only parse inline elements, omitting any `<p>` tags.
 
+
+### The `parseRefs` directive
+Parse the element references on the field.
+| Argument | Type | Description
+| - | - | -
+
 <!-- END DIRECTIVES -->
 
 ## Pre-defined interfaces
