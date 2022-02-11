@@ -1142,8 +1142,6 @@ Parses the passed field value as Markdown.
 
 ### The `parseRefs` directive
 Parse the element references on the field.
-| Argument | Type | Description
-| - | - | -
 
 <!-- END DIRECTIVES -->
 
