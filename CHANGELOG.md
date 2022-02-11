@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-02-11
+### Added
+- Added plugin naming tips.
+
 ## 2022-02-08
 ### Added
 - Documented `clear-deprecations`, `plugin/list`, `users/activation-url`, and `users/password-reset-url` commands added in Craft 3.7.31.
