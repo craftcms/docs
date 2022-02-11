@@ -102,6 +102,25 @@ Don’t disable this setting until **all** environments have been updated to Cra
 
 
 
+### `allowSimilarTags`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$allowSimilarTags](craft4:craft\config\GeneralConfig::$allowSimilarTags)
+
+</div>
+
+Whether users should be allowed to create similarly-named tags.
+
+
+
 ### `allowUpdates`
 
 <div class="compact">
@@ -120,25 +139,6 @@ Defined by
 Whether Craft should allow system and plugin updates in the control panel, and plugin installation from the Plugin Store.
 
 This setting will automatically be disabled if <config3:allowAdminChanges> is disabled.
-
-
-
-### `allowSimilarTags`
-
-<div class="compact">
-
-Allowed types
-:  [boolean](https://php.net/language.types.boolean)
-
-Default value
-:  `false`
-
-Defined by
-:  [GeneralConfig::$allowSimilarTags](craft4:craft\config\GeneralConfig::$allowSimilarTags)
-
-</div>
-
-Whether users should be allowed to create similarly-named tags.
 
 
 
@@ -1138,6 +1138,29 @@ php craft utils/update-usernames
 
 
 
+### `useFileLocks`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$useFileLocks](craft4:craft\config\GeneralConfig::$useFileLocks)
+
+</div>
+
+Whether to grab an exclusive lock on a file when writing to it by using the `LOCK_EX` flag.
+
+Some file systems, such as NFS, do not support exclusive file locking.
+
+If `null`, Craft will try to detect if the underlying file system supports exclusive file locking and cache the results.
+
+
+
 ### `useIframeResizer`
 
 <div class="compact">
@@ -1172,29 +1195,6 @@ page as well for this to work. You can conditionally include it for only Live Pr
 ::: tip
 You can customize the behavior of iFrame Resizer via the <config3:previewIframeResizerOptions> config setting.
 :::
-
-
-
-### `useFileLocks`
-
-<div class="compact">
-
-Allowed types
-:  [boolean](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
-
-Default value
-:  `null`
-
-Defined by
-:  [GeneralConfig::$useFileLocks](craft4:craft\config\GeneralConfig::$useFileLocks)
-
-</div>
-
-Whether to grab an exclusive lock on a file when writing to it by using the `LOCK_EX` flag.
-
-Some file systems, such as NFS, do not support exclusive file locking.
-
-If `null`, Craft will try to detect if the underlying file system supports exclusive file locking and cache the results.
 
 
 
@@ -2168,6 +2168,29 @@ If you don’t, the only way they can set their password is to go through your �
 
 
 
+### `elevatedSessionDuration`
+
+<div class="compact">
+
+Allowed types
+:  `mixed`
+
+Default value
+:  `300` (5 minutes)
+
+Defined by
+:  [GeneralConfig::$elevatedSessionDuration](craft4:craft\config\GeneralConfig::$elevatedSessionDuration)
+
+</div>
+
+The amount of time a user’s elevated session will last, which is required for some sensitive actions (e.g. user group/permission assignment).
+
+Set to `0` to disable elevated session support.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+
+
 ### `enableBasicHttpAuth`
 
 <div class="compact">
@@ -2208,29 +2231,6 @@ Defined by
 Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtection> is enabled. If false, the CSRF token will be
 stored in session under the `csrfTokenName` config setting name. Note that while storing CSRF tokens in session increases security,
 it requires starting a session for every page that a CSRF token is needed, which may degrade site performance.
-
-
-
-### `elevatedSessionDuration`
-
-<div class="compact">
-
-Allowed types
-:  `mixed`
-
-Default value
-:  `300` (5 minutes)
-
-Defined by
-:  [GeneralConfig::$elevatedSessionDuration](craft4:craft\config\GeneralConfig::$elevatedSessionDuration)
-
-</div>
-
-The amount of time a user’s elevated session will last, which is required for some sensitive actions (e.g. user group/permission assignment).
-
-Set to `0` to disable elevated session support.
-
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -2383,27 +2383,6 @@ This should definitely be enabled if you are accepting SVG uploads from untruste
 
 
 
-### `securityKey`
-
-<div class="compact">
-
-Allowed types
-:  [string](https://php.net/language.types.string)
-
-Default value
-:  `null`
-
-Defined by
-:  [GeneralConfig::$securityKey](craft4:craft\config\GeneralConfig::$securityKey)
-
-</div>
-
-A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](craft4:craft\services\Security).
-
-This value should be the same across all environments. If this key ever changes, any data that was encrypted with it will be inaccessible.
-
-
-
 ### `secureHeaders`
 
 <div class="compact">
@@ -2447,6 +2426,27 @@ List of headers to check for determining whether the connection is made via HTTP
 See [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) for more details.
 
 If not set, the default [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) value will be used.
+
+
+
+### `securityKey`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string)
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$securityKey](craft4:craft\config\GeneralConfig::$securityKey)
+
+</div>
+
+A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](craft4:craft\services\Security).
+
+This value should be the same across all environments. If this key ever changes, any data that was encrypted with it will be inaccessible.
 
 
 
@@ -3168,28 +3168,6 @@ Whether the `transform` directive should be disabled for the GraphQL API.
 
 
 
-### `enableGraphqlIntrospection`
-
-<div class="compact">
-
-Allowed types
-:  [boolean](https://php.net/language.types.boolean)
-
-Default value
-:  `true`
-
-Defined by
-:  [GeneralConfig::$enableGraphqlIntrospection](craft4:craft\config\GeneralConfig::$enableGraphqlIntrospection)
-
-Since
-:  3.6.0
-
-</div>
-
-Whether GraphQL introspection queries are allowed. Defaults to `true` and is always allowed in the CP.
-
-
-
 ### `enableGql`
 
 <div class="compact">
@@ -3242,7 +3220,7 @@ caching logic and setting the `result` property.
 
 
 
-### `setGraphqlDatesToSystemTimeZone`
+### `enableGraphqlIntrospection`
 
 <div class="compact">
 
@@ -3250,17 +3228,17 @@ Allowed types
 :  [boolean](https://php.net/language.types.boolean)
 
 Default value
-:  `false`
+:  `true`
 
 Defined by
-:  [GeneralConfig::$setGraphqlDatesToSystemTimeZone](craft4:craft\config\GeneralConfig::$setGraphqlDatesToSystemTimeZone)
+:  [GeneralConfig::$enableGraphqlIntrospection](craft4:craft\config\GeneralConfig::$enableGraphqlIntrospection)
 
 Since
-:  3.7.0
+:  3.6.0
 
 </div>
 
-Whether dates returned by the GraphQL API should be set to the system time zone by default, rather than UTC.
+Whether GraphQL introspection queries are allowed. Defaults to `true` and is always allowed in the CP.
 
 
 
@@ -3368,6 +3346,28 @@ Since
 </div>
 
 Whether the <config3:gqlTypePrefix> config setting should have an impact on `query`, `mutation`, and `subscription` types.
+
+
+
+### `setGraphqlDatesToSystemTimeZone`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$setGraphqlDatesToSystemTimeZone](craft4:craft\config\GeneralConfig::$setGraphqlDatesToSystemTimeZone)
+
+Since
+:  3.7.0
+
+</div>
+
+Whether dates returned by the GraphQL API should be set to the system time zone by default, rather than UTC.
 
 
 
