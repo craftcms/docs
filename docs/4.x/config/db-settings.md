@@ -245,10 +245,10 @@ PostgreSQL’s `search_path` setting should be configured to prioritize the desi
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string)
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
-:  `''`
+:  `null`
 
 Defined by
 :  [DbConfig::$tablePrefix](craft4:craft\config\DbConfig::$tablePrefix)
