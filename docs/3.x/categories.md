@@ -149,9 +149,7 @@ Category queries support the following parameters:
 | [positionedBefore](#positionedbefore)     | Narrows the query results to only categories that are positioned before another category in its structure.
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 | [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the category that comes immediately before another category in its structure.
-| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                   | Narrows the query results to only categories that are related to certain other elements.
-| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#search)                         | Narrows the query results to only categories that match a search query.
 | [siblingOf](#siblingof)                   | Narrows the query results to only categories that are siblings of another category in its structure.
 | [site](#site)                             | Determines which site(s) the categories should be queried in.
@@ -987,33 +985,6 @@ $category = \craft\elements\Category::find()
 :::
 
 
-#### `provisionalDrafts`
-
-Narrows the query results to only provisional drafts.
-
-
-
-
-
-::: code
-```twig
-{# Fetch provisional drafts created by the current user #}
-{% set categories = craft.categories()
-  .provisionalDrafts()
-  .draftCreator(currentUser)
-  .all() %}
-```
-
-```php
-// Fetch provisional drafts created by the current user
-$categories = \craft\elements\Category::find()
-    ->provisionalDrafts()
-    ->draftCreator(Craft::$app->user->identity)
-    ->all();
-```
-:::
-
-
 #### `relatedTo`
 
 Narrows the query results to only categories that are related to certain other elements.
@@ -1036,33 +1007,6 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 // Fetch all categories that are related to $myCategory
 $categories = \craft\elements\Category::find()
     ->relatedTo($myCategory)
-    ->all();
-```
-:::
-
-
-#### `savedDraftsOnly`
-
-Narrows the query results to only unpublished drafts which have been saved after initial creation.
-
-
-
-
-
-::: code
-```twig
-{# Fetch saved, unpublished draft categories #}
-{% set categories = {twig-function}
-  .draftOf(false)
-  .savedDraftsOnly()
-  .all() %}
-```
-
-```php
-// Fetch saved, unpublished draft categories
-$categories = \craft\elements\Category::find()
-    ->draftOf(false)
-    ->savedDraftsOnly()
     ->all();
 ```
 :::
