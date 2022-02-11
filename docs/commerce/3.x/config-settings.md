@@ -59,7 +59,6 @@ Since
 
 </div>
 
-
 Commerce’s default control panel view. (Defaults to order index.)
 
 
@@ -180,7 +179,7 @@ Allowed types
 :  `mixed`
 
 Default value
-:  `3600`
+:  `3600` (1 hour)
 
 Defined by
 :  [Settings::$activeCartDuration](commerce3:craft\commerce\models\Settings::$activeCartDuration)
@@ -190,7 +189,7 @@ Since
 
 </div>
 
-How long a cart should go without being updated before it’s considered inactive. (Defaults to one hour.)
+How long a cart should go without being updated before it’s considered inactive.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](craft3:craft\helpers\ConfigHelper::durationInSeconds()) for a list of supported value types.
 
@@ -215,6 +214,29 @@ Since
 </div>
 
 Whether carts are can be marked as completed without a payment.
+
+
+
+### `allowEmptyCartOnCheckout`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [Settings::$allowEmptyCartOnCheckout](commerce3:craft\commerce\models\Settings::$allowEmptyCartOnCheckout)
+
+Since
+:  2.2
+
+</div>
+
+Whether carts are allowed to be empty on checkout.
+
 
 
 ### `autoSetCartShippingMethodOption`
@@ -252,28 +274,6 @@ Defined by
 </div>
 
 Whether the customer’s primary shipping and billing addresses should be set automatically on new carts.
-
-
-
-### `allowEmptyCartOnCheckout`
-
-<div class="compact">
-
-Allowed types
-:  [boolean](https://php.net/language.types.boolean)
-
-Default value
-:  `false`
-
-Defined by
-:  [Settings::$allowEmptyCartOnCheckout](commerce3:craft\commerce\models\Settings::$allowEmptyCartOnCheckout)
-
-Since
-:  2.2
-
-</div>
-
-Whether carts are allowed to be empty on checkout.
 
 
 
@@ -351,7 +351,7 @@ Allowed types
 :  `mixed`
 
 Default value
-:  `7776000`
+:  `7776000` (90 days)
 
 Defined by
 :  [Settings::$purgeInactiveCartsDuration](commerce3:craft\commerce\models\Settings::$purgeInactiveCartsDuration)
@@ -484,7 +484,26 @@ Defined by
 
 Human-friendly reference number format for orders. Result must be unique.
 
-See [Order Numbers](orders-carts.md#order-numbers).
+See [Order Numbers](orders.md#order-numbers).
+
+
+
+### `pdfAllowRemoteImages`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [Settings::$pdfAllowRemoteImages](commerce3:craft\commerce\models\Settings::$pdfAllowRemoteImages)
+
+</div>
+
+Whether to allow non-local images in generated order PDFs.
 
 
 
@@ -530,7 +549,7 @@ The full list of supported paper sizes can be found [in the dompdf library](http
 
 
 
-### `pdfAllowRemoteImages`
+### `requireBillingAddressAtCheckout`
 
 <div class="compact">
 
@@ -541,11 +560,11 @@ Default value
 :  `false`
 
 Defined by
-:  [Settings::$pdfAllowRemoteImages](commerce3:craft\commerce\models\Settings::$pdfAllowRemoteImages)
+:  [Settings::$requireBillingAddressAtCheckout](commerce3:craft\commerce\models\Settings::$requireBillingAddressAtCheckout)
 
 </div>
 
-Whether to allow non-local images in generated order PDFs.
+Whether a billing address is required before making payment on an order.
 
 
 
@@ -565,25 +584,6 @@ Defined by
 </div>
 
 Whether a shipping address is required before making payment on an order.
-
-
-
-### `requireBillingAddressAtCheckout`
-
-<div class="compact">
-
-Allowed types
-:  [boolean](https://php.net/language.types.boolean)
-
-Default value
-:  `false`
-
-Defined by
-:  [Settings::$requireBillingAddressAtCheckout](commerce3:craft\commerce\models\Settings::$requireBillingAddressAtCheckout)
-
-</div>
-
-Whether a billing address is required before making payment on an order.
 
 
 
@@ -624,7 +624,7 @@ Defined by
 URL for a user to resolve billing issues with their subscription.
 
 ::: tip
-The example templates include [a template for this page](https://github.com/craftcms/commerce/tree/main/example-templates/dist/shop/plans/update-billing-details.twig).
+The example templates include [a template for this page](https://github.com/craftcms/commerce/tree/master/example-templates/shop/plans/update-billing-details.twig).
 :::
 
 
@@ -692,7 +692,8 @@ Defined by
 
 </div>
 
-Whether [partial payment](making-payments.md#checkout-with-partial-payment) can be made from the front end when the gateway allows them.
+Whether [partial payment](https://craftcms.com/docs/commerce/3.x/making-payments.html#checkout-with-partial-payment)
+can be made from the front end when the gateway allows them.
 
 The default `false` does not allow partial payments on the front end.
 
@@ -730,7 +731,7 @@ the `inputs` variable.
   <p>Redirecting to payment page...</p>
   <p>
     {{ inputs|raw }}
-    <button type="submit">Continue</button>
+    <input type="submit" value="Continue">
   </p>
 </form>
 </body>
@@ -743,6 +744,7 @@ images and inline styles to reduce HTTP requests.
 :::
 
 If empty (default), each gateway will decide how to handle after-payment redirects.
+
 
 
 ### `paymentCurrency`
