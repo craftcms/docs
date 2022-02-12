@@ -188,9 +188,10 @@ Some `redirect` param tokens have been renamed:
 
 ## GraphQL
 
-| GraphQL Argument |
-| ---------------- |
-| `immediately`    |
+| GraphQL Argument | What to do instead
+| ---------------- | --------------------
+| `immediately`    | all GraphQL transforms are now processed immediately
+| `enabledForSite` | `status`
 
 ## Console Commands
 
