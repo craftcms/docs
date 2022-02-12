@@ -133,6 +133,14 @@ Clears Asset caches.
 
 Clears Asset indexing data.
 
+<h3 id="clear-caches-compiled-classes">
+    <a href="#clear-caches-compiled-classes" class="header-anchor">#</a>
+    <code>clear-caches/compiled-classes</code>
+</h3>
+
+
+Clears the caches.
+
 <h3 id="clear-caches-compiled-templates">
     <a href="#clear-caches-compiled-templates" class="header-anchor">#</a>
     <code>clear-caches/compiled-templates</code>
@@ -240,6 +248,11 @@ Can be any of the following:
 
 Converts tables’ character sets and collations. (MySQL only)
 
+Example:
+```
+php craft db/convert-charset utf8 utf8_unicode_ci
+```
+
 <h4 id="db-convert-charset-parameters" class="command-subheading">Parameters</h4>
 
 charset
@@ -260,51 +273,15 @@ collation
 
 Restores a database backup.
 
+Example:
+```
+php craft db/restore ./my-backup.sql
+```
+
 <h4 id="db-restore-parameters" class="command-subheading">Parameters</h4>
 
 path
 :  The path to the database backup file.
-
-
-## `docubot/event-dumper`
-
-
-<h3 id="docubot-event-dumper-index">
-    <a href="#docubot-event-dumper-index" class="header-anchor">#</a>
-    <code>docubot/event-dumper</code>
-</h3>
-
-
-<h4 id="docubot-event-dumper-index-parameters" class="command-subheading">Parameters</h4>
-
-dest
-: 
-
-
-
-<h4 id="docubot-event-dumper-index-options" class="command-subheading">Options</h4>
-
-
---mode
-: `'craft'` or `'commerce'`
-
-
-## `docubot/gql`
-
-
-<h3 id="docubot-gql-generate">
-    <a href="#docubot-gql-generate" class="header-anchor">#</a>
-    <code>docubot/gql/generate</code>
-</h3>
-
-
-Generate GraphQL Documentation
-
-<h4 id="docubot-gql-generate-options" class="command-subheading">Options</h4>
-
-
---target-file
-: The target file path to use.
 
 
 ## `fixture`
@@ -410,10 +387,6 @@ the ones that were deleted long enough ago to be ready for hard-deletion
 per the `softDeleteDuration` config setting.
 
 
---empty-deprecated-tables
-: Whether old database tables should be emptied out.
-
-
 ## `graphql`
 
 Allows you to manage GraphQL schemas.
@@ -500,6 +473,122 @@ Prints a given GraphQL schema.
 : Whether full schema should be printed or dumped.
 
 
+## `help`
+
+Provides help information about console commands.
+
+<h3 id="help-index">
+    <a href="#help-index" class="header-anchor">#</a>
+    <code>help</code>
+</h3>
+
+
+Displays available commands or the detailed information
+about a particular command.
+
+Example:
+
+```
+$ php craft help db/backup
+
+DESCRIPTION
+
+Creates a new database backup.
+
+Example:
+php craft db/backup ./my-backups/
+
+
+USAGE
+
+craft db/backup [path] [...options...]
+
+- path: string
+  The path the database backup should be created at.
+  Can be any of the following:
+
+  - A full file path
+  - A folder path (backup will be saved in there with a dynamically-generated name)
+  - A filename (backup will be saved in the working directory with the given name)
+  - Blank (backup will be saved to the `storage/backups/` folder with a dynamically-generated name)
+
+
+OPTIONS
+
+--appconfig: string
+  custom application configuration file path.
+  If not set, default application configuration is used.
+
+--color: boolean, 0 or 1
+  whether to enable ANSI color in the output.
+  If not set, ANSI color will only be enabled for terminals that support it.
+
+--help, -h: boolean, 0 or 1 (defaults to 0)
+  whether to display help information about current command.
+
+--interactive: boolean, 0 or 1 (defaults to 1)
+  whether to run the command interactively.
+
+--overwrite: boolean, 0 or 1 (defaults to 0)
+  Whether to overwrite an existing backup file, if a specific file path is given.
+
+--silent-exit-on-exception: boolean, 0 or 1
+  if true - script finish with `ExitCode::OK` in case of exception.
+  false - `ExitCode::UNSPECIFIED_ERROR`.
+  Default: `YII_ENV_TEST`
+
+--zip: boolean, 0 or 1 (defaults to 0)
+  Whether the backup should be saved as a zip file.
+
+$
+```
+
+
+<h4 id="help-index-parameters" class="command-subheading">Parameters</h4>
+
+command
+:  The name of the command to show help about.
+If not provided, all available commands will be displayed.
+
+
+
+<h3 id="help-list">
+    <a href="#help-list" class="header-anchor">#</a>
+    <code>help/list</code>
+</h3>
+
+
+Lists all available controllers and actions in machine-readable format.
+
+<h3 id="help-list-action-options">
+    <a href="#help-list-action-options" class="header-anchor">#</a>
+    <code>help/list-action-options</code>
+</h3>
+
+
+List all available options for `action` in machine-readable format.
+
+<h4 id="help-list-action-options-parameters" class="command-subheading">Parameters</h4>
+
+action
+: Route to action.
+
+
+
+<h3 id="help-usage">
+    <a href="#help-usage" class="header-anchor">#</a>
+    <code>help/usage</code>
+</h3>
+
+
+Displays usage information for `action`.
+
+<h4 id="help-usage-parameters" class="command-subheading">Parameters</h4>
+
+action
+: Route to action.
+
+
 ## `index-assets`
 
 Allows you to re-index assets in volumes.
@@ -528,22 +617,46 @@ Re-indexes assets across all volumes.
 
 
 
+<h3 id="index-assets-cleanup">
+    <a href="#index-assets-cleanup" class="header-anchor">#</a>
+    <code>index-assets/cleanup</code>
+</h3>
+
+
+Removes all CLI indexing sessions.
+
+<h4 id="index-assets-cleanup-options" class="command-subheading">Options</h4>
+
+
+--cache-remote-images
+: Whether remote-stored images should be locally cached in the process.
+
+
+--create-missing-assets
+: Whether to auto-create new asset records when missing.
+
+
+--delete-missing-assets
+: Whether to delete all the asset records that have their files missing.
+
+
+
 <h3 id="index-assets-one">
     <a href="#index-assets-one" class="header-anchor">#</a>
     <code>index-assets/one</code>
 </h3>
 
 
-Re-indexes assets from the given volume handle ($startAt = 0).
+Re-indexes assets from the given volume handle.
 
 <h4 id="index-assets-one-parameters" class="command-subheading">Parameters</h4>
 
 handle
 :  The handle of the volume to index.
-It is also possible to provide a volume sub-path to index, e.g. `./craft index-assets/one volume-handle/path/to/folder`.
+You can optionally provide a volume sub-path, e.g. `php craft index-assets/one volume-handle/path/to/folder`.
 
 startAt
-: 
+:  Index of the asset to start with, which defaults to `0`.
 
 
 
@@ -586,27 +699,27 @@ Runs the install migration.
 
 
 --email
-: The default email address for the first user to create during install
+: The default email address for the first user to create during install.
 
 
 --username
-: The default username for the first user to create during install
+: The default username for the first user to create during install.
 
 
 --password
-: The default password for the first user to create during install
+: The default password for the first user to create during install.
 
 
 --site-name
-: The default site name for the first site to create during install
+: The default site name for the first site to create during install.
 
 
 --site-url
-: The default site url for the first site to create during install
+: The default site URL for the first site to create during install.
 
 
 --language
-: The default langcode for the first site to create during install
+: The default langcode for the first site to create during install.
 
 
 ## `invalidate-tags`
@@ -659,7 +772,7 @@ Tests sending an email with the current mailer settings.
 
 
 --to
-: The email address to send the test email to.
+: Email address that should receive the test message.
 
 
 ## `migrate`
@@ -970,20 +1083,19 @@ version
 </h3>
 
 
-Upgrades the application by applying new migrations.
+Upgrades Craft by applying new migrations.
 
-For example,
-
+Example:
 ```
-craft migrate     # apply all new migrations
-craft migrate 3   # apply the first 3 new migrations
+php craft migrate     # apply all new migrations
+php craft migrate 3   # apply the first 3 new migrations
 ```
 
 <h4 id="migrate-up-parameters" class="command-subheading">Parameters</h4>
 
 limit
-:  the number of new migrations to be applied. If 0, it means
-applying all available new migrations.
+:  The number of new migrations to be applied. If `0`, every new migration
+will be applied.
 
 
 
@@ -1009,8 +1121,8 @@ applying all available new migrations.
 </h3>
 
 
-Disables `system.live` project config value—bypassing any `allowAdminChanges` config setting restrictions—
-meant for temporary use during the deployment process.
+Disables `system.live` project config value—bypassing any `allowAdminChanges` config setting
+restrictions—meant for temporary use during the deployment process.
 
 <h4 id="off-index-options" class="command-subheading">Options</h4>
 
@@ -1047,15 +1159,14 @@ meant for temporary use during the deployment process.
 
 Turns the system on.
 
-**Example**
-
+Example:
 ```
 $ php craft on
 The system is now online.
 ```
 ## `plugin`
 
-Manage plugins.
+Manages plugins.
 
 <h3 id="plugin-disable">
     <a href="#plugin-disable" class="header-anchor">#</a>
@@ -1232,7 +1343,7 @@ Applies project config file changes.
 </h3>
 
 
-See a diff of the pending project config YAML changes.
+Prints a diff of the pending project config YAML changes.
 
 <h4 id="project-config-diff-options" class="command-subheading">Options</h4>
 
@@ -1264,7 +1375,7 @@ Updates the `dateModified` value in `config/project/project.yaml`, attempting to
 </h3>
 
 
-Writes out the current project config as YAML files to the `config/project/` folder, discarding any pending YAML changes.
+Writes out the currently-loaded project config as YAML files to the `config/project/` folder, discarding any pending YAML changes.
 ## `queue`
 
 Manages the queue.
@@ -1468,15 +1579,15 @@ Re-saves assets.
 : The value that should be set on the --set attribute.
     
     The following value types are supported:
-    - An attribute name: --to myCustomField
-    - An object template: --to "={myCustomField|lower}"
-    - A raw value: --to "=foo bar"
-    - A PHP arrow function: --to "fn($element) => $element->callSomething()"
-    - An empty value: --to :empty:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - An empty value: `--to :empty:`
 
 
 --if-empty
-: Whether the --set attribute should only be set if it doesn’t have a value.
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
 
@@ -1539,15 +1650,15 @@ Re-saves categories.
 : The value that should be set on the --set attribute.
     
     The following value types are supported:
-    - An attribute name: --to myCustomField
-    - An object template: --to "={myCustomField|lower}"
-    - A raw value: --to "=foo bar"
-    - A PHP arrow function: --to "fn($element) => $element->callSomething()"
-    - An empty value: --to :empty:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - An empty value: `--to :empty:`
 
 
 --if-empty
-: Whether the --set attribute should only be set if it doesn’t have a value.
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
 
@@ -1622,15 +1733,15 @@ Re-saves entries.
 : The value that should be set on the --set attribute.
     
     The following value types are supported:
-    - An attribute name: --to myCustomField
-    - An object template: --to "={myCustomField|lower}"
-    - A raw value: --to "=foo bar"
-    - A PHP arrow function: --to "fn($element) => $element->callSomething()"
-    - An empty value: --to :empty:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - An empty value: `--to :empty:`
 
 
 --if-empty
-: Whether the --set attribute should only be set if it doesn’t have a value.
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
 
@@ -1642,7 +1753,7 @@ Re-saves entries.
 
 Re-saves Matrix blocks.
 
-Note that you must supply the --field or --element-id argument for this to work properly.
+You must supply the `--field` or `--element-id` argument for this to work properly.
 
 <h4 id="resave-matrix-blocks-options" class="command-subheading">Options</h4>
 
@@ -1699,15 +1810,15 @@ Note that you must supply the --field or --element-id argument for this to work 
 : The value that should be set on the --set attribute.
     
     The following value types are supported:
-    - An attribute name: --to myCustomField
-    - An object template: --to "={myCustomField|lower}"
-    - A raw value: --to "=foo bar"
-    - A PHP arrow function: --to "fn($element) => $element->callSomething()"
-    - An empty value: --to :empty:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - An empty value: `--to :empty:`
 
 
 --if-empty
-: Whether the --set attribute should only be set if it doesn’t have a value.
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
 
@@ -1770,15 +1881,15 @@ Re-saves tags.
 : The value that should be set on the --set attribute.
     
     The following value types are supported:
-    - An attribute name: --to myCustomField
-    - An object template: --to "={myCustomField|lower}"
-    - A raw value: --to "=foo bar"
-    - A PHP arrow function: --to "fn($element) => $element->callSomething()"
-    - An empty value: --to :empty:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - An empty value: `--to :empty:`
 
 
 --if-empty
-: Whether the --set attribute should only be set if it doesn’t have a value.
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
 
@@ -1841,15 +1952,15 @@ Re-saves users.
 : The value that should be set on the --set attribute.
     
     The following value types are supported:
-    - An attribute name: --to myCustomField
-    - An object template: --to "={myCustomField|lower}"
-    - A raw value: --to "=foo bar"
-    - A PHP arrow function: --to "fn($element) => $element->callSomething()"
-    - An empty value: --to :empty:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - An empty value: `--to :empty:`
 
 
 --if-empty
-: Whether the --set attribute should only be set if it doesn’t have a value.
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
 ## `serve`
@@ -2073,7 +2184,7 @@ Updates Craft and plugins.
 </h3>
 
 
-Installs dependencies based on the current composer.json & composer.lock.
+Installs dependencies based on the current `composer.json` & `composer.lock`.
 
 <h3 id="update-info">
     <a href="#update-info" class="header-anchor">#</a>
@@ -2094,9 +2205,8 @@ Updates Craft and/or plugins.
 <h4 id="update-update-parameters" class="command-subheading">Parameters</h4>
 
 handle
-: 
-The update handle (`all`, `craft`, or a plugin handle). You can pass
-multiple handles separated by spaces, and you can update to a specific
+:  The update handle (`all`, `craft`, or a plugin handle).
+You can pass multiple handles separated by spaces, and you can update to a specific
 version using the syntax `<handle>:<version>`.
 
 
@@ -2126,7 +2236,7 @@ Manages user accounts.
 </h3>
 
 
-Generate an activation URL for a pending user.
+Generates an activation URL for a pending user.
 
 <h4 id="users-activation-url-parameters" class="command-subheading">Parameters</h4>
 
@@ -2208,7 +2318,7 @@ user
 </h3>
 
 
-Generate a URL to impersonate a user.
+Generates a URL to impersonate a user.
 
 <h4 id="users-impersonate-parameters" class="command-subheading">Parameters</h4>
 
@@ -2231,7 +2341,7 @@ Lists admin users.
 </h3>
 
 
-Generate a password reset URL for a user.
+Generates a password reset URL for a user.
 
 <h4 id="users-password-reset-url-parameters" class="command-subheading">Parameters</h4>
 
