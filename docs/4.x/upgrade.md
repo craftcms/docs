@@ -154,7 +154,8 @@ Some element query params have been removed:
 
 | Element Type | Old Param          | What to do instead
 | ------------ | ------------------ | -------------------------
-| |
+| all          | `locale`           | `site` or `siteId`
+| all          | `localeEnabled`    | `status`
 
 Some element query params have been renamed in Craft 4. The old params have been deprecated, but will continue to work until Craft 5.
 
@@ -164,11 +165,13 @@ Some element query params have been renamed in Craft 4. The old params have been
 
 ### Query Methods
 
-Some element query methods have been renamed in Craft 4. The old methods have been deprecated, but will continue to work until Craft 5.
+Some element query methods have been removed in Craft 4.
 
-| Old Method      | New Method
+| Old Method      | What to do instead
 | --------------- | --------------------------------------------------------
-| |
+| `find()`        | `all()`
+| `first()`       | `one()`
+| `last()`        | `inReverse().one()`
 
 ## Elements
 
