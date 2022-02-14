@@ -40,7 +40,7 @@ A big architectural change for Nitro 2 was the addition of the proxy container t
 
 ### Sites
 
-Each site has its own PHP, Git, and npm+node version and can be independently configured to use [Xdebug](xdebug.md) or customized PHP [settings](php-settings.md) or [extensions](extensions.md). It exposes ports 8080, 9000, and 9003 to the proxy, which you can reach via the hostname on ports 80 (http) and 443 (https) from your host machine.
+Each site has its own PHP, Git, and npm+node version and can be independently configured to use [Xdebug](xdebug.md), customized [PHP settings](php-settings.md), and [extensions](extensions.md). It exposes ports 8080, 9000, and 9003 to the proxy, which you can reach via the hostname on ports 80 (http) and 443 (https) from your host machine.
 
 ### Databases
 
