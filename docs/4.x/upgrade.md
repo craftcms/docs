@@ -7,7 +7,7 @@ The first step to upgrading your site to Craft 4 is updating the CMS itself.
 Before you begin, make sure that:
 
 - you’ve reviewed the changes in Craft 4 further down this page
-- all your environments meet Craft 4’s [minimum requirements](requirements.md), with [PHP 8.0+ and MySQL 5.7.8+](https://craftcms.com/knowledge-base/preparing-for-craft-4#upgrade-php-and-mySQL)
+- all your environments meet Craft 4’s [minimum requirements](requirements.md), with [PHP 8.0.2+ and MySQL 5.7.8+](https://craftcms.com/knowledge-base/preparing-for-craft-4#upgrade-php-and-mySQL)
 - your site is running [the latest **Craft 3.7** release](https://craftcms.com/knowledge-base/preparing-for-craft-4#update-to-the-latest-version-of-craft-3)
 - your plugins are all up-to-date, and you’ve verified that they’ve been updated for Craft 4 (check your plugins’ Craft 4 compatibility status from the **Updates** page in the Craft 3 control panel)
 - you’ve made sure there are no [deprecation warnings](https://craftcms.com/knowledge-base/preparing-for-craft-4#fix-deprecation-warnings) anywhere that need fixing
