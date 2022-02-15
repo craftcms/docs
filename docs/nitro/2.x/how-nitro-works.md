@@ -42,6 +42,33 @@ A big architectural change for Nitro 2 was the addition of the proxy container t
 
 Each site has its own PHP, Git, and npm+node version and can be independently configured to use [Xdebug](xdebug.md), customized [PHP settings](php-settings.md), and [extensions](extensions.md). It exposes ports 8080, 9000, and 9003 to the proxy, which you can reach via the hostname on ports 80 (http) and 443 (https) from your host machine.
 
+#### Site Paths
+
+Each site uses its own container, a virtual environment that’s sort of like a machine within your machine. The filesystem paths Craft uses will be relative to this container and not your host machine, which is important to know when you’re configuring Craft to use any paths.
+
+When you create a Nitro site, you map a directory on your machine—like `/Users/oli/dev/my-project`—to a container, where it becomes `/app`:
+
+| Host Machine Path                      | Nitro Container Path |
+| -------------------------------------- | -------------------- |
+| `/Users/oli/dev/my-project`            | `/app`               |
+| `/Users/oli/dev/my-project/web`        | `/app/web`           |
+| `/Users/oli/dev/my-project/web/assets` | `/app/web/assets`    |
+
+This is what happens by default; if you configure your Nitro site with a higher path and deeper webroot…
+
+```yaml
+path: ~/dev
+webroot: my-project/web
+```
+
+…the paths above would be `/app/my-project`, `/app/my-project/web`, and `/app/my-project/web/assets` respectively.
+
+If you’re seeing an error about a path like this, you may need to adjust a machine-relative path to one of these container-relative paths Craft can see:
+
+> Invalid Configuration – yii\base\InvalidConfigException\
+> /Users/oli/dev/my-project/web/cpresources doesn’t exist or isn’t writable by PHP.
+
+
 ### Databases
 
 Each database engine has its own container and can host however many databases you need.

@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-02-14
+### Added
+- Added an overview of Nitro’s site paths.
+
 ## 2022-02-11
 ### Added
 - Added plugin naming tips.
