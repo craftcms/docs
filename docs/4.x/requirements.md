@@ -32,6 +32,7 @@ You can use the [Craft Server Check](https://github.com/craftcms/server-check) s
 
 ## Required PHP Extensions
 
+- [BCMath](https://www.php.net/manual/en/book.bc.php)
 - [ctype](https://secure.php.net/manual/en/book.ctype.php)
 - [cURL](http://php.net/manual/en/book.curl.php)
 - [GD](http://php.net/manual/en/book.image.php) or [ImageMagick](http://php.net/manual/en/book.imagick.php)
