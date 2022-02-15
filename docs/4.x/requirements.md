@@ -37,6 +37,7 @@ You can use the [Craft Server Check](https://github.com/craftcms/server-check) s
 - [cURL](http://php.net/manual/en/book.curl.php)
 - [GD](http://php.net/manual/en/book.image.php) or [ImageMagick](http://php.net/manual/en/book.imagick.php)
 - [iconv](http://php.net/manual/en/book.iconv.php)
+- [Intl](http://php.net/manual/en/book.intl.php)
 - [JSON](http://php.net/manual/en/book.json.php)
 - [Multibyte String](http://php.net/manual/en/book.mbstring.php)
 - [OpenSSL](http://php.net/manual/en/book.openssl.php)
@@ -48,7 +49,7 @@ You can use the [Craft Server Check](https://github.com/craftcms/server-check) s
 - [Zip](http://php.net/manual/en/book.zip.php)
 - [DOM](http://php.net/manual/en/book.dom.php)
 
-We recommend ImageMagick for expanded image handling options and the [Intl](http://php.net/manual/en/book.intl.php) extension for rich internationalization support.
+We recommend ImageMagick for expanded image handling options.
 
 ## Optional PHP Methods and Configurations
 
