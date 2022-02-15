@@ -652,6 +652,10 @@ You can also specify a custom class name that should be added to the root `<svg>
 {{ svg('@webroot/icons/lemon.svg')|attr({ class: 'lemon-icon' }) }}
 ```
 
+::: tip
+Consider caching the output, especially if you’re loading SVG files from remote volumes or URLs, so Craft doesn’t download the file each time your template is rendered.
+:::
+
 ## `source`
 
 Returns the content of a template without rendering it.
