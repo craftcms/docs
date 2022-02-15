@@ -1108,16 +1108,16 @@ Directives are not regulated by permissions and they affect how the returned dat
 <!-- BEGIN DIRECTIVES -->
 
 ### The `formatDateTime` directive
-This directive allows for formatting any date to the desired format. It can be applied to all fields, but changes anything only when applied to a DateTime field.
+Formats a date in the desired format. Can be applied to all fields, only changes output of DateTime fields.
 | Argument | Type | Description
 | - | - | -
-| `format`| `String` | This specifies the format to use. This can be `short`, `medium`, `long`, `full`, an [ICU date format](http://userguide.icu-project.org/formatparse/datetime), or a [PHP date format](https://www.php.net/manual/en/function.date.php). It defaults to the [Atom date time format](https://www.php.net/manual/en/class.datetimeinterface.php#datetime.constants.atom]).
+| `format`| `String` | The format to use. Can be `short`, `medium`, `long`, `full`, an [ICU date format](http://userguide.icu-project.org/formatparse/datetime), or a [PHP date format](https://www.php.net/manual/en/function.date.php). Defaults to the [Atom date time format](https://www.php.net/manual/en/class.datetimeinterface.php#datetime.constants.atom]).
 | `timezone`| `String` | The full name of the timezone (e.g., America/New_York). Defaults to UTC if no timezone set on the field.
 | `locale`| `String` | The locale to use when formatting the date. (E.g., en-US)
 
 
 ### The `transform` directive
-This directive is used to return a URL for an [asset transform](https://craftcms.com/docs/3.x/image-transforms.html). It accepts the same arguments you would use for a transform in Craft and adds the `immediately` argument.
+Returns a URL for an [asset transform](https://craftcms.com/docs/3.x/image-transforms.html). Accepts the same arguments you would use for a transform in Craft and adds the `immediately` argument.
 | Argument | Type | Description
 | - | - | -
 | `handle`| `String` | The handle of the named transform to use.
@@ -1141,7 +1141,7 @@ Parses the passed field value as Markdown.
 
 
 ### The `parseRefs` directive
-Parse the element references on the field.
+Parses the element references on the field.
 
 <!-- END DIRECTIVES -->
 

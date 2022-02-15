@@ -240,6 +240,11 @@ Can be any of the following:
 
 Converts tables’ character sets and collations. (MySQL only)
 
+Example:
+```
+php craft db/convert-charset utf8 utf8_unicode_ci
+```
+
 <h4 id="db-convert-charset-parameters" class="command-subheading">Parameters</h4>
 
 charset
@@ -259,6 +264,11 @@ collation
 
 
 Restores a database backup.
+
+Example:
+```
+php craft db/restore ./my-backup.sql
+```
 
 <h4 id="db-restore-parameters" class="command-subheading">Parameters</h4>
 
@@ -534,16 +544,16 @@ Re-indexes assets across all volumes.
 </h3>
 
 
-Re-indexes assets from the given volume handle ($startAt = 0).
+Re-indexes assets from the given volume handle.
 
 <h4 id="index-assets-one-parameters" class="command-subheading">Parameters</h4>
 
 handle
 :  The handle of the volume to index.
-It is also possible to provide a volume sub-path to index, e.g. `./craft index-assets/one volume-handle/path/to/folder`.
+You can optionally provide a volume sub-path, e.g. `php craft index-assets/one volume-handle/path/to/folder`.
 
 startAt
-: 
+:  Index of the asset to start with, which defaults to `0`.
 
 
 
@@ -586,27 +596,27 @@ Runs the install migration.
 
 
 --email
-: The default email address for the first user to create during install
+: The default email address for the first user to create during install.
 
 
 --username
-: The default username for the first user to create during install
+: The default username for the first user to create during install.
 
 
 --password
-: The default password for the first user to create during install
+: The default password for the first user to create during install.
 
 
 --site-name
-: The default site name for the first site to create during install
+: The default site name for the first site to create during install.
 
 
 --site-url
-: The default site url for the first site to create during install
+: The default site URL for the first site to create during install.
 
 
 --language
-: The default langcode for the first site to create during install
+: The default langcode for the first site to create during install.
 
 
 ## `invalidate-tags`
@@ -659,7 +669,7 @@ Tests sending an email with the current mailer settings.
 
 
 --to
-: The email address to send the test email to.
+: Email address that should receive the test message.
 
 
 ## `migrate`
@@ -970,20 +980,19 @@ version
 </h3>
 
 
-Upgrades the application by applying new migrations.
+Upgrades Craft by applying new migrations.
 
-For example,
-
+Example:
 ```
-craft migrate     # apply all new migrations
-craft migrate 3   # apply the first 3 new migrations
+php craft migrate     # apply all new migrations
+php craft migrate 3   # apply the first 3 new migrations
 ```
 
 <h4 id="migrate-up-parameters" class="command-subheading">Parameters</h4>
 
 limit
-:  the number of new migrations to be applied. If 0, it means
-applying all available new migrations.
+:  The number of new migrations to be applied. If `0`, every new migration
+will be applied.
 
 
 
@@ -1009,8 +1018,8 @@ applying all available new migrations.
 </h3>
 
 
-Disables `system.live` project config value—bypassing any `allowAdminChanges` config setting restrictions—
-meant for temporary use during the deployment process.
+Disables `system.live` project config value—bypassing any `allowAdminChanges` config setting
+restrictions—meant for temporary use during the deployment process.
 
 <h4 id="off-index-options" class="command-subheading">Options</h4>
 
@@ -1047,15 +1056,14 @@ meant for temporary use during the deployment process.
 
 Turns the system on.
 
-**Example**
-
+Example:
 ```
 $ php craft on
 The system is now online.
 ```
 ## `plugin`
 
-Manage plugins.
+Manages plugins.
 
 <h3 id="plugin-disable">
     <a href="#plugin-disable" class="header-anchor">#</a>
@@ -1232,7 +1240,7 @@ Applies project config file changes.
 </h3>
 
 
-See a diff of the pending project config YAML changes.
+Prints a diff of the pending project config YAML changes.
 
 <h4 id="project-config-diff-options" class="command-subheading">Options</h4>
 
@@ -1264,7 +1272,7 @@ Updates the `dateModified` value in `config/project/project.yaml`, attempting to
 </h3>
 
 
-Writes out the current project config as YAML files to the `config/project/` folder, discarding any pending YAML changes.
+Writes out the currently-loaded project config as YAML files to the `config/project/` folder, discarding any pending YAML changes.
 ## `queue`
 
 Manages the queue.
@@ -1468,15 +1476,15 @@ Re-saves assets.
 : The value that should be set on the --set attribute.
     
     The following value types are supported:
-    - An attribute name: --to myCustomField
-    - An object template: --to "={myCustomField|lower}"
-    - A raw value: --to "=foo bar"
-    - A PHP arrow function: --to "fn($element) => $element->callSomething()"
-    - An empty value: --to :empty:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - An empty value: `--to :empty:`
 
 
 --if-empty
-: Whether the --set attribute should only be set if it doesn’t have a value.
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
 
@@ -1539,15 +1547,15 @@ Re-saves categories.
 : The value that should be set on the --set attribute.
     
     The following value types are supported:
-    - An attribute name: --to myCustomField
-    - An object template: --to "={myCustomField|lower}"
-    - A raw value: --to "=foo bar"
-    - A PHP arrow function: --to "fn($element) => $element->callSomething()"
-    - An empty value: --to :empty:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - An empty value: `--to :empty:`
 
 
 --if-empty
-: Whether the --set attribute should only be set if it doesn’t have a value.
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
 
@@ -1622,15 +1630,15 @@ Re-saves entries.
 : The value that should be set on the --set attribute.
     
     The following value types are supported:
-    - An attribute name: --to myCustomField
-    - An object template: --to "={myCustomField|lower}"
-    - A raw value: --to "=foo bar"
-    - A PHP arrow function: --to "fn($element) => $element->callSomething()"
-    - An empty value: --to :empty:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - An empty value: `--to :empty:`
 
 
 --if-empty
-: Whether the --set attribute should only be set if it doesn’t have a value.
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
 
@@ -1642,7 +1650,7 @@ Re-saves entries.
 
 Re-saves Matrix blocks.
 
-Note that you must supply the --field or --element-id argument for this to work properly.
+You must supply the `--field` or `--element-id` argument for this to work properly.
 
 <h4 id="resave-matrix-blocks-options" class="command-subheading">Options</h4>
 
@@ -1699,15 +1707,15 @@ Note that you must supply the --field or --element-id argument for this to work 
 : The value that should be set on the --set attribute.
     
     The following value types are supported:
-    - An attribute name: --to myCustomField
-    - An object template: --to "={myCustomField|lower}"
-    - A raw value: --to "=foo bar"
-    - A PHP arrow function: --to "fn($element) => $element->callSomething()"
-    - An empty value: --to :empty:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - An empty value: `--to :empty:`
 
 
 --if-empty
-: Whether the --set attribute should only be set if it doesn’t have a value.
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
 
@@ -1770,15 +1778,15 @@ Re-saves tags.
 : The value that should be set on the --set attribute.
     
     The following value types are supported:
-    - An attribute name: --to myCustomField
-    - An object template: --to "={myCustomField|lower}"
-    - A raw value: --to "=foo bar"
-    - A PHP arrow function: --to "fn($element) => $element->callSomething()"
-    - An empty value: --to :empty:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - An empty value: `--to :empty:`
 
 
 --if-empty
-: Whether the --set attribute should only be set if it doesn’t have a value.
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
 
@@ -1841,15 +1849,15 @@ Re-saves users.
 : The value that should be set on the --set attribute.
     
     The following value types are supported:
-    - An attribute name: --to myCustomField
-    - An object template: --to "={myCustomField|lower}"
-    - A raw value: --to "=foo bar"
-    - A PHP arrow function: --to "fn($element) => $element->callSomething()"
-    - An empty value: --to :empty:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - An empty value: `--to :empty:`
 
 
 --if-empty
-: Whether the --set attribute should only be set if it doesn’t have a value.
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
 ## `serve`
@@ -2122,7 +2130,7 @@ Updates Craft and plugins.
 </h3>
 
 
-Installs dependencies based on the current composer.json & composer.lock.
+Installs dependencies based on the current `composer.json` & `composer.lock`.
 
 <h3 id="update-info">
     <a href="#update-info" class="header-anchor">#</a>
@@ -2143,9 +2151,8 @@ Updates Craft and/or plugins.
 <h4 id="update-update-parameters" class="command-subheading">Parameters</h4>
 
 handle
-: 
-The update handle (`all`, `craft`, or a plugin handle). You can pass
-multiple handles separated by spaces, and you can update to a specific
+:  The update handle (`all`, `craft`, or a plugin handle).
+You can pass multiple handles separated by spaces, and you can update to a specific
 version using the syntax `<handle>:<version>`.
 
 
@@ -2175,7 +2182,7 @@ Manages user accounts.
 </h3>
 
 
-Generate an activation URL for a pending user.
+Generates an activation URL for a pending user.
 
 <h4 id="users-activation-url-parameters" class="command-subheading">Parameters</h4>
 
@@ -2257,7 +2264,7 @@ user
 </h3>
 
 
-Generate a URL to impersonate a user.
+Generates a URL to impersonate a user.
 
 <h4 id="users-impersonate-parameters" class="command-subheading">Parameters</h4>
 
@@ -2274,13 +2281,21 @@ user
 
 Lists admin users.
 
+<h3 id="users-logout-all">
+    <a href="#users-logout-all" class="header-anchor">#</a>
+    <code>users/logout-all</code>
+</h3>
+
+
+Logs all users out of the system.
+
 <h3 id="users-password-reset-url">
     <a href="#users-password-reset-url" class="header-anchor">#</a>
     <code>users/password-reset-url</code>
 </h3>
 
 
-Generate a password reset URL for a user.
+Generates a password reset URL for a user.
 
 <h4 id="users-password-reset-url-parameters" class="command-subheading">Parameters</h4>
 
