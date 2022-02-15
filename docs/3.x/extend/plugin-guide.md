@@ -12,6 +12,17 @@ Before you begin working on a plugin, you need to decide on a few things:
   Your plugin name must not begin with “Craft” or an include an [edition](plugin-editions.md)-sounding word like “Lite”, “Plus”, or “Pro”.
   :::
 
+### Naming Your Plugin
+
+Choose a plugin name that will age well and possibly save your future self time:
+
+- **Do** add `craft-` as a prefix in your GitHub repository name, e.g. `craft-foo`.\
+This differentiates any Craft plugins from other projects.
+- **Don’t** reference the Craft version in your plugin’s name, folder, or repository URL.\
+It’ll require more work and licensing considerations if you update it for another major Craft release. (`craft-foo`, not `craft3-foo`.)
+- **Do** keep your Composer package name reasonably concise.\
+It’s more convenient for someone to type `composer require acme/craft-thinginator` than `composer require acme/craft-super-advanced-thinginator-by-acme`.
+
 ## Setting up the basic file structure
 
 To create a plugin, create a new directory for it somewhere on your computer. A common approach is to store them in a `~/dev/` folder alongside your Craft projects:
