@@ -68,6 +68,9 @@ If you’re seeing an error about a path like this, you may need to adjust a mac
 > Invalid Configuration – yii\base\InvalidConfigException\
 > /Users/oli/dev/my-project/web/cpresources doesn’t exist or isn’t writable by PHP.
 
+::: tip
+If you prefer to learn by adventure, use the [nitro ssh](commands.md#ssh) command to pop into the site container and look around. (You can always use `pwd` to output the current directory.)
+:::
 
 ### Databases
 
