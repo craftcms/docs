@@ -84,6 +84,8 @@ Matrix block queries support the following parameters:
 | [owner](#owner)                             | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
 | [ownerId](#ownerid)                         | Narrows the query results based on the owner element of the Matrix blocks, per the owners’ IDs.
 | [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [primaryOwner](#primaryowner)               | Sets the [primaryOwnerId](#primaryownerid) and [siteId](#siteid) parameters based on a given element.
+| [primaryOwnerId](#primaryownerid)           | Narrows the query results based on the primary owner element of the Matrix blocks, per the owners’ IDs.
 | [relatedTo](#relatedto)                     | Narrows the query results to only Matrix blocks that are related to certain other elements.
 | [search](#search)                           | Narrows the query results to only Matrix blocks that match a search query.
 | [site](#site)                               | Determines which site(s) the Matrix blocks should be queried in.
@@ -624,6 +626,61 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->site('*')
     ->unique()
     ->preferSites(['a', 'b'])
+    ->all();
+```
+:::
+
+
+#### `primaryOwner`
+
+Sets the [primaryOwnerId](#primaryownerid) and [siteId](#siteid) parameters based on a given element.
+
+
+
+::: code
+```twig
+{# Fetch Matrix blocks created for this entry #}
+{% set MatrixBlocks = craft.matrixBlocks()
+  .primaryOwner(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch Matrix blocks created for this entry
+$MatrixBlocks = \craft\elements\MatrixBlock::find()
+    ->primaryOwner($myEntry)
+    ->all();
+```
+:::
+
+
+#### `primaryOwnerId`
+
+Narrows the query results based on the primary owner element of the Matrix blocks, per the owners’ IDs.
+
+Possible values include:
+
+| Value | Fetches Matrix blocks…
+| - | -
+| `1` | created for an element with an ID of 1.
+| `'not 1'` | not created for an element with an ID of 1.
+| `[1, 2]` | created for an element with an ID of 1 or 2.
+| `['not', 1, 2]` | not created for an element with an ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch Matrix blocks created for an element with an ID of 1 #}
+{% set MatrixBlocks = craft.matrixBlocks()
+  .primaryOwnerId(1)
+  .all() %}
+```
+
+```php
+// Fetch Matrix blocks created for an element with an ID of 1
+$MatrixBlocks = \craft\elements\MatrixBlock::find()
+    ->primaryOwnerId(1)
     ->all();
 ```
 :::
