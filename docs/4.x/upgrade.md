@@ -207,6 +207,10 @@ Craft 4’s Assets have the option of including a native `alt` field for alterna
 
 ![Native Alternative Text field in a Field Layout](./images/native-alternative-text-field-layout.png)
 
+::: warning
+`alt` is now a reserved word for Asset Volume field layouts. If you have a custom `alt` field already, you’ll want to change the handle before upgrading to Craft 4.
+:::
+
 If you’re already using your own custom field for this, you can [use Craft’s resave command(s)](https://craftcms.com/knowledge-base/bulk-resaving-elements#resaving-with-specific-field-values) to migrate to the new `alt` field:
 
 1. In the control panel, drag Craft’s `alt` field into each relevant field layout.
