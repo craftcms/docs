@@ -54,6 +54,7 @@ The MySQL user you tell Craft to connect with must have the following privileges
 - `INDEX`
 - `DROP`
 - `REFERENCES`
+- `LOCK TABLES`
 
 ## CP Browser Requirements
 
