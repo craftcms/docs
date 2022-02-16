@@ -125,3 +125,5 @@ Some user permissions have been split into more granular alternatives:
 | `editPeerEntryDrafts:<uid>`  | `viewPeerEntryDrafts:<uid>`<br>`savePeerEntryDrafts:<uid>`
 
 ## Writing an Upgrade Migration
+
+- JSON column support: https://github.com/craftcms/cms/pull/9089
