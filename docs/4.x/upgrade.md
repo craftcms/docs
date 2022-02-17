@@ -145,6 +145,35 @@ Twig 3’s operators (`in`, `<`, `>`, `<=`, `>=`, `==`, `!=`) are more strict co
 
 ## Collections
 
+Craft 4 adds the [Illuminate Collections](https://packagist.org/packages/illuminate/collections) package, which offers a more convenient and consistent way of working with arrays and collections of things.
+
+Element queries, for example, now include a `collect()` method that returns query results as one of these collections instead of an array:
+
+::: code
+```twig
+{# Array #}
+{% set posts = craft.entries()
+  .section('blog')
+  .all() %}
+
+{# Collection #}
+{% set posts = craft.entries()
+  .section('blog')
+  .collect() %}
+```
+```php
+// Array
+$posts = \craft\elements\Entry::find()
+    ->section('blog')
+    ->all();
+
+// Collection
+$posts = \craft\elements\Entry::find()
+    ->section('blog')
+    ->collect();
+```
+:::
+
 ## Element Queries
 
 ### Query Params
