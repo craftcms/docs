@@ -601,6 +601,44 @@ module.exports = {
     }
   },
   sidebarExtra: {
+    "4.x": {
+      "/extend/": [
+        {
+          title: "Class Reference",
+          icon: "/docs/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/api/v4/"
+        },
+        {
+          title: "Back to Craft Docs",
+          icon: "/docs/icons/icon-back.svg",
+          link: "/4.x/"
+        }
+      ],
+      "/testing/": [
+        {
+          title: "Back to Craft Docs",
+          icon: "/docs/icons/icon-back.svg",
+          link: "/4.x/"
+        }
+      ],
+      "/": [
+        {
+          title: "Extending Craft",
+          icon: "/docs/icons/icon-book.svg",
+          link: "/4.x/extend/"
+        },
+        {
+          title: "Testing Craft",
+          icon: "/docs/icons/icon-flask.svg",
+          link: "/4.x/testing/"
+        },
+        {
+          title: "Class Reference",
+          icon: "/docs/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/api/v4/"
+        },
+      ]
+    },
     "3.x": {
       "/extend/": [
         {
