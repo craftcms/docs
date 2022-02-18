@@ -33,6 +33,10 @@ Now that you’ve upgraded your install to use Craft 4, please take some time to
 
 Once you’ve verified everything’s looking great, commit your updated `composer.json`, `composer.lock`, and `config/project/` directory and roll those changes out normally into each additional environment.
 
+::: tip
+If you’re using MySQL, we recommend running [`php craft db/convert-charset`](console-commands.md#db-convert-charset) along with the upgrade process to ensure optimal database performance.
+:::
+
 ### Troubleshooting
 
 ## Configuration
