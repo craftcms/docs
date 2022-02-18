@@ -48,11 +48,23 @@ The following core service names have changed:
 
 ### Control Panel Template Hooks
 
-The following control panel [template hooks](template-hooks.md) have been renamed:
+The following control panel [template hooks](template-hooks.md) have been removed:
 
-| Old                              | New
-| -------------------------------- | ----------------------------
-| |
+- `cp.assets.edit.content`
+- `cp.assets.edit.details`
+- `cp.assets.edit.meta`
+- `cp.assets.edit.settings`
+- `cp.assets.edit`
+- `cp.categories.edit.content`
+- `cp.categories.edit.details`
+- `cp.categories.edit.meta`
+- `cp.categories.edit.settings`
+- `cp.categories.edit`
+- `cp.entries.edit.content`
+- `cp.entries.edit.details`
+- `cp.entries.edit.meta`
+- `cp.entries.edit.settings`
+- `cp.entries.edit`
 
 ## Queue Jobs
 
