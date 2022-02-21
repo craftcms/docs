@@ -5,6 +5,7 @@ module.exports = {
   icon: "/docs/icons/commerce.svg",
   baseDir: "commerce",
   versions: [
+    ["4.x", { label: "4.x" }],
     ["3.x", { label: "3.x" }],
     ["2.x", { label: "2.x" }],
     ["1.x", { label: "1.x" }]
@@ -13,6 +14,7 @@ module.exports = {
   searchPlaceholder: "Search the Commerce docs (Press “/” to focus)",
   primarySet: true,
   sidebar: {
+    "4.x": {},
     "3.x": {
       "/extend/": [
         {
