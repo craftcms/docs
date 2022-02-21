@@ -10,5 +10,5 @@ Craft Commerce gives web developers an enjoyable platform to build hand-crafted 
 
 ::: tip
 Do yourself a big favor and learn [Craft CMS](https://craftcms.com/) before embarking on a Craft Commerce project.
-Reading the [Craft CMS documentation](https://docs.craftcms.com/) first will also make it easier to understand the Craft Commerce documentation.
+Reading the [Craft CMS documentation](https://craftcms.com/docs/) first will also make it easier to understand the Craft Commerce documentation.
 :::
