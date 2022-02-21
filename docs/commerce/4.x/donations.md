@@ -1,6 +1,6 @@
 # Donations
 
-Donations can be added to the cart using the [donation purchasable](commerce3:craft\commerce\elements\Donation). This is a separate element type from products and variants, and unlike a product the donation element does not belong to a “product type”.
+Donations can be added to the cart using the [donation purchasable](commerce4:craft\commerce\elements\Donation). This is a separate element type from products and variants, and unlike a product the donation element does not belong to a “product type”.
 
 There is a single donation element installed when you install Craft Commerce. The donation element settings are found in the control panel under **Commerce** → **Store Settings** → **Donations**.
 
