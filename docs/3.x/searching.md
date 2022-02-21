@@ -67,7 +67,7 @@ Searching for… | will find elements…
 `body:*` | where the `body` field contains any value.
 `-body:*` | where the `body` field is empty.
 
-The `subLeft` and `subRight` search options, when set to `true`, prepend and append an implicit `*` to the search string respectively—meaning it won’t have any effect when used explicitly if it’s already enabled by default.
+The `subLeft` and `subRight` search options, when set to `true`, prepend and append an implicit `*` to the search string respectively—meaning the `*` won’t have any effect when used explicitly if it’s already added by default.
 
 ## Searching for Specific Element Attributes
 
