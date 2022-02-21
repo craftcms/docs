@@ -54,7 +54,7 @@ Searching for… | will find elements…
 
 ### Wildcard Syntax
 
-Depending on your [`defaultSearchTermOptions`](config3:defaultSearchTermOptions) config setting, you may also be able to use a wildcard character (`*`) in search keywords:
+You can use a wildcard character (`*`) to modify search behavior:
 
 Searching for… | will find elements…
 -|-
@@ -67,7 +67,7 @@ Searching for… | will find elements…
 `body:*` | where the `body` field contains any value.
 `-body:*` | where the `body` field is empty.
 
-The `subLeft` and `subRight` search options, when set to `true`, prepend and append an implicit `*` to the search string respectively—meaning the `*` won’t have any effect when used explicitly if it’s already added by default.
+The exact behavior will depend on your [`defaultSearchTermOptions`](config3:defaultSearchTermOptions) config setting, where `subLeft` and `subRight`—when set to `true`—add a wildcard to search keywords by default behind the scenes.
 
 ## Searching for Specific Element Attributes
 
