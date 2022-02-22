@@ -147,6 +147,37 @@ Some template functions have been removed completely:
 
 Twig 3’s operators (`in`, `<`, `>`, `<=`, `>=`, `==`, `!=`) are more strict comparing strings to integers and floats. Make sure this doesn’t have any unintended consequences!
 
+## Element Queries
+
+::: warning
+Element queries can no longer be traversed or accessed like an array. Use a query execution method such as `all()`, `collect()`, or `one()` to fetch the results before working with them.
+:::
+
+### Query Params
+
+Some element query params have been removed:
+
+| Element Type | Old Param          | What to do instead
+| ------------ | ------------------ | -------------------------
+| all          | `locale`           | `site` or `siteId`
+| all          | `localeEnabled`    | `status`
+
+Some element query params have been renamed in Craft 4. The old params have been deprecated, but will continue to work until Craft 5.
+
+| Element Type | Old Param                | New Param
+| ------------ | ------------------------ | ----------------------------
+| all          | `anyStatus`              | `status(null)`
+
+### Query Methods
+
+Some element query methods have been removed in Craft 4.
+
+| Old Method      | What to do instead
+| --------------- | --------------------------------------------------------
+| `find()`        | `all()`
+| `first()`       | `one()`
+| `last()`        | `inReverse().one()`
+
 ## Collections
 
 Craft 4 adds the [Illuminate Collections](https://packagist.org/packages/illuminate/collections) package, which offers a more convenient and consistent way of working with arrays and collections of things.
@@ -177,33 +208,6 @@ $posts = \craft\elements\Entry::find()
     ->collect();
 ```
 :::
-
-## Element Queries
-
-### Query Params
-
-Some element query params have been removed:
-
-| Element Type | Old Param          | What to do instead
-| ------------ | ------------------ | -------------------------
-| all          | `locale`           | `site` or `siteId`
-| all          | `localeEnabled`    | `status`
-
-Some element query params have been renamed in Craft 4. The old params have been deprecated, but will continue to work until Craft 5.
-
-| Element Type | Old Param                | New Param
-| ------------ | ------------------------ | ----------------------------
-| all          | `anyStatus`              | `status(null)`
-
-### Query Methods
-
-Some element query methods have been removed in Craft 4.
-
-| Old Method      | What to do instead
-| --------------- | --------------------------------------------------------
-| `find()`        | `all()`
-| `first()`       | `one()`
-| `last()`        | `inReverse().one()`
 
 ## Elements
 
