@@ -45,6 +45,8 @@ The following core service names have changed:
 - The `limitField` macro in the `_components/fieldtypes/elementfieldsettings` control panel template has been renamed to `limitFields`.
 - Added the `button`, `submitButton`, `fs`, and `fsField` macros to the `_includes/forms` control panel template.
 - Added the `htmx.org` JavaScript library.
+- Removed the `categories/_edit` control panel template.
+- Removed the `entries/_edit` control panel template.
 
 ### Control Panel Template Hooks
 
@@ -60,6 +62,7 @@ The following control panel [template hooks](template-hooks.md) have been remove
 - `cp.categories.edit.meta`
 - `cp.categories.edit.settings`
 - `cp.categories.edit`
+- `cp.elements.edit`
 - `cp.entries.edit.content`
 - `cp.entries.edit.details`
 - `cp.entries.edit.meta`
@@ -108,6 +111,8 @@ The following control panel [template hooks](template-hooks.md) have been remove
 - Removed `craft\web\twig\variables\CraftVariable::EVENT_DEFINE_COMPONENTS`. `EVENT_INIT` can be used instead.
 
 ## Controller Actions
+
+## Symfony Mailer
 
 ## User Permissions
 
