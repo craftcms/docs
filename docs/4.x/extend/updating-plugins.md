@@ -1,7 +1,5 @@
 # Updating Plugins for Craft 4
 
-TODO: write, obviously
-
 ::: tip
 If you think something is missing, please [create an issue](https://github.com/craftcms/docs/issues/new).
 :::
@@ -18,18 +16,26 @@ Some events, permissions, and controller actions have changed largely in support
 - The condition builder, which is integral to conditional fields, custom sources, and dynamically-controlled relations
 - Inactive users
 
-
 ### Plugin Store Considerations
 
 It’s best to update any existing plugin for Craft 4 rather than creating a new one with its own handle. A separate plugin complicates the developer experience, licensing, and migration path.
 
 ## Services
 
+### Added
+
+- `craft\services\Conditions` is globally accessible for creating conditions and condition rules for the new condition builder.
+
 ### Removed
 
 The following core services have been removed:
 
-- `craft\services\EntryRevisions`
+| Old                              | What to do instead
+| -------------------------------- | --------------------------------
+| `craft\services\AssetTransforms` | `craft\services\ImageTransforms`
+| `craft\services\ElementIndexes`  | `craft\services\ElementSources`
+| `craft\services\EntryRevisions`  |
+| `craft\services\SystemSettings`  |
 
 ## Components
 
@@ -80,11 +86,28 @@ The following control panel [template hooks](template-hooks.md) have been remove
 - Deprecated the `categories/save-category` action. `elements/save` should be used instead.
 - Deprecated the `entries/save-entry` action. `elements/save` should be used instead.
 
+## Elements
+
+### Removed
+
+| Old                                             | What to do instead
+| ----------------------------------------------- | ---------------------------------------------------------------------
+| `craft\base\Element::ATTR_STATUS_CONFLICTED`    |
+| `craft\base\Element::getFieldStatus()`          | Fields’ `getStatus()` methods
+| `craft\base\Element::getHasFreshContent()`      | `getIsFresh()`
+| `craft\base\Element::getIsProvisionalDraft()`   | `$isProvisionalDraft`
+| `craft\base\Element::getIsUnsavedDraft()`       | `getIsUnpublishedDraft()`
+| `craft\base\Element::isDeletable()`             | `canDelete()`
+| `craft\base\Element::isEditable()`              | `canView()` and `canSave()`
+| `craft\base\ElementInterface::getEditorHtml()`  | Element edit forms are now exclusively driven by their field layout.
+| `craft\base\ElementInterface::getIsDeletable()` | `canDelete()`
+| `craft\base\ElementInterface::getIsEditable()`  | `canView()` and `canSave()`
+
 ## Events
 
 ### Changed
 
-`craft\gql\TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS` is now triggered when actually resolving fields for a GraphQL type, rather than when the type is first created.
+The `craft\gql\TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS` event is now triggered when actually resolving fields for a GraphQL type, rather than when the type is first created.
 
 The following events have been renamed:
 
@@ -104,7 +127,6 @@ The following events have been renamed:
 
 | Old                                                               | What to do instead
 | ----------------------------------------------------------------- | -------------------------------------------------
-| `craft\base\Element::ATTR_STATUS_CONFLICTED`                      |
 | `craft\base\Element::EVENT_DEFINE_IS_DELETABLE`                   | `EVENT_AUTHORIZE_DELETE`
 | `craft\base\Element::EVENT_DEFINE_IS_EDITABLE`                    | `EVENT_AUTHORIZE_VIEW` and `EVENT_AUTHORIZE_SAVE`
 | `craft\controllers\EntriesController::EVENT_PREVIEW_ENTRY`        |
