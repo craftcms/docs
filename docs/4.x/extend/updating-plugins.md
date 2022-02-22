@@ -114,6 +114,10 @@ The following control panel [template hooks](template-hooks.md) have been remove
 
 ## Symfony Mailer
 
+Craft 4 uses [Symfony Mailer](https://symfony.com/doc/current/mailer.html) to send email.
+
+This shouldn’t require any changes to composing and sending messages, but any transport adapter’s `defineTransport()` method must now return either a transporter that implements [Symfony\Component\Mailer\Transport\TransportInterface](https://github.com/symfony/mailer/blob/6.0/Transport/TransportInterface.php), or an array that defines one.
+
 ## User Permissions
 
 A number of user permissions have been renamed in Craft 4:
