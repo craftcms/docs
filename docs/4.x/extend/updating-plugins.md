@@ -36,7 +36,7 @@ The following core services have been removed:
 | `craft\services\AssetTransforms` | `craft\services\ImageTransforms`
 | `craft\services\ElementIndexes`  | `craft\services\ElementSources`
 | `craft\services\EntryRevisions`  |
-| `craft\services\SystemSettings`  |
+| `craft\services\SystemSettings`  | `craft\services\ProjectConfig`
 
 ## Components
 
