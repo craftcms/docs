@@ -38,8 +38,6 @@ The following core services have been removed:
 | `craft\services\EntryRevisions`  |
 | `craft\services\SystemSettings`  | `craft\services\ProjectConfig`
 
-## Components
-
 ## Translations
 
 ## DB Queries
