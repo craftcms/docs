@@ -15,7 +15,7 @@ Before you begin, make sure that:
 (check plugin compatibility status from the **Updates** page in the Craft 3 control panel)
 - you’ve made sure there are no [deprecation warnings](https://craftcms.com/knowledge-base/preparing-for-craft-4#fix-deprecation-warnings) anywhere that need fixing
 
-Once you’ve completed everything listed above you can continue with the upgrade process.
+Once you’ve completed everything above you can continue with the upgrade process.
 
 ## Performing the Upgrade
 
