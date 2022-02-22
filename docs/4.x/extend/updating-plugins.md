@@ -23,13 +23,13 @@ Some events, permissions, and controller actions have changed largely in support
 
 It’s best to update any existing plugin for Craft 4 rather than creating a new one with its own handle. A separate plugin complicates the developer experience, licensing, and migration path.
 
-## Service Names
+## Services
 
-The following core service names have changed:
+### Removed
 
-| Old             | New
-| --------------- | ----------------
-| |
+The following core services have been removed:
+
+- `craft\services\EntryRevisions`
 
 ## Components
 
@@ -84,31 +84,40 @@ The following control panel [template hooks](template-hooks.md) have been remove
 
 ### Changed
 
-- `craft\gql\TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS` is now triggered when actually resolving fields for a GraphQL type, rather than when the type is first created. ([#9626](https://github.com/craftcms/cms/issues/9626))
-- `craft\services\Assets::EVENT_GET_ASSET_THUMB_URL` has been renamed to `EVENT_DEFINE_THUMB_URL`.
-- `craft\services\Assets::EVENT_GET_ASSET_URL` has been renamed to `EVENT_DEFINE_ASSET_URL`.
-- `craft\services\Assets::EVENT_GET_THUMB_PATH` has been renamed to `EVENT_DEFINE_THUMB_PATH`.
+`craft\gql\TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS` is now triggered when actually resolving fields for a GraphQL type, rather than when the type is first created.
+
+The following events have been renamed:
+
+| Old                                                | Renamed to
+| -------------------------------------------------- | --------------------------
+| `craft\services\Assets::EVENT_GET_ASSET_THUMB_URL` | `EVENT_DEFINE_THUMB_URL`
+| `craft\services\Assets::EVENT_GET_ASSET_URL`       | `EVENT_DEFINE_ASSET_URL`
+| `craft\services\Assets::EVENT_GET_THUMB_PATH`      | `EVENT_DEFINE_THUMB_PATH`
 
 ### Deprecated
 
-- Added `craft\models\FieldLayout::EVENT_DEFINE_NATIVE_FIELDS`, which replaces `EVENT_DEFINE_STANDARD_FIELDS`.
-- Deprecated `craft\models\FieldLayout::EVENT_DEFINE_STANDARD_FIELDS`. `EVENT_DEFINE_NATIVE_FIELDS` should be used instead.
+| Old                                                      | What to do instead
+| -------------------------------------------------------- | ------------------------------------------------------
+| `craft\models\FieldLayout::EVENT_DEFINE_STANDARD_FIELDS` | `EVENT_DEFINE_NATIVE_FIELDS`
 
 ### Removed
 
-- Removed `craft\base\Element::ATTR_STATUS_CONFLICTED`.
-- Removed `craft\base\Element::EVENT_DEFINE_IS_DELETABLE`. `EVENT_AUTHORIZE_DELETE` can be used instead.
-- Removed `craft\base\Element::EVENT_DEFINE_IS_EDITABLE`. `EVENT_AUTHORIZE_VIEW` and `EVENT_AUTHORIZE_SAVE` can be used instead.
-- Removed `craft\controllers\EntriesController::EVENT_PREVIEW_ENTRY`.
-- Removed `craft\services\Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES`.
-- Removed `craft\services\Drafts::EVENT_AFTER_PUBLISH_DRAFT`.
-- Removed `craft\services\Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES`.
-- Removed `craft\services\Drafts::EVENT_BEFORE_PUBLISH_DRAFT`.
-- Removed `craft\services\Gql::EVENT_REGISTER_GQL_PERMISSIONS`. `EVENT_REGISTER_GQL_SCHEMA_COMPONENTS` can be used instead.
-- Removed `craft\services\TemplateCaches::EVENT_AFTER_DELETE_CACHES`.
-- Removed `craft\services\TemplateCaches::EVENT_BEFORE_DELETE_CACHES`.
-- Removed `craft\services\Volumes::EVENT_REGISTER_VOLUME_TYPES`.
-- Removed `craft\web\twig\variables\CraftVariable::EVENT_DEFINE_COMPONENTS`. `EVENT_INIT` can be used instead.
+| Old                                                               | What to do instead
+| ----------------------------------------------------------------- | -------------------------------------------------
+| `craft\base\Element::ATTR_STATUS_CONFLICTED`                      |
+| `craft\base\Element::EVENT_DEFINE_IS_DELETABLE`                   | `EVENT_AUTHORIZE_DELETE`
+| `craft\base\Element::EVENT_DEFINE_IS_EDITABLE`                    | `EVENT_AUTHORIZE_VIEW` and `EVENT_AUTHORIZE_SAVE`
+| `craft\controllers\EntriesController::EVENT_PREVIEW_ENTRY`        |
+| `craft\services\Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES`         |
+| `craft\services\Drafts::EVENT_AFTER_PUBLISH_DRAFT`                |
+| `craft\services\Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES`        |
+| `craft\services\Drafts::EVENT_BEFORE_PUBLISH_DRAFT`               |
+| `craft\services\Gql::EVENT_REGISTER_GQL_PERMISSIONS`              | `EVENT_REGISTER_GQL_SCHEMA_COMPONENTS`
+| `craft\services\TemplateCaches::EVENT_AFTER_DELETE_CACHES`        |
+| `craft\services\TemplateCaches::EVENT_AFTER_DELETE_CACHES`        |
+| `craft\services\TemplateCaches::EVENT_BEFORE_DELETE_CACHES`       |
+| `craft\services\Volumes::EVENT_REGISTER_VOLUME_TYPES`             |
+| `craft\web\twig\variables\CraftVariable::EVENT_DEFINE_COMPONENTS` | `EVENT_INIT`
 
 ## Controller Actions
 
