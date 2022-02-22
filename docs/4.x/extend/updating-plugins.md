@@ -142,6 +142,33 @@ The following events have been renamed:
 
 ## Controller Actions
 
+### Removed
+
+| Old                                       | What to do instead
+| ----------------------------------------- | ------------------------------------------------------
+| `assets/edit-asset`                       |
+| `assets/generate-thumb`                   | `assets/thumb`
+| `categories/delete-category`              | `elements/delete`
+| `categories/edit-category`                |
+| `categories/preview-category`             |
+| `categories/share-category`               |
+| `categories/view-shared-category`         |
+| `dashboard/get-feed-items`                |
+| `edit/by-id`                              | `elements/edit`
+| `edit/by-uid`                             | `elements/edit`
+| `elements/get-editor-html`                |
+| `elements/save-element`                   | `elements/save`
+| `entries/delete-entry`                    | `elements/delete`
+| `entries/delete-for-site`                 | `elements/delete-for-site`
+| `entries/duplicate-entry`                 | `elements/duplicate`
+| `entries/switch-entry-type`               |
+| `entry-revisions/create-draft`            | `elements/create`
+| `entry-revisions/delete-draft`            | `elements/delete-draft`
+| `entry-revisions/publish-draft`           | `elements/apply-draft`
+| `entry-revisions/revert-entry-to-version` | `elements/revert`
+| `entry-revisions/save-draft`              | `elements/save-draft`
+| `users/get-remaining-session-time`        | `users/session-info`
+
 ## Filesystems
 
 We’ve decoupled file operations from storage volumes into a new concept called “Filesystems” ([#10367](https://github.com/craftcms/cms/pull/10367)). Former volume type classes are now filesystem types, and a single [craft\models\Volume](craft4:craft\models\Volume) class represents all volumes.
