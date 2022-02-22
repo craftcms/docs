@@ -180,7 +180,7 @@ Some element query methods have been removed in Craft 4.
 
 ## Collections
 
-Craft 4 adds the [Illuminate Collections](https://packagist.org/packages/illuminate/collections) package, which offers a more convenient and consistent way of working with arrays and collections of things.
+Craft 4 adds the [Collections](https://packagist.org/packages/illuminate/collections) package, which offers a more convenient and consistent way of working with arrays and collections of things.
 
 Element queries, for example, now include a `collect()` method that returns query results as one of these collections instead of an array:
 
