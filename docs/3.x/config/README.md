@@ -391,7 +391,7 @@ return [
 ```
 
 ::: tip
-Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing email settings from Settings → Email.
+Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing email settings from **Settings** → **Email**.
 :::
 
 ### Queue Component
