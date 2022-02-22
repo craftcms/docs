@@ -12,9 +12,10 @@ Custom volume types will need to be updated, as will anything deprecated in Craf
 
 Some events, permissions, and controller actions have changed largely in support of some exciting new features you may want to take advantage of:
 
-- A unified element editor https://github.com/craftcms/cms/pull/10467
+- A [unified element editor](#unified-element-editor)
 - The condition builder, which is integral to conditional fields, custom sources, and dynamically-controlled relations
 - Inactive users
+- More flexible volumes with [Filesystems](#filesystems) and extensible asset transforms via [Image Transforms and Transformers](#image-transforms-and-transformers)
 
 ### Plugin Store Considerations
 
@@ -142,6 +143,30 @@ The following events have been renamed:
 | `craft\web\twig\variables\CraftVariable::EVENT_DEFINE_COMPONENTS` | `EVENT_INIT`
 
 ## Controller Actions
+
+## Filesystems
+
+We’ve decoupled file operations from storage volumes into a new concept called “Filesystems” ([#10367](https://github.com/craftcms/cms/pull/10367)). Former volume type classes are now filesystem types, and a single [craft\models\Volume](craft4:craft\models\Volume) class represents all volumes.
+
+## Image Transforms and Transformers
+
+Asset Transforms are now Image Transforms, which utilize the newly-added concept of “Imager Transformers”. Existing image transform functionality and index management has been rolled into a default [ImageTransformer](craft4:craft\imagetransforms\ImageTransformer).
+
+Third parties can introduce image transformers by registering them via the [`EVENT_REGISTER_IMAGE_TRANSFORMERS`](craft4:craft\services\ImageTransforms::EVENT_REGISTER_IMAGE_TRANSFORMERS) event.
+
+## Unified Element Editor
+
+Craft 4’s new unified element editing experience refines formerly-disparate UI and functionality for a number of benefits:
+
+- Easier draft, revision, autosave, preview, and conditional field layout support for all element types.
+- Drafts and autosaving in element editor slideouts for element types that support it.
+- A more consistent editing experience for content authors, whether they’re editing in a full-page layout or a slideout.
+
+One immediate benefit is to categories, which now support drafts, autosave, and editing features formerly limited to entries.
+
+With this new unified editing experience, we’ve eliminated a variety of element-specific templates, template hooks, and controller actions that are replaced by more uniform alternatives. Similarly, new element type methods and front-end components can be utilized by all element types.
+
+https://github.com/craftcms/cms/pull/10467
 
 ## Symfony Mailer
 
