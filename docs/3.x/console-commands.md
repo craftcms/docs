@@ -276,47 +276,6 @@ path
 :  The path to the database backup file.
 
 
-## `docubot/event-dumper`
-
-
-<h3 id="docubot-event-dumper-index">
-    <a href="#docubot-event-dumper-index" class="header-anchor">#</a>
-    <code>docubot/event-dumper</code>
-</h3>
-
-
-<h4 id="docubot-event-dumper-index-parameters" class="command-subheading">Parameters</h4>
-
-dest
-: 
-
-
-
-<h4 id="docubot-event-dumper-index-options" class="command-subheading">Options</h4>
-
-
---mode
-: `'craft'` or `'commerce'`
-
-
-## `docubot/gql`
-
-
-<h3 id="docubot-gql-generate">
-    <a href="#docubot-gql-generate" class="header-anchor">#</a>
-    <code>docubot/gql/generate</code>
-</h3>
-
-
-Generate GraphQL Documentation
-
-<h4 id="docubot-gql-generate-options" class="command-subheading">Options</h4>
-
-
---target-file
-: The target file path to use.
-
-
 ## `fixture`
 
 Allows you to manage test fixtures.
@@ -508,6 +467,122 @@ Prints a given GraphQL schema.
 
 --full-schema
 : Whether full schema should be printed or dumped.
+
+
+## `help`
+
+Provides help information about console commands.
+
+<h3 id="help-index">
+    <a href="#help-index" class="header-anchor">#</a>
+    <code>help</code>
+</h3>
+
+
+Displays available commands or the detailed information
+about a particular command.
+
+Example:
+
+```
+$ php craft help db/backup
+
+DESCRIPTION
+
+Creates a new database backup.
+
+Example:
+php craft db/backup ./my-backups/
+
+
+USAGE
+
+craft db/backup [path] [...options...]
+
+- path: string
+  The path the database backup should be created at.
+  Can be any of the following:
+
+  - A full file path
+  - A folder path (backup will be saved in there with a dynamically-generated name)
+  - A filename (backup will be saved in the working directory with the given name)
+  - Blank (backup will be saved to the `storage/backups/` folder with a dynamically-generated name)
+
+
+OPTIONS
+
+--appconfig: string
+  custom application configuration file path.
+  If not set, default application configuration is used.
+
+--color: boolean, 0 or 1
+  whether to enable ANSI color in the output.
+  If not set, ANSI color will only be enabled for terminals that support it.
+
+--help, -h: boolean, 0 or 1 (defaults to 0)
+  whether to display help information about current command.
+
+--interactive: boolean, 0 or 1 (defaults to 1)
+  whether to run the command interactively.
+
+--overwrite: boolean, 0 or 1 (defaults to 0)
+  Whether to overwrite an existing backup file, if a specific file path is given.
+
+--silent-exit-on-exception: boolean, 0 or 1
+  if true - script finish with `ExitCode::OK` in case of exception.
+  false - `ExitCode::UNSPECIFIED_ERROR`.
+  Default: `YII_ENV_TEST`
+
+--zip: boolean, 0 or 1 (defaults to 0)
+  Whether the backup should be saved as a zip file.
+
+$
+```
+
+
+<h4 id="help-index-parameters" class="command-subheading">Parameters</h4>
+
+command
+:  The name of the command to show help about.
+If not provided, all available commands will be displayed.
+
+
+
+<h3 id="help-list">
+    <a href="#help-list" class="header-anchor">#</a>
+    <code>help/list</code>
+</h3>
+
+
+Lists all available controllers and actions in machine-readable format.
+
+<h3 id="help-list-action-options">
+    <a href="#help-list-action-options" class="header-anchor">#</a>
+    <code>help/list-action-options</code>
+</h3>
+
+
+List all available options for `action` in machine-readable format.
+
+<h4 id="help-list-action-options-parameters" class="command-subheading">Parameters</h4>
+
+action
+: Route to action.
+
+
+
+<h3 id="help-usage">
+    <a href="#help-usage" class="header-anchor">#</a>
+    <code>help/usage</code>
+</h3>
+
+
+Displays usage information for `action`.
+
+<h4 id="help-usage-parameters" class="command-subheading">Parameters</h4>
+
+action
+: Route to action.
 
 
 ## `index-assets`
