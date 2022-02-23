@@ -185,6 +185,8 @@ The following events have been renamed:
 
 Craft 4 improves controller request and response handling to be much simpler and more uniform.
 
+#### Action Requests
+
 On the front end, we recommend replacing deprecated `Craft.postActionRequest()` calls with `Craft.sendActionRequest()`:
 
 ```javascript
@@ -192,6 +194,8 @@ On the front end, we recommend replacing deprecated `Craft.postActionRequest()` 
 Craft.postActionRequest('my-plugin/do-something', data, function(response, textStatus) {
   if (textStatus === 'success') {
     // ...
+  } else {
+    // Handle errors
   }
 });
 
@@ -204,6 +208,10 @@ Craft.sendActionRequest('POST', 'my-plugin/do-something', {data})
       // Handle non-200 responses ...
   });
 ```
+
+The `sendActionRequest()` method returns a response object that includes `config`, `data`, `headers`, `request`, `status`, and `statusText` properties, and non-`200` responses can be handled with a `catch()` handler.
+
+#### Controller Responses
 
 Controller actions can return new [asSuccess()](craft4:craft\web\Controller::asSuccess()) / [asModelSuccess()](craft4:craft\web\Controller::asModelSuccess()) or [asFailure()](craft4:craft\web\Controller::asFailure()) / [asModelFailure()](craft4:craft\web\Controller::asModelFailure()) functions that automatically handle…
 
