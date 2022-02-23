@@ -1187,7 +1187,7 @@ It works by setting the height of the iframe to match the height of the inner we
 than the iframe document itself. This can lead to some unexpected CSS issues, however, because the previewed viewport height will be taller
 than the visible portion of the iframe.
 
-If you have a [decoupled front end](https://craftcms.com/docs/3.x/entries.html#previewing-decoupled-front-ends), you will need to include
+If you have a [decoupled front end](https://craftcms.com/docs/4.x/entries.html#previewing-decoupled-front-ends), you will need to include
 [iframeResizer.contentWindow.min.js](https://raw.github.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js) on your
 page as well for this to work. You can conditionally include it for only Live Preview requests by checking if the requested URL contains a
 `x-craft-live-preview` query string parameter.
@@ -3397,7 +3397,7 @@ Set to `0` to disable this feature.
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: tip
-Users will only be purged when [garbage collection](https://craftcms.com/docs/3.x/gc.html) is run.
+Users will only be purged when [garbage collection](https://craftcms.com/docs/4.x/gc.html) is run.
 :::
 
 

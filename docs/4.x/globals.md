@@ -108,7 +108,7 @@ Global set queries support the following parameters:
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only global sets that are related to certain other elements.
 | [asArray](#asarray)                       | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft4:craft\elements\GlobalSet) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCreated](#datecreated)               | Narrows the query results based on the global sets’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the global sets’ last-updated dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
@@ -150,7 +150,7 @@ Narrows the query results to only global sets that are related to certain other 
 
 
 
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -213,7 +213,7 @@ Enables query cache for this Query.
 
 #### `clearCachedResult`
 
-Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 
 
 
@@ -553,7 +553,7 @@ Narrows the query results to only global sets that are related to certain other 
 
 
 
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -580,7 +580,7 @@ Narrows the query results to only global sets that match a search query.
 
 
 
-See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/4.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -805,7 +805,7 @@ Causes the query to return matching global sets eager-loaded with related elemen
 
 
 
-See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/4.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 

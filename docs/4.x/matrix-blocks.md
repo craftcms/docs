@@ -68,7 +68,7 @@ Matrix block queries support the following parameters:
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only Matrix blocks that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft4:craft\elements\MatrixBlock) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+| [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCreated](#datecreated)                 | Narrows the query results based on the Matrix blocks’ creation dates.
 | [dateUpdated](#dateupdated)                 | Narrows the query results based on the Matrix blocks’ last-updated dates.
 | [field](#field)                             | Narrows the query results based on the field the Matrix blocks belong to.
@@ -146,7 +146,7 @@ Narrows the query results to only Matrix blocks that are related to certain othe
 
 
 
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -209,7 +209,7 @@ Enables query cache for this Query.
 
 #### `clearCachedResult`
 
-Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 
 
 
@@ -692,7 +692,7 @@ Narrows the query results to only Matrix blocks that are related to certain othe
 
 
 
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -719,7 +719,7 @@ Narrows the query results to only Matrix blocks that match a search query.
 
 
 
-See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/4.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1042,7 +1042,7 @@ Causes the query to return matching Matrix blocks eager-loaded with related elem
 
 
 
-See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/4.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 

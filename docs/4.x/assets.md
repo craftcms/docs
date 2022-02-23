@@ -164,7 +164,7 @@ Asset queries support the following parameters:
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only assets that are related to certain other elements.
 | [asArray](#asarray)                       | Causes the query to return matching assets as arrays of data, rather than [Asset](craft4:craft\elements\Asset) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCreated](#datecreated)               | Narrows the query results based on the assets’ creation dates.
 | [dateModified](#datemodified)             | Narrows the query results based on the assets’ files’ last-modified dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the assets’ last-updated dates.
@@ -219,7 +219,7 @@ Narrows the query results to only assets that are related to certain other eleme
 
 
 
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -282,7 +282,7 @@ Enables query cache for this Query.
 
 #### `clearCachedResult`
 
-Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 
 
 
@@ -820,7 +820,7 @@ Narrows the query results to only assets that are related to certain other eleme
 
 
 
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -847,7 +847,7 @@ Narrows the query results to only assets that match a search query.
 
 
 
-See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/4.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1269,7 +1269,7 @@ Causes the query to return matching assets eager-loaded with related elements.
 
 
 
-See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/4.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 
