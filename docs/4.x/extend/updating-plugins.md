@@ -191,7 +191,6 @@ Craft.postActionRequest('POST', 'my-plugin/do-something', {data})
   .catch(({response}) => {
       // ...
   });
-});
 ```
 :::
 
