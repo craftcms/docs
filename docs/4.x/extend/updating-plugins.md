@@ -200,7 +200,7 @@ Controller actions can return new [asSuccess()](craft4:craft\web\Controller::asS
 - returning relevant HTTP status codes
 - returning an accompanying message in the JSON response or flash
 - returning relevant model data in the JSON response or route params
-- honoring a provided and posted redirect
+- honoring a redirect provided via argument or request param
 - including `'success' => true` and `'success' => false`
 
 Using these new methods, most controller action methods can be shortened:
