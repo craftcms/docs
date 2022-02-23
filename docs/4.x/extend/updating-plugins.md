@@ -195,7 +195,7 @@ Craft.postActionRequest('my-plugin/do-something', data, function(response, textS
   if (textStatus === 'success') {
     // ...
   } else {
-    // Handle errors
+    // Handle non-2xx responses ...
   }
 });
 
@@ -205,7 +205,7 @@ Craft.sendActionRequest('POST', 'my-plugin/do-something', {data})
       // ...
   })
   .catch(({response}) => {
-      // Handle non-200 responses ...
+      // Handle non-2xx responses ...
   });
 ```
 
