@@ -220,7 +220,6 @@ Controller actions can return new [asSuccess()](craft4:craft\web\Controller::asS
 - returning an accompanying message in the JSON response or flash
 - returning relevant model data in the JSON response or route params
 - honoring a redirect provided via argument or request param
-- including `'success' => true` and `'success' => false`
 
 ::: tip
 A JSON error response will now be returned with a `400` HTTP status in Craft 4.
