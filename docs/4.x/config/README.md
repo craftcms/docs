@@ -391,7 +391,7 @@ return [
 ```
 
 ::: tip
-Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing email settings from Settings → Email.
+Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing email settings from **Settings** → **Email**.
 :::
 
 ### Queue Component
@@ -617,10 +617,10 @@ The path that Craft should store its license key file, including its filename. (
 
 ### `CRAFT_LOG_PHP_ERRORS`
 
-Can be set to `false` to prevent Craft from setting PHP’s [log_errors](http://php.net/manual/en/errorfunc.configuration.php#ini.log-errors) setting, leaving it up to whatever’s set in `php.ini`.
+Can be set to `false` to prevent Craft from setting PHP’s [log_errors](https://php.net/manual/en/errorfunc.configuration.php#ini.log-errors) and [error_log](https://php.net/manual/en/errorfunc.configuration.php#ini.error-log) settings, leaving it up to whatever’s set in `php.ini`.
 
 ```php
-// Don't send PHP error logs to storage/logs/phperrors.log
+// Don’t send PHP error logs to storage/logs/phperrors.log
 define('CRAFT_LOG_PHP_ERRORS', false);
 ```
 
@@ -643,7 +643,7 @@ Make sure you set this to a valid folder path, otherwise it will be ignored.
 
 ### `CRAFT_STREAM_LOG`
 
-When set to `true`, Craft will additionally send log output to `stderr` and `stdout`.
+When set to `true`, Craft will additionally send log output to `stderr` and `stdout`. PHP fatal errors will be sent to `stderr`.
 
 ### `CRAFT_TEMPLATES_PATH`
 

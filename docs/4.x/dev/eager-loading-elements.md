@@ -61,7 +61,6 @@ When the assets _aren’t_ eager-loaded, `entry.assetsField` gives you an [asset
 
 However when the assets _are_ eager-loaded, `entry.assetsField` gets overwritten with an array of the eager-loaded assets. So `one()`, `all()`, and other element query methods are not available. Instead you must stick to the standard array syntaxes. In our example, we’re grabbing the first asset with `entry.assetsField[0]`, and we’re using Twig’s _null-coalescing operator_ (`??`) to define a default value (`null`) in case there is no related asset.
 
-
 ## Eager-Loading Multiple Sets of Elements
 
 If you have multiple sets of elements you wish to eager-load off of the top list of elements, just add additional values to your `with` parameter.
@@ -88,8 +87,6 @@ If you have multiple sets of elements you wish to eager-load off of the top list
   {% endfor %}
 {% endfor %}
 ```
-
-
 
 ## Eager-Loading Nested Sets of Elements
 
