@@ -78,12 +78,24 @@ The following control panel [template hooks](template-hooks.md) have been remove
 
 ## Element Actions
 
-- Renamed the `elements/get-categories-input-html` action to `categories/input-html`.
-- Renamed the `elements/get-modal-body` action to `element-selector-modals/body`.
-- The `users/save-user` action no longer includes a `unverifiedEmail` key in failure responses.
-- Deprecated the `assets/save-asset` action. `elements/save` should be used instead.
-- Deprecated the `categories/save-category` action. `elements/save` should be used instead.
-- Deprecated the `entries/save-entry` action. `elements/save` should be used instead.
+### Renamed
+
+| Old                                  | Renamed to
+| ------------------------------------ | ------------------------------
+| `elements/get-categories-input-html` | `categories/input-html`
+| `elements/get-modal-body`            | `element-selector-modals/body`
+
+### Changed
+
+The `users/save-user` action no longer includes a `unverifiedEmail` key in failure responses.
+
+### Deprecated
+
+| Old                        | What to do instead
+| -------------------------- | ------------------
+| `assets/save-asset`        | `elements/save`
+| `categories/save-category` | `elements/save`
+| `entries/save-entry`       | `elements/save`
 
 ## Elements
 
