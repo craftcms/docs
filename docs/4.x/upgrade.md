@@ -211,20 +211,6 @@ $posts = \craft\elements\Entry::find()
 
 ## Elements
 
-## Request Params
-
-Some controller actions have been renamed:
-
-| Old Controller Action       | New Controller Action
-| --------------------------- | --------------------------
-| |
-
-Some `redirect` param tokens have been renamed:
-
-| Controller Action               | Old Token     | New Token
-| ------------------------------- | ------------- | ---------
-| |
-
 ## GraphQL
 
 | GraphQL Argument | What to do instead
