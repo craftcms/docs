@@ -187,16 +187,16 @@ Craft 4 improves controller request and response handling to be much simpler and
 
 On the front end, we recommend replacing deprecated `Craft.postActionRequest()` calls with `Craft.sendActionRequest()`:
 
-::: code
-```javascript Craft 3
+```javascript
+// Craft 3
 Craft.postActionRequest('my-plugin/do-something', data, function(response, textStatus) {
   if (textStatus === 'success') {
     // ...
   }
 });
-```
-```javascript Craft 4
-Craft.postActionRequest('POST', 'my-plugin/do-something', {data})
+
+// Craft 4
+Craft.sendActionRequest('POST', 'my-plugin/do-something', {data})
   .then((response) => {
       // ...
   })
@@ -204,7 +204,6 @@ Craft.postActionRequest('POST', 'my-plugin/do-something', {data})
       // ...
   });
 ```
-:::
 
 Controller actions can return new [asSuccess()](craft4:craft\web\Controller::asSuccess()) / [asModelSuccess()](craft4:craft\web\Controller::asModelSuccess()) or [asFailure()](craft4:craft\web\Controller::asFailure()) / [asModelFailure()](craft4:craft\web\Controller::asModelFailure()) functions that automatically handle…
 
@@ -221,8 +220,8 @@ A JSON error response will now be returned with a `400` HTTP status in Craft 4.
 
 Using these new methods, most controller action methods can be shortened:
 
-::: code
-```php Craft 3
+```php
+// Craft 3
 public function actionSave() {
     // ...
 
@@ -255,8 +254,8 @@ public function actionSave() {
     $this->setSuccessFlash(Craft::t('myPlugin', 'Element saved.'));
     return $this->redirectToPostedUrl($myElement);
 }
-```
-```php Craft 4
+
+// Craft 4
 public function actionSave() {
     // ...
 
@@ -279,18 +278,16 @@ public function actionSave() {
     );
 }
 ```
-:::
 
 [asErrorJson()](craft4:craft\web\Controller::asErrorJson()) has been deprecated in Craft 4 and will be removed in Craft 5. Use [asFailure()](craft4:craft\web\Controller::asFailure()) instead:
 
-::: code
-```php Craft 3
+```php
+// Craft 3
 return $this->asErrorJson('Thing not found.');
-```
-```php Craft 4
+
+// Craft 4
 return $this->asFailure('Thing not found.');
 ```
-:::
 
 ## Filesystems
 
