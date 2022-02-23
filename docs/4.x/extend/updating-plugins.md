@@ -169,6 +169,114 @@ The following events have been renamed:
 | `entry-revisions/save-draft`              | `elements/save-draft`
 | `users/get-remaining-session-time`        | `users/session-info`
 
+### Controller Requests & Responses
+
+Craft 4 improves controller request and response handling to be much simpler and more uniform.
+
+On the front end, we recommend replacing deprecated `Craft.postActionRequest()` calls with `Craft.sendActionRequest()`:
+
+::: code
+```javascript Craft 3
+Craft.postActionRequest('my-plugin/do-something', data, function(response, textStatus) {
+  if (textStatus === 'success') {
+    // ...
+  }
+});
+```
+```javascript Craft 4
+Craft.postActionRequest('POST', 'my-plugin/do-something', {data})
+  .then((response) => {
+      // ...
+  })
+  .catch(({response}) => {
+      // ...
+  });
+});
+```
+:::
+
+Controller actions can return new [asSuccess()](craft4:craft\web\Controller::asSuccess()) / [asModelSuccess()](craft4:craft\web\Controller::asModelSuccess()) or [asFailure()](craft4:craft\web\Controller::asFailure()) / [asModelFailure()](craft4:craft\web\Controller::asModelFailure()) functions that automatically handle…
+
+- checking whether the request accepts JSON and returning a JSON response accordingly
+- returning relevant HTTP status codes
+- returning an accompanying message in the JSON response or flash
+- returning relevant model data in the JSON response or route params
+- honoring a provided and posted redirect
+- including `'success' => true` and `'success' => false`
+
+Using these new methods, most controller action methods can be shortened:
+
+::: code
+```php Craft 3
+public function actionSave() {
+    // ...
+
+    if (!Craft::$app->getElements()->saveElement($myElement)) {
+        if ($this->request->getAcceptsJson()) {
+            return $this->asJson([
+                'success' => false,
+                'errors' => $myElement->getErrors(),
+            ]);
+        }
+
+        $this->setFailFlash(Craft::t('myPlugin', 'Couldn’t save element.'));
+
+        Craft::$app->getUrlManager()->setRouteParams([
+            'myElement' => $myElement,
+        ]);
+
+        return null;
+    }
+
+    if ($this->request->getAcceptsJson()) {
+        return $this->asJson([
+            'success' => true,
+            'id' => $myElement->id,
+            'title' => $myElement->title,
+            'url' => $myElement->getUrl(),
+        ]);
+    }
+
+    $this->setSuccessFlash(Craft::t('myPlugin', 'Element saved.'));
+    return $this->redirectToPostedUrl($myElement);
+}
+```
+```php Craft 4
+public function actionSave() {
+    // ...
+
+    if (!Craft::$app->getElements()->saveElement($myElement)) {
+        return $this->asModelFailure(
+            $myElement,
+            Craft::t('myPlugin', 'Couldn’t save element.'),
+            'myElement'
+        );
+    }
+
+    return $this->asModelSuccess(
+        $asset,
+        Craft::t('app', 'Asset saved.'),
+        data: [
+            'id' => $myElement->id,
+            'title' => $myElement->title,
+            'url' => $myElement->getUrl(),
+        ],
+    );
+}
+```
+:::
+
+[asErrorJson()](craft4:craft\web\Controller::asErrorJson()) has been deprecated in Craft 4 and will be removed in Craft 5. Use [asFailure()](craft4:craft\web\Controller::asFailure()) instead:
+
+::: code
+```php Craft 3
+return $this->asErrorJson('Thing not found.');
+```
+```php Craft 4
+return $this->asFailure('Thing not found.');
+```
+:::
+
 ## Filesystems
 
 We’ve decoupled file operations from storage volumes into a new concept called “Filesystems” ([#10367](https://github.com/craftcms/cms/pull/10367)). Former volume type classes are now filesystem types, and a single [craft\models\Volume](craft4:craft\models\Volume) class represents all volumes.
