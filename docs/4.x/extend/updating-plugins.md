@@ -209,7 +209,7 @@ Craft.sendActionRequest('POST', 'my-plugin/do-something', {data})
   });
 ```
 
-The `sendActionRequest()` method returns a response object that includes `config`, `data`, `headers`, `request`, `status`, and `statusText` properties, and non-`200` responses can be handled with a `catch()` handler.
+The `sendActionRequest()` method returns a promise with an object that includes `config`, `data`, `headers`, `request`, `status`, and `statusText` properties, and non-`200` responses can be handled with a `catch()` handler.
 
 #### Controller Responses
 
