@@ -76,6 +76,7 @@ User queries support the following parameters:
 | [email](#email)                           | Narrows the query results based on the users’ email addresses.
 | [firstName](#firstname)                   | Narrows the query results based on the users’ first names.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
+| [fullName](#fullname)                     | Narrows the query results based on the users’ full names.
 | [getCacheTags](#getcachetags)             |
 | [group](#group)                           | Narrows the query results based on the user group the users belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
@@ -442,6 +443,36 @@ $users = \craft\elements\User::find()
     ->id([1, 2, 3, 4, 5])
     ->fixedOrder()
     ->all();
+```
+:::
+
+
+#### `fullName`
+
+Narrows the query results based on the users’ full names.
+
+Possible values include:
+
+| Value | Fetches users…
+| - | -
+| `'Jane Doe'` | with a full name of `Jane Doe`.
+| `'not Jane Doe'` | not with a full name of `Jane Doe`.
+
+
+
+::: code
+```twig
+{# Fetch all the Jane Doe's #}
+{% set users = craft.users()
+  .fullName('Jane Doe')
+  .all() %}
+```
+
+```php
+// Fetch all the Jane Doe's
+$users = \craft\elements\User::find()
+    ->fullName('JaneDoe')
+    ->one();
 ```
 :::
 
