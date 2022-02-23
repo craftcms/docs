@@ -484,7 +484,7 @@ Defined by
 
 Human-friendly reference number format for orders. Result must be unique.
 
-See [Order Numbers](orders-carts.md#order-numbers).
+See [Order Numbers](orders.md#order-numbers).
 
 
 
@@ -624,7 +624,7 @@ Defined by
 URL for a user to resolve billing issues with their subscription.
 
 ::: tip
-The example templates include [a template for this page](https://github.com/craftcms/commerce/tree/main/example-templates/dist/shop/plans/update-billing-details.twig).
+The example templates include [a template for this page](https://github.com/craftcms/commerce/tree/master/example-templates/shop/plans/update-billing-details.twig).
 :::
 
 
@@ -692,9 +692,10 @@ Defined by
 
 </div>
 
-Whether [partial payment](making-payments.md#checkout-with-partial-payment) can be made from the front end when the gateway allows them.
+Whether [partial payment](https://craftcms.com/docs/commerce/3.x/making-payments.html#checkout-with-partial-payment)
+can be made from the front end when the gateway allows them.
 
-The `false` default does not allow partial payments on the front end.
+The default `false` does not allow partial payments on the front end.
 
 
 
