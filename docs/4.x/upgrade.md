@@ -169,6 +169,12 @@ Some element query params have been removed:
 | ------------ | ------------------ | -------------------------
 | all          | `locale`           | `site` or `siteId`
 | all          | `localeEnabled`    | `status`
+| all          | `order`            | `orderBy`
+| Asset        | `source`           | `volume`
+| Asset        | `sourceId`         | `volumeId`
+| Matrix block | `ownerLocale`      | `site` or `siteId`
+| Matrix block | `ownerSite`        | `site`
+| Matrix block | `ownerSiteId`      | `siteId`
 
 Some element query params have been renamed in Craft 4. The old params have been deprecated, but will continue to work until Craft 5.
 
@@ -185,6 +191,7 @@ Some element query methods have been removed in Craft 4.
 | `find()`        | `all()`
 | `first()`       | `one()`
 | `last()`        | `inReverse().one()`
+| `total()`       | `count()`
 
 ## Collections
 
