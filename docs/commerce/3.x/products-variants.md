@@ -397,7 +397,7 @@ Narrows the query results to only products that are available for purchase.
 ::: code
 ```twig
 {# Fetch products that are available for purchase #}
-{% set products = {twig-function}
+{% set products = craft.products()
   .availableForPurchase()
   .all() %}
 ```
@@ -1271,7 +1271,7 @@ Possible values include:
 ::: code
 ```twig
 {# Fetch disabled products #}
-{% set products = {twig-function}
+{% set products = craft.products()
   .status('disabled')
   .all() %}
 ```
@@ -2130,7 +2130,7 @@ Narrows the query results to only default variants.
 ::: code
 ```twig
 {# Fetch default variants #}
-{% set variants = {twig-function}
+{% set variants = craft.variants()
   .isDefault()
   .all() %}
 ```
