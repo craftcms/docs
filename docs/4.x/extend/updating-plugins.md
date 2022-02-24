@@ -38,10 +38,6 @@ The following core services have been removed:
 | `craft\services\EntryRevisions`  |
 | `craft\services\SystemSettings`  | `craft\services\ProjectConfig`
 
-## Translations
-
-## DB Queries
-
 ## Control Panel Templates
 
 - All control panel templates end in `.twig` now. ([#9743](https://github.com/craftcms/cms/pull/9743))
