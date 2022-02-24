@@ -147,6 +147,12 @@ Some template functions have been removed completely:
 
 Twig 3’s operators (`in`, `<`, `>`, `<=`, `>=`, `==`, `!=`) are more strict comparing strings to integers and floats. Make sure this doesn’t have any unintended consequences!
 
+## Elements
+
+Craft elements now clone custom array and object field values before returning them. This means you’ll get a fresh copy of an `element.myCustomField` value each time you’ll make a call for it, which should reduce the need for using `clone()` on field values in some situations.
+
+The change in behavior has the potential to break templates relying on Craft 3’s behavior, so be sure to check any templates or custom code that modifies and re-uses custom field values.
+
 ## Element Queries
 
 ::: warning
