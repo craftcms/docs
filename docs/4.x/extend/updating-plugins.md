@@ -114,6 +114,10 @@ The `users/save-user` action no longer includes a `unverifiedEmail` key in failu
 | `craft\base\ElementInterface::getIsDeletable()` | `canDelete()`
 | `craft\base\ElementInterface::getIsEditable()`  | `canView()` and `canSave()`
 
+### Matrix Blocks
+
+Matrix blocks [can now have multiple owners](https://github.com/craftcms/cms/pull/10577) via a `matrixblocks_owners` join table. This comes with a huge performance improvement creating and applying drafts since it’s no longer necessary to duplicate Matrix blocks with unchanged content.
+
 ## Events
 
 ### Changed
