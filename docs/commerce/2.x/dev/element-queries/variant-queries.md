@@ -368,7 +368,7 @@ Narrows the query results to only default variants.
 ::: code
 ```twig
 {# Fetch default variants #}
-{% set variants = {twig-function}
+{% set variants = craft.variants()
     .isDefault()
     .all() %}
 ```
