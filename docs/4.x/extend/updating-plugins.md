@@ -70,8 +70,6 @@ The following control panel [template hooks](template-hooks.md) have been remove
 - `cp.entries.edit.settings`
 - `cp.entries.edit`
 
-## Queue Jobs
-
 ## Element Actions
 
 ### Renamed
