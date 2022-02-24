@@ -936,7 +936,7 @@ Narrows the query results to only drafts entries.
 ::: code
 ```twig
 {# Fetch a draft entry #}
-{% set entries = {twig-function}
+{% set entries = craft.entries()
   .drafts()
   .id(123)
   .one() %}
@@ -1622,7 +1622,7 @@ Narrows the query results to only revision entries.
 ::: code
 ```twig
 {# Fetch a revision entry #}
-{% set entries = {twig-function}
+{% set entries = craft.entries()
   .revisions()
   .id(123)
   .one() %}
@@ -1649,7 +1649,7 @@ Narrows the query results to only unpublished drafts which have been saved after
 ::: code
 ```twig
 {# Fetch saved, unpublished draft entries #}
-{% set entries = {twig-function}
+{% set entries = craft.entries()
   .draftOf(false)
   .savedDraftsOnly()
   .all() %}
