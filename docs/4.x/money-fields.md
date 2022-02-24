@@ -19,4 +19,17 @@ Money fields have the following settings:
 
 ### Working with Money Field Data
 
+If you have an element with a Money field in your template, you can access its data using your Number field’s handle:
+
+::: code
+```twig
+{% set value = entry.myFieldHandle %}
+```
+```php
+$value = $entry->myFieldHandle;
+```
+:::
+
+That will give you the number value for the field, or `null` if there is no value.
+
 ### Saving Money Fields
