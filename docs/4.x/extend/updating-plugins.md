@@ -25,7 +25,9 @@ It’s best to update any existing plugin for Craft 4 rather than creating a new
 
 ### Added
 
-- `craft\services\Conditions` is globally accessible for creating conditions and condition rules for the new condition builder.
+- `craft\services\Conditions` for creating the new condition builder’s conditions and condition rules.
+- `craft\services\Fs` for managing filesystems.
+- `craft\services\ImageTransforms` for managing image transforms and transformers.
 
 ### Removed
 
@@ -39,6 +41,8 @@ The following core services have been removed:
 | `craft\services\SystemSettings`  | `craft\services\ProjectConfig`
 
 ## Control Panel Templates
+
+Control panel template updates have largely been in support of the [unified element editor](#unified-element-editor) experience and a variety of UI refinements.
 
 - All control panel templates end in `.twig` now. ([#9743](https://github.com/craftcms/cms/pull/9743))
 - The `forms/selectize` control panel template now supports `addOptionFn` and `addOptionLabel` params, which can be set to add new options to the list.
