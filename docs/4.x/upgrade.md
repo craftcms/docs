@@ -211,8 +211,6 @@ $posts = \craft\elements\Entry::find()
 
 There’s also a new [collect()](dev/functions.md#collect) function you can use in Twig templates.
 
-## Elements
-
 ## GraphQL
 
 | GraphQL Argument | What to do instead
