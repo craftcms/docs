@@ -264,6 +264,14 @@ Don’t forget to update your templates and GraphQL queries!
 `alt` is now a reserved word for Asset Volume field layouts. If you have an existing, custom `alt` field, you’ll need to change it.
 :::
 
+## User Permissions
+
+A few user permissions have been removed in Craft 4:
+
+- `assignUserGroups` previously let authorized users assign other users to their own groups. Authorization must now be explicitly granted for each group.
+- `customizeSources` had made it possible for authorized users to customize element sources. Only admins can customize element sources now, and only from an environment that allows admin changes.
+- `publishPeerEntryDrafts:<uid>` permissions wouldn’t have stopped users from viewing, copying, and saving draft content themselves.
+
 ## Plugins
 
 See [Updating Plugins for Craft 4](extend/updating-plugins.md).
