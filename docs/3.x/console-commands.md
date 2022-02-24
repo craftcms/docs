@@ -1148,8 +1148,6 @@ Manages plugins.
 
 Disables a plugin.
 
-Example:
-
 ```
 $ php craft plugin/disable
 
@@ -1165,8 +1163,9 @@ The following plugins are enabled:
 
 Choose a plugin handle to disable: ckeditor
 *** disabling ckeditor
-*** disabled ckeditor successfully (time: 0.496s)
+*** disabled ckeditor successfully (time: 0.003s)
 ```
+
 
 <h4 id="plugin-disable-parameters" class="command-subheading">Parameters</h4>
 
@@ -1184,9 +1183,9 @@ handle
 Enables a plugin.
 
 ```
-$ php craft plugin/disable
+$ php craft plugin/enable
 
-The following plugins are enabled:
+The following plugins are disabled:
 
     Handle                 Name
     ---------------------  ---------------------
@@ -1196,10 +1195,11 @@ The following plugins are enabled:
     commerce               Craft Commerce
     gatsby-helper          Gatsby Helper
 
-Choose a plugin handle to disable: ckeditor
-*** disabling ckeditor
-*** disabled ckeditor successfully (time: 0.496s)
+Choose a plugin handle to enable: ckeditor
+*** enabling ckeditor
+*** enabled ckeditor successfully (time: 0.004s)
 ```
+
 
 <h4 id="plugin-enable-parameters" class="command-subheading">Parameters</h4>
 
