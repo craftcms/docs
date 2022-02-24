@@ -1295,7 +1295,7 @@ Narrows the query results to only orders that have line items.
 ::: code
 ```twig
 {# Fetch orders that do or do not have line items #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
   .hasLineItems()
   .all() %}
 ```
@@ -1332,7 +1332,7 @@ Narrows the query results to only carts that have at least one transaction.
 ::: code
 ```twig
 {# Fetch carts that have attempted payments #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
   .hasTransactions()
   .all() %}
 ```
@@ -1434,7 +1434,7 @@ Narrows the query results to only orders that are completed.
 ::: code
 ```twig
 {# Fetch completed orders #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
   .isCompleted()
   .all() %}
 ```
@@ -1457,7 +1457,7 @@ Narrows the query results to only orders that are paid.
 ::: code
 ```twig
 {# Fetch paid orders #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
   .isPaid()
   .all() %}
 ```
@@ -1480,7 +1480,7 @@ Narrows the query results to only orders that are not paid.
 ::: code
 ```twig
 {# Fetch unpaid orders #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
   .isUnpaid()
   .all() %}
 ```
