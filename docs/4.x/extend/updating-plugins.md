@@ -353,4 +353,17 @@ Some user permissions have been split into more granular alternatives:
 
 ## Writing an Upgrade Migration
 
-- JSON column support: https://github.com/craftcms/cms/pull/9089
+### JSON Column Support
+
+Craft 4 adds `JSON` column support now that it’s supported by the MySQL 5.7.8 minimum version.
+
+This doesn’t introduce any breaking changes since JSON data can still be stored in `TEXT` columns and [ActiveRecord](craft4:craft\db\ActiveRecord) will continue normalizing arrays into JSON on set.
+
+Plugin developers can start storing JSON data in `JSON` columns by…
+
+1. Writing a migration that ensures existing data is valid JSON and converts the column to `JSON`:
+    ```php
+    $this->convertColumnToJson('{{%mytable}}', 'myColumn');
+    ```
+2. Ensuring that the column’s data is never being JSON-encoded before being set on the ActiveRecord model, or when being set on an insert, update, or upsert command.
+3. Updating the install migration to use `$this->json()` rather than `$this->text()` or whatever the original column type had been.
