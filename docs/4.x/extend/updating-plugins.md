@@ -50,8 +50,10 @@ Control panel template updates have largely been in support of the [unified elem
 - The `limitField` macro in the `_components/fieldtypes/elementfieldsettings` control panel template has been renamed to `limitFields`.
 - Added the `button`, `submitButton`, `fs`, and `fsField` macros to the `_includes/forms` control panel template.
 - Added the `htmx.org` JavaScript library.
+- Removed the `assets/_edit` control panel template.
 - Removed the `categories/_edit` control panel template.
 - Removed the `entries/_edit` control panel template.
+- Removed the `_layouts/element` control panel template.
 
 ### Control Panel Template Hooks
 
