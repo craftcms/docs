@@ -149,7 +149,9 @@ Twig 3’s operators (`in`, `<`, `>`, `<=`, `>=`, `==`, `!=`) are more strict co
 
 ## Elements
 
-Craft elements now clone custom array and object field values before returning them. This means you’ll get a fresh copy of an `element.myCustomField` value each time you’ll make a call for it, which should reduce the need for using `clone()` on field values in some situations.
+Craft elements now clone custom array and object field values before returning them.
+
+This means that every time you call a field handle like `element.myCustomField`, you’ll get a fresh copy of that field’s value. As a result, you may no longer need to use `clone()` to avoid inadvertently changing data or element queries used elsewhere.
 
 The change in behavior has the potential to break templates relying on Craft 3’s behavior, so be sure to check any templates or custom code that modifies and re-uses custom field values.
 
