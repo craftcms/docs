@@ -50,6 +50,7 @@ Filter | Description
 [map](https://twig.symfony.com/doc/2.x/filters/map.html) | Applies an arrow function to the items in an array.
 [markdown](#markdown-or-md) | Processes a string as Markdown.
 [merge](#merge) | Merges an array with another one.
+[money](#money) | Outputs a value from a Money object.
 [multisort](#multisort) | Sorts an array by one or more keys within its sub-arrays.
 [namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
 [namespaceInputId](#namespaceinputid) | Namespaces an element ID.
@@ -700,6 +701,22 @@ With `recursive`:
     'Hoth': 'Veers'
   }
 } #}
+```
+
+## `money`
+
+Outputs a value from a Money object.
+
+```twig
+{{ myMoneyField|money }}
+{# Output: $123.00 #}
+```
+
+An optional **formatLocale** argument can be provided if you don’t want to use the default formatter’s locale:
+
+```twig
+{{ myMoneyField|money('de') }}
+{# Output: 123,00 $ #}
 ```
 
 ## `multisort`
