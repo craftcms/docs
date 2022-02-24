@@ -25,9 +25,9 @@ It’s best to update any existing plugin for Craft 4 rather than creating a new
 
 ### Added
 
-- `craft\services\Conditions` for creating the new condition builder’s conditions and condition rules.
-- `craft\services\Fs` for managing filesystems.
-- `craft\services\ImageTransforms` for managing image transforms and transformers.
+- [craft\services\Conditions](craft4:craft\services\Conditions) for creating the new condition builder’s conditions and condition rules.
+- [craft\services\Fs](craft4:craft\services\Fs) for managing filesystems.
+- [craft\services\ImageTransforms](craft4:craft\services\ImageTransforms) for managing image transforms and transformers.
 
 ### Removed
 
