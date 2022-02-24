@@ -14,6 +14,7 @@ Function | Description
 [ceil](#ceil) | Rounds a number up.
 [className](#classname) | Returns the fully qualified class name of a given object.
 [clone](#clone) | Clones an object.
+[collect](#collect) | Returns a new collection.
 [combine](#combine) | Combines two arrays into one.
 [configure](#configure) | Sets attributes on the passed object.
 [constant](https://twig.symfony.com/doc/2.x/functions/constant.html) | Returns the constant value for a given string.
@@ -160,6 +161,14 @@ Clones a given object.
 ```twig
 {% set query = craft.entries.section('news') %}
 {% set articles = clone(query).type('articles') %}
+```
+
+## `collect`
+
+Returns a new [collection](https://laravel.com/docs/9.x/collections).
+
+```twig
+{% set collection = collect(['a', 'b', 'c']) %}
 ```
 
 ## `combine`
