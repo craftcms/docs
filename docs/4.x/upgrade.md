@@ -73,7 +73,7 @@ Some PHP constants have been deprecated in Craft 4, and will no longer work in C
 
 ## Template Tags
 
-Some Twig template tags have been deprecated in Craft 4, and will be completely removed in Craft 5:
+Some Twig tags have been deprecated in Craft 4, and will be completely removed in Craft 5:
 
 | Old Tag                 | What to do instead
 | ------------------------| ---------------------------------------------
@@ -208,6 +208,8 @@ $posts = \craft\elements\Entry::find()
     ->collect();
 ```
 :::
+
+There’s also a new [collect()](dev/functions.md#collect) function you can use in Twig templates.
 
 ## Elements
 
