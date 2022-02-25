@@ -105,6 +105,7 @@ componentId
 
 
 Lists the caches that can be flushed.
+
 ## `clear-caches`
 
 Allows you to clear various Craft caches.
@@ -188,6 +189,7 @@ Clears temporary files.
 
 
 Clears the Asset transform index.
+
 ## `clear-deprecations`
 
 
@@ -198,6 +200,7 @@ Clears the Asset transform index.
 
 
 Clears all deprecation warnings.
+
 ## `db`
 
 Performs database operations.
@@ -284,6 +287,7 @@ path
 :  The path to the database backup file.
 
 
+
 ## `fixture`
 
 Allows you to manage test fixtures.
@@ -367,6 +371,7 @@ fixturesInput
 : Namespace to search for fixtures. Defaults to `tests\unit\fixtures`.
 
 
+
 ## `gc`
 
 
@@ -385,6 +390,7 @@ Runs garbage collection.
 : Whether all soft-deleted items should be deleted, rather than just
 the ones that were deleted long enough ago to be ready for hard-deletion
 per the `softDeleteDuration` config setting.
+
 
 
 ## `graphql`
@@ -471,6 +477,7 @@ Prints a given GraphQL schema.
 
 --full-schema
 : Whether full schema should be printed or dumped.
+
 
 
 ## `help`
@@ -589,6 +596,7 @@ action
 : Route to action.
 
 
+
 ## `index-assets`
 
 Allows you to re-index assets in volumes.
@@ -675,6 +683,7 @@ startAt
 : Whether to delete all the asset records that have their files missing.
 
 
+
 ## `install`
 
 Craft CMS CLI installer.
@@ -722,6 +731,7 @@ Runs the install migration.
 : The default langcode for the first site to create during install.
 
 
+
 ## `invalidate-tags`
 
 Allows you to invalidate cache tags.
@@ -757,6 +767,7 @@ Lists the cache tags that can be invalidated.
 
 
 Invalidates all template cache tags.
+
 ## `mailer`
 
 
@@ -773,6 +784,7 @@ Tests sending an email with the current mailer settings.
 
 --to
 : Email address that should receive the test message.
+
 
 
 ## `migrate`
@@ -1112,6 +1124,7 @@ will be applied.
 : The handle of the plugin to use during migration operations, or the plugin itself.
 
 
+
 ## `off`
 
 
@@ -1148,6 +1161,7 @@ restrictions—meant for temporary use during the deployment process.
     ```
 
 
+
 ## `on`
 
 
@@ -1164,6 +1178,7 @@ Example:
 $ php craft on
 The system is now online.
 ```
+
 ## `plugin`
 
 Manages plugins.
@@ -1175,8 +1190,6 @@ Manages plugins.
 
 
 Disables a plugin.
-
-Example:
 
 ```
 $ php craft plugin/disable
@@ -1193,8 +1206,9 @@ The following plugins are enabled:
 
 Choose a plugin handle to disable: ckeditor
 *** disabling ckeditor
-*** disabled ckeditor successfully (time: 0.496s)
+*** disabled ckeditor successfully (time: 0.003s)
 ```
+
 
 <h4 id="plugin-disable-parameters" class="command-subheading">Parameters</h4>
 
@@ -1212,9 +1226,9 @@ handle
 Enables a plugin.
 
 ```
-$ php craft plugin/disable
+$ php craft plugin/enable
 
-The following plugins are enabled:
+The following plugins are disabled:
 
     Handle                 Name
     ---------------------  ---------------------
@@ -1224,10 +1238,11 @@ The following plugins are enabled:
     commerce               Craft Commerce
     gatsby-helper          Gatsby Helper
 
-Choose a plugin handle to disable: ckeditor
-*** disabling ckeditor
-*** disabled ckeditor successfully (time: 0.496s)
+Choose a plugin handle to enable: ckeditor
+*** enabling ckeditor
+*** enabled ckeditor successfully (time: 0.004s)
 ```
+
 
 <h4 id="plugin-enable-parameters" class="command-subheading">Parameters</h4>
 
@@ -1317,6 +1332,7 @@ handle
 : Whether the plugin uninstallation should be forced.
 
 
+
 ## `project-config`
 
 Manages the Project Config.
@@ -1376,6 +1392,7 @@ Updates the `dateModified` value in `config/project/project.yaml`, attempting to
 
 
 Writes out the currently-loaded project config as YAML files to the `config/project/` folder, discarding any pending YAML changes.
+
 ## `queue`
 
 Manages the queue.
@@ -1514,6 +1531,7 @@ will be printed.
 --php-binary
 : path to php interpreter that uses to run child processes.
 If it is undefined, PHP_BINARY will be used.
+
 
 
 ## `resave`
@@ -1963,6 +1981,7 @@ Re-saves users.
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+
 ## `serve`
 
 
@@ -1985,7 +2004,7 @@ address
 
 
 --docroot, -t
-: path or [path alias](https://craftcms.com/docs/3.x/config/#aliases) of the directory to serve.
+: path or [path alias](https://craftcms.com/docs/4.x/config/#aliases) of the directory to serve.
 
 
 --port, -p
@@ -1995,6 +2014,7 @@ address
 --router, -r
 : path or [path alias](guide:concept-aliases) to router script.
 See https://www.php.net/manual/en/features.commandline.webserver.php
+
 
 
 ## `setup`
@@ -2138,6 +2158,58 @@ Generates a new security key and saves it in the `.env` file.
 
 
 Called from the `post-create-project-cmd` Composer hook.
+
+## `shell`
+
+
+<h3 id="shell-index">
+    <a href="#shell-index" class="header-anchor">#</a>
+    <code>shell</code>
+</h3>
+
+
+Runs an interactive shell.
+
+::: tip
+This command requires the [`yiisoft/yii2-shell`](https://github.com/yiisoft/yii2-shell) package, which you may need to add to your project:
+
+```
+composer require --dev yiisoft/yii2-shell
+```
+:::
+
+```
+$ php craft shell
+
+Psy Shell v0.10.12 (PHP 8.0.3 — cli) by Justin Hileman
+>>> help
+  help       Show a list of commands. Type `help [foo]` for information about [foo].      Aliases: ?
+  ls         List local, instance or class variables, methods and constants.              Aliases: dir
+  dump       Dump an object or primitive.
+  doc        Read the documentation for an object, class, constant, method or property.   Aliases: rtfm, m
+  show       Show the code for an object, class, constant, method or property.
+  wtf        Show the backtrace of the most recent exception.                             Aliases: last-ex
+  whereami   Show where you are in the code.
+  throw-up   Throw an exception or error out of the Psy Shell.
+  timeit     Profiles with a timer.
+  trace      Show the current call stack.
+  buffer     Show (or clear) the contents of the code input buffer.                       Aliases: buf
+  clear      Clear the Psy Shell screen.
+  edit       Open an external editor. Afterwards, get produced code in input buffer.
+  sudo       Evaluate PHP code, bypassing visibility restrictions.
+  history    Show the Psy Shell history.                                                  Aliases: hist
+  exit       End the current session and return to caller.                                Aliases: quit, q
+```
+
+
+<h4 id="shell-index-options" class="command-subheading">Options</h4>
+
+
+--include
+: Include file(s) before starting tinker shell.
+
+
+
 ## `tests`
 
 
@@ -2156,6 +2228,7 @@ dst
                         Defaults to the current working directory.
 
 
+
 ## `up`
 
 
@@ -2172,6 +2245,7 @@ Runs pending migrations and applies pending project config changes.
 
 --force
 : Whether to perform the action even if a mutex lock could not be acquired.
+
 
 
 ## `update`
@@ -2224,6 +2298,7 @@ version using the syntax `<handle>:<version>`.
 
 --migrate
 : Run new database migrations after completing the update
+
 
 
 ## `users`
@@ -2335,6 +2410,14 @@ user
 
 Lists admin users.
 
+<h3 id="users-logout-all">
+    <a href="#users-logout-all" class="header-anchor">#</a>
+    <code>users/logout-all</code>
+</h3>
+
+
+Logs all users out of the system.
+
 <h3 id="users-password-reset-url">
     <a href="#users-password-reset-url" class="header-anchor">#</a>
     <code>users/password-reset-url</code>
@@ -2372,6 +2455,7 @@ user
 : The user’s new password.
 
 
+
 ## `utils/ascii-filenames`
 
 
@@ -2382,6 +2466,7 @@ user
 
 
 Converts all non-ASCII asset filenames to ASCII.
+
 ## `utils/fix-element-uids`
 
 
@@ -2392,6 +2477,7 @@ Converts all non-ASCII asset filenames to ASCII.
 
 
 Ensures all elements UIDs are unique.
+
 ## `utils/prune-provisional-drafts`
 
 
@@ -2408,6 +2494,7 @@ Prunes provisional drafts for elements that have more than one per user.
 
 --dry-run
 : Whether this is a dry run.
+
 
 
 ## `utils/prune-revisions`
@@ -2430,6 +2517,7 @@ Prunes excess element revisions.
 
 --dry-run
 : Whether this is a dry run.
+
 
 
 ## `utils/repair`
@@ -2495,6 +2583,7 @@ handle
 
 --dry-run
 : Whether to only do a dry run of the repair process.
+
 
 
 ## `utils/update-usernames`
