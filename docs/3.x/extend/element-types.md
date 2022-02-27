@@ -195,7 +195,7 @@ class ProductQuery extends ElementQuery
         // join in the products table
         $this->joinElementTable('products');
 
-        // select the price column
+        // select the price and currency columns
         $this->query->select([
             'products.price',
             'products.currency',
