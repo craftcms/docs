@@ -255,6 +255,7 @@ If you want to make it possible for templates to query for your elements, you ca
 <?php
 namespace mynamespace;
 
+use mynamespace\elements\db\ProductQuery;
 use Craft;
 use yii\base\Behavior;
 
