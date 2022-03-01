@@ -90,6 +90,20 @@ Some Twig tags have been deprecated in Craft 4, and will be completely removed i
 | `{% spaceless %}` | `{% apply spaceless %}`
 | `{% filter %}`    | `{% apply %}`
 
+Twig 3 also removed support for the `if` param in `{% for %}` tags, but you can use `|filter` instead:
+
+```twig
+{# Craft 3 #}
+{% for item in items if item is not null %}
+  {# ... #}
+{% endfor %}
+
+{# Craft 4 #}
+{% for item in items|filter(item => item is not null) %}
+  {# ... #}
+{% endfor %}
+```
+
 ## Template Functions
 
 Some template functions have been removed completely:
