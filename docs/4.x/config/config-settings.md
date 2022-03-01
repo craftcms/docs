@@ -1054,7 +1054,7 @@ The character(s) that should be used to separate words in slugs.
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string), [array](https://php.net/language.types.array), [false](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
+:  [string](https://php.net/language.types.string), [array](https://php.net/language.types.array), [null](https://php.net/language.types.null), [false](https://php.net/language.types.boolean)
 
 Default value
 :  `null`
@@ -1224,7 +1224,7 @@ Any custom Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-a
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string), [false](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null), [false](https://php.net/language.types.boolean)
 
 Default value
 :  `null`
@@ -2726,7 +2726,7 @@ the <config3:extraAllowedFileExtensions> config setting.
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string), [boolean](https://php.net/language.types.boolean)
+:  [string](https://php.net/language.types.string), [false](https://php.net/language.types.boolean)
 
 Default value
 :  `'-'`
@@ -3124,7 +3124,7 @@ Whether images should be upscaled if the provided transform size is larger than 
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string)[], [false](https://php.net/language.types.boolean), [null](https://php.net/language.types.null)
+:  [string](https://php.net/language.types.string)[], [null](https://php.net/language.types.null), [false](https://php.net/language.types.boolean)
 
 Default value
 :  `null`
