@@ -105,6 +105,7 @@ componentId
 
 
 Lists the caches that can be flushed.
+
 ## `clear-caches`
 
 Allows you to clear various Craft caches.
@@ -180,6 +181,7 @@ Clears temporary files.
 
 
 Clears the Asset transform index.
+
 ## `clear-deprecations`
 
 
@@ -190,6 +192,7 @@ Clears the Asset transform index.
 
 
 Clears all deprecation warnings.
+
 ## `db`
 
 Performs database operations.
@@ -276,6 +279,7 @@ path
 :  The path to the database backup file.
 
 
+
 ## `fixture`
 
 Allows you to manage test fixtures.
@@ -359,6 +363,7 @@ fixturesInput
 : Namespace to search for fixtures. Defaults to `tests\unit\fixtures`.
 
 
+
 ## `gc`
 
 
@@ -381,6 +386,7 @@ per the `softDeleteDuration` config setting.
 
 --empty-deprecated-tables
 : Whether old database tables should be emptied out.
+
 
 
 ## `graphql`
@@ -467,6 +473,7 @@ Prints a given GraphQL schema.
 
 --full-schema
 : Whether full schema should be printed or dumped.
+
 
 
 ## `help`
@@ -585,6 +592,7 @@ action
 : Route to action.
 
 
+
 ## `index-assets`
 
 Allows you to re-index assets in volumes.
@@ -647,6 +655,7 @@ startAt
 : Whether to delete all the asset records that have their files missing.
 
 
+
 ## `install`
 
 Craft CMS CLI installer.
@@ -694,6 +703,7 @@ Runs the install migration.
 : The default langcode for the first site to create during install.
 
 
+
 ## `invalidate-tags`
 
 Allows you to invalidate cache tags.
@@ -729,6 +739,7 @@ Lists the cache tags that can be invalidated.
 
 
 Invalidates all template cache tags.
+
 ## `mailer`
 
 
@@ -745,6 +756,7 @@ Tests sending an email with the current mailer settings.
 
 --to
 : Email address that should receive the test message.
+
 
 
 ## `migrate`
@@ -1084,6 +1096,7 @@ will be applied.
 : The handle of the plugin to use during migration operations, or the plugin itself.
 
 
+
 ## `off`
 
 
@@ -1120,6 +1133,7 @@ restrictions—meant for temporary use during the deployment process.
     ```
 
 
+
 ## `on`
 
 
@@ -1136,6 +1150,7 @@ Example:
 $ php craft on
 The system is now online.
 ```
+
 ## `plugin`
 
 Manages plugins.
@@ -1289,6 +1304,7 @@ handle
 : Whether the plugin uninstallation should be forced.
 
 
+
 ## `project-config`
 
 Manages the Project Config.
@@ -1348,6 +1364,7 @@ Updates the `dateModified` value in `config/project/project.yaml`, attempting to
 
 
 Writes out the currently-loaded project config as YAML files to the `config/project/` folder, discarding any pending YAML changes.
+
 ## `queue`
 
 Manages the queue.
@@ -1486,6 +1503,7 @@ will be printed.
 --php-binary
 : path to php interpreter that uses to run child processes.
 If it is undefined, PHP_BINARY will be used.
+
 
 
 ## `resave`
@@ -1655,6 +1673,10 @@ Re-saves entries.
 
 --provisional-drafts
 : Whether to resave provisional element drafts.
+
+
+--revisions
+: Whether to resave element revisions.
 
 
 --element-id
@@ -1935,6 +1957,7 @@ Re-saves users.
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+
 ## `serve`
 
 
@@ -1967,6 +1990,7 @@ address
 --router, -r
 : path or [path alias](guide:concept-aliases) to router script.
 See https://www.php.net/manual/en/features.commandline.webserver.php
+
 
 
 ## `setup`
@@ -2110,6 +2134,7 @@ Generates a new security key and saves it in the `.env` file.
 
 
 Called from the `post-create-project-cmd` Composer hook.
+
 ## `shell`
 
 
@@ -2159,6 +2184,7 @@ Psy Shell v0.10.4 (PHP 7.4.3 — cli) by Justin Hileman
 : Include file(s) before starting tinker shell.
 
 
+
 ## `tests`
 
 
@@ -2177,6 +2203,7 @@ dst
                         Defaults to the current working directory.
 
 
+
 ## `up`
 
 
@@ -2193,6 +2220,7 @@ Runs pending migrations and applies pending project config changes.
 
 --force
 : Whether to perform the action even if a mutex lock could not be acquired.
+
 
 
 ## `update`
@@ -2245,6 +2273,7 @@ version using the syntax `<handle>:<version>`.
 
 --migrate
 : Run new database migrations after completing the update
+
 
 
 ## `users`
@@ -2401,6 +2430,7 @@ user
 : The user’s new password.
 
 
+
 ## `utils/ascii-filenames`
 
 
@@ -2411,6 +2441,7 @@ user
 
 
 Converts all non-ASCII asset filenames to ASCII.
+
 ## `utils/fix-element-uids`
 
 
@@ -2421,6 +2452,7 @@ Converts all non-ASCII asset filenames to ASCII.
 
 
 Ensures all elements UIDs are unique.
+
 ## `utils/prune-provisional-drafts`
 
 
@@ -2437,6 +2469,7 @@ Prunes provisional drafts for elements that have more than one per user.
 
 --dry-run
 : Whether this is a dry run.
+
 
 
 ## `utils/prune-revisions`
@@ -2459,6 +2492,7 @@ Prunes excess element revisions.
 
 --dry-run
 : Whether this is a dry run.
+
 
 
 ## `utils/repair`
@@ -2524,6 +2558,7 @@ handle
 
 --dry-run
 : Whether to only do a dry run of the repair process.
+
 
 
 ## `utils/update-usernames`
