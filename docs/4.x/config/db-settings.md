@@ -232,7 +232,7 @@ The database password to connect with.
 <div class="compact">
 
 Allowed types
-:  [integer](https://php.net/language.types.integer), [string](https://php.net/language.types.string)
+:  [integer](https://php.net/language.types.integer), [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :  `null`
