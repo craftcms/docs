@@ -27,6 +27,8 @@ It’s best to update any existing plugin for Craft 4 rather than creating a new
 
 We anticipate most developers will choose to release a new major version of their plugin that requires Craft 4, though all Craft and the plugin store look at for compatibility is what’s required by `composer.json`.
 
+You’ll need to explicitly state support for each major Craft version. Any `craftcms/cms` constraint beginning with `>=` will be treated as `^`. If your plugin supports Craft 3 and 4, for example, you’ll need to set your `craftcms/cms` constraint to `^3.0|^4.0` rather than `>=3.0`.
+
 ## Rector
 
 Craft’s [Rector](https://github.com/craftcms/rector) rules can save you time by adding required type declarations throughout your code. It’s important to do things in the right order so you can run Rector once and be on your way.
