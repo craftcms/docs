@@ -34,7 +34,6 @@ While it’s not required, we also recommend setting a `php` constraint to clari
 ```json
   "require": {
     "php": "^7.2.5|^8.0"
-    // ...
   }
 ```
 
@@ -43,7 +42,6 @@ If the Craft 4 version adds support for (not yet released) PHP 9, it would look 
 ```json
   "require": {
     "php": "^8.0.2|^9.0"
-    // ...
   }
 ```
 
