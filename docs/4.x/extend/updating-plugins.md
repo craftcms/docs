@@ -29,6 +29,24 @@ We anticipate most developers will choose to release a new major version of thei
 
 You’ll need to explicitly state support for each major Craft version. Any `craftcms/cms` constraint beginning with `>=` will be treated as `^`. If your plugin supports Craft 3 and 4, for example, you’ll need to set your `craftcms/cms` constraint to `^3.0|^4.0` rather than `>=3.0`.
 
+While it’s not required, we also recommend setting a `php` constraint to clarify expectations and carefully manage any breaking changes. A Craft 3 plugin with support for PHP 7 and PHP 8, for example, might look like this:
+
+```json
+  "require": {
+    "php": "^7.2.5|^8.0"
+    // ...
+  }
+```
+
+If the Craft 4 version adds support for (not yet released) PHP 9, it would look like this:
+
+```json
+  "require": {
+    "php": "^8.0.2|^9.0"
+    // ...
+  }
+```
+
 ## Rector
 
 Craft’s [Rector](https://github.com/craftcms/rector) rules can save you time by adding required type declarations throughout your code. It’s important to do things in the right order so you can run Rector once and be on your way.
