@@ -1261,6 +1261,19 @@ handle
 
 Lists all plugins.
 
+```
+$ php craft plugin/list
+
+    Name            Handle         Package Name            Version  Installed  Enabled
+    --------------  -------------  ----------------------  -------  ---------  -------
+    Anchors         anchors        craftcms/anchors        2.3.1    Yes        Yes
+    Apple News      apple-news     craftcms/apple-news     2.0.1    Yes        Yes
+    CKEditor        ckeditor       craftcms/ckeditor       1.3.0    Yes        Yes
+    Craft Commerce  commerce       craftcms/commerce       3.4.11   Yes        Yes
+    Gatsby Helper   gatsby-helper  craftcms/gatsby-helper  1.1.2    Yes        Yes
+```
+
+
 <h3 id="plugin-uninstall">
     <a href="#plugin-uninstall" class="header-anchor">#</a>
     <code>plugin/uninstall</code>
