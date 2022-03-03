@@ -329,10 +329,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -375,10 +371,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -423,10 +415,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -469,10 +457,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -517,10 +501,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -563,10 +543,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -611,10 +587,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -657,10 +629,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -705,10 +673,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -751,10 +715,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -799,10 +759,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -845,10 +801,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -893,10 +845,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -939,10 +887,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -987,10 +931,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1033,10 +973,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1081,10 +1017,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1127,10 +1059,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1175,10 +1103,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1221,10 +1145,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1269,10 +1189,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1315,10 +1231,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1363,10 +1275,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1409,10 +1317,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1457,10 +1361,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1503,10 +1403,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1551,10 +1447,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1597,10 +1489,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1739,10 +1627,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1785,10 +1669,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1833,10 +1713,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1879,10 +1755,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1927,10 +1799,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1974,10 +1842,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -2020,10 +1884,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4072,10 +3932,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4118,10 +3974,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4166,10 +4018,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4212,10 +4060,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4260,10 +4104,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4306,10 +4146,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4354,10 +4190,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4400,10 +4232,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4448,10 +4276,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4494,10 +4318,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4542,10 +4362,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4588,10 +4404,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4636,10 +4448,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4682,10 +4490,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4730,10 +4534,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4776,10 +4576,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4824,10 +4620,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4870,10 +4662,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4918,10 +4706,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4964,10 +4748,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5012,10 +4792,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5058,10 +4834,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5106,10 +4878,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5152,10 +4920,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5200,10 +4964,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5246,10 +5006,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5294,10 +5050,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5341,10 +5093,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5387,10 +5135,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5529,10 +5273,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5575,10 +5315,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5623,10 +5359,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5669,10 +5401,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5717,10 +5445,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5763,10 +5487,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5811,10 +5531,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5857,10 +5573,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5905,10 +5617,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5951,10 +5659,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5999,10 +5703,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6045,10 +5745,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6093,10 +5789,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6139,10 +5831,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6187,10 +5875,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6233,10 +5917,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6281,10 +5961,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6327,10 +6003,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6375,10 +6047,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6421,10 +6089,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6469,10 +6133,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6515,10 +6175,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6563,10 +6219,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6609,10 +6261,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6657,10 +6305,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6703,10 +6347,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6751,10 +6391,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6797,10 +6433,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6845,10 +6477,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6891,10 +6519,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6939,10 +6563,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6985,10 +6605,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7033,10 +6649,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7080,10 +6692,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7126,10 +6734,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7268,10 +6872,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7314,10 +6914,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7362,10 +6958,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7408,10 +7000,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7456,10 +7044,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7503,10 +7087,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7549,10 +7129,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7608,10 +7184,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7689,10 +7261,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7772,10 +7340,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7853,10 +7417,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7936,10 +7496,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8017,10 +7573,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8100,10 +7652,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8181,10 +7729,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8264,10 +7808,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8345,10 +7885,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8428,10 +7964,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8509,10 +8041,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8592,10 +8120,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8673,10 +8197,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8756,10 +8276,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8837,10 +8353,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8920,10 +8432,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9001,10 +8509,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9084,10 +8588,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9165,10 +8665,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9248,10 +8744,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9329,10 +8821,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9412,10 +8900,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9493,10 +8977,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9576,10 +9056,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9657,10 +9133,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9740,10 +9212,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9822,10 +9290,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9903,10 +9367,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10150,10 +9610,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10231,10 +9687,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10314,10 +9766,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10395,10 +9843,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10478,10 +9922,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10559,10 +9999,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10642,10 +10078,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10713,10 +10145,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10759,10 +10187,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10807,10 +10231,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10853,10 +10273,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10901,10 +10317,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10947,10 +10359,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10995,10 +10403,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11041,10 +10445,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11089,10 +10489,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11135,10 +10531,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11183,10 +10575,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11229,10 +10617,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11277,10 +10661,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11323,10 +10703,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11371,10 +10747,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11417,10 +10789,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11465,10 +10833,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11511,10 +10875,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11559,10 +10919,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11605,10 +10961,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11653,10 +11005,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11699,10 +11047,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11747,10 +11091,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11793,10 +11133,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11841,10 +11177,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11887,10 +11219,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11935,10 +11263,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11981,10 +11305,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -12123,10 +11443,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -12169,10 +11485,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -12217,10 +11529,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -12263,10 +11571,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -12311,10 +11615,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -12357,10 +11657,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -12405,10 +11701,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -12451,10 +11743,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -12499,10 +11787,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -12545,10 +11829,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -12593,10 +11873,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -12639,10 +11915,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -12687,10 +11959,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -12733,10 +12001,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -12781,10 +12045,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -12827,10 +12087,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -12875,10 +12131,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -12921,10 +12173,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -12969,10 +12217,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -13015,10 +12259,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -13063,10 +12303,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -13109,10 +12345,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -13157,10 +12389,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -13203,10 +12431,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -13251,10 +12475,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -13297,10 +12517,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -13345,10 +12561,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -13391,10 +12603,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -13439,10 +12647,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -13485,10 +12689,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -13533,10 +12733,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -13579,10 +12775,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -13627,10 +12819,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -13674,10 +12862,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -13720,10 +12904,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -13862,10 +13042,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -13908,10 +13084,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -13956,10 +13128,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -14002,10 +13170,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -14050,10 +13214,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -14096,10 +13256,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -14144,10 +13300,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -14190,10 +13342,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -14238,10 +13386,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -14284,10 +13428,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -14332,10 +13472,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -14378,10 +13514,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -14426,10 +13558,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -14472,10 +13600,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -14520,10 +13644,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -14566,10 +13686,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -14614,10 +13730,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -14660,10 +13772,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -14708,10 +13816,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -14754,10 +13858,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -14802,10 +13902,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -14848,10 +13944,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -14896,10 +13988,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -14942,10 +14030,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -14990,10 +14074,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -15036,10 +14116,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -15084,10 +14160,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -15130,10 +14202,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -15178,10 +14246,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -15224,10 +14288,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -15272,10 +14332,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -15318,10 +14374,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -15366,10 +14418,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -15413,10 +14461,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -15459,10 +14503,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -15601,10 +14641,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -15647,10 +14683,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -15695,10 +14727,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -15741,10 +14769,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -15789,10 +14813,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -15836,10 +14856,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -15882,10 +14898,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -15930,10 +14942,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -15976,10 +14984,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -16024,10 +15028,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -16070,10 +15070,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -16118,10 +15114,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -16164,10 +15156,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -16212,10 +15200,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -16258,10 +15242,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -16306,10 +15286,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -16352,10 +15328,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -16400,10 +15372,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -16446,10 +15414,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -16494,10 +15458,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -16540,10 +15500,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -16588,10 +15544,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -16634,10 +15586,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -16682,10 +15630,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -16728,10 +15672,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -16776,10 +15716,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -16822,10 +15758,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -16870,10 +15802,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -16916,10 +15844,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -16964,10 +15888,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -17010,10 +15930,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -17058,10 +15974,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -17104,10 +16016,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -17152,10 +16060,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -17198,10 +16102,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -17246,10 +16146,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -17293,10 +16189,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -17339,10 +16231,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -17481,10 +16369,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -17527,10 +16411,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -17575,10 +16455,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -17621,10 +16497,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -17669,10 +16541,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -17716,10 +16584,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -17762,10 +16626,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -23036,10 +21896,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -23082,10 +21938,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -23130,10 +21982,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -23176,10 +22024,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -23224,10 +22068,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -23270,10 +22110,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -23318,10 +22154,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -23364,10 +22196,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -23412,10 +22240,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -23458,10 +22282,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -23506,10 +22326,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -23552,10 +22368,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -23600,10 +22412,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -23646,10 +22454,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -23694,10 +22498,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -23740,10 +22540,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -23788,10 +22584,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -23834,10 +22626,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -23882,10 +22670,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -23928,10 +22712,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -23976,10 +22756,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -24022,10 +22798,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -24070,10 +22842,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -24116,10 +22884,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -24164,10 +22928,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -24210,10 +22970,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -24258,10 +23014,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -24305,10 +23057,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -24351,10 +23099,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -24493,10 +23237,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -24539,10 +23279,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -24587,10 +23323,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -24633,10 +23365,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -24681,10 +23409,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -24728,10 +23452,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -24774,10 +23494,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -25032,10 +23748,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -25078,10 +23790,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -25126,10 +23834,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -25172,10 +23876,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -25220,10 +23920,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -25266,10 +23962,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -25314,10 +24006,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -25360,10 +24048,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -25408,10 +24092,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -25454,10 +24134,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -25502,10 +24178,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -25548,10 +24220,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -25596,10 +24264,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -25642,10 +24306,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -25690,10 +24350,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -25736,10 +24392,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -25784,10 +24436,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -25830,10 +24478,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -25878,10 +24522,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -25924,10 +24564,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -25972,10 +24608,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -26018,10 +24650,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -26066,10 +24694,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -26112,10 +24736,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -26160,10 +24780,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -26206,10 +24822,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -26254,10 +24866,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -26301,10 +24909,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -26347,10 +24951,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -26489,10 +25089,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -26535,10 +25131,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -26583,10 +25175,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -26629,10 +25217,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -26677,10 +25261,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -26724,10 +25304,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -26770,10 +25346,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -26860,10 +25432,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -26906,10 +25474,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -26954,10 +25518,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -27000,10 +25560,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -27048,10 +25604,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -27094,10 +25646,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -27142,10 +25690,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -27188,10 +25732,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -27236,10 +25776,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -27282,10 +25818,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -27330,10 +25862,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -27376,10 +25904,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -27424,10 +25948,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -27470,10 +25990,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -27518,10 +26034,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -27564,10 +26076,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -27612,10 +26120,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -27658,10 +26162,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -27706,10 +26206,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -27752,10 +26248,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -27800,10 +26292,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -27846,10 +26334,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -27894,10 +26378,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -27940,10 +26420,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -27988,10 +26464,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -28034,10 +26506,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -28082,10 +26550,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -28129,10 +26593,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -28175,10 +26635,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -28317,10 +26773,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -28363,10 +26815,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -28411,10 +26859,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -28457,10 +26901,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -28505,10 +26945,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -28552,10 +26988,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -28598,10 +27030,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -33032,10 +31460,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->element->propagating"
@@ -33078,10 +31502,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -33126,10 +31546,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->element->propagating"
@@ -33173,10 +31589,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->element->propagating"
@@ -33219,10 +31631,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -33321,10 +31729,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->element->propagating"
@@ -33367,10 +31771,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
