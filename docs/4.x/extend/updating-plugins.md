@@ -349,6 +349,21 @@ With the new [unified element editor](#unified-element-editor) improvement, elem
 - [getCrumbs()](craft4:craft\base\ElementInterface::getCrumbs()) – Array of breadcrumbs that should be shown on the element’s edit page.
 - [getAddlButtons()](craft4:craft\base\ElementInterface::getAddlButtons()) – HTML for any additional buttons that should be shown beside “Save”.
 
+::: tip
+It’s best to rely on the new element authorization methods (`canView()`, `canSave()`, etc.) rather than checking permissions directly:
+```php
+// Good
+if (Craft::$app->getUser()->checkPermission('myplugin-manageMyElements')) {
+    // ...
+}
+
+// Better
+if ($myElement->canSave()) {
+    // ...
+}
+```
+:::
+
 ### Removed
 
 | Old                                                                                        | What to do instead
@@ -438,7 +453,6 @@ The following events have been renamed:
 | [TemplateCaches::EVENT_BEFORE_DELETE_CACHES](craft3:craft\services\TemplateCaches::EVENT_BEFORE_DELETE_CACHES)   |
 | [Volumes::EVENT_REGISTER_VOLUME_TYPES)](craft3:craft\services\Volumes::EVENT_REGISTER_VOLUME_TYPES)              |
 | [CraftVariable::EVENT_DEFINE_COMPONENTS](craft3:craft\web\twig\variables\CraftVariable::EVENT_DEFINE_COMPONENTS) | [CraftVariable::EVENT_INIT](craft4:craft\web\twig\variables\CraftVariable::EVENT_INIT)
-
 
 ## Filesystems
 
