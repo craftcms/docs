@@ -174,8 +174,6 @@ For example, `entries/edit-entry`, `categories/edit-category`, and `assets/edit-
 'entries/<section:{handle}>/<elementId:\d+><slug:(?:-[^\/]*)?>' => 'elements/edit',
 ```
 
-Most element types still have a `*/create` action that populates a draft and redirects to its edit page.
-
 ::: tip
 Categories take advantage of this unified element editing improvement with their new draft support—so the [Category](craft4:craft\elements\Category) element is a good example to investigate.
 :::
