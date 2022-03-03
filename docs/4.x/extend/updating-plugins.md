@@ -1,7 +1,5 @@
 # Updating Plugins for Craft 4
 
-Updating custom plugins and modules for Craft 4 should be much more straightforward than the Craft 2 to 3 platform transition.
-
 While [the changelog](https://github.com/craftcms/cms/blob/4.0/CHANGELOG.md) is the most comprehensive list of changes, this guide provides high-level overview and organizes changes by category.
 
 ::: tip
