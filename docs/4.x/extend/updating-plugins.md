@@ -150,9 +150,30 @@ If you don’t make the field layout designer available or support custom fields
 ```php
 public function getFieldLayout(): ?\craft\models\FieldLayout
 {
-    return FieldLayout::createFromConfig([
-        // ...
-    ]);
+    $layoutElements = [
+        new TitleField([
+            'label' => 'My Title',
+            'mandatory' => true,
+            'instructions' => 'Enter a title.',
+        ]),
+        new TextField([
+            'label' => 'My Description'
+            'attribute' => 'description',
+            'mandatory' => true,
+            'instructions' => 'Enter a description.',
+        ])
+    ];
+
+    $fieldLayout = new FieldLayout();
+
+    $tab = new FieldLayoutTab();
+    $tab->name = 'Content';
+    $tab->setLayout($fieldLayout);
+    $tab->setElements($layoutElements);
+
+    $fieldLayout->setTabs([ $tab ]);
+
+    return $fieldLayout;
 }
 ```
 
