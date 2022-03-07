@@ -42,17 +42,20 @@ The permissions Craft comes with are:
 | Permission | Handle
 | ---------- | ------
 | Access the site when the system is off | `accessSiteWhenSystemIsOff`
-| Access the CP | `accessCp`
-| ↳&nbsp; Access the CP when the system is off | `accessCpWhenSystemIsOff`
+| Access the control panel | `accessCp`
+| ↳&nbsp; Access when system is offline | `accessCpWhenSystemIsOff`
 | ↳&nbsp; Perform Craft and plugin updates | `performUpdates`
 | ↳&nbsp; Access _[Plugin Name]_ | `accessPlugin-[PluginHandle]`
 | Edit users | `editUsers`
 | ↳&nbsp; Register users | `registerUsers`
-| ↳&nbsp; Assign permissions | `assignUserPermissions`
+| ↳&nbsp; Moderate users | `moderateUsers`
+| ↳&nbsp; Assign user permissions | `assignUserPermissions`
+| ↳&nbsp; Assign user groups | `assignUserGroups`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp;  Assign users to _[Group Name]_ | `assignUserGroup:[GroupUID]`
 | ↳&nbsp; Administrate users | `administrateUsers`
+| ↳&nbsp; Impersonate users | `impersonateUsers`
 | Delete users | `deleteUsers`
 | Edit _[Site Name]_ | `editSite:[SiteUID]`
-| Impersonate users | `impersonateUsers`
 | Edit entries | `editEntries:[SectionUID]`
 | ↳&nbsp; Create entries | `createEntries:[SectionUID]`
 | ↳&nbsp; Publish entries | `publishEntries:[SectionUID]`
@@ -69,6 +72,7 @@ The permissions Craft comes with are:
 | ↳&nbsp; Upload files | `saveAssetInVolume:[VolumeUID]`
 | ↳&nbsp; Create subfolders | `createFoldersInVolume:[VolumeUID]`
 | ↳&nbsp; Remove files and folders | `deleteFilesAndFoldersInVolume:[VolumeUID]`
+| ↳&nbsp; Replace files | `replaceFilesInVolume:[VolumeUID]`
 | ↳&nbsp; Edit images | `editImagesInVolume:[VolumeUID]`
 | ↳&nbsp; View files uploaded by other users | `viewPeerFilesInVolume:[VolumeUID]`
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Edit files uploaded by other users | `editPeerFilesInVolume:[SectionUID]`
