@@ -171,7 +171,6 @@ Asset queries support the following parameters:
 | [filename](#filename)                     | Narrows the query results based on the assets’ filenames.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [folderId](#folderid)                     | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
-| [getCacheTags](#getcachetags)             |
 | [hasAlt](#hasalt)                         | Narrows the query results based on whether the assets have alternative text.
 | [height](#height)                         | Narrows the query results based on the assets’ image heights.
 | [id](#id)                                 | Narrows the query results based on the assets’ IDs.
@@ -498,15 +497,6 @@ $assets = \craft\elements\Asset::find()
 ::: tip
 This can be combined with [includeSubfolders](#includesubfolders) if you want to include assets in all the subfolders of a certain folder.
 :::
-#### `getCacheTags`
-
-
-
-
-
-
-
-
 #### `hasAlt`
 
 Narrows the query results based on whether the assets have alternative text.

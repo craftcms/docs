@@ -78,7 +78,6 @@ Tag queries support the following parameters:
 | [dateCreated](#datecreated)               | Narrows the query results based on the tags’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the tags’ last-updated dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [getCacheTags](#getcachetags)             |
 | [group](#group)                           | Narrows the query results based on the tag groups the tags belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 | [id](#id)                                 | Narrows the query results based on the tags’ IDs.
@@ -290,15 +289,6 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 :::
-
-
-#### `getCacheTags`
-
-
-
-
-
-
 
 
 #### `group`
