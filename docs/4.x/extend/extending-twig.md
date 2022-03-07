@@ -21,24 +21,28 @@ public function init()
 {
     parent::init();
 
-    Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function(Event $e) {
-        /** @var CraftVariable $variable */
-        $variable = $e->sender;
+    Event::on(
+        CraftVariable::class,
+        CraftVariable::EVENT_INIT,
+        function(Event $e) {
+            /** @var CraftVariable $variable */
+            $variable = $e->sender;
 
-        // Attach a behavior:
-        $variable->attachBehaviors([
-            MyBehavior::class,
-        ]);
+            // Attach a behavior:
+            $variable->attachBehaviors([
+                MyBehavior::class,
+            ]);
 
-        // Attach a service:
-        $variable->set('serviceId', MyService::class);
-    });
+            // Attach a service:
+            $variable->set('serviceId', MyService::class);
+        }
+    );
 }
 ```
 
 ## Register a Twig Extension
 
-If you want to add new global variables, functions, filters, tags, operators, or tests to Twig, you can do that by creating a custom [Twig extension](https://twig.symfony.com/doc/2.x/advanced.html#creating-an-extension).
+If you want to add new global variables, functions, filters, tags, operators, or tests to Twig, you can do that by creating a custom [Twig extension](https://twig.symfony.com/doc/3.x/advanced.html#creating-an-extension).
 
 Twig extensions can be registered for Craft’s Twig environment by calling <craft3:craft\web\View::registerTwigExtension()> method:
 

@@ -195,7 +195,7 @@ class ProductQuery extends ElementQuery
         // join in the products table
         $this->joinElementTable('products');
 
-        // select the price column
+        // select the price and currency columns
         $this->query->select([
             'products.price',
             'products.currency',
@@ -255,6 +255,8 @@ If you want to make it possible for templates to query for your elements, you ca
 <?php
 namespace mynamespace;
 
+use mynamespace\elements\Product;
+use mynamespace\elements\db\ProductQuery;
 use Craft;
 use yii\base\Behavior;
 

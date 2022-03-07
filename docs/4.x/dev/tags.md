@@ -205,7 +205,7 @@ The `{% css %}` tag can be used to register a CSS file or a CSS code block.
 ```
 
 ::: tip
-To register a CSS file, the URL must end in `.css`.
+To register a CSS file, the URL must begin with `https://` or `http://`, or end in `.css`.
 :::
 
 ### Parameters
@@ -348,7 +348,7 @@ The `{% js %}` tag can be used to register a JavaScript file or a JavaScript cod
 ```
 
 ::: tip
-To register a JavaScript file, the URL must end in `.js`.
+To register a JavaScript file, the URL must begin with `https://` or `http://`, or end in `.js`.
 
 To provide a *dynamic* filename reference, use [`view.registerJsFile()`](craft3:craft\web\View::registerJsFile()) instead:
 ```twig
