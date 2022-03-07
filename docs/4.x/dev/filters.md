@@ -1,35 +1,35 @@
 # Filters
 
-The following [filters](https://twig.symfony.com/doc/2.x/templates.html#filters) are available to Twig templates in Craft:
+The following [filters](https://twig.symfony.com/doc/3.x/templates.html#filters) are available to Twig templates in Craft:
 
 Filter | Description
 ------ | -----------
-[abs](https://twig.symfony.com/doc/2.x/filters/abs.html) | Returns the absolute value of a number.
+[abs](https://twig.symfony.com/doc/3.x/filters/abs.html) | Returns the absolute value of a number.
 [append](#append) | Appends HTML to the end of another element.
 [ascii](#ascii) | Converts a string to ASCII characters.
 [atom](#atom) | Converts a date to an ISO-8601 timestamp.
 [attr](#attr) | Modifies an HTML tag’s attributes.
-[batch](https://twig.symfony.com/doc/2.x/filters/batch.html) | Batches items in an array.
+[batch](https://twig.symfony.com/doc/3.x/filters/batch.html) | Batches items in an array.
 [camel](#camel) | Formats a string into camelCase.
-[capitalize](https://twig.symfony.com/doc/2.x/filters/capitalize.html) | Capitalizes the first character of a string.
+[capitalize](https://twig.symfony.com/doc/3.x/filters/capitalize.html) | Capitalizes the first character of a string.
 [column](#column) | Returns the values from a single property or key in an array.
 [contains](#contains) | Returns whether an array contains a nested item with a given key/value pair.
-[convert_encoding](https://twig.symfony.com/doc/2.x/filters/convert_encoding.html) | Converts a string from one encoding to another.
+[convert_encoding](https://twig.symfony.com/doc/3.x/filters/convert_encoding.html) | Converts a string from one encoding to another.
 [currency](#currency) | Formats a number as currency.
 [date](#date) | Formats a date.
-[date_modify](https://twig.symfony.com/doc/2.x/filters/date_modify.html) | Modifies a date.
+[date_modify](https://twig.symfony.com/doc/3.x/filters/date_modify.html) | Modifies a date.
 [datetime](#datetime) | Formats a date with its time.
-[default](https://twig.symfony.com/doc/2.x/filters/default.html) | Returns the value or a default value if empty.
+[default](https://twig.symfony.com/doc/3.x/filters/default.html) | Returns the value or a default value if empty.
 [diff](#diff) | Returns the difference between arrays.
 [duration](#duration) | Returns a `DateInterval` object.
 [encenc](#encenc) | Encrypts and base64-encodes a string.
-[escape](https://twig.symfony.com/doc/2.x/filters/escape.html) | Escapes a string.
+[escape](https://twig.symfony.com/doc/3.x/filters/escape.html) | Escapes a string.
 [explodeClass](#explodeclass) | Converts a `class` attribute value into an array of class names.
 [explodeStyle](#explodestyle) | Converts a `style` attribute value into an array of property name/value pairs.
 [filesize](#filesize) | Formats a number of bytes into something else.
 [filter](#filter) | Filters the items in an array.
-[first](https://twig.symfony.com/doc/2.x/filters/first.html) | Returns the first character/item of a string/array.
-[format](https://twig.symfony.com/doc/2.x/filters/format.html) | Formats a string by replacing placeholders.
+[first](https://twig.symfony.com/doc/3.x/filters/first.html) | Returns the first character/item of a string/array.
+[format](https://twig.symfony.com/doc/3.x/filters/format.html) | Formats a string by replacing placeholders.
 [group](#group) | Groups items in an array.
 [hash](#hash) | Prefixes a string with a keyed-hash message authentication code (HMAC).
 [httpdate](#httpdate) | Converts a date to the HTTP format.
@@ -37,17 +37,17 @@ Filter | Description
 [indexOf](#indexof) | Returns the index of a given value within an array, or the position of a passed-in string within another string.
 [index](#index) | Indexes the items in an array.
 [intersect](#intersect) | Returns the intersecting items of two arrays.
-[join](https://twig.symfony.com/doc/2.x/filters/join.html) | Concatenates multiple strings into one.
+[join](https://twig.symfony.com/doc/3.x/filters/join.html) | Concatenates multiple strings into one.
 [json_decode](#json_decode) | JSON-decodes a value.
 [json_encode](#json_encode) | JSON-encodes a value.
 [kebab](#kebab) | Formats a string into “kebab-case”.
-[keys](https://twig.symfony.com/doc/2.x/filters/keys.html) | Returns the keys of an array.
-[last](https://twig.symfony.com/doc/2.x/filters/last.html) | Returns the last character/item of a string/array.
+[keys](https://twig.symfony.com/doc/3.x/filters/keys.html) | Returns the keys of an array.
+[last](https://twig.symfony.com/doc/3.x/filters/last.html) | Returns the last character/item of a string/array.
 [lcfirst](#lcfirst) | Lowercases the first character of a string.
-[length](https://twig.symfony.com/doc/2.x/filters/length.html) | Returns the length of a string or array.
+[length](https://twig.symfony.com/doc/3.x/filters/length.html) | Returns the length of a string or array.
 [literal](#literal) | Escapes an untrusted string for use with element query params.
-[lower](https://twig.symfony.com/doc/2.x/filters/lower.html) | Lowercases a string.
-[map](https://twig.symfony.com/doc/2.x/filters/map.html) | Applies an arrow function to the items in an array.
+[lower](https://twig.symfony.com/doc/3.x/filters/lower.html) | Lowercases a string.
+[map](https://twig.symfony.com/doc/3.x/filters/map.html) | Applies an arrow function to the items in an array.
 [markdown](#markdown-or-md) | Processes a string as Markdown.
 [merge](#merge) | Merges an array with another one.
 [money](#money) | Outputs a value from a Money object.
@@ -55,39 +55,39 @@ Filter | Description
 [namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
 [namespaceInputId](#namespaceinputid) | Namespaces an element ID.
 [namespaceInputName](#namespaceinputname) | Namespaces an input name.
-[nl2br](https://twig.symfony.com/doc/2.x/filters/nl2br.html) | Replaces newlines with `<br>` tags.
+[nl2br](https://twig.symfony.com/doc/3.x/filters/nl2br.html) | Replaces newlines with `<br>` tags.
 [number](#number) | Formats a number.
-[number_format](https://twig.symfony.com/doc/2.x/filters/number_format.html) | Formats numbers.
+[number_format](https://twig.symfony.com/doc/3.x/filters/number_format.html) | Formats numbers.
 [parseRefs](#parserefs) | Parses a string for reference tags.
 [pascal](#pascal) | Formats a string into “PascalCase”.
 [percentage](#percentage) | Formats a percentage.
 [prepend](#prepend) | Prepends HTML to the beginning of another element.
 [purify](#purify) | Runs HTML code through HTML Purifier.
 [push](#push) | Appends one or more items onto the end of an array.
-[raw](https://twig.symfony.com/doc/2.x/filters/raw.html) | Marks as value as safe for the current escaping strategy.
-[reduce](https://twig.symfony.com/doc/2.x/filters/reduce.html) | Iteratively reduces a sequence or mapping to a single value.
+[raw](https://twig.symfony.com/doc/3.x/filters/raw.html) | Marks as value as safe for the current escaping strategy.
+[reduce](https://twig.symfony.com/doc/3.x/filters/reduce.html) | Iteratively reduces a sequence or mapping to a single value.
 [removeClass](#removeclass) | Removes a class (or classes) from the given HTML tag.
 [replace](#replace) | Replaces parts of a string with other things.
-[reverse](https://twig.symfony.com/doc/2.x/filters/reverse.html) | Reverses a string or array.
-[round](https://twig.symfony.com/doc/2.x/filters/round.html) | Rounds a number.
+[reverse](https://twig.symfony.com/doc/3.x/filters/reverse.html) | Reverses a string or array.
+[round](https://twig.symfony.com/doc/3.x/filters/round.html) | Rounds a number.
 [rss](#rss) | Converts a date to RSS date format.
-[slice](https://twig.symfony.com/doc/2.x/filters/slice.html) | Extracts a slice of a string or array.
+[slice](https://twig.symfony.com/doc/3.x/filters/slice.html) | Extracts a slice of a string or array.
 [snake](#snake) | Formats a string into “snake_case”.
-[sort](https://twig.symfony.com/doc/2.x/filters/sort.html) | Sorts an array.
-[spaceless](https://twig.symfony.com/doc/2.x/filters/spaceless.html) | Removes whitespace between HTML tags.
-[split](https://twig.symfony.com/doc/2.x/filters/split.html) | Splits a string by a delimiter.
-[striptags](https://twig.symfony.com/doc/2.x/filters/striptags.html) | Strips SGML/XML tags from a string.
+[sort](https://twig.symfony.com/doc/3.x/filters/sort.html) | Sorts an array.
+[spaceless](https://twig.symfony.com/doc/3.x/filters/spaceless.html) | Removes whitespace between HTML tags.
+[split](https://twig.symfony.com/doc/3.x/filters/split.html) | Splits a string by a delimiter.
+[striptags](https://twig.symfony.com/doc/3.x/filters/striptags.html) | Strips SGML/XML tags from a string.
 [time](#time) | Formats a time.
 [timestamp](#timestamp) | Formats a human-readable timestamp.
-[title](https://twig.symfony.com/doc/2.x/filters/title.html) | Formats a string into “Title Case”.
+[title](https://twig.symfony.com/doc/3.x/filters/title.html) | Formats a string into “Title Case”.
 [translate](#translate-or-t) | Translates a message.
 [truncate](#truncate) | Truncates a string to a given length, while ensuring that it does not split words.
-[trim](https://twig.symfony.com/doc/2.x/filters/trim.html) | Strips whitespace from the beginning and end of a string.
+[trim](https://twig.symfony.com/doc/3.x/filters/trim.html) | Strips whitespace from the beginning and end of a string.
 [ucfirst](#ucfirst) | Capitalizes the first character of a string.
 [unique](#unique) | Removes duplicate values from an array.
 [unshift](#unshift) | Prepends one or more items to the beginning of an array.
-[upper](https://twig.symfony.com/doc/2.x/filters/upper.html) | Formats a string into “UPPER CASE”.
-[url_encode](https://twig.symfony.com/doc/2.x/filters/url_encode.html) | Percent-encodes a string as a URL segment or an array as a query string.
+[upper](https://twig.symfony.com/doc/3.x/filters/upper.html) | Formats a string into “UPPER CASE”.
+[url_encode](https://twig.symfony.com/doc/3.x/filters/url_encode.html) | Percent-encodes a string as a URL segment or an array as a query string.
 [values](#values) | Returns all the values in an array, resetting its keys.
 [where](#where) | Filters an array by key/value pairs.
 [withoutKey](#withoutkey) | Returns an array without the specified key.
@@ -229,7 +229,7 @@ An arrow function can be passed instead, if the values that should be returned d
 {% set authorNames = entries|column(e => e.author.fullName) %}
 ```
 
-This works similarly to Twig’s core [`column`](https://twig.symfony.com/doc/2.x/filters/column.html) filter, except that [ArrayHelper::getColumn()](yii2:yii\helpers\BaseArrayHelper::getColumn()) is used rather than PHP’s [array_column()](https://secure.php.net/array_column) function.
+This works similarly to Twig’s core [`column`](https://twig.symfony.com/doc/3.x/filters/column.html) filter, except that [ArrayHelper::getColumn()](yii2:yii\helpers\BaseArrayHelper::getColumn()) is used rather than PHP’s [array_column()](https://secure.php.net/array_column) function.
 
 ## `contains`
 
@@ -278,7 +278,7 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 {# Output: Dec 20, 1990 #}
 ```
 
-You can customize how the date is presented by passing a custom date format, just like Twig’s core [`date`](https://twig.symfony.com/doc/2.x/filters/date.html) filter:
+You can customize how the date is presented by passing a custom date format, just like Twig’s core [`date`](https://twig.symfony.com/doc/3.x/filters/date.html) filter:
 
 ```twig
 {{ 'now'|date('m/d/Y') }}
@@ -438,7 +438,7 @@ If nothing is passed to it, any “empty” elements will be removed.
 {# Result: ['foo', 'bar', 'baz'] #}
 ```
 
-When an arrow function is passed, this works identically to Twig’s core [`filter`](https://twig.symfony.com/doc/2.x/filters/filter.html) filter.
+When an arrow function is passed, this works identically to Twig’s core [`filter`](https://twig.symfony.com/doc/3.x/filters/filter.html) filter.
 
 ```twig
 {% set array = ['foo', 'bar', 'baz'] %}
@@ -563,7 +563,7 @@ Returns an array containing only the values that are also in a passed-in array.
 
 Returns the JSON representation of a value.
 
-This works similarly to Twig’s core [`json_encode`](https://twig.symfony.com/doc/2.x/filters/json_encode.html) filter, except that the `options` argument will default to `JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT` if the response content type is either `text/html` or `application/xhtml+xml`.
+This works similarly to Twig’s core [`json_encode`](https://twig.symfony.com/doc/3.x/filters/json_encode.html) filter, except that the `options` argument will default to `JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT` if the response content type is either `text/html` or `application/xhtml+xml`.
 
 ## `json_decode`
 
@@ -631,7 +631,7 @@ This filter supports two arguments:
 
 Merges an array with another one.
 
-This has the same behavior as [Twig’s merge filter](https://twig.symfony.com/doc/2.x/filters/merge.html) which uses PHP’s [array_merge()](https://www.php.net/manual/en/function.array-merge.php) under the hood:
+This has the same behavior as [Twig’s merge filter](https://twig.symfony.com/doc/3.x/filters/merge.html) which uses PHP’s [array_merge()](https://www.php.net/manual/en/function.array-merge.php) under the hood:
 
 ```twig
 {% set values = [1, 2] %}
@@ -990,7 +990,7 @@ Removes a class (or classes) from the given HTML tag.
 
 Replaces parts of a string with other things.
 
-When a mapping array is passed, this works identically to Twig’s core [`replace`](https://twig.symfony.com/doc/2.x/filters/replace.html) filter:
+When a mapping array is passed, this works identically to Twig’s core [`replace`](https://twig.symfony.com/doc/3.x/filters/replace.html) filter:
 
 ```twig
 {% set str = 'Hello, FIRST LAST' %}

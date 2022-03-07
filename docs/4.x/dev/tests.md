@@ -1,29 +1,29 @@
 # Tests
 
-The following [tests](https://twig.symfony.com/doc/2.x/templates.html#test-operator) are available to Twig templates in Craft:
+The following [tests](https://twig.symfony.com/doc/3.x/templates.html#test-operator) are available to Twig templates in Craft:
 
 Test | Description
 ---- | -----------
 [array](#array) | Whether a variable is an array.
 [boolean](#boolean) | Whether a variable is a boolean value.
 [callable](#callable) | Whether a variable is callable.
-[constant](https://twig.symfony.com/doc/2.x/tests/constant.html) | Whether a variable is the same as a PHP constant value.
+[constant](https://twig.symfony.com/doc/3.x/tests/constant.html) | Whether a variable is the same as a PHP constant value.
 [countable](#countable) | Whether a variable is a countable value.
-[defined](https://twig.symfony.com/doc/2.x/tests/defined.html) | Whether a variable is defined.
-[divisible by](https://twig.symfony.com/doc/2.x/tests/divisibleby.html) | Whether a number is divisible by another number.
-[empty](https://twig.symfony.com/doc/2.x/tests/empty.html) | Whether a variable is empty.
-[even](https://twig.symfony.com/doc/2.x/tests/even.html) | Whether a number is even.
+[defined](https://twig.symfony.com/doc/3.x/tests/defined.html) | Whether a variable is defined.
+[divisible by](https://twig.symfony.com/doc/3.x/tests/divisibleby.html) | Whether a number is divisible by another number.
+[empty](https://twig.symfony.com/doc/3.x/tests/empty.html) | Whether a variable is empty.
+[even](https://twig.symfony.com/doc/3.x/tests/even.html) | Whether a number is even.
 [float](#float) | Whether a variable is a float value.
 [instance of](#instance-of) | Whether an object is an instance of a namespace or parent class.
 [integer](#integer) | Whether a variable is an integer value.
-[iterable](https://twig.symfony.com/doc/2.x/tests/iterable.html) | Whether a variable is an array or a traversable object.
+[iterable](https://twig.symfony.com/doc/3.x/tests/iterable.html) | Whether a variable is an array or a traversable object.
 [missing](#missing) | Whether an object is missing its expected class.
-[null](https://twig.symfony.com/doc/2.x/tests/null.html) | Whether a variable is `null`.
+[null](https://twig.symfony.com/doc/3.x/tests/null.html) | Whether a variable is `null`.
 [numeric](#numeric) | Whether a variable is numeric.
 [object](#object) | Whether a variable is an object.
-[odd](https://twig.symfony.com/doc/2.x/tests/odd.html) | Whether a number is odd.
+[odd](https://twig.symfony.com/doc/3.x/tests/odd.html) | Whether a number is odd.
 [resource](#resource) | Whether a variable is a resource.
-[same as](https://twig.symfony.com/doc/2.x/tests/sameas.html) | Whether a variable is the same as another.
+[same as](https://twig.symfony.com/doc/3.x/tests/sameas.html) | Whether a variable is the same as another.
 [scalar](#scalar) | Whether a variable is a scalar.
 [string](#string) | Whether a variable is a string value.
 

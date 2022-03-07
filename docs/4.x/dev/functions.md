@@ -1,6 +1,6 @@
 # Functions
 
-The following [functions](https://twig.symfony.com/doc/2.x/templates.html#functions) are available to Twig templates in Craft:
+The following [functions](https://twig.symfony.com/doc/3.x/templates.html#functions) are available to Twig templates in Craft:
 
 Function | Description
 -------- | -----------
@@ -8,23 +8,23 @@ Function | Description
 [actionUrl](#actionurl) | Generates a controller action URL.
 [alias](#alias) | Parses a string as an alias.
 [attr](#attr) | Generates HTML attributes.
-[attribute](https://twig.symfony.com/doc/2.x/functions/attribute.html) | Accesses a dynamic attribute of a variable.
+[attribute](https://twig.symfony.com/doc/3.x/functions/attribute.html) | Accesses a dynamic attribute of a variable.
 [beginBody](#beginbody) | Outputs scripts and styles that were registered for the “begin body” position.
-[block](https://twig.symfony.com/doc/2.x/functions/block.html) | Prints a block’s output.
+[block](https://twig.symfony.com/doc/3.x/functions/block.html) | Prints a block’s output.
 [ceil](#ceil) | Rounds a number up.
 [className](#classname) | Returns the fully qualified class name of a given object.
 [clone](#clone) | Clones an object.
 [collect](#collect) | Returns a new collection.
 [combine](#combine) | Combines two arrays into one.
 [configure](#configure) | Sets attributes on the passed object.
-[constant](https://twig.symfony.com/doc/2.x/functions/constant.html) | Returns the constant value for a given string.
+[constant](https://twig.symfony.com/doc/3.x/functions/constant.html) | Returns the constant value for a given string.
 [create](#create) | Creates a new object.
 [csrfInput](#csrfinput) | Returns a hidden CSRF token input.
 [cpUrl](#cpurl) | Generates a control panel URL.
-[cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html) | Cycles on an array of values.
+[cycle](https://twig.symfony.com/doc/3.x/functions/cycle.html) | Cycles on an array of values.
 [dataUrl](#dataurl) | Outputs an asset or file as a base64-encoded data URL.
 [date](#date) | Creates a date.
-[dump](https://twig.symfony.com/doc/2.x/functions/dump.html) | Dumps information about a variable.
+[dump](https://twig.symfony.com/doc/3.x/functions/dump.html) | Dumps information about a variable.
 [endBody](#endbody) | Outputs scripts and styles that were registered for the “end body” position.
 [expression](#expression) | Creates a database expression object.
 [failMessageInput](#failmessageinput) | Outputs a hidden `failMessage` input.
@@ -33,17 +33,17 @@ Function | Description
 [gql](#gql) | Executes a GraphQL query against the full schema.
 [head](#head) | Outputs scripts and styles that were registered for the “head” position.
 [hiddenInput](#hiddeninput) | Outputs a hidden input.
-[include](https://twig.symfony.com/doc/2.x/functions/include.html) | Returns the rendered content of a template.
+[include](https://twig.symfony.com/doc/3.x/functions/include.html) | Returns the rendered content of a template.
 [input](#input) | Outputs an HTML input.
-[max](https://twig.symfony.com/doc/2.x/functions/max.html) | Returns the biggest value in an array.
-[min](https://twig.symfony.com/doc/2.x/functions/min.html) | Returns the lowest value in an array.
+[max](https://twig.symfony.com/doc/3.x/functions/max.html) | Returns the biggest value in an array.
+[min](https://twig.symfony.com/doc/3.x/functions/min.html) | Returns the lowest value in an array.
 [ol](#ol) | Outputs an array of items as an ordered list.
-[parent](https://twig.symfony.com/doc/2.x/functions/parent.html) | Returns the parent block’s output.
+[parent](https://twig.symfony.com/doc/3.x/functions/parent.html) | Returns the parent block’s output.
 [parseBooleanEnv](#parsebooleanenv) | Parses a string as an environment variable or alias having a boolean value.
 [parseEnv](#parseenv) | Parses a string as an environment variable or alias.
 [plugin](#plugin) | Returns a plugin instance by its handle.
-[random](https://twig.symfony.com/doc/2.x/functions/random.html) | Returns a random value.
-[range](https://twig.symfony.com/doc/2.x/functions/range.html) | Returns a list containing an arithmetic progression of integers.
+[random](https://twig.symfony.com/doc/3.x/functions/random.html) | Returns a random value.
+[range](https://twig.symfony.com/doc/3.x/functions/range.html) | Returns a list containing an arithmetic progression of integers.
 [raw](#raw) | Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML-encoded when output.
 [redirectInput](#redirectinput) | Outputs a hidden `redirect` input.
 [seq](#seq) | Outputs the next or current number in a sequence.
@@ -51,9 +51,9 @@ Function | Description
 [siteUrl](#siteurl) | Generates a front-end URL.
 [successMessageInput](#successmessageinput) | Outputs a hidden `successMessage` input.
 [svg](#svg) | Outputs an SVG document.
-[source](https://twig.symfony.com/doc/2.x/functions/source.html) | Returns the content of a template without rendering it.
+[source](https://twig.symfony.com/doc/3.x/functions/source.html) | Returns the content of a template without rendering it.
 [tag](#tag) | Outputs an HTML tag.
-[template_from_string](https://twig.symfony.com/doc/2.x/functions/template_from_string.html) | Loads a template from a string.
+[template_from_string](https://twig.symfony.com/doc/3.x/functions/template_from_string.html) | Loads a template from a string.
 [ul](#ul) | Outputs an array of items as an unordered list.
 [url](#url) | Generates a URL.
 
@@ -134,7 +134,7 @@ Outputs any scripts and styles that were registered for the “begin body” pos
 
 Prints a block’s output.
 
-This works identically to Twig’s core [`block`](https://twig.symfony.com/doc/2.x/functions/block.html) function.
+This works identically to Twig’s core [`block`](https://twig.symfony.com/doc/3.x/functions/block.html) function.
 
 ## `ceil`
 
@@ -193,7 +193,7 @@ Passes through the behavior of the `Craft::configure()` method inherited from [`
 }).all() %}
 ```
 
-It can also be used instead of the [`merge`](https://twig.symfony.com/doc/2.x/filters/merge.html) filter:
+It can also be used instead of the [`merge`](https://twig.symfony.com/doc/3.x/filters/merge.html) filter:
 
 ```twig
 {% set myObject = { one: 'Original' } %}
@@ -215,7 +215,7 @@ It could technically even be used to set a model or element’s attributes, even
 
 Returns the constant value for a given string.
 
-This works identically to Twig’s core [`constant`](https://twig.symfony.com/doc/2.x/functions/constant.html) function.
+This works identically to Twig’s core [`constant`](https://twig.symfony.com/doc/3.x/functions/constant.html) function.
 
 ## `create`
 
@@ -286,7 +286,7 @@ The `dataUrl()` function has the following arguments:
 
 ## `date`
 
-Converts an argument to a date to allow comparison, like [Twig’s `date()` function](https://twig.symfony.com/doc/2.x/functions/date.html).
+Converts an argument to a date to allow comparison, like [Twig’s `date()` function](https://twig.symfony.com/doc/3.x/functions/date.html).
 
 The argument can be one of PHP’s supported [date and time formats](https://www.php.net/manual/en/datetime.formats.php), or additionally a `date`/`time` array.
 
@@ -438,7 +438,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 Returns the rendered content of a template.
 
-This works identically to Twig’s core [`include`](https://twig.symfony.com/doc/2.x/functions/include.html) function.
+This works identically to Twig’s core [`include`](https://twig.symfony.com/doc/3.x/functions/include.html) function.
 
 ## `input`
 
@@ -462,13 +462,13 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 Returns the biggest value in an array.
 
-This works identically to Twig’s core [`max`](https://twig.symfony.com/doc/2.x/functions/max.html) function.
+This works identically to Twig’s core [`max`](https://twig.symfony.com/doc/3.x/functions/max.html) function.
 
 ## `min`
 
 Returns the lowest value in an array.
 
-This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/2.x/functions/min.html) function.
+This works identically to Twig’s core [`min`](https://twig.symfony.com/doc/3.x/functions/min.html) function.
 
 ## `ol`
 
@@ -526,7 +526,7 @@ Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML
 ```
 
 ::: tip
-This works similarly to the [raw](https://twig.symfony.com/doc/2.x/filters/raw.html) filter, except that Twig will remember not to escape the HTML even if the variable is passed to another template/macro, whereas `|raw` filters only have an effect if used directly in an output tag.
+This works similarly to the [raw](https://twig.symfony.com/doc/3.x/filters/raw.html) filter, except that Twig will remember not to escape the HTML even if the variable is passed to another template/macro, whereas `|raw` filters only have an effect if used directly in an output tag.
 :::
 
 ## `redirectInput`
@@ -669,7 +669,7 @@ Consider caching the output, especially if you’re loading SVG files from remot
 
 Returns the content of a template without rendering it.
 
-This works identically to Twig’s core [`source`](https://twig.symfony.com/doc/2.x/functions/source.html) function.
+This works identically to Twig’s core [`source`](https://twig.symfony.com/doc/3.x/functions/source.html) function.
 
 ## `tag`
 

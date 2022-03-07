@@ -32,7 +32,7 @@ We can display content from all the Matrix blocks of an element by doing the fol
 1. Create a Matrix block query with `craft.matrixBlocks()`.
 2. Set the [owner](#owner), [fieldId](#fieldid), and [type](#type) parameters on it.
 3. Fetch the Matrix blocks with `.all()`.
-4. Loop through the Matrix blocks using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag to output the contents.
+4. Loop through the Matrix blocks using a [for](https://twig.symfony.com/doc/3.x/tags/for.html) tag to output the contents.
 
 ```twig
 {# Create a Matrix block query with the 'owner', 'fieldId', and 'type' parameters #}

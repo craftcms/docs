@@ -44,7 +44,7 @@ We can display a list of the tags in a “Blog Tags” tag group by doing the fo
 1. Create a tag query with `craft.tags()`.
 2. Set the [group](#group) parameter on it.
 3. Fetch the tags with `.all()`.
-4. Loop through the tags using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag to create the list HTML.
+4. Loop through the tags using a [for](https://twig.symfony.com/doc/3.x/tags/for.html) tag to create the list HTML.
 
 ```twig
 {# Create a tag query with the 'group' parameter #}

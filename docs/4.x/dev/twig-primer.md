@@ -123,13 +123,13 @@ Which would cause JavaScript to execute on the page, even though it wasn’t par
 There are two cases where print statements will output content directly, without auto-escaping it first:
 
 - When the content is deemed safe by the last tag or function that was called within the print statement (such as the [markdown](filters.md#markdown-or-md) filter).
-- When you explicitly mark the content as safe using a [raw](https://twig.symfony.com/doc/2.x/filters/raw.html) filter.
+- When you explicitly mark the content as safe using a [raw](https://twig.symfony.com/doc/3.x/filters/raw.html) filter.
 
 #### Manual escaping
 
 There are times where you may need to work with both trusted and untrusted content together. For example, let’s say you want to output user-supplied content as Markdown, but you want to ensure they haven’t put anything nefarious in there first.
 
-To do that, you could explicitly encode _all_ HTML within the user-supplied content using the [escape](https://twig.symfony.com/doc/2.x/filters/escape.html) filter, before passing it to the [markdown](filters.md#markdown-or-md) filter:
+To do that, you could explicitly encode _all_ HTML within the user-supplied content using the [escape](https://twig.symfony.com/doc/3.x/filters/escape.html) filter, before passing it to the [markdown](filters.md#markdown-or-md) filter:
 
 ```twig
 {# Escape any HTML in the Body field, then format as Markdown #}
@@ -147,7 +147,7 @@ Alternatively if you want to allow _some_ HTML, so long as it’s tame, you can 
 
 Twig supports setting custom **variables** in your templates, which let you save a [value](#types-of-values) to be referenced later on in your template.
 
-You can define variables using the [set](https://twig.symfony.com/doc/2.x/tags/set.html) tag.
+You can define variables using the [set](https://twig.symfony.com/doc/3.x/tags/set.html) tag.
 
 ```twig
 {% set title = "About Us" %}
@@ -209,7 +209,7 @@ Refer to the [Filters](filters.md) page for a full list of filters available to 
 
 ## Tests
 
-Tests are like functions that only return `true` or `false`, and are meant to reveal something about the nature of a value. For example, the [defined](https://twig.symfony.com/doc/2.x/tests/defined.html) test will return `true` or `false` depending on whether a variable or hash/object property is defined:
+Tests are like functions that only return `true` or `false`, and are meant to reveal something about the nature of a value. For example, the [defined](https://twig.symfony.com/doc/3.x/tests/defined.html) test will return `true` or `false` depending on whether a variable or hash/object property is defined:
 
 ```twig
 {% if specs.weight is defined %}
@@ -316,7 +316,7 @@ Arrays are ordered lists of nested values. They are delimited with left and righ
 ] %}
 ```
 
-You can loop over an array using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag:
+You can loop over an array using a [for](https://twig.symfony.com/doc/3.x/tags/for.html) tag:
 
 ```twig
 <ol class="todo">
@@ -326,7 +326,7 @@ You can loop over an array using a [for](https://twig.symfony.com/doc/2.x/tags/f
 </ol>
 ```
 
-Note that you can’t output an array directly in a print statement, or combine it with another string. If you want to quickly output a comma-separated list of an array’s values, you could use the [join](https://twig.symfony.com/doc/2.x/filters/join.html) filter:
+Note that you can’t output an array directly in a print statement, or combine it with another string. If you want to quickly output a comma-separated list of an array’s values, you could use the [join](https://twig.symfony.com/doc/3.x/filters/join.html) filter:
 
 ```twig
 {{ todoList|join(', ') }}
@@ -358,7 +358,7 @@ If you need to create a hash with a dynamic key, wrap the key in parentheses:
 } %}
 ```
 
-Like arrays, you can loop over all the values in a hash using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag:
+Like arrays, you can loop over all the values in a hash using a [for](https://twig.symfony.com/doc/3.x/tags/for.html) tag:
 
 ```twig
 <dl class="specs">
@@ -409,7 +409,7 @@ For example, Craft’s [group](filters.md#group) filter will group all of the it
 
 ## Loops
 
-You’ll frequently need to loop over multiple items in an [array](#arrays) or [hash](#hashes). To do that, you’ll use a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag.
+You’ll frequently need to loop over multiple items in an [array](#arrays) or [hash](#hashes). To do that, you’ll use a [for](https://twig.symfony.com/doc/3.x/tags/for.html) tag.
 
 ```twig{8-10}
 {% set todoList = [
@@ -427,7 +427,7 @@ You’ll frequently need to loop over multiple items in an [array](#arrays) or [
 
 ## Conditionals
 
-Your templates can contain **conditionals**, which are initiated by an [if](https://twig.symfony.com/doc/2.x/tags/if.html) tag, which contains an expression that will be evaluated as either `true` or `false`, and will show part of a template depending on the result of that expression.
+Your templates can contain **conditionals**, which are initiated by an [if](https://twig.symfony.com/doc/3.x/tags/if.html) tag, which contains an expression that will be evaluated as either `true` or `false`, and will show part of a template depending on the result of that expression.
 
 ```twig
 {% if currentUser %}
@@ -542,7 +542,7 @@ You can extend templates recursively. Try creating another template that extends
 
 ### Includes
 
-You can create “partial” templates, which only output the HTML for an individual component, and then include them within other templates using an [include](https://twig.symfony.com/doc/2.x/tags/include.html) tag.
+You can create “partial” templates, which only output the HTML for an individual component, and then include them within other templates using an [include](https://twig.symfony.com/doc/3.x/tags/include.html) tag.
 
 For example, create a template called `_tip.twig` in your `templates/` folder, with this:
 
@@ -574,7 +574,7 @@ Embeds are similar to [includes](#includes), with a superpower: they can overrid
 </div>
 ```
 
-The template will continue to work with [include](https://twig.symfony.com/doc/2.x/tags/include.html) tags like before, but now other templates have the option of using an [embed](https://twig.symfony.com/doc/2.x/tags/embed.html) tag instead, and overwriting the entire `content` block:
+The template will continue to work with [include](https://twig.symfony.com/doc/3.x/tags/include.html) tags like before, but now other templates have the option of using an [embed](https://twig.symfony.com/doc/3.x/tags/embed.html) tag instead, and overwriting the entire `content` block:
 
 ```twig
 {% embed '_tip.twig' %}
@@ -600,7 +600,7 @@ For example, let’s say you find yourself repeating the same HTML and Twig code
 </nav>
 ```
 
-You could pull that `<li>` HTML into a [macro](https://twig.symfony.com/doc/2.x/tags/macro.html) tag, and then call it for each of your nav items instead:
+You could pull that `<li>` HTML into a [macro](https://twig.symfony.com/doc/3.x/tags/macro.html) tag, and then call it for each of your nav items instead:
 
 ```twig
 {% macro navItem(label, path) %}
@@ -617,12 +617,12 @@ You could pull that `<li>` HTML into a [macro](https://twig.symfony.com/doc/2.x/
 ```
 
 ::: tip
-You can import macros from other templates using an [import](https://twig.symfony.com/doc/2.x/tags/import.html) tag.
+You can import macros from other templates using an [import](https://twig.symfony.com/doc/3.x/tags/import.html) tag.
 :::
 
 ## Additional resources
 
 To learn more about Twig, check out these resources:
 
-- [Twig for Template Designers](https://twig.symfony.com/doc/2.x/templates.html) – Twig’s official templating documentation
+- [Twig for Template Designers](https://twig.symfony.com/doc/3.x/templates.html) – Twig’s official templating documentation
 - [Twig Templates in Craft](https://craftquest.io/courses/twig-templates-in-craft) – CraftQuest’s 12-part video course introducing Twig templating in Craft

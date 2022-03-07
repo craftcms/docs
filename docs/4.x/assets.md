@@ -122,7 +122,7 @@ We can display a list of thumbnails for images in a “Photos” volume by doing
 1. Create an asset query with `craft.assets()`.
 2. Set the [volume](#volume) and [kind](#kind) parameters on it.
 3. Fetch the assets with `.all()`.
-4. Loop through the assets using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag to create the thumbnail list HTML.
+4. Loop through the assets using a [for](https://twig.symfony.com/doc/3.x/tags/for.html) tag to create the thumbnail list HTML.
 
 ```twig
 {# Create an asset query with the 'volume' and 'kind' parameters #}

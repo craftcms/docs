@@ -1,30 +1,30 @@
 # Tags
 
-The following [tags](https://twig.symfony.com/doc/2.x/templates.html#control-structure) are available to Twig templates in Craft:
+The following [tags](https://twig.symfony.com/doc/3.x/templates.html#control-structure) are available to Twig templates in Craft:
 
 Tag | Description
 --- | -----------
-[apply](https://twig.symfony.com/doc/2.x/tags/apply.html) | Applies Twig filters to the nested template code.
-[autoescape](https://twig.symfony.com/doc/2.x/tags/autoescape.html) | Controls the escaping strategy for the nested template code.
-[block](https://twig.symfony.com/doc/2.x/tags/block.html) | Defines a template block.
+[apply](https://twig.symfony.com/doc/3.x/tags/apply.html) | Applies Twig filters to the nested template code.
+[autoescape](https://twig.symfony.com/doc/3.x/tags/autoescape.html) | Controls the escaping strategy for the nested template code.
+[block](https://twig.symfony.com/doc/3.x/tags/block.html) | Defines a template block.
 [cache](#cache) | Caches a portion of your template.
 [css](#css) | Registers a `<style>` tag on the page.
 [dd](#dd) | Dump and die.
-[deprecated](https://twig.symfony.com/doc/2.x/tags/deprecated.html) | Triggers a PHP deprecation error.
-[do](https://twig.symfony.com/doc/2.x/tags/do.html) | Does.
-[embed](https://twig.symfony.com/doc/2.x/tags/embed.html) | Embeds another template.
+[deprecated](https://twig.symfony.com/doc/3.x/tags/deprecated.html) | Triggers a PHP deprecation error.
+[do](https://twig.symfony.com/doc/3.x/tags/do.html) | Does.
+[embed](https://twig.symfony.com/doc/3.x/tags/embed.html) | Embeds another template.
 [exit](#exit) | Ends the request.
-[extends](https://twig.symfony.com/doc/2.x/tags/extends.html) | Extends another template.
-[for](https://twig.symfony.com/doc/2.x/tags/for.html) | Loops through an array.
-[from](https://twig.symfony.com/doc/2.x/tags/from.html) | Imports macros from a template.
+[extends](https://twig.symfony.com/doc/3.x/tags/extends.html) | Extends another template.
+[for](https://twig.symfony.com/doc/3.x/tags/for.html) | Loops through an array.
+[from](https://twig.symfony.com/doc/3.x/tags/from.html) | Imports macros from a template.
 [header](#header) | Sets an HTTP header on the response.
 [hook](#hook) | Invokes a template hook.
 [html](#html) | Registers arbitrary HTML code on the page.
-[if](https://twig.symfony.com/doc/2.x/tags/if.html) | Conditionally executes the nested template code.
-[import](https://twig.symfony.com/doc/2.x/tags/import.html) | Imports macros from a template.
-[include](https://twig.symfony.com/doc/2.x/tags/include.html) | Includes another template.
+[if](https://twig.symfony.com/doc/3.x/tags/if.html) | Conditionally executes the nested template code.
+[import](https://twig.symfony.com/doc/3.x/tags/import.html) | Imports macros from a template.
+[include](https://twig.symfony.com/doc/3.x/tags/include.html) | Includes another template.
 [js](#js) | Registers a `<script>` tag on the page.
-[macro](https://twig.symfony.com/doc/2.x/tags/macro.html) | Defines a macro.
+[macro](https://twig.symfony.com/doc/3.x/tags/macro.html) | Defines a macro.
 [namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
 [nav](#nav) | Creates a hierarchical nav menu.
 [paginate](#paginate) | Paginates an element query.
@@ -32,13 +32,13 @@ Tag | Description
 [requireGuest](#requireguest) | Requires that no user is logged-in.
 [requireLogin](#requirelogin) | Requires that a user is logged-in.
 [requirePermission](#requirepermission) | Requires that a user is logged-in with a given permission.
-[set](https://twig.symfony.com/doc/2.x/tags/set.html) | Sets a variable.
+[set](https://twig.symfony.com/doc/3.x/tags/set.html) | Sets a variable.
 [script](#script) | Renders an HTML script tag on the page.
 [switch](#switch) | Switch the template output based on a give value.
 [tag](#tag) | Renders an HTML tag on the page.
-[use](https://twig.symfony.com/doc/2.x/tags/use.html) | Inherits from another template horizontally.
-[verbatim](https://twig.symfony.com/doc/2.x/tags/verbatim.html) | Disables parsing of nested Twig code.
-[with](https://twig.symfony.com/doc/2.x/tags/with.html) | Creates a nested template scope.
+[use](https://twig.symfony.com/doc/3.x/tags/use.html) | Inherits from another template horizontally.
+[verbatim](https://twig.symfony.com/doc/3.x/tags/verbatim.html) | Disables parsing of nested Twig code.
+[with](https://twig.symfony.com/doc/3.x/tags/with.html) | Creates a nested template scope.
 
 ## `cache`
 

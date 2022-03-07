@@ -250,7 +250,7 @@ We can display the 10 most recent entries in a “Blog” section by doing the f
 1. Create an entry query with `craft.entries()`.
 2. Set the [section](#section) and [limit](#limit) parameters on it.
 3. Fetch the entries with `.all()`.
-4. Loop through the entries using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag to output the blog post HTML.
+4. Loop through the entries using a [for](https://twig.symfony.com/doc/3.x/tags/for.html) tag to output the blog post HTML.
 
 ```twig
 {# Create an entry query with the 'section' and 'limit' parameters #}

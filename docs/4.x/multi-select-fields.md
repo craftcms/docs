@@ -89,7 +89,7 @@ foreach ($entry->myFieldHandle->options as $option) {
 ```
 :::
 
-To see if any options are selected, use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter:
+To see if any options are selected, use the [length](https://twig.symfony.com/doc/3.x/filters/length.html) filter:
 
 ::: code
 ```twig

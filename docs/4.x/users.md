@@ -36,7 +36,7 @@ We can display a list of the users in an “Authors” user group by doing the f
 1. Create a user query with `craft.users()`.
 2. Set the [group](#group) parameter on it.
 3. Fetch the users with `.all()`.
-4. Loop through the users using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag to create the list HTML.
+4. Loop through the users using a [for](https://twig.symfony.com/doc/3.x/tags/for.html) tag to create the list HTML.
 
 ```twig
 {# Create a user query with the 'group' parameter #}

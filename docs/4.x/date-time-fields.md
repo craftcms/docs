@@ -125,7 +125,7 @@ Craft and Twig provide several Twig filters for manipulating dates, which you ca
 - [timestamp](dev/filters.md#timestamp)
 - [atom](dev/filters.md#atom)
 - [rss](dev/filters.md#rss)
-- [date_modify](https://twig.symfony.com/doc/2.x/filters/date_modify.html)
+- [date_modify](https://twig.symfony.com/doc/3.x/filters/date_modify.html)
 
 ### Saving Date Fields
 
