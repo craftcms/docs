@@ -400,6 +400,7 @@ if ($myElement->canSave()) {
 
 ### Added
 
+- [craft\services\Addresses](craft4:craft\services\Addresses)
 - [craft\services\Conditions](craft4:craft\services\Conditions) for creating the new condition builder’s conditions and condition rules.
 - [craft\services\Fs](craft4:craft\services\Fs) for managing filesystems.
 - [craft\services\ImageTransforms](craft4:craft\services\ImageTransforms) for managing image transforms and transformers.
@@ -473,7 +474,31 @@ The following events have been renamed:
 
 ## Filesystems
 
-We’ve decoupled file operations from storage volumes into a new concept called “Filesystems” ([#10367](https://github.com/craftcms/cms/pull/10367)). Former volume type classes are now filesystem types, and a single [craft\models\Volume](craft4:craft\models\Volume) class represents all volumes.
+In Craft 4, volumes have been simplified to represent a place where uploaded files can go. Each volume is represented by a single [craft\models\Volume](craft4:craft\models\Volume) class, where file operations have been decoupled into a new concept called “Filesystems” ([#10367](https://github.com/craftcms/cms/pull/10367)).
+
+![A Craft 4 Volume](../images/volume.png)
+
+The volume’s former `type` has gone away, replaced instead by whatever filesystem it designates via [Volume::getFs()](craft4:\craft\models\Volume::getFs()).
+
+![A Craft 4 Filesystem](../images/filesystem.png)
+
+A Craft install can have however many filesystems it needs, where each volume designates a single filesystem handle. Since that setting can be an environment variable, it becomes trivial to swap filesystems in different environments.
+
+Former volume types will need to be implemented as filesystem types, and most calls directly to a volume’s I/O operations will need to be made on the volume’s filesystem:
+
+```php
+/** @var \craft\models\Volume $volume **/
+
+// Craft 3
+$myVolumeHandle = $volume->handle;
+$volume->createDirectory('subfolder');
+
+// Craft 4
+$myVolumeHandle = $volume->handle;
+$volume->getFs()->createDirectory('subfolder');
+```
+
+Each volume has an additional transform filesystem which defaults to the filesystem used for that volume. This makes it possible for volumes without public URLs to designate another filesystem solely for image transforms, available to be implemented by [ImageEditorTransformerInterface](craft4:craft\base\imagetransforms\ImageEditorTransformerInterface).
 
 ## Image Transforms and Transformers
 
