@@ -76,7 +76,7 @@ Craft 4 [streamlines element editing machinery](https://github.com/craftcms/cms/
 
 If you have a plugin or module that uses custom element types, there are a handful of [new methods to extend](#new-element-methods) and you may need to evaluate any routes, controllers, templates, and permissions that support the editing process.
 
-The bad news is that Craft 4’s changes touch a variety of aspects of element types, but the good news is that you’ll most likely be able to consolidate a fair amount of code.
+While Craft 4’s changes touch a variety of element type pieces, the good news is that you’ll most likely be able to consolidate a fair amount of code.
 
 ### Field Layouts
 
