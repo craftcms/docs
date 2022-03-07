@@ -48,7 +48,11 @@ At this stage the Craft developer—the person building the site that *uses* you
 Your gateway class can use [`availableForUseWithOrder($order)`](commerce3:craft\commerce\base\GatewayInterface::availableForUseWithOrder()) to examine the order and return `true` if the gateway should be available as a payment option. Even if the store doesn’t expose customer-facing gateway selection, this method is called immediately before sending payment information to the gateway to make sure it _should_. This can be useful, for example, to prevent a $0.00 “charge” from being attempted when there’s no need for it.
 
 ```php
-// only allow this gateway for orders in Australia
+public function availableForUseWithOrder(\craft\commerce\elements\Order $order): bool
+{
+    // only allow this gateway for orders in Australia
+    return $order->getBillingAddress()->countryIso === 'AU';
+}
 ```
 
 ### Payment Page
