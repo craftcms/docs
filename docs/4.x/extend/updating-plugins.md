@@ -647,5 +647,5 @@ class MyModel extends \yii\base\Model
 ```
 
 ::: tip
-Thanks to Craft 4’s [Typecast](\craft\helpers\Typecast) helper, all arrays, floats, booleans, and strings are normalized correctly in addition to DateTime values.
+Thanks to Craft 4’s [Typecast](craft4:craft\helpers\Typecast) helper, all arrays, floats, booleans, and strings are normalized correctly in addition to DateTime values.
 :::
