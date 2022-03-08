@@ -477,9 +477,9 @@ The following events have been moved or renamed:
 | [AssetTransforms::EVENT_AFTER_DELETE_TRANSFORMS](craft3:craft\services\AssetTransforms::EVENT_AFTER_DELETE_TRANSFORMS)             | Transforms are now invalidated, but no event is triggered _after_ that happens.
 | [Element::EVENT_DEFINE_IS_DELETABLE](craft3:craft\base\Element::EVENT_DEFINE_IS_DELETABLE)                                         | [Element::EVENT_AUTHORIZE_DELETE](craft4:craft\base\Element::EVENT_AUTHORIZE_DELETE)
 | [Element::EVENT_DEFINE_IS_EDITABLE](craft3:craft\base\Element::EVENT_DEFINE_IS_EDITABLE)                                           | [Element::EVENT_AUTHORIZE_VIEW](craft4:craft\base\Element::EVENT_AUTHORIZE_VIEW) and [Element::EVENT_AUTHORIZE_SAVE](craft4:craft\base\Element::EVENT_AUTHORIZE_SAVE)
-| [Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES](craft3:craft\services\Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES)                         |
+| [Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES](craft3:craft\services\Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES)                         | [Elements::EVENT_AFTER_MERGE_CANONICAL_CHANGES](craft4:craft\services\Elements::EVENT_AFTER_MERGE_CANONICAL_CHANGES)
 | [Drafts::EVENT_AFTER_PUBLISH_DRAFT](craft3:craft\services\Drafts::EVENT_AFTER_PUBLISH_DRAFT)                                       |
-| [Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES](craft3:craft\services\Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES)                       |
+| [Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES](craft3:craft\services\Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES)                       | [Elements::EVENT_BEFORE_MERGE_CANONICAL_CHANGES](craft4:craft\services\Elements::EVENT_BEFORE_MERGE_CANONICAL_CHANGES)
 | [Drafts::EVENT_BEFORE_PUBLISH_DRAFT](craft3:craft\services\Drafts::EVENT_BEFORE_PUBLISH_DRAFT)                                     |
 | [Gql::EVENT_REGISTER_GQL_PERMISSIONS](craft3:craft\services\Gql::EVENT_REGISTER_GQL_PERMISSIONS)                                   | [Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS](craft4:craft\services\Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS)
 | [TemplateCaches::EVENT_AFTER_DELETE_CACHES](craft3:craft\services\TemplateCaches::EVENT_AFTER_DELETE_CACHES)                       | Template caches have been invalidated since Craft 3.5.
