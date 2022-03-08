@@ -401,13 +401,13 @@ While the [unified element editor](#unified-element-editor) introduced some new 
 | [ElementInterface::getEditorHtml()](craft3:craft\base\ElementInterface::getEditorHtml())   | Element edit forms are now exclusively driven [by their field layout](#field-layouts).
 | [ElementInterface::getIsDeletable()](craft3:craft\base\ElementInterface::getIsDeletable()) | [ElementInterface::canDelete()](craft4:craft\base\ElementInterface::canDelete())
 | [ElementInterface::getIsEditable()](craft3:craft\base\ElementInterface::getIsEditable())   | [Element::canView()](craft4:craft\base\Element::canView()) and [Element::canSave()](craft4:craft\base\Element::canSave())
-| [Element::ATTR_STATUS_CONFLICTED](craft3:craft\base\Element::ATTR_STATUS_CONFLICTED)       | draft content is favored
+| [Element::ATTR_STATUS_CONFLICTED](craft3:craft\base\Element::ATTR_STATUS_CONFLICTED)       | Incoming draft content is favored.
 
 ## Services
 
 ### Added
 
-- [craft\services\Addresses](craft4:craft\services\Addresses) 
+- [craft\services\Addresses](craft4:craft\services\Addresses) for helping to manage new user addresses and their fields.
 - [craft\services\Conditions](craft4:craft\services\Conditions) for creating the new condition builder’s conditions and condition rules.
 - [craft\services\Fs](craft4:craft\services\Fs) for managing filesystems.
 - [craft\services\ImageTransforms](craft4:craft\services\ImageTransforms) for managing image transforms and transformers.
@@ -438,23 +438,29 @@ Control panel template updates have largely been in support of the [unified elem
 - Removed the `entries/_edit` control panel template.
 - Removed the `_layouts/element` control panel template.
 
-### Matrix Blocks
-
-Matrix blocks [can now have multiple owners](https://github.com/craftcms/cms/pull/10577) via a `matrixblocks_owners` join table. This comes with a huge performance improvement creating and applying drafts since it’s no longer necessary to duplicate Matrix blocks with unchanged content.
-
 ## Events
 
 ### Changed
 
 The [TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS](craft4:craft\gql\TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS) event is now triggered when resolving fields for a GraphQL type instead of when the type is first created.
 
-The following events have been renamed:
+The following events have been moved or renamed:
 
-| Old                                                                                          | Renamed to
-| -------------------------------------------------------------------------------------------- | -----------------------------------------------------------------------------------
-| [Assets::EVENT_GET_ASSET_THUMB_URL](craft3:craft\services\Assets::EVENT_GET_ASSET_THUMB_URL) | [Assets::EVENT_DEFINE_THUMB_URL](craft4:craft\services\Assets::EVENT_DEFINE_THUMB_URL)
-| [Assets::EVENT_GET_ASSET_URL](craft3:craft\services\Assets::EVENT_GET_ASSET_URL)             | [Assets::EVENT_DEFINE_ASSET_URL](craft4:craft\services\Assets::EVENT_DEFINE_ASSET_URL)
-| [Assets::EVENT_GET_THUMB_PATH](craft3:craft\services\Assets::EVENT_GET_THUMB_PATH)           | [Assets::EVENT_DEFINE_THUMB_PATH](craft4:craft\services\Assets::EVENT_DEFINE_THUMB_PATH)
+| Old                                                                                                                                | Renamed to
+| ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------
+| [Assets::EVENT_GET_ASSET_THUMB_URL](craft3:craft\services\Assets::EVENT_GET_ASSET_THUMB_URL)                                       | [Assets::EVENT_DEFINE_THUMB_URL](craft4:craft\services\Assets::EVENT_DEFINE_THUMB_URL)
+| [Assets::EVENT_GET_ASSET_URL](craft3:craft\services\Assets::EVENT_GET_ASSET_URL)                                                   | [Assets::EVENT_DEFINE_ASSET_URL](craft4:craft\services\Assets::EVENT_DEFINE_ASSET_URL)
+| [Assets::EVENT_GET_THUMB_PATH](craft3:craft\services\Assets::EVENT_GET_THUMB_PATH)                                                 | [Assets::EVENT_DEFINE_THUMB_PATH](craft4:craft\services\Assets::EVENT_DEFINE_THUMB_PATH)
+| [AssetTransforms::CONFIG_TRANSFORM_KEY](craft3:craft\services\AssetTransforms::CONFIG_TRANSFORM_KEY)                               | [ProjectConfig::PATH_IMAGE_TRANSFORMS](craft4:craft\services\ProjectConfig::PATH_IMAGE_TRANSFORMS)
+| [AssetTransforms::EVENT_BEFORE_SAVE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_BEFORE_SAVE_ASSET_TRANSFORM)     | [ImageTransforms::EVENT_BEFORE_SAVE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_BEFORE_SAVE_IMAGE_TRANSFORM)
+| [AssetTransforms::EVENT_AFTER_SAVE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_AFTER_SAVE_ASSET_TRANSFORM)       | [ImageTransforms::EVENT_AFTER_SAVE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_AFTER_SAVE_IMAGE_TRANSFORM)
+| [AssetTransforms::EVENT_BEFORE_DELETE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_BEFORE_DELETE_ASSET_TRANSFORM) | [ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM)
+| [AssetTransforms::EVENT_AFTER_DELETE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_AFTER_DELETE_ASSET_TRANSFORM)   | [ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM)
+| [AssetTransforms::EVENT_GENERATE_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_GENERATE_TRANSFORM)                       | [ImageTransforms::EVENT_GENERATE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_GENERATE_TRANSFORM)
+| [AssetTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE](craft3:craft\services\AssetTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE) | [ImageTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE](craft4:craft\services\ImageTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE)
+| [AssetTransforms::EVENT_BEFORE_DELETE_TRANSFORMS](craft3:craft\services\AssetTransforms::EVENT_BEFORE_DELETE_TRANSFORMS)           | [ImageTransforms::EVENT_BEFORE_INVALIDATE_ASSET_TRANSFORMS](craft4:craft\services\ImageTransforms::EVENT_BEFORE_INVALIDATE_ASSET_TRANSFORMS)
+| [ElementIndexes::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES](craft3:craft\services\ElementIndexes::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES) | [ElementSources::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES](craft4:craft\services\ElementSources::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES)
+| [ElementIndexes::EVENT_DEFINE_SOURCE_SORT_OPTIONS](craft3:craft\services\ElementIndexes::EVENT_DEFINE_SOURCE_SORT_OPTIONS)         | [ElementSources::EVENT_DEFINE_SOURCE_SORT_OPTIONS](craft4:craft\services\ElementSources::EVENT_DEFINE_SOURCE_SORT_OPTIONS)
 
 ### Deprecated
 
@@ -464,38 +470,44 @@ The following events have been renamed:
 
 ### Removed
 
-| Old                                                                                                              | What to do instead
-| ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------
-| [Element::EVENT_DEFINE_IS_DELETABLE](craft3:craft\base\Element::EVENT_DEFINE_IS_DELETABLE)                       | [Element::EVENT_AUTHORIZE_DELETE](craft4:craft\base\Element::EVENT_AUTHORIZE_DELETE)
-| [Element::EVENT_DEFINE_IS_EDITABLE](craft3:craft\base\Element::EVENT_DEFINE_IS_EDITABLE)                         | [Element::EVENT_AUTHORIZE_VIEW](craft4:craft\base\Element::EVENT_AUTHORIZE_VIEW) and [Element::EVENT_AUTHORIZE_SAVE](craft4:craft\base\Element::EVENT_AUTHORIZE_SAVE)
-| [EntriesController::EVENT_PREVIEW_ENTRY](craft3:craft\controllers\EntriesController::EVENT_PREVIEW_ENTRY)        |
-| [Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES](craft3:craft\services\Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES)       |
-| [Drafts::EVENT_AFTER_PUBLISH_DRAFT](craft3:craft\services\Drafts::EVENT_AFTER_PUBLISH_DRAFT)                     |
-| [Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES](craft3:craft\services\Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES)     | 
-| [Drafts::EVENT_BEFORE_PUBLISH_DRAFT](craft3:craft\services\Drafts::EVENT_BEFORE_PUBLISH_DRAFT)                   |
-| [Gql::EVENT_REGISTER_GQL_PERMISSIONS](craft3:craft\services\Gql::EVENT_REGISTER_GQL_PERMISSIONS)                 | [Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS](craft4:craft\services\Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS)
-| [TemplateCaches::EVENT_AFTER_DELETE_CACHES](craft3:craft\services\TemplateCaches::EVENT_AFTER_DELETE_CACHES)     |
-| [TemplateCaches::EVENT_BEFORE_DELETE_CACHES](craft3:craft\services\TemplateCaches::EVENT_BEFORE_DELETE_CACHES)   |
-| [Volumes::EVENT_REGISTER_VOLUME_TYPES)](craft3:craft\services\Volumes::EVENT_REGISTER_VOLUME_TYPES)              | [Fs::EVENT_REGISTER_FILESYSTEM_TYPES](craft4:craft\services\Fs::EVENT_REGISTER_FILESYSTEM_TYPES)
-| [CraftVariable::EVENT_DEFINE_COMPONENTS](craft3:craft\web\twig\variables\CraftVariable::EVENT_DEFINE_COMPONENTS) | [CraftVariable::EVENT_INIT](craft4:craft\web\twig\variables\CraftVariable::EVENT_INIT)
+| Old                                                                                                                                | What to do instead
+| ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------
+| [AssetTransforms::EVENT_AFTER_DELETE_TRANSFORMS](craft3:craft\services\AssetTransforms::EVENT_AFTER_DELETE_TRANSFORMS)             | Transforms are now invalidated, but no event is triggered _after_ that happens.
+| [Element::EVENT_DEFINE_IS_DELETABLE](craft3:craft\base\Element::EVENT_DEFINE_IS_DELETABLE)                                         | [Element::EVENT_AUTHORIZE_DELETE](craft4:craft\base\Element::EVENT_AUTHORIZE_DELETE)
+| [Element::EVENT_DEFINE_IS_EDITABLE](craft3:craft\base\Element::EVENT_DEFINE_IS_EDITABLE)                                           | [Element::EVENT_AUTHORIZE_VIEW](craft4:craft\base\Element::EVENT_AUTHORIZE_VIEW) and [Element::EVENT_AUTHORIZE_SAVE](craft4:craft\base\Element::EVENT_AUTHORIZE_SAVE)
+| [Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES](craft3:craft\services\Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES)                         |
+| [Drafts::EVENT_AFTER_PUBLISH_DRAFT](craft3:craft\services\Drafts::EVENT_AFTER_PUBLISH_DRAFT)                                       |
+| [Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES](craft3:craft\services\Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES)                       |
+| [Drafts::EVENT_BEFORE_PUBLISH_DRAFT](craft3:craft\services\Drafts::EVENT_BEFORE_PUBLISH_DRAFT)                                     |
+| [Gql::EVENT_REGISTER_GQL_PERMISSIONS](craft3:craft\services\Gql::EVENT_REGISTER_GQL_PERMISSIONS)                                   | [Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS](craft4:craft\services\Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS)
+| [TemplateCaches::EVENT_AFTER_DELETE_CACHES](craft3:craft\services\TemplateCaches::EVENT_AFTER_DELETE_CACHES)                       | Template caches have been invalidated since Craft 3.5.
+| [TemplateCaches::EVENT_BEFORE_DELETE_CACHES](craft3:craft\services\TemplateCaches::EVENT_BEFORE_DELETE_CACHES)                     | Template caches have been invalidated since Craft 3.5.
+| [Volumes::EVENT_REGISTER_VOLUME_TYPES)](craft3:craft\services\Volumes::EVENT_REGISTER_VOLUME_TYPES)                                | [Fs::EVENT_REGISTER_FILESYSTEM_TYPES](craft4:craft\services\Fs::EVENT_REGISTER_FILESYSTEM_TYPES)
+| [CraftVariable::EVENT_DEFINE_COMPONENTS](craft3:craft\web\twig\variables\CraftVariable::EVENT_DEFINE_COMPONENTS)                   | [CraftVariable::EVENT_INIT](craft4:craft\web\twig\variables\CraftVariable::EVENT_INIT)
+| [EntryRevisions::EVENT_BEFORE_SAVE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_BEFORE_SAVE_DRAFT)                           |
+| [EntryRevisions::EVENT_AFTER_SAVE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_AFTER_SAVE_DRAFT)                             |
+| [EntryRevisions::EVENT_BEFORE_PUBLISH_DRAFT](craft3:craft\services\EntryRevisions::EVENT_BEFORE_PUBLISH_DRAFT)                     |
+| [EntryRevisions::EVENT_AFTER_PUBLISH_DRAFT](craft3:craft\services\EntryRevisions::EVENT_AFTER_PUBLISH_DRAFT)                       |
+| [EntryRevisions::EVENT_BEFORE_DELETE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_BEFORE_DELETE_DRAFT)                       |
+| [EntryRevisions::EVENT_AFTER_DELETE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_AFTER_DELETE_DRAFT)                         |
+| [EntryRevisions::EVENT_BEFORE_REVERT_ENTRY_TO_VERSION](craft3:craft\services\EntryRevisions::EVENT_BEFORE_REVERT_ENTRY_TO_VERSION) |
+| [EntryRevisions::EVENT_AFTER_REVERT_ENTRY_TO_VERSION](craft3:craft\services\EntryRevisions::EVENT_AFTER_REVERT_ENTRY_TO_VERSION)   |
 
 ## Filesystems
 
-In Craft 4, volumes have been simplified to represent a place where uploaded files can go. Each volume is represented by a single [craft\models\Volume](craft4:craft\models\Volume) class, where file operations have been decoupled into a new concept called “Filesystems” ([#10367](https://github.com/craftcms/cms/pull/10367)).
+In Craft 4, volumes have been simplified to represent a place where uploaded files can go. Each volume is represented by a single [craft\models\Volume](craft4:craft\models\Volume) class. File operations have been decoupled into a new concept called “Filesystems” ([#10367](https://github.com/craftcms/cms/pull/10367)).
 
-![A Craft 4 Volume](../images/volume.png)
+![Screenshot of a Craft 4 Volume’s settings that includes the new Filesystem dropdown field.](../images/volume.png)
 
 The volume’s former `type` has gone away, replaced instead by whatever filesystem it designates via [Volume::getFs()](craft4:\craft\models\Volume::getFs()).
 
-![A Craft 4 Filesystem](../images/filesystem.png)
+![Screenshot of a Craft 4 Filesystem’s settings, which include former volume type settings like Base Path, Base URL, and Filesystem Type.](../images/filesystem.png)
 
 A Craft install can have however many filesystems it needs, where each volume designates a single filesystem handle. Since that setting can be an environment variable, it becomes trivial to swap filesystems in different environments.
 
 Former volume types will need to be implemented as filesystem types, and most calls directly to a volume’s I/O operations will need to be made on the volume’s filesystem:
 
 ```php
-/** @var \craft\models\Volume $volume **/
-
 // Craft 3
 $myVolumeHandle = $volume->handle;
 $volume->createDirectory('subfolder');
@@ -505,13 +517,58 @@ $myVolumeHandle = $volume->handle;
 $volume->getFs()->createDirectory('subfolder');
 ```
 
-Each volume has an additional transform filesystem which defaults to the filesystem used for that volume. This makes it possible for volumes without public URLs to designate another filesystem solely for image transforms, available to be implemented by [ImageEditorTransformerInterface](craft4:craft\base\imagetransforms\ImageEditorTransformerInterface).
+Each volume has an additional transform filesystem which defaults to the filesystem used for that volume. This makes it possible for volumes without public URLs to designate another filesystem solely for image transforms—accessible via the volume’s [Volume::getTransformFs()](craft4:craft\models\Volume::getTransformFs()) method.
+
+### Migrating Asset Volumes to Filesystems
+
+If you need to migrate an asset volume type to a filesystem type, you can find migrated filesystems using the old volume type and provide a reference to the new filesystem class (`MyFs` here):
+
+```php
+<?php
+
+use mynamespace\migrations;
+
+use mynamespace\fs\MyFs;
+use Craft;
+use craft\db\Migration;
+use craft\services\ProjectConfig;
+
+class mXXXXXX_XXXXXX_update_fs_configs extends Migration
+{
+    public function safeUp(): bool
+    {
+        $projectConfig = Craft::$app->getProjectConfig();
+
+        // Don’t make the same changes twice
+        $schemaVersion = $projectConfig->get('plugins.pluginHandle.schemaVersion', true);
+        if (version_compare($schemaVersion, '2.0', '>=')) {
+            return true;
+        }
+
+        $fsConfigs = $projectConfig->get(ProjectConfig::PATH_FS) ?? [];
+        foreach ($fsConfigs as $uid => $config) {
+            if ($config['type'] === 'my\old\Volume') {
+                $config['type'] = MyFs::class;
+                $projectConfig->set(sprintf('%s.%s', ProjectConfig::PATH_FS, $uid), $config);
+            }
+        }
+
+        return true;
+    }
+
+    public function safeDown(): bool
+    {
+        echo "mXXXXXX_XXXXXX_update_fs_configs cannot be reverted.\n";
+        return false;
+    }
+}
+```
 
 ## Image Transforms and Transformers
 
-Asset Transforms are now Image Transforms, which utilize the newly-added concept of “Imager Transformers”. Existing image transform functionality and index management has been rolled into a default [ImageTransformer](craft4:craft\imagetransforms\ImageTransformer).
+Asset Transforms are now Image Transforms, which utilize the newly-added concept of “Image Transformers”. Existing image transform functionality and index management has been rolled into a default [ImageTransformer](craft4:craft\imagetransforms\ImageTransformer).
 
-Third parties can introduce image transformers by registering them via the [EVENT_REGISTER_IMAGE_TRANSFORMERS](craft4:craft\services\ImageTransforms::EVENT_REGISTER_IMAGE_TRANSFORMERS) event.
+Third parties can register new image transformers via the [EVENT_REGISTER_IMAGE_TRANSFORMERS](craft4:craft\services\ImageTransforms::EVENT_REGISTER_IMAGE_TRANSFORMERS) event.
 
 ## Symfony Mailer
 
@@ -523,7 +580,7 @@ This shouldn’t require any changes to composing and sending messages, but any 
 
 A number of user permissions have been renamed in Craft 4:
 
-| Old                                   | New 
+| Old                                   | New
 | ------------------------------------- | -------------------------
 | `createFoldersInVolume:<uid>`         | `createFolders:<uid>`
 | `deleteFilesAndFoldersInVolume:<uid>` | `deleteAssets:<uid>`
@@ -547,20 +604,3 @@ Some user permissions have been split into more granular alternatives:
 | ---------------------------- | -------------
 | `editCategories:<uid>`       | `viewCategories:<uid>`<br>`saveCategories:<uid>`<br>`deleteCategories:<uid>`<br>`viewPeerCategoryDrafts:<uid>`<br>`savePeerCategoryDrafts:<uid>`<br>`deletePeerCategoryDrafts:<uid>`
 | `editPeerEntryDrafts:<uid>`  | `viewPeerEntryDrafts:<uid>`<br>`savePeerEntryDrafts:<uid>`
-
-## Writing an Upgrade Migration
-
-### JSON Column Support
-
-Craft 4 adds `JSON` column support now that it’s supported by the MySQL 5.7.8 minimum version.
-
-This doesn’t introduce any breaking changes since JSON data can still be stored in `TEXT` columns and [ActiveRecord](craft4:craft\db\ActiveRecord) will continue normalizing arrays into JSON on set.
-
-Plugin developers can start storing JSON data in `JSON` columns by…
-
-1. Writing a migration that ensures existing data is valid JSON and converts the column to `JSON`:
-    ```php
-    $this->convertColumnToJson('{{%mytable}}', 'myColumn');
-    ```
-2. Ensuring that the column’s data is never being JSON-encoded before being set on the ActiveRecord model, or when being set on an insert, update, or upsert command.
-3. Updating the install migration to use `$this->json()` rather than `$this->text()` or whatever the original column type had been.
