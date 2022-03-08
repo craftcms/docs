@@ -43,6 +43,18 @@ If the Craft 4 version adds support for (not yet released) PHP 9, it would look 
   }
 ```
 
+### Improving Code Quality
+
+We’ve added [PHPStan](https://github.com/phpstan/phpstan) and [ECS](https://github.com/symplify/easy-coding-standard) configurations to Craft CMS, Craft Commerce, and a growing number of first-party plugins to improve our code quality and consistency.
+
+While there’s no requirement that you use these tools, we encourage all developers to join us—with this upgrade process being a timely opportunity to integrate code quality tools into your workflow.
+
+If you decide to use PHPStan and/or ECS, we recommend doing it in the following order:
+
+1. Run PHPStan on your existing Craft 3 code base and apply the greatest level of fixes you’re comfortable with.
+2. Run Craft’s [Rector](#rector) rules to prep a bunch of your code for Craft 4.
+3. Run PHPStan again to identify issues and opportunities specifically related to Craft 4 changes.
+
 ## Rector
 
 Craft’s [Rector](https://github.com/craftcms/rector) rules can save you time by adding required type declarations throughout your code. It’s important to do things in the right order so you can run Rector once and be on your way.
