@@ -60,7 +60,18 @@ You can now set your own config settings—as opposed to those Craft supports—
 
 ### Volumes
 
-We’ve removed support for `config/volumes.php`. Volumes can now specify per-environment filesystems.
+Volumes have changed a bit in Craft 4.
+
+In Craft 3, Volumes were for storing custom files and defining their associated field layouts. In Craft 4, the field layouts work exactly the same but URLs and storage settings are moved to a new concept called a “Filesystem”. You can create any number of filesystems, giving each one a handle, and you designate one filesystem for each volume. Since this can be set to an environment variable, you can define all the filesystems you need in different environments and easily swap them out depending on the actual environment you’re in.
+
+::: tip
+You’ll want to create one filesystem per volume, which should be fairly quick since filesystems can be created in slideouts without leaving the volume settings page.
+:::
+
+The migration process will take care of volume migrations for you, but there are two cases that may require your attention:
+
+1. `volumes.php` files are no longer supported—so you’ll need to use filesystems accordingly if you’re swapping storage methods in different environments.
+2. Any filesystems without public URLs should designate a transform filesystem in order to have control panel thumbnails. Craft used to store generated thumbnails separately for the control panel—but it will now create them alongside your assets just like front-end transforms.
 
 ## PHP Constants
 
