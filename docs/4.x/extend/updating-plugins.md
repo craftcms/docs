@@ -492,8 +492,8 @@ The following events have been moved or renamed:
 | [EntryRevisions::EVENT_AFTER_PUBLISH_DRAFT](craft3:craft\services\EntryRevisions::EVENT_AFTER_PUBLISH_DRAFT)                       |
 | [EntryRevisions::EVENT_BEFORE_DELETE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_BEFORE_DELETE_DRAFT)                       |
 | [EntryRevisions::EVENT_AFTER_DELETE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_AFTER_DELETE_DRAFT)                         |
-| [EntryRevisions::EVENT_BEFORE_REVERT_ENTRY_TO_VERSION](craft3:craft\services\EntryRevisions::EVENT_BEFORE_REVERT_ENTRY_TO_VERSION) |
-| [EntryRevisions::EVENT_AFTER_REVERT_ENTRY_TO_VERSION](craft3:craft\services\EntryRevisions::EVENT_AFTER_REVERT_ENTRY_TO_VERSION)   |
+| [EntryRevisions::EVENT_BEFORE_REVERT_ENTRY_TO_VERSION](craft3:craft\services\EntryRevisions::EVENT_BEFORE_REVERT_ENTRY_TO_VERSION) | [Revisions::EVENT_BEFORE_REVERT_TO_REVISION](craft4:craft\services\Revisions::EVENT_BEFORE_REVERT_TO_REVISION)
+| [EntryRevisions::EVENT_AFTER_REVERT_ENTRY_TO_VERSION](craft3:craft\services\EntryRevisions::EVENT_AFTER_REVERT_ENTRY_TO_VERSION)   | [Revisions::EVENT_AFTER_REVERT_TO_REVISION](craft4:craft\services\Revisions::EVENT_AFTER_REVERT_TO_REVISION)
 
 ## Filesystems
 
