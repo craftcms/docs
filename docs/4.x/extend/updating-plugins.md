@@ -604,3 +604,48 @@ Some user permissions have been split into more granular alternatives:
 | ---------------------------- | -------------
 | `editCategories:<uid>`       | `viewCategories:<uid>`<br>`saveCategories:<uid>`<br>`deleteCategories:<uid>`<br>`viewPeerCategoryDrafts:<uid>`<br>`savePeerCategoryDrafts:<uid>`<br>`deletePeerCategoryDrafts:<uid>`
 | `editPeerEntryDrafts:<uid>`  | `viewPeerEntryDrafts:<uid>`<br>`savePeerEntryDrafts:<uid>`
+
+## Declaring DateTime Attributes
+
+The [dateTimeAttributes()](craft4:\craft\base\Model::datetimeAttributes()) method, used to designate a model’s attributes having [DateTime](https://www.php.net/manual/en/class.datetime.php) values for easier handling and storage, has been deprecated.
+
+Craft uses DateTime type declarations instead.
+
+A model in Craft 3 might have declared its own `$dateViewed` attribute like this:
+
+```php
+<?php
+
+class MyModel extends \yii\base\Model
+{
+    public $dateViewed;
+    
+    // ...
+
+    public function datetimeAttributes(): array
+    {
+        $attributes = parent::datetimeAttributes();
+        $attributes[] = 'dateViewed';
+        return $attributes;
+    }
+
+    // ...
+}
+```
+
+In Craft 4, *all* that’s needed is the `DateTime` type declaration:
+
+```php
+<?php
+
+class MyModel extends \yii\base\Model
+{
+    public ?DateTime $dateViewed;
+    
+    // ...
+}
+```
+
+::: tip
+Thanks to Craft 4’s [Typecast](\craft\helpers\Typecast) helper, all arrays, floats, booleans, and strings are normalized correctly in addition to DateTime values.
+:::
