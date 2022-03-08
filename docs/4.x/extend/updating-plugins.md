@@ -121,9 +121,9 @@ While Craft 4’s changes touch a variety of element type pieces, the good news 
 
 ### Field Layouts
 
-If you followed Craft 3’s releases, it will be no surprise that the context and flow for element editing has become more complex. An element may be edited on its own page, in a slideout, and it may or may not need UI for handling drafts. There are permissions and new conditional fields to manage.
+Element editing has become more complex. A Craft 3 entry could already be edited on its own page, in a slideout, and included UI for handling drafts. With Craft 4, entry editing is more consistent via slideout or dedicated page—and other element types can more easily offer the same experience. There are also permissions and brand new conditional fields to manage.
 
-To help with this, Craft 4 broadly puts more emphasis on field layouts than templates. It’s field layout logic, more than template logic, that determines what the content author interacts with.
+To help with this potential complexity, Craft 4 broadly puts more emphasis on field layouts than templates. It’s field layout logic, more than template logic, that determines what the content author interacts with.
 
 Craft 4 has removed its own element-specific controllers and templates in favor of re-usable ones that more easily support the nuanced editing experience—along with some convenient controls and cleaned-up permissions. All element types, including those added by third parties, can take advantage of these improvements.
 
@@ -133,10 +133,10 @@ Any element type providing control panel editing UI may need to update it.
 
 If your element type already supported custom field layouts and behaved well with slideout UI in Craft 3, you may only need to update a few renamed [events](#events) and [permissions](#user-permissions).
 
-If your element type relies on [getEditorHtml()](craft3:craft\base\ElementInterface::getEditorHtml()), however, whether it’s because it has legacy UI or does its own thing entirely, you’ll need to migrate those pieces elsewhere since that method has been removed. Craft 3.7’s [getSidebarHtml()](craft4:craft\base\ElementInterface::getSidebarHtml()) and [getMetadata()](craft4:craft\base\ElementInterface::getMetadata()) are still available for some control over what’s displayed in sidebar and metadata areas, but Craft will always give priority to any custom field layout when it exists.
+If your element type relies on [getEditorHtml()](craft3:craft\base\ElementInterface::getEditorHtml()), however, whether it’s because it has legacy UI or does its own thing entirely, you’ll need to migrate those pieces elsewhere since that method has been removed. Craft 3.7’s [getSidebarHtml()](craft4:craft\base\ElementInterface::getSidebarHtml()) and [getMetadata()](craft4:craft\base\ElementInterface::getMetadata()) are still available for tailoring what’s displayed in sidebar and metadata areas, but Craft will always give priority to any custom field layout when it exists.
 
 ::: warning
-Elements types’ `defineRules()` methods need to fully cover any inputs that could be posted via `getSidebarHtml()` and `metaFieldsHtml()`. This is because an additional security measure applies posted values using the element’s `setAttributes()` method, which only allows “safe” attributes (having validation rules) by default.
+Elements types’ `defineRules()` methods need to fully cover any inputs that could be posted via native field elements, `getSidebarHtml()`, and `getMetadata()`. This is because an additional security measure applies posted values using the element’s `setAttributes()` method, which only allows “safe” attributes (having validation rules) by default.
 :::
 
 Craft 4 introduces the concept of “native” fields, meaning ones offered or required by the element type. These are distinctly different from the custom fields added by users.
