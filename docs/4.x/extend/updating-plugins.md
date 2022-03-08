@@ -62,9 +62,9 @@ Craft’s [Rector](https://github.com/craftcms/rector) rules can save you time b
     vendor/bin/rector process src --config vendor/craftcms/rector/sets/craft-cms-40.php
     ```
     Your code should have type declarations added throughout that are compatible with Craft 4; it’s normal if things are now broken in Craft 3.
-3. Update your `composer.json` requirement to `"craftcms/cms": "^4.0.0-alpha"`, remove `craftcms/rector`, and run `composer update`.
+3. Update your `composer.json` requirement to `"craftcms/cms": "^4.0.0-alpha"` and run `composer update`.
 
-Your code should now be Craft-4-friendly so you can continue with any necessary API changes.
+Most of the busywork is now done so you can continue addressing the breaking changes on the rest of this page.
 
 ::: tip
 [PhpStorm](https://www.jetbrains.com/phpstorm/) does a great job of identifying and offering to fix type issues—consider using it if you aren’t already!
@@ -74,7 +74,36 @@ Your code should now be Craft-4-friendly so you can continue with any necessary 
 
 Craft 4 [streamlines element editing machinery](https://github.com/craftcms/cms/pull/10467) to support a more rich, consistent authoring experience across all element types.
 
-If you have a plugin or module that uses custom element types, there are a handful of [new methods to extend](#new-element-methods) and you may need to evaluate any routes, controllers, templates, and permissions that support the editing process.
+If you have a plugin or module that implements custom element types and want to take advantage of these improvements, there are a handful of [new methods to extend](#new-element-methods):
+
+- [canView()](craft4:craft\base\ElementInterface::canView()) – Whether the given user is authorized to view the element.
+- [canSave()](craft4:craft\base\ElementInterface::canSave()) – Whether the given user is authorized to save the element.
+- [canDuplicate()](craft4:craft\base\ElementInterface::canDuplicate()) – Whether the given user is authorized to duplicate the element.
+- [canDelete()](craft4:craft\base\ElementInterface::canDelete()) – Whether the given user is authorized to delete the element.
+- [canDeleteForSite()](craft4:craft\base\ElementInterface::canDeleteForSite()) – Whether the given user is authorized to delete the element for its currently-loaded site only. (Requires that the element type supports a manual site propagation mode like entries have when their section is set to “Let each entry choose which sites it should be saved to”.)
+- [canCreateDrafts()](craft4:craft\base\ElementInterface::canCreateDrafts()) – Whether the given user is authorized to create drafts for the element.
+- [createAnother()](craft4:craft\base\ElementInterface::createAnother()) – Returns a new, unsaved element for “Save and add another” actions. (No need to worry about permissions here; canSave() will be in effect for it.)
+- [hasRevisions()](craft4:craft\base\ElementInterface::hasRevisions()) – Whether the element type is creating revisions for itself.
+- [getPostEditUrl()](craft4:craft\base\ElementInterface::getPostEditUrl()) – The URL that the browser should be redirected to after the element is saved.
+- [getCrumbs()](craft4:craft\base\ElementInterface::getCrumbs()) – Array of breadcrumbs that should be shown on the element’s edit page.
+- [getAddlButtons()](craft4:craft\base\ElementInterface::getAddlButtons()) – HTML for any additional buttons that should be shown beside “Save”.
+
+::: tip
+It’s best to rely on the new element authorization methods (`canView()`, `canSave()`, etc.) rather than checking permissions directly:
+```php
+// Good
+if (Craft::$app->getUser()->checkPermission('myplugin-manageMyElements')) {
+    // ...
+}
+
+// Better
+if ($myElement->canSave()) {
+    // ...
+}
+```
+:::
+
+You may need to evaluate any routes, controllers, templates, and permissions that support the editing process.
 
 While Craft 4’s changes touch a variety of element type pieces, the good news is that you’ll most likely be able to consolidate a fair amount of code.
 
@@ -350,42 +379,12 @@ return $this->asFailure('Thing not found.');
 
 ## Elements
 
-### New Element Methods
-
-With the new [unified element editor](#unified-element-editor) improvement, element types should start extending the following methods where appropriate:
-
-- [canView()](craft4:craft\base\ElementInterface::canView()) – Whether the given user is authorized to view the element.
-- [canSave()](craft4:craft\base\ElementInterface::canSave()) – Whether the given user is authorized to save the element.
-- [canDuplicate()](craft4:craft\base\ElementInterface::canDuplicate()) – Whether the given user is authorized to duplicate the element.
-- [canDelete()](craft4:craft\base\ElementInterface::canDelete()) – Whether the given user is authorized to delete the element.
-- [canDeleteForSite()](craft4:craft\base\ElementInterface::canDeleteForSite()) – Whether the given user is authorized to delete the element for its currently-loaded site only. (Requires that the element type supports a manual site propagation mode like entries have when their section is set to “Let each entry choose which sites it should be saved to”.)
-- [canCreateDrafts()](craft4:craft\base\ElementInterface::canCreateDrafts()) – Whether the given user is authorized to create drafts for the element.
-- [createAnother()](craft4:craft\base\ElementInterface::createAnother()) – Returns a new, unsaved element for “Save and add another” actions. (No need to worry about permissions here; canSave() will be in effect for it.)
-- [hasRevisions()](craft4:craft\base\ElementInterface::hasRevisions()) – Whether the element type is creating revisions for itself.
-- [getPostEditUrl()](craft4:craft\base\ElementInterface::getPostEditUrl()) – The URL that the browser should be redirected to after the element is saved.
-- [getCrumbs()](craft4:craft\base\ElementInterface::getCrumbs()) – Array of breadcrumbs that should be shown on the element’s edit page.
-- [getAddlButtons()](craft4:craft\base\ElementInterface::getAddlButtons()) – HTML for any additional buttons that should be shown beside “Save”.
-
-::: tip
-It’s best to rely on the new element authorization methods (`canView()`, `canSave()`, etc.) rather than checking permissions directly:
-```php
-// Good
-if (Craft::$app->getUser()->checkPermission('myplugin-manageMyElements')) {
-    // ...
-}
-
-// Better
-if ($myElement->canSave()) {
-    // ...
-}
-```
-:::
+While the [unified element editor](#unified-element-editor) introduced some new methods, some others have been changed and removed.
 
 ### Removed
 
 | Old                                                                                        | What to do instead
 | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------
-| [Element::ATTR_STATUS_CONFLICTED](craft3:craft\base\Element::ATTR_STATUS_CONFLICTED)       |
 | [Element::getFieldStatus()](craft3:craft\base\Element::getFieldStatus())                   | [Field::getStatus()](craft4:craft\base\Field::getStatus())
 | [Element::getHasFreshContent()](craft3:craft\base\Element::getHasFreshContent())           | [Element::getIsFresh()](craft4:craft\base\Element::getIsFresh())
 | [Element::getIsProvisionalDraft()](craft3:craft\base\Element::getIsProvisionalDraft())     | [Element::$isProvisionalDraft](https://docs.craftcms.com/api/v4/craft-base-elementtrait.html#public-properties)
@@ -395,12 +394,13 @@ if ($myElement->canSave()) {
 | [ElementInterface::getEditorHtml()](craft3:craft\base\ElementInterface::getEditorHtml())   | Element edit forms are now exclusively driven [by their field layout](#field-layouts).
 | [ElementInterface::getIsDeletable()](craft3:craft\base\ElementInterface::getIsDeletable()) | [ElementInterface::canDelete()](craft4:craft\base\ElementInterface::canDelete())
 | [ElementInterface::getIsEditable()](craft3:craft\base\ElementInterface::getIsEditable())   | [Element::canView()](craft4:craft\base\Element::canView()) and [Element::canSave()](craft4:craft\base\Element::canSave())
+| [Element::ATTR_STATUS_CONFLICTED](craft3:craft\base\Element::ATTR_STATUS_CONFLICTED)       | draft content is favored
 
 ## Services
 
 ### Added
 
-- [craft\services\Addresses](craft4:craft\services\Addresses)
+- [craft\services\Addresses](craft4:craft\services\Addresses) 
 - [craft\services\Conditions](craft4:craft\services\Conditions) for creating the new condition builder’s conditions and condition rules.
 - [craft\services\Fs](craft4:craft\services\Fs) for managing filesystems.
 - [craft\services\ImageTransforms](craft4:craft\services\ImageTransforms) for managing image transforms and transformers.
@@ -413,7 +413,7 @@ The following core services have been removed:
 | -------------------------------------------------------- | --------------------------------
 | [AssetTransforms](craft3:craft\services\AssetTransforms) | [ImageTransforms](craft4:craft\services\ImageTransforms)
 | [ElementIndexes](craft3:craft\services\ElementIndexes)   | [ElementSources](craft4:craft\services\ElementSources)
-| [EntryRevisions](craft3:craft\services\EntryRevisions)   |
+| [EntryRevisions](craft3:craft\services\EntryRevisions)   | Revisions
 | [SystemSettings](craft3:craft\services\SystemSettings)   | [ProjectConfig](craft4:craft\services\ProjectConfig)
 
 ## Control Panel Templates
