@@ -242,10 +242,6 @@ A number of controller actions have been renamed or removed, largely to support 
 | `assets/generate-thumb`                   | `assets/thumb`
 | `categories/delete-category`              | `elements/delete`
 | `categories/edit-category`                | `elements/edit`
-| `categories/preview-category`             |
-| `categories/share-category`               |
-| `categories/view-shared-category`         |
-| `dashboard/get-feed-items`                |
 | `edit/by-id`                              | `elements/edit`
 | `edit/by-uid`                             | `elements/edit`
 | `entries/edit-entry`                      | `elements/edit`
@@ -254,7 +250,6 @@ A number of controller actions have been renamed or removed, largely to support 
 | `entries/delete-entry`                    | `elements/delete`
 | `entries/delete-for-site`                 | `elements/delete-for-site`
 | `entries/duplicate-entry`                 | `elements/duplicate`
-| `entries/switch-entry-type`               |
 | `entry-revisions/create-draft`            | `elements/create`
 | `entry-revisions/delete-draft`            | `elements/delete-draft`
 | `entry-revisions/publish-draft`           | `elements/apply-draft`
