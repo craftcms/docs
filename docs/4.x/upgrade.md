@@ -62,7 +62,17 @@ You can now set your own config settings—as opposed to those Craft supports—
 
 Volumes have changed a bit in Craft 4.
 
-In Craft 3, Volumes were for storing custom files and defining their associated field layouts. In Craft 4, the field layouts work exactly the same but URLs and storage settings are moved to a new concept called a “Filesystem”. You can create any number of filesystems, giving each one a handle, and you designate one filesystem for each volume. Since this can be set to an environment variable, you can define all the filesystems you need in different environments and easily swap them out depending on the actual environment you’re in.
+In Craft 3, Volumes were for storing custom files and defining their associated field layouts. In Craft 4, the field layouts work exactly the same but URLs and storage settings are moved to a new concept called a “Filesystem”.
+
+Craft 4 Volume settings:
+
+![Screenshot of a Craft 4 Volume’s settings that includes the new Filesystem dropdown field.](../images/volume.png)
+
+Craft 4 Filesystem settings:
+
+![Screenshot of a Craft 4 Filesystem’s settings, which include former volume type settings like Base Path, Base URL, and Filesystem Type.](../images/filesystem.png)
+
+You can create any number of filesystems, giving each one a handle, and you designate one filesystem for each volume. Since this can be set to an environment variable, you can define all the filesystems you need in different environments and easily swap them out depending on the actual environment you’re in.
 
 ::: tip
 You’ll want to create one filesystem per volume, which should be fairly quick since filesystems can be created in slideouts without leaving the volume settings page.
