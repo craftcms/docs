@@ -136,7 +136,9 @@ If your element type already supported custom field layouts and behaved well wit
 If your element type relies on [getEditorHtml()](craft3:craft\base\ElementInterface::getEditorHtml()), however, whether it’s because it has legacy UI or does its own thing entirely, you’ll need to migrate those pieces elsewhere since that method has been removed. Craft 3.7’s [getSidebarHtml()](craft4:craft\base\ElementInterface::getSidebarHtml()) and [getMetadata()](craft4:craft\base\ElementInterface::getMetadata()) are still available for tailoring what’s displayed in sidebar and metadata areas, but Craft will always give priority to any custom field layout when it exists.
 
 ::: warning
-Elements types’ `defineRules()` methods need to fully cover any inputs that could be posted via native field elements, `getSidebarHtml()`, and `getMetadata()`. This is because an additional security measure applies posted values using the element’s `setAttributes()` method, which only allows “safe” attributes (having validation rules) by default.
+Each elements type’s `defineRules()` method needs to fully cover any inputs that could be posted via native field elements, `getSidebarHtml()`, and `getMetadata()`.
+
+This is because an additional security measure applies posted values using the element’s `setAttributes()` method, which only allows “safe” attributes (having validation rules) by default.
 :::
 
 Craft 4 introduces the concept of “native” fields, meaning ones offered or required by the element type. These are distinctly different from the custom fields added by users.
@@ -420,7 +422,7 @@ The following core services have been removed:
 | -------------------------------------------------------- | --------------------------------
 | [AssetTransforms](craft3:craft\services\AssetTransforms) | [ImageTransforms](craft4:craft\services\ImageTransforms)
 | [ElementIndexes](craft3:craft\services\ElementIndexes)   | [ElementSources](craft4:craft\services\ElementSources)
-| [EntryRevisions](craft3:craft\services\EntryRevisions)   | Revisions
+| [EntryRevisions](craft3:craft\services\EntryRevisions)   | [Revisions](craft4:craft\services\Revisions)
 | [SystemSettings](craft3:craft\services\SystemSettings)   | [ProjectConfig](craft4:craft\services\ProjectConfig)
 
 ## Control Panel Templates
