@@ -72,8 +72,11 @@ export default {
     .sidebar-link {
       @apply mx-0 px-0 border-0 pr-4;
       color: var(--sidebar-link-color);
-
       opacity: 0.6;
+
+      &:hover {
+        @apply text-blue opacity-100;
+      }
 
       &.active {
         @apply opacity-100;
