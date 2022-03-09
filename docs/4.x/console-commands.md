@@ -1196,13 +1196,12 @@ $ php craft plugin/disable
 
 The following plugins are enabled:
 
-    Handle                 Name
-    ---------------------  ---------------------
-    anchors                Anchors
-    apple-news             Apple News
-    ckeditor               CKEditor
-    commerce               Craft Commerce
-    gatsby-helper          Gatsby Helper
+    Handle         Name            Version
+    -------------  --------------  -------
+    apple-news     Apple News      3.0.0
+    ckeditor       CKEditor        2.0.0
+    commerce       Craft Commerce  4.0.0
+    gatsby-helper  Gatsby Helper   2.0.0
 
 Choose a plugin handle to disable: ckeditor
 *** disabling ckeditor
@@ -1230,13 +1229,10 @@ $ php craft plugin/enable
 
 The following plugins are disabled:
 
-    Handle                 Name
-    ---------------------  ---------------------
-    anchors                Anchors
-    apple-news             Apple News
-    ckeditor               CKEditor
-    commerce               Craft Commerce
-    gatsby-helper          Gatsby Helper
+    Handle      Name        Version
+    ----------  ----------  -------
+    apple-news  Apple News  3.0.0
+    ckeditor    CKEditor    2.0.0
 
 Choose a plugin handle to enable: ckeditor
 *** enabling ckeditor
@@ -1264,18 +1260,19 @@ $ php craft plugin/install
 
 The following uninstalled plugins are present:
 
-    Handle                 Name
-    ---------------------  ---------------------
-    anchors                Anchors
-    apple-news             Apple News
-    ckeditor               CKEditor
-    commerce               Craft Commerce
-    gatsby-helper          Gatsby Helper
+    Handle         Name            Version
+    -------------  --------------  -------
+    anchors        Anchors         3.0.0
+    apple-news     Apple News      3.0.0
+    ckeditor       CKEditor        2.0.0
+    commerce       Craft Commerce  4.0.0
+    gatsby-helper  Gatsby Helper   2.0.0
 
 Choose a plugin handle to install: ckeditor
 *** installing ckeditor
 *** installed ckeditor successfully (time: 0.496s)
 ```
+
 
 <h4 id="plugin-install-parameters" class="command-subheading">Parameters</h4>
 
@@ -1292,6 +1289,19 @@ handle
 
 Lists all plugins.
 
+```
+$ php craft plugin/list
+
+    Name            Handle         Package Name            Version  Installed  Enabled
+    --------------  -------------  ----------------------  -------  ---------  -------
+    Anchors         anchors        craftcms/anchors        3.0.0    Yes        Yes
+    Apple News      apple-news     craftcms/apple-news     3.0.0    Yes        Yes
+    CKEditor        ckeditor       craftcms/ckeditor       2.0.0    Yes        Yes
+    Craft Commerce  commerce       craftcms/commerce       4.0.0    Yes        Yes
+    Gatsby Helper   gatsby-helper  craftcms/gatsby-helper  2.0.0    Yes        Yes
+```
+
+
 <h3 id="plugin-uninstall">
     <a href="#plugin-uninstall" class="header-anchor">#</a>
     <code>plugin/uninstall</code>
@@ -1305,18 +1315,19 @@ $ php craft plugin/uninstall
 
 The following plugins plugins are installed and enabled:
 
-    Handle                 Name
-    ---------------------  ---------------------
-    anchors                Anchors
-    apple-news             Apple News
-    ckeditor               CKEditor
-    commerce               Craft Commerce
-    gatsby-helper          Gatsby Helper
+    Handle         Name            Version
+    -------------  --------------  -------
+    anchors        Anchors         3.0.0
+    apple-news     Apple News      3.0.0
+    ckeditor       CKEditor        2.0.0
+    commerce       Craft Commerce  4.0.0
+    gatsby-helper  Gatsby Helper   2.0.0
 
 Choose a plugin handle to uninstall: ckeditor
 *** uninstalling ckeditor
 *** uninstalled ckeditor successfully (time: 0.496s)
 ```
+
 
 <h4 id="plugin-uninstall-parameters" class="command-subheading">Parameters</h4>
 
@@ -1701,6 +1712,10 @@ Re-saves entries.
 
 --provisional-drafts
 : Whether to resave provisional element drafts.
+
+
+--revisions
+: Whether to resave element revisions.
 
 
 --element-id
