@@ -208,6 +208,50 @@ For example, `mysql:host=127.0.0.1;port=3306;dbname=acme_corp`.
 
 
 
+### `enableLogging`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `YII_DEBUG`
+
+Defined by
+:  [DbConfig::$enableLogging](craft4:craft\config\DbConfig::$enableLogging)
+
+Since
+:  4.0.0
+
+</div>
+
+Whether to enable logging of database queries.
+
+
+
+### `enableProfiling`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `YII_DEBUG`
+
+Defined by
+:  [DbConfig::$enableProfiling](craft4:craft\config\DbConfig::$enableProfiling)
+
+Since
+:  4.0.0
+
+</div>
+
+Whether to enable profiling of opening database connection and database queries.
+
+
+
 ### `password`
 
 <div class="compact">
