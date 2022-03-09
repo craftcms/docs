@@ -78,7 +78,7 @@ Now that we have a layout template, let’s use it for our blog post detail page
 Create `templates/blog/_entry.twig` and add the following to it:
 
 ```twig
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% block content %}
   <h1 class="text-4xl text-black font-display my-4">I’m a blog post!</h1>
@@ -104,7 +104,7 @@ Clearly we don’t want to display the same title on every page, so let’s chan
 For any detail page template, Craft CMS provides a special `entry` variable we can use to access that entry’s content. Let’s display the `title` and `postDate` properties in the template:
 
 ```twig{4,6}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% block content %}
   <h1 class="text-4xl text-black font-display my-4">{{ entry.title }}</h1>
@@ -124,7 +124,7 @@ Notice how we’re using the [`|date` Twig filter](/3.x/dev/filters.md#date) to 
 Let’s display the “Feature Image” next, using the `featureImage` handle we created with that custom field:
 
 ```twig{8-12}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% block content %}
   <h1 class="text-4xl text-black font-display my-4">{{ entry.title }}</h1>
@@ -163,7 +163,7 @@ It’s pretty big.
 We’ll use Twig to create an object called `featureImage` with the settings we want, then pass those settings to `image.getUrl()` in place of `image.url`:
 
 ```twig{3-8,17}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% set featureImage = {
   mode: 'crop',
@@ -201,7 +201,7 @@ Matrix content is stored in whatever blocks we’ve defined. To display that con
 2. use an `if` statement to handle output based on the block type
 
 ```twig{21-33}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% set featureImage = {
   mode: 'crop',
@@ -270,7 +270,7 @@ Create `templates/_includes/post-blocks.twig` and copy that code to it:
 We can now go back to `templates/blog/_entry.twig` and _include_ that template instead:
 
 ```twig{21}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% set featureImage = {
   mode: 'crop',
@@ -290,7 +290,7 @@ We can now go back to `templates/blog/_entry.twig` and _include_ that template i
     {% endfor %}
   {% endif %}
 
-  {% include "_includes/post-blocks" with { blocks: entry.postContent.all() } only %}
+  {% include "_includes/post-blocks.twig" with { blocks: entry.postContent.all() } only %}
 {% endblock %}
 ```
 
@@ -323,7 +323,7 @@ There’s nothing special about the `_includes` folder, it’s just the name we 
 While we’re building, let’s add some comments so we can remember what we’ve done. Twig ignores anything wrapped with `{#` and `#}`, which is what we’ll use to leave human-friendly notes:
 
 ```twig{3,16,23}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {# create settings for image transform #}
 {% set featureImage = {
@@ -346,7 +346,7 @@ While we’re building, let’s add some comments so we can remember what we’v
   {% endif %}
 
   {# render Matrix blocks for the “Post Content” field, passed as `blocks` #}
-  {% include "_includes/post-blocks" with { blocks: entry.postContent.all() } only %}
+  {% include "_includes/post-blocks.twig" with { blocks: entry.postContent.all() } only %}
 {% endblock %}
 ```
 
@@ -357,7 +357,7 @@ You may find that the human you most often leave the note for is yourself.
 The last thing we need to do on the post detail template is output the post categories using the `postCategories` field handle:
 
 ```twig{26-35}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {# create settings for image transform #}
 {% set featureImage = {
@@ -380,7 +380,7 @@ The last thing we need to do on the post detail template is output the post cate
   {% endif %}
 
   {# render Matrix blocks for the “Post Content” field, passed as `blocks` #}
-  {% include "_includes/post-blocks" with { blocks: entry.postContent.all() } only %}
+  {% include "_includes/post-blocks.twig" with { blocks: entry.postContent.all() } only %}
 
   {# display post categories #}
   {% if entry.postCategories|length %}
@@ -450,7 +450,7 @@ Let’s start with our landing page first.
 Create `templates/blog/index.twig`. Any time you use `index.twig` or `index.html`, that will be the default template or page in a given folder. So when we visit `https://tutorial.nitro/blog/`, that folder’s `blog/index.twig` will be used for rendering the result. Add the following to that template:
 
 ```twig
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% set posts = craft.entries().section('blog').all() %}
 
@@ -458,7 +458,7 @@ Create `templates/blog/index.twig`. Any time you use `index.twig` or `index.html
 
   <h1 class="text-4xl text-black font-display my-4">Blog Posts</h1>
 
-  {% include "_includes/listing" with { posts: posts } only %}
+  {% include "_includes/listing.twig" with { posts: posts } only %}
 {% endblock %}
 ```
 
@@ -521,7 +521,7 @@ Back on the front end, refresh the listing page and you’ll see the re-cropped 
 Create `templates/blog/_category.twig` and add the following:
 
 ```twig
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% set posts = craft.entries().section('blog').relatedTo(category).all() %}
 
@@ -531,7 +531,7 @@ Create `templates/blog/_category.twig` and add the following:
     Blog Posts in “{{ category.title }}”
   </h1>
 
-  {% include "_includes/listing" with { posts: posts } only %}
+  {% include "_includes/listing.twig" with { posts: posts } only %}
 {% endblock %}
 ```
 
@@ -582,7 +582,7 @@ Now let’s include that in `templates/_layout.twig`:
     <link href="/styles.css" rel="stylesheet">
   </head>
   <body class="ltr">
-    {% include "_includes/nav" %}
+    {% include "_includes/nav.twig" %}
     <div class="container mx-auto px-4">
       {% block content %}
       {% endblock %}
@@ -610,7 +610,7 @@ Next, let’s set up the about page. We set it up as a single, using the templat
 Create `template/_singles/about.twig` and add the following to it:
 
 ```twig
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% block content %}
   <h1 class="text-4xl text-black font-display my-4">{{ entry.title }}</h1>
@@ -624,7 +624,7 @@ Create `template/_singles/about.twig` and add the following to it:
       {% endif %}
     </div>
     <div class="w-1/2 px-4">
-      {% include "_includes/post-blocks" with { blocks: entry.postContent.all() } only %}
+      {% include "_includes/post-blocks.twig" with { blocks: entry.postContent.all() } only %}
     </div>
   </div>
 {% endblock %}

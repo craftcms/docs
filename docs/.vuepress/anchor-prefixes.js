@@ -9,6 +9,7 @@
  * - `generic` for replacement of the supplied `base` only and no additional formatting
  */
 module.exports = {
+  'craft4': { base: 'https://docs.craftcms.com/api/v4/', format: 'internal' },
   'craft3': { base: 'https://docs.craftcms.com/api/v3/', format: 'internal' },
   'craft2': { base: 'https://docs.craftcms.com/api/v2/', format: 'internal' },
   'commerce3': { base: 'https://docs.craftcms.com/commerce/api/v3/', format: 'internal' },
