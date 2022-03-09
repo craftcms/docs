@@ -1205,7 +1205,6 @@ This is the interface implemented by all entries.
 | `revisionId`| `Int` | The revision ID (from the `revisions` table).
 | `draftId`| `Int` | The draft ID (from the `drafts` table).
 | `isUnpublishedDraft`| `Boolean` | Returns whether this is an unpublished draft.
-| `isUnsavedDraft`| `Boolean` | Returns whether this is an unpublished draft. **This field is deprecated.** `isUnpublishedDraft` should be used instead.
 | `draftName`| `String` | The name of the draft.
 | `draftNotes`| `String` | The notes for the draft.
 | `authorId`| `Int` | The ID of the author of this entry.
@@ -1225,12 +1224,12 @@ This is the interface implemented by all entries.
 | `typeHandle`| `String!` | The handle of the entry type that contains the entry.
 | `postDate`| `DateTime` | The entry's post date.
 | `expiryDate`| `DateTime` | The expiry date of the entry.
-| `children`| `[EntryInterface!]` | The entry’s children, if the section is a structure. Accepts the same arguments as the `entries` query.
-| `descendants`| `[EntryInterface!]` | The entry’s descendants, if the section is a structure. Accepts the same arguments as the `entries` query.
-| `parent`| `EntryInterface!` | The entry’s parent, if the section is a structure.
-| `ancestors`| `[EntryInterface!]` | The entry’s ancestors, if the section is a structure. Accepts the same arguments as the `entries` query.
+| `children`| `[EntryInterface!]!` | The entry’s children, if the section is a structure. Accepts the same arguments as the `entries` query.
+| `descendants`| `[EntryInterface!]!` | The entry’s descendants, if the section is a structure. Accepts the same arguments as the `entries` query.
+| `parent`| `EntryInterface` | The entry’s parent, if the section is a structure.
+| `ancestors`| `[EntryInterface!]!` | The entry’s ancestors, if the section is a structure. Accepts the same arguments as the `entries` query.
 | `url`| `String` | The element’s full URL
-| `localized`| `[EntryInterface!]` | The same element in other locales.
+| `localized`| `[EntryInterface!]!` | The same element in other locales.
 | `prev`| `EntryInterface` | Returns the previous element relative to this one, from a given set of criteria.
 | `next`| `EntryInterface` | Returns the next element relative to this one, from a given set of criteria.
 
@@ -1344,10 +1343,10 @@ This is the interface implemented by all categories.
 | `structureId`| `Int` | The element’s structure ID.
 | `groupId`| `Int!` | The ID of the group that contains the category.
 | `groupHandle`| `String!` | The handle of the group that contains the category.
-| `children`| `[CategoryInterface!]` | The category’s children.
-| `parent`| `CategoryInterface!` | The category’s parent.
+| `children`| `[CategoryInterface!]!` | The category’s children.
+| `parent`| `CategoryInterface` | The category’s parent.
 | `url`| `String` | The element’s full URL
-| `localized`| `[CategoryInterface!]` | The same element in other locales.
+| `localized`| `[CategoryInterface!]!` | The same element in other locales.
 | `prev`| `CategoryInterface` | Returns the previous element relative to this one, from a given set of criteria.
 | `next`| `CategoryInterface` | Returns the next element relative to this one, from a given set of criteria.
 
