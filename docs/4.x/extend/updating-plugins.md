@@ -434,7 +434,6 @@ Control panel template updates have largely been in support of the [unified elem
 - All control panel templates end in `.twig` now. ([#9743](https://github.com/craftcms/cms/pull/9743))
 - The `forms/selectize` control panel template now supports `addOptionFn` and `addOptionLabel` params, which can be set to add new options to the list.
 - The `limitField` macro in the `_components/fieldtypes/elementfieldsettings` control panel template has been renamed to `limitFields`.
-- Added the `button`, `submitButton`, `fs`, and `fsField` macros to the `_includes/forms` control panel template.
 - Added the `htmx.org` JavaScript library.
 - Removed the `assets/_edit` control panel template.
 - Removed the `categories/_edit` control panel template.
@@ -446,7 +445,7 @@ Control panel template updates have largely been in support of the [unified elem
 If your Craft 3 plugin was using Craft’s editable table (via `editableTableField()` or `editableTable`), you may need to explicitly set `allowAdd`, `allowDelete`, and `allowReorder` to `true` for it to behave the same in Craft 4:
 
 ```twig
-{% import "_includes/forms" as forms %}
+{% import '_includes/forms' as forms %}
 
 {# Craft 3 #}
 {{ forms.editableTableField({
@@ -467,6 +466,44 @@ If your Craft 3 plugin was using Craft’s editable table (via `editableTableFie
   allowDelete: true,
 }) }}
 ```
+
+### New Form Macros
+
+The control panel’s `_includes/forms` got a few new macros: `button`, `submitButton`, `fs`, and `fsField`.
+
+The `button` and `submitButton` macros can each take a `spinner` option that will include markup for a loading animation you can use for AJAX requests:
+
+```twig
+{% import '_includes/forms' as forms %}
+
+{{ forms.button({
+  label: 'Save a Copy',
+  spinner: true,
+}) }}
+
+{# Output:
+<button type="button" class="btn">
+  <div class="label">Save a Copy</div>
+  <div class="spinner spinner-absolute"></div>
+</button>
+#}
+
+{{ forms.submitButton({
+  label: 'Save',
+  spinner: true,
+}) }}
+
+{# Output:
+<button type="submit" class="submit btn">
+  <div class="label">Save</div>
+  <div class="spinner spinner-absolute"></div>
+</button>
+#}
+```
+
+You can then use JavaScript to toggle a `loading` class on the button element as needed:
+
+![Animation of a submit button with its “Save a Copy” label that switches to a spinner when a loading class is added to the element](../images/loading-button.gif)
 
 ## Events
 
