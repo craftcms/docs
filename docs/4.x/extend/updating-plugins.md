@@ -433,7 +433,6 @@ Control panel template updates have largely been in support of the [unified elem
 
 - All control panel templates end in `.twig` now. ([#9743](https://github.com/craftcms/cms/pull/9743))
 - The `forms/selectize` control panel template now supports `addOptionFn` and `addOptionLabel` params, which can be set to add new options to the list.
-- Editable tables now support `allowAdd`, `allowDelete`, and `allowReorder` settings, replacing `staticRows`. ([#10163](https://github.com/craftcms/cms/pull/10163))
 - The `limitField` macro in the `_components/fieldtypes/elementfieldsettings` control panel template has been renamed to `limitFields`.
 - Added the `button`, `submitButton`, `fs`, and `fsField` macros to the `_includes/forms` control panel template.
 - Added the `htmx.org` JavaScript library.
@@ -441,6 +440,35 @@ Control panel template updates have largely been in support of the [unified elem
 - Removed the `categories/_edit` control panel template.
 - Removed the `entries/_edit` control panel template.
 - Removed the `_layouts/element` control panel template.
+
+### Editable Tables
+
+If your Craft 3 plugin was using Craft’s editable table (via `editableTableField()` or importing `_includes/forms/editableTable`), you may need to explicitly set `allowAdd`, `allowDelete`, and `allowReorder` to `true` for it to behave the same in Craft 4:
+
+```twig
+{% import "_includes/forms" as forms %}
+
+{# Craft 3 #}
+{{ forms.editableTableField({
+  label: 'My Table Field',
+  id: 'rules',
+  name: 'rules',
+  cols: myTableCols,
+  rows: myTableRows,
+}) }}
+
+{# Craft 4 #}
+{{ forms.editableTableField({
+  label: 'My Table Field',
+  id: 'rules',
+  name: 'rules',
+  cols: myTableCols,
+  rows: myTableRows,
+  allowAdd: true,
+  allowReorder: true,
+  allowDelete: true,
+}) }}
+```
 
 ## Events
 
