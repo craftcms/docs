@@ -443,7 +443,7 @@ Control panel template updates have largely been in support of the [unified elem
 
 ### Editable Tables
 
-If your Craft 3 plugin was using Craft’s editable table (via `editableTableField()` or importing `_includes/forms/editableTable`), you may need to explicitly set `allowAdd`, `allowDelete`, and `allowReorder` to `true` for it to behave the same in Craft 4:
+If your Craft 3 plugin was using Craft’s editable table (via `editableTableField()` or the `_includes/forms/editableTable` macro), you may need to explicitly set `allowAdd`, `allowDelete`, and `allowReorder` to `true` for it to behave the same in Craft 4:
 
 ```twig
 {% import "_includes/forms" as forms %}
