@@ -17,7 +17,7 @@ Before you begin, make sure that:
 Once you’ve completed everything above you can continue with the upgrade process.
 
 ::: tip
-If you’ve got custom plugins or modules, running Craft’s [Rector](updating-plugins.md#rector) ruleset might save you some time!
+If you’ve got custom plugins or modules, running Craft’s [Rector](extend/updating-plugins.md#rector) ruleset might save you some time!
 :::
 
 ## Performing the Upgrade
