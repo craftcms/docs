@@ -40,8 +40,6 @@ Once you’ve verified everything’s looking great, commit your updated `compos
 If you’re using MySQL, we recommend running [`php craft db/convert-charset`](console-commands.md#db-convert-charset) along with the upgrade process to ensure optimal database performance.
 :::
 
-### Troubleshooting
-
 ## Configuration
 
 ### Config Settings
