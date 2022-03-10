@@ -451,8 +451,7 @@ If your Craft 3 plugin was using Craft’s editable table (via `editableTableFie
 {# Craft 3 #}
 {{ forms.editableTableField({
   label: 'My Table Field',
-  id: 'rules',
-  name: 'rules',
+  name: 'myTable',
   cols: myTableCols,
   rows: myTableRows,
 }) }}
@@ -460,8 +459,7 @@ If your Craft 3 plugin was using Craft’s editable table (via `editableTableFie
 {# Craft 4 #}
 {{ forms.editableTableField({
   label: 'My Table Field',
-  id: 'rules',
-  name: 'rules',
+  name: 'myTable',
   cols: myTableCols,
   rows: myTableRows,
   allowAdd: true,
