@@ -236,7 +236,7 @@ For example, `entries/edit-entry`, `categories/edit-category`, and `assets/edit-
 
 // Craft 4
 'assets/edit/<elementId:\d+><filename:(?:-[^\/]*)?>' => 'elements/edit',
-'entries/<section:{handle}>/<elementId:\d+><slug:(?:-[^\/]*)?>' => 'elements/edit',
+'categories/<groupHandle:{handle}>/<elementId:\d+><slug:(?:-[^\/]*)?>' => 'elements/edit',
 'entries/<section:{handle}>/<elementId:\d+><slug:(?:-[^\/]*)?>' => 'elements/edit',
 ```
 
