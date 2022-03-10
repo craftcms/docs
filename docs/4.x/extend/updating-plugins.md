@@ -78,6 +78,8 @@ Craft’s [Rector](https://github.com/craftcms/rector) rules can save you time b
 
 Most of the busywork is now done so you can continue addressing the breaking changes on the rest of this page.
 
+You can do the same thing with your custom modules by replacing `src` above with `modules`, or the path to wherever your custom modules live.
+
 ::: tip
 [PhpStorm](https://www.jetbrains.com/phpstorm/) does a great job of identifying and offering to fix type issues—consider using it if you aren’t already!
 :::

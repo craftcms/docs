@@ -16,6 +16,10 @@ Before you begin, make sure that:
 
 Once you’ve completed everything above you can continue with the upgrade process.
 
+::: tip
+If you’ve got custom plugins or modules, running Craft’s [Rector](updating-plugins.md#rector) ruleset might save you some time!
+:::
+
 ## Performing the Upgrade
 
 The best way to upgrade a Craft 3 site is to get everything squeaky-clean and up to date at all at once, then proceed like it’s a normal software update.
