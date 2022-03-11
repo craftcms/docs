@@ -33,3 +33,7 @@ Deletes all orders, subscriptions, payment sources, customers, addresses and res
 ```
 php craft commerce/reset-data
 ```
+
+## upgrade
+
+Support command for the Commerce 3 → Commerce 4 upgrade process, meant to be run _after_ upgrading to Commerce 4.
