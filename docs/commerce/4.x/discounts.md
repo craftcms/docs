@@ -119,7 +119,7 @@ This field specifies the type of relationship must exist between the purchasable
 - **Target**: the category has a product/variant relational field.
 - **Both**: the relationship can be either **Source** or **Target**
 
-For more information on how this works please see [Relations Terminology](https://craftcms.com/docs/3.x/relations.html#terminology).
+For more information on how this works please see [Relations Terminology](/4.x/relations.md#terminology).
 
 ### Purchase Total
 

@@ -18,7 +18,7 @@ return [
 
 ## Environmental Configuration
 
-Some Commerce settings should be defined on a [per-environment basis](/3.x/config/#environmental-configuration).
+Some Commerce settings should be defined on a [per-environment basis](/4.x/config/#environmental-configuration).
 
 - System Settings
     - General Settings
@@ -36,7 +36,7 @@ This constant can be used to lock a valid payment currency ISO code, which other
 
 ## Project Config
 
-Craft 3.1 introduced the [**project config**](https://craftcms.com/docs/3.x/project-config.html), a sharable configuration store that makes it easier for developers to collaborate and deploy site changes across multiple environments.
+Craft 3.1 introduced the [**project config**](https://craftcms.com/docs/4.x/project-config.html), a sharable configuration store that makes it easier for developers to collaborate and deploy site changes across multiple environments.
 
 Craft Commerce stores the following items in the project config:
 

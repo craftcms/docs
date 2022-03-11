@@ -1,6 +1,6 @@
 # Updating Instructions
 
-Craft Commerce may be updated like any other update to [Craft or its plugins](/3.x/updating.md).
+Craft Commerce may be updated like any other update to [Craft or its plugins](/4.x/updating.md).
 
 ## Updating from the Control Panel
 
@@ -16,7 +16,7 @@ You can then choose the **Update** button next to Commerce to update the plugin,
 
 ## Updating from the Terminal
 
-The [`update` console command](/3.x/console-commands.md#update) can be used to update Craft and plugins including Commerce.
+The [`update` console command](/4.x/console-commands.md#update) can be used to update Craft and plugins including Commerce.
 
 To see available updates, go to your Craft project in your terminal and run this command:
 

@@ -2,7 +2,7 @@
 
 With Craft Commerce, a _Customer_ is a model representing a person who may place an order.
 
-That person could have placed an order as a guest, or as a registered user with an associated Craft [user account](/3.x/users.md) for logging in and placing orders with saved information.
+That person could have placed an order as a guest, or as a registered user with an associated Craft [user account](/4.x/users.md) for logging in and placing orders with saved information.
 
 Every Craft user has a customer record by default, even if that user has never created an order.
 

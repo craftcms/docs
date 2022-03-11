@@ -36,7 +36,7 @@ If you flattened `storeAddress` into an array, this is what it might look like:
 
 <toggle-tip title="Example Address">
 
-<<< @/docs/commerce/3.x/example-objects/storeAddress.php
+<<< @/docs/commerce/4.x/example-objects/storeAddress.php
 
 </toggle-tip>
 
@@ -451,7 +451,7 @@ If an address is designated for shipping or billing in a cart, edits will carry 
 Commerce saves customer address data without any validation. If you’d like to provide your own validation rules, you can either do that on the front end or use a custom plugin or module to provide server side validation.
 
 ::: tip
-If you’d like to provide your own server side validation, make sure you’re comfortable [creating a plugin or module for Craft CMS](https://craftcms.com/docs/3.x/extend/). Take a look at this Knowledge Base article for a complete example: [craftcms.com/knowledge-base/custom-module-events](https://craftcms.com/knowledge-base/custom-module-events)
+If you’d like to provide your own server side validation, make sure you’re comfortable [creating a plugin or module for Craft CMS](../../4.x/extend/). Take a look at the [Using Events in a Custom Module](https://craftcms.com/knowledge-base/custom-module-events) Knowledge Base article for a complete example.
 :::
 
 If you write your own plugin or module, you’ll want to use its `init()` method to subscribe to the event that’s triggered when the `Address` model collects it rules prior to attempting validation. Your event listener can add additional [validation rules](https://www.yiiframework.com/doc/guide/2.0/en/input-validation#declaring-rules) for the Address model.

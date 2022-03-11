@@ -5,7 +5,7 @@ keywords: cli
 
 Commerce adds console commands that can be run in your terminal.
 
-See Craft’s [Console Commands](/3.x/console-commands.md) page for more about using console commands.
+See Craft’s [Console Commands](/4.x/console-commands.md) page for more about using console commands.
 
 ## example-templates
 
