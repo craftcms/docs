@@ -36,9 +36,7 @@ This constant can be used to lock a valid payment currency ISO code, which other
 
 ## Project Config
 
-Craft 3.1 introduced the [**project config**](https://craftcms.com/docs/4.x/project-config.html), a sharable configuration store that makes it easier for developers to collaborate and deploy site changes across multiple environments.
-
-Craft Commerce stores the following items in the project config:
+Craft Commerce stores the following items in the Craft [project config](/4.x/project-config.md):
 
 - Commerce general settings
 - Email settings
@@ -50,9 +48,7 @@ Craft Commerce stores the following items in the project config:
 - Fields and field groups
 - Subscription field layout
 
-Not everything should be stored in the project config. Some items are considered content, which will change in production.
-
-The following items are not stored in the project config:
+Not _everything_ should be stored in the project config. Some items are considered content, which will change in production—meaning they’re not stored in the project config:
 
 - Discount promotions
 - Sales promotions
