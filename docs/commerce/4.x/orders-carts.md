@@ -933,8 +933,8 @@ Possible values include:
 ```twig
 {# Fetch the current user's orders #}
 {% set orders = craft.orders()
-    .customerId(currentUser.id)
-    .all() %}
+  .customerId(currentUser.id)
+  .all() %}
 ```
 
 ```php
@@ -1706,8 +1706,8 @@ Possible values include:
 ```twig
 {# Fetch shipped orders #}
 {% set orders = craft.orders()
-    .origin('web')
-    .all() %}
+  .origin('web')
+  .all() %}
 ```
 
 ```php
