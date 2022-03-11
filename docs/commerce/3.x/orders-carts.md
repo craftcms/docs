@@ -121,7 +121,7 @@ If the product has multiple variants, you could provide a dropdown menu to allow
   {{ csrfInput() }}
   {{ actionInput('commerce/cart/update-cart') }}
   {{ redirectInput('shop/cart') }}
-  {{ hiddenInput('successMessage', 'Added ' ~ product.title ~ ' to cart.'|hash) }}
+  {{ hiddenInput('successMessage', ('Added "' ~ product.title ~ '" to cart.')|hash) }}
   {{ hiddenInput('qty', 1) }}
 
   <select name="purchasableId">
