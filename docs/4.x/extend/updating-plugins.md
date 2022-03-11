@@ -202,7 +202,7 @@ public function getFieldLayout(): ?\craft\models\FieldLayout
             'instructions' => 'Enter a title.',
         ]),
         new TextField([
-            'label' => 'My Description'
+            'label' => 'My Description',
             'attribute' => 'description',
             'mandatory' => true,
             'instructions' => 'Enter a description.',
