@@ -10,7 +10,7 @@ Log into the control panel, navigate to **Plugin Store** and search for “Comme
 
 ## Composer
 
-Ensure that you have Composer [installed correctly](/4.x/installation.md#downloading-with-composer) in your Craft 3 project. Then run the following terminal commands from within your Craft project:
+Ensure that you have Composer [installed correctly](/4.x/installation.md#downloading-with-composer), then run the following terminal commands from within your Craft 4 project:
 
 ```bash
 composer require craftcms/commerce
