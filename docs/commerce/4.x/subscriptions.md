@@ -106,7 +106,7 @@ Subscription queries support the following parameters:
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only subscriptions that are related to certain other elements.
 | [asArray](#asarray)                       | Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce4:craft\commerce\elements\Subscription) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCanceled](#datecanceled)             | Narrows the query results based on the subscriptions’ cancellation date.
 | [dateCreated](#datecreated)               | Narrows the query results based on the subscriptions’ creation dates.
 | [dateExpired](#dateexpired)               | Narrows the query results based on the subscriptions’ expiration date.
@@ -114,7 +114,6 @@ Subscription queries support the following parameters:
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the subscriptions’ last-updated dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [gatewayId](#gatewayid)                   | Narrows the query results based on the gateway, per its ID.
-| [getCacheTags](#getcachetags)             |
 | [hasStarted](#hasstarted)                 | Narrows the query results to only subscriptions that have started.
 | [id](#id)                                 | Narrows the query results based on the subscriptions’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -162,7 +161,7 @@ Narrows the query results to only subscriptions that are related to certain othe
 
 
 
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -225,7 +224,7 @@ Enables query cache for this Query.
 
 #### `clearCachedResult`
 
-Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 
 
 
@@ -455,15 +454,6 @@ Possible values include:
 
 
 
-#### `getCacheTags`
-
-
-
-
-
-
-
-
 #### `hasStarted`
 
 Narrows the query results to only subscriptions that have started.
@@ -473,7 +463,7 @@ Narrows the query results to only subscriptions that have started.
 ::: code
 ```twig
 {# Fetch started subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
   .hasStarted()
   .all() %}
 ```
@@ -575,7 +565,7 @@ Narrows the query results to only subscriptions that are canceled.
 ::: code
 ```twig
 {# Fetch canceled subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
   .isCanceled()
   .all() %}
 ```
@@ -598,7 +588,7 @@ Narrows the query results to only subscriptions that have expired.
 ::: code
 ```twig
 {# Fetch expired subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
   .isExpired()
   .all() %}
 ```
@@ -621,7 +611,7 @@ Narrows the query results to only subscriptions that are suspended.
 ::: code
 ```twig
 {# Fetch suspended subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
   .isSuspended()
   .all() %}
 ```
@@ -725,7 +715,7 @@ Narrows the query results to only subscriptions that are on trial.
 ::: code
 ```twig
 {# Fetch trialed subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
   .onTrial()
   .all() %}
 ```
@@ -874,7 +864,7 @@ Narrows the query results to only subscriptions that are related to certain othe
 
 
 
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -901,7 +891,7 @@ Narrows the query results to only subscriptions that match a search query.
 
 
 
-See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/4.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -978,7 +968,7 @@ Possible values include:
 ::: code
 ```twig
 {# Fetch expired subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
   .status('expired')
   .all() %}
 ```
@@ -1121,7 +1111,7 @@ Causes the query to return matching subscriptions eager-loaded with related elem
 
 
 
-See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/4.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 

@@ -747,9 +747,9 @@ Order queries support the following parameters:
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only orders that are related to certain other elements.
 | [asArray](#asarray)                       | Causes the query to return matching orders as arrays of data, rather than [Order](commerce4:craft\commerce\elements\Order) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
-| [customer](#customer)                     | Narrows the query results based on the customer.
-| [customerId](#customerid)                 | Narrows the query results based on the customer, per their ID.
+| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [customer](#customer)                     | Narrows the query results based on the customer’s user account.
+| [customerId](#customerid)                 | Narrows the query results based on the customer, per their user ID.
 | [dateAuthorized](#dateauthorized)         | Narrows the query results based on the orders’ authorized dates.
 | [dateCreated](#datecreated)               | Narrows the query results based on the orders’ creation dates.
 | [dateOrdered](#dateordered)               | Narrows the query results based on the orders’ completion dates.
@@ -760,7 +760,6 @@ Order queries support the following parameters:
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [gateway](#gateway)                       | Narrows the query results based on the gateway.
 | [gatewayId](#gatewayid)                   | Narrows the query results based on the gateway, per its ID.
-| [getCacheTags](#getcachetags)             |
 | [hasLineItems](#haslineitems)             | Narrows the query results to only orders that have line items.
 | [hasPurchasables](#haspurchasables)       | Narrows the query results to only orders that have certain purchasables.
 | [hasTransactions](#hastransactions)       | Narrows the query results to only carts that have at least one transaction.
@@ -787,12 +786,11 @@ Order queries support the following parameters:
 | [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the orders’ IDs in the `elements_sites` table.
 | [trashed](#trashed)                       | Narrows the query results to only orders that have been soft-deleted.
 | [uid](#uid)                               | Narrows the query results based on the orders’ UIDs.
-| [user](#user)                             | Narrows the query results based on the customer’s user account.
 | [with](#with)                             | Causes the query to return matching orders eager-loaded with related elements.
 | [withAddresses](#withaddresses)           | Eager loads the the shipping and billing addressees on the resulting orders.
 | [withAdjustments](#withadjustments)       | Eager loads the order adjustments on the resulting orders.
 | [withAll](#withall)                       | Eager loads all relational data (addresses, adjustents, customers, line items, transactions) for the resulting orders.
-| [withCustomer](#withcustomer)             | Eager loads the customer (and related user) on the resulting orders.
+| [withCustomer](#withcustomer)             | Eager loads the user on the resulting orders.
 | [withLineItems](#withlineitems)           | Eager loads the line items on the resulting orders.
 | [withTransactions](#withtransactions)     | Eager loads the transactions on the resulting orders.
 
@@ -815,7 +813,7 @@ Narrows the query results to only orders that are related to certain other eleme
 
 
 
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -878,7 +876,7 @@ Enables query cache for this Query.
 
 #### `clearCachedResult`
 
-Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
+Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 
 
 
@@ -887,13 +885,14 @@ Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#ca
 
 #### `customer`
 
-Narrows the query results based on the customer.
+Narrows the query results based on the customer’s user account.
 
 Possible values include:
 
 | Value | Fetches orders…
 | - | -
-| a [Customer](commerce4:craft\commerce\models\Customer) object | with a customer represented by the object.
+| `1` | with a customer with a user account ID of 1.
+| a [User](https://docs.craftcms.com/api/v3/craft-elements-user.html) object | with a customer with a user account represented by the object.
 
 
 
@@ -901,7 +900,7 @@ Possible values include:
 ```twig
 {# Fetch the current user's orders #}
 {% set orders = craft.orders()
-  .customer(currentUser.customerFieldHandle)
+  .customer(currentUser)
   .all() %}
 ```
 
@@ -909,7 +908,7 @@ Possible values include:
 // Fetch the current user's orders
 $user = Craft::$app->user->getIdentity();
 $orders = \craft\commerce\elements\Order::find()
-    ->customer($user->customerFieldHandle)
+    ->customer($user)
     ->all();
 ```
 :::
@@ -917,16 +916,16 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `customerId`
 
-Narrows the query results based on the customer, per their ID.
+Narrows the query results based on the customer, per their user ID.
 
 Possible values include:
 
 | Value | Fetches orders…
 | - | -
-| `1` | with a customer with an ID of 1.
-| `'not 1'` | not with a customer with an ID of 1.
-| `[1, 2]` | with a customer with an ID of 1 or 2.
-| `['not', 1, 2]` | not with a customer with an ID of 1 or 2.
+| `1` | with a user with an ID of 1.
+| `'not 1'` | not with a user with an ID of 1.
+| `[1, 2]` | with a user with an ID of 1 or 2.
+| `['not', 1, 2]` | not with a user with an ID of 1 or 2.
 
 
 
@@ -934,15 +933,15 @@ Possible values include:
 ```twig
 {# Fetch the current user's orders #}
 {% set orders = craft.orders()
-  .customerId(currentUser.customerFieldHandle.id)
-  .all() %}
+    .customerId(currentUser.id)
+    .all() %}
 ```
 
 ```php
 // Fetch the current user's orders
 $user = Craft::$app->user->getIdentity();
 $orders = \craft\commerce\elements\Order::find()
-    ->customerId($user->customerFieldHandle->id)
+    ->customerId($user->id)
     ->all();
 ```
 :::
@@ -1251,15 +1250,6 @@ Possible values include:
 
 
 
-#### `getCacheTags`
-
-
-
-
-
-
-
-
 #### `hasLineItems`
 
 Narrows the query results to only orders that have line items.
@@ -1269,7 +1259,7 @@ Narrows the query results to only orders that have line items.
 ::: code
 ```twig
 {# Fetch orders that do or do not have line items #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
   .hasLineItems()
   .all() %}
 ```
@@ -1306,7 +1296,7 @@ Narrows the query results to only carts that have at least one transaction.
 ::: code
 ```twig
 {# Fetch carts that have attempted payments #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
   .hasTransactions()
   .all() %}
 ```
@@ -1408,7 +1398,7 @@ Narrows the query results to only orders that are completed.
 ::: code
 ```twig
 {# Fetch completed orders #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
   .isCompleted()
   .all() %}
 ```
@@ -1431,7 +1421,7 @@ Narrows the query results to only orders that are paid.
 ::: code
 ```twig
 {# Fetch paid orders #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
   .isPaid()
   .all() %}
 ```
@@ -1454,7 +1444,7 @@ Narrows the query results to only orders that are not paid.
 ::: code
 ```twig
 {# Fetch unpaid orders #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
   .isUnpaid()
   .all() %}
 ```
@@ -1716,8 +1706,8 @@ Possible values include:
 ```twig
 {# Fetch shipped orders #}
 {% set orders = craft.orders()
-  .origin('web')
-  .all() %}
+    .origin('web')
+    .all() %}
 ```
 
 ```php
@@ -1801,7 +1791,7 @@ Narrows the query results to only orders that are related to certain other eleme
 
 
 
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1828,7 +1818,7 @@ Narrows the query results to only orders that match a search query.
 
 
 
-See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/4.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1970,44 +1960,13 @@ $order = \craft\commerce\elements\Order::find()
 :::
 
 
-#### `user`
-
-Narrows the query results based on the customer’s user account.
-
-Possible values include:
-
-| Value | Fetches orders…
-| - | -
-| `1` | with a customer with a user account ID of 1.
-| a [User](https://docs.craftcms.com/api/v3/craft-elements-user.html) object | with a customer with a user account represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch the current user's orders #}
-{% set orders = craft.orders()
-  .user(currentUser)
-  .all() %}
-```
-
-```php
-// Fetch the current user's orders
-$user = Craft::$app->user->getIdentity();
-$orders = \craft\commerce\elements\Order::find()
-    ->user($user)
-    ->all();
-```
-:::
-
-
 #### `with`
 
 Causes the query to return matching orders eager-loaded with related elements.
 
 
 
-See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/4.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -2069,7 +2028,7 @@ Possible values include:
 
 #### `withCustomer`
 
-Eager loads the customer (and related user) on the resulting orders.
+Eager loads the user on the resulting orders.
 
 Possible values include:
 
@@ -2086,7 +2045,7 @@ Eager loads the line items on the resulting orders.
 
 Possible values include:
 
-| Value | Fetches line items…
+| Value | Fetches line items
 | - | -
 | bool | `true` to eager-load, `false` to not eager load.
 

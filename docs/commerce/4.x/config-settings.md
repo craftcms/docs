@@ -147,7 +147,7 @@ If `null` (default), Craft’s [MailSettings::$fromName](craft3:craft\models\Mai
 
 
 
-### `showCustomerInfoTab`
+### `showEditUserCommerceTab`
 
 <div class="compact">
 
@@ -158,14 +158,14 @@ Default value
 :  `true`
 
 Defined by
-:  [Settings::$showCustomerInfoTab](commerce4:craft\commerce\models\Settings::$showCustomerInfoTab)
+:  [Settings::$showEditUserCommerceTab](commerce4:craft\commerce\models\Settings::$showEditUserCommerceTab)
 
 Since
-:  3.0
+:  4.0
 
 </div>
 
-Whether the [customer info tab](customers.md#user-customer-info-tab) should be shown when viewing users in the control panel.
+Whether the [Commerce Tab](customers.md#user-customer-info-tab) should be shown when viewing users in the control panel.
 
 
 
@@ -273,7 +273,7 @@ Defined by
 
 </div>
 
-Whether the customer’s primary shipping and billing addresses should be set automatically on new carts.
+Whether the user’s primary shipping and billing addresses should be set automatically on new carts.
 
 
 
