@@ -217,7 +217,7 @@ Check out the [example templates](example-templates.md)—they’re compatible w
 - [ProductType::$titleFormat](commerce3:craft\commerce\model\ProductType::$titleFormat) was renamed to [ProductType::$variantTitleFormat](commerce4:craft\commerce\model\ProductType::$variantTitleFormat).
 - [TaxRate::getRateAsPercent()](commerce4:craft\commerce\models\TaxRate::getRateAsPercent()) now returns a localized value.
 - [ProductType::lineItemFormat](commerce3:craft\commerce\models\ProductType::lineItemFormat) has been removed.
-
+- [ShippingAddressZone::getStatesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getStatesNames()) has been removed.
 
 ## Services
 
