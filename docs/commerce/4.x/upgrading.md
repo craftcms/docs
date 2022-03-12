@@ -1,214 +1,186 @@
 # Upgrading to Commerce 4
 
+Commerce 4 brings the power of element types to customers and addresses and incorporates new Craft 4 features.
+
+Address and Customer models have gone away, replaced by [Address](craft4:craft\elements\Address) and [User](craft4:craft\elements\User) elements. Thanks to the now-integrated [commerceguys/addressing](https://github.com/commerceguys/addressing) library (no relation), address data is now more pleasant to work with no matter what part of the planet you’re on.
+
 ::: warning
-If you’re upgrading from Commerce 3, see the [Changes in Commerce 3](https://craftcms.com/docs/commerce/3.x/changes-in-commerce-3.html) and upgrade to the latest Commerce 3 version before upgrading to Commerce 4.
+If you’re upgrading from Commerce 2, see the [Changes in Commerce 3](https://craftcms.com/docs/commerce/3.x/upgrading.html) and upgrade to the latest Commerce 3 version before upgrading to Commerce 4.
 :::
 
 ## Preparing for the Upgrade
 
 Before you begin, make sure that:
 
-1. You’ve reviewed the [changes in Commerce 4](https://github.com/craftcms/commerce/blob/4.0/CHANGELOG-4.0.md)
-2. Your site’s running at least **Craft 4.0** and **the latest version of Commerce 3** (3.4.11)
-3. Your **database is backed up** in case everything goes horribly wrong
+- you’ve reviewed the changes in Commerce 4 [in the changelog](https://github.com/craftcms/commerce/blob/main/CHANGELOG.md#400) and further down this page
+- your site’s running at least **Craft 4.0**
+- you’ve made sure there are no deprecation warnings from Commerce 3 that need fixing
+- your **database and files are backed up** in case everything goes horribly wrong
 
 Once you’ve completed these steps, you’re ready continue with the upgrade process.
 
 ## Performing the Upgrade
 
-Like updating any Craft CMS plugin, you’ll want to update Commerce locally and sync any resulting project config changes [into production](https://craftcms.com/knowledge-base/deployment-best-practices).
-
-1. Edit your project’s `composer.json`’s `"require"` section to specify Commerce 3:
-    ```json
-    "craftcms/commerce": "^4.0.0-beta.1",
-    ```
-2. In your terminal, run `composer update` to pull the latest project dependencies—including Commerce 3—into your `vendor/` directory.
-3. Run `php craft migrate/up --track=plugin:commerce` to run the migrations that bring Commerce data up to date with the latest version.
+1. Create a new database backup just in case things go sideways.
+2. Edit your project’s `composer.json` to require `"craftcms/commerce": "^4.0.0-beta.1"`.
+3. In your terminal, run `composer update`.
+4. Run `php craft migrate/up --track=plugin:commerce`.
+5. Run `php craft commerce/upgrade`.
 
 Once you’re running the latest version of Craft Commerce, you’ll need to update your templates and any custom code relevant to the topics detailed below.
 
-## Order Emails
+## Customer → User Transition
 
-Order notification emails are now sent via a queue job, so we highly recommend running a [queue worker as a daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms) to avoid customer email notification delays.
+In Commerce 4, a customer is always represented by a user element regardless of an order’s status.
 
-Previously emails would be generated during customer checkout, which could cause the order completion page to take a prolonged time to display (especially with PDF generation involved). This change gives your customers a better checkout experience.
+The [Order::setEmail()](commerce4:commerce\elements\Order::setEmail()) method was previously required to uniquely identify an order from the beginning. You can still use that and Commerce will ensure a user exists with that email address.
 
-No changes are needed for emails to continue to work, but ensuring your queue is working correctly will ensure everything goes smoothly.
+If your controller or service has already ensured a given user exists, however, you can now call [Order::setUser()](commerce4:commerce\elements\Order::setUser()) or directly set the [Order::$userId](commerce4:commerce\elements\Order::$userId) property.
 
-## Edit Order page
+## Countries and States
 
-Plugins and modules that modify the Edit Order page are likely to break with this update as the page is now a [Vue.js](https://vuejs.org/) application.
-The same Twig template hooks are still available, but inserting into the part of the DOM controlled by Vue.js will not work.
+Commerce 4 replaces manually-managed countries and states with an [Addresses](craft4:craft\services\Addresses) service that provides a full repository of countries and subdivisions (states, provinces, etc.).
 
-## Data Tables
+Enabled countries from Commerce 3 are migrated to store settings. You can order and remove the list of countries available for selection by your customers in front end in dropdowns:
 
-All data tables throughout the control panel use the new Craft 3.4 Vue.js-based data table, so any extensions of those old HTML tables are likely to break.
+```twig
+{# Craft 3 #}
+craft.commerce.countries.allEnabledCountriesAsList
 
-## Permissions
-
-We have added the “Edit orders” and “Delete orders” user permissions, but users with the existing “Manage orders” permission will not automatically get these new permissions, so updating those users and user groups would be required.
-
-## Cart Merging
-
-Automatic cart merging has been removed.
-
-The cart is still retrieved from the front end templates using `craft.commerce.carts.cart` in your templates, but the optional `mergeCarts` param has been removed, and it is no longer possible to automicatically merge previous carts of the current user.
-
-We now recommend the customer manually adds items from the [previous carts to their current cart](orders-carts.md#restoring-previous-cart-contents). An example of this is in the example templates.
-
-Merging carts as manual process is better since the customer can decide what to do with any validation issues like maximum quanity rules. The previous merge feature would just fail to merge correctly with no error messages.
-
-This change is also mitigated by the fact that the previous cart of the current user is now loaded as the current cart when calling `craft.commerce.carts.cart` automatically.
-
-## Order Recalculations
-
-Previously, a saved order would only be recalculated if it was still a cart, meaning `Order::isCompleted` was `false`.
-
-The introduction of order editing required more sophisticated recalculation that can be achieved with three order recalculation modes.
-
-| Mode                                                                                                       | Recalculates                                                                                                                                |
-| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Recalculate All](https://docs.craftcms.com/commerce/api/v3/craft-commerce-elements-order.html#constants)  | All line items (from purchasables) and all adjustments.<br>Removes line item if purchasable is out of stock.<br>**Default mode for carts.** |
-| [Adjustments Only](https://docs.craftcms.com/commerce/api/v3/craft-commerce-elements-order.html#constants) | All order adjustments; doesn’t change line items.                                                                                           |
-| [None](https://docs.craftcms.com/commerce/api/v3/craft-commerce-elements-order.html#constants)             | Nothing; does not change anything about the order.                                                                                          |
-
-If you’re using event listeners or plugins to save orders, you may want to check and set the mode prior to saving to ensure recalculation behaves as expected. In this example, we’re avoiding any recalculation on our custom save by setting the recalculation mode to `Order::RECALCULATION_MODE_NONE`:
-
-```php
-$originalRecalculationMode = $order->getRecalculationMode();
-$order->setRecalculationMode(\craft\commerce\elements\Order::RECALCULATION_MODE_NONE);
-
-Craft::$app->elements->saveElement($order);
-
-// restore original mode to avoid unexpected issues with other events, plugins, etc.
-$order->setRecalculationMode($originalRecalculationMode);
+{# Craft 4 #}
+craft.commerce.getStore().store.getCountriesList()
 ```
 
-## Twig Template Breaking Changes
+States can no longer be enabled or disabled for selection in dropdown lists, but the new Order Address Condition (**Commerce** → **Store Settings** → **Store**) allows you to set rules for allowed addresses.
 
-Use the table below to update each breaking change in your Twig templates.
+This example is configured to only allow orders having addresses in the United States:
 
-| Old                                       | New                                                                 |
-| ----------------------------------------- | ------------------------------------------------------------------- |
-| `variant.purchasableId`                   | `variant.id`                                                        |
-| `craft.commerce.carts.cart(true, true)`   | `craft.commerce.carts.cart(true)`                                   |
-| `craft.commerce.carts.cart(false, true)`  | `craft.commerce.carts.cart(false)`                                  |
-| `craft.commerce.availableShippingMethods` | `cart.availableShippingMethodOptions`                               |
-| `craft.commerce.cart`                     | `craft.commerce.carts.cart`                                         |
-| `craft.commerce.countriesList`            | `craft.commerce.countries.allCountriesAsList`                       |
-| `craft.commerce.customer`                 | `craft.commerce.customers.customer`                                 |
-| `craft.commerce.discountByCode`           | `craft.commerce.discounts.discountByCode`                           |
-| `craft.commerce.primaryPaymentCurrency`   | `craft.commerce.paymentCurrencies.primaryPaymentCurrency`           |
-| `craft.commerce.statesArray`              | `craft.commerce.states.allStatesAsList`                             |
-| `craft.commerce.states.allStatesAsList`   | `craft.commerce.states.getAllEnabledStatesAsListGroupedByCountryId` |
-| `currentUser.customerFieldHandle`         | `craft.commerce.customers.customer`                                 |
+![The Order Address Condition condition builder field, configured with `Administrative Area`, `is one of`, and `United States`.](./images/order-address-condition.png)
 
-## Form Action Changes
+With these country and subdivision repositories, Commerce has removed support for managing custom countries and states. The [`commerce/upgrade`](console-commands.md#commerce-upgrade) command migrates any custom countries and states into fields on individual addresses and adds rules to zone and store market condition builders to match those custom country and state values.
 
-| Old                                   | New                         | Docs                                                                        |
-| ------------------------------------- | --------------------------- | --------------------------------------------------------------------------- |
-| `commerce/cart/remove-line-item`      | `commerce/cart/update-cart` | [Updating the Cart](orders-carts.md#carts) |
-| `commerce/cart/update-line-item`      | `commerce/cart/update-cart` | [Updating the Cart](orders-carts.md#carts) |
-| `commerce/cart/remove-all-line-items` | `commerce/cart/update-cart` | [Updating the Cart](orders-carts.md#carts) |
+Please review your tax and shipping zones. We encourage you to use standardized countries and administrative areas (states) for your zones in the future.
 
-## Event Changes
+## Address Management
 
-| Old                                                                      | New                                            |
-| ------------------------------------------------------------------------ | ---------------------------------------------- |
-| `craft\commerce\models\Address::EVENT_REGISTER_ADDRESS_VALIDATION_RULES` | `craft\base\Model::EVENT_DEFINE_RULES`         |
-| `craft\commerce\services\Reports::EVENT_BEFORE_GENERATE_EXPORT`          | `craft\base\Element::EVENT_REGISTER_EXPORTERS` |
+Commerce-specific Address models are now Craft [Address](craft4:craft\elements\Address) elements and can only belong to one owner in the Craft install.
 
-## Custom Adjuster Types
+This will almost certainly require changes to your front-end templates, though it comes with several benefits:
 
-In order to improve compatibility with payment gateways and tax systems, custom adjuster types have been deprecated.
+- better address formatting defaults
+- easier address format customization
+- custom address fields can be managed in field layouts—so no more need for `custom1`, `custom2`, etc.
 
-Custom adjusters must extend the included <commerce3:craft\commerce\adjusters\Discount>, <commerce3:craft\commerce\adjusters\Shipping>, or <commerce3:craft\commerce\adjusters\Tax>.
+An order’s addresses (estimated and normal billing + shipping) belong solely to that order. If a user designates one of their saved addresses for an order’s shipping or billing, the address will be cloned to that order with references to the original address element stored in `order.sourceBillingAddressId` and `order.sourceShippingAddressId`.
 
-
-## Discount Category Matching
-
-Commerce 3 adds a *Categories Relationship Type* field for choosing how designated purchasable categories may be used to match a discount or sale promotion. Its options are “Source”, “Target”, and “Either”. (See the Craft CMS [Relations](https://craftcms.com/docs/3.x/relations.html) page for more on what each means.)
-
-Commerce 2 used discount categories as the “Source” for discount matches, and existing discounts are migrated from Commerce 2 with that option selected. It’s important to consider the relationship type as you work with discounts in Commerce 3 since the *Categories Relationship Type* can impact how discounts and sales are applied and its default match type is “Either”.
-
-## Custom Line Item Pricing
-
-If your store customizes line item pricing with the [`populateLineItem` event](extend/events.md#populatelineitem), it’s important to know that the `salePrice` property is handled differently in Commerce 3.
-
-Commerce 2 set the line item’s `salePrice` to the sum of `saleAmount` and `price` immediately *after* the `populateLineItem` event. Commerce 3 does not modify `salePrice` after the event is triggered, so any pricing adjustments should explicitly set `salePrice`.
-
-### Commerce 2 Example
-
-If we’re setting a line item’s price to $20 in Commerce 2 and we want the cart price to be $15, we’d modify the `price` and `saleAmount` properties on the line item:
-
-```php {17}
-use craft\commerce\events\LineItemEvent;
-use craft\commerce\services\LineItems;
-use craft\commerce\models\LineItem;
-use yii\base\Event;
-
-Event::on(
-    LineItems::class,
-    LineItems::EVENT_POPULATE_LINE_ITEM,
-    function(LineItemEvent $event) {
-        // @var LineItem $lineItem
-        $lineItem = $event->lineItem;
-
-        // setting custom price
-        $lineItem->price = 20;
-
-        // setting amount to be discounted from price
-        $lineItem->saleAmount = -5;
-    }
-);
-```
-
-### Commerce 3 Example
-
-To accomplish the same thing in Commerce 3, we would need to set `price` and `salePrice`:
-
-```php {17}
-use craft\commerce\events\LineItemEvent;
-use craft\commerce\services\LineItems;
-use craft\commerce\models\LineItem;
-use yii\base\Event;
-
-Event::on(
-    LineItems::class,
-    LineItems::EVENT_POPULATE_LINE_ITEM,
-    function(LineItemEvent $event) {
-        // @var LineItem $lineItem
-        $lineItem = $event->lineItem;
-
-        // setting custom price
-        $lineItem->price = 20;
-
-        // setting discounted price
-        $lineItem->salePrice = 15;
-    }
-);
-```
-
-## Current Customer
-
-The Customer field on Craft’s [`currentUser`](/3.x/dev/global-variables.md#currentuser) (i.e. `currentUser.customerFieldHandle`, where `customerFieldHandle` is the field handle you chose) was removed in Commerce 3. Retrieving the current customer can now be done consistently through the customers service:
+You can use [User::getAddresses()](craft4:craft\elements\User::getAddresses()) to fetch any user’s addresses, including the currently-logged-in user:
 
 ::: code
 ```twig
-{# gets the customer active in the current session #}
-{% set customer = craft.commerce.customers.customer %}
+{% set userAddresses = currentUser.getAddresses() %}
 ```
-
 ```php
-// gets the customer active in the current session
-$customer = \craft\commerce\Plugin::getInstance()
-    ->getCustomers()
-    ->customer;
+$userAddresses = Craft::$app->getUser()->getIdentity()->getAddresses();
 ```
 :::
 
-## Customer Info Field
+If you’d like to save a new address to a user’s address book, you must provide an `ownerId`:
 
-The Customer Info field type has been removed. If you previously added a Customer Info field to any field layouts, you’ll need to remove them manually.
+```php
+$address = new \craft\elements\Address();
+$address->setAttributes($addressData);
+$address->ownerId = 1;
 
-By default, customer information is displayed in a tab for each user in the control panel. You can control whether this tab is shown using the Commerce [showCustomerInfoTab](config-settings.md#showcustomerinfotab) setting.
+Craft::$app->getElements()->saveElement($address);
+```
+
+### Template Changes
+
+`stateId` and `stateValue` references can be replaced with `administrativeArea`—a key-value array indexed by two-letter codes:
+
+```twig
+{# Commerce 3 #}
+{% set states = craft.commerce.states.allEnabledStatesAsListGroupedByCountryId %}
+{% set options = (countryId and states[countryId] is defined ? states[countryId] : []) %}
+
+{% tag 'select' with { name: modelName ~ '[stateValue]' } %}
+  {% for key, option in options %}
+    {# @var option \craft\commerce\models\State #}
+    {% set optionValue = (stateId ?: '') %}
+    {{ tag('option', {
+      value: key,
+      selected: key == optionValue,
+      text: option
+    }) }}
+  {% endfor %}
+{% endtag %}
+
+{# Commerce 4 #}
+{% set administrativeAreas = craft.app.getAddresses()
+  .getSubdivisionRepository.getList([countryCode]) %}
+
+{% tag 'select' with { name: 'administrativeArea' } %}
+  {% for key, option in administrativeAreas %}
+    {# @var address \craft\elements\Address #}
+    {% set selectedValue = address.administrativeArea ?? '' %}
+    {{ tag('option', {
+      value: key,
+      selected: key == selectedValue,
+      text: option
+    }) }}
+  {% endfor %}
+{% endtag %}
+```
+
+`city` is now `locality`:
+
+```twig
+{# Commerce 3 #}
+{# @var model craft\commerce\models\Address #}
+{{ input('text', modelName ~ '[city]', model.city ?? '') }}
+
+{# Commerce 4 #}
+{# @var address craft\elements\Address #}
+{{ input('text', 'locality', address.locality ?? '') }}
+```
+
+`zipCode` is now `postalCode`:
+
+```twig
+{# Commerce 3 #}
+{# @var model craft\commerce\models\Address #}
+{{ input('text', modelName ~ '[zipCode]', model.zipCode ?? '') }}
+
+{# Commerce 4 #}
+{# @var address craft\elements\Address #}
+{{ input('text', 'postalCode', address.postalCode ?? '') }}
+```
+
+## Front-End Form Requests and Responses
+
+AJAX responses from `commerce/payment-sources/*` no longer return the payment form error using the `paymentForm` key.
+Use `paymentFormErrors` to get the payment form errors instead.
+
+## Payment forms
+
+Gateway payment forms are now namespaced with `paymentForm` and the gateway’s `handle`, to prevent conflicts between normal fields and those required by the gateway.
+
+If you were displaying the payment form on the final checkout step, for example, you would need to make the following change:
+
+```twig
+{# Commerce 3 #}
+{{ cart.gateway.getPaymentFormHtml(params)|raw }}
+
+{# Commerce 4 #}
+{% namespace cart.gateway.handle|commercePaymentFormNamespace %}
+  {{ cart.gateway.getPaymentFormHtml(params)|raw }}
+{% endnamespace %}
+```
+
+This makes it possible to display multiple payment forms on the same page within the same form tag.
+
+## Zones
+
+## Events
+
+## Permissions
