@@ -71,7 +71,11 @@ This will almost certainly require changes to your front-end templates, though i
 - easier address format customization
 - custom address fields can be managed in field layouts—so no more need for `custom1`, `custom2`, etc.
 
+### Order Addresses
+
 An order’s addresses (estimated and normal billing + shipping) belong solely to that order. If a user designates one of their saved addresses for an order’s shipping or billing, the address will be cloned to that order with references to the original address element stored in `order.sourceBillingAddressId` and `order.sourceShippingAddressId`.
+
+### User Addresses
 
 You can use [User::getAddresses()](craft4:craft\elements\User::getAddresses()) to fetch any user’s addresses, including the currently-logged-in user:
 
@@ -93,6 +97,10 @@ $address->ownerId = 1;
 
 Craft::$app->getElements()->saveElement($address);
 ```
+
+### Custom Address Fields and Formatting
+
+The concept of address lines has gone away along with [DefineAddressLinesEvent](commerce3:craft\commerce\events\DefineAddressLinesEvent). Use Craft’s [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()) instead.
 
 ### Template Changes
 
@@ -238,6 +246,9 @@ Several methods have been deprecated:
 | [Subscriptions::getSubscriptionCountForPlanById()](commerce3:craft\commerce\services\Subscriptions::getSubscriptionCountForPlanById()) | [Subscriptions::getSubscriptionCountByPlanId()](commerce4:craft\commerce\services\Subscriptions::getSubscriptionCountByPlanId())
 | [TaxRates::getTaxRatesForZone()](commerce3:craft\commerce\services\TaxRates::getTaxRatesForZone()) | [TaxRates::getTaxRatesByTaxZoneId()](commerce4:craft\commerce\services\TaxRates::getTaxRatesByTaxZoneId())
 | [Transactions::deleteTransaction()](commerce3:craft\commerce\services\Transactions::deleteTransaction()) | [Transactions::deleteTransactionById()](commerce4:craft\commerce\services\Transactions::deleteTransactionById())
+
+## Controllers
+
 
 
 ## User Permissions
