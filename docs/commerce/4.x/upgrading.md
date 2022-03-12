@@ -158,7 +158,7 @@ Craft::$app->getElements()->saveElement($address);
 
 ## Front-End Form Requests and Responses
 
-AJAX responses from `commerce/payment-sources/*` no longer return the payment form error using the `paymentForm` key.
+Ajax responses from `commerce/payment-sources/*` no longer return the payment form error using the `paymentForm` key.
 Use `paymentFormErrors` to get the payment form errors instead.
 
 ## Payment forms
