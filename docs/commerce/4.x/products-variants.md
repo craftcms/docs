@@ -11,7 +11,7 @@ Products are the items available in your store.
 
 A product itself is never sold; what goes into a cart for purchase is actually one of the product’s [variants](#variants). In the Craft control panel, you’ll see Products listed by Product Type.
 
-![Diagram depicting Product with common fields and its relationship to one or more Variants](./assets/product-variant.png)
+![Diagram depicting Product with common fields and its relationship to one or more Variants](./images/product-variant.png)
 
 In the same way that all Craft CMS entries have common fields, Craft Commerce products have some of their own:
 
@@ -27,7 +27,7 @@ Product Types are a way to distinguish products in your system. Similar to Craft
 
 You can manage Product Types in the control panel from **Commerce** → **System Settings** → **Product Types**.
 
-<img src="./assets/product-type-entry-screen.png" width="797" alt="Edit Product Type page">
+<img src="./images/product-type-entry-screen.png" width="797" alt="Edit Product Type page">
 
 ### Product Type Options
 
@@ -1547,11 +1547,11 @@ If a product type has multiple variants enabled, the author can choose which one
 
 For a single-variant product, variant details are shown in a unified view with custom product fields:
 
-![Single-Variant Product](./assets/single-variant.png)
+![Single-Variant Product](./images/single-variant.png)
 
 When a product supports multiple variants, the default variant will be identified in a **Variants** field where more variants can be added:
 
-![Multi-Variant Product](./assets/multi-variant.png)
+![Multi-Variant Product](./images/multi-variant.png)
 
 ### Variant Stock
 

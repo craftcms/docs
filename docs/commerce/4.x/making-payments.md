@@ -254,11 +254,11 @@ To make a partial payment in the Craft control panel:
 2. Choose a cart or order to view its edit page
 3. Select the **Transactions** tab and choose **Make Payment**.
 4. Select a gateway that supports partial payments to enter the payment details and amount:\
-    ![Store manager’s partial payment modal](./assets/partial-payment-modal.png)
+    ![Store manager’s partial payment modal](./images/partial-payment-modal.png)
 5. Choose **Pay** to process the payment.
 
 ::: tip
 To more quickly identify partially-paid orders, a store manager may want to add the **Paid Status** column on the order index page.
 
-![Orders table Paid Status column](./assets/paid-status-column.png)
+![Orders table Paid Status column](./images/paid-status-column.png)
 :::

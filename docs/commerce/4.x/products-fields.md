@@ -14,11 +14,11 @@ Commerce Products fields have the following settings:
 
 Commerce Products fields list all of the currently selected products, with a button to select new ones:
 
-<img src="./assets/product-field-example.png" alt="Products field">
+<img src="./images/product-field-example.png" alt="Products field">
 
 Choosing **Add a product** opens a modal window for finding and selecting additional products:
 
-<img src="./assets/product-field-modal.png" alt="Product selection modal">
+<img src="./images/product-field-modal.png" alt="Product selection modal">
 
 ## Templating
 
