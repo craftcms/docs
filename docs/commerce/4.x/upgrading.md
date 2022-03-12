@@ -181,6 +181,25 @@ This makes it possible to display multiple payment forms on the same page within
 
 ## Zones
 
+## Config Settings
+
+- Removed the `orderPdfFilenameFormat` setting.
+- Removed the `orderPdfPath` setting.
+
+## Twig
+
+- Removed `json_encode_filtered` Twig filter.
+
+::: tip
+Consider having a look at the [example templates](example-templates.md)—they’re compatible with Commerce 4!
+:::
+
 ## Events
 
-## Permissions
+## Controller Actions
+
+## User Permissions
+
+Permissions for managing products have become more granular in Commerce 4:
+
+- `commerce-manageProducts` has been replaced by `commerce-editProductType:<uid>` and nested `commerce-createProducts:<uid>` and `commerce-deleteProducts:<uid>` permissions
