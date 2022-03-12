@@ -5085,7 +5085,7 @@
         "class": "craft\\commerce\\elements\\Order",
         "name": "EVENT_AFTER_ORDER_AUTHORIZED",
         "type": "yii\\base\\Event",
-        "desc": "This event is raised after an order is customerized in full and completed",
+        "desc": "This event is raised after an order is authorized in full and completed",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
