@@ -117,7 +117,8 @@ Craft::$app->getElements()->saveElement($address);
 
 {# Commerce 4 #}
 {% set administrativeAreas = craft.app.getAddresses()
-  .getSubdivisionRepository.getList([countryCode]) %}
+  .getSubdivisionRepository()
+  .getList([countryCode]) %}
 
 {% tag 'select' with { name: 'administrativeArea' } %}
   {% for key, option in administrativeAreas %}
@@ -161,7 +162,7 @@ Craft::$app->getElements()->saveElement($address);
 Ajax responses from `commerce/payment-sources/*` no longer return the payment form error using the `paymentForm` key.
 Use `paymentFormErrors` to get the payment form errors instead.
 
-## Payment forms
+### Payment Forms
 
 Gateway payment forms are now namespaced with `paymentForm` and the gateway’s `handle`, to prevent conflicts between normal fields and those required by the gateway.
 
@@ -181,6 +182,10 @@ This makes it possible to display multiple payment forms on the same page within
 
 ## Zones
 
+## Subscriptions
+
+- Subscription plans are no longer accessible via old Control Panel URLs.
+
 ## Config Settings
 
 - Removed the `orderPdfFilenameFormat` setting.
@@ -188,15 +193,52 @@ This makes it possible to display multiple payment forms on the same page within
 
 ## Twig
 
-- Removed `json_encode_filtered` Twig filter.
+- Removed the `json_encode_filtered` Twig filter.
 
 ::: tip
-Consider having a look at the [example templates](example-templates.md)—they’re compatible with Commerce 4!
+Check out the [example templates](example-templates.md)—they’re compatible with Commerce 4!
 :::
 
 ## Events
 
+- Renamed `craft\commerce\elements\Order::EVENT_AFTER_REMOVE_LINE_ITEM` string from `afterRemoveLineItemToOrder` -> `afterRemoveLineItemFromOrder`.
+
 ## Controller Actions
+
+- The `cartUpdatedNotice` param is no longer accepted for `commerce/cart/*` requests. Use a hashed `successMessage` param instead.
+
+## Elements
+
+- [Order::getCustomer()](commerce4:craft\commerce\elements\Order::getCustomer()) now returns a [User](craft4:craft\elements\User) element.
+- [Product::getVariants()](commerce4:craft\commerce\elements\Product::getVariants()), [getDefaultVariant()](commerce4:craft\commerce\elements\Product::getDefaultVariant()), [getCheapestVariant()](commerce4:craft\commerce\elements\Product::getCheapestVariant()), [getTotalStock()](commerce4:craft\commerce\elements\Product::getTotalStock()), and [getHasUnlimitedStock()](commerce4:craft\commerce\elements\Product::getHasUnlimitedStock()) now return data related to only enabled variant(s) by default.
+
+## Models
+
+- [ProductType::$titleFormat](commerce3:craft\commerce\model\ProductType::$titleFormat) was renamed to [ProductType::$variantTitleFormat](commerce4:craft\commerce\model\ProductType::$variantTitleFormat).
+- [TaxRate::getRateAsPercent()](commerce4:craft\commerce\models\TaxRate::getRateAsPercent()) now returns a localized value.
+- [ProductType::lineItemFormat](commerce3:craft\commerce\models\ProductType::lineItemFormat) has been removed.
+
+
+## Services
+
+In Commerce 4, [ShippingMethods::getAvailableShippingMethods()](commerce3:craft\commerce\services\ShippingMethods::getAvailableShippingMethods()) has been renamed to [getMatchingShippingMethods()](commerce4:craft\commerce\services\ShippingMethods::getMatchingShippingMethods()) to better represent the method.
+
+A few methods have had changes to their arguments:
+
+- [LineItems::createLineItem()](commerce4:craft\commerce\services\LineItems::createLineItem()) no longer has an `$orderId` argument.
+- [LineItems::resolveLineItem()](commerce4:craft\commerce\services\LineItems::resolveLineItem()) expects an `$order` argument instead of `$orderId`.
+- [Variants::getAllVariantsByProductId()](commerce4:craft\commerce\services\Variants::getAllVariantsByProductId()) now accepts a third param: `$includeDisabled`.
+
+Several methods have been deprecated:
+
+| Old | What to do instead
+| --- | ---
+| [Plans::getAllGatewayPlans()](commerce3:craft\commerce\services\Plans::getAllGatewayPlans()) | [Plans::getPlansByGatewayId()](commerce4:craft\commerce\services\Plans::getPlansByGatewayId())
+| [Subscriptions::doesUserHaveAnySubscriptions()](commerce3:craft\commerce\services\Subscriptions::doesUserHaveAnySubscriptions()) | [Subscriptions::doesUserHaveAnySubscriptions()](commerce4:craft\commerce\services\Subscriptions::doesUserHaveSubscriptions())
+| [Subscriptions::getSubscriptionCountForPlanById()](commerce3:craft\commerce\services\Subscriptions::getSubscriptionCountForPlanById()) | [Subscriptions::getSubscriptionCountByPlanId()](commerce4:craft\commerce\services\Subscriptions::getSubscriptionCountByPlanId())
+| [TaxRates::getTaxRatesForZone()](commerce3:craft\commerce\services\TaxRates::getTaxRatesForZone()) | [TaxRates::getTaxRatesByTaxZoneId()](commerce4:craft\commerce\services\TaxRates::getTaxRatesByTaxZoneId())
+| [Transactions::deleteTransaction()](commerce3:craft\commerce\services\Transactions::deleteTransaction()) | [Transactions::deleteTransactionById()](commerce4:craft\commerce\services\Transactions::deleteTransactionById())
+
 
 ## User Permissions
 
