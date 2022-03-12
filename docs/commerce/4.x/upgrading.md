@@ -194,6 +194,10 @@ This makes it possible to display multiple payment forms on the same page within
 
 - Subscription plans are no longer accessible via old Control Panel URLs.
 
+## Discounts
+
+
+
 ## Config Settings
 
 - Removed the `orderPdfFilenameFormat` setting.
@@ -240,6 +244,31 @@ Some element methods have been removed in Commerce 4:
 - [ProductType::lineItemFormat](commerce3:craft\commerce\models\ProductType::lineItemFormat) has been removed.
 - [ShippingAddressZone::getStatesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getStatesNames()) has been removed.
 
+- Removed `craft\commerce\models\Discount::$code`.
+- Removed `craft\commerce\models\Discount::getDiscountUserGroups()`.
+- Removed `craft\commerce\models\Discount::getUserGroupIds()`. Discount user groups were migrated to the customer condition rule.
+- Removed `craft\commerce\models\Discount::setUserGroupIds()`. Discount user groups were migrated to the customer condition rule.
+- Removed `craft\commerce\models\OrderHistory::$customerId`. Use `$userId` instead.
+- Removed `craft\commerce\models\OrderHistory::getCustomer()`. Use `getUser()` instead.
+- Removed `craft\commerce\models\Settings::$showCustomerInfoTab`. Use `$showEditUserCommerceTab` instead. 
+- Removed `craft\commerce\models\ShippingAddressZone::getCountries()`
+- Removed `craft\commerce\models\ShippingAddressZone::getCountriesNames()`
+- Removed `craft\commerce\models\ShippingAddressZone::getCountryIds()`
+- Removed `craft\commerce\models\ShippingAddressZone::getCountryIds()`
+- Removed `craft\commerce\models\ShippingAddressZone::getStateIds()`
+- Removed `craft\commerce\models\ShippingAddressZone::getStates()`
+- Removed `craft\commerce\models\ShippingAddressZone::getStatesNames()`
+- Removed `craft\commerce\models\ShippingAddressZone::isCountryBased`
+- Removed `craft\commerce\models\States`.
+- Removed `craft\commerce\models\TaxAddressZone::getCountries()`
+- Removed `craft\commerce\models\TaxAddressZone::getCountriesNames()`
+- Removed `craft\commerce\models\TaxAddressZone::getCountryIds()`
+- Removed `craft\commerce\models\TaxAddressZone::getCountryIds()`
+- Removed `craft\commerce\models\TaxAddressZone::getStateIds()`
+- Removed `craft\commerce\models\TaxAddressZone::getStates()`
+- Removed `craft\commerce\models\TaxAddressZone::getStatesNames()`
+- Removed `craft\commerce\models\TaxAddressZone::isCountryBased`
+
 ## Services
 
 In Commerce 4, [ShippingMethods::getAvailableShippingMethods()](commerce3:craft\commerce\services\ShippingMethods::getAvailableShippingMethods()) has been renamed to [getMatchingShippingMethods()](commerce4:craft\commerce\services\ShippingMethods::getMatchingShippingMethods()) to better represent the method.
@@ -262,7 +291,15 @@ Several methods have been deprecated:
 
 ## Controllers
 
-
+- Removed `craft\commerce\controllers\AddressesController`.
+- Removed `craft\commerce\controllers\CountriesController`.
+- Removed `craft\commerce\controllers\CustomersController`.
+- Removed `craft\commerce\controllers\CustomerAddressesController`.
+- Removed `craft\commerce\controllers\DiscountsController::DISCOUNT_COUNTER_TYPE_CUSTOMER`. Use `DISCOUNT_COUNTER_TYPE_USER` instead.
+- Removed `craft\commerce\controllers\OrdersController::_prepCustomersArray()`. Use `_customerToArray()` instead.
+- Removed `craft\commerce\controllers\PlansController::actionRedirect()`.
+- Removed `craft\commerce\controllers\ProductsPreviewController::enforceProductPermissions()`.
+- Removed `craft\commerce\controllers\StatesController`.
 
 ## User Permissions
 
