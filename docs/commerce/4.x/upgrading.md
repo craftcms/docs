@@ -220,6 +220,19 @@ Check out the [example templates](example-templates.md)—they’re compatible w
 - [Order::getCustomer()](commerce4:craft\commerce\elements\Order::getCustomer()) now returns a [User](craft4:craft\elements\User) element.
 - [Product::getVariants()](commerce4:craft\commerce\elements\Product::getVariants()), [getDefaultVariant()](commerce4:craft\commerce\elements\Product::getDefaultVariant()), [getCheapestVariant()](commerce4:craft\commerce\elements\Product::getCheapestVariant()), [getTotalStock()](commerce4:craft\commerce\elements\Product::getTotalStock()), and [getHasUnlimitedStock()](commerce4:craft\commerce\elements\Product::getHasUnlimitedStock()) now return data related to only enabled variant(s) by default.
 
+Some element methods have been removed in Commerce 4:
+
+| Old | What to do instead
+| --- | ---
+| [Order::isEditable](commerce3:craft\commerce\elements\Order::isEditable) |
+| [Order::removeEstimatedBillingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedBillingAddress()) | [setEstimatedBillingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedBillingAddress(null))
+| [Order::removeEstimatedShippingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedShippingAddress()) | [setEstimatedShippingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedShippingAddress(null))
+| [Product::getIsDeletable()](commerce3:craft\commerce\elements\Product::getIsDeletable()) |
+| [Product::getIsEditable()](commerce3:craft\commerce\elements\Product::getIsEditable()) |
+| [Product::isDeletable()](commerce3:craft\commerce\elements\Product::isDeletable()) |
+| [Product::isEditable()](commerce3:craft\commerce\elements\Product::isEditable()) |
+| [Variant::isEditable()](commerce3:craft\commerce\elements\Variant::isEditable()) |
+
 ## Models
 
 - [ProductType::$titleFormat](commerce3:craft\commerce\model\ProductType::$titleFormat) was renamed to [ProductType::$variantTitleFormat](commerce4:craft\commerce\model\ProductType::$variantTitleFormat).
@@ -241,11 +254,11 @@ Several methods have been deprecated:
 
 | Old | What to do instead
 | --- | ---
-| [Plans::getAllGatewayPlans()](commerce3:craft\commerce\services\Plans::getAllGatewayPlans()) | [Plans::getPlansByGatewayId()](commerce4:craft\commerce\services\Plans::getPlansByGatewayId())
-| [Subscriptions::doesUserHaveAnySubscriptions()](commerce3:craft\commerce\services\Subscriptions::doesUserHaveAnySubscriptions()) | [Subscriptions::doesUserHaveAnySubscriptions()](commerce4:craft\commerce\services\Subscriptions::doesUserHaveSubscriptions())
-| [Subscriptions::getSubscriptionCountForPlanById()](commerce3:craft\commerce\services\Subscriptions::getSubscriptionCountForPlanById()) | [Subscriptions::getSubscriptionCountByPlanId()](commerce4:craft\commerce\services\Subscriptions::getSubscriptionCountByPlanId())
-| [TaxRates::getTaxRatesForZone()](commerce3:craft\commerce\services\TaxRates::getTaxRatesForZone()) | [TaxRates::getTaxRatesByTaxZoneId()](commerce4:craft\commerce\services\TaxRates::getTaxRatesByTaxZoneId())
-| [Transactions::deleteTransaction()](commerce3:craft\commerce\services\Transactions::deleteTransaction()) | [Transactions::deleteTransactionById()](commerce4:craft\commerce\services\Transactions::deleteTransactionById())
+| [Plans::getAllGatewayPlans()](commerce3:craft\commerce\services\Plans::getAllGatewayPlans()) | [getPlansByGatewayId()](commerce4:craft\commerce\services\Plans::getPlansByGatewayId())
+| [Subscriptions::doesUserHaveAnySubscriptions()](commerce3:craft\commerce\services\Subscriptions::doesUserHaveAnySubscriptions()) | [doesUserHaveAnySubscriptions()](commerce4:craft\commerce\services\Subscriptions::doesUserHaveSubscriptions())
+| [Subscriptions::getSubscriptionCountForPlanById()](commerce3:craft\commerce\services\Subscriptions::getSubscriptionCountForPlanById()) | [getSubscriptionCountByPlanId()](commerce4:craft\commerce\services\Subscriptions::getSubscriptionCountByPlanId())
+| [TaxRates::getTaxRatesForZone()](commerce3:craft\commerce\services\TaxRates::getTaxRatesForZone()) | [getTaxRatesByTaxZoneId()](commerce4:craft\commerce\services\TaxRates::getTaxRatesByTaxZoneId())
+| [Transactions::deleteTransaction()](commerce3:craft\commerce\services\Transactions::deleteTransaction()) | [deleteTransactionById()](commerce4:craft\commerce\services\Transactions::deleteTransactionById())
 
 ## Controllers
 
