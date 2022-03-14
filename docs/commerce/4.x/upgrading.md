@@ -262,45 +262,55 @@ Theses Commerce-specific element actions have been removed and rely on Craft’s
 
 ## Models
 
-- [ProductType::$titleFormat](commerce3:craft\commerce\model\ProductType::$titleFormat) was renamed to [ProductType::$variantTitleFormat](commerce4:craft\commerce\model\ProductType::$variantTitleFormat).
-- [TaxRate::getRateAsPercent()](commerce4:craft\commerce\models\TaxRate::getRateAsPercent()) now returns a localized value.
-- [ProductType::lineItemFormat](commerce3:craft\commerce\models\ProductType::lineItemFormat) has been removed.
-- [ShippingAddressZone::getStatesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getStatesNames()) has been removed.
+### Changed
 
-- Removed `craft\commerce\models\Discount::$code`.
-- Removed `craft\commerce\models\Discount::getDiscountUserGroups()`.
-- Removed `craft\commerce\models\Discount::getUserGroupIds()`. Discount user groups were migrated to the customer condition rule.
-- Removed `craft\commerce\models\Discount::setUserGroupIds()`. Discount user groups were migrated to the customer condition rule.
-- Removed `craft\commerce\models\OrderHistory::$customerId`. Use `$userId` instead.
-- Removed `craft\commerce\models\OrderHistory::getCustomer()`. Use `getUser()` instead.
-- Removed `craft\commerce\models\Settings::$showCustomerInfoTab`. Use `$showEditUserCommerceTab` instead. 
-- Removed `craft\commerce\models\ShippingAddressZone::getCountries()`
-- Removed `craft\commerce\models\ShippingAddressZone::getCountriesNames()`
-- Removed `craft\commerce\models\ShippingAddressZone::getCountryIds()`
-- Removed `craft\commerce\models\ShippingAddressZone::getCountryIds()`
-- Removed `craft\commerce\models\ShippingAddressZone::getStateIds()`
-- Removed `craft\commerce\models\ShippingAddressZone::getStates()`
-- Removed `craft\commerce\models\ShippingAddressZone::getStatesNames()`
-- Removed `craft\commerce\models\ShippingAddressZone::isCountryBased`
-- Removed `craft\commerce\models\States`.
-- Removed `craft\commerce\models\TaxAddressZone::getCountries()`
-- Removed `craft\commerce\models\TaxAddressZone::getCountriesNames()`
-- Removed `craft\commerce\models\TaxAddressZone::getCountryIds()`
-- Removed `craft\commerce\models\TaxAddressZone::getCountryIds()`
-- Removed `craft\commerce\models\TaxAddressZone::getStateIds()`
-- Removed `craft\commerce\models\TaxAddressZone::getStates()`
-- Removed `craft\commerce\models\TaxAddressZone::getStatesNames()`
-- Removed `craft\commerce\models\TaxAddressZone::isCountryBased`
+- [ProductType::$titleFormat](commerce3:craft\commerce\model\ProductType::$titleFormat) was renamed to [$variantTitleFormat](commerce4:craft\commerce\model\ProductType::$variantTitleFormat).
+- [TaxRate::getRateAsPercent()](commerce4:craft\commerce\models\TaxRate::getRateAsPercent()) now returns a localized value.
+
+### Removed
+
+| Old | What to do instead
+| --- | ---
+| [ProductType::lineItemFormat](commerce3:craft\commerce\models\ProductType::lineItemFormat) |
+| [ShippingAddressZone::getStatesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getStatesNames()) |
+| [Discount::$code](commerce3:craft\commerce\models\Discount::$code) |
+| [Discount::getDiscountUserGroups()](commerce3:craft\commerce\models\Discount::getDiscountUserGroups()) |
+| [Discount::getUserGroupIds()](commerce3:craft\commerce\models\Discount::getUserGroupIds()) | Discount user groups were migrated to the customer condition rule.
+| [Discount::setUserGroupIds()](commerce3:craft\commerce\models\Discount::setUserGroupIds()) | Discount user groups were migrated to the customer condition rule.
+| [OrderHistory::$customerId](commerce3:craft\commerce\models\OrderHistory::$customerId) | [$userId](commerce4:craft\commerce\models\OrderHistory::$userId)
+| [OrderHistory::getCustomer()](commerce3:craft\commerce\models\OrderHistory::getCustomer()) | [getUser()](commerce4:craft\commerce\models\OrderHistory::getUser())
+| [Settings::$showCustomerInfoTab](commerce3:craft\commerce\models\Settings::$showCustomerInfoTab) | [$showEditUserCommerceTab](commerce4:craft\commerce\models\Settings::$showEditUserCommerceTab)
+| [ShippingAddressZone::getCountries()](commerce3:craft\commerce\models\ShippingAddressZone::getCountries()) | 
+| [ShippingAddressZone::getCountriesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getCountriesNames()) | 
+| [ShippingAddressZone::getCountryIds()](commerce3:craft\commerce\models\ShippingAddressZone::getCountryIds()) | 
+| [ShippingAddressZone::getCountryIds()](commerce3:craft\commerce\models\ShippingAddressZone::getCountryIds()) |
+| [ShippingAddressZone::getStateIds()](commerce3:craft\commerce\models\ShippingAddressZone::getStateIds()) |
+| [ShippingAddressZone::getStates()](commerce3:craft\commerce\models\ShippingAddressZone::getStates()) |
+| [ShippingAddressZone::getStatesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getStatesNames()) | 
+| [ShippingAddressZone::isCountryBased](commerce3:craft\commerce\models\ShippingAddressZone::isCountryBased) |
+| [States](commerce3:craft\commerce\models\States) |
+| [TaxAddressZone::getCountries()](commerce3:craft\commerce\models\TaxAddressZone::getCountries()) |
+| [TaxAddressZone::getCountriesNames()](commerce3:craft\commerce\models\TaxAddressZone::getCountriesNames()) |
+| [TaxAddressZone::getCountryIds()](commerce3:craft\commerce\models\TaxAddressZone::getCountryIds()) |
+| [TaxAddressZone::getCountryIds()](commerce3:craft\commerce\models\TaxAddressZone::getCountryIds()) |
+| [TaxAddressZone::getStateIds()](commerce3:craft\commerce\models\TaxAddressZone::getStateIds()) |
+| [TaxAddressZone::getStates()](commerce3:craft\commerce\models\TaxAddressZone::getStates()) |
+| [TaxAddressZone::getStatesNames()](commerce3:craft\commerce\models\TaxAddressZone::getStatesNames()) |
+| [TaxAddressZone::isCountryBased](commerce3:craft\commerce\models\TaxAddressZone::isCountryBased) |
 
 ## Services
 
 In Commerce 4, [ShippingMethods::getAvailableShippingMethods()](commerce3:craft\commerce\services\ShippingMethods::getAvailableShippingMethods()) has been renamed to [getMatchingShippingMethods()](commerce4:craft\commerce\services\ShippingMethods::getMatchingShippingMethods()) to better represent the method.
+
+### Changed
 
 A few methods have had changes to their arguments:
 
 - [LineItems::createLineItem()](commerce4:craft\commerce\services\LineItems::createLineItem()) no longer has an `$orderId` argument.
 - [LineItems::resolveLineItem()](commerce4:craft\commerce\services\LineItems::resolveLineItem()) expects an `$order` argument instead of `$orderId`.
 - [Variants::getAllVariantsByProductId()](commerce4:craft\commerce\services\Variants::getAllVariantsByProductId()) now accepts a third param: `$includeDisabled`.
+
+### Deprecated
 
 Several methods have been deprecated:
 
