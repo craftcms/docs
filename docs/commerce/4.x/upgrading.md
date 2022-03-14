@@ -231,11 +231,11 @@ Some element methods have been removed in Commerce 4:
 | [Order::isEditable](commerce3:craft\commerce\elements\Order::isEditable) | [canSave()](commerce4:craft\commerce\elements\Order::canSave())
 | [Order::removeEstimatedBillingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedBillingAddress()) | [setEstimatedBillingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedBillingAddress(null))
 | [Order::removeEstimatedShippingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedShippingAddress()) | [setEstimatedShippingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedShippingAddress(null))
-| [Product::getIsDeletable()](commerce3:craft\commerce\elements\Product::getIsDeletable()) |
-| [Product::getIsEditable()](commerce3:craft\commerce\elements\Product::getIsEditable()) |
-| [Product::isDeletable()](commerce3:craft\commerce\elements\Product::isDeletable()) |
-| [Product::isEditable()](commerce3:craft\commerce\elements\Product::isEditable()) |
-| [Variant::isEditable()](commerce3:craft\commerce\elements\Variant::isEditable()) |
+| [Product::getIsDeletable()](commerce3:craft\commerce\elements\Product::getIsDeletable()) | [canDelete()](commerce4:craft\commerce\elements\Product::canDelete())
+| [Product::getIsEditable()](commerce3:craft\commerce\elements\Product::getIsEditable()) | [canSave()](commerce4:craft\commerce\elements\Product::canSave())
+| [Product::isDeletable()](commerce3:craft\commerce\elements\Product::isDeletable()) | [canDelete()](commerce4:craft\commerce\elements\Product::canDelete())
+| [Product::isEditable()](commerce3:craft\commerce\elements\Product::isEditable()) | [canSave()](commerce4:craft\commerce\elements\Product::canSave())
+| [Variant::isEditable()](commerce3:craft\commerce\elements\Variant::isEditable()) | [canSave()](commerce4:craft\commerce\elements\Variant::canSave())
 
 ## Models
 
