@@ -104,7 +104,7 @@ The concept of address lines has gone away along with [DefineAddressLinesEvent](
 
 ### Template Changes
 
-`stateId` and `stateValue` references can be replaced with `administrativeArea`—a key-value array indexed by two-letter codes:
+`stateId` and `stateValue` references can be replaced with `administrativeArea`. It expects a two-letter code if the state/province is in the list of subdivisions for the current country, or an arbitrary string for countries that don’t.
 
 ```twig
 {# Commerce 3 #}
@@ -172,7 +172,7 @@ Use `paymentFormErrors` to get the payment form errors instead.
 
 ### Payment Forms
 
-Gateway payment forms are now namespaced with `paymentForm` and the gateway’s `handle`, to prevent conflicts between normal fields and those required by the gateway.
+Gateway payment forms are now namespaced with `paymentForm` and the gateway’s `handle`, to prevent conflicts between cart/order fields and those required by the gateway.
 
 If you were displaying the payment form on the final checkout step, for example, you would need to make the following change:
 
@@ -186,7 +186,7 @@ If you were displaying the payment form on the final checkout step, for example,
 {% endnamespace %}
 ```
 
-This makes it possible to display multiple payment forms on the same page within the same form tag.
+This makes it possible to display multiple payment gateways’ form fields inside the same `<form>` tag, where the `gatewayId` param still determines which form data should be used.
 
 ## Zones
 
@@ -228,14 +228,14 @@ Some element methods have been removed in Commerce 4:
 
 | Old | What to do instead
 | --- | ---
-| [Order::isEditable](commerce3:craft\commerce\elements\Order::isEditable) |
+| [Order::isEditable](commerce3:craft\commerce\elements\Order::isEditable) | [canSave()](commerce4:craft\commerce\elements\Order::canSave())
 | [Order::removeEstimatedBillingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedBillingAddress()) | [setEstimatedBillingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedBillingAddress(null))
 | [Order::removeEstimatedShippingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedShippingAddress()) | [setEstimatedShippingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedShippingAddress(null))
-| [Product::getIsDeletable()](commerce3:craft\commerce\elements\Product::getIsDeletable()) |
-| [Product::getIsEditable()](commerce3:craft\commerce\elements\Product::getIsEditable()) |
-| [Product::isDeletable()](commerce3:craft\commerce\elements\Product::isDeletable()) |
-| [Product::isEditable()](commerce3:craft\commerce\elements\Product::isEditable()) |
-| [Variant::isEditable()](commerce3:craft\commerce\elements\Variant::isEditable()) |
+| [Product::getIsDeletable()](commerce3:craft\commerce\elements\Product::getIsDeletable()) | [canDelete()](commerce4:craft\commerce\elements\Product::canDelete())
+| [Product::getIsEditable()](commerce3:craft\commerce\elements\Product::getIsEditable()) | [canSave()](commerce4:craft\commerce\elements\Product::canSave())
+| [Product::isDeletable()](commerce3:craft\commerce\elements\Product::isDeletable()) | [canDelete()](commerce4:craft\commerce\elements\Product::canDelete())
+| [Product::isEditable()](commerce3:craft\commerce\elements\Product::isEditable()) | [canSave()](commerce4:craft\commerce\elements\Product::canSave())
+| [Variant::isEditable()](commerce3:craft\commerce\elements\Variant::isEditable()) | [canSave()](commerce4:craft\commerce\elements\Variant::canSave())
 
 ## Models
 
