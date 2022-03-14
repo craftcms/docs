@@ -921,7 +921,7 @@
     },
     {
         "class": "craft\\commerce\\base\\Purchasable",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -3527,7 +3527,7 @@
     },
     {
         "class": "craft\\commerce\\elements\\Donation",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -5728,7 +5728,7 @@
     },
     {
         "class": "craft\\commerce\\elements\\Order",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -7542,7 +7542,7 @@
     },
     {
         "class": "craft\\commerce\\elements\\Product",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -9356,7 +9356,7 @@
     },
     {
         "class": "craft\\commerce\\elements\\Subscription",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -11342,7 +11342,7 @@
     },
     {
         "class": "craft\\commerce\\elements\\Variant",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
