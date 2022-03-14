@@ -39,9 +39,20 @@ If your controller or service has already ensured a given user exists, however, 
 
 ## Countries and States
 
-Commerce 4 replaces manually-managed countries and states with an [Addresses](craft4:craft\services\Addresses) service that provides a full repository of countries and subdivisions (states, provinces, etc.).
+Commerce 4 replaces manually-managed countries and states with Craft’s [Addresses](craft4:craft\services\Addresses) service, which provides a full repository of countries and subdivisions (states, provinces, etc.).
 
-Enabled countries from Commerce 3 are migrated to store settings. You can order and remove the list of countries available for selection by your customers in front end in dropdowns:
+Because this repository isn’t editable, Commerce 4 has moved away from custom countries and states to a new concept called “Store Markets”—which is a more flexible way of defining where the store operates. You can navigate to these settings via **Commerce** → **Store Settings** → **Store**:
+
+![Screenshot of the Store Markets settings, with an Order Address Condition rule builder and Country List autosuggest field](./images/store-markets.png)
+
+- **Order Address Condition** provides a condition builder for limiting what addresses should be allowed for orders.
+- **Country List** is an autosuggest field for choosing the countries that should be available for customers to select.
+
+::: tip
+Enabled countries from Commerce 3 are migrated to the **Country List** field.
+:::
+
+You can fetch the list of available countries via the new [Store](commerce4:craft\commerce\services\Store) service:
 
 ::: code
 ```twig
@@ -65,13 +76,11 @@ $countries = \craft\commerce\Plugin::getInstance()
 ```
 :::
 
-States can no longer be enabled or disabled for selection in dropdown lists, but the new Order Address Condition (**Commerce** → **Store Settings** → **Store**) allows you to set rules for allowed addresses.
+States can no longer be enabled or disabled for selection in dropdown lists, but you can use the new **Order Address Condition** to limit them instead. This example is configured to only allow orders from Western Australia:
 
-This example is configured to only allow orders having addresses in the United States:
+![The Order Address Condition condition builder field, configured with `Administrative Area`, `is one of`, `Australia`, and `Western Australia`.](./images/order-address-condition.png)
 
-![The Order Address Condition condition builder field, configured with `Administrative Area`, `is one of`, and `United States`.](./images/order-address-condition.png)
-
-With these country and subdivision repositories, Commerce has removed support for managing custom countries and states. The [`commerce/upgrade`](console-commands.md#commerce-upgrade) command migrates any custom countries and states into fields on individual addresses and adds rules to zone and store market condition builders to match those custom country and state values.
+While Commerce has removed support for managing custom countries and states, the [`commerce/upgrade`](console-commands.md#commerce-upgrade) command migrates previous custom countries and states into fields on individual addresses and adds rules to zone and store market condition builders to match those custom country and state values.
 
 Please review your tax and shipping zones. We encourage you to use standardized countries and administrative areas (states) for your zones in the future.
 
@@ -227,8 +236,6 @@ If you were displaying the payment form on the final checkout step, for example,
 ```
 
 This makes it possible to display multiple payment gateways’ form fields inside the same `<form>` tag, where the `gatewayId` param still determines which form data should be used.
-
-## Store Markets
 
 ## Subscriptions
 
