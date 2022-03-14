@@ -213,29 +213,52 @@ Check out the [example templates](example-templates.md)—they’re compatible w
 
 ## Events
 
-- Renamed `craft\commerce\elements\Order::EVENT_AFTER_REMOVE_LINE_ITEM` string from `afterRemoveLineItemToOrder` -> `afterRemoveLineItemFromOrder`.
+- Renamed [Order::EVENT_AFTER_REMOVE_LINE_ITEM](commerce4:craft\commerce\elements\Order::EVENT_AFTER_REMOVE_LINE_ITEM) string from `afterRemoveLineItemToOrder` to `afterRemoveLineItemFromOrder`.
 
 ## Controller Actions
 
 - The `cartUpdatedNotice` param is no longer accepted for `commerce/cart/*` requests. Use a hashed `successMessage` param instead.
+- The `commerce/orders/purchasable-search` action was removed. Use `commerce/orders/purchasables-table` instead.
 
 ## Elements
 
 - [Order::getCustomer()](commerce4:craft\commerce\elements\Order::getCustomer()) now returns a [User](craft4:craft\elements\User) element.
 - [Product::getVariants()](commerce4:craft\commerce\elements\Product::getVariants()), [getDefaultVariant()](commerce4:craft\commerce\elements\Product::getDefaultVariant()), [getCheapestVariant()](commerce4:craft\commerce\elements\Product::getCheapestVariant()), [getTotalStock()](commerce4:craft\commerce\elements\Product::getTotalStock()), and [getHasUnlimitedStock()](commerce4:craft\commerce\elements\Product::getHasUnlimitedStock()) now return data related to only enabled variant(s) by default.
 
+One element method was deprecated in Commerce 4:
+
+| Old | What to do instead
+| --- | ---
+| [Order::getUser()](commerce4:craft\commerce\elements\Order::getUser()) | [getCustomer()](commerce4:craft\commerce\elements\Order::getCustomer())
+
 Some element methods have been removed in Commerce 4:
 
 | Old | What to do instead
 | --- | ---
+| [Order::getAdjustmentsTotalByType()](commerce3:craft\commerce\elements\Order::getAdjustmentsTotalByType()) | [getTotalTax()](commerce4:craft\commerce\elements\Order::getTotalTax()), [getTotalDiscount()](commerce4:craft\commerce\elements\Order::getTotalDiscount()), or [getTotalShippingCost()](commerce4:craft\commerce\elements\Order::getTotalShippingCost())
+| [Order::getAvailableShippingMethods()](commerce3:craft\commerce\elements\Order::getAvailableShippingMethods()) | [getAvailableShippingMethodOptions()](commerce4:craft\commerce\elements\Order::getAvailableShippingMethodOptions())
+| [Order::getOrderLocale()](commerce3:craft\commerce\elements\Order::getOrderLocale()) | [$orderLanguage](commerce4:craft\commerce\elements\Order::$orderLanguage)
+| [Order::getShippingMethodId()](commerce3:craft\commerce\elements\Order::getShippingMethodId()) | [getShippingMethodHandle()](commerce4:craft\commerce\elements\Order::getShippingMethodHandle())
+| [Order::getShouldRecalculateAdjustments()](commerce3:craft\commerce\elements\Order::getShouldRecalculateAdjustments()) | [recalculationMode](commerce4:craft\commerce\elements\Order::recalculationMode)
+| [Order::getTotalTaxablePrice()](commerce3:craft\commerce\elements\Order::getTotalTaxablePrice()) | Taxable price is now calculated within the tax adjuster.
 | [Order::isEditable](commerce3:craft\commerce\elements\Order::isEditable) | [canSave()](commerce4:craft\commerce\elements\Order::canSave())
 | [Order::removeEstimatedBillingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedBillingAddress()) | [setEstimatedBillingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedBillingAddress(null))
 | [Order::removeEstimatedShippingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedShippingAddress()) | [setEstimatedShippingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedShippingAddress(null))
+| [Order::setShouldRecalculateAdjustments()](commerce3:craft\commerce\elements\Order::setShouldRecalculateAdjustments()) | [recalculationMode](commerce4:craft\commerce\elements\Order::recalculationMode)
 | [Product::getIsDeletable()](commerce3:craft\commerce\elements\Product::getIsDeletable()) | [canDelete()](commerce4:craft\commerce\elements\Product::canDelete())
 | [Product::getIsEditable()](commerce3:craft\commerce\elements\Product::getIsEditable()) | [canSave()](commerce4:craft\commerce\elements\Product::canSave())
 | [Product::isDeletable()](commerce3:craft\commerce\elements\Product::isDeletable()) | [canDelete()](commerce4:craft\commerce\elements\Product::canDelete())
 | [Product::isEditable()](commerce3:craft\commerce\elements\Product::isEditable()) | [canSave()](commerce4:craft\commerce\elements\Product::canSave())
 | [Variant::isEditable()](commerce3:craft\commerce\elements\Variant::isEditable()) | [canSave()](commerce4:craft\commerce\elements\Variant::canSave())
+
+### Element Actions
+
+Theses Commerce-specific element actions have been removed and rely on Craft’s:
+
+| Old | What to do instead
+| --- | ---
+| [DeleteOrder](commerce3:craft\commerce\elements\actions\DeleteOrder) | [Delete](craft4:craft\elements\actions\Delete)
+| [DeleteProduct](commerce3:craft\commerce\elements\actions\DeleteProduct) | [Delete](craft4:craft\elements\actions\Delete)
 
 ## Models
 
@@ -295,7 +318,6 @@ Several methods have been deprecated:
 - Removed `craft\commerce\controllers\CountriesController`.
 - Removed `craft\commerce\controllers\CustomersController`.
 - Removed `craft\commerce\controllers\CustomerAddressesController`.
-- Removed `craft\commerce\controllers\DiscountsController::DISCOUNT_COUNTER_TYPE_CUSTOMER`. Use `DISCOUNT_COUNTER_TYPE_USER` instead.
 - Removed `craft\commerce\controllers\OrdersController::_prepCustomersArray()`. Use `_customerToArray()` instead.
 - Removed `craft\commerce\controllers\PlansController::actionRedirect()`.
 - Removed `craft\commerce\controllers\ProductsPreviewController::enforceProductPermissions()`.
