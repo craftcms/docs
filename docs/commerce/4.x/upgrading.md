@@ -328,3 +328,4 @@ Several methods have been deprecated:
 Permissions for managing products have become more granular in Commerce 4:
 
 - `commerce-manageProducts` has been replaced by `commerce-editProductType:<uid>` and nested `commerce-createProducts:<uid>` and `commerce-deleteProducts:<uid>` permissions
+- `commerce-manageCustomers` has been replaced by Craft’s standard user management permissions.
