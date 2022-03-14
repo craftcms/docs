@@ -98,6 +98,32 @@ $address->ownerId = 1;
 Craft::$app->getElements()->saveElement($address);
 ```
 
+### Store Address
+
+The Commerce store address is now an [Address](craft4:craft\elements\Address) element available via the store service:
+
+::: code
+```twig
+{# Commerce 3 #}
+{% set storeAddress = craft.commerce.addresses.storeLocationAddress %}
+
+{# Commerce 4 #}
+{% set storeAddress = craft.commerce.getStore().getStore().getLocationAddress() %}
+```
+```php
+// Commerce 3
+$storeAddress = \craft\commerce\Plugin::getInstance()
+    ->getAddresses()
+    ->getStoreLocationAddress();
+
+// Commerce 4
+$storeAddress = \craft\commerce\Plugin::getInstance()
+    ->getStore()
+    ->getStore()
+    ->getLocationAddress();
+```
+:::
+
 ### Custom Address Fields and Formatting
 
 The concept of address lines has gone away along with [DefineAddressLinesEvent](commerce3:craft\commerce\events\DefineAddressLinesEvent). Use Craft’s [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()) instead.
@@ -188,15 +214,13 @@ If you were displaying the payment form on the final checkout step, for example,
 
 This makes it possible to display multiple payment gateways’ form fields inside the same `<form>` tag, where the `gatewayId` param still determines which form data should be used.
 
-## Zones
+## Store Markets
 
 ## Subscriptions
 
 - Subscription plans are no longer accessible via old Control Panel URLs.
 
 ## Discounts
-
-
 
 ## Config Settings
 
