@@ -287,7 +287,7 @@ The `note` parameter is not part of a line item’s uniqueness; it will always b
 
 Each line item includes several totals:
 
-- **lineItem.subtotal** is the sum of the line item’s `qty` and `salePrice`.
+- **lineItem.subtotal** is the product of the line item’s `qty` and `salePrice`.
 - **lineItem.adjustmentsTotal** is the sum of each of the line item’s adjustment `amount` values.
 - **lineItem.total** is the sum of the line item’s `subtotal` and `adjustmentsTotal`.
 
