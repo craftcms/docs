@@ -186,7 +186,7 @@ If you were displaying the payment form on the final checkout step, for example,
 {% endnamespace %}
 ```
 
-This makes it possible to display multiple payment gateways’ form fields inside the same `<form>` tag, and the `gatewayId` param still determines which form data should be used.
+This makes it possible to display multiple payment gateways’ form fields inside the same `<form>` tag, where the `gatewayId` param still determines which form data should be used.
 
 ## Zones
 
