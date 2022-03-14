@@ -43,13 +43,27 @@ Commerce 4 replaces manually-managed countries and states with an [Addresses](cr
 
 Enabled countries from Commerce 3 are migrated to store settings. You can order and remove the list of countries available for selection by your customers in front end in dropdowns:
 
+::: code
 ```twig
 {# Craft 3 #}
-craft.commerce.countries.allEnabledCountriesAsList
+{% set countries = craft.commerce.countries.allEnabledCountriesAsList %}
 
 {# Craft 4 #}
-craft.commerce.getStore().store.getCountriesList()
+{% set countries = craft.commerce.getStore().store.getCountriesList() %}
 ```
+```php
+// Craft 3
+$countries = \craft\commerce\Plugin::getInstance()
+    ->getCountries()
+    ->getAllEnabledCountriesAsList();
+
+// Craft 4
+$countries = \craft\commerce\Plugin::getInstance()
+    ->getStore()
+    ->getStore()
+    ->getCountriesList();
+```
+:::
 
 States can no longer be enabled or disabled for selection in dropdown lists, but the new Order Address Condition (**Commerce** → **Store Settings** → **Store**) allows you to set rules for allowed addresses.
 
