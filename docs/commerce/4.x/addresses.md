@@ -4,13 +4,11 @@
 Addresses have changed significantly in Commerce 4 and this page isn’t up to date yet!
 :::
 
-Commerce manages shipping and billing addresses using [Address](commerce3:craft\commerce\models\Address) models that are relevant to [Orders](orders-carts.md) and [Customers](customers.md).
+Commerce manages shipping and billing addresses using Craft’s [Address](craft4:craft\elements\Address) elements.
 
-In the control panel, you’ll find addresses within the context of Orders and Customers. A Store Location may also be entered at **Commerce** → **Store Settings** → **Store Location**.
+In the control panel, you’ll find addresses within the context of Orders and Customers. A Store Location may also be entered at **Commerce** → **Store Settings** → **Store** → **Store Location**.
 
-You can also manage any customer’s addresses from their user account. Navigate to **Users**, choose a user to visit their edit page, and see the **Addresses** section of the **Customer Info** tab:
-
-![A user’s addresses seen from their Craft user account page](./images/user-addresses.png)
+You can also manage any customer’s addresses from their user account once you’ve added the native Addresses field to Users’ Field Layout.
 
 ## Managing Addresses
 
@@ -23,16 +21,17 @@ Every order may have a shipping and billing address, and customers with accounts
 - Convenient handling of the [Countries & States](countries-states.md) used in addresses thatstore managers can fully customize.
 - A separate endpoint that can be used to allow customers to [manage their saved addresses](#customer-addresses).
 
-An [Addresses service](commerce3:craft\commerce\services\Addresses) also provides methods for working directly with address data. We can use it here, for example, to get the store location address:
+The store address is available via the [Store service](craf4:craft\commerce\services\Store):
 
 ::: code
 ```twig
-{% set storeAddress = craft.commerce.addresses.storeLocationAddress %}
+{% set storeAddress = craft.commerce.getStore().getStore().getLocationAddress() %}
 ```
 ```php
-$storeAddress = craft\commerce\Plugin::getInstance()
-    ->getAddresses()
-    ->getStoreLocationAddress();
+$storeAddress = \craft\commerce\Plugin::getInstance()
+    ->getStore()
+    ->getStore()
+    ->getLocationAddress();
 ```
 :::
 
@@ -43,45 +42,6 @@ If you flattened `storeAddress` into an array, this is what it might look like:
 <<< @/docs/commerce/4.x/example-objects/storeAddress.php
 
 </toggle-tip>
-
-
-Several [Events](extend/events.md) may also be used, when [extending Commerce](extend/), to provide custom functionality as addresses are changed in the system:
-
-- [`beforeSaveAddress`](extend/events.md#beforesaveaddress)
-- [`afterSaveAddress`](extend/events.md#aftersaveaddress)
-- [`afterDeleteAddress`](extend/events.md#afterdeleteaddress)
-- [`defineAddressLines`](extend/events.md#defineaddresslines)
-
-### Address Lines
-
-The address model has a read-only `addressLines` parameter that returns a key-value array with every line of the address. By default it consists of most of the items in the example above:
-
-- `attention`
-- `name`
-- `fullName`
-- `address1`
-- `address2`
-- `address3`
-- `city`
-- `zipCode`
-- `phone`
-- `alternativePhone`
-- `label`
-- `notes`
-- `businessName`
-- `businessTaxId`
-- `stateText`
-- `countryText`
-- `custom1`
-- `custom2`
-- `custom3`
-- `custom4`
-
-This parameter is designed to allow consistency when displaying a customer’s address on the front end and in the control panel.
-
-Address lines are used, for example, on the [order edit](orders-carts.md#editing-orders) page in the control panel. There are examples for [displaying an address](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/_private/address/address.twig) in the [example templates](example-templates.md).
-
-You can customize this array using the [defineAddressLines](extend/events.md#defineaddresslines) event.
 
 ## Cart Addresses
 
@@ -101,7 +61,7 @@ Once you have [a cart object](orders-carts.md#fetching-a-cart), you can access o
 {% endif %}
 ```
 
-If present, the address will be an [Address](commerce3:craft\commerce\models\Address) object like the store location example above. Otherwise the `shippingAddress` or `billingAddress` property will return `null` if an address is not set.
+If present, the address will be an [Address](craft4:craft\elements\Address) object like the store location example above. Otherwise the `shippingAddress` or `billingAddress` property will return `null` if an address is not set.
 
 ::: tip
 You don’t need to add your own logic for checking `shippingAddressSameAsBilling` or `billingAddressSameAsShipping`; Commerce will return the correct address taking those options into account.
