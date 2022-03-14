@@ -35,7 +35,7 @@ In Commerce 4, a customer is always represented by a user element regardless of 
 
 The [Order::setEmail()](commerce4:craft\commerce\elements\Order::setEmail()) method was previously required to uniquely identify an order from the beginning. You can still use that and Commerce will ensure a user exists with that email address.
 
-If your controller or service has already ensured a given user exists, however, you can now call [Order::setUser()](commerce4:craft\commerce\elements\Order::setUser()) or directly set the [Order::$userId](commerce4:craft\commerce\elements\Order::$userId) property.
+If your controller or service has already ensured a given user exists, however, you can now call [Order::setCustomer()](commerce4:craft\commerce\elements\Order::setCustomer()) or directly set the [Order::$customerId](commerce4:craft\commerce\elements\Order::$customerId) property.
 
 ## Countries and States
 
