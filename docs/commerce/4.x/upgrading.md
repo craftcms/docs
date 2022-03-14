@@ -186,7 +186,7 @@ If you were displaying the payment form on the final checkout step, for example,
 {% endnamespace %}
 ```
 
-This makes it possible to display multiple payment forms on the same page within the same form tag. The `gatewayId` param is used to determine which payment form data to use for payment.
+This makes it possible to display multiple payment gateways’ form fields inside the same `<form>` tag, and the `gatewayId` param still determines which form data should be used.
 
 ## Zones
 
