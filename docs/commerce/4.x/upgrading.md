@@ -86,7 +86,7 @@ Please review your tax and shipping zones. We encourage you to use standardized 
 
 ## Address Management
 
-Commerce-specific Address models are now Craft [Address](craft4:craft\elements\Address) elements and can only belong to one owner in the Craft install.
+Commerce-specific Address models are now Craft [Address](craft4:craft\elements\Address) elements.
 
 This will almost certainly require changes to your front-end templates, though it comes with several benefits:
 
@@ -96,7 +96,9 @@ This will almost certainly require changes to your front-end templates, though i
 
 ### Order Addresses
 
-An order’s addresses (estimated and normal billing + shipping) belong solely to that order. If a user designates one of their saved addresses for an order’s shipping or billing, the address will be cloned to that order with references to the original address element stored in `order.sourceBillingAddressId` and `order.sourceShippingAddressId`.
+Each address can only belong to one owner in the Craft install.
+
+An order’s addresses (estimated and normal billing + shipping) belong solely to that order. If a customer designates one of their saved addresses for an order’s shipping or billing, the address will be cloned to that order with references to the original address element stored in `order.sourceBillingAddressId` and `order.sourceShippingAddressId`.
 
 ### User Addresses
 
