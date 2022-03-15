@@ -247,8 +247,7 @@ This makes it possible to display multiple payment gateways’ form fields insid
 
 ## Config Settings
 
-- Removed the `orderPdfFilenameFormat` setting.
-- Removed the `orderPdfPath` setting.
+The `orderPdfFilenameFormat` and `orderPdfPath` settings have been removed. Create a default order [PDF](pdfs.md#creating-a-pdf) instead.
 
 ## Twig
 
