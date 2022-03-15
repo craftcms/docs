@@ -13,7 +13,6 @@ If you’re upgrading from Commerce 2, see the [Changes in Commerce 3](https://c
 Before you begin, make sure that:
 
 - you’ve reviewed the changes in Commerce 4 [in the changelog](https://github.com/craftcms/commerce/blob/main/CHANGELOG.md#400) and further down this page
-- your site’s running at least **Craft 4.0**
 - you’ve made sure there are no deprecation warnings from Commerce 3 that need fixing
 - your **database and files are backed up** in case everything goes horribly wrong
 
