@@ -310,32 +310,29 @@ Theses Commerce-specific element actions have been removed and rely on Craft’s
 
 | Old | What to do instead
 | --- | ---
-| [ProductType::lineItemFormat](commerce3:craft\commerce\models\ProductType::lineItemFormat) |
-| [ShippingAddressZone::getStatesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getStatesNames()) |
-| [Discount::$code](commerce3:craft\commerce\models\Discount::$code) |
-| [Discount::getDiscountUserGroups()](commerce3:craft\commerce\models\Discount::getDiscountUserGroups()) |
+| [ShippingAddressZone::getStatesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getStatesNames()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [Discount::$code](commerce3:craft\commerce\models\Discount::$code) | [$codes[0]](commerce4:craft\commerce\models\Discount::$codes)
+| [Discount::getDiscountUserGroups()](commerce3:craft\commerce\models\Discount::getDiscountUserGroups()) | Discount user groups were migrated to the customer condition rule.
 | [Discount::getUserGroupIds()](commerce3:craft\commerce\models\Discount::getUserGroupIds()) | Discount user groups were migrated to the customer condition rule.
 | [Discount::setUserGroupIds()](commerce3:craft\commerce\models\Discount::setUserGroupIds()) | Discount user groups were migrated to the customer condition rule.
 | [OrderHistory::$customerId](commerce3:craft\commerce\models\OrderHistory::$customerId) | [$userId](commerce4:craft\commerce\models\OrderHistory::$userId)
 | [OrderHistory::getCustomer()](commerce3:craft\commerce\models\OrderHistory::getCustomer()) | [getUser()](commerce4:craft\commerce\models\OrderHistory::getUser())
 | [Settings::$showCustomerInfoTab](commerce3:craft\commerce\models\Settings::$showCustomerInfoTab) | [$showEditUserCommerceTab](commerce4:craft\commerce\models\Settings::$showEditUserCommerceTab)
-| [ShippingAddressZone::getCountries()](commerce3:craft\commerce\models\ShippingAddressZone::getCountries()) | 
-| [ShippingAddressZone::getCountriesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getCountriesNames()) | 
-| [ShippingAddressZone::getCountryIds()](commerce3:craft\commerce\models\ShippingAddressZone::getCountryIds()) | 
-| [ShippingAddressZone::getCountryIds()](commerce3:craft\commerce\models\ShippingAddressZone::getCountryIds()) |
-| [ShippingAddressZone::getStateIds()](commerce3:craft\commerce\models\ShippingAddressZone::getStateIds()) |
-| [ShippingAddressZone::getStates()](commerce3:craft\commerce\models\ShippingAddressZone::getStates()) |
-| [ShippingAddressZone::getStatesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getStatesNames()) | 
-| [ShippingAddressZone::isCountryBased](commerce3:craft\commerce\models\ShippingAddressZone::isCountryBased) |
-| [States](commerce3:craft\commerce\models\States) |
-| [TaxAddressZone::getCountries()](commerce3:craft\commerce\models\TaxAddressZone::getCountries()) |
-| [TaxAddressZone::getCountriesNames()](commerce3:craft\commerce\models\TaxAddressZone::getCountriesNames()) |
-| [TaxAddressZone::getCountryIds()](commerce3:craft\commerce\models\TaxAddressZone::getCountryIds()) |
-| [TaxAddressZone::getCountryIds()](commerce3:craft\commerce\models\TaxAddressZone::getCountryIds()) |
-| [TaxAddressZone::getStateIds()](commerce3:craft\commerce\models\TaxAddressZone::getStateIds()) |
-| [TaxAddressZone::getStates()](commerce3:craft\commerce\models\TaxAddressZone::getStates()) |
-| [TaxAddressZone::getStatesNames()](commerce3:craft\commerce\models\TaxAddressZone::getStatesNames()) |
-| [TaxAddressZone::isCountryBased](commerce3:craft\commerce\models\TaxAddressZone::isCountryBased) |
+| [ShippingAddressZone::getCountries()](commerce3:craft\commerce\models\ShippingAddressZone::getCountries()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [ShippingAddressZone::getCountriesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getCountriesNames()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [ShippingAddressZone::getCountryIds()](commerce3:craft\commerce\models\ShippingAddressZone::getCountryIds()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [ShippingAddressZone::getStateIds()](commerce3:craft\commerce\models\ShippingAddressZone::getStateIds()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [ShippingAddressZone::getStates()](commerce3:craft\commerce\models\ShippingAddressZone::getStates()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [ShippingAddressZone::getStatesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getStatesNames()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [ShippingAddressZone::isCountryBased](commerce3:craft\commerce\models\ShippingAddressZone::isCountryBased) | Not applicable; zones can be country- and state-based simultaneously.
+| [States](commerce3:craft\commerce\models\States) | `craft.app.getAddresses().subdivisionRepository.getAll(['US'])`
+| [TaxAddressZone::getCountries()](commerce3:craft\commerce\models\TaxAddressZone::getCountries()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
+| [TaxAddressZone::getCountriesNames()](commerce3:craft\commerce\models\TaxAddressZone::getCountriesNames()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
+| [TaxAddressZone::getCountryIds()](commerce3:craft\commerce\models\TaxAddressZone::getCountryIds()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
+| [TaxAddressZone::getStateIds()](commerce3:craft\commerce\models\TaxAddressZone::getStateIds()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
+| [TaxAddressZone::getStates()](commerce3:craft\commerce\models\TaxAddressZone::getStates()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
+| [TaxAddressZone::getStatesNames()](commerce3:craft\commerce\models\TaxAddressZone::getStatesNames()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
+| [TaxAddressZone::isCountryBased](commerce3:craft\commerce\models\TaxAddressZone::isCountryBased) | Not applicable; zones can be country- and state-based simultaneously.
 
 ## Services
 
