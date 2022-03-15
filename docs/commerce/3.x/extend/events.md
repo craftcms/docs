@@ -6,7 +6,7 @@ Craft Commerce provides a multitude of events for extending its functionality. M
 
 Select an event for details and a code snippet. See Craft’s [Events](../../../3.x/extend/events.md) page for Craft and Yii events.
 
-<event-browser source="commerce" />
+<event-browser source="commerce-3" />
 
 ## Variant Events
 

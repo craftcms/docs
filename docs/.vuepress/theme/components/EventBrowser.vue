@@ -342,8 +342,9 @@
 
 <script>
 import { VueAutosuggest } from "vue-autosuggest";
-import CraftEventData from "../../../3.x/event-data/events.json";
-import CommerceEventData from "../../../commerce/3.x/event-data/events.json";
+import Craft3EventData from "../../../3.x/event-data/events.json";
+import Craft4EventData from "../../../4.x/event-data/events.json";
+import Commerce3EventData from "../../../commerce/3.x/event-data/events.json";
 import copy from "copy-to-clipboard";
 import CheckMark from "../global-components/CheckMark.vue";
 
@@ -362,7 +363,7 @@ export default {
     return {
       searchText: "",
       currentEvent: "",
-      eventData: this.source === "craft" ? CraftEventData : CommerceEventData,
+      eventData: [],
       filterSelections: {},
       codeCopied: false,
       prism: null,
@@ -370,6 +371,18 @@ export default {
     };
   },
   mounted() {
+    switch (this.source) {
+      case "craft-3":
+        this.eventData = Craft3EventData;
+        break;
+      case "craft-4":
+        this.eventData = Craft4EventData;
+        break;
+      case "commerce-3":
+        this.eventData = Commerce3EventData;
+        break;
+    }
+
     if (typeof window !== "undefined") {
       // avoid having Prism initialize itself and automatically re-style existing code blocks
       window.Prism = window.Prism || {};
