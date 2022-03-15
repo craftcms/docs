@@ -6,7 +6,7 @@ Craft has all kinds of events you can use to customize how things work. See [Usi
 
 Select an event for more detail and a code snippet.
 
-<event-browser source="craft" />
+<event-browser source="craft-3" />
 
 ## Common Event Flows
 
