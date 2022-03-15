@@ -19267,6 +19267,12 @@
         "desc": "The event that is triggered when a default order status is being fetched."
     },
     {
+        "class": "craft\\commerce\\services\\OrderStatuses",
+        "name": "EVENT_ORDER_STATUS_CHANGE_EMAILS",
+        "type": "craft\\commerce\\events\\OrderStatusEmailsEvent",
+        "desc": "The email event that is triggered when an order status is changed."
+    },
+    {
         "class": "craft\\commerce\\services\\PaymentSources",
         "name": "EVENT_DELETE_PAYMENT_SOURCE",
         "type": "craft\\commerce\\events\\PaymentSourceEvent",
