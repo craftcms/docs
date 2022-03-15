@@ -45,7 +45,7 @@ Because this repository isn’t editable, Commerce 4 has moved away from custom 
 ![Screenshot of the Store Markets settings, with an Order Address Condition rule builder and Country List autosuggest field](./images/store-markets.png)
 
 - **Order Address Condition** provides a condition builder for limiting what addresses should be allowed for orders.
-- **Country List** is an autosuggest field for choosing the countries that should be available for customers to select.
+- **Country List** is an autosuggest field for choosing the countries that should be available for customers to select, in the order they’re saved in the field.
 
 ::: tip
 Enabled countries from Commerce 3 are migrated to the **Country List** field.
