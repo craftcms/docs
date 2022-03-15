@@ -24,17 +24,19 @@ Once you’ve completed these steps, you’re ready continue with the upgrade pr
 2. Edit your project’s `composer.json` to require `"craftcms/commerce": "^4.0.0-beta.1"`.
 3. In your terminal, run `composer update`.
 4. Run `php craft migrate/up --track=plugin:commerce`.
-5. Run `php craft commerce/upgrade`.
+5. Run `php craft commerce/upgrade` and follow the interactive prompts.
 
 Once you’re running the latest version of Craft Commerce, you’ll need to update your templates and any custom code relevant to the topics detailed below.
 
 ## Customer → User Transition
 
-In Commerce 4, a customer is always represented by a user element regardless of an order’s status.
+In Commerce 4, a customer is always represented by a [User](craft4:craft\elements\User) element regardless of an order’s status.
 
-The [Order::setEmail()](commerce4:craft\commerce\elements\Order::setEmail()) method was previously required to uniquely identify an order from the beginning. You can still use that and Commerce will ensure a user exists with that email address.
+This means that whenever you see the word “customer” in Commerce 4, it’s something that relates to a user element. (This is possible thanks to Craft 4’s new support for inactive users, which are those that don’t have an account.)
 
-If your controller or service has already ensured a given user exists, however, you can now call [Order::setCustomer()](commerce4:craft\commerce\elements\Order::setCustomer()) or directly set the [Order::$customerId](commerce4:craft\commerce\elements\Order::$customerId) property.
+The [Order::getUser()](commerce4:craft\commerce\elements\Order::getUser()) method has been deprecated, and you should use [getCustomer()](commerce4:craft\commerce\elements\Order::getCustomer()) instead. You can also designate the customer for an order using [Order::setCustomer()](commerce4:craft\commerce\elements\Order::setCustomer()) or by directly setting the [Order::$customerId](commerce4:craft\commerce\elements\Order::$customerId) property—just make sure the user you’ve referenced already exists.
+
+Calling the [Order::setEmail()](commerce4:craft\commerce\elements\Order::setEmail()) method works slightly differently now behind the scenes to ensure a user with the supplied email address exists. (If not, Commerce will create one for you.)
 
 ## Countries and States
 
