@@ -30,6 +30,10 @@ The `commerce/upgrade` command must be run interactively, and it will walk you t
 
 Once you’re running the latest version of Craft Commerce, you’ll need to update your templates and any custom code relevant to the topics detailed below.
 
+## Order Numbers
+
+Any time you pass a reference to an order/cart to a Commerce API, it will be consistently referenced as a `number`—meaning `orderNumber` is now `number` in [a few places](https://github.com/craftcms/commerce/pull/2732/files).
+
 ## Customer → User Transition
 
 In Commerce 4, a customer is always represented by a [User](craft4:craft\elements\User) element regardless of an order’s status.
