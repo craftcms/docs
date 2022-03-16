@@ -273,7 +273,7 @@ If you’re providing a way for customers to save their addresses on the front e
 
 - Address field names will need to be [updated](#address-template-changes), where any custom field names should follow the `fields[myFieldName]` format used by other element types.
 - You must specify the user’s ID in an `ownerId` field for the address you’re saving.
-- If you’re saving an _existing_ address, as opposed to a new one, you’ll need to reference it via the `id` param instead of `addressId`.
+- If you’re saving an _existing_ address, as opposed to a new one, you’ll need to reference it via the `addressId` param instead of `id`.
 - The form action should be `users/save-address` rather than `commerce/customer-addresses/save`.
 - The (optional) `makePrimaryShippingAddress` and `makePrimaryBillingAddress` params are now `isPrimaryShipping` and `isPrimaryBilling`.
 
@@ -286,7 +286,7 @@ The new controller actions are only available for logged-in users; guests are no
 If you’re allowing customers to delete their addresses on the front end…
 
 - The form action should be `users/delete-address` rather than `commerce/customer-addresses/delete`.
-- You must specify the address to be deleted via an `id` param instead of `addressId`.
+- You must specify the address to be deleted via an `addressId` param instead of `id`.
 
 ::: warning
 The new controller actions are only available for logged-in users; guests are no longer allowed to maintain address books.
