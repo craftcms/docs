@@ -36,7 +36,7 @@ This means that whenever you see the word “customer” in Commerce 4, it’s s
 
 The [Order::getUser()](commerce4:craft\commerce\elements\Order::getUser()) method has been deprecated, and you should use [getCustomer()](commerce4:craft\commerce\elements\Order::getCustomer()) instead. You can also designate the customer for an order using [Order::setCustomer()](commerce4:craft\commerce\elements\Order::setCustomer()) or by directly setting the [Order::$customerId](commerce4:craft\commerce\elements\Order::$customerId) property—just make sure the user you’ve referenced already exists.
 
-Calling the [Order::setEmail()](commerce4:craft\commerce\elements\Order::setEmail()) method works slightly differently now behind the scenes to ensure a user with the supplied email address exists. (If not, Commerce will create one for you.)
+Calling the [Order::setEmail()](commerce4:craft\commerce\elements\Order::setEmail()) method works slightly differently now behind the scenes to ensure a user with the supplied email address exists. (If not, Commerce will create one for you.) In other words, an order can exist without an email address, but as soon as it has an email address it also has a customer.
 
 ## Countries and States
 
