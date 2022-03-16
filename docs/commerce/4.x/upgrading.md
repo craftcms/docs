@@ -166,6 +166,8 @@ The concept of address lines has gone away along with [DefineAddressLinesEvent](
 
 ### Template Changes
 
+`businessName` and `businessTaxId` are now `orgnization` and `orgnizationTaxId`.
+
 `stateId` and `stateValue` references can be replaced with `administrativeArea`. It expects a two-letter code if the state/province is in the list of subdivisions for the current country, or an arbitrary string for countries that don’t.
 
 ```twig
