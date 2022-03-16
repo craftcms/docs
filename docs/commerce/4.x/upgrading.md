@@ -416,14 +416,19 @@ Several methods have been deprecated:
 
 ## Controllers
 
-- Removed `craft\commerce\controllers\AddressesController`.
-- Removed `craft\commerce\controllers\CountriesController`.
-- Removed `craft\commerce\controllers\CustomersController`.
-- Removed `craft\commerce\controllers\CustomerAddressesController`.
-- Removed `craft\commerce\controllers\OrdersController::_prepCustomersArray()`. Use `_customerToArray()` instead.
-- Removed `craft\commerce\controllers\PlansController::actionRedirect()`.
-- Removed `craft\commerce\controllers\ProductsPreviewController::enforceProductPermissions()`.
-- Removed `craft\commerce\controllers\StatesController`.
+Several controllers have been removed entirely in Commerce 4:
+
+- [AddressesController](commerce3:craft\commerce\controllers\AddressesController)
+- [CountriesController](commerce3:craft\commerce\controllers\CountriesController)
+- [CustomersController](commerce3:craft\commerce\controllers\CustomersController)
+- [CustomerAddressesController](commerce3:craft\commerce\controllers\CustomerAddressesController)
+- [StatesController](commerce3:craft\commerce\controllers\StatesController)
+
+A few controller methods have been removed as well:
+
+- [OrdersController::_prepCustomersArray()](commerce3:craft\commerce\controllers\OrdersController::_prepCustomersArray()) (Use [_customerToArray()](commerce4:craft\commerce\controllers\OrdersController::_customerToArray()) instead.)
+- [PlansController::actionRedirect()](commerce3:craft\commerce\controllers\PlansController::actionRedirect())
+- [ProductsPreviewController::enforceProductPermissions()](commerce3:craft\commerce\controllers\ProductsPreviewController::enforceProductPermissions())
 
 ## User Permissions
 
