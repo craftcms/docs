@@ -26,6 +26,8 @@ Once you’ve completed these steps, you’re ready continue with the upgrade pr
 4. Run `php craft migrate/up --track=plugin:commerce`.
 5. Run `php craft commerce/upgrade` and follow the interactive prompts.
 
+The `commerce/upgrade` command must be run interactively, and it will walk you through the process of migrating various customizations to Commerce 4. See the [console command](console-commands.md#upgrade) page for more about what it does.
+
 Once you’re running the latest version of Craft Commerce, you’ll need to update your templates and any custom code relevant to the topics detailed below.
 
 ## Customer → User Transition
