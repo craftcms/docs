@@ -271,7 +271,7 @@ If you’re providing a way for customers to manage their addresses on the front
 
 - Address field names will need to be [updated](#address-template-changes), where any custom field names should follow the `fields[myFieldName]` format used by other element types.
 - You must specify the user’s ID in an `ownerId` field for the address you’re saving.
-- The form action should be `elements/save` rather than `commerce/customer-addresses/save`.
+- The form action should be `users/save-address` rather than `commerce/customer-addresses/save`.
 
 ### Payment Forms
 
