@@ -166,7 +166,19 @@ The concept of address lines has gone away along with [DefineAddressLinesEvent](
 
 ### Template Changes
 
-`businessName` and `businessTaxId` are now `orgnization` and `orgnizationTaxId`.
+`businessName` and `businessTaxId` are now `organization` and `organizationTaxId`:
+
+```twig
+{# Commerce 3 #}
+{# @var model craft\commerce\models\Address #}
+{{ input('text', modelName ~ '[businessName]', model.businessName ?? '') }}
+{{ input('text', modelName ~ '[businessTaxId]', model.businessTaxId ?? '') }}
+
+{# Commerce 4 #}
+{# @var address craft\elements\Address #}
+{{ input('text', 'organization', address.organization ?? '') }}
+{{ input('text', 'organizationTaxId', address.organizationTaxId ?? '') }}
+```
 
 `stateId` and `stateValue` references can be replaced with `administrativeArea`. It expects a two-letter code if the state/province is in the list of subdivisions for the current country, or an arbitrary string for countries that don’t.
 
