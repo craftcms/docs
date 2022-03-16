@@ -91,7 +91,7 @@ States can no longer be enabled or disabled for selection in dropdown lists, but
 
 ![The Order Address Condition condition builder field, configured with `Administrative Area`, `is one of`, `Australia`, and `Western Australia`.](./images/order-address-condition.png)
 
-While Commerce has removed support for managing custom countries and states, the [`commerce/upgrade`](console-commands.md#commerce-upgrade) command migrates previous custom countries and states into fields on individual addresses and adds rules to zone and store market condition builders to match those custom country and state values.
+While Commerce has removed support for managing custom countries and states, the [`commerce/upgrade`](console-commands.md#commerce-upgrade) command prompts you to map the custom countries to real country codes, and copies the state `abbreviation` (if a custom state was created) or the `stateName` entered by the customer to the `administrativeArea` field on relevant addresses and zones.
 
 Please review your tax and shipping zones. We encourage you to use standardized countries and administrative areas (states) for your zones in the future.
 
