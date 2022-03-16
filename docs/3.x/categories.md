@@ -132,7 +132,6 @@ Category queries support the following parameters:
 | [descendantDist](#descendantdist)         | Narrows the query results to only categories that are up to a certain distance away from the category specified by [descendantOf](#descendantof).
 | [descendantOf](#descendantof)             | Narrows the query results to only categories that are descendants of another category in its structure.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [getCacheTags](#getcachetags)             |
 | [group](#group)                           | Narrows the query results based on the category groups the categories belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
 | [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the categories have any descendants in their structure.
@@ -509,15 +508,6 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
-
-
-#### `getCacheTags`
-
-
-
-
-
-
 
 
 #### `group`

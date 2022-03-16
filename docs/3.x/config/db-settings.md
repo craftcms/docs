@@ -150,7 +150,7 @@ You can change the character set and collation across all existing database tabl
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string)
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :  `null`
@@ -169,7 +169,7 @@ The name of the database to select.
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string)
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :  `null`
@@ -188,7 +188,7 @@ The database driver to use. Either `mysql` for MySQL or `pgsql` for PostgreSQL.
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string)
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :  `null`
@@ -232,7 +232,7 @@ The database password to connect with.
 <div class="compact">
 
 Allowed types
-:  [integer](https://php.net/language.types.integer)
+:  [integer](https://php.net/language.types.integer), [null](https://php.net/language.types.null)
 
 Default value
 :  `null`
@@ -275,7 +275,7 @@ the [setSchemaOnConnect](https://docs.craftcms.com/api/v3/craft-config-dbconfig.
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string)
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :  `null`

@@ -75,7 +75,6 @@ User queries support the following parameters:
 | [email](#email)                           | Narrows the query results based on the users’ email addresses.
 | [firstName](#firstname)                   | Narrows the query results based on the users’ first names.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [getCacheTags](#getcachetags)             |
 | [group](#group)                           | Narrows the query results based on the user group the users belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 | [hasPhoto](#hasphoto)                     | Narrows the query results to only users that have (or don’t have) a user photo.
@@ -422,15 +421,6 @@ $users = \craft\elements\User::find()
     ->all();
 ```
 :::
-
-
-#### `getCacheTags`
-
-
-
-
-
-
 
 
 #### `group`

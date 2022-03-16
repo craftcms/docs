@@ -302,7 +302,6 @@ Entry queries support the following parameters:
 | [drafts](#drafts)                         | Narrows the query results to only drafts entries.
 | [expiryDate](#expirydate)                 | Narrows the query results based on the entries’ expiry dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [getCacheTags](#getcachetags)             |
 | [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the entries have any descendants in their structure.
 | [id](#id)                                 | Narrows the query results based on the entries’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -1014,15 +1013,6 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
-
-
-#### `getCacheTags`
-
-
-
-
-
-
 
 
 #### `hasDescendants`

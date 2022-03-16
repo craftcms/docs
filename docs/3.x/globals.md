@@ -113,7 +113,6 @@ Global set queries support the following parameters:
 | [dateCreated](#datecreated)               | Narrows the query results based on the global sets’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the global sets’ last-updated dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [getCacheTags](#getcachetags)             |
 | [handle](#handle)                         | Narrows the query results based on the global sets’ handles.
 | [id](#id)                                 | Narrows the query results based on the global sets’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching global sets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -347,15 +346,6 @@ $globalSets = \craft\elements\GlobalSet::find()
     ->all();
 ```
 :::
-
-
-#### `getCacheTags`
-
-
-
-
-
-
 
 
 #### `handle`

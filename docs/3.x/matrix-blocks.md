@@ -75,7 +75,6 @@ Matrix block queries support the following parameters:
 | [field](#field)                             | Narrows the query results based on the field the Matrix blocks belong to.
 | [fieldId](#fieldid)                         | Narrows the query results based on the field the Matrix blocks belong to, per the fields’ IDs.
 | [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
-| [getCacheTags](#getcachetags)               |
 | [id](#id)                                   | Narrows the query results based on the Matrix blocks’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching Matrix blocks as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
@@ -406,15 +405,6 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->all();
 ```
 :::
-
-
-#### `getCacheTags`
-
-
-
-
-
-
 
 
 #### `id`
