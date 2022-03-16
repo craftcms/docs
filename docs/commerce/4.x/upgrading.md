@@ -53,7 +53,7 @@ Because this repository isn’t editable, Commerce 4 has moved away from custom 
 Enabled countries from Commerce 3 are migrated to the **Country List** field.
 :::
 
-You can fetch the list of available countries via the new [Store](commerce4:craft\commerce\services\Store) service:
+You can fetch that list of available countries via the new [Store](commerce4:craft\commerce\services\Store) service:
 
 ::: code
 ```twig
