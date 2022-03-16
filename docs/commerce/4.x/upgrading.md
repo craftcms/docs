@@ -20,15 +20,16 @@ Once you’ve completed these steps, you’re ready continue with the upgrade pr
 
 ## Performing the Upgrade
 
-1. Create a new database backup just in case things go sideways.
-2. Edit your project’s `composer.json` to require `"craftcms/commerce": "^4.0.0-beta.1"`.
-3. In your terminal, run `composer update`.
-4. Run `php craft migrate/up --track=plugin:commerce`.
-5. Run `php craft commerce/upgrade` and follow the interactive prompts.
-
-The `commerce/upgrade` command must be run interactively, and it will walk you through the process of migrating various customizations to Commerce 4. See the [console command](console-commands.md#upgrade) page for more about what it does.
+1. Upgrade Craft CMS, Craft Commerce, and any other plugins you may have, per the [Craft 4 upgrade instructions](../../4.x/upgrade.md). (Your project’s `composer.json` should require `"craftcms/commerce": "^4.0.0-beta.1"`.)
+2. In your terminal, run `php craft commerce/upgrade` and follow the interactive prompts.
 
 Once you’re running the latest version of Craft Commerce, you’ll need to update your templates and any custom code relevant to the topics detailed below.
+
+::: warning
+The [`commerce/upgrade`](console-commands.md#upgrade) command must be run interactively. It will prompt you to designate or create fields and then migrate content to them.
+
+You’ll need to run it again in production where you can _only_ designate target fields and migrate content—unless you temporarily disable [allowAdminChanges](config4:allowAdminChanges) to create fields on the fly in that environment, in which case you’d need to pull your production database down locally afterward and run [`project-config/write`](../../4.x/console-commands.md#project-config-write).
+:::
 
 ## Order Numbers
 
