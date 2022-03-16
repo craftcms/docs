@@ -63,4 +63,4 @@ It goes through several steps to ensure the best-possible migration:
 9. Creates tax and shipping zone conditions based on legacy country and state lists.
 10. Links the store location address to the appropriate address element.
 11. Links order history records to their appropriate user accounts.
-12. Migrates previously-enabled countries to the store’s Country List and creates an Order Address Condition as needed.
+12. Migrates previously-enabled countries to the store’s Country List and creates an Order Address Condition as needed. Any custom state `abbreviation` or `stateName` will be copied to the `administrativeArea` field of relevant addresses and zones.
