@@ -106,7 +106,7 @@ Each address can only have a single owner, whether that’s an order or a user.
 An order’s addresses (both estimated and normal billing + shipping) belong solely to that order. If a customer designates one of their saved addresses for an order’s shipping or billing, the address will be cloned to that order with references to the original address element stored in `order.sourceBillingAddressId` and `order.sourceShippingAddressId`.
 
 ::: warning
-Addresses are no longer automatically added to a customer’s address book when an order is completed, and a user must be logged in to be able to save an address to their address book.
+Addresses are no longer automatically added to a customer’s address book when an order is completed, and a user must be logged in to be able to save an address to their address book. `makePrimaryBillingAddress` and `makePrimaryShippingAddress` will not have any effect for a user that’s not logged in.
 :::
 
 ### User Addresses
