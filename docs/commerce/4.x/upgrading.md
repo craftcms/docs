@@ -252,14 +252,12 @@ Any custom fields can be treated just like those on any other element type. For 
 
 ```twig
 {# Commerce 3 #}
-{# @var model craft\commerce\models\Address #}
-{{ input('text', modelName ~ '[address1]', model.address1 ?? '') }}
-{{ input('text', modelName ~ '[custom1]', model.custom1 ?? '') }}
+{{ input('text', 'shippingAddress[address1]', order.shippingAddress.address1 ?? '') }}
+{{ input('text', 'shippingAddress[custom1]', order.shippingAddress.custom1 ?? '') }}
 
 {# Commerce 4 #}
-{# @var address craft\elements\Address #}
-{{ input('text', 'addressLine1', address.addressLine1 ?? '') }}
-{{ input('text', 'fields[custom1]', address.custom1 ?? '') }}
+{{ input('text', 'shippingAddress[addressLine1]', order.shippingAddress.addressLine1 ?? '') }}
+{{ input('text', 'shippingAddress[fields][custom1]', order.shippingAddress.custom1 ?? '') }}
 ```
 
 ## Front-End Form Requests and Responses
