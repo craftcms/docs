@@ -345,6 +345,7 @@ import { VueAutosuggest } from "vue-autosuggest";
 import Craft3EventData from "../../../3.x/event-data/events.json";
 import Craft4EventData from "../../../4.x/event-data/events.json";
 import Commerce3EventData from "../../../commerce/3.x/event-data/events.json";
+import Commerce4EventData from "../../../commerce/4.x/event-data/events.json";
 import copy from "copy-to-clipboard";
 import CheckMark from "../global-components/CheckMark.vue";
 
@@ -380,6 +381,9 @@ export default {
         break;
       case "commerce-3":
         this.eventData = Commerce3EventData;
+        break;
+      case "commerce-4":
+        this.eventData = Commerce4EventData;
         break;
     }
 

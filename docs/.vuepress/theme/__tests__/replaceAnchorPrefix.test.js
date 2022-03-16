@@ -77,6 +77,10 @@ test("handles Yii API links", () => {
  */
 const config = [
   {
+    source: "config4:softDeleteDuration",
+    result: "/4.x/config/config-settings.md#softdeleteduration"
+  },
+  {
     source: "config3:softDeleteDuration",
     result: "/3.x/config/config-settings.md#softdeleteduration"
   },

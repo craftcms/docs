@@ -5,6 +5,7 @@ The following [filters](https://twig.symfony.com/doc/2.x/templates.html#filters)
 Filter | Description
 ------ | -----------
 [abs](https://twig.symfony.com/doc/2.x/filters/abs.html) | Returns the absolute value of a number.
+[address](#address) | Formats an address.
 [append](#append) | Appends HTML to the end of another element.
 [ascii](#ascii) | Converts a string to ASCII characters.
 [atom](#atom) | Converts a date to an ISO-8601 timestamp.
@@ -91,6 +92,24 @@ Filter | Description
 [where](#where) | Filters an array by key/value pairs.
 [withoutKey](#withoutkey) | Returns an array without the specified key.
 [without](#without) | Returns an array without the specified element(s).
+
+## `address`
+
+Applies formatting to an [Address](craft4:craft\elements\Address).
+
+```twig
+{% set myAddress = currentUser.getAddresses()|first %}
+{{ myAddress|address }}
+{# Output:
+  <p translate="no">
+  <span class="address-line1">1234 Balboa Towers Circle</span><br>
+  <span class="locality">Los Angeles</span>, <span class="administrative-area">CA</span> <span class="postal-code">92662</span><br>
+  <span class="country">United States</span>
+  </p>
+#}
+```
+
+This calls [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()), so you can optionally provide an array of options and even your own [formatter](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php).
 
 ## `append`
 
