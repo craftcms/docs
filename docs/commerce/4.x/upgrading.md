@@ -101,9 +101,13 @@ This will almost certainly require changes to your front-end templates, though i
 
 ### Order Addresses
 
-Each address can only belong to one owner in the Craft install.
+Each address can only have a single owner, whether that’s an order or a user.
 
-An order’s addresses (estimated and normal billing + shipping) belong solely to that order. If a customer designates one of their saved addresses for an order’s shipping or billing, the address will be cloned to that order with references to the original address element stored in `order.sourceBillingAddressId` and `order.sourceShippingAddressId`.
+An order’s addresses (both estimated and normal billing + shipping) belong solely to that order. If a customer designates one of their saved addresses for an order’s shipping or billing, the address will be cloned to that order with references to the original address element stored in `order.sourceBillingAddressId` and `order.sourceShippingAddressId`.
+
+::: warning
+Addresses are no longer automatically added to a customer’s address book when an order is completed, and a user must be logged in to be able to save an address to their address book.
+:::
 
 ### User Addresses
 
