@@ -130,10 +130,11 @@ $userAddresses = Craft::$app->getUser()->getIdentity()->getAddresses();
 
 If you’d like to save a new address to a user’s address book, you must provide an `ownerId`:
 
-```php
+```php{3-4}
 $address = new \craft\elements\Address();
 $address->setAttributes($addressData);
-$address->ownerId = 1;
+// Designate the logged-in user as the owner of this address
+$address->ownerId = Craft::$app->getUser()->getIdentity()->id;
 
 Craft::$app->getElements()->saveElement($address);
 ```
@@ -168,7 +169,9 @@ $storeAddress = \craft\commerce\Plugin::getInstance()
 
 The concept of address lines has gone away along with [DefineAddressLinesEvent](commerce3:craft\commerce\events\DefineAddressLinesEvent). Use Craft’s [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()) instead.
 
-### Template Changes
+### Address Template Changes
+
+The change in address format means you’ll need to update some references in your templates.
 
 `businessName` and `businessTaxId` are now `organization` and `organizationTaxId`:
 
@@ -247,8 +250,9 @@ The concept of address lines has gone away along with [DefineAddressLinesEvent](
 
 ## Front-End Form Requests and Responses
 
-Ajax responses from `commerce/payment-sources/*` no longer return the payment form error using the `paymentForm` key.
-Use `paymentFormErrors` to get the payment form errors instead.
+::: tip
+Check out the [example templates](example-templates.md)—they’re compatible with Commerce 4!
+:::
 
 ### Payment Forms
 
@@ -268,21 +272,22 @@ If you were displaying the payment form on the final checkout step, for example,
 
 This makes it possible to display multiple payment gateways’ form fields inside the same `<form>` tag, where the `gatewayId` param still determines which form data should be used.
 
+### Payment Sources Responses
+
+Ajax responses from `commerce/payment-sources/*` no longer return the payment form error using the `paymentForm` key.
+Use `paymentFormErrors` to get the payment form errors instead.
+
 ## Config Settings
 
 The `orderPdfFilenameFormat` and `orderPdfPath` settings have been removed. Create a default order [PDF](pdfs.md#creating-a-pdf) instead.
 
-## Twig
+## Twig Filters
 
-- Removed the `json_encode_filtered` Twig filter.
-
-::: tip
-Check out the [example templates](example-templates.md)—they’re compatible with Commerce 4!
-:::
+We removed the `json_encode_filtered` Twig filter. Use [`json_encode`](../../4.x/dev/filters.md#json-encode) instead.
 
 ## Events
 
-- Renamed [Order::EVENT_AFTER_REMOVE_LINE_ITEM](commerce4:craft\commerce\elements\Order::EVENT_AFTER_REMOVE_LINE_ITEM) string from `afterRemoveLineItemToOrder` to `afterRemoveLineItemFromOrder`.
+The [Order::EVENT_AFTER_REMOVE_LINE_ITEM](commerce4:craft\commerce\elements\Order::EVENT_AFTER_REMOVE_LINE_ITEM) string has been renamed from `afterRemoveLineItemToOrder` to `afterRemoveLineItemFromOrder`.
 
 ## Controller Actions
 
