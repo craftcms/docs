@@ -248,11 +248,33 @@ The change in address format means you’ll need to update some references in yo
 {{ input('text', 'postalCode', address.postalCode ?? '') }}
 ```
 
+Any custom fields can be treated just like those on any other element type. For example, if you were previously using `custom1`, which was part of Commerce 3’s address model, your migration would’ve made it a custom field on the Commerce 4 address element:
+
+```twig
+{# Commerce 3 #}
+{# @var model craft\commerce\models\Address #}
+{{ input('text', modelName ~ '[address1]', model.address1 ?? '') }}
+{{ input('text', modelName ~ '[custom1]', model.custom1 ?? '') }}
+
+{# Commerce 4 #}
+{# @var address craft\elements\Address #}
+{{ input('text', 'addressLine1', address.addressLine1 ?? '') }}
+{{ input('text', 'fields[custom1]', address.custom1 ?? '') }}
+```
+
 ## Front-End Form Requests and Responses
 
 ::: tip
 Check out the [example templates](example-templates.md)—they’re compatible with Commerce 4!
 :::
+
+### Saving an Address
+
+If you’re providing a way for customers to manage their addresses on the front end, you’ll need to make a few adjustments:
+
+- Address field names will need to be [updated](#address-template-changes), where any custom field names should follow the `fields[myFieldName]` format used by other element types.
+- You must specify the user’s ID in an `ownerId` field for the address you’re saving.
+- The form action should be `elements/save` rather than `commerce/customer-addresses/save`.
 
 ### Payment Forms
 
