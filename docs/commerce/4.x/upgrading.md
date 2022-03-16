@@ -28,7 +28,7 @@ Once you’re running the latest version of Craft Commerce, you’ll need to upd
 ::: warning
 The [`commerce/upgrade`](console-commands.md#upgrade) command must be run interactively. It will prompt you to designate or create fields and then migrate content to them.
 
-You’ll need to run it again in production where you can _only_ designate target fields and migrate content—unless you temporarily disable [allowAdminChanges](config4:allowAdminChanges) to create fields on the fly in that environment, in which case you’d need to pull your production database down locally afterward and run [`project-config/write`](../../4.x/console-commands.md#project-config-write).
+You’ll need to run it again in production where you can _only_ designate target fields and migrate content—unless you temporarily disable <config4:allowAdminChanges> to create fields on the fly in that environment, in which case you’d need to pull your production database down locally afterward and run [`project-config/write`](../../4.x/console-commands.md#project-config-write).
 :::
 
 ## Order Numbers
@@ -348,7 +348,7 @@ Some element methods have been removed in Commerce 4:
 
 ### Element Actions
 
-Theses Commerce-specific element actions have been removed and rely on Craft’s:
+These Commerce-specific element actions have been removed and rely on Craft’s:
 
 | Old | What to do instead
 | --- | ---
