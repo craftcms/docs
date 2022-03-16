@@ -236,7 +236,6 @@ Product queries support the following parameters:
 | [defaultWidth](#product-defaultwidth)                 | Narrows the query results based on the products’ default variant width domention IDs.
 | [expiryDate](#product-expirydate)                     | Narrows the query results based on the products’ expiry dates.
 | [fixedOrder](#product-fixedorder)                     | Causes the query results to be returned in the order specified by [id](#product-id).
-| [getCacheTags](#product-getcachetags)                 |
 | [hasVariant](#product-hasvariant)                     | Narrows the query results to only products that have certain variants.
 | [id](#product-id)                                     | Narrows the query results based on the products’ IDs.
 | [ignorePlaceholders](#product-ignoreplaceholders)     | Causes the query to return matching products as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -793,15 +792,6 @@ $products = \craft\commerce\elements\Product::find()
     ->all();
 ```
 :::
-
-
-<h4 id="product-getcachetags"><a href="#product-getcachetags" class="header-anchor">#</a> <code>getCacheTags</code></h4>
-
-
-
-
-
-
 
 
 <h4 id="product-hasvariant"><a href="#product-hasvariant" class="header-anchor">#</a> <code>hasVariant</code></h4>
@@ -1709,7 +1699,6 @@ Variant queries support the following parameters:
 | [dateCreated](#variant-datecreated)               | Narrows the query results based on the variants’ creation dates.
 | [dateUpdated](#variant-dateupdated)               | Narrows the query results based on the variants’ last-updated dates.
 | [fixedOrder](#variant-fixedorder)                 | Causes the query results to be returned in the order specified by [id](#variant-id).
-| [getCacheTags](#variant-getcachetags)             |
 | [hasProduct](#variant-hasproduct)                 | Narrows the query results to only variants for certain products.
 | [hasSales](#variant-hassales)                     | Narrows the query results to only variants that are on sale.
 | [hasStock](#variant-hasstock)                     | Narrows the query results to only variants that have stock.
@@ -1961,15 +1950,6 @@ $variants = \craft\commerce\elements\Variant::find()
     ->all();
 ```
 :::
-
-
-<h4 id="variant-getcachetags"><a href="#variant-getcachetags" class="header-anchor">#</a> <code>getCacheTags</code></h4>
-
-
-
-
-
-
 
 
 <h4 id="variant-hasproduct"><a href="#variant-hasproduct" class="header-anchor">#</a> <code>hasProduct</code></h4>

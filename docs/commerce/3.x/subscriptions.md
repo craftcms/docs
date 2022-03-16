@@ -115,7 +115,6 @@ Subscription queries support the following parameters:
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the subscriptions’ last-updated dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [gatewayId](#gatewayid)                   | Narrows the query results based on the gateway, per its ID.
-| [getCacheTags](#getcachetags)             |
 | [hasStarted](#hasstarted)                 | Narrows the query results to only subscriptions that have started.
 | [id](#id)                                 | Narrows the query results based on the subscriptions’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -477,15 +476,6 @@ Possible values include:
 | `'not 1'` | not with a gateway with an ID of 1.
 | `[1, 2]` | with a gateway with an ID of 1 or 2.
 | `['not', 1, 2]` | not with a gateway with an ID of 1 or 2.
-
-
-
-
-#### `getCacheTags`
-
-
-
-
 
 
 

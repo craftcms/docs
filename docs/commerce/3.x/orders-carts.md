@@ -761,7 +761,6 @@ Order queries support the following parameters:
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [gateway](#gateway)                       | Narrows the query results based on the gateway.
 | [gatewayId](#gatewayid)                   | Narrows the query results based on the gateway, per its ID.
-| [getCacheTags](#getcachetags)             |
 | [hasLineItems](#haslineitems)             | Narrows the query results to only orders that have line items.
 | [hasPurchasables](#haspurchasables)       | Narrows the query results to only orders that have certain purchasables.
 | [hasTransactions](#hastransactions)       | Narrows the query results to only carts that have at least one transaction.
@@ -1273,15 +1272,6 @@ Possible values include:
 | `'not 1'` | not with a gateway with an ID of 1.
 | `[1, 2]` | with a gateway with an ID of 1 or 2.
 | `['not', 1, 2]` | not with a gateway with an ID of 1 or 2.
-
-
-
-
-#### `getCacheTags`
-
-
-
-
 
 
 
