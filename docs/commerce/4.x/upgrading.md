@@ -208,9 +208,7 @@ The change in address format means you’ll need to update some references in yo
 {% endtag %}
 
 {# Commerce 4 #}
-{% set administrativeAreas = craft.app.getAddresses()
-  .getSubdivisionRepository()
-  .getList([countryCode]) %}
+{% set administrativeAreas = craft.commerce.getAdministrativeAreasListByCountryCode() %}
 
 {% tag 'select' with { name: 'administrativeArea' } %}
   {% for key, option in administrativeAreas %}
