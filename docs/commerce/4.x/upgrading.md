@@ -106,6 +106,8 @@ This will almost certainly require changes to your front-end templates, though i
 - easier address format customization
 - custom address fields can be managed in field layouts—so no more need for `custom1`, `custom2`, etc.
 
+If store managers had been editing user addresses directly from their profile pages in the control panel, you’ll want to expose address details in the Users field layout via **Settings** → **Users** → **User Fields**.
+
 ### Order Addresses
 
 Each address can only have a single owner, whether that’s an order or a user.
