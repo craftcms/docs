@@ -26,11 +26,12 @@ The best way to upgrade a Craft 3 site is to get everything squeaky-clean and up
 
 1. Pull a fresh database backup down from your production environment and import it locally.
 2. If your database has `entrydrafts` and `entryversions` tables, check them for any meaningful data. Craft 3.2 stopped using these tables when drafts and revisions became elements, and the tables will be removed as part of the Craft 4 install process.
-3. Run `php craft project-config/rebuild` and make sure all background tasks have completed.
-4. Create a new database backup just in case things go sideways.
-5. Edit your project’s `composer.json` to require `"craftcms/cms": "4.0.0-beta.1"` and Craft-4-compatible plugins all at once.
-6. Run `composer update`.
-7. Run `php craft migrate/all`.
+3. Make sure you don’t have any pending or active jobs in your queue.
+4. Run `php craft project-config/rebuild` and make sure all background tasks have completed.
+5. Create a new database backup just in case things go sideways.
+6. Edit your project’s `composer.json` to require `"craftcms/cms": "4.0.0-beta.1"` and Craft-4-compatible plugins all at once.
+7. Run `composer update`.
+8. Run `php craft migrate/all`.
 
 Now that you’ve upgraded your install to use Craft 4, please take some time to review the changes on this page and update your project.
 
