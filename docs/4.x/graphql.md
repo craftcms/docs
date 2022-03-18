@@ -1126,6 +1126,13 @@ Parses the passed field value as Markdown.
 ### The `parseRefs` directive
 Parses the element references on the field.
 
+### The `money` directive
+Formats a money object to the desired format. It can be applied to any fields, but only changes a Money field.
+| Argument | Type | Description
+| - | - | -
+| `format`| `String` | This specifies the format to output. This can be `amount`, `decimal`, `number`, or `string`. It defaults to the `string`.
+| `locale`| `String` | The locale to use when formatting the money value. (e.g. `en_US`). This argument is only valid with `number` and `string` formats.
+
 <!-- END DIRECTIVES -->
 
 ## Pre-defined interfaces

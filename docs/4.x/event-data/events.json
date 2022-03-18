@@ -20,13 +20,13 @@
     {
         "class": "craft\\assetpreviews\\Image",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\assetpreviews\\Image",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -62,13 +62,13 @@
     {
         "class": "craft\\assetpreviews\\Pdf",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\assetpreviews\\Pdf",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -104,13 +104,13 @@
     {
         "class": "craft\\assetpreviews\\Text",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\assetpreviews\\Text",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -146,13 +146,13 @@
     {
         "class": "craft\\assetpreviews\\Video",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\assetpreviews\\Video",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -188,13 +188,13 @@
     {
         "class": "craft\\base\\AssetPreviewHandler",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\AssetPreviewHandler",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -230,13 +230,13 @@
     {
         "class": "craft\\base\\Component",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\Component",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -278,13 +278,13 @@
     {
         "class": "craft\\base\\ConfigurableComponent",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\ConfigurableComponent",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -903,7 +903,7 @@
     },
     {
         "class": "craft\\base\\Element",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -1944,7 +1944,7 @@
     {
         "class": "craft\\base\\Element",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -1987,7 +1987,7 @@
     {
         "class": "craft\\base\\Element",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -2140,13 +2140,13 @@
     {
         "class": "craft\\base\\ElementAction",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\ElementAction",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2182,13 +2182,13 @@
     {
         "class": "craft\\base\\ElementExporter",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\ElementExporter",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2314,13 +2314,13 @@
     {
         "class": "craft\\base\\Field",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\Field",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2356,13 +2356,13 @@
     {
         "class": "craft\\base\\FieldLayoutComponent",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\FieldLayoutComponent",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2398,13 +2398,13 @@
     {
         "class": "craft\\base\\FieldLayoutElement",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\FieldLayoutElement",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2476,13 +2476,13 @@
     {
         "class": "craft\\base\\Fs",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\Fs",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2518,13 +2518,13 @@
     {
         "class": "craft\\base\\Model",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\Model",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2620,13 +2620,13 @@
     {
         "class": "craft\\base\\SavableComponent",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\SavableComponent",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2662,13 +2662,13 @@
     {
         "class": "craft\\base\\Utility",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\Utility",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2740,13 +2740,13 @@
     {
         "class": "craft\\base\\Widget",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\Widget",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2788,13 +2788,13 @@
     {
         "class": "craft\\base\\conditions\\BaseCondition",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\conditions\\BaseCondition",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2830,13 +2830,13 @@
     {
         "class": "craft\\base\\conditions\\BaseConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\conditions\\BaseConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2872,13 +2872,13 @@
     {
         "class": "craft\\base\\conditions\\BaseDateRangeConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\conditions\\BaseDateRangeConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2914,13 +2914,13 @@
     {
         "class": "craft\\base\\conditions\\BaseElementSelectConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\conditions\\BaseElementSelectConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2956,13 +2956,13 @@
     {
         "class": "craft\\base\\conditions\\BaseLightswitchConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\conditions\\BaseLightswitchConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2998,13 +2998,13 @@
     {
         "class": "craft\\base\\conditions\\BaseMultiSelectConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\conditions\\BaseMultiSelectConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -3040,13 +3040,13 @@
     {
         "class": "craft\\base\\conditions\\BaseNumberConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\conditions\\BaseNumberConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -3082,13 +3082,13 @@
     {
         "class": "craft\\base\\conditions\\BaseSelectConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\conditions\\BaseSelectConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -3124,13 +3124,13 @@
     {
         "class": "craft\\base\\conditions\\BaseTextConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\base\\conditions\\BaseTextConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -5129,7 +5129,7 @@
     },
     {
         "class": "craft\\elements\\Address",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -6170,7 +6170,7 @@
     {
         "class": "craft\\elements\\Address",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -6213,7 +6213,7 @@
     {
         "class": "craft\\elements\\Address",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -7115,7 +7115,7 @@
     },
     {
         "class": "craft\\elements\\Asset",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -8156,7 +8156,7 @@
     {
         "class": "craft\\elements\\Asset",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -8199,7 +8199,7 @@
     {
         "class": "craft\\elements\\Asset",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -8929,7 +8929,7 @@
     },
     {
         "class": "craft\\elements\\Category",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -9970,7 +9970,7 @@
     {
         "class": "craft\\elements\\Category",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -10013,7 +10013,7 @@
     {
         "class": "craft\\elements\\Category",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -11311,7 +11311,7 @@
     },
     {
         "class": "craft\\elements\\Entry",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -13192,7 +13192,7 @@
     {
         "class": "craft\\elements\\Entry",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "draft": {
@@ -13270,7 +13270,7 @@
     {
         "class": "craft\\elements\\Entry",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "draft": {
@@ -14105,7 +14105,7 @@
     },
     {
         "class": "craft\\elements\\GlobalSet",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -15146,7 +15146,7 @@
     {
         "class": "craft\\elements\\GlobalSet",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -15189,7 +15189,7 @@
     {
         "class": "craft\\elements\\GlobalSet",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -15919,7 +15919,7 @@
     },
     {
         "class": "craft\\elements\\MatrixBlock",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -16960,7 +16960,7 @@
     {
         "class": "craft\\elements\\MatrixBlock",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -17003,7 +17003,7 @@
     {
         "class": "craft\\elements\\MatrixBlock",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -17733,7 +17733,7 @@
     },
     {
         "class": "craft\\elements\\Tag",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -18774,7 +18774,7 @@
     {
         "class": "craft\\elements\\Tag",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -18817,7 +18817,7 @@
     {
         "class": "craft\\elements\\Tag",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -19676,7 +19676,7 @@
     },
     {
         "class": "craft\\elements\\User",
-        "name": "EVENT_DEFINE_ADDL_BUTTONS",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
         "filters": {
@@ -20717,7 +20717,7 @@
     {
         "class": "craft\\elements\\User",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -20760,7 +20760,7 @@
     {
         "class": "craft\\elements\\User",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -20913,13 +20913,13 @@
     {
         "class": "craft\\elements\\actions\\CopyReferenceTag",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\CopyReferenceTag",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -20961,13 +20961,13 @@
     {
         "class": "craft\\elements\\actions\\CopyUrl",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\CopyUrl",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21009,13 +21009,13 @@
     {
         "class": "craft\\elements\\actions\\Delete",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\Delete",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21057,13 +21057,13 @@
     {
         "class": "craft\\elements\\actions\\DeleteAssets",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\DeleteAssets",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21105,13 +21105,13 @@
     {
         "class": "craft\\elements\\actions\\DeleteForSite",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\DeleteForSite",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21153,13 +21153,13 @@
     {
         "class": "craft\\elements\\actions\\DeleteUsers",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\DeleteUsers",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21201,13 +21201,13 @@
     {
         "class": "craft\\elements\\actions\\DownloadAssetFile",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\DownloadAssetFile",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21249,13 +21249,13 @@
     {
         "class": "craft\\elements\\actions\\Duplicate",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\Duplicate",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21297,13 +21297,13 @@
     {
         "class": "craft\\elements\\actions\\Edit",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\Edit",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21345,13 +21345,13 @@
     {
         "class": "craft\\elements\\actions\\EditImage",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\EditImage",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21393,13 +21393,13 @@
     {
         "class": "craft\\elements\\actions\\NewChild",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\NewChild",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21441,13 +21441,13 @@
     {
         "class": "craft\\elements\\actions\\NewSiblingAfter",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\NewSiblingAfter",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21489,13 +21489,13 @@
     {
         "class": "craft\\elements\\actions\\NewSiblingBefore",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\NewSiblingBefore",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21537,13 +21537,13 @@
     {
         "class": "craft\\elements\\actions\\PreviewAsset",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\PreviewAsset",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21585,13 +21585,13 @@
     {
         "class": "craft\\elements\\actions\\RenameFile",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\RenameFile",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21633,13 +21633,13 @@
     {
         "class": "craft\\elements\\actions\\ReplaceFile",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\ReplaceFile",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21681,13 +21681,13 @@
     {
         "class": "craft\\elements\\actions\\Restore",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\Restore",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21729,13 +21729,13 @@
     {
         "class": "craft\\elements\\actions\\SetStatus",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\SetStatus",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21777,13 +21777,13 @@
     {
         "class": "craft\\elements\\actions\\SuspendUsers",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\SuspendUsers",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21825,13 +21825,13 @@
     {
         "class": "craft\\elements\\actions\\UnsuspendUsers",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\UnsuspendUsers",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21873,13 +21873,13 @@
     {
         "class": "craft\\elements\\actions\\View",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\actions\\View",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21915,13 +21915,13 @@
     {
         "class": "craft\\elements\\conditions\\DateCreatedConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\DateCreatedConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -21957,13 +21957,13 @@
     {
         "class": "craft\\elements\\conditions\\DateUpdatedConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\DateUpdatedConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22005,13 +22005,13 @@
     {
         "class": "craft\\elements\\conditions\\ElementCondition",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\ElementCondition",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22047,13 +22047,13 @@
     {
         "class": "craft\\elements\\conditions\\HasUrlConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\HasUrlConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22089,13 +22089,13 @@
     {
         "class": "craft\\elements\\conditions\\IdConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\IdConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22131,13 +22131,13 @@
     {
         "class": "craft\\elements\\conditions\\LevelConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\LevelConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22173,13 +22173,13 @@
     {
         "class": "craft\\elements\\conditions\\RelatedToConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\RelatedToConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22215,13 +22215,13 @@
     {
         "class": "craft\\elements\\conditions\\SiteConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\SiteConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22257,13 +22257,13 @@
     {
         "class": "craft\\elements\\conditions\\SlugConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\SlugConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22299,13 +22299,13 @@
     {
         "class": "craft\\elements\\conditions\\StatusConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\StatusConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22341,13 +22341,13 @@
     {
         "class": "craft\\elements\\conditions\\UriConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\UriConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22389,13 +22389,13 @@
     {
         "class": "craft\\elements\\conditions\\addresses\\AddressCondition",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\addresses\\AddressCondition",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22431,13 +22431,13 @@
     {
         "class": "craft\\elements\\conditions\\addresses\\AdministrativeAreaConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\addresses\\AdministrativeAreaConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22473,13 +22473,13 @@
     {
         "class": "craft\\elements\\conditions\\addresses\\CountryConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\addresses\\CountryConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22521,13 +22521,13 @@
     {
         "class": "craft\\elements\\conditions\\assets\\AssetCondition",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\assets\\AssetCondition",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22563,13 +22563,13 @@
     {
         "class": "craft\\elements\\conditions\\assets\\DateModifiedConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\assets\\DateModifiedConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22605,13 +22605,13 @@
     {
         "class": "craft\\elements\\conditions\\assets\\FileSizeConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\assets\\FileSizeConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22647,13 +22647,13 @@
     {
         "class": "craft\\elements\\conditions\\assets\\FileTypeConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\assets\\FileTypeConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22689,13 +22689,13 @@
     {
         "class": "craft\\elements\\conditions\\assets\\FilenameConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\assets\\FilenameConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22731,13 +22731,13 @@
     {
         "class": "craft\\elements\\conditions\\assets\\HasAltConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\assets\\HasAltConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22773,13 +22773,13 @@
     {
         "class": "craft\\elements\\conditions\\assets\\HeightConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\assets\\HeightConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22815,13 +22815,13 @@
     {
         "class": "craft\\elements\\conditions\\assets\\UploaderConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\assets\\UploaderConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22857,13 +22857,13 @@
     {
         "class": "craft\\elements\\conditions\\assets\\VolumeConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\assets\\VolumeConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22899,13 +22899,13 @@
     {
         "class": "craft\\elements\\conditions\\assets\\WidthConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\assets\\WidthConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22947,13 +22947,13 @@
     {
         "class": "craft\\elements\\conditions\\categories\\CategoryCondition",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\categories\\CategoryCondition",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -22989,13 +22989,13 @@
     {
         "class": "craft\\elements\\conditions\\categories\\GroupConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\categories\\GroupConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23031,13 +23031,13 @@
     {
         "class": "craft\\elements\\conditions\\entries\\AuthorConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\entries\\AuthorConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23073,13 +23073,13 @@
     {
         "class": "craft\\elements\\conditions\\entries\\AuthorGroupConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\entries\\AuthorGroupConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23121,13 +23121,13 @@
     {
         "class": "craft\\elements\\conditions\\entries\\EntryCondition",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\entries\\EntryCondition",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23163,13 +23163,13 @@
     {
         "class": "craft\\elements\\conditions\\entries\\ExpiryDateConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\entries\\ExpiryDateConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23205,13 +23205,13 @@
     {
         "class": "craft\\elements\\conditions\\entries\\PostDateConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\entries\\PostDateConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23247,13 +23247,13 @@
     {
         "class": "craft\\elements\\conditions\\entries\\SectionConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\entries\\SectionConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23289,13 +23289,13 @@
     {
         "class": "craft\\elements\\conditions\\entries\\TypeConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\entries\\TypeConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23331,13 +23331,13 @@
     {
         "class": "craft\\elements\\conditions\\tags\\GroupConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\tags\\GroupConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23379,13 +23379,13 @@
     {
         "class": "craft\\elements\\conditions\\tags\\TagCondition",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\tags\\TagCondition",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23421,13 +23421,13 @@
     {
         "class": "craft\\elements\\conditions\\users\\AdminConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\users\\AdminConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23463,13 +23463,13 @@
     {
         "class": "craft\\elements\\conditions\\users\\CredentialedConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\users\\CredentialedConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23505,13 +23505,13 @@
     {
         "class": "craft\\elements\\conditions\\users\\EmailConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\users\\EmailConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23547,13 +23547,13 @@
     {
         "class": "craft\\elements\\conditions\\users\\FirstNameConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\users\\FirstNameConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23589,13 +23589,13 @@
     {
         "class": "craft\\elements\\conditions\\users\\GroupConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\users\\GroupConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23631,13 +23631,13 @@
     {
         "class": "craft\\elements\\conditions\\users\\LastLoginDateConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\users\\LastLoginDateConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23673,13 +23673,13 @@
     {
         "class": "craft\\elements\\conditions\\users\\LastNameConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\users\\LastNameConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23721,13 +23721,13 @@
     {
         "class": "craft\\elements\\conditions\\users\\UserCondition",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\users\\UserCondition",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -23763,13 +23763,13 @@
     {
         "class": "craft\\elements\\conditions\\users\\UsernameConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\conditions\\users\\UsernameConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24075,13 +24075,13 @@
     {
         "class": "craft\\elements\\exporters\\Expanded",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\exporters\\Expanded",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24117,13 +24117,13 @@
     {
         "class": "craft\\elements\\exporters\\Raw",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\elements\\exporters\\Raw",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24159,13 +24159,13 @@
     {
         "class": "craft\\fieldlayoutelements\\BaseField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\BaseField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24201,13 +24201,13 @@
     {
         "class": "craft\\fieldlayoutelements\\BaseNativeField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\BaseNativeField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24243,13 +24243,13 @@
     {
         "class": "craft\\fieldlayoutelements\\BaseUiElement",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\BaseUiElement",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24285,13 +24285,13 @@
     {
         "class": "craft\\fieldlayoutelements\\CustomField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\CustomField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24327,13 +24327,13 @@
     {
         "class": "craft\\fieldlayoutelements\\FullNameField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\FullNameField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24369,13 +24369,13 @@
     {
         "class": "craft\\fieldlayoutelements\\Heading",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\Heading",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24411,13 +24411,13 @@
     {
         "class": "craft\\fieldlayoutelements\\HorizontalRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\HorizontalRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24433,6 +24433,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\fieldlayoutelements\\Html",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Html",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Html",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Html",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Html",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Html",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Html",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\fieldlayoutelements\\Template",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -24453,13 +24495,13 @@
     {
         "class": "craft\\fieldlayoutelements\\Template",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\Template",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24495,13 +24537,13 @@
     {
         "class": "craft\\fieldlayoutelements\\TextField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\TextField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24537,13 +24579,13 @@
     {
         "class": "craft\\fieldlayoutelements\\TextareaField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\TextareaField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24579,13 +24621,13 @@
     {
         "class": "craft\\fieldlayoutelements\\Tip",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\Tip",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24621,13 +24663,13 @@
     {
         "class": "craft\\fieldlayoutelements\\TitleField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\TitleField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24663,13 +24705,13 @@
     {
         "class": "craft\\fieldlayoutelements\\addresses\\AddressField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\AddressField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24705,13 +24747,13 @@
     {
         "class": "craft\\fieldlayoutelements\\addresses\\CountryCodeField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\CountryCodeField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24747,13 +24789,13 @@
     {
         "class": "craft\\fieldlayoutelements\\addresses\\LabelField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\LabelField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24789,13 +24831,13 @@
     {
         "class": "craft\\fieldlayoutelements\\addresses\\LatLongField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\LatLongField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24831,13 +24873,13 @@
     {
         "class": "craft\\fieldlayoutelements\\addresses\\OrganizationField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\OrganizationField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24873,13 +24915,13 @@
     {
         "class": "craft\\fieldlayoutelements\\addresses\\OrganizationTaxIdField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\OrganizationTaxIdField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24915,13 +24957,13 @@
     {
         "class": "craft\\fieldlayoutelements\\assets\\AltField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\assets\\AltField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24957,13 +24999,13 @@
     {
         "class": "craft\\fieldlayoutelements\\assets\\AssetTitleField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\assets\\AssetTitleField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -24999,13 +25041,13 @@
     {
         "class": "craft\\fieldlayoutelements\\entries\\EntryTitleField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\entries\\EntryTitleField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -25041,13 +25083,13 @@
     {
         "class": "craft\\fieldlayoutelements\\users\\AddressesField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fieldlayoutelements\\users\\AddressesField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -25179,13 +25221,13 @@
     {
         "class": "craft\\fields\\Assets",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Assets",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -25311,13 +25353,13 @@
     {
         "class": "craft\\fields\\BaseOptionsField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\BaseOptionsField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -25449,13 +25491,13 @@
     {
         "class": "craft\\fields\\BaseRelationField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\BaseRelationField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -25587,13 +25629,13 @@
     {
         "class": "craft\\fields\\Categories",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Categories",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -25719,13 +25761,13 @@
     {
         "class": "craft\\fields\\Checkboxes",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Checkboxes",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -25851,13 +25893,13 @@
     {
         "class": "craft\\fields\\Color",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Color",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -25983,13 +26025,13 @@
     {
         "class": "craft\\fields\\Date",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Date",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -26115,13 +26157,13 @@
     {
         "class": "craft\\fields\\Dropdown",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Dropdown",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -26247,13 +26289,13 @@
     {
         "class": "craft\\fields\\Email",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Email",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -26385,13 +26427,13 @@
     {
         "class": "craft\\fields\\Entries",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Entries",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -26517,13 +26559,13 @@
     {
         "class": "craft\\fields\\Lightswitch",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Lightswitch",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -26655,13 +26697,13 @@
     {
         "class": "craft\\fields\\Matrix",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Matrix",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -26787,13 +26829,13 @@
     {
         "class": "craft\\fields\\MissingField",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\MissingField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -26919,13 +26961,13 @@
     {
         "class": "craft\\fields\\Money",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Money",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -27051,13 +27093,13 @@
     {
         "class": "craft\\fields\\MultiSelect",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\MultiSelect",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -27183,13 +27225,13 @@
     {
         "class": "craft\\fields\\Number",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Number",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -27315,13 +27357,13 @@
     {
         "class": "craft\\fields\\PlainText",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\PlainText",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -27447,13 +27489,13 @@
     {
         "class": "craft\\fields\\RadioButtons",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\RadioButtons",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -27579,13 +27621,13 @@
     {
         "class": "craft\\fields\\Table",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Table",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -27717,13 +27759,13 @@
     {
         "class": "craft\\fields\\Tags",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Tags",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -27849,13 +27891,13 @@
     {
         "class": "craft\\fields\\Time",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Time",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -27981,13 +28023,13 @@
     {
         "class": "craft\\fields\\Url",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Url",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28119,13 +28161,13 @@
     {
         "class": "craft\\fields\\Users",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\Users",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28161,13 +28203,13 @@
     {
         "class": "craft\\fields\\conditions\\DateFieldConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\conditions\\DateFieldConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28203,13 +28245,13 @@
     {
         "class": "craft\\fields\\conditions\\LightswitchFieldConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\conditions\\LightswitchFieldConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28245,13 +28287,13 @@
     {
         "class": "craft\\fields\\conditions\\NumberFieldConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\conditions\\NumberFieldConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28287,13 +28329,13 @@
     {
         "class": "craft\\fields\\conditions\\OptionsFieldConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\conditions\\OptionsFieldConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28329,13 +28371,13 @@
     {
         "class": "craft\\fields\\conditions\\RelationalFieldConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\conditions\\RelationalFieldConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28371,13 +28413,13 @@
     {
         "class": "craft\\fields\\conditions\\TextFieldConditionRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fields\\conditions\\TextFieldConditionRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28449,13 +28491,13 @@
     {
         "class": "craft\\fs\\Local",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fs\\Local",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28527,13 +28569,13 @@
     {
         "class": "craft\\fs\\MissingFs",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fs\\MissingFs",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28605,13 +28647,13 @@
     {
         "class": "craft\\fs\\Temp",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\fs\\Temp",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28653,13 +28695,13 @@
     {
         "class": "craft\\gql\\ArgumentManager",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\gql\\ArgumentManager",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28701,13 +28743,13 @@
     {
         "class": "craft\\gql\\ElementQueryConditionBuilder",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\gql\\ElementQueryConditionBuilder",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28749,13 +28791,13 @@
     {
         "class": "craft\\gql\\TypeManager",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\gql\\TypeManager",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28803,13 +28845,13 @@
     {
         "class": "craft\\gql\\base\\ElementMutationResolver",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\gql\\base\\ElementMutationResolver",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28845,13 +28887,13 @@
     {
         "class": "craft\\gql\\base\\MutationResolver",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\gql\\base\\MutationResolver",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28899,13 +28941,13 @@
     {
         "class": "craft\\gql\\resolvers\\mutations\\Asset",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\gql\\resolvers\\mutations\\Asset",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -28953,13 +28995,13 @@
     {
         "class": "craft\\gql\\resolvers\\mutations\\Category",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\gql\\resolvers\\mutations\\Category",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29007,13 +29049,13 @@
     {
         "class": "craft\\gql\\resolvers\\mutations\\Entry",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\gql\\resolvers\\mutations\\Entry",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29061,13 +29103,13 @@
     {
         "class": "craft\\gql\\resolvers\\mutations\\GlobalSet",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\gql\\resolvers\\mutations\\GlobalSet",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29115,13 +29157,13 @@
     {
         "class": "craft\\gql\\resolvers\\mutations\\Tag",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\gql\\resolvers\\mutations\\Tag",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29141,6 +29183,60 @@
         "name": "EVENT_MISSING_TRANSLATION",
         "type": "yii\\i18n\\MissingTranslationEvent",
         "desc": "an event that is triggered when a message translation is not found."
+    },
+    {
+        "class": "craft\\imagetransforms\\ImageTransformer",
+        "name": "EVENT_TRANSFORM_IMAGE",
+        "type": "craft\\events\\ImageTransformerOperationEvent",
+        "desc": "The event that is fired when an image is transformed"
+    },
+    {
+        "class": "craft\\imagetransforms\\ImageTransformer",
+        "name": "EVENT_DELETE_TRANSFORMED_IMAGE",
+        "type": "craft\\events\\ImageTransformerOperationEvent",
+        "desc": "The event that is fired when a generated image transform is deleted"
+    },
+    {
+        "class": "craft\\imagetransforms\\ImageTransformer",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\imagetransforms\\ImageTransformer",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\imagetransforms\\ImageTransformer",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\imagetransforms\\ImageTransformer",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\imagetransforms\\ImageTransformer",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\imagetransforms\\ImageTransformer",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\imagetransforms\\ImageTransformer",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
     },
     {
         "class": "craft\\mail\\Mailer",
@@ -29187,13 +29283,13 @@
     {
         "class": "craft\\mail\\transportadapters\\BaseTransportAdapter",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\mail\\transportadapters\\BaseTransportAdapter",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29235,13 +29331,13 @@
     {
         "class": "craft\\mail\\transportadapters\\Gmail",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\mail\\transportadapters\\Gmail",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29283,13 +29379,13 @@
     {
         "class": "craft\\mail\\transportadapters\\Sendmail",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\mail\\transportadapters\\Sendmail",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29331,13 +29427,13 @@
     {
         "class": "craft\\mail\\transportadapters\\Smtp",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\mail\\transportadapters\\Smtp",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29421,13 +29517,13 @@
     {
         "class": "craft\\models\\AssetIndexData",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\AssetIndexData",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29463,13 +29559,13 @@
     {
         "class": "craft\\models\\AssetIndexingSession",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\AssetIndexingSession",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29505,13 +29601,13 @@
     {
         "class": "craft\\models\\CategoryGroup",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\CategoryGroup",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29547,13 +29643,13 @@
     {
         "class": "craft\\models\\CategoryGroup_SiteSettings",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\CategoryGroup_SiteSettings",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29589,13 +29685,13 @@
     {
         "class": "craft\\models\\CraftIdToken",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\CraftIdToken",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29631,13 +29727,13 @@
     {
         "class": "craft\\models\\CraftSupport",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\CraftSupport",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29673,13 +29769,13 @@
     {
         "class": "craft\\models\\DeprecationError",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\DeprecationError",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29715,13 +29811,13 @@
     {
         "class": "craft\\models\\EntryType",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\EntryType",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29757,13 +29853,13 @@
     {
         "class": "craft\\models\\FieldGroup",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\FieldGroup",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29817,13 +29913,13 @@
     {
         "class": "craft\\models\\FieldLayout",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\FieldLayout",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29859,13 +29955,13 @@
     {
         "class": "craft\\models\\FieldLayoutForm",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\FieldLayoutForm",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29901,13 +29997,13 @@
     {
         "class": "craft\\models\\FieldLayoutFormTab",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\FieldLayoutFormTab",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29943,13 +30039,13 @@
     {
         "class": "craft\\models\\FieldLayoutTab",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\FieldLayoutTab",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -29985,13 +30081,13 @@
     {
         "class": "craft\\models\\FolderCriteria",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\FolderCriteria",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30027,13 +30123,13 @@
     {
         "class": "craft\\models\\FsListing",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\FsListing",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30069,13 +30165,13 @@
     {
         "class": "craft\\models\\GqlSchema",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\GqlSchema",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30111,13 +30207,13 @@
     {
         "class": "craft\\models\\GqlToken",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\GqlToken",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30153,13 +30249,13 @@
     {
         "class": "craft\\models\\ImageTransform",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\ImageTransform",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30195,13 +30291,13 @@
     {
         "class": "craft\\models\\ImageTransformIndex",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\ImageTransformIndex",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30237,13 +30333,13 @@
     {
         "class": "craft\\models\\Info",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\Info",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30279,13 +30375,13 @@
     {
         "class": "craft\\models\\MailSettings",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\MailSettings",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30321,13 +30417,13 @@
     {
         "class": "craft\\models\\MatrixBlockType",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\MatrixBlockType",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30363,13 +30459,13 @@
     {
         "class": "craft\\models\\ProjectConfigData",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\ProjectConfigData",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30405,13 +30501,13 @@
     {
         "class": "craft\\models\\ReadOnlyProjectConfigData",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\ReadOnlyProjectConfigData",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30447,13 +30543,13 @@
     {
         "class": "craft\\models\\Section",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\Section",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30489,13 +30585,13 @@
     {
         "class": "craft\\models\\Section_SiteSettings",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\Section_SiteSettings",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30531,13 +30627,13 @@
     {
         "class": "craft\\models\\Site",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\Site",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30573,13 +30669,13 @@
     {
         "class": "craft\\models\\SiteGroup",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\SiteGroup",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30615,13 +30711,13 @@
     {
         "class": "craft\\models\\Structure",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\Structure",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30657,13 +30753,13 @@
     {
         "class": "craft\\models\\SystemMessage",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\SystemMessage",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30699,13 +30795,13 @@
     {
         "class": "craft\\models\\TagGroup",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\TagGroup",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30741,13 +30837,13 @@
     {
         "class": "craft\\models\\Update",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\Update",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30783,13 +30879,13 @@
     {
         "class": "craft\\models\\UpdateRelease",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\UpdateRelease",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30825,13 +30921,13 @@
     {
         "class": "craft\\models\\Updates",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\Updates",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30867,13 +30963,13 @@
     {
         "class": "craft\\models\\Url",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\Url",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30909,13 +31005,13 @@
     {
         "class": "craft\\models\\UserGroup",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\UserGroup",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30951,13 +31047,13 @@
     {
         "class": "craft\\models\\Volume",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\Volume",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -30993,13 +31089,13 @@
     {
         "class": "craft\\models\\VolumeFolder",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\models\\VolumeFolder",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -34251,6 +34347,12 @@
     },
     {
         "class": "craft\\services\\Assets",
+        "name": "EVENT_DEFINE_THUMB_URL",
+        "type": "craft\\events\\DefineAssetThumbUrlEvent",
+        "desc": "The event that is triggered when a thumbnail is being requested for an asset."
+    },
+    {
+        "class": "craft\\services\\Assets",
         "name": "EVENT_REGISTER_PREVIEW_HANDLER",
         "type": "craft\\events\\AssetPreviewEvent",
         "desc": "The event that is triggered when determining the preview handler for an asset."
@@ -35554,13 +35656,13 @@
     {
         "class": "craft\\utilities\\AssetIndexes",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\utilities\\AssetIndexes",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -35608,13 +35710,13 @@
     {
         "class": "craft\\utilities\\ClearCaches",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\utilities\\ClearCaches",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -35650,13 +35752,13 @@
     {
         "class": "craft\\utilities\\DbBackup",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\utilities\\DbBackup",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -35692,13 +35794,13 @@
     {
         "class": "craft\\utilities\\DeprecationErrors",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\utilities\\DeprecationErrors",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -35734,13 +35836,13 @@
     {
         "class": "craft\\utilities\\FindAndReplace",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\utilities\\FindAndReplace",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -35776,13 +35878,13 @@
     {
         "class": "craft\\utilities\\Migrations",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\utilities\\Migrations",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -35818,13 +35920,13 @@
     {
         "class": "craft\\utilities\\PhpInfo",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\utilities\\PhpInfo",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -35860,13 +35962,13 @@
     {
         "class": "craft\\utilities\\ProjectConfig",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\utilities\\ProjectConfig",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -35902,13 +36004,13 @@
     {
         "class": "craft\\utilities\\QueueManager",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\utilities\\QueueManager",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -35944,13 +36046,13 @@
     {
         "class": "craft\\utilities\\SystemMessages",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\utilities\\SystemMessages",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -35986,13 +36088,13 @@
     {
         "class": "craft\\utilities\\SystemReport",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\utilities\\SystemReport",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -36028,13 +36130,13 @@
     {
         "class": "craft\\utilities\\Updates",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\utilities\\Updates",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -36292,13 +36394,13 @@
     {
         "class": "craft\\widgets\\CraftSupport",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\widgets\\CraftSupport",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -36370,13 +36472,13 @@
     {
         "class": "craft\\widgets\\Feed",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\widgets\\Feed",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -36448,13 +36550,13 @@
     {
         "class": "craft\\widgets\\MissingWidget",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\widgets\\MissingWidget",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -36526,13 +36628,13 @@
     {
         "class": "craft\\widgets\\MyDrafts",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\widgets\\MyDrafts",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -36604,13 +36706,13 @@
     {
         "class": "craft\\widgets\\NewUsers",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\widgets\\NewUsers",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -36682,13 +36784,13 @@
     {
         "class": "craft\\widgets\\QuickPost",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\widgets\\QuickPost",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -36760,13 +36862,13 @@
     {
         "class": "craft\\widgets\\RecentEntries",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\widgets\\RecentEntries",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -36838,13 +36940,13 @@
     {
         "class": "craft\\widgets\\Updates",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\widgets\\Updates",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
