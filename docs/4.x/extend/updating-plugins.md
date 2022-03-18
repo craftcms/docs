@@ -645,6 +645,39 @@ This shouldn’t require any changes to composing and sending messages, but any 
 
 ## User Permissions
 
+### Registering Permissions
+
+Registering permissions has changed slightly in Craft 4: the [RegisterUserPermissionsEvent](craft4:craft\events\RegisterUserPermissionsEvent)’s `permissions` array now requires individual items with `heading` and `permissions` keys:
+
+```php
+use yii\base\Event;
+use craft\events\RegisterUserPermissionsEvent;
+use craft\services\UserPermissions;
+
+// Craft 3
+Event::on(
+    UserPermissions::class,
+    UserPermissions::EVENT_REGISTER_PERMISSIONS,
+    function(RegisterUserPermissionsEvent $event) {
+        $event->permissions['My Heading'] = $permissions;
+    }
+);
+
+// Craft 4
+Event::on(
+    UserPermissions::class,
+    UserPermissions::EVENT_REGISTER_PERMISSIONS,
+    function(RegisterUserPermissionsEvent $event) {
+        $event->permissions[] = [
+            'heading' => 'My Heading',
+            'permissions' => $permissions,
+        ];
+    }
+);
+```
+
+### Changed Permissions
+
 A number of user permissions have been renamed in Craft 4:
 
 | Old                                   | New
