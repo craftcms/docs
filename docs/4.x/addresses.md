@@ -1062,7 +1062,8 @@ We can instantiate and use that just like the postal label formatter:
     addressService.getAddressFormatRepository(),
     addressService.getCountryRepository(),
     addressService.getSubdivisionRepository(),
-  ]) %}
+  ]
+) %}
 {{ addr|address({ hide_countries: ['US'] }, customFormatter) }}
 {# Output:
   1234 Balboa Towers Circle
