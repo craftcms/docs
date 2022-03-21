@@ -290,6 +290,42 @@ $posts = \craft\elements\Entry::find()
 
 There’s also a new [collect()](dev/functions.md#collect) function you can use in Twig templates.
 
+Be careful with any conditionals that rely on an implicit count! An empty array evaluates as `false`, while an empty collection evaluates as `true`:
+
+```twig
+{# 👍 #}
+{% if myArray %}
+  {# Do stuff #}
+{% else %}
+  {# No items to do stuff with; do something else #}
+{% endif %}
+
+{# ❌ #}
+{% if myCollection %}
+  {# Do stuff #}
+{% else %}
+  {# !! We’ll never end up here !! #}
+{% endif %}
+```
+
+Use the `|length` filter or the collection’s `.count()` method instead:
+
+```twig
+{# 👍 #}
+{% if myCollection.count() %}
+  {# Do stuff #}
+{% else %}
+  {# No items to do stuff with; do something else #}
+{% endif %}
+
+{# 👍 #}
+{% if myCollection|length %}
+  {# Do stuff #}
+{% else %}
+  {# No items to do stuff with; do something else #}
+{% endif %}
+```
+
 ## GraphQL
 
 | GraphQL Argument | What to do instead
