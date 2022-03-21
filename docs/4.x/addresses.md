@@ -1050,3 +1050,22 @@ class OptionalCountryFormatter extends DefaultFormatter
     }
 }
 ```
+
+We can instantiate and use that just like the postal label formatter:
+
+```twig
+{# Use our custom formatter #}
+{% set addressService = craft.app.getAddresses() %}
+{% set customFormatter = create(
+  'mynamespace\\OptionalCountryFormatter',
+  [
+    addressService.getAddressFormatRepository(),
+    addressService.getCountryRepository(),
+    addressService.getSubdivisionRepository(),
+  ]) %}
+{{ addr|address({ hide_countries: ['US'] }, customFormatter) }}
+{# Output:
+  1234 Balboa Towers Circle
+  Los Angeles, CA 92662
+#}
+```
