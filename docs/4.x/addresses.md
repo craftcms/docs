@@ -969,7 +969,7 @@ You can also pass your own formatter to the `|address` filter. The addressing li
 {# Use the postal label formatter #}
 {% set addressService = craft.app.getAddresses() %}
 {% set labelFormatter = create(
-  '\\CommerceGuys\\Addressing\\Formatter\\PostalLabelFormatter',
+  'CommerceGuys\\Addressing\\Formatter\\PostalLabelFormatter',
   [
     addressService.getAddressFormatRepository(),
     addressService.getCountryRepository(),
