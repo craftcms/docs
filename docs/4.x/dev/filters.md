@@ -225,6 +225,18 @@ If you want to completely replace a `class` or `style` attribute, remove it firs
 {# Output: <div class="bar"> #}
 ```
 
+::: tip
+Attribute values are HTML-encoded automatically:
+```twig
+{% set tag = '<input type="text">' %}
+{{ tag|attr({
+  type: 'submit',
+  value: 'Register & Subscribe →'
+}) }}
+{# Output: <input type="submit" value="Register &amp; Subscribe →"> #}
+```
+:::
+
 ## `camel`
 
 Returns a string formatted in “camelCase”.
