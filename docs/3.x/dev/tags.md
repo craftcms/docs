@@ -840,6 +840,18 @@ It’s similar to the [tag](functions.md#tag) _function_, however the `{% tag %}
 {# Output: <div class="foo"><p class="welcome">Hello, Tim</p></div> #}
 ```
 
+::: tip
+Attribute values are HTML-encoded automatically:
+```twig
+{% tag 'p' with {
+  title: 'Hello & Welcome',
+} %}
+  Hello, {{ currentUser.friendlyName }}
+{% endtag %}
+{# Output: <p title="Hello &amp; Welcome">Hello, Tim</p> #}
+```
+:::
+
 ### Parameters
 
 The `{% tag %}` tag has the following parameters:

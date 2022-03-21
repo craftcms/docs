@@ -116,6 +116,14 @@ Generates a list of HTML attributes based on the given [hash](twig-primer.md#has
 <div {{ attr(myAttributes) }}></div>
 ```
 
+::: tip
+Attribute values are HTML-encoded automatically:
+```twig
+<div {{ attr({ title: 'Greetings & Salutations' }) }}></div>
+{# Output: <input type="submit" value="Greetings &amp; Salutations"> #}
+```
+:::
+
 ## `beginBody`
 
 Outputs any scripts and styles that were registered for the “begin body” position. It should be placed right after your `<body>` tag.
@@ -701,14 +709,25 @@ If an attribute is set to `true`, it will be added without a value.
 
 ```twig
 {{ tag('input', {
-  id: "foo",
-  name: "bar",
+  id: 'foo',
+  name: 'bar',
   required: true
 }) }}
 {# Output: <input id="foo" name="bar" required> #}
 ```
 
 Any attribute set to `null` or `false` will be omitted.
+
+::: tip
+Attribute values are HTML-encoded automatically:
+```twig
+{{ tag('input', {
+  name: 'bar',
+  value: 'Foobar & Baz',
+}) }}
+{# Output: <input name="bar" value="Foobar &amp; Baz"> #}
+```
+:::
 
 ## `ul`
 
