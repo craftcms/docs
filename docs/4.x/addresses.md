@@ -1,6 +1,6 @@
 # Addresses
 
-Addresses are special elements Craft includes to support each [User](users.md) having an address book.
+Addresses are special elements Craft includes so each [User](users.md) having an address book.
 
 They’re element types with their own fields, but they’re strictly available to User’s field layouts. Querying addresses and working with their field data, however, is nearly identical to the experience you’d have with any other element type.
 
