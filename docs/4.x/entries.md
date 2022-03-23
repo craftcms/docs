@@ -969,6 +969,10 @@ Causes the query results to be returned in the order specified by [id](#id).
 
 
 
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
