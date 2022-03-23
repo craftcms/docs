@@ -100,7 +100,9 @@ If you have a plugin or module that implements custom element types and want to 
 - [hasRevisions()](craft4:craft\base\ElementInterface::hasRevisions()) – Whether the element type is creating revisions for itself.
 - [getPostEditUrl()](craft4:craft\base\ElementInterface::getPostEditUrl()) – The URL that the browser should be redirected to after the element is saved.
 - [getCrumbs()](craft4:craft\base\ElementInterface::getCrumbs()) – Array of breadcrumbs that should be shown on the element’s edit page.
-- [getAdditionallButtons()](craft4:craft\base\ElementInterface::getAdditionalButtons()) – HTML for any additional buttons that should be shown beside “Save”.
+- [getAdditionalButtons()](craft4:craft\base\ElementInterface::getAdditionalButtons()) – HTML for any additional buttons that should be shown beside “Save”.
+- [prepareEditScreen()](craft4:craft\base\ElementInterface::prepareEditScreen()) – [Optional customization](https://github.com/craftcms/cms/discussions/10784) of the edit screen response.
+
 
 ::: tip
 It’s best to rely on the new element authorization methods (`canView()`, `canSave()`, etc.) rather than checking permissions directly:
