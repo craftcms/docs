@@ -2,6 +2,14 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-03-16
+### Added
+- Added Commerce 4 beta docs.
+
+## 2022-03-09
+### Added
+- Added Craft 4 beta docs.
+
 ## 2022-02-14
 ### Added
 - Added an overview of Nitro’s site paths.
