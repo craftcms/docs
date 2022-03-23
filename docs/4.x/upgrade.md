@@ -95,9 +95,9 @@ Logs in Craft 4 now use [Monolog](https://github.com/Seldaek/monolog), which com
         'log' => [
             'monologTargetConfig' => [
                 'except' => [
-                    PhpMessageSource::class . ':*',
+                    \yii\i18n\PhpMessageSource::class . ':*',
                     // *Do* log 404s (commented for illustration)
-                    // HttpException::class . ':404',
+                    // \yii\web\HttpException::class . ':404',
                 ]
             ]
         ]
