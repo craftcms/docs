@@ -89,12 +89,29 @@ The migration process will take care of volume migrations for you, but there are
 
 Logs in Craft 4 now use [Monolog](https://github.com/Seldaek/monolog), which comes with some behavior changes.
 
-- 404s are no longer logged by default. This can be customized using via `components.log.monologTargetConfig.except`.
+- 404s are no longer logged by default. You can customize this in `config/app.php` via `components.log.monologTargetConfig.except`:
+    ```php
+    'components' => [
+        'log' => [
+            'monologTargetConfig' => [
+                'except' => [
+                    PhpMessageSource::class . ':*',
+                    // *Do* log 404s (commented for illustration)
+                    // HttpException::class . ':404',
+                ]
+            ]
+        ]
+    ],
+    ```
 - Query logging is no longer enabled by default when `devMode` is set to `false`. This can be changed using the new [enableLogging](./config/db-settings.md#enablelogging) config setting in `config/db.php`.
 - Query profiling is no longer enabled by default when `devMode` is set to `false`. This can be changed using the new [enableProfiling](./config/db-settings.md#enableprofiling) config setting in `config/db.php`.
 - When [CRAFT_STREAM_LOG](./config/#craft-stream-log) is set to `true`, file logging will **not** be enabled.
 
-Any custom log components defined in `config/app.php`, `config/web.php`, or `config/console.php` may required changes noted below.
+::: tip
+See <craft4:craft\log\MonologTarget> for a look at Craft’s default log configuration.
+:::
+
+Any existing custom log components defined in `config/app.php`, `config/web.php`, or `config/console.php` may require changes noted below.
 
 The following PHP classes have been removed:
 
