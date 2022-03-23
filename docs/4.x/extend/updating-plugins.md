@@ -99,7 +99,6 @@ If you have a plugin or module that implements custom element types and want to 
 - [createAnother()](craft4:craft\base\ElementInterface::createAnother()) – Returns a new, unsaved element for “Save and add another” actions. (No need to worry about permissions here; canSave() will be in effect for it.)
 - [hasRevisions()](craft4:craft\base\ElementInterface::hasRevisions()) – Whether the element type is creating revisions for itself.
 - [getPostEditUrl()](craft4:craft\base\ElementInterface::getPostEditUrl()) – The URL that the browser should be redirected to after the element is saved.
-- [getCrumbs()](craft4:craft\base\ElementInterface::getCrumbs()) – Array of breadcrumbs that should be shown on the element’s edit page.
 - [getAdditionalButtons()](craft4:craft\base\ElementInterface::getAdditionalButtons()) – HTML for any additional buttons that should be shown beside “Save”.
 - [prepareEditScreen()](craft4:craft\base\ElementInterface::prepareEditScreen()) – [Optional customization](https://github.com/craftcms/cms/discussions/10784) of the edit screen response.
 
