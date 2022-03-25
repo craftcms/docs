@@ -156,7 +156,8 @@ module.exports = {
             "assets",
             "globals",
             "matrix-blocks",
-            "users"
+            "users",
+            "addresses"
           ]
         },
         {

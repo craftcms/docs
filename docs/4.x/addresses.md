@@ -1,5 +1,134 @@
 # Addresses
 
+Addresses are special elements Craft includes so each [User](users.md) can have an address book.
+
+They’re element types with their own fields, but they’re strictly available to User’s field layouts. Querying addresses and working with their field data, however, is nearly identical to the experience you’d have with any other element type.
+
+## Managing Address Fields
+
+By default, address fields aren’t shown anywhere in the control panel—but they’re ready to customize and add to User field layouts.
+
+In the control panel, navigate to **Settings** → **Users**.
+
+The **User Fields** editor lets you manage whatever fields you’d like to be available for all users:
+
+![Screenshot of User Fields’ Field Layout editor, with an empty layout and an available Addresses field under Native Fields in the sidebar](./images/user-fields.png)
+
+You can drag the native **Addresses** field into the user field layout. If you created your own “Contact Information” tab, for example, and moved **Addresses** into it you’d see that tab and field on every user detail page:
+
+![Screenshot of My Account page with a “Contact Information” tab selected and the “Addresses” field heading with “+ Add an address” just underneath it](./images/my-account-contact-information.png)
+
+Back in **User Settings**, the **Address Fields** editor lets you manage the fields that are part of each address. **Label**, **Country**, and **Address** are included by default, with several other native fields available:
+
+![Screenshot of Address Fields’ Field Layout editor, with an existing Content tab containing Label, Country, and Address fields](./images/address-fields.png)
+
+You can add any native and custom fields to this field layout just like any other element type.
+
+## Address Repository
+
+The [commerceguys/addressing](https://github.com/commerceguys/addressing) library helps power planet-friendly address handling and formatting, and its exhaustive repository of global address information available to any Craft project. If you’d like to get a list of countries, states, or provinces, for example, you can most likely fetch them from these included repositories.
+
+You can use Craft’s [Addresses](craft4:craft\services\Addresses) service to do this from Twig templates and PHP.
+
+Here’s how you can fetch a list of countries, for example:
+
+::: code
+```twig
+{% set countries = craft.app.getAddresses().countryRepository.getAll() %}
+```
+```php
+$countries = Craft::$app->getAddresses()->countryRepository->getAll();
+```
+:::
+
+You’ll get an array of [Country](https://github.com/commerceguys/addressing/blob/master/src/Country/Country.php) objects back, which you could use to populate a dropdown menu:
+
+```twig
+{% set countryNamesByCode = countries|map(value => "#{value.name}") %}
+<select name="myCountry">
+  {% for code, name in countryNamesByCode %}
+    <option value="{{ code }}">{{ name }}</option>
+  {% endfor %}
+</select>
+
+{# Output:
+<select name="myCountry">
+  <option value="AF">Afghanistan</option>
+  <option value="AX">Åland Islands</option>
+  ...
+</select>
+#}
+```
+
+You can similarly get a list of subdivisions, which are hierarchical and can have up to three levels depending on how a given country is organized: _Administrative Area_ → _Locality_ → _Dependent Locality_. We can get all U.S. states by getting subdivisions whose parents are `'US'`:
+
+::: code
+```twig
+{% set states = craft.app.getAddresses().subdivisionRepository.getAll(['US']) %}
+```
+```php
+$countries = Craft::$app->getAddresses()->subdivisionRepository->getAll(['US']);
+```
+:::
+
+Each resulting array item is a [Subdivision](https://github.com/commerceguys/addressing/blob/master/src/Subdivision/Subdivision.php) object, which we could treat similarly to the country example above:
+
+```twig
+{% set states = craft.app.getAddresses().subdivisionRepository.getAll(['US']) %}
+{% set stateNamesByCode = states|map(value => "#{value.name}") %}
+<select name="myState">
+  {% for code, name in stateNamesByCode %}
+    <option value="{{ code }}">{{ name }}</option>
+  {% endfor %}
+</select>
+
+{# Output:
+<select name="myState">
+  <option value="AL">Alabama</option>
+  <option value="AK">Alaska</option>
+  ...
+</select>
+#}
+```
+
+If we just want a key-value array instead of the extra information that comes with Country and Subdivision objects, we can call either repository’s `getList()` method instead and save ourselves the `|map` step from each example above:
+
+```twig
+{% set countries = craft.app.getAddresses().countryRepository.getList() %}
+<select name="myCountry">
+  {% for code, name in countries %}
+    <option value="{{ code }}">{{ name }}</option>
+  {% endfor %}
+</select>
+
+{# Output:
+<select name="myCountry">
+  <option value="AF">Afghanistan</option>
+  <option value="AX">Åland Islands</option>
+  ...
+</select>
+#}
+
+{% set states = craft.app.getAddresses().subdivisionRepository.getList(['US']) %}
+<select name="myState">
+  {% for code, name in states %}
+    <option value="{{ code }}">{{ name }}</option>
+  {% endfor %}
+</select>
+
+{# Output:
+<select name="myState">
+  <option value="AL">Alabama</option>
+  <option value="AK">Alaska</option>
+  ...
+</select>
+#}
+```
+
+::: tip
+There’s a lot more you can do here, including translated place names, postal codes, timezones, and formatting! Check out the [addressing docs](https://github.com/commerceguys/addressing#data-model) for more details and examples.
+:::
+
 ## Querying Addresses
 
 You can fetch addresses in your templates or PHP code using **address queries**.
@@ -14,6 +143,33 @@ You can fetch addresses in your templates or PHP code using **address queries**.
 $myAddressQuery = \craft\elements\Address::find();
 ```
 :::
+
+::: tip
+See [Element Queries](element-queries.md) to learn about how element queries work.
+:::
+
+### Example
+
+We can get all the addresses for a user by passing their ID to the `ownerId` parameter.
+
+1. Create an address query with `craft.addresses()`.
+2. Set the [`ownerId`](#ownerId) parameter on it.
+3. Fetch the addresses with `.collect()`.
+4. Loop through the addresses using a [`{% for %}`](https://twig.symfony.com/doc/3.x/tags/for.html) tag.
+5. Output preformatted address details with the [`|address`](dev/filters.md#address) filter.
+
+```twig
+{# Prepare an element query for addresses belonging to user having ID = 3 #}
+{% set myAddressQuery = craft.addresses().ownerId(3) %}
+
+{# Fetch the addresses as a collection #}
+{% set addresses = myAddressQuery.collect() %}
+
+{# Loop through addresses and output each one #}
+{% for addr in addresses %}
+  {{ addr|address }}
+{% endfor %}
+```
 
 ### Parameters
 
@@ -720,3 +876,201 @@ $addresses = \craft\elements\Address::find()
 
 
 <!-- END PARAMS -->
+
+
+## Working with Address Fields
+
+### Field Handles
+
+You can reference individual fields—native and custom—using their field handles like any other element:
+
+```twig
+<ul>
+  <li>Name: {{ myAddress.title }}</li>
+  <li>Postal Code: {{ myAddress.postalCode }}</li>
+  <li>Custom Label Color: {{ myAddress.myCustomColorFieldHandle }}</li>
+</ul>
+```
+
+### Attribute Labels
+
+The addressing library’s abstracted _Administrative Area_ → _Locality_ → _Dependent Locality_ terminology probably isn’t what you actually call address bits in your part of the world, and it’s even less likely you’d want to show those terms to site visitors.
+
+You can use any address element’s `addressAttributeLabel()` method to get human-friendly labels for a given locale. Using a U.S. address…
+
+```twig
+{{ myAddress.attributeLabel('administrativeArea') }} {# State #}
+{{ myAddress.attributeLabel('locality') }} {# City #}
+{{ myAddress.attributeLabel('dependentLocality') }} {# Suburb #}
+{{ myAddress.attributeLabel('postalCode') }} {# Zip Code #}
+```
+
+### `|address` Formatter
+
+You can use the [`|address`](./dev/filters.md#address) filter to get an address with its default HTML formatting:
+
+```twig
+{{ myAddress|address }}
+{# Output:
+  <p translate="no">
+    <span class="address-line1">1234 Balboa Towers Circle</span><br>
+    <span class="locality">Los Angeles</span>, <span class="administrative-area">CA</span> <span class="postal-code">92662</span><br>
+    <span class="country">United States</span>
+  </p>
+#}
+```
+
+The default formatter includes the following options:
+
+- **locale** – defaults to `'en'`
+- **html** – defaults to `true`; disable with `false` to maintain line breaks but omit HTML tags
+- **html_tag** – defaults to `p`
+- **html_attributes** – is an array that defaults to `['translate' => 'no']`
+
+```twig
+{# Swap enclosing paragraph tag with a div #}
+{{ myAddress|address({ html_tag: 'div' }) }}
+{# Output:
+  <div translate="no">
+    <span class="address-line1">1234 Balboa Towers Circle</span><br>
+    <span class="locality">Los Angeles</span>, <span class="administrative-area">CA</span> <span class="postal-code">92662</span><br>
+    <span class="country">United States</span>
+  </div>
+#}
+
+{# Replace the default `translate` param with something whimsical and pointless #}
+{{ myAddress|address({ html_attributes: { example: 'sure is!' }}) }}
+{# Output:
+  <p example="sure is!">
+    <span class="address-line1">1234 Balboa Towers Circle</span><br>
+    <span class="locality">Los Angeles</span>, <span class="administrative-area">CA</span> <span class="postal-code">92662</span><br>
+    <span class="country">United States</span>
+  </p>
+#}
+
+{# Omit all HTML tags #}
+{{ myAddress|address({ html: false }) }}
+{# Output:
+  1234 Balboa Towers Circle
+  Los Angeles, CA 92662
+  United States
+#}
+
+{# Format with `uk` locale #}
+{{ myAddress|address({ html: false, locale: 'uk' }) }}
+{# Output:
+  1234 Balboa Towers Circle
+  Los Angeles, CA 92662
+  Сполучені Штати
+#}
+```
+
+### Customizing the Formatter
+
+You can also pass your own formatter to the `|address` filter. The addressing library includes [PostalLabelFormatter](https://github.com/commerceguys/addressing/blob/master/src/Formatter/PostalLabelFormatter.php) to make it easier to print shipping labels. Here, we can specify that formatter and set its additional `origin_country` option:
+
+```twig
+{# Use the postal label formatter #}
+{% set addressService = craft.app.getAddresses() %}
+{% set labelFormatter = create(
+  'CommerceGuys\\Addressing\\Formatter\\PostalLabelFormatter',
+  [
+    addressService.getAddressFormatRepository(),
+    addressService.getCountryRepository(),
+    addressService.getSubdivisionRepository(),
+  ]) %}
+{{ addr|address({ origin_country: 'GB' }, labelFormatter) }}
+{# Output:
+  1234 Balboa Towers Circle
+  LOS ANGELES, CA 92662
+  UNITED STATES
+#}
+```
+
+You can also write a custom formatter that implements [FormatterInterface](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php). We might extend the default formatter, for example, to add a `hide_countries` option that avoids printing the names of specified countries:
+
+```php
+<?php
+
+namespace mynamespace;
+
+use CommerceGuys\Addressing\AddressInterface;
+use CommerceGuys\Addressing\Formatter\DefaultFormatter;
+use CommerceGuys\Addressing\Locale;
+
+class OptionalCountryFormatter extends DefaultFormatter
+{
+    /**
+     * @inheritdoc
+     */
+    protected $defaultOptions = [
+        'locale' => 'en',
+        'html' => true,
+        'html_tag' => 'p',
+        'html_attributes' => ['translate' => 'no'],
+        'hide_countries' => [],
+    ];
+
+    /**
+     * @inheritdoc
+     */
+    public function format(AddressInterface $address, array $options = []): string
+    {
+        $this->validateOptions($options);
+        $options = array_replace($this->defaultOptions, $options);
+        $countryCode = $address->getCountryCode();
+        $addressFormat = $this->addressFormatRepository->get($countryCode);
+
+        if (!in_array($countryCode, $options['hide_countries'])) {
+            if (Locale::matchCandidates($addressFormat->getLocale(), $address->getLocale())) {
+                $formatString = '%country' . "\n" . $addressFormat->getLocalFormat();
+            } else {
+                $formatString = $addressFormat->getFormat() . "\n" . '%country';
+            }
+        } else {
+            // If this is in our `hide_countries` list, omit the country
+            $formatString = $addressFormat->getFormat();
+        }
+
+        $view = $this->buildView($address, $addressFormat, $options);
+        $view = $this->renderView($view);
+        $replacements = [];
+        foreach ($view as $key => $element) {
+            $replacements['%' . $key] = $element;
+        }
+        $output = strtr($formatString, $replacements);
+        $output = $this->cleanupOutput($output);
+
+        if (!empty($options['html'])) {
+            $output = nl2br($output, false);
+            // Add the HTML wrapper element.
+            $attributes = $this->renderAttributes($options['html_attributes']);
+            $prefix = '<' . $options['html_tag'] . ' ' . $attributes . '>' . "\n";
+            $suffix = "\n" . '</' . $options['html_tag'] . '>';
+            $output = $prefix . $output . $suffix;
+        }
+
+        return $output;
+    }
+}
+```
+
+We can instantiate and use that just like the postal label formatter:
+
+```twig
+{# Use our custom formatter #}
+{% set addressService = craft.app.getAddresses() %}
+{% set customFormatter = create(
+  'mynamespace\\OptionalCountryFormatter',
+  [
+    addressService.getAddressFormatRepository(),
+    addressService.getCountryRepository(),
+    addressService.getSubdivisionRepository(),
+  ]
+) %}
+{{ addr|address({ hide_countries: ['US'] }, customFormatter) }}
+{# Output:
+  1234 Balboa Towers Circle
+  Los Angeles, CA 92662
+#}
+```
