@@ -44,7 +44,7 @@ $countries = Craft::$app->getAddresses()->countryRepository->getAll();
 You’ll get an array of [Country](https://github.com/commerceguys/addressing/blob/master/src/Country/Country.php) objects back, which you could use to populate a dropdown menu:
 
 ```twig
-{% set countryNamesByCode = countries|map((value, key) => "#{value.name}") %}
+{% set countryNamesByCode = countries|map(value => "#{value.name}") %}
 <select name="myCountry">
   {% for code, name in countryNamesByCode %}
     <option value="{{ code }}">{{ name }}</option>
@@ -75,7 +75,7 @@ Each resulting array item is a [Subdivision](https://github.com/commerceguys/add
 
 ```twig
 {% set states = craft.app.getAddresses().subdivisionRepository.getAll(['US']) %}
-{% set stateNamesByCode = states|map((value, key) => "#{value.name}") %}
+{% set stateNamesByCode = states|map(value => "#{value.name}") %}
 <select name="myState">
   {% for code, name in stateNamesByCode %}
     <option value="{{ code }}">{{ name }}</option>
