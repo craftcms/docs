@@ -377,7 +377,7 @@ These Commerce-specific element actions have been removed and rely on Craft’s:
 
 ### Changed
 
-- [ProductType::$titleFormat](commerce3:craft\commerce\model\ProductType::$titleFormat) was renamed to [$variantTitleFormat](commerce4:craft\commerce\model\ProductType::$variantTitleFormat).
+- [ProductType::$titleFormat](commerce3:craft\commerce\models\ProductType::$titleFormat) was renamed to [$variantTitleFormat](commerce4:craft\commerce\models\ProductType::$variantTitleFormat).
 - [TaxRate::getRateAsPercent()](commerce4:craft\commerce\models\TaxRate::getRateAsPercent()) now returns a localized value.
 
 ### Removed
@@ -399,7 +399,7 @@ These Commerce-specific element actions have been removed and rely on Craft’s:
 | [ShippingAddressZone::getStates()](commerce3:craft\commerce\models\ShippingAddressZone::getStates()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
 | [ShippingAddressZone::getStatesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getStatesNames()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
 | [ShippingAddressZone::isCountryBased](commerce3:craft\commerce\models\ShippingAddressZone::isCountryBased) | Not applicable; zones can be country- and state-based simultaneously.
-| [States](commerce3:craft\commerce\models\States) | `craft.app.getAddresses().subdivisionRepository.getAll(['US'])`
+| [States](commerce3:craft\commerce\services\States) | `craft.app.getAddresses().subdivisionRepository.getAll(['US'])`
 | [TaxAddressZone::getCountries()](commerce3:craft\commerce\models\TaxAddressZone::getCountries()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
 | [TaxAddressZone::getCountriesNames()](commerce3:craft\commerce\models\TaxAddressZone::getCountriesNames()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
 | [TaxAddressZone::getCountryIds()](commerce3:craft\commerce\models\TaxAddressZone::getCountryIds()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
