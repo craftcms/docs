@@ -14,7 +14,7 @@ The **User Fields** editor lets you manage whatever fields you’d like to be av
 
 ![Screenshot of User Fields’ Field Layout editor, with an empty layout and an available Addresses field under Native Fields in the sidebar](./images/user-fields.png)
 
-A native **Addresses** field is available to be dragged into the field layout. You could add it to a newly-created “Contact Information” tab, for example, and that tab and its **Addresses** field would be included on every user detail page:
+You can drag the native **Addresses** field into the user field layout. If you created your own “Contact Information” tab, for example, and moved **Addresses** into it you’d see that tab and field on every user detail page:
 
 ![Screenshot of My Account page with a “Contact Information” tab selected and the “Addresses” field heading with “+ Add an address” just underneath it](./images/my-account-contact-information.png)
 
