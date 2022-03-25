@@ -301,9 +301,14 @@ return [
 
 In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location.
 
+::: tip
+The `session` component should be overridden from `app.web.php` so it gets defined for web requests, but not console requests.
+:::
+
 #### Redis Example
 
 ```php
+// config/app.php
 <?php
 
 use craft\helpers\App;
@@ -316,6 +321,18 @@ return [
             'port' => 6379,
             'password' => App::env('REDIS_PASSWORD') ?: null,
         ],
+    ],
+];
+```
+
+```php
+// config/app.web.php
+<?php
+
+use craft\helpers\App;
+
+return [
+    'components' => [
         'session' => function() {
             // Get the default component config
             $config = App::sessionConfig();
