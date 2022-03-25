@@ -425,6 +425,10 @@ Causes the query results to be returned in the order specified by [id](#id).
 
 
 
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
@@ -487,6 +491,7 @@ Possible values include:
 | `'foo'` | in a group with a handle of `foo`.
 | `'not foo'` | not in a group with a handle of `foo`.
 | `['foo', 'bar']` | in a group with a handle of `foo` or `bar`.
+| `['and', 'foo', 'bar']` | in both groups with handles of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a group with a handle of `foo` or `bar`.
 | a [UserGroup](craft4:craft\models\UserGroup) object | in a group represented by the object.
 
@@ -520,6 +525,7 @@ Possible values include:
 | `1` | in a group with an ID of 1.
 | `'not 1'` | not in a group with an ID of 1.
 | `[1, 2]` | in a group with an ID of 1 or 2.
+| `['and', 1, 2]` | in both groups with IDs of 1 or 2.
 | `['not', 1, 2]` | not in a group with an ID of 1 or 2.
 
 
