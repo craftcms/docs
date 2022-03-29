@@ -28,8 +28,6 @@ You can use the [Craft Server Check](https://github.com/craftcms/server-check) s
 </column>
 </columns>
 
-<b>*</b> Craft supports PHP 8, but it may not be fully supported by all plugins yet.
-
 ## Required PHP Extensions
 
 - [BCMath](https://www.php.net/manual/en/book.bc.php)
