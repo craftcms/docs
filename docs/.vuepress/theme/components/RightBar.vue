@@ -3,14 +3,14 @@
     <div class="switch-wrapper hidden xl:block">
       <ColorModeSwitch v-on="$listeners" :on="isDark" />
     </div>
-    <div class="sidebar-link-wrapper">
+    <nav class="sidebar-link-wrapper">
       <SidebarLinks
         :depth="depth"
         :sidebar-depth="$page.frontmatter.sidebarDepth || sidebarDepth"
         :items="headingItems"
         fixed-heading="On this Page"
       />
-    </div>
+    </nav>
   </div>
 </template>
 
