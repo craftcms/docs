@@ -13,6 +13,7 @@ const { devices } = require("@playwright/test");
  */
 const config = {
   testDir: "./docs/.vuepress/theme/tests/",
+  testMatch: "*.spec.js",
   /* Maximum time one test can run for. */
   timeout: 15 * 1000,
   expect: {
