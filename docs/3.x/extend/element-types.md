@@ -613,7 +613,7 @@ When a source is selected, Craft will configure your [element query](#element-qu
 You can give your [control panel section](cp-section.md) an index page for your element type using the following template:
 
 ```twig
-{% extends '_layouts/elementindex.twig' %}
+{% extends '_layouts/elementindex.html' %}
 {% set title = 'Products' %}
 {% set elementType = 'ns\\prefix\\elements\\Product' %}
 ```
