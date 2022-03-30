@@ -1316,7 +1316,7 @@ The URL to the root directory that should store published control panel resource
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null), [false](https://php.net/language.types.boolean)
 
 Default value
 :  `null`
