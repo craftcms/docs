@@ -29,7 +29,7 @@ The best way to upgrade a Craft 3 site is to get everything squeaky-clean and up
 3. Make sure you don’t have any pending or active jobs in your queue.
 4. Run `php craft project-config/rebuild` and make sure all background tasks have completed.
 5. Create a new database backup just in case things go sideways.
-6. Edit your project’s `composer.json` to require `"craftcms/cms": "^4.0.0-beta.1"` and Craft-4-compatible plugins all at once.
+6. Edit your project’s `composer.json` to require `"craftcms/cms": "^4.0.0-beta.1"` and Craft-4-compatible plugins all at once. (You may also need to update your platform requirement to `php: "8.0.2"`.)
 7. Run `composer update`.
 8. Run `php craft migrate/all`.
 
