@@ -30,7 +30,7 @@ A tax category may have zero or more [tax rates](#tax-rates), which we’ll expl
 
 ### Fetching Tax Categories
 
-You can fetch all of your site’s tax categories through the [TaxCategories](commerce4:craft\commerce\services\TaxCategories) service:
+You can fetch your site’s tax categories through the [TaxCategories](commerce4:craft\commerce\services\TaxCategories) service:
 
 ::: code
 ```twig
@@ -230,7 +230,7 @@ To create a new tax zone, visit **Commerce** → **Tax** → **Tax Zones** and p
 
 ![Screenshot of a new tax zone form with fields for name, description, and an address condition](./images/new-tax-zone.png)
 
-The tax zone consists of a **Name**, **Description**, and an **Address Condition** you can use to define the relevant area. That condition can be as broad or specific as you’d like, from one or more countries to specific administrative areas (like U.S. states) or postal codes.
+The tax zone consists of a **Name**, **Description**, and an **Address Condition** you can use to define the relevant area. That condition can be as broad or specific as you’d like, from one or more countries to specific administrative areas (like U.S. states) or postal codes. You can also designate a single zone to be used as the default when an order doesn’t have a shipping address.
 
 ### Postal Code Formula
 
@@ -252,7 +252,7 @@ postalCode in ['NG102', 'NG103', 'NG104']
 
 ### Fetching Tax Zones
 
-You can fetch all of your site’s tax zones through the [TaxZones](commerce4:craft\commerce\services\TaxZones) service:
+You can fetch your site’s tax zones through the [TaxZones](commerce4:craft\commerce\services\TaxZones) service:
 
 ::: code
 ```twig
