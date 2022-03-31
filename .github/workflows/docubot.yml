@@ -105,7 +105,7 @@ jobs:
         run: php craft docubot/event-dumper $GITHUB_WORKSPACE/docs/docs/3.x/event-data/events.json
         working-directory: site
 
-      - name: Store Craft revision
+      - name: Store Craft revision reference
         run: |
           echo 'CRAFT_REV<<EOF' >> $GITHUB_ENV
           echo $(git rev-parse --short HEAD) >> $GITHUB_ENV
@@ -114,7 +114,6 @@ jobs:
 
       - name: Commit updates
         run: |
-          echo "cms@${{ env.CRAFT_REV }}"
           git config user.name shinybrad
           git config user.email brad+shinybrad@pixelandtonic.com
           if ! git diff --quiet
