@@ -38,7 +38,7 @@ jobs:
           repository: 'craftcms/docubot'
           path: 'docubot'
           ref: 'main'
-          token: $GITHUB_TOKEN
+          token: $GH_TOKEN
 
       - uses: actions/checkout@v3
         with:
@@ -95,7 +95,7 @@ jobs:
           then
             git add --all
             git commit -a -m "$GITHUB_ACTION@$GITHUB_REF"
-            git push https://${GITHUB_TOKEN}@github.com/craftcms/docs.git
+            git push https://${GH_TOKEN}@github.com/craftcms/docs.git
           else
             echo "No changes to commit."
           fi
