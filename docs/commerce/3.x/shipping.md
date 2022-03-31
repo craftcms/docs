@@ -74,7 +74,7 @@ Shipping rules belong to a shipping method and may be edited in that shipping me
 
 The matching of the shipping rules to the cart is based on the following rules conditions:
 
-![A default Shipping Method Rule Conditions form.](./assets/shipping-method-conditions.png)
+![A default Shipping Method Rule Conditions form.](./images/shipping-method-conditions.png)
 
 ### Shipping Zone
 
@@ -120,7 +120,7 @@ This rule can allow, disallow, or require certain products to match this rule.
 
 ## Shipping Rule Costs
 
-![A default Shipping Method Rule Costs form.](./assets/shipping-method-costs.png)
+![A default Shipping Method Rule Costs form.](./images/shipping-method-costs.png)
 
 ### Base Rate
 
