@@ -106,7 +106,10 @@ jobs:
         working-directory: site
 
       - name: Store Craft revision
-        run: echo "CRAFT_REV=$(echo git rev-parse --short HEAD)" >> $GITHUB_ENV
+        run: |
+          echo 'CRAFT_REV<<EOF' >> $GITHUB_ENV
+          echo $(git rev-parse --short HEAD) >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
         working-directory: cms
 
       - name: Commit updates
