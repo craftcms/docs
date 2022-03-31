@@ -6,7 +6,7 @@ Commerce represents taxes for an order using tax categories, tax rates, and tax 
 Tax features differ depending on your [edition](editions.md) of Craft Commerce.
 :::
 
-When you’re setting up a new store, you’ll probably want to establish whatever tax categories and zones you’ll need, then configure the tax rates that rely on them.
+When you’re setting up a store, you’ll probably want to establish whatever tax categories and zones you’ll need, then configure the tax rates that rely on them.
 
 ## Tax Categories
 
