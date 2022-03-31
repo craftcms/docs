@@ -25,6 +25,7 @@ env:
 
 jobs:
   craft3:
+    name: Build v3 GQL Docs + Event JSON + Console Commands
     runs-on: ubuntu-latest
     services:
       mysql:
@@ -44,10 +45,6 @@ jobs:
           repository: 'craftcms/cms'
           path: 'cms'
           ref: 'main' # TODO: parameterize
-
-      - name: Store Craft revision
-        run: export CRAFT_REV=$(git rev-parse --short HEAD)
-        working-directory: cms
 
       - name: Check out docs
         uses: actions/checkout@v3
@@ -108,6 +105,10 @@ jobs:
         run: php craft docubot/event-dumper $GITHUB_WORKSPACE/docs/docs/3.x/event-data/events.json
         working-directory: site
 
+      - name: Store Craft revision
+        run: export CRAFT_REV=$(git rev-parse --short HEAD)
+        working-directory: cms
+
       - name: Commit updates
         run: |
           git config user.name shinybrad
@@ -115,7 +116,7 @@ jobs:
           if ! git diff --quiet
           then
             git add --all
-            git commit -a -m "cms@$CRAFT_REV"
+            git commit -a -m "cms@${{ env.CRAFT_REV }}"
             git push https://${GH_TOKEN}@github.com/craftcms/docs.git
           else
             echo "No changes to commit."
