@@ -44,6 +44,7 @@ jobs:
           repository: 'craftcms/cms'
           path: 'cms'
           ref: 'main' # TODO: parameterize
+        run: export CRAFT_REV=$(git rev-parse --short HEAD)
 
       - name: Check out docs
         uses: actions/checkout@v3
@@ -81,10 +82,7 @@ jobs:
           composer require craftcms/docubot:dev-main
           composer require --dev yiisoft/yii2-shell
           echo "$APP_CONFIG" > config/app.php
-        working-directory: site
-
-      - name: Validate composer.json and composer.lock
-        run: composer validate
+          rm -f composer.lock
         working-directory: site
 
       - name: Install Composer dependencies
@@ -114,7 +112,7 @@ jobs:
           if ! git diff --quiet
           then
             git add --all
-            git commit -a -m "$GITHUB_ACTION@$GITHUB_REF"
+            git commit -a -m "cms@$CRAFT_REV"
             git push https://${GH_TOKEN}@github.com/craftcms/docs.git
           else
             echo "No changes to commit."
