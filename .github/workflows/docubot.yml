@@ -44,7 +44,10 @@ jobs:
           repository: 'craftcms/cms'
           path: 'cms'
           ref: 'main' # TODO: parameterize
+
+      - name: Store Craft revision
         run: export CRAFT_REV=$(git rev-parse --short HEAD)
+        working-directory: cms
 
       - name: Check out docs
         uses: actions/checkout@v3
