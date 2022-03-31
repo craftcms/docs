@@ -111,13 +111,13 @@ jobs:
 
       - name: Commit updates
         run: |
-          echo "cms@$CRAFT_REV"
+          echo "cms@${{ env.CRAFT_REV }}"
           git config user.name shinybrad
           git config user.email brad+shinybrad@pixelandtonic.com
           if ! git diff --quiet
           then
             git add --all
-            git commit -a -m "cms@$CRAFT_REV"
+            git commit -a -m "cms@${{ env.CRAFT_REV }}"
             git push https://${GH_TOKEN}@github.com/craftcms/docs.git
           else
             echo "No changes to commit."
