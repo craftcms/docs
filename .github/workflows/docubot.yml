@@ -54,11 +54,12 @@ jobs:
           ini-values: post_max_size=256M
 
       - name: Prepare Craft
-        run: composer config repositories.craftcms/docubot path ../docubot/
-        run: composer config repositories.craftcms/cms path ../cms/
-        run: composer require craftcms/docubot:dev-main
-        run: composer require --dev yiisoft/yii2-shell
-        run: echo "$APP_CONFIG" > config/app.php
+        run: |
+          composer config repositories.craftcms/docubot path ../docubot/
+          composer config repositories.craftcms/cms path ../cms/
+          composer require craftcms/docubot:dev-main
+          composer require --dev yiisoft/yii2-shell
+          echo "$APP_CONFIG" > config/app.php
         working-directory: site
         # TODO: set environment variables for site
 
@@ -90,7 +91,6 @@ jobs:
         run: |
           git config user.name shinybrad
           git config user.email brad+shinybrad@pixelandtonic.com
-        run: |
           if ! git diff --quiet
           then
             git add --all
