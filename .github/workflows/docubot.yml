@@ -55,7 +55,7 @@ jobs:
           repository: 'craftcms/docubot'
           path: 'docubot'
           ref: 'main'
-          token: $GH_TOKEN
+          token: ${{ secrets.GH_TOKEN }}
 
       - uses: actions/checkout@v3
         with:
