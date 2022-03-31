@@ -8,10 +8,10 @@ on:
 
 env:
   DB_DRIVER: mysql
-  DB_DATABASE: db
+  DB_SERVER: mysql
+  DB_DATABASE: mysql
   DB_USER: root
   DB_PASSWORD: root
-  DB_SERVER: mysql
   APP_CONFIG: |
     <?php
     return [
@@ -32,7 +32,7 @@ jobs:
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: false
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: db
+          MYSQL_DATABASE: mysql
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -78,7 +78,6 @@ jobs:
           composer require --dev yiisoft/yii2-shell
           echo "$APP_CONFIG" > config/app.php
         working-directory: site
-        # TODO: set environment variables for site
 
       - name: Validate composer.json and composer.lock
         run: composer validate
