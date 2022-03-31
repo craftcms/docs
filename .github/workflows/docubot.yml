@@ -111,6 +111,7 @@ jobs:
 
       - name: Commit updates
         run: |
+          echo "cms@${{ env.CRAFT_REV }}"
           git config user.name shinybrad
           git config user.email brad+shinybrad@pixelandtonic.com
           if ! git diff --quiet
