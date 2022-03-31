@@ -5,6 +5,22 @@ on:
   push:
     branches:
       - "feature/gh-actions-docubot"
+  env:
+    DB_DRIVER: mysql
+    DB_DATABASE: db
+    DB_USER: root
+    DB_PASSWORD: root
+    DB_SERVER: mysql
+    APP_CONFIG: |
+      <?php
+      return [
+          'modules' => [
+              'docubot' => \craft\docubot\Module::class,
+          ],
+          'bootstrap' => [
+              'docubot'
+          ],
+      ];
 
 jobs:
   craft3:
