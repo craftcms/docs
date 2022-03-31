@@ -2279,7 +2279,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 <div class="compact">
 
 Allowed types
-:  [integer](https://php.net/language.types.integer)
+:  [integer](https://php.net/language.types.integer), [false](https://php.net/language.types.boolean)
 
 Default value
 :  `5`
