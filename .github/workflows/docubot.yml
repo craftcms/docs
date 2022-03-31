@@ -38,26 +38,30 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out Craft
+        uses: actions/checkout@v3
         with:
           repository: 'craftcms/cms'
           path: 'cms'
           ref: 'main' # TODO: parameterize
 
-      - uses: actions/checkout@v3
+      - name: Check out docs
+        uses: actions/checkout@v3
         with:
           repository: 'craftcms/docs'
           path: 'docs'
           ref: 'main'
 
-      - uses: actions/checkout@v3
+      - name: Check out Docubot
+        uses: actions/checkout@v3
         with:
           repository: 'craftcms/docubot'
           path: 'docubot'
           ref: 'main'
           token: ${{ secrets.GH_TOKEN }}
 
-      - uses: actions/checkout@v3
+      - name: Check out demo site
+        uses: actions/checkout@v3
         with:
           repository: 'craftcms/starter-blog'
           path: 'site'
