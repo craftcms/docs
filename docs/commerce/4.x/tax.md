@@ -6,7 +6,7 @@ Commerce represents taxes for an order using tax categories, tax rates, and tax 
 Tax features differ depending on your [edition](editions.md) of Craft Commerce.
 :::
 
-When you’re setting up a store, you’ll probably want to establish whatever tax categories and zones you’ll need, then configure the tax rates that rely on them.
+You can model common sales tax policies—like those typical in U.S. retail and European Value Added Tax (VAT)—but those aren’t the _only_ types of tax rules that you can model in Commerce. With an understanding of Commerce’s basic taxation concepts you should be able to model the tax rules of your country or jurisdiction.
 
 ## Tax Categories
 
@@ -22,7 +22,11 @@ To create a new tax category, visit **Commerce** → **Tax** → **Tax Categorie
 
 Each new tax category should identify the product types it applies to. A new product will use the first tax category that’s available to it, or fall back on the default category.
 
-A tax category may have zero or more [tax rates](#tax-rates).
+::: tip
+Every line item must have a tax category, and Commerce will pick the most appropriate one you’ve established. It’s possible your default category will be used for product types that _aren’t_ explicitly selected, if no other tax categories are available.
+:::
+
+A tax category may have zero or more [tax rates](#tax-rates), which we’ll explore further below.
 
 ### Fetching Tax Categories
 
@@ -112,7 +116,7 @@ This would mean that all items in your store would get the `GST` tax category, a
 
 ## Tax Rates
 
-A tax rate is a simple percentage that may be applied to relevant cart items. The rate is only applied to an item when that item’s tax category and tax zone qualify it for the rate.
+A tax rate is a simple percentage that may be applied to relevant cart items. The rate is only applied when an item’s tax category and tax zone qualify it for the rate.
 
 Commerce does not add any tax rates by default; you’ll need to explicitly create any that you’d like to be available.
 
@@ -168,7 +172,7 @@ This returns an array of [TaxRate](commerce4:craft\commerce\models\TaxRate) mode
 {% endforeach %}
 ```
 
-You can also fetch tax rates that are applicable to a specific tax zone by providing a zone object or ID:
+You can also fetch tax rates for a specific tax zone by providing a zone object or ID:
 
 ::: code
 ```twig
@@ -216,9 +220,9 @@ $taxZones = \craft\commerce\Plugin::getInstance()
 
 ## Tax Zones
 
-A tax zone is a physical area you define that can be used to influence tax based on an order’s shipping address. If the order address falls within that zone, any rates tied to that zone may be factored into tax calculation.
+A tax zone represents a physical area that can be used to influence tax based on an order’s shipping address. 
 
-When an order is placed, Commerce will select the single best matching tax zone for that order and use that for tax calculation.
+When an order address falls within that zone, any rates tied to that zone may be factored into tax calculation. An order may have more than one matching tax zone, and all of them will be factored in.
 
 Commerce does not add any tax zones by default. Like tax rates, you’ll need to create any tax zones you’d like to use for your store.
 
@@ -226,13 +230,11 @@ To create a new tax zone, visit **Commerce** → **Tax** → **Tax Zones** and p
 
 ![Screenshot of a new tax zone form with fields for name, description, and an address condition](./images/new-tax-zone.png)
 
-The tax zone consists of a **Name**, **Description**, and the **Address Condition** you can use to define the relevant area. That condition can be as broad or specific as you’d like, from one or more countries to specific administrative areas (like U.S. states) or postal codes.
+The tax zone consists of a **Name**, **Description**, and an **Address Condition** you can use to define the relevant area. That condition can be as broad or specific as you’d like, from one or more countries to specific administrative areas (like U.S. states) or postal codes.
 
-While standard sales tax policies can be modeled—like those common in the U.S. and European Value Added Tax (VAT)—these are not the _only_ types of tax rules that you can model in Commerce. With an understanding of Commerce’s basic taxation concepts you should be able to model the tax rules of your country or jurisdiction.
+### Postal Code Formula
 
-### Post Code Formula
-
-One of the Address Condition options is “Post Code Formula”, previously referred to as the “zip code condition formula”.
+One of the Address Condition options is “Postal Code Formula”, previously referred to as the “zip code condition formula”.
 
 This formula is an expression written in [Twig’s expression syntax](https://twig.symfony.com/doc/3.x/templates.html#expressions) that returns `true` or `false`.
 
