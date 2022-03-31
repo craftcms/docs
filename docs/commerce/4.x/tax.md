@@ -239,13 +239,13 @@ This formula is an expression written in [Twig’s expression syntax](https://tw
 This will match if the zip code’s first two characters are `60` or `70`:
 
 ```
-zipCode[0:2] == '60' or zipCode[0:2] == '70'
+postalCode[0:2] == '60' or postalCode[0:2] == '70'
 ```
 
 The will match if the zip code is equal to `NG102`, `NG103`, or `NG104`:
 
 ```
-zipCode in ['NG102', 'NG103', 'NG104']
+postalCode in ['NG102', 'NG103', 'NG104']
 ```
 
 ### Fetching Tax Zones
