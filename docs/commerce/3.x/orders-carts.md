@@ -230,7 +230,7 @@ Commerce does not validate the `options` and `note` parameters. If you’d like 
 
 The note and options will be visible on the order’s detail page in the control panel:
 
-![Line Item Option Review](./assets/lineitem-options-review.png)
+![Line Item Option Review](./images/lineitem-options-review.png)
 
 #### Updating Line Items
 
@@ -311,7 +311,7 @@ Have the customer navigate to the `commerce/cart/load-cart` endpoint, including 
 
 A quick way for a store manager to grab the URL is by navigating in the control panel to **Commerce** → **Orders**, selecting one item from **Active Carts** or **Inactive Carts**, and choosing **Share cart…** from the context menu:
 
-![Share cart context menu option](./assets/share-cart.png)
+![Share cart context menu option](./images/share-cart.png)
 
 You can also do this from an order edit page by choosing the gear icon and then **Share cart…**.
 
@@ -552,7 +552,7 @@ Cart/order subtotals and totals are computed values that always reflect the sum 
 
 You can manually recalculate an order by choosing “Recalculate order” at the bottom of the order edit screen:
 
-![](./assets/recalculate-order.png)
+![](./images/recalculate-order.png)
 
 This will set temporarily the order’s calculation mode to *Recalculate All* and trigger recalculation. You can then apply the resulting changes to the order by choosing “Update Order”, or discard them by choosing “Cancel”.
 

@@ -6,7 +6,7 @@ In the control panel, you’ll find addresses within the context of Orders and C
 
 You can also manage any customer’s addresses from their user account. Navigate to **Users**, choose a user to visit their edit page, and see the **Addresses** section of the **Customer Info** tab:
 
-![A user’s addresses seen from their Craft user account page](./assets/user-addresses.png)
+![A user’s addresses seen from their Craft user account page](./images/user-addresses.png)
 
 ## Managing Addresses
 

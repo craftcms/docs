@@ -12,13 +12,13 @@ You can model common sales tax policies—like those typical in U.S. retail and 
 
 Every product designates a single tax category that determines how it’s taxed:
 
-![Screenshot of product details in the control panel](./assets/product-details-category.png)
+![Screenshot of product details in the control panel](./images/product-details-category.png)
 
 Commerce creates a default “General” category when it’s installed. Every newly-created product is automatically assigned to that default category, but you can add as many categories as you’d like and designate any one of them as the system-wide default.
 
 To create a new tax category, visit **Commerce** → **Tax** → **Tax Categories** and press **+ New tax category**:
 
-![Screenshot of tax category form with fields for name, handle, description, available product types, and a checkbox to designate the category as the default](./assets/new-tax-category.png)
+![Screenshot of tax category form with fields for name, handle, description, available product types, and a checkbox to designate the category as the default](./images/new-tax-category.png)
 
 Each new tax category should identify the product types it applies to. A new product will use the first tax category that’s available to it, or fall back on the default category.
 
@@ -122,7 +122,7 @@ Commerce does not add any tax rates by default; you’ll need to explicitly crea
 
 To create a new tax category, visit **Commerce** → **Tax** → **Tax Rates** and press **+ New tax rate**:
 
-![Screenshot of a new tax rate form with fields for name, code, taxable subject, tax zone, business tax ID disqualification, tax category, and tax rate](./assets/new-tax-rate.png)
+![Screenshot of a new tax rate form with fields for name, code, taxable subject, tax zone, business tax ID disqualification, tax category, and tax rate](./images/new-tax-rate.png)
 
 Every tax rate must specify a single [tax category](#tax-categories) it applies to.
 
@@ -228,7 +228,7 @@ Commerce does not add any tax zones by default. Like tax rates, you’ll need to
 
 To create a new tax zone, visit **Commerce** → **Tax** → **Tax Zones** and press **+ New tax zone**:
 
-![Screenshot of a new tax zone form with fields for name, description, state or country type, country list, and zip code condition formula](./assets/new-tax-zone.png)
+![Screenshot of a new tax zone form with fields for name, description, state or country type, country list, and zip code condition formula](./images/new-tax-zone.png)
 
 The tax zone consists of a **Name**, **Description**, and three fields you can use to define the relevant area: **Type**, **Countries**, and **Zip Code Condition Formula**. You can also designate a single zone to be used as the default when an order doesn’t have a shipping address.
 
