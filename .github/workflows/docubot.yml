@@ -1,7 +1,10 @@
 name: Docubot
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+  push:
+    branches:
+      - "feature/gh-actions-docubot"
 
 jobs:
   craft3:
