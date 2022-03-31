@@ -8,7 +8,7 @@ on:
 
 env:
   DB_DRIVER: mysql
-  DB_SERVER: mysql
+  DB_SERVER: 127.0.0.1
   DB_DATABASE: mysql
   DB_USER: root
   DB_PASSWORD: root
