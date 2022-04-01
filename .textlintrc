@@ -1,0 +1,13 @@
+{
+  "filters": {},
+  "rules": {
+    "no-todo": true,
+    "terminology": {
+      "defaultTerms": true,
+      "exclude": [
+        "front[- ]end(\\w*)",
+        "command ?line"
+      ]
+    }
+  }
+}
