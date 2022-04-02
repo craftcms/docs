@@ -109,7 +109,7 @@ If you would like the section's content to be separate then disable this option 
 
 ## Setting Up a New Site
 
-In this short guide we'll walk through the steps of setting up a new site in Craft. This guide assumes you already have Craft installed and the default site setup and configured.
+In this short guide we’ll walk through the steps of setting up a new site in Craft. This guide assumes you already have Craft installed and the default site setup and configured.
 
 ### Step 1: Create the Site in Settings
 

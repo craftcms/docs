@@ -36,7 +36,7 @@ The `matrix` is where we explicitly define the different environments we want th
 tests to run in.  That includes PHP 7.1 - 7.3 and we define an environment variable
 called `DB` that sets both `mysql` and `pgsql` we can use later.
 
-PHP 7.1 also sets an environment variable called `TASK_TESTS_COVERAGE` we'll use later
+PHP 7.1 also sets an environment variable called `TASK_TESTS_COVERAGE` we’ll use later
 because that’s the only environment we want code coverage reports to generate in (for
 performance reasons).
 
