@@ -13,7 +13,7 @@ This guide can be used for setting up tests for a Craft site & Modules/Plugins.
 
 ## Step 1: Install Codeception 3.1 or Higher
 
-Follow instruction 1 and 2 Codeception's [website](https://codeception.com/quickstart). Ensure you install
+Follow instruction 1 and 2 Codeception’s [website](https://codeception.com/quickstart). Ensure you install
 `codeception/codeception` at `3.1`or higher.
 
 ::: tip

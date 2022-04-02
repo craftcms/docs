@@ -4,7 +4,7 @@ Shipping methods are only available in the Pro edition of Craft Commerce. This p
 
 If you need to add shipping costs to the cart, you have the following options:
 
-1) Use the built in shipping method and shipping rules engine to define your rules and prices based on a few product and cart attributes, including per item rates, base order rates, weight rates, and percentage of cost rates.
+1) Use the built-in shipping method and shipping rules engine to define your rules and prices based on a few product and cart attributes, including per item rates, base order rates, weight rates, and percentage of cost rates.
 This engine is fairly powerful and can meet the needs of most small businesses with simple to medium complex shipping needs.
 
 2) Write a plugin or module that provides your own shipping method. This allows you to present more than one option to the customer, and writing your own shipping method allows you to use the option (1) above at the same time. Your shipping rules could use any external API to look up prices, or you could just build the pricing logic out in PHP.
