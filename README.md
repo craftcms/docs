@@ -21,7 +21,7 @@ The pages served from `docs/` are treated like any other VuePress project, and t
     - `config.js` is the root VuePress configuration.
     - `head.js` for customizing global `<head>` contents for published pages.
     - `placeholders.js` for configuring special placeholders to be emphasized in code samples.
-  - `*/` docset markdown as you’d see it on its own in each legacy VuePress project.
+  - `*/` docset Markdown as you’d see it on its own in each legacy VuePress project.
   - `README.md` the topmost homepage for all docsets.
 - `postcss.config.js`
 - `tailwind.config.js`
@@ -37,7 +37,7 @@ Quit the process and re-run if you’ve made changes to any `.js` config files.
 
 ## Writing Tips
 
-Most stock VuePress markdown extensions are supported here. See the [Markdown Extensions](https://v1.vuepress.vuejs.org/guide/markdown.html) page to learn more about linking, frontmatter, and highlighting lines in code samples.
+Most stock VuePress Markdown extensions are supported here. See the [Markdown Extensions](https://v1.vuepress.vuejs.org/guide/markdown.html) page to learn more about linking, frontmatter, and highlighting lines in code samples.
 
 - Keep code block line lengths up to 85 characters long to avoid horizontal scrollbars.
 - Avoid placing highlighted code blocks `::: details` toggles because the performance is terrible in WebKit. Use our height-limited `<toggle-tip>` component instead.

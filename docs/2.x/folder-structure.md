@@ -50,4 +50,4 @@ This is where all of your site’s [templates](templating-overview.md) go.
 
 ## `craft/translations/`
 
-This folder is not present by default, but if you create it, you can store custom CP and front-end translations in here. The file names and contents should follow the same formats as the files in `craft/app/translations/`. When a request comes in that gets served with a locale matching one of your translation’s filenames, the file will automatically get loaded up, and its strings will be used when called upon. (See [Translating Static Text](https://craftcms.com/support/static-translations) for an example.)
+This folder is not present by default, but if you create it, you can store custom CP and front-end translations in here. The filenames and contents should follow the same formats as the files in `craft/app/translations/`. When a request comes in that gets served with a locale matching one of your translation’s filenames, the file will automatically get loaded up, and its strings will be used when called upon. (See [Translating Static Text](https://craftcms.com/support/static-translations) for an example.)

@@ -12,7 +12,7 @@ The follow attributes make up the payment form model.
 
 If a token is found on the payment form, no validation of other field is performed and the data is ignored.
 
-The token represents a pre validated credit card and is provided by a gateways client side JavaScript library. For example [Stripe.js](https://stripe.com/docs/stripe-js)
+The token represents a pre validated credit card and is provided by a gateway’s client-side JavaScript library. For example [Stripe.js](https://stripe.com/docs/stripe-js)
 
 ### firstName
 

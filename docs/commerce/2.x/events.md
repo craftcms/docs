@@ -341,7 +341,7 @@ use craft\commerce\services\Payments;
 use yii\base\Event;
 
 Event::on(Payments::class, Payments::EVENT_AFTER_CAPTURE_TRANSACTION, function(TransactionEvent $e) {
-    // Do something - probably notify warehouse that we're ready to ship
+    // Do something - probably notify warehouse that we’re ready to ship
 });
 ```
 

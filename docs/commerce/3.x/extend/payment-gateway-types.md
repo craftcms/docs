@@ -35,7 +35,12 @@ At a high level, a Craft Commerce gateway may use the following parts:
 It may be easiest to extend the [Gateway](commerce3:craft\commerce\base\Gateway) or [SubscriptionGateway](commerce3:craft\commerce\base\SubscriptionGateway) classes in order to save time and minimize the amount of code you need to write.
 :::
 
+<!-- textlint-disable terminology -->
+<!-- this “walk through” functions as a verb -->
+
 Let’s walk through the customer order process to highlight different gateway interactions.
+
+<!-- textlint-enable terminology -->
 
 ### Checkout Page
 

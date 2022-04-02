@@ -2,7 +2,7 @@
 
 Testing mainly revolves around `asserting` that some behaviour, object or value, is working in an expected manner
 or with an expected result. With Craft introducing some key concepts
-the Craft module introduces it's own set of `assert` / `expect` methods allowing
+the Craft module introduces its own set of `assert` / `expect` methods allowing
 you to write more concise and effective tests.
 
 ## `assertElementsExist`

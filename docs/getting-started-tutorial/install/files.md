@@ -10,11 +10,11 @@ Nitro and Craft both rely on Composer, and Nitro used it under the hood to estab
 <img src="../images/getcomposer.org.png" alt="Screenshot of getcomposer.org homepage" />
 </BrowserShot>
 
-Composer is a command line application with one important job: it makes sure a PHP project like our website has all the code it needs to run.
+Composer is a command line application with one important job: it makes sure a PHP project like our site has all the code it needs to run.
 
-This code is split up into numerous _packages_ written by different authors. Our website depends on these packages—also referred to as _dependencies_—and each one provides a specific set of functionality. Composer makes sure every PHP package (including Craft CMS!) is installed, has the dependencies it needs to do its job, and that all these packages can work together without major conflicts.
+This code is split up into numerous _packages_ written by different authors. Our site depends on these packages—also referred to as _dependencies_—and each one provides a specific set of functionality. Composer makes sure every PHP package (including Craft CMS!) is installed, has the dependencies it needs to do its job, and that all these packages can work together without major conflicts.
 
-Composer handles the complexity of combining these packages so we can use the best software available for each individual job the website needs to accomplish. This isn’t unique to Craft CMS—most modern PHP projects are built this way.
+Composer handles the complexity of combining these packages so we can use the best software available for each individual job the site needs to accomplish. This isn’t unique to Craft CMS—most modern PHP projects are built this way.
 
 ## Tour the site’s folder structure
 
@@ -53,7 +53,7 @@ Let’s take a look at each top-level item:
 - **`storage/`** is where Craft keeps its temporary files.
 - **`templates/`** is where we’ll write template code to dynamically display content. (Unless you’d like to use Craft headlessly, but we’ll come back to that.)
 - **`vendor/`** is where Composer stores all the project packages we covered earlier.
-- **`web/`** is the document root covered [earlier](../environment/stack.md), where your web server needs to send its requests. We’ll also put website pieces like images, CSS, and JavaScript in this folder.
+- **`web/`** is the document root covered [earlier](../environment/stack.md), where your web server needs to send its requests. We’ll also put site pieces like images, CSS, and JavaScript in this folder.
 - **`.env`** is a special file with constants that tell Craft how to connect to its database.
 - **`.env.example`** is an example of `.env`’s format for others to use setting up _their_ environments.
 - **`.gitignore`** is another special file for telling Git, if it’s used, not to care about certain files.

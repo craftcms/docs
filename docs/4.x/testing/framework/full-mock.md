@@ -13,7 +13,7 @@ For this reason, the Craft testing framework provides the `fullMock` option
 to be set in your `codeception.yaml` or `unit.suite.yaml` file. If you set this option to true,
 instead of creating a `Craft::$app` that is as close to the real thing, Craft will
 setup the `Craft::$app` object and all services to be mocks according to
-PHP Unit's mocking system.
+PHP Unit’s mocking system.
 
 Under the hood Craft will setup a mock of each service that is set on the `Craft::$app`
 using `craft\test\TestSetup:getMockApp()`. The _actual_ mock is setup using
@@ -38,11 +38,11 @@ containing sub-arrays which meet the following specifications:
 - `string` The class of the service
 - `array` An array containing, in the mentioned order:
   - `string` The name of the method used to access this service. I.E if you access
-  your module/plugin's service as follows: `MyModule::getInstance()->getMyService()`
-  you would enter 'getMyService' for this parameter. Leave null if you don't access
+  your module/plugin’s service as follows: `MyModule::getInstance()->getMyService()`
+  you would enter 'getMyService' for this parameter. Leave null if you don’t access
   your module/plugin via methods.
   - `string` The property name used to access this service. I.E
-  if you access your module/plugin's service as follows:
+  if you access your module/plugin’s service as follows:
    `MyModule::getInstance()->myService` you would enter 'myService' in this parameter.
    Leave null if not applicable.
 

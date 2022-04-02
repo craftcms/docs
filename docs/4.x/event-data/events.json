@@ -35177,13 +35177,13 @@
         "class": "craft\\services\\Plugins",
         "name": "EVENT_BEFORE_SAVE_PLUGIN_SETTINGS",
         "type": "craft\\events\\PluginEvent",
-        "desc": "The event that is triggered before a plugin's settings are saved"
+        "desc": "The event that is triggered before a plugin’s settings are saved"
     },
     {
         "class": "craft\\services\\Plugins",
         "name": "EVENT_AFTER_SAVE_PLUGIN_SETTINGS",
         "type": "craft\\events\\PluginEvent",
-        "desc": "The event that is triggered after a plugin's settings are saved"
+        "desc": "The event that is triggered after a plugin’s settings are saved"
     },
     {
         "class": "craft\\services\\ProjectConfig",

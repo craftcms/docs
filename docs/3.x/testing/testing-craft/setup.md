@@ -186,7 +186,7 @@ in these `_bootstrap.php` files. i.e. if you want specific PHP code to run only 
 Codeception provides a generation script for various types of tests which can
 be found in their [documentation](https://codeception.com/docs/02-GettingStarted).
 
-For the purpose of this guide let's create one test manually. Create a `ExampleTest.php`
+For the purpose of this guide let’s create one test manually. Create a `ExampleTest.php`
 file in `tests/unit/` and add the following content.
 
 ```php
@@ -225,7 +225,7 @@ Run the following command:
 codecept run unit
 ```
 
-This will take a second to load as it has to install all of Craft's database tables.
+This will take a second to load as it has to install all of Craft’s database tables.
 Once completed it will say:
 
 ```bash

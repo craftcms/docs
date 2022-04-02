@@ -21,23 +21,23 @@ Craft’s DbCommand enhances Yii’s CDbCommand in the following ways:
 - It automatically adds the prefix to table names, without requiring you to wrap the table name in `{{` and `}}`:
 
     ```php
-    // with Yii's CDbCommand:
+    // with Yii’s CDbCommand:
     ->from('{{users}}')
 
-    // with Craft's DbCommand:
+    // with Craft’s DbCommand:
     ->from('users')
     ```
 
-- It allows you to specify `AND` conditions as key/value arrays, with automatic parameter cleansing:
+- It allows you to specify `AND` conditions as key-value arrays, with automatic parameter cleansing:
 
     ```php
-    // with Yii's CDbCommand:
+    // with Yii’s CDbCommand:
     ->where(
         array('and', 'foo = :foo', 'bar = :bar'),
         array(':foo' => $foo, ':bar' => $bar)
     )
 
-    // with Craft's DbCommand:
+    // with Craft’s DbCommand:
     ->where(array(
         'foo' => $foo,
         'bar' => $bar
@@ -47,10 +47,10 @@ Craft’s DbCommand enhances Yii’s CDbCommand in the following ways:
 - It allows you to specify “`$type`” attributes using an array syntax:
 
     ```php
-    // with Yii's CDbCommand:
+    // with Yii’s CDbCommand:
     ->alterColumn('assetfiles', 'sourceId', 'INT(11) NULL')
 
-    // with Craft's DbCommand:
+    // with Craft’s DbCommand:
     ->alterColumn('assetfiles', 'sourceId', array(
         'column' => ColumnType::Int,
         'null' => true

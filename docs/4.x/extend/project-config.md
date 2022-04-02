@@ -106,7 +106,7 @@ public function handleDeletedProductType(ConfigEvent $event)
     // Get the product type
     $productType = $this->getProductTypeByUid($uid);
 
-    // If that came back empty, we're done!
+    // If that came back empty, we’re done!
     if (!$productType) {
         return;
     }

@@ -9,7 +9,7 @@ Nitro uses whatever CPU, memory, and disk settings you’ve set for Docker. You 
 
 ## How to Customize Nitro’s Defaults
 
-Let’s say you’re running another local development environment and the [`portcheck`](commands.md#portcheck) command confirms port 80 (http) is already in use:
+Let’s say you’re running another local development environment and the [`portcheck`](commands.md#portcheck) command confirms port 80 (HTTP) is already in use:
 
 ```
 $ nitro portcheck 80
@@ -23,7 +23,7 @@ $ nitro portcheck 8080
 Port 8080 is available!
 ```
 
-Now we can use a shell environment variable setting Nitro’s http port to 8080:
+Now we can use a shell environment variable setting Nitro’s HTTP port to 8080:
 
 ```
 export NITRO_HTTP_PORT=8080
@@ -53,14 +53,14 @@ The table below details every environment variable you can use to customize Nitr
 
 | Environment Variable      | Used By                                           | Default     | Container                |
 | ------------------------- | ------------------------------------------------- | ----------- | ------------------------ |
-| `NITRO_HTTP_PORT`         | http URLs                                         | `80`        | `nitro-proxy`            |
-| `NITRO_HTTPS_PORT`        | https URLs                                        | `443`       | `nitro-proxy`            |
+| `NITRO_HTTP_PORT`         | HTTP URLs                                         | `80`        | `nitro-proxy`            |
+| `NITRO_HTTPS_PORT`        | HTTPS URLs                                        | `443`       | `nitro-proxy`            |
 | `NITRO_API_PORT`          | gRPC                                              | `5000`      | `nitro-proxy`            |
 | `NITRO_DEFAULT_TLD`       | TLD for auto-suggested site hostnames             | `nitro`     | n/a                      |
 | `NITRO_EDIT_HOSTS`        | Attempt to edit hosts file when applying changes? | `true`      | n/a                      |
 | `NITRO_MAILHOG_SMTP_PORT` | MailHog SMTP                                      | `1025`      | `mailhog.service.nitro`  |
-| `NITRO_NODE_PORT`         | node port                                         | `3000`      | `nitro-proxy`            |
-| `NITRO_ALT_NODE_PORT`     | Alternate node port                               | `3001`      | `nitro-proxy`            |
+| `NITRO_NODE_PORT`         | Node.js port                                      | `3000`      | `nitro-proxy`            |
+| `NITRO_ALT_NODE_PORT`     | Alternate Node.js port                            | `3001`      | `nitro-proxy`            |
 | `NITRO_MAILHOG_HTTP_PORT` | MailHog web interface                             | `8025`      | `mailhog.service.nitro`  |
 | `NITRO_DYNAMODB_PORT`     | DynamoDB server port                              | `8000`      | `dynamodb.service.nitro` |
 | `NITRO_MINIO_PORT`        | MinIO web interface and API                       | `9000`      | `minio.service.nitro`    |

@@ -44,7 +44,7 @@ enable the checking if they have an account with your site already:
 ```twig
 {% if craft.users.email(cart.email).one() %}You are already a user, please log in.{% endif %}
 ```
-Once a user logs in, the cart's customer will switch to be the registered user’s customer record.
+Once a user logs in, the cart’s customer will switch to be the registered user’s customer record.
 
 ## Registering a guest customer as a user
 

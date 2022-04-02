@@ -1,8 +1,8 @@
-# Node & npm
+# Node.js & npm
 
 ## Installing Dependencies
 
-Nitro’s [`npm`](commands.md#npm) command lets you to run any npm command without having Node or npm installed on your host machine.
+Nitro’s [`npm`](commands.md#npm) command lets you to run any npm command without having Node.js or npm installed on your host machine.
 
 ```bash
 $ cd ~/dev/my-craft-project
@@ -19,24 +19,24 @@ found 0 vulnerabilities
 npm install complete 🤘
 ```
 
-### Specifying a Node Version
+### Specifying a Node.js Version
 
-You can specify a node version for Docker image used by the `npm` command:
+You can specify a Node.js version for Docker image used by the `npm` command:
 
 ```bash
 $ nitro npm --version=12 install
 ```
 
-## Configuring Node Server Ports
+## Configuring Node.js Server Ports
 
-If your project runs a node server that needs to be accessed from a web browser, you’ll need to do one of two things:
+If your project runs a Node.js server that needs to be accessed from a web browser, you’ll need to do one of two things:
 
-1. Run the server on your host machine to use whatever ports you’d like. (This means installing node+npm on your machine instead of running it in a Nitro container.)
+1. Run the server on your host machine to use whatever ports you’d like. (This means installing Node.js+npm on your machine instead of running it in a Nitro container.)
 2. Configure the server to use one of Nitro’s available proxy ports.
 
 Nitro provides ports 3000 and 3001 for each site by default. (You can change these ports using Nitro’s [environment variables](customizing.md#nitro-environment-variables).)
 
-Configuring the server usually means you’ll need to provide the site with a base URL for the node server, and instructing the node server itself to utilize a specific hostname and port.
+Configuring the server usually means you’ll need to provide the site with a base URL, and instructing the Node.js server itself to utilize a specific hostname and port.
 
 A webpack configuration using hot module reloading, for example, would need to use port 3000 and `0.0.0.0` instead of `localhost`:
 
@@ -56,5 +56,5 @@ A webpack configuration using hot module reloading, for example, would need to u
 Binding the port to `0.0.0.0` means it will be available on all interfaces, meaning both inside and outside the web container.
 
 ::: tip
-Depending on your front end build setup, you may also need to provide your site with a base URL for the node server. In this case, it would mean changing `http://localhost:8080` to `http://starterblog.nitro:3000`.
+Depending on your front end build setup, you may also need to provide your site with a base URL for the Node.js server. In this case, it would mean changing `http://localhost:8080` to `http://starterblog.nitro:3000`.
 :::

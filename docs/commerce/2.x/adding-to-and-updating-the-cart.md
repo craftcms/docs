@@ -201,7 +201,7 @@ Please note, using the above two methods will only merge previous carts of a log
 
 Calling `craft.commerce.cart.mergedCart` which the user is a guest behaves the same way as `craft.commetce.cart.cart`, so there is no harm in using it on most cart pages.
 
-You might not want to use it on final checkout pages, so that customers don't get confused seeing new items in the cart before payment.
+You might not want to use it on final checkout pages, so that customers don’t get confused seeing new items in the cart before payment.
 
 Before merging, you may want to show the user what will be merged.
 

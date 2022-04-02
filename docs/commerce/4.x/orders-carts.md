@@ -44,7 +44,7 @@ In your templates, you can get the current user’s cart like this:
 {% set cart = craft.commerce.getCarts().getCart() %}
 ```
 
-You could also fetch the cart via AJAX. This example could be added to a Twig template, and outputs the cart data to the browser’s development console:
+You could also fetch the cart via Ajax. This example could be added to a Twig template, and outputs the cart data to the browser’s development console:
 
 ::: code
 ```twig jQuery

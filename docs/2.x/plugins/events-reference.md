@@ -139,7 +139,7 @@ Raised when an update is beginning.
 
 #### Params:
 
-- `type` – A string either set to 'auto' or 'manual' indicating if the update is a manual update or auto-update.
+- `type` – A string either set to `'auto'` or `'manual'` indicating if the update is a manual update or auto-update.
 
 ### updates.onEndUpdate
 

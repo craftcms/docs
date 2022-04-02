@@ -144,4 +144,4 @@ if ($found) {
 }
 ```
 
-It's important to update both your own tables as well as the `commerce_purchasables` table.
+It’s important to update both your own tables as well as the `commerce_purchasables` table.

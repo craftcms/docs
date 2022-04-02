@@ -521,7 +521,7 @@ Event::on(
 
 ### `modifyCartInfo`
 
-The event that’s triggered when a cart is returned as an array for AJAX cart update requests.
+The event that’s triggered when a cart is returned as an array for Ajax cart update requests.
 
 ```php
 use craft\commerce\controllers\BaseFrontEndController;
@@ -925,7 +925,7 @@ Event::on(
         // @var Transaction $transaction
         $transaction = $event->transaction;
 
-        // Notify the warehouse we're ready to ship
+        // Notify the warehouse we’re ready to ship
         // ...
     }
 );

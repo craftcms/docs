@@ -73,7 +73,7 @@ The exact permissions you should be setting depends on the relationship between 
 Here are some recommended permissions depending on that relationship:
 
 * If they are the same user, use `744`.
-* If they're in the same group, then use `774`.
+* If they’re in the same group, then use `774`.
 * If they’re neither the same user nor in the same group, or if you just prefer to live life on the edge, you can use `777`, just please do not do that in a production environment.
 
 ::: tip

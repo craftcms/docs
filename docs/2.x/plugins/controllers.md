@@ -1,6 +1,6 @@
 # Controllers
 
-Generally speaking, controllers are the middlemen between the front end of the CP/website and your plugin’s [services](services.md). They contain **action methods** which handle individual tasks.
+Generally speaking, controllers are the middlemen between the front end of the control panel or site and your plugin’s [services](services.md). They contain **action methods** which handle individual tasks.
 
 A common pattern used throughout Craft involves a controller action gathering post data, saving it on a [model](models.md), passing the model off to a service, and then responding to the request appropriately depending on the service method’s response.
 
@@ -93,7 +93,7 @@ class CocktailRecipes_IngredientsController extends BaseController
             craft()->userSession->setError(Craft::t('Couldn’t save ingredient.'));
 
             // Make the ingredient model available to the template as an 'ingredient' variable,
-            // since it contains the user's dumb input as well as the validation errors.
+            // since it contains the user’s dumb input as well as the validation errors.
             craft()->urlManager->setRouteVariables(array(
                'ingredient' => $ingredient
             ));
@@ -144,7 +144,7 @@ A similar `actionUrl()` function is available to your templates:
 <a href="{{ actionUrl('cocktailRecipes/ingredients/saveIngredient', { id: 10 }) }}">
 ```
 
-And then there’s `Craft.getActionUrl()` for Javascript:
+And then there’s `Craft.getActionUrl()` for JavaScript:
 
 ```javascript
 var url = Craft.getActionUrl('cocktailRecipes/ingredients/saveIngredient', { id: 10 });
@@ -206,7 +206,7 @@ Requires the current request to be sent over POST. We recommend you use this for
 
 ### `$this->requireAjaxRequest()`
 
-Requires the current request to be sent over AJAX.
+Requires the current request to be sent over Ajax.
 
 ### `$this->redirect($url, $terminate = true, $statusCode = 302)`
 

@@ -78,7 +78,7 @@ You’ll use Field Layouts to add and arrange as many Field Types as you need, i
 </div>
 
 ::: tip
-These are the fields that ship with Craft CMS; more are available [in the plugin store](https://plugins.craftcms.com/categories/fields).
+These are the fields that ship with Craft CMS; more are available [in the Plugin Store](https://plugins.craftcms.com/categories/fields).
 :::
 
 ## Modeling a blog

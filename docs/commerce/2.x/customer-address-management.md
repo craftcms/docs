@@ -42,7 +42,7 @@ See <commerce2:craft\commerce\models\Address> to learn about the fields availabl
 
 Including an `address[id]` param with a valid address ID that belongs to the current customer will update that address.
 
-## Deleting a customer's address
+## Deleting a customer’s address
 
 ```twig
 <form method="POST">
@@ -54,4 +54,4 @@ Including an `address[id]` param with a valid address ID that belongs to the cur
 </form>
 ```
 
-Deleting an address that is currently applied as the billing or shipping address of the current customer's cart will result in the addresses on the cart being removed.
+Deleting an address that is currently applied as the billing or shipping address of the current customer’s cart will result in the addresses on the cart being removed.

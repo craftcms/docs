@@ -15,7 +15,7 @@ Before you can create entries, you must create Sections to contain them. In each
 - Which template should get loaded if an entry’s URL is requested
 - What types of entries should be available in the section, and which fields each of those entry types should have
 
-If you're using Craft with multiple sites then you can also define in your Section:
+If you’re using Craft with multiple sites then you can also define in your Section:
 
 - Which sites’ entries in the section should target
 - Which sites are enabled by default for new entries

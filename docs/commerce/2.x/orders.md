@@ -31,7 +31,7 @@ This is short enough to still be unique, and is a little friendlier to customers
 
 The order reference number is generated on cart completion by the ‘Order Reference Number Format’ in general settings.
 
-This number is usually the best to use as the customer facing identifier of the order, but shouldn't be used in URLs.
+This number is usually the best to use as the customer facing identifier of the order, but shouldn’t be used in URLs.
 
 ```twig
 {{ object.reference }}

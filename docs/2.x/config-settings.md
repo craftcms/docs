@@ -8,7 +8,7 @@ Craft comes with a bunch of config settings that give you control over various a
 
 All config settings should be placed within the `array()` in your `craft/config/general.php` file.
 
-For example, if you want to enable Dev Mode and set Craft to use uncompressed Javascript files, your array would look like this:
+For example, if you want to enable Dev Mode and set Craft to use uncompressed JavaScript files, your array would look like this:
 
 ```php
 return array(
@@ -37,7 +37,7 @@ The application ID, which is used for things like storing data caches and user s
 
 ### `cacheDuration`
 
-**Accepts**: A string set to any valid PHP interval specification, or '0' if you wish to cache data indefinitely.
+**Accepts**: A string set to any valid PHP interval specification, or `0` if you wish to cache data indefinitely.
 
 **Default**: `'P1D'` (one day)
 
@@ -73,7 +73,7 @@ The DB, file, Memcache(d), and Redis cache methods each have their own additiona
 
 ### `customAsciiCharMappings`
 
-**Accepts**: An array of key/value pairs mapping character codes to lower ASCII strings
+**Accepts**: An array of key-value pairs mapping character codes to lower ASCII strings
 
 **Default**: `array()` (an empty array)
 
@@ -85,7 +85,11 @@ This array is merged into the default mapping array in <craft2:Craft\StringHelpe
 
 The keys should be the HTML decimal code equivalent of the character to search for and the value is the ASCII character used for swapping.
 
+<!-- textlint-disable terminology -->
+
 For example, the code for `Æ` is `198`. See sites like [Website Builders](https://websitebuilders.com/tools/html-codes/a-z/) to look up additional codes.
+
+<!-- textlint-enable terminology -->
 
 ```php
 'customAsciiCharMappings' => array(
@@ -111,7 +115,7 @@ The default domain name Craft will use when sending cookies to the browser. If i
 
 ### `defaultSearchTermOptions`
 
-**Accepts**: An array of key/value pairs
+**Accepts**: An array of key-value pairs
 
 **Default**: `array('attribute' => null, 'exact' => false, 'exclude' => false, 'subLeft' => false, 'subRight' => false)`
 
@@ -164,7 +168,7 @@ The number representing the default Week Start Day preference value for new user
 
 ### `environmentVariables`
 
-**Accepts**: An array of key/value string pairs
+**Accepts**: An array of key-value string pairs
 
 **Default**: `array()` (an empty array)
 
@@ -385,7 +389,7 @@ Tells Craft whether to surround all strings that are ran through `Craft::t()` or
 
 **Since**: Craft 1.0
 
-Tells Craft whether to use compressed Javascript files whenever possible, to cut down on page load times.
+Tells Craft whether to use compressed JavaScript files whenever possible, to cut down on page load times.
 
 ```php
 'useCompressedJs' => false,
@@ -563,7 +567,7 @@ If this is set to `'auto'`, it will resolve to `true` or `false` depending on wh
 If set to `true`, the following request parameters will need to be hashed to ensure they weren’t tampered with:
 
 - all `redirect` parameters
-- possibly 3rd party plugin parameters
+- possibly third-party plugin parameters
 
 ```php
 'validateUnsafeRequestParams' => true,

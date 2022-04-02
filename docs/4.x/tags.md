@@ -8,7 +8,7 @@ Before you can create tags, you must create Tag Groups to contain them.
 
 To create a new tag group, go to Settings → Tags and click New Tag Group.
 
-Each tag group holds a unique set of tags, and lets you define a custom set of [fields](fields.md) that should be available to tags within the group. However, you don't need to assign any fields to the Tag Group Field Layout in order to use the group.
+Each tag group holds a unique set of tags, and lets you define a custom set of [fields](fields.md) that should be available to tags within the group. However, you don’t need to assign any fields to the Tag Group Field Layout in order to use the group.
 
 ## Assigning Tags
 

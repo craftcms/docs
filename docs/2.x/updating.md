@@ -13,7 +13,7 @@ For one-click updates to work, your craft/app folder and all its enclosed files 
 Here are some recommended permissions depending on that relationship:
 
 * If they are the same user, use `744`.
-* If they're in the same group, then use `774`.
+* If they’re in the same group, then use `774`.
 * Otherwise, use `777`.
 
 

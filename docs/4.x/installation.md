@@ -141,12 +141,12 @@ Create a new web server to host your Craft project. Its document root (or “web
 See [Moving Craft’s Files Below the Webroot](https://craftcms.com/knowledge-base/moving-craft-files) if your hosting setup does not allow Craft’s files to exist outside the webroot.
 :::
 
-If you’re not using [Nitro](/nitro/2.x/) or another local hosting tool, you’ll probably need to update your `hosts` file so your computer knows to route your chosen host name’s requests locally.
+If you’re not using [Nitro](/nitro/2.x/) or another local hosting tool, you’ll probably need to update your `hosts` file so your computer knows to route your chosen hostname’s requests locally.
 
 - **macOS/Linux/Unix**: `/etc/hosts`
 - **Windows**: `\Windows\System32\drivers\etc\hosts`
 
-You can test whether you set everything up correctly by pointing your web browser to `https://<Hostname>/index.php?p=admin/install` (substituting `<Hostname>` with your web server’s host name). If Craft’s Setup Wizard is shown, the host name is correctly resolving to your Craft installation.
+You can test whether you set everything up correctly by pointing your web browser to `https://<Hostname>/index.php?p=admin/install` (substituting `<Hostname>` with your web server’s hostname). If Craft’s Setup Wizard is shown, the hostname is correctly resolving to your Craft installation.
 
 ::: tip
 We recommend using the `.test` TLD for local development, and specifically not `.local` on macOS since [conflicts with Bonjour can lead to performance issues](https://help.rm.com/technicalarticle.asp?cref=tec3015691).
@@ -172,7 +172,7 @@ The command will ask you a few questions to learn how to connect to your databas
 
 ### Web Browser Setup
 
-In your web browser, go to `https://mysite.test/index.php?p=admin/install` (substituting `mysite.test` with your web server’s host name). If you’ve done everything right so far, you should be greeted by Craft’s Setup Wizard:
+In your web browser, go to `https://mysite.test/index.php?p=admin/install` (substituting `mysite.test` with your web server’s hostname). If you’ve done everything right so far, you should be greeted by Craft’s Setup Wizard:
 
 <BrowserShot url="https://mysite.test/admin/install" :link="false">
 <img src="./images/installation-step-0.png" alt="Craft Installation Screen">

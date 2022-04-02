@@ -109,7 +109,7 @@ When creating a Manual payment method, you must select the payment type to be �
 
 The “Worldpay JSON” gateway is the newly recommended modern gateway API for Worldpay. The “Worldpay” gateway below is the older offsite gateway API.
 
-The Worldpay JSON gateway uses client side JavaScript `worldpay.js` on your payment template page to generate a token representing the credit card. This token can be passed to the standard `commerce/payments/pay` form action like the Stripe gateway.
+The Worldpay JSON gateway uses client-side JavaScript `worldpay.js` on your payment template page to generate a token representing the credit card. This token can be passed to the standard `commerce/payments/pay` form action like the Stripe gateway.
 
 You have the option of a simple implementation using the `worldpay.js` “Template Form” documented [here](https://developer.worldpay.com/jsonapi/docs/template-form), and a more advanced customized implementation called “Own Form” documented [here](https://developer.worldpay.com/jsonapi/docs/own-form).
 

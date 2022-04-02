@@ -2,7 +2,7 @@
 
 The word “stack” refers to the web software that’s needed to work with Craft CMS, which is detailed in [Craft’s minimum requirements](/3.x/requirements.md).
 
-Like your workstation, a web server can run different operating systems and apps. Web servers, however, use an OS and software specifically for running websites. Common bundles of web software are referred to as “stacks.” (You’ve probably heard of a “full stack developer”, which means someone having experience with each of the software components of a particular stack.)
+Like your workstation, a web server can run different operating systems and apps. Web servers, however, use an OS and software specifically for running sites. Common bundles of web software are referred to as “stacks.” (You’ve probably heard of a “full stack developer”, which means someone having experience with each of the software components of a particular stack.)
 
 Craft can run on a few different stacks, but the main ingredients are...
 
@@ -10,7 +10,12 @@ Craft can run on a few different stacks, but the main ingredients are...
 - **A database** – place where content is stored, sort of like a collection of Excel files used by code that can work with lots of data quickly. Commonly MySQL or PostgreSQL.
 - **A web server** – software that listens for requests made by your web browser, hands them off to a web application (like Craft), and gives a response back to the browser. Commonly Apache or nginx.
 
+<!-- textlint-disable -->
+<!-- this “walk through” is a legitimate compound verb -->
+
 The best way to get working quickly is to use a pre-packaged web stack that runs on your operating system. We’ll walk through setup using [Craft Nitro](/nitro/2.x/), a tool for managing your local development environment on macOS, Windows, and Linux.
+
+<!-- textlint-enable -->
 
 ## Why Nitro?
 

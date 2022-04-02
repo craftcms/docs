@@ -28,11 +28,11 @@ If you are using Craft 3.5 or later, or are using [the `projectConfig` config op
 
 ## Namespacing
 
-Craft namespaces it's tests under one separate root namespace and then expands per test subject. I.E. Unit tests are namespaced under `crafttests\unit` while functional tests are namespaced under `crafttests\functional`. It is advised to apply this same convention to your tests. If you are testing a module or plugin you may want to provide support resources for testing, it is advised to namespace these using `my\plugin\namespace\test`. This is exactly how Craft does it as well. See the [element fixtures](../testing-craft/fixtures.md) as an example.
+Craft namespaces its tests under one separate root namespace and then expands per test subject. I.E. Unit tests are namespaced under `crafttests\unit` while functional tests are namespaced under `crafttests\functional`. It is advised to apply this same convention to your tests. If you are testing a module or plugin you may want to provide support resources for testing, it is advised to namespace these using `my\plugin\namespace\test`. This is exactly how Craft does it as well. See the [element fixtures](../testing-craft/fixtures.md) as an example.
 
 ## Quick Setup via Console Command
 
-If you have a general understanding of the typical Craft testing setup, you can use the `tests/setup` console command which will do all of the important setup work for you. It will copy from Craft's `src/test/internal/example-test-suite` folder to either your project's root directory or a directory path of your choosing. All you then have to do is:
+If you have a general understanding of the typical Craft testing setup, you can use the `tests/setup` console command which will do all of the important setup work for you. It will copy from Craft’s `src/test/internal/example-test-suite` folder to either your project’s root directory or a directory path of your choosing. All you then have to do is:
 
 - Install Codeception with `composer require codeception/codeception`.
 - Run `codecept build`.

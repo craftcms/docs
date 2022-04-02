@@ -36,7 +36,7 @@ Double-clicking on a category will bring up a modal that lets you edit its name,
 When you create a category, you have the following options:
 
 - Fill out the category fields (if you didn't define any then the only field available will be Title)
-- Edit the slug (it's automatically populated based on the title).
+- Edit the slug (it’s automatically populated based on the title).
 - Choose a Parent category. The new category will have a hierarchical relationship with its parent. This is helpful for creating taxonomies with multiple levels. You also have the option of creating a new category while assigning the Parent.
 
 ::: tip

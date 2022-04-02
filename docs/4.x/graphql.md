@@ -1135,7 +1135,7 @@ Formats a money object to the desired format. It can be applied to any fields, b
 
 <!-- END DIRECTIVES -->
 
-## Pre-defined interfaces
+## Predefined interfaces
 Craft defines several interfaces to be implemented by the different GraphQL types.
 
 <!-- BEGIN INTERFACES -->
@@ -1167,11 +1167,11 @@ This is the interface implemented by all assets.
 | `filename`| `String!` | The filename of the asset file.
 | `extension`| `String!` | The file extension for the asset file.
 | `hasFocalPoint`| `Boolean!` | Whether a user-defined focal point is set on the asset.
-| `focalPoint`| `[Float]` | The focal point represented as an array with `x` and `y` keys, or null if it's not an image.
+| `focalPoint`| `[Float]` | The focal point represented as an array with `x` and `y` keys, or null if it’s not an image.
 | `kind`| `String!` | The file kind.
 | `size`| `String` | The file size in bytes.
-| `height`| `Int` | The height in pixels or null if it's not an image.
-| `width`| `Int` | The width in pixels or null if it's not an image.
+| `height`| `Int` | The height in pixels or null if it’s not an image.
+| `width`| `Int` | The width in pixels or null if it’s not an image.
 | `img`| `String` | An `<img>` tag based on this asset.
 | `srcset`| `String` | Returns a `srcset` attribute value based on the given widths or x-descriptors.
 | `url`| `String` | The full URL of the asset. This field accepts the same fields as the `transform` directive.
