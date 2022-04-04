@@ -1010,6 +1010,10 @@ You can also use a regular expression to search for matches by starting and endi
 {{ tag.title|lower|replace('/[^\\w]+/', '-') }}
 ```
 
+::: tip
+Any backslashes in the regular expression will need to be double-escaped '`\\`' for them to work properly.
+:::
+
 ## `rss`
 
 Outputs a date in the format required for RSS feeds (`D, d M Y H:i:s O`).
