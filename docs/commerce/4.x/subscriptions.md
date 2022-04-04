@@ -100,7 +100,7 @@ Subscription queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
-| Param                                     | Description
+<!-- textlint-disable -->| Param                                     | Description
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only subscriptions that are related to certain other elements.
@@ -141,7 +141,7 @@ Subscription queries support the following parameters:
 | [user](#user)                             | Narrows the query results based on the subscriptions’ user accounts.
 | [userId](#userid)                         | Narrows the query results based on the subscriptions’ user accounts’ IDs.
 | [with](#with)                             | Causes the query to return matching subscriptions eager-loaded with related elements.
-
+<!-- textlint-enable -->
 #### `afterPopulate`
 
 Performs any post-population processing on elements.
