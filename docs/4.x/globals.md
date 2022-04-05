@@ -102,6 +102,10 @@ Global set queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
@@ -129,6 +133,10 @@ Global set queries support the following parameters:
 | [uid](#uid)                               | Narrows the query results based on the global sets’ UIDs.
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
 | [with](#with)                             | Causes the query to return matching global sets eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
