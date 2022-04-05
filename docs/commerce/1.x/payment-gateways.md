@@ -49,7 +49,7 @@ Additional Omnipay gateways can be added to Craft Commerce. They require the cre
 
 ## Storing config outside of the database
 
-If you do not wish to store your payment gateway config information in the database (which could include secret API keys), you can override the values of a payment method’s settings by placing a `paymentMethodSettings` key into your `commerce.php` config file. You then use the payment method's ID  as the key to the config for that payment method.
+If you do not wish to store your payment gateway config information in the database (which could include secret API keys), you can override the values of a payment method’s settings by placing a `paymentMethodSettings` key into your `commerce.php` config file. You then use the payment method’s ID as the key to the config for that payment method.
 
 ```php
 return [
