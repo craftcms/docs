@@ -20,7 +20,7 @@ See <commerce2:craft\commerce\models\Customer> to learn about the methods availa
 
 See <commerce2:craft\commerce\models\Address> to learn about the fields available on an address.
 
-## Get a specific address belonging to the current customer by its id
+## Get a specific address belonging to the current customer by its ID
 
 ```twig
 {% set address = craft.commerce.customer.getAddressById(id) %}
