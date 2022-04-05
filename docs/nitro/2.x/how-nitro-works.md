@@ -54,7 +54,7 @@ When you create a Nitro site, you map a directory on your machine—like `/Users
 | `/Users/oli/dev/my-project/web`        | `/app/web`           |
 | `/Users/oli/dev/my-project/web/assets` | `/app/web/assets`    |
 
-This is what happens by default; if you configure your Nitro site with a higher path and deeper webroot…
+This is what happens by default; if you configure your Nitro site with a higher path and deeper web root…
 
 ```yaml
 path: ~/dev

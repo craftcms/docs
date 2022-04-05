@@ -138,7 +138,7 @@ If you’re given a choice, we recommend the following database settings in most
 Create a new web server to host your Craft project. Its document root (or “web root”) should point to your `web/` directory (or whatever you’ve renamed it to).
 
 ::: tip
-See [Moving Craft’s Files Below the Webroot](https://craftcms.com/knowledge-base/moving-craft-files) if your hosting setup does not allow Craft’s files to exist outside the webroot.
+See [Moving Craft’s Files Below the Web Root](https://craftcms.com/knowledge-base/moving-craft-files) if your hosting setup does not allow Craft’s files to exist outside the web root.
 :::
 
 If you’re not using [Nitro](/nitro/2.x/) or another local hosting tool, you’ll probably need to update your `hosts` file so your computer knows to route your chosen hostname’s requests locally.
