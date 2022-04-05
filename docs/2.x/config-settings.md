@@ -201,7 +201,7 @@ Overrides the “System Status” setting in Settings → General if set to `tru
 
 **Accepts**: A valid method name, callable, or function.
 
-**Default**: 'var_export'
+**Default**: `'var_export'`
 
 **Since**: Craft 2.3
 
@@ -538,7 +538,7 @@ The query string parameter name that Craft should use for system tokens.
 
 **Since**: Craft 2.6.2793
 
-Whether tokenized URLs (email verification links, entry draft sharing links, etc.) should begin with https or not. When set to `'auto'`, https will be used if either the base site URL or the current URL have https.
+Whether tokenized URLs (email verification links, entry draft sharing links, etc.) should begin with `https`. When set to `'auto'`, `https` will be used if either the base site URL or the current URL have `https`.
 
 ```php
 'useSslOnTokenizedUrls' => true,
@@ -727,11 +727,11 @@ Explicitly sets the base URL to the Control Panel, which may be used if the dyna
 
 **Accepts**: A string set to any valid URI segment
 
-**Default**: 'admin'
+**Default**: `'admin'`
 
 **Since**: Craft 1.0
 
-The URI segment Craft should look for when determining if the current request should route to the CP rather than the front-end website.
+The URI segment Craft should look for when determining if the current request should route to the control panel rather than the front-end site.
 
 ```php
 'cpTrigger' => 's3cret',
@@ -818,7 +818,7 @@ The URI segment Craft should look for when determining if the current request sh
 ```
 
 ::: tip
-The default resourceTrigger value changed in Craft 2.0. In Craft 1.x it was 'resources'.
+The default resourceTrigger value changed in Craft 2.0. In Craft 1.x it was `'resources'`.
 :::
 
 ### `slugWordSeparator`
@@ -931,7 +931,7 @@ The template filenames Craft will look for within a directory to represent the d
 
 **Since**: Craft 2.0
 
-The prefix that can be placed before a template folder/file name to forbid direct HTTP traffic to it.
+The prefix that can be placed before a template folder/filename to forbid direct HTTP traffic to it.
 
 ```php
 'privateTemplateTrigger' => "."
@@ -1361,7 +1361,7 @@ A list of file extensions that Craft will allow when a user is uploading files. 
 
 **Since**: Craft 2.4
 
-Whether Craft should convert any non-ASCII characters in uploaded file names to ASCII.
+Whether Craft should convert any non-ASCII characters in uploaded filenames to ASCII.
 
 ```php
 'convertFilenamesToAscii' => true,
