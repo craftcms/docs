@@ -113,4 +113,4 @@ after_script:
 ```
 
 After tests are done executing, if `TASK_TESTS_COVERAGE` is set, we upload the code
-coverage reports to a 3rd party service, [https://codecov.io](https://codecov.io/gh/craftcms/cms).
+coverage reports to a third-party service, [https://codecov.io](https://codecov.io/gh/craftcms/cms).
