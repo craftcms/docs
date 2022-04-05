@@ -1561,7 +1561,7 @@ Defined by
 
 Whether generated URLs should omit `index.php` (e.g. `http://domain.com/path` instead of `http://domain.com/index.php/path`)
 
-This can only be possible if your server is configured to redirect would-be 404's to `index.php`, for example, with the redirect found
+This can only be possible if your server is configured to redirect would-be 404s to `index.php`, for example, with the redirect found
 in the `.htaccess` file that came with Craft:
 
 ```
