@@ -222,8 +222,8 @@ Raised when any element merged with another element.
 
 #### Params:
 
-- `mergedElementId` – The id of the element being merged.
-- `prevailingElementId` – The id of the element that prevailed in the merge.
+- `mergedElementId` – The ID of the element being merged.
+- `prevailingElementId` – The ID of the element that prevailed in the merge.
 
 ### structures.onBeforeMoveElement
 
@@ -1134,7 +1134,7 @@ Raised towards the end of a public user registration request before a user is as
 #### Params:
 
 - `user` – A <craft2:Craft\UserModel> object representing the user that was just registered.
-- `defaultGroupId` – The id of the user group that the user is about to be assigned to.
+- `defaultGroupId` – The ID of the user group that the user is about to be assigned to.
 
 ### userGroups.onAssignUserToDefaultGroup
 
@@ -1147,4 +1147,4 @@ Raised towards the end of a public user registration request after a user is ass
 #### Params:
 
 - `user` – A <craft2:Craft\UserModel> object representing the user that was just registered.
-- `defaultGroupId` – The id of the user group that the user was just assigned to.
+- `defaultGroupId` – The ID of the user group that the user was just assigned to.
