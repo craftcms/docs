@@ -1243,6 +1243,30 @@ This can also be set to `false` to disable database backups completely.
 
 
 
+### `buildId`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$buildId](craft4:craft\config\GeneralConfig::$buildId)
+
+Since
+:  4.0.0
+
+</div>
+
+A unique ID representing the current build of the codebase.
+
+This should be set to something unique to the deployment, e.g. a Git SHA or a deployment timestamp.
+
+
+
 ### `defaultCookieDomain`
 
 <div class="compact">
@@ -1857,7 +1881,7 @@ Defined by
 </div>
 
 Determines what protocol/schema Craft will use when generating tokenized URLs. If set to `'auto'`, Craft will check the
-current site’s base URL and the protocol of the current request and if either of them are https will use `https` in the tokenized URL. If not,
+current site’s base URL and the protocol of the current request and if either of them are HTTPS will use `https` in the tokenized URL. If not,
 will use `http`.
 
 If set to `false`, Craft will always use `http`. If set to `true`, then, Craft will always use `https`.
