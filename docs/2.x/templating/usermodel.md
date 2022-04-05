@@ -84,7 +84,7 @@ Alias of [getPrev](#getprev).
 
 ### `status`
 
-The user’s status ('active', 'locked', 'suspended', 'pending', 'archived').
+The user’s status (`'active'`, `'locked'`, `'suspended'`, `'pending'`, `'archived'`).
 
 ### `username`
 
