@@ -20,7 +20,7 @@ Otherwise, use 777.
 
 If you’re manually updating a live site, we recommend you follow these instructions to minimize the time your site is down:
 
-1. Backup your entire Craft database.
+1. Back up your entire Craft database.
 2. Rename the `plugins/commerce/` folder in the latest release zip to `commerce-new`.
 3. Upload `plugins/commerce-new/` to the `craft/plugins/` folder on your server, alongside the old `plugins/commerce/` folder.
 4. Once `commerce-new` is done uploading proceed to the next step.
