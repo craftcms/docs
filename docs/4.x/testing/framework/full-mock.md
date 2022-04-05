@@ -39,11 +39,11 @@ containing sub-arrays which meet the following specifications:
 - `array` An array containing, in the mentioned order:
   - `string` The name of the method used to access this service. I.E if you access
   your module/plugin’s service as follows: `MyModule::getInstance()->getMyService()`
-  you would enter 'getMyService' for this parameter. Leave null if you don’t access
+  you would enter `getMyService` for this parameter. Leave null if you don’t access
   your module/plugin via methods.
   - `string` The property name used to access this service. I.E
   if you access your module/plugin’s service as follows:
-   `MyModule::getInstance()->myService` you would enter 'myService' in this parameter.
+   `MyModule::getInstance()->myService` you would enter `myService` in this parameter.
    Leave null if not applicable.
 
 The parameters must be entered in the order as mentioned above.
