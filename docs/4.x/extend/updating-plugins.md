@@ -53,7 +53,8 @@ If you decide to use PHPStan and/or ECS, we recommend doing it in the following 
 
 1. Run PHPStan on your existing Craft 3 codebase and apply the greatest level of fixes you’re comfortable with.
 2. Run Craft’s [Rector](#rector) rules to prep a bunch of your code for Craft 4.
-3. Run PHPStan again to identify issues and opportunities specifically related to Craft 4 changes.
+3. Update your `craftcms/cms` requirement to `^4.0.0-beta.1` and run `composer update`.
+4. Run PHPStan again to identify issues and opportunities specifically related to Craft 4 changes.
 
 ## Rector
 
