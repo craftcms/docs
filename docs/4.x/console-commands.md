@@ -728,7 +728,7 @@ Runs the install migration.
 
 
 --language
-: The default langcode for the first site to create during install.
+: The default language for the first site to create during install.
 
 
 
