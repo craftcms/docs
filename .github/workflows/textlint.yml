@@ -6,15 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-      - name: Reconfigure Git to use HTTP authentication
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
       - uses: actions/setup-node@v2
         with:
-          node-version: "14.x"
+          node-version: "16.x"
       - name: Install dependencies
         run: npm ci
       - name: Run textlint
