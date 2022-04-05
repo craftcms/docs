@@ -60,6 +60,10 @@ User queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [admin](#admin)                           | Narrows the query results to only users that have admin accounts.
@@ -98,6 +102,10 @@ User queries support the following parameters:
 | [username](#username)                     | Narrows the query results based on the users’ usernames.
 | [with](#with)                             | Causes the query to return matching users eager-loaded with related elements.
 | [withGroups](#withgroups)                 | Causes the query to return matching users eager-loaded with their user groups.
+
+
+<!-- textlint-enable -->
+
 
 #### `admin`
 
