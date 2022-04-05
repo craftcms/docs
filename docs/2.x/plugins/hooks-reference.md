@@ -220,7 +220,7 @@ Called by
 
 Return
 
-:   An array of CP alerts, or `null` if there are no alerts to display.
+:   An array of control panel alerts, or `null` if there are no alerts to display.
 
 Gives plugins a chance to register new control panel alerts.
 
@@ -235,8 +235,8 @@ public function getCpAlerts($path, $fetch)
 
 The hook is passed the following arguments:
 
-* **`$path`** – The path to the main CP page that the alert will be displayed on. (This won’t nceessarily be the same as <craft2:Craft\HttpRequestService::getPath()> because getCpAlerts() is often called over Ajax after the main page has loaded.)
-* **`$fetch`** – Whether the method can create HTTP requests when determining if it should display alerts. When this is `false`, if the alerts can not be determined without an HTTP request, `null` should be returned, so the method does not significantly impact CP page load times.
+* **`$path`** – The path to the main control panel page that the alert will be displayed on. (This won’t nceessarily be the same as <craft2:Craft\HttpRequestService::getPath()> because getCpAlerts() is often called over Ajax after the main page has loaded.)
+* **`$fetch`** – Whether the method can create HTTP requests when determining if it should display alerts. When this is `false`, if the alerts can not be determined without an HTTP request, `null` should be returned, so the method does not significantly impact control panel page load times.
 
 ## Routing Hooks
 
@@ -248,9 +248,9 @@ Called by
 
 Return
 
-:   An array of CP routes.
+:   An array of control panel routes.
 
-Gives plugins a chance to register their own CP routes.
+Gives plugins a chance to register their own control panel routes.
 
 ```php
 public function registerCpRoutes()

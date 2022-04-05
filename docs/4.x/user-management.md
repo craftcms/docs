@@ -42,8 +42,8 @@ The permissions Craft comes with are:
 | Permission | Handle
 | ---------- | ------
 | Access the site when the system is off | `accessSiteWhenSystemIsOff`
-| Access the CP | `accessCp`
-| ↳&nbsp; Access the CP when the system is off | `accessCpWhenSystemIsOff`
+| Access the control panel | `accessCp`
+| ↳&nbsp; Access the control panel when the system is off | `accessCpWhenSystemIsOff`
 | ↳&nbsp; Perform Craft and plugin updates | `performUpdates`
 | ↳&nbsp; Access _[Plugin Name]_ | `accessPlugin-[PluginHandle]`
 | Edit users | `editUsers`

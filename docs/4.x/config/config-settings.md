@@ -3229,7 +3229,7 @@ Since
 
 </div>
 
-Whether GraphQL introspection queries are allowed. Defaults to `true` and is always allowed in the CP.
+Whether GraphQL introspection queries are allowed. Defaults to `true` and is always allowed in the control panel.
 
 
 

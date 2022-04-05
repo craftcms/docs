@@ -12,7 +12,7 @@ Here is an outline of what that entails:
 
 1. **Is it a resource request?**
 
-   Resource request URIs begin with `cpresources/` (or whatever your <config2:resourceTrigger> config setting is set to). They are used to serve CP resources, user photos, etc..
+   Resource request URIs begin with `cpresources/` (or whatever your <config2:resourceTrigger> config setting is set to). They are used to serve control panel resources, user photos, etc..
 
 2. **Is it an action request?**
 

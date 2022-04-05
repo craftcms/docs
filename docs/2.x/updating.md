@@ -2,9 +2,9 @@
 
 ## One-click Updating
 
-When an update is available, users with the permission to update Craft will see a badge in the CP header. Clicking on that badge will take you to a page that shows the release notes of all the available updates.
+When an update is available, users with the permission to update Craft will see a badge in the control panel header. Clicking on that badge will take you to a page that shows the release notes of all the available updates.
 
-You can get to that page at any time by clicking the “Check for updates” link in the CP footer as well. Whenever you go to the page, whether Craft thinks updates are available or not, the page will clear its cache and re-check for available updates.
+You can get to that page at any time by clicking the “Check for updates” link in the control panel footer as well. Whenever you go to the page, whether Craft thinks updates are available or not, the page will clear its cache and re-check for available updates.
 
 At the top of the page there is an “Update” button. Clicking that will initiate Craft’s self-updating process.
 

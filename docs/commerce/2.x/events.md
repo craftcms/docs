@@ -273,7 +273,7 @@ Event::on(OrderHistories::class, OrderHistories::EVENT_ORDER_STATUS_CHANGE, func
 
 ### The `defaultOrderStatus` event
 
-You may set the `orderStatus` property to a desired OrderStatus to override the default status set in CP
+You may set the `orderStatus` property to a desired OrderStatus to override the default status set in the control panel.
 
 Plugins can get notified when a default order status is being fetched
 
@@ -283,7 +283,7 @@ use craft\commerce\services\OrderStatuses;
 use yii\base\Event;
 
 Event::on(OrderStatuses::class, OrderStatuses::EVENT_DEFAULT_ORDER_STATUS, function(DefaultOrderStatusEvent $e) {
-    // Do something - perhaps figure out a better default order statues than the one set in CP
+    // Do something - perhaps figure out a better default order statues than the one set in the control panel
 });
 ```
 

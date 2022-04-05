@@ -175,7 +175,7 @@ If the plugin has database tables, returns the database schema version number fo
 
 #### `hasCpSection()`:
 
-Returns whether the plugin should get its own tab in the CP header. (See [templates](templates.md) for information on that.)
+Returns whether the plugin should get its own tab in the control panel header. (See [templates](templates.md) for information on that.)
 
 #### `onAfterInstall()`:
 

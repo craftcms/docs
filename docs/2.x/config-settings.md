@@ -1153,7 +1153,7 @@ The number of invalid login attempts Craft will allow within the specified durat
 
 The path that users should be redirected to after logging in from the control panel.
 
-This setting will also come into effect if the user visits the CP’s Login page when they are already logged in, or the CP’s root URL (e.g. /admin).
+This setting will also come into effect if the user visits the control panel’s Login page when they are already logged in, or the control panel’s root URL (e.g. /admin).
 
 ```php
 'postCpLoginRedirect' => 'entries',
@@ -1197,7 +1197,7 @@ The amount of time to wait before Craft purges pending users from the system tha
 
 **Since**: Craft 1.0
 
-The amount of time Craft will remember a username and pre-populate it on the CP login page.
+The amount of time Craft will remember a username and pre-populate it on the control panel login page.
 
 Set to `false` to disable this feature altogether.
 
