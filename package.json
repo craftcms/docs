@@ -26,7 +26,7 @@
     "textlint": "^12.1.1",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-apostrophe": "^2.0.0",
-    "textlint-rule-linkable-params": "https://git@github.com/craftcms/textlint-rule-linkable-params.git",
+    "textlint-rule-linkable-params": "docs/.vuepress/theme/textlint-rule-linkable-params",
     "textlint-rule-no-todo": "^2.0.1",
     "textlint-rule-terminology": "^2.1.5",
     "v-tooltip": "^2.1.3",
