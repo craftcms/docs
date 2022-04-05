@@ -1,6 +1,6 @@
 # Globals
 
-Globals store content that is available globally throughout your templates. They're a convenient way to make non-Entry content easily editable via the control panel.
+Globals store content that is available globally throughout your templates. They’re a convenient way to make non-Entry content easily editable via the control panel.
 
 Craft organizes Globals into Global Sets. Each Global Set has its own [field layout](fields.md#field-layouts) using any of the existing fields or new fields.
 
