@@ -297,6 +297,8 @@ Some template functions have been removed completely:
 
 Some template functions have been deprecated in Craft 3, and will be completely removed in Craft 4:
 
+<!-- textlint-disable -->
+
 | Old Template Function                                   | What to do instead
 | ------------------------------------------------------- | ---------------------------------------------
 | `round(num)`                                            | `num|round`
@@ -413,11 +415,15 @@ Some template functions have been deprecated in Craft 3, and will be completely 
 | `craft.session.getFlash()`                              | `craft.app.session.getFlash()`
 | `craft.session.hasFlash()`                              | `craft.app.session.hasFlash()`
 
+<!-- textlint-enable -->
+
 *<sup>1</sup> `craft.app.request.isLivePreview` is also deprecated, and only will return `true` when previewing categories or plugin-supplied element types that don’t support the new previewing system. If you were calling this to work around Craft templating bugs in Live Preview requests, you can simply delete the condition now, and treat Live Preview requests the same as any other request type.*
 
 ## Date Formatting
 
 Craft’s extended DateTime class has been removed in Craft 3. Here’s a list of things you used to be able to do in your templates, and what the Craft 3 equivalent is. (The DateTime object is represented by the `d` variable. In reality it could be `entry.postDate`, `now`, etc.)
+
+<!-- textlint-disable -->
 
 | Old                               | New
 | --------------------------------- | ----------------------------------
@@ -442,6 +448,8 @@ Craft’s extended DateTime class has been removed in Craft 3. Here’s a list o
 | `{{ d.w3c() }}`                   | `{{ d|date('Y-m-d\\TH:i:sP') }}`
 | `{{ d.w3cDate() }}`               | `{{ d|date('Y-m-d') }}`
 | `{{ d.year() }}`                  | `{{ d|date('Y') }}`
+
+<!-- textlint-enable -->
 
 ## Currency Formatting
 
