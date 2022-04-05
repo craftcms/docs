@@ -34433,13 +34433,13 @@
         "class": "craft\\services\\Content",
         "name": "EVENT_BEFORE_SAVE_CONTENT",
         "type": "craft\\events\\ElementContentEvent",
-        "desc": "The event that is triggered before an element's content is saved."
+        "desc": "The event that is triggered before an element’s content is saved."
     },
     {
         "class": "craft\\services\\Content",
         "name": "EVENT_AFTER_SAVE_CONTENT",
         "type": "craft\\events\\ElementContentEvent",
-        "desc": "The event that is triggered after an element's content is saved."
+        "desc": "The event that is triggered after an element’s content is saved."
     },
     {
         "class": "craft\\services\\Dashboard",
@@ -35543,13 +35543,13 @@
         "class": "craft\\services\\Users",
         "name": "EVENT_BEFORE_VERIFY_EMAIL",
         "type": "craft\\events\\UserEvent",
-        "desc": "The event that is triggered before a user's email is verified."
+        "desc": "The event that is triggered before a user’s email is verified."
     },
     {
         "class": "craft\\services\\Users",
         "name": "EVENT_AFTER_VERIFY_EMAIL",
         "type": "craft\\events\\UserEvent",
-        "desc": "The event that is triggered after a user's email is verified."
+        "desc": "The event that is triggered after a user’s email is verified."
     },
     {
         "class": "craft\\services\\Users",
