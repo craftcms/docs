@@ -16,7 +16,12 @@
         ["(\\s)jpg", "JPG"],
         ["(\\s)gif", "GIF"],
         ["(\\s)html", "HTML"],
-        ["(\\s)css", "CSS"]
+        ["(\\s)css", "CSS"],
+        ["gray", "grey"],
+        ["sub-folder", "subfolder"],
+        ["CP", "control panel"],
+        ["e-commerce", "ecommerce"],
+        ["web-?root", "web root"]
       ],
       "exclude": [
         "front[- ]end(\\w*)",
