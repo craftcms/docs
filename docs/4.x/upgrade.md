@@ -175,6 +175,8 @@ Twig 3 also removed support for the `if` param in `{% for %}` tags, but you can 
 
 Some template functions have been removed completely:
 
+<!-- textlint-disable -->
+
 | Old Template Function | What to do instead
 | --------------------- | -------------------
 | `getCsrfInput()`      | `csrfInput()`
@@ -201,6 +203,8 @@ Some template functions have been removed completely:
 | `day()`               | `|date('j')`
 | `nice()`              | `|dateTime('short')`
 | `uiTimestamp()`       | `|timestamp('short')`
+
+<!-- textlint-enable -->
 
 ## Template Variables
 
