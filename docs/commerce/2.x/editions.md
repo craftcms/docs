@@ -14,7 +14,7 @@ The Pro edition has the following features that Lite does not:
 
 ## Lite
 
-The Lite edition of Craft Commerce is designed for websites that just need the basics. For things like one-off product sales or subscriptions, where complex tax and shipping rules, promotion management, and shopping carts would be overkill.
+The Lite edition of Craft Commerce is designed for sites that just need the basics. For things like one-off product sales or subscriptions, where complex tax and shipping rules, promotion management, and shopping carts would be overkill.
 
 The Lite edition has the following limitations that the Pro edition does not:
 
