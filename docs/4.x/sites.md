@@ -105,7 +105,7 @@ In the settings for each Channel Section is an option to propagate entries in th
 
 When enabled, Craft will create the new entry in each site enabled for that section using the submitted content.
 
-If you would like the section's content to be separate then disable this option for that section.
+If you would like the section’s content to be separate then disable this option for that section.
 
 ## Setting Up a New Site
 
@@ -176,7 +176,7 @@ Craft will allow you to update this field’s content in each entry on a per-lan
 
 ### Step 4: Update Your Templates
 
-If you have any templates that you only want to serve from a specific site, you can create a new subfolder in your templates folder, named after your site's handle, and place the templates in there.
+If you have any templates that you only want to serve from a specific site, you can create a new subfolder in your templates folder, named after your site’s handle, and place the templates in there.
 
 For example, if you wanted to give your German site its own homepage template, you might set your templates folder up like this:
 
