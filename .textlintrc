@@ -5,6 +5,7 @@
   "rules": {
     "apostrophe": true,
     "no-todo": true,
+    "linkable-params": true,
     "terminology": {
       "defaultTerms": true,
       "skip": ["Image", "Code"],
@@ -17,6 +18,7 @@
         ["(\\s)gif", "GIF"],
         ["(\\s)html", "HTML"],
         ["(\\s)css", "CSS"],
+        ["(\\s)url", "URL"],
         ["gray", "grey"],
         ["sub-folder", "subfolder"],
         ["CP", "control panel"],
@@ -32,7 +34,10 @@
         "JPG",
         "GIF",
         "HTML",
-        "CSS"
+        "CSS",
+        "ID",
+        "Markdown",
+        "URL"
       ]
     }
   }
