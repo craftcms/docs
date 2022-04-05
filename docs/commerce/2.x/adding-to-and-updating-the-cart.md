@@ -191,7 +191,7 @@ If the user logs in, but already has a cart in session (even an empty one), this
 When retrieving the current cart you can optionally tell the system to merge in the line items from a previous session
 in 2 ways:
 
-1) Submit the `mergeCarts` parameter in either the `commerce/cart/get-cart` ajax controller action or the `commerce/cart/update-cart` controller action.
+1) Submit the `mergeCarts` parameter in either the `commerce/cart/get-cart` Ajax controller action or the `commerce/cart/update-cart` controller action.
 
 `<input type="hidden" name="mergeCarts" value="commerce/cart/update-cart">`
 
