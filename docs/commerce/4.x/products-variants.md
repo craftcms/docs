@@ -215,7 +215,11 @@ Product queries support the following parameters:
 
 <!-- BEGIN PRODUCTQUERY_PARAMS -->
 
-<!-- textlint-disable -->| Param                                                 | Description
+
+
+<!-- textlint-disable -->
+
+| Param                                                 | Description
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [after](#product-after)                               | Narrows the query results to only products that were posted on or after a certain date.
 | [afterPopulate](#product-afterpopulate)               | Performs any post-population processing on elements.
@@ -259,7 +263,11 @@ Product queries support the following parameters:
 | [unique](#product-unique)                             | Determines whether only elements with unique IDs should be returned by the query.
 | [uri](#product-uri)                                   | Narrows the query results based on the products’ URIs.
 | [with](#product-with)                                 | Causes the query to return matching products eager-loaded with related elements.
+
+
 <!-- textlint-enable -->
+
+
 <h4 id="product-after"><a href="#product-after" class="header-anchor">#</a> <code>after</code></h4>
 
 Narrows the query results to only products that were posted on or after a certain date.
@@ -1662,7 +1670,11 @@ Variant queries support the following parameters:
 
 <!-- BEGIN VARIANTQUERY_PARAMS -->
 
-<!-- textlint-disable -->| Param                                             | Description
+
+
+<!-- textlint-disable -->
+
+| Param                                             | Description
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#variant-afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#variant-andrelatedto)             | Narrows the query results to only variants that are related to certain other elements.
@@ -1707,7 +1719,11 @@ Variant queries support the following parameters:
 | [weight](#variant-weight)                         | Narrows the query results based on the variants’ weight dimension.
 | [width](#variant-width)                           | Narrows the query results based on the variants’ width dimension.
 | [with](#variant-with)                             | Causes the query to return matching variants eager-loaded with related elements.
+
+
 <!-- textlint-enable -->
+
+
 <h4 id="variant-afterpopulate"><a href="#variant-afterpopulate" class="header-anchor">#</a> <code>afterPopulate</code></h4>
 
 Performs any post-population processing on elements.

@@ -741,7 +741,11 @@ Order queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
-<!-- textlint-disable -->| Param                                     | Description
+
+
+<!-- textlint-disable -->
+
+| Param                                     | Description
 | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only orders that are related to certain other elements.
@@ -793,7 +797,11 @@ Order queries support the following parameters:
 | [withCustomer](#withcustomer)             | Eager loads the user on the resulting orders.
 | [withLineItems](#withlineitems)           | Eager loads the line items on the resulting orders.
 | [withTransactions](#withtransactions)     | Eager loads the transactions on the resulting orders.
+
+
 <!-- textlint-enable -->
+
+
 #### `afterPopulate`
 
 Performs any post-population processing on elements.
