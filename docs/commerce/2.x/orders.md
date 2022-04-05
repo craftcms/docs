@@ -7,7 +7,7 @@ When a cart becomes an order, the following things happen:
 1) The `dateOrdered` order attribute is set to the current date.
 2) The `isCompleted` order attribute is set to `true`.
 3) The default [order status](custom-order-statuses.md) is set on the order and any emails for this status are sent.
-4) The order reference number is generated for the order, based on the “Order Reference Number Format” setting found in Commerce → Settings → General Settings section of the Control Panel.
+4) The order reference number is generated for the order, based on the “Order Reference Number Format” setting found in Commerce → Settings → General Settings section of the control panel.
 
 ## Order Numbers
 

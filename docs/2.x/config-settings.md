@@ -717,7 +717,7 @@ Whether uppercase letters should be allowed in entry and category slugs. Note th
 
 **Since**: Craft 2.1
 
-Explicitly sets the base URL to the Control Panel, which may be used if the dynamically-determined URL is not desired for some reason.
+Explicitly sets the base URL to the control panel, which may be used if the dynamically-determined URL is not desired for some reason.
 
 ```php
 'baseCpUrl' => 'http://admin.example.com/',
@@ -1041,7 +1041,7 @@ Set to `false` to keep the account locked indefinitely, requiring an admin to ma
 
 **Since**: Craft 2.4
 
-The default language that the Control Panel should be rendered in, for users that haven’t specified their Preferred Locale.
+The default language that the control panel should be rendered in, for users that haven’t specified their Preferred Locale.
 
 ```php
 'defaultCpLanguage' => 'en',
@@ -1151,7 +1151,7 @@ The number of invalid login attempts Craft will allow within the specified durat
 
 **Since**: Craft 2.2
 
-The path that users should be redirected to after logging in from the Control Panel.
+The path that users should be redirected to after logging in from the control panel.
 
 This setting will also come into effect if the user visits the CP’s Login page when they are already logged in, or the CP’s root URL (e.g. /admin).
 
@@ -1257,7 +1257,7 @@ Whether Craft should require the existence of a user agent string and IP address
 
 **Since**: Craft 1.0
 
-The URI and template path that Craft should use for user password resetting. Note that this only affects front-end site requests, and Password Reset emails will only use this setting for users that don’t have access to the Control Panel.
+The URI and template path that Craft should use for user password resetting. Note that this only affects front-end site requests, and Password Reset emails will only use this setting for users that don’t have access to the control panel.
 
 ```php
 'setPasswordPath' => array(
@@ -1305,7 +1305,7 @@ Configures Craft to send all system emails to a single email address (or multipl
 
 **Since**: Craft 2.1
 
-Removes “Username” fields in the Control Panel, and automatically saves users’ usernames based on their email addresses.
+Removes “Username” fields in the control panel, and automatically saves users’ usernames based on their email addresses.
 
 ```php
 'useEmailAsUsername' => true,

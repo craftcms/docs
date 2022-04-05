@@ -101,7 +101,7 @@ Returns whether the user has a given permission, either directly or via one of i
 
 ```twig
 {% if currentUser.can('accessCp') %}
-  <a href="{{ cpUrl() }}">Control Panel</a>
+  <a href="{{ cpUrl() }}">Ccntrol Panel</a>
 {% endif %}
 ```
 

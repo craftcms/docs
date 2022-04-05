@@ -26,7 +26,7 @@ If you’re manually updating a live site, we recommend you follow these instruc
 4. Once `commerce-new` is done uploading proceed to the next step.
 5. Rename the old `craft/plugins/commerce/` folder to `commerce-old`.
 6. Rename `craft/plugins/commerce-new/` to `commerce`.
-7. Point your browser to your Craft Control Panel. You will be prompted to proceed with a database update.
+7. Point your browser to your Craft control panel. You will be prompted to proceed with a database update.
 Click “Finish up” and let the database updates run.
 8. If all is well, delete the `craft/plugins/commerce-old/` folder, otherwise restore this folder as `commerce` and restore your database from backup and contact support.
 

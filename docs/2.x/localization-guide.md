@@ -12,7 +12,7 @@ The first step to running a localized site is to establish which locales your si
 
 ![Locales](./images/locales.png)
 
-When you add a new locale, you may notice that a little progress bar shows up in the Control Panel’s header. That’s because Craft has to go through and re-save all of your site’s existing content, accounting for the new locale. Don’t delete any locales while that is running – it may result in unintended data loss.
+When you add a new locale, you may notice that a little progress bar shows up in the control panel’s header. That’s because Craft has to go through and re-save all of your site’s existing content, accounting for the new locale. Don’t delete any locales while that is running – it may result in unintended data loss.
 
 ## Step 2: Update your sections
 

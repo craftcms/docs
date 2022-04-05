@@ -117,7 +117,7 @@ Or you can have Craft apply all new migrations across all migration tracks:
 php craft migrate/all
 ```
 
-Craft will also check for new plugin migrations on control panel requests, for any plugins that have a new [schema version](craft3:craft\base\PluginTrait::$schemaVersion), and content migrations can be applied from the Control Panel by going to Utilities → Migrations.
+Craft will also check for new plugin migrations on control panel requests, for any plugins that have a new [schema version](craft3:craft\base\PluginTrait::$schemaVersion), and content migrations can be applied from the control panel by going to Utilities → Migrations.
 
 ## Plugin Install Migrations
 

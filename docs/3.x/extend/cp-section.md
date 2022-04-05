@@ -100,7 +100,7 @@ If you do this, Craft will automatically add a new [user permission](user-permis
 Clicking on a plugin’s section will take the user to `/admin/plugin-handle`, which will attempt to load an `index.html` or `index.twig` template within the plugin’s [template root](template-roots.md) (its `templates/` folder within its base source folder).
 
 ::: tip
-See [Control Panel Templates](cp-templates.md) for more information about developing Control Panel templates.
+See [Control Panel Templates](cp-templates.md) for more information about developing control panel templates.
 :::
 
 Alternatively, you can route `/admin/plugin-handle` requests to a controller action (or a different template) by registering a control panel route from your plugin’s `init()` method:

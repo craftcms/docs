@@ -22,7 +22,7 @@ The shipping method interface requires a class with the following methods:
 ### `getType()`
 
 Returns the type of shipping method. This might be the name of the plugin or provider.
-The core shipping methods have type: `Custom`. This is shown in the Control Panel only.
+The core shipping methods have type: `Custom`. This is shown in the control panel only.
 
 ### `getId()`
 
@@ -30,7 +30,7 @@ This must return null.
 
 ### `getName()`
 
-Returns the name of this shipping method as displayed to the customer and in the Control Panel.
+Returns the name of this shipping method as displayed to the customer and in the control panel.
 
 ### `getHandle()`
 
@@ -38,7 +38,7 @@ This is the handle added to the order for the chosen shipping method.
 
 ### `getCpEditUrl()`
 
-Returns a Control Panel URL to a place where you can configure this shipping method’s rules.
+Returns a control panel URL to a place where you can configure this shipping method’s rules.
 Return an empty string if the method has no link.
 
 ### `getRules()`

@@ -4,7 +4,7 @@ Rather than requiring that everyone upload images at a certain size, Craft lets 
 
 ## Defining Transforms from the Control Panel
 
-You can define transforms from the Control Panel by going to Settings → Assets → Image Transforms and clicking the “New Transform” button.
+You can define transforms from the control panel by going to Settings → Assets → Image Transforms and clicking the “New Transform” button.
 
 ![transform-settings.2x](./images/transform-settings.2x.jpg)
 

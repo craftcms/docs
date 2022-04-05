@@ -22,5 +22,5 @@ A boolean, which determines if the state is required when this country is select
 
 ### `cpEditUrl`
 
-A URL to edit this country in the Control Panel.
+A URL to edit this country in the control panel.
 
