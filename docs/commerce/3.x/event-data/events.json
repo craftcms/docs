@@ -2142,7 +2142,7 @@
         "class": "craft\\commerce\\controllers\\BaseFrontEndController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
-        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
+        "desc": "The event that’s triggered when a cart is returned as an array for AJAX cart update requests."
     },
     {
         "class": "craft\\commerce\\controllers\\BaseFrontEndController",
@@ -2196,7 +2196,7 @@
         "class": "craft\\commerce\\controllers\\CartController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
-        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
+        "desc": "The event that’s triggered when a cart is returned as an array for AJAX cart update requests."
     },
     {
         "class": "craft\\commerce\\controllers\\CartController",
@@ -2226,7 +2226,7 @@
         "class": "craft\\commerce\\controllers\\CustomerAddressesController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
-        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
+        "desc": "The event that’s triggered when a cart is returned as an array for AJAX cart update requests."
     },
     {
         "class": "craft\\commerce\\controllers\\CustomerAddressesController",
@@ -2244,7 +2244,7 @@
         "class": "craft\\commerce\\controllers\\CustomerOrdersController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
-        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
+        "desc": "The event that’s triggered when a cart is returned as an array for AJAX cart update requests."
     },
     {
         "class": "craft\\commerce\\controllers\\CustomerOrdersController",
@@ -2298,7 +2298,7 @@
         "class": "craft\\commerce\\controllers\\DownloadsController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
-        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
+        "desc": "The event that’s triggered when a cart is returned as an array for AJAX cart update requests."
     },
     {
         "class": "craft\\commerce\\controllers\\DownloadsController",
@@ -2448,7 +2448,7 @@
         "class": "craft\\commerce\\controllers\\PaymentSourcesController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
-        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
+        "desc": "The event that’s triggered when a cart is returned as an array for AJAX cart update requests."
     },
     {
         "class": "craft\\commerce\\controllers\\PaymentSourcesController",
@@ -2466,7 +2466,7 @@
         "class": "craft\\commerce\\controllers\\PaymentsController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
-        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
+        "desc": "The event that’s triggered when a cart is returned as an array for AJAX cart update requests."
     },
     {
         "class": "craft\\commerce\\controllers\\PaymentsController",

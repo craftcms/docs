@@ -1167,7 +1167,7 @@ This is the interface implemented by all assets.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
 | `uploaderId`| `Int` | The ID of the user who first added this asset (if known).
@@ -1186,7 +1186,7 @@ This is the interface implemented by all assets.
 | `srcset`| `String` | Returns a `srcset` attribute value based on the given widths or x-descriptors.
 | `url`| `String` | The full URL of the asset. This field accepts the same fields as the `transform` directive.
 | `mimeType`| `String` | The file’s MIME type, if it can be determined.
-| `path`| `String` | The asset's path in the volume.
+| `path`| `String` | The asset’s path in the volume.
 | `dateModified`| `DateTime` | The date the asset file was last modified.
 | `prev`| `AssetInterface` | Returns the previous element relative to this one, from a given set of criteria.
 | `next`| `AssetInterface` | Returns the next element relative to this one, from a given set of criteria.
@@ -1209,7 +1209,7 @@ This is the interface implemented by all entries.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
 | `lft`| `Int` | The element’s left position within its structure.
@@ -1226,7 +1226,7 @@ This is the interface implemented by all entries.
 | `draftName`| `String` | The name of the draft.
 | `draftNotes`| `String` | The notes for the draft.
 | `authorId`| `Int` | The ID of the author of this entry.
-| `author`| `UserInterface` | The entry's author.
+| `author`| `UserInterface` | The entry’s author.
 | `draftCreator`| `UserInterface` | The creator of a given draft.
 | `drafts`| `[EntryInterface]` | The drafts for the entry.
 | `revisionCreator`| `UserInterface` | The creator of a given revision.
@@ -1240,7 +1240,7 @@ This is the interface implemented by all entries.
 | `sectionHandle`| `String` | The handle of the section that contains the entry.
 | `typeId`| `Int` | The ID of the entry type that contains the entry.
 | `typeHandle`| `String` | The handle of the entry type that contains the entry.
-| `postDate`| `DateTime` | The entry's post date.
+| `postDate`| `DateTime` | The entry’s post date.
 | `expiryDate`| `DateTime` | The expiry date of the entry.
 | `children`| `[EntryInterface]` | The entry’s children, if the section is a structure. Accepts the same arguments as the `entries` query.
 | `descendants`| `[EntryInterface]` | The entry’s descendants, if the section is a structure. Accepts the same arguments as the `entries` query.
@@ -1269,7 +1269,7 @@ This is the interface implemented by all global sets.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
 | `name`| `String` | The name of the global set.
@@ -1293,13 +1293,13 @@ This is the interface implemented by all matrix blocks.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
 | `fieldId`| `Int` | The ID of the field that owns the matrix block.
 | `ownerId`| `Int` | The ID of the element that owns the matrix block.
-| `typeId`| `Int` | The ID of the matrix block's type.
-| `typeHandle`| `String` | The handle of the matrix block's type.
+| `typeId`| `Int` | The ID of the matrix block’s type.
+| `typeHandle`| `String` | The handle of the matrix block’s type.
 | `sortOrder`| `Int` | The sort order of the matrix block within the owner element field.
 
 
@@ -1320,18 +1320,18 @@ This is the interface implemented by all users.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
-| `friendlyName`| `String` | The user's first name or username.
-| `fullName`| `String` | The user's full name.
-| `name`| `String` | The user's full name or username.
+| `friendlyName`| `String` | The user’s first name or username.
+| `fullName`| `String` | The user’s full name.
+| `name`| `String` | The user’s full name or username.
 | `preferences`| `String` | The user’s preferences.
 | `preferredLanguage`| `String` | The user’s preferred language.
 | `username`| `String` | The username.
-| `firstName`| `String` | The user's first name.
-| `lastName`| `String` | The user's last name.
-| `email`| `String` | The user's email.
+| `firstName`| `String` | The user’s first name.
+| `lastName`| `String` | The user’s last name.
+| `email`| `String` | The user’s email.
 
 
 ### The `CategoryInterface` interface
@@ -1351,7 +1351,7 @@ This is the interface implemented by all categories.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
 | `lft`| `Int` | The element’s left position within its structure.
@@ -1386,7 +1386,7 @@ This is the interface implemented by all tags.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `String` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
 | `groupId`| `Int` | The ID of the group that contains the tag.

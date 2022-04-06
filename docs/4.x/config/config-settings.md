@@ -561,7 +561,7 @@ If set to `'_'` your site’s 404 template would live at `templates/_404.html`, 
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string)[], [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
+:  [string](https://php.net/language.types.string)[], [null](https://php.net/language.types.null)
 
 Default value
 :  `null`
@@ -2562,7 +2562,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string)[], [string](https://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)[]
 
 Default value
 :  `[
