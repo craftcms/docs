@@ -32,7 +32,7 @@ A “Customer Info” tab will be available on each user account page in the con
 - **Active Carts**: list of the customer’s active carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
 - **Inactive Carts**: list of the customer’s inactive carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
 - **Addresses**: list of the customer’s [addresses](addresses.md), which can be edited and deleted.
-- **Subscriptions**: list of the customer's subscriptions.
+- **Subscriptions**: list of the customer’s subscriptions.
 
 This tab is shown by default but you can control its visibility with the [Commerce::\$showCustomerInfoTab](configuration.md#showcustomerinfotab) setting.
 

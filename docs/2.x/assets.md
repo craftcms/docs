@@ -28,7 +28,7 @@ Once your asset source has some fields associated with it, you can edit the fiel
 
 ## Assets Index
 
-When you have at least one asset source, a new “Assets” item will be added to the CP’s main nav. Clicking on that will take you to the Assets Index, which lists all of your sources in the left sidebar, and the selected source’s files in the main content area.
+When you have at least one asset source, a new “Assets” item will be added to the control panel’s main nav. Clicking on that will take you to the Assets Index, which lists all of your sources in the left sidebar, and the selected source’s files in the main content area.
 
 From this page, you can do the following:
 

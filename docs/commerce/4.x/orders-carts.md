@@ -44,7 +44,7 @@ In your templates, you can get the current user’s cart like this:
 {% set cart = craft.commerce.getCarts().getCart() %}
 ```
 
-You could also fetch the cart via AJAX. This example could be added to a Twig template, and outputs the cart data to the browser’s development console:
+You could also fetch the cart via Ajax. This example could be added to a Twig template, and outputs the cart data to the browser’s development console:
 
 ::: code
 ```twig jQuery
@@ -741,6 +741,10 @@ Order queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
@@ -793,6 +797,10 @@ Order queries support the following parameters:
 | [withCustomer](#withcustomer)             | Eager loads the user on the resulting orders.
 | [withLineItems](#withlineitems)           | Eager loads the line items on the resulting orders.
 | [withTransactions](#withtransactions)     | Eager loads the transactions on the resulting orders.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
@@ -1200,6 +1208,10 @@ Causes the query results to be returned in the order specified by [id](#id).
 
 
 
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
@@ -1566,23 +1578,23 @@ Possible values include:
 
 | Value | Fetches orders…
 | - | -
-| `en` | with an order language that is 'en'.
-| `'not en'` | not with an order language that is no 'en'.
-| `['en', 'en-us']` | with an order language that is 'en' or 'en-us'.
-| `['not', 'en']` | not with an order language that is not 'en'.
+| `'en'` | with an order language that is `'en'`.
+| `'not en'` | not with an order language that is not `'en'`.
+| `['en', 'en-us']` | with an order language that is `'en'` or `'en-us'`.
+| `['not', 'en']` | not with an order language that is not `'en'`.
 
 
 
 ::: code
 ```twig
-{# Fetch orders with an order status with an ID of 1 #}
+{# Fetch orders with an order language that is `'en'` #}
 {% set orders = craft.orders()
   .orderLanguage('en')
   .all() %}
 ```
 
 ```php
-// Fetch orders with an order status with an ID of 1
+// Fetch orders with an order language that is `'en'`
 $orders = \craft\commerce\elements\Order::find()
     ->orderLanguage('en')
     ->all();
@@ -1726,8 +1738,8 @@ If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.ht
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 

@@ -62,7 +62,7 @@ Their syntax always begins with “`{#`” and ends with “`#}`”.
 
 ## Variables
 
-Variables in Twig are just like variables in Javascript or any other programming language. There are different types of variables – strings, arrays, booleans, and objects. You can pass them into functions, manipulate them, and output them.
+Variables in Twig are just like variables in JavaScript or any other programming language. There are different types of variables – strings, arrays, booleans, and objects. You can pass them into functions, manipulate them, and output them.
 
 All of your Craft templates are pre-loaded with a few [global variables](templating/global-variables.md); templates that are loaded as a result of a matching [route](routing.md#dynamic-routes) get pre-loaded with the variables defined by the route’s tokens; and templates that are loaded as the result of a matching [entry](sections-and-entries.md) URL get an “entry” variable (see [routing](routing.md) for more details).
 

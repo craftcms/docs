@@ -22,7 +22,7 @@ nitro update
 :::
 
 ::: tip
-`self-update` finds the latest stable version of Nitro, but takes a `--dev` argument to include pre-releases:
+`self-update` finds the latest stable version of Nitro, but takes a `--dev` argument to include prereleases:
 
 ```sh
 nitro self-update --dev

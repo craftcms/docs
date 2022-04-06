@@ -1357,7 +1357,7 @@ Nitro certificates are now trusted 🔒
 
 ## `update`
 
-Updates Nitro's containers.
+Updates Nitro’s containers.
 
 ```
 nitro update
@@ -1391,7 +1391,7 @@ Checking proxy…
 
 ## `validate`
 
-Validates Nitro's configuration.
+Validates Nitro’s configuration.
 
 ```
 nitro validate

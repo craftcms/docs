@@ -11,7 +11,7 @@ Products are the items available in your store.
 
 A product itself is never sold; what goes into a cart for purchase is actually one of the product’s [variants](#variants). In the Craft control panel, you’ll see Products listed by Product Type.
 
-![Diagram depicting Product with common fields and its relationship to one or more Variants](./assets/product-variant.png)
+![Diagram depicting Product with common fields and its relationship to one or more Variants](./images/product-variant.png)
 
 In the same way that all Craft CMS entries have common fields, Craft Commerce products have some of their own:
 
@@ -27,7 +27,7 @@ Product Types are a way to distinguish products in your system. Similar to Craft
 
 You can manage Product Types in the control panel from **Commerce** → **System Settings** → **Product Types**.
 
-<img src="./assets/product-type-entry-screen.png" width="797" alt="Edit Product Type page">
+<img src="./images/product-type-entry-screen.png" width="797" alt="Edit Product Type page">
 
 ### Product Type Options
 
@@ -215,6 +215,10 @@ Product queries support the following parameters:
 
 <!-- BEGIN PRODUCTQUERY_PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                                 | Description
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [after](#product-after)                               | Narrows the query results to only products that were posted on or after a certain date.
@@ -260,6 +264,10 @@ Product queries support the following parameters:
 | [unique](#product-unique)                             | Determines whether only elements with unique IDs should be returned by the query.
 | [uri](#product-uri)                                   | Narrows the query results based on the products’ URIs.
 | [with](#product-with)                                 | Causes the query to return matching products eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 <h4 id="product-after"><a href="#product-after" class="header-anchor">#</a> <code>after</code></h4>
 
@@ -1573,11 +1581,11 @@ If a product type has multiple variants enabled, the author can choose which one
 
 For a single-variant product, variant details are shown in a unified view with custom product fields:
 
-![Single-Variant Product](./assets/single-variant.png)
+![Single-Variant Product](./images/single-variant.png)
 
 When a product supports multiple variants, the default variant will be identified in a **Variants** field where more variants can be added:
 
-![Multi-Variant Product](./assets/multi-variant.png)
+![Multi-Variant Product](./images/multi-variant.png)
 
 ### Variant Stock
 
@@ -1688,6 +1696,10 @@ Variant queries support the following parameters:
 
 <!-- BEGIN VARIANTQUERY_PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                             | Description
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#variant-afterpopulate)           | Performs any post-population processing on elements.
@@ -1734,6 +1746,10 @@ Variant queries support the following parameters:
 | [weight](#variant-weight)                         | Narrows the query results based on the variants’ weight dimension.
 | [width](#variant-width)                           | Narrows the query results based on the variants’ width dimension.
 | [with](#variant-with)                             | Causes the query to return matching variants eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 <h4 id="variant-afterpopulate"><a href="#variant-afterpopulate" class="header-anchor">#</a> <code>afterPopulate</code></h4>
 

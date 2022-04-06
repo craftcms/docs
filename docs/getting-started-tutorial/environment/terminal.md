@@ -28,7 +28,7 @@ echo "hello world"
 
 In this example, you would copy+paste or type `echo "hello world"` exactly as you see it above, then hit <kbd>return</kbd> or <kbd>enter</kbd> to execute the command. The result, or output, will be printed and you’ll be returned to the empty prompt.
 
-The `echo` console command just repeats back whatever you pass to it. Here’s what you'd see after running that command:
+The `echo` console command just repeats back whatever you pass to it. Here’s what you’d see after running that command:
 
 ```bash
 echo "hello world"

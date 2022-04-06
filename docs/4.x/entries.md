@@ -15,7 +15,7 @@ Before you can create entries, you must create Sections to contain them. In each
 - Which template should get loaded if an entry’s URL is requested
 - What types of entries should be available in the section, and which fields each of those entry types should have
 
-If you're using Craft with multiple sites then you can also define in your Section:
+If you’re using Craft with multiple sites then you can also define in your Section:
 
 - Which sites’ entries in the section should target
 - Which sites are enabled by default for new entries
@@ -277,6 +277,10 @@ Entry queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [after](#after)                           | Narrows the query results to only entries that were posted on or after a certain date.
@@ -340,6 +344,10 @@ Entry queries support the following parameters:
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
 | [uri](#uri)                               | Narrows the query results based on the entries’ URIs.
 | [with](#with)                             | Causes the query to return matching entries eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `after`
 
@@ -969,6 +977,10 @@ Causes the query results to be returned in the order specified by [id](#id).
 
 
 
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
@@ -1367,8 +1379,8 @@ If [unique](#unique) is set, this determines which site should be selected when 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 

@@ -191,7 +191,7 @@ If the user logs in, but already has a cart in session (even an empty one), this
 When retrieving the current cart you can optionally tell the system to merge in the line items from a previous session
 in 2 ways:
 
-1) Submit the `mergeCarts` parameter in either the `commerce/cart/get-cart` ajax controller action or the `commerce/cart/update-cart` controller action.
+1) Submit the `mergeCarts` parameter in either the `commerce/cart/get-cart` Ajax controller action or the `commerce/cart/update-cart` controller action.
 
 `<input type="hidden" name="mergeCarts" value="commerce/cart/update-cart">`
 
@@ -201,7 +201,7 @@ Please note, using the above two methods will only merge previous carts of a log
 
 Calling `craft.commerce.cart.mergedCart` which the user is a guest behaves the same way as `craft.commetce.cart.cart`, so there is no harm in using it on most cart pages.
 
-You might not want to use it on final checkout pages, so that customers don't get confused seeing new items in the cart before payment.
+You might not want to use it on final checkout pages, so that customers don’t get confused seeing new items in the cart before payment.
 
 Before merging, you may want to show the user what will be merged.
 

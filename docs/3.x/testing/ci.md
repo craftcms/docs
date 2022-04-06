@@ -2,7 +2,7 @@
 
 There are [many](https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software) [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) platforms available to choose from.
 
-Craft uses [Travis](https://app.travis-ci.com/github/craftcms/cms) for its public repo, but you’re free to use what you're comfortable with and modify things to your workflow.
+Craft uses [Travis](https://app.travis-ci.com/github/craftcms/cms) for its public repo, but you’re free to use what you’re comfortable with and modify things to your workflow.
 
 There are [many options](https://docs.travis-ci.com/) for configuring Travis, but let’s examine [Craft’s `.travis.yml` file](https://github.com/craftcms/cms/blob/main/.travis.yml).
 
@@ -33,11 +33,11 @@ matrix:
 ```
 
 The `matrix` is where we explicitly define the different environments we want the
-tests to run in.  That includes PHP 7.1 - 7.3 and we define an environment variable
+tests to run in. That includes PHP 7.1 - 7.3 and we define an environment variable
 called `DB` that sets both `mysql` and `pgsql` we can use later.
 
-PHP 7.1 also sets an environment variable called `TASK_TESTS_COVERAGE` we'll use later
-because that's the only environment we want code coverage reports to generate in (for
+PHP 7.1 also sets an environment variable called `TASK_TESTS_COVERAGE` we’ll use later
+because that’s the only environment we want code coverage reports to generate in (for
 performance reasons).
 
 ```yaml
@@ -52,10 +52,10 @@ install:
   travis_retry composer install $DEFAULT_COMPOSER_FLAGS
 ```
 
-If `TASK_TESTS_COVERAGE` isn't set, we're going to disable xDebug to speed things up.
-It's only needed for generated code coverage reports in this context.
+If `TASK_TESTS_COVERAGE` isn’t set, we’re going to disable xDebug to speed things up.
+It’s only needed for generated code coverage reports in this context.
 
-Then we `composer install` to pull down all of Craft's dependencies.
+Then we `composer install` to pull down all of Craft’s dependencies.
 
 ```yaml
 before_script:
@@ -102,7 +102,7 @@ script:
 ```
 
 If `TASK_TESTS_COVERAGE` is set, then we pass in the flags to Codeception to generate
-code coverage reports.  If not, we just run the tests.
+code coverage reports. If not, we just run the tests.
 
 ```yaml
 after_script:
@@ -113,4 +113,4 @@ after_script:
 ```
 
 After tests are done executing, if `TASK_TESTS_COVERAGE` is set, we upload the code
-coverage reports to a 3rd party service, [https://codecov.io](https://codecov.io/gh/craftcms/cms).
+coverage reports to a third-party service, [https://codecov.io](https://codecov.io/gh/craftcms/cms).

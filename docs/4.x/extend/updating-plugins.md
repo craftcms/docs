@@ -23,7 +23,7 @@ Some events, permissions, and controller actions have changed largely in support
 
 It’s best to update any existing plugin for Craft 4 rather than creating a new one with its own handle. A separate plugin complicates the developer experience, licensing, and migration path.
 
-We anticipate most developers will choose to release a new major version of their plugin that requires Craft 4, though all Craft and the plugin store look at for compatibility is what’s required by `composer.json`.
+We anticipate most developers will choose to release a new major version of their plugin that requires Craft 4, though all Craft and the Plugin Store look at for compatibility is what’s required by `composer.json`.
 
 You’ll need to explicitly state support for each major Craft version. Any `craftcms/cms` constraint beginning with `>=` will be treated as `^`. If your plugin supports Craft 3 and 4, for example, you’ll need to set your `craftcms/cms` constraint to `^3.0|^4.0` rather than `>=3.0`.
 
@@ -51,9 +51,10 @@ While there’s no requirement that you use these tools, we encourage all develo
 
 If you decide to use PHPStan and/or ECS, we recommend doing it in the following order:
 
-1. Run PHPStan on your existing Craft 3 code base and apply the greatest level of fixes you’re comfortable with.
+1. Run PHPStan on your existing Craft 3 codebase and apply the greatest level of fixes you’re comfortable with.
 2. Run Craft’s [Rector](#rector) rules to prep a bunch of your code for Craft 4.
-3. Run PHPStan again to identify issues and opportunities specifically related to Craft 4 changes.
+3. Update your `craftcms/cms` requirement to `^4.0.0-beta.1` and run `composer update`.
+4. Run PHPStan again to identify issues and opportunities specifically related to Craft 4 changes.
 
 ## Rector
 
@@ -472,7 +473,7 @@ If your Craft 3 plugin was using Craft’s editable table (via `editableTableFie
 
 The control panel’s `_includes/forms` got a few new macros: `button`, `submitButton`, `fs`, and `fsField`.
 
-The `button` and `submitButton` macros can each take a `spinner` option that will include markup for a loading animation you can use for AJAX requests:
+The `button` and `submitButton` macros can each take a `spinner` option that will include markup for a loading animation you can use for Ajax requests:
 
 ```twig
 {% import '_includes/forms' as forms %}

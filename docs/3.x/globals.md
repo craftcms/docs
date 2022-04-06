@@ -1,6 +1,6 @@
 # Globals
 
-Globals store content that is available globally throughout your templates. They're a convenient way to make non-Entry content easily editable via the control panel.
+Globals store content that is available globally throughout your templates. They’re a convenient way to make non-Entry content easily editable via the control panel.
 
 Craft organizes Globals into Global Sets. Each Global Set has its own [field layout](fields.md#field-layouts) using any of the existing fields or new fields.
 
@@ -102,6 +102,10 @@ Global set queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
@@ -130,6 +134,10 @@ Global set queries support the following parameters:
 | [uid](#uid)                               | Narrows the query results based on the global sets’ UIDs.
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
 | [with](#with)                             | Causes the query to return matching global sets eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
@@ -326,6 +334,10 @@ $globalSets = \craft\elements\GlobalSet::find()
 Causes the query results to be returned in the order specified by [id](#id).
 
 
+
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
 
 
 
@@ -535,8 +547,8 @@ If [unique](#unique) is set, this determines which site should be selected when 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 

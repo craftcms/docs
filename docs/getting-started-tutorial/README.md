@@ -13,7 +13,7 @@ If you get stuck, [join us on Discord](https://craftcms.com/discord) where frien
 
 ## Why Craft CMS?
 
-Craft CMS is a content management system for building bespoke websites.
+Craft CMS is a content management system for building bespoke web projects.
 
 There are lots of options when it comes to choosing a CMS, and Craft CMS is a blank slate that puts your content first. It provides a flexible, tailored experience for developers and content authors.
 

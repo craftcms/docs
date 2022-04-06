@@ -2,6 +2,13 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-03-25
+### Added
+- Added a page on Craft 4’s Address element.
+
+### Changed
+- The `session` component example is now defined in `app.web.php`. ([craftcms/cms#10820](https://github.com/craftcms/cms/issues/10820))
+
 ## 2022-03-16
 ### Added
 - Added Commerce 4 beta docs.

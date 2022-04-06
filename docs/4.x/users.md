@@ -60,6 +60,10 @@ User queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [admin](#admin)                           | Narrows the query results to only users that have admin accounts.
@@ -98,6 +102,10 @@ User queries support the following parameters:
 | [username](#username)                     | Narrows the query results based on the users’ usernames.
 | [with](#with)                             | Causes the query to return matching users eager-loaded with related elements.
 | [withGroups](#withgroups)                 | Causes the query to return matching users eager-loaded with their user groups.
+
+
+<!-- textlint-enable -->
+
 
 #### `admin`
 
@@ -425,6 +433,10 @@ Causes the query results to be returned in the order specified by [id](#id).
 
 
 
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
@@ -487,6 +499,7 @@ Possible values include:
 | `'foo'` | in a group with a handle of `foo`.
 | `'not foo'` | not in a group with a handle of `foo`.
 | `['foo', 'bar']` | in a group with a handle of `foo` or `bar`.
+| `['and', 'foo', 'bar']` | in both groups with handles of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a group with a handle of `foo` or `bar`.
 | a [UserGroup](craft4:craft\models\UserGroup) object | in a group represented by the object.
 
@@ -520,6 +533,7 @@ Possible values include:
 | `1` | in a group with an ID of 1.
 | `'not 1'` | not in a group with an ID of 1.
 | `[1, 2]` | in a group with an ID of 1 or 2.
+| `['and', 1, 2]` | in both groups with IDs of 1 or 2.
 | `['not', 1, 2]` | not in a group with an ID of 1 or 2.
 
 
@@ -784,8 +798,8 @@ If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.ht
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 

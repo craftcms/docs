@@ -13,7 +13,7 @@ Filter | Description
 [camel](#camel) | Formats a string into camelCase.
 [capitalize](https://twig.symfony.com/doc/2.x/filters/capitalize.html) | Capitalizes the first character of a string.
 [column](#column) | Returns the values from a single property or key in an array.
-[contains](#contains) | Returns whether an array contains a nested item with a given key/value pair.
+[contains](#contains) | Returns whether an array contains a nested item with a given key-value pair.
 [convert_encoding](https://twig.symfony.com/doc/2.x/filters/convert_encoding.html) | Converts a string from one encoding to another.
 [currency](#currency) | Formats a number as currency.
 [date](#date) | Formats a date.
@@ -88,7 +88,7 @@ Filter | Description
 [upper](https://twig.symfony.com/doc/2.x/filters/upper.html) | Formats a string into “UPPER CASE”.
 [url_encode](https://twig.symfony.com/doc/2.x/filters/url_encode.html) | Percent-encodes a string as a URL segment or an array as a query string.
 [values](#values) | Returns all the values in an array, resetting its keys.
-[where](#where) | Filters an array by key/value pairs.
+[where](#where) | Filters an array by key-value pairs.
 [withoutKey](#withoutkey) | Returns an array without the specified key.
 [without](#without) | Returns an array without the specified element(s).
 

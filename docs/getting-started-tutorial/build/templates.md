@@ -50,7 +50,7 @@ We’ll blend HTML and Twig in our templates to display content we manage in the
 
 Now download a copy of the example styles into `web/styles.css`: <https://raw.githubusercontent.com/craftcms/tutorial-project/main/web/styles.css>
 
-This static stylesheet will offer some basic styling for our templates.
+This static style sheet will offer some basic styling for our templates.
 
 The layout template sets the page’s language to match Craft’s and adds `meta` details that tell browsers how to interpret text and how the page fits into different browser windows.
 

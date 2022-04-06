@@ -857,11 +857,19 @@ The `{% tag %}` tag has the following parameters:
 
 #### Name
 
+<!-- textlint-disable terminology -->
+
 The first thing you must pass to the `{% tag %}` tag is the name of the node that should be rendered.
+
+<!-- textlint-enable terminology -->
 
 #### `with`
 
+<!-- textlint-disable terminology -->
+
 Next, you can optionally type “` with `” followed by an object with attributes for the node.
+
+<!-- textlint-enable terminology -->
 
 These will be rendered using <yii2:yii\helpers\BaseHtml::renderTagAttributes()> just like the [tag](functions.md#tag) function, except for the `html` and `text` keys because inner content will go between `{% tag %}` and `{% endtag %}` instead.
 

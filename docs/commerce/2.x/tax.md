@@ -39,9 +39,9 @@ A zip code condition formula is a short expression of logic that returns either 
 Below are some examples of a zip code condition formula:
 
 `zipCode[0:2] == '60' or zipCode[0:2] == '70'`\
-The zip code condition will match if the zip code has `60` or `70` as it’s first 2 characters.
+The zip code condition will match if the zip code has `60` or `70` as its first two characters.
 
-`zipCode in ['NG102', 'NG103', 'NG102']`\
+`zipCode in ['NG102', 'NG103', 'NG104']`\
 The zip code condition will match if the zip code is any of the above values.
 
 ## Tax Rate

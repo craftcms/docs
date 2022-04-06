@@ -16,26 +16,26 @@ If you add the [Customer Info](customer-info-fields.md) field to the user profil
 
 ## Attributes
 
-### user
+### `user`
 
 Returns a [UserModel](https://craftcms.com/docs/2.x/templating/usermodel.html) object if the customer is logged in, or `null` if the customer is a guest.
 
-### addresses
+### `addresses`
 
 Returns an array of [Address models](address-model.md).
 
-### orders
+### `orders`
 
 Returns an array of completed [Order models](order-model.md).
 
-### userId
+### `userId`
 
 Returns the User ID associated with this customer if the customer is a registered user.
 
-### lastUsedShippingAddress
+### `lastUsedShippingAddress`
 
 Returns the last used shipping address. Returns `null` if there is not a last used address.
 
-### lastUsedBillingAddress
+### `lastUsedBillingAddress`
 
 Returns the last used billing address. Returns `null` if there is not a last used address.

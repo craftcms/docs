@@ -14,11 +14,11 @@ Commerce Variants fields have the following settings:
 
 Commerce Variants fields list all of the currently selected product variants, with a button to select new ones:
 
-<img src="./assets/variant-field-example.png" alt="Variants field">
+<img src="./images/variant-field-example.png" alt="Variants field">
 
 Choosing **Add a variant** opens a modal window for finding and selecting additional variants:
 
-<img src="./assets/variant-field-modal.png" alt="Variant selection modal">
+<img src="./images/variant-field-modal.png" alt="Variant selection modal">
 
 ## Templating
 

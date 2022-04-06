@@ -1,6 +1,6 @@
 # Events Reference
 
-## commerce_discounts.onBeforeMatchLineItem
+## `commerce_discounts.onBeforeMatchLineItem`
 
 Raised when matching the discount to each line item.
 
@@ -21,7 +21,7 @@ craft()->on('commerce_discounts.onBeforeMatchLineItem', function($event) {
 });
 ```
 
-## commerce_sales.onBeforeMatchProductAndSale
+## `commerce_sales.onBeforeMatchProductAndSale`
 
 This event will trigger if the product matches the sale.
 
@@ -39,7 +39,7 @@ craft()->on('commerce_sales.onBeforeMatchProductAndSale', function($event) {
 });
 ```
 
-## commerce_payments.onBeforeGatewayRequestSend
+## `commerce_payments.onBeforeGatewayRequestSend`
 
 Raised before an order is saved.
 
@@ -61,7 +61,7 @@ craft()->on('commerce_payments.onBeforeGatewayRequestSend', function($event){
 Event handlers can prevent the gateway request from happening by setting `$event->performAction` to `false`. If you want to give a clear reason, set a message on the transaction model.
 :::
 
-## commerce_lineItems.onPopulateLineItem
+## `commerce_lineItems.onPopulateLineItem`
 
 This event is raised when a line item is getting populated or repopulated from a purchasable.
 
@@ -111,7 +111,7 @@ craft()->on('commerce_lineItems.onPopulateLineItem', function($event)
 });
 ```
 
-## commerce_lineItems.onCreateLineItem
+## `commerce_lineItems.onCreateLineItem`
 
 This event is raised when a new line item is created from a purchasable.
 
@@ -123,7 +123,7 @@ This event is raised when a new line item is created from a purchasable.
 craft()->on('commerce_lineItems.onCreateLineItem', ['MyClass', 'onCreateLineItemHandlerMethod']);
 ```
 
-## commerce_lineItems.onBeforeSaveLineItem
+## `commerce_lineItems.onBeforeSaveLineItem`
 
 Raised before a line item is saved.
 
@@ -136,7 +136,7 @@ Raised before a line item is saved.
 craft()->on('commerce_lineItems.onBeforeSaveLineItem', ['MyClass', 'beforeSaveHandlerMethod']);
 ```
 
-## commerce_lineItems.onSaveLineItem
+## `commerce_lineItems.onSaveLineItem`
 
 Raised when a line item is saved.
 
@@ -149,7 +149,7 @@ Raised when a line item is saved.
 craft()->on('commerce_lineItems.onSaveLineItem', ['MyClass', 'saveHandlerMethod']);
 ```
 
-## commerce_products.onBeforeSaveProduct
+## `commerce_products.onBeforeSaveProduct`
 
 Raised before a product is saved.
 
@@ -162,7 +162,7 @@ Raised before a product is saved.
 craft()->on('commerce_products.onBeforeSaveProduct', ['MyClass', 'beforeSaveHandlerMethod']);
 ```
 
-## commerce_products.onSaveProduct
+## `commerce_products.onSaveProduct`
 
 Raised after a product is saved.
 
@@ -175,7 +175,7 @@ Raised after a product is saved.
 craft()->on('commerce_products.onSaveProduct', ['MyClass', 'saveHandlerMethod']);
 ```
 
-## commerce_products.onBeforeDeleteProduct
+## `commerce_products.onBeforeDeleteProduct`
 
 Raised before a product is deleted.
 
@@ -191,7 +191,7 @@ craft()->on('commerce_products.onBeforeDeleteProduct', ['MyClass', 'beforeDelete
 You can prevent the product from getting deleted by setting `$event->performAction` to `false`.
 :::
 
-## commerce_products.onBeforeEditProduct
+## `commerce_products.onBeforeEditProduct`
 
 Raised after a product model has been loaded for editing.
 
@@ -203,7 +203,7 @@ Raised after a product model has been loaded for editing.
 craft()->on('commerce_products.onBeforeEditProduct', ['MyClass', 'saveHandlerMethod']);
 ```
 
-## commerce_products.onDeleteProduct
+## `commerce_products.onDeleteProduct`
 
 Raised after a Product is deleted.
 
@@ -215,7 +215,7 @@ Raised after a Product is deleted.
 craft()->on('commerce_products.onDeleteProduct', ['MyClass', 'deleteHandlerMethod']);
 ```
 
-## commerce_orders.onBeforeSaveOrder
+## `commerce_orders.onBeforeSaveOrder`
 
 Raised before an order is saved.
 
@@ -231,7 +231,7 @@ craft()->on('commerce_orders.onBeforeSaveOrder', ['MyClass', 'orderBeforeSaveHan
 Event handlers can prevent the order from getting saved by setting `$event->performAction` to false.
 :::
 
-## commerce_orders.onSaveOrder
+## `commerce_orders.onSaveOrder`
 
 Raised after an order is saved.
 
@@ -243,7 +243,7 @@ Raised after an order is saved.
 craft()->on('commerce_orders.onSaveOrder', ['MyClass', 'orderSaveHandlerMethod']);
 ```
 
-## commerce_orders.onBeforeOrderComplete
+## `commerce_orders.onBeforeOrderComplete`
 
 Raised before a cart is completed and becomes an order.
 
@@ -255,7 +255,7 @@ Raised before a cart is completed and becomes an order.
 craft()->on('commerce_orders.onBeforeOrderComplete', ['MyClass', 'orderCompleteHandlerMethod']);
 ```
 
-## commerce_orders.onOrderComplete
+## `commerce_orders.onOrderComplete`
 
 Raised when a cart has been turned into an order.
 
@@ -267,7 +267,7 @@ Raised when a cart has been turned into an order.
 craft()->on('commerce_orders.onOrderComplete', ['MyClass', 'orderCompleteHandlerMethod']);
 ```
 
-## commerce_payments.onRefundTransaction
+## `commerce_payments.onRefundTransaction`
 
 Raised after a transaction was attempted to be refunded.
 
@@ -285,7 +285,7 @@ craft()->on('commerce_payments.onRefundTransaction', function($event) {
 });
 ```
 
-## commerce_orderHistories.onStatusChange
+## `commerce_orderHistories.onStatusChange`
 
 Raised after the status of an order was changed.
 
@@ -298,7 +298,7 @@ Raised after the status of an order was changed.
 craft()->on('commerce_orderHistories.onStatusChange', ['MyClass', 'orderStatusChangeHandlerMethod']);
 ```
 
-## commerce_cart.onBeforeAddToCart
+## `commerce_cart.onBeforeAddToCart`
 
 Raised before an item has been saved to the cart for the first time.
 
@@ -315,7 +315,7 @@ craft()->on('commerce_cart.onAddToCart', ['MyClass', 'beforAddToCartHandlerMetho
 Event handlers can prevent the add to cart by setting `$event->performAction` to `false`.
 :::
 
-## commerce_cart.onAddToCart
+## `commerce_cart.onAddToCart`
 
 Raised after an item has been added to the cart for the first time.
 
@@ -328,7 +328,7 @@ Raised after an item has been added to the cart for the first time.
 craft()->on('commerce_cart.onAddToCart', ['MyClass', 'addToCartHandlerMethod']);
 ```
 
-## commerce_cart.onRemoveFromCart
+## `commerce_cart.onRemoveFromCart`
 
 Raised after a lineItem has been removed from the cart.
 
@@ -341,7 +341,7 @@ Raised after a lineItem has been removed from the cart.
 craft()->on('commerce_cart.onRemoveFromCart', ['MyClass', 'removeFromCartHandlerMethod']);
 ```
 
-## commerce_transactions.onCreateTransaction
+## `commerce_transactions.onCreateTransaction`
 
 Raised after a newly created transaction model has been instantiated.
 
@@ -359,7 +359,7 @@ craft()->on('commerce_transactions.onCreateTransaction', function($event) {
 });
 ```
 
-## commerce_transactions.onSaveTransaction
+## `commerce_transactions.onSaveTransaction`
 
 Raised after a transaction has been saved.
 
@@ -371,7 +371,7 @@ Raised after a transaction has been saved.
 craft()->on('commerce_transactions.onSaveTransaction', ['MyClass', 'savedTranactionHandlerMethod']);
 ```
 
-## commerce_variants.onOrderVariant
+## `commerce_variants.onOrderVariant`
 
 Raised after stock has been deducted from a variant.
 
@@ -388,7 +388,7 @@ craft()->on('commerce_variants.onOrderVariant', function($event) {
 });
 ```
 
-## commerce_emails.onBeforeSendEmail
+## `commerce_emails.onBeforeSendEmail`
 
 Raised before a Commerce email is sent.
 
@@ -408,7 +408,7 @@ craft()->on('commerce_emails.onBeforeSendEmail', function($event) {
 });
 ```
 
-## commerce_emails.onSendEmail
+## `commerce_emails.onSendEmail`
 
 Raised after a Commerce email was sent.
 
@@ -428,7 +428,7 @@ craft()->on('commerce_emails.onSendEmail', function($event) {
 });
 ```
 
-## commerce_addresses.onBeforeSaveAddress
+## `commerce_addresses.onBeforeSaveAddress`
 
 Raised before address has been saved.
 
@@ -448,7 +448,7 @@ craft()->on('commerce_addresses.onBeforeSaveAddress', function($event) {
 Event handlers can prevent the address from getting replaced by setting `$event->performAction` to `false`.
 :::
 
-## commerce_addresses.onSaveAddress
+## `commerce_addresses.onSaveAddress`
 
 Raised after an address has been saved.
 

@@ -728,7 +728,7 @@ Runs the install migration.
 
 
 --language
-: The default langcode for the first site to create during install.
+: The default language for the first site to create during install.
 
 
 
@@ -2056,11 +2056,11 @@ Alias for [setup/db-creds](#setup-db-creds).
 
 
 --driver
-: The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
+: The database driver to use. Either `'mysql'` for MySQL or `'pgsql'` for PostgreSQL.
 
 
 --server
-: The database server name or IP address. Usually 'localhost' or '127.0.0.1'.
+: The database server name or IP address. Usually `'localhost'` or `'127.0.0.1'`.
 
 
 --port
@@ -2109,11 +2109,11 @@ Stores new DB connection settings to the `.env` file.
 
 
 --driver
-: The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
+: The database driver to use. Either `'mysql'` for MySQL or `'pgsql'` for PostgreSQL.
 
 
 --server
-: The database server name or IP address. Usually 'localhost' or '127.0.0.1'.
+: The database server name or IP address. Usually `'localhost'` or `'127.0.0.1'`.
 
 
 --port

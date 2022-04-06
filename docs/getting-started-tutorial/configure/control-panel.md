@@ -45,7 +45,7 @@ We won’t be using these utilities in this tutorial, but it might be good to kn
 
 ## Plugin Store
 
-Craft’s plugin store offers free and paid plugins that add functionality to your Craft CMS website.
+Craft’s Plugin Store offers free and paid plugins that add functionality to your Craft CMS site.
 
 <BrowserShot url="https://tutorial.nitro/admin/plugin-store" :link="false" caption="The Craft CMS Plugin Store.">
 <img src="../images/plugin-store.png" alt="Screenshot of Plugin Store" />

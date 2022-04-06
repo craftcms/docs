@@ -10,7 +10,7 @@ If you’ve used Twig in other projects that’ll be useful here. Craft adds its
 
 Creating Twig templates isn’t all that different from working with HTML, CSS, or JavaScript. In fact, you can write an entire Twig template without even using Twig!
 
-If you’ve never written any part of a website before that’s okay, but it might help to familiarize yourself with fundamental [HTML, CSS, and JavaScript](https://developer.mozilla.org/en-US/docs/Web/Guide/Introduction_to_Web_development).
+If you’ve never built any part of a site before that’s okay, but it might help to familiarize yourself with fundamental [HTML, CSS, and JavaScript](https://developer.mozilla.org/en-US/docs/Web/Guide/Introduction_to_Web_development).
 
 The idea is that you build whatever normal parts you need for a web page and Twig provides super powers for rendering dynamic content wherever you need it.
 
@@ -87,7 +87,7 @@ You’ll need to restart the app so they can all take effect.
 
 ![](../images/vs-code-extension-pane.png)
 
-Once the extensions are installed, your Twig templates will get helpful syntax highlighting to make code more readable and auto-complete tips. Here’s a before and after comparison:
+Once the extensions are installed, your Twig templates will get helpful syntax highlighting to make code more readable and autocomplete tips. Here’s a before and after comparison:
 
 ![](../images/vs-code-extensions.png)
 

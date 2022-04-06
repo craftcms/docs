@@ -17,7 +17,7 @@ define('CRAFT_LOCALE',   'nl');
 
 ### `CRAFT_ENVIRONMENT`
 
-Defines the name of the current environment, which defaults to the server’s host name. (See [multi-environment-configs](multi-environment-configs.md) for more info.)
+Defines the name of the current environment, which defaults to the server’s hostname. (See [multi-environment-configs](multi-environment-configs.md) for more info.)
 
 ```php
 define('CRAFT_ENVIRONMENT', 'dev');

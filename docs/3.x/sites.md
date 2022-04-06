@@ -82,9 +82,9 @@ You can change the Primary site once you create additional sites. Craft will aut
 
 Each site has a Base URL Craft uses to generate links to entries and other site content.
 
-Multiple sites can share the same host name, such as `https://craftcms.com/` and `https://craftcms.com/de/`, or they can have different host names, such as `https://craftcms.com/` and `https://de.craftcms.com/`.
+Multiple sites can share the same hostname, such as `https://craftcms.com/` and `https://craftcms.com/de/`, or they can have different hostnames, such as `https://craftcms.com/` and `https://de.craftcms.com/`.
 
-If you want to create a site with a different host name, you must configure your server to handle traffic for it. The host name can either point to the same web root as your current site (e.g. `web/`), or you may want to give it its own separate web root. If you do the latter, make sure you copy your `.htaccess` and `index.php` files into the new web root.
+If you want to create a site with a different hostname, you must configure your server to handle traffic for it. The hostname can either point to the same web root as your current site (e.g. `web/`), or you may want to give it its own separate web root. If you do the latter, make sure you copy your `.htaccess` and `index.php` files into the new web root.
 
 ::: tip
 If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](https://craftcms.com/support/license-enforcement), you’ll want to pick one of the domains to access the Craft control panel from for _all_ sites.
@@ -105,11 +105,11 @@ In the settings for each Channel Section is an option to propagate entries in th
 
 When enabled, Craft will create the new entry in each site enabled for that section using the submitted content.
 
-If you would like the section's content to be separate then disable this option for that section.
+If you would like the section’s content to be separate then disable this option for that section.
 
 ## Setting Up a New Site
 
-In this short guide we'll walk through the steps of setting up a new site in Craft. This guide assumes you already have Craft installed and the default site setup and configured.
+In this short guide we’ll walk through the steps of setting up a new site in Craft. This guide assumes you already have Craft installed and the default site setup and configured.
 
 ### Step 1: Create the Site in Settings
 
@@ -176,7 +176,7 @@ Craft will allow you to update this field’s content in each entry on a per-lan
 
 ### Step 4: Update Your Templates
 
-If you have any templates that you only want to serve from a specific site, you can create a new subfolder in your templates folder, named after your site's handle, and place the templates in there.
+If you have any templates that you only want to serve from a specific site, you can create a new subfolder in your templates folder, named after your site’s handle, and place the templates in there.
 
 For example, if you wanted to give your German site its own homepage template, you might set your templates folder up like this:
 
@@ -245,7 +245,7 @@ echo Craft::t('site', 'Contact us');
 
 Once you’ve prepped a message for translations, you need to supply the actual translation.
 
-To do that, create a new folder in your project’s base directory called `translations/`, and within that, create a new folder named after the target language’s ID. Within that, create a file named after the translation category you want to create massages for (`site.php` for project messages, `app.php` to overwrite Craft's control panel messages, or `<plugin-handle>.php` to overwrite a plugin’s messages).
+To do that, create a new folder in your project’s base directory called `translations/`, and within that, create a new folder named after the target language’s ID. Within that, create a file named after the translation category you want to create massages for (`site.php` for project messages, `app.php` to overwrite Craft’s control panel messages, or `<plugin-handle>.php` to overwrite a plugin’s messages).
 
 For example, if you want to translate your project’s messages into German, this is what your project’s directory structure should look like:
 

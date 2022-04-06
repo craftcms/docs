@@ -8,6 +8,10 @@
     bash <(curl -sLS http://installer.getnitro.sh)
     ````
 
+::: warning
+Nitro does not support MySQL for Apple Silicon, but you can use MariaDB interchangeably.
+:::
+
 ### macOS via Brew
 
 You can alternatively install Nitro using the [Homebrew](https://brew.sh) package manager if you have it installed.

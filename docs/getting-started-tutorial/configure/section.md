@@ -56,7 +56,7 @@ We’ll create a local Asset Volume within the web root for blog post images:
 Craft will create that folder and let you upload and manage its Assets from the control panel.
 
 ::: tip
-`@web` and `@webroot` are [aliases](/3.x/config/#aliases) Craft includes by default, pointing to the base website URL and document root file path respectively.
+`@web` and `@webroot` are [aliases](/3.x/config/#aliases) Craft includes by default, pointing to the base site URL and document root file path respectively.
 :::
 
 <BrowserShot url="https://tutorial.nitro/admin/settings/assets/volumes/new" :link="false" caption="Settings for the new blog volume.">

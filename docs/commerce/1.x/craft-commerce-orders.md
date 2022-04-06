@@ -17,55 +17,55 @@ It returns an [ElementCriteriaModel](https://craftcms.com/docs/2.x/templating/el
 
 `craft.commerce.orders` supports the following parameters:
 
-### type
+### `type`
 
 Product Type model or handle.
 
-### typeId
+### `typeId`
 
 Product type ID.
 
-### number
+### `number`
 
 The unique hash of the order.
 
-### completed
+### `completed`
 
 Accepts `true`.  e.g `{% set orders = craft.commerce.orders.completed(true).find() %}` would return completed orders since they have `isCompleted` set to true.
 
-### isCompleted
+### `isCompleted`
 
 Accepts `1` or `not 1`.  e.g `{% set orders = craft.commerce.orders.isCompleted('not 1').find() %}` would return incomplete orders (carts) since they have `isCompleted` set to false.
 
-### dateOrdered
+### `dateOrdered`
 
 The date the order was completed.
 
-### orderStatus
+### `orderStatus`
 
-accepts an `orderStatus` model.
+Accepts an `orderStatus` model.
 
-### orderStatusId
+### `orderStatusId`
 
 Accepts the ID of an order status.
 
-### customer
+### `customer`
 
 A customer Model can be passed to get orders for that customer only. e.g `{% set orders = craft.commerce.orders.customer(craft.commerce.customer).find() %}`
 Do not use this to get a cart, as the default response does not include orders that are still
 carts (use `{% set cart = craft.commerce.getCart %}` to get the current user’s cart).
 
-### user
+### `user`
 
 A customer Model can be passed to get orders for that user only. e.g `{% set orders = craft.commerce.orders.user(currentUser).find() %}`
 Do not use this to get a cart, as the default response does not include orders that are still
 carts (use `{% set cart = craft.commerce.getCart %}` to get the current user’s cart).
 
-### customerId
+### `customerId`
 
 Accepts an ID of a customer.
 
-### updatedAfter
+### `updatedAfter`
 
 Only fetch orders with an Updated Date that is on or after the given date.
 
@@ -79,7 +79,7 @@ You can specify dates in the following formats:
 - A Unix timestamp
 - A DateTime variable
 
-### updatedBefore
+### `updatedBefore`
 
 Only fetch orders with an Updated Date that is before the given date.
 
@@ -93,19 +93,19 @@ You can specify dates in the following formats:
 - A Unix timestamp
 - A DateTime variable
 
-### isPaid
+### `isPaid`
 
 Accepts `true`. Limits results to only orders where totalPaid is >= totalPrice
 
-### isUnPaid
+### `isUnPaid`
 
 Accepts `true`. Limits results to only orders where totalPaid is < totalPrice
 
-### datePaid
+### `datePaid`
 
 The date the order was paid.
 
-### hasPurchasables
+### `hasPurchasables`
 
 Returns orders that contains specific purchasables.
 

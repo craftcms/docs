@@ -61,7 +61,7 @@ The Craft Autocomplete package provides Twig template autocompletion in PhpStorm
 - Don’t use a `switch` statement when a single `if` condition will suffice.
 - Use single quotes (`'`) whenever double quotes (`"`) aren’t needed.
 - Use shortcut operators (`+=`, `-=`, `*=`, `/=`, `%=`, `.=`, etc.) whenever possible.
-- Use shortcut regex patterns (`\d`, `\D`, `\w`, `\W`, etc.) whenever possible.
+- Use shortcut regular expression patterns (`\d`, `\D`, `\w`, `\W`, etc.) whenever possible.
 - Use the `DIRECTORY_SEPARATOR` constant rather than `'/'` when defining file paths.
 
 ::: tip

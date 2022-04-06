@@ -40,7 +40,7 @@ A big architectural change for Nitro 2 was the addition of the proxy container t
 
 ### Sites
 
-Each site has its own PHP, Git, and npm+node version and can be independently configured to use [Xdebug](xdebug.md), customized [PHP settings](php-settings.md), and [extensions](extensions.md). It exposes ports 8080, 9000, and 9003 to the proxy, which you can reach via the hostname on ports 80 (http) and 443 (https) from your host machine.
+Each site has its own PHP, Git, and npm+Node.js version and can be independently configured to use [Xdebug](xdebug.md), customized [PHP settings](php-settings.md), and [extensions](extensions.md). It exposes ports 8080, 9000, and 9003 to the proxy, which you can reach via the hostname on ports 80 (http) and 443 (https) from your host machine.
 
 #### Site Paths
 
@@ -54,7 +54,7 @@ When you create a Nitro site, you map a directory on your machine—like `/Users
 | `/Users/oli/dev/my-project/web`        | `/app/web`           |
 | `/Users/oli/dev/my-project/web/assets` | `/app/web/assets`    |
 
-This is what happens by default; if you configure your Nitro site with a higher path and deeper webroot…
+This is what happens by default; if you configure your Nitro site with a higher path and deeper web root…
 
 ```yaml
 path: ~/dev

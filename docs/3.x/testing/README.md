@@ -3,7 +3,7 @@
 ## Introduction
 
 Testing is a crucial part of ensuring that software continues to work
-as the initial design expected. Things often tend to break when changing existing code bases
+as the initial design expected. Things often tend to break when changing existing codebases
 and often not directly in the places you are working on when errors occur.
 
 This is where automated testing can help. If done correctly critical parts of

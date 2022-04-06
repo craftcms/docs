@@ -8,7 +8,7 @@ Before you can create tags, you must create Tag Groups to contain them.
 
 To create a new tag group, go to Settings → Tags and click New Tag Group.
 
-Each tag group holds a unique set of tags, and lets you define a custom set of [fields](fields.md) that should be available to tags within the group. However, you don't need to assign any fields to the Tag Group Field Layout in order to use the group.
+Each tag group holds a unique set of tags, and lets you define a custom set of [fields](fields.md) that should be available to tags within the group. However, you don’t need to assign any fields to the Tag Group Field Layout in order to use the group.
 
 ## Assigning Tags
 
@@ -68,6 +68,10 @@ Tag queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
@@ -98,6 +102,10 @@ Tag queries support the following parameters:
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
 | [uri](#uri)                               | Narrows the query results based on the tags’ URIs.
 | [with](#with)                             | Causes the query to return matching tags eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
@@ -269,6 +277,10 @@ $tags = \craft\elements\Tag::find()
 Causes the query results to be returned in the order specified by [id](#id).
 
 
+
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
 
 
 
@@ -511,8 +523,8 @@ If [unique](#unique) is set, this determines which site should be selected when 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 

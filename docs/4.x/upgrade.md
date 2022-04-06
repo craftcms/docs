@@ -8,7 +8,7 @@ Before you begin, make sure that:
 
 - you’ve reviewed the changes in Craft 4 further down this page
 - all your environments meet Craft 4’s [minimum requirements](requirements.md)
-    - [PHP 8.0.2+ and MySQL 5.7.8+](https://craftcms.com/knowledge-base/preparing-for-craft-4#upgrade-php-and-mySQL)
+    - [PHP 8.0.2+ and MySQL 5.7.8+, MariaDB 10.2.7+, or PostgreSQL 10+](https://craftcms.com/knowledge-base/preparing-for-craft-4#upgrade-your-environment)
     - newly-required PHP extensions: [BCMath](https://www.php.net/manual/en/book.bc.php) and [Intl](http://php.net/manual/en/book.intl.php)
 - your site is running [the latest **Craft 3.7** release](https://craftcms.com/knowledge-base/preparing-for-craft-4#update-to-the-latest-version-of-craft-3)
 - your plugins are up to date and you’ve verified that they’ve been updated for Craft 4
@@ -29,7 +29,7 @@ The best way to upgrade a Craft 3 site is to get everything squeaky-clean and up
 3. Make sure you don’t have any pending or active jobs in your queue.
 4. Run `php craft project-config/rebuild` and make sure all background tasks have completed.
 5. Create a new database backup just in case things go sideways.
-6. Edit your project’s `composer.json` to require `"craftcms/cms": "4.0.0-beta.1"` and Craft-4-compatible plugins all at once.
+6. Edit your project’s `composer.json` to require `"craftcms/cms": "^4.0.0-beta.1"` and Craft-4-compatible plugins all at once. (You may also need to update your platform requirement to `php: "8.0.2"`.)
 7. Run `composer update`.
 8. Run `php craft migrate/all`.
 
@@ -175,6 +175,8 @@ Twig 3 also removed support for the `if` param in `{% for %}` tags, but you can 
 
 Some template functions have been removed completely:
 
+<!-- textlint-disable -->
+
 | Old Template Function | What to do instead
 | --------------------- | -------------------
 | `getCsrfInput()`      | `csrfInput()`
@@ -201,6 +203,8 @@ Some template functions have been removed completely:
 | `day()`               | `|date('j')`
 | `nice()`              | `|dateTime('short')`
 | `uiTimestamp()`       | `|timestamp('short')`
+
+<!-- textlint-enable -->
 
 ## Template Variables
 

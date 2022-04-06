@@ -2,9 +2,13 @@
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.17.2",
+    "@playwright/test": "^1.20.1",
     "@vuepress/core": "^1.8.3",
     "@vuepress/plugin-google-analytics": "^1.8.3",
     "autoprefixer": "^9.8.4",
+    "axe-core": "^4.4.1",
+    "axe-html-reporter": "^2.2.3",
+    "axe-playwright": "^1.1.11",
     "babel-preset-vue": "^2.0.2",
     "commander": "^2.20.3",
     "css-loader": "^4.0.0",
@@ -13,11 +17,18 @@
     "markdown-it-deflist": "^2.1.0",
     "markdown-it-imsize": "^2.0.1",
     "nprogress": "^0.2.0",
-    "postcss": "^8.4.7",
+    "postcss": "^8.4.8",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-nested": "^4.2.1",
+    "serve": "^13.0.2",
     "tailwindcss": "^1.4.6",
+    "textlint": "^12.1.1",
+    "textlint-filter-rule-comments": "^1.2.2",
+    "textlint-rule-apostrophe": "^2.0.0",
+    "textlint-rule-linkable-params": "github:craftcms/textlint-rule-linkable-params",
+    "textlint-rule-no-todo": "^2.0.1",
+    "textlint-rule-terminology": "^2.1.5",
     "v-tooltip": "^2.1.3",
     "vue-fragment": "^1.5.2",
     "vue-loader": "^15.7.1",
@@ -38,7 +49,10 @@
     "docs:build": "vuepress build docs --dest=docs/.vuepress/dist/docs && npm run docs:sitemap && npm run docs:redirects",
     "docs:sitemap": "vuepress-sitemap -H https://craftcms.com/docs/ -d docs/.vuepress/dist/docs",
     "docs:redirects": "cp ./_redirects ./docs/.vuepress/dist/",
-    "test": "node ./node_modules/.bin/jest"
+    "serve-static": "./node_modules/.bin/serve -l 3030 ./docs/.vuepress/dist/",
+    "textlint": "./node_modules/.bin/textlint 'docs/**'",
+    "test:playwright": "npx playwright test",
+    "test:jest": "node ./node_modules/.bin/jest"
   },
   "dependencies": {
     "copy-to-clipboard": "^3.3.1",
@@ -46,5 +60,10 @@
     "html-to-text": "^7.1.1",
     "marked": "^4.0.12",
     "vue-autosuggest": "^2.2.0"
+  },
+  "jest": {
+    "testMatch": [
+      "**/*.test.js"
+    ]
   }
 }

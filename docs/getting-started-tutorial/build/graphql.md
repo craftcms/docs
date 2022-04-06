@@ -108,7 +108,7 @@ The blog post detail template displays an entire blog post with its full content
 - `entry.postCategories`
   - `title`
   - `url`
-- `siteInformation.siteDescription` processed by markdown
+- `siteInformation.siteDescription` processed by Markdown
 
 With the Twig setup, the web server provides its URL to Craft CMS, which uses its routing logic to fetch the entry and make it available as `entry` in the template.
 

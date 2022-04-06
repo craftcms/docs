@@ -28,7 +28,7 @@ To create a new email, navigate to **Commerce** → **System Settings** → **Em
 
 <toggle-tip>
 
-<img src="./assets/new-email-settings.png" alt="New Email Settings.">
+<img src="./images/new-email-settings.png" alt="New Email Settings.">
 
 </toggle-tip>
 
@@ -138,7 +138,7 @@ To use the email you’ve created, visit **Commerce** → **System Settings** �
 
 Select the email by name in the **Status Emails** field. You can select as many emails as you’d like for any given Order Status.
 
-![](./assets/order-status-email-selection.png)
+![](./images/order-status-email-selection.png)
 
 Once you choose **Save**, the designated emails will be sent when an order is assigned that status.
 

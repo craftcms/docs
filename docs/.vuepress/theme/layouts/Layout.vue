@@ -21,11 +21,12 @@
         <Hamburger @click="toggleSidebar" />
         <div
           class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center"
+          role="search"
         >
           <SearchBox
             v-if="
               $site.themeConfig.search !== false &&
-                $page.frontmatter.search !== false
+              $page.frontmatter.search !== false
             "
           />
         </div>
@@ -164,7 +165,7 @@ import {
   getAlternateVersion,
   getPageWithRelativePath,
   fixDoubleSlashes,
-  getSameContentForVersion
+  getSameContentForVersion,
 } from "../util";
 
 import { getStorage, setStorage, unsetStorage } from "../Storage";
@@ -177,7 +178,7 @@ export default {
     LeftBar,
     RightBar,
     SearchBox,
-    Hamburger
+    Hamburger,
   },
 
   data: () => ({
@@ -192,8 +193,8 @@ export default {
         : 0,
     colorModes: {
       light: "theme-light",
-      dark: "theme-dark"
-    }
+      dark: "theme-dark",
+    },
   }),
 
   computed: {
@@ -227,9 +228,9 @@ export default {
         {
           "no-navbar": !this.shouldShowNavbar,
           "sidebar-open": this.isSidebarOpen,
-          "sidebar-transitioning": this.isSidebarTransitioning
+          "sidebar-transitioning": this.isSidebarTransitioning,
         },
-        userPageClass
+        userPageClass,
       ];
     },
 
@@ -263,7 +264,7 @@ export default {
 
     colorMode() {
       return this.isDark ? "dark" : "light";
-    }
+    },
   },
 
   mounted() {
@@ -284,7 +285,7 @@ export default {
         setTimeout(() => {
           if (element) {
             element.scrollIntoView({
-              behavior: this.getPrefersReducedMotion() ? "auto" : "smooth"
+              behavior: this.getPrefersReducedMotion() ? "auto" : "smooth",
             });
           }
         }, 750);
@@ -452,7 +453,7 @@ export default {
     onTouchStart(e) {
       this.touchStart = {
         x: e.changedTouches[0].clientX,
-        y: e.changedTouches[0].clientY
+        y: e.changedTouches[0].clientY,
       };
     },
 
@@ -474,7 +475,7 @@ export default {
       setTimeout(() => {
         this.isSidebarTransitioning = false;
       }, 1500);
-    }
-  }
+    },
+  },
 };
 </script>
