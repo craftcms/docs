@@ -371,7 +371,7 @@ The default options that should be applied to each search term.
 
 Options include:
 
-- `attribute` – The attribute that the term should apply to (e.g. 'title'), if any. (`null` by default)
+- `attribute` – The attribute that the term should apply to (e.g. `'title'`), if any. (`null` by default)
 - `exact` – Whether the term must be an exact match (only applies if `attribute` is set). (`false` by default)
 - `exclude` – Whether search results should *exclude* records with this term. (`false` by default)
 - `subLeft` – Whether to include keywords that contain the term, with additional characters before it. (`false` by default)
@@ -1250,7 +1250,7 @@ You may provide your own command optionally using several tokens Craft will swap
 
 - `{path}` - the target backup file path
 - `{port}` - the current database port
-- `{server}` - the current database hostname
+- `{server}` - the current database host name
 - `{user}` - the user to connect to the database
 - `{database}` - the current database name
 - `{schema}` - the current database schema (if any)
@@ -1341,7 +1341,7 @@ There are several tokens you can use that Craft will swap out at runtime:
 
 - `{path}` - the backup file path
 - `{port}` - the current database port
-- `{server}` - the current database hostname
+- `{server}` - the current database host name
 - `{user}` - the user to connect to the database
 - `{database}` - the current database name
 - `{schema}` - the current database schema (if any)
@@ -1473,8 +1473,8 @@ Defined by
 The URI segment Craft should look for when determining if the current request should route to the control panel rather than
 the front-end website.
 
-This can be set to `null` if you have a dedicated hostname for the control panel (e.g. `cms.example.com`), or you are running Craft in
-[Headless Mode](config3:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own web root
+This can be set to `null` if you have a dedicated host name for the control panel (e.g. `cms.example.com`), or you are running Craft in
+[Headless Mode](config3:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own webroot
 directory on your server, with an `index.php` file that defines the `CRAFT_CP` PHP constant.
 
 ```php
@@ -1482,7 +1482,7 @@ define('CRAFT_CP', true);
 ```
 
 Alternatively, you can set the <config3:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your
-control panel due to URI conflicts with actual folders/files in your main web root.
+control panel due to URI conflicts with actual folders/files in your main webroot.
 
 (For example, if you have an `assets/` folder, that would conflict with the `/assets` page in the control panel.)
 
@@ -1577,7 +1577,7 @@ Defined by
 
 Whether generated URLs should omit `index.php` (e.g. `http://domain.com/path` instead of `http://domain.com/index.php/path`)
 
-This can only be possible if your server is configured to redirect would-be 404s to `index.php`, for example, with the redirect found
+This can only be possible if your server is configured to redirect would-be 404's to `index.php`, for example, with the redirect found
 in the `.htaccess` file that came with Craft:
 
 ```
@@ -1873,7 +1873,7 @@ Defined by
 </div>
 
 Determines what protocol/schema Craft will use when generating tokenized URLs. If set to `'auto'`, Craft will check the
-current site’s base URL and the protocol of the current request and if either of them are https will use `https` in the tokenized URL. If not,
+current site’s base URL and the protocol of the current request and if either of them are HTTPS will use `https` in the tokenized URL. If not,
 will use `http`.
 
 If set to `false`, Craft will always use `http`. If set to `true`, then, Craft will always use `https`.
@@ -2713,9 +2713,9 @@ List of additional file kinds Craft should support. This array will get merged w
     'photoshop' => [
         'extensions' => ['psb'],
     ],
-    // register new “Style Sheet” file kind
+    // register new "Stylesheet" file kind
     'stylesheet' => [
-        'label' => 'Style Sheet',
+        'label' => 'Stylesheet',
         'extensions' => ['css', 'less', 'pcss', 'sass', 'scss', 'styl'],
     ],
 ],
@@ -3245,7 +3245,7 @@ Since
 
 </div>
 
-Whether GraphQL introspection queries are allowed. Defaults to `true` and is always allowed in the control panel.
+Whether GraphQL introspection queries are allowed. Defaults to `true` and is always allowed in the CP.
 
 
 
