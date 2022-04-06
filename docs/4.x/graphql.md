@@ -1144,8 +1144,8 @@ Craft defines several interfaces to be implemented by the different GraphQL type
 This is the interface implemented by all assets.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1186,8 +1186,8 @@ This is the interface implemented by all assets.
 This is the interface implemented by all entries.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1245,8 +1245,8 @@ This is the interface implemented by all entries.
 This is the interface implemented by all global sets.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1269,8 +1269,8 @@ This is the interface implemented by all global sets.
 This is the interface implemented by all matrix blocks.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1296,8 +1296,8 @@ This is the interface implemented by all matrix blocks.
 This is the interface implemented by all users.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1327,8 +1327,8 @@ This is the interface implemented by all users.
 This is the interface implemented by all categories.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1362,8 +1362,8 @@ This is the interface implemented by all categories.
 This is the interface implemented by all tags.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
