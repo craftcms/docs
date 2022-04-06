@@ -23,7 +23,8 @@
         ["sub-folder", "subfolder"],
         ["CP", "control panel"],
         ["e-commerce", "ecommerce"],
-        ["web-?root", "web root"]
+        ["web-?root", "web root"],
+        "Base64"
       ],
       "exclude": [
         "front[- ]end(\\w*)",
@@ -38,7 +39,8 @@
         "ID",
         "Markdown",
         "URL",
-        "walk[- ]through"
+        "walk[- ]through",
+        "(?<=(?:\\w+[^.?!])? )base64\\b"
       ]
     }
   }
