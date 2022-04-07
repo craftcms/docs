@@ -318,7 +318,35 @@ Use `paymentFormErrors` to get the payment form errors instead.
 
 ## Config Settings
 
+### PDF Settings
+
 The `orderPdfFilenameFormat` and `orderPdfPath` settings have been removed. Create a default order [PDF](pdfs.md#creating-a-pdf) instead.
+
+### Gateway Settings
+
+Support for `commerce-gateways.php` has been removed. We recommend migrating any gateway-specific setting overrides to [environment variables](/4.x/config/#environmental-configuration).
+
+**Commerce 3**
+
+```php
+// config/commerce-gateways.php
+return [
+    'myStripeGateway' => [
+        'apiKey' => getenv('STRIPE_API_KEY'),
+    ],
+];
+```
+
+**Commerce 4**
+
+```sh
+# .env
+STRIPE_API_KEY="<MY-API-KEY>"
+```
+
+![Screenshot of Stripe gateway settings in the control panel cropped to emphasize the Secret API Key field containing a $STRIPE_API_KEY environment variable placeholder](./images/stripe-gateway-api-key.png)
+
+
 
 ## Twig Filters
 
