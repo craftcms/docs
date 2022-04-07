@@ -15,6 +15,7 @@ Before you begin, make sure that:
 - you’ve reviewed the changes in Commerce 4 [in the changelog](https://github.com/craftcms/commerce/blob/main/CHANGELOG.md#400) and further down this page
 - you’re running the latest version of Commerce 3.4.x
 - you’ve made sure there are no deprecation warnings from Commerce 3 that need fixing
+- you’ve checked the [Payment Gateways](#payment-gateways) section below and made sure any gateway plugins are ready before the upgrade
 - your **database and files are backed up** in case everything goes horribly wrong
 
 Once you’ve completed these steps, you’re ready continue with the upgrade process.
