@@ -30,7 +30,7 @@ $results = \craft\elements\Entry::find()
 :::
 
 ::: tip
-The [`defaultSearchTermOptions`](config3:defaultSearchTermOptions) config setting lets you adjust default search behavior.
+Use the [`defaultSearchTermOptions`](config4:defaultSearchTermOptions) config setting to adjust default search behavior.
 :::
 
 ## Supported Syntaxes
@@ -66,8 +66,6 @@ Searching for… | will find elements…
 `body::*dog` | where the `body` field ends with “dog”.
 `body:*` | where the `body` field contains any value.
 `-body:*` | where the `body` field is empty.
-
-The exact behavior will depend on your [`defaultSearchTermOptions`](config3:defaultSearchTermOptions) config setting, where `subLeft` and `subRight`—when set to `true`—add a wildcard to search keywords by default behind the scenes.
 
 ## Searching for Specific Element Attributes
 
