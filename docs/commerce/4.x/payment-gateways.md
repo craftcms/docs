@@ -55,29 +55,7 @@ See the _Extending Commerce_ section’s [Payment Gateway Types](extend/payment-
 
 When you’re configuring gateways in the Craft control panel, we recommend using [environment variables](https://craftcms.com/docs/3.x/config/#environmental-configuration) so environment-specific settings and sensitive API keys don’t end up in the database or project config.
 
-::: tip
-Craft CMS 3.7.22 added UI giving boolean values the option to be set with environment variables. Previously, these could only be overridden in static config files.
-:::
-
-### `commerce-gateways.php`
-
-The now-deprecated `config/commerce-gateways.php` format allows storing any number of gateway setting overrides in a common static file, where each array of settings is indexed by a key that matches a payment gateway handle you’ve first configured in the control panel:
-
-```php
-return [
-    'myStripeGateway' => [
-        'apiKey' => getenv('STRIPE_API_KEY'),
-    ],
-];
-```
-
-If you’re overriding gateway settings this way, you’ll get a deprecation warning:
-
-> Overriding gateway settings using the `commerce-gateways.php` file has been deprecated. Use the gateway’s config file instead.
-
-Commerce 4 will not have support for this format, so it’s best to remove `config/commerce-gateways.php` and use environment variables like we recommend above. If you must override gateway settings, you can still do that using a standard config file for your gateway plugin (i.e. `config/commerce-stripe.php`)—but be aware that you’ll only be able to provide one set of settings for that gateway.
-
-While it’s possible to leverage [dependency injection](https://www.yiiframework.com/doc/guide/2.0/en/concept-di-container) to support multiple configurations per payment gateway, settings will eventually get captured in the project config and likely lead to more issues or confusion.
+If you must override gateway settings, you can still do that using a standard config file for your gateway plugin (i.e. `config/commerce-stripe.php`)—but be aware that you’ll only be able to provide one set of settings for that gateway.
 
 ## Payment Sources
 
