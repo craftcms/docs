@@ -1631,14 +1631,14 @@ If more than one of the block types are defined, only the block type that is lis
 
 ### Saving Files via Mutations
 
-You can provide files for Assets as either Base64-encoded data, or a URL that Craft will download.
+You can provide files for Assets as either base64-encoded data, or a URL that Craft will download.
 
 Either way you’ll use the `FileInput` GraphQL input type, which has the following fields:
 
 | Field      | Description
 | ---------- | -----------
 | `url`      | URL of a file to be downloaded.
-| `fileData` | File contents in Base64 format. If provided, takes precedence over `url`.
+| `fileData` | File contents in base64 format. If provided, takes precedence over `url`.
 | `filename` | Filename to use for the saved Asset. If omitted, Craft will create a filename.
 
 ### Mutating Entries

@@ -263,7 +263,7 @@ Assets fields can handle new file uploads as well:
 Don’t forget to set `enctype="multipart/form-data"` on your `<form>` tag so your browser knows to submit the form as a multipart request.
 :::
 
-Alternatively, you can submit Base64-encoded file data, which the Assets field will decode and treat as an uploaded file. To do that, you have to specify both the data and the filename like this:
+Alternatively, you can submit base64-encoded file data, which the Assets field will decode and treat as an uploaded file. To do that, you have to specify both the data and the filename like this:
 
 ```twig
 {{ hiddenInput(
