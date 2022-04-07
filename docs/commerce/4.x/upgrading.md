@@ -482,3 +482,11 @@ Permissions for managing products have become more granular in Commerce 4:
 
 - `commerce-manageProducts` has been replaced by `commerce-editProductType:<uid>` and nested `commerce-createProducts:<uid>` and `commerce-deleteProducts:<uid>` permissions
 - `commerce-manageCustomers` has been replaced by Craft’s standard user management permissions.
+
+## Payment Gateways
+
+There are gateway-specific changes to be aware of in Commerce 4 in addition to the [removed support for `commerce-gateways.php`](#gateway-settings).
+
+### Stripe
+
+The “Charge” gateway has been removed. Use the “Payment Intents” gateway instead.
