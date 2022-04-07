@@ -19,7 +19,7 @@
         ["(\\s)html", "HTML"],
         ["(\\s)css", "CSS"],
         ["(\\s)url", "URL"],
-        ["gray", "grey"],
+        ["grey", "gray"],
         ["sub-folder", "subfolder"],
         ["CP", "control panel"],
         ["e-commerce", "ecommerce"],
@@ -38,7 +38,8 @@
         "ID",
         "Markdown",
         "URL",
-        "walk[- ]through"
+        "walk[- ]through",
+        "web[- ]?site(s)?"
       ]
     }
   }
