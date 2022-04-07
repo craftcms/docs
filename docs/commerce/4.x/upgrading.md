@@ -474,7 +474,7 @@ A few controller methods have been removed as well:
 
 - [OrdersController::_prepCustomersArray()](commerce3:craft\commerce\controllers\OrdersController::_prepCustomersArray()) (Use [_customerToArray()](commerce4:craft\commerce\controllers\OrdersController::_customerToArray()) instead.)
 - [PlansController::actionRedirect()](commerce3:craft\commerce\controllers\PlansController::actionRedirect())
-- [ProductsPreviewController::enforceProductPermissions()](commerce3:craft\commerce\controllers\ProductsPreviewController::enforceProductPermissions())
+- [ProductsPreviewController::<wbr>enforceProductPermissions()](commerce3:craft\commerce\controllers\ProductsPreviewController::enforceProductPermissions())
 
 ## User Permissions
 
