@@ -467,7 +467,7 @@ Some settings in the control panel can be set to environment variables (like the
   - **HTML Email Template**
   - **Username** (Gmail and SMTP)
   - **Password** (Gmail and SMTP)
-  - **Host Name** (SMTP)
+  - **Hostname** (SMTP)
   - **Port** (SMTP)
   - **Use authentication** (SMTP)
   - **Encryption Method** (SMTP)
