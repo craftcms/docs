@@ -13,25 +13,32 @@ Before you can create categories, you must create Category Groups to contain the
 - Which template should load if a category’s URL is accessed
 - Which [fields](fields.md) categories in the group should have
 
-To create a new category group, go to Settings → Categories and click the “New Category Group” button.
+To create a new category group, go to **Settings** → **Categories** and click “New Category Group”.
 
 After you create at least one category group, you will be able to create categories for that group.
 
 ## Category Field Layout
 
-Each Category Groups can have its own Field Layout, which allows you to customize the data that is associated with each category in the group. By default, every category will have a Title field (the category name).
+Each Category Group can have its own Field Layout, which allows you to customize the data that’s associated with each category in the group. By default, every category will have a Title field (the category name).
 
-You can also add additional fields using all of the available field types in Craft. If a field doesn’t yet exist, you must first create it via Settings → Fields. The new field will then be available to assign to the Field Layout of your Category Group.
+You can also add additional fields using all of the available field types in Craft. If a field doesn’t yet exist, you must first create it via **Settings** → **Fields**. The new field will then be available to assign to the Field Layout of your Category Group.
 
 ## Creating and Editing Categories
 
-If you have at least one category group, there will be a “Categories” tab in the primary control panel navigation. Clicking on it will take you to the category index. From there you can choose a category group from the sidebar, and add/reorder/delete categories within it:
+When there’s at least one category group, **Categories** will appear in the primary control panel navigation. Clicking it will take you to the category index. From there, you can choose a category group from the sidebar, and add/reorder/delete categories within it:
 
-![Category Index](./images/categories-category-index.png)
+![Screenshot of the categories index, with “Categories” active in the main navigation, the “Types of Coffee Drinks” category group selected, and a listing of category names in a nested hierarchy](./images/categories-category-index.png)
 
-Double-clicking on a category will bring up a modal that lets you edit its name, slug, and any fields you’ve assigned to the group.
+::: tip
+Select the “Structure” sort to work with a drag-and-drop hierarchy:
+![Close crop of a screenshot with an arrow pointing to the “Structure” view option in the menu immediately to the right of the search bar](./images/category-structure-view.png)
+:::
 
-![Category Edit Modal](./images/categories-edit-popup.png)
+Double-clicking a category’s status icon opens a slideout for quickly editing that category’s details:
+
+![Screenshot of the category listing with a slideout opened for editing the “Americano” category fields](./images/category-slideout.png)
+
+You can also click a category’s title to visit its edit page just like an entry.
 
 When you create a category, you have the following options:
 
@@ -40,7 +47,7 @@ When you create a category, you have the following options:
 - Choose a Parent category. The new category will have a hierarchical relationship with its parent. This is helpful for creating taxonomies with multiple levels. You also have the option of creating a new category while assigning the Parent.
 
 ::: tip
-You can only nest categories up to the level specified in the Max Level field Category Group settings. If no level is specified then the nesting level is unlimited.
+You can only nest categories up to the level specified in the **Max Level** field Category Group settings. If it’s empty, the nesting level is unlimited.
 :::
 
 ## Assigning Categories
