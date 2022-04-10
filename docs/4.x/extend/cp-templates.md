@@ -10,7 +10,7 @@ Modules can have templates too, but they will need to manually define a [templat
 
 ## Page Templates
 
-To add a new full page to the control panel, create a template that extends the [_layouts/cp.html](https://github.com/craftcms/cms/blob/develop/src/templates/_layouts/cp.html) template.
+To add a new full page to the control panel, create a template that extends the [_layouts/cp.twig](https://github.com/craftcms/cms/blob/4.0/src/templates/_layouts/cp.twig) template.
 
 At a minimum, your template should set a `title` variable and define a `content` block:
 
@@ -25,7 +25,7 @@ At a minimum, your template should set a `title` variable and define a `content`
 
 ### Supported Variables
 
-The following variables are supported by the `_layouts/cp.html` template:
+The following variables are supported by the `_layouts/cp.twig` template:
 
 Variable | Description
 -------- | -----------
@@ -142,7 +142,7 @@ Variable | Description
 
 #### Form Inputs
 
-Craft’s [_includes/forms.html](https://github.com/craftcms/cms/blob/develop/src/templates/_includes/forms.html) template defines several macros that can be used to display your form elements.
+Craft’s [_includes/forms.twig](https://github.com/craftcms/cms/blob/4.0/src/templates/_includes/forms.twig) template defines several macros that can be used to display your form elements.
 
 Most input types have two macros: one for outputting _just_ the input; and another for outputting the input as a “field”, complete with a label, author instructions, etc.
 
