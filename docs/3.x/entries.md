@@ -24,9 +24,11 @@ To create a new section, go to **Settings** → **Sections** and choose **New Se
 
 ### Section Types
 
-Not all sections are created equal. Craft has three different types of sections:
+Craft has three different types of sections:
 
 #### Singles
+
+![Illustration of Entries layout with “Singles” selected, showing “About Us”, “Contact” and “Home” entries](./images/singles.png)
 
 Singles are used for one-off pages that have unique content requirements, such as:
 
@@ -38,6 +40,8 @@ Unlike the other section types, Singles only have one entry associated with them
 
 #### Channels
 
+![Illustration of Entries layout with a “News Articles” channel selected, showing three dated news entries](./images/channels.png)
+
 Channels are used for streams of similar content, such as:
 
 - a Blog
@@ -46,7 +50,15 @@ Channels are used for streams of similar content, such as:
 
 #### Structures
 
-Structures are good for times when you need to store multiple similar entries, and sort them into a specific order. They can also be hierarchical. Examples include:
+Structures are good for times when you need to store multiple similar entries, and sort them into a specific order. They can also be hierarchical.
+
+![Illustration of Entries layout with an “Exhibits” structure selected, showing four demonstration exhibits entries with nesting and drag-and-drop handles](./images/structures.png)
+
+Unlike other sections, Structures have a “Structure” sort option that provies the manually-ordered, drag-and-drop hierarchy seen above:
+
+![Illustration of entry listing sort menu with “Structure” selected](./images/structure-view-mode.png)
+
+Examples include:
 
 - Documentation
 - a Services section, where the order of services matters
