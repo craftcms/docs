@@ -404,11 +404,28 @@ if ($currentUser) {
 ```
 :::
 
-You could then loop over the line items in those older carts and allow the customer to add them to the current order.
+You could then loop over the line items in those older carts and allow the customer to add them to the current order:
 
-::: tip
-You’ll find an example of this in the [example templates](example-templates.md).
-:::
+```twig
+<h2>Previous Cart Items</h2>
+
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+
+  {% for oldCart in oldCarts %}
+    {% for lineItem in oldCart.lineItems %}
+      {{ lineItem.description }}
+      <label>
+        {{ input('checkbox', 'purchasables[][id]', lineItem.getPurchasable().id) }}
+        Add to cart
+      </label>
+    {% endfor %}
+  {% endfor %}
+
+  <button type="submit">Update Cart</button>
+</form>
+```
 
 ### Forgetting a Cart
 
