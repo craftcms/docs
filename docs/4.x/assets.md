@@ -175,6 +175,7 @@ Asset queries support the following parameters:
 | [filename](#filename)                     | Narrows the query results based on the assets’ filenames.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [folderId](#folderid)                     | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
+| [folderPath](#folderpath)                 | Narrows the query results based on the folders the assets belong to, per the folders’ paths.
 | [hasAlt](#hasalt)                         | Narrows the query results based on whether the assets have alternative text.
 | [height](#height)                         | Narrows the query results based on the assets’ image heights.
 | [id](#id)                                 | Narrows the query results based on the assets’ IDs.
@@ -509,6 +510,39 @@ $assets = \craft\elements\Asset::find()
 ::: tip
 This can be combined with [includeSubfolders](#includesubfolders) if you want to include assets in all the subfolders of a certain folder.
 :::
+#### `folderPath`
+
+Narrows the query results based on the folders the assets belong to, per the folders’ paths.
+
+Possible values include:
+
+| Value | Fetches assets…
+| - | -
+| `foo/` | in a `foo/` folder (excluding nested folders).
+| `foo/*` | in a `foo/` folder (including nested folders).
+| `'not foo/*'` | not in a `foo/` folder (including nested folders).
+| `['foo/*', 'bar/*']` | in a `foo/` or `bar/` folder (including nested folders).
+| `['not', 'foo/*', 'bar/*']` | not in a `foo/` or `bar/` folder (including nested folders).
+
+
+
+::: code
+```twig
+{# Fetch assets in the foo/ folder or its nested folders #}
+{% set assets = craft.assets()
+  .folderPath('foo/*')
+  .all() %}
+```
+
+```php
+// Fetch assets in the foo/ folder or its nested folders
+$assets = \craft\elements\Asset::find()
+    ->folderPath('foo/*')
+    ->all();
+```
+:::
+
+
 #### `hasAlt`
 
 Narrows the query results based on whether the assets have alternative text.
