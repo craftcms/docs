@@ -548,7 +548,7 @@ Possible values include:
 ```
 
 ```php
-// Fetch products of the  product default dimension of 1
+// Fetch products of the product default dimension of 1
 $products = \craft\commerce\elements\Product::find()
     ->defaultHeight(1)
     ->all();
