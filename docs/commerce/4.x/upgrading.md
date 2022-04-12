@@ -480,9 +480,18 @@ A few controller methods have been removed as well:
 
 ## User Permissions
 
-Permissions for managing products have become more granular in Commerce 4:
+Some permissions have changed in Commerce 4:
 
-- `commerce-manageProducts` has been replaced by `commerce-editProductType:<uid>` and nested `commerce-createProducts:<uid>` and `commerce-deleteProducts:<uid>` permissions
+- `commerce-manageProducts` has been replaced by `commerce-editProductType:<uid>`, with nested permissions:
+    - `commerce-createProducts:<uid>`
+    - `commerce-deleteProducts:<uid>`
+- `commerce-managePromotions` has new, more granular nested permissions:
+    - `commerce-editSales`
+    - `commerce-createSales`
+    - `commerce-deleteSales`
+    - `commerce-editDiscounts`
+    - `commerce-createDiscounts`
+    - `commerce-deleteDiscounts`
 - `commerce-manageCustomers` has been replaced by Craft’s standard user management permissions.
 
 ## Payment Gateways
