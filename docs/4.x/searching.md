@@ -141,6 +141,10 @@ $images = \craft\elements\User::find()
 ```
 :::
 
+## Search Filters
+
+TODO: write
+
 ## Development
 
 `craft.assets()`, `craft.entries()`, `craft.tags()`, and `craft.users()` support a `search` parameter you can use to filter their elements by a given search query.

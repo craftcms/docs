@@ -64,6 +64,10 @@ Examples include:
 - a Services section, where the order of services matters
 - a company organization chart
 
+#### Custom Sources
+
+TODO: write
+
 ### Entry URI Formats
 
 Channel and Structure sections can choose whether their entries should be assigned URLs in the system, by filling in the “Entry URI Format” setting. (Singles have a “URI” setting.)
