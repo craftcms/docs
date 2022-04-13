@@ -3939,6 +3939,12 @@
     },
     {
         "class": "craft\\controllers\\ElementsController",
+        "name": "EVENT_DEFINE_EDITOR_CONTENT",
+        "type": "craft\\events\\DefineElementEditorHtmlEvent",
+        "desc": "The event that is triggered when rendering an element editor’s content."
+    },
+    {
+        "class": "craft\\controllers\\ElementsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4524,6 +4530,30 @@
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised after executing a controller action."
+    },
+    {
+        "class": "craft\\debug\\controllers\\DefaultController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\debug\\controllers\\DefaultController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\debug\\controllers\\UserController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\debug\\controllers\\UserController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
     },
     {
         "class": "craft\\elements\\Address",
@@ -35046,6 +35076,12 @@
         "name": "EVENT_REGISTER_FILESYSTEM_TYPES",
         "type": "craft\\events\\RegisterComponentTypesEvent",
         "desc": "The event that is triggered when registering filesystem types."
+    },
+    {
+        "class": "craft\\services\\Fs",
+        "name": "EVENT_RENAME_FILESYSTEM",
+        "type": "craft\\events\\FsEvent",
+        "desc": "The event that is triggered after a filesystem is renamed."
     },
     {
         "class": "craft\\services\\Gc",

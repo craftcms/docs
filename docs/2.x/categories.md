@@ -16,7 +16,7 @@ To create a new category group, go to Settings → Categories and click the “N
 
 ## Editing Categories
 
-If you have at least one category group, there will be a “Categories” tab in the primary control panel nav. Clicking on it will take you to the category index. From there you can choose a category group from the sidebar, and add/reorder/delete categories within it:
+If you have at least one category group, there will be a “Categories” menu item in the primary control panel navigation. Clicking on it will take you to the category index. From there you can choose a category group from the sidebar, and add/reorder/delete categories within it:
 
 ![Categories Index](./images/categories-index.jpg)
 
