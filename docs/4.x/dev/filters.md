@@ -482,7 +482,7 @@ When an arrow function is passed, this works identically to Twig’s core [`filt
 Groups items in an array by a the results of an arrow function.
 
 ```twig
-{% set allEntries = craft.entries.section('blog').all() %}
+{% set allEntries = craft.entries().section('blog').all() %}
 {% set allEntriesByYear = allEntries|group(e => e.postDate|date('Y')) %}
 
 {% for year, entriesInYear in allEntriesByYear %}
@@ -1219,7 +1219,7 @@ Runs an array through <craft3:craft\helpers\ArrayHelper::where()>.
 Returns an array without the specified element(s).
 
 ```twig
-{% set entries = craft.entries.section('articles').limit(3).find %}
+{% set entries = craft.entries().section('articles').limit(3).find %}
 {% set firstEntry = entries[0] %}
 {% set remainingEntries = entries|without(firstEntry) %}
 ```

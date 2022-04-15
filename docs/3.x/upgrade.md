@@ -523,7 +523,7 @@ In Craft 2, each time you call a parameter-setter method (e.g. `.type('article')
 That made it possible to execute variations of an element query, without affecting subsequent queries. For example:
 
 ```twig
-{% set query = craft.entries.section('news') %}
+{% set query = craft.entries().section('news') %}
 {% set articleEntries = query.type('article').find() %}
 {% set totalEntries = query.total() %}
 ```
@@ -540,7 +540,7 @@ Which means in the above code example, `totalEntries` will be set to the total _
 If you have any templates that count on the Craft 2 behavior, you can fix them using the [clone()](dev/functions.md#clone-object) function.
 
 ```twig
-{% set query = craft.entries.section('news') %}
+{% set query = craft.entries().section('news') %}
 {% set articleEntries = clone(query).type('article').all() %}
 {% set totalEntries = query.count() %}
 ```
@@ -567,11 +567,11 @@ When you need to loop over an element query, you should start explicitly calling
 
 ```twig
 Old:
-{% for entry in craft.entries.section('news') %}...{% endfor %}
+{% for entry in craft.entries().section('news') %}...{% endfor %}
 {% for asset in entry.myAssetsField %}...{% endfor %}
 
 New:
-{% for entry in craft.entries.section('news').all() %}...{% endfor %}
+{% for entry in craft.entries().section('news').all() %}...{% endfor %}
 {% for asset in entry.myAssetsField.all() %}...{% endfor %}
 ```
 
@@ -579,10 +579,10 @@ When you need to get the total number of results from an element query, you shou
 
 ```twig
 Old:
-{% set total = craft.entries.section('news')|length %}
+{% set total = craft.entries().section('news')|length %}
 
 New:
-{% set total = craft.entries.section('news').count() %}
+{% set total = craft.entries().section('news').count() %}
 ```
 
 Alternatively, if you already needed to fetch the actual query results, and you didn’t set the `offset` or `limit` params, you can use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter to find the total size of the results array without the need for an extra database query.
