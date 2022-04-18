@@ -756,4 +756,9 @@ Thanks to Craft 4’s [Typecast](craft4:craft\helpers\Typecast) helper, all arra
 
 With changes in Twig 3, the [View](craft4:craft\web\View) class has removed its `renderTemplateMacro()` method.
 
+<!-- textlint-disable terminology -->
+<!-- `Cp` is the name of the class here, so be cool textlint -->
+
 The [Cp](craft4:craft\helpers\Cp) helper includes methods for rendering Craft’s built-in form components you may be able to use (like [Cp::textFieldHtml()](craft4:craft\helpers\Cp::textFieldHtml()))—otherwise any macros will need to be moved to their own full templates.
+
+<!-- textlint-enable terminology -->
