@@ -66,7 +66,11 @@ Examples include:
 
 #### Custom Sources
 
-TODO: write
+Content authors can add their own special element sources based on existing Singles, Channels, and Structures by creating custom sources. Each custom source lists all entries by default, and can be filtered to only those that meet customized **Entry Criteria**.
+
+To create a new custom source, go to **Entries** → **Customize (<icon kind="settings" />)**, and from the bottom-left “+” menu choose **New custom source**:
+
+![Screenshot of a modal window with fields for a new custom source: Label, Entry Criteria, and Table Columns](./images/custom-source.png)
 
 ### Entry URI Formats
 
