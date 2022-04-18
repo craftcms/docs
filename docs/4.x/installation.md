@@ -13,7 +13,7 @@ You should be running Composer 1.3.0 or later. You can find out your installed v
 To create a new Craft project, run this command (substituting `my/project/path` with the path where Composer should create the project):
 
 ```bash
-composer create-project craftcms/craft my/project/path
+composer create-project craftcms/craft my/project/path dev-craft4 --ignore-platform-reqs
 ```
 
 Composer will take a few minutes to load everything. Once it’s done you’ll see a success message:
@@ -127,6 +127,7 @@ Next up, you need to create a database for your Craft project. Craft 3 supports 
 If you’re given a choice, we recommend the following database settings in most cases:
 
 - **MySQL**
+
   - Default Character Set: `utf8`
   - Default Collation: `utf8_unicode_ci`
 
