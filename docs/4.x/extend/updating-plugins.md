@@ -751,3 +751,9 @@ class MyModel extends \yii\base\Model
 ::: tip
 Thanks to Craft 4’s [Typecast](craft4:craft\helpers\Typecast) helper, all arrays, floats, booleans, and strings are normalized correctly in addition to DateTime values.
 :::
+
+## Templates
+
+With changes in Twig 3, the [View](craft4:craft\web\View) class has removed its `renderTemplateMacro()` method.
+
+The [Cp](craft4:craft\helpers\Cp) helper includes methods for rendering Craft’s built-in form components you may be able to use (like [Cp::textFieldHtml()](craft4:craft\helpers\Cp::textFieldHtml()))—otherwise any macros will need to be moved to their own full templates.
