@@ -111,7 +111,7 @@ You can designate any one entry as a site’s homepage using a special `__home__
 :::
 
 ::: tip
-You can use an attribute from a query in the entry’s URI. Use double curly braces (e.g. `{{craft.entries.section('mySingle').one().slug}}/news`).
+You can use an attribute from a query in the entry’s URI. Use double curly braces (e.g. `{{craft.entries().section('mySingle').one().slug}}/news`).
 :::
 
 ::: tip
@@ -139,7 +139,7 @@ You can use environment variables and aliases in the preview target URL. These d
 :::
 
 ::: tip
-Preview target URLs can include an attribute on the result of a query. Here double curly braces must be used (e.g. `{{ craft.entries.section('mySingle').one().url }}`).
+Preview target URLs can include an attribute on the result of a query. Here double curly braces must be used (e.g. `{{ craft.entries().section('mySingle').one().url }}`).
 :::
 
 When an author is editing an entry from a section with custom preview targets, the **View** button will be replaced with a menu that lists the **Primary entry page** (if the section has an Entry URI Format), plus the names of each preview target.

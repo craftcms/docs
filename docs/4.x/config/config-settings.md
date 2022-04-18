@@ -177,6 +177,9 @@ Defined by
 Since
 :  3.5.6
 
+Deprecated
+:  in 4.0.0
+
 </div>
 
 Whether drafts should be saved automatically as they are edited.

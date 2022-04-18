@@ -166,7 +166,7 @@ Returns the fully qualified class name of a given object.
 Clones a given object.
 
 ```twig
-{% set query = craft.entries.section('news') %}
+{% set query = craft.entries().section('news') %}
 {% set articles = clone(query).type('articles') %}
 ```
 
@@ -573,7 +573,7 @@ To view the current number in the sequence without incrementing it, set the `nex
 Randomizes the order of the elements within an array.
 
 ```twig
-{% set promos = craft.entries.section('promos').all() %}
+{% set promos = craft.entries().section('promos').all() %}
 {% set shuffledPromos = shuffle(promos) %}
 
 {% for promo in shuffledPromos %}

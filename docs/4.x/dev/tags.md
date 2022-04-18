@@ -227,7 +227,7 @@ Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()
 This tag will dump a variable out to the browser and then end the request. (`dd` stands for “Dump-and-Die”.)
 
 ```twig
-{% set entry = craft.entries.id(entryId).one() %}
+{% set entry = craft.entries().id(entryId).one() %}
 {% dd entry %}
 ```
 
@@ -236,7 +236,7 @@ This tag will dump a variable out to the browser and then end the request. (`dd`
 This tag will prevent the rest of the template from executing, and end the request.
 
 ```twig
-{% set entry = craft.entries.id(entryId).one() %}
+{% set entry = craft.entries().id(entryId).one() %}
 
 {% if not entry %}
   {% exit 404 %}
@@ -452,7 +452,7 @@ This tag works identically to the [namespace](filters.md#namespace) filter, exce
 This tag helps create a hierarchical navigation menu for entries in a [Structure section](../entries.md#section-types) or a [Category Group](../categories.md).
 
 ```twig
-{% set entries = craft.entries.section('pages').all() %}
+{% set entries = craft.entries().section('pages').all() %}
 
 <ul id="nav">
   {% nav entry in entries %}
@@ -565,7 +565,7 @@ The `{% paginate %}` tag won’t actually output the current page’s results fo
 Following your `{% paginate %}` tag, you will need to loop through this page’s results using a [for](https://twig.symfony.com/doc/tags/for.html) tag.
 
 ```twig
-{% paginate craft.entries.section('blog').limit(10) as pageEntries %}
+{% paginate craft.entries().section('blog').limit(10) as pageEntries %}
 
 {% for entry in pageEntries %}
   <article>
