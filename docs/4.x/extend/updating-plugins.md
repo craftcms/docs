@@ -751,3 +751,41 @@ class MyModel extends \yii\base\Model
 ::: tip
 Thanks to Craft 4’s [Typecast](craft4:craft\helpers\Typecast) helper, all arrays, floats, booleans, and strings are normalized correctly in addition to DateTime values.
 :::
+
+## Templates
+
+### `View::renderTemplateMacro()` has been removed
+
+With changes in Twig 3, the [View](craft4:craft\web\View) class has removed its `renderTemplateMacro()` method.
+
+<!-- textlint-disable terminology -->
+<!-- `Cp` is the name of the class here, so be cool textlint -->
+
+The [Cp](craft4:craft\helpers\Cp) helper includes methods for rendering Craft’s built-in form components you may be able to use (like [Cp::textFieldHtml()](craft4:craft\helpers\Cp::textFieldHtml()))—otherwise any macros will need to be moved to their own full templates.
+
+<!-- textlint-enable terminology -->
+
+### Template Hooks
+
+Element-specific [control panel template hooks](template-hooks.md#control-panel-template-hooks) have been removed:
+
+- `cp.assets.edit.content`
+- `cp.assets.edit.details`
+- `cp.assets.edit.meta`
+- `cp.assets.edit.settings`
+- `cp.assets.edit`
+- `cp.categories.edit.content`
+- `cp.categories.edit.details`
+- `cp.categories.edit.meta`
+- `cp.categories.edit.settings`
+- `cp.categories.edit`
+- `cp.elements.edit`
+- `cp.entries.edit.content`
+- `cp.entries.edit.details`
+- `cp.entries.edit.meta`
+- `cp.entries.edit.settings`
+- `cp.entries.edit`
+
+With the new [unified element editor](#unified-element-editor), anything that needs to be included in the editor should be provided in a field layout.
+
+If your plugin appended non-field content to a main content area, however, you can use Craft 4’s [ElementsController::EVENT_DEFINE_EDITOR_CONTENT](craft4:craft\controllers\ElementsController::EVENT_DEFINE_EDITOR_CONTENT) to check the event object’s `$element` property and optionally append markup to `$html`.
