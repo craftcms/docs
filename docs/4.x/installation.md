@@ -104,7 +104,7 @@ You can generate and assign the key [manually](#set-the-key-manually), or have C
 
 ### Set the Key Manually
 
-First generate a cryptographically secure key, preferably using a password generator like [1Password](https://1password.com/password-generator/). (There’s no length limit.)
+First generate a cryptographically secure key, ideally using a password generator like [1Password](https://1password.com/password-generator/). (There’s no length limit.)
 
 Then open up your `.env` file (you may need to use an app like [Transmit](https://panic.com/transmit/) to do this if you’re running macOS), and find this line:
 
