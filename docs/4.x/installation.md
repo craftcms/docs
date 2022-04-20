@@ -122,7 +122,7 @@ php craft setup/security-key
 
 ## Step 4: Create a Database
 
-Next up, you need to create a database for your Craft project. Craft 3 supports both MySQL 5.5+ and PostgreSQL 9.5+.
+Next up, you need to create a database for your Craft project. Craft 4 supports both MySQL 5.7.8+ and PostgreSQL PostgreSQL 10+.
 
 If you’re given a choice, we recommend the following database settings in most cases:
 
