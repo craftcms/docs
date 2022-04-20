@@ -168,7 +168,7 @@ In your terminal, go to your project’s root directory and run the following co
 php craft setup
 ```
 
-The command will ask you a few questions to learn how to connect to your database, and then kick off Craft’s installer. Once it’s done, you should be able to access your new Craft site from your web browser.
+The command will ask a few questions about your database connection and kick off Craft’s installer. Once it’s done, you should be able to access your new Craft site from your web browser.
 
 ### Web Browser Setup
 
