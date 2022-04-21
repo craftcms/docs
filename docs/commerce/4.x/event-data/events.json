@@ -19335,13 +19335,13 @@
     {
         "class": "craft\\commerce\\services\\Pdfs",
         "name": "EVENT_BEFORE_SAVE_PDF",
-        "type": "craft\\commerce\\events\\PdfSaveEvent",
+        "type": "craft\\commerce\\events\\PdfEvent",
         "desc": "The event that is triggered before an pdf is saved."
     },
     {
         "class": "craft\\commerce\\services\\Pdfs",
         "name": "EVENT_AFTER_SAVE_PDF",
-        "type": "craft\\commerce\\events\\PdfSaveEvent",
+        "type": "craft\\commerce\\events\\PdfEvent",
         "desc": "The event that is triggered after an PDF is saved."
     },
     {
@@ -19361,6 +19361,12 @@
         "name": "EVENT_MODIFY_RENDER_OPTIONS",
         "type": "craft\\commerce\\events\\PdfRenderOptionsEvent",
         "desc": "The event that allows additional setting of pdf render options."
+    },
+    {
+        "class": "craft\\commerce\\services\\Pdfs",
+        "name": "EVENT_BEFORE_DELETE_PDF",
+        "type": "craft\\commerce\\events\\PdfEvent",
+        "desc": "The event that is triggered before a pdf is deleted."
     },
     {
         "class": "craft\\commerce\\services\\Plans",
