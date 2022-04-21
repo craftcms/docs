@@ -2,11 +2,17 @@
 
 ## Updating from the Control Panel
 
-When an update is available, users with the permission to update Craft will see a badge in the control panel next to **Utilities** in the main navigation. Click **Utilities**, then **Updates**. (You can also get to this view directly from the **Updates** widget that’s installed by default in the control panel dashboard.)
+When an update is available, users with the permission to update Craft will see a badge in the control panel next to **Utilities** in the global navigation:
 
-This section displays updates for Craft CMS plugins, each with its own **Update** button. Choosing any of those will initiate Craft’s self-updating process.
+![Screenshot of control panel cropped to “Utilities” global navigation item, which contains a circular badge with the number “1” in it](./images/update-badge.png)
 
-You can choose **Update All** at the top left to initiate all available Craft and/or plugin updates at once.
+Click **Utilities** → **Updates**. (You can also get to this view directly from the **Updates** widget that’s installed by default in the control panel dashboard.)
+
+This section displays updates for Craft CMS and installed plugins, where each version has its own collapsible panel detailing relevant changes.
+
+![Stylized screenshot of “Updates” page, which displays two plugins with newer versions with collapsible panes detailing their changes](./images/updates.png)
+
+There may be an **Update** button next to each item and an **Update All** at the top of the screen, depending on your the <config4:allowUpdates> and <config4:allowAdminChanges> settings for your current environment. You can use those to initiate updates directly from the control panel.
 
 ::: tip
 Craft’s [changelog](https://github.com/craftcms/cms/blob/main/CHANGELOG.md) will warn you of any critical changes at the top of the release notes. While there aren’t usually any warnings, it’s always a good idea to check the changelog and [any upgrade guides](#upgrade-guides) before updating.
