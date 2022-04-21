@@ -28,7 +28,7 @@ Tags fields list all the currently-related tags with a text input to add new one
 As you type into the text input, the Tags field will search through the existing tags that belong to the field’s tag group (per its Source setting), and suggest tags in a menu below the text input. If an exact match is not found, the first option in the menu will create a new tag named after the input value.
 
 ::: tip
-By default you won’t be able to create multiple tags that are too similar in name. You can change that behavior by enabling the <config3:allowSimilarTags> config setting.
+By default you won’t be able to create multiple tags that are too similar in name. You can change that behavior by enabling the <config4:allowSimilarTags> config setting.
 :::
 
 ### Inline Tag Editing

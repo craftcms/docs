@@ -37,8 +37,8 @@ Method | Description
 [requirePostRequest()](craft3:craft\web\Controller::requirePostRequest()) | Requires that the request was sent as a POST request.
 [requireAcceptsJson()](craft3:craft\web\Controller::requireAcceptsJson()) | Requires that the request was sent with an `Accept: application/json` header.
 [requireToken()](craft3:craft\web\Controller::requireToken()) | Requires that the request was sent with a [token](craft3:craft\web\Request::getToken()).
-[requireCpRequest()](craft3:craft\web\Controller::requireCpRequest()) | Requires that the request URI begins with the [control panel trigger](config3:cpTrigger).
-[requireSiteRequest()](craft3:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin with the [control panel trigger](config3::cpTrigger).
+[requireCpRequest()](craft3:craft\web\Controller::requireCpRequest()) | Requires that the request URI begins with the [control panel trigger](config4:cpTrigger).
+[requireSiteRequest()](craft3:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin with the [control panel trigger](config4::cpTrigger).
 
 ```php
 public function actionFoo()
@@ -77,7 +77,7 @@ return [
 
 ### The `actions/<action-path>` Route
 
-By default, Craft makes an `actions/` route available for appending any valid action path. This can be customized with the <config3:actionTrigger> config setting.
+By default, Craft makes an `actions/` route available for appending any valid action path. This can be customized with the <config4:actionTrigger> config setting.
 
 ```bash
 curl -X POST https://my-project.test/actions/plugin-handle/controller/action

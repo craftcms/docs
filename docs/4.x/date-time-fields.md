@@ -83,7 +83,7 @@ $futureEntries = \craft\elements\Entry::find()
 :::
 
 ::: tip
-Don’t forget to consider or disable [template caching](tags.md#cache) for requests that use `now` comparisons! You can pass a `x-craft-gql-cache: no-cache` header for GraphQL requests or set a relatively low [cache duration](config3:cacheDuration).
+Don’t forget to consider or disable [template caching](tags.md#cache) for requests that use `now` comparisons! You can pass a `x-craft-gql-cache: no-cache` header for GraphQL requests or set a relatively low [cache duration](config4:cacheDuration).
 :::
 
 ### Working with Date Field Data

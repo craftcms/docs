@@ -1,6 +1,6 @@
 # Directory Structure
 
-When you download a fresh copy of Craft 3, your project will have the following folders and files in it:
+When you download a fresh copy of Craft 4, your project will have the following folders and files in it:
 
 ### `config/`
 

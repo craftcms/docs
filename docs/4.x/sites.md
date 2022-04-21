@@ -91,7 +91,7 @@ If you have multiple sites using different root domains like `https://site-a.com
 :::
 
 ::: tip
-If your primary site’s Base URL includes a subdirectory (i.e. `https://foo.dev/bar/`), you should set the [baseCpUrl](config3:baseCpUrl) config setting.
+If your primary site’s Base URL includes a subdirectory (i.e. `https://foo.dev/bar/`), you should set the [baseCpUrl](config4:baseCpUrl) config setting.
 :::
 
 ::: warning

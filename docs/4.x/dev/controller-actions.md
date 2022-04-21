@@ -97,7 +97,7 @@ Param | Description
 `failMessage` | The hashed flash notice that should be displayed, if the user is not logged in successfully. (Only used for `text/html` requests.)
 `loginName` | The username or email of the user to login.
 `password` | The user’s password.
-`rememberMe` | Whether to keep the user logged-in for an extended period of time per the <config3:rememberedUserSessionDuration> config setting (`1`/`0`).
+`rememberMe` | Whether to keep the user logged-in for an extended period of time per the <config4:rememberedUserSessionDuration> config setting (`1`/`0`).
 
 ### Output
 
@@ -162,7 +162,7 @@ Param | Description
 `successMessage` | The hashed flash notice that should be displayed, if the user account is saved successfully. (Only used for `text/html` requests.)
 `userId` | The ID of the user to save, if updating an existing user.
 `userVariable` | The hashed name of the variable that should reference the user, if a validation error occurs. (Defaults to `user`.)
-`username` | The user’s username. (Only checked if the <config3:useEmailAsUsername> config setting is disabled.)
+`username` | The user’s username. (Only checked if the <config4:useEmailAsUsername> config setting is disabled.)
 
 ### Output
 
@@ -174,7 +174,7 @@ The output depends on whether the user save action was successful and the reques
 
 Success | Output
 ------- | ------
-<check-mark/> | Redirect response per the hashed `redirect` param, or the <config3:activateAccountSuccessPath> config setting if email verification is not required.
+<check-mark/> | Redirect response per the hashed `redirect` param, or the <config4:activateAccountSuccessPath> config setting if email verification is not required.
 <x-mark/> | None; the request will be routed per the URI. A `user` variable will be passed to the resulting template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getFirstError()](yii2:yii\base\Model::getFirstError()), etc.
 
 </span>
@@ -261,7 +261,7 @@ The output of the action depends on whether the password was updated successfull
 
 Success | Output
 ------- | ------
-<check-mark/> | Redirect response depending on the <config3:autoLoginAfterAccountActivation> and <config3:setPasswordSuccessPath> config settings, and whether the user has access to the control panel.
+<check-mark/> | Redirect response depending on the <config4:autoLoginAfterAccountActivation> and <config4:setPasswordSuccessPath> config settings, and whether the user has access to the control panel.
 <x-mark/> | None; the request will be routed per the URI. `errors` , `code`, `id`, and `newUser` variables will be passed to the resulting template.
 
 </span>

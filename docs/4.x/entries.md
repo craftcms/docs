@@ -146,18 +146,18 @@ When an author is editing an entry from a section with custom preview targets, t
 
 ![An entry’s View menu with 3 custom preview targets.](./images/share-with-targets.png =394x)
 
-If you share a link from this menu that includes a preview token, it will expire by default after one day. You can customize this with the [defaultTokenDuration](config3:defaultTokenDuration) config setting.
+If you share a link from this menu that includes a preview token, it will expire by default after one day. You can customize this with the [defaultTokenDuration](config4:defaultTokenDuration) config setting.
 
 The targets will also be available within **Preview**.
 
 #### Previewing Decoupled Front Ends
 
-If your site’s front end lives outside of Craft, for example as a Vue or React app, you can still support previewing drafts and revisions with **Preview** or **Share** buttons. To do that, your front end must check for the existence of a `token` query string parameter (or whatever your <config3:tokenParam> config setting is set to). If it’s in the URL, then you will need to pass that same token in the Craft API request that loads the page content. This token will cause the API request to respond with the correct content based on what’s actually being previewed.
+If your site’s front end lives outside of Craft, for example as a Vue or React app, you can still support previewing drafts and revisions with **Preview** or **Share** buttons. To do that, your front end must check for the existence of a `token` query string parameter (or whatever your <config4:tokenParam> config setting is set to). If it’s in the URL, then you will need to pass that same token in the Craft API request that loads the page content. This token will cause the API request to respond with the correct content based on what’s actually being previewed.
 
-You can pass the token via either a query string parameter named after your <config3:tokenParam> config setting, or an `X-Craft-Token` header.
+You can pass the token via either a query string parameter named after your <config4:tokenParam> config setting, or an `X-Craft-Token` header.
 
 ::: tip
-For live preview, you should also consider [enabling iFrame Resizer](config3:useIframeResizer) so that Craft can maintain the page scroll position between page loads.
+For live preview, you should also consider [enabling iFrame Resizer](config4:useIframeResizer) so that Craft can maintain the page scroll position between page loads.
 :::
 
 ## Entry Types

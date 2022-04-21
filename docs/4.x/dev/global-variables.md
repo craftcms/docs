@@ -115,7 +115,7 @@ The currently-logged-in user, represented by a <craft3:craft\elements\User> obje
 
 ## `devMode`
 
-Whether the <config3:devMode> config setting is currently enabled.
+Whether the <config4:devMode> config setting is currently enabled.
 
 ```twig
 {% if devMode %}
@@ -125,7 +125,7 @@ Whether the <config3:devMode> config setting is currently enabled.
 
 ## `loginUrl`
 
-The URL to your site’s login page, based on the <config3:loginPath> config setting.
+The URL to your site’s login page, based on the <config4:loginPath> config setting.
 
 ```twig
 {% if not currentUser %}
@@ -135,7 +135,7 @@ The URL to your site’s login page, based on the <config3:loginPath> config set
 
 ## `logoutUrl`
 
-The URL Craft uses to log users out, based on the <config3:logoutPath> config setting. Note that Craft will automatically redirect users to your homepage after going here; there’s no such thing as a “logout _page_”.
+The URL Craft uses to log users out, based on the <config4:logoutPath> config setting. Note that Craft will automatically redirect users to your homepage after going here; there’s no such thing as a “logout _page_”.
 
 ```twig
 {% if currentUser %}
@@ -173,7 +173,7 @@ Twig-facing copy of the [craft\web\View::POS_READY](craft3:craft\web\View#consta
 
 ## `setPasswordUrl`
 
-The URL to [`setPasswordRequestPath`](config3:setPasswordRequestPath) if it’s set. (This wraps the path in [`siteUrl`](#siteurl).)
+The URL to [`setPasswordRequestPath`](config4:setPasswordRequestPath) if it’s set. (This wraps the path in [`siteUrl`](#siteurl).)
 
 ```twig
 {% if setPasswordUrl %}

@@ -47,7 +47,7 @@ Some settings and functions in Craft support [Yii aliases](https://www.yiiframew
 - Sites’ Base URL settings
 - Volumes’ Base URL settings
 - Local volumes’ File System Path settings
-- The <config3:resourceBasePath> and <config3:resourceBaseUrl> config settings
+- The <config4:resourceBasePath> and <config4:resourceBaseUrl> config settings
 - The [svg()](../dev/functions.md#svg-svg-sanitize) Twig function
 
 The following aliases are available out of the box:
@@ -68,7 +68,7 @@ The following aliases are available out of the box:
 | `@web` | The URL to the folder that contains the `index.php` file that was loaded for the request
 | `@webroot` | The path to the folder that contains the `index.php` file that was loaded for the request
 
-You can override these default aliases with the <config3:aliases> config setting if needed. We recommend overriding the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+You can override these default aliases with the <config4:aliases> config setting if needed. We recommend overriding the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
 
 ```php
 'aliases' => [
@@ -85,7 +85,7 @@ If your web root is something besides `web/`, `public/`, `public_html/`, or `htm
 ];
 ```
 
-You can define additional custom aliases using the <config3:aliases> config setting as well. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
+You can define additional custom aliases using the <config4:aliases> config setting as well. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
 
 ```php
 'aliases' => [
@@ -435,7 +435,7 @@ Only drivers that implement <craft3:craft\queue\QueueInterface> will be visible 
 :::
 
 ::: tip
-If your queue driver supplies its own worker, set the <config3:runQueueAutomatically> config setting to `false` in `config/general.php`.
+If your queue driver supplies its own worker, set the <config4:runQueueAutomatically> config setting to `false` in `config/general.php`.
 :::
 
 ### Modules
@@ -603,8 +603,8 @@ define('CRAFT_CP', true);
 
 If this isn’t defined, Craft will treat the request as a control panel request if either of these are true:
 
-- The <config3:baseCpUrl> setting **is** set, and the request URL begins with it (plus the <config3:cpTrigger> setting, if set).
-- The <config3:baseCpUrl> setting **is not** set, and the request URI begins with the <config3:cpTrigger> setting.
+- The <config4:baseCpUrl> setting **is** set, and the request URL begins with it (plus the <config4:cpTrigger> setting, if set).
+- The <config4:baseCpUrl> setting **is not** set, and the request URI begins with the <config4:cpTrigger> setting.
 
 ### `CRAFT_ENVIRONMENT`
 

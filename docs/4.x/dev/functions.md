@@ -75,7 +75,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ## `actionUrl`
 
-Returns a controller action URL, automatically accounting for relative vs. absolute format and the active <config3:actionTrigger> setting.
+Returns a controller action URL, automatically accounting for relative vs. absolute format and the active <config4:actionTrigger> setting.
 
 ### Arguments
 
@@ -243,7 +243,7 @@ Creates a new object instance based on a given class name or object configuratio
 
 ## `cpUrl`
 
-Returns a control panel URL, automatically accounting for relative vs. absolute format and the active <config3:cpTrigger> setting.
+Returns a control panel URL, automatically accounting for relative vs. absolute format and the active <config4:cpTrigger> setting.
 
 ```twig
 <a href="{{ cpUrl('settings') }}">Visit control panel settings</a>
@@ -785,11 +785,11 @@ The `url()` function has the following arguments:
 - **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
 - **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
 - **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
-- **`mustShowScriptName`** – If this is set to `true`, then the URL returned will include “index.php”, disregarding the <config3:omitScriptNameInUrls> config setting. (This can be useful if the URL will be used by POST requests over Ajax, where the URL will not be shown in the browser’s address bar, and you want to avoid a possible collision with your site’s .htaccess file redirect.)
+- **`mustShowScriptName`** – If this is set to `true`, then the URL returned will include “index.php”, disregarding the <config4:omitScriptNameInUrls> config setting. (This can be useful if the URL will be used by POST requests over Ajax, where the URL will not be shown in the browser’s address bar, and you want to avoid a possible collision with your site’s .htaccess file redirect.)
 
 Using the `url()` function has advantages over hard-coding URLs in your templates:
 
-- Generated URLs will encourage consistency by respecting settings like [addTrailingSlashesToUrls](config3:addTrailingSlashesToUrls).
+- Generated URLs will encourage consistency by respecting settings like [addTrailingSlashesToUrls](config4:addTrailingSlashesToUrls).
 - Your site will be more portable, making it easier to do something like move to a new domain or subdomain.
 - If the page has a `token` URL parameter, that token will automatically get appended to generated URLs to maintain preview context navigating around the site.
 

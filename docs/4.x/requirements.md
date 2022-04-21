@@ -55,7 +55,7 @@ Some shared hosting environments will disable certain common PHP methods and con
 
 - [allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen) must be enabled for updating and installing plugins from the Plugin Store.
 - [proc_*](http://php.net/manual/en/ref.exec.php) methods must be enabled in order to utilize the Plugin Store and send emails.
-- [ignore_user_abort](https://www.php.net/manual/en/function.ignore-user-abort.php) must be enabled for the [default, web-based queue runner](config3:runQueueAutomatically) to operate.
+- [ignore_user_abort](https://www.php.net/manual/en/function.ignore-user-abort.php) must be enabled for the [default, web-based queue runner](config4:runQueueAutomatically) to operate.
 
 ## Required Database User Privileges
 

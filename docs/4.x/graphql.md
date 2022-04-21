@@ -8,7 +8,7 @@ Craft Pro provides a [GraphQL](https://graphql.org) API you can use to work with
 
 ## Getting Started
 
-Make sure you’re running Craft Pro 3.3 or later and [the `enableGql` setting](config3:enableGql) is not set to `false`.
+Make sure you’re running Craft Pro 3.3 or later and [the `enableGql` setting](config4:enableGql) is not set to `false`.
 
 Because GraphQL is self-documenting, you can jump right into Craft’s included [GraphiQL IDE](#using-the-graphiql-ide) from the control panel and interactively build and execute queries. Querying from the control panel gives you full access to data that’s available, unlike queries from the outside that require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
 
@@ -140,7 +140,7 @@ return [
 ```
 
 ::: tip
-Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using the <config3:allowedGraphqlOrigins> setting.
+Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using the <config4:allowedGraphqlOrigins> setting.
 :::
 
 Pretending your endpoint is `http://my-project.test/api`, you can verify that it’s configured correctly by sending a `{ping}` query to it:
@@ -195,7 +195,7 @@ Additional GraphQL IDEs are available as well:
 * [GraphQL Playground online](https://www.graphqlbin.com/v2/new)
 
 ::: tip
-When you’re initially exploring the API, make sure <config3:devMode> is enabled so the IDE can be informed about the entire schema available to it.
+When you’re initially exploring the API, make sure <config4:devMode> is enabled so the IDE can be informed about the entire schema available to it.
 :::
 
 ### Sending Requests Manually
@@ -270,7 +270,7 @@ RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
 ## Caching
 
-Query results are cached by default to speed up subsequent queries, and you can disable that caching with the <config3:enableGraphQlCaching> setting.
+Query results are cached by default to speed up subsequent queries, and you can disable that caching with the <config4:enableGraphQlCaching> setting.
 
 The entire GraphQL cache is purged for any schema changes, otherwise Craft only purges caches based on content changes relevant to a given query. The more specific your query, the less likely its cache will be cleared when an entry is saved or deleted. For example:
 
@@ -1656,7 +1656,7 @@ To save an [entry](entries.md), use the entry type-specific mutation which will 
 The `id`, `uid` and `authorId` arguments do no exist for single entries. This is because single entries have no authors and are identified already by the exact mutation. In a similar fashion, there are additional arguments available for structured entries. For more information, refer to [mutating structure data](#mutating-structure-data).
 
 ::: tip
-After saving an entry, Craft runs queue jobs for updating revisions and search indexes. If you’re using Craft headlessly or infrequently accessing the control panel, consider disabling <config3:runQueueAutomatically> and [establishing an always-running daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms) to keep revisions and search indexes up to date.
+After saving an entry, Craft runs queue jobs for updating revisions and search indexes. If you’re using Craft headlessly or infrequently accessing the control panel, consider disabling <config4:runQueueAutomatically> and [establishing an always-running daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms) to keep revisions and search indexes up to date.
 :::
 
 #### Editing Existing Entries
