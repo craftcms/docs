@@ -316,7 +316,7 @@ Since
 
 Default URL to be loaded after using the [load cart controller action](orders-carts.md#loading-a-cart).
 
-If `null` (default), Craft’s default [`siteUrl`](config3:siteUrl) will be used.
+If `null` (default), Craft’s default [`siteUrl`](config4:siteUrl) will be used.
 
 
 
@@ -461,7 +461,7 @@ How Commerce should handle minimum total price for an order.
 
 Options:
 
-- `'default'` [rounds](commerce3:\craft\commerce\helpers\Currency::round()) the sum of the item subtotal and adjustments.
+- `'default'` [rounds](commerce4:\craft\commerce\helpers\Currency::round()) the sum of the item subtotal and adjustments.
 - `'zero'` returns `0` if the result from `'default'` would’ve been negative; minimum order total is `0`.
 - `'shipping'` returns the total shipping cost if the `'default'` result would’ve been negative; minimum order total equals shipping amount.
 
