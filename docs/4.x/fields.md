@@ -81,6 +81,6 @@ Once a field is selected, a gear icon (<icon kind="settings" />) will appear bes
 - Make required
 - Remove
 
-Clicking “Make required” will add an asterisk (`*`) beside the field’s name, indicating that it’s now required. Subsequent gear icon clicks will reveal a new “Make not required” option which does as you’d expect.
+Clicking “Make required” will add an asterisk (<icon kind="asterisk" />) beside the field’s name, indicating that it’s now required. Subsequent gear icon clicks will reveal a new “Make not required” option which does as you’d expect.
 
 Field layouts for entry types have another feature: they let you define the content tabs that contain the fields. You can create as many content tabs as you want, and use them to organize similar fields together. Each content tab will get its own gear icon allowing you to rename or delete it.
