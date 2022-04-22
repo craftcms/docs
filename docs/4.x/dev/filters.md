@@ -403,7 +403,7 @@ arrays passed into the filter.
 
 ## `duration`
 
-Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object through <craft3:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
+Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object through <craft4:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
 
 ```twig
 <p>Posted {{ entry.postDate.diff(now)|duration(false) }} ago.</p>
@@ -533,7 +533,7 @@ You can use the `timezone` param to specify the date’s timezone for conversion
 
 ## `id`
 
-Formats a string into something that will work well as an HTML input `id`, via <craft3:craft\web\View::formatInputId()>.
+Formats a string into something that will work well as an HTML input `id`, via <craft4:craft\web\View::formatInputId()>.
 
 ```twig
 {% set name = 'input[name]' %}
@@ -628,7 +628,7 @@ Lowercases the first character of a string.
 
 ## `literal`
 
-Runs a string through <craft3:craft\helpers\Db::escapeParam()> to escape commas and asterisks so they’re are not treated as special characters in query params.
+Runs a string through <craft4:craft\helpers\Db::escapeParam()> to escape commas and asterisks so they’re are not treated as special characters in query params.
 
 ```twig
 {% set titleParam = craft.app.request.getQueryParam('title') %}
@@ -688,7 +688,7 @@ If you want to make sure specific values are defined by default in an array, lik
 ```
 :::
 
-You can also provide an optional `recursive` argument that will use [ArrayHelper::merge()](craft3:craft\helpers\ArrayHelper::merge()) to merge nested arrays or hashes.
+You can also provide an optional `recursive` argument that will use [ArrayHelper::merge()](craft4:craft\helpers\ArrayHelper::merge()) to merge nested arrays or hashes.
 
 Without `recursive`:
 
@@ -1103,7 +1103,7 @@ You can customize the timezone the time is output in, using the `timezone` param
 
 ## `timestamp`
 
-Formats a date as a human-readable timestamp, via <craft3:craft\i18n\Formatter::asTimestamp()>.
+Formats a date as a human-readable timestamp, via <craft4:craft\i18n\Formatter::asTimestamp()>.
 
 ```twig
 {{ now|timestamp }}
@@ -1206,7 +1206,7 @@ Returns an array of all the values in a given array, but without any custom keys
 
 ## `where`
 
-Runs an array through <craft3:craft\helpers\ArrayHelper::where()>.
+Runs an array through <craft4:craft\helpers\ArrayHelper::where()>.
 
 ```twig
 {% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}

@@ -137,7 +137,7 @@ Any element type providing control panel editing UI may need to update it.
 
 If your element type already supported custom field layouts and behaved well with slideout UI in Craft 3, you may only need to update a few renamed [events](#events) and [permissions](#user-permissions).
 
-If your element type relies on [getEditorHtml()](craft3:craft\base\ElementInterface::getEditorHtml()), however, whether it’s because it has legacy UI or does its own thing entirely, you’ll need to migrate those pieces elsewhere since that method has been removed. Craft 3.7’s [getSidebarHtml()](craft4:craft\base\ElementInterface::getSidebarHtml()) and [getMetadata()](craft4:craft\base\ElementInterface::getMetadata()) are still available for tailoring what’s displayed in sidebar and metadata areas, but Craft will always give priority to any custom field layout when it exists.
+If your element type relies on [getEditorHtml()](craft4:craft\base\ElementInterface::getEditorHtml()), however, whether it’s because it has legacy UI or does its own thing entirely, you’ll need to migrate those pieces elsewhere since that method has been removed. Craft 3.7’s [getSidebarHtml()](craft4:craft\base\ElementInterface::getSidebarHtml()) and [getMetadata()](craft4:craft\base\ElementInterface::getMetadata()) are still available for tailoring what’s displayed in sidebar and metadata areas, but Craft will always give priority to any custom field layout when it exists.
 
 ::: warning
 Each elements type’s `defineRules()` method needs to fully cover any inputs that could be posted via native field elements, `getSidebarHtml()`, and `getMetadata()`.
@@ -398,16 +398,16 @@ While the [unified element editor](#unified-element-editor) introduced some new 
 
 | Old                                                                                        | What to do instead
 | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------
-| [Element::getFieldStatus()](craft3:craft\base\Element::getFieldStatus())                   | [Field::getStatus()](craft4:craft\base\Field::getStatus())
-| [Element::getHasFreshContent()](craft3:craft\base\Element::getHasFreshContent())           | [Element::getIsFresh()](craft4:craft\base\Element::getIsFresh())
-| [Element::getIsProvisionalDraft()](craft3:craft\base\Element::getIsProvisionalDraft())     | [Element::$isProvisionalDraft](https://docs.craftcms.com/api/v4/craft-base-elementtrait.html#public-properties)
-| [Element::getIsUnsavedDraft()](craft3:craft\base\Element::getIsUnsavedDraft())             | [Element::getIsUnpublishedDraft()](craft4:craft\base\Element::getIsUnpublishedDraft())
-| [Element::isDeletable()](craft3:craft\base\Element::isDeletable())                         | [Element::canDelete()](craft4:craft\base\Element::canDelete())
-| [Element::isEditable()](craft3:craft\base\Element::isEditable())                           | [Element::canView()](craft4:craft\base\Element::canView()) and [Element::canSave()](craft4:craft\base\Element::canSave())
-| [ElementInterface::getEditorHtml()](craft3:craft\base\ElementInterface::getEditorHtml())   | Element edit forms are now exclusively driven [by their field layout](#field-layouts).
-| [ElementInterface::getIsDeletable()](craft3:craft\base\ElementInterface::getIsDeletable()) | [ElementInterface::canDelete()](craft4:craft\base\ElementInterface::canDelete())
-| [ElementInterface::getIsEditable()](craft3:craft\base\ElementInterface::getIsEditable())   | [Element::canView()](craft4:craft\base\Element::canView()) and [Element::canSave()](craft4:craft\base\Element::canSave())
-| [Element::ATTR_STATUS_CONFLICTED](craft3:craft\base\Element::ATTR_STATUS_CONFLICTED)       | Incoming draft content is favored.
+| [Element::getFieldStatus()](craft4:craft\base\Element::getFieldStatus())                   | [Field::getStatus()](craft4:craft\base\Field::getStatus())
+| [Element::getHasFreshContent()](craft4:craft\base\Element::getHasFreshContent())           | [Element::getIsFresh()](craft4:craft\base\Element::getIsFresh())
+| [Element::getIsProvisionalDraft()](craft4:craft\base\Element::getIsProvisionalDraft())     | [Element::$isProvisionalDraft](https://docs.craftcms.com/api/v4/craft-base-elementtrait.html#public-properties)
+| [Element::getIsUnsavedDraft()](craft4:craft\base\Element::getIsUnsavedDraft())             | [Element::getIsUnpublishedDraft()](craft4:craft\base\Element::getIsUnpublishedDraft())
+| [Element::isDeletable()](craft4:craft\base\Element::isDeletable())                         | [Element::canDelete()](craft4:craft\base\Element::canDelete())
+| [Element::isEditable()](craft4:craft\base\Element::isEditable())                           | [Element::canView()](craft4:craft\base\Element::canView()) and [Element::canSave()](craft4:craft\base\Element::canSave())
+| [ElementInterface::getEditorHtml()](craft4:craft\base\ElementInterface::getEditorHtml())   | Element edit forms are now exclusively driven [by their field layout](#field-layouts).
+| [ElementInterface::getIsDeletable()](craft4:craft\base\ElementInterface::getIsDeletable()) | [ElementInterface::canDelete()](craft4:craft\base\ElementInterface::canDelete())
+| [ElementInterface::getIsEditable()](craft4:craft\base\ElementInterface::getIsEditable())   | [Element::canView()](craft4:craft\base\Element::canView()) and [Element::canSave()](craft4:craft\base\Element::canSave())
+| [Element::ATTR_STATUS_CONFLICTED](craft4:craft\base\Element::ATTR_STATUS_CONFLICTED)       | Incoming draft content is favored.
 
 ## Services
 
@@ -424,10 +424,10 @@ The following core services have been removed:
 
 | Old                                                      | What to do instead
 | -------------------------------------------------------- | --------------------------------
-| [AssetTransforms](craft3:craft\services\AssetTransforms) | [ImageTransforms](craft4:craft\services\ImageTransforms)
-| [ElementIndexes](craft3:craft\services\ElementIndexes)   | [ElementSources](craft4:craft\services\ElementSources)
-| [EntryRevisions](craft3:craft\services\EntryRevisions)   | [Revisions](craft4:craft\services\Revisions)
-| [SystemSettings](craft3:craft\services\SystemSettings)   | [ProjectConfig](craft4:craft\services\ProjectConfig)
+| [AssetTransforms](craft4:craft\services\AssetTransforms) | [ImageTransforms](craft4:craft\services\ImageTransforms)
+| [ElementIndexes](craft4:craft\services\ElementIndexes)   | [ElementSources](craft4:craft\services\ElementSources)
+| [EntryRevisions](craft4:craft\services\EntryRevisions)   | [Revisions](craft4:craft\services\Revisions)
+| [SystemSettings](craft4:craft\services\SystemSettings)   | [ProjectConfig](craft4:craft\services\ProjectConfig)
 
 ## Control Panel Templates
 
@@ -517,50 +517,50 @@ The following events have been moved or renamed:
 
 | Old                                                                                                                                | Renamed to
 | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------
-| [Assets::EVENT_GET_ASSET_THUMB_URL](craft3:craft\services\Assets::EVENT_GET_ASSET_THUMB_URL)                                       | [Assets::EVENT_DEFINE_THUMB_URL](craft4:craft\services\Assets::EVENT_DEFINE_THUMB_URL)
-| [Assets::EVENT_GET_ASSET_URL](craft3:craft\services\Assets::EVENT_GET_ASSET_URL)                                                   | [Assets::EVENT_DEFINE_ASSET_URL](craft4:craft\services\Assets::EVENT_DEFINE_ASSET_URL)
-| [Assets::EVENT_GET_THUMB_PATH](craft3:craft\services\Assets::EVENT_GET_THUMB_PATH)                                                 | [Assets::EVENT_DEFINE_THUMB_PATH](craft4:craft\services\Assets::EVENT_DEFINE_THUMB_PATH)
-| [AssetTransforms::CONFIG_TRANSFORM_KEY](craft3:craft\services\AssetTransforms::CONFIG_TRANSFORM_KEY)                               | [ProjectConfig::PATH_IMAGE_TRANSFORMS](craft4:craft\services\ProjectConfig::PATH_IMAGE_TRANSFORMS)
-| [AssetTransforms::EVENT_BEFORE_SAVE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_BEFORE_SAVE_ASSET_TRANSFORM)     | [ImageTransforms::EVENT_BEFORE_SAVE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_BEFORE_SAVE_IMAGE_TRANSFORM)
-| [AssetTransforms::EVENT_AFTER_SAVE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_AFTER_SAVE_ASSET_TRANSFORM)       | [ImageTransforms::EVENT_AFTER_SAVE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_AFTER_SAVE_IMAGE_TRANSFORM)
-| [AssetTransforms::EVENT_BEFORE_DELETE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_BEFORE_DELETE_ASSET_TRANSFORM) | [ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM)
-| [AssetTransforms::EVENT_AFTER_DELETE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_AFTER_DELETE_ASSET_TRANSFORM)   | [ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM)
-| [AssetTransforms::EVENT_GENERATE_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_GENERATE_TRANSFORM)                       | [ImageTransforms::EVENT_GENERATE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_GENERATE_TRANSFORM)
-| [AssetTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE](craft3:craft\services\AssetTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE) | [ImageTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE](craft4:craft\services\ImageTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE)
-| [AssetTransforms::EVENT_BEFORE_DELETE_TRANSFORMS](craft3:craft\services\AssetTransforms::EVENT_BEFORE_DELETE_TRANSFORMS)           | [ImageTransforms::EVENT_BEFORE_INVALIDATE_ASSET_TRANSFORMS](craft4:craft\services\ImageTransforms::EVENT_BEFORE_INVALIDATE_ASSET_TRANSFORMS)
-| [ElementIndexes::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES](craft3:craft\services\ElementIndexes::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES) | [ElementSources::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES](craft4:craft\services\ElementSources::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES)
-| [ElementIndexes::EVENT_DEFINE_SOURCE_SORT_OPTIONS](craft3:craft\services\ElementIndexes::EVENT_DEFINE_SOURCE_SORT_OPTIONS)         | [ElementSources::EVENT_DEFINE_SOURCE_SORT_OPTIONS](craft4:craft\services\ElementSources::EVENT_DEFINE_SOURCE_SORT_OPTIONS)
+| [Assets::EVENT_GET_ASSET_THUMB_URL](craft4:craft\services\Assets::EVENT_GET_ASSET_THUMB_URL)                                       | [Assets::EVENT_DEFINE_THUMB_URL](craft4:craft\services\Assets::EVENT_DEFINE_THUMB_URL)
+| [Assets::EVENT_GET_ASSET_URL](craft4:craft\services\Assets::EVENT_GET_ASSET_URL)                                                   | [Assets::EVENT_DEFINE_ASSET_URL](craft4:craft\services\Assets::EVENT_DEFINE_ASSET_URL)
+| [Assets::EVENT_GET_THUMB_PATH](craft4:craft\services\Assets::EVENT_GET_THUMB_PATH)                                                 | [Assets::EVENT_DEFINE_THUMB_PATH](craft4:craft\services\Assets::EVENT_DEFINE_THUMB_PATH)
+| [AssetTransforms::CONFIG_TRANSFORM_KEY](craft4:craft\services\AssetTransforms::CONFIG_TRANSFORM_KEY)                               | [ProjectConfig::PATH_IMAGE_TRANSFORMS](craft4:craft\services\ProjectConfig::PATH_IMAGE_TRANSFORMS)
+| [AssetTransforms::EVENT_BEFORE_SAVE_ASSET_TRANSFORM](craft4:craft\services\AssetTransforms::EVENT_BEFORE_SAVE_ASSET_TRANSFORM)     | [ImageTransforms::EVENT_BEFORE_SAVE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_BEFORE_SAVE_IMAGE_TRANSFORM)
+| [AssetTransforms::EVENT_AFTER_SAVE_ASSET_TRANSFORM](craft4:craft\services\AssetTransforms::EVENT_AFTER_SAVE_ASSET_TRANSFORM)       | [ImageTransforms::EVENT_AFTER_SAVE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_AFTER_SAVE_IMAGE_TRANSFORM)
+| [AssetTransforms::EVENT_BEFORE_DELETE_ASSET_TRANSFORM](craft4:craft\services\AssetTransforms::EVENT_BEFORE_DELETE_ASSET_TRANSFORM) | [ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM)
+| [AssetTransforms::EVENT_AFTER_DELETE_ASSET_TRANSFORM](craft4:craft\services\AssetTransforms::EVENT_AFTER_DELETE_ASSET_TRANSFORM)   | [ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM)
+| [AssetTransforms::EVENT_GENERATE_TRANSFORM](craft4:craft\services\AssetTransforms::EVENT_GENERATE_TRANSFORM)                       | [ImageTransforms::EVENT_GENERATE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_GENERATE_TRANSFORM)
+| [AssetTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE](craft4:craft\services\AssetTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE) | [ImageTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE](craft4:craft\services\ImageTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE)
+| [AssetTransforms::EVENT_BEFORE_DELETE_TRANSFORMS](craft4:craft\services\AssetTransforms::EVENT_BEFORE_DELETE_TRANSFORMS)           | [ImageTransforms::EVENT_BEFORE_INVALIDATE_ASSET_TRANSFORMS](craft4:craft\services\ImageTransforms::EVENT_BEFORE_INVALIDATE_ASSET_TRANSFORMS)
+| [ElementIndexes::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES](craft4:craft\services\ElementIndexes::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES) | [ElementSources::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES](craft4:craft\services\ElementSources::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES)
+| [ElementIndexes::EVENT_DEFINE_SOURCE_SORT_OPTIONS](craft4:craft\services\ElementIndexes::EVENT_DEFINE_SOURCE_SORT_OPTIONS)         | [ElementSources::EVENT_DEFINE_SOURCE_SORT_OPTIONS](craft4:craft\services\ElementSources::EVENT_DEFINE_SOURCE_SORT_OPTIONS)
 
 ### Deprecated
 
 | Old                                                                                                        | What to do instead
 | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------
-| [FieldLayout::EVENT_DEFINE_STANDARD_FIELDS](craft3:craft\models\FieldLayout::EVENT_DEFINE_STANDARD_FIELDS) | [FieldLayout::EVENT_DEFINE_NATIVE_FIELDS](craft4:craft\models\FieldLayout::EVENT_DEFINE_NATIVE_FIELDS)
+| [FieldLayout::EVENT_DEFINE_STANDARD_FIELDS](craft4:craft\models\FieldLayout::EVENT_DEFINE_STANDARD_FIELDS) | [FieldLayout::EVENT_DEFINE_NATIVE_FIELDS](craft4:craft\models\FieldLayout::EVENT_DEFINE_NATIVE_FIELDS)
 
 ### Removed
 
 | Old                                                                                                                                | What to do instead
 | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------
-| [AssetTransforms::EVENT_AFTER_DELETE_TRANSFORMS](craft3:craft\services\AssetTransforms::EVENT_AFTER_DELETE_TRANSFORMS)             | Transforms are now invalidated, but no event is triggered _after_ that happens.
-| [Element::EVENT_DEFINE_IS_DELETABLE](craft3:craft\base\Element::EVENT_DEFINE_IS_DELETABLE)                                         | [Element::EVENT_AUTHORIZE_DELETE](craft4:craft\base\Element::EVENT_AUTHORIZE_DELETE)
-| [Element::EVENT_DEFINE_IS_EDITABLE](craft3:craft\base\Element::EVENT_DEFINE_IS_EDITABLE)                                           | [Element::EVENT_AUTHORIZE_VIEW](craft4:craft\base\Element::EVENT_AUTHORIZE_VIEW) and [Element::EVENT_AUTHORIZE_SAVE](craft4:craft\base\Element::EVENT_AUTHORIZE_SAVE)
-| [Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES](craft3:craft\services\Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES)                         | [Elements::EVENT_AFTER_MERGE_CANONICAL_CHANGES](craft4:craft\services\Elements::EVENT_AFTER_MERGE_CANONICAL_CHANGES)
-| [Drafts::EVENT_AFTER_PUBLISH_DRAFT](craft3:craft\services\Drafts::EVENT_AFTER_PUBLISH_DRAFT)                                       |
-| [Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES](craft3:craft\services\Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES)                       | [Elements::EVENT_BEFORE_MERGE_CANONICAL_CHANGES](craft4:craft\services\Elements::EVENT_BEFORE_MERGE_CANONICAL_CHANGES)
-| [Drafts::EVENT_BEFORE_PUBLISH_DRAFT](craft3:craft\services\Drafts::EVENT_BEFORE_PUBLISH_DRAFT)                                     |
-| [Gql::EVENT_REGISTER_GQL_PERMISSIONS](craft3:craft\services\Gql::EVENT_REGISTER_GQL_PERMISSIONS)                                   | [Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS](craft4:craft\services\Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS)
-| [TemplateCaches::EVENT_AFTER_DELETE_CACHES](craft3:craft\services\TemplateCaches::EVENT_AFTER_DELETE_CACHES)                       | Template caches have been invalidated since Craft 3.5.
-| [TemplateCaches::EVENT_BEFORE_DELETE_CACHES](craft3:craft\services\TemplateCaches::EVENT_BEFORE_DELETE_CACHES)                     | Template caches have been invalidated since Craft 3.5.
-| [Volumes::EVENT_REGISTER_VOLUME_TYPES)](craft3:craft\services\Volumes::EVENT_REGISTER_VOLUME_TYPES)                                | [Fs::EVENT_REGISTER_FILESYSTEM_TYPES](craft4:craft\services\Fs::EVENT_REGISTER_FILESYSTEM_TYPES)
-| [CraftVariable::EVENT_DEFINE_COMPONENTS](craft3:craft\web\twig\variables\CraftVariable::EVENT_DEFINE_COMPONENTS)                   | [CraftVariable::EVENT_INIT](craft4:craft\web\twig\variables\CraftVariable::EVENT_INIT)
-| [EntryRevisions::EVENT_BEFORE_SAVE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_BEFORE_SAVE_DRAFT)                           |
-| [EntryRevisions::EVENT_AFTER_SAVE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_AFTER_SAVE_DRAFT)                             |
-| [EntryRevisions::EVENT_BEFORE_PUBLISH_DRAFT](craft3:craft\services\EntryRevisions::EVENT_BEFORE_PUBLISH_DRAFT)                     |
-| [EntryRevisions::EVENT_AFTER_PUBLISH_DRAFT](craft3:craft\services\EntryRevisions::EVENT_AFTER_PUBLISH_DRAFT)                       |
-| [EntryRevisions::EVENT_BEFORE_DELETE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_BEFORE_DELETE_DRAFT)                       |
-| [EntryRevisions::EVENT_AFTER_DELETE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_AFTER_DELETE_DRAFT)                         |
-| [EntryRevisions::EVENT_BEFORE_REVERT_ENTRY_TO_VERSION](craft3:craft\services\EntryRevisions::EVENT_BEFORE_REVERT_ENTRY_TO_VERSION) | [Revisions::EVENT_BEFORE_REVERT_TO_REVISION](craft4:craft\services\Revisions::EVENT_BEFORE_REVERT_TO_REVISION)
-| [EntryRevisions::EVENT_AFTER_REVERT_ENTRY_TO_VERSION](craft3:craft\services\EntryRevisions::EVENT_AFTER_REVERT_ENTRY_TO_VERSION)   | [Revisions::EVENT_AFTER_REVERT_TO_REVISION](craft4:craft\services\Revisions::EVENT_AFTER_REVERT_TO_REVISION)
+| [AssetTransforms::EVENT_AFTER_DELETE_TRANSFORMS](craft4:craft\services\AssetTransforms::EVENT_AFTER_DELETE_TRANSFORMS)             | Transforms are now invalidated, but no event is triggered _after_ that happens.
+| [Element::EVENT_DEFINE_IS_DELETABLE](craft4:craft\base\Element::EVENT_DEFINE_IS_DELETABLE)                                         | [Element::EVENT_AUTHORIZE_DELETE](craft4:craft\base\Element::EVENT_AUTHORIZE_DELETE)
+| [Element::EVENT_DEFINE_IS_EDITABLE](craft4:craft\base\Element::EVENT_DEFINE_IS_EDITABLE)                                           | [Element::EVENT_AUTHORIZE_VIEW](craft4:craft\base\Element::EVENT_AUTHORIZE_VIEW) and [Element::EVENT_AUTHORIZE_SAVE](craft4:craft\base\Element::EVENT_AUTHORIZE_SAVE)
+| [Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES](craft4:craft\services\Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES)                         | [Elements::EVENT_AFTER_MERGE_CANONICAL_CHANGES](craft4:craft\services\Elements::EVENT_AFTER_MERGE_CANONICAL_CHANGES)
+| [Drafts::EVENT_AFTER_PUBLISH_DRAFT](craft4:craft\services\Drafts::EVENT_AFTER_PUBLISH_DRAFT)                                       |
+| [Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES](craft4:craft\services\Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES)                       | [Elements::EVENT_BEFORE_MERGE_CANONICAL_CHANGES](craft4:craft\services\Elements::EVENT_BEFORE_MERGE_CANONICAL_CHANGES)
+| [Drafts::EVENT_BEFORE_PUBLISH_DRAFT](craft4:craft\services\Drafts::EVENT_BEFORE_PUBLISH_DRAFT)                                     |
+| [Gql::EVENT_REGISTER_GQL_PERMISSIONS](craft4:craft\services\Gql::EVENT_REGISTER_GQL_PERMISSIONS)                                   | [Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS](craft4:craft\services\Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS)
+| [TemplateCaches::EVENT_AFTER_DELETE_CACHES](craft4:craft\services\TemplateCaches::EVENT_AFTER_DELETE_CACHES)                       | Template caches have been invalidated since Craft 3.5.
+| [TemplateCaches::EVENT_BEFORE_DELETE_CACHES](craft4:craft\services\TemplateCaches::EVENT_BEFORE_DELETE_CACHES)                     | Template caches have been invalidated since Craft 3.5.
+| [Volumes::EVENT_REGISTER_VOLUME_TYPES)](craft4:craft\services\Volumes::EVENT_REGISTER_VOLUME_TYPES)                                | [Fs::EVENT_REGISTER_FILESYSTEM_TYPES](craft4:craft\services\Fs::EVENT_REGISTER_FILESYSTEM_TYPES)
+| [CraftVariable::EVENT_DEFINE_COMPONENTS](craft4:craft\web\twig\variables\CraftVariable::EVENT_DEFINE_COMPONENTS)                   | [CraftVariable::EVENT_INIT](craft4:craft\web\twig\variables\CraftVariable::EVENT_INIT)
+| [EntryRevisions::EVENT_BEFORE_SAVE_DRAFT](craft4:craft\services\EntryRevisions::EVENT_BEFORE_SAVE_DRAFT)                           |
+| [EntryRevisions::EVENT_AFTER_SAVE_DRAFT](craft4:craft\services\EntryRevisions::EVENT_AFTER_SAVE_DRAFT)                             |
+| [EntryRevisions::EVENT_BEFORE_PUBLISH_DRAFT](craft4:craft\services\EntryRevisions::EVENT_BEFORE_PUBLISH_DRAFT)                     |
+| [EntryRevisions::EVENT_AFTER_PUBLISH_DRAFT](craft4:craft\services\EntryRevisions::EVENT_AFTER_PUBLISH_DRAFT)                       |
+| [EntryRevisions::EVENT_BEFORE_DELETE_DRAFT](craft4:craft\services\EntryRevisions::EVENT_BEFORE_DELETE_DRAFT)                       |
+| [EntryRevisions::EVENT_AFTER_DELETE_DRAFT](craft4:craft\services\EntryRevisions::EVENT_AFTER_DELETE_DRAFT)                         |
+| [EntryRevisions::EVENT_BEFORE_REVERT_ENTRY_TO_VERSION](craft4:craft\services\EntryRevisions::EVENT_BEFORE_REVERT_ENTRY_TO_VERSION) | [Revisions::EVENT_BEFORE_REVERT_TO_REVISION](craft4:craft\services\Revisions::EVENT_BEFORE_REVERT_TO_REVISION)
+| [EntryRevisions::EVENT_AFTER_REVERT_ENTRY_TO_VERSION](craft4:craft\services\EntryRevisions::EVENT_AFTER_REVERT_ENTRY_TO_VERSION)   | [Revisions::EVENT_AFTER_REVERT_TO_REVISION](craft4:craft\services\Revisions::EVENT_AFTER_REVERT_TO_REVISION)
 
 ## Filesystems
 

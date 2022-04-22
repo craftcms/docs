@@ -29,7 +29,7 @@ class MyModel extends Model
 
 ## Validation
 
-If your environmental settings require special validation rules, you can have the validators check the parsed values rather than the raw values using <craft3:craft\behaviors\EnvAttributeParserBehavior>.
+If your environmental settings require special validation rules, you can have the validators check the parsed values rather than the raw values using <craft4:craft\behaviors\EnvAttributeParserBehavior>.
 
 ```php
 use craft\base\Model;
@@ -75,7 +75,7 @@ To guide users when entering your setting’s value in the control panel, give y
 }) }}
 ```
 
-When `suggestEnvVars` is set to `true`, the autosuggest input will call <craft3:craft\web\twig\variables\Cp::getEnvSuggestions()> to get its suggestions, and a tip will show up below the form field advising the user that they can set the value to an environment variable.
+When `suggestEnvVars` is set to `true`, the autosuggest input will call <craft4:craft\web\twig\variables\Cp::getEnvSuggestions()> to get its suggestions, and a tip will show up below the form field advising the user that they can set the value to an environment variable.
 
 If your setting is for a URL or file system path, you should also set `suggestAliases` to `true`.
 

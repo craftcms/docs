@@ -1,6 +1,6 @@
 # Control Panel Sections
 
-Modules and plugins can add new sections to the control panel using the [EVENT_REGISTER_CP_NAV_ITEMS](craft3:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) event:
+Modules and plugins can add new sections to the control panel using the [EVENT_REGISTER_CP_NAV_ITEMS](craft4:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) event:
 
 ```php
 use craft\events\RegisterCpNavItemsEvent;
@@ -27,9 +27,9 @@ public function init()
 }
 ```
 
-Each item within the [navItems](craft3:craft\events\RegisterCpNavItemsEvent::$navItems) array can have the following keys:
+Each item within the [navItems](craft4:craft\events\RegisterCpNavItemsEvent::$navItems) array can have the following keys:
 
-- `url` – The URL that the nav item should link to. (It will be run through <craft3:craft\helpers\UrlHelper::cpUrl()>.)
+- `url` – The URL that the nav item should link to. (It will be run through <craft4:craft\helpers\UrlHelper::cpUrl()>.)
 - `label` – The user-facing nav item label.
 - `icon` – The path to the icon SVG that should be used. (It can begin with an alias.)
 - `badgeCount` _(optional)_ – The badge count that should be displayed in the nav item.
@@ -60,7 +60,7 @@ Your templates can specify which subnav item should be selected by setting a `se
 
 ## Plugin Sections
 
-Plugins that only need to add one section can set the `$hasCpSection` property on their primary plugin class, rather than using the [EVENT_REGISTER_CP_NAV_ITEMS](craft3:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) event:
+Plugins that only need to add one section can set the `$hasCpSection` property on their primary plugin class, rather than using the [EVENT_REGISTER_CP_NAV_ITEMS](craft4:craft\web\twig\variables\Cp::EVENT_REGISTER_CP_NAV_ITEMS) event:
 
 ```php
 <?php
@@ -79,7 +79,7 @@ class Plugin extends \craft\base\Plugin
 You can alternatively set a `hasCpSection` value in `composer.json` as noted in the [plugin guide](plugin-guide.md#compser-json). We don’t recommend setting it in both places, however, since the value set in `composer.json` will override your public class property’s value and likely create confusion.
 :::
 
-You can modify aspects of the plugin’s control panel nav item by overriding its [getCpNavItem()](craft3:craft\base\PluginInterface::getCpNavItem()) method:
+You can modify aspects of the plugin’s control panel nav item by overriding its [getCpNavItem()](craft4:craft\base\PluginInterface::getCpNavItem()) method:
 
 ```php
 public function getCpNavItem()

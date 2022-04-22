@@ -225,7 +225,7 @@ In this example, we’re providing the customer with an option to include a note
 :::
 
 ::: warning
-Commerce does not validate the `options` and `note` parameters. If you’d like to limit user input, use front-end validation or use the [`Model::EVENT_DEFINE_RULES`](craft3:craft\base\Model::EVENT_DEFINE_RULES) event to add validation rules for the [`LineItem`](commerce3:craft\commerce\models\LineItem) model.
+Commerce does not validate the `options` and `note` parameters. If you’d like to limit user input, use front-end validation or use the [`Model::EVENT_DEFINE_RULES`](craft4:craft\base\Model::EVENT_DEFINE_RULES) event to add validation rules for the [`LineItem`](commerce3:craft\commerce\models\LineItem) model.
 :::
 
 The note and options will be visible on the order’s detail page in the control panel:

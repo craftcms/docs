@@ -51,7 +51,7 @@ $value = $entry->myFieldHandle %}
 ```
 :::
 
-That will give you a <craft3:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
+That will give you a <craft4:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
 
 To loop through all checked options, iterate over the field value:
 
@@ -70,7 +70,7 @@ foreach ($entry->myFieldHandle as $option) {
 ```
 :::
 
-To loop through all available options, iterate over the [options](craft3:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
+To loop through all available options, iterate over the [options](craft4:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
 
 ::: code
 ```twig
@@ -100,7 +100,7 @@ if (count($entry->myFieldHandle)) {
 ```
 :::
 
-To see if a particular option is checked, use [contains()](craft3:craft\fields\data\MultiOptionsFieldData::contains())
+To see if a particular option is checked, use [contains()](craft4:craft\fields\data\MultiOptionsFieldData::contains())
 
 ::: code
 ```twig

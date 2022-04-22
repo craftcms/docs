@@ -1,8 +1,8 @@
 # Field Types
 
-Plugins can provide custom field types by creating a class that implements <craft3:craft\base\FieldInterface> and <craft3:craft\base\FieldTrait>. The class will serve both as a way to communicate various things about your field type (with static methods), and as a model that fields of its type will be instantiated with.
+Plugins can provide custom field types by creating a class that implements <craft4:craft\base\FieldInterface> and <craft4:craft\base\FieldTrait>. The class will serve both as a way to communicate various things about your field type (with static methods), and as a model that fields of its type will be instantiated with.
 
-As a convenience, you can extend <craft3:craft\base\Field>, which provides a base field type implementation.
+As a convenience, you can extend <craft4:craft\base\Field>, which provides a base field type implementation.
 
 You can refer to Craft’s own field classes for examples. They are located in `vendor/craftcms/cms/src/fields/`.
 
@@ -39,9 +39,9 @@ class Plugin extends \craft\base\Plugin
 
 ## Supporting Delta Saves
 
-If your field type does any processing from [afterElementSave()](<craft3:craft\base\FieldInterface::afterElementSave()>) or [afterElementPropagate()](<craft3:craft\base\FieldInterface::afterElementPropagate()>), you can improve performance by skipping processing when the field’s value is unchanged.
+If your field type does any processing from [afterElementSave()](<craft4:craft\base\FieldInterface::afterElementSave()>) or [afterElementPropagate()](<craft4:craft\base\FieldInterface::afterElementPropagate()>), you can improve performance by skipping processing when the field’s value is unchanged.
 
-You can tell whether field content has changed by calling [isFieldDirty()](<craft3:craft\base\ElementInterface::isFieldDirty()>) on the element.
+You can tell whether field content has changed by calling [isFieldDirty()](<craft4:craft\base\ElementInterface::isFieldDirty()>) on the element.
 
 ```php
 public function afterElementSave(ElementInterface $element, bool $isNew)
@@ -56,9 +56,9 @@ public function afterElementSave(ElementInterface $element, bool $isNew)
 
 ## Storing Content
 
-By default, a field type’s [hasContentColumn()](craft3:craft\base\Field::hasContentColumn()) method returns `true`, meaning Craft will create one or more fields for it in the database’s `content` table.
+By default, a field type’s [hasContentColumn()](craft4:craft\base\Field::hasContentColumn()) method returns `true`, meaning Craft will create one or more fields for it in the database’s `content` table.
 
-The field type’s [getContentColumnType()](craft3:craft\base\Field::getContentColumnType()) method can return either a single column type, or a key-value array of multiple handles and [types](yii2:yii\db\Schema#constants).
+The field type’s [getContentColumnType()](craft4:craft\base\Field::getContentColumnType()) method can return either a single column type, or a key-value array of multiple handles and [types](yii2:yii\db\Schema#constants).
 
 ::: code
 ```php Single Column
@@ -79,7 +79,7 @@ public function getContentColumnType()
 :::
 
 ::: tip
-See Craft’s [Date](craft3:craft\fields\Date) field for an example that uses two columns when it’s configured to store a timezone.
+See Craft’s [Date](craft4:craft\fields\Date) field for an example that uses two columns when it’s configured to store a timezone.
 :::
 
 Any column Craft creates in the `content` table will automatically get a random 9-character suffix like `_ycpsotpa`. This ensures column names are unique even in the rare case that identical handles are used. You can get this suffix from any field instance from its `columnSuffix` property.
