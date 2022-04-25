@@ -51,6 +51,7 @@
     "docs:redirects": "cp ./_redirects ./docs/.vuepress/dist/",
     "serve-static": "./node_modules/.bin/serve -l 3030 ./docs/.vuepress/dist/",
     "textlint": "./node_modules/.bin/textlint 'docs/**'",
+    "textlint:fix": "./node_modules/.bin/textlint 'docs/**' --fix",
     "test:playwright": "npx playwright test",
     "test:jest": "node ./node_modules/.bin/jest"
   },
