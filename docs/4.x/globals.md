@@ -45,7 +45,7 @@ If you run multiple sites with Craft, global sets are available in all sites. Ho
 
 To do that, edit the global set’s fields, and make sure that their “Translation Method” settings are set to “Translate for each site”.
 
-To toggle between sites while viewing global sets, use the drop-down menu at the top left of the global sets page in the control panel.
+To toggle between sites while viewing global sets, use the dropdown menu at the top left of the global sets page in the control panel.
 
 ![Toggling between sites in Globals](./images/globals-multisite-nav.png)
 
