@@ -45,13 +45,13 @@ The permissions Craft comes with are:
 | Access the control panel | `accessCp`
 | ↳&nbsp; Access the control panel when the system is off | `accessCpWhenSystemIsOff`
 | ↳&nbsp; Perform Craft and plugin updates | `performUpdates`
-| ↳&nbsp; Access _[Plugin Name]_ | `accessPlugin-[PluginHandle]`
+| ↳&nbsp; Access _[plugin name]_ | `accessPlugin-[PluginHandle]`
 | Edit users | `editUsers`
 | ↳&nbsp; Register users | `registerUsers`
 | ↳&nbsp; Assign permissions | `assignUserPermissions`
 | ↳&nbsp; Administrate users | `administrateUsers`
 | Delete users | `deleteUsers`
-| Edit _[Site Name]_ | `editSite:[SiteUID]`
+| Edit _[site name]_ | `editSite:[SiteUID]`
 | Impersonate users | `impersonateUsers`
 | Edit entries | `editEntries:[SectionUID]`
 | ↳&nbsp; Create entries | `createEntries:[SectionUID]`
@@ -63,9 +63,9 @@ The permissions Craft comes with are:
 | ↳&nbsp; Edit other authors’ drafts | `editPeerEntryDrafts:[SectionUID]`
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Publish other authors’ drafts | `publishPeerEntryDrafts:[SectionUID]`
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other authors’ drafts | `deletePeerEntryDrafts:[SectionUID]`
-| Edit _[Global Set Name]_ | `editGlobalSet:[GlobalSetUID]`
-| Edit _[Category Group Name]_ | `editCategories:[CategoryGroupUID]`
-| View _[Asset Volume Name]_ | `viewVolume:[VolumeUID]`
+| Edit _[global set name]_ | `editGlobalSet:[GlobalSetUID]`
+| Edit _[category group name]_ | `editCategories:[CategoryGroupUID]`
+| View _[asset volume name]_ | `viewVolume:[VolumeUID]`
 | ↳&nbsp; Upload files | `saveAssetInVolume:[VolumeUID]`
 | ↳&nbsp; Create subfolders | `createFoldersInVolume:[VolumeUID]`
 | ↳&nbsp; Remove files and folders | `deleteFilesAndFoldersInVolume:[VolumeUID]`

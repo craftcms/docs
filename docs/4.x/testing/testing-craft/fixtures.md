@@ -100,7 +100,7 @@ The primary keys are: `siteId`, `sectionId`, `typeId` and `title`.
 
 ### Global Set Fixture
 
-You can add Global Set fixtures by extending [craft\test\fixtures\elements\GlobalSetFixture](craft4:craft\test\fixtures\elements\GlobalSetFixture).
+You can add global set fixtures by extending [craft\test\fixtures\elements\GlobalSetFixture](craft4:craft\test\fixtures\elements\GlobalSetFixture).
 
 The fixture data file could look like this:
 
@@ -117,7 +117,7 @@ return [
 The primary keys are: `handle`.
 
 ::: tip
-By default, a Global Set doesn’t get its own database row. If you need it to, you can set `$useActiveRecord` to `true`.
+By default, a global set doesn’t get its own database row. If you need it to, you can set `$useActiveRecord` to `true`.
 :::
 
 ### Tag Fixtures

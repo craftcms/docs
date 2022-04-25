@@ -784,7 +784,7 @@ Raised right before a Global Set’s content is saved.
 
 #### Params:
 
-- `globalSet` – A <craft2:Craft\GlobalSetModel> object representing the Global Set whose content is about to be saved.
+- `globalSet` – A <craft2:Craft\GlobalSetModel> object representing the global set whose content is about to be saved.
 
 ::: tip
 Event handlers can prevent the global set from getting saved by setting [$event->performAction](craft2:Craft\Event::performAction) to `false`.
@@ -800,7 +800,7 @@ Raised when a Global Set’s content is saved.
 
 #### Params:
 
-- `globalSet` – A <craft2:Craft\GlobalSetModel> object representing the Global Set whose content was just saved.
+- `globalSet` – A <craft2:Craft\GlobalSetModel> object representing the global set whose content was just saved.
 
 ## User API Events
 
