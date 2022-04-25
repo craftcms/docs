@@ -42,8 +42,8 @@ Possible values include:
 | `[100, 200]` | that are related to a user with an ID of 100 or 200.
 | `[':empty:', 100, 200]` | without related users, or related to a user with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the users with IDs of 100 and 200.
-| an [User](craft3:craft\elements\User) object | that are related to the user.
-| an [UserQuery](craft3:craft\elements\db\UserQuery) object | that are related to any of the resulting users.
+| an [User](craft4:craft\elements\User) object | that are related to the user.
+| an [UserQuery](craft4:craft\elements\db\UserQuery) object | that are related to any of the resulting users.
 
 ::: code
 ```twig
@@ -75,7 +75,7 @@ $query = $entry->myFieldHandle;
 
 That will give you a [user query](users.md#querying-users), prepped to output all the related users for the given field.
 
-To loop through all the related users, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
+To loop through all the related users, call [all()](craft4:craft\db\Query::all()) and then loop over the results:
 
 ::: code
 ```twig
@@ -99,7 +99,7 @@ if (count($relatedUsers)) {
 ```
 :::
 
-If you only want the first related user, call [one()](craft3:craft\db\Query::one()) and make sure it returned something:
+If you only want the first related user, call [one()](craft4:craft\db\Query::one()) and make sure it returned something:
 
 ::: code
 ```twig
@@ -117,7 +117,7 @@ if ($rel) {
 ```
 :::
 
-If you need to check for related users without fetching them you can call [exists()](craft3:craft\db\Query::exists()):
+If you need to check for related users without fetching them you can call [exists()](craft4:craft\db\Query::exists()):
 
 ::: code
 ```twig
@@ -195,5 +195,5 @@ You could then make the checkbox list sortable, so users have control over the o
 ## See Also
 
 - [User Queries](users.md#querying-users)
-- <craft3:craft\elements\User>
+- <craft4:craft\elements\User>
 - [Relations](relations.md)

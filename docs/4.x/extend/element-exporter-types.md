@@ -11,14 +11,14 @@ The data included in these files is determined by the selected **exporter type**
 
 ## Creating Custom Exporter Types
 
-Plugins can provide custom exporter types for element index pages by creating a class that implements <craft3:craft\base\ElementExporterInterface>.
+Plugins can provide custom exporter types for element index pages by creating a class that implements <craft4:craft\base\ElementExporterInterface>.
 
-As a convenience, you can extend <craft3:craft\base\ElementExporter>, which provides a base exporter type implementation.
+As a convenience, you can extend <craft4:craft\base\ElementExporter>, which provides a base exporter type implementation.
 
 There are two methods that your exporter type should define:
 
-- **[displayName()](craft3:craft\base\ComponentInterface::displayName())** _(static)_ – returns the user-facing name of the exporter type (shown in the **Export Type** dropdown menu within the Export HUD).
-- **[export()](craft3:craft\base\ElementExporterInterface::export())** – Accepts an element query, and returns the export data. Each item of the returned array represents one row of data, and should be set to a nested array of the column values.
+- **[displayName()](craft4:craft\base\ComponentInterface::displayName())** _(static)_ – returns the user-facing name of the exporter type (shown in the **Export Type** dropdown menu within the Export HUD).
+- **[export()](craft4:craft\base\ElementExporterInterface::export())** – Accepts an element query, and returns the export data. Each item of the returned array represents one row of data, and should be set to a nested array of the column values.
 
 ::: tip
 Make sure that each of the nested arrays returned by `export()` contain the exact same array keys.

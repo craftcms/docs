@@ -162,7 +162,7 @@ With all that in place, your plugin will now get its own icon on the Settings pa
 
 ### Advanced Settings Pages
 
-When the `/admin/settings/plugins/my-plugin-handle` control panel URL is requested, your plugin is ultimately in charge of the response. Namely, your plugin’s `getSettingsResponse()` method. The default `getSettingsResponse()` implementation in <craft3:craft\base\Plugin> will call your plugin’s `settingsHtml()` method, and then tell the active controller to render Craft’s `settings/plugins/_settings` template (the layout template for plugin settings pages), passing it the HTML returned by `settingsHtml()`.
+When the `/admin/settings/plugins/my-plugin-handle` control panel URL is requested, your plugin is ultimately in charge of the response. Namely, your plugin’s `getSettingsResponse()` method. The default `getSettingsResponse()` implementation in <craft4:craft\base\Plugin> will call your plugin’s `settingsHtml()` method, and then tell the active controller to render Craft’s `settings/plugins/_settings` template (the layout template for plugin settings pages), passing it the HTML returned by `settingsHtml()`.
 
 If a plugin needs more control over its settings page(s), it can override its `getSettingsResponse()` method and do whatever it wants with the request.
 
@@ -188,4 +188,4 @@ public function getSettingsResponse()
 }
 ```
 
-Just note that whatever it returns needs to make sense as something a controller action would return, because that’s exactly what’s happening. The <craft3:craft\controllers\PluginsController::actionEditPluginSettings()> method returns whatever `getSettingsResponse()` returns directly.
+Just note that whatever it returns needs to make sense as something a controller action would return, because that’s exactly what’s happening. The <craft4:craft\controllers\PluginsController::actionEditPluginSettings()> method returns whatever `getSettingsResponse()` returns directly.

@@ -10,11 +10,11 @@ For the most part, writing controllers for Craft is identical to writing control
 [Yii documentation][yii] as a starting point.
 :::
 
-Craft controllers should extend <craft3:craft\web\Controller>, which offers a few advantages over its parent,
+Craft controllers should extend <craft4:craft\web\Controller>, which offers a few advantages over its parent,
 <yii2:yii\web\Controller>:
 
 - You can easily control whether the controller should allow anonymous access by overriding
-  [$allowAnonymous](craft3:craft\web\Controller::$allowAnonymous). (An active user session is required by default.)
+  [$allowAnonymous](craft4:craft\web\Controller::$allowAnonymous). (An active user session is required by default.)
 - If an exception is thrown by a controller action and the request accepts a JSON response, the response will
   automatically be formatted as JSON, with an `error` key.
 - It provides several helper methods that ease development.
@@ -23,22 +23,22 @@ If you’re writing a custom module and not a plugin, make sure your module’s 
 
 ## Request Validation Methods
 
-<craft3:craft\web\Controller> offers several methods you can call from within your actions, to validate the current
+<craft4:craft\web\Controller> offers several methods you can call from within your actions, to validate the current
 request:
 
 Method | Description
 ------ | -----------
-[requireLogin()](craft3:craft\web\Controller::requireLogin()) | Requires that a user is logged in.
-[requireGuest()](craft3:craft\web\Controller::requireGuest()) | Requires that the user is anonymous.
-[requireAdmin()](craft3:craft\web\Controller::requireAdmin()) | Requires that the user is logged in with an Admin account.
-[requirePermission()](craft3:craft\web\Controller::requirePermission()) | Requires that the user is logged in with an account that has a given permission.
-[requireAuthorization()](craft3:craft\web\Controller::requireAuthorization()) | Requires that the user has been granted authorization to do something (whether or not they are logged in).
-[requireElevatedSession()](craft3:craft\web\Controller::requireElevatedSession()) | Requires that the user has an elevated session.
-[requirePostRequest()](craft3:craft\web\Controller::requirePostRequest()) | Requires that the request was sent as a POST request.
-[requireAcceptsJson()](craft3:craft\web\Controller::requireAcceptsJson()) | Requires that the request was sent with an `Accept: application/json` header.
-[requireToken()](craft3:craft\web\Controller::requireToken()) | Requires that the request was sent with a [token](craft3:craft\web\Request::getToken()).
-[requireCpRequest()](craft3:craft\web\Controller::requireCpRequest()) | Requires that the request URI begins with the [control panel trigger](config3:cpTrigger).
-[requireSiteRequest()](craft3:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin with the [control panel trigger](config3::cpTrigger).
+[requireLogin()](craft4:craft\web\Controller::requireLogin()) | Requires that a user is logged in.
+[requireGuest()](craft4:craft\web\Controller::requireGuest()) | Requires that the user is anonymous.
+[requireAdmin()](craft4:craft\web\Controller::requireAdmin()) | Requires that the user is logged in with an Admin account.
+[requirePermission()](craft4:craft\web\Controller::requirePermission()) | Requires that the user is logged in with an account that has a given permission.
+[requireAuthorization()](craft4:craft\web\Controller::requireAuthorization()) | Requires that the user has been granted authorization to do something (whether or not they are logged in).
+[requireElevatedSession()](craft4:craft\web\Controller::requireElevatedSession()) | Requires that the user has an elevated session.
+[requirePostRequest()](craft4:craft\web\Controller::requirePostRequest()) | Requires that the request was sent as a POST request.
+[requireAcceptsJson()](craft4:craft\web\Controller::requireAcceptsJson()) | Requires that the request was sent with an `Accept: application/json` header.
+[requireToken()](craft4:craft\web\Controller::requireToken()) | Requires that the request was sent with a [token](craft4:craft\web\Request::getToken()).
+[requireCpRequest()](craft4:craft\web\Controller::requireCpRequest()) | Requires that the request URI begins with the [control panel trigger](config4:cpTrigger).
+[requireSiteRequest()](craft4:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin with the [control panel trigger](config4::cpTrigger).
 
 ```php
 public function actionFoo()
@@ -77,7 +77,7 @@ return [
 
 ### The `actions/<action-path>` Route
 
-By default, Craft makes an `actions/` route available for appending any valid action path. This can be customized with the <config3:actionTrigger> config setting.
+By default, Craft makes an `actions/` route available for appending any valid action path. This can be customized with the <config4:actionTrigger> config setting.
 
 ```bash
 curl -X POST https://my-project.test/actions/plugin-handle/controller/action
@@ -101,7 +101,7 @@ an action could go about that, depending on the needs.
 
 ### Rendering Templates
 
-Controller actions can render and return Twig templates using <craft3:craft\web\Controller::renderTemplate()>.
+Controller actions can render and return Twig templates using <craft4:craft\web\Controller::renderTemplate()>.
 
 ```php
 use yii\web\Response;
@@ -118,7 +118,7 @@ public function actionFoo(): Response
 }
 ```
 
-<craft3:craft\web\Controller::renderTemplate()> calls <craft3:craft\web\View::renderPageTemplate()> internally, which
+<craft4:craft\web\Controller::renderTemplate()> calls <craft4:craft\web\View::renderPageTemplate()> internally, which
 ensures all registered JS and CSS resources have been added to the rendered HTML, and then it will set the
 `Content-Type` header on the response, based on the MIME type of the template being rendered (using `text/html` as the
 default if the MIME type isn’t known).
@@ -144,12 +144,12 @@ public function actionFoo(): Response
 ```
 
 ::: tip
-You can call <craft3:craft\web\Controller::asErrorJson()> instead for an easy way to return a JSON response with an `error` key.
+You can call <craft4:craft\web\Controller::asErrorJson()> instead for an easy way to return a JSON response with an `error` key.
 :::
 
 ### Redirecting the Request
 
-Controller actions can redirect the request using <craft3:craft\web\Controller::redirect()>.
+Controller actions can redirect the request using <craft4:craft\web\Controller::redirect()>.
 
 ```php
 use yii\web\Response;
@@ -160,7 +160,7 @@ public function actionFoo(): Response
 }
 ```
 
-Or, if the request may contain a hashed `redirect` param, you can redirect to that using <craft3:craft\web\Controller::redirectToPostedUrl()>.
+Or, if the request may contain a hashed `redirect` param, you can redirect to that using <craft4:craft\web\Controller::redirectToPostedUrl()>.
 
 ```php
 use yii\web\Response;
@@ -174,7 +174,7 @@ public function actionFoo(): Response
 
 If the controller action is saving something, you may want to allow forms’ `redirect` params to include dynamic tokens
 such as `{id}`, which should be replaced with the object’s attribute values. To support that, pass the object into
-[redirectToPostedUrl()](craft3:craft\web\Controller::redirectToPostedUrl()).
+[redirectToPostedUrl()](craft4:craft\web\Controller::redirectToPostedUrl()).
 
 ```php
 use yii\web\Response;

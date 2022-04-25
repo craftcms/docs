@@ -48,8 +48,8 @@ Possible values include:
 | `':notempty:'`          | that have at least one Matrix block.                                      |
 | `100`                   | that have a Matrix block with an ID of 100.                               |
 | `[100, 200]`            | that have Matrix blocks with IDs of 100 or 200.                           |
-| a [MatrixBlock](craft3:craft\elements\MatrixBlock) object | that have the Matrix block.             |
-| an array of [MatrixBlock](craft3:craft\elements\MatrixBlock) objects | that have the Matrix blocks. |
+| a [MatrixBlock](craft4:craft\elements\MatrixBlock) object | that have the Matrix block.             |
+| an array of [MatrixBlock](craft4:craft\elements\MatrixBlock) objects | that have the Matrix blocks. |
 
 ::: code
 ```twig
@@ -96,7 +96,7 @@ $query = $entry->myFieldHandle;
 
 That will give you a [Matrix block query](matrix-blocks.md#querying-matrix-blocks), prepped to output all the enabled blocks for the given field.
 
-To loop through all the blocks, call [all()](<craft3:craft\db\Query::all()>) and loop over the results:
+To loop through all the blocks, call [all()](<craft4:craft\db\Query::all()>) and loop over the results:
 
 ::: code
 ```twig
@@ -119,9 +119,9 @@ if (count($blocks)) {
 ```
 :::
 
-All the code you put within the for-loop will be repeated for each Matrix block in the field. The current block will get set to that `block` variable we’ve defined, and it will be a <craft3:craft\elements\MatrixBlock> model.
+All the code you put within the for-loop will be repeated for each Matrix block in the field. The current block will get set to that `block` variable we’ve defined, and it will be a <craft4:craft\elements\MatrixBlock> model.
 
-Here’s an example of what the template might look like for a Matrix field with four block types (Heading, Text, Image, and Quote). We can determine the current block type’s handle by checking `block.type` (<craft3:craft\elements\MatrixBlock::getType()>).
+Here’s an example of what the template might look like for a Matrix field with four block types (Heading, Text, Image, and Quote). We can determine the current block type’s handle by checking `block.type` (<craft4:craft\elements\MatrixBlock::getType()>).
 
 ```twig
 {% for block in entry.myFieldHandle.all() %}
@@ -151,7 +151,7 @@ Here’s an example of what the template might look like for a Matrix field with
 This code can be simplified using the [switch](dev/tags.md#switch) tag.
 :::
 
-If you only want the first block, call [one()](<craft3:craft\db\Query::one()>) instead of `all()`, and make sure it returned something:
+If you only want the first block, call [one()](<craft4:craft\db\Query::one()>) instead of `all()`, and make sure it returned something:
 
 ::: code
 ```twig
@@ -168,7 +168,7 @@ if ($block) {
 ```
 :::
 
-If you only want to know the total number of blocks, call [count()](<craft3:craft\db\Query::count()>).
+If you only want to know the total number of blocks, call [count()](<craft4:craft\db\Query::count()>).
 
 ::: code
 ```twig
@@ -181,7 +181,7 @@ $total = $entry->myFieldHandle->count();
 ```
 :::
 
-If you just need to check if blocks exist (but don’t need to fetch them), you can call [exists()](<craft3:craft\db\Query::exists()>):
+If you just need to check if blocks exist (but don’t need to fetch them), you can call [exists()](<craft4:craft\db\Query::exists()>):
 
 ::: code
 ```twig
@@ -310,4 +310,4 @@ Then define the form inputs for any additional blocks that should be appended to
 
 - [Matrix Block Queries](matrix-blocks.md#querying-matrix-blocks)
 - [Element Queries](element-queries.md)
-- <craft3:craft\elements\MatrixBlock>
+- <craft4:craft\elements\MatrixBlock>

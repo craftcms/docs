@@ -2,7 +2,7 @@
 
 Craft uses a queue for processing background tasks like updating indexes, propagating entries, and pruning revisions. You can write simple queue job classes to register your asynchronous queue tasks.
 
-This feature relies on [Yii’s queue system](https://www.yiiframework.com/extension/yiisoft/yii2-queue/doc/guide/2.0/en/usage), to which Craft adds a [BaseJob](craft3:craft\queue\BaseJob) class for some perks:
+This feature relies on [Yii’s queue system](https://www.yiiframework.com/extension/yiisoft/yii2-queue/doc/guide/2.0/en/usage), to which Craft adds a [BaseJob](craft4:craft\queue\BaseJob) class for some perks:
 
 - The ability to set a fallback description for the job.
 - The ability to label and report task progress for a better user experience.
@@ -11,13 +11,13 @@ This feature relies on [Yii’s queue system](https://www.yiiframework.com/exten
 
 An ideal queue job is something slow that the a user shouldn’t have to wait on while using a site’s front end or the control panel. Multi-step processes and actions that connect with third-party APIs can be ideal candidates for queueing.
 
-Critical tasks, however, should not necessarily be entrusted to the queue. A default Craft install will have <config3:runQueueAutomatically> enabled and be reliant on a control panel browser session to trigger the queue. This could result in queue processing delays for infrequently-accessed sites.
+Critical tasks, however, should not necessarily be entrusted to the queue. A default Craft install will have <config4:runQueueAutomatically> enabled and be reliant on a control panel browser session to trigger the queue. This could result in queue processing delays for infrequently-accessed sites.
 
 Similarly, failed queue jobs may pause the queue and require admin intervention. Both are worth considering as you’re contemplating whether or not to utilize a queue job for your plugin or custom module.
 
 ## Writing a Job
 
-You can add your own queue job by first writing a class that extends <craft3:craft\queue\BaseJob> and implements `execute()`.
+You can add your own queue job by first writing a class that extends <craft4:craft\queue\BaseJob> and implements `execute()`.
 
 This example class sends an email:
 
@@ -63,7 +63,7 @@ class MyJob extends \craft\queue\BaseJob
 
 If your job involves multiple steps, you might want to report its progress while it’s executing.
 
-You can do this with BaseJob’s [`setProgress()`](craft3:craft\queue\BaseJob::setProgress()) method, whose arguments are
+You can do this with BaseJob’s [`setProgress()`](craft4:craft\queue\BaseJob::setProgress()) method, whose arguments are
 
 - the queue instance
 - a number between 0 and 1 representing the percent complete

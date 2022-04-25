@@ -104,7 +104,7 @@ You can generate and assign the key [manually](#set-the-key-manually), or have C
 
 ### Set the Key Manually
 
-First generate a cryptographically secure key, preferably using a password generator like [1Password](https://1password.com/password-generator/). (There’s no length limit.)
+First generate a cryptographically secure key, ideally using a password generator like [1Password](https://1password.com/password-generator/). (There’s no length limit.)
 
 Then open up your `.env` file (you may need to use an app like [Transmit](https://panic.com/transmit/) to do this if you’re running macOS), and find this line:
 
@@ -168,7 +168,7 @@ In your terminal, go to your project’s root directory and run the following co
 php craft setup
 ```
 
-The command will ask you a few questions to learn how to connect to your database, and then kick off Craft’s installer. Once it’s done, you should be able to access your new Craft site from your web browser.
+The command will ask a few questions about your database connection and kick off Craft’s installer. Once it’s done, you should be able to access your new Craft site from your web browser.
 
 ### Web Browser Setup
 

@@ -2,7 +2,7 @@
 
 ## Custom Validation Rules
 
-You can add your own custom validation rules to elements and other system components using the [EVENT_DEFINE_RULES](craft3:craft\base\Model#event-define-rules) event.
+You can add your own custom validation rules to elements and other system components using the [EVENT_DEFINE_RULES](craft4:craft\base\Model#event-define-rules) event.
 
 Additional rules can use any of [Yii’s core validators](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-core-validators), [Craft’s validators](https://github.com/craftcms/cms/tree/develop/src/validators), or an [inline validation method](https://www.yiiframework.com/doc/guide/2.0/en/input-validation#inline-validators).
 
@@ -35,7 +35,7 @@ Event::on(
 
 ## Behaviors
 
-You can add your own custom [behaviors](https://www.yiiframework.com/doc/guide/2.0/en/concept-behaviors) to elements and other system components using the [EVENT_DEFINE_BEHAVIORS](craft3:craft\base\Model#event-define-behaviors) event.
+You can add your own custom [behaviors](https://www.yiiframework.com/doc/guide/2.0/en/concept-behaviors) to elements and other system components using the [EVENT_DEFINE_BEHAVIORS](craft4:craft\base\Model#event-define-behaviors) event.
 
 This can be a simple way of adding small amounts of functionality to elements without having to write and use extended classes everywhere.
 
@@ -123,7 +123,7 @@ if ($product->isFinanceable()) {
 
 ## Custom Searchable Attributes
 
-If you’d like to extend system components to add your own searchable custom attributes, you can hook into the [`EVENT_REGISTER_SEARCHABLE_ATTRIBUTES`](craft3:craft\base\Element#event-register-searchable-attributes) event. Here, we’re making custom field `myCustomAttribute` searchable for Commerce orders:
+If you’d like to extend system components to add your own searchable custom attributes, you can hook into the [`EVENT_REGISTER_SEARCHABLE_ATTRIBUTES`](craft4:craft\base\Element#event-register-searchable-attributes) event. Here, we’re making custom field `myCustomAttribute` searchable for Commerce orders:
 
 ```php
 use craft\base\Element;

@@ -2150,6 +2150,9 @@ be no more than 5 characters, and must be all lowercase.
 
 Sets up all the things.
 
+This is an interactive wrapper for the `setup/app-id`, `setup/security-key`, `setup/db-creds`,
+and `install` commands, each of which support being run non-interactively.
+
 <h3 id="setup-php-session-table">
     <a href="#setup-php-session-table" class="header-anchor">#</a>
     <code>setup/php-session-table</code>

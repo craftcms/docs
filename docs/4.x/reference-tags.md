@@ -32,11 +32,11 @@ As you can see, they are made up three segments:
 
     You can refer to the element types’ class references for a list of available properties:
 
-    - [craft\elements\Entry](craft3:craft\elements\Entry#public-properties)
-    - [craft\elements\Asset](craft3:craft\elements\Asset#public-properties)
-    - [craft\elements\Tag](craft3:craft\elements\Tag#public-properties)
-    - [craft\elements\User](craft3:craft\elements\User#public-properties)
-    - [craft\elements\GlobalSet](craft3:craft\elements\GlobalSet#public-properties)
+    - [craft\elements\Entry](craft4:craft\elements\Entry#public-properties)
+    - [craft\elements\Asset](craft4:craft\elements\Asset#public-properties)
+    - [craft\elements\Tag](craft4:craft\elements\Tag#public-properties)
+    - [craft\elements\User](craft4:craft\elements\User#public-properties)
+    - [craft\elements\GlobalSet](craft4:craft\elements\GlobalSet#public-properties)
 
     Custom field handles are also supported, for field types with values that can be represented as strings.
 
@@ -44,7 +44,7 @@ As you can see, they are made up three segments:
 
 The following are valid reference tags:
 
-- `{asset:123:filename}` – returns the filename of an asset with the ID of `123` (via <craft3:craft\elements\Asset::getFilename()>).
+- `{asset:123:filename}` – returns the filename of an asset with the ID of `123` (via <craft4:craft\elements\Asset::getFilename()>).
 - `{entry:blog/whats-on-tap}` – returns the URL of an entry in a `blog` section with the slug `whats-on-tap`.
 - `{entry:blog/whats-on-tap@en:intro}` – returns the value of an `intro` custom field on a `blog` section entry with the slug `whats-on-tap`, loaded from the site with the handle `en`.
 - `{craft\commerce\Variant:123:price}` – returns the price of a Commerce Variant object with the ID of `123`.

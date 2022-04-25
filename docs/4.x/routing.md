@@ -15,7 +15,7 @@ Here is how Craft handles each request:
 
 1. **Is it an action request?**
 
-   Action requests either have a URL that begins with `actions/` (or whatever your <config3:actionTrigger> config setting is set to), or an `action` parameter in the POST request or the query string.
+   Action requests either have a URL that begins with `actions/` (or whatever your <config4:actionTrigger> config setting is set to), or an `action` parameter in the POST request or the query string.
 
    Craft routes action requests to a controller action that perform actions. Craft has system Controller actions for core actions, but plugins may also have Controllers that define their own custom actions.
 
@@ -26,7 +26,7 @@ Here is how Craft handles each request:
    If the URI matches an element’s URI, Craft lets the element decide how to route the request. For example, if an [entry’s](entries.md) URI is requested, then the entry will route the request to the template specified in its section’s settings, with an `entry` variable predefined, set to the requested entry.
 
    ::: tip
-   Modules and plugins can override element routes using the [EVENT_SET_ROUTE](craft3:craft\base\Element::EVENT_SET_ROUTE) event.
+   Modules and plugins can override element routes using the [EVENT_SET_ROUTE](craft4:craft\base\Element::EVENT_SET_ROUTE) event.
    :::
 
 3. **Does the URI match a route or URI rule?**
@@ -44,7 +44,7 @@ Here is how Craft handles each request:
 5. **404**
 
    If none of the above checks are successful, Craft will throw a [NotFoundHttpException](yii2:yii\web\NotFoundHttpException). \
-   If [Dev Mode](config3:devMode) is enabled, an error report for the exception will be shown. Otherwise, a 404 error will be returned using either your [custom error template](#error-templates) or Craft’s own default.
+   If [Dev Mode](config4:devMode) is enabled, an error report for the exception will be shown. Otherwise, a 404 error will be returned using either your [custom error template](#error-templates) or Craft’s own default.
 
 ## Dynamic Routes
 
@@ -179,7 +179,7 @@ public function actionFoo(int $year = null)
 
 You can provide your own error templates for Craft to use when returning errors.
 
-When Craft encounters an error for a front end request, it will take your <config3:errorTemplatePrefix> into account and check the root of your `templates/` directory, in order, for the following:
+When Craft encounters an error for a front end request, it will take your <config4:errorTemplatePrefix> into account and check the root of your `templates/` directory, in order, for the following:
 
 1. A template matching the error’s status code, like `404.twig`.
 2. For a 503 error, a template named `offline.twig`.
@@ -194,5 +194,5 @@ When Craft finds a matching error template, it will use that and provide it with
 - `statusCode` – error’s HTTP status code
 
 ::: tip
-You can test these pages even if [Dev Mode](config3:devMode) is enabled by going to `https://my-project.nitro/404`, substituting `404` for the name of the template you’re testing.
+You can test these pages even if [Dev Mode](config4:devMode) is enabled by going to `https://my-project.nitro/404`, substituting `404` for the name of the template you’re testing.
 :::

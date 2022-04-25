@@ -121,7 +121,7 @@ The accepted duration units are:
 - `year`(`s`)
 - `week`(`s`)
 
-Tip: If this parameter is omitted, your <config3:cacheDuration> config setting will be used to define the default duration.
+Tip: If this parameter is omitted, your <config4:cacheDuration> config setting will be used to define the default duration.
 
 #### `until`
 
@@ -249,7 +249,11 @@ The `{% exit %}` tag supports the following parameter:
 
 #### Status
 
-You can optionally set the HTTP status code that should be included with the response. If you do, Craft will look for the appropriate error template to render. For example, `{% exit 404 %}` will get Craft to return the `404.twig` template. If the template doesn’t exist. Craft will fallback on its own template corresponding to the status code.
+If you choose to set the HTTP status code that should be included with the response, Craft will look for the appropriate error template to render. For example, `{% exit 404 %}` will get Craft to return the `404.twig` template. If the template doesn’t exist, Craft will fall back on its own template corresponding to the status code.
+
+::: tip
+`{% exit %}` throws an [HttpException](yii2:yii\web\HttpException) with the appropriate status code, so with <config4:devMode> enabled a full error report and stack trace will be shown instead of an error template.
+:::
 
 ## `header`
 
@@ -301,7 +305,7 @@ The `{% html %}` tag can be used to register arbitrary HTML code on the page.
 ```
 
 ::: tip
-The tag calls <craft3:craft\web\View::registerHtml()> under the hood, which can also be accessed via the global `view` variable.
+The tag calls <craft4:craft\web\View::registerHtml()> under the hood, which can also be accessed via the global `view` variable.
 
 ```twig
 {% set para = '<p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>' %}
@@ -350,7 +354,7 @@ The `{% js %}` tag can be used to register a JavaScript file or a JavaScript cod
 ::: tip
 To register a JavaScript file, the URL must begin with `https://` or `http://`, or end in `.js`.
 
-To provide a *dynamic* filename reference, use [`view.registerJsFile()`](craft3:craft\web\View::registerJsFile()) instead:
+To provide a *dynamic* filename reference, use [`view.registerJsFile()`](craft4:craft\web\View::registerJsFile()) instead:
 ```twig
 {% set myJsFile = "/assets/js/script.js" %}
 {% do view.registerJsFile(myJsFile) %}
@@ -444,7 +448,7 @@ That would result in:
 ```
 
 ::: tip
-This tag works identically to the [namespace](filters.md#namespace) filter, except that it will call <craft3:craft\web\View::setNamespace()> at the beginning, so any PHP code executed within it can be aware of what the nested IDs will become.
+This tag works identically to the [namespace](filters.md#namespace) filter, except that it will call <craft4:craft\web\View::setNamespace()> at the beginning, so any PHP code executed within it can be aware of what the nested IDs will become.
 :::
 
 ## `nav`
@@ -523,7 +527,7 @@ This tag makes it easy to paginate query results across multiple pages.
 Paginated URLs will be identical to the first page’s URL, except that “/p_X_” will be appended to the end (where _X_ is the page number), e.g. `http://my-project.test/news/p2`.
 
 ::: tip
-You can use the <config3:pageTrigger> config setting to customize what comes before the actual page number in your URLs. For example you could set it to `'page/'`, and your paginated URLs would start looking like `http://my-project.test/news/page/2`.
+You can use the <config4:pageTrigger> config setting to customize what comes before the actual page number in your URLs. For example you could set it to `'page/'`, and your paginated URLs would start looking like `http://my-project.test/news/page/2`.
 :::
 
 ::: warning
@@ -551,7 +555,7 @@ Next up you need to type “`as`”, followed by one or two variable names:
 
 Here’s what they get set to:
 
-- `pageInfo` gets set to a <craft3:craft\web\twig\variables\Paginate> object, which provides info about the current page, and some helper methods for creating links to other pages. (See [below](#the-pageInfo-variable) for more info.)
+- `pageInfo` gets set to a <craft4:craft\web\twig\variables\Paginate> object, which provides info about the current page, and some helper methods for creating links to other pages. (See [below](#the-pageInfo-variable) for more info.)
 - `pageEntries` gets set to an array of the results (e.g. the elements) that belong to the current page.
 
 ::: tip
@@ -704,7 +708,7 @@ You can optionally set flash messages that will show up for the user on the next
 
 ## `requireGuest`
 
-This tag will ensure that the user is **not** logged in. If they’re already logged in, they’ll be redirected to the page specified by your <config3:postLoginRedirect> config setting.
+This tag will ensure that the user is **not** logged in. If they’re already logged in, they’ll be redirected to the page specified by your <config4:postLoginRedirect> config setting.
 
 ```twig
 {% requireGuest %}
@@ -722,7 +726,7 @@ This tag will ensure that the user is logged in. If they aren’t, they’ll be 
 
 You can place this tag anywhere in your template, including within a conditional. If/when Twig gets to it, the login enforcement will take place.
 
-The Login page location is based on your <config3:loginPath> config setting. If you do not set <config3:loginPath>, it defaults to `login`. That will throw a `404` error if you have not handled the `/login` route with a custom template. To use the control panel’s Login form, set it to `admin/login` or `[your cpTrigger]/login`.
+The login page location is based on your <config4:loginPath> config setting. If you do not set <config4:loginPath>, it defaults to `login`. That will throw a `404` error if you have not handled the `/login` route with a custom template. To use the control panel’s login form, set it to `admin/login` or `[your cpTrigger]/login`.
 
 ## `requirePermission`
 

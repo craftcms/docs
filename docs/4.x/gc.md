@@ -2,14 +2,14 @@
 
 Craft occasionally runs a few garbage collection routines to remove stale data, including:
 
-- Purge unsaved drafts (per the <config3:purgeUnsavedDraftsDuration> config setting).
+- Purge unsaved drafts (per the <config4:purgeUnsavedDraftsDuration> config setting).
 - Delete expired template caches.
-- Purge any expired pending user accounts (per the <config3:purgePendingUsersDuration> config setting).
-- Hard delete expired soft-deleted rows (per the <config3:softDeleteDuration> config setting).
+- Purge any expired pending user accounts (per the <config4:purgePendingUsersDuration> config setting).
+- Hard delete expired soft-deleted rows (per the <config4:softDeleteDuration> config setting).
 - Delete stale user session data.
 - Delete orphaned search indexes (any indexes belonging to elements that don’t exist anymore).
 
-By default, each web request has a 1 in 100,000 chance of triggering garbage collection. That can be configured from `config/app.php` by overriding <craft3:craft\services\Gc::$probability>.
+By default, each web request has a 1 in 100,000 chance of triggering garbage collection. That can be configured from `config/app.php` by overriding <craft4:craft\services\Gc::$probability>.
 
 ```php
 return [
@@ -36,7 +36,7 @@ In your terminal, go to your Craft project and then run:
 php craft gc
 ```
 
-If the shell is interactive, you will be asked whether Craft should delete all trashed items. If you enter `yes` at that prompt, all of your database rows that have been soft-deleted will get hard-deleted immediately, even if they hadn’t waited the full [soft delete duration](config3:softDeleteDuration) yet.
+If the shell is interactive, you will be asked whether Craft should delete all trashed items. If you enter `yes` at that prompt, all of your database rows that have been soft-deleted will get hard-deleted immediately, even if they hadn’t waited the full [soft delete duration](config4:softDeleteDuration) yet.
 
 You can also force hard-deletion for all soft-deleted rows with the `delete-all-trashed` option:
 

@@ -112,7 +112,7 @@ The field’s settings let you control if and how it’s displayed:
 - **Current User Condition** – optional rules for determining which users should see the field in the editor.
 - **Entry Condition** – optional rules, based on the entry, that determine when the field should be displayed in the editor.
 
-A field that’s required will have an asterisk (`*`) beside the field’s name.
+A field that’s required will have an asterisk (<icon kind="asterisk" />) beside the field’s name.
 
 ### Field Conditions
 

@@ -155,7 +155,7 @@ You can add `&orderNumber=ORDER_NUMBER` to the preview URL to use a specific num
 If your template is rendering successfully but messages are failing to send, you’ll want to check these things in order:
 
 1. **Make sure Craft’s queue is running.**\
-If the [`runQueueAutomatically`](config3:runQueueAutomatically) setting is `true` you may want to establish a more reliable queue worker.
+If the [`runQueueAutomatically`](config4:runQueueAutomatically) setting is `true` you may want to establish a more reliable queue worker.
 2. **Make sure any dynamic settings are parsed properly.**\
 Some email settings support dynamic Twig values, where parsing errors can cause sending to fail: 
     - Email Subject

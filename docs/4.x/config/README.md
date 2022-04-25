@@ -47,7 +47,7 @@ Some settings and functions in Craft support [Yii aliases](https://www.yiiframew
 - Sites’ Base URL settings
 - Volumes’ Base URL settings
 - Local volumes’ File System Path settings
-- The <config3:resourceBasePath> and <config3:resourceBaseUrl> config settings
+- The <config4:resourceBasePath> and <config4:resourceBaseUrl> config settings
 - The [svg()](../dev/functions.md#svg-svg-sanitize) Twig function
 
 The following aliases are available out of the box:
@@ -68,7 +68,11 @@ The following aliases are available out of the box:
 | `@web` | The URL to the folder that contains the `index.php` file that was loaded for the request
 | `@webroot` | The path to the folder that contains the `index.php` file that was loaded for the request
 
-You can override these default aliases with the <config3:aliases> config setting if needed. We recommend overriding the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+You can override these default aliases with the <config4:aliases> config setting if needed. 
+
+::: tip
+We recommend overriding the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+:::
 
 ```php
 'aliases' => [
@@ -85,7 +89,7 @@ If your web root is something besides `web/`, `public/`, `public_html/`, or `htm
 ];
 ```
 
-You can define additional custom aliases using the <config3:aliases> config setting as well. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
+You can define additional custom aliases using the <config4:aliases> config setting as well. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
 
 ```php
 'aliases' => [
@@ -105,7 +109,7 @@ ASSETS_BASE_URL=https://my-project.com/assets
 ASSETS_BASE_PATH=/path/to/webroot/assets
 ```
 
-Then you can pull them into the alias definitions using [App::env()](craft3:craft\helpers\App::env()):
+Then you can pull them into the alias definitions using [App::env()](craft4:craft\helpers\App::env()):
 
 ```php
 'aliases' => [
@@ -158,7 +162,7 @@ If you want to store data caches in the database, first you will need to create 
 php craft setup/db-cache-table
 ```
 
-Once that’s done, you can set your `cache` application component to use <craft3:craft\cache\DbCache>.
+Once that’s done, you can set your `cache` application component to use <craft4:craft\cache\DbCache>.
 
 ```php
 <?php
@@ -170,7 +174,7 @@ return [
 ```
 
 ::: tip
-If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather than <craft3:craft\cache\DbCache>, you can safely switch to the latter if you remove your `cache` table’s `dateCreated`, `dateUpdated`, and `uid` columns.
+If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather than <craft4:craft\cache\DbCache>, you can safely switch to the latter if you remove your `cache` table’s `dateCreated`, `dateUpdated`, and `uid` columns.
 :::
 
 #### APC Example
@@ -373,7 +377,7 @@ return [
 ```
 
 ::: tip
-The `session` component **must** be configured with the <craft3:craft\behaviors\SessionBehavior> behavior, which adds methods to the component that the system relies on.
+The `session` component **must** be configured with the <craft4:craft\behaviors\SessionBehavior> behavior, which adds methods to the component that the system relies on.
 :::
 
 ### Mailer Component
@@ -413,7 +417,7 @@ Any changes you make to the Mailer component from `config/app.php` will not be r
 
 ### Queue Component
 
-Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default Craft will use a [custom queue driver](craft3:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md), but you can switch to a different driver by overriding Craft’s `queue` component from `config/app.php`:
+Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default Craft will use a [custom queue driver](craft4:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md), but you can switch to a different driver by overriding Craft’s `queue` component from `config/app.php`:
 
 ```php
 <?php
@@ -431,11 +435,11 @@ return [
 Available drivers are listed in the [Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide).
 
 ::: warning
-Only drivers that implement <craft3:craft\queue\QueueInterface> will be visible within the control panel.
+Only drivers that implement <craft4:craft\queue\QueueInterface> will be visible within the control panel.
 :::
 
 ::: tip
-If your queue driver supplies its own worker, set the <config3:runQueueAutomatically> config setting to `false` in `config/general.php`.
+If your queue driver supplies its own worker, set the <config4:runQueueAutomatically> config setting to `false` in `config/general.php`.
 :::
 
 ### Modules
@@ -505,7 +509,7 @@ Then you could go into your User Photos volume’s settings (for example) and se
 
 ### Config Files
 
-You can set your [general config settings](config-settings.md), [database connection settings](db-settings.md), and other PHP config files to environment variables using Craft’s [App::env()](craft3:craft\helpers\App::env()) function:
+You can set your [general config settings](config-settings.md), [database connection settings](db-settings.md), and other PHP config files to environment variables using Craft’s [App::env()](craft4:craft\helpers\App::env()) function:
 
 ```bash
 # -- .env --
@@ -603,8 +607,8 @@ define('CRAFT_CP', true);
 
 If this isn’t defined, Craft will treat the request as a control panel request if either of these are true:
 
-- The <config3:baseCpUrl> setting **is** set, and the request URL begins with it (plus the <config3:cpTrigger> setting, if set).
-- The <config3:baseCpUrl> setting **is not** set, and the request URI begins with the <config3:cpTrigger> setting.
+- The <config4:baseCpUrl> setting **is** set, and the request URL begins with it (plus the <config4:cpTrigger> setting, if set).
+- The <config4:baseCpUrl> setting **is not** set, and the request URI begins with the <config4:cpTrigger> setting.
 
 ### `CRAFT_ENVIRONMENT`
 
@@ -679,7 +683,7 @@ The path to the [vendor/](../directory-structure.md#vendor) folder. (It is assum
 Craft uses a file-based mutex driver by default, which should be switched to a different driver in [load-balanced environments](https://craftcms.com/knowledge-base/configuring-load-balanced-environments#mutex-locks).
 
 ::: tip
-A [NullMutex](craft3:craft\mutex\NullMutex) driver is used when Dev Mode is enabled, since mutex drivers aren’t necessary for local development and we’ve seen issues with mutex in some Windows and Linux filesystems.
+A [NullMutex](craft4:craft\mutex\NullMutex) driver is used when Dev Mode is enabled, since mutex drivers aren’t necessary for local development and we’ve seen issues with mutex in some Windows and Linux filesystems.
 :::
 
 You can configure a custom mutex driver by configuring the `mutex` component’s nested `$mutex` property:

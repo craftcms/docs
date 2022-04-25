@@ -7,7 +7,7 @@ Variable | Description
 `_self` | The current template name.
 `_context` | The currently-defined variables.
 `_charset` | The current charset.
-[craft](#craft) | A <craft3:craft\web\twig\variables\CraftVariable> object.
+[craft](#craft) | A <craft4:craft\web\twig\variables\CraftVariable> object.
 [currentSite](#currentsite) | The requested site.
 [currentUser](#currentuser) | The currently logged-in user.
 [devMode](#devmode) | Whether Dev Mode is enabled.
@@ -15,11 +15,11 @@ Variable | Description
 [loginUrl](#loginurl) | The URL to the front-end Login page.
 [logoutUrl](#logouturl) | The URL to the front-end Logout page.
 [now](#now) | The current date/time.
-[POS_BEGIN](#pos-begin) | The [craft\web\View::POS_BEGIN](craft3:craft\web\View#constants) constant.
-[POS_END](#pos-end) | The [craft\web\View::POS_END](craft3:craft\web\View#constants) constant.
-[POS_HEAD](#pos-head) | The [craft\web\View::POS_HEAD](craft3:craft\web\View#constants) constant.
-[POS_LOAD](#pos-load) | The [craft\web\View::POS_LOAD](craft3:craft\web\View#constants) constant.
-[POS_READY](#pos-ready) | The [craft\web\View::POS_READY](craft3:craft\web\View#constants) constant.
+[POS_BEGIN](#pos-begin) | The [craft\web\View::POS_BEGIN](craft4:craft\web\View#constants) constant.
+[POS_END](#pos-end) | The [craft\web\View::POS_END](craft4:craft\web\View#constants) constant.
+[POS_HEAD](#pos-head) | The [craft\web\View::POS_HEAD](craft4:craft\web\View#constants) constant.
+[POS_LOAD](#pos-load) | The [craft\web\View::POS_LOAD](craft4:craft\web\View#constants) constant.
+[POS_READY](#pos-ready) | The [craft\web\View::POS_READY](craft4:craft\web\View#constants) constant.
 [setPasswordUrl](#setpasswordurl) | The URL to the front-end [Reset Password](https://craftcms.com/knowledge-base/front-end-user-accounts#reset-password-forms) page.
 [siteName](#sitename) | The name of the current site.
 [siteUrl](#siteurl) | The base URL of the current site.
@@ -36,11 +36,11 @@ Variable | Description
 
 ## `craft`
 
-A <craft3:craft\web\twig\variables\CraftVariable> object, which provides access points to various helper functions and objects for templates.
+A <craft4:craft\web\twig\variables\CraftVariable> object, which provides access points to various helper functions and objects for templates.
 
 ### `craft.app`
 
-A reference to the main <craft3:craft\web\Application> instance (the thing you get when you type `Craft::$app` in PHP code) is also available to templates via `craft.app`.
+A reference to the main <craft4:craft\web\Application> instance (the thing you get when you type `Craft::$app` in PHP code) is also available to templates via `craft.app`.
 
 ::: warning
 Accessing things via `craft.app` is considered advanced. There are more security implications than other Twig-specific variables and functions, and your templates will be more susceptible to breaking changes during major Craft version bumps.
@@ -50,13 +50,13 @@ Accessing things via `craft.app` is considered advanced. There are more security
 
 Some of the services commonly used in templates:
 
-- `craft.app.request` – [Request](craft3:craft\web\Request) object with information about the current HTTP request
-- `craft.app.session` – [Session](craft3:craft\web\Session) object useful for getting and setting flash messages
-- `craft.app.user` – [User](craft3:craft\web\User) object representing the logged-in human (when applicable)
-- `craft.app.config.general` – [GeneralConfig](craft3:craft\config\GeneralConfig) object of [General Config Settings](../config/config-settings.md)
-- `craft.app.fields` – [Fields](craft3:craft\services\Fields) service for accessing custom field details
-- `craft.app.sections` – [Sections](craft3:craft\services\Sections) service for working with sections and entry types
-- `craft.app.sites` – [Sites](craft3:craft\services\Sites) service for getting [site](../sites.md) details
+- `craft.app.request` – [Request](craft4:craft\web\Request) object with information about the current HTTP request
+- `craft.app.session` – [Session](craft4:craft\web\Session) object useful for getting and setting flash messages
+- `craft.app.user` – [User](craft4:craft\web\User) object representing the logged-in human (when applicable)
+- `craft.app.config.general` – [GeneralConfig](craft4:craft\config\GeneralConfig) object of [General Config Settings](../config/config-settings.md)
+- `craft.app.fields` – [Fields](craft4:craft\services\Fields) service for accessing custom field details
+- `craft.app.sections` – [Sections](craft4:craft\services\Sections) service for working with sections and entry types
+- `craft.app.sites` – [Sites](craft4:craft\services\Sites) service for getting [site](../sites.md) details
 
 Examples:
 
@@ -85,7 +85,7 @@ Examples:
 
 ## `currentSite`
 
-The requested site, represented by a <craft3:craft\models\Site> object.
+The requested site, represented by a <craft4:craft\models\Site> object.
 
 ```twig
 {{ currentSite.name }}
@@ -105,7 +105,7 @@ You can access all of the sites in the same group as the current site via `curre
 
 ## `currentUser`
 
-The currently-logged-in user, represented by a <craft3:craft\elements\User> object, or `null` if no one is logged in.
+The currently-logged-in user, represented by a <craft4:craft\elements\User> object, or `null` if no one is logged in.
 
 ```twig
 {% if currentUser %}
@@ -115,7 +115,7 @@ The currently-logged-in user, represented by a <craft3:craft\elements\User> obje
 
 ## `devMode`
 
-Whether the <config3:devMode> config setting is currently enabled.
+Whether the <config4:devMode> config setting is currently enabled.
 
 ```twig
 {% if devMode %}
@@ -125,7 +125,7 @@ Whether the <config3:devMode> config setting is currently enabled.
 
 ## `loginUrl`
 
-The URL to your site’s login page, based on the <config3:loginPath> config setting.
+The URL to your site’s login page, based on the <config4:loginPath> config setting.
 
 ```twig
 {% if not currentUser %}
@@ -135,7 +135,7 @@ The URL to your site’s login page, based on the <config3:loginPath> config set
 
 ## `logoutUrl`
 
-The URL Craft uses to log users out, based on the <config3:logoutPath> config setting. Note that Craft will automatically redirect users to your homepage after going here; there’s no such thing as a “logout _page_”.
+The URL Craft uses to log users out, based on the <config4:logoutPath> config setting. Note that Craft will automatically redirect users to your homepage after going here; there’s no such thing as a “logout _page_”.
 
 ```twig
 {% if currentUser %}
@@ -153,27 +153,27 @@ Today is {{ now|date('M j, Y') }}.
 
 ## `POS_BEGIN`
 
-Twig-facing copy of the [craft\web\View::POS_BEGIN](craft3:craft\web\View#constants) constant.
+Twig-facing copy of the [craft\web\View::POS_BEGIN](craft4:craft\web\View#constants) constant.
 
 ## `POS_END`
 
-Twig-facing copy of the [craft\web\View::POS_END](craft3:craft\web\View#constants) constant.
+Twig-facing copy of the [craft\web\View::POS_END](craft4:craft\web\View#constants) constant.
 
 ## `POS_HEAD`
 
-Twig-facing copy of the [craft\web\View::POS_HEAD](craft3:craft\web\View#constants) constant.
+Twig-facing copy of the [craft\web\View::POS_HEAD](craft4:craft\web\View#constants) constant.
 
 ## `POS_LOAD`
 
-Twig-facing copy of the [craft\web\View::POS_LOAD](craft3:craft\web\View#constants) constant.
+Twig-facing copy of the [craft\web\View::POS_LOAD](craft4:craft\web\View#constants) constant.
 
 ## `POS_READY`
 
-Twig-facing copy of the [craft\web\View::POS_READY](craft3:craft\web\View#constants) constant.
+Twig-facing copy of the [craft\web\View::POS_READY](craft4:craft\web\View#constants) constant.
 
 ## `setPasswordUrl`
 
-The URL to [`setPasswordRequestPath`](config3:setPasswordRequestPath) if it’s set. (This wraps the path in [`siteUrl`](#siteurl).)
+The URL to [`setPasswordRequestPath`](config4:setPasswordRequestPath) if it’s set. (This wraps the path in [`siteUrl`](#siteurl).)
 
 ```twig
 {% if setPasswordUrl %}
@@ -235,13 +235,13 @@ The System Name, as defined in Settings → General.
 
 ## `view`
 
-A reference to the <craft3:craft\web\View> instance that is driving the template.
+A reference to the <craft4:craft\web\View> instance that is driving the template.
 
 ## Global Set Variables
 
 Each of your site’s [global sets](../globals.md) will be available to your template as global variables, named after their handle.
 
-They will be represented as <craft3:craft\elements\GlobalSet> objects.
+They will be represented as <craft4:craft\elements\GlobalSet> objects.
 
 ```twig
 <p>{{ companyInfo.companyName }} was established in {{ companyInfo.yearEstablished }}.</p>

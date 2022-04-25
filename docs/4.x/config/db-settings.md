@@ -102,7 +102,7 @@ The charset to use when creating tables.
 You can change the character set and collation across all existing database tables using this terminal command:
 
 ```bash
-> php craft db/convert-charset
+php craft db/convert-charset
 ```
 :::
 
@@ -139,7 +139,7 @@ This is only used by MySQL. If null, the [charset’s](https://docs.craftcms.com
 You can change the character set and collation across all existing database tables using this terminal command:
 
 ```bash
-> php craft db/convert-charset
+php craft db/convert-charset
 ```
 :::
 

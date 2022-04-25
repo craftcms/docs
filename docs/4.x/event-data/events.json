@@ -4532,30 +4532,6 @@
         "desc": "an event raised after executing a controller action."
     },
     {
-        "class": "craft\\debug\\controllers\\DefaultController",
-        "name": "EVENT_BEFORE_ACTION",
-        "type": "yii\\base\\ActionEvent",
-        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
-    },
-    {
-        "class": "craft\\debug\\controllers\\DefaultController",
-        "name": "EVENT_AFTER_ACTION",
-        "type": "yii\\base\\ActionEvent",
-        "desc": "an event raised right after executing a controller action."
-    },
-    {
-        "class": "craft\\debug\\controllers\\UserController",
-        "name": "EVENT_BEFORE_ACTION",
-        "type": "yii\\base\\ActionEvent",
-        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
-    },
-    {
-        "class": "craft\\debug\\controllers\\UserController",
-        "name": "EVENT_AFTER_ACTION",
-        "type": "yii\\base\\ActionEvent",
-        "desc": "an event raised right after executing a controller action."
-    },
-    {
         "class": "craft\\elements\\Address",
         "name": "EVENT_REGISTER_SOURCES",
         "type": "craft\\events\\RegisterElementSourcesEvent",

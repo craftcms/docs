@@ -15,6 +15,7 @@ In the control panel, you’ll encounter the element *types* Craft makes availab
 - [**Matrix Blocks**](matrix-blocks.md) are powerful, easily combined and reordered groupings of content that can be used within the other element types.
 - [**Tags**](tags.md) are flat taxonomies optimized for quick input and re-use.
 - [**Users**](users.md) are accounts for human beings with email addresses and permissions, organized into customizable groups.
+- [**Addresses**](addresses.md) are physical addresses that can be attached to users.
 
 There’s no limit to how many element types you use or how you combine them. You can use third-party plugins or write your own to include additional element types.
 
