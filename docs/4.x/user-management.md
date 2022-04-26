@@ -3,7 +3,7 @@ keywords: permissions
 ---
 # User Management
 
-Craft calls all member accounts of the system “[Users](users.md)”.
+Craft’s “[Users](users.md)” represent humans in the system. These may be member accounts, or records that represent people in general.
 
 The first user account is created during [installation](installation.md). If you stick with the Solo edition, this is the only account you will be able to create. If you need more you can upgrade to the Pro edition, which offers additional user accounts.
 
