@@ -8,7 +8,7 @@ Craft Pro provides a [GraphQL](https://graphql.org) API you can use to work with
 
 ## Getting Started
 
-Make sure you’re running Craft Pro 3.3 or later and [the `enableGql` setting](config4:enableGql) is not set to `false`.
+Make sure you’re running Craft Pro and [the `enableGql` setting](config4:enableGql) is not set to `false`.
 
 Because GraphQL is self-documenting, you can jump right into Craft’s included [GraphiQL IDE](#using-the-graphiql-ide) from the control panel and interactively build and execute queries. Querying from the control panel gives you full access to data that’s available, unlike queries from the outside that require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
 
@@ -190,9 +190,9 @@ The included GraphiQL IDE preselects a special “Full Schema” option for opti
 
 Additional GraphQL IDEs are available as well:
 
-* [Insomnia](https://insomnia.rest/)
-* [GraphQL Playground](https://github.com/prisma/graphql-playground)
-* [GraphQL Playground online](https://www.graphqlbin.com/v2/new)
+- [Insomnia](https://insomnia.rest/)
+- [GraphQL Playground](https://github.com/prisma/graphql-playground)
+- [GraphQL Playground online](https://www.graphqlbin.com/v2/new)
 
 ::: tip
 When you’re initially exploring the API, make sure <config4:devMode> is enabled so the IDE can be informed about the entire schema available to it.
