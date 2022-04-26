@@ -6,7 +6,7 @@ Radio Buttons fields give you a group of radio buttons.
 
 Radio Buttons fields have the following settings:
 
-* **Radio Button Options** – Define the radio buttons that will be available in the field. You even get to set the option values and labels separately, and choose which one should be selected by default.
+- **Radio Button Options** – Define the radio buttons that will be available in the field. You even get to set the option values and labels separately, and choose which one should be selected by default.
 
 ## Development
 

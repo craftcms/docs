@@ -47,9 +47,9 @@ If we want to output the ingredients list for a drink recipe, we’d use the fol
   <h3>Ingredients</h3>
 
   <ul>
-      {% for ingredient in ingredients %}
-          <li>{{ ingredient.title }}</li>
-      {% endfor %}
+    {% for ingredient in ingredients %}
+      <li>{{ ingredient.title }}</li>
+    {% endfor %}
   </ul>
 {% endif %}
 ```
