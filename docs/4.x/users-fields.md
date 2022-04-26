@@ -7,7 +7,9 @@ Users fields type allow you relate [users](users.md) to other elements.
 Users fields have the following settings:
 
 - **Sources** – Which user groups (or other user index sources) the field should be able to relate users from.
-- **Limit** – The maximum number of users that can be related with the field at once. (Default is no limit.)
+- **Selectable Users Condition** – Rules that determine which users should be available for selection.
+- **Min Relations** – The minimum number of users that must be related with the field at once. (Default is no limit.
+- **Max Relations** – The maximum number of users that can be related with the field at once. (Default is no limit.)
 - **Selection Label** – The label that should be used on the field’s selection button.
 
 ### Multi-Site Settings
@@ -195,5 +197,6 @@ You could then make the checkbox list sortable, so users have control over the o
 ## See Also
 
 - [User Queries](users.md#querying-users)
+- [Addresses](addresses.md)
 - <craft4:craft\elements\User>
 - [Relations](relations.md)
