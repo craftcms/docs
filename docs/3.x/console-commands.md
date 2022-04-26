@@ -140,7 +140,7 @@ Clears Asset indexing data.
 </h3>
 
 
-Compiled classes
+Clears compiled classes.
 
 <h3 id="clear-caches-compiled-templates">
     <a href="#clear-caches-compiled-templates" class="header-anchor">#</a>
