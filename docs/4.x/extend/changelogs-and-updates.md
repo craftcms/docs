@@ -2,7 +2,7 @@
 
 When you [publish](plugin-store.md) your plugin in the Plugin Store, you will be able to specify a path to your plugin’s changelog within the repository.
 
-If this is set to a valid changelog path, then each time you release a new update for your plugin, the Plugin Store will re-download your changelog, and use it to display release notes for any available plugin updates on the Utilities → Updates page.
+If this is set to a valid changelog path, the Plugin Store will re-download your changelog on each release. Those release notes will then be displayed for your plugin on the page at **Utilities** → **Updates**.
 
 ## Setting Up a Changelog
 
