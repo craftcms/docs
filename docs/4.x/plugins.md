@@ -14,7 +14,7 @@ Craft’s control panel features a Plugin Store where you can browse through hun
 If you’ve disallowed admin changes in production, you will only be able to install plugins from the control panel in your local development environment.
 :::
 
-To access the Plugin Store from the control panel, click **Plugin Store** from the main navigation. From there you can browse through the various plugin categories and curated lists to discover new plugins.
+To access the Plugin Store from the control panel, click **Plugin Store** from the global navigation menu. From there you can browse through the various plugin categories and curated lists to discover new plugins.
 
 ![The Craft Plugin Store](./images/plugin-store.png)
 
