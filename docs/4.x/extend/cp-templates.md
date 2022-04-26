@@ -1,6 +1,6 @@
 # Control Panel Templates
 
-The control panel is built using Twig templates, so extending it with new pages should feel familiar if you’ve worked with Twig on the front-end.
+The control panel is built using Twig templates, so extending it with new pages should feel familiar if you’ve worked with Twig on the front end.
 
 Plugins can define templates within the `templates/` folder within their base source folder. Templates within there can be referenced using the plugin’s handle as the template path prefix.
 

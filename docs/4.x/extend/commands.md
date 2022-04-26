@@ -8,8 +8,7 @@ a `console/controllers/` folder within your plugin or module’s base source fol
 <craft4:craft\console\Controller> (rather than <craft4:craft\web\Controller>).
 
 ::: tip
-For the most part, writing console commands for Craft is identical to writing console commands for Yii, so be sure to
-read the [Yii documentation][yii] as a starting point.
+For the most part, writing console commands for Craft is identical to writing console commands for Yii, so be sure to read the [Yii documentation][yii] as a starting point.
 :::
 
 ## Module Setup
@@ -59,8 +58,7 @@ return [
 ## Registering Custom Console Commands
 
 You can register custom console commands on Craft’s own controllers, or plugin-supplied controllers, so long as
-they extend <craft4:craft\console\Controller>. For example, plugins that supply custom element types can add their own
-actions to the [resave](craft4:craft\console\controllers\ResaveController) controller.
+they extend <craft4:craft\console\Controller>. For example, plugins that supply custom element types can add their own actions to the [resave](craft4:craft\console\controllers\ResaveController) controller.
 
 To do that, use the <craft4:craft\console\Controller::EVENT_DEFINE_ACTIONS> event.
 
