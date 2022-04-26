@@ -6,7 +6,7 @@ Multi-select fields give you an input where multiple items may be selected.
 
 Multi-select fields have the following settings:
 
-* **Multi-select Options** – Define the options that will be available in the field. You even get to set the option values and labels separately, and choose which ones should be selected by default.
+- **Multi-select Options** – Define the options that will be available in the field. You even get to set the option values and labels separately, and choose which ones should be selected by default.
 
 ## Development
 
