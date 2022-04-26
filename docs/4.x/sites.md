@@ -4,11 +4,15 @@ keywords: multi multisite multilingual translation
 
 # Sites & Localization
 
-In Craft 3 you can host multiple websites in a single Craft installation.
+A single Craft installation can be responsible for multiple websites.
 
 You can define one or more sites at different domains, using a different set of templates, and different versions of entry content.
 
-The multi-site feature in Craft is for sites with the same publishing team. You manage the multi-site content at the entry level, with the ability to enable Sections you want included in a site.
+Craft’s multi-site feature is for sites with the same publishing team. You manage the multi-site content at the entry level, with the ability to enable Sections you want included in a site.
+
+::: warning
+Craft’s multi-site feature is not meant for managing multiple _installs_ that have no relationship to one another, but different sites where it’s vital that some users and content are shared among them.
+:::
 
 ## Creating a Site
 
