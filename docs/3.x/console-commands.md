@@ -134,6 +134,14 @@ Clears Asset caches.
 
 Clears Asset indexing data.
 
+<h3 id="clear-caches-compiled-classes">
+    <a href="#clear-caches-compiled-classes" class="header-anchor">#</a>
+    <code>clear-caches/compiled-classes</code>
+</h3>
+
+
+Compiled classes
+
 <h3 id="clear-caches-compiled-templates">
     <a href="#clear-caches-compiled-templates" class="header-anchor">#</a>
     <code>clear-caches/compiled-templates</code>
