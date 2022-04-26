@@ -1,6 +1,6 @@
 # Conditions
 
-The Craft CMS condition builder is a powerful tool that helps content editors and developers utilize dynamic, rule-based settings.
+The Craft CMS condition builder is a powerful tool that helps content editors and site developers utilize dynamic, rule-based settings.
 
 ![Abstracted illustration of a condition builder with a criteria row and an add button](../images/abstracted-condition.png)
 
@@ -13,9 +13,9 @@ There are several places you can find the condition builder in action:
 
 ## Architecture
 
-A condition is a group of one or more condition rules that can run programmatically to modify an element query or match an element. The rules are available for a control panel user to configure, should they decide to utilize a condition wherever you’ve made it available.
+A condition is a group of one or more condition rules that, when combined, can perform a collective task like modifying an element query or matching an element. The rules are available for a control panel user to configure, should they decide to utilize a condition wherever you’ve made it available.
 
-We refer to the “condition builder” as the sum of the conditions, condition rules, and the Htmx-powered UI framework the control panel user interacts with in their browser.
+The “condition builder” is the Htmx-powered UI framework the control panel user interacts with in their browser.
 
 Custom fields may define condition rule types to be pulled into element conditions. (Most included field types take advantage of this and offer examples.)
 
