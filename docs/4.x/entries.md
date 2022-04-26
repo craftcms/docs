@@ -64,6 +64,14 @@ Examples include:
 - a Services section, where the order of services matters
 - a company organization chart
 
+#### Custom Sources
+
+Content authors can add their own special element sources based on existing Singles, Channels, and Structures by creating custom sources. Each custom source lists all entries by default, and can be filtered to only those that meet customized **Entry Criteria**.
+
+To create a new custom source, go to **Entries** → **Customize (<icon kind="settings" />)**, and from the bottom-left “+” menu choose **New custom source**:
+
+![Screenshot of a modal window with fields for a new custom source: Label, Entry Criteria, and Table Columns](./images/custom-source.png)
+
 ### Entry URI Formats
 
 Channel and Structure sections can choose whether their entries should be assigned URLs in the system, by filling in the “Entry URI Format” setting. (Singles have a “URI” setting.)
