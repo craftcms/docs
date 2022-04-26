@@ -6,7 +6,7 @@ Transforms can be defined in the control panel and directly from your templates 
 
 ## Defining Transforms from the Control Panel
 
-You can define named transforms from the control panel by navigating to **Settings** → **Assets** → **Image Transforms** and press **New Transform**.
+You can define named transforms from the control panel by navigating to **Settings** → **Assets** → **Image Transforms** and pressing **New Transform**.
 
 Each transform has the following settings:
 
