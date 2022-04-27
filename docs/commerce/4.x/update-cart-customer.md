@@ -1,5 +1,9 @@
 # Update Cart Customer
 
+::: warning
+Customers are _always_ User elements in Commerce 4 and this page isn’t up to date yet!
+:::
+
 A cart always has an associated customer. That customer can either be a guest with no user association, or a registered user—which is a customer associated with a Craft user.
 
 When a user logs in, the current customer switches to the customer associated to the logged-in user.
