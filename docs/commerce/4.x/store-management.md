@@ -52,13 +52,33 @@ Whether the user may click the “Capture” button on an authorized transaction
 
 Whether the user may click the “Refund” button on a successful payment.
 
-### Manage customers
-
-Whether the user can see the customers listing and individual customer information.
-
 ### Manage promotions
 
-Whether the user can see, create and edit discounts and sales.
+Whether the user can manage promotions.
+
+#### Edit Sales
+
+Whether the user can edit existing sales.
+
+#### Create Sales
+
+Whether the user can create new sales.
+
+#### Delete Sales
+
+Whether the user can delete sales.
+
+#### Edit Discounts
+
+Whether the user can edit existing discounts.
+
+#### Create Discounts
+
+Whether the user can create new discounts.
+
+#### Delete Discounts
+
+Whether the user can delete discounts.
 
 ### Manage subscriptions
 
