@@ -1,5 +1,9 @@
 # Customers
 
+::: warning
+Customers are _always_ User elements in Commerce 4 and this page isn’t up to date yet!
+:::
+
 With Craft Commerce, a _Customer_ is a model representing a person who may place an order.
 
 That person could have placed an order as a guest, or as a registered user with an associated Craft [user account](/4.x/users.md) for logging in and placing orders with saved information.
