@@ -56,7 +56,7 @@ Every plugin needs to explicitly require a minimum Craft CMS version in `compose
 
 ```json
 "require": {
-    "craftcms/cms": "^3.0.0"
+  "craftcms/cms": "^3.0.0"
 }
 ```
 
