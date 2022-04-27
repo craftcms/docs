@@ -15,7 +15,7 @@ A product itself is never sold; what goes into a cart for purchase is actually o
 
 In the same way that all Craft CMS entries have common fields, Craft Commerce products have some of their own:
 
-- **Title**, **Slug**, **Post Date**, **Expiry Date**, and **Enabled** work just like they do in Craft [entries](../../4.x/entries.md).
+- **Title**, **Slug**, **Post Date**, **Expiry Date**, and **Enabled** work just like they do in Craft [entries](/4.x/entries.md).
 - **Free Shipping**, when enabled, excludes the product and its variants from an order’s shipping cost calculation. (This only impacts per-*item*—and not per-*order*—shipping costs.)
 - **Promotable** determines whether [sales](sales.md) and [discounts](discounts.md) can be applied to the product and its variants.
 - **Available for purchase** determines whether the product and its variants should be available for purchase on the front end.
@@ -23,11 +23,11 @@ In the same way that all Craft CMS entries have common fields, Craft Commerce pr
 
 ## Product Types
 
-Product Types are a way to distinguish products in your system. Similar to Craft’s [Entry Types](/4.x/entries.html#entry-types), they can determine the URL format of a product and include any number of custom fields. Each product type will also have one or more variants.
+Product Types are a way to distinguish products in your system. Similar to Craft’s [Entry Types](/4.x/entries.md#entry-types), they can determine the URL format of a product and include any number of custom fields. Each product type will also have one or more variants.
 
 You can manage Product Types in the control panel from **Commerce** → **System Settings** → **Product Types**.
 
-<img src="./images/product-type-entry-screen.png" width="797" alt="Edit Product Type page">
+![Screenshot of a “Clothing” product type’s details displaying the settings mentioned below](./images/product-type-details.png)
 
 ### Product Type Options
 
@@ -45,10 +45,6 @@ The handle is what you’ll use to reference the product type in code. In Twig, 
   .all() %}
 ```
 
-#### Title Field Label
-
-Allows you to change what the “Title” field label should be.
-
 #### Automatic SKU Format
 
 Defines what auto-generated SKUs should look like when a SKU field is submitted empty. You can include Twig tags that output properties, such as `{product.slug}` or `{myCustomField}`.
@@ -59,7 +55,7 @@ How you access properties in the SKU format depends on whether the product type 
 
 Be sure to choose this carefully and avoid using the `id` property to ensure a unique SKU.
 
-Since `id` refers to the element’s ID and Craft may have many other elements, this won’t be sequential. If you’d rather generate a unique sequential number, consider using Craft’s [seq()](https://craftcms.com/docs/4.x/dev/functions.html#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
+Since `id` refers to the element’s ID and Craft may have many other elements, this won’t be sequential. If you’d rather generate a unique sequential number, consider using Craft’s [seq()](/4.x/dev/functions.md#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
 
 The following example generates a sequential number, per variant, with the given product slug:
 
@@ -87,13 +83,17 @@ If enabled and multiple variants are allowed, a new tab will appear at the top o
 
 A “Variant Title Format” will also appear for configuring auto-generated variant titles.
 
+::: tip
+Once you’ve checked this field, you’ll need to press **Save** in order to see additional settings related to variants.
+:::
+
 #### Show the Title field for variants
 
 Whether or not to show the “Variant Title” field when adding or editing variants. When `true` a “Variant Title Field Label” will appear, allowing you to change what the “Variant Title” field label should be.
 
-#### Products of this type have their own URLs
+#### Site Settings
 
-This works just like Craft’s [entry](https://craftcms.com/docs/4.x/entries.html) URLs.
+This works just like Craft’s [entry](/4.x/entries.md) URLs, where you can determine the URL for the product type and which template it should use.
 
 ::: tip
 When a site visitor hits the URL of a product, the `product` variable is automatically available to your templates, just like the `entry` variable for Craft’s entries.
@@ -1559,11 +1559,11 @@ If a product type has multiple variants enabled, the author can choose which one
 
 For a single-variant product, variant details are shown in a unified view with custom product fields:
 
-![Single-Variant Product](./images/single-variant.png)
+![Stylized illustration of a single-variant product edit page, with custom product fields in a single content pane and fields like SKU in the sidebar details](./images/single-variant.png)
 
 When a product supports multiple variants, the default variant will be identified in a **Variants** field where more variants can be added:
 
-![Multi-Variant Product](./images/multi-variant.png)
+![Stylized illustration of a multi-variant product edit page, with an additional “Variants” tab that has a Matrix-like editor for multiple variants each having their own fields like SKU](./images/multi-variant.png)
 
 ### Variant Stock
 
