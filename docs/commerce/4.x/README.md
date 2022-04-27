@@ -5,7 +5,7 @@ description: Official documentation for Craft Commerce 4.
 # About Craft Commerce
 
 ::: warning
-Commerce 4 is in beta. See the [Commerce 3](../4.x/) docs for the latest release.
+Commerce 4 is in beta. See the [Commerce 3](../3.x/) docs for the latest release.
 :::
 
 Craft Commerce is an amazingly powerful and flexible ecommerce platform for [Craft CMS](https://craftcms.com).
