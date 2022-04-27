@@ -30,7 +30,7 @@ Unlike the others, you’ll find it under Craft’s **Access the control panel**
 
 ### Manage products
 
-Whether the user can see, create, save, edit, and delete products by product type.
+Whether the user can manage products, with each product type having its own create and delete permissions.
 
 ### Manage orders
 
