@@ -22,7 +22,7 @@ The payment gateway is set on the cart. This template uses `cart.gateway.getPaym
 
   {{ cart.gateway.getPaymentFormHtml({})|raw }}
 
-  <button type="submit">Pay Now</button>
+  <button>Pay Now</button>
 </form>
 ```
 
@@ -111,7 +111,7 @@ This manual form example assumes the availability of a `paymentForm` variable, a
     {{ forms.errorList(errors) }}
   </fieldset>
 
-  <button type="submit">Pay Now</button>
+  <button>Pay Now</button>
 </form>
 ```
 
@@ -134,7 +134,7 @@ Once the [allowCheckoutWithoutPayment](config-settings.md#allowcheckoutwithoutpa
   {{ hiddenInput('action', 'commerce/cart/complete') }}
   {{ redirectInput('/shop/customer/order?number='~cart.number~'&success=true') }}
 
-  <button type="submit">Commit to buy</button>
+  <button>Commit to buy</button>
 </form>
 ```
 
@@ -228,7 +228,7 @@ Here we’re pretending the relevant order number is 12345, the customer’s ema
 
   {{ cart.gateway.getPaymentFormHtml({})|raw }}
 
-  <button type="submit">Submit</button>
+  <button>Submit</button>
 </form>
 ```
 

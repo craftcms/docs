@@ -100,7 +100,7 @@ This creates a form for adding the customer’s first saved address as the `ship
   {{ actionInput('commerce/cart/update-cart') }}
   {{ hiddenInput('shippingAddressId', address.id) }}
   {{ hiddenInput('billingAddressSameAsShipping', '1') }}
-  <button type="submit">Submit</button>
+  <button>Submit</button>
 </form>
 ```
 
@@ -116,7 +116,7 @@ The same thing could also be done explicitly setting each address ID:
   {{ actionInput('commerce/cart/update-cart') }}
   {{ hiddenInput('shippingAddressId', address.id) }}
   {{ hiddenInput('billingAddressId', address.id) }}
-  <button type="submit">Submit</button>
+  <button>Submit</button>
 </form>
 ```
 
@@ -144,7 +144,7 @@ This example creates a form for collecting the customer’s name and country, wh
   </select>
   {{ hiddenInput('billingAddressSameAsShipping', '1') }}
 
-  <button type="submit">Add to Cart</button>
+  <button>Add to Cart</button>
 </form>
 ```
 
@@ -242,7 +242,7 @@ This example starts a form that could be used to update the shipping address att
 
   {# ... #}
 
-  <button type="submit">Update Address</button>
+  <button>Update Address</button>
 </form>
 ```
 
@@ -311,7 +311,7 @@ In this example we’ll first check for existing estimate addresses with the `es
     {% endfor %}
   {% endif %}
 
-  <button type="submit">Submit</button>
+  <button>Submit</button>
 </form>
 ```
 
@@ -373,7 +373,7 @@ This example would add a new address for the customer with the details in the `a
   <input type="text" name="address[firstName]" value="{{ address is defined ? address.firstName : '' }}">
   <input type="text" name="address[lastName]" value="{{ address is defined ? address.lastName : '' }}">
   {# ... #}
-  <button type="submit">Save</button>
+  <button>Save</button>
 </form>
 ```
 
@@ -388,7 +388,7 @@ To update an existing address, include its ID for the value of a `address[id]` p
   <input type="text" name="address[firstName]" value="{{ address.firstName }}">
   <input type="text" name="address[lastName]" value="{{ address.lastName }}">
   {# ... #}
-  <button type="submit">Save</button>
+  <button>Save</button>
 </form>
 ```
 
@@ -402,7 +402,7 @@ The form action for deleting a customer address is `commerce/customer-addresses/
   {{ actionInput('commerce/customer-addresses/delete') }}
   {{ redirectInput('commerce/customer/addresses') }}
   {{ hiddenInput('id', address.id) }}
-  <button type="submit">Delete</button>
+  <button>Delete</button>
 </form>
 ```
 

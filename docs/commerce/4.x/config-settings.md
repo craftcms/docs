@@ -730,7 +730,7 @@ the `inputs` variable.
   <p>Redirecting to payment page...</p>
   <p>
     {{ inputs|raw }}
-    <button type="submit">Continue</button>
+    <button>Continue</button>
   </p>
 </form>
 </body>

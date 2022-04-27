@@ -34,7 +34,7 @@ Example:
     placeholder="{{ "Coupon Code"|t }}"
   >
 
-  <button type="submit">Update Cart</button>
+  <button>Update Cart</button>
 </form>
 ```
 

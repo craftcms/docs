@@ -27,7 +27,7 @@ Example:
     placeholder="{{ "your@email.com"|t }}"
   >
 
-  <button type="submit">Update Cart Email</button>
+  <button>Update Cart Email</button>
 <form>
 ```
 
@@ -70,7 +70,7 @@ order completion. This can again be done with the same `commerce/cart/update-car
       value="1"
     /> Register me for a user account
   </label>
-  <button type="submit">Update Cart</button>
+  <button>Update Cart</button>
 <form>
 ```
 

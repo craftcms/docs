@@ -42,7 +42,7 @@ This example creates a form for each available plan, posting the selection to th
       </div>
     {% endif %}
 
-    <button type="submit">{{ "Subscribe"|t }}</button>
+    <button>{{ "Subscribe"|t }}</button>
   </form>
 {% endfor %}
 ```
@@ -66,7 +66,7 @@ To cancel a subscription you can use the following template. It assumes the `sub
 
   {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml()|raw }}
 
-  <button type="submit">Unsubscribe</button>
+  <button>Unsubscribe</button>
 </form>
 ```
 
@@ -87,7 +87,7 @@ To switch a subscription plan you can use the following template. It assumes tha
 
     {{ plan.getGateway().getSwitchPlansFormHtml(subscription.plan, plan)|raw }}
 
-    <button type="submit" class="button link">Switch</button>
+    <button class="button link">Switch</button>
   </form>
   <hr />
 {% endfor %}
@@ -106,7 +106,7 @@ To reactivate a subscription plan you can use the following template. It assumes
     {{ hiddenInput('action', 'commerce/subscriptions/reactivate') }}
     {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
 
-    <button type="submit" class="button link">Reactivate</button>
+    <button class="button link">Reactivate</button>
   </form>
 {% endif %}
 ```
