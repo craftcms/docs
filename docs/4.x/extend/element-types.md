@@ -106,8 +106,14 @@ if (!$this->db->tableExists('{{%products}}')) {
 
     // give it a foreign key to the elements table
     $this->addForeignKey(
-        $this->db->getForeignKeyName('{{%products}}', 'id'),
-        '{{%products}}', 'id', '{{%elements}}', 'id', 'CASCADE', null);
+        $this->db->getForeignKeyName(),
+        '{{%products}}',
+        'id',
+        '{{%elements}}',
+        'id',
+        'CASCADE',
+        null
+    );
 }
 ```
 
