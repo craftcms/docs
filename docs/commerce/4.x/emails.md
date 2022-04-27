@@ -42,8 +42,8 @@ Enter the name of this email as it will be shown when managing it in the control
 
 The subject of the email, which can be plain text or use Twig to set dynamic values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce3:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce3:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
 
 `order` is the cart or order relevant to the notification. The “Email Subject” we enter, for example, might be:
 
@@ -61,8 +61,8 @@ If “Send to custom recipient” is selected, an email address can be entered. 
 
 Like the [Email Subject](#email-subject), this field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce3:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce3:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
 
 `order` is the cart or order relevant to the notification. The “Recipient” we enter, for example, might be:
 
@@ -78,8 +78,8 @@ The Reply-To address for this email.
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce3:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce3:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
 
 ### BCC’d Recipient
 
@@ -89,8 +89,8 @@ Separate multiple addresses with a comma (`,`).
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce3:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce3:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
 
 ### CC’d Recipient
 
@@ -98,8 +98,8 @@ The CC addresses for this email. Separate multiple addresses with a comma (`,`).
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce3:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce3:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
 
 ### HTML Email Template Path
 
@@ -107,8 +107,8 @@ The path to an HTML template in your site’s `templates/` folder.
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce3:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce3:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
 
 This allows you to have full design flexibility.
 

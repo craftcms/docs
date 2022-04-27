@@ -1,6 +1,6 @@
 # Purchasables
 
-The core of anything sold with Commerce is a purchasable, a custom [element type](https://craftcms.com/docs/3.x/extend/element-types.html) that can be added to a cart.
+The core of anything sold with Commerce is a purchasable, a custom [element type](/4.x/extend/element-types.md) that can be added to a cart.
 
 ## Purchasables and Line Items
 

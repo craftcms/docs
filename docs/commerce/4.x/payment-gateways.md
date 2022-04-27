@@ -53,7 +53,7 @@ See the _Extending Commerce_ section’s [Payment Gateway Types](extend/payment-
 
 ## Storing Config Outside of the Database
 
-When you’re configuring gateways in the Craft control panel, we recommend using [environment variables](https://craftcms.com/docs/3.x/config/#environmental-configuration) so environment-specific settings and sensitive API keys don’t end up in the database or project config.
+When you’re configuring gateways in the Craft control panel, we recommend using [environment variables](/4.x/config/#environmental-configuration) so environment-specific settings and sensitive API keys don’t end up in the database or project config.
 
 If you must override gateway settings, you can still do that using a standard config file for your gateway plugin (i.e. `config/commerce-stripe.php`)—but be aware that you’ll only be able to provide one set of settings for that gateway.
 

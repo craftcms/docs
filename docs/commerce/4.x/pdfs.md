@@ -83,7 +83,7 @@ If you’re seeing missing or incorrect characters (i.e. `�` or `□`) where y
 ```
 :::
 
-The [`pdfAllowRemoteImages`](config-settings.md#pdfallowremoteimages) setting is `false` by default, so any images in your templates must be provided with [data URLs](/3.x/dev/functions.md#dataurl):
+The [`pdfAllowRemoteImages`](config-settings.md#pdfallowremoteimages) setting is `false` by default, so any images in your templates must be provided with [data URLs](/4.x/dev/functions.md#dataurl):
 
 ```twig
 {# base64-encoded SVG image works when `pdfAllowRemoteImages` is `false` #}

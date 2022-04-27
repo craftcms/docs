@@ -1,6 +1,6 @@
 # Store Management
 
-Craft Commerce adds user permissions you can customize in any of your [Craft CMS user groups](/3.x/user-management.md).
+Craft Commerce adds user permissions you can customize in any of your [Craft CMS user groups](/4.x/user-management.md).
 
 ## Store Managers
 

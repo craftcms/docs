@@ -257,14 +257,14 @@ It’s common to provide a shipping or tax cost estimate before a customer has e
 To help with this, the cart can use estimated shipping and billing addresses for calculations before complete addresses are available.
 
 ::: tip
-An estimated address is an [Address model](commerce3:craft\commerce\models\Address) with its `isEstimated` property set to `true`. This simple differentiation prevents any confusion between estimated and final calculations.
+An estimated address is an [Address model](commerce4:craft\commerce\models\Address) with its `isEstimated` property set to `true`. This simple differentiation prevents any confusion between estimated and final calculations.
 :::
 
 #### Adding a Shipping Estimate Address to the Cart
 
 You can add or update an estimated addresses on the order with the same `commerce/cart/update-cart` form action.
 
-In this example we’ll first check for existing estimate addresses with the `estimatedShippingAddressId` and `estimatedBillingAddressId` attributes on the [cart](commerce3:craft\commerce\elements\Order) object, displaying a form to collect only the shipping country, state, and zip code if we don’t already have them:
+In this example we’ll first check for existing estimate addresses with the `estimatedShippingAddressId` and `estimatedBillingAddressId` attributes on the [cart](commerce4:craft\commerce\elements\Order) object, displaying a form to collect only the shipping country, state, and zip code if we don’t already have them:
 
 ```twig
 {% set cart = craft.commerce.carts.cart %}
@@ -316,7 +316,7 @@ In this example we’ll first check for existing estimate addresses with the `es
 ```
 
 ::: tip
-[Tax adjusters](commerce3:craft\commerce\adjusters\Tax) and [shipping adjusters](commerce3:craft\commerce\adjusters\Shipping) will include an `isEsimated` attribute when their calculations were based on estimated address data.
+[Tax adjusters](commerce4:craft\commerce\adjusters\Tax) and [shipping adjusters](commerce4:craft\commerce\adjusters\Shipping) will include an `isEsimated` attribute when their calculations were based on estimated address data.
 :::
 
 A full example of this can be seen in the [example templates](example-templates.md) on the cart page.
@@ -329,7 +329,7 @@ When a customer is logged in and checks out with a new address, that address is 
 
 Customers can only add and remove addresses from the front end while they’re logged in.
 
-See [the Customer model](commerce3:craft\commerce\models\Customer) to learn about the methods available to retrieve customer address data e.g. [Customer::getPrimaryBillingAddress()](<commerce3:craft\commerce\models\Customer::getPrimaryBillingAddress()>), [Customer::getPrimaryShippingAddress()](<commerce3:craft\commerce\models\Customer::getPrimaryShippingAddress()>) and [Customer::getAddressById()](<commerce3:craft\commerce\models\Customer::getAddressById()>).
+See [the Customer model](commerce4:craft\commerce\models\Customer) to learn about the methods available to retrieve customer address data e.g. [Customer::getPrimaryBillingAddress()](<commerce4:craft\commerce\models\Customer::getPrimaryBillingAddress()>), [Customer::getPrimaryShippingAddress()](<commerce4:craft\commerce\models\Customer::getPrimaryShippingAddress()>) and [Customer::getAddressById()](<commerce4:craft\commerce\models\Customer::getAddressById()>).
 
 ### Get All Current Customer Addresses
 

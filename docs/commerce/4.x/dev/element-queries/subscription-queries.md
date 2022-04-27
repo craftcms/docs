@@ -13,10 +13,10 @@ $mySubscriptionQuery = \craft\commerce\elements\Subscription::find();
 ```
 :::
 
-Once you’ve created a subscription query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://craftcms.com/docs/3.x/element-queries.html#executing-element-queries) by calling `.all()`. An array of [Subscription](commerce3:craft\commerce\elements\Subscription) objects will be returned.
+Once you’ve created a subscription query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](/docs/4.x/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Subscription](commerce4:craft\commerce\elements\Subscription) objects will be returned.
 
 ::: tip
-See [Element Queries](https://craftcms.com/docs/3.x/element-queries.html) in the Craft docs to learn about how element queries work.
+See [Element Queries](/4.x/element-queries.md) in the Craft docs to learn about how element queries work.
 :::
 
 ## Example
@@ -58,7 +58,7 @@ Subscription queries support the following parameters:
 | Param                                     | Description
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [anyStatus](#anystatus)                   | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
-| [asArray](#asarray)                       | Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce3:craft\commerce\elements\Subscription) objects.
+| [asArray](#asarray)                       | Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce4:craft\commerce\elements\Subscription) objects.
 | [clearCachedResult](#clearcachedresult)   | Clears the cached result.
 | [dateCanceled](#datecanceled)             | Narrows the query results based on the subscriptions’ cancellation date.
 | [dateCreated](#datecreated)               | Narrows the query results based on the subscriptions’ creation dates.
@@ -121,7 +121,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 ### `asArray`
 
-Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce3:craft\commerce\elements\Subscription) objects.
+Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce4:craft\commerce\elements\Subscription) objects.
 
 
 
@@ -700,7 +700,7 @@ Possible values include:
 | - | -
 | `'foo'` | for a plan with a handle of `foo`.
 | `['foo', 'bar']` | for plans with a handle of `foo` or `bar`.
-| a [Plan](commerce3:craft\commerce\base\Plan) object | for a plan represented by the object.
+| a [Plan](commerce4:craft\commerce\base\Plan) object | for a plan represented by the object.
 
 
 
@@ -786,7 +786,7 @@ Narrows the query results to only subscriptions that are related to certain othe
 
 
 
-See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](/4.x/relations.md) for a full explanation of how to work with this parameter.
 
 
 
@@ -813,7 +813,7 @@ Narrows the query results to only subscriptions that match a search query.
 
 
 
-See [Searching](https://craftcms.com/docs/3.x/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](/4.x/searching.md) for a full explanation of how to work with this parameter.
 
 
 
@@ -999,7 +999,7 @@ Causes the query to return matching subscriptions eager-loaded with related elem
 
 
 
-See [Eager-Loading Elements](https://craftcms.com/docs/3.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](/4.x/dev/eager-loading-elements.md) for a full explanation of how to work with this parameter.
 
 
 

@@ -4,10 +4,10 @@ Adjuster classes return models that modify pricing when an order is [recalculate
 
 ## Writing an Adjuster
 
-Each class implements the [Adjuster Interface](commerce3:craft\commerce\base\AdjusterInterface) with an `adjust()` method for evaluating the order and returning zero or more [OrderAdjustment](commerce3:craft\commerce\models\OrderAdjustment) models. Each of those models may be applied to the order or one of its line items.
+Each class implements the [Adjuster Interface](commerce4:craft\commerce\base\AdjusterInterface) with an `adjust()` method for evaluating the order and returning zero or more [OrderAdjustment](commerce4:craft\commerce\models\OrderAdjustment) models. Each of those models may be applied to the order or one of its line items.
 
 ::: tip Do you need your own adjuster?
-The built-in adjusters each include integration points that could reduce the amount of custom code you need to write. Look at the existing [Discount](commerce3:craft\commerce\adjusters\Discount), [Shipping](commerce3:craft\commerce\adjusters\Shipping), and [Tax](commerce3:craft\commerce\adjusters\Tax) adjusters before you write your own from scratch.
+The built-in adjusters each include integration points that could reduce the amount of custom code you need to write. Look at the existing [Discount](commerce4:craft\commerce\adjusters\Discount), [Shipping](commerce4:craft\commerce\adjusters\Shipping), and [Tax](commerce4:craft\commerce\adjusters\Tax) adjusters before you write your own from scratch.
 :::
 
 An adjustment model should have a `type` of `shipping`, `discount`, or `tax`. (Adjustments are applied in that order under the hood.) While it’s technically possible to designate any `type` value, using one of those three will ensure the adjustment is properly represented to the payment gateway.
@@ -59,7 +59,7 @@ Even if you don’t add or replace an adjuster you might still use either event 
 
 ## Replacing an Adjuster
 
-Because the adjusters are exposed in an array, you could also swap your own custom adjuster for one that’s included. Here, we’re swapping a custom `MyShippingAdjuster` in place of the included [Shipping](commerce3:craft\commerce\adjusters\Shipping) class:
+Because the adjusters are exposed in an array, you could also swap your own custom adjuster for one that’s included. Here, we’re swapping a custom `MyShippingAdjuster` in place of the included [Shipping](commerce4:craft\commerce\adjusters\Shipping) class:
 
 ```php
 use craft\commerce\services\OrderAdjustments;
@@ -88,7 +88,7 @@ Event::on(
 
 The adjuster interface consists of a single method: `adjust(Order $order)`.
 
-Each [OrderAdjustment](commerce3:craft\commerce\models\OrderAdjustment) model returned by that `adjust` method—if it returns any at all—will have adjustment details and should include contextual information that explains why the adjuster returned it:
+Each [OrderAdjustment](commerce4:craft\commerce\models\OrderAdjustment) model returned by that `adjust` method—if it returns any at all—will have adjustment details and should include contextual information that explains why the adjuster returned it:
 
 - **$type** should be `shipping`, `discount`, or `tax` to reflect the kind of adjustment.
 - **$amount** is the value (positive or negative) used to modify the order or line item. (Negative amounts reduce the price of the order.)

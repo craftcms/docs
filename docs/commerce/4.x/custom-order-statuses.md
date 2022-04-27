@@ -75,9 +75,9 @@ If no line item status is designated as the default, line items have a `null` or
 
 ### Showing Customers the History of an Order
 
-An order’s <commerce3:craft\commerce\models\OrderHistory> models are available via `order.histories`. Every history record has a `newStatus` property that reflects which status the order moved into, and all but the first record will have an `prevStatus`. The `message` property contains any text from the order’s `message` field that coincided with the change.
+An order’s <commerce4:craft\commerce\models\OrderHistory> models are available via `order.histories`. Every history record has a `newStatus` property that reflects which status the order moved into, and all but the first record will have an `prevStatus`. The `message` property contains any text from the order’s `message` field that coincided with the change.
 
-The new and old status properties return <commerce3:craft\commerce\models\OrderStatus> models, which include a `name` and `description`.
+The new and old status properties return <commerce4:craft\commerce\models\OrderStatus> models, which include a `name` and `description`.
 
 ```twig
 <ul>
@@ -93,7 +93,7 @@ The new and old status properties return <commerce3:craft\commerce\models\OrderS
 
 ### craft.commerce.orderStatuses.allOrderStatuses
 
-Returns an array of <commerce3:craft\commerce\models\OrderStatus> objects representing all the order statuses in the system.
+Returns an array of <commerce4:craft\commerce\models\OrderStatus> objects representing all the order statuses in the system.
 
 ```twig
 {% for status in craft.commerce.orderStatuses.allOrderStatuses %}

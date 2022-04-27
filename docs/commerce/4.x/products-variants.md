@@ -138,7 +138,7 @@ $myProductQuery = \craft\commerce\elements\Product::find();
 ```
 :::
 
-Once you’ve created a product query, you can set [parameters](#product-query-parameters) on it to narrow down the results, and then [execute it](https://craftcms.com/docs/4.x/element-queries.html#executing-element-queries) by calling `.all()`. An array of [Product](commerce3:craft\commerce\elements\Product) objects will be returned.
+Once you’ve created a product query, you can set [parameters](#product-query-parameters) on it to narrow down the results, and then [execute it](/4.x/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Product](commerce4:craft\commerce\elements\Product) objects will be returned.
 
 You can also fetch only the number of items a query might return, which is better for performance when you don’t need the variant data.
 
@@ -166,7 +166,7 @@ $myProductCount = Product::find()
 :::
 
 ::: tip
-See [Element Queries](https://craftcms.com/docs/4.x/element-queries.html) in the Craft docs to learn about how element queries work.
+See [Element Queries](/4.x/element-queries.md) in the Craft docs to learn about how element queries work.
 :::
 
 ### Example
@@ -1596,7 +1596,7 @@ $myVariantQuery = \craft\commerce\elements\Variant::find();
 ```
 :::
 
-Once you’ve created a variant query, you can set [parameters](#variant-query-parameters) on it to narrow down the results, and then [execute it](https://craftcms.com/docs/4.x/element-queries.html#executing-element-queries) by calling `.all()`. An array of [Variant](commerce3:craft\commerce\elements\Variant) objects will be returned.
+Once you’ve created a variant query, you can set [parameters](#variant-query-parameters) on it to narrow down the results, and then [execute it](https://craftcms.com/docs/4.x/element-queries.html#executing-element-queries) by calling `.all()`. An array of [Variant](commerce4:craft\commerce\elements\Variant) objects will be returned.
 
 You can also fetch only the number of items a query might return, which is better for performance when you don’t need the variant data.
 

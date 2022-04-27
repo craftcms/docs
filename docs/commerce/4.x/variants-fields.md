@@ -28,10 +28,10 @@ If you have an element with a variants field in your template, you can access it
 {% set variants = entry.myFieldHandle %}
 ```
 
-That will give you an [element query](/3.x/element-queries.md) prepped to output all the selected product variants for the given field.
+That will give you an [element query](/4.x/element-queries.md) prepped to output all the selected product variants for the given field.
 
 ::: tip
-See [Relations](/3.x/relations.md) for more info on the `relatedTo` param.
+See [Relations](/4.x/relations.md) for more info on the `relatedTo` param.
 :::
 
 ## Examples

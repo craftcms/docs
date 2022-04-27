@@ -5,7 +5,7 @@ sidebarDepth: 2
 
 Variants are added to a _cart_ that can be completed to become an _order_. Carts and orders are both listed in the control panel under **Commerce** → **Orders**.
 
-When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce3:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false` and its `dateCompleted` is `null`.
+When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce4:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false` and its `dateCompleted` is `null`.
 
 ## Carts
 
@@ -80,7 +80,7 @@ axios.get('', {
 
 Either of the examples above will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
 
-To see what cart information you can use in your templates, take a look at the [Order](commerce3:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig).
+To see what cart information you can use in your templates, take a look at the [Order](commerce4:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig).
 
 <toggle-tip title="Example Order">
 
@@ -225,7 +225,7 @@ In this example, we’re providing the customer with an option to include a note
 :::
 
 ::: warning
-Commerce does not validate the `options` and `note` parameters. If you’d like to limit user input, use front-end validation or use the [`Model::EVENT_DEFINE_RULES`](craft4:craft\base\Model::EVENT_DEFINE_RULES) event to add validation rules for the [`LineItem`](commerce3:craft\commerce\models\LineItem) model.
+Commerce does not validate the `options` and `note` parameters. If you’d like to limit user input, use front-end validation or use the [`Model::EVENT_DEFINE_RULES`](craft4:craft\base\Model::EVENT_DEFINE_RULES) event to add validation rules for the [`LineItem`](commerce4:craft\commerce\models\LineItem) model.
 :::
 
 The note and options will be visible on the order’s detail page in the control panel:
@@ -459,7 +459,7 @@ Instead of being recalculated on each change like a cart, the order will only be
 
 Adjustments for discounts, shipping, and tax may be applied when an order is recalcuated. Each adjustment is related to its order, and can optionally relate to a specific line item.
 
-If you’d like to jump straight to displaying order information in your templates, take a look at the the <commerce3:craft\commerce\elements\Order> class reference for a complete list of available properties.
+If you’d like to jump straight to displaying order information in your templates, take a look at the the <commerce4:craft\commerce\elements\Order> class reference for a complete list of available properties.
 
 ### Order Numbers
 

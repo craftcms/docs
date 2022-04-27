@@ -27,7 +27,7 @@ The following methods are available for getting country data.
 
 ### allEnabledCountries
 
-Returns an array of <commerce3:craft\commerce\models\Country> objects representing all countries that have been enabled.
+Returns an array of <commerce4:craft\commerce\models\Country> objects representing all countries that have been enabled.
 
 ::: code
 ```twig
@@ -83,7 +83,7 @@ foreach ($countries as $id => $countryName) {
 
 ### craft.commerce.countries.allCountries
 
-Returns an array of <commerce3:craft\commerce\models\Country> objects representing all countries defined in the system regardless of whether they’re enabled.
+Returns an array of <commerce4:craft\commerce\models\Country> objects representing all countries defined in the system regardless of whether they’re enabled.
 
 ::: code
 ```twig
@@ -139,7 +139,7 @@ foreach ($countries as $id => $countryName) {
 
 ### craft.commerce.countries.countriesByShippingZoneId
 
-Returns an array of <commerce3:craft\commerce\models\Country> objects representing all countries within the specified shipping zone, per the shipping zone’s ID.
+Returns an array of <commerce4:craft\commerce\models\Country> objects representing all countries within the specified shipping zone, per the shipping zone’s ID.
 
 ::: code
 ```twig
@@ -167,7 +167,7 @@ foreach ($countries as $country) {
 
 ### craft.commerce.countries.countriesByTaxZoneId
 
-Returns an array of <commerce3:craft\commerce\models\Country> objects representing all countries within the specified tax zone, per the tax zone’s ID.
+Returns an array of <commerce4:craft\commerce\models\Country> objects representing all countries within the specified tax zone, per the tax zone’s ID.
 
 ::: code
 ```twig
@@ -194,7 +194,7 @@ foreach ($countries as $country) {
 
 ### craft.commerce.countries.countryById
 
-Returns a <commerce3:craft\commerce\models\Country> object for the provided country ID.
+Returns a <commerce4:craft\commerce\models\Country> object for the provided country ID.
 
 ::: code
 ```twig
@@ -213,7 +213,7 @@ $country = \craft\commerce\Plugin::getInstance()
 
 ### craft.commerce.countries.countryByIso
 
-Returns a <commerce3:craft\commerce\models\Country> object for the provided two-character country ISO code.
+Returns a <commerce4:craft\commerce\models\Country> object for the provided two-character country ISO code.
 
 ::: code
 ```twig
@@ -248,7 +248,7 @@ The following methods are available for getting country data.
 
 ### craft.commerce.states.allEnabledStates
 
-Returns an array of <commerce3:craft\commerce\models\State> objects representing all states that have been enabled.
+Returns an array of <commerce4:craft\commerce\models\State> objects representing all states that have been enabled.
 
 ::: code
 ```twig
@@ -302,7 +302,7 @@ foreach ($states as $id => $stateName) {
 
 ### craft.commerce.states.allEnabledStatesAsListGroupedByCountryId
 
-Returns an array of <commerce3:craft\commerce\models\State> object arrays, indexed by country IDs.
+Returns an array of <commerce4:craft\commerce\models\State> object arrays, indexed by country IDs.
 
 Data returned as `[72:[3:'California', 4:'Washington'],32:[7:'New South Wales']]`.
 
@@ -340,7 +340,7 @@ foreach ($statesByCountryId as $countryId => $states) {
 
 ### craft.commerce.states.allStates
 
-Returns an array of <commerce3:craft\commerce\models\State> objects representing all states defined in the system regardless of whether they’re enabled.
+Returns an array of <commerce4:craft\commerce\models\State> objects representing all states defined in the system regardless of whether they’re enabled.
 
 ::: code
 ```twig
@@ -394,7 +394,7 @@ foreach ($states as $id => $stateName) {
 
 ### craft.commerce.states.statesByCountryId
 
-Returns an array of <commerce3:craft\commerce\models\State> objects representing all states belonging to the provided country ID, ignoring whether the country or any state is enabled.
+Returns an array of <commerce4:craft\commerce\models\State> objects representing all states belonging to the provided country ID, ignoring whether the country or any state is enabled.
 
 ::: code
 ```twig
@@ -419,7 +419,7 @@ foreach ($states as $state) {
 
 ### craft.commerce.states.statesByShippingZoneId
 
-Returns an array of <commerce3:craft\commerce\models\State> objects representing all states belonging to the provided shipping zone by the provided zone ID.
+Returns an array of <commerce4:craft\commerce\models\State> objects representing all states belonging to the provided shipping zone by the provided zone ID.
 
 ::: code
 ```twig
@@ -444,7 +444,7 @@ foreach ($states as $state) {
 
 ### craft.commerce.states.statesByTaxZoneId
 
-Returns an array of <commerce3:craft\commerce\models\State> objects representing all states belonging to the provided tax zone by the provided zone ID.
+Returns an array of <commerce4:craft\commerce\models\State> objects representing all states belonging to the provided tax zone by the provided zone ID.
 
 ::: code
 ```twig
@@ -469,7 +469,7 @@ foreach ($states as $state) {
 
 ### craft.commerce.states.stateByAbbreviation
 
-Returns a <commerce3:craft\commerce\models\State> object for the provided country ID and state abbreviation.
+Returns a <commerce4:craft\commerce\models\State> object for the provided country ID and state abbreviation.
 
 ::: code
 ```twig
@@ -488,7 +488,7 @@ $state = \craft\commerce\Plugin::getInstance()
 
 ### craft.commerce.states.stateById
 
-Returns a <commerce3:craft\commerce\models\State> object for the provided state ID.
+Returns a <commerce4:craft\commerce\models\State> object for the provided state ID.
 
 ::: code
 ```twig

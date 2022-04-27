@@ -5,7 +5,7 @@ Commerce 4 brings the power of element types to customers and addresses and inco
 Address and Customer models have gone away, replaced by [Address](craft4:craft\elements\Address) and [User](craft4:craft\elements\User) elements. Thanks to the now-integrated [commerceguys/addressing](https://github.com/commerceguys/addressing) library, address data is now more pleasant to work with no matter what part of the planet you’re on.
 
 ::: warning
-If you’re upgrading from Commerce 2, see the [Changes in Commerce 3](https://craftcms.com/docs/commerce/3.x/upgrading.html) and upgrade to the latest Commerce 3 version before upgrading to Commerce 4.
+If you’re upgrading from Commerce 2, see the [Changes in Commerce 3](/commerce/3.x/upgrading.md) and upgrade to the latest Commerce 3 version before upgrading to Commerce 4.
 :::
 
 ## Preparing for the Upgrade
@@ -173,7 +173,7 @@ $storeAddress = \craft\commerce\Plugin::getInstance()
 
 ### Custom Address Fields and Formatting
 
-The concept of address lines has gone away along with [DefineAddressLinesEvent](commerce3:craft\commerce\events\DefineAddressLinesEvent). Use Craft’s [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()) instead.
+The concept of address lines has gone away along with [DefineAddressLinesEvent](commerce4:craft\commerce\events\DefineAddressLinesEvent). Use Craft’s [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()) instead.
 
 ### Address Template Changes
 
@@ -378,21 +378,21 @@ Some element methods have been removed in Commerce 4:
 
 | Old | What to do instead
 | --- | ---
-| [Order::getAdjustmentsTotalByType()](commerce3:craft\commerce\elements\Order::getAdjustmentsTotalByType()) | [getTotalTax()](commerce4:craft\commerce\elements\Order::getTotalTax()), [getTotalDiscount()](commerce4:craft\commerce\elements\Order::getTotalDiscount()), or [getTotalShippingCost()](commerce4:craft\commerce\elements\Order::getTotalShippingCost())
-| [Order::getAvailableShippingMethods()](commerce3:craft\commerce\elements\Order::getAvailableShippingMethods()) | [getAvailableShippingMethodOptions()](commerce4:craft\commerce\elements\Order::getAvailableShippingMethodOptions())
-| [Order::getOrderLocale()](commerce3:craft\commerce\elements\Order::getOrderLocale()) | [$orderLanguage](commerce4:craft\commerce\elements\Order::$orderLanguage)
-| [Order::getShippingMethodId()](commerce3:craft\commerce\elements\Order::getShippingMethodId()) | [getShippingMethodHandle()](commerce4:craft\commerce\elements\Order::getShippingMethodHandle())
-| [Order::getShouldRecalculateAdjustments()](commerce3:craft\commerce\elements\Order::getShouldRecalculateAdjustments()) | [recalculationMode](commerce4:craft\commerce\elements\Order::recalculationMode)
-| [Order::getTotalTaxablePrice()](commerce3:craft\commerce\elements\Order::getTotalTaxablePrice()) | Taxable price is now calculated within the tax adjuster.
-| [Order::isEditable](commerce3:craft\commerce\elements\Order::isEditable) | [canSave()](commerce4:craft\commerce\elements\Order::canSave())
-| [Order::removeEstimatedBillingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedBillingAddress()) | [setEstimatedBillingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedBillingAddress(null))
-| [Order::removeEstimatedShippingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedShippingAddress()) | [setEstimatedShippingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedShippingAddress(null))
-| [Order::setShouldRecalculateAdjustments()](commerce3:craft\commerce\elements\Order::setShouldRecalculateAdjustments()) | [recalculationMode](commerce4:craft\commerce\elements\Order::recalculationMode)
-| [Product::getIsDeletable()](commerce3:craft\commerce\elements\Product::getIsDeletable()) | [canDelete()](commerce4:craft\commerce\elements\Product::canDelete())
-| [Product::getIsEditable()](commerce3:craft\commerce\elements\Product::getIsEditable()) | [canSave()](commerce4:craft\commerce\elements\Product::canSave())
-| [Product::isDeletable()](commerce3:craft\commerce\elements\Product::isDeletable()) | [canDelete()](commerce4:craft\commerce\elements\Product::canDelete())
-| [Product::isEditable()](commerce3:craft\commerce\elements\Product::isEditable()) | [canSave()](commerce4:craft\commerce\elements\Product::canSave())
-| [Variant::isEditable()](commerce3:craft\commerce\elements\Variant::isEditable()) | [canSave()](commerce4:craft\commerce\elements\Variant::canSave())
+| [Order::getAdjustmentsTotalByType()](commerce4:craft\commerce\elements\Order::getAdjustmentsTotalByType()) | [getTotalTax()](commerce4:craft\commerce\elements\Order::getTotalTax()), [getTotalDiscount()](commerce4:craft\commerce\elements\Order::getTotalDiscount()), or [getTotalShippingCost()](commerce4:craft\commerce\elements\Order::getTotalShippingCost())
+| [Order::getAvailableShippingMethods()](commerce4:craft\commerce\elements\Order::getAvailableShippingMethods()) | [getAvailableShippingMethodOptions()](commerce4:craft\commerce\elements\Order::getAvailableShippingMethodOptions())
+| [Order::getOrderLocale()](commerce4:craft\commerce\elements\Order::getOrderLocale()) | [$orderLanguage](commerce4:craft\commerce\elements\Order::$orderLanguage)
+| [Order::getShippingMethodId()](commerce4:craft\commerce\elements\Order::getShippingMethodId()) | [getShippingMethodHandle()](commerce4:craft\commerce\elements\Order::getShippingMethodHandle())
+| [Order::getShouldRecalculateAdjustments()](commerce4:craft\commerce\elements\Order::getShouldRecalculateAdjustments()) | [recalculationMode](commerce4:craft\commerce\elements\Order::recalculationMode)
+| [Order::getTotalTaxablePrice()](commerce4:craft\commerce\elements\Order::getTotalTaxablePrice()) | Taxable price is now calculated within the tax adjuster.
+| [Order::isEditable](commerce4:craft\commerce\elements\Order::isEditable) | [canSave()](commerce4:craft\commerce\elements\Order::canSave())
+| [Order::removeEstimatedBillingAddress()](commerce4:craft\commerce\elements\Order::removeEstimatedBillingAddress()) | [setEstimatedBillingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedBillingAddress(null))
+| [Order::removeEstimatedShippingAddress()](commerce4:craft\commerce\elements\Order::removeEstimatedShippingAddress()) | [setEstimatedShippingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedShippingAddress(null))
+| [Order::setShouldRecalculateAdjustments()](commerce4:craft\commerce\elements\Order::setShouldRecalculateAdjustments()) | [recalculationMode](commerce4:craft\commerce\elements\Order::recalculationMode)
+| [Product::getIsDeletable()](commerce4:craft\commerce\elements\Product::getIsDeletable()) | [canDelete()](commerce4:craft\commerce\elements\Product::canDelete())
+| [Product::getIsEditable()](commerce4:craft\commerce\elements\Product::getIsEditable()) | [canSave()](commerce4:craft\commerce\elements\Product::canSave())
+| [Product::isDeletable()](commerce4:craft\commerce\elements\Product::isDeletable()) | [canDelete()](commerce4:craft\commerce\elements\Product::canDelete())
+| [Product::isEditable()](commerce4:craft\commerce\elements\Product::isEditable()) | [canSave()](commerce4:craft\commerce\elements\Product::canSave())
+| [Variant::isEditable()](commerce4:craft\commerce\elements\Variant::isEditable()) | [canSave()](commerce4:craft\commerce\elements\Variant::canSave())
 
 ### Element Actions
 
@@ -400,47 +400,47 @@ These Commerce-specific element actions have been removed and rely on Craft’s:
 
 | Old | What to do instead
 | --- | ---
-| [DeleteOrder](commerce3:craft\commerce\elements\actions\DeleteOrder) | [Delete](craft4:craft\elements\actions\Delete)
-| [DeleteProduct](commerce3:craft\commerce\elements\actions\DeleteProduct) | [Delete](craft4:craft\elements\actions\Delete)
+| [DeleteOrder](commerce4:craft\commerce\elements\actions\DeleteOrder) | [Delete](craft4:craft\elements\actions\Delete)
+| [DeleteProduct](commerce4:craft\commerce\elements\actions\DeleteProduct) | [Delete](craft4:craft\elements\actions\Delete)
 
 ## Models
 
 ### Changed
 
-- [ProductType::$titleFormat](commerce3:craft\commerce\models\ProductType::$titleFormat) was renamed to [$variantTitleFormat](commerce4:craft\commerce\models\ProductType::$variantTitleFormat).
+- [ProductType::$titleFormat](commerce4:craft\commerce\models\ProductType::$titleFormat) was renamed to [$variantTitleFormat](commerce4:craft\commerce\models\ProductType::$variantTitleFormat).
 - [TaxRate::getRateAsPercent()](commerce4:craft\commerce\models\TaxRate::getRateAsPercent()) now returns a localized value.
 
 ### Removed
 
 | Old | What to do instead
 | --- | ---
-| [ShippingAddressZone::getStatesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getStatesNames()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
-| [Discount::$code](commerce3:craft\commerce\models\Discount::$code) | [$codes[0]](commerce4:craft\commerce\models\Discount::$codes)
-| [Discount::getDiscountUserGroups()](commerce3:craft\commerce\models\Discount::getDiscountUserGroups()) | Discount user groups were migrated to the customer condition rule.
-| [Discount::getUserGroupIds()](commerce3:craft\commerce\models\Discount::getUserGroupIds()) | Discount user groups were migrated to the customer condition rule.
-| [Discount::setUserGroupIds()](commerce3:craft\commerce\models\Discount::setUserGroupIds()) | Discount user groups were migrated to the customer condition rule.
-| [OrderHistory::$customerId](commerce3:craft\commerce\models\OrderHistory::$customerId) | [$userId](commerce4:craft\commerce\models\OrderHistory::$userId)
-| [OrderHistory::getCustomer()](commerce3:craft\commerce\models\OrderHistory::getCustomer()) | [getUser()](commerce4:craft\commerce\models\OrderHistory::getUser())
-| [Settings::$showCustomerInfoTab](commerce3:craft\commerce\models\Settings::$showCustomerInfoTab) | [$showEditUserCommerceTab](commerce4:craft\commerce\models\Settings::$showEditUserCommerceTab)
-| [ShippingAddressZone::getCountries()](commerce3:craft\commerce\models\ShippingAddressZone::getCountries()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
-| [ShippingAddressZone::getCountriesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getCountriesNames()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
-| [ShippingAddressZone::getCountryIds()](commerce3:craft\commerce\models\ShippingAddressZone::getCountryIds()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
-| [ShippingAddressZone::getStateIds()](commerce3:craft\commerce\models\ShippingAddressZone::getStateIds()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
-| [ShippingAddressZone::getStates()](commerce3:craft\commerce\models\ShippingAddressZone::getStates()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
-| [ShippingAddressZone::getStatesNames()](commerce3:craft\commerce\models\ShippingAddressZone::getStatesNames()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
-| [ShippingAddressZone::isCountryBased](commerce3:craft\commerce\models\ShippingAddressZone::isCountryBased) | Not applicable; zones can be country- and state-based simultaneously.
-| [States](commerce3:craft\commerce\services\States) | `craft.app.getAddresses().subdivisionRepository.getAll(['US'])`
-| [TaxAddressZone::getCountries()](commerce3:craft\commerce\models\TaxAddressZone::getCountries()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
-| [TaxAddressZone::getCountriesNames()](commerce3:craft\commerce\models\TaxAddressZone::getCountriesNames()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
-| [TaxAddressZone::getCountryIds()](commerce3:craft\commerce\models\TaxAddressZone::getCountryIds()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
-| [TaxAddressZone::getStateIds()](commerce3:craft\commerce\models\TaxAddressZone::getStateIds()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
-| [TaxAddressZone::getStates()](commerce3:craft\commerce\models\TaxAddressZone::getStates()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
-| [TaxAddressZone::getStatesNames()](commerce3:craft\commerce\models\TaxAddressZone::getStatesNames()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
-| [TaxAddressZone::isCountryBased](commerce3:craft\commerce\models\TaxAddressZone::isCountryBased) | Not applicable; zones can be country- and state-based simultaneously.
+| [ShippingAddressZone::getStatesNames()](commerce4:craft\commerce\models\ShippingAddressZone::getStatesNames()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [Discount::$code](commerce4:craft\commerce\models\Discount::$code) | [$codes[0]](commerce4:craft\commerce\models\Discount::$codes)
+| [Discount::getDiscountUserGroups()](commerce4:craft\commerce\models\Discount::getDiscountUserGroups()) | Discount user groups were migrated to the customer condition rule.
+| [Discount::getUserGroupIds()](commerce4:craft\commerce\models\Discount::getUserGroupIds()) | Discount user groups were migrated to the customer condition rule.
+| [Discount::setUserGroupIds()](commerce4:craft\commerce\models\Discount::setUserGroupIds()) | Discount user groups were migrated to the customer condition rule.
+| [OrderHistory::$customerId](commerce4:craft\commerce\models\OrderHistory::$customerId) | [$userId](commerce4:craft\commerce\models\OrderHistory::$userId)
+| [OrderHistory::getCustomer()](commerce4:craft\commerce\models\OrderHistory::getCustomer()) | [getUser()](commerce4:craft\commerce\models\OrderHistory::getUser())
+| [Settings::$showCustomerInfoTab](commerce4:craft\commerce\models\Settings::$showCustomerInfoTab) | [$showEditUserCommerceTab](commerce4:craft\commerce\models\Settings::$showEditUserCommerceTab)
+| [ShippingAddressZone::getCountries()](commerce4:craft\commerce\models\ShippingAddressZone::getCountries()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [ShippingAddressZone::getCountriesNames()](commerce4:craft\commerce\models\ShippingAddressZone::getCountriesNames()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [ShippingAddressZone::getCountryIds()](commerce4:craft\commerce\models\ShippingAddressZone::getCountryIds()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [ShippingAddressZone::getStateIds()](commerce4:craft\commerce\models\ShippingAddressZone::getStateIds()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [ShippingAddressZone::getStates()](commerce4:craft\commerce\models\ShippingAddressZone::getStates()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [ShippingAddressZone::getStatesNames()](commerce4:craft\commerce\models\ShippingAddressZone::getStatesNames()) | [getDescription()](commerce4:craft\commerce\models\ShippingAddressZone::getDescription())
+| [ShippingAddressZone::isCountryBased](commerce4:craft\commerce\models\ShippingAddressZone::isCountryBased) | Not applicable; zones can be country- and state-based simultaneously.
+| [States](commerce4:craft\commerce\services\States) | `craft.app.getAddresses().subdivisionRepository.getAll(['US'])`
+| [TaxAddressZone::getCountries()](commerce4:craft\commerce\models\TaxAddressZone::getCountries()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
+| [TaxAddressZone::getCountriesNames()](commerce4:craft\commerce\models\TaxAddressZone::getCountriesNames()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
+| [TaxAddressZone::getCountryIds()](commerce4:craft\commerce\models\TaxAddressZone::getCountryIds()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
+| [TaxAddressZone::getStateIds()](commerce4:craft\commerce\models\TaxAddressZone::getStateIds()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
+| [TaxAddressZone::getStates()](commerce4:craft\commerce\models\TaxAddressZone::getStates()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
+| [TaxAddressZone::getStatesNames()](commerce4:craft\commerce\models\TaxAddressZone::getStatesNames()) | [getDescription()](commerce4:craft\commerce\models\TaxAddressZone::getDescription())
+| [TaxAddressZone::isCountryBased](commerce4:craft\commerce\models\TaxAddressZone::isCountryBased) | Not applicable; zones can be country- and state-based simultaneously.
 
 ## Services
 
-In Commerce 4, [ShippingMethods::getAvailableShippingMethods()](commerce3:craft\commerce\services\ShippingMethods::getAvailableShippingMethods()) has been renamed to [getMatchingShippingMethods()](commerce4:craft\commerce\services\ShippingMethods::getMatchingShippingMethods()) to better represent the method.
+In Commerce 4, [ShippingMethods::getAvailableShippingMethods()](commerce4:craft\commerce\services\ShippingMethods::getAvailableShippingMethods()) has been renamed to [getMatchingShippingMethods()](commerce4:craft\commerce\services\ShippingMethods::getMatchingShippingMethods()) to better represent the method.
 
 ### Changed
 
@@ -456,27 +456,27 @@ Several methods have been deprecated:
 
 | Old | What to do instead
 | --- | ---
-| [Plans::getAllGatewayPlans()](commerce3:craft\commerce\services\Plans::getAllGatewayPlans()) | [getPlansByGatewayId()](commerce4:craft\commerce\services\Plans::getPlansByGatewayId())
-| [Subscriptions::doesUserHaveAnySubscriptions()](commerce3:craft\commerce\services\Subscriptions::doesUserHaveAnySubscriptions()) | [doesUserHaveAnySubscriptions()](commerce4:craft\commerce\services\Subscriptions::doesUserHaveSubscriptions())
-| [Subscriptions::getSubscriptionCountForPlanById()](commerce3:craft\commerce\services\Subscriptions::getSubscriptionCountForPlanById()) | [getSubscriptionCountByPlanId()](commerce4:craft\commerce\services\Subscriptions::getSubscriptionCountByPlanId())
-| [TaxRates::getTaxRatesForZone()](commerce3:craft\commerce\services\TaxRates::getTaxRatesForZone()) | [getTaxRatesByTaxZoneId()](commerce4:craft\commerce\services\TaxRates::getTaxRatesByTaxZoneId())
-| [Transactions::deleteTransaction()](commerce3:craft\commerce\services\Transactions::deleteTransaction()) | [deleteTransactionById()](commerce4:craft\commerce\services\Transactions::deleteTransactionById())
+| [Plans::getAllGatewayPlans()](commerce4:craft\commerce\services\Plans::getAllGatewayPlans()) | [getPlansByGatewayId()](commerce4:craft\commerce\services\Plans::getPlansByGatewayId())
+| [Subscriptions::doesUserHaveAnySubscriptions()](commerce4:craft\commerce\services\Subscriptions::doesUserHaveAnySubscriptions()) | [doesUserHaveAnySubscriptions()](commerce4:craft\commerce\services\Subscriptions::doesUserHaveSubscriptions())
+| [Subscriptions::getSubscriptionCountForPlanById()](commerce4:craft\commerce\services\Subscriptions::getSubscriptionCountForPlanById()) | [getSubscriptionCountByPlanId()](commerce4:craft\commerce\services\Subscriptions::getSubscriptionCountByPlanId())
+| [TaxRates::getTaxRatesForZone()](commerce4:craft\commerce\services\TaxRates::getTaxRatesForZone()) | [getTaxRatesByTaxZoneId()](commerce4:craft\commerce\services\TaxRates::getTaxRatesByTaxZoneId())
+| [Transactions::deleteTransaction()](commerce4:craft\commerce\services\Transactions::deleteTransaction()) | [deleteTransactionById()](commerce4:craft\commerce\services\Transactions::deleteTransactionById())
 
 ## Controllers
 
 Several controllers have been removed entirely in Commerce 4:
 
-- [AddressesController](commerce3:craft\commerce\controllers\AddressesController)
-- [CountriesController](commerce3:craft\commerce\controllers\CountriesController)
-- [CustomersController](commerce3:craft\commerce\controllers\CustomersController)
-- [CustomerAddressesController](commerce3:craft\commerce\controllers\CustomerAddressesController)
-- [StatesController](commerce3:craft\commerce\controllers\StatesController)
+- [AddressesController](commerce4:craft\commerce\controllers\AddressesController)
+- [CountriesController](commerce4:craft\commerce\controllers\CountriesController)
+- [CustomersController](commerce4:craft\commerce\controllers\CustomersController)
+- [CustomerAddressesController](commerce4:craft\commerce\controllers\CustomerAddressesController)
+- [StatesController](commerce4:craft\commerce\controllers\StatesController)
 
 A few controller methods have been removed as well:
 
-- [OrdersController::_prepCustomersArray()](commerce3:craft\commerce\controllers\OrdersController::_prepCustomersArray()) (Use [_customerToArray()](commerce4:craft\commerce\controllers\OrdersController::_customerToArray()) instead.)
-- [PlansController::actionRedirect()](commerce3:craft\commerce\controllers\PlansController::actionRedirect())
-- [ProductsPreviewController::<wbr>enforceProductPermissions()](commerce3:craft\commerce\controllers\ProductsPreviewController::enforceProductPermissions())
+- [OrdersController::_prepCustomersArray()](commerce4:craft\commerce\controllers\OrdersController::_prepCustomersArray()) (Use [_customerToArray()](commerce4:craft\commerce\controllers\OrdersController::_customerToArray()) instead.)
+- [PlansController::actionRedirect()](commerce4:craft\commerce\controllers\PlansController::actionRedirect())
+- [ProductsPreviewController::<wbr>enforceProductPermissions()](commerce4:craft\commerce\controllers\ProductsPreviewController::enforceProductPermissions())
 
 ## User Permissions
 

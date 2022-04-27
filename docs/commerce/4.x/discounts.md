@@ -248,7 +248,7 @@ Returns an array of all enabled discounts set up in the system active for the cu
 
 ### craft.commerce.discounts.getDiscountByCode(code)
 
-Returns a [Discount](commerce3:craft\commerce\models\Discount) model that matches the supplied code.
+Returns a [Discount](commerce4:craft\commerce\models\Discount) model that matches the supplied code.
 
 ```twig
 {% set discount = craft.commerce.discounts.getDiscountByCode('HALFOFF') %}

@@ -1,6 +1,6 @@
 # Template Hooks
 
-Commerce adds its own [template hooks](/3.x/extend/template-hooks.md) in addition to Craft’s.
+Commerce adds its own [template hooks](/4.x/extend/template-hooks.md) in addition to Craft’s.
 
 ## Control Panel Template Hooks
 
