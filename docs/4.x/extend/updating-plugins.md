@@ -789,3 +789,25 @@ Element-specific [control panel template hooks](template-hooks.md#control-panel-
 With the new [unified element editor](#unified-element-editor), anything that needs to be included in the editor should be provided in a field layout.
 
 If your plugin appended non-field content to a main content area, however, you can use Craft 4’s [ElementsController::EVENT_DEFINE_EDITOR_CONTENT](craft4:craft\controllers\ElementsController::EVENT_DEFINE_EDITOR_CONTENT) to check the event object’s `$element` property and optionally append markup to `$html`.
+
+## GraphQL
+
+[TypeManager::prepareFieldDefinitions()](craft4:craft\gql\TypeManager::prepareFieldDefinitions()) has been deprecated. Use [Gql::prepareFieldDefinitions()](craft4:craft\services\Gql::prepareFieldDefinitions()) instead:
+
+```php
+// Craft 3
+public static function getFieldDefinitions(): array
+{
+    return craft\gql\TypeManager::prepareFieldDefinitions([
+        // ...
+    ], self::getName());
+}
+
+// Craft 4
+public static function getFieldDefinitions(): array
+{
+    return Craft::$app->getGql()->prepareFieldDefinitions([
+        // ...
+    ], self::getName());
+}
+```
