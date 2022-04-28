@@ -811,3 +811,54 @@ public static function getFieldDefinitions(): array
     ], self::getName());
 }
 ```
+
+### Defining Components
+
+Plugins can now define their components (like services) using a new static [config()](craft4:craft\base\PluginInterface::config()) method rather than [setComponents()](yii2:yii\di\ServiceLocator::setComponents()). This makes the plugin’s service extendable in the same way Craft’s main app config can be extended via `config/app`.
+
+To take advantage of this, you could move your existing component definition...
+
+```php
+// Craft 3/4 `setComponents()`
+public function init(): void
+{
+    // …
+    $this->setComponents([
+        'myComponent' => MyComponent::class
+    ]);
+}
+```
+
+...to the new `config()` method:
+
+```php
+// Craft 4 `config()`
+public static function config(): array
+{
+    return [
+        'components' => [
+            'myComponent' => ['class' => MyComponent::class],
+        ],
+    ];
+}
+```
+
+A project then has the option to customize the component from `config/app.php`:
+
+```php
+return [
+    'components' => [
+        'plugins' => [
+            'pluginConfigs' => [
+                'my-plugin' => [
+                    'components' => [
+                        'myComponent' => [
+                            'myProperty' => 'foo',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];
+```

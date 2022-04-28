@@ -36,22 +36,22 @@ For example, you might make one zone for the USA and Canada, and another zone fo
 
 Like shipping categories, these tax zones can factor into [shipping rule](#shipping-rules) conditions and costs. Shipping zones can be used for conditions that apply to the customer’s shipping address.
 
-### Zip code condition formula
+### Postal Code Formula
 
-In addition to country and state matching, an address can match a zip code condition formula.
+In addition to country and state matching, an address can match a postal code condition formula.
 
-A zip code condition formula is an expression written in [Twig’s expression syntax](https://twig.symfony.com/doc/2.x/templates.html#expressions) that returns `true` or `false`.
+A postal code condition formula is an expression written in [Twig’s expression syntax](https://twig.symfony.com/doc/2.x/templates.html#expressions) that returns `true` or `false`.
 
-This will match if the zip code’s first two characters are `60` or `70`:
+This will match if the postal code’s first two characters are `60` or `70`:
 
 ```
-zipCode[0:2] == '60' or zipCode[0:2] == '70'
+postalCode[0:2] == '60' or postalCode[0:2] == '70'
 ```
 
 The will match if the zip code is equal to `NG102`, `ZZ200`, or `CC101`:
 
 ```
-zipCode in ['NG102', 'ZZ200', 'CC101']
+postalCode in ['NG102', 'ZZ200', 'CC101']
 ```
 
 ## Shipping Methods

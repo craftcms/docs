@@ -29,7 +29,7 @@ class Foo extends Component
 }
 ```
 
-Once the service class exists, you can register it as a component on your primary plugin class by calling [setComponents()](yii2:yii\di\ServiceLocator::setComponents()) from its [init()](yii2:yii\base\BaseObject::init()) method:
+Once the service class exists, you can register it as a component on your primary plugin or module class by calling [setComponents()](yii2:yii\di\ServiceLocator::setComponents()) from its [init()](yii2:yii\base\BaseObject::init()) method:
 
 ```php
 public function init()
@@ -42,6 +42,39 @@ public function init()
 
     // ...
 }
+```
+
+Plugins also have a special [config()](craft4:craft\base\PluginInterface::config()) method you can use instead if you’d like to make your service extensible at the project level:
+
+```php
+public static function config(): array
+{
+    return [
+        'components' => [
+            'foo' => ['class' => \mynamespace\services\Foo::class],
+        ],
+    ];
+}
+```
+
+Any component registered via the `config()` method can be customized from the project’s `config/app.php`:
+
+```php
+return [
+    'components' => [
+        'plugins' => [
+            'pluginConfigs' => [
+                'my-plugin' => [
+                    'components' => [
+                        'foo' => [
+                            'myProperty' => 'bar',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];
 ```
 
 ## Calling Service Methods
