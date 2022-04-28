@@ -379,6 +379,8 @@ If you’re already using your own custom field for this, you can [use Craft’s
     ```
 4. Remove the old field from each relevant field layout.
 
+For deployment, you’ll probably want to take a phased approach: upgrade your site, migrate off your existing field to the native one, then remove the existing field after you’ve migrated the data in all your environments.
+
 Don’t forget to update your templates and GraphQL queries!
 
 ::: warning
