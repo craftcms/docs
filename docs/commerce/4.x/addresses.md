@@ -18,7 +18,7 @@ Every order may have a shipping and billing address, and customers with accounts
 
 - The ability to use minimal [estimated addresses](#estimate-addresses) for calculating shipping and tax costs with minimal data entry prior to checkout.
 - Multiple ways of [updating cart addresses](#updating-cart-addresses) and avoid data re-entry.
-- Convenient handling of the [Countries & States](countries-states.md) used in addresses that store managers can fully customize.
+- Methods for working with the store’s [countries & states](countries-states.md) provided by Craft’s supporting [address repository](/4.x/addresses.md#address-repository).
 - A separate endpoint that can be used to allow customers to [manage their saved addresses](#customer-addresses).
 
 The store address is available via the [Store service](craf4:craft\commerce\services\Store):
@@ -137,9 +137,9 @@ This example creates a form for collecting the customer’s name and country, wh
 
   <input type="text" name="shippingAddress[firstName]" value="">
   <input type="text" name="shippingAddress[lastName]" value="">
-  <select name="shippingAddress[countryId]">
-    {% for id, name in craft.commerce.countries.getAllCountriesAsList() %}
-      <option value="{{ id }}">{{ name }}</option>
+  <select name="shippingAddress[countryCode]">
+    {% for code, name in craft.commerce.store.getStore().getCountriesList() %}
+      <option value="{{ code }}">{{ name }}</option>
     {% endfor %}
   </select>
   {{ hiddenInput('billingAddressSameAsShipping', '1') }}
@@ -264,7 +264,7 @@ An estimated address is an [Address model](commerce4:craft\commerce\models\Addre
 
 You can add or update an estimated addresses on the order with the same `commerce/cart/update-cart` form action.
 
-In this example we’ll first check for existing estimate addresses with the `estimatedShippingAddressId` and `estimatedBillingAddressId` attributes on the [cart](commerce4:craft\commerce\elements\Order) object, displaying a form to collect only the shipping country, state, and zip code if we don’t already have them:
+In this example we’ll first check for existing estimate addresses with the `estimatedShippingAddressId` and `estimatedBillingAddressId` attributes on the [cart](commerce4:craft\commerce\elements\Order) object, displaying a form to collect only the shipping country, state, and postal code if we don’t already have them:
 
 ```twig
 {% set cart = craft.commerce.carts.cart %}
@@ -276,23 +276,23 @@ In this example we’ll first check for existing estimate addresses with the `es
 
   {% if not cart.estimatedShippingAddressId %}
     {# Display country selection dropdown #}
-    <select name="estimatedShippingAddress[countryId]">
-      {% for key, option in craft.commerce.countries.allCountriesAsList %}
-        <option value="{{ key }}">{{ option }}</option>
+    <select name="estimatedShippingAddress[countryCode]">
+      {% for code, option in craft.commerce.store.getStore().getCountriesList() %}
+        <option value="{{ code }}">{{ option }}</option>
       {% endfor %}
     </select>
 
     {# Display state selection dropdown #}
-    <select name="estimatedShippingAddress[stateValue]">
-      {% for states in craft.commerce.states.allStatesAsList %}
+    <select name="estimatedShippingAddress[administrativeArea]">
+      {% for states in craft.commerce.store.getStore().getAdministrativeAreasListByCountryCode() %}
         {% for key, option in states %}
           <option value="{{ key }}">{{ option }}</option>
         {% endfor %}
       {% endfor %}
     </select>
 
-    {# Display a zip code input #}
-    <input type="text" name="estimatedShippingAddress[zipCode]" value="">
+    {# Display a postal code input #}
+    <input type="text" name="estimatedShippingAddress[postalCode]" value="">
   {% endif %}
 
 
