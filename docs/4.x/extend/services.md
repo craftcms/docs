@@ -44,7 +44,7 @@ public function init()
 }
 ```
 
-Plugins also have a special [config()](craft4:craft\base\PluginInterface::config()) method you can use instead if you’d like to make your service extendable at the project level:
+Plugins also have a special [config()](craft4:craft\base\PluginInterface::config()) method you can use instead if you’d like to make your service extensible at the project level:
 
 ```php
 public static function config(): array
