@@ -18,7 +18,7 @@ Every order may have a shipping and billing address, and customers with accounts
 
 - The ability to use minimal [estimated addresses](#estimate-addresses) for calculating shipping and tax costs with minimal data entry prior to checkout.
 - Multiple ways of [updating cart addresses](#updating-cart-addresses) and avoid data re-entry.
-- Convenient handling of the [Countries & States](countries-states.md) used in addresses thatstore managers can fully customize.
+- Convenient handling of the [Countries & States](countries-states.md) used in addresses that store managers can fully customize.
 - A separate endpoint that can be used to allow customers to [manage their saved addresses](#customer-addresses).
 
 The store address is available via the [Store service](craf4:craft\commerce\services\Store):
