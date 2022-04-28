@@ -171,6 +171,8 @@ Twig 3 also removed support for the `if` param in `{% for %}` tags, but you can 
 {% endfor %}
 ```
 
+The `{% cache %}` tag now stores any external references from `{% css %}` and `{% js %}` tags now, in addition to any inline content.
+
 ## Template Functions
 
 Some template functions have been removed completely:
