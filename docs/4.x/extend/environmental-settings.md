@@ -64,10 +64,10 @@ class MyModel extends Model
 To guide users when entering your setting’s value in the control panel, give your setting an autosuggest input.
 
 ```twig
-{% import "_includes/forms.twig" as forms %}
+{% import '_includes/forms.twig' as forms %}
 
 {{ forms.autosuggestField({
-  label: "Secret Key"|t('plugin-handle'),
+  label: 'Secret Key'|t('plugin-handle'),
   id: 'secret-key',
   name: 'secretKey',
   value: myModel.secretKey,

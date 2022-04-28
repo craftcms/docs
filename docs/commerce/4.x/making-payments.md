@@ -35,7 +35,7 @@ This manual form example assumes the availability of a `paymentForm` variable, a
 <ToggleTip :height="465">
 
 ```twig
-{% import "_includes/forms.twig" as forms %}
+{% import '_includes/forms.twig' as forms %}
 <form method="post">
   {{ csrfInput() }}
   {{ actionInput('commerce/payments/pay') }}
@@ -49,7 +49,7 @@ This manual form example assumes the availability of a `paymentForm` variable, a
     {{ forms.text({
       name: 'firstName',
       maxlength: 70,
-      placeholder: "First Name",
+      placeholder: 'First Name',
       autocomplete: false,
       class: 'card-holder-first-name'~(paymentForm.getErrors('firstName') ? ' error'),
       value: paymentForm.firstName,
@@ -59,7 +59,7 @@ This manual form example assumes the availability of a `paymentForm` variable, a
     {{ forms.text({
       name: 'lastName',
       maxlength: 70,
-      placeholder: "Last Name",
+      placeholder: 'Last Name',
       autocomplete: false,
       class: 'card-holder-last-name'~(paymentForm.getErrors('lastName') ? ' error'),
       value: paymentForm.lastName,
@@ -81,7 +81,7 @@ This manual form example assumes the availability of a `paymentForm` variable, a
     {{ forms.text({
       name: 'number',
       maxlength: 19,
-      placeholder: "Card Number",
+      placeholder: 'Card Number',
       autocomplete: false,
       class: 'card-number'~(paymentForm.getErrors('number') ? ' error'),
       value: paymentForm.number
@@ -91,14 +91,14 @@ This manual form example assumes the availability of a `paymentForm` variable, a
       name: 'expiry',
       class: 'card-expiry'~(paymentForm.getErrors('month') or paymentForm.getErrors('year') ? ' error'),
       type: 'tel',
-      placeholder: "MM / YYYY",
+      placeholder: 'MM / YYYY',
       value: paymentForm.expiry
     }) }}
 
     {{ forms.text({
       name: 'cvv',
       type: 'tel',
-      placeholder: "CVV",
+      placeholder: 'CVV',
       class: 'card-cvc'~(paymentForm.getErrors('cvv') ? ' error'),
       value: paymentForm.cvv
     }) }}
