@@ -447,7 +447,7 @@ Control panel template updates have largely been in support of the [unified elem
 If your Craft 3 plugin was using Craft’s editable table (via `editableTableField()` or `editableTable`), you may need to explicitly set `allowAdd`, `allowDelete`, and `allowReorder` to `true` for it to behave the same in Craft 4:
 
 ```twig
-{% import '_includes/forms' as forms %}
+{% import _includes/forms.twig' as forms %}
 
 {# Craft 3 #}
 {{ forms.editableTableField({
@@ -476,7 +476,7 @@ The control panel’s `_includes/forms` got a few new macros: `button`, `submitB
 The `button` and `submitButton` macros can each take a `spinner` option that will include markup for a loading animation you can use for Ajax requests:
 
 ```twig
-{% import '_includes/forms' as forms %}
+{% import '_includes/forms.twig' as forms %}
 
 {{ forms.button({
   label: 'Save a Copy',

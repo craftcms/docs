@@ -310,7 +310,7 @@ Note that [Element Editor HUDs](#editor-huds) do not automatically show a Title 
 ```php
 public function getEditorHtml(): string
 {
-    $html = \Craft::$app->getView()->renderTemplateMacro('_includes/forms', 'textField', [
+    $html = \Craft::$app->getView()->renderTemplateMacro('_includes/forms.twig', 'textField', [
         [
             'label' => \Craft::t('app', 'Title'),
             'siteId' => $this->siteId,
@@ -336,10 +336,10 @@ public function getEditorHtml(): string
 
 #### Managing Field Layouts
 
-If you want your element type to support custom fields, you will also need to create a page somewhere within the control panel for managing your element type’s field layout. The `_includes/forms.html` template provides a `fieldLayoutDesignerField` macro, which will output a field layout designer:
+If you want your element type to support custom fields, you will also need to create a page somewhere within the control panel for managing your element type’s field layout. The `_includes/forms.twig` template provides a `fieldLayoutDesignerField` macro, which will output a field layout designer:
 
 ```twig
-{% import '_includes/forms' as forms %}
+{% import '_includes/forms.twig' as forms %}
 
 {{ forms.fieldLayoutDesignerField({
   fieldLayout: craft.app.fields.getLayoutByType(
@@ -817,7 +817,7 @@ By default the element editor HUD will only include custom fields. To include a 
 ```php
 public function getEditorHtml(): string
 {
-    $html = \Craft::$app->getView()->renderTemplateMacro('_includes/forms', 'textField', [
+    $html = \Craft::$app->getView()->renderTemplateMacro('_includes/forms.twig', 'textField', [
         [
             'label' => \Craft::t('app', 'Title'),
             'siteId' => $this->siteId,

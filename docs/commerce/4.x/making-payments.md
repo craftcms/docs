@@ -35,7 +35,7 @@ This manual form example assumes the availability of a `paymentForm` variable, a
 <ToggleTip :height="465">
 
 ```twig
-{% import "_includes/forms" as forms %}
+{% import "_includes/forms.twig" as forms %}
 <form method="post">
   {{ csrfInput() }}
   {{ actionInput('commerce/payments/pay') }}

@@ -149,7 +149,7 @@ Most input types have two macros: one for outputting _just_ the input; and anoth
 For example, if you just want to output a date input, but nothing else, you could use the `date` macro:
 
 ```twig
-{% import '_includes/forms' as forms %}
+{% import '_includes/forms.twig' as forms %}
 
 {{ forms.date({
   id: 'start-date',
@@ -161,7 +161,7 @@ For example, if you just want to output a date input, but nothing else, you coul
 However if you want to wrap the input with a label, author instructions, a “Required” indicator, and any validation errors, you could use the `dateField` macro instead:
 
 ```twig
-{% import '_includes/forms' as forms %}
+{% import '_includes/forms.twig' as forms %}
 
 {{ forms.dateField({
   label: 'Start Date'|t('plugin-handle'),

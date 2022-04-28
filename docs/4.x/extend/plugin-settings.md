@@ -114,18 +114,18 @@ Plugins can also provide a settings page in the control panel, which may make it
 To give your plugin a settings page, create a `templates/` directory within your plugin’s source directory, and create a `settings.twig` file within it:
 
 ```twig
-{% import "_includes/forms" as forms %}
+{% import "_includes/forms.twig" as forms %}
 
 {{ forms.textField({
   first: true,
   label: "Foo",
-  name: 'foo',
+  name: "foo",
   value: settings.foo
 }) }}
 
 {{ forms.textField({
   label: "Bar",
-  name: 'bar',
+  name: "bar",
   value: settings.bar
 }) }}
 ```
