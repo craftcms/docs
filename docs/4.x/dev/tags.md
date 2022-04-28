@@ -61,6 +61,8 @@ While carefully-placed `{% cache %}` tags can offer significant boosts to perfor
 ::: tip
 The `{% cache %}` tag captures code and styles registered with `{% js %}`, \
 `{% script %}` and `{% css %}` tags.
+
+External references from `{% js %}` and `{% css %}` tags will be stored as well.
 :::
 
 <small>
