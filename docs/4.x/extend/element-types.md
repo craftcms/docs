@@ -305,32 +305,9 @@ public static function hasTitles(): bool
 }
 ```
 
-Note that [Element Editor HUDs](#editor-huds) do not automatically show a Title field, so you will need to add it yourself:
-
-```php
-public function getEditorHtml(): string
-{
-    $html = \Craft::$app->getView()->renderTemplateMacro('_includes/forms.twig', 'textField', [
-        [
-            'label' => \Craft::t('app', 'Title'),
-            'siteId' => $this->siteId,
-            'id' => 'title',
-            'name' => 'title',
-            'value' => $this->title,
-            'errors' => $this->getErrors('title'),
-            'first' => true,
-            'autofocus' => true,
-            'required' => true
-        ]
-    ]);
-
-    // ...
-
-    $html .= parent::getEditorHtml();
-
-    return $html;
-}
-```
+::: tip
+Don’t forget to include a title field in your field layout!
+:::
 
 ### Custom Fields
 
