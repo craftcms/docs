@@ -447,7 +447,7 @@ Control panel template updates have largely been in support of the [unified elem
 If your Craft 3 plugin was using Craft’s editable table (via `editableTableField()` or `editableTable`), you may need to explicitly set `allowAdd`, `allowDelete`, and `allowReorder` to `true` for it to behave the same in Craft 4:
 
 ```twig
-{% import '_includes/forms' as forms %}
+{% import _includes/forms.twig' as forms %}
 
 {# Craft 3 #}
 {{ forms.editableTableField({
@@ -476,7 +476,7 @@ The control panel’s `_includes/forms` got a few new macros: `button`, `submitB
 The `button` and `submitButton` macros can each take a `spinner` option that will include markup for a loading animation you can use for Ajax requests:
 
 ```twig
-{% import '_includes/forms' as forms %}
+{% import '_includes/forms.twig' as forms %}
 
 {{ forms.button({
   label: 'Save a Copy',
@@ -789,3 +789,25 @@ Element-specific [control panel template hooks](template-hooks.md#control-panel-
 With the new [unified element editor](#unified-element-editor), anything that needs to be included in the editor should be provided in a field layout.
 
 If your plugin appended non-field content to a main content area, however, you can use Craft 4’s [ElementsController::EVENT_DEFINE_EDITOR_CONTENT](craft4:craft\controllers\ElementsController::EVENT_DEFINE_EDITOR_CONTENT) to check the event object’s `$element` property and optionally append markup to `$html`.
+
+## GraphQL
+
+[TypeManager::prepareFieldDefinitions()](craft4:craft\gql\TypeManager::prepareFieldDefinitions()) has been deprecated. Use [Gql::prepareFieldDefinitions()](craft4:craft\services\Gql::prepareFieldDefinitions()) instead:
+
+```php
+// Craft 3
+public static function getFieldDefinitions(): array
+{
+    return craft\gql\TypeManager::prepareFieldDefinitions([
+        // ...
+    ], self::getName());
+}
+
+// Craft 4
+public static function getFieldDefinitions(): array
+{
+    return Craft::$app->getGql()->prepareFieldDefinitions([
+        // ...
+    ], self::getName());
+}
+```

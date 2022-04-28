@@ -56,27 +56,27 @@ Whether the user may click the “Refund” button on a successful payment.
 
 Whether the user can manage promotions.
 
-#### Edit Sales
+#### Edit sales
 
 Whether the user can edit existing sales.
 
-#### Create Sales
+#### Create sales
 
 Whether the user can create new sales.
 
-#### Delete Sales
+#### Delete sales
 
 Whether the user can delete sales.
 
-#### Edit Discounts
+#### Edit discounts
 
 Whether the user can edit existing discounts.
 
-#### Create Discounts
+#### Create discounts
 
 Whether the user can create new discounts.
 
-#### Delete Discounts
+#### Delete discounts
 
 Whether the user can delete discounts.
 

@@ -26,8 +26,8 @@ Now create a new [form page template](./cp-templates.md#form-pages) that contain
 The model being edited will be available to the template as a predefined variable (e.g. `event`). The template can refer to that model when passing current field values and validation errors to the [form inputs](./cp-templates.md#form-inputs).
 
 ```twig
-{% extends '_layouts/cp' %}
-{% import '_includes/forms' as forms %}
+{% extends '_layouts/cp.twig' %}
+{% import '_includes/forms.twig' as forms %}
 
 {% set title = 'Edit Event'|t('my-plugin') %}
 {% set fullPageForm = true %}
