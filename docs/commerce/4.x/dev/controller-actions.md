@@ -8,10 +8,7 @@ Action | Description
 <badge vertical="baseline" type="verb">GET</badge> [cart/get-cart](#get-cart-get-cart) | Returns the current cart as JSON.
 <badge vertical="baseline" type="verb">GET</badge> [cart/load-cart](#get-cart-load-cart) | Loads a given cart into the current session.
 <badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | Updates the cart by adding purchasables, updating line items, or updating various cart attributes.
-<badge vertical="baseline" type="verb">POST</badge> [customer-addresses/delete](#post-customer-addresses-delete) | Deletes a customer’s address.
-<badge vertical="baseline" type="verb">GET</badge> [customer-addresses/get-addresses](#get-customer-addresses-get-addresses) | Returns a customer’s addresses as JSON.
 <badge vertical="baseline" type="verb">GET</badge> [customer-orders/get-orders](#get-customer-orders-get-orders) | Returns a customer’s orders as JSON.
-<badge vertical="baseline" type="verb">POST</badge> [customer-addresses/save](#post-customer-addresses-save) | Creates or updates a customer’s address.
 <badge vertical="baseline" type="verb">GET</badge> [downloads/pdf](#get-downloads-pdf) | Returns an order PDF as a file.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/add](#post-payment-sources-add) | Creates a new payment source.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/delete](#post-payment-sources-delete) | Deletes a payment source.
@@ -195,100 +192,6 @@ Success | Output
 <x-mark/> | JSON object with an error message in its `error` key.
 
 </span>
-
-## <badge vertical="baseline" type="verb">POST</badge> `customer-addresses/save`
-
-Creates or updates a customer’s address. Refreshes the cart if it’s using the provided address.
-
-### Supported Params
-
-The following params can be sent with the request:
-
-Param | Description
------ | -----------
-`address.{$attr}` | Address object with any of the key-value pairs in the system’s [address lines](../addresses.md#address-lines).
-`address.id` | Required address ID to be edited, which must belong to the current customer.
-`fields[]` | Custom fields to be saved on the cart if it’s using the provided address.
-`makePrimaryBillingAddress` | Whether to save as the primary billing address.
-`makePrimaryShippingAddress` | Whether to save as the primary shipping address.
-
-### Output
-
-The output of the action depends on whether the address was saved successfully and the request included an `Accept: application/json` header.
-
-#### Standard Request
-
-<span class="croker-table">
-
-Success | Output
-------- | ------
-<check-mark/> | Redirect response to the POST URI. Success message will be set on the flash `notice` key.
-<x-mark/> | Routed per the POST URI with an `address` variable. A failure message will be set on the flash `error` key.
-
-</span>
-
-#### With JSON Request Header
-
-<span class="croker-table">
-
-Success | Output
-------- | ------
-<check-mark/> | JSON object with a `success` key with a value of `true`, and the address model on its `address` key.
-<x-mark/> | JSON object with an error message in its `error` key. If there are validation errors, those will be listed in an array on the `errors` key.
-
-</span>
-
-## <badge vertical="baseline" type="verb">POST</badge> `customer-addresses/delete`
-
-Deletes one of the current customer’s addresses.
-
-::: tip
-If the deleted address is used in the cart, that relationship will automatically be removed.
-:::
-
-### Supported Params
-
-The following params can be sent with the request:
-
-Param | Description
------ | -----------
-`id` | ID of the address to be removed, which must belong to the customer.
-
-### Output
-
-The output of the action depends on whether the cart was removed successfully and the request included an `Accept: application/json` header.
-
-#### Standard Request
-
-<span class="croker-table">
-
-Success | Output
-------- | ------
-<check-mark/> | Redirect response to the POST URI. Success message will be set on the flash `notice` key.
-<x-mark/> | Routed per the POST URI. A failure message will be set on the flash `error` key.
-
-</span>
-
-#### With JSON Request Header
-
-<span class="croker-table">
-
-Success | Output
-------- | ------
-<check-mark/> | JSON object: `{ "success": true }`.
-<x-mark/> | JSON object with an error message in its `error` key.
-
-</span>
-
-## <badge vertical="baseline" type="verb">GET</badge> `customer-addresses/get-addresses`
-
-Returns the current customer’s addresses as JSON.
-
-The request must include `Accept: application/json` in its headers.
-
-### Output
-
-Returns a JSON object with a `success` key and `true` value, and an `addresses` key with an array of the customer’s addresses.
 
 ## <badge vertical="baseline" type="verb">GET</badge> `customer-orders/get-orders`
 
