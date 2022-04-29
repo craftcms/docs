@@ -358,7 +358,11 @@ This is a simplified version of [`shop/cart/load.twig`](https://github.com/craft
 
 #### Restoring Previous Cart Contents
 
-If the customer’s a registered user they may want to continue shopping from another browser or computer. If that customer has an empty cart—as they would by default—and they log into the site, the any previous cart will automatically be loaded.
+If the customer’s a registered user they may want to continue shopping from another browser or computer. If that customer has an empty cart—as they would by default—and they log into the site, any previous cart will automatically be loaded.
+
+::: tip
+If a customer is a guest with a cart and they create an account, that cart will be maintained after logging in.
+:::
 
 You can allow a customer to see previously-loaded carts:
 
@@ -431,7 +435,9 @@ You could then loop over the line items in those older carts and allow the custo
 
 A logged-in customer’s cart is stored in a cookie that persists across sessions, so they can close their browser and return to the store without losing their cart.
 
-You can call the `forgetCart()` method directly, however, to remove the current cart cookie. The cart itself will not be deleted, but disassociated with any sessions until it’s loaded again.
+If the customer logs out, their cart will automatically be forgotten.
+
+You can call the `forgetCart()` method manually to remove the current cart cookie. The cart itself will not be deleted, but disassociated with any sessions until it’s loaded again.
 
 ::: code
 ```twig
