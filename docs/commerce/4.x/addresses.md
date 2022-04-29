@@ -16,7 +16,7 @@ Your front end can work with addresses [by way of the cart](#cart-addresses) and
 
 Every order may have a shipping and billing address, and customers with accounts can save and re-use addresses when placing new orders. How you collect and validate addresses on the front end is up to you. Commerce provides tools that help streamline address management:
 
-- The ability to use minimal [estimated addresses](#estimate-addresses) for calculating shipping and tax costs with minimal data entry prior to checkout.
+- The ability to use [estimated addresses](#estimate-addresses) to calculate shipping and tax costs with minimal data entry before checkout.
 - Multiple ways of [updating cart addresses](#updating-cart-addresses) and avoid data re-entry.
 - Methods for working with the store’s [countries & states](countries-states.md) provided by Craft’s supporting [address repository](/4.x/addresses.md#address-repository).
 - A separate endpoint that can be used to allow customers to [manage their saved addresses](#customer-addresses).
