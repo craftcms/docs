@@ -84,8 +84,6 @@ See Craft’s [Date](craft4:craft\fields\Date) field for an example that uses tw
 
 Any column Craft creates in the `content` table will automatically get a random 9-character suffix like `_ycpsotpa`. This ensures column names are unique even in the rare case that identical handles are used. You can get this suffix from any field instance from its `columnSuffix` property.
 
-This automatic suffix behavior was introduced in Craft 3.7 and only impacts existing fields when they’re saved—not via migration when Craft is updated.
-
 If you’d rather have your custom field type manage its own content in the database, you can return `false` for hasContentColumn()—just know that you’ll have to manually account for several things you otherwise get for free when Craft manages its content fields in the database:
 
 - Automatic creation, duplication, retrieval, and deletion of field content in the database.
