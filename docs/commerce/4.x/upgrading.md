@@ -173,7 +173,7 @@ $storeAddress = \craft\commerce\Plugin::getInstance()
 
 ### Custom Address Fields and Formatting
 
-The concept of address lines has gone away along with [DefineAddressLinesEvent](commerce4:craft\commerce\events\DefineAddressLinesEvent). Use Craft’s [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()) instead.
+The concept of address lines has gone away along with [DefineAddressLinesEvent](commerce3:craft\commerce\events\DefineAddressLinesEvent). Use Craft’s [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()) instead.
 
 ### Address Template Changes
 
