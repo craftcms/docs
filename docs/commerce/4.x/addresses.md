@@ -323,7 +323,7 @@ A full example of this can be seen in the [example templates](example-templates.
 
 ## Customer Addresses
 
-Your front end modify customer addresses indepdendently of the cart.
+Your front end can modify customer addresses indepdendently of the cart.
 
 When a customer is logged in and checks out with a new address, that address is saved to their address book. (This is not true for guests since they don’t have any need for an address book.)
 
