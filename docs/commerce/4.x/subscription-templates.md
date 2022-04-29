@@ -28,17 +28,19 @@ This example creates a form for each available plan, posting the selection to th
     <h4>{{ plan.name }}</h4>
 
     {% set paymentSources = craft.commerce.
-        getPaymentSources().
-        getAllGatewayPaymentSourcesByUserId(
-            plan.getGateway().id,
-            currentUser.id ?? null
-        )
+      getPaymentSources().
+      getAllGatewayPaymentSourcesByUserId(
+        plan.getGateway().id,
+        currentUser.id ?? null
+      )
     %}
 
     {# If we don’t have a saved payment soruce, collect details for the gateway #}
     {% if not paymentSources|length %}
       <div class="paymentForm">
-        {{ plan.getGateway().getPaymentFormHtml({})|raw }}
+        {% namespace plan.getGateway().handle|commercePaymentFormNamespace %}
+          {{ plan.getGateway().getPaymentFormHtml({})|raw }}
+        {% endnamespace %}
       </div>
     {% endif %}
 
@@ -64,7 +66,9 @@ To cancel a subscription you can use the following template. It assumes the `sub
   {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
   {{ redirectInput('shop/services') }}
 
-  {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml()|raw }}
+  {% namespace subscription.getGateway().handle|commercePaymentFormNamespace %}
+    {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml()|raw }}
+  {% endnamespace %}
 
   <button>Unsubscribe</button>
 </form>

@@ -10,7 +10,7 @@ It’s most common to have a customer provide information for the payment gatewa
 
 In this example, we’ll assume a customer has finished shopping and building a cart and that we know what payment gateway they intend to use. (It could be that the store only uses one gateway, or they explicitly chose a gateway in a previous step.)
 
-The payment gateway is set on the cart. This template uses `cart.gateway.getPaymentFormHtml()` to render the form fields required by the payment gateway, posting them to the [`commerce/payments/pay`](./dev/controller-actions.html#post-payments-pay) controller action:
+The payment gateway is set on the cart, and any forms meant for it must be namespaced. This template uses `cart.gateway.getPaymentFormHtml()` to render the form fields required by the payment gateway, posting them to the [`commerce/payments/pay`](./dev/controller-actions.html#post-payments-pay) controller action:
 
 ```twig
 {# @var cart craft\commerce\elements\Order #}
@@ -20,7 +20,9 @@ The payment gateway is set on the cart. This template uses `cart.gateway.getPaym
   {{ redirectInput('/commerce/customer/order?number={number}') }}
   {{ hiddenInput('cancelUrl', '/commerce/checkout/payment'|hash) }}
 
-  {{ cart.gateway.getPaymentFormHtml({})|raw }}
+  {% namespace cart.gateway.handle|commercePaymentFormNamespace %}
+    {{ cart.gateway.getPaymentFormHtml({})|raw }}
+  {% endnamespace %}
 
   <button>Pay Now</button>
 </form>
@@ -42,76 +44,78 @@ This manual form example assumes the availability of a `paymentForm` variable, a
   {{ redirectInput('/commerce/customer/order?number={number}') }}
   {{ hiddenInput('cancelUrl', '/commerce/checkout/payment'|hash) }}
 
-  {# First and last name #}
-  <fieldset>
-    <legend>Card Holder</legend>
+  {% namespace cart.gateway.handle|commercePaymentFormNamespace %}
+    {# First and last name #}
+    <fieldset>
+      <legend>Card Holder</legend>
 
-    {{ forms.text({
-      name: 'firstName',
-      maxlength: 70,
-      placeholder: 'First Name',
-      autocomplete: false,
-      class: 'card-holder-first-name'~(paymentForm.getErrors('firstName') ? ' error'),
-      value: paymentForm.firstName,
-      required: true,
-    }) }}
+      {{ forms.text({
+        name: 'firstName',
+        maxlength: 70,
+        placeholder: 'First Name',
+        autocomplete: false,
+        class: 'card-holder-first-name'~(paymentForm.getErrors('firstName') ? ' error'),
+        value: paymentForm.firstName,
+        required: true,
+      }) }}
 
-    {{ forms.text({
-      name: 'lastName',
-      maxlength: 70,
-      placeholder: 'Last Name',
-      autocomplete: false,
-      class: 'card-holder-last-name'~(paymentForm.getErrors('lastName') ? ' error'),
-      value: paymentForm.lastName,
-      required: true,
-    }) }}
+      {{ forms.text({
+        name: 'lastName',
+        maxlength: 70,
+        placeholder: 'Last Name',
+        autocomplete: false,
+        class: 'card-holder-last-name'~(paymentForm.getErrors('lastName') ? ' error'),
+        value: paymentForm.lastName,
+        required: true,
+      }) }}
 
-    {% set errors = [] %}
-    {% for attributeKey in ['firstName', 'lastName'] %}
-      {% set errors = errors|merge(paymentForm.getErrors(attributeKey)) %}
-    {% endfor %}
+      {% set errors = [] %}
+      {% for attributeKey in ['firstName', 'lastName'] %}
+        {% set errors = errors|merge(paymentForm.getErrors(attributeKey)) %}
+      {% endfor %}
 
-    {{ forms.errorList(errors) }}
-  </fieldset>
+      {{ forms.errorList(errors) }}
+    </fieldset>
 
-  {# Card number #}
-  <fieldset>
-    <legend>Card</legend>
+    {# Card number #}
+    <fieldset>
+      <legend>Card</legend>
 
-    {{ forms.text({
-      name: 'number',
-      maxlength: 19,
-      placeholder: 'Card Number',
-      autocomplete: false,
-      class: 'card-number'~(paymentForm.getErrors('number') ? ' error'),
-      value: paymentForm.number
-    }) }}
+      {{ forms.text({
+        name: 'number',
+        maxlength: 19,
+        placeholder: 'Card Number',
+        autocomplete: false,
+        class: 'card-number'~(paymentForm.getErrors('number') ? ' error'),
+        value: paymentForm.number
+      }) }}
 
-    {{ forms.text({
-      name: 'expiry',
-      class: 'card-expiry'~(paymentForm.getErrors('month') or paymentForm.getErrors('year') ? ' error'),
-      type: 'tel',
-      placeholder: 'MM / YYYY',
-      value: paymentForm.expiry
-    }) }}
+      {{ forms.text({
+        name: 'expiry',
+        class: 'card-expiry'~(paymentForm.getErrors('month') or paymentForm.getErrors('year') ? ' error'),
+        type: 'tel',
+        placeholder: 'MM / YYYY',
+        value: paymentForm.expiry
+      }) }}
 
-    {{ forms.text({
-      name: 'cvv',
-      type: 'tel',
-      placeholder: 'CVV',
-      class: 'card-cvc'~(paymentForm.getErrors('cvv') ? ' error'),
-      value: paymentForm.cvv
-    }) }}
+      {{ forms.text({
+        name: 'cvv',
+        type: 'tel',
+        placeholder: 'CVV',
+        class: 'card-cvc'~(paymentForm.getErrors('cvv') ? ' error'),
+        value: paymentForm.cvv
+      }) }}
 
-    {% set errors = [] %}
-    {% for attributeKey in ['number', 'month', 'year', 'cvv'] %}
-      {% set errors = errors|merge(paymentForm.getErrors(attributeKey)) %}
-    {% endfor %}
+      {% set errors = [] %}
+      {% for attributeKey in ['number', 'month', 'year', 'cvv'] %}
+        {% set errors = errors|merge(paymentForm.getErrors(attributeKey)) %}
+      {% endfor %}
 
-    {{ forms.errorList(errors) }}
-  </fieldset>
+      {{ forms.errorList(errors) }}
+    </fieldset>
 
-  <button>Pay Now</button>
+    <button>Pay Now</button>
+  {% endnamespace %}
 </form>
 ```
 
@@ -185,12 +189,12 @@ This example provides a dropdown menu that allows the customer to choose half or
 %}
 
 <select name="paymentAmount">
-    <option value="{{ halfAmount|hash }}">50%
-      ({{ halfAmount|commerceCurrency(cart.paymentCurrency) }})
-    </option>
-    <option value="{{ fullAmount|hash }}">100%
-      ({{ fullAmount|commerceCurrency(cart.paymentCurrency) }})
-    </option>
+  <option value="{{ halfAmount|hash }}">50%
+    ({{ halfAmount|commerceCurrency(cart.paymentCurrency) }})
+  </option>
+  <option value="{{ fullAmount|hash }}">100%
+    ({{ fullAmount|commerceCurrency(cart.paymentCurrency) }})
+  </option>
 </select>
 
 {# ... payment form ... #}
@@ -226,7 +230,9 @@ Here we’re pretending the relevant order number is 12345, the customer’s ema
   {{ hiddenInput('email', email) }}
   {{ hiddenInput('orderNumber', cart.number) }}
 
-  {{ cart.gateway.getPaymentFormHtml({})|raw }}
+  {% namespace cart.gateway.handle|commercePaymentFormNamespace %}
+    {{ cart.gateway.getPaymentFormHtml({})|raw }}
+  {% endnamespace %}
 
   <button>Submit</button>
 </form>
