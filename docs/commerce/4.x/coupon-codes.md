@@ -1,20 +1,32 @@
-# Coupon Codes
+# Coupon Codes <badge type="edition" vertical="middle" title="Discounts are only available in Commerce Pro">Pro</badge>
 
-Coupon codes are unique strings that may be entered by a user in order to receive a discount.
+Coupon codes are unique strings customers may enter for an order to receive a [discount](discounts.md).
 
-::: warning
-Discounts are only available in the [Pro edition](editions.md) of Craft Commerce.
+Craft Commerce treats coupon codes as conditions within a discount promotion. Go to **Commerce** → **Promotions** → **Discounts**, select an existing promotion or press **+ New discount** to start a new one, and select to the “Coupons” tab:
+
+![Screenshot of a new discount’s settings with its “Coupons” tab selected, displaying a “Generate” button and a separate “Add a coupon button”](./images/discount-coupons.png)
+
+There are no coupon codes by default, meaning no coupon code is necessary for the discount to work.
+
+## Adding Coupon Codes
+
+You can click **+ Add a coupon** to create them one at a time, where each one needs a **Code** and optional **Max Uses**. Individual code uses will be updated automatically in the **Uses** column each time an order is completed using that code for a matching discount:
+
+![Screenshot of a row in the Coupons table, with three columns: “Code”, “Uses”, and “Max Uses”](./images/coupon-code.png)
+
+Press **Generate** if you’d like to create codes in bulk:
+
+![Screenshot of the “Generate” HUD, with a “Number of Coupons” field and a “Generated Coupon Format” field](./images/generate-coupons.png)
+
+Set the number of coupons you’d like to generate along with a desired format, where pound signs (`#`) will be replaced with random letters. Press **Submit** and they’ll be generated and added to the set.
+
+::: tip
+To make a coupon code no longer available for use, you can either delete it from the table or set its **Max Uses** to `0`.
 :::
 
-With Craft Commerce, coupon codes are set up as a condition within a discount promotion.
+## Using a Coupon Code
 
-To create a new discount promotion, navigate to **Commerce** → **Promotions** → **Discounts** in the control panel. To see the coupon condition, select to the “Coupon” tab.
-
-An empty coupon field on the discount means no coupon is needed for the discount to work. Adding a coupon requires that a coupon is submitted to the cart. This makes the discount available to match the order but still needs to match all other discount conditions.
-
-Read more about [Discounts](discounts.md).
-
-## Using a coupon
+Adding a coupon requires that a coupon is submitted to the cart. This makes the discount available to match the order but still needs to match all other discount conditions.
 
 To add a coupon to the cart, a customer submits the `couponCode` parameter using the `commerce/cart/update-cart` form action.
 
@@ -40,7 +52,7 @@ Example:
 
 Only one coupon code can exist on the cart at a time. To see the value of the current cart’s coupon code, use `{{ cart.couponCode }}`.
 
-You can retrieve the discount associated with the coupon code using `craft.commerce.discounts.getDiscountByCode`:
+You can retrieve the discount associated with the coupon code using `craft.commerce.discounts.getDiscountByCode()`:
 
 ```twig
 {# @var discount craft\commerce\models\Discount #}
