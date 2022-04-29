@@ -7,8 +7,14 @@ Commerce Variants fields allow you to relate [product variants](products-variant
 Commerce Variants fields have the following settings:
 
 - **Sources** – the product types whose variants you want to relate entries from. (Default is “All”.)
-- **Limit** – the maximum number of products that can be related with the field at once. (Default is no limit.)
-- **Selection Label** – the label to be shown on the field’s selection button. (Default is “Add a variant.)
+- **Min Relations** – the minimum number of variants that must be selected. (Default is none.)
+- **Max Relations** – the maximum number of variants that can be selected. (Default is no limit.)
+- **Selection Label** – the label to be shown on the field’s selection button. (Default is “Add a variant”.)
+- **Validate related product variants** – whether validation errors on selected variants should prevent the source element from being saved. (Default is un-checked.)
+
+### Advanced
+
+- **Allow self relations** – whether the source element should be able to select itself in this field.
 
 ## The Field
 

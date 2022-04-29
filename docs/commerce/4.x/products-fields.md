@@ -7,7 +7,7 @@ Commerce Products fields allow you to relate [products](products-variants.md#pro
 Commerce Products fields have the following settings:
 
 - **Sources** – the product types you want to relate entries from. (Default is “All”.)
-- **Min Relations** – the minimum number of products that must be selected. (Default is no minimum.)
+- **Min Relations** – the minimum number of products that must be selected. (Default is none.)
 - **Max Relations** – the maximum number of products that can be selected. (Default is no limit.)
 - **Selection Label** – the label to be shown on the field’s selection button. (Default is “Add a product”.)
 - **Validate related products** – whether validation errors on selected products should prevent the source element from being saved. (Default is un-checked.)
