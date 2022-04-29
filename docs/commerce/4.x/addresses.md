@@ -8,7 +8,7 @@ Commerce manages shipping and billing addresses using Craft’s [Address](craft4
 
 In the control panel, you’ll find addresses within the context of Orders and Customers. A Store Location may also be entered at **Commerce** → **Store Settings** → **Store** → **Store Location**.
 
-You can also manage any customer’s addresses from their user account once you’ve added the native Addresses field to Users’ Field Layout.
+You manage any customer’s addresses from their user account once you’ve added the native Addresses field to Users’ Field Layout.
 
 ## Managing Addresses
 
