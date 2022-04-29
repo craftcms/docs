@@ -241,7 +241,7 @@ If you’d like to have the customer pay with a different gateway than whatever�
 ```
 
 ::: warning
-During this process the cart or order is never in the user’s session; they could be paying for a cart even with a separate cart in their current session.
+A cart cookie is not created during this process; the user could be paying for a cart even while they have a different cart loaded.
 :::
 
 ## Partial Payments in the Control Panel

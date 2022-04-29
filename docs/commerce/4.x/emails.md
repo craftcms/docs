@@ -170,7 +170,7 @@ Syntax issues, undeclared variables, or missing information may prevent template
 4. **Make sure included PDFs render properly.**\
 If you’re including a [PDF](pdfs.md), it could have its own rendering issues that cause sending to fail. Be sure to preview the relevant PDF separately and ensure it’s working as expected.
 5. **Avoid cart and session references.**\
-Emails are sent by queue processes that don’t have access to sessions or carts that depend on them. References to `craft.commerce.carts.cart` or `craft.commerce.customers.customer`, for example, will result in session-related errors.
+Emails are sent by queue processes that don’t have access to cookies or sessions the cart depends on. References to `craft.commerce.carts.cart` or `craft.commerce.customers.customer`, for example, will result in session-related errors.
 
 Commerce adds email jobs to the queue with [high priority](/4.x/extend/queue-jobs.md#specifying-priority) for drivers that support it. This helps ensure outgoing messages don’t get stuck behind slow, long-running tasks.
 

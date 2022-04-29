@@ -78,7 +78,7 @@ axios.get('', {
 ```
 :::
 
-Either of the examples above will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
+Either of the examples above will generate a new cart cookie if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
 
 To see what cart information you can use in your templates, take a look at the [Order](commerce4:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig).
 
@@ -293,14 +293,14 @@ Each line item includes several totals:
 
 ### Loading a Cart
 
-Commerce provides a `commerce/cart/load-cart` endpoint for loading an existing cart into the current customer’s session.
+Commerce provides a `commerce/cart/load-cart` endpoint for loading an existing cart into a cookie for the current customer.
 
 You can have the user interact with the endpoint by either [navigating to a URL](#loading-a-cart-with-a-url) or by [submitting a form](#loading-a-cart-with-a-form). Either way, the cart number is required.
 
 Each method will store any errors in the session’s error flash data (`craft.app.session.getFlash('error')`), and the cart being loaded can be active or inactive.
 
 ::: tip
-If the desired cart belongs to a user, that user must be logged in to load it into their session.
+If the desired cart belongs to a user, that user must be logged in to load it into a browser cookie.
 :::
 
 The [`loadCartRedirectUrl`](config-settings.md#loadCartRedirectUrl) setting determines where the customer will be sent by default after the cart’s loaded.
@@ -358,16 +358,16 @@ This is a simplified version of [`shop/cart/load.twig`](https://github.com/craft
 
 #### Restoring Previous Cart Contents
 
-If the customer’s a registered user they may want to continue shopping from another browser or computer. If that customer has an empty cart—as they would by default—and they log into the site, the cart from a previous session will automatically be loaded.
+If the customer’s a registered user they may want to continue shopping from another browser or computer. If that customer has an empty cart—as they would by default—and they log into the site, the any previous cart will automatically be loaded.
 
-You can allow a customer to see carts from previous logged-in sessions:
+You can allow a customer to see previously-loaded carts:
 
 ::: code
 ```twig
 {% if currentUser %}
   {% set currentCart = craft.commerce.carts.cart %}
   {% if currentCart.id %}
-    {# Return all incomplete carts *except* the one from this session #}
+    {# Return all incomplete carts *except* the currently-loaded one #}
     {% set oldCarts = craft.orders()
       .isCompleted(false)
       .id('not '~currentCart.id)
@@ -390,7 +390,7 @@ $currentUser = Craft::$app->getUser()->getIdentity();
 if ($currentUser) {
     $currentCart = Commerce::getInstance()->getCarts()->getCart();
     if ($currentCart->id) {
-        // return all incomplete carts *except* the one from this session
+        // Return all incomplete carts *except* the currently-loaded one
         $oldCarts = Order::findAll()
             ->isCompleted(false)
             ->id('not '.$currentCart->id)
@@ -429,7 +429,9 @@ You could then loop over the line items in those older carts and allow the custo
 
 ### Forgetting a Cart
 
-A logged-in customer’s cart is removed from their session automatically when they log out. You can call the `forgetCart()` method directly at any time to remove the current cart from the session. The cart itself will not be deleted, but only disassociated with the active session.
+A logged-in customer’s cart is stored in a cookie that persists across sessions, so they can close their browser and return to the store without losing their cart.
+
+You can call the `forgetCart()` method directly, however, to remove the current cart cookie. The cart itself will not be deleted, but disassociated with any sessions until it’s loaded again.
 
 ::: code
 ```twig
@@ -467,7 +469,7 @@ There are three ways to identify an order: by order number, short order number, 
 
 #### Order Number
 
-The order number is a hash generated when the cart is first created in the user’s session. It exists even before the cart is saved in the database, and remains the same for the entire life of the order.
+The order number is a hash generated when the cart cookie is first created. It exists even before the cart is saved in the database, and remains the same for the entire life of the order.
 
 This is different from the order reference number, which is only generated after the cart has been completed and becomes an order.
 

@@ -6,7 +6,7 @@ Action | Description
 ------ | -----------
 <badge vertical="baseline" type="verb">POST</badge> [cart/complete](#post-cart-complete) | Completes an order without payment.
 <badge vertical="baseline" type="verb">GET</badge> [cart/get-cart](#get-cart-get-cart) | Returns the current cart as JSON.
-<badge vertical="baseline" type="verb">GET</badge> [cart/load-cart](#get-cart-load-cart) | Loads a given cart into the current session.
+<badge vertical="baseline" type="verb">GET</badge> [cart/load-cart](#get-cart-load-cart) | Loads a cookie for the given cart.
 <badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | Updates the cart by adding purchasables, updating line items, or updating various cart attributes.
 <badge vertical="baseline" type="verb">POST</badge> [customer-addresses/delete](#post-customer-addresses-delete) | Deletes a customer’s address.
 <badge vertical="baseline" type="verb">GET</badge> [customer-addresses/get-addresses](#get-customer-addresses-get-addresses) | Returns a customer’s addresses as JSON.
@@ -76,7 +76,7 @@ Success | Output
 
 ## <badge vertical="baseline" type="verb">GET</badge> `cart/get-cart`
 
-Returns the [current cart](../orders-carts.md#fetching-a-cart) as JSON. A new cart will be generated in the session if one doesn’t already exist.
+Returns the [current cart](../orders-carts.md#fetching-a-cart) as JSON. A new cart cookie will be generated if one doesn’t already exist.
 
 The request must include `Accept: application/json` in its headers.
 
@@ -159,7 +159,7 @@ Success | Output
 
 ## <badge vertical="baseline" type="verb">GET</badge> `cart/load-cart`
 
-Loads a given cart into the current session.
+Loads a cookie for the specified cart.
 
 ### Supported Params
 

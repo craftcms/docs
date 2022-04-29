@@ -62,3 +62,29 @@ Not _everything_ should be stored in the project config. Some items are consider
 - Tax rates
 - Order elements
 - Products & Variant elements
+
+## Cart Cookie Configuration
+
+By default, the cart cookie has a one-year expiry. You can modify this and any other cookie settings by customizing the `cartCookie` component in `config/app.php`:
+
+```php
+return [
+    'components' => [
+        'plugins' => [
+            'pluginConfigs' => [
+                'commerce' => [
+                    'components' => [
+                        'carts' => [
+                            'cartCookie' => [
+                                // Add custom key-value cookie params
+                            ],
+                            // Set the cart expiry to one month
+                            'cartCookieDuration' => 2629800,
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];
+```

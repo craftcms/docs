@@ -51,7 +51,7 @@ When guiding users through the checkout, it’s a good idea to collect the email
 {% endif %}
 ```
 
-Once a user logs in, the cart’s customer will switch to be the registered user’s customer record. If the cart was empty before login and the user had a cart with items from a previous session, that previous cart will be restored.
+Once a user logs in, the cart’s customer will switch to be the registered user’s customer record. If the cart was empty before login and the user had a previous cart with items, that previous cart will be restored.
 
 ## Registering a guest customer as a user
 
