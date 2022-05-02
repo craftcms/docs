@@ -504,7 +504,7 @@ The “Charge” gateway has been removed. Use the “Payment Intents” gateway
 
 ## Cart Cookies
 
-The customer's current cart number is now stored in a new cart cookie rather than in the session. This allows for a guest cart to persist even after a browser is closed. Current cart sessions are automatically migrated to the cookie when the customer visits the the front end.
+The customer’s current cart number is now stored in a new cart cookie rather than in the session. This allows for a guest cart to persist even after a browser is closed. Current cart sessions are automatically migrated to the cookie when the customer visits the the front end.
 
 ::: tip
 The cart cookie and its default one-year expiry can be [modified via `config/app.php`](configuration.md#cart-cookie-configuration).
