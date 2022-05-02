@@ -4,25 +4,9 @@
 Customers are _always_ User elements in Commerce 4 and this page isn’t up to date yet!
 :::
 
-With Craft Commerce, a _Customer_ is a model representing a person who may place an order.
+With Craft Commerce, a _Customer_ is a [user](/4.x/users.md) element representing a person who may place an order.
 
-That person could have placed an order as a guest, or as a registered user with an associated Craft [user account](/4.x/users.md) for logging in and placing orders with saved information.
-
-Every Craft user has a customer record by default, even if that user has never created an order.
-
-::: tip
-The 1:1 user-to-customer relationship is new to Craft Commerce 3. A migration from Commerce 2 will create a new customer record for any existing Craft user that doesn’t already have one.
-:::
-
-## Customer List
-
-Customers can be found in the control panel by navigating to **Commerce** → **Customers**.
-
-The customer list is a paginated data set of all customers in the system linked to a user or having completed orders. The customer list can be searched by name, email, address, and order reference number.
-
-Customers having user accounts will appear with a link to the respective Craft user in the listing table.
-
-Choose any customer’s email address to see more information.
+That person could have placed an order as a guest, or as a registered user with user credentials for logging in and placing orders with saved information.
 
 ## Customer
 

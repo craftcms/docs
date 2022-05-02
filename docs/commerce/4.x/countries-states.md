@@ -4,13 +4,11 @@
 Addresses have changed significantly in Commerce 4 and this page isn’t up to date yet! See Craft 4’s [Addresses](../../4.x/addresses.md) page.
 :::
 
-Because billing and shipping addresses are important for orders, Commerce provides convenient, flexible support for working with whatever countries and states your store needs to support.
+Craft Commerce takes advantage of Craft’s built-in [addresses](../../4.x/addresses.md) support for managing store and order addresses, and adds tools for working with them more easily.
 
-When you first install Commerce, a complete set of countries and their related states will be prepopulated. You can see these navigating in the control panel to **Store Settings** → **Countries & States**. From there, you can remove any countries you don’t want to be available for checkout, reorder those countries, and add/edit any states within and optionally designate the state as a required field on a per-country basis.
+A complete repository of countries and states ships with Craft, and you can visit **Commerce** → **Store Settings** → **Store** to set a store location address as well as the market(s) the store operates in as defined by a list of one or more countries and address condition(s).
 
-::: tip
-Starting your own country? No problem! Choose **New Country** from the **Countries & States** list to enter your own country name, ISO, and individual states.
-:::
+You can get global country and state information from Craft’s [address repository](/4.x/addresses.md#address-repository). Commerce includes methods for getting location information specific to your store.
 
 ## Fetching Countries
 
