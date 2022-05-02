@@ -25,7 +25,10 @@ The store address is available via the [Store service](craf4:craft\commerce\serv
 
 ::: code
 ```twig
-{% set storeAddress = craft.commerce.getStore().getStore().getLocationAddress() %}
+{% set storeAddress = craft.commerce
+  .getStore()
+  .getStore()
+  .getLocationAddress() %}
 ```
 ```php
 $storeAddress = \craft\commerce\Plugin::getInstance()
@@ -33,6 +36,10 @@ $storeAddress = \craft\commerce\Plugin::getInstance()
     ->getStore()
     ->getLocationAddress();
 ```
+:::
+
+::: tip
+That `getStore().getStore()` is not a typo! We’re getting the store service with the first method and getting the store model with the second.
 :::
 
 If you flattened `storeAddress` into an array, this is what it might look like:
@@ -140,7 +147,7 @@ This example creates a form for collecting the customer’s name and country, wh
   <input type="text" name="shippingAddress[firstName]" value="">
   <input type="text" name="shippingAddress[lastName]" value="">
   <select name="shippingAddress[countryCode]">
-    {% for code, name in craft.commerce.store.getStore().getCountriesList() %}
+    {% for code, name in craft.commerce.getStore().getStore().getCountriesList() %}
       <option value="{{ code }}">{{ name }}</option>
     {% endfor %}
   </select>
@@ -275,14 +282,14 @@ In this example we’ll first check for existing estimate addresses with the `es
   {% if not cart.estimatedShippingAddressId %}
     {# Display country selection dropdown #}
     <select name="estimatedShippingAddress[countryCode]">
-      {% for code, option in craft.commerce.store.getStore().getCountriesList() %}
+      {% for code, option in craft.commerce.getStore().getStore().getCountriesList() %}
         <option value="{{ code }}">{{ option }}</option>
       {% endfor %}
     </select>
 
     {# Display state selection dropdown #}
     <select name="estimatedShippingAddress[administrativeArea]">
-      {% for states in craft.commerce.store.getStore().getAdministrativeAreasListByCountryCode() %}
+      {% for states in craft.commerce.getStore().getStore().getAdministrativeAreasListByCountryCode() %}
         {% for key, option in states %}
           <option value="{{ key }}">{{ option }}</option>
         {% endfor %}
