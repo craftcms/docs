@@ -220,7 +220,7 @@ $taxZones = \craft\commerce\Plugin::getInstance()
 
 ## Tax Zones
 
-A tax zone represents a physical area that can be used to influence tax based on an order’s shipping address. 
+A tax zone represents a physical area that can be used to influence tax based on an order’s shipping address.
 
 When an order address falls within that zone, any rates tied to that zone may be factored into tax calculation. An order may have more than one matching tax zone, and all of them will be factored in.
 
