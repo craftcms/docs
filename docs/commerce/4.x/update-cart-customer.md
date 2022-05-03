@@ -4,19 +4,13 @@
 Customers are _always_ User elements in Commerce 4 and this page isn’t up to date yet!
 :::
 
-A cart always has an associated customer. That customer can either be a guest with no user association, or a registered user—which is a customer associated with a Craft user.
+A cart always has an associated customer. That customer is a Craft [User](/4.x/users.md) element, and can represent an inactive guest or a credentialed user.
 
-When a user logs in, the current customer switches to the customer associated to the logged-in user.
-
-The only information stored about a customer is their related address book records with primary shipping and billing address IDs. The email address of a guest customer is inferred from their cart’s email address.
-
-A guest customer’s address book is useless without an account for authenticating and storing that information. If a guest registers on checkout, however, the address book will survive. This makes address management during checkout the same for guests and registered users.
+If a customer creates an account, their user element graduates from inactive to credentialed and they’re able to manage [addresses](addresses.md) and any other profile information you choose to make available on the front end.
 
 ## Updating the email address on an order
 
-If a customer is a guest, their email address is updated along with the cart’s email. This can be done with the same `commerce/cart/update-cart` action used for updating anything else on the cart.
-
-Example:
+A guest customer’s email address can be updated along with the [update-cart](./dev/controller-actions.md#post-cart-update-cart) action:
 
 ```twig
 <form method="post">
@@ -29,13 +23,13 @@ Example:
     class="{% if cart.getFirstError('email') %}has-error{% endif %}"
     value="{{ cart.email }}"
     placeholder="{{ "your@email.com"|t }}"
-  >
+  />
 
   <button>Update Cart Email</button>
-<form>
+</form>
 ```
 
-If a customer is a registered user, you cannot update the email address of the order; it’s always set to the user’s email address.
+If a customer is a credentialed user, they cannot update the order email address—the order always carries the user’s email address.
 
 ::: warning
 If a customer is authenticated, any attempt to change their order’s email address will be ignored; the order will be linked directly to the customer and their current email address.
