@@ -30,9 +30,16 @@ For example, you might set up a shipping rule that’s unavailable when the cart
 
 ## Shipping Zones
 
-Shipping zones are geographical areas your store ships to. Shipping zones can be made up of one or more countries, and (optionally) specify one or more states within those countries. They can also provide a zip code condition formula.
+Shipping zones are geographical areas your store ships to, as defined by a flexible **Address Condition** setting. The setting can be composed of one or more rules based on countries, states (called administrative areas), postal code formula, and even custom fields:
 
-For example, you might make one zone for the USA and Canada, and another zone for the international countries you ship to.
+![Screenshot of a new shipping zone screen with Name, Description, and Address Condition fields](./images/create-shipping-zone.png)
+
+For example, you might make one zone for the USA and Canada, and another zone for the international countries you ship to:
+
+1. For **Address Condition**, click **+ Add a rule**.
+2. Click the default “Administrative Area” rule and select “Country” instead.
+3. Leave “is one of” selected, and type+select “United States” and “Canada” in the typeahead input field.
+4. Press **Save**.
 
 Like shipping categories, these tax zones can factor into [shipping rule](#shipping-rules) conditions and costs. Shipping zones can be used for conditions that apply to the customer’s shipping address.
 
@@ -40,7 +47,7 @@ Like shipping categories, these tax zones can factor into [shipping rule](#shipp
 
 In addition to country and state matching, an address can match a postal code condition formula.
 
-A postal code condition formula is an expression written in [Twig’s expression syntax](https://twig.symfony.com/doc/2.x/templates.html#expressions) that returns `true` or `false`.
+The “Postal Code Formula” address condition is an expression written in [Twig’s expression syntax](https://twig.symfony.com/doc/3.x/templates.html#expressions) that returns `true` or `false`.
 
 This will match if the postal code’s first two characters are `60` or `70`:
 
