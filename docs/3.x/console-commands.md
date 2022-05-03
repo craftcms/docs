@@ -1568,10 +1568,6 @@ Re-saves assets.
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1637,10 +1633,6 @@ Re-saves categories.
 
 --limit
 : The number of elements to resave.
-
-
---propagate
-: Whether to save the elements across all their enabled sites.
 
 
 --update-search-index
@@ -1722,10 +1714,6 @@ Re-saves entries.
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1799,10 +1787,6 @@ You must supply the `--field` or `--element-id` argument for this to work proper
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1874,10 +1858,6 @@ Re-saves tags.
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1943,10 +1923,6 @@ Re-saves users.
 
 --limit
 : The number of elements to resave.
-
-
---propagate
-: Whether to save the elements across all their enabled sites.
 
 
 --update-search-index
