@@ -4,10 +4,6 @@ description: Official documentation for Craft CMS 4.
 
 # About Craft CMS
 
-::: warning
-Craft 4 is currently in beta. See [3.x](../3.x/) for the latest stable version.
-:::
-
 Craft is a flexible, user-friendly CMS for creating custom digital experiences on the web and beyond.
 
 It features:
