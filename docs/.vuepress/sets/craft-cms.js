@@ -9,7 +9,7 @@ module.exports = {
     ["3.x", { label: "3.x" }],
     ["2.x", { label: "2.x" }]
   ],
-  defaultVersion: "3.x",
+  defaultVersion: "4.x",
   searchPlaceholder: "Search the Craft docs (Press “/” to focus)",
   primarySet: true,
   sidebar: {
