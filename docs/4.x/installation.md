@@ -24,8 +24,8 @@ Composer will take a few minutes to load everything. Once it’s done you’ll s
 
 Download the archive format you prefer to work with:
 
-- [zip](https://craftcms.com/latest-v3.zip)
-- [tar.gz](https://craftcms.com/latest-v3.tar.gz)
+- [zip](https://craftcms.com/latest-v4.zip)
+- [tar.gz](https://craftcms.com/latest-v4.tar.gz)
 
 Extract the archive wherever you want your new Craft project to live.
 
