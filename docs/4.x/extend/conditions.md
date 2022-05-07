@@ -41,12 +41,10 @@ A condition builder’s HTML can be generated via `$condition->getBuilderHtml()`
 
 ### Element Query Conditions
 
-Element types can provide their own custom condition classes which extend [ElementQueryCondition](craft4:craft\conditions\elements\ElementQueryCondition). Doing so will give them a chance to include additional element type-specific rules, by overriding `conditionRuleTypes()` (see `EntryQueryCondition` for an example).
+Element types can provide their own custom condition classes which extend [ElementCondition](craft4:craft\elements\conditions\ElementCondition). Doing so will give them a chance to include additional element type-specific rules, by overriding [conditionRuleTypes()](craft4:craft\elements\conditions\ElementCondition::conditionRuleTypes()) (see [EntryCondition](craft4:\craft\elements\conditions\entries\EntryCondition) for an example).
 
 The element type can return an instance of it from its static `createCondition()` method.
 
 ### Field Condition Rules
 
-Field types can provide a rule type which implements `craft\conditions\elements\fields\FieldConditionRuleInterface` and uses `craft\conditions\elements\fields\FieldConditionRuleTrait`.
-
-The field type can return its class name from its `getQueryConditionRuleType()` method.
+Field types can provide a rule type which implements [FieldConditionRuleInterface](craft4:\craft\fields\conditions\FieldConditionRuleInterface) and uses [FieldConditionRuleTrait](craft4:craft\fields\conditions\FieldConditionRuleTrait).
