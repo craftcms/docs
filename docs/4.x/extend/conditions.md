@@ -27,9 +27,9 @@ At a high level, a condition rule doesn’t know anything about how it will be u
 
 Developers can work with existing conditions or introduce new ones using the condition builder framework.
 
-Conditions need to implement [ConditionInterface](craft4:craft\conditions\ConditionInterface). A generic base implementation is provided by [BaseCondition](craft4:craft\conditions\BaseCondition), and another base implementation is tailored for modifying a database query: [BaseQueryCondition](craft4:craft\conditions\BaseQueryCondition).
+Conditions need to implement [ConditionInterface](craft4:craft\base\conditions\ConditionInterface). A generic base implementation is provided by [BaseCondition](craft4:craft\base\conditions\BaseCondition).
 
-Condition rules must implement [ConditionRuleInterface](craft4:craft\conditions\ConditionRuleInterface); query condition rules must also implement [QueryConditionRuleinterface](craft4:craft\conditions\QueryConditionRuleinterface). You’ll find a generic [BaseConditionRule](craft4:craft\base\conditions\BaseConditionRule) implementation along with a handful of base condition rules in `base/conditions/` that are geared for common rule formats.
+Condition rules must implement [ConditionRuleInterface](craft4:craft\base\conditions\ConditionRuleInterface). You’ll find a generic [BaseConditionRule](craft4:craft\base\conditions\BaseConditionRule) implementation along with a handful of base condition rules in `base/conditions/` that are geared for common rule formats.
 
 A condition builder’s HTML can be generated via `$condition->getBuilderHtml()`, which supports a few builder-specific options:
 
