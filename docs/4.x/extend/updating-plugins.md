@@ -1,6 +1,6 @@
 # Updating Plugins for Craft 4
 
-While [the changelog](https://github.com/craftcms/cms/blob/4.0/CHANGELOG.md) is the most comprehensive list of changes, this guide provides high-level overview and organizes changes by category.
+While [the changelog](https://github.com/craftcms/cms/blob/main/CHANGELOG.md) is the most comprehensive list of changes, this guide provides high-level overview and organizes changes by category.
 
 ::: tip
 If you think something is missing, please [create an issue](https://github.com/craftcms/docs/issues/new).
