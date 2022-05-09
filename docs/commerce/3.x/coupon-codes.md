@@ -16,9 +16,7 @@ Read more about [Discounts](discounts.md).
 
 ## Using a coupon
 
-To add a coupon to the cart, a customer submits the `couponCode` parameter using the `commerce/cart/update-cart` form action.
-
-Example:
+To add a coupon to the cart, a customer submits the `couponCode` parameter using the `commerce/cart/update-cart` form action:
 
 ```twig
 <form method="post">
@@ -30,15 +28,37 @@ Example:
   <input type="text"
     name="couponCode"
     value="{{ cart.couponCode }}"
-    class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}"
     placeholder="{{ "Coupon Code"|t }}"
   >
 
-  <button type="submit">Update Cart</button>
+  <button>Update Cart</button>
 </form>
 ```
 
-Only one coupon code can exist on the cart at a time. To see the value of the current cart’s coupon code, use `{{ cart.couponCode }}`.
+Only one coupon code can exist on the cart at a time, accessible via `{{ cart.couponCode }}`.
+
+If the customer submits an invalid code, Commerce may update the cart but adds an [order notice](carts-orders.md#order-notices):
+
+```twig{7-8,13}
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+  {{ hiddenInput('successMessage', 'Added coupon code.'|hash) }}
+  {{ redirectInput('shop/cart') }}
+
+  {# Get the first notice for the `couponCode` attribute, if we have one #}
+  {% set firstCouponCodeNotice = cart.getFirstNotice(null, 'couponCode') %}
+
+  <input type="text"
+    name="couponCode"
+    value="{{ cart.couponCode }}"
+    class="{% if firstCouponCodeNotice is not empty %}has-error{% endif %}"
+    placeholder="{{ "Coupon Code"|t }}"
+  >
+
+  <button>Update Cart</button>
+</form>
+```
 
 You can retrieve the discount associated with the coupon code using `craft.commerce.discounts.getDiscountByCode`:
 
