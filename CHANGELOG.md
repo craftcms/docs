@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-05-04
+### Changed
+- Switched default documentation versions to Craft 4.x and Commerce 4.x. 🎉
+
 ## 2022-03-25
 ### Added
 - Added a page on Craft 4’s Address element.
