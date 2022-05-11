@@ -1607,7 +1607,7 @@ Re-saves assets.
     - An attribute name: `--to myCustomField`
     - An object template: `--to "={myCustomField|lower}"`
     - A raw value: `--to "=foo bar"`
-    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
 
 
@@ -1674,7 +1674,7 @@ Re-saves categories.
     - An attribute name: `--to myCustomField`
     - An object template: `--to "={myCustomField|lower}"`
     - A raw value: `--to "=foo bar"`
-    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
 
 
@@ -1757,7 +1757,7 @@ Re-saves entries.
     - An attribute name: `--to myCustomField`
     - An object template: `--to "={myCustomField|lower}"`
     - A raw value: `--to "=foo bar"`
-    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
 
 
@@ -1830,7 +1830,7 @@ You must supply the `--field` or `--element-id` argument for this to work proper
     - An attribute name: `--to myCustomField`
     - An object template: `--to "={myCustomField|lower}"`
     - A raw value: `--to "=foo bar"`
-    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
 
 
@@ -1897,7 +1897,7 @@ Re-saves tags.
     - An attribute name: `--to myCustomField`
     - An object template: `--to "={myCustomField|lower}"`
     - A raw value: `--to "=foo bar"`
-    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
 
 
@@ -1964,7 +1964,7 @@ Re-saves users.
     - An attribute name: `--to myCustomField`
     - An object template: `--to "={myCustomField|lower}"`
     - A raw value: `--to "=foo bar"`
-    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
 
 
