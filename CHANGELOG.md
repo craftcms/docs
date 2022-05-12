@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-05-12
+### Changed
+- Updated Craft 4.x database connection settings intro to use `craft\helpers\App::env()` and new `CRAFT_` config setting override support.
+
 ## 2022-05-04
 ### Changed
 - Switched default documentation versions to Craft 4.x and Commerce 4.x. 🎉
