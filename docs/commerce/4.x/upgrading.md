@@ -469,7 +469,7 @@ Several controllers have been removed entirely in Commerce 4:
 - [AddressesController](commerce3:craft\commerce\controllers\AddressesController)
 - [CountriesController](commerce3:craft\commerce\controllers\CountriesController)
 - [CustomersController](commerce3:craft\commerce\controllers\CustomersController)
-- [CustomerAddressesController](commecommerce3rce4:craft\commerce\controllers\CustomerAddressesController)
+- [CustomerAddressesController](commerce3:craft\commerce\controllers\CustomerAddressesController)
 - [StatesController](commerce3:craft\commerce\controllers\StatesController)
 
 A few controller methods have been removed as well:
