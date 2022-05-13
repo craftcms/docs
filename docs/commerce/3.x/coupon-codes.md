@@ -39,7 +39,7 @@ Only one coupon code can exist on the cart at a time, accessible via `{{ cart.co
 
 If the customer submits an invalid code, Commerce may update the cart but adds an [order notice](carts-orders.md#order-notices):
 
-```twig{7-8,13}
+```twig{7-8,16}
 <form method="post">
   {{ csrfInput() }}
   {{ actionInput('commerce/cart/update-cart') }}
@@ -47,18 +47,25 @@ If the customer submits an invalid code, Commerce may update the cart but adds a
   {{ redirectInput('shop/cart') }}
 
   {# Get the first notice for the `couponCode` attribute, if we have one #}
-  {% set firstCouponCodeNotice = cart.getFirstNotice(null, 'couponCode') %}
+  {% set couponCodeNotice = cart.getFirstNotice(null, 'couponCode') %}
+
+  {# Get any lower-level coupon code errors just in case #}
+  {% set couponCodeError = cart.getFirstError('couponCode') %}
 
   <input type="text"
     name="couponCode"
     value="{{ cart.couponCode }}"
-    class="{% if firstCouponCodeNotice is not empty %}has-error{% endif %}"
+    class="{% if couponCodeNotice or couponCodeError %}has-error{% endif %}"
     placeholder="{{ "Coupon Code"|t }}"
   >
 
   <button>Update Cart</button>
 </form>
 ```
+
+::: tip
+The example above includes `cart.getFirstError('couponCode')` as a precaution. Commerce won’t throw any coupon errors, but another plugin or custom module could.
+:::
 
 You can retrieve the discount associated with the coupon code using `craft.commerce.discounts.getDiscountByCode`:
 
