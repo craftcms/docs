@@ -1121,7 +1121,7 @@ class RelatedWidgets extends RelationArgumentHandler
 
 #### Registering Argument Handlers
 
-Add a listener for [defineGqlArgumentHandlers](craft3:craft3:craft\gql\ArgumentManager::EVENT_DEFINE_GQL_ARGUMENT_HANDLERS) and append any argument handler class names:
+Add a listener for [defineGqlArgumentHandlers](craft3:craft\gql\ArgumentManager::EVENT_DEFINE_GQL_ARGUMENT_HANDLERS) and append any argument handler class names:
 
 ```php
 use mynamespace\gql\argumenthandlers\RelatedWidgets;
