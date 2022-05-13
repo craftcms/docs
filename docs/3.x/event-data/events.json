@@ -18022,6 +18022,12 @@
     },
     {
         "class": "craft\\fields\\Assets",
+        "name": "EVENT_LOCATE_UPLOADED_FILES",
+        "type": "craft\\events\\LocateUploadedFilesEvent",
+        "desc": "The event that is triggered when identifying any uploaded files that should be stored as assets and related by the field."
+    },
+    {
+        "class": "craft\\fields\\Assets",
         "name": "EVENT_DEFINE_SELECTION_CRITERIA",
         "type": "craft\\events\\ElementCriteriaEvent",
         "desc": "The event that is triggered when defining the selection criteria for this field."

@@ -19282,7 +19282,7 @@
         "class": "craft\\commerce\\services\\LineItems",
         "name": "EVENT_AFTER_SAVE_LINE_ITEM",
         "type": "craft\\commerce\\events\\LineItemEvent",
-        "desc": "The event that is triggeredd after a line item is saved."
+        "desc": "The event that is triggered after a line item is saved."
     },
     {
         "class": "craft\\commerce\\services\\LineItems",

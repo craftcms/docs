@@ -5,35 +5,40 @@ sidebarLevel: 3
 
 Craft supports several database connection settings that give you control over how Craft connects to the database.
 
-Ultimately, database connection settings must be set from  `config/db.php`, but we recommend you initially set them as environment variables (such as in your `.env` file), and then pull the environment variable value into `config/db.php` using [getenv()](https://php.net/manual/en/function.getenv.php).
+Database connection settings may be set from `config/db.php`, but we recommend using environment variables (such as in your `.env` file).
 
-For example, in a new Craft 3 project, your `.env` file should define these environment variables:
+For example, in [a new Craft 4 project](https://github.com/craftcms/craft), your `.env` file should define these environment variables:
 
 ```bash
-ENVIRONMENT="dev"
-SECURITY_KEY=""
-DB_DRIVER="mysql"
-DB_SERVER="<host>"
-DB_PORT="<port>"
-DB_DATABASE="<dbname>"
-DB_USER="root"
-DB_PASSWORD=""
-DB_SCHEMA="public"
-DB_TABLE_PREFIX=""
+CRAFT_APP_ID=
+CRAFT_ENVIRONMENT=dev
+CRAFT_SECURITY_KEY=
+CRAFT_DB_DRIVER=mysql
+CRAFT_DB_SERVER=127.0.0.1
+CRAFT_DB_PORT=3306
+CRAFT_DB_DATABASE=
+CRAFT_DB_USER=root
+CRAFT_DB_PASSWORD=
+CRAFT_DB_SCHEMA=public
+CRAFT_DB_TABLE_PREFIX=
 ```
 
-The variables that start with `DB_` are database connection settings, and they get pulled into `config/db.php` like this:
+The `DB_` variables are database connection settings, and the `CRAFT_` prefix is a special convention for overriding any config setting—meaning you don’t need to use a `config/db.php` file in Craft 4.
+
+If you wanted to use your own environment variables in a static config file, you could create a `config/db.php` to return an array of settings (defined below), using the thread-safe [App::env()](craft4:craft\helpers\App::env()) to get the value of each environment variable:
 
 ```php
+use craft\helpers\App;
+
 return [
-    'driver' => getenv('DB_DRIVER'),
-    'server' => getenv('DB_SERVER'),
-    'port' => getenv('DB_PORT'),
-    'database' => getenv('DB_DATABASE'),
-    'user' => getenv('DB_USER'),
-    'password' => getenv('DB_PASSWORD'),
-    'schema' => getenv('DB_SCHEMA'),
-    'tablePrefix' => getenv('DB_TABLE_PREFIX'),
+    'driver' => App::env('MY_DB_DRIVER'),
+    'server' => App::env('MY_DB_SERVER'),
+    'port' => App::env('MY_DB_PORT'),
+    'database' => App::env('MY_DB_DATABASE'),
+    'user' => App::env('MY_DB_USER'),
+    'password' => App::env('MY_DB_PASSWORD'),
+    'schema' => App::env('MY_DB_SCHEMA'),
+    'tablePrefix' => App::env('MY_DB_TABLE_PREFIX'),
 ];
 ```
 
