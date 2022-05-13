@@ -14,7 +14,7 @@ An empty coupon field on the discount means no coupon is needed for the discount
 
 Read more about [Discounts](discounts.md).
 
-## Using a coupon
+## Using a Coupon Code
 
 To add a coupon to the cart, a customer submits the `couponCode` parameter using the `commerce/cart/update-cart` form action:
 
@@ -67,7 +67,7 @@ If the customer submits an invalid code, Commerce may update the cart but adds a
 The example above includes `cart.getFirstError('couponCode')` as a precaution. Commerce won’t throw any coupon errors, but another plugin or custom module could.
 :::
 
-You can retrieve the discount associated with the coupon code using `craft.commerce.discounts.getDiscountByCode`:
+You can retrieve the discount associated with the coupon code using `craft.commerce.discounts.getDiscountByCode()`:
 
 ```twig
 {# @var discount craft\commerce\models\Discount #}
