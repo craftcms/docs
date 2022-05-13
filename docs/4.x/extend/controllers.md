@@ -38,7 +38,7 @@ Method | Description
 [requireAcceptsJson()](craft4:craft\web\Controller::requireAcceptsJson()) | Requires that the request was sent with an `Accept: application/json` header.
 [requireToken()](craft4:craft\web\Controller::requireToken()) | Requires that the request was sent with a [token](craft4:craft\web\Request::getToken()).
 [requireCpRequest()](craft4:craft\web\Controller::requireCpRequest()) | Requires that the request URI begins with the [control panel trigger](config4:cpTrigger).
-[requireSiteRequest()](craft4:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin with the [control panel trigger](config4::cpTrigger).
+[requireSiteRequest()](craft4:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin with the [control panel trigger](config4:cpTrigger).
 
 ```php
 public function actionFoo()
