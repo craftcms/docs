@@ -14,8 +14,8 @@ Topical guides and support articles are available in the [Knowledge Base](https:
 ## Browse Product Documentation
 
 <div class="w-full sm:flex sm:-mx-2">
-    <LinkPanel title="Craft CMS" subtitle="Flexible content management." link="/3.x/" icon="/docs/icons/craft.svg" />
-    <LinkPanel title="Craft Commerce" subtitle="Custom, extensible ecommerce." link="/commerce/3.x/" icon="/docs/icons/commerce.svg" />
+    <LinkPanel title="Craft CMS" subtitle="Flexible content management." link="/4.x/" icon="/docs/icons/craft.svg" />
+    <LinkPanel title="Craft Commerce" subtitle="Custom, extensible ecommerce." link="/commerce/4.x/" icon="/docs/icons/commerce.svg" />
 </div>
 
 ## Follow Tutorials
