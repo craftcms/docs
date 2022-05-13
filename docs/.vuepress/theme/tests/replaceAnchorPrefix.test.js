@@ -5,11 +5,11 @@ const replaceAnchorPrefix = require("../util/replace-anchor-prefixes");
  */
 const craft = [
   {
-    source: "craft4:craft\web\Controller::$allowAnonymous",
+    source: "craft4:craft\\web\\Controller::$allowAnonymous",
     result: "https://docs.craftcms.com/api/v4/craft-web-controller.html#allowanonymous",
   },
   {
-    source: "craft4:craft\console\Controller::EVENT_DEFINE_ACTIONS",
+    source: "craft4:craft\\console\\Controller::EVENT_DEFINE_ACTIONS",
     result: "https://docs.craftcms.com/api/v4/craft-console-controller.html#event-define-actions",
   },
   {
