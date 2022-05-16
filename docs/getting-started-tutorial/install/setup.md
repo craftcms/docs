@@ -16,8 +16,9 @@ Visit `https://tutorial.nitro/admin` instead. You should have an **Install Craft
 <img src="../images/install.png" alt="Screenshot of the first install step" />
 </BrowserShot>
 
-::: tip
-If you’re getting other errors in your browser, check your environment’s setup guide and make sure you have the right base URL for your site and that the server is running.
+::: tip No install button?
+Check your environment setup, double-check that your server is running, and make sure you’ve got the right base URL for your site. See [Troubleshooting a Failed Craft Installation
+](https://craftcms.com/knowledge-base/troubleshooting-failed-installation) and [Troubleshooting Database Connection Issues](https://craftcms.com/knowledge-base/troubleshooting-database-connection-issues).
 :::
 
 If you’ve managed _not_ to push the red button, go ahead!
