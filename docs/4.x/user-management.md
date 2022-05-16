@@ -43,38 +43,46 @@ The permissions Craft comes with are:
 | ---------- | ------
 | Access the site when the system is off | `accessSiteWhenSystemIsOff`
 | Access the control panel | `accessCp`
-| ↳&nbsp; Access the control panel when the system is off | `accessCpWhenSystemIsOff`
-| ↳&nbsp; Perform Craft and plugin updates | `performUpdates`
+| ↳&nbsp; Access the control panel when the system is offline | `accessCpWhenSystemIsOff`
+| ↳&nbsp; Perform Craft CMS and plugin updates | `performUpdates`
 | ↳&nbsp; Access _[plugin name]_ | `accessPlugin-[PluginHandle]`
 | Edit users | `editUsers`
 | ↳&nbsp; Register users | `registerUsers`
-| ↳&nbsp; Assign permissions | `assignUserPermissions`
-| ↳&nbsp; Administrate users | `administrateUsers`
+| ↳&nbsp; Moderate users | `moderateUsers`
+| ↳&nbsp; Administrate users | `administrateUsers`
+| ↳&nbsp; Impersonate users | `impersonateUsers`
+| ↳&nbsp; Assign user permissions | `assignUserPermissions`
+| ↳&nbsp; Assign users to this group | `assignNewUserGroup`
 | Delete users | `deleteUsers`
 | Edit _[site name]_ | `editSite:[SiteUID]`
-| Impersonate users | `impersonateUsers`
-| Edit entries | `editEntries:[SectionUID]`
-| ↳&nbsp; Create entries | `createEntries:[SectionUID]`
-| ↳&nbsp; Publish entries | `publishEntries:[SectionUID]`
-| ↳&nbsp; Delete entries | `deleteEntries:[SectionUID]`
-| ↳&nbsp; Edit other authors’ entries | `editPeerEntries:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Publish other authors’ entries | `publishPeerEntries:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other authors’ entries | `deletePeerEntries:[SectionUID]`
-| ↳&nbsp; Edit other authors’ drafts | `editPeerEntryDrafts:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Publish other authors’ drafts | `publishPeerEntryDrafts:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other authors’ drafts | `deletePeerEntryDrafts:[SectionUID]`
+| View entries | `viewEntries:[SectionUID]`
+| ↳&nbsp;Create entries | `createEntries:[SectionUID]`
+| ↳&nbsp;Save entries | `saveEntries:[SectionUID]`
+| ↳&nbsp;Delete entries | `deleteEntries:[SectionUID]`
+| ↳&nbsp;View other users’ entries | `viewPeerEntries:[SectionUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Save other users’ drafts | `savePeerEntries:[SectionUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other users’ drafts | `deletePeerEntries:[SectionUID]`
+| ↳&nbsp;View other users’ drafts | `viewPeerEntryDrafts:[SectionUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Save other users’ drafts | `savePeerEntryDrafts:[SectionUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other users’ drafts | `deletePeerEntryDrafts:[SectionUID]`
 | Edit _[global set name]_ | `editGlobalSet:[GlobalSetUID]`
-| Edit _[category group name]_ | `editCategories:[CategoryGroupUID]`
-| View _[asset volume name]_ | `viewVolume:[VolumeUID]`
-| ↳&nbsp; Upload files | `saveAssetInVolume:[VolumeUID]`
-| ↳&nbsp; Create subfolders | `createFoldersInVolume:[VolumeUID]`
-| ↳&nbsp; Remove files and folders | `deleteFilesAndFoldersInVolume:[VolumeUID]`
-| ↳&nbsp; Edit images | `editImagesInVolume:[VolumeUID]`
-| ↳&nbsp; View files uploaded by other users | `viewPeerFilesInVolume:[VolumeUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Edit files uploaded by other users | `editPeerFilesInVolume:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Replace files uploaded by other users | `replacePeerFilesInVolume:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Remove files uploaded by other users | `deletePeerFilesInVolume:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Edit images uploaded by other users | `editPeerImagesInVolume:[SectionUID]`
+| View categories | `viewCategories:[CategoryGroupUID]`
+| ↳&nbsp;Save categories | `saveCategories:[CategoryGroupUID]`
+| ↳&nbsp;Delete categories | `deleteCategories:[CategoryGroupUID]`
+| ↳&nbsp;View other users’ drafts | `viewPeerCategoryDrafts:[CategoryGroupUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Save other users’ drafts | `savePeerCategoryDrafts:[CategoryGroupUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other users’ drafts | `deletePeerCategoryDrafts:[CategoryGroupUID]`
+| View assets | `viewAssets:[VolumeUID]`
+| ↳&nbsp;Save assets | `saveAssets:[VolumeUID]`
+| ↳&nbsp;Delete assets | `deleteAssets:[VolumeUID]`
+| ↳&nbsp;Replace files | `replaceFiles:[VolumeUID]`
+| ↳&nbsp;Edit images | `editImages:[VolumeUID]`
+| ↳&nbsp;View assets uploaded by other users | `viewPeerAssets:[VolumeUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Save assets uploaded by other users | `savePeerAssets:[VolumeUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Replace files uploaded by other users | `replacePeerFiles:[VolumeUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Remove files uploaded by other users | `deletePeerAssets:[VolumeUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Edit images uploaded by other users | `editPeerImages:[VolumeUID]`
+| ↳&nbsp;Create subfolders | `createFolders:[VolumeUID]`
 | Utilities |
 | ↳&nbsp; Updates | `utility:updates`
 | ↳&nbsp; System Report | `utility:system-report`
@@ -82,7 +90,7 @@ The permissions Craft comes with are:
 | ↳&nbsp; System Messages | `utility:system-messages`
 | ↳&nbsp; Asset Indexes | `utility:asset-indexes`
 | ↳&nbsp; Queue Manager | `utility:queue-manager`
-| ↳&nbsp; Clear Caches | `utility:clear-caches`
+| ↳&nbsp; Caches | `utility:clear-caches`
 | ↳&nbsp; Deprecation Warnings | `utility:deprecation-errors`
 | ↳&nbsp; Database Backup | `utility:db-backup`
 | ↳&nbsp; Find and Replace | `utility:find-replace`
