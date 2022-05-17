@@ -507,9 +507,15 @@ Then create a `@rootUrl` alias that references it:
 
 Then you could go into your User Photos volume’s settings (for example) and set its Base URL to `@rootUrl/images/user-photos`.
 
+### Config Environment Variables
+
+Craft’s [general config settings](config-settings.md) and [database connection settings](db-settings.md) can be defined exclusively by environment variables using a `CRAFT_` or `CRAFT_DB_` prefix respectively.
+
+Combine the prefix with the config setting in [screaming snake case](https://dev.to/fission/screaming-snake-case-43kj). The <config4:allowUpdates> setting, for example, would be `CRAFT_ALLOW_UPDATES`. The database [port](db-settings.md#port) setting would be `CRAFT_DB_PORT`.
+
 ### Config Files
 
-You can set your [general config settings](config-settings.md), [database connection settings](db-settings.md), and other PHP config files to environment variables using Craft’s [App::env()](craft4:craft\helpers\App::env()) function:
+Craft still supports setting [general config settings](config-settings.md), [database connection settings](db-settings.md), and other settings via static PHP files. You can set config values in these files to environment variables using Craft’s [App::env()](craft4:craft\helpers\App::env()) function:
 
 ```bash
 # -- .env --
