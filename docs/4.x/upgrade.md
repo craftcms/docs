@@ -22,7 +22,7 @@ If you’ve got custom plugins or modules, running Craft’s [Rector](extend/upd
 
 ## Performing the Upgrade
 
-The best way to upgrade a Craft 3 site is to get everything squeaky-clean and up to date at all at once, then proceed like it’s a normal software update.
+The best way to upgrade a Craft 3 site is to get everything squeaky-clean and up to date all at once, then proceed like it’s a normal software update.
 
 1. Pull a fresh database backup down from your production environment and import it locally.
 2. If your database has `entrydrafts` and `entryversions` tables, check them for any meaningful data. Craft 3.2 stopped using these tables when drafts and revisions became elements, and the tables will be removed as part of the Craft 4 install process.
