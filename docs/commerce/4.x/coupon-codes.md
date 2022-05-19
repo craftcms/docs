@@ -14,6 +14,10 @@ You can click **+ Add a coupon** to create them one at a time, where each one ne
 
 ![Screenshot of a row in the Coupons table, with three columns: “Code”, “Uses”, and “Max Uses”](./images/coupon-code.png)
 
+::: warning
+Store managers can edit a coupon code’s **Uses** for flexibility, so that number may be different from counting rows in a database query.
+:::
+
 Press **Generate** if you’d like to create codes in bulk:
 
 ![Screenshot of the “Generate” HUD, with a “Number of Coupons” field and a “Generated Coupon Format” field](./images/generate-coupons.png)
