@@ -144,17 +144,7 @@ Some PHP constants have been deprecated in Craft 4, and will no longer work in C
 
 ## Template Tags
 
-Some Twig tags have been deprecated in Craft 4, and will be completely removed in Craft 5:
-
-| Old Tag                 | What to do instead
-| ------------------------| ---------------------------------------------
-| `{% includeCss %}`      | `{% css %}`
-| `{% includeCssFile %}`  | `{% css %}`
-| `{% includeHiResCss %}` | Add your own media selector to `{% css %}`.
-| `{% includeJs %}`       | `{% js %}`
-| `{% includeJsFile %}`   | `{% js %}`
-
-[Twig 3](https://github.com/twigphp/Twig/blob/3.x/CHANGELOG) has removed some template tags, too:
+[Twig 3](https://github.com/twigphp/Twig/blob/3.x/CHANGELOG) has removed some template tags:
 
 | Old Tag           | What to do instead
 | ----------------- | ------------------------
