@@ -19,17 +19,15 @@ Money fields have the following settings:
 
 ### Working with Money Field Data
 
-If you have an element with a Money field in your template, you can access its data using your Number field’s handle:
+If you have an element with a Money field in your template, you can output its value using the [money](dev/filters.md#money) filter, or <craft4:craft\helpers\MoneyHelper::toString()>.
 
 ::: code
 ```twig
-{% set value = entry.myFieldHandle %}
+{% set value = entry.myFieldHandle|money %}
 ```
 ```php
-$value = $entry->myFieldHandle;
+$value = \craft\helpers\MoneyHelper::toString($entry->myFieldHandle);
 ```
 :::
 
-That will give you the number value for the field, or `null` if there is no value.
-
-### Saving Money Fields
+That will give you a formatted currency value for the field, if it has a value.
