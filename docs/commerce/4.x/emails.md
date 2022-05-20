@@ -142,6 +142,31 @@ Select the email by name in the **Status Emails** field. You can select as many 
 
 Once you choose **Save**, the designated emails will be sent when an order is assigned that status.
 
+## Suppressing Emails
+
+There may be cases where you don’t want an order status change to send an email.
+
+Orders have a memory-only [suppressEmails](commerce4:craft\commerce\elements\Order::$suppressEmails) attribute you can set to `true` to avoid sending email for anything that happens in that request. This is what the “Suppress email” options set when changing status from the order listing or edit views.
+
+![Screenshot of order status edit modal with “Update Order Status” heading, a status dropdown, message field, and “Suppress emails” checkbox](./images/update-order-status.png)
+
+Any time an order status email is prepared, Commerce triggers a cancelable event. Set the event object’s `$isValid` proprty to `false` to prevent a status change email from being sent:
+
+```php
+use craft\commerce\events\OrderStatusEmailsEvent;
+use craft\commerce\services\OrderStatuses;
+use yii\base\Event;
+
+Event::on(
+    OrderStatuses::class,
+    OrderStatuses::EVENT_ORDER_STATUS_CHANGE_EMAILS,
+    function (OrderStatusEmailsEvent $event) {
+        // Prevent sending an order status email
+        $event->isValid = false;
+    }
+);
+```
+
 ## Troubleshooting
 
 It’s a good idea to always test your status email templates before relying on them in production.
