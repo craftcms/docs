@@ -87,6 +87,7 @@ Matrix block queries support the following parameters:
 | [owner](#owner)                             | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
 | [ownerId](#ownerid)                         | Narrows the query results based on the owner element of the Matrix blocks, per the owners’ IDs.
 | [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [primaryOwner](#primaryowner)               | Sets the [primaryOwnerId](#primaryownerid) and [siteId](#siteid) parameters based on a given element.
 | [primaryOwnerId](#primaryownerid)           | Narrows the query results based on the primary owner element of the Matrix blocks, per the owners’ IDs.
 | [relatedTo](#relatedto)                     | Narrows the query results to only Matrix blocks that are related to certain other elements.
@@ -631,6 +632,15 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `primaryOwner`

@@ -91,6 +91,7 @@ Tag queries support the following parameters:
 | [offset](#offset)                         | Determines how many tags should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the tags should be returned in. (If empty, defaults to `title ASC`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only tags that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only tags that match a search query.
 | [site](#site)                             | Determines which site(s) the tags should be queried in.
@@ -549,6 +550,15 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `relatedTo`

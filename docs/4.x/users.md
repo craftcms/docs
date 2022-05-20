@@ -93,6 +93,7 @@ User queries support the following parameters:
 | [offset](#offset)                         | Determines how many users should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
 | [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only users that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only users that match a search query.
 | [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the users’ IDs in the `elements_sites` table.
@@ -824,6 +825,15 @@ $users = \craft\elements\User::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `relatedTo`

@@ -187,6 +187,7 @@ Asset queries support the following parameters:
 | [offset](#offset)                         | Determines how many assets should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only assets that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only assets that match a search query.
 | [site](#site)                             | Determines which site(s) the assets should be queried in.
@@ -848,6 +849,15 @@ $assets = \craft\elements\Asset::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `relatedTo`

@@ -202,6 +202,7 @@ Address queries support the following parameters:
 | [owner](#owner)                           | Sets the [ownerId](#ownerid) parameter based on a given owner element.
 | [ownerId](#ownerid)                       | Narrows the query results based on the addresses’ owner elements, per their IDs.
 | [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only addresses that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only addresses that match a search query.
 | [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the addresses’ IDs in the `elements_sites` table.
@@ -709,6 +710,15 @@ $addresses = \craft\elements\Address::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `relatedTo`
