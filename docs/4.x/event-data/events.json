@@ -23852,6 +23852,12 @@
     },
     {
         "class": "craft\\elements\\db\\AddressQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\AddressQuery",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the query's init cycle"
@@ -23882,6 +23888,12 @@
     },
     {
         "class": "craft\\elements\\db\\AssetQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\AssetQuery",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the query's init cycle"
@@ -23912,6 +23924,12 @@
     },
     {
         "class": "craft\\elements\\db\\CategoryQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\CategoryQuery",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the query's init cycle"
@@ -23942,6 +23960,12 @@
     },
     {
         "class": "craft\\elements\\db\\ElementQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\ElementQuery",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the query's init cycle"
@@ -23972,6 +23996,12 @@
     },
     {
         "class": "craft\\elements\\db\\EntryQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\EntryQuery",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the query's init cycle"
@@ -24002,6 +24032,12 @@
     },
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\GlobalSetQuery",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the query's init cycle"
@@ -24032,6 +24068,12 @@
     },
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\MatrixBlockQuery",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the query's init cycle"
@@ -24062,6 +24104,12 @@
     },
     {
         "class": "craft\\elements\\db\\TagQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\TagQuery",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the query's init cycle"
@@ -24087,6 +24135,12 @@
     {
         "class": "craft\\elements\\db\\UserQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\UserQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
     },
