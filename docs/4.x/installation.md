@@ -108,7 +108,7 @@ First generate a cryptographically secure key, ideally using a password generato
 
 Then open up your `.env` file (you may need to use an app like [Transmit](https://panic.com/transmit/) to do this if you’re running macOS), and find this line:
 
-    SECURITY_KEY=""
+    CRAFT_SECURITY_KEY=""
 
 Paste your security key inside the quotes and save the file.
 
