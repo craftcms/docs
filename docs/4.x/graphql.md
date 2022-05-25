@@ -30,7 +30,7 @@ Here’s what a [query](#query-reference) for two news entries might look like, 
     ... on news_article_Entry {
       shortDescription
       featuredImage {
-        url @transform (width: 300, immediately: true)
+        url @transform (width: 300)
       }
     }
   }
