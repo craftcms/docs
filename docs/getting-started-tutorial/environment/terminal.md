@@ -20,7 +20,7 @@ There are other apps like [Hyper](https://hyper.is/) (cross-platform) and [iTerm
 
 Once you’ve launched your terminal, you’ll be greeted by an empty prompt that’s ready for input.
 
-Later on we’ll refer to “running” commands, in a format that look like this:
+Later on we’ll refer to “running” commands, in a format that looks like this:
 
 ```bash
 echo "hello world"

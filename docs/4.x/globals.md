@@ -124,6 +124,7 @@ Global set queries support the following parameters:
 | [offset](#offset)                         | Determines how many global sets should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the global sets should be returned in. (If empty, defaults to `sortOrder ASC`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only global sets that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only global sets that match a search query.
 | [site](#site)                             | Determines which site(s) the global sets should be queried in.
@@ -547,6 +548,15 @@ $globalSets = \craft\elements\GlobalSet::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `relatedTo`

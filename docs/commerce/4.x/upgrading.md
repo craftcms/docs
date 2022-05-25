@@ -362,6 +362,7 @@ The [Order::EVENT_AFTER_REMOVE_LINE_ITEM](commerce4:craft\commerce\elements\Orde
 
 - The `cartUpdatedNotice` param is no longer accepted for `commerce/cart/*` requests. Use a hashed `successMessage` param instead.
 - The `commerce/orders/purchasable-search` action was removed. Use `commerce/orders/purchasables-table` instead.
+- The `customer-orders/get-orders` action was removed. Use `{{ currentUser.getOrders() }}` in Twig templates or the [Element API](https://plugins.craftcms.com/element-api) to provide your own controller endpoint.
 
 ## Elements
 

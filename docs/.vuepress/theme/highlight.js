@@ -32,6 +32,7 @@ function getLangCodeFromExtension(extension) {
     ts: "typescript",
     py: "python",
     sh: "bash",
+    env: "shell",
     yml: "yaml",
     styl: "stylus",
     kt: "kotlin",

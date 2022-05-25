@@ -157,6 +157,7 @@ Category queries support the following parameters:
 | [positionedAfter](#positionedafter)       | Narrows the query results to only categories that are positioned after another category in its structure.
 | [positionedBefore](#positionedbefore)     | Narrows the query results to only categories that are positioned before another category in its structure.
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the category that comes immediately before another category in its structure.
 | [relatedTo](#relatedto)                   | Narrows the query results to only categories that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only categories that match a search query.
@@ -934,6 +935,15 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `prevSiblingOf`

@@ -8,7 +8,6 @@ Action | Description
 <badge vertical="baseline" type="verb">GET</badge> [cart/get-cart](#get-cart-get-cart) | Returns the current cart as JSON.
 <badge vertical="baseline" type="verb">GET</badge> [cart/load-cart](#get-cart-load-cart) | Loads a cookie for the given cart.
 <badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | Updates the cart by adding purchasables, updating line items, or updating various cart attributes.
-<badge vertical="baseline" type="verb">GET</badge> [customer-orders/get-orders](#get-customer-orders-get-orders) | Returns a customer’s orders as JSON.
 <badge vertical="baseline" type="verb">GET</badge> [downloads/pdf](#get-downloads-pdf) | Returns an order PDF as a file.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/add](#post-payment-sources-add) | Creates a new payment source.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/delete](#post-payment-sources-delete) | Deletes a payment source.
@@ -192,16 +191,6 @@ Success | Output
 <x-mark/> | JSON object with an error message in its `error` key.
 
 </span>
-
-## <badge vertical="baseline" type="verb">GET</badge> `customer-orders/get-orders`
-
-Returns the current customer’s orders as JSON.
-
-The request must include `Accept: application/json` in its headers.
-
-### Output
-
-Returns a JSON object with a `success` key and `true` value, and an `orders` key with an array of the customer’s orders.
 
 ## <badge vertical="baseline" type="verb">GET</badge> `downloads/pdf`
 

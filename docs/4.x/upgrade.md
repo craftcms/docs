@@ -37,7 +37,7 @@ The best way to upgrade a Craft 3 site is to get everything squeaky-clean and up
 7. Run `composer update`.
 8. Run `php craft migrate/all`.
 
-Now that you’ve upgraded your install to use Craft 4, please take some time to review the changes on this page and update your project.
+Now that you’ve upgraded your install to use Craft 4, please take some time to review the changes on this page and update your project. You may also need to follow any plugin-specific upgrade guides, like [Upgrading to Commerce 4](/commerce/4.x/upgrading.md).
 
 Once you’ve verified everything’s looking great, commit your updated `composer.json`, `composer.lock`, and `config/project/` directory and roll those changes out normally into each additional environment.
 

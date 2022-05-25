@@ -339,6 +339,7 @@ Entry queries support the following parameters:
 | [positionedBefore](#positionedbefore)     | Narrows the query results to only entries that are positioned before another entry in its structure.
 | [postDate](#postdate)                     | Narrows the query results based on the entries’ post dates.
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the entry that comes immediately before another entry in its structure.
 | [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                   | Narrows the query results to only entries that are related to certain other elements.
@@ -1425,6 +1426,15 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `prevSiblingOf`
