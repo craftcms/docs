@@ -8,6 +8,7 @@ Craft occasionally runs a few garbage collection routines to remove stale data, 
 - Hard delete expired soft-deleted rows (per the <config4:softDeleteDuration> config setting).
 - Delete stale user session data.
 - Delete orphaned search indexes (any indexes belonging to elements that don’t exist anymore).
+- Delete empty user folders from the **Temp Uploads Location** defined in **Settings** → **Assets** → **Settings**.
 
 By default, each web request has a 1 in 100,000 chance of triggering garbage collection. That can be configured from `config/app.php` by overriding <craft4:craft\services\Gc::$probability>.
 
