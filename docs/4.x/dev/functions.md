@@ -395,7 +395,7 @@ Executes a GraphQL query against the full schema.
     ... on news_article_Entry {
       shortDescription
       featuredImage {
-        url @transform (width: 300, immediately: true)
+        url @transform (width: 300)
         altText
       }
     }
