@@ -5,6 +5,7 @@ Theme and significant content changes will be documented in this file.
 ## 2022-05-25
 ### Added
 - Covered Commerce 4.x’s email suppression feature.
+- Mentioned empty user folder garbage collection in Craft 4.
 
 ### Fixed
 - Updated Commerce 4.x’s controller action reference and upgrade guide to reflect removed `customer-orders/get-orders` action.
