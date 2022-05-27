@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-05-27
+### Added
+- Added a note about Craft 4.x element type garbage collection.
+
 ## 2022-05-25
 ### Added
 - Covered Commerce 4.x’s email suppression feature.
