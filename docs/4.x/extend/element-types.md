@@ -1022,14 +1022,14 @@ Event::on(
     Gc::class,
     Gc::EVENT_RUN,
     function (Event $event) {
-        // Delete Craft `elements` table rows without peers in the custom `my_element` table
+        // Delete `elements` table rows without peers in the custom `my_element` table
         Craft::$app->getGc()->deletePartialElements(
             MyElement::class,
             'my_element',
             'id'
         );
 
-        // Delete Craft `elements` table rows without corresponding `content` table rows for the custom element
+        // Delete `elements` table rows without corresponding `content` table rows for the custom element
         Craft::$app->getGc()->deletePartialElements(
             MyElement::class,
             Table::CONTENT,
