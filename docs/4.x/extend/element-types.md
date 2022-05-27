@@ -1006,3 +1006,37 @@ public function setEagerLoadedElements(string $handle, array $elements)
     }
 }
 ```
+
+## Garbage Collection
+
+Element types should opt into [garbage collection](../gc.md) by hooking into the [Gc::EVENT_RUN](craft4:craft\services\Gc::EVENT_RUN) event and calling [Gc::deletePartialElements()](craft4:craft\services\Gc::deletePartialElements()):
+
+```php
+use mynamespace\elements\MyElement;
+use craft\db\Table;
+use craft\services\Event;
+use craft\services\Gc;
+use yii\base\Event;
+
+Event::on(
+    Gc::class,
+    Gc::EVENT_RUN,
+    function (Event $event) {
+        // Delete Craft `elements` table rows without peers in the custom `my_element` table
+        Craft::$app->getGc()->deletePartialElements(
+            MyElement::class,
+            'my_element',
+            'id'
+        );
+
+        // Delete Craft `elements` table rows without corresponding `content` table rows for the custom element
+        Craft::$app->getGc()->deletePartialElements(
+            MyElement::class,
+            Table::CONTENT,
+            'elementId'
+        );
+    }
+);
+```
+
+This helps ensure that any elements missing data get deleted instead of lingering in the database.
