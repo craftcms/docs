@@ -371,7 +371,7 @@ If you’re already using your own custom field for this, you can [use Craft’s
     ```
 3. If everything looks good, you can optionally empty the content out of your original field:
     ```shell
-    php craft resave/entries --set myAltTextField --to :empty:
+    php craft resave/assets --set myAltTextField --to :empty:
     ```
 4. Remove the old field from each relevant field layout.
 

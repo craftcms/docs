@@ -174,6 +174,7 @@ module.exports = {
             "entries-fields",
             "lightswitch-fields",
             "matrix-fields",
+            "money-fields",
             "multi-select-fields",
             "number-fields",
             "plain-text-fields",
