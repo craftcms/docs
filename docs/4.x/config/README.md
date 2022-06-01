@@ -149,7 +149,7 @@ Craft’s default configuration is defined by [src/config/app.php](https://githu
 By default, Craft will store data caches in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) by overriding the `cache` application component from `config/app.php`.
 
 ::: tip
-Make sure that your `config/app.php` file is setting a unique `id` for your application, like [new Craft projects are doing](https://github.com/craftcms/craft/blob/master/config/app.php#L23). If not, add that missing line, and run the following command to add a unique `APP_ID` environment variable to your `.env` file:
+Make sure that your `config/app.php` file is setting a unique `id` for your application, like [new Craft projects are doing](https://github.com/craftcms/craft/blob/main/config/app.php#L23). If not, add that missing line, and run the following command to add a unique `CRAFT_APP_ID` environment variable to your `.env` file:
 
     php craft setup/app-id
 :::
@@ -189,7 +189,7 @@ return [
         'cache' => [
             'class' => yii\caching\ApcCache::class,
             'useApcu' => true,
-            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
+            'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
         ],
     ],
 ];
@@ -222,7 +222,7 @@ return [
                     'weight' => 1,
                 ],
             ],
-            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
+            'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
         ],
     ],
 ];
@@ -248,7 +248,7 @@ return [
         'cache' => [
             'class' => yii\redis\Cache::class,
             'defaultDuration' => 86400,
-            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
+            'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
         ],
     ],
 ];
@@ -278,7 +278,7 @@ return [
             $config['replicaConfig'] = [
                 'username' => App::env('DB_REPLICA_USER'),
                 'password' => App::env('DB_REPLICA_PASSWORD'),
-                'tablePrefix' => App::env('DB_TABLE_PREFIX'),
+                'tablePrefix' => App::env('CRAFT_DB_TABLE_PREFIX'),
                 'attributes' => [
                     // Use a smaller connection timeout
                     PDO::ATTR_TIMEOUT => 10,
@@ -515,17 +515,7 @@ Combine the prefix with the config setting in [screaming snake case](https://dev
 
 ### Config Files
 
-Craft still supports setting [general config settings](config-settings.md), [database connection settings](db-settings.md), and other settings via static PHP files. You can set config values in these files to environment variables using Craft’s [App::env()](craft4:craft\helpers\App::env()) function:
-
-```bash
-# -- .env --
-CP_TRIGGER="secret-word"
-```
-
-```php
-// -- config/general.php --
-'cpTrigger' => craft\helpers\App::env('CP_TRIGGER') ?: 'admin',
-```
+Craft still supports setting [general config settings](config-settings.md), [database connection settings](db-settings.md), and other settings via static PHP files. A few non-scalar config settings, like <config4:cpHeadTags>, must be set this way because there’s no way to provide a nested array via environment variable.
 
 #### Multi-Environment Configs
 
@@ -557,16 +547,11 @@ The `'*'` key is required here so Craft knows to treat it as a multi-environment
 Make sure your key(s) are sufficiently unique! Craft reads your array of config settings from top to bottom, applying config settings wherever the `CRAFT_ENVIRONMENT` value *contains* the key.
 :::
 
-By default, new Craft 4 projects will define the [CRAFT_ENVIRONMENT](#craft-environment) constant using an environment variable called `ENVIRONMENT`, which is defined in the `.env` file:
+By default, new Craft 4 projects will define the [CRAFT_ENVIRONMENT](#craft-environment) constant using an environment variable that’s defined in the `.env` file:
 
 ```bash
 # -- .env --
-ENVIRONMENT="dev"
-```
-
-```php
-// -- web/index.php --
-define('CRAFT_ENVIRONMENT', craft\helpers\App::env('ENVIRONMENT') ?: 'production');
+CRAFT_ENVIRONMENT=dev
 ```
 
 ## PHP Constants
@@ -618,12 +603,11 @@ If this isn’t defined, Craft will treat the request as a control panel request
 
 ### `CRAFT_ENVIRONMENT`
 
-The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays. (The [craftcms/craft](https://github.com/craftcms/craft) starter project sets this to the value of an `ENVIRONMENT` environment variable, or falls back to `production` if it’s not defined.)
+The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays.
 
-```php
-// Set the environment from the ENVIRONMENT env var, or default to 'production'
-define('CRAFT_ENVIRONMENT', craft\helpers\App::env('ENVIRONMENT') ?: 'production');
-```
+::: warning
+Prior to Craft 4, `craftcms/craft` projects had `CRAFT_ENVIRONMENT` fall back to a value of `production` by default. This is no longer the case, as the default is [explicitly set to `dev`](https://github.com/craftcms/craft/blob/main/.env.example#L5).
+:::
 
 ### `CRAFT_EPHEMERAL`
 
