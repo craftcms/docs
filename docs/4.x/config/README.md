@@ -541,13 +541,11 @@ return [
 ];
 ```
 
-The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you. Craft will look for the key(s) that match the [CRAFT_ENVIRONMENT](#craft-environment) PHP constant, which should be defined by your `web/index.php` file. (Your server’s hostname will be used as a fallback.)
+The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you. Craft will look for the key(s) that match the [CRAFT_ENVIRONMENT](#craft-environment) PHP constant or environment variable. (Your server’s hostname will be used as a fallback.)
 
 ::: tip
 Make sure your key(s) are sufficiently unique! Craft reads your array of config settings from top to bottom, applying config settings wherever the `CRAFT_ENVIRONMENT` value *contains* the key.
 :::
-
-By default, new Craft 4 projects will define the [CRAFT_ENVIRONMENT](#craft-environment) constant using an environment variable that’s defined in the `.env` file:
 
 ```bash
 # -- .env --
