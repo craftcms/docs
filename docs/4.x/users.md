@@ -938,9 +938,11 @@ Possible values include:
 
 | Value | Fetches users…
 | - | -
-| `'active'` _(default)_ | with active accounts.
-| `'suspended'` | with suspended accounts.
+| `'inactive'` | with inactive accounts.
+| `'active'` | with active accounts.
 | `'pending'` | with accounts that are still pending activation.
+| `'credentialed'` | with either active or pending accounts.
+| `'suspended'` | with suspended accounts.
 | `'locked'` | with locked accounts (regardless of whether they’re active or suspended).
 | `['active', 'suspended']` | with active or suspended accounts.
 | `['not', 'active', 'suspended']` | without active or suspended accounts.
