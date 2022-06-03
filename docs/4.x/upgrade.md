@@ -61,7 +61,7 @@ Some config settings have been removed in Craft 4:
 | `config/general.php` | `useProjectConfigFile`    | Project config always writes YAML now, but you can [manually control when](https://craftcms.com/docs/4.x/project-config.html#manual-yaml-file-generation).
 
 ::: tip
-You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your custom config settings will be accessible via `Craft::$app->config->{mycustomsetting}`.
+You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your custom config settings will be accessible via `Craft::$app->config->custom->{mycustomsetting}`.
 :::
 
 ### Volumes
