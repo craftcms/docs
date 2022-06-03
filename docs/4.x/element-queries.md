@@ -218,6 +218,7 @@ Element queries are specialized [query builders](https://www.yiiframework.com/do
 ### Query Execution
 
 - [all()](yii2:yii\db\Query::all())
+- [collect()](craft4:craft\db\Query::collect())
 - [one()](yii2:yii\db\Query::one())
 - [nth()](craft4:craft\db\Query::nth())
 - [exists()](yii2:yii\db\Query::exists())
@@ -228,6 +229,7 @@ Element queries are specialized [query builders](https://www.yiiframework.com/do
 - [average()](yii2:yii\db\Query::average())
 - [min()](yii2:yii\db\Query::min())
 - [max()](yii2:yii\db\Query::max())
+- [pairs()](craft4:craft\db\Query::pairs())
 
 :::tip
 If you need to reference a custom field column in any of the above methods, you will need to use its complete column name (e.g. `field_altText_xssyxqvs`).
