@@ -13316,6 +13316,12 @@
     },
     {
         "class": "craft\\commerce\\elements\\db\\DonationQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\DonationQuery",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the query's init cycle"
@@ -13346,6 +13352,12 @@
     },
     {
         "class": "craft\\commerce\\elements\\db\\OrderQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\OrderQuery",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the query's init cycle"
@@ -13376,6 +13388,12 @@
     },
     {
         "class": "craft\\commerce\\elements\\db\\ProductQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\ProductQuery",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the query's init cycle"
@@ -13406,6 +13424,12 @@
     },
     {
         "class": "craft\\commerce\\elements\\db\\SubscriptionQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\SubscriptionQuery",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the query's init cycle"
@@ -13431,6 +13455,12 @@
     {
         "class": "craft\\commerce\\elements\\db\\VariantQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\VariantQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
     },
