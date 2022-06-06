@@ -82,6 +82,7 @@ $countries = \craft\commerce\Plugin::getInstance()
 // Craft 4
 $countries = \craft\commerce\Plugin::getInstance()
     ->getStore()
+    ->getStore()
     ->getCountriesList();
 ```
 :::
