@@ -4,7 +4,7 @@ The control panel may seem a bit empty—that’s a feature, not bug! Craft does
 
 ## Dashboard
 
-<BrowserShot url="https://tutorial.nitro/admin/dashboard" :link="false" caption="The control panel without any content.">
+<BrowserShot url="https://tutorial.ddev.site/admin/dashboard" :link="false" caption="The control panel without any content.">
 <img src="../images/empty-control-panel.png" alt="Screenshot of the Craft CMS control panel Dashboard" />
 </BrowserShot>
 
@@ -18,7 +18,7 @@ To the left, then, is the sidebar navigation. (You may have to use the hamburger
 
 ## Utilities
 
-<BrowserShot url="https://tutorial.nitro/admin/utilities/system-report" :link="false" caption="The System Report utility lists important details about your installation.">
+<BrowserShot url="https://tutorial.ddev.site/admin/utilities/system-report" :link="false" caption="The System Report utility lists important details about your installation.">
 <img src="../images/utilities.png" alt="Screenshot of the Craft CMS utilities section" />
 </BrowserShot>
 
@@ -26,7 +26,7 @@ You probably won’t need to visit Utilities too often, but it has some helpful 
 
 By default you’ll land on the System Report. These are key details about your Craft install, and while we’re here it’s a good idea to make sure that each of the items under “Requirements” has a green check mark next to it:
 
-<BrowserShot url="https://tutorial.nitro/admin/utilities/system-report" :link="false" caption="Installed with flying colors.">
+<BrowserShot url="https://tutorial.ddev.site/admin/utilities/system-report" :link="false" caption="Installed with flying colors.">
 <img src="../images/system-requirements.png" alt="Screenshot of the System Report’s Requirements list with all green checkmarks" />
 </BrowserShot>
 
@@ -47,6 +47,6 @@ We won’t be using these utilities in this tutorial, but it might be good to kn
 
 Craft’s Plugin Store offers free and paid plugins that add functionality to your Craft CMS site.
 
-<BrowserShot url="https://tutorial.nitro/admin/plugin-store" :link="false" caption="The Craft CMS Plugin Store.">
+<BrowserShot url="https://tutorial.ddev.site/admin/plugin-store" :link="false" caption="The Craft CMS Plugin Store.">
 <img src="../images/plugin-store.png" alt="Screenshot of Plugin Store" />
 </BrowserShot>

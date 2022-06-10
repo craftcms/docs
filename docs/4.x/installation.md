@@ -63,6 +63,10 @@ my-project/
 The `web/` folder represents your site’s web root, and it can be renamed to whatever you want (`www/`, `public/`, `public_html/`, etc.).
 :::
 
+::: tip
+See [Moving Craft’s Files Below the Web Root](https://craftcms.com/knowledge-base/moving-craft-files) if your hosting setup does not allow Craft’s files to exist outside the web root.
+:::
+
 See the [Directory Structure](directory-structure.md) page to learn what these folders and files are for and how you can customize them.
 
 ## Step 2: Set the File Permissions
@@ -138,14 +142,14 @@ If you’re given a choice, we recommend the following database settings in most
 
 Create a new web server to host your Craft project. Its document root (or “web root”) should point to your `web/` directory (or whatever you’ve renamed it to).
 
-::: tip
-See [Moving Craft’s Files Below the Web Root](https://craftcms.com/knowledge-base/moving-craft-files) if your hosting setup does not allow Craft’s files to exist outside the web root.
-:::
-
-If you’re not using [Nitro](/nitro/2.x/) or another local hosting tool, you’ll probably need to update your `hosts` file so your computer knows to route your chosen hostname’s requests locally.
+You’ll also need to update your system’s `hosts` file so requests to your chosen hostname (e.g. `my-project.tld`) should be routed locally.
 
 - **macOS/Linux/Unix**: `/etc/hosts`
 - **Windows**: `\Windows\System32\drivers\etc\hosts`
+
+::: tip
+Some local development tools such as [DDEV](https://ddev.com/) will update your `hosts` file automatically for you.
+:::
 
 You can test whether you set everything up correctly by pointing your web browser to `https://<Hostname>/index.php?p=admin/install` (substituting `<Hostname>` with your web server’s hostname). If Craft’s Setup Wizard is shown, the hostname is correctly resolving to your Craft installation.
 

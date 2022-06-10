@@ -43,7 +43,7 @@ module.exports = {
     docsRepo: "craftcms/docs",
     docsDir: "docs",
     docsBranch: "main",
-    searchPlaceholder: "Search Craft, Commerce, and Nitro docs (Press “/” to focus)",
+    searchPlaceholder: "Search Craft CMS and Craft Commerce docs (Press “/” to focus)",
     editLinks: true,
     nextLinks: true,
     prevLinks: true,

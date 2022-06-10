@@ -12,7 +12,7 @@ The layout is important for this because it will be the base our other templates
 
 The underscore (`_`) at the beginning of `_layout.twig` means the template is private. 
 
-Unlike the quick example we started with, you _cannot_ view the template by visiting `https://tutorial.nitro/_layout`. We can use those underscores when it makes sense. In this case the layout is only a shell and we never want it to appear on its own, so a private template is perfect.
+Unlike the quick example we started with, you _cannot_ view the template by visiting `https://tutorial.ddev.site/_layout`. We can use those underscores when it makes sense. In this case the layout is only a shell and we never want it to appear on its own, so a private template is perfect.
 
 Copy the following into the `templates/_layout.twig` file you created:
 
@@ -91,7 +91,7 @@ The first line _extends_ the layout template, meaning it will use that as a star
 
 Now that the blog section’s template is ready, you can visit the URL for a published post:
 
-<BrowserShot url="https://tutorial.nitro/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="https://tutorial.ddev.site/blog/my-first-post" :link="false" caption="">
 <img src="../images/entry-static.png" alt="Screenshot of empty page with generic title" />
 </BrowserShot>
 
@@ -115,7 +115,7 @@ For any detail page template, Craft CMS provides a special `entry` variable we c
 
 Now it’s looking better!
 
-<BrowserShot url="https://tutorial.nitro/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="https://tutorial.ddev.site/blog/my-first-post" :link="false" caption="">
 <img src="../images/entry-dynamic.png" alt="Screenshot of detail page with dynamic title and entry date" />
 </BrowserShot>
 
@@ -447,7 +447,7 @@ We’ll display a listing of posts in two places: in the blog index and again on
 
 Let’s start with our landing page first.
 
-Create `templates/blog/index.twig`. Any time you use `index.twig` or `index.html`, that will be the default template or page in a given folder. So when we visit `https://tutorial.nitro/blog/`, that folder’s `blog/index.twig` will be used for rendering the result. Add the following to that template:
+Create `templates/blog/index.twig`. Any time you use `index.twig` or `index.html`, that will be the default template or page in a given folder. So when we visit `https://tutorial.ddev.site/blog/`, that folder’s `blog/index.twig` will be used for rendering the result. Add the following to that template:
 
 ```twig
 {% extends "_layout.twig" %}
@@ -495,7 +495,7 @@ The image transform is similar to what we did earlier, except we used `.one()` i
 
 Here’s what the result looks like:
 
-<BrowserShot url="https://tutorial.nitro/blog/" :link="false" caption="">
+<BrowserShot url="https://tutorial.ddev.site/blog/" :link="false" caption="">
 <img src="../images/listing.png" alt="Screenshot of listing page" />
 </BrowserShot>
 
@@ -543,7 +543,7 @@ In the same way that entry detail pages came automatically loaded with an `entry
 
 Our post category listings, which you can navigate to by choosing any of a blog post’s tags, should be working now:
 
-<BrowserShot url="https://tutorial.nitro/blog/category/ramblings" :link="false" caption="Listing page for posts in the `Ramblings` category.">
+<BrowserShot url="https://tutorial.ddev.site/blog/category/ramblings" :link="false" caption="Listing page for posts in the `Ramblings` category.">
 <img src="../images/listing-category.png" alt="Screenshot of listing page limited by category" />
 </BrowserShot>
 
@@ -595,7 +595,7 @@ Now let’s include that in `templates/_layout.twig`:
 </html>
 ```
 
-<BrowserShot url="https://tutorial.nitro/blog" :link="false" caption="Blog listing with navigation." :max-height="600">
+<BrowserShot url="https://tutorial.ddev.site/blog" :link="false" caption="Blog listing with navigation." :max-height="600">
 <img src="../images/navigation.png" alt="Screenshot of blog listing with new top navigation" />
 </BrowserShot>
 
@@ -632,7 +632,6 @@ Create `template/_singles/about.twig` and add the following to it:
 
 We’re using specific CSS utility classes to create a two-column layout, but otherwise you’ll recognize all the pieces from previous examples!
 
-<BrowserShot url="https://tutorial.nitro/about" :link="false" caption="The About page.">
+<BrowserShot url="https://tutorial.ddev.site/about" :link="false" caption="The About page.">
 <img src="../images/single.png" alt="Screenshot of two-column About page" />
 </BrowserShot>
-

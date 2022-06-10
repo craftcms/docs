@@ -63,7 +63,7 @@ Next, add the exact same contents to each one:
 Hi! This site’s name is {{ siteName }}.
 ```
 
-Without any setup in Craft CMS, you can go directly to `https://tutorial.nitro/twig-hello` and `https://tutorial.nitro/html-hello.html` to see each one in your browser. Try it!
+Without any setup in Craft CMS, you can go directly to `https://tutorial.ddev.site/twig-hello` and `https://tutorial.ddev.site/html-hello.html` to see each one in your browser. Try it!
 
 The Twig version gets parsed and displays the name of your site, with a clean URL that doesn’t require a file extension.
 

@@ -4,7 +4,7 @@ Every web server has the straightforward job of translating a URL into a respons
 
 ## Static routes
 
-At this very moment, you can add a cat photo to your project at `web/cat.jpg` and see it in your browser at `https://tutorial.nitro/cat.jpg`.
+At this very moment, you can add a cat photo to your project at `web/cat.jpg` and see it in your browser at `https://tutorial.ddev.site/cat.jpg`.
 
 The web server reads that URL, finds the file in the web root, and returns it in a response that’s displayed by your browser. This is a _static_ route where Craft CMS never gets involved; normal web server stuff.
 
