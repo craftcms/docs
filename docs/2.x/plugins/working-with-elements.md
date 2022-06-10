@@ -81,9 +81,6 @@ We are still documenting all of the different features these classes have at the
 
 Here are some existing resources, if you want to start diving in:
 
-* [Introduction to Element Types in Craft CMS - Part 1 of 3](https://straightupcraft.com/events/introduction-to-element-types-in-craft-cms-part-1-of-3) _(video)_
-* [Introduction to Element Types in Craft CMS - Part 2 of 3](https://straightupcraft.com/events/element-types-and-the-element-service-part-2-of-3) _(video)_
-* [Introduction to Element Types in Craft CMS - Part 3 of 3](https://straightupcraft.com/events/exploring-the-element-type-model-part-3-of-3) _(video)_
 * <craft2:Craft\BaseElementType> class reference
 * <craft2:Craft\BaseElementModel> class reference
 * <craft2:Craft\ElementsService> class reference
