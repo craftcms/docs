@@ -153,7 +153,7 @@ The fixture data file could look like this:
 return [
     [
         'username' => 'User',
-        'email' => 'info@example.com',
+        'email' => 'info@domain.tld',
     ],
 ];
 ```

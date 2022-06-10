@@ -110,7 +110,7 @@ For example, the code for `Æ` is `198`. See sites like [Website Builders](https
 The default domain name Craft will use when sending cookies to the browser. If it is left blank, Craft will leave it up to the browser to decide – which will be whatever the current request’s domain name is.
 
 ```php
-'defaultCookieDomain' => '.example.com',
+'defaultCookieDomain' => '.my-project.tld',
 ```
 
 ### `defaultSearchTermOptions`
@@ -178,7 +178,7 @@ An array of environment-specific variables which can be accessed as tags within 
 
 ```php
 'environmentVariables' => array(
-    'baseAssetUrl'  => '//example.com/',
+    'baseAssetUrl'  => '//my-project.tld/',
     'baseAssetPath' => './',
 ),
 ```
@@ -280,7 +280,7 @@ This setting should be disabled for servers running Win32, or with Apache’s mo
 If disabled, an alternate task running trigger *must* be set up separately. For example, this Cron command would trigger a task runner once every minute:
 
 ```
-*/1 * * * * /usr/bin/curl --silent --compressed http://example.com/index.php?p=actions/tasks/runPendingTasks
+*/1 * * * * /usr/bin/curl --silent --compressed http://my-project.tld/index.php?p=actions/tasks/runPendingTasks
 ```
 
 ### `sameSiteCookieValue`
@@ -348,8 +348,8 @@ This is the recommended way to set the site URL on multi-lingual sites, as it gi
 
 ```php
 'siteUrl' => array(
-    'en' => 'http://example.com/',
-    'de' => 'http://example.de/'
+    'en' => 'http://my-project.com/',
+    'de' => 'http://my-project.de/'
 ),
 ```
 
@@ -720,7 +720,7 @@ Whether uppercase letters should be allowed in entry and category slugs. Note th
 Explicitly sets the base URL to the control panel, which may be used if the dynamically-determined URL is not desired for some reason.
 
 ```php
-'baseCpUrl' => 'http://admin.example.com/',
+'baseCpUrl' => 'http://cms.my-project.tld/',
 ```
 
 ### `cpTrigger`
@@ -1294,7 +1294,7 @@ The URI and template path that Craft should use upon successfully setting a user
 Configures Craft to send all system emails to a single email address (or multiple email addresses), for testing purposes.
 
 ```php
-'testToEmailAddress' => 'me@example.com',
+'testToEmailAddress' => 'me@domain.tld',
 ```
 
 ### `useEmailAsUsername`

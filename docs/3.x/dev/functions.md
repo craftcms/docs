@@ -788,7 +788,7 @@ Using the `url()` function has advantages over hard-coding URLs in your template
 ::: tip
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
 ```twig
-{{ url('http://my-project.com', 'foo=1', 'https') }}
-{# Output: "https://my-project.com?foo=1" #}
+{{ url('http://my-project.tld', 'foo=1', 'https') }}
+{# Output: "https://my-project.tld?foo=1" #}
 ```
 :::

@@ -76,7 +76,7 @@ We recommend overriding the `@web` alias if you plan on using it, to avoid a cac
 
 ```php
 'aliases' => [
-    '@web' => 'https://my-project.com',
+    '@web' => 'https://my-project.tld',
 ];
 ```
 
@@ -84,7 +84,7 @@ If your web root is something besides `web/`, `public/`, `public_html/`, or `htm
 
 ```php
 'aliases' => [
-    '@web' => 'https://my-project.com',
+    '@web' => 'https://my-project.tld',
     '@webroot' => dirname(__DIR__) . '/path/to/webroot',
 ];
 ```
@@ -93,7 +93,7 @@ You can define additional custom aliases using the <config4:aliases> config sett
 
 ```php
 'aliases' => [
-    '@web' => 'https://my-project.com',
+    '@web' => 'https://my-project.tld',
     '@webroot' => dirname(__DIR__) . '/path/to/webroot',
     '@assetBaseUrl' => '@web/assets',
     '@assetBasePath' => '@webroot/assets',
@@ -105,7 +105,7 @@ With those in place, you could begin your asset volumes’ Base URL and File Sys
 If you’d like, you can set the alias values with environment variables, either from your `.env` file or somewhere in your environment’s configuration:
 
 ```bash
-ASSETS_BASE_URL=https://my-project.com/assets
+ASSETS_BASE_URL=https://my-project.tld/assets
 ASSETS_BASE_PATH=/path/to/webroot/assets
 ```
 
@@ -397,7 +397,7 @@ return [
 
             // Override the transport adapter settings
             $settings->transportSettings = [
-                'domain' => 'foo.com',
+                'domain' => 'my-project.tld',
                 'apiKey' => 'key-xxxxxxxxxx',
             ];
 
@@ -494,7 +494,7 @@ For example, you can define a `ROOT_URL` environment variable that is set to the
 
 ```bash
 # -- .env --
-ROOT_URL="http://my-project.test"
+ROOT_URL="http://my-project.tld"
 ```
 Then create a `@rootUrl` alias that references it:
 

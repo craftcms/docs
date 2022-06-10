@@ -37,7 +37,7 @@ class MyJob extends \craft\queue\BaseJob
     {
         $message = new Message();
 
-        $message->setTo('to@foo.dev');
+        $message->setTo('to@domain.tld');
         $message->setSubject('Oh Hai');
         $message->setTextBody('Hello from the queue system! 👋');
 

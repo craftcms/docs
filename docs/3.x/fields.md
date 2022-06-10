@@ -13,7 +13,7 @@ All fields share a few common settings:
 - **Field Type** – What type of field it is
 
 
-<BrowserShot url="https://mysite.test/admin/settings/fields/new" :link="false" :max-height="500">
+<BrowserShot url="https://my-project.tld/admin/settings/fields/new" :link="false" :max-height="500">
 <img src="./images/fields-field-settings.png">
 </BrowserShot>
 

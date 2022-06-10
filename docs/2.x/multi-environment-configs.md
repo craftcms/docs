@@ -15,7 +15,7 @@ Without any help on Craft’s part, you could technically add multi-environment 
 ```php
 return array(
     'omitScriptNameInUrls' => true,
-    'devMode' => ($_SERVER['SERVER_NAME'] == 'example.test' ? true : false),
+    'devMode' => ($_SERVER['SERVER_NAME'] == 'my-project.test' ? true : false),
 );
 ```
 
@@ -45,23 +45,23 @@ return array(
         'omitScriptNameInUrls' => true,
     ),
 
-    'example.test' => array(
+    'my-project.test' => array(
         'devMode' => true,
     ),
 
-    'example.com' => array(
+    'my-project.com' => array(
         'cooldownDuration' => 0,
     )
 );
 ```
 
-Craft will compare the additional array keys (`'example.test'` and `'example.com'`) with the `$_SERVER['SERVER_NAME']` server environment variable. If your server is configured properly, that should be your site’s domain name (without the ‘http://’).
+Craft will compare the additional array keys (`'my-project.test'` and `'my-project.com'`) with the `$_SERVER['SERVER_NAME']` server environment variable. If your server is configured properly, that should be your site’s domain name (without the ‘http://’).
 
 ::: tip
 You can change the string Craft uses to determine the current environment by defining the [CRAFT_ENVIRONMENT](php-constants.md#craft-environment) constant in your `index.php` file.
 :::
 
-When Craft is comparing your config keys with `$_SERVER['SERVER_NAME']`, it’s only looking for a *partial match*. So the environment key `'example.com'` will also work if you’re accessing your site via www.example.com or any other subdomain. You could even just use the TLD if you’re feeling adventurous:
+When Craft is comparing your config keys with `$_SERVER['SERVER_NAME']`, it’s only looking for a *partial match*. So the environment key `'my-project.com'` will also work if you’re accessing your site via `www.my-project.com` or any other subdomain. You could even just use the TLD if you’re feeling adventurous:
 
 ```php
 return array(
@@ -115,10 +115,10 @@ A popular use case for the environmentVariables config setting is the File Syste
 
 First we need to identify the areas of these settings that will differ depending on the environment. Let’s say we only have a single Assets Source, and its settings are as follows:
 
-* **File System Path (Local)**: `/users/brandon/Sites/example.test/public/assets/images/`
+* **File System Path (Local)**: `/users/brandon/Sites/my-project/public/assets/images/`
 * **File System Path (Prod.)**: `/storage/av12345/www/public_html/assets/images/`
-* **URL (Local)**: `http://example.test/assets/images/`
-* **URL (Prod.)**: `http://example.com/assets/images/`
+* **URL (Local)**: `http://my-project.test/assets/images/`
+* **URL (Prod.)**: `https://my-project.com/assets/images/`
 
 In each case, everything before `assets/images/` could be different between the environments. To address this, we should create two custom environment variables. Their names are completely up to us – we’ll go with “`basePath`” and “`baseUrl`”.
 
@@ -128,21 +128,21 @@ return array(
         // ...
     ),
 
-    'example.test' => array(
+    'my-project.test' => array(
         // ...
 
         'environmentVariables' => array(
-            'basePath' => '/users/brandon/Sites/example.test/public/',
-            'baseUrl'  => 'http://example.test/',
+            'basePath' => '/users/brandon/Sites/my-project/public/',
+            'baseUrl'  => 'http://my-project.test/',
         )
     ),
 
-    'example.com' => array(
+    'my-project.com' => array(
         // ...
 
         'environmentVariables' => array(
             'basePath' => '/storage/av12345/www/public_html/',
-            'baseUrl'  => 'http://example.com/',
+            'baseUrl'  => 'https://my-project.com/',
         )
     )
 );

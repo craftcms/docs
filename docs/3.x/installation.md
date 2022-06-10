@@ -10,10 +10,10 @@ Craft can be downloaded with [Composer](#downloading-with-composer) or by [manua
 You should be running Composer 1.3.0 or later. You can find out your installed version of Composer by running `composer -V` from your terminal. If that outputs something lower than 1.3.0, run `composer self-update` to update your Composer installation.
 :::
 
-To create a new Craft project, run this command (substituting `my/project/path` with the path where Composer should create the project):
+To create a new Craft project, run this command (substituting `path/to/my-project` with the path where Composer should create the project):
 
 ```bash
-composer create-project craftcms/craft my/project/path ^1
+composer create-project craftcms/craft path/to/my-project ^1
 ```
 
 Composer will take a few minutes to load everything. Once it’s done you’ll see a success message:
@@ -38,7 +38,7 @@ If you’re on macOS, be careful not to lose the hidden files in there (`.env`, 
 Once Craft’s files are in place, your project directory should have a directory structure like this:
 
 ```treeview
-my-project.test/
+my-project/
 ├── config/
 │   └── ...
 ├── modules/
@@ -157,7 +157,7 @@ We recommend using the `.test` TLD for local development, and specifically not `
 Finally, it’s time to run Craft’s Setup Wizard from either your [terminal](#terminal-setup) or your [web browser](#web-browser-setup).
 
 ::: tip
-If you used `composer create-project` earlier and chose to continue setup there, you can head straight to `https://mysite.test/admin`.
+If you used `composer create-project` earlier and chose to continue setup there, you can head straight to `https://my-project.tld/admin`.
 :::
 
 ### Terminal Setup
@@ -172,15 +172,15 @@ The command will ask a few questions about your database connection and kick off
 
 ### Web Browser Setup
 
-In your web browser, go to `https://mysite.test/index.php?p=admin/install` (substituting `mysite.test` with your web server’s hostname). If you’ve done everything right so far, you should be greeted by Craft’s Setup Wizard:
+In your web browser, go to `https://my-project.tld/index.php?p=admin/install` (substituting `my-project.tld` with your web server’s hostname). If you’ve done everything right so far, you should be greeted by Craft’s Setup Wizard:
 
-<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<BrowserShot url="https://my-project.tld/admin/install" :link="false">
 <img src="./images/installation-step-0.png" alt="Craft Installation Screen">
 </BrowserShot>
 
 The first step of the installer is to accept the [license agreement](https://craftcms.com/license). Scroll down through the agreement (reading it all, of course) and press **Got it** to accept:
 
-<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<BrowserShot url="https://my-project.tld/admin/install" :link="false">
 <img src="./images/installation-step-1.png" alt="Craft Installation License Agreement">
 </BrowserShot>
 
@@ -190,19 +190,19 @@ The second step is to enter your database connection information:
 If the Setup Wizard skips this step, it’s because Craft is already able to connect to your database.
 :::
 
-<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<BrowserShot url="https://my-project.tld/admin/install" :link="false">
 <img src="./images/installation-step-2.png" alt="Craft Installation Database Connection Information">
 </BrowserShot>
 
 The third step is to create an admin account. Don’t be one of _those people_—be sure to pick a strong password:
 
-<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<BrowserShot url="https://my-project.tld/admin/install" :link="false">
 <img src="./images/installation-step-3.png" alt="Craft Installation Create User Account">
 </BrowserShot>
 
 The final step is to define your System Name, Base URL, and Language:
 
-<BrowserShot url="https://mysite.test/admin/install" :link="false">
+<BrowserShot url="https://my-project.tld/admin/install" :link="false">
 <img src="./images/installation-step-4.png" alt="Craft Installation System Settings">
 </BrowserShot>
 
@@ -210,7 +210,7 @@ Press **Finish up** to complete the setup process. A few seconds later, you shou
 
 If it was successful, Craft will redirect your browser to the control panel:
 
-<BrowserShot url="https://mysite.test/admin/dashboard" :link="false">
+<BrowserShot url="https://my-project.tld/admin/dashboard" :link="false">
 <img src="./images/installation-step-5.png" alt="Craft Installation Complete">
 </BrowserShot>
 

@@ -102,13 +102,13 @@ Once you’ve finished setting your DB config settings, save the file and close 
 
 ### Step 5: Run the installer!
 
-Now that everything’s set up, point your browser to `http://example.com/admin`. If you see a monkey in your browser, you’ve done everything right!
+Now that everything’s set up, point your browser to `http://my-project.tld/admin`. If you see a monkey in your browser, you’ve done everything right!
 
 ![Install Screen 1](./images/install1.png)
 
 No monkey? Here’s a couple tips:
 
-* If you’re getting a 404, your server might not be configured to redirect would-be 404’s to `index.php` correctly. Try going to `http://example.com/index.php/admin` or `http://example.com/index.php?p=admin` instead.
+* If you’re getting a 404, your server might not be configured to redirect would-be 404’s to `index.php` correctly. Try going to `http://my-project.tld/index.php/admin` or `http://my-project.tld/index.php?p=admin` instead.
 * If you’re getting an error about how Craft can’t connect to your DB, you’ll need to revisit Step 4.
 
 The first step of the installer is to create a user account. Don’t be one of *those* people and be sure to pick a strong password.

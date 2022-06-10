@@ -13,7 +13,7 @@ All fields share a few common settings:
 - **Field Type** – What type of field it is
 
 
-<BrowserShot url="https://mysite.test/admin/settings/fields/new" :link="false" :max-height="500">
+<BrowserShot url="https://my-project.tld/admin/settings/fields/new" :link="false" :max-height="500">
 <img src="./images/fields-field-settings.png">
 </BrowserShot>
 
@@ -119,4 +119,3 @@ A field that’s required will have an asterisk (<icon kind="asterisk" />) besid
 Any fields that have condition rules on them are displayed with a caution strip:
 
 ![Screenshot of two simplified fields: normal on the left, and conditional on the right with a skewed dashed internal border](./images/field-and-conditional-field.png)
-

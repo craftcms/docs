@@ -67,7 +67,7 @@ If you have any reference-style links in your release notes, you will need to de
 ### Added
 - New [superFoo] config setting
 
-[superFoo]: https://docs.foo.com/config#superFoo
+[superFoo]: https://docs.my-plugin.tld/config#superFoo
 ```
 
 ## Critical Updates

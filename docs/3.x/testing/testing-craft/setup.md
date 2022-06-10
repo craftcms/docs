@@ -60,7 +60,7 @@ modules:
   config:
     \craft\test\Craft:
       configFile: "tests/_craft/config/test.php"
-      entryUrl: "https://your-site-url.test/index.php"
+      entryUrl: "http://my-project.test/index.php"
       projectConfig: {}
       migrations: []
       plugins: []
@@ -83,7 +83,7 @@ DB_USER="root"
 DB_PASSWORD=""
 DB_TABLE_PREFIX=""
 SECURITY_KEY=""
-PRIMARY_SITE_URL="https://your-site-url.test/" # Set this to the `entryUrl` param in the `codeception.yml` file.
+PRIMARY_SITE_URL="http://my-project.test/" # Set this to the `entryUrl` param in the `codeception.yml` file.
 ```
 
 ::: tip

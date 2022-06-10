@@ -52,8 +52,8 @@ You can set Craft’s Site URL setting on a per-locale basis via the <config2:si
 return array(
     // ...
     'siteUrl' => array(
-        'en' => 'http://example.com/en/',
-        'de' => 'http://example.com/de/',
+        'en' => 'http://my-project.com/en/',
+        'de' => 'http://my-project.com/de/',
     ),
 );
 ```
@@ -65,18 +65,18 @@ return array(
     '*' => array(
         // ...
     ),
-    'example.dev' => array(
+    'my-project.test' => array(
         // ...
         'siteUrl' => array(
-            'en' => 'http://example.dev/en/',
-            'de' => 'http://example.dev/de/',
+            'en' => 'http://my-project.test/en/',
+            'de' => 'http://my-project.test/de/',
         ),
     ),
-    'example.com' => array(
+    'my-project.com' => array(
         // ...
         'siteUrl' => array(
-            'en' => 'http://example.com/en/',
-            'de' => 'http://example.com/de/',
+            'en' => 'http://my-project.com/en/',
+            'de' => 'http://my-project.com/de/',
         ),
     ),
 );
@@ -94,30 +94,30 @@ Here are some examples of what that might look like. Note that your actual web r
 
         craft/
         public_html/
-            en/                 --> example.com/en/
+            en/                 --> my-project.com/en/
                 .htaccess
                 index.php
-            de/                 --> example.com/de/
+            de/                 --> my-project.com/de/
                 .htaccess
                 index.php
 
 * **Example 2**: English at the top level; German from a `de/` subfolder:
 
         craft/
-        public_html/            --> example.com/
+        public_html/            --> my-project.com/
             .htaccess
             index.php
-            de/                 --> example.com/de/
+            de/                 --> my-project.com/de/
                 .htaccess
                 index.php
 
 * **Example 3**: English and German each get their own domain:
 
         craft/
-        public_html/            --> example.com/
+        public_html/            --> my-project.com/
             .htaccess
             index.php
-        public_de/              --> example.de/
+        public_de/              --> my-project.de/
             .htaccess
             index.php
 
@@ -143,8 +143,8 @@ define('CRAFT_LOCALE', 'de');
 
 If you have any local asset sources, you will need to make sure those assets are available from each of your locales’ sites.
 
-* The **File System Path** settings should be absolute (`/full/path/to/example.com/images/`).
-* The **URL** settings should be absolute (`http://example.com/images/`) or protocol-relative (`//example.com/images/`). If each of your locales’ sites are going to exist on the same domain (and subdomain), root-relative will work, too (`/images/`).
+* The **File System Path** settings should be absolute (`/path/to/my-project/public/images/`).
+* The **URL** settings should be absolute (`http://my-project.tld/images/`) or protocol-relative (`//my-project.tld/images/`). If each of your locales’ sites are going to exist on the same domain (and subdomain), root-relative will work, too (`/images/`).
 
 ::: tip
 If these settings are going to need to change between environments, you can use [environment variables](multi-environment-configs.md#environment-specific-variables) to define the parts that will change on a per-environment basis.

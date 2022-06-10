@@ -71,7 +71,7 @@ Route URIs should _not_ begin with a slash (`/`).
 
 After defining your URI pattern and entering a template path, press **Save**. The modal will close, revealing your new route on the page.
 
-When you point your browser to `https://my-project.nitro/blog/archive/2018`, it will match your new route, and Craft will load the specified template.
+When you point your browser to `https://my-project.tld/blog/archive/2018`, it will match your new route, and Craft will load the specified template.
 
 The value of the `year` token will also be available to the template as a variable called `year`.
 
@@ -137,7 +137,7 @@ For example, with this URL rule:
 'blog/archive/<year:\d{4}>' => ['template' => 'blog/_archive'],
 ```
 
-If you access `https://my-project.nitro/blog/archive/2018`, your `blog/_archive.twig` template will get loaded a `year` variable set to `2018`.
+If you access `https://my-project.tld/blog/archive/2018`, your `blog/_archive.twig` template will get loaded a `year` variable set to `2018`.
 
 ```twig
 <h1>Blog Entries from {{ year }}</h1>
@@ -148,7 +148,7 @@ If you define a wildcard token (`*`) in the control panel, it will automatically
 
 ![Screenshot of Create a new route control panel form with wildcard token](./images/route-with-wildcard-token.png =400x300)
 
-The template for `my-project.nitro/foo/some-slug` could then use `{{ any }}`:
+The template for `my-project.tld/foo/some-slug` could then use `{{ any }}`:
 
 ```twig
 It seems you’re looking for `{{ any }}`.
@@ -194,5 +194,5 @@ When Craft finds a matching error template, it will use that and provide it with
 - `statusCode` – error’s HTTP status code
 
 ::: tip
-You can test these pages even if [Dev Mode](config3:devMode) is enabled by going to `https://my-project.nitro/404`, substituting `404` for the name of the template you’re testing.
+You can test these pages even if [Dev Mode](config3:devMode) is enabled by going to `https://my-project.tld/404`, substituting `404` for the name of the template you’re testing.
 :::

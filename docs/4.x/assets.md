@@ -149,7 +149,7 @@ You can cache-bust asset URLs automatically by enabling the [revAssetUrls](confi
 
 ```twig
 <img src="{{ url(image.getUrl('thumb'), {v: image.dateModified.timestamp}) }}">
-{# <img src="https://mysite.foo/images/_thumb/bar.jpg?v=1614374621"> #}
+{# <img src="https://my-project.tld/images/_thumb/bar.jpg?v=1614374621"> #}
 ```
 
 ### Parameters

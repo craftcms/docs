@@ -4,7 +4,7 @@ module.exports = {
   "my-field-handle": { title: "Replace this with your kebab-case field handle." },
   "my-machine": { title: "Replace with the name of your machine, using only letters, numbers, underscores, and hyphens." },
   "my-plugin-handle": { title: "Replace this with your kebab-case plugin handle." },
-  "my/project/path": { title: "Replace this with your project path." },
+  "my-project.tld": { title: "Replace with your site’s hostname." },
   "myAssetsField": { title: "Replace with your Assets field handle." },
   "myEntriesField": { title: "Replace with your Entries field handle." },
   "myFieldHandle": { title: "Replace this with your actual field handle." },
@@ -12,6 +12,6 @@ module.exports = {
   "myNamedTransform": { title: "Replace with the named transform you created in the control panel." },
   "my_migration_name": { title: "Replace this with your snake_case migration name." },
   "mynamespace": { title: "Replace this with your actual namespace." },
-  "mysite.test": { title: "Replace with your site’s hostname." },
   "mytablename": { title: "Replace this with your database table name, without any prefix." },
+  "path/to/my-project": { title: "Replace this with your project path." },
 };

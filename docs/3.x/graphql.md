@@ -143,10 +143,10 @@ return [
 Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using the <config3:allowedGraphqlOrigins> setting.
 :::
 
-Pretending your endpoint is `http://my-project.test/api`, you can verify that it’s configured correctly by sending a `{ping}` query to it:
+Pretending your endpoint is `http://my-project.tld/api`, you can verify that it’s configured correctly by sending a `{ping}` query to it:
 
 ```bash
-curl -H "Content-Type: application/graphql" -d '{ping}' http://my-project.test/api
+curl -H "Content-Type: application/graphql" -d '{ping}' http://my-project.tld/api
 ```
 
 If you get a `pong` in your response, your GraphQL API is up and running!
@@ -206,23 +206,23 @@ The GraphQL API can be queried in three ways:
   ```bash
   curl \
     --data-urlencode "query={ping}" \
-    http://craft32.test/api
+    http://my-project.tld/api
   # or
-  curl http://craft32.test/api?query=%7Bping%7D
+  curl http://my-project.tld/api?query=%7Bping%7D
   ```
 2. **A `POST` request with an `application/json` content type** and the GraphQL query defined by a `query` key:
   ```bash
   curl \
     -H "Content-Type: application/json" \
     -d '{"query":"{ping}"}' \
-    http://my-project.test/api
+    http://my-project.tld/api
   ```
 3. **A `POST` request with an `application/graphql` content type** and the GraphQL query defined by the raw request body:
   ```bash
   curl \
     -H "Content-Type: application/graphql" \
     -d '{ping}' \
-    http://my-project.test/api
+    http://my-project.tld/api
   ```
 
 #### Specifying Variables
@@ -236,7 +236,7 @@ curl \
         "query": "query($id:[Int]) { entries(id: $id) { id, title } }",
         "variables": { "id": [1, 2, 3] }
       }' \
-  http://my-project.test/api
+  http://my-project.tld/api
 ```
 
 #### Querying a Private Schema
@@ -248,7 +248,7 @@ curl \
   -H "Authorization: Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
   -H "Content-Type: application/graphql" \
   -d '{entries{id}}' \
-  http://my-project.test/api
+  http://my-project.tld/api
 ```
 
 ::: warning

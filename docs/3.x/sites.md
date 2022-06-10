@@ -250,7 +250,7 @@ To do that, create a new folder in your project’s base directory called `trans
 For example, if you want to translate your project’s messages into German, this is what your project’s directory structure should look like:
 
 ```treeview
-my-project.test/
+my-project/
 ├── config/
 ├── ...
 └── translations/
