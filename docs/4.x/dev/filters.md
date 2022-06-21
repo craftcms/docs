@@ -54,6 +54,7 @@ Filter | Description
 [money](#money) | Outputs a value from a Money object.
 [multisort](#multisort) | Sorts an array by one or more keys within its sub-arrays.
 [namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
+[namespaceAttributes](#namespaceattributes) | Namespaces `id` and other HTML attributes, as well as CSS selectors.
 [namespaceInputId](#namespaceinputid) | Namespaces an element ID.
 [namespaceInputName](#namespaceinputname) | Namespaces an input name.
 [nl2br](https://twig.symfony.com/doc/3.x/filters/nl2br.html) | Replaces newlines with `<br>` tags.
@@ -838,6 +839,53 @@ That would result in:
   #foo-title { font-weight: bold; }
 </style>
 <input class="foo-text" id="foo-title" name="foo[title]" type="text">
+```
+
+## `namespaceAttributes`
+
+The `|namespaceAttributes` filter can be used to namespace `id` and other HTML attributes, as well as CSS selectors.
+
+It’s identical to the [namespace](#namespace) filter, except that inputs’ `name` attributes won’t be modified.
+
+For example, this:
+
+```twig
+{% set html %}
+<style>
+  .text { font-size: larger; }
+  #title { font-weight: bold; }
+</style>
+<input class="text" id="title" name="title" type="text">
+{% endset %}
+{{ html|namespaceAttributes('foo') }}
+```
+
+would become this:
+
+```html
+<style>
+  .text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="text" id="foo-title" name="title" type="text">
+```
+
+Notice how the `#title` CSS selector became `#foo-title`, the `id` attribute changed from `title` to `foo-title`, but the `name` attribute wasn’t changed.
+
+If you want class names to get namespaced as well, pass `withClasses=true`. That will affect both class CSS selectors and `class` attributes:
+
+```twig
+{{ html|namespaceAttributes('foo', withClasses=true) }}
+```
+
+That would result in:
+
+```html{2,5}
+<style>
+  .foo-text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="foo-text" id="foo-title" name="title" type="text">
 ```
 
 ## `namespaceInputId`

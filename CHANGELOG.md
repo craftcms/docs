@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-06-20
+### Changed
+- Documented the `namespaceAttributes` filter for Craft 3 and 4.
+
 ## 2022-05-27
 ### Added
 - Added a note about Craft 4.x element type garbage collection.
