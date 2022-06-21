@@ -556,10 +556,10 @@ The database username to connect with.
 
 ::: code
 ```php Static Config
-'user' => 'nitro',
+'user' => 'db',
 ```
 ```shell Environment Override
-CRAFT_DB_USER=nitro
+CRAFT_DB_USER=db
 ```
 :::
 

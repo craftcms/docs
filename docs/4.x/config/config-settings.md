@@ -950,10 +950,10 @@ in Settings → General.
 
 ::: code
 ```php Static Config
-'ipHeaders' => ['X-Forwarded-For', 'CF-Connecting-IP'],
+'isSystemLive' => true,
 ```
 ```shell Environment Override
-CRAFT_IP_HEADERS=X-Forwarded-For,CF-Connecting-IP
+CRAFT_IS_SYSTEM_LIVE=true
 ```
 :::
 
@@ -3568,7 +3568,7 @@ Defined by
 The file extensions Craft should allow when a user is uploading files.
 
 ```php Static Config
-// Nothing but GIFs!
+// Nothing bug GIFs!
 'allowedFileExtensions' => [
     'gif',
 ],
