@@ -17,8 +17,8 @@ Filter | Description
 [contains](#contains) | Returns whether an array contains a nested item with a given key-value pair.
 [convert_encoding](https://twig.symfony.com/doc/3.x/filters/convert_encoding.html) | Converts a string from one encoding to another.
 [currency](#currency) | Formats a number as currency.
-[date](#date) | Formats a date.
 [date_modify](https://twig.symfony.com/doc/3.x/filters/date_modify.html) | Modifies a date.
+[date](#date) | Formats a date.
 [datetime](#datetime) | Formats a date with its time.
 [default](https://twig.symfony.com/doc/3.x/filters/default.html) | Returns the value or a default value if empty.
 [diff](#diff) | Returns the difference between arrays.
@@ -35,8 +35,8 @@ Filter | Description
 [hash](#hash) | Prefixes a string with a keyed-hash message authentication code (HMAC).
 [httpdate](#httpdate) | Converts a date to the HTTP format.
 [id](#id) | Normalizes an element ID into only alphanumeric characters, underscores, and dashes.
-[indexOf](#indexof) | Returns the index of a given value within an array, or the position of a passed-in string within another string.
 [index](#index) | Indexes the items in an array.
+[indexOf](#indexof) | Returns the index of a given value within an array, or the position of a passed-in string within another string.
 [intersect](#intersect) | Returns the intersecting items of two arrays.
 [join](https://twig.symfony.com/doc/3.x/filters/join.html) | Concatenates multiple strings into one.
 [json_decode](#json_decode) | JSON-decodes a value.
@@ -58,8 +58,8 @@ Filter | Description
 [namespaceInputId](#namespaceinputid) | Namespaces an element ID.
 [namespaceInputName](#namespaceinputname) | Namespaces an input name.
 [nl2br](https://twig.symfony.com/doc/3.x/filters/nl2br.html) | Replaces newlines with `<br>` tags.
-[number](#number) | Formats a number.
 [number_format](https://twig.symfony.com/doc/3.x/filters/number_format.html) | Formats numbers.
+[number](#number) | Formats a number.
 [parseRefs](#parserefs) | Parses a string for reference tags.
 [pascal](#pascal) | Formats a string into “PascalCase”.
 [percentage](#percentage) | Formats a percentage.
@@ -83,8 +83,8 @@ Filter | Description
 [timestamp](#timestamp) | Formats a human-readable timestamp.
 [title](https://twig.symfony.com/doc/3.x/filters/title.html) | Formats a string into “Title Case”.
 [translate](#translate-or-t) | Translates a message.
-[truncate](#truncate) | Truncates a string to a given length, while ensuring that it does not split words.
 [trim](https://twig.symfony.com/doc/3.x/filters/trim.html) | Strips whitespace from the beginning and end of a string.
+[truncate](#truncate) | Truncates a string to a given length, while ensuring that it does not split words.
 [ucfirst](#ucfirst) | Capitalizes the first character of a string.
 [unique](#unique) | Removes duplicate values from an array.
 [unshift](#unshift) | Prepends one or more items to the beginning of an array.
@@ -92,8 +92,8 @@ Filter | Description
 [url_encode](https://twig.symfony.com/doc/3.x/filters/url_encode.html) | Percent-encodes a string as a URL segment or an array as a query string.
 [values](#values) | Returns all the values in an array, resetting its keys.
 [where](#where) | Filters an array by key-value pairs.
-[withoutKey](#withoutkey) | Returns an array without the specified key.
 [without](#without) | Returns an array without the specified element(s).
+[withoutKey](#withoutkey) | Returns an array without the specified key.
 
 ## `address`
 

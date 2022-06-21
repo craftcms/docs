@@ -32,8 +32,8 @@ Tag | Description
 [requireGuest](#requireguest) | Requires that no user is logged-in.
 [requireLogin](#requirelogin) | Requires that a user is logged-in.
 [requirePermission](#requirepermission) | Requires that a user is logged-in with a given permission.
-[set](https://twig.symfony.com/doc/3.x/tags/set.html) | Sets a variable.
 [script](#script) | Renders an HTML script tag on the page.
+[set](https://twig.symfony.com/doc/3.x/tags/set.html) | Sets a variable.
 [switch](#switch) | Switch the template output based on a give value.
 [tag](#tag) | Renders an HTML tag on the page.
 [use](https://twig.symfony.com/doc/3.x/tags/use.html) | Inherits from another template horizontally.
