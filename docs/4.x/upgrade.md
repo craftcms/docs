@@ -242,7 +242,7 @@ The change in behavior has the potential to break templates relying on Craft 3â€
 Element queries can no longer be traversed or accessed like an array. Use a query execution method such as `all()`, `collect()`, or `one()` to fetch the results before working with them.
 :::
 
-Templates that check the `|length` of an element query, for example, will behave differently in Craft 4:
+Templates that check the `|length` of an element query, for example, behave differently in Craft 4:
 
 ```twig
 {# Get an element query #}
@@ -257,7 +257,7 @@ Templates that check the `|length` of an element query, for example, will behave
 {% endif %}
 ```
 
-Youâ€™ll need to explicitly get whatever results you need from that element query.
+You need to explicitly get whatever results you need from that element query.
 
 Use [.count()](element-queries.md#count) if you need to check for results without using them for anything else:
 
