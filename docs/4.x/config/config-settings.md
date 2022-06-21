@@ -3568,7 +3568,7 @@ Defined by
 The file extensions Craft should allow when a user is uploading files.
 
 ```php Static Config
-// Nothing bug GIFs!
+// Nothing but GIFs!
 'allowedFileExtensions' => [
     'gif',
 ],
