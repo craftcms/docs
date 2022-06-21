@@ -242,6 +242,49 @@ The change in behavior has the potential to break templates relying on Craft 3�
 Element queries can no longer be traversed or accessed like an array. Use a query execution method such as `all()`, `collect()`, or `one()` to fetch the results before working with them.
 :::
 
+Templates that check the `|length` of an element query, for example, will behave differently in Craft 4:
+
+```twig
+{# Get an element query #}
+{% set entryQuery = craft.entries() %}
+
+{% if entryQuery|length %}
+  {# Craft 3: land here when the element query implicitly returns 1+ elements #}
+  {# Craft 4: *always* land here; element query treated as multi-property array #}
+{% else %}
+  {# Craft 3: land here when the element query returned 0 elements #}
+  {# Craft 4: *never* land here; arrayified element query always has >1 properties #}
+{% endif %}
+```
+
+You’ll need to explicitly get whatever results you need from that element query.
+
+Use [.count()](element-queries.md#count) if you need to check for results without using them for anything else:
+
+```twig
+{# Get an element query #}
+{% set entryQuery = craft.entries() %}
+
+{# Execute the query to get the number of results #}
+{% if entryQuery.count() %}
+  {# ... #}
+{% endif %}
+```
+
+If you’re using those entries somewhere else in your template, fetch them with [.all()](element-queries.md#all) or [.collect()](craft4:craft\db\Query::collect()) before your condition:
+
+```twig
+{# Use .all() to get the results of an element query #}
+{% set entries = craft.entries().all() %}
+
+{# Check the length of the results #}
+{% if entries|length %}
+  {# ... #}
+{% endif %}
+
+{# ... do stuff with the entries ... #}
+```
+
 ### Query Params
 
 Some element query params have been removed:
