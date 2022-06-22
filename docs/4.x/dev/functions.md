@@ -46,6 +46,7 @@ Function | Description
 [range](https://twig.symfony.com/doc/3.x/functions/range.html) | Returns a list containing an arithmetic progression of integers.
 [raw](#raw) | Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML-encoded when output.
 [redirectInput](#redirectinput) | Outputs a hidden `redirect` input.
+[renderObjectTemplate](#renderObjectTemplate) | Renders an object template.
 [seq](#seq) | Outputs the next or current number in a sequence.
 [shuffle](#shuffle) | Randomizes the order of the items in an array.
 [siteUrl](#siteurl) | Generates a front-end URL.
@@ -551,6 +552,19 @@ You can optionally set additional attributes on the tag by passing an `options` 
 {{ redirectInput(url, {
   id: 'redirect-input'
 }) }}
+```
+
+## `renderObjectTemplate`
+
+Renders an object template, which is a micro Twig template used to generate a single value, such as a URI, for an object represented by an `object` variable.
+
+```twig
+{% set entry = craft.entries().one() %}
+{{ renderObjectTemplate('👋 {object.title}', entry) }}
+{# Output: 👋 I’m an entry title! #}
+
+{{ renderObjectTemplate('✨ {object.foo}', { foo: "I’m a made-up hash!" }) }}
+{# Output: ✨ I’m a made-up hash! #}
 ```
 
 ## `seq`

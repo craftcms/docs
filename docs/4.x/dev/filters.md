@@ -60,6 +60,7 @@ Filter | Description
 [nl2br](https://twig.symfony.com/doc/3.x/filters/nl2br.html) | Replaces newlines with `<br>` tags.
 [number_format](https://twig.symfony.com/doc/3.x/filters/number_format.html) | Formats numbers.
 [number](#number) | Formats a number.
+[parseAttr](#parseAttr) | Parses an HTML tag to find its attributes.
 [parseRefs](#parserefs) | Parses a string for reference tags.
 [pascal](#pascal) | Formats a string into “PascalCase”.
 [percentage](#percentage) | Formats a percentage.
@@ -90,8 +91,10 @@ Filter | Description
 [unshift](#unshift) | Prepends one or more items to the beginning of an array.
 [upper](https://twig.symfony.com/doc/3.x/filters/upper.html) | Formats a string into “UPPER CASE”.
 [url_encode](https://twig.symfony.com/doc/3.x/filters/url_encode.html) | Percent-encodes a string as a URL segment or an array as a query string.
+[ucwords](#ucwords) | Uppercases the first character of each word in a string.
 [values](#values) | Returns all the values in an array, resetting its keys.
 [where](#where) | Filters an array by key-value pairs.
+[widont](#widont) | Inserts a non-breaking space between the last two words of a string.
 [without](#without) | Returns an array without the specified element(s).
 [withoutKey](#withoutkey) | Returns an array without the specified key.
 
@@ -963,6 +966,19 @@ If the passed-in value isn’t a valid number it will be returned verbatim:
 {# Output: oh hai #}
 ```
 
+## `parseAttr`
+
+Parses an HTML tag to find its attributes.
+
+```twig
+{% set content %}
+  <a class="text-xl pt-0" href="/foo.pdf" download>Save File</p>
+{% endset %}
+
+{{ content|parseAttr }}
+{# Result: ["class" => ["text-xl", "pt-0"], "href" => "/foo.pdf", "download" => true] #}
+```
+
 ## `parseRefs`
 
 Parses a string for [reference tags](../reference-tags.md).
@@ -1242,6 +1258,15 @@ Prepends one or more items to the beginning of an array, and returns the new arr
 {# Result: ['bar', 'baz', 'foo'] #}
 ```
 
+## `ucwords`
+
+Uppercases the first character of each word in a string.
+
+```twig
+{{ 'foo bar baz hyphenated-pair'|ucwords }}
+{# Output: Foo Bar Baz Hyphenated-Pair #}
+```
+
 ## `values`
 
 Returns an array of all the values in a given array, but without any custom keys.
@@ -1260,6 +1285,21 @@ Runs an array through <craft4:craft\helpers\ArrayHelper::where()>.
 {% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}
 {{ array|where(v => v == 'bar') }}
 {# Result: { 'foo': 'bar', 'bat': 'bar' } #}
+```
+
+## `widont`
+
+Inserts a non-breaking space between the last two words of a string.
+
+This can be useful to prevent typographic [widows and orphans](https://en.wikipedia.org/wiki/Widows_and_orphans).
+
+```twig
+{% set content %}
+  Don’t leave any word stranded on its own line.
+{% endset %}
+
+{{ content|widont }}
+{# Output: Don’t leave any word stranded on its own&nbsp;line. #}
 ```
 
 ## `without`
