@@ -177,15 +177,19 @@ public function actionFoo(int $year = null)
 
 ## Error Templates
 
-You can provide your own error templates for Craft to use when returning errors.
+You can provide your own error templates for Craft to use when returning errors on the front end.
 
-When Craft encounters an error for a front end request, it will take your <config3:errorTemplatePrefix> into account and check the root of your `templates/` directory, in order, for the following:
+When an error is encountered, Craft will look for a template in your `templates/` directory, in the following order:
 
 1. A template matching the error’s status code, like `404.twig`.
 2. For a 503 error, a template named `offline.twig`.
 3. A template named `error.twig`.
 
-When Craft finds a matching error template, it will use that and provide it with a few extra Twig variables:
+::: tip
+You can tell Craft to look for the error template in a nested template directory, using the <config3:errorTemplatePrefix> config setting.
+:::
+
+If Craft finds a matching error template, it will render it with the following variables:
 
 - `message` – error message
 - `code` – exception code
@@ -194,5 +198,5 @@ When Craft finds a matching error template, it will use that and provide it with
 - `statusCode` – error’s HTTP status code
 
 ::: tip
-You can test these pages even if [Dev Mode](config3:devMode) is enabled by going to `https://my-project.tld/404`, substituting `404` for the name of the template you’re testing.
+Custom error templates are only used when [Dev Mode](config3:devMode) is **disabled**. When it’s enabled, an exception view will be rendered instead.
 :::
