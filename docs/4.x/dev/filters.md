@@ -799,7 +799,7 @@ When sorting by multiple properties or keys, you must set the `direction` and `s
 ], sortFlag=[SORT_NATURAL, SORT_FLAG_CASE]) %}
 ```
 
-## `namespace`
+## `namespace` or `ns`
 
 The `|namespace` filter can be used to namespace input names and other HTML attributes, as well as CSS selectors.
 
