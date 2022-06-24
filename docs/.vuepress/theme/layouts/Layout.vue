@@ -303,14 +303,29 @@ export default {
    * If there’s no modern equivalent, omit the tag.
    */
   created() {
-    if (!this.$activeSet) {
-      // Don’t do anything if a doc set hasn’t been selected
+    if (typeof this.$ssrContext === 'undefined') {
+      // Don’t do anything unless we’re generating static pages
+      return;
+    }
+
+    let baseUrl = this.$themeConfig.baseUrl;
+
+    if (this.$page.path === "/") {
+      // Add a canonical tag to the homepage because Moz said so
+      this.$ssrContext.userHeadTags += `\n    <link rel="canonical" href="${
+        baseUrl
+      }">`;
+
+      return;
+    }
+
+    if (! this.$activeSet) {
+      // Bail if we aren’t in a doc set at this point
       return;
     }
 
     let latestVersion = this.$activeSet.defaultVersion;
     let latestVersionActive = this.$activeVersion === latestVersion;
-    let baseUrl = this.$themeConfig.baseUrl;
 
     if (latestVersionActive) {
       // If we’re on the lastest version, add a canonical tag
