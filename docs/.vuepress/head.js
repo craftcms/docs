@@ -56,5 +56,6 @@ module.exports = [
       content: "https://docs.craftcms.com/browserconfig.xml"
     }
   ],
+  ["meta", { name: "theme-color", content: "#1a202c", media: "(prefers-color-scheme: dark)" }],
   ["meta", { name: "theme-color", content: "#f1f5fd" }]
 ];
