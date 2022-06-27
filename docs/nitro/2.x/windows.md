@@ -65,6 +65,10 @@ For your hostnames to work, add the following to `C:\Windows\System32\Drivers\et
 Nitro attempts to update hostnames when you run `nitro apply`—so you may need to run that after adding your first site.
 :::
 
+::: tip
+Windows only allows for up to nine aliases per line in the hosts file. If you have more than nine, you will need to add any aliases after the ninth one onto a new line below starting with `127.0.0.1`.
+:::
+
 ## Note WSL2 Memory Usage
 
 WSL2 has been known to consume a lot of memory, most noticeably on machines with more limited RAM.

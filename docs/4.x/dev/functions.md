@@ -18,9 +18,9 @@ Function | Description
 [combine](#combine) | Combines two arrays into one.
 [configure](#configure) | Sets attributes on the passed object.
 [constant](https://twig.symfony.com/doc/3.x/functions/constant.html) | Returns the constant value for a given string.
+[cpUrl](#cpurl) | Generates a control panel URL.
 [create](#create) | Creates a new object.
 [csrfInput](#csrfinput) | Returns a hidden CSRF token input.
-[cpUrl](#cpurl) | Generates a control panel URL.
 [cycle](https://twig.symfony.com/doc/3.x/functions/cycle.html) | Cycles on an array of values.
 [dataUrl](#dataurl) | Outputs an asset or file as a base64-encoded data URL.
 [date](#date) | Creates a date.
@@ -46,12 +46,13 @@ Function | Description
 [range](https://twig.symfony.com/doc/3.x/functions/range.html) | Returns a list containing an arithmetic progression of integers.
 [raw](#raw) | Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML-encoded when output.
 [redirectInput](#redirectinput) | Outputs a hidden `redirect` input.
+[renderObjectTemplate](#renderObjectTemplate) | Renders an object template.
 [seq](#seq) | Outputs the next or current number in a sequence.
 [shuffle](#shuffle) | Randomizes the order of the items in an array.
 [siteUrl](#siteurl) | Generates a front-end URL.
+[source](#source) | Returns the content of a template without rendering it.
 [successMessageInput](#successmessageinput) | Outputs a hidden `successMessage` input.
 [svg](#svg) | Outputs an SVG document.
-[source](https://twig.symfony.com/doc/3.x/functions/source.html) | Returns the content of a template without rendering it.
 [tag](#tag) | Outputs an HTML tag.
 [template_from_string](https://twig.symfony.com/doc/3.x/functions/template_from_string.html) | Loads a template from a string.
 [ul](#ul) | Outputs an array of items as an unordered list.
@@ -225,22 +226,6 @@ Returns the constant value for a given string.
 
 This works identically to Twig’s core [`constant`](https://twig.symfony.com/doc/3.x/functions/constant.html) function.
 
-## `create`
-
-Creates a new object instance based on a given class name or object configuration. See <yii2:Yii::createObject()> for a full explanation of supported arguments.
-
-```twig
-{# Pass in a class name #}
-{% set cookie = create('yii\\web\\Cookie') %}
-
-{# Or a full object configuration hash #}
-{% set cookie = create({
-  class: 'yii\\web\\cookie',
-  name: 'foo',
-  value: 'bar'
-}) %}
-```
-
 ## `cpUrl`
 
 Returns a control panel URL, automatically accounting for relative vs. absolute format and the active <config4:cpTrigger> setting.
@@ -256,6 +241,22 @@ The `cpUrl()` function has the following arguments:
 - **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
 - **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
 - **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
+
+## `create`
+
+Creates a new object instance based on a given class name or object configuration. See <yii2:Yii::createObject()> for a full explanation of supported arguments.
+
+```twig
+{# Pass in a class name #}
+{% set cookie = create('yii\\web\\Cookie') %}
+
+{# Or a full object configuration hash #}
+{% set cookie = create({
+  class: 'yii\\web\\cookie',
+  name: 'foo',
+  value: 'bar'
+}) %}
+```
 
 ## `csrfInput`
 
@@ -553,6 +554,19 @@ You can optionally set additional attributes on the tag by passing an `options` 
 }) }}
 ```
 
+## `renderObjectTemplate`
+
+Renders an object template, which is a micro Twig template used to generate a single value, such as a URI, for an object represented by an `object` variable.
+
+```twig
+{% set entry = craft.entries().one() %}
+{{ renderObjectTemplate('👋 {object.title}', entry) }}
+{# Output: 👋 I’m an entry title! #}
+
+{{ renderObjectTemplate('✨ {object.foo}', { foo: "I’m a made-up hash!" }) }}
+{# Output: ✨ I’m a made-up hash! #}
+```
+
 ## `seq`
 
 Outputs the next or current number in a sequence, defined by `name`:
@@ -610,6 +624,12 @@ The `siteUrl()` function has the following arguments:
 - **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](twig-primer.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
 - **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
 - **`siteId`** – The ID of the site that the URL should point to. By default the current site will be used.
+
+## `source`
+
+Returns the content of a template without rendering it.
+
+This works identically to Twig’s core [`source`](https://twig.symfony.com/doc/3.x/functions/source.html) function.
 
 ## `successMessageInput`
 
@@ -676,12 +696,6 @@ You can also specify a custom class name that should be added to the root `<svg>
 ::: tip
 Consider caching the output, especially if you’re loading SVG files from remote volumes or URLs, so Craft doesn’t download the file each time your template is rendered.
 :::
-
-## `source`
-
-Returns the content of a template without rendering it.
-
-This works identically to Twig’s core [`source`](https://twig.symfony.com/doc/3.x/functions/source.html) function.
 
 ## `tag`
 

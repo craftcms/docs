@@ -12,9 +12,52 @@ return [
 ];
 ```
 
+You can read general config settings in Twig templates or PHP files via the config service:
+
+::: code
+```twig
+{% set devModeEnabled = craft.app.config.general.devMode %}
+```
+```php
+$devModeEnabled = Craft::$app->config->general->devMode;
+```
+:::
+
 ## Database Connection Settings
 
 Craft supports several [database connection settings](db-settings.md). You can override their default values in your `config/db.php` file.
+
+You can read database config settings in Twig templates or PHP files via the config service:
+
+::: code
+```twig
+{% set database = craft.app.config.db.database %}
+```
+```php
+$database = Craft::$app->config->db->database;
+```
+:::
+
+## Custom Config Settings
+
+You can optionally define your own config settings by creating a `config/custom.php` file:
+
+```php
+return [
+    'myCustomSetting' => 'foo',
+];
+```
+
+Custom config settings can be read in Twig templates or PHP files via the config service:
+
+::: code
+```twig
+{% set mySetting = craft.app.config.custom.myCustomSetting %}
+```
+```php
+$mySetting = Craft::$app->config->custom->myCustomSetting;
+```
+:::
 
 ## Guzzle Config
 

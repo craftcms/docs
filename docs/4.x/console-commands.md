@@ -268,6 +268,19 @@ collation
 
 
 
+<h3 id="db-drop-all-tables">
+    <a href="#db-drop-all-tables" class="header-anchor">#</a>
+    <code>db/drop-all-tables</code>
+</h3>
+
+
+Drops all tables in the database.
+
+Example:
+```
+php craft db/drop-all-tables
+```
+
 <h3 id="db-restore">
     <a href="#db-restore" class="header-anchor">#</a>
     <code>db/restore</code>
@@ -285,6 +298,14 @@ php craft db/restore ./my-backup.sql
 
 path
 :  The path to the database backup file.
+
+
+
+<h4 id="db-restore-options" class="command-subheading">Options</h4>
+
+
+--drop-all-tables
+: Whether to drop all preexisting tables in the database prior to restoring the backup.
 
 
 
@@ -1370,13 +1391,41 @@ Applies project config file changes.
 </h3>
 
 
-Prints a diff of the pending project config YAML changes.
+Outputs a diff of the pending project config YAML changes.
 
 <h4 id="project-config-diff-options" class="command-subheading">Options</h4>
 
 
 --invert
 : Whether to treat the loaded project config as the source of truth, instead of the YAML files.
+
+
+
+<h3 id="project-config-get">
+    <a href="#project-config-get" class="header-anchor">#</a>
+    <code>project-config/get</code>
+</h3>
+
+
+Outputs a project config value.
+
+Example:
+```
+php craft project-config/get system.edition
+```
+
+<h4 id="project-config-get-parameters" class="command-subheading">Parameters</h4>
+
+path
+:  The config item path
+
+
+
+<h4 id="project-config-get-options" class="command-subheading">Options</h4>
+
+
+--external
+: Whether to pull values from the project config YAML files instead of the loaded config.
 
 
 
@@ -1387,6 +1436,65 @@ Prints a diff of the pending project config YAML changes.
 
 
 Rebuilds the project config.
+
+<h3 id="project-config-remove">
+    <a href="#project-config-remove" class="header-anchor">#</a>
+    <code>project-config/remove</code>
+</h3>
+
+
+Removes a project config value.
+
+Example:
+```
+php craft project-config/set system.edition pro
+```
+
+<h4 id="project-config-remove-parameters" class="command-subheading">Parameters</h4>
+
+path
+:  The config item path
+
+
+
+<h3 id="project-config-set">
+    <a href="#project-config-set" class="header-anchor">#</a>
+    <code>project-config/set</code>
+</h3>
+
+
+Sets a project config value.
+
+Example:
+```
+php craft project-config/set system.edition pro
+```
+
+<h4 id="project-config-set-parameters" class="command-subheading">Parameters</h4>
+
+path
+:  The config item path
+
+value
+:  The config item value as a valid YAML string
+
+
+
+<h4 id="project-config-set-options" class="command-subheading">Options</h4>
+
+
+--force
+: Whether every entry change should be force-applied.
+
+
+--message
+: A message describing the changes.
+
+
+--update-timestamp
+: Whether the `dateModified` value should be updated
+
+
 
 <h3 id="project-config-touch">
     <a href="#project-config-touch" class="header-anchor">#</a>

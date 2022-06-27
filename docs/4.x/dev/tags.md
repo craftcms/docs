@@ -15,6 +15,7 @@ Tag | Description
 [embed](https://twig.symfony.com/doc/3.x/tags/embed.html) | Embeds another template.
 [exit](#exit) | Ends the request.
 [extends](https://twig.symfony.com/doc/3.x/tags/extends.html) | Extends another template.
+[flush](https://twig.symfony.com/doc/3.x/tags/flush.html) | Flushes the output buffer.
 [for](https://twig.symfony.com/doc/3.x/tags/for.html) | Loops through an array.
 [from](https://twig.symfony.com/doc/3.x/tags/from.html) | Imports macros from a template.
 [header](#header) | Sets an HTTP header on the response.
@@ -29,11 +30,13 @@ Tag | Description
 [nav](#nav) | Creates a hierarchical nav menu.
 [paginate](#paginate) | Paginates an element query.
 [redirect](#redirect) | Redirects the browser.
-[requireGuest](#requireguest) | Requires that no user is logged-in.
-[requireLogin](#requirelogin) | Requires that a user is logged-in.
-[requirePermission](#requirepermission) | Requires that a user is logged-in with a given permission.
-[set](https://twig.symfony.com/doc/3.x/tags/set.html) | Sets a variable.
+[requireAdmin](#requireAdmin) | Requires that an admin user is logged in.
+[requireEdition](#requireEdition) | Requires Craft’s edition to be equal to or better than what’s specified.
+[requireGuest](#requireguest) | Requires that no user is logged in.
+[requireLogin](#requirelogin) | Requires that a user is logged in.
+[requirePermission](#requirepermission) | Requires that a user is logged in with a given permission.
 [script](#script) | Renders an HTML script tag on the page.
+[set](https://twig.symfony.com/doc/3.x/tags/set.html) | Sets a variable.
 [switch](#switch) | Switch the template output based on a give value.
 [tag](#tag) | Renders an HTML tag on the page.
 [use](https://twig.symfony.com/doc/3.x/tags/use.html) | Inherits from another template horizontally.
@@ -707,6 +710,39 @@ You can optionally set flash messages that will show up for the user on the next
   {% redirect "pricing" 301 with notice "You have to be a member to access that!" %}
 {% endif %}
 ```
+
+## `requireAdmin`
+
+This tag will ensure that an admin user is logged in. If the user is not logged in, they’ll be redirected to the Login page specified by your <config4:loginPath> config setting and returned to the original page after logging in as an admin.
+
+A user that’s already logged in but *not* an admin will get a 403 response.
+
+```twig
+{% requireAdmin %}
+```
+
+You can place this tag anywhere in your template, including within a conditional. If/when Twig gets to it, the admin enforcement will take place.
+
+## `requireEdition`
+
+Requires Craft’s edition to be equal to or better than what’s specified.
+
+If the Craft edition does not meet the requirement, the visitor will get a 404 response.
+
+- `0` – Craft Solo
+- `1` – Craft Pro
+
+```twig
+{# Require Craft Pro #}
+{% requireEdition 1 %}
+```
+
+You can place this tag anywhere in your template, including within a conditional. If/when Twig gets to it, the edition enforcement will take place.
+
+::: tip
+Control panel templates can use the `CraftSolo` and `CraftPro` variables.\
+Example: `{% requireEdition CraftPro %}`.
+:::
 
 ## `requireGuest`
 

@@ -17,8 +17,8 @@ Filter | Description
 [contains](#contains) | Returns whether an array contains a nested item with a given key-value pair.
 [convert_encoding](https://twig.symfony.com/doc/3.x/filters/convert_encoding.html) | Converts a string from one encoding to another.
 [currency](#currency) | Formats a number as currency.
-[date](#date) | Formats a date.
 [date_modify](https://twig.symfony.com/doc/3.x/filters/date_modify.html) | Modifies a date.
+[date](#date) | Formats a date.
 [datetime](#datetime) | Formats a date with its time.
 [default](https://twig.symfony.com/doc/3.x/filters/default.html) | Returns the value or a default value if empty.
 [diff](#diff) | Returns the difference between arrays.
@@ -35,8 +35,8 @@ Filter | Description
 [hash](#hash) | Prefixes a string with a keyed-hash message authentication code (HMAC).
 [httpdate](#httpdate) | Converts a date to the HTTP format.
 [id](#id) | Normalizes an element ID into only alphanumeric characters, underscores, and dashes.
-[indexOf](#indexof) | Returns the index of a given value within an array, or the position of a passed-in string within another string.
 [index](#index) | Indexes the items in an array.
+[indexOf](#indexof) | Returns the index of a given value within an array, or the position of a passed-in string within another string.
 [intersect](#intersect) | Returns the intersecting items of two arrays.
 [join](https://twig.symfony.com/doc/3.x/filters/join.html) | Concatenates multiple strings into one.
 [json_decode](#json_decode) | JSON-decodes a value.
@@ -54,11 +54,13 @@ Filter | Description
 [money](#money) | Outputs a value from a Money object.
 [multisort](#multisort) | Sorts an array by one or more keys within its sub-arrays.
 [namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
+[namespaceAttributes](#namespaceattributes) | Namespaces `id` and other HTML attributes, as well as CSS selectors.
 [namespaceInputId](#namespaceinputid) | Namespaces an element ID.
 [namespaceInputName](#namespaceinputname) | Namespaces an input name.
 [nl2br](https://twig.symfony.com/doc/3.x/filters/nl2br.html) | Replaces newlines with `<br>` tags.
-[number](#number) | Formats a number.
 [number_format](https://twig.symfony.com/doc/3.x/filters/number_format.html) | Formats numbers.
+[number](#number) | Formats a number.
+[parseAttr](#parseAttr) | Parses an HTML tag to find its attributes.
 [parseRefs](#parserefs) | Parses a string for reference tags.
 [pascal](#pascal) | Formats a string into “PascalCase”.
 [percentage](#percentage) | Formats a percentage.
@@ -82,17 +84,19 @@ Filter | Description
 [timestamp](#timestamp) | Formats a human-readable timestamp.
 [title](https://twig.symfony.com/doc/3.x/filters/title.html) | Formats a string into “Title Case”.
 [translate](#translate-or-t) | Translates a message.
-[truncate](#truncate) | Truncates a string to a given length, while ensuring that it does not split words.
 [trim](https://twig.symfony.com/doc/3.x/filters/trim.html) | Strips whitespace from the beginning and end of a string.
+[truncate](#truncate) | Truncates a string to a given length, while ensuring that it does not split words.
 [ucfirst](#ucfirst) | Capitalizes the first character of a string.
 [unique](#unique) | Removes duplicate values from an array.
 [unshift](#unshift) | Prepends one or more items to the beginning of an array.
 [upper](https://twig.symfony.com/doc/3.x/filters/upper.html) | Formats a string into “UPPER CASE”.
 [url_encode](https://twig.symfony.com/doc/3.x/filters/url_encode.html) | Percent-encodes a string as a URL segment or an array as a query string.
+[ucwords](#ucwords) | Uppercases the first character of each word in a string.
 [values](#values) | Returns all the values in an array, resetting its keys.
 [where](#where) | Filters an array by key-value pairs.
-[withoutKey](#withoutkey) | Returns an array without the specified key.
+[widont](#widont) | Inserts a non-breaking space between the last two words of a string.
 [without](#without) | Returns an array without the specified element(s).
+[withoutKey](#withoutkey) | Returns an array without the specified key.
 
 ## `address`
 
@@ -795,7 +799,7 @@ When sorting by multiple properties or keys, you must set the `direction` and `s
 ], sortFlag=[SORT_NATURAL, SORT_FLAG_CASE]) %}
 ```
 
-## `namespace`
+## `namespace` or `ns`
 
 The `|namespace` filter can be used to namespace input names and other HTML attributes, as well as CSS selectors.
 
@@ -838,6 +842,53 @@ That would result in:
   #foo-title { font-weight: bold; }
 </style>
 <input class="foo-text" id="foo-title" name="foo[title]" type="text">
+```
+
+## `namespaceAttributes`
+
+The `|namespaceAttributes` filter can be used to namespace `id` and other HTML attributes, as well as CSS selectors.
+
+It’s identical to the [namespace](#namespace) filter, except that inputs’ `name` attributes won’t be modified.
+
+For example, this:
+
+```twig
+{% set html %}
+<style>
+  .text { font-size: larger; }
+  #title { font-weight: bold; }
+</style>
+<input class="text" id="title" name="title" type="text">
+{% endset %}
+{{ html|namespaceAttributes('foo') }}
+```
+
+would become this:
+
+```html
+<style>
+  .text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="text" id="foo-title" name="title" type="text">
+```
+
+Notice how the `#title` CSS selector became `#foo-title`, the `id` attribute changed from `title` to `foo-title`, but the `name` attribute wasn’t changed.
+
+If you want class names to get namespaced as well, pass `withClasses=true`. That will affect both class CSS selectors and `class` attributes:
+
+```twig
+{{ html|namespaceAttributes('foo', withClasses=true) }}
+```
+
+That would result in:
+
+```html{2,5}
+<style>
+  .foo-text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="foo-text" id="foo-title" name="title" type="text">
 ```
 
 ## `namespaceInputId`
@@ -913,6 +964,19 @@ If the passed-in value isn’t a valid number it will be returned verbatim:
 ```twig
 {{ 'oh hai'|number }}
 {# Output: oh hai #}
+```
+
+## `parseAttr`
+
+Parses an HTML tag to find its attributes.
+
+```twig
+{% set content %}
+  <a class="text-xl pt-0" href="/foo.pdf" download>Save File</p>
+{% endset %}
+
+{{ content|parseAttr }}
+{# Result: ["class" => ["text-xl", "pt-0"], "href" => "/foo.pdf", "download" => true] #}
 ```
 
 ## `parseRefs`
@@ -1194,6 +1258,15 @@ Prepends one or more items to the beginning of an array, and returns the new arr
 {# Result: ['bar', 'baz', 'foo'] #}
 ```
 
+## `ucwords`
+
+Uppercases the first character of each word in a string.
+
+```twig
+{{ 'foo bar baz hyphenated-pair'|ucwords }}
+{# Output: Foo Bar Baz Hyphenated-Pair #}
+```
+
 ## `values`
 
 Returns an array of all the values in a given array, but without any custom keys.
@@ -1212,6 +1285,21 @@ Runs an array through <craft4:craft\helpers\ArrayHelper::where()>.
 {% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}
 {{ array|where(v => v == 'bar') }}
 {# Result: { 'foo': 'bar', 'bat': 'bar' } #}
+```
+
+## `widont`
+
+Inserts a non-breaking space between the last two words of a string.
+
+This can be useful to prevent typographic [widows and orphans](https://en.wikipedia.org/wiki/Widows_and_orphans).
+
+```twig
+{% set content %}
+  Don’t leave any word stranded on its own line.
+{% endset %}
+
+{{ content|widont }}
+{# Output: Don’t leave any word stranded on its own&nbsp;line. #}
 ```
 
 ## `without`

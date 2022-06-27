@@ -2,6 +2,17 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-06-24
+### Added
+- Added canonical tags to most pages to promote latest product versions.
+
+### Fixed
+- Improved mobile Safari’s dark mode browser chrome.
+
+## 2022-06-20
+### Changed
+- Documented the `namespaceAttributes` filter for Craft 3 and 4.
+
 ## 2022-05-27
 ### Added
 - Added a note about Craft 4.x element type garbage collection.

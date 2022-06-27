@@ -61,7 +61,7 @@ Some config settings have been removed in Craft 4:
 | `config/general.php` | `useProjectConfigFile`    | Project config always writes YAML now, but you can [manually control when](https://craftcms.com/docs/4.x/project-config.html#manual-yaml-file-generation).
 
 ::: tip
-You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your custom config settings will be accessible via `Craft::$app->config->{mycustomsetting}`.
+You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your [custom config settings](config/README.md#custom-config-settings) will be accessible via `Craft::$app->config->custom->{mycustomsetting}`.
 :::
 
 ### Volumes
@@ -241,6 +241,49 @@ The change in behavior has the potential to break templates relying on Craft 3�
 ::: warning
 Element queries can no longer be traversed or accessed like an array. Use a query execution method such as `all()`, `collect()`, or `one()` to fetch the results before working with them.
 :::
+
+Templates that check the `|length` of an element query, for example, behave differently in Craft 4:
+
+```twig
+{# Get an element query #}
+{% set entryQuery = craft.entries() %}
+
+{% if entryQuery|length %}
+  {# Craft 3: land here when the element query implicitly returns 1+ elements #}
+  {# Craft 4: *always* land here; element query treated as multi-property array #}
+{% else %}
+  {# Craft 3: land here when the element query returned 0 elements #}
+  {# Craft 4: *never* land here; arrayified element query always has >1 properties #}
+{% endif %}
+```
+
+You need to explicitly get whatever results you need from that element query.
+
+Use [.count()](element-queries.md#count) if you need to check for results without using them for anything else:
+
+```twig
+{# Get an element query #}
+{% set entryQuery = craft.entries() %}
+
+{# Execute the query to get the number of results #}
+{% if entryQuery.count() %}
+  {# ... #}
+{% endif %}
+```
+
+If you’re using those entries somewhere else in your template, fetch them with [.all()](element-queries.md#all) or [.collect()](craft4:craft\db\Query::collect()) before your condition:
+
+```twig
+{# Use .all() to get the results of an element query #}
+{% set entries = craft.entries().all() %}
+
+{# Check the length of the results #}
+{% if entries|length %}
+  {# ... #}
+{% endif %}
+
+{# ... do stuff with the entries ... #}
+```
 
 ### Query Params
 

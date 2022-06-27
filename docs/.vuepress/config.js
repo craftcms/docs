@@ -43,6 +43,7 @@ module.exports = {
     docsRepo: "craftcms/docs",
     docsDir: "docs",
     docsBranch: "main",
+    baseUrl: "https://craftcms.com/docs",
     searchPlaceholder: "Search Craft CMS and Craft Commerce docs (Press “/” to focus)",
     editLinks: true,
     nextLinks: true,
