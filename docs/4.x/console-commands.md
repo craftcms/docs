@@ -309,6 +309,48 @@ path
 
 
 
+## `elements`
+
+Manages elements.
+
+<h3 id="elements-delete">
+    <a href="#elements-delete" class="header-anchor">#</a>
+    <code>elements/delete</code>
+</h3>
+
+
+Deletes an element by its ID.
+
+<h4 id="elements-delete-parameters" class="command-subheading">Parameters</h4>
+
+id
+:  The element ID to delete.
+
+
+
+<h4 id="elements-delete-options" class="command-subheading">Options</h4>
+
+
+--hard
+: Whether the element should be hard-deleted.
+
+
+
+<h3 id="elements-restore">
+    <a href="#elements-restore" class="header-anchor">#</a>
+    <code>elements/restore</code>
+</h3>
+
+
+Restores an element by its ID.
+
+<h4 id="elements-restore-parameters" class="command-subheading">Parameters</h4>
+
+id
+:  The element ID to restore.
+
+
+
 ## `fixture`
 
 Allows you to manage test fixtures.
