@@ -256,7 +256,7 @@ return [
             'defaultDuration' => 86400,
             'servers' => [
                 [
-                    'host' => 'localhost',
+                    'host' => App::env('MEMCACHED_HOST') ?: 'localhost',
                     'persistent' => true,
                     'port' => 11211,
                     'retryInterval' => 15,
@@ -284,7 +284,7 @@ return [
     'components' => [
         'redis' => [
             'class' => yii\redis\Connection::class,
-            'hostname' => 'localhost',
+            'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
             'port' => 6379,
             'password' => App::env('REDIS_PASSWORD') ?: null,
         ],
@@ -364,7 +364,7 @@ return [
     'components' => [
         'redis' => [
             'class' => yii\redis\Connection::class,
-            'hostname' => 'localhost',
+            'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
             'port' => 6379,
             'password' => App::env('REDIS_PASSWORD') ?: null,
         ],
