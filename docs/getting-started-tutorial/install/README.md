@@ -26,7 +26,7 @@ At the end of that command, it will ask whether you’d like to begin the setup.
 - **Database name** → `db`
 - **Database table prefix** → _(leave blank)_
 
-Answer `yes` to the prompt on whether to install Craft now, and answer the remaining prompts as you like. The only one that matters is **Site URL**, which you should answer with `http://tutorial.ddev.site`.
+Answer `yes` to the prompt on whether to install Craft now, and answer the remaining prompts as you like. The only one that matters is **Site URL**, which you should answer with `https://tutorial.ddev.site`.
 
 Now set your DDEV web server’s document root to the `web/` folder like so:
 
@@ -40,8 +40,8 @@ Finally, you’re ready to start up your new web server:
 ddev start
 ```
 
-In your browser, you should be able to head over to <http://tutorial.ddev.site/> and see the Craft CMS welcome template. 
+In your browser, you should be able to head over to <https://tutorial.ddev.site/> and see the Craft CMS welcome template.
 
-<BrowserShot url="http://tutorial.ddev.site/" :link="true">
+<BrowserShot url="https://tutorial.ddev.site/" :link="true">
 <img src="../images/welcome-template.png" alt="Screenshot of the Craft CMS welcome template" />
 </BrowserShot>

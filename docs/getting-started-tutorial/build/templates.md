@@ -150,7 +150,7 @@ For each asset, we output a `img` HTML tag which tells the browser to display an
 
 We should now see the image after refreshing the page:
 
-<BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="">
 <img src="../images/entry-with-image.png" alt="Screenshot of detail page with dynamic image added" />
 </BrowserShot>
 
@@ -187,7 +187,7 @@ We’ll use Twig to create an object called `featureImage` with the settings we 
 
 You can now refresh the front end and see your transformed asset:
 
-<BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="Automatically-resized image, cropped at 900×600px.">
+<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="Automatically-resized image, cropped at 900×600px.">
 <img src="../images/image-resized.png" alt="Screenshot of detail page with auto-sized image" />
 </BrowserShot>
 
@@ -239,7 +239,7 @@ Matrix content is stored in whatever blocks we’ve defined. To display that con
 
 The Matrix content will now be included on the page:
 
-<BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="Detail page with post content added." :max-height="600">
+<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="Detail page with post content added." :max-height="600">
 <img src="../images/matrix-content.png" alt="Screenshot of detail page with post content" />
 </BrowserShot>
 
@@ -512,7 +512,7 @@ Transformed images will automatically be cropped from the center, but a content 
 
 Back on the front end, refresh the listing page and you’ll see the re-cropped thumbnail:
 
-<BrowserShot url="http://tutorial.test/blog/" :link="false" caption="Listing page with adjusted thumbnail focal point.">
+<BrowserShot url="https://tutorial.test/blog/" :link="false" caption="Listing page with adjusted thumbnail focal point.">
 <img src="../images/listing-with-custom-focal-point.png" alt="Screenshot of listing page where post thumbnail is cropped toward focal point of image" />
 </BrowserShot>
 
