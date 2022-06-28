@@ -88,7 +88,7 @@ You’ll probably want a rich text editor (WYSIWYG) for editing the main text of
 Let’s be adventurous and use console commands:
 
 1. From your terminal, run `ddev composer require craftcms/redactor`. Composer will download the plugin and add it to your project.
-2. Now run `ddev craft plugin/install redactor`.
+2. Now run `ddev php craft plugin/install redactor`.
 
 ::: tip
 You can install Craft and Craft plugins from the browser like we did earlier **or** using terminal commands like we did here. 😎
