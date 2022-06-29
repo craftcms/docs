@@ -13,8 +13,7 @@ test.describe("Search", () => {
     // should see install instruction results for Craft, Commerce, and Nitro
     await expect(page.locator(".suggestions")).toContainText([
       "Craft CMS",
-      "Craft Commerce",
-      "Craft Nitro",
+      "Craft Commerce"
     ]);
   });
 
@@ -27,8 +26,7 @@ test.describe("Search", () => {
     await page.keyboard.type("install");
     // should *only* see Craft results here
     await expect(page.locator(".suggestions")).not.toContainText([
-      "Craft Commerce",
-      "Craft Nitro",
+      "Craft Commerce"
     ]);
   });
 
