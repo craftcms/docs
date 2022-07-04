@@ -76,7 +76,7 @@ class Plugin extends \craft\base\Plugin
 ```
 
 ::: tip
-You can alternatively set a `hasCpSection` value in `composer.json` as noted in the [plugin guide](plugin-guide.md#compser-json). We don’t recommend setting it in both places, however, since the value set in `composer.json` will override your public class property’s value and likely create confusion.
+You can alternatively set a `hasCpSection` value in `composer.json` as noted in the [plugin guide](plugin-guide.md#composer-json). We don’t recommend setting it in both places, however, since the value set in `composer.json` will override your public class property’s value and likely create confusion.
 :::
 
 You can modify aspects of the plugin’s control panel nav item by overriding its [getCpNavItem()](craft4:craft\base\PluginInterface::getCpNavItem()) method:
