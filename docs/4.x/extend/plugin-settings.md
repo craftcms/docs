@@ -139,7 +139,7 @@ namespace mynamespace;
 
 class Plugin extends \craft\base\Plugin
 {
-    public $hasCpSettings = true;
+    public bool $hasCpSettings = true;
 
     protected function createSettingsModel()
     {

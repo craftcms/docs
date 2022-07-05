@@ -434,6 +434,23 @@ A few user permissions have been removed in Craft 4:
 - `customizeSources` had made it possible for authorized users to customize element sources. Only admins can customize element sources now, and only from an environment that allows admin changes.
 - `publishPeerEntryDrafts:<uid>` permissions wouldn’t have stopped users from viewing, copying, and saving draft content themselves.
 
+## Queue Drivers
+
+If you’re overriding Craft’s `queue` component in `config/app.php`, you may want to override Craft’s built-in queue driver’s [`proxyQueue`](craft4:craft\queue\Queue::$proxyQueue) property instead. That way you’ll regain visibility into the queue’s state from the control panel.
+
+```php
+<?php
+return [
+    'components' => [
+        'queue' => [
+            'proxyQueue' => [
+                // custom queue config goes here
+            ],
+        ],
+    ],
+];
+```
+
 ## Plugins
 
 See [Updating Plugins for Craft 4](extend/updating-plugins.md).
