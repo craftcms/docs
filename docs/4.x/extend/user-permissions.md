@@ -15,9 +15,12 @@ public function init()
         UserPermissions::class,
         UserPermissions::EVENT_REGISTER_PERMISSIONS,
         function(RegisterUserPermissionsEvent $event) {
-            $event->permissions['Permission Group Name'] = [
-                'permissionName' => [
-                    'label' => 'Permission Label',
+            $event->permissions[] = [
+                'heading' => 'Permission Group Name',
+                'permissions' => [
+                    'permissionName' => [
+                        'label' => 'Permission Label',
+                    ],
                 ],
             ];
         }
