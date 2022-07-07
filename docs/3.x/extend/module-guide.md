@@ -59,7 +59,7 @@ You can add your module to your project’s [application configuration](../confi
 return [
     // ...
     'modules' => [
-        'foo' => foo\Module::class,
+        'foo' => bar\Module::class,
     ],
     'bootstrap' => [
         'foo',
