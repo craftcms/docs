@@ -175,6 +175,29 @@ $storeAddress = \craft\commerce\Plugin::getInstance()
 
 The concept of address lines has gone away along with [DefineAddressLinesEvent](commerce3:craft\commerce\events\DefineAddressLinesEvent). Use Craft’s [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()) instead.
 
+### Address `phone` Fields
+
+The `phone` field is no longer included by default with each address.
+
+If you’re upgrading a project that’s using `phone` fields, those will be migrated automatically. To store address phone numbers in a fresh Commerce 4 install, you’ll need to manually add a custom `phone` field to the address field layout.
+
+### Address `firstName` and `lastName` Fields
+
+Individual `firstName` and `lastName` fields have been consolidated into a `fullName` field instead. An included parser makes it possible to get a first name or last name when you need it:
+
+```twig
+{# @var address craft\elements\Address #}
+{% set address = currentUser.getAddresses()|first %}
+
+{% set firstName = address.getGivenName() %}
+{% set middleName = address.getAdditionalName() %}
+{% set lastName = address.getFamilyName() %}
+```
+
+::: tip
+Addresses have a `getAdditionalName()`, but it always returns `null`. And don’t confuse this with User elements, which have `firstName`, `lastName`, and `fullName` fields but no `getGivenName()` or `getFamilyName()` methods.
+:::
+
 ### Address Template Changes
 
 The change in address format means you’ll need to update some references in your templates.
