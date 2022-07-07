@@ -579,6 +579,15 @@ Defined by
 
 Whether the system should run in [Dev Mode](https://craftcms.com/support/dev-mode).
 
+::: code
+```php Static Config
+'devMode' => true,
+```
+```shell Environment Override
+CRAFT_DEV_MODE=true
+```
+:::
+
 
 
 ### `disabledPlugins`
@@ -618,6 +627,15 @@ This can also be set to `'*'` to disable **all** plugins.
 ::: warning
 This should not be set on a per-environment basis, as it could result in plugin schema version mismatches
 between environments, which will prevent project config changes from getting applied.
+:::
+
+::: code
+```php Static Config
+'disabledPlugins' => ['redactor', 'webhooks'],
+```
+```shell Environment Override
+CRAFT_DISABLED_PLUGINS=redactor,webhooks
+```
 :::
 
 

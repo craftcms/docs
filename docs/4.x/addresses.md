@@ -193,7 +193,7 @@ Address queries support the following parameters:
 | [dateCreated](#datecreated)               | Narrows the query results based on the addresses’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the addresses’ last-updated dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [id](#id)                                 | Narrows the query results based on the addresses’ IDs.
+| [id](#id)                                 |
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching addresses as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [limit](#limit)                           | Determines the number of addresses that should be returned.
@@ -476,42 +476,11 @@ $addresses = \craft\elements\Address::find()
 
 #### `id`
 
-Narrows the query results based on the addresses’ IDs.
 
 
 
-Possible values include:
-
-| Value | Fetches addresses…
-| - | -
-| `1` | with an ID of 1.
-| `'not 1'` | not with an ID of 1.
-| `[1, 2]` | with an ID of 1 or 2.
-| `['not', 1, 2]` | not with an ID of 1 or 2.
 
 
-
-::: code
-```twig
-{# Fetch the address by its ID #}
-{% set address = craft.queryFunction()
-  .id(1)
-  .one() %}
-```
-
-```php
-// Fetch the address by its ID
-$address = \craft\elements\Address::find()
-    ->id(1)
-    ->one();
-```
-:::
-
-
-
-::: tip
-This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
-:::
 
 
 #### `ignorePlaceholders`
