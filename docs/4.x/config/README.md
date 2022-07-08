@@ -173,6 +173,14 @@ You can parse aliases in your templates by passing them to the [alias()](../dev/
 ```
 :::
 
+::: tip
+You can parse aliases in your modules or configs by passing them to the getAlias function:
+
+```php
+Craft::getAlias('@webroot');
+```
+:::
+
 ## URL Rules
 
 You can define custom [URL rules](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) in `config/routes.php`. See [Routing](../routing.md) for more details.
