@@ -8,6 +8,22 @@ There are also preferences for localization, accessibility, and debugging that m
 
 Users can be part of groups you create that [fine-tune permissions](user-management.md).
 
+### Active and Inactive Users
+
+A Craft user can be active or inactive, meaning they have a credentialed account or simply exist as a record in the system. Navigate to the **Users** screen and you’ll find these represented by **Credentialed** and **Inactive** groupings under the “Account Type” heading.
+
+![](./images/account-type-subnav.png)
+
+You’ll most likely be creating active user accounts for content managers or site members to log in and do things. Each active account has its own status to describe that user’s level of access to the system:
+
+- **Active** – Account was activated by an admin, or the user set credentials to gain system access.
+- **Pending** – User was invited to activate their account but hasn’t completed the process.
+- **Suspended** – Account’s system access was explicitly revoked by another user with sufficient permissions.
+- **Locked** – Account was locked because of too many failed login attempts per the <config4:maxInvalidLogins> and <config4:cooldownDuration> config settings.
+- **Inactive** – Account never had credentials, or was explicitly deactivated.
+
+You can’t create an inactive user from the control panel, but you can deactivate a user account by choosing **Deactivate...** from its action menu (<icon kind="settings" />). Inactive user accounts are best suited for specific circumstances, like Craft Commerce guest customers or an imaginary Craft-based CRM that manages contacts.
+
 ## Querying Users
 
 You can fetch users in your templates or PHP code using **user queries**.
