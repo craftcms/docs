@@ -174,7 +174,7 @@ You can parse aliases in your templates by passing them to the [alias()](../dev/
 :::
 
 ::: tip
-You can parse aliases in your modules or configs by passing them to the getAlias function:
+You can parse aliases in your modules or configs by passing them to the [getAlias()](yii2:yii\BaseYii::getAlias()) function:
 
 ```php
 Craft::getAlias('@webroot');
