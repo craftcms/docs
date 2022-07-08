@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-07-08
+### Added
+- Documented user statuses.
+
 ## 2022-06-24
 ### Added
 - Added canonical tags to most pages to promote latest product versions.
