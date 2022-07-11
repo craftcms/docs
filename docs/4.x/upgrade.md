@@ -211,7 +211,7 @@ Some template functions have been removed completely:
 | `craft.deprecator`        | `craft.app.deprecator`
 | `craft.elementIndexes`    | `craft.app.elementIndexes`
 | `craft.emailMessages`     | `craft.app.systemMessages`
-| `craft.feeds`             | `craft.app.feeds`
+| `craft.feeds`             | n/a (see below)
 | `craft.fields`            | `craft.app.fields`
 | `craft.globals`           | `craft.app.globals`
 | `craft.i18n`              | `craft.app.i18n`
@@ -223,6 +223,17 @@ Some template functions have been removed completely:
 | `craft.systemSettings`    | `craft.app.systemSettings`
 | `craft.userGroups`        | `craft.app.userGroups`
 | `craft.userPermissions`   | `craft.app.userPermissions`
+
+::: tip Reading Feeds?
+You can use [dodecastudio/craft-feedreader](https://github.com/dodecastudio/craft-feedreader) as a drop-in replacement for Craft’s removed feed service:
+```twig
+{# Craft 3 #}
+{% set feed = craft.app.feeds.getFeed('https://craftcms.com/blog.rss') %}
+
+{# Craft 4 #}
+{% set feed = craft.feedreader.getFeed('https://craftcms.com/blog.rss') %}
+```
+:::
 
 ## Template Operators
 
