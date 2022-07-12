@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-07-12
+### Added
+- Documented change in default Craft 4 user query behavior.
+
 ## 2022-07-08
 ### Added
 - Documented user statuses.

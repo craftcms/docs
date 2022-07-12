@@ -328,6 +328,31 @@ Some element query methods have been removed in Craft 4.
 | `last()`        | `inReverse().one()`
 | `total()`       | `count()`
 
+### User Queries
+
+User queries now return _all_ users by default in Craft 4, instead of only active users. Any user queries relying on this default behavior may need to be updated:
+
+::: code
+```twig
+{# Craft 3 returned all *active* users by default #}
+{% set activeUsers = craft.users().all() %}
+
+{# Craft 4 returns *all* users by default; specify status for the same behavior #}
+{% set activeUsers = craft.users()
+  .status('active')
+  .all() %}
+```
+```php
+// Craft 3 returned all *active* users by default
+$activeUsers = Craft::$app->getUsers()->all();
+
+// Craft 4 returns *all* users by default; specify status for the same behavior
+$activeUsers = Craft::$app->getUsers()
+  ->status('active')
+  ->all();
+```
+:::
+
 ## Collections
 
 Craft 4 adds the [Collections](https://packagist.org/packages/illuminate/collections) package, which offers a more convenient and consistent way of working with arrays and collections of things.
