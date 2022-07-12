@@ -707,7 +707,7 @@ Make sure you set this to a valid folder path, otherwise it will be ignored.
 
 ### `CRAFT_STREAM_LOG`
 
-When set to `true`, Craft will additionally send log output to `stderr` and `stdout`. PHP fatal errors will be sent to `stderr`.
+When set to `true`, Craft will send log output to `stderr` and `stdout`, instead of to log files. PHP fatal errors will be sent to `stderr`.
 
 ### `CRAFT_TEMPLATES_PATH`
 
