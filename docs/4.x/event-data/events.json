@@ -35915,6 +35915,12 @@
     },
     {
         "class": "craft\\services\\Search",
+        "name": "EVENT_BEFORE_INDEX_KEYWORDS",
+        "type": "craft\\events\\IndexKeywordsEvent",
+        "desc": "The event that is triggered before keywords are indexed for an element attribute or field."
+    },
+    {
+        "class": "craft\\services\\Search",
         "name": "EVENT_BEFORE_SEARCH",
         "type": "craft\\events\\SearchEvent",
         "desc": "The event that is triggered before a search is performed."
