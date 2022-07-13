@@ -183,20 +183,7 @@ If you’re upgrading a project that’s using `phone` fields, those will be mig
 
 ### Address `firstName` and `lastName` Fields
 
-Individual `firstName` and `lastName` fields have been consolidated into a `fullName` field instead. An included parser makes it possible to get a first name or last name when you need it:
-
-```twig
-{# @var address craft\elements\Address #}
-{% set address = currentUser.getAddresses()|first %}
-
-{% set firstName = address.getGivenName() %}
-{% set middleName = address.getAdditionalName() %}
-{% set lastName = address.getFamilyName() %}
-```
-
-::: tip
-Addresses have a `getAdditionalName()`, but it always returns `null`. And don’t confuse this with User elements, which have `firstName`, `lastName`, and `fullName` fields but no `getGivenName()` or `getFamilyName()` methods.
-:::
+Any front-end address forms must submit `fullName` instead of `firstName` and `lastName`. You can still access the `firstName` and `lastName` properties on an address like you normally would, however.
 
 ### Address Template Changes
 
