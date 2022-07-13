@@ -175,6 +175,16 @@ $storeAddress = \craft\commerce\Plugin::getInstance()
 
 The concept of address lines has gone away along with [DefineAddressLinesEvent](commerce3:craft\commerce\events\DefineAddressLinesEvent). Use Craft’s [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()) instead.
 
+### Address `phone` Fields
+
+The `phone` field is no longer included by default with each address.
+
+If you’re upgrading a project that’s using `phone` fields, those will be migrated automatically. To store address phone numbers in a fresh Commerce 4 install, you’ll need to manually add a custom `phone` field to the address field layout.
+
+### Address `firstName` and `lastName` Fields
+
+Any front-end address forms must submit `fullName` instead of `firstName` and `lastName`. You can still access the `firstName` and `lastName` properties on an address like you normally would, however.
+
 ### Address Template Changes
 
 The change in address format means you’ll need to update some references in your templates.
