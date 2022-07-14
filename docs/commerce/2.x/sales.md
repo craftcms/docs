@@ -85,6 +85,6 @@ This setting is related to the purchasable being affected.
 
 ### Do not apply subsequent matching sales beyond applying this sale. (Checkbox)
 
-After this sale matches the order, do not apply any other sales, based on the order of sales in the Control Panel.
+After this sale matches the order, do not apply any other sales, based on the order of sales in the control panel.
 
 This is a sale level option, not a purchasable level option like the above `Ignore previous matching sales if this sale matches.`

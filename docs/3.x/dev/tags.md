@@ -46,19 +46,26 @@ This tag will cache a portion of your template, which can improve performance fo
 
 ```twig
 {% cache %}
-    {% for block in entry.myMatrixField.all() %}
-        <p>{{ block.text }}</p>
-    {% endfor %}
+  {% for block in entry.myMatrixField.all() %}
+    <p>{{ block.text }}</p>
+  {% endfor %}
 {% endcache %}
 ```
 
 Since the cache tag is for caching output and not logic, avoid caching `{{ csrfInput() }}`, form fields, or parts of templates where dynamic output is expected.
 
-Warning: If you’re suffering from abnormal page load times, you may be experiencing a suboptimal hosting environment. Please consult a specialist before trying `{% cache %}`. `{% cache %}` is not a substitute for fast database connections, efficient templates, or moderate query counts. Possible side effects include stale content, excessively long-running background tasks, stuck tasks, and in rare cases, death. Ask your hosting provider if `{% cache %}` is right for you.
-
 By default, cached output will be kept by URL without regard for the query string.
 
 While carefully-placed `{% cache %}` tags can offer significant boosts to performance, it’s important to know how the cache tag’s parameters can be used to fine-tune its behavior.
+
+::: tip
+The `{% cache %}` tag captures code and styles registered with `{% js %}`, \
+`{% script %}` and `{% css %}` tags.
+:::
+
+<small>
+Warning: If you’re suffering from abnormal page load times, you may be experiencing a suboptimal hosting environment. Please consult a specialist before trying <b>{% cache %}</b>. <b>{% cache %}</b> is not a substitute for fast database connections, efficient templates, or moderate query counts. Possible side effects include stale content, excessively long-running background tasks, stuck tasks, and in rare cases, death. Ask your hosting provider if <b>{% cache %}</b> is right for you.
+</small>
 
 ### Parameters
 
@@ -81,7 +88,7 @@ Specifies the name of the key the cache should use. When the key changes, the ta
 ```
 
 ::: warning
-If you change the template code within a `{% cache %}` that uses a custom key, any existing template caches will not automatically be purged. You will either need to assign the tag a new key, or clear your existing template caches manually selecting “Data Caches” in the Utilities → Clear Caches tool.
+If you change template code within a `{% cache %}` that uses a custom key, existing template caches will not automatically be purged. Either assign the tag a new key, or clear your existing template caches manually by navigating to **Utilities** → **Caches** and clearing **Data caches**.
 :::
 
 You can provide a dynamic key and combine it with [globally](#globally) for more control over template caching. For example, you could cache based on the URL *with* the query string that’s ignored by default:
@@ -150,7 +157,7 @@ Prevents the `{% cache %}` tag from activating if a certain condition is met.
 You can only use [if](#if) **_or_** [unless](#unless) in a single `{% cache %}` tag.
 :::
 
-### Cache clearing
+### Cache Clearing
 
 Your template caches will automatically clear when any elements (entries, assets, etc.) within the tags are saved or deleted.
 
@@ -162,7 +169,7 @@ You can also manually clear your template caches from the Utilities page, using 
 php craft invalidate-tags/template
 ```
 
-### When to use `{% cache %}` tags
+### When to Use `{% cache %}` Tags
 
 You should use `{% cache %}` tags any time you’ve got a template that’s causing a lot of database queries, or you’re doing something very computationally expensive with Twig.
 
@@ -176,30 +183,10 @@ There are also some cases where it’s _not_ a good idea to use them:
 
 - Don’t use them to cache static text; that will be more expensive than simply outputting the text.
 - You can’t use them outside of top-level `{% block %}` tags within a template that extends another.
-- The `{% cache %}` tag will only cache HTML, so using tags like [{% css %}](#css) and [{% js %}](#js) inside of it doesn’t make sense because they don’t actually output HTML therefore their output won’t be cached.
 
-    ```twig
-    {# Bad: #}
-
-    {% extends "_layout" %}
-    {% cache %}
-        {% block "content" %}
-            ...
-        {% endblock %}
-    {% endcache %}
-
-    {# Good: #}
-
-    {% extends "_layout" %}
-    {% block "content" %}
-        {% cache %}
-            ...
-        {% endcache %}
-    {% endblock %}
-    ```
-
-
-Tip: The `{% cache %}` tag will detect if there are any ungenerated [image transform](../image-transforms.md) URLs within it. If there are, it will hold off on caching the template until the next request, so those temporary image URLs won’t get cached.
+::: tip
+The `{% cache %}` tag detects ungenerated [image transform](../image-transforms.md) URLs within it. When it finds any, it holds off caching the template until the next request so those temporary image URLs aren’t cached.
+:::
 
 ## `css`
 
@@ -211,14 +198,14 @@ The `{% css %}` tag can be used to register a CSS file or a CSS code block.
 
 {# Register a CSS code block #}
 {% css %}
-    .content {
-        color: {{ entry.textColor }};
-    }
+  .content {
+    color: {{ entry.textColor }};
+  }
 {% endcss %}
 ```
 
 ::: tip
-To register a CSS file, the URL must end in `.css`.
+To register a CSS file, the URL must begin with `https://` or `http://`, or end in `.css`.
 :::
 
 ### Parameters
@@ -240,7 +227,7 @@ Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()
 This tag will dump a variable out to the browser and then end the request. (`dd` stands for “Dump-and-Die”.)
 
 ```twig
-{% set entry = craft.entries.id(entryId).one() %}
+{% set entry = craft.entries().id(entryId).one() %}
 {% dd entry %}
 ```
 
@@ -249,10 +236,10 @@ This tag will dump a variable out to the browser and then end the request. (`dd`
 This tag will prevent the rest of the template from executing, and end the request.
 
 ```twig
-{% set entry = craft.entries.id(entryId).one() %}
+{% set entry = craft.entries().id(entryId).one() %}
 
 {% if not entry %}
-    {% exit 404 %}
+  {% exit 404 %}
 {% endif %}
 ```
 
@@ -262,7 +249,11 @@ The `{% exit %}` tag supports the following parameter:
 
 #### Status
 
-You can optionally set the HTTP status code that should be included with the response. If you do, Craft will look for the appropriate error template to render. For example, `{% exit 404 %}` will get Craft to return the `404.twig` template. If the template doesn’t exist. Craft will fallback on its own template corresponding to the status code.
+If you choose to set the HTTP status code that should be included with the response, Craft will look for the appropriate error template to render. For example, `{% exit 404 %}` will get Craft to return the `404.twig` template. If the template doesn’t exist, Craft will fall back on its own template corresponding to the status code.
+
+::: tip
+`{% exit %}` throws an [HttpException](yii2:yii\web\HttpException) with the appropriate status code, so with <config3:devMode> enabled a full error report and stack trace will be shown instead of an error template.
+:::
 
 ## `header`
 
@@ -309,7 +300,7 @@ The `{% html %}` tag can be used to register arbitrary HTML code on the page.
 
 ```twig
 {% html %}
-    <p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>
+  <p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>
 {% endhtml %}
 ```
 
@@ -352,16 +343,16 @@ The `{% js %}` tag can be used to register a JavaScript file or a JavaScript cod
 
 {# Register a JS code block #}
 {% js %}
-    _gaq.push([
-        "_trackEvent",
-        "Search",
-        "{{ searchTerm|e('js') }}"
-    ]);
+  _gaq.push([
+    "_trackEvent",
+    "Search",
+    "{{ searchTerm|e('js') }}"
+  ]);
 {% endjs %}
 ```
 
 ::: tip
-To register a JavaScript file, the URL must end in `.js`.
+To register a JavaScript file, the URL must begin with `https://` or `http://`, or end in `.js`.
 
 To provide a *dynamic* filename reference, use [`view.registerJsFile()`](craft3:craft\web\View::registerJsFile()) instead:
 ```twig
@@ -402,7 +393,7 @@ Any HTML attributes that should be included on the `<script>` tag.
 
 ```twig
 {% js "/assets/js/script.js" with {
-    defer: true
+  defer: true
 } %}
 ```
 
@@ -465,19 +456,19 @@ This tag works identically to the [namespace](filters.md#namespace) filter, exce
 This tag helps create a hierarchical navigation menu for entries in a [Structure section](../entries.md#section-types) or a [Category Group](../categories.md).
 
 ```twig
-{% set entries = craft.entries.section('pages').all() %}
+{% set entries = craft.entries().section('pages').all() %}
 
 <ul id="nav">
-    {% nav entry in entries %}
-        <li>
-            <a href="{{ entry.url }}">{{ entry.title }}</a>
-            {% ifchildren %}
-                <ul>
-                    {% children %}
-                </ul>
-            {% endifchildren %}
-        </li>
-    {% endnav %}
+  {% nav entry in entries %}
+    <li>
+      <a href="{{ entry.url }}">{{ entry.title }}</a>
+      {% ifchildren %}
+        <ul>
+          {% children %}
+        </ul>
+      {% endifchildren %}
+    </li>
+  {% endnav %}
 </ul>
 ```
 
@@ -517,26 +508,26 @@ This tag makes it easy to paginate query results across multiple pages.
 
 ```twig
 {% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
+  .section('blog')
+  .limit(10) %}
 
 {% paginate query as pageInfo, pageEntries %}
 
 {% for entry in pageEntries %}
-    <article>
-        <h1>{{ entry.title }}</h1>
-        {{ entry.body }}
-    </article>
+  <article>
+    <h1>{{ entry.title }}</h1>
+    {{ entry.body }}
+  </article>
 {% endfor %}
 
 {% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
 {% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
 ```
 
-Paginated URLs will be identical to the first page’s URL, except that “/p_X_” will be appended to the end (where _X_ is the page number), e.g. `http://my-project.test/news/p2`.
+Paginated URLs will be identical to the first page’s URL, except that “/p_X_” will be appended to the end (where _X_ is the page number), e.g. `http://my-project.tld/news/p2`.
 
 ::: tip
-You can use the <config3:pageTrigger> config setting to customize what comes before the actual page number in your URLs. For example you could set it to `'page/'`, and your paginated URLs would start looking like `http://my-project.test/news/page/2`.
+You can use the <config3:pageTrigger> config setting to customize what comes before the actual page number in your URLs. For example you could set it to `'page/'`, and your paginated URLs would start looking like `http://my-project.tld/news/page/2`.
 :::
 
 ::: warning
@@ -578,13 +569,13 @@ The `{% paginate %}` tag won’t actually output the current page’s results fo
 Following your `{% paginate %}` tag, you will need to loop through this page’s results using a [for](https://twig.symfony.com/doc/tags/for.html) tag.
 
 ```twig
-{% paginate craft.entries.section('blog').limit(10) as pageEntries %}
+{% paginate craft.entries().section('blog').limit(10) as pageEntries %}
 
 {% for entry in pageEntries %}
-    <article>
-        <h1>{{ entry.title }}</h1>
-        {{ entry.body }}
-    </article>
+  <article>
+    <h1>{{ entry.title }}</h1>
+    {{ entry.body }}
+  </article>
 {% endfor %}
 ```
 
@@ -617,8 +608,8 @@ If you just want simple Previous Page and Next Page links to appear, you can do 
 
 ```twig
 {% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
+  .section('blog')
+  .limit(10) %}
 
 {% paginate query as pageInfo, pageEntries %}
 
@@ -634,8 +625,8 @@ You can add First Page and Last Page links into the mix, you can do that too:
 
 ```twig
 {% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
+  .section('blog')
+  .limit(10) %}
 
 {% paginate query as pageInfo, pageEntries %}
 
@@ -653,8 +644,8 @@ If you want to create a list of nearby pages, perhaps surrounding the current pa
 
 ```twig
 {% set query = craft.entries()
-    .section('blog')
-    .limit(10) %}
+  .section('blog')
+  .limit(10) %}
 
 {% paginate query as pageInfo, pageEntries %}
 
@@ -662,13 +653,13 @@ If you want to create a list of nearby pages, perhaps surrounding the current pa
 {% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
 
 {% for page, url in pageInfo.getPrevUrls(5) %}
-    <a href="{{ url }}">{{ page }}</a>
+  <a href="{{ url }}">{{ page }}</a>
 {% endfor %}
 
 <span class="current">{{ pageInfo.currentPage }}</span>
 
 {% for page, url in pageInfo.getNextUrls(5) %}
-    <a href="{{ url }}">{{ page }}</a>
+  <a href="{{ url }}">{{ page }}</a>
 {% endfor %}
 
 {% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
@@ -683,7 +674,7 @@ This tag will redirect the browser to a different URL.
 
 ```twig
 {% if not user or not user.isInGroup('members') %}
-    {% redirect "pricing" %}
+  {% redirect "pricing" %}
 {% endif %}
 ```
 
@@ -711,7 +702,7 @@ You can optionally set flash messages that will show up for the user on the next
 
 ```twig
 {% if not currentUser.isInGroup('members') %}
-    {% redirect "pricing" 301 with notice "You have to be a member to access that!" %}
+  {% redirect "pricing" 301 with notice "You have to be a member to access that!" %}
 {% endif %}
 ```
 
@@ -767,12 +758,12 @@ Take this template for example, which is running different template code dependi
 
 ```twig
 {% if matrixBlock.type == "text" %}
-    {{ matrixBlock.textField|markdown }}
+  {{ matrixBlock.textField|markdown }}
 {% elseif matrixBlock.type == "image" %}
-    {{ matrixBlock.image[0].getImg() }}
+  {{ matrixBlock.image[0].getImg() }}
 {% else %}
-    <p>A font walks into a bar.</p>
-    <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
+  <p>A font walks into a bar.</p>
+  <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
 {% endif %}
 ```
 
@@ -780,13 +771,13 @@ Since all of the conditionals are evaluating the same thing – `matrixBlock.typ
 
 ```twig
 {% switch matrixBlock.type %}
-    {% case "text" %}
-        {{ matrixBlock.textField|markdown }}
-    {% case "image" %}
-        {{ matrixBlock.image[0].getImg() }}
-    {% default %}
-        <p>A font walks into a bar.</p>
-        <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
+  {% case "text" %}
+    {{ matrixBlock.textField|markdown }}
+  {% case "image" %}
+    {{ matrixBlock.image[0].getImg() }}
+  {% default %}
+    <p>A font walks into a bar.</p>
+    <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
 {% endswitch %}
 ```
 
@@ -800,10 +791,10 @@ If you want to check for mulitple values from a single `{% case %}` tag, separat
 
 ```twig
 {% case "h2" or "h3" or "p" %}
-    {# output an <h2>, <h3>, or <p> tag, depending on the block type #}
-    {{ tag(matrixBlock.type, {
-        text: matrixBlock.text
-    }) }}
+  {# output an <h2>, <h3>, or <p> tag, depending on the block type #}
+  {{ tag(matrixBlock.type, {
+      text: matrixBlock.text
+  }) }}
 ```
 
 ### Accessing the parent `loop` variable
@@ -812,15 +803,15 @@ If you’re using the `{% switch %}` tag inside of a `{% for %}` loop, you won�
 
 ```twig
 {% for matrixBlock in entry.matrixField.all() %}
-    {% set loopIndex = loop.index %}
+  {% set loopIndex = loop.index %}
 
-    {% switch matrixBlock.type %}
+  {% switch matrixBlock.type %}
 
-        {% case "text" %}
+    {% case "text" %}
 
-            Loop #{{ loopIndex }}
+        Loop #{{ loopIndex }}
 
-    {% endswitch %}
+  {% endswitch %}
 {% endfor %}
 ```
 
@@ -832,9 +823,9 @@ It’s similar to the [tag](functions.md#tag) _function_, however the `{% tag %}
 
 ```twig
 {% tag 'p' with {
-    class: 'welcome',
+  class: 'welcome',
 } %}
-    Hello, {{ currentUser.friendlyName }}
+  Hello, {{ currentUser.friendlyName }}
 {% endtag %}
 {# Output: <p class="welcome">Hello, Tim</p> #}
 ```
@@ -842,16 +833,28 @@ It’s similar to the [tag](functions.md#tag) _function_, however the `{% tag %}
 `{% tag %}` tags can also be nested:
 ```twig
 {% tag 'div' with {
-    class: 'foo',
+  class: 'foo',
 } %}
-    {% tag 'p' with {
-        class: 'welcome',
-    } -%}
-        Hello, {{ currentUser.friendlyName }}
-    {%- endtag %}
+  {% tag 'p' with {
+    class: 'welcome',
+  } -%}
+    Hello, {{ currentUser.friendlyName }}
+  {%- endtag %}
 {% endtag %}
 {# Output: <div class="foo"><p class="welcome">Hello, Tim</p></div> #}
 ```
+
+::: tip
+Attribute values are HTML-encoded automatically:
+```twig
+{% tag 'p' with {
+  title: 'Hello & Welcome',
+} %}
+  Hello, {{ currentUser.friendlyName }}
+{% endtag %}
+{# Output: <p title="Hello &amp; Welcome">Hello, Tim</p> #}
+```
+:::
 
 ### Parameters
 
@@ -859,11 +862,21 @@ The `{% tag %}` tag has the following parameters:
 
 #### Name
 
+<!-- textlint-disable terminology -->
+<!-- This “node” is legit and not Node.js -->
+
 The first thing you must pass to the `{% tag %}` tag is the name of the node that should be rendered.
+
+<!-- textlint-enable terminology -->
 
 #### `with`
 
+<!-- textlint-disable terminology -->
+<!-- This “node” is legit and not Node.js -->
+
 Next, you can optionally type “` with `” followed by an object with attributes for the node.
+
+<!-- textlint-enable terminology -->
 
 These will be rendered using <yii2:yii\helpers\BaseHtml::renderTagAttributes()> just like the [tag](functions.md#tag) function, except for the `html` and `text` keys because inner content will go between `{% tag %}` and `{% endtag %}` instead.
 
@@ -871,10 +884,10 @@ If an attribute is set to `true`, it will be added without a value:
 
 ```twig
 {% tag 'textarea' with {
-    name: 'message',
-    required: true
+  name: 'message',
+  required: true
 } -%}
-    Please foo some bar.
+  Please foo some bar.
 {%- endtag %}
 {# Output: <textarea name="message" required>Please foo some bar.</textarea> #}
 ```

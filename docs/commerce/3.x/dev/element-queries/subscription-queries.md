@@ -34,18 +34,18 @@ We can display all of the current user’s subscriptions by doing the following:
 
 {# Create a subscription query with the 'user' parameter #}
 {% set mySubscriptionQuery = craft.subscriptions()
-    .user(currentUser) %}
+  .user(currentUser) %}
 
 {# Fetch the subscriptions #}
 {% set subscriptions = mySubscriptionQuery.all() %}
 
 {# Display the subscriptions #}
 {% for subscription in subscriptions %}
-    <article>
-        <h1><a href="{{ subscription.url }}">{{ subscription.title }}</a></h1>
-        {{ subscription.summary }}
-        <a href="{{ subscription.url }}">Learn more</a>
-    </article>
+  <article>
+    <h1><a href="{{ subscription.url }}">{{ subscription.title }}</a></h1>
+    {{ subscription.summary }}
+    <a href="{{ subscription.url }}">Learn more</a>
+  </article>
 {% endfor %}
 ```
 
@@ -385,7 +385,7 @@ Narrows the query results to only subscriptions that have started.
 ::: code
 ```twig
 {# Fetch started subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
     .hasStarted()
     .all() %}
 ```
@@ -487,7 +487,7 @@ Narrows the query results to only subscriptions that are canceled.
 ::: code
 ```twig
 {# Fetch canceled subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
     .isCanceled()
     .all() %}
 ```
@@ -510,7 +510,7 @@ Narrows the query results to only subscriptions that have expired.
 ::: code
 ```twig
 {# Fetch expired subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
     .isExpired()
     .all() %}
 ```
@@ -533,7 +533,7 @@ Narrows the query results to only subscriptions that are suspended.
 ::: code
 ```twig
 {# Fetch suspended subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
     .isSuspended()
     .all() %}
 ```
@@ -637,7 +637,7 @@ Narrows the query results to only subscriptions that are on trial.
 ::: code
 ```twig
 {# Fetch trialed subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
     .onTrial()
     .all() %}
 ```
@@ -856,7 +856,7 @@ Possible values include:
 ::: code
 ```twig
 {# Fetch expired subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
     .status('expired')
     .all() %}
 ```

@@ -28,9 +28,9 @@ You can loop through your selected options like so:
 
 ```twig
 <ul>
-    {% for option in entry.checkboxFieldHandle %}
-        <li>{{ option }}</li>
-    {% endfor %}
+  {% for option in entry.checkboxFieldHandle %}
+    <li>{{ option }}</li>
+  {% endfor %}
 </ul>
 ```
 
@@ -38,9 +38,9 @@ Or you can loop through all of the available options rather than just the select
 
 ```twig
 <ul>
-    {% for option in entry.checkboxFieldHandle.options %}
-        <li>{{ option }}</li>
-    {% endfor %}
+  {% for option in entry.checkboxFieldHandle.options %}
+    <li>{{ option }}</li>
+  {% endfor %}
 </ul>
 ```
 
@@ -50,7 +50,7 @@ You can also tell if a particular option is selected outside the scope of loopin
 
 ```twig
 {% if entry.checkboxFieldHandle.contains('tequila') %}
-    <p>Really?</p>
+  <p>Really?</p>
 {% endif %}
 ```
 
@@ -60,7 +60,7 @@ If you are including a Checkboxes field on a front-end [entry from](templating/e
 <input type="hidden" name="fields[checkboxFieldhandle]" value="">
 
 <ul>
-    <li><input type="checkbox" name="fields[checkboxFieldHandle][]" value="foo">{{ checkboxOption.label }}</li>
-    <li><input type="checkbox" name="fields[checkboxFieldHandle][]" value="bar">{{ checkboxOption.label }}</li>
+  <li><input type="checkbox" name="fields[checkboxFieldHandle][]" value="foo">{{ checkboxOption.label }}</li>
+  <li><input type="checkbox" name="fields[checkboxFieldHandle][]" value="bar">{{ checkboxOption.label }}</li>
 </ul>
 ```

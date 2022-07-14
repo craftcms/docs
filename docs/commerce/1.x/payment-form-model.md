@@ -8,43 +8,43 @@ The `paymentForm` model is usually only used by onsite gateways. In addition to 
 
 The follow attributes make up the payment form model.
 
-### token
+### `token`
 
 If a token is found on the payment form, no validation of other field is performed and the data is ignored.
 
-The token represents a pre validated credit card and is provided by a gateways client side JavaScript library. For example [Stripe.js](https://stripe.com/docs/stripe-js)
+The token represents a pre validated credit card and is provided by a gateway’s client-side JavaScript library. For example [Stripe.js](https://stripe.com/docs/stripe-js)
 
-### firstName
+### `firstName`
 
 The first name of the customers credit card.
 
 Validation: required field
 
-### lastName
+### `lastName`
 
 The last name of the customers credit card.
 
 Validation: required field
 
-### month
+### `month`
 
 Integer only number representing the month of credit card expiry.
 
 Validation: required field, Min:1 Max: 12
 
-### year
+### `year`
 
 Integer only number representing the year of credit card expiry.
 
 Validation: required field, Min: current year: 2016 Max: Current year plus 12 e.g 2028
 
-### CVV
+### `cvv`
 
 Integer only number found on the back side of the card for security.
 
 Validation: minimum char length: 3, maximum char length: 4
 
-### number
+### `number`
 
 The credit card number itself.
 
@@ -62,12 +62,12 @@ Below is an example of a payment form using the payment form model.
 {{ getCsrfInput() }}
 
 {% set formValues = {
-firstName: paymentForm is defined ? paymentForm.firstName : (cart.billingAddress ? cart.billingAddress.firstName : ''),
-lastName: paymentForm is defined ? paymentForm.lastName : (cart.billingAddress ? cart.billingAddress.lastName : ''),
-number: paymentForm is defined ? paymentForm.number : '',
-cvv: paymentForm is defined ? paymentForm.cvv : '',
-month: paymentForm is defined ? paymentForm.month : 1,
-year: paymentForm is defined ? paymentForm.year : currentYear,
+  firstName: paymentForm is defined ? paymentForm.firstName : (cart.billingAddress ? cart.billingAddress.firstName : ''),
+  lastName: paymentForm is defined ? paymentForm.lastName : (cart.billingAddress ? cart.billingAddress.lastName : ''),
+  number: paymentForm is defined ? paymentForm.number : '',
+  cvv: paymentForm is defined ? paymentForm.cvv : '',
+  month: paymentForm is defined ? paymentForm.month : 1,
+  year: paymentForm is defined ? paymentForm.year : currentYear,
 } %}
 
 <input type="text" name="firstName" value="{{ formValues.firstName }}">
@@ -80,16 +80,16 @@ year: paymentForm is defined ? paymentForm.year : currentYear,
 {% if paymentForm is defined %}{{ paymentForm.getError('number') }}{% endif %}
 
 <select name="month">
- {% for month in 1..12 %}
-  <option value="{{ month }}" {% if formValues.month == month %}selected{% endif %}>{{ month }}</option>
- {% endfor %}
+  {% for month in 1..12 %}
+    <option value="{{ month }}" {% if formValues.month == month %}selected{% endif %}>{{ month }}</option>
+  {% endfor %}
 </select>
 {% if paymentForm is defined %}{{ paymentForm.getError('month') }}{% endif %}
 
 <select class="required form-control" name="year">
-{% for year in currentYear-1..(currentYear + 12) %}
-<option value="{{ year }}"{% if formValues.year == year %}selected{% endif %}>{{ year }}</option>
-{% endfor %}
+  {% for year in currentYear-1..(currentYear + 12) %}
+    <option value="{{ year }}"{% if formValues.year == year %}selected{% endif %}>{{ year }}</option>
+  {% endfor %}
 </select>
 {% if paymentForm is defined %}{{ paymentForm.getError('year') }}{% endif %}
 

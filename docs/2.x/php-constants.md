@@ -9,7 +9,7 @@ If you wish to define any of these constants for your site, you should put them 
 $craftPath = '../../craft';
 
 // This is for the Dutch site
-define('CRAFT_SITE_URL', 'http://example.com/nl/');
+define('CRAFT_SITE_URL', 'http://my-project.tld/nl/');
 define('CRAFT_LOCALE',   'nl');
 ```
 
@@ -17,7 +17,7 @@ define('CRAFT_LOCALE',   'nl');
 
 ### `CRAFT_ENVIRONMENT`
 
-Defines the name of the current environment, which defaults to the server’s host name. (See [multi-environment-configs](multi-environment-configs.md) for more info.)
+Defines the name of the current environment, which defaults to the server’s hostname. (See [multi-environment-configs](multi-environment-configs.md) for more info.)
 
 ```php
 define('CRAFT_ENVIRONMENT', 'dev');
@@ -36,7 +36,7 @@ define('CRAFT_LOCALE', 'nl');
 Overrides the Site URL setting in Settings → General. That can be useful in combination with [CRAFT_LOCALE](#craft-locale) for creating a locale-specific version of your site.
 
 ```php
-define('CRAFT_SITE_URL', "http://example.com/nl/");
+define('CRAFT_SITE_URL', "http://my-project.tld/nl/");
 ```
 
 You’re free to use [environment-specific variables](multi-environment-configs.md#environment-specific-variables) in the value as well:

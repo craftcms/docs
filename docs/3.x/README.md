@@ -1,3 +1,7 @@
+---
+description: Official documentation for Craft CMS 3.
+---
+
 # About Craft CMS
 
 Craft is a flexible, user-friendly CMS for creating custom digital experiences on the web and beyond.

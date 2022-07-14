@@ -1,6 +1,6 @@
 # Plugin Settings
 
-There are two ways to give your plugin its own settings: via a config file that users can optionally save in `craft/config/`, or via a new settings page within the Control Panel.
+There are two ways to give your plugin its own settings: via a config file that users can optionally save in `craft/config/`, or via a new settings page within the control panel.
 
 Both ways have their advantages:
 
@@ -49,7 +49,7 @@ return array(
 
 ## Settings Page
 
-To give your plugin its own settings page within the Control Panel, first define which settings the plugin actually has. You do that by creating a protected `defineSettings()` method within your primary plugin class. This method returns an array whose keys define the setting names, and values define the parameters (the type of value, etc.).
+To give your plugin its own settings page within the control panel, first define which settings the plugin actually has. You do that by creating a protected `defineSettings()` method within your primary plugin class. This method returns an array whose keys define the setting names, and values define the parameters (the type of value, etc.).
 
 ```php
 <?php

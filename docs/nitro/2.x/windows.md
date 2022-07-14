@@ -36,19 +36,40 @@ When adding a new site, you’ll need to manually set permissions from the root 
 chmod 777 ./.env
 chmod 777 ./composer.lock
 chmod 777 ./composer.json
-chmod -R 777 ./config
-chmod -R 777 ./storage
-chmod -R 777 ./vendor
-chmod -R 777 ./web
+sudo chmod -R 777 ./config
+sudo chmod -R 777 ./storage
+sudo chmod -R 777 ./vendor
+sudo chmod -R 777 ./web
 ```
+
+::: tip
+You’ll probably need those `sudo` commands to properly set permissions on directories. You can try first without them, but a `chmod(): Operation not permitted` warning from Craft means you’ll need those elevated permissions.
+:::
 
 ## Manually Trust Certificates and Edit the Hosts File
 
 The first time you add a Craft site, you’ll need to manually run a command on the Windows host machine to import a certificate file so SSL will work. You can follow the terminal output for exact instructions.
 
-Nitro cannot edit the Windows hosts file at `C:\Windows\system32\drivers\etc\hosts` and will provide you with copy+paste instructions when it needs the file updated.
+Nitro cannot edit the Windows hosts file at `C:\Windows\system32\drivers\etc\hosts` and will provide you with copy+paste instructions when it needs the file updated. It’ll look something like this:
 
-## Limit WSL2 Memory Usage
+```
+For your hostnames to work, add the following to `C:\Windows\System32\Drivers\etc\hosts`:
+---- COPY BELOW ----
+# <nitro>
+127.0.0.1 mysql-8.0-3306.database.nitro mysite.nitro myothersite.nitro
+# </nitro>
+---- COPY ABOVE ----
+```
+
+::: tip
+Nitro attempts to update hostnames when you run `nitro apply`—so you may need to run that after adding your first site.
+:::
+
+::: tip
+Windows only allows for up to nine aliases per line in the hosts file. If you have more than nine, you will need to add any aliases after the ninth one onto a new line below starting with `127.0.0.1`.
+:::
+
+## Note WSL2 Memory Usage
 
 WSL2 has been known to consume a lot of memory, most noticeably on machines with more limited RAM.
 
@@ -63,6 +84,8 @@ swap=0
 ```
 
 Then run `wsl --shutdown` and restart Docker to apply the change. This will put a hard limit on RAM usage and prevent any swap file from being created.
+
+On the other hand, if your database containers are unexpectedly stopping or the `vmmem.exe` process heavily consumes disk usage for several minutes, you probably don’t have enough memory or swap file allocated to WSL2.
 
 ### Related
 

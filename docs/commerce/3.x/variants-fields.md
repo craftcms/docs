@@ -14,11 +14,11 @@ Commerce Variants fields have the following settings:
 
 Commerce Variants fields list all of the currently selected product variants, with a button to select new ones:
 
-<img src="./assets/variant-field-example.png" alt="Variants field">
+<img src="./images/variant-field-example.png" alt="Variants field">
 
 Choosing **Add a variant** opens a modal window for finding and selecting additional variants:
 
-<img src="./assets/variant-field-modal.png" alt="Variant selection modal">
+<img src="./images/variant-field-modal.png" alt="Variant selection modal">
 
 ## Templating
 
@@ -40,7 +40,7 @@ To check if your Commerce Variants field has any selected product variants, you 
 
 ```twig
 {% if entry.myFieldHandle|length %}
-    {# ... #}
+  {# ... #}
 {% endif %}
 ```
 
@@ -48,7 +48,7 @@ Loop through all the selected variants using `all()`:
 
 ```twig
 {% for variant in entry.myFieldHandle.all() %}
-    {# ... #}
+  {# ... #}
 {% endfor %}
 ```
 
@@ -58,20 +58,17 @@ Rather than typing `entry.myFieldHandle` every time, you can call it once and se
 {% set variants = entry.myFieldHandle.all() %}
 
 {% if variants|length %}
-
-    <h3>Consider buying these:</h3>
-
-    <ul>
-        {% for variant in variants %}
-            {% set product = variant.getProduct() %}
-            <li>
-                <a href="{{ product.url }}">
-                    {{ product.title ~ ': ' ~ variant.title }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-
+  <h3>Consider buying these:</h3>
+  <ul>
+    {% for variant in variants %}
+      {% set product = variant.getProduct() %}
+      <li>
+        <a href="{{ product.url }}">
+          {{ product.title ~ ': ' ~ variant.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
 {% endif %}
 ```
 
@@ -86,6 +83,6 @@ If your variants field is only meant to have a single variant selected, remember
 ```twig
 {% set variant = entry.myFieldHandle.one() %}
 {% if variant %}
-    {# ... #}
+  {# ... #}
 {% endif %}
 ```

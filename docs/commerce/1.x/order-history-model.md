@@ -10,35 +10,34 @@ Current Order Status: {{order.orderStatus.name}} <br>
   Status: '{{ history.newStatus.name ?? ""}}' (previously '{{ history.prevStatus.name ?? ""}}')
   with message: '{{ history.message }}'<br>
 {% endfor %}
-
 ```
 
-## message
+## `message`
 
 The message saved when the order status was changed.
 
-## orderId
+## `orderId`
 
 The order ID.
 
-## prevStatus
+## `prevStatus`
 
 Returns an [Order Status model](order-status-model.md) of the previous status this order was in.
 
 Returns `null` if there was no previous status, as is the case when a new order is created.
 
-## prevStatusId
+## `prevStatusId`
 
 The the ID of the previous status this order was in.
 
-## newStatus
+## `newStatus`
 
 Returns an [Order Status model](order-status-model.md) of the new status this order is in.
 
-## newStatusId
+## `newStatusId`
 
 The status this order history model recorded
 
-## customerId
+## `customerId`
 
 The customer who made this order ID

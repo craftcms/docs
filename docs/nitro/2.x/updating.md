@@ -22,7 +22,7 @@ nitro update
 :::
 
 ::: tip
-`self-update` finds the latest stable version of Nitro, but takes a `--dev` argument to include pre-releases:
+`self-update` finds the latest stable version of Nitro, but takes a `--dev` argument to include prereleases:
 
 ```sh
 nitro self-update --dev
@@ -53,4 +53,4 @@ The Nitro CLI and gRPC versions do not match
 You might need to run `nitro update`
 ```
 
-If you’re running into issues using the update instructions above, you should be able to follow the [installation instructions](http://localhost:8080/docs/nitro/2.x/installation.html) for your OS.
+If you’re running into issues using the update instructions above, you should be able to follow the [installation instructions](installation.md) for your OS.

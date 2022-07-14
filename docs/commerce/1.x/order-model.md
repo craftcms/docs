@@ -34,160 +34,160 @@ Order Model objects have the following attributes and methods:
 
 ## Attributes
 
-### id
+### `id`
 
 The element ID of the order.
 
-### number
+### `number`
 
 The unique identifier of the order, the customer will see this, and is the best thing to use in URLs.
 
-### shortNumber
+### `shortNumber`
 
 The first 7 characters of the unique `number` identifier of the order.
 
-### couponCode
+### `couponCode`
 
 The current coupon code applied to the cart
 
-### totalQty
+### `totalQty`
 
 The total number of items in the order. For example an order might have 2 variants (line items) but each have a quantity of 2, this `totalQty` would be 4.
 Alias of `getTotalQty()`
 
-### totalWeight
+### `totalWeight`
 
 Total weight of all items on the order summed.
 
-### itemSubtotal
+### `itemSubtotal`
 
 Sum of all the item’s `subtotal. (Item subtotal does not any adjustments made to the line items)
 
-### itemTotal
+### item`Total
 
 Sum of all the items totals. (Includes all adjustments made to line items)
 
-### totalTax
+### `totalTax`
 
 Total of all tax adjustments to line items’ and the order’s `baseTax`
 
-### totalTaxIncluded
+### `totalTaxIncluded`
 
 Total of all included tax adjustments to line items.
 
-### totalDiscount
+### `totalDiscount`
 
 Total of all discounts adjustments to line items including the base discount.
 
-### totalShippingCost
+### `totalShippingCost`
 
 Total of all shipping cost adjustments to line items including the base shipping cost.
 
-### baseDiscount
+### `baseDiscount`
 
 The total base discount that applies to the whole order.
 
-### baseShippingCost
+### `baseShippingCost`
 
 The total amount of base shipping value applied to whole order.
 
-### baseTax
+### `baseTax`
 
 The total base tax that applies to the whole order.
 
-### totalPrice
+### `totalPrice`
 
 Total order price, including all items and adjustments.
 
-### totalPaid
+### `totalPaid`
 
 Total amount paid on to the order.
 
-### email
+### `email`
 
 Currently set email address on the order.
 
-### dateOrdered
+### `dateOrdered`
 
 The date the orders default status was set and the cart was turned into an order.
 
-### datePaid
+### `datePaid`
 
 The date the order was paid.
 
-### billingAddressId
+### `billingAddressId`
 
 The ID of the linked billing address. You can get the billing address model with the `billingAddress` attribute.
 
-### billingAddress
+### `billingAddress`
 
 This returns the address model from the database for the current `billingAddressId` OR the caches address if the order is complete.
 
-### shippingAddressId
+### `shippingAddressId`
 
 The ID of the linked shipping address. You can get the shipping address model with the `shippingAddress` attribute.
 
-### shippingAddress
+### `shippingAddress`
 
 This returns the address model from the database for the current `shippingAddressId` OR the caches address if the order is complete.
 
-### shippingMethodHandle
+### `shippingMethodHandle`
 
 The handle of the currently-applied shipping method. You can get the set shipping method’s model with the `shippingMethod` attribute.
 
-### paymentMethodId
+### `paymentMethodId`
 
 The ID of the linked payment method. You can get the set payment method’s model with the `paymentMethod` attribute.
 
-### currency
+### `currency`
 
 The currency the order will use for payments.
 
-### lastIp
+### `lastIp`
 
 The last IP address used to update the order on the front end before completedAt is set.
 
-### customerId
+### `customerId`
 
 The customer record for this order. You can also use `customer` to get the customer model which can tell you which craft user
 made the order, as well as access the addresses for this customer.
 
-### lineItems
+### `lineItems`
 
 The line item models as an array on this order.
 
-### adjustments
+### `adjustments`
 
 The order adjustments on this order.
 
-### transactions
+### `transactions`
 
 The transactions on this order.
 
-### message
+### `message`
 
 The current message saved when the current order status was set.
 
 ## Methods
 
-### getPdfUrl($option = '')
+### `getPdfUrl($option = '')`
 
 Returns the URL to the PDF for this order. Requires that your general settings point to a valid HTML template file.
 Optionally can pass an `option` string to this method to identify the type of PDF you want to the template.
 The order PDF template is passed an `order` and `option` variable.
 
-### getShippingMethod()
+### `getShippingMethod()`
 
 Returns a `Commerce_ShippingMethodModel` with the current shipping method for the model, or `null` if none exists.
 
-### isEmpty()
+### `isEmpty()`
 
 Is the current order or cart empty.
 
-### isPaid()
+### `isPaid()`
 
 Are the payments made to the order totalling equal or greater value than the `totalPrice`
 
-### outstandingBalance()
+### `outstandingBalance()`
 
 The amount owing on the order to reach the totalPrice.

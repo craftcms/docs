@@ -46,7 +46,7 @@ Migration classes contain methods: [safeUp()](<yii2:yii\db\Migration::safeUp()>)
 You can usually ignore the `safeDown()` method, as Craft doesn’t have a way to revert migrations from the control panel.
 :::
 
-You have full access to [Craft’s API](https://docs.craftcms.com/api/v3/) from your `safeUp()` method, but plugin migrations should try to avoid calling the plugin’s own API here. As your plugin’s database schema changes over time, so will your API’s assumptions about the schema. If an old migration calls a service method that relies on database changes that haven’t been applied yet, it will result in a SQL error. So in general you should execute all SQL queries directly from your own migration class. It may feel like you’re duplicating code, but it will be more future-proof.
+You have full access to [Craft’s API](https://docs.craftcms.com/api/v3/) from your `safeUp()` method, but plugin migrations should try to avoid calling the plugin’s own API here. As your plugin’s database schema changes over time, so will your APIs assumptions about the schema. If an old migration calls a service method that relies on database changes that haven’t been applied yet, it will result in a SQL error. So in general you should execute all SQL queries directly from your own migration class. It may feel like you’re duplicating code, but it will be more future-proof.
 
 ### Manipulating Database Data
 
@@ -117,7 +117,7 @@ Or you can have Craft apply all new migrations across all migration tracks:
 php craft migrate/all
 ```
 
-Craft will also check for new plugin migrations on control panel requests, for any plugins that have a new [schema version](craft3:craft\base\PluginTrait::$schemaVersion), and content migrations can be applied from the Control Panel by going to Utilities → Migrations.
+Craft will also check for new plugin migrations on control panel requests, for any plugins that have a new [schema version](craft3:craft\base\PluginTrait::$schemaVersion), and content migrations can be applied from the control panel by going to **Utilities** → **Migrations**.
 
 ## Plugin Install Migrations
 
@@ -172,3 +172,22 @@ public function safeUp()
 ```
 
 That’s because there’s a chance that your plugin is being installed as part of a project config sync, and if its install migration were to make any project config changes of its own, they would overwrite all of the incoming project config YAML changes.
+
+The reverse could be useful if you need to make changes when your plugin is uninstalled:
+
+```php{6-14}
+public function safeUp()
+{
+    // ...
+}
+
+public function safeDown()
+{
+    // ...
+
+    // Don’t make the same config changes twice
+    if (Craft::$app->projectConfig->get('plugins.my-plugin-handle', true) !== null) {
+        // Make the config changes here...
+    }
+}
+```

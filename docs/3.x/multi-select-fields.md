@@ -27,8 +27,8 @@ Possible values include:
 ```twig
 {# Fetch entries with the 'foo' option selected #}
 {% set entries = craft.entries()
-    .myFieldHandle('foo')
-    .all() %}
+  .myFieldHandle('foo')
+  .all() %}
 ```
 ```php
 // Fetch entries with the 'foo' option selected
@@ -58,8 +58,8 @@ To loop through all the selected options, iterate over the field value:
 ::: code
 ```twig
 {% for option in entry.myFieldHandle %}
-    Label: {{ option.label }}
-    Value: {{ option }} or {{ option.value }}
+  Label: {{ option.label }}
+  Value: {{ option }} or {{ option.value }}
 {% endfor %}
 ```
 ```php
@@ -75,9 +75,9 @@ To loop through all the available options, iterate over the [options](craft3:cra
 ::: code
 ```twig
 {% for option in entry.myFieldHandle.options %}
-    Label:    {{ option.label }}
-    Value:    {{ option }} or {{ option.value }}
-    Selected: {{ option.selected ? 'Yes' : 'No' }}
+  Label:    {{ option.label }}
+  Value:    {{ option }} or {{ option.value }}
+  Selected: {{ option.selected ? 'Yes' : 'No' }}
 {% endfor %}
 ```
 ```php
@@ -123,16 +123,16 @@ If you have an element form, such as an [entry form](https://craftcms.com/knowle
 {{ hiddenInput('fields[myFieldHandle]', '') }}
 
 <select multiple name="fields[myFieldHandle][]">
-    {% for option in field.options %}
+  {% for option in field.options %}
+      {% set selected = entry is defined
+        ? entry.myFieldHandle.contains(option.value)
+        : option.default %}
 
-        {% set selected = entry is defined
-            ? entry.myFieldHandle.contains(option.value)
-            : option.default %}
-
-        <option value="{{ option.value }}"
-                {% if selected %}selected{% endif %}>
-            {{ option.label }}
-        </option>
-    {% endfor %}
+      <option value="{{ option.value }}"
+        {% if selected %} selected{% endif %}
+      >
+        {{ option.label }}
+      </option>
+  {% endfor %}
 </select>
 ```

@@ -16,7 +16,7 @@ When choosing a module ID, try to avoid names that will conflict with Craft’s 
 To create a module, create a new directory for it somewhere within your Craft project, such as `modules/<ModuleID>/`. For example, if your module ID is `foo`, you might set it up like this:
 
 ```treeview
-my-project.test/
+my-project/
 ├── modules/
 │   └── foo/
 │       └── Module.php
@@ -59,7 +59,7 @@ You can add your module to your project’s [application configuration](../confi
 return [
     // ...
     'modules' => [
-        'foo' => foo\Module::class,
+        'foo' => bar\Module::class,
     ],
     'bootstrap' => [
         'foo',

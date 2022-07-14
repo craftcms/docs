@@ -202,15 +202,15 @@ Returns whether the category is an ancestor of another category.
 
 ```twig
 {% nav page in craft.categories.group('whiskey') %}
-    {% set expanded = category is defined and item.isAncestorOf(category) %}
-    <li{% if expanded %} class="expanded"{% endif %}>
-        {{ item.getLink() }}
-        {% ifchildren %}
-            <ul>
-                {% children %}
-            </ul>
-        {% endifchildren %}
-    </li>
+  {% set expanded = category is defined and item.isAncestorOf(category) %}
+  <li{% if expanded %} class="expanded"{% endif %}>
+    {{ item.getLink() }}
+    {% ifchildren %}
+      <ul>
+        {% children %}
+      </ul>
+    {% endifchildren %}
+  </li>
 {% endnav %}
 ```
 
@@ -242,18 +242,18 @@ Here’s an example of `getNext()` and `getPrev()` in action:
 
 ```twig
 {% set params = {
-    section: 'cocktails',
-    order:   'title'
+  section: 'cocktails',
+  order:   'title'
 } %}
 
 {% set prevWhiskey = category.getPrev(params) %}
 {% set nextWhiskey = category.getNext(params) %}
 
 {% if prevWhiskey %}
-    <p>Previous: <a href="{{ prevWhiskey.url }}">{{ prevWhiskey.title }}</a></p>
+  <p>Previous: <a href="{{ prevWhiskey.url }}">{{ prevWhiskey.title }}</a></p>
 {% endif %}
 
 {% if nextWhiskey %}
-    <p>Next: <a href="{{ nextWhiskey.url }}">{{ nexWhiskey.title }}</a></p>
+  <p>Next: <a href="{{ nextWhiskey.url }}">{{ nexWhiskey.title }}</a></p>
 {% endif %}
 ```

@@ -33,7 +33,7 @@ If you need to explain in plain text the adjustment made use the `description` f
 
 If you mark the adjustment model’s `included` attribute as `true`, the adjustment does not make any changes to the orders total, but simply records an amount that was included in the price of the order.
 
-The only 'included' adjustment we use in the the core of Commerce is included taxes.'
+The only included adjustment we use in the the core of Commerce is included taxes.
 
 ## Order or Line Item adjustment.
 

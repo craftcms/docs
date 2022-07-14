@@ -12,14 +12,14 @@ You can search for elements from your own code, too:
 ::: code
 ```twig
 {% set results = craft.entries()
-    .search('foo')
-    .all() %}
+  .search('foo')
+  .all() %}
 ```
 ```graphql
 {
-    entries(search: "foo") {
-        title
-    }
+  entries(search: "foo") {
+    title
+  }
 }
 ```
 ```php
@@ -44,21 +44,30 @@ Searching for… | will find elements…
 `salty OR dog` | containing either “salty” or “dog” (or both).
 `salty -dog` | containing “salty” but not “dog”.
 `"salty dog"` | containing the exact phrase “salty dog”.
-`*ty` | containing a word that ends with “ty”.
-`*alt*` | containing a word that contains “alt”.
 `body:salty` | where the `body` field contains “salty”.
 `body:salty body:dog` | where the `body` field contains both “salty” and “dog”.
 `body:salty OR body:dog` | where the `body` field contains either “salty” or “dog”.
 `body:salty -body:dog` | where the `body` field contains “salty” but not “dog”.
 `body:"salty dog"` | where the `body` field contains the exact phrase “salty dog”.
-`body:*ty` | where the `body` field contains a word that ends with “ty”.
-`body:*alt*` | where the `body` field contains a word that contains “alt”.
 `body::salty` | where the `body` field is set to “salty” and nothing more.
 `body::"salty dog"` | where the `body` field is set to “salty dog” and nothing more.
+
+### Wildcard Syntax
+
+You can use a wildcard character (`*`) to modify search behavior:
+
+Searching for… | will find elements…
+-|-
+`*ty` | containing a word that ends with “ty”.
+`*alt*` | containing a word that contains “alt”.
+`body:*ty` | where the `body` field contains a word that ends with “ty”.
+`body:*alt*` | where the `body` field contains a word that contains “alt”.
 `body::salty*` | where the `body` field begins with “salty”.
 `body::*dog` | where the `body` field ends with “dog”.
 `body:*` | where the `body` field contains any value.
 `-body:*` | where the `body` field is empty.
+
+The exact behavior will depend on your [`defaultSearchTermOptions`](config3:defaultSearchTermOptions) config setting, where `subLeft` and `subRight`—when set to `true`—add a wildcard to search keywords by default behind the scenes.
 
 ## Searching for Specific Element Attributes
 
@@ -87,15 +96,15 @@ The same search from your code:
 ::: code
 ```twig
 {% set images = craft.assets()
-    .search('kind:image')
-    .all() %}
+  .search('kind:image')
+  .all() %}
 ```
 
 ```graphql
 {
-    images: assets(search: "kind:image") {
-        title
-    }
+  images: assets(search: "kind:image") {
+    title
+  }
 }
 ```
 
@@ -115,15 +124,15 @@ The same search from your code:
 ::: code
 ```twig
 {% set users = craft.users()
-    .search('email:@craftcms.com')
-    .all() %}
+  .search('email:@craftcms.com')
+  .all() %}
 ```
 
 ```graphql
 {
-    users(search: "email:@craftcms.com") {
-        title
-    }
+  users(search: "email:@craftcms.com") {
+    title
+  }
 }
 ```
 
@@ -145,8 +154,8 @@ $images = \craft\elements\User::find()
 
 {# Fetch entries that match the search query #}
 {% set results = craft.entries()
-    .search(searchQuery)
-    .all() %}
+  .search(searchQuery)
+  .all() %}
 ```
 ```php
 // Get the user’s search query from the 'q' query string param
@@ -166,15 +175,15 @@ You can also set the `orderBy` parameter to `'score'` if you want results ordere
 ::: code
 ```twig
 {% set results = craft.entries()
-    .search('foo')
-    .orderBy('score')
-    .all() %}
+  .search('foo')
+  .orderBy('score')
+  .all() %}
 ```
 ```graphql
 {
-    entries(search: "foo", orderBy: "score") {
-        title
-    }
+  entries(search: "foo", orderBy: "score") {
+    title
+  }
 }
 ```
 ```php

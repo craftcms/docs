@@ -4,9 +4,9 @@ This tag will cache a portion of your template, which can improve performance fo
 
 ```twig
 {% cache %}
-    {% for block in entry.myMatrixField %}
-        <p>{{ block.text }}</p>
-    {% endfor %}
+  {% for block in entry.myMatrixField %}
+    <p>{{ block.text }}</p>
+  {% endfor %}
 {% endcache %}
 ```
 
@@ -135,18 +135,18 @@ There are also some cases where it’s _not_ a good idea to use them:
 
 {% extends "_layout" %}
 {% cache %}
-    {% block "content" %}
-        ...
-    {% endblock %}
+  {% block "content" %}
+    ...
+  {% endblock %}
 {% endcache %}
 
 {# Good: #}
 
 {% extends "_layout" %}
 {% block "content" %}
-    {% cache %}
-        ...
-    {% endcache %}
+  {% cache %}
+    ...
+  {% endcache %}
 {% endblock %}
 ```
 

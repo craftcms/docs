@@ -16,38 +16,38 @@ The example below shows how you can add a shipping estimate address to the cart.
 {% set cart = craft.commerce.carts.cart %}
 
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    <input type="hidden" name="estimatedBillingAddressSameAsShipping" value="1">
+  <input type="hidden" name="action" value="commerce/cart/update-cart">
+  <input type="hidden" name="estimatedBillingAddressSameAsShipping" value="1">
 
-    {% if not cart.estimatedShippingAddressId %}
-        <select name="estimatedShippingAddress[countryId]">
-            {% for key, option in craft.commerce.countries.allCountriesAsList %}
-                <option value="{{ key }}">{{ option }}</option>
-            {% endfor %}
-        </select>
+  {% if not cart.estimatedShippingAddressId %}
+    <select name="estimatedShippingAddress[countryId]">
+      {% for key, option in craft.commerce.countries.allCountriesAsList %}
+        <option value="{{ key }}">{{ option }}</option>
+      {% endfor %}
+    </select>
 
-        <select name="estimatedShippingAddress[stateValue]">
-            {% for states in craft.commerce.states.allStatesAsList %}
-                {% for key, option in states %}
-                    <option value="{{ key }}">{{ option }}</option>
-                {% endfor %}
-            {% endfor %}
-        </select>
-
-        <input type="text" name="estimatedShippingAddress[zipCode]" value="">
-    {% endif %}
-
-
-    {% if cart.availableShippingMethods|length and cart.estimatedShippingAddressId %}
-        {% for handle, method in cart.availableShippingMethods %}
-            <label>
-                <input type="radio" name="shippingMethodHandle" value="{{ handle }}" {% if handle == cart.shippingMethodHandle %}checked{% endif %} />
-                {{ method.name }} - {{ method.priceForOrder(cart)|commerceCurrency(cart.currency) }}
-            </label>
+    <select name="estimatedShippingAddress[stateValue]">
+      {% for states in craft.commerce.states.allStatesAsList %}
+        {% for key, option in states %}
+          <option value="{{ key }}">{{ option }}</option>
         {% endfor %}
-    {% endif %}
+      {% endfor %}
+    </select>
 
-    <input type="submit" value="Submit">
+    <input type="text" name="estimatedShippingAddress[zipCode]" value="">
+  {% endif %}
+
+
+  {% if cart.availableShippingMethods|length and cart.estimatedShippingAddressId %}
+    {% for handle, method in cart.availableShippingMethods %}
+      <label>
+        <input type="radio" name="shippingMethodHandle" value="{{ handle }}" {% if handle == cart.shippingMethodHandle %}checked{% endif %} />
+        {{ method.name }} - {{ method.priceForOrder(cart)|commerceCurrency(cart.currency) }}
+      </label>
+    {% endfor %}
+  {% endif %}
+
+  <input type="submit" value="Submit">
 </form>
 ```
 

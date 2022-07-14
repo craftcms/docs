@@ -18,8 +18,11 @@ $this->createTable('{{%mytablename}}', [
 ]);
 
 // Existing table migration
-$this->addColumn('{{%mytablename}}', 'dateDeleted',
-    $this->dateTime()->null()->after('dateUpdated'));
+$this->addColumn(
+    '{{%mytablename}}',
+    'dateDeleted',
+    $this->dateTime()->null()->after('dateUpdated')
+);
 ```
 
 Tables containing soft-deletable component data should not enforce any unique constraints (besides a primary key). If yours does, you’ll need to remove them.
@@ -46,11 +49,15 @@ use yii\base\Event;
 
 public function init()
 {
-    paren::init();
+    parent::init();
 
-    Event::on(Gc::class, Gc::EVENT_RUN, function() {
-        Craft::$app->gc->hardDelete('{{%mytablename}}');
-    });
+    Event::on(
+        Gc::class,
+        Gc::EVENT_RUN,
+        function() {
+            Craft::$app->gc->hardDelete('{{%mytablename}}');
+        }
+    );
 }
 ```
 
@@ -151,9 +158,9 @@ Check your code for any database queries that involve your component’s table. 
 
 ## Restoring Soft-Deleted Rows
 
-There are two ways to restore soft-deleted rows that haven’t been hard-deleted by garbage collection yet:
+There are two ways to restore soft-deleted rows not yet hard-deleted by garbage collection:
 
-- With your Active Record class, by calling its `restore()` method.
+1. With your Active Record class, by calling its `restore()` method.
 
   ```php
   $record = MyRecord::findTrashed()
@@ -163,10 +170,14 @@ There are two ways to restore soft-deleted rows that haven’t been hard-deleted
   $record->restore();
   ```
 
-- With a query command, by calling <craft3:craft\db\Command::restore()>.
+2. With a query command, by calling <craft3:craft\db\Command::restore()>.
 
   ```php
   \Craft::$app->db->createCommand()
       ->restore('{{%mytablename}}', ['id' => $id])
       ->execute();
   ```
+
+::: tip
+See [this Stack Exchange post](https://craftcms.stackexchange.com/questions/38628/how-to-make-custom-element-types-restorable) for supporting custom element restores from the control panel.
+:::

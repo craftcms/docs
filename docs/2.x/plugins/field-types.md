@@ -52,13 +52,13 @@ Here’s an example input template for a textarea fieldtype:
 To make sense of that “cocktailrecipes/ingredientlist/input” template path, see [Plugin Template Paths, Explained](templates.md#plugin-template-paths-explained).
 :::
 
-## Binding Javascript
+## Binding JavaScript
 
-It’s easy to bind some Javascript to your field type’s input. You just need to keep in mind that there’s a good chance the HTML returned by `getInputHtml()` is going to be run through <craft2:Craft\TemplatesService::namespaceInputs()> before being output to the page. Which means that any `name=` and `id=` HTML attributes will get prefixed with something.
+It’s easy to bind some JavaScript to your field type’s input. You just need to keep in mind that there’s a good chance the HTML returned by `getInputHtml()` is going to be run through <craft2:Craft\TemplatesService::namespaceInputs()> before being output to the page. Which means that any `name=` and `id=` HTML attributes will get prefixed with something.
 
 For example, when editing an entry, fields get namespaced with “field”. So an input with the name “cocktails” becomes “fields[cocktails]”, and an element with the ID “cocktails” would become “fields-cocktails”.
 
-If your Javascript code relies on knowing an ID within your field’s HTML, all you have to do is pass the ID through <craft2:Craft\TemplatesService::namespaceInputId()> before placing it in your Javascript code:
+If your JavaScript code relies on knowing an ID within your field’s HTML, all you have to do is pass the ID through <craft2:Craft\TemplatesService::namespaceInputId()> before placing it in your JavaScript code:
 
 ```php
 public function getInputHtml($name, $value)
@@ -69,7 +69,7 @@ public function getInputHtml($name, $value)
     // Figure out what that ID is going to look like once it has been namespaced
     $namespacedId = craft()->templates->namespaceInputId($id);
 
-    // Include our Javascript
+    // Include our JavaScript
     craft()->templates->includeJsResource('cocktails/js/input.js');
     craft()->templates->includeJs("$('#{$namespacedId}').cocktail();");
 

@@ -20,7 +20,7 @@ Craft’s element fixtures are based on the [robuust](https://robuust.digital/) 
 
 #### Working with your own custom element type?
 
-You can extend [craft\test\fixtures\elements\ElementFixture](craft3:craft\test\fixtures\elements\ElementFixture) for your own testing and to offer other developers the ability to use your element type as a fixture testing their code.
+You can extend [craft\test\fixtures\elements\ElementFixture](craft3:craft\test\fixtures\elements\BaseElementFixture) for your own testing and to offer other developers the ability to use your element type as a fixture testing their code.
 
 ### Asset Fixtures
 
@@ -100,7 +100,7 @@ The primary keys are: `siteId`, `sectionId`, `typeId` and `title`.
 
 ### Global Set Fixture
 
-You can add Global Set fixtures by extending [craft\test\fixtures\elements\GlobalSetFixture](craft3:craft\test\fixtures\elements\GlobalSetFixture).
+You can add global set fixtures by extending [craft\test\fixtures\elements\GlobalSetFixture](craft3:craft\test\fixtures\elements\GlobalSetFixture).
 
 The fixture data file could look like this:
 
@@ -117,7 +117,7 @@ return [
 The primary keys are: `handle`.
 
 ::: tip
-By default, a Global Set doesn’t get its own database row. If you need it to, you can set `$useActiveRecord` to `true`.
+By default, a global set doesn’t get its own database row. If you need it to, you can set `$useActiveRecord` to `true`.
 :::
 
 ### Tag Fixtures
@@ -153,7 +153,7 @@ The fixture data file could look like this:
 return [
     [
         'username' => 'User',
-        'email' => 'info@example.com',
+        'email' => 'me@domain.tld',
     ],
 ];
 ```

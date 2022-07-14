@@ -4,23 +4,23 @@ CountryModels objects have the following attributes and methods:
 
 ## Attributes
 
-### id
+### `id`
 
 The address record ID.
 
-### name
+### `name`
 
 The countries name (required).
 
-### iso
+### `iso`
 
 The country’s ISO code (required).
 
-### stateRequired
+### `stateRequired`
 
 A boolean, which determines if the state is required when this country is selected.
 
-### cpEditUrl
+### `cpEditUrl`
 
-A URL to edit this country in the Control Panel.
+A URL to edit this country in the control panel.
 

@@ -12,7 +12,7 @@ Returns whether a user is currently logged in.
 
 ```twig
 {% if craft.session.isLoggedIn %}
-    <a href="{{ logoutUrl }}">Logout</a>
+  <a href="{{ logoutUrl }}">Logout</a>
 {% endif %}
 ```
 

@@ -6,20 +6,20 @@ This tag makes it easy to paginate a set of elements across multiple pages.
 {% paginate craft.entries.section('blog').limit(10) as pageInfo, pageEntries %}
 
 {% for entry in pageEntries %}
-    <article>
-        <h1>{{ entry.title }}</h1>
-        {{ entry.body }}
-    </article>
+  <article>
+    <h1>{{ entry.title }}</h1>
+    {{ entry.body }}
+  </article>
 {% endfor %}
 
 {% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
 {% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
 ```
 
-Paginated URLs will be identical to the first page’s URL, except that “/p_X_” will be appended to the end (where _X_ is the page number), e.g. `http://example.com/news/p2`.
+Paginated URLs will be identical to the first page’s URL, except that “/p_X_” will be appended to the end (where _X_ is the page number), e.g. `http://my-project.tld/news/p2`.
 
 ::: tip
-You can use the <config2:pageTrigger> config setting to customize what comes before the actual page number in your URLs. For example you could set it to `'page/'`, and your paginated URLs would start looking like `http://example.com/news/page/2`.
+You can use the <config2:pageTrigger> config setting to customize what comes before the actual page number in your URLs. For example you could set it to `'page/'`, and your paginated URLs would start looking like `http://my-project.tld/news/page/2`.
 :::
 
 ::: tip
@@ -62,10 +62,10 @@ Following your `{% paginate %}` tag, you will need to loop through this page’s
 {% paginate craft.entries.section('blog').limit(10) as pageEntries %}
 
 {% for entry in pageEntries %}
-    <article>
-        <h1>{{ entry.title }}</h1>
-        {{ entry.body }}
-    </article>
+  <article>
+    <h1>{{ entry.title }}</h1>
+    {{ entry.body }}
+  </article>
 {% endfor %}
 ```
 
@@ -130,13 +130,13 @@ If you want to create a list of nearby pages, perhaps surrounding the current pa
 {% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
 
 {% for page, url in pageInfo.getPrevUrls(5) %}
-    <a href="{{ url }}">{{ page }}</a>
+  <a href="{{ url }}">{{ page }}</a>
 {% endfor %}
 
 <span class="current">{{ pageInfo.currentPage }}</span>
 
 {% for page, url in pageInfo.getNextUrls(5) %}
-    <a href="{{ url }}">{{ page }}</a>
+  <a href="{{ url }}">{{ page }}</a>
 {% endfor %}
 
 {% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}

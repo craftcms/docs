@@ -2,13 +2,13 @@
 
 Plugin settings that may need to change per-environment, or contain sensitive information, should be implemented as **environmental settings**.
 
-Environmental settings are settings whose raw values may reference an environment variable or alias, and which get parsed by <craft3:Craft::parseEnv()> at runtime.
+Environmental settings are settings whose raw values may reference an environment variable or alias, and which get parsed by <craft3:craft\helpers\App::parseEnv()> at runtime.
 
 Here’s an example model with a `$secretKey` property that may be set to an environment variable, and a `getSecretKey()` method that is responsible for parsing the value.
 
 ```php
-use Craft;
 use craft\base\Model;
+use craft\helpers\App;
 
 class MyModel extends Model
 {
@@ -22,7 +22,7 @@ class MyModel extends Model
      */
     public function getSecretKey(): string
     {
-        return Craft::parseEnv($this->secretKey);
+        return App::parseEnv($this->secretKey);
     }
 }
 ```
@@ -32,7 +32,6 @@ class MyModel extends Model
 If your environmental settings require special validation rules, you can have the validators check the parsed values rather than the raw values using <craft3:craft\behaviors\EnvAttributeParserBehavior>.
 
 ```php
-use Craft;
 use craft\base\Model;
 use craft\behaviors\EnvAttributeParserBehavior;
 
@@ -68,11 +67,11 @@ To guide users when entering your setting’s value in the control panel, give y
 {% import "_includes/forms" as forms %}
 
 {{ forms.autosuggestField({
-    label: "Secret Key"|t('plugin-handle'),
-    id: 'secret-key',
-    name: 'secretKey',
-    value: myModel.secretKey,
-    suggestEnvVars: true
+  label: "Secret Key"|t('plugin-handle'),
+  id: 'secret-key',
+  name: 'secretKey',
+  value: myModel.secretKey,
+  suggestEnvVars: true
 }) }}
 ```
 
@@ -82,8 +81,8 @@ If your setting is for a URL or file system path, you should also set `suggestAl
 
 ```twig{4}
 {{ forms.autosuggestField({
-    // ...
-    suggestEnvVars: true,
-    suggestAliases: true
+  // ...
+  suggestEnvVars: true,
+  suggestAliases: true
 }) }}
 ```

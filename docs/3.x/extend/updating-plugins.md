@@ -900,13 +900,13 @@ Support for the `extraPageHeaderHtml` variable has been removed. To create a pri
 ::: code
 ```twig Craft 2
 {% set extraPageHeaderHtml %}
-    <a href="{{ url('recipes/new') }}" class="btn submit">{{ 'New recipe'|t('app') }}</a>
+  <a href="{{ url('recipes/new') }}" class="btn submit">{{ 'New recipe'|t('app') }}</a>
 {% endset %}
 ```
 
 ```twig Craft 3
 {% block actionButton %}
-    <a href="{{ url('recipes/new') }}" class="btn submit">{{ 'New recipe'|t('app') }}</a>
+  <a href="{{ url('recipes/new') }}" class="btn submit">{{ 'New recipe'|t('app') }}</a>
 {% endblock %}
 ```
 :::
@@ -920,32 +920,32 @@ Additionally, any `<div class="pane">`s you had should generally lose their `pan
 ::: code
 ```twig Craft 2
 {% block main %}
-    <div class="grid first" data-max-cols="3">
-        <div class="item" data-position="left" data-colspan="2">
-            <div id="recipe-fields" class="pane">
-                <!-- Primary Content -->
-            </div>
-        </div>
-        <div class="item" data-position="right">
-            <div class="pane meta">
-                <!-- Secondary Content -->
-            </div>
-        </div>
+  <div class="grid first" data-max-cols="3">
+    <div class="item" data-position="left" data-colspan="2">
+      <div id="recipe-fields" class="pane">
+        <!-- Primary Content -->
+      </div>
     </div>
+    <div class="item" data-position="right">
+      <div class="pane meta">
+        <!-- Secondary Content -->
+      </div>
+    </div>
+  </div>
 {% endblock %}
 ```
 
 ```twig Craft 3
 {% block content %}
-    <div id="recipe-fields">
-        <!-- Primary Content -->
-    </div>
+  <div id="recipe-fields">
+    <!-- Primary Content -->
+  </div>
 {% endblock %}
 
 {% block details %}
-    <div class="meta">
-        <!-- Secondary Content -->
-    </div>
+  <div class="meta">
+    <!-- Secondary Content -->
+  </div>
 {% endblock %}
 ```
 :::

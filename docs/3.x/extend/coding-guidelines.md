@@ -17,6 +17,10 @@ Do your best to follow these guidelines when writing code for Craft and Craft pl
 Craft’s PhpStorm settings repository includes a code style scheme and inspection profile: <https://github.com/craftcms/phpstorm-settings>
 :::
 
+::: tip
+The Craft Autocomplete package provides Twig template autocompletion in PhpStorm for Craft and plugin/module variables and element types: <https://github.com/nystudio107/craft-autocomplete>
+:::
+
 ## Best Practices
 
 - Declare method argument types whenever possible.
@@ -57,7 +61,7 @@ Craft’s PhpStorm settings repository includes a code style scheme and inspecti
 - Don’t use a `switch` statement when a single `if` condition will suffice.
 - Use single quotes (`'`) whenever double quotes (`"`) aren’t needed.
 - Use shortcut operators (`+=`, `-=`, `*=`, `/=`, `%=`, `.=`, etc.) whenever possible.
-- Use shortcut regex patterns (`\d`, `\D`, `\w`, `\W`, etc.) whenever possible.
+- Use shortcut regular expression patterns (`\d`, `\D`, `\w`, `\W`, etc.) whenever possible.
 - Use the `DIRECTORY_SEPARATOR` constant rather than `'/'` when defining file paths.
 
 ::: tip

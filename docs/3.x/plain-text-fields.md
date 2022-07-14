@@ -21,8 +21,8 @@ Calling a Plain Text field in your templates will return the value that was ente
 ::: code
 ```twig
 {% if entry.myFieldHandle %}
-    <h3>Article</h3>
-    {{ entry.myFieldHandle|markdown }}
+  <h3>Article</h3>
+  {{ entry.myFieldHandle|markdown }}
 {% endif %}
 ```
 ```php

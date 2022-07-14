@@ -4,7 +4,7 @@ You can access your site’s [assets](../assets.md) from your templates via `cra
 
 ```twig
 {% for image in craft.assets.kind('image') %}
-    <li><img src="{{ image.getUrl('thumb') }}" alt="{{ image.title }}"></li>
+  <li><img src="{{ image.getUrl('thumb') }}" alt="{{ image.title }}"></li>
 {% endfor %}
 ```
 
@@ -42,21 +42,21 @@ Only fetch assets of the given file kind.
 
 The supported values are:
 
-* access
-* audio
-* compressed
-* excel
-* flash
-* html
-* illustrator
-* image
-* pdf
-* photoshop
-* php
-* powerpoint
-* text
-* video
-* word
+- access
+- audio
+- compressed
+- excel
+- flash
+- html
+- illustrator
+- image
+- pdf
+- photoshop
+- php
+- powerpoint
+- text
+- video
+- word
 
 ### `limit`
 

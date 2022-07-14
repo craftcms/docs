@@ -42,7 +42,7 @@ The URL to your site’s login page, based on the <config2:loginPath> config set
 
 ```twig
 {% if not currentUser %}
-    <a href="{{ loginUrl }}">Login</a>
+  <a href="{{ loginUrl }}">Login</a>
 {% endif %}
 ```
 
@@ -52,7 +52,7 @@ The URL Craft uses to log users out, based on the <config2:logoutPath> config se
 
 ```twig
 {% if currentUser %}
-    <a href="{{ logoutUrl }}">Logout</a>
+  <a href="{{ logoutUrl }}">Logout</a>
 {% endif %}
 ```
 

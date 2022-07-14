@@ -33,22 +33,29 @@ After you create your groups, you can assign users to groups by going into their
 
 Craft Pro allows you to set permissions on users and groups, such as the ability to access the control panel, edit content within certain sections, etc. You can apply these permissions directly to user accounts as well as to user groups. When you apply permissions to a user group, all users that belong to that group will inherit them.
 
+::: warning
+Make sure you trust users with access to settings that accept Twig code, like the **Settings** section and the **System Messages** utility. It’s possible to do potentially-malicious things in Craft via Twig, which is intented primarily for trusted admins and developers.
+:::
+
 The permissions Craft comes with are:
 
 | Permission | Handle
 | ---------- | ------
 | Access the site when the system is off | `accessSiteWhenSystemIsOff`
-| Access the CP | `accessCp`
-| ↳&nbsp; Access the CP when the system is off | `accessCpWhenSystemIsOff`
+| Access the control panel | `accessCp`
+| ↳&nbsp; Access when system is offline | `accessCpWhenSystemIsOff`
 | ↳&nbsp; Perform Craft and plugin updates | `performUpdates`
-| ↳&nbsp; Access _[Plugin Name]_ | `accessPlugin-[PluginHandle]`
+| ↳&nbsp; Access _[plugin name]_ | `accessPlugin-[PluginHandle]`
 | Edit users | `editUsers`
 | ↳&nbsp; Register users | `registerUsers`
-| ↳&nbsp; Assign permissions | `assignUserPermissions`
+| ↳&nbsp; Moderate users | `moderateUsers`
+| ↳&nbsp; Assign user permissions | `assignUserPermissions`
+| ↳&nbsp; Assign user groups | `assignUserGroups`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp;  Assign users to _[group name]_ | `assignUserGroup:[GroupUID]`
 | ↳&nbsp; Administrate users | `administrateUsers`
+| ↳&nbsp; Impersonate users | `impersonateUsers`
 | Delete users | `deleteUsers`
-| Edit _[Site Name]_ | `editSite:[SiteUID]`
-| Impersonate users | `impersonateUsers`
+| Edit _[site name]_ | `editSite:[SiteUID]`
 | Edit entries | `editEntries:[SectionUID]`
 | ↳&nbsp; Create entries | `createEntries:[SectionUID]`
 | ↳&nbsp; Publish entries | `publishEntries:[SectionUID]`
@@ -59,12 +66,13 @@ The permissions Craft comes with are:
 | ↳&nbsp; Edit other authors’ drafts | `editPeerEntryDrafts:[SectionUID]`
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Publish other authors’ drafts | `publishPeerEntryDrafts:[SectionUID]`
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other authors’ drafts | `deletePeerEntryDrafts:[SectionUID]`
-| Edit _[Global Set Name]_ | `editGlobalSet:[GlobalSetUID]`
-| Edit _[Category Group Name]_ | `editCategories:[CategoryGroupUID]`
-| View _[Asset Volume Name]_ | `viewVolume:[VolumeUID]`
+| Edit _[global set name]_ | `editGlobalSet:[GlobalSetUID]`
+| Edit _[category group name]_ | `editCategories:[CategoryGroupUID]`
+| View _[asset volume name]_ | `viewVolume:[VolumeUID]`
 | ↳&nbsp; Upload files | `saveAssetInVolume:[VolumeUID]`
 | ↳&nbsp; Create subfolders | `createFoldersInVolume:[VolumeUID]`
 | ↳&nbsp; Remove files and folders | `deleteFilesAndFoldersInVolume:[VolumeUID]`
+| ↳&nbsp; Replace files | `replaceFilesInVolume:[VolumeUID]`
 | ↳&nbsp; Edit images | `editImagesInVolume:[VolumeUID]`
 | ↳&nbsp; View files uploaded by other users | `viewPeerFilesInVolume:[VolumeUID]`
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Edit files uploaded by other users | `editPeerFilesInVolume:[SectionUID]`
@@ -94,7 +102,7 @@ You can check whether the logged-in user has a specific permission by using its 
 
 ```twig
 {% if currentUser.can('accessCp') %}
-    <a href="{{ cpUrl() }}">Visit the Control Panel</a>
+  <a href="{{ cpUrl() }}">Visit the Control Panel</a>
 {% endif %}
 ```
 

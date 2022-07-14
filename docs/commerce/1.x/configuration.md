@@ -25,16 +25,16 @@ The template path that this item points to must contain a form that submits itse
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Redirecting...</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Redirecting...</title>
 </head>
 <body onload="document.forms[0].submit();">
 <form action="{{ actionUrl|raw }}" method="post">
-    <p>Redirecting to payment page...</p>
-    <p>
-        {{ inputs|raw }}
-        <input type="submit" value="Continue" />
-    </p>
+  <p>Redirecting to payment page...</p>
+  <p>
+    {{ inputs|raw }}
+    <input type="submit" value="Continue" />
+  </p>
 </form>
 </body>
 </html>
@@ -44,7 +44,7 @@ Since this template is simply used for redirecting, it only appears for a few se
 
 ## `paymentMethodSettings`
 
-Allows for the overriding of payment method settings. You still need to configure the payment method in the Control Panel so you can reference the ID as the key to the payment method’s settings. Example:
+Allows for the overriding of payment method settings. You still need to configure the payment method in the control panel so you can reference the ID as the key to the payment method’s settings. Example:
 
 ```php
 <?php

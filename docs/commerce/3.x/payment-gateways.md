@@ -2,7 +2,7 @@
 
 Craft Commerce payments gateways are provided by Craft CMS plugins.
 
-To create a payment gateway you must install the appropriate plugin and navigate to **Commerce** → **Settings** → **Gateways** and configure the appropriate gateway. For more detailed instructions, see each plugin’s `README.md` file.
+To create a payment gateway you must install the appropriate plugin, navigate to **Commerce** → **Settings** → **Gateways**, and add configuration for that gateway. For more detailed instructions, see each plugin’s `README.md` file.
 
 Payment gateways generally fit in one of two categories:
 
@@ -13,16 +13,16 @@ Merchant-hosted gateways collect the customer’s credit card details directly o
 
 ## First-Party Gateway Plugins
 
-| Plugin                                                                                      | Gateways                                | Remarks                                                            | 3D Secure Support   |
-| ------------------------------------------------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------ | ------------------- |
-| [`craftcms/commerce-stripe`](https://github.com/craftcms/commerce-stripe)                   | Stripe                                  | Uses Stripe SDK; only first-party gateway to support subscriptions | Yes                 |
-| [`craftcms/commerce-paypal`](https://github.com/craftcms/commerce-paypal)                   | PayPal Pro; PayPal REST; PayPal Express | PayPal REST supports storing payment information                   | Only PayPal Express |
-| [`craftcms/commerce-paypal-checkout`](https://github.com/craftcms/commerce-paypal-checkout) |                                         |                                                                    |                     |
-| [`craftcms/commerce-sagepay`](https://github.com/craftcms/commerce-sagepay)                 | SagePay Direct; SagePay Server          | SagePay Direct requires setting up webhooks                        | Yes                 |
-| [`craftcms/commerce-multisafepay`](https://github.com/craftcms/commerce-multisafepay)       | MultiSafePay REST                       | Does not support authorize charges                                 | Yes                 |
-| [`craftcms/commerce-worldpay`](https://github.com/craftcms/commerce-worldpay)               | Worldpay JSON                           | -                                                                  | No                  |
-| [`craftcms/commerce-eway`](https://github.com/craftcms/commerce-eway)                       | eWAY Rapid                              | Supports storing payment information                               | Yes                 |
-| [`craftcms/commerce-mollie`](https://github.com/craftcms/commerce-mollie)                   | Mollie                                  | Does not support authorize charges                                 | Yes                 |
+| Plugin                                                                   | Gateways                                | Remarks                                                            | 3D Secure Support   |
+| ------------------------------------------------------------------------ | --------------------------------------- | ------------------------------------------------------------------ | ------------------- |
+| [Stripe](https://plugins.craftcms.com/commerce-stripe)                   | Stripe                                  | Uses Stripe SDK; only first-party gateway to support subscriptions | Yes                 |
+| [PayPal Checkout](https://plugins.craftcms.com/commerce-paypal-checkout) | PayPal Checkout                         |                                                                    | Yes                 |
+| [Sage Pay](https://plugins.craftcms.com/commerce-sagepay)                | SagePay Direct; SagePay Server          |                                                                    | Yes                 |
+| [MultiSafepay](https://plugins.craftcms.com/commerce-multisafepay)       | MultiSafePay REST                       | Does not support authorize charges                                 | Yes                 |
+| [Worldpay](https://plugins.craftcms.com/commerce-worldpay)               | Worldpay JSON                           |                                                                    | No                  |
+| [eWay](https://plugins.craftcms.com/commerce-eway)                       | eWAY Rapid                              | Supports storing payment information                               | Yes                 |
+| [Mollie](https://plugins.craftcms.com/commerce-mollie)                   | Mollie                                  | Does not support authorize charges                                 | Yes                 |
+| [PayPal](https://plugins.craftcms.com/commerce-paypal) _deprecated_      | PayPal Pro; PayPal REST; PayPal Express | PayPal REST supports storing payment information                   | Only PayPal Express |
 
 ## Dummy Gateway
 
@@ -53,19 +53,31 @@ See the _Extending Commerce_ section’s [Payment Gateway Types](extend/payment-
 
 ## Storing Config Outside of the Database
 
-If you do not wish to store your payment gateway config information in the database (which could include secret API keys), you can override the values of a payment method’s setting via the `commerce-gateways.php` config file. Use the payment gateway’s handle as the key to the config for that payment method.
+When you’re configuring gateways in the Craft control panel, we recommend using [environment variables](https://craftcms.com/docs/3.x/config/#environmental-configuration) so environment-specific settings and sensitive API keys don’t end up in the database or project config.
 
 ::: tip
-The gateway must be set up in the control panel in order to reference its handle in the config file.
+Craft CMS 3.7.22 added UI giving boolean values the option to be set with environment variables. Previously, these could only be overridden in static config files.
 :::
+
+### `commerce-gateways.php`
+
+The now-deprecated `config/commerce-gateways.php` format allows storing any number of gateway setting overrides in a common static file, where each array of settings is indexed by a key that matches a payment gateway handle you’ve first configured in the control panel:
 
 ```php
 return [
-  'myStripeGateway' => [
-    'apiKey' => getenv('STRIPE_API_KEY'),
-  ],
+    'myStripeGateway' => [
+        'apiKey' => getenv('STRIPE_API_KEY'),
+    ],
 ];
 ```
+
+If you’re overriding gateway settings this way, you’ll get a deprecation warning:
+
+> Overriding gateway settings using the `commerce-gateways.php` file has been deprecated. Use the gateway’s config file instead.
+
+Commerce 4 will not have support for this format, so it’s best to remove `config/commerce-gateways.php` and use environment variables like we recommend above. If you must override gateway settings, you can still do that using a standard config file for your gateway plugin (i.e. `config/commerce-stripe.php`)—but be aware that you’ll only be able to provide one set of settings for that gateway.
+
+While it’s possible to leverage [dependency injection](https://www.yiiframework.com/doc/guide/2.0/en/concept-di-container) to support multiple configurations per payment gateway, settings will eventually get captured in the project config and likely lead to more issues or confusion.
 
 ## Payment Sources
 
@@ -96,23 +108,23 @@ Returns all payment gateways available to the customer.
 {% set gateways = craft.commerce.gateways.getAllCustomerEnabledGateways %}
 
 {% if not gateways|length %}
-    <p>No payment methods available.</p>
+<p>No payment methods available.</p>
 {% endif %}
 
 {% if gateways|length %}
 <form method="post">
-    {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
-    {{ hiddenInput('redirect', 'commerce/checkout/payment') }}
+  {{ csrfInput() }}
+  {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+  {{ hiddenInput('redirect', 'commerce/checkout/payment') }}
 
-    <label for="gatewayId">Payment Method</label>
-    <select id="gatewayId" name="gatewayId" >
-        {% for id,name in gateways %}
-            <option value="{{ id }}"{% if id == cart.gatewayId %} selected{% endif %}>
-                {{- name -}}
-            </option>
-        {% endfor %}
-    </select>
+  <label for="gatewayId">Payment Method</label>
+  <select name="gatewayId" id="gatewayId">
+    {% for id,name in gateways %}
+      <option value="{{ id }}"{% if id == cart.gatewayId %} selected{% endif %}>
+        {{- name -}}
+      </option>
+    {% endfor %}
+  </select>
 </form>
 {% endif %}
 ```

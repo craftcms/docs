@@ -32,7 +32,7 @@ A “Customer Info” tab will be available on each user account page in the con
 - **Active Carts**: list of the customer’s active carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
 - **Inactive Carts**: list of the customer’s inactive carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
 - **Addresses**: list of the customer’s [addresses](addresses.md), which can be edited and deleted.
-- **Subscriptions**: list of the customer's subscriptions.
+- **Subscriptions**: list of the customer’s subscriptions.
 
 This tab is shown by default but you can control its visibility with the [Commerce::\$showCustomerInfoTab](configuration.md#showcustomerinfotab) setting.
 
@@ -80,15 +80,15 @@ If a customer chooses to register an account on order completion, a Craft user a
 
 If any of the above fail, the user account will not be created; errors will be logged but not displayed or returned.
 
-The Commerce [example templates](https://github.com/craftcms/commerce/blob/main/example-templates/build/shop/checkout/payment.twig) display a “Register me for a user account” checkbox at the payment stage—but only if a user account doesn’t already exist for the email address on the cart:
+The Commerce [example templates](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/checkout/payment.twig) display a “Register me for a user account” checkbox at the payment stage—but only if a user account doesn’t already exist for the email address on the cart:
 
 ```twig
 {# Get a user account using the same email address as the cart #}
 {% set user = craft.users.email(cart.email).one() %}
 {% if not user %}
-    <label for="registerUserOnOrderComplete">
-        <input type="checkbox" name="registerUserOnOrderComplete" value="1" />
-        {{ "Register me for a user account"|t }}
-    </label>
+  <label for="registerUserOnOrderComplete">
+    <input type="checkbox" name="registerUserOnOrderComplete" value="1" />
+    {{ "Register me for a user account"|t }}
+  </label>
 {% endif %}
 ```

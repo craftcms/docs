@@ -22,7 +22,7 @@ Function | Description
 [cpUrl](#cpurl) | Generates a control panel URL.
 [cycle](https://twig.symfony.com/doc/2.x/functions/cycle.html) | Cycles on an array of values.
 [dataUrl](#dataurl) | Outputs an asset or file as a base64-encoded data URL.
-[date](https://twig.symfony.com/doc/2.x/functions/date.html) | Creates a date.
+[date](#date) | Creates a date.
 [dump](https://twig.symfony.com/doc/2.x/functions/dump.html) | Dumps information about a variable.
 [endBody](#endbody) | Outputs scripts and styles that were registered for the “end body” position.
 [expression](#expression) | Creates a database expression object.
@@ -38,6 +38,7 @@ Function | Description
 [min](https://twig.symfony.com/doc/2.x/functions/min.html) | Returns the lowest value in an array.
 [ol](#ol) | Outputs an array of items as an ordered list.
 [parent](https://twig.symfony.com/doc/2.x/functions/parent.html) | Returns the parent block’s output.
+[parseBooleanEnv](#parsebooleanenv) | Parses a string as an environment variable or alias having a boolean value.
 [parseEnv](#parseenv) | Parses a string as an environment variable or alias.
 [plugin](#plugin) | Returns a plugin instance by its handle.
 [random](https://twig.symfony.com/doc/2.x/functions/random.html) | Returns a random value.
@@ -67,7 +68,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ actionInput('users/save-user', {
-    id: 'action-input'
+  id: 'action-input'
 }) }}
 ```
 
@@ -97,23 +98,31 @@ Generates a list of HTML attributes based on the given [hash](twig-primer.md#has
 
 ```twig
 {% set myAttributes = {
-    class: ['one', 'two'],
-    disabled: true,
-    readonly: false,
-    data: {
-        baz: 'Escape this "',
-        qux: {
-            some: ['data', '"quoted"']
-        }
-    },
-    style: {
-        'background-color': 'red',
-        'font-size': '20px'
-    },
+  class: ['one', 'two'],
+  disabled: true,
+  readonly: false,
+  data: {
+    baz: 'Escape this "',
+    qux: {
+      some: ['data', '"quoted"']
+    }
+  },
+  style: {
+    'background-color': 'red',
+    'font-size': '20px'
+  },
 } %}
 
 <div {{ attr(myAttributes) }}></div>
 ```
+
+::: tip
+Attribute values are HTML-encoded automatically:
+```twig
+<div {{ attr({ title: 'Greetings & Salutations' }) }}></div>
+{# Output: <input type="submit" value="Greetings &amp; Salutations"> #}
+```
+:::
 
 ## `beginBody`
 
@@ -121,10 +130,10 @@ Outputs any scripts and styles that were registered for the “begin body” pos
 
 ```twig
 <body>
-    {{ beginBody() }}
+  {{ beginBody() }}
 
-    <h1>{{ page.name }}</h1>
-    {{ page.body }}
+  <h1>{{ page.name }}</h1>
+  {{ page.body }}
 </body>
 ```
 
@@ -157,7 +166,7 @@ Returns the fully qualified class name of a given object.
 Clones a given object.
 
 ```twig
-{% set query = craft.entries.section('news') %}
+{% set query = craft.entries().section('news') %}
 {% set articles = clone(query).type('articles') %}
 ```
 
@@ -179,7 +188,7 @@ Passes through the behavior of the `Craft::configure()` method inherited from [`
 ```twig
 {# Modify an `EntryQuery` object set up by a relational field: #}
 {% set myRelatedEntries = configure(entry.myEntriesField, {
-    section: 'blog'
+  section: 'blog'
 }).all() %}
 ```
 
@@ -217,9 +226,9 @@ Creates a new object instance based on a given class name or object configuratio
 
 {# Or a full object configuration hash #}
 {% set cookie = create({
-    class: 'yii\\web\\cookie',
-    name: 'foo',
-    value: 'bar'
+  class: 'yii\\web\\cookie',
+  name: 'foo',
+  value: 'bar'
 }) %}
 ```
 
@@ -251,7 +260,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ csrfInput({
-    id: 'csrf-input'
+  id: 'csrf-input'
 }) }}
 ```
 
@@ -274,16 +283,50 @@ The `dataUrl()` function has the following arguments:
 - **`file`** - The asset or path to a file to be encoded.
 - **`mimeType`** - Optional MIME type. If omitted, the file’s MIME type will be determined automatically.
 
+## `date`
+
+Converts an argument to a date to allow comparison, like [Twig’s `date()` function](https://twig.symfony.com/doc/2.x/functions/date.html).
+
+The argument can be one of PHP’s supported [date and time formats](https://www.php.net/manual/en/datetime.formats.php), or additionally a `date`/`time` array.
+
+```twig
+{% if date(asset.dateModified) < date('-2days') %}
+  {# asset is not new #}
+{% endif %}
+```
+
+A `null` or empty argument defaults to the current date:
+
+```twig
+{% if date() > date('2021/06/01') %}
+  {# today is past June 1, 2021 #}
+{% endif %}
+```
+
+Craft additionally supports passing a `date`/`time` array:
+
+```twig
+{% set myDate = {
+  date: '2021-01-15',
+  timezone: 'America/Los_Angeles',
+  time: '10:57',
+} %}
+
+{% if now > date(myDate) %}
+  {# today is past January 15, 2021 #}
+{% endif %}
+```
+
 ## `endBody`
 
 Outputs any scripts and styles that were registered for the “end body” position. It should be placed right before your `</body>` tag.
 
 ```twig
 <body>
-    <h1>{{ page.name }}</h1>
-    {{ page.body }}
+  <h1>{{ page.name }}</h1>
+  {{ page.body }}
 
-    {{ endBody() }}
+  {{ endBody() }}
 </body>
 ```
 
@@ -293,8 +336,8 @@ Creates and returns a new <yii2:yii\db\Expression> object, for use in database q
 
 ```twig
 {% set entries = craft.entries()
-    .andWhere(expression('[[authorId]] = :authorId', {authorId: currentUser.id}))
-    .all() %}
+  .andWhere(expression('[[authorId]] = :authorId', {authorId: currentUser.id}))
+  .all() %}
 ```
 
 ## `failMessageInput`
@@ -309,7 +352,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ failMessageInput('Custom fail message', {
-    id: 'fail-message-input'
+  id: 'fail-message-input'
 }) }}
 ```
 
@@ -351,14 +394,14 @@ Executes a GraphQL query against the full schema.
 }') %}
 
 {% for entry in result.data %}
-    <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
-    <p class="timestamp">{{ entry.postDate }}</p>
+  <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+  <p class="timestamp">{{ entry.postDate }}</p>
 
-    {% set image = entry.featuredImage[0] %}
-    <img class="thumb" src="{{ image.url }}" alt="{{ image.altText }}">
+  {% set image = entry.featuredImage[0] %}
+  <img class="thumb" src="{{ image.url }}" alt="{{ image.altText }}">
 
-    {{ entry.shortDescription|markdown }}
-    <p><a href="{{ entry.url }}">Continue reading…</a></p>
+  {{ entry.shortDescription|markdown }}
+  <p><a href="{{ entry.url }}">Continue reading…</a></p>
 {% endfor %}
 ```
 
@@ -368,8 +411,8 @@ Outputs any scripts and styles that were registered for the “head” position.
 
 ```twig
 <head>
-    <title>{{ siteName }}</title>
-    {{ head() }}
+  <title>{{ siteName }}</title>
+  {{ head() }}
 </head>
 ```
 
@@ -386,7 +429,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ hiddenInput('entryId', entry.id, {
-    id: 'entry-id-input'
+  id: 'entry-id-input'
 }) }}
 ```
 
@@ -409,7 +452,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ input('email', 'email-input', '', {
-    id: 'custom-input'
+  id: 'custom-input'
 }) }}
 {# Output: <input type="email" id="custom-input" name="email-input" value=""> #}
 ```
@@ -432,15 +475,15 @@ Outputs an array of items as an ordered list.
 
 ```twig
 {% set titles = craft.entries()
-    .section('news')
-    .select('title')
-    .column() %}
+  .section('news')
+  .select('title')
+  .column() %}
 {{ ol(titles) }}
 {# Output:
 <ol>
-    <li>Shocking Foo</li>
-    <li>You Won’t Believe This Bar</li>
-    <li>Ten Baz You Can’t Live Without</li>
+  <li>Shocking Foo</li>
+  <li>You Won’t Believe This Bar</li>
+  <li>Ten Baz You Can’t Live Without</li>
 </ol>
 #}
 ```
@@ -454,9 +497,15 @@ The `ol()` function has the following arguments:
     - **`encode: false`** – Prevents the list items from being HTML-encoded.
     - **`itemOptions: {...}`** – Tag attributes to be applied to each of the `<li>`s.
 
+## `parseBooleanEnv`
+
+Checks if a string references an environment variable (`$VARIABLE_NAME`) and returns the referenced boolean value, or `null` if a boolean value can’t be determined.
+
 ## `parseEnv`
 
 Checks if a string references an environment variable (`$VARIABLE_NAME`) and/or an alias (`@aliasName`), and returns the referenced value.
+
+If the string references an environment variable with a value of `true` or `false`, a boolean value will be returned.
 
 ## `plugin`
 
@@ -491,7 +540,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ redirectInput(url, {
-    id: 'redirect-input'
+  id: 'redirect-input'
 }) }}
 ```
 
@@ -524,15 +573,15 @@ To view the current number in the sequence without incrementing it, set the `nex
 Randomizes the order of the elements within an array.
 
 ```twig
-{% set promos = craft.entries.section('promos').all() %}
+{% set promos = craft.entries().section('promos').all() %}
 {% set shuffledPromos = shuffle(promos) %}
 
 {% for promo in shuffledPromos %}
-    <div class="promo {{ promo.slug }}">
-        <h3>{{ promo.title }}</h3>
-        <p>{{ promo.description }}</p>
-        <a class="cta" href="{{ promo.ctaUrl }}">{{ promo.ctaLabel }}</a>
-    </div>
+  <div class="promo {{ promo.slug }}">
+    <h3>{{ promo.title }}</h3>
+    <p>{{ promo.description }}</p>
+    <a class="cta" href="{{ promo.ctaUrl }}">{{ promo.ctaLabel }}</a>
+  </div>
 {% endfor %}
 ```
 
@@ -565,7 +614,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ```twig
 {{ successMessageInput('Custom success message', {
-    id: 'success-message-input'
+  id: 'success-message-input'
 }) }}
 ```
 
@@ -603,11 +652,22 @@ By default, if you pass an asset or raw markup into the function, the SVG will b
 {{ svg(image, sanitize=false, namespace=false) }}
 ```
 
+Images passed via path/alias will _not_ automatically be sanitized and namespaced.
+
+<!-- textlint-disable terminology -->
+<!-- This “node” is legit and not Node.js -->
+
 You can also specify a custom class name that should be added to the root `<svg>` node using the [attr](filters.md#attr) filter:
+
+<!-- textlint-enable terminology -->
 
 ```twig
 {{ svg('@webroot/icons/lemon.svg')|attr({ class: 'lemon-icon' }) }}
 ```
+
+::: tip
+Consider caching the output, especially if you’re loading SVG files from remote volumes or URLs, so Craft doesn’t download the file each time your template is rendered.
+:::
 
 ## `source`
 
@@ -621,7 +681,7 @@ Renders a complete HTML tag.
 
 ```twig
 {{ tag('div', {
-    class: 'foo'
+  class: 'foo'
 }) }}
 {# Output: <div class="foo"></div> #}
 ```
@@ -630,7 +690,7 @@ If `text` is included in the attributes argument, its value will be HTML-encoded
 
 ```twig
 {{ tag('div', {
-    text: 'Hello'
+  text: 'Hello'
 }) }}
 {# Output: <div>Hello</div> #}
 ```
@@ -643,7 +703,7 @@ Be sure you trust any input you provide via `html` since it could be an XSS (cro
 
 ```twig
 {{ tag('div', {
-    html: 'Hello<br>world'
+  html: 'Hello<br>world'
 }) }}
 {# Output: <div>Hello<br>world</div> #}
 ```
@@ -654,14 +714,25 @@ If an attribute is set to `true`, it will be added without a value.
 
 ```twig
 {{ tag('input', {
-    id: "foo",
-    name: "bar",
-    required: true
+  id: 'foo',
+  name: 'bar',
+  required: true
 }) }}
 {# Output: <input id="foo" name="bar" required> #}
 ```
 
 Any attribute set to `null` or `false` will be omitted.
+
+::: tip
+Attribute values are HTML-encoded automatically:
+```twig
+{{ tag('input', {
+  name: 'bar',
+  value: 'Foobar & Baz',
+}) }}
+{# Output: <input name="bar" value="Foobar &amp; Baz"> #}
+```
+:::
 
 ## `ul`
 
@@ -669,15 +740,15 @@ Outputs an array of items as an unordered list.
 
 ```twig
 {% set titles = craft.entries()
-    .section('news')
-    .select('title')
-    .column() %}
+  .section('news')
+  .select('title')
+  .column() %}
 {{ ul(titles) }}
 {# Output:
 <ul>
-    <li>Shocking Foo</li>
-    <li>You Won’t Believe This Bar</li>
-    <li>Ten Baz You Can’t Live Without</li>
+  <li>Shocking Foo</li>
+  <li>You Won’t Believe This Bar</li>
+  <li>Ten Baz You Can’t Live Without</li>
 </ul>
 #}
 ```
@@ -717,7 +788,7 @@ Using the `url()` function has advantages over hard-coding URLs in your template
 ::: tip
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
 ```twig
-{{ url('http://my-project.com', 'foo=1', 'https') }}
-{# Output: "https://my-project.com?foo=1" #}
+{{ url('http://my-project.tld', 'foo=1', 'https') }}
+{# Output: "https://my-project.tld?foo=1" #}
 ```
 :::

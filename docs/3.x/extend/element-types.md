@@ -195,7 +195,7 @@ class ProductQuery extends ElementQuery
         // join in the products table
         $this->joinElementTable('products');
 
-        // select the price column
+        // select the price and currency columns
         $this->query->select([
             'products.price',
             'products.currency',
@@ -255,6 +255,8 @@ If you want to make it possible for templates to query for your elements, you ca
 <?php
 namespace mynamespace;
 
+use mynamespace\elements\Product;
+use mynamespace\elements\db\ProductQuery;
 use Craft;
 use yii\base\Behavior;
 
@@ -333,9 +335,9 @@ If you want your element type to support custom fields, you will also need to cr
 {% import '_includes/forms' as forms %}
 
 {{ forms.fieldLayoutDesignerField({
-    fieldLayout: craft.app.fields.getLayoutByType(
-        'ns\\prefix\\elements\\MyElementType'
-    ),
+  fieldLayout: craft.app.fields.getLayoutByType(
+    'ns\\prefix\\elements\\MyElementType'
+  ),
 }) }}
 ```
 
@@ -444,26 +446,25 @@ See [Edit Page](#edit-page) to learn how to create an edit page for your element
 
 #### Saving Custom Field Values
 
-When saving values on a custom field, always use the [`setFieldValue()`](craft3:craft\base\ElementInterface::setFieldValue()) or [`setFieldValues()`](craft3:craft\base\ElementInterface::setFieldValues()) methods rather than directly accessing the field handle as a property on the element object. This ensures the value is normalized and marked as dirty for [delta saves](field-types.md#supporting-delta-saves).
-
+When saving values on a custom field, you may use the [`setFieldValue()`](craft3:craft\base\ElementInterface::setFieldValue()) and [`setFieldValues()`](craft3:craft\base\ElementInterface::setFieldValues()) methods or directly access the field handle as a property on the element object.
 In this example, we’re setting and saving custom field values for an [Entry](craft3:craft\elements\Entry) element:
 
 ::: code
 ```php Single Value
-// incorrect
+// field handle
 $entry->myCustomField = 'foo';
 
-// correct
+// method
 $entry->setFieldValue('myCustomField', 'foo');
 
 \Craft::$app->elements->saveElement($entry);
 ```
 ```php Multiple Values
-// incorrect
+// field handle
 $entry->myCustomField = 'foo';
 $entry->myOtherCustomField = 'bar';
 
-// correct
+// method
 $entry->setFieldValues([
     'myCustomField' => 'foo',
     'myOtherCustomField' => 'bar',
@@ -471,6 +472,10 @@ $entry->setFieldValues([
 
 \Craft::$app->elements->saveElement($entry);
 ```
+:::
+
+::: warning
+Prior to Craft 3.7.21, it was only safe to set field values with the `setFieldValue()` and `setFieldValues()` methods to ensure values were normalized and marked as dirty for [delta saves](field-types.md#supporting-delta-saves).
 :::
 
 #### Validating Required Custom Fields
@@ -608,7 +613,7 @@ When a source is selected, Craft will configure your [element query](#element-qu
 You can give your [control panel section](cp-section.md) an index page for your element type using the following template:
 
 ```twig
-{% extends '_layouts/elementindex' %}
+{% extends '_layouts/elementindex.html' %}
 {% set title = 'Products' %}
 {% set elementType = 'ns\\prefix\\elements\\Product' %}
 ```
@@ -827,7 +832,7 @@ public function getEditorHtml(): string
 
 ### Edit Page
 
-If you want to give your element type a full-sized edit page, it’s up to you to set all of that up – the templates, the routes, and the controller actions.
+If you want to give your element type a full-sized [edit page](./cp-edit-pages.md), it’s up to you to set all of that up – the templates, the routes, and the controller actions.
 
 The Edit Category page offers a relatively straightforward example of how it could be done.
 
@@ -898,7 +903,7 @@ public function getCpEditUrl()
 ```
 
 ::: tip
-Elements that are editable (per `getIsEditable()`) and which define a CP Edit URL (via `getCpEditUrl()`) will be accessible from a discoverable `/admin/edit/{id|uid}` URL, which will redirect to their edit page.
+Elements that are editable (per `getIsEditable()`) and which define a control panel edit URL (via `getCpEditUrl()`) will be accessible from a discoverable `/admin/edit/{id|uid}` URL, which will redirect to their edit page.
 :::
 
 ## Relations

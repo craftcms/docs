@@ -31,12 +31,12 @@ Calling a Table field in your templates will return an array of the rows. Each r
 
 ```twig
 {% if entry.whiskeyTableHandle | length %}
-    <h3>Whiskeys</h3>
+  <h3>Whiskeys</h3>
 
-    <ul>
-        {% for row in entry.whiskeyTableHandle %}
-            <li>{{ row.whiskey }} - {{ row.description }} - {{ row.proof }}</li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for row in entry.whiskeyTableHandle %}
+      <li>{{ row.whiskey }} - {{ row.description }} - {{ row.proof }}</li>
+    {% endfor %}
+  </ul>
 {% endif %}
 ```

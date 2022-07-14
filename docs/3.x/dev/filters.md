@@ -13,7 +13,7 @@ Filter | Description
 [camel](#camel) | Formats a string into camelCase.
 [capitalize](https://twig.symfony.com/doc/2.x/filters/capitalize.html) | Capitalizes the first character of a string.
 [column](#column) | Returns the values from a single property or key in an array.
-[contains](#contains) | Returns whether an array contains a nested item with a given key/value pair.
+[contains](#contains) | Returns whether an array contains a nested item with a given key-value pair.
 [convert_encoding](https://twig.symfony.com/doc/2.x/filters/convert_encoding.html) | Converts a string from one encoding to another.
 [currency](#currency) | Formats a number as currency.
 [date](#date) | Formats a date.
@@ -52,6 +52,7 @@ Filter | Description
 [merge](#merge) | Merges an array with another one.
 [multisort](#multisort) | Sorts an array by one or more keys within its sub-arrays.
 [namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
+[namespaceAttributes](#namespaceattributes) | Namespaces `id` and other HTML attributes, as well as CSS selectors.
 [namespaceInputId](#namespaceinputid) | Namespaces an element ID.
 [namespaceInputName](#namespaceinputname) | Namespaces an input name.
 [nl2br](https://twig.symfony.com/doc/2.x/filters/nl2br.html) | Replaces newlines with `<br>` tags.
@@ -65,12 +66,12 @@ Filter | Description
 [push](#push) | Appends one or more items onto the end of an array.
 [raw](https://twig.symfony.com/doc/2.x/filters/raw.html) | Marks as value as safe for the current escaping strategy.
 [reduce](https://twig.symfony.com/doc/2.x/filters/reduce.html) | Iteratively reduces a sequence or mapping to a single value.
+[removeClass](#removeclass) | Removes a class (or classes) from the given HTML tag.
 [replace](#replace) | Replaces parts of a string with other things.
 [reverse](https://twig.symfony.com/doc/2.x/filters/reverse.html) | Reverses a string or array.
 [round](https://twig.symfony.com/doc/2.x/filters/round.html) | Rounds a number.
 [rss](#rss) | Converts a date to RSS date format.
 [slice](https://twig.symfony.com/doc/2.x/filters/slice.html) | Extracts a slice of a string or array.
-[slug](https://twig.symfony.com/doc/2.x/filters/slug.html) | Transforms a given string into another string that only includes safe ASCII characters.
 [snake](#snake) | Formats a string into “snake_case”.
 [sort](https://twig.symfony.com/doc/2.x/filters/sort.html) | Sorts an array.
 [spaceless](https://twig.symfony.com/doc/2.x/filters/spaceless.html) | Removes whitespace between HTML tags.
@@ -88,7 +89,7 @@ Filter | Description
 [upper](https://twig.symfony.com/doc/2.x/filters/upper.html) | Formats a string into “UPPER CASE”.
 [url_encode](https://twig.symfony.com/doc/2.x/filters/url_encode.html) | Percent-encodes a string as a URL segment or an array as a query string.
 [values](#values) | Returns all the values in an array, resetting its keys.
-[where](#where) | Filters an array by key/value pairs.
+[where](#where) | Filters an array by key-value pairs.
 [withoutKey](#withoutkey) | Returns an array without the specified key.
 [without](#without) | Returns an array without the specified element(s).
 
@@ -146,7 +147,7 @@ Modifies an HTML tag’s attributes, using the same attribute definitions suppor
 ```twig
 {% set tag = '<div>' %}
 {{ tag|attr({
-    class: 'foo'
+  class: 'foo'
 }) }}
 {# Output: <div class="foo"> #}
 ```
@@ -155,15 +156,15 @@ Only the first tag will be modified, and any HTML comments or doctype declaratio
 
 ```twig
 {% set svg %}
-    <?xml version="1.0" encoding="utf-8"?>
-    <svg>...</svg>
+  <?xml version="1.0" encoding="utf-8"?>
+  <svg>...</svg>
 {% endset %}
 {{ svg|attr({
-    class: 'icon'
+  class: 'icon'
 }) }}
 {# Output:
-   <?xml version="1.0" encoding="utf-8"?>
-   <svg class="icon">...</svg> #}
+  <?xml version="1.0" encoding="utf-8"?>
+  <svg class="icon">...</svg> #}
 ```
 
 Attributes can be removed by setting them to `false`.
@@ -181,8 +182,8 @@ Attributes can be removed by setting them to `false`.
 ```twig
 {% set tag = '<div class="foo" style="color: black;">' %}
 {{ tag|attr({
-    class: 'bar',
-    style: {background: 'red'}
+  class: 'bar',
+  style: {background: 'red'}
 }) }}
 {# Output: <div class="foo bar" style="color: black; background: red;"> #}
 ```
@@ -192,7 +193,7 @@ All other attributes will replace the existing attribute values.
 ```twig
 {% set tag = '<input type="text">' %}
 {{ tag|attr({
-    type: 'email'
+  type: 'email'
 }) }}
 {# Output: <input type="email"> #}
 ```
@@ -204,6 +205,18 @@ If you want to completely replace a `class` or `style` attribute, remove it firs
 {{ tag|attr({class: false})|attr({class: 'bar'}) }}
 {# Output: <div class="bar"> #}
 ```
+
+::: tip
+Attribute values are HTML-encoded automatically:
+```twig
+{% set tag = '<input type="text">' %}
+{{ tag|attr({
+  type: 'submit',
+  value: 'Register & Subscribe →'
+}) }}
+{# Output: <input type="submit" value="Register &amp; Subscribe →"> #}
+```
+:::
 
 ## `camel`
 
@@ -236,12 +249,12 @@ Returns whether the passed-in array contains any nested arrays/objects with a pa
 
 ```twig
 {% set works = craft.entries()
-    .section('artwork')
-    .all() %}
+  .section('artwork')
+  .all() %}
 
 {# See if any of the artwork has a mature rating #}
 {% if works|contains('rating', 'm') %}
-    <p class="mature">Some of this artwork is meant for mature viewers.</p>
+  <p class="mature">Some of this artwork is meant for mature viewers.</p>
 {% endif %}
 ```
 
@@ -450,17 +463,17 @@ When an arrow function is passed, this works identically to Twig’s core [`filt
 Groups items in an array by a the results of an arrow function.
 
 ```twig
-{% set allEntries = craft.entries.section('blog').all() %}
+{% set allEntries = craft.entries().section('blog').all() %}
 {% set allEntriesByYear = allEntries|group(e => e.postDate|date('Y')) %}
 
 {% for year, entriesInYear in allEntriesByYear %}
-    <h2>{{ year }}</h2>
+  <h2>{{ year }}</h2>
 
-    <ul>
-        {% for entry in entriesInYear %}
-            <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for entry in entriesInYear %}
+      <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+    {% endfor %}
+  </ul>
 {% endfor %}
 ```
 
@@ -526,7 +539,7 @@ Returns the index of a passed-in value within an array, or the position of a pas
 
 {% set position = 'team'|indexOf('i') %}
 {% if position != -1 %}
-    <p>There <em>is</em> an “i” in “team”! It’s at position {{ position + 1 }}.</p>
+  <p>There <em>is</em> an “i” in “team”! It’s at position {{ position + 1 }}.</p>
 {% endif %}
 ```
 
@@ -536,25 +549,25 @@ Returns an array containing only the values that are also in a passed-in array.
 
 ```twig
 {% set ownedIngredients = [
-    'vodka',
-    'gin',
-    'triple sec',
-    'tonic',
-    'grapefruit juice'
+  'vodka',
+  'gin',
+  'triple sec',
+  'tonic',
+  'grapefruit juice'
 ] %}
 
 {% set longIslandIcedTeaIngredients = [
-    'vodka',
-    'tequila',
-    'rum',
-    'gin',
-    'triple sec',
-    'sweet and sour mix',
-    'Coke'
+  'vodka',
+  'tequila',
+  'rum',
+  'gin',
+  'triple sec',
+  'sweet and sour mix',
+  'Coke'
 ] %}
 
 {% set ownedLongIslandIcedTeaIngredients =
-    ownedIngredients|intersect(longIslandIcedTeaIngredients)
+  ownedIngredients|intersect(longIslandIcedTeaIngredients)
 %}
 ```
 
@@ -662,16 +675,16 @@ Without `recursive`:
 
 ```twig
 {% set items = {
-    'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
-    'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
+  'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
+  'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
 } %}
 {% set items = items|merge({
-    'rebellion': { 'Endor': 'Solo/Organa' },
-    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+  'rebellion': { 'Endor': 'Solo/Organa' },
+  'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
 }) %}
 {# Result: {
-    'rebellion': { 'Endor': 'Solo/Organa' },
-    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+  'rebellion': { 'Endor': 'Solo/Organa' },
+  'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
 } #}
 ```
 
@@ -679,26 +692,26 @@ With `recursive`:
 
 ```twig{8}
 {% set items = {
-    'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
-    'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
+  'rebellion': { 'Bespin': 'Calrissian', 'Hoth': 'Organa', 'Crait': 'Organa' },
+  'empire': { 'Coruscant': 'Palpatine', 'Endor': 'Palpatine' }
 } %}
 {% set items = items|merge({
-    'rebellion': { 'Endor': 'Solo/Organa' },
-    'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
+  'rebellion': { 'Endor': 'Solo/Organa' },
+  'empire': { 'Bespin': 'Vader', 'Hoth': 'Veers' }
 }, true) %}
 {# Result: {
-    'rebellion': {
-        'Bespin': 'Calrissian',
-        'Hoth': 'Organa',
-        'Crait': 'Organa',
-        'Endor': 'Solo/Organa'
-    },
-    'empire': {
-        'Coruscant': 'Palpatine',
-        'Endor': 'Palpatine',
-        'Bespin': 'Vader',
-        'Hoth': 'Veers'
-    }
+  'rebellion': {
+    'Bespin': 'Calrissian',
+    'Hoth': 'Organa',
+    'Crait': 'Organa',
+    'Endor': 'Solo/Organa'
+  },
+  'empire': {
+    'Coruscant': 'Palpatine',
+    'Endor': 'Palpatine',
+    'Bespin': 'Vader',
+    'Hoth': 'Veers'
+  }
 } #}
 ```
 
@@ -742,8 +755,8 @@ When sorting by multiple properties or keys, you must set the `direction` and `s
 
 ```twig
 {% set entries = entries|multisort([
-    'postDate',
-    'title',
+  'postDate',
+  'title',
 ], sortFlag=[SORT_NATURAL, SORT_FLAG_CASE]) %}
 ```
 
@@ -792,6 +805,53 @@ That would result in:
 <input class="foo-text" id="foo-title" name="foo[title]" type="text">
 ```
 
+## `namespaceAttributes`
+
+The `|namespaceAttributes` filter can be used to namespace `id` and other HTML attributes, as well as CSS selectors.
+
+It’s identical to the [namespace](#namespace) filter, except that inputs’ `name` attributes won’t be modified.
+
+For example, this:
+
+```twig
+{% set html %}
+<style>
+  .text { font-size: larger; }
+  #title { font-weight: bold; }
+</style>
+<input class="text" id="title" name="title" type="text">
+{% endset %}
+{{ html|namespaceAttributes('foo') }}
+```
+
+would become this:
+
+```html
+<style>
+  .text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="text" id="foo-title" name="title" type="text">
+```
+
+Notice how the `#title` CSS selector became `#foo-title`, the `id` attribute changed from `title` to `foo-title`, but the `name` attribute wasn’t changed.
+
+If you want class names to get namespaced as well, pass `withClasses=true`. That will affect both class CSS selectors and `class` attributes:
+
+```twig
+{{ html|namespaceAttributes('foo', withClasses=true) }}
+```
+
+That would result in:
+
+```html{2,5}
+<style>
+  .foo-text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="foo-text" id="foo-title" name="title" type="text">
+```
+
 ## `namespaceInputId`
 
 Namepaces an element ID.
@@ -836,14 +896,28 @@ If this is used within a [namespace](tags.md#namespace) tag, the namespace appli
 
 Formats a number according to the user’s preferred language.
 
-You can optionally pass `false` to it if you want group symbols to be omitted (e.g. commas in English).
+For example, comma group symbols are added by default in English:
 
 ```twig
 {{ 1000000|number }}
 {# Output: 1,000,000 #}
+```
 
-{{ 1000000|number(false) }}
-{# Output: 1000000 #}
+The value is passed to [`Craft::$app->getFormatter()->asDecimal()`](yii2:yii\i18n\Formatter::asDecimal()) and may include three additional arguments:
+
+- **decimals** – number of digits that should appear after the decimal point (defaults to `null`)
+- **options** – key-value array of [number formatter options](https://www.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformatattribute) (ignored if PHP intl extension is not installed)
+- **textOptions** – key-value array of [text formatting options](https://www.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformattextattribute) for the formatter
+
+```twig
+{{ 1000000|number(2) }}
+{# Output: 1,000,000.00 #}
+
+{{ 1000000|number(null, { (constant('NumberFormatter::GROUPING_SIZE')): 4 }) }}
+{# Output: 100,0000 #}
+
+{{ (-5)|number(null, {}, { (constant('NumberFormatter::NEGATIVE_PREFIX')): '☹' }) }}
+{# Output: ☹5 #}
 ```
 
 If the passed-in value isn’t a valid number it will be returned verbatim:
@@ -859,7 +933,7 @@ Parses a string for [reference tags](../reference-tags.md).
 
 ```twig
 {% set content %}
-    {entry:blog/hello-world:link} was my first blog post. Pretty geeky, huh?
+  {entry:blog/hello-world:link} was my first blog post. Pretty geeky, huh?
 {% endset %}
 
 {{ content|parseRefs|raw }}
@@ -939,6 +1013,22 @@ Appends one or more items onto the end of an array, and returns the new array.
 {# Result: ['foo', 'bar', 'baz'] #}
 ```
 
+## `removeClass`
+
+Removes a class (or classes) from the given HTML tag.
+
+```twig
+{% set markup = '<p class="apple orange banana">A classy bit of text.</p>' %}
+{{ markup|removeClass('orange') }}
+{# Result: <p class="apple banana">A classy bit of text.</p> #}
+```
+
+```twig
+{% set markup = '<p class="apple orange banana">A classy bit of text.</p>' %}
+{{ markup|removeClass(['orange', 'banana']) }}
+{# Result: <p class="apple">A classy bit of text.</p> #}
+```
+
 ## `replace`
 
 Replaces parts of a string with other things.
@@ -949,8 +1039,8 @@ When a mapping array is passed, this works identically to Twig’s core [`replac
 {% set str = 'Hello, FIRST LAST' %}
 
 {{ str|replace({
-    FIRST: currentUser.firstName,
-    LAST:  currentUser.lastName
+  FIRST: currentUser.firstName,
+  LAST:  currentUser.lastName
 }) }}
 ```
 
@@ -967,6 +1057,10 @@ You can also use a regular expression to search for matches by starting and endi
 ```twig
 {{ tag.title|lower|replace('/[^\\w]+/', '-') }}
 ```
+
+::: tip
+Any backslashes in the regular expression will need to be double-escaped '`\\`' for them to work properly.
+:::
 
 ## `rss`
 
@@ -1141,7 +1235,7 @@ Runs an array through <craft3:craft\helpers\ArrayHelper::where()>.
 Returns an array without the specified element(s).
 
 ```twig
-{% set entries = craft.entries.section('articles').limit(3).find %}
+{% set entries = craft.entries().section('articles').limit(3).find %}
 {% set firstEntry = entries[0] %}
 {% set remainingEntries = entries|without(firstEntry) %}
 ```
@@ -1154,9 +1248,9 @@ The key can be a single key as a string:
 
 ```twig
 {% set array = {
-    foo: 'foo',
-    bar: 'bar',
-    baz: 'baz'
+  foo: 'foo',
+  bar: 'bar',
+  baz: 'baz'
 } %}
 {% set filtered = array|withoutKey('baz') %}
 {# Result: { 'foo': 'foo', 'bar: 'bar' } #}
@@ -1166,9 +1260,9 @@ You can also pass multiple keys in an array:
 
 ```twig
 {% set array = {
-    foo: 'foo',
-    bar: 'bar',
-    baz: 'baz'
+  foo: 'foo',
+  bar: 'bar',
+  baz: 'baz'
 } %}
 {% set filtered = array|withoutKey(['bar', 'baz']) %}
 {# Result: { 'foo': 'foo' } #}

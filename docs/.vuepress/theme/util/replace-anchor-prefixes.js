@@ -60,7 +60,7 @@ function replacePrefix(link) {
         if (ref.isMethod) {
           hash = "method-";
         } else if (!ref.subject.match(/^EVENT_/)) {
-          hash = "property-";
+          // used to start with `property-`, but more recent yii2-apidoc dropped it
         }
 
         hash += ref.subject.replace(/_/g, "-").toLowerCase();
@@ -83,7 +83,7 @@ function replacePrefix(link) {
 
       return url + (hash ? `#${hash}` : "");
     } else if (prefixSettings.format === "config") {
-      m = link.match(/^config[2|3]:(.+)/);
+      m = link.match(/^config[2|3|4]:(.+)/);
       let setting = m[1].toLowerCase();
 
       if (m) {

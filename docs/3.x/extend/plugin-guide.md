@@ -8,6 +8,20 @@ Before you begin working on a plugin, you need to decide on a few things:
 - **Namespace** – The root namespace that your plugin’s classes will live in. (See the [PSR-4] autoloading specification for details.) Note that this should _not_ begin with `craft\`; use something that identifies you, the developer.
 - **Plugin handle** – Something that uniquely identifies your plugin within the Craft ecosystem. (Plugin handles must begin with a letter and contain only lowercase letters, numbers, and dashes. They should be `kebab-cased`.)
 - **Plugin name** – What your plugin will be called within the control panel.
+  ::: warning
+  Your plugin name must not begin with “Craft” or an include an [edition](plugin-editions.md)-sounding word like “Lite”, “Plus”, or “Pro”.
+  :::
+
+### Naming Your Plugin
+
+Choose a plugin name that will age well and possibly save your future self time:
+
+- **Do** add `craft-` as a prefix in your GitHub repository name, e.g. `craft-foo`.\
+This differentiates any Craft plugins from other projects.
+- **Don’t** reference the Craft version in your plugin’s name, folder, or repository URL.\
+It’ll require more work and licensing considerations if you update it for another major Craft release. (`craft-foo`, not `craft3-foo`.)
+- **Do** keep your Composer package name reasonably concise.\
+It’s more convenient for someone to type `composer require acme/craft-thinginator` than `composer require acme/craft-super-advanced-thinginator-by-acme`.
 
 ## Setting up the basic file structure
 
@@ -15,7 +29,7 @@ To create a plugin, create a new directory for it somewhere on your computer. A 
 
 ```treeview
 ~/dev/
-├── my-project.test/
+├── my-project/
 │   └── ...
 └── my-plugin/
     ├── CHANGELOG.md
@@ -152,7 +166,7 @@ In your terminal, go to your Craft project and tell Composer to require your plu
 
 ```bash
 # go to the project directory
-cd /path/to/my-project.test
+cd /path/to/my-project
 
 # require the plugin package
 composer require package/name
@@ -169,7 +183,7 @@ One caveat of `path` Composer repositories is that Composer may ignore `path`-ba
 
 ```bash
 # go to the project directory
-cd /path/to/my-project.test
+cd /path/to/my-project
 
 # remove the plugin package
 composer remove package/name
@@ -186,7 +200,7 @@ If you’re ready to publicly release your plugin, register it as a new Composer
 
 ```bash
 # go to the project directory
-cd /path/to/my-project.test
+cd /path/to/my-project
 
 # require the plugin package
 composer require package/name
@@ -194,9 +208,12 @@ composer require package/name
 
 ## Plugin Icons
 
-Plugins can provide an icon, which will be visible on the Settings → Plugins page.
+Plugins can provide an icon, which will be visible on the **Settings** → **Plugins** page.
 
-![The Settings → Plugins page in Craft’s control panel.](../images/plugin-index.png)
+<BrowserShot url="https://my-project.tld/admin/settings/plugins" :link="false" caption="The Settings → Plugins page in Craft’s control panel.">
+<img src="../images/plugin-index.png" alt="Screenshot of control panel Settings → Plugins">
+</BrowserShot>
+
 
 Plugin icons must be square SVG files, saved as `icon.svg` at the root of your plugin’s source directory (e.g `src/`).
 

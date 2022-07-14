@@ -34,9 +34,9 @@ That will give you an [ElementCriteriaModel](templating/elementcriteriamodel.md)
 
 ```twig
 {% craft.users({
-    relatedTo: { sourceElement: entry, field: "usersFieldHandle" },
-    order:     "sortOrder",
-    limit:     null
+  relatedTo: { sourceElement: entry, field: "usersFieldHandle" },
+  order:     "sortOrder",
+  limit:     null
 }) %}
 ```
 
@@ -48,7 +48,7 @@ To check if your Users field has any selected users, you can use the `length` fi
 
 ```twig
 {% if entry.usersFieldHandle | length %}
-    ...
+  ...
 {% endif %}
 ```
 
@@ -56,7 +56,7 @@ To loop through the selected users, you can treat the field like an array:
 
 ```twig
 {% for user in entry.usersFieldHandle %}
-    ...
+  ...
 {% endfor %}
 ```
 
@@ -67,10 +67,10 @@ Rather than typing “`entry.usersFieldHandle`” every time, you can call it on
 
 {% if users | length %}
 
-    <h3>Some great users</h3>
-    {% for user in users %}
-        ...
-    {% endfor %}
+  <h3>Some great users</h3>
+  {% for user in users %}
+    ...
+  {% endfor %}
 
 {% endif %}
 ```
@@ -87,7 +87,7 @@ If your Users field is only meant to have a single user selected, remember that 
 {% set user = entry.myUsersField.first() %}
 
 {% if user %}
-    ...
+  ...
 {% endif %}
 ```
 

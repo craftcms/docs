@@ -6,7 +6,7 @@ Now that we’ve set up sections and fields, we can focus on editing content.
 
 Navigate to **Entries** and create a new blog entry. Fill in each field.
 
-<BrowserShot url="https://tutorial.nitro/admin/entries/blog/9?draftId=7&fresh=1" :link="false" caption="A complete new blog post ready to be saved.">
+<BrowserShot url="https://tutorial.ddev.site/admin/entries/blog/9?draftId=7&fresh=1" :link="false" caption="A complete new blog post ready to be saved.">
 <img src="../images/new-entry.png" alt="Screenshot of blog post entry with fields filled in" />
 </BrowserShot>
 
@@ -56,7 +56,7 @@ Go ahead and add some content and publish it when you’re ready!
 
 Once you’ve saved an entry, you can use the globe icon from the Entries listing to jump to its public URL. The result foreshadows what’s next:
 
-<BrowserShot url="https://tutorial.nitro/blog/my-first-post" :link="false" caption="The front end is missing.">
+<BrowserShot url="https://tutorial.ddev.site/blog/my-first-post" :link="false" caption="The front end is missing.">
 <img src="../images/404.png" alt="Screenshot of public post URL 404" />
 </BrowserShot>
 

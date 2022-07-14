@@ -24,7 +24,7 @@ So, if you were to call `craft()->templates->render('cocktailrecipes/settings')`
 As you can see, the `templates/` folder segment is assumed, so there’s no need to include it when calling `render()`.
 
 ::: tip
-Craft will only automatically look for templates within the plugin folders for CP requests. If you are going to be calling `TemplatesService::render()` from a front end site request, you will need to manually tell Craft where to find your template using <craft2:Craft\PathService::setTemplatesPath()> first:
+Craft will only automatically look for templates within the plugin folders for control panel requests. If you are going to be calling `TemplatesService::render()` from a front end site request, you will need to manually tell Craft where to find your template using <craft2:Craft\PathService::setTemplatesPath()> first:
 
 ```php
 $oldPath = craft()->path->getTemplatesPath();
@@ -37,7 +37,7 @@ craft()->path->setTemplatesPath($oldPath);
 If you do this, you won’t be needing to begin the template path with your plugin handle.
 :::
 
-## Giving your Plugin its own CP Section
+## Giving your Plugin its own Control Panel Section
 
 If you want to give your plugin its own control panel section, add this to your primary plugin class:
 
@@ -56,13 +56,13 @@ class CocktailRecipesPlugin extends BasePlugin
 }
 ```
 
-With that set, your plugin will show up in the CP nav. Clicking on it will take you to admin/PluginHandle, which will route to index.html within your plugin’s `templates/` folder.
+With that set, your plugin will show up in the control panel navigation. Clicking on it will take you to admin/PluginHandle, which will route to index.html within your plugin’s `templates/` folder.
 
-Your plugin’s CP section can have as many pages as you’d like. To link to other pages, use the `{{ url() }}` template function just like you would in your site’s templates (ex: `href="{{ url('cocktailrecipes/all') }}`).
+Your plugin’s control panel section can have as many pages as you’d like. To link to other pages, use the `{{ url() }}` template function just like you would in your site’s templates (ex: `href="{{ url('cocktailrecipes/all') }}`).
 
-## Extending the CP layout
+## Extending the Control Panel Layout
 
-Most of the time you’ll want your plugin’s templates to look like the rest of the CP. To do that, they must extend the ``_layouts/cp`` layout.
+Most of the time you’ll want your plugin’s templates to look like the rest of the control panel. To do that, they must extend the ``_layouts/cp`` layout.
 
 The `_layouts/cp` layout expects two variables to be set: `title` and `content`. `title` is used to set the page’s `<title>` and `<h1>` tag values, and `content` defines the HTML that should show up in the `#main` div.
 
@@ -72,20 +72,20 @@ The `_layouts/cp` layout expects two variables to be set: `title` and `content`.
 {% set title = "Cocktail Recipes"|t %}
 
 {% set content %}
-    <p>Hello!</p>
+  <p>Hello!</p>
 {% endset %}
 ```
 
-If your plugin’s CP section has its own sub-navigation, you can define that by setting the `tabs` variable in your template:
+If your plugin’s control panel section has its own sub-navigation, you can define that by setting the `tabs` variable in your template:
 
 ```twig
 {% set tabs = {
-    recent: { label: "Recent"|t, url: url('cocktailrecipes') },
-    new:    { label: "Add a New Recipe"|t, url: url('cocktailrecipes/new') }
+  recent: { label: "Recent"|t, url: url('cocktailrecipes') },
+  new:    { label: "Add a New Recipe"|t, url: url('cocktailrecipes/new') }
 } %}
 ```
 
-Tell the CP template which tab should be selected by setting the `selectedTab` variable:
+Tell the control panel template which tab should be selected by setting the `selectedTab` variable:
 
 ```twig
 {% set selectedTab = 'recent' %}
@@ -95,8 +95,8 @@ You can also add breadcrumbs to your pages by setting the `crumbs` variable:
 
 ```twig
 {% set crumbs = [
-    { label: "Cocktail Recipes"|t, url: url('cocktailrecipes') },
-    { label: recipe.groupName|t, url: url('cocktailrecipes/recipes/'~recipe.groupHandle) }
+  { label: "Cocktail Recipes"|t, url: url('cocktailrecipes') },
+  { label: recipe.groupName|t, url: url('cocktailrecipes/recipes/'~recipe.groupHandle) }
 ] %}
 ```
 
@@ -104,7 +104,7 @@ You can also add breadcrumbs to your pages by setting the `crumbs` variable:
 
 By default, incoming requests are routed to a template with the same path as the request URI (possibly with `.html` or `/index.html` appended to it). Most of the time this works well, but it falls short for dynamic URLs, such as URLs where one of the segments is an ID or a slug. For example, you might want to route URLs that look like `admin/cocktailrecipes/123` to `templates/_edit.html`.
 
-You can accomplish this by registering **routes**. Craft gives plugins a chance to register new CP routes via the `registerCpRoutes` hook. Simply add a new method to your plugin called `registerCpRoutes()`:
+You can accomplish this by registering **routes**. Craft gives plugins a chance to register new control panel routes via the `registerCpRoutes` hook. Simply add a new method to your plugin called `registerCpRoutes()`:
 
 ```php
 <?php

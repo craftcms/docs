@@ -2,7 +2,7 @@
 
 ## |commerceCurrency
 
-You can use the `|commerceCurrency` filter as a drop-in replacement for the built in Craft `|currency` filter. But in addition to currency _formatting_, it can also be used for currency _conversion_, by setting the `convert` param to `true`. In addition to that, the currency formatting can also be disabled by setting the `format` param to `false`, if you just want to get the raw converted currency value as a float.
+You can use the `|commerceCurrency` filter as a drop-in replacement for the built-in Craft `|currency` filter. But in addition to currency _formatting_, it can also be used for currency _conversion_, by setting the `convert` param to `true`. In addition to that, the currency formatting can also be disabled by setting the `format` param to `false`, if you just want to get the raw converted currency value as a float.
 
 ### currency (string)
 
@@ -38,7 +38,7 @@ You might want to show the order’s price in all available payment currencies:
 
 ```twig
 {% for currency in craft.commerce.paymentCurrencies %}
-    Total in {{ currency.iso|upper }}: {{ cart.totalPrice|commerceCurrency(cart.paymentCurrency,convert=true) }} <br>
+  Total in {{ currency.iso|upper }}: {{ cart.totalPrice|commerceCurrency(cart.paymentCurrency,convert=true) }} <br>
 {% endfor %}
 </select>
 ```

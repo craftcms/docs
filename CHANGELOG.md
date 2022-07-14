@@ -2,6 +2,200 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-07-12
+### Added
+- Documented change in default Craft 4 user query behavior.
+
+## 2022-07-08
+### Added
+- Documented user statuses.
+
+## 2022-06-24
+### Added
+- Added canonical tags to most pages to promote latest product versions.
+
+### Fixed
+- Improved mobile Safari’s dark mode browser chrome.
+
+## 2022-06-20
+### Changed
+- Documented the `namespaceAttributes` filter for Craft 3 and 4.
+
+## 2022-05-27
+### Added
+- Added a note about Craft 4.x element type garbage collection.
+
+## 2022-05-25
+### Added
+- Covered Commerce 4.x’s email suppression feature.
+- Mentioned empty user folder garbage collection in Craft 4.
+
+### Fixed
+- Updated Commerce 4.x’s controller action reference and upgrade guide to reflect removed `customer-orders/get-orders` action.
+
+## 2022-05-18
+### Fixed
+- Fixed the Money field development example.
+
+## 2022-05-12
+### Changed
+- Updated Craft 4.x database connection settings intro to use `craft\helpers\App::env()` and new `CRAFT_` config setting override support.
+
+## 2022-05-04
+### Changed
+- Switched default documentation versions to Craft 4.x and Commerce 4.x. 🎉
+
+## 2022-03-25
+### Added
+- Added a page on Craft 4’s Address element.
+
+### Changed
+- The `session` component example is now defined in `app.web.php`. ([craftcms/cms#10820](https://github.com/craftcms/cms/issues/10820))
+
+## 2022-03-16
+### Added
+- Added Commerce 4 beta docs.
+
+## 2022-03-09
+### Added
+- Added Craft 4 beta docs.
+
+## 2022-02-14
+### Added
+- Added an overview of Nitro’s site paths.
+
+## 2022-02-11
+### Added
+- Added plugin naming tips.
+
+## 2022-02-08
+### Added
+- Documented `clear-deprecations`, `plugin/list`, `users/activation-url`, and `users/password-reset-url` commands added in Craft 3.7.31.
+- Documented `users/list-admins` and `users/set-password` commands added in Craft 3.6.0.
+
+## 2022-02-02
+### Removed
+- Moved stale + partial Craft 3.x translations to https://github.com/craftcms/docs-translations.
+
+## 2022-01-20
+### Added
+- Noted default mutex behavior with configuration example for Craft 3.7.30.
+
+## 2022-01-18
+### Changed
+- Updated wording to reflect Craft CMS 3.7.29’s PHP fatal error logging to `stderr`.
+- Updated Craft CMS `resave/*` console command reference for 3.7.29.
+
+## 2021-12-15
+### Added
+- Added Event Code Generator to the Craft Commerce docs “Events” page.
+- Documented new `getHsl()`, `getHue()`, `getL()`, `getLightness()`, `getS()`, and `getSaturation()` methods for Color field values added in Craft 3.7.26.
+
+## 2021-12-08
+### Added
+- Added “Events” page to the Craft CMS docs Extending Craft section.
+
+## 2021-12-03
+### Added
+- Documented `parseBooleanEnv` Twig function added in Craft 3.7.24.
+- Documented element query `cache()` function.
+
+## 2021-11-26
+### Changed
+- Updated `plugin/install`, `plugin/uninstall`, `plugin/enable`, and `plugin/disable` console command descriptions for Craft 3.7.23.
+
+## 2021-11-16
+### Changed
+- Updated Element Type’s “Saving Custom Field Values” section for Craft 3.7.21.
+
+## 2021-10-19
+### Added
+- Documented new `countable` and `object` Twig tests added in Craft 3.7.17.
+
+## 2021-10-07
+### Added
+- Documented `autoSetCartShippingMethodOption` setting added in Commerce 3.4.4.
+- Documented `clearLineItems` param added to the `cart/update-cart` controller action in Commerce 3.4.4.
+
+## 2021-10-05
+### Added
+- Documented new `array`, `callable`, `float`, `integer`, `numeric`, `resource`, `scalar`, and `string` Twig tests added in Craft 3.7.15.
+- Documented `graphql/create-token`, `graphql/list-schemas`, and `users/impersonate` commands added in Craft 3.7.15.
+
+## 2021-09-28
+### Added
+- Documented Matrix field’s newly-supported values in Craft 3.7.14.
+
+### Fixed
+- Fixed example errors and added missing element type example class in Extending GraphQL.
+
+## 2021-09-27
+### Changed
+- Added tip about referencing custom field columns by their full column name.
+
+## 2021-09-14
+### Added
+- Documented `up` command added in Craft 3.7.13.
+
+## 2021-08-31
+### Changed
+- Updated `{sourceId}` and `{sourceUid}` references to `{canonicalId}` and `{canonicalUid}`. 
+
+## 2021-08-24
+### Added
+- Documented `utils/prune-provisional-drafts` added in Craft 3.7.9.
+- Documented `--dry-run` flag for `utils/prune-revisions` command added in Craft 3.7.9.
+
+## 2021-08-04
+### Added
+- Added the warning about running `project-config/write` to the Project Config page.
+
+## 2021-07-26
+### Added
+- Documented Commerce order and line item totals.
+
+### Fixed
+- Fixed vertical code highlight alignment.
+
+## 2021-07-21
+### Added
+- Documented queue driver priority support.
+
+## 2021-07-16
+### Added
+- Documented `sendContentLengthHeader` config setting added in Craft 3.7.3.
+
+## 2021-07-14
+### Added
+- Documented `transformSvgs` config setting added in Craft 3.7.1.
+
+## 2021-07-13
+### Added
+- Documented `|removeClass` Twig filter added in Craft 3.7.0.
+- Documented `cp.commerce.discounts.*` and `cp.commerce.sales.*` template hooks added in Commerce 3.4.
+- Documented `httpProxy`, `previewTokenDuration`, `revAssetUrls`, and `setGraphqlDatesToSystemTimeZone` config settings added in Craft 3.7.0.
+- Documented `useUnbufferedConnections` database config setting added in Craft 3.7.0.
+- Documented `date()` Twig function added in Craft 3.7.0.
+- Documented `users/create` and `users/delete` commands added in Craft 3.7.0.
+- Documented Date field `now` comparison support added in Craft 3.7.0.
+- Added _Extending GraphQL_ section detailing Craft’s GraphQL components for custom plugin/module developers.
+- Documented custom field empty-string translation key behavior new to Craft 3.7.0.
+
+### Changed
+- Revised Date field settings to include new “Show Time Zone” setting added in Craft 3.7.0.
+- Updated requirements for Commerce 3.4.0.
+- Revised `{% cache %}` tag documentation to reflect that Craft 3.7.0 captures `{% js %}`, `{% script %}` and `{% css %}` code and styles.
+- Revised Image Transforms page to demonstrate Craft 3.7.0’s support for overrides in via `asset.setTransform()` in addition to `asset.getUrl()`.
+- Updated Discounts page to reflect Users condition options added in Commerce 3.4.0.
+
+### Removed
+- Removed `flash` file kind that was retired in Craft 3.7.0.
+
+## 2021-07-09
+### Added
+- Added the “Control Panel Edit Pages” page to the Extending Craft docs.
+- Added the “Form Inputs” section to the “Control Panel Templates” page.
+
 ## 2021-06-11
 ### Changed
 - Documented the `failMessageInput()` and `successMessageInput()` Twig functions added in Craft 3.6.6.

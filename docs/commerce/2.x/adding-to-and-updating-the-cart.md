@@ -13,12 +13,12 @@ The following is an example of getting the first product found in your store. We
 {% set variant = product.defaultVariant %}
 
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
-    {{ redirectInput('shop/cart') }}
-    <input type="hidden" name="qty" value="1">
-    <input type="hidden" name="purchasableId" value="{{ variant.id }}">
-    <input type="submit" value="Add to cart">
+  <input type="hidden" name="action" value="commerce/cart/update-cart">
+  <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
+  {{ redirectInput('shop/cart') }}
+  <input type="hidden" name="qty" value="1">
+  <input type="hidden" name="purchasableId" value="{{ variant.id }}">
+  <input type="submit" value="Add to cart">
 </form>
 ```
 * The `qty` param is not required as it defaults to `1` if not supplied.
@@ -29,17 +29,17 @@ The above is a simple example, if your product’s type has multiple variants yo
 {% set product = craft.products.one() %}
 
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
-    {{ redirectInput('shop/cart') }}
-    {{ csrfInput() }}
-    <input type="hidden" name="qty" value="1">
-    <select name="purchasableId">
-        {% for variant in product.variants %}
-            <option value="{{ variant.id }}">{{ variant.sku }}</option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="Add to cart">
+  <input type="hidden" name="action" value="commerce/cart/update-cart">
+  <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
+  {{ redirectInput('shop/cart') }}
+  {{ csrfInput() }}
+  <input type="hidden" name="qty" value="1">
+  <select name="purchasableId">
+    {% for variant in product.variants %}
+      <option value="{{ variant.id }}">{{ variant.sku }}</option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="Add to cart">
 </form>
 ```
 
@@ -62,26 +62,26 @@ Here is an example of an add to cart form with both a `notes` and `options` para
 {% set product = craft.products.one() %}
 {% set variant = product.defaultVariant %}
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
-    {{ redirectInput('shop/cart') }}
-    {{ csrfInput() }}
-    <input type="hidden" name="qty" value="1">
+  <input type="hidden" name="action" value="commerce/cart/update-cart">
+  <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
+  {{ redirectInput('shop/cart') }}
+  {{ csrfInput() }}
+  <input type="hidden" name="qty" value="1">
 
-    <input type="text" name="note" value="">
+  <input type="text" name="note" value="">
 
-    <select name="options[engraving]">
-        <option value="happy-birthday">Happy Birthday</option>
-        <option value="good-riddance">Good Riddance</option>
-    </select>
+  <select name="options[engraving]">
+    <option value="happy-birthday">Happy Birthday</option>
+    <option value="good-riddance">Good Riddance</option>
+  </select>
 
-    <select name="options[giftwrap]">
-        <option value="yes">Yes Please</option>
-        <option value="no">No Thanks</option>
-    </select>
+  <select name="options[giftwrap]">
+    <option value="yes">Yes Please</option>
+    <option value="no">No Thanks</option>
+  </select>
 
-    <input type="hidden" name="purchasableId" value="{{ variant.id }}">
-    <input type="submit" value="Add to cart">
+  <input type="hidden" name="purchasableId" value="{{ variant.id }}">
+  <input type="submit" value="Add to cart">
 </form>
 ```
 
@@ -112,18 +112,18 @@ You can add multiple purchasables to the cart in an update cart form. You supply
 ```twig
 {% set product = craft.products.one() %}
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    <input type="hidden" name="cartUpdatedNotice" value="Products added to the cart.">
-    {{ redirectInput('shop/cart') }}
-    {{ csrfInput() }}
+  <input type="hidden" name="action" value="commerce/cart/update-cart">
+  <input type="hidden" name="cartUpdatedNotice" value="Products added to the cart.">
+  {{ redirectInput('shop/cart') }}
+  {{ csrfInput() }}
 
-    {% for variant in product.variants %}
-        <input type="hidden" name="purchasables[{{loop.index}}][id]" value="{{ variant.id }}">
-        <input type="hidden" name="purchasables[{{loop.index}}][qty]" value="1">
-        <input type="hidden" name="purchasables[{{loop.index}}][note]" value="1">
-    {% endfor %}
+  {% for variant in product.variants %}
+    <input type="hidden" name="purchasables[{{loop.index}}][id]" value="{{ variant.id }}">
+    <input type="hidden" name="purchasables[{{loop.index}}][qty]" value="1">
+    <input type="hidden" name="purchasables[{{loop.index}}][note]" value="1">
+  {% endfor %}
 
-    <input type="submit" value="Add all variants to cart">
+  <input type="submit" value="Add all variants to cart">
 </form>
 ```
 
@@ -143,13 +143,13 @@ Example:
 
 ```twig
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/cart/update-cart">
-    <input type="hidden" name="cartUpdatedNotice" value="Updated line items.">
-    {{ redirectInput('shop/cart') }}
-    {{ csrfInput() }}
-    <input type="text" placeholder="My Note" name="lineItems[LINE_ITEM_ID][note]" value="{{ item.note }}">
-    <input type="number" name="lineItems[LINE_ITEM_ID][qty]" min="1" value="{{ item.qty }}">
-    <input type="submit" value="Update Line Item">
+  <input type="hidden" name="action" value="commerce/cart/update-cart">
+  <input type="hidden" name="cartUpdatedNotice" value="Updated line items.">
+  {{ redirectInput('shop/cart') }}
+  {{ csrfInput() }}
+  <input type="text" placeholder="My Note" name="lineItems[LINE_ITEM_ID][note]" value="{{ item.note }}">
+  <input type="number" name="lineItems[LINE_ITEM_ID][qty]" min="1" value="{{ item.qty }}">
+  <input type="submit" value="Update Line Item">
 </form>
 ```
 
@@ -191,7 +191,7 @@ If the user logs in, but already has a cart in session (even an empty one), this
 When retrieving the current cart you can optionally tell the system to merge in the line items from a previous session
 in 2 ways:
 
-1) Submit the `mergeCarts` parameter in either the `commerce/cart/get-cart` ajax controller action or the `commerce/cart/update-cart` controller action.
+1) Submit the `mergeCarts` parameter in either the `commerce/cart/get-cart` Ajax controller action or the `commerce/cart/update-cart` controller action.
 
 `<input type="hidden" name="mergeCarts" value="commerce/cart/update-cart">`
 
@@ -201,7 +201,7 @@ Please note, using the above two methods will only merge previous carts of a log
 
 Calling `craft.commerce.cart.mergedCart` which the user is a guest behaves the same way as `craft.commetce.cart.cart`, so there is no harm in using it on most cart pages.
 
-You might not want to use it on final checkout pages, so that customers don't get confused seeing new items in the cart before payment.
+You might not want to use it on final checkout pages, so that customers don’t get confused seeing new items in the cart before payment.
 
 Before merging, you may want to show the user what will be merged.
 

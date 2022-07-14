@@ -20,37 +20,37 @@ This example creates a form for each available plan, posting the selection to th
 {% set plans = craft.commerce.getPlans().getAllPlans() %}
 
 {% for plan in plans %}
-    <form method="post">
-        {{ csrfInput() }}
-        {{ hiddenInput('action', 'commerce/subscriptions/subscribe') }}
-        {{ hiddenInput('planUid', plan.uid|hash) }}
+  <form method="post">
+    {{ csrfInput() }}
+    {{ hiddenInput('action', 'commerce/subscriptions/subscribe') }}
+    {{ hiddenInput('planUid', plan.uid|hash) }}
 
-        <h4>{{ plan.name }}</h4>
+    <h4>{{ plan.name }}</h4>
 
-        {% set paymentSources = craft.commerce.
-            getPaymentSources().
-            getAllGatewayPaymentSourcesByUserId(
-                plan.getGateway().id,
-                currentUser.id ?? null
-            )
-        %}
+    {% set paymentSources = craft.commerce.
+        getPaymentSources().
+        getAllGatewayPaymentSourcesByUserId(
+            plan.getGateway().id,
+            currentUser.id ?? null
+        )
+    %}
 
-        {# If we don’t have a saved payment soruce, collect details for the gateway #}
-        {% if not paymentSources|length %}
-            <div class="paymentForm">
-                {{ plan.getGateway().getPaymentFormHtml({})|raw }}
-            </div>
-        {% endif %}
+    {# If we don’t have a saved payment soruce, collect details for the gateway #}
+    {% if not paymentSources|length %}
+      <div class="paymentForm">
+        {{ plan.getGateway().getPaymentFormHtml({})|raw }}
+      </div>
+    {% endif %}
 
-        <button type="submit">{{ "Subscribe"|t }}</button>
-    </form>
+    <button type="submit">{{ "Subscribe"|t }}</button>
+  </form>
 {% endfor %}
 ```
 
 There are several things to note:
 
 - Subscribing a user to a plan requires the user to have a stored payment source. If a user doesn’t have one, you can add it by displaying the payment form with `{{ plan.getGateway().getPaymentFormHtml({})|raw }}`.
-- If you wish to set subscription parameters, such as amount of trial days, it is strongly recommended to make use of [subscription events](events.md#beforecreatesubscription) instead of POST data.
+- If you wish to set subscription parameters, such as amount of trial days, it is strongly recommended to make use of [subscription events](extend/events.md#beforecreatesubscription) instead of POST data.
 - When using Stripe, it’s not possible to choose which payment source to use if more than one is saved. Stripe will use the default payment source associated with that customer.
 
 ## Canceling the subscription
@@ -59,18 +59,18 @@ To cancel a subscription you can use the following template. It assumes the `sub
 
 ```twig
 <form method="post">
-    {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/subscriptions/cancel') }}
-    {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
-    {{ redirectInput('shop/services') }}
+  {{ csrfInput() }}
+  {{ hiddenInput('action', 'commerce/subscriptions/cancel') }}
+  {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
+  {{ redirectInput('shop/services') }}
 
-    {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml()|raw }}
+  {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml()|raw }}
 
-    <button type="submit">Unsubscribe</button>
+  <button type="submit">Unsubscribe</button>
 </form>
 ```
 
-If you wish to set cancellation parameters, it is strongly recommended to make use of [subscription events](events.md#beforecancelsubscription) instead of POST data.
+If you wish to set cancellation parameters, it is strongly recommended to make use of [subscription events](extend/events.md#beforecancelsubscription) instead of POST data.
 
 ## Switching the subscription plan
 
@@ -78,22 +78,22 @@ To switch a subscription plan you can use the following template. It assumes tha
 
 ```twig
 {% for plan in subscription.alternativePlans %}
-    <strong>Switch to {{ plan.name }}</strong>
-    <form method="post">
-        {{ csrfInput() }}
-        {{ hiddenInput('action', 'commerce/subscriptions/switch') }}
-        {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
-        {{ hiddenInput('planUid', plan.uid|hash) }}
+  <strong>Switch to {{ plan.name }}</strong>
+  <form method="post">
+    {{ csrfInput() }}
+    {{ hiddenInput('action', 'commerce/subscriptions/switch') }}
+    {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
+    {{ hiddenInput('planUid', plan.uid|hash) }}
 
-        {{ plan.getGateway().getSwitchPlansFormHtml(subscription.plan, plan)|raw }}
+    {{ plan.getGateway().getSwitchPlansFormHtml(subscription.plan, plan)|raw }}
 
-        <button type="submit" class="button link">Switch</button>
-    </form>
-    <hr />
+    <button type="submit" class="button link">Switch</button>
+  </form>
+  <hr />
 {% endfor %}
 ```
 
-If you wish to set parameters for switching the subscription plan, it is strongly recommended to make use of [subscription events](events.md#beforeswitchsubscriptionplan) instead of POST data.
+If you wish to set parameters for switching the subscription plan, it is strongly recommended to make use of [subscription events](extend/events.md#beforeswitchsubscriptionplan) instead of POST data.
 
 ## Reactivating a canceled subscription
 
@@ -101,13 +101,13 @@ To reactivate a subscription plan you can use the following template. It assumes
 
 ```twig
 {% if subscription.canReactivate() %}
-    <form method="post">
-        {{ csrfInput() }}
-        {{ hiddenInput('action', 'commerce/subscriptions/reactivate') }}
-        {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
+  <form method="post">
+    {{ csrfInput() }}
+    {{ hiddenInput('action', 'commerce/subscriptions/reactivate') }}
+    {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
 
-        <button type="submit" class="button link">Reactivate</button>
-    </form>
+    <button type="submit" class="button link">Reactivate</button>
+  </form>
 {% endif %}
 ```
 

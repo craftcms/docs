@@ -13,7 +13,7 @@ The store manager can also send any email manually from an order’s edit page, 
 
 ## Settings
 
-Before setting up emails for Craft Commerce, ensure that your Craft CMS installation is [properly configured for email delivery](https://craftcms.com/guides/why-doesnt-craft-send-emails#setting-up-email).
+Before setting up emails for Craft Commerce, ensure that your Craft CMS installation is [properly configured for email delivery](https://craftcms.com/knowledge-base/why-doesnt-craft-send-emails#setting-up-email).
 You can set up your email gateway in the control panel by navigating to **Settings** → **Email**.
 
 ::: tip
@@ -28,7 +28,7 @@ To create a new email, navigate to **Commerce** → **System Settings** → **Em
 
 <toggle-tip>
 
-<img src="./assets/new-email-settings.png" alt="New Email Settings.">
+<img src="./images/new-email-settings.png" alt="New Email Settings.">
 
 </toggle-tip>
 
@@ -138,7 +138,7 @@ To use the email you’ve created, visit **Commerce** → **System Settings** �
 
 Select the email by name in the **Status Emails** field. You can select as many emails as you’d like for any given Order Status.
 
-![](./assets/order-status-email-selection.png)
+![](./images/order-status-email-selection.png)
 
 Once you choose **Save**, the designated emails will be sent when an order is assigned that status.
 
@@ -171,6 +171,8 @@ Syntax issues, undeclared variables, or missing information may prevent template
 If you’re including a [PDF](pdfs.md), it could have its own rendering issues that cause sending to fail. Be sure to preview the relevant PDF separately and ensure it’s working as expected.
 5. **Avoid cart and session references.**\
 Emails are sent by queue processes that don’t have access to sessions or carts that depend on them. References to `craft.commerce.carts.cart` or `craft.commerce.customers.customer`, for example, will result in session-related errors.
+
+Commerce adds email jobs to the queue with [high priority](https://craftcms.com/docs/3.x/extend/queue-jobs.html#specifying-priority) for drivers that support it. This helps ensure outgoing messages don’t get stuck behind slow, long-running tasks.
 
 When an email fails to send in response to a status change, its queue job will be marked as failed and include an appropriate message. Once you fix the cause of the sending failure, you can retry sending the email from the queue via **Utilities** → **Queue Manager**.
 

@@ -19,6 +19,8 @@ Craft controllers should extend <craft3:craft\web\Controller>, which offers a fe
   automatically be formatted as JSON, with an `error` key.
 - It provides several helper methods that ease development.
 
+If you’re writing a custom module and not a plugin, make sure your module’s [$controllerNamespace](https://www.yiiframework.com/doc/api/2.0/yii-base-application#$controllerNamespace-detail) property sets the right namespace for your controllers.
+
 ## Request Validation Methods
 
 <craft3:craft\web\Controller> offers several methods you can call from within your actions, to validate the current
@@ -58,7 +60,7 @@ Provide an `action` param set to your controller’s action path:
 
 ```bash
 curl -d "action=plugin-handle/controller/action" \
-  -X POST https://my-project.test/
+  -X POST https://my-project.tld/
 ```
 
 ### Custom Route
@@ -78,7 +80,7 @@ return [
 By default, Craft makes an `actions/` route available for appending any valid action path. This can be customized with the <config3:actionTrigger> config setting.
 
 ```bash
-curl -X POST https://my-project.test/actions/plugin-handle/controller/action
+curl -X POST https://my-project.tld/actions/plugin-handle/controller/action
 ```
 
 #### Default Route Format
@@ -107,8 +109,12 @@ use craft\web\View;
 
 public function actionFoo(): Response
 {
-    // Render and return the plugin's 'foo.twig' template
-    return $this->renderTemplate('plugin-handle/foo.twig', $variables, View::TEMPLATE_MODE_CP);
+    // Render and return the plugin’s `foo.twig` template
+    return $this->renderTemplate(
+        'plugin-handle/foo.twig',
+        $variables,
+        View::TEMPLATE_MODE_CP
+    );
 }
 ```
 

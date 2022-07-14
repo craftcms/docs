@@ -38,7 +38,7 @@ Two special variables available to you:
 `order` is the current cart or order that this email is a notification for. For example, for the subject we might use a template like:
 
 ```twig
-Order #{{ order.id }} received.`
+Order #{{ order.id }} received.
 ```
 
 ### Recipient
@@ -58,7 +58,7 @@ Two special variables available to you:
 `order` is the current cart or order that this email is a notification for. For example, for the subject we might use a template like:
 
 ```twig
-{{ order.email }}`
+{{ order.email }}
 ```
 
 This would send the email to the customer to made this order.
@@ -94,7 +94,7 @@ Craft global set variables are not loaded automatically into your email template
 
 To get access to global set variables you need to manually load them into your templates like so:
 
-```
+```twig
 {% set globalSetName = craft.globals.getSetByHandle('globalSetName') %}
 
 {{ globalSetName.customFieldName }}

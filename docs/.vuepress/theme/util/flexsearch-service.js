@@ -1,7 +1,4 @@
 import Flexsearch from "flexsearch";
-// Use when flexSearch v0.7.0 will be available
-// import cyrillicCharset from 'flexsearch/dist/lang/cyrillic/default.min.js'
-// import cjkCharset from 'flexsearch/dist/lang/cjk/default.min.js'
 import _ from "lodash";
 import FlexSearch from "flexsearch";
 
@@ -9,10 +6,6 @@ const defaultLang = "en-US";
 
 let pagesByPath = null;
 let indexes = [];
-let cyrillicIndexes = [];
-let cjkIndexes = [];
-
-const cjkRegex = /[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3]|[\u4E00-\u9FCC\u3400-\u4DB5\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29]|[\ud840-\ud868][\udc00-\udfff]|\ud869[\udc00-\uded6\udf00-\udfff]|[\ud86a-\ud86c][\udc00-\udfff]|\ud86d[\udc00-\udf34\udf40-\udfff]|\ud86e[\udc00-\udc1d]/giu;
 
 export default {
   buildIndex(pages) {
@@ -103,31 +96,6 @@ export default {
             //console.log(setKey, setPages);
             setIndex.add(setPages);
             indexes[setKey] = setIndex;
-
-            const cyrillicSetPages = setPages.filter(p => p.charsets.cyrillic);
-            const cjkSetPages = setPages.filter(p => p.charsets.cjk);
-
-            if (cyrillicSetPages.length) {
-              const setCyrillicIndex = new Flexsearch({
-                ...indexSettings,
-                encode: false,
-                split: /\s+/,
-                tokenize: "forward"
-              });
-              setCyrillicIndex.add(cyrillicPages);
-              cyrillicIndexes[setKey] = setCyrillicIndex;
-            }
-            if (cjkSetPages.length) {
-              const setCjkIndex = new Flexsearch({
-                ...indexSettings,
-                encode: false,
-                tokenize: function(str) {
-                  return str.replace(/[\x00-\x7F]/g, "").split("");
-                }
-              });
-              setCjkIndex.add(cjkSetPages);
-              cjkIndexes[setKey] = setCjkIndex;
-            }
           }
         }
       } else {
@@ -154,13 +122,6 @@ export default {
 
   async match(queryString, queryTerms, docSet, version, language, limit = 7) {
     const index = resolveSearchIndex(docSet, version, language, indexes);
-    const cyrillicIndex = resolveSearchIndex(
-      docSet,
-      version,
-      language,
-      cyrillicIndexes
-    );
-    const cjkIndex = resolveSearchIndex(docSet, version, language, cjkIndexes);
 
     const searchParams = [
       {
@@ -192,18 +153,8 @@ export default {
         bool: "or",
       }
     ];
-    const searchResult1 = await index.search(searchParams, limit);
-    const searchResult2 = cyrillicIndex
-      ? await cyrillicIndex.search(searchParams, limit)
-      : [];
-    const searchResult3 = cjkIndex
-      ? await cjkIndex.search(searchParams, limit)
-      : [];
-    const searchResult = _.uniqBy(
-      [...searchResult1, ...searchResult2, ...searchResult3],
-      "path"
-    );
 
+    const searchResult = await index.search(searchParams, limit);
     const result = searchResult.map(page => ({
       ...page,
       parentPageTitle: getParentPageTitle(page),

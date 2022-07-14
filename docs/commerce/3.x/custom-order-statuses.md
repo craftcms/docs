@@ -12,11 +12,11 @@ The only differences between an order and a cart is:
 
 When a customer completes their order, the `dateOrdered` is set to the current time and date and it gets a custom order status. The custom order status set depends on which order status you’ve established as the default.
 
-Custom order statuses can be managed from **Commerce** → **System Settings** →** Order Statuses** in the control panel. There you can choose the default order status for new orders.
+Custom order statuses can be managed from **Commerce** → **System Settings** → **Order Statuses** in the control panel. There you can choose the default order status for new orders.
 
 ## Functionality
 
-Order statuses allow a store owner to track an order through the various stages of its life cycle.
+Order statuses allow a store owner to track an order through the various stages of its lifecycle.
 
 For example you may use default status of “Received”, set when the order is completed. Once you’ve packaged the order for shipment, you might update to “Packed” status. Or if you’re waiting to receive product stock you might use a “Pending Stock” status. When you’ve shipped the order you might set the status to “Completed”. Every year you might change all “Completed” orders to an “Archived” status.
 
@@ -73,12 +73,30 @@ If no line item status is designated as the default, line items have a `null` or
 
 ## Templating
 
+### Showing Customers the History of an Order
+
+An order’s <commerce3:craft\commerce\models\OrderHistory> models are available via `order.histories`. Every history record has a `newStatus` property that reflects which status the order moved into, and all but the first record will have an `prevStatus`. The `message` property contains any text from the order’s `message` field that coincided with the change.
+
+The new and old status properties return <commerce3:craft\commerce\models\OrderStatus> models, which include a `name` and `description`.
+
+```twig
+<ul>
+  {% for history in order.histories %}
+    {% set newStatus = history.newStatus %}
+
+    <li>{{ newStatus.name }} ({{ history.dateCreated | date('short') }}): {{ history.message }}</li>
+
+    {# `newStatus.color` and `newStatus.handle` are also available, if you want to distinguish (visually or functionally) between history records! #}
+  {% endfor %}
+</ul>
+```
+
 ### craft.commerce.orderStatuses.allOrderStatuses
 
 Returns an array of <commerce3:craft\commerce\models\OrderStatus> objects representing all the order statuses in the system.
 
 ```twig
 {% for status in craft.commerce.orderStatuses.allOrderStatuses %}
-    {{ status.handle }} - {{ status.name }}
+  {{ status.handle }} - {{ status.name }}
 {% endfor %}
 ```

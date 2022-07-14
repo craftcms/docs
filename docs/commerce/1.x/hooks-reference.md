@@ -2,7 +2,7 @@
 
 Craft Commerce provides several hooks that give plugins the opportunity to get involved in various areas of the system.
 
-### commerce_modifyPaymentRequest
+### `commerce_modifyPaymentRequest`
 
 Example:
 ```php
@@ -16,7 +16,7 @@ public function commerce_modifyPaymentRequest(array $request){
 
 The hook must return an array that is merged into the original `$request` array.
 
-### commerce_modifyGatewayRequestData
+### `commerce_modifyGatewayRequestData`
 
 The hook must return the raw modified data object that is applicable to the gateway being used.
 
@@ -33,7 +33,7 @@ This hook differs from the `modifyPaymentRequest` hook, in that it not the basic
 
 For more information on modifying the raw data, see the [Omnipay changelog](http://omnipay.thephpleague.com/changelog/#additions) and the Omnipay [pull request](https://github.com/thephpleague/omnipay/pull/162).
 
-### commerce_modifyItemBag
+### `commerce_modifyItemBag`
 
 The hook can modify the Omnipay ItemBag object that will be sent to the gateway.
 
@@ -46,7 +46,7 @@ public function commerce_modifyItemBag($items, $order){
 }
 ```
 
-### commerce_modifyOrderSources
+### `commerce_modifyOrderSources`
 
 Gives plugins a chance to modify the sources listed in the sidebar of the Orders index page. By default the sources are order statuses and active and inactive carts.
 
@@ -57,7 +57,7 @@ public function commerce_modifyOrderSources($sources, $context)
 }
 ```
 
-### commerce_getOrderTableAttributeHtml
+### `commerce_getOrderTableAttributeHtml`
 
 Gives plugins a chance to customize the HTML of the table cells on the order index page.
 
@@ -71,7 +71,7 @@ public function commerce_getOrderTableAttributeHtml(Commerce_OrderModel $order, 
 }
 ```
 
-### commerce_getProductTableAttributeHtml
+### `commerce_getProductTableAttributeHtml`
 
 Gives plugins a chance to customize the HTML of the table cells on the product index page.
 
@@ -85,7 +85,7 @@ public function commerce_getProductTableAttributeHtml(Commerce_ProductModel $pro
 }
 ```
 
-### commerce_defaultCartShippingAddress
+### `commerce_defaultCartShippingAddress`
 
 If there is no shipping address on the cart, you can optionally return a default address that should be set on the cart.
 
@@ -101,7 +101,7 @@ public function commerce_defaultCartShippingAddress(){
 }
 ```
 
-### commerce_defaultCartBillingAddress
+### `commerce_defaultCartBillingAddress`
 
 If there is no billing address on the cart, you can optionally return a default address that should be set on the cart.
 
@@ -117,7 +117,7 @@ public function commerce_defaultCartBillingAddress(){
 }
 ```
 
-### commerce_defineAdditionalOrderTableAttributes
+### `commerce_defineAdditionalOrderTableAttributes`
 
 Gives plugins a chance to make additional table columns available to order indexes.
 
@@ -131,7 +131,7 @@ public function commerce_defineAdditionalOrderTableAttributes()
 }
 ```
 
-### commerce_defineAdditionalProductTableAttributes
+### `commerce_defineAdditionalProductTableAttributes`
 
 Gives plugins a chance to make additional table columns available to product indexes.
 
@@ -145,7 +145,7 @@ public function commerce_defineAdditionalProductTableAttributes()
 }
 ```
 
-### commerce_modifyEmail
+### `commerce_modifyEmail`
 
 Example:
 
@@ -158,7 +158,7 @@ public function commerce_modifyEmail(EmailModel &$email, $order){
 Hook must modify the `$email` Email Model directly and not return anything.
 You may use information contained on the `$order` to determine changes to the email.
 
-### commerce_registerOrderAdjusters
+### `commerce_registerOrderAdjusters`
 
 Example:
 ```php
